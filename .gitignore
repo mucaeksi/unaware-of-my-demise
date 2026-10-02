@@ -1,0 +1,33 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.npm/
+.next/
+out/
+dist/
+build/
+coverage/
+release/
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Godot generated state
+.godot/
+export.cfg
+
+# Local/editor files
+.vscode/
+.idea/
+
+# Android signing material
+*.keystore
+*.jks
+*.p12
+
+# Local patch outputs
+patch/files/*.pck
+patch/files/*.zip
