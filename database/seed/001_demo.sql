@@ -1,0 +1,3 @@
+INSERT INTO items(code,name,rarity,kind) VALUES ('char_001','Aster',5,'character'),('char_002','Mira',5,'character'),('char_003','Rook',4,'character'),('char_004','Lyra',4,'character'),('char_005','Nova',3,'character') ON CONFLICT DO NOTHING;
+INSERT INTO gacha_banners(code,name,active,single_cost,ten_cost,pity_5,pity_4) VALUES ('standard_demo','Standard Demo Banner',true,160,1600,80,10) ON CONFLICT DO NOTHING;
+INSERT INTO gacha_entries(banner_id,item_id,rarity,weight,featured) SELECT b.id,i.id,i.rarity,CASE i.rarity WHEN 5 THEN 60 WHEN 4 THEN 220 ELSE 720 END,(i.code='char_001') FROM gacha_banners b CROSS JOIN items i WHERE b.code='standard_demo' ON CONFLICT DO NOTHING;

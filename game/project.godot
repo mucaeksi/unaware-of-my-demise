@@ -1,0 +1,22 @@
+[application]
+config/name="Gacha Online"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/icon="res://icon.svg"
+[autoload]
+ApiClient="*res://scripts/api_client.gd"
+PatchManager="*res://scripts/patch_manager.gd"
+[display]
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/size/window_width_override=540
+window/size/window_height_override=960
+window/stretch/mode="canvas_items"
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+[application/android]
+package/unique_name="com.example.gachaonline"
+package/name="Gacha Online"
+version/code=1
+version/name="1.0.0"

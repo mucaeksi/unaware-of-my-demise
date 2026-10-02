@@ -1,0 +1,1 @@
+import fs from "node:fs/promises"; import path from "node:path"; import {pool} from "../db.js"; await pool.query(await fs.readFile(path.resolve(process.cwd(),"../database/seed/001_demo.sql"),"utf8")); await pool.end(); console.log("seed ok");
