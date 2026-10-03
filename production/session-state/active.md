@@ -61,7 +61,7 @@ parity reference, FastAPI economy server).
 
 ## Blockers / owner actions
 
-See `docs/OPEN_QUESTIONS.md` (OQ-000…OQ-010). OQ-000 (Drive shared to anyone as writer) and OQ-005 (API key in Drive) are urgent security items. None block the audit.
+See `docs/OPEN_QUESTIONS.md` (OQ-000…OQ-010). OQ-000/OQ-005 closed by owner (risk accepted; do not remind). Owner directive 2026-10-03: take all needed LEGACY files, no extra code, fix and build on top; work autonomously per master prompt.
 
 ## Failing / missing tests
 
