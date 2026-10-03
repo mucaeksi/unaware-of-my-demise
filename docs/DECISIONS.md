@@ -51,14 +51,14 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Until then deploy jobs are written but skipped when the secret is absent.
 
 ## DEC-0004 — Gemini model pinning per medium
-- Status: PARTIALLY ACCEPTED
-- Images: **`models/gemini-3.1-flash-image`** ("Nano Banana 2", GA) — matches
-  the documented intent; ACCEPTED.
-- Voice / music: DEFERRED until the LEGACY creative pipeline audit is done.
-  LEGACY contains Gemini-TTS voice auditions (prebuilt voices Sulafat,
-  Sadachbia, Vindemiatrix, Erinome, Achernar, …) and BGM incl.
-  `bgm_fadyme_theme_v001`. The established voice choice for Fadyme must be
-  read from LEGACY before pinning; otherwise it would silently change canon.
+- Status: ACCEPTED (2026-10-03) — adopts LEGACY owner decision **C44**
+  (2026-09-30), found in `LEGACY:narrative/…/canon.md`.
+- Images: `gemini-3.1-flash-image` (Nano Banana 2) at 2K — not Pro, not Lite.
+- Music (all tracks and stingers, except the owner's main theme):
+  `lyria-3.5`.
+- Voice (all characters): `gemini-3.8-flash-tts`; one prebuilt voice per
+  character, never reused (`casting.json` rule); Fadyme = `Sulafat`.
+- All three models verified present in this environment's Gemini model list.
 
 ## DEC-0005 — Repository license
 - Status: DECISION_REQUIRED (legal)
@@ -93,3 +93,27 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Recommendation: migrate the LEGACY Godot project and its content pipeline
   selectively (with provenance) as the client foundation, then adapt it to the
   online server-authoritative architecture; retire the starter client.
+
+## DEC-0009 — Adopt the LEGACY creative asset pipeline
+- Status: ACCEPTED (2026-10-03)
+- Evidence: `docs/LEGACY_AUDIT.md` §3 — `narrative/tools/gen_image.py`,
+  `gen_audio.py`, `record_fadyme_vo.py`, `art_manifest.py` et al.; naming
+  `{kind}_{id}_{variant}_v{NNN}[_t{N}]`, `uomd_*` PNG metadata, JSON audio
+  sidecars, status vocabulary REVIEW/APPROVED/APPROVED_WITH_ISSUE/REJECTED/
+  SUPERSEDED/REFERENCE/PENDING, `_review/_rejected/production` folders.
+- Rule applied: CLAUDE.md "If an established legacy system exists, preserve
+  compatible conventions". No new naming/ID/metadata scheme is invented.
+- Adaptations (minimal): re-root under `narrative/`; read the Gemini
+  credential from the environment/proxy instead of `narrative/.secrets/`;
+  add a JSON manifest export for build/PCK tooling.
+
+## DEC-0010 — Reference set status
+- Status: DECISION_REQUIRED (owner approval boundary)
+- LEGACY records owner approval (2026-09-30) of R01 logo, R02 key art,
+  R03 Fadyme sheet r2, R04–R17 Fadyme assets, Fadyme voice Sulafat and
+  R18 Fadyme theme (`docs/LEGACY_AUDIT.md` §4).
+- Claude does not mark the lock APPROVED on its own. On owner confirmation:
+  migrate those exact files (byte-exact, sha256 recorded) into
+  `narrative/references/`, update `docs/UOMD_REFERENCE_LOCK.md` to
+  APPROVED/LOCKED with the version list, and continue roster generation
+  autonomously under C41.

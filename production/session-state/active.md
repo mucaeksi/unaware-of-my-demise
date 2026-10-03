@@ -18,25 +18,27 @@ Durable resume point for long-running takeover work. Read this after
 | 3 Instructions read | all canonical docs read in full |
 | 4 Repository audit | `docs/REPOSITORY_INVENTORY.md` |
 | 5/6 Toolchain + current game | `docs/CURRENT_STATE.md` (client broken, server not Worker-compatible, prod DB empty) |
-| Decisions / questions | `docs/DECISIONS.md` (DEC-0000…0008), `docs/OPEN_QUESTIONS.md` |
+| 7 (partial) LEGACY audit | `docs/LEGACY_AUDIT.md` (creative pipeline, canon, reference-set evidence) |
+| Decisions / questions | `docs/DECISIONS.md` (DEC-0000…0010), `docs/OPEN_QUESTIONS.md` |
 
 ## Current phase
 
-Phase 7 — deep LEGACY audit (Google Drive). Top-level listing done; LEGACY
+Phase 7 — deep LEGACY audit (Google Drive). Creative pipeline, canon ledger (C1–C45) and
+reference-set evidence audited (`docs/LEGACY_AUDIT.md`). Earlier: top-level listing; LEGACY
 `README.md` read (Godot 4.7.2 port, G0–G5 gates, content pipeline, Python
 parity reference, FastAPI economy server).
 
 ## Exact next task
 
-1. Read LEGACY `CLAUDE.md` (`1pBY0OZcC2o40n1m1v1ocNhe6bXgJSG9v`) and list
-   LEGACY `docs/` (`1ul6O03C01Bjhc7NOVf1ereb9_L3Oyt0D`): GODOT_HANDOFF,
-   PROJECT_WORKFLOW, decisions/, ASSET_CATALOG, ART_BIBLE, STORY_BIBLE_PART1,
-   ONLINE_API_SPEC, PART1_ECONOMY_ANDROID.
-2. List LEGACY `game/`, `content/`, `tools/`, `narrative/tools/`,
-   `narrative/art/`, `narrative/audio/` → find the asset naming/ID/metadata
-   pipeline and the Gemini voice/music generation records.
-3. Write `docs/LEGACY_AUDIT.md`, inventories, `docs/MIGRATION_LEDGER.md`.
-4. Then migrate the LEGACY Godot project + content pipeline (DEC-0008).
+1. Continue `docs/LEGACY_AUDIT.md` §8: list LEGACY `game/`
+   (`1sUuCQc1RMcQn1xBhMPEwxvK2OwCAJZuN`), `content/`
+   (`1simd_nzO6ukqoCXHQNwiSesFbmOIlEiD`), `tools/`
+   (`1bVaM5WVAR2wdv2s5QMjzCgt_sw65fM0P`), `server/`
+   (`1ow88cjDeVrf6val0p5gTSwHuz1CX0MKk`).
+2. Read GODOT_HANDOFF, ONLINE_API_SPEC, PART1_ECONOMY_ANDROID, GDD.
+3. Write inventories + `docs/MIGRATION_LEDGER.md`; migrate LEGACY Godot
+   project + content pipeline (DEC-0008) and creative tools (DEC-0009).
+4. Await owner on OQ-007 (reference set) before migrating reference files.
 
 ## Blockers / owner actions
 
