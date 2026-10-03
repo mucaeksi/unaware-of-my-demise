@@ -39,7 +39,13 @@ parity reference, FastAPI economy server).
 2. Read GODOT_HANDOFF, ONLINE_API_SPEC, PART1_ECONOMY_ANDROID, GDD.
 3. Write inventories + `docs/MIGRATION_LEDGER.md`; migrate LEGACY Godot
    project + content pipeline (DEC-0008) and creative tools (DEC-0009).
-4. Transfer method (verified): `download_file_content`; large results are
+4. BLOCKED for bulk code: waiting for OQ-010 (GitHub Release asset with the
+   LEGACY ZIP or the 10.3 MB pack). On arrival: `gh release download
+   legacy-import-2026-10 -D <scratch>`; for the pack: `git init --bare x &&
+   cp pack x/objects/pack/ && git -C x index-pack objects/pack/*.pack`, then
+   recover refs (LEGACY .git/refs/heads, packed-refs) or `git fsck --lost-found`.
+   Large single binaries (≤6 MB) still go through the Drive MCP.
+5. Transfer method (verified): `download_file_content`; large results are
    saved by the harness under `/root/.claude/projects/.../tool-results/` and
    decoded with `scratchpad/drive_decode.py <saved> <dest> <size> <drive_id>`
    (recreate it from `docs/MIGRATION_LEDGER.md` description if the scratchpad

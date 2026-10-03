@@ -50,6 +50,12 @@ Images as text (no vision via `read_file_content`); very large binaries (APK
    saved by the harness to a session file instead of entering the context;
    they are decoded in the sandbox (`drive_decode.py` pattern: verify Drive id
    and `fileSize`, then sha256). Small results still arrive inline.
+   **Size cap:** a 6.3 MB file (8.4 M base64 chars) transferred fine; the
+   10.3 MB git pack exceeded the MCP message limit and dropped the connection
+   (2026-10-03). Practical per-file ceiling ≈ 6–7 MB. Files under ~20 KB
+   return inline (into the model context); migrating many small files this
+   way is costly and a re-typing error is undetectable without a Drive
+   checksum (none is exposed). Bulk path: OQ-010.
    Original note: Images
    (≈150–500 KB) and audio (≈0.1–4.5 MB) are technically retrievable but
    transferring them consumes large amounts of context and they cannot be
