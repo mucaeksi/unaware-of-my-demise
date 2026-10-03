@@ -57,7 +57,13 @@ Images as text (no vision via `read_file_content`); very large binaries (APK
 2. **No recursive search.** Each folder must be listed individually.
 3. **Pagination quirk.** Some pages return few items plus a `nextPageToken`;
    every listing must be paged until exhausted.
-4. Tool/build noise (`.git/`, `.venv313/`, `.mypy_cache/`, `.ruff_cache/`,
+4. **Throughput.** Most `search_files` queries return ~5 items per page
+   regardless of `pageSize`, and file bodies arrive base64-encoded inside the
+   model context (each migrated file passes through the context twice:
+   download + write). Enumerating and byte-exact migrating the LEGACY Godot
+   project, content packs and tools (several hundred files) through this
+   channel is possible but slow and expensive. Preferred bulk path: OQ-010.
+5. Tool/build noise (`.git/`, `.venv313/`, `.mypy_cache/`, `.ruff_cache/`,
    `.pytest_cache/`, Gradle caches under `build/`/`game/.godot`) is
    inventoried at folder level only and classified `ARCHIVE_IN_DRIVE`.
 
