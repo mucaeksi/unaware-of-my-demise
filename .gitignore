@@ -31,3 +31,8 @@ export.cfg
 # Local patch outputs
 patch/files/*.pck
 patch/files/*.zip
+
+# CCGS hook runtime output (regenerated every turn; durable state lives in
+# production/session-state/active.md). Keep the directory placeholder.
+production/session-logs/*
+!production/session-logs/README.md

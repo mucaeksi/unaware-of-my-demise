@@ -1,6 +1,4 @@
-# Directory Placeholder
+# Fadyme — locked reference package
 
-This directory is intentionally kept in the repository so the UOMD project
-structure is preserved before real project content is added.
-
-Do not remove this directory solely because it is currently empty.
+Canonical anchor for character visuals, chibi battle style, voice and theme.
+See `../README.md` and `docs/UOMD_REFERENCE_LOCK.md`. Do not modify.
