@@ -1,50 +1,47 @@
-# GitHub Secrets
+# GitHub Secrets and Variables
 
-Repository: **Settings → Secrets and variables → Actions → New repository secret**
+Repository: **Settings → Secrets and variables → Actions**.
+Never commit secret values. Workflows must skip (not fail open) when an
+optional secret is absent.
 
-## Android / Google Play deployment
+## Cloudflare (Worker deploy, R2 publish) — see DEC-0003
 
-Create these repository secrets:
+| Name | Kind | Purpose |
+|---|---|---|
+| `CLOUDFLARE_API_TOKEN` | secret | scoped token: Workers Scripts Edit, Hyperdrive Read, R2 Edit (bucket `unaware-of-my-demise-content` only) |
+| `CLOUDFLARE_ACCOUNT_ID` | variable | account id (not secret) |
 
-```text
-ANDROID_KEYSTORE_BASE64
-ANDROID_KEY_ALIAS
-ANDROID_KEY_PASSWORD
-GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_BASE64
-```
+Worker runtime secrets (e.g. JWT signing key, admin session secret) are set
+with `wrangler secret put` / the Cloudflare dashboard — **not** as GitHub
+secrets, and never in `wrangler.toml`.
 
-Create this repository variable (not secret):
+## Neon (migrations) — optional
 
-```text
-GOOGLE_PLAY_PACKAGE_NAME
-```
+Migrations run through a gated workflow job against a Neon branch connection
+string stored as secret `NEON_MIGRATION_DATABASE_URL`. Production migrations
+require manual approval (GitHub environment `production`). Never seed
+production.
 
-## Google AI / Gemini
+## Android / Google Play (later release task)
 
-For Google AI / Gemini access, create:
+| Name | Kind |
+|---|---|
+| `ANDROID_KEYSTORE_BASE64` | secret |
+| `ANDROID_KEY_ALIAS` | secret |
+| `ANDROID_KEY_PASSWORD` | secret |
+| `ANDROID_KEYSTORE_PASSWORD` | secret |
+| `GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_BASE64` | secret |
+| `GOOGLE_PLAY_PACKAGE_NAME` | variable |
 
-```text
-GEMINI_API_KEY
-```
+## Gemini
 
-Use a Gemini API key created through Google AI Studio / Google Cloud credentials. Keep it server-side. Do **not** put it in Godot project files, GDScript, exported AAB files, or client-side configuration.
+**Not a GitHub or runtime secret.** Gemini is a development-time creative
+service used only by Claude Code; its credential lives in the Claude Code
+Cloud environment. It must never appear in the Godot project, the Worker,
+the admin panel, CI, or Git.
 
-Google currently recommends environment variables such as `GEMINI_API_KEY` for the Gemini SDK. New AI Studio keys are authorization keys; unrestricted legacy standard keys are no longer the intended production configuration. See Google's current Gemini API key documentation.
+---
 
-For a deployment to a VPS, the same `GEMINI_API_KEY` must also exist in the backend's server environment (for example `/etc/gacha-game/backend.env`, a systemd EnvironmentFile, Docker secret, or another secret manager). GitHub Secrets alone do not automatically become environment variables on a separately managed VPS.
-
-## Local development
-
-Copy:
-
-```text
-.env.example → .env
-```
-
-and set:
-
-```text
-GEMINI_API_KEY=your_key_here
-```
-
-Never commit `.env`.
+History: this file previously instructed storing `GEMINI_API_KEY` for a
+VPS backend (starter-template guidance). That contradicted the architecture
+and was replaced on 2026-10-03 (see `docs/CURRENT_STATE.md` C4).
