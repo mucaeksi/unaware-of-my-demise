@@ -63,6 +63,12 @@ Images as text (no vision via `read_file_content`); very large binaries (APK
 
 ## REQUIRED_USER_ACTIONS
 
+0. **CRITICAL — sharing:** `get_file_permissions` on the LEGACY folder returns
+   `{role: writer, type: anyone}` plus the owner. Anyone with the link can
+   modify/delete LEGACY files and read `narrative/.secrets/`. Set link sharing
+   to *Restricted*. (Verified 2026-10-03; Claude did not change it — permission
+   changes are an owner action.) A Drive API v3 call with the proxy's API key
+   returns 401, so link sharing is not needed for Claude's access.
 1. **Security:** the archive contains `narrative/.secrets/`
    (id `1iLJTkOwBhMTXL6OdyyKqrUMvZ9jVy6e3`). Its contents were deliberately
    not opened. If it holds live credentials (API keys, keystores, tokens),

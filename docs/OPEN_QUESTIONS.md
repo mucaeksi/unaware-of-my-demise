@@ -5,6 +5,7 @@ record where applicable. Engineering continues around every item.
 
 | ID | Question / action | Type | Blocks | Ref |
 |---|---|---|---|---|
+| OQ-000 | **URGENT:** the LEGACY Drive folder `1oe_UF3PyZ1u8dPWner_7rJhx7228Fovy` is shared as `anyone with the link` = **writer**. Anyone holding the link (it is written in this repo's docs) can edit or delete the archive and read `narrative/.secrets/`. Change link sharing to *Restricted* (or at most *Viewer*); Claude's connector access uses the owner account and is unaffected | security (CRITICAL) | none | DRIVE_LEGACY_ACCESS |
 | OQ-001 | Confirm production Worker name `unaware-of-my-demise` (recommended) vs `unaware-of-my-demise-api` | owner decision | first Worker deploy | DEC-0001 |
 | OQ-002 | Disable Neon Auth on project `sweet-cake-52313810` (console) | external action | nothing immediately (inert) | DEC-0002 |
 | OQ-003 | Disconnect orphaned Cloudflare Workers Builds trigger; add GitHub secret `CLOUDFLARE_API_TOKEN` + variable `CLOUDFLARE_ACCOUNT_ID` | external action | automated Worker deploy | DEC-0003 |

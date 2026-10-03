@@ -206,6 +206,7 @@ See `docs/DRIVE_LEGACY_ACCESS.md` (DRIVE_ACCESS_STATUS).
 | S4 | No rate limiting on auth/gacha/admin | HIGH | Worker rate limiting |
 | S5 | `/content/:file` and manifest served unsigned from local disk | MEDIUM | signed manifest + R2 |
 | S6 | LEGACY Drive contains a folder named `narrative/.secrets` | HIGH (owner) | contents deliberately NOT read; owner should verify nothing sensitive is stored in Drive |
+| S6b | LEGACY Drive folder link-shared to `anyone` as **writer** | CRITICAL (owner) | restrict sharing (OQ-000) |
 | S7 | Neon `production` branch not protected | MEDIUM | owner toggle |
 | S8 | Gemini runtime code in backend (`server/src/ai.ts`) | MEDIUM | remove with Worker rewrite |
 
