@@ -1,6 +1,3 @@
-# Directory Placeholder
+# Logo — locked reference (R01)
 
-This directory is intentionally kept in the repository so the UOMD project
-structure is preserved before real project content is added.
-
-Do not remove this directory solely because it is currently empty.
+See `../README.md` and `docs/UOMD_REFERENCE_LOCK.md`. Do not modify.

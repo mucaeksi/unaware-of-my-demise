@@ -140,7 +140,7 @@ with **owner approval dated 2026-09-30**:
 Retrieved byte-exact so far: `casting.json` (1239 B), theme sidecars
 (885 B, 458 B). Images/audio binaries: metadata only (see access limits).
 
-Conflict to resolve (**DECISION_REQUIRED**, not silently resolved): the
+**Resolved 2026-10-03:** owner confirmed the set; migrated and locked (DEC-0010, BATCH-0001). Original conflict note: the
 active `docs/UOMD_REFERENCE_LOCK.md` says the set is *not yet locked* and
 must be approved by the owner, and CLAUDE.md says visuals are regenerated from
 scratch. LEGACY shows the regeneration (C41) already happened for the

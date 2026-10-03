@@ -108,7 +108,10 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   add a JSON manifest export for build/PCK tooling.
 
 ## DEC-0010 — Reference set status
-- Status: DECISION_REQUIRED (owner approval boundary)
+- Status: ACCEPTED — owner confirmed 2026-10-03 ("Referans setini onaylıyorum,
+  kilitle ve taşımaya devam et"). Migrated byte-exact (BATCH-0001,
+  `docs/MIGRATION_LEDGER.md`); lock: `docs/UOMD_REFERENCE_LOCK.md`,
+  `narrative/references/REFERENCE_SET.lock.json`.
 - LEGACY records owner approval (2026-09-30) of R01 logo, R02 key art,
   R03 Fadyme sheet r2, R04–R17 Fadyme assets, Fadyme voice Sulafat and
   R18 Fadyme theme (`docs/LEGACY_AUDIT.md` §4).
@@ -117,3 +120,12 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   `narrative/references/`, update `docs/UOMD_REFERENCE_LOCK.md` to
   APPROVED/LOCKED with the version list, and continue roster generation
   autonomously under C41.
+
+## DEC-0011 — Storage of binary creative assets
+- Status: ACCEPTED (2026-10-03), revisit at ~500 MB repository size
+- Reference set (73 MB) is committed as plain git objects (`.gitattributes`
+  marks png/ogg/mp3 binary). Git LFS is not used: GitHub LFS bandwidth quotas
+  would be consumed by every CI checkout, and no file approaches the 100 MB
+  limit. Runtime-optimized derivatives (WebP/ETC2, OGG) are what ships;
+  large source masters beyond the reference set may move to R2 with a manifest
+  if repository growth requires it.

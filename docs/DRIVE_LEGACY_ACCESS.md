@@ -27,8 +27,8 @@ LEGACY folder: `LEGACY` — id `1oe_UF3PyZ1u8dPWner_7rJhx7228Fovy`
 | Python source (`text/x-python`) | `download_file_content` | base64 of exact bytes (`main.py`) | VERIFIED |
 | Small binary / zip (`application/x-zip`) | `download_file_content` | base64, valid `PK\x03\x04` header (963 B Gradle cache entry) | VERIFIED |
 | JPEG | `read_file_content` | empty text (no OCR/vision description) | UNREADABLE as text |
-| JPEG / PNG | `download_file_content` | not exercised — binary path proven on zip; transfer size is the constraint | PARTIALLY_VERIFIED |
-| WAV / MP3 | metadata only (size, name, parent) | content not transferred | PARTIALLY_VERIFIED (metadata) |
+| JPEG / PNG | `download_file_content` | VERIFIED 2026-10-03: 19 PNGs of 0.5–6.3 MB transferred byte-exact (size + id + full ffmpeg decode; embedded `uomd_*` chunks intact) | VERIFIED |
+| WAV / MP3 / OGG | `download_file_content` | VERIFIED 2026-10-03: MP3 0.5 MB and 2.9 MB, OGG 1.6 MB transferred byte-exact, ffprobe OK | VERIFIED |
 | APK (86.7 MB) | metadata only | not transferred | UNREADABLE_IN_CURRENT_ENVIRONMENT (size) |
 | PDF / Office / Google Docs | none encountered yet in LEGACY traversal | — | UNVERIFIED |
 | Archives (zip/7z/tar) | small zip downloadable; extraction only practical for small archives | — | PARTIALLY_VERIFIED |
@@ -45,7 +45,12 @@ Images as text (no vision via `read_file_content`); very large binaries (APK
 
 ## LIMITATIONS
 
-1. **Binary content is returned as base64 into the model context.** Images
+1. ~~Binary content is returned as base64 into the model context.~~
+   **Resolved 2026-10-03:** results larger than the tool-output limit are
+   saved by the harness to a session file instead of entering the context;
+   they are decoded in the sandbox (`drive_decode.py` pattern: verify Drive id
+   and `fileSize`, then sha256). Small results still arrive inline.
+   Original note: Images
    (≈150–500 KB) and audio (≈0.1–4.5 MB) are technically retrievable but
    transferring them consumes large amounts of context and they cannot be
    streamed into the sandbox filesystem directly. Consequences:

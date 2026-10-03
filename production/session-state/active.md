@@ -19,7 +19,8 @@ Durable resume point for long-running takeover work. Read this after
 | 4 Repository audit | `docs/REPOSITORY_INVENTORY.md` |
 | 5/6 Toolchain + current game | `docs/CURRENT_STATE.md` (client broken, server not Worker-compatible, prod DB empty) |
 | 7 (partial) LEGACY audit | `docs/LEGACY_AUDIT.md` (creative pipeline, canon, reference-set evidence) |
-| Decisions / questions | `docs/DECISIONS.md` (DEC-0000…0010), `docs/OPEN_QUESTIONS.md` |
+| Reference set | LOCKED 2026-10-03 (owner), 26 files byte-exact in `narrative/references/` (BATCH-0001, `docs/MIGRATION_LEDGER.md`) |
+| Decisions / questions | `docs/DECISIONS.md` (DEC-0000…0011), `docs/OPEN_QUESTIONS.md` |
 
 ## Current phase
 
@@ -38,15 +39,17 @@ parity reference, FastAPI economy server).
 2. Read GODOT_HANDOFF, ONLINE_API_SPEC, PART1_ECONOMY_ANDROID, GDD.
 3. Write inventories + `docs/MIGRATION_LEDGER.md`; migrate LEGACY Godot
    project + content pipeline (DEC-0008) and creative tools (DEC-0009).
-4. Await owner on OQ-007 (reference set) before migrating reference files.
-5. Bulk transfer: if a GitHub Release asset `legacy-import-*` exists (OQ-010),
-   download it with `gh release download` into the scratchpad, verify, and
-   migrate from it; otherwise continue per-file via the Drive MCP
-   (download_file_content → base64 -d → compare size with Drive `fileSize`).
+4. Transfer method (verified): `download_file_content`; large results are
+   saved by the harness under `/root/.claude/projects/.../tool-results/` and
+   decoded with `scratchpad/drive_decode.py <saved> <dest> <size> <drive_id>`
+   (recreate it from `docs/MIGRATION_LEDGER.md` description if the scratchpad
+   is gone). Verify Drive id + fileSize, record sha256 in the ledger.
    LEGACY game ids: scripts `1V8Es81u0BLQPkNiwYNWRGq9rHowsGt3g` (app, ui,
-   services, persistence, online, core), tests `12Rd1PKUftk2cvi9F87SslmRV7nSPfwew`,
-   addons `1lOXaDhfJ2Ix82f5C5vs6WPYRgf8cM9HL`, data `1WROl9vgoDGemZKNoiw-8di2odEIRdnOV`,
-   scenes `16IcSkDcVCYr7wiQY8m0PfHAeWwtehWtH`, theme `1xWlA8r1QB2mublyRb_k3USd7VPyf9VBD`,
+   services, persistence, online, core `1EnNVDk5KqBQYMOdoOREHA16d8CTwF1ZN`),
+   tests `12Rd1PKUftk2cvi9F87SslmRV7nSPfwew`, addons
+   `1lOXaDhfJ2Ix82f5C5vs6WPYRgf8cM9HL`, data `1WROl9vgoDGemZKNoiw-8di2odEIRdnOV`,
+   scenes `16IcSkDcVCYr7wiQY8m0PfHAeWwtehWtH`, theme
+   `1xWlA8r1QB2mublyRb_k3USd7VPyf9VBD`, tools `1TZUGndZ1yP1bjaSTQM-e1rtRlwF1PtQ5`,
    project.godot `1uUn9hHE4_Gg_OjbIbWhAi2WJQ3m0z_sq` (portrait lock, autoloads
    Game/Save/Online/Native, GUT + uomd_native plugins, ETC2/ASTC).
 
