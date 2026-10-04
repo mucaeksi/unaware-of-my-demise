@@ -1,0 +1,3629 @@
+{
+  "schema_version": 1,
+  "pack_id": "unaware_of_my_demise.part1.enemies.v1",
+  "game_title": "Unaware of My Demise",
+  "combat_scale_note": "Compact combat scale: ordinary level-one enemies usually begin around 4-9 HP and 1-2 ATK; chapter bosses use low tens of HP. Stats grow by small flat increments per enemy level.",
+  "level_cap": 20,
+  "enemy_scaling": "stage_level_stats = base + growth_per_level * (stage_level - 1); apply boss phase multipliers after scaling.",
+  "targeting_contract": "All enemy intent telegraphs are visible before resolution; story bosses cannot hard-lock progress with an uncounterable mechanic.",
+  "necropolis_reference_note": "Heroes of Might and Magic III's Necropolis tier ladder is used as a broad role-progression reference (swarm, durable dead, specter, hunter, ranged caster, elite knight, colossal threat). All names, factions, silhouettes, lore and mechanics in this pack are original.",
+  "enemies": [
+    {
+      "enemy_id": "ash_wolf",
+      "name_en": "Ash Wolf",
+      "faction_id": "ashbound_beasts",
+      "role": "flanker",
+      "element": "Ember",
+      "necropolis_inspiration_tier": 4,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 6
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0.0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Tide",
+        "Dawn"
+      ],
+      "resistances": [
+        "Ember"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Pack Lunge",
+        "action_id": "ash_wolf_pack_lunge",
+        "intent_visible_before_action": true,
+        "target_selector_id": "lowest_hp_rear_enemy"
+      },
+      "skills": [
+        {
+          "skill_id": "ash_wolf_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_ash_wolf",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "ash_wolf_pack_lunge",
+          "name_en": "Pack Lunge",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_ash_wolf",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A fast beast that marks an isolated Rear target.",
+          "ai_priority": 30,
+          "target_selector_id": "lowest_hp_rear_enemy",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_rear_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.35
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "trail_mark",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_ash_wolf",
+      "design_note_en": "A fast beast that marks an isolated Rear target."
+    },
+    {
+      "enemy_id": "bellbound_dead",
+      "name_en": "Bellbound Dead",
+      "faction_id": "hollow_host",
+      "role": "swarm",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 1,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 5,
+        "atk": 1,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.05,
+        "def": 0.0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Tolling Grab",
+        "action_id": "bellbound_dead_tolling_grab",
+        "intent_visible_before_action": true,
+        "target_selector_id": "single_enemy_default"
+      },
+      "skills": [
+        {
+          "skill_id": "bellbound_dead_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_bellbound_dead",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "bellbound_dead_tolling_grab",
+          "name_en": "Tolling Grab",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_bellbound_dead",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "Low-tier bell-wired remains; individually weak, dangerous in numbers.",
+          "ai_priority": 30,
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.15
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "dread",
+              "duration_turns": 1,
+              "chance": 0.25
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_bellbound_dead",
+      "design_note_en": "Low-tier bell-wired remains; individually weak, dangerous in numbers."
+    },
+    {
+      "enemy_id": "bridge_revenant",
+      "name_en": "Bridge Revenant",
+      "faction_id": "hollow_host",
+      "role": "spectral_guard",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 3,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 7,
+        "atk": 1,
+        "def": 1,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.35,
+        "atk": 0.05,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Stone"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Chain Drag",
+        "action_id": "bridge_revenant_chain_drag",
+        "intent_visible_before_action": true,
+        "target_selector_id": "lowest_hp_front_enemy"
+      },
+      "skills": [
+        {
+          "skill_id": "bridge_revenant_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_bridge_revenant",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "bridge_revenant_chain_drag",
+          "name_en": "Chain Drag",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_bridge_revenant",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A drowned sentry hooks a Front defender, deals a crushing chain blow and Fractures the guard.",
+          "ai_priority": 30,
+          "target_selector_id": "lowest_hp_front_enemy",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_front_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.25
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "fracture",
+              "duration_turns": 1
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_bridge_revenant",
+      "design_note_en": "A drowned sentry hooks a Front defender, deals a crushing chain blow and Fractures the guard."
+    },
+    {
+      "enemy_id": "chain_cultist",
+      "name_en": "Chain Cultist",
+      "faction_id": "first_eclipse_cult",
+      "role": "support",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 3,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 5,
+        "atk": 1,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.05,
+        "def": 0.0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Gale"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Knot the Breath",
+        "action_id": "chain_cultist_knot_the_breath",
+        "intent_visible_before_action": true,
+        "target_selector_id": "all_enemy_allies"
+      },
+      "skills": [
+        {
+          "skill_id": "chain_cultist_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_chain_cultist",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "chain_cultist_knot_the_breath",
+          "name_en": "Knot the Breath",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_chain_cultist",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A support cultist who links allies and shares a portion of their wounds.",
+          "ai_priority": 30,
+          "target_selector_id": "all_enemy_allies",
+          "damage_type": "magic",
+          "effect_ops": [
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemy_allies",
+              "status_id": "soul_link",
+              "duration_turns": 2,
+              "shared_damage_fraction": 0.25
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_chain_cultist",
+      "design_note_en": "A support cultist who links allies and shares a portion of their wounds."
+    },
+    {
+      "enemy_id": "choir_knight",
+      "name_en": "Choir Knight",
+      "faction_id": "hollow_host",
+      "role": "elite_guard",
+      "element": "Dawn",
+      "necropolis_inspiration_tier": 6,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 9,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.45,
+        "atk": 0.1,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Veil",
+        "Ember"
+      ],
+      "resistances": [
+        "Dawn"
+      ],
+      "status_immunities": [
+        "dread"
+      ],
+      "intent": {
+        "telegraph": "Unison Verdict",
+        "action_id": "choir_knight_unison_verdict",
+        "intent_visible_before_action": true,
+        "target_selector_id": "single_enemy_default"
+      },
+      "skills": [
+        {
+          "skill_id": "choir_knight_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_choir_knight",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "choir_knight_unison_verdict",
+          "name_en": "Unison Verdict",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_choir_knight",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "Elite oath-armor that counterattacks when another Hollow is struck.",
+          "ai_priority": 30,
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.35
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [
+        {
+          "event": "ally_damaged",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "event_source",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 0.65,
+              "no_focus_gain": true,
+              "can_trigger_passives": false
+            }
+          ],
+          "limit": {
+            "per_round": 1
+          },
+          "event_filter": {
+            "event_target_faction_is": "hollow_host"
+          }
+        }
+      ],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_choir_knight",
+      "design_note_en": "Elite oath-armor that counterattacks when another Hollow is struck."
+    },
+    {
+      "enemy_id": "corrupted_crown_guard",
+      "name_en": "Corrupted Crown Guard",
+      "faction_id": "crown_remnant",
+      "role": "elite_guard",
+      "element": "Stone",
+      "necropolis_inspiration_tier": 6,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 9,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.45,
+        "atk": 0.1,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Gale",
+        "Veil"
+      ],
+      "resistances": [
+        "Stone"
+      ],
+      "status_immunities": [
+        "dread"
+      ],
+      "intent": {
+        "telegraph": "Formation Brace",
+        "action_id": "corrupted_crown_guard_formation_brace",
+        "intent_visible_before_action": true,
+        "target_selector_id": "single_enemy_default"
+      },
+      "skills": [
+        {
+          "skill_id": "corrupted_crown_guard_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_corrupted_crown_guard",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "corrupted_crown_guard_formation_brace",
+          "name_en": "Formation Brace",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_corrupted_crown_guard",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A disciplined guard that raises an ally shield before its signal strike.",
+          "ai_priority": 30,
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "lowest_hp_enemy_ally",
+              "scale_stat": "def",
+              "multiplier": 0.6,
+              "duration_turns": 2
+            },
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 0.9
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_corrupted_crown_guard",
+      "design_note_en": "A disciplined guard that raises an ally shield before its signal strike."
+    },
+    {
+      "enemy_id": "corrupted_mercenary",
+      "name_en": "Corrupted Mercenary",
+      "faction_id": "red_vial_guild",
+      "role": "bruiser",
+      "element": "Ember",
+      "necropolis_inspiration_tier": 4,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 7,
+        "atk": 2,
+        "def": 1,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.35,
+        "atk": 0.1,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Tide",
+        "Dawn"
+      ],
+      "resistances": [
+        "Ember"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Paid in Blood",
+        "action_id": "corrupted_mercenary_paid_in_blood",
+        "intent_visible_before_action": true,
+        "target_selector_id": "single_enemy_default"
+      },
+      "skills": [
+        {
+          "skill_id": "corrupted_mercenary_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_corrupted_mercenary",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "corrupted_mercenary_paid_in_blood",
+          "name_en": "Paid in Blood",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_corrupted_mercenary",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A hired fighter using a risky self-buff and heavy single-target blows.",
+          "ai_priority": 30,
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "pay_hp_cost",
+              "target_selector_id": "self",
+              "max_hp_fraction": 0.08,
+              "cannot_reduce_below": 1
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "self",
+              "stat_id": "atk",
+              "mode": "add_pct",
+              "amount": 0.25,
+              "duration_turns": 2
+            },
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.55
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_corrupted_mercenary",
+      "design_note_en": "A hired fighter using a risky self-buff and heavy single-target blows."
+    },
+    {
+      "enemy_id": "crownless_knight",
+      "name_en": "Crownless Knight",
+      "faction_id": "crown_remnant",
+      "role": "elite_guard",
+      "element": "Stone",
+      "necropolis_inspiration_tier": 6,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 9,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.45,
+        "atk": 0.1,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Veil",
+        "Gale"
+      ],
+      "resistances": [
+        "Stone"
+      ],
+      "status_immunities": [
+        "dread"
+      ],
+      "intent": {
+        "telegraph": "Crestless Challenge",
+        "action_id": "crownless_knight_crestless_challenge",
+        "intent_visible_before_action": true,
+        "target_selector_id": "single_enemy_default"
+      },
+      "skills": [
+        {
+          "skill_id": "crownless_knight_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_crownless_knight",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "crownless_knight_crestless_challenge",
+          "name_en": "Crestless Challenge",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_crownless_knight",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A stripped-plate duelist that deals extra damage to shields and resists Dread.",
+          "ai_priority": 30,
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.45,
+              "shield_damage_multiplier": 1.5
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_crownless_knight",
+      "design_note_en": "A stripped-plate duelist that deals extra damage to shields and resists Dread."
+    },
+    {
+      "enemy_id": "eclipse_sentinel",
+      "name_en": "Eclipse Sentinel",
+      "faction_id": "first_eclipse_cult",
+      "role": "warder",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 5,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 6,
+        "atk": 1,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.3,
+        "atk": 0.05,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Stone"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Pylon Ward",
+        "action_id": "eclipse_sentinel_pylon_ward",
+        "intent_visible_before_action": true,
+        "target_selector_id": "all_enemy_allies"
+      },
+      "skills": [
+        {
+          "skill_id": "eclipse_sentinel_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_eclipse_sentinel",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "eclipse_sentinel_pylon_ward",
+          "name_en": "Pylon Ward",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_eclipse_sentinel",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A ranged warder that channels a barrier through altar pylons.",
+          "ai_priority": 30,
+          "target_selector_id": "all_enemy_allies",
+          "damage_type": "magic",
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "all_enemy_allies",
+              "scale_stat": "def",
+              "multiplier": 0.35,
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_eclipse_sentinel",
+      "design_note_en": "A ranged warder that channels a barrier through altar pylons."
+    },
+    {
+      "enemy_id": "estate_wraith",
+      "name_en": "Estate Wraith",
+      "faction_id": "ashen_estate_dead",
+      "role": "spectral_caster",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 3,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0.0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Portrait Borrowing",
+        "action_id": "estate_wraith_portrait_borrowing",
+        "intent_visible_before_action": true,
+        "target_selector_id": "single_enemy_default"
+      },
+      "skills": [
+        {
+          "skill_id": "estate_wraith_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_estate_wraith",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "estate_wraith_portrait_borrowing",
+          "name_en": "Portrait Borrowing",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_estate_wraith",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A drifting noble shade that copies one shield from the most-buffed opposing unit.",
+          "ai_priority": 30,
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "effect_ops": [
+            {
+              "op": "copy_buff",
+              "target_selector_id": "self",
+              "source_selector_id": "enemy_with_most_buffs",
+              "category": "buff",
+              "maximum_count": 1,
+              "duration_turns": 2
+            },
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 0.9
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_estate_wraith",
+      "design_note_en": "A drifting noble shade that copies one shield from the most-buffed opposing unit."
+    },
+    {
+      "enemy_id": "glass_viper",
+      "name_en": "Glass Viper",
+      "faction_id": "red_vial_guild",
+      "role": "assassin",
+      "element": "Tide",
+      "necropolis_inspiration_tier": 4,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 4,
+        "atk": 2,
+        "def": 0,
+        "spd": 6
+      },
+      "growth_per_level": {
+        "hp": 0.2,
+        "atk": 0.1,
+        "def": 0.0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Ember",
+        "Stone"
+      ],
+      "resistances": [
+        "Tide"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Brittle Venom",
+        "action_id": "glass_viper_brittle_venom",
+        "intent_visible_before_action": true,
+        "target_selector_id": "lowest_hp_rear_enemy"
+      },
+      "skills": [
+        {
+          "skill_id": "glass_viper_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_glass_viper",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "glass_viper_brittle_venom",
+          "name_en": "Brittle Venom",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_glass_viper",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A glass-scaled experimental serpent; fast, fragile and poison-prone.",
+          "ai_priority": 30,
+          "target_selector_id": "lowest_hp_rear_enemy",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_rear_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "venom",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_glass_viper",
+      "design_note_en": "A glass-scaled experimental serpent; fast, fragile and poison-prone."
+    },
+    {
+      "enemy_id": "hollow_cleric",
+      "name_en": "Hollow Cleric",
+      "faction_id": "hollow_host",
+      "role": "ranged_caster",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 5,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0.0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Grave Litany",
+        "action_id": "hollow_cleric_grave_litany",
+        "intent_visible_before_action": true,
+        "target_selector_id": "lowest_hp_enemy"
+      },
+      "skills": [
+        {
+          "skill_id": "hollow_cleric_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_hollow_cleric",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "hollow_cleric_grave_litany",
+          "name_en": "Grave Litany",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_hollow_cleric",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A grave scribe that heals its most-injured ally below 70% HP; otherwise it curses the weakest foe.",
+          "ai_priority": 30,
+          "target_selector_id": "lowest_hp_enemy",
+          "damage_type": "magic",
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "most_injured_enemy_ally",
+              "scale_stat": "atk",
+              "multiplier": 0.9,
+              "when": {
+                "predicate": "enemy_ally_hp_below_pct",
+                "value": 70
+              }
+            },
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_enemy",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.1,
+              "when": {
+                "predicate": "no_enemy_ally_below_pct",
+                "value": 70
+              }
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "dread",
+              "duration_turns": 2,
+              "when": {
+                "predicate": "no_enemy_ally_below_pct",
+                "value": 70
+              }
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_hollow_cleric",
+      "design_note_en": "A grave scribe that heals its most-injured ally below 70% HP; otherwise it curses the weakest foe."
+    },
+    {
+      "enemy_id": "hollow_pilgrim",
+      "name_en": "Hollow Pilgrim",
+      "faction_id": "hollow_host",
+      "role": "slow_vanguard",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 2,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 8,
+        "atk": 1,
+        "def": 2,
+        "spd": 3
+      },
+      "growth_per_level": {
+        "hp": 0.4,
+        "atk": 0.05,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Pilgrim's Weight",
+        "action_id": "hollow_pilgrim_pilgrim_s_weight",
+        "intent_visible_before_action": true,
+        "target_selector_id": "single_enemy_default"
+      },
+      "skills": [
+        {
+          "skill_id": "hollow_pilgrim_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_hollow_pilgrim",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "hollow_pilgrim_pilgrim_s_weight",
+          "name_en": "Pilgrim's Weight",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_hollow_pilgrim",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A slow, stubborn frontliner with high HP and a crushing step.",
+          "ai_priority": 30,
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.5
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "self",
+              "status_id": "stoneguard",
+              "duration_turns": 1
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_hollow_pilgrim",
+      "design_note_en": "A slow, stubborn frontliner with high HP and a crushing step."
+    },
+    {
+      "enemy_id": "inkbound_dead",
+      "name_en": "Inkbound Dead",
+      "faction_id": "ashen_estate_dead",
+      "role": "ranged_caster",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 5,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0.0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Gale"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Black Margin",
+        "action_id": "inkbound_dead_black_margin",
+        "intent_visible_before_action": true,
+        "target_selector_id": "lowest_hp_enemy"
+      },
+      "skills": [
+        {
+          "skill_id": "inkbound_dead_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_inkbound_dead",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "inkbound_dead_black_margin",
+          "name_en": "Black Margin",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_inkbound_dead",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A paper-wrapped corpse that marks targets with debuff ink.",
+          "ai_priority": 30,
+          "target_selector_id": "lowest_hp_enemy",
+          "damage_type": "magic",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_enemy",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "trail_mark",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_inkbound_dead",
+      "design_note_en": "A paper-wrapped corpse that marks targets with debuff ink."
+    },
+    {
+      "enemy_id": "lost_vow_knight",
+      "name_en": "Lost-Vow Knight",
+      "faction_id": "hollow_host",
+      "role": "elite_duelist",
+      "element": "Stone",
+      "necropolis_inspiration_tier": 6,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 8,
+        "atk": 2,
+        "def": 1,
+        "spd": 6
+      },
+      "growth_per_level": {
+        "hp": 0.4,
+        "atk": 0.1,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Veil",
+        "Ember"
+      ],
+      "resistances": [
+        "Stone"
+      ],
+      "status_immunities": [
+        "dread"
+      ],
+      "intent": {
+        "telegraph": "Oath Sever",
+        "action_id": "lost_vow_knight_oath_sever",
+        "intent_visible_before_action": true,
+        "target_selector_id": "lowest_hp_front_enemy"
+      },
+      "skills": [
+        {
+          "skill_id": "lost_vow_knight_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_lost_vow_knight",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "lost_vow_knight_oath_sever",
+          "name_en": "Oath Sever",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_lost_vow_knight",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "An elite dead knight who punishes shields and exposed Front units.",
+          "ai_priority": 30,
+          "target_selector_id": "lowest_hp_front_enemy",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_front_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.45,
+              "shield_damage_multiplier": 1.5
+            },
+            {
+              "op": "remove_shield",
+              "target_selector_id": "previous_op_targets",
+              "amount_fraction": 0.2
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_lost_vow_knight",
+      "design_note_en": "An elite dead knight who punishes shields and exposed Front units."
+    },
+    {
+      "enemy_id": "noble_retainer",
+      "name_en": "Noble Retainer",
+      "faction_id": "crown_remnant",
+      "role": "support_guard",
+      "element": "Dawn",
+      "necropolis_inspiration_tier": 2,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 7,
+        "atk": 1,
+        "def": 1,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.35,
+        "atk": 0.05,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Veil",
+        "Ember"
+      ],
+      "resistances": [
+        "Dawn"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Household Interpose",
+        "action_id": "noble_retainer_household_interpose",
+        "intent_visible_before_action": true,
+        "target_selector_id": "lowest_hp_enemy_ally"
+      },
+      "skills": [
+        {
+          "skill_id": "noble_retainer_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_noble_retainer",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "noble_retainer_household_interpose",
+          "name_en": "Household Interpose",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_noble_retainer",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "An attendant's ghost intercepts the next single-target strike for its most-injured ally.",
+          "ai_priority": 30,
+          "target_selector_id": "lowest_hp_enemy_ally",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "grant_intercept",
+              "target_selector_id": "self",
+              "protected_ally_selector_id": "lowest_hp_enemy_ally",
+              "redirected_fraction": 1.0,
+              "duration_turns": 2,
+              "maximum_intercepts": 1
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_noble_retainer",
+      "design_note_en": "An attendant's ghost intercepts the next single-target strike for its most-injured ally."
+    },
+    {
+      "enemy_id": "orchard_ghoul",
+      "name_en": "Orchard Ghoul",
+      "faction_id": "hollow_host",
+      "role": "bruiser",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 2,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 7,
+        "atk": 2,
+        "def": 1,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.35,
+        "atk": 0.1,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Rooted Bite",
+        "action_id": "orchard_ghoul_rooted_bite",
+        "intent_visible_before_action": true,
+        "target_selector_id": "single_enemy_default"
+      },
+      "skills": [
+        {
+          "skill_id": "orchard_ghoul_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_orchard_ghoul",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "orchard_ghoul_rooted_bite",
+          "name_en": "Rooted Bite",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_orchard_ghoul",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A bloated orchard dead that gains defense while feeding.",
+          "ai_priority": 30,
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "self",
+              "stat_id": "def",
+              "mode": "add_pct",
+              "amount": 0.1,
+              "duration_turns": 2
+            },
+            {
+              "op": "heal",
+              "target_selector_id": "self",
+              "scale_stat": "atk",
+              "multiplier": 0.2,
+              "when": {
+                "predicate": "damage_dealt_at_least_pct_of_target_hp",
+                "value": 10
+              }
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_orchard_ghoul",
+      "design_note_en": "A bloated orchard dead that gains defense while feeding."
+    },
+    {
+      "enemy_id": "red_vial_alchemist",
+      "name_en": "Red Vial Alchemist",
+      "faction_id": "red_vial_guild",
+      "role": "ranged_caster",
+      "element": "Ember",
+      "necropolis_inspiration_tier": 5,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0.0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Tide",
+        "Gale"
+      ],
+      "resistances": [
+        "Ember"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Corrosive Phial",
+        "action_id": "red_vial_alchemist_corrosive_phial",
+        "intent_visible_before_action": true,
+        "target_selector_id": "rear_row_enemies"
+      },
+      "skills": [
+        {
+          "skill_id": "red_vial_alchemist_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_red_vial_alchemist",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "red_vial_alchemist_corrosive_phial",
+          "name_en": "Corrosive Phial",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_red_vial_alchemist",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A back-row bomber whose flask racks can be interrupted.",
+          "ai_priority": 30,
+          "target_selector_id": "rear_row_enemies",
+          "damage_type": "elemental",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "rear_row_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "venom",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_red_vial_alchemist",
+      "design_note_en": "A back-row bomber whose flask racks can be interrupted."
+    },
+    {
+      "enemy_id": "red_vial_scout",
+      "name_en": "Red Vial Scout",
+      "faction_id": "red_vial_guild",
+      "role": "flanker",
+      "element": "Gale",
+      "necropolis_inspiration_tier": 4,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 6
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0.0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Stone",
+        "Tide"
+      ],
+      "resistances": [
+        "Gale"
+      ],
+      "status_immunities": [],
+      "intent": {
+        "telegraph": "Glass Needle",
+        "action_id": "red_vial_scout_glass_needle",
+        "intent_visible_before_action": true,
+        "target_selector_id": "lowest_hp_rear_enemy"
+      },
+      "skills": [
+        {
+          "skill_id": "red_vial_scout_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_red_vial_scout",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "red_vial_scout_glass_needle",
+          "name_en": "Glass Needle",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_red_vial_scout",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A quick courier with a poison dart and a route-marking shot.",
+          "ai_priority": 30,
+          "target_selector_id": "lowest_hp_rear_enemy",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_rear_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.25
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "venom",
+              "duration_turns": 2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "trail_mark",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_red_vial_scout",
+      "design_note_en": "A quick courier with a poison dart and a route-marking shot."
+    },
+    {
+      "enemy_id": "royal_hollow",
+      "name_en": "Royal Hollow",
+      "faction_id": "crown_remnant",
+      "role": "armored_vanguard",
+      "element": "Stone",
+      "necropolis_inspiration_tier": 2,
+      "inspiration_note": "Broad unit-role progression only; all Veyrhold names, silhouettes, lore and mechanics are original.",
+      "base_stats_level_1": {
+        "hp": 9,
+        "atk": 1,
+        "def": 2,
+        "spd": 3
+      },
+      "growth_per_level": {
+        "hp": 0.45,
+        "atk": 0.05,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Veil",
+        "Gale"
+      ],
+      "resistances": [
+        "Stone"
+      ],
+      "status_immunities": [
+        "dread"
+      ],
+      "intent": {
+        "telegraph": "Empty Throne",
+        "action_id": "royal_hollow_empty_throne",
+        "intent_visible_before_action": true,
+        "target_selector_id": "single_enemy_default"
+      },
+      "skills": [
+        {
+          "skill_id": "royal_hollow_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_royal_hollow",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "skill_id": "royal_hollow_empty_throne",
+          "name_en": "Empty Throne",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_royal_hollow",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "effect_en": "A heavily armoured royal remnant that blocks one attack per round.",
+          "ai_priority": 30,
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [
+        {
+          "event": "before_damage_received",
+          "effect_ops": [
+            {
+              "op": "block_attack",
+              "target_selector_id": "self",
+              "maximum_hits": 1
+            }
+          ],
+          "limit": {
+            "per_round": 1
+          }
+        }
+      ],
+      "continuous_modifiers": [],
+      "brand_mark_id": "mark_enemy_royal_hollow",
+      "design_note_en": "A heavily armoured royal remnant that blocks one attack per round."
+    },
+    {
+      "enemy_id": "boss_ash_maw",
+      "name_en": "The Ash-Maw",
+      "faction_id": "ashbound_beasts",
+      "role": "beast_boss",
+      "element": "Ember",
+      "necropolis_inspiration_tier": 7,
+      "inspiration_note": "Tier-seven framing borrows the broad colossal endgame threat role; this boss is an original Veyrhold design, not a borrowed unit.",
+      "base_stats_level_1": {
+        "hp": 20,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 1.0,
+        "atk": 0.1,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Stone",
+        "Tide"
+      ],
+      "resistances": [
+        "Ember"
+      ],
+      "status_immunities": [],
+      "control_rules": {
+        "control_duration_multiplier": 0.5,
+        "control_duration_rounding": "minimum_one_turn",
+        "blanket_control_immunity": false
+      },
+      "intent": {
+        "telegraph": "Breakable jaw bell; a broken bell interrupts Ash Howl.",
+        "action_id": "boss_ash_maw_ash_howl",
+        "target_selector_id": "all_enemies",
+        "intent_visible_before_action": true,
+        "player_actions_before_resolution": 1
+      },
+      "skills": [
+        {
+          "skill_id": "boss_ash_maw_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_boss_ash_maw",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "phase_ids": [
+            "jaw_bell",
+            "ash_howl"
+          ],
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "cooldown_turns": 3,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.4
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "burn",
+              "duration_turns": 1
+            }
+          ],
+          "skill_id": "boss_ash_maw_ash_howl",
+          "name_en": "Jaw-Bell",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_ash_maw",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "jaw_bell"
+          }
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "boss_id": "ash_maw",
+      "story_stage_id": "1-5",
+      "phase_ids": [
+        "jaw_bell",
+        "ash_howl"
+      ],
+      "phases": [
+        {
+          "phase_id": "jaw_bell",
+          "name_en": "Jaw-Bell",
+          "transition": "battle_start",
+          "transition_hp_percent": null,
+          "hp_multiplier": 1.0,
+          "atk_multiplier": 1.0,
+          "def_multiplier": 1.0,
+          "weaknesses": [
+            "Stone",
+            "Ember"
+          ],
+          "passives": [
+            {
+              "passive_id": "jaw_bell_mechanic",
+              "name_en": "Jaw-Bell",
+              "brand_mark_id": "mark_enemy_boss_ash_maw",
+              "effect_en": "Breakable jaw bell; a broken bell interrupts Ash Howl.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Breakable jaw bell; a broken bell interrupts Ash Howl.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "jaw_bell"
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [
+            "jaw_bell"
+          ],
+          "objectives": [
+            {
+              "objective_id": "jaw_bell",
+              "name_en": "Jaw Bell",
+              "max_hp": 4,
+              "hp": 4,
+              "targetable_by_player": true,
+              "persists_across_phases": true,
+              "on_destroyed": [
+                {
+                  "op": "cancel_boss_telegraph",
+                  "target_selector_id": "boss",
+                  "action_id": "boss_ash_maw_ash_howl"
+                }
+              ]
+            }
+          ],
+          "enter_ops": [],
+          "passive_ops": [],
+          "signature_action_id": "boss_ash_maw_ash_howl"
+        },
+        {
+          "phase_id": "ash_howl",
+          "name_en": "Ash Howl",
+          "transition": "at_hp_percent",
+          "transition_hp_percent": 0.5,
+          "hp_multiplier": 0.72,
+          "atk_multiplier": 1.15,
+          "def_multiplier": 1.12,
+          "weaknesses": [
+            "Stone",
+            "Tide"
+          ],
+          "passives": [
+            {
+              "passive_id": "ash_howl_mechanic",
+              "name_en": "Ash Howl",
+              "brand_mark_id": "mark_enemy_boss_ash_maw",
+              "effect_en": "Charged howl telegraph; guard or interrupt before party-wide damage.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Charged howl telegraph; guard or interrupt before party-wide damage.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "jaw_bell"
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [],
+          "objectives": [],
+          "enter_ops": [],
+          "passive_ops": [],
+          "signature_action_id": "boss_ash_maw_ash_howl"
+        }
+      ],
+      "passives": [],
+      "drop_profile_id": "story_boss_first_clear",
+      "guaranteed_accessory_set_id": "ash_maw_hide",
+      "first_clear_accessory_rarity": 4,
+      "brand_mark_id": "mark_enemy_boss_ash_maw",
+      "phase_transition_rule": "At 50% current HP, resolve any active intent, change phase once, clear boss debuffs except Break, and refresh visible intent.",
+      "phase_transition_contract": {
+        "trigger": "boss_hp_crosses_threshold_pct",
+        "threshold_pct": 50,
+        "once_per_battle": true,
+        "pending_intent": "resolve_before_transition",
+        "clear_status_category": "debuff",
+        "preserve_status_ids": [
+          "break"
+        ],
+        "refresh_intent": true
+      },
+      "phase_mechanics_source": {},
+      "boss_drop_table_id": "story_boss_first_clear"
+    },
+    {
+      "enemy_id": "boss_bell_widow",
+      "name_en": "The Bell-Widow",
+      "faction_id": "villain_boss",
+      "role": "ritual_boss",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 7,
+      "inspiration_note": "Tier-seven framing borrows the broad colossal endgame threat role; this boss is an original Veyrhold design, not a borrowed unit.",
+      "base_stats_level_1": {
+        "hp": 22,
+        "atk": 2,
+        "def": 3,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 1.1,
+        "atk": 0.1,
+        "def": 0.15,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "control_rules": {
+        "control_duration_multiplier": 0.5,
+        "control_duration_rounding": "minimum_one_turn",
+        "blanket_control_immunity": false
+      },
+      "intent": {
+        "telegraph": "Wax seal absorbs a portion of incoming damage until broken.",
+        "action_id": "boss_bell_widow_charged_judgement",
+        "target_selector_id": "all_enemies",
+        "intent_visible_before_action": true,
+        "player_actions_before_resolution": 1
+      },
+      "skills": [
+        {
+          "skill_id": "boss_bell_widow_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_boss_bell_widow",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "phase_ids": [
+            "wax_seal",
+            "widow_verdict"
+          ],
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "cooldown_turns": 3,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.35
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "dread",
+              "duration_turns": 2
+            }
+          ],
+          "skill_id": "boss_bell_widow_charged_judgement",
+          "name_en": "Wax Seal",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_bell_widow",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "wax_seal"
+          }
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "boss_id": "bell_widow",
+      "story_stage_id": "2-5",
+      "phase_ids": [
+        "wax_seal",
+        "widow_verdict"
+      ],
+      "phases": [
+        {
+          "phase_id": "wax_seal",
+          "name_en": "Wax Seal",
+          "transition": "battle_start",
+          "transition_hp_percent": null,
+          "hp_multiplier": 1.0,
+          "atk_multiplier": 0.92,
+          "def_multiplier": 1.0,
+          "weaknesses": [
+            "Dawn",
+            "Ember"
+          ],
+          "passives": [
+            {
+              "passive_id": "wax_seal_mechanic",
+              "name_en": "Wax Seal",
+              "brand_mark_id": "mark_enemy_boss_bell_widow",
+              "effect_en": "Wax seal absorbs a portion of incoming damage until broken.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Wax seal absorbs a portion of incoming damage until broken.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "wax_seal"
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [
+            "wax_seal"
+          ],
+          "objectives": [
+            {
+              "objective_id": "wax_seal",
+              "name_en": "Wax Seal",
+              "max_hp": 5,
+              "hp": 5,
+              "targetable_by_player": true,
+              "persists_across_phases": true,
+              "on_destroyed": [
+                {
+                  "op": "remove_boss_modifier",
+                  "target_selector_id": "boss",
+                  "modifier_id": "wax_seal_ward"
+                }
+              ]
+            }
+          ],
+          "enter_ops": [],
+          "passive_ops": [
+            {
+              "op": "boss_damage_taken_modifier",
+              "target_selector_id": "self",
+              "multiplier": 0.8,
+              "modifier_id": "wax_seal_ward",
+              "until_objective_destroyed": "wax_seal"
+            }
+          ],
+          "signature_action_id": "boss_bell_widow_charged_judgement"
+        },
+        {
+          "phase_id": "widow_verdict",
+          "name_en": "Widow's Verdict",
+          "transition": "at_hp_percent",
+          "transition_hp_percent": 0.5,
+          "hp_multiplier": 0.72,
+          "atk_multiplier": 1.18,
+          "def_multiplier": 1.12,
+          "weaknesses": [
+            "Dawn",
+            "Ember"
+          ],
+          "passives": [
+            {
+              "passive_id": "widow_verdict_mechanic",
+              "name_en": "Widow's Verdict",
+              "brand_mark_id": "mark_enemy_boss_bell_widow",
+              "effect_en": "Charged judgement is interrupted by breaking the seal.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Charged judgement is interrupted by breaking the seal.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "wax_seal"
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [],
+          "objectives": [],
+          "enter_ops": [],
+          "passive_ops": [],
+          "signature_action_id": "boss_bell_widow_charged_judgement"
+        }
+      ],
+      "passives": [],
+      "drop_profile_id": "story_boss_first_clear",
+      "guaranteed_accessory_set_id": "widow_verdict",
+      "first_clear_accessory_rarity": 4,
+      "brand_mark_id": "mark_enemy_boss_bell_widow",
+      "phase_transition_rule": "At 50% current HP, resolve any active intent, change phase once, clear boss debuffs except Break, and refresh visible intent.",
+      "phase_transition_contract": {
+        "trigger": "boss_hp_crosses_threshold_pct",
+        "threshold_pct": 50,
+        "once_per_battle": true,
+        "pending_intent": "resolve_before_transition",
+        "clear_status_category": "debuff",
+        "preserve_status_ids": [
+          "break"
+        ],
+        "refresh_intent": true
+      },
+      "phase_mechanics_source": {},
+      "boss_drop_table_id": "story_boss_first_clear"
+    },
+    {
+      "enemy_id": "boss_captain_rusk",
+      "name_en": "Captain Rusk",
+      "faction_id": "red_vial_guild",
+      "role": "duelist_boss",
+      "element": "Gale",
+      "necropolis_inspiration_tier": 7,
+      "inspiration_note": "Tier-seven framing borrows the broad colossal endgame threat role; this boss is an original Veyrhold design, not a borrowed unit.",
+      "base_stats_level_1": {
+        "hp": 24,
+        "atk": 2,
+        "def": 3,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 1.2,
+        "atk": 0.1,
+        "def": 0.15,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Stone",
+        "Tide"
+      ],
+      "resistances": [
+        "Gale"
+      ],
+      "status_immunities": [],
+      "control_rules": {
+        "control_duration_multiplier": 0.5,
+        "control_duration_rounding": "minimum_one_turn",
+        "blanket_control_immunity": false
+      },
+      "intent": {
+        "telegraph": "Rusk marks one Front hero and telegraphs a heavy duel strike.",
+        "action_id": "boss_captain_rusk_duel_cut",
+        "target_selector_id": "duel_marked_enemy",
+        "intent_visible_before_action": true,
+        "player_actions_before_resolution": 1
+      },
+      "skills": [
+        {
+          "skill_id": "boss_captain_rusk_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_boss_captain_rusk",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "phase_ids": [
+            "captain_duel"
+          ],
+          "target_selector_id": "duel_marked_enemy",
+          "damage_type": "physical",
+          "cooldown_turns": 2,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "duel_marked_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.8
+            }
+          ],
+          "skill_id": "boss_captain_rusk_duel_cut",
+          "name_en": "Captain's Duel",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_captain_rusk",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "interruptible_by_control": false
+          }
+        },
+        {
+          "phase_ids": [
+            "banner_call"
+          ],
+          "target_selector_id": "self",
+          "damage_type": "none",
+          "cooldown_turns": 4,
+          "effect_ops": [
+            {
+              "op": "summon_enemies",
+              "target_selector_id": "self",
+              "enemy_id": "corrupted_mercenary",
+              "count": 2,
+              "only_if_objective_alive": "signal_banner"
+            }
+          ],
+          "skill_id": "boss_captain_rusk_banner_call",
+          "name_en": "Banner Call",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_captain_rusk",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "signal_banner"
+          }
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "boss_id": "captain_rusk",
+      "story_stage_id": "3-5",
+      "phase_ids": [
+        "captain_duel",
+        "banner_call"
+      ],
+      "phases": [
+        {
+          "phase_id": "captain_duel",
+          "name_en": "Captain's Duel",
+          "transition": "battle_start",
+          "transition_hp_percent": null,
+          "hp_multiplier": 1.0,
+          "atk_multiplier": 1.0,
+          "def_multiplier": 1.0,
+          "weaknesses": [
+            "Stone",
+            "Tide"
+          ],
+          "passives": [
+            {
+              "passive_id": "captain_duel_mechanic",
+              "name_en": "Captain's Duel",
+              "brand_mark_id": "mark_enemy_boss_captain_rusk",
+              "effect_en": "Rusk marks one Front hero and telegraphs a heavy duel strike.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Rusk marks one Front hero and telegraphs a heavy duel strike.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interruptible_by_control": false
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [],
+          "objectives": [],
+          "enter_ops": [
+            {
+              "op": "apply_status",
+              "target_selector_id": "front_row_enemies",
+              "status_id": "duel_mark",
+              "duration_turns": 2
+            }
+          ],
+          "passive_ops": [],
+          "signature_action_id": "boss_captain_rusk_duel_cut"
+        },
+        {
+          "phase_id": "banner_call",
+          "name_en": "Banner Call",
+          "transition": "at_hp_percent",
+          "transition_hp_percent": 0.5,
+          "hp_multiplier": 0.72,
+          "atk_multiplier": 1.12,
+          "def_multiplier": 1.12,
+          "weaknesses": [
+            "Stone",
+            "Tide"
+          ],
+          "passives": [
+            {
+              "passive_id": "banner_call_mechanic",
+              "name_en": "Banner Call",
+              "brand_mark_id": "mark_enemy_boss_captain_rusk",
+              "effect_en": "Signal banner calls reinforcements unless destroyed during the phase.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Signal banner calls reinforcements unless destroyed during the phase.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "signal_banner"
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [
+            "signal_banner"
+          ],
+          "objectives": [
+            {
+              "objective_id": "signal_banner",
+              "name_en": "Signal Banner",
+              "max_hp": 4,
+              "hp": 4,
+              "targetable_by_player": true,
+              "on_destroyed": [
+                {
+                  "op": "cancel_boss_telegraph",
+                  "target_selector_id": "boss",
+                  "action_id": "boss_captain_rusk_banner_call"
+                }
+              ]
+            }
+          ],
+          "enter_ops": [],
+          "passive_ops": [],
+          "signature_action_id": "boss_captain_rusk_banner_call"
+        }
+      ],
+      "passives": [],
+      "drop_profile_id": "story_boss_first_clear",
+      "guaranteed_accessory_set_id": "road_captain_oath",
+      "first_clear_accessory_rarity": 4,
+      "brand_mark_id": "mark_enemy_boss_captain_rusk",
+      "phase_transition_rule": "At 50% current HP, resolve any active intent, change phase once, clear boss debuffs except Break, and refresh visible intent.",
+      "phase_transition_contract": {
+        "trigger": "boss_hp_crosses_threshold_pct",
+        "threshold_pct": 50,
+        "once_per_battle": true,
+        "pending_intent": "resolve_before_transition",
+        "clear_status_category": "debuff",
+        "preserve_status_ids": [
+          "break"
+        ],
+        "refresh_intent": true
+      },
+      "phase_mechanics_source": {},
+      "boss_drop_table_id": "story_boss_first_clear"
+    },
+    {
+      "enemy_id": "boss_red_vial_matron",
+      "name_en": "The Red Vial Matron",
+      "faction_id": "red_vial_guild",
+      "role": "alchemist_boss",
+      "element": "Ember",
+      "necropolis_inspiration_tier": 7,
+      "inspiration_note": "Tier-seven framing borrows the broad colossal endgame threat role; this boss is an original Veyrhold design, not a borrowed unit.",
+      "base_stats_level_1": {
+        "hp": 26,
+        "atk": 2,
+        "def": 4,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 1.3,
+        "atk": 0.1,
+        "def": 0.2,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Tide",
+        "Gale"
+      ],
+      "resistances": [
+        "Ember"
+      ],
+      "status_immunities": [],
+      "control_rules": {
+        "control_duration_multiplier": 0.5,
+        "control_duration_rounding": "minimum_one_turn",
+        "blanket_control_immunity": false
+      },
+      "intent": {
+        "telegraph": "Glass ward reduces damage while flask racks remain intact.",
+        "action_id": "boss_red_vial_matron_corrosive_flasks",
+        "target_selector_id": "all_enemies",
+        "intent_visible_before_action": true,
+        "player_actions_before_resolution": 1
+      },
+      "skills": [
+        {
+          "skill_id": "boss_red_vial_matron_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_boss_red_vial_matron",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "phase_ids": [
+            "glass_ward",
+            "corrosive_flasks"
+          ],
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "cooldown_turns": 3,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.2,
+              "hit_count": 2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "fracture",
+              "duration_turns": 2
+            }
+          ],
+          "skill_id": "boss_red_vial_matron_corrosive_flasks",
+          "name_en": "Glass Ward",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_red_vial_matron",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_all_objectives_destroyed": [
+              "flask_rack_left",
+              "flask_rack_right"
+            ]
+          }
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "boss_id": "red_vial_matron",
+      "story_stage_id": "4-5",
+      "phase_ids": [
+        "glass_ward",
+        "corrosive_flasks"
+      ],
+      "phases": [
+        {
+          "phase_id": "glass_ward",
+          "name_en": "Glass Ward",
+          "transition": "battle_start",
+          "transition_hp_percent": null,
+          "hp_multiplier": 1.0,
+          "atk_multiplier": 0.95,
+          "def_multiplier": 1.0,
+          "weaknesses": [
+            "Tide",
+            "Gale"
+          ],
+          "passives": [
+            {
+              "passive_id": "glass_ward_mechanic",
+              "name_en": "Glass Ward",
+              "brand_mark_id": "mark_enemy_boss_red_vial_matron",
+              "effect_en": "Glass ward reduces damage while flask racks remain intact.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Glass ward reduces damage while flask racks remain intact.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_all_objectives_destroyed": [
+              "flask_rack_left",
+              "flask_rack_right"
+            ]
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [
+            "flask_rack_left",
+            "flask_rack_right"
+          ],
+          "objectives": [
+            {
+              "objective_id": "flask_rack_left",
+              "name_en": "Left Flask Rack",
+              "max_hp": 3,
+              "hp": 3,
+              "targetable_by_player": true
+            },
+            {
+              "objective_id": "flask_rack_right",
+              "name_en": "Right Flask Rack",
+              "max_hp": 3,
+              "hp": 3,
+              "targetable_by_player": true
+            }
+          ],
+          "enter_ops": [],
+          "passive_ops": [
+            {
+              "op": "boss_damage_taken_modifier",
+              "target_selector_id": "self",
+              "multiplier": 0.85,
+              "modifier_id": "glass_racks_ward",
+              "while_any_objective_alive": [
+                "flask_rack_left",
+                "flask_rack_right"
+              ]
+            }
+          ],
+          "signature_action_id": "boss_red_vial_matron_corrosive_flasks"
+        },
+        {
+          "phase_id": "corrosive_flasks",
+          "name_en": "Corrosive Flasks",
+          "transition": "at_hp_percent",
+          "transition_hp_percent": 0.5,
+          "hp_multiplier": 0.72,
+          "atk_multiplier": 1.14,
+          "def_multiplier": 1.12,
+          "weaknesses": [
+            "Tide",
+            "Gale"
+          ],
+          "passives": [
+            {
+              "passive_id": "corrosive_flasks_mechanic",
+              "name_en": "Corrosive Flasks",
+              "brand_mark_id": "mark_enemy_boss_red_vial_matron",
+              "effect_en": "Telegraphed area corrosion; destroy rack props to lower its multiplier.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Telegraphed area corrosion; destroy rack props to lower its multiplier.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_all_objectives_destroyed": [
+              "flask_rack_left",
+              "flask_rack_right"
+            ]
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [],
+          "objectives": [],
+          "enter_ops": [],
+          "passive_ops": [],
+          "signature_action_id": "boss_red_vial_matron_corrosive_flasks"
+        }
+      ],
+      "passives": [],
+      "drop_profile_id": "story_boss_first_clear",
+      "guaranteed_accessory_set_id": "red_vial_residue",
+      "first_clear_accessory_rarity": 4,
+      "brand_mark_id": "mark_enemy_boss_red_vial_matron",
+      "phase_transition_rule": "At 50% current HP, resolve any active intent, change phase once, clear boss debuffs except Break, and refresh visible intent.",
+      "phase_transition_contract": {
+        "trigger": "boss_hp_crosses_threshold_pct",
+        "threshold_pct": 50,
+        "once_per_battle": true,
+        "pending_intent": "resolve_before_transition",
+        "clear_status_category": "debuff",
+        "preserve_status_ids": [
+          "break"
+        ],
+        "refresh_intent": true
+      },
+      "phase_mechanics_source": {},
+      "boss_drop_table_id": "story_boss_first_clear"
+    },
+    {
+      "enemy_id": "boss_marshal_oren",
+      "name_en": "Marshal Oren",
+      "faction_id": "crown_remnant",
+      "role": "commander_boss",
+      "element": "Stone",
+      "necropolis_inspiration_tier": 7,
+      "inspiration_note": "Tier-seven framing borrows the broad colossal endgame threat role; this boss is an original Veyrhold design, not a borrowed unit.",
+      "base_stats_level_1": {
+        "hp": 28,
+        "atk": 3,
+        "def": 4,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 1.4,
+        "atk": 0.15,
+        "def": 0.2,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Gale",
+        "Veil"
+      ],
+      "resistances": [
+        "Stone"
+      ],
+      "status_immunities": [],
+      "control_rules": {
+        "control_duration_multiplier": 0.5,
+        "control_duration_rounding": "minimum_one_turn",
+        "blanket_control_immunity": false
+      },
+      "intent": {
+        "telegraph": "Oren guards himself and Crown Guards in formation.",
+        "action_id": "boss_marshal_oren_formation_order",
+        "target_selector_id": "self_and_enemy_guards",
+        "intent_visible_before_action": true,
+        "player_actions_before_resolution": 1
+      },
+      "skills": [
+        {
+          "skill_id": "boss_marshal_oren_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_boss_marshal_oren",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "phase_ids": [
+            "shield_formation"
+          ],
+          "target_selector_id": "self_and_enemy_guards",
+          "damage_type": "none",
+          "cooldown_turns": 3,
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "self_and_enemy_guards",
+              "scale_stat": "def",
+              "multiplier": 0.45,
+              "duration_turns": 2
+            }
+          ],
+          "skill_id": "boss_marshal_oren_formation_order",
+          "name_en": "Shield Formation",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_marshal_oren",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "signal_standard"
+          }
+        },
+        {
+          "phase_ids": [
+            "bridge_strike"
+          ],
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "physical",
+          "cooldown_turns": 3,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "front_row_enemies",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.65,
+              "multiplier_if_objective_alive": {
+                "objective_id": "signal_standard",
+                "multiplier": 1.15
+              }
+            }
+          ],
+          "skill_id": "boss_marshal_oren_bridge_strike",
+          "name_en": "Bridge Strike",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_marshal_oren",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "interruptible_by_control": false
+          }
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "boss_id": "marshal_oren",
+      "story_stage_id": "5-5",
+      "phase_ids": [
+        "shield_formation",
+        "bridge_strike"
+      ],
+      "phases": [
+        {
+          "phase_id": "shield_formation",
+          "name_en": "Shield Formation",
+          "transition": "battle_start",
+          "transition_hp_percent": null,
+          "hp_multiplier": 1.0,
+          "atk_multiplier": 0.9,
+          "def_multiplier": 1.0,
+          "weaknesses": [
+            "Gale",
+            "Veil"
+          ],
+          "passives": [
+            {
+              "passive_id": "shield_formation_mechanic",
+              "name_en": "Shield Formation",
+              "brand_mark_id": "mark_enemy_boss_marshal_oren",
+              "effect_en": "Oren guards himself and Crown Guards in formation.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Oren guards himself and Crown Guards in formation.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "signal_standard"
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [
+            "signal_standard"
+          ],
+          "objectives": [
+            {
+              "objective_id": "signal_standard",
+              "name_en": "Signal Standard",
+              "max_hp": 4,
+              "hp": 4,
+              "targetable_by_player": true,
+              "persists_across_phases": true,
+              "on_destroyed": [
+                {
+                  "op": "remove_shield",
+                  "target_selector_id": "boss_and_enemy_guards",
+                  "shield_source_id": "formation_guard"
+                }
+              ]
+            }
+          ],
+          "enter_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "self_and_enemy_guards",
+              "scale_stat": "def",
+              "multiplier": 0.6,
+              "duration_turns": 2,
+              "shield_source_id": "formation_guard"
+            }
+          ],
+          "passive_ops": [],
+          "signature_action_id": "boss_marshal_oren_formation_order"
+        },
+        {
+          "phase_id": "bridge_strike",
+          "name_en": "Bridge Strike",
+          "transition": "at_hp_percent",
+          "transition_hp_percent": 0.5,
+          "hp_multiplier": 0.72,
+          "atk_multiplier": 1.18,
+          "def_multiplier": 1.12,
+          "weaknesses": [
+            "Gale",
+            "Veil"
+          ],
+          "passives": [
+            {
+              "passive_id": "bridge_strike_mechanic",
+              "name_en": "Bridge Strike",
+              "brand_mark_id": "mark_enemy_boss_marshal_oren",
+              "effect_en": "A visible lane strike can be mitigated by shielding or breaking the standard.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "A visible lane strike can be mitigated by shielding or breaking the standard.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interruptible_by_control": false
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [],
+          "objectives": [],
+          "enter_ops": [],
+          "passive_ops": [],
+          "signature_action_id": "boss_marshal_oren_bridge_strike"
+        }
+      ],
+      "passives": [],
+      "drop_profile_id": "story_boss_first_clear",
+      "guaranteed_accessory_set_id": "bridgewarden_plating",
+      "first_clear_accessory_rarity": 4,
+      "brand_mark_id": "mark_enemy_boss_marshal_oren",
+      "phase_transition_rule": "At 50% current HP, resolve any active intent, change phase once, clear boss debuffs except Break, and refresh visible intent.",
+      "phase_transition_contract": {
+        "trigger": "boss_hp_crosses_threshold_pct",
+        "threshold_pct": 50,
+        "once_per_battle": true,
+        "pending_intent": "resolve_before_transition",
+        "clear_status_category": "debuff",
+        "preserve_status_ids": [
+          "break"
+        ],
+        "refresh_intent": true
+      },
+      "phase_mechanics_source": {},
+      "boss_drop_table_id": "story_boss_first_clear"
+    },
+    {
+      "enemy_id": "boss_ashen_lord_wraith",
+      "name_en": "The Ashen Lord's Wraith",
+      "faction_id": "ashen_estate_dead",
+      "role": "spectral_boss",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 7,
+      "inspiration_note": "Tier-seven framing borrows the broad colossal endgame threat role; this boss is an original Veyrhold design, not a borrowed unit.",
+      "base_stats_level_1": {
+        "hp": 30,
+        "atk": 3,
+        "def": 5,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 1.5,
+        "atk": 0.15,
+        "def": 0.25,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "control_rules": {
+        "control_duration_multiplier": 0.5,
+        "control_duration_rounding": "minimum_one_turn",
+        "blanket_control_immunity": false
+      },
+      "intent": {
+        "telegraph": "Mirror frame copies one defensive buff; break it to remove copied shields.",
+        "action_id": "boss_ashen_wraith_mirror_shard",
+        "target_selector_id": "single_enemy_default",
+        "intent_visible_before_action": true,
+        "player_actions_before_resolution": 1
+      },
+      "skills": [
+        {
+          "skill_id": "boss_ashen_lord_wraith_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "phase_ids": [
+            "portrait_double"
+          ],
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "cooldown_turns": 3,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            }
+          ],
+          "skill_id": "boss_ashen_wraith_mirror_shard",
+          "name_en": "Portrait Double",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "remove_copied_shields_if_objective_destroyed": "mirror_frame"
+          }
+        },
+        {
+          "phase_ids": [
+            "falling_gallery"
+          ],
+          "target_selector_id": "rear_row_enemies",
+          "damage_type": "magic",
+          "cooldown_turns": 3,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "rear_row_enemies",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.5
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "rear_row_enemies",
+              "status_id": "dread",
+              "duration_turns": 1
+            }
+          ],
+          "skill_id": "boss_ashen_wraith_falling_gallery",
+          "name_en": "Falling Gallery",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "interruptible_by_control": false
+          }
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "boss_id": "ashen_lord_wraith",
+      "story_stage_id": "6-5",
+      "phase_ids": [
+        "portrait_double",
+        "falling_gallery"
+      ],
+      "phases": [
+        {
+          "phase_id": "portrait_double",
+          "name_en": "Portrait Double",
+          "transition": "battle_start",
+          "transition_hp_percent": null,
+          "hp_multiplier": 1.0,
+          "atk_multiplier": 0.95,
+          "def_multiplier": 1.0,
+          "weaknesses": [
+            "Dawn",
+            "Ember"
+          ],
+          "passives": [
+            {
+              "passive_id": "portrait_double_mechanic",
+              "name_en": "Portrait Double",
+              "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+              "effect_en": "Mirror frame copies one defensive buff; break it to remove copied shields.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Mirror frame copies one defensive buff; break it to remove copied shields.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "remove_copied_shields_if_objective_destroyed": "mirror_frame"
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [
+            "mirror_frame"
+          ],
+          "objectives": [
+            {
+              "objective_id": "mirror_frame",
+              "name_en": "Mirror Frame",
+              "max_hp": 4,
+              "hp": 4,
+              "targetable_by_player": true,
+              "persists_across_phases": true,
+              "on_destroyed": [
+                {
+                  "op": "remove_copied_statuses",
+                  "target_selector_id": "boss",
+                  "category": "shield"
+                }
+              ]
+            }
+          ],
+          "enter_ops": [
+            {
+              "op": "copy_buff",
+              "target_selector_id": "self",
+              "source_selector_id": "enemy_with_most_buffs",
+              "category": "shield",
+              "maximum_count": 1,
+              "duration_turns": 2
+            }
+          ],
+          "passive_ops": [],
+          "signature_action_id": "boss_ashen_wraith_mirror_shard"
+        },
+        {
+          "phase_id": "falling_gallery",
+          "name_en": "Falling Gallery",
+          "transition": "at_hp_percent",
+          "transition_hp_percent": 0.5,
+          "hp_multiplier": 0.72,
+          "atk_multiplier": 1.18,
+          "def_multiplier": 1.12,
+          "weaknesses": [
+            "Dawn",
+            "Ember"
+          ],
+          "passives": [
+            {
+              "passive_id": "falling_gallery_mechanic",
+              "name_en": "Falling Gallery",
+              "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+              "effect_en": "Falling-beam telegraph targets a row; use guard or row mitigation.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Falling-beam telegraph targets a row; use guard or row mitigation.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interruptible_by_control": false
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [],
+          "objectives": [],
+          "enter_ops": [],
+          "passive_ops": [],
+          "signature_action_id": "boss_ashen_wraith_falling_gallery"
+        }
+      ],
+      "passives": [],
+      "drop_profile_id": "story_boss_first_clear",
+      "guaranteed_accessory_set_id": "nameless_gallery",
+      "first_clear_accessory_rarity": 4,
+      "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+      "phase_transition_rule": "At 50% current HP, resolve any active intent, change phase once, clear boss debuffs except Break, and refresh visible intent.",
+      "phase_transition_contract": {
+        "trigger": "boss_hp_crosses_threshold_pct",
+        "threshold_pct": 50,
+        "once_per_battle": true,
+        "pending_intent": "resolve_before_transition",
+        "clear_status_category": "debuff",
+        "preserve_status_ids": [
+          "break"
+        ],
+        "refresh_intent": true
+      },
+      "phase_mechanics_source": {},
+      "boss_drop_table_id": "story_boss_first_clear"
+    },
+    {
+      "enemy_id": "boss_eclipse_construct",
+      "name_en": "Eclipse Construct",
+      "faction_id": "first_eclipse_cult",
+      "role": "mythic_construct_boss",
+      "element": "Veil",
+      "necropolis_inspiration_tier": 7,
+      "inspiration_note": "Tier-seven framing borrows the broad colossal endgame threat role; this boss is an original Veyrhold design, not a borrowed unit.",
+      "base_stats_level_1": {
+        "hp": 32,
+        "atk": 3,
+        "def": 5,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 1.6,
+        "atk": 0.15,
+        "def": 0.25,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Stone",
+        "Dawn"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "status_immunities": [],
+      "control_rules": {
+        "control_duration_multiplier": 0.5,
+        "control_duration_rounding": "minimum_one_turn",
+        "blanket_control_immunity": false
+      },
+      "intent": {
+        "telegraph": "Three chain joints can be broken to stagger and expose the frame.",
+        "action_id": "boss_eclipse_construct_crownfall_sweep",
+        "target_selector_id": "front_row_enemies",
+        "intent_visible_before_action": true,
+        "player_actions_before_resolution": 1
+      },
+      "skills": [
+        {
+          "skill_id": "boss_eclipse_construct_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "multiplier": 1.0,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.0
+            }
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10
+        },
+        {
+          "phase_ids": [
+            "crownless_frame"
+          ],
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "physical",
+          "cooldown_turns": 3,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "front_row_enemies",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.55,
+              "multiplier_if_all_objectives_alive": {
+                "multiplier": 1.15
+              }
+            }
+          ],
+          "skill_id": "boss_eclipse_construct_crownfall_sweep",
+          "name_en": "Crownless Frame",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_all_objectives_destroyed": [
+              "chain_joint_left",
+              "chain_joint_right",
+              "ankle_anchor"
+            ]
+          }
+        },
+        {
+          "phase_ids": [
+            "aether_ward"
+          ],
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "cooldown_turns": 3,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.6
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "lowest_hp_enemy",
+              "status_id": "decay",
+              "duration_turns": 2
+            }
+          ],
+          "skill_id": "boss_eclipse_construct_eclipse_pulse",
+          "name_en": "Aether Ward",
+          "type": "signature",
+          "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "telegraph_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_all_objectives_destroyed": [
+              "altar_pylon_left",
+              "altar_pylon_center",
+              "altar_pylon_right"
+            ]
+          }
+        }
+      ],
+      "passive_hooks": [],
+      "continuous_modifiers": [],
+      "boss_id": "eclipse_construct",
+      "story_stage_id": "7-5",
+      "phase_ids": [
+        "crownless_frame",
+        "aether_ward"
+      ],
+      "phases": [
+        {
+          "phase_id": "crownless_frame",
+          "name_en": "Crownless Frame",
+          "transition": "battle_start",
+          "transition_hp_percent": null,
+          "hp_multiplier": 1.0,
+          "atk_multiplier": 1.0,
+          "def_multiplier": 1.0,
+          "weaknesses": [
+            "Stone",
+            "Dawn"
+          ],
+          "passives": [
+            {
+              "passive_id": "crownless_frame_mechanic",
+              "name_en": "Crownless Frame",
+              "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+              "effect_en": "Three chain joints can be broken to stagger and expose the frame.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "Three chain joints can be broken to stagger and expose the frame.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_all_objectives_destroyed": [
+              "chain_joint_left",
+              "chain_joint_right",
+              "ankle_anchor"
+            ]
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [
+            "chain_joint_left",
+            "chain_joint_right",
+            "ankle_anchor"
+          ],
+          "objectives": [
+            {
+              "objective_id": "chain_joint_left",
+              "name_en": "Left Chain Joint",
+              "max_hp": 3,
+              "hp": 3,
+              "targetable_by_player": true
+            },
+            {
+              "objective_id": "chain_joint_right",
+              "name_en": "Right Chain Joint",
+              "max_hp": 3,
+              "hp": 3,
+              "targetable_by_player": true
+            },
+            {
+              "objective_id": "ankle_anchor",
+              "name_en": "Ankle Anchor",
+              "max_hp": 4,
+              "hp": 4,
+              "targetable_by_player": true,
+              "on_destroyed": [
+                {
+                  "op": "apply_status",
+                  "target_selector_id": "boss",
+                  "status_id": "break",
+                  "duration_turns": 1
+                },
+                {
+                  "op": "apply_status",
+                  "target_selector_id": "boss",
+                  "status_id": "fracture",
+                  "duration_turns": 2
+                }
+              ]
+            }
+          ],
+          "enter_ops": [],
+          "passive_ops": [],
+          "signature_action_id": "boss_eclipse_construct_crownfall_sweep"
+        },
+        {
+          "phase_id": "aether_ward",
+          "name_en": "Aether Ward",
+          "transition": "at_hp_percent",
+          "transition_hp_percent": 0.5,
+          "hp_multiplier": 0.72,
+          "atk_multiplier": 1.15,
+          "def_multiplier": 1.12,
+          "weaknesses": [
+            "Stone",
+            "Dawn"
+          ],
+          "passives": [
+            {
+              "passive_id": "aether_ward_mechanic",
+              "name_en": "Aether Ward",
+              "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+              "effect_en": "35% ward; damaging three altar pylons lowers ward and clears Decay Brand.",
+              "execution_source": "phase_ops_and_objectives"
+            }
+          ],
+          "telegraph": "35% ward; damaging three altar pylons lowers ward and clears Decay Brand.",
+          "intent_rules": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_all_objectives_destroyed": [
+              "altar_pylon_left",
+              "altar_pylon_center",
+              "altar_pylon_right"
+            ]
+          },
+          "interruptible_by_control": false,
+          "tauntable": true,
+          "break_targets": [
+            "altar_pylon_left",
+            "altar_pylon_center",
+            "altar_pylon_right"
+          ],
+          "objectives": [
+            {
+              "objective_id": "altar_pylon_left",
+              "name_en": "Left Altar Pylon",
+              "max_hp": 3,
+              "hp": 3,
+              "targetable_by_player": true,
+              "on_destroyed": [
+                {
+                  "op": "clear_status_if_all_objectives_destroyed",
+                  "target_selector_id": "boss",
+                  "objective_ids": [
+                    "altar_pylon_left",
+                    "altar_pylon_center",
+                    "altar_pylon_right"
+                  ],
+                  "status_id": "decay"
+                }
+              ]
+            },
+            {
+              "objective_id": "altar_pylon_center",
+              "name_en": "Central Altar Pylon",
+              "max_hp": 3,
+              "hp": 3,
+              "targetable_by_player": true,
+              "on_destroyed": [
+                {
+                  "op": "clear_status_if_all_objectives_destroyed",
+                  "target_selector_id": "boss",
+                  "objective_ids": [
+                    "altar_pylon_left",
+                    "altar_pylon_center",
+                    "altar_pylon_right"
+                  ],
+                  "status_id": "decay"
+                }
+              ]
+            },
+            {
+              "objective_id": "altar_pylon_right",
+              "name_en": "Right Altar Pylon",
+              "max_hp": 3,
+              "hp": 3,
+              "targetable_by_player": true,
+              "on_destroyed": [
+                {
+                  "op": "clear_status_if_all_objectives_destroyed",
+                  "target_selector_id": "boss",
+                  "objective_ids": [
+                    "altar_pylon_left",
+                    "altar_pylon_center",
+                    "altar_pylon_right"
+                  ],
+                  "status_id": "decay"
+                }
+              ]
+            }
+          ],
+          "enter_ops": [
+            {
+              "op": "apply_status",
+              "target_selector_id": "lowest_hp_enemy",
+              "status_id": "decay",
+              "duration_turns": 2
+            }
+          ],
+          "passive_ops": [
+            {
+              "op": "boss_damage_taken_modifier",
+              "target_selector_id": "self",
+              "multiplier": 0.65,
+              "modifier_id": "aether_ward",
+              "while_any_objective_alive": [
+                "altar_pylon_left",
+                "altar_pylon_center",
+                "altar_pylon_right"
+              ]
+            }
+          ],
+          "signature_action_id": "boss_eclipse_construct_eclipse_pulse"
+        }
+      ],
+      "passives": [],
+      "drop_profile_id": "story_boss_first_clear",
+      "guaranteed_accessory_set_id": "first_eclipse",
+      "first_clear_accessory_rarity": 5,
+      "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+      "phase_transition_rule": "At 50% current HP, resolve any active intent, change phase once, clear boss debuffs except Break, and refresh visible intent.",
+      "phase_transition_contract": {
+        "trigger": "boss_hp_crosses_threshold_pct",
+        "threshold_pct": 50,
+        "once_per_battle": true,
+        "pending_intent": "resolve_before_transition",
+        "clear_status_category": "debuff",
+        "preserve_status_ids": [
+          "break"
+        ],
+        "refresh_intent": true
+      },
+      "phase_mechanics_source": {
+        "phase_1": {
+          "weakness": "Stone",
+          "break_targets": [
+            "chain_joint_left",
+            "chain_joint_right",
+            "ankle_anchor"
+          ],
+          "telegraph": "Crownfall Sweep"
+        },
+        "phase_2": {
+          "ward": "Aether Ward",
+          "ward_damage_reduction": 0.35,
+          "counterplay": "Stone damage to three pylons; cleanse, shield or heal Decay Brand",
+          "telegraph": "Eclipse Pulse"
+        }
+      },
+      "boss_drop_table_id": "story_boss_final"
+    }
+  ]
+}

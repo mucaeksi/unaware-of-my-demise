@@ -1,0 +1,5382 @@
+{
+  "schema_version": 1,
+  "pack_id": "unaware_of_my_demise.part1.battle_effects.v1",
+  "balance_status": "draft_v1_needs_battle_simulation",
+  "contract": {
+    "resolution_order": [
+      "validate_actor_and_cost",
+      "resolve_targets",
+      "effect_ops_in_array_order",
+      "post_action_hooks",
+      "death_checks",
+      "boss_objectives_and_phase_transition"
+    ],
+    "targeting": {
+      "team_relation": "ally is the acting unit's team; enemy is the opposing team; event_source/event_target use the event record",
+      "front_row_protection": "single_enemy_default selects living Front heroes before Rear; selectors that name a row or lowest/highest/random explicitly bypass the default row rule",
+      "taunt": "redirect after selector and before damage; only eligible single-target hostile actions",
+      "target_ties": "lowest slot index then stable entity_id",
+      "dead_targets": "filter before each operation; an empty target set skips that operation",
+      "manual_objective_targeting": "A player-selected, damageable boss objective overrides a single-target damage op's selector for that action. Auto selectors never choose objectives unless explicitly authored. Area attacks do not include objectives unless their selector names them."
+    },
+    "condition_language": {
+      "boolean_nodes": [
+        "all",
+        "any",
+        "not"
+      ],
+      "leaf_key": "predicate",
+      "unknown_predicate": "content_load_error",
+      "evaluation": "effect-time snapshot after prior operation resolves"
+    },
+    "status_tag_groups": {
+      "mark_or_dread": [
+        "mark",
+        "dread"
+      ]
+    },
+    "predicates": [
+      "owner_in_row",
+      "owner_hp_below_pct",
+      "owner_hp_above_pct",
+      "owner_has_shield",
+      "owner_has_status",
+      "owner_action_type",
+      "owner_took_no_damage_this_round",
+      "last_target_has_status",
+      "last_target_has_status_tag",
+      "last_target_defeated",
+      "last_primary_target_defeated",
+      "target_has_status",
+      "target_has_status_tag",
+      "target_has_any_status_tag",
+      "target_has_acted_this_battle",
+      "target_in_row",
+      "event_target_hp_at_or_below_pct",
+      "event_target_had_status",
+      "event_actor_has_any_buff",
+      "event_source_faction_is",
+      "count_enemies_with_status",
+      "enemy_ally_hp_below_pct",
+      "no_enemy_ally_below_pct",
+      "damage_dealt_at_least_pct_of_target_hp",
+      "round_number_at_most"
+    ],
+    "events": [
+      "battle_start",
+      "stat_snapshot",
+      "owner_turn_start",
+      "before_damage_dealt",
+      "after_damage_dealt",
+      "before_damage_received",
+      "after_damage_received",
+      "after_ally_healed",
+      "ally_hp_threshold_crossed",
+      "after_ally_action",
+      "after_ally_ultimate",
+      "ally_damaged",
+      "after_enemy_defeated",
+      "after_round_end",
+      "target_action_before_owner_next_turn"
+    ],
+    "event_hook_schema": {
+      "required": [
+        "event",
+        "effect_ops"
+      ],
+      "optional": [
+        "condition",
+        "event_filter",
+        "limit"
+      ],
+      "event_filter_fields": [
+        "incoming_action_type",
+        "damage_action_type",
+        "team",
+        "owner_action_type",
+        "ally_action_type",
+        "event_target_faction_is",
+        "source_is_owner",
+        "exclude_owner"
+      ],
+      "limit_fields": [
+        "per_event",
+        "per_battle",
+        "per_round",
+        "per_owner_turn",
+        "per_target_per_battle",
+        "per_damage_action",
+        "chance",
+        "one_pending_bonus"
+      ]
+    },
+    "continuous_modifier_schema": {
+      "required": [
+        "event",
+        "condition",
+        "target"
+      ],
+      "supported_outputs": [
+        "damage_multiplier",
+        "stat_id+mode+amount"
+      ],
+      "owner_must_be_alive": true
+    },
+    "operations": [
+      "damage",
+      "heal",
+      "heal_per_removed_status",
+      "grant_shield",
+      "apply_status",
+      "remove_status",
+      "reduce_status_durations",
+      "modify_stat",
+      "modify_incoming_damage",
+      "modify_outgoing_damage",
+      "grant_damage_reduction",
+      "grant_redirect",
+      "grant_intercept",
+      "grant_first_hit_guard",
+      "grant_opening_guard",
+      "gain_focus",
+      "delay_next_action",
+      "reduce_cooldowns",
+      "apply_regeneration",
+      "arm_counter",
+      "arm_next_attack_bonus",
+      "grant_status_immunity",
+      "remove_shield",
+      "copy_buff",
+      "block_attack",
+      "pay_hp_cost",
+      "boss_damage_taken_modifier",
+      "summon_enemies",
+      "cancel_boss_telegraph",
+      "remove_boss_modifier",
+      "remove_copied_statuses",
+      "clear_status_if_all_objectives_destroyed"
+    ],
+    "operation_schemas": {
+      "damage": {
+        "required": [
+          "target_selector_id",
+          "damage_type",
+          "scale_stat",
+          "multiplier"
+        ],
+        "optional": [
+          "when",
+          "chance",
+          "hit_count",
+          "modifiers",
+          "no_focus_gain",
+          "can_trigger_passives",
+          "shield_damage_multiplier",
+          "multiplier_if_objective_alive",
+          "multiplier_if_all_objectives_alive"
+        ]
+      },
+      "heal": {
+        "required": [
+          "target_selector_id",
+          "scale_stat",
+          "multiplier"
+        ],
+        "optional": [
+          "when",
+          "chance"
+        ]
+      },
+      "heal_per_removed_status": {
+        "required": [
+          "target_selector_id",
+          "scale_stat",
+          "multiplier",
+          "maximum_targets",
+          "maximum_total_stacks",
+          "requires_successful_cleanse"
+        ]
+      },
+      "grant_shield": {
+        "required": [
+          "target_selector_id",
+          "scale_stat",
+          "multiplier",
+          "duration_turns"
+        ],
+        "optional": [
+          "when",
+          "shield_source_id"
+        ]
+      },
+      "apply_status": {
+        "required": [
+          "target_selector_id",
+          "status_id",
+          "duration_turns"
+        ],
+        "optional": [
+          "when",
+          "chance",
+          "shared_damage_fraction",
+          "consume_on_single_target_action"
+        ]
+      },
+      "remove_status": {
+        "required": [
+          "target_selector_id",
+          "category",
+          "count",
+          "selection"
+        ],
+        "optional": [
+          "status_id"
+        ]
+      },
+      "reduce_status_durations": {
+        "required": [
+          "target_selector_id",
+          "category",
+          "amount_turns",
+          "minimum_remaining_turns"
+        ]
+      },
+      "modify_stat": {
+        "required": [
+          "target_selector_id",
+          "stat_id",
+          "mode",
+          "amount",
+          "duration_turns"
+        ],
+        "optional": [
+          "when"
+        ]
+      },
+      "modify_incoming_damage": {
+        "required": [
+          "target_selector_id",
+          "multiplier"
+        ],
+        "optional": [
+          "when"
+        ]
+      },
+      "modify_outgoing_damage": {
+        "required": [
+          "target_selector_id",
+          "multiplier"
+        ],
+        "optional": [
+          "when"
+        ]
+      },
+      "grant_damage_reduction": {
+        "required": [
+          "target_selector_id",
+          "damage_taken_multiplier",
+          "duration_turns"
+        ]
+      },
+      "grant_redirect": {
+        "required": [
+          "target_selector_id",
+          "protected_ally_selector_id",
+          "redirected_fraction",
+          "duration_turns",
+          "eligible_action_types"
+        ]
+      },
+      "grant_intercept": {
+        "required": [
+          "target_selector_id",
+          "protected_ally_selector_id",
+          "redirected_fraction",
+          "duration_turns"
+        ],
+        "optional": [
+          "maximum_intercepts"
+        ]
+      },
+      "grant_first_hit_guard": {
+        "required": [
+          "target_selector_id",
+          "damage_taken_multiplier",
+          "duration_turns",
+          "hits_per_target"
+        ]
+      },
+      "grant_opening_guard": {
+        "required": [
+          "target_selector_id",
+          "duration_rounds",
+          "target_override",
+          "damage_taken_multiplier"
+        ]
+      },
+      "gain_focus": {
+        "required": [
+          "target_selector_id",
+          "amount"
+        ],
+        "optional": [
+          "when"
+        ]
+      },
+      "delay_next_action": {
+        "required": [
+          "target_selector_id",
+          "gauge_fraction"
+        ]
+      },
+      "reduce_cooldowns": {
+        "required": [
+          "target_selector_id",
+          "amount_turns",
+          "minimum_remaining_turns"
+        ]
+      },
+      "apply_regeneration": {
+        "required": [
+          "target_selector_id",
+          "scale_stat",
+          "multiplier",
+          "ticks",
+          "tick_event",
+          "duration_turns"
+        ]
+      },
+      "arm_counter": {
+        "required": [
+          "target_selector_id",
+          "event",
+          "scale_stat",
+          "multiplier",
+          "damage_type",
+          "consume_on_trigger"
+        ]
+      },
+      "arm_next_attack_bonus": {
+        "required": [
+          "target_selector_id",
+          "damage_multiplier",
+          "consume_on_attack"
+        ]
+      },
+      "grant_status_immunity": {
+        "required": [
+          "target_selector_id",
+          "status_id",
+          "duration_turns"
+        ]
+      },
+      "remove_shield": {
+        "required": [
+          "target_selector_id"
+        ],
+        "optional": [
+          "amount_fraction",
+          "shield_source_id"
+        ]
+      },
+      "copy_buff": {
+        "required": [
+          "target_selector_id",
+          "source_selector_id",
+          "category",
+          "maximum_count",
+          "duration_turns"
+        ]
+      },
+      "block_attack": {
+        "required": [
+          "target_selector_id",
+          "maximum_hits"
+        ]
+      },
+      "pay_hp_cost": {
+        "required": [
+          "target_selector_id",
+          "max_hp_fraction",
+          "cannot_reduce_below"
+        ]
+      },
+      "boss_damage_taken_modifier": {
+        "required": [
+          "target_selector_id",
+          "multiplier"
+        ],
+        "optional": [
+          "modifier_id",
+          "until_objective_destroyed",
+          "while_any_objective_alive"
+        ]
+      },
+      "summon_enemies": {
+        "required": [
+          "target_selector_id",
+          "enemy_id",
+          "count"
+        ],
+        "optional": [
+          "only_if_objective_alive"
+        ]
+      },
+      "cancel_boss_telegraph": {
+        "required": [
+          "target_selector_id",
+          "action_id"
+        ]
+      },
+      "remove_boss_modifier": {
+        "required": [
+          "target_selector_id",
+          "modifier_id"
+        ]
+      },
+      "remove_copied_statuses": {
+        "required": [
+          "target_selector_id",
+          "category"
+        ]
+      },
+      "clear_status_if_all_objectives_destroyed": {
+        "required": [
+          "target_selector_id",
+          "objective_ids",
+          "status_id"
+        ]
+      }
+    },
+    "operation_rules": {
+      "arrays_execute_in_order": true,
+      "chance_range": [
+        0.0,
+        1.0
+      ],
+      "multipliers_are_decimal": true,
+      "percent_stat_amounts_are_decimal": true,
+      "duration_unit": "target_owner_turns",
+      "same_status": "refresh_to_greater_remaining_duration; never duplicate same status_id",
+      "shield": "absorbs resolved damage after damage-reduction modifiers; independent shields add; clamp total shield to 2x max_hp",
+      "healing": "apply healing_received modifiers then clamp to missing HP",
+      "cleanse": "remove matching debuffs before any later heal operation",
+      "focus": "clamp to 0..100; death resets to zero",
+      "cooldown": "decrement at actor turn start before passive start-turn hooks; reduction cannot go below each op minimum",
+      "turn_delay": "add floor(gauge_max * gauge_fraction) to target pending_delay_gauge; this raises its next readiness threshold; pending delay accumulates to 0.5 gauge_max and clears after that action resolves",
+      "gust_status": "on application add its authored next_action_gauge_delay_fraction to pending delay; keep the icon until the delayed action resolves, then consume it",
+      "round_cycle": "per_round hook limits and after_round_end use the gauge cycle defined by battle_rules_part1.json",
+      "boss_control": "halve control duration, minimum one turn; critical telegraphs ignore control unless the action has a break-objective interrupt rule",
+      "passive_recursion": "counter/splash damage cannot trigger its own source hook unless can_trigger_passives is explicitly true",
+      "damage_rounding": "apply effective attack and skill scaling, defense, element, conditional/status modifiers, one crit roll per hit, then floor each damage packet with minimum 1"
+    },
+    "target_selectors": [
+      "single_enemy",
+      "single_enemy_default",
+      "front_row_enemies",
+      "rear_row_enemies",
+      "all_enemies",
+      "lowest_hp_enemy",
+      "enemy_with_lowest_def",
+      "enemy_with_highest_atk",
+      "lowest_hp_rear_enemy",
+      "lowest_hp_front_enemy",
+      "random_other_enemy",
+      "all_allies",
+      "selected_ally",
+      "lowest_hp_ally",
+      "lowest_hp_allies",
+      "ally_with_lowest_focus",
+      "front_row_allies",
+      "event_source",
+      "event_target",
+      "previous_op_targets",
+      "last_heal_target",
+      "self",
+      "boss",
+      "self_and_lowest_hp_ally",
+      "self_and_enemy_guards",
+      "boss_and_enemy_guards",
+      "all_enemy_allies",
+      "lowest_hp_enemy_ally",
+      "most_injured_enemy_ally",
+      "duel_marked_enemy",
+      "enemy_with_most_buffs"
+    ],
+    "selector_rules": {
+      "single_enemy": {
+        "kind": "manual_single",
+        "side": "opposing",
+        "auto_fallback": "single_enemy_default"
+      },
+      "single_enemy_default": {
+        "kind": "row_priority_single",
+        "side": "opposing",
+        "row_priority": [
+          "front",
+          "rear"
+        ],
+        "within_row": "lowest_slot_index",
+        "tie_break": "entity_id"
+      },
+      "front_row_enemies": {
+        "kind": "all_by_row",
+        "side": "opposing",
+        "row": "front"
+      },
+      "rear_row_enemies": {
+        "kind": "all_by_row",
+        "side": "opposing",
+        "row": "rear"
+      },
+      "all_enemies": {
+        "kind": "all_living",
+        "side": "opposing"
+      },
+      "lowest_hp_enemy": {
+        "kind": "minimum_stat",
+        "side": "opposing",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "enemy_with_lowest_def": {
+        "kind": "minimum_stat",
+        "side": "opposing",
+        "stat": "def",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "enemy_with_highest_atk": {
+        "kind": "maximum_stat",
+        "side": "opposing",
+        "stat": "atk",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "lowest_hp_rear_enemy": {
+        "kind": "minimum_stat_by_row",
+        "side": "opposing",
+        "row": "rear",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "lowest_hp_front_enemy": {
+        "kind": "minimum_stat_by_row",
+        "side": "opposing",
+        "row": "front",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "random_other_enemy": {
+        "kind": "random_excluding_last_primary",
+        "side": "opposing",
+        "rng": "battle_seed_stream",
+        "empty_fallback": "lowest_hp_enemy"
+      },
+      "all_allies": {
+        "kind": "all_living",
+        "side": "actor"
+      },
+      "selected_ally": {
+        "kind": "manual_single",
+        "side": "actor",
+        "auto_fallback": "lowest_hp_ally"
+      },
+      "lowest_hp_ally": {
+        "kind": "minimum_stat",
+        "side": "actor",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "lowest_hp_allies": {
+        "kind": "ordered_minimum_stat_set",
+        "side": "actor",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ],
+        "maximum_targets": "operation_field_or_all"
+      },
+      "ally_with_lowest_focus": {
+        "kind": "minimum_stat",
+        "side": "actor",
+        "stat": "focus",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "front_row_allies": {
+        "kind": "all_by_row",
+        "side": "actor",
+        "row": "front"
+      },
+      "event_source": {
+        "kind": "event_reference",
+        "reference": "source",
+        "missing_fallback": "empty"
+      },
+      "event_target": {
+        "kind": "event_reference",
+        "reference": "target",
+        "missing_fallback": "empty"
+      },
+      "previous_op_targets": {
+        "kind": "previous_operation_result",
+        "missing_fallback": "empty"
+      },
+      "last_heal_target": {
+        "kind": "previous_successful_heal_target",
+        "missing_fallback": "empty"
+      },
+      "self": {
+        "kind": "actor"
+      },
+      "boss": {
+        "kind": "encounter_boss",
+        "missing_fallback": "empty"
+      },
+      "self_and_lowest_hp_ally": {
+        "kind": "actor_plus_minimum_stat",
+        "side": "actor",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "self_and_enemy_guards": {
+        "kind": "actor_plus_tagged_allies",
+        "side": "actor",
+        "tag": "guard"
+      },
+      "boss_and_enemy_guards": {
+        "kind": "boss_plus_tagged_allies",
+        "side": "boss_team",
+        "tag": "guard"
+      },
+      "all_enemy_allies": {
+        "kind": "all_living",
+        "side": "actor",
+        "authoring_note": "An enemy-authored skill selects its own faction, which is the enemy team from the player's viewpoint."
+      },
+      "lowest_hp_enemy_ally": {
+        "kind": "minimum_stat",
+        "side": "actor",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "most_injured_enemy_ally": {
+        "kind": "maximum_missing_hp",
+        "side": "actor",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "duel_marked_enemy": {
+        "kind": "lowest_hp_with_status",
+        "side": "opposing",
+        "status_id": "duel_mark",
+        "empty_fallback": "single_enemy_default",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "enemy_with_most_buffs": {
+        "kind": "maximum_status_count",
+        "side": "opposing",
+        "status_category": "buff",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      }
+    },
+    "boss_objectives": {
+      "damageable_by_player": true,
+      "takes_elemental_and_physical_damage": true,
+      "not_a_party_slot": true,
+      "destroyed_at_hp_zero": true,
+      "destroyed_objective_cannot_be_repaired_unless_explicitly_authored": true,
+      "stage_progression": "objective damage is encounter-local and is not persisted across retries"
+    },
+    "enemy_ai": {
+      "basic_action_always_available": true,
+      "signature_action_rule": "use when its cooldown is zero and phase/conditions match; otherwise Basic",
+      "signature_cooldown_starts_after_resolution": true,
+      "boss_intent_visibility": "when a boss signature reaches Action Gauge readiness, show its intent and hold resolution for one living player action opportunity",
+      "intent_resolution": "control does not cancel a held telegraph; after the next player action opportunity it resolves unless its authored break-objective interrupt fires"
+    }
+  },
+  "player_skill_effects": [
+    {
+      "character_id": "mahmut",
+      "skill_id": "mahmut_basic_oathless_cut",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "self",
+          "status_id": "stoneguard",
+          "duration_turns": 1,
+          "when": {
+            "predicate": "owner_in_row",
+            "value": "front"
+          }
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "mahmut",
+      "skill_id": "mahmut_active_broken_crest_guard",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "self_and_lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.8,
+          "duration_turns": 2
+        },
+        {
+          "op": "grant_redirect",
+          "target_selector_id": "self",
+          "protected_ally_selector_id": "lowest_hp_ally",
+          "redirected_fraction": 0.5,
+          "duration_turns": 2,
+          "eligible_action_types": [
+            "basic",
+            "active",
+            "ultimate"
+          ]
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "mahmut",
+      "skill_id": "mahmut_passive_a_knight_s_debt",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "before_damage_received",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "event_source",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 0.6,
+              "no_focus_gain": true
+            },
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "amount": 5
+            }
+          ],
+          "condition": {
+            "predicate": "owner_has_shield"
+          },
+          "limit": {
+            "per_owner_turn": 1
+          },
+          "event_filter": {
+            "incoming_action_type": "basic"
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "mahmut",
+      "skill_id": "mahmut_ultimate_last_wall_at_dusk",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 2.2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "taunt",
+          "duration_turns": 2
+        },
+        {
+          "op": "grant_shield",
+          "target_selector_id": "all_allies",
+          "scale_stat": "def",
+          "multiplier": 1.2,
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "fadyme",
+      "skill_id": "fadyme_basic_veilglass_thorn",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        },
+        {
+          "op": "gain_focus",
+          "target_selector_id": "self",
+          "amount": 5,
+          "when": {
+            "predicate": "last_target_has_status",
+            "value": "dread"
+          }
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "fadyme",
+      "skill_id": "fadyme_active_borrowed_hour",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "dread",
+          "duration_turns": 2
+        },
+        {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "fadyme",
+      "skill_id": "fadyme_passive_a_smile_kept",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "owner_turn_start",
+          "effect_ops": [
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "veil_res",
+              "mode": "add_pct",
+              "amount": 0.08,
+              "duration_turns": 1
+            }
+          ],
+          "condition": {
+            "predicate": "owner_hp_below_pct",
+            "value": 50
+          },
+          "limit": {
+            "per_battle": 2
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "fadyme",
+      "skill_id": "fadyme_ultimate_the_bell_that_forgets",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.8
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "dread",
+          "duration_turns": 2
+        },
+        {
+          "op": "remove_status",
+          "target_selector_id": "all_allies",
+          "category": "debuff",
+          "count": 1,
+          "selection": "oldest_applied"
+        },
+        {
+          "op": "heal_per_removed_status",
+          "target_selector_id": "lowest_hp_allies",
+          "scale_stat": "atk",
+          "multiplier": 0.4,
+          "maximum_targets": 3,
+          "maximum_total_stacks": 3,
+          "requires_successful_cleanse": true
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "kera_voss",
+      "skill_id": "kera_voss_basic_flask_flick",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "kera_voss",
+      "skill_id": "kera_voss_active_cinder_tonic",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.5,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        },
+        {
+          "op": "apply_status",
+          "status_id": "burn",
+          "duration_turns": 2,
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "kera_voss",
+      "skill_id": "kera_voss_passive_measure_twice",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "after_damage_dealt",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "random_other_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 0.4,
+              "hit_count": 1,
+              "can_trigger_passives": false
+            }
+          ],
+          "condition": {
+            "predicate": "last_target_has_status",
+            "value": "burn"
+          },
+          "limit": {
+            "chance": 0.1,
+            "per_damage_action": 1
+          },
+          "event_filter": {
+            "damage_action_type": "basic_or_skill"
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "kera_voss",
+      "skill_id": "kera_voss_ultimate_redoubt_reaction",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.9,
+          "modifiers": [
+            {
+              "condition": {
+                "predicate": "count_enemies_with_status",
+                "value": "burn"
+              },
+              "add_multiplier_per_count": 0.1,
+              "maximum_count": 3
+            }
+          ]
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "brin_alder",
+      "skill_id": "brin_alder_basic_rootsplitter",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        },
+        {
+          "op": "grant_shield",
+          "target_selector_id": "self",
+          "scale_stat": "def",
+          "multiplier": 0.05,
+          "duration_turns": 1
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "brin_alder",
+      "skill_id": "brin_alder_active_oakbrace",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "taunt",
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "brin_alder",
+      "skill_id": "brin_alder_passive_hold_the_gate",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [],
+      "continuous_modifiers": [
+        {
+          "event": "before_damage_received",
+          "condition": {
+            "predicate": "owner_has_status",
+            "value": "taunt"
+          },
+          "target": "self",
+          "damage_multiplier": 0.9
+        }
+      ]
+    },
+    {
+      "character_id": "brin_alder",
+      "skill_id": "brin_alder_ultimate_alderwall",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.7
+        },
+        {
+          "op": "grant_shield",
+          "target_selector_id": "all_allies",
+          "scale_stat": "def",
+          "multiplier": 1.0,
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "nixie_vale",
+      "skill_id": "nixie_vale_basic_windneedle",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "nixie_vale",
+      "skill_id": "nixie_vale_active_crossdraft_shot",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.7
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "previous_op_targets",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": -0.15,
+          "duration_turns": 1
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "nixie_vale",
+      "skill_id": "nixie_vale_passive_trail_mark",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "after_damage_dealt",
+          "effect_ops": [
+            {
+              "op": "apply_status",
+              "target_selector_id": "enemy_with_lowest_def",
+              "status_id": "trail_mark",
+              "duration_turns": 2
+            }
+          ],
+          "limit": {
+            "per_battle": 1
+          },
+          "event_filter": {
+            "owner_action_type": "any_attack"
+          }
+        }
+      ],
+      "continuous_modifiers": [
+        {
+          "event": "before_damage_dealt",
+          "condition": {
+            "predicate": "target_has_status_tag",
+            "value": "mark"
+          },
+          "target": "previous_op_targets",
+          "damage_multiplier": 1.05,
+          "applies_to": "all_allies_while_owner_alive"
+        }
+      ]
+    },
+    {
+      "character_id": "nixie_vale",
+      "skill_id": "nixie_vale_ultimate_hawk_over_the_pass",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "enemy_with_highest_atk",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 3.0
+        },
+        {
+          "op": "gain_focus",
+          "target_selector_id": "self",
+          "amount": 20,
+          "when": {
+            "predicate": "last_target_defeated"
+          }
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "sister_aveline",
+      "skill_id": "sister_aveline_basic_mercy_staff",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        },
+        {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 0.2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "sister_aveline",
+      "skill_id": "sister_aveline_active_quiet_benediction",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "heal",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 1.1
+        },
+        {
+          "op": "remove_status",
+          "target_selector_id": "all_allies",
+          "category": "debuff",
+          "count": 1,
+          "selection": "oldest_applied"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "sister_aveline",
+      "skill_id": "sister_aveline_passive_candle_remains",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "ally_hp_threshold_crossed",
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "event_target",
+              "scale_stat": "atk",
+              "multiplier": 0.8,
+              "duration_turns": 2
+            }
+          ],
+          "condition": {
+            "predicate": "event_target_hp_at_or_below_pct",
+            "value": 25
+          },
+          "limit": {
+            "per_battle": 1
+          },
+          "event_filter": {
+            "team": "player"
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "sister_aveline",
+      "skill_id": "sister_aveline_ultimate_matins_at_the_last_door",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "heal",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 2.2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_allies",
+          "status_id": "dawnward",
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "sable_wren",
+      "skill_id": "sable_wren_basic_wren_s_point",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.1,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "sable_wren",
+      "skill_id": "sable_wren_active_cut_the_thread",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.8,
+          "modifiers": [
+            {
+              "condition": {
+                "predicate": "target_has_any_status_tag",
+                "value": "mark_or_dread"
+              },
+              "multiplier": 1.3
+            }
+          ]
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "sable_wren",
+      "skill_id": "sable_wren_passive_no_footprint",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "before_damage_received",
+          "effect_ops": [
+            {
+              "op": "modify_incoming_damage",
+              "target_selector_id": "self",
+              "multiplier": 0.5
+            }
+          ],
+          "limit": {
+            "per_battle": 1
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "sable_wren",
+      "skill_id": "sable_wren_ultimate_name_taken_in_silence",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 3.3
+        },
+        {
+          "op": "damage",
+          "target_selector_id": "random_other_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.0,
+          "when": {
+            "predicate": "last_primary_target_defeated"
+          },
+          "hit_count": 1,
+          "can_trigger_passives": false
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "tilda_fen",
+      "skill_id": "tilda_fen_basic_reedstaff_tap",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        },
+        {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 0.15
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "tilda_fen",
+      "skill_id": "tilda_fen_active_marsh_poultice",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.7
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "last_heal_target",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "tilda_fen",
+      "skill_id": "tilda_fen_passive_patient_hands",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "after_ally_healed",
+          "effect_ops": [
+            {
+              "op": "apply_status",
+              "target_selector_id": "event_target",
+              "status_id": "soaked_immunity",
+              "duration_turns": 1
+            }
+          ],
+          "limit": {
+            "per_event": 1
+          },
+          "event_filter": {
+            "source_is_owner": true
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "tilda_fen",
+      "skill_id": "tilda_fen_ultimate_rain_on_the_salt_road",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "heal",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 1.8
+        },
+        {
+          "op": "apply_regeneration",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 0.35,
+          "ticks": 2,
+          "tick_event": "owner_turn_start",
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "rikka_ember",
+      "skill_id": "rikka_ember_basic_bellpoint_thrust",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.05,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "rikka_ember",
+      "skill_id": "rikka_ember_active_furnace_lunge",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.8,
+          "modifiers": [
+            {
+              "condition": {
+                "predicate": "target_has_status",
+                "value": "burn"
+              },
+              "multiplier": 1.25
+            }
+          ]
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "rikka_ember",
+      "skill_id": "rikka_ember_passive_marching_heat",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "after_damage_received",
+          "effect_ops": [
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "amount": 5
+            }
+          ],
+          "limit": {
+            "per_owner_turn": 1
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "rikka_ember",
+      "skill_id": "rikka_ember_ultimate_procession_of_sparks",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 2.1,
+          "scale_stat": "atk",
+          "target_selector_id": "all_enemies"
+        },
+        {
+          "op": "apply_status",
+          "status_id": "burn",
+          "duration_turns": 2,
+          "target_selector_id": "all_enemies"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "mirel_quill",
+      "skill_id": "mirel_quill_basic_inkline",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "mirel_quill",
+      "skill_id": "mirel_quill_active_margin_note",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "selected_ally",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.18,
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "selected_ally",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "mirel_quill",
+      "skill_id": "mirel_quill_passive_corrected_record",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "after_ally_action",
+          "effect_ops": [
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "amount": 5
+            }
+          ],
+          "condition": {
+            "predicate": "event_actor_has_any_buff"
+          },
+          "limit": {
+            "per_event": 1
+          },
+          "event_filter": {
+            "ally_action_type": "basic"
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "mirel_quill",
+      "skill_id": "mirel_quill_ultimate_decree_of_the_unfallen",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.2,
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        },
+        {
+          "op": "reduce_status_durations",
+          "target_selector_id": "all_allies",
+          "category": "debuff",
+          "amount_turns": 1,
+          "minimum_remaining_turns": 0
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "odelia_pike",
+      "skill_id": "odelia_pike_basic_saltmark_arrow",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "soaked",
+          "duration_turns": 2,
+          "chance": 0.2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "odelia_pike",
+      "skill_id": "odelia_pike_active_undertow_pin",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "fracture",
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "odelia_pike",
+      "skill_id": "odelia_pike_passive_read_the_current",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [],
+      "continuous_modifiers": [
+        {
+          "event": "before_damage_dealt",
+          "condition": {
+            "predicate": "target_has_status",
+            "value": "soaked"
+          },
+          "target": "previous_op_targets",
+          "damage_multiplier": 1.1,
+          "applies_to": "self"
+        }
+      ]
+    },
+    {
+      "character_id": "odelia_pike",
+      "skill_id": "odelia_pike_ultimate_breakwater_volley",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.75
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "soaked",
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "previous_op_targets",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": -0.1,
+          "duration_turns": 1
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "pippa_bell",
+      "skill_id": "pippa_bell_basic_plucked_note",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        },
+        {
+          "op": "gain_focus",
+          "target_selector_id": "ally_with_lowest_focus",
+          "amount": 5
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "pippa_bell",
+      "skill_id": "pippa_bell_active_rally_refrain",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.12,
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "pippa_bell",
+      "skill_id": "pippa_bell_passive_encore",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "after_ally_ultimate",
+          "effect_ops": [
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "amount": 10
+            }
+          ],
+          "limit": {
+            "per_round": 1
+          },
+          "event_filter": {
+            "exclude_owner": true
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "pippa_bell",
+      "skill_id": "pippa_bell_ultimate_a_song_for_the_long_road",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "reduce_cooldowns",
+          "target_selector_id": "all_allies",
+          "amount_turns": 1,
+          "minimum_remaining_turns": 1
+        },
+        {
+          "op": "gain_focus",
+          "target_selector_id": "all_allies",
+          "amount": 20
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "nara_vell",
+      "skill_id": "nara_vell_basic_vellian_bash",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "nara_vell",
+      "skill_id": "nara_vell_active_shelter_angle",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "grant_damage_reduction",
+          "target_selector_id": "selected_ally",
+          "damage_taken_multiplier": 0.75,
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "self",
+          "status_id": "taunt",
+          "duration_turns": 1
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "nara_vell",
+      "skill_id": "nara_vell_passive_familiar_footsteps",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "before_damage_received",
+          "effect_ops": [
+            {
+              "op": "modify_incoming_damage",
+              "target_selector_id": "event_target",
+              "multiplier": 0.9
+            }
+          ],
+          "condition": {
+            "all": [
+              {
+                "predicate": "owner_in_row",
+                "value": "front"
+              },
+              {
+                "predicate": "target_in_row",
+                "value": "rear"
+              },
+              {
+                "predicate": "round_number_at_most",
+                "value": 1
+              }
+            ]
+          },
+          "limit": {
+            "per_event": 1
+          },
+          "event_filter": {
+            "team": "player"
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "nara_vell",
+      "skill_id": "nara_vell_ultimate_the_narrow_gate",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.2,
+          "duration_turns": 2
+        },
+        {
+          "op": "grant_opening_guard",
+          "target_selector_id": "self",
+          "duration_rounds": 2,
+          "target_override": "first_single_target_attack_per_enemy",
+          "damage_taken_multiplier": 0.7
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "clem_marr",
+      "skill_id": "clem_marr_basic_chalk_scratch",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 0.95,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "clem_marr",
+      "skill_id": "clem_marr_active_grave_index",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.4
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "previous_op_targets",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": -0.12,
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "clem_marr",
+      "skill_id": "clem_marr_passive_keep_the_names",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "before_damage_dealt",
+          "effect_ops": [
+            {
+              "op": "modify_outgoing_damage",
+              "target_selector_id": "self",
+              "multiplier": 1.08
+            }
+          ],
+          "condition": {
+            "predicate": "target_has_status",
+            "value": "dread"
+          },
+          "limit": {
+            "per_target_per_battle": 1
+          },
+          "event_filter": {
+            "owner_action_type": "any_attack"
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "clem_marr",
+      "skill_id": "clem_marr_ultimate_epitaph_in_reverse",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.45
+        },
+        {
+          "op": "remove_status",
+          "target_selector_id": "previous_op_targets",
+          "category": "buff",
+          "count": 1,
+          "selection": "random_applied_buff"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "vespera_wisp",
+      "skill_id": "vespera_wisp_basic_wisp_spark",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "magic",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "vespera_wisp",
+      "skill_id": "vespera_wisp_active_pale_orbit",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.3
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "lowest_hp_enemy",
+          "status_id": "dread",
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "vespera_wisp",
+      "skill_id": "vespera_wisp_passive_candle_eater",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "after_enemy_defeated",
+          "effect_ops": [
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "amount": 10
+            }
+          ],
+          "condition": {
+            "predicate": "event_target_had_status",
+            "value": "dread"
+          },
+          "limit": {
+            "per_event": 1
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "vespera_wisp",
+      "skill_id": "vespera_wisp_ultimate_procession_of_pale_lights",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 2.2,
+          "modifiers": [
+            {
+              "condition": {
+                "predicate": "target_has_status",
+                "value": "dread"
+              },
+              "multiplier": 1.2
+            }
+          ]
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "hana_birch",
+      "skill_id": "hana_birch_basic_short_hatchet",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "hana_birch",
+      "skill_id": "hana_birch_active_set_the_snare",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        },
+        {
+          "op": "arm_counter",
+          "target_selector_id": "previous_op_targets",
+          "event": "target_action_before_owner_next_turn",
+          "scale_stat": "atk",
+          "multiplier": 0.8,
+          "damage_type": "physical",
+          "consume_on_trigger": true
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "hana_birch",
+      "skill_id": "hana_birch_passive_still_as_bark",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "after_round_end",
+          "effect_ops": [
+            {
+              "op": "arm_next_attack_bonus",
+              "target_selector_id": "self",
+              "damage_multiplier": 1.2,
+              "consume_on_attack": true
+            }
+          ],
+          "condition": {
+            "predicate": "owner_took_no_damage_this_round"
+          },
+          "limit": {
+            "one_pending_bonus": true
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "hana_birch",
+      "skill_id": "hana_birch_ultimate_birchline_ambush",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 2.5,
+          "modifiers": [
+            {
+              "condition": {
+                "predicate": "target_has_acted_this_battle"
+              },
+              "multiplier": 1.4
+            }
+          ]
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "fracture",
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "thistle_roe",
+      "skill_id": "thistle_roe_basic_seedshot",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 0.9,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "thistle_roe",
+      "skill_id": "thistle_roe_active_windgrown_herb",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.5
+        },
+        {
+          "op": "remove_status",
+          "target_selector_id": "last_heal_target",
+          "category": "debuff",
+          "count": 1,
+          "selection": "oldest_applied"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "thistle_roe",
+      "skill_id": "thistle_roe_passive_shelter_leaves",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "owner_turn_start",
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 0.05,
+              "duration_turns": 1
+            }
+          ],
+          "condition": {
+            "predicate": "owner_hp_above_pct",
+            "value": 80
+          },
+          "limit": {
+            "per_event": 1
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "thistle_roe",
+      "skill_id": "thistle_roe_ultimate_garden_before_winter",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "heal",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 1.4
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.08,
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "iona_mist",
+      "skill_id": "iona_mist_basic_mistlit_touch",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        },
+        {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 0.15
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "iona_mist",
+      "skill_id": "iona_mist_active_fogbound_remedy",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "heal",
+          "target_selector_id": "selected_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.8
+        },
+        {
+          "op": "remove_status",
+          "target_selector_id": "last_heal_target",
+          "category": "debuff",
+          "count": 1,
+          "selection": "oldest_applied"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "iona_mist",
+      "skill_id": "iona_mist_passive_lantern_watch",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [
+        {
+          "event": "ally_hp_threshold_crossed",
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "event_target",
+              "scale_stat": "atk",
+              "multiplier": 0.5
+            }
+          ],
+          "condition": {
+            "predicate": "event_target_hp_at_or_below_pct",
+            "value": 30
+          },
+          "limit": {
+            "per_battle": 1
+          },
+          "event_filter": {
+            "team": "player"
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "iona_mist",
+      "skill_id": "iona_mist_ultimate_safe_harbor_in_fog",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "heal",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        },
+        {
+          "op": "grant_first_hit_guard",
+          "target_selector_id": "all_allies",
+          "damage_taken_multiplier": 0.8,
+          "duration_turns": 2,
+          "hits_per_target": 1
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "jori_flint",
+      "skill_id": "jori_flint_basic_hammer_tap",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 0.95,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "jori_flint",
+      "skill_id": "jori_flint_active_forgeguard",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "def",
+          "multiplier": 1.0,
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "jori_flint",
+      "skill_id": "jori_flint_passive_hot_rivet",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [],
+      "continuous_modifiers": [
+        {
+          "event": "before_damage_dealt",
+          "condition": {
+            "all": [
+              {
+                "predicate": "owner_has_shield"
+              },
+              {
+                "predicate": "owner_action_type",
+                "value": "basic"
+              }
+            ]
+          },
+          "target": "previous_op_targets",
+          "damage_multiplier": 1.15,
+          "applies_to": "self"
+        }
+      ]
+    },
+    {
+      "character_id": "jori_flint",
+      "skill_id": "jori_flint_ultimate_furnace_door",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "burn",
+          "duration_turns": 1
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "taunt",
+          "duration_turns": 2
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "marek_vane",
+      "skill_id": "marek_vane_basic_vane_s_measure",
+      "skill_type": "basic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "marek_vane",
+      "skill_id": "marek_vane_active_broken_meter",
+      "skill_type": "active",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.4
+        },
+        {
+          "op": "delay_next_action",
+          "target_selector_id": "previous_op_targets",
+          "gauge_fraction": 0.15
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    },
+    {
+      "character_id": "marek_vane",
+      "skill_id": "marek_vane_passive_watchman_s_rhythm",
+      "skill_type": "passive",
+      "effect_ops": [],
+      "event_hooks": [],
+      "continuous_modifiers": [
+        {
+          "event": "stat_snapshot",
+          "condition": {
+            "predicate": "owner_in_row",
+            "value": "rear"
+          },
+          "target": "front_row_allies",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.05
+        }
+      ]
+    },
+    {
+      "character_id": "marek_vane",
+      "skill_id": "marek_vane_ultimate_march_without_a_banner",
+      "skill_type": "ultimate",
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "res",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        },
+        {
+          "op": "delay_next_action",
+          "target_selector_id": "all_enemies",
+          "gauge_fraction": 0.05
+        }
+      ],
+      "event_hooks": [],
+      "continuous_modifiers": []
+    }
+  ],
+  "enemy_actions": [
+    {
+      "enemy_id": "ash_wolf",
+      "skill_id": "ash_wolf_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_ash_wolf",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "ash_wolf",
+      "skill_id": "ash_wolf_pack_lunge",
+      "name_en": "Pack Lunge",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_ash_wolf",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A fast beast that marks an isolated Rear target.",
+      "ai_priority": 30,
+      "target_selector_id": "lowest_hp_rear_enemy",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_rear_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.35
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "trail_mark",
+          "duration_turns": 2
+        }
+      ]
+    },
+    {
+      "enemy_id": "bellbound_dead",
+      "skill_id": "bellbound_dead_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_bellbound_dead",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "bellbound_dead",
+      "skill_id": "bellbound_dead_tolling_grab",
+      "name_en": "Tolling Grab",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_bellbound_dead",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "Low-tier bell-wired remains; individually weak, dangerous in numbers.",
+      "ai_priority": 30,
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.15
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "dread",
+          "duration_turns": 1,
+          "chance": 0.25
+        }
+      ]
+    },
+    {
+      "enemy_id": "bridge_revenant",
+      "skill_id": "bridge_revenant_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_bridge_revenant",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "bridge_revenant",
+      "skill_id": "bridge_revenant_chain_drag",
+      "name_en": "Chain Drag",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_bridge_revenant",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A drowned sentry hooks a Front defender, deals a crushing chain blow and Fractures the guard.",
+      "ai_priority": 30,
+      "target_selector_id": "lowest_hp_front_enemy",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_front_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.25
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "fracture",
+          "duration_turns": 1
+        }
+      ]
+    },
+    {
+      "enemy_id": "chain_cultist",
+      "skill_id": "chain_cultist_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_chain_cultist",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "magic",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "chain_cultist",
+      "skill_id": "chain_cultist_knot_the_breath",
+      "name_en": "Knot the Breath",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_chain_cultist",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A support cultist who links allies and shares a portion of their wounds.",
+      "ai_priority": 30,
+      "target_selector_id": "all_enemy_allies",
+      "damage_type": "magic",
+      "effect_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemy_allies",
+          "status_id": "soul_link",
+          "duration_turns": 2,
+          "shared_damage_fraction": 0.25
+        }
+      ]
+    },
+    {
+      "enemy_id": "choir_knight",
+      "skill_id": "choir_knight_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_choir_knight",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "choir_knight",
+      "skill_id": "choir_knight_unison_verdict",
+      "name_en": "Unison Verdict",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_choir_knight",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "Elite oath-armor that counterattacks when another Hollow is struck.",
+      "ai_priority": 30,
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.35
+        }
+      ]
+    },
+    {
+      "enemy_id": "corrupted_crown_guard",
+      "skill_id": "corrupted_crown_guard_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_corrupted_crown_guard",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "corrupted_crown_guard",
+      "skill_id": "corrupted_crown_guard_formation_brace",
+      "name_en": "Formation Brace",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_corrupted_crown_guard",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A disciplined guard that raises an ally shield before its signal strike.",
+      "ai_priority": 30,
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "lowest_hp_enemy_ally",
+          "scale_stat": "def",
+          "multiplier": 0.6,
+          "duration_turns": 2
+        },
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        }
+      ]
+    },
+    {
+      "enemy_id": "corrupted_mercenary",
+      "skill_id": "corrupted_mercenary_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_corrupted_mercenary",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "corrupted_mercenary",
+      "skill_id": "corrupted_mercenary_paid_in_blood",
+      "name_en": "Paid in Blood",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_corrupted_mercenary",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A hired fighter using a risky self-buff and heavy single-target blows.",
+      "ai_priority": 30,
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "pay_hp_cost",
+          "target_selector_id": "self",
+          "max_hp_fraction": 0.08,
+          "cannot_reduce_below": 1
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.25,
+          "duration_turns": 2
+        },
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.55
+        }
+      ]
+    },
+    {
+      "enemy_id": "crownless_knight",
+      "skill_id": "crownless_knight_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_crownless_knight",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "crownless_knight",
+      "skill_id": "crownless_knight_crestless_challenge",
+      "name_en": "Crestless Challenge",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_crownless_knight",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A stripped-plate duelist that deals extra damage to shields and resists Dread.",
+      "ai_priority": 30,
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.45,
+          "shield_damage_multiplier": 1.5
+        }
+      ]
+    },
+    {
+      "enemy_id": "eclipse_sentinel",
+      "skill_id": "eclipse_sentinel_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_eclipse_sentinel",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "magic",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "eclipse_sentinel",
+      "skill_id": "eclipse_sentinel_pylon_ward",
+      "name_en": "Pylon Ward",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_eclipse_sentinel",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A ranged warder that channels a barrier through altar pylons.",
+      "ai_priority": 30,
+      "target_selector_id": "all_enemy_allies",
+      "damage_type": "magic",
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "all_enemy_allies",
+          "scale_stat": "def",
+          "multiplier": 0.35,
+          "duration_turns": 2
+        }
+      ]
+    },
+    {
+      "enemy_id": "estate_wraith",
+      "skill_id": "estate_wraith_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_estate_wraith",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "magic",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "estate_wraith",
+      "skill_id": "estate_wraith_portrait_borrowing",
+      "name_en": "Portrait Borrowing",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_estate_wraith",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A drifting noble shade that copies one shield from the most-buffed opposing unit.",
+      "ai_priority": 30,
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "magic",
+      "effect_ops": [
+        {
+          "op": "copy_buff",
+          "target_selector_id": "self",
+          "source_selector_id": "enemy_with_most_buffs",
+          "category": "buff",
+          "maximum_count": 1,
+          "duration_turns": 2
+        },
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        }
+      ]
+    },
+    {
+      "enemy_id": "glass_viper",
+      "skill_id": "glass_viper_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_glass_viper",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "glass_viper",
+      "skill_id": "glass_viper_brittle_venom",
+      "name_en": "Brittle Venom",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_glass_viper",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A glass-scaled experimental serpent; fast, fragile and poison-prone.",
+      "ai_priority": 30,
+      "target_selector_id": "lowest_hp_rear_enemy",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_rear_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "venom",
+          "duration_turns": 2
+        }
+      ]
+    },
+    {
+      "enemy_id": "hollow_cleric",
+      "skill_id": "hollow_cleric_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_hollow_cleric",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "magic",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "hollow_cleric",
+      "skill_id": "hollow_cleric_grave_litany",
+      "name_en": "Grave Litany",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_hollow_cleric",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A grave scribe that heals its most-injured ally below 70% HP; otherwise it curses the weakest foe.",
+      "ai_priority": 30,
+      "target_selector_id": "lowest_hp_enemy",
+      "damage_type": "magic",
+      "effect_ops": [
+        {
+          "op": "heal",
+          "target_selector_id": "most_injured_enemy_ally",
+          "scale_stat": "atk",
+          "multiplier": 0.9,
+          "when": {
+            "predicate": "enemy_ally_hp_below_pct",
+            "value": 70
+          }
+        },
+        {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_enemy",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.1,
+          "when": {
+            "predicate": "no_enemy_ally_below_pct",
+            "value": 70
+          }
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "dread",
+          "duration_turns": 2,
+          "when": {
+            "predicate": "no_enemy_ally_below_pct",
+            "value": 70
+          }
+        }
+      ]
+    },
+    {
+      "enemy_id": "hollow_pilgrim",
+      "skill_id": "hollow_pilgrim_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_hollow_pilgrim",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "hollow_pilgrim",
+      "skill_id": "hollow_pilgrim_pilgrim_s_weight",
+      "name_en": "Pilgrim's Weight",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_hollow_pilgrim",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A slow, stubborn frontliner with high HP and a crushing step.",
+      "ai_priority": 30,
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.5
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "self",
+          "status_id": "stoneguard",
+          "duration_turns": 1
+        }
+      ]
+    },
+    {
+      "enemy_id": "inkbound_dead",
+      "skill_id": "inkbound_dead_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_inkbound_dead",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "magic",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "inkbound_dead",
+      "skill_id": "inkbound_dead_black_margin",
+      "name_en": "Black Margin",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_inkbound_dead",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A paper-wrapped corpse that marks targets with debuff ink.",
+      "ai_priority": 30,
+      "target_selector_id": "lowest_hp_enemy",
+      "damage_type": "magic",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_enemy",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "trail_mark",
+          "duration_turns": 2
+        }
+      ]
+    },
+    {
+      "enemy_id": "lost_vow_knight",
+      "skill_id": "lost_vow_knight_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_lost_vow_knight",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "lost_vow_knight",
+      "skill_id": "lost_vow_knight_oath_sever",
+      "name_en": "Oath Sever",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_lost_vow_knight",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "An elite dead knight who punishes shields and exposed Front units.",
+      "ai_priority": 30,
+      "target_selector_id": "lowest_hp_front_enemy",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_front_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.45,
+          "shield_damage_multiplier": 1.5
+        },
+        {
+          "op": "remove_shield",
+          "target_selector_id": "previous_op_targets",
+          "amount_fraction": 0.2
+        }
+      ]
+    },
+    {
+      "enemy_id": "noble_retainer",
+      "skill_id": "noble_retainer_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_noble_retainer",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "noble_retainer",
+      "skill_id": "noble_retainer_household_interpose",
+      "name_en": "Household Interpose",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_noble_retainer",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "An attendant's ghost intercepts the next single-target strike for its most-injured ally.",
+      "ai_priority": 30,
+      "target_selector_id": "lowest_hp_enemy_ally",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "grant_intercept",
+          "target_selector_id": "self",
+          "protected_ally_selector_id": "lowest_hp_enemy_ally",
+          "redirected_fraction": 1.0,
+          "duration_turns": 2,
+          "maximum_intercepts": 1
+        }
+      ]
+    },
+    {
+      "enemy_id": "orchard_ghoul",
+      "skill_id": "orchard_ghoul_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_orchard_ghoul",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "orchard_ghoul",
+      "skill_id": "orchard_ghoul_rooted_bite",
+      "name_en": "Rooted Bite",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_orchard_ghoul",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A bloated orchard dead that gains defense while feeding.",
+      "ai_priority": 30,
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        },
+        {
+          "op": "heal",
+          "target_selector_id": "self",
+          "scale_stat": "atk",
+          "multiplier": 0.2,
+          "when": {
+            "predicate": "damage_dealt_at_least_pct_of_target_hp",
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "enemy_id": "red_vial_alchemist",
+      "skill_id": "red_vial_alchemist_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_red_vial_alchemist",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "magic",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "red_vial_alchemist",
+      "skill_id": "red_vial_alchemist_corrosive_phial",
+      "name_en": "Corrosive Phial",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_red_vial_alchemist",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A back-row bomber whose flask racks can be interrupted.",
+      "ai_priority": 30,
+      "target_selector_id": "rear_row_enemies",
+      "damage_type": "elemental",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "rear_row_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "venom",
+          "duration_turns": 2
+        }
+      ]
+    },
+    {
+      "enemy_id": "red_vial_scout",
+      "skill_id": "red_vial_scout_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_red_vial_scout",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "red_vial_scout",
+      "skill_id": "red_vial_scout_glass_needle",
+      "name_en": "Glass Needle",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_red_vial_scout",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A quick courier with a poison dart and a route-marking shot.",
+      "ai_priority": 30,
+      "target_selector_id": "lowest_hp_rear_enemy",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_rear_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.25
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "venom",
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "trail_mark",
+          "duration_turns": 2
+        }
+      ]
+    },
+    {
+      "enemy_id": "royal_hollow",
+      "skill_id": "royal_hollow_basic",
+      "name_en": "Grave-Worn Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_royal_hollow",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "royal_hollow",
+      "skill_id": "royal_hollow_empty_throne",
+      "name_en": "Empty Throne",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_royal_hollow",
+      "cooldown_turns": 3,
+      "focus_cost": 0,
+      "effect_en": "A heavily armoured royal remnant that blocks one attack per round.",
+      "ai_priority": 30,
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        }
+      ]
+    },
+    {
+      "enemy_id": "boss_ash_maw",
+      "skill_id": "boss_ash_maw_basic",
+      "name_en": "Boss Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_boss_ash_maw",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "boss_ash_maw",
+      "phase_ids": [
+        "jaw_bell",
+        "ash_howl"
+      ],
+      "target_selector_id": "all_enemies",
+      "damage_type": "elemental",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.4
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "burn",
+          "duration_turns": 1
+        }
+      ],
+      "skill_id": "boss_ash_maw_ash_howl",
+      "name_en": "Jaw-Bell",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_ash_maw",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "jaw_bell"
+      }
+    },
+    {
+      "enemy_id": "boss_bell_widow",
+      "skill_id": "boss_bell_widow_basic",
+      "name_en": "Boss Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_boss_bell_widow",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "boss_bell_widow",
+      "phase_ids": [
+        "wax_seal",
+        "widow_verdict"
+      ],
+      "target_selector_id": "all_enemies",
+      "damage_type": "magic",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.35
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "dread",
+          "duration_turns": 2
+        }
+      ],
+      "skill_id": "boss_bell_widow_charged_judgement",
+      "name_en": "Wax Seal",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_bell_widow",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "wax_seal"
+      }
+    },
+    {
+      "enemy_id": "boss_captain_rusk",
+      "skill_id": "boss_captain_rusk_basic",
+      "name_en": "Boss Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_boss_captain_rusk",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "boss_captain_rusk",
+      "phase_ids": [
+        "captain_duel"
+      ],
+      "target_selector_id": "duel_marked_enemy",
+      "damage_type": "physical",
+      "cooldown_turns": 2,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "duel_marked_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.8
+        }
+      ],
+      "skill_id": "boss_captain_rusk_duel_cut",
+      "name_en": "Captain's Duel",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_captain_rusk",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interruptible_by_control": false
+      }
+    },
+    {
+      "enemy_id": "boss_captain_rusk",
+      "phase_ids": [
+        "banner_call"
+      ],
+      "target_selector_id": "self",
+      "damage_type": "none",
+      "cooldown_turns": 4,
+      "effect_ops": [
+        {
+          "op": "summon_enemies",
+          "target_selector_id": "self",
+          "enemy_id": "corrupted_mercenary",
+          "count": 2,
+          "only_if_objective_alive": "signal_banner"
+        }
+      ],
+      "skill_id": "boss_captain_rusk_banner_call",
+      "name_en": "Banner Call",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_captain_rusk",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "signal_banner"
+      }
+    },
+    {
+      "enemy_id": "boss_red_vial_matron",
+      "skill_id": "boss_red_vial_matron_basic",
+      "name_en": "Boss Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_boss_red_vial_matron",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "boss_red_vial_matron",
+      "phase_ids": [
+        "glass_ward",
+        "corrosive_flasks"
+      ],
+      "target_selector_id": "all_enemies",
+      "damage_type": "elemental",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.2,
+          "hit_count": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "fracture",
+          "duration_turns": 2
+        }
+      ],
+      "skill_id": "boss_red_vial_matron_corrosive_flasks",
+      "name_en": "Glass Ward",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_red_vial_matron",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_all_objectives_destroyed": [
+          "flask_rack_left",
+          "flask_rack_right"
+        ]
+      }
+    },
+    {
+      "enemy_id": "boss_marshal_oren",
+      "skill_id": "boss_marshal_oren_basic",
+      "name_en": "Boss Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_boss_marshal_oren",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "boss_marshal_oren",
+      "phase_ids": [
+        "shield_formation"
+      ],
+      "target_selector_id": "self_and_enemy_guards",
+      "damage_type": "none",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "self_and_enemy_guards",
+          "scale_stat": "def",
+          "multiplier": 0.45,
+          "duration_turns": 2
+        }
+      ],
+      "skill_id": "boss_marshal_oren_formation_order",
+      "name_en": "Shield Formation",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_marshal_oren",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "signal_standard"
+      }
+    },
+    {
+      "enemy_id": "boss_marshal_oren",
+      "phase_ids": [
+        "bridge_strike"
+      ],
+      "target_selector_id": "front_row_enemies",
+      "damage_type": "physical",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.65,
+          "multiplier_if_objective_alive": {
+            "objective_id": "signal_standard",
+            "multiplier": 1.15
+          }
+        }
+      ],
+      "skill_id": "boss_marshal_oren_bridge_strike",
+      "name_en": "Bridge Strike",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_marshal_oren",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interruptible_by_control": false
+      }
+    },
+    {
+      "enemy_id": "boss_ashen_lord_wraith",
+      "skill_id": "boss_ashen_lord_wraith_basic",
+      "name_en": "Boss Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "boss_ashen_lord_wraith",
+      "phase_ids": [
+        "portrait_double"
+      ],
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "magic",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        }
+      ],
+      "skill_id": "boss_ashen_wraith_mirror_shard",
+      "name_en": "Portrait Double",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "remove_copied_shields_if_objective_destroyed": "mirror_frame"
+      }
+    },
+    {
+      "enemy_id": "boss_ashen_lord_wraith",
+      "phase_ids": [
+        "falling_gallery"
+      ],
+      "target_selector_id": "rear_row_enemies",
+      "damage_type": "magic",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "rear_row_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.5
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "rear_row_enemies",
+          "status_id": "dread",
+          "duration_turns": 1
+        }
+      ],
+      "skill_id": "boss_ashen_wraith_falling_gallery",
+      "name_en": "Falling Gallery",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interruptible_by_control": false
+      }
+    },
+    {
+      "enemy_id": "boss_eclipse_construct",
+      "skill_id": "boss_eclipse_construct_basic",
+      "name_en": "Boss Strike",
+      "type": "basic",
+      "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "physical",
+      "multiplier": 1.0,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      ],
+      "cooldown_turns": 0,
+      "focus_cost": 0,
+      "ai_priority": 10
+    },
+    {
+      "enemy_id": "boss_eclipse_construct",
+      "phase_ids": [
+        "crownless_frame"
+      ],
+      "target_selector_id": "front_row_enemies",
+      "damage_type": "physical",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.55,
+          "multiplier_if_all_objectives_alive": {
+            "multiplier": 1.15
+          }
+        }
+      ],
+      "skill_id": "boss_eclipse_construct_crownfall_sweep",
+      "name_en": "Crownless Frame",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_all_objectives_destroyed": [
+          "chain_joint_left",
+          "chain_joint_right",
+          "ankle_anchor"
+        ]
+      }
+    },
+    {
+      "enemy_id": "boss_eclipse_construct",
+      "phase_ids": [
+        "aether_ward"
+      ],
+      "target_selector_id": "all_enemies",
+      "damage_type": "magic",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "lowest_hp_enemy",
+          "status_id": "decay",
+          "duration_turns": 2
+        }
+      ],
+      "skill_id": "boss_eclipse_construct_eclipse_pulse",
+      "name_en": "Aether Ward",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_all_objectives_destroyed": [
+          "altar_pylon_left",
+          "altar_pylon_center",
+          "altar_pylon_right"
+        ]
+      }
+    }
+  ],
+  "enemy_passives": [
+    {
+      "enemy_id": "choir_knight",
+      "event_hooks": [
+        {
+          "event": "ally_damaged",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "event_source",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 0.65,
+              "no_focus_gain": true,
+              "can_trigger_passives": false
+            }
+          ],
+          "limit": {
+            "per_round": 1
+          },
+          "event_filter": {
+            "event_target_faction_is": "hollow_host"
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    },
+    {
+      "enemy_id": "royal_hollow",
+      "event_hooks": [
+        {
+          "event": "before_damage_received",
+          "effect_ops": [
+            {
+              "op": "block_attack",
+              "target_selector_id": "self",
+              "maximum_hits": 1
+            }
+          ],
+          "limit": {
+            "per_round": 1
+          }
+        }
+      ],
+      "continuous_modifiers": []
+    }
+  ],
+  "boss_actions": [
+    {
+      "enemy_id": "boss_ash_maw",
+      "phase_ids": [
+        "jaw_bell",
+        "ash_howl"
+      ],
+      "target_selector_id": "all_enemies",
+      "damage_type": "elemental",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.4
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "burn",
+          "duration_turns": 1
+        }
+      ],
+      "skill_id": "boss_ash_maw_ash_howl",
+      "name_en": "Jaw-Bell",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_ash_maw",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "jaw_bell"
+      }
+    },
+    {
+      "enemy_id": "boss_bell_widow",
+      "phase_ids": [
+        "wax_seal",
+        "widow_verdict"
+      ],
+      "target_selector_id": "all_enemies",
+      "damage_type": "magic",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.35
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "dread",
+          "duration_turns": 2
+        }
+      ],
+      "skill_id": "boss_bell_widow_charged_judgement",
+      "name_en": "Wax Seal",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_bell_widow",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "wax_seal"
+      }
+    },
+    {
+      "enemy_id": "boss_captain_rusk",
+      "phase_ids": [
+        "captain_duel"
+      ],
+      "target_selector_id": "duel_marked_enemy",
+      "damage_type": "physical",
+      "cooldown_turns": 2,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "duel_marked_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.8
+        }
+      ],
+      "skill_id": "boss_captain_rusk_duel_cut",
+      "name_en": "Captain's Duel",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_captain_rusk",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interruptible_by_control": false
+      }
+    },
+    {
+      "enemy_id": "boss_captain_rusk",
+      "phase_ids": [
+        "banner_call"
+      ],
+      "target_selector_id": "self",
+      "damage_type": "none",
+      "cooldown_turns": 4,
+      "effect_ops": [
+        {
+          "op": "summon_enemies",
+          "target_selector_id": "self",
+          "enemy_id": "corrupted_mercenary",
+          "count": 2,
+          "only_if_objective_alive": "signal_banner"
+        }
+      ],
+      "skill_id": "boss_captain_rusk_banner_call",
+      "name_en": "Banner Call",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_captain_rusk",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "signal_banner"
+      }
+    },
+    {
+      "enemy_id": "boss_red_vial_matron",
+      "phase_ids": [
+        "glass_ward",
+        "corrosive_flasks"
+      ],
+      "target_selector_id": "all_enemies",
+      "damage_type": "elemental",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.2,
+          "hit_count": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "fracture",
+          "duration_turns": 2
+        }
+      ],
+      "skill_id": "boss_red_vial_matron_corrosive_flasks",
+      "name_en": "Glass Ward",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_red_vial_matron",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_all_objectives_destroyed": [
+          "flask_rack_left",
+          "flask_rack_right"
+        ]
+      }
+    },
+    {
+      "enemy_id": "boss_marshal_oren",
+      "phase_ids": [
+        "shield_formation"
+      ],
+      "target_selector_id": "self_and_enemy_guards",
+      "damage_type": "none",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "self_and_enemy_guards",
+          "scale_stat": "def",
+          "multiplier": 0.45,
+          "duration_turns": 2
+        }
+      ],
+      "skill_id": "boss_marshal_oren_formation_order",
+      "name_en": "Shield Formation",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_marshal_oren",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "signal_standard"
+      }
+    },
+    {
+      "enemy_id": "boss_marshal_oren",
+      "phase_ids": [
+        "bridge_strike"
+      ],
+      "target_selector_id": "front_row_enemies",
+      "damage_type": "physical",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.65,
+          "multiplier_if_objective_alive": {
+            "objective_id": "signal_standard",
+            "multiplier": 1.15
+          }
+        }
+      ],
+      "skill_id": "boss_marshal_oren_bridge_strike",
+      "name_en": "Bridge Strike",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_marshal_oren",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interruptible_by_control": false
+      }
+    },
+    {
+      "enemy_id": "boss_ashen_lord_wraith",
+      "phase_ids": [
+        "portrait_double"
+      ],
+      "target_selector_id": "single_enemy_default",
+      "damage_type": "magic",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        }
+      ],
+      "skill_id": "boss_ashen_wraith_mirror_shard",
+      "name_en": "Portrait Double",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "remove_copied_shields_if_objective_destroyed": "mirror_frame"
+      }
+    },
+    {
+      "enemy_id": "boss_ashen_lord_wraith",
+      "phase_ids": [
+        "falling_gallery"
+      ],
+      "target_selector_id": "rear_row_enemies",
+      "damage_type": "magic",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "rear_row_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.5
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "rear_row_enemies",
+          "status_id": "dread",
+          "duration_turns": 1
+        }
+      ],
+      "skill_id": "boss_ashen_wraith_falling_gallery",
+      "name_en": "Falling Gallery",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interruptible_by_control": false
+      }
+    },
+    {
+      "enemy_id": "boss_eclipse_construct",
+      "phase_ids": [
+        "crownless_frame"
+      ],
+      "target_selector_id": "front_row_enemies",
+      "damage_type": "physical",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.55,
+          "multiplier_if_all_objectives_alive": {
+            "multiplier": 1.15
+          }
+        }
+      ],
+      "skill_id": "boss_eclipse_construct_crownfall_sweep",
+      "name_en": "Crownless Frame",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_all_objectives_destroyed": [
+          "chain_joint_left",
+          "chain_joint_right",
+          "ankle_anchor"
+        ]
+      }
+    },
+    {
+      "enemy_id": "boss_eclipse_construct",
+      "phase_ids": [
+        "aether_ward"
+      ],
+      "target_selector_id": "all_enemies",
+      "damage_type": "magic",
+      "cooldown_turns": 3,
+      "effect_ops": [
+        {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "lowest_hp_enemy",
+          "status_id": "decay",
+          "duration_turns": 2
+        }
+      ],
+      "skill_id": "boss_eclipse_construct_eclipse_pulse",
+      "name_en": "Aether Ward",
+      "type": "signature",
+      "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+      "focus_cost": 0,
+      "ai_priority": 30,
+      "telegraph_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_all_objectives_destroyed": [
+          "altar_pylon_left",
+          "altar_pylon_center",
+          "altar_pylon_right"
+        ]
+      }
+    }
+  ],
+  "boss_phases": [
+    {
+      "enemy_id": "boss_ash_maw",
+      "boss_id": "ash_maw",
+      "phase_id": "jaw_bell",
+      "name_en": "Jaw-Bell",
+      "transition": "battle_start",
+      "transition_hp_percent": null,
+      "hp_multiplier": 1.0,
+      "atk_multiplier": 1.0,
+      "def_multiplier": 1.0,
+      "weaknesses": [
+        "Stone",
+        "Ember"
+      ],
+      "passives": [
+        {
+          "passive_id": "jaw_bell_mechanic",
+          "name_en": "Jaw-Bell",
+          "brand_mark_id": "mark_enemy_boss_ash_maw",
+          "effect_en": "Breakable jaw bell; a broken bell interrupts Ash Howl.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Breakable jaw bell; a broken bell interrupts Ash Howl.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "jaw_bell"
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [
+        "jaw_bell"
+      ],
+      "objectives": [
+        {
+          "objective_id": "jaw_bell",
+          "name_en": "Jaw Bell",
+          "max_hp": 4,
+          "hp": 4,
+          "targetable_by_player": true,
+          "persists_across_phases": true,
+          "on_destroyed": [
+            {
+              "op": "cancel_boss_telegraph",
+              "target_selector_id": "boss",
+              "action_id": "boss_ash_maw_ash_howl"
+            }
+          ]
+        }
+      ],
+      "enter_ops": [],
+      "passive_ops": [],
+      "signature_action_id": "boss_ash_maw_ash_howl"
+    },
+    {
+      "enemy_id": "boss_ash_maw",
+      "boss_id": "ash_maw",
+      "phase_id": "ash_howl",
+      "name_en": "Ash Howl",
+      "transition": "at_hp_percent",
+      "transition_hp_percent": 0.5,
+      "hp_multiplier": 0.72,
+      "atk_multiplier": 1.15,
+      "def_multiplier": 1.12,
+      "weaknesses": [
+        "Stone",
+        "Tide"
+      ],
+      "passives": [
+        {
+          "passive_id": "ash_howl_mechanic",
+          "name_en": "Ash Howl",
+          "brand_mark_id": "mark_enemy_boss_ash_maw",
+          "effect_en": "Charged howl telegraph; guard or interrupt before party-wide damage.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Charged howl telegraph; guard or interrupt before party-wide damage.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "jaw_bell"
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [],
+      "objectives": [],
+      "enter_ops": [],
+      "passive_ops": [],
+      "signature_action_id": "boss_ash_maw_ash_howl"
+    },
+    {
+      "enemy_id": "boss_bell_widow",
+      "boss_id": "bell_widow",
+      "phase_id": "wax_seal",
+      "name_en": "Wax Seal",
+      "transition": "battle_start",
+      "transition_hp_percent": null,
+      "hp_multiplier": 1.0,
+      "atk_multiplier": 0.92,
+      "def_multiplier": 1.0,
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "passives": [
+        {
+          "passive_id": "wax_seal_mechanic",
+          "name_en": "Wax Seal",
+          "brand_mark_id": "mark_enemy_boss_bell_widow",
+          "effect_en": "Wax seal absorbs a portion of incoming damage until broken.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Wax seal absorbs a portion of incoming damage until broken.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "wax_seal"
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [
+        "wax_seal"
+      ],
+      "objectives": [
+        {
+          "objective_id": "wax_seal",
+          "name_en": "Wax Seal",
+          "max_hp": 5,
+          "hp": 5,
+          "targetable_by_player": true,
+          "persists_across_phases": true,
+          "on_destroyed": [
+            {
+              "op": "remove_boss_modifier",
+              "target_selector_id": "boss",
+              "modifier_id": "wax_seal_ward"
+            }
+          ]
+        }
+      ],
+      "enter_ops": [],
+      "passive_ops": [
+        {
+          "op": "boss_damage_taken_modifier",
+          "target_selector_id": "self",
+          "multiplier": 0.8,
+          "modifier_id": "wax_seal_ward",
+          "until_objective_destroyed": "wax_seal"
+        }
+      ],
+      "signature_action_id": "boss_bell_widow_charged_judgement"
+    },
+    {
+      "enemy_id": "boss_bell_widow",
+      "boss_id": "bell_widow",
+      "phase_id": "widow_verdict",
+      "name_en": "Widow's Verdict",
+      "transition": "at_hp_percent",
+      "transition_hp_percent": 0.5,
+      "hp_multiplier": 0.72,
+      "atk_multiplier": 1.18,
+      "def_multiplier": 1.12,
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "passives": [
+        {
+          "passive_id": "widow_verdict_mechanic",
+          "name_en": "Widow's Verdict",
+          "brand_mark_id": "mark_enemy_boss_bell_widow",
+          "effect_en": "Charged judgement is interrupted by breaking the seal.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Charged judgement is interrupted by breaking the seal.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "wax_seal"
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [],
+      "objectives": [],
+      "enter_ops": [],
+      "passive_ops": [],
+      "signature_action_id": "boss_bell_widow_charged_judgement"
+    },
+    {
+      "enemy_id": "boss_captain_rusk",
+      "boss_id": "captain_rusk",
+      "phase_id": "captain_duel",
+      "name_en": "Captain's Duel",
+      "transition": "battle_start",
+      "transition_hp_percent": null,
+      "hp_multiplier": 1.0,
+      "atk_multiplier": 1.0,
+      "def_multiplier": 1.0,
+      "weaknesses": [
+        "Stone",
+        "Tide"
+      ],
+      "passives": [
+        {
+          "passive_id": "captain_duel_mechanic",
+          "name_en": "Captain's Duel",
+          "brand_mark_id": "mark_enemy_boss_captain_rusk",
+          "effect_en": "Rusk marks one Front hero and telegraphs a heavy duel strike.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Rusk marks one Front hero and telegraphs a heavy duel strike.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interruptible_by_control": false
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [],
+      "objectives": [],
+      "enter_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "front_row_enemies",
+          "status_id": "duel_mark",
+          "duration_turns": 2
+        }
+      ],
+      "passive_ops": [],
+      "signature_action_id": "boss_captain_rusk_duel_cut"
+    },
+    {
+      "enemy_id": "boss_captain_rusk",
+      "boss_id": "captain_rusk",
+      "phase_id": "banner_call",
+      "name_en": "Banner Call",
+      "transition": "at_hp_percent",
+      "transition_hp_percent": 0.5,
+      "hp_multiplier": 0.72,
+      "atk_multiplier": 1.12,
+      "def_multiplier": 1.12,
+      "weaknesses": [
+        "Stone",
+        "Tide"
+      ],
+      "passives": [
+        {
+          "passive_id": "banner_call_mechanic",
+          "name_en": "Banner Call",
+          "brand_mark_id": "mark_enemy_boss_captain_rusk",
+          "effect_en": "Signal banner calls reinforcements unless destroyed during the phase.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Signal banner calls reinforcements unless destroyed during the phase.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "signal_banner"
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [
+        "signal_banner"
+      ],
+      "objectives": [
+        {
+          "objective_id": "signal_banner",
+          "name_en": "Signal Banner",
+          "max_hp": 4,
+          "hp": 4,
+          "targetable_by_player": true,
+          "on_destroyed": [
+            {
+              "op": "cancel_boss_telegraph",
+              "target_selector_id": "boss",
+              "action_id": "boss_captain_rusk_banner_call"
+            }
+          ]
+        }
+      ],
+      "enter_ops": [],
+      "passive_ops": [],
+      "signature_action_id": "boss_captain_rusk_banner_call"
+    },
+    {
+      "enemy_id": "boss_red_vial_matron",
+      "boss_id": "red_vial_matron",
+      "phase_id": "glass_ward",
+      "name_en": "Glass Ward",
+      "transition": "battle_start",
+      "transition_hp_percent": null,
+      "hp_multiplier": 1.0,
+      "atk_multiplier": 0.95,
+      "def_multiplier": 1.0,
+      "weaknesses": [
+        "Tide",
+        "Gale"
+      ],
+      "passives": [
+        {
+          "passive_id": "glass_ward_mechanic",
+          "name_en": "Glass Ward",
+          "brand_mark_id": "mark_enemy_boss_red_vial_matron",
+          "effect_en": "Glass ward reduces damage while flask racks remain intact.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Glass ward reduces damage while flask racks remain intact.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_all_objectives_destroyed": [
+          "flask_rack_left",
+          "flask_rack_right"
+        ]
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [
+        "flask_rack_left",
+        "flask_rack_right"
+      ],
+      "objectives": [
+        {
+          "objective_id": "flask_rack_left",
+          "name_en": "Left Flask Rack",
+          "max_hp": 3,
+          "hp": 3,
+          "targetable_by_player": true
+        },
+        {
+          "objective_id": "flask_rack_right",
+          "name_en": "Right Flask Rack",
+          "max_hp": 3,
+          "hp": 3,
+          "targetable_by_player": true
+        }
+      ],
+      "enter_ops": [],
+      "passive_ops": [
+        {
+          "op": "boss_damage_taken_modifier",
+          "target_selector_id": "self",
+          "multiplier": 0.85,
+          "modifier_id": "glass_racks_ward",
+          "while_any_objective_alive": [
+            "flask_rack_left",
+            "flask_rack_right"
+          ]
+        }
+      ],
+      "signature_action_id": "boss_red_vial_matron_corrosive_flasks"
+    },
+    {
+      "enemy_id": "boss_red_vial_matron",
+      "boss_id": "red_vial_matron",
+      "phase_id": "corrosive_flasks",
+      "name_en": "Corrosive Flasks",
+      "transition": "at_hp_percent",
+      "transition_hp_percent": 0.5,
+      "hp_multiplier": 0.72,
+      "atk_multiplier": 1.14,
+      "def_multiplier": 1.12,
+      "weaknesses": [
+        "Tide",
+        "Gale"
+      ],
+      "passives": [
+        {
+          "passive_id": "corrosive_flasks_mechanic",
+          "name_en": "Corrosive Flasks",
+          "brand_mark_id": "mark_enemy_boss_red_vial_matron",
+          "effect_en": "Telegraphed area corrosion; destroy rack props to lower its multiplier.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Telegraphed area corrosion; destroy rack props to lower its multiplier.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_all_objectives_destroyed": [
+          "flask_rack_left",
+          "flask_rack_right"
+        ]
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [],
+      "objectives": [],
+      "enter_ops": [],
+      "passive_ops": [],
+      "signature_action_id": "boss_red_vial_matron_corrosive_flasks"
+    },
+    {
+      "enemy_id": "boss_marshal_oren",
+      "boss_id": "marshal_oren",
+      "phase_id": "shield_formation",
+      "name_en": "Shield Formation",
+      "transition": "battle_start",
+      "transition_hp_percent": null,
+      "hp_multiplier": 1.0,
+      "atk_multiplier": 0.9,
+      "def_multiplier": 1.0,
+      "weaknesses": [
+        "Gale",
+        "Veil"
+      ],
+      "passives": [
+        {
+          "passive_id": "shield_formation_mechanic",
+          "name_en": "Shield Formation",
+          "brand_mark_id": "mark_enemy_boss_marshal_oren",
+          "effect_en": "Oren guards himself and Crown Guards in formation.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Oren guards himself and Crown Guards in formation.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_objective_destroyed": "signal_standard"
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [
+        "signal_standard"
+      ],
+      "objectives": [
+        {
+          "objective_id": "signal_standard",
+          "name_en": "Signal Standard",
+          "max_hp": 4,
+          "hp": 4,
+          "targetable_by_player": true,
+          "persists_across_phases": true,
+          "on_destroyed": [
+            {
+              "op": "remove_shield",
+              "target_selector_id": "boss_and_enemy_guards",
+              "shield_source_id": "formation_guard"
+            }
+          ]
+        }
+      ],
+      "enter_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "self_and_enemy_guards",
+          "scale_stat": "def",
+          "multiplier": 0.6,
+          "duration_turns": 2,
+          "shield_source_id": "formation_guard"
+        }
+      ],
+      "passive_ops": [],
+      "signature_action_id": "boss_marshal_oren_formation_order"
+    },
+    {
+      "enemy_id": "boss_marshal_oren",
+      "boss_id": "marshal_oren",
+      "phase_id": "bridge_strike",
+      "name_en": "Bridge Strike",
+      "transition": "at_hp_percent",
+      "transition_hp_percent": 0.5,
+      "hp_multiplier": 0.72,
+      "atk_multiplier": 1.18,
+      "def_multiplier": 1.12,
+      "weaknesses": [
+        "Gale",
+        "Veil"
+      ],
+      "passives": [
+        {
+          "passive_id": "bridge_strike_mechanic",
+          "name_en": "Bridge Strike",
+          "brand_mark_id": "mark_enemy_boss_marshal_oren",
+          "effect_en": "A visible lane strike can be mitigated by shielding or breaking the standard.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "A visible lane strike can be mitigated by shielding or breaking the standard.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interruptible_by_control": false
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [],
+      "objectives": [],
+      "enter_ops": [],
+      "passive_ops": [],
+      "signature_action_id": "boss_marshal_oren_bridge_strike"
+    },
+    {
+      "enemy_id": "boss_ashen_lord_wraith",
+      "boss_id": "ashen_lord_wraith",
+      "phase_id": "portrait_double",
+      "name_en": "Portrait Double",
+      "transition": "battle_start",
+      "transition_hp_percent": null,
+      "hp_multiplier": 1.0,
+      "atk_multiplier": 0.95,
+      "def_multiplier": 1.0,
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "passives": [
+        {
+          "passive_id": "portrait_double_mechanic",
+          "name_en": "Portrait Double",
+          "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+          "effect_en": "Mirror frame copies one defensive buff; break it to remove copied shields.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Mirror frame copies one defensive buff; break it to remove copied shields.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "remove_copied_shields_if_objective_destroyed": "mirror_frame"
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [
+        "mirror_frame"
+      ],
+      "objectives": [
+        {
+          "objective_id": "mirror_frame",
+          "name_en": "Mirror Frame",
+          "max_hp": 4,
+          "hp": 4,
+          "targetable_by_player": true,
+          "persists_across_phases": true,
+          "on_destroyed": [
+            {
+              "op": "remove_copied_statuses",
+              "target_selector_id": "boss",
+              "category": "shield"
+            }
+          ]
+        }
+      ],
+      "enter_ops": [
+        {
+          "op": "copy_buff",
+          "target_selector_id": "self",
+          "source_selector_id": "enemy_with_most_buffs",
+          "category": "shield",
+          "maximum_count": 1,
+          "duration_turns": 2
+        }
+      ],
+      "passive_ops": [],
+      "signature_action_id": "boss_ashen_wraith_mirror_shard"
+    },
+    {
+      "enemy_id": "boss_ashen_lord_wraith",
+      "boss_id": "ashen_lord_wraith",
+      "phase_id": "falling_gallery",
+      "name_en": "Falling Gallery",
+      "transition": "at_hp_percent",
+      "transition_hp_percent": 0.5,
+      "hp_multiplier": 0.72,
+      "atk_multiplier": 1.18,
+      "def_multiplier": 1.12,
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "passives": [
+        {
+          "passive_id": "falling_gallery_mechanic",
+          "name_en": "Falling Gallery",
+          "brand_mark_id": "mark_enemy_boss_ashen_lord_wraith",
+          "effect_en": "Falling-beam telegraph targets a row; use guard or row mitigation.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Falling-beam telegraph targets a row; use guard or row mitigation.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interruptible_by_control": false
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [],
+      "objectives": [],
+      "enter_ops": [],
+      "passive_ops": [],
+      "signature_action_id": "boss_ashen_wraith_falling_gallery"
+    },
+    {
+      "enemy_id": "boss_eclipse_construct",
+      "boss_id": "eclipse_construct",
+      "phase_id": "crownless_frame",
+      "name_en": "Crownless Frame",
+      "transition": "battle_start",
+      "transition_hp_percent": null,
+      "hp_multiplier": 1.0,
+      "atk_multiplier": 1.0,
+      "def_multiplier": 1.0,
+      "weaknesses": [
+        "Stone",
+        "Dawn"
+      ],
+      "passives": [
+        {
+          "passive_id": "crownless_frame_mechanic",
+          "name_en": "Crownless Frame",
+          "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+          "effect_en": "Three chain joints can be broken to stagger and expose the frame.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "Three chain joints can be broken to stagger and expose the frame.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_all_objectives_destroyed": [
+          "chain_joint_left",
+          "chain_joint_right",
+          "ankle_anchor"
+        ]
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [
+        "chain_joint_left",
+        "chain_joint_right",
+        "ankle_anchor"
+      ],
+      "objectives": [
+        {
+          "objective_id": "chain_joint_left",
+          "name_en": "Left Chain Joint",
+          "max_hp": 3,
+          "hp": 3,
+          "targetable_by_player": true
+        },
+        {
+          "objective_id": "chain_joint_right",
+          "name_en": "Right Chain Joint",
+          "max_hp": 3,
+          "hp": 3,
+          "targetable_by_player": true
+        },
+        {
+          "objective_id": "ankle_anchor",
+          "name_en": "Ankle Anchor",
+          "max_hp": 4,
+          "hp": 4,
+          "targetable_by_player": true,
+          "on_destroyed": [
+            {
+              "op": "apply_status",
+              "target_selector_id": "boss",
+              "status_id": "break",
+              "duration_turns": 1
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "boss",
+              "status_id": "fracture",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "enter_ops": [],
+      "passive_ops": [],
+      "signature_action_id": "boss_eclipse_construct_crownfall_sweep"
+    },
+    {
+      "enemy_id": "boss_eclipse_construct",
+      "boss_id": "eclipse_construct",
+      "phase_id": "aether_ward",
+      "name_en": "Aether Ward",
+      "transition": "at_hp_percent",
+      "transition_hp_percent": 0.5,
+      "hp_multiplier": 0.72,
+      "atk_multiplier": 1.15,
+      "def_multiplier": 1.12,
+      "weaknesses": [
+        "Stone",
+        "Dawn"
+      ],
+      "passives": [
+        {
+          "passive_id": "aether_ward_mechanic",
+          "name_en": "Aether Ward",
+          "brand_mark_id": "mark_enemy_boss_eclipse_construct",
+          "effect_en": "35% ward; damaging three altar pylons lowers ward and clears Decay Brand.",
+          "execution_source": "phase_ops_and_objectives"
+        }
+      ],
+      "telegraph": "35% ward; damaging three altar pylons lowers ward and clears Decay Brand.",
+      "intent_rules": {
+        "player_actions_before_resolution": 1,
+        "interrupt_if_all_objectives_destroyed": [
+          "altar_pylon_left",
+          "altar_pylon_center",
+          "altar_pylon_right"
+        ]
+      },
+      "interruptible_by_control": false,
+      "tauntable": true,
+      "break_targets": [
+        "altar_pylon_left",
+        "altar_pylon_center",
+        "altar_pylon_right"
+      ],
+      "objectives": [
+        {
+          "objective_id": "altar_pylon_left",
+          "name_en": "Left Altar Pylon",
+          "max_hp": 3,
+          "hp": 3,
+          "targetable_by_player": true,
+          "on_destroyed": [
+            {
+              "op": "clear_status_if_all_objectives_destroyed",
+              "target_selector_id": "boss",
+              "objective_ids": [
+                "altar_pylon_left",
+                "altar_pylon_center",
+                "altar_pylon_right"
+              ],
+              "status_id": "decay"
+            }
+          ]
+        },
+        {
+          "objective_id": "altar_pylon_center",
+          "name_en": "Central Altar Pylon",
+          "max_hp": 3,
+          "hp": 3,
+          "targetable_by_player": true,
+          "on_destroyed": [
+            {
+              "op": "clear_status_if_all_objectives_destroyed",
+              "target_selector_id": "boss",
+              "objective_ids": [
+                "altar_pylon_left",
+                "altar_pylon_center",
+                "altar_pylon_right"
+              ],
+              "status_id": "decay"
+            }
+          ]
+        },
+        {
+          "objective_id": "altar_pylon_right",
+          "name_en": "Right Altar Pylon",
+          "max_hp": 3,
+          "hp": 3,
+          "targetable_by_player": true,
+          "on_destroyed": [
+            {
+              "op": "clear_status_if_all_objectives_destroyed",
+              "target_selector_id": "boss",
+              "objective_ids": [
+                "altar_pylon_left",
+                "altar_pylon_center",
+                "altar_pylon_right"
+              ],
+              "status_id": "decay"
+            }
+          ]
+        }
+      ],
+      "enter_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "lowest_hp_enemy",
+          "status_id": "decay",
+          "duration_turns": 2
+        }
+      ],
+      "passive_ops": [
+        {
+          "op": "boss_damage_taken_modifier",
+          "target_selector_id": "self",
+          "multiplier": 0.65,
+          "modifier_id": "aether_ward",
+          "while_any_objective_alive": [
+            "altar_pylon_left",
+            "altar_pylon_center",
+            "altar_pylon_right"
+          ]
+        }
+      ],
+      "signature_action_id": "boss_eclipse_construct_eclipse_pulse"
+    }
+  ]
+}

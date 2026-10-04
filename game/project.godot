@@ -1,22 +1,52 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
 [application]
-config/name="Gacha Online"
-run/main_scene="res://scenes/main.tscn"
+
+config/name="Unaware of My Demise"
+config/description="Part I - Unaware, I Fade. Godot client (GDScript, statically typed)."
+run/main_scene="res://scenes/main/main.tscn"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
 [autoload]
-ApiClient="*res://scripts/api_client.gd"
-PatchManager="*res://scripts/patch_manager.gd"
+
+Game="*res://scripts/app/game.gd"
+Online="*res://scripts/app/online.gd"
+Native="*res://scripts/app/native.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+
 [display]
+
 window/size/viewport_width=1080
 window/size/viewport_height=1920
 window/size/window_width_override=540
 window/size/window_height_override=960
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
+[gui]
+
+theme/custom="res://theme/uomd_theme.tres"
+
 [rendering]
+
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-[application/android]
-package/unique_name="com.example.gachaonline"
-package/name="Gacha Online"
-version/code=1
-version/name="1.0.0"
+textures/vram_compression/import_etc2_astc=true

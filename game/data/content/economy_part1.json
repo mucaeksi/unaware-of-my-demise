@@ -1,0 +1,369 @@
+{
+  "schema_version": 1,
+  "pack_id": "part1_economy",
+  "design_version": "2026-09-27.1",
+  "player_timezone_policy": "UTC server authority; local time is display only",
+  "currencies": [
+    {
+      "id": "eclipse_token",
+      "display_name": "Eclipse Token",
+      "kind": "premium_earnable",
+      "spend_targets": [
+        "convert_to_fates_thread"
+      ],
+      "direct_item_sales": false
+    },
+    {
+      "id": "fates_thread",
+      "display_name": "Fate's Thread",
+      "kind": "pull_ticket",
+      "token_conversion_cost": 160,
+      "reversible": false,
+      "pull_cost": 1
+    },
+    {
+      "id": "silver_crowns",
+      "display_name": "Silver Crowns",
+      "kind": "progression_only",
+      "purchaseable": false
+    },
+    {
+      "id": "ration",
+      "display_name": "Ration",
+      "kind": "energy",
+      "cap": 120,
+      "regen_seconds_per_unit": 360,
+      "purchaseable": false
+    }
+  ],
+  "daily_schedule": {
+    "reset_hours_utc": [
+      0,
+      12
+    ],
+    "window_seconds": 43200,
+    "missed_window_carries": false,
+    "tasks": [
+      {
+        "id": "win_three_battles",
+        "objective": {
+          "type": "eligible_wins",
+          "count": 3,
+          "eligibility": "ration_consuming_battles_including_sweep"
+        },
+        "eclipse_token": 80,
+        "character_xp": 1500,
+        "silver_crown": 10000
+      },
+      {
+        "id": "improve_company_kit",
+        "objective": {
+          "type": "successful_level_up",
+          "count": 1
+        },
+        "eclipse_token": 40,
+        "character_xp": 500,
+        "silver_crown": 3000
+      },
+      {
+        "id": "watch_rewarded_memory",
+        "objective": {
+          "type": "verified_rewarded_ad",
+          "per_view": 30,
+          "max_per_window": 4
+        },
+        "eclipse_token_per_view": 30,
+        "eclipse_token_max": 120,
+        "extra_completion_reward": 0
+      }
+    ],
+    "window_completion": {
+      "requires": [
+        "win_three_battles",
+        "improve_company_kit"
+      ],
+      "requires_ads": false,
+      "character_xp": 2000,
+      "silver_crown": 15000,
+      "account_xp": 400
+    },
+    "maximum_per_window": {
+      "eclipse_token": 240,
+      "character_xp": 4000,
+      "silver_crown": 28000,
+      "account_xp": 400
+    },
+    "maximum_per_utc_day": {
+      "rewarded_ads": 8,
+      "eclipse_token_from_ads": 240,
+      "eclipse_token_all_sources": 480
+    }
+  },
+  "weekly_cycle": {
+    "week_start": "monday_00_utc",
+    "segments": [
+      {
+        "id": "cycle_a",
+        "start_day": 0,
+        "duration_days": 3,
+        "focus": "wayfarer_errands_and_dungeons",
+        "eclipse_token": 320,
+        "character_xp": 4500,
+        "silver_crown": 26000,
+        "objective": {
+          "type": "eligible_wins",
+          "count": 15,
+          "eligibility": "ration_consuming_battles_including_sweep"
+        }
+      },
+      {
+        "id": "cycle_b",
+        "start_day": 3,
+        "duration_days": 3,
+        "focus": "boss_hunts_and_limited_encounters",
+        "eclipse_token": 320,
+        "character_xp": 4500,
+        "silver_crown": 26000,
+        "objective": {
+          "type": "boss_wins",
+          "count": 5,
+          "eligibility": "ration_consuming_battles_including_sweep"
+        }
+      },
+      {
+        "id": "sun_eclipse",
+        "start_day": 6,
+        "duration_days": 1,
+        "focus": "special_story_encounter",
+        "eclipse_token": 160,
+        "character_xp": 1000,
+        "silver_crown": 6000,
+        "objective": {
+          "type": "three_star_wins",
+          "count": 3,
+          "eligibility": "ration_consuming_battles_including_sweep"
+        }
+      }
+    ],
+    "full_week": {
+      "eclipse_token": 800,
+      "fates_thread_equivalent": 5,
+      "character_xp": 10000,
+      "silver_crown": 58000
+    },
+    "completed_unclaimed_mail_days": 7
+  },
+  "rewarded_ads": {
+    "provider": "google_mobile_ads",
+    "per_window_cap": 4,
+    "reward_token": 30,
+    "server_side_verification_recommended": true,
+    "grant_idempotency_key": "provider_transaction_id"
+  },
+  "ration": {
+    "cap": 120,
+    "regen_seconds_per_unit": 360,
+    "daily_inn_meal": 30,
+    "stage_costs": {
+      "campaign": 6,
+      "material_hunt": 8,
+      "gear_dungeon": 10,
+      "special_boss": 10
+    },
+    "loss_on_failure": false,
+    "token_refill_enabled": false
+  },
+  "subscription": {
+    "id": "eclipse_blessing_30d",
+    "duration_days": 30,
+    "instant_eclipse_token": 1600,
+    "halfday_entitlement_token": 187,
+    "halfday_entitlement_count": 60,
+    "mailbox_claim_grace_days": 14,
+    "expected_total_eclipse_token": 12820,
+    "expected_fates_thread_equivalent": 80,
+    "remainder_eclipse_token": 20,
+    "guarantees_featured_character": false,
+    "platform": "google_play_billing",
+    "receipt_verification": "backend_required"
+  },
+  "banners": {
+    "limited_duration_days": 15,
+    "pull_currency": "fates_thread",
+    "pull_cost": 1,
+    "rarity_resolution": {
+      "rate_basis": "unconditional_probability_per_pull",
+      "soft_pity_increments_apply_to": "five_star_probability",
+      "redistribute_remaining_probability": "preserve_base_non_five_star_4_to_3_ratio",
+      "base_non_five_star_ratio": {
+        "four_star": 17,
+        "three_star": 81
+      },
+      "resolution_precedence": [
+        "hard_five_star_pity",
+        "weighted_rarity_roll",
+        "upgrade_three_star_to_four_star_if_minimum_four_star_guarantee_is_due"
+      ],
+      "four_star_guarantee_counter_resets_on": "four_star_or_higher",
+      "five_star_pity_counter_resets_on": "five_star",
+      "four_star_guarantee_counter_scope": "per_banner_type_and_account"
+    },
+    "character": {
+      "id": "limited_character",
+      "hard_pity": 80,
+      "base_five_star_rate": 0.025,
+      "base_rate_through_pull": 64,
+      "soft_pity_start_pull": 65,
+      "soft_pity_increment_percentage_points": 6,
+      "soft_pity_rate_formula": "min(100%, 2.5% + 6 percentage points * (pull_number - 64)); hard pity pull 80 is 100%",
+      "featured_chance_on_five_star": 0.55,
+      "lost_featured_next_five_star_guaranteed": true,
+      "pity_carries_between_limited_banners": true,
+      "featured_guarantee_carries": true,
+      "four_star_rate": 0.1691326530612245,
+      "three_star_rate": 0.8058673469387755,
+      "minimum_four_star_or_better_every_n_pulls": 10,
+      "lost_featured_pool": "standard_character"
+    },
+    "weapon": {
+      "id": "limited_signature_weapon",
+      "hard_pity": 65,
+      "base_five_star_rate": 0.025,
+      "soft_pity": false,
+      "selected_target_required": true,
+      "fate_knot_per_non_target_five_star": 1,
+      "fate_knots_to_guarantee": 2,
+      "next_five_star_after_two_knots_is_target": true,
+      "pity_carries_between_weapon_banners": true,
+      "fate_knots_carry_between_weapon_banners": true,
+      "worst_case_pulls_for_target": 195,
+      "four_star_rate": 0.1691326530612245,
+      "three_star_rate": 0.8058673469387755,
+      "selected_target_chance_on_unprotected_five_star": 0.55,
+      "minimum_four_star_or_better_every_n_pulls": 10,
+      "fate_knots_reset_on_target_win": true
+    },
+    "standard_character": {
+      "id": "hall_of_ancestors",
+      "hard_pity": 80,
+      "limited_characters_excluded": true,
+      "separate_pity": true,
+      "five_star_base_rate": 0.02,
+      "four_star_rate": 0.17,
+      "three_star_rate": 0.81,
+      "minimum_four_star_or_better_every_n_pulls": 10,
+      "five_star_character_ids": [
+        "mahmut",
+        "fadyme"
+      ],
+      "soft_pity": false
+    },
+    "signature_pairs": [
+      {
+        "banner_id": "oath_01_aveline",
+        "character_id": "sister_aveline",
+        "weapon_id": "weapon_aveline_last_vigil",
+        "weapon_name": "Lantern of the Last Vigil"
+      },
+      {
+        "banner_id": "oath_02_sable",
+        "character_id": "sable_wren",
+        "weapon_id": "weapon_sable_broken_bell",
+        "weapon_name": "Quietus at the Broken Bell"
+      },
+      {
+        "banner_id": "oath_03_nara",
+        "character_id": "nara_vell",
+        "weapon_id": "weapon_nara_gatewarden_promise",
+        "weapon_name": "Gatewarden's Promise"
+      },
+      {
+        "banner_id": "oath_04_mirel",
+        "character_id": "mirel_quill",
+        "weapon_id": "weapon_mirel_unwritten_ledger",
+        "weapon_name": "The Unwritten Ledger"
+      },
+      {
+        "banner_id": "oath_05_vespera",
+        "character_id": "vespera_wisp",
+        "weapon_id": "weapon_vespera_last_hour",
+        "weapon_name": "Mirror of the Last Hour"
+      }
+    ],
+    "standard_signature_weapon": {
+      "id": "hall_of_armaments",
+      "banner_id": "hall_of_armaments",
+      "display_name_en": "Hall of Armaments",
+      "permanent": true,
+      "selected_signature_ids": [
+        "weapon_mahmut_signature",
+        "weapon_fadyme_signature",
+        "weapon_kera_voss_signature",
+        "weapon_brin_alder_signature",
+        "weapon_nixie_vale_signature",
+        "weapon_tilda_fen_signature",
+        "weapon_rikka_ember_signature",
+        "weapon_odelia_pike_signature",
+        "weapon_pippa_bell_signature",
+        "weapon_clem_marr_signature",
+        "weapon_hana_birch_signature",
+        "weapon_thistle_roe_signature",
+        "weapon_iona_mist_signature",
+        "weapon_jori_flint_signature",
+        "weapon_marek_vane_signature"
+      ],
+      "selected_target_required": true,
+      "signature_feature_chance_on_unprotected_five_star": 0.55,
+      "pity_rules_source": "banners.weapon",
+      "weapon_pity_and_fate_knots_share_with_limited_weapon_banners": true,
+      "common_rarity_pool": {
+        "rarities": [
+          3,
+          4
+        ],
+        "catalog": "weapons_part1.json",
+        "pool_filter": "all non-signature weapons"
+      },
+      "target_change_rule": "Target may be changed between pulls; pity and earned Fate Knots remain attached to the banner account state and the selected target receives the next guarantee."
+    },
+    "duplicate_policy": {
+      "conversion": "character_bound_memory_shards",
+      "memory_shards_per_duplicate_by_rarity": {
+        "5": 10,
+        "4": 5,
+        "3": 2
+      },
+      "free_start_characters_count_as_owned": true,
+      "copies_tracked": true,
+      "balance_status": "approved_v1_2026-09-29"
+    },
+    "rotation": {
+      "order": [
+        "oath_01_aveline",
+        "oath_02_sable",
+        "oath_03_nara",
+        "oath_04_mirel",
+        "oath_05_vespera"
+      ],
+      "after_last": "loop",
+      "permanent_banner_ids": [
+        "hall_of_ancestors",
+        "hall_of_armaments"
+      ]
+    }
+  },
+  "f2p_reference": {
+    "period_days": 15,
+    "daily_windows": 30,
+    "daily_max_tokens": 7200,
+    "complete_week_count": 2,
+    "weekly_cycle_tokens": 1600,
+    "total_tokens": 8800,
+    "pull_equivalent": 55,
+    "full_completion_hard_pity_days": 22,
+    "note": "Excludes one-time story, achievement, event launch and maintenance rewards; assumes four ads per half-day window.",
+    "character_xp": 140000,
+    "silver_crowns": 956000,
+    "account_xp_from_daily_and_story": 13300
+  }
+}
