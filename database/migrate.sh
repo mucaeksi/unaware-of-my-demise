@@ -9,10 +9,12 @@ set -euo pipefail
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/migrations" && pwd)"
 check_only=false
 [[ "${1:-}" == "--check" ]] && check_only=true
-export PGOPTIONS="${PGOPTIONS:-} -c client_min_messages=warning"
+# Notices are silenced with SET inside each transaction, not with PGOPTIONS: a transaction pooler (Neon's PgBouncer
+# endpoint) rejects startup options, and a session-level SET would not survive between its transactions.
+QUIET="SET client_min_messages TO warning"
 psql_q() { psql "${DATABASE_URL}" -X -q -v ON_ERROR_STOP=1 "$@"; }
 
-psql_q -c "CREATE TABLE IF NOT EXISTS schema_migrations (
+psql_q -c "${QUIET}; CREATE TABLE IF NOT EXISTS schema_migrations (
     version     INTEGER PRIMARY KEY,
     filename    TEXT NOT NULL,
     sha256      TEXT NOT NULL,
@@ -35,6 +37,6 @@ for file in "${dir}"/[0-9][0-9][0-9][0-9]_*.sql; do
     continue
   fi
   echo "applying ${name}"
-  psql_q -1 -f "${file}" -c "INSERT INTO schema_migrations (version, filename, sha256) VALUES (${version}, '${name}', '${sum}')" >/dev/null
+  psql_q -1 -c "${QUIET}" -f "${file}" -c "INSERT INTO schema_migrations (version, filename, sha256) VALUES (${version}, '${name}', '${sum}')" >/dev/null
 done
 ${check_only} && echo "${pending} pending" || echo "up to date"
