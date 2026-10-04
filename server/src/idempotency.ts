@@ -55,3 +55,21 @@ export async function runIdempotent<T>(
     throw error;
   }
 }
+
+/**
+ * The committed result of the account's request with `key`, or null when no such request committed (INF-013). A request
+ * still running holds the account lock and is not visible yet; resending it with the same key is always safe.
+ */
+export async function committedOperation(
+  db: Db,
+  accountId: string,
+  key: string,
+): Promise<{ operation_key: string; endpoint: string; committed_at_utc: string; response: unknown } | null> {
+  if (!UUID_V4.test(key)) return null;
+  const { rows } = await db.query<{ endpoint: string; created_at: Date; response_json: unknown }>(
+    "SELECT endpoint, created_at, response_json FROM idempotency_keys WHERE idempotency_key = $1 AND account_id = $2",
+    [key, accountId],
+  );
+  const row = rows[0];
+  return row ? { operation_key: key, endpoint: row.endpoint, committed_at_utc: row.created_at.toISOString(), response: row.response_json } : null;
+}

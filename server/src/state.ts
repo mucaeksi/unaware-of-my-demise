@@ -88,6 +88,13 @@ export async function snapshot(db: Db, accountId: string, nowUnix: number = nowS
   const inventory: Record<string, unknown[]> = {};
   for (const [table, query] of Object.entries(EQUIPMENT_QUERIES)) inventory[table] = (await db.query(query, [accountId])).rows;
 
+  // The battle opened but not reported (INF-014): after a restart the client re-runs it from these frozen inputs.
+  const open = await db.query<{ attempt_id: string; stage_id: string; roster: string[]; run_seed: unknown; inputs: unknown }>(
+    "SELECT attempt_id, stage_id, roster, run_seed, inputs FROM stage_attempts WHERE account_id = $1 AND status = 'open' ORDER BY created_at DESC LIMIT 1",
+    [accountId],
+  );
+  const openRow = open.rows[0];
+
   return {
     schema_version: SNAPSHOT_SCHEMA_VERSION,
     // Grows by one with every committed mutation; unrelated to `schema_version` (the shape of this object).
@@ -98,6 +105,9 @@ export async function snapshot(db: Db, accountId: string, nowUnix: number = nowS
     items,
     roster,
     inventory,
+    open_attempt: openRow
+      ? { attempt_id: openRow.attempt_id, stage_id: openRow.stage_id, run_seed: toSafeInt(openRow.run_seed), roster: openRow.roster, inputs: openRow.inputs }
+      : null,
   };
 }
 

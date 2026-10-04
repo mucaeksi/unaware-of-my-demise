@@ -102,7 +102,10 @@ func _on_flow_loaded(loaded: GameFlow) -> void:
 			_present_boot_failure("The game could not start", Game.boot_error)
 		return
 	flow = Game.flow
-	_present_hub()
+	if flow.open_attempt().is_empty():
+		_present_hub()
+	else:
+		_present_unfinished_battle()
 
 
 func _present_boot_failure(title: String, message: String) -> void:
@@ -200,7 +203,10 @@ func _finish_narrative_entry() -> void:
 
 
 func _present_save_problem(outcome: Outcome, retry: Callable) -> void:
-	var screen: MessageScreen = _show_message("Progress could not be saved", "%s\nNothing was changed; you can try again." % outcome.error, [
+	# A lost connection leaves the change unconfirmed: trying again resends the same request, which the server never applies twice (INF-013).
+	var advice: String = "It may already be saved; trying again finishes it and never applies it twice." if outcome.error_kind == GameBackend.KIND_OFFLINE \
+		else "Nothing was changed; you can try again."
+	var screen: MessageScreen = _show_message("Progress could not be saved", "%s\n%s" % [outcome.error, advice], [
 		{"id": "retry", "label": "Try again"}, {"id": "hub", "label": "Back to the menu"}] as Array[Dictionary])
 	screen.chosen.connect(_on_save_problem_chosen.bind(retry), CONNECT_ONE_SHOT)
 
@@ -288,9 +294,13 @@ func _start_battle(stage_id: String, roster: Variant) -> void:
 
 
 func _on_battle_finished(result: BattleService.BattleResult) -> void:
-	var stage_id: String = _battle_stage
-	var roster: Variant = _battle_roster
-	var outcome: GameFlow.StageOutcome = await flow.complete_battle(result)
+	_handle_battle_outcome(_battle_stage, _battle_roster, await flow.complete_battle(result))
+
+
+func _handle_battle_outcome(stage_id: String, roster: Variant, outcome: GameFlow.StageOutcome) -> void:
+	if outcome.error_kind == GameBackend.KIND_OFFLINE and flow.unreported != null:
+		_present_unreported_victory(stage_id, roster)
+		return
 	if not outcome.error.is_empty():
 		push_warning("Battle %s failed: %s" % [stage_id, outcome.error])
 		_present_defeat(stage_id, roster, BATTLE_ERROR_TITLE, BATTLE_ERROR_MESSAGE % stage_id)
@@ -300,6 +310,43 @@ func _on_battle_finished(result: BattleService.BattleResult) -> void:
 		return
 	battle.finished.connect(func() -> void: _finish_stage(stage_id, outcome, roster), CONNECT_ONE_SHOT)
 	battle.play(BattlePlayback.create(outcome.battle, flow.registry), _stage_title(stage_id))
+
+
+## The victory's report got no reply: it may have been saved. Trying again resends the same report (never paid twice); leaving keeps the
+## attempt open on the server, and the next start offers to resume it.
+func _present_unreported_victory(stage_id: String, roster: Variant) -> void:
+	var screen: MessageScreen = _show_message("Victory not confirmed",
+		"The connection dropped while %s was being saved. The result is kept: try again to confirm it." % _stage_title(stage_id), [
+		{"id": "retry", "label": "Try again"}, {"id": "hub", "label": "Back to the menu"}] as Array[Dictionary])
+	screen.chosen.connect(func(action_id: String) -> void:
+		if action_id == "retry":
+			var battle: BattleScreen = BattleScreen.new()
+			battle.show_loading(_stage_title(stage_id))
+			shell.show_screen(battle)
+			_handle_battle_outcome(stage_id, roster, await flow.report_again())
+		else:
+			_present_hub(), CONNECT_ONE_SHOT)
+
+
+## INF-014: the server holds a battle that was started but never reported (the app closed or lost its connection). Resuming plays the same
+## battle again from the inputs the server froze; giving up costs nothing.
+func _present_unfinished_battle() -> void:
+	var open: Dictionary = flow.open_attempt()
+	var screen: MessageScreen = _show_message("Unfinished battle",
+		"%s was started but its result was never saved. Resume it to finish the battle, or give it up." % _stage_title(String(open["stage_id"])), [
+		{"id": "resume", "label": "Resume"}, {"id": "give_up", "label": "Give up"}] as Array[Dictionary])
+	screen.chosen.connect(func(action_id: String) -> void:
+		if action_id == "resume" and flow.resume_open_attempt():
+			_battle_stage = String(flow.attempt["stage_id"])
+			_battle_roster = flow.attempt["roster"]
+			var battle: BattleScreen = BattleScreen.new()
+			battle.show_loading(_stage_title(_battle_stage))
+			shell.show_screen(battle)
+			_battle_job = flow.start_battle(_battle_stage, _battle_roster, int(flow.attempt["run_seed"]))
+			set_process(true)
+		else:
+			await flow.abandon_open_attempt()
+			_present_hub(), CONNECT_ONE_SHOT)
 
 
 func _finish_stage(stage_id: String, outcome: GameFlow.StageOutcome, roster: Variant) -> void:

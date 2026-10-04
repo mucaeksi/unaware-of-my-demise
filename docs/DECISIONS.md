@@ -300,3 +300,23 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Owner actions for a device test: an Android OAuth client (package `io.github.mucaeksi.unawareofmydemise`, the debug
   keystore's SHA-1) in the same Google Cloud project as the Web client, and the keystore as secret
   `ANDROID_DEBUG_KEYSTORE_BASE64`. Upload-key and Play App Signing SHA-1s follow with the release AAB (INF-040/043).
+
+## DEC-0017 — Uncertain operations and battle recovery
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-013, INF-014).
+- Context: after a lost reply the client retried once with the same key and then dropped it; the player's "Try again"
+  sent a new key, so a request that had committed was applied a second time (a story advance, a pull). A victory whose
+  report got no reply was discarded with "nothing was saved". After a restart an open battle was invisible, and defeats
+  left attempts open.
+- Decision:
+  - A mutation without an API reply (no response, or a gateway page instead of the API's JSON) stays pending with its
+    key. The same request sent again reuses the key (the server replays a committed result). Before any other
+    mutation, `GET /v1/operations/{key}` settles it (committed or not); while that cannot be asked, nothing else is
+    sent. Reads never settle it. A renewal into another account drops it. Pending state is in memory only (after a
+    restart the snapshot is the truth).
+  - Session renewal needs a bound account; signing in as another account clears the session but keeps the binding,
+    so a request is never sent for another account; only a new boot changes the account.
+  - A victory whose report got no reply stays `unreported` with its attempt; "Try again" resends the same report.
+  - The snapshot carries `open_attempt` with the inputs the server froze; the client offers Resume (the deterministic
+    battle runs again on those inputs, so it matches the server's re-simulation) or Give up.
+  - Supersedes DEC-0013's "a defeat reports nothing": a defeat now abandons its attempt (`POST
+    /v1/attempts/{id}/abandon`, status `lost`, pays nothing). The victory path is unchanged.

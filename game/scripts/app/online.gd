@@ -11,7 +11,7 @@ const SERVER_URL_SETTING: String = "uomd/online/server_url"
 ## Project setting holding the game server's Web OAuth client id: Credential Manager's server client id, one of the Worker's
 ## GOOGLE_CLIENT_IDS (the ID token audience). Public, not a secret.
 const GOOGLE_CLIENT_SETTING: String = "uomd/online/google_server_client_id"
-const KIND_ACCOUNT_CHANGED: String = "account_changed"
+const KIND_ACCOUNT_CHANGED: String = OnlineBackend.KIND_ACCOUNT_CHANGED
 
 var is_offline: bool = true
 ## The bearer session from `POST /v1/auth/google`, kept in memory only (a new launch signs in again; a returning player is not prompted).
@@ -58,9 +58,12 @@ func sign_in() -> Outcome:
 
 
 ## A new session for the same account after the old one expired (coroutine; `value` = the new token). Signing in as another account
-## ends the session instead (`KIND_ACCOUNT_CHANGED`): a request made for one account is never retried for another. Concurrent callers
-## share one renewal.
+## ends the session instead (`KIND_ACCOUNT_CHANGED`) and the account stays bound, so every later renewal fails the same way: a request
+## made for one account is never sent for another; only a new boot (`sign_in`) may change the account. Without a bound account (after
+## `sign_out`) nothing is renewed. Concurrent callers share one renewal.
 func renew_session() -> Outcome:
+	if account_id.is_empty():
+		return Outcome.fail(KIND_ACCOUNT_CHANGED, "You are signed out. Restart the game to sign in.")
 	if _renewing:
 		var shared: Outcome = await _renewal_finished
 		return shared
@@ -68,8 +71,10 @@ func renew_session() -> Outcome:
 	var result: Outcome = await SignInFlow.run(OnlineBackend.new(server_url(), "", transport), google_server_client_id(), signer)
 	if result.is_ok():
 		var session: Dictionary = result.value
-		if not account_id.is_empty() and str(session["account_id"]) != account_id:
-			sign_out()
+		if str(session["account_id"]) != account_id:
+			session_token = ""
+			session_expires_at_utc = ""
+			Native.clear_credential_state()
 			result = Outcome.fail(KIND_ACCOUNT_CHANGED, "You signed in with a different account. Restart the game to play as that account.")
 		else:
 			_adopt(session)
