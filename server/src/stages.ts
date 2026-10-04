@@ -2,8 +2,10 @@
 // reported victory is re-simulated from the stored attempt before anything is granted.
 import { toSafeInt, type Db } from "./db";
 import { ApiError, invalid } from "./http";
-import { StoryError, type PersistedStoryState } from "./engine/story";
-import { contentRegistry, storyRules } from "./rules";
+import { CpythonRandom } from "./engine/random";
+import { StoryError, type PersistedStoryState, type PlayerStoryState } from "./engine/story";
+import { applyRewards, recordBattleVictory, type AppliedReward } from "./rewards";
+import { contentRegistry, lootResolver, questProgress, stackCaps, storyRules } from "./rules";
 
 /** The engine options a run needs besides the stage, roster and seed (game_flow.gd `battle_options`). */
 export interface BattleInputs {
@@ -11,6 +13,11 @@ export interface BattleInputs {
   equipment: Record<string, Loadout>;
   skill_ranks: Record<string, Record<string, number>>;
   memory_nodes: Record<string, number>;
+}
+
+/** What an attempt freezes when it opens: the build and the owned heroes the client's run starts from. */
+export interface AttemptInputs extends BattleInputs {
+  owned_character_ids: string[];
 }
 
 export interface Loadout {
@@ -125,7 +132,10 @@ export async function beginAttempt(tx: Db, accountId: string, persisted: Persist
     if (error instanceof StoryError) throw invalid(error.message);
     throw error;
   }
-  const inputs = await battleInputs(tx, accountId, state.owned_character_ids);
+  const inputs: AttemptInputs = {
+    owned_character_ids: [...state.owned_character_ids].sort(),
+    ...(await battleInputs(tx, accountId, state.owned_character_ids)),
+  };
   await tx.query("UPDATE stage_attempts SET status = 'expired', resolved_at = now() WHERE account_id = $1 AND status = 'open'", [accountId]);
   const attemptId = crypto.randomUUID();
   const runSeed = newRunSeed();
@@ -134,4 +144,118 @@ export async function beginAttempt(tx: Db, accountId: string, persisted: Persist
     [attemptId, accountId, stageId, JSON.stringify(roster), runSeed, JSON.stringify(inputs)],
   );
   return { attempt_id: attemptId, stage_id: stageId, run_seed: runSeed };
+}
+
+/** The stored attempt a re-simulation runs from. */
+export interface StoredAttempt {
+  attempt_id: string;
+  stage_id: string;
+  roster: string[];
+  run_seed: number;
+  inputs: AttemptInputs;
+}
+
+/** The server's own run of an attempt. */
+export interface SimulatedBattle {
+  outcome: "victory" | "defeat";
+  stars: number;
+  actions: number;
+  cycles: number;
+}
+
+/** Re-runs an attempt with the battle engine (the client's run is never trusted). */
+export type Simulate = (attempt: StoredAttempt) => SimulatedBattle;
+
+/** The client's report: informational only (kept with the result for diagnostics). */
+export interface ClientResult {
+  outcome: string;
+  stars: number | null;
+  actions: number | null;
+  cycles: number | null;
+}
+
+export function parseClientResult(body: Record<string, unknown>): ClientResult {
+  const count = (key: string): number | null => {
+    const value = body[key];
+    if (value === undefined || value === null) return null;
+    if (typeof value !== "number" || !Number.isSafeInteger(value) || value < 0) throw invalid(`${key} must be a non-negative integer`);
+    return value;
+  };
+  if (body.outcome !== "victory") throw invalid("outcome must be 'victory' (a defeat is not reported)");
+  return { outcome: "victory", stars: count("stars"), actions: count("actions"), cycles: count("cycles") };
+}
+
+export interface VictoryResult {
+  applied: AppliedReward[];
+  first_clear: boolean;
+  result: SimulatedBattle;
+}
+
+/** A 64-bit seed from the platform CSPRNG for one clear's reward rolls (LEGACY re-rolled rewards on every clear). */
+function newRewardSeed(): bigint {
+  const words = crypto.getRandomValues(new Uint32Array(2));
+  return (BigInt(words[0]!) << 32n) | BigInt(words[1]!);
+}
+
+/**
+ * Verifies and pays one attempt (LEGACY `GameController._apply_victory`, docs/LEGACY_AUDIT.md 9.4), all inside the
+ * request's transaction: the server re-runs the attempt from its stored inputs and refuses anything but its own victory;
+ * then loot (first-clear rows claimed once per account and stage), the reward writes, the quest events, the story rewards
+ * and, on a first clear, the cursor. The attempt is used up.
+ */
+export async function completeAttempt(
+  tx: Db,
+  accountId: string,
+  persisted: PersistedStoryState,
+  attemptId: string,
+  client: ClientResult,
+  simulate: Simulate,
+  nowUnix: number,
+): Promise<{ victory: VictoryResult; story: PersistedStoryState; recruits: string[] }> {
+  const { rows } = await tx.query<{ stage_id: string; roster: string[]; run_seed: unknown; inputs: AttemptInputs; status: string }>(
+    "SELECT stage_id, roster, run_seed, inputs, status FROM stage_attempts WHERE attempt_id = $1 AND account_id = $2 FOR UPDATE",
+    [attemptId, accountId],
+  );
+  const row = rows[0];
+  if (!row) throw new ApiError(404, "ITEM_NOT_FOUND", "Unknown battle attempt");
+  if (row.status !== "open") throw conflict(`This battle attempt is already ${row.status}`);
+  const stage = contentRegistry().stages.get(row.stage_id);
+  if (!stage) throw conflict(`Stage ${row.stage_id} no longer exists`);
+  const rules = storyRules();
+  const state: PlayerStoryState = rules.fromPersisted(persisted as unknown as Record<string, unknown>);
+  const current = rules.storyOrder()[state.story_cursor] ?? null;
+  if (current !== stage.stage_id && !state.completed_stage_ids.has(stage.stage_id)) throw conflict(`Stage ${stage.stage_id} is not unlocked`);
+
+  const attempt: StoredAttempt = { attempt_id: attemptId, stage_id: row.stage_id, roster: row.roster, run_seed: toSafeInt(row.run_seed), inputs: row.inputs };
+  const simulated = simulate(attempt);
+  if (simulated.outcome !== "victory") throw conflict("The battle result could not be verified");
+
+  const isFirstClear = !state.completed_stage_ids.has(stage.stage_id);
+  const rewardSeed = newRewardSeed();
+  const rewards = await lootResolver().resolveBattleRewards(
+    stage.drop_table_id,
+    isFirstClear,
+    accountId,
+    async (claimAccountId, claimType) =>
+      ((await tx.query("INSERT INTO claims (account_id, reward_type, cycle_id) VALUES ($1, $2, 0) ON CONFLICT DO NOTHING", [claimAccountId, claimType])).rowCount ?? 0) === 1,
+    new CpythonRandom(rewardSeed),
+    stage.stage_id,
+    stage.boss_id,
+  );
+  const applied = await applyRewards(tx, accountId, rewards, stackCaps());
+  const questEvents = await recordBattleVictory(tx, questProgress(), accountId, nowUnix, {
+    staminaCost: stage.stamina_cost,
+    isBoss: Boolean(stage.boss_id),
+    stars: simulated.stars,
+  });
+  let next = rules.applyStoryRewards(state, stage);
+  if (isFirstClear) next = rules.advanceStoryCursor(next);
+  const recruits = [...next.owned_character_ids].filter((characterId) => !state.owned_character_ids.has(characterId)).sort();
+
+  const victory: VictoryResult = { applied, first_clear: isFirstClear, result: simulated };
+  await tx.query("UPDATE stage_attempts SET status = 'won', resolved_at = now(), result = $2 WHERE attempt_id = $1", [
+    attemptId,
+    JSON.stringify({ ...victory, client, reward_seed: rewardSeed.toString(), quest_events: questEvents }),
+  ]);
+  return { victory, story: rules.toPersisted(next), recruits };
 }

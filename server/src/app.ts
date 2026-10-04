@@ -13,7 +13,7 @@ import { transaction, type Connect, type Db } from "./db";
 import { idempotencyKey, runIdempotent } from "./idempotency";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
-import { beginAttempt, parseRoster } from "./stages";
+import { beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
 import { snapshot, wallet } from "./state";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
 
@@ -25,7 +25,13 @@ export interface AppDeps {
   apiLimiter?: RateLimit;
   /** Schedules work after the response (the Worker's ctx.waitUntil); awaited inline when absent. */
   waitUntil?: (promise: Promise<unknown>) => void;
+  /** Re-runs a stored battle attempt (the battle engine); null = victories cannot be verified yet: 503. */
+  simulate?: Simulate | null;
+  /** The server clock in UTC unix seconds (quest windows); defaults to the system clock. */
+  nowUnix?: () => number;
 }
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
 interface Context {
   request: Request;
@@ -166,6 +172,24 @@ function routes(deps: AppDeps): Record<string, Handler> {
       return mutate(context, "stage_attempt", JSON.stringify([stageId, roster]), async (tx, accountId) => {
         const attempt = await beginAttempt(tx, accountId, await lockedStoryState(tx, accountId), stageId, roster);
         return { attempt };
+      });
+    },
+
+    "POST /v1/attempts/:attempt_id/victory": async (context) => {
+      const attemptId = context.params.attempt_id!.toLowerCase();
+      if (!UUID.test(attemptId)) throw new ApiError(404, "ITEM_NOT_FOUND", "Unknown battle attempt");
+      const client = parseClientResult(await readJsonObject(context.request));
+      const simulate = deps.simulate;
+      if (!simulate) throw new ApiError(503, "SERVICE_UNAVAILABLE", "Battle verification is not available");
+      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
+      return mutate(context, "stage_victory", JSON.stringify([attemptId, client]), async (tx, accountId) => {
+        const { victory, story, recruits } = await completeAttempt(tx, accountId, await lockedStoryState(tx, accountId), attemptId, client, simulate, now);
+        await saveStoryState(tx, accountId, story);
+        // Story recruits join the roster at level 1, like the First Oath pick.
+        for (const characterId of recruits) {
+          await tx.query("INSERT INTO roster (account_id, character_id) VALUES ($1, $2) ON CONFLICT DO NOTHING", [accountId, characterId]);
+        }
+        return { ...victory };
       });
     },
   };

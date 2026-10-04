@@ -1,5 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createApp } from "../src/app";
+import type { SimulatedBattle, Simulate, StoredAttempt } from "../src/stages";
 import type { IdentityVerifier } from "../src/identity";
 import { loadFixture } from "./engine/fixtures";
 import { createTestDatabase, type TestDatabase } from "./db";
@@ -14,7 +15,17 @@ const verifier: IdentityVerifier = {
   },
 };
 
-const app = () => createApp({ connect: () => database.connect(), verifier });
+/** The engine stand-in: every attempt it is shown is recorded and answered with `verdict`. */
+let verdict: SimulatedBattle = { outcome: "victory", stars: 3, actions: 20, cycles: 3 };
+const simulated: StoredAttempt[] = [];
+const simulate: Simulate = (attempt) => {
+  simulated.push(attempt);
+  return verdict;
+};
+/** 2026-10-07T10:00:00Z, a Wednesday morning: half-day cycle 41466, week 2961, segment cycle_a. */
+const NOW = 1791367200;
+let withEngine = true;
+const app = () => createApp({ connect: () => database.connect(), verifier, simulate: withEngine ? simulate : null, nowUnix: () => NOW });
 
 beforeAll(async () => {
   database = await createTestDatabase();
@@ -71,7 +82,7 @@ describe("POST /v1/stages/{stage_id}/attempts", () => {
     const [row] = await attempts(accountId);
     expect(row).toMatchObject({ attempt_id: body.attempt.attempt_id, stage_id: "1-1", roster: [], status: "open" });
     expect(Number(row.run_seed)).toBe(body.attempt.run_seed);
-    expect(row.inputs).toEqual({ player_levels: {}, equipment: {}, skill_ranks: {}, memory_nodes: {} });
+    expect(row.inputs).toEqual({ owned_character_ids: ["fadyme", "mahmut"], player_levels: {}, equipment: {}, skill_ranks: {}, memory_nodes: {} });
   });
 
   it("refuses unknown and locked stages, a pending First Oath and illegal rosters", async () => {
@@ -138,6 +149,7 @@ describe("POST /v1/stages/{stage_id}/attempts", () => {
     expect((await post(token, "/v1/stages/1-4/attempts", { roster: ["brin_alder", "fadyme", "mahmut", "tilda_fen"] })).status).toBe(200);
     const [row] = await attempts(accountId);
     expect(row.inputs).toEqual({
+      owned_character_ids: ["brin_alder", "fadyme", "mahmut", "tilda_fen"],
       player_levels: { fadyme: 7 },
       memory_nodes: { fadyme: 2 },
       skill_ranks: { fadyme: { fadyme_active: 3 } },
@@ -151,5 +163,144 @@ describe("POST /v1/stages/{stage_id}/attempts", () => {
         },
       },
     });
+  });
+});
+
+describe("POST /v1/attempts/{attempt_id}/victory", () => {
+  const ROSTER = ["brin_alder", "fadyme", "mahmut", "tilda_fen"];
+
+  async function opened(stageId: string, roster: string[] = ROSTER) {
+    const player = await newPlayer();
+    await atStage(player.accountId, stageId);
+    const begin = await post(player.token, `/v1/stages/${stageId}/attempts`, { roster });
+    expect(begin.status, JSON.stringify(begin.body)).toBe(200);
+    return { ...player, attemptId: begin.body.attempt.attempt_id as string, runSeed: begin.body.attempt.run_seed as number };
+  }
+
+  const claim = (attemptId: string, key?: string, body: unknown = { outcome: "victory", stars: 3, actions: 20, cycles: 3 }) =>
+    ({ path: `/v1/attempts/${attemptId}/victory`, body, key });
+
+  async function count(sql: string, values: unknown[]): Promise<number> {
+    return Number((await database.pool.query(sql, values)).rows[0].count);
+  }
+
+  it("re-runs the stored attempt, pays the first clear once and moves the story", async () => {
+    verdict = { outcome: "victory", stars: 3, actions: 20, cycles: 3 };
+    const { token, accountId, attemptId, runSeed } = await opened("1-4");
+    const request = claim(attemptId);
+    const { status, body } = await post(token, request.path, request.body);
+    expect(status, JSON.stringify(body)).toBe(200);
+    expect(simulated.at(-1)).toMatchObject({ attempt_id: attemptId, stage_id: "1-4", roster: ROSTER, run_seed: runSeed });
+    expect(simulated.at(-1)!.inputs.owned_character_ids).toEqual(ROSTER);
+    expect(body.first_clear).toBe(true);
+    expect(body.result).toEqual(verdict);
+    expect(body.applied.length).toBeGreaterThan(0);
+    const story = body.state.story_state;
+    expect(story.completed_stage_ids).toContain("1-4");
+    expect(story.story_cursor_entry_id, "the cursor moved past the cleared stage").toBe("1-5");
+    expect(story.owned_character_ids, "1-4 recruits Nixie").toContain("nixie_vale");
+    expect(body.state.roster).toHaveProperty("nixie_vale");
+    expect(await count("SELECT count(*) FROM claims WHERE account_id = $1 AND reward_type = 'first_clear_stage:1-4'", [accountId])).toBe(1);
+    const [attempt] = await attempts(accountId);
+    expect(attempt.status).toBe("won");
+    // Silver Crowns and stackable items landed where the snapshot shows them.
+    for (const reward of body.applied) {
+      if (reward.kind === "currency" && reward.item_id === "silver_crowns") expect(body.state.wallet.silver_crowns).toBeGreaterThanOrEqual(reward.quantity);
+      if (reward.kind === "item") expect(body.state.items[reward.item_id]).toBeGreaterThanOrEqual(Math.min(reward.quantity, 1));
+    }
+    // A Ration-costing 3-star win counts for the daily and the active weekly tasks under the server clock.
+    const progress = await database.pool.query("SELECT task_id, cycle_id, progress FROM quest_progress WHERE account_id = $1 ORDER BY task_id", [accountId]);
+    expect(progress.rows.map((row) => [row.task_id, Number(row.cycle_id), row.progress])).toEqual([
+      ["weekly:cycle_a", 2961, 1],
+      ["win_three_battles", 41466, 1],
+    ]);
+  });
+
+  it("replays a retried victory and refuses a used attempt", async () => {
+    const { token, accountId, attemptId } = await opened("1-4");
+    const key = crypto.randomUUID();
+    const request = claim(attemptId);
+    const first = await post(token, request.path, request.body, key);
+    const wallet = (await database.pool.query("SELECT * FROM wallet WHERE account_id = $1", [accountId])).rows[0];
+    const retry = await post(token, request.path, request.body, key);
+    expect(retry).toEqual(first);
+    expect((await database.pool.query("SELECT * FROM wallet WHERE account_id = $1", [accountId])).rows[0]).toEqual(wallet);
+    const again = await post(token, request.path, request.body);
+    expect(again.status).toBe(409);
+    expect(again.body.error.message).toBe("This battle attempt is already won");
+  });
+
+  it("pays first-clear rows once per account and stage even if the story forgets the clear", async () => {
+    const { token, accountId, attemptId } = await opened("1-4");
+    const first = await post(token, claim(attemptId).path, claim(attemptId).body);
+    expect(first.body.applied.some((reward: { is_first_clear: boolean }) => reward.is_first_clear)).toBe(true);
+    await atStage(accountId, "1-4"); // the story state is back at 1-4, uncleared; the claim ledger is not
+    const again = await post(token, "/v1/stages/1-4/attempts", { roster: ROSTER });
+    const second = await post(token, claim(again.body.attempt.attempt_id).path, claim(again.body.attempt.attempt_id).body);
+    expect(second.status).toBe(200);
+    expect(second.body.first_clear).toBe(true);
+    expect(second.body.applied.some((reward: { is_first_clear: boolean }) => reward.is_first_clear), "the ledger refused the duplicate").toBe(false);
+    expect(await count("SELECT count(*) FROM claims WHERE account_id = $1", [accountId])).toBe(1);
+  });
+
+  it("grants nothing when the server's own run is not a victory", async () => {
+    verdict = { outcome: "defeat", stars: 0, actions: 40, cycles: 6 };
+    try {
+      const { token, accountId, attemptId } = await opened("1-4");
+      const request = claim(attemptId);
+      const refused = await post(token, request.path, request.body);
+      expect(refused.status).toBe(409);
+      expect(refused.body.error).toEqual({ code: "CONFLICT", message: "The battle result could not be verified" });
+      expect((await attempts(accountId))[0].status, "nothing was stored").toBe("open");
+      expect(await count("SELECT count(*) FROM claims WHERE account_id = $1", [accountId])).toBe(0);
+      expect(await count("SELECT count(*) FROM inventory_items WHERE account_id = $1", [accountId])).toBe(0);
+    } finally {
+      verdict = { outcome: "victory", stars: 3, actions: 20, cycles: 3 };
+    }
+  });
+
+  it("pays a replay without first-clear rows and leaves the cursor alone", async () => {
+    const { token, accountId } = await opened("1-4");
+    const replay = await post(token, "/v1/stages/1-2/attempts", { roster: ROSTER });
+    const request = claim(replay.body.attempt.attempt_id);
+    const { status, body } = await post(token, request.path, request.body);
+    expect(status).toBe(200);
+    expect(body.first_clear).toBe(false);
+    expect(body.applied.every((reward: { is_first_clear: boolean }) => !reward.is_first_clear)).toBe(true);
+    expect(body.state.story_state.story_cursor_entry_id).toBe("1-4");
+    expect(await count("SELECT count(*) FROM claims WHERE account_id = $1", [accountId])).toBe(0);
+  });
+
+  it("writes a boss stage's rolled accessory with its own instance id", async () => {
+    const { token, accountId, attemptId } = await opened("1-5", [...ROSTER, "nixie_vale"]);
+    const request = claim(attemptId);
+    const { status, body } = await post(token, request.path, request.body);
+    expect(status, JSON.stringify(body)).toBe(200);
+    const accessories = body.applied.filter((reward: { payload: unknown }) => reward.payload !== null);
+    expect(accessories.length).toBeGreaterThan(0);
+    const rows = await database.pool.query("SELECT instance_id, accessory_id, equip_slot, payload FROM inventory_accessories WHERE account_id = $1", [accountId]);
+    expect(rows.rows.map((row) => row.instance_id).sort()).toEqual(accessories.map((reward: { instance_id: string }) => reward.instance_id).sort());
+    for (const row of rows.rows) {
+      expect(row.instance_id).toMatch(/^acc_[0-9a-f]{32}$/);
+      expect(row.payload.instance_id).toBe(row.instance_id);
+      expect(row.equip_slot).toBe(row.payload.slot);
+    }
+  });
+
+  it("refuses unknown, foreign and malformed requests, and answers 503 without an engine", async () => {
+    const a = await opened("1-4");
+    const b = await newPlayer();
+    const foreign = claim(a.attemptId);
+    expect((await post(b.token, foreign.path, foreign.body)).status, "another player's attempt").toBe(404);
+    expect((await post(a.token, `/v1/attempts/${crypto.randomUUID()}/victory`, foreign.body)).status).toBe(404);
+    expect((await post(a.token, "/v1/attempts/not-a-uuid/victory", foreign.body)).status).toBe(404);
+    expect((await post(a.token, foreign.path, { outcome: "defeat" })).status).toBe(400);
+    expect((await post(a.token, foreign.path, { outcome: "victory", stars: -1 })).status).toBe(400);
+    withEngine = false;
+    try {
+      expect((await post(a.token, foreign.path, foreign.body)).status).toBe(503);
+    } finally {
+      withEngine = true;
+    }
   });
 });
