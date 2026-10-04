@@ -17,6 +17,9 @@ export function idempotencyKey(request: Request): string {
   return key;
 }
 
+const expired = (key: string): ApiError =>
+  new ApiError(409, "OPERATION_EXPIRED", `Idempotency-Key '${key}' belongs to a request too old to replay; refresh the state and act again`);
+
 const reused = (key: string): ApiError =>
   new ApiError(409, "INVALID_REQUEST", `Idempotency-Key '${key}' was already used for a different account, endpoint or request body`);
 
@@ -31,7 +34,7 @@ export async function runIdempotent<T>(
   try {
     return await transaction(db, async (tx) => {
       await tx.query("SELECT 1 FROM account WHERE account_id = $1 FOR UPDATE", [accountId]);
-      const existing = await tx.query<{ account_id: string; endpoint: string; request_fingerprint: string; response_json: T }>(
+      const existing = await tx.query<{ account_id: string; endpoint: string; request_fingerprint: string; response_json: T | null }>(
         "SELECT account_id, endpoint, request_fingerprint, response_json FROM idempotency_keys WHERE idempotency_key = $1",
         [key],
       );
@@ -40,6 +43,8 @@ export async function runIdempotent<T>(
         if (stored.account_id !== accountId || stored.endpoint !== endpoint || stored.request_fingerprint !== fingerprint) {
           throw reused(key);
         }
+        // The reply was purged by the retention job (INF-016): the request did commit, so it must not run again.
+        if (stored.response_json === null) throw expired(key);
         return { response: stored.response_json, replayed: true };
       }
       const response = await action(tx);
@@ -65,6 +70,7 @@ export async function committedOperation(
   accountId: string,
   key: string,
 ): Promise<{ operation_key: string; endpoint: string; committed_at_utc: string; response: unknown } | null> {
+  // `response` is null once the retention job purged it; the operation still counts as committed.
   if (!UUID_V4.test(key)) return null;
   const { rows } = await db.query<{ endpoint: string; created_at: Date; response_json: unknown }>(
     "SELECT endpoint, created_at, response_json FROM idempotency_keys WHERE idempotency_key = $1 AND account_id = $2",

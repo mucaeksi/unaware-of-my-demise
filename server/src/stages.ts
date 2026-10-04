@@ -30,6 +30,12 @@ export interface Loadout {
   rolled_accessories: unknown[];
 }
 
+/**
+ * An open attempt older than this is expired (INF-016): it can no longer be won, the snapshot stops offering it, and the
+ * retention job marks it. Nothing was paid for it, so expiry only costs the player a replay.
+ */
+export const ATTEMPT_TTL_SECONDS = 24 * 3600;
+
 /** Largest party any stage allows; a longer list is refused before the rules see it. */
 const MAX_ROSTER = 5;
 /** Seeds stay below 2^53 so they survive JSON on every client (Godot parses JSON numbers as doubles). */
@@ -250,13 +256,15 @@ export async function completeAttempt(
   simulate: Simulate,
   nowUnix: number,
 ): Promise<{ victory: VictoryResult; story: PersistedStoryState; recruits: string[] }> {
-  const { rows } = await tx.query<{ stage_id: string; roster: string[]; run_seed: unknown; inputs: AttemptInputs; status: string }>(
-    "SELECT stage_id, roster, run_seed, inputs, status FROM stage_attempts WHERE attempt_id = $1 AND account_id = $2 FOR UPDATE",
-    [attemptId, accountId],
+  const { rows } = await tx.query<{ stage_id: string; roster: string[]; run_seed: unknown; inputs: AttemptInputs; status: string; stale: boolean }>(
+    "SELECT stage_id, roster, run_seed, inputs, status, created_at <= now() - make_interval(secs => $3) AS stale " +
+      "FROM stage_attempts WHERE attempt_id = $1 AND account_id = $2 FOR UPDATE",
+    [attemptId, accountId, ATTEMPT_TTL_SECONDS],
   );
   const row = rows[0];
   if (!row) throw new ApiError(404, "ITEM_NOT_FOUND", "Unknown battle attempt");
   if (row.status !== "open") throw conflict(`This battle attempt is already ${row.status}`);
+  if (row.stale) throw conflict("This battle attempt is already expired");
   const stage = contentRegistry().stages.get(row.stage_id);
   if (!stage) throw conflict(`Stage ${row.stage_id} no longer exists`);
   const rules = storyRules();

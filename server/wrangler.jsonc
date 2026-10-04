@@ -11,6 +11,8 @@
   // No public per-version preview URLs: only the deployed version answers.
   "preview_urls": false,
   "observability": { "enabled": true },
+  // Data lifecycle job (INF-016, src/retention.ts): daily at 03:17 UTC.
+  "triggers": { "crons": ["17 3 * * *"] },
   "hyperdrive": [
     // unaware-of-my-demise-production -> Neon UOMD (query caching off: transactional game state).
     { "binding": "HYPERDRIVE", "id": "edbe90afd0ab42a1ab708e7e2e49c04b" }
