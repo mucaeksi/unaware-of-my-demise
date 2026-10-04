@@ -28,7 +28,7 @@ async function addWalletCurrency(tx: Db, accountId: string, column: "silver_crow
  * Adds a granted stack. A grant is clipped at the item's `stack_cap` and the excess is dropped (a full stack never fails
  * the whole victory); a stack already above the cap is never reduced. Items without a cap are unbounded.
  */
-async function addItemQuantity(tx: Db, accountId: string, itemId: string, delta: number, cap: number | null): Promise<void> {
+export async function addItemQuantity(tx: Db, accountId: string, itemId: string, delta: number, cap: number | null): Promise<void> {
   await tx.query(
     `INSERT INTO inventory_items (account_id, item_id, quantity) VALUES ($1, $2, CASE WHEN $4::bigint IS NULL THEN $3::bigint ELSE LEAST($3::bigint, $4::bigint) END)
      ON CONFLICT (account_id, item_id) DO UPDATE SET quantity = CASE

@@ -25,6 +25,7 @@ import {
   setLocked,
   unequip,
 } from "./equipment";
+import { claimQuest, parseQuestClaim, questStatus } from "./quest-claims";
 import { levelUp, parseXpItems, unlockMemoryNode, upgradeSkill } from "./progression";
 import { beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
 import { snapshot, wallet } from "./state";
@@ -247,6 +248,17 @@ function routes(deps: AppDeps): Record<string, Handler> {
     "POST /v1/inventory/inventory_accessories/:instance_id/reroll": (context) => {
       const instanceId = context.params.instance_id!;
       return mutate(context, "inventory_reroll", instanceId, (tx, accountId) => rerollAccessory(tx, accountId, instanceId));
+    },
+
+    "GET /v1/quests/status": async (context) => {
+      const accountId = await requireAccount(context);
+      return json(await questStatus(context.db, accountId, Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))())));
+    },
+
+    "POST /v1/quests/claim": async (context) => {
+      const request = parseQuestClaim(await readJsonObject(context.request));
+      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
+      return mutate(context, "quest_claim", JSON.stringify(request), async (tx, accountId) => ({ ...(await claimQuest(tx, accountId, request, now)) }));
     },
 
     "POST /v1/attempts/:attempt_id/victory": async (context) => {

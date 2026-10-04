@@ -153,6 +153,11 @@ export class QuestProgress {
     private readonly items: Row,
   ) {}
 
+  /** The raw economy_part1.json object (reward rows, windows, mail days). */
+  economyPack(): Readonly<Row> {
+    return this.economy;
+  }
+
   dailyTasks(): QuestTask[] {
     return countedTasks(isObject(this.economy.daily_schedule) ? this.economy.daily_schedule : {});
   }

@@ -27,6 +27,8 @@ server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
 | `POST /v1/inventory/inventory_weapons/{instance_id}/dismantle` | Deletes an unequipped, unlocked, dismantlable weapon and grants its `dismantle_output` plus `dismantle_xp` Weapon Tempering XP, in one transaction. |
 | `POST /v1/inventory/{table}/{instance_id}/level-up` | Takes `{target_levels}` (default 1) for weapons and armor: spends only the Tempering XP still needed, per-step Silver Crowns and milestone Blacksmith Rivets; an unpaid step stops with `stopped_reason` and the item keeps its XP. A level gained counts the `successful_level_up` daily task. |
 | `POST /v1/inventory/inventory_accessories/{instance_id}/reroll` | Rerolls a rerollable accessory's sub-stats for its reroll tokens with a fresh CSPRNG seed (main stat kept, locked items refused). |
+| `GET /v1/quests/status` | The server-clock claim scope (half-day window, active weekly segment), the keys claimed in it, the weekly mailbox (finished segments within `completed_unclaimed_mail_days`) and the verified progress of every counted task. |
+| `POST /v1/quests/claim` | Takes `{kind: "daily"\|"weekly", task_id, period?}` and pays a reward once per window (`quest_claims`; LEGACY `server/quests.py`). Gameplay tasks pay only when their verified progress reached the target. The window chest needs both daily tasks claimed. The grant covers Eclipse Tokens, Silver Crowns, Account XP and Character XP (as Chronicle items). A repeat claim returns the original grant. |
 
 Mutating routes require a UUIDv4 `Idempotency-Key`. Each request is one transaction that locks the account row, so a
 retried request replays its stored response, and a key reused for another account, endpoint or body gets 409. Mutating
@@ -44,8 +46,7 @@ Security properties:
 
 ## Next
 
-Not implemented yet: gacha, quest status and
-claims, Ration, billing, ads and social. They go through the same `mutate` helper in `src/app.ts`.
+Not implemented yet: gacha, Ration (OQ-011), billing, ads and social. They go through the same `mutate` helper in `src/app.ts`.
 
 ## Commands
 
