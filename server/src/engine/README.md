@@ -24,7 +24,9 @@ and the fixtures must stay green.
 | `story/story_state.gd` (roster, rewards, persisted form) | `story.ts` (the API's `../story.ts` keeps the route-level cursor rules) | `story_flow.json`, `rosters.json`, `persisted_state.json` (`story_loans.json` is `BattleService.story_loan_loadout`, service row) | DONE |
 | `battle/*` (action gauge, units, damage, focus, auto battle, encounter state, effect interpreter 1741, victory stars) | — | `battle_1-1.json` … `battle_7-5.json` (35 stages) | TODO |
 | `battle/battle_service.gd` (orchestration, player loadouts) | — | `battle_*.json`, `loadouts.json`, `story_loans.json` | TODO |
-| `loot/loot_resolver.gd`, `quest/*`, `time/*` | — | `loot.json`, `quests.json`, `time_source.json` | TODO (needed for rewards) |
+| `quest/quest_progress.gd`, `quest/reset_clock.gd` | `quests.ts` | `quests.json` (tasks, scripts, invalid events, 82 window instants, Character XP items) | DONE |
+| `loot/loot_resolver.gd` | — | `loot.json` | TODO (needed for rewards) |
+| `time/trusted_clock.gd`, `device_clock.gd` | not ported: client-only (the Worker uses its own clock) | `time_source.json` (client GUT only) | N/A |
 
 Order of work: content loader, then progression/equipment, then story roster, then the battle core, then the
 service. Each step lands with its fixture gate in `server/test/engine/`.
