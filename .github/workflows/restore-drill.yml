@@ -77,9 +77,24 @@ jobs:
         run: |
           major="$(tr -d '[:space:]' < database/POSTGRES_MAJOR)"
           psql "${RESTORE_ADMIN_URL}" -X -q -v ON_ERROR_STOP=1 -c "CREATE DATABASE restore_drill"
+          # Neon installs platform extensions (e.g. pg_session_jwt) that a stock PostgreSQL does not have and the game
+          # schema does not use: leave out every extension the target cannot install, and say which.
+          docker run --rm -v "${RUNNER_TEMP}:/work" "postgres:${major}" pg_restore --list /work/production.dump > "${RUNNER_TEMP}/toc.all"
+          available="$(psql "${RESTORE_URL}" -X -At -c "SELECT name FROM pg_available_extensions")"
+          skipped=""
+          for extension in $(grep -oE ' EXTENSION - [A-Za-z0-9_]+' "${RUNNER_TEMP}/toc.all" | awk '{print $3}' | sort -u); do
+            grep -qx "${extension}" <<<"${available}" || skipped="${skipped} ${extension}"
+          done
+          cp "${RUNNER_TEMP}/toc.all" "${RUNNER_TEMP}/toc.list"
+          for extension in ${skipped}; do
+            grep -vE " (COMMENT - )?EXTENSION ${extension}( |\$)| EXTENSION - ${extension}( |\$)" "${RUNNER_TEMP}/toc.list" > "${RUNNER_TEMP}/toc.next" || true
+            mv "${RUNNER_TEMP}/toc.next" "${RUNNER_TEMP}/toc.list"
+          done
+          echo "extensions left out (not available here, not used by the game schema):${skipped:- none}"
+          echo "| extensions left out | ${skipped:- none} |" >> "${GITHUB_STEP_SUMMARY}"
           started=$(date +%s)
           docker run --rm --network host -e RESTORE_URL -v "${RUNNER_TEMP}:/work" "postgres:${major}" \
-            sh -c 'pg_restore --dbname="${RESTORE_URL}" --no-owner --no-privileges --exit-on-error /work/production.dump'
+            sh -c 'pg_restore --dbname="${RESTORE_URL}" --no-owner --no-privileges --exit-on-error --use-list=/work/toc.list /work/production.dump'
           elapsed=$(( $(date +%s) - started ))
           echo "restore: ${elapsed}s"
           echo "| restore (pg_restore into an empty database) | ${elapsed}s |" >> "${GITHUB_STEP_SUMMARY}"
@@ -102,4 +117,4 @@ jobs:
           } >> "${GITHUB_STEP_SUMMARY}"
       - name: Delete the dump
         if: always()
-        run: rm -f "${RUNNER_TEMP}/production.dump"
+        run: rm -f "${RUNNER_TEMP}/production.dump" "${RUNNER_TEMP}"/toc.*
