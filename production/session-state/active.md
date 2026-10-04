@@ -1,20 +1,20 @@
 # Active Session State — UOMD takeover
 
 <!-- STATUS -->
-Epic: Takeover / rebuild (master prompt)
-Feature: BATCH-0002 LEGACY client migration
-Task: gacha + Ration + deploy (DEC-0003/0013/0014)
+Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md, INF backlog)
+Feature: G0/G2 first slice — release contract + state revision
+Task: INF-003/004/008/012/018 (DEC-0015)
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
-**Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR → `main` per change; #9–#14 merged)
-**Current task:** production is live (`https://unaware-of-my-demise.muratcaneksiii.workers.dev`, /healthz ok, migrations 0001–0002 on Neon); every merge to `main` deploys via `.github/workflows/deploy.yml`
-**Next step:** DONE: engine port (parity-gated), every gameplay route (stages/victories, progression, equipment, quests, gacha pull/banners/history/pity, wallet convert), Ration (DEC-0014), client `GameBackend` calls for all of them, license (DEC-0005), Worker deployed to Cloudflare (version 097ca9db, template + orphaned trigger deleted). Client Summon + Quests screens (GUT 245), Inn Meal. Summon exchange button. NEXT: (1) Android Credential Manager sign-in (sets `Online.session_token`; needs the owner's Web OAuth client id → `GOOGLE_CLIENT_IDS`, Android client needs a signing SHA-1); (2) Gemini asset work only after the foundation (DEC-0004).
-**Blocked on (owner):** Google OAuth client id → `GOOGLE_CLIENT_IDS` (sign-in answers 503 until set).
+**Branch:** `claude/adoring-galileo-f7rd3o` (PR → `main`)
+**Current task:** first roadmap slice implemented and locally verified: `GET /v1/bootstrap`, update/maintenance gate, `account.state_revision` (migration 0003), consistent `GET /v1/state`, client `ClientRelease` gate + monotonic snapshot adoption, Android INTERNET permission, deploy source-SHA check and no-automatic-rollback guard. vitest 389, GUT 259, database 0001–0003.
+**Next step:** after merge, confirm the deploy run: migration 0003 applied on Neon and `/v1/bootstrap` reports the merged SHA. Then INF-013 (operation reconciliation: keep the action key until its result is known, no replay across accounts), INF-017 auth coordinator (Credential Manager), INF-006/007 staging + CI (Android export job).
+**Blocked on (owner):** Google OAuth client id → `GOOGLE_CLIENT_IDS` (sign-in answers 503 until set); `docs/INFRASTRUCTURE_REVIEW.md` missing (OQ-014).
 **Files in progress:** none
-**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-006 open; OQ-000/005 closed — do not remind)
-**Local test infra:** Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`); production deploys only through `.github/workflows/deploy.yml` (GitHub secrets `DATABASE_URL`, `CLOUDFLARE_API_TOKEN`, variable `CLOUDFLARE_ACCOUNT_ID`); no credentials in the session.
+**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014 open; OQ-000/005 closed — do not remind)
+**Local test infra:** Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`; recreate with `initdb -U uomd --auth=trust` + `pg_ctl -o '-k /var/tmp/uomd-pg -p 54329'` as user postgres); production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
 <!-- /CHECKPOINT -->
 
 ---
