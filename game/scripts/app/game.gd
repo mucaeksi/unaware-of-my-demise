@@ -10,6 +10,12 @@ var flow: GameFlow = null
 ## "" = the content itself failed to load).
 var boot_error: String = ""
 var boot_error_kind: String = ""
+## Stable asset references -> art (INF-024), built from the shipped content packs on first use. Tests may replace it.
+var assets: AssetResolver = null:
+	get:
+		if assets == null:
+			assets = AssetResolver.new(AssetCatalog.from_dir(GameFlow.CONTENT_DIR))
+		return assets
 
 
 ## Engine facts for the boot screen, logs and bug reports.

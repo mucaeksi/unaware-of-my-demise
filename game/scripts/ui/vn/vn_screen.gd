@@ -1,7 +1,9 @@
 class_name VnScreen
 extends UiScreen
 ## The Visual Novel reader (port of client/screens/vn_screen.py): one scene at a time, line by line, with back, next, auto speed and a log.
-## Art is placeholder: a tinted panel stands in for the background and the bust (the speaker's initial and the line's `emotion`), and says so.
+## Art comes from the asset resolver (INF-024): the scene's `location_id` names the background ("background/<id>/story") and the speaker
+## the bust ("character/<id>/vn_bust"). Where the art is not shipped yet, a tinted panel stands in (the speaker's initial and the line's
+## `emotion`) and says so.
 ## `finished` fires once, when the reader advances past the last line (Finish button or auto play), never when the screen is just left.
 
 signal finished
@@ -12,6 +14,8 @@ const LINE_FIELDS: Array[String] = ["pre_battle_lines", "lines", "battle_lines",
 
 ## Why the last `load_scene` was refused ("" = it was not).
 var error: String = ""
+## Where art comes from; null = the app's (`Game.assets`). Tests set their own before the screen is built.
+var assets: AssetResolver = null
 
 var _lines: Array[Dictionary] = []
 var _index: int = 0
@@ -20,6 +24,11 @@ var _done: bool = false
 
 var _title_label: Label = null
 var _stage_panel: PanelContainer = null
+var _background: TextureRect = null
+var _bust: TextureRect = null
+var _placeholder_tag: Label = null
+var _background_reference: String = ""
+var _bust_reference: String = ""
 var _dialogue_panel: PanelContainer = null
 var _bust_letter: Label = null
 var _emotion_label: Label = null
@@ -43,7 +52,21 @@ func _build(column: VBoxContainer) -> void:
 	var stage_column: VBoxContainer = UiKit.column(8)
 	stage_column.alignment = BoxContainer.ALIGNMENT_CENTER
 	_stage_panel.add_child(stage_column)
-	stage_column.add_child(UiKit.placeholder_tag("PLACEHOLDER BACKGROUND AND BUST"))
+	_background = TextureRect.new()
+	_background.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_background.visible = false
+	_stage_panel.add_child(_background)
+	_bust = TextureRect.new()
+	_bust.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_bust.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_bust.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_bust.visible = false
+	_stage_panel.add_child(_bust)
+	_stage_panel.move_child(stage_column, -1)
+	_placeholder_tag = UiKit.placeholder_tag("PLACEHOLDER BACKGROUND AND BUST")
+	stage_column.add_child(_placeholder_tag)
 	_bust_letter = UiKit.label("", "", false)
 	_bust_letter.add_theme_font_size_override("font_size", 220)
 	_bust_letter.add_theme_color_override("font_color", UiTheme.PANEL_HOVER)
@@ -134,6 +157,9 @@ func load_scene(scene: Dictionary) -> bool:
 	if _log_panel.visible:
 		toggle_log()
 	_title_label.text = str(scene.get("title_en", ""))
+	var location: String = str(scene.get("location_id", ""))
+	_background_reference = "background/%s/story" % location if not location.is_empty() else ""
+	_show_art(_background, _background_reference)
 	_show_line()
 	return true
 
@@ -162,6 +188,36 @@ func is_log_open() -> bool:
 	return _log_panel.visible
 
 
+## The asset references the current scene and line ask for ("" = none), and whether real art shows (not the placeholder).
+func background_reference() -> String:
+	return _background_reference
+
+
+func bust_reference() -> String:
+	return _bust_reference
+
+
+func shows_background_art() -> bool:
+	return _background.visible
+
+
+func shows_bust_art() -> bool:
+	return _bust.visible
+
+
+func _resolver() -> AssetResolver:
+	return assets if assets != null else Game.assets
+
+
+## Shows `reference`'s art in `target`, or hides it when there is none (the placeholder panel shows through).
+func _show_art(target: TextureRect, reference: String) -> void:
+	var resolver: AssetResolver = _resolver()
+	var present: bool = not reference.is_empty() and resolver.has_art(reference)
+	target.texture = resolver.texture(reference) if present else null
+	target.visible = present
+	_placeholder_tag.visible = not (_background.visible and _bust.visible)
+
+
 func _show_line() -> void:
 	if _lines.is_empty():
 		return
@@ -169,7 +225,10 @@ func _show_line() -> void:
 	var speaker: String = str(line.get("speaker_display", "")) if not str(line.get("speaker_display", "")).is_empty() else str(line.get("speaker_id", ""))
 	_speaker_label.text = speaker
 	_dialogue_label.text = str(line["text_en"])
-	_bust_letter.text = speaker.left(1).to_upper()
+	var speaker_id: String = str(line.get("speaker_id", "")).trim_suffix("_thought")
+	_bust_reference = "character/%s/vn_bust" % speaker_id if not speaker_id.is_empty() else ""
+	_show_art(_bust, _bust_reference)
+	_bust_letter.text = speaker.left(1).to_upper() if not _bust.visible else ""
 	var emotion: String = str(line.get("emotion", ""))
 	_emotion_label.text = "[%s]" % emotion if not emotion.is_empty() else ""
 	_back_button.disabled = _index == 0
