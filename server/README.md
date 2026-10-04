@@ -23,7 +23,7 @@ routes answer `{"state": <snapshot>}`, the client's `GameBackend` contract. The 
 Python reference walk in `parity/fixtures/story_flow.json`.
 
 Errors use the shape `{"error": {"code", "message"}}`. The codes are `UNAUTHORIZED`, `INVALID_REQUEST`, `RATE_LIMITED`,
-`SERVICE_UNAVAILABLE`, `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
+`SERVICE_UNAVAILABLE`, `CONFLICT`, `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
 
 Security properties:
 - The Google `sub` and the session tokens are stored only as SHA-256 hashes.
