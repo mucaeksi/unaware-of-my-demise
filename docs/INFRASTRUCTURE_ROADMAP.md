@@ -22,7 +22,10 @@ olmadan başarısız görüldü.
 | INF-004 Immutable release modeli | IN_PROGRESS | Worker'a deploy edilen commit SHA'sı (`RELEASE_SOURCE_SHA`) bootstrap'ta görünür; deploy health check SHA'yı doğrular. Eksik: release ID kaydı, base/presentation manifest, promote durumu. |
 | INF-008 Artifact promotion | IN_PROGRESS | Deploy, canlıdaki SHA'nın atası olan eski bir CI tamamlanmasını atlar (geri gitmez). Eksik: tek artifact'ın hem test hem deploy'a bağlanması, kayıtlı rollback. |
 | INF-012 Tutarlı snapshot | IN_PROGRESS | `account.state_revision` (migration 0003), her başarılı mutation +1; `GET /v1/state` ve `/v1/wallet` REPEATABLE READ READ ONLY; istemci eski revision'ı uygulamaz. Eşzamanlı yazma testi vitest'te. Canlı Neon'a migration deploy ile uygulanır. |
-| INF-018 Manifest/signing kimliği | IN_PROGRESS | Android preset'e `permissions/internet=true` eklendi (önceden yoktu = Godot varsayılanı kapalı; AAB ağa çıkamazdı). versionCode ile `uomd/release/version_code` eşitliği GUT'ta. Eksik: imza sertifikası parmak izleri ↔ OAuth kayıtları (sahibinin hesap işlemi). |
+| INF-007 CI tamamlama | IN_PROGRESS | CI `android` job: UomdNative AAR + debug APK export + `verify_apk.sh` + artifact (DEC-0016). Eksik: admin, release AAB, GUT exit status. |
+| INF-017 Android plugin ve auth coordinator | IN_PROGRESS | UomdNative geri geldi (BATCH-0003) + Credential Manager; `SignInFlow` nonce → ID token → session; açılışta gate → giriş → snapshot. GUT 270; yerel debug APK export'unda plugin kayıtlı. Eksik: gerçek cihazda Google hesabıyla giriş (sahibinin Android OAuth client + debug keystore secret'ı). |
+| INF-018 Manifest/signing kimliği | IN_PROGRESS | `permissions/internet=true`; versionCode = `uomd/release/version_code` (GUT). İzin allowlist'i APK'da doğrulanıyor: INTERNET + uygulama içi imza izni (credentials'ın biyometrik izinleri kaldırıldı). Eksik: debug/upload/Play App Signing SHA-1 ↔ OAuth kayıtları. |
+| INF-019 Session | IN_PROGRESS | 401 → tek yenileme, aynı Idempotency-Key ile yeniden gönderim; başka hesapla yenileme oturumu bitirir, tekrar göndermez (GUT, düzeltmesiz başarısız görüldü). Eksik: background/resume, logout UI, keystore'da oturum saklama kararı. |
 
 ---
 

@@ -22,6 +22,13 @@ string stored as secret `NEON_MIGRATION_DATABASE_URL`. Production migrations
 require manual approval (GitHub environment `production`). Never seed
 production.
 
+## Android debug APK (CI job `android`, DEC-0016)
+
+| Name | Kind | Purpose |
+|---|---|---|
+| `ANDROID_DEBUG_KEYSTORE_BASE64` | secret | base64 of a debug keystore (alias `androiddebugkey`, store/key password `android`). A fixed key keeps the APK's SHA-1 registered with the Android OAuth client; without it CI signs with a throwaway key and device sign-in fails. Not the release/upload key. |
+| `GOOGLE_CLIENT_IDS` | variable | the Worker's accepted ID-token audiences (the Web OAuth client id); the same Web client id is `uomd/online/google_server_client_id` in `game/project.godot` |
+
 ## Android / Google Play (later release task)
 
 | Name | Kind |

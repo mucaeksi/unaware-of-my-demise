@@ -279,3 +279,24 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   - The deploy passes `RELEASE_SOURCE_SHA`, verifies it through `/v1/bootstrap`, and skips an automatic deploy of a
     commit that is an ancestor of the live one. A manual run may roll back and says so.
 - Not decided here: release IDs, presentation/content release manifests, channels, capability versions (G0/G4/G5).
+
+## DEC-0016 — Google sign-in on Android: UomdNative plugin, nonce flow, session renewal
+- Status: ACCEPTED (2026-10-04, engineering; owner set `GOOGLE_CLIENT_IDS` and asked for the second slice). Roadmap
+  INF-017, INF-018, INF-019 (partly), INF-007 (Android job).
+- Decision:
+  - The LEGACY `UomdNative` Godot Android plugin returns (BATCH-0003) with Credential Manager sign-in ported from the
+    LEGACY `GoogleSignInBridge`, reporting through the `sign_in_finished` signal, never by polling. A returning
+    player is signed in without a prompt (authorized accounts, auto-select); otherwise the account chooser opens.
+  - Flow (`SignInFlow`): `POST /v1/auth/nonce` → Credential Manager with the server's **Web** client id
+    (`uomd/online/google_server_client_id`, public) and that nonce → `POST /v1/auth/google` → opaque session held in
+    memory only. No client secret, no token storage, no SQLite.
+  - Boot order (INF-026): release gate → sign-in when there is no session → snapshot.
+  - Session expiry: a 401 renews the session once and resends the request with the **same** Idempotency-Key. A
+    renewal that signs in a different account ends the session and does not resend.
+  - Packaging: the AARs are built from source (`game/tools/build_uomd_native.sh`) and not committed; the export
+    plugin adds the Maven dependencies. The permission allowlist is INTERNET plus androidx.core's app-private signature
+    permission; the biometric permissions merged by androidx.credentials are removed. CI builds, exports and verifies a
+    debug APK and keeps it as an artifact.
+- Owner actions for a device test: an Android OAuth client (package `io.github.mucaeksi.unawareofmydemise`, the debug
+  keystore's SHA-1) in the same Google Cloud project as the Web client, and the keystore as secret
+  `ANDROID_DEBUG_KEYSTORE_BASE64`. Upload-key and Play App Signing SHA-1s follow with the release AAB (INF-040/043).

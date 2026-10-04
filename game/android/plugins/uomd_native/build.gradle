@@ -1,0 +1,28 @@
+plugins {
+    // Same AGP as Godot's Android build template (config.gradle of the pinned engine version).
+    id 'com.android.library' version '8.6.1'
+}
+
+android {
+    namespace 'io.github.mucaeksi.uomd'
+    compileSdk 36
+
+    defaultConfig {
+        minSdk 28
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // Provided by the engine at runtime; must match game/GODOT_VERSION (4.7.2-stable -> 4.7.2.stable).
+    compileOnly "org.godotengine:godot:4.7.2.stable"
+    // Google sign-in (INF-017). An AAR does not carry its dependencies into the Godot export: the export plugin
+    // (game/addons/uomd_native/export_plugin.gd ANDROID_DEPENDENCIES) adds the same coordinates; a test keeps them equal.
+    implementation "androidx.credentials:credentials:1.6.0"
+    implementation "androidx.credentials:credentials-play-services-auth:1.6.0"
+    implementation "com.google.android.libraries.identity.googleid:googleid:1.2.1"
+}

@@ -83,3 +83,63 @@ jobs:
         run: |
           "${GODOT}" --headless --path game -s addons/gut/gut_cmdln.gd -gexit | tee gut.log
           grep -q "All tests passed" gut.log
+
+  # INF-007/INF-017: the UomdNative Android plugin (Google sign-in through Credential Manager) and a debug APK built from it with
+  # the pinned toolchain, verified by game/tools/verify_apk.sh and kept as an artifact for device tests. The APK is signed with
+  # the repository's debug keystore (secret ANDROID_DEBUG_KEYSTORE_BASE64) so its certificate SHA-1 stays registered with the
+  # Android OAuth client; without the secret a throwaway key is used and sign-in on a device fails with a developer error.
+  android:
+    runs-on: ubuntu-latest
+    env:
+      ANDROID_DEBUG_KEYSTORE_BASE64: ${{ secrets.ANDROID_DEBUG_KEYSTORE_BASE64 }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.11.1"
+      - name: Android SDK packages
+        run: |
+          yes | "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
+          "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.1.0" >/dev/null
+      - name: Build the UomdNative AARs
+        run: game/tools/build_uomd_native.sh
+      - name: Install the pinned Godot and its Android export templates (checksums verified)
+        run: |
+          version="$(tr -d '[:space:]' < game/GODOT_VERSION)"
+          base="https://github.com/godotengine/godot/releases/download/${version}"
+          mkdir -p "${RUNNER_TEMP}/godot" && cd "${RUNNER_TEMP}/godot"
+          editor="Godot_v${version}_linux.x86_64.zip"
+          templates="Godot_v${version}_export_templates.tpz"
+          curl -fsSLO "${base}/SHA512-SUMS.txt"
+          curl -fsSLO "${base}/${editor}"
+          curl -fsSLO "${base}/${templates}"
+          grep -E " (${editor}|${templates})\$" SHA512-SUMS.txt | sha512sum -c -
+          unzip -q "${editor}"
+          target="${HOME}/.local/share/godot/export_templates/${version/-/.}"
+          mkdir -p "${target}"
+          unzip -q -o -j "${templates}" 'templates/android*' 'templates/version.txt' -d "${target}"
+          rm "${templates}"
+          echo "GODOT=${RUNNER_TEMP}/godot/Godot_v${version}_linux.x86_64" >> "${GITHUB_ENV}"
+      - name: Debug keystore
+        run: |
+          config_dir="${HOME}/.config/godot"
+          mkdir -p "${config_dir}"
+          if [ -n "${ANDROID_DEBUG_KEYSTORE_BASE64}" ]; then
+            printf '%s' "${ANDROID_DEBUG_KEYSTORE_BASE64}" | base64 -d > "${config_dir}/debug.keystore"
+          else
+            echo "::warning::secret ANDROID_DEBUG_KEYSTORE_BASE64 is not set: the APK is signed with a throwaway key and Google sign-in will not work on a device"
+          fi
+      - name: Export and verify the debug APK
+        run: game/tools/build_android_debug.sh "${RUNNER_TEMP}/uomd-debug.apk"
+      - name: Signing certificate (register its SHA-1 with the Android OAuth client)
+        run: |
+          "${ANDROID_HOME}/build-tools/36.1.0/apksigner" verify --print-certs "${RUNNER_TEMP}/uomd-debug.apk" | grep -E "SHA-1|SHA-256"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: uomd-debug-apk
+          path: ${{ runner.temp }}/uomd-debug.apk
+          retention-days: 14

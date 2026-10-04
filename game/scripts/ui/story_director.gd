@@ -96,6 +96,8 @@ func _on_flow_loaded(loaded: GameFlow) -> void:
 	if not await Game.attach(loaded, shell.backend):
 		if Game.boot_error_kind == GameBackend.KIND_OFFLINE:
 			_present_boot_failure("Server unreachable", "The game server could not be reached. Check your connection and try again.")
+		elif Game.boot_error_kind in [SignInFlow.KIND_CANCELLED, SignInFlow.KIND_FAILED, SignInFlow.KIND_UNAVAILABLE]:
+			_present_boot_failure("Sign-in required", Game.boot_error)
 		else:
 			_present_boot_failure("The game could not start", Game.boot_error)
 		return

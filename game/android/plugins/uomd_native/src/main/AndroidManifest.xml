@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- androidx.credentials declares these for passkey/biometric flows; Google sign-in does not use them (INF-018 allowlist). -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" tools:node="remove" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" tools:node="remove" />
+    <application>
+        <!-- Godot Android plugin v2: the engine instantiates this class and registers it as the singleton "UomdNative". -->
+        <meta-data
+            android:name="org.godotengine.plugin.v2.UomdNative"
+            android:value="io.github.mucaeksi.uomd.UomdNative" />
+    </application>
+</manifest>

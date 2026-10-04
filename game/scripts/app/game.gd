@@ -33,7 +33,7 @@ func boot(backend: GameBackend = null) -> bool:
 
 
 ## Adopts a content-loaded flow, connects it to `backend` (null = `Online.backend()`), checks the server's release contract
-## (`ClientRelease`) and fetches the player's snapshot (coroutine).
+## (`ClientRelease`), signs in when `Online` has no session yet, and fetches the player's snapshot (coroutine).
 func attach(new_flow: GameFlow, backend: GameBackend = null) -> bool:
 	flow = null
 	boot_error = ""
@@ -50,6 +50,14 @@ func attach(new_flow: GameFlow, backend: GameBackend = null) -> bool:
 		boot_error = gate.error
 		boot_error_kind = gate.error_kind
 		return false
+	# Then the player (INF-026 order): the Worker backend without a session signs in with Google first.
+	if backend == null and new_flow.backend is OnlineBackend and not Online.has_session():
+		var signed: Outcome = await Online.sign_in()
+		if not signed.is_ok():
+			boot_error = signed.error
+			boot_error_kind = signed.error_kind
+			return false
+		new_flow.backend = Online.backend()
 	var synced: Outcome = await new_flow.sync()
 	if not synced.is_ok():
 		boot_error = synced.error
