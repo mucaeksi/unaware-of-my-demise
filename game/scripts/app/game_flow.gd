@@ -100,7 +100,9 @@ func sync() -> Outcome:
 	return _adopt(await backend.fetch_state())
 
 
-## Takes the snapshot out of a backend reply (`value["state"]`) into `state`; a failed reply passes through and keeps the old state.
+## Takes the snapshot out of a backend reply (`value["state"]`) into `state`; a failed reply passes through and keeps the old state. A
+## snapshot older than the one held (lower `state_revision`: a late reply, a replayed request) is not adopted (INF-012); the reply
+## itself still succeeds, since what it reports did happen.
 func _adopt(reply: Outcome) -> Outcome:
 	if not reply.is_ok():
 		return reply
@@ -110,6 +112,8 @@ func _adopt(reply: Outcome) -> Outcome:
 	var next: PlayerState = PlayerState.from_snapshot((value as Dictionary)["state"], rules.story)
 	if not next.is_valid():
 		return Outcome.fail(ERROR_PROTOCOL, next.error)
+	if state != null and next.revision() < state.revision():
+		return reply
 	state = next
 	return reply
 

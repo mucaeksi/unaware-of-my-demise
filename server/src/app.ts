@@ -9,7 +9,7 @@ import {
   issueNonce,
   resolveSession,
 } from "./accounts";
-import { transaction, type Connect, type Db } from "./db";
+import { consistentRead, transaction, type Connect, type Db } from "./db";
 import { idempotencyKey, runIdempotent } from "./idempotency";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
@@ -31,7 +31,8 @@ import { claimQuest, parseQuestClaim, questStatus } from "./quest-claims";
 import { levelUp, parseXpItems, unlockMemoryNode, upgradeSkill } from "./progression";
 import { beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
 import { claimInnMeal } from "./ration";
-import { snapshot, wallet } from "./state";
+import { admit, bootstrap, DEVELOPMENT_RELEASE, type ReleaseConfig } from "./release";
+import { bumpStateRevision, snapshot, wallet } from "./state";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
 
 export interface AppDeps {
@@ -48,6 +49,8 @@ export interface AppDeps {
   nowUnix?: () => number;
   /** The banner rotation launch instant; null/absent = undated development rotation (the first banner pair stays open). */
   bannerEpoch?: Date | null;
+  /** This deployment's release identity, client floor and maintenance switch; defaults to `DEVELOPMENT_RELEASE`. */
+  release?: ReleaseConfig;
 }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -85,7 +88,8 @@ async function saveStoryState(tx: Db, accountId: string, state: StoryStateDict):
 
 /**
  * A mutating route: authenticated, idempotent (Idempotency-Key), one transaction with the account row locked. `action`
- * changes the state; the response is the new player snapshot under "state" (the client's `GameBackend` contract).
+ * changes the state; the response is the new player snapshot under "state" (the client's `GameBackend` contract), whose
+ * `state_revision` the commit raised by one. A replay answers the stored response, revision included.
  */
 async function mutate(
   context: Context,
@@ -98,6 +102,7 @@ async function mutate(
   const key = idempotencyKey(context.request);
   const { response } = await runIdempotent(context.db, key, accountId, endpoint, fingerprint, async (tx) => {
     const extra = (await action(tx, accountId)) ?? {};
+    await bumpStateRevision(tx, accountId);
     return { ...extra, state: await snapshot(tx, accountId, nowUnix) };
   });
   return json(response);
@@ -112,6 +117,9 @@ function routes(deps: AppDeps): Record<string, Handler> {
       await db.query("SELECT 1");
       return json({ status: "ok" });
     },
+
+    // Unauthenticated and outside the update/maintenance gate: a client asks it first to learn whether it may play.
+    "GET /v1/bootstrap": async () => json(await bootstrap(deps.release ?? DEVELOPMENT_RELEASE, new Date(clock() * 1000))),
 
     "POST /v1/auth/nonce": async ({ db }) => {
       const { nonce, expiresAt } = await issueNonce(db);
@@ -164,14 +172,14 @@ function routes(deps: AppDeps): Record<string, Handler> {
 
     "GET /v1/wallet": async (context) => {
       const accountId = await requireAccount(context);
-      const balances = await wallet(context.db, accountId, clock());
+      const balances = await consistentRead(context.db, (tx) => wallet(tx, accountId, clock()));
       if (balances === null) throw new ApiError(404, "ITEM_NOT_FOUND", "Wallet not found");
       return json(balances);
     },
 
     "GET /v1/state": async (context) => {
       const accountId = await requireAccount(context);
-      return json(await snapshot(context.db, accountId, clock()));
+      return json(await consistentRead(context.db, (tx) => snapshot(tx, accountId, clock())));
     },
 
     "POST /v1/story/advance": (context) =>
@@ -350,8 +358,17 @@ function matchRoute(table: Record<string, Handler>, method: string, pathname: st
 /** The client key for rate limiting: Cloudflare's connecting IP (set by the edge, not by the client). */
 const clientKey = (request: Request): string => request.headers.get("cf-connecting-ip") ?? "unknown";
 
+/** Routes that answer whatever the client version or maintenance state (liveness, and the bootstrap that reports both). */
+const UNGATED = new Set(["/healthz", "/v1/bootstrap"]);
+/** Routes that read no database, so they answer during a database outage too (the bootstrap carries the maintenance notice). */
+const NO_DATABASE = new Set(["/v1/bootstrap"]);
+const noDatabase: Db = {
+  query: () => Promise.reject(new Error("this route has no database connection")),
+};
+
 export function createApp(deps: AppDeps): (request: Request) => Promise<Response> {
   const table = routes(deps);
+  const release = deps.release ?? DEVELOPMENT_RELEASE;
   return async (request) => {
     const url = new URL(request.url);
     const route = matchRoute(table, request.method, url.pathname);
@@ -365,8 +382,17 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
         return errorResponse(new ApiError(429, "RATE_LIMITED", "Too many requests"), { "retry-after": "60" });
       }
     }
+    if (!UNGATED.has(url.pathname)) {
+      try {
+        admit(request, release);
+      } catch (error) {
+        if (error instanceof ApiError) return errorResponse(error);
+        throw error;
+      }
+    }
     let connection;
     try {
+      if (NO_DATABASE.has(url.pathname)) return await route.handler({ request, db: noDatabase, params: route.params });
       connection = await deps.connect();
       return await route.handler({ request, db: connection, params: route.params });
     } catch (error) {

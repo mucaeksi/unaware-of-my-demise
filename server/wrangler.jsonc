@@ -24,6 +24,12 @@
     // Comma-separated Google OAuth client IDs accepted as the ID token audience. Empty = sign-in answers 503.
     "GOOGLE_CLIENT_IDS": "",
     // Banner rotation launch instant (ISO-8601 Monday 00:00 UTC). Empty = undated: the first banner pair stays open.
-    "BANNER_EPOCH": ""
+    "BANNER_EPOCH": "",
+    // The git commit of this deployment; the deploy workflow sets it with --var. Empty = not recorded.
+    "RELEASE_SOURCE_SHA": "",
+    // The lowest Android versionCode the API serves; older apps get 426 UPDATE_REQUIRED (GET /v1/bootstrap reports it).
+    "MIN_CLIENT_VERSION_CODE": "1",
+    // Non-empty = maintenance: every game route answers 503 MAINTENANCE with this message. Changing it is a redeploy.
+    "MAINTENANCE_MESSAGE": ""
   }
 }

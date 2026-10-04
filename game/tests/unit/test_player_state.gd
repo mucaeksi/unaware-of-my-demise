@@ -114,6 +114,7 @@ func test_the_servers_new_account_snapshot_is_accepted() -> void:
 	var state: PlayerState = PlayerState.from_snapshot(JSON.parse_string(FileAccess.get_file_as_string(path)), _flow.rules.story)
 	assert_true(state.is_valid(), state.error)
 	assert_eq(state.story_state.story_cursor, 0)
+	assert_eq(state.revision(), 0, "a new account starts at state_revision 0")
 	assert_eq(_flow.rules.story.to_persisted_dict(state.story_state), _flow.rules.story.to_persisted_dict(_flow.rules.story.new_player_state()),
 		"identical to the client's new_player_state")
 	assert_eq(state.roster_ids(), ["fadyme", "mahmut"] as Array[String])
@@ -268,3 +269,22 @@ func test_run_stage_plays_the_seed_of_the_attempt() -> void:
 		assert_eq(backend.calls[-1], "submit_victory")
 		assert_eq(backend.args[0], "attempt-1")
 		assert_eq(int(backend.args[1]["stars"]), outcome.battle.stars)
+
+
+func test_an_older_revision_never_replaces_the_held_snapshot() -> void:
+	var backend: _StubBackend = _stub({"state_revision": 5, "wallet": {"silver_crowns": 500}})
+	assert_true((await _flow.sync()).is_ok())
+	assert_eq(_flow.state.revision(), 5)
+	var held: PlayerState = _flow.state
+	backend.snapshot = _snapshot({"state_revision": 4, "wallet": {"silver_crowns": 1}})
+	var late: Outcome = await _flow.advance()
+	assert_true(late.is_ok(), "the reply itself succeeded; only its older snapshot is ignored")
+	assert_true(_flow.state == held)
+	assert_eq(_flow.wallet()["silver_crowns"], 500)
+	backend.snapshot = _snapshot({"state_revision": 5, "wallet": {"silver_crowns": 520}})
+	assert_true((await _flow.sync()).is_ok())
+	assert_eq(_flow.wallet()["silver_crowns"], 520, "the same revision is adopted (time-derived values such as Ration move on)")
+	backend.snapshot = _snapshot({"state_revision": 6, "wallet": {"silver_crowns": 600}})
+	assert_true((await _flow.advance()).is_ok())
+	assert_eq([_flow.state.revision(), _flow.wallet()["silver_crowns"]], [6, 600])
+

@@ -208,3 +208,27 @@ func test_quest_and_gacha_calls_go_to_their_routes() -> void:
 		assert_eq(_header(sent[index], "Idempotency-Key"), "", "reads carry no idempotency key")
 	for index: int in [1, 5, 6, 7, 8]:
 		assert_ne(_header(sent[index], "Idempotency-Key"), "", "mutations do")
+
+
+func test_every_call_names_the_app_version_and_bootstrap_asks_the_release_route() -> void:
+	var pair: Array = _backend([{"status": 200, "body": "{\"api_version\": 1}"}, {"status": 200, "body": "{\"state\": {}}"}] as Array[Dictionary])
+	var backend: OnlineBackend = pair[0]
+	assert_eq(backend.client_version_code, ClientRelease.version_code())
+	var reply: Outcome = await backend.fetch_bootstrap()
+	assert_true(reply.is_ok(), reply.error)
+	assert_eq(int((reply.value as Dictionary)["api_version"]), 1)
+	assert_true((await backend.advance_story()).is_ok())
+	var sent: Array[Dictionary] = (pair[1] as ScriptedTransport).sent
+	assert_eq([sent[0]["method"], sent[0]["url"]], [HTTPClient.METHOD_GET, "https://api.example/v1/bootstrap"])
+	for request: Dictionary in sent:
+		assert_eq(_header(request, "X-Client-Version-Code"), str(ClientRelease.version_code()), request["url"])
+
+
+func test_an_outdated_build_and_maintenance_become_their_release_kinds() -> void:
+	var pair: Array = _backend([
+		{"status": 426, "body": "{\"error\": {\"code\": \"UPDATE_REQUIRED\", \"message\": \"update\"}}"},
+		{"status": 503, "body": "{\"error\": {\"code\": \"MAINTENANCE\", \"message\": \"back soon\"}}"},
+	] as Array[Dictionary])
+	assert_eq((await (pair[0] as OnlineBackend).fetch_state()).error_kind, ClientRelease.KIND_UPDATE_REQUIRED)
+	var down: Outcome = await (pair[0] as OnlineBackend).fetch_state()
+	assert_eq([down.error_kind, down.error], [ClientRelease.KIND_MAINTENANCE, "back soon"])

@@ -255,3 +255,27 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Content change: `economy_part1.json` `ration.cap` 120 → 100 and `regen_seconds_per_unit` 360 → 300 (in both
   places), with the MANIFEST sha256 updated.
 
+
+## DEC-0015 — Release contract: bootstrap, state revision, no automatic rollback
+- Status: ACCEPTED (2026-10-04, engineering; implements the owner's infrastructure roadmap
+  `docs/INFRASTRUCTURE_ROADMAP.md`, first slice INF-003/004/008/012/018).
+- Context: the client had no way to learn that the server no longer serves it (old app, other rules content,
+  maintenance); `GET /v1/state` read its tables at READ COMMITTED, so a concurrent mutation could appear half-applied;
+  a late reply or an idempotent replay could move the client's state backwards; the Android preset lacked the INTERNET
+  permission; the deployed Worker did not report which commit it runs.
+- Decision:
+  - `GET /v1/bootstrap` (unauthenticated) reports `api_version`, `snapshot_schema_version`, `min_client_version_code`
+    (Worker var `MIN_CLIENT_VERSION_CODE`), `rules_hash` (shared algorithm, test vector in both suites), `source_sha`
+    (Worker var `RELEASE_SOURCE_SHA`, set by the deploy) and `maintenance` (Worker var `MAINTENANCE_MESSAGE`). The client
+    checks it at boot (`ClientRelease`) before reading any player state. While content ships inside the app, a rules
+    hash mismatch means "update the app"; signed content patches (G5) will turn it into "download the content".
+  - Every other route answers 426 `UPDATE_REQUIRED` to an `X-Client-Version-Code` below the floor and 503
+    `MAINTENANCE` while the switch is on. Changing either is a redeploy for now (remote config is INF-035).
+  - `account.state_revision` (migration 0003, additive) grows by one in every committed mutation's transaction and is
+    in the snapshot; `schema_version` stays 1 (the field is additive). The client never adopts a lower revision.
+    `GET /v1/state` and `GET /v1/wallet` read in one `REPEATABLE READ READ ONLY` transaction.
+  - The Android versionCode lives in project setting `uomd/release/version_code`, equal to the preset's `version/code`
+    (GUT-checked); the preset has `permissions/internet=true`.
+  - The deploy passes `RELEASE_SOURCE_SHA`, verifies it through `/v1/bootstrap`, and skips an automatic deploy of a
+    commit that is an ancestor of the live one. A manual run may roll back and says so.
+- Not decided here: release IDs, presentation/content release manifests, channels, capability versions (G0/G4/G5).

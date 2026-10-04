@@ -2,7 +2,8 @@ class_name OnlineBackend
 extends GameBackend
 ## `GameBackend` over the Worker API (server/README.md, DEC-0013): JSON over HTTPS with a bearer session token. Every
 ## mutating call carries a fresh UUIDv4 `Idempotency-Key`; a call whose connection failed is retried once with the same
-## key, which the server answers with the stored result instead of acting twice.
+## key, which the server answers with the stored result instead of acting twice. Every call names the app's Android
+## versionCode (`X-Client-Version-Code`), so a server that no longer serves this build answers 426 "update_required".
 ##
 ## Errors come back as `Outcome`s: no connection -> `GameBackend.KIND_OFFLINE`, an API error -> its code in lower case
 ## ("conflict", "unauthorized", "progression", "equipment", ...) with the server's message, a reply that is not JSON ->
@@ -41,6 +42,8 @@ class HttpTransport extends Transport:
 var base_url: String = ""
 var session_token: String = ""
 var transport: Transport = HttpTransport.new()
+## Sent as `X-Client-Version-Code` (0 = not sent).
+var client_version_code: int = ClientRelease.version_code()
 
 
 func _init(server_url: String = "", token: String = "", with_transport: Transport = null) -> void:
@@ -61,6 +64,8 @@ static func new_idempotency_key() -> String:
 
 func _call(method: int, path: String, body: Variant = null, mutating: bool = false) -> Outcome:
 	var headers: PackedStringArray = PackedStringArray(["Accept: application/json", "Authorization: Bearer %s" % session_token])
+	if client_version_code > 0:
+		headers.append("X-Client-Version-Code: %d" % client_version_code)
 	var payload: String = ""
 	if body != null:
 		headers.append("Content-Type: application/json")
@@ -86,6 +91,10 @@ static func _outcome(reply: Dictionary) -> Outcome:
 		var error: Dictionary = (parsed as Dictionary)["error"]
 		return Outcome.fail(str(error.get("code", "http_error")).to_lower(), str(error.get("message", "Request failed (HTTP %d)." % status)))
 	return Outcome.fail(KIND_PROTOCOL, "Request failed (HTTP %d)." % status)
+
+
+func fetch_bootstrap() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/bootstrap")
 
 
 func fetch_state() -> Outcome:

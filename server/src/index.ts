@@ -5,6 +5,7 @@ import type { DbConnection } from "./db";
 import type { Env } from "./env";
 import { GoogleIdTokenVerifier, type IdentityVerifier } from "./identity";
 import { bannerEpoch } from "./gacha";
+import { parseReleaseConfig } from "./release";
 import { engineSimulate } from "./stages";
 
 let verifierFor: { audiences: string; verifier: IdentityVerifier | null } | null = null;
@@ -32,6 +33,7 @@ export default {
       waitUntil: (promise) => ctx.waitUntil(promise),
       simulate: engineSimulate,
       bannerEpoch: bannerEpoch(env.BANNER_EPOCH),
+      release: parseReleaseConfig(env),
     });
     return app(request);
   },

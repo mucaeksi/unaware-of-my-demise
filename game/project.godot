@@ -54,3 +54,4 @@ textures/vram_compression/import_etc2_astc=true
 [uomd]
 
 online/server_url="https://unaware-of-my-demise.muratcaneksiii.workers.dev"
+release/version_code=1
