@@ -24,7 +24,8 @@ Statuses follow the master prompt vocabulary.
 | `docs/ARCHITECTURE.md`, `docs/ADMIN_PANEL.md`, `docs/PRODUCTION_CHECKLIST.md` | starter-era docs (Fastify/VPS) | stale | — | — | NEEDS_REFACTOR |
 | `docs/engine-reference/godot/` | Godot 4.7 reference notes | current | — | — | ACTIVE |
 | `docs/INFRASTRUCTURE_AUDIT.md`, `DRIVE_LEGACY_ACCESS.md`, `CURRENT_STATE.md`, `DECISIONS.md`, `OPEN_QUESTIONS.md`, `coder/MCP.md`, this file | takeover audit outputs | new | — | — | ACTIVE |
-| `game/` | Godot client | broken starter | does not run | superseded by LEGACY Godot port | NEEDS_REWRITE |
+| `game/` | Godot client | LEGACY Godot 4.7.2 port, SQLite-free (BATCH-0002, DEC-0012) | import clean; GUT 219/219 | needs `OnlineBackend` (Worker API) to play | MIGRATED |
+| `parity/` | Python-reference parity fixtures read by `game/tests/parity` | byte-exact LEGACY (BATCH-0002), persistence fixtures excluded | parity suites pass | — | MIGRATED |
 | `narrative/` | creative staging tree | README placeholders only | — | LEGACY `narrative/` has art/audio/tools | ACTIVE (empty) |
 | `patch/manifests/manifest.json` | patch manifest | empty, unsigned | — | — | NEEDS_REFACTOR |
 | `production/session-state/`, `session-logs/` | durable session state | placeholders | — | — | ACTIVE |

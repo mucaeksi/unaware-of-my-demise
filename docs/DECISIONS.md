@@ -129,3 +129,35 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   limit. Runtime-optimized derivatives (WebP/ETC2, OGG) are what ships;
   large source masters beyond the reference set may move to R2 with a manifest
   if repository growth requires it.
+
+## DEC-0012 — Client player state: server snapshot, no local game database
+- Status: ACCEPTED (2026-10-03) — owner directive "Sqlite kullanmıyoruz".
+- Evidence: LEGACY `docs/GODOT_MIGRATION_PROMPT.md` §2.8/§5 (G4/G5) built an
+  offline client on godot-sqlite (`Save` autoload, `scripts/persistence/`,
+  `scripts/services/` over `Tx`) under "authority A" (only gacha, wallet,
+  Memory Shards and reward windows on the server). The active target
+  (CLAUDE.md "SERVER AUTHORITY") makes the server own every sensitive state
+  transition (currencies, inventory, ownership, progression, rewards).
+- Decision:
+  - Not migrated: `game/addons/godot-sqlite/`, `game/scripts/persistence/`
+    (SQLite repository, schema, save_store, Fernet, key providers),
+    `game/scripts/app/save.gd`, the mutating services
+    (`battle_reward_service`, `equipment_service`, `progression_service`,
+    `quest_service`, `reward_claims`, `story_service`, `victory_service`,
+    `tx`) and `game/tests/persistence/`. They stay in Drive as the behaviour
+    reference for the server port (same rules, same idempotency/claim model).
+  - Migrated unchanged: the pure domain (`scripts/core/**`), content packs,
+    UI, `Outcome` and `ServiceRules` (pure, content-derived rules).
+  - `GameFlow` reads a server-issued `PlayerState` snapshot and sends every
+    mutation through a `GameBackend` (implemented by the `Online` autoload
+    against the Worker API). The client never writes progression locally;
+    it only renders what the server returns.
+  - Battles still run on the client for presentation (deterministic engine,
+    63-bit seed). Reward-bearing results are decided by the server; how the
+    server validates a battle (re-simulation vs. bounded trust) is decided in
+    the backend phase and recorded as its own decision.
+  - Device-local data is limited to non-authoritative conveniences
+    (settings, auth credential via the platform keystore, content cache).
+- Not migrated for the same reason: `game/addons/uomd_native/`,
+  `game/android/plugins/uomd_native/` (Keystore save-key wrapping existed for
+  the SQLite save; Sign-In/Billing/Ads move with G6 when implemented).

@@ -1,0 +1,528 @@
+class_name GameFlow
+extends RefCounted
+## The game flow the screens drive (port of client/game_controller.py on top of DEC-0012): which `story_order` entry is due, the First Oath
+## Invitation gate, roster selection, running a stage battle and reporting its clear, and the hub's team/skill/inventory menus. The rules
+## live in the core domain; the player's state is the server's (`PlayerState`, read-only here) and every change goes through `backend`
+## (`GameBackend`) as a coroutine whose reply carries the new snapshot, adopted into `state` before the call returns.
+##
+## Threading: the battle itself runs on a `WorkerJob` and touches nothing but the objects it was handed; everything else runs on the calling
+## thread. `start_battle` reads what the battle needs from `state` first, `complete_battle` reports the result after `finish()`. While a battle
+## job runs, do not call other methods that use `rules.story` (roster checks); the battle owns its own `StoryState` and `BattleService`.
+##
+## Failures come back as an `Outcome` / `StageOutcome` with `error` and `error_kind`; nothing here raises.
+
+const CONTENT_DIR: String = "res://data/content"
+## core.story_state.resolve_battle_roster hardcodes this stage to exactly the two free starters (the guided tutorial exception).
+const TUTORIAL_STAGE_ID: String = "1-1"
+const ERROR_BATTLE: String = "battle"
+const ERROR_FLOW: String = "flow"
+## The server replied, but not with a usable player snapshot.
+const ERROR_PROTOCOL: String = "protocol"
+
+
+## One owned hero as the roster and First Oath screens list it.
+class RosterCandidate extends RefCounted:
+	var character_id: String = ""
+	var name_en: String = ""
+	var rarity: int = 0
+	var element: String = ""
+	var class_id: String = ""
+	var combat_role: String = ""
+
+
+## What one stage attempt produced: the battle and, for a first or repeat clear, what the server granted for it.
+class StageOutcome extends RefCounted:
+	var battle: BattleService.BattleResult = null
+	var applied: Array = []
+	## The story state after the clear (the current one for a defeat).
+	var story_state: StoryState.PlayerStoryState = null
+	var first_clear: bool = false
+	var error: String = ""
+	var error_kind: String = ""
+
+	func is_victory() -> bool:
+		return error.is_empty() and battle != null and battle.outcome == "victory"
+
+	func is_defeat() -> bool:
+		return error.is_empty() and battle != null and battle.outcome == "defeat"
+
+
+var registry: ContentModels.ContentRegistry = null
+var rules: ServiceRules = null
+var story_index: StoryIndex = null
+## The battle's own services (see the threading note); never used by the roster checks.
+var battle_service: BattleService = null
+## Where state changes go; the base class is the "no server" backend (every call fails `GameBackend.KIND_OFFLINE`).
+var backend: GameBackend = GameBackend.new()
+## The last snapshot the server sent (null until `sync` succeeded).
+var state: PlayerState = null
+## Why the content or the rules could not be set up ("" = ready).
+var error: String = ""
+
+
+## Loads the content packs and builds everything derived from them. Slow (the packs are parsed): call it once, off the UI thread on the
+## boot screen. Check `error` on the result.
+static func create(content_dir: String = CONTENT_DIR) -> GameFlow:
+	var flow: GameFlow = GameFlow.new()
+	var loader: ContentLoader = ContentLoader.new()
+	flow.registry = loader.load_dir(content_dir)
+	if flow.registry == null:
+		flow.error = "content load failed: %s" % loader.error
+		return flow
+	flow.rules = ServiceRules.create(flow.registry, content_dir)
+	if not flow.rules.error.is_empty():
+		flow.error = "service rules failed: %s" % flow.rules.error
+		return flow
+	var battle_story: StoryState = StoryState.new(flow.registry, StoryState.load_manifest(content_dir))
+	flow.battle_service = BattleService.create(flow.registry, battle_story)
+	if not flow.battle_service.error.is_empty():
+		flow.error = "battle service setup failed: %s" % flow.battle_service.error
+		return flow
+	flow.story_index = StoryIndex.load_dir(content_dir)
+	if not flow.story_index.load_error.is_empty():
+		flow.error = "story script failed: %s" % flow.story_index.load_error
+	return flow
+
+
+func is_ready() -> bool:
+	return error.is_empty()
+
+
+## True once a snapshot is held.
+func has_state() -> bool:
+	return state != null
+
+
+## Fetches the player's snapshot from the server (coroutine).
+func sync() -> Outcome:
+	return _adopt(await backend.fetch_state())
+
+
+## Takes the snapshot out of a backend reply (`value["state"]`) into `state`; a failed reply passes through and keeps the old state.
+func _adopt(reply: Outcome) -> Outcome:
+	if not reply.is_ok():
+		return reply
+	var value: Variant = reply.value
+	if not (value is Dictionary) or not (value as Dictionary).has("state"):
+		return Outcome.fail(ERROR_PROTOCOL, "the server reply carries no player state")
+	var next: PlayerState = PlayerState.from_snapshot((value as Dictionary)["state"], rules.story)
+	if not next.is_valid():
+		return Outcome.fail(ERROR_PROTOCOL, next.error)
+	state = next
+	return reply
+
+
+# -- the story cursor ---------------------------------------------------------------------------------
+
+
+## The next `story_order` entry to present, "" when the story is over.
+func current_entry() -> String:
+	var cursor: int = state.story_state.story_cursor
+	return story_index.story_order[cursor] if cursor < story_index.story_order.size() else ""
+
+
+func is_finished() -> bool:
+	return current_entry().is_empty()
+
+
+func is_stage(entry_id: String) -> bool:
+	return story_index.is_stage_entry(entry_id)
+
+
+func stage(stage_id: String) -> ContentModels.Stage:
+	return registry.stages.get(stage_id)
+
+
+## Moves past the current (non-stage) entry (coroutine).
+func advance() -> Outcome:
+	return _adopt(await backend.advance_story())
+
+
+## True while the First Oath Invitation must be resolved before any further entry is presented (a one-time gate, not tied to a cursor index).
+func needs_first_oath_selection() -> bool:
+	return state.story_state.first_oath_invitation_available
+
+
+## Every hero the invitation can grant, in the manifest's authored order.
+func first_oath_choices() -> Array[RosterCandidate]:
+	var candidates: Array[RosterCandidate] = []
+	for character_id: String in rules.story.first_oath_choices():
+		var candidate: RosterCandidate = _candidate(character_id)
+		if candidate != null:
+			candidates.append(candidate)
+	return candidates
+
+
+## Coroutine.
+func claim_first_oath(character_id: String) -> Outcome:
+	return _adopt(await backend.claim_first_oath(character_id))
+
+
+# -- roster selection ---------------------------------------------------------------------------------
+
+
+func party_size() -> int:
+	var party: Variant = registry.battle_rules.get("party", {})
+	return int((party as Dictionary).get("size", 5)) if party is Dictionary else 5
+
+
+## The deterministic default party: the roster screen's pre-ticked selection (an empty list at the tutorial, where the party is fixed).
+func auto_roster(stage_id: String) -> Array[String]:
+	var picked: Array[String] = []
+	if stage_id == TUTORIAL_STAGE_ID:
+		return picked
+	var owned: Array[String] = _owned_ids()
+	for index: int in range(mini(party_size(), owned.size())):
+		picked.append(owned[index])
+	return picked
+
+
+## False only for the guided two-hero tutorial.
+func needs_roster_selection(stage_id: String) -> bool:
+	return stage_id != TUTORIAL_STAGE_ID
+
+
+## Every owned hero by id. Not filtered against the stage's guests: an owned guest can still be picked, then the player's own copy is used.
+func roster_candidates() -> Array[RosterCandidate]:
+	var candidates: Array[RosterCandidate] = []
+	for character_id: String in _owned_ids():
+		var candidate: RosterCandidate = _candidate(character_id)
+		if candidate != null:
+			candidates.append(candidate)
+	return candidates
+
+
+## The story guests the stage fills in (informational; a selection never has to include them).
+func guest_display_names(stage_id: String) -> Array[String]:
+	var names: Array[String] = []
+	var target: ContentModels.Stage = stage(stage_id)
+	if target == null:
+		return names
+	for character_id: String in target.guest_characters:
+		if registry.characters.has(character_id):
+			names.append(registry.characters[character_id].name_en)
+	return names
+
+
+## "" when `selected` is playable, else the reason. Asks the same rule the battle uses, so the two cannot drift apart.
+func validate_roster_selection(stage_id: String, selected: Array) -> String:
+	var target: ContentModels.Stage = stage(stage_id)
+	if target == null:
+		return "Unknown stage_id '%s'" % stage_id
+	rules.story.resolve_battle_roster(state.story_state, target, selected)
+	return rules.story.error
+
+
+func _owned_ids() -> Array[String]:
+	var ids: Array[String] = []
+	for character_id: String in state.story_state.owned_character_ids:
+		ids.append(character_id)
+	ids.sort()
+	return ids
+
+
+func _candidate(character_id: String) -> RosterCandidate:
+	var character: ContentModels.Character = registry.characters.get(character_id)
+	if character == null:
+		return null
+	var candidate: RosterCandidate = RosterCandidate.new()
+	candidate.character_id = character.character_id
+	candidate.name_en = character.name_en
+	candidate.rarity = character.rarity
+	candidate.element = character.element
+	candidate.class_id = character.class_id
+	candidate.combat_role = character.combat_role
+	return candidate
+
+
+# -- battles ------------------------------------------------------------------------------------------
+
+
+## A fresh, unpredictable battle seed (non-negative, 63-bit): retries are genuinely different fights; the seed used is on the result.
+static func new_run_seed() -> int:
+	return Crypto.new().generate_random_bytes(8).decode_s64(0) & 0x7fffffffffffffff
+
+
+## What `BattleService.run` needs from the snapshot: levels, equipped gear, skill ranks and Memory Nodes of the OWNED heroes only (a
+## story-loan guest keeps its authored kit and stage level), plus the story state.
+func battle_options(run_seed: int) -> Dictionary:
+	var owned: Dictionary = state.story_state.owned_character_ids
+	var levels: Dictionary = {}
+	var ranks: Dictionary = {}
+	var nodes: Dictionary = {}
+	for character_id: String in state.roster_ids():
+		if not owned.has(character_id):
+			continue
+		if state.level(character_id) > 1:
+			levels[character_id] = state.level(character_id)
+		var skill_ranks: Dictionary = state.skill_ranks(character_id)
+		if not skill_ranks.is_empty():
+			ranks[character_id] = skill_ranks
+		var unlocked: int = state.memory(character_id)[1]
+		if unlocked > 0:
+			nodes[character_id] = unlocked
+	# An unequipped weapon is passed as an explicit `weapon_id: null` (the engine's default for a missing key is the signature weapon).
+	var loadouts: Dictionary = {}
+	for table: String in PlayerState.EQUIPMENT_TABLES:
+		for record: Dictionary in state.instances(table):
+			var character_id: Variant = record["equipped_character_id"]
+			if character_id == null or not owned.has(character_id):
+				continue
+			if not loadouts.has(character_id):
+				loadouts[character_id] = {"weapon_id": null, "armor_id": null, "accessory_ids": [], "rolled_accessories": []}
+			var loadout: Dictionary = loadouts[character_id]
+			if table == "inventory_weapons":
+				loadout["weapon_id"] = record["template_id"]
+				loadout["weapon_level"] = int(record["level"])
+			elif table == "inventory_armor":
+				loadout["armor_id"] = record["template_id"]
+				loadout["armor_level"] = int(record["level"])
+			else:
+				(loadout["accessory_ids"] as Array).append(record["template_id"])
+				(loadout["rolled_accessories"] as Array).append(record["payload"] if record["payload"] != null else {})
+	return {
+		"story_state": state.story_state,
+		"player_levels": levels,
+		"equipment": loadouts,
+		"skill_ranks": ranks,
+		"memory_nodes": nodes,
+		"run_seed": run_seed,
+	}
+
+
+## Starts the battle of `stage_id` on a worker thread. `roster` null = the default party (`auto_roster`); `run_seed` < 0 = a fresh seed.
+## The main thread polls `WorkerJob.is_finished()`, then hands `finish()` and the same `roster` to `complete_battle`.
+func start_battle(stage_id: String, roster: Variant = null, run_seed: int = -1) -> WorkerJob:
+	var chosen: Array = auto_roster(stage_id) if roster == null else (roster as Array).duplicate()
+	var options: Dictionary = battle_options(new_run_seed() if run_seed < 0 else run_seed)
+	var service: BattleService = battle_service
+	return WorkerJob.start(func() -> Variant: return service.run(stage_id, chosen, options))
+
+
+## Reports a finished battle (coroutine). A victory goes to the server, which decides what it is worth and replies with the new snapshot;
+## `state` moves only then. A defeat reports nothing.
+func complete_battle(result: BattleService.BattleResult, roster: Variant = null) -> StageOutcome:
+	var outcome: StageOutcome = StageOutcome.new()
+	outcome.battle = result
+	outcome.story_state = state.story_state
+	if not result.error.is_empty():
+		outcome.error = result.error
+		outcome.error_kind = ERROR_BATTLE
+		return outcome
+	if result.outcome != "victory":
+		return outcome
+	if stage(result.stage_id) == null:
+		outcome.error = "Unknown stage_id '%s'" % result.stage_id
+		outcome.error_kind = ERROR_FLOW
+		return outcome
+	var chosen: Array = auto_roster(result.stage_id) if roster == null else (roster as Array).duplicate()
+	var client_result: Dictionary = {"outcome": result.outcome, "stars": result.stars, "actions": result.actions, "cycles": result.cycles}
+	var reported: Outcome = _adopt(await backend.submit_victory(result.stage_id, chosen, result.run_seed, client_result))
+	if not reported.is_ok():
+		outcome.error = reported.error
+		outcome.error_kind = reported.error_kind
+		return outcome
+	var value: Dictionary = reported.value
+	outcome.applied = value.get("applied", []) if value.get("applied") is Array else []
+	outcome.story_state = state.story_state
+	outcome.first_clear = bool(value.get("first_clear", false))
+	return outcome
+
+
+## Runs and reports one attempt, waiting for the worker (headless tests, tools; coroutine). Screens use `start_battle` and poll.
+func run_stage(stage_id: String, roster: Variant = null, run_seed: int = -1) -> StageOutcome:
+	var job: WorkerJob = start_battle(stage_id, roster, run_seed)
+	var result: BattleService.BattleResult = job.finish() as BattleService.BattleResult
+	return await complete_battle(result, roster)
+
+
+# -- team, skills and inventory (the hub's menus) -----------------------------------------------------
+
+
+func wallet() -> Dictionary:
+	return state.wallet()
+
+
+func item_name(item_id: String) -> String:
+	var item: ContentModels.Item = registry.items.get(item_id)
+	return item.name_en if item != null else item_id
+
+
+## Every owned hero with level, XP, ascension and Memory Node state, by id.
+func team() -> Array[GameViews.TeamMember]:
+	var members: Array[GameViews.TeamMember] = []
+	var total_nodes: int = rules.progression.memory_nodes().size()
+	for character_id: String in _owned_ids():
+		var character: ContentModels.Character = registry.characters.get(character_id)
+		if character == null:
+			continue
+		var info: Dictionary = state.progress(character_id)
+		var memory: Array[int] = state.memory(character_id)
+		var member: GameViews.TeamMember = GameViews.TeamMember.new()
+		member.character_id = character_id
+		member.name_en = character.name_en
+		member.rarity = character.rarity
+		member.level = info["level"]
+		member.xp = info["xp"]
+		member.xp_to_next = info["xp_to_next"]
+		member.ascension = info["ascension"]
+		member.level_cap = info["level_cap"]
+		member.next_level_silver_crowns = info["level_up_silver_crowns"]
+		member.memory_shards = memory[0]
+		member.memory_nodes = memory[1]
+		member.memory_total = total_nodes
+		members.append(member)
+	return members
+
+
+## The character XP items with what each is worth and how many the player has.
+func xp_items() -> Array[GameViews.XpItem]:
+	var items: Array[GameViews.XpItem] = []
+	for item_id: String in rules.character_xp:
+		var row: GameViews.XpItem = GameViews.XpItem.new()
+		row.item_id = item_id
+		row.name_en = item_name(item_id)
+		row.xp_each = int(rules.character_xp[item_id])
+		row.owned = state.item_quantity(item_id)
+		items.append(row)
+	return items
+
+
+## Spends one `item_id` on `character_id` (as many levels as that pays for; coroutine). `value` on success: the server's level-up result.
+func level_up(character_id: String, item_id: String) -> Outcome:
+	return _adopt(await backend.level_up(character_id, {item_id: 1}))
+
+
+## The hero's skills with rank and the next upgrade's cost.
+func skill_rows(character_id: String) -> Array[GameViews.SkillRow]:
+	var rows: Array[GameViews.SkillRow] = []
+	var character: ContentModels.Character = registry.characters.get(character_id)
+	if character == null:
+		return rows
+	for skill: ContentModels.Skill in character.skills:
+		var row: GameViews.SkillRow = GameViews.SkillRow.new()
+		row.skill_id = skill.skill_id
+		row.name_en = skill.name_en
+		row.type = skill.type
+		row.rank = state.skill_rank(character_id, skill.skill_id)
+		row.max_rank = rules.progression.skill_max_rank(skill.type)
+		var need: Progression.SkillUpgradeRequirement = rules.progression.skill_upgrade_requirement(skill.type, row.rank)
+		if need != null:
+			row.has_next = true
+			row.next_level = need.required_character_level
+			row.next_silver_crowns = need.silver_crowns
+			row.next_item_id = need.item_id
+			row.next_item_name = item_name(need.item_id) if not need.item_id.is_empty() else ""
+			row.next_item_quantity = need.item_quantity
+		rows.append(row)
+	return rows
+
+
+## Coroutine.
+func upgrade_skill(character_id: String, skill_id: String) -> Outcome:
+	return _adopt(await backend.upgrade_skill(character_id, skill_id))
+
+
+## Memory Shards belong to the server (economy authority A); coroutine.
+func unlock_memory_node(character_id: String) -> Outcome:
+	return _adopt(await backend.unlock_memory_node(character_id))
+
+
+## Every owned equipment instance, weapons then armor then accessories, each in acquisition order.
+func inventory() -> Array[GameViews.InventoryEntry]:
+	var entries: Array[GameViews.InventoryEntry] = []
+	for table: String in PlayerState.EQUIPMENT_TABLES:
+		for record: Dictionary in state.instances(table):
+			var entry: GameViews.InventoryEntry = _inventory_entry(table, record)
+			if entry != null:
+				entries.append(entry)
+	return entries
+
+
+func _inventory_entry(table: String, record: Dictionary) -> GameViews.InventoryEntry:
+	var entry: GameViews.InventoryEntry = GameViews.InventoryEntry.new()
+	entry.table = table
+	entry.instance_id = str(record["instance_id"])
+	entry.template_id = str(record["template_id"])
+	entry.locked = bool(record["locked"])
+	var owner: Variant = record["equipped_character_id"]
+	if owner != null:
+		entry.equipped_character_id = str(owner)
+		var owner_character: ContentModels.Character = registry.characters.get(entry.equipped_character_id)
+		entry.equipped_character_name = owner_character.name_en if owner_character != null else entry.equipped_character_id
+	var parts: PackedStringArray = PackedStringArray()
+	match table:
+		"inventory_weapons":
+			var weapon: ContentModels.Weapon = registry.weapons.get(entry.template_id)
+			if weapon == null:
+				return null
+			entry.name_en = weapon.name_en
+			entry.kind = "weapon"
+			entry.rarity = weapon.rarity
+			entry.level = int(record["level"])
+			entry.slot = "weapon"
+			for stat: String in weapon.base_stats_level_1:
+				if not (weapon.base_stats_level_1[stat] is String):
+					parts.append("%s %s" % [stat, GameViews.number_text(weapon.base_stats_level_1[stat])])
+			entry.can_dismantle = weapon.dismantle_allowed and entry.equipped_character_id.is_empty() and not entry.locked
+			entry.can_level_up = entry.level < weapon.level_cap
+		"inventory_armor":
+			var armor: ContentModels.Armor = registry.armors.get(entry.template_id)
+			if armor == null:
+				return null
+			entry.name_en = armor.name_en
+			entry.kind = "armor"
+			entry.rarity = armor.rarity
+			entry.level = int(record["level"])
+			entry.slot = "armor"
+			for stat: String in armor.base_stats_level_1:
+				parts.append("%s %s" % [stat, GameViews.number_text(armor.base_stats_level_1[stat])])
+			entry.can_level_up = entry.level < armor.level_cap
+		_:
+			var template: ContentModels.AccessoryTemplate = registry.accessories.get(entry.template_id)
+			if template == null:
+				return null
+			entry.name_en = template.name_en
+			entry.kind = "accessory"
+			entry.rarity = template.rarity
+			entry.slot = str(record["equip_slot"])
+			var payload: Dictionary = record["payload"] if record["payload"] is Dictionary else {}
+			var stat_rows: Array = []
+			if payload.get("main_stat") is Dictionary:
+				stat_rows.append(payload["main_stat"])
+			if payload.get("sub_stats") is Array:
+				stat_rows.append_array(payload["sub_stats"])
+			for row: Variant in stat_rows:
+				if row is Dictionary:
+					parts.append("%s %s" % [str((row as Dictionary).get("stat_id")), GameViews.number_text((row as Dictionary).get("value"))])
+			entry.can_reroll = bool(payload.get("is_rerollable", false)) and not entry.locked
+	entry.stats_text = ", ".join(parts)
+	return entry
+
+
+# Every equipment change below is a coroutine answered with the new snapshot.
+
+
+func equip(table: String, instance_id: String, character_id: String) -> Outcome:
+	return _adopt(await backend.equip(table, instance_id, character_id))
+
+
+func unequip(table: String, instance_id: String) -> Outcome:
+	return _adopt(await backend.unequip(table, instance_id))
+
+
+func set_locked(table: String, instance_id: String, locked: bool) -> Outcome:
+	return _adopt(await backend.set_locked(table, instance_id, locked))
+
+
+func dismantle_weapon(instance_id: String) -> Outcome:
+	return _adopt(await backend.dismantle_weapon(instance_id))
+
+
+## One level of a weapon or armor (Weapon Tempering XP, Silver Crowns, Rivets on milestones).
+func level_up_equipment(table: String, instance_id: String) -> Outcome:
+	return _adopt(await backend.level_up_equipment(table, instance_id))
+
+
+func reroll_accessory(instance_id: String) -> Outcome:
+	return _adopt(await backend.reroll_accessory(instance_id))

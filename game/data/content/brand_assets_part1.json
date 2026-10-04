@@ -1,0 +1,5110 @@
+{
+  "schema_version": 1,
+  "pack_id": "part1_brand_assets",
+  "orientation": "portrait_game_1080x1920",
+  "coverage_rule": "Every named gameplay entity shown in UI, combat, rewards or social profile must resolve to a stable logo_id or explicitly inherit a shared mark.",
+  "mark_spec": {
+    "master_px": [
+      512,
+      512
+    ],
+    "runtime_px": [
+      128,
+      128
+    ],
+    "compact_px": [
+      64,
+      64
+    ],
+    "micro_px": [
+      32,
+      32
+    ],
+    "format_master": "SVG with 512x512 viewBox",
+    "transparent_background": true,
+    "status_values": [
+      "brief",
+      "prompt_ready",
+      "generated",
+      "reviewed",
+      "approved",
+      "in_game",
+      "revised",
+      "retired"
+    ]
+  },
+  "game_identity": [
+    {
+      "entity_id": "game_title",
+      "display_name": "Unaware of My Demise",
+      "logo_id": "mark_game_wordmark",
+      "file": "assets/marks/game/mark_game_wordmark_v001.svg",
+      "source_px": [
+        1600,
+        600
+      ],
+      "runtime_px": [
+        800,
+        300
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "app_icon",
+      "display_name": "Unaware of My Demise App Icon",
+      "logo_id": "mark_game_app_icon",
+      "file": "assets/marks/game/mark_game_app_icon_v001.png",
+      "source_px": [
+        1024,
+        1024
+      ],
+      "runtime_px": [
+        512,
+        512
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "adaptive_app_icon",
+      "display_name": "Android Adaptive App Icon",
+      "logo_id": "mark_game_adaptive_icon",
+      "file": "assets/marks/game/mark_game_adaptive_icon_v001/",
+      "source_px_dp": [
+        108,
+        108
+      ],
+      "safe_area_dp": [
+        66,
+        66
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "play_feature_graphic",
+      "display_name": "Google Play Feature Graphic",
+      "logo_id": "mark_game_store_feature",
+      "file": "assets/marks/game/mark_game_store_feature_v001.png",
+      "source_px": [
+        1024,
+        500
+      ],
+      "runtime_px": [
+        1024,
+        500
+      ],
+      "status": "brief",
+      "note": "External store requirement; not an in-game landscape screen."
+    }
+  ],
+  "characters": [
+    {
+      "entity_id": "mahmut",
+      "display_name": "Mahmut",
+      "logo_id": "mark_character_mahmut",
+      "file": "assets/marks/characters/mark_character_mahmut_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "fadyme",
+      "display_name": "Fadyme",
+      "logo_id": "mark_character_fadyme",
+      "file": "assets/marks/characters/mark_character_fadyme_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "kera_voss",
+      "display_name": "Kera Voss",
+      "logo_id": "mark_character_kera_voss",
+      "file": "assets/marks/characters/mark_character_kera_voss_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "brin_alder",
+      "display_name": "Brin Alder",
+      "logo_id": "mark_character_brin_alder",
+      "file": "assets/marks/characters/mark_character_brin_alder_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "nixie_vale",
+      "display_name": "Nixie Vale",
+      "logo_id": "mark_character_nixie_vale",
+      "file": "assets/marks/characters/mark_character_nixie_vale_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "sister_aveline",
+      "display_name": "Sister Aveline",
+      "logo_id": "mark_character_sister_aveline",
+      "file": "assets/marks/characters/mark_character_sister_aveline_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "sable_wren",
+      "display_name": "Sable Wren",
+      "logo_id": "mark_character_sable_wren",
+      "file": "assets/marks/characters/mark_character_sable_wren_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "tilda_fen",
+      "display_name": "Tilda Fen",
+      "logo_id": "mark_character_tilda_fen",
+      "file": "assets/marks/characters/mark_character_tilda_fen_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "rikka_ember",
+      "display_name": "Rikka Ember",
+      "logo_id": "mark_character_rikka_ember",
+      "file": "assets/marks/characters/mark_character_rikka_ember_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "mirel_quill",
+      "display_name": "Mirel Quill",
+      "logo_id": "mark_character_mirel_quill",
+      "file": "assets/marks/characters/mark_character_mirel_quill_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "odelia_pike",
+      "display_name": "Odelia Pike",
+      "logo_id": "mark_character_odelia_pike",
+      "file": "assets/marks/characters/mark_character_odelia_pike_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "pippa_bell",
+      "display_name": "Pippa Bell",
+      "logo_id": "mark_character_pippa_bell",
+      "file": "assets/marks/characters/mark_character_pippa_bell_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "nara_vell",
+      "display_name": "Nara Vell",
+      "logo_id": "mark_character_nara_vell",
+      "file": "assets/marks/characters/mark_character_nara_vell_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "clem_marr",
+      "display_name": "Clem Marr",
+      "logo_id": "mark_character_clem_marr",
+      "file": "assets/marks/characters/mark_character_clem_marr_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "vespera_wisp",
+      "display_name": "Vespera Wisp",
+      "logo_id": "mark_character_vespera_wisp",
+      "file": "assets/marks/characters/mark_character_vespera_wisp_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "hana_birch",
+      "display_name": "Hana Birch",
+      "logo_id": "mark_character_hana_birch",
+      "file": "assets/marks/characters/mark_character_hana_birch_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "thistle_roe",
+      "display_name": "Thistle Roe",
+      "logo_id": "mark_character_thistle_roe",
+      "file": "assets/marks/characters/mark_character_thistle_roe_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "iona_mist",
+      "display_name": "Iona Mist",
+      "logo_id": "mark_character_iona_mist",
+      "file": "assets/marks/characters/mark_character_iona_mist_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "jori_flint",
+      "display_name": "Jori Flint",
+      "logo_id": "mark_character_jori_flint",
+      "file": "assets/marks/characters/mark_character_jori_flint_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "marek_vane",
+      "display_name": "Marek Vane",
+      "logo_id": "mark_character_marek_vane",
+      "file": "assets/marks/characters/mark_character_marek_vane_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    }
+  ],
+  "weapons": [
+    {
+      "entity_id": "weapon_mahmut_signature",
+      "display_name": "long arming sword and heater shield",
+      "owner_character_id": "mahmut",
+      "logo_id": "mark_weapon_mahmut_signature",
+      "file": "assets/marks/weapons/mark_weapon_mahmut_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_fadyme_signature",
+      "display_name": "silver bell focus",
+      "owner_character_id": "fadyme",
+      "logo_id": "mark_weapon_fadyme_signature",
+      "file": "assets/marks/weapons/mark_weapon_fadyme_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_kera_voss_signature",
+      "display_name": "brass hand mortar and alchemy flasks",
+      "owner_character_id": "kera_voss",
+      "logo_id": "mark_weapon_kera_voss_signature",
+      "file": "assets/marks/weapons/mark_weapon_kera_voss_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_brin_alder_signature",
+      "display_name": "hand axe and small tower buckler",
+      "owner_character_id": "brin_alder",
+      "logo_id": "mark_weapon_brin_alder_signature",
+      "file": "assets/marks/weapons/mark_weapon_brin_alder_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_nixie_vale_signature",
+      "display_name": "shortbow and three-part quiver",
+      "owner_character_id": "nixie_vale",
+      "logo_id": "mark_weapon_nixie_vale_signature",
+      "file": "assets/marks/weapons/mark_weapon_nixie_vale_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_aveline_last_vigil",
+      "display_name": "reliquary staff and sun-disc",
+      "owner_character_id": "sister_aveline",
+      "logo_id": "mark_weapon_aveline_last_vigil",
+      "file": "assets/marks/weapons/mark_weapon_aveline_last_vigil_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_sable_broken_bell",
+      "display_name": "narrow twin blades and message tube",
+      "owner_character_id": "sable_wren",
+      "logo_id": "mark_weapon_sable_broken_bell",
+      "file": "assets/marks/weapons/mark_weapon_sable_broken_bell_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_tilda_fen_signature",
+      "display_name": "short staff and herb box",
+      "owner_character_id": "tilda_fen",
+      "logo_id": "mark_weapon_tilda_fen_signature",
+      "file": "assets/marks/weapons/mark_weapon_tilda_fen_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_rikka_ember_signature",
+      "display_name": "forge hammer",
+      "owner_character_id": "rikka_ember",
+      "logo_id": "mark_weapon_rikka_ember_signature",
+      "file": "assets/marks/weapons/mark_weapon_rikka_ember_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_mirel_unwritten_ledger",
+      "display_name": "brass astrolabe folio and stylus dagger",
+      "owner_character_id": "mirel_quill",
+      "logo_id": "mark_weapon_mirel_unwritten_ledger",
+      "file": "assets/marks/weapons/mark_weapon_mirel_unwritten_ledger_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_odelia_pike_signature",
+      "display_name": "long hunting bow with fishbone fletching",
+      "owner_character_id": "odelia_pike",
+      "logo_id": "mark_weapon_odelia_pike_signature",
+      "file": "assets/marks/weapons/mark_weapon_odelia_pike_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_pippa_bell_signature",
+      "display_name": "lute, sling and bell chimes",
+      "owner_character_id": "pippa_bell",
+      "logo_id": "mark_weapon_pippa_bell_signature",
+      "file": "assets/marks/weapons/mark_weapon_pippa_bell_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_nara_gatewarden_promise",
+      "display_name": "long glaive and compact kite shield",
+      "owner_character_id": "nara_vell",
+      "logo_id": "mark_weapon_nara_gatewarden_promise",
+      "file": "assets/marks/weapons/mark_weapon_nara_gatewarden_promise_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_clem_marr_signature",
+      "display_name": "bone-handled lantern and short ritual knife",
+      "owner_character_id": "clem_marr",
+      "logo_id": "mark_weapon_clem_marr_signature",
+      "file": "assets/marks/weapons/mark_weapon_clem_marr_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_vespera_last_hour",
+      "display_name": "floating glass lantern and focus ring",
+      "owner_character_id": "vespera_wisp",
+      "logo_id": "mark_weapon_vespera_last_hour",
+      "file": "assets/marks/weapons/mark_weapon_vespera_last_hour_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_hana_birch_signature",
+      "display_name": "short staff made from a recurve bow",
+      "owner_character_id": "hana_birch",
+      "logo_id": "mark_weapon_hana_birch_signature",
+      "file": "assets/marks/weapons/mark_weapon_hana_birch_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_thistle_roe_signature",
+      "display_name": "thornwood crook with seed charms",
+      "owner_character_id": "thistle_roe",
+      "logo_id": "mark_weapon_thistle_roe_signature",
+      "file": "assets/marks/weapons/mark_weapon_thistle_roe_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_iona_mist_signature",
+      "display_name": "tidal censer and glass ampoule",
+      "owner_character_id": "iona_mist",
+      "logo_id": "mark_weapon_iona_mist_signature",
+      "file": "assets/marks/weapons/mark_weapon_iona_mist_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_jori_flint_signature",
+      "display_name": "compact forge shield and blunt hammer",
+      "owner_character_id": "jori_flint",
+      "logo_id": "mark_weapon_jori_flint_signature",
+      "file": "assets/marks/weapons/mark_weapon_jori_flint_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_marek_vane_signature",
+      "display_name": "short spear, signal horn and banner pennant",
+      "owner_character_id": "marek_vane",
+      "logo_id": "mark_weapon_marek_vane_signature",
+      "file": "assets/marks/weapons/mark_weapon_marek_vane_signature_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "status": "brief"
+    }
+  ],
+  "currencies": [
+    {
+      "entity_id": "eclipse_token",
+      "display_name": "Eclipse Token",
+      "logo_id": "mark_currencies_eclipse_token",
+      "file": "assets/marks/currencies/mark_currencies_eclipse_token_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "eclipsed sun coin",
+      "status": "brief"
+    },
+    {
+      "entity_id": "fates_thread",
+      "display_name": "Fate's Thread",
+      "logo_id": "mark_currencies_fates_thread",
+      "file": "assets/marks/currencies/mark_currencies_fates_thread_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "knotted silver thread",
+      "status": "brief"
+    },
+    {
+      "entity_id": "silver_crowns",
+      "display_name": "Silver Crowns",
+      "logo_id": "mark_currencies_silver_crowns",
+      "file": "assets/marks/currencies/mark_currencies_silver_crowns_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "three stacked crown coins",
+      "status": "brief"
+    },
+    {
+      "entity_id": "ration",
+      "display_name": "Ration",
+      "logo_id": "mark_currencies_ration",
+      "file": "assets/marks/currencies/mark_currencies_ration_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "bread loaf and travel flask",
+      "status": "brief"
+    },
+    {
+      "entity_id": "focus",
+      "display_name": "Focus",
+      "logo_id": "mark_currencies_focus",
+      "file": "assets/marks/currencies/mark_currencies_focus_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "small filled lantern eye",
+      "status": "brief"
+    }
+  ],
+  "progression_items": [
+    {
+      "entity_id": "first_oath_invitation",
+      "display_name": "First Oath Invitation",
+      "logo_id": "mark_items_first_oath_invitation",
+      "file": "assets/marks/items/mark_items_first_oath_invitation_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "sealed parchment with a five-point party crest and one open choice ribbon; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "torn_chronicle_page",
+      "display_name": "Torn Chronicle Page",
+      "logo_id": "mark_items_torn_chronicle_page",
+      "file": "assets/marks/items/mark_items_torn_chronicle_page_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for XP material; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "bound_chronicle",
+      "display_name": "Bound Chronicle",
+      "logo_id": "mark_items_bound_chronicle",
+      "file": "assets/marks/items/mark_items_bound_chronicle_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for XP material; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "illuminated_chronicle",
+      "display_name": "Illuminated Chronicle",
+      "logo_id": "mark_items_illuminated_chronicle",
+      "file": "assets/marks/items/mark_items_illuminated_chronicle_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for XP material; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "iron_oath_seal",
+      "display_name": "Iron Oath Seal",
+      "logo_id": "mark_items_iron_oath_seal",
+      "file": "assets/marks/items/mark_items_iron_oath_seal_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for ascension material; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "alchemy_core",
+      "display_name": "Alchemy Core",
+      "logo_id": "mark_items_alchemy_core",
+      "file": "assets/marks/items/mark_items_alchemy_core_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for ascension material; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "bellglass_shard",
+      "display_name": "Bellglass Shard",
+      "logo_id": "mark_items_bellglass_shard",
+      "file": "assets/marks/items/mark_items_bellglass_shard_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for ascension material; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "blacksmith_rivet",
+      "display_name": "Blacksmith Rivet",
+      "logo_id": "mark_items_blacksmith_rivet",
+      "file": "assets/marks/items/mark_items_blacksmith_rivet_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for equipment enhancement; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "forge_dust",
+      "display_name": "Forge Dust",
+      "logo_id": "mark_items_forge_dust",
+      "file": "assets/marks/items/mark_items_forge_dust_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for equipment enhancement; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "tactical_notes",
+      "display_name": "Tactical Notes",
+      "logo_id": "mark_items_tactical_notes",
+      "file": "assets/marks/items/mark_items_tactical_notes_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for skill material; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "hymn_leaves",
+      "display_name": "Hymn Leaves",
+      "logo_id": "mark_items_hymn_leaves",
+      "file": "assets/marks/items/mark_items_hymn_leaves_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for skill material; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "memory_shard",
+      "display_name": "Memory Shard",
+      "logo_id": "mark_items_memory_shard",
+      "file": "assets/marks/items/mark_items_memory_shard_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for duplicate conversion; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "universal_memory_shard",
+      "display_name": "Universal Memory Shard",
+      "logo_id": "mark_items_universal_memory_shard",
+      "file": "assets/marks/items/mark_items_universal_memory_shard_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for duplicate progression; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "reliquary_medal",
+      "display_name": "Reliquary Medal",
+      "logo_id": "mark_items_reliquary_medal",
+      "file": "assets/marks/items/mark_items_reliquary_medal_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for boss/event reward; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "t3_charm_blueprint",
+      "display_name": "T3 Accessory Blueprint",
+      "logo_id": "mark_items_t3_charm_blueprint",
+      "file": "assets/marks/items/mark_items_t3_charm_blueprint_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for crafting blueprint; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "sun_eclipse_token",
+      "display_name": "Sun-Eclipse Event Token",
+      "logo_id": "mark_items_sun_eclipse_token",
+      "file": "assets/marks/items/mark_items_sun_eclipse_token_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "clear silhouette for event crafting token; same border family, unique inner emblem",
+      "status": "brief"
+    },
+    {
+      "entity_id": "unwritten_hour_cinder",
+      "display_name": "Cinder of the Unwritten Hour",
+      "logo_id": "mark_items_unwritten_hour_cinder",
+      "file": "assets/marks/items/mark_items_unwritten_hour_cinder_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A dark glass ember with a single clock-hand shaped ash curl; no lettering.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_tempering_xp",
+      "display_name": "Weapon Tempering XP",
+      "logo_id": "mark_items_weapon_tempering_xp",
+      "file": "assets/marks/items/mark_items_weapon_tempering_xp_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A small glowing rivet fragment inside an anvil-shaped outline; no lettering.",
+      "status": "brief"
+    }
+  ],
+  "chapters": [
+    {
+      "entity_id": "forest_whispering_ash",
+      "display_name": "Whispering Ash Forest",
+      "logo_id": "mark_chapter_01",
+      "file": "assets/marks/chapters/mark_chapter_01_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "ash leaf and cracked bell",
+      "status": "brief"
+    },
+    {
+      "entity_id": "cathedral_saint_luthos",
+      "display_name": "Ruined Cathedral of Saint Luthos",
+      "logo_id": "mark_chapter_02",
+      "file": "assets/marks/chapters/mark_chapter_02_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "broken rose window",
+      "status": "brief"
+    },
+    {
+      "entity_id": "village_oakhaven",
+      "display_name": "Oakhaven, the Red Harvest",
+      "logo_id": "mark_chapter_03",
+      "file": "assets/marks/chapters/mark_chapter_03_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "well and red harvest sheaf",
+      "status": "brief"
+    },
+    {
+      "entity_id": "undercity_subterranean",
+      "display_name": "The Subterranean Undercity",
+      "logo_id": "mark_chapter_04",
+      "file": "assets/marks/chapters/mark_chapter_04_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "cistern arch and mushroom lantern",
+      "status": "brief"
+    },
+    {
+      "entity_id": "bridge_forsaken",
+      "display_name": "The Bridge of the Forsaken",
+      "logo_id": "mark_chapter_05",
+      "file": "assets/marks/chapters/mark_chapter_05_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "broken bridge span",
+      "status": "brief"
+    },
+    {
+      "entity_id": "estate_ashen_lord",
+      "display_name": "The Ashen Lord's Estate",
+      "logo_id": "mark_chapter_06",
+      "file": "assets/marks/chapters/mark_chapter_06_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "sealed portrait frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "altar_first_eclipse",
+      "display_name": "The Altar of the First Eclipse",
+      "logo_id": "mark_chapter_07",
+      "file": "assets/marks/chapters/mark_chapter_07_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "eclipse ring and seven chains",
+      "status": "brief"
+    }
+  ],
+  "villains": [
+    {
+      "entity_id": "lady_yseldra_vale",
+      "display_name": "Lady Yseldra Vale — The Bell-Widow",
+      "logo_id": "mark_villains_bell_widow",
+      "file": "assets/marks/villains/mark_villains_bell_widow_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "cracked bell within seven-notched wax seal",
+      "status": "brief"
+    },
+    {
+      "entity_id": "lord_cael_veyr",
+      "display_name": "Lord Cael Veyr — The Clockless Chancellor",
+      "logo_id": "mark_villains_clockless_chancellor",
+      "file": "assets/marks/villains/mark_villains_clockless_chancellor_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "handless dial inside one broken crown arc",
+      "status": "brief"
+    }
+  ],
+  "banners": [
+    {
+      "entity_id": "oath_01_aveline",
+      "display_name": "Sister Aveline Character Banner",
+      "logo_id": "mark_banners_oath_01_aveline",
+      "file": "assets/marks/banners/mark_banners_oath_01_aveline_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "featured character seal + portrait frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "oath_02_sable",
+      "display_name": "Sable Wren Character Banner",
+      "logo_id": "mark_banners_oath_02_sable",
+      "file": "assets/marks/banners/mark_banners_oath_02_sable_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "featured character seal + portrait frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "oath_03_nara",
+      "display_name": "Nara Vell Character Banner",
+      "logo_id": "mark_banners_oath_03_nara",
+      "file": "assets/marks/banners/mark_banners_oath_03_nara_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "featured character seal + portrait frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "oath_04_mirel",
+      "display_name": "Mirel Quill Character Banner",
+      "logo_id": "mark_banners_oath_04_mirel",
+      "file": "assets/marks/banners/mark_banners_oath_04_mirel_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "featured character seal + portrait frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "oath_05_vespera",
+      "display_name": "Vespera Wisp Character Banner",
+      "logo_id": "mark_banners_oath_05_vespera",
+      "file": "assets/marks/banners/mark_banners_oath_05_vespera_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "featured character seal + portrait frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_oath_01_aveline",
+      "display_name": "Lantern of the Last Vigil Weapon Banner",
+      "logo_id": "mark_banners_weapon_oath_01_aveline",
+      "file": "assets/marks/banners/mark_banners_weapon_oath_01_aveline_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "signature weapon silhouette + matching banner frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_oath_02_sable",
+      "display_name": "Quietus at the Broken Bell Weapon Banner",
+      "logo_id": "mark_banners_weapon_oath_02_sable",
+      "file": "assets/marks/banners/mark_banners_weapon_oath_02_sable_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "signature weapon silhouette + matching banner frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_oath_03_nara",
+      "display_name": "Gatewarden's Promise Weapon Banner",
+      "logo_id": "mark_banners_weapon_oath_03_nara",
+      "file": "assets/marks/banners/mark_banners_weapon_oath_03_nara_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "signature weapon silhouette + matching banner frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_oath_04_mirel",
+      "display_name": "The Unwritten Ledger Weapon Banner",
+      "logo_id": "mark_banners_weapon_oath_04_mirel",
+      "file": "assets/marks/banners/mark_banners_weapon_oath_04_mirel_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "signature weapon silhouette + matching banner frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "weapon_oath_05_vespera",
+      "display_name": "Mirror of the Last Hour Weapon Banner",
+      "logo_id": "mark_banners_weapon_oath_05_vespera",
+      "file": "assets/marks/banners/mark_banners_weapon_oath_05_vespera_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "signature weapon silhouette + matching banner frame",
+      "status": "brief"
+    },
+    {
+      "entity_id": "hall_of_armaments",
+      "display_name": "Hall of Armaments",
+      "logo_id": "mark_banners_hall_of_armaments",
+      "file": "assets/marks/banners/mark_banners_hall_of_armaments_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A permanent iron armory seal surrounded by fifteen small selectable weapon notches; no lettering.",
+      "status": "brief"
+    }
+  ],
+  "elements": [
+    {
+      "entity_id": "ember",
+      "display_name": "Ember",
+      "logo_id": "mark_elements_ember",
+      "file": "assets/marks/elements/mark_elements_ember_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "high-contrast ember element silhouette with distinct outline",
+      "status": "brief"
+    },
+    {
+      "entity_id": "tide",
+      "display_name": "Tide",
+      "logo_id": "mark_elements_tide",
+      "file": "assets/marks/elements/mark_elements_tide_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "high-contrast tide element silhouette with distinct outline",
+      "status": "brief"
+    },
+    {
+      "entity_id": "gale",
+      "display_name": "Gale",
+      "logo_id": "mark_elements_gale",
+      "file": "assets/marks/elements/mark_elements_gale_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "high-contrast gale element silhouette with distinct outline",
+      "status": "brief"
+    },
+    {
+      "entity_id": "stone",
+      "display_name": "Stone",
+      "logo_id": "mark_elements_stone",
+      "file": "assets/marks/elements/mark_elements_stone_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "high-contrast stone element silhouette with distinct outline",
+      "status": "brief"
+    },
+    {
+      "entity_id": "dawn",
+      "display_name": "Dawn",
+      "logo_id": "mark_elements_dawn",
+      "file": "assets/marks/elements/mark_elements_dawn_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "high-contrast dawn element silhouette with distinct outline",
+      "status": "brief"
+    },
+    {
+      "entity_id": "veil",
+      "display_name": "Veil",
+      "logo_id": "mark_elements_veil",
+      "file": "assets/marks/elements/mark_elements_veil_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "high-contrast veil element silhouette with distinct outline",
+      "status": "brief"
+    }
+  ],
+  "statuses": [
+    {
+      "entity_id": "burn",
+      "display_name": "Burn",
+      "logo_id": "mark_statuses_burn",
+      "file": "assets/marks/statuses/mark_statuses_burn_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable combat-state silhouette for burn; never hue-only",
+      "status": "brief"
+    },
+    {
+      "entity_id": "soaked",
+      "display_name": "Soaked",
+      "logo_id": "mark_statuses_soaked",
+      "file": "assets/marks/statuses/mark_statuses_soaked_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable combat-state silhouette for soaked; never hue-only",
+      "status": "brief"
+    },
+    {
+      "entity_id": "gust",
+      "display_name": "Gust",
+      "logo_id": "mark_statuses_gust",
+      "file": "assets/marks/statuses/mark_statuses_gust_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable combat-state silhouette for gust; never hue-only",
+      "status": "brief"
+    },
+    {
+      "entity_id": "fracture",
+      "display_name": "Fracture",
+      "logo_id": "mark_statuses_fracture",
+      "file": "assets/marks/statuses/mark_statuses_fracture_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable combat-state silhouette for fracture; never hue-only",
+      "status": "brief"
+    },
+    {
+      "entity_id": "sanctuary",
+      "display_name": "Sanctuary",
+      "logo_id": "mark_statuses_sanctuary",
+      "file": "assets/marks/statuses/mark_statuses_sanctuary_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable combat-state silhouette for sanctuary; never hue-only",
+      "status": "brief"
+    },
+    {
+      "entity_id": "dread",
+      "display_name": "Dread",
+      "logo_id": "mark_statuses_dread",
+      "file": "assets/marks/statuses/mark_statuses_dread_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable combat-state silhouette for dread; never hue-only",
+      "status": "brief"
+    },
+    {
+      "entity_id": "decay",
+      "display_name": "Decay",
+      "logo_id": "mark_statuses_decay",
+      "file": "assets/marks/statuses/mark_statuses_decay_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable combat-state silhouette for decay; never hue-only",
+      "status": "brief"
+    },
+    {
+      "entity_id": "taunt",
+      "display_name": "Taunt",
+      "logo_id": "mark_status_taunt",
+      "file": "assets/marks/statuses/mark_status_taunt_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A hooked shield redirect arrow; distinct at 32 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "stoneguard",
+      "display_name": "Stoneguard",
+      "logo_id": "mark_status_stoneguard",
+      "file": "assets/marks/statuses/mark_status_stoneguard_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A compact shield braced by one stone wedge; distinct at 32 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "dawnward",
+      "display_name": "Dawnward",
+      "logo_id": "mark_status_dawnward",
+      "file": "assets/marks/statuses/mark_status_dawnward_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A small round shield behind a rising sun ray; distinct at 32 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "trail_mark",
+      "display_name": "Trail Mark",
+      "logo_id": "mark_status_trail_mark",
+      "file": "assets/marks/statuses/mark_status_trail_mark_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A feathered arrow notch over a target ring; readable at 32 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "duel_mark",
+      "display_name": "Duel Mark",
+      "logo_id": "mark_status_duel_mark",
+      "file": "assets/marks/statuses/mark_status_duel_mark_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A crossed pennant and single sword; distinct from Taunt at 32 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "venom",
+      "display_name": "Venom",
+      "logo_id": "mark_status_venom",
+      "file": "assets/marks/statuses/mark_status_venom_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A sealed glass droplet with a split fang; never hue-only.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "break",
+      "display_name": "Break",
+      "logo_id": "mark_status_break",
+      "file": "assets/marks/statuses/mark_status_break_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A fractured crown link bent around a short stun spark; distinct at 32 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "soul_link",
+      "display_name": "Soul Link",
+      "logo_id": "mark_status_soul_link",
+      "file": "assets/marks/statuses/mark_status_soul_link_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "Two linked bell rings sharing one central spark; readable at 32 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "soaked_immunity",
+      "display_name": "Dry Ward",
+      "logo_id": "mark_status_soaked_immunity",
+      "file": "assets/marks/statuses/mark_status_soaked_immunity_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "A waxed leaf beneath a rain line; distinct at 32 px.",
+      "status": "brief"
+    }
+  ],
+  "weapon_catalog_note": "All 20 signature weapons are individual 5-star banner-only entries. Common 3/4-star weapons use a family mark from weapon_families, enter the shared weapon-banner pool and remain available from drops/crafting; at least four of each rarity are defined for each weapon type.",
+  "pending_catalog_note": "Covers every roster character, signature weapon/focus, skill, chapter, stage enemy, villain, currency, progression material, banner, element and status explicitly present in current content. Gate 1 item catalog must assign logo_id to every new drop/item ID before it enters any UI.",
+  "skills": [
+    {
+      "entity_id": "skill_mahmut_basic",
+      "character_id": "mahmut",
+      "display_name": "Oathless Cut",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_mahmut_basic_oathless_cut",
+      "file": "assets/marks/skills/mark_skill_mahmut_basic_oathless_cut_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Oathless Cut; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_mahmut_active",
+      "character_id": "mahmut",
+      "display_name": "Broken Crest Guard",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_mahmut_active_broken_crest_guard",
+      "file": "assets/marks/skills/mark_skill_mahmut_active_broken_crest_guard_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Broken Crest Guard; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_mahmut_passive",
+      "character_id": "mahmut",
+      "display_name": "A Knight's Debt",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_mahmut_passive_a_knight_s_debt",
+      "file": "assets/marks/skills/mark_skill_mahmut_passive_a_knight_s_debt_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for A Knight's Debt; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_mahmut_ultimate",
+      "character_id": "mahmut",
+      "display_name": "Last Wall at Dusk",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_mahmut_ultimate_last_wall_at_dusk",
+      "file": "assets/marks/skills/mark_skill_mahmut_ultimate_last_wall_at_dusk_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Last Wall at Dusk; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_fadyme_basic",
+      "character_id": "fadyme",
+      "display_name": "Veilglass Thorn",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_fadyme_basic_veilglass_thorn",
+      "file": "assets/marks/skills/mark_skill_fadyme_basic_veilglass_thorn_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Veilglass Thorn; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_fadyme_active",
+      "character_id": "fadyme",
+      "display_name": "Borrowed Hour",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_fadyme_active_borrowed_hour",
+      "file": "assets/marks/skills/mark_skill_fadyme_active_borrowed_hour_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Borrowed Hour; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_fadyme_passive",
+      "character_id": "fadyme",
+      "display_name": "A Smile Kept",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_fadyme_passive_a_smile_kept",
+      "file": "assets/marks/skills/mark_skill_fadyme_passive_a_smile_kept_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for A Smile Kept; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_fadyme_ultimate",
+      "character_id": "fadyme",
+      "display_name": "The Bell That Forgets",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_fadyme_ultimate_the_bell_that_forgets",
+      "file": "assets/marks/skills/mark_skill_fadyme_ultimate_the_bell_that_forgets_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for The Bell That Forgets; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_kera_voss_basic",
+      "character_id": "kera_voss",
+      "display_name": "Flask Flick",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_kera_voss_basic_flask_flick",
+      "file": "assets/marks/skills/mark_skill_kera_voss_basic_flask_flick_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Flask Flick; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_kera_voss_active",
+      "character_id": "kera_voss",
+      "display_name": "Cinder Tonic",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_kera_voss_active_cinder_tonic",
+      "file": "assets/marks/skills/mark_skill_kera_voss_active_cinder_tonic_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Cinder Tonic; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_kera_voss_passive",
+      "character_id": "kera_voss",
+      "display_name": "Measure Twice",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_kera_voss_passive_measure_twice",
+      "file": "assets/marks/skills/mark_skill_kera_voss_passive_measure_twice_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Measure Twice; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_kera_voss_ultimate",
+      "character_id": "kera_voss",
+      "display_name": "Redoubt Reaction",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_kera_voss_ultimate_redoubt_reaction",
+      "file": "assets/marks/skills/mark_skill_kera_voss_ultimate_redoubt_reaction_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Redoubt Reaction; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_brin_alder_basic",
+      "character_id": "brin_alder",
+      "display_name": "Rootsplitter",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_brin_alder_basic_rootsplitter",
+      "file": "assets/marks/skills/mark_skill_brin_alder_basic_rootsplitter_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Rootsplitter; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_brin_alder_active",
+      "character_id": "brin_alder",
+      "display_name": "Oakbrace",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_brin_alder_active_oakbrace",
+      "file": "assets/marks/skills/mark_skill_brin_alder_active_oakbrace_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Oakbrace; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_brin_alder_passive",
+      "character_id": "brin_alder",
+      "display_name": "Hold the Gate",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_brin_alder_passive_hold_the_gate",
+      "file": "assets/marks/skills/mark_skill_brin_alder_passive_hold_the_gate_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Hold the Gate; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_brin_alder_ultimate",
+      "character_id": "brin_alder",
+      "display_name": "Alderwall",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_brin_alder_ultimate_alderwall",
+      "file": "assets/marks/skills/mark_skill_brin_alder_ultimate_alderwall_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Alderwall; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_nixie_vale_basic",
+      "character_id": "nixie_vale",
+      "display_name": "Windneedle",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_nixie_vale_basic_windneedle",
+      "file": "assets/marks/skills/mark_skill_nixie_vale_basic_windneedle_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Windneedle; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_nixie_vale_active",
+      "character_id": "nixie_vale",
+      "display_name": "Crossdraft Shot",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_nixie_vale_active_crossdraft_shot",
+      "file": "assets/marks/skills/mark_skill_nixie_vale_active_crossdraft_shot_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Crossdraft Shot; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_nixie_vale_passive",
+      "character_id": "nixie_vale",
+      "display_name": "Trail Mark",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_nixie_vale_passive_trail_mark",
+      "file": "assets/marks/skills/mark_skill_nixie_vale_passive_trail_mark_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Trail Mark; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_nixie_vale_ultimate",
+      "character_id": "nixie_vale",
+      "display_name": "Hawk Over the Pass",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_nixie_vale_ultimate_hawk_over_the_pass",
+      "file": "assets/marks/skills/mark_skill_nixie_vale_ultimate_hawk_over_the_pass_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Hawk Over the Pass; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_sister_aveline_basic",
+      "character_id": "sister_aveline",
+      "display_name": "Mercy Staff",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_sister_aveline_basic_mercy_staff",
+      "file": "assets/marks/skills/mark_skill_sister_aveline_basic_mercy_staff_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Mercy Staff; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_sister_aveline_active",
+      "character_id": "sister_aveline",
+      "display_name": "Quiet Benediction",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_sister_aveline_active_quiet_benediction",
+      "file": "assets/marks/skills/mark_skill_sister_aveline_active_quiet_benediction_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Quiet Benediction; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_sister_aveline_passive",
+      "character_id": "sister_aveline",
+      "display_name": "Candle Remains",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_sister_aveline_passive_candle_remains",
+      "file": "assets/marks/skills/mark_skill_sister_aveline_passive_candle_remains_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Candle Remains; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_sister_aveline_ultimate",
+      "character_id": "sister_aveline",
+      "display_name": "Matins at the Last Door",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_sister_aveline_ultimate_matins_at_the_last_door",
+      "file": "assets/marks/skills/mark_skill_sister_aveline_ultimate_matins_at_the_last_door_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Matins at the Last Door; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_sable_wren_basic",
+      "character_id": "sable_wren",
+      "display_name": "Wren's Point",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_sable_wren_basic_wren_s_point",
+      "file": "assets/marks/skills/mark_skill_sable_wren_basic_wren_s_point_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Wren's Point; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_sable_wren_active",
+      "character_id": "sable_wren",
+      "display_name": "Cut the Thread",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_sable_wren_active_cut_the_thread",
+      "file": "assets/marks/skills/mark_skill_sable_wren_active_cut_the_thread_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Cut the Thread; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_sable_wren_passive",
+      "character_id": "sable_wren",
+      "display_name": "No Footprint",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_sable_wren_passive_no_footprint",
+      "file": "assets/marks/skills/mark_skill_sable_wren_passive_no_footprint_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for No Footprint; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_sable_wren_ultimate",
+      "character_id": "sable_wren",
+      "display_name": "Name Taken in Silence",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_sable_wren_ultimate_name_taken_in_silence",
+      "file": "assets/marks/skills/mark_skill_sable_wren_ultimate_name_taken_in_silence_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Name Taken in Silence; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_tilda_fen_basic",
+      "character_id": "tilda_fen",
+      "display_name": "Reedstaff Tap",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_tilda_fen_basic_reedstaff_tap",
+      "file": "assets/marks/skills/mark_skill_tilda_fen_basic_reedstaff_tap_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Reedstaff Tap; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_tilda_fen_active",
+      "character_id": "tilda_fen",
+      "display_name": "Marsh Poultice",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_tilda_fen_active_marsh_poultice",
+      "file": "assets/marks/skills/mark_skill_tilda_fen_active_marsh_poultice_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Marsh Poultice; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_tilda_fen_passive",
+      "character_id": "tilda_fen",
+      "display_name": "Patient Hands",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_tilda_fen_passive_patient_hands",
+      "file": "assets/marks/skills/mark_skill_tilda_fen_passive_patient_hands_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Patient Hands; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_tilda_fen_ultimate",
+      "character_id": "tilda_fen",
+      "display_name": "Rain on the Salt Road",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_tilda_fen_ultimate_rain_on_the_salt_road",
+      "file": "assets/marks/skills/mark_skill_tilda_fen_ultimate_rain_on_the_salt_road_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Rain on the Salt Road; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_rikka_ember_basic",
+      "character_id": "rikka_ember",
+      "display_name": "Bellpoint Thrust",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_rikka_ember_basic_bellpoint_thrust",
+      "file": "assets/marks/skills/mark_skill_rikka_ember_basic_bellpoint_thrust_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Bellpoint Thrust; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_rikka_ember_active",
+      "character_id": "rikka_ember",
+      "display_name": "Furnace Lunge",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_rikka_ember_active_furnace_lunge",
+      "file": "assets/marks/skills/mark_skill_rikka_ember_active_furnace_lunge_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Furnace Lunge; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_rikka_ember_passive",
+      "character_id": "rikka_ember",
+      "display_name": "Marching Heat",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_rikka_ember_passive_marching_heat",
+      "file": "assets/marks/skills/mark_skill_rikka_ember_passive_marching_heat_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Marching Heat; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_rikka_ember_ultimate",
+      "character_id": "rikka_ember",
+      "display_name": "Procession of Sparks",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_rikka_ember_ultimate_procession_of_sparks",
+      "file": "assets/marks/skills/mark_skill_rikka_ember_ultimate_procession_of_sparks_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Procession of Sparks; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_mirel_quill_basic",
+      "character_id": "mirel_quill",
+      "display_name": "Inkline",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_mirel_quill_basic_inkline",
+      "file": "assets/marks/skills/mark_skill_mirel_quill_basic_inkline_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Inkline; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_mirel_quill_active",
+      "character_id": "mirel_quill",
+      "display_name": "Margin Note",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_mirel_quill_active_margin_note",
+      "file": "assets/marks/skills/mark_skill_mirel_quill_active_margin_note_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Margin Note; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_mirel_quill_passive",
+      "character_id": "mirel_quill",
+      "display_name": "Corrected Record",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_mirel_quill_passive_corrected_record",
+      "file": "assets/marks/skills/mark_skill_mirel_quill_passive_corrected_record_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Corrected Record; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_mirel_quill_ultimate",
+      "character_id": "mirel_quill",
+      "display_name": "Decree of the Unfallen",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_mirel_quill_ultimate_decree_of_the_unfallen",
+      "file": "assets/marks/skills/mark_skill_mirel_quill_ultimate_decree_of_the_unfallen_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Decree of the Unfallen; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_odelia_pike_basic",
+      "character_id": "odelia_pike",
+      "display_name": "Saltmark Arrow",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_odelia_pike_basic_saltmark_arrow",
+      "file": "assets/marks/skills/mark_skill_odelia_pike_basic_saltmark_arrow_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Saltmark Arrow; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_odelia_pike_active",
+      "character_id": "odelia_pike",
+      "display_name": "Undertow Pin",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_odelia_pike_active_undertow_pin",
+      "file": "assets/marks/skills/mark_skill_odelia_pike_active_undertow_pin_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Undertow Pin; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_odelia_pike_passive",
+      "character_id": "odelia_pike",
+      "display_name": "Read the Current",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_odelia_pike_passive_read_the_current",
+      "file": "assets/marks/skills/mark_skill_odelia_pike_passive_read_the_current_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Read the Current; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_odelia_pike_ultimate",
+      "character_id": "odelia_pike",
+      "display_name": "Breakwater Volley",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_odelia_pike_ultimate_breakwater_volley",
+      "file": "assets/marks/skills/mark_skill_odelia_pike_ultimate_breakwater_volley_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Breakwater Volley; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_pippa_bell_basic",
+      "character_id": "pippa_bell",
+      "display_name": "Plucked Note",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_pippa_bell_basic_plucked_note",
+      "file": "assets/marks/skills/mark_skill_pippa_bell_basic_plucked_note_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Plucked Note; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_pippa_bell_active",
+      "character_id": "pippa_bell",
+      "display_name": "Rally Refrain",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_pippa_bell_active_rally_refrain",
+      "file": "assets/marks/skills/mark_skill_pippa_bell_active_rally_refrain_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Rally Refrain; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_pippa_bell_passive",
+      "character_id": "pippa_bell",
+      "display_name": "Encore!",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_pippa_bell_passive_encore",
+      "file": "assets/marks/skills/mark_skill_pippa_bell_passive_encore_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Encore!; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_pippa_bell_ultimate",
+      "character_id": "pippa_bell",
+      "display_name": "A Song for the Long Road",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_pippa_bell_ultimate_a_song_for_the_long_road",
+      "file": "assets/marks/skills/mark_skill_pippa_bell_ultimate_a_song_for_the_long_road_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for A Song for the Long Road; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_nara_vell_basic",
+      "character_id": "nara_vell",
+      "display_name": "Vellian Bash",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_nara_vell_basic_vellian_bash",
+      "file": "assets/marks/skills/mark_skill_nara_vell_basic_vellian_bash_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Vellian Bash; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_nara_vell_active",
+      "character_id": "nara_vell",
+      "display_name": "Shelter Angle",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_nara_vell_active_shelter_angle",
+      "file": "assets/marks/skills/mark_skill_nara_vell_active_shelter_angle_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Shelter Angle; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_nara_vell_passive",
+      "character_id": "nara_vell",
+      "display_name": "Familiar Footsteps",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_nara_vell_passive_familiar_footsteps",
+      "file": "assets/marks/skills/mark_skill_nara_vell_passive_familiar_footsteps_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Familiar Footsteps; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_nara_vell_ultimate",
+      "character_id": "nara_vell",
+      "display_name": "The Narrow Gate",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_nara_vell_ultimate_the_narrow_gate",
+      "file": "assets/marks/skills/mark_skill_nara_vell_ultimate_the_narrow_gate_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for The Narrow Gate; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_clem_marr_basic",
+      "character_id": "clem_marr",
+      "display_name": "Chalk Scratch",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_clem_marr_basic_chalk_scratch",
+      "file": "assets/marks/skills/mark_skill_clem_marr_basic_chalk_scratch_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Chalk Scratch; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_clem_marr_active",
+      "character_id": "clem_marr",
+      "display_name": "Grave Index",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_clem_marr_active_grave_index",
+      "file": "assets/marks/skills/mark_skill_clem_marr_active_grave_index_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Grave Index; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_clem_marr_passive",
+      "character_id": "clem_marr",
+      "display_name": "Keep the Names",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_clem_marr_passive_keep_the_names",
+      "file": "assets/marks/skills/mark_skill_clem_marr_passive_keep_the_names_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Keep the Names; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_clem_marr_ultimate",
+      "character_id": "clem_marr",
+      "display_name": "Epitaph in Reverse",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_clem_marr_ultimate_epitaph_in_reverse",
+      "file": "assets/marks/skills/mark_skill_clem_marr_ultimate_epitaph_in_reverse_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Epitaph in Reverse; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_vespera_wisp_basic",
+      "character_id": "vespera_wisp",
+      "display_name": "Wisp Spark",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_vespera_wisp_basic_wisp_spark",
+      "file": "assets/marks/skills/mark_skill_vespera_wisp_basic_wisp_spark_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Wisp Spark; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_vespera_wisp_active",
+      "character_id": "vespera_wisp",
+      "display_name": "Pale Orbit",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_vespera_wisp_active_pale_orbit",
+      "file": "assets/marks/skills/mark_skill_vespera_wisp_active_pale_orbit_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Pale Orbit; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_vespera_wisp_passive",
+      "character_id": "vespera_wisp",
+      "display_name": "Candle-Eater",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_vespera_wisp_passive_candle_eater",
+      "file": "assets/marks/skills/mark_skill_vespera_wisp_passive_candle_eater_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Candle-Eater; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_vespera_wisp_ultimate",
+      "character_id": "vespera_wisp",
+      "display_name": "Procession of Pale Lights",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_vespera_wisp_ultimate_procession_of_pale_lights",
+      "file": "assets/marks/skills/mark_skill_vespera_wisp_ultimate_procession_of_pale_lights_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Procession of Pale Lights; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_hana_birch_basic",
+      "character_id": "hana_birch",
+      "display_name": "Short Hatchet",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_hana_birch_basic_short_hatchet",
+      "file": "assets/marks/skills/mark_skill_hana_birch_basic_short_hatchet_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Short Hatchet; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_hana_birch_active",
+      "character_id": "hana_birch",
+      "display_name": "Set the Snare",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_hana_birch_active_set_the_snare",
+      "file": "assets/marks/skills/mark_skill_hana_birch_active_set_the_snare_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Set the Snare; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_hana_birch_passive",
+      "character_id": "hana_birch",
+      "display_name": "Still as Bark",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_hana_birch_passive_still_as_bark",
+      "file": "assets/marks/skills/mark_skill_hana_birch_passive_still_as_bark_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Still as Bark; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_hana_birch_ultimate",
+      "character_id": "hana_birch",
+      "display_name": "Birchline Ambush",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_hana_birch_ultimate_birchline_ambush",
+      "file": "assets/marks/skills/mark_skill_hana_birch_ultimate_birchline_ambush_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Birchline Ambush; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_thistle_roe_basic",
+      "character_id": "thistle_roe",
+      "display_name": "Seedshot",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_thistle_roe_basic_seedshot",
+      "file": "assets/marks/skills/mark_skill_thistle_roe_basic_seedshot_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Seedshot; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_thistle_roe_active",
+      "character_id": "thistle_roe",
+      "display_name": "Windgrown Herb",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_thistle_roe_active_windgrown_herb",
+      "file": "assets/marks/skills/mark_skill_thistle_roe_active_windgrown_herb_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Windgrown Herb; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_thistle_roe_passive",
+      "character_id": "thistle_roe",
+      "display_name": "Shelter Leaves",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_thistle_roe_passive_shelter_leaves",
+      "file": "assets/marks/skills/mark_skill_thistle_roe_passive_shelter_leaves_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Shelter Leaves; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_thistle_roe_ultimate",
+      "character_id": "thistle_roe",
+      "display_name": "Garden Before Winter",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_thistle_roe_ultimate_garden_before_winter",
+      "file": "assets/marks/skills/mark_skill_thistle_roe_ultimate_garden_before_winter_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Garden Before Winter; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_iona_mist_basic",
+      "character_id": "iona_mist",
+      "display_name": "Mistlit Touch",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_iona_mist_basic_mistlit_touch",
+      "file": "assets/marks/skills/mark_skill_iona_mist_basic_mistlit_touch_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Mistlit Touch; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_iona_mist_active",
+      "character_id": "iona_mist",
+      "display_name": "Fogbound Remedy",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_iona_mist_active_fogbound_remedy",
+      "file": "assets/marks/skills/mark_skill_iona_mist_active_fogbound_remedy_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Fogbound Remedy; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_iona_mist_passive",
+      "character_id": "iona_mist",
+      "display_name": "Lantern Watch",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_iona_mist_passive_lantern_watch",
+      "file": "assets/marks/skills/mark_skill_iona_mist_passive_lantern_watch_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Lantern Watch; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_iona_mist_ultimate",
+      "character_id": "iona_mist",
+      "display_name": "Safe Harbor in Fog",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_iona_mist_ultimate_safe_harbor_in_fog",
+      "file": "assets/marks/skills/mark_skill_iona_mist_ultimate_safe_harbor_in_fog_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Safe Harbor in Fog; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_jori_flint_basic",
+      "character_id": "jori_flint",
+      "display_name": "Hammer Tap",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_jori_flint_basic_hammer_tap",
+      "file": "assets/marks/skills/mark_skill_jori_flint_basic_hammer_tap_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Hammer Tap; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_jori_flint_active",
+      "character_id": "jori_flint",
+      "display_name": "Forgeguard",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_jori_flint_active_forgeguard",
+      "file": "assets/marks/skills/mark_skill_jori_flint_active_forgeguard_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Forgeguard; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_jori_flint_passive",
+      "character_id": "jori_flint",
+      "display_name": "Hot Rivet",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_jori_flint_passive_hot_rivet",
+      "file": "assets/marks/skills/mark_skill_jori_flint_passive_hot_rivet_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Hot Rivet; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_jori_flint_ultimate",
+      "character_id": "jori_flint",
+      "display_name": "Furnace Door",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_jori_flint_ultimate_furnace_door",
+      "file": "assets/marks/skills/mark_skill_jori_flint_ultimate_furnace_door_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Furnace Door; category outline matches ultimate skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_marek_vane_basic",
+      "character_id": "marek_vane",
+      "display_name": "Vane's Measure",
+      "skill_type": "Basic",
+      "logo_id": "mark_skill_marek_vane_basic_vane_s_measure",
+      "file": "assets/marks/skills/mark_skill_marek_vane_basic_vane_s_measure_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Vane's Measure; category outline matches basic skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_marek_vane_active",
+      "character_id": "marek_vane",
+      "display_name": "Broken Meter",
+      "skill_type": "Active",
+      "logo_id": "mark_skill_marek_vane_active_broken_meter",
+      "file": "assets/marks/skills/mark_skill_marek_vane_active_broken_meter_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Broken Meter; category outline matches active skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_marek_vane_passive",
+      "character_id": "marek_vane",
+      "display_name": "Watchman's Rhythm",
+      "skill_type": "Passive",
+      "logo_id": "mark_skill_marek_vane_passive_watchman_s_rhythm",
+      "file": "assets/marks/skills/mark_skill_marek_vane_passive_watchman_s_rhythm_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for Watchman's Rhythm; category outline matches passive skill family",
+      "status": "brief"
+    },
+    {
+      "entity_id": "skill_marek_vane_ultimate",
+      "character_id": "marek_vane",
+      "display_name": "March Without a Banner",
+      "skill_type": "Ultimate",
+      "logo_id": "mark_skill_marek_vane_ultimate_march_without_a_banner",
+      "file": "assets/marks/skills/mark_skill_marek_vane_ultimate_march_without_a_banner_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "distinct medieval combat glyph for March Without a Banner; category outline matches ultimate skill family",
+      "status": "brief"
+    }
+  ],
+  "enemies": [
+    {
+      "entity_id": "ash_wolf",
+      "display_name": "Ash Wolf",
+      "logo_id": "mark_enemy_ash_wolf",
+      "file": "assets/marks/enemies/mark_enemy_ash_wolf_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "bellbound_dead",
+      "display_name": "Bellbound Dead",
+      "logo_id": "mark_enemy_bellbound_dead",
+      "file": "assets/marks/enemies/mark_enemy_bellbound_dead_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "boss_ash_maw",
+      "display_name": "Boss Ash Maw",
+      "logo_id": "mark_enemy_boss_ash_maw",
+      "file": "assets/marks/enemies/mark_enemy_boss_ash_maw_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "boss_ashen_lord_wraith",
+      "display_name": "Boss Ashen Lord Wraith",
+      "logo_id": "mark_enemy_boss_ashen_lord_wraith",
+      "file": "assets/marks/enemies/mark_enemy_boss_ashen_lord_wraith_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "boss_bell_widow",
+      "display_name": "Boss Bell Widow",
+      "logo_id": "mark_enemy_boss_bell_widow",
+      "file": "assets/marks/enemies/mark_enemy_boss_bell_widow_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "boss_captain_rusk",
+      "display_name": "Boss Captain Rusk",
+      "logo_id": "mark_enemy_boss_captain_rusk",
+      "file": "assets/marks/enemies/mark_enemy_boss_captain_rusk_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "boss_eclipse_construct",
+      "display_name": "Boss Eclipse Construct",
+      "logo_id": "mark_enemy_boss_eclipse_construct",
+      "file": "assets/marks/enemies/mark_enemy_boss_eclipse_construct_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "boss_marshal_oren",
+      "display_name": "Boss Marshal Oren",
+      "logo_id": "mark_enemy_boss_marshal_oren",
+      "file": "assets/marks/enemies/mark_enemy_boss_marshal_oren_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "boss_red_vial_matron",
+      "display_name": "Boss Red Vial Matron",
+      "logo_id": "mark_enemy_boss_red_vial_matron",
+      "file": "assets/marks/enemies/mark_enemy_boss_red_vial_matron_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "bridge_revenant",
+      "display_name": "Bridge Revenant",
+      "logo_id": "mark_enemy_bridge_revenant",
+      "file": "assets/marks/enemies/mark_enemy_bridge_revenant_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "chain_cultist",
+      "display_name": "Chain Cultist",
+      "logo_id": "mark_enemy_chain_cultist",
+      "file": "assets/marks/enemies/mark_enemy_chain_cultist_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "choir_knight",
+      "display_name": "Choir Knight",
+      "logo_id": "mark_enemy_choir_knight",
+      "file": "assets/marks/enemies/mark_enemy_choir_knight_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "corrupted_crown_guard",
+      "display_name": "Corrupted Crown Guard",
+      "logo_id": "mark_enemy_corrupted_crown_guard",
+      "file": "assets/marks/enemies/mark_enemy_corrupted_crown_guard_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "corrupted_mercenary",
+      "display_name": "Corrupted Mercenary",
+      "logo_id": "mark_enemy_corrupted_mercenary",
+      "file": "assets/marks/enemies/mark_enemy_corrupted_mercenary_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "crownless_knight",
+      "display_name": "Crownless Knight",
+      "logo_id": "mark_enemy_crownless_knight",
+      "file": "assets/marks/enemies/mark_enemy_crownless_knight_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "eclipse_sentinel",
+      "display_name": "Eclipse Sentinel",
+      "logo_id": "mark_enemy_eclipse_sentinel",
+      "file": "assets/marks/enemies/mark_enemy_eclipse_sentinel_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "estate_wraith",
+      "display_name": "Estate Wraith",
+      "logo_id": "mark_enemy_estate_wraith",
+      "file": "assets/marks/enemies/mark_enemy_estate_wraith_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "glass_viper",
+      "display_name": "Glass Viper",
+      "logo_id": "mark_enemy_glass_viper",
+      "file": "assets/marks/enemies/mark_enemy_glass_viper_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "hollow_cleric",
+      "display_name": "Hollow Cleric",
+      "logo_id": "mark_enemy_hollow_cleric",
+      "file": "assets/marks/enemies/mark_enemy_hollow_cleric_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "hollow_pilgrim",
+      "display_name": "Hollow Pilgrim",
+      "logo_id": "mark_enemy_hollow_pilgrim",
+      "file": "assets/marks/enemies/mark_enemy_hollow_pilgrim_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "inkbound_dead",
+      "display_name": "Inkbound Dead",
+      "logo_id": "mark_enemy_inkbound_dead",
+      "file": "assets/marks/enemies/mark_enemy_inkbound_dead_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "lost_vow_knight",
+      "display_name": "Lost Vow Knight",
+      "logo_id": "mark_enemy_lost_vow_knight",
+      "file": "assets/marks/enemies/mark_enemy_lost_vow_knight_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "noble_retainer",
+      "display_name": "Noble Retainer",
+      "logo_id": "mark_enemy_noble_retainer",
+      "file": "assets/marks/enemies/mark_enemy_noble_retainer_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "orchard_ghoul",
+      "display_name": "Orchard Ghoul",
+      "logo_id": "mark_enemy_orchard_ghoul",
+      "file": "assets/marks/enemies/mark_enemy_orchard_ghoul_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "red_vial_alchemist",
+      "display_name": "Red Vial Alchemist",
+      "logo_id": "mark_enemy_red_vial_alchemist",
+      "file": "assets/marks/enemies/mark_enemy_red_vial_alchemist_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "red_vial_scout",
+      "display_name": "Red Vial Scout",
+      "logo_id": "mark_enemy_red_vial_scout",
+      "file": "assets/marks/enemies/mark_enemy_red_vial_scout_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    },
+    {
+      "entity_id": "royal_hollow",
+      "display_name": "Royal Hollow",
+      "logo_id": "mark_enemy_royal_hollow",
+      "file": "assets/marks/enemies/mark_enemy_royal_hollow_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "readable enemy-family silhouette for battle intent, codex and reward preview; no lettering",
+      "status": "brief"
+    }
+  ],
+  "weapon_families": [
+    {
+      "entity_id": "arming_sword",
+      "display_name": "Arming Sword",
+      "logo_id": "mark_weapon_family_arming_sword",
+      "file": "assets/marks/weapons/families/mark_weapon_family_arming_sword_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Arming Sword; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "bell_focus",
+      "display_name": "Bell Focus",
+      "logo_id": "mark_weapon_family_bell_focus",
+      "file": "assets/marks/weapons/families/mark_weapon_family_bell_focus_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Bell Focus; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "alchemy_mortar",
+      "display_name": "Alchemy Mortar",
+      "logo_id": "mark_weapon_family_alchemy_mortar",
+      "file": "assets/marks/weapons/families/mark_weapon_family_alchemy_mortar_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Alchemy Mortar; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "axe_shield",
+      "display_name": "Axe and Buckler",
+      "logo_id": "mark_weapon_family_axe_shield",
+      "file": "assets/marks/weapons/families/mark_weapon_family_axe_shield_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Axe and Buckler; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "shortbow",
+      "display_name": "Shortbow",
+      "logo_id": "mark_weapon_family_shortbow",
+      "file": "assets/marks/weapons/families/mark_weapon_family_shortbow_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Shortbow; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "reliquary_staff",
+      "display_name": "Reliquary Staff",
+      "logo_id": "mark_weapon_family_reliquary_staff",
+      "file": "assets/marks/weapons/families/mark_weapon_family_reliquary_staff_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Reliquary Staff; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "twin_daggers",
+      "display_name": "Twin Daggers",
+      "logo_id": "mark_weapon_family_twin_daggers",
+      "file": "assets/marks/weapons/families/mark_weapon_family_twin_daggers_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Twin Daggers; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "healer_staff",
+      "display_name": "Healer Staff",
+      "logo_id": "mark_weapon_family_healer_staff",
+      "file": "assets/marks/weapons/families/mark_weapon_family_healer_staff_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Healer Staff; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "spear",
+      "display_name": "Spear",
+      "logo_id": "mark_weapon_family_spear",
+      "file": "assets/marks/weapons/families/mark_weapon_family_spear_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Spear; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "astrolabe_folio",
+      "display_name": "Astrolabe Folio",
+      "logo_id": "mark_weapon_family_astrolabe_folio",
+      "file": "assets/marks/weapons/families/mark_weapon_family_astrolabe_folio_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Astrolabe Folio; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "longbow",
+      "display_name": "Longbow",
+      "logo_id": "mark_weapon_family_longbow",
+      "file": "assets/marks/weapons/families/mark_weapon_family_longbow_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Longbow; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "lute_sling",
+      "display_name": "Lute and Sling",
+      "logo_id": "mark_weapon_family_lute_sling",
+      "file": "assets/marks/weapons/families/mark_weapon_family_lute_sling_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Lute and Sling; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "glaive_shield",
+      "display_name": "Glaive and Shield",
+      "logo_id": "mark_weapon_family_glaive_shield",
+      "file": "assets/marks/weapons/families/mark_weapon_family_glaive_shield_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Glaive and Shield; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "ritual_lantern",
+      "display_name": "Ritual Lantern",
+      "logo_id": "mark_weapon_family_ritual_lantern",
+      "file": "assets/marks/weapons/families/mark_weapon_family_ritual_lantern_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Ritual Lantern; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "glass_focus",
+      "display_name": "Glass Focus",
+      "logo_id": "mark_weapon_family_glass_focus",
+      "file": "assets/marks/weapons/families/mark_weapon_family_glass_focus_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Glass Focus; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "hatchet_trap",
+      "display_name": "Hatchet and Trap",
+      "logo_id": "mark_weapon_family_hatchet_trap",
+      "file": "assets/marks/weapons/families/mark_weapon_family_hatchet_trap_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Hatchet and Trap; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "thorn_crook",
+      "display_name": "Thorn Crook",
+      "logo_id": "mark_weapon_family_thorn_crook",
+      "file": "assets/marks/weapons/families/mark_weapon_family_thorn_crook_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Thorn Crook; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "tidal_censer",
+      "display_name": "Tidal Censer",
+      "logo_id": "mark_weapon_family_tidal_censer",
+      "file": "assets/marks/weapons/families/mark_weapon_family_tidal_censer_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Tidal Censer; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "hammer_shield",
+      "display_name": "Hammer and Shield",
+      "logo_id": "mark_weapon_family_hammer_shield",
+      "file": "assets/marks/weapons/families/mark_weapon_family_hammer_shield_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Hammer and Shield; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "spear_horn",
+      "display_name": "Spear and Signal Horn",
+      "logo_id": "mark_weapon_family_spear_horn",
+      "file": "assets/marks/weapons/families/mark_weapon_family_spear_horn_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast silhouette representing Spear and Signal Horn; no lettering, readable at 64 px.",
+      "status": "brief"
+    }
+  ],
+  "accessory_sets": [
+    {
+      "entity_id": "ash_maw_hide",
+      "display_name": "Ash-Maw Hide",
+      "logo_id": "mark_accessory_set_ash_maw_hide",
+      "file": "assets/marks/accessories/mark_accessory_set_ash_maw_hide_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "Distinct set emblem for Ash-Maw Hide; shared by that set's necklaces and rings, not by other sets.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "widow_verdict",
+      "display_name": "Widow's Verdict",
+      "logo_id": "mark_accessory_set_widow_verdict",
+      "file": "assets/marks/accessories/mark_accessory_set_widow_verdict_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "Distinct set emblem for Widow's Verdict; shared by that set's necklaces and rings, not by other sets.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "road_captain_oath",
+      "display_name": "Road Captain's Oath",
+      "logo_id": "mark_accessory_set_road_captain_oath",
+      "file": "assets/marks/accessories/mark_accessory_set_road_captain_oath_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "Distinct set emblem for Road Captain's Oath; shared by that set's necklaces and rings, not by other sets.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "red_vial_residue",
+      "display_name": "Red Vial Residue",
+      "logo_id": "mark_accessory_set_red_vial_residue",
+      "file": "assets/marks/accessories/mark_accessory_set_red_vial_residue_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "Distinct set emblem for Red Vial Residue; shared by that set's necklaces and rings, not by other sets.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "bridgewarden_plating",
+      "display_name": "Bridgewarden Plating",
+      "logo_id": "mark_accessory_set_bridgewarden_plating",
+      "file": "assets/marks/accessories/mark_accessory_set_bridgewarden_plating_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "Distinct set emblem for Bridgewarden Plating; shared by that set's necklaces and rings, not by other sets.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "nameless_gallery",
+      "display_name": "Nameless Gallery",
+      "logo_id": "mark_accessory_set_nameless_gallery",
+      "file": "assets/marks/accessories/mark_accessory_set_nameless_gallery_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "Distinct set emblem for Nameless Gallery; shared by that set's necklaces and rings, not by other sets.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "first_eclipse",
+      "display_name": "First Eclipse",
+      "logo_id": "mark_accessory_set_first_eclipse",
+      "file": "assets/marks/accessories/mark_accessory_set_first_eclipse_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "Distinct set emblem for First Eclipse; shared by that set's necklaces and rings, not by other sets.",
+      "status": "brief"
+    }
+  ],
+  "accessory_catalog_note": "Necklace and ring each have 3/4/5-star accessory variants. Individual items use the shared mark for their unique named set. All art remains brief until an image file is actually generated.",
+  "armor_families": [
+    {
+      "entity_id": "padded",
+      "display_name": "Padded Roadcoat",
+      "logo_id": "mark_armor_family_padded",
+      "file": "assets/marks/armor/families/mark_armor_family_padded_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast body armor silhouette for Padded Roadcoat; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "mail",
+      "display_name": "Guild Mail",
+      "logo_id": "mark_armor_family_mail",
+      "file": "assets/marks/armor/families/mark_armor_family_mail_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast body armor silhouette for Guild Mail; no lettering, readable at 64 px.",
+      "status": "brief"
+    },
+    {
+      "entity_id": "plate",
+      "display_name": "Bellwrought Plate",
+      "logo_id": "mark_armor_family_plate",
+      "file": "assets/marks/armor/families/mark_armor_family_plate_v001.svg",
+      "source_px": [
+        512,
+        512
+      ],
+      "runtime_px": [
+        128,
+        128
+      ],
+      "compact_px": [
+        64,
+        64
+      ],
+      "glyph_brief": "One centered, high-contrast body armor silhouette for Bellwrought Plate; no lettering, readable at 64 px.",
+      "status": "brief"
+    }
+  ]
+}

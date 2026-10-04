@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" rx="48" fill="#151821"/><path d="M60 70h136v116H60z" fill="#f4f5f7"/><circle cx="105" cy="128" r="14" fill="#151821"/><circle cx="151" cy="128" r="14" fill="#151821"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PLACEHOLDER app icon (brief G2.2): replaced by the production adaptive icon (docs/ART_BIBLE.md) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="24" fill="#1d1a2b"/>
+  <circle cx="64" cy="64" r="34" fill="none" stroke="#c9a24a" stroke-width="6"/>
+  <circle cx="76" cy="58" r="30" fill="#1d1a2b"/>
+  <text x="64" y="118" font-size="12" text-anchor="middle" fill="#c9a24a" font-family="sans-serif">PLACEHOLDER</text>
+</svg>

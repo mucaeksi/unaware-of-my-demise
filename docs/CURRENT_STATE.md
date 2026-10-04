@@ -13,6 +13,23 @@ schema. The UOMD framework/docs layer is in place.
 
 ## 1. Godot client (`game/`)
 
+> **Update 2026-10-04 (BATCH-0002).** The starter described below has been
+> replaced by the LEGACY Godot 4.7.2 client, migrated selectively and without
+> SQLite (DEC-0012, `docs/MIGRATION_LEDGER.md`). Verified state:
+>
+> - `project.godot`: name "Unaware of My Demise", portrait lock, autoloads
+>   `Game`/`Online`/`Native`, GUT 9.7.1, `untyped_declaration` = error.
+>   Android app id `io.github.mucaeksi.unawareofmydemise` (resolves C8).
+> - Headless `--import`: clean. GUT: **33 scripts, 219/219 tests pass**,
+>   including the Python parity suites, content invariants, battle engine, UI
+>   screens and the new `PlayerState`/`GameBackend` tests.
+> - Player state is a server snapshot (`PlayerState`). Every change is a
+>   `GameBackend` coroutine. `Online.backend()` is still the "no server" base,
+>   so a real boot shows "Server unreachable" until the Worker API client
+>   (`OnlineBackend`) exists. The story, battle and menus are verified only
+>   through tests that use a stub backend.
+> - The table below is the historical audit of the replaced starter.
+
 | File | What it does | Verified status |
 |---|---|---|
 | `project.godot` | name "Gacha Online"; main scene `scenes/main.tscn`; autoloads `ApiClient`, `PatchManager`; viewport 1080×1920, window override 540×960, stretch `canvas_items`; renderer `gl_compatibility`; Android package `com.example.gachaonline` | loads; identity is placeholder; **no portrait orientation lock** (`display/window/handheld/orientation` unset) |

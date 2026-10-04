@@ -1,0 +1,6196 @@
+{
+  "schema_version": 1,
+  "pack_id": "unaware_of_my_demise.part1.accessories.v1",
+  "game_title": "Unaware of My Demise",
+  "accessory_slots": [
+    "necklace",
+    "ring"
+  ],
+  "stat_generation": "Weighted per-slot/per-item pool; no duplicate substat IDs; main stat is excluded from substats.",
+  "reroll_rule": "4★/5★ reroll only substats, retain main stat/set/rarity; spend Cinder of the Unwritten Hour; 3★ cannot reroll.",
+  "accessories": [
+    {
+      "accessory_id": "accessory_ash_maw_hide_necklace_3",
+      "name_en": "Ash-Maw Hide Necklace",
+      "rarity": 3,
+      "slot": "necklace",
+      "set_id": "ash_maw_hide",
+      "set_name_en": "Ash-Maw Hide",
+      "brand_mark_id": "mark_accessory_set_ash_maw_hide",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.02,
+          "max_value": 0.05
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A set of ash-scored leather and bell-wire from the forest predator."
+    },
+    {
+      "accessory_id": "accessory_ash_maw_hide_necklace_4",
+      "name_en": "Ash-Maw Hide Necklace",
+      "rarity": 4,
+      "slot": "necklace",
+      "set_id": "ash_maw_hide",
+      "set_name_en": "Ash-Maw Hide",
+      "brand_mark_id": "mark_accessory_set_ash_maw_hide",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.027,
+          "max_value": 0.0675
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A set of ash-scored leather and bell-wire from the forest predator."
+    },
+    {
+      "accessory_id": "accessory_ash_maw_hide_necklace_5",
+      "name_en": "Ash-Maw Hide Necklace",
+      "rarity": 5,
+      "slot": "necklace",
+      "set_id": "ash_maw_hide",
+      "set_name_en": "Ash-Maw Hide",
+      "brand_mark_id": "mark_accessory_set_ash_maw_hide",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.035,
+          "max_value": 0.0875
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A set of ash-scored leather and bell-wire from the forest predator."
+    },
+    {
+      "accessory_id": "accessory_ash_maw_hide_ring_3",
+      "name_en": "Ash-Maw Hide Ring",
+      "rarity": 3,
+      "slot": "ring",
+      "set_id": "ash_maw_hide",
+      "set_name_en": "Ash-Maw Hide",
+      "brand_mark_id": "mark_accessory_set_ash_maw_hide",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A set of ash-scored leather and bell-wire from the forest predator."
+    },
+    {
+      "accessory_id": "accessory_ash_maw_hide_ring_4",
+      "name_en": "Ash-Maw Hide Ring",
+      "rarity": 4,
+      "slot": "ring",
+      "set_id": "ash_maw_hide",
+      "set_name_en": "Ash-Maw Hide",
+      "brand_mark_id": "mark_accessory_set_ash_maw_hide",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A set of ash-scored leather and bell-wire from the forest predator."
+    },
+    {
+      "accessory_id": "accessory_ash_maw_hide_ring_5",
+      "name_en": "Ash-Maw Hide Ring",
+      "rarity": 5,
+      "slot": "ring",
+      "set_id": "ash_maw_hide",
+      "set_name_en": "Ash-Maw Hide",
+      "brand_mark_id": "mark_accessory_set_ash_maw_hide",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A set of ash-scored leather and bell-wire from the forest predator."
+    },
+    {
+      "accessory_id": "accessory_widow_verdict_necklace_3",
+      "name_en": "Widow's Verdict Necklace",
+      "rarity": 3,
+      "slot": "necklace",
+      "set_id": "widow_verdict",
+      "set_name_en": "Widow's Verdict",
+      "brand_mark_id": "mark_accessory_set_widow_verdict",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.02,
+          "max_value": 0.05
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Wax-sealed fittings recovered from the Bell-Widow's chamber."
+    },
+    {
+      "accessory_id": "accessory_widow_verdict_necklace_4",
+      "name_en": "Widow's Verdict Necklace",
+      "rarity": 4,
+      "slot": "necklace",
+      "set_id": "widow_verdict",
+      "set_name_en": "Widow's Verdict",
+      "brand_mark_id": "mark_accessory_set_widow_verdict",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.027,
+          "max_value": 0.0675
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Wax-sealed fittings recovered from the Bell-Widow's chamber."
+    },
+    {
+      "accessory_id": "accessory_widow_verdict_necklace_5",
+      "name_en": "Widow's Verdict Necklace",
+      "rarity": 5,
+      "slot": "necklace",
+      "set_id": "widow_verdict",
+      "set_name_en": "Widow's Verdict",
+      "brand_mark_id": "mark_accessory_set_widow_verdict",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.035,
+          "max_value": 0.0875
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Wax-sealed fittings recovered from the Bell-Widow's chamber."
+    },
+    {
+      "accessory_id": "accessory_widow_verdict_ring_3",
+      "name_en": "Widow's Verdict Ring",
+      "rarity": 3,
+      "slot": "ring",
+      "set_id": "widow_verdict",
+      "set_name_en": "Widow's Verdict",
+      "brand_mark_id": "mark_accessory_set_widow_verdict",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Wax-sealed fittings recovered from the Bell-Widow's chamber."
+    },
+    {
+      "accessory_id": "accessory_widow_verdict_ring_4",
+      "name_en": "Widow's Verdict Ring",
+      "rarity": 4,
+      "slot": "ring",
+      "set_id": "widow_verdict",
+      "set_name_en": "Widow's Verdict",
+      "brand_mark_id": "mark_accessory_set_widow_verdict",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Wax-sealed fittings recovered from the Bell-Widow's chamber."
+    },
+    {
+      "accessory_id": "accessory_widow_verdict_ring_5",
+      "name_en": "Widow's Verdict Ring",
+      "rarity": 5,
+      "slot": "ring",
+      "set_id": "widow_verdict",
+      "set_name_en": "Widow's Verdict",
+      "brand_mark_id": "mark_accessory_set_widow_verdict",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Wax-sealed fittings recovered from the Bell-Widow's chamber."
+    },
+    {
+      "accessory_id": "accessory_road_captain_oath_necklace_3",
+      "name_en": "Road Captain's Oath Necklace",
+      "rarity": 3,
+      "slot": "necklace",
+      "set_id": "road_captain_oath",
+      "set_name_en": "Road Captain's Oath",
+      "brand_mark_id": "mark_accessory_set_road_captain_oath",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.02,
+          "max_value": 0.05
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A mercenary's practical road kit, stripped of its false colors."
+    },
+    {
+      "accessory_id": "accessory_road_captain_oath_necklace_4",
+      "name_en": "Road Captain's Oath Necklace",
+      "rarity": 4,
+      "slot": "necklace",
+      "set_id": "road_captain_oath",
+      "set_name_en": "Road Captain's Oath",
+      "brand_mark_id": "mark_accessory_set_road_captain_oath",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.027,
+          "max_value": 0.0675
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A mercenary's practical road kit, stripped of its false colors."
+    },
+    {
+      "accessory_id": "accessory_road_captain_oath_necklace_5",
+      "name_en": "Road Captain's Oath Necklace",
+      "rarity": 5,
+      "slot": "necklace",
+      "set_id": "road_captain_oath",
+      "set_name_en": "Road Captain's Oath",
+      "brand_mark_id": "mark_accessory_set_road_captain_oath",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.035,
+          "max_value": 0.0875
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A mercenary's practical road kit, stripped of its false colors."
+    },
+    {
+      "accessory_id": "accessory_road_captain_oath_ring_3",
+      "name_en": "Road Captain's Oath Ring",
+      "rarity": 3,
+      "slot": "ring",
+      "set_id": "road_captain_oath",
+      "set_name_en": "Road Captain's Oath",
+      "brand_mark_id": "mark_accessory_set_road_captain_oath",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A mercenary's practical road kit, stripped of its false colors."
+    },
+    {
+      "accessory_id": "accessory_road_captain_oath_ring_4",
+      "name_en": "Road Captain's Oath Ring",
+      "rarity": 4,
+      "slot": "ring",
+      "set_id": "road_captain_oath",
+      "set_name_en": "Road Captain's Oath",
+      "brand_mark_id": "mark_accessory_set_road_captain_oath",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A mercenary's practical road kit, stripped of its false colors."
+    },
+    {
+      "accessory_id": "accessory_road_captain_oath_ring_5",
+      "name_en": "Road Captain's Oath Ring",
+      "rarity": 5,
+      "slot": "ring",
+      "set_id": "road_captain_oath",
+      "set_name_en": "Road Captain's Oath",
+      "brand_mark_id": "mark_accessory_set_road_captain_oath",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A mercenary's practical road kit, stripped of its false colors."
+    },
+    {
+      "accessory_id": "accessory_red_vial_residue_necklace_3",
+      "name_en": "Red Vial Residue Necklace",
+      "rarity": 3,
+      "slot": "necklace",
+      "set_id": "red_vial_residue",
+      "set_name_en": "Red Vial Residue",
+      "brand_mark_id": "mark_accessory_set_red_vial_residue",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.02,
+          "max_value": 0.05
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Alchemical glasswork that steadies restorative mixtures."
+    },
+    {
+      "accessory_id": "accessory_red_vial_residue_necklace_4",
+      "name_en": "Red Vial Residue Necklace",
+      "rarity": 4,
+      "slot": "necklace",
+      "set_id": "red_vial_residue",
+      "set_name_en": "Red Vial Residue",
+      "brand_mark_id": "mark_accessory_set_red_vial_residue",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.027,
+          "max_value": 0.0675
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Alchemical glasswork that steadies restorative mixtures."
+    },
+    {
+      "accessory_id": "accessory_red_vial_residue_necklace_5",
+      "name_en": "Red Vial Residue Necklace",
+      "rarity": 5,
+      "slot": "necklace",
+      "set_id": "red_vial_residue",
+      "set_name_en": "Red Vial Residue",
+      "brand_mark_id": "mark_accessory_set_red_vial_residue",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.035,
+          "max_value": 0.0875
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Alchemical glasswork that steadies restorative mixtures."
+    },
+    {
+      "accessory_id": "accessory_red_vial_residue_ring_3",
+      "name_en": "Red Vial Residue Ring",
+      "rarity": 3,
+      "slot": "ring",
+      "set_id": "red_vial_residue",
+      "set_name_en": "Red Vial Residue",
+      "brand_mark_id": "mark_accessory_set_red_vial_residue",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Alchemical glasswork that steadies restorative mixtures."
+    },
+    {
+      "accessory_id": "accessory_red_vial_residue_ring_4",
+      "name_en": "Red Vial Residue Ring",
+      "rarity": 4,
+      "slot": "ring",
+      "set_id": "red_vial_residue",
+      "set_name_en": "Red Vial Residue",
+      "brand_mark_id": "mark_accessory_set_red_vial_residue",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Alchemical glasswork that steadies restorative mixtures."
+    },
+    {
+      "accessory_id": "accessory_red_vial_residue_ring_5",
+      "name_en": "Red Vial Residue Ring",
+      "rarity": 5,
+      "slot": "ring",
+      "set_id": "red_vial_residue",
+      "set_name_en": "Red Vial Residue",
+      "brand_mark_id": "mark_accessory_set_red_vial_residue",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Alchemical glasswork that steadies restorative mixtures."
+    },
+    {
+      "accessory_id": "accessory_bridgewarden_plating_necklace_3",
+      "name_en": "Bridgewarden Plating Necklace",
+      "rarity": 3,
+      "slot": "necklace",
+      "set_id": "bridgewarden_plating",
+      "set_name_en": "Bridgewarden Plating",
+      "brand_mark_id": "mark_accessory_set_bridgewarden_plating",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.02,
+          "max_value": 0.05
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Iron fittings carried by the last loyal bridge guards."
+    },
+    {
+      "accessory_id": "accessory_bridgewarden_plating_necklace_4",
+      "name_en": "Bridgewarden Plating Necklace",
+      "rarity": 4,
+      "slot": "necklace",
+      "set_id": "bridgewarden_plating",
+      "set_name_en": "Bridgewarden Plating",
+      "brand_mark_id": "mark_accessory_set_bridgewarden_plating",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.027,
+          "max_value": 0.0675
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Iron fittings carried by the last loyal bridge guards."
+    },
+    {
+      "accessory_id": "accessory_bridgewarden_plating_necklace_5",
+      "name_en": "Bridgewarden Plating Necklace",
+      "rarity": 5,
+      "slot": "necklace",
+      "set_id": "bridgewarden_plating",
+      "set_name_en": "Bridgewarden Plating",
+      "brand_mark_id": "mark_accessory_set_bridgewarden_plating",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.035,
+          "max_value": 0.0875
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Iron fittings carried by the last loyal bridge guards."
+    },
+    {
+      "accessory_id": "accessory_bridgewarden_plating_ring_3",
+      "name_en": "Bridgewarden Plating Ring",
+      "rarity": 3,
+      "slot": "ring",
+      "set_id": "bridgewarden_plating",
+      "set_name_en": "Bridgewarden Plating",
+      "brand_mark_id": "mark_accessory_set_bridgewarden_plating",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Iron fittings carried by the last loyal bridge guards."
+    },
+    {
+      "accessory_id": "accessory_bridgewarden_plating_ring_4",
+      "name_en": "Bridgewarden Plating Ring",
+      "rarity": 4,
+      "slot": "ring",
+      "set_id": "bridgewarden_plating",
+      "set_name_en": "Bridgewarden Plating",
+      "brand_mark_id": "mark_accessory_set_bridgewarden_plating",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Iron fittings carried by the last loyal bridge guards."
+    },
+    {
+      "accessory_id": "accessory_bridgewarden_plating_ring_5",
+      "name_en": "Bridgewarden Plating Ring",
+      "rarity": 5,
+      "slot": "ring",
+      "set_id": "bridgewarden_plating",
+      "set_name_en": "Bridgewarden Plating",
+      "brand_mark_id": "mark_accessory_set_bridgewarden_plating",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "Iron fittings carried by the last loyal bridge guards."
+    },
+    {
+      "accessory_id": "accessory_nameless_gallery_necklace_3",
+      "name_en": "Nameless Gallery Necklace",
+      "rarity": 3,
+      "slot": "necklace",
+      "set_id": "nameless_gallery",
+      "set_name_en": "Nameless Gallery",
+      "brand_mark_id": "mark_accessory_set_nameless_gallery",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.02,
+          "max_value": 0.05
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A nameplate and mirror shard from the Ashen Lord's estate."
+    },
+    {
+      "accessory_id": "accessory_nameless_gallery_necklace_4",
+      "name_en": "Nameless Gallery Necklace",
+      "rarity": 4,
+      "slot": "necklace",
+      "set_id": "nameless_gallery",
+      "set_name_en": "Nameless Gallery",
+      "brand_mark_id": "mark_accessory_set_nameless_gallery",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.027,
+          "max_value": 0.0675
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A nameplate and mirror shard from the Ashen Lord's estate."
+    },
+    {
+      "accessory_id": "accessory_nameless_gallery_necklace_5",
+      "name_en": "Nameless Gallery Necklace",
+      "rarity": 5,
+      "slot": "necklace",
+      "set_id": "nameless_gallery",
+      "set_name_en": "Nameless Gallery",
+      "brand_mark_id": "mark_accessory_set_nameless_gallery",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.035,
+          "max_value": 0.0875
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A nameplate and mirror shard from the Ashen Lord's estate."
+    },
+    {
+      "accessory_id": "accessory_nameless_gallery_ring_3",
+      "name_en": "Nameless Gallery Ring",
+      "rarity": 3,
+      "slot": "ring",
+      "set_id": "nameless_gallery",
+      "set_name_en": "Nameless Gallery",
+      "brand_mark_id": "mark_accessory_set_nameless_gallery",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A nameplate and mirror shard from the Ashen Lord's estate."
+    },
+    {
+      "accessory_id": "accessory_nameless_gallery_ring_4",
+      "name_en": "Nameless Gallery Ring",
+      "rarity": 4,
+      "slot": "ring",
+      "set_id": "nameless_gallery",
+      "set_name_en": "Nameless Gallery",
+      "brand_mark_id": "mark_accessory_set_nameless_gallery",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A nameplate and mirror shard from the Ashen Lord's estate."
+    },
+    {
+      "accessory_id": "accessory_nameless_gallery_ring_5",
+      "name_en": "Nameless Gallery Ring",
+      "rarity": 5,
+      "slot": "ring",
+      "set_id": "nameless_gallery",
+      "set_name_en": "Nameless Gallery",
+      "brand_mark_id": "mark_accessory_set_nameless_gallery",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A nameplate and mirror shard from the Ashen Lord's estate."
+    },
+    {
+      "accessory_id": "accessory_first_eclipse_necklace_3",
+      "name_en": "First Eclipse Necklace",
+      "rarity": 3,
+      "slot": "necklace",
+      "set_id": "first_eclipse",
+      "set_name_en": "First Eclipse",
+      "brand_mark_id": "mark_accessory_set_first_eclipse",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.02,
+          "max_value": 0.05
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A tiny piece of the altar's pre-royal warding lattice."
+    },
+    {
+      "accessory_id": "accessory_first_eclipse_necklace_4",
+      "name_en": "First Eclipse Necklace",
+      "rarity": 4,
+      "slot": "necklace",
+      "set_id": "first_eclipse",
+      "set_name_en": "First Eclipse",
+      "brand_mark_id": "mark_accessory_set_first_eclipse",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.027,
+          "max_value": 0.0675
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A tiny piece of the altar's pre-royal warding lattice."
+    },
+    {
+      "accessory_id": "accessory_first_eclipse_necklace_5",
+      "name_en": "First Eclipse Necklace",
+      "rarity": 5,
+      "slot": "necklace",
+      "set_id": "first_eclipse",
+      "set_name_en": "First Eclipse",
+      "brand_mark_id": "mark_accessory_set_first_eclipse",
+      "possible_main_stats": [
+        {
+          "stat_id": "hp_pct",
+          "weight": 40,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 25,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.035,
+          "max_value": 0.0875
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A tiny piece of the altar's pre-royal warding lattice."
+    },
+    {
+      "accessory_id": "accessory_first_eclipse_ring_3",
+      "name_en": "First Eclipse Ring",
+      "rarity": 3,
+      "slot": "ring",
+      "set_id": "first_eclipse",
+      "set_name_en": "First Eclipse",
+      "brand_mark_id": "mark_accessory_set_first_eclipse",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.0,
+          "max_value": 2.0
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.25,
+          "max_value": 0.5
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.2,
+          "max_value": 0.4
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.06,
+          "max_value": 0.12
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.03,
+          "max_value": 0.075
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.07
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.04,
+          "max_value": 0.08
+        }
+      ],
+      "rarity_profiles": {
+        "3": {
+          "substat_count": 2,
+          "is_rerollable": false,
+          "reroll_cost": null,
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A tiny piece of the altar's pre-royal warding lattice."
+    },
+    {
+      "accessory_id": "accessory_first_eclipse_ring_4",
+      "name_en": "First Eclipse Ring",
+      "rarity": 4,
+      "slot": "ring",
+      "set_id": "first_eclipse",
+      "set_name_en": "First Eclipse",
+      "brand_mark_id": "mark_accessory_set_first_eclipse",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.35,
+          "max_value": 2.7
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.3375,
+          "max_value": 0.675
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.27,
+          "max_value": 0.54
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.081,
+          "max_value": 0.162
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0405,
+          "max_value": 0.1013
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.0945
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.054,
+          "max_value": 0.108
+        }
+      ],
+      "rarity_profiles": {
+        "4": {
+          "substat_count": 3,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 3
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A tiny piece of the altar's pre-royal warding lattice."
+    },
+    {
+      "accessory_id": "accessory_first_eclipse_ring_5",
+      "name_en": "First Eclipse Ring",
+      "rarity": 5,
+      "slot": "ring",
+      "set_id": "first_eclipse",
+      "set_name_en": "First Eclipse",
+      "brand_mark_id": "mark_accessory_set_first_eclipse",
+      "possible_main_stats": [
+        {
+          "stat_id": "atk_pct",
+          "weight": 35,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 20,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 15,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        }
+      ],
+      "possible_sub_stats": [
+        {
+          "stat_id": "hp_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 1.75,
+          "max_value": 3.5
+        },
+        {
+          "stat_id": "atk_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "def_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.4375,
+          "max_value": 0.875
+        },
+        {
+          "stat_id": "spd_flat",
+          "weight": 10,
+          "unit": "flat",
+          "min_value": 0.35,
+          "max_value": 0.7
+        },
+        {
+          "stat_id": "hp_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "atk_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "def_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.105,
+          "max_value": 0.21
+        },
+        {
+          "stat_id": "spd_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.0525,
+          "max_value": 0.1313
+        },
+        {
+          "stat_id": "effect_res_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        },
+        {
+          "stat_id": "focus_gain_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "heal_bonus_pct",
+          "weight": 10,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.1225
+        },
+        {
+          "stat_id": "element_res_pct",
+          "weight": 12,
+          "unit": "percent",
+          "min_value": 0.07,
+          "max_value": 0.14
+        }
+      ],
+      "rarity_profiles": {
+        "5": {
+          "substat_count": 4,
+          "is_rerollable": true,
+          "reroll_cost": {
+            "item_id": "unwritten_hour_cinder",
+            "quantity": 6
+          },
+          "minimum_substat_value_rolls": 1,
+          "maximum_substat_value_rolls": 1
+        }
+      },
+      "acquisition": [
+        "boss_drop",
+        "accessory_crafting"
+      ],
+      "drop_is_gacha": false,
+      "flavor_en": "A tiny piece of the altar's pre-royal warding lattice."
+    }
+  ],
+  "sets": [
+    {
+      "set_id": "ash_maw_hide",
+      "name_en": "Ash-Maw Hide",
+      "brand_mark_id": "mark_accessory_set_ash_maw_hide",
+      "pieces_for_bonus": 2,
+      "bonus_id": "set_bonus_ash_maw_hide",
+      "bonus_stat_id": "hp_pct",
+      "bonus_value_pct": 0.05,
+      "bonus_en": "2 pieces: +5% HP."
+    },
+    {
+      "set_id": "widow_verdict",
+      "name_en": "Widow's Verdict",
+      "brand_mark_id": "mark_accessory_set_widow_verdict",
+      "pieces_for_bonus": 2,
+      "bonus_id": "set_bonus_widow_verdict",
+      "bonus_stat_id": "effect_res_pct",
+      "bonus_value_pct": 0.05,
+      "bonus_en": "2 pieces: +5% EFFECT RES."
+    },
+    {
+      "set_id": "road_captain_oath",
+      "name_en": "Road Captain's Oath",
+      "brand_mark_id": "mark_accessory_set_road_captain_oath",
+      "pieces_for_bonus": 2,
+      "bonus_id": "set_bonus_road_captain_oath",
+      "bonus_stat_id": "atk_pct",
+      "bonus_value_pct": 0.05,
+      "bonus_en": "2 pieces: +5% ATK."
+    },
+    {
+      "set_id": "red_vial_residue",
+      "name_en": "Red Vial Residue",
+      "brand_mark_id": "mark_accessory_set_red_vial_residue",
+      "pieces_for_bonus": 2,
+      "bonus_id": "set_bonus_red_vial_residue",
+      "bonus_stat_id": "heal_bonus_pct",
+      "bonus_value_pct": 0.05,
+      "bonus_en": "2 pieces: +5% HEAL BONUS."
+    },
+    {
+      "set_id": "bridgewarden_plating",
+      "name_en": "Bridgewarden Plating",
+      "brand_mark_id": "mark_accessory_set_bridgewarden_plating",
+      "pieces_for_bonus": 2,
+      "bonus_id": "set_bonus_bridgewarden_plating",
+      "bonus_stat_id": "def_pct",
+      "bonus_value_pct": 0.05,
+      "bonus_en": "2 pieces: +5% DEF."
+    },
+    {
+      "set_id": "nameless_gallery",
+      "name_en": "Nameless Gallery",
+      "brand_mark_id": "mark_accessory_set_nameless_gallery",
+      "pieces_for_bonus": 2,
+      "bonus_id": "set_bonus_nameless_gallery",
+      "bonus_stat_id": "focus_gain_pct",
+      "bonus_value_pct": 0.05,
+      "bonus_en": "2 pieces: +5% FOCUS GAIN."
+    },
+    {
+      "set_id": "first_eclipse",
+      "name_en": "First Eclipse",
+      "brand_mark_id": "mark_accessory_set_first_eclipse",
+      "pieces_for_bonus": 2,
+      "bonus_id": "set_bonus_first_eclipse",
+      "bonus_stat_id": "element_res_pct",
+      "bonus_value_pct": 0.05,
+      "bonus_en": "2 pieces: +5% ELEMENT RES."
+    }
+  ]
+}
