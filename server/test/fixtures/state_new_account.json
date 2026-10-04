@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "story_state": {
+    "completed_stage_ids": [],
+    "owned_character_ids": [
+      "fadyme",
+      "mahmut"
+    ],
+    "first_oath_invitation_claimed": false,
+    "first_oath_invitation_selection": null,
+    "first_oath_invitation_available": false,
+    "story_cursor": 0,
+    "story_cursor_entry_id": "opening_sad_scene",
+    "online_character_ids": []
+  },
+  "wallet": {
+    "eclipse_tokens": 0,
+    "fate_threads": 0,
+    "silver_crowns": 0,
+    "ration": 0,
+    "account_xp": 0
+  },
+  "items": {},
+  "roster": {
+    "fadyme": {
+      "level": 1,
+      "xp": 0,
+      "ascension": 0,
+      "memory_shards": 0,
+      "memory_nodes": 0,
+      "skill_ranks": {}
+    },
+    "mahmut": {
+      "level": 1,
+      "xp": 0,
+      "ascension": 0,
+      "memory_shards": 0,
+      "memory_nodes": 0,
+      "skill_ranks": {}
+    }
+  },
+  "inventory": {
+    "inventory_weapons": [],
+    "inventory_armor": [],
+    "inventory_accessories": []
+  }
+}

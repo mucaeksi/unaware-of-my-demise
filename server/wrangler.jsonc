@@ -1,0 +1,24 @@
+// Unaware of My Demise game API (DEC-0013). Deployed by GitHub Actions (DEC-0003); never commit secrets here.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // The existing Worker (docs/INFRASTRUCTURE_AUDIT.md 3.1); deploying under this name replaces its "Hello world" template.
+  "name": "unaware-of-my-demise",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "observability": { "enabled": true },
+  "hyperdrive": [
+    // unaware-of-my-demise-production -> Neon UOMD (query caching off: transactional game state).
+    { "binding": "HYPERDRIVE", "id": "edbe90afd0ab42a1ab708e7e2e49c04b" }
+  ],
+  // LEGACY server/ratelimit.py budgets: sign-in 20/min, everything else 240/min, per client IP.
+  "ratelimits": [
+    { "name": "AUTH_LIMITER", "namespace_id": "1001", "simple": { "limit": 20, "period": 60 } },
+    { "name": "API_LIMITER", "namespace_id": "1002", "simple": { "limit": 240, "period": 60 } }
+  ],
+  "vars": {
+    // Comma-separated Google OAuth client IDs accepted as the ID token audience. Empty = sign-in answers 503.
+    "GOOGLE_CLIENT_IDS": ""
+  }
+}

@@ -99,6 +99,11 @@ no deployment target. Status: **NEEDS_REWRITE** (foundation only).
 
 ## 4. Database (`database/`)
 
+> **Update 2026-10-04.** Replaced by `database/migrations/0001_baseline.sql`, a PostgreSQL translation of the LEGACY
+> schemas plus `stage_attempts` (DEC-0013). It has a checksum-guarded runner (`migrate.sh`) and constraint tests
+> (`test.sh`), all verified on local PostgreSQL 16. Not applied to Neon yet. The starter migration and demo seed are
+> deleted. The audit below describes the removed starter.
+
 - `migrations/001_init.sql`: players (email+password_hash), wallets (non-negative
   CHECKs), items, player_inventory, gacha_banners, gacha_entries, gacha_pity,
   gacha_draws (`request_id UNIQUE`), audit_log. Uses `CREATE … IF NOT EXISTS`

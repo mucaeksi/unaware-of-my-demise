@@ -1,0 +1,85 @@
+# Validation for every push and pull request: database schema, Worker API, Godot client. Deploy jobs come later (DEC-0003).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  database:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        # Throwaway CI database, not a secret.
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Migrations and constraint tests
+        env:
+          ADMIN_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+        run: database/test.sh
+
+  server:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - name: Tests (disposable PostgreSQL)
+        env:
+          TEST_ADMIN_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+        run: npm test
+      - name: Bundle (wrangler dry-run)
+        run: npm run build
+
+  godot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the pinned Godot (checksum verified)
+        run: |
+          version="$(tr -d '[:space:]' < game/GODOT_VERSION)"
+          base="https://github.com/godotengine/godot/releases/download/${version}"
+          archive="Godot_v${version}_linux.x86_64.zip"
+          mkdir -p "${RUNNER_TEMP}/godot" && cd "${RUNNER_TEMP}/godot"
+          curl -fsSLO "${base}/${archive}"
+          curl -fsSLO "${base}/SHA512-SUMS.txt"
+          grep " ${archive}\$" SHA512-SUMS.txt | sha512sum -c -
+          unzip -q "${archive}"
+          echo "GODOT=${RUNNER_TEMP}/godot/Godot_v${version}_linux.x86_64" >> "${GITHUB_ENV}"
+      - name: Import
+        run: |
+          "${GODOT}" --headless --path game --import || "${GODOT}" --headless --path game --import
+      - name: GUT (unit, parity, ui, contract)
+        run: |
+          "${GODOT}" --headless --path game -s addons/gut/gut_cmdln.gd -gexit | tee gut.log
+          grep -q "All tests passed" gut.log

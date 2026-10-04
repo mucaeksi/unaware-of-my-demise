@@ -17,9 +17,8 @@ Statuses follow the master prompt vocabulary.
 | `UOMD_FRAMEWORK_MANIFEST.md` | framework manifest | current | — | — | ACTIVE |
 | `project.yaml` | CCGS config | stage "Technical Setup", gdUnit4 test command | — | — | ACTIVE (test cmd references missing addon) |
 | `docker-compose.yml` | local Postgres + Node server | local-only | none in cloud | — | CLOUD_DEPENDENCY_GAP (optional dev aid; not part of production path) |
-| `admin/` | Next.js admin | single page, no auth | not deployed | none | NEEDS_REWRITE |
-| `database/migrations/001_init.sql` | starter schema | not applied anywhere | — | LEGACY server schema to audit | NEEDS_REWRITE |
-| `database/seed/001_demo.sql` | demo items (Aster, Mira, …) | non-canon | must never reach prod | — | ARCHIVE candidate |
+| `admin/` | Next.js admin | single page, no auth; calls starter admin endpoints that no longer exist | not deployed | none | NEEDS_REWRITE |
+| `database/` | PostgreSQL migrations + runner + constraint tests | `0001_baseline.sql` from LEGACY schemas | tests pass on local PostgreSQL 16; not applied to Neon | LEGACY `backend/_schema.py` + `server/schema.py` | ACTIVE |
 | `docs/UOMD_*.md`, `docs/coder/*` | canonical rules, master prompt, templates | current | — | — | ACTIVE |
 | `docs/ARCHITECTURE.md`, `docs/ADMIN_PANEL.md`, `docs/PRODUCTION_CHECKLIST.md` | starter-era docs (Fastify/VPS) | stale | — | — | NEEDS_REFACTOR |
 | `docs/engine-reference/godot/` | Godot 4.7 reference notes | current | — | — | ACTIVE |
@@ -31,7 +30,7 @@ Statuses follow the master prompt vocabulary.
 | `production/session-state/`, `session-logs/` | durable session state | placeholders | — | — | ACTIVE |
 | `scripts/build_patch.sh` | PCK patch export | sound Godot CLI usage, no signing/upload | — | — | NEEDS_REFACTOR |
 | `scripts/build_patch.ps1`, `scripts/encode-github-secrets.ps1` | Windows helpers | local-only | — | — | CLOUD_DEPENDENCY_GAP (superseded by CI) |
-| `server/` | Fastify API | not Worker-compatible; Gemini runtime code | not deployed | LEGACY FastAPI economy server to audit | NEEDS_REWRITE |
+| `server/` | Cloudflare Worker API (DEC-0013) | TypeScript, Hyperdrive + Neon; auth/session/account/wallet/state routes | vitest 16/16 on local PostgreSQL; wrangler dry-run bundle OK; not deployed | LEGACY FastAPI server ported route by route | IN_PROGRESS |
 | `.github/workflows/` | CI/CD | **absent** | — | LEGACY had `ci.yml` (validate, parity, godot, android) | missing |
 
 Tests in repository: **none** (no Godot tests, no server tests, no admin tests).

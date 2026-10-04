@@ -95,6 +95,19 @@ func test_accessors_convert_json_numbers_and_fill_defaults() -> void:
 	assert_eq(state.instances("inventory_armor").size(), 0)
 
 
+## The contract fixture the Worker's own tests check its new-account snapshot against (server/test/state.test.ts).
+func test_the_servers_new_account_snapshot_is_accepted() -> void:
+	var path: String = ProjectSettings.globalize_path("res://").path_join("../server/test/fixtures/state_new_account.json").simplify_path()
+	assert_true(FileAccess.file_exists(path), path)
+	var state: PlayerState = PlayerState.from_snapshot(JSON.parse_string(FileAccess.get_file_as_string(path)), _flow.rules.story)
+	assert_true(state.is_valid(), state.error)
+	assert_eq(state.story_state.story_cursor, 0)
+	assert_eq(_flow.rules.story.to_persisted_dict(state.story_state), _flow.rules.story.to_persisted_dict(_flow.rules.story.new_player_state()),
+		"identical to the client's new_player_state")
+	assert_eq(state.roster_ids(), ["fadyme", "mahmut"] as Array[String])
+	assert_eq(state.wallet()["silver_crowns"], 0)
+
+
 func test_without_a_server_the_boot_fails_offline_and_holds_no_state() -> void:
 	assert_false(await Game.attach(_flow, GameBackend.new()))
 	assert_eq(Game.boot_error_kind, GameBackend.KIND_OFFLINE)
