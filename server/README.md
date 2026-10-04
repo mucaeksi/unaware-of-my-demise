@@ -68,7 +68,9 @@ npm run build        # wrangler dry-run bundle
 ```
 
 Configuration:
-- `GOOGLE_CLIENT_IDS` (a var in `wrangler.jsonc`) lists the accepted OAuth client ids, comma-separated. While it is
-  empty, sign-in answers 503.
+- `GOOGLE_CLIENT_IDS` lists the accepted OAuth client ids (the Web client the Android app passes as its server client id),
+  comma-separated. Production takes them from the GitHub secret of the same name: the Deploy workflow checks the format
+  without printing it and passes it with `wrangler deploy --var`. `wrangler.jsonc` keeps it empty, and while it is empty
+  sign-in answers 503. After each deploy the workflow expects a forged credential to get 401 (or 503 without the secret).
 - No secrets live in this directory.
-- Deploys go through GitHub Actions (DEC-0003). The Worker name `unaware-of-my-demise` is the existing Worker.
+- Deploys go through `.github/workflows/deploy.yml` (DEC-0003). The Worker name is `unaware-of-my-demise` (DEC-0001).
