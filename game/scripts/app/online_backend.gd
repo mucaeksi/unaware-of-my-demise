@@ -167,6 +167,16 @@ func exchange_google_credential(credential: String) -> Outcome:
 	return await _call(HTTPClient.METHOD_POST, "/v1/auth/google", {"credential": credential})
 
 
+## Ends this session on the server (INF-019).
+func log_out() -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/auth/logout")
+
+
+## Deletes the account and all its data (INF-020); `credential` is a fresh ID token of the account's identity.
+func delete_account(credential: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/account/delete", {"credential": credential})
+
+
 func fetch_bootstrap() -> Outcome:
 	return await _call(HTTPClient.METHOD_GET, "/v1/bootstrap")
 

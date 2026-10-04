@@ -36,7 +36,8 @@ revision, hesap değişimi) düzeltme olmadan başarısız görüldü.
 | INF-016 Intake ve lifecycle | IN_PROGRESS | Gövde okunurken 16 KiB sınırı; günlük cron: nonce/session temizliği, 24 saatlik attempt süresi, 30 gün sonra yanıt temizliği + anahtar mezar taşı (geç tekrar 409 `OPERATION_EXPIRED`, asla yeniden çalışmaz) (DEC-0018, migration 0004; vitest, mezar taşı kontrolü kaldırılınca test başarısız). VERIFIED için: canlıda cron çalışma kaydı. |
 | INF-017 Android plugin ve auth coordinator | VERIFIED | UomdNative (BATCH-0003) + Credential Manager; `SignInFlow`; açılış gate → giriş → snapshot. Cihaz kanıtı: sahibi CI debug APK'sını (run 37220748833) telefona kurdu, Google ile giriş yaptı ve oyunu oynadı (2026-10-04, OQ-015 kapandı). |
 | INF-018 Manifest/signing kimliği | IN_PROGRESS | INTERNET açık; versionCode = `uomd/release/version_code`; APK izinleri yalnız INTERNET + uygulama içi imza izni. Debug SHA-1 için Android OAuth client sahibince oluşturuldu (2026-10-04, bildirildi; cihaz testiyle doğrulanacak). Eksik: upload ve Play App Signing SHA-1'leri (G7). |
-| INF-019 Session | IN_PROGRESS | 401 → tek yenileme, aynı Idempotency-Key; başka hesapla yenileme oturumu bitirir. Eksik: background/resume, logout UI, oturumu cihazda saklama kararı. |
+| INF-019 Session | IN_PROGRESS | 401 → tek yenileme, aynı Idempotency-Key; başka hesapla yenileme oturumu bitirir. Ayarlar'da çıkış: sunucuda oturum iptali + Credential Manager seçimi temizlenir (DEC-0022). Eksik: background/resume testi, oturumu cihazda saklama kararı. |
+| INF-020 Hesap/veri lifecycle | IN_PROGRESS | Ayarlar'da iki aşamalı onaylı hesap silme: uyarı + yeni nonce'lu Google kimlik bilgisi aynı kimlikle eşleşmeli; tüm satırlar cascade ile silinir, yalnız anonim silme kaydı kalır (migration 0006; vitest: tüm tablolarda 0 satır). Neon PITR geçmişi 6 saat. Eksik: web silme sayfası (OQ-016), satın alma kayıtları için saklama kararı (INF-036). |
 
 ---
 

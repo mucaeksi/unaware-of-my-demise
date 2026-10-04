@@ -3,11 +3,14 @@ import {
   consumeNonce,
   createAccount,
   createSession,
+  deleteAccount,
   ensureProfile,
   findAccountBySubject,
   hashSubject,
+  isLinked,
   issueNonce,
   resolveSession,
+  revokeSession,
 } from "./accounts";
 import { consistentRead, transaction, type Connect, type Db } from "./db";
 import { setJournalContext } from "./journal";
@@ -86,9 +89,13 @@ type Handler = (context: Context) => Promise<Response>;
 
 const UNIQUE_VIOLATION = "23505";
 
-async function requireAccount({ request, db }: Context): Promise<string> {
+function bearerToken(request: Request): string {
   const header = request.headers.get("authorization") ?? "";
-  const token = header.startsWith("Bearer ") ? header.slice("Bearer ".length).trim() : "";
+  return header.startsWith("Bearer ") ? header.slice("Bearer ".length).trim() : "";
+}
+
+async function requireAccount({ request, db }: Context): Promise<string> {
+  const token = bearerToken(request);
   if (!token) throw unauthorized("Missing or invalid Authorization header");
   const accountId = await resolveSession(db, token);
   if (accountId === null) throw unauthorized("Session token is missing, invalid or expired");
@@ -131,6 +138,23 @@ async function mutate(
 }
 
 function routes(deps: AppDeps): Record<string, Handler> {
+  /** The provider identity of a `{credential}` body: verified, with its single-use server nonce consumed. */
+  const verifiedIdentity = async (request: Request, db: Db): Promise<{ provider: string; subjectHash: string }> => {
+    if (deps.verifier === null) throw new ApiError(503, "SERVICE_UNAVAILABLE", "Sign-in is not configured");
+    const credential = requireString(await readJsonObject(request), "credential", 8192);
+    let identity;
+    try {
+      identity = await deps.verifier.verify(credential);
+    } catch (error) {
+      if (error instanceof IdentityVerificationError) throw unauthorized(error.message);
+      throw error;
+    }
+    if (!identity.nonce) throw unauthorized("Credential is missing a nonce claim");
+    // Never-issued, already-used and expired nonces fail alike: telling them apart helps no legitimate retry.
+    if (!(await consumeNonce(db, identity.nonce))) throw unauthorized("Invalid, expired or already-used nonce");
+    return { provider: identity.provider, subjectHash: await hashSubject(identity.provider, identity.subject) };
+  };
+
   /** The server clock in whole UTC seconds (quest windows, Ration). */
   const clock = (): number => Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
   const mutateNow = (...args: [Context, string, string, (tx: Db, accountId: string) => Promise<Record<string, unknown> | void>]) => mutate(...args, clock());
@@ -149,20 +173,8 @@ function routes(deps: AppDeps): Record<string, Handler> {
     },
 
     "POST /v1/auth/google": async ({ request, db }) => {
-      if (deps.verifier === null) throw new ApiError(503, "SERVICE_UNAVAILABLE", "Sign-in is not configured");
-      const credential = requireString(await readJsonObject(request), "credential", 8192);
-      let identity;
-      try {
-        identity = await deps.verifier.verify(credential);
-      } catch (error) {
-        if (error instanceof IdentityVerificationError) throw unauthorized(error.message);
-        throw error;
-      }
-      if (!identity.nonce) throw unauthorized("Credential is missing a nonce claim");
-      // Never-issued, already-used and expired nonces fail alike: telling them apart helps no legitimate retry.
-      if (!(await consumeNonce(db, identity.nonce))) throw unauthorized("Invalid, expired or already-used nonce");
-
-      const subjectHash = await hashSubject(identity.provider, identity.subject);
+      const identity = await verifiedIdentity(request, db);
+      const subjectHash = identity.subjectHash;
       let accountId = await findAccountBySubject(db, identity.provider, subjectHash);
       const isNewAccount = accountId === null;
       if (accountId === null) {
@@ -185,6 +197,25 @@ function routes(deps: AppDeps): Record<string, Handler> {
         expires_at_utc: isoUtc(session.expiresAt),
         is_new_account: isNewAccount,
       });
+    },
+
+    // INF-019: ends this session; the token stops working at once.
+    "POST /v1/auth/logout": async (context) => {
+      await requireAccount(context);
+      await revokeSession(context.db, bearerToken(context.request));
+      return json({ signed_out: true });
+    },
+
+    // INF-020: deletes the account and all its data. The session alone is not enough: a fresh credential for a fresh
+    // nonce must prove the player holds the identity linked to this account.
+    "POST /v1/account/delete": async (context) => {
+      const accountId = await requireAccount(context);
+      const identity = await verifiedIdentity(context.request, context.db);
+      if (!(await isLinked(context.db, accountId, identity.provider, identity.subjectHash))) {
+        throw new ApiError(403, "REAUTH_MISMATCH", "The confirmation was signed with another account");
+      }
+      await transaction(context.db, (tx) => deleteAccount(tx, accountId, identity.provider));
+      return json({ deleted: true, account_id: accountId });
     },
 
     "GET /v1/account": async (context) => {

@@ -30,8 +30,9 @@ class NativeSigner extends Signer:
 		return result
 
 
-## Runs one sign-in (coroutine). `value` on success: {"account_id", "session_token", "expires_at_utc", "is_new_account"}.
-static func run(backend: OnlineBackend, server_client_id: String, signer: Signer) -> Outcome:
+## A fresh Google ID token bound to a new server nonce (coroutine; `value` = the token). Sign-in trades it for a session; account
+## deletion sends it as the proof that the player holds the account's identity.
+static func request_credential(backend: OnlineBackend, server_client_id: String, signer: Signer) -> Outcome:
 	if server_client_id.is_empty():
 		return Outcome.fail(KIND_UNAVAILABLE, "Sign-in is not configured in this build.")
 	var issued: Outcome = await backend.request_nonce()
@@ -55,7 +56,15 @@ static func run(backend: OnlineBackend, server_client_id: String, signer: Signer
 	var id_token: String = str(token.get("id_token", ""))
 	if id_token.is_empty():
 		return Outcome.fail(KIND_FAILED, "Google sign-in returned no credential.")
-	var session: Outcome = await backend.exchange_google_credential(id_token)
+	return Outcome.ok(id_token)
+
+
+## Runs one sign-in (coroutine). `value` on success: {"account_id", "session_token", "expires_at_utc", "is_new_account"}.
+static func run(backend: OnlineBackend, server_client_id: String, signer: Signer) -> Outcome:
+	var credential: Outcome = await request_credential(backend, server_client_id, signer)
+	if not credential.is_ok():
+		return credential
+	var session: Outcome = await backend.exchange_google_credential(str(credential.value))
 	if not session.is_ok():
 		return session
 	var data: Dictionary = session.value

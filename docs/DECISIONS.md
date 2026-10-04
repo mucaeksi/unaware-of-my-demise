@@ -378,3 +378,19 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
     unexpected errors write `unhandled_error` with the same id. The id is Cloudflare's `cf-ray` (or a UUID) and is
     returned as `x-request-id`. Headers, bodies, tokens and path ids are never logged.
 - Not done here: alerting, dashboards, quota/cost budgets and runbooks (rest of INF-011).
+
+## DEC-0022 — Sign-out and account deletion
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-019, INF-020). Google Play requires in-app account deletion for
+  apps that create accounts.
+- Decision:
+  - Sign-out ends the session on the server (`POST /v1/auth/logout`), forgets it on the device and clears Credential
+    Manager's remembered choice; other devices stay signed in.
+  - Deletion is in Settings, confirmed twice: a warning screen, then a fresh Google credential for a fresh server nonce
+    that must match the identity linked to the account. A session alone cannot delete an account.
+  - The account row is deleted and every table cascades (economic journal included). `account_deletions` keeps only the
+    random account id, the confirming provider and the created/deleted times: no provider subject, no game data.
+  - Backups: Neon keeps history for point-in-time restore for 6 hours (project `history_retention_seconds` = 21600), so a
+    deleted account stays restorable from history for at most 6 hours; restoring it would need an explicit operator
+    action. Paid purchases do not exist yet; when billing arrives (INF-036) any legally required purchase records need
+    their own retention decision.
+- Open: the web page Play asks for (deletion without the app) needs a support contact (OQ-016).

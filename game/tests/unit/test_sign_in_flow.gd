@@ -196,3 +196,56 @@ func test_the_export_plugin_adds_exactly_the_aars_gradle_dependencies() -> void:
 		exported.append(dependency)
 	assert_gt(declared.size(), 0)
 	assert_eq(exported, declared)
+
+
+func test_logging_out_ends_the_session_on_the_server_and_here() -> void:
+	Online.session_token = "session-1"
+	Online.account_id = "acct_1"
+	Online.transport = _scripted([{"status": 200, "body": "{\"signed_out\": true}"}] as Array[Dictionary])
+	assert_true((await Online.log_out()).is_ok())
+	var sent: Array[Dictionary] = (Online.transport as ScriptedTransport).sent
+	assert_eq([sent[0]["method"], sent[0]["url"]], [HTTPClient.METHOD_POST, Online.server_url() + "/v1/auth/logout"])
+	assert_eq(_header(sent[0], "Authorization"), "Bearer session-1")
+	assert_false(Online.has_session())
+	assert_eq(Online.account_id, "", "no account stays bound: a later renewal cannot sign anyone in")
+	Online.transport = _scripted([] as Array[Dictionary])
+	assert_true((await Online.log_out()).is_ok(), "signing out works offline too")
+
+
+func test_deleting_the_account_confirms_the_identity_with_a_fresh_credential() -> void:
+	Online.session_token = "session-1"
+	Online.account_id = "acct_1"
+	Online.transport = _scripted([
+		{"status": 200, "body": "{\"nonce\": \"n-del\"}"},
+		{"status": 200, "body": "{\"deleted\": true, \"account_id\": \"acct_1\"}"},
+	] as Array[Dictionary])
+	var signer: FakeSigner = FakeSigner.new()
+	signer.results = [_ok("fresh-token")] as Array[Dictionary]
+	Online.signer = signer
+	assert_true((await Online.delete_account()).is_ok())
+	var sent: Array[Dictionary] = (Online.transport as ScriptedTransport).sent
+	assert_eq(signer.asked[0][1], "n-del", "the confirmation is bound to a new server nonce")
+	assert_eq(sent[1]["url"], Online.server_url() + "/v1/account/delete")
+	assert_eq(JSON.parse_string(sent[1]["body"]), {"credential": "fresh-token"})
+	assert_eq(_header(sent[1], "Authorization"), "Bearer session-1")
+	assert_false(Online.has_session())
+
+
+func test_a_refused_or_cancelled_deletion_keeps_the_account_signed_in() -> void:
+	Online.session_token = "session-1"
+	Online.account_id = "acct_1"
+	Online.transport = _scripted([
+		{"status": 200, "body": "{\"nonce\": \"n\"}"},
+		{"status": 403, "body": "{\"error\": {\"code\": \"REAUTH_MISMATCH\", \"message\": \"The confirmation was signed with another account\"}}"},
+		{"status": 200, "body": "{\"nonce\": \"n2\"}"},
+	] as Array[Dictionary])
+	var signer: FakeSigner = FakeSigner.new()
+	signer.results = [_ok("other-account-token"), {"status": "cancelled", "id_token": "", "error": ""}] as Array[Dictionary]
+	Online.signer = signer
+	assert_eq((await Online.delete_account()).error_kind, "reauth_mismatch")
+	assert_eq((await Online.delete_account()).error_kind, SignInFlow.KIND_CANCELLED)
+	assert_eq((Online.transport as ScriptedTransport).sent.size(), 3, "a cancelled confirmation sends no deletion")
+	assert_true(Online.has_session())
+	Online.session_token = ""
+	assert_eq((await Online.delete_account()).error_kind, Online.KIND_ACCOUNT_CHANGED, "nothing to delete when signed out")
+

@@ -23,6 +23,8 @@ const HUB_SUMMON: String = "summon"
 const HUB_QUESTS: String = "quests"
 const HUB_INN_MEAL: String = "inn_meal"
 const HUB_SETTINGS: String = "settings"
+const SETTINGS_SIGN_OUT: String = "sign_out"
+const SETTINGS_DELETE_ACCOUNT: String = "delete_account"
 const HUB_DIAGNOSTICS: String = "diagnostics"
 
 const _STOP_REASONS: Dictionary = {
@@ -609,10 +611,55 @@ func _claim_inn_meal() -> void:
 
 func _present_settings(status: String = "") -> void:
 	var version: Dictionary = Engine.get_version_info()
+	var info: String = "Unaware of My Demise  (Godot %s, build %d)" % [str(version.get("string", "")), ClientRelease.version_code()]
+	var actions: Array[Dictionary] = []
+	if Online.server_url().is_empty():
+		info += "\nNo game server is configured in this build."
+	elif Online.has_session():
+		info += "\nSigned in with Google  (account …%s)" % Online.account_id.right(6)
+		actions = [{"id": SETTINGS_SIGN_OUT, "label": "Sign out"}, {"id": SETTINGS_DELETE_ACCOUNT, "label": "Delete account"}]
 	var settings: SettingsScreen = SettingsScreen.new()
-	settings.load_settings("Unaware of My Demise  (Godot %s)\nNo game server is configured in this build." % str(version.get("string", "")), status)
+	settings.load_settings(info, status, actions)
 	settings.back_requested.connect(func() -> void: _present_hub())
+	settings.action_requested.connect(func(action_id: String) -> void:
+		if action_id == SETTINGS_SIGN_OUT:
+			_sign_out()
+		elif action_id == SETTINGS_DELETE_ACCOUNT:
+			_confirm_account_deletion())
 	shell.show_screen(settings)
+
+
+## INF-019: ends the session here and on the server; the next start shows the account chooser again.
+func _sign_out() -> void:
+	_show_message("Signing out", "...")
+	await Online.log_out()
+	_present_signed_out("Signed out", "You are signed out of this device.")
+
+
+## INF-020: deletion is permanent, so it is confirmed twice: here, and by choosing the Google account again.
+func _confirm_account_deletion() -> void:
+	var screen: MessageScreen = _show_message("Delete your account?",
+		"This permanently deletes your account and all its progress, heroes, items and currencies. It cannot be undone.\n" +
+		"You will be asked to confirm with your Google account.", [
+		{"id": "delete", "label": "Delete permanently"}, {"id": "cancel", "label": "Cancel"}] as Array[Dictionary])
+	screen.chosen.connect(func(action_id: String) -> void:
+		if action_id != "delete":
+			_present_settings()
+			return
+		_show_message("Deleting your account", "...")
+		var deleted: Outcome = await Online.delete_account()
+		if deleted.is_ok():
+			_present_signed_out("Account deleted", "Your account and all its data were deleted.")
+		else:
+			_present_settings("The account was not deleted: %s" % deleted.error), CONNECT_ONE_SHOT)
+
+
+## After a sign-out or a deletion: nothing of the old session is kept; "Sign in" starts over (account chooser).
+func _present_signed_out(title: String, message: String) -> void:
+	Game.flow = null
+	flow = null
+	var screen: MessageScreen = _show_message(title, message, [{"id": "sign_in", "label": "Sign in"}] as Array[Dictionary])
+	screen.chosen.connect(func(_action_id: String) -> void: start(), CONNECT_ONE_SHOT)
 
 # -- helpers ------------------------------------------------------------------------------------------
 
