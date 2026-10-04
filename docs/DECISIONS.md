@@ -335,3 +335,20 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   - An open attempt older than 24 h cannot be won and is not offered for resume (it paid nothing). This also bounds
     how long an attempt can outlive a rules change (INF-022 still to do).
   - Nothing that proves an economic outcome is deleted: claims, pull history, resolved attempts and key tombstones stay.
+
+## DEC-0019 — Economic journal by database triggers
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-015).
+- Context: grants and debits were only visible through their side tables (pull history, claims, attempt results,
+  stored replies); there was no single record that explains a balance or ties a change to the request and the content
+  release that made it.
+- Decision:
+  - Migration 0005 adds `economy_journal` and triggers on `wallet` (Eclipse Tokens, Fate's Threads, Silver Crowns,
+    Account XP), `inventory_items`, the three equipment tables (minted/destroyed), `roster` (copies, Memory Shards)
+    and `gacha_pity` (state before and after). A trigger cannot be forgotten by a new grant path.
+  - Each row carries the request's Idempotency-Key, route and rules hash, set once per transaction by the Worker
+    (`setJournalContext`, transaction-local `set_config`); account creation records `account_create`; changes outside
+    a request are `unattributed`. With the reward seed (stage_attempts) and RNG seed (pull_history) a past outcome is
+    reproducible after tuning.
+  - Ration is not journaled (time regeneration makes a row diff misleading); its spends are on the verified victory.
+  - Invariant (tested): the journaled deltas of each currency and item add up to the balance.
+  - Journal rows go with a deleted account (cascade); retention/anonymization is INF-020.

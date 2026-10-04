@@ -2,8 +2,8 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md, INF backlog)
-Feature: G2 third slice — uncertain operations and battle recovery
-Task: INF-013/014 (DEC-0017)
+Feature: G2 — slices 3–5 (INF-013/014 merged, INF-016 merged, INF-015 in PR)
+Task: INF-015 economic journal (DEC-0019)
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->

@@ -10,6 +10,7 @@ import {
   resolveSession,
 } from "./accounts";
 import { consistentRead, transaction, type Connect, type Db } from "./db";
+import { setJournalContext } from "./journal";
 import { committedOperation, idempotencyKey, runIdempotent } from "./idempotency";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
@@ -101,6 +102,8 @@ async function mutate(
   const accountId = await requireAccount(context);
   const key = idempotencyKey(context.request);
   const { response } = await runIdempotent(context.db, key, accountId, endpoint, fingerprint, async (tx) => {
+    // Every balance or inventory change below is journaled with this request (INF-015).
+    await setJournalContext(tx, key, endpoint);
     const extra = (await action(tx, accountId)) ?? {};
     await bumpStateRevision(tx, accountId);
     return { ...extra, state: await snapshot(tx, accountId, nowUnix) };
@@ -145,7 +148,10 @@ function routes(deps: AppDeps): Record<string, Handler> {
       const isNewAccount = accountId === null;
       if (accountId === null) {
         try {
-          accountId = await transaction(db, (tx) => createAccount(tx, identity.provider, subjectHash));
+          accountId = await transaction(db, async (tx) => {
+            await setJournalContext(tx, null, "account_create");
+            return createAccount(tx, identity.provider, subjectHash);
+          });
         } catch (error) {
           // A concurrent first sign-in of the same identity won the race: use its account.
           if ((error as { code?: string }).code !== UNIQUE_VIOLATION) throw error;

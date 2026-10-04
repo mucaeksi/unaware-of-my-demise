@@ -50,6 +50,10 @@ Every route except `/healthz` and `/v1/bootstrap` passes the release gate first:
 is below `MIN_CLIENT_VERSION_CODE` gets 426 `UPDATE_REQUIRED` (the header is optional; the Godot client always sends
 it), and a non-empty `MAINTENANCE_MESSAGE` answers 503 `MAINTENANCE` with that message.
 
+Economic journal (INF-015, migration 0005, DEC-0019): database triggers record every change to a currency (not Ration),
+a stackable item, an equipment instance, a hero's copies or Memory Shards and gacha pity in `economy_journal`, with the
+request's Idempotency-Key, route and rules hash (`src/journal.ts` sets them per transaction).
+
 Data lifecycle (INF-016, `src/retention.ts`, cron `17 3 * * *` UTC): nonces are deleted a day after expiry and sessions a
 week after; an open attempt older than 24 h can no longer be won, the snapshot stops offering it and the job marks it
 `expired`; a stored reply is replayable for 30 days, then purged while its key stays as a tombstone, so a later retry
