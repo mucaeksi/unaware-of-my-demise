@@ -98,7 +98,9 @@ repository** and is orphaned. It will not fire for the current repo. Even if
 reconnected, it would fail: `server/` is a Node/Fastify server (no
 `wrangler.toml`, native `argon2`, `app.listen`). See `docs/CURRENT_STATE.md`.
 
-Canonical deploy path: **DECISION_REQUIRED** — recorded as DEC-0003 in
+2026-10-04: the template Worker (and with it the orphaned trigger binding) was deleted and the game API deployed (DEC-0003, version `097ca9db…`).
+
+Canonical deploy path (original audit): **DECISION_REQUIRED** — recorded as DEC-0003 in
 `docs/DECISIONS.md` with a recommendation (GitHub Actions + wrangler, and
 disconnect the orphaned Workers Builds trigger in the dashboard).
 
