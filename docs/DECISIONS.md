@@ -553,3 +553,21 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   claim (another key, another device) a 409 that pays nothing; the grant is journaled as `mail_claim`. A missing config
   means revision 0, no flags, no notices; clients ignore flags they do not know. Revoking a mail stops further claims and
   never takes back what was claimed.
+
+## DEC-0035 — Release AABs and the end-to-end test
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-039…042). Store upload waits on owner decision D-13.
+- Release: `.github/workflows/release-android.yml` (manual, main only) builds the AAB with the pinned Godot 4.7.2, JDK 17,
+  platform 36 and build-tools 36.1.0 from the committed versionCode/versionName (raising them is a reviewed commit; a
+  versionCode already built is refused), signs it with the upload key from secrets, and `game/tools/build_android_release.sh`
+  proves it: the signature verifies and is the upload key's; bundletool 1.18.2 (hash-pinned) validates the bundle and
+  builds the universal APK, which `verify_apk.sh` checks (package, min/target SDK, arm64-v8a only, permission allowlist,
+  UomdNative plugin, 16 KB zip and ELF alignment) and whose versionCode/Name must match. The AAB, its base pack (the
+  base of that release's content patches) and a provenance file (hashes, commit, upload certificate) are kept for 90 days.
+  No NDK is needed: Godot ships the native libraries prebuilt (verified with a full local build, 2026-10-04).
+- End-to-end: `server/e2e/run.sh` runs the production Worker code under `wrangler dev` (entry `src/e2e-index.ts`: only
+  sign-in is swapped for test credentials; never deployed — deploy.yml checks the production entry) against a disposable
+  PostgreSQL with every migration, and the headless Godot client (`game/e2e`) plays a new account through the opening,
+  1-1 and 1-2 (server-verified victories), the First Oath and 1-3, calls the menus, then relaunches with the same session
+  and signs in again — same account, same state. CI job `e2e`.
+- Not covered here (device and store): a real Google sign-in on a phone, Play install/upgrade, background/kill, patch
+  under bad connectivity (INF-043/044, owner-run with the release build).

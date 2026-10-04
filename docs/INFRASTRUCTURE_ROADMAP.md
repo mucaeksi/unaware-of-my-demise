@@ -14,7 +14,11 @@ Tarih: 2026-10-04. Başlangıç: `main@bdd3e19e395f73f7c2bdff5966e20a74ae986123`
 Durumlar: TODO / IN_PROGRESS / VERIFIED / BLOCKED. VERIFIED yalnız komut/artifact/cihaz/yayın kanıtıyla yazılır.
 Listede olmayan INF kimlikleri **TODO**'dur. Kararlar: DEC-0015 (dilim 1), DEC-0016 (dilim 2).
 
-Kanıt (2026-10-04): vitest 389/389, GUT 270/270, `database/test.sh` 0001–0003; CI `database`/`server`/`godot`/`android`
+Güncel kanıt (2026-10-04, PR #27 itibarıyla): vitest 446, GUT 314 (rapor kontrolüyle), `database/test.sh` 0001–0009 +
+süper-kullanıcı olmayan sahip koşusu, araç testleri 14, gerçek HTTP E2E 1 senaryo; canlı: migration 0001–0009, ortam kaydı
+`production`, restore provası geçti, admin Worker yayında (Access bekliyor). Genel kabul tablosu: aşağıda "G8 durumu".
+
+İlk kanıt (2026-10-04): vitest 389/389, GUT 270/270, `database/test.sh` 0001–0003; CI `database`/`server`/`godot`/`android`
 yeşil (PR #18, #19). Canlı: `/v1/bootstrap` merge SHA'sını raporluyor, migration 0003 Neon'da (deploy #8 başarılı),
 sahte Google credential'a 401, rules hash istemciyle aynı. CI debug APK'sı depo debug anahtarıyla imzalı
 (SHA-1 `84:E8:2C:4D:9B:A6:77:36:2F:06:D9:C6:E2:A6:9D:CD:B5:0E:9A:4D`). Regresyon testleri (tutarlı snapshot, eski
@@ -54,6 +58,12 @@ revision, hesap değişimi) düzeltme olmadan başarısız görüldü.
 | INF-036 Billing ve rewarded ads | BLOCKED_OWNER | v1 kapsamına dahil olup olmadığı sahibin kararı (D-10). LEGACY şemasında abonelik/ad tabloları mevcut (0001), sunucu doğrulaması ve native adaptör yok. Dahil değilse genel altyapı kabulünün dışında açıkça listelenir. |
 | INF-037 Social | BLOCKED_OWNER | Kapsam kararı D-10. LEGACY `friend_edges`/`reports` tabloları ve profil/arkadaş kodu mevcut; uç nokta yok. |
 | INF-038 İşletim kapanışı | IN_PROGRESS | Restore provası canlıya karşı geçti; rollback kayıtlı ve çalıştırılabilir; CPU ölçümü (`docs/runbooks/CAPACITY.md`): zafer ~51 ms, giriş ≤39 ms, DB rotaları 12–23 ms — Free planın 10 ms sınırının üstünde (D-12). Eksik: gerçek oyuncu trafiğiyle yeniden ölçüm, sağlayıcı callback retry (INF-036 ile), retention temizliğinin canlı kaydı. |
+| INF-039 Android release toolchain | IN_PROGRESS | Godot 4.7.2 + eşleşen şablonlar (SHA-512), JDK 17, platform 36, build-tools 36.1.0, Gradle 8.11.1, bundletool 1.18.2 (hash sabit); NDK gerekmiyor (yerel tam derleme ile doğrulandı) (DEC-0035). |
+| INF-040 AAB artifact | IN_PROGRESS | Ayrı "Android AAB" preset'i; `release-android.yml` + `build_android_release.sh`: commit'lenmiş versionCode (aynısı ikinci kez reddedilir), upload anahtarıyla imza, base pack + provenance (hash'ler, commit, sertifika) 90 gün. Yerelde deneme anahtarıyla tam çalıştırıldı. Eksik: upload anahtarı secret'ları (D-13), SBOM/üçüncü taraf bildirimleri. |
+| INF-041 Bundle doğrulaması | IN_PROGRESS | bundletool validate + universal APK → `verify_apk.sh` (paket, SDK 28/36, yalnız arm64-v8a, izin listesi, UomdNative, 16 KB zip/ELF hizası) + versionCode/Name eşleşmesi; yerelde geçti. |
+| INF-042 E2E | IN_PROGRESS | `server/e2e/run.sh` + `game/e2e`: gerçek HTTP Worker (`wrangler dev`) + PostgreSQL + başsız istemci: yeni hesap → açılış → 1-1/1-2 sunucu doğrulamalı zafer → First Oath → 1-3 → menüler → yeniden açılışta aynı durum, tekrar girişte aynı hesap (yerelde geçti; CI `e2e` job'u). Eksik: gerçek Google/cihaz akışı (INF-044). |
+| INF-043 Test dağıtımı | BLOCKED_OWNER | Play Console hesabı/uygulama/App Signing/test track ve testçi erişimi sahibinde (D-13). |
+| INF-044 Cihaz QA | BLOCKED_OWNER | Play'den kurulum/güncelleme, soğuk açılış, arka plan/öldürme, patch sırasında bağlantı — release AAB ile sahibin cihazında (D-13 sonrası). |
 | INF-017 Android plugin ve auth coordinator | VERIFIED | UomdNative (BATCH-0003) + Credential Manager; `SignInFlow`; açılış gate → giriş → snapshot. Cihaz kanıtı: sahibi CI debug APK'sını (run 37220748833) telefona kurdu, Google ile giriş yaptı ve oyunu oynadı (2026-10-04, OQ-015 kapandı). |
 | INF-018 Manifest/signing kimliği | IN_PROGRESS | INTERNET açık; versionCode = `uomd/release/version_code`; APK izinleri yalnız INTERNET + uygulama içi imza izni. Debug SHA-1 için Android OAuth client sahibince oluşturuldu (2026-10-04, bildirildi; cihaz testiyle doğrulanacak). Eksik: upload ve Play App Signing SHA-1'leri (G7). |
 | INF-019 Session | IN_PROGRESS | 401 → tek yenileme, aynı Idempotency-Key; başka hesapla yenileme oturumu bitirir. Ayarlar'da çıkış: sunucuda oturum iptali + Credential Manager seçimi temizlenir (DEC-0022). Eksik: background/resume testi, oturumu cihazda saklama kararı. |
@@ -228,6 +238,24 @@ Aşağıdaki kapıların tamamı kapanmadan “altyapı tamamen bitti” denmez:
 | İşletim | Staging/prod ayrımı, restore+rollback tatbikatı, retention, alarms ve measured resource budgets |
 | AAB | Signed tested artifact, matching base identity, Play test-track install ve gerçek cihaz E2E |
 | Ortak hafıza | Güncel docs, release manifesti, migration provenance ve her gate'in doğrulama kaydı |
+
+### G8 durumu (2026-10-04)
+
+Altyapı **tamamen bitmiş sayılmaz**: mühendislik tarafı her kapı için kuruldu ve test edildi; kalan kanıtların hepsi sahibin
+kararı veya hesap işlemi gerektiriyor (`docs/OWNER_DECISIONS.md`).
+
+| Kapı | Durum | Kanıt | Eksik (karar) |
+| --- | --- | --- | --- |
+| Hesap | Kısmen | Gerçek nonce + Google girişi debug APK ile cihazda (sahip); logout/silme, oturum yenileme, hesap değişimi testli | Play kurulumunda giriş (D-13, D-04), web silme sayfası (D-01) |
+| State/ekonomi | Hazır | revision, kayıp yanıt/tekrar/uzlaştırma, journal = bakiye (`verify.sh`), tek ödül (mail, quest, gacha) testli; restore edilmiş canlı kopyada bütünlük ok | çoklu cihaz canlı kanıtı |
+| Rules | Hazır | ortak hash (sunucu = istemci = Python aracı = canlı), attempt rules pinning, eski istemci 426 | — |
+| İçerik tüketimi | Kısmen | asset resolver, ses/locale (ikinci dil örneği) testli | gerçek sanat/ses dosyaları (narrative ekibi), müzik cue id'leri (D-08) |
+| Patch | Kısmen | veri/asset kapısı (CI'da gerçek motorla), imzalı manifest, özel R2 teslimi (canlı 401), yükleyici (bozuk/disk/kesinti/replay/last-good testli) | imza anahtarı (D-09), cihazda imzalı canary |
+| Admin/liveops | Kısmen | rol + denetim aynı transaction'da, sürümlü config, posta defteri, UTC sınırı testli; admin Worker canlı | Cloudflare Access (D-11), canlı sentetik duyuru/posta |
+| Platform kapsamı | Karar bekliyor | — | billing/reklam/sosyal dahil mi (D-10) |
+| İşletim | Kısmen | restore provası canlıya karşı geçti, kayıtlı rollback, retention cron'u, CPU ölçümü, runbook'lar | staging kaynakları (D-07), alarm kanalı (D-06), 6 saati aşan yedek (D-05), Workers planı (D-12), Neon branch koruması (D-03) |
+| AAB | Kısmen | imzalı AAB + bundletool + APK kontrolleri yerelde tam geçti, gerçek HTTP E2E | upload anahtarı + Play test track + cihaz QA (D-13) |
+| Ortak hafıza | Hazır | DEC-0015…0035, migration provenance (MIG-0041/0042), runbook'lar, bu tablo, checkpoint | — |
 
 ## Altyapıdan sonraki sıra
 
