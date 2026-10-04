@@ -151,6 +151,51 @@ jobs:
       - run: npm run check
       - run: npm run build
 
+  # INF-042: the real client against the real Worker over HTTP with PostgreSQL (server/e2e/run.sh): a new player plays
+  # the opening chapter with server-verified victories, then a fresh client with the same session sees the same player.
+  e2e:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - run: npm ci
+        working-directory: server
+      - name: Install the pinned Godot (checksum verified)
+        run: |
+          version="$(tr -d '[:space:]' < game/GODOT_VERSION)"
+          base="https://github.com/godotengine/godot/releases/download/${version}"
+          archive="Godot_v${version}_linux.x86_64.zip"
+          mkdir -p "${RUNNER_TEMP}/godot" && cd "${RUNNER_TEMP}/godot"
+          curl -fsSLO "${base}/${archive}"
+          curl -fsSLO "${base}/SHA512-SUMS.txt"
+          grep " ${archive}\$" SHA512-SUMS.txt | sha512sum -c -
+          unzip -q "${archive}"
+          echo "GODOT=${RUNNER_TEMP}/godot/Godot_v${version}_linux.x86_64" >> "${GITHUB_ENV}"
+      - name: End to end
+        env:
+          ADMIN_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+        run: server/e2e/run.sh "${RUNNER_TEMP}/e2e-junit.xml"
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: e2e-report
+          path: |
+            ${{ runner.temp }}/e2e-junit.xml
+            ${{ runner.temp }}/e2e-junit.log
+          retention-days: 14
+
   # INF-007/INF-017: the UomdNative Android plugin (Google sign-in through Credential Manager) and a debug APK built from it with
   # the pinned toolchain, verified by game/tools/verify_apk.sh and kept as an artifact for device tests. The APK is signed with
   # the repository's debug keystore (secret ANDROID_DEBUG_KEYSTORE_BASE64) so its certificate SHA-1 stays registered with the

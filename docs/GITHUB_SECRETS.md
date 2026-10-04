@@ -30,16 +30,23 @@ secrets, and never in `wrangler.toml`.
 | `ANDROID_DEBUG_KEYSTORE_BASE64` | secret | base64 of a debug keystore (alias `androiddebugkey`, store/key password `android`). A fixed key keeps the APK's SHA-1 registered with the Android OAuth client; without it CI signs with a throwaway key and device sign-in fails. Not the release/upload key. |
 | `GOOGLE_CLIENT_IDS` | variable | the Worker's accepted ID-token audiences (the Web OAuth client id); the same Web client id is `uomd/online/google_server_client_id` in `game/project.godot` |
 
-## Android / Google Play (later release task)
+## Android release (release-android.yml, DEC-0035, owner decision D-13)
 
-| Name | Kind |
-|---|---|
-| `ANDROID_KEYSTORE_BASE64` | secret |
-| `ANDROID_KEY_ALIAS` | secret |
-| `ANDROID_KEY_PASSWORD` | secret |
-| `ANDROID_KEYSTORE_PASSWORD` | secret |
-| `GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_BASE64` | secret |
-| `GOOGLE_PLAY_PACKAGE_NAME` | variable |
+| Name | Kind | Purpose |
+|---|---|---|
+| `ANDROID_UPLOAD_KEYSTORE_BASE64` | secret | `base64 -w0` of the upload keystore (Play App Signing upload key; never the app signing key) |
+| `ANDROID_UPLOAD_KEY_ALIAS` | secret | its alias |
+| `ANDROID_UPLOAD_KEYSTORE_PASSWORD` | secret | the store password, which must also be the key password (Godot signs with one password) |
+
+Uploading to Play from CI (a service account) is not set up; the AAB is uploaded by hand to a test track.
+
+## Content signing and admin (DEC-0029, DEC-0033)
+
+| Name | Kind | Purpose |
+|---|---|---|
+| `CONTENT_SIGNING_KEY` | secret | PEM private key that signs content manifests (D-09) |
+| `ADMIN_ACCESS_TEAM_DOMAIN`, `ADMIN_ACCESS_AUD` | variables | Cloudflare Access team domain and application audience of the admin Worker (D-11) |
+| `ADMIN_OPERATOR_EMAILS` | variable | operators the deploy registers (adds only) |
 
 ## Gemini
 

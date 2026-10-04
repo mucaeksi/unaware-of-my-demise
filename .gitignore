@@ -45,3 +45,4 @@ game/android/build/
 game/android/.build_version
 __pycache__/
 *.pyc
+server/.wrangler/

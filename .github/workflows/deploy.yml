@@ -146,6 +146,8 @@ jobs:
         if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
         working-directory: server
         run: |
+          # The test-only entry (test sign-in) must never be what production runs.
+          grep -Eq '"main": "src/index.ts"' wrangler.jsonc || { echo "::error::wrangler.jsonc main is not src/index.ts"; exit 1; }
           npm ci
           # --env= targets the top-level (production) configuration explicitly; env.staging is deploy-staging.yml's.
           args=(--env= --var "RELEASE_SOURCE_SHA:${SOURCE_SHA}")
