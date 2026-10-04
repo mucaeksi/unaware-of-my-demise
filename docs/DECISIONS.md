@@ -490,3 +490,17 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Why RSA, not Ed25519: Godot's `Crypto` (mbedTLS, the same on Android) verifies RSA PKCS#1 v1.5 with SHA-256 and has no
   Ed25519; verified headless by GUT against an openssl-signed fixture (its private key was discarded).
 - Key rotation: a new key id is an app release that ships both keys; manifests switch after enough players updated.
+
+## DEC-0030 — Content patches are delivered by the Worker from a private bucket
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-029).
+- Decision: the R2 bucket `unaware-of-my-demise-content` stays private (verified 2026-10-04: r2.dev access disabled, no
+  custom domain, no CORS). The Worker binds it as `CONTENT` and serves signed-in players only:
+  `GET /v1/content/current` (the channel's signed manifest and signature, byte-exact, `no-store`) and
+  `GET /v1/content/packs/{sha256}` (immutable, content-addressed packs; `private, max-age=31536000, immutable`; one
+  byte range per request for resumed downloads, 206/416). Layout: `packs/<sha256>.pck`,
+  `manifests/<channel>/<generation>.json(.sig)` (both never overwritten), `channels/<channel>/current.json(.sig)` (the
+  pointer, a copy of the current manifest). The pointer needs no trust of its own (DEC-0029: signature + generation).
+  Each deployment serves one channel (`CONTENT_CHANNEL`: production, staging); the client cannot ask for another.
+  No credential or URL that bypasses the Worker is ever embedded in the app or a pack.
+- Rejected: presigned R2 URLs handed to clients (would need R2 S3 credentials in the Worker for little gain at this
+  scale); a public bucket.
