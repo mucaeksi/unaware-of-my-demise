@@ -19,3 +19,4 @@ record where applicable. Engineering continues around every item.
 | OQ-011 | ~~Ration spending~~ — **CLOSED 2026-10-04**: owner set cap 100; spend on verified victory, 1 unit / 300 s server-side regeneration (DEC-0014) | — | — | DEC-0014 |
 | OQ-012 | ~~Production migrations~~ — **CLOSED 2026-10-04**: owner added secret `DATABASE_URL`; the deploy workflow applies pending migrations before each Worker deploy | — | — | DEC-0003 |
 | OQ-013 | ~~Public endpoint~~ — **CLOSED 2026-10-04**: workers.dev (owner); a custom-domain route can replace it later | — | — | DEC-0003 |
+| OQ-014 | `docs/INFRASTRUCTURE_REVIEW.md` (findings R01–R16 cited by the infrastructure roadmap) is not in the repository; provide it so the R-findings can be traced | owner action | traceability of `docs/INFRASTRUCTURE_ROADMAP.md` only | INFRASTRUCTURE_ROADMAP |
