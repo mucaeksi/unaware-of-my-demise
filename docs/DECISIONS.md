@@ -161,3 +161,45 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Not migrated for the same reason: `game/addons/uomd_native/`,
   `game/android/plugins/uomd_native/` (Keystore save-key wrapping existed for
   the SQLite save; Sign-In/Billing/Ads move with G6 when implemented).
+
+## DEC-0013 — Backend: TypeScript Worker port of the LEGACY server, battles re-simulated
+- Status: ACCEPTED (2026-10-04, lead engineer). Derived from CLAUDE.md
+  "SERVER AUTHORITY" and DEC-0012. The owner may override the battle-validation
+  choice.
+- Evidence: `docs/LEGACY_AUDIT.md` §9.
+- Decision:
+  - **Runtime.** The production API is a TypeScript Cloudflare Worker using
+    Hyperdrive → Neon (`UOMD`, branch `production`). It replaces both the
+    starter Fastify `server/` and the LEGACY FastAPI code.
+    - The LEGACY routes, payload names, error shape, idempotency model and
+      ledger tables are kept (§9.3).
+    - The SQLite DDL is translated to PostgreSQL as versioned migrations
+      under `database/migrations/`. The starter `001_init.sql` and the demo
+      seed are replaced.
+  - **Rules.** The pure rules (progression, equipment, loot, quests, story
+    state, gacha) are ported to TypeScript. They are verified against the same
+    `parity/fixtures` that the Python reference and the GDScript port already
+    pass. One source of truth for numbers (`content/` packs), three
+    implementations checked against one fixture set.
+  - **Battles are re-simulated on the server.**
+    - The client asks to start a stage (`POST /v1/stages/{id}/attempts`,
+      sending the roster). The server checks the stage is unlocked and the
+      roster is owned and legal, then stores an attempt with a
+      server-chosen 63-bit seed and returns `{attempt_id, run_seed}`.
+    - The client plays that seed and reports the result.
+    - The server re-runs the deterministic engine (TypeScript port,
+      parity-tested) from the attempt's stored inputs. It grants rewards only
+      if its own result is a victory, and applies them in one transaction
+      keyed by the attempt (single use).
+    - Why: a client-chosen seed allows seed shopping, and a client-reported
+      victory would make rewards client-authoritative.
+  - **Client contract change.** `GameBackend` gains
+    `begin_stage(stage_id, roster) -> {attempt_id, run_seed}`.
+    `submit_victory` takes the attempt id instead of a seed. This is done
+    together with `OnlineBackend`.
+  - **No Gemini or AI code in the runtime** (CLAUDE.md). The starter
+    `server/src/ai.ts` is not carried over.
+- Consequences:
+  - The battle engine gets a third implementation, so parity fixtures become
+    the gate for every engine change.
+  - CI must run the GDScript and TypeScript parity suites.
