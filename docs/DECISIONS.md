@@ -462,3 +462,17 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   (`LocalizedText.pick`); adding a language is a content addition.
 - Open: story scenes carry `music_cue` as prose, not an id; cue ids per scene are a content/narrative decision
   (`docs/OWNER_DECISIONS.md` D-08). UI chrome strings (button labels) are not yet in a translation table.
+
+## DEC-0028 — A content patch carries data and imported art/audio, never code
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-027).
+- Decision: content patches are Godot delta packs (`--export-patch` against the base pack of the app release they apply
+  to, plus earlier patches), built by `game/tools/build_content_patch.sh`. `tools/pck_inventory.py` reads the pack
+  (format v4, Godot 4.7.2), checks every file against its directory MD5 and refuses anything outside the allowlist:
+  `data/content/*.json`, `assets/**/*.import`, imported textures/audio under `.godot/imported/`, `.godot/uid_cache.bin`,
+  and the script-class cache only when it lists the same classes as the base. Scripts (`.gd`/`.gdc`/`.remap`), scenes,
+  `.tres`/`.res` (they can embed script), native libraries and `project.binary` always need an app release (Google Play
+  forbids downloading executable code; a reviewed AAB stays the only code path). CI proves both directions with the
+  pinned engine on every change.
+- Facts: `--export-pack` of a commit is byte-reproducible (same SHA-256 on three exports), so a release's base pack can
+  be rebuilt from its commit; it is still kept with the release.
+- Next: signed manifest and trust root (INF-028).
