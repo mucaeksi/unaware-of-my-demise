@@ -60,6 +60,14 @@ func wallet() -> Dictionary:
 	return result
 
 
+## Ration the daily Inn Meal would grant now; 0 when today's meal is taken (or the content authors none).
+func inn_meal_amount() -> int:
+	var meal: Variant = _section("ration").get("inn_meal")
+	if not (meal is Dictionary) or (meal as Dictionary).get("available") != true:
+		return 0
+	return int((meal as Dictionary).get("amount", 0))
+
+
 func item_quantity(item_id: String) -> int:
 	return int(_section("items").get(item_id, 0))
 

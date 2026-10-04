@@ -30,6 +30,7 @@ import { pullFingerprint } from "./engine/gacha";
 import { claimQuest, parseQuestClaim, questStatus } from "./quest-claims";
 import { levelUp, parseXpItems, unlockMemoryNode, upgradeSkill } from "./progression";
 import { beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
+import { claimInnMeal } from "./ration";
 import { snapshot, wallet } from "./state";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
 
@@ -291,6 +292,11 @@ function routes(deps: AppDeps): Record<string, Handler> {
       return mutateNow(context, "gacha_pull", pullFingerprint(request.banner_id, request.pull_count, request.target_id), async (tx, accountId) => ({
         pull: await pull(tx, accountId, request, now, deps.bannerEpoch ?? null),
       }));
+    },
+
+    "POST /v1/ration/inn-meal": async (context) => {
+      const now = clock();
+      return mutateNow(context, "ration_inn_meal", "", async (tx, accountId) => ({ ...(await claimInnMeal(tx, accountId, now)) }));
     },
 
     "POST /v1/wallet/convert": async (context) => {

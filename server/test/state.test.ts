@@ -45,7 +45,7 @@ describe("player snapshot", () => {
     expect(snapshot.story_state.story_cursor).toBe(0);
     expect(snapshot.story_state.story_cursor_entry_id).toBe(STORY_ORDER[0]);
     expect(snapshot.wallet).toEqual({ eclipse_tokens: 0, fate_threads: 0, silver_crowns: 0, ration: 100, account_xp: 0 });
-    expect(snapshot.ration, "a new player starts with a full meter").toEqual({ current: 100, cap: 100, regen_seconds_per_unit: 300, next_unit_at_utc: null, full_at_utc: null });
+    expect(snapshot.ration, "a new player starts with a full meter").toEqual({ current: 100, cap: 100, regen_seconds_per_unit: 300, next_unit_at_utc: null, full_at_utc: null, inn_meal: { amount: 30, available: true } });
     expect(Object.keys(snapshot.roster)).toEqual(FREE_START_CHARACTER_IDS);
     expect(snapshot.inventory).toEqual({ inventory_weapons: [], inventory_armor: [], inventory_accessories: [] });
   });

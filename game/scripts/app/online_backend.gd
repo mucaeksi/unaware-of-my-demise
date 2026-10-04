@@ -179,6 +179,10 @@ func gacha_pull(banner_id: String, pull_count: int, target_id: String = "") -> O
 	return await _call(HTTPClient.METHOD_POST, "/v1/gacha/pull", body, true)
 
 
+func claim_inn_meal() -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/ration/inn-meal", {}, true)
+
+
 func convert_fate_threads(count: int) -> Outcome:
 	return await _call(HTTPClient.METHOD_POST, "/v1/wallet/convert", {"count": count}, true)
 

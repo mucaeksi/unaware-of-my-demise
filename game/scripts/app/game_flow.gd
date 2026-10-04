@@ -769,3 +769,8 @@ static func grouped(value: int) -> String:
 ## Claims a quest reward (coroutine); `period` is a mail row's week ("" = current). `value` on success: the server's claim result.
 func claim_quest(kind: String, task_id: String, period: String = "") -> Outcome:
 	return _adopt(await backend.claim_quest(kind, task_id, period))
+
+
+## Today's Inn Meal (coroutine); the reply's snapshot is adopted.
+func claim_inn_meal() -> Outcome:
+	return _adopt(await backend.claim_inn_meal())

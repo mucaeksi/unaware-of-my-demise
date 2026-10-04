@@ -242,7 +242,8 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
     the balance below the cap, and partial progress survives spends made below the cap.
   - New accounts start full. The snapshot carries `ration {current, cap, regen_seconds_per_unit,
     next_unit_at_utc, full_at_utc}` for the client meter.
-  - Not yet implemented: `daily_inn_meal` (+30 a day). Token refill stays disabled as authored.
+  - `daily_inn_meal`: +30 Ration once per UTC day of the server clock (`POST /v1/ration/inn-meal`, ledger key
+    `inn_meal:YYYY-MM-DD` in `quest_claims`); like any grant it may exceed the cap. Token refill stays disabled as authored.
 - Content change: `economy_part1.json` `ration.cap` 120 → 100 and `regen_seconds_per_unit` 360 → 300 (in both
   places), with the MANIFEST sha256 updated.
 

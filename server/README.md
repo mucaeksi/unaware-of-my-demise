@@ -33,6 +33,7 @@ server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
 | `GET /v1/gacha/pity` | The stored pity state per banner type (`character`, `weapon`, `standard_character`; `{}` before the first pull). |
 | `GET /v1/gacha/history?limit=&before=` | The account's pulls, newest first (limit 1..200, default 50; `next_cursor` feeds `before`). |
 | `POST /v1/gacha/pull` | Takes `{banner_id, pull_count: 1\|10, target_id?}` (target = Hall of Armaments weapon). One transaction: pity read, every pull resolved by the parity-tested `engine/gacha.ts` from a fresh CSPRNG seed, Fate's Threads debited (402 `INSUFFICIENT_FUNDS`, nothing written), characters granted (duplicates become copies plus Memory Shards; a first copy joins the story state's owned/online heroes), weapons minted as `wpn_` instances, each pull recorded in `pull_history` with the request's `rng_seed`, pity saved. Answers `{pull, state}`. Closed banners, bad counts and a missing target are 400. |
+| `POST /v1/ration/inn-meal` | The daily Inn Meal: `daily_inn_meal` (30) Ration once per UTC day, recorded in `quest_claims`. A repeat the same day answers `already_claimed: true` and grants nothing. The snapshot's `ration.inn_meal {amount, available}` drives the hub button. |
 | `POST /v1/wallet/convert` | Takes `{count}` (1..1000) and converts Eclipse Tokens into Fate's Threads at `token_conversion_cost` (160) each, one way. |
 
 Mutating routes require a UUIDv4 `Idempotency-Key`. Each request is one transaction that locks the account row, so a
