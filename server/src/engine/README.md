@@ -25,7 +25,7 @@ and the fixtures must stay green.
 | `battle/*` (action gauge, units, damage, focus, auto battle, encounter state, effect interpreter 1741, victory stars) | — | `battle_1-1.json` … `battle_7-5.json` (35 stages) | TODO |
 | `battle/battle_service.gd` (orchestration, player loadouts) | — | `battle_*.json`, `loadouts.json`, `story_loans.json` | TODO |
 | `quest/quest_progress.gd`, `quest/reset_clock.gd` | `quests.ts` | `quests.json` (tasks, scripts, invalid events, 82 window instants, Character XP items) | DONE |
-| `loot/loot_resolver.gd` | — | `loot.json` | TODO (needed for rewards) |
+| `loot/loot_resolver.gd` | `loot.ts` (async first-clear ledger callback, runs in the caller's transaction) | `loot.json` (840 cases, replays, failures, 70+ synthetic tables with exact messages) | DONE |
 | `time/trusted_clock.gd`, `device_clock.gd` | not ported: client-only (the Worker uses its own clock) | `time_source.json` (client GUT only) | N/A |
 
 Order of work: content loader, then progression/equipment, then story roster, then the battle core, then the
