@@ -1,5 +1,24 @@
 # Current State
 
+## Snapshot 2026-10-04 (verified; the sections below are the 2026-10-03 audit, kept as history)
+
+The backlog is `docs/INFRASTRUCTURE_ROADMAP.md` (INF ids, status table). Evidence for each line is in that table, the
+PRs and `docs/DECISIONS.md`.
+
+| Area | State |
+|---|---|
+| Production API | Cloudflare Worker `https://unaware-of-my-demise.muratcaneksiii.workers.dev`, deployed from `main` by `.github/workflows/deploy.yml` (migrations first, then the Worker, then health/bootstrap/sign-in checks). `GET /v1/bootstrap` reports the deployed commit. Google sign-in configured (variable `GOOGLE_CLIENT_IDS`). |
+| Database | Neon PostgreSQL through Hyperdrive; migrations 0001–0003 (`database/migrations/`), append-only, applied by the deploy. |
+| Server | TypeScript Worker (DEC-0013): auth, state, story, stages/victories (server re-simulation), progression, equipment, quests, gacha, Ration, release contract. vitest 389. |
+| Client | Godot 4.7.2 LEGACY client (BATCH-0002), server snapshot only (DEC-0012), release gate (DEC-0015), Google sign-in through the UomdNative Android plugin (BATCH-0003, DEC-0016). GUT 270. |
+| Android | CI builds, exports and verifies a debug APK signed with the repository debug key and keeps it as an artifact. Not yet: release AAB, upload key, Play test track (G7). Device sign-in test pending (OQ-015). |
+| CI | `ci.yml`: `database`, `server`, `godot`, `android`. `deploy.yml`: production, with no automatic rollback to an older commit. |
+| Not built | admin panel, content patches/R2, staging environment, billing/ads/social, localization/audio runtime (roadmap G1–G6). |
+
+---
+
+## 2026-10-03 audit (historical)
+
 Phase 6 (current game audit) plus the server/admin/database state, verified
 **2026-10-03** against commit `8a5c776` (branch
 `claude/framework-bootstrap-setup-ahj0tz`, base `main@8797289`).

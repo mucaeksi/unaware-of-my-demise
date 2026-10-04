@@ -12,20 +12,24 @@ Tarih: 2026-10-04. Başlangıç: `main@bdd3e19e395f73f7c2bdff5966e20a74ae986123`
 ## Durum
 
 Durumlar: TODO / IN_PROGRESS / VERIFIED / BLOCKED. VERIFIED yalnız komut/artifact/cihaz/yayın kanıtıyla yazılır.
-Listede olmayan INF kimlikleri **TODO**'dur. İlk dilimin kararı: DEC-0015. Yerel kanıt (2026-10-04): vitest 389/389,
-GUT 259/259, `database/test.sh` 0001–0003 ok; iki yeni regresyon testi (tutarlı snapshot, eski revision) düzeltme
-olmadan başarısız görüldü.
+Listede olmayan INF kimlikleri **TODO**'dur. Kararlar: DEC-0015 (dilim 1), DEC-0016 (dilim 2).
+
+Kanıt (2026-10-04): vitest 389/389, GUT 270/270, `database/test.sh` 0001–0003; CI `database`/`server`/`godot`/`android`
+yeşil (PR #18, #19). Canlı: `/v1/bootstrap` merge SHA'sını raporluyor, migration 0003 Neon'da (deploy #8 başarılı),
+sahte Google credential'a 401, rules hash istemciyle aynı. CI debug APK'sı depo debug anahtarıyla imzalı
+(SHA-1 `84:E8:2C:4D:9B:A6:77:36:2F:06:D9:C6:E2:A6:9D:CD:B5:0E:9A:4D`). Regresyon testleri (tutarlı snapshot, eski
+revision, hesap değişimi) düzeltme olmadan başarısız görüldü.
 
 | INF | Durum | Kanıt / not |
 | --- | --- | --- |
-| INF-003 API/bootstrap sözleşmesi | IN_PROGRESS | `GET /v1/bootstrap` (api/snapshot sürümü, min versionCode, rules hash, source SHA, bakım), sunucu sürüm/bakım kapısı, istemci `ClientRelease` kapısı — vitest + GUT. Eksik: presentation release, channel, engine/interpreter capability (G4/G5'e bağlı). |
-| INF-004 Immutable release modeli | IN_PROGRESS | Worker'a deploy edilen commit SHA'sı (`RELEASE_SOURCE_SHA`) bootstrap'ta görünür; deploy health check SHA'yı doğrular. Eksik: release ID kaydı, base/presentation manifest, promote durumu. |
-| INF-008 Artifact promotion | IN_PROGRESS | Deploy, canlıdaki SHA'nın atası olan eski bir CI tamamlanmasını atlar (geri gitmez). Eksik: tek artifact'ın hem test hem deploy'a bağlanması, kayıtlı rollback. |
-| INF-012 Tutarlı snapshot | IN_PROGRESS | `account.state_revision` (migration 0003), her başarılı mutation +1; `GET /v1/state` ve `/v1/wallet` REPEATABLE READ READ ONLY; istemci eski revision'ı uygulamaz. Eşzamanlı yazma testi vitest'te. Canlı Neon'a migration deploy ile uygulanır. |
-| INF-007 CI tamamlama | IN_PROGRESS | CI `android` job: UomdNative AAR + debug APK export + `verify_apk.sh` + artifact (DEC-0016). Eksik: admin, release AAB, GUT exit status. |
-| INF-017 Android plugin ve auth coordinator | IN_PROGRESS | UomdNative geri geldi (BATCH-0003) + Credential Manager; `SignInFlow` nonce → ID token → session; açılışta gate → giriş → snapshot. GUT 270; yerel debug APK export'unda plugin kayıtlı. Eksik: gerçek cihazda Google hesabıyla giriş (sahibinin Android OAuth client + debug keystore secret'ı). |
-| INF-018 Manifest/signing kimliği | IN_PROGRESS | `permissions/internet=true`; versionCode = `uomd/release/version_code` (GUT). İzin allowlist'i APK'da doğrulanıyor: INTERNET + uygulama içi imza izni (credentials'ın biyometrik izinleri kaldırıldı). Eksik: debug/upload/Play App Signing SHA-1 ↔ OAuth kayıtları. |
-| INF-019 Session | IN_PROGRESS | 401 → tek yenileme, aynı Idempotency-Key ile yeniden gönderim; başka hesapla yenileme oturumu bitirir, tekrar göndermez (GUT, düzeltmesiz başarısız görüldü). Eksik: background/resume, logout UI, keystore'da oturum saklama kararı. |
+| INF-003 API/bootstrap sözleşmesi | IN_PROGRESS | Canlı: `GET /v1/bootstrap` (api/snapshot sürümü, min versionCode, rules hash, source SHA, bakım), sunucu 426/503 kapısı, istemci `ClientRelease`. Eksik: presentation release, channel, engine/interpreter capability (G4/G5). |
+| INF-004 Immutable release modeli | IN_PROGRESS | Canlı Worker kaynağının SHA'sını raporluyor; deploy health check doğruluyor. Eksik: release ID kaydı, base/presentation manifest, promote durumu. |
+| INF-007 CI tamamlama | IN_PROGRESS | `android` job: AAR + debug APK + `verify_apk.sh` + artifact; keystore secret'ı kullanmadan önce doğrulanıyor. Eksik: admin, release AAB, GUT exit status, template cache. |
+| INF-008 Artifact promotion | IN_PROGRESS | Otomatik deploy, canlıdakinin atası olan commit'i atlar (henüz atlama yolu canlıda tetiklenmedi). Eksik: tek artifact'ın test + deploy'a bağlanması, kayıtlı rollback. |
+| INF-012 Tutarlı snapshot | IN_PROGRESS | Canlıda: `account.state_revision`, REPEATABLE READ READ ONLY snapshot, istemci eski revision'ı uygulamaz. VERIFIED için kalan: canlıda iki cihaz/eşzamanlı senaryo kanıtı. |
+| INF-017 Android plugin ve auth coordinator | IN_PROGRESS | UomdNative (BATCH-0003) + Credential Manager; `SignInFlow`; açılış gate → giriş → snapshot. APK'da plugin kayıtlı. Bekleyen: gerçek cihazda Google hesabıyla giriş (OQ-015). |
+| INF-018 Manifest/signing kimliği | IN_PROGRESS | INTERNET açık; versionCode = `uomd/release/version_code`; APK izinleri yalnız INTERNET + uygulama içi imza izni. Debug SHA-1 için Android OAuth client sahibince oluşturuldu (2026-10-04, bildirildi; cihaz testiyle doğrulanacak). Eksik: upload ve Play App Signing SHA-1'leri (G7). |
+| INF-019 Session | IN_PROGRESS | 401 → tek yenileme, aynı Idempotency-Key; başka hesapla yenileme oturumu bitirir. Eksik: background/resume, logout UI, oturumu cihazda saklama kararı. |
 
 ---
 
