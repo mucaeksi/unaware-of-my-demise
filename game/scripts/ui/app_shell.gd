@@ -5,12 +5,11 @@ extends Control
 ## `StoryDirector`'s business.
 ##
 ## Tests and tools set these options before the shell enters the tree: `flow` (an already loaded `GameFlow`; null = load the content on a
-## worker thread), `backend` (a `GameBackend`; null = the one `Online` provides), and `battle_seed` (>= 0 = every battle uses that seed, so a
-## scripted playthrough is repeatable; -1 = a fresh seed per attempt, as in play).
+## worker thread) and `backend` (a `GameBackend`; null = the one `Online` provides). Battle seeds come from the server's attempts (DEC-0013),
+## so a scripted playthrough is repeatable through its backend.
 
 var flow: GameFlow = null
 var backend: GameBackend = null
-var battle_seed: int = -1
 
 var current: Control = null
 var director: StoryDirector = null

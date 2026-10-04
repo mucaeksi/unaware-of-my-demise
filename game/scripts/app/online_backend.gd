@@ -107,8 +107,12 @@ func claim_first_oath(character_id: String) -> Outcome:
 	return await _call(HTTPClient.METHOD_POST, "/v1/story/first-oath", {"character_id": character_id}, true)
 
 
-func submit_victory(_stage_id: String, _roster: Array, _run_seed: int, _client_result: Dictionary) -> Outcome:
-	return _unsupported()
+func begin_stage(stage_id: String, roster: Array) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/stages/%s/attempts" % stage_id.uri_encode(), {"roster": roster}, true)
+
+
+func submit_victory(attempt_id: String, client_result: Dictionary) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/attempts/%s/victory" % attempt_id.uri_encode(), client_result, true)
 
 
 func level_up(_character_id: String, _items: Dictionary) -> Outcome:

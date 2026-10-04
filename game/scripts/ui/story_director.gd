@@ -253,21 +253,28 @@ func _stage_title(stage_id: String) -> String:
 	return "%s  %s" % [stage_id, stage.title_en] if stage != null else stage_id
 
 
-## Starts the battle on a worker thread; the loading state shows until it is done.
+## Opens the attempt on the server (which picks the seed), then runs the battle on a worker thread; the loading state shows until it is done.
 func _start_battle(stage_id: String, roster: Variant) -> void:
 	_battle_stage = stage_id
 	_battle_roster = roster
 	var battle: BattleScreen = BattleScreen.new()
 	battle.show_loading(_stage_title(stage_id))
 	shell.show_screen(battle)
-	_battle_job = flow.start_battle(stage_id, roster, shell.battle_seed)
+	var opened: Outcome = await flow.begin_stage(stage_id, roster)
+	if shell.current != battle:
+		return
+	if not opened.is_ok():
+		push_warning("Stage %s could not start: %s" % [stage_id, opened.error])
+		_present_defeat(stage_id, roster, BATTLE_ERROR_TITLE, _problem_text(opened))
+		return
+	_battle_job = flow.start_battle(stage_id, roster, int(flow.attempt["run_seed"]))
 	set_process(true)
 
 
 func _on_battle_finished(result: BattleService.BattleResult) -> void:
 	var stage_id: String = _battle_stage
 	var roster: Variant = _battle_roster
-	var outcome: GameFlow.StageOutcome = await flow.complete_battle(result, roster)
+	var outcome: GameFlow.StageOutcome = await flow.complete_battle(result)
 	if not outcome.error.is_empty():
 		push_warning("Battle %s failed: %s" % [stage_id, outcome.error])
 		_present_defeat(stage_id, roster, BATTLE_ERROR_TITLE, BATTLE_ERROR_MESSAGE % stage_id)

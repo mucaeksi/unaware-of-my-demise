@@ -114,3 +114,17 @@ func test_the_game_flow_adopts_the_servers_story_reply() -> void:
 func test_online_hands_out_the_offline_base_until_a_session_exists() -> void:
 	Online.session_token = ""
 	assert_false(Online.backend() is OnlineBackend)
+
+
+func test_stage_attempts_and_victories_go_to_their_routes() -> void:
+	var pair: Array = _backend([{"status": 200, "body": "{\"state\": {}, \"attempt\": {}}"}, {"status": 200, "body": "{\"state\": {}}"}] as Array[Dictionary])
+	var backend: OnlineBackend = pair[0]
+	assert_true((await backend.begin_stage("1-4", ["fadyme", "mahmut"])).is_ok())
+	assert_true((await backend.submit_victory("6f1c2d6e-0000-4000-8000-000000000001", {"outcome": "victory", "stars": 3})).is_ok())
+	var sent: Array[Dictionary] = (pair[1] as ScriptedTransport).sent
+	assert_eq(sent[0]["url"], "https://api.example/v1/stages/1-4/attempts")
+	assert_eq(JSON.parse_string(sent[0]["body"]), {"roster": ["fadyme", "mahmut"]})
+	assert_eq(sent[1]["url"], "https://api.example/v1/attempts/6f1c2d6e-0000-4000-8000-000000000001/victory")
+	assert_eq(JSON.parse_string(sent[1]["body"]), {"outcome": "victory", "stars": 3.0})
+	for request: Dictionary in sent:
+		assert_ne(_header(request, "Idempotency-Key"), "", "both are mutations")
