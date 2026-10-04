@@ -1,0 +1,23 @@
+// The admin Worker (INF-033, DEC-0033): operator panel + admin API on one origin, behind Cloudflare Access.
+// Deployed by .github/workflows/deploy.yml after the game Worker, only once Access is configured (owner decision D-11).
+// Until ACCESS_TEAM_DOMAIN and ACCESS_AUD are set, every admin API route answers 503; the static page holds no data.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "unaware-of-my-demise-admin",
+  "main": "src/admin-index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+  // The same production database as the game Worker (unaware-of-my-demise-production).
+  "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "edbe90afd0ab42a1ab708e7e2e49c04b" }],
+  // The static panel (admin `next build` output); the Worker runs first only for the API.
+  "assets": { "directory": "../admin/out", "binding": "ASSETS", "run_worker_first": ["/admin/api/*"] },
+  "vars": {
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": "",
+    "ADMIN_ENVIRONMENT": "production",
+    "RELEASE_SOURCE_SHA": ""
+  }
+}

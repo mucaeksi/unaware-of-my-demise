@@ -48,6 +48,10 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       # Client IDs are public: the repository variable is the usual home; a secret of the same name also works.
       GOOGLE_CLIENT_IDS: ${{ vars.GOOGLE_CLIENT_IDS || secrets.GOOGLE_CLIENT_IDS }}
+      # The admin Worker (DEC-0033): Cloudflare Access settings and the operators to register (owner decision D-11).
+      ADMIN_ACCESS_TEAM_DOMAIN: ${{ vars.ADMIN_ACCESS_TEAM_DOMAIN }}
+      ADMIN_ACCESS_AUD: ${{ vars.ADMIN_ACCESS_AUD }}
+      ADMIN_OPERATOR_EMAILS: ${{ vars.ADMIN_OPERATOR_EMAILS }}
       # The commit this run deploys; the Worker reports it as source_sha.
       SOURCE_SHA: ${{ github.event.workflow_run.head_sha || inputs.source_sha || github.sha }}
       DEPLOY_REASON: ${{ inputs.reason }}
@@ -175,3 +179,35 @@ jobs:
           [ "${{ steps.config.outputs.signin }}" = "true" ] && expected="401"
           echo "POST /v1/auth/google with a forged credential: HTTP ${status} (expected ${expected})"
           [ "${status}" = "${expected}" ] || { echo "::error::sign-in answered ${status}, expected ${expected}"; exit 1; }
+      # The admin Worker (INF-033, DEC-0033) ships with the same commit. Without Access settings its API answers 503 and
+      # the page holds no data, so it is deployed anyway: Access is switched on for its workers.dev host after it exists.
+      - name: Register operators
+        if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true' && env.ADMIN_OPERATOR_EMAILS != ''
+        env:
+          ADDED_BY: deploy:${{ github.actor }}
+        run: |
+          # Adds missing operators only; never changes or removes an existing admin user (that is an audited admin action).
+          for email in $(printf '%s' "${ADMIN_OPERATOR_EMAILS}" | tr ',' ' ' | tr '[:upper:]' '[:lower:]'); do
+            printf '%s' "${email}" | grep -Eq '^[^@[:space:]]+@[^@[:space:]]+$' || { echo "::error::ADMIN_OPERATOR_EMAILS has an invalid entry"; exit 1; }
+            psql "${DATABASE_URL}" -X -q -v ON_ERROR_STOP=1 -v email="${email}" -v added_by="${ADDED_BY}" \
+              -c "INSERT INTO admin_users (email, role, added_by) VALUES (:'email', 'operator', :'added_by') ON CONFLICT (email) DO NOTHING"
+          done
+          echo "operators registered: $(psql "${DATABASE_URL}" -X -At -c "SELECT count(*) FROM admin_users WHERE disabled_at IS NULL")"
+      - name: Deploy the admin Worker
+        if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
+        run: |
+          (cd admin && npm ci && npm run build)
+          cd server
+          args=(--config wrangler.admin.jsonc --var "RELEASE_SOURCE_SHA:${SOURCE_SHA}")
+          if [ -n "${ADMIN_ACCESS_TEAM_DOMAIN}" ] && [ -n "${ADMIN_ACCESS_AUD}" ]; then
+            args+=(--var "ACCESS_TEAM_DOMAIN:${ADMIN_ACCESS_TEAM_DOMAIN}" --var "ACCESS_AUD:${ADMIN_ACCESS_AUD}")
+          else
+            echo "::warning::ADMIN_ACCESS_TEAM_DOMAIN / ADMIN_ACCESS_AUD are not set: the admin API answers 503 until Cloudflare Access is set up (D-11)"
+          fi
+          npx wrangler deploy "${args[@]}" | tee "${RUNNER_TEMP}/admin-deploy.log"
+          url="$(grep -Eo 'https://unaware-of-my-demise-admin\.[A-Za-z0-9.-]+\.workers\.dev' "${RUNNER_TEMP}/admin-deploy.log" | head -n1)"
+          [ -n "${url}" ] || { echo "::error::no admin workers.dev URL in the deploy output"; exit 1; }
+          # Without an Access token the API must refuse: 401 when Access is configured, 503 when it is not, never data.
+          status="$(curl -s -o /dev/null -w '%{http_code}' "${url}/admin/api/me")"
+          echo "GET /admin/api/me without Access: HTTP ${status}"
+          case "${status}" in 401|403|503|302) ;; *) echo "::error::the admin API answered ${status} without an Access token"; exit 1 ;; esac

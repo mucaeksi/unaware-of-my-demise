@@ -112,6 +112,10 @@ server-authoritative semantics (transactional draw, row locks, audit).
 
 ## 3. Admin (`admin/`)
 
+> **Update 2026-10-04.** Rewritten (DEC-0033): a static operator panel served with the admin API by the separate
+> admin Worker behind Cloudflare Access; roles, audited reads and changes (`docs/ADMIN_PANEL.md`). The audit below
+> describes the removed starter.
+
 Next.js 16 / React 19 single page (`app/page.tsx`, 169 lines) calling the
 admin API with a token typed into the browser. No auth, no RBAC, no tests,
 no deployment target. Status: **NEEDS_REWRITE** (foundation only).

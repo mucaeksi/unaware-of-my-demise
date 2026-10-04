@@ -38,6 +38,7 @@ import { claimInnMeal } from "./ration";
 import { admit, bootstrap, DEVELOPMENT_RELEASE, type ReleaseConfig } from "./release";
 import { bumpStateRevision, snapshot, wallet } from "./state";
 import { currentRelease, packResponse, type ContentStore } from "./content";
+import { claimMail, currentLiveops, listMail } from "./liveops";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
 
 export interface AppDeps {
@@ -386,6 +387,22 @@ function routes(deps: AppDeps): Record<string, Handler> {
       return mutateNow(context, "gacha_pull", pullFingerprint(request.banner_id, request.pull_count, request.target_id), async (tx, accountId) => ({
         pull: await pull(tx, accountId, request, now, deps.bannerEpoch ?? null),
       }));
+    },
+
+    // Live operations (INF-035): flags and notices for everyone; mail and its one-time rewards per account.
+    "GET /v1/liveops": async ({ db }) => json(await currentLiveops(db, new Date(clock() * 1000))),
+
+    "GET /v1/mail": async (context) => {
+      const accountId = await requireAccount(context);
+      return json({ mail: await listMail(context.db, accountId, new Date(clock() * 1000)) });
+    },
+
+    "POST /v1/mail/:mail_id/claim": async (context) => {
+      const mailId = context.params.mail_id!;
+      if (!/^mail_[0-9a-f]{32}$/.test(mailId)) throw new ApiError(404, "NOT_FOUND", "No such mail");
+      const now = new Date(clock() * 1000);
+      const key = idempotencyKey(context.request);
+      return mutateNow(context, "mail_claim", mailId, async (tx, accountId) => ({ ...(await claimMail(tx, accountId, mailId, now, key)) }));
     },
 
     "POST /v1/ration/inn-meal": async (context) => {
