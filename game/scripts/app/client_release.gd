@@ -9,6 +9,8 @@ extends RefCounted
 
 const KIND_UPDATE_REQUIRED: String = "update_required"
 const KIND_MAINTENANCE: String = "maintenance"
+## The app is current but its game data differs from the server's: a signed content release may fix that (INF-031).
+const KIND_CONTENT_UPDATE: String = "content_update_required"
 ## The bootstrap reply is not the contract this build knows.
 const KIND_PROTOCOL: String = "protocol"
 
@@ -62,7 +64,8 @@ static func local_rules_hash(path: String = CONTENT_MANIFEST) -> String:
 
 
 ## Whether a `GET /v1/bootstrap` reply lets this build play: ok, or a failure of kind `KIND_UPDATE_REQUIRED` (another API or snapshot
-## version, a versionCode below the server's floor, other rules content), `KIND_MAINTENANCE` (with the server's message) or
+## version, a versionCode below the server's floor), `KIND_CONTENT_UPDATE` (other rules content: fetch the content release),
+## `KIND_MAINTENANCE` (with the server's message) or
 ## `KIND_PROTOCOL` (not a bootstrap reply). An update outranks maintenance, as on the server.
 static func check(bootstrap: Variant, local_hash: String, code: int = version_code()) -> Outcome:
 	if not (bootstrap is Dictionary):
@@ -78,7 +81,7 @@ static func check(bootstrap: Variant, local_hash: String, code: int = version_co
 	if code < int(data["min_client_version_code"]):
 		return Outcome.fail(KIND_UPDATE_REQUIRED, "This version of the game is no longer supported. Please update the game.")
 	if local_hash.is_empty() or str(data["rules_hash"]) != local_hash:
-		return Outcome.fail(KIND_UPDATE_REQUIRED, "The game data on this device does not match the server. Please update the game.")
+		return Outcome.fail(KIND_CONTENT_UPDATE, "The game data on this device does not match the server. A game data update is needed.")
 	var maintenance: Dictionary = data["maintenance"]
 	if maintenance.get("active") == true:
 		var message: String = str(maintenance.get("message", ""))

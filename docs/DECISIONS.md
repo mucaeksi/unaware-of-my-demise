@@ -516,3 +516,17 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   append-only `history/<channel>/<generation>.json` (actor, reason, commit, base, run link) and only then moves
   `channels/<channel>/current.json(.sig)`. Default channel: staging.
 - Not decided here: automatic promotion from staging to production after device tests (manual for now).
+
+## DEC-0032 — Installing content on the device, and the boot order
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-026, INF-031, INF-032).
+- Decision: `ContentInstaller` (user://content) keeps exactly two releases, `installed.json` and `last_good.json`, each
+  the signed manifest plus its pack file, and `generation.json` (the replay floor). Install: verify the manifest
+  (DEC-0029, generation above the floor), check free space, download into `packs/<sha256>.pck.part` (a dropped
+  connection resumes from the bytes already there with a Range request), check length and SHA-256 (a damaged file is
+  deleted, never kept), rename into place, then move installed → last_good and write the new record with a
+  temporary-file rename (a crash leaves the old or the new release, never half of one), then delete every other pack.
+  Boot (INF-026): mount the installed release (re-verified: signature, app versionCode, pack SHA-256; falling back to
+  last_good, then to the shipped data) → load content → release gate → sign-in → snapshot. When the gate reports other
+  game data (`content_update_required`), the client signs in, fetches the current release, installs it and reloads the
+  content; if a release was already mounted in this process it asks for a restart instead (cumulative packs are never
+  layered). Nothing is mounted while a battle runs.

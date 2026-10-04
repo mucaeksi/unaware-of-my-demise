@@ -59,6 +59,8 @@ func start() -> void:
 		_on_flow_loaded(shell.flow)
 		return
 	_show_message("Unaware of My Demise", "Loading...")
+	# INF-026: the installed content release is mounted before any content is read.
+	Game.mount_content()
 	_boot_job = WorkerJob.start(func() -> Variant: return GameFlow.create())
 	set_process(true)
 
@@ -96,6 +98,9 @@ func _on_flow_loaded(loaded: GameFlow) -> void:
 		return
 	_show_message("Unaware of My Demise", "Connecting...")
 	if not await Game.attach(loaded, shell.backend):
+		if Game.boot_error_kind == ClientRelease.KIND_CONTENT_UPDATE:
+			_update_content()
+			return
 		if Game.boot_error_kind == GameBackend.KIND_OFFLINE:
 			_present_boot_failure("Server unreachable", "The game server could not be reached. Check your connection and try again.")
 		elif Game.boot_error_kind in [SignInFlow.KIND_CANCELLED, SignInFlow.KIND_FAILED, SignInFlow.KIND_UNAVAILABLE]:
@@ -108,6 +113,23 @@ func _on_flow_loaded(loaded: GameFlow) -> void:
 		_present_hub()
 	else:
 		_present_unfinished_battle()
+
+
+## The server runs other game data than this device: install the signed content release, then load the content again (or
+## ask for a restart when another release is already mounted in this process).
+func _update_content() -> void:
+	_show_message("Updating game data", "Downloading the game data update...")
+	var updated: Outcome = await Game.update_content(shell.backend)
+	if not updated.is_ok():
+		_present_boot_failure("Game data update needed", updated.error)
+		return
+	if bool((updated.value as Dictionary)["restart_required"]):
+		var screen: MessageScreen = _show_message("Game data updated", "Restart the game to finish the update.",
+			[{"id": "quit", "label": "Close the game"}] as Array[Dictionary])
+		screen.chosen.connect(func(_action_id: String) -> void: get_tree().quit(), CONNECT_ONE_SHOT)
+		return
+	shell.flow = null
+	start()
 
 
 func _present_boot_failure(title: String, message: String) -> void:
