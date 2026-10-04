@@ -7,6 +7,10 @@ class _StubBackend extends GameBackend:
 	var snapshot: Dictionary = {}
 	var reply: Outcome = null
 	var calls: Array[String] = []
+	## Arguments of the last begin_stage / submit_victory call.
+	var args: Array = []
+	## The seed begin_stage hands out (a JSON number, as the server sends it).
+	var seed: int = 4242
 
 	func _answer(call_name: String) -> Outcome:
 		calls.append(call_name)
@@ -18,7 +22,15 @@ class _StubBackend extends GameBackend:
 	func advance_story() -> Outcome:
 		return _answer("advance_story")
 
-	func submit_victory(_stage_id: String, _roster: Array, _run_seed: int, _client_result: Dictionary) -> Outcome:
+	func begin_stage(stage_id: String, roster: Array) -> Outcome:
+		args = [stage_id, roster]
+		calls.append("begin_stage")
+		if reply != null:
+			return reply
+		return Outcome.ok({"state": snapshot, "attempt": {"attempt_id": "attempt-1", "stage_id": stage_id, "run_seed": float(seed)}})
+
+	func submit_victory(attempt_id: String, client_result: Dictionary) -> Outcome:
+		args = [attempt_id, client_result]
 		return _answer("submit_victory")
 
 	func level_up(_character_id: String, _items: Dictionary) -> Outcome:
@@ -193,15 +205,62 @@ func test_a_victory_is_reported_and_the_reply_becomes_the_state() -> void:
 	var won: BattleService.BattleResult = BattleService.BattleResult.new()
 	won.stage_id = "1-1"
 	won.outcome = "victory"
+	won.run_seed = 4242
+	_flow.attempt = {"attempt_id": "attempt-1", "stage_id": "1-1", "run_seed": 4242}
 	var advanced: Dictionary = _snapshot()
 	advanced["story_state"]["completed_stage_ids"] = ["1-1"]
 	advanced["story_state"]["story_cursor"] = 2
 	advanced["story_state"]["story_cursor_entry_id"] = _flow.story_index.story_order[2]
 	backend.reply = Outcome.ok({"state": advanced, "applied": [{"item_id": "torn_chronicle_page"}], "first_clear": true})
-	var outcome: GameFlow.StageOutcome = await _flow.complete_battle(won, [])
+	var outcome: GameFlow.StageOutcome = await _flow.complete_battle(won)
 	assert_eq(outcome.error, "")
 	assert_true(outcome.first_clear)
 	assert_eq(outcome.applied.size(), 1)
 	assert_true(outcome.story_state.completed_stage_ids.has("1-1"))
 	assert_eq(_flow.state.story_state.story_cursor, 2)
 	assert_eq(backend.calls[-1], "submit_victory")
+	assert_eq(backend.args[0], "attempt-1", "the victory names the attempt, not a seed")
+	assert_true(_flow.attempt.is_empty(), "a reported attempt is used up")
+
+
+func test_begin_stage_keeps_the_attempt_the_server_opened() -> void:
+	var backend: _StubBackend = _stub()
+	assert_true((await _flow.sync()).is_ok())
+	var opened: Outcome = await _flow.begin_stage("1-1")
+	assert_true(opened.is_ok(), opened.error)
+	assert_eq(backend.args, ["1-1", []], "the tutorial's default party is empty")
+	assert_eq(_flow.attempt, {"attempt_id": "attempt-1", "stage_id": "1-1", "run_seed": 4242})
+	assert_typeof(_flow.attempt["run_seed"], TYPE_INT, "the JSON number becomes an int seed")
+	backend.reply = Outcome.ok({"state": backend.snapshot, "attempt": {"attempt_id": "x", "stage_id": "1-2", "run_seed": 1.0}})
+	var wrong: Outcome = await _flow.begin_stage("1-1")
+	assert_eq(wrong.error_kind, GameFlow.ERROR_PROTOCOL, "an attempt for another stage is refused")
+	assert_true(_flow.attempt.is_empty())
+	backend.reply = Outcome.fail("conflict", "Stage 1-1 is not unlocked")
+	assert_eq((await _flow.begin_stage("1-1")).error_kind, "conflict")
+	assert_true(_flow.attempt.is_empty())
+
+
+func test_a_victory_without_its_attempt_is_not_reported() -> void:
+	var backend: _StubBackend = _stub()
+	assert_true((await _flow.sync()).is_ok())
+	_flow.attempt = {"attempt_id": "attempt-1", "stage_id": "1-1", "run_seed": 7}
+	var won: BattleService.BattleResult = BattleService.BattleResult.new()
+	won.stage_id = "1-1"
+	won.outcome = "victory"
+	won.run_seed = 8
+	var outcome: GameFlow.StageOutcome = await _flow.complete_battle(won)
+	assert_eq(outcome.error_kind, GameFlow.ERROR_FLOW, "a battle fought on another seed matches no attempt")
+	assert_false(backend.calls.has("submit_victory"))
+
+
+func test_run_stage_plays_the_seed_of_the_attempt() -> void:
+	var backend: _StubBackend = _stub()
+	assert_true((await _flow.sync()).is_ok())
+	var outcome: GameFlow.StageOutcome = await _flow.run_stage("1-1")
+	assert_eq(outcome.error, "")
+	assert_eq(outcome.battle.run_seed, 4242, "the battle ran on the server's seed")
+	assert_eq(backend.calls.slice(1, 2), ["begin_stage"] as Array[String])
+	if outcome.is_victory():
+		assert_eq(backend.calls[-1], "submit_victory")
+		assert_eq(backend.args[0], "attempt-1")
+		assert_eq(int(backend.args[1]["stars"]), outcome.battle.stars)

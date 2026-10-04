@@ -29,8 +29,15 @@ func claim_first_oath(_character_id: String) -> Outcome:
 	return _offline()
 
 
-## Reports a finished victory. `value`: {"state", "applied", "first_clear"}. The server decides what it is worth.
-func submit_victory(_stage_id: String, _roster: Array, _run_seed: int, _client_result: Dictionary) -> Outcome:
+## Opens a battle attempt: the server checks the stage and the party and picks the seed (DEC-0013).
+## `value`: {"state", "attempt": {"attempt_id", "stage_id", "run_seed"}}.
+func begin_stage(_stage_id: String, _roster: Array) -> Outcome:
+	return _offline()
+
+
+## Reports the victory of an attempt; the server re-runs it from its stored inputs and decides what it is worth.
+## `value`: {"state", "applied", "first_clear"}.
+func submit_victory(_attempt_id: String, _client_result: Dictionary) -> Outcome:
 	return _offline()
 
 

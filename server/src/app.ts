@@ -13,6 +13,21 @@ import { transaction, type Connect, type Db } from "./db";
 import { idempotencyKey, runIdempotent } from "./idempotency";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
+import {
+  dismantleWeapon,
+  equip,
+  levelUpEquipment,
+  parseCharacterId,
+  parseLocked,
+  parseTable,
+  parseTargetLevels,
+  rerollAccessory,
+  setLocked,
+  unequip,
+} from "./equipment";
+import { claimQuest, parseQuestClaim, questStatus } from "./quest-claims";
+import { levelUp, parseXpItems, unlockMemoryNode, upgradeSkill } from "./progression";
+import { beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
 import { snapshot, wallet } from "./state";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
 
@@ -24,11 +39,19 @@ export interface AppDeps {
   apiLimiter?: RateLimit;
   /** Schedules work after the response (the Worker's ctx.waitUntil); awaited inline when absent. */
   waitUntil?: (promise: Promise<unknown>) => void;
+  /** Re-runs a stored battle attempt (the battle engine); null = victories cannot be verified yet: 503. */
+  simulate?: Simulate | null;
+  /** The server clock in UTC unix seconds (quest windows); defaults to the system clock. */
+  nowUnix?: () => number;
 }
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
 interface Context {
   request: Request;
   db: Db;
+  /** Path parameters of a pattern route (`:name` segments). */
+  params: Record<string, string>;
 }
 
 type Handler = (context: Context) => Promise<Response>;
@@ -156,7 +179,128 @@ function routes(deps: AppDeps): Record<string, Handler> {
         await tx.query("INSERT INTO roster (account_id, character_id) VALUES ($1, $2) ON CONFLICT DO NOTHING", [accountId, characterId]);
       });
     },
+
+    "POST /v1/stages/:stage_id/attempts": async (context) => {
+      const stageId = context.params.stage_id!;
+      const roster = parseRoster(await readJsonObject(context.request));
+      return mutate(context, "stage_attempt", JSON.stringify([stageId, roster]), async (tx, accountId) => {
+        const attempt = await beginAttempt(tx, accountId, await lockedStoryState(tx, accountId), stageId, roster);
+        return { attempt };
+      });
+    },
+
+    "POST /v1/roster/:character_id/level-up": async (context) => {
+      const characterId = context.params.character_id!;
+      const items = parseXpItems(await readJsonObject(context.request));
+      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
+      return mutate(context, "roster_level_up", JSON.stringify([characterId, items]), async (tx, accountId) => ({
+        ...(await levelUp(tx, accountId, characterId, items, now)),
+      }));
+    },
+
+    "POST /v1/roster/:character_id/skills/:skill_id/upgrade": (context) => {
+      const { character_id: characterId, skill_id: skillId } = context.params as { character_id: string; skill_id: string };
+      return mutate(context, "roster_skill_upgrade", JSON.stringify([characterId, skillId]), async (tx, accountId) => ({
+        ...(await upgradeSkill(tx, accountId, characterId, skillId)),
+      }));
+    },
+
+    "POST /v1/roster/:character_id/memory-nodes": (context) => {
+      const characterId = context.params.character_id!;
+      return mutate(context, "roster_memory_node", characterId, async (tx, accountId) => ({ ...(await unlockMemoryNode(tx, accountId, characterId)) }));
+    },
+
+    "POST /v1/inventory/:table/:instance_id/equip": async (context) => {
+      const table = parseTable(context.params.table!);
+      const instanceId = context.params.instance_id!;
+      const characterId = parseCharacterId(await readJsonObject(context.request));
+      return mutate(context, "inventory_equip", JSON.stringify([table, instanceId, characterId]), (tx, accountId) => equip(tx, accountId, table, instanceId, characterId));
+    },
+
+    "POST /v1/inventory/:table/:instance_id/unequip": (context) => {
+      const table = parseTable(context.params.table!);
+      const instanceId = context.params.instance_id!;
+      return mutate(context, "inventory_unequip", JSON.stringify([table, instanceId]), (tx, accountId) => unequip(tx, accountId, table, instanceId));
+    },
+
+    "POST /v1/inventory/:table/:instance_id/lock": async (context) => {
+      const table = parseTable(context.params.table!);
+      const instanceId = context.params.instance_id!;
+      const locked = parseLocked(await readJsonObject(context.request));
+      return mutate(context, "inventory_lock", JSON.stringify([table, instanceId, locked]), (tx, accountId) => setLocked(tx, accountId, table, instanceId, locked));
+    },
+
+    "POST /v1/inventory/inventory_weapons/:instance_id/dismantle": (context) => {
+      const instanceId = context.params.instance_id!;
+      return mutate(context, "inventory_dismantle", instanceId, async (tx, accountId) => ({ ...(await dismantleWeapon(tx, accountId, instanceId)) }));
+    },
+
+    "POST /v1/inventory/:table/:instance_id/level-up": async (context) => {
+      const table = parseTable(context.params.table!);
+      const instanceId = context.params.instance_id!;
+      const targetLevels = parseTargetLevels(await readJsonObject(context.request));
+      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
+      return mutate(context, "inventory_level_up", JSON.stringify([table, instanceId, targetLevels]), async (tx, accountId) => ({
+        ...(await levelUpEquipment(tx, accountId, table, instanceId, targetLevels, now)),
+      }));
+    },
+
+    "POST /v1/inventory/inventory_accessories/:instance_id/reroll": (context) => {
+      const instanceId = context.params.instance_id!;
+      return mutate(context, "inventory_reroll", instanceId, (tx, accountId) => rerollAccessory(tx, accountId, instanceId));
+    },
+
+    "GET /v1/quests/status": async (context) => {
+      const accountId = await requireAccount(context);
+      return json(await questStatus(context.db, accountId, Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))())));
+    },
+
+    "POST /v1/quests/claim": async (context) => {
+      const request = parseQuestClaim(await readJsonObject(context.request));
+      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
+      return mutate(context, "quest_claim", JSON.stringify(request), async (tx, accountId) => ({ ...(await claimQuest(tx, accountId, request, now)) }));
+    },
+
+    "POST /v1/attempts/:attempt_id/victory": async (context) => {
+      const attemptId = context.params.attempt_id!.toLowerCase();
+      if (!UUID.test(attemptId)) throw new ApiError(404, "ITEM_NOT_FOUND", "Unknown battle attempt");
+      const client = parseClientResult(await readJsonObject(context.request));
+      const simulate = deps.simulate;
+      if (!simulate) throw new ApiError(503, "SERVICE_UNAVAILABLE", "Battle verification is not available");
+      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
+      return mutate(context, "stage_victory", JSON.stringify([attemptId, client]), async (tx, accountId) => {
+        const { victory, story, recruits } = await completeAttempt(tx, accountId, await lockedStoryState(tx, accountId), attemptId, client, simulate, now);
+        await saveStoryState(tx, accountId, story);
+        // Story recruits join the roster at level 1, like the First Oath pick.
+        for (const characterId of recruits) {
+          await tx.query("INSERT INTO roster (account_id, character_id) VALUES ($1, $2) ON CONFLICT DO NOTHING", [accountId, characterId]);
+        }
+        return { ...victory };
+      });
+    },
   };
+}
+
+/** `:name` segments match one path segment of word characters and dashes (stage ids like "1-2", UUIDs). */
+function matchRoute(table: Record<string, Handler>, method: string, pathname: string): { handler: Handler; params: Record<string, string> } | null {
+  const exact = table[`${method} ${pathname}`];
+  if (exact) return { handler: exact, params: {} };
+  const segments = pathname.split("/");
+  for (const [key, handler] of Object.entries(table)) {
+    const [routeMethod, pattern] = key.split(" ") as [string, string];
+    const parts = pattern.split("/");
+    if (routeMethod !== method || parts.length !== segments.length || !parts.some((part) => part.startsWith(":"))) continue;
+    const params: Record<string, string> = {};
+    const matched = parts.every((part, index) => {
+      const segment = segments[index]!;
+      if (!part.startsWith(":")) return part === segment;
+      if (!/^[A-Za-z0-9_-]{1,64}$/.test(segment)) return false;
+      params[part.slice(1)] = segment;
+      return true;
+    });
+    if (matched) return { handler, params };
+  }
+  return null;
 }
 
 /** The client key for rate limiting: Cloudflare's connecting IP (set by the edge, not by the client). */
@@ -166,9 +310,9 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
   const table = routes(deps);
   return async (request) => {
     const url = new URL(request.url);
-    const handler = table[`${request.method} ${url.pathname}`];
-    if (!handler) {
-      const known = Object.keys(table).some((key) => key.endsWith(` ${url.pathname}`));
+    const route = matchRoute(table, request.method, url.pathname);
+    if (!route) {
+      const known = ["GET", "POST", "PUT", "PATCH", "DELETE"].some((method) => matchRoute(table, method, url.pathname) !== null);
       return errorResponse(new ApiError(known ? 405 : 404, "HTTP_ERROR", known ? "Method Not Allowed" : "Not Found"));
     }
     if (url.pathname !== "/healthz") {
@@ -180,7 +324,7 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
     let connection;
     try {
       connection = await deps.connect();
-      return await handler({ request, db: connection });
+      return await route.handler({ request, db: connection, params: route.params });
     } catch (error) {
       if (error instanceof ApiError) return errorResponse(error);
       console.error("unhandled", request.method, url.pathname, error);

@@ -28,6 +28,9 @@
       "ascension": 0,
       "memory_shards": 0,
       "memory_nodes": 0,
+      "xp_to_next": 122,
+      "level_cap": 20,
+      "level_up_silver_crowns": 150,
       "skill_ranks": {}
     },
     "mahmut": {
@@ -36,6 +39,9 @@
       "ascension": 0,
       "memory_shards": 0,
       "memory_nodes": 0,
+      "xp_to_next": 122,
+      "level_cap": 20,
+      "level_up_silver_crowns": 150,
       "skill_ranks": {}
     }
   },

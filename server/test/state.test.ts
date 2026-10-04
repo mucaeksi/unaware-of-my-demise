@@ -2,9 +2,12 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createApp } from "../src/app";
-import { FREE_START_CHARACTER_IDS, STORY_ORDER } from "../src/content";
+import { progression, storyRules } from "../src/rules";
 import type { IdentityVerifier } from "../src/identity";
 import { createTestDatabase, type TestDatabase } from "./db";
+
+const FREE_START_CHARACTER_IDS = [...storyRules().newPlayerState().owned_character_ids].sort();
+const STORY_ORDER = storyRules().storyOrder();
 
 let database: TestDatabase;
 let token = "";
@@ -75,7 +78,17 @@ describe("player snapshot", () => {
     );
     const snapshot = await state();
     expect(snapshot.wallet.silver_crowns).toBe(9007199254740991);
-    expect(snapshot.roster.mahmut).toEqual({ level: 7, xp: 15, ascension: 0, memory_shards: 3, memory_nodes: 1, skill_ranks: { skill_x: 3 } });
+    expect(snapshot.roster.mahmut).toEqual({
+      level: 7,
+      xp: 15,
+      ascension: 0,
+      memory_shards: 3,
+      memory_nodes: 1,
+      xp_to_next: progression().xpToNext(7),
+      level_cap: 20,
+      level_up_silver_crowns: progression().levelUpSilverCrownsCost(7),
+      skill_ranks: { skill_x: 3 },
+    });
     expect(snapshot.items).toEqual({ torn_chronicle_page: 4 });
     expect(snapshot.inventory.inventory_weapons.map((row: { instance_id: string }) => row.instance_id)).toEqual(["w-b", "w-a"]);
     expect(snapshot.inventory.inventory_weapons[0]).toEqual({

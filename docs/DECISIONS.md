@@ -185,7 +185,11 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
     - The client asks to start a stage (`POST /v1/stages/{id}/attempts`,
       sending the roster). The server checks the stage is unlocked and the
       roster is owned and legal, then stores an attempt with a
-      server-chosen 63-bit seed and returns `{attempt_id, run_seed}`.
+      server-chosen seed and returns `{attempt_id, run_seed}`.
+      Implementation note (2026-10-04): the seed is drawn from the CSPRNG
+      below 2^53, not 63 bits, because Godot parses JSON numbers as
+      doubles. The seed space stays far beyond any shopping, since the
+      server, not the client, picks it.
     - The client plays that seed and reports the result.
     - The server re-runs the deterministic engine (TypeScript port,
       parity-tested) from the attempt's stored inputs. It grants rewards only

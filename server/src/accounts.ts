@@ -1,6 +1,6 @@
 // Accounts, sign-in nonces, sessions and profiles (LEGACY server/repository.py, server/app.py auth routes).
 import { randomChoice, randomHex, randomUrlSafe, sha256Hex } from "./crypto";
-import { FREE_START_CHARACTER_IDS, newStoryState } from "./content";
+import { newStoryState } from "./story";
 import type { Db } from "./db";
 
 export const SESSION_TTL_SECONDS = 3600;
@@ -48,8 +48,9 @@ export async function createAccount(db: Db, provider: string, subjectHash: strin
   await db.query("INSERT INTO account (account_id) VALUES ($1)", [accountId]);
   await db.query("INSERT INTO provider_links (provider, subject_hash, account_id) VALUES ($1, $2, $3)", [provider, subjectHash, accountId]);
   await db.query("INSERT INTO wallet (account_id) VALUES ($1)", [accountId]);
-  await db.query("INSERT INTO story_state (account_id, state) VALUES ($1, $2)", [accountId, JSON.stringify(newStoryState())]);
-  for (const characterId of FREE_START_CHARACTER_IDS) {
+  const story = newStoryState();
+  await db.query("INSERT INTO story_state (account_id, state) VALUES ($1, $2)", [accountId, JSON.stringify(story)]);
+  for (const characterId of story.owned_character_ids) {
     await db.query("INSERT INTO roster (account_id, character_id) VALUES ($1, $2)", [accountId, characterId]);
   }
   await ensureProfile(db, accountId);

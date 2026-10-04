@@ -86,12 +86,6 @@ func test_unreadable_replies_are_protocol_errors() -> void:
 	assert_eq((await (pair[0] as OnlineBackend).fetch_state()).error_kind, OnlineBackend.KIND_PROTOCOL)
 
 
-func test_actions_the_server_lacks_fail_without_a_request() -> void:
-	var pair: Array = _backend([] as Array[Dictionary])
-	assert_eq((await (pair[0] as OnlineBackend).level_up("mahmut", {})).error_kind, OnlineBackend.KIND_UNSUPPORTED)
-	assert_eq((pair[1] as ScriptedTransport).sent.size(), 0)
-
-
 func test_the_game_flow_adopts_the_servers_story_reply() -> void:
 	var flow: GameFlow = GameFlow.create()
 	assert_true(flow.is_ready(), flow.error)
@@ -114,3 +108,61 @@ func test_the_game_flow_adopts_the_servers_story_reply() -> void:
 func test_online_hands_out_the_offline_base_until_a_session_exists() -> void:
 	Online.session_token = ""
 	assert_false(Online.backend() is OnlineBackend)
+
+
+func test_stage_attempts_and_victories_go_to_their_routes() -> void:
+	var pair: Array = _backend([{"status": 200, "body": "{\"state\": {}, \"attempt\": {}}"}, {"status": 200, "body": "{\"state\": {}}"}] as Array[Dictionary])
+	var backend: OnlineBackend = pair[0]
+	assert_true((await backend.begin_stage("1-4", ["fadyme", "mahmut"])).is_ok())
+	assert_true((await backend.submit_victory("6f1c2d6e-0000-4000-8000-000000000001", {"outcome": "victory", "stars": 3})).is_ok())
+	var sent: Array[Dictionary] = (pair[1] as ScriptedTransport).sent
+	assert_eq(sent[0]["url"], "https://api.example/v1/stages/1-4/attempts")
+	assert_eq(JSON.parse_string(sent[0]["body"]), {"roster": ["fadyme", "mahmut"]})
+	assert_eq(sent[1]["url"], "https://api.example/v1/attempts/6f1c2d6e-0000-4000-8000-000000000001/victory")
+	assert_eq(JSON.parse_string(sent[1]["body"]), {"outcome": "victory", "stars": 3.0})
+	for request: Dictionary in sent:
+		assert_ne(_header(request, "Idempotency-Key"), "", "both are mutations")
+
+
+func test_progression_calls_go_to_the_roster_routes_and_map_refusals() -> void:
+	var refusal: String = "{\"error\": {\"code\": \"PROGRESSION\", \"message\": \"Not enough Silver Crowns\"}}"
+	var pair: Array = _backend([
+		{"status": 200, "body": "{\"state\": {}, \"level_after\": 2}"},
+		{"status": 409, "body": refusal},
+		{"status": 200, "body": "{\"state\": {}, \"node\": 1}"},
+	] as Array[Dictionary])
+	var backend: OnlineBackend = pair[0]
+	assert_true((await backend.level_up("mahmut", {"torn_chronicle_page": 2})).is_ok())
+	var refused: Outcome = await backend.upgrade_skill("mahmut", "mahmut_active_broken_crest_guard")
+	assert_eq(refused.error_kind, Outcome.PROGRESSION, "a rules refusal becomes a progression outcome the screens show")
+	assert_eq(refused.error, "Not enough Silver Crowns")
+	assert_true((await backend.unlock_memory_node("fadyme")).is_ok())
+	var sent: Array[Dictionary] = (pair[1] as ScriptedTransport).sent
+	assert_eq(sent[0]["url"], "https://api.example/v1/roster/mahmut/level-up")
+	assert_eq(JSON.parse_string(sent[0]["body"]), {"items": {"torn_chronicle_page": 2.0}})
+	assert_eq(sent[1]["url"], "https://api.example/v1/roster/mahmut/skills/mahmut_active_broken_crest_guard/upgrade")
+	assert_eq(sent[2]["url"], "https://api.example/v1/roster/fadyme/memory-nodes")
+
+
+func test_equipment_calls_go_to_the_inventory_routes() -> void:
+	var ok: Dictionary = {"status": 200, "body": "{\"state\": {}}"}
+	var pair: Array = _backend([ok, ok, ok, ok, ok, ok] as Array[Dictionary])
+	var backend: OnlineBackend = pair[0]
+	assert_true((await backend.equip("inventory_weapons", "wpn_1", "mahmut")).is_ok())
+	assert_true((await backend.unequip("inventory_armor", "arm_1")).is_ok())
+	assert_true((await backend.set_locked("inventory_accessories", "acc_1", true)).is_ok())
+	assert_true((await backend.dismantle_weapon("wpn_2")).is_ok())
+	assert_true((await backend.level_up_equipment("inventory_weapons", "wpn_1")).is_ok())
+	assert_true((await backend.reroll_accessory("acc_1")).is_ok())
+	var sent: Array[Dictionary] = (pair[1] as ScriptedTransport).sent
+	var urls: Array = sent.map(func(request: Dictionary) -> String: return request["url"])
+	assert_eq(urls, [
+		"https://api.example/v1/inventory/inventory_weapons/wpn_1/equip",
+		"https://api.example/v1/inventory/inventory_armor/arm_1/unequip",
+		"https://api.example/v1/inventory/inventory_accessories/acc_1/lock",
+		"https://api.example/v1/inventory/inventory_weapons/wpn_2/dismantle",
+		"https://api.example/v1/inventory/inventory_weapons/wpn_1/level-up",
+		"https://api.example/v1/inventory/inventory_accessories/acc_1/reroll",
+	])
+	assert_eq(JSON.parse_string(sent[0]["body"]), {"character_id": "mahmut"})
+	assert_eq(JSON.parse_string(sent[2]["body"]), {"locked": true})

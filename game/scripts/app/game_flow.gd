@@ -56,6 +56,8 @@ var battle_service: BattleService = null
 var backend: GameBackend = GameBackend.new()
 ## The last snapshot the server sent (null until `sync` succeeded).
 var state: PlayerState = null
+## The attempt the server opened for the battle in progress ({} = none): {"attempt_id", "stage_id", "run_seed"}.
+var attempt: Dictionary = {}
 ## Why the content or the rules could not be set up ("" = ready).
 var error: String = ""
 
@@ -238,9 +240,22 @@ func _candidate(character_id: String) -> RosterCandidate:
 # -- battles ------------------------------------------------------------------------------------------
 
 
-## A fresh, unpredictable battle seed (non-negative, 63-bit): retries are genuinely different fights; the seed used is on the result.
-static func new_run_seed() -> int:
-	return Crypto.new().generate_random_bytes(8).decode_s64(0) & 0x7fffffffffffffff
+## Asks the server to open an attempt at `stage_id` with `roster` (null = the default party; coroutine). The server checks the stage and the
+## party and picks the battle seed (DEC-0013); on success `attempt` holds {"attempt_id", "stage_id", "run_seed"} and the battle must be
+## started with that seed. A new attempt replaces any older one, on the server too.
+func begin_stage(stage_id: String, roster: Variant = null) -> Outcome:
+	attempt = {}
+	var chosen: Array = auto_roster(stage_id) if roster == null else (roster as Array).duplicate()
+	var reply: Outcome = _adopt(await backend.begin_stage(stage_id, chosen))
+	if not reply.is_ok():
+		return reply
+	var opened: Variant = (reply.value as Dictionary).get("attempt")
+	var valid: bool = opened is Dictionary and (opened as Dictionary).get("attempt_id") is String \
+		and ((opened as Dictionary).get("run_seed") is int or (opened as Dictionary).get("run_seed") is float)
+	if not valid or (opened as Dictionary).get("stage_id") != stage_id:
+		return Outcome.fail(ERROR_PROTOCOL, "the server did not open an attempt for stage %s" % stage_id)
+	attempt = {"attempt_id": opened["attempt_id"], "stage_id": stage_id, "run_seed": int(opened["run_seed"])}
+	return reply
 
 
 ## What `BattleService.run` needs from the snapshot: levels, equipped gear, skill ranks and Memory Nodes of the OWNED heroes only (a
@@ -290,18 +305,18 @@ func battle_options(run_seed: int) -> Dictionary:
 	}
 
 
-## Starts the battle of `stage_id` on a worker thread. `roster` null = the default party (`auto_roster`); `run_seed` < 0 = a fresh seed.
-## The main thread polls `WorkerJob.is_finished()`, then hands `finish()` and the same `roster` to `complete_battle`.
-func start_battle(stage_id: String, roster: Variant = null, run_seed: int = -1) -> WorkerJob:
+## Starts the battle of `stage_id` on a worker thread with the seed of the attempt `begin_stage` opened. `roster` null = the default party
+## (`auto_roster`). The main thread polls `WorkerJob.is_finished()`, then hands `finish()` and the same `roster` to `complete_battle`.
+func start_battle(stage_id: String, roster: Variant, run_seed: int) -> WorkerJob:
 	var chosen: Array = auto_roster(stage_id) if roster == null else (roster as Array).duplicate()
-	var options: Dictionary = battle_options(new_run_seed() if run_seed < 0 else run_seed)
+	var options: Dictionary = battle_options(run_seed)
 	var service: BattleService = battle_service
 	return WorkerJob.start(func() -> Variant: return service.run(stage_id, chosen, options))
 
 
-## Reports a finished battle (coroutine). A victory goes to the server, which decides what it is worth and replies with the new snapshot;
-## `state` moves only then. A defeat reports nothing.
-func complete_battle(result: BattleService.BattleResult, roster: Variant = null) -> StageOutcome:
+## Reports a finished battle (coroutine). A victory goes to the server, which re-runs the attempt, decides what it is worth and replies with
+## the new snapshot; `state` moves only then. A defeat reports nothing (the open attempt simply expires with the next one).
+func complete_battle(result: BattleService.BattleResult) -> StageOutcome:
 	var outcome: StageOutcome = StageOutcome.new()
 	outcome.battle = result
 	outcome.story_state = state.story_state
@@ -315,9 +330,13 @@ func complete_battle(result: BattleService.BattleResult, roster: Variant = null)
 		outcome.error = "Unknown stage_id '%s'" % result.stage_id
 		outcome.error_kind = ERROR_FLOW
 		return outcome
-	var chosen: Array = auto_roster(result.stage_id) if roster == null else (roster as Array).duplicate()
+	if attempt.get("stage_id") != result.stage_id or attempt.get("run_seed") != result.run_seed:
+		outcome.error = "No open attempt matches the battle of stage %s" % result.stage_id
+		outcome.error_kind = ERROR_FLOW
+		return outcome
 	var client_result: Dictionary = {"outcome": result.outcome, "stars": result.stars, "actions": result.actions, "cycles": result.cycles}
-	var reported: Outcome = _adopt(await backend.submit_victory(result.stage_id, chosen, result.run_seed, client_result))
+	var reported: Outcome = _adopt(await backend.submit_victory(String(attempt["attempt_id"]), client_result))
+	attempt = {}
 	if not reported.is_ok():
 		outcome.error = reported.error
 		outcome.error_kind = reported.error_kind
@@ -330,10 +349,17 @@ func complete_battle(result: BattleService.BattleResult, roster: Variant = null)
 
 
 ## Runs and reports one attempt, waiting for the worker (headless tests, tools; coroutine). Screens use `start_battle` and poll.
-func run_stage(stage_id: String, roster: Variant = null, run_seed: int = -1) -> StageOutcome:
-	var job: WorkerJob = start_battle(stage_id, roster, run_seed)
+func run_stage(stage_id: String, roster: Variant = null) -> StageOutcome:
+	var opened: Outcome = await begin_stage(stage_id, roster)
+	if not opened.is_ok():
+		var refused: StageOutcome = StageOutcome.new()
+		refused.story_state = state.story_state
+		refused.error = opened.error
+		refused.error_kind = opened.error_kind
+		return refused
+	var job: WorkerJob = start_battle(stage_id, roster, int(attempt["run_seed"]))
 	var result: BattleService.BattleResult = job.finish() as BattleService.BattleResult
-	return await complete_battle(result, roster)
+	return await complete_battle(result)
 
 
 # -- team, skills and inventory (the hub's menus) -----------------------------------------------------

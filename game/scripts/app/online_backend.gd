@@ -5,11 +5,10 @@ extends GameBackend
 ## key, which the server answers with the stored result instead of acting twice.
 ##
 ## Errors come back as `Outcome`s: no connection -> `GameBackend.KIND_OFFLINE`, an API error -> its code in lower case
-## ("conflict", "unauthorized", ...) with the server's message, a reply that is not JSON -> `KIND_PROTOCOL`. Calls the
-## server does not offer yet fail with `KIND_UNSUPPORTED`.
+## ("conflict", "unauthorized", "progression", "equipment", ...) with the server's message, a reply that is not JSON ->
+## `KIND_PROTOCOL`.
 
 const KIND_PROTOCOL: String = "protocol"
-const KIND_UNSUPPORTED: String = "unsupported"
 
 
 ## How a request reaches the server; tests substitute their own. `request` is a coroutine returning
@@ -89,10 +88,6 @@ static func _outcome(reply: Dictionary) -> Outcome:
 	return Outcome.fail(KIND_PROTOCOL, "Request failed (HTTP %d)." % status)
 
 
-func _unsupported() -> Outcome:
-	return Outcome.fail(KIND_UNSUPPORTED, "This action is not available on the game server yet.")
-
-
 func fetch_state() -> Outcome:
 	var reply: Outcome = await _call(HTTPClient.METHOD_GET, "/v1/state")
 	# GET /v1/state answers the bare snapshot; the GameBackend contract carries it under "state".
@@ -107,41 +102,49 @@ func claim_first_oath(character_id: String) -> Outcome:
 	return await _call(HTTPClient.METHOD_POST, "/v1/story/first-oath", {"character_id": character_id}, true)
 
 
-func submit_victory(_stage_id: String, _roster: Array, _run_seed: int, _client_result: Dictionary) -> Outcome:
-	return _unsupported()
+func begin_stage(stage_id: String, roster: Array) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/stages/%s/attempts" % stage_id.uri_encode(), {"roster": roster}, true)
 
 
-func level_up(_character_id: String, _items: Dictionary) -> Outcome:
-	return _unsupported()
+func submit_victory(attempt_id: String, client_result: Dictionary) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/attempts/%s/victory" % attempt_id.uri_encode(), client_result, true)
 
 
-func upgrade_skill(_character_id: String, _skill_id: String) -> Outcome:
-	return _unsupported()
+func level_up(character_id: String, items: Dictionary) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/roster/%s/level-up" % character_id.uri_encode(), {"items": items}, true)
 
 
-func unlock_memory_node(_character_id: String) -> Outcome:
-	return _unsupported()
+func upgrade_skill(character_id: String, skill_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/roster/%s/skills/%s/upgrade" % [character_id.uri_encode(), skill_id.uri_encode()], null, true)
 
 
-func equip(_table: String, _instance_id: String, _character_id: String) -> Outcome:
-	return _unsupported()
+func unlock_memory_node(character_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/roster/%s/memory-nodes" % character_id.uri_encode(), null, true)
 
 
-func unequip(_table: String, _instance_id: String) -> Outcome:
-	return _unsupported()
+func equip(table: String, instance_id: String, character_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, _instance_path(table, instance_id, "equip"), {"character_id": character_id}, true)
 
 
-func set_locked(_table: String, _instance_id: String, _locked: bool) -> Outcome:
-	return _unsupported()
+func unequip(table: String, instance_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, _instance_path(table, instance_id, "unequip"), {}, true)
 
 
-func dismantle_weapon(_instance_id: String) -> Outcome:
-	return _unsupported()
+func set_locked(table: String, instance_id: String, locked: bool) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, _instance_path(table, instance_id, "lock"), {"locked": locked}, true)
 
 
-func level_up_equipment(_table: String, _instance_id: String) -> Outcome:
-	return _unsupported()
+func dismantle_weapon(instance_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, _instance_path("inventory_weapons", instance_id, "dismantle"), {}, true)
 
 
-func reroll_accessory(_instance_id: String) -> Outcome:
-	return _unsupported()
+func level_up_equipment(table: String, instance_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, _instance_path(table, instance_id, "level-up"), {"target_levels": 1}, true)
+
+
+func reroll_accessory(instance_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, _instance_path("inventory_accessories", instance_id, "reroll"), {}, true)
+
+
+static func _instance_path(table: String, instance_id: String, action: String) -> String:
+	return "/v1/inventory/%s/%s/%s" % [table.uri_encode(), instance_id.uri_encode(), action]

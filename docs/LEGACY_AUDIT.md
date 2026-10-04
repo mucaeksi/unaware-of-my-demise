@@ -324,3 +324,53 @@ Read from Drive (content retrieved and decoded, not just metadata):
   every balance.
 - Reset windows (half-day cycle, weekly Monday 00:00 UTC) on the server
   clock only.
+
+### 9.4 Story-stage victory flow (audited 2026-10-04)
+
+Read in full from Drive: `client/game_controller.py` (`1GgTPgR7xvcGU501FwfuwTcWxYrZqop0e`),
+`backend/battle_reward_service.py` (`1JtqvrKL6l0_4WueU4i-bfsV-5kbyRZSp`), `backend/loot_service.py`
+(`1nkteKOIRX1bQFv6LRxZVQah-1Fur5eLl`), `backend/reward_service.py` (`1X4pm0HnAxhj4UuP-rCb4c6tYNCNa9HVa`),
+`backend/repository.py` (`19EVCFe44tzPD6MJON3GR1SiwOJYnupVG`), `backend/quest_service.py`
+(`1k8QDhx_54g6rQkmHq9mKrXbYUkvT75gZ`), `core/story_state.py` (`1zJLfgpo-CvB0EL7p2szEPew2ROkQjusg`),
+`game_logic/accessory_rng.py` (`1TELtLESzcOknevtA2qVUnY4yL69p25fO`), GDScript `services/victory_service.gd`
+(`121a2OjxQrCryo0veXP9RVfLqf6BauojD`). Victory lines only: `save.gd` (`18HsDISGtCJQh_V9fz7BtnqGWMZC4B2_R`),
+`game_flow.gd` (`126xCv7rYIqi9D5-VIe8DHS1Q2WRgiiZB`).
+
+`GameController._apply_victory` runs only for `outcome == "victory"`. A defeat writes nothing and raises no quest
+event. The steps:
+
+1. `is_first_clear = stage_id not in completed_stage_ids`.
+2. The reward RNG is a fresh `random.Random()` from OS entropy, re-rolled on every clear by design. It is not
+   derived from the battle seed (`secrets.randbits(63)`). GDScript does the same:
+   `CpythonRandom.create_from_u64(random 8 bytes)`.
+3. One transaction (`BEGIN IMMEDIATE` … commit) covers everything:
+   1. `apply_battle_result(..., boss_id=stage.boss_id, in_transaction=True)`:
+      - resolves the repeatable rows;
+      - only when `is_first_clear`, claims `claims(account_id, 'first_clear_stage:<id>', cycle 0)`. If the claim
+        already exists, the first-clear rows are skipped and nothing is drawn for them;
+      - resolves the first-clear rows;
+      - writes the rewards:
+        - currency `silver_crowns` → `wallet.silver_crowns`, `eclipse_token` → `wallet.eclipse_tokens`,
+          `account_xp` → `wallet.account_xp`;
+        - `item` / `item_pool` → `inventory_items`, clipped at the item's `stack_cap` (logged, not an error);
+        - `weapon_pool` → `inventory_weapons`: id `wpn_` + `token_hex(16)`, level 1, unlocked;
+        - `armor_pool` → `inventory_armor`: id `arm_` + `token_hex(16)`, `equip_slot 'armor'`;
+        - accessory kinds → `inventory_accessories`: id and payload come from the roll (`acc_` + 128 bits of the
+          sub-RNG), `equip_slot = payload.slot`.
+   2. `quest_service.record_battle_victory(stamina_cost, is_boss=bool(stage.boss_id), stars)`. Nothing happens
+      when `stamina_cost <= 0`: only Ration-costing battles count (owner decision 2026-09-28), so the 1-1 tutorial
+      counts for nothing. Otherwise it records `eligible_win`, plus `boss_win` if the stage has a boss, plus
+      `three_star_win` if stars >= 3. Each event goes into the half-day `cycle_id` and the weekly `(week, segment)`
+      buckets of `quest_progress`. Quest rewards are claimed later; they are never granted here.
+   3. `apply_story_rewards(state, stage)` (idempotent, also on replays). Then, only on a first clear,
+      `advance_story_cursor`. Then `save_story_state`.
+4. Victory does not change character XP or levels. It deducts no Ration; no Ration deduction exists anywhere in
+   the LEGACY client (NOT FOUND). It sends no mail and unlocks nothing else.
+
+Carried into the Worker (DEC-0013):
+
+- One transaction per verified victory.
+- The same order of steps and the same claim key.
+- The reward RNG is a fresh CSPRNG seed per verified victory, stored with the attempt's result. The idempotent
+  replay returns the stored rewards instead of rolling again.
+- Quest buckets use the server clock (the LEGACY client used the device clock).

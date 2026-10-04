@@ -64,6 +64,9 @@ static func create(content_registry: ContentModels.ContentRegistry, story_state_
 ## memory_nodes {id: unlocked}, max_actions, on_encounter_ready (Callable(state)).
 func run(stage_id: String, roster: Array = [], options: Dictionary = {}) -> BattleResult:
 	error = ""
+	# Every run starts the shared interpreter stream afresh: anything drawn before `run_battle` seeds the state (battle_start
+	# hooks) must not depend on earlier runs, so the server's re-run of an attempt (DEC-0013) matches this one.
+	interpreter.rng = CpythonRandom.new()
 	var result: BattleResult = BattleResult.new()
 	result.stage_id = stage_id
 	if not registry.stages.has(stage_id):
