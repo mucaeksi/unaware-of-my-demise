@@ -56,6 +56,9 @@ Economic journal (INF-015, migration 0005, DEC-0019): database triggers record e
 a stackable item, an equipment instance, a hero's copies or Memory Shards and gacha pity in `economy_journal`, with the
 request's Idempotency-Key, route and rules hash (`src/journal.ts` sets them per transaction).
 
+An attempt records the rules hash it opened under (INF-022): after a content release a victory on an older attempt gets
+409 `RULES_CHANGED`, and the snapshot stops offering it.
+
 Data lifecycle (INF-016, `src/retention.ts`, cron `17 3 * * *` UTC): nonces are deleted a day after expiry and sessions a
 week after; an open attempt older than 24 h can no longer be won, the snapshot stops offering it and the job marks it
 `expired`; a stored reply is replayable for 30 days, then purged while its key stays as a tombstone, so a later retry

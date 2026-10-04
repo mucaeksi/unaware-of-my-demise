@@ -6,6 +6,7 @@ import { CpythonRandom } from "./engine/random";
 import { StoryError, type PersistedStoryState, type PlayerStoryState } from "./engine/story";
 import { requireRation, spendRation } from "./ration";
 import { applyRewards, recordBattleVictory, type AppliedReward } from "./rewards";
+import { serverRulesHash } from "./release";
 import { battleService, contentRegistry, lootResolver, questProgress, stackCaps, storyRules } from "./rules";
 
 /** The engine options a run needs besides the stage, roster and seed (game_flow.gd `battle_options`). */
@@ -149,8 +150,8 @@ export async function beginAttempt(tx: Db, accountId: string, persisted: Persist
   const attemptId = crypto.randomUUID();
   const runSeed = newRunSeed();
   await tx.query(
-    "INSERT INTO stage_attempts (attempt_id, account_id, stage_id, roster, run_seed, inputs) VALUES ($1, $2, $3, $4, $5, $6)",
-    [attemptId, accountId, stageId, JSON.stringify(roster), runSeed, JSON.stringify(inputs)],
+    "INSERT INTO stage_attempts (attempt_id, account_id, stage_id, roster, run_seed, inputs, rules_hash) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+    [attemptId, accountId, stageId, JSON.stringify(roster), runSeed, JSON.stringify(inputs), await serverRulesHash()],
   );
   return { attempt_id: attemptId, stage_id: stageId, run_seed: runSeed };
 }
@@ -256,8 +257,16 @@ export async function completeAttempt(
   simulate: Simulate,
   nowUnix: number,
 ): Promise<{ victory: VictoryResult; story: PersistedStoryState; recruits: string[] }> {
-  const { rows } = await tx.query<{ stage_id: string; roster: string[]; run_seed: unknown; inputs: AttemptInputs; status: string; stale: boolean }>(
-    "SELECT stage_id, roster, run_seed, inputs, status, created_at <= now() - make_interval(secs => $3) AS stale " +
+  const { rows } = await tx.query<{
+    stage_id: string;
+    roster: string[];
+    run_seed: unknown;
+    inputs: AttemptInputs;
+    status: string;
+    stale: boolean;
+    rules_hash: string | null;
+  }>(
+    "SELECT stage_id, roster, run_seed, inputs, status, rules_hash, created_at <= now() - make_interval(secs => $3) AS stale " +
       "FROM stage_attempts WHERE attempt_id = $1 AND account_id = $2 FOR UPDATE",
     [attemptId, accountId, ATTEMPT_TTL_SECONDS],
   );
@@ -265,6 +274,10 @@ export async function completeAttempt(
   if (!row) throw new ApiError(404, "ITEM_NOT_FOUND", "Unknown battle attempt");
   if (row.status !== "open") throw conflict(`This battle attempt is already ${row.status}`);
   if (row.stale) throw conflict("This battle attempt is already expired");
+  // INF-022: the client fought it under other rules than the server would re-run now.
+  if (row.rules_hash !== null && row.rules_hash !== (await serverRulesHash())) {
+    throw new ApiError(409, "RULES_CHANGED", "The game data changed since this battle started; start it again");
+  }
   const stage = contentRegistry().stages.get(row.stage_id);
   if (!stage) throw conflict(`Stage ${row.stage_id} no longer exists`);
   const rules = storyRules();

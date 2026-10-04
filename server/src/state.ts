@@ -4,6 +4,7 @@ import { toSafeInt, type Db } from "./db";
 import { isoUtcSeconds } from "./engine/quests";
 import { currentRation, innMealAvailable, rationRules } from "./ration";
 import { progression } from "./rules";
+import { serverRulesHash } from "./release";
 import { ATTEMPT_TTL_SECONDS } from "./stages";
 
 export const SNAPSHOT_SCHEMA_VERSION = 1;
@@ -92,8 +93,9 @@ export async function snapshot(db: Db, accountId: string, nowUnix: number = nowS
   // The battle opened but not reported (INF-014): after a restart the client re-runs it from these frozen inputs.
   const open = await db.query<{ attempt_id: string; stage_id: string; roster: string[]; run_seed: unknown; inputs: unknown }>(
     "SELECT attempt_id, stage_id, roster, run_seed, inputs FROM stage_attempts " +
-      "WHERE account_id = $1 AND status = 'open' AND created_at > now() - make_interval(secs => $2) ORDER BY created_at DESC LIMIT 1",
-    [accountId, ATTEMPT_TTL_SECONDS],
+      "WHERE account_id = $1 AND status = 'open' AND created_at > now() - make_interval(secs => $2) " +
+      "AND (rules_hash IS NULL OR rules_hash = $3) ORDER BY created_at DESC LIMIT 1",
+    [accountId, ATTEMPT_TTL_SECONDS, await serverRulesHash()],
   );
   const openRow = open.rows[0];
 

@@ -151,3 +151,24 @@ describe("POST /v1/attempts/{attempt_id}/abandon", () => {
     expect((await post(token, "/v1/attempts/not-a-uuid/abandon")).status).toBe(404);
   });
 });
+
+describe("rules release of an attempt (INF-022)", () => {
+  it("records the rules an attempt opened under; under other rules it is neither offered nor paid", async () => {
+    const token = await atFirstStage();
+    const opened = await post(token, "/v1/stages/1-1/attempts", { roster: [] });
+    const attemptId = opened.body.attempt.attempt_id;
+    const stored = await database.pool.query("SELECT rules_hash FROM stage_attempts WHERE attempt_id = $1", [attemptId]);
+    expect(stored.rows[0].rules_hash).toMatch(/^[0-9a-f]{64}$/);
+    await database.pool.query("UPDATE stage_attempts SET rules_hash = $2 WHERE attempt_id = $1", [attemptId, "0".repeat(64)]);
+    expect((await get(token, "/v1/state")).body.open_attempt, "not offered for resume").toBeNull();
+    const won = await post(token, `/v1/attempts/${attemptId}/victory`, { outcome: "victory" });
+    expect([won.status, won.body.error.code]).toEqual([409, "RULES_CHANGED"]);
+  });
+
+  it("still pays an attempt opened before the rules were recorded", async () => {
+    const token = await atFirstStage();
+    const opened = await post(token, "/v1/stages/1-1/attempts", { roster: [] });
+    await database.pool.query("UPDATE stage_attempts SET rules_hash = NULL WHERE attempt_id = $1", [opened.body.attempt.attempt_id]);
+    expect((await post(token, `/v1/attempts/${opened.body.attempt.attempt_id}/victory`, { outcome: "victory" })).status).toBe(200);
+  });
+});

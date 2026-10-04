@@ -410,3 +410,14 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
     it (the migration map itself is INF-023's remaining work, built when the first retirement is needed).
   - New data in a content release uses new ids and existing closed operations (the battle `EffectOp` set and the existing
     reward/quest kinds); a new operation is code and ships with an app (and Worker) release.
+
+## DEC-0024 — Attempts are pinned to their rules release
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-022 first part).
+- Decision: an attempt records the rules hash it was opened under (migration 0007). A victory is re-simulated with the
+  rules the Worker bundles; if they differ from the attempt's (a content release happened in between), the victory gets
+  409 `RULES_CHANGED` and the snapshot no longer offers the attempt for resume. The player loses only the replay (nothing
+  is paid before a verified victory), never a reward for a battle judged under other rules. Attempts from before the
+  column (NULL) keep working. Together with the boot gate (DEC-0015: the client's rules must equal the server's) and the
+  24 h attempt TTL (DEC-0018) this is the drain policy for open battles across a rules rollout.
+- Not decided here: running several rules releases side by side on the server (multi-release engine), needed only if a
+  rollout must keep old-release battles payable.
