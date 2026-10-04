@@ -2,15 +2,15 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md) — finish it step by step
-Feature: batch 5 (INF-033/034 admin Worker + audit, INF-035 liveops, INF-038 capacity) — PR open
-Task: merge batch 5 when CI is green (first deploy of the admin Worker; check its API refuses without Access); then G7 (INF-039–044) and G8 acceptance; final owner-decision summary
+Feature: batch 6 (G7: release AAB pipeline INF-039/040/041, end-to-end test INF-042) — PR open
+Task: merge batch 6 when CI (incl. the new e2e job) is green; then write G8 acceptance status and present all owner decisions (D-01…D-13) in one Turkish message
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
 **Owner directives (2026-10-04):** finish the roadmap in order, step by step; the owner presses "auto-continue" when a usage limit hits, so always leave a resumable checkpoint here. Merge to `main` every 3–4 verified steps (batch PRs), push the branch after each commit. Collect every owner decision in `docs/OWNER_DECISIONS.md` and present them together at the end. `narrative/` belongs to another team: do not touch it.
-**Branch:** `claude/adoring-galileo-f7rd3o`. Merged + live: #18–#25 (live `ccf579d`; Neon schema 0001–0007, `uomd_environment = production` recorded; R2 binding live, `/v1/content/current` 401 without auth). Batch 5 commits: 10629db (admin Worker, migration 0008), f880257 (liveops, migration 0009), 4fd9fa6 (CPU measurements).
-**Next step:** merge batch 5 → verify game source_sha, migrations 0008–0009 applied, admin Worker deployed and `GET /admin/api/me` answers 503 without Access. Then G7: INF-039 release toolchain (NDK pin), INF-040 AAB preset + upload signing (owner: upload keystore secret), INF-041 bundletool checks, INF-042 E2E script against a real Worker/Postgres, INF-043/044 owner-side (Play Console). Then present all owner decisions (D-01…D-12) in one Turkish message.
+**Branch:** `claude/adoring-galileo-f7rd3o`. Merged + live: #18–#26 (live `249913e`: admin Worker deployed, API 503 until Access; `/v1/liveops` 200; migrations 0001–0009). Batch 6 commit: 8bea984 (release AAB + e2e).
+**Next step:** merge batch 6 → G8 acceptance section in docs/INFRASTRUCTURE_ROADMAP.md (what is verified, what waits on which owner decision) → final message to the owner with D-01…D-13. Local e2e needs PostgreSQL on TCP 127.0.0.1:54318 with a password (Hyperdrive local mode refuses socket URLs).
 **Files in progress:** none
 **Open questions:** `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014, OQ-016 open; OQ-000/005 closed — do not remind); owner decisions collected in `docs/OWNER_DECISIONS.md`.
 **Local test infra (session-local, recreate as needed):** PostgreSQL 18 (production major) from PGDG at `/var/tmp/uomd-pg18` port 54318 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg18&port=54318"`; `PATH=/usr/lib/postgresql/18/bin:$PATH` for database/test.sh); Godot 4.7.2 in the scratchpad (checksum-verified download); Android SDK `/var/tmp/android-sdk`; Godot Android templates `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.

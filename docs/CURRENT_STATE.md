@@ -7,13 +7,15 @@ PRs and `docs/DECISIONS.md`.
 
 | Area | State |
 |---|---|
-| Production API | Cloudflare Worker `https://unaware-of-my-demise.muratcaneksiii.workers.dev`, deployed from `main` by `.github/workflows/deploy.yml` (migrations first, then the Worker, then health/bootstrap/sign-in checks). `GET /v1/bootstrap` reports the deployed commit. Google sign-in configured (variable `GOOGLE_CLIENT_IDS`). |
-| Database | Neon PostgreSQL through Hyperdrive; migrations 0001–0003 (`database/migrations/`), append-only, applied by the deploy. |
-| Server | TypeScript Worker (DEC-0013): auth, state, story, stages/victories (server re-simulation), progression, equipment, quests, gacha, Ration, release contract. vitest 423. |
-| Client | Godot 4.7.2 LEGACY client (BATCH-0002), server snapshot only (DEC-0012), release gate (DEC-0015), Google sign-in through the UomdNative Android plugin (BATCH-0003, DEC-0016). GUT 284. |
-| Android | CI builds, exports and verifies a debug APK signed with the repository debug key and keeps it as an artifact; the owner installed it and signed in with Google (2026-10-04). Not yet: release AAB, upload key, Play test track (G7). |
-| CI | `ci.yml`: `database`, `server`, `godot`, `android`. `deploy.yml`: production, with no automatic rollback to an older commit. |
-| Not built | admin panel, content patches/R2, staging environment, billing/ads/social, localization/audio runtime (roadmap G1–G6). |
+| Production API | Cloudflare Worker `https://unaware-of-my-demise.muratcaneksiii.workers.dev`, deployed from `main` by `.github/workflows/deploy.yml` (migrations with the environment guard, the Worker, health/bootstrap/sign-in checks, then the admin Worker). `GET /v1/bootstrap` reports the deployed commit; manual deploys take `source_sha` + `reason` (recorded rollback). |
+| Database | Neon PostgreSQL 18 through Hyperdrive; migrations 0001–0009 (journal, lifecycle, deletion, rules pinning, admin audit, liveops), recorded as `production` (`uomd_environment`). Read-only integrity check `database/verify.sh`; monthly restore drill passed against production. Point-in-time history: 6 h (D-05). |
+| Server | TypeScript Worker (DEC-0013): auth, state, story, stages/victories (server re-simulation, rules-pinned), progression, equipment, quests, gacha, Ration, release contract, operations reconciliation, sign-out/deletion, content delivery from private R2, liveops (config, mail ledger). vitest 446. |
+| Admin | Separate admin Worker `unaware-of-my-demise-admin` (static panel + audited API); answers 503 until Cloudflare Access is set up (D-11). |
+| Client | Godot 4.7.2 client: server snapshot, release gate, Google sign-in (UomdNative), asset resolver, audio/locale, signed content-patch installer with boot-order mount. GUT 314 + end-to-end test over real HTTP. |
+| Content | `game/data/content` is the single source (DEC-0026), validated in CI; content patches: data/imported-assets gate, signed manifests (key pending, D-09), publishing workflow, private delivery. |
+| Android | CI debug APK (owner-tested on a phone). Release AAB pipeline built and verified locally with a throwaway upload key; store upload waits on D-13. |
+| CI | `ci.yml`: `content`, `database`, `server`, `godot` (+ content-patch gate), `admin`, `e2e`, `android`. Also `deploy.yml`, `deploy-staging.yml` (skips until D-07), `restore-drill.yml`, `publish-content.yml` (skips until D-09), `release-android.yml` (skips until D-13). |
+| Owner decisions | `docs/OWNER_DECISIONS.md` D-01…D-13. |
 
 ---
 
