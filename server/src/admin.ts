@@ -11,14 +11,15 @@ import { ApiError, errorResponse, isoUtc, json, readJsonObject } from "./http";
 import { setJournalContext } from "./journal";
 import { bootstrap, DEVELOPMENT_RELEASE, type ReleaseConfig } from "./release";
 import { snapshot } from "./state";
+import { currentLiveops, parseConfig, parseMail } from "./liveops";
 
 export type AdminRole = "viewer" | "support" | "operator";
-export type Permission = "service.read" | "player.read" | "player.support" | "audit.read";
+export type Permission = "service.read" | "player.read" | "player.support" | "audit.read" | "liveops.write";
 
 const GRANTS: Record<AdminRole, readonly Permission[]> = {
   viewer: ["service.read", "player.read"],
   support: ["service.read", "player.read", "player.support"],
-  operator: ["service.read", "player.read", "player.support", "audit.read"],
+  operator: ["service.read", "player.read", "player.support", "audit.read", "liveops.write"],
 };
 
 export interface AdminDeps {
@@ -112,8 +113,43 @@ async function changeRequest(context: AdminContext): Promise<{ reason: string; k
 
 type AdminHandler = (context: AdminContext) => Promise<Response>;
 
+/**
+ * Runs an admin change once per Idempotency-Key: `apply` and its audit row commit in one transaction (the journal of
+ * any balance it moves carries the same key); a replayed or concurrently repeated key answers the stored result.
+ */
+async function auditedChange(
+  deps: AdminDeps,
+  context: AdminContext,
+  change: { reason: string; key: string },
+  permission: Permission,
+  action: string,
+  target: string | null,
+  apply: (tx: Db) => Promise<Record<string, unknown>>,
+): Promise<Response> {
+  const stored = async () => (await context.db.query<{ result: unknown }>("SELECT result FROM admin_audit WHERE operation_key = $1", [change.key])).rows[0];
+  const replay = await stored();
+  if (replay) return json(replay.result);
+  try {
+    return json(
+      await transaction(context.db, async (tx) => {
+        await setJournalContext(tx, change.key, `admin:${action}`);
+        const result = await apply(tx);
+        await audit(tx, deps, context.operator, { permission, action, target, reason: change.reason, operationKey: change.key, result });
+        return result;
+      }),
+    );
+  } catch (error) {
+    if ((error as { code?: string }).code !== "23505") throw error;
+    const concurrent = await stored();
+    if (!concurrent) throw error;
+    return json(concurrent.result);
+  }
+}
+
 function routes(deps: AdminDeps): Record<string, AdminHandler> {
   const now = (): number => Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
+  const audited = (context: AdminContext, change: { reason: string; key: string }, action: string, target: string | null, apply: (tx: Db) => Promise<Record<string, unknown>>) =>
+    auditedChange(deps, context, change, action.startsWith("support.") ? "player.support" : "liveops.write", action, target, apply);
   return {
     "GET /admin/api/me": async ({ operator }) => json({ email: operator.email, role: operator.role, permissions: GRANTS[operator.role] }),
 
@@ -203,32 +239,63 @@ function routes(deps: AdminDeps): Record<string, AdminHandler> {
       requirePermission(context.operator, "player.support");
       const accountId = accountParam(context);
       const change = await changeRequest(context);
-      const replay = await context.db.query<{ result: unknown }>("SELECT result FROM admin_audit WHERE operation_key = $1", [change.key]);
-      if (replay.rows[0]) return json(replay.rows[0].result);
       await requireAccountExists(context.db, accountId);
-      const apply = () => transaction(context.db, async (tx) => {
-        await setJournalContext(tx, change.key, "admin:support.revoke_sessions");
+      return audited(context, change, "support.revoke_sessions", accountId, async (tx) => {
         const revoked = await tx.query("DELETE FROM sessions WHERE account_id = $1", [accountId]);
-        const outcome = { account_id: accountId, revoked_sessions: revoked.rowCount ?? 0 };
-        await audit(tx, deps, context.operator, {
-          permission: "player.support",
-          action: "support.revoke_sessions",
-          target: accountId,
-          reason: change.reason,
-          operationKey: change.key,
-          result: outcome,
-        });
-        return outcome;
+        return { account_id: accountId, revoked_sessions: revoked.rowCount ?? 0 };
       });
-      try {
-        return json(await apply());
-      } catch (error) {
-        // The same key committed concurrently: answer what it did, apply nothing again.
-        if ((error as { code?: string }).code !== "23505") throw error;
-        const stored = await context.db.query<{ result: unknown }>("SELECT result FROM admin_audit WHERE operation_key = $1", [change.key]);
-        if (!stored.rows[0]) throw error;
-        return json(stored.rows[0].result);
-      }
+    },
+
+    // Live operations (INF-035): what runs now, and the last mail sent.
+    "GET /admin/api/liveops": async ({ db, operator }) => {
+      requirePermission(operator, "service.read");
+      const mail = await db.query(
+        `SELECT mail_id, account_id, title_en, rewards, starts_at, expires_at, revoked_at, created_by, reason,
+                (SELECT count(*) FROM mail_claims c WHERE c.mail_id = m.mail_id)::int AS claims
+         FROM mail m ORDER BY created_at DESC LIMIT ${PAGE}`,
+      );
+      return json({ current: await currentLiveops(db, new Date(now() * 1000)), mail: mail.rows });
+    },
+
+    "POST /admin/api/liveops/config": async (context) => {
+      requirePermission(context.operator, "liveops.write");
+      const change = await changeRequest(context);
+      const config = parseConfig(change.body.config);
+      return audited(context, change, "liveops.publish_config", null, async (tx) => {
+        const { rows } = await tx.query<{ revision: string }>(
+          "INSERT INTO liveops_config (config, created_by, reason, operation_key) VALUES ($1, $2, $3, $4) RETURNING revision",
+          [JSON.stringify(config), context.operator.email, change.reason, change.key],
+        );
+        return { revision: Number(rows[0]!.revision), config };
+      });
+    },
+
+    "POST /admin/api/mail": async (context) => {
+      requirePermission(context.operator, "liveops.write");
+      const change = await changeRequest(context);
+      const mail = parseMail(change.body);
+      if (mail.accountId !== null) await requireAccountExists(context.db, mail.accountId);
+      const mailId = `mail_${[...crypto.getRandomValues(new Uint8Array(16))].map((byte) => byte.toString(16).padStart(2, "0")).join("")}`;
+      return audited(context, change, "liveops.send_mail", mail.accountId, async (tx) => {
+        await tx.query(
+          `INSERT INTO mail (mail_id, account_id, title_en, body_en, rewards, starts_at, expires_at, created_by, reason, operation_key)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+          [mailId, mail.accountId, mail.title, mail.text, JSON.stringify(mail.rewards), mail.starts, mail.expires, context.operator.email, change.reason, change.key],
+        );
+        return { mail_id: mailId, account_id: mail.accountId, rewards: mail.rewards, starts_at_utc: isoUtc(mail.starts), expires_at_utc: isoUtc(mail.expires) };
+      });
+    },
+
+    // Stops future claims; what was claimed stays claimed.
+    "POST /admin/api/mail/:mail/revoke": async (context) => {
+      requirePermission(context.operator, "liveops.write");
+      const mailId = context.params.mail!;
+      const change = await changeRequest(context);
+      return audited(context, change, "liveops.revoke_mail", null, async (tx) => {
+        const revoked = await tx.query("UPDATE mail SET revoked_at = now() WHERE mail_id = $1 AND revoked_at IS NULL", [mailId]);
+        if (revoked.rowCount !== 1) throw new ApiError(404, "NOT_FOUND", "No such mail, or already revoked");
+        return { mail_id: mailId, revoked: true };
+      });
     },
 
     "GET /admin/api/audit": async ({ db, url, operator }) => {

@@ -542,3 +542,14 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   administrative; there is no production grant endpoint.
 - Why not the admin panel's own login: Access gives SSO/one-time PIN and MFA without the project storing operator
   credentials, and is free at this team size.
+
+## DEC-0034 — Live operations: versioned config and mail paid through a claim ledger
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-035). No real event or reward amounts are designed here.
+- Decision: operators publish append-only config revisions (`liveops_config`: feature flags, notices with server-UTC
+  windows; validated, unknown fields refused) and send mail (`mail`: to everyone or one account, a UTC window, bounded
+  rewards of Silver Crowns, Eclipse Tokens and known items) through the admin API, each change audited with its reason
+  (DEC-0033). Players read `GET /v1/liveops` (no sign-in: the current revision's flags and the notices running now) and
+  `GET /v1/mail`, and claim with `POST /v1/mail/{id}/claim`: idempotent, and the `mail_claims` primary key makes a second
+  claim (another key, another device) a 409 that pays nothing; the grant is journaled as `mail_claim`. A missing config
+  means revision 0, no flags, no notices; clients ignore flags they do not know. Revoking a mail stops further claims and
+  never takes back what was claimed.

@@ -23,6 +23,8 @@ The game Worker has no admin routes.
 | `GET /admin/api/players/{id}/state` · `/journal` · `/pulls` · `/claims` | player.read | `read.player_*` |
 | `POST /admin/api/players/{id}/revoke-sessions` (reason + Idempotency-Key) | player.support | `support.revoke_sessions`, same transaction |
 | `GET /admin/api/audit?target=` | audit.read | no |
+| `GET /admin/api/liveops` (current config, last mail with claim counts) | service.read | no |
+| `POST /admin/api/liveops/config` (a new config revision) · `POST /admin/api/mail` · `POST /admin/api/mail/{id}/revoke` | liveops.write (operator) | `liveops.*`, same transaction |
 
 Changes need a same-origin JSON request (the panel page), a reason of 5–500 characters and an Idempotency-Key; a
 replayed key answers the first result and changes nothing. `admin_audit` is append-only (triggers refuse UPDATE,
@@ -43,5 +45,5 @@ DELETE, TRUNCATE) and keeps the actor, role, permission, reason, key, target, en
 
 ## Not built yet
 
-Release/maintenance controls (maintenance is a deploy variable today, `docs/runbooks/INCIDENT.md`), liveops
-(INF-035), staging-only test grants (none exist in production by design).
+Release/maintenance controls (maintenance is a deploy variable today, `docs/runbooks/INCIDENT.md`) and
+staging-only test grants (none exist in production by design).

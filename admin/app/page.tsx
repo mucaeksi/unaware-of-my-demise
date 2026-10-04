@@ -6,7 +6,7 @@
 // Idempotency-Key, and the API writes the audit row in the same transaction as the change.
 import { FormEvent, useEffect, useState } from "react";
 
-type Tab = "service" | "player" | "audit";
+type Tab = "service" | "player" | "liveops" | "audit";
 type Me = { email: string; role: "viewer" | "support" | "operator"; permissions: string[] };
 type Row = Record<string, unknown>;
 
@@ -23,11 +23,11 @@ async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   return body as T;
 }
 
-function change<T>(path: string, reason: string): Promise<T> {
+function change<T>(path: string, reason: string, fields: Record<string, unknown> = {}): Promise<T> {
   return api<T>(path, {
     method: "POST",
     headers: { "content-type": "application/json", "idempotency-key": crypto.randomUUID() },
-    body: JSON.stringify({ reason }),
+    body: JSON.stringify({ ...fields, reason }),
   });
 }
 
@@ -69,6 +69,12 @@ export default function AdminPage() {
   const [claims, setClaims] = useState<Row | null>(null);
   const [reason, setReason] = useState("");
   const [audit, setAudit] = useState<Row[]>([]);
+  const [liveops, setLiveops] = useState<Row | null>(null);
+  const [configText, setConfigText] = useState('{\n  "flags": {},\n  "notices": []\n}');
+  const [mailText, setMailText] = useState(
+    '{\n  "title_en": "",\n  "body_en": "",\n  "rewards": {},\n  "starts_at_utc": "2026-01-01T00:00:00Z",\n  "expires_at_utc": "2026-01-08T00:00:00Z"\n}',
+  );
+  const [liveopsReason, setLiveopsReason] = useState("");
 
   const run = async (work: () => Promise<void>) => {
     setError("");
@@ -112,6 +118,31 @@ export default function AdminPage() {
     });
   };
 
+  const loadLiveops = () =>
+    void run(async () => {
+      setLiveops(await api<Row>("/admin/api/liveops"));
+    });
+
+  const publishConfig = (event: FormEvent) => {
+    event.preventDefault();
+    void run(async () => {
+      const done = await change<{ revision: number }>("/admin/api/liveops/config", liveopsReason, { config: JSON.parse(configText) });
+      setNotice(`Published config revision ${done.revision}.`);
+      setLiveopsReason("");
+      setLiveops(await api<Row>("/admin/api/liveops"));
+    });
+  };
+
+  const sendMail = (event: FormEvent) => {
+    event.preventDefault();
+    void run(async () => {
+      const done = await change<{ mail_id: string }>("/admin/api/mail", liveopsReason, JSON.parse(mailText));
+      setNotice(`Sent ${done.mail_id}.`);
+      setLiveopsReason("");
+      setLiveops(await api<Row>("/admin/api/liveops"));
+    });
+  };
+
   const loadAudit = () =>
     void run(async () => {
       const target = accountId ? `?target=${accountId}` : "";
@@ -140,6 +171,7 @@ export default function AdminPage() {
         <nav>
           <button className={`navItem ${tab === "service" ? "active" : ""}`} onClick={() => setTab("service")}>Service</button>
           <button className={`navItem ${tab === "player" ? "active" : ""}`} onClick={() => setTab("player")}>Player</button>
+          <button className={`navItem ${tab === "liveops" ? "active" : ""}`} onClick={() => { setTab("liveops"); loadLiveops(); }}>Live ops</button>
           {can("audit.read") && <button className={`navItem ${tab === "audit" ? "active" : ""}`} onClick={() => { setTab("audit"); loadAudit(); }}>Audit</button>}
         </nav>
       </aside>
@@ -191,6 +223,32 @@ export default function AdminPage() {
               <section className="panel full">
                 <h2>Claims</h2>
                 <pre className="manifest">{JSON.stringify(claims, null, 2)}</pre>
+              </section>
+            )}
+          </div>
+        )}
+        {tab === "liveops" && (
+          <div className="panelGrid">
+            <section className="panel full">
+              <h2>Running now</h2>
+              <pre className="manifest">{JSON.stringify(liveops, null, 2)}</pre>
+            </section>
+            {can("liveops.write") && (
+              <section className="panel full">
+                <h2>Publish (every change needs a reason and is audited)</h2>
+                <input value={liveopsReason} onChange={(event) => setLiveopsReason(event.target.value)} placeholder="Reason" />
+                <div className="two">
+                  <form className="form" onSubmit={publishConfig}>
+                    <label className="muted">New config revision (flags, notices with UTC times)</label>
+                    <textarea rows={12} value={configText} onChange={(event) => setConfigText(event.target.value)} />
+                    <button type="submit" disabled={liveopsReason.trim().length < 5}>Publish config</button>
+                  </form>
+                  <form className="form" onSubmit={sendMail}>
+                    <label className="muted">Mail (add "account_id" for one player; rewards: silver_crowns, eclipse_tokens, items)</label>
+                    <textarea rows={12} value={mailText} onChange={(event) => setMailText(event.target.value)} />
+                    <button type="submit" disabled={liveopsReason.trim().length < 5}>Send mail</button>
+                  </form>
+                </div>
               </section>
             )}
           </div>
