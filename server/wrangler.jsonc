@@ -1,12 +1,13 @@
-// Unaware of My Demise game API (DEC-0013). Deployed by GitHub Actions (DEC-0003); never commit secrets here.
+// Unaware of My Demise game API (DEC-0013). Deployed by .github/workflows/deploy.yml (DEC-0003); never commit secrets here.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  // The existing Worker (docs/INFRASTRUCTURE_AUDIT.md 3.1); deploying under this name replaces its "Hello world" template.
+  // Worker name (DEC-0001).
   "name": "unaware-of-my-demise",
   "main": "src/index.ts",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
-  "workers_dev": false,
+  // Public API endpoint on workers.dev (OQ-013, owner 2026-10-04); a custom-domain route can replace it later.
+  "workers_dev": true,
   "observability": { "enabled": true },
   "hyperdrive": [
     // unaware-of-my-demise-production -> Neon UOMD (query caching off: transactional game state).

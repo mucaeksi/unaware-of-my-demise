@@ -1,0 +1,73 @@
+# Production deploy (DEC-0003): after CI passes for a push to main (or on demand), apply pending database migrations to
+# Neon, then deploy the Worker and check /healthz. Migrations are additive and run first, so the running Worker keeps
+# working against the newer schema. Uses repository secrets DATABASE_URL and CLOUDFLARE_API_TOKEN and the variable
+# CLOUDFLARE_ACCOUNT_ID; when one is missing every step is skipped with a warning instead of failing main.
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  production:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Check configuration
+        id: config
+        run: |
+          missing=""
+          [ -n "${DATABASE_URL}" ] || missing="${missing} secret:DATABASE_URL"
+          [ -n "${CLOUDFLARE_API_TOKEN}" ] || missing="${missing} secret:CLOUDFLARE_API_TOKEN"
+          [ -n "${CLOUDFLARE_ACCOUNT_ID}" ] || missing="${missing} variable:CLOUDFLARE_ACCOUNT_ID"
+          if [ -n "${missing}" ]; then
+            echo "::warning::Production deploy skipped; missing:${missing}"
+            echo "ready=false" >> "${GITHUB_OUTPUT}"
+          else
+            echo "ready=true" >> "${GITHUB_OUTPUT}"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.config.outputs.ready == 'true'
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - name: Apply pending migrations (Neon)
+        if: steps.config.outputs.ready == 'true'
+        run: database/migrate.sh
+      - uses: actions/setup-node@v4
+        if: steps.config.outputs.ready == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - name: Deploy the Worker
+        if: steps.config.outputs.ready == 'true'
+        working-directory: server
+        run: |
+          npm ci
+          npx wrangler deploy | tee "${RUNNER_TEMP}/deploy.log"
+      - name: Health check
+        if: steps.config.outputs.ready == 'true'
+        run: |
+          url="$(grep -Eo 'https://[A-Za-z0-9.-]+\.workers\.dev' "${RUNNER_TEMP}/deploy.log" | head -n1)"
+          [ -n "${url}" ] || { echo "::error::no workers.dev URL in the deploy output"; exit 1; }
+          for attempt in 1 2 3 4 5 6; do
+            if curl -fsS "${url}/healthz"; then echo; exit 0; fi
+            sleep 10
+          done
+          echo "::error::${url}/healthz did not answer ok"
+          exit 1
