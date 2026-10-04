@@ -18,7 +18,7 @@ and the fixtures must stay green.
 | `rng/cpython_random.gd` (342 lines) | `random.ts` | `rng.json`, all 11 seeds | DONE |
 | `rng/crc32.gd` | `crc32.ts` | `crc32.json` | DONE |
 | `battle/frac.gd` | `frac.ts` (BigInt, exact like Python) | unit tests; exercised by `battle_*.json` | DONE |
-| `content/content_models.gd` + `content_loader.gd` (1315) | — | `content_registry.json`, `content_errors.json` | TODO |
+| `content/content_models.gd` + `content_loader.gd` (1315) | `content.ts` | `content_registry.json` (all 12 tables + catalogs, field by field), `content_errors.json` (every case, exact message) | DONE |
 | `progression/progression.gd`, `dec.gd`, `big_nat.gd`, `float_repr.gd` | — | `curves.json`, `stats_*.json`, `float_repr.json` | TODO (Dec/BigNat become BigInt) |
 | `equipment/equipment.gd`, `loot/accessory_roller.gd` | — | `equipment_rules.json`, `loadouts.json`, `accessories.json` | TODO |
 | `story/story_state.gd` (roster, loans, rewards) | `../story.ts` (cursor and First Oath only) | `story_flow.json`, `rosters.json`, `story_loans.json`, `persisted_state.json` | PARTIAL |
