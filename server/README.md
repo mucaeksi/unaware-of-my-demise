@@ -62,6 +62,9 @@ gets 409 `OPERATION_EXPIRED` and is never executed again. Request bodies are cap
 Errors use the shape `{"error": {"code", "message"}}`. The codes are `UPDATE_REQUIRED` (426), `MAINTENANCE` (503), `OPERATION_EXPIRED` (409), `UNAUTHORIZED`, `INVALID_REQUEST`, `INSUFFICIENT_FUNDS` (402, Ration or Fate's Threads), `RATE_LIMITED`,
 `SERVICE_UNAVAILABLE`, `CONFLICT`, `PROGRESSION` and `EQUIPMENT` (409, a request the rules refuse; the client shows the message), `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
 
+Every response carries `x-request-id` (Cloudflare's `cf-ray`, or a UUID); the Worker log has one JSON line per request
+with that id, the route pattern, status, duration and deployed commit (INF-011). Headers, bodies and tokens are never logged.
+
 Security properties:
 - The Google `sub` and the session tokens are stored only as SHA-256 hashes.
 - Account ids are random and minted on the server.

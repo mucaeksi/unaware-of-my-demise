@@ -2,8 +2,8 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md, INF backlog)
-Feature: G2 — slices 3–5 (INF-013/014 merged, INF-016 merged, INF-015 in PR)
-Task: INF-015 economic journal (DEC-0019)
+Feature: batch PR #22 — INF-015, INF-009, INF-010, INF-011 (owner: merge to main every 3–4 verified steps)
+Task: merge #22 when CI is green
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
@@ -15,7 +15,7 @@ Task: INF-015 economic journal (DEC-0019)
 **Blocked on (owner):** OQ-014 missing `docs/INFRASTRUCTURE_REVIEW.md`; OQ-006 Neon branch protection.
 **Files in progress:** none
 **Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014 open; OQ-000/005 closed — do not remind)
-**Local test infra (session-local, recreate as needed):** Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`initdb -U uomd --auth=trust`, `pg_ctl -o '-k /var/tmp/uomd-pg -p 54329'` as user postgres; `TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`); Android SDK `/var/tmp/android-sdk`; Godot Android templates in `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
+**Local test infra (session-local, recreate as needed):** PostgreSQL 18 (production major) from PGDG at `/var/tmp/uomd-pg18` port 54318 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg18&port=54318"`); older Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`initdb -U uomd --auth=trust`, `pg_ctl -o '-k /var/tmp/uomd-pg -p 54329'` as user postgres; `TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`); Android SDK `/var/tmp/android-sdk`; Godot Android templates in `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
 <!-- /CHECKPOINT -->
 
 ---
