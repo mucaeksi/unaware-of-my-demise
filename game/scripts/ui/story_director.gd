@@ -459,6 +459,8 @@ func _present_gacha(selected: String = "", results_text: String = "", status: St
 	var banners: Array[GameViews.BannerView] = []
 	banners.assign(listed.value)
 	gacha.load_gacha(banners, int(flow.wallet().get("fate_threads", 0)), selected, results_text, status)
+	gacha.set_exchange(int(flow.wallet().get("eclipse_tokens", 0)), flow.fate_thread_token_cost())
+	gacha.exchange_requested.connect(func(count: int) -> void: _exchange(gacha, count))
 	gacha.pull_requested.connect(func(banner_id: String, count: int, target_id: String) -> void: _pull(gacha, banner_id, count, target_id))
 	gacha.history_requested.connect(func() -> void: _present_gacha_history(0, selected))
 	gacha.back_requested.connect(func() -> void: _present_hub())
@@ -472,6 +474,17 @@ func _pull(screen: GachaScreen, banner_id: String, count: int, target_id: String
 		_present_gacha(banner_id, "", _problem_text(result))
 		return
 	_present_gacha(banner_id, pull_results_text(flow.pull_entries(result.value)))
+
+
+func _exchange(screen: GachaScreen, count: int) -> void:
+	screen.set_busy(true)
+	var selected: String = screen.selected
+	var result: Outcome = await flow.convert_fate_threads(count)
+	if not result.is_ok():
+		_present_gacha(selected, "", _problem_text(result))
+		return
+	var converted: Dictionary = result.value
+	_present_gacha(selected, "", "Exchanged %d Eclipse Tokens for %d Fate's Thread." % [int(converted.get("eclipse_tokens_spent", 0)), int(converted.get("fate_threads_gained", 0))])
 
 
 ## One line per pull, in the order the server resolved them: "5★ Name  NEW", "4★ Name  duplicate (+10 Memory Shards)".

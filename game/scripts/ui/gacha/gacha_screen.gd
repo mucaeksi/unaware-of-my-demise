@@ -6,6 +6,8 @@ extends UiScreen
 
 signal pull_requested(banner_id: String, count: int, target_id: String)
 signal history_requested
+## Eclipse Tokens -> `count` Fate's Threads at the authored rate.
+signal exchange_requested(count: int)
 signal back_requested
 
 var selected: String = ""
@@ -16,6 +18,7 @@ var _info_label: Label = null
 var _target_button: Button = null
 var _pull_one: Button = null
 var _pull_ten: Button = null
+var _exchange: Button = null
 var _results_label: Label = null
 var _status_label: Label = null
 var _group: ButtonGroup = null
@@ -24,6 +27,9 @@ var _banner_buttons: Dictionary = {}
 var _fate_threads: int = 0
 var _target_index: int = 0
 var _busy: bool = false
+var _eclipse_tokens: int = 0
+## Eclipse Tokens per Fate's Thread; 0 = no exchange offered.
+var _token_cost: int = 0
 
 
 func _build(column: VBoxContainer) -> void:
@@ -45,6 +51,12 @@ func _build(column: VBoxContainer) -> void:
 	_pull_ten.pressed.connect(_on_pull.bind(10))
 	pulls.add_child(_pull_ten)
 	column.add_child(pulls)
+	_exchange = UiKit.button("")
+	_exchange.visible = false
+	_exchange.pressed.connect(func() -> void:
+		if not _busy:
+			exchange_requested.emit(1))
+	column.add_child(_exchange)
 	var results: VBoxContainer = UiKit.scroll_column(column, 8)
 	_results_label = UiKit.label("")
 	results.add_child(_results_label)
@@ -73,6 +85,7 @@ func load_gacha(banners: Array[GameViews.BannerView], fate_threads: int, selecte
 	selected = ""
 	_busy = false
 	_fate_threads = fate_threads
+	_token_cost = 0
 	_wallet_label.text = "Fate's Threads: %d" % fate_threads
 	for banner: GameViews.BannerView in banners:
 		var button: Button = UiKit.button(banner_label(banner), true)
@@ -107,6 +120,27 @@ static func info_text(banner: GameViews.BannerView) -> String:
 	if not banner.guarantee.is_empty():
 		lines.append(banner.guarantee)
 	return "\n".join(lines)
+
+
+## Offers one Fate's Thread for `token_cost` Eclipse Tokens (call after `load_gacha`).
+func set_exchange(eclipse_tokens: int, token_cost: int) -> void:
+	_eclipse_tokens = eclipse_tokens
+	_token_cost = token_cost
+	_wallet_label.text = "Fate's Threads: %d   Eclipse Tokens: %d" % [_fate_threads, eclipse_tokens]
+	_refresh()
+
+
+func exchange_enabled() -> bool:
+	return _exchange.visible and not _exchange.disabled
+
+
+func exchange_text() -> String:
+	return _exchange.text
+
+
+func press_exchange() -> void:
+	if exchange_enabled():
+		_exchange.pressed.emit()
 
 
 ## Shows the call in flight: pulls and navigation are disabled until the director reloads the screen.
@@ -202,3 +236,6 @@ func _refresh() -> void:
 		var cost: int = banner.pull_cost * int(pair[1]) if banner != null else 0
 		(pair[0] as Button).disabled = banner == null or _busy or _fate_threads < cost
 	_pull_one.text = "Summoning..." if _busy else "Pull x1"
+	_exchange.visible = _token_cost > 0
+	_exchange.text = "Exchange %d Eclipse Tokens for 1 Fate's Thread" % _token_cost
+	_exchange.disabled = _busy or _eclipse_tokens < _token_cost

@@ -774,3 +774,16 @@ func claim_quest(kind: String, task_id: String, period: String = "") -> Outcome:
 ## Today's Inn Meal (coroutine); the reply's snapshot is adopted.
 func claim_inn_meal() -> Outcome:
 	return _adopt(await backend.claim_inn_meal())
+
+
+## Eclipse Tokens one Fate's Thread costs (economy_part1.json `currencies[fates_thread].token_conversion_cost`; 0 = none).
+func fate_thread_token_cost() -> int:
+	for currency: Variant in (rules.quest.economy().get("currencies") if rules.quest.economy().get("currencies") is Array else []):
+		if currency is Dictionary and str((currency as Dictionary).get("id", "")) == "fates_thread":
+			return int((currency as Dictionary).get("token_conversion_cost", 0))
+	return 0
+
+
+## Eclipse Tokens -> `count` Fate's Threads on the server (coroutine); the reply's snapshot is adopted.
+func convert_fate_threads(count: int) -> Outcome:
+	return _adopt(await backend.convert_fate_threads(count))

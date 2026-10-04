@@ -102,3 +102,17 @@ func test_only_a_claimable_row_can_be_claimed() -> void:
 	assert_signal_emitted_with_parameters(quests, "claim_requested", ["weekly", "cycle_a", "2026-09-28"])
 	quests.set_busy(true)
 	assert_false(quests.claim_enabled())
+
+
+func test_the_exchange_needs_enough_eclipse_tokens() -> void:
+	var gacha: GachaScreen = _gacha(0)
+	assert_false(gacha.exchange_enabled(), "no exchange until the director offers one")
+	gacha.set_exchange(150, 160)
+	assert_eq(gacha.wallet_text(), "Fate's Threads: 0   Eclipse Tokens: 150")
+	assert_eq(gacha.exchange_text(), "Exchange 160 Eclipse Tokens for 1 Fate's Thread")
+	assert_false(gacha.exchange_enabled())
+	gacha.set_exchange(320, 160)
+	assert_true(gacha.exchange_enabled())
+	watch_signals(gacha)
+	gacha.press_exchange()
+	assert_signal_emitted_with_parameters(gacha, "exchange_requested", [1])
