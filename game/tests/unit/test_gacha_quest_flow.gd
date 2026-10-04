@@ -131,3 +131,7 @@ func test_grouping_matches_python() -> void:
 	assert_eq(GameFlow.grouped(1000), "1,000")
 	assert_eq(GameFlow.grouped(1234567), "1,234,567")
 	assert_eq(GameFlow.grouped(-4500), "-4,500")
+
+
+func test_the_exchange_rate_comes_from_the_economy() -> void:
+	assert_eq(_flow.fate_thread_token_cost(), 160)
