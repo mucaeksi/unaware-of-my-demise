@@ -143,7 +143,8 @@ jobs:
         working-directory: server
         run: |
           npm ci
-          args=(--var "RELEASE_SOURCE_SHA:${SOURCE_SHA}")
+          # --env= targets the top-level (production) configuration explicitly; env.staging is deploy-staging.yml's.
+          args=(--env= --var "RELEASE_SOURCE_SHA:${SOURCE_SHA}")
           if [ "${{ steps.config.outputs.signin }}" = "true" ]; then
             args+=(--var "GOOGLE_CLIENT_IDS:$(printf '%s' "${GOOGLE_CLIENT_IDS}" | tr -d '[:space:]')")
           fi

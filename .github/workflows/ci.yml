@@ -27,6 +27,8 @@ jobs:
           python-version: "3.12"
       - run: python3 tools/content_manifest.py --check
       - run: python3 tools/validate_part1_content.py
+      - name: Tool tests (PCK inventory and content-patch policy)
+        run: python3 -m unittest discover -s tools -p 'test_*.py'
 
   database:
     runs-on: ubuntu-latest
@@ -109,6 +111,19 @@ jobs:
       - name: Every test script ran, none failed, no script errors
         if: ${{ !cancelled() }}
         run: game/tools/check_gut_report.sh "${RUNNER_TEMP}/gut-junit.xml" "${RUNNER_TEMP}/gut.log"
+      # INF-027 end to end with the pinned engine: against this commit's base pack, a data change makes a content patch
+      # that passes the policy, and a script change is refused (it needs an app release).
+      - name: Content patch gate
+        run: |
+          "${GODOT}" --headless --path game --export-pack Android "${RUNNER_TEMP}/base.pck" >/dev/null 2>&1
+          printf '\n' >> game/data/content/lore_text_part1.json
+          game/tools/build_content_patch.sh "${RUNNER_TEMP}/base.pck" "${RUNNER_TEMP}/data.pck"
+          printf '\nfunc _uomd_patch_probe() -> void:\n\tpass\n' >> game/scripts/core/content/localized_text.gd
+          if game/tools/build_content_patch.sh "${RUNNER_TEMP}/base.pck" "${RUNNER_TEMP}/code.pck"; then
+            echo "::error::a script change passed the content-patch gate"
+            exit 1
+          fi
+          git checkout -- game/data/content/lore_text_part1.json game/scripts/core/content/localized_text.gd
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

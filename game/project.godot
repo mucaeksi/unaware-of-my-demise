@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 Game="*res://scripts/app/game.gd"
 Online="*res://scripts/app/online.gd"
 Native="*res://scripts/app/native.gd"
+Audio="*res://scripts/app/audio_director.gd"
 
 [debug]
 

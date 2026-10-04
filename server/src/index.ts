@@ -6,6 +6,7 @@ import type { Env } from "./env";
 import { GoogleIdTokenVerifier, type IdentityVerifier } from "./identity";
 import { bannerEpoch } from "./gacha";
 import { parseReleaseConfig } from "./release";
+import { CHANNELS } from "./content";
 import { runRetention } from "./retention";
 import { engineSimulate } from "./stages";
 
@@ -18,6 +19,13 @@ function verifier(env: Env): IdentityVerifier | null {
     verifierFor = { audiences: env.GOOGLE_CLIENT_IDS, verifier: audiences.length > 0 ? new GoogleIdTokenVerifier(audiences) : null };
   }
   return verifierFor.verifier;
+}
+
+/** The configured content channel; anything but a known channel name is a deployment mistake, refused loudly. */
+function contentChannel(value: string | undefined): string {
+  const channel = (value ?? "").trim() || "production";
+  if (!(CHANNELS as readonly string[]).includes(channel)) throw new Error(`CONTENT_CHANNEL must be one of ${CHANNELS.join(", ")}`);
+  return channel;
 }
 
 export default {
@@ -35,6 +43,8 @@ export default {
       simulate: engineSimulate,
       bannerEpoch: bannerEpoch(env.BANNER_EPOCH),
       release: parseReleaseConfig(env),
+      content: env.CONTENT ?? null,
+      contentChannel: contentChannel(env.CONTENT_CHANNEL),
     });
     return app(request);
   },

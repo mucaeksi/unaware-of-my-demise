@@ -28,10 +28,16 @@ class Transport extends RefCounted:
 	func request(_method: int, _url: String, _headers: PackedStringArray, _body: String) -> Dictionary:
 		return {"status": 0, "body": ""}
 
+	## A GET whose body goes to the file `path` (binary-safe): {"status": int (0 = no connection)}.
+	func download(_url: String, _headers: PackedStringArray, _path: String) -> Dictionary:
+		return {"status": 0}
+
 
 ## The real transport: one `HTTPRequest` node per call, parented to the scene tree root while it runs.
 class HttpTransport extends Transport:
 	const TIMEOUT_SECONDS: float = 15.0
+	## A content pack may take a while on a slow connection; an interrupted one resumes from what arrived.
+	const DOWNLOAD_TIMEOUT_SECONDS: float = 300.0
 
 	func request(method: int, url: String, headers: PackedStringArray, body: String) -> Dictionary:
 		var tree: SceneTree = Engine.get_main_loop() as SceneTree
@@ -47,6 +53,21 @@ class HttpTransport extends Transport:
 		node.queue_free()
 		var status: int = int(completed[1]) if int(completed[0]) == HTTPRequest.RESULT_SUCCESS else 0
 		return {"status": status, "body": (completed[3] as PackedByteArray).get_string_from_utf8()}
+
+	func download(url: String, headers: PackedStringArray, path: String) -> Dictionary:
+		var tree: SceneTree = Engine.get_main_loop() as SceneTree
+		if tree == null:
+			return {"status": 0}
+		var node: HTTPRequest = HTTPRequest.new()
+		node.timeout = DOWNLOAD_TIMEOUT_SECONDS
+		node.download_file = path
+		tree.root.add_child(node)
+		if node.request(url, headers, HTTPClient.METHOD_GET) != OK:
+			node.queue_free()
+			return {"status": 0}
+		var completed: Array = await node.request_completed
+		node.queue_free()
+		return {"status": int(completed[1]) if int(completed[0]) == HTTPRequest.RESULT_SUCCESS else 0}
 
 
 var base_url: String = ""
@@ -175,6 +196,38 @@ func log_out() -> Outcome:
 ## Deletes the account and all its data (INF-020); `credential` is a fresh ID token of the account's identity.
 func delete_account(credential: String) -> Outcome:
 	return await _call(HTTPClient.METHOD_POST, "/v1/account/delete", {"credential": credential})
+
+
+## The signed manifest of the current content release: {"channel", "manifest_b64", "signature_b64"} (INF-029).
+func fetch_content_release() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/content/current")
+
+
+## Downloads content pack `sha256` into `path` from byte `offset` on (a resumed download appends to what is there).
+## A server that ignores the range (200) sends the whole pack, which then replaces the file.
+func download_pack(sha256: String, path: String, offset: int = 0) -> Outcome:
+	var headers: PackedStringArray = PackedStringArray()
+	if not session_token.is_empty():
+		headers.append("Authorization: Bearer %s" % session_token)
+	if client_version_code > 0:
+		headers.append("X-Client-Version-Code: %d" % client_version_code)
+	if offset > 0:
+		headers.append("Range: bytes=%d-" % offset)
+	var chunk: String = path + ".chunk"
+	var reply: Dictionary = await transport.download(base_url + "/v1/content/packs/%s" % sha256, headers, chunk)
+	var status: int = int(reply.get("status", 0))
+	if status != 200 and status != 206:
+		DirAccess.remove_absolute(chunk)
+		return Outcome.fail(KIND_OFFLINE if status == 0 else ContentInstaller.KIND_DOWNLOAD, "The game data update could not be downloaded (HTTP %d)." % status)
+	var bytes: PackedByteArray = FileAccess.get_file_as_bytes(chunk)
+	DirAccess.remove_absolute(chunk)
+	var file: FileAccess = FileAccess.open(path, FileAccess.READ_WRITE) if status == 206 and FileAccess.file_exists(path) else FileAccess.open(path, FileAccess.WRITE)
+	if file == null:
+		return Outcome.fail(ContentInstaller.KIND_DISK, "The game data update could not be written on this device.")
+	file.seek_end()
+	file.store_buffer(bytes)
+	file.close()
+	return Outcome.ok()
 
 
 func fetch_bootstrap() -> Outcome:

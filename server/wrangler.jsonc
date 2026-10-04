@@ -17,6 +17,8 @@
     // unaware-of-my-demise-production -> Neon UOMD (query caching off: transactional game state).
     { "binding": "HYPERDRIVE", "id": "edbe90afd0ab42a1ab708e7e2e49c04b" }
   ],
+  // Private content-patch bucket (INF-029, DEC-0030): read only by this Worker, never public.
+  "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "unaware-of-my-demise-content" }],
   // LEGACY server/ratelimit.py budgets: sign-in 20/min, everything else 240/min, per client IP.
   "ratelimits": [
     { "name": "AUTH_LIMITER", "namespace_id": "1001", "simple": { "limit": 20, "period": 60 } },
@@ -32,7 +34,9 @@
     // The lowest Android versionCode the API serves; older apps get 426 UPDATE_REQUIRED (GET /v1/bootstrap reports it).
     "MIN_CLIENT_VERSION_CODE": "1",
     // Non-empty = maintenance: every game route answers 503 MAINTENANCE with this message. Changing it is a redeploy.
-    "MAINTENANCE_MESSAGE": ""
+    "MAINTENANCE_MESSAGE": "",
+    // The content channel this Worker serves from the bucket (channels/<channel>/current.json).
+    "CONTENT_CHANNEL": "production"
   },
   // Staging (INF-006, DEC-0025): Worker "unaware-of-my-demise-staging" on its own Hyperdrive config and Neon branch, with
   // its own rate-limit counters. Deployed only by .github/workflows/deploy-staging.yml (`wrangler deploy --env staging`).
@@ -44,6 +48,8 @@
       "preview_urls": false,
       "triggers": { "crons": ["17 3 * * *"] },
       "hyperdrive": [{ "binding": "HYPERDRIVE", "id": "00000000000000000000000000000000" }],
+      // Same private bucket, its own channel prefix (channels/staging/): staging never moves the production pointer.
+      "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "unaware-of-my-demise-content" }],
       "ratelimits": [
         { "name": "AUTH_LIMITER", "namespace_id": "2001", "simple": { "limit": 20, "period": 60 } },
         { "name": "API_LIMITER", "namespace_id": "2002", "simple": { "limit": 240, "period": 60 } }
@@ -53,7 +59,8 @@
         "BANNER_EPOCH": "",
         "RELEASE_SOURCE_SHA": "",
         "MIN_CLIENT_VERSION_CODE": "1",
-        "MAINTENANCE_MESSAGE": ""
+        "MAINTENANCE_MESSAGE": "",
+        "CONTENT_CHANNEL": "staging"
       }
     }
   }

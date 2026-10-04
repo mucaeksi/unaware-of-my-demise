@@ -18,6 +18,47 @@ var assets: AssetResolver = null:
 		return assets
 
 
+## Signed content releases on this device (INF-031); built on first use. Tests may replace it.
+var content: ContentInstaller = null:
+	get:
+		if content == null:
+			content = ContentInstaller.new()
+		return content
+var _content_mounted: bool = false
+
+
+## Mounts the installed content release over the shipped data, once per process, before any content is loaded (INF-026).
+func mount_content() -> Dictionary:
+	if not _content_mounted:
+		_content_mounted = true
+		var mounted: Dictionary = content.mount_installed()
+		for problem: Variant in mounted.get("problems", []):
+			push_warning("Content: %s" % str(problem))
+	return content.report
+
+
+## Fetches, verifies and installs the current content release (coroutine), signing in first when needed. value:
+## {"generation", "content_release", "restart_required"}; when no restart is required the new pack is already mounted and
+## the caller reloads the content.
+func update_content(backend: GameBackend = null) -> Outcome:
+	var online: GameBackend = backend if backend != null else Online.backend()
+	if backend == null and online is OnlineBackend and not Online.has_session():
+		var signed: Outcome = await Online.sign_in()
+		if not signed.is_ok():
+			return signed
+		online = Online.backend()
+	if not (online is OnlineBackend):
+		return Outcome.fail(ContentInstaller.KIND_DOWNLOAD, "Game data updates need the game server.")
+	var server: OnlineBackend = online
+	var release: Outcome = await server.fetch_content_release()
+	if not release.is_ok():
+		return release
+	var installed: Outcome = await content.install(release.value, server.download_pack)
+	if installed.is_ok() and not bool((installed.value as Dictionary)["restart_required"]):
+		content.mount_new()
+	return installed
+
+
 ## Engine facts for the boot screen, logs and bug reports.
 func engine_info() -> Dictionary:
 	var version: Dictionary = Engine.get_version_info()

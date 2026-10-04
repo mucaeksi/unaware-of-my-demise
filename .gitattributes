@@ -9,3 +9,6 @@
 *.glb binary
 *.gltf binary
 *.pck binary
+# Signed bytes: never normalize line endings (the signature covers the exact bytes).
+*.sig binary
+game/tests/fixtures/content_manifest/* binary

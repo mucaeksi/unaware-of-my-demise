@@ -427,7 +427,8 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Decision: staging is its own Worker (`unaware-of-my-demise-staging`, `server/wrangler.jsonc` `env.staging`) with its
   own Hyperdrive config, its own empty Neon database (no copy of player data; `deploy-staging.yml` builds the schema with the migrations), its own rate-limit counters and its
   own secret (`STAGING_DATABASE_URL`), deployed by `.github/workflows/deploy-staging.yml` from the same commits as
-  production. Each database records its environment in the database-level setting `uomd.environment`;
+  production. Each database records its environment in the one-row table `uomd_environment` (outside the
+  numbered migrations; a database-level setting was tried first, but Neon does not let the owner set custom parameters);
   `database/migrate.sh` with `UOMD_ENVIRONMENT` refuses a database recorded as another environment's, production
   records itself on its next deploy, and staging claims only an empty database (so it can never adopt the production
   database through a wrong URL). The staging workflow also refuses `STAGING_DATABASE_URL` equal to `DATABASE_URL`.
@@ -447,3 +448,85 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   (DEC-0015) refuses to play when its rules hash differs from the server's.
 - Rejected for now: loading server rules from a runtime registry (R2/DB) independent of the Worker release; it adds a
   second release identity without a current need. Revisit if content must change faster than Worker deploys.
+
+## DEC-0027 — Audio by stable id, text by locale field
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-025).
+- Decision: the client plays audio only by id through the `Audio` autoload (`game/scripts/app/audio_director.gd`).
+  Runtime paths keep the LEGACY layout (`audio/voice/<speaker_id>/<line_id>`, `audio/music/<id>/`, LEGACY_AUDIT §4)
+  under the content's `assets/` root, without the generation version: `res://assets/audio/voice/<speaker_id>/<line_id>.ogg`,
+  `res://assets/audio/music/<cue_id>.ogg`, `res://assets/audio/sfx/<cue_id>.ogg`. Versions, takes and sidecars stay in
+  narrative staging; promotion writes the stable runtime name (and sets loop points in the import settings). Buses
+  Music/Voice/SFX → Master (`game/default_bus_layout.tres`), linear volumes saved in `user://settings.cfg`. A missing
+  file is silence, never an error.
+  Player-facing content text is read as `<field>_<locale>` with English (`_en`, the authored language) as the fallback
+  (`LocalizedText.pick`); adding a language is a content addition.
+- Open: story scenes carry `music_cue` as prose, not an id; cue ids per scene are a content/narrative decision
+  (`docs/OWNER_DECISIONS.md` D-08). UI chrome strings (button labels) are not yet in a translation table.
+
+## DEC-0028 — A content patch carries data and imported art/audio, never code
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-027).
+- Decision: content patches are Godot delta packs (`--export-patch` against the base pack of the app release they apply
+  to, plus earlier patches), built by `game/tools/build_content_patch.sh`. `tools/pck_inventory.py` reads the pack
+  (format v4, Godot 4.7.2), checks every file against its directory MD5 and refuses anything outside the allowlist:
+  `data/content/*.json`, `assets/**/*.import`, imported textures/audio under `.godot/imported/`, `.godot/uid_cache.bin`,
+  and the script-class cache only when it lists the same classes as the base. Scripts (`.gd`/`.gdc`/`.remap`), scenes,
+  `.tres`/`.res` (they can embed script), native libraries and `project.binary` always need an app release (Google Play
+  forbids downloading executable code; a reviewed AAB stays the only code path). CI proves both directions with the
+  pinned engine on every change.
+- Facts: `--export-pack` of a commit is byte-reproducible (same SHA-256 on three exports), so a release's base pack can
+  be rebuilt from its commit; it is still kept with the release.
+- Next: signed manifest and trust root (INF-028).
+
+## DEC-0029 — Signed content manifests, trust root in the app
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-028). Activation waits on owner decision D-09 (signing key).
+- Decision: a content release is described by a manifest (`tools/content_release.py`: schema, channel, release id,
+  monotonic generation, app versionCode range, base pack SHA-256, rules hash, key id, packs in mount order with
+  SHA-256 and size) and signed with RSA (3072-bit) PKCS#1 v1.5 over SHA-256 of the exact bytes
+  (`tools/sign_content_manifest.sh`, `openssl dgst -sha256 -sign`). The private key exists only as the GitHub repository secret
+  `CONTENT_SIGNING_KEY`; the public key ships in the app as `res://data/keys/<key_id>.pem`,
+  which a patch cannot change (DEC-0028). The client (`ContentManifest.verify`) trusts a manifest only with a valid
+  signature from a shipped key, for its own versionCode, and with a generation newer than the installed one (replay of an
+  old manifest is refused; a rollback is published as a new generation pointing at older packs).
+- Why RSA, not Ed25519: Godot's `Crypto` (mbedTLS, the same on Android) verifies RSA PKCS#1 v1.5 with SHA-256 and has no
+  Ed25519; verified headless by GUT against an openssl-signed fixture (its private key was discarded).
+- Key rotation: a new key id is an app release that ships both keys; manifests switch after enough players updated.
+
+## DEC-0030 — Content patches are delivered by the Worker from a private bucket
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-029).
+- Decision: the R2 bucket `unaware-of-my-demise-content` stays private (verified 2026-10-04: r2.dev access disabled, no
+  custom domain, no CORS). The Worker binds it as `CONTENT` and serves signed-in players only:
+  `GET /v1/content/current` (the channel's signed manifest and signature, byte-exact, `no-store`) and
+  `GET /v1/content/packs/{sha256}` (immutable, content-addressed packs; `private, max-age=31536000, immutable`; one
+  byte range per request for resumed downloads, 206/416). Layout: `packs/<sha256>.pck`,
+  `manifests/<channel>/<generation>.json(.sig)` (both never overwritten), `channels/<channel>/current.json(.sig)` (the
+  pointer, a copy of the current manifest). The pointer needs no trust of its own (DEC-0029: signature + generation).
+  Each deployment serves one channel (`CONTENT_CHANNEL`: production, staging); the client cannot ask for another.
+  No credential or URL that bypasses the Worker is ever embedded in the app or a pack.
+- Rejected: presigned R2 URLs handed to clients (would need R2 S3 credentials in the Worker for little gain at this
+  scale); a public bucket.
+
+## DEC-0031 — Publishing content: cumulative packs, immutable objects, pointer last
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-030). First run waits on owner decision D-09.
+- Decision: `.github/workflows/publish-content.yml` (manual: channel, base commit of the installed app, versionCode
+  range, reason) rebuilds the app's base pack from its commit (byte-reproducible, DEC-0028), builds one cumulative patch
+  of everything since that base (never a chain of deltas: a device mounts exactly one pack over the app, and a rollback
+  is a new generation built from an older commit), validates content, signs the manifest (generation = current + 1),
+  uploads `packs/<sha256>.pck` (content-addressed; an existing one must read back identical), then
+  `manifests/<channel>/<generation>.json(.sig)` (refused if it exists), reads every object back byte for byte, writes an
+  append-only `history/<channel>/<generation>.json` (actor, reason, commit, base, run link) and only then moves
+  `channels/<channel>/current.json(.sig)`. Default channel: staging.
+- Not decided here: automatic promotion from staging to production after device tests (manual for now).
+
+## DEC-0032 — Installing content on the device, and the boot order
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-026, INF-031, INF-032).
+- Decision: `ContentInstaller` (user://content) keeps exactly two releases, `installed.json` and `last_good.json`, each
+  the signed manifest plus its pack file, and `generation.json` (the replay floor). Install: verify the manifest
+  (DEC-0029, generation above the floor), check free space, download into `packs/<sha256>.pck.part` (a dropped
+  connection resumes from the bytes already there with a Range request), check length and SHA-256 (a damaged file is
+  deleted, never kept), rename into place, then move installed → last_good and write the new record with a
+  temporary-file rename (a crash leaves the old or the new release, never half of one), then delete every other pack.
+  Boot (INF-026): mount the installed release (re-verified: signature, app versionCode, pack SHA-256; falling back to
+  last_good, then to the shipped data) → load content → release gate → sign-in → snapshot. When the gate reports other
+  game data (`content_update_required`), the client signs in, fetches the current release, installs it and reloads the
+  content; if a release was already mounted in this process it asks for a restart instead (cumulative packs are never
+  layered). Nothing is mounted while a battle runs.

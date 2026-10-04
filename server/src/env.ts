@@ -10,6 +10,10 @@ export interface Env {
   MIN_CLIENT_VERSION_CODE?: string;
   /** Non-empty = maintenance: every game route answers 503 MAINTENANCE with this message. */
   MAINTENANCE_MESSAGE?: string;
+  /** The private content bucket (INF-029); absent = content delivery answers 503. */
+  CONTENT?: R2Bucket;
+  /** The content channel this deployment serves (production, staging); empty = production. */
+  CONTENT_CHANNEL?: string;
   AUTH_LIMITER?: RateLimit;
   API_LIMITER?: RateLimit;
 }

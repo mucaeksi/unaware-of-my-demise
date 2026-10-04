@@ -37,6 +37,7 @@ import { abandonAttempt, beginAttempt, completeAttempt, parseClientResult, parse
 import { claimInnMeal } from "./ration";
 import { admit, bootstrap, DEVELOPMENT_RELEASE, type ReleaseConfig } from "./release";
 import { bumpStateRevision, snapshot, wallet } from "./state";
+import { currentRelease, packResponse, type ContentStore } from "./content";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
 
 export interface AppDeps {
@@ -57,6 +58,10 @@ export interface AppDeps {
   release?: ReleaseConfig;
   /** Where the structured request and error log lines go (INF-011); defaults to the Worker log (console). */
   log?: (entry: LogEntry) => void;
+  /** The private content bucket (INF-029); null/absent = content delivery answers 503. */
+  content?: ContentStore | null;
+  /** The content channel this deployment serves; defaults to "production". */
+  contentChannel?: string;
 }
 
 /**
@@ -166,6 +171,17 @@ function routes(deps: AppDeps): Record<string, Handler> {
 
     // Unauthenticated and outside the update/maintenance gate: a client asks it first to learn whether it may play.
     "GET /v1/bootstrap": async () => json(await bootstrap(deps.release ?? DEVELOPMENT_RELEASE, new Date(clock() * 1000))),
+
+    // Content patches (INF-029): signed-in players only; the bucket itself is private.
+    "GET /v1/content/current": async (context) => {
+      await requireAccount(context);
+      return json(await currentRelease(deps.content ?? null, deps.contentChannel ?? "production"));
+    },
+
+    "GET /v1/content/packs/:sha256": async (context) => {
+      await requireAccount(context);
+      return packResponse(deps.content ?? null, context.params.sha256!, context.request.headers.get("range"));
+    },
 
     "POST /v1/auth/nonce": async ({ db }) => {
       const { nonce, expiresAt } = await issueNonce(db);

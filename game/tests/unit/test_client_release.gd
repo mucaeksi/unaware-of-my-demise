@@ -66,10 +66,13 @@ func test_a_mismatch_requires_an_update() -> void:
 		{"api_version": ClientRelease.API_VERSION + 1},
 		{"snapshot_schema_version": PlayerState.SCHEMA_VERSION + 1},
 		{"min_client_version_code": 2},
-		{"rules_hash": "0".repeat(64)},
 	]:
 		assert_eq(ClientRelease.check(_bootstrap(changed), local, 1).error_kind, ClientRelease.KIND_UPDATE_REQUIRED, str(changed))
-	assert_eq(ClientRelease.check(_bootstrap(), "", 1).error_kind, ClientRelease.KIND_UPDATE_REQUIRED, "no local hash never matches")
+	# Other game data is a content update (INF-031), not an app update; an outdated app still outranks it.
+	assert_eq(ClientRelease.check(_bootstrap({"rules_hash": "0".repeat(64)}), local, 1).error_kind, ClientRelease.KIND_CONTENT_UPDATE)
+	assert_eq(ClientRelease.check(_bootstrap(), "", 1).error_kind, ClientRelease.KIND_CONTENT_UPDATE, "no local hash never matches")
+	assert_eq(ClientRelease.check(_bootstrap({"rules_hash": "0".repeat(64), "min_client_version_code": 2}), local, 1).error_kind,
+		ClientRelease.KIND_UPDATE_REQUIRED)
 
 
 func test_maintenance_carries_the_servers_message_and_yields_to_an_update() -> void:
