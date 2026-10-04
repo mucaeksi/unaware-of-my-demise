@@ -2,7 +2,7 @@
 # Neon, then deploy the Worker and check /healthz. Migrations are additive and run first, so the running Worker keeps
 # working against the newer schema. Uses repository secrets DATABASE_URL and CLOUDFLARE_API_TOKEN and the variable
 # CLOUDFLARE_ACCOUNT_ID; when one is missing every step is skipped with a warning instead of failing main. The optional
-# secret GOOGLE_CLIENT_IDS (comma-separated Google OAuth client IDs, the ID-token audiences) enables sign-in; without it, or
+# variable (or secret) GOOGLE_CLIENT_IDS (comma-separated Google OAuth client IDs, the ID-token audiences) enables sign-in; without it, or
 # when it does not look like OAuth client IDs, the Worker deploys with sign-in answering 503.
 name: Deploy
 
@@ -29,7 +29,8 @@ jobs:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-      GOOGLE_CLIENT_IDS: ${{ secrets.GOOGLE_CLIENT_IDS }}
+      # Client IDs are public: the repository variable is the usual home; a secret of the same name also works.
+      GOOGLE_CLIENT_IDS: ${{ vars.GOOGLE_CLIENT_IDS || secrets.GOOGLE_CLIENT_IDS }}
     steps:
       - name: Check configuration
         id: config
@@ -47,12 +48,12 @@ jobs:
           # Sign-in audiences: only well-formed OAuth client IDs are passed on (the value itself is never printed).
           ids="$(printf '%s' "${GOOGLE_CLIENT_IDS}" | tr -d '[:space:]')"
           if [ -z "${ids}" ]; then
-            echo "::warning::secret GOOGLE_CLIENT_IDS is not set; sign-in will answer 503"
+            echo "::warning::GOOGLE_CLIENT_IDS (repository variable or secret) is not set; sign-in will answer 503"
             echo "signin=false" >> "${GITHUB_OUTPUT}"
           elif printf '%s' "${ids}" | grep -Eq '^[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com(,[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com)*$'; then
             echo "signin=true" >> "${GITHUB_OUTPUT}"
           else
-            echo "::warning::secret GOOGLE_CLIENT_IDS is not a comma-separated list of OAuth client IDs (<number>-<id>.apps.googleusercontent.com); sign-in will answer 503"
+            echo "::warning::GOOGLE_CLIENT_IDS is not a comma-separated list of OAuth client IDs (<number>-<id>.apps.googleusercontent.com); sign-in will answer 503"
             echo "signin=false" >> "${GITHUB_OUTPUT}"
           fi
       - uses: actions/checkout@v4
