@@ -14,6 +14,13 @@ server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
 | `GET /v1/account` | Returns the profile: friend code, nickname, avatar, badge, presence opt-in. |
 | `GET /v1/wallet` | Returns the currency balances. |
 | `GET /v1/state` | Returns the player snapshot the Godot client renders (`game/scripts/app/player_state.gd`). |
+| `POST /v1/story/advance` | Moves the story past the current narrative entry. A stage entry, the end of the story and a pending First Oath are refused with 409. |
+| `POST /v1/story/first-oath` | Takes `{character_id}` and claims the one-time First Oath hero from the manifest's selector pool. The claim is recorded in `story_claims` and the hero joins the roster. |
+
+Mutating routes require a UUIDv4 `Idempotency-Key`. Each request is one transaction that locks the account row, so a
+retried request replays its stored response, and a key reused for another account, endpoint or body gets 409. Mutating
+routes answer `{"state": <snapshot>}`, the client's `GameBackend` contract. The story rules are checked against the
+Python reference walk in `parity/fixtures/story_flow.json`.
 
 Errors use the shape `{"error": {"code", "message"}}`. The codes are `UNAUTHORIZED`, `INVALID_REQUEST`, `RATE_LIMITED`,
 `SERVICE_UNAVAILABLE`, `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
@@ -26,9 +33,8 @@ Security properties:
 
 ## Next
 
-The mutating game endpoints are not implemented yet: story, stage attempts with server re-simulation, progression,
-equipment, gacha, quests, billing, ads and social. They will reuse the LEGACY idempotency model (a UUIDv4
-`Idempotency-Key` with a request fingerprint) and run one transaction per request that locks the account row.
+Not implemented yet: stage attempts with server re-simulation (DEC-0013), progression, equipment, gacha, quests,
+billing, ads and social. They go through the same `mutate` helper in `src/app.ts`.
 
 ## Commands
 

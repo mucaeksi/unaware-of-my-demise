@@ -10,9 +10,11 @@ import {
   resolveSession,
 } from "./accounts";
 import { transaction, type Connect, type Db } from "./db";
+import { idempotencyKey, runIdempotent } from "./idempotency";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
 import { snapshot, wallet } from "./state";
+import { advance, claimFirstOath, type StoryStateDict } from "./story";
 
 export interface AppDeps {
   connect: Connect;
@@ -40,6 +42,36 @@ async function requireAccount({ request, db }: Context): Promise<string> {
   const accountId = await resolveSession(db, token);
   if (accountId === null) throw unauthorized("Session token is missing, invalid or expired");
   return accountId;
+}
+
+/** The account's story state, read inside the request's transaction (the account row is already locked). */
+async function lockedStoryState(tx: Db, accountId: string): Promise<StoryStateDict> {
+  const { rows } = await tx.query<{ state: StoryStateDict }>("SELECT state FROM story_state WHERE account_id = $1", [accountId]);
+  if (!rows[0]) throw new Error(`account ${accountId} has no story state`);
+  return rows[0].state;
+}
+
+async function saveStoryState(tx: Db, accountId: string, state: StoryStateDict): Promise<void> {
+  await tx.query("UPDATE story_state SET state = $2, updated_at = now() WHERE account_id = $1", [accountId, JSON.stringify(state)]);
+}
+
+/**
+ * A mutating route: authenticated, idempotent (Idempotency-Key), one transaction with the account row locked. `action`
+ * changes the state; the response is the new player snapshot under "state" (the client's `GameBackend` contract).
+ */
+async function mutate(
+  context: Context,
+  endpoint: string,
+  fingerprint: string,
+  action: (tx: Db, accountId: string) => Promise<Record<string, unknown> | void>,
+): Promise<Response> {
+  const accountId = await requireAccount(context);
+  const key = idempotencyKey(context.request);
+  const { response } = await runIdempotent(context.db, key, accountId, endpoint, fingerprint, async (tx) => {
+    const extra = (await action(tx, accountId)) ?? {};
+    return { ...extra, state: await snapshot(tx, accountId) };
+  });
+  return json(response);
 }
 
 function routes(deps: AppDeps): Record<string, Handler> {
@@ -108,6 +140,21 @@ function routes(deps: AppDeps): Record<string, Handler> {
     "GET /v1/state": async (context) => {
       const accountId = await requireAccount(context);
       return json(await snapshot(context.db, accountId));
+    },
+
+    "POST /v1/story/advance": (context) =>
+      mutate(context, "story_advance", "", async (tx, accountId) => {
+        await saveStoryState(tx, accountId, advance(await lockedStoryState(tx, accountId)));
+      }),
+
+    "POST /v1/story/first-oath": async (context) => {
+      const characterId = requireString(await readJsonObject(context.request), "character_id", 64);
+      return mutate(context, "story_first_oath", characterId, async (tx, accountId) => {
+        await saveStoryState(tx, accountId, claimFirstOath(await lockedStoryState(tx, accountId), characterId));
+        // The durable one-time record (LEGACY story_claims 'first_oath'); the hero joins the roster at level 1.
+        await tx.query("INSERT INTO story_claims (account_id, claim_key, character_id) VALUES ($1, 'first_oath', $2)", [accountId, characterId]);
+        await tx.query("INSERT INTO roster (account_id, character_id) VALUES ($1, $2) ON CONFLICT DO NOTHING", [accountId, characterId]);
+      });
     },
   };
 }

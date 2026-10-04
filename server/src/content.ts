@@ -7,9 +7,24 @@ interface CharacterRow {
   acquisition?: unknown;
 }
 
-const characters = (charactersPack as unknown as { characters: CharacterRow[] }).characters;
+interface StoryManifest {
+  story_order: string[];
+  non_stage_scene_ids: string[];
+  acquisition_story_beats: { guaranteed_selector: { choose_one_from: string[] } };
+}
 
-export const STORY_ORDER: readonly string[] = (storyManifest as unknown as { story_order: string[] }).story_order;
+const characters = (charactersPack as unknown as { characters: CharacterRow[] }).characters;
+const manifest = storyManifest as unknown as StoryManifest;
+
+export const CHARACTER_IDS: ReadonlySet<string> = new Set(characters.map((character) => character.character_id));
+
+export const STORY_ORDER: readonly string[] = manifest.story_order;
+
+/** The narrative (VN) entries of `story_order`; every other entry is a stage. */
+export const NON_STAGE_ENTRY_IDS: ReadonlySet<string> = new Set(manifest.non_stage_scene_ids);
+
+/** The First Oath Invitation's selector pool, in authored order. */
+export const FIRST_OATH_POOL: readonly string[] = manifest.acquisition_story_beats.guaranteed_selector.choose_one_from;
 
 /** core.story_state `_starting_owned_ids`: every character whose acquisition is "free_start". */
 export const FREE_START_CHARACTER_IDS: readonly string[] = characters

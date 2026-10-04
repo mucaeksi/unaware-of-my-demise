@@ -9,8 +9,8 @@ Task: Worker API + Neon schema (DEC-0013)
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
 **Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR → `main`, merge regularly)
-**Current task:** Worker skeleton merged (auth/session/account/wallet/state, vitest 16/16) + `database/0001_baseline.sql` (tests pass locally)
-**Next step:** CI workflow (Postgres service: database/test.sh, server check/test/build, Godot import+GUT); then idempotency module + first mutating route (`POST /v1/story/advance`) and `OnlineBackend` in GDScript
+**Current task:** story routes (`/v1/story/advance`, `/v1/story/first-oath`) + idempotency on the Worker; CI (database/server/godot) green on main
+**Next step:** `OnlineBackend` (GDScript HTTP client implementing `GameBackend`, token from an injectable session provider; Google Credential Manager sign-in is a native-plugin gap) + switch `begin_stage`/`submit_victory` contract (DEC-0013); then port progression/equipment rules to TS against parity fixtures
 **Blocked on:** nothing (deploy needs owner: Google OAuth client id → `GOOGLE_CLIENT_IDS`, `CLOUDFLARE_API_TOKEN` secret, DEC-0003)
 **Files in progress:** none
 **Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-001…004, 006, 008 open; OQ-000/005 closed — do not remind)
