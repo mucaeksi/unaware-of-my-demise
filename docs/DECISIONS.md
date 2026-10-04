@@ -394,3 +394,19 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
     action. Paid purchases do not exist yet; when billing arrives (INF-036) any legally required purchase records need
     their own retention decision.
 - Open: the web page Play asks for (deletion without the app) needs a support contact (OQ-016).
+
+## DEC-0023 — Stable content ids
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-005, INF-023 first part).
+- Context: saved state stores content ids (roster, inventories, skill ranks, completed stages, claims) and the story
+  cursor as an index into the story order. A content release that renamed or dropped an id, or inserted a story entry,
+  would orphan or shift players' saved state, and nothing would notice.
+- Decision:
+  - `game/data/stable_ids.lock.json` records every id ever shipped per kind (characters, skills, items, weapons, armors,
+    accessories, stages, currencies, daily tasks, weekly segments) and the shipped story order. It only grows.
+  - `server/test/stable-ids.test.ts` (CI) fails when a shipped id is gone and not listed under `retired`, when the story
+    order is not an append of the shipped one, and when new ids are not recorded yet
+    (`UPDATE_STABLE_IDS=1 npx vitest run test/stable-ids.test.ts` adds them, never removes).
+  - Retiring an id is a deliberate act: list it under `retired` in the same release that migrates the saved state holding
+    it (the migration map itself is INF-023's remaining work, built when the first retirement is needed).
+  - New data in a content release uses new ids and existing closed operations (the battle `EffectOp` set and the existing
+    reward/quest kinds); a new operation is code and ships with an app (and Worker) release.

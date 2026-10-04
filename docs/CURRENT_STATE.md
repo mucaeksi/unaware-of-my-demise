@@ -9,8 +9,8 @@ PRs and `docs/DECISIONS.md`.
 |---|---|
 | Production API | Cloudflare Worker `https://unaware-of-my-demise.muratcaneksiii.workers.dev`, deployed from `main` by `.github/workflows/deploy.yml` (migrations first, then the Worker, then health/bootstrap/sign-in checks). `GET /v1/bootstrap` reports the deployed commit. Google sign-in configured (variable `GOOGLE_CLIENT_IDS`). |
 | Database | Neon PostgreSQL through Hyperdrive; migrations 0001–0003 (`database/migrations/`), append-only, applied by the deploy. |
-| Server | TypeScript Worker (DEC-0013): auth, state, story, stages/victories (server re-simulation), progression, equipment, quests, gacha, Ration, release contract. vitest 414. |
-| Client | Godot 4.7.2 LEGACY client (BATCH-0002), server snapshot only (DEC-0012), release gate (DEC-0015), Google sign-in through the UomdNative Android plugin (BATCH-0003, DEC-0016). GUT 281. |
+| Server | TypeScript Worker (DEC-0013): auth, state, story, stages/victories (server re-simulation), progression, equipment, quests, gacha, Ration, release contract. vitest 421. |
+| Client | Godot 4.7.2 LEGACY client (BATCH-0002), server snapshot only (DEC-0012), release gate (DEC-0015), Google sign-in through the UomdNative Android plugin (BATCH-0003, DEC-0016). GUT 284. |
 | Android | CI builds, exports and verifies a debug APK signed with the repository debug key and keeps it as an artifact; the owner installed it and signed in with Google (2026-10-04). Not yet: release AAB, upload key, Play test track (G7). |
 | CI | `ci.yml`: `database`, `server`, `godot`, `android`. `deploy.yml`: production, with no automatic rollback to an older commit. |
 | Not built | admin panel, content patches/R2, staging environment, billing/ads/social, localization/audio runtime (roadmap G1–G6). |
