@@ -2,9 +2,12 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createApp } from "../src/app";
-import { FREE_START_CHARACTER_IDS, STORY_ORDER } from "../src/content";
+import { storyRules } from "../src/rules";
 import type { IdentityVerifier } from "../src/identity";
 import { createTestDatabase, type TestDatabase } from "./db";
+
+const FREE_START_CHARACTER_IDS = [...storyRules().newPlayerState().owned_character_ids].sort();
+const STORY_ORDER = storyRules().storyOrder();
 
 let database: TestDatabase;
 let token = "";

@@ -1,8 +1,11 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createApp } from "../src/app";
-import { FIRST_OATH_POOL, STORY_ORDER } from "../src/content";
+import { storyRules } from "../src/rules";
 import type { IdentityVerifier } from "../src/identity";
 import { createTestDatabase, type TestDatabase } from "./db";
+
+const FIRST_OATH_POOL = storyRules().firstOathChoices();
+const STORY_ORDER = storyRules().storyOrder();
 
 let database: TestDatabase;
 let counter = 0;
