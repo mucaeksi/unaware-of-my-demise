@@ -13,6 +13,18 @@ import { transaction, type Connect, type Db } from "./db";
 import { idempotencyKey, runIdempotent } from "./idempotency";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
+import {
+  dismantleWeapon,
+  equip,
+  levelUpEquipment,
+  parseCharacterId,
+  parseLocked,
+  parseTable,
+  parseTargetLevels,
+  rerollAccessory,
+  setLocked,
+  unequip,
+} from "./equipment";
 import { levelUp, parseXpItems, unlockMemoryNode, upgradeSkill } from "./progression";
 import { beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
 import { snapshot, wallet } from "./state";
@@ -195,6 +207,46 @@ function routes(deps: AppDeps): Record<string, Handler> {
     "POST /v1/roster/:character_id/memory-nodes": (context) => {
       const characterId = context.params.character_id!;
       return mutate(context, "roster_memory_node", characterId, async (tx, accountId) => ({ ...(await unlockMemoryNode(tx, accountId, characterId)) }));
+    },
+
+    "POST /v1/inventory/:table/:instance_id/equip": async (context) => {
+      const table = parseTable(context.params.table!);
+      const instanceId = context.params.instance_id!;
+      const characterId = parseCharacterId(await readJsonObject(context.request));
+      return mutate(context, "inventory_equip", JSON.stringify([table, instanceId, characterId]), (tx, accountId) => equip(tx, accountId, table, instanceId, characterId));
+    },
+
+    "POST /v1/inventory/:table/:instance_id/unequip": (context) => {
+      const table = parseTable(context.params.table!);
+      const instanceId = context.params.instance_id!;
+      return mutate(context, "inventory_unequip", JSON.stringify([table, instanceId]), (tx, accountId) => unequip(tx, accountId, table, instanceId));
+    },
+
+    "POST /v1/inventory/:table/:instance_id/lock": async (context) => {
+      const table = parseTable(context.params.table!);
+      const instanceId = context.params.instance_id!;
+      const locked = parseLocked(await readJsonObject(context.request));
+      return mutate(context, "inventory_lock", JSON.stringify([table, instanceId, locked]), (tx, accountId) => setLocked(tx, accountId, table, instanceId, locked));
+    },
+
+    "POST /v1/inventory/inventory_weapons/:instance_id/dismantle": (context) => {
+      const instanceId = context.params.instance_id!;
+      return mutate(context, "inventory_dismantle", instanceId, async (tx, accountId) => ({ ...(await dismantleWeapon(tx, accountId, instanceId)) }));
+    },
+
+    "POST /v1/inventory/:table/:instance_id/level-up": async (context) => {
+      const table = parseTable(context.params.table!);
+      const instanceId = context.params.instance_id!;
+      const targetLevels = parseTargetLevels(await readJsonObject(context.request));
+      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
+      return mutate(context, "inventory_level_up", JSON.stringify([table, instanceId, targetLevels]), async (tx, accountId) => ({
+        ...(await levelUpEquipment(tx, accountId, table, instanceId, targetLevels, now)),
+      }));
+    },
+
+    "POST /v1/inventory/inventory_accessories/:instance_id/reroll": (context) => {
+      const instanceId = context.params.instance_id!;
+      return mutate(context, "inventory_reroll", instanceId, (tx, accountId) => rerollAccessory(tx, accountId, instanceId));
     },
 
     "POST /v1/attempts/:attempt_id/victory": async (context) => {

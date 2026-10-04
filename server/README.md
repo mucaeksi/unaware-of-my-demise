@@ -21,6 +21,12 @@ server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
 | `POST /v1/roster/{character_id}/level-up` | Takes `{items: {xp_item_id: count}}` and applies every affordable level (LEGACY `level_up_character`): Character XP from Chronicle items, Silver Crowns per level, ascension gates (account level, gate items, ascension Crowns). An unpaid step stops leveling with `stopped_reason` and keeps the XP. A level gained counts the `successful_level_up` daily task. |
 | `POST /v1/roster/{character_id}/skills/{skill_id}/upgrade` | Raises one skill rank for its character level, Silver Crowns and item cost (draft_v1). |
 | `POST /v1/roster/{character_id}/memory-nodes` | Unlocks the hero's next Memory Node with that hero's Memory Shards. |
+| `POST /v1/inventory/{table}/{instance_id}/equip` | Takes `{character_id}` and equips an owned instance on an owned hero, replacing that slot's holder. Weapons must pass `canEquipWeapon`; armor and accessories must match their slots. |
+| `POST /v1/inventory/{table}/{instance_id}/unequip` | Unequips an equipped instance. |
+| `POST /v1/inventory/{table}/{instance_id}/lock` | Takes `{locked}`; an accessory's payload copy follows the column. |
+| `POST /v1/inventory/inventory_weapons/{instance_id}/dismantle` | Deletes an unequipped, unlocked, dismantlable weapon and grants its `dismantle_output` plus `dismantle_xp` Weapon Tempering XP, in one transaction. |
+| `POST /v1/inventory/{table}/{instance_id}/level-up` | Takes `{target_levels}` (default 1) for weapons and armor: spends only the Tempering XP still needed, per-step Silver Crowns and milestone Blacksmith Rivets; an unpaid step stops with `stopped_reason` and the item keeps its XP. A level gained counts the `successful_level_up` daily task. |
+| `POST /v1/inventory/inventory_accessories/{instance_id}/reroll` | Rerolls a rerollable accessory's sub-stats for its reroll tokens with a fresh CSPRNG seed (main stat kept, locked items refused). |
 
 Mutating routes require a UUIDv4 `Idempotency-Key`. Each request is one transaction that locks the account row, so a
 retried request replays its stored response, and a key reused for another account, endpoint or body gets 409. Mutating
@@ -28,7 +34,7 @@ routes answer `{"state": <snapshot>}`, the client's `GameBackend` contract. The 
 Python reference walk in `parity/fixtures/story_flow.json`.
 
 Errors use the shape `{"error": {"code", "message"}}`. The codes are `UNAUTHORIZED`, `INVALID_REQUEST`, `RATE_LIMITED`,
-`SERVICE_UNAVAILABLE`, `CONFLICT`, `PROGRESSION` (409, a progression request the rules refuse; the client shows the message), `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
+`SERVICE_UNAVAILABLE`, `CONFLICT`, `PROGRESSION` and `EQUIPMENT` (409, a request the rules refuse; the client shows the message), `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
 
 Security properties:
 - The Google `sub` and the session tokens are stored only as SHA-256 hashes.
@@ -38,7 +44,7 @@ Security properties:
 
 ## Next
 
-Not implemented yet: equipment management (equip, lock, dismantle, level, reroll), gacha, quest status and
+Not implemented yet: gacha, quest status and
 claims, Ration, billing, ads and social. They go through the same `mutate` helper in `src/app.ts`.
 
 ## Commands

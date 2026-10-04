@@ -86,12 +86,6 @@ func test_unreadable_replies_are_protocol_errors() -> void:
 	assert_eq((await (pair[0] as OnlineBackend).fetch_state()).error_kind, OnlineBackend.KIND_PROTOCOL)
 
 
-func test_actions_the_server_lacks_fail_without_a_request() -> void:
-	var pair: Array = _backend([] as Array[Dictionary])
-	assert_eq((await (pair[0] as OnlineBackend).equip("inventory_weapons", "wpn_x", "mahmut")).error_kind, OnlineBackend.KIND_UNSUPPORTED)
-	assert_eq((pair[1] as ScriptedTransport).sent.size(), 0)
-
-
 func test_the_game_flow_adopts_the_servers_story_reply() -> void:
 	var flow: GameFlow = GameFlow.create()
 	assert_true(flow.is_ready(), flow.error)
@@ -148,3 +142,27 @@ func test_progression_calls_go_to_the_roster_routes_and_map_refusals() -> void:
 	assert_eq(JSON.parse_string(sent[0]["body"]), {"items": {"torn_chronicle_page": 2.0}})
 	assert_eq(sent[1]["url"], "https://api.example/v1/roster/mahmut/skills/mahmut_active_broken_crest_guard/upgrade")
 	assert_eq(sent[2]["url"], "https://api.example/v1/roster/fadyme/memory-nodes")
+
+
+func test_equipment_calls_go_to_the_inventory_routes() -> void:
+	var ok: Dictionary = {"status": 200, "body": "{\"state\": {}}"}
+	var pair: Array = _backend([ok, ok, ok, ok, ok, ok] as Array[Dictionary])
+	var backend: OnlineBackend = pair[0]
+	assert_true((await backend.equip("inventory_weapons", "wpn_1", "mahmut")).is_ok())
+	assert_true((await backend.unequip("inventory_armor", "arm_1")).is_ok())
+	assert_true((await backend.set_locked("inventory_accessories", "acc_1", true)).is_ok())
+	assert_true((await backend.dismantle_weapon("wpn_2")).is_ok())
+	assert_true((await backend.level_up_equipment("inventory_weapons", "wpn_1")).is_ok())
+	assert_true((await backend.reroll_accessory("acc_1")).is_ok())
+	var sent: Array[Dictionary] = (pair[1] as ScriptedTransport).sent
+	var urls: Array = sent.map(func(request: Dictionary) -> String: return request["url"])
+	assert_eq(urls, [
+		"https://api.example/v1/inventory/inventory_weapons/wpn_1/equip",
+		"https://api.example/v1/inventory/inventory_armor/arm_1/unequip",
+		"https://api.example/v1/inventory/inventory_accessories/acc_1/lock",
+		"https://api.example/v1/inventory/inventory_weapons/wpn_2/dismantle",
+		"https://api.example/v1/inventory/inventory_weapons/wpn_1/level-up",
+		"https://api.example/v1/inventory/inventory_accessories/acc_1/reroll",
+	])
+	assert_eq(JSON.parse_string(sent[0]["body"]), {"character_id": "mahmut"})
+	assert_eq(JSON.parse_string(sent[2]["body"]), {"locked": true})
