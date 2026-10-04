@@ -9,8 +9,8 @@ Task: Worker API + Neon schema (DEC-0013)
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
 **Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR → `main`, merge regularly)
-**Current task:** TS battle-engine port for server re-simulation (DEC-0013): RNG/CRC32/Frac done with parity gates; plan + status in `server/src/engine/README.md`
-**Next step:** content loader + progression DONE; next port `equipment/equipment.gd` + `loot/accessory_roller.gd` gated by `equipment_rules.json`/`loadouts.json`/`accessories.json`; then → equipment → story roster → battle core → service; then `POST /v1/stages/{id}/attempts` + victory re-simulation. Native gap: Android Credential Manager sign-in (sets `Online.session_token`).
+**Current task:** TS battle-engine port for server re-simulation (DEC-0013); status table in `server/src/engine/README.md`
+**Next step:** DONE with parity gates: RNG, CRC32, Frac, content loader, progression/Dec, equipment + accessory roller, story state (rosters/rewards/persisted), quests/reset windows. NEXT: battle core (`game/scripts/core/battle/*`: util, rules, unit, action_gauge, damage, battle_state, effect_interpreter, encounter_state, auto_battle, battle_service incl. story_loan_loadout/resolve_equipment) gated by `battle_*.json` (525 runs), `loadouts.json`, `story_loans.json` → `server/src/engine/battle/`; then `loot/loot_resolver.gd` (`loot.json`); then `POST /v1/stages/{id}/attempts` + victory re-simulation. Native gap: Android Credential Manager sign-in (sets `Online.session_token`).
 **Blocked on:** nothing (deploy needs owner: Google OAuth client id → `GOOGLE_CLIENT_IDS`, `CLOUDFLARE_API_TOKEN` secret, DEC-0003)
 **Files in progress:** none
 **Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-001…004, 006, 008 open; OQ-000/005 closed — do not remind)
