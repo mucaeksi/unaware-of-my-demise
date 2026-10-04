@@ -29,13 +29,18 @@ server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
 | `POST /v1/inventory/inventory_accessories/{instance_id}/reroll` | Rerolls a rerollable accessory's sub-stats for its reroll tokens with a fresh CSPRNG seed (main stat kept, locked items refused). |
 | `GET /v1/quests/status` | The server-clock claim scope (half-day window, active weekly segment), the keys claimed in it, the weekly mailbox (finished segments within `completed_unclaimed_mail_days`) and the verified progress of every counted task. |
 | `POST /v1/quests/claim` | Takes `{kind: "daily"\|"weekly", task_id, period?}` and pays a reward once per window (`quest_claims`; LEGACY `server/quests.py`). Gameplay tasks pay only when their verified progress reached the target. The window chest needs both daily tasks claimed. The grant covers Eclipse Tokens, Silver Crowns, Account XP and Character XP (as Chronicle items). A repeat claim returns the original grant. |
+| `GET /v1/gacha/banners` | The open banner windows (rotation from `BANNER_EPOCH`; empty = undated development rotation) with the account's pity, next-pull odds and guarantee (LEGACY `server/banner_status.py`). |
+| `GET /v1/gacha/pity` | The stored pity state per banner type (`character`, `weapon`, `standard_character`; `{}` before the first pull). |
+| `GET /v1/gacha/history?limit=&before=` | The account's pulls, newest first (limit 1..200, default 50; `next_cursor` feeds `before`). |
+| `POST /v1/gacha/pull` | Takes `{banner_id, pull_count: 1\|10, target_id?}` (target = Hall of Armaments weapon). One transaction: pity read, every pull resolved by the parity-tested `engine/gacha.ts` from a fresh CSPRNG seed, Fate's Threads debited (402 `INSUFFICIENT_FUNDS`, nothing written), characters granted (duplicates become copies plus Memory Shards; a first copy joins the story state's owned/online heroes), weapons minted as `wpn_` instances, each pull recorded in `pull_history` with the request's `rng_seed`, pity saved. Answers `{pull, state}`. Closed banners, bad counts and a missing target are 400. |
+| `POST /v1/wallet/convert` | Takes `{count}` (1..1000) and converts Eclipse Tokens into Fate's Threads at `token_conversion_cost` (160) each, one way. |
 
 Mutating routes require a UUIDv4 `Idempotency-Key`. Each request is one transaction that locks the account row, so a
 retried request replays its stored response, and a key reused for another account, endpoint or body gets 409. Mutating
 routes answer `{"state": <snapshot>}`, the client's `GameBackend` contract. The story rules are checked against the
 Python reference walk in `parity/fixtures/story_flow.json`.
 
-Errors use the shape `{"error": {"code", "message"}}`. The codes are `UNAUTHORIZED`, `INVALID_REQUEST`, `RATE_LIMITED`,
+Errors use the shape `{"error": {"code", "message"}}`. The codes are `UNAUTHORIZED`, `INVALID_REQUEST`, `INSUFFICIENT_FUNDS` (402, Ration or Fate's Threads), `RATE_LIMITED`,
 `SERVICE_UNAVAILABLE`, `CONFLICT`, `PROGRESSION` and `EQUIPMENT` (409, a request the rules refuse; the client shows the message), `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
 
 Security properties:
@@ -48,7 +53,7 @@ Security properties:
 
 Ration (DEC-0014): cap 100, 1 unit / 300 s regenerated on read, spent only by verified victories; `/v1/state` carries the meter.
 
-Not implemented yet: gacha, billing, ads and social. They go through the same `mutate` helper in `src/app.ts`.
+Not implemented yet: billing, ads and social. They go through the same `mutate` helper in `src/app.ts`.
 
 ## Commands
 

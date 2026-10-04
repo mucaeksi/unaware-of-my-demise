@@ -25,6 +25,8 @@ import {
   setLocked,
   unequip,
 } from "./equipment";
+import { banners, convertToFateThreads, history, parsePullRequest, pity, pull } from "./gacha";
+import { pullFingerprint } from "./engine/gacha";
 import { claimQuest, parseQuestClaim, questStatus } from "./quest-claims";
 import { levelUp, parseXpItems, unlockMemoryNode, upgradeSkill } from "./progression";
 import { beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
@@ -43,6 +45,8 @@ export interface AppDeps {
   simulate?: Simulate | null;
   /** The server clock in UTC unix seconds (quest windows); defaults to the system clock. */
   nowUnix?: () => number;
+  /** The banner rotation launch instant; null/absent = undated development rotation (the first banner pair stays open). */
+  bannerEpoch?: Date | null;
 }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -264,6 +268,35 @@ function routes(deps: AppDeps): Record<string, Handler> {
       const request = parseQuestClaim(await readJsonObject(context.request));
       const now = clock();
       return mutateNow(context, "quest_claim", JSON.stringify(request), async (tx, accountId) => ({ ...(await claimQuest(tx, accountId, request, now)) }));
+    },
+
+    "GET /v1/gacha/banners": async (context) => {
+      const accountId = await requireAccount(context);
+      return json(await banners(context.db, accountId, clock(), deps.bannerEpoch ?? null));
+    },
+
+    "GET /v1/gacha/pity": async (context) => {
+      const accountId = await requireAccount(context);
+      return json(await pity(context.db, accountId));
+    },
+
+    "GET /v1/gacha/history": async (context) => {
+      const accountId = await requireAccount(context);
+      return json(await history(context.db, accountId, new URL(context.request.url)));
+    },
+
+    "POST /v1/gacha/pull": async (context) => {
+      const request = parsePullRequest(await readJsonObject(context.request));
+      const now = clock();
+      return mutateNow(context, "gacha_pull", pullFingerprint(request.banner_id, request.pull_count, request.target_id), async (tx, accountId) => ({
+        pull: await pull(tx, accountId, request, now, deps.bannerEpoch ?? null),
+      }));
+    },
+
+    "POST /v1/wallet/convert": async (context) => {
+      const { count = 1 } = await readJsonObject(context.request);
+      if (typeof count !== "number" || !Number.isSafeInteger(count)) throw new ApiError(400, "INVALID_REQUEST", "count must be an integer");
+      return mutateNow(context, "wallet_convert", String(count), async (tx, accountId) => ({ ...(await convertToFateThreads(tx, accountId, count)) }));
     },
 
     "POST /v1/attempts/:attempt_id/victory": async (context) => {

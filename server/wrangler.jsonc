@@ -19,6 +19,8 @@
   ],
   "vars": {
     // Comma-separated Google OAuth client IDs accepted as the ID token audience. Empty = sign-in answers 503.
-    "GOOGLE_CLIENT_IDS": ""
+    "GOOGLE_CLIENT_IDS": "",
+    // Banner rotation launch instant (ISO-8601 Monday 00:00 UTC). Empty = undated: the first banner pair stays open.
+    "BANNER_EPOCH": ""
   }
 }

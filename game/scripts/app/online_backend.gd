@@ -146,5 +146,42 @@ func reroll_accessory(instance_id: String) -> Outcome:
 	return await _call(HTTPClient.METHOD_POST, _instance_path("inventory_accessories", instance_id, "reroll"), {}, true)
 
 
+func quest_status() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/quests/status")
+
+
+func claim_quest(kind: String, task_id: String, period: String = "") -> Outcome:
+	var body: Dictionary = {"kind": kind, "task_id": task_id}
+	if not period.is_empty():
+		body["period"] = period
+	return await _call(HTTPClient.METHOD_POST, "/v1/quests/claim", body, true)
+
+
+func gacha_banners() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/gacha/banners")
+
+
+func gacha_pity() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/gacha/pity")
+
+
+func gacha_history(limit: int = 50, before: int = 0) -> Outcome:
+	var query: String = "?limit=%d" % limit
+	if before > 0:
+		query += "&before=%d" % before
+	return await _call(HTTPClient.METHOD_GET, "/v1/gacha/history" + query)
+
+
+func gacha_pull(banner_id: String, pull_count: int, target_id: String = "") -> Outcome:
+	var body: Dictionary = {"banner_id": banner_id, "pull_count": pull_count}
+	if not target_id.is_empty():
+		body["target_id"] = target_id
+	return await _call(HTTPClient.METHOD_POST, "/v1/gacha/pull", body, true)
+
+
+func convert_fate_threads(count: int) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/wallet/convert", {"count": count}, true)
+
+
 static func _instance_path(table: String, instance_id: String, action: String) -> String:
 	return "/v1/inventory/%s/%s/%s" % [table.uri_encode(), instance_id.uri_encode(), action]
