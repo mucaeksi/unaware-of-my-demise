@@ -21,9 +21,9 @@ and the fixtures must stay green.
 | `content/content_models.gd` + `content_loader.gd` (1315) | `content.ts` | `content_registry.json` (all 12 tables + catalogs, field by field), `content_errors.json` (every case, exact message) | DONE |
 | `progression/progression.gd`, `dec.gd`, `big_nat.gd`, `float_repr.gd` | `progression.ts`, `dec.ts` (BigInt; JS shortest formatting = Python repr) | `curves.json`, `stats_characters/enemies/equipment.json`, `float_repr.json` | DONE |
 | `equipment/equipment.gd`, `loot/accessory_roller.gd` | `equipment.ts`, `accessories.ts` | `equipment_rules.json`, `accessories.json` (`loadouts.json` exercises `BattleService` and moves to that row) | DONE |
-| `story/story_state.gd` (roster, loans, rewards) | `../story.ts` (cursor and First Oath only) | `story_flow.json`, `rosters.json`, `story_loans.json`, `persisted_state.json` | PARTIAL |
+| `story/story_state.gd` (roster, rewards, persisted form) | `story.ts` (the API's `../story.ts` keeps the route-level cursor rules) | `story_flow.json`, `rosters.json`, `persisted_state.json` (`story_loans.json` is `BattleService.story_loan_loadout`, service row) | DONE |
 | `battle/*` (action gauge, units, damage, focus, auto battle, encounter state, effect interpreter 1741, victory stars) | — | `battle_1-1.json` … `battle_7-5.json` (35 stages) | TODO |
-| `battle/battle_service.gd` (orchestration, player loadouts) | — | `battle_*.json`, `loadouts.json` | TODO |
+| `battle/battle_service.gd` (orchestration, player loadouts) | — | `battle_*.json`, `loadouts.json`, `story_loans.json` | TODO |
 | `loot/loot_resolver.gd`, `quest/*`, `time/*` | — | `loot.json`, `quests.json`, `time_source.json` | TODO (needed for rewards) |
 
 Order of work: content loader, then progression/equipment, then story roster, then the battle core, then the
