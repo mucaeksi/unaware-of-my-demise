@@ -197,16 +197,130 @@ Claude then migrates those exact files with provenance into
 
 ## 8. Remaining audit work (next steps)
 
-1. `LEGACY:game/` (`1sUuCQc1RMcQn1xBhMPEwxvK2OwCAJZuN`): full tree; addons
-   (GUT, godot-sqlite, uomd_native); `scripts/core|persistence|services|app|ui`;
-   tests; project.godot; export presets; `GODOT_VERSION`.
+1. ~~`LEGACY:game/`~~ DONE 2026-10-04: migrated selectively (BATCH-0002,
+   `docs/MIGRATION_LEDGER.md`, DEC-0012).
 2. `LEGACY:content/` (`1simd_nzO6ukqoCXHQNwiSesFbmOIlEiD`): every JSON pack,
    story scripts ch01–ch07, `visual_assets_part1.json`,
    `character_visuals_part1.json`, `brand_assets_part1.json`, manifests.
 3. `LEGACY:tools/` (`1bVaM5WVAR2wdv2s5QMjzCgt_sw65fM0P`) and `parity/`.
-4. `LEGACY:server/` (FastAPI economy authority) → source for the Worker API
-   and Postgres schema.
+4. ~~`LEGACY:server/`~~ AUDITED 2026-10-04 (§9). Remaining reads for the port:
+   `server/{gacha_transaction,gacha_grants,quests,billing,ads,identity,repository,social,deletion,ratelimit}.py`,
+   `backend/{gacha_service,loot_service,reward_service,battle_reward_service,progression_service,equipment_service,quest_service,banner_rotation}.py`
+   (read each when its endpoint is ported).
 5. `LEGACY:narrative/` remainder: `prompts/` (reference set R01–R23,
    `asset_pipeline/00_rules.md`), `lore/`, `archive/`.
 6. Read GDD, STORY_BIBLE, ART_BIBLE, COSTUME_GUIDE, ECONOMY, ONLINE_API_SPEC
    in full; populate STORY/CHARACTER inventories.
+
+## 9. Server and backend audit (2026-10-04)
+
+Read from Drive (content retrieved and decoded, not just metadata):
+`docs/ONLINE_API_SPEC.md` (`1aTIdDuF0NTUDdhXfL6z62G1vSUXBqyNf`),
+`docs/ONLINE_ACCOUNT_SOCIAL_PART1.md` (`1f5CpEtKb0qSghVqBRiQyX4R1NpUy6So8`),
+`docs/decisions/DECISION_ECONOMY_AUTHORITY.md` (`1iwaz_6eAhnXyzz4EpPleosE0H51vTvIP`),
+`server/app.py` (`1AD_xqL0VOXOyUP16Kn87gPJWVn72dL-F`), `server/schemas.py`
+(`1Kw5-ZecHrZrdAL73TSTP6xr4dPt90KQP`), `server/schema.py`
+(`1kvRy8ujiF_MXsx5ORraf-GaMBqHG9PVw`), `server/sync.py`
+(`18WgB9M44dUdTASAL5vr0lwI48VAEPUkb`), `server/idempotency.py`
+(`1TfFxfOZJCn0D6Y-7kSReh9u69OoUSv48`), `backend/_schema.py`
+(`1OITNq-WsI2si2u5BNstP6you4ISxk-1A`).
+
+### 9.1 What exists
+
+- **Stack:** FastAPI on a single `sqlite3` connection behind one lock,
+  plus pydantic models. It is not Workers-compatible, and its own docstring
+  says it is not built for concurrent load. The pure rules live in
+  `backend/*.py` and `core/*.py`; the GDScript `scripts/core/**` is a
+  parity-tested port of that `core/` package.
+- **Endpoints (`server/app.py`)**, all `/v1`, with a bearer session:
+  - **Auth:** `POST auth/nonce`, `POST auth/google`. The Google ID token is
+    verified with signature, iss, aud, exp and a single-use nonce. The
+    stable `sub` is stored only as a hash in `provider_links`. The
+    `account_id` is a random `acct_<hex>` and is never taken from the client.
+  - **Account:** `GET account`, `POST account/delete`
+    (confirm literal `DELETE MY ACCOUNT`).
+  - **Economy reads:** `GET wallet`, `GET roster`, `GET inventory/weapons`,
+    `GET gacha/{banners,history,pity}`.
+  - **Gacha:** `POST gacha/pull`. Requires a UUIDv4 `Idempotency-Key`. 1 or
+    10 pulls; `target_id` applies to the weapon banner.
+  - **Story:** `POST sync/story` validates client-earned story characters
+    against content (only free starters, recruits whose granting stage is
+    completed, and one First Oath pick recorded in `story_claims`).
+  - **Progression:** `POST roster/{id}/memory-nodes`. Server-authoritative
+    and idempotent per node number.
+  - **Quests:** `GET quests/status`, `POST quests/claim`. Server-clock
+    daily/weekly windows; the `quest_claims` row is the idempotency record.
+  - **Subscription (Play Billing "Eclipse Blessing"):** `POST subscription/verify`,
+    `GET subscription/status`, `POST subscription/claim`.
+  - **Rewarded ads:** `GET ads/ssv` (AdMob SSV callback, transaction id as
+    primary key), `GET ads/status`.
+  - **Social:** `GET friends`, `POST friend-requests[/{id}/accept|reject]`,
+    `DELETE friends/{id}`, `POST blocks`, `POST reports`.
+- **Error shape:** `{"error": {"code", "message"}}`. Codes are
+  UNAUTHORIZED, INVALID_REQUEST, INSUFFICIENT_FUNDS (402), CONFLICT (409),
+  ITEM_NOT_FOUND, SERVICE_UNAVAILABLE (503) and INTERNAL_ERROR.
+- **Idempotency:** one global table keyed by the client key, storing
+  account, endpoint, request fingerprint and the stored response.
+  - A replay returns the stored response verbatim.
+  - Reusing a key for a different account, endpoint or body is a conflict.
+  - Everything runs in one transaction with the action itself.
+- **Tables:**
+  - From `backend/_schema.py`, migrations v1–v7:
+    - `account`, `wallet` (eclipse_tokens, fate_threads, silver_crowns,
+      ration, account_xp; all CHECK ≥ 0)
+    - `roster` (level 1..20, copies, xp, ascension, memory_shards,
+      memory_nodes)
+    - `gacha_pity` (per banner type), `purchase_receipts`
+    - `inventory_weapons|armor|accessories`: instance-based, with partial
+      unique indexes for "one item per slot per character"
+    - `inventory_items` (quantity ≥ 0), `story_state`, `claims`
+      (UNIQUE account+reward_type+cycle, unique transaction_id),
+      `quest_progress`, `skill_ranks`
+  - Server-only, from `server/schema.py`: `provider_links`, `sessions`
+    (SHA-256 token hash; opaque, not JWT), `idempotency_keys`,
+    `pull_history` (append-only), `quest_claims`, `ad_rewards`,
+    `subscriptions`, `subscription_periods`, `subscription_claims`,
+    `story_claims`, `auth_nonces`, `profiles` (unique friend_code),
+    `friend_edges` (mirrored rows), `reports`.
+
+### 9.2 Gaps against the active target
+
+1. **LEGACY authority was "A-light".** DECISION_ECONOMY_AUTHORITY §5 kept
+   story, battles, leveling and equipment on the device and put only the
+   monetized economy behind the server. CLAUDE.md requires the server to own
+   progression, inventory, ownership and rewards as well (DEC-0012). So the
+   rule services that LEGACY ran on the client must run on the server:
+   - `progression_service`, `equipment_service`, `battle_reward_service`
+   - `quest_service`, `reward_service`
+   - the GDScript `services/*` that were not migrated
+
+   `sync/story` (the client tells the server what the story granted)
+   becomes unnecessary: the server advances the story itself.
+2. **Battle results.** Nothing in LEGACY validates a battle server-side; the
+   client applied its own victories. Under server authority a client-reported
+   victory cannot be trusted (see DEC-0013).
+3. **Runtime.** Python, sqlite3, a process lock and a filesystem key provider
+   cannot run on Workers. The data model and the rules carry over; the code
+   does not.
+4. **Open content decisions** carried over from the economy decision:
+   - §6.2 (4★ rate-up) and §6.3 (hall_of_ancestors) are marked implemented.
+   - Player level from account_xp is not designed: `public_profile` returns
+     `player_level = 0`, deliberately flagged rather than invented.
+5. **ONLINE_API_SPEC.md is an older draft.** Examples: `api.gacha-game.com`,
+   singular `eclipse_token`, `POST /save` with a client-written save. Its
+   successor is `schemas.py` ("the implemented schema is the source of
+   truth"). Treat the draft as historical only; its client-written save
+   contradicts server authority.
+
+### 9.3 Carried forward (compatible conventions to preserve)
+
+- Endpoint paths and payload field names from `server/app.py` + `schemas.py`.
+- Error shape and codes; UUIDv4 `Idempotency-Key` on every mutation, with
+  fingerprint conflict detection.
+- Opaque session tokens stored as hashes. Google `sub` stored only as a hash.
+  Single-use nonces. Random internal account ids.
+- The ledger model: one row per claim key, `granted_json` as the record.
+  Append-only `pull_history`. Partial unique equip indexes. CHECK ≥ 0 on
+  every balance.
+- Reset windows (half-day cycle, weekly Monday 00:00 UTC) on the server
+  clock only.

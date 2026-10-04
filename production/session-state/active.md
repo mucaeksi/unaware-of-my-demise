@@ -3,14 +3,14 @@
 <!-- STATUS -->
 Epic: Takeover / rebuild (master prompt)
 Feature: BATCH-0002 LEGACY client migration
-Task: client SQLite-free + server snapshot (DEC-0012) — done, merging
+Task: Worker API + Neon schema (DEC-0013)
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
 **Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR → `main`, merge regularly)
-**Current task:** BATCH-0002 committed (LEGACY Godot client, no SQLite, `PlayerState` + `GameBackend`); GUT 219/219, import clean
-**Next step:** audit LEGACY `server/` (`1ow88cjDeVrf6val0p5gTSwHuz1CX0MKk`) + ONLINE_API_SPEC → design Worker API + Neon schema matching `GameBackend` methods/snapshot (`game/scripts/app/player_state.gd` header)
+**Current task:** LEGACY server audited (`docs/LEGACY_AUDIT.md` §9), DEC-0013 accepted (TS Worker port, server battle re-simulation)
+**Next step:** PostgreSQL migration `database/migrations/` translating LEGACY `backend/_schema.py` + `server/schema.py` (+ `stage_attempts`), then Worker skeleton (auth nonce/google, sessions, idempotency, `GET /v1/state` snapshot per `player_state.gd`)
 **Blocked on:** nothing
 **Files in progress:** none
 **Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-001…004, 006, 008 open; OQ-000/005 closed — do not remind)
@@ -43,7 +43,7 @@ Read after `CLAUDE.md` on every resume. Conversation memory is not authoritative
 
 ### Remaining work (order)
 
-1. LEGACY `server/` + `backend/` audit; ONLINE_API_SPEC, GODOT_HANDOFF, PART1_ECONOMY_ANDROID, GDD.
+1. ~~LEGACY `server/` audit~~ done (§9). Still to read: GODOT_HANDOFF, PART1_ECONOMY_ANDROID, GDD; per-endpoint LEGACY rule files (list in LEGACY_AUDIT §8.4).
 2. Worker API (Cloudflare Workers + Hyperdrive + Neon) implementing the
    `GameBackend` contract; Neon schema; battle validation decision
    (client runs deterministic engine; server decides rewards).
