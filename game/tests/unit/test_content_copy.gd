@@ -1,6 +1,6 @@
 extends GutTest
-## The content copy under res://data/content is byte-identical to content/*.json (tools/sync_godot_content.py
-## is the only writer): every file matches the sha256 in MANIFEST.json and parses to an object.
+## The content packs under res://data/content (the authoring source; tools/content_manifest.py writes MANIFEST.json,
+## tools/validate_part1_content.py audits them): every file matches the sha256 in MANIFEST.json and parses to an object.
 
 const CONTENT_DIR: String = "res://data/content"
 

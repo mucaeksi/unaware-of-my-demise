@@ -15,6 +15,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # INF-021: the content packs (game/data/content, the single authoring source) agree with their manifest, which both
+  # client and server hash into the rules hash, and pass the cross-pack audit (references resolve, every battle rule key
+  # is read by both the GDScript and the TypeScript engine or recorded as descriptive).
+  content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 tools/content_manifest.py --check
+      - run: python3 tools/validate_part1_content.py
+
   database:
     runs-on: ubuntu-latest
     services:

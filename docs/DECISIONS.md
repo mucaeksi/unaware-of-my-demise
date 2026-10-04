@@ -434,3 +434,16 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   No test, seed or reset tool is bound to production; none exists in the Worker.
 - Not decided here: production deploys waiting for a green staging deploy (after staging has run for a while), and a
   staging build of the Android app (its `uomd/online/server_url` would point at the staging Worker).
+
+## DEC-0026 — One content source, and how content reaches each side
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-021 and the G4 "single path" choice).
+- Decision: `game/data/content/*.json` is the single authoring source of game content. Packs are edited there (by hand
+  or by a tool), `tools/content_manifest.py --write` records their hashes, and CI requires the manifest to match and
+  `tools/validate_part1_content.py` (LEGACY validator, MIG-0041) to pass. The LEGACY generator
+  (`build_part1_content.py`, from the GDD markdown) is reference only.
+  The server's rules come from the deployed Worker: it bundles the packs of its commit, so a rules change is a Worker
+  release (recorded `source_sha`, rules hash in `/v1/bootstrap`, attempts pinned by DEC-0024). The client gets the same
+  packs inside the app or, later, in a signed content patch (G5) — never a separately edited copy — and the boot gate
+  (DEC-0015) refuses to play when its rules hash differs from the server's.
+- Rejected for now: loading server rules from a runtime registry (R2/DB) independent of the Worker release; it adds a
+  second release identity without a current need. Revisit if content must change faster than Worker deploys.
