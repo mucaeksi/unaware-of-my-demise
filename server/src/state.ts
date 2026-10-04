@@ -1,6 +1,8 @@
 // The player snapshot the client renders (game/scripts/app/player_state.gd, DEC-0012), including the derived
 // progression numbers of every hero (xp_to_next and level_up_silver_crowns are -1 at the level cap).
 import { toSafeInt, type Db } from "./db";
+import { isoUtcSeconds } from "./engine/quests";
+import { currentRation } from "./ration";
 import { progression } from "./rules";
 
 export const SNAPSHOT_SCHEMA_VERSION = 1;
@@ -17,16 +19,21 @@ const EQUIPMENT_QUERIES: Record<string, string> = {
     "FROM inventory_accessories WHERE account_id = $1 ORDER BY acquired_seq",
 };
 
-export async function wallet(db: Db, accountId: string): Promise<Record<string, number> | null> {
+const nowSeconds = (): number => Math.floor(Date.now() / 1000);
+
+/** The balances, with `ration` as of `nowUnix` (regeneration included). */
+export async function wallet(db: Db, accountId: string, nowUnix: number = nowSeconds()): Promise<Record<string, number> | null> {
   const { rows } = await db.query<Record<string, unknown>>(
     "SELECT eclipse_tokens, fate_threads, silver_crowns, ration, account_xp FROM wallet WHERE account_id = $1",
     [accountId],
   );
   if (!rows[0]) return null;
-  return Object.fromEntries(Object.entries(rows[0]).map(([key, value]) => [key, toSafeInt(value)]));
+  const balances = Object.fromEntries(Object.entries(rows[0]).map(([key, value]) => [key, toSafeInt(value)]));
+  balances.ration = (await currentRation(db, accountId, nowUnix)).ration;
+  return balances;
 }
 
-export async function snapshot(db: Db, accountId: string): Promise<Record<string, unknown>> {
+export async function snapshot(db: Db, accountId: string, nowUnix: number = nowSeconds()): Promise<Record<string, unknown>> {
   const story = await db.query<{ state: unknown }>("SELECT state FROM story_state WHERE account_id = $1", [accountId]);
   if (!story.rows[0]) throw new Error(`account ${accountId} has no story state`);
 
@@ -69,9 +76,23 @@ export async function snapshot(db: Db, accountId: string): Promise<Record<string
   return {
     schema_version: SNAPSHOT_SCHEMA_VERSION,
     story_state: story.rows[0].state,
-    wallet: await wallet(db, accountId),
+    wallet: await wallet(db, accountId, nowUnix),
+    ration: await rationSection(db, accountId, nowUnix),
     items,
     roster,
     inventory,
+  };
+}
+
+/** The Ration meter the client shows: balance, cap and when the next unit / a full meter arrive (null when full). */
+async function rationSection(db: Db, accountId: string, nowUnix: number): Promise<Record<string, unknown>> {
+  const ration = await currentRation(db, accountId, nowUnix);
+  const iso = (unix: number | null): string | null => (unix === null ? null : isoUtcSeconds(unix));
+  return {
+    current: ration.ration,
+    cap: ration.cap,
+    regen_seconds_per_unit: ration.regen_seconds_per_unit,
+    next_unit_at_utc: iso(ration.next_unit_at_unix),
+    full_at_utc: iso(ration.full_at_unix),
   };
 }

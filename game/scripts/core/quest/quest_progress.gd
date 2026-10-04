@@ -69,6 +69,11 @@ static func _is_positive_whole(value: Variant) -> bool:
 	return value is float and is_finite(value) and value == floorf(value) and value > 0.0
 
 
+## The raw economy_part1.json object (task rows, reward amounts, banners).
+func economy() -> Dictionary:
+	return _economy
+
+
 func daily_tasks() -> Array[QuestTask]:
 	return counted_tasks(_economy.get("daily_schedule", {}))
 

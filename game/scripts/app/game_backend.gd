@@ -9,6 +9,8 @@ extends RefCounted
 ## and test doubles override the methods.
 
 const KIND_OFFLINE: String = "offline"
+## The server refused for lack of a currency (Ration for a stage, Fate's Threads for a pull); its message says which.
+const KIND_INSUFFICIENT_FUNDS: String = "insufficient_funds"
 
 
 func _offline() -> Outcome:
@@ -79,4 +81,42 @@ func level_up_equipment(_table: String, _instance_id: String) -> Outcome:
 
 
 func reroll_accessory(_instance_id: String) -> Outcome:
+	return _offline()
+
+
+## Reads (no snapshot): `value` is the route's reply as is.
+## `value`: {"half_day_cycle_id", ..., "claimed", "mail", "daily_tasks", "weekly_tasks"} (GET /v1/quests/status).
+func quest_status() -> Outcome:
+	return _offline()
+
+
+## `kind` "daily" | "weekly"; `period` a week's Monday (YYYY-MM-DD) or "" for the current one.
+## `value`: {"state", "claim_key", "already_claimed", "granted", "eclipse_tokens"}.
+func claim_quest(_kind: String, _task_id: String, _period: String = "") -> Outcome:
+	return _offline()
+
+
+## `value`: {"banners": [{"banner_id", "banner_type", "pull_cost", "pity", "next_pull", "guarantee", ...}]}.
+func gacha_banners() -> Outcome:
+	return _offline()
+
+
+## `value`: {"banner_types": {"character": {...}, "weapon": {...}, "standard_character": {...}}}.
+func gacha_pity() -> Outcome:
+	return _offline()
+
+
+## Newest first; `before` is the previous page's `next_cursor` (0 = first page). `value`: {"items", "next_cursor"}.
+func gacha_history(_limit: int = 50, _before: int = 0) -> Outcome:
+	return _offline()
+
+
+## One or ten pulls, resolved and granted by the server. `target_id` picks the Hall of Armaments weapon ("" = none).
+## `value`: {"state", "pull": {"pull_count", "results": [{"pull_id", "rarity", "reward_id", "grant", ...}], ...}}.
+func gacha_pull(_banner_id: String, _pull_count: int, _target_id: String = "") -> Outcome:
+	return _offline()
+
+
+## Eclipse Tokens -> `count` Fate's Threads at the authored rate. `value`: {"state", "fate_threads_gained", "eclipse_tokens_spent"}.
+func convert_fate_threads(_count: int) -> Outcome:
 	return _offline()

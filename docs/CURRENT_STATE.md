@@ -147,6 +147,6 @@ None. No `.github/workflows/`. Cloudflare Workers Builds trigger is orphaned
 | C3 | Workers Builds orphaned + no GitHub Actions → no canonical deploy path | DEC-0003 |
 | C4 | `docs/GITHUB_SECRETS.md` instructs storing `GEMINI_API_KEY` server-side / VPS deploy — contradicts Gemini-is-dev-only and Workers runtime | rewrite doc (done in this checkpoint) |
 | C5 | `docs/ADMIN_PANEL.md`, `docs/ARCHITECTURE.md` describe Fastify/VPS starter | ARCHITECTURE rewrite pending Phase 12 |
-| C6 | Root `LICENSE` is MIT "Copyright (c) 2026 Donchitos" (from the CCGS framework) and sits at repo root, implying the whole game is MIT-licensed | DEC-0005 (legal, owner) |
+| C6 | Root `LICENSE` is MIT "Copyright (c) 2026 Donchitos" (from the CCGS framework) and sits at repo root, implying the whole game is MIT-licensed | RESOLVED 2026-10-04 (DEC-0005) |
 | C7 | `.gitkeep` files present although project policy forbids them (every directory already had a README placeholder) | removed in this checkpoint |
-| C8 | Client Android package `com.example.gachaonline` vs legacy README `io.github.mucaeksi.unawareofmydemise` | resolve during legacy audit (DECISION if conflicting) |
+| C8 | Client Android package `com.example.gachaonline` vs legacy README `io.github.mucaeksi.unawareofmydemise` | RESOLVED 2026-10-04: LEGACY id adopted (DEC-0008) |

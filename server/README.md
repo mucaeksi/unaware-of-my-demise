@@ -16,8 +16,8 @@ server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
 | `GET /v1/state` | Returns the player snapshot the Godot client renders (`game/scripts/app/player_state.gd`). |
 | `POST /v1/story/advance` | Moves the story past the current narrative entry. A stage entry, the end of the story and a pending First Oath are refused with 409. |
 | `POST /v1/story/first-oath` | Takes `{character_id}` and claims the one-time First Oath hero from the manifest's selector pool. The claim is recorded in `story_claims` and the hero joins the roster. |
-| `POST /v1/stages/{stage_id}/attempts` | Takes `{roster}` and opens a battle attempt. The stage must be the story's current entry or one already cleared; the First Oath must be resolved; the roster must be legal (`StoryRules.resolveBattleRoster`). The server freezes the player's build and owned heroes, picks a CSPRNG seed below 2^53 and answers `{attempt: {attempt_id, stage_id, run_seed}, state}`. Older open attempts expire. |
-| `POST /v1/attempts/{attempt_id}/victory` | Takes the client's `{outcome: "victory", stars, actions, cycles}` (informational) and re-runs the attempt with the bundled battle engine. Only the server's own victory pays, in one transaction (docs/LEGACY_AUDIT.md 9.4): loot from a fresh reward seed, the first-clear claim ledger, the reward writes, quest events for Ration-costing wins, story rewards and recruits, and the cursor on a first clear. Answers `{applied, first_clear, result, state}`; a run that does not verify gets 409. |
+| `POST /v1/stages/{stage_id}/attempts` | Takes `{roster}` and opens a battle attempt. The stage must be the story's current entry or one already cleared; the First Oath must be resolved; the roster must be legal (`StoryRules.resolveBattleRoster`). The server freezes the player's build and owned heroes, checks the stage's Ration cost (402 `INSUFFICIENT_FUNDS`, nothing spent), picks a CSPRNG seed below 2^53 and answers `{attempt: {attempt_id, stage_id, run_seed}, state}`. Older open attempts expire. |
+| `POST /v1/attempts/{attempt_id}/victory` | Takes the client's `{outcome: "victory", stars, actions, cycles}` (informational) and re-runs the attempt with the bundled battle engine. Only the server's own victory pays, in one transaction (docs/LEGACY_AUDIT.md 9.4): the stage's Ration (DEC-0014), loot from a fresh reward seed, the first-clear claim ledger, the reward writes, quest events for Ration-costing wins, story rewards and recruits, and the cursor on a first clear. Answers `{applied, first_clear, result, state}`; a run that does not verify gets 409. |
 | `POST /v1/roster/{character_id}/level-up` | Takes `{items: {xp_item_id: count}}` and applies every affordable level (LEGACY `level_up_character`): Character XP from Chronicle items, Silver Crowns per level, ascension gates (account level, gate items, ascension Crowns). An unpaid step stops leveling with `stopped_reason` and keeps the XP. A level gained counts the `successful_level_up` daily task. |
 | `POST /v1/roster/{character_id}/skills/{skill_id}/upgrade` | Raises one skill rank for its character level, Silver Crowns and item cost (draft_v1). |
 | `POST /v1/roster/{character_id}/memory-nodes` | Unlocks the hero's next Memory Node with that hero's Memory Shards. |
@@ -29,13 +29,18 @@ server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
 | `POST /v1/inventory/inventory_accessories/{instance_id}/reroll` | Rerolls a rerollable accessory's sub-stats for its reroll tokens with a fresh CSPRNG seed (main stat kept, locked items refused). |
 | `GET /v1/quests/status` | The server-clock claim scope (half-day window, active weekly segment), the keys claimed in it, the weekly mailbox (finished segments within `completed_unclaimed_mail_days`) and the verified progress of every counted task. |
 | `POST /v1/quests/claim` | Takes `{kind: "daily"\|"weekly", task_id, period?}` and pays a reward once per window (`quest_claims`; LEGACY `server/quests.py`). Gameplay tasks pay only when their verified progress reached the target. The window chest needs both daily tasks claimed. The grant covers Eclipse Tokens, Silver Crowns, Account XP and Character XP (as Chronicle items). A repeat claim returns the original grant. |
+| `GET /v1/gacha/banners` | The open banner windows (rotation from `BANNER_EPOCH`; empty = undated development rotation) with the account's pity, next-pull odds and guarantee (LEGACY `server/banner_status.py`). |
+| `GET /v1/gacha/pity` | The stored pity state per banner type (`character`, `weapon`, `standard_character`; `{}` before the first pull). |
+| `GET /v1/gacha/history?limit=&before=` | The account's pulls, newest first (limit 1..200, default 50; `next_cursor` feeds `before`). |
+| `POST /v1/gacha/pull` | Takes `{banner_id, pull_count: 1\|10, target_id?}` (target = Hall of Armaments weapon). One transaction: pity read, every pull resolved by the parity-tested `engine/gacha.ts` from a fresh CSPRNG seed, Fate's Threads debited (402 `INSUFFICIENT_FUNDS`, nothing written), characters granted (duplicates become copies plus Memory Shards; a first copy joins the story state's owned/online heroes), weapons minted as `wpn_` instances, each pull recorded in `pull_history` with the request's `rng_seed`, pity saved. Answers `{pull, state}`. Closed banners, bad counts and a missing target are 400. |
+| `POST /v1/wallet/convert` | Takes `{count}` (1..1000) and converts Eclipse Tokens into Fate's Threads at `token_conversion_cost` (160) each, one way. |
 
 Mutating routes require a UUIDv4 `Idempotency-Key`. Each request is one transaction that locks the account row, so a
 retried request replays its stored response, and a key reused for another account, endpoint or body gets 409. Mutating
 routes answer `{"state": <snapshot>}`, the client's `GameBackend` contract. The story rules are checked against the
 Python reference walk in `parity/fixtures/story_flow.json`.
 
-Errors use the shape `{"error": {"code", "message"}}`. The codes are `UNAUTHORIZED`, `INVALID_REQUEST`, `RATE_LIMITED`,
+Errors use the shape `{"error": {"code", "message"}}`. The codes are `UNAUTHORIZED`, `INVALID_REQUEST`, `INSUFFICIENT_FUNDS` (402, Ration or Fate's Threads), `RATE_LIMITED`,
 `SERVICE_UNAVAILABLE`, `CONFLICT`, `PROGRESSION` and `EQUIPMENT` (409, a request the rules refuse; the client shows the message), `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
 
 Security properties:
@@ -46,7 +51,9 @@ Security properties:
 
 ## Next
 
-Not implemented yet: gacha, Ration (OQ-011), billing, ads and social. They go through the same `mutate` helper in `src/app.ts`.
+Ration (DEC-0014): cap 100, 1 unit / 300 s regenerated on read, spent only by verified victories; `/v1/state` carries the meter.
+
+Not implemented yet: billing, ads and social. They go through the same `mutate` helper in `src/app.ts`.
 
 ## Commands
 

@@ -3,17 +3,18 @@
 <!-- STATUS -->
 Epic: Takeover / rebuild (master prompt)
 Feature: BATCH-0002 LEGACY client migration
-Task: Worker API + Neon schema (DEC-0013)
+Task: gacha + Ration + deploy (DEC-0003/0013/0014)
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
-**Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR → `main`, merge regularly)
-**Current task:** server-authoritative gameplay routes on the ported engine (DEC-0013); engine status in `server/src/engine/README.md`, routes in `server/README.md`
-**Next step:** DONE: whole engine port (parity-gated); server routes for stage attempts + verified victories (engine re-simulation, rewards, quests, story), progression (level-up/skills/Memory Nodes), equipment (equip/unequip/lock/dismantle/level/reroll), quest status/claims on verified progress; every client `GameBackend` call has a route. NEXT: gacha (`POST /v1/gacha/pull`, `GET /v1/gacha/{banners,history,pity}`) → port LEGACY `backend/gacha_service.py` (Drive 1jRUZUQy7imD1wjNUE9PkqOLPVZ9GYTER), `server/gacha_transaction.py` (1O1mZjlPXDtUm9JXtP4VuxB7HaclaML1G), `server/gacha_grants.py` (1EGdTCVR64-VbztkAaG1XuQ2QsECykTE5), with parity fixtures if LEGACY has them; then the client quest/gacha screens use the routes; Ration waits on OQ-011. Native gap: Android Credential Manager sign-in (sets `Online.session_token`).
-**Blocked on:** nothing (deploy needs owner: Google OAuth client id → `GOOGLE_CLIENT_IDS`, `CLOUDFLARE_API_TOKEN` secret, DEC-0003)
+**Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR #10 → `main`, merge when CI is green)
+**Current task:** foundation complete server-side; deployment (DEC-0003) partially done
+**Next step:** DONE: engine port (parity-gated), every gameplay route (stages/victories, progression, equipment, quests, gacha pull/banners/history/pity, wallet convert), Ration (DEC-0014), client `GameBackend` calls for all of them, license (DEC-0005), Worker deployed to Cloudflare (version 097ca9db, template + orphaned trigger deleted). Client Summon + Quests screens (GUT 245). NEXT: (1) merge PR #10 when CI is green; (2) Ration `daily_inn_meal`; (3) CI deploy job (needs OQ-003 secrets); (4) Android Credential Manager sign-in (sets `Online.session_token`); (5) Eclipse Token → Fate's Thread convert button in the Summon screen; (6) Gemini asset work only after the foundation (DEC-0004).
+**Blocked on (owner):** OQ-012 Neon production migrations (port 5432 times out from the session, credential route refused by the permission classifier); OQ-013 public endpoint (route vs workers.dev); Google OAuth client id → `GOOGLE_CLIENT_IDS`; OQ-003 GitHub deploy secrets.
 **Files in progress:** none
-**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-001…004, 006, 008, 011 open; OQ-000/005 closed — do not remind)
+**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-003, 006, 012, 013 open; OQ-000/005 closed — do not remind)
+**Local test infra:** Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`); Cloudflare credentials only at `/root/.config/uomd/cloudflare.env` (outside Git, ephemeral container).
 <!-- /CHECKPOINT -->
 
 ---
@@ -32,7 +33,8 @@ Read after `CLAUDE.md` on every resume. Conversation memory is not authoritative
 | 7 (partial) | `docs/LEGACY_AUDIT.md` (creative pipeline, canon, reference set) |
 | Reference set | LOCKED 2026-10-03, BATCH-0001 (26 files) |
 | Client | BATCH-0002: 291 files (240 byte-exact, 13 adapted, 5 new, 33 regenerated .uid) + GUT 9.7.1 vendored; manifest `docs/migration/BATCH-0002.manifest.json` |
-| Decisions | `docs/DECISIONS.md` DEC-0000…0012 |
+| Decisions | `docs/DECISIONS.md` DEC-0000…0014 |
+| Server | Worker API: engine port + all gameplay routes + gacha + Ration; 368 vitest; deployed 2026-10-04 |
 
 ### Owner directives in effect
 

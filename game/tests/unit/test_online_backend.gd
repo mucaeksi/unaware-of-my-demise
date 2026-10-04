@@ -166,3 +166,39 @@ func test_equipment_calls_go_to_the_inventory_routes() -> void:
 	])
 	assert_eq(JSON.parse_string(sent[0]["body"]), {"character_id": "mahmut"})
 	assert_eq(JSON.parse_string(sent[2]["body"]), {"locked": true})
+
+
+func test_quest_and_gacha_calls_go_to_their_routes() -> void:
+	var ok: Dictionary = {"status": 200, "body": "{\"state\": {}}"}
+	var broke: Dictionary = {"status": 402, "body": "{\"error\": {\"code\": \"INSUFFICIENT_FUNDS\", \"message\": \"Not enough Fate's Threads (have 3, need 10)\"}}"}
+	var pair: Array = _backend([ok, ok, ok, ok, ok, broke, ok, ok] as Array[Dictionary])
+	var backend: OnlineBackend = pair[0]
+	assert_true((await backend.quest_status()).is_ok())
+	assert_true((await backend.claim_quest("weekly", "cycle_a", "2026-10-05")).is_ok())
+	assert_true((await backend.gacha_banners()).is_ok())
+	assert_true((await backend.gacha_pity()).is_ok())
+	assert_true((await backend.gacha_history(20, 41)).is_ok())
+	var refused: Outcome = await backend.gacha_pull("character:oath_01_aveline", 10)
+	assert_eq(refused.error_kind, GameBackend.KIND_INSUFFICIENT_FUNDS)
+	assert_true((await backend.gacha_pull("hall_of_armaments", 1, "weapon_fadyme_signature")).is_ok())
+	assert_true((await backend.convert_fate_threads(2)).is_ok())
+	var sent: Array[Dictionary] = (pair[1] as ScriptedTransport).sent
+	var urls: Array = sent.map(func(request: Dictionary) -> String: return request["url"])
+	assert_eq(urls, [
+		"https://api.example/v1/quests/status",
+		"https://api.example/v1/quests/claim",
+		"https://api.example/v1/gacha/banners",
+		"https://api.example/v1/gacha/pity",
+		"https://api.example/v1/gacha/history?limit=20&before=41",
+		"https://api.example/v1/gacha/pull",
+		"https://api.example/v1/gacha/pull",
+		"https://api.example/v1/wallet/convert",
+	])
+	assert_eq(JSON.parse_string(sent[1]["body"]), {"kind": "weekly", "task_id": "cycle_a", "period": "2026-10-05"})
+	assert_eq(JSON.parse_string(sent[5]["body"]), {"banner_id": "character:oath_01_aveline", "pull_count": 10.0})
+	assert_eq(JSON.parse_string(sent[6]["body"]), {"banner_id": "hall_of_armaments", "pull_count": 1.0, "target_id": "weapon_fadyme_signature"})
+	assert_eq(JSON.parse_string(sent[7]["body"]), {"count": 2.0})
+	for index: int in [0, 2, 3, 4]:
+		assert_eq(_header(sent[index], "Idempotency-Key"), "", "reads carry no idempotency key")
+	for index: int in [1, 5, 6, 7]:
+		assert_ne(_header(sent[index], "Idempotency-Key"), "", "mutations do")

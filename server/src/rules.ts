@@ -16,6 +16,7 @@ import { AccessoryRoller } from "./engine/accessories";
 import { BattleService } from "./engine/battle/service";
 import { loadPacks, type ContentRegistry, type PackName } from "./engine/content";
 import { Equipment } from "./engine/equipment";
+import { GachaRules } from "./engine/gacha";
 import { LootResolver } from "./engine/loot";
 import { Progression } from "./engine/progression";
 import { QuestProgress } from "./engine/quests";
@@ -46,6 +47,7 @@ export const battleService = once(() => BattleService.create(contentRegistry(), 
 export const equipmentRules = once(() => new Equipment(contentRegistry()));
 export const accessoryRoller = once(() => new AccessoryRoller(contentRegistry().accessories));
 export const progression = once(() => Progression.create(contentRegistry()));
+export const gachaRules = once(() => new GachaRules(economy, characters, weapons));
 export const questProgress = once(() => new QuestProgress(economy as Record<string, unknown>, items as Record<string, unknown>));
 
 /** items_part1.json `stack_cap` per item id (items without an integer cap are unbounded). */
@@ -73,3 +75,12 @@ export function itemProgressionRule(key: string): string {
   if (typeof value !== "string" || !value) throw new Error(`items_part1.json progression_rules.${key} is missing`);
   return value;
 }
+
+/** economy_part1.json `currencies[fates_thread].token_conversion_cost`: Eclipse Tokens per Fate's Thread. */
+export const fateThreadTokenCost = once((): number => {
+  const currencies = (economy as { currencies?: unknown }).currencies;
+  const row = Array.isArray(currencies) ? (currencies as Record<string, unknown>[]).find((currency) => currency?.id === "fates_thread") : undefined;
+  const cost = Number(row?.token_conversion_cost);
+  if (!Number.isSafeInteger(cost) || cost <= 0) throw new Error("economy_part1.json fates_thread.token_conversion_cost is invalid");
+  return cost;
+});

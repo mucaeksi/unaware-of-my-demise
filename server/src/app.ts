@@ -25,6 +25,8 @@ import {
   setLocked,
   unequip,
 } from "./equipment";
+import { banners, convertToFateThreads, history, parsePullRequest, pity, pull } from "./gacha";
+import { pullFingerprint } from "./engine/gacha";
 import { claimQuest, parseQuestClaim, questStatus } from "./quest-claims";
 import { levelUp, parseXpItems, unlockMemoryNode, upgradeSkill } from "./progression";
 import { beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
@@ -43,6 +45,8 @@ export interface AppDeps {
   simulate?: Simulate | null;
   /** The server clock in UTC unix seconds (quest windows); defaults to the system clock. */
   nowUnix?: () => number;
+  /** The banner rotation launch instant; null/absent = undated development rotation (the first banner pair stays open). */
+  bannerEpoch?: Date | null;
 }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -87,17 +91,21 @@ async function mutate(
   endpoint: string,
   fingerprint: string,
   action: (tx: Db, accountId: string) => Promise<Record<string, unknown> | void>,
+  nowUnix: number,
 ): Promise<Response> {
   const accountId = await requireAccount(context);
   const key = idempotencyKey(context.request);
   const { response } = await runIdempotent(context.db, key, accountId, endpoint, fingerprint, async (tx) => {
     const extra = (await action(tx, accountId)) ?? {};
-    return { ...extra, state: await snapshot(tx, accountId) };
+    return { ...extra, state: await snapshot(tx, accountId, nowUnix) };
   });
   return json(response);
 }
 
 function routes(deps: AppDeps): Record<string, Handler> {
+  /** The server clock in whole UTC seconds (quest windows, Ration). */
+  const clock = (): number => Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
+  const mutateNow = (...args: [Context, string, string, (tx: Db, accountId: string) => Promise<Record<string, unknown> | void>]) => mutate(...args, clock());
   return {
     "GET /healthz": async ({ db }) => {
       await db.query("SELECT 1");
@@ -155,24 +163,24 @@ function routes(deps: AppDeps): Record<string, Handler> {
 
     "GET /v1/wallet": async (context) => {
       const accountId = await requireAccount(context);
-      const balances = await wallet(context.db, accountId);
+      const balances = await wallet(context.db, accountId, clock());
       if (balances === null) throw new ApiError(404, "ITEM_NOT_FOUND", "Wallet not found");
       return json(balances);
     },
 
     "GET /v1/state": async (context) => {
       const accountId = await requireAccount(context);
-      return json(await snapshot(context.db, accountId));
+      return json(await snapshot(context.db, accountId, clock()));
     },
 
     "POST /v1/story/advance": (context) =>
-      mutate(context, "story_advance", "", async (tx, accountId) => {
+      mutateNow(context, "story_advance", "", async (tx, accountId) => {
         await saveStoryState(tx, accountId, advance(await lockedStoryState(tx, accountId)));
       }),
 
     "POST /v1/story/first-oath": async (context) => {
       const characterId = requireString(await readJsonObject(context.request), "character_id", 64);
-      return mutate(context, "story_first_oath", characterId, async (tx, accountId) => {
+      return mutateNow(context, "story_first_oath", characterId, async (tx, accountId) => {
         await saveStoryState(tx, accountId, claimFirstOath(await lockedStoryState(tx, accountId), characterId));
         // The durable one-time record (LEGACY story_claims 'first_oath'); the hero joins the roster at level 1.
         await tx.query("INSERT INTO story_claims (account_id, claim_key, character_id) VALUES ($1, 'first_oath', $2)", [accountId, characterId]);
@@ -183,8 +191,9 @@ function routes(deps: AppDeps): Record<string, Handler> {
     "POST /v1/stages/:stage_id/attempts": async (context) => {
       const stageId = context.params.stage_id!;
       const roster = parseRoster(await readJsonObject(context.request));
-      return mutate(context, "stage_attempt", JSON.stringify([stageId, roster]), async (tx, accountId) => {
-        const attempt = await beginAttempt(tx, accountId, await lockedStoryState(tx, accountId), stageId, roster);
+      const now = clock();
+      return mutateNow(context, "stage_attempt", JSON.stringify([stageId, roster]), async (tx, accountId) => {
+        const attempt = await beginAttempt(tx, accountId, await lockedStoryState(tx, accountId), stageId, roster, now);
         return { attempt };
       });
     },
@@ -192,73 +201,102 @@ function routes(deps: AppDeps): Record<string, Handler> {
     "POST /v1/roster/:character_id/level-up": async (context) => {
       const characterId = context.params.character_id!;
       const items = parseXpItems(await readJsonObject(context.request));
-      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
-      return mutate(context, "roster_level_up", JSON.stringify([characterId, items]), async (tx, accountId) => ({
+      const now = clock();
+      return mutateNow(context, "roster_level_up", JSON.stringify([characterId, items]), async (tx, accountId) => ({
         ...(await levelUp(tx, accountId, characterId, items, now)),
       }));
     },
 
     "POST /v1/roster/:character_id/skills/:skill_id/upgrade": (context) => {
       const { character_id: characterId, skill_id: skillId } = context.params as { character_id: string; skill_id: string };
-      return mutate(context, "roster_skill_upgrade", JSON.stringify([characterId, skillId]), async (tx, accountId) => ({
+      return mutateNow(context, "roster_skill_upgrade", JSON.stringify([characterId, skillId]), async (tx, accountId) => ({
         ...(await upgradeSkill(tx, accountId, characterId, skillId)),
       }));
     },
 
     "POST /v1/roster/:character_id/memory-nodes": (context) => {
       const characterId = context.params.character_id!;
-      return mutate(context, "roster_memory_node", characterId, async (tx, accountId) => ({ ...(await unlockMemoryNode(tx, accountId, characterId)) }));
+      return mutateNow(context, "roster_memory_node", characterId, async (tx, accountId) => ({ ...(await unlockMemoryNode(tx, accountId, characterId)) }));
     },
 
     "POST /v1/inventory/:table/:instance_id/equip": async (context) => {
       const table = parseTable(context.params.table!);
       const instanceId = context.params.instance_id!;
       const characterId = parseCharacterId(await readJsonObject(context.request));
-      return mutate(context, "inventory_equip", JSON.stringify([table, instanceId, characterId]), (tx, accountId) => equip(tx, accountId, table, instanceId, characterId));
+      return mutateNow(context, "inventory_equip", JSON.stringify([table, instanceId, characterId]), (tx, accountId) => equip(tx, accountId, table, instanceId, characterId));
     },
 
     "POST /v1/inventory/:table/:instance_id/unequip": (context) => {
       const table = parseTable(context.params.table!);
       const instanceId = context.params.instance_id!;
-      return mutate(context, "inventory_unequip", JSON.stringify([table, instanceId]), (tx, accountId) => unequip(tx, accountId, table, instanceId));
+      return mutateNow(context, "inventory_unequip", JSON.stringify([table, instanceId]), (tx, accountId) => unequip(tx, accountId, table, instanceId));
     },
 
     "POST /v1/inventory/:table/:instance_id/lock": async (context) => {
       const table = parseTable(context.params.table!);
       const instanceId = context.params.instance_id!;
       const locked = parseLocked(await readJsonObject(context.request));
-      return mutate(context, "inventory_lock", JSON.stringify([table, instanceId, locked]), (tx, accountId) => setLocked(tx, accountId, table, instanceId, locked));
+      return mutateNow(context, "inventory_lock", JSON.stringify([table, instanceId, locked]), (tx, accountId) => setLocked(tx, accountId, table, instanceId, locked));
     },
 
     "POST /v1/inventory/inventory_weapons/:instance_id/dismantle": (context) => {
       const instanceId = context.params.instance_id!;
-      return mutate(context, "inventory_dismantle", instanceId, async (tx, accountId) => ({ ...(await dismantleWeapon(tx, accountId, instanceId)) }));
+      return mutateNow(context, "inventory_dismantle", instanceId, async (tx, accountId) => ({ ...(await dismantleWeapon(tx, accountId, instanceId)) }));
     },
 
     "POST /v1/inventory/:table/:instance_id/level-up": async (context) => {
       const table = parseTable(context.params.table!);
       const instanceId = context.params.instance_id!;
       const targetLevels = parseTargetLevels(await readJsonObject(context.request));
-      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
-      return mutate(context, "inventory_level_up", JSON.stringify([table, instanceId, targetLevels]), async (tx, accountId) => ({
+      const now = clock();
+      return mutateNow(context, "inventory_level_up", JSON.stringify([table, instanceId, targetLevels]), async (tx, accountId) => ({
         ...(await levelUpEquipment(tx, accountId, table, instanceId, targetLevels, now)),
       }));
     },
 
     "POST /v1/inventory/inventory_accessories/:instance_id/reroll": (context) => {
       const instanceId = context.params.instance_id!;
-      return mutate(context, "inventory_reroll", instanceId, (tx, accountId) => rerollAccessory(tx, accountId, instanceId));
+      return mutateNow(context, "inventory_reroll", instanceId, (tx, accountId) => rerollAccessory(tx, accountId, instanceId));
     },
 
     "GET /v1/quests/status": async (context) => {
       const accountId = await requireAccount(context);
-      return json(await questStatus(context.db, accountId, Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))())));
+      return json(await questStatus(context.db, accountId, clock()));
     },
 
     "POST /v1/quests/claim": async (context) => {
       const request = parseQuestClaim(await readJsonObject(context.request));
-      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
-      return mutate(context, "quest_claim", JSON.stringify(request), async (tx, accountId) => ({ ...(await claimQuest(tx, accountId, request, now)) }));
+      const now = clock();
+      return mutateNow(context, "quest_claim", JSON.stringify(request), async (tx, accountId) => ({ ...(await claimQuest(tx, accountId, request, now)) }));
+    },
+
+    "GET /v1/gacha/banners": async (context) => {
+      const accountId = await requireAccount(context);
+      return json(await banners(context.db, accountId, clock(), deps.bannerEpoch ?? null));
+    },
+
+    "GET /v1/gacha/pity": async (context) => {
+      const accountId = await requireAccount(context);
+      return json(await pity(context.db, accountId));
+    },
+
+    "GET /v1/gacha/history": async (context) => {
+      const accountId = await requireAccount(context);
+      return json(await history(context.db, accountId, new URL(context.request.url)));
+    },
+
+    "POST /v1/gacha/pull": async (context) => {
+      const request = parsePullRequest(await readJsonObject(context.request));
+      const now = clock();
+      return mutateNow(context, "gacha_pull", pullFingerprint(request.banner_id, request.pull_count, request.target_id), async (tx, accountId) => ({
+        pull: await pull(tx, accountId, request, now, deps.bannerEpoch ?? null),
+      }));
+    },
+
+    "POST /v1/wallet/convert": async (context) => {
+      const { count = 1 } = await readJsonObject(context.request);
+      if (typeof count !== "number" || !Number.isSafeInteger(count)) throw new ApiError(400, "INVALID_REQUEST", "count must be an integer");
+      return mutateNow(context, "wallet_convert", String(count), async (tx, accountId) => ({ ...(await convertToFateThreads(tx, accountId, count)) }));
     },
 
     "POST /v1/attempts/:attempt_id/victory": async (context) => {
@@ -267,8 +305,8 @@ function routes(deps: AppDeps): Record<string, Handler> {
       const client = parseClientResult(await readJsonObject(context.request));
       const simulate = deps.simulate;
       if (!simulate) throw new ApiError(503, "SERVICE_UNAVAILABLE", "Battle verification is not available");
-      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
-      return mutate(context, "stage_victory", JSON.stringify([attemptId, client]), async (tx, accountId) => {
+      const now = clock();
+      return mutateNow(context, "stage_victory", JSON.stringify([attemptId, client]), async (tx, accountId) => {
         const { victory, story, recruits } = await completeAttempt(tx, accountId, await lockedStoryState(tx, accountId), attemptId, client, simulate, now);
         await saveStoryState(tx, accountId, story);
         // Story recruits join the roster at level 1, like the First Oath pick.

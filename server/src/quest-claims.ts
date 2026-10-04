@@ -117,7 +117,14 @@ export async function questStatus(tx: Db, accountId: string, nowUnix: number) {
   for (const task of quests.dailyTasks()) daily.push(await status(task.task_id, task.target, scope.daily_cycle_id));
   const weekly: TaskStatus[] = [];
   for (const task of quests.weeklyTasks()) weekly.push(await status(task.task_id, task.target, weekId));
-  return { ...scope, claimed: await claimedKeys(tx, accountId, scope), mail: await mailbox(tx, accountId, nowUnix), daily_tasks: daily, weekly_tasks: weekly };
+  // A mail row carries the verified progress of its own week, so the client can tell a claimable one from an unfinished one.
+  const mail: (MailItem & { progress: number; target: number })[] = [];
+  for (const item of await mailbox(tx, accountId, nowUnix)) {
+    const task = quests.weeklyTasks().find((row) => row.segment_id === item.segment);
+    const target = task?.target ?? 0;
+    mail.push({ ...item, progress: task ? await progressOf(tx, accountId, task.task_id, weekOf(item.week_key).weekId) : 0, target });
+  }
+  return { ...scope, claimed: await claimedKeys(tx, accountId, scope), mail, daily_tasks: daily, weekly_tasks: weekly };
 }
 
 export interface QuestClaimRequest {

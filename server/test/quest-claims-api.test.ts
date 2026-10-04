@@ -109,7 +109,7 @@ describe("POST /v1/quests/claim", () => {
     expect((await claim(token, "weekly", "cycle_b", "2026-09-21")).body.error.message).toBe("That weekly reward is not in the mailbox (expired or not finished yet)");
     const status = await call(token, "GET", "/v1/quests/status");
     expect(status.body.claimed).toEqual(["weekly:2026-10-05:cycle_a"]);
-    expect(status.body.mail.find((item: { segment: string }) => item.segment === "cycle_b").claimed).toBe(true);
+    expect(status.body.mail.find((item: { segment: string }) => item.segment === "cycle_b")).toMatchObject({ claimed: true, progress: 5, target: 5 });
   });
 
   it("rejects malformed requests", async () => {

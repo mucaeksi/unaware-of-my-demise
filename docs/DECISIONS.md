@@ -16,7 +16,7 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   `.claude/` untouched.
 
 ## DEC-0001 — Production Worker name
-- Status: DECISION_REQUIRED
+- Status: ACCEPTED (owner, 2026-10-04: "Do the Recommend") — the Worker is `unaware-of-my-demise`
 - Facts: master prompt names `unaware-of-my-demise-api`; the only Worker in
   the Cloudflare account is `unaware-of-my-demise` (dash template, no
   bindings, no routes). Workers Builds trigger also targets
@@ -27,7 +27,8 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   unless the owner chooses otherwise.
 
 ## DEC-0002 — Neon Auth present on production
-- Status: DECISION_REQUIRED
+- Status: DONE (owner permission 2026-10-04) — Neon Auth disabled on `sweet-cake-52313810`;
+  the `neon_auth` schema and its 0 users are gone (`UOMD` listed no tables afterwards)
 - Facts: `neon_auth` schema with 9 tables exists in `UOMD` on branch
   `production`; 0 users. Master prompt forbids Neon Auth.
 - Recommendation: owner disables Neon Auth in the Neon console (Claude does
@@ -36,7 +37,19 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   `neon_auth`. Until disabled, it is inert.
 
 ## DEC-0003 — Canonical Worker deployment path
-- Status: PROPOSED
+- Status: ACCEPTED (owner, 2026-10-04: use the owner's Cloudflare account, delete what is not needed, create what is)
+- Done 2026-10-04:
+  - the "Hello world" template Worker `unaware-of-my-demise` was deleted through the Cloudflare API, which also drops
+    the orphaned Workers Builds binding;
+  - `wrangler deploy` from `server/` uploaded the game API under the same name: version
+    `097ca9db-15e6-4ed4-aba6-fa52adf91792`, with Hyperdrive `edbe90af…`, both rate limiters, and `GOOGLE_CLIENT_IDS` / `BANNER_EPOCH`
+    empty. No route and no workers.dev (`workers_dev: false`), so it is not reachable yet.
+  - The owner's Cloudflare credentials live only outside the repository and are never committed.
+- Pending:
+  1. apply `database/migrations` to Neon `UOMD` (OQ-012);
+  2. choose the public endpoint, a custom-domain route or workers.dev (OQ-013);
+  3. GitHub secret `CLOUDFLARE_API_TOKEN` + variable `CLOUDFLARE_ACCOUNT_ID` for CI deploys (OQ-003).
+- Original proposal:
 - Facts: no GitHub Actions; Cloudflare Workers Builds trigger is bound to the
   deleted repo id `1395495121` and all 6 builds failed.
 - Recommendation: **GitHub Actions is canonical** for Worker deploys
@@ -51,7 +64,7 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Until then deploy jobs are written but skipped when the secret is absent.
 
 ## DEC-0004 — Gemini model pinning per medium
-- Status: ACCEPTED (2026-10-03) — adopts LEGACY owner decision **C44**
+- Status: ACCEPTED (2026-10-03); generation work DEFERRED by the owner (2026-10-04) until the game foundation is complete — adopts LEGACY owner decision **C44**
   (2026-09-30), found in `LEGACY:narrative/…/canon.md`.
 - Images: `gemini-3.1-flash-image` (Nano Banana 2) at 2K — not Pro, not Lite.
 - Music (all tracks and stingers, except the owner's main theme):
@@ -61,7 +74,9 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - All three models verified present in this environment's Gemini model list.
 
 ## DEC-0005 — Repository license
-- Status: DECISION_REQUIRED (legal)
+- Status: ACCEPTED (owner, 2026-10-04: "Do the Recommend")
+- Action: the CCGS MIT text moved to `THIRD_PARTY_LICENSES/claude-code-game-studios-MIT.txt`. `THIRD_PARTY_NOTICE.md`
+  now scopes it to the `.claude/` tooling. The root `LICENSE` is now "All rights reserved" (proprietary).
 - Facts: root `LICENSE` is MIT, "Copyright (c) 2026 Donchitos", inherited from
   Claude Code Game Studios. At repo root it reads as licensing the whole game.
   `THIRD_PARTY_NOTICE.md` already attributes CCGS.
@@ -84,7 +99,8 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   only; no force pushes, no history rewrite.
 
 ## DEC-0008 — Primary migration source for the client
-- Status: PROPOSED (pending deep legacy audit)
+- Status: ACCEPTED (owner, 2026-10-04) — done in BATCH-0002. The Android application id is the LEGACY
+  `io.github.mucaeksi.unawareofmydemise` (`game/export_presets.cfg`; OQ-008 closed).
 - Facts: active `game/` is a broken generic starter (parse errors, corrupted
   scene, placeholder identity). LEGACY `game/` is a Godot 4.7.2 port with core
   domain, persistence, offline flow/screens, 319 GUT tests and a content
@@ -207,3 +223,26 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   - The battle engine gets a third implementation, so parity fixtures become
     the gate for every engine change.
   - CI must run the GDScript and TypeScript parity suites.
+
+## DEC-0014 — Ration (stamina): cap 100, server-side regeneration
+- Status: ACCEPTED (2026-10-04, owner): "Stamina ayarla, 100e sabitle, harcama ve yenileme mekaniğini bu sayıya göre
+  ayarlayacağız, ne çok hızlı bitecek ne de çok geç yenilenecek". Closes OQ-011.
+- Facts: LEGACY never deducted Ration (LEGACY_AUDIT §9.4). `economy_part1.json` authored cap 120, 1 unit / 360 s,
+  stage costs campaign 6 / material hunt 8 / gear dungeon 10 / special boss 10, `loss_on_failure: false`,
+  `daily_inn_meal: 30`, no token refill.
+- Decision:
+  - **Cap 100** (owner) and **1 unit every 300 s**: an empty meter refills in 8 h 20 min. Two to three sessions a day
+    each find a full or nearly full meter. Natural income is 288 Ration a day, about 48 campaign clears.
+  - Stage costs stay as authored. Each stage's own `stamina_cost` (6 for every campaign stage after the free 1-1)
+    is what is charged, so a full meter buys 16 campaign clears, about three story chapters.
+  - **Spent only by a verified victory** (`loss_on_failure: false`). Opening an attempt checks the balance (402
+    `INSUFFICIENT_FUNDS`) without spending it, and defeats or abandoned attempts cost nothing.
+  - Regeneration is computed on read: `wallet.ration` as of `wallet.ration_updated_at` (migration 0002), with no
+    timers. It stops at the cap; a surplus from future grants stays but does not grow. It restarts when a spend takes
+    the balance below the cap, and partial progress survives spends made below the cap.
+  - New accounts start full. The snapshot carries `ration {current, cap, regen_seconds_per_unit,
+    next_unit_at_utc, full_at_utc}` for the client meter.
+  - Not yet implemented: `daily_inn_meal` (+30 a day). Token refill stays disabled as authored.
+- Content change: `economy_part1.json` `ration.cap` 120 → 100 and `regen_seconds_per_unit` 360 → 300 (in both
+  places), with the MANIFEST sha256 updated.
+

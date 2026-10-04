@@ -12,7 +12,7 @@ Statuses follow the master prompt vocabulary.
 | `CLAUDE.md` | project rules | current | — | — | ACTIVE |
 | `README.md` | project overview | current target description | — | — | ACTIVE |
 | `GAME_TOOLCHAIN.md` | toolchain pin | Godot 4.7.2, API 36 | — | LEGACY uses minSdk 28 / target 36 | ACTIVE |
-| `LICENSE` | MIT (Donchitos, CCGS) | at root | — | — | DECISION_REQUIRED (DEC-0005) |
+| `LICENSE` | Proprietary, all rights reserved (CCGS MIT moved to `THIRD_PARTY_LICENSES/`) | at root | — | — | DONE (DEC-0005) |
 | `THIRD_PARTY_NOTICE.md` | CCGS attribution | current | — | — | ACTIVE |
 | `UOMD_FRAMEWORK_MANIFEST.md` | framework manifest | current | — | — | ACTIVE |
 | `project.yaml` | CCGS config | stage "Technical Setup", gdUnit4 test command | — | — | ACTIVE (test cmd references missing addon) |
