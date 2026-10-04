@@ -530,3 +530,15 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   game data (`content_update_required`), the client signs in, fetches the current release, installs it and reloads the
   content; if a release was already mounted in this process it asks for a restart instead (cumulative packs are never
   layered). Nothing is mounted while a battle runs.
+
+## DEC-0033 — The admin panel: a separate Worker behind Cloudflare Access, audited in the same transaction
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-033/034). Activation waits on owner decision D-11.
+- Decision: replace the starter admin (shared `x-admin-token`, endpoints that never existed in the Worker) with a
+  separate admin Worker (`server/wrangler.admin.jsonc`) serving the static Next.js panel and the admin API on one origin
+  (a same-origin BFF: no CORS, no token in the browser). Cloudflare Access signs operators in; the API verifies the
+  Access JWT on every request and maps the e-mail to a role in `admin_users` (viewer, support, operator). Reads of
+  player data are audited; changes require a reason, an Idempotency-Key and a same-origin JSON request, and their audit
+  row commits in the same transaction (append-only `admin_audit`, migration 0008). The game Worker exposes nothing
+  administrative; there is no production grant endpoint.
+- Why not the admin panel's own login: Access gives SSO/one-time PIN and MFA without the project storing operator
+  credentials, and is free at this team size.
