@@ -2,7 +2,7 @@
 // progression numbers of every hero (xp_to_next and level_up_silver_crowns are -1 at the level cap).
 import { toSafeInt, type Db } from "./db";
 import { isoUtcSeconds } from "./engine/quests";
-import { currentRation } from "./ration";
+import { currentRation, innMealAvailable, rationRules } from "./ration";
 import { progression } from "./rules";
 
 export const SNAPSHOT_SCHEMA_VERSION = 1;
@@ -94,5 +94,6 @@ async function rationSection(db: Db, accountId: string, nowUnix: number): Promis
     regen_seconds_per_unit: ration.regen_seconds_per_unit,
     next_unit_at_utc: iso(ration.next_unit_at_unix),
     full_at_utc: iso(ration.full_at_unix),
+    inn_meal: { amount: rationRules().daily_inn_meal, available: await innMealAvailable(db, accountId, nowUnix) },
   };
 }

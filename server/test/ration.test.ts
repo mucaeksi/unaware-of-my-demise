@@ -1,13 +1,13 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createApp } from "../src/app";
 import type { IdentityVerifier } from "../src/identity";
-import { rationRules, regenerate, status } from "../src/ration";
+import { innMealKey, rationRules, regenerate, status } from "../src/ration";
 import type { SimulatedBattle } from "../src/stages";
 import { loadFixture } from "./engine/fixtures";
 import { createTestDatabase, type TestDatabase } from "./db";
 
 describe("Ration rules (owner decision: cap 100)", () => {
-  const rules = { cap: 100, regen_seconds_per_unit: 300 };
+  const rules = { cap: 100, regen_seconds_per_unit: 300, daily_inn_meal: 30 };
 
   it("comes from economy_part1.json", () => {
     expect(rationRules()).toEqual(rules);
@@ -101,5 +101,24 @@ describe("Ration through the stage flow", () => {
     now += 300;
     expect((await call(token, "POST", "/v1/stages/1-4/attempts", { roster: ROSTER })).status, "one regenerated unit later it opens").toBe(200);
     expect((await call(token, "POST", "/v1/stages/1-1/attempts", { roster: [] })).status).toBe(200);
+  });
+
+  it("grants the Inn Meal once per UTC day, above the cap if need be", async () => {
+    const { token, accountId } = await playerAt("1-4");
+    await database.pool.query("UPDATE wallet SET ration = 40, ration_updated_at = to_timestamp($2) WHERE account_id = $1", [accountId, now]);
+    expect((await call(token, "GET", "/v1/state")).body.ration.inn_meal).toEqual({ amount: 30, available: true });
+    const meal = await call(token, "POST", "/v1/ration/inn-meal");
+    expect(meal.status).toBe(200);
+    expect(meal.body).toMatchObject({ claim_key: innMealKey(now), already_claimed: false, ration_granted: 30 });
+    expect(meal.body.state.ration).toMatchObject({ current: 70, inn_meal: { available: false } });
+    const again = await call(token, "POST", "/v1/ration/inn-meal");
+    expect(again.body, "a second meal the same day grants nothing").toMatchObject({ already_claimed: true, ration_granted: 0 });
+    expect(again.body.state.ration.current).toBe(70);
+
+    now += 86400; // the next UTC day
+    await database.pool.query("UPDATE wallet SET ration = 90, ration_updated_at = to_timestamp($2) WHERE account_id = $1", [accountId, now]);
+    expect((await call(token, "GET", "/v1/state")).body.ration.inn_meal.available).toBe(true);
+    const full = await call(token, "POST", "/v1/ration/inn-meal");
+    expect(full.body.state.ration, "the surplus stays and regeneration pauses").toMatchObject({ current: 120, next_unit_at_utc: null, full_at_utc: null });
   });
 });

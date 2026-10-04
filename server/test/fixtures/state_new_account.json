@@ -25,7 +25,11 @@
     "cap": 100,
     "regen_seconds_per_unit": 300,
     "next_unit_at_utc": null,
-    "full_at_utc": null
+    "full_at_utc": null,
+    "inn_meal": {
+      "amount": 30,
+      "available": true
+    }
   },
   "items": {},
   "roster": {

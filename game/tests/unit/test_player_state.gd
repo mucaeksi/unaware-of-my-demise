@@ -118,6 +118,10 @@ func test_the_servers_new_account_snapshot_is_accepted() -> void:
 		"identical to the client's new_player_state")
 	assert_eq(state.roster_ids(), ["fadyme", "mahmut"] as Array[String])
 	assert_eq(state.wallet()["silver_crowns"], 0)
+	assert_eq(state.inn_meal_amount(), 30, "a new player can take today's Inn Meal")
+	var eaten: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(path))
+	eaten["ration"]["inn_meal"]["available"] = false
+	assert_eq(PlayerState.from_snapshot(eaten, _flow.rules.story).inn_meal_amount(), 0)
 
 
 func test_without_a_server_the_boot_fails_offline_and_holds_no_state() -> void:

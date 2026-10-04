@@ -21,6 +21,7 @@ const HUB_TEAM: String = "team"
 const HUB_INVENTORY: String = "inventory"
 const HUB_SUMMON: String = "summon"
 const HUB_QUESTS: String = "quests"
+const HUB_INN_MEAL: String = "inn_meal"
 const HUB_SETTINGS: String = "settings"
 const HUB_DIAGNOSTICS: String = "diagnostics"
 
@@ -122,6 +123,9 @@ func _present_hub(status: String = "") -> void:
 		{"id": HUB_QUESTS, "label": "Quests"},
 		{"id": HUB_SETTINGS, "label": "Settings"},
 	]
+	var meal: int = flow.state.inn_meal_amount()
+	if meal > 0:
+		entries.insert(1, {"id": HUB_INN_MEAL, "label": "Inn Meal (+%d Ration)" % meal})
 	if OS.is_debug_build():
 		entries.append({"id": HUB_DIAGNOSTICS, "label": "Diagnostics"})
 	var hub: HubScreen = HubScreen.new()
@@ -142,6 +146,8 @@ func _on_hub_chosen(entry_id: String) -> void:
 			_present_gacha()
 		HUB_QUESTS:
 			_present_quests()
+		HUB_INN_MEAL:
+			_claim_inn_meal()
 		HUB_SETTINGS:
 			_present_settings()
 		HUB_DIAGNOSTICS:
@@ -528,6 +534,15 @@ func _claim_quest(screen: QuestsScreen, kind: String, task_id: String, period: S
 	else:
 		status = _problem_text(result)
 	_present_quests(selected, status)
+
+
+func _claim_inn_meal() -> void:
+	var result: Outcome = await flow.claim_inn_meal()
+	if not result.is_ok():
+		_present_hub(_problem_text(result))
+		return
+	var granted: int = int((result.value as Dictionary).get("ration_granted", 0))
+	_present_hub("The inn serves a hot meal: +%d Ration." % granted if granted > 0 else "Today's meal is already eaten.")
 
 
 func _present_settings(status: String = "") -> void:

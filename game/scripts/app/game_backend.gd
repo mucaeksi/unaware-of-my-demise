@@ -120,3 +120,8 @@ func gacha_pull(_banner_id: String, _pull_count: int, _target_id: String = "") -
 ## Eclipse Tokens -> `count` Fate's Threads at the authored rate. `value`: {"state", "fate_threads_gained", "eclipse_tokens_spent"}.
 func convert_fate_threads(_count: int) -> Outcome:
 	return _offline()
+
+
+## Today's Inn Meal (DEC-0014): Ration once per UTC day. `value`: {"state", "claim_key", "already_claimed", "ration_granted"}.
+func claim_inn_meal() -> Outcome:
+	return _offline()

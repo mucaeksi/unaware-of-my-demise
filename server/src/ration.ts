@@ -12,16 +12,19 @@ import { questProgress } from "./rules";
 export interface RationRules {
   cap: number;
   regen_seconds_per_unit: number;
+  /** Ration the once-a-day Inn Meal grants (`daily_inn_meal`; 0 = none). */
+  daily_inn_meal: number;
 }
 
 export function rationRules(): RationRules {
   const ration = questProgress().economyPack().ration as Record<string, unknown> | undefined;
   const cap = Number(ration?.cap);
   const regen = Number(ration?.regen_seconds_per_unit);
-  if (!Number.isSafeInteger(cap) || cap <= 0 || !Number.isSafeInteger(regen) || regen <= 0) {
-    throw new Error("economy_part1.json ration.cap / regen_seconds_per_unit are invalid");
+  const meal = Number(ration?.daily_inn_meal ?? 0);
+  if (!Number.isSafeInteger(cap) || cap <= 0 || !Number.isSafeInteger(regen) || regen <= 0 || !Number.isSafeInteger(meal) || meal < 0) {
+    throw new Error("economy_part1.json ration.cap / regen_seconds_per_unit / daily_inn_meal are invalid");
   }
-  return { cap, regen_seconds_per_unit: regen };
+  return { cap, regen_seconds_per_unit: regen, daily_inn_meal: meal };
 }
 
 export interface RationState {
@@ -88,4 +91,41 @@ export async function spendRation(tx: Db, accountId: string, cost: number, nowUn
   const anchor = now.ration >= rules.cap ? nowUnix : now.anchor_unix;
   await tx.query("UPDATE wallet SET ration = $2, ration_updated_at = to_timestamp($3) WHERE account_id = $1", [accountId, ration, anchor]);
   return status({ ration, anchor_unix: anchor }, rules);
+}
+
+/** The `quest_claims` key of the Inn Meal of the UTC day containing `nowUnix` ("inn_meal:YYYY-MM-DD"). */
+export function innMealKey(nowUnix: number): string {
+  return `inn_meal:${new Date(Math.floor(nowUnix / 86400) * 86400 * 1000).toISOString().slice(0, 10)}`;
+}
+
+/** Whether today's Inn Meal is still unclaimed (always false when the content authors no meal). */
+export async function innMealAvailable(db: Db, accountId: string, nowUnix: number): Promise<boolean> {
+  if (rationRules().daily_inn_meal <= 0) return false;
+  const { rowCount } = await db.query("SELECT 1 FROM quest_claims WHERE account_id = $1 AND claim_key = $2", [accountId, innMealKey(nowUnix)]);
+  return rowCount === 0;
+}
+
+export interface InnMealResult {
+  claim_key: string;
+  already_claimed: boolean;
+  ration_granted: number;
+}
+
+/**
+ * The daily Inn Meal (DEC-0014): `daily_inn_meal` Ration once per UTC day of the server clock, recorded in `quest_claims`
+ * (a repeat the same day grants nothing and says so). Like any grant it may lift the balance above the cap; regeneration
+ * then pauses until spending takes it below the cap again. Runs inside the caller's transaction (account row locked).
+ */
+export async function claimInnMeal(tx: Db, accountId: string, nowUnix: number): Promise<InnMealResult> {
+  const rules = rationRules();
+  if (rules.daily_inn_meal <= 0) throw new ApiError(409, "CONFLICT", "There is no Inn Meal");
+  const key = innMealKey(nowUnix);
+  const done = await tx.query("SELECT 1 FROM quest_claims WHERE account_id = $1 AND claim_key = $2", [accountId, key]);
+  if (done.rowCount !== 0) return { claim_key: key, already_claimed: true, ration_granted: 0 };
+  const now = await currentRation(tx, accountId, nowUnix);
+  const ration = now.ration + rules.daily_inn_meal;
+  const anchor = ration >= rules.cap ? nowUnix : now.anchor_unix;
+  await tx.query("UPDATE wallet SET ration = $2, ration_updated_at = to_timestamp($3) WHERE account_id = $1", [accountId, ration, anchor]);
+  await tx.query("INSERT INTO quest_claims (account_id, claim_key, granted_json) VALUES ($1, $2, $3)", [accountId, key, JSON.stringify({ ration: rules.daily_inn_meal })]);
+  return { claim_key: key, already_claimed: false, ration_granted: rules.daily_inn_meal };
 }
