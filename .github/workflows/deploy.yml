@@ -6,7 +6,10 @@
 # when it does not look like OAuth client IDs, the Worker deploys with sign-in answering 503.
 # Release identity (INF-004/INF-008): the Worker is told the commit it was built from (RELEASE_SOURCE_SHA, reported by
 # GET /v1/bootstrap and checked after the deploy), and an automatic deploy of a commit older than the one already live
-# (a CI run that finished late) is skipped instead of rolling production back. A manual run deploys what it is given.
+# (a CI run that finished late) is skipped instead of rolling production back.
+# A manual run (INF-008, docs/runbooks/ROLLBACK.md) deploys the commit in its source_sha input, or the selected branch's
+# head. The commit must be on main and have passed CI; deploying one older than the live commit is a rollback and needs
+# a reason, which the run records in its summary (the run itself is the rollback record).
 name: Deploy
 
 on:
@@ -15,9 +18,20 @@ on:
     types: [completed]
     branches: [main]
   workflow_dispatch:
+    inputs:
+      source_sha:
+        description: "Commit to deploy (full SHA on main). Empty: the selected branch's head."
+        required: false
+        default: ""
+      reason:
+        description: "Why (required when the commit is older than the live one: a rollback)."
+        required: false
+        default: ""
 
 permissions:
   contents: read
+  # The manual-run check that the commit passed CI.
+  actions: read
 
 concurrency:
   group: deploy-production
@@ -35,7 +49,8 @@ jobs:
       # Client IDs are public: the repository variable is the usual home; a secret of the same name also works.
       GOOGLE_CLIENT_IDS: ${{ vars.GOOGLE_CLIENT_IDS || secrets.GOOGLE_CLIENT_IDS }}
       # The commit this run deploys; the Worker reports it as source_sha.
-      SOURCE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+      SOURCE_SHA: ${{ github.event.workflow_run.head_sha || inputs.source_sha || github.sha }}
+      DEPLOY_REASON: ${{ inputs.reason }}
       # The public API endpoint (the client's uomd/online/server_url).
       PRODUCTION_URL: https://unaware-of-my-demise.muratcaneksiii.workers.dev
     steps:
@@ -69,6 +84,16 @@ jobs:
           ref: ${{ env.SOURCE_SHA }}
           # Full history: the order check below compares commits.
           fetch-depth: 0
+      - name: A manual run deploys a tested commit of main
+        if: steps.config.outputs.ready == 'true' && github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          printf '%s' "${SOURCE_SHA}" | grep -Eq '^[0-9a-f]{40}$' || { echo "::error::source_sha must be a full 40-character commit SHA"; exit 1; }
+          git merge-base --is-ancestor "${SOURCE_SHA}" origin/main || { echo "::error::${SOURCE_SHA} is not on main"; exit 1; }
+          passed="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs?head_sha=${SOURCE_SHA}&status=success&per_page=1" --jq '.total_count')"
+          [ "${passed:-0}" -gt 0 ] || { echo "::error::CI has not passed for ${SOURCE_SHA}"; exit 1; }
+          echo "${SOURCE_SHA} is on main and passed CI"
       - name: Never roll production back automatically
         id: order
         if: steps.config.outputs.ready == 'true'
@@ -78,7 +103,16 @@ jobs:
           echo "live: ${live:-unknown}; this run: ${SOURCE_SHA}"
           if [ -n "${live}" ] && [ "${live}" != "${SOURCE_SHA}" ] && git merge-base --is-ancestor "${SOURCE_SHA}" "${live}" 2>/dev/null; then
             if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-              echo "::warning::Manual deploy of ${SOURCE_SHA}, older than the live ${live}: this is a rollback"
+              [ -n "${DEPLOY_REASON}" ] || { echo "::error::${SOURCE_SHA} is older than the live ${live}: a rollback needs the reason input"; exit 1; }
+              echo "::warning::Rollback from ${live} to ${SOURCE_SHA}: ${DEPLOY_REASON}"
+              {
+                echo "## Rollback"
+                echo "- from: \`${live}\`"
+                echo "- to: \`${SOURCE_SHA}\`"
+                echo "- by: ${GITHUB_ACTOR}"
+                echo "- reason: ${DEPLOY_REASON}"
+                echo "- migrations stay applied (additive, DEC-0020); migrate.sh warns that the database is ahead of this code."
+              } >> "${GITHUB_STEP_SUMMARY}"
             else
               echo "::warning::Skipped: ${SOURCE_SHA} is older than the live ${live} (a late CI completion must not roll production back)"
               echo "deploy=false" >> "${GITHUB_OUTPUT}"

@@ -75,5 +75,19 @@ wait "${holder}" 2>/dev/null || true
 rm -r "${probe}"
 [[ "$(psql "${ops_url}" -X -At -c "SELECT count(*) FROM schema_migrations")" == "${count}" ]] || { echo "the failed migration was recorded" >&2; exit 1; }
 echo "ok lock timeout"
+
+# The integrity check (verify.sh, INF-011): journaled balances pass; an account older than the journal is counted, not
+# checked; a balance changed behind the journal's back (triggers off) fails it.
+psql "${ops_url}" -X -q -v ON_ERROR_STOP=1 \
+  -c "SET session_replication_role = replica; INSERT INTO account (account_id, created_at) VALUES ('acct_000000000000000000000000000000a1', '2000-01-01'); INSERT INTO wallet (account_id, ration, fate_threads) VALUES ('acct_000000000000000000000000000000a1', 1, 99)" \
+  -c "RESET session_replication_role; INSERT INTO account (account_id) VALUES ('acct_000000000000000000000000000000a2'); INSERT INTO wallet (account_id, ration, fate_threads, silver_crowns) VALUES ('acct_000000000000000000000000000000a2', 1, 10, 5); UPDATE wallet SET fate_threads = 3 WHERE account_id = 'acct_000000000000000000000000000000a2'; INSERT INTO inventory_items (account_id, item_id, quantity) VALUES ('acct_000000000000000000000000000000a2', 'rivet', 4)"
+verified="$(DATABASE_URL="${ops_url}" "${here}/verify.sh")" || { echo "verify.sh failed a consistent database" >&2; exit 1; }
+grep -qx "integrity ok" <<<"${verified}" || { echo "verify.sh did not report integrity ok" >&2; exit 1; }
+grep -qx "accounts_checked_against_journal: 1" <<<"${verified}" || { echo "verify.sh checked an account older than the journal" >&2; exit 1; }
+psql "${ops_url}" -X -q -v ON_ERROR_STOP=1 -c "SET session_replication_role = replica; UPDATE wallet SET silver_crowns = 500 WHERE account_id = 'acct_000000000000000000000000000000a2'; UPDATE inventory_items SET quantity = 9 WHERE account_id = 'acct_000000000000000000000000000000a2'"
+if DATABASE_URL="${ops_url}" "${here}/verify.sh" >/dev/null 2>&1; then echo "verify.sh accepted a balance the journal does not explain" >&2; exit 1; fi
+mismatches="$(DATABASE_URL="${ops_url}" "${here}/verify.sh" 2>&1 >/dev/null || true)"
+[[ "$(grep -c "journal mismatch" <<<"${mismatches}")" == "2" ]] || { echo "verify.sh did not name both mismatches" >&2; exit 1; }
+echo "ok integrity check"
 psql "${ADMIN_DATABASE_URL}" -X -q -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${ops}' AND pid <> pg_backend_pid()" >/dev/null
 psql "${ADMIN_DATABASE_URL}" -X -q -c "DROP DATABASE ${ops}"

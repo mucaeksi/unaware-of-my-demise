@@ -15,12 +15,11 @@ Worker runtime secrets (e.g. JWT signing key, admin session secret) are set
 with `wrangler secret put` / the Cloudflare dashboard — **not** as GitHub
 secrets, and never in `wrangler.toml`.
 
-## Neon (migrations) — optional
+## Neon (migrations, restore drill)
 
-Migrations run through a gated workflow job against a Neon branch connection
-string stored as secret `NEON_MIGRATION_DATABASE_URL`. Production migrations
-require manual approval (GitHub environment `production`). Never seed
-production.
+| Name | Kind | Purpose |
+|---|---|---|
+| `DATABASE_URL` | secret | production Neon connection string. `deploy.yml` applies migrations with it; `restore-drill.yml` dumps production read-only over the direct (non-pooled) host derived from it. Both skip with a warning when it is absent. Never seed or reset production. |
 
 ## Android debug APK (CI job `android`, DEC-0016)
 
