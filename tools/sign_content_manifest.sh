@@ -3,7 +3,7 @@
 #
 # Usage: CONTENT_SIGNING_KEY="$(secret PEM)" tools/sign_content_manifest.sh <manifest.json>
 # Writes <manifest.json>.sig: RSA PKCS#1 v1.5 over SHA-256 of the exact manifest bytes (what ContentManifest verifies).
-# The private key comes only from the environment (GitHub secret CONTENT_SIGNING_KEY, environment production); it is
+# The private key comes only from the environment (GitHub repository secret CONTENT_SIGNING_KEY); it is
 # written to a private temporary file for openssl and removed on exit. The manifest's key_id must name a public key
 # committed at game/data/keys/<key_id>.pem (UOMD_KEYS_DIR overrides the directory, for tests), and that key must verify
 # the new signature, or nothing is published.

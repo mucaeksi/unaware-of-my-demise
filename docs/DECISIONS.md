@@ -482,8 +482,8 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Decision: a content release is described by a manifest (`tools/content_release.py`: schema, channel, release id,
   monotonic generation, app versionCode range, base pack SHA-256, rules hash, key id, packs in mount order with
   SHA-256 and size) and signed with RSA (3072-bit) PKCS#1 v1.5 over SHA-256 of the exact bytes
-  (`tools/sign_content_manifest.sh`, `openssl dgst -sha256 -sign`). The private key exists only as the GitHub secret
-  `CONTENT_SIGNING_KEY` (environment `production`); the public key ships in the app as `res://data/keys/<key_id>.pem`,
+  (`tools/sign_content_manifest.sh`, `openssl dgst -sha256 -sign`). The private key exists only as the GitHub repository secret
+  `CONTENT_SIGNING_KEY`; the public key ships in the app as `res://data/keys/<key_id>.pem`,
   which a patch cannot change (DEC-0028). The client (`ContentManifest.verify`) trusts a manifest only with a valid
   signature from a shipped key, for its own versionCode, and with a generation newer than the installed one (replay of an
   old manifest is refused; a rollback is published as a new generation pointing at older packs).
@@ -504,3 +504,15 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   No credential or URL that bypasses the Worker is ever embedded in the app or a pack.
 - Rejected: presigned R2 URLs handed to clients (would need R2 S3 credentials in the Worker for little gain at this
   scale); a public bucket.
+
+## DEC-0031 — Publishing content: cumulative packs, immutable objects, pointer last
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-030). First run waits on owner decision D-09.
+- Decision: `.github/workflows/publish-content.yml` (manual: channel, base commit of the installed app, versionCode
+  range, reason) rebuilds the app's base pack from its commit (byte-reproducible, DEC-0028), builds one cumulative patch
+  of everything since that base (never a chain of deltas: a device mounts exactly one pack over the app, and a rollback
+  is a new generation built from an older commit), validates content, signs the manifest (generation = current + 1),
+  uploads `packs/<sha256>.pck` (content-addressed; an existing one must read back identical), then
+  `manifests/<channel>/<generation>.json(.sig)` (refused if it exists), reads every object back byte for byte, writes an
+  append-only `history/<channel>/<generation>.json` (actor, reason, commit, base, run link) and only then moves
+  `channels/<channel>/current.json(.sig)`. Default channel: staging.
+- Not decided here: automatic promotion from staging to production after device tests (manual for now).
