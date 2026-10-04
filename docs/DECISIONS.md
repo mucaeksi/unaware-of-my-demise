@@ -207,3 +207,26 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   - The battle engine gets a third implementation, so parity fixtures become
     the gate for every engine change.
   - CI must run the GDScript and TypeScript parity suites.
+
+## DEC-0014 — Ration (stamina): cap 100, server-side regeneration
+- Status: ACCEPTED (2026-10-04, owner): "Stamina ayarla, 100e sabitle, harcama ve yenileme mekaniğini bu sayıya göre
+  ayarlayacağız, ne çok hızlı bitecek ne de çok geç yenilenecek". Closes OQ-011.
+- Facts: LEGACY never deducted Ration (LEGACY_AUDIT §9.4). `economy_part1.json` authored cap 120, 1 unit / 360 s,
+  stage costs campaign 6 / material hunt 8 / gear dungeon 10 / special boss 10, `loss_on_failure: false`,
+  `daily_inn_meal: 30`, no token refill.
+- Decision:
+  - **Cap 100** (owner) and **1 unit every 300 s**: an empty meter refills in 8 h 20 min. Two to three sessions a day
+    each find a full or nearly full meter. Natural income is 288 Ration a day, about 48 campaign clears.
+  - Stage costs stay as authored. Each stage's own `stamina_cost` (6 for every campaign stage after the free 1-1)
+    is what is charged, so a full meter buys 16 campaign clears, about three story chapters.
+  - **Spent only by a verified victory** (`loss_on_failure: false`). Opening an attempt checks the balance (402
+    `INSUFFICIENT_FUNDS`) without spending it, and defeats or abandoned attempts cost nothing.
+  - Regeneration is computed on read: `wallet.ration` as of `wallet.ration_updated_at` (migration 0002), with no
+    timers. It stops at the cap; a surplus from future grants stays but does not grow. It restarts when a spend takes
+    the balance below the cap, and partial progress survives spends made below the cap.
+  - New accounts start full. The snapshot carries `ration {current, cap, regen_seconds_per_unit,
+    next_unit_at_utc, full_at_utc}` for the client meter.
+  - Not yet implemented: `daily_inn_meal` (+30 a day). Token refill stays disabled as authored.
+- Content change: `economy_part1.json` `ration.cap` 120 → 100 and `regen_seconds_per_unit` 360 → 300 (in both
+  places), with the MANIFEST sha256 updated.
+

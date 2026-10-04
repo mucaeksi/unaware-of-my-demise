@@ -320,7 +320,7 @@ func _name_of(character_id: String) -> String:
 ## The line a failed server call shows: the rule that refused it, the lost connection, or a generic one for anything unexpected (the detail
 ## goes to the log).
 func _problem_text(outcome: Outcome) -> String:
-	if outcome.error_kind in [Outcome.PROGRESSION, Outcome.EQUIPMENT, GameBackend.KIND_OFFLINE]:
+	if outcome.error_kind in [Outcome.PROGRESSION, Outcome.EQUIPMENT, GameBackend.KIND_OFFLINE, GameBackend.KIND_INSUFFICIENT_FUNDS]:
 		return outcome.error
 	push_warning("Service call failed (%s): %s" % [outcome.error_kind, outcome.error])
 	return GENERIC_PROBLEM

@@ -9,6 +9,8 @@ extends RefCounted
 ## and test doubles override the methods.
 
 const KIND_OFFLINE: String = "offline"
+## The server refused for lack of a currency (Ration for a stage, Fate's Threads for a pull); its message says which.
+const KIND_INSUFFICIENT_FUNDS: String = "insufficient_funds"
 
 
 func _offline() -> Outcome:

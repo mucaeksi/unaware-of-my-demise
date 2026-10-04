@@ -17,8 +17,15 @@
     "eclipse_tokens": 0,
     "fate_threads": 0,
     "silver_crowns": 0,
-    "ration": 0,
+    "ration": 100,
     "account_xp": 0
+  },
+  "ration": {
+    "current": 100,
+    "cap": 100,
+    "regen_seconds_per_unit": 300,
+    "next_unit_at_utc": null,
+    "full_at_utc": null
   },
   "items": {},
   "roster": {

@@ -1,5 +1,6 @@
 // Accounts, sign-in nonces, sessions and profiles (LEGACY server/repository.py, server/app.py auth routes).
 import { randomChoice, randomHex, randomUrlSafe, sha256Hex } from "./crypto";
+import { rationRules } from "./ration";
 import { newStoryState } from "./story";
 import type { Db } from "./db";
 
@@ -47,7 +48,8 @@ export async function createAccount(db: Db, provider: string, subjectHash: strin
   const accountId = `acct_${randomHex(16)}`;
   await db.query("INSERT INTO account (account_id) VALUES ($1)", [accountId]);
   await db.query("INSERT INTO provider_links (provider, subject_hash, account_id) VALUES ($1, $2, $3)", [provider, subjectHash, accountId]);
-  await db.query("INSERT INTO wallet (account_id) VALUES ($1)", [accountId]);
+  // A new player starts with a full Ration meter.
+  await db.query("INSERT INTO wallet (account_id, ration) VALUES ($1, $2)", [accountId, rationRules().cap]);
   const story = newStoryState();
   await db.query("INSERT INTO story_state (account_id, state) VALUES ($1, $2)", [accountId, JSON.stringify(story)]);
   for (const characterId of story.owned_character_ids) {

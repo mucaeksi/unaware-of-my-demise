@@ -4,6 +4,7 @@ import { toSafeInt, type Db } from "./db";
 import { ApiError, invalid } from "./http";
 import { CpythonRandom } from "./engine/random";
 import { StoryError, type PersistedStoryState, type PlayerStoryState } from "./engine/story";
+import { requireRation, spendRation } from "./ration";
 import { applyRewards, recordBattleVictory, type AppliedReward } from "./rewards";
 import { battleService, contentRegistry, lootResolver, questProgress, stackCaps, storyRules } from "./rules";
 
@@ -118,7 +119,7 @@ export interface AttemptStart {
  * Opens an attempt at `stageId`: the stage must be the story's current entry or one already cleared, the First Oath must
  * be resolved, and the roster must be legal for the stage. Any older open attempt of the account expires.
  */
-export async function beginAttempt(tx: Db, accountId: string, persisted: PersistedStoryState, stageId: string, roster: string[]): Promise<AttemptStart> {
+export async function beginAttempt(tx: Db, accountId: string, persisted: PersistedStoryState, stageId: string, roster: string[], nowUnix: number): Promise<AttemptStart> {
   const stage = contentRegistry().stages.get(stageId);
   if (!stage) throw new ApiError(404, "ITEM_NOT_FOUND", `Unknown stage '${stageId}'`);
   const rules = storyRules();
@@ -132,6 +133,8 @@ export async function beginAttempt(tx: Db, accountId: string, persisted: Persist
     if (error instanceof StoryError) throw invalid(error.message);
     throw error;
   }
+  // Ration is checked here but spent only by the verified victory (`loss_on_failure: false`).
+  await requireRation(tx, accountId, stage.stamina_cost, nowUnix);
   const inputs: AttemptInputs = {
     owned_character_ids: [...state.owned_character_ids].sort(),
     ...(await battleInputs(tx, accountId, state.owned_character_ids)),
@@ -249,6 +252,7 @@ export async function completeAttempt(
   const simulated = simulate(attempt);
   if (simulated.outcome !== "victory") throw conflict("The battle result could not be verified");
 
+  await spendRation(tx, accountId, stage.stamina_cost, nowUnix);
   const isFirstClear = !state.completed_stage_ids.has(stage.stage_id);
   const rewardSeed = newRewardSeed();
   const rewards = await lootResolver().resolveBattleRewards(
