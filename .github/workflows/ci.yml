@@ -129,7 +129,17 @@ jobs:
           config_dir="${HOME}/.config/godot"
           mkdir -p "${config_dir}"
           if [ -n "${ANDROID_DEBUG_KEYSTORE_BASE64}" ]; then
-            printf '%s' "${ANDROID_DEBUG_KEYSTORE_BASE64}" | base64 -d > "${config_dir}/debug.keystore"
+            # Whitespace and line breaks from copying are dropped; anything else must be base64. The value is never printed.
+            value="$(printf '%s' "${ANDROID_DEBUG_KEYSTORE_BASE64}" | tr -d '[:space:]')"
+            if ! printf '%s' "${value}" | grep -Eq '^[A-Za-z0-9+/]+={0,2}$'; then
+              echo "::error::secret ANDROID_DEBUG_KEYSTORE_BASE64 (${#value} characters) contains characters outside base64, e.g. the shell prompt pasted after the value; paste only the output of base64 -w0"
+              exit 1
+            fi
+            printf '%s' "${value}" | base64 -d > "${config_dir}/debug.keystore"
+            # The export signs with alias androiddebugkey and password android (game/tools/build_android_debug.sh).
+            keytool -list -keystore "${config_dir}/debug.keystore" -storepass android -alias androiddebugkey >/dev/null \
+              || { echo "::error::the keystore in ANDROID_DEBUG_KEYSTORE_BASE64 has no alias androiddebugkey with password android"; exit 1; }
+            keytool -list -v -keystore "${config_dir}/debug.keystore" -storepass android -alias androiddebugkey | grep -E "SHA1:"
           else
             echo "::warning::secret ANDROID_DEBUG_KEYSTORE_BASE64 is not set: the APK is signed with a throwaway key and Google sign-in will not work on a device"
           fi
