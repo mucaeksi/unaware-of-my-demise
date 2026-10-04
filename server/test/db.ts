@@ -7,9 +7,25 @@ import type { DbConnection } from "../src/db";
 
 const MIGRATIONS = join(import.meta.dirname, "..", "..", "database", "migrations");
 
+/**
+ * Only a disposable server is accepted (INF-010): a local socket or loopback host, never a Neon host. Another host needs
+ * TEST_DATABASE_ALLOW_REMOTE=1, an explicit statement that it is a throwaway server.
+ */
+export function assertDisposableServer(url: string, allowRemote = process.env.TEST_DATABASE_ALLOW_REMOTE === "1"): void {
+  const parsed = new URL(url);
+  const host = parsed.hostname.replace(/^\[|\]$/g, "");
+  if (/(^|\.)neon\.(tech|build)$/i.test(host)) throw new Error(`refusing to run tests against ${host}: Neon is never a test server`);
+  const socket = (parsed.searchParams.get("host") ?? "").startsWith("/");
+  const loopback = ["", "localhost", "127.0.0.1", "::1"].includes(host);
+  if (!socket && !loopback && !allowRemote) {
+    throw new Error(`refusing to run tests against ${host}: set TEST_DATABASE_ALLOW_REMOTE=1 if it is a disposable server`);
+  }
+}
+
 function adminUrl(): string {
   const url = process.env.TEST_ADMIN_DATABASE_URL;
   if (!url) throw new Error("TEST_ADMIN_DATABASE_URL is not set (a disposable PostgreSQL maintenance database)");
+  assertDisposableServer(url);
   return url;
 }
 
@@ -36,11 +52,18 @@ export interface TestDatabase {
 }
 
 export async function createTestDatabase(): Promise<TestDatabase> {
-  const name = `uomd_api_test_${process.pid}_${Date.now()}`;
+  const name = `uomd_api_test_${process.pid}_${Date.now()}_${Math.floor(Math.random() * 1e6)}`;
   await admin(`CREATE DATABASE ${name}`);
   const pool = new pg.Pool({ connectionString: withDatabase(adminUrl(), name), max: 4 });
-  for (const file of readdirSync(MIGRATIONS).filter((f) => /^\d{4}_.*\.sql$/.test(f)).sort()) {
-    await pool.query(readFileSync(join(MIGRATIONS, file), "utf8"));
+  try {
+    for (const file of readdirSync(MIGRATIONS).filter((f) => /^\d{4}_.*\.sql$/.test(f)).sort()) {
+      await pool.query(readFileSync(join(MIGRATIONS, file), "utf8"));
+    }
+  } catch (error) {
+    // A failed setup must not leave the database behind.
+    await pool.end().catch(() => undefined);
+    await admin(`DROP DATABASE IF EXISTS ${name}`).catch(() => undefined);
+    throw error;
   }
   return {
     pool,

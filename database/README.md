@@ -26,4 +26,9 @@ from the LEGACY schemas; `docs/LEGACY_AUDIT.md` §9 has the provenance.
   - It creates the disposable database `uomd_schema_test`, migrates it, runs
     the constraint tests, checks the edited-migration guard, then drops the
     database.
-  - Use a local or CI Postgres only.
+  - Use a local or CI Postgres only. Both test tools refuse a Neon host and
+    any non-loopback host unless `TEST_DATABASE_ALLOW_REMOTE=1`, and drop their
+    databases even when a test fails.
+- `POSTGRES_MAJOR`: the production PostgreSQL major (Neon project
+  `pg_version`, 18). CI runs its services on that major and checks it; the
+  deploy warns when production differs.

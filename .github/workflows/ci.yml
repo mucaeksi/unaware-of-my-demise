@@ -18,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:16
+        # The production major (database/POSTGRES_MAJOR, Neon project pg_version); the first step checks they agree.
+        image: postgres:18
         # Throwaway CI database, not a secret.
         env:
           POSTGRES_PASSWORD: postgres
@@ -27,6 +28,12 @@ jobs:
           --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
     steps:
       - uses: actions/checkout@v4
+      - name: The test server runs the production PostgreSQL major
+        run: |
+          expected="$(tr -d '[:space:]' < database/POSTGRES_MAJOR)"
+          actual="$(psql postgresql://postgres:postgres@localhost:5432/postgres -At -c "SELECT current_setting('server_version_num')::int / 10000")"
+          echo "server major ${actual}, production major ${expected}"
+          [ "${actual}" = "${expected}" ] || { echo "::error::CI runs PostgreSQL ${actual}, production runs ${expected} (database/POSTGRES_MAJOR)"; exit 1; }
       - name: Migrations and constraint tests
         env:
           ADMIN_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
@@ -36,7 +43,8 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:16
+        # The production major (database/POSTGRES_MAJOR, Neon project pg_version); the first step checks they agree.
+        image: postgres:18
         env:
           POSTGRES_PASSWORD: postgres
         ports: ["5432:5432"]

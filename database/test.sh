@@ -6,6 +6,18 @@ set -euo pipefail
 : "${ADMIN_DATABASE_URL:?set ADMIN_DATABASE_URL to the maintenance database of a disposable server}"
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 db=uomd_schema_test
+ops=uomd_schema_ops
+# Only a disposable server (INF-010): a local socket or loopback host, never Neon; another host needs TEST_DATABASE_ALLOW_REMOTE=1.
+host="$(sed -E 's#^postgres(ql)?://([^@/]*@)?(\[[^]]*\]|[^:/?]*).*#\3#' <<<"${ADMIN_DATABASE_URL}")"
+grep -Eq '[?&]host=/' <<<"${ADMIN_DATABASE_URL}" && host=""
+if grep -Eiq '(^|\.)neon\.(tech|build)$' <<<"${host}"; then echo "refusing to run tests against ${host}: Neon is never a test server" >&2; exit 2; fi
+case "${host}" in
+  ""|localhost|127.0.0.1|"[::1]") ;;
+  *) [[ "${TEST_DATABASE_ALLOW_REMOTE:-}" == "1" ]] || { echo "refusing to run tests against ${host}: set TEST_DATABASE_ALLOW_REMOTE=1 if it is a disposable server" >&2; exit 2; } ;;
+esac
+# The test databases go away whatever happens.
+cleanup() { psql "${ADMIN_DATABASE_URL}" -X -q -c "DROP DATABASE IF EXISTS ${db} WITH (FORCE)" -c "DROP DATABASE IF EXISTS ${ops} WITH (FORCE)" >/dev/null 2>&1 || true; }
+trap cleanup EXIT
 export PGOPTIONS="${PGOPTIONS:-} -c client_min_messages=warning"
 psql "${ADMIN_DATABASE_URL}" -X -q -v ON_ERROR_STOP=1 -c "DROP DATABASE IF EXISTS ${db}" -c "CREATE DATABASE ${db}"
 test_url="$(sed -E "s#^(postgres(ql)?://[^/?]*)/[^?]*#\1/${db}#" <<<"${ADMIN_DATABASE_URL}")"
@@ -22,7 +34,6 @@ echo "ok edited-migration guard"
 psql "${ADMIN_DATABASE_URL}" -X -q -c "DROP DATABASE ${db}"
 
 # Runner safety (INF-009) on a second disposable database.
-ops=uomd_schema_ops
 ops_url="$(sed -E "s#^(postgres(ql)?://[^/?]*)/[^?]*#\1/${ops}#" <<<"${ADMIN_DATABASE_URL}")"
 psql "${ADMIN_DATABASE_URL}" -X -q -v ON_ERROR_STOP=1 -c "DROP DATABASE IF EXISTS ${ops}" -c "CREATE DATABASE ${ops}"
 count="$(find "${here}/migrations" -name '[0-9][0-9][0-9][0-9]_*.sql' | wc -l)"
