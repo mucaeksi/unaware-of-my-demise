@@ -135,7 +135,10 @@ jobs:
               echo "::error::secret ANDROID_DEBUG_KEYSTORE_BASE64 (${#value} characters) contains characters outside base64, e.g. the shell prompt pasted after the value; paste only the output of base64 -w0"
               exit 1
             fi
-            printf '%s' "${value}" | base64 -d > "${config_dir}/debug.keystore"
+            if ! printf '%s' "${value}" | base64 -d > "${config_dir}/debug.keystore" 2>/dev/null; then
+              echo "::error::secret ANDROID_DEBUG_KEYSTORE_BASE64 does not decode: ${#value} characters (remainder $(( ${#value} % 4 )) after dividing by 4; a complete value has remainder 0), so part of it is missing; copy the whole base64 -w0 output again"
+              exit 1
+            fi
             # The export signs with alias androiddebugkey and password android (game/tools/build_android_debug.sh).
             keytool -list -keystore "${config_dir}/debug.keystore" -storepass android -alias androiddebugkey >/dev/null \
               || { echo "::error::the keystore in ANDROID_DEBUG_KEYSTORE_BASE64 has no alias androiddebugkey with password android"; exit 1; }
