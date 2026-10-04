@@ -13,6 +13,7 @@ import { transaction, type Connect, type Db } from "./db";
 import { idempotencyKey, runIdempotent } from "./idempotency";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
+import { levelUp, parseXpItems, unlockMemoryNode, upgradeSkill } from "./progression";
 import { beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
 import { snapshot, wallet } from "./state";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
@@ -173,6 +174,27 @@ function routes(deps: AppDeps): Record<string, Handler> {
         const attempt = await beginAttempt(tx, accountId, await lockedStoryState(tx, accountId), stageId, roster);
         return { attempt };
       });
+    },
+
+    "POST /v1/roster/:character_id/level-up": async (context) => {
+      const characterId = context.params.character_id!;
+      const items = parseXpItems(await readJsonObject(context.request));
+      const now = Math.floor((deps.nowUnix ?? (() => Date.now() / 1000))());
+      return mutate(context, "roster_level_up", JSON.stringify([characterId, items]), async (tx, accountId) => ({
+        ...(await levelUp(tx, accountId, characterId, items, now)),
+      }));
+    },
+
+    "POST /v1/roster/:character_id/skills/:skill_id/upgrade": (context) => {
+      const { character_id: characterId, skill_id: skillId } = context.params as { character_id: string; skill_id: string };
+      return mutate(context, "roster_skill_upgrade", JSON.stringify([characterId, skillId]), async (tx, accountId) => ({
+        ...(await upgradeSkill(tx, accountId, characterId, skillId)),
+      }));
+    },
+
+    "POST /v1/roster/:character_id/memory-nodes": (context) => {
+      const characterId = context.params.character_id!;
+      return mutate(context, "roster_memory_node", characterId, async (tx, accountId) => ({ ...(await unlockMemoryNode(tx, accountId, characterId)) }));
     },
 
     "POST /v1/attempts/:attempt_id/victory": async (context) => {

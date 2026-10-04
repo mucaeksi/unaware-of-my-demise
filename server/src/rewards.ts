@@ -103,8 +103,18 @@ async function loadProgress(tx: Db, accountId: string, cycleId: number): Promise
   return Object.fromEntries(rows.map((row) => [row.task_id, row.progress]));
 }
 
-/** `record_quest_event`: the daily tasks under the half-day cycle, the active weekly segment's task under its week. */
-export async function recordQuestEvent(tx: Db, quests: QuestProgress, accountId: string, nowUnix: number, event: keyof typeof EVENT_OBJECTIVES): Promise<void> {
+/**
+ * `record_quest_event`: the daily tasks under the half-day cycle and, with `weekly`, the active weekly segment's task under
+ * its week (LEGACY level-ups record the daily bucket only).
+ */
+export async function recordQuestEvent(
+  tx: Db,
+  quests: QuestProgress,
+  accountId: string,
+  nowUnix: number,
+  event: keyof typeof EVENT_OBJECTIVES,
+  weekly = true,
+): Promise<void> {
   const persist = async (tasks: QuestTask[], bucket: number, segment: string | null): Promise<void> => {
     const before = await loadProgress(tx, accountId, bucket);
     const after = quests.applyEvent(before, tasks, event, 1, segment);
@@ -118,6 +128,7 @@ export async function recordQuestEvent(tx: Db, quests: QuestProgress, accountId:
     }
   };
   await persist(quests.dailyTasks(), halfDayWindow(nowUnix).cycle_id, null);
+  if (!weekly) return;
   const [weekId, segmentId] = weeklyCycleKey(nowUnix);
   await persist(quests.weeklyTasks(), weekId, segmentId);
 }

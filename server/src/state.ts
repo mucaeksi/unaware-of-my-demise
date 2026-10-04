@@ -1,7 +1,7 @@
-// The player snapshot the client renders (game/scripts/app/player_state.gd, DEC-0012). Derived progression numbers
-// (xp_to_next, level_cap, level_up_silver_crowns) arrive with the progression port; until then the client uses its
-// documented defaults for them.
+// The player snapshot the client renders (game/scripts/app/player_state.gd, DEC-0012), including the derived
+// progression numbers of every hero (xp_to_next and level_up_silver_crowns are -1 at the level cap).
 import { toSafeInt, type Db } from "./db";
+import { progression } from "./rules";
 
 export const SNAPSHOT_SCHEMA_VERSION = 1;
 
@@ -42,7 +42,18 @@ export async function snapshot(db: Db, accountId: string): Promise<Record<string
     "SELECT character_id, level, xp, ascension, memory_shards, memory_nodes FROM roster WHERE account_id = $1 ORDER BY character_id",
     [accountId],
   );
-  for (const { character_id, ...progress } of rosterRows.rows) roster[character_id] = { ...progress, skill_ranks: {} };
+  const rules = progression();
+  const cap = rules.characterLevelCap();
+  for (const { character_id, ...progress } of rosterRows.rows) {
+    const level = toSafeInt(progress.level);
+    roster[character_id] = {
+      ...progress,
+      xp_to_next: level < cap ? rules.xpToNext(level) : -1,
+      level_cap: cap,
+      level_up_silver_crowns: level < cap ? rules.levelUpSilverCrownsCost(level) : -1,
+      skill_ranks: {},
+    };
+  }
   const rankRows = await db.query<{ character_id: string; skill_id: string; rank: number }>(
     "SELECT character_id, skill_id, rank FROM skill_ranks WHERE account_id = $1",
     [accountId],

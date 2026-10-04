@@ -115,16 +115,16 @@ func submit_victory(attempt_id: String, client_result: Dictionary) -> Outcome:
 	return await _call(HTTPClient.METHOD_POST, "/v1/attempts/%s/victory" % attempt_id.uri_encode(), client_result, true)
 
 
-func level_up(_character_id: String, _items: Dictionary) -> Outcome:
-	return _unsupported()
+func level_up(character_id: String, items: Dictionary) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/roster/%s/level-up" % character_id.uri_encode(), {"items": items}, true)
 
 
-func upgrade_skill(_character_id: String, _skill_id: String) -> Outcome:
-	return _unsupported()
+func upgrade_skill(character_id: String, skill_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/roster/%s/skills/%s/upgrade" % [character_id.uri_encode(), skill_id.uri_encode()], null, true)
 
 
-func unlock_memory_node(_character_id: String) -> Outcome:
-	return _unsupported()
+func unlock_memory_node(character_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/roster/%s/memory-nodes" % character_id.uri_encode(), null, true)
 
 
 func equip(_table: String, _instance_id: String, _character_id: String) -> Outcome:

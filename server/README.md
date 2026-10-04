@@ -18,6 +18,9 @@ server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
 | `POST /v1/story/first-oath` | Takes `{character_id}` and claims the one-time First Oath hero from the manifest's selector pool. The claim is recorded in `story_claims` and the hero joins the roster. |
 | `POST /v1/stages/{stage_id}/attempts` | Takes `{roster}` and opens a battle attempt. The stage must be the story's current entry or one already cleared; the First Oath must be resolved; the roster must be legal (`StoryRules.resolveBattleRoster`). The server freezes the player's build and owned heroes, picks a CSPRNG seed below 2^53 and answers `{attempt: {attempt_id, stage_id, run_seed}, state}`. Older open attempts expire. |
 | `POST /v1/attempts/{attempt_id}/victory` | Takes the client's `{outcome: "victory", stars, actions, cycles}` (informational) and re-runs the attempt with the bundled battle engine. Only the server's own victory pays, in one transaction (docs/LEGACY_AUDIT.md 9.4): loot from a fresh reward seed, the first-clear claim ledger, the reward writes, quest events for Ration-costing wins, story rewards and recruits, and the cursor on a first clear. Answers `{applied, first_clear, result, state}`; a run that does not verify gets 409. |
+| `POST /v1/roster/{character_id}/level-up` | Takes `{items: {xp_item_id: count}}` and applies every affordable level (LEGACY `level_up_character`): Character XP from Chronicle items, Silver Crowns per level, ascension gates (account level, gate items, ascension Crowns). An unpaid step stops leveling with `stopped_reason` and keeps the XP. A level gained counts the `successful_level_up` daily task. |
+| `POST /v1/roster/{character_id}/skills/{skill_id}/upgrade` | Raises one skill rank for its character level, Silver Crowns and item cost (draft_v1). |
+| `POST /v1/roster/{character_id}/memory-nodes` | Unlocks the hero's next Memory Node with that hero's Memory Shards. |
 
 Mutating routes require a UUIDv4 `Idempotency-Key`. Each request is one transaction that locks the account row, so a
 retried request replays its stored response, and a key reused for another account, endpoint or body gets 409. Mutating
@@ -25,7 +28,7 @@ routes answer `{"state": <snapshot>}`, the client's `GameBackend` contract. The 
 Python reference walk in `parity/fixtures/story_flow.json`.
 
 Errors use the shape `{"error": {"code", "message"}}`. The codes are `UNAUTHORIZED`, `INVALID_REQUEST`, `RATE_LIMITED`,
-`SERVICE_UNAVAILABLE`, `CONFLICT`, `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
+`SERVICE_UNAVAILABLE`, `CONFLICT`, `PROGRESSION` (409, a progression request the rules refuse; the client shows the message), `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
 
 Security properties:
 - The Google `sub` and the session tokens are stored only as SHA-256 hashes.
@@ -35,7 +38,7 @@ Security properties:
 
 ## Next
 
-Not implemented yet: progression (level up, skills, Memory Nodes), equipment management, gacha, quest status and
+Not implemented yet: equipment management (equip, lock, dismantle, level, reroll), gacha, quest status and
 claims, Ration, billing, ads and social. They go through the same `mutate` helper in `src/app.ts`.
 
 ## Commands
