@@ -200,15 +200,15 @@ See `docs/DRIVE_LEGACY_ACCESS.md` (DRIVE_ACCESS_STATUS).
 
 | # | Observation | Severity | Action |
 |---|---|---|---|
-| S1 | `server/src/index.ts` falls back to JWT secret `"dev"` when `JWT_SECRET` is unset | HIGH | fix in Worker rewrite; never deploy as-is |
+| S1 | `server/src/index.ts` falls back to JWT secret `"dev"` when `JWT_SECRET` is unset | HIGH | **RESOLVED 2026-10-04**: starter server removed; the Worker uses opaque hashed sessions, no JWT secret |
 | S2 | Admin auth = single shared `x-admin-token`, non-constant-time compare, actor logged as `"admin"` | HIGH | RBAC + per-admin identity (roadmap) |
-| S3 | `gacha_draws.request_id` is globally unique and lookup is not scoped by player → another player's draw result can be returned for a reused UUID | HIGH | scope idempotency key by player |
-| S4 | No rate limiting on auth/gacha/admin | HIGH | Worker rate limiting |
+| S3 | `gacha_draws.request_id` is globally unique and lookup is not scoped by player → another player's draw result can be returned for a reused UUID | HIGH | **RESOLVED (schema)**: starter table removed; `idempotency_keys` stores account + endpoint + fingerprint and a mismatch is a conflict (LEGACY model) |
+| S4 | No rate limiting on auth/gacha/admin | HIGH | **RESOLVED (API)**: Workers rate-limit bindings, auth 20/min, API 240/min per IP; admin API not built yet |
 | S5 | `/content/:file` and manifest served unsigned from local disk | MEDIUM | signed manifest + R2 |
 | S6 | LEGACY Drive contains a folder named `narrative/.secrets` | HIGH (owner) | contents deliberately NOT read; owner should verify nothing sensitive is stored in Drive |
 | S6b | LEGACY Drive folder link-shared to `anyone` as **writer** | CRITICAL (owner) | restrict sharing (OQ-000) |
 | S7 | Neon `production` branch not protected | MEDIUM | owner toggle |
-| S8 | Gemini runtime code in backend (`server/src/ai.ts`) | MEDIUM | remove with Worker rewrite |
+| S8 | Gemini runtime code in backend (`server/src/ai.ts`) | MEDIUM | **RESOLVED 2026-10-04**: removed with the starter server |
 
 No secrets were found committed in the current repository tree
 (`.env.example` contains placeholders only).

@@ -19,6 +19,3 @@ from the LEGACY schemas; `docs/LEGACY_AUDIT.md` §9 has the provenance.
     the constraint tests, checks the edited-migration guard, then drops the
     database.
   - Use a local or CI Postgres only.
-- `seed/001_demo.sql` and `migrations/001_init.sql`: starter leftovers. They
-  are non-canon, and they are removed together with the starter `server/`
-  when the Worker replaces it.

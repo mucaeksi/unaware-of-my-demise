@@ -9,9 +9,9 @@ Task: Worker API + Neon schema (DEC-0013)
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
 **Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR → `main`, merge regularly)
-**Current task:** LEGACY server audited (`docs/LEGACY_AUDIT.md` §9), DEC-0013 accepted (TS Worker port, server battle re-simulation)
-**Next step:** PostgreSQL migration `database/migrations/` translating LEGACY `backend/_schema.py` + `server/schema.py` (+ `stage_attempts`), then Worker skeleton (auth nonce/google, sessions, idempotency, `GET /v1/state` snapshot per `player_state.gd`)
-**Blocked on:** nothing
+**Current task:** Worker skeleton merged (auth/session/account/wallet/state, vitest 16/16) + `database/0001_baseline.sql` (tests pass locally)
+**Next step:** CI workflow (Postgres service: database/test.sh, server check/test/build, Godot import+GUT); then idempotency module + first mutating route (`POST /v1/story/advance`) and `OnlineBackend` in GDScript
+**Blocked on:** nothing (deploy needs owner: Google OAuth client id → `GOOGLE_CLIENT_IDS`, `CLOUDFLARE_API_TOKEN` secret, DEC-0003)
 **Files in progress:** none
 **Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-001…004, 006, 008 open; OQ-000/005 closed — do not remind)
 <!-- /CHECKPOINT -->
