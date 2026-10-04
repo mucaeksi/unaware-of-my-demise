@@ -16,8 +16,8 @@ export interface DbConnection extends Db {
 export type Connect = () => Promise<DbConnection>;
 
 /** Runs `fn` in one transaction: COMMIT on success, ROLLBACK on any error (rethrown). */
-export async function transaction<T>(db: Db, fn: (tx: Db) => Promise<T>): Promise<T> {
-  await db.query("BEGIN");
+export async function transaction<T>(db: Db, fn: (tx: Db) => Promise<T>, begin = "BEGIN"): Promise<T> {
+  await db.query(begin);
   try {
     const result = await fn(db);
     await db.query("COMMIT");
@@ -27,6 +27,13 @@ export async function transaction<T>(db: Db, fn: (tx: Db) => Promise<T>): Promis
     throw error;
   }
 }
+
+/**
+ * Runs the reads of `fn` against one consistent view of the database (INF-012): a read-only REPEATABLE READ transaction
+ * sees every table as of its first query, so a snapshot never mixes data from before and after a concurrent mutation.
+ */
+export const consistentRead = <T>(db: Db, fn: (tx: Db) => Promise<T>): Promise<T> =>
+  transaction(db, fn, "BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY");
 
 /** pg returns BIGINT as a string; balances must stay exact integers. */
 export function toSafeInt(value: unknown): number {

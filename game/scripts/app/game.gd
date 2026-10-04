@@ -32,7 +32,8 @@ func boot(backend: GameBackend = null) -> bool:
 	return await attach(GameFlow.create(), backend)
 
 
-## Adopts a content-loaded flow, connects it to `backend` (null = `Online.backend()`) and fetches the player's snapshot (coroutine).
+## Adopts a content-loaded flow, connects it to `backend` (null = `Online.backend()`), checks the server's release contract
+## (`ClientRelease`) and fetches the player's snapshot (coroutine).
 func attach(new_flow: GameFlow, backend: GameBackend = null) -> bool:
 	flow = null
 	boot_error = ""
@@ -41,6 +42,14 @@ func attach(new_flow: GameFlow, backend: GameBackend = null) -> bool:
 		boot_error = new_flow.error
 		return false
 	new_flow.backend = backend if backend != null else Online.backend()
+	# The release gate first (INF-003): an outdated build or a server in maintenance stops here, before any player state is read.
+	var gate: Outcome = await new_flow.backend.fetch_bootstrap()
+	if gate.is_ok() and gate.value != null:
+		gate = ClientRelease.check(gate.value, ClientRelease.local_rules_hash())
+	if not gate.is_ok():
+		boot_error = gate.error
+		boot_error_kind = gate.error_kind
+		return false
 	var synced: Outcome = await new_flow.sync()
 	if not synced.is_ok():
 		boot_error = synced.error

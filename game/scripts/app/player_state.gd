@@ -4,6 +4,7 @@ extends RefCounted
 ## the screens read from here, every change goes through `GameBackend` and comes back as a new snapshot.
 ##
 ## Snapshot shape (JSON object, versioned by "schema_version"):
+##   state_revision  the account's change counter: +1 per committed server mutation (absent = -1, from test doubles)
 ##   story_state  the `StoryState.to_persisted_dict` form (cursor, completed stages, owned heroes, First Oath)
 ##   wallet       {"silver_crowns", "eclipse_tokens", "account_xp", ...} ints
 ##   items        {item_id: quantity}
@@ -50,6 +51,11 @@ func is_valid() -> bool:
 func _section(name: String) -> Dictionary:
 	var value: Variant = _data.get(name)
 	return value if value is Dictionary else {}
+
+
+## The account's state revision (INF-012); -1 when the snapshot carries none.
+func revision() -> int:
+	return int(_data.get("state_revision", -1))
 
 
 func wallet() -> Dictionary:

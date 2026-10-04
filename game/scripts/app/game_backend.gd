@@ -17,6 +17,12 @@ func _offline() -> Outcome:
 	return Outcome.fail(KIND_OFFLINE, "The game server cannot be reached.")
 
 
+## The server's release contract (`GET /v1/bootstrap`, judged by `ClientRelease.check`), asked at boot before anything else. `value`
+## null = this backend has no contract to check (this "no server" base and test doubles); its other calls decide.
+func fetch_bootstrap() -> Outcome:
+	return Outcome.ok(null)
+
+
 ## The player's current snapshot (`value["state"]`).
 func fetch_state() -> Outcome:
 	return _offline()

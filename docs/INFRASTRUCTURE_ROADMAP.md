@@ -12,7 +12,7 @@ Tarih: 2026-10-04. Başlangıç: `main@bdd3e19e395f73f7c2bdff5966e20a74ae986123`
 ## Durum
 
 Durumlar: TODO / IN_PROGRESS / VERIFIED / BLOCKED. VERIFIED yalnız komut/artifact/cihaz/yayın kanıtıyla yazılır.
-Listede olmayan INF kimlikleri **TODO**'dur. İlk dilimin kararı: DEC-0015. Yerel kanıt (2026-10-04): vitest 388/388,
+Listede olmayan INF kimlikleri **TODO**'dur. İlk dilimin kararı: DEC-0015. Yerel kanıt (2026-10-04): vitest 389/389,
 GUT 259/259, `database/test.sh` 0001–0003 ok; iki yeni regresyon testi (tutarlı snapshot, eski revision) düzeltme
 olmadan başarısız görüldü.
 

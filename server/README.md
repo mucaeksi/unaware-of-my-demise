@@ -11,11 +11,12 @@ server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
 | Route | Purpose |
 |---|---|
 | `GET /healthz` | Liveness check, including a database round trip. |
+| `GET /v1/bootstrap` | The release contract (INF-003, `src/release.ts`), unauthenticated and outside the update/maintenance gate: `{api_version, snapshot_schema_version, min_client_version_code, rules_hash, source_sha, maintenance: {active, message}, server_time_utc}`. `rules_hash` is the SHA-256 of `"<file> <sha256>\n"` lines of the rules packs in `game/data/content/MANIFEST.json`; the client (`game/scripts/app/client_release.gd`) refuses to play on any mismatch. |
 | `POST /v1/auth/nonce` | Issues a single-use sign-in nonce, valid for 300 s. |
 | `POST /v1/auth/google` | Verifies a Google ID token (signature, issuer, audience, expiry), then consumes its nonce. Creates the account on the first sign-in and returns an opaque session token valid for 3600 s. |
 | `GET /v1/account` | Returns the profile: friend code, nickname, avatar, badge, presence opt-in. |
-| `GET /v1/wallet` | Returns the currency balances. |
-| `GET /v1/state` | Returns the player snapshot the Godot client renders (`game/scripts/app/player_state.gd`). |
+| `GET /v1/wallet` | Returns the currency balances (one consistent read). |
+| `GET /v1/state` | Returns the player snapshot the Godot client renders (`game/scripts/app/player_state.gd`), read in one `REPEATABLE READ READ ONLY` transaction so it never mixes states from before and after a concurrent mutation. `state_revision` grows by one with every committed mutation of the account (migration 0003); the client never adopts a lower one. |
 | `POST /v1/story/advance` | Moves the story past the current narrative entry. A stage entry, the end of the story and a pending First Oath are refused with 409. |
 | `POST /v1/story/first-oath` | Takes `{character_id}` and claims the one-time First Oath hero from the manifest's selector pool. The claim is recorded in `story_claims` and the hero joins the roster. |
 | `POST /v1/stages/{stage_id}/attempts` | Takes `{roster}` and opens a battle attempt. The stage must be the story's current entry or one already cleared; the First Oath must be resolved; the roster must be legal (`StoryRules.resolveBattleRoster`). The server freezes the player's build and owned heroes, checks the stage's Ration cost (402 `INSUFFICIENT_FUNDS`, nothing spent), picks a CSPRNG seed below 2^53 and answers `{attempt: {attempt_id, stage_id, run_seed}, state}`. Older open attempts expire. |
@@ -43,7 +44,11 @@ retried request replays its stored response, and a key reused for another accoun
 routes answer `{"state": <snapshot>}`, the client's `GameBackend` contract. The story rules are checked against the
 Python reference walk in `parity/fixtures/story_flow.json`.
 
-Errors use the shape `{"error": {"code", "message"}}`. The codes are `UNAUTHORIZED`, `INVALID_REQUEST`, `INSUFFICIENT_FUNDS` (402, Ration or Fate's Threads), `RATE_LIMITED`,
+Every route except `/healthz` and `/v1/bootstrap` passes the release gate first: a request whose `X-Client-Version-Code`
+is below `MIN_CLIENT_VERSION_CODE` gets 426 `UPDATE_REQUIRED` (the header is optional; the Godot client always sends
+it), and a non-empty `MAINTENANCE_MESSAGE` answers 503 `MAINTENANCE` with that message.
+
+Errors use the shape `{"error": {"code", "message"}}`. The codes are `UPDATE_REQUIRED` (426), `MAINTENANCE` (503), `UNAUTHORIZED`, `INVALID_REQUEST`, `INSUFFICIENT_FUNDS` (402, Ration or Fate's Threads), `RATE_LIMITED`,
 `SERVICE_UNAVAILABLE`, `CONFLICT`, `PROGRESSION` and `EQUIPMENT` (409, a request the rules refuse; the client shows the message), `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
 
 Security properties:

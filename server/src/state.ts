@@ -33,7 +33,22 @@ export async function wallet(db: Db, accountId: string, nowUnix: number = nowSec
   return balances;
 }
 
+/**
+ * Marks one committed change of the account's state (INF-012). Called by every mutating route inside its transaction,
+ * after the account row was locked, so revisions of one account never repeat or go backwards.
+ */
+export async function bumpStateRevision(tx: Db, accountId: string): Promise<void> {
+  const { rowCount } = await tx.query("UPDATE account SET state_revision = state_revision + 1 WHERE account_id = $1", [accountId]);
+  if (rowCount !== 1) throw new Error(`account ${accountId} does not exist`);
+}
+
+/**
+ * The player snapshot. Its queries must see one consistent database state: call it inside the mutation's transaction or
+ * through `consistentRead`.
+ */
 export async function snapshot(db: Db, accountId: string, nowUnix: number = nowSeconds()): Promise<Record<string, unknown>> {
+  const revision = await db.query<{ state_revision: unknown }>("SELECT state_revision FROM account WHERE account_id = $1", [accountId]);
+  if (!revision.rows[0]) throw new Error(`account ${accountId} does not exist`);
   const story = await db.query<{ state: unknown }>("SELECT state FROM story_state WHERE account_id = $1", [accountId]);
   if (!story.rows[0]) throw new Error(`account ${accountId} has no story state`);
 
@@ -75,6 +90,8 @@ export async function snapshot(db: Db, accountId: string, nowUnix: number = nowS
 
   return {
     schema_version: SNAPSHOT_SCHEMA_VERSION,
+    // Grows by one with every committed mutation; unrelated to `schema_version` (the shape of this object).
+    state_revision: toSafeInt(revision.rows[0].state_revision),
     story_state: story.rows[0].state,
     wallet: await wallet(db, accountId, nowUnix),
     ration: await rationSection(db, accountId, nowUnix),
