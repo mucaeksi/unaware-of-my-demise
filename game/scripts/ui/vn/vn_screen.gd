@@ -3,7 +3,8 @@ extends UiScreen
 ## The Visual Novel reader (port of client/screens/vn_screen.py): one scene at a time, line by line, with back, next, auto speed and a log.
 ## Art comes from the asset resolver (INF-024): the scene's `location_id` names the background ("background/<id>/story") and the speaker
 ## the bust ("character/<id>/vn_bust"). Where the art is not shipped yet, a tinted panel stands in (the speaker's initial and the line's
-## `emotion`) and says so.
+## `emotion`) and says so. Text is the player's language with English as the fallback (`LocalizedText`); a line with a recording
+## plays it on the Voice bus (`Audio.play_voice(speaker_id, line_id)`), and leaving the line or the screen stops it.
 ## `finished` fires once, when the reader advances past the last line (Finish button or auto play), never when the screen is just left.
 
 signal finished
@@ -16,6 +17,8 @@ const LINE_FIELDS: Array[String] = ["pre_battle_lines", "lines", "battle_lines",
 var error: String = ""
 ## Where art comes from; null = the app's (`Game.assets`). Tests set their own before the screen is built.
 var assets: AssetResolver = null
+## Whether the current line's recording started (false: text only).
+var voiced: bool = false
 
 var _lines: Array[Dictionary] = []
 var _index: int = 0
@@ -156,7 +159,7 @@ func load_scene(scene: Dictionary) -> bool:
 	_done = false
 	if _log_panel.visible:
 		toggle_log()
-	_title_label.text = str(scene.get("title_en", ""))
+	_title_label.text = LocalizedText.pick(scene, "title")
 	var location: String = str(scene.get("location_id", ""))
 	_background_reference = "background/%s/story" % location if not location.is_empty() else ""
 	_show_art(_background, _background_reference)
@@ -224,9 +227,13 @@ func _show_line() -> void:
 	var line: Dictionary = _lines[_index]
 	var speaker: String = str(line.get("speaker_display", "")) if not str(line.get("speaker_display", "")).is_empty() else str(line.get("speaker_id", ""))
 	_speaker_label.text = speaker
-	_dialogue_label.text = str(line["text_en"])
+	_dialogue_label.text = LocalizedText.pick(line, "text")
+	voiced = Audio.play_voice(str(line.get("speaker_id", "")), str(line.get("line_id", "")))
 	var speaker_id: String = str(line.get("speaker_id", "")).trim_suffix("_thought")
-	_bust_reference = "character/%s/vn_bust" % speaker_id if not speaker_id.is_empty() else ""
+	# Speakers without character art (narrator, enemies, extras) ask for none: only roster characters have busts.
+	_bust_reference = "character/%s/vn_bust" % speaker_id
+	if speaker_id.is_empty() or not _resolver().catalog.has(_bust_reference):
+		_bust_reference = ""
 	_show_art(_bust, _bust_reference)
 	_bust_letter.text = speaker.left(1).to_upper() if not _bust.visible else ""
 	var emotion: String = str(line.get("emotion", ""))
@@ -277,7 +284,8 @@ func _refresh_log() -> void:
 	for index: int in range(_index + 1):
 		var line: Dictionary = _lines[index]
 		var speaker: String = str(line.get("speaker_display", ""))
-		rows.append(("%s: %s" % [speaker, line["text_en"]]) if not speaker.is_empty() else str(line["text_en"]))
+		var text: String = LocalizedText.pick(line, "text")
+		rows.append(("%s: %s" % [speaker, text]) if not speaker.is_empty() else text)
 	_log_text.text = "\n\n".join(rows)
 
 
@@ -296,8 +304,13 @@ func _stop_auto() -> void:
 		_auto_timer.stop()
 
 
+func _exit_tree() -> void:
+	Audio.stop_voice()
+
+
 func _finish() -> void:
 	_stop_auto()
+	Audio.stop_voice()
 	if _done:
 		return
 	_done = true

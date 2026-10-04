@@ -447,3 +447,17 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   (DEC-0015) refuses to play when its rules hash differs from the server's.
 - Rejected for now: loading server rules from a runtime registry (R2/DB) independent of the Worker release; it adds a
   second release identity without a current need. Revisit if content must change faster than Worker deploys.
+
+## DEC-0027 — Audio by stable id, text by locale field
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-025).
+- Decision: the client plays audio only by id through the `Audio` autoload (`game/scripts/app/audio_director.gd`).
+  Runtime paths keep the LEGACY layout (`audio/voice/<speaker_id>/<line_id>`, `audio/music/<id>/`, LEGACY_AUDIT §4)
+  under the content's `assets/` root, without the generation version: `res://assets/audio/voice/<speaker_id>/<line_id>.ogg`,
+  `res://assets/audio/music/<cue_id>.ogg`, `res://assets/audio/sfx/<cue_id>.ogg`. Versions, takes and sidecars stay in
+  narrative staging; promotion writes the stable runtime name (and sets loop points in the import settings). Buses
+  Music/Voice/SFX → Master (`game/default_bus_layout.tres`), linear volumes saved in `user://settings.cfg`. A missing
+  file is silence, never an error.
+  Player-facing content text is read as `<field>_<locale>` with English (`_en`, the authored language) as the fallback
+  (`LocalizedText.pick`); adding a language is a content addition.
+- Open: story scenes carry `music_cue` as prose, not an id; cue ids per scene are a content/narrative decision
+  (`docs/OWNER_DECISIONS.md` D-08). UI chrome strings (button labels) are not yet in a translation table.
