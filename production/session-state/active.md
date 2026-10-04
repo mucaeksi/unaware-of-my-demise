@@ -1,21 +1,19 @@
 # Active Session State — UOMD takeover
 
 <!-- STATUS -->
-Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md, INF backlog)
-Feature: batch PR #22 — INF-015, INF-009, INF-010, INF-011 (owner: merge to main every 3–4 verified steps)
-Task: merge #22 when CI is green
+Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md) — finish it step by step
+Feature: batch 2 (PR #23): INF-019/020, INF-005/023, INF-022
+Task: merge #23, then batch 3
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
-**Branch:** `claude/adoring-galileo-f7rd3o` (PR → `main`; #18, #19 merged and deployed, live 126be16)
-**Current task:** slice 3 implemented: `GET /v1/operations/{key}`, `POST /v1/attempts/{id}/abandon`, snapshot `open_attempt`; client keeps an uncertain mutation's key until settled, keeps an unreported victory, offers Resume/Give up for an open attempt, defeats abandon. Local: vitest 396, GUT 281.
-**Next step:** PR, CI, merge (owner asked to merge per slice). Then per the roadmap: INF-015 economic journal / INF-016 intake & retention (rest of G2), INF-006 staging (G1), INF-002 v1 capability list (G0, owner decisions).
-**Device evidence:** owner installed the CI debug APK and signed in with Google (INF-017 VERIFIED, OQ-015 closed).
-**Blocked on (owner):** OQ-014 missing `docs/INFRASTRUCTURE_REVIEW.md`; OQ-006 Neon branch protection.
+**Owner directives (2026-10-04):** finish the roadmap in order, step by step; the owner presses "auto-continue" when a usage limit hits, so always leave a resumable checkpoint here. Merge to `main` every 3–4 verified steps (batch PRs), push the branch after each commit. Collect every owner decision in `docs/OWNER_DECISIONS.md` and present them together at the end. `narrative/` belongs to another team: do not touch it.
+**Branch:** `claude/adoring-galileo-f7rd3o`. Merged + live: #18–#22 (live `c5bd1ab`). Open: PR #23 (batch 2).
+**Next step:** after #23: batch 3 = INF-007 (GUT result/exit status, admin build in CI), INF-011 runbooks (backup/restore, rollback, incident), INF-006 staging scaffolding (skips without owner secrets). Then G4 (INF-021/024/025/026), G5 patch pipeline, G6 admin/liveops, G7 release AAB — owner-gated parts go to docs/OWNER_DECISIONS.md.
 **Files in progress:** none
-**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014 open; OQ-000/005 closed — do not remind)
-**Local test infra (session-local, recreate as needed):** PostgreSQL 18 (production major) from PGDG at `/var/tmp/uomd-pg18` port 54318 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg18&port=54318"`); older Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`initdb -U uomd --auth=trust`, `pg_ctl -o '-k /var/tmp/uomd-pg -p 54329'` as user postgres; `TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`); Android SDK `/var/tmp/android-sdk`; Godot Android templates in `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
+**Open questions:** `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014, OQ-016 open; OQ-000/005 closed — do not remind); owner decisions collected in `docs/OWNER_DECISIONS.md`.
+**Local test infra (session-local, recreate as needed):** PostgreSQL 18 (production major) from PGDG at `/var/tmp/uomd-pg18` port 54318 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg18&port=54318"`; `PATH=/usr/lib/postgresql/18/bin:$PATH` for database/test.sh); Godot 4.7.2 in the scratchpad (checksum-verified download); Android SDK `/var/tmp/android-sdk`; Godot Android templates `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
 <!-- /CHECKPOINT -->
 
 ---

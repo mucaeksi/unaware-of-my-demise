@@ -14,6 +14,8 @@ server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
 | `GET /v1/bootstrap` | The release contract (INF-003, `src/release.ts`), unauthenticated and outside the update/maintenance gate: `{api_version, snapshot_schema_version, min_client_version_code, rules_hash, source_sha, maintenance: {active, message}, server_time_utc}`. `rules_hash` is the SHA-256 of `"<file> <sha256>\n"` lines of the rules packs in `game/data/content/MANIFEST.json`; the client (`game/scripts/app/client_release.gd`) refuses to play on any mismatch. |
 | `POST /v1/auth/nonce` | Issues a single-use sign-in nonce, valid for 300 s. |
 | `POST /v1/auth/google` | Verifies a Google ID token (signature, issuer, audience, expiry), then consumes its nonce. Creates the account on the first sign-in and returns an opaque session token valid for 3600 s. |
+| `POST /v1/auth/logout` | Ends this session (its token stops working at once); other devices stay signed in. |
+| `POST /v1/account/delete` | Takes `{credential}`: a fresh Google ID token for a fresh `/v1/auth/nonce`, which must belong to the identity linked to this account (else 403 `REAUTH_MISMATCH`). Deletes the account and, through the cascading foreign keys, all its rows (journal included); only an anonymous record stays (`account_deletions`: account id, how it was confirmed, created/deleted times). |
 | `GET /v1/account` | Returns the profile: friend code, nickname, avatar, badge, presence opt-in. |
 | `GET /v1/wallet` | Returns the currency balances (one consistent read). |
 | `GET /v1/state` | Returns the player snapshot the Godot client renders (`game/scripts/app/player_state.gd`), read in one `REPEATABLE READ READ ONLY` transaction so it never mixes states from before and after a concurrent mutation. `state_revision` grows by one with every committed mutation of the account (migration 0003); the client never adopts a lower one. `open_attempt` is the battle opened but not reported (`{attempt_id, stage_id, run_seed, roster, inputs}` or null); after a restart the client re-runs it from those frozen inputs. |
@@ -53,6 +55,9 @@ it), and a non-empty `MAINTENANCE_MESSAGE` answers 503 `MAINTENANCE` with that m
 Economic journal (INF-015, migration 0005, DEC-0019): database triggers record every change to a currency (not Ration),
 a stackable item, an equipment instance, a hero's copies or Memory Shards and gacha pity in `economy_journal`, with the
 request's Idempotency-Key, route and rules hash (`src/journal.ts` sets them per transaction).
+
+An attempt records the rules hash it opened under (INF-022): after a content release a victory on an older attempt gets
+409 `RULES_CHANGED`, and the snapshot stops offering it.
 
 Data lifecycle (INF-016, `src/retention.ts`, cron `17 3 * * *` UTC): nonces are deleted a day after expiry and sessions a
 week after; an open attempt older than 24 h can no longer be won, the snapshot stops offering it and the job marks it

@@ -84,6 +84,30 @@ func renew_session() -> Outcome:
 	return result
 
 
+## Signs out (coroutine): ends the session on the server (best effort: an unreachable server only delays its expiry), then forgets it
+## here and the device's automatic sign-in choice, so the next sign-in shows the account chooser.
+func log_out() -> Outcome:
+	if has_session() and not server_url().is_empty():
+		await OnlineBackend.new(server_url(), session_token, transport).log_out()
+	sign_out()
+	return Outcome.ok()
+
+
+## Deletes the player's account and everything in it (coroutine; INF-020). The server requires a fresh Google credential of the same
+## identity, so this shows the account chooser (or signs in silently with the remembered account). On success the session is gone.
+func delete_account() -> Outcome:
+	if not has_session():
+		return Outcome.fail(KIND_ACCOUNT_CHANGED, "You are signed out.")
+	var backend: OnlineBackend = OnlineBackend.new(server_url(), session_token, transport)
+	var credential: Outcome = await SignInFlow.request_credential(backend, google_server_client_id(), signer)
+	if not credential.is_ok():
+		return credential
+	var deleted: Outcome = await backend.delete_account(str(credential.value))
+	if deleted.is_ok():
+		sign_out()
+	return deleted
+
+
 ## Forgets the session and the device's automatic sign-in choice.
 func sign_out() -> void:
 	session_token = ""

@@ -378,3 +378,46 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
     unexpected errors write `unhandled_error` with the same id. The id is Cloudflare's `cf-ray` (or a UUID) and is
     returned as `x-request-id`. Headers, bodies, tokens and path ids are never logged.
 - Not done here: alerting, dashboards, quota/cost budgets and runbooks (rest of INF-011).
+
+## DEC-0022 — Sign-out and account deletion
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-019, INF-020). Google Play requires in-app account deletion for
+  apps that create accounts.
+- Decision:
+  - Sign-out ends the session on the server (`POST /v1/auth/logout`), forgets it on the device and clears Credential
+    Manager's remembered choice; other devices stay signed in.
+  - Deletion is in Settings, confirmed twice: a warning screen, then a fresh Google credential for a fresh server nonce
+    that must match the identity linked to the account. A session alone cannot delete an account.
+  - The account row is deleted and every table cascades (economic journal included). `account_deletions` keeps only the
+    random account id, the confirming provider and the created/deleted times: no provider subject, no game data.
+  - Backups: Neon keeps history for point-in-time restore for 6 hours (project `history_retention_seconds` = 21600), so a
+    deleted account stays restorable from history for at most 6 hours; restoring it would need an explicit operator
+    action. Paid purchases do not exist yet; when billing arrives (INF-036) any legally required purchase records need
+    their own retention decision.
+- Open: the web page Play asks for (deletion without the app) needs a support contact (OQ-016).
+
+## DEC-0023 — Stable content ids
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-005, INF-023 first part).
+- Context: saved state stores content ids (roster, inventories, skill ranks, completed stages, claims) and the story
+  cursor as an index into the story order. A content release that renamed or dropped an id, or inserted a story entry,
+  would orphan or shift players' saved state, and nothing would notice.
+- Decision:
+  - `game/data/stable_ids.lock.json` records every id ever shipped per kind (characters, skills, items, weapons, armors,
+    accessories, stages, currencies, daily tasks, weekly segments) and the shipped story order. It only grows.
+  - `server/test/stable-ids.test.ts` (CI) fails when a shipped id is gone and not listed under `retired`, when the story
+    order is not an append of the shipped one, and when new ids are not recorded yet
+    (`UPDATE_STABLE_IDS=1 npx vitest run test/stable-ids.test.ts` adds them, never removes).
+  - Retiring an id is a deliberate act: list it under `retired` in the same release that migrates the saved state holding
+    it (the migration map itself is INF-023's remaining work, built when the first retirement is needed).
+  - New data in a content release uses new ids and existing closed operations (the battle `EffectOp` set and the existing
+    reward/quest kinds); a new operation is code and ships with an app (and Worker) release.
+
+## DEC-0024 — Attempts are pinned to their rules release
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-022 first part).
+- Decision: an attempt records the rules hash it was opened under (migration 0007). A victory is re-simulated with the
+  rules the Worker bundles; if they differ from the attempt's (a content release happened in between), the victory gets
+  409 `RULES_CHANGED` and the snapshot no longer offers the attempt for resume. The player loses only the replay (nothing
+  is paid before a verified victory), never a reward for a battle judged under other rules. Attempts from before the
+  column (NULL) keep working. Together with the boot gate (DEC-0015: the client's rules must equal the server's) and the
+  24 h attempt TTL (DEC-0018) this is the drain policy for open battles across a rules rollout.
+- Not decided here: running several rules releases side by side on the server (multi-release engine), needed only if a
+  rollout must keep old-release battles payable.

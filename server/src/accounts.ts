@@ -106,3 +106,31 @@ export async function resolveSession(db: Db, token: string): Promise<string | nu
   );
   return rows[0]?.account_id ?? null;
 }
+
+/** Ends one session (logout): its token stops working at once. */
+export async function revokeSession(db: Db, token: string): Promise<void> {
+  await db.query("DELETE FROM sessions WHERE token_hash = $1", [await sha256Hex(token)]);
+}
+
+/** True when `subjectHash` of `provider` is linked to `accountId` (the re-authentication of a deletion). */
+export async function isLinked(db: Db, accountId: string, provider: string, subjectHash: string): Promise<boolean> {
+  const { rowCount } = await db.query("SELECT 1 FROM provider_links WHERE account_id = $1 AND provider = $2 AND subject_hash = $3", [
+    accountId,
+    provider,
+    subjectHash,
+  ]);
+  return rowCount === 1;
+}
+
+/**
+ * Deletes the account and, through the cascading foreign keys, every row of it (INF-020), inside the caller's
+ * transaction. Only an anonymous record that it existed stays (`account_deletions`).
+ */
+export async function deleteAccount(tx: Db, accountId: string, confirmedBy: string): Promise<void> {
+  await tx.query("SELECT 1 FROM account WHERE account_id = $1 FOR UPDATE", [accountId]);
+  await tx.query(
+    "INSERT INTO account_deletions (account_id, confirmed_by, account_created_at) SELECT account_id, $2, created_at FROM account WHERE account_id = $1",
+    [accountId, confirmedBy],
+  );
+  await tx.query("DELETE FROM account WHERE account_id = $1", [accountId]);
+}
