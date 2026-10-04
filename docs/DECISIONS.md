@@ -476,3 +476,17 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Facts: `--export-pack` of a commit is byte-reproducible (same SHA-256 on three exports), so a release's base pack can
   be rebuilt from its commit; it is still kept with the release.
 - Next: signed manifest and trust root (INF-028).
+
+## DEC-0029 — Signed content manifests, trust root in the app
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-028). Activation waits on owner decision D-09 (signing key).
+- Decision: a content release is described by a manifest (`tools/content_release.py`: schema, channel, release id,
+  monotonic generation, app versionCode range, base pack SHA-256, rules hash, key id, packs in mount order with
+  SHA-256 and size) and signed with RSA (3072-bit) PKCS#1 v1.5 over SHA-256 of the exact bytes
+  (`tools/sign_content_manifest.sh`, `openssl dgst -sha256 -sign`). The private key exists only as the GitHub secret
+  `CONTENT_SIGNING_KEY` (environment `production`); the public key ships in the app as `res://data/keys/<key_id>.pem`,
+  which a patch cannot change (DEC-0028). The client (`ContentManifest.verify`) trusts a manifest only with a valid
+  signature from a shipped key, for its own versionCode, and with a generation newer than the installed one (replay of an
+  old manifest is refused; a rollback is published as a new generation pointing at older packs).
+- Why RSA, not Ed25519: Godot's `Crypto` (mbedTLS, the same on Android) verifies RSA PKCS#1 v1.5 with SHA-256 and has no
+  Ed25519; verified headless by GUT against an openssl-signed fixture (its private key was discarded).
+- Key rotation: a new key id is an app release that ships both keys; manifests switch after enough players updated.

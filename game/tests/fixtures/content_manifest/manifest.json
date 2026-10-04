@@ -1,0 +1,14 @@
+{
+  "app": {"max_version_code": 1, "min_version_code": 1},
+  "base_pack_sha256": "0e61ae19b78fde67aa42c4a7f0f8f7d9e3c6b1a5d2e4f60718293a4b5c6d7e8f",
+  "channel": "test",
+  "content_release": "test-0001",
+  "generation": 2,
+  "issued_at_utc": "2026-10-04T22:00:00Z",
+  "key_id": "uomd-test-1",
+  "packs": [
+    {"bytes": 1024, "name": "content-test-0001.pck", "sha256": "6d5495651eb4f72f2ce395d0e962d9ef389083b51f2e621b87ba90fc003d241e"}
+  ],
+  "rules_hash": "5f0c7a5a2a7c0d1e9b3f4c6d8e0a2b4c6d8e0f1a3b5c7d9e1f2a4b6c8d0e2f4a",
+  "schema": 1
+}

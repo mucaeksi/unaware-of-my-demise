@@ -66,7 +66,8 @@ off-site dumps exist (D-05).
 `.github/workflows/restore-drill.yml` (Actions → Restore drill → Run workflow; also monthly on the 1st, 04:41 UTC):
 
 1. `pg_dump` of production over the direct endpoint (read-only, one snapshot), with the production-major client;
-2. `pg_restore` into an empty PostgreSQL 18 on the runner;
+2. `pg_restore` into an empty PostgreSQL 18 on the runner, leaving out extensions the target cannot install (Neon adds
+   `pg_session_jwt` to `public`; the game schema does not use it) and naming them in the summary;
 3. the restored ledger must equal production's; `database/verify.sh` must pass;
 4. dump size, dump time and restore time go to the run summary (recovery-time evidence);
 5. the dump is deleted; it is never uploaded.
@@ -75,4 +76,5 @@ Record each drill's run link and timings in the table below.
 
 | Date (UTC) | Run | Dump | Restore | Result |
 |---|---|---|---|---|
-| — | — | — | — | first run pending (workflow lands with batch 3) |
+| 2026-10-04 | [run 37238173328](https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37238173328) | — | failed | `pg_restore`: Neon's `pg_session_jwt` extension is not in stock PostgreSQL → the drill now leaves out unavailable extensions |
+| 2026-10-04 | [run 37238392033](https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37238392033) | step 20 s (incl. image pull) | < 1 s | ledger identical (7 migrations), PG 18 → 18, `verify.sh` integrity ok (1 account; 0 checked against the journal: it predates it); left out: `pg_session_jwt` |
