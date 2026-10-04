@@ -9,8 +9,8 @@ Task: Worker API + Neon schema (DEC-0013)
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
 **Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR → `main`, merge regularly)
-**Current task:** `OnlineBackend` (GDScript, Worker API client: state, story advance, First Oath; idempotent retry) on top of merged story routes
-**Next step:** DEC-0013 stage attempts: `POST /v1/stages/{id}/attempts` (roster check, server seed) + victory re-simulation — requires a TypeScript port of the battle engine verified against `parity/fixtures/battle_*.json`; switch `GameBackend` to `begin_stage`/`submit_victory(attempt_id)`. Native gap: Android Credential Manager sign-in (sets `Online.session_token`).
+**Current task:** TS battle-engine port for server re-simulation (DEC-0013): RNG/CRC32/Frac done with parity gates; plan + status in `server/src/engine/README.md`
+**Next step:** port `content_models.gd` + `content_loader.gd` to `server/src/engine/content.ts` gated by `parity/fixtures/content_registry.json` / `content_errors.json`; then progression → equipment → story roster → battle core → service; then `POST /v1/stages/{id}/attempts` + victory re-simulation. Native gap: Android Credential Manager sign-in (sets `Online.session_token`).
 **Blocked on:** nothing (deploy needs owner: Google OAuth client id → `GOOGLE_CLIENT_IDS`, `CLOUDFLARE_API_TOKEN` secret, DEC-0003)
 **Files in progress:** none
 **Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-001…004, 006, 008 open; OQ-000/005 closed — do not remind)
