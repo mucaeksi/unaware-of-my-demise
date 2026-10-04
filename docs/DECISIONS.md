@@ -352,3 +352,14 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   - Ration is not journaled (time regeneration makes a row diff misleading); its spends are on the verified victory.
   - Invariant (tested): the journaled deltas of each currency and item add up to the balance.
   - Journal rows go with a deleted account (cascade); retention/anonymization is INF-020.
+
+## DEC-0020 — Migration runner safety
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-009).
+- Context: `migrate.sh --check` created the ledger table; a migration waiting for a lock held by live traffic queued
+  indefinitely (and every request behind it); nothing serialized runners besides the deploy concurrency group; ledger
+  and files were only compared by checksum.
+- Decision: `--check` is read-only; each migration transaction takes an advisory lock, re-checks the ledger, and runs
+  with `SET LOCAL lock_timeout` (10 s, `MIGRATION_LOCK_TIMEOUT`) and `statement_timeout` (5 min); files must be
+  numbered contiguously; a renamed applied file is an error; a ledger row without a file is a warning (rollback
+  deploy). Compatibility rule: every migration is additive and must keep the Worker version that is still serving
+  working, because the deploy migrates before it switches the Worker. Each property is exercised by `database/test.sh`.
