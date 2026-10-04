@@ -19,6 +19,8 @@ const BATTLE_ERROR_MESSAGE: String = "Stage %s could not be completed because of
 const HUB_CONTINUE: String = "continue"
 const HUB_TEAM: String = "team"
 const HUB_INVENTORY: String = "inventory"
+const HUB_SUMMON: String = "summon"
+const HUB_QUESTS: String = "quests"
 const HUB_SETTINGS: String = "settings"
 const HUB_DIAGNOSTICS: String = "diagnostics"
 
@@ -110,12 +112,14 @@ func _present_boot_failure(title: String, message: String) -> void:
 
 func _present_hub(status: String = "") -> void:
 	var money: Dictionary = flow.wallet()
-	var summary: String = "Silver Crowns %d   Eclipse Tokens %d\nAccount XP %d" % [int(money.get("silver_crowns", 0)), int(money.get("eclipse_tokens", 0)), int(money.get("account_xp", 0))]
+	var summary: String = "Silver Crowns %d   Eclipse Tokens %d\nFate's Threads %d   Ration %d   Account XP %d" % [int(money.get("silver_crowns", 0)), int(money.get("eclipse_tokens", 0)), int(money.get("fate_threads", 0)), int(money.get("ration", 0)), int(money.get("account_xp", 0))]
 	var over: bool = flow.is_finished() and not flow.needs_first_oath_selection()
 	var entries: Array[Dictionary] = [
 		{"id": HUB_CONTINUE, "label": "Epilogue" if over else "Continue Story"},
 		{"id": HUB_TEAM, "label": "Team"},
 		{"id": HUB_INVENTORY, "label": "Inventory"},
+		{"id": HUB_SUMMON, "label": "Summon"},
+		{"id": HUB_QUESTS, "label": "Quests"},
 		{"id": HUB_SETTINGS, "label": "Settings"},
 	]
 	if OS.is_debug_build():
@@ -134,6 +138,10 @@ func _on_hub_chosen(entry_id: String) -> void:
 			_present_team()
 		HUB_INVENTORY:
 			_present_inventory()
+		HUB_SUMMON:
+			_present_gacha()
+		HUB_QUESTS:
+			_present_quests()
 		HUB_SETTINGS:
 			_present_settings()
 		HUB_DIAGNOSTICS:
@@ -433,6 +441,93 @@ func _inventory_action(action: String, entry: GameViews.InventoryEntry, target_i
 	if result != null and not result.is_ok():
 		status = _problem_text(result)
 	_present_inventory(selected, status)
+
+
+## The banners come from the server on every visit (pity and odds change with each pull).
+func _present_gacha(selected: String = "", results_text: String = "", status: String = "") -> void:
+	var listed: Outcome = await flow.gacha_banners()
+	if not listed.is_ok():
+		_present_hub(_problem_text(listed))
+		return
+	var gacha: GachaScreen = GachaScreen.new()
+	var banners: Array[GameViews.BannerView] = []
+	banners.assign(listed.value)
+	gacha.load_gacha(banners, int(flow.wallet().get("fate_threads", 0)), selected, results_text, status)
+	gacha.pull_requested.connect(func(banner_id: String, count: int, target_id: String) -> void: _pull(gacha, banner_id, count, target_id))
+	gacha.history_requested.connect(func() -> void: _present_gacha_history(0, selected))
+	gacha.back_requested.connect(func() -> void: _present_hub())
+	shell.show_screen(gacha)
+
+
+func _pull(screen: GachaScreen, banner_id: String, count: int, target_id: String) -> void:
+	screen.set_busy(true)
+	var result: Outcome = await flow.gacha_pull(banner_id, count, target_id)
+	if not result.is_ok():
+		_present_gacha(banner_id, "", _problem_text(result))
+		return
+	_present_gacha(banner_id, pull_results_text(flow.pull_entries(result.value)))
+
+
+## One line per pull, in the order the server resolved them: "5★ Name  NEW", "4★ Name  duplicate (+10 Memory Shards)".
+static func pull_results_text(entries: Array[GameViews.PullEntry]) -> String:
+	var lines: PackedStringArray = PackedStringArray()
+	for entry: GameViews.PullEntry in entries:
+		var line: String = "%d★ %s" % [entry.rarity, entry.name_en]
+		if entry.featured:
+			line += "  featured"
+		if entry.is_new:
+			line += "  NEW"
+		elif entry.duplicate:
+			line += ("  duplicate (+%d Memory Shards)" % entry.memory_shards) if entry.memory_shards > 0 else "  duplicate"
+		lines.append(line)
+	return "\n".join(lines)
+
+
+func _present_gacha_history(before: int, selected: String) -> void:
+	var page: Outcome = await flow.gacha_history(before)
+	if not page.is_ok():
+		_present_gacha(selected, "", _problem_text(page))
+		return
+	var lines: Array = (page.value as Dictionary)["lines"]
+	var cursor: int = int((page.value as Dictionary)["next_cursor"])
+	var actions: Array[Dictionary] = []
+	if cursor > 0:
+		actions.append({"id": "older", "label": "Older"})
+	actions.append({"id": "back", "label": "Back"})
+	var screen: MessageScreen = _show_message("Pull history", "\n".join(lines) if not lines.is_empty() else "No pulls yet.", actions)
+	screen.chosen.connect(func(action_id: String) -> void:
+		if action_id == "older":
+			_present_gacha_history(cursor, selected)
+		else:
+			_present_gacha(selected), CONNECT_ONE_SHOT)
+
+
+func _present_quests(selected: String = "", status: String = "") -> void:
+	var listed: Outcome = await flow.quest_rows()
+	if not listed.is_ok():
+		_present_hub(_problem_text(listed))
+		return
+	var rows: Array[GameViews.QuestRow] = []
+	rows.assign(listed.value)
+	var quests: QuestsScreen = QuestsScreen.new()
+	quests.load_quests(rows, selected, status)
+	quests.claim_requested.connect(func(kind: String, task_id: String, period: String) -> void: _claim_quest(quests, kind, task_id, period))
+	quests.back_requested.connect(func() -> void: _present_hub())
+	shell.show_screen(quests)
+
+
+func _claim_quest(screen: QuestsScreen, kind: String, task_id: String, period: String) -> void:
+	screen.set_busy(true)
+	var selected: String = screen.selected
+	var result: Outcome = await flow.claim_quest(kind, task_id, period)
+	var status: String
+	if result.is_ok():
+		var claimed: Dictionary = result.value
+		var granted: Dictionary = claimed.get("granted", {}) if claimed.get("granted") is Dictionary else {}
+		status = ("Already claimed: " if claimed.get("already_claimed") == true else "Claimed: ") + GameFlow.reward_text(granted)
+	else:
+		status = _problem_text(result)
+	_present_quests(selected, status)
 
 
 func _present_settings(status: String = "") -> void:

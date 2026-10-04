@@ -552,3 +552,220 @@ func level_up_equipment(table: String, instance_id: String) -> Outcome:
 
 func reroll_accessory(instance_id: String) -> Outcome:
 	return _adopt(await backend.reroll_accessory(instance_id))
+
+
+# -- gacha and quests (server-authoritative; ports of the gacha/quest parts of client/game_controller.py) -------------
+
+
+## The open banners, display-ready (coroutine). `value` on success: Array[GameViews.BannerView].
+func gacha_banners() -> Outcome:
+	var reply: Outcome = await backend.gacha_banners()
+	if not reply.is_ok():
+		return reply
+	var rows: Variant = (reply.value as Dictionary).get("banners")
+	if not (rows is Array):
+		return Outcome.fail(ERROR_PROTOCOL, "the banner reply carries no banner list")
+	var views: Array[GameViews.BannerView] = []
+	for row: Variant in rows:
+		if row is Dictionary:
+			views.append(_banner_view(row))
+	return Outcome.ok(views)
+
+
+func _banner_view(row: Dictionary) -> GameViews.BannerView:
+	var view: GameViews.BannerView = GameViews.BannerView.new()
+	view.banner_id = str(row.get("banner_id", ""))
+	view.banner_type = str(row.get("banner_type", ""))
+	view.pull_cost = int(row.get("pull_cost", 1))
+	var next_pull: Variant = row.get("next_pull")
+	view.five_star_percent = roundf(float((next_pull as Dictionary).get("five_star", 0.0)) * 10000.0) / 100.0 if next_pull is Dictionary else 0.0
+	view.pity = int(row.get("pity", 0))
+	view.hard_pity = int(row.get("hard_pity", 0))
+	var guarantee: Variant = row.get("guarantee")
+	view.guarantee = str((guarantee as Dictionary).get("text", "")) if guarantee is Dictionary else ""
+	view.closes_at = str(row["closes_at"]) if row.get("closes_at") != null else ""
+	view.selected_target = str(row["selected_target_id"]) if row.get("selected_target_id") != null else ""
+	var pair_id: String = view.banner_id.get_slice(":", 1) if view.banner_id.contains(":") else ""
+	var pair: Dictionary = _signature_pair(pair_id)
+	match view.banner_type:
+		"character":
+			view.featured_name = _name_of(str(pair.get("character_id", "")))
+			view.title = "Oath: %s" % view.featured_name
+		"weapon":
+			if view.banner_id == "hall_of_armaments":
+				view.title = "Hall of Armaments"
+				var target_ids: Variant = row.get("target_ids")
+				for weapon_id: Variant in (target_ids if target_ids is Array else []):
+					view.targets.append({"id": str(weapon_id), "name": _name_of(str(weapon_id))})
+			else:
+				view.featured_name = _name_of(str(pair.get("weapon_id", "")))
+				view.title = "Arms: %s" % view.featured_name
+		_:
+			view.title = "Hall of Ancestors"
+	return view
+
+
+func _signature_pair(pair_id: String) -> Dictionary:
+	var banners: Variant = rules.quest.economy().get("banners")
+	var pairs: Variant = (banners as Dictionary).get("signature_pairs") if banners is Dictionary else null
+	for pair: Variant in (pairs if pairs is Array else []):
+		if pair is Dictionary and str((pair as Dictionary).get("banner_id", "")) == pair_id:
+			return pair
+	return {}
+
+
+## A character's or weapon's display name (the id when the content does not know it).
+func _name_of(content_id: String) -> String:
+	var character: ContentModels.Character = registry.characters.get(content_id)
+	if character != null:
+		return character.name_en
+	var weapon: ContentModels.Weapon = registry.weapons.get(content_id)
+	return weapon.name_en if weapon != null else content_id
+
+
+## Pulls `count` times on `banner_id` (coroutine); `target_id` is the Hall of Armaments target ("" = none). `value` on success: the server
+## reply, whose new snapshot is adopted; `pull_entries(value)` turns it into result rows.
+func gacha_pull(banner_id: String, count: int, target_id: String = "") -> Outcome:
+	return _adopt(await backend.gacha_pull(banner_id, count, target_id))
+
+
+func pull_entries(reply_value: Dictionary) -> Array[GameViews.PullEntry]:
+	var entries: Array[GameViews.PullEntry] = []
+	var pull: Variant = reply_value.get("pull")
+	var results: Variant = (pull as Dictionary).get("results") if pull is Dictionary else null
+	for row: Variant in (results if results is Array else []):
+		if not (row is Dictionary):
+			continue
+		var result: Dictionary = row
+		var grant: Dictionary = result["grant"] if result.get("grant") is Dictionary else {}
+		var entry: GameViews.PullEntry = GameViews.PullEntry.new()
+		entry.rarity = int(result.get("rarity", 3))
+		entry.name_en = _name_of(str(result.get("reward_id", "")))
+		entry.duplicate = bool(grant.get("duplicate", false))
+		entry.is_new = not grant.is_empty() and not entry.duplicate
+		entry.memory_shards = int(grant.get("memory_shards", 0))
+		entry.featured = result.get("is_featured") == true
+		entries.append(entry)
+	return entries
+
+
+## One page of the account's pulls, newest first (coroutine). `value` on success: {"lines": Array[String], "next_cursor": int (0 = last
+## page)}.
+func gacha_history(before: int = 0, limit: int = 50) -> Outcome:
+	var reply: Outcome = await backend.gacha_history(limit, before)
+	if not reply.is_ok():
+		return reply
+	var page: Dictionary = reply.value
+	var lines: Array[String] = []
+	var items: Variant = page.get("items")
+	for item: Variant in (items if items is Array else []):
+		if not (item is Dictionary):
+			continue
+		var row: Dictionary = item
+		var marks: PackedStringArray = PackedStringArray()
+		if row.get("is_featured") == true:
+			marks.append("featured")
+		if row.get("hard_pity_triggered") == true:
+			marks.append("pity")
+		var stamp: String = str(row.get("created_at_utc", "")).substr(0, 16).replace("T", " ")
+		var line: String = "%s  %d★ %s" % [stamp, int(row.get("rarity", 0)), _name_of(str(row.get("reward_id", "")))]
+		if not marks.is_empty():
+			line += "  (%s)" % ", ".join(marks)
+		lines.append(line)
+	var cursor: Variant = page.get("next_cursor")
+	return Outcome.ok({"lines": lines, "next_cursor": int(cursor) if cursor != null else 0})
+
+
+## Daily tasks, the window chest, the active weekly segment and unclaimed weekly mail, with their claim state (coroutine). Progress and
+## claims are the server's (`GET /v1/quests/status`); titles and rewards come from economy_part1.json. `value`: Array[GameViews.QuestRow].
+func quest_rows() -> Outcome:
+	var reply: Outcome = await backend.quest_status()
+	if not reply.is_ok():
+		return reply
+	var scope: Dictionary = reply.value
+	var economy: Dictionary = rules.quest.economy()
+	var schedule: Dictionary = economy.get("daily_schedule", {})
+	var weekly: Dictionary = economy.get("weekly_cycle", {})
+	var claimed: Dictionary = {}
+	for key: Variant in (scope.get("claimed") if scope.get("claimed") is Array else []):
+		claimed[str(key)] = true
+	var progress: Dictionary = {}
+	for list_key: String in ["daily_tasks", "weekly_tasks"]:
+		for task: Variant in (scope.get(list_key) if scope.get(list_key) is Array else []):
+			if task is Dictionary:
+				progress[str(task["task_id"])] = [int(task["progress"]), int(task["target"])]
+	var daily_prefix: String = "daily:%d:" % int(scope.get("daily_cycle_id", 0))
+	var rows: Array[GameViews.QuestRow] = []
+	for task: Variant in (schedule.get("tasks") if schedule.get("tasks") is Array else []):
+		if not (task is Dictionary) or progress.get(str(task["id"])) == null:
+			continue  # only counted tasks (the rewarded-ad task has its own flow)
+		var counts: Array = progress[str(task["id"])]
+		rows.append(_quest_row("daily", str(task["id"]), str(task["id"]).capitalize(), counts[0], counts[1],
+				_quest_state(claimed.has(daily_prefix + str(task["id"])), counts[0] >= counts[1]), task))
+	var chest: Dictionary = schedule.get("window_completion", {})
+	var required: Array = chest.get("requires", [])
+	var required_claimed: int = required.filter(func(task_id: Variant) -> bool: return claimed.has(daily_prefix + str(task_id))).size()
+	rows.append(_quest_row("daily", "window_completion", "Window Completion Chest", required_claimed, required.size(),
+			_quest_state(claimed.has(daily_prefix + "window_completion"), required_claimed == required.size()), chest))
+	var segments: Array = weekly.get("segments", [])
+	var active_id: String = str(scope.get("weekly_segment", ""))
+	for segment: Variant in segments:
+		if segment is Dictionary and str(segment["id"]) == active_id:
+			var counts: Array = progress.get("weekly:" + active_id, [0, int((segment["objective"] as Dictionary).get("count", 0))])
+			rows.append(_quest_row("weekly", active_id, "Weekly: %s" % str(segment.get("focus", active_id)).capitalize(), counts[0], counts[1],
+					_quest_state(claimed.has("weekly:%s:%s" % [str(scope.get("weekly_key", "")), active_id]), counts[0] >= counts[1]), segment))
+	for mail: Variant in (scope.get("mail") if scope.get("mail") is Array else []):
+		if not (mail is Dictionary) or mail.get("claimed") == true:
+			continue
+		var segment_row: Dictionary = {}
+		for segment: Variant in segments:
+			if segment is Dictionary and str(segment["id"]) == str(mail["segment"]):
+				segment_row = segment
+		var row: GameViews.QuestRow = _quest_row("weekly", str(mail["segment"]),
+				"Mail: %s (week of %s)" % [str(segment_row.get("focus", mail["segment"])).capitalize(), str(mail["week_key"])],
+				int(mail.get("progress", 0)), int(mail.get("target", 0)),
+				_quest_state(false, int(mail.get("progress", 0)) >= int(mail.get("target", 0))), segment_row)
+		row.period = str(mail["week_key"])
+		rows.append(row)
+	return Outcome.ok(rows)
+
+
+static func _quest_state(is_claimed: bool, complete: bool) -> String:
+	return "claimed" if is_claimed else ("claimable" if complete else "locked")
+
+
+static func _quest_row(kind: String, task_id: String, title: String, done: int, target: int, state_text: String, reward: Dictionary) -> GameViews.QuestRow:
+	var row: GameViews.QuestRow = GameViews.QuestRow.new()
+	row.kind = kind
+	row.task_id = task_id
+	row.title = title
+	row.progress = done
+	row.target = target
+	row.state = state_text
+	row.reward_text = reward_text(reward)
+	return row
+
+
+## "80 Eclipse Tokens, 1,500 Character XP, 10,000 Silver Crowns" from a reward row (`_reward_text`).
+static func reward_text(reward: Dictionary) -> String:
+	var parts: PackedStringArray = PackedStringArray()
+	for pair: Array in [["eclipse_token", "Eclipse Tokens"], ["character_xp", "Character XP"], ["silver_crown", "Silver Crowns"], ["account_xp", "Account XP"]]:
+		var amount: int = int(reward.get(pair[0], 0))
+		if amount != 0:
+			parts.append("%s %s" % [grouped(amount), pair[1]])
+	return ", ".join(parts)
+
+
+## 12345 -> "12,345" (Python's `{:,}`).
+static func grouped(value: int) -> String:
+	var digits: String = str(absi(value))
+	var out: String = ""
+	while digits.length() > 3:
+		out = "," + digits.substr(digits.length() - 3) + out
+		digits = digits.substr(0, digits.length() - 3)
+	return ("-" if value < 0 else "") + digits + out
+
+
+## Claims a quest reward (coroutine); `period` is a mail row's week ("" = current). `value` on success: the server's claim result.
+func claim_quest(kind: String, task_id: String, period: String = "") -> Outcome:
+	return _adopt(await backend.claim_quest(kind, task_id, period))
