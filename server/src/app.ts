@@ -13,6 +13,7 @@ import { transaction, type Connect, type Db } from "./db";
 import { idempotencyKey, runIdempotent } from "./idempotency";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
+import { beginAttempt, parseRoster } from "./stages";
 import { snapshot, wallet } from "./state";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
 
@@ -29,6 +30,8 @@ export interface AppDeps {
 interface Context {
   request: Request;
   db: Db;
+  /** Path parameters of a pattern route (`:name` segments). */
+  params: Record<string, string>;
 }
 
 type Handler = (context: Context) => Promise<Response>;
@@ -156,7 +159,38 @@ function routes(deps: AppDeps): Record<string, Handler> {
         await tx.query("INSERT INTO roster (account_id, character_id) VALUES ($1, $2) ON CONFLICT DO NOTHING", [accountId, characterId]);
       });
     },
+
+    "POST /v1/stages/:stage_id/attempts": async (context) => {
+      const stageId = context.params.stage_id!;
+      const roster = parseRoster(await readJsonObject(context.request));
+      return mutate(context, "stage_attempt", JSON.stringify([stageId, roster]), async (tx, accountId) => {
+        const attempt = await beginAttempt(tx, accountId, await lockedStoryState(tx, accountId), stageId, roster);
+        return { attempt };
+      });
+    },
   };
+}
+
+/** `:name` segments match one path segment of word characters and dashes (stage ids like "1-2", UUIDs). */
+function matchRoute(table: Record<string, Handler>, method: string, pathname: string): { handler: Handler; params: Record<string, string> } | null {
+  const exact = table[`${method} ${pathname}`];
+  if (exact) return { handler: exact, params: {} };
+  const segments = pathname.split("/");
+  for (const [key, handler] of Object.entries(table)) {
+    const [routeMethod, pattern] = key.split(" ") as [string, string];
+    const parts = pattern.split("/");
+    if (routeMethod !== method || parts.length !== segments.length || !parts.some((part) => part.startsWith(":"))) continue;
+    const params: Record<string, string> = {};
+    const matched = parts.every((part, index) => {
+      const segment = segments[index]!;
+      if (!part.startsWith(":")) return part === segment;
+      if (!/^[A-Za-z0-9_-]{1,64}$/.test(segment)) return false;
+      params[part.slice(1)] = segment;
+      return true;
+    });
+    if (matched) return { handler, params };
+  }
+  return null;
 }
 
 /** The client key for rate limiting: Cloudflare's connecting IP (set by the edge, not by the client). */
@@ -166,9 +200,9 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
   const table = routes(deps);
   return async (request) => {
     const url = new URL(request.url);
-    const handler = table[`${request.method} ${url.pathname}`];
-    if (!handler) {
-      const known = Object.keys(table).some((key) => key.endsWith(` ${url.pathname}`));
+    const route = matchRoute(table, request.method, url.pathname);
+    if (!route) {
+      const known = ["GET", "POST", "PUT", "PATCH", "DELETE"].some((method) => matchRoute(table, method, url.pathname) !== null);
       return errorResponse(new ApiError(known ? 405 : 404, "HTTP_ERROR", known ? "Method Not Allowed" : "Not Found"));
     }
     if (url.pathname !== "/healthz") {
@@ -180,7 +214,7 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
     let connection;
     try {
       connection = await deps.connect();
-      return await handler({ request, db: connection });
+      return await route.handler({ request, db: connection, params: route.params });
     } catch (error) {
       if (error instanceof ApiError) return errorResponse(error);
       console.error("unhandled", request.method, url.pathname, error);
