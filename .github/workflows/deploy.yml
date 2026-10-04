@@ -1,7 +1,9 @@
 # Production deploy (DEC-0003): after CI passes for a push to main (or on demand), apply pending database migrations to
 # Neon, then deploy the Worker and check /healthz. Migrations are additive and run first, so the running Worker keeps
 # working against the newer schema. Uses repository secrets DATABASE_URL and CLOUDFLARE_API_TOKEN and the variable
-# CLOUDFLARE_ACCOUNT_ID; when one is missing every step is skipped with a warning instead of failing main.
+# CLOUDFLARE_ACCOUNT_ID; when one is missing every step is skipped with a warning instead of failing main. The optional
+# secret GOOGLE_CLIENT_IDS (comma-separated Google OAuth client IDs, the ID-token audiences) enables sign-in; without it, or
+# when it does not look like OAuth client IDs, the Worker deploys with sign-in answering 503.
 name: Deploy
 
 on:
@@ -27,6 +29,7 @@ jobs:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      GOOGLE_CLIENT_IDS: ${{ secrets.GOOGLE_CLIENT_IDS }}
     steps:
       - name: Check configuration
         id: config
@@ -40,6 +43,17 @@ jobs:
             echo "ready=false" >> "${GITHUB_OUTPUT}"
           else
             echo "ready=true" >> "${GITHUB_OUTPUT}"
+          fi
+          # Sign-in audiences: only well-formed OAuth client IDs are passed on (the value itself is never printed).
+          ids="$(printf '%s' "${GOOGLE_CLIENT_IDS}" | tr -d '[:space:]')"
+          if [ -z "${ids}" ]; then
+            echo "::warning::secret GOOGLE_CLIENT_IDS is not set; sign-in will answer 503"
+            echo "signin=false" >> "${GITHUB_OUTPUT}"
+          elif printf '%s' "${ids}" | grep -Eq '^[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com(,[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com)*$'; then
+            echo "signin=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "::warning::secret GOOGLE_CLIENT_IDS is not a comma-separated list of OAuth client IDs (<number>-<id>.apps.googleusercontent.com); sign-in will answer 503"
+            echo "signin=false" >> "${GITHUB_OUTPUT}"
           fi
       - uses: actions/checkout@v4
         if: steps.config.outputs.ready == 'true'
@@ -59,15 +73,25 @@ jobs:
         working-directory: server
         run: |
           npm ci
-          npx wrangler deploy | tee "${RUNNER_TEMP}/deploy.log"
+          args=()
+          if [ "${{ steps.config.outputs.signin }}" = "true" ]; then
+            args+=(--var "GOOGLE_CLIENT_IDS:$(printf '%s' "${GOOGLE_CLIENT_IDS}" | tr -d '[:space:]')")
+          fi
+          npx wrangler deploy "${args[@]}" | tee "${RUNNER_TEMP}/deploy.log"
       - name: Health check
         if: steps.config.outputs.ready == 'true'
         run: |
           url="$(grep -Eo 'https://[A-Za-z0-9.-]+\.workers\.dev' "${RUNNER_TEMP}/deploy.log" | head -n1)"
           [ -n "${url}" ] || { echo "::error::no workers.dev URL in the deploy output"; exit 1; }
+          healthy=false
           for attempt in 1 2 3 4 5 6; do
-            if curl -fsS "${url}/healthz"; then echo; exit 0; fi
+            if curl -fsS "${url}/healthz"; then echo; healthy=true; break; fi
             sleep 10
           done
-          echo "::error::${url}/healthz did not answer ok"
-          exit 1
+          [ "${healthy}" = "true" ] || { echo "::error::${url}/healthz did not answer ok"; exit 1; }
+          # A configured sign-in rejects a forged credential (401); an unconfigured one answers 503.
+          status="$(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'content-type: application/json' -d '{"credential":"not-a-token"}' "${url}/v1/auth/google")"
+          expected="503"
+          [ "${{ steps.config.outputs.signin }}" = "true" ] && expected="401"
+          echo "POST /v1/auth/google with a forged credential: HTTP ${status} (expected ${expected})"
+          [ "${status}" = "${expected}" ] || { echo "::error::sign-in answered ${status}, expected ${expected}"; exit 1; }
