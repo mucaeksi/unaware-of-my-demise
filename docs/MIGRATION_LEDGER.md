@@ -94,3 +94,26 @@ Deferred until a server or fake backend exists. These were copied byte-exact, th
 - `game/tools/ui_preview.gd` (`1zAGbGCkNllHqyFdreC9yqcOI6w_8sy_k`) and `ui_preview.tscn` (`1chCMSNuLlUc_ZNn8RZ1TgqhD8dBwhtn1`)
 
 They return when they can be ported onto a `GameBackend` test double.
+
+
+## BATCH-0003 — UomdNative Android plugin with Google sign-in (2026-10-04)
+
+Scope: the LEGACY Godot Android plugin that BATCH-0002 left in Drive (it then only wrapped keys for the SQLite save),
+brought back because the client now needs Credential Manager sign-in (INF-017, DEC-0016). Sources were downloaded
+through the Drive connector, decoded in the sandbox (no base64 through the model) and recorded by git blob sha1/size.
+Rollback point: the commit before this batch. The LEGACY originals in Drive were not modified.
+
+| ID | Google Drive source | GitHub target | Action | Transformation | Validation | Status |
+|---|---|---|---|---|---|---|
+| MIG-0033 | `LEGACY:game/addons/uomd_native/{plugin.cfg,plugin.gd}` (`1Ia4261-ToErS73Nj9RicjTy6KmrZmCwc` blob `7071139` 192 B; `1iWZ1ZtJ3ei04hgz6xeFfE5B8pYK7cL5g` blob `104f3a2` 401 B) | same paths | MIGRATE | none (byte-exact) | blob sha1 equal; headless import | MIGRATED |
+| MIG-0034 | `LEGACY:game/addons/uomd_native/export_plugin.gd` (`1UC9pa7_hfK-FNNvw9UuepvtGIgTtooOO` blob `36ee6c6` 688 B) | same path | ADAPT | `_get_android_dependencies` with `ANDROID_DEPENDENCIES` (the AAR's Maven dependencies) | GUT: equal to build.gradle; APK export | MIGRATED |
+| MIG-0035 | `LEGACY:game/android/plugins/uomd_native/{settings.gradle,gradle.properties}` (`1LIJfk7FlMjJDdZX8lyDSgDxjc_1TNY86` blob `2339531`; `1itvWr5SwLlMHn9hgEvu4v_f7w_wvTDxU` blob `fcff09d`) | same paths | MIGRATE | none (byte-exact) | blob sha1 equal; `gradle assembleDebug assembleRelease` | MIGRATED |
+| MIG-0036 | `LEGACY:game/android/plugins/uomd_native/build.gradle` (`1m-AzHbgf3VsHAV27UdH9ugaBSbXMNxVI` blob `f0dcbfb` 574 B) | same path | ADAPT | adds `androidx.credentials:credentials{,-play-services-auth}:1.6.0`, `googleid:1.2.1` | AAR builds against `org.godotengine:godot:4.7.2.stable` | MIGRATED |
+| MIG-0037 | `LEGACY:.../src/main/AndroidManifest.xml` (`18woGxprCmw7fjJH5exdmPv2S3na8_AwY` blob `a0d4956` 432 B) | same path | ADAPT | removes `USE_BIOMETRIC`/`USE_FINGERPRINT` merged in by androidx.credentials (INF-018 allowlist) | `verify_apk.sh`: INTERNET + app-private signature permission only | MIGRATED |
+| MIG-0038 | `LEGACY:.../io/github/mucaeksi/uomd/UomdNative.java` (`1wxFayFjrdHUZglQK7yrnNo-2lTpIc8-2` blob `3fb30dd` 5847 B) | same path | ADAPT | keystore methods unchanged; adds `sign_in_finished` signal, `signIn`, `clearCredentialState` | compiles; registered in the exported APK | MIGRATED |
+| MIG-0039 | LEGACY Kivy-era client `GoogleSignInBridge.java` (package `io.github.mucaeksi.unawareofmydemise`; Drive folder `1gASKPl0leC8wFBLuYAEt82Mn1oVChuDX`) (`1XBpCQAwr3BSpO-ZzEKNLgKK79OIa-PsD` blob `1373201` 5467 B) | `game/android/plugins/uomd_native/src/main/java/io/github/mucaeksi/uomd/GoogleSignIn.java` | ADAPT | polling statics → one callback; returning accounts first (auto-select), chooser second; token never logged | compiles; in the APK's dex | MIGRATED |
+| MIG-0040 | `LEGACY:game/tools/build_uomd_native.sh` (`1uee1NzVlHL5shaNaa3Zz2fsnf3xmqJ07` blob `c878638` 994 B) | same path | ADAPT | pinned `gradle` (8.11.1 in CI) instead of the wrapper | builds the AARs locally and in CI | MIGRATED |
+
+Left in Drive: `gradlew`, `gradlew.bat`, `gradle/wrapper/gradle-wrapper.{jar,properties}` (Gradle 8.11.1 comes from
+`gradle/actions/setup-gradle`; no binary jar in Git) and the prebuilt AARs under `addons/uomd_native/bin/` (built from
+source by `build_uomd_native.sh`, never committed).

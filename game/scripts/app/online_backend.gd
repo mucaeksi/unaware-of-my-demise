@@ -4,6 +4,8 @@ extends GameBackend
 ## mutating call carries a fresh UUIDv4 `Idempotency-Key`; a call whose connection failed is retried once with the same
 ## key, which the server answers with the stored result instead of acting twice. Every call names the app's Android
 ## versionCode (`X-Client-Version-Code`), so a server that no longer serves this build answers 426 "update_required".
+## A session that expired mid-play (401) is renewed once through `reauthenticate` and the request is sent again with the same
+## Idempotency-Key, so a renewed retry can never act twice.
 ##
 ## Errors come back as `Outcome`s: no connection -> `GameBackend.KIND_OFFLINE`, an API error -> its code in lower case
 ## ("conflict", "unauthorized", "progression", "equipment", ...) with the server's message, a reply that is not JSON ->
@@ -44,6 +46,8 @@ var session_token: String = ""
 var transport: Transport = HttpTransport.new()
 ## Sent as `X-Client-Version-Code` (0 = not sent).
 var client_version_code: int = ClientRelease.version_code()
+## Coroutine renewing an expired session: returns an `Outcome` whose value is the new token (invalid Callable = no renewal).
+var reauthenticate: Callable = Callable()
 
 
 func _init(server_url: String = "", token: String = "", with_transport: Transport = null) -> void:
@@ -63,19 +67,31 @@ static func new_idempotency_key() -> String:
 
 
 func _call(method: int, path: String, body: Variant = null, mutating: bool = false) -> Outcome:
-	var headers: PackedStringArray = PackedStringArray(["Accept: application/json", "Authorization: Bearer %s" % session_token])
+	var payload: String = JSON.stringify(body) if body != null else ""
+	var key: String = new_idempotency_key() if mutating else ""
+	var reply: Dictionary = await _send(method, path, payload, key)
+	if int(reply.get("status", 0)) == 0 and mutating:
+		reply = await _send(method, path, payload, key)
+	if int(reply.get("status", 0)) == 401 and not session_token.is_empty() and reauthenticate.is_valid():
+		var renewed: Outcome = await reauthenticate.call()
+		if not renewed.is_ok():
+			return renewed
+		session_token = str(renewed.value)
+		reply = await _send(method, path, payload, key)
+	return _outcome(reply)
+
+
+func _send(method: int, path: String, payload: String, key: String) -> Dictionary:
+	var headers: PackedStringArray = PackedStringArray(["Accept: application/json"])
+	if not session_token.is_empty():
+		headers.append("Authorization: Bearer %s" % session_token)
 	if client_version_code > 0:
 		headers.append("X-Client-Version-Code: %d" % client_version_code)
-	var payload: String = ""
-	if body != null:
+	if not payload.is_empty():
 		headers.append("Content-Type: application/json")
-		payload = JSON.stringify(body)
-	if mutating:
-		headers.append("Idempotency-Key: %s" % new_idempotency_key())
-	var reply: Dictionary = await transport.request(method, base_url + path, headers, payload)
-	if int(reply.get("status", 0)) == 0 and mutating:
-		reply = await transport.request(method, base_url + path, headers, payload)
-	return _outcome(reply)
+	if not key.is_empty():
+		headers.append("Idempotency-Key: %s" % key)
+	return await transport.request(method, base_url + path, headers, payload)
 
 
 static func _outcome(reply: Dictionary) -> Outcome:
@@ -91,6 +107,16 @@ static func _outcome(reply: Dictionary) -> Outcome:
 		var error: Dictionary = (parsed as Dictionary)["error"]
 		return Outcome.fail(str(error.get("code", "http_error")).to_lower(), str(error.get("message", "Request failed (HTTP %d)." % status)))
 	return Outcome.fail(KIND_PROTOCOL, "Request failed (HTTP %d)." % status)
+
+
+## A single-use sign-in nonce: {"nonce", "expires_at_utc"}.
+func request_nonce() -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/auth/nonce")
+
+
+## Trades a Google ID token for a session: {"account_id", "session_token", "expires_at_utc", "is_new_account"}.
+func exchange_google_credential(credential: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/auth/google", {"credential": credential})
 
 
 func fetch_bootstrap() -> Outcome:

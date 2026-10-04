@@ -36,3 +36,10 @@ patch/files/*.zip
 # production/session-state/active.md). Keep the directory placeholder.
 production/session-logs/*
 !production/session-logs/README.md
+
+# UomdNative AARs: built from game/android/plugins/uomd_native by game/tools/build_uomd_native.sh
+game/addons/uomd_native/bin/
+game/android/plugins/uomd_native/.gradle/
+# Godot Android build template (installed from the export templates by game/tools/build_android_debug.sh)
+game/android/build/
+game/android/.build_version

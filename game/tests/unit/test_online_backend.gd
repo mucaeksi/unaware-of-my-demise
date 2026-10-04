@@ -105,12 +105,16 @@ func test_the_game_flow_adopts_the_servers_story_reply() -> void:
 	assert_eq(flow.current_entry(), flow.story_index.story_order[1])
 
 
-func test_online_hands_out_the_offline_base_until_a_session_exists() -> void:
+func test_online_hands_out_the_worker_backend_with_or_without_a_session() -> void:
 	assert_eq(Online.server_url(), "https://unaware-of-my-demise.muratcaneksiii.workers.dev", "the production Worker (DEC-0003, workers.dev)")
 	Online.session_token = ""
-	assert_false(Online.backend() is OnlineBackend)
+	var anonymous: GameBackend = Online.backend()
+	assert_true(anonymous is OnlineBackend, "without a session it still reads the release contract; the boot signs in next")
+	assert_eq((anonymous as OnlineBackend).session_token, "")
 	Online.session_token = "token-1"
-	assert_true(Online.backend() is OnlineBackend, "a signed-in session talks to the Worker")
+	var signed: OnlineBackend = Online.backend()
+	assert_eq(signed.session_token, "token-1")
+	assert_true(signed.reauthenticate.is_valid(), "an expired session is renewed through Online")
 	Online.session_token = ""
 
 

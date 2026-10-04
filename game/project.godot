@@ -39,7 +39,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/uomd_native/plugin.cfg")
 
 [gui]
 
@@ -53,5 +53,6 @@ textures/vram_compression/import_etc2_astc=true
 
 [uomd]
 
+online/google_server_client_id="604013824221-n7htgfhfs55njs5ie11ulojsk1tnk6da.apps.googleusercontent.com"
 online/server_url="https://unaware-of-my-demise.muratcaneksiii.workers.dev"
 release/version_code=1

@@ -2,19 +2,19 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md, INF backlog)
-Feature: G0/G2 first slice — release contract + state revision
-Task: INF-003/004/008/012/018 (DEC-0015)
+Feature: G0–G3 first two slices merged
+Task: none in progress — next slice to be chosen from the roadmap
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
-**Branch:** `claude/adoring-galileo-f7rd3o` (PR → `main`)
-**Current task:** first roadmap slice implemented and locally verified: `GET /v1/bootstrap`, update/maintenance gate, `account.state_revision` (migration 0003), consistent `GET /v1/state`, client `ClientRelease` gate + monotonic snapshot adoption, Android INTERNET permission, deploy source-SHA check and no-automatic-rollback guard. vitest 389, GUT 259, database 0001–0003.
-**Next step:** after merge, confirm the deploy run: migration 0003 applied on Neon and `/v1/bootstrap` reports the merged SHA. Then INF-013 (operation reconciliation: keep the action key until its result is known, no replay across accounts), INF-017 auth coordinator (Credential Manager), INF-006/007 staging + CI (Android export job).
-**Blocked on (owner):** Google OAuth client id → `GOOGLE_CLIENT_IDS` (sign-in answers 503 until set); `docs/INFRASTRUCTURE_REVIEW.md` missing (OQ-014).
+**Branch:** `claude/adoring-galileo-f7rd3o` → `main` (PR #18 merged + deployed; PR #19 merging with this checkpoint)
+**State:** see `docs/CURRENT_STATE.md` snapshot and the roadmap status table. Slice 1 (DEC-0015): release contract, state revision, consistent snapshot, deploy SHA check + no automatic rollback. Slice 2 (DEC-0016): UomdNative plugin + Google sign-in, 401 renewal with the same key, permission allowlist, CI `android` job (debug APK signed with the repository debug key, SHA-1 84:E8:…:9A:4D).
+**Next step:** owner device test of sign-in (OQ-015). Then, per the roadmap order: INF-013 operation reconciliation + INF-014 battle recovery (G2), INF-006 staging (G1), INF-002 v1 capability list (G0, owner decisions on billing/ads/social).
+**Blocked on (owner):** OQ-015 device test; OQ-014 missing `docs/INFRASTRUCTURE_REVIEW.md`; OQ-006 Neon branch protection.
 **Files in progress:** none
-**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014 open; OQ-000/005 closed — do not remind)
-**Local test infra:** Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`; recreate with `initdb -U uomd --auth=trust` + `pg_ctl -o '-k /var/tmp/uomd-pg -p 54329'` as user postgres); production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
+**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014, OQ-015 open; OQ-000/005 closed — do not remind)
+**Local test infra (session-local, recreate as needed):** Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`initdb -U uomd --auth=trust`, `pg_ctl -o '-k /var/tmp/uomd-pg -p 54329'` as user postgres; `TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`); Android SDK `/var/tmp/android-sdk` (cmdline-tools sha1-verified, platform 36, build-tools 36.1.0); Godot Android templates in `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
 <!-- /CHECKPOINT -->
 
 ---
