@@ -106,8 +106,12 @@ func test_the_game_flow_adopts_the_servers_story_reply() -> void:
 
 
 func test_online_hands_out_the_offline_base_until_a_session_exists() -> void:
+	assert_eq(Online.server_url(), "https://unaware-of-my-demise.muratcaneksiii.workers.dev", "the production Worker (DEC-0003, workers.dev)")
 	Online.session_token = ""
 	assert_false(Online.backend() is OnlineBackend)
+	Online.session_token = "token-1"
+	assert_true(Online.backend() is OnlineBackend, "a signed-in session talks to the Worker")
+	Online.session_token = ""
 
 
 func test_stage_attempts_and_victories_go_to_their_routes() -> void:

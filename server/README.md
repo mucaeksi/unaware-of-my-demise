@@ -1,5 +1,7 @@
 # Game API (Cloudflare Worker)
 
+Production: `https://unaware-of-my-demise.muratcaneksiii.workers.dev` (deployed from `main` by `.github/workflows/deploy.yml`, DEC-0003).
+
 The server-authoritative API of Unaware of My Demise (DEC-0012, DEC-0013). It is a TypeScript Worker that reaches Neon
 PostgreSQL through Hyperdrive (binding `HYPERDRIVE`). Routes, payload names and the error shape follow the LEGACY FastAPI
 server (`docs/LEGACY_AUDIT.md` §9). The schema lives in `database/migrations/`.
