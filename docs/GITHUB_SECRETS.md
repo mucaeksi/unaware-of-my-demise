@@ -20,6 +20,8 @@ secrets, and never in `wrangler.toml`.
 | Name | Kind | Purpose |
 |---|---|---|
 | `DATABASE_URL` | secret | production Neon connection string. `deploy.yml` applies migrations with it; `restore-drill.yml` dumps production read-only over the direct (non-pooled) host derived from it. Both skip with a warning when it is absent. Never seed or reset production. |
+| `STAGING_DATABASE_URL` | secret (environment `staging`) | the staging Neon branch (DEC-0025); `deploy-staging.yml` migrates it with `UOMD_ENVIRONMENT=staging`. Must never be the production URL (the workflow and `migrate.sh` refuse it). |
+| `STAGING_GOOGLE_CLIENT_IDS` | variable (optional) | staging sign-in audiences; defaults to `GOOGLE_CLIENT_IDS` |
 
 ## Android debug APK (CI job `android`, DEC-0016)
 

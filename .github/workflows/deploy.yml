@@ -122,6 +122,9 @@ jobs:
           echo "deploy=true" >> "${GITHUB_OUTPUT}"
       - name: Apply pending migrations (Neon)
         if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
+        env:
+          # The environment guard (DEC-0025): refuses a database recorded as another environment's.
+          UOMD_ENVIRONMENT: production
         run: |
           database/migrate.sh
           # CI tests on database/POSTGRES_MAJOR; a Neon upgrade must be mirrored there (INF-010).

@@ -28,6 +28,32 @@ LOCK_KEY=8261946013
 psql_q() { psql "${DATABASE_URL}" -X -q -v ON_ERROR_STOP=1 "$@"; }
 fail() { echo "$*" >&2; exit 1; }
 
+# Environment guard (INF-006, DEC-0025): UOMD_ENVIRONMENT names the environment the caller means (production, staging).
+# A database records its own in the database-level setting uomd.environment, and a different one is refused, so staging
+# tooling cannot migrate production and the other way round. A database without the record: production records it
+# (best effort: the production database predates the record); any other environment claims a database only while it
+# holds no schema, so it never adopts one that is already in use. Unset UOMD_ENVIRONMENT (local tests): no check.
+environment="${UOMD_ENVIRONMENT:-}"
+if [[ -n "${environment}" ]]; then
+  [[ "${environment}" =~ ^[a-z]+$ ]] || fail "UOMD_ENVIRONMENT must be lowercase letters, got '${environment}'"
+  recorded="$(psql_q -At -c "SELECT COALESCE(current_setting('uomd.environment', true), '')")"
+  record_sql="DO \$\$ BEGIN EXECUTE format('ALTER DATABASE %I SET uomd.environment = %L', current_database(), '${environment}'); END \$\$"
+  if [[ -n "${recorded}" ]]; then
+    [[ "${recorded}" == "${environment}" ]] || fail "refusing: this database belongs to '${recorded}', not '${environment}'"
+  elif [[ "${environment}" == "production" ]]; then
+    if ! ${check_only}; then
+      psql_q -c "${record_sql}" >/dev/null 2>&1 \
+        && echo "recorded uomd.environment = production on this database" \
+        || echo "warning: could not record uomd.environment on the production database (needs the database owner)" >&2
+    fi
+  elif [[ "$(psql_q -At -c "SELECT to_regclass('public.schema_migrations') IS NOT NULL")" == "t" ]]; then
+    fail "refusing: this database has a schema but no uomd.environment record; it is not claimed as '${environment}'"
+  elif ! ${check_only}; then
+    psql_q -c "${record_sql}" >/dev/null
+    echo "claimed this empty database for ${environment}"
+  fi
+fi
+
 if [[ "$(psql_q -At -c "SELECT to_regclass('public.schema_migrations') IS NOT NULL")" == "t" ]]; then
   ledger="$(psql_q -At -F '|' -c "SELECT version, filename, sha256 FROM schema_migrations ORDER BY version")"
 elif ${check_only}; then

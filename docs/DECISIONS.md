@@ -421,3 +421,16 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   24 h attempt TTL (DEC-0018) this is the drain policy for open battles across a rules rollout.
 - Not decided here: running several rules releases side by side on the server (multi-release engine), needed only if a
   rollout must keep old-release battles payable.
+
+## DEC-0025 — Staging is a separate environment, and databases know which environment they belong to
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-006). Activation waits on owner decision D-07.
+- Decision: staging is its own Worker (`unaware-of-my-demise-staging`, `server/wrangler.jsonc` `env.staging`) with its
+  own Hyperdrive config, its own empty Neon database (no copy of player data; `deploy-staging.yml` builds the schema with the migrations), its own rate-limit counters and its
+  own secret (`STAGING_DATABASE_URL`), deployed by `.github/workflows/deploy-staging.yml` from the same commits as
+  production. Each database records its environment in the database-level setting `uomd.environment`;
+  `database/migrate.sh` with `UOMD_ENVIRONMENT` refuses a database recorded as another environment's, production
+  records itself on its next deploy, and staging claims only an empty database (so it can never adopt the production
+  database through a wrong URL). The staging workflow also refuses `STAGING_DATABASE_URL` equal to `DATABASE_URL`.
+  No test, seed or reset tool is bound to production; none exists in the Worker.
+- Not decided here: production deploys waiting for a green staging deploy (after staging has run for a while), and a
+  staging build of the Android app (its `uomd/online/server_url` would point at the staging Worker).

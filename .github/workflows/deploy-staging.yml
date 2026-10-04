@@ -1,0 +1,95 @@
+# Staging deploy (INF-006, DEC-0025): the same commit production gets, on its own Worker (unaware-of-my-demise-staging),
+# Hyperdrive config and Neon branch, with its own secrets. Runs after CI passes for a push to main, or on demand.
+#
+# Separation is enforced, not assumed:
+#   * migrations run with UOMD_ENVIRONMENT=staging: database/migrate.sh refuses a database recorded as production's and
+#     claims only an empty one, and the production deploy refuses a database recorded as staging's;
+#   * STAGING_DATABASE_URL may not equal the production DATABASE_URL;
+#   * the Worker binds only the staging Hyperdrive config (server/wrangler.jsonc env.staging) and its own rate limits.
+# Needs the secret STAGING_DATABASE_URL and a real Hyperdrive id in env.staging (owner decision D-07); until then
+# every step is skipped with a warning. Production deploys do not wait for staging yet.
+name: Deploy staging
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
+jobs:
+  staging:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    environment: staging
+    env:
+      STAGING_DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+      PRODUCTION_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      GOOGLE_CLIENT_IDS: ${{ vars.STAGING_GOOGLE_CLIENT_IDS || vars.GOOGLE_CLIENT_IDS }}
+      SOURCE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+      - name: Check configuration
+        id: config
+        run: |
+          missing=""
+          [ -n "${STAGING_DATABASE_URL}" ] || missing="${missing} secret:STAGING_DATABASE_URL"
+          [ -n "${CLOUDFLARE_API_TOKEN}" ] || missing="${missing} secret:CLOUDFLARE_API_TOKEN"
+          [ -n "${CLOUDFLARE_ACCOUNT_ID}" ] || missing="${missing} variable:CLOUDFLARE_ACCOUNT_ID"
+          grep -q '"id": "00000000000000000000000000000000"' server/wrangler.jsonc && missing="${missing} hyperdrive-id:server/wrangler.jsonc(env.staging)"
+          if [ -n "${missing}" ]; then
+            echo "::warning::Staging deploy skipped; missing:${missing} (owner decision D-07)"
+            echo "ready=false" >> "${GITHUB_OUTPUT}"
+            exit 0
+          fi
+          if [ -n "${PRODUCTION_DATABASE_URL}" ] && [ "${STAGING_DATABASE_URL}" = "${PRODUCTION_DATABASE_URL}" ]; then
+            echo "::error::STAGING_DATABASE_URL is the production database"
+            exit 1
+          fi
+          echo "ready=true" >> "${GITHUB_OUTPUT}"
+      - name: Apply pending migrations (staging branch)
+        if: steps.config.outputs.ready == 'true'
+        env:
+          DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+          UOMD_ENVIRONMENT: staging
+        run: database/migrate.sh
+      - uses: actions/setup-node@v4
+        if: steps.config.outputs.ready == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - name: Deploy the staging Worker
+        if: steps.config.outputs.ready == 'true'
+        working-directory: server
+        run: |
+          npm ci
+          args=(--env staging --var "RELEASE_SOURCE_SHA:${SOURCE_SHA}")
+          ids="$(printf '%s' "${GOOGLE_CLIENT_IDS}" | tr -d '[:space:]')"
+          [ -n "${ids}" ] && args+=(--var "GOOGLE_CLIENT_IDS:${ids}")
+          npx wrangler deploy "${args[@]}" | tee "${RUNNER_TEMP}/deploy.log"
+      - name: Health check
+        if: steps.config.outputs.ready == 'true'
+        run: |
+          url="$(grep -Eo 'https://unaware-of-my-demise-staging\.[A-Za-z0-9.-]+\.workers\.dev' "${RUNNER_TEMP}/deploy.log" | head -n1)"
+          [ -n "${url}" ] || { echo "::error::no staging workers.dev URL in the deploy output"; exit 1; }
+          served=""
+          for attempt in 1 2 3 4 5 6; do
+            served="$(curl -fsS "${url}/v1/bootstrap" | jq -r '.source_sha // empty' || true)"
+            [ "${served}" = "${SOURCE_SHA}" ] && break
+            sleep 10
+          done
+          echo "staging ${url} source_sha: ${served:-none} (expected ${SOURCE_SHA})"
+          [ "${served}" = "${SOURCE_SHA}" ] || { echo "::error::staging reports source_sha '${served}', expected ${SOURCE_SHA}"; exit 1; }
+          curl -fsS "${url}/healthz"
