@@ -56,8 +56,11 @@ var battle_service: BattleService = null
 var backend: GameBackend = GameBackend.new()
 ## The last snapshot the server sent (null until `sync` succeeded).
 var state: PlayerState = null
-## The attempt the server opened for the battle in progress ({} = none): {"attempt_id", "stage_id", "run_seed"}.
+## The attempt the server opened for the battle in progress ({} = none): {"attempt_id", "stage_id", "run_seed"}, plus "roster" and
+## "inputs" (the build the server froze) for an attempt resumed from the snapshot (INF-014).
 var attempt: Dictionary = {}
+## A victory whose report got no reply (it may have committed): kept with `attempt` until `report_again` settles it.
+var unreported: BattleService.BattleResult = null
 ## Why the content or the rules could not be set up ("" = ready).
 var error: String = ""
 
@@ -249,6 +252,7 @@ func _candidate(character_id: String) -> RosterCandidate:
 ## started with that seed. A new attempt replaces any older one, on the server too.
 func begin_stage(stage_id: String, roster: Variant = null) -> Outcome:
 	attempt = {}
+	unreported = null
 	var chosen: Array = auto_roster(stage_id) if roster == null else (roster as Array).duplicate()
 	var reply: Outcome = _adopt(await backend.begin_stage(stage_id, chosen))
 	if not reply.is_ok():
@@ -309,17 +313,57 @@ func battle_options(run_seed: int) -> Dictionary:
 	}
 
 
+## `battle_options` rebuilt from the inputs an attempt froze on the server (`AttemptInputs`: owned heroes, levels, loadouts, skill ranks,
+## Memory Nodes), so a resumed battle runs exactly what the server re-simulates even if the build changed since. JSON numbers become ints
+## where `battle_options` has ints.
+func frozen_battle_options(inputs: Dictionary, run_seed: int) -> Dictionary:
+	var story_dict: Dictionary = rules.story.to_persisted_dict(state.story_state)
+	story_dict["owned_character_ids"] = inputs.get("owned_character_ids", []) if inputs.get("owned_character_ids") is Array else []
+	var story: StoryState.PlayerStoryState = rules.story.from_persisted_dict(story_dict)
+	var ints: Callable = func(values: Variant) -> Dictionary:
+		var result: Dictionary = {}
+		if values is Dictionary:
+			for key: String in values:
+				result[key] = int((values as Dictionary)[key])
+		return result
+	var ranks: Dictionary = {}
+	var raw_ranks: Variant = inputs.get("skill_ranks")
+	if raw_ranks is Dictionary:
+		for character_id: String in raw_ranks:
+			ranks[character_id] = ints.call((raw_ranks as Dictionary)[character_id])
+	var loadouts: Dictionary = {}
+	var raw_equipment: Variant = inputs.get("equipment")
+	if raw_equipment is Dictionary:
+		for character_id: String in raw_equipment:
+			var loadout: Dictionary = ((raw_equipment as Dictionary)[character_id] as Dictionary).duplicate(true)
+			for level_key: String in ["weapon_level", "armor_level"]:
+				if loadout.has(level_key):
+					loadout[level_key] = int(loadout[level_key])
+			loadouts[character_id] = loadout
+	return {
+		"story_state": story,
+		"player_levels": ints.call(inputs.get("player_levels")),
+		"equipment": loadouts,
+		"skill_ranks": ranks,
+		"memory_nodes": ints.call(inputs.get("memory_nodes")),
+		"run_seed": run_seed,
+	}
+
+
 ## Starts the battle of `stage_id` on a worker thread with the seed of the attempt `begin_stage` opened. `roster` null = the default party
-## (`auto_roster`). The main thread polls `WorkerJob.is_finished()`, then hands `finish()` and the same `roster` to `complete_battle`.
+## (`auto_roster`). The main thread polls `WorkerJob.is_finished()`, then hands `finish()` and the same `roster` to `complete_battle`. A
+## resumed attempt runs on the inputs the server froze.
 func start_battle(stage_id: String, roster: Variant, run_seed: int) -> WorkerJob:
 	var chosen: Array = auto_roster(stage_id) if roster == null else (roster as Array).duplicate()
-	var options: Dictionary = battle_options(run_seed)
+	var frozen: Variant = attempt.get("inputs") if attempt.get("stage_id") == stage_id and attempt.get("run_seed") == run_seed else null
+	var options: Dictionary = frozen_battle_options(frozen, run_seed) if frozen is Dictionary else battle_options(run_seed)
 	var service: BattleService = battle_service
 	return WorkerJob.start(func() -> Variant: return service.run(stage_id, chosen, options))
 
 
 ## Reports a finished battle (coroutine). A victory goes to the server, which re-runs the attempt, decides what it is worth and replies with
-## the new snapshot; `state` moves only then. A defeat reports nothing (the open attempt simply expires with the next one).
+## the new snapshot; `state` moves only then. A victory whose report got no reply stays `unreported` with its attempt (`report_again`). A
+## defeat gives the attempt up on the server (best effort: a failure leaves it open, which costs nothing).
 func complete_battle(result: BattleService.BattleResult) -> StageOutcome:
 	var outcome: StageOutcome = StageOutcome.new()
 	outcome.battle = result
@@ -329,6 +373,9 @@ func complete_battle(result: BattleService.BattleResult) -> StageOutcome:
 		outcome.error_kind = ERROR_BATTLE
 		return outcome
 	if result.outcome != "victory":
+		if not attempt.is_empty() and attempt.get("stage_id") == result.stage_id and attempt.get("run_seed") == result.run_seed:
+			_adopt(await backend.abandon_attempt(String(attempt["attempt_id"])))
+		attempt = {}
 		return outcome
 	if stage(result.stage_id) == null:
 		outcome.error = "Unknown stage_id '%s'" % result.stage_id
@@ -340,7 +387,13 @@ func complete_battle(result: BattleService.BattleResult) -> StageOutcome:
 		return outcome
 	var client_result: Dictionary = {"outcome": result.outcome, "stars": result.stars, "actions": result.actions, "cycles": result.cycles}
 	var reported: Outcome = _adopt(await backend.submit_victory(String(attempt["attempt_id"]), client_result))
+	if not reported.is_ok() and reported.error_kind == GameBackend.KIND_OFFLINE:
+		unreported = result
+		outcome.error = reported.error
+		outcome.error_kind = reported.error_kind
+		return outcome
 	attempt = {}
+	unreported = null
 	if not reported.is_ok():
 		outcome.error = reported.error
 		outcome.error_kind = reported.error_kind
@@ -350,6 +403,42 @@ func complete_battle(result: BattleService.BattleResult) -> StageOutcome:
 	outcome.story_state = state.story_state
 	outcome.first_clear = bool(value.get("first_clear", false))
 	return outcome
+
+
+## Sends the unreported victory again (coroutine): the same request, so a report that did commit is replayed, never paid twice.
+func report_again() -> StageOutcome:
+	if unreported == null:
+		var none: StageOutcome = StageOutcome.new()
+		none.story_state = state.story_state
+		none.error = "There is no unreported victory"
+		none.error_kind = ERROR_FLOW
+		return none
+	return await complete_battle(unreported)
+
+
+## The battle the server still holds open (after a restart, INF-014); {} = none. See `PlayerState.open_attempt`.
+func open_attempt() -> Dictionary:
+	return state.open_attempt() if state != null else {}
+
+
+## Takes the snapshot's open attempt as the battle in progress, so `start_battle` re-runs it on the server's frozen inputs and
+## `complete_battle` reports it. False when there is none.
+func resume_open_attempt() -> bool:
+	var open: Dictionary = open_attempt()
+	if open.is_empty():
+		return false
+	attempt = open
+	unreported = null
+	return true
+
+
+## Gives the snapshot's open attempt up (the player chose not to resume it; coroutine).
+func abandon_open_attempt() -> Outcome:
+	var open: Dictionary = open_attempt()
+	if open.is_empty():
+		return Outcome.ok()
+	attempt = {}
+	return _adopt(await backend.abandon_attempt(String(open["attempt_id"])))
 
 
 ## Runs and reports one attempt, waiting for the worker (headless tests, tools; coroutine). Screens use `start_battle` and poll.

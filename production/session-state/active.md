@@ -2,19 +2,20 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md, INF backlog)
-Feature: G0–G3 first two slices merged
-Task: none in progress — next slice to be chosen from the roadmap
+Feature: G2 third slice — uncertain operations and battle recovery
+Task: INF-013/014 (DEC-0017)
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
-**Branch:** `claude/adoring-galileo-f7rd3o` → `main` (PR #18 merged + deployed; PR #19 merging with this checkpoint)
-**State:** see `docs/CURRENT_STATE.md` snapshot and the roadmap status table. Slice 1 (DEC-0015): release contract, state revision, consistent snapshot, deploy SHA check + no automatic rollback. Slice 2 (DEC-0016): UomdNative plugin + Google sign-in, 401 renewal with the same key, permission allowlist, CI `android` job (debug APK signed with the repository debug key, SHA-1 84:E8:…:9A:4D).
-**Next step:** owner device test of sign-in (OQ-015). Then, per the roadmap order: INF-013 operation reconciliation + INF-014 battle recovery (G2), INF-006 staging (G1), INF-002 v1 capability list (G0, owner decisions on billing/ads/social).
-**Blocked on (owner):** OQ-015 device test; OQ-014 missing `docs/INFRASTRUCTURE_REVIEW.md`; OQ-006 Neon branch protection.
+**Branch:** `claude/adoring-galileo-f7rd3o` (PR → `main`; #18, #19 merged and deployed, live 126be16)
+**Current task:** slice 3 implemented: `GET /v1/operations/{key}`, `POST /v1/attempts/{id}/abandon`, snapshot `open_attempt`; client keeps an uncertain mutation's key until settled, keeps an unreported victory, offers Resume/Give up for an open attempt, defeats abandon. Local: vitest 396, GUT 281.
+**Next step:** PR, CI, merge (owner asked to merge per slice). Then per the roadmap: INF-015 economic journal / INF-016 intake & retention (rest of G2), INF-006 staging (G1), INF-002 v1 capability list (G0, owner decisions).
+**Device evidence:** owner installed the CI debug APK and signed in with Google (INF-017 VERIFIED, OQ-015 closed).
+**Blocked on (owner):** OQ-014 missing `docs/INFRASTRUCTURE_REVIEW.md`; OQ-006 Neon branch protection.
 **Files in progress:** none
-**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014, OQ-015 open; OQ-000/005 closed — do not remind)
-**Local test infra (session-local, recreate as needed):** Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`initdb -U uomd --auth=trust`, `pg_ctl -o '-k /var/tmp/uomd-pg -p 54329'` as user postgres; `TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`); Android SDK `/var/tmp/android-sdk` (cmdline-tools sha1-verified, platform 36, build-tools 36.1.0); Godot Android templates in `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
+**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014 open; OQ-000/005 closed — do not remind)
+**Local test infra (session-local, recreate as needed):** Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`initdb -U uomd --auth=trust`, `pg_ctl -o '-k /var/tmp/uomd-pg -p 54329'` as user postgres; `TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`); Android SDK `/var/tmp/android-sdk`; Godot Android templates in `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
 <!-- /CHECKPOINT -->
 
 ---

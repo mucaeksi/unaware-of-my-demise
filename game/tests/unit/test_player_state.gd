@@ -36,6 +36,10 @@ class _StubBackend extends GameBackend:
 	func level_up(_character_id: String, _items: Dictionary) -> Outcome:
 		return _answer("level_up")
 
+	func abandon_attempt(attempt_id: String) -> Outcome:
+		args = [attempt_id]
+		return _answer("abandon_attempt")
+
 
 static var _flow: GameFlow = null
 
@@ -193,15 +197,22 @@ func test_battle_options_carry_only_what_the_player_owns() -> void:
 	assert_null(options["equipment"][hero]["armor_id"], "unequipped armor stays off the loadout")
 
 
-func test_a_defeat_reports_nothing_to_the_server() -> void:
+func test_a_defeat_gives_its_attempt_up_and_reports_no_result() -> void:
 	var backend: _StubBackend = _stub()
 	assert_true((await _flow.sync()).is_ok())
 	var lost: BattleService.BattleResult = BattleService.BattleResult.new()
 	lost.stage_id = "1-1"
 	lost.outcome = "defeat"
+	lost.run_seed = 4242
+	_flow.attempt = {"attempt_id": "attempt-1", "stage_id": "1-1", "run_seed": 4242}
 	var outcome: GameFlow.StageOutcome = await _flow.complete_battle(lost)
 	assert_true(outcome.is_defeat())
-	assert_eq(backend.calls, ["fetch_state"] as Array[String], "only the boot sync reached the server")
+	assert_eq(backend.calls, ["fetch_state", "abandon_attempt"] as Array[String], "no victory report; the attempt is given up (INF-014)")
+	assert_eq(backend.args, ["attempt-1"])
+	assert_true(_flow.attempt.is_empty())
+	backend.reply = Outcome.fail(GameBackend.KIND_OFFLINE, "offline")
+	_flow.attempt = {"attempt_id": "attempt-2", "stage_id": "1-1", "run_seed": 4242}
+	assert_true((await _flow.complete_battle(lost)).is_defeat(), "a failed give-up changes nothing for the player")
 
 
 func test_a_victory_is_reported_and_the_reply_becomes_the_state() -> void:
@@ -288,3 +299,75 @@ func test_an_older_revision_never_replaces_the_held_snapshot() -> void:
 	assert_true((await _flow.advance()).is_ok())
 	assert_eq([_flow.state.revision(), _flow.wallet()["silver_crowns"]], [6, 600])
 
+
+func test_a_victory_without_a_reply_stays_unreported_until_it_is_sent_again() -> void:
+	var backend: _StubBackend = _stub()
+	assert_true((await _flow.sync()).is_ok())
+	var won: BattleService.BattleResult = BattleService.BattleResult.new()
+	won.stage_id = "1-1"
+	won.outcome = "victory"
+	won.run_seed = 4242
+	_flow.attempt = {"attempt_id": "attempt-1", "stage_id": "1-1", "run_seed": 4242}
+	backend.reply = Outcome.fail(GameBackend.KIND_OFFLINE, "The game server cannot be reached.")
+	var lost: GameFlow.StageOutcome = await _flow.complete_battle(won)
+	assert_eq(lost.error_kind, GameBackend.KIND_OFFLINE)
+	assert_true(_flow.unreported == won, "the result is kept (it may have been paid)")
+	assert_eq(_flow.attempt["attempt_id"], "attempt-1", "and so is its attempt")
+	backend.reply = null
+	var again: GameFlow.StageOutcome = await _flow.report_again()
+	assert_eq(again.error, "")
+	assert_eq(backend.calls.count("submit_victory"), 2)
+	assert_eq(backend.args[0], "attempt-1", "the same attempt is reported")
+	assert_null(_flow.unreported)
+	assert_true(_flow.attempt.is_empty())
+	assert_eq((await _flow.report_again()).error_kind, GameFlow.ERROR_FLOW, "nothing left to report")
+
+
+## The inputs the server freezes for the current snapshot (stages.ts `battleInputs`), as they arrive in JSON.
+func _server_inputs(options: Dictionary) -> Dictionary:
+	var owned: Array = []
+	for character_id: String in (options["story_state"] as StoryState.PlayerStoryState).owned_character_ids:
+		owned.append(character_id)
+	owned.sort()
+	var inputs: Dictionary = {"owned_character_ids": owned, "player_levels": options["player_levels"], "equipment": options["equipment"],
+		"skill_ranks": options["skill_ranks"], "memory_nodes": options["memory_nodes"]}
+	return JSON.parse_string(JSON.stringify(inputs))
+
+
+func test_a_resumed_attempt_runs_on_the_inputs_the_server_froze() -> void:
+	var hero: String = "mahmut"
+	_stub({"roster": {hero: {"level": 7, "memory_nodes": 2, "skill_ranks": {"skill_x": 3}}},
+		"inventory": {"inventory_weapons": [{"instance_id": "w1", "template_id": "weapon_mahmut_signature", "level": 4, "equipped_character_id": hero}]}})
+	assert_true((await _flow.sync()).is_ok())
+	var current: Dictionary = _flow.battle_options(99)
+	var frozen: Dictionary = _flow.frozen_battle_options(_server_inputs(current), 99)
+	for key: String in ["player_levels", "equipment", "skill_ranks", "memory_nodes", "run_seed"]:
+		assert_eq(frozen[key], current[key], key)
+	assert_typeof(frozen["player_levels"][hero], TYPE_INT)
+	assert_typeof(frozen["equipment"][hero]["weapon_level"], TYPE_INT)
+	assert_eq((frozen["story_state"] as StoryState.PlayerStoryState).owned_character_ids.keys(),
+		(current["story_state"] as StoryState.PlayerStoryState).owned_character_ids.keys())
+
+
+func test_the_snapshots_open_attempt_can_be_resumed_or_given_up() -> void:
+	var inputs: Dictionary = {"owned_character_ids": ["fadyme", "mahmut"], "player_levels": {}, "equipment": {}, "skill_ranks": {}, "memory_nodes": {}}
+	var backend: _StubBackend = _stub({"open_attempt": {"attempt_id": "attempt-9", "stage_id": "1-1", "run_seed": 77.0, "roster": [], "inputs": inputs}})
+	assert_true((await _flow.sync()).is_ok())
+	var open: Dictionary = _flow.open_attempt()
+	assert_eq([open["attempt_id"], open["stage_id"], open["run_seed"]], ["attempt-9", "1-1", 77])
+	assert_typeof(open["run_seed"], TYPE_INT)
+	assert_true(_flow.resume_open_attempt())
+	var job: WorkerJob = _flow.start_battle("1-1", _flow.attempt["roster"], 77)
+	var result: BattleService.BattleResult = job.finish() as BattleService.BattleResult
+	assert_eq(result.error, "")
+	assert_eq(result.run_seed, 77, "the resumed battle runs on the attempt's seed")
+	var outcome: GameFlow.StageOutcome = await _flow.complete_battle(result)
+	assert_eq(outcome.error, "")
+	assert_eq(backend.calls[-1], "submit_victory" if result.outcome == "victory" else "abandon_attempt")
+	assert_eq(backend.args[0], "attempt-9")
+	assert_true((await _flow.abandon_open_attempt()).is_ok())
+	assert_eq(backend.calls[-1], "abandon_attempt")
+	backend.snapshot = _snapshot({"open_attempt": null})
+	assert_true((await _flow.sync()).is_ok())
+	assert_true(_flow.open_attempt().is_empty())
+	assert_false(_flow.resume_open_attempt())

@@ -50,6 +50,11 @@ func submit_victory(_attempt_id: String, _client_result: Dictionary) -> Outcome:
 
 
 ## Spends `items` (item_id -> count) on `character_id`. `value`: {"state", "xp_gained", "level_before", "level_after", "stopped_reason"}.
+## Gives up an open attempt (a defeat, or a battle not resumed): it pays nothing. `value`: {"state", "attempt_status"}.
+func abandon_attempt(_attempt_id: String) -> Outcome:
+	return _offline()
+
+
 func level_up(_character_id: String, _items: Dictionary) -> Outcome:
 	return _offline()
 

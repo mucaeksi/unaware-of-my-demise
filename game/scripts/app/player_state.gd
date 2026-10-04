@@ -5,6 +5,7 @@ extends RefCounted
 ##
 ## Snapshot shape (JSON object, versioned by "schema_version"):
 ##   state_revision  the account's change counter: +1 per committed server mutation (absent = -1, from test doubles)
+##   open_attempt  the battle the server holds open (null = none): {"attempt_id", "stage_id", "run_seed", "roster", "inputs"}
 ##   story_state  the `StoryState.to_persisted_dict` form (cursor, completed stages, owned heroes, First Oath)
 ##   wallet       {"silver_crowns", "eclipse_tokens", "account_xp", ...} ints
 ##   items        {item_id: quantity}
@@ -56,6 +57,21 @@ func _section(name: String) -> Dictionary:
 ## The account's state revision (INF-012); -1 when the snapshot carries none.
 func revision() -> int:
 	return int(_data.get("state_revision", -1))
+
+
+## The open battle attempt (INF-014): {"attempt_id", "stage_id", "run_seed" (int), "roster", "inputs"}; {} = none.
+func open_attempt() -> Dictionary:
+	var open: Variant = _data.get("open_attempt")
+	if not (open is Dictionary) or not ((open as Dictionary).get("attempt_id") is String):
+		return {}
+	var data: Dictionary = open
+	return {
+		"attempt_id": str(data["attempt_id"]),
+		"stage_id": str(data.get("stage_id", "")),
+		"run_seed": int(data.get("run_seed", 0)),
+		"roster": data.get("roster") if data.get("roster") is Array else [],
+		"inputs": data.get("inputs") if data.get("inputs") is Dictionary else {},
+	}
 
 
 func wallet() -> Dictionary:

@@ -61,5 +61,6 @@
     "inventory_weapons": [],
     "inventory_armor": [],
     "inventory_accessories": []
-  }
+  },
+  "open_attempt": null
 }

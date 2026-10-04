@@ -10,7 +10,7 @@ import {
   resolveSession,
 } from "./accounts";
 import { consistentRead, transaction, type Connect, type Db } from "./db";
-import { idempotencyKey, runIdempotent } from "./idempotency";
+import { committedOperation, idempotencyKey, runIdempotent } from "./idempotency";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
 import {
@@ -29,7 +29,7 @@ import { banners, convertToFateThreads, history, parsePullRequest, pity, pull } 
 import { pullFingerprint } from "./engine/gacha";
 import { claimQuest, parseQuestClaim, questStatus } from "./quest-claims";
 import { levelUp, parseXpItems, unlockMemoryNode, upgradeSkill } from "./progression";
-import { beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
+import { abandonAttempt, beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
 import { claimInnMeal } from "./ration";
 import { admit, bootstrap, DEVELOPMENT_RELEASE, type ReleaseConfig } from "./release";
 import { bumpStateRevision, snapshot, wallet } from "./state";
@@ -266,6 +266,20 @@ function routes(deps: AppDeps): Record<string, Handler> {
     "POST /v1/inventory/inventory_accessories/:instance_id/reroll": (context) => {
       const instanceId = context.params.instance_id!;
       return mutateNow(context, "inventory_reroll", instanceId, (tx, accountId) => rerollAccessory(tx, accountId, instanceId));
+    },
+
+    // INF-013: whether a mutation whose reply was lost committed, and what it answered then.
+    "GET /v1/operations/:key": async (context) => {
+      const accountId = await requireAccount(context);
+      const operation = await committedOperation(context.db, accountId, context.params.key!.toLowerCase());
+      if (!operation) throw new ApiError(404, "ITEM_NOT_FOUND", "No committed operation with this key");
+      return json(operation);
+    },
+
+    "POST /v1/attempts/:attempt_id/abandon": (context) => {
+      const attemptId = context.params.attempt_id!.toLowerCase();
+      if (!UUID.test(attemptId)) throw new ApiError(404, "ITEM_NOT_FOUND", "Unknown battle attempt");
+      return mutateNow(context, "stage_abandon", attemptId, async (tx, accountId) => ({ ...(await abandonAttempt(tx, accountId, attemptId)) }));
     },
 
     "GET /v1/quests/status": async (context) => {

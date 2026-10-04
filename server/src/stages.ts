@@ -149,6 +149,22 @@ export async function beginAttempt(tx: Db, accountId: string, persisted: Persist
   return { attempt_id: attemptId, stage_id: stageId, run_seed: runSeed };
 }
 
+/**
+ * Gives up an open attempt (a defeat, or a battle the player chose not to resume): it becomes `lost` and pays nothing.
+ * Abandoning an attempt that is already lost or expired changes nothing; one that was won cannot be abandoned.
+ */
+export async function abandonAttempt(tx: Db, accountId: string, attemptId: string): Promise<{ attempt_status: string }> {
+  const { rows } = await tx.query<{ status: string }>("SELECT status FROM stage_attempts WHERE attempt_id = $1 AND account_id = $2 FOR UPDATE", [
+    attemptId,
+    accountId,
+  ]);
+  const status = rows[0]?.status;
+  if (status === undefined) throw new ApiError(404, "ITEM_NOT_FOUND", "Unknown battle attempt");
+  if (status === "won") throw conflict("This battle attempt was already won");
+  if (status === "open") await tx.query("UPDATE stage_attempts SET status = 'lost', resolved_at = now() WHERE attempt_id = $1", [attemptId]);
+  return { attempt_status: "lost" };
+}
+
 /** The stored attempt a re-simulation runs from. */
 export interface StoredAttempt {
   attempt_id: string;

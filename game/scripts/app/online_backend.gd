@@ -7,11 +7,19 @@ extends GameBackend
 ## A session that expired mid-play (401) is renewed once through `reauthenticate` and the request is sent again with the same
 ## Idempotency-Key, so a renewed retry can never act twice.
 ##
+## A mutation whose reply never arrived may or may not have committed (INF-013). It stays `pending` with its key: sent again (the
+## player's "Try again"), it reuses that key, so the server replays its result instead of acting twice. Before any other mutation
+## goes out, the server is asked whether the pending one committed (`GET /v1/operations/{key}`), so an abandoned request is never
+## replayed later as a new action.
+##
 ## Errors come back as `Outcome`s: no connection -> `GameBackend.KIND_OFFLINE`, an API error -> its code in lower case
 ## ("conflict", "unauthorized", "progression", "equipment", ...) with the server's message, a reply that is not JSON ->
 ## `KIND_PROTOCOL`.
 
 const KIND_PROTOCOL: String = "protocol"
+## A session renewal signed in another account (`Online.renew_session`).
+const KIND_ACCOUNT_CHANGED: String = "account_changed"
+const KIND_NOT_FOUND: String = "item_not_found"
 
 
 ## How a request reaches the server; tests substitute their own. `request` is a coroutine returning
@@ -48,6 +56,8 @@ var transport: Transport = HttpTransport.new()
 var client_version_code: int = ClientRelease.version_code()
 ## Coroutine renewing an expired session: returns an `Outcome` whose value is the new token (invalid Callable = no renewal).
 var reauthenticate: Callable = Callable()
+## The last mutation whose outcome is unknown: {"method", "path", "payload", "key"}; {} = none.
+var pending: Dictionary = {}
 
 
 func _init(server_url: String = "", token: String = "", with_transport: Transport = null) -> void:
@@ -66,19 +76,57 @@ static func new_idempotency_key() -> String:
 	return "%s-%s-%s-%s-%s" % [hex.substr(0, 8), hex.substr(8, 4), hex.substr(12, 4), hex.substr(16, 4), hex.substr(20, 12)]
 
 
+func has_pending_operation() -> bool:
+	return not pending.is_empty()
+
+
 func _call(method: int, path: String, body: Variant = null, mutating: bool = false) -> Outcome:
 	var payload: String = JSON.stringify(body) if body != null else ""
-	var key: String = new_idempotency_key() if mutating else ""
+	var key: String = ""
+	if mutating:
+		if not pending.is_empty() and pending["method"] == method and pending["path"] == path and pending["payload"] == payload:
+			key = str(pending["key"])
+		else:
+			if not pending.is_empty():
+				var settled: Outcome = await _settle_pending()
+				if not settled.is_ok():
+					return settled
+			key = new_idempotency_key()
 	var reply: Dictionary = await _send(method, path, payload, key)
 	if int(reply.get("status", 0)) == 0 and mutating:
 		reply = await _send(method, path, payload, key)
 	if int(reply.get("status", 0)) == 401 and not session_token.is_empty() and reauthenticate.is_valid():
 		var renewed: Outcome = await reauthenticate.call()
 		if not renewed.is_ok():
+			if renewed.error_kind == KIND_ACCOUNT_CHANGED:
+				pending = {}
 			return renewed
 		session_token = str(renewed.value)
 		reply = await _send(method, path, payload, key)
+	if mutating:
+		pending = {"method": method, "path": path, "payload": payload, "key": key} if _uncertain(reply) else {}
 	return _outcome(reply)
+
+
+## No reply at all, or a gateway error page instead of the API's JSON: the request may have committed or not.
+static func _uncertain(reply: Dictionary) -> bool:
+	var status: int = int(reply.get("status", 0))
+	if status == 0:
+		return true
+	if status < 500:
+		return false
+	var json: JSON = JSON.new()
+	return json.parse(str(reply.get("body", ""))) != OK or not (json.data is Dictionary) or not ((json.data as Dictionary).get("error") is Dictionary)
+
+
+## Asks whether the pending mutation committed; either answer settles it (committed: its effect is in the next snapshot; not committed:
+## it never happened). Fails, keeping it pending, while the server cannot be asked.
+func _settle_pending() -> Outcome:
+	var asked: Outcome = await _call(HTTPClient.METHOD_GET, "/v1/operations/%s" % str(pending["key"]))
+	if asked.is_ok() or asked.error_kind == KIND_NOT_FOUND:
+		pending = {}
+		return Outcome.ok()
+	return asked
 
 
 func _send(method: int, path: String, payload: String, key: String) -> Dictionary:
@@ -143,6 +191,10 @@ func begin_stage(stage_id: String, roster: Array) -> Outcome:
 
 func submit_victory(attempt_id: String, client_result: Dictionary) -> Outcome:
 	return await _call(HTTPClient.METHOD_POST, "/v1/attempts/%s/victory" % attempt_id.uri_encode(), client_result, true)
+
+
+func abandon_attempt(attempt_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/attempts/%s/abandon" % attempt_id.uri_encode(), {}, true)
 
 
 func level_up(character_id: String, items: Dictionary) -> Outcome:
