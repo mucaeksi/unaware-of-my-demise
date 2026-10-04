@@ -10,6 +10,7 @@ import {
   resolveSession,
 } from "./accounts";
 import { consistentRead, transaction, type Connect, type Db } from "./db";
+import { setJournalContext } from "./journal";
 import { committedOperation, idempotencyKey, runIdempotent } from "./idempotency";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
@@ -51,7 +52,26 @@ export interface AppDeps {
   bannerEpoch?: Date | null;
   /** This deployment's release identity, client floor and maintenance switch; defaults to `DEVELOPMENT_RELEASE`. */
   release?: ReleaseConfig;
+  /** Where the structured request and error log lines go (INF-011); defaults to the Worker log (console). */
+  log?: (entry: LogEntry) => void;
 }
+
+/**
+ * One structured log line (INF-011). Never carries a header, a body, a token or a credential: the route is the pattern
+ * (ids stay out), and an error carries its message and stack only.
+ */
+export interface LogEntry {
+  event: "request" | "unhandled_error";
+  request_id: string;
+  method: string;
+  route: string;
+  status?: number;
+  duration_ms?: number;
+  source_sha?: string | null;
+  error?: string;
+}
+
+const consoleLog = (entry: LogEntry): void => (entry.event === "request" ? console.log : console.error)(JSON.stringify(entry));
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
@@ -101,6 +121,8 @@ async function mutate(
   const accountId = await requireAccount(context);
   const key = idempotencyKey(context.request);
   const { response } = await runIdempotent(context.db, key, accountId, endpoint, fingerprint, async (tx) => {
+    // Every balance or inventory change below is journaled with this request (INF-015).
+    await setJournalContext(tx, key, endpoint);
     const extra = (await action(tx, accountId)) ?? {};
     await bumpStateRevision(tx, accountId);
     return { ...extra, state: await snapshot(tx, accountId, nowUnix) };
@@ -145,7 +167,10 @@ function routes(deps: AppDeps): Record<string, Handler> {
       const isNewAccount = accountId === null;
       if (accountId === null) {
         try {
-          accountId = await transaction(db, (tx) => createAccount(tx, identity.provider, subjectHash));
+          accountId = await transaction(db, async (tx) => {
+            await setJournalContext(tx, null, "account_create");
+            return createAccount(tx, identity.provider, subjectHash);
+          });
         } catch (error) {
           // A concurrent first sign-in of the same identity won the race: use its account.
           if ((error as { code?: string }).code !== UNIQUE_VIOLATION) throw error;
@@ -348,9 +373,13 @@ function routes(deps: AppDeps): Record<string, Handler> {
 }
 
 /** `:name` segments match one path segment of word characters and dashes (stage ids like "1-2", UUIDs). */
-function matchRoute(table: Record<string, Handler>, method: string, pathname: string): { handler: Handler; params: Record<string, string> } | null {
+function matchRoute(
+  table: Record<string, Handler>,
+  method: string,
+  pathname: string,
+): { handler: Handler; params: Record<string, string>; route: string } | null {
   const exact = table[`${method} ${pathname}`];
-  if (exact) return { handler: exact, params: {} };
+  if (exact) return { handler: exact, params: {}, route: `${method} ${pathname}` };
   const segments = pathname.split("/");
   for (const [key, handler] of Object.entries(table)) {
     const [routeMethod, pattern] = key.split(" ") as [string, string];
@@ -364,7 +393,7 @@ function matchRoute(table: Record<string, Handler>, method: string, pathname: st
       params[part.slice(1)] = segment;
       return true;
     });
-    if (matched) return { handler, params };
+    if (matched) return { handler, params, route: key };
   }
   return null;
 }
@@ -383,36 +412,45 @@ const noDatabase: Db = {
 export function createApp(deps: AppDeps): (request: Request) => Promise<Response> {
   const table = routes(deps);
   const release = deps.release ?? DEVELOPMENT_RELEASE;
-  return async (request) => {
-    const url = new URL(request.url);
+  const log = deps.log ?? consoleLog;
+  const sourceSha = release.sourceSha?.slice(0, 12) ?? null;
+
+  const handle = async (request: Request, url: URL, requestId: string): Promise<{ response: Response; route: string }> => {
     const route = matchRoute(table, request.method, url.pathname);
     if (!route) {
       const known = ["GET", "POST", "PUT", "PATCH", "DELETE"].some((method) => matchRoute(table, method, url.pathname) !== null);
-      return errorResponse(new ApiError(known ? 405 : 404, "HTTP_ERROR", known ? "Method Not Allowed" : "Not Found"));
+      return { response: errorResponse(new ApiError(known ? 405 : 404, "HTTP_ERROR", known ? "Method Not Allowed" : "Not Found")), route: "unmatched" };
     }
+    const answer = (response: Response) => ({ response, route: route.route });
     if (url.pathname !== "/healthz") {
       const limiter = url.pathname.startsWith("/v1/auth/") ? deps.authLimiter : deps.apiLimiter;
       if (limiter && !(await limiter.limit({ key: clientKey(request) })).success) {
-        return errorResponse(new ApiError(429, "RATE_LIMITED", "Too many requests"), { "retry-after": "60" });
+        return answer(errorResponse(new ApiError(429, "RATE_LIMITED", "Too many requests"), { "retry-after": "60" }));
       }
     }
     if (!UNGATED.has(url.pathname)) {
       try {
         admit(request, release);
       } catch (error) {
-        if (error instanceof ApiError) return errorResponse(error);
+        if (error instanceof ApiError) return answer(errorResponse(error));
         throw error;
       }
     }
     let connection;
     try {
-      if (NO_DATABASE.has(url.pathname)) return await route.handler({ request, db: noDatabase, params: route.params });
+      if (NO_DATABASE.has(url.pathname)) return answer(await route.handler({ request, db: noDatabase, params: route.params }));
       connection = await deps.connect();
-      return await route.handler({ request, db: connection, params: route.params });
+      return answer(await route.handler({ request, db: connection, params: route.params }));
     } catch (error) {
-      if (error instanceof ApiError) return errorResponse(error);
-      console.error("unhandled", request.method, url.pathname, error);
-      return errorResponse(new ApiError(500, "INTERNAL_ERROR", "Unexpected server error"));
+      if (error instanceof ApiError) return answer(errorResponse(error));
+      log({
+        event: "unhandled_error",
+        request_id: requestId,
+        method: request.method,
+        route: route.route,
+        error: error instanceof Error ? (error.stack ?? error.message) : String(error),
+      });
+      return answer(errorResponse(new ApiError(500, "INTERNAL_ERROR", "Unexpected server error")));
     } finally {
       if (connection) {
         const released = connection.release().catch((error: unknown) => console.error("release failed", error));
@@ -420,6 +458,17 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
         else await released;
       }
     }
+  };
+
+  return async (request) => {
+    const started = Date.now();
+    // Cloudflare's ray id ties the line to the edge logs; elsewhere (tests, local runs) a fresh UUID.
+    const requestId = request.headers.get("cf-ray") ?? crypto.randomUUID();
+    const url = new URL(request.url);
+    const { response, route } = await handle(request, url, requestId);
+    response.headers.set("x-request-id", requestId);
+    log({ event: "request", request_id: requestId, method: request.method, route, status: response.status, duration_ms: Date.now() - started, source_sha: sourceSha });
+    return response;
   };
 }
 

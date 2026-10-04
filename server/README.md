@@ -50,6 +50,10 @@ Every route except `/healthz` and `/v1/bootstrap` passes the release gate first:
 is below `MIN_CLIENT_VERSION_CODE` gets 426 `UPDATE_REQUIRED` (the header is optional; the Godot client always sends
 it), and a non-empty `MAINTENANCE_MESSAGE` answers 503 `MAINTENANCE` with that message.
 
+Economic journal (INF-015, migration 0005, DEC-0019): database triggers record every change to a currency (not Ration),
+a stackable item, an equipment instance, a hero's copies or Memory Shards and gacha pity in `economy_journal`, with the
+request's Idempotency-Key, route and rules hash (`src/journal.ts` sets them per transaction).
+
 Data lifecycle (INF-016, `src/retention.ts`, cron `17 3 * * *` UTC): nonces are deleted a day after expiry and sessions a
 week after; an open attempt older than 24 h can no longer be won, the snapshot stops offering it and the job marks it
 `expired`; a stored reply is replayable for 30 days, then purged while its key stays as a tombstone, so a later retry
@@ -57,6 +61,9 @@ gets 409 `OPERATION_EXPIRED` and is never executed again. Request bodies are cap
 
 Errors use the shape `{"error": {"code", "message"}}`. The codes are `UPDATE_REQUIRED` (426), `MAINTENANCE` (503), `OPERATION_EXPIRED` (409), `UNAUTHORIZED`, `INVALID_REQUEST`, `INSUFFICIENT_FUNDS` (402, Ration or Fate's Threads), `RATE_LIMITED`,
 `SERVICE_UNAVAILABLE`, `CONFLICT`, `PROGRESSION` and `EQUIPMENT` (409, a request the rules refuse; the client shows the message), `ITEM_NOT_FOUND`, `HTTP_ERROR` and `INTERNAL_ERROR`.
+
+Every response carries `x-request-id` (Cloudflare's `cf-ray`, or a UUID); the Worker log has one JSON line per request
+with that id, the route pattern, status, duration and deployed commit (INF-011). Headers, bodies and tokens are never logged.
 
 Security properties:
 - The Google `sub` and the session tokens are stored only as SHA-256 hashes.

@@ -88,7 +88,13 @@ jobs:
           echo "deploy=true" >> "${GITHUB_OUTPUT}"
       - name: Apply pending migrations (Neon)
         if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
-        run: database/migrate.sh
+        run: |
+          database/migrate.sh
+          # CI tests on database/POSTGRES_MAJOR; a Neon upgrade must be mirrored there (INF-010).
+          expected="$(tr -d '[:space:]' < database/POSTGRES_MAJOR)"
+          actual="$(psql "${DATABASE_URL}" -X -At -c "SELECT current_setting('server_version_num')::int / 10000")"
+          echo "production PostgreSQL major ${actual} (CI tests ${expected})"
+          [ "${actual}" = "${expected}" ] || echo "::warning::production runs PostgreSQL ${actual} but CI tests ${expected}: update database/POSTGRES_MAJOR and the CI service images"
       - uses: actions/setup-node@v4
         if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
         with:

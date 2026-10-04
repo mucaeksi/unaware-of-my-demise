@@ -335,3 +335,46 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   - An open attempt older than 24 h cannot be won and is not offered for resume (it paid nothing). This also bounds
     how long an attempt can outlive a rules change (INF-022 still to do).
   - Nothing that proves an economic outcome is deleted: claims, pull history, resolved attempts and key tombstones stay.
+
+## DEC-0019 — Economic journal by database triggers
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-015).
+- Context: grants and debits were only visible through their side tables (pull history, claims, attempt results,
+  stored replies); there was no single record that explains a balance or ties a change to the request and the content
+  release that made it.
+- Decision:
+  - Migration 0005 adds `economy_journal` and triggers on `wallet` (Eclipse Tokens, Fate's Threads, Silver Crowns,
+    Account XP), `inventory_items`, the three equipment tables (minted/destroyed), `roster` (copies, Memory Shards)
+    and `gacha_pity` (state before and after). A trigger cannot be forgotten by a new grant path.
+  - Each row carries the request's Idempotency-Key, route and rules hash, set once per transaction by the Worker
+    (`setJournalContext`, transaction-local `set_config`); account creation records `account_create`; changes outside
+    a request are `unattributed`. With the reward seed (stage_attempts) and RNG seed (pull_history) a past outcome is
+    reproducible after tuning.
+  - Ration is not journaled (time regeneration makes a row diff misleading); its spends are on the verified victory.
+  - Invariant (tested): the journaled deltas of each currency and item add up to the balance.
+  - Journal rows go with a deleted account (cascade); retention/anonymization is INF-020.
+
+## DEC-0020 — Migration runner safety
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-009).
+- Context: `migrate.sh --check` created the ledger table; a migration waiting for a lock held by live traffic queued
+  indefinitely (and every request behind it); nothing serialized runners besides the deploy concurrency group; ledger
+  and files were only compared by checksum.
+- Decision: `--check` is read-only; each migration transaction takes an advisory lock, re-checks the ledger, and runs
+  with `SET LOCAL lock_timeout` (10 s, `MIGRATION_LOCK_TIMEOUT`) and `statement_timeout` (5 min); files must be
+  numbered contiguously; a renamed applied file is an error; a ledger row without a file is a warning (rollback
+  deploy). Compatibility rule: every migration is additive and must keep the Worker version that is still serving
+  working, because the deploy migrates before it switches the Worker. Each property is exercised by `database/test.sh`.
+
+## DEC-0021 — Test-database safety and request observability
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-010, INF-011).
+- Context: production Neon runs PostgreSQL 18 (project `pg_version`), CI and local tests ran 16; the test tools would
+  create and drop databases on whatever server they were given; failed setups left databases behind; the Worker logged
+  only unhandled errors, with no id to tie a player's report to a log line.
+- Decision:
+  - `database/POSTGRES_MAJOR` (18) is the tested major: the CI services use it and a step checks it; the deploy warns if
+    production differs. All suites were re-run on PostgreSQL 18 before the switch.
+  - `database/test.sh` and the API tests' `createTestDatabase` refuse Neon hosts always and any non-loopback host unless
+    `TEST_DATABASE_ALLOW_REMOTE=1`; database names are unique; cleanup also runs on failure.
+  - Every request writes one JSON line `{event, request_id, method, route (pattern), status, duration_ms, source_sha}`;
+    unexpected errors write `unhandled_error` with the same id. The id is Cloudflare's `cf-ray` (or a UUID) and is
+    returned as `x-request-id`. Headers, bodies, tokens and path ids are never logged.
+- Not done here: alerting, dashboards, quota/cost budgets and runbooks (rest of INF-011).
