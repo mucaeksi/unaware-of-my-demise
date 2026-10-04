@@ -21,7 +21,8 @@ db_url="$(sed -E "s#^(postgres(ql)?://[^/?]*)/[^?]*#\1/${db}#" <<<"${ADMIN_DATAB
 log="$(mktemp)"
 worker_pid=""
 cleanup() {
-  [[ -n "${worker_pid}" ]] && kill "${worker_pid}" 2>/dev/null || true
+  # wrangler runs in its own process group (setsid below): npx, node and workerd all stop, not only the subshell.
+  [[ -n "${worker_pid}" ]] && kill -- "-${worker_pid}" 2>/dev/null || true
   wait 2>/dev/null || true
   psql "${ADMIN_DATABASE_URL}" -X -q -c "DROP DATABASE IF EXISTS ${db} WITH (FORCE)" >/dev/null 2>&1 || true
   rm -f "${log}"
@@ -33,7 +34,7 @@ DATABASE_URL="${db_url}" "${repo_dir}/database/migrate.sh" >/dev/null
 
 # Hyperdrive's local mode connects the binding straight to this database.
 (cd "${server_dir}" && CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE="${db_url}" \
-  npx wrangler dev --config wrangler.e2e.jsonc --ip 127.0.0.1 --port "${port}" --show-interactive-dev-session=false >"${log}" 2>&1) &
+  exec setsid npx wrangler dev --config wrangler.e2e.jsonc --ip 127.0.0.1 --port "${port}" --show-interactive-dev-session=false >"${log}" 2>&1) &
 worker_pid=$!
 for _ in $(seq 1 90); do
   curl -fsS "http://127.0.0.1:${port}/healthz" >/dev/null 2>&1 && break
