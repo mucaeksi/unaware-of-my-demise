@@ -57,6 +57,35 @@ func test_vn_shows_the_first_line_and_walks_forward_and_back() -> void:
 	assert_false(vn._back_button.disabled)
 
 
+## INF-024: the scene's location and the speaker name the art; shipped art replaces the placeholder, missing art keeps it.
+func test_vn_shows_resolved_art_and_keeps_the_placeholder_where_there_is_none() -> void:
+	var catalog: AssetCatalog = AssetCatalog.from_packs({
+		AssetCatalog.VISUAL_PACK: {"chapter_environments": [{"id": "forest", "master": "assets/bg/forest.webp"}]},
+		AssetCatalog.CHARACTER_PACK: {"characters": [{"id": "mahmut", "planned_files": {"vn_bust": "assets/c/mahmut.webp"}}]},
+	})
+	var art: Texture2D = ImageTexture.create_from_image(Image.create(4, 4, false, Image.FORMAT_RGBA8))
+	var vn: VnScreen = VnScreen.new()
+	vn.assets = AssetResolver.new(catalog, func(path: String) -> bool: return path == "res://assets/bg/forest.webp" or path == "res://assets/c/mahmut.webp",
+		func(_path: String) -> Resource: return art)
+	add_child_autofree(vn)
+	var scene: Dictionary = _scene(2, {"location_id": "forest"})
+	scene["lines"][1] = {"line_id": "n", "speaker_id": "narrator", "text_en": "Wind."}
+	assert_true(vn.load_scene(scene))
+	assert_eq(vn.background_reference(), "background/forest/story")
+	assert_eq(vn.bust_reference(), "character/mahmut/vn_bust")
+	assert_true(vn.shows_background_art())
+	assert_true(vn.shows_bust_art())
+	assert_same(vn._bust.texture, art)
+	assert_false(vn._placeholder_tag.visible, "all art present: no placeholder label")
+	assert_eq(vn._bust_letter.text, "", "the bust replaces the initial")
+	vn.go_next()
+	assert_false(vn.shows_bust_art(), "the narrator has no bust art")
+	assert_true(vn._placeholder_tag.visible)
+	assert_eq(vn._bust_letter.text, "N")
+	assert_true(vn.load_scene(_scene(1, {"location_id": "cave"})))
+	assert_false(vn.shows_background_art(), "an environment without art keeps the tinted panel")
+
+
 func test_vn_finishes_exactly_once_and_can_be_reused() -> void:
 	var vn: VnScreen = add_child_autofree(VnScreen.new())
 	watch_signals(vn)

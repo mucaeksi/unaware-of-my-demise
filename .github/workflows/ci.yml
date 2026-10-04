@@ -1,4 +1,5 @@
-# Validation for every push and pull request: database schema, Worker API, Godot client. Deploy jobs come later (DEC-0003).
+# Validation for every push and pull request: database schema, Worker API, Godot client, admin panel, Android debug APK.
+# Production deploys run in deploy.yml (DEC-0003).
 name: CI
 
 on:
@@ -14,6 +15,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # INF-021: the content packs (game/data/content, the single authoring source) agree with their manifest, which both
+  # client and server hash into the rules hash, and pass the cross-pack audit (references resolve, every battle rule key
+  # is read by both the GDScript and the TypeScript engine or recorded as descriptive).
+  content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 tools/content_manifest.py --check
+      - run: python3 tools/validate_part1_content.py
+
   database:
     runs-on: ubuntu-latest
     services:
@@ -89,8 +103,38 @@ jobs:
           "${GODOT}" --headless --path game --import || "${GODOT}" --headless --path game --import
       - name: GUT (unit, parity, ui, contract)
         run: |
-          "${GODOT}" --headless --path game -s addons/gut/gut_cmdln.gd -gexit | tee gut.log
-          grep -q "All tests passed" gut.log
+          set -o pipefail
+          "${GODOT}" --headless --path game -s addons/gut/gut_cmdln.gd -gexit -gjunit_xml_file="${RUNNER_TEMP}/gut-junit.xml" 2>&1 | tee "${RUNNER_TEMP}/gut.log"
+      # INF-007: GUT's exit status misses a test script that fails to load; the report check does not.
+      - name: Every test script ran, none failed, no script errors
+        if: ${{ !cancelled() }}
+        run: game/tools/check_gut_report.sh "${RUNNER_TEMP}/gut-junit.xml" "${RUNNER_TEMP}/gut.log"
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: gut-report
+          path: |
+            ${{ runner.temp }}/gut-junit.xml
+            ${{ runner.temp }}/gut.log
+          retention-days: 14
+
+  # INF-007: the admin panel installs from its lockfile, type-checks and builds. It is still the starter (docs/CURRENT_STATE.md
+  # §3, NEEDS_REWRITE in INF-033); this job keeps the rewrite starting from a reproducible, building base.
+  admin:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: admin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: admin/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
 
   # INF-007/INF-017: the UomdNative Android plugin (Google sign-in through Credential Manager) and a debug APK built from it with
   # the pinned toolchain, verified by game/tools/verify_apk.sh and kept as an artifact for device tests. The APK is signed with

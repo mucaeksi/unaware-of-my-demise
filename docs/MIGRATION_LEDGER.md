@@ -117,3 +117,15 @@ Rollback point: the commit before this batch. The LEGACY originals in Drive were
 Left in Drive: `gradlew`, `gradlew.bat`, `gradle/wrapper/gradle-wrapper.{jar,properties}` (Gradle 8.11.1 comes from
 `gradle/actions/setup-gradle`; no binary jar in Git) and the prebuilt AARs under `addons/uomd_native/bin/` (built from
 source by `build_uomd_native.sh`, never committed).
+
+## BATCH-0004 — content tools (INF-021, 2026-10-04)
+
+Scope: the LEGACY content validator and manifest tool, adapted so `game/data/content` is the single authoring source
+(DEC-0026). Downloaded through the Drive connector, decoded in the sandbox, recorded by git blob sha1/size. The LEGACY
+originals in Drive were not modified.
+
+| ID | Google Drive source | GitHub target | Action | Transformation | Validation | Status |
+|---|---|---|---|---|---|---|
+| MIG-0041 | `LEGACY:tools/validate_part1_content.py` (`1wxfuSGYev63Q1A7cY5szVbz3KUxuioSq` blob `65a9ff0` 53,071 B) | `tools/validate_part1_content.py` | ADAPT | content dir `game/data/content`; runtime rule keys pinned to a (GDScript client, TypeScript server) file pair instead of the LEGACY Python engine; Ration pin 120/360 → 100/300 (DEC-0014) | passes on the current packs; fails on an unclassified rule key and on a server engine that stops reading a runtime key; CI job `content` | MIGRATED |
+| MIG-0042 | `LEGACY:tools/sync_godot_content.py` (`1gHQUZGc5ozRqu2xZXJLUBRGsSqRavkn0` 4,268 B) | `tools/content_manifest.py` | ADAPT | no mirror (one source): check/rewrite `MANIFEST.json` in place; manifest `note`/`source` now name the new tool (pack hashes, hence the rules hash, unchanged) | `--check` fails on an edited pack; CI job `content`; GUT `test_content_copy` | MIGRATED |
+| — | `LEGACY:tools/build_part1_content.py` (`1y4gTsqYLZN7C0qcNd1hRKsJdmAMywFGL` blob `f939a78` 79,285 B) | — | REFERENCE | not migrated: it regenerates packs from the LEGACY GDD markdown and `battle_effect_catalog.py`; the packs it produced are the authoring source now (DEC-0026) | — | NOT_MIGRATED |

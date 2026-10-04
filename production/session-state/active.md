@@ -2,15 +2,15 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md) — finish it step by step
-Feature: batch 2 (PR #23): INF-019/020, INF-005/023, INF-022
-Task: merge #23, then batch 3
+Feature: batch 3 (INF-007, INF-011/008, INF-006) — PR to main open
+Task: merge batch 3 when CI is green, run the restore drill once, then G4
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
 **Owner directives (2026-10-04):** finish the roadmap in order, step by step; the owner presses "auto-continue" when a usage limit hits, so always leave a resumable checkpoint here. Merge to `main` every 3–4 verified steps (batch PRs), push the branch after each commit. Collect every owner decision in `docs/OWNER_DECISIONS.md` and present them together at the end. `narrative/` belongs to another team: do not touch it.
-**Branch:** `claude/adoring-galileo-f7rd3o`. Merged + live: #18–#22 (live `c5bd1ab`). Open: PR #23 (batch 2).
-**Next step:** after #23: batch 3 = INF-007 (GUT result/exit status, admin build in CI), INF-011 runbooks (backup/restore, rollback, incident), INF-006 staging scaffolding (skips without owner secrets). Then G4 (INF-021/024/025/026), G5 patch pipeline, G6 admin/liveops, G7 release AAB — owner-gated parts go to docs/OWNER_DECISIONS.md.
+**Branch:** `claude/adoring-galileo-f7rd3o`. Merged + live: #18–#23 (live `6857fdd`, migrations 0001–0007 on Neon). Batch 3 commits: f77876a (INF-007 GUT report check + admin lockfile/CI), 0900ecc (verify.sh, restore drill, recorded rollback, runbooks), 4324221 (staging scaffold + DB environment guard).
+**Next step:** merge batch 3 → verify live source_sha and that the deploy recorded `uomd.environment = production` (Neon: `SELECT current_setting('uomd.environment', true)` in a new session) → dispatch `restore-drill.yml` once and record its timings in docs/runbooks/BACKUP_RESTORE.md. Then G4 (INF-021/024/025/026), G5 patch pipeline (INF-027–032), G6 admin/liveops (INF-033–038), G7 release AAB (INF-039–044) — owner-gated parts go to docs/OWNER_DECISIONS.md (D-01…D-07 so far).
 **Files in progress:** none
 **Open questions:** `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014, OQ-016 open; OQ-000/005 closed — do not remind); owner decisions collected in `docs/OWNER_DECISIONS.md`.
 **Local test infra (session-local, recreate as needed):** PostgreSQL 18 (production major) from PGDG at `/var/tmp/uomd-pg18` port 54318 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg18&port=54318"`; `PATH=/usr/lib/postgresql/18/bin:$PATH` for database/test.sh); Godot 4.7.2 in the scratchpad (checksum-verified download); Android SDK `/var/tmp/android-sdk`; Godot Android templates `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.

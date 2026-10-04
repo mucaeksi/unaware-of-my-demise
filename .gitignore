@@ -43,3 +43,5 @@ game/android/plugins/uomd_native/.gradle/
 # Godot Android build template (installed from the export templates by game/tools/build_android_debug.sh)
 game/android/build/
 game/android/.build_version
+__pycache__/
+*.pyc
