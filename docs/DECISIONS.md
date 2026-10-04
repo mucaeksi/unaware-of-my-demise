@@ -50,7 +50,13 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   - It applies pending migrations to Neon (`database/migrate.sh`, secret `DATABASE_URL`), then runs `wrangler deploy`
     (secret `CLOUDFLARE_API_TOKEN`, variable `CLOUDFLARE_ACCOUNT_ID`), then checks `/healthz` on workers.dev.
   - The owner added the secrets and the variable (OQ-003, OQ-012). The public endpoint is workers.dev (OQ-013,
-    `workers_dev: true`).
+    `workers_dev: true`, `preview_urls: false`).
+  - Verified 2026-10-04, Deploy run 2 (`06bbab7`):
+    - migrations 0001 and 0002 were applied on Neon `UOMD`;
+    - Worker version `668aef7e` is live at `https://unaware-of-my-demise.muratcaneksiii.workers.dev`;
+    - `/healthz` answered `{"status":"ok"}`, a database round trip through Hyperdrive.
+  - Run 1 failed before connecting: Neon's pooled endpoint rejects `PGOPTIONS` startup options, fixed in #13.
+  - The client's project setting `uomd/online/server_url` points at this URL.
 - Original proposal:
 - Facts: no GitHub Actions; Cloudflare Workers Builds trigger is bound to the
   deleted repo id `1395495121` and all 6 builds failed.

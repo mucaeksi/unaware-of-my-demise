@@ -8,6 +8,8 @@
   "compatibility_flags": ["nodejs_compat"],
   // Public API endpoint on workers.dev (OQ-013, owner 2026-10-04); a custom-domain route can replace it later.
   "workers_dev": true,
+  // No public per-version preview URLs: only the deployed version answers.
+  "preview_urls": false,
   "observability": { "enabled": true },
   "hyperdrive": [
     // unaware-of-my-demise-production -> Neon UOMD (query caching off: transactional game state).

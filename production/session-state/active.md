@@ -8,9 +8,9 @@ Task: gacha + Ration + deploy (DEC-0003/0013/0014)
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
-**Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR #12 → `main`; #9–#11 merged)
-**Current task:** production deploy pipeline (DEC-0003) — first run on merge of PR #12
-**Next step:** DONE: engine port (parity-gated), every gameplay route (stages/victories, progression, equipment, quests, gacha pull/banners/history/pity, wallet convert), Ration (DEC-0014), client `GameBackend` calls for all of them, license (DEC-0005), Worker deployed to Cloudflare (version 097ca9db, template + orphaned trigger deleted). Client Summon + Quests screens (GUT 245), Inn Meal. NEXT: (1) merge PR #12 when CI is green; (2) verify the first Deploy run (migrations + /healthz on workers.dev); (3) Android Credential Manager sign-in (sets `Online.session_token`); (4) Eclipse Token → Fate's Thread convert button in the Summon screen; (5) Gemini asset work only after the foundation (DEC-0004).
+**Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR → `main` per change; #9–#14 merged)
+**Current task:** production is live (`https://unaware-of-my-demise.muratcaneksiii.workers.dev`, /healthz ok, migrations 0001–0002 on Neon); every merge to `main` deploys via `.github/workflows/deploy.yml`
+**Next step:** DONE: engine port (parity-gated), every gameplay route (stages/victories, progression, equipment, quests, gacha pull/banners/history/pity, wallet convert), Ration (DEC-0014), client `GameBackend` calls for all of them, license (DEC-0005), Worker deployed to Cloudflare (version 097ca9db, template + orphaned trigger deleted). Client Summon + Quests screens (GUT 245), Inn Meal. Summon exchange button. NEXT: (1) Android Credential Manager sign-in (sets `Online.session_token`; needs the owner's Web OAuth client id → `GOOGLE_CLIENT_IDS`, Android client needs a signing SHA-1); (2) Gemini asset work only after the foundation (DEC-0004).
 **Blocked on (owner):** Google OAuth client id → `GOOGLE_CLIENT_IDS` (sign-in answers 503 until set).
 **Files in progress:** none
 **Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-006 open; OQ-000/005 closed — do not remind)
