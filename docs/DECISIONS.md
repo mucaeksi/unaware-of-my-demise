@@ -45,10 +45,12 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
     `097ca9db-15e6-4ed4-aba6-fa52adf91792`, with Hyperdrive `edbe90af…`, both rate limiters, and `GOOGLE_CLIENT_IDS` / `BANNER_EPOCH`
     empty. No route and no workers.dev (`workers_dev: false`), so it is not reachable yet.
   - The owner's Cloudflare credentials live only outside the repository and are never committed.
-- Pending:
-  1. apply `database/migrations` to Neon `UOMD` (OQ-012);
-  2. choose the public endpoint, a custom-domain route or workers.dev (OQ-013);
-  3. GitHub secret `CLOUDFLARE_API_TOKEN` + variable `CLOUDFLARE_ACCOUNT_ID` for CI deploys (OQ-003).
+- Canonical path (2026-10-04): `.github/workflows/deploy.yml`.
+  - It runs after CI succeeds on a push to `main`, or on demand.
+  - It applies pending migrations to Neon (`database/migrate.sh`, secret `DATABASE_URL`), then runs `wrangler deploy`
+    (secret `CLOUDFLARE_API_TOKEN`, variable `CLOUDFLARE_ACCOUNT_ID`), then checks `/healthz` on workers.dev.
+  - The owner added the secrets and the variable (OQ-003, OQ-012). The public endpoint is workers.dev (OQ-013,
+    `workers_dev: true`).
 - Original proposal:
 - Facts: no GitHub Actions; Cloudflare Workers Builds trigger is bound to the
   deleted repo id `1395495121` and all 6 builds failed.

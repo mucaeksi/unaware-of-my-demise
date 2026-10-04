@@ -8,13 +8,13 @@ Task: gacha + Ration + deploy (DEC-0003/0013/0014)
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-04
-**Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR #10 → `main`, merge when CI is green)
-**Current task:** foundation complete server-side; deployment (DEC-0003) partially done
-**Next step:** DONE: engine port (parity-gated), every gameplay route (stages/victories, progression, equipment, quests, gacha pull/banners/history/pity, wallet convert), Ration (DEC-0014), client `GameBackend` calls for all of them, license (DEC-0005), Worker deployed to Cloudflare (version 097ca9db, template + orphaned trigger deleted). Client Summon + Quests screens (GUT 245). NEXT: (1) merge PR #10 when CI is green; (2) Ration `daily_inn_meal`; (3) CI deploy job (needs OQ-003 secrets); (4) Android Credential Manager sign-in (sets `Online.session_token`); (5) Eclipse Token → Fate's Thread convert button in the Summon screen; (6) Gemini asset work only after the foundation (DEC-0004).
-**Blocked on (owner):** OQ-012 Neon production migrations (port 5432 times out from the session, credential route refused by the permission classifier); OQ-013 public endpoint (route vs workers.dev); Google OAuth client id → `GOOGLE_CLIENT_IDS`; OQ-003 GitHub deploy secrets.
+**Branch:** `claude/framework-bootstrap-setup-ahj0tz` (PR #12 → `main`; #9–#11 merged)
+**Current task:** production deploy pipeline (DEC-0003) — first run on merge of PR #12
+**Next step:** DONE: engine port (parity-gated), every gameplay route (stages/victories, progression, equipment, quests, gacha pull/banners/history/pity, wallet convert), Ration (DEC-0014), client `GameBackend` calls for all of them, license (DEC-0005), Worker deployed to Cloudflare (version 097ca9db, template + orphaned trigger deleted). Client Summon + Quests screens (GUT 245), Inn Meal. NEXT: (1) merge PR #12 when CI is green; (2) verify the first Deploy run (migrations + /healthz on workers.dev); (3) Android Credential Manager sign-in (sets `Online.session_token`); (4) Eclipse Token → Fate's Thread convert button in the Summon screen; (5) Gemini asset work only after the foundation (DEC-0004).
+**Blocked on (owner):** Google OAuth client id → `GOOGLE_CLIENT_IDS` (sign-in answers 503 until set).
 **Files in progress:** none
-**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-003, 006, 012, 013 open; OQ-000/005 closed — do not remind)
-**Local test infra:** Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`); Cloudflare credentials only at `/root/.config/uomd/cloudflare.env` (outside Git, ephemeral container).
+**Open questions:** see `docs/OPEN_QUESTIONS.md` (OQ-006 open; OQ-000/005 closed — do not remind)
+**Local test infra:** Postgres 16 at `/var/tmp/uomd-pg` port 54329 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg&port=54329"`); production deploys only through `.github/workflows/deploy.yml` (GitHub secrets `DATABASE_URL`, `CLOUDFLARE_API_TOKEN`, variable `CLOUDFLARE_ACCOUNT_ID`); no credentials in the session.
 <!-- /CHECKPOINT -->
 
 ---
