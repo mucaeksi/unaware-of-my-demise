@@ -5,7 +5,7 @@ import { ApiError, invalid } from "./http";
 import { CpythonRandom } from "./engine/random";
 import { StoryError, type PersistedStoryState, type PlayerStoryState } from "./engine/story";
 import { applyRewards, recordBattleVictory, type AppliedReward } from "./rewards";
-import { contentRegistry, lootResolver, questProgress, stackCaps, storyRules } from "./rules";
+import { battleService, contentRegistry, lootResolver, questProgress, stackCaps, storyRules } from "./rules";
 
 /** The engine options a run needs besides the stage, roster and seed (game_flow.gd `battle_options`). */
 export interface BattleInputs {
@@ -165,6 +165,25 @@ export interface SimulatedBattle {
 
 /** Re-runs an attempt with the battle engine (the client's run is never trusted). */
 export type Simulate = (attempt: StoredAttempt) => SimulatedBattle;
+
+/**
+ * The battle engine's run of an attempt: the client's `GameFlow.battle_options` inputs rebuilt from what the attempt froze
+ * (only the owned set of the story state matters to the run), the stored roster and the server's seed.
+ */
+export const engineSimulate: Simulate = (attempt) => {
+  const story = storyRules().newPlayerState();
+  story.owned_character_ids = new Set(attempt.inputs.owned_character_ids);
+  const result = battleService().run(attempt.stage_id, attempt.roster, {
+    story_state: story,
+    player_levels: attempt.inputs.player_levels,
+    equipment: attempt.inputs.equipment as unknown as Record<string, Record<string, unknown>>,
+    skill_ranks: attempt.inputs.skill_ranks,
+    memory_nodes: attempt.inputs.memory_nodes,
+    run_seed: attempt.run_seed,
+  });
+  if (result.error) throw conflict(`The battle could not be re-run: ${result.error}`);
+  return { outcome: result.outcome === "victory" ? "victory" : "defeat", stars: result.stars, actions: result.actions, cycles: result.cycles };
+};
 
 /** The client's report: informational only (kept with the result for diagnostics). */
 export interface ClientResult {

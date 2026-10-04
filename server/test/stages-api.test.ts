@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createApp } from "../src/app";
-import type { SimulatedBattle, Simulate, StoredAttempt } from "../src/stages";
+import { engineSimulate, type SimulatedBattle, type Simulate, type StoredAttempt } from "../src/stages";
 import type { IdentityVerifier } from "../src/identity";
 import { loadFixture } from "./engine/fixtures";
 import { createTestDatabase, type TestDatabase } from "./db";
@@ -301,6 +301,34 @@ describe("POST /v1/attempts/{attempt_id}/victory", () => {
       expect((await post(a.token, foreign.path, foreign.body)).status).toBe(503);
     } finally {
       withEngine = true;
+    }
+  });
+});
+
+describe("victories through the real battle engine", () => {
+  it("verifies the tutorial with the server's own run of the stored attempt", async () => {
+    const real = createApp({ connect: () => database.connect(), verifier, simulate: engineSimulate, nowUnix: () => NOW });
+    const { token, accountId } = await newPlayer();
+    const call = async (path: string, body?: unknown) => {
+      const response = await real(new Request(`https://api.test${path}`, {
+        method: "POST",
+        headers: { authorization: `Bearer ${token}`, "idempotency-key": crypto.randomUUID() },
+        body: body === undefined ? undefined : JSON.stringify(body),
+      }));
+      return { status: response.status, body: (await response.json()) as Record<string, any> };
+    };
+    expect((await call("/v1/story/advance")).status).toBe(200);
+    const begin = await call("/v1/stages/1-1/attempts", { roster: [] });
+    expect(begin.status).toBe(200);
+    const [row] = await attempts(accountId);
+    const expected = engineSimulate({ attempt_id: row.attempt_id, stage_id: "1-1", roster: row.roster, run_seed: Number(row.run_seed), inputs: row.inputs });
+    const victory = await call(`/v1/attempts/${begin.body.attempt.attempt_id}/victory`, { outcome: "victory", stars: expected.stars });
+    if (expected.outcome === "victory") {
+      expect(victory.status, JSON.stringify(victory.body)).toBe(200);
+      expect(victory.body.result).toEqual(expected);
+      expect(victory.body.state.story_state.story_cursor_entry_id).toBe("1-2");
+    } else {
+      expect(victory.status).toBe(409);
     }
   });
 });

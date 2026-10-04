@@ -4,6 +4,7 @@ import { createApp } from "./app";
 import type { DbConnection } from "./db";
 import type { Env } from "./env";
 import { GoogleIdTokenVerifier, type IdentityVerifier } from "./identity";
+import { engineSimulate } from "./stages";
 
 let verifierFor: { audiences: string; verifier: IdentityVerifier | null } | null = null;
 
@@ -28,6 +29,7 @@ export default {
       authLimiter: env.AUTH_LIMITER,
       apiLimiter: env.API_LIMITER,
       waitUntil: (promise) => ctx.waitUntil(promise),
+      simulate: engineSimulate,
     });
     return app(request);
   },

@@ -12,6 +12,7 @@ import items from "../../game/data/content/items_part1.json";
 import stages from "../../game/data/content/stages_part1.json";
 import storyManifest from "../../game/data/content/story_script_part1_manifest.json";
 import weapons from "../../game/data/content/weapons_part1.json";
+import { BattleService } from "./engine/battle/service";
 import { loadPacks, type ContentRegistry, type PackName } from "./engine/content";
 import { LootResolver } from "./engine/loot";
 import { QuestProgress } from "./engine/quests";
@@ -38,6 +39,7 @@ const once = <T>(build: () => T): (() => T) => {
 export const contentRegistry = once((): ContentRegistry => loadPacks(PACKS));
 export const storyRules = once(() => new StoryRules(contentRegistry(), storyManifest as Record<string, unknown>));
 export const lootResolver = once(() => new LootResolver(contentRegistry()));
+export const battleService = once(() => BattleService.create(contentRegistry(), storyRules()));
 export const questProgress = once(() => new QuestProgress(economy as Record<string, unknown>, items as Record<string, unknown>));
 
 /** items_part1.json `stack_cap` per item id (items without an integer cap are unbounded). */
