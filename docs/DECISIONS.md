@@ -427,7 +427,8 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - Decision: staging is its own Worker (`unaware-of-my-demise-staging`, `server/wrangler.jsonc` `env.staging`) with its
   own Hyperdrive config, its own empty Neon database (no copy of player data; `deploy-staging.yml` builds the schema with the migrations), its own rate-limit counters and its
   own secret (`STAGING_DATABASE_URL`), deployed by `.github/workflows/deploy-staging.yml` from the same commits as
-  production. Each database records its environment in the database-level setting `uomd.environment`;
+  production. Each database records its environment in the one-row table `uomd_environment` (outside the
+  numbered migrations; a database-level setting was tried first, but Neon does not let the owner set custom parameters);
   `database/migrate.sh` with `UOMD_ENVIRONMENT` refuses a database recorded as another environment's, production
   records itself on its next deploy, and staging claims only an empty database (so it can never adopt the production
   database through a wrong URL). The staging workflow also refuses `STAGING_DATABASE_URL` equal to `DATABASE_URL`.
