@@ -27,12 +27,43 @@ export function errorResponse(error: ApiError, headers: Record<string, string> =
 export const invalid = (message: string): ApiError => new ApiError(400, "INVALID_REQUEST", message);
 export const unauthorized = (message: string): ApiError => new ApiError(401, "UNAUTHORIZED", message);
 
-/** The request's JSON object body (size-capped); anything else is a 400. */
-export async function readJsonObject(request: Request): Promise<Record<string, unknown>> {
+/**
+ * The body as UTF-8 text, read with the size cap applied while reading (INF-016): a body without a Content-Length is
+ * never buffered past `limit`, the stream is cancelled at the first byte over it.
+ */
+export async function readBoundedText(request: Request, limit: number = MAX_BODY_BYTES): Promise<string> {
   const declared = Number(request.headers.get("content-length") ?? "0");
-  if (declared > MAX_BODY_BYTES) throw invalid("Request body is too large");
-  const text = await request.text();
-  if (new TextEncoder().encode(text).byteLength > MAX_BODY_BYTES) throw invalid("Request body is too large");
+  if (declared > limit) throw invalid("Request body is too large");
+  if (!request.body) return "";
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > limit) {
+      await reader.cancel().catch(() => undefined);
+      throw invalid("Request body is too large");
+    }
+    chunks.push(value);
+  }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  try {
+    return new TextDecoder("utf-8", { fatal: true, ignoreBOM: false }).decode(bytes);
+  } catch {
+    throw invalid("Request body must be UTF-8");
+  }
+}
+
+/** The request's JSON object body (size-capped while read); anything else is a 400. */
+export async function readJsonObject(request: Request): Promise<Record<string, unknown>> {
+  const text = await readBoundedText(request);
   let parsed: unknown;
   try {
     parsed = JSON.parse(text);

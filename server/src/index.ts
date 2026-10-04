@@ -6,6 +6,7 @@ import type { Env } from "./env";
 import { GoogleIdTokenVerifier, type IdentityVerifier } from "./identity";
 import { bannerEpoch } from "./gacha";
 import { parseReleaseConfig } from "./release";
+import { runRetention } from "./retention";
 import { engineSimulate } from "./stages";
 
 let verifierFor: { audiences: string; verifier: IdentityVerifier | null } | null = null;
@@ -36,5 +37,16 @@ export default {
       release: parseReleaseConfig(env),
     });
     return app(request);
+  },
+
+  /** The data lifecycle job (INF-016, `triggers.crons` in wrangler.jsonc); its report goes to the Worker logs. */
+  async scheduled(_controller: ScheduledController, env: Env, _ctx: ExecutionContext): Promise<void> {
+    const client = new Client({ connectionString: env.HYPERDRIVE.connectionString });
+    await client.connect();
+    try {
+      console.log(JSON.stringify({ event: "retention", ...(await runRetention(client)) }));
+    } finally {
+      await client.end();
+    }
   },
 } satisfies ExportedHandler<Env>;

@@ -320,3 +320,18 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
     battle runs again on those inputs, so it matches the server's re-simulation) or Give up.
   - Supersedes DEC-0013's "a defeat reports nothing": a defeat now abandons its attempt (`POST
     /v1/attempts/{id}/abandon`, status `lost`, pays nothing). The victory path is unchanged.
+
+## DEC-0018 — Request intake and data lifecycle
+- Status: ACCEPTED (2026-10-04, engineering; roadmap INF-016).
+- Context: bodies were read whole before their size was checked; expired nonces and sessions, stored replies and open
+  attempts were kept forever, with no rule for how long a retry stays safe.
+- Decision:
+  - Bodies are read with the 16 KiB cap applied while reading; invalid UTF-8 is a 400.
+  - A daily Worker cron (`17 3 * * *` UTC, `server/src/retention.ts`) runs bounded, idempotent batches: nonces deleted
+    1 day after expiry, sessions 7 days after, open attempts older than 24 h marked `expired`, stored replies older
+    than 30 days purged (migration 0004: the key row stays as a tombstone).
+  - Retry contract: a key is replayable for 30 days; after that it answers 409 `OPERATION_EXPIRED` and never runs
+    again. Clients hold an uncertain key only for one app session (DEC-0017), far inside that window.
+  - An open attempt older than 24 h cannot be won and is not offered for resume (it paid nothing). This also bounds
+    how long an attempt can outlive a rules change (INF-022 still to do).
+  - Nothing that proves an economic outcome is deleted: claims, pull history, resolved attempts and key tombstones stay.
