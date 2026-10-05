@@ -916,6 +916,11 @@ func _present_settings(status: String = "") -> void:
 	actions.append({"id": SETTINGS_CONTACT_SUPPORT, "label": "Contact support"})
 	var settings: SettingsScreen = SettingsScreen.new()
 	settings.load_settings(info, status, actions)
+	var volumes: Dictionary = {}
+	for bus: String in Audio.BUSES:
+		volumes[bus] = Audio.volume(bus)
+	settings.load_volumes(volumes)
+	settings.volume_changed.connect(func(bus: String, linear: float) -> void: Audio.set_volume(bus, linear))
 	settings.back_requested.connect(func() -> void: _present_hub())
 	settings.action_requested.connect(func(action_id: String) -> void:
 		if action_id == SETTINGS_SIGN_OUT:

@@ -217,6 +217,19 @@ func test_the_settings_screen_shows_the_build_line_and_any_extra_actions() -> vo
 	assert_eq(settings._actions.get_child_count(), 0, "a reload without actions clears them")
 
 
+func test_the_settings_volume_sliders_show_and_report_each_bus() -> void:
+	var settings: SettingsScreen = add_child_autofree(SettingsScreen.new())
+	watch_signals(settings)
+	settings.load_settings("x")
+	settings.load_volumes({"Music": 0.8, "Voice": 1.0, "SFX": 0.0})
+	assert_almost_eq(settings.volume_slider("Music").value, 0.8, 0.001)
+	settings.volume_slider("Voice").value = 0.5
+	assert_signal_emitted_with_parameters(settings, "volume_changed", ["Voice", 0.5])
+	assert_eq([SettingsScreen.volume_caption("Music", 0.8), SettingsScreen.volume_caption("Effects", 0.0)], ["Music  80%", "Effects  off"])
+	settings.load_volumes({"Music": 1.0})
+	assert_null(settings.volume_slider("SFX"), "a reload replaces the sliders")
+
+
 func test_the_support_mail_names_the_build_and_the_account() -> void:
 	var saved_token: String = Online.session_token
 	var saved_account: String = Online.account_id
