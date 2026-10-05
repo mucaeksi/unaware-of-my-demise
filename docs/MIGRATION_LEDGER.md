@@ -4,7 +4,7 @@ Every item migrated from the Google Drive LEGACY archive into this repository.
 Format (CLAUDE.md): GOOGLE DRIVE SOURCE → GITHUB TARGET → ACTION →
 TRANSFORMATION → VALIDATION → STATUS. LEGACY originals are never modified.
 
-Transfer method: Drive MCP `download_file_content`; results larger than the
+Historical transfer method for BATCH-0001/0002: Drive MCP `download_file_content`; results larger than the
 tool-output limit are written by the harness to a file in the session, from
 which they are base64-decoded in the sandbox (no bytes pass through the model
 context). Every file is checked against the Drive file id and Drive
@@ -129,3 +129,20 @@ originals in Drive were not modified.
 | MIG-0041 | `LEGACY:tools/validate_part1_content.py` (`1wxfuSGYev63Q1A7cY5szVbz3KUxuioSq` blob `65a9ff0` 53,071 B) | `tools/validate_part1_content.py` | ADAPT | content dir `game/data/content`; runtime rule keys pinned to a (GDScript client, TypeScript server) file pair instead of the LEGACY Python engine; Ration pin 120/360 → 100/300 (DEC-0014) | passes on the current packs; fails on an unclassified rule key and on a server engine that stops reading a runtime key; CI job `content` | MIGRATED |
 | MIG-0042 | `LEGACY:tools/sync_godot_content.py` (`1gHQUZGc5ozRqu2xZXJLUBRGsSqRavkn0` 4,268 B) | `tools/content_manifest.py` | ADAPT | no mirror (one source): check/rewrite `MANIFEST.json` in place; manifest `note`/`source` now name the new tool (pack hashes, hence the rules hash, unchanged) | `--check` fails on an edited pack; CI job `content`; GUT `test_content_copy` | MIGRATED |
 | — | `LEGACY:tools/build_part1_content.py` (`1y4gTsqYLZN7C0qcNd1hRKsJdmAMywFGL` blob `f939a78` 79,285 B) | — | REFERENCE | not migrated: it regenerates packs from the LEGACY GDD markdown and `battle_effect_catalog.py`; the packs it produced are the authoring source now (DEC-0026) | — | NOT_MIGRATED |
+
+## BATCH-0005 — Narrative source package (2026-10-05)
+
+Owner request: organize `main/narrative/` and retrieve needed story/design sources from Drive before continuing UI design. Baseline/rollback point: `7440328ab39e20878732d2515c8347842769899f`. Drive originals are read-only.
+
+Method: connected Google Drive full direct-child tree listing (558 Narrative entries, 68 listed folders, 2 excluded secret/cache subtrees); authenticated complete streamed downloads. Earlier complete downloads reused only after matching fresh path/id/parent/size/modifiedTime and local SHA-256; active Story Bible and canon additionally re-downloaded. No provider checksum/version was exposed; this is explicitly recorded. No bearer URLs or ephemeral attachment paths are committed.
+
+[Per-file manifest](migration/BATCH-0005.manifest.json) contains every inventory decision and 1 supplemental root GDD: 163 MIGRATE (38,070,780 bytes), 26 ALREADY_MIGRATED locked references, 300 LEAVE_IN_DRIVE, 68 INVENTORY_FOLDER, 2 EXCLUDE_SUBTREE. Source/target bytes and staged Git objects are validated; preservation attributes prevent line-ending normalization.
+
+| ID | Google Drive source | GitHub target | Action | Transformation | Validation | Status |
+|---|---|---|---|---|---|---|
+| MIG-0043 | `LEGACY/narrative/` selected canon, story, lore, art/audio/prompt/tech documents, content JSON and 13 pipeline scripts | organized `narrative/` source areas (manifest per-file paths) | MIGRATE | none; original bytes, stable IDs, source status retained | id/parent/size/metadata + SHA-256 + Git blob; JSON/AST; source/runtime reconciliation | MIGRATED_SOURCE_ONLY |
+| MIG-0044 | existing/pending sheets and chibi refs, 25 selected Fadyme VO OGG, 4 approved music loops | `narrative/art/sheets/`, `audio/voice/`, `audio/music/` | MIGRATE | none; PNG embedded metadata, audio and sidecars unchanged | byte/hash/Git blob + image/audio decode + selection IDs | MIGRATED_SOURCE_ONLY |
+| MIG-0045 | two retired Story Bible/canon copies and archive README | `narrative/archive/` | MIGRATE | none; scoped historical copies | hash/size; explicit retirement evidence and comparison | HISTORICAL_SUPERSEDED |
+| MIG-0046 | `LEGACY/Unaware_of_My_Demise_Part1_GDD.md` (`17pi9ULybDLxKHaRtzQoUhlXaSLql_ZHn`) | `narrative/design/Unaware_of_My_Demise_Part1_GDD.md` | MIGRATE | none | authenticated id/root parent/size + SHA-256 + Git blob | SUPPLEMENTAL_DESIGN_REFERENCE |
+
+Runtime content and all 26 locked reference files are unchanged from this baseline (55 protected files in total). [Source/runtime reconciliation](../narrative/migration/RECONCILIATION.md): 419/409 main lines, 10 missing runtime line IDs and 2 changed shared dialogue lines, 51/1 music cue fields, 9 Codex gates, 40 VO unlock fields. No automatic runtime promotion, canon rewriting, content generation or Legacy modification occurred. Pending/stale/issue/draft states remain visible.

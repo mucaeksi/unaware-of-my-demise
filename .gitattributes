@@ -12,3 +12,20 @@
 # Signed bytes: never normalize line endings (the signature covers the exact bytes).
 *.sig binary
 game/tests/fixtures/content_manifest/* binary
+
+# BATCH-0005: preserve audited Legacy source bytes, including original line endings.
+narrative/canon/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/story/*.md -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/lore/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/content/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/tools/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/art/*.md -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/art/*.json -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/prompts/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/audio/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/archive/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/docs/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/design/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/migration/sources/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/migration/audits/** -text whitespace=-blank-at-eol,-blank-at-eof
+narrative/CHANGELOG_NARRATIVE.md -text whitespace=-blank-at-eol,-blank-at-eof

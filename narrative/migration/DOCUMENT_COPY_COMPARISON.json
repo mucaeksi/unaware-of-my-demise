@@ -1,0 +1,22 @@
+[
+  {
+    "active": "story/STORY_BIBLE_PART1.md",
+    "historical": "archive/2026-09-29_consolidation/root_docs/STORY_BIBLE_PART1.md",
+    "active_bytes": 48520,
+    "historical_bytes": 41726,
+    "active_sha256": "7f1d798e2fa4491f8d4e5870e1378bf84d2b2fffcaeaea73a0f65b9f434b9f2c",
+    "historical_sha256": "1a6e541440839c3c2f56ca40f5f40991554177c6b1df41e11950cbb205ffbe52",
+    "identical": false,
+    "authority_evidence": "Original Narrative README and archive README retire root copies; date alone is not the criterion."
+  },
+  {
+    "active": "canon/canon.md",
+    "historical": "archive/2026-09-29_consolidation/root_lore/canon.md",
+    "active_bytes": 26710,
+    "historical_bytes": 3610,
+    "active_sha256": "5c9afca25aee32a0b2a5ea944ee828efc77dc4eb0151e83c1e0bb9597300c2a0",
+    "historical_sha256": "5f6450ee27a9cee0215bedc8f8be5b42f004d1493736e3ff00dedd7fc4ab5dcf",
+    "identical": false,
+    "authority_evidence": "Original Narrative README and archive README retire root copies; date alone is not the criterion."
+  }
+]

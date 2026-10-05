@@ -1,0 +1,21 @@
+{
+  "date_utc": "2026-10-04",
+  "browser": "Chromium via Playwright",
+  "scope": "Standalone design prototype, not Godot/device/backend acceptance",
+  "checks": [
+    "320×640: 14 route layouts, no horizontal overflow; hub hotspots / 44px targets.",
+    "360×800: 14 route layouts, no horizontal overflow; hub hotspots / 44px targets.",
+    "390×844: 14 route layouts, no horizontal overflow; hub hotspots / 44px targets.",
+    "Inn Meal once only; 78→108 overflow retained; dialog focus wraps / Escape restores.",
+    "Tutorial 1-1 two-hero exception; later chapter locked state.",
+    "20 source heroes; live search and source skill detail.",
+    "Standard 2% / limited 2.5% source rates; explicit demo pull confirmation / insufficient balance.",
+    "Formation swaps / 2+3; immersive battle and defeat state.",
+    "Spoiler-safe locked codex; source VN lines / seen-line log; immersive navigation.",
+    "Reduced motion and larger text states; hash back navigation.",
+    "Chromium: no page errors or HTTP asset failures.",
+    "All 55 baseline content/reference hashes unchanged."
+  ],
+  "page_errors": [],
+  "http_failures": []
+}

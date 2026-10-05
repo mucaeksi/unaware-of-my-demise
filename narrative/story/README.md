@@ -1,12 +1,15 @@
-# Mevcut hikâye kayıtlarına erişim
+# Hikâye kaynakları ve runtime indeksi
 
-Bu indeks depodaki mevcut runtime hikâye kayıtlarını listeler. **Legacy Narrative orijinal kapsamı henüz okunmadı; bu mevcut runtime kaydıdır.** Özgün hikâye/canon belgelerinin okunduğu, güncelliğinin karşılaştırıldığı veya bütünüyle taşındığı iddia edilmez.
+Özgün Narrative metinleri ve JSON'ları BATCH-0005 ile kaynak izleri korunarak aktarıldı. Hikâye yeniden yazılmadı; oyun paketleri değiştirilmedi.
 
-Hikâye metinleri, olaylar ve karakter geçmişleri burada özetlenmez veya yeniden yazılmaz. JSON kaynakları çoğaltılmaz; yalnız mevcut başlıklar, kimlikler ve sayımlar listelenir.
+- [STORY_BIBLE_PART1.md](STORY_BIBLE_PART1.md): güncel Narrative kopyası.
+- [PART1_FULL_SCRIPT.md](PART1_FULL_SCRIPT.md): özgün tam okunabilir script; yeniden compile edilmedi.
+- [VILLAIN_BIBLE_PART1.md](VILLAIN_BIBLE_PART1.md): antagonist tasarımları.
+- [Canon](../canon/README.md), [lore](../lore/README.md), [karakter paketleri](../characters/INDEX.md).
+- [Özgün sahne/line JSON kaynakları](../content/README.md); aşağıdaki tablo mevcut runtime kayıtlarına bağlanır.
+- [Önceki Story Bible](../archive/2026-09-29_consolidation/root_docs/STORY_BIBLE_PART1.md): tarihsel karşılaştırma; aktif kopyanın yerine kullanılmaz.
 
-Ana kaynak: [story_script_part1_manifest.json](../../game/data/content/story_script_part1_manifest.json). `chapter_files` bölüm dosyalarını, `story_order` oynatma sırasını belirler.
-
-Kapsam: **7 bölüm scripti**, **51 story_order kaydı**, **35 stage sahnesi**, **16 stage dışı sahne**, **409 benzersiz ana hikâye line_id**. Companion story kataloğunda ayrıca **20 karakter / 76 bölüm** vardır; bunlar ana manifestteki 51 kayda dahil değildir.
+İki tarafta **7 bölüm**, **51 story_order**, **35 stage** ve **16 stage dışı sahne**. Özgün kaynak **419**, runtime **409** ana hikâye line_id taşır; **10 eksik satır ve 2 değişen ortak replik** [fark raporunda](../migration/RECONCILIATION.md). Companion kapsamı **20 karakter / 76 parça**; ses repliği kataloğu **220 kayıt**. Stable ID ve konuşmacı alias'ları değiştirilmedi.
 
 ## Bölüm ve stage kaynakları
 
@@ -34,7 +37,7 @@ Bölüm 2 ve 5 için katalog/script kimlikleri farklıdır; kaynak değerleri ko
 
 ## Tüketiciler ve bütünlük
 
-- [StoryIndex](../../game/scripts/app/story_index.gd) manifest/bölümleri okur; [StoryDirector](../../game/scripts/ui/story_director.gd) ekran sırasını yönetir. [VnScreen](../../game/scripts/ui/vn/vn_screen.gd) mevcut haliyle text_en, konuşmacı ve duyguyu gösterir; portre/background placeholder kullanır ve voice_track/müzik alanlarını ses dosyasına bağlamaz.
+- [StoryIndex](../../game/scripts/app/story_index.gd) bölüm/manifestleri; [StoryDirector](../../game/scripts/ui/story_director.gd) akışı okur. Güncel [VnScreen](../../game/scripts/ui/vn/vn_screen.gd) AssetResolver/AudioDirector bağlantılarını içerir; Narrative kaynaklarının burada olması aktif asset dosyalarının AAB/PCK içinde bulunduğunu kanıtlamaz.
 - Konuşmacı kimlikleri oynanabilir karakterlerle sınırlı değildir; iç ses, narration/narrator, NPC ve antagonist kimlikleri kaynaklarda olduğu gibi korunur.
-- [Runtime içerik manifesti](../../game/data/content/MANIFEST.json) **27 JSON dosyasının** boyut ve SHA256 değerini kaydeder. Tarif ettiği `tools/sync_godot_content.py` aracı ve kaynak `content/` ağacı mevcut checkout içinde yoktur. [İçerik bütünlük testi](../../game/tests/unit/test_content_copy.gd) dosya kümesi, hash, boyut ve JSON parse sonuçlarını doğrular.
+- [Runtime içerik manifesti](../../game/data/content/MANIFEST.json) 27 JSON için boyut/SHA-256 kaydıdır; güncel araç [tools/content_manifest.py](../../tools/content_manifest.py). Runtime kaynakları bu aktarımda korunur; [bütünlük testi](../../game/tests/unit/test_content_copy.gd) mevcut paketi doğrular.
 - [Kilitli referans manifesti](../references/REFERENCE_SET.lock.json) ve [kilit kuralları](../../docs/UOMD_REFERENCE_LOCK.md) ayrı korunur. Bu indeks runtime kayıtlarını veya kilitli referansları değiştirmez.
