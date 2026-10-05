@@ -91,6 +91,9 @@ class BannerView extends RefCounted:
 	var targets: Array[Dictionary] = []
 	## The server's remembered target ("" = none).
 	var selected_target: String = ""
+	## The full odds and guarantees of this banner type, shown before every pull (Google Play's loot-box policy); from
+	## economy_part1.json `banners`, the data the server runs (one rules hash).
+	var odds: PackedStringArray = PackedStringArray()
 
 
 ## One pull result, display-ready (port of `PullEntry`).
