@@ -1,10 +1,10 @@
 # UOMD — UI Tasarım Çalışması
 
-Durum: `DESIGN_DRAFT`. Kullanıcı yönlendirmesi: AFK Arena benzeri gezinme ve sunum; daha karanlık tema ve oyunun kendi mekanikleri. Oyuncu arayüzü/altyazı İngilizce, seslendirme Japonca. Seçili Narrative kaynakları BATCH-0005 ile main'e aktarıldı; mevcut dosyalar tasarım prototipidir.
+Durum: prototipler **DESIGN_DRAFT**; Engine/Studio/StartupSequence gerçek Godot uygulaması ve mevcut Title bağlantısı yerel olarak kontrol edildi. [Güncel startup/audio](../design/STARTUP_AUDIO_V01.md), [doğrulama](../design/STARTUP_VERIFY_V01.json). Kullanıcı yönlendirmesi: AFK Arena benzeri gezinme ve sunum; daha karanlık tema ve oyunun kendi mekanikleri. Oyuncu arayüzü/altyazı İngilizce, seslendirme Japonca. Seçili Narrative kaynakları BATCH-0005 ile main'e aktarıldı.
 
-**Son yönlendirme — 2026-10-05:** [yeniden başlangıç promptu](../design/CREATIVE_RESTART_PROMPT.md) ve [döküm](../design/WORK_COMPLETED_2026-10-05.md) yeni sanat kararını/sırayı kaydeder. Gelecek çalışmada her tasarım adımı gerçek Godot entegrasyonunu da içerir; eski görsel pack'ler yeni ortak sanat diliyle aktif kullanımdan çıkarılacaktır. Bu tur yalnız plan kaydedildi; mevcut prototip, runtime ve referans dosyaları değiştirilmedi.
+**Son yönlendirme — 2026-10-05:** [yeniden başlangıç promptu](../design/CREATIVE_RESTART_PROMPT.md) ve [döküm](../design/WORK_COMPLETED_2026-10-05.md) yeni sanat kararını/sırayı kaydeder. Her tasarım adımı gerçek Godot entegrasyonunu da içerir. Dünya/karakter okuması ve ilk sanat adayları sonrasında açılış sahneleri uygulandı. Ana tema owner tarafından daha sonra sağlanacak; şimdilik sessiz rezervasyon var. Eski görsel pack'ler tarihsel olarak korunur. Final title/entry UI ve Fadyme paketleri açık.
 
-Bu alan tasarım kaynağıdır. Prototip örnek verilerle çalışır; satın alma, ödül, ilerleme, giriş veya gerçek oyuncu hesabında işlem yapmaz. Runtime ve kilitli referans dosyalarını değiştirmez.
+Bu alan tasarım kaynağıdır. HTML prototip örnek verilerle çalışır; satın alma, ödül, ilerleme, giriş veya gerçek oyuncu hesabında işlem yapmaz. Gerçek Godot bağlantıları registry'de ekran bazında ayırt edilir; tarihsel referans byte'ları korunur.
 
 - [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md): renk, tipografi, bileşenler ve davranışlar.
 - [SCREEN_MAP.md](SCREEN_MAP.md): ekran/alt ekran haritası ve mevcut mekaniklerle eşleme.

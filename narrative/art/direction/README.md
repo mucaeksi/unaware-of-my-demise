@@ -10,6 +10,8 @@ Durum: **CANDIDATE**. Dünya/hikâye/20 karakter okumasından sonra üretildi. B
 
 Kaydedilen preview'lar gerçek Godot viewport capture'larıdır; artwork üstüne sonradan resim edit'i veya HTML mockup uygulanmadı.
 
+Devam adımı: [gerçek Engine → Studio → mevcut Title startup ve bekleyen ana tema](../../design/STARTUP_AUDIO_V01.md). İlk PROVENANCE/VERIFY dosyaları sanat-only aşamanın snapshot kayıtlarıdır; sonraki startup/audio uygulaması ayrı kanıt dosyasındadır. Mevcut title artwork'ü hâlâ placeholder; v02 burada dev inceleme adayını sürdürür.
+
 | Önizleme | Boyut / kapsam |
 |---|---|
 | [Artwork ve Label/Button katmanı](previews/art_540x960.png) | 540×960 |

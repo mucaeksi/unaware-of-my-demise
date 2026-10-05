@@ -200,3 +200,90 @@ func test_stopping_music_when_none_plays_is_quiet() -> void:
 	_audio.stop_music(0.0)
 	assert_eq(_audio.music_cue(), "")
 	assert_null(_audio._fade, "no empty fade was started")
+
+
+func test_future_main_theme_is_silent_without_a_file_and_does_not_use_fadyme() -> void:
+	_present = [AudioDirector.music_path("bgm_fadyme_theme")]
+	_audio.cues = _cues({})
+	assert_false(_audio.play_entry_theme(0.0))
+	assert_false(_audio.play_entry_theme(0.0))
+	assert_eq(_audio.music_cue(), "")
+	assert_eq(_audio.missing(), ["res://assets/audio/music/bgm_main_theme.ogg"])
+	assert_false(_audio._music[0].playing or _audio._music[1].playing)
+
+
+func test_reserved_main_theme_keeps_its_player_stream_and_fade_across_entry_calls() -> void:
+	_present = [AudioDirector.music_path(AudioDirector.PENDING_MAIN_THEME)]
+	_audio.cues = _cues({})
+	assert_true(_audio.play_entry_theme())
+	var player: AudioStreamPlayer = _audio._music[_audio._active_music]
+	var stream: AudioStream = player.stream
+	var fade: Tween = _audio._fade
+	await wait_seconds(0.1)
+	var position: float = player.get_playback_position()
+	assert_true(_audio.play_entry_theme())
+	assert_same(_audio._music[_audio._active_music], player)
+	assert_same(player.stream, stream)
+	assert_same(_audio._fade, fade, "re-entering title does not restart the fade")
+	assert_gte(player.get_playback_position(), position, "the playback cursor is retained")
+	assert_eq(_audio.music_cue(), AudioDirector.PENDING_MAIN_THEME)
+
+
+func test_assigned_title_cue_overrides_the_future_filename_and_preserves_mute() -> void:
+	_present = [AudioDirector.music_path("bgm_owner_title")]
+	_audio.cues = _cues({"flow.title": "bgm_owner_title"})
+	_audio.set_volume(AudioDirector.BUS_MUSIC, 0.0)
+	assert_true(_audio.play_entry_theme(0.0))
+	assert_eq(_audio.music_cue(), "bgm_owner_title")
+	assert_eq(_audio.missing(), [])
+	assert_eq(_audio.volume(AudioDirector.BUS_MUSIC), 0.0)
+	assert_true(AudioServer.is_bus_mute(AudioServer.get_bus_index(AudioDirector.BUS_MUSIC)))
+
+
+func test_backgrounding_preserves_the_entry_fade_until_resume() -> void:
+	_present = [AudioDirector.music_path(AudioDirector.PENDING_MAIN_THEME)]
+	_audio.cues = _cues({})
+	_audio.play_entry_theme(0.5)
+	var player: AudioStreamPlayer = _audio._music[_audio._active_music]
+	await wait_seconds(0.05)
+	_audio._notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
+	var level: float = player.volume_db
+	await wait_seconds(0.1)
+	assert_almost_eq(player.volume_db, level, 0.01)
+	assert_true(player.stream_paused)
+	_audio._notification(Node.NOTIFICATION_APPLICATION_FOCUS_IN)
+	await wait_seconds(0.1)
+	assert_gt(player.volume_db, level)
+	assert_false(player.stream_paused)
+
+
+func test_entry_ogg_loops_without_mutating_the_imported_resource() -> void:
+	var source: AudioStreamOggVorbis = AudioStreamOggVorbis.load_from_file("res://tests/fixtures/audio/silence_80ms.ogg")
+	assert_not_null(source)
+	assert_false(source.loop)
+	_present = [AudioDirector.music_path(AudioDirector.PENDING_MAIN_THEME)]
+	_audio.load_stream = func(_path: String) -> Resource: return source
+	_audio.cues = _cues({})
+	assert_true(_audio.play_entry_theme(0.0))
+	var player: AudioStreamPlayer = _audio._music[_audio._active_music]
+	assert_true((player.stream as AudioStreamOggVorbis).loop)
+	assert_not_same(player.stream, source)
+	assert_false(source.loop, "entry playback never changes the cached/imported resource")
+	await wait_seconds(0.3)
+	assert_true(player.playing, "an 80 ms recording continues beyond its first pass")
+
+
+func test_entry_music_started_while_backgrounded_waits_for_resume() -> void:
+	_present = [AudioDirector.music_path(AudioDirector.PENDING_MAIN_THEME)]
+	_audio.cues = _cues({})
+	_audio.set_paused(true)
+	_audio.play_entry_theme(0.5)
+	var player: AudioStreamPlayer = _audio._music[_audio._active_music]
+	var level: float = player.volume_db
+	await wait_seconds(0.1)
+	assert_true(player.stream_paused)
+	assert_almost_eq(player.volume_db, level, 0.01)
+	_audio.set_paused(false)
+	await wait_seconds(0.1)
+	assert_false(player.stream_paused)
+	assert_gt(player.volume_db, level)
