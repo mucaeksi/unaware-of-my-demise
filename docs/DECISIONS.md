@@ -685,3 +685,18 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   variables alone). A database outage never turns into a maintenance screen or a forced update by itself; the routes
   that need the database fail as before.
 - `/v1/bootstrap` reports the combined values, so the client's start screen shows the panel's maintenance message.
+
+## DEC-0041 — The session stays in memory; a long absence refreshes the hub
+- Status: ACCEPTED (2026-10-05, engineering; roadmap INF-019).
+- The session token is never written to the device.
+  - A new launch signs in again through Credential Manager. For a returning player this is silent, with no prompt and
+    one `/v1/auth/google` call.
+  - So there is no bearer token at rest to protect, to leak through backups, or to outlive a sign-out.
+  - The AndroidKeyStore wrapping the plugin offers stays unused for sessions.
+- Coming back from the background after more than 5 minutes:
+  - on the hub, the client fetches the server's state again and redraws, so a change made on another device shows;
+  - a required update or a maintenance that started meanwhile is shown at once;
+  - battles, story scenes and every other screen are never interrupted, and their next server call meets the same
+    answers.
+- An expired session during the absence is handled as before: the first 401 renews once and repeats the same
+  Idempotency-Key.

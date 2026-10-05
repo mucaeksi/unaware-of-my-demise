@@ -4,9 +4,12 @@ extends GutTest
 
 class _Backend extends GameBackend:
 	var snapshot: Dictionary = {}
+	var fetches: int = 0
+	var refusal: Outcome = null
 
 	func fetch_state() -> Outcome:
-		return Outcome.ok({"state": snapshot})
+		fetches += 1
+		return refusal if refusal != null else Outcome.ok({"state": snapshot})
 
 
 static var _flow: GameFlow = null
@@ -31,6 +34,7 @@ func _shell(cursor: int) -> AppShell:
 	assert_true(_flow.is_ready(), _flow.error)
 	var backend: _Backend = _Backend.new()
 	backend.snapshot = _snapshot(cursor)
+	_flow.state = null  # every test starts from its own snapshot (the flow is shared; INF-012 refuses an older revision)
 	var shell: AppShell = AppShell.new()
 	shell.startup_intro_enabled = false  # presentation is covered in test_startup_sequence.gd
 	shell.flow = _flow
@@ -65,3 +69,41 @@ func test_the_title_has_no_say_in_a_retry() -> void:
 	assert_false(shell.current is TitleScreen, "a retry or a restart after an update goes straight on")
 	await wait_until(func() -> bool: return shell.current is HubScreen, 5.0)
 	assert_true(shell.current is HubScreen)
+
+
+func test_a_long_absence_refreshes_the_hub_and_a_short_one_does_not() -> void:
+	var shell: AppShell = _shell(1)
+	await _start(shell)
+	var backend: _Backend = shell.backend
+	var before: int = backend.fetches
+	await shell.director.handle_resume(StoryDirector.RESUME_REFRESH_MS - 1)
+	assert_eq(backend.fetches, before, "a quick app switch asks nothing")
+	backend.snapshot["wallet"]["silver_crowns"] = 500
+	backend.snapshot["state_revision"] = 7
+	await shell.director.handle_resume(StoryDirector.RESUME_REFRESH_MS)
+	assert_eq(backend.fetches, before + 1)
+	assert_true(shell.current is HubScreen)
+	assert_eq(int(shell.director.flow.wallet()["silver_crowns"]), 500, "what another device did is shown")
+	await wait_process_frames(1)  # replaced screens are freed at the end of the frame
+
+
+func test_a_maintenance_or_update_that_started_meanwhile_shows_on_return() -> void:
+	var shell: AppShell = _shell(1)
+	await _start(shell)
+	var backend: _Backend = shell.backend
+	backend.refusal = Outcome.fail(ClientRelease.KIND_MAINTENANCE, "Back at 03:00 UTC")
+	await shell.director.handle_resume(StoryDirector.RESUME_REFRESH_MS)
+	assert_true(shell.current is MessageScreen)
+	assert_string_contains((shell.current as MessageScreen).message_text(), "Back at 03:00 UTC")
+	await wait_process_frames(1)
+
+
+func test_a_return_never_interrupts_a_story_scene() -> void:
+	var shell: AppShell = _shell(0)
+	await _start(shell)
+	var backend: _Backend = shell.backend
+	var before: int = backend.fetches
+	await shell.director.handle_resume(StoryDirector.RESUME_REFRESH_MS * 10)
+	assert_true(shell.current is VnScreen)
+	assert_eq(backend.fetches, before)
+	await wait_process_frames(1)
