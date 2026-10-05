@@ -1,10 +1,10 @@
 class_name StudioSplashScreen
-extends StartupSplashScreen
-## Typographic candidate; studio name research is preliminary, no final emblem has been approved.
+extends Control
+## Raven/hourglass emblem and real wordmark layers. Branding candidate, shipped before any patch.
 
 const SCREEN_ID: String = "ui.studio_splash"
+const CandidateTheme = preload("res://theme/gothic_candidate_v01.gd")
 
 
-func _init() -> void:
-	heading = "SovTaym"
-	subtitle = "STUDIOS"
+func _ready() -> void:
+	theme = CandidateTheme.create()

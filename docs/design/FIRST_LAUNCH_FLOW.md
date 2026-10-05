@@ -5,9 +5,10 @@ cues, but first this whole stretch is designed so that every cue point exists fo
 design: what the player sees from tapping the app icon until they are in the game, for a brand-new player and for a
 returning one, with every audio slot named.
 
-**Startup extension (2026-10-05):** the current implementation adds game-controlled Godot → provisional studio →
-existing title after the native black splash. The owner main theme is not ready; a future `bgm_main_theme.ogg` path
-is reserved and absence is silent. See [current scenes, audio and verification](../../narrative/design/STARTUP_AUDIO_V01.md).
+**Current startup revision (2026-10-05):** Godot's built-in native logo is restored, followed by a game-controlled
+SovTaym emblem page → existing title. The extra Godot text page from the first candidate is retired. The owner main
+theme is not ready; `bgm_main_theme.ogg` is reserved and absence is silent. Music begins at the studio after native boot.
+See [current scenes, artwork and verification](../../narrative/design/STUDIO_SPLASH_V02.md).
 The v1 facts/diagram below retain their original design context. Content loads behind the presentation; actual
 release/session/patch requests still start after the title tap. Final title artwork and the entry-page redesign remain open.
 

@@ -1,5 +1,7 @@
 # Godot → stüdyo → title ve gelecekteki ana tema — v01
 
+**Tarihsel v01 kaydı.** Owner’ın ek Godot yazılı sayfa ve düz stüdyo yazısını düzeltme isteğiyle aktif akış [SovTaym logolu açılış v02](STUDIO_SPLASH_V02.md) olarak güncellendi: Godot’un native logosu → logolu studio → mevcut title. Aşağıdaki v01 süreleri/görüntüleri kendi ilk commit aşamasına aittir.
+
 Tarih: **2026-10-05**. Uygulama durumu: **IMPLEMENTED**, yerel Godot **4.6.3** kontrolü. Hedef **4.7.2 Standard** ve Android cihaz kabulü açık. Engine/stüdyo yazıları **CANDIDATE**; SovTaym Studios adı **PRELIMINARY**. Title’ın son sanat tasarımı bu adımda tamamlanmadı.
 
 Owner, ana tema dosyasının henüz hazır olmadığını ve sonradan eklenecek şekilde hazırlanmasını istedi. Ayrılan yol **`game/assets/audio/music/bgm_main_theme.ogg`**. Dosya şu an yok; boş ses dosyası veya Fadyme temasıyla ikame edilmedi. [Teslim/kurulum notu](../../game/assets/audio/music/README.md).

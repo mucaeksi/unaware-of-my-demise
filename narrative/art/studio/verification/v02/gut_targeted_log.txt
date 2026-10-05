@@ -1,0 +1,90 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+---  GUT  ---
+[INFO]:  using [/home/agent/.local/share/godot/app_userdata/Unaware of My Demise] for temporary output.
+Godot version:  4.6.3
+GUT version:  9.7.1
+
+
+res://tests/ui/test_startup_sequence.gd
+* test_silent_startup_visits_studio_title_without_a_second_godot_page
+* test_focus_loss_freezes_the_timeline_and_resume_continues_it
+* test_cancelled_startup_cannot_emit_a_late_completion
+* test_early_title_tap_waits_for_startup_before_fetching_the_player
+WARNING: AssetResolver: the content names no asset ui/title_key_art
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _report (res://scripts/app/asset_resolver.gd:122)
+         [1] _load_art (res://scripts/app/asset_resolver.gd:102)
+         [2] texture (res://scripts/app/asset_resolver.gd:56)
+         [3] _build (res://scripts/ui/title/title_screen.gd:36)
+         [4] ensure_built (res://scripts/ui/common/ui_screen.gd:44)
+         [5] load_title (res://scripts/ui/title/title_screen.gd:70)
+         [6] _present_title (res://scripts/ui/story_director.gd:117)
+         [7] start (res://scripts/ui/story_director.gd:82)
+         [8] _ready (res://scripts/ui/app_shell.gd:31)
+         [9] add_child_autofree (res://addons/gut/test.gd:2784)
+         [10] _shell (res://tests/ui/test_startup_sequence.gd:49)
+         [11] test_early_title_tap_waits_for_startup_before_fetching_the_player (res://tests/ui/test_startup_sequence.gd:90)
+         [12] _run_test (res://addons/gut/gut.gd:622)
+         [13] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_title_also_waits_for_content_when_startup_finishes_first
+* test_retry_cancels_the_overlay_and_does_not_replay_the_splashes
+* test_builtin_engine_splash_and_studio_emblem_work_without_a_content_patch
+7/7 passed.
+
+
+res://tests/ui/test_first_launch.gd
+* test_a_new_player_goes_from_the_title_straight_into_the_opening
+* test_a_returning_player_lands_on_the_hub
+* test_the_title_has_no_say_in_a_retry
+3/3 passed.
+
+
+res://tests/unit/test_audio_and_locale.gd
+* test_the_bus_layout_has_music_voice_and_sfx
+* test_runtime_paths_follow_the_stable_ids
+* test_missing_audio_is_silence_reported_once
+* test_a_new_voice_line_cuts_the_previous_one
+* test_music_cross_fades_and_a_missing_cue_fades_the_old_one_out
+* test_volumes_are_applied_saved_and_restored
+* test_backgrounding_the_app_pauses_and_resuming_continues
+* test_text_follows_the_locale_with_english_as_the_fallback
+* test_the_vn_reads_the_player_language_and_plays_recorded_lines
+* test_the_shipped_cue_pack_has_every_slot_and_nothing_assigned_yet
+* test_a_cue_pack_ignores_unknown_slots_and_empty_values
+* test_flow_cues_play_their_slot_and_an_unassigned_music_slot_fades_the_music_out
+* test_story_scenes_and_lines_drive_music_ambience_and_effects
+* test_stopping_music_when_none_plays_is_quiet
+* test_future_main_theme_is_silent_without_a_file_and_does_not_use_fadyme
+* test_reserved_main_theme_keeps_its_player_stream_and_fade_across_entry_calls
+* test_assigned_title_cue_overrides_the_future_filename_and_preserves_mute
+* test_backgrounding_preserves_the_entry_fade_until_resume
+* test_entry_ogg_loops_without_mutating_the_imported_resource
+* test_entry_music_started_while_backgrounded_waits_for_resume
+20/20 passed.
+
+
+
+
+==============================================
+= Run Summary
+==============================================
+
+Totals
+------
+Scripts               3
+Tests                30
+Passing Tests        30
+Asserts             165
+Time              2.834s
+
+
+---- All tests passed! ----
+GUT 9.6.1:  https://github.com/bitwes/Gut/releases/tag/v9.6.1 is now available!
+
+Results saved to /workspace/scratch/uomd-studio-v02/qa/targeted.xml
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2663)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)

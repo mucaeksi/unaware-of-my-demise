@@ -5,13 +5,11 @@ extends Control
 signal completed
 signal phase_changed(screen_id: String)
 
-const ENGINE_SCENE: PackedScene = preload("res://scenes/ui/startup/engine_splash_screen.tscn")
 const STUDIO_SCENE: PackedScene = preload("res://scenes/ui/startup/studio_splash_screen.tscn")
 const CandidateTheme = preload("res://theme/gothic_candidate_v01.gd")
 
 @export_range(0.0, 5.0) var fade_seconds: float = 1.0
-@export_range(0.0, 10.0) var engine_hold_seconds: float = 1.8
-@export_range(0.0, 10.0) var studio_hold_seconds: float = 2.2
+@export_range(0.0, 10.0) var studio_hold_seconds: float = 3.0
 @export_range(0.0, 5.0) var title_reveal_seconds: float = 1.2
 @export_range(0.0, 10.0) var music_fade_seconds: float = 5.0
 @export var auto_start: bool = true
@@ -41,18 +39,14 @@ func begin() -> void:
 	if _begun:
 		return
 	_begun = true
-	_show_engine()
+	# The engine's own native splash precedes this scene. Never show a second Godot page.
+	_show_studio()
 	music_available = Audio.play_entry_theme(music_fade_seconds)
 	_timeline = create_tween()
 	_timeline.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	_timeline.tween_property(_screen, "modulate:a", 1.0, fade_seconds)
-	_timeline.tween_interval(engine_hold_seconds)
-	_timeline.tween_property(_screen, "modulate:a", 0.0, fade_seconds)
-	_timeline.tween_callback(_show_studio)
-	# Callbacks read the newly installed screen; the engine screen is freed between phases.
-	_timeline.tween_method(_set_screen_alpha, 0.0, 1.0, fade_seconds)
 	_timeline.tween_interval(studio_hold_seconds)
-	_timeline.tween_method(_set_screen_alpha, 1.0, 0.0, fade_seconds)
+	_timeline.tween_property(_screen, "modulate:a", 0.0, fade_seconds)
 	_timeline.tween_callback(_reveal_title)
 	_timeline.tween_property(self, "modulate:a", 0.0, title_reveal_seconds)
 	_timeline.tween_callback(_complete)
@@ -92,16 +86,8 @@ func _replace(packed: PackedScene, screen_id: String) -> void:
 	phase_changed.emit(phase)
 
 
-func _show_engine() -> void:
-	_replace(ENGINE_SCENE, EngineSplashScreen.SCREEN_ID)
-
-
 func _show_studio() -> void:
 	_replace(STUDIO_SCENE, StudioSplashScreen.SCREEN_ID)
-
-
-func _set_screen_alpha(value: float) -> void:
-	_screen.modulate.a = value
 
 
 func _reveal_title() -> void:

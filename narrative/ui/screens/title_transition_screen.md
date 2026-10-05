@@ -10,4 +10,4 @@ The `ui/title_key_art` resolver slot is still unfilled and the current title vis
 
 Music is started by the entry presentation, not restarted by this view. It continues through title and existing entry operations; routing to a new player's story fades it out, while the hub/recovery routes use their existing hub cue behavior.
 
-Sources: [startup/audio record](../../design/STARTUP_AUDIO_V01.md), [first-launch design](../../../docs/design/FIRST_LAUNCH_FLOW.md), [art review](../../design/ART_SYSTEM_V01.md).
+Sources: [current logo/native startup](../../design/STUDIO_SPLASH_V02.md), [historical startup/audio v01](../../design/STARTUP_AUDIO_V01.md), [first-launch design](../../../docs/design/FIRST_LAUNCH_FLOW.md), [art review](../../design/ART_SYSTEM_V01.md).

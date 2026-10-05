@@ -2,6 +2,16 @@
 
 Bu kayıt Narrative ve UI tasarım işine aittir. Infrastructure ekibinin `active.md` kaydı ve runtime değişiklikleri ayrı sahipliktedir.
 
+## Güncel revizyon / native Godot ve SovTaym logosu
+
+- Owner, önceki stüdyo düz yazısını yetersiz buldu ve Godot’un kendi APK açılışını kullanmayı hatırlattı. [Logolu açılış v02](../../narrative/design/STUDIO_SPLASH_V02.md) uygulandı: **native Godot → SovTaym amblemi → mevcut title**.
+- Repo’da gizlenen `boot_splash/show_image` true yapıldı; custom image atanmadı, 1200 ms minimum. Yerel runtime’ın kendi Godot logosu X11 kaydında görüldü. Ek `EngineSplashScreen` artık preload/instantiate edilmez; tarihsel sınıf/scene yerinde, registry **RETIRED_FROM_STARTUP**.
+- OpenAI imagegen ile şeffaf kuzgun/kum saati amblemi üretildi. Source/runtime PNG birebir; gerçek scene’de TextureRect, Cinzel SovTaym/STUDIOS ve Inter PRESENTS ayrı node’lar. Koyu dokulu shader parent alpha’yı korur. 360×640 / 390×844 render ve gerçek main cold-boot videosu mevcut.
+- Studio 1 s fade-in / 3 s hold / 1 s fade-out, title reveal 1,2 s. Tema ilk script kontrollü studio frame’inde başlar; native Godot’ta audio iddia edilmez. Owner dosyası hâlâ yok, `bgm_main_theme.ogg` sessiz rezervasyonu korunur.
+- [Üretim izi](../../narrative/art/studio/PROVENANCE.json) ve [doğrulama](../../narrative/art/studio/VERIFY_V02.json). Yerel 4.6.3 QA kopyasında 30 ilgili test geçti; aynı iki GUT-only uyumluluk düzenlemesi kullanılır. Production GUT/pin, backend, gerçek auth/patch/progression, canon ve tarihsel asset/audio orijinalleri değişmedi. Hedef 4.7.2/Android, gerçek müzik ve final owner sanat onayı açık.
+- Title hâlâ kendi placeholder’ıdır; final görsel uygulaması ayrı sonraki adım. Normal main push `[skip ci]` ile üretim deploy zincirini tetiklemeden kaydedilir. Önceki v01 kayıtları kendi aşamalarının tarihsel kanıtıdır.
+- Eşzamanlı teknik main `b65a387` (billing/ads/mail/licences/release-control/resume) korundu; yalnız unpublished sanat commit’i rebase edildi. D-16 düzeltmesiyle D-17/D-18/D-19 satırları birlikte tutuldu. Birleşmiş sürümde **33/33** ilgili test geçti ve gerçek Studio render’ı alındı; teknik runtime/workflow byte’ları upstream ile eşit.
+
 ## Güncel uygulama / açılış ve bekleyen ana tema
 
 - Owner: **“şimdilik hazır değil, oraya eklenecekmiş gibi ayarlayalım.”** Ana tema teslimi bekler; rezervasyon `game/assets/audio/music/bgm_main_theme.ogg`. `flow.title` null kalır, gerçek teslim/cue uydurulmaz; Fadyme teması ikame edilmez.

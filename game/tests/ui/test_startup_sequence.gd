@@ -25,7 +25,6 @@ func _sequence() -> StartupSequence:
 	var sequence: StartupSequence = StartupSequence.new()
 	sequence.auto_start = false
 	sequence.fade_seconds = 0.01
-	sequence.engine_hold_seconds = 0.08
 	sequence.studio_hold_seconds = 0.08
 	sequence.title_reveal_seconds = 0.01
 	return sequence
@@ -51,7 +50,7 @@ func _shell() -> AppShell:
 	return shell
 
 
-func test_silent_startup_visits_engine_studio_title_and_completes_once() -> void:
+func test_silent_startup_visits_studio_title_without_a_second_godot_page() -> void:
 	var sequence: StartupSequence = add_child_autofree(_sequence())
 	var phases: Array[String] = []
 	sequence.phase_changed.connect(func(id: String) -> void: phases.append(id))
@@ -60,7 +59,7 @@ func test_silent_startup_visits_engine_studio_title_and_completes_once() -> void
 	sequence.begin()
 	assert_false(sequence.music_available, "no owner recording has been supplied")
 	await wait_for_signal(sequence.completed, 2.0)
-	assert_eq(phases, ["ui.engine_splash", "ui.studio_splash", "ui.title"])
+	assert_eq(phases, ["ui.studio_splash", "ui.title"])
 	assert_signal_emit_count(sequence, "completed", 1)
 	assert_almost_eq(sequence.modulate.a, 0.0, 0.01)
 
@@ -70,7 +69,7 @@ func test_focus_loss_freezes_the_timeline_and_resume_continues_it() -> void:
 	sequence.begin()
 	sequence._notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
 	await wait_seconds(0.3)
-	assert_eq(sequence.phase, "ui.engine_splash")
+	assert_eq(sequence.phase, "ui.studio_splash")
 	assert_almost_eq(sequence._screen.modulate.a, 0.0, 0.01)
 	sequence._notification(Node.NOTIFICATION_APPLICATION_FOCUS_IN)
 	await wait_for_signal(sequence.completed, 2.0)
@@ -84,7 +83,7 @@ func test_cancelled_startup_cannot_emit_a_late_completion() -> void:
 	sequence.cancel()
 	await wait_seconds(0.3)
 	assert_signal_not_emitted(sequence, "completed")
-	assert_eq(sequence.phase, "ui.engine_splash")
+	assert_eq(sequence.phase, "ui.studio_splash")
 
 
 func test_early_title_tap_waits_for_startup_before_fetching_the_player() -> void:
@@ -123,3 +122,16 @@ func test_retry_cancels_the_overlay_and_does_not_replay_the_splashes() -> void:
 	await wait_seconds(0.3)
 	assert_true(shell.current is VnScreen)
 	assert_eq((shell.backend as _Backend).fetches, 1)
+
+
+func test_builtin_engine_splash_and_studio_emblem_work_without_a_content_patch() -> void:
+	assert_true(bool(ProjectSettings.get_setting("application/boot_splash/show_image")))
+	assert_eq(String(ProjectSettings.get_setting("application/boot_splash/image", "")), "", "the engine supplies its own logo")
+	var studio: StudioSplashScreen = add_child_autofree(StartupSequence.STUDIO_SCENE.instantiate())
+	var emblem: TextureRect = studio.find_child("Emblem", true, false) as TextureRect
+	assert_not_null(emblem)
+	assert_not_null(emblem.texture, "the mark ships as a built-in resource")
+	assert_true(emblem.texture.resource_path.begins_with("res://assets/branding/sovtaym/"))
+	assert_eq(emblem.stretch_mode, TextureRect.STRETCH_KEEP_ASPECT_CENTERED, "the hourglass/wing tips are not cropped")
+	assert_eq((studio.find_child("Wordmark", true, false) as Label).text, "SovTaym")
+	assert_eq((studio.find_child("Studios", true, false) as Label).text, "STUDIOS")

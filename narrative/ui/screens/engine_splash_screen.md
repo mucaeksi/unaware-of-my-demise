@@ -1,6 +1,6 @@
 # EngineSplashScreen — ui.engine_splash
 
-Status: **IMPLEMENTED; local Godot 4.6.3 viewport reviewed; Android/4.7.2 pending**. Text presentation is a candidate.
+Status: **RETIRED_FROM_STARTUP (2026-10-05 owner correction)**. The engine's own native Godot logo is restored with `boot_splash/show_image=true`; no custom Godot text page is instantiated. The source below documents the earlier candidate. See [current studio/native startup](../../design/STUDIO_SPLASH_V02.md).
 
 The first game-controlled frame shows `Godot` and `ENGINE` centered on the shared ink background, with Inter, bone lettering and a thin bronze rule. SafeAreaContainer handles viewport insets. This follows the native black boot splash; native splash audio is not claimed.
 

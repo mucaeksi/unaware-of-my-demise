@@ -15,27 +15,32 @@
       "id": "ui.engine_splash",
       "name": "EngineSplashScreen",
       "type": "screen",
-      "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
+      "status": "RETIRED_FROM_STARTUP",
       "art_status": "CANDIDATE",
       "spec": "screens/engine_splash_screen.md",
       "godot_scene": "res://scenes/ui/startup/engine_splash_screen.tscn",
       "godot_script": "res://scripts/ui/startup/engine_splash_screen.gd",
-      "access": "public; shipped_fonts; no_account_or_patch_dependency",
+      "access": "historical manual review only; no startup consumer",
       "signals": [],
-      "verification": "../design/STARTUP_VERIFY_V01.json"
+      "verification": "../art/studio/VERIFY_V02.json",
+      "active": false
     },
     {
       "id": "ui.studio_splash",
       "name": "StudioSplashScreen",
       "type": "screen",
       "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
-      "art_status": "CANDIDATE",
+      "art_status": "CANDIDATE_EMBLEM_V01",
       "spec": "screens/studio_splash_screen.md",
       "godot_scene": "res://scenes/ui/startup/studio_splash_screen.tscn",
       "godot_script": "res://scripts/ui/startup/studio_splash_screen.gd",
       "access": "public; shipped_fonts; no_account_or_patch_dependency",
       "signals": [],
-      "verification": "../design/STARTUP_VERIFY_V01.json"
+      "verification": "../art/studio/VERIFY_V02.json",
+      "assets": [
+        "res://assets/branding/sovtaym/v01/emblem.png",
+        "res://assets/branding/sovtaym/v01/studio_atmosphere.gdshader"
+      ]
     },
     {
       "id": "ui.startup_sequence",
@@ -51,7 +56,7 @@
         "phase_changed(screen_id: String)",
         "completed"
       ],
-      "verification": "../design/STARTUP_VERIFY_V01.json"
+      "verification": "../art/studio/VERIFY_V02.json"
     },
     {
       "id": "ui.title",
@@ -67,7 +72,7 @@
         "start_requested",
         "support_requested"
       ],
-      "verification": "../design/STARTUP_VERIFY_V01.json"
+      "verification": "../art/studio/VERIFY_V02.json"
     },
     {
       "id": "ui.sign_in",
@@ -174,5 +179,12 @@
       ],
       "status": "PLANNED"
     }
-  ]
+  ],
+  "native_engine_splash": {
+    "owner": "Godot native engine boot; not a second Control screen",
+    "show_image": true,
+    "custom_image": null,
+    "minimum_display_time_ms": 1200,
+    "verification": "../art/studio/VERIFY_V02.json"
+  }
 }

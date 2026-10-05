@@ -1,6 +1,6 @@
 # UOMD — UI Tasarım Çalışması
 
-Durum: prototipler **DESIGN_DRAFT**; Engine/Studio/StartupSequence gerçek Godot uygulaması ve mevcut Title bağlantısı yerel olarak kontrol edildi. [Güncel startup/audio](../design/STARTUP_AUDIO_V01.md), [doğrulama](../design/STARTUP_VERIFY_V01.json). Kullanıcı yönlendirmesi: AFK Arena benzeri gezinme ve sunum; daha karanlık tema ve oyunun kendi mekanikleri. Oyuncu arayüzü/altyazı İngilizce, seslendirme Japonca. Seçili Narrative kaynakları BATCH-0005 ile main'e aktarıldı.
+Durum: prototipler **DESIGN_DRAFT**; Godot’un native logosu geri açıldı, logolu Studio/StartupSequence ve mevcut Title bağlantısı yerel olarak kontrol edildi. [Güncel logolu açılış](../design/STUDIO_SPLASH_V02.md), [doğrulama](../art/studio/VERIFY_V02.json). Kullanıcı yönlendirmesi: AFK Arena benzeri gezinme ve sunum; daha karanlık tema ve oyunun kendi mekanikleri. Oyuncu arayüzü/altyazı İngilizce, seslendirme Japonca. Seçili Narrative kaynakları BATCH-0005 ile main'e aktarıldı.
 
 **Son yönlendirme — 2026-10-05:** [yeniden başlangıç promptu](../design/CREATIVE_RESTART_PROMPT.md) ve [döküm](../design/WORK_COMPLETED_2026-10-05.md) yeni sanat kararını/sırayı kaydeder. Her tasarım adımı gerçek Godot entegrasyonunu da içerir. Dünya/karakter okuması ve ilk sanat adayları sonrasında açılış sahneleri uygulandı. Ana tema owner tarafından daha sonra sağlanacak; şimdilik sessiz rezervasyon var. Eski görsel pack'ler tarihsel olarak korunur. Final title/entry UI ve Fadyme paketleri açık.
 

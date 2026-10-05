@@ -4,7 +4,7 @@ Every new screen gets an immutable `ui.*` ID, a PascalCase Godot root name, a ma
 
 | Screen/component | ID | Specification |
 |---|---|---|
-| EngineSplashScreen | `ui.engine_splash` | [engine_splash_screen.md](engine_splash_screen.md) |
+| Retired custom EngineSplashScreen; native Godot restored | `ui.engine_splash` (retired) | [engine_splash_screen.md](engine_splash_screen.md) |
 | StudioSplashScreen | `ui.studio_splash` | [studio_splash_screen.md](studio_splash_screen.md) |
 | StartupSequence | `ui.startup_sequence` | [startup_sequence.md](startup_sequence.md) |
 | Existing TitleScreen transition | `ui.title` | [title_transition_screen.md](title_transition_screen.md) |

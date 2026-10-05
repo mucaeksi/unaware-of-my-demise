@@ -29,9 +29,6 @@ func _run() -> void:
 	root.add_child(_shell)
 	var intro: StartupSequence = _shell.director._startup
 	await get_tree().create_timer(intro.fade_seconds + 0.25).timeout
-	await _capture("engine", intro)
-	await intro.phase_changed
-	await get_tree().create_timer(intro.fade_seconds + 0.25).timeout
 	await _capture("studio", intro)
 	await intro.completed
 	await get_tree().process_frame
