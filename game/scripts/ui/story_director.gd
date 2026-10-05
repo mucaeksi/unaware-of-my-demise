@@ -28,6 +28,8 @@ const SETTINGS_DELETE_ACCOUNT: String = "delete_account"
 const SETTINGS_CONTACT_SUPPORT: String = "contact_support"
 ## Where players write for help (owner decision D-01); the same address is on the web deletion page (server/src/web.ts).
 const SUPPORT_EMAIL: String = "unawareofmydemise@gmail.com"
+## The game's store page (the Android package of export_presets.cfg): where "Update" sends a build the server no longer accepts.
+const STORE_URL: String = "https://play.google.com/store/apps/details?id=io.github.mucaeksi.unawareofmydemise"
 const HUB_DIAGNOSTICS: String = "diagnostics"
 
 const _STOP_REASONS: Dictionary = {
@@ -47,6 +49,10 @@ var shell: AppShell = null
 var flow: GameFlow = null
 
 var _boot_job: WorkerJob = null
+## The title on show while the content loads behind it (null once the player has tapped or when it was skipped).
+var _title: TitleScreen = null
+## The content-loaded flow waiting for the title's tap.
+var _loaded_flow: GameFlow = null
 var _battle_job: WorkerJob = null
 var _battle_stage: String = ""
 var _battle_roster: Variant = null
@@ -56,14 +62,21 @@ func _ready() -> void:
 	set_process(false)
 
 
-## Begins the boot sequence: content (on a worker unless the shell already has a loaded flow), then the server snapshot, then the first screen.
-func start() -> void:
-	if shell.flow != null:
-		_on_flow_loaded(shell.flow)
-		return
-	_show_message("Unaware of My Demise", "Loading...")
+## Begins the boot sequence (docs/design/FIRST_LAUNCH_FLOW.md): the title, with the content loading behind it (on a worker unless the
+## shell already has a loaded flow); the tap then goes on to the server (release gate, sign-in, snapshot) and the first screen.
+## `skip_title`: a retry or a restart after an update goes straight on.
+func start(skip_title: bool = false) -> void:
+	_loaded_flow = null
 	# INF-026: the installed content release is mounted before any content is read.
 	Game.mount_content()
+	if skip_title:
+		_title = null
+		_show_message("Unaware of My Demise", "Loading...")
+	else:
+		_present_title()
+	if shell.flow != null:
+		_on_content_loaded(shell.flow)
+		return
 	_boot_job = WorkerJob.start(func() -> Variant: return GameFlow.create())
 	set_process(true)
 
@@ -72,7 +85,7 @@ func _process(_delta: float) -> void:
 	if _boot_job != null and _boot_job.is_finished():
 		var loaded: GameFlow = _boot_job.finish() as GameFlow
 		_boot_job = null
-		_on_flow_loaded(loaded)
+		_on_content_loaded(loaded)
 	if _battle_job != null and _battle_job.is_finished():
 		var result: BattleService.BattleResult = _battle_job.finish() as BattleService.BattleResult
 		_battle_job = null
@@ -93,16 +106,41 @@ func on_back_unhandled() -> void:
 # -- boot ---------------------------------------------------------------------------------------------
 
 
+func _present_title() -> void:
+	_title = TitleScreen.new()
+	_title.load_title("build %d" % ClientRelease.version_code())
+	_title.start_requested.connect(func() -> void:
+		_title = null
+		_on_flow_loaded(_loaded_flow), CONNECT_ONE_SHOT)
+	_title.support_requested.connect(func() -> void: OS.shell_open(support_mail_uri()))
+	shell.show_screen(_title)
+	Audio.play_flow_cue(AudioCues.FLOW_TITLE)
+
+
+## The content is loaded (or failed to): with the title on show it waits for the tap, otherwise it goes straight on.
+func _on_content_loaded(loaded: GameFlow) -> void:
+	if _title == null:
+		_on_flow_loaded(loaded)
+		return
+	_loaded_flow = loaded
+	_title.set_ready(true)
+
+
 func _on_flow_loaded(loaded: GameFlow) -> void:
 	# A flow that failed to load is dropped, so "Try again" reloads the content instead of showing the same failure.
 	shell.flow = loaded if loaded.is_ready() else null
 	if not loaded.is_ready():
 		_present_boot_failure("Game data could not be loaded", loaded.error)
 		return
-	_show_message("Unaware of My Demise", "Connecting...")
+	# Without a session the next thing is Google's account chooser: say first why it appears (FIRST_LAUNCH_FLOW step 6).
+	var signing_in: bool = shell.backend == null and not Online.server_url().is_empty() and not Online.has_session()
+	_show_message("Unaware of My Demise", "Signing in with Google. Your progress is saved to your Google account." if signing_in else "Connecting...")
 	if not await Game.attach(loaded, shell.backend):
 		if Game.boot_error_kind == ClientRelease.KIND_CONTENT_UPDATE:
 			_update_content()
+			return
+		if Game.boot_error_kind == ClientRelease.KIND_UPDATE_REQUIRED:
+			_present_update_required(Game.boot_error)
 			return
 		if Game.boot_error_kind == GameBackend.KIND_OFFLINE:
 			_present_boot_failure("Server unreachable", "The game server could not be reached. Check your connection and try again.")
@@ -112,10 +150,13 @@ func _on_flow_loaded(loaded: GameFlow) -> void:
 			_present_boot_failure("The game could not start", Game.boot_error)
 		return
 	flow = Game.flow
-	if flow.open_attempt().is_empty():
-		_present_hub()
-	else:
+	if not flow.open_attempt().is_empty():
 		_present_unfinished_battle()
+	elif flow.is_at_story_start():
+		# A new player goes straight into the opening; the story chain takes them on from there.
+		_present_current_entry()
+	else:
+		_present_hub()
 
 
 ## The server runs other game data than this device: install the signed content release, then load the content again (or
@@ -132,12 +173,22 @@ func _update_content() -> void:
 		screen.chosen.connect(func(_action_id: String) -> void: get_tree().quit(), CONNECT_ONE_SHOT)
 		return
 	shell.flow = null
-	start()
+	start(true)
+
+
+## This build is below the server's floor: the only way on is the store (docs/design/FIRST_LAUNCH_FLOW.md step 4).
+func _present_update_required(message: String) -> void:
+	var screen: MessageScreen = _show_message("Update required", message, [
+		{"id": "update", "label": "Update"}, {"id": "retry", "label": "Try again"}] as Array[Dictionary])
+	screen.chosen.connect(func(action_id: String) -> void:
+		if action_id == "update":
+			OS.shell_open(STORE_URL)
+		start(true), CONNECT_ONE_SHOT)
 
 
 func _present_boot_failure(title: String, message: String) -> void:
 	var screen: MessageScreen = _show_message(title, message, [{"id": "retry", "label": "Try again"}] as Array[Dictionary])
-	screen.chosen.connect(func(_action_id: String) -> void: start(), CONNECT_ONE_SHOT)
+	screen.chosen.connect(func(_action_id: String) -> void: start(true), CONNECT_ONE_SHOT)
 
 
 # -- hub ----------------------------------------------------------------------------------------------
@@ -164,6 +215,7 @@ func _present_hub(status: String = "") -> void:
 	hub.load_hub(summary, entries, status)
 	hub.chosen.connect(_on_hub_chosen)
 	shell.show_screen(hub)
+	Audio.play_flow_cue(AudioCues.FLOW_HUB)
 
 
 func _on_hub_chosen(entry_id: String) -> void:
@@ -309,6 +361,7 @@ func _start_battle(stage_id: String, roster: Variant) -> void:
 	var battle: BattleScreen = BattleScreen.new()
 	battle.show_loading(_stage_title(stage_id))
 	shell.show_screen(battle)
+	Audio.play_flow_cue(AudioCues.FLOW_BATTLE_DEFAULT)
 	var opened: Outcome = await flow.begin_stage(stage_id, roster)
 	if shell.current != battle:
 		return
@@ -380,6 +433,7 @@ func _finish_stage(stage_id: String, outcome: GameFlow.StageOutcome, roster: Var
 	if not outcome.is_victory():
 		_present_defeat(stage_id, roster)
 		return
+	Audio.play_flow_cue(AudioCues.FLOW_VICTORY)
 	# Back to the hub after every cleared stage, so the player can level up and re-gear with what it granted before continuing.
 	var post: Dictionary = flow.story_index.post_battle_scene(stage_id)
 	if post.is_empty():
@@ -397,6 +451,7 @@ func _present_defeat(stage_id: String, roster: Variant, title: String = "", mess
 	defeat.change_party.connect(func() -> void: _present_roster(stage_id, roster))
 	defeat.retreat.connect(func() -> void: _present_stage(stage_id))
 	shell.show_screen(defeat)
+	Audio.play_flow_cue(AudioCues.FLOW_DEFEAT)
 
 
 # -- team, skills, inventory, settings ------------------------------------------------------------------
@@ -541,6 +596,7 @@ func _present_gacha(selected: String = "", results_text: String = "", status: St
 	gacha.history_requested.connect(func() -> void: _present_gacha_history(0, selected))
 	gacha.back_requested.connect(func() -> void: _present_hub())
 	shell.show_screen(gacha)
+	Audio.play_flow_cue(AudioCues.FLOW_SUMMON)
 
 
 func _pull(screen: GachaScreen, banner_id: String, count: int, target_id: String) -> void:
@@ -658,7 +714,7 @@ func _present_settings(status: String = "") -> void:
 	shell.show_screen(settings)
 
 
-## A mailto link to support with the build and the account's short id filled in, so a report can be traced.
+## A mailto link to support with the build and the account id filled in, so a report can be traced.
 static func support_mail_uri() -> String:
 	var body: String = "Build: %d" % ClientRelease.version_code()
 	if Online.has_session():
@@ -697,7 +753,7 @@ func _present_signed_out(title: String, message: String) -> void:
 	Game.flow = null
 	flow = null
 	var screen: MessageScreen = _show_message(title, message, [{"id": "sign_in", "label": "Sign in"}] as Array[Dictionary])
-	screen.chosen.connect(func(_action_id: String) -> void: start(), CONNECT_ONE_SHOT)
+	screen.chosen.connect(func(_action_id: String) -> void: start(true), CONNECT_ONE_SHOT)
 
 # -- helpers ------------------------------------------------------------------------------------------
 

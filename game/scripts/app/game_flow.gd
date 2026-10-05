@@ -134,6 +134,12 @@ func is_finished() -> bool:
 	return current_entry().is_empty()
 
 
+## True for a player who has not finished the first story entry yet (the opening scene): the game takes them straight
+## into the story instead of the hub (docs/design/FIRST_LAUNCH_FLOW.md step 9).
+func is_at_story_start() -> bool:
+	return state.story_state.story_cursor == 0 and not needs_first_oath_selection()
+
+
 func is_stage(entry_id: String) -> bool:
 	return story_index.is_stage_entry(entry_id)
 

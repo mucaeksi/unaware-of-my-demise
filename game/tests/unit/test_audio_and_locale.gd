@@ -133,3 +133,70 @@ func test_the_vn_reads_the_player_language_and_plays_recorded_lines() -> void:
 	vn.go_next()
 	assert_eq(vn.dialogue_text(), "Behind me.", "untranslated line: English")
 	TranslationServer.set_locale(previous_locale)
+
+
+# -- cues (docs/design/FIRST_LAUNCH_FLOW.md, D-08) -----------------------------------------------------
+
+
+func _cues(slots: Dictionary) -> AudioCues:
+	var cues: AudioCues = AudioCues.new()
+	cues.adopt(slots)
+	return cues
+
+
+func test_the_shipped_cue_pack_has_every_slot_and_nothing_assigned_yet() -> void:
+	var shipped: AudioCues = AudioCues.load_pack()
+	assert_eq(shipped.error, "", "the pack reads cleanly")
+	var parsed: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(AudioCues.PACK_PATH))
+	var slots: Array = (parsed["slots"] as Dictionary).keys()
+	slots.sort()
+	var expected: Array = AudioCues.SLOTS.duplicate()
+	expected.sort()
+	assert_eq(slots, expected, "the pack's slots are exactly the client's (tools/validate_part1_content.py checks the same list)")
+	for slot: String in AudioCues.SLOTS:
+		assert_eq(shipped.cue(slot), "", "%s is unassigned until the narrative team fills it" % slot)
+
+
+func test_a_cue_pack_ignores_unknown_slots_and_empty_values() -> void:
+	var cues: AudioCues = _cues({"flow.title": "bgm_title", "flow.hub": "", "flow.mystery": "bgm_x"})
+	assert_eq(cues.cue(AudioCues.FLOW_TITLE), "bgm_title")
+	assert_eq(cues.cue(AudioCues.FLOW_HUB), "")
+	assert_eq(cues.cue("flow.mystery"), "")
+	assert_string_contains(cues.error, "unknown slot")
+	assert_string_contains(AudioCues.load_pack("res://no/such/pack.json").error, "missing")
+
+
+func test_flow_cues_play_their_slot_and_an_unassigned_music_slot_fades_the_music_out() -> void:
+	_present = [AudioDirector.music_path("bgm_title"), AudioDirector.sfx_path("sfx_start"), AudioDirector.voice_path("fadyme", "title_call")]
+	_audio.cues = _cues({"flow.title": "bgm_title", "sfx.ui_start": "sfx_start", "voice.title_call": "fadyme/title_call"})
+	assert_true(_audio.play_flow_cue(AudioCues.FLOW_TITLE, 0.0))
+	assert_eq(_audio.music_cue(), "bgm_title")
+	assert_true(_audio.play_flow_cue(AudioCues.SFX_UI_START))
+	assert_true(_audio.play_flow_cue(AudioCues.VOICE_TITLE_CALL))
+	assert_true(_audio.is_voice_playing())
+	assert_false(_audio.play_flow_cue(AudioCues.FLOW_HUB, 0.0), "the hub has no cue yet")
+	assert_eq(_audio.music_cue(), "", "another screen's music does not carry on")
+	assert_false(_audio.play_flow_cue(AudioCues.SFX_UI_ERROR), "an unassigned sound is silence")
+
+
+func test_story_scenes_and_lines_drive_music_ambience_and_effects() -> void:
+	_present = [AudioDirector.music_path("bgm_opening"), AudioDirector.ambience_path("amb_rain"), AudioDirector.sfx_path("sfx_bell")]
+	_audio.apply_scene_audio({"music_cue_id": "bgm_opening", "ambience_cue_id": "amb_rain"})
+	assert_eq(_audio.music_cue(), "bgm_opening")
+	assert_eq(_audio.ambience_cue(), "amb_rain")
+	_audio.apply_line_audio({"sfx": "sfx_bell", "music": "stop", "fade_seconds": 0})
+	assert_eq(_audio.music_cue(), "", "the bell line stops the music")
+	assert_true(_audio._sfx.playing)
+	assert_eq(_audio.ambience_cue(), "amb_rain", "the rain goes on")
+	_audio.apply_line_audio({"ambience": "stop"})
+	assert_eq(_audio.ambience_cue(), "")
+	_audio.apply_scene_audio({"music_cue_id": null})
+	assert_eq(_audio.music_cue(), "", "a scene without a cue changes nothing")
+	_audio.apply_line_audio("not an object")
+
+
+func test_stopping_music_when_none_plays_is_quiet() -> void:
+	_audio.stop_music(1.0)
+	_audio.stop_music(0.0)
+	assert_eq(_audio.music_cue(), "")
+	assert_null(_audio._fade, "no empty fade was started")

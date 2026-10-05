@@ -397,3 +397,73 @@ func test_battle_screen_replays_on_its_own_timer() -> void:
 	await wait_until(battle.can_continue, 5.0, "the timer plays every event and shows the result by itself")
 	assert_eq(battle.result_text(), "Victory!  ★★★")
 	assert_true(battle._timer.is_stopped())
+
+
+## docs/design/FIRST_LAUNCH_FLOW.md: skipping asks first; confirming ends the scene like its last line, refusing keeps reading.
+func test_vn_skip_asks_first_and_then_finishes_the_scene() -> void:
+	var vn: VnScreen = add_child_autofree(VnScreen.new())
+	watch_signals(vn)
+	assert_true(vn.load_scene(_scene(5)))
+	vn.go_next()
+	vn.ask_skip()
+	assert_true(vn.is_skip_asked())
+	assert_false(vn._dialogue_panel.visible, "the question replaces the dialogue")
+	vn.cancel_skip()
+	assert_false(vn.is_skip_asked())
+	assert_true(vn._dialogue_panel.visible)
+	assert_eq(vn.dialogue_text(), "Line 1", "refusing keeps the place")
+	vn.ask_skip()
+	assert_true(vn.handle_back(), "back answers the question with no")
+	assert_false(vn.is_skip_asked())
+	assert_signal_not_emitted(vn, "finished")
+	vn.confirm_skip()
+	assert_signal_not_emitted(vn, "finished", "confirm without the question does nothing")
+	vn.ask_skip()
+	vn.confirm_skip()
+	assert_signal_emit_count(vn, "finished", 1)
+	vn.ask_skip()
+	vn.confirm_skip()
+	assert_signal_emit_count(vn, "finished", 1, "a finished scene does not finish twice")
+
+
+# -- title ------------------------------------------------------------------------------------------------
+
+
+func _title() -> TitleScreen:
+	var title: TitleScreen = TitleScreen.new()
+	title.assets = AssetResolver.new(AssetCatalog.from_packs({}), func(_path: String) -> bool: return false)
+	add_child_autofree(title)
+	return title
+
+
+func test_the_title_keeps_an_early_tap_until_the_game_is_ready() -> void:
+	var title: TitleScreen = _title()
+	watch_signals(title)
+	title.load_title("build 12")
+	assert_eq(title._build_label.text, "build 12")
+	assert_true(title.shows_placeholder(), "no title art is promoted yet")
+	assert_true(title._name_label.visible, "the name stands in for the logo")
+	title.tap()
+	assert_signal_not_emitted(title, "start_requested")
+	assert_eq(title.prompt_text(), "Preparing…")
+	title.set_ready(true)
+	assert_signal_emit_count(title, "start_requested", 1, "the early tap starts as soon as it may")
+	assert_eq(title.prompt_text(), "Tap to start")
+	title.tap()
+	assert_signal_emit_count(title, "start_requested", 2)
+
+
+func test_the_title_waits_for_a_tap_once_ready_and_offers_support() -> void:
+	var title: TitleScreen = _title()
+	watch_signals(title)
+	title.load_title("build 1", "Checking for updates")
+	title.set_ready(true)
+	assert_signal_not_emitted(title, "start_requested", "ready alone never starts")
+	assert_eq(title.status_text(), "Checking for updates")
+	var touch: InputEventScreenTouch = InputEventScreenTouch.new()
+	touch.pressed = true
+	title._gui_input(touch)
+	assert_signal_emit_count(title, "start_requested", 1, "a touch anywhere starts")
+	var support: Button = title._build_label.get_parent().get_child(1)
+	support.pressed.emit()
+	assert_signal_emitted(title, "support_requested")
