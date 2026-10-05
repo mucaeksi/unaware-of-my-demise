@@ -9,7 +9,7 @@ import type { Env } from "./env";
 import type { IdentityVerifier } from "./identity";
 import { IdentityVerificationError } from "./identity";
 import { bannerEpoch } from "./gacha";
-import { parseReleaseConfig } from "./release";
+import { parseReleaseConfig, ReleaseControlCache } from "./release";
 import { engineSimulate } from "./stages";
 import { Client } from "pg";
 
@@ -20,6 +20,9 @@ const testVerifier: IdentityVerifier = {
     return { provider: "google_oidc", subject: `e2e-${match[1]}`, nonce: match[2]! };
   },
 };
+
+/** As in production (src/index.ts): the admin release control, cached per isolate. */
+const releaseControl = new ReleaseControlCache();
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -34,6 +37,7 @@ export default {
       simulate: engineSimulate,
       bannerEpoch: bannerEpoch(env.BANNER_EPOCH),
       release: parseReleaseConfig(env),
+      releaseControl,
     });
     return app(request);
   },

@@ -5,7 +5,7 @@ import type { DbConnection } from "./db";
 import type { Env } from "./env";
 import { GoogleIdTokenVerifier, type IdentityVerifier } from "./identity";
 import { bannerEpoch } from "./gacha";
-import { parseReleaseConfig } from "./release";
+import { parseReleaseConfig, ReleaseControlCache } from "./release";
 import { CHANNELS } from "./content";
 import { runRetention } from "./retention";
 import { engineSimulate } from "./stages";
@@ -23,6 +23,9 @@ function playVerifier(env: Env): PlayVerifier | null {
   if (playFor?.key !== key) playFor = { key, verifier: key ? new GooglePlayVerifier(packageName(env), key) : null };
   return playFor.verifier;
 }
+
+/** The admin panel's release control (DEC-0040), read at most every 30 s per isolate. */
+const releaseControl = new ReleaseControlCache();
 
 /** Google's AdMob verifier keys, kept per isolate (fetched on the first callback). */
 const admobKeys = new HttpAdmobKeys();
@@ -58,6 +61,7 @@ export default {
       simulate: engineSimulate,
       bannerEpoch: bannerEpoch(env.BANNER_EPOCH),
       release: parseReleaseConfig(env),
+      releaseControl,
       content: env.CONTENT ?? null,
       contentChannel: contentChannel(env.CONTENT_CHANNEL),
       // GOOGLE_CLIENT_IDS holds the Web OAuth client id (docs/GITHUB_SECRETS.md): the deletion page signs in with it.

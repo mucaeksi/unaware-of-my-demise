@@ -4,6 +4,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createAdminApp } from "../src/admin";
 import { AccessJwtVerifier, AdminAuthError, type AdminVerifier } from "../src/admin-auth";
 import { createApp } from "../src/app";
+import { ReleaseControlCache } from "../src/release";
 import type { IdentityVerifier } from "../src/identity";
 import { createTestDatabase, type TestDatabase } from "./db";
 
@@ -235,5 +236,28 @@ describe("AccessJwtVerifier", () => {
   it("refuses a configuration that is not an Access team and audience", () => {
     expect(() => new AccessJwtVerifier("example.com", audience)).toThrow(/ACCESS_TEAM_DOMAIN/);
     expect(() => new AccessJwtVerifier(team, "short")).toThrow(/ACCESS_AUD/);
+  });
+});
+
+describe("release control (INF-033, DEC-0040)", () => {
+  it("lets an operator set maintenance and the minimum version; the game applies it, audited, without a redeploy", async () => {
+    expect((await post("help@uomd.test", "/admin/api/release", { maintenance_message: "x", reason: "support may not" })).status).toBe(403);
+    expect((await post("ops@uomd.test", "/admin/api/release", { min_client_version_code: 0, reason: "a bad minimum" })).status).toBe(400);
+    const key = crypto.randomUUID();
+    const set = await post("ops@uomd.test", "/admin/api/release", { maintenance_message: "Back at 03:00 UTC", min_client_version_code: 3, reason: "database upgrade" }, key);
+    expect(set.status).toBe(200);
+    expect((await post("ops@uomd.test", "/admin/api/release", { maintenance_message: "other", reason: "database upgrade" }, key)).body, "a replayed key changes nothing").toEqual(set.body);
+    const audit = (await database.pool.query("SELECT action, permission, reason FROM admin_audit WHERE operation_key = $1", [key])).rows;
+    expect(audit).toEqual([{ action: "release.set_control", permission: "release.write", reason: "database upgrade" }]);
+
+    const live = createApp({ connect: () => database.connect(), verifier: playerVerifier, releaseControl: new ReleaseControlCache(0) });
+    const boot = (await (await live(new Request("https://api.test/v1/bootstrap"))).json()) as Record<string, any>;
+    expect([boot.min_client_version_code, boot.maintenance.message]).toEqual([3, "Back at 03:00 UTC"]);
+    expect((await live(new Request("https://api.test/v1/state", { headers: { "x-client-version-code": "3" } }))).status).toBe(503);
+    const listed = await get("view@uomd.test", "/admin/api/release");
+    expect(listed.body.revisions[0]).toMatchObject({ maintenance_message: "Back at 03:00 UTC", min_client_version_code: 3, created_by: "ops@uomd.test" });
+
+    expect((await post("ops@uomd.test", "/admin/api/release", { maintenance_message: "", min_client_version_code: 1, reason: "upgrade finished" })).status).toBe(200);
+    expect((await live(new Request("https://api.test/v1/state", { headers: { "x-client-version-code": "3" } }))).status, "open again: only the sign-in is missing").toBe(401);
   });
 });

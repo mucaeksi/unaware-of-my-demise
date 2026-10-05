@@ -4,6 +4,7 @@
 // commit of this deployment and whether the game is in maintenance. The client's mirror is game/scripts/app/client_release.gd.
 import manifest from "../../game/data/content/MANIFEST.json";
 import { sha256Hex } from "./crypto";
+import type { Connect, Db } from "./db";
 import { ApiError, invalid, isoUtc } from "./http";
 import { SNAPSHOT_SCHEMA_VERSION } from "./state";
 
@@ -67,6 +68,78 @@ export function parseReleaseConfig(vars: { RELEASE_SOURCE_SHA?: string; MIN_CLIE
   const minimum = (vars.MIN_CLIENT_VERSION_CODE ?? "").trim() || "1";
   if (!/^[1-9][0-9]{0,9}$/.test(minimum)) throw new Error("MIN_CLIENT_VERSION_CODE must be a positive integer");
   return { sourceSha: sha || null, minClientVersionCode: Number(minimum), maintenanceMessage: (vars.MAINTENANCE_MESSAGE ?? "").trim() };
+}
+
+/** The admin panel's release control (migration 0012, DEC-0040): the newest revision, or null when none was set. */
+export interface ReleaseControl {
+  revision: number;
+  maintenanceMessage: string;
+  minClientVersionCode: number;
+}
+
+/**
+ * The deployment's release config with the admin control applied: the minimum versionCode is the larger of the two (an
+ * operator can raise it, never lower it below what this server needs), and a control maintenance message wins.
+ */
+export function effectiveRelease(base: ReleaseConfig, control: ReleaseControl | null): ReleaseConfig {
+  if (control === null) return base;
+  return {
+    sourceSha: base.sourceSha,
+    minClientVersionCode: Math.max(base.minClientVersionCode, control.minClientVersionCode),
+    maintenanceMessage: control.maintenanceMessage || base.maintenanceMessage,
+  };
+}
+
+export async function readReleaseControl(db: Db): Promise<ReleaseControl | null> {
+  const { rows } = await db.query<{ revision: string; maintenance_message: string; min_client_version_code: number }>(
+    "SELECT revision, maintenance_message, min_client_version_code FROM release_control ORDER BY revision DESC LIMIT 1",
+  );
+  const row = rows[0];
+  return row ? { revision: Number(row.revision), maintenanceMessage: row.maintenance_message, minClientVersionCode: Number(row.min_client_version_code) } : null;
+}
+
+/** An operator's new control from the admin request body; anything malformed is refused. */
+export function parseReleaseControl(body: Record<string, unknown>): { maintenanceMessage: string; minClientVersionCode: number } {
+  const message = body.maintenance_message ?? "";
+  if (typeof message !== "string" || message.trim().length > 500) throw invalid("maintenance_message must be text of at most 500 characters ('' = none)");
+  const minimum = body.min_client_version_code ?? 1;
+  if (typeof minimum !== "number" || !Number.isSafeInteger(minimum) || minimum < 1 || minimum > 2_100_000_000) {
+    throw invalid("min_client_version_code must be a positive integer");
+  }
+  return { maintenanceMessage: message.trim(), minClientVersionCode: minimum };
+}
+
+/**
+ * The control as the game Worker sees it: read at most once per `ttlMs` per isolate (one small query), so an operator's
+ * change reaches every isolate within that time. When the database cannot be read the last value stays in force (none
+ * yet = the deploy variables alone): an outage never turns into a maintenance or an update screen by itself.
+ */
+export class ReleaseControlCache {
+  private value: ReleaseControl | null = null;
+  private readAt = Number.NEGATIVE_INFINITY;
+  private pending: Promise<void> | null = null;
+
+  constructor(private readonly ttlMs = 30_000) {}
+
+  async current(connect: Connect, nowMs: number, onError: (error: unknown) => void): Promise<ReleaseControl | null> {
+    if (nowMs - this.readAt >= this.ttlMs) {
+      this.pending ??= (async () => {
+        let connection: Awaited<ReturnType<Connect>> | null = null;
+        try {
+          connection = await connect();
+          this.value = await readReleaseControl(connection);
+        } catch (error) {
+          onError(error);
+        } finally {
+          this.readAt = nowMs;
+          this.pending = null;
+          await connection?.release().catch(onError);
+        }
+      })();
+      await this.pending;
+    }
+    return this.value;
+  }
 }
 
 export async function bootstrap(config: ReleaseConfig, now: Date): Promise<Record<string, unknown>> {

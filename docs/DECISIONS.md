@@ -667,3 +667,21 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   - `tools/verify_apk.sh` compares it with the version records inside the APK (AndroidX `META-INF/*.version`, Google
     `*.properties`).
 - Google's Play libraries are listed under the "Android Software Development Kit License" their POMs name, with its URL.
+
+## DEC-0040 — Maintenance and the minimum app version from the admin panel
+- Status: ACCEPTED (2026-10-05, engineering; roadmap INF-033).
+- Before: maintenance and the minimum app versionCode were deploy variables, so stopping the game or retiring an app
+  version needed a deploy.
+- Now: operators set them in the admin panel (Service tab; permission `release.write`, operator role).
+  - Each change is an append-only revision in `release_control` (migration 0012), with who set it and why, and an
+    audit row (`release.set_control`) in the same transaction.
+  - The game Worker reads the newest revision at most every 30 s per isolate. Requests in between share that read, so
+    there is one small query per isolate per 30 s.
+- Combining it with the deploy variables:
+  - minimum versionCode = the larger of the deploy's and the panel's, so an operator can retire app versions but never
+    reopen ones this server no longer supports;
+  - a non-empty panel message wins over the deploy's.
+- Failure behaviour: when the database cannot be read, the last value read stays in force (none yet = the deploy
+  variables alone). A database outage never turns into a maintenance screen or a forced update by itself; the routes
+  that need the database fail as before.
+- `/v1/bootstrap` reports the combined values, so the client's start screen shows the panel's maintenance message.

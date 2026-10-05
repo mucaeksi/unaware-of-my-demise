@@ -70,7 +70,10 @@ Python reference walk in `parity/fixtures/story_flow.json`.
 
 Every route except `/healthz` and `/v1/bootstrap` passes the release gate first: a request whose `X-Client-Version-Code`
 is below `MIN_CLIENT_VERSION_CODE` gets 426 `UPDATE_REQUIRED` (the header is optional; the Godot client always sends
-it), and a non-empty `MAINTENANCE_MESSAGE` answers 503 `MAINTENANCE` with that message.
+it), and a non-empty `MAINTENANCE_MESSAGE` answers 503 `MAINTENANCE` with that message. The admin panel's release
+control (migration 0012, DEC-0040) applies on top without a deploy: the newest revision is read at most every 30 s per
+isolate; it can raise the minimum versionCode (never lower it) and its maintenance message wins. An unreadable
+database keeps the last value read (none yet = the variables alone): an outage never becomes maintenance by itself.
 
 Economic journal (INF-015, migration 0005, DEC-0019): database triggers record every change to a currency (not Ration),
 a stackable item, an equipment instance, a hero's copies or Memory Shards and gacha pity in `economy_journal`, with the

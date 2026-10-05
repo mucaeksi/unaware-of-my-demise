@@ -2,15 +2,15 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md) — finish it step by step
-Feature: batch 8 (PR #30, open): INF-036 billing + rewarded ads — server (28f78b2, 09081dd) + native/client (this commit)
-Task: push batch 8, get CI green, merge #30, verify production; then the remaining roadmap gaps (INF-038 → INF-042) and the final owner-decision summary
+Feature: batch 9 (PR #31, open): INF-040 third-party notices (e0e1124)
+Task: next roadmap gaps without owner blockers: INF-015/033 admin (journal read, release/maintenance control), INF-014 attempt expiry, INF-025 UI translation table; then the final owner-decision summary
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-05
 **Owner directives (2026-10-04):** finish the roadmap in order, step by step; the owner presses "auto-continue" when a usage limit hits, so always leave a resumable checkpoint here. Merge to `main` every 3–4 verified steps (batch PRs), push the branch after each commit. Collect every owner decision in `docs/OWNER_DECISIONS.md` and present them together at the end. `narrative/` belongs to another team: do not touch it.
-**Branch:** `claude/adoring-galileo-f7rd3o`. Merged + live: #18–#29 (live `10b42fb`: web deletion page, first-launch flow, social; migrations 0001–0010). PR #30 (INF-036, migration 0011) open.
-**Next step:** CI on PR #30 → merge → check production (`/v1/ads/ssv` 503 and `/v1/subscription/status` 401 until D-17/D-18 are configured is correct). Then continue the roadmap gaps from INF-038 onward. Owner answers applied 2026-10-05: D-01/02/07/08/10 (DEC-0036); open: D-03…D-06, D-09, D-11…D-18 (D-17 Play billing, D-18 AdMob added with DEC-0038). Plugin builds with JDK 21 locally (CI uses 17). Local e2e needs PostgreSQL on TCP 127.0.0.1:54318 with a password (Hyperdrive local mode refuses socket URLs).
+**Branch:** `claude/adoring-galileo-f7rd3o`. Merged: #18–#30 (#30 = `bbbf82b`: INF-036 billing/ads, INF-035 mail screen, INF-025 sliders, migration 0011; main also carries the narrative team's startup splash flow). PR #31 open.
+**Next step:** check the deploy of `bbbf82b` (expected: `/v1/ads/status` 401 without session, `/v1/ads/ssv` 503, `/v1/billing/rtdn` 503 until D-17/D-18). Then INF-015/033 admin gaps. Other teams push to `main` directly (narrative/UI): merge `origin/main` before each PR merge. Owner decisions open: D-03…D-06, D-09, D-11…D-18. Local e2e needs PostgreSQL on TCP 127.0.0.1:54318 with a password. CI pins Gradle 8.11.1 (scratchpad copy available).
 **Files in progress:** none
 **Open questions:** `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014, OQ-016 open; OQ-000/005 closed — do not remind); owner decisions collected in `docs/OWNER_DECISIONS.md`.
 **Local test infra (session-local, recreate as needed):** PostgreSQL 18 (production major) from PGDG at `/var/tmp/uomd-pg18` port 54318 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg18&port=54318"`; `PATH=/usr/lib/postgresql/18/bin:$PATH` for database/test.sh); Godot 4.7.2 in the scratchpad (checksum-verified download); Android SDK `/var/tmp/android-sdk`; Godot Android templates `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.

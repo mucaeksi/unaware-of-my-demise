@@ -78,6 +78,10 @@ export default function AdminPage() {
   const [reports, setReports] = useState<Row[]>([]);
   const [reportsStatus, setReportsStatus] = useState<"open" | "all">("open");
   const [resolveReason, setResolveReason] = useState("");
+  const [release, setRelease] = useState<Row | null>(null);
+  const [maintenanceText, setMaintenanceText] = useState("");
+  const [minVersion, setMinVersion] = useState("1");
+  const [releaseReason, setReleaseReason] = useState("");
 
   const run = async (work: () => Promise<void>) => {
     setError("");
@@ -93,6 +97,7 @@ export default function AdminPage() {
     void run(async () => {
       setMe(await api<Me>("/admin/api/me"));
       setService(await api<Row>("/admin/api/service"));
+      setRelease(await api<Row>("/admin/api/release"));
     });
   }, []);
 
@@ -167,6 +172,21 @@ export default function AdminPage() {
     });
   };
 
+  // Release control (DEC-0040): the game applies it within 30 s; the minimum version never drops below the deploy's.
+  const applyRelease = (event: FormEvent) => {
+    event.preventDefault();
+    void run(async () => {
+      const done = await change<{ revision: number }>("/admin/api/release", releaseReason, {
+        maintenance_message: maintenanceText.trim(),
+        min_client_version_code: Number(minVersion),
+      });
+      setNotice(`Release control revision ${done.revision} applied; players see it within 30 seconds.`);
+      setReleaseReason("");
+      setService(await api<Row>("/admin/api/service"));
+      setRelease(await api<Row>("/admin/api/release"));
+    });
+  };
+
   const loadAudit = () =>
     void run(async () => {
       const target = accountId ? `?target=${accountId}` : "";
@@ -207,6 +227,26 @@ export default function AdminPage() {
           <section className="panel full">
             <h2>Service</h2>
             <pre className="manifest">{JSON.stringify(service, null, 2)}</pre>
+          </section>
+        )}
+        {tab === "service" && release && (
+          <section className="panel full">
+            <h2>Maintenance and minimum app version</h2>
+            <p className="muted">
+              Deploy values: minimum versionCode {String((release.deploy as Row).min_client_version_code)}, maintenance &quot;
+              {String((release.deploy as Row).maintenance_message)}&quot;. A revision here can raise the minimum, never lower it below the deploy&apos;s.
+            </p>
+            {can("release.write") && (
+              <form className="form" onSubmit={applyRelease}>
+                <label className="muted">Maintenance message shown to players (empty = no maintenance)</label>
+                <input value={maintenanceText} onChange={(event) => setMaintenanceText(event.target.value)} maxLength={500} placeholder="e.g. Back at 03:00 UTC" />
+                <label className="muted">Minimum app versionCode</label>
+                <input type="number" min={1} value={minVersion} onChange={(event) => setMinVersion(event.target.value)} />
+                <input value={releaseReason} onChange={(event) => setReleaseReason(event.target.value)} placeholder="Reason" />
+                <button type="submit" disabled={releaseReason.trim().length < 5 || !/^[1-9][0-9]*$/.test(minVersion)}>Apply</button>
+              </form>
+            )}
+            <Table rows={release.revisions as Row[]} columns={["revision", "created_at", "maintenance_message", "min_client_version_code", "created_by", "reason"]} />
           </section>
         )}
         {tab === "player" && (

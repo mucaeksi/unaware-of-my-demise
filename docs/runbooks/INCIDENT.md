@@ -31,10 +31,16 @@ No alert is wired yet: nobody is paged on errors. Choosing a channel (email, pho
 
 ## Maintenance
 
-`MAINTENANCE_MESSAGE` in `server/wrangler.jsonc`: non-empty → every game route answers `503 MAINTENANCE` with that
-message and `/v1/bootstrap` reports it (the client shows it at start). It is a deploy: change it on `main` through a
-PR (CI → Deploy), or, in an emergency, edit the variable in the Cloudflare dashboard and commit the same value right
-after, because the next deploy from `main` overwrites dashboard values.
+First choice, no deploy (DEC-0040): admin panel → Service → "Maintenance and minimum app version". Write the message
+players should see, a reason, Apply: within 30 seconds every game route answers `503 MAINTENANCE` with that message
+and `/v1/bootstrap` reports it (the client shows it at start). End it the same way with an empty message. The same
+form raises the minimum app versionCode (an outdated app is told to update); it cannot lower it below the deploy's.
+Every change is audited (`release.set_control`). Needs the operator role (and Cloudflare Access, D-11).
+
+Fallback (the panel unreachable, or Access not set up yet): `MAINTENANCE_MESSAGE` in `server/wrangler.jsonc`. It is a
+deploy: change it on `main` through a PR (CI → Deploy), or, in an emergency, edit the variable in the Cloudflare
+dashboard and commit the same value right after, because the next deploy from `main` overwrites dashboard values. A
+panel message, when set, wins over the variable; clear it in the panel too.
 
 ## Record (copy into the incident note)
 

@@ -28,6 +28,8 @@ The game Worker has no admin routes.
 | `GET /admin/api/audit?target=` | audit.read | no |
 | `GET /admin/api/liveops` (current config, last mail with claim counts) | service.read | no |
 | `POST /admin/api/liveops/config` (a new config revision) · `POST /admin/api/mail` · `POST /admin/api/mail/{id}/revoke` | liveops.write (operator) | `liveops.*`, same transaction |
+| `GET /admin/api/release` (the deploy values and the release-control revisions) | service.read | no |
+| `POST /admin/api/release` `{maintenance_message, min_client_version_code}` (DEC-0040: applied by the game within 30 s; the minimum never drops below the deploy's) | release.write (operator) | `release.set_control`, same transaction |
 
 Changes need a same-origin JSON request (the panel page), a reason of 5–500 characters and an Idempotency-Key; a
 replayed key answers the first result and changes nothing. `admin_audit` is append-only (triggers refuse UPDATE,
@@ -48,5 +50,5 @@ DELETE, TRUNCATE) and keeps the actor, role, permission, reason, key, target, en
 
 ## Not built yet
 
-Release/maintenance controls (maintenance is a deploy variable today, `docs/runbooks/INCIDENT.md`) and
-staging-only test grants (none exist in production by design).
+Staging-only test grants (none exist in production by design). Maintenance and the minimum app version are set from
+the Service tab (DEC-0040; `docs/runbooks/INCIDENT.md`).
