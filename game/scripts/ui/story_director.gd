@@ -22,8 +22,8 @@ const HUB_INVENTORY: String = "inventory"
 const HUB_SUMMON: String = "summon"
 const HUB_QUESTS: String = "quests"
 const HUB_FRIENDS: String = "friends"
+const HUB_MAIL: String = "mail"
 const HUB_BLESSING: String = "blessing"
-## Rewarded ad unit (INF-036): Google's sample unit until the owner's AdMob unit exists (D-18).
 const HUB_INN_MEAL: String = "inn_meal"
 const HUB_SETTINGS: String = "settings"
 const SETTINGS_SIGN_OUT: String = "sign_out"
@@ -210,6 +210,7 @@ func _present_hub(status: String = "") -> void:
 		{"id": HUB_SUMMON, "label": "Summon"},
 		{"id": HUB_QUESTS, "label": "Quests"},
 		{"id": HUB_FRIENDS, "label": "Friends"},
+		{"id": HUB_MAIL, "label": "Mail"},
 		{"id": HUB_BLESSING, "label": "Eclipse Blessing"},
 		{"id": HUB_SETTINGS, "label": "Settings"},
 	]
@@ -239,6 +240,8 @@ func _on_hub_chosen(entry_id: String) -> void:
 			_present_quests()
 		HUB_FRIENDS:
 			_present_friends()
+		HUB_MAIL:
+			_present_mailbox()
 		HUB_BLESSING:
 			_present_blessing()
 		HUB_INN_MEAL:
@@ -853,6 +856,42 @@ func _present_blocked(status: String = "") -> void:
 			_present_blocked("Unblocked." if done.is_ok() else _friend_problem(done)))
 	screen.back_requested.connect(func() -> void: _present_friends())
 	shell.show_screen(screen)
+
+
+# -- mail and notices (INF-035) -------------------------------------------------------------------------------------
+
+
+func _present_mailbox(status: String = "") -> void:
+	_show_message("Mail", "Loading...")
+	var loaded: Outcome = await flow.mailbox()
+	if not loaded.is_ok():
+		_present_hub("Mail could not be loaded: %s" % _problem_text(loaded))
+		return
+	var screen: MailboxScreen = MailboxScreen.new()
+	screen.load_mailbox((loaded.value as Dictionary)["notices"], (loaded.value as Dictionary)["mail"], status)
+	screen.claim_requested.connect(func(mail_id: String) -> void: _claim_mail(screen, mail_id))
+	screen.back_requested.connect(func() -> void: _present_hub())
+	shell.show_screen(screen)
+
+
+func _claim_mail(screen: MailboxScreen, mail_id: String) -> void:
+	screen.set_busy(true)
+	var claimed: Outcome = await flow.claim_mail(mail_id)
+	if shell.current != screen:
+		return
+	_present_mailbox(mail_claim_text(flow, claimed))
+
+
+## The line the mailbox shows after a claim: what was paid, or why nothing was.
+static func mail_claim_text(game: GameFlow, claimed: Outcome) -> String:
+	if claimed.is_ok():
+		var granted: Variant = (claimed.value as Dictionary).get("granted")
+		return "Received: %s." % game.mail_reward_text(granted if granted is Dictionary else {})
+	if claimed.error_kind == "conflict":
+		return "This mail was already claimed."
+	if claimed.error_kind == "not_found":
+		return "This mail has expired."
+	return claimed.error
 
 
 func _claim_inn_meal() -> void:

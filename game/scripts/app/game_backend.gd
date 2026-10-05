@@ -209,7 +209,24 @@ func subscription_claim(_window_id: int = -1) -> Outcome:
 	return _offline()
 
 
-## `value`: {"window_views", "window_cap", "day_views", "day_cap", "reward_eclipse_tokens"}.
+## `value`: {"window_views", "window_cap", "day_views", "day_cap", "reward_eclipse_tokens", "ad_unit_id"}.
 func ads_status() -> Outcome:
+	return _offline()
+
+
+## Live operations everyone sees (INF-035, DEC-0034). `value`: {"revision", "flags", "notices": [{"notice_id",
+## "title_en", "body_en", "starts_at_utc", "ends_at_utc"}], "server_time_utc"}; only the notices running now.
+func liveops() -> Outcome:
+	return _offline()
+
+
+## The account's open mail, newest first. `value`: {"mail": [{"mail_id", "title_en", "body_en", "rewards",
+## "expires_at_utc", "claimed"}]}; `rewards`: {"silver_crowns"?, "eclipse_tokens"?, "items"?: {item_id: quantity}}.
+func mail() -> Outcome:
+	return _offline()
+
+
+## Pays one mail's rewards, once per account. `value`: {"mail_id", "granted", "state"}; a second claim fails with kind "conflict".
+func claim_mail(_mail_id: String) -> Outcome:
 	return _offline()
 

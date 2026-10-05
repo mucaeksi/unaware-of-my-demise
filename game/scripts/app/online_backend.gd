@@ -396,5 +396,17 @@ func ads_status() -> Outcome:
 	return await _call(HTTPClient.METHOD_GET, "/v1/ads/status")
 
 
+func liveops() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/liveops")
+
+
+func mail() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/mail")
+
+
+func claim_mail(mail_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/mail/%s/claim" % mail_id.uri_encode(), {}, true)
+
+
 static func _instance_path(table: String, instance_id: String, action: String) -> String:
 	return "/v1/inventory/%s/%s/%s" % [table.uri_encode(), instance_id.uri_encode(), action]

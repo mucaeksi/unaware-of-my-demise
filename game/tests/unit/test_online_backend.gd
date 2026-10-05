@@ -306,3 +306,18 @@ func test_blessing_and_ad_calls_go_to_their_routes() -> void:
 	assert_eq(JSON.parse_string(sent[0]["body"]), {"purchase_token": "tok"})
 	assert_eq(JSON.parse_string(sent[2]["body"]), {"window_id": 41001.0})
 	assert_eq(JSON.parse_string(sent[3]["body"]), {}, "no window: the current twelve-hour window")
+
+
+## INF-035: notices, mail and the mail claim go to their routes; only the claim is an idempotent change.
+func test_liveops_and_mail_calls_go_to_their_routes() -> void:
+	var ok: Dictionary = {"status": 200, "body": "{}"}
+	var pair: Array = _backend([ok, ok, ok] as Array[Dictionary])
+	var backend: OnlineBackend = pair[0]
+	assert_true((await backend.liveops()).is_ok())
+	assert_true((await backend.mail()).is_ok())
+	assert_true((await backend.claim_mail("mail_0123456789abcdef0123456789abcdef")).is_ok())
+	var routes: Array[String] = []
+	for request: Dictionary in (pair[1] as ScriptedTransport).sent:
+		routes.append("%s %s %s" % ["POST" if request["method"] == HTTPClient.METHOD_POST else "GET", str(request["url"]).trim_prefix("https://api.example"),
+			"keyed" if not _header(request, "Idempotency-Key").is_empty() else "-"])
+	assert_eq(routes, ["GET /v1/liveops -", "GET /v1/mail -", "POST /v1/mail/mail_0123456789abcdef0123456789abcdef/claim keyed"])

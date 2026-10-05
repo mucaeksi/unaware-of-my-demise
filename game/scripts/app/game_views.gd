@@ -123,7 +123,6 @@ class QuestRow extends RefCounted:
 		return "%s/%s/%s" % [kind, task_id, period]
 
 
-## `2` for 2.0, `0.08` for 0.08: the way the content authors write a stat (JSON numbers all arrive as floats).
 ## One player on the friends screen (INF-037): a friend, a request either way. Only public fields (no friend code).
 class FriendRow extends RefCounted:
 	var account_id: String = ""
@@ -148,6 +147,19 @@ class FriendsView extends RefCounted:
 	var friend_limit: int = 0
 
 
+## One mail in the mailbox (INF-035): from the operators, to every player or to this one.
+class MailRow extends RefCounted:
+	var mail_id: String = ""
+	var title: String = ""
+	var body: String = ""
+	## "1,000 Silver Crowns, 3× Ember Shard"; "" for a mail without rewards (a letter only).
+	var reward_text: String = ""
+	## "YYYY-MM-DD HH:MM" (UTC).
+	var expires_at: String = ""
+	var claimed: bool = false
+
+
+## `2` for 2.0, `0.08` for 0.08: the way the content authors write a stat (JSON numbers all arrive as floats).
 static func number_text(value: Variant) -> String:
 	if value is float:
 		var number: float = value

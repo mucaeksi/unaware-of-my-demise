@@ -975,6 +975,58 @@ func claim_quest(kind: String, task_id: String, period: String = "") -> Outcome:
 	return _adopt(await backend.claim_quest(kind, task_id, period))
 
 
+## The notices running now and the account's open mail (INF-035, coroutine). `value`: {"notices": [{"title", "body"}],
+## "mail": Array[GameViews.MailRow]}. Notices are best effort: when they cannot be read the mail is still shown.
+func mailbox() -> Outcome:
+	var listed: Outcome = await backend.mail()
+	if not listed.is_ok():
+		return listed
+	var raw: Variant = (listed.value as Dictionary).get("mail")
+	if not (raw is Array):
+		return Outcome.fail(ERROR_PROTOCOL, "the mail reply carries no mail list")
+	var rows: Array[GameViews.MailRow] = []
+	for entry: Variant in raw:
+		if not (entry is Dictionary):
+			continue
+		var mail: Dictionary = entry
+		var row: GameViews.MailRow = GameViews.MailRow.new()
+		row.mail_id = str(mail.get("mail_id", ""))
+		row.title = str(mail.get("title_en", ""))
+		row.body = str(mail.get("body_en", ""))
+		row.reward_text = mail_reward_text(mail.get("rewards") if mail.get("rewards") is Dictionary else {})
+		row.expires_at = str(mail.get("expires_at_utc", "")).left(16).replace("T", " ")
+		row.claimed = mail.get("claimed") == true
+		rows.append(row)
+	var notices: Array[Dictionary] = []
+	var live: Outcome = await backend.liveops()
+	if live.is_ok() and (live.value as Dictionary).get("notices") is Array:
+		for notice: Variant in (live.value as Dictionary)["notices"]:
+			if notice is Dictionary:
+				notices.append({"title": str((notice as Dictionary).get("title_en", "")), "body": str((notice as Dictionary).get("body_en", ""))})
+	return Outcome.ok({"notices": notices, "mail": rows})
+
+
+## "1,000 Silver Crowns, 50 Eclipse Tokens, 3× Ember Shard" from a mail's rewards ("" when it has none).
+func mail_reward_text(rewards: Dictionary) -> String:
+	var parts: PackedStringArray = PackedStringArray()
+	for pair: Array in [["silver_crowns", "Silver Crowns"], ["eclipse_tokens", "Eclipse Tokens"]]:
+		var amount: int = int(rewards.get(pair[0], 0))
+		if amount > 0:
+			parts.append("%s %s" % [grouped(amount), pair[1]])
+	var items: Variant = rewards.get("items")
+	if items is Dictionary:
+		var ids: Array = (items as Dictionary).keys()
+		ids.sort()
+		for item_id: Variant in ids:
+			parts.append("%s× %s" % [grouped(int((items as Dictionary)[item_id])), item_name(str(item_id))])
+	return ", ".join(parts)
+
+
+## Claims one mail (coroutine); the reply's snapshot is adopted. `value`: {"mail_id", "granted", "state"}.
+func claim_mail(mail_id: String) -> Outcome:
+	return _adopt(await backend.claim_mail(mail_id))
+
+
 ## Today's Inn Meal (coroutine); the reply's snapshot is adopted.
 func claim_inn_meal() -> Outcome:
 	return _adopt(await backend.claim_inn_meal())
