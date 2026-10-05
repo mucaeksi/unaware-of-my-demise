@@ -113,3 +113,67 @@ describe("POST /v1/account/delete", () => {
     expect(response.status).toBe(503);
   });
 });
+
+// D-01 / OQ-016: the public deletion page (Google Play's Data safety link) and the deletion it performs without the app.
+describe("/account/delete (web)", () => {
+  const web = (deps: Partial<Parameters<typeof createApp>[0]> = {}) =>
+    createApp({ connect: () => database.connect(), verifier, webClientId: "web-client.apps.googleusercontent.com", ...deps });
+  const webDelete = async (body: unknown) => {
+    const response = await web()(new Request("https://api.test/account/delete", { method: "POST", body: JSON.stringify(body) }));
+    return { status: response.status, body: (await response.json()) as Record<string, any> };
+  };
+
+  it("serves the page without a database, a client version or a session, under a strict CSP", async () => {
+    const response = await web({ connect: () => Promise.reject(new Error("no database for the page")) })(new Request("https://api.test/account/delete"));
+    expect(response.status).toBe(200);
+    expect(response.headers.get("content-type")).toContain("text/html");
+    const html = await response.text();
+    expect(html).toContain("unawareofmydemise@gmail.com");
+    expect(html).toContain('"web-client.apps.googleusercontent.com"');
+    const csp = response.headers.get("content-security-policy")!;
+    expect(csp).toContain("default-src 'none'");
+    expect(csp).toContain("frame-ancestors 'none'");
+    const nonce = /script-src 'nonce-([^']+)'/.exec(csp)![1]!;
+    expect(html.match(/<script[^>]*>/g)!.every((tag) => tag.includes(`nonce="${nonce}"`)), "every script carries the nonce").toBe(true);
+  });
+
+  it("stays readable during maintenance", async () => {
+    const maintenance = web({ release: { sourceSha: null, minClientVersionCode: 1, maintenanceMessage: "Down for maintenance" } });
+    expect((await maintenance(new Request("https://api.test/account/delete"))).status).toBe(200);
+  });
+
+  it("offers only the app and the support address when sign-in is not configured", async () => {
+    const html = await (await web({ verifier: null })(new Request("https://api.test/account/delete"))).text();
+    expect(html).toContain("unawareofmydemise@gmail.com");
+    expect(html).not.toContain("accounts.google.com/gsi/client\"");
+    expect(html).not.toContain("<script");
+  });
+
+  it("deletes the account linked to a fresh credential, keeping only the anonymous record", async () => {
+    const subject = `web-delete-${++counter}`;
+    const { token, accountId } = await signIn(subject);
+    expect((await webDelete({ credential: `${subject}|never-issued` })).status, "a nonce the server never issued").toBe(401);
+    expect(await rowsOf(accountId), "nothing was deleted").toBeGreaterThan(0);
+    const fresh = await nonce();
+    expect(await webDelete({ credential: `${subject}|${fresh}` })).toEqual({ status: 200, body: { deleted: true } });
+    expect(await rowsOf(accountId)).toBe(0);
+    const record = (await database.pool.query("SELECT confirmed_by FROM account_deletions WHERE account_id = $1", [accountId])).rows[0];
+    expect(record.confirmed_by).toBe("web:google_oidc");
+    expect(await stateStatus(token), "the sessions went with the account").toBe(401);
+    expect((await webDelete({ credential: `${subject}|${fresh}` })).status, "a used nonce cannot be replayed").toBe(401);
+  });
+
+  it("answers 404 for a Google account without a game account, and deletes nothing", async () => {
+    const response = await webDelete({ credential: `never-played-${++counter}|${await nonce()}` });
+    expect([response.status, response.body.error.code]).toEqual([404, "NOT_FOUND"]);
+  });
+
+  it("uses the sign-in rate limit", async () => {
+    const used: string[] = [];
+    const limiter = (name: string) => ({ limit: async () => (used.push(name), { success: true }) });
+    await web({ authLimiter: limiter("auth"), apiLimiter: limiter("api") })(
+      new Request("https://api.test/account/delete", { method: "POST", body: JSON.stringify({ credential: "x|y" }) }),
+    );
+    expect(used).toEqual(["auth"]);
+  });
+});

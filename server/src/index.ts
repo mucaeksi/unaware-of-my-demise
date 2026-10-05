@@ -45,6 +45,8 @@ export default {
       release: parseReleaseConfig(env),
       content: env.CONTENT ?? null,
       contentChannel: contentChannel(env.CONTENT_CHANNEL),
+      // GOOGLE_CLIENT_IDS holds the Web OAuth client id (docs/GITHUB_SECRETS.md): the deletion page signs in with it.
+      webClientId: (env.GOOGLE_CLIENT_IDS ?? "").split(",").map((id) => id.trim()).find(Boolean) ?? null,
     });
     return app(request);
   },

@@ -571,3 +571,25 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   and signs in again — same account, same state. CI job `e2e`.
 - Not covered here (device and store): a real Google sign-in on a phone, Play install/upgrade, background/kill, patch
   under bad connectivity (INF-043/044, owner-run with the release build).
+
+## DEC-0036 — Owner answers of 2026-10-05: v1 scope, staging timing, support address, music cues
+- Status: ACCEPTED (2026-10-05, owner answers to docs/OWNER_DECISIONS.md D-01, D-02, D-07, D-08, D-10).
+- D-10 (v1 scope): Google Play billing (the LEGACY Eclipse Blessing subscription and purchases), rewarded ads with
+  server-side verification, and the LEGACY social features (friends, requests, block, report) are **in** the first public
+  release. INF-036 and INF-037 move from BLOCKED_OWNER to TODO. Real payments and production ad serving stay off until
+  the store and ad accounts exist (sandbox and test ads only), as the roadmap says.
+- D-01 (support address): `unawareofmydemise@gmail.com` is the address wherever the game or a store needs one. The game
+  Worker serves the public deletion page `GET /account/delete` (Google Play Data safety link): what is deleted and what
+  stays, the in-app path, the address, and a self-service deletion without the app — choose the same Google account in
+  the browser (Google Identity Services, fresh server nonce), confirm, and `POST /account/delete` deletes the linked
+  account exactly like the in-app deletion (`account_deletions.confirmed_by = web:google_oidc`). No session is needed;
+  the fresh Google token for a single-use nonce is the proof. Sign-in rate limit, strict CSP (per-response nonce),
+  readable during maintenance and database outages. The browser button needs the Worker origin on the Web OAuth client
+  (owner action D-14); until then the page still offers the app and the address.
+- D-07 (staging): deferred until after the closed test; production deploys stay as they are, `deploy-staging.yml`
+  keeps skipping. INF-006 is DEFERRED, not done.
+- D-08 (music/voice cues): the narrative team assigns cue ids per scene. First the whole stretch from the first app
+  launch to entering the game is designed (docs/design/FIRST_LAUNCH_FLOW.md), so its cue points exist for them to fill.
+- D-02: there is no `docs/INFRASTRUCTURE_REVIEW.md`; the roadmap's R01–R16 labels stay as written and are marked as
+  untraceable (they are unrelated to the R01–R23 creative reference set in UOMD_REFERENCE_LOCK.md).
+

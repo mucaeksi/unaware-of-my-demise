@@ -40,6 +40,7 @@ import { bumpStateRevision, snapshot, wallet } from "./state";
 import { currentRelease, packResponse, type ContentStore } from "./content";
 import { claimMail, currentLiveops, listMail } from "./liveops";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
+import { accountDeletionPage } from "./web";
 
 export interface AppDeps {
   connect: Connect;
@@ -63,6 +64,8 @@ export interface AppDeps {
   content?: ContentStore | null;
   /** The content channel this deployment serves; defaults to "production". */
   contentChannel?: string;
+  /** The Web OAuth client the public deletion page signs in with (the first GOOGLE_CLIENT_IDS entry); null = none. */
+  webClientId?: string | null;
 }
 
 /**
@@ -233,6 +236,19 @@ function routes(deps: AppDeps): Record<string, Handler> {
       }
       await transaction(context.db, (tx) => deleteAccount(tx, accountId, identity.provider));
       return json({ deleted: true, account_id: accountId });
+    },
+
+    // The public deletion page (D-01, OQ-016): the link for Google Play's Data safety form. Static, no database.
+    "GET /account/delete": async () => accountDeletionPage(deps.verifier === null ? null : (deps.webClientId ?? null)),
+
+    // The page's deletion: no session (the player may not have the app any more), so the fresh credential for a fresh
+    // nonce is the whole proof; it deletes the account linked to that Google identity, exactly as in the app.
+    "POST /account/delete": async (context) => {
+      const identity = await verifiedIdentity(context.request, context.db);
+      const accountId = await findAccountBySubject(context.db, identity.provider, identity.subjectHash);
+      if (accountId === null) throw new ApiError(404, "NOT_FOUND", "No game account is linked to this Google account");
+      await transaction(context.db, (tx) => deleteAccount(tx, accountId, `web:${identity.provider}`));
+      return json({ deleted: true });
     },
 
     "GET /v1/account": async (context) => {
@@ -465,10 +481,13 @@ function matchRoute(
 /** The client key for rate limiting: Cloudflare's connecting IP (set by the edge, not by the client). */
 const clientKey = (request: Request): string => request.headers.get("cf-connecting-ip") ?? "unknown";
 
-/** Routes that answer whatever the client version or maintenance state (liveness, and the bootstrap that reports both). */
-const UNGATED = new Set(["/healthz", "/v1/bootstrap"]);
+/**
+ * Routes that answer whatever the client version or maintenance state: liveness, the bootstrap that reports both, and
+ * the public deletion page (a store requirement, readable during maintenance too).
+ */
+const UNGATED = new Set(["GET /healthz", "GET /v1/bootstrap", "GET /account/delete"]);
 /** Routes that read no database, so they answer during a database outage too (the bootstrap carries the maintenance notice). */
-const NO_DATABASE = new Set(["/v1/bootstrap"]);
+const NO_DATABASE = new Set(["GET /v1/bootstrap", "GET /account/delete"]);
 const noDatabase: Db = {
   query: () => Promise.reject(new Error("this route has no database connection")),
 };
@@ -487,12 +506,13 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
     }
     const answer = (response: Response) => ({ response, route: route.route });
     if (url.pathname !== "/healthz") {
-      const limiter = url.pathname.startsWith("/v1/auth/") ? deps.authLimiter : deps.apiLimiter;
+      // Sign-in and the web deletion (both verify a Google token) share the tighter sign-in budget.
+      const limiter = url.pathname.startsWith("/v1/auth/") || url.pathname === "/account/delete" ? deps.authLimiter : deps.apiLimiter;
       if (limiter && !(await limiter.limit({ key: clientKey(request) })).success) {
         return answer(errorResponse(new ApiError(429, "RATE_LIMITED", "Too many requests"), { "retry-after": "60" }));
       }
     }
-    if (!UNGATED.has(url.pathname)) {
+    if (!UNGATED.has(route.route)) {
       try {
         admit(request, release);
       } catch (error) {
@@ -502,7 +522,7 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
     }
     let connection;
     try {
-      if (NO_DATABASE.has(url.pathname)) return answer(await route.handler({ request, db: noDatabase, params: route.params }));
+      if (NO_DATABASE.has(route.route)) return answer(await route.handler({ request, db: noDatabase, params: route.params }));
       connection = await deps.connect();
       return answer(await route.handler({ request, db: connection, params: route.params }));
     } catch (error) {

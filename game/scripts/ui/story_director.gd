@@ -25,6 +25,9 @@ const HUB_INN_MEAL: String = "inn_meal"
 const HUB_SETTINGS: String = "settings"
 const SETTINGS_SIGN_OUT: String = "sign_out"
 const SETTINGS_DELETE_ACCOUNT: String = "delete_account"
+const SETTINGS_CONTACT_SUPPORT: String = "contact_support"
+## Where players write for help (owner decision D-01); the same address is on the web deletion page (server/src/web.ts).
+const SUPPORT_EMAIL: String = "unawareofmydemise@gmail.com"
 const HUB_DIAGNOSTICS: String = "diagnostics"
 
 const _STOP_REASONS: Dictionary = {
@@ -640,6 +643,8 @@ func _present_settings(status: String = "") -> void:
 	elif Online.has_session():
 		info += "\nSigned in with Google  (account …%s)" % Online.account_id.right(6)
 		actions = [{"id": SETTINGS_SIGN_OUT, "label": "Sign out"}, {"id": SETTINGS_DELETE_ACCOUNT, "label": "Delete account"}]
+	info += "\nSupport: %s" % SUPPORT_EMAIL
+	actions.append({"id": SETTINGS_CONTACT_SUPPORT, "label": "Contact support"})
 	var settings: SettingsScreen = SettingsScreen.new()
 	settings.load_settings(info, status, actions)
 	settings.back_requested.connect(func() -> void: _present_hub())
@@ -647,8 +652,19 @@ func _present_settings(status: String = "") -> void:
 		if action_id == SETTINGS_SIGN_OUT:
 			_sign_out()
 		elif action_id == SETTINGS_DELETE_ACCOUNT:
-			_confirm_account_deletion())
+			_confirm_account_deletion()
+		elif action_id == SETTINGS_CONTACT_SUPPORT:
+			OS.shell_open(support_mail_uri()))
 	shell.show_screen(settings)
+
+
+## A mailto link to support with the build and the account's short id filled in, so a report can be traced.
+static func support_mail_uri() -> String:
+	var body: String = "Build: %d" % ClientRelease.version_code()
+	if Online.has_session():
+		# The random account id (not a secret: it signs nothing in); the admin panel finds the player by it.
+		body += "\nAccount: %s" % Online.account_id
+	return "mailto:%s?subject=%s&body=%s" % [SUPPORT_EMAIL, "Unaware of My Demise support".uri_encode(), body.uri_encode()]
 
 
 ## INF-019: ends the session here and on the server; the next start shows the account chooser again.

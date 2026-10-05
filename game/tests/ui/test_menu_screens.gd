@@ -215,3 +215,18 @@ func test_the_settings_screen_shows_the_build_line_and_any_extra_actions() -> vo
 	assert_signal_emitted_with_parameters(settings, "action_requested", ["sign_out"])
 	settings.load_settings("x")
 	assert_eq(settings._actions.get_child_count(), 0, "a reload without actions clears them")
+
+
+func test_the_support_mail_names_the_build_and_the_account() -> void:
+	var saved_token: String = Online.session_token
+	var saved_account: String = Online.account_id
+	Online.session_token = ""
+	var signed_out: String = StoryDirector.support_mail_uri()
+	assert_true(signed_out.begins_with("mailto:unawareofmydemise@gmail.com?subject="), signed_out)
+	assert_string_contains(signed_out.uri_decode(), "Build: %d" % ClientRelease.version_code())
+	assert_false(signed_out.uri_decode().contains("Account:"), "no account line without a session")
+	Online.session_token = "token"
+	Online.account_id = "acct_0123456789abcdef0123456789abcdef"
+	assert_string_contains(StoryDirector.support_mail_uri().uri_decode(), "Account: acct_0123456789abcdef0123456789abcdef")
+	Online.session_token = saved_token
+	Online.account_id = saved_account
