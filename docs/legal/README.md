@@ -33,12 +33,14 @@ Status: **DRAFT, awaiting the owner's review** (2026-10-05). Not yet published o
 
 ## Engineering work the texts depend on (found while drafting)
 
-- **Ad privacy choices** (AdMob/UMP requirement): Settings must offer Google's privacy options form when UMP reports it
-  is required. Not built yet.
-- **Full summon odds** (Google Play loot-box policy): the summon screen shows the 5★ rate and pity; the 4★/3★ rates and
-  the featured share must be shown before a pull too.
-- Serving `/privacy` and `/terms` and the first-install notices screen (docs/design/FIRST_LAUNCH_FLOW.md step 5) once
-  the texts are approved.
+- **Ad privacy choices** (AdMob/UMP requirement): built. Settings offers "Ad privacy choices" when Google's consent
+  applies to the player, and it opens Google's privacy options form. A changed choice is asked again before the next
+  ad. The pieces: the UomdNative calls `adsPrivacyStatus` and `adsShowPrivacyOptions`, and `Monetization`. GUT covers it.
+- **Full summon odds** (Google Play loot-box policy): built. Every banner lists every rarity's odds, the pity, the
+  4★ guarantee and the featured share before a pull, from the same data the server rolls with. GUT covers it.
+- Still to do once the texts are approved:
+  - serve `/privacy` and `/terms`;
+  - build the first-install notices screen (docs/design/FIRST_LAUNCH_FLOW.md step 5).
 
 ## Sources consulted
 

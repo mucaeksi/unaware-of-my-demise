@@ -131,6 +131,27 @@ func ad_status() -> Outcome:
 	return await _flow.backend.ads_status()
 
 
+## Whether Settings must offer "Ad privacy choices" (coroutine): true where Google's consent form applies (EEA, UK,
+## Switzerland and similar), so the player can change or withdraw ad consent at any time; false where it does not or
+## when the bridge is missing.
+func privacy_options_required() -> bool:
+	if not _native.call("ads_privacy_status"):
+		return false
+	var status: Dictionary = await _native.privacy_status
+	return bool(status.get("privacy_options_required", false))
+
+
+## Google's privacy options form (coroutine). The consent asked before the next ad follows the new choice.
+func show_privacy_options() -> Outcome:
+	if not _native.call("ads_show_privacy_options"):
+		return Outcome.fail(KIND_UNAVAILABLE, "Ad privacy choices are not available on this device.")
+	var result: Dictionary = await _native.privacy_options_finished
+	_consent_asked = false
+	if str(result.get("status", "")) != "ok":
+		return Outcome.fail(KIND_UNAVAILABLE, "Ad privacy choices: %s" % str(result.get("error", "unknown error")))
+	return Outcome.ok()
+
+
 ## Whether the server's counts allow an ad now: a unit it pays for, and room under both caps.
 static func ad_open(counts: Dictionary) -> bool:
 	return counts.get("ad_unit_id") is String and not str(counts["ad_unit_id"]).is_empty() \

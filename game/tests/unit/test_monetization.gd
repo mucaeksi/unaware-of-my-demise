@@ -8,6 +8,8 @@ class FakeNative extends RefCounted:
 	signal purchases_queried(result: Dictionary)
 	signal consent_finished(result: Dictionary)
 	signal ad_finished(result: Dictionary)
+	signal privacy_status(result: Dictionary)
+	signal privacy_options_finished(result: Dictionary)
 
 	var available: bool = true
 	var product: Dictionary = {"status": "ok", "product_id": "eclipse_blessing_30d", "price": "€4.99", "offer_token": "offer-1"}
@@ -15,6 +17,8 @@ class FakeNative extends RefCounted:
 	var owned: Dictionary = {}
 	var consent: Dictionary = {"status": "ok", "can_request_ads": true, "error": ""}
 	var ad: Dictionary = {"status": "rewarded", "error": ""}
+	var privacy: Dictionary = {"status": "ok", "privacy_options_required": false, "can_request_ads": true, "error": ""}
+	var privacy_result: Dictionary = {"status": "ok", "error": ""}
 	var calls: Array = []
 
 	func billing_query_product(product_id: String) -> bool:
@@ -35,6 +39,16 @@ class FakeNative extends RefCounted:
 	func ads_consent() -> bool:
 		calls.append(["consent"])
 		consent_finished.emit.call_deferred(consent)
+		return available
+
+	func ads_privacy_status() -> bool:
+		calls.append(["privacy_status"])
+		privacy_status.emit.call_deferred(privacy)
+		return available
+
+	func ads_show_privacy_options() -> bool:
+		calls.append(["privacy_options"])
+		privacy_options_finished.emit.call_deferred(privacy_result)
 		return available
 
 	func ads_show_rewarded(ad_unit_id: String, account_id: String) -> bool:
@@ -208,3 +222,31 @@ func test_the_quests_screen_offers_the_ad_only_when_it_pays() -> void:
 	quests.set_ad("Watch an ad (+30)  1/4", true)
 	quests.press_ad()
 	assert_signal_emit_count(quests, "ad_requested", 1)
+
+
+func test_ad_privacy_choices_are_offered_only_where_consent_applies() -> void:
+	var setup: Array = _setup()
+	var money: Monetization = setup[0]
+	var native: FakeNative = setup[1]
+	native.privacy = {"status": "ok", "privacy_options_required": true, "can_request_ads": true, "error": ""}
+	assert_true(await money.privacy_options_required())
+	native.privacy = {"status": "ok", "privacy_options_required": false, "can_request_ads": true, "error": ""}
+	assert_false(await money.privacy_options_required(), "outside the consent regions there is no form to offer")
+	native.available = false
+	assert_false(await money.privacy_options_required(), "no bridge, nothing to offer")
+
+
+func test_changing_ad_privacy_choices_asks_consent_again_before_the_next_ad() -> void:
+	var setup: Array = _setup()
+	var money: Monetization = setup[0]
+	var native: FakeNative = setup[1]
+	var backend: FakeBackend = setup[2]
+	var open: Dictionary = {"window_views": 0, "window_cap": 4, "day_views": 0, "day_cap": 8, "reward_eclipse_tokens": 30, "ad_unit_id": "unit-1"}
+	backend.ad_counts = [open]
+	native.ad = {"status": "closed", "error": ""}
+	await money.watch_ad("a")
+	assert_true((await money.show_privacy_options()).is_ok())
+	await money.watch_ad("a")
+	assert_eq(native.calls.count(["consent"]), 2, "the new choice is read before the next ad")
+	native.privacy_result = {"status": "error", "error": "form unavailable"}
+	assert_string_contains((await money.show_privacy_options()).error, "form unavailable")
