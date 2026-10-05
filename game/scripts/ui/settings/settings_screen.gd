@@ -61,7 +61,7 @@ func load_volumes(volumes: Dictionary) -> void:
 		slider.min_value = 0.0
 		slider.max_value = 1.0
 		slider.step = 0.05
-		slider.custom_minimum_size = Vector2(0, UiTheme.TOUCH_HEIGHT / 2)
+		slider.custom_minimum_size = Vector2(0, UiTheme.TOUCH_HEIGHT)
 		slider.value = clampf(float(volumes[bus]), 0.0, 1.0)
 		caption.text = volume_caption(str(pair[1]), slider.value)
 		slider.value_changed.connect(func(value: float) -> void:

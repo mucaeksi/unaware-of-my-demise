@@ -12,7 +12,6 @@ var _buttons: Dictionary = {}
 
 
 func _build(column: VBoxContainer) -> void:
-	column.add_child(UiKit.spacer(0, true))
 	var title: Label = UiKit.label("Unaware of My Demise", UiTheme.TITLE)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(title)
@@ -23,9 +22,8 @@ func _build(column: VBoxContainer) -> void:
 	_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(_status_label)
 	column.add_child(UiKit.spacer(24, false))
-	_menu = UiKit.column(16)
-	column.add_child(_menu)
-	column.add_child(UiKit.spacer(0, true))
+	# The full menu remains reachable with the shared 48 dp touch target.
+	_menu = UiKit.scroll_column(column, 16)
 	column.add_child(UiKit.placeholder_tag("PLACEHOLDER SCREEN"))
 
 

@@ -178,6 +178,54 @@
         "cancelled"
       ],
       "status": "PLANNED"
+    },
+    {
+      "id": "ui.action_button",
+      "name": "GothicActionButton",
+      "type": "component",
+      "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
+      "art_status": "CANDIDATE_SYSTEM_V02",
+      "spec": "../design/ART_SYSTEM_V02.md",
+      "godot_scene": null,
+      "godot_construction": "Reusable code-built Control; UiKit or direct component construction",
+      "godot_script": "res://scripts/ui/common/gothic_action_button.gd",
+      "access": "bundled_base_install; no_account_or_patch_dependency",
+      "signals": [
+        "pressed",
+        "busy_changed(is_busy: bool)"
+      ],
+      "verification": "../art/system/v02/VERIFY.json"
+    },
+    {
+      "id": "ui.confirmation_frame",
+      "name": "GothicModal",
+      "type": "component",
+      "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
+      "art_status": "CANDIDATE_SYSTEM_V02",
+      "spec": "../design/ART_SYSTEM_V02.md",
+      "godot_scene": null,
+      "godot_construction": "Reusable code-built Control; UiKit or direct component construction",
+      "godot_script": "res://scripts/ui/common/gothic_modal.gd",
+      "access": "bundled_base_install; no_account_or_patch_dependency",
+      "signals": [
+        "confirmed",
+        "canceled"
+      ],
+      "verification": "../art/system/v02/VERIFY.json"
+    },
+    {
+      "id": "ui.game_logo",
+      "name": "GameLogo",
+      "type": "component",
+      "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
+      "art_status": "CANDIDATE_SYSTEM_V02",
+      "spec": "../design/ART_SYSTEM_V02.md",
+      "godot_scene": null,
+      "godot_construction": "Reusable code-built Control; UiKit or direct component construction",
+      "godot_script": "res://scripts/ui/common/game_logo.gd",
+      "access": "bundled_base_install; no_account_or_patch_dependency",
+      "signals": [],
+      "verification": "../art/system/v02/VERIFY.json"
     }
   ],
   "native_engine_splash": {
@@ -186,5 +234,25 @@
     "custom_image": null,
     "minimum_display_time_ms": 1200,
     "verification": "../art/studio/VERIFY_V02.json"
-  }
+  },
+  "shared_art_system": {
+    "id": "art_system_v02",
+    "runtime_theme": "res://theme/gothic_system_v02.gd",
+    "consumer_api": "UiTheme/UiKit/UiScreen",
+    "art_status": "CANDIDATE",
+    "spec": "../design/ART_SYSTEM_V02.md",
+    "verification": "../art/system/v02/VERIFY.json",
+    "all_player_screens_final": false
+  },
+  "developer_reviews": [
+    {
+      "id": "review.art_system_v02",
+      "name": "ArtSystemReviewV02",
+      "godot_scene": "res://scenes/art_review/art_system_review_v02.tscn",
+      "status": "VERIFIED_LOCAL_4_6_3",
+      "player_route": false,
+      "android_export_excluded": true,
+      "verification": "../art/system/v02/VERIFY.json"
+    }
+  ]
 }

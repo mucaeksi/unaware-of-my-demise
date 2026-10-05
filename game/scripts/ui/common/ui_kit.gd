@@ -16,14 +16,25 @@ static func label(text: String, variation: String = "", wrap: bool = true) -> La
 
 
 ## A touch-sized button; `toggle` makes it a selectable choice.
-static func button(text: String, toggle: bool = false) -> Button:
-	var node: Button = Button.new()
+static func button(text: String, toggle: bool = false, variation: String = "") -> Button:
+	var node: GothicActionButton = GothicActionButton.new()
 	node.text = text
 	node.toggle_mode = toggle
+	if not variation.is_empty():
+		node.theme_type_variation = variation
 	# Long lines (an accessory's stat list) wrap inside the button instead of widening the whole screen.
 	node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	node.custom_minimum_size = Vector2(0, UiTheme.TOUCH_HEIGHT)
 	node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	return node
+
+
+## Utilities retain a visible caption and tooltip; icon geometry is a bundled SVG.
+static func icon_button(icon_name: String, caption: String, variation: String = UiTheme.ICON) -> Button:
+	var node: Button = button(caption, false, variation)
+	node.icon = UiTheme.GothicTheme.icon(icon_name)
+	node.tooltip_text = caption
+	node.expand_icon = true
 	return node
 
 
@@ -53,6 +64,7 @@ static func row(separation: int = 16) -> HBoxContainer:
 ## A scrolling column that fills the remaining height; returns the inner column to add rows to.
 static func scroll_column(parent: Control, separation: int = 12) -> VBoxContainer:
 	var scroll: ScrollContainer = ScrollContainer.new()
+	scroll.follow_focus = true
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL

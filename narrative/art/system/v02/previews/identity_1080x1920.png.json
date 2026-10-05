@@ -1,0 +1,29 @@
+{
+  "account_requested": false,
+  "controls": [
+    {
+      "disabled": false,
+      "rect": "[P: (64.0, 1658.0), S: (952.0, 144.0)]",
+      "text": "View component library",
+      "variation": "PrimaryButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (0.0, 0.0), S: (80.0, 144.0)]",
+      "text": "Cancel",
+      "variation": "SecondaryButton",
+      "visible": false
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (0.0, 0.0), S: (80.0, 144.0)]",
+      "text": "Continue",
+      "variation": "ModalActionButton",
+      "visible": false
+    }
+  ],
+  "engine": "4.6.3-stable (official)",
+  "page": "identity",
+  "viewport": "[P: (0.0, 0.0), S: (1080.0, 1920.0)]"
+}

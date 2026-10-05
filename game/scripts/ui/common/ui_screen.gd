@@ -25,7 +25,9 @@ func ensure_built() -> void:
 		return
 	_built = true
 	var background: ColorRect = ColorRect.new()
-	background.color = UiTheme.BACKGROUND
+	# The shared shader supplies the ink palette; white avoids multiplying it twice.
+	background.color = Color.WHITE
+	background.material = UiTheme.GothicTheme.background_material()
 	background.set_anchors_preset(Control.PRESET_FULL_RECT)
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(background)

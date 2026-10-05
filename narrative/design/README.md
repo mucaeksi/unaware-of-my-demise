@@ -2,6 +2,7 @@
 
 ## Güncel yaratıcı yeniden başlangıç — 2026-10-05
 
+- **2. adım uygulandı:** [Ortak sanat sistemi v02](ART_SYSTEM_V02.md), gerçek aktif UiTheme/UiKit, iki oyun logo dizgisi, 15 SVG glyph ve 9-slice frame. [1080×1920 kimlik](../art/system/v02/previews/identity_1080x1920.png), [bileşenler](../art/system/v02/previews/components_1080x1920.png), [üretim/katalog/geçiş/doğrulama](../art/system/v02/README.md). Yeni sanat candidate, bütün ekran yerleşimleri final değil.
 - [Tamamlanan işler ve eksik listesi](WORK_COMPLETED_2026-10-05.md): kaynak aktarımı, UI prototipleri, doğrulama sınırları ve son kullanıcı kararları.
 - [Yeni oturum başlangıç promptu](CREATIVE_RESTART_PROMPT.md): stüdyo adı araştırması, yeni ortak sanat dili, Godot → stüdyo → title açılışı/ana tema, sayfa sayfa Godot entegrasyonu, ardından final Fadyme ve diğer karakter/mekânlar.
 - [Dünya, hikâye ve 20 karakter brief’i](WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md): yeni oturumda tamamlanan kaynak okuması, karakterlerin psikoloji/görsel ayrımları, alınan stil referansı ve tasarım çelişkileri. **İç kullanım; tam hikâye spoiler’ları içerir.**

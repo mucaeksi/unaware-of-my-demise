@@ -1,7 +1,8 @@
 class_name AssetCatalog
 extends RefCounted
 ## Stable asset references -> project paths, read from the content packs (INF-024). Content names art by stable id and
-## records where its file lives ("assets/..."); nothing else in the client hardcodes an art path.
+## records where its file lives ("assets/..."). Bootstrap Theme/font/brand components also preload their bundled
+## base-install resources so the first screen does not depend on a content patch; their texture IDs are cataloged too.
 ##
 ## A reference is "<kind>/<id>" or "<kind>/<id>/<variant>":
 ##   mark/<logo_id>                          brand_assets_part1.json, every section (characters, items, skills, ...);

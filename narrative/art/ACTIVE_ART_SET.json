@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "date": "2026-10-05",
+  "status": "CANDIDATE_WITH_RUNTIME_FOUNDATION",
+  "authority": "Latest owner creative restart; source canon/lore governs identity; historical locked visual pack no longer mandatory art direction",
+  "system": "narrative/design/ART_SYSTEM_V02.md",
+  "manifest": "narrative/art/system/v02/ASSET_MANIFEST.json",
+  "replacement_map": "narrative/art/system/v02/REPLACEMENT_MAP.json",
+  "bindings": {
+    "shared_ui_theme": {
+      "source": "game/theme/gothic_system_v02.gd",
+      "consumers": [
+        "AppShell",
+        "UiTheme",
+        "UiKit",
+        "UiScreen",
+        "StudioSplashScreen"
+      ],
+      "status": "ACTIVE_RUNTIME_CANDIDATE"
+    },
+    "studio_identity": {
+      "source": "narrative/art/studio/v01/emblem.png",
+      "consumer": "StudioSplashScreen",
+      "status": "ACTIVE_RUNTIME_CANDIDATE"
+    },
+    "game_identity": {
+      "source": "narrative/art/system/v02/game_emblem_v002.png",
+      "consumer": "GameLogo in ArtSystemReviewV02; catalog ui/game_emblem",
+      "status": "CANDIDATE; TITLE_COMPOSITION_PENDING"
+    },
+    "key_art": {
+      "source": "narrative/art/direction/v02/key_art.png",
+      "consumer": "ArtDirectionReviewV01",
+      "status": "REVIEW_ONLY; TITLE_PROMOTION_PENDING"
+    },
+    "fadyme_final": {
+      "source": null,
+      "consumer": null,
+      "status": "AFTER_UI_PENDING"
+    }
+  },
+  "audio_and_voice_reset": false,
+  "old_lock_manifest_preserved": "narrative/references/REFERENCE_SET.lock.json"
+}

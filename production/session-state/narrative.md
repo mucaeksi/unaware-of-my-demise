@@ -2,6 +2,16 @@
 
 Bu kayıt Narrative ve UI tasarım işine aittir. Infrastructure ekibinin `active.md` kaydı ve runtime değişiklikleri ayrı sahipliktedir.
 
+## Güncel adım / 2 — ortak sanat sistemi
+
+- Owner, 1. adımdan 2. adıma geçilmesini istedi. [ART_SYSTEM_V02](../../narrative/design/ART_SYSTEM_V02.md) uygulandı. Önceki bağımsız v01 teması yerine gerçek AppShell → UiTheme → UiKit/UiScreen zinciri ortak ink/bone/wine/silver font/renk/state/zemin katmanını kullanır; Studio da aynı Theme'e bağlıdır. Oyuncu yönlendirme/sinyal/hesap/auth/patch/tercih deposu değişmedi.
+- Oyun için çan/diken tokmak/kırık taç/ince kızıl halka amblemi üretildi ve edit'le sadeleştirildi. 1254×1254 RGBA orijinal byte'lar; native Cinzel dizgisiyle Seal/Compact adayları. Fadyme final sheet veya yeni title kompozisyonu onaylanmış/terfi edilmiş değildir.
+- 15 SVG utility glyph, gerçek 9-slice frame, ortak Button aileleri ve busy durumunu geri getiren GothicActionButton, focus/back/confirm davranışlı GothicModal. 17 Texture2D `visual_assets_part1/shared_ui` katalog ve ilgili MANIFEST hash'iyle bağlıdır; ilk pakette preload/load, patch bağımlılığı yok. Android presetleri dev art_review sahne/script/texture'larını dışarıda bırakır; gerçek export/cihaz kabulü bekler.
+- [1080×1920 kimlik, bileşen ve modal panoları](../../narrative/art/system/v02/README.md), 390×844 kontrolü ve gerçek main startup → mevcut title render'ı alındı. [VERIFY](../../narrative/art/system/v02/VERIFY.json): **81/81 UI testi**, 17-asset resolver kontrolü ve content audit geçti. Scratch-only iki GUT shim ve parity fixture kopyası belgeli; production addon/pin değiştirilmedi. Yerel 4.6.3; hedef 4.7.2/Android ve kapanış uyarıları açık.
+- [Aktif sanat seçimi](../../narrative/art/ACTIVE_ART_SET.json), [replacement haritası](../../narrative/art/system/v02/REPLACEMENT_MAP.json) ve [provenance](../../narrative/art/system/v02/PROVENANCE.json) yeni aday/consumer durumunu ayırır. 26 Legacy lock hash'i korunur; eski HTML tüketicileri tarihsel kalır; audio/voice/theme yerinde. SovTaym resmî kayıt erişim eksikleri ve owner ana tema dosyası bekler.
+- **Sonraki somut görsel iş:** mevcut native Godot → SovTaym açılışından gelen TitleScreen'i yeni logo/key-art/ortak UI ile sayfa olarak tamamlamak; ardından SignIn/Patch/entry araçları. UI sonrası Fadyme sheet → VN/poz → chibi/animasyon. Normal main push `[skip ci]` ile otomatik deploy zinciri tetiklenmez.
+- Büyük target sonrası Hub/gacha listeleri scroll + focus-follow ile erişilebilir kaldı; Settings slider hit yüksekliği ortak ölçüye getirildi. Son UI + player_state/online_backend fixture kontrolü **114/114**, component/focus adlandırma kontrolü 7/7. Ek full-suite koşusunun engine-pin farkı ve eksik scratch fixture nedenleri VERIFY'da ayrı; pin/production addon değişmedi.
+
 ## Güncel revizyon / native Godot ve SovTaym logosu
 
 - Owner düşük çözünürlük ve açılmayan sohbet linklerini bildirdi. Gerçek Godot sahnesinden **1080×1920** stüdyo/title PNG ve native Godot → studio → mevcut title MP4 yeniden alındı; [HD teslim](../../narrative/art/studio/previews/v02_1080/README.md). 1254×1254 logo kaynağı değiştirilmedi; ekranda 720×720 gösterilir. Yerel çalışma yolu yerine doğrudan sohbet görseli ve GitHub dosya URL'leri paylaşılır. Upstream `ede6a8e` checkpoint değişikliği fast-forward ile korundu; runtime değişmedi.

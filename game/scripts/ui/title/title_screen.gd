@@ -3,8 +3,8 @@ extends UiScreen
 ## The title (docs/design/FIRST_LAUNCH_FLOW.md step 3): the key art with the logo, "Tap to start", the build line and a
 ## Support button. It is on show while the content loads and the server is asked behind it; a tap is taken at once and
 ## `start_requested` fires when the director allows it (`set_ready(true)`), so an early tap is never lost. Until the
-## title art is promoted into the game (`ui/title_key_art`, locked reference R02+R01) a placeholder panel and the
-## game's name stand in, marked as placeholder.
+## title art is promoted into the game (`ui/title_key_art`) a placeholder panel and the game's name stand in,
+## marked as placeholder. R02+R01 is historical; the owner authorized a new candidate art system (v02).
 
 signal start_requested
 signal support_requested

@@ -1,0 +1,248 @@
+{
+  "schema": 1,
+  "date": "2026-10-05",
+  "baseline": "d7fdf54be83d9524f4572e9018c5f4a0e2827a0b",
+  "status": "FOUNDATION_IMPLEMENTED_AND_VERIFIED_LOCAL; ART_CANDIDATE",
+  "engine_tested": "4.6.3.stable.official.7d41c59c4",
+  "engine_target": "4.7.2-stable",
+  "checks": {
+    "ui_gut": {
+      "scripts": 9,
+      "tests": 81,
+      "passed": 81,
+      "asserts": 94747,
+      "exit_code": 0,
+      "new_behavior_tests": 7,
+      "log_sha256": "24553819c7637ab390c042aee5b6ae04cf10033986320c89c561d1dc6f0f7a8b"
+    },
+    "scratch_only_engine_compatibility_shims": [
+      {
+        "file": "addons/gut/godot_singletons.gd",
+        "original_sha256": "29e16d7d85119efe5ee47c893670fc8baabd68dfcc7268ccea8f93ab428c5d32",
+        "qa_sha256": "b6fcdc2d43063c823ff28338ae93bd4109471f5d7d9021ecc8b9fedbe32fe4e4",
+        "scope": "scratch QA only; engine 4.6.3 compatibility, production dependency unchanged"
+      },
+      {
+        "file": "addons/gut/stub_params.gd",
+        "original_sha256": "cdd75c6e444393bbb9c3d16a191bbfe9f4dc08fa74022ba32965985ce3d3e6fe",
+        "qa_sha256": "e4db442b7b73311f27322883d996a99f8b85639564b05e5873dca076d9a971bc",
+        "scope": "scratch QA only; engine 4.6.3 compatibility, production dependency unchanged"
+      }
+    ],
+    "initial_qa_fixture_issue": "First UI run missed repo/parity fixtures in scratch copy; restored fixtures, rerun passes. Production fixture/test files were not weakened.",
+    "catalog_textures_resolved": 17,
+    "catalog_check_exit_code": 0,
+    "content_audit_exit_code": 0,
+    "content_audit_log_sha256": "5587f24040bb13bf24eef02703cf692556cbd4570664334c4b2faa5551907be8",
+    "content_manifest_entries_verified": 28,
+    "source_runtime_byte_equal_assets": 18,
+    "historical_lock_hashes_unchanged": 26,
+    "visible_button_geometry": [
+      {
+        "record": "narrative/art/system/v02/previews/identity_1080x1920.png.json",
+        "logical_viewport": [
+          1080.0,
+          1920.0
+        ],
+        "all_visible_button_bounds_inside_viewport": true
+      },
+      {
+        "record": "narrative/art/system/v02/previews/modal_1080x1920.png.json",
+        "logical_viewport": [
+          1080.0,
+          1920.0
+        ],
+        "all_visible_button_bounds_inside_viewport": true
+      },
+      {
+        "record": "narrative/art/system/v02/previews/components_390x844.png.json",
+        "logical_viewport": [
+          1080.0,
+          2337.0
+        ],
+        "all_visible_button_bounds_inside_viewport": true
+      },
+      {
+        "record": "narrative/art/system/v02/previews/components_1080x1920.png.json",
+        "logical_viewport": [
+          1080.0,
+          1920.0
+        ],
+        "all_visible_button_bounds_inside_viewport": true
+      }
+    ],
+    "flat_color_contrast": [
+      {
+        "pair": "bone_panel",
+        "foreground": "#ede3d2",
+        "background": "#15181f",
+        "ratio": 13.97
+      },
+      {
+        "pair": "muted_panel",
+        "foreground": "#b7b0a6",
+        "background": "#15181f",
+        "ratio": 8.27
+      },
+      {
+        "pair": "bone_primary",
+        "foreground": "#ede3d2",
+        "background": "#4b2028",
+        "ratio": 10.75
+      },
+      {
+        "pair": "bone_hover",
+        "foreground": "#ede3d2",
+        "background": "#602a34",
+        "ratio": 8.8
+      },
+      {
+        "pair": "danger_action",
+        "foreground": "#ffb9b6",
+        "background": "#2a171d",
+        "ratio": 10.39
+      },
+      {
+        "pair": "disabled_text",
+        "foreground": "#a4a0a1",
+        "background": "#15181f",
+        "ratio": 6.87
+      },
+      {
+        "pair": "warm_accent_panel",
+        "foreground": "#b59a76",
+        "background": "#15181f",
+        "ratio": 6.64
+      }
+    ],
+    "startup_real_main": {
+      "account_requested": false,
+      "captures": [
+        {
+          "file": "studio_1080x1920.png",
+          "phase": "ui.studio_splash",
+          "title_ready": false,
+          "wordmarks": [
+            {
+              "rect": "[P: (180.0, 1145.0), S: (720.0, 141.0)]",
+              "text": "SovTaym",
+              "visible": true
+            }
+          ]
+        },
+        {
+          "file": "title_1080x1920.png",
+          "phase": "ui.title",
+          "title_ready": true,
+          "wordmarks": []
+        }
+      ],
+      "engine": "4.6.3-stable (official)",
+      "missing_audio": [
+        "res://assets/audio/music/bgm_main_theme.ogg"
+      ],
+      "music_cue": "",
+      "source": "Uncomposited Godot viewport captures of the real main scene",
+      "title_tapped": false
+    },
+    "no_account_request": true,
+    "final_component_name_check": {
+      "tests": 7,
+      "passed": 7,
+      "exit_code": 0,
+      "log_sha256": "24e88a47ff0c3193b5114be0a2323c091d6bc14457a9ab6a621e1c0ea33742d0"
+    },
+    "final_editor_import": {
+      "exit_code": 0,
+      "script_errors": false,
+      "log_sha256": "2cc4407ff5f363ea0e756db6e3fafb35ac3c85433da949367c15c1453da4d30d"
+    },
+    "additional_full_suite_observation": {
+      "tests": 375,
+      "passed": 372,
+      "failed": 3,
+      "cause": "gtest appended a script while .gutconfig still selected all tests. One engine-pin test requires 4.7.2; two unit suites missed server/test/fixtures in scratch.",
+      "server_fixtures_restored": true,
+      "affected_suites_and_ui_rechecked": true,
+      "recheck_log_sha256": "3d03d86aeb2147f7ebd767efd9aa9e2e5b2e97af6213b675bf8d0ae54fd595bd",
+      "recheck_tests": 114,
+      "remaining_limit": "Local engine-pin test 4.6.3 vs target 4.7.2; production version was not changed."
+    }
+  },
+  "runtime_integration": [
+    "AppShell -> UiTheme -> gothic_system_v02",
+    "UiKit -> GothicActionButton; compatible inherited Button signals/toggles",
+    "UiScreen -> same safe area + static alpha-preserving ink shader",
+    "StudioSplashScreen -> same UiTheme",
+    "Hub/gacha list scrolling + shared focus follow keeps larger targets reachable",
+    "Settings HSlider uses full touch height",
+    "GameLogo Seal/Compact + GothicModal in actual Control gallery",
+    "17 textures in visual_assets_part1 shared_ui; MANIFEST hash updated"
+  ],
+  "android_export_config": {
+    "review_scenes_scripts_textures_excluded_in_both_presets": true,
+    "actual_apk_aab_export_run": false,
+    "content_pck_published": false,
+    "deployment_triggered": false
+  },
+  "known_limits": [
+    "Desktop software OpenGL/4.6.3 captures and scratch GUT are not Android/target-4.7.2 acceptance",
+    "GUT and startup-capture shutdown retain prior ObjectDB/one-resource-in-use messages after passing; no SCRIPT ERROR in final UI run",
+    "Xvfb driver does not support VSync changes",
+    "Title still has existing placeholder art; final logo/key-art page composition pending",
+    "Owner music file still missing; no Fadyme-theme substitution",
+    "Native Android safe area/density/controller/assistive technology/performance acceptance pending",
+    "Old HTML entry/prototype deliberately retains historical source visuals until its page replacement",
+    "Owner final artwork and official SovTaym registration checks remain open"
+  ],
+  "captures": [
+    {
+      "path": "narrative/art/system/v02/previews/components_1080x1920.png",
+      "sha256": "43f0b96d287a699845049d4d5836135511516457b727d96f3c8cdd89ff7fce05",
+      "bytes": 784941,
+      "width": 1080,
+      "height": 1920,
+      "source": "Uncomposited real Godot viewport capture; not upscaled"
+    },
+    {
+      "path": "narrative/art/system/v02/previews/components_390x844.png",
+      "sha256": "3a613240f2093fcfeec3c53dba6a20399c961ab169c230e9360a36307f86776a",
+      "bytes": 193942,
+      "width": 390,
+      "height": 844,
+      "source": "Uncomposited real Godot viewport capture; not upscaled"
+    },
+    {
+      "path": "narrative/art/system/v02/previews/identity_1080x1920.png",
+      "sha256": "27a406320c5ab8ecd4b04622f9186004de623681c0006b887c80e71b7cbe7360",
+      "bytes": 1267778,
+      "width": 1080,
+      "height": 1920,
+      "source": "Uncomposited real Godot viewport capture; not upscaled"
+    },
+    {
+      "path": "narrative/art/system/v02/previews/modal_1080x1920.png",
+      "sha256": "ce7eeb9657c9b832350c5b217a2947314525cb97333b55470fcc530003f201ee",
+      "bytes": 249947,
+      "width": 1080,
+      "height": 1920,
+      "source": "Uncomposited real Godot viewport capture; not upscaled"
+    },
+    {
+      "path": "narrative/art/system/v02/previews/runtime_1080/studio_1080x1920.png",
+      "sha256": "aee0b91610813d75bdf06345e6862e34859af16605353766d3271c7f85367d67",
+      "bytes": 1978477,
+      "width": 1080,
+      "height": 1920,
+      "source": "Uncomposited real Godot viewport capture; not upscaled"
+    },
+    {
+      "path": "narrative/art/system/v02/previews/runtime_1080/title_1080x1920.png",
+      "sha256": "8c8f7affde56558e81c00bc7ce7e6d5403e4f44610de3ef8dc0b0ce92fa03e58",
+      "bytes": 41194,
+      "width": 1080,
+      "height": 1920,
+      "source": "Uncomposited real Godot viewport capture; not upscaled"
+    }
+  ]
+}

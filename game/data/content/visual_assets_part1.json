@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "pack_id": "part1_visual_assets",
-  "asset_status_note": "All entries are briefs or prompt-ready. No raster files have been generated in this workspace.",
+  "asset_status_note": "Existing chapter, character, currency, element and status artwork entries retain their prior brief/prompt-ready state. Shared art system v02 adds bundled runtime candidates with explicit art_approval; in_game is not owner approval.",
   "status_values": [
     "brief",
     "prompt_ready",
@@ -283,6 +283,286 @@
       "file": "assets/ui/currencies_v001.svg",
       "brief": "Eclipse Token, Fate's Thread, Silver Crowns, Ration and Focus emblems in a medieval ledger motif.",
       "status": "brief"
+    },
+    {
+      "id": "icon_back",
+      "file": "assets/ui/gothic/v02/icons/back.svg",
+      "brief": "Shared Gothic UI utility glyph: back.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_check",
+      "file": "assets/ui/gothic/v02/icons/check.svg",
+      "brief": "Shared Gothic UI utility glyph: check.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_checked",
+      "file": "assets/ui/gothic/v02/icons/checked.svg",
+      "brief": "Shared Gothic UI utility glyph: checked.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_chevron",
+      "file": "assets/ui/gothic/v02/icons/chevron.svg",
+      "brief": "Shared Gothic UI utility glyph: chevron.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_close",
+      "file": "assets/ui/gothic/v02/icons/close.svg",
+      "brief": "Shared Gothic UI utility glyph: close.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_companions",
+      "file": "assets/ui/gothic/v02/icons/companions.svg",
+      "brief": "Shared Gothic UI utility glyph: companions.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_help",
+      "file": "assets/ui/gothic/v02/icons/help.svg",
+      "brief": "Shared Gothic UI utility glyph: help.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_home",
+      "file": "assets/ui/gothic/v02/icons/home.svg",
+      "brief": "Shared Gothic UI utility glyph: home.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_journey",
+      "file": "assets/ui/gothic/v02/icons/journey.svg",
+      "brief": "Shared Gothic UI utility glyph: journey.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_lock",
+      "file": "assets/ui/gothic/v02/icons/lock.svg",
+      "brief": "Shared Gothic UI utility glyph: lock.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_records",
+      "file": "assets/ui/gothic/v02/icons/records.svg",
+      "brief": "Shared Gothic UI utility glyph: records.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_settings",
+      "file": "assets/ui/gothic/v02/icons/settings.svg",
+      "brief": "Shared Gothic UI utility glyph: settings.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_summon",
+      "file": "assets/ui/gothic/v02/icons/summon.svg",
+      "brief": "Shared Gothic UI utility glyph: summon.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_unchecked",
+      "file": "assets/ui/gothic/v02/icons/unchecked.svg",
+      "brief": "Shared Gothic UI utility glyph: unchecked.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_waiting",
+      "file": "assets/ui/gothic/v02/icons/waiting.svg",
+      "brief": "Shared Gothic UI utility glyph: waiting.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "panel_frame_gothic",
+      "file": "assets/ui/gothic/v02/panel_frame.svg",
+      "brief": "Reusable 9-slice metal frame; fixed 32 px texture margins, solid ink panel.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "game_emblem",
+      "file": "assets/branding/uomd/v01/emblem.png",
+      "brief": "Silver bell, organic thorn clapper, broken circlet fragment and fine crimson ring; English lettering remains a separate GameLogo Control.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        1254,
+        1254
+      ],
+      "transparent_background": true
     }
   ],
   "weapon_banner_key_art": [
