@@ -1,5 +1,5 @@
 # UOMD — Ekran Haritası v1
-Durum: DESIGN_DRAFT. Ana menü ayrıntılı görsel tasarım; bütün sistem yerleşim/davranış taslağı.
+Durum: DESIGN_DRAFT. İlk giriş v02 ve ana menü görsel adayı; bütün sistem yerleşim/davranış taslağı.
 
 ## Ana akış
 ```mermaid
@@ -23,7 +23,7 @@ flowchart TD
 ## Kapsam ve bağımlılıklar
 | Ekran | Yerleşim / amaç | Mevcut bağlantı | Tasarım durumu |
 |---|---|---|---|
-| Title / giriş | Marka, tek giriş CTA, bağlantı/oturum durumu | Online ve boot; Android Credential Manager eksik | Blueprint; ayrı login mockup sonraki pass |
+| Title / giriş | Marka, tek giriş CTA, bağlantı/oturum durumu | SignInFlow, Native Credential Manager, Online, ClientRelease | [Ayrı v02 taslağı](ENTRY_SCREEN.md); 10 senaryo, Godot binding bekliyor |
 | Sığınak | Kaynaklar, mekân hotspotları, büyük devam kartı, 5 tab | HubScreen + StoryDirector | Ayrıntılı görsel aday |
 | Yolculuk | 7 chapter kartı; mevcut chapter 5 node, kilit/clear/current | StoryIndex + chapter/stage JSON | Etkileşimli yerleşim |
 | Stage detayı | Tavsiye Lv, Ration, düşman/ödül özeti, hazırlan | stage JSON + begin_stage | Sheet |
@@ -41,7 +41,7 @@ flowchart TD
 | Companion | Karakter bazlı parçalar, spoiler unlock | kaynak 76 part; runtime tüketici eksik | Kayıtlar yerleşimi |
 | Codex | Kategoriler, ilerlemeye bağlı kilitler | kaynak unlock/runtime farkı | Kayıtlar yerleşimi |
 | Events | 4 mevcut narrative event, erişim/ödül | event JSON; schedule/integration kararı | Blueprint; guild event sosyal guild sistemi varsaymaz |
-| VN | Background, portrait, subtitle, Auto/Log | VnScreen + cue integration eksik | Etkileşimli yerleşim |
+| VN | Background, portrait, subtitle, Auto/Log | VnScreen, AssetResolver, AudioDirector; cue/asset kapsam farkları | Etkileşimli yerleşim |
 | Profil / ayarlar | Hesap, ses/müzik/VO, metin, motion, sign-out | Settings/Online; hesap işlemleri eksik | Etkileşimli ayar yerleşimi |
 | Kaynaklar / hata / loading | Chip sheet, retry, disabled/empty | Outcome ve PlayerState | Ortak bileşen |
 
@@ -56,4 +56,4 @@ flowchart TD
 Demo stage 1-5, roster 5 örnek sahip olunan yoldaş, örnek cüzdan: canlı oyuncu durumu değildir. Skill ve chapter/stage adları mevcut JSON'dan gelir. Türkçe etiketler localization taslağıdır. Gerçek server authority, currency/pity, state persistence bu taslakta yoktur.
 
 ## Uygulama sırası
-Sığınak + tasarım sistemi → Yolculuk/formasyon/savaş → Yoldaşlar/envanter/skills → Çağrı/görevler → Kayıtlar/VN/ayarlar → tüm durumlar ve Android doğrulaması. Narrative kaynak aktarımı/fark kapatma bundan ayrı izlenir.
+İlk giriş → Sığınak + ortak tasarım sistemi → Yolculuk/formasyon/savaş → Yoldaşlar/envanter/skills → Çağrı/görevler → Kayıtlar/VN/ayarlar → tüm durumlar ve Android doğrulaması. Seçili Narrative kaynak aktarımı tamamlandı; kaynak/runtime farklarını kapatma ayrı izlenir.

@@ -16,7 +16,7 @@ Hikâye, canon, karakter, sanat ve ses üretim kaynaklarının düzenli giriş a
 | Üretim araçları | 13 Legacy script; kaynak koruma, adaptasyon ve çalıştırma ayrı | [tools/](tools/README.md) |
 | Teknik teslim | Özgün Narrative handoff | [docs/](docs/README.md) |
 | Tasarım referansı | Legacy root GDD; güncel kararlar ayrıca geçerlidir | [design/](design/README.md) |
-| UI taslakları | AFK Arena benzeri mobil gezinme + karanlık tema; DESIGN_DRAFT | [ui/](ui/README.md) |
+| UI taslakları | İlk giriş v02, AFK Arena benzeri mobil gezinme + karanlık tema; DESIGN_DRAFT | [ui/](ui/README.md) |
 | Tarihsel kopyalar | İki emekliye ayrılmış belge ve özgün archive açıklaması | [archive/](archive/README.md) |
 | Aktarım / eksikler | Tam envanter kararları, hash, kaynak/runtime farkları | [migration/](migration/README.md) |
 

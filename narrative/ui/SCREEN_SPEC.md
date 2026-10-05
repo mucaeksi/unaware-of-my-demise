@@ -3,7 +3,7 @@
 Durum: DESIGN_DRAFT. Ana menü görsel adayı ve toplam 14 ekran/alt ekranın etkileşimli yerleşimi hazır. Aşağıdaki üretim şartları, Godot'a uygulandığı anlamına gelmez. Mekanik/ekonomi JSON'ları bu çalışma sırasında değiştirilmez.
 
 ## 01 — Açılış / oturum
-Artwork üzerinde marka ve tek ana giriş eylemi. Alt bölümde bağlantı durumu, sürüm ve gizlilik bağlantıları için alan. Google → sunucu oturumu → oyuncu snapshot'ı → Sığınak. Oturum varsa doğrudan devam.
+Onaylı artwork üzerinde marka ve tek ana giriş eylemi. Alt bölümde bağlantı durumu, sürüm ve gizlilik bağlantıları için alan. İçerik / release gate → Google → sunucu oturumu → oyuncu snapshot'ı → Sığınak veya açık girişim recovery. Mevcut Online session bellektedir; geri dönen oyuncunun hesabı Native Credential Manager ile yeniden bağlanır. Ayrıntılı v02 durum tasarımı: [ENTRY_SCREEN.md](ENTRY_SCREEN.md).
 
 Loading sırasında ikinci giriş engellenir. Kullanıcı iptali yumuşak durumdur; ağ hatası açık yeniden deneme sunar. Hesap bilgisi doğrulanmadan örnek/cached bakiye gerçek bakiye gibi sunulmaz. Prototip giriş yapmaz.
 
