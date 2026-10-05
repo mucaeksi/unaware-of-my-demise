@@ -58,6 +58,7 @@ var _title: TitleScreen = null
 var _loaded_flow: GameFlow = null
 ## Purchases and ads (INF-036); built on first use. Tests may set their own.
 var monetization: Monetization = null
+var _startup: StartupSequence = null
 var _battle_job: WorkerJob = null
 var _battle_stage: String = ""
 var _battle_roster: Variant = null
@@ -71,6 +72,10 @@ func _ready() -> void:
 ## shell already has a loaded flow); the tap then goes on to the server (release gate, sign-in, snapshot) and the first screen.
 ## `skip_title`: a retry or a restart after an update goes straight on.
 func start(skip_title: bool = false) -> void:
+	if _startup != null:
+		_startup.cancel()
+		_startup.queue_free()
+		_startup = null
 	_loaded_flow = null
 	# INF-026: the installed content release is mounted before any content is read.
 	Game.mount_content()
@@ -104,7 +109,7 @@ func is_busy() -> bool:
 
 
 func on_back_unhandled() -> void:
-	if shell.current is HubScreen:
+	if shell.current is HubScreen or shell.current is TitleScreen:
 		get_tree().quit()
 
 
@@ -119,7 +124,19 @@ func _present_title() -> void:
 		_on_flow_loaded(_loaded_flow), CONNECT_ONE_SHOT)
 	_title.support_requested.connect(func() -> void: OS.shell_open(support_mail_uri()))
 	shell.show_screen(_title)
-	Audio.play_flow_cue(AudioCues.FLOW_TITLE)
+	if shell.startup_intro_enabled:
+		var presentation: StartupSequence = shell.startup_presentation.instantiate() as StartupSequence
+		_startup = presentation
+		presentation.completed.connect(func() -> void:
+			if _startup != presentation:
+				return
+			_startup = null
+			presentation.queue_free()
+			if _title != null and _loaded_flow != null:
+				_title.set_ready(true), CONNECT_ONE_SHOT)
+		shell.add_child(presentation)
+	else:
+		Audio.play_entry_theme()
 
 
 ## The content is loaded (or failed to): with the title on show it waits for the tap, otherwise it goes straight on.
@@ -128,7 +145,8 @@ func _on_content_loaded(loaded: GameFlow) -> void:
 		_on_flow_loaded(loaded)
 		return
 	_loaded_flow = loaded
-	_title.set_ready(true)
+	if _startup == null:
+		_title.set_ready(true)
 
 
 func _on_flow_loaded(loaded: GameFlow) -> void:
@@ -159,6 +177,7 @@ func _on_flow_loaded(loaded: GameFlow) -> void:
 		_present_unfinished_battle()
 	elif flow.is_at_story_start():
 		# A new player goes straight into the opening; the story chain takes them on from there.
+		Audio.stop_music(1.2)
 		_present_current_entry()
 	else:
 		_present_hub()

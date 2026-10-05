@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "status": "CANDIDATE_NOT_OWNER_APPROVED",
+  "baseline_commit": "d5c5cadd2357a5c97aab0b2aac52977151f602bd",
+  "world_review": "narrative/design/SOURCE_REVIEW_2026-10-05.json",
+  "art_system": "narrative/design/ART_SYSTEM_V01.md",
+  "assets": [
+    {
+      "path": "narrative/art/direction/v01/key_art.png",
+      "sha256": "1a3d56a67884d8b5890da87e4b5f2f42e503e200890bb8ee4a9d8e243714d374",
+      "bytes": 2868622,
+      "width": 941,
+      "height": 1672,
+      "mode": "RGB",
+      "asset_id": "review.key_art.v01",
+      "generated_date": "2026-10-05",
+      "tool": "OpenAI image_gen.imagegen",
+      "model_version": null,
+      "seed": null,
+      "original_generated_output": "/workspace/generated_images/exec-59358913-04d5-4768-aa29-7b22ee604d54.png",
+      "transparent_background": false,
+      "prompt": {
+        "path": "narrative/design/ART_DIRECTION_V01.prompt.txt",
+        "sha256": "11c10049a83d95248218abe45f80ac8ef0d6e5c5185c393aa898e76973f9dfb2",
+        "bytes": 4642
+      },
+      "owner_approval": null,
+      "presented_to_user": true,
+      "status": "CANDIDATE",
+      "canon_review": "v01 Brin plate/gorget mismatch; corrected in v02",
+      "input": {
+        "source": "Current user conversation image attachment",
+        "tool_parameter": {
+          "num_last_images_to_include": 1
+        },
+        "visually_reviewed": true,
+        "local_original_path": null,
+        "sha256": null
+      }
+    },
+    {
+      "path": "narrative/art/direction/v02/key_art.png",
+      "sha256": "91e1c49fa8134d0167e974626ff8474b6b4d3945133accf4ddad6247beadef5b",
+      "bytes": 2657584,
+      "width": 941,
+      "height": 1672,
+      "mode": "RGB",
+      "asset_id": "review.key_art.v02",
+      "generated_date": "2026-10-05",
+      "tool": "OpenAI image_gen.imagegen",
+      "model_version": null,
+      "seed": null,
+      "original_generated_output": "/workspace/generated_images/exec-26f7dadb-f24c-4273-a1fb-89be1c93665d.png",
+      "transparent_background": false,
+      "prompt": {
+        "path": "narrative/design/ART_DIRECTION_V02.prompt.txt",
+        "sha256": "e6b0470e9243c53561d93d8baf85143f5c455293cbbe77778c47934af263d285",
+        "bytes": 2015
+      },
+      "owner_approval": null,
+      "presented_to_user": true,
+      "status": "CANDIDATE",
+      "canon_review": "Brin cloth correction visually reviewed; small identity accessories remain final-sheet review items",
+      "input": {
+        "source": {
+          "path": "narrative/art/direction/v01/key_art.png",
+          "sha256": "1a3d56a67884d8b5890da87e4b5f2f42e503e200890bb8ee4a9d8e243714d374",
+          "bytes": 2868622,
+          "width": 941,
+          "height": 1672,
+          "mode": "RGB"
+        },
+        "tool_parameter": {
+          "referenced_image_paths": [
+            "/workspace/unaware-of-my-demise/narrative/art/direction/v01/key_art.png"
+          ]
+        }
+      }
+    }
+  ],
+  "current_review_consumer": {
+    "id": "review.art_direction_v01",
+    "scene": "game/scenes/art_review/art_direction_review_v01.tscn",
+    "script": "game/scripts/art_review/art_direction_review_v01.gd",
+    "theme": "game/theme/gothic_candidate_v01.gd",
+    "runtime_asset": {
+      "path": "game/assets/art_review/v02/key_art.png",
+      "sha256": "91e1c49fa8134d0167e974626ff8474b6b4d3945133accf4ddad6247beadef5b",
+      "bytes": 2657584,
+      "width": 941,
+      "height": 1672,
+      "mode": "RGB"
+    },
+    "staging_source": "narrative/art/direction/v02/key_art.png",
+    "source_runtime_hash_equal": true,
+    "active_title_or_hub_promoted": false
+  },
+  "fonts": [
+    {
+      "path": "game/assets/fonts/art_direction_v01/Cinzel.ttf",
+      "sha256": "f4d83d34d1f6c741193e4acf4b3dff9531e5a67b6aa65228d00a7db72a4e0f34",
+      "bytes": 125468,
+      "family": "Cinzel",
+      "download_date": "2026-10-05",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/Cinzel%5Bwght%5D.ttf",
+      "upstream_commit": null,
+      "license": "SIL Open Font License 1.1",
+      "license_file": {
+        "path": "game/assets/fonts/art_direction_v01/Cinzel-OFL.txt",
+        "sha256": "f2b3029aba64c378bf0963b62945eee15e564fe4330b934c8f2eb058282b5e83",
+        "bytes": 4383
+      },
+      "license_source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/OFL.txt"
+    },
+    {
+      "path": "game/assets/fonts/art_direction_v01/Inter.ttf",
+      "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+      "bytes": 876576,
+      "family": "Inter",
+      "download_date": "2026-10-05",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz,wght%5D.ttf",
+      "upstream_commit": null,
+      "license": "SIL Open Font License 1.1",
+      "license_file": {
+        "path": "game/assets/fonts/art_direction_v01/Inter-OFL.txt",
+        "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+        "bytes": 4377
+      },
+      "license_source_url": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt"
+    }
+  ],
+  "preservation": {
+    "historical_visual_sources_unchanged": true,
+    "canon_script_content_unchanged": true,
+    "active_startup_auth_patch_audio_unchanged": true,
+    "generated_original_outputs_left_in_place": true
+  }
+}

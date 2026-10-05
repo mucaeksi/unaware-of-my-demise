@@ -32,6 +32,7 @@ func _shell(cursor: int) -> AppShell:
 	var backend: _Backend = _Backend.new()
 	backend.snapshot = _snapshot(cursor)
 	var shell: AppShell = AppShell.new()
+	shell.startup_intro_enabled = false  # presentation is covered in test_startup_sequence.gd
 	shell.flow = _flow
 	shell.backend = backend
 	add_child_autofree(shell)

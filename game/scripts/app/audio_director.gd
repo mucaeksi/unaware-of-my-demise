@@ -30,6 +30,9 @@ const BUSES: Array[String] = [BUS_MUSIC, BUS_VOICE, BUS_SFX]
 const SETTINGS_PATH: String = "user://settings.cfg"
 const SETTINGS_SECTION: String = "audio"
 const AUDIO_ROOT: String = "res://assets/audio"
+## Owner's future main theme (2026-10-05): reserved filename, not a generated or supplied recording.
+const PENDING_MAIN_THEME: String = "bgm_main_theme"
+const ENTRY_FADE_SECONDS: float = 5.0
 ## Below this linear volume a bus is muted instead of driven to -inf dB.
 const SILENT: float = 0.001
 
@@ -54,6 +57,7 @@ var cues: AudioCues = null:
 		return cues
 var _sfx: AudioStreamPlayer = null
 var _fade: Tween = null
+var _paused: bool = false
 var _volumes: Dictionary = {}
 var _missing: Dictionary = {}
 var _settings_path: String = SETTINGS_PATH
@@ -123,6 +127,16 @@ func play_flow_cue(slot: String, fade_seconds: float = 1.0) -> bool:
 	return false
 
 
+## Entry music starts on the first game-controlled splash and survives Studio/Title/auth/patch.
+## An assigned flow.title overrides the reserved filename; null/old patch slots use the built-in reservation.
+## The missing future file is intentionally silent. Repeated calls preserve player, cursor and in-flight fade.
+func play_entry_theme(fade_seconds: float = ENTRY_FADE_SECONDS) -> bool:
+	var cue_id: String = cues.cue(AudioCues.FLOW_TITLE)
+	if cue_id.is_empty():
+		cue_id = PENDING_MAIN_THEME
+	return play_music(cue_id, fade_seconds, true)
+
+
 ## Starts the looped bed `cue_id` ("" or "stop" stops it); the same bed already playing is left alone.
 func play_ambience(cue_id: String) -> bool:
 	if cue_id.is_empty() or cue_id == "stop":
@@ -138,6 +152,7 @@ func play_ambience(cue_id: String) -> bool:
 		return false
 	_ambience.stream = stream
 	_ambience.play()
+	_ambience.stream_paused = _paused
 	_ambience_cue = cue_id
 	return true
 
@@ -177,18 +192,23 @@ func apply_line_audio(audio: Variant) -> void:
 ## Starts `cue_id`, cross-fading from the current track over `fade_seconds`; the same cue already playing is left alone.
 ## False when the cue has no file (the current music then fades out: a scene that asks for another mood never keeps the
 ## old one).
-func play_music(cue_id: String, fade_seconds: float = 1.0) -> bool:
+func play_music(cue_id: String, fade_seconds: float = 1.0, force_loop: bool = false) -> bool:
 	if cue_id == _music_cue and _music[_active_music].playing:
 		return true
 	var stream: AudioStream = _stream(music_path(cue_id))
 	if stream == null:
 		stop_music(fade_seconds)
 		return false
+	if force_loop and stream is AudioStreamOggVorbis and not (stream as AudioStreamOggVorbis).loop:
+		# Keep cached/imported source settings intact; only the entry player's copy loops.
+		stream = stream.duplicate() as AudioStreamOggVorbis
+		(stream as AudioStreamOggVorbis).loop = true
 	_active_music = 1 - _active_music
 	var incoming: AudioStreamPlayer = _music[_active_music]
 	incoming.stream = stream
 	incoming.volume_db = linear_to_db(SILENT) if fade_seconds > 0.0 else 0.0
 	incoming.play()
+	incoming.stream_paused = _paused
 	_music_cue = cue_id
 	_crossfade(incoming, fade_seconds)
 	return true
@@ -214,6 +234,7 @@ func play_voice(speaker_id: String, line_id: String) -> bool:
 		return false
 	_voice.stream = stream
 	_voice.play()
+	_voice.stream_paused = _paused
 	return true
 
 
@@ -231,13 +252,20 @@ func play_sfx(cue_id: String) -> bool:
 		return false
 	_sfx.stream = stream
 	_sfx.play()
+	_sfx.stream_paused = _paused
 	return true
 
 
 ## Pauses (true) or resumes (false) every player in place.
 func set_paused(paused: bool) -> void:
+	_paused = paused
 	for player: AudioStreamPlayer in _music + [_voice, _sfx, _ambience]:
 		player.stream_paused = paused
+	if _fade != null and _fade.is_valid():
+		if paused:
+			_fade.pause()
+		else:
+			_fade.play()
 
 
 ## Linear volume 0..1 of `bus`; applied at once and saved.
@@ -326,3 +354,5 @@ func _crossfade(incoming: AudioStreamPlayer, seconds: float) -> void:
 			for player: AudioStreamPlayer in outgoing:
 				player.stop()
 		_fade.chain().tween_callback(finished)
+	if _paused:
+		_fade.pause()

@@ -3,12 +3,15 @@
 2026-10-05 · DESIGN_DRAFT · Bu liste yeni tasarım ile mevcut oyunun arasındaki işi gösterir. Seçili Narrative kaynakları BATCH-0005 ile aktarıldı; kaynak/runtime farkları [aktarım kaydında](../migration/README.md).
 
 ## P0 — İlk oyuna giriş
-- [x] Onaylı key art / logo ile giriş taslağı; 10 release/login/snapshot senaryosu: [ENTRY_SCREEN.md](ENTRY_SCREEN.md), [entry/index.html](entry/index.html).
+- [x] İngilizce giriş ve giriş sonrası PatchScreen; sağ üst Settings/Help/Sign Out, ayrı sayfalar ve sabit Godot adları: [ENTRY_SCREEN.md](ENTRY_SCREEN.md), [SCREEN_REGISTRY.json](SCREEN_REGISTRY.json).
+- [x] Oyuncu metni/altyazı EN, ses JA kuralı; mevcut sistem wireframe etiketleri İngilizceye düzeltildi.
 - [ ] Godot title/boot Control yerleşimi; mevcut SignInFlow, Online ve ClientRelease sonuçlarını yeni yüzeye bağlama.
+- [ ] Patch operation controller: sayfa navigasyonundan bağımsız indirme, gerçek byte progress ve Sign Out için güvenli iptal/atomic-install sınırı.
+- [ ] EntrySettingsScreen → AudioDirector ve ortak erişilebilirlik/cihaz tercihleri bağlantısı; EntryHelpScreen shipped metin olarak patch'ten bağımsız.
 - [ ] Gerçek gizlilik ve mağaza adresleri; Android Back, cutout/safe-area ve native hesap seçimi cihaz doğrulaması.
 
 ## P0 — Ana menüyü oyuna almak
-- [ ] Ortak Godot theme, font ve ikon bileşenleri; lisanslı Türkçe font seçimi, 1080×1920 ve safe-area ölçekleme.
+- [ ] Ortak Godot theme, font ve ikon bileşenleri; İngilizce oyuncu metnine uygun lisanslı font seçimi, 1080×1920 ve safe-area ölçekleme.
 - [ ] Sığınak artwork adayının görsel değerlendirmesi; kaynak PNG/prompt/hash kaydı hazır. Dokunma hotspotları artwork'ten ayrı Control katmanı.
 - [ ] HubScreen + kalıcı 5 tab; doğru geri navigasyonu ve restore edilen scroll/selection.
 - [ ] Profil, currencies, Ration/UTC timer, ready quest ve Inn Meal gerçek snapshot/claim durumlarına bağlanmalı.

@@ -5,6 +5,12 @@ cues, but first this whole stretch is designed so that every cue point exists fo
 design: what the player sees from tapping the app icon until they are in the game, for a brand-new player and for a
 returning one, with every audio slot named.
 
+**Startup extension (2026-10-05):** the current implementation adds game-controlled Godot → provisional studio →
+existing title after the native black splash. The owner main theme is not ready; a future `bgm_main_theme.ogg` path
+is reserved and absence is silent. See [current scenes, audio and verification](../../narrative/design/STARTUP_AUDIO_V01.md).
+The v1 facts/diagram below retain their original design context. Content loads behind the presentation; actual
+release/session/patch requests still start after the title tap. Final title artwork and the entry-page redesign remain open.
+
 Markers used below: **[built]** works in the current build; **[build]** engineering work this design asks for (no
 decision needed); **[slot]** a cue or asset the narrative/art team fills; **[owner]** needs an owner decision (listed
 at the end).
@@ -154,7 +160,7 @@ Two kinds of cue ids, both filled by the narrative team (D-08), both resolved by
 
    | Slot | Where | Notes |
    |---|---|---|
-   | `flow.title` | [3]–[8] | the main theme if the owner chooses (owner supplies it) |
+   | `flow.title` | game-controlled Godot/studio, [3]–[8] | owner main theme confirmed; recording pending. Entry helper reserves `bgm_main_theme` when this slot is null; other null flow slots remain silent |
    | `flow.hub` | hub and menus | |
    | `flow.summon` | summon screen | |
    | `flow.battle_default` | battles without their own cue | stages may name their own later |
@@ -179,7 +185,7 @@ Two kinds of cue ids, both filled by the narrative team (D-08), both resolved by
 - **D-15 Legal texts** for [5]: the Terms of Service and the Privacy Policy (Play requires a privacy policy for an
   app with accounts, purchases and ads). Engineering can draft the privacy policy from what the system actually stores
   for the owner to approve; the terms are the owner's.
-- **Main theme on the title** (`flow.title`): yes or no; if yes, the owner supplies the file.
+- **Main theme delivery** (`flow.title` / reserved `bgm_main_theme`): usage is confirmed; the owner will supply the recording later. The opening is prepared and currently silent.
 
 Everything else above is engineering or narrative-team work and proceeds without a decision.
 

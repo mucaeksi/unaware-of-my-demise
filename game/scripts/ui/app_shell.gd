@@ -11,6 +11,10 @@ extends Control
 var flow: GameFlow = null
 var backend: GameBackend = null
 
+## Cold-start presentation; tests/tools can bypass it without changing player routing.
+@export var startup_intro_enabled: bool = true
+@export var startup_presentation: PackedScene = preload("res://scenes/ui/startup/startup_sequence.tscn")
+
 var current: Control = null
 var director: StoryDirector = null
 
