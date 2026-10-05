@@ -593,3 +593,27 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - D-02: there is no `docs/INFRASTRUCTURE_REVIEW.md`; the roadmap's R01–R16 labels stay as written and are marked as
   untraceable (they are unrelated to the R01–R23 creative reference set in UOMD_REFERENCE_LOCK.md).
 
+## DEC-0037 — Social features: the LEGACY friend graph on the Worker
+- Status: ACCEPTED (2026-10-05, engineering; owner decision D-10 put social in v1; roadmap INF-037).
+- Source: the LEGACY server and client (Drive: `server/social.py`, `server/repository.py`, `server/app.py`,
+  `tests/test_social.py`, `client/screens/friends_screen.py`, `docs/ONLINE_ACCOUNT_SOCIAL_PART1.md`). Kept as they were:
+  friend codes (8 characters without 0/O/1/I/L), `friend_edges` with mirrored pending/accepted pairs and one-sided
+  blocks, crossed requests becoming a friendship, repeat requests answering the relationship as it is, a block ending
+  every relationship and stopping the blocked player's requests (403, never saying who blocked whom), reports with the
+  LEGACY reason keys, public records without friend codes or anything private. No chat, guild, PvP, co-op or transfer.
+- Filled where LEGACY stopped (its own docs asked for these): cancelling one's own request; unblocking (LEGACY's
+  message said "unblock them first" but had no route); choosing a nickname (unique regardless of case, 3–16 characters,
+  reserved words, once per 24 h); coarse presence that respects the player's setting; player level from account XP
+  (LEGACY returned 0 because no curve existed then); keyset paging; anti-abuse limits in a versioned config
+  (`SOCIAL_LIMITS` v1: 50 friends, 30 waiting requests, 100 waiting on one player, 30 requests and 10 reports per day,
+  a repeat report within 24 h is the same report) — engineering defaults the owner may tune; moderation in the admin
+  panel (open reports, resolve with a reason, reset a nickname; audited).
+- Paths follow this API's conventions (POST for every change, each with an Idempotency-Key): removal is
+  `POST /v1/friends/{id}/remove` instead of LEGACY's `DELETE /v1/friends/{id}`.
+- Concurrency: every change to a pair runs under a transaction-scoped advisory lock on the pair. The idempotency
+  helper now locks the account row `FOR NO KEY UPDATE` instead of `FOR UPDATE`: still one mutation per account at a
+  time, but a foreign-key check from another account's transaction (KEY SHARE) is no longer blocked by it. With
+  `FOR UPDATE`, two players sending each other a request at the same moment deadlocked (found by the concurrency test;
+  500 before, a friendship after).
+- Deleting an account removes its edges on both sides and every report it made or received (cascades).
+

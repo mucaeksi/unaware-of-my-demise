@@ -22,6 +22,9 @@ The game Worker has no admin routes.
 | `GET /admin/api/players?query=<acct_…|XXXX-XXXX>` (exact match only, no listing) | player.read | `read.player_search` |
 | `GET /admin/api/players/{id}/state` · `/journal` · `/pulls` · `/claims` | player.read | `read.player_*` |
 | `POST /admin/api/players/{id}/revoke-sessions` (reason + Idempotency-Key) | player.support | `support.revoke_sessions`, same transaction |
+| `GET /admin/api/reports?status=open\|all&before=` | player.read | `read.reports` (player reports with both players' nicknames, the reported friend code and how often that player was reported) |
+| `POST /admin/api/reports/{report_id}/resolve` (reason + Idempotency-Key) | player.support | `support.resolve_report`; the reason is stored on the report as the decision; a resolved report answers 409 |
+| `POST /admin/api/players/{id}/reset-nickname` (reason + Idempotency-Key) | player.support | `support.reset_nickname`: back to a `Player…` placeholder, the player may choose again at once |
 | `GET /admin/api/audit?target=` | audit.read | no |
 | `GET /admin/api/liveops` (current config, last mail with claim counts) | service.read | no |
 | `POST /admin/api/liveops/config` (a new config revision) · `POST /admin/api/mail` · `POST /admin/api/mail/{id}/revoke` | liveops.write (operator) | `liveops.*`, same transaction |

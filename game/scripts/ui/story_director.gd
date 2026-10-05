@@ -21,6 +21,7 @@ const HUB_TEAM: String = "team"
 const HUB_INVENTORY: String = "inventory"
 const HUB_SUMMON: String = "summon"
 const HUB_QUESTS: String = "quests"
+const HUB_FRIENDS: String = "friends"
 const HUB_INN_MEAL: String = "inn_meal"
 const HUB_SETTINGS: String = "settings"
 const SETTINGS_SIGN_OUT: String = "sign_out"
@@ -204,6 +205,7 @@ func _present_hub(status: String = "") -> void:
 		{"id": HUB_INVENTORY, "label": "Inventory"},
 		{"id": HUB_SUMMON, "label": "Summon"},
 		{"id": HUB_QUESTS, "label": "Quests"},
+		{"id": HUB_FRIENDS, "label": "Friends"},
 		{"id": HUB_SETTINGS, "label": "Settings"},
 	]
 	var meal: int = flow.state.inn_meal_amount()
@@ -230,6 +232,8 @@ func _on_hub_chosen(entry_id: String) -> void:
 			_present_gacha()
 		HUB_QUESTS:
 			_present_quests()
+		HUB_FRIENDS:
+			_present_friends()
 		HUB_INN_MEAL:
 			_claim_inn_meal()
 		HUB_SETTINGS:
@@ -679,6 +683,81 @@ func _claim_quest(screen: QuestsScreen, kind: String, task_id: String, period: S
 	else:
 		status = _problem_text(result)
 	_present_quests(selected, status)
+
+
+# -- friends (INF-037) ---------------------------------------------------------------------------------------------
+
+const _FRIEND_DONE: Dictionary = {"add": "Friend request sent.", "accept": "Friend added.", "reject": "Request declined.",
+	"cancel": "Request cancelled.", "remove": "Friend removed.", "block": "Player blocked.", "report": "Report sent. Thank you."}
+
+
+## Everything comes from the server on every visit (requests arrive while the screen is closed).
+func _present_friends(selected: String = "", status: String = "") -> void:
+	_show_message("Friends", "Loading...")
+	var overview: Outcome = await flow.friends_overview()
+	if not overview.is_ok():
+		_present_hub("Friends could not be loaded: %s" % _problem_text(overview))
+		return
+	var screen: FriendsScreen = FriendsScreen.new()
+	screen.load_friends(overview.value, selected, status)
+	screen.action_requested.connect(func(action: String, account_id: String, argument: String) -> void: _friend_action(screen, overview.value, action, account_id, argument))
+	screen.rename_requested.connect(func(nickname: String) -> void: _change_profile(screen, {"nickname": nickname}, "Name changed."))
+	screen.presence_changed.connect(func(show_presence: bool) -> void:
+		_change_profile(screen, {"presence_opt_in": show_presence}, "Friends see when you are online." if show_presence else "Your online status is hidden."))
+	screen.blocked_requested.connect(func() -> void: _present_blocked())
+	screen.back_requested.connect(func() -> void: _present_hub())
+	shell.show_screen(screen)
+
+
+func _friend_action(screen: FriendsScreen, view: GameViews.FriendsView, action: String, account_id: String, argument: String) -> void:
+	var row: GameViews.FriendRow = null
+	for candidate: GameViews.FriendRow in view.rows:
+		if candidate.account_id == account_id:
+			row = candidate
+	if row == null and action != "add":
+		return
+	screen.set_busy(true)
+	var done: Outcome = await flow.friend_action(action, row, argument)
+	if shell.current != screen:
+		return
+	if not done.is_ok():
+		_present_friends(account_id, _friend_problem(done))
+		return
+	var text: String = str(_FRIEND_DONE.get(action, ""))
+	if action == "add" and done.value is Dictionary and str((done.value as Dictionary).get("relationship", "")) == "accepted":
+		text = "You are now friends: they had asked you first."
+	_present_friends("" if action in ["remove", "block", "reject", "cancel"] else account_id, text)
+
+
+func _change_profile(screen: FriendsScreen, changes: Dictionary, done_text: String) -> void:
+	screen.set_busy(true)
+	var done: Outcome = await flow.update_profile(changes)
+	if shell.current != screen:
+		return
+	_present_friends(screen.selected, done_text if done.is_ok() else _friend_problem(done))
+
+
+## The server's words for a refused social action (they say what to do); the generic line for anything else.
+func _friend_problem(outcome: Outcome) -> String:
+	if outcome.error_kind in ["not_found", "forbidden", "limit_reached", "nickname_taken", "rate_limited", "invalid_request"]:
+		return outcome.error
+	return _problem_text(outcome)
+
+
+func _present_blocked(status: String = "") -> void:
+	_show_message("Blocked players", "Loading...")
+	var listed: Outcome = await flow.blocked_players()
+	if not listed.is_ok():
+		_present_friends("", "Blocked players could not be loaded: %s" % _problem_text(listed))
+		return
+	var screen: BlockedScreen = BlockedScreen.new()
+	screen.load_blocked(listed.value, status)
+	screen.unblock_requested.connect(func(account_id: String) -> void:
+		var done: Outcome = await flow.unblock_player(account_id)
+		if shell.current == screen:
+			_present_blocked("Unblocked." if done.is_ok() else _friend_problem(done)))
+	screen.back_requested.connect(func() -> void: _present_friends())
+	shell.show_screen(screen)
 
 
 func _claim_inn_meal() -> void:

@@ -124,6 +124,30 @@ class QuestRow extends RefCounted:
 
 
 ## `2` for 2.0, `0.08` for 0.08: the way the content authors write a stat (JSON numbers all arrive as floats).
+## One player on the friends screen (INF-037): a friend, a request either way. Only public fields (no friend code).
+class FriendRow extends RefCounted:
+	var account_id: String = ""
+	var nickname: String = ""
+	var player_level: int = 1
+	## "online" | "offline" (offline also when the player hides their presence).
+	var presence: String = "offline"
+	## "accepted" | "pending_in" (they asked) | "pending_out" (the player asked).
+	var relationship: String = ""
+	var request_id: String = ""
+
+
+## The friends screen: the own profile line and the rows.
+class FriendsView extends RefCounted:
+	var friend_code: String = ""
+	var nickname: String = ""
+	var presence_opt_in: bool = true
+	## When the nickname may change again ("" = now).
+	var nickname_change_available_at: String = ""
+	var rows: Array[FriendRow] = []
+	var friend_count: int = 0
+	var friend_limit: int = 0
+
+
 static func number_text(value: Variant) -> String:
 	if value is float:
 		var number: float = value

@@ -41,6 +41,7 @@ import { currentRelease, packResponse, type ContentStore } from "./content";
 import { claimMail, currentLiveops, listMail } from "./liveops";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
 import { accountDeletionPage } from "./web";
+import * as social from "./social";
 
 export interface AppDeps {
   connect: Connect;
@@ -143,6 +144,13 @@ async function mutate(
     await bumpStateRevision(tx, accountId);
     return { ...extra, state: await snapshot(tx, accountId, nowUnix) };
   });
+  return json(response);
+}
+
+/** A social mutation (INF-037): authenticated, idempotent, one transaction; it changes no player state, so no snapshot. */
+async function socialChange<T>(context: Context, endpoint: string, fingerprint: string, action: (tx: Db, accountId: string) => Promise<T>): Promise<Response> {
+  const accountId = await requireAccount(context);
+  const { response } = await runIdempotent(context.db, idempotencyKey(context.request), accountId, endpoint, fingerprint, (tx) => action(tx, accountId));
   return json(response);
 }
 
@@ -255,8 +263,67 @@ function routes(deps: AppDeps): Record<string, Handler> {
       const accountId = await requireAccount(context);
       const created = await context.db.query<{ created_at: Date }>("SELECT created_at FROM account WHERE account_id = $1", [accountId]);
       if (!created.rows[0]) throw new ApiError(404, "ITEM_NOT_FOUND", "Account not found");
-      const profile = await ensureProfile(context.db, accountId);
+      await ensureProfile(context.db, accountId);
+      const profile = await social.ownProfile(context.db, accountId, new Date(clock() * 1000));
       return json({ account_id: accountId, created_at_utc: isoUtc(created.rows[0].created_at), ...profile });
+    },
+
+    // Social (INF-037, DEC-0037): the own profile, friends and requests, blocks, reports.
+    "POST /v1/profile": async (context) => {
+      const body = await readJsonObject(context.request);
+      return socialChange(context, "profile_update", JSON.stringify(body), (tx, accountId) => social.updateProfile(tx, accountId, body, new Date(clock() * 1000)));
+    },
+
+    "GET /v1/friends": async (context) => {
+      const accountId = await requireAccount(context);
+      await social.touchPresence(context.db, accountId);
+      const query = new URL(context.request.url).searchParams;
+      const limit = query.has("limit") ? Number(query.get("limit")) : 50;
+      return json(await social.listFriends(context.db, accountId, query.get("cursor"), limit, new Date(clock() * 1000)));
+    },
+
+    "POST /v1/friend-requests": async (context) => {
+      const code = social.normalizeFriendCode((await readJsonObject(context.request)).friend_code);
+      return socialChange(context, "friend_request", code, (tx, accountId) => social.sendFriendRequest(tx, accountId, code, new Date(clock() * 1000)));
+    },
+
+    "POST /v1/friend-requests/:request_id/accept": (context) => {
+      const requestId = social.requireRequestId(context.params.request_id);
+      return socialChange(context, "friend_accept", requestId, (tx, accountId) => social.acceptFriendRequest(tx, accountId, requestId, new Date(clock() * 1000)));
+    },
+
+    "POST /v1/friend-requests/:request_id/reject": (context) => {
+      const requestId = social.requireRequestId(context.params.request_id);
+      return socialChange(context, "friend_reject", requestId, (tx, accountId) => social.rejectFriendRequest(tx, accountId, requestId));
+    },
+
+    "POST /v1/friend-requests/:request_id/cancel": (context) => {
+      const requestId = social.requireRequestId(context.params.request_id);
+      return socialChange(context, "friend_cancel", requestId, (tx, accountId) => social.cancelFriendRequest(tx, accountId, requestId));
+    },
+
+    "POST /v1/friends/:account_id/remove": (context) => {
+      const other = social.requireAccountId(context.params.account_id);
+      return socialChange(context, "friend_remove", other, (tx, accountId) => social.removeFriend(tx, accountId, other));
+    },
+
+    "GET /v1/blocks": async (context) => json(await social.listBlocks(context.db, await requireAccount(context))),
+
+    "POST /v1/blocks": async (context) => {
+      const other = social.requireAccountId((await readJsonObject(context.request)).account_id);
+      return socialChange(context, "block", other, (tx, accountId) => social.blockAccount(tx, accountId, other));
+    },
+
+    "POST /v1/blocks/:account_id/remove": (context) => {
+      const other = social.requireAccountId(context.params.account_id);
+      return socialChange(context, "unblock", other, (tx, accountId) => social.unblockAccount(tx, accountId, other));
+    },
+
+    "POST /v1/reports": async (context) => {
+      const body = await readJsonObject(context.request);
+      const other = social.requireAccountId(body.account_id);
+      const reason = social.requireReason(body.reason_key);
+      return socialChange(context, "report", `${other}|${reason}`, (tx, accountId) => social.reportAccount(tx, accountId, other, reason));
     },
 
     "GET /v1/wallet": async (context) => {
@@ -268,6 +335,8 @@ function routes(deps: AppDeps): Record<string, Handler> {
 
     "GET /v1/state": async (context) => {
       const accountId = await requireAccount(context);
+      // The game reads the state on every launch and after a reconnect: the moment friends see the player online.
+      await social.touchPresence(context.db, accountId);
       return json(await consistentRead(context.db, (tx) => snapshot(tx, accountId, clock())));
     },
 

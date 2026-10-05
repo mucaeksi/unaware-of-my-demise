@@ -6,6 +6,7 @@
 // another site cannot trigger one with the operator's Access cookie.
 import type { AdminVerifier } from "./admin-auth";
 import { AdminAuthError } from "./admin-auth";
+import { randomHex } from "./crypto";
 import { consistentRead, transaction, type Connect, type Db } from "./db";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject } from "./http";
 import { setJournalContext } from "./journal";
@@ -243,6 +244,73 @@ function routes(deps: AdminDeps): Record<string, AdminHandler> {
       return audited(context, change, "support.revoke_sessions", accountId, async (tx) => {
         const revoked = await tx.query("DELETE FROM sessions WHERE account_id = $1", [accountId]);
         return { account_id: accountId, revoked_sessions: revoked.rowCount ?? 0 };
+      });
+    },
+
+    // Moderation (INF-037, DEC-0037): player reports, newest first (open ones by default); `before` = a report's
+    // created_at (ISO) to page from.
+    "GET /admin/api/reports": async ({ db, url, operator }) => {
+      requirePermission(operator, "player.read");
+      const status = url.searchParams.get("status") ?? "open";
+      if (status !== "open" && status !== "all") throw new ApiError(400, "INVALID_REQUEST", "status is open or all");
+      const before = url.searchParams.get("before");
+      const beforeDate = before === null ? null : new Date(before);
+      if (beforeDate !== null && Number.isNaN(beforeDate.getTime())) throw new ApiError(400, "INVALID_REQUEST", "before must be a timestamp");
+      const { rows } = await db.query(
+        `SELECT r.report_id, r.reason_key, r.created_at, r.resolved_at, r.resolved_by, r.resolution,
+                r.reporter_account_id, reporter.nickname AS reporter_nickname,
+                r.reported_account_id, reported.nickname AS reported_nickname, reported.friend_code AS reported_friend_code,
+                (SELECT count(*) FROM reports other WHERE other.reported_account_id = r.reported_account_id)::int AS reports_against_player
+         FROM reports r
+         LEFT JOIN profiles reporter ON reporter.account_id = r.reporter_account_id
+         LEFT JOIN profiles reported ON reported.account_id = r.reported_account_id
+         WHERE ($1 = 'all' OR r.resolved_at IS NULL) AND ($2::timestamptz IS NULL OR r.created_at < $2)
+         ORDER BY r.created_at DESC LIMIT ${PAGE}`,
+        [status, beforeDate],
+      );
+      await audit(db, deps, operator, { permission: "player.read", action: "read.reports", request: { status, before } });
+      return json({ reports: rows });
+    },
+
+    // A report has been looked at: who, when and what was decided (the reason) are kept on it and in the audit trail.
+    "POST /admin/api/reports/:report/resolve": async (context) => {
+      requirePermission(context.operator, "player.support");
+      const reportId = context.params.report!;
+      if (!/^report_[0-9a-f]{32}$/.test(reportId)) throw new ApiError(404, "HTTP_ERROR", "Not Found");
+      const change = await changeRequest(context);
+      const found = await context.db.query<{ reported_account_id: string; resolved_at: Date | null }>(
+        "SELECT reported_account_id, resolved_at FROM reports WHERE report_id = $1",
+        [reportId],
+      );
+      const report = found.rows[0];
+      if (!report) throw new ApiError(404, "NOT_FOUND", "No such report");
+      return audited(context, change, "support.resolve_report", report.reported_account_id, async (tx) => {
+        const updated = await tx.query(
+          "UPDATE reports SET resolved_at = now(), resolved_by = $2, resolution = $3 WHERE report_id = $1 AND resolved_at IS NULL",
+          [reportId, context.operator.email, change.reason],
+        );
+        if (updated.rowCount !== 1) throw new ApiError(409, "CONFLICT", "The report was already resolved");
+        return { report_id: reportId, resolved: true };
+      });
+    },
+
+    // An inappropriate nickname goes back to a placeholder; the player may choose a new one at once.
+    "POST /admin/api/players/:account/reset-nickname": async (context) => {
+      requirePermission(context.operator, "player.support");
+      const accountId = accountParam(context);
+      const change = await changeRequest(context);
+      await requireAccountExists(context.db, accountId);
+      return audited(context, change, "support.reset_nickname", accountId, async (tx) => {
+        const before = (await tx.query<{ nickname: string }>("SELECT nickname FROM profiles WHERE account_id = $1 FOR UPDATE", [accountId])).rows[0];
+        if (!before) throw new ApiError(404, "NOT_FOUND", "The player has no profile");
+        for (let attempt = 0; attempt < 5; attempt++) {
+          const placeholder = `Player${randomHex(3).toUpperCase()}`;
+          const taken = await tx.query("SELECT 1 FROM profiles WHERE lower(nickname) = lower($1)", [placeholder]);
+          if (taken.rowCount !== 0) continue;
+          await tx.query("UPDATE profiles SET nickname = $2, nickname_changed_at = NULL, updated_at = now() WHERE account_id = $1", [accountId, placeholder]);
+          return { account_id: accountId, previous_nickname: before.nickname, nickname: placeholder };
+        }
+        throw new Error("no free placeholder nickname after 5 attempts");
       });
     },
 

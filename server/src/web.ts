@@ -68,7 +68,8 @@ export function accountDeletionPage(webClientId: string | null): Response {
   <h2>What is deleted</h2>
   <ul>
     <li>Your game account and everything in it: characters, items, currencies, story and stage progress, quest and mail
-      claims, pull history, and your signed-in sessions on every device.</li>
+      claims, pull history, your name, friends, friend requests, blocks and reports, and your signed-in sessions on
+      every device.</li>
     <li>The link between your Google account and the game. The game never stores your Google e-mail address or name.</li>
   </ul>
   <h2>What is kept</h2>

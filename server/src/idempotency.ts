@@ -33,7 +33,10 @@ export async function runIdempotent<T>(
 ): Promise<{ response: T; replayed: boolean }> {
   try {
     return await transaction(db, async (tx) => {
-      await tx.query("SELECT 1 FROM account WHERE account_id = $1 FOR UPDATE", [accountId]);
+      // Serializes the account's mutations. NO KEY UPDATE (not UPDATE): another account's transaction that references
+      // this one through a foreign key (a friend request, a report: KEY SHARE) is not blocked by it, so two players
+      // acting on each other at once cannot deadlock (DEC-0037). Deleting the account still waits (FOR UPDATE).
+      await tx.query("SELECT 1 FROM account WHERE account_id = $1 FOR NO KEY UPDATE", [accountId]);
       const existing = await tx.query<{ account_id: string; endpoint: string; request_fingerprint: string; response_json: T | null }>(
         "SELECT account_id, endpoint, request_fingerprint, response_json FROM idempotency_keys WHERE idempotency_key = $1",
         [key],

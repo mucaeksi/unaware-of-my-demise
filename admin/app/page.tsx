@@ -6,7 +6,7 @@
 // Idempotency-Key, and the API writes the audit row in the same transaction as the change.
 import { FormEvent, useEffect, useState } from "react";
 
-type Tab = "service" | "player" | "liveops" | "audit";
+type Tab = "service" | "player" | "reports" | "liveops" | "audit";
 type Me = { email: string; role: "viewer" | "support" | "operator"; permissions: string[] };
 type Row = Record<string, unknown>;
 
@@ -75,6 +75,9 @@ export default function AdminPage() {
     '{\n  "title_en": "",\n  "body_en": "",\n  "rewards": {},\n  "starts_at_utc": "2026-01-01T00:00:00Z",\n  "expires_at_utc": "2026-01-08T00:00:00Z"\n}',
   );
   const [liveopsReason, setLiveopsReason] = useState("");
+  const [reports, setReports] = useState<Row[]>([]);
+  const [reportsStatus, setReportsStatus] = useState<"open" | "all">("open");
+  const [resolveReason, setResolveReason] = useState("");
 
   const run = async (work: () => Promise<void>) => {
     setError("");
@@ -117,6 +120,27 @@ export default function AdminPage() {
       setReason("");
     });
   };
+
+  const resetNickname = () =>
+    void run(async () => {
+      const done = await change<{ nickname: string; previous_nickname: string }>(`/admin/api/players/${accountId}/reset-nickname`, reason);
+      setNotice(`Nickname "${done.previous_nickname}" reset to ${done.nickname}.`);
+      setReason("");
+    });
+
+  const loadReports = (status: "open" | "all" = reportsStatus) =>
+    void run(async () => {
+      setReportsStatus(status);
+      setReports((await api<{ reports: Row[] }>(`/admin/api/reports?status=${status}`)).reports);
+    });
+
+  const resolveReport = (reportId: string) =>
+    void run(async () => {
+      await change(`/admin/api/reports/${reportId}/resolve`, resolveReason);
+      setNotice(`Report ${reportId} resolved.`);
+      setResolveReason("");
+      setReports((await api<{ reports: Row[] }>(`/admin/api/reports?status=${reportsStatus}`)).reports);
+    });
 
   const loadLiveops = () =>
     void run(async () => {
@@ -171,6 +195,7 @@ export default function AdminPage() {
         <nav>
           <button className={`navItem ${tab === "service" ? "active" : ""}`} onClick={() => setTab("service")}>Service</button>
           <button className={`navItem ${tab === "player" ? "active" : ""}`} onClick={() => setTab("player")}>Player</button>
+          <button className={`navItem ${tab === "reports" ? "active" : ""}`} onClick={() => { setTab("reports"); loadReports(); }}>Reports</button>
           <button className={`navItem ${tab === "liveops" ? "active" : ""}`} onClick={() => { setTab("liveops"); loadLiveops(); }}>Live ops</button>
           {can("audit.read") && <button className={`navItem ${tab === "audit" ? "active" : ""}`} onClick={() => { setTab("audit"); loadAudit(); }}>Audit</button>}
         </nav>
@@ -198,6 +223,7 @@ export default function AdminPage() {
                   <h2>Sign the player out everywhere</h2>
                   <input value={reason} onChange={(event) => setReason(event.target.value)} placeholder="Reason (ticket, what happened)" />
                   <button className="danger ghost" type="submit" disabled={reason.trim().length < 5}>Revoke sessions</button>
+                  <button className="ghost" type="button" onClick={resetNickname} disabled={reason.trim().length < 5}>Reset nickname</button>
                 </form>
               )}
             </section>
@@ -226,6 +252,33 @@ export default function AdminPage() {
               </section>
             )}
           </div>
+        )}
+        {tab === "reports" && (
+          <section className="panel full">
+            <div className="panelHead">
+              <h2>Player reports ({reportsStatus})</h2>
+              <button className="ghost" onClick={() => loadReports(reportsStatus === "open" ? "all" : "open")}>Show {reportsStatus === "open" ? "all" : "open"}</button>
+            </div>
+            <p className="muted">Look up the reported player in the Player tab (friend code or account id) before deciding. Resolving records your reason.</p>
+            {can("player.support") && <input value={resolveReason} onChange={(event) => setResolveReason(event.target.value)} placeholder="Decision (what you did and why)" />}
+            {reports.length === 0 ? <p className="muted">Nothing recorded.</p> : (
+              <div className="scrollTable">
+                <table>
+                  <thead>
+                    <tr>{["created_at", "reason_key", "reported_nickname", "reported_friend_code", "reports_against_player", "reporter_nickname", "resolution", ""].map((column) => <th key={column}>{column}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {reports.map((row) => (
+                      <tr key={String(row.report_id)}>
+                        {["created_at", "reason_key", "reported_nickname", "reported_friend_code", "reports_against_player", "reporter_nickname", "resolution"].map((column) => <td key={column}><code>{String(row[column] ?? "")}</code></td>)}
+                        <td>{row.resolved_at === null && can("player.support") && <button className="ghost" disabled={resolveReason.trim().length < 5} onClick={() => resolveReport(String(row.report_id))}>Resolve</button>}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
         )}
         {tab === "liveops" && (
           <div className="panelGrid">
