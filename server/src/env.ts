@@ -14,6 +14,8 @@ export interface Env {
   CONTENT?: R2Bucket;
   /** The content channel this deployment serves (production, staging); empty = production. */
   CONTENT_CHANNEL?: string;
+  /** Comma-separated AdMob rewarded ad unit ids whose SSV callbacks pay (INF-036); empty = rewarded ads answer 503. */
+  ADMOB_AD_UNIT_IDS?: string;
   AUTH_LIMITER?: RateLimit;
   API_LIMITER?: RateLimit;
 }

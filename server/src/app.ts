@@ -42,6 +42,7 @@ import { claimMail, currentLiveops, listMail } from "./liveops";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
 import { accountDeletionPage } from "./web";
 import * as social from "./social";
+import { adStatus, grantVerifiedAd, verifySsv, type AdmobKeys } from "./ads";
 
 export interface AppDeps {
   connect: Connect;
@@ -67,6 +68,10 @@ export interface AppDeps {
   contentChannel?: string;
   /** The Web OAuth client the public deletion page signs in with (the first GOOGLE_CLIENT_IDS entry); null = none. */
   webClientId?: string | null;
+  /** Google's AdMob verifier keys (INF-036); null/absent = rewarded ads answer 503. */
+  admobKeys?: AdmobKeys | null;
+  /** Our rewarded ad units (ADMOB_AD_UNIT_IDS): a callback for any other unit is refused; empty = ads answer 503. */
+  admobAdUnits?: string[];
 }
 
 /**
@@ -306,6 +311,24 @@ function routes(deps: AppDeps): Record<string, Handler> {
       const other = social.requireAccountId(context.params.account_id);
       return socialChange(context, "friend_remove", other, (tx, accountId) => social.removeFriend(tx, accountId, other));
     },
+
+    // Rewarded ads (INF-036, DEC-0038): AdMob calls this after a completed ad (not the app). Only our ad units count:
+    // AdMob signs every publisher's callbacks, so without that check another app could pay our players.
+    "GET /v1/ads/ssv": async ({ request, db }) => {
+      const units = deps.admobAdUnits ?? [];
+      if (!deps.admobKeys || units.length === 0) throw new ApiError(503, "SERVICE_UNAVAILABLE", "Rewarded ads are not configured");
+      const params = await verifySsv(new URL(request.url).search.slice(1), deps.admobKeys);
+      if (!units.includes(params.ad_unit ?? "")) throw new ApiError(400, "INVALID_REQUEST", "Unexpected ad unit");
+      const accountId = params.user_id ?? "";
+      const transactionId = params.transaction_id ?? "";
+      if (!/^acct_[0-9a-f]{32}$/.test(accountId) || !/^[A-Za-z0-9_-]{1,128}$/.test(transactionId)) {
+        throw new ApiError(400, "INVALID_REQUEST", "user_id and transaction_id are required");
+      }
+      if ((await db.query("SELECT 1 FROM account WHERE account_id = $1", [accountId])).rowCount !== 1) throw new ApiError(404, "NOT_FOUND", "Unknown account");
+      return json(await transaction(db, (tx) => grantVerifiedAd(tx, accountId, transactionId, clock())));
+    },
+
+    "GET /v1/ads/status": async (context) => json(await adStatus(context.db, await requireAccount(context), clock())),
 
     "GET /v1/blocks": async (context) => json(await social.listBlocks(context.db, await requireAccount(context))),
 
@@ -554,7 +577,7 @@ const clientKey = (request: Request): string => request.headers.get("cf-connecti
  * Routes that answer whatever the client version or maintenance state: liveness, the bootstrap that reports both, and
  * the public deletion page (a store requirement, readable during maintenance too).
  */
-const UNGATED = new Set(["GET /healthz", "GET /v1/bootstrap", "GET /account/delete"]);
+const UNGATED = new Set(["GET /healthz", "GET /v1/bootstrap", "GET /account/delete", "GET /v1/ads/ssv"]);
 /** Routes that read no database, so they answer during a database outage too (the bootstrap carries the maintenance notice). */
 const NO_DATABASE = new Set(["GET /v1/bootstrap", "GET /account/delete"]);
 const noDatabase: Db = {
@@ -574,7 +597,8 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
       return { response: errorResponse(new ApiError(known ? 405 : 404, "HTTP_ERROR", known ? "Method Not Allowed" : "Not Found")), route: "unmatched" };
     }
     const answer = (response: Response) => ({ response, route: route.route });
-    if (url.pathname !== "/healthz") {
+    // Liveness and Google's own callbacks (signed; from Google's addresses, many players behind each) skip the IP budget.
+    if (url.pathname !== "/healthz" && url.pathname !== "/v1/ads/ssv") {
       // Sign-in and the web deletion (both verify a Google token) share the tighter sign-in budget.
       const limiter = url.pathname.startsWith("/v1/auth/") || url.pathname === "/account/delete" ? deps.authLimiter : deps.apiLimiter;
       if (limiter && !(await limiter.limit({ key: clientKey(request) })).success) {

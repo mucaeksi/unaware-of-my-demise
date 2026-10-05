@@ -9,8 +9,11 @@ import { parseReleaseConfig } from "./release";
 import { CHANNELS } from "./content";
 import { runRetention } from "./retention";
 import { engineSimulate } from "./stages";
+import { HttpAdmobKeys } from "./ads";
 
 let verifierFor: { audiences: string; verifier: IdentityVerifier | null } | null = null;
+/** Google's AdMob verifier keys, kept per isolate (fetched on the first callback). */
+const admobKeys = new HttpAdmobKeys();
 
 /** One verifier per isolate and configuration, so Google's signing keys stay cached between requests. */
 function verifier(env: Env): IdentityVerifier | null {
@@ -47,6 +50,8 @@ export default {
       contentChannel: contentChannel(env.CONTENT_CHANNEL),
       // GOOGLE_CLIENT_IDS holds the Web OAuth client id (docs/GITHUB_SECRETS.md): the deletion page signs in with it.
       webClientId: (env.GOOGLE_CLIENT_IDS ?? "").split(",").map((id) => id.trim()).find(Boolean) ?? null,
+      admobKeys,
+      admobAdUnits: (env.ADMOB_AD_UNIT_IDS ?? "").split(",").map((id) => id.trim()).filter(Boolean),
     });
     return app(request);
   },
