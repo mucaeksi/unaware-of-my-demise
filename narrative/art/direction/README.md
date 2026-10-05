@@ -18,4 +18,3 @@ Kaydedilen preview'lar gerçek Godot viewport capture'larıdır; artwork üstün
 | [Geniş portrait butonlar](previews/components_600x900.png) | 600×900 |
 
 Kullanıcının özgün stil ekinin byte/hash'i mevcut değil; bu dizindeki PNG'ler yeni üretimdir. Eski kilitli sheet/pack orijinalleri korunur. Yeni üretimler onaysız adaydır; nihai Fadyme ve diğer paketler çalışma sırasıyla devam edecek.
-
