@@ -207,8 +207,9 @@ jobs:
           # Adds missing operators only; never changes or removes an existing admin user (that is an audited admin action).
           for email in $(printf '%s' "${ADMIN_OPERATOR_EMAILS}" | tr ',' ' ' | tr '[:upper:]' '[:lower:]'); do
             printf '%s' "${email}" | grep -Eq '^[^@[:space:]]+@[^@[:space:]]+$' || { echo "::error::ADMIN_OPERATOR_EMAILS has an invalid entry"; exit 1; }
-            psql "${DATABASE_URL}" -X -q -v ON_ERROR_STOP=1 -v email="${email}" -v added_by="${ADDED_BY}" \
-              -c "INSERT INTO admin_users (email, role, added_by) VALUES (:'email', 'operator', :'added_by') ON CONFLICT (email) DO NOTHING"
+            # psql expands :'variables' (quoted as literals) only in SQL it reads, never in -c: the statement goes in on stdin.
+            printf '%s\n' "INSERT INTO admin_users (email, role, added_by) VALUES (:'email', 'operator', :'added_by') ON CONFLICT (email) DO NOTHING;" \
+              | psql "${DATABASE_URL}" -X -q -v ON_ERROR_STOP=1 -v email="${email}" -v added_by="${ADDED_BY}"
           done
           echo "operators registered: $(psql "${DATABASE_URL}" -X -At -c "SELECT count(*) FROM admin_users WHERE disabled_at IS NULL")"
       - name: Deploy the admin Worker
