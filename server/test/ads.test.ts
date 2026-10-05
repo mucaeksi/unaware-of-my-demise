@@ -76,25 +76,32 @@ describe("GET /v1/ads/ssv", () => {
     const before = await tokens(accountId);
     const revision = Number((await database.pool.query("SELECT state_revision FROM account WHERE account_id = $1", [accountId])).rows[0].state_revision);
     const query = await callback({ transaction_id: `tx${++counter}`, user_id: accountId });
-    expect(await ssv(query)).toEqual({ status: 200, body: { granted: true, reason: "granted", eclipse_tokens: 30 } });
-    expect(await tokens(accountId)).toBe(before + 30);
+    expect(await ssv(query), "the first view of a window pays 10").toEqual({ status: 200, body: { granted: true, reason: "granted", eclipse_tokens: 10 } });
+    expect(await tokens(accountId)).toBe(before + 10);
     expect(await ssv(query), "AdMob retries the same callback").toEqual({ status: 200, body: { granted: false, reason: "duplicate", eclipse_tokens: 0 } });
-    expect(await tokens(accountId)).toBe(before + 30);
+    expect(await tokens(accountId)).toBe(before + 10);
     const journal = (await database.pool.query("SELECT endpoint, delta::int FROM economy_journal WHERE account_id = $1 AND resource_id = 'eclipse_tokens' ORDER BY entry_id DESC LIMIT 1", [accountId])).rows[0];
-    expect(journal).toEqual({ endpoint: "ad_reward", delta: 30 });
+    expect(journal).toEqual({ endpoint: "ad_reward", delta: 10 });
     expect(Number((await database.pool.query("SELECT state_revision FROM account WHERE account_id = $1", [accountId])).rows[0].state_revision)).toBe(revision + 1);
   });
 
-  it("keeps to 4 views per half-day window and 8 per UTC day", async () => {
+  it("pays 10, 20, 30, 40, 50 for the views of a half-day window, at most 5 per window and 10 per UTC day", async () => {
     const { accountId, token } = await player();
     const view = async () => (await ssv(await callback({ transaction_id: `tx${++counter}`, user_id: accountId }))).body;
-    for (let index = 0; index < 4; index++) expect((await view()).granted).toBe(true);
-    expect(await view()).toEqual({ granted: false, reason: "cap", eclipse_tokens: 0 });
-    now += 12 * 3600;
-    for (let index = 0; index < 4; index++) expect((await view()).granted).toBe(true);
     const status = async (deps: Partial<Parameters<typeof createApp>[0]> = {}) =>
       (await (await app(deps)(new Request("https://api.test/v1/ads/status", { headers: { authorization: `Bearer ${token}` } }))).json()) as Record<string, unknown>;
-    expect(await status()).toEqual({ window_views: 4, window_cap: 4, day_views: 8, day_cap: 8, reward_eclipse_tokens: 30, ad_unit_id: AD_UNIT });
+    const before = await tokens(accountId);
+    expect((await status()).reward_eclipse_tokens, "the next view's reward is shown before an ad").toBe(10);
+    const paid: unknown[] = [];
+    for (let index = 0; index < 5; index++) paid.push((await view()).eclipse_tokens);
+    expect(paid).toEqual([10, 20, 30, 40, 50]);
+    expect(await tokens(accountId), "150 per window, as 5 × 30").toBe(before + 150);
+    expect(await view()).toEqual({ granted: false, reason: "cap", eclipse_tokens: 0 });
+    expect((await status()).reward_eclipse_tokens, "nothing more to earn in this window").toBe(0);
+    now += 12 * 3600;
+    expect((await status()).reward_eclipse_tokens, "a new window starts at 10 again").toBe(10);
+    for (let index = 0; index < 5; index++) expect((await view()).granted).toBe(true);
+    expect(await status()).toEqual({ window_views: 5, window_cap: 5, day_views: 10, day_cap: 10, reward_eclipse_tokens: 0, ad_unit_id: AD_UNIT });
     expect((await status({ admobAdUnits: [] })).ad_unit_id, "no unit: the app offers no ad").toBeNull();
     expect((await status({ admobKeys: null })).ad_unit_id).toBeNull();
     now += 12 * 3600;

@@ -723,3 +723,19 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
 - D-19: the game launches in English. Other languages arrive later through content patches.
 - Deferred until the release: D-03 (Neon branch protection needs a paid plan) and D-12 (Workers Paid).
 - Partly done: D-13 and D-17, with progress in OWNER_DECISIONS. D-18: AdMob account pending, plus the reward question.
+
+## DEC-0043 — Rewarded ads: five per half-day window, rewards rising from 10 to 50
+- Status: ACCEPTED (2026-10-05, owner decision D-18; numbers may be tuned later).
+- At most 5 rewarded ads per half-day window and 10 per UTC day; before this it was 4 and 8.
+- Rewards: the n-th view of a window pays 10, 20, 30, 40 and 50 Eclipse Tokens, 150 per window. That equals 5 × 30
+  but rewards watching the whole series.
+  - Data: `rewarded_ads.reward_token_by_view` replaces `reward_token`.
+  - `GET /v1/ads/status` reports what the next view pays (0 at a cap); the app shows it on the button.
+- Economy, recomputed in `economy_part1.json`:
+  - window maximum 270 tokens (was 240);
+  - daily maximum from ads 300, from all sources 540;
+  - 15-day free-to-play reference 9,700 tokens / 60 pulls (was 8,800 / 55); the owner accepted 60;
+  - hard pity reached in about 20 days of full play (was 22).
+- `tools/validate_part1_content.py` checks that these numbers stay consistent with one another.
+- Still waiting on the subscription tier design (D-17): subscribers watch one ad and skip; the highest tier gets the
+  ad rewards without watching.

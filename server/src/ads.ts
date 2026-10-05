@@ -1,8 +1,9 @@
 // Rewarded ads through Google AdMob server-side verification (INF-036, owner decision D-10, DEC-0038; LEGACY Drive
 // server/ads.py). The device never grants an ad reward: after a completed ad, AdMob calls GET /v1/ads/ssv with a signed
 // query string; the Worker checks the ECDSA-SHA256 signature against Google's published verifier keys, then pays
-// `rewarded_ads.reward_token` Eclipse Tokens once per AdMob transaction id, within the authored caps (economy_part1.json:
-// `rewarded_ads.per_window_cap` per 12-hour window, `daily_schedule.maximum_per_utc_day.rewarded_ads` per UTC day).
+// once per AdMob transaction id, within the authored caps (economy_part1.json: `rewarded_ads.per_window_cap` per 12-hour
+// window, `daily_schedule.maximum_per_utc_day.rewarded_ads` per UTC day). The n-th view of a window pays
+// `rewarded_ads.reward_token_by_view[n-1]` Eclipse Tokens (owner decision 2026-10-05: 10, 20, 30, 40, 50).
 //
 // Signature (AdMob documentation): the signed message is the raw query string up to, not including, "&signature=";
 // `signature` is URL-safe base64 of a DER ECDSA signature; `key_id` names the public key (base64 DER SPKI, P-256).
@@ -122,10 +123,13 @@ export async function verifySsv(rawQuery: string, keys: AdmobKeys): Promise<Reco
 }
 
 const RULES = {
-  token: Number(economy.rewarded_ads.reward_token),
+  byView: (economy.rewarded_ads.reward_token_by_view as number[]).map(Number),
   perWindow: Number(economy.rewarded_ads.per_window_cap),
   perDay: Number(economy.daily_schedule.maximum_per_utc_day.rewarded_ads),
 };
+
+/** What the next view of a window pays (0 once the window's cap is reached). */
+const rewardForView = (viewsInWindow: number): number => (viewsInWindow < RULES.perWindow ? (RULES.byView[viewsInWindow] ?? 0) : 0);
 
 async function counts(db: Db, accountId: string, nowUnix: number): Promise<{ window: number; day: number }> {
   const windowStart = new Date(halfDayWindow(nowUnix).cycle_id * 43_200 * 1000);
@@ -137,10 +141,11 @@ async function counts(db: Db, accountId: string, nowUnix: number): Promise<{ win
   return { window: Number(rows[0]!.window), day: Number(rows[0]!.day) };
 }
 
-/** How many ads the account may still watch for a reward now (the client shows it before offering one). */
+/** How many ads the account may still watch for a reward now and what the next one pays (shown before offering one). */
 export async function adStatus(db: Db, accountId: string, nowUnix: number): Promise<Record<string, number>> {
   const seen = await counts(db, accountId, nowUnix);
-  return { window_views: seen.window, window_cap: RULES.perWindow, day_views: seen.day, day_cap: RULES.perDay, reward_eclipse_tokens: RULES.token };
+  const open = seen.window < RULES.perWindow && seen.day < RULES.perDay;
+  return { window_views: seen.window, window_cap: RULES.perWindow, day_views: seen.day, day_cap: RULES.perDay, reward_eclipse_tokens: open ? rewardForView(seen.window) : 0 };
 }
 
 /**
@@ -155,14 +160,15 @@ export async function grantVerifiedAd(tx: Db, accountId: string, transactionId: 
   }
   const seen = await counts(tx, accountId, nowUnix);
   if (seen.window >= RULES.perWindow || seen.day >= RULES.perDay) return { granted: false, reason: "cap", eclipse_tokens: 0 };
+  const tokens = rewardForView(seen.window);
   await setJournalContext(tx, null, "ad_reward");
-  await tx.query("UPDATE wallet SET eclipse_tokens = eclipse_tokens + $2 WHERE account_id = $1", [accountId, RULES.token]);
+  await tx.query("UPDATE wallet SET eclipse_tokens = eclipse_tokens + $2 WHERE account_id = $1", [accountId, tokens]);
   await tx.query("INSERT INTO ad_rewards (transaction_id, account_id, granted_at, tokens) VALUES ($1, $2, $3, $4)", [
     transactionId,
     accountId,
     new Date(nowUnix * 1000),
-    RULES.token,
+    tokens,
   ]);
   await bumpStateRevision(tx, accountId);
-  return { granted: true, reason: "granted", eclipse_tokens: RULES.token };
+  return { granted: true, reason: "granted", eclipse_tokens: tokens };
 }

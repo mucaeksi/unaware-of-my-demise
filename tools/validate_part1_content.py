@@ -644,8 +644,26 @@ def main(content_dir: Path = CONTENT) -> int:
             require(min(p_five, p_four, p_three) >= 0 and abs(p_five + p_four + p_three - 1.0) < 1e-9, f"{banner_kind} banner rarity probabilities are invalid on pull {pull_number}")
     f2p = economy.get("f2p_reference", {})
     expected_tokens = f2p.get("daily_windows", 0) * economy.get("daily_schedule", {}).get("maximum_per_window", {}).get("eclipse_token", 0) + f2p.get("complete_week_count", 0) * economy.get("weekly_cycle", {}).get("full_week", {}).get("eclipse_token", 0)
-    require(expected_tokens == f2p.get("total_tokens") == 8800, "15-day repeatable F2P token total must be 8,800")
-    require(f2p.get("pull_equivalent") == expected_tokens // 160 == 55, "15-day repeatable F2P pull total must be 55")
+    # Owner decision 2026-10-05: five rewarded ads per half-day window paying 10, 20, 30, 40 and 50 Eclipse Tokens.
+    require(expected_tokens == f2p.get("total_tokens") == 9700, "15-day repeatable F2P token total must be 9,700")
+    require(f2p.get("pull_equivalent") == expected_tokens // 160 == 60, "15-day repeatable F2P pull total must be 60")
+    ads = economy.get("rewarded_ads", {})
+    by_view = ads.get("reward_token_by_view", [])
+    require(isinstance(by_view, list) and len(by_view) == ads.get("per_window_cap") and all(isinstance(t, int) and t > 0 for t in by_view),
+            "rewarded_ads.reward_token_by_view must pay a positive whole amount for each view up to per_window_cap")
+    ad_task = next((t for t in economy["daily_schedule"]["tasks"] if t.get("objective", {}).get("type") == "verified_rewarded_ad"), {})
+    require(ad_task.get("eclipse_token_by_view") == by_view and ad_task.get("eclipse_token_max") == sum(by_view)
+            and ad_task.get("objective", {}).get("max_per_window") == ads.get("per_window_cap"),
+            "the rewarded-ad daily task must describe the same views, rewards and cap as rewarded_ads")
+    windows_per_day = len(economy["daily_schedule"].get("reset_hours_utc", []))
+    day = economy["daily_schedule"]["maximum_per_utc_day"]
+    require(day.get("rewarded_ads") == windows_per_day * ads.get("per_window_cap", 0) and day.get("eclipse_token_from_ads") == windows_per_day * sum(by_view),
+            "maximum_per_utc_day must match the per-window ad cap and rewards")
+    window_tokens = sum(t.get("eclipse_token", 0) for t in economy["daily_schedule"]["tasks"]) + ad_task.get("eclipse_token_max", 0)
+    require(economy["daily_schedule"]["maximum_per_window"].get("eclipse_token") == window_tokens,
+            "maximum_per_window.eclipse_token must be the window's task tokens plus the ad maximum")
+    require(day.get("eclipse_token_all_sources") == windows_per_day * window_tokens, "eclipse_token_all_sources must be two full windows")
+    require(f2p.get("daily_max_tokens") == f2p.get("daily_windows", 0) * window_tokens, "f2p_reference.daily_max_tokens must be daily_windows full windows")
     subscription = economy.get("subscription", {})
     expected_subscription = subscription.get("instant_eclipse_token", 0) + subscription.get("halfday_entitlement_token", 0) * subscription.get("halfday_entitlement_count", 0)
     require(expected_subscription == subscription.get("expected_total_eclipse_token") == 12820, "30-day subscription token total must be 12,820")

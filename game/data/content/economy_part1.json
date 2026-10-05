@@ -69,11 +69,10 @@
         "id": "watch_rewarded_memory",
         "objective": {
           "type": "verified_rewarded_ad",
-          "per_view": 30,
-          "max_per_window": 4
+          "max_per_window": 5
         },
-        "eclipse_token_per_view": 30,
-        "eclipse_token_max": 120,
+        "eclipse_token_by_view": [10, 20, 30, 40, 50],
+        "eclipse_token_max": 150,
         "extra_completion_reward": 0
       }
     ],
@@ -88,15 +87,15 @@
       "account_xp": 400
     },
     "maximum_per_window": {
-      "eclipse_token": 240,
+      "eclipse_token": 270,
       "character_xp": 4000,
       "silver_crown": 28000,
       "account_xp": 400
     },
     "maximum_per_utc_day": {
-      "rewarded_ads": 8,
-      "eclipse_token_from_ads": 240,
-      "eclipse_token_all_sources": 480
+      "rewarded_ads": 10,
+      "eclipse_token_from_ads": 300,
+      "eclipse_token_all_sources": 540
     }
   },
   "weekly_cycle": {
@@ -155,8 +154,8 @@
   },
   "rewarded_ads": {
     "provider": "google_mobile_ads",
-    "per_window_cap": 4,
-    "reward_token": 30,
+    "per_window_cap": 5,
+    "reward_token_by_view": [10, 20, 30, 40, 50],
     "server_side_verification_recommended": true,
     "grant_idempotency_key": "provider_transaction_id"
   },
@@ -355,13 +354,13 @@
   "f2p_reference": {
     "period_days": 15,
     "daily_windows": 30,
-    "daily_max_tokens": 7200,
+    "daily_max_tokens": 8100,
     "complete_week_count": 2,
     "weekly_cycle_tokens": 1600,
-    "total_tokens": 8800,
-    "pull_equivalent": 55,
-    "full_completion_hard_pity_days": 22,
-    "note": "Excludes one-time story, achievement, event launch and maintenance rewards; assumes four ads per half-day window.",
+    "total_tokens": 9700,
+    "pull_equivalent": 60,
+    "full_completion_hard_pity_days": 20,
+    "note": "Excludes one-time story, achievement, event launch and maintenance rewards; assumes five ads per half-day window (10, 20, 30, 40 and 50 Eclipse Tokens; owner decision 2026-10-05).",
     "character_xp": 140000,
     "silver_crowns": 956000,
     "account_xp_from_daily_and_story": 13300
