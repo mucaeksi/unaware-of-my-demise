@@ -47,6 +47,9 @@ Uploading to Play from CI (a service account) is not set up; the AAB is uploaded
 | `CONTENT_SIGNING_KEY` | secret | PEM private key that signs content manifests (D-09) |
 | `ADMIN_ACCESS_TEAM_DOMAIN`, `ADMIN_ACCESS_AUD` | variables | Cloudflare Access team domain and application audience of the admin Worker (D-11) |
 | `ADMIN_OPERATOR_EMAILS` | variable | operators the deploy registers (adds only) |
+| `GOOGLE_PLAY_SERVICE_ACCOUNT` | secret | JSON key of the Google Cloud service account that reads purchases (Play Console: "View financial data", "Manage orders and subscriptions"); `deploy.yml` uploads it as a Worker secret. Without it purchases answer 503 (D-17, DEC-0038) |
+| `RTDN_AUDIENCE`, `RTDN_PUSH_SERVICE_ACCOUNT` | variables | audience and service-account e-mail of the Pub/Sub push subscription that delivers Play's developer notifications to `/v1/billing/rtdn` (D-17) |
+| `ADMOB_AD_UNIT_IDS` | variable | comma-separated AdMob rewarded ad unit ids whose server-side verification callbacks pay (D-18); without it `/v1/ads/ssv` answers 503 |
 
 ## Gemini
 

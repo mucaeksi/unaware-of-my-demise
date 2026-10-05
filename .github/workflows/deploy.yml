@@ -52,6 +52,11 @@ jobs:
       ADMIN_ACCESS_TEAM_DOMAIN: ${{ vars.ADMIN_ACCESS_TEAM_DOMAIN }}
       ADMIN_ACCESS_AUD: ${{ vars.ADMIN_ACCESS_AUD }}
       ADMIN_OPERATOR_EMAILS: ${{ vars.ADMIN_OPERATOR_EMAILS }}
+      # Billing and rewarded ads (INF-036, DEC-0038; owner decisions D-17/D-18): each part answers 503 until it is set.
+      GOOGLE_PLAY_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+      RTDN_AUDIENCE: ${{ vars.RTDN_AUDIENCE }}
+      RTDN_PUSH_SERVICE_ACCOUNT: ${{ vars.RTDN_PUSH_SERVICE_ACCOUNT }}
+      ADMOB_AD_UNIT_IDS: ${{ vars.ADMOB_AD_UNIT_IDS }}
       # The commit this run deploys; the Worker reports it as source_sha.
       SOURCE_SHA: ${{ github.event.workflow_run.head_sha || inputs.source_sha || github.sha }}
       DEPLOY_REASON: ${{ inputs.reason }}
@@ -154,7 +159,18 @@ jobs:
           if [ "${{ steps.config.outputs.signin }}" = "true" ]; then
             args+=(--var "GOOGLE_CLIENT_IDS:$(printf '%s' "${GOOGLE_CLIENT_IDS}" | tr -d '[:space:]')")
           fi
+          for name in ADMOB_AD_UNIT_IDS RTDN_AUDIENCE RTDN_PUSH_SERVICE_ACCOUNT; do
+            value="$(printf '%s' "${!name}" | tr -d '[:space:]')"
+            if [ -n "${value}" ]; then args+=(--var "${name}:${value}"); else echo "::notice::${name} is not set (D-17/D-18): that part of billing/ads answers 503"; fi
+          done
           npx wrangler deploy "${args[@]}" | tee "${RUNNER_TEMP}/deploy.log"
+          # The Play service account key is a Worker secret (never a var, never in the log).
+          if [ -n "${GOOGLE_PLAY_SERVICE_ACCOUNT}" ]; then
+            printf '%s' "${GOOGLE_PLAY_SERVICE_ACCOUNT}" | npx wrangler secret put GOOGLE_PLAY_SERVICE_ACCOUNT --env= >/dev/null
+            echo "GOOGLE_PLAY_SERVICE_ACCOUNT uploaded as a Worker secret"
+          else
+            echo "::notice::GOOGLE_PLAY_SERVICE_ACCOUNT is not set (D-17): purchases answer 503"
+          fi
       - name: Health check
         if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
         run: |
