@@ -188,3 +188,28 @@ func unblock_player(_account_id: String) -> Outcome:
 ## `reason`: spam | harassment | inappropriate_name | cheating | other.
 func report_player(_account_id: String, _reason: String) -> Outcome:
 	return _offline()
+
+
+# -- the Eclipse Blessing and rewarded ads (INF-036) -------------------------------------------------------------------
+
+
+## Reports a Play purchase token; the server asks Google Play, pays the period's instant grant once and acknowledges it.
+## `value`: {"new_period", "instant_eclipse_tokens", "period_end_utc", "active", "acknowledged", "state"}.
+func subscription_verify(_purchase_token: String) -> Outcome:
+	return _offline()
+
+
+## `value`: {"subscribed", "expires_at_utc", "revoked", "claimable_windows", "claimed_this_period", "window_tokens", ...}.
+func subscription_status() -> Outcome:
+	return _offline()
+
+
+## One twelve-hour entitlement (`window_id` -1 = the current window). `value`: {"state", "already_claimed", "eclipse_tokens"}.
+func subscription_claim(_window_id: int = -1) -> Outcome:
+	return _offline()
+
+
+## `value`: {"window_views", "window_cap", "day_views", "day_cap", "reward_eclipse_tokens"}.
+func ads_status() -> Outcome:
+	return _offline()
+

@@ -53,5 +53,5 @@ rm -f "${out}"
 "${GODOT}" --headless --path "${game_dir}" --import >/dev/null 2>&1 || "${GODOT}" --headless --path "${game_dir}" --import >/dev/null 2>&1
 "${GODOT}" --headless --path "${game_dir}" --export-debug "Android" "${out}"
 [[ -f "${out}" ]] || { echo "export did not produce ${out}" >&2; exit 1; }
-# INTERNET (the game API) and androidx.core's app-private signature permission are the whole allowlist (INF-018).
-"${game_dir}/tools/verify_apk.sh" "${out}" android.permission.INTERNET io.github.mucaeksi.unawareofmydemise.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+# The permission allowlist lives in verify_apk.sh (INF-018, DEC-0038).
+"${game_dir}/tools/verify_apk.sh" "${out}"

@@ -740,6 +740,24 @@ func unblock_player(account_id: String) -> Outcome:
 	return await backend.unblock_player(account_id)
 
 
+# -- the Eclipse Blessing (INF-036; the server pays, the reply carries the new state) -----------------------------------
+
+
+## The authored Eclipse Blessing (economy_part1.json `subscription`): {"id", "duration_days", "instant_eclipse_token",
+## "halfday_entitlement_token", "halfday_entitlement_count", "expected_total_eclipse_token", ...}.
+func blessing_rules() -> Dictionary:
+	var subscription: Variant = rules.quest.economy().get("subscription")
+	return subscription if subscription is Dictionary else {}
+
+
+func verify_subscription(purchase_token: String) -> Outcome:
+	return _adopt(await backend.subscription_verify(purchase_token))
+
+
+func claim_subscription_window(window_id: int) -> Outcome:
+	return _adopt(await backend.subscription_claim(window_id))
+
+
 # -- gacha and quests (server-authoritative; ports of the gacha/quest parts of client/game_controller.py) -------------
 
 

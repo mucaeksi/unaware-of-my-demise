@@ -2,15 +2,15 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md) — finish it step by step
-Feature: batch 7 (PR #29, open): owner answers D-01/02/07/08/10 + web deletion page (67e3d99), first-launch flow (1c13c7f); next INF-037 social on the same PR, then merge
-Task: INF-037 social (LEGACY friends/requests/block/report → secure endpoints + client), then INF-036 billing/ads
+Feature: batch 8 (PR #30, open): INF-036 billing + rewarded ads — server (28f78b2, 09081dd) + native/client (this commit)
+Task: push batch 8, get CI green, merge #30, verify production; then the remaining roadmap gaps (INF-038 → INF-042) and the final owner-decision summary
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-05
 **Owner directives (2026-10-04):** finish the roadmap in order, step by step; the owner presses "auto-continue" when a usage limit hits, so always leave a resumable checkpoint here. Merge to `main` every 3–4 verified steps (batch PRs), push the branch after each commit. Collect every owner decision in `docs/OWNER_DECISIONS.md` and present them together at the end. `narrative/` belongs to another team: do not touch it.
-**Branch:** `claude/adoring-galileo-f7rd3o`. Merged + live: #18–#27 (live `7990998`, deploy run 17 green; admin API 503 until Access; migrations 0001–0009). Deploy run 16 (`249913e`) failed only at the admin check (404 right after the admin Worker's first deploy, 503 a minute later); the check now retries a 404 for up to 60 s (on the branch, ships with the next batch).
-**Next step:** INF-037 social on PR #29 (port LEGACY behaviour; read the LEGACY server/client friends code on Drive first), merge #29 when green, then INF-036 (billing + rewarded ads; LEGACY client has blessing/ad screens and android_bridge adapters). Owner answers applied 2026-10-05: D-01/02/07/08/10 (DEC-0036); open: D-03…D-06, D-09, D-11…D-16. Local e2e needs PostgreSQL on TCP 127.0.0.1:54318 with a password (Hyperdrive local mode refuses socket URLs).
+**Branch:** `claude/adoring-galileo-f7rd3o`. Merged + live: #18–#29 (live `10b42fb`: web deletion page, first-launch flow, social; migrations 0001–0010). PR #30 (INF-036, migration 0011) open.
+**Next step:** CI on PR #30 → merge → check production (`/v1/ads/ssv` 503 and `/v1/subscription/status` 401 until D-17/D-18 are configured is correct). Then continue the roadmap gaps from INF-038 onward. Owner answers applied 2026-10-05: D-01/02/07/08/10 (DEC-0036); open: D-03…D-06, D-09, D-11…D-18 (D-17 Play billing, D-18 AdMob added with DEC-0038). Plugin builds with JDK 21 locally (CI uses 17). Local e2e needs PostgreSQL on TCP 127.0.0.1:54318 with a password (Hyperdrive local mode refuses socket URLs).
 **Files in progress:** none
 **Open questions:** `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014, OQ-016 open; OQ-000/005 closed — do not remind); owner decisions collected in `docs/OWNER_DECISIONS.md`.
 **Local test infra (session-local, recreate as needed):** PostgreSQL 18 (production major) from PGDG at `/var/tmp/uomd-pg18` port 54318 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg18&port=54318"`; `PATH=/usr/lib/postgresql/18/bin:$PATH` for database/test.sh); Godot 4.7.2 in the scratchpad (checksum-verified download); Android SDK `/var/tmp/android-sdk`; Godot Android templates `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.

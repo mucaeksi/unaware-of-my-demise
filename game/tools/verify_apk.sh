@@ -2,12 +2,30 @@
 # Verifies an exported APK against the brief (G2.3, G7): package id, min/target SDK, 64-bit ARM only, the
 # permission list, the UomdNative plugin registration (Google sign-in, INF-017), 16 KB zip alignment and 16 KB ELF
 # segment alignment of every native library.
-# Usage: verify_apk.sh <apk> [expected permissions, space separated; default none]
+# Usage: verify_apk.sh <apk> [allowed permissions, space separated; default: the game's allowlist below]
 # Needs ANDROID_HOME (build-tools with aapt2 and zipalign) and readelf.
 set -euo pipefail
 apk="${1:?usage: verify_apk.sh <apk> [allowed permissions...]}"
 shift || true
-allowed=("$@")
+# The game's whole permission allowlist (INF-018, INF-036/DEC-0038); a new library that merges in anything else fails here.
+#   INTERNET: the game API. DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: androidx.core's app-private signature permission.
+#   com.android.vending.BILLING: Play Billing (the Eclipse Blessing).
+#   AD_ID, ACCESS_NETWORK_STATE, WAKE_LOCK, FOREGROUND_SERVICE: Google Mobile Ads and its WorkManager (rewarded ads).
+#   ACCESS_ADSERVICES_AD_ID/ATTRIBUTION/TOPICS: Google Mobile Ads' Android Privacy Sandbox defaults.
+# Play Console's Data safety form must declare the advertising ID while AD_ID is here (docs/OWNER_DECISIONS.md D-18).
+default_allowed=(
+  android.permission.INTERNET
+  io.github.mucaeksi.unawareofmydemise.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+  com.android.vending.BILLING
+  com.google.android.gms.permission.AD_ID
+  android.permission.ACCESS_NETWORK_STATE
+  android.permission.WAKE_LOCK
+  android.permission.FOREGROUND_SERVICE
+  android.permission.ACCESS_ADSERVICES_AD_ID
+  android.permission.ACCESS_ADSERVICES_ATTRIBUTION
+  android.permission.ACCESS_ADSERVICES_TOPICS
+)
+if [[ $# -gt 0 ]]; then allowed=("$@"); else allowed=("${default_allowed[@]}"); fi
 : "${ANDROID_HOME:?set ANDROID_HOME to the Android SDK}"
 tools="$(ls -d "${ANDROID_HOME}"/build-tools/* | sort -V | tail -1)"
 fail=0

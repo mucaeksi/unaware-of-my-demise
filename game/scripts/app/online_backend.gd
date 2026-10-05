@@ -380,5 +380,21 @@ func report_player(account_id: String, reason: String) -> Outcome:
 	return await _call(HTTPClient.METHOD_POST, "/v1/reports", {"account_id": account_id, "reason_key": reason}, true)
 
 
+func subscription_verify(purchase_token: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/subscription/verify", {"purchase_token": purchase_token})
+
+
+func subscription_status() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/subscription/status")
+
+
+func subscription_claim(window_id: int = -1) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/subscription/claim", {"window_id": window_id} if window_id >= 0 else {}, true)
+
+
+func ads_status() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/ads/status")
+
+
 static func _instance_path(table: String, instance_id: String, action: String) -> String:
 	return "/v1/inventory/%s/%s/%s" % [table.uri_encode(), instance_id.uri_encode(), action]

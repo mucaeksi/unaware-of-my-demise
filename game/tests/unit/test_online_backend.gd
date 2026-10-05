@@ -279,3 +279,30 @@ func test_social_calls_go_to_their_routes() -> void:
 		"POST /v1/reports keyed",
 	])
 	assert_eq(JSON.parse_string(sent[9]["body"]), {"account_id": account, "reason_key": "spam"})
+
+
+## INF-036: the Blessing and ad calls go to their routes; only the claim is an idempotent change.
+func test_blessing_and_ad_calls_go_to_their_routes() -> void:
+	var ok: Dictionary = {"status": 200, "body": "{}"}
+	var pair: Array = _backend([ok, ok, ok, ok, ok] as Array[Dictionary])
+	var backend: OnlineBackend = pair[0]
+	assert_true((await backend.subscription_verify("tok")).is_ok())
+	assert_true((await backend.subscription_status()).is_ok())
+	assert_true((await backend.subscription_claim(41001)).is_ok())
+	assert_true((await backend.subscription_claim()).is_ok())
+	assert_true((await backend.ads_status()).is_ok())
+	var sent: Array[Dictionary] = (pair[1] as ScriptedTransport).sent
+	var routes: Array[String] = []
+	for request: Dictionary in sent:
+		routes.append("%s %s %s" % ["POST" if request["method"] == HTTPClient.METHOD_POST else "GET", str(request["url"]).trim_prefix("https://api.example"),
+			"keyed" if not _header(request, "Idempotency-Key").is_empty() else "-"])
+	assert_eq(routes, [
+		"POST /v1/subscription/verify -",
+		"GET /v1/subscription/status -",
+		"POST /v1/subscription/claim keyed",
+		"POST /v1/subscription/claim keyed",
+		"GET /v1/ads/status -",
+	])
+	assert_eq(JSON.parse_string(sent[0]["body"]), {"purchase_token": "tok"})
+	assert_eq(JSON.parse_string(sent[2]["body"]), {"window_id": 41001.0})
+	assert_eq(JSON.parse_string(sent[3]["body"]), {}, "no window: the current twelve-hour window")

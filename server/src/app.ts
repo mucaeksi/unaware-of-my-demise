@@ -376,7 +376,12 @@ function routes(deps: AppDeps): Record<string, Handler> {
       return json(await transaction(db, (tx) => grantVerifiedAd(tx, accountId, transactionId, clock())));
     },
 
-    "GET /v1/ads/status": async (context) => json(await adStatus(context.db, await requireAccount(context), clock())),
+    // `ad_unit_id`: the unit the app shows (the first of ADMOB_AD_UNIT_IDS); null while ads are not configured, so the
+    // app offers no ad this server could not pay for.
+    "GET /v1/ads/status": async (context) => {
+      const units = deps.admobKeys ? (deps.admobAdUnits ?? []) : [];
+      return json({ ...(await adStatus(context.db, await requireAccount(context), clock())), ad_unit_id: units[0] ?? null });
+    },
 
     // The Eclipse Blessing (INF-036, DEC-0038). The app sends the Play purchase token after a purchase (and on every
     // start while one is pending): Google Play is asked first, outside the transaction; the grant and the binding commit

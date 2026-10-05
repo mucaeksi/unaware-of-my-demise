@@ -61,7 +61,7 @@ trap 'rm -rf "${work}"' EXIT
 "${JAVA_HOME}/bin/java" -jar "${BUNDLETOOL}" build-apks --bundle="${aab}" --output="${work}/universal.apks" --mode=universal \
   --ks="${UPLOAD_KEYSTORE}" --ks-key-alias="${UPLOAD_KEY_ALIAS}" --ks-pass="pass:${UPLOAD_KEYSTORE_PASSWORD}"
 unzip -q -o "${work}/universal.apks" universal.apk -d "${work}"
-"${game_dir}/tools/verify_apk.sh" "${work}/universal.apk" android.permission.INTERNET io.github.mucaeksi.unawareofmydemise.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+"${game_dir}/tools/verify_apk.sh" "${work}/universal.apk"
 build_tools="$(ls -d "${ANDROID_HOME}"/build-tools/* | sort -V | tail -1)"
 version_line="$("${build_tools}/aapt2" dump badging "${work}/universal.apk" 2>/dev/null | sed -n "s/^package: .*versionCode='\([0-9]*\)'.*versionName='\([^']*\)'.*/\1 \2/p" | head -n1)"
 [[ "${version_line}" == "${VERSION_CODE} ${VERSION_NAME}" ]] || { echo "the APK reports version ${version_line}, expected ${VERSION_CODE} ${VERSION_NAME}" >&2; exit 1; }

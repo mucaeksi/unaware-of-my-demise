@@ -92,8 +92,11 @@ describe("GET /v1/ads/ssv", () => {
     expect(await view()).toEqual({ granted: false, reason: "cap", eclipse_tokens: 0 });
     now += 12 * 3600;
     for (let index = 0; index < 4; index++) expect((await view()).granted).toBe(true);
-    const status = (await (await app()(new Request("https://api.test/v1/ads/status", { headers: { authorization: `Bearer ${token}` } }))).json()) as Record<string, number>;
-    expect(status).toEqual({ window_views: 4, window_cap: 4, day_views: 8, day_cap: 8, reward_eclipse_tokens: 30 });
+    const status = async (deps: Partial<Parameters<typeof createApp>[0]> = {}) =>
+      (await (await app(deps)(new Request("https://api.test/v1/ads/status", { headers: { authorization: `Bearer ${token}` } }))).json()) as Record<string, unknown>;
+    expect(await status()).toEqual({ window_views: 4, window_cap: 4, day_views: 8, day_cap: 8, reward_eclipse_tokens: 30, ad_unit_id: AD_UNIT });
+    expect((await status({ admobAdUnits: [] })).ad_unit_id, "no unit: the app offers no ad").toBeNull();
+    expect((await status({ admobKeys: null })).ad_unit_id).toBeNull();
     now += 12 * 3600;
     expect((await view()).granted, "a new UTC day").toBe(true);
   });
