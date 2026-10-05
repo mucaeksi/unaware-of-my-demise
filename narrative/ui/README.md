@@ -1,6 +1,8 @@
 # UOMD — UI Tasarım Çalışması
 
-Durum: `DESIGN_DRAFT`. Kullanıcı yönlendirmesi: AFK Arena benzeri gezinme ve sunum; daha karanlık tema ve oyunun kendi mekanikleri. Oyuncu arayüzü/altyazı İngilizce, seslendirme Japonca. Seçili Narrative kaynakları BATCH-0005 ile main'e aktarıldı; sayfalar ilk giriş ve patch öncesi araçlardan başlayarak adım adım ayrıntılandırılır. Godot UI uygulaması ayrı aşama.
+Durum: `DESIGN_DRAFT`. Kullanıcı yönlendirmesi: AFK Arena benzeri gezinme ve sunum; daha karanlık tema ve oyunun kendi mekanikleri. Oyuncu arayüzü/altyazı İngilizce, seslendirme Japonca. Seçili Narrative kaynakları BATCH-0005 ile main'e aktarıldı; mevcut dosyalar tasarım prototipidir.
+
+**Son yönlendirme — 2026-10-05:** [yeniden başlangıç promptu](../design/CREATIVE_RESTART_PROMPT.md) ve [döküm](../design/WORK_COMPLETED_2026-10-05.md) yeni sanat kararını/sırayı kaydeder. Gelecek çalışmada her tasarım adımı gerçek Godot entegrasyonunu da içerir; eski görsel pack'ler yeni ortak sanat diliyle aktif kullanımdan çıkarılacaktır. Bu tur yalnız plan kaydedildi; mevcut prototip, runtime ve referans dosyaları değiştirilmedi.
 
 Bu alan tasarım kaynağıdır. Prototip örnek verilerle çalışır; satın alma, ödül, ilerleme, giriş veya gerçek oyuncu hesabında işlem yapmaz. Runtime ve kilitli referans dosyalarını değiştirmez.
 
@@ -21,4 +23,4 @@ Prototip bağımlılıksız HTML/CSS/JS'tir. HTTP ile incelemek için repository
 
 Referanslar: `../references/REFERENCE_SET.lock.json`, `../../docs/DECISIONS.md` DEC-0014, `../../game/data/content/chapters_part1.json`, `../../game/data/content/story_script_part1_manifest.json`. Kaynak canon ve onaylı karakter kimlikleri korunur. Yeni hub sahnesi bir UI ortam önerisidir; yeni canon lokasyonu olarak kaydedilmez.
 
-Gemini görsel hattı bu çalışma sırasında silinmez. Yeni tasarım görsellerinin sağlayıcısı ve prompt'u ayrı kaydedilir; ses/müzik hattı ve owner'a ait ana tema korunur.
+Mevcut prototiplerin üretimi sırasında Gemini hattı/referans seti değiştirilmedi. Son kullanıcı kararıyla yeni görseller Codex üzerinden üretilecek; eski görsel paketlerin ve aktif üretim kuralının geçişi yeni promptta planlıdır. Sağlayıcı/prompt ve eski kaynak izi kayıtlı kalır; ses/müzik hattı ve owner'a ait ana tema korunur.
