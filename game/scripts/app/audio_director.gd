@@ -7,6 +7,7 @@ extends Node
 ##   voice  res://assets/audio/voice/<speaker_id>/<line_id>.ogg   (the line_id of the story/voice-line packs)
 ##   music  res://assets/audio/music/<cue_id>.ogg                  (looping is an import setting of the promoted file)
 ##   sfx    res://assets/audio/sfx/<cue_id>.ogg
+##   ambience res://assets/audio/ambience/<cue_id>.ogg            (a looped bed under the music, e.g. rain)
 ## A file that is not shipped (or mounted from a content patch) is silence, reported once in `missing()`: before the
 ## audio is produced every call is a no-op, never an error.
 ##
@@ -19,6 +20,8 @@ extends Node
 ##   Audio.play_voice("fadyme", "opening_001")   # false when there is no recording: show text only
 ##   Audio.stop_voice()                          # on line skip / scene exit
 ##   Audio.set_volume(AudioDirector.BUS_MUSIC, 0.6)
+##   Audio.play_flow_cue(AudioCues.FLOW_TITLE)    # a screen's slot; the content names the cue (D-08)
+##   Audio.apply_line_audio({"sfx": "sfx_bell_distant", "music": "stop", "fade_seconds": 2.0})   # a story line's changes
 
 const BUS_MUSIC: String = "Music"
 const BUS_VOICE: String = "Voice"
@@ -39,6 +42,16 @@ var _music: Array[AudioStreamPlayer] = []
 var _active_music: int = 0
 var _music_cue: String = ""
 var _voice: AudioStreamPlayer = null
+var _ambience: AudioStreamPlayer = null
+var _ambience_cue: String = ""
+## The flow slot table (docs/design/FIRST_LAUNCH_FLOW.md); loaded on first use, tests may replace it.
+var cues: AudioCues = null:
+	get:
+		if cues == null:
+			cues = AudioCues.load_pack()
+			if not cues.error.is_empty():
+				push_warning("Audio: %s" % cues.error)
+		return cues
 var _sfx: AudioStreamPlayer = null
 var _fade: Tween = null
 var _volumes: Dictionary = {}
@@ -56,6 +69,9 @@ func _ready() -> void:
 	_voice = AudioStreamPlayer.new()
 	_voice.bus = BUS_VOICE
 	add_child(_voice)
+	_ambience = AudioStreamPlayer.new()
+	_ambience.bus = BUS_MUSIC
+	add_child(_ambience)
 	_sfx = AudioStreamPlayer.new()
 	_sfx.bus = BUS_SFX
 	_sfx.max_polyphony = 4
@@ -81,6 +97,81 @@ static func music_path(cue_id: String) -> String:
 
 static func sfx_path(cue_id: String) -> String:
 	return "%s/sfx/%s.ogg" % [AUDIO_ROOT, cue_id]
+
+
+static func ambience_path(cue_id: String) -> String:
+	return "%s/ambience/%s.ogg" % [AUDIO_ROOT, cue_id]
+
+
+## Plays what the content assigned to a flow `slot` (AudioCues): music slots cross-fade (an unassigned music slot fades
+## the music out, so a screen never keeps another screen's mood), sfx slots play once, voice slots speak their line.
+## False when nothing was played.
+func play_flow_cue(slot: String, fade_seconds: float = 1.0) -> bool:
+	var cue: String = cues.cue(slot)
+	if slot.begins_with("flow."):
+		if cue.is_empty():
+			stop_music(fade_seconds)
+			return false
+		return play_music(cue, fade_seconds)
+	if cue.is_empty():
+		return false
+	if slot.begins_with("sfx."):
+		return play_sfx(cue)
+	if slot.begins_with("voice."):
+		var parts: PackedStringArray = cue.split("/")
+		return parts.size() == 2 and play_voice(parts[0], parts[1])
+	return false
+
+
+## Starts the looped bed `cue_id` ("" or "stop" stops it); the same bed already playing is left alone.
+func play_ambience(cue_id: String) -> bool:
+	if cue_id.is_empty() or cue_id == "stop":
+		_ambience.stop()
+		_ambience_cue = ""
+		return false
+	if cue_id == _ambience_cue and _ambience.playing:
+		return true
+	var stream: AudioStream = _stream(ambience_path(cue_id))
+	_ambience.stop()
+	_ambience_cue = ""
+	if stream == null:
+		return false
+	_ambience.stream = stream
+	_ambience.play()
+	_ambience_cue = cue_id
+	return true
+
+
+func ambience_cue() -> String:
+	return _ambience_cue
+
+
+## A story scene opening: its music and ambience (docs/design/FIRST_LAUNCH_FLOW.md, story cues). A scene without a
+## music_cue_id leaves the current music alone (cues are assigned scene by scene, D-08).
+func apply_scene_audio(scene: Dictionary) -> void:
+	var music: Variant = scene.get("music_cue_id")
+	if music is String and not (music as String).is_empty():
+		play_music(music)
+	if scene.has("ambience_cue_id"):
+		var ambience: Variant = scene["ambience_cue_id"]
+		play_ambience(ambience if ambience is String else "")
+
+
+## A story line's audio changes: {"music": cue | "stop", "ambience": cue | "stop", "sfx": cue, "fade_seconds": n}.
+func apply_line_audio(audio: Variant) -> void:
+	if not (audio is Dictionary):
+		return
+	var changes: Dictionary = audio
+	var fade: float = float(changes.get("fade_seconds", 1.0)) if (changes.get("fade_seconds") is float or changes.get("fade_seconds") is int) else 1.0
+	var music: Variant = changes.get("music")
+	if music == "stop":
+		stop_music(fade)
+	elif music is String:
+		play_music(music, fade)
+	if changes.get("ambience") is String:
+		play_ambience(changes["ambience"])
+	if changes.get("sfx") is String:
+		play_sfx(changes["sfx"])
 
 
 ## Starts `cue_id`, cross-fading from the current track over `fade_seconds`; the same cue already playing is left alone.
@@ -145,7 +236,7 @@ func play_sfx(cue_id: String) -> bool:
 
 ## Pauses (true) or resumes (false) every player in place.
 func set_paused(paused: bool) -> void:
-	for player: AudioStreamPlayer in _music + [_voice, _sfx]:
+	for player: AudioStreamPlayer in _music + [_voice, _sfx, _ambience]:
 		player.stream_paused = paused
 
 
@@ -217,6 +308,8 @@ func _crossfade(incoming: AudioStreamPlayer, seconds: float) -> void:
 	for player: AudioStreamPlayer in _music:
 		if player != incoming and player.playing:
 			outgoing.append(player)
+	if incoming == null and outgoing.is_empty():
+		return  # nothing playing and nothing to start: a tween with no work is an engine error
 	if seconds <= 0.0 or not is_inside_tree():
 		for player: AudioStreamPlayer in outgoing:
 			player.stop()

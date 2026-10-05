@@ -8,6 +8,10 @@
       "bytes": 25756,
       "sha256": "f5cc053a561a0642c288c2e771f202f73b008c85265f07217e9ad0d64bb8398b"
     },
+    "audio_cues_part1.json": {
+      "bytes": 750,
+      "sha256": "66f66a612b52d16708b203d57936590d0f297296e11466c1813be645229f40ca"
+    },
     "battle_effects_part1.json": {
       "bytes": 149863,
       "sha256": "ba9d941a0873cacd692558ef84d04e41395089b903fcbca0530fb993f4092fea"

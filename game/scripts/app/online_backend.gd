@@ -337,5 +337,48 @@ func convert_fate_threads(count: int) -> Outcome:
 	return await _call(HTTPClient.METHOD_POST, "/v1/wallet/convert", {"count": count}, true)
 
 
+func fetch_account() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/account")
+
+
+func update_profile(changes: Dictionary) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/profile", changes, true)
+
+
+func friends(cursor: String = "") -> Outcome:
+	var query: String = "?limit=100"
+	if not cursor.is_empty():
+		query += "&cursor=%s" % cursor.uri_encode()
+	return await _call(HTTPClient.METHOD_GET, "/v1/friends" + query)
+
+
+func send_friend_request(friend_code: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/friend-requests", {"friend_code": friend_code}, true)
+
+
+func answer_friend_request(request_id: String, answer: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/friend-requests/%s/%s" % [request_id.uri_encode(), answer.uri_encode()], {}, true)
+
+
+func remove_friend(account_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/friends/%s/remove" % account_id.uri_encode(), {}, true)
+
+
+func blocked_players() -> Outcome:
+	return await _call(HTTPClient.METHOD_GET, "/v1/blocks")
+
+
+func block_player(account_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/blocks", {"account_id": account_id}, true)
+
+
+func unblock_player(account_id: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/blocks/%s/remove" % account_id.uri_encode(), {}, true)
+
+
+func report_player(account_id: String, reason: String) -> Outcome:
+	return await _call(HTTPClient.METHOD_POST, "/v1/reports", {"account_id": account_id, "reason_key": reason}, true)
+
+
 static func _instance_path(table: String, instance_id: String, action: String) -> String:
 	return "/v1/inventory/%s/%s/%s" % [table.uri_encode(), instance_id.uri_encode(), action]

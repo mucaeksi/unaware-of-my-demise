@@ -571,3 +571,49 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   and signs in again — same account, same state. CI job `e2e`.
 - Not covered here (device and store): a real Google sign-in on a phone, Play install/upgrade, background/kill, patch
   under bad connectivity (INF-043/044, owner-run with the release build).
+
+## DEC-0036 — Owner answers of 2026-10-05: v1 scope, staging timing, support address, music cues
+- Status: ACCEPTED (2026-10-05, owner answers to docs/OWNER_DECISIONS.md D-01, D-02, D-07, D-08, D-10).
+- D-10 (v1 scope): Google Play billing (the LEGACY Eclipse Blessing subscription and purchases), rewarded ads with
+  server-side verification, and the LEGACY social features (friends, requests, block, report) are **in** the first public
+  release. INF-036 and INF-037 move from BLOCKED_OWNER to TODO. Real payments and production ad serving stay off until
+  the store and ad accounts exist (sandbox and test ads only), as the roadmap says.
+- D-01 (support address): `unawareofmydemise@gmail.com` is the address wherever the game or a store needs one. The game
+  Worker serves the public deletion page `GET /account/delete` (Google Play Data safety link): what is deleted and what
+  stays, the in-app path, the address, and a self-service deletion without the app — choose the same Google account in
+  the browser (Google Identity Services, fresh server nonce), confirm, and `POST /account/delete` deletes the linked
+  account exactly like the in-app deletion (`account_deletions.confirmed_by = web:google_oidc`). No session is needed;
+  the fresh Google token for a single-use nonce is the proof. Sign-in rate limit, strict CSP (per-response nonce),
+  readable during maintenance and database outages. The browser button needs the Worker origin on the Web OAuth client
+  (owner action D-14); until then the page still offers the app and the address.
+- D-07 (staging): deferred until after the closed test; production deploys stay as they are, `deploy-staging.yml`
+  keeps skipping. INF-006 is DEFERRED, not done.
+- D-08 (music/voice cues): the narrative team assigns cue ids per scene. First the whole stretch from the first app
+  launch to entering the game is designed (docs/design/FIRST_LAUNCH_FLOW.md), so its cue points exist for them to fill.
+- D-02: there is no `docs/INFRASTRUCTURE_REVIEW.md`; the roadmap's R01–R16 labels stay as written and are marked as
+  untraceable (they are unrelated to the R01–R23 creative reference set in UOMD_REFERENCE_LOCK.md).
+
+## DEC-0037 — Social features: the LEGACY friend graph on the Worker
+- Status: ACCEPTED (2026-10-05, engineering; owner decision D-10 put social in v1; roadmap INF-037).
+- Source: the LEGACY server and client (Drive: `server/social.py`, `server/repository.py`, `server/app.py`,
+  `tests/test_social.py`, `client/screens/friends_screen.py`, `docs/ONLINE_ACCOUNT_SOCIAL_PART1.md`). Kept as they were:
+  friend codes (8 characters without 0/O/1/I/L), `friend_edges` with mirrored pending/accepted pairs and one-sided
+  blocks, crossed requests becoming a friendship, repeat requests answering the relationship as it is, a block ending
+  every relationship and stopping the blocked player's requests (403, never saying who blocked whom), reports with the
+  LEGACY reason keys, public records without friend codes or anything private. No chat, guild, PvP, co-op or transfer.
+- Filled where LEGACY stopped (its own docs asked for these): cancelling one's own request; unblocking (LEGACY's
+  message said "unblock them first" but had no route); choosing a nickname (unique regardless of case, 3–16 characters,
+  reserved words, once per 24 h); coarse presence that respects the player's setting; player level from account XP
+  (LEGACY returned 0 because no curve existed then); keyset paging; anti-abuse limits in a versioned config
+  (`SOCIAL_LIMITS` v1: 50 friends, 30 waiting requests, 100 waiting on one player, 30 requests and 10 reports per day,
+  a repeat report within 24 h is the same report) — engineering defaults the owner may tune; moderation in the admin
+  panel (open reports, resolve with a reason, reset a nickname; audited).
+- Paths follow this API's conventions (POST for every change, each with an Idempotency-Key): removal is
+  `POST /v1/friends/{id}/remove` instead of LEGACY's `DELETE /v1/friends/{id}`.
+- Concurrency: every change to a pair runs under a transaction-scoped advisory lock on the pair. The idempotency
+  helper now locks the account row `FOR NO KEY UPDATE` instead of `FOR UPDATE`: still one mutation per account at a
+  time, but a foreign-key check from another account's transaction (KEY SHARE) is no longer blocked by it. With
+  `FOR UPDATE`, two players sending each other a request at the same moment deadlocked (found by the concurrency test;
+  500 before, a friendship after).
+- Deleting an account removes its edges on both sides and every report it made or received (cascades).
+

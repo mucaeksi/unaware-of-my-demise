@@ -136,3 +136,55 @@ func convert_fate_threads(_count: int) -> Outcome:
 ## Today's Inn Meal (DEC-0014): Ration once per UTC day. `value`: {"state", "claim_key", "already_claimed", "ration_granted"}.
 func claim_inn_meal() -> Outcome:
 	return _offline()
+
+
+# -- social (INF-037; reads and changes that touch no player state, so no snapshot) ----------------------------------
+
+
+## The own account and public profile. `value`: {"account_id", "friend_code", "nickname", "presence_opt_in",
+## "nickname_change_available_at_utc", ...} (GET /v1/account).
+func fetch_account() -> Outcome:
+	return _offline()
+
+
+## Changes {"nickname"} and/or {"presence_opt_in"}. `value`: the own profile as `fetch_account` shows it.
+func update_profile(_changes: Dictionary) -> Outcome:
+	return _offline()
+
+
+## Friends and requests, newest first. `value`: {"items": [{"account_id", "nickname", "player_level", "presence",
+## "relationship", "request_id", ...}], "next_cursor", "counts", "limits"}.
+func friends(_cursor: String = "") -> Outcome:
+	return _offline()
+
+
+## `value`: the other player's public record with `relationship` "pending_out" (or "accepted" when they had asked first).
+func send_friend_request(_friend_code: String) -> Outcome:
+	return _offline()
+
+
+## `answer`: "accept" | "reject" (a request to the player) or "cancel" (the player's own request).
+func answer_friend_request(_request_id: String, _answer: String) -> Outcome:
+	return _offline()
+
+
+func remove_friend(_account_id: String) -> Outcome:
+	return _offline()
+
+
+## `value`: {"items": [{"account_id", "nickname", "blocked_at_utc"}]}.
+func blocked_players() -> Outcome:
+	return _offline()
+
+
+func block_player(_account_id: String) -> Outcome:
+	return _offline()
+
+
+func unblock_player(_account_id: String) -> Outcome:
+	return _offline()
+
+
+## `reason`: spam | harassment | inappropriate_name | cheating | other.
+func report_player(_account_id: String, _reason: String) -> Outcome:
+	return _offline()

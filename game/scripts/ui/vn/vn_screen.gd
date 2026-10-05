@@ -5,7 +5,10 @@ extends UiScreen
 ## the bust ("character/<id>/vn_bust"). Where the art is not shipped yet, a tinted panel stands in (the speaker's initial and the line's
 ## `emotion`) and says so. Text is the player's language with English as the fallback (`LocalizedText`); a line with a recording
 ## plays it on the Voice bus (`Audio.play_voice(speaker_id, line_id)`), and leaving the line or the screen stops it.
-## `finished` fires once, when the reader advances past the last line (Finish button or auto play), never when the screen is just left.
+## `finished` fires once, when the reader advances past the last line (Finish button or auto play) or skips the scene after confirming
+## (the scene then counts as seen: story progress moves on exactly as at its end), never when the screen is
+## just left. Story cues (docs/design/FIRST_LAUNCH_FLOW.md): the scene's music_cue_id/ambience_cue_id start with it, a line's `audio`
+## changes play when the line shows.
 
 signal finished
 
@@ -41,6 +44,8 @@ var _back_button: Button = null
 var _auto_button: Button = null
 var _log_button: Button = null
 var _next_button: Button = null
+var _skip_button: Button = null
+var _skip_panel: PanelContainer = null
 var _log_panel: PanelContainer = null
 var _log_text: Label = null
 var _auto_timer: Timer = null
@@ -100,11 +105,32 @@ func _build(column: VBoxContainer) -> void:
 	_auto_button.pressed.connect(cycle_auto_speed)
 	_log_button = UiKit.button("Log")
 	_log_button.pressed.connect(toggle_log)
+	_skip_button = UiKit.button("Skip")
+	_skip_button.pressed.connect(ask_skip)
 	_next_button = UiKit.button("Next")
 	_next_button.pressed.connect(go_next)
-	for button: Button in [_back_button, _auto_button, _log_button, _next_button]:
+	for button: Button in [_back_button, _auto_button, _log_button, _skip_button, _next_button]:
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		controls.add_child(button)
 	column.add_child(controls)
+
+	# Skipping asks first, in place of the dialogue (a mistap must not lose a scene's first reading).
+	_skip_panel = PanelContainer.new()
+	_skip_panel.visible = false
+	var skip_column: VBoxContainer = UiKit.column(16)
+	_skip_panel.add_child(skip_column)
+	skip_column.add_child(UiKit.label("Skip the rest of this scene?"))
+	var skip_row: HBoxContainer = UiKit.row(12)
+	var confirm: Button = UiKit.button("Skip scene")
+	confirm.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	confirm.pressed.connect(confirm_skip)
+	var keep: Button = UiKit.button("Keep reading")
+	keep.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	keep.pressed.connect(cancel_skip)
+	skip_row.add_child(confirm)
+	skip_row.add_child(keep)
+	skip_column.add_child(skip_row)
+	column.add_child(_skip_panel)
 
 	# The log sits in the same column (so it respects the safe area) and replaces the stage and the dialogue while it is open.
 	_log_panel = PanelContainer.new()
@@ -159,6 +185,8 @@ func load_scene(scene: Dictionary) -> bool:
 	_done = false
 	if _log_panel.visible:
 		toggle_log()
+	cancel_skip()
+	Audio.apply_scene_audio(scene)
 	_title_label.text = LocalizedText.pick(scene, "title")
 	var location: String = str(scene.get("location_id", ""))
 	_background_reference = "background/%s/story" % location if not location.is_empty() else ""
@@ -228,6 +256,7 @@ func _show_line() -> void:
 	var speaker: String = str(line.get("speaker_display", "")) if not str(line.get("speaker_display", "")).is_empty() else str(line.get("speaker_id", ""))
 	_speaker_label.text = speaker
 	_dialogue_label.text = LocalizedText.pick(line, "text")
+	Audio.apply_line_audio(line.get("audio"))
 	voiced = Audio.play_voice(str(line.get("speaker_id", "")), str(line.get("line_id", "")))
 	var speaker_id: String = str(line.get("speaker_id", "")).trim_suffix("_thought")
 	# Speakers without character art (narrator, enemies, extras) ask for none: only roster characters have busts.
@@ -254,6 +283,33 @@ func go_next() -> void:
 		_finish()
 
 
+## Asks to skip the rest of the scene (the dialogue gives way to the question until it is answered).
+func ask_skip() -> void:
+	if _lines.is_empty() or _done:
+		return
+	_stop_auto()
+	_skip_panel.visible = true
+	_dialogue_panel.visible = false
+
+
+func cancel_skip() -> void:
+	if _skip_panel == null:
+		return
+	_skip_panel.visible = false
+	_dialogue_panel.visible = not _log_panel.visible
+
+
+func is_skip_asked() -> bool:
+	return _skip_panel.visible
+
+
+func confirm_skip() -> void:
+	if not _skip_panel.visible:
+		return
+	cancel_skip()
+	_finish()
+
+
 func go_back() -> void:
 	if _index > 0:
 		_index -= 1
@@ -272,6 +328,8 @@ func cycle_auto_speed() -> void:
 
 
 func toggle_log() -> void:
+	if _skip_panel.visible:
+		cancel_skip()
 	_log_panel.visible = not _log_panel.visible
 	_stage_panel.visible = not _log_panel.visible
 	_dialogue_panel.visible = not _log_panel.visible
@@ -324,6 +382,9 @@ func _on_dialogue_input(event: InputEvent) -> void:
 
 
 func handle_back() -> bool:
+	if _skip_panel != null and _skip_panel.visible:
+		cancel_skip()
+		return true
 	if _log_panel != null and _log_panel.visible:
 		toggle_log()
 		return true

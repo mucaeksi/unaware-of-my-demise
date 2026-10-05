@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "pack_id": "part1_audio_cues",
+  "owner_note": "Flow audio slots outside story scenes (docs/design/FIRST_LAUNCH_FLOW.md). Engineering owns the slot list; the narrative team assigns each value (owner decision D-08). null = silent. Music and sfx values are cue ids (res://assets/audio/music|sfx/<id>.ogg); voice values are <speaker_id>/<line_id>. flow.title is the owner's main theme only if the owner supplies it.",
+  "slots": {
+    "flow.title": null,
+    "flow.hub": null,
+    "flow.summon": null,
+    "flow.battle_default": null,
+    "flow.victory": null,
+    "flow.defeat": null,
+    "sfx.ui_start": null,
+    "sfx.ui_confirm": null,
+    "sfx.ui_back": null,
+    "sfx.ui_error": null,
+    "voice.title_call": null
+  }
+}

@@ -149,6 +149,51 @@ describe("support: revoking a player's sessions", () => {
   });
 });
 
+describe("moderation (INF-037): reports and nicknames", () => {
+  const report = async (from: { token: string }, about: string, reason = "harassment") =>
+    (await (await game()(new Request("https://api.test/v1/reports", {
+      method: "POST",
+      headers: { authorization: `Bearer ${(from as { token: string }).token}`, "idempotency-key": crypto.randomUUID() },
+      body: JSON.stringify({ account_id: about, reason_key: reason }),
+    }))).json()) as { report_id: string };
+
+  it("lists open reports with both players, resolves each once with the reason, and audits both", async () => {
+    const [reporter, reported] = [await player(), await player()];
+    const { report_id } = await report(reporter, reported.accountId);
+    const open = await get("view@uomd.test", "/admin/api/reports");
+    const row = open.body.reports.find((entry: { report_id: string }) => entry.report_id === report_id);
+    expect(row).toMatchObject({ reason_key: "harassment", reporter_account_id: reporter.accountId, reported_account_id: reported.accountId, reported_friend_code: reported.friendCode, reports_against_player: 1 });
+    expect((await post("view@uomd.test", `/admin/api/reports/${report_id}/resolve`, { reason: "warned the player" })).status, "a viewer cannot resolve").toBe(403);
+    const resolved = await post("help@uomd.test", `/admin/api/reports/${report_id}/resolve`, { reason: "warned the player, ticket 12" });
+    expect(resolved.body).toEqual({ report_id, resolved: true });
+    expect((await post("help@uomd.test", `/admin/api/reports/${report_id}/resolve`, { reason: "second look at it" })).status).toBe(409);
+    expect((await get("view@uomd.test", "/admin/api/reports")).body.reports.some((entry: { report_id: string }) => entry.report_id === report_id), "no longer open").toBe(false);
+    const all = (await get("view@uomd.test", "/admin/api/reports?status=all")).body.reports.find((entry: { report_id: string }) => entry.report_id === report_id);
+    expect(all).toMatchObject({ resolved_by: "help@uomd.test", resolution: "warned the player, ticket 12" });
+    expect((await auditRows(reported.accountId)).map((entry) => entry.action)).toContain("support.resolve_report");
+    expect((await get("view@uomd.test", "/admin/api/reports?status=bogus")).status).toBe(400);
+  });
+
+  it("resets an inappropriate nickname to a placeholder the player can replace at once", async () => {
+    const target = await player();
+    await game()(new Request("https://api.test/v1/profile", {
+      method: "POST",
+      headers: { authorization: `Bearer ${target.token}`, "idempotency-key": crypto.randomUUID() },
+      body: JSON.stringify({ nickname: `Rude${counter}` }),
+    }));
+    const reset = await post("help@uomd.test", `/admin/api/players/${target.accountId}/reset-nickname`, { reason: "offensive name, report 4" });
+    expect(reset.body.previous_nickname).toBe(`Rude${counter}`);
+    expect(reset.body.nickname).toMatch(/^Player[0-9A-F]{6}$/);
+    const renamed = await game()(new Request("https://api.test/v1/profile", {
+      method: "POST",
+      headers: { authorization: `Bearer ${target.token}`, "idempotency-key": crypto.randomUUID() },
+      body: JSON.stringify({ nickname: `Kind${counter}` }),
+    }));
+    expect(renamed.status, "no wait after a reset").toBe(200);
+    expect((await auditRows(target.accountId)).filter((entry) => entry.action === "support.reset_nickname")).toHaveLength(1);
+  });
+});
+
 describe("AccessJwtVerifier", () => {
   const team = "uomd.cloudflareaccess.com";
   const audience = "a".repeat(64);

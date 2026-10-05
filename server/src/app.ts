@@ -40,6 +40,8 @@ import { bumpStateRevision, snapshot, wallet } from "./state";
 import { currentRelease, packResponse, type ContentStore } from "./content";
 import { claimMail, currentLiveops, listMail } from "./liveops";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
+import { accountDeletionPage } from "./web";
+import * as social from "./social";
 
 export interface AppDeps {
   connect: Connect;
@@ -63,6 +65,8 @@ export interface AppDeps {
   content?: ContentStore | null;
   /** The content channel this deployment serves; defaults to "production". */
   contentChannel?: string;
+  /** The Web OAuth client the public deletion page signs in with (the first GOOGLE_CLIENT_IDS entry); null = none. */
+  webClientId?: string | null;
 }
 
 /**
@@ -140,6 +144,13 @@ async function mutate(
     await bumpStateRevision(tx, accountId);
     return { ...extra, state: await snapshot(tx, accountId, nowUnix) };
   });
+  return json(response);
+}
+
+/** A social mutation (INF-037): authenticated, idempotent, one transaction; it changes no player state, so no snapshot. */
+async function socialChange<T>(context: Context, endpoint: string, fingerprint: string, action: (tx: Db, accountId: string) => Promise<T>): Promise<Response> {
+  const accountId = await requireAccount(context);
+  const { response } = await runIdempotent(context.db, idempotencyKey(context.request), accountId, endpoint, fingerprint, (tx) => action(tx, accountId));
   return json(response);
 }
 
@@ -235,12 +246,84 @@ function routes(deps: AppDeps): Record<string, Handler> {
       return json({ deleted: true, account_id: accountId });
     },
 
+    // The public deletion page (D-01, OQ-016): the link for Google Play's Data safety form. Static, no database.
+    "GET /account/delete": async () => accountDeletionPage(deps.verifier === null ? null : (deps.webClientId ?? null)),
+
+    // The page's deletion: no session (the player may not have the app any more), so the fresh credential for a fresh
+    // nonce is the whole proof; it deletes the account linked to that Google identity, exactly as in the app.
+    "POST /account/delete": async (context) => {
+      const identity = await verifiedIdentity(context.request, context.db);
+      const accountId = await findAccountBySubject(context.db, identity.provider, identity.subjectHash);
+      if (accountId === null) throw new ApiError(404, "NOT_FOUND", "No game account is linked to this Google account");
+      await transaction(context.db, (tx) => deleteAccount(tx, accountId, `web:${identity.provider}`));
+      return json({ deleted: true });
+    },
+
     "GET /v1/account": async (context) => {
       const accountId = await requireAccount(context);
       const created = await context.db.query<{ created_at: Date }>("SELECT created_at FROM account WHERE account_id = $1", [accountId]);
       if (!created.rows[0]) throw new ApiError(404, "ITEM_NOT_FOUND", "Account not found");
-      const profile = await ensureProfile(context.db, accountId);
+      await ensureProfile(context.db, accountId);
+      const profile = await social.ownProfile(context.db, accountId, new Date(clock() * 1000));
       return json({ account_id: accountId, created_at_utc: isoUtc(created.rows[0].created_at), ...profile });
+    },
+
+    // Social (INF-037, DEC-0037): the own profile, friends and requests, blocks, reports.
+    "POST /v1/profile": async (context) => {
+      const body = await readJsonObject(context.request);
+      return socialChange(context, "profile_update", JSON.stringify(body), (tx, accountId) => social.updateProfile(tx, accountId, body, new Date(clock() * 1000)));
+    },
+
+    "GET /v1/friends": async (context) => {
+      const accountId = await requireAccount(context);
+      await social.touchPresence(context.db, accountId);
+      const query = new URL(context.request.url).searchParams;
+      const limit = query.has("limit") ? Number(query.get("limit")) : 50;
+      return json(await social.listFriends(context.db, accountId, query.get("cursor"), limit, new Date(clock() * 1000)));
+    },
+
+    "POST /v1/friend-requests": async (context) => {
+      const code = social.normalizeFriendCode((await readJsonObject(context.request)).friend_code);
+      return socialChange(context, "friend_request", code, (tx, accountId) => social.sendFriendRequest(tx, accountId, code, new Date(clock() * 1000)));
+    },
+
+    "POST /v1/friend-requests/:request_id/accept": (context) => {
+      const requestId = social.requireRequestId(context.params.request_id);
+      return socialChange(context, "friend_accept", requestId, (tx, accountId) => social.acceptFriendRequest(tx, accountId, requestId, new Date(clock() * 1000)));
+    },
+
+    "POST /v1/friend-requests/:request_id/reject": (context) => {
+      const requestId = social.requireRequestId(context.params.request_id);
+      return socialChange(context, "friend_reject", requestId, (tx, accountId) => social.rejectFriendRequest(tx, accountId, requestId));
+    },
+
+    "POST /v1/friend-requests/:request_id/cancel": (context) => {
+      const requestId = social.requireRequestId(context.params.request_id);
+      return socialChange(context, "friend_cancel", requestId, (tx, accountId) => social.cancelFriendRequest(tx, accountId, requestId));
+    },
+
+    "POST /v1/friends/:account_id/remove": (context) => {
+      const other = social.requireAccountId(context.params.account_id);
+      return socialChange(context, "friend_remove", other, (tx, accountId) => social.removeFriend(tx, accountId, other));
+    },
+
+    "GET /v1/blocks": async (context) => json(await social.listBlocks(context.db, await requireAccount(context))),
+
+    "POST /v1/blocks": async (context) => {
+      const other = social.requireAccountId((await readJsonObject(context.request)).account_id);
+      return socialChange(context, "block", other, (tx, accountId) => social.blockAccount(tx, accountId, other));
+    },
+
+    "POST /v1/blocks/:account_id/remove": (context) => {
+      const other = social.requireAccountId(context.params.account_id);
+      return socialChange(context, "unblock", other, (tx, accountId) => social.unblockAccount(tx, accountId, other));
+    },
+
+    "POST /v1/reports": async (context) => {
+      const body = await readJsonObject(context.request);
+      const other = social.requireAccountId(body.account_id);
+      const reason = social.requireReason(body.reason_key);
+      return socialChange(context, "report", `${other}|${reason}`, (tx, accountId) => social.reportAccount(tx, accountId, other, reason));
     },
 
     "GET /v1/wallet": async (context) => {
@@ -252,6 +335,8 @@ function routes(deps: AppDeps): Record<string, Handler> {
 
     "GET /v1/state": async (context) => {
       const accountId = await requireAccount(context);
+      // The game reads the state on every launch and after a reconnect: the moment friends see the player online.
+      await social.touchPresence(context.db, accountId);
       return json(await consistentRead(context.db, (tx) => snapshot(tx, accountId, clock())));
     },
 
@@ -465,10 +550,13 @@ function matchRoute(
 /** The client key for rate limiting: Cloudflare's connecting IP (set by the edge, not by the client). */
 const clientKey = (request: Request): string => request.headers.get("cf-connecting-ip") ?? "unknown";
 
-/** Routes that answer whatever the client version or maintenance state (liveness, and the bootstrap that reports both). */
-const UNGATED = new Set(["/healthz", "/v1/bootstrap"]);
+/**
+ * Routes that answer whatever the client version or maintenance state: liveness, the bootstrap that reports both, and
+ * the public deletion page (a store requirement, readable during maintenance too).
+ */
+const UNGATED = new Set(["GET /healthz", "GET /v1/bootstrap", "GET /account/delete"]);
 /** Routes that read no database, so they answer during a database outage too (the bootstrap carries the maintenance notice). */
-const NO_DATABASE = new Set(["/v1/bootstrap"]);
+const NO_DATABASE = new Set(["GET /v1/bootstrap", "GET /account/delete"]);
 const noDatabase: Db = {
   query: () => Promise.reject(new Error("this route has no database connection")),
 };
@@ -487,12 +575,13 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
     }
     const answer = (response: Response) => ({ response, route: route.route });
     if (url.pathname !== "/healthz") {
-      const limiter = url.pathname.startsWith("/v1/auth/") ? deps.authLimiter : deps.apiLimiter;
+      // Sign-in and the web deletion (both verify a Google token) share the tighter sign-in budget.
+      const limiter = url.pathname.startsWith("/v1/auth/") || url.pathname === "/account/delete" ? deps.authLimiter : deps.apiLimiter;
       if (limiter && !(await limiter.limit({ key: clientKey(request) })).success) {
         return answer(errorResponse(new ApiError(429, "RATE_LIMITED", "Too many requests"), { "retry-after": "60" }));
       }
     }
-    if (!UNGATED.has(url.pathname)) {
+    if (!UNGATED.has(route.route)) {
       try {
         admit(request, release);
       } catch (error) {
@@ -502,7 +591,7 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
     }
     let connection;
     try {
-      if (NO_DATABASE.has(url.pathname)) return answer(await route.handler({ request, db: noDatabase, params: route.params }));
+      if (NO_DATABASE.has(route.route)) return answer(await route.handler({ request, db: noDatabase, params: route.params }));
       connection = await deps.connect();
       return answer(await route.handler({ request, db: connection, params: route.params }));
     } catch (error) {

@@ -210,6 +210,51 @@ def unused_drop_tables(drop_tables: list[dict], stages: list[dict]) -> list[str]
     return sorted(row.get("drop_table_id") for row in drop_tables if row.get("drop_table_id") not in used)
 
 
+CUE_ID = re.compile(r"^[a-z][a-z0-9_]{2,63}$")
+VOICE_REF = re.compile(r"^[a-z][a-z0-9_]{0,63}/[a-z0-9][a-z0-9_]{0,63}$")
+# The flow slots the client plays (game/scripts/core/content/audio_cues.gd); docs/design/FIRST_LAUNCH_FLOW.md.
+AUDIO_SLOTS = {
+    "flow.title", "flow.hub", "flow.summon", "flow.battle_default", "flow.victory", "flow.defeat",
+    "sfx.ui_start", "sfx.ui_confirm", "sfx.ui_back", "sfx.ui_error", "voice.title_call",
+}
+LINE_AUDIO_KEYS = {"music", "ambience", "sfx", "fade_seconds"}
+
+
+def check_story_audio(row: dict) -> None:
+    """Story cues (D-08): scene music_cue_id/ambience_cue_id and a line's `audio` changes; ids only, files may come later."""
+
+    label = row.get("line_id") or row.get("scene_id") or "story entry"
+    for field in ("music_cue_id", "ambience_cue_id"):
+        if field in row:
+            value = row[field]
+            require(value is None or (isinstance(value, str) and CUE_ID.match(value) is not None), f"{label}: {field} must be null or a cue id like bgm_opening_letter")
+    if "audio" in row:
+        audio = row["audio"]
+        require(isinstance(audio, dict) and set(audio) <= LINE_AUDIO_KEYS and bool(audio), f"{label}: audio must be an object of {sorted(LINE_AUDIO_KEYS)}")
+        if isinstance(audio, dict):
+            for field in ("music", "ambience"):
+                if field in audio:
+                    require(audio[field] == "stop" or (isinstance(audio[field], str) and CUE_ID.match(audio[field]) is not None), f"{label}: audio.{field} must be a cue id or \"stop\"")
+            if "sfx" in audio:
+                require(isinstance(audio["sfx"], str) and CUE_ID.match(audio["sfx"]) is not None, f"{label}: audio.sfx must be a cue id")
+            if "fade_seconds" in audio:
+                fade = audio["fade_seconds"]
+                require(isinstance(fade, (int, float)) and not isinstance(fade, bool) and 0 <= fade <= 10, f"{label}: audio.fade_seconds must be 0..10")
+
+
+def check_audio_cues(pack) -> None:
+    """The flow slot pack: exactly the client's slots, each null or a well-formed id."""
+
+    require(isinstance(pack, dict), "audio_cues_part1.json is missing")
+    if not isinstance(pack, dict):
+        return
+    slots = pack.get("slots")
+    require(isinstance(slots, dict) and set(slots) == AUDIO_SLOTS, f"audio_cues_part1 slots must be exactly {sorted(AUDIO_SLOTS)}")
+    for slot, value in (slots or {}).items():
+        pattern = VOICE_REF if slot.startswith("voice.") else CUE_ID
+        require(value is None or (isinstance(value, str) and pattern.match(value) is not None), f"audio_cues_part1 {slot}: must be null or a well-formed id")
+
+
 def main(content_dir: Path = CONTENT) -> int:
     ERRORS.clear()
     content_dir = Path(content_dir)
@@ -655,6 +700,7 @@ def main(content_dir: Path = CONTENT) -> int:
 
     def inspect_story(value) -> None:
         if isinstance(value, dict):
+            check_story_audio(value)
             speaker = value.get("speaker_id")
             if isinstance(speaker, str):
                 story_speakers.add(speaker)
@@ -696,6 +742,8 @@ def main(content_dir: Path = CONTENT) -> int:
     require(not (story_character_refs - char_ids), f"Story references unknown playable guests: {sorted(story_character_refs - char_ids)}")
     require(char_ids <= story_character_refs, f"Playable characters missing from story guest/dialogue references: {sorted(char_ids - story_character_refs)}")
     require(len(line_ids) == len(set(line_ids)), "Story line IDs must be globally unique")
+
+    check_audio_cues(packs.get("audio_cues_part1"))
 
     rule_warnings = check_rule_key_consumption(battle_rules)
     unused_tables = unused_drop_tables(drop_tables, stages)

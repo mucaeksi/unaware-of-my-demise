@@ -134,6 +134,12 @@ func is_finished() -> bool:
 	return current_entry().is_empty()
 
 
+## True for a player who has not finished the first story entry yet (the opening scene): the game takes them straight
+## into the story instead of the hub (docs/design/FIRST_LAUNCH_FLOW.md step 9).
+func is_at_story_start() -> bool:
+	return state.story_state.story_cursor == 0 and not needs_first_oath_selection()
+
+
 func is_stage(entry_id: String) -> bool:
 	return story_index.is_stage_entry(entry_id)
 
@@ -645,6 +651,93 @@ func level_up_equipment(table: String, instance_id: String) -> Outcome:
 
 func reroll_accessory(instance_id: String) -> Outcome:
 	return _adopt(await backend.reroll_accessory(instance_id))
+
+
+# -- social (INF-037; port of friends_overview / friend_action of the LEGACY client/game_controller.py) ---------------
+
+
+## The friends screen's content: the own profile and every friend and request (coroutine). `value`: GameViews.FriendsView.
+func friends_overview() -> Outcome:
+	var account: Outcome = await backend.fetch_account()
+	if not account.is_ok():
+		return account
+	var view: GameViews.FriendsView = _friends_view_profile(account.value)
+	var cursor: String = ""
+	# The server pages 100 at a time; the friend and request limits keep the whole list to a few pages.
+	for page: int in 5:
+		var listed: Outcome = await backend.friends(cursor)
+		if not listed.is_ok():
+			return listed
+		var reply: Dictionary = listed.value
+		if not (reply.get("items") is Array):
+			return Outcome.fail(ERROR_PROTOCOL, "the friends reply carries no list")
+		for item: Variant in reply["items"]:
+			if item is Dictionary:
+				view.rows.append(_friend_row(item))
+		var counts: Variant = reply.get("counts")
+		var limits: Variant = reply.get("limits")
+		view.friend_count = int((counts as Dictionary).get("friends", 0)) if counts is Dictionary else 0
+		view.friend_limit = int((limits as Dictionary).get("friends", 0)) if limits is Dictionary else 0
+		cursor = str(reply["next_cursor"]) if reply.get("next_cursor") is String else ""
+		if cursor.is_empty():
+			break
+	return Outcome.ok(view)
+
+
+static func _friends_view_profile(profile: Variant) -> GameViews.FriendsView:
+	var view: GameViews.FriendsView = GameViews.FriendsView.new()
+	var data: Dictionary = profile if profile is Dictionary else {}
+	view.friend_code = str(data.get("friend_code", ""))
+	view.nickname = str(data.get("nickname", ""))
+	view.presence_opt_in = bool(data.get("presence_opt_in", true))
+	var next_change: Variant = data.get("nickname_change_available_at_utc")
+	view.nickname_change_available_at = str(next_change) if next_change is String else ""
+	return view
+
+
+static func _friend_row(item: Dictionary) -> GameViews.FriendRow:
+	var row: GameViews.FriendRow = GameViews.FriendRow.new()
+	row.account_id = str(item.get("account_id", ""))
+	row.nickname = str(item.get("nickname", ""))
+	row.player_level = int(item.get("player_level", 1))
+	row.presence = str(item.get("presence", "offline"))
+	row.relationship = str(item.get("relationship", ""))
+	row.request_id = str(item["request_id"]) if item.get("request_id") is String else ""
+	return row
+
+
+## One friends-screen action (coroutine): "add" (`argument` = the typed friend code), "accept" / "reject" / "cancel"
+## (a request), "remove", "block", "report" (`argument` = the reason key) for `row`.
+func friend_action(action: String, row: GameViews.FriendRow, argument: String = "") -> Outcome:
+	match action:
+		"add":
+			return await backend.send_friend_request(argument)
+		"accept", "reject", "cancel":
+			return await backend.answer_friend_request(row.request_id, action)
+		"remove":
+			return await backend.remove_friend(row.account_id)
+		"block":
+			return await backend.block_player(row.account_id)
+		"report":
+			return await backend.report_player(row.account_id, argument)
+	return Outcome.fail(ERROR_PROTOCOL, "unknown friend action %s" % action)
+
+
+func update_profile(changes: Dictionary) -> Outcome:
+	return await backend.update_profile(changes)
+
+
+## `value`: Array of {"account_id", "nickname"} the player blocked.
+func blocked_players() -> Outcome:
+	var reply: Outcome = await backend.blocked_players()
+	if not reply.is_ok():
+		return reply
+	var items: Variant = (reply.value as Dictionary).get("items")
+	return Outcome.ok(items if items is Array else [])
+
+
+func unblock_player(account_id: String) -> Outcome:
+	return await backend.unblock_player(account_id)
 
 
 # -- gacha and quests (server-authoritative; ports of the gacha/quest parts of client/game_controller.py) -------------

@@ -77,15 +77,18 @@ export async function ensureProfile(db: Db, accountId: string): Promise<Profile>
   const select = "SELECT friend_code, nickname, avatar_mark_id, chapter_badge_id, presence_opt_in FROM profiles WHERE account_id = $1";
   const existing = await db.query<Profile>(select, [accountId]);
   if (existing.rows[0]) return existing.rows[0];
-  const nickname = `Player${accountId.slice(-6).toUpperCase()}`;
   for (let attempt = 0; attempt < 5; attempt++) {
+    // The placeholder nickname; nicknames are unique regardless of case (0010), so a collision tries a random suffix.
+    const nickname = `Player${attempt === 0 ? accountId.slice(-6).toUpperCase() : randomHex(3).toUpperCase()}`;
+    // Any conflict (friend code, nickname, or a concurrent first use creating the same profile) tries again.
     const inserted = await db.query(
-      "INSERT INTO profiles (account_id, friend_code, nickname) VALUES ($1, $2, $3) ON CONFLICT (friend_code) DO NOTHING",
+      "INSERT INTO profiles (account_id, friend_code, nickname) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING",
       [accountId, generateFriendCode(), nickname],
     );
-    if (inserted.rowCount === 1) return (await db.query<Profile>(select, [accountId])).rows[0]!;
+    const created = await db.query<Profile>(select, [accountId]);
+    if (inserted.rowCount === 1 || created.rows[0]) return created.rows[0]!;
   }
-  throw new Error("Could not generate a unique friend code after 5 attempts");
+  throw new Error("Could not create a profile with a unique friend code and nickname after 5 attempts");
 }
 
 /** A new opaque bearer token; only its SHA-256 is stored, the plaintext is returned exactly once. */

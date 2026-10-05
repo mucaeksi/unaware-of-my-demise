@@ -236,3 +236,46 @@ func test_an_outdated_build_and_maintenance_become_their_release_kinds() -> void
 	assert_eq((await (pair[0] as OnlineBackend).fetch_state()).error_kind, ClientRelease.KIND_UPDATE_REQUIRED)
 	var down: Outcome = await (pair[0] as OnlineBackend).fetch_state()
 	assert_eq([down.error_kind, down.error], [ClientRelease.KIND_MAINTENANCE, "back soon"])
+
+
+## INF-037: every social call goes to its route; changes carry an idempotency key, reads do not.
+func test_social_calls_go_to_their_routes() -> void:
+	var ok: Dictionary = {"status": 200, "body": "{}"}
+	var replies: Array[Dictionary] = []
+	for index: int in 11:
+		replies.append(ok)
+	var pair: Array = _backend(replies)
+	var backend: OnlineBackend = pair[0]
+	var account: String = "acct_0123456789abcdef0123456789abcdef"
+	var request_id: String = "freq_0123456789abcdef0123456789abcdef"
+	for call: Callable in [
+		func() -> Outcome: return await backend.fetch_account(),
+		func() -> Outcome: return await backend.update_profile({"nickname": "Ember"}),
+		func() -> Outcome: return await backend.friends("17.%s" % account),
+		func() -> Outcome: return await backend.send_friend_request("ABCD-2345"),
+		func() -> Outcome: return await backend.answer_friend_request(request_id, "accept"),
+		func() -> Outcome: return await backend.remove_friend(account),
+		func() -> Outcome: return await backend.blocked_players(),
+		func() -> Outcome: return await backend.block_player(account),
+		func() -> Outcome: return await backend.unblock_player(account),
+		func() -> Outcome: return await backend.report_player(account, "spam"),
+	]:
+		assert_true((await call.call()).is_ok())
+	var sent: Array[Dictionary] = (pair[1] as ScriptedTransport).sent
+	var routes: Array[String] = []
+	for request: Dictionary in sent:
+		routes.append("%s %s %s" % ["POST" if request["method"] == HTTPClient.METHOD_POST else "GET", str(request["url"]).trim_prefix("https://api.example"),
+			"keyed" if not _header(request, "Idempotency-Key").is_empty() else "-"])
+	assert_eq(routes, [
+		"GET /v1/account -",
+		"POST /v1/profile keyed",
+		"GET /v1/friends?limit=100&cursor=17.%s -" % account,
+		"POST /v1/friend-requests keyed",
+		"POST /v1/friend-requests/%s/accept keyed" % request_id,
+		"POST /v1/friends/%s/remove keyed" % account,
+		"GET /v1/blocks -",
+		"POST /v1/blocks keyed",
+		"POST /v1/blocks/%s/remove keyed" % account,
+		"POST /v1/reports keyed",
+	])
+	assert_eq(JSON.parse_string(sent[9]["body"]), {"account_id": account, "reason_key": "spam"})
