@@ -7,16 +7,23 @@ Status: **DRAFT, awaiting the owner's review** (2026-10-05). Not yet published o
 | `PRIVACY_POLICY.md` | Privacy policy (GDPR, KVKK, Google Play User Data policy, AdMob disclosures) | `/privacy` on the game Worker; Play Console → App content → Privacy policy |
 | `TERMS_OF_SERVICE.md` | Terms of service | `/terms` on the game Worker |
 
-## Owner inputs still needed
+## Owner inputs
 
-1. Controller identity: full legal name (or company), postal address in Türkiye.
-2. Minimum age / target audience (draft: 16+). It must match the Play Console target-audience answers and the IARC
-   rating; the gacha with paid subscriptions and the adult character designs point to 16+ or 18+.
-3. Refund rule: keep "rewards already paid are not taken back" (DEC-0038)?
-4. Governing law (draft: Türkiye) and the closing notice period (draft: 30 days).
-5. How long support e-mails are kept (draft: 12 months).
-6. KVKK cross-border transfers (Article 9 as amended in 2024): sign the standard contracts with the providers that offer
-   them, or rely on another safeguard, and notify the KVKK Board within 5 business days of signing. Needs a lawyer.
+Answered on 2026-10-05:
+- **Controller:** Serpil Ekşi, Bahçelievler Mah. Emektar Sok. Taşkent Sitesi No:17 D:1, 59030 Süleymanpaşa/Tekirdağ.
+- **Governing law:** Türkiye.
+- **Age:** the owner prefers 12+, else 16+. The texts use **13+**.
+  - Picking an under-13 age group in Play's target audience puts the game under the Families policy:
+    Families-certified ads only, no personalised ads, child data limits.
+  - 13 is the lowest age that avoids that. The IARC content rating (PEGI 12 or 16, from the questionnaire) is
+    separate from this.
+- **Cross-border transfers (KVKK m.9):** map them and choose the mechanism; sign standard contracts and notify the
+  Board within 5 business days where needed. The map and plan are in `KVKK_TRANSFERS.md`; a lawyer must confirm them.
+
+Still open:
+- Refund rule: keep "rewards already paid are not taken back" (DEC-0038)?
+- How long support e-mails are kept (draft: 12 months).
+- The closing notice period (draft: 30 days).
 
 ## Evidence the texts were written from
 

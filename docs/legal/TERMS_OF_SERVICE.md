@@ -6,13 +6,14 @@
 
 Last updated: [date of publication]
 
-These terms are an agreement between you and **[owner's full legal name or company name]** ("we", "us") for the mobile
+These terms are an agreement between you and **Serpil Ekşi**, Bahçelievler Mah. Emektar Sok. Taşkent Sitesi No:17 D:1, 59030 Süleymanpaşa/Tekirdağ, Türkiye ("we", "us") for the mobile
 game **Unaware of My Demise** and its online services (the "Game"). By signing in and playing you accept them and our
 Privacy Policy. If you do not accept them, do not use the Game.
 
 ## 1. Who may play
 
-You must be at least [16] years old, or older if your country requires it to agree to these terms. You sign in with a
+You must be at least 13 years old. If you are below the age at which your country lets you agree to these terms alone
+(up to 16 in some EU countries, 18 for contracts in others), a parent or guardian must agree to them for you. You sign in with a
 Google account and are responsible for what happens on your game account. One person, one account: do not sell, share
 or transfer accounts.
 
@@ -94,6 +95,6 @@ your account.
 
 ## 12. Law and disputes
 
-These terms are governed by the laws of [Türkiye], without prejudice to the mandatory consumer-protection law of the
+These terms are governed by the laws of the Republic of Türkiye, without prejudice to the mandatory consumer-protection law of the
 country where you live. Consumers in Türkiye may apply to the Consumer Arbitration Committees and Consumer Courts;
 consumers in the EU may use their local courts. Contact: unawareofmydemise@gmail.com.

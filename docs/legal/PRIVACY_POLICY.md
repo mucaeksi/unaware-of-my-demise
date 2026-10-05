@@ -12,7 +12,7 @@ collect, why, how long it is kept, who processes it, and what rights you have.
 
 ## 1. Who is responsible
 
-The controller of your personal data is **[owner's full legal name or company name]**, [postal address], Türkiye
+The controller of your personal data is **Serpil Ekşi**, Bahçelievler Mah. Emektar Sok. Taşkent Sitesi No:17 D:1, 59030 Süleymanpaşa/Tekirdağ, Türkiye
 ("we", "us"). Contact for every privacy question or request: **unawareofmydemise@gmail.com**.
 
 ## 2. What we collect and why
@@ -54,8 +54,9 @@ These providers act on our instructions under their data processing terms, excep
 independent controller for sign-in, payments and ads under its own policies.
 
 **International transfers.** Some providers process data outside Türkiye and outside the European Economic Area. Such
-transfers rely on the providers' standard contractual clauses or other safeguards required by the GDPR and by KVKK
-Article 9 [owner/legal review: the standard contracts and their notification to the KVKK Board].
+transfers rely on the providers' standard contractual clauses under the GDPR and, under KVKK Article 9, on the
+standard contracts announced by the Turkish Personal Data Protection Board, notified to the Board within five business
+days of signing [being arranged with each provider: docs/legal/KVKK_TRANSFERS.md].
 
 ## 5. How long we keep it
 
@@ -87,8 +88,9 @@ You can, at any time:
 
 ## 7. Children
 
-The Game is not directed to children under [16] and is rated for [age rating from the Play questionnaire]. We do not
-knowingly collect data from children below that age. If you believe a child has an account, write to us and we will
+The Game is intended for players aged 13 and over and is not directed to children under 13. In countries where a
+higher age applies to consent to online services (up to 16 in some EU countries), younger players need a parent's
+permission. We do not knowingly collect data from children under 13. If you believe a child has an account, write to us and we will
 delete it.
 
 ## 8. Security
