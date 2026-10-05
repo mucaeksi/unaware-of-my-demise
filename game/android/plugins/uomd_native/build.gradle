@@ -29,4 +29,66 @@ dependencies {
     implementation "com.android.billingclient:billing:9.1.0"
     implementation "com.google.android.gms:play-services-ads:25.5.0"
     implementation "com.google.android.ump:user-messaging-platform:4.0.0"
+    // Shipped by the engine and Godot's Android build template (config.gradle of the pinned engine version), not by
+    // this plugin: runtime-only here (an AAR carries no dependencies) so this build resolves the same versions as the
+    // exported app, whose libraries the third-party notices below list.
+    runtimeOnly "org.godotengine:godot:4.7.2.stable"
+    runtimeOnly "androidx.fragment:fragment:1.8.6"
+    runtimeOnly "androidx.core:core-splashscreen:1.0.1"
+    runtimeOnly "androidx.documentfile:documentfile:1.1.0"
+}
+
+// Third-party notices (INF-040): every Maven library the app ships (this plugin's runtime classpath, which mirrors the
+// exported app's) with the licenses its POM (or a parent POM) declares, written to game/data/legal/android_libraries.json.
+// The file is committed; tools/build_uomd_native.sh regenerates it and fails when a dependency change left it stale, and
+// tools/verify_apk.sh checks it against the library versions recorded inside the APK.
+tasks.register('thirdPartyNotices') {
+    def output = rootProject.file('../../../data/legal/android_libraries.json')
+    outputs.file(output)
+    doLast {
+        def ids = new TreeSet<String>()
+        configurations.getByName('releaseRuntimeClasspath').incoming.resolutionResult.allComponents.each { component ->
+            def id = component.id
+            if (id instanceof ModuleComponentIdentifier) {
+                ids << "${id.group}:${id.module}:${id.version}".toString()
+            }
+        }
+        // A POM download can fail on a flaky network: asked up to three times before the library counts as unlicensed.
+        def pom = { String coordinates ->
+            def parts = coordinates.split(':')
+            for (int attempt = 0; attempt < 3; attempt++) {
+                def result = dependencies.createArtifactResolutionQuery()
+                        .forModule(parts[0], parts[1], parts[2])
+                        .withArtifacts(MavenModule, MavenPomArtifact)
+                        .execute()
+                def files = result.resolvedComponents.collectMany { it.getArtifacts(MavenPomArtifact).findAll { it instanceof ResolvedArtifactResult }*.file }
+                if (files) {
+                    return new groovy.xml.XmlSlurper().parse(files[0])
+                }
+            }
+            return null
+        }
+        def licensesOf
+        licensesOf = { String coordinates, int depth ->
+            def xml = pom(coordinates)
+            if (xml == null) {
+                return []
+            }
+            def found = xml.licenses.license.collect { [name: it.name.text().trim(), url: it.url.text().trim()] }
+            if (found || depth >= 4 || xml.parent.artifactId.text().isEmpty()) {
+                return found
+            }
+            return licensesOf("${xml.parent.groupId.text()}:${xml.parent.artifactId.text()}:${xml.parent.version.text()}".toString(), depth + 1)
+        }
+        def rows = ids.collect { coordinates ->
+            def parts = coordinates.split(':')
+            [group: parts[0], name: parts[1], version: parts[2], licenses: licensesOf(coordinates, 0)]
+        }
+        output.parentFile.mkdirs()
+        output.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([libraries: rows])) + '\n'
+        def missing = rows.findAll { it.licenses.isEmpty() }*.name
+        if (missing) {
+            throw new GradleException("No license in the POM of: ${missing.join(', ')}")
+        }
+    }
 }

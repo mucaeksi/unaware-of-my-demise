@@ -10,17 +10,17 @@ import { randomHex } from "./crypto";
 import { consistentRead, transaction, type Connect, type Db } from "./db";
 import { ApiError, errorResponse, isoUtc, json, readJsonObject } from "./http";
 import { setJournalContext } from "./journal";
-import { bootstrap, DEVELOPMENT_RELEASE, type ReleaseConfig } from "./release";
+import { bootstrap, DEVELOPMENT_RELEASE, effectiveRelease, parseReleaseControl, readReleaseControl, type ReleaseConfig } from "./release";
 import { snapshot } from "./state";
 import { currentLiveops, parseConfig, parseMail } from "./liveops";
 
 export type AdminRole = "viewer" | "support" | "operator";
-export type Permission = "service.read" | "player.read" | "player.support" | "audit.read" | "liveops.write";
+export type Permission = "service.read" | "player.read" | "player.support" | "audit.read" | "liveops.write" | "release.write";
 
 const GRANTS: Record<AdminRole, readonly Permission[]> = {
   viewer: ["service.read", "player.read"],
   support: ["service.read", "player.read", "player.support"],
-  operator: ["service.read", "player.read", "player.support", "audit.read", "liveops.write"],
+  operator: ["service.read", "player.read", "player.support", "audit.read", "liveops.write", "release.write"],
 };
 
 export interface AdminDeps {
@@ -164,9 +164,11 @@ function routes(deps: AdminDeps): Record<string, AdminHandler> {
       const counts = await db.query<{ accounts: string; sessions: string }>(
         "SELECT (SELECT count(*) FROM account) AS accounts, (SELECT count(*) FROM sessions WHERE expires_at > now()) AS sessions",
       );
+      const control = await readReleaseControl(db);
       return json({
         environment: deps.environment,
-        release: await bootstrap(release, new Date(now() * 1000)),
+        // What players get within 30 s (the game Worker caches the control per isolate), given these deploy variables.
+        release: await bootstrap(effectiveRelease(release, control), new Date(now() * 1000)),
         schema: ledger.rows[0] ? { version: ledger.rows[0].version, filename: ledger.rows[0].filename, applied_at_utc: isoUtc(ledger.rows[0].applied_at) } : null,
         accounts: Number(counts.rows[0]?.accounts ?? 0),
         active_sessions: Number(counts.rows[0]?.sessions ?? 0),
@@ -244,6 +246,35 @@ function routes(deps: AdminDeps): Record<string, AdminHandler> {
       return audited(context, change, "support.revoke_sessions", accountId, async (tx) => {
         const revoked = await tx.query("DELETE FROM sessions WHERE account_id = $1", [accountId]);
         return { account_id: accountId, revoked_sessions: revoked.rowCount ?? 0 };
+      });
+    },
+
+    // Release control (INF-033, DEC-0040): maintenance and the minimum app version without a redeploy. The game Worker
+    // applies the newest revision within 30 s; it can raise the deploy's minimum versionCode, never lower it.
+    "GET /admin/api/release": async ({ db, operator }) => {
+      requirePermission(operator, "service.read");
+      const { rows } = await db.query<{ revision: string; maintenance_message: string; min_client_version_code: number; created_by: string; reason: string; created_at: Date }>(
+        `SELECT revision, maintenance_message, min_client_version_code, created_by, reason, created_at
+         FROM release_control ORDER BY revision DESC LIMIT ${PAGE}`,
+      );
+      const release = deps.release ?? DEVELOPMENT_RELEASE;
+      return json({
+        deploy: { min_client_version_code: release.minClientVersionCode, maintenance_message: release.maintenanceMessage },
+        revisions: rows.map((row) => ({ ...row, revision: Number(row.revision), created_at: isoUtc(row.created_at) })),
+      });
+    },
+
+    "POST /admin/api/release": async (context) => {
+      requirePermission(context.operator, "release.write");
+      const change = await changeRequest(context);
+      const control = parseReleaseControl(change.body);
+      return auditedChange(deps, context, change, "release.write", "release.set_control", null, async (tx) => {
+        const { rows } = await tx.query<{ revision: string }>(
+          `INSERT INTO release_control (maintenance_message, min_client_version_code, created_by, reason, operation_key)
+           VALUES ($1, $2, $3, $4, $5) RETURNING revision`,
+          [control.maintenanceMessage, control.minClientVersionCode, context.operator.email, change.reason, change.key],
+        );
+        return { revision: Number(rows[0]!.revision), maintenance_message: control.maintenanceMessage, min_client_version_code: control.minClientVersionCode };
       });
     },
 

@@ -29,10 +29,14 @@ const HUB_SETTINGS: String = "settings"
 const SETTINGS_SIGN_OUT: String = "sign_out"
 const SETTINGS_DELETE_ACCOUNT: String = "delete_account"
 const SETTINGS_CONTACT_SUPPORT: String = "contact_support"
+const SETTINGS_LICENSES: String = "licenses"
 ## Where players write for help (owner decision D-01); the same address is on the web deletion page (server/src/web.ts).
 const SUPPORT_EMAIL: String = "unawareofmydemise@gmail.com"
 ## The game's store page (the Android package of export_presets.cfg): where "Update" sends a build the server no longer accepts.
 const STORE_URL: String = "https://play.google.com/store/apps/details?id=io.github.mucaeksi.unawareofmydemise"
+## INF-019: after this long in the background the hub asks the server again (another device may have played, a
+## maintenance or a required update may have started); shorter switches change nothing.
+const RESUME_REFRESH_MS: int = 5 * 60 * 1000
 const HUB_DIAGNOSTICS: String = "diagnostics"
 
 const _STOP_REASONS: Dictionary = {
@@ -60,6 +64,8 @@ var _loaded_flow: GameFlow = null
 var monetization: Monetization = null
 var _startup: StartupSequence = null
 var _battle_job: WorkerJob = null
+## When the app went to the background (Time.get_ticks_msec; -1 = in the foreground).
+var _backgrounded_at: int = -1
 var _battle_stage: String = ""
 var _battle_roster: Variant = null
 
@@ -106,6 +112,36 @@ func _process(_delta: float) -> void:
 ## True while a worker (content load or battle) is running.
 func is_busy() -> bool:
 	return _boot_job != null or _battle_job != null
+
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_APPLICATION_PAUSED, NOTIFICATION_APPLICATION_FOCUS_OUT:
+			if _backgrounded_at < 0:
+				_backgrounded_at = Time.get_ticks_msec()
+		NOTIFICATION_APPLICATION_RESUMED, NOTIFICATION_APPLICATION_FOCUS_IN:
+			if _backgrounded_at >= 0:
+				var away: int = Time.get_ticks_msec() - _backgrounded_at
+				_backgrounded_at = -1
+				handle_resume(away)
+
+
+## Back from the background after `away_ms`: on the hub, after a long absence, the server's state is fetched again and
+## the hub redrawn; an update or a maintenance that started meanwhile shows at once. Battles, story scenes and other
+## screens are never interrupted (their next server call meets the same answers).
+func handle_resume(away_ms: int) -> void:
+	if away_ms < RESUME_REFRESH_MS or flow == null or not (shell.current is HubScreen):
+		return
+	var hub: Control = shell.current
+	var synced: Outcome = await flow.sync()
+	if shell.current != hub:
+		return
+	if synced.is_ok():
+		_present_hub()
+	elif synced.error_kind == ClientRelease.KIND_UPDATE_REQUIRED:
+		_present_update_required(synced.error)
+	elif synced.error_kind == ClientRelease.KIND_MAINTENANCE:
+		_present_boot_failure("Maintenance", synced.error)
 
 
 func on_back_unhandled() -> void:
@@ -933,6 +969,7 @@ func _present_settings(status: String = "") -> void:
 		actions = [{"id": SETTINGS_SIGN_OUT, "label": "Sign out"}, {"id": SETTINGS_DELETE_ACCOUNT, "label": "Delete account"}]
 	info += "\nSupport: %s" % SUPPORT_EMAIL
 	actions.append({"id": SETTINGS_CONTACT_SUPPORT, "label": "Contact support"})
+	actions.append({"id": SETTINGS_LICENSES, "label": "Licenses"})
 	var settings: SettingsScreen = SettingsScreen.new()
 	settings.load_settings(info, status, actions)
 	var volumes: Dictionary = {}
@@ -947,8 +984,17 @@ func _present_settings(status: String = "") -> void:
 		elif action_id == SETTINGS_DELETE_ACCOUNT:
 			_confirm_account_deletion()
 		elif action_id == SETTINGS_CONTACT_SUPPORT:
-			OS.shell_open(support_mail_uri()))
+			OS.shell_open(support_mail_uri())
+		elif action_id == SETTINGS_LICENSES:
+			_present_licenses())
 	shell.show_screen(settings)
+
+
+func _present_licenses() -> void:
+	var screen: LicensesScreen = LicensesScreen.new()
+	screen.load_text(ThirdPartyNotices.text())
+	screen.back_requested.connect(func() -> void: _present_settings())
+	shell.show_screen(screen)
 
 
 ## A mailto link to support with the build and the account id filled in, so a report can be traced.

@@ -35,7 +35,7 @@ import { claimQuest, parseQuestClaim, questStatus } from "./quest-claims";
 import { levelUp, parseXpItems, unlockMemoryNode, upgradeSkill } from "./progression";
 import { abandonAttempt, beginAttempt, completeAttempt, parseClientResult, parseRoster, type Simulate } from "./stages";
 import { claimInnMeal } from "./ration";
-import { admit, bootstrap, DEVELOPMENT_RELEASE, type ReleaseConfig } from "./release";
+import { admit, bootstrap, DEVELOPMENT_RELEASE, effectiveRelease, type ReleaseConfig, type ReleaseControlCache } from "./release";
 import { bumpStateRevision, snapshot, wallet } from "./state";
 import { currentRelease, packResponse, type ContentStore } from "./content";
 import { claimMail, currentLiveops, listMail } from "./liveops";
@@ -73,6 +73,8 @@ export interface AppDeps {
   /** Google's AdMob verifier keys (INF-036); null/absent = rewarded ads answer 503. */
   admobKeys?: AdmobKeys | null;
   /** Our rewarded ad units (ADMOB_AD_UNIT_IDS): a callback for any other unit is refused; empty = ads answer 503. */
+  /** The admin panel's release control (DEC-0040), cached per isolate; absent = the deploy variables alone. */
+  releaseControl?: ReleaseControlCache;
   admobAdUnits?: string[];
   /** Google Play for the Eclipse Blessing (INF-036); null/absent = purchases answer 503. */
   playVerifier?: PlayVerifier | null;
@@ -87,7 +89,7 @@ export interface AppDeps {
  * (ids stay out), and an error carries its message and stack only.
  */
 export interface LogEntry {
-  event: "request" | "unhandled_error";
+  event: "request" | "unhandled_error" | "release_control_unreadable";
   request_id: string;
   method: string;
   route: string;
@@ -235,7 +237,7 @@ function routes(deps: AppDeps): Record<string, Handler> {
     },
 
     // Unauthenticated and outside the update/maintenance gate: a client asks it first to learn whether it may play.
-    "GET /v1/bootstrap": async () => json(await bootstrap(deps.release ?? DEVELOPMENT_RELEASE, new Date(clock() * 1000))),
+    "GET /v1/bootstrap": async () => json(await bootstrap(await releaseInForce(deps), new Date(clock() * 1000))),
 
     // Content patches (INF-029): signed-in players only; the bucket itself is private.
     "GET /v1/content/current": async (context) => {
@@ -693,11 +695,27 @@ const noDatabase: Db = {
   query: () => Promise.reject(new Error("this route has no database connection")),
 };
 
+/** The deploy variables with the admin release control applied (DEC-0040); without a cache, the variables alone. */
+async function releaseInForce(deps: AppDeps): Promise<ReleaseConfig> {
+  const base = deps.release ?? DEVELOPMENT_RELEASE;
+  if (!deps.releaseControl) return base;
+  const nowMs = (deps.nowUnix ?? (() => Date.now() / 1000))() * 1000;
+  const control = await deps.releaseControl.current(deps.connect, nowMs, (error) =>
+    (deps.log ?? consoleLog)({
+      event: "release_control_unreadable",
+      request_id: "release_control",
+      method: "-",
+      route: "release_control",
+      error: error instanceof Error ? error.message : String(error),
+    }),
+  );
+  return effectiveRelease(base, control);
+}
+
 export function createApp(deps: AppDeps): (request: Request) => Promise<Response> {
   const table = routes(deps);
-  const release = deps.release ?? DEVELOPMENT_RELEASE;
   const log = deps.log ?? consoleLog;
-  const sourceSha = release.sourceSha?.slice(0, 12) ?? null;
+  const sourceSha = (deps.release ?? DEVELOPMENT_RELEASE).sourceSha?.slice(0, 12) ?? null;
 
   const handle = async (request: Request, url: URL, requestId: string): Promise<{ response: Response; route: string }> => {
     const route = matchRoute(table, request.method, url.pathname);
@@ -716,7 +734,7 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
     }
     if (!UNGATED.has(route.route)) {
       try {
-        admit(request, release);
+        admit(request, await releaseInForce(deps));
       } catch (error) {
         if (error instanceof ApiError) return answer(errorResponse(error));
         throw error;

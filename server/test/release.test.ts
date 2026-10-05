@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { createApp } from "../src/app";
 import type { DbConnection } from "../src/db";
-import { API_VERSION, parseReleaseConfig, rulesHash, RULES_FILES, serverRulesHash, type ReleaseConfig } from "../src/release";
+import { API_VERSION, effectiveRelease, parseReleaseConfig, parseReleaseControl, ReleaseControlCache, rulesHash, RULES_FILES, serverRulesHash, type ReleaseConfig } from "../src/release";
 
 const ROOT = join(import.meta.dirname, "..", "..");
 const CONTENT = join(ROOT, "game", "data", "content");
@@ -138,5 +138,76 @@ describe("update and maintenance gate", () => {
       expect(response.status, path).toBe(503);
       expect(await response.json()).toEqual({ error: { code: "MAINTENANCE", message: "Patch in progress" } });
     }
+  });
+});
+
+describe("release control (DEC-0040)", () => {
+  const BASE: ReleaseConfig = { sourceSha: null, minClientVersionCode: 5, maintenanceMessage: "" };
+  const control = (minimum: number, message = "") => ({ revision: 1, minClientVersionCode: minimum, maintenanceMessage: message });
+
+  it("can raise the deploy's minimum versionCode but never lower it, and its maintenance message wins", () => {
+    expect(effectiveRelease(BASE, null)).toEqual(BASE);
+    expect(effectiveRelease(BASE, control(9)).minClientVersionCode).toBe(9);
+    expect(effectiveRelease(BASE, control(2)).minClientVersionCode, "never below what this server needs").toBe(5);
+    expect(effectiveRelease({ ...BASE, maintenanceMessage: "deploy" }, control(1, "")).maintenanceMessage).toBe("deploy");
+    expect(effectiveRelease(BASE, control(1, "Back at 03:00 UTC")).maintenanceMessage).toBe("Back at 03:00 UTC");
+  });
+
+  it("refuses malformed operator input", () => {
+    expect(parseReleaseControl({ maintenance_message: "  Back soon  ", min_client_version_code: 3 })).toEqual({ maintenanceMessage: "Back soon", minClientVersionCode: 3 });
+    expect(parseReleaseControl({})).toEqual({ maintenanceMessage: "", minClientVersionCode: 1 });
+    for (const body of [{ min_client_version_code: 0 }, { min_client_version_code: 1.5 }, { min_client_version_code: "2" }, { maintenance_message: 7 }, { maintenance_message: "x".repeat(501) }]) {
+      expect(() => parseReleaseControl(body)).toThrow();
+    }
+  });
+
+  /** A database holding one control row (or failing), counting its connections. */
+  const controlDb = (row: Record<string, unknown> | null, fail = false) => {
+    const state = { connections: 0, row, fail };
+    const connect = async (): Promise<DbConnection> => {
+      state.connections += 1;
+      if (state.fail) throw new Error("database unreachable");
+      return {
+        query: async (text: string) =>
+          (text.includes("release_control")
+            ? { rows: state.row ? [state.row] : [], rowCount: state.row ? 1 : 0 }
+            : { rows: [{ "?column?": 1 }], rowCount: 1 }) as never,
+        release: async () => undefined,
+      };
+    };
+    return { state, connect };
+  };
+
+  it("is read once per interval per isolate, and an unreadable database keeps the last value", async () => {
+    const db = controlDb({ revision: "4", maintenance_message: "Down", min_client_version_code: 2 });
+    const cache = new ReleaseControlCache(30_000);
+    const errors: unknown[] = [];
+    const [first, second] = await Promise.all([cache.current(db.connect, 0, (e) => errors.push(e)), cache.current(db.connect, 0, (e) => errors.push(e))]);
+    expect(first).toEqual({ revision: 4, maintenanceMessage: "Down", minClientVersionCode: 2 });
+    expect(second).toEqual(first);
+    expect(db.state.connections, "concurrent requests share one read").toBe(1);
+    await cache.current(db.connect, 29_999, () => undefined);
+    expect(db.state.connections).toBe(1);
+    db.state.fail = true;
+    expect(await cache.current(db.connect, 30_000, (e) => errors.push(e)), "the last value stays in force").toEqual(first);
+    expect(errors).toHaveLength(1);
+    db.state.fail = false;
+    db.state.row = null;
+    expect(await cache.current(db.connect, 60_000, () => undefined), "no revision = the deploy variables").toBeNull();
+  });
+
+  it("puts the game into maintenance and raises the minimum version without a redeploy", async () => {
+    const db = controlDb({ revision: "1", maintenance_message: "Back at 03:00 UTC", min_client_version_code: 7 });
+    const game = createApp({ connect: db.connect, verifier: null, release: BASE, releaseControl: new ReleaseControlCache(0), nowUnix: () => 1_790_000_000 });
+    const boot = (await (await game(new Request("https://api.test/v1/bootstrap"))).json()) as Record<string, unknown>;
+    expect([boot.min_client_version_code, boot.maintenance]).toEqual([7, { active: true, message: "Back at 03:00 UTC" }]);
+    const outdated = await game(new Request("https://api.test/v1/state", { headers: { "x-client-version-code": "6" } }));
+    expect(outdated.status).toBe(426);
+    const current = await game(new Request("https://api.test/v1/state", { headers: { "x-client-version-code": "7" } }));
+    expect([current.status, ((await current.json()) as { error: { code: string } }).error.code]).toEqual([503, "MAINTENANCE"]);
+    db.state.fail = true;
+    const unreachable = createApp({ connect: db.connect, verifier: null, release: BASE, releaseControl: new ReleaseControlCache(0), log: () => undefined, nowUnix: () => 1_790_000_000 });
+    const plain = (await (await unreachable(new Request("https://api.test/v1/bootstrap"))).json()) as Record<string, unknown>;
+    expect(plain.maintenance, "an outage alone never means maintenance").toEqual({ active: false, message: "" });
   });
 });
