@@ -63,3 +63,20 @@ Read after `CLAUDE.md` on every resume. Conversation memory is not authoritative
   `/root/.claude/projects/.../tool-results/`, decode in the sandbox, verify
   against the LEGACY git index (blob sha1 + size). No base64 through the model.
 - GUT source: `add_repo bitwes/Gut` (read) then `git archive v9.7.1`.
+
+## Owner answers received 2026-10-05 (NOT yet applied — apply after the limit reset, when the owner restarts the session)
+
+Owner: "do not do these now, just note them". Verbatim intent (Turkish originals summarised):
+- **D-12** Workers Paid: not now. Wait until the game is fully released and uploaded to Play Store as an AAB; continue on Free until then.
+- **D-03** Neon branch protection needs a paid upgrade: do it when the game is fully released.
+- **D-09** Content-signing key: give the owner the exact commands and explain in detail where each output goes.
+- **D-13 + D-04**: no answer given yet (left blank) — ask again.
+- **D-17** Billing: owner plans THREE subscriptions — US$5, US$10, US$20 — each with different rewards (reward design later; current single `eclipse_blessing_30d` must become a 3-tier model). Service account etc. will be created now: give step-by-step instructions.
+- **D-18** AdMob is important: max 5 highest-paying rewarded ads per 12 hours; subscribers watch only 1 ad and skip; the highest subscription tier gets all ad rewards without watching any ad. (Changes current caps 4/window 8/day and adds tier-aware ad logic, server-side.)
+- **D-11** Admin panel: do it; panel is important and must be well organised — owner must be able to make the changes they want from there. Give Access setup steps.
+- **D-06** Alerts: use unawareofmydemise@gmail.com (and everywhere such an address fits).
+- **D-05** Backups: owner asks for a recommendation; Neon stays free for now — is R2 better? Answer with a recommendation.
+- **D-14** Tell the owner exactly where to add the origin; they will add it.
+- **D-15** Research Terms of Service + Privacy Policy in detail and write them for the owner (after the reset).
+- **D-16** All design/creative work is handed to another team; this session is responsible only for game infrastructure and gameplay for now.
+- **D-19** No other languages for now: release fully in English; add languages later via patch.
