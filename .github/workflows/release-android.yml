@@ -78,7 +78,12 @@ jobs:
           echo "BUNDLETOOL=${RUNNER_TEMP}/bundletool.jar" >> "${GITHUB_ENV}"
       - name: Build the UomdNative AARs
         if: steps.config.outputs.ready == 'true'
-        run: game/tools/build_uomd_native.sh
+        env:
+          # The owner's AdMob app id (D-18); unset, the build carries Google's sample id and serves only test ads.
+          ADMOB_APP_ID: ${{ vars.ADMOB_APP_ID }}
+        run: |
+          [ -n "${ADMOB_APP_ID}" ] || echo "::warning::variable ADMOB_APP_ID is not set: this release carries Google's sample AdMob app id (test ads only)"
+          game/tools/build_uomd_native.sh
       - name: Install the pinned Godot and its Android export templates (checksums verified)
         if: steps.config.outputs.ready == 'true'
         run: |

@@ -9,8 +9,23 @@ import { parseReleaseConfig } from "./release";
 import { CHANNELS } from "./content";
 import { runRetention } from "./retention";
 import { engineSimulate } from "./stages";
+import { HttpAdmobKeys } from "./ads";
+import { GooglePlayVerifier, GooglePushVerifier, type PlayVerifier } from "./billing";
 
 let verifierFor: { audiences: string; verifier: IdentityVerifier | null } | null = null;
+const packageName = (env: Env): string => (env.PLAY_PACKAGE_NAME ?? "").trim() || "io.github.mucaeksi.unawareofmydemise";
+
+let playFor: { key: string; verifier: PlayVerifier | null } | null = null;
+
+/** One Google Play client per isolate and key, so its access token is reused between requests. */
+function playVerifier(env: Env): PlayVerifier | null {
+  const key = env.GOOGLE_PLAY_SERVICE_ACCOUNT ?? "";
+  if (playFor?.key !== key) playFor = { key, verifier: key ? new GooglePlayVerifier(packageName(env), key) : null };
+  return playFor.verifier;
+}
+
+/** Google's AdMob verifier keys, kept per isolate (fetched on the first callback). */
+const admobKeys = new HttpAdmobKeys();
 
 /** One verifier per isolate and configuration, so Google's signing keys stay cached between requests. */
 function verifier(env: Env): IdentityVerifier | null {
@@ -47,6 +62,11 @@ export default {
       contentChannel: contentChannel(env.CONTENT_CHANNEL),
       // GOOGLE_CLIENT_IDS holds the Web OAuth client id (docs/GITHUB_SECRETS.md): the deletion page signs in with it.
       webClientId: (env.GOOGLE_CLIENT_IDS ?? "").split(",").map((id) => id.trim()).find(Boolean) ?? null,
+      admobKeys,
+      playVerifier: playVerifier(env),
+      playPackageName: packageName(env),
+      pushVerifier: env.RTDN_AUDIENCE && env.RTDN_PUSH_SERVICE_ACCOUNT ? new GooglePushVerifier(env.RTDN_AUDIENCE, env.RTDN_PUSH_SERVICE_ACCOUNT) : null,
+      admobAdUnits: (env.ADMOB_AD_UNIT_IDS ?? "").split(",").map((id) => id.trim()).filter(Boolean),
     });
     return app(request);
   },

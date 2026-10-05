@@ -30,7 +30,12 @@ import javax.crypto.spec.GCMParameterSpec;
  * {@code iv_length (1 byte) || iv || ciphertext+tag} is stored by the app.
  *
  * <p>Google sign-in through Credential Manager ({@link GoogleSignIn}, INF-017): {@link #signIn} starts it and the result
- * arrives as the {@code sign_in_finished} signal, never by polling. Play Billing and the rewarded ad are not built.
+ * arrives as the {@code sign_in_finished} signal, never by polling.
+ *
+ * <p>Google Play Billing ({@link PlayBilling}) and rewarded ads with Google's consent form ({@link RewardedAds}),
+ * INF-036: results arrive as the {@code billing_product}, {@code purchases_updated}, {@code purchases_queried},
+ * {@code consent_finished} and {@code ad_finished} signals. The app never grants a purchase or an ad reward; the game
+ * server does, after Google confirms.
  *
  * <p>Methods never throw into the engine: they return {@code false} / an empty array and record the reason,
  * readable through {@link #lastError()}.
@@ -38,12 +43,19 @@ import javax.crypto.spec.GCMParameterSpec;
 public class UomdNative extends GodotPlugin {
     static final String PLUGIN_NAME = "UomdNative";
     static final String SIGN_IN_FINISHED = "sign_in_finished";
+    static final String BILLING_PRODUCT = "billing_product";
+    static final String PURCHASES_UPDATED = "purchases_updated";
+    static final String PURCHASES_QUERIED = "purchases_queried";
+    static final String CONSENT_FINISHED = "consent_finished";
+    static final String AD_FINISHED = "ad_finished";
     private static final String TAG = "UomdNative";
     private static final String ANDROID_KEYSTORE = "AndroidKeyStore";
     private static final String TRANSFORMATION = "AES/GCM/NoPadding";
     private static final int GCM_TAG_BITS = 128;
 
     private String lastError = "";
+    private PlayBilling billing = null;
+    private final RewardedAds ads = new RewardedAds();
 
     public UomdNative(Godot godot) {
         super(godot);
@@ -59,6 +71,9 @@ public class UomdNative extends GodotPlugin {
     public Set<SignalInfo> getPluginSignals() {
         Set<SignalInfo> signals = new HashSet<>();
         signals.add(new SignalInfo(SIGN_IN_FINISHED, Dictionary.class));
+        for (String name : new String[] {BILLING_PRODUCT, PURCHASES_UPDATED, PURCHASES_QUERIED, CONSENT_FINISHED, AD_FINISHED}) {
+            signals.add(new SignalInfo(name, Dictionary.class));
+        }
         return signals;
     }
 
@@ -93,6 +108,82 @@ public class UomdNative extends GodotPlugin {
         if (activity != null) {
             GoogleSignIn.clearCredentialState(activity);
         }
+    }
+
+    private PlayBilling billing(Activity activity) {
+        if (billing == null) {
+            billing = new PlayBilling(activity.getApplicationContext(), payload -> emitSignal(PURCHASES_UPDATED, payload));
+        }
+        return billing;
+    }
+
+    /** Asks Play about subscription {@code productId}; one {@code billing_product} signal follows. */
+    @UsedByGodot
+    public boolean billingQueryProduct(String productId) {
+        Activity activity = getActivity();
+        if (activity == null) {
+            lastError = "billingQueryProduct: no activity";
+            return false;
+        }
+        billing(activity).queryProduct(productId, payload -> emitSignal(BILLING_PRODUCT, payload));
+        lastError = "";
+        return true;
+    }
+
+    /**
+     * Opens Play's purchase sheet for a product {@link #billingQueryProduct} returned, tagged with the game account id;
+     * the outcome arrives as {@code purchases_updated} ({@code {"status": "ok" | "cancelled" | "error", "purchases":
+     * [{"token", "products", "state", "acknowledged"}], "error"}}).
+     */
+    @UsedByGodot
+    public boolean billingPurchase(String productId, String offerToken, String accountId) {
+        Activity activity = getActivity();
+        if (activity == null) {
+            lastError = "billingPurchase: no activity";
+            return false;
+        }
+        boolean started = billing(activity).purchase(activity, productId, offerToken, accountId);
+        lastError = started ? "" : "billingPurchase: query the product first";
+        return started;
+    }
+
+    /** The subscriptions Play holds for this Google account; one {@code purchases_queried} signal follows. */
+    @UsedByGodot
+    public boolean billingQueryPurchases() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            lastError = "billingQueryPurchases: no activity";
+            return false;
+        }
+        billing(activity).queryPurchases(payload -> emitSignal(PURCHASES_QUERIED, payload));
+        lastError = "";
+        return true;
+    }
+
+    /** Google's consent form where the law asks for it, before any ad; one {@code consent_finished} signal follows. */
+    @UsedByGodot
+    public boolean adsConsent() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            lastError = "adsConsent: no activity";
+            return false;
+        }
+        activity.runOnUiThread(() -> ads.consent(activity, payload -> emitSignal(CONSENT_FINISHED, payload)));
+        lastError = "";
+        return true;
+    }
+
+    /** Loads and shows one rewarded ad for {@code accountId}; one {@code ad_finished} signal follows when it returns true. */
+    @UsedByGodot
+    public boolean adsShowRewarded(String adUnitId, String accountId) {
+        Activity activity = getActivity();
+        if (activity == null) {
+            lastError = "adsShowRewarded: no activity";
+            return false;
+        }
+        boolean started = ads.show(activity, adUnitId, accountId, payload -> emitSignal(AD_FINISHED, payload));
+        lastError = started ? "" : "adsShowRewarded: an ad is already showing";
+        return started;
     }
 
     /** The reason the previous call failed, or an empty string. */

@@ -15,7 +15,7 @@ import {
 import { consistentRead, transaction, type Connect, type Db } from "./db";
 import { setJournalContext } from "./journal";
 import { committedOperation, idempotencyKey, runIdempotent } from "./idempotency";
-import { ApiError, errorResponse, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
+import { ApiError, errorResponse, invalid, isoUtc, json, readJsonObject, requireString, unauthorized } from "./http";
 import { IdentityVerificationError, type IdentityVerifier } from "./identity";
 import {
   dismantleWeapon,
@@ -42,6 +42,9 @@ import { claimMail, currentLiveops, listMail } from "./liveops";
 import { advance, claimFirstOath, type StoryStateDict } from "./story";
 import { accountDeletionPage } from "./web";
 import * as social from "./social";
+import { adStatus, grantVerifiedAd, verifySsv, type AdmobKeys } from "./ads";
+import { applySubscription, claimEntitlement, parseRtdn, subscriptionStatus, type PlayVerifier, type PushVerifier, type SubscriptionState } from "./billing";
+import { sha256Hex } from "./crypto";
 
 export interface AppDeps {
   connect: Connect;
@@ -67,6 +70,16 @@ export interface AppDeps {
   contentChannel?: string;
   /** The Web OAuth client the public deletion page signs in with (the first GOOGLE_CLIENT_IDS entry); null = none. */
   webClientId?: string | null;
+  /** Google's AdMob verifier keys (INF-036); null/absent = rewarded ads answer 503. */
+  admobKeys?: AdmobKeys | null;
+  /** Our rewarded ad units (ADMOB_AD_UNIT_IDS): a callback for any other unit is refused; empty = ads answer 503. */
+  admobAdUnits?: string[];
+  /** Google Play for the Eclipse Blessing (INF-036); null/absent = purchases answer 503. */
+  playVerifier?: PlayVerifier | null;
+  /** The app's Android package: developer notifications for any other package are refused. */
+  playPackageName?: string;
+  /** Authenticates Pub/Sub pushes of Play's developer notifications; null/absent = /v1/billing/rtdn answers 503. */
+  pushVerifier?: PushVerifier | null;
 }
 
 /**
@@ -155,6 +168,46 @@ async function socialChange<T>(context: Context, endpoint: string, fingerprint: 
 }
 
 function routes(deps: AppDeps): Record<string, Handler> {
+  const playOrUnavailable = (): PlayVerifier => {
+    if (!deps.playVerifier) throw new ApiError(503, "SERVICE_UNAVAILABLE", "Purchases are not configured");
+    return deps.playVerifier;
+  };
+  /** Google Play's answer; Play being unreachable or misconfigured is a 503 the app (or Pub/Sub) retries. */
+  const askPlay = async (play: PlayVerifier, token: string): Promise<SubscriptionState> => {
+    try {
+      return await play.verifySubscription(token);
+    } catch (error) {
+      if (error instanceof ApiError) throw error;
+      (deps.log ?? consoleLog)({ event: "unhandled_error", request_id: "billing", method: "GET", route: "play_verify", error: String(error) });
+      throw new ApiError(503, "SERVICE_UNAVAILABLE", "Could not reach Google Play right now");
+    }
+  };
+  /** One developer notification, applied (outcome recorded on the notification row). */
+  const handleNotification = async (db: Db, note: ReturnType<typeof parseRtdn>): Promise<string> => {
+    if (note.kind === "test" || note.kind === "other" || !note.purchaseToken) return note.kind === "test" ? "test notification" : "ignored";
+    const token = note.purchaseToken;
+    const bound = (await db.query<{ account_id: string }>("SELECT account_id FROM subscriptions WHERE purchase_token = $1", [token])).rows[0]?.account_id ?? null;
+    if (note.kind === "voided") {
+      if (!bound) return "voided: purchase not bound";
+      await db.query("UPDATE subscriptions SET revoked_at = COALESCE(revoked_at, now()), revoke_reason = COALESCE(revoke_reason, 'voided purchase') WHERE purchase_token = $1", [token]);
+      return "voided: claims stopped";
+    }
+    const state = await askPlay(playOrUnavailable(), token);
+    // A purchase the app has not verified yet is bound through the account id it was tagged with at purchase.
+    const accountId = bound ?? state.accountRef;
+    if (!accountId || (await db.query("SELECT 1 FROM account WHERE account_id = $1", [accountId])).rowCount !== 1) return "no account for this purchase";
+    try {
+      const applied = await transaction(db, async (tx) => {
+        await tx.query("SELECT 1 FROM account WHERE account_id = $1 FOR NO KEY UPDATE", [accountId]);
+        return applySubscription(tx, accountId, token, state, new Date(clock() * 1000));
+      });
+      return applied.active ? (applied.new_period ? "period opened" : "up to date") : "not active";
+    } catch (error) {
+      if (error instanceof ApiError) return `refused: ${error.message}`;
+      throw error;
+    }
+  };
+
   /** The provider identity of a `{credential}` body: verified, with its single-use server nonce consumed. */
   const verifiedIdentity = async (request: Request, db: Db): Promise<{ provider: string; subjectHash: string }> => {
     if (deps.verifier === null) throw new ApiError(503, "SERVICE_UNAVAILABLE", "Sign-in is not configured");
@@ -305,6 +358,85 @@ function routes(deps: AppDeps): Record<string, Handler> {
     "POST /v1/friends/:account_id/remove": (context) => {
       const other = social.requireAccountId(context.params.account_id);
       return socialChange(context, "friend_remove", other, (tx, accountId) => social.removeFriend(tx, accountId, other));
+    },
+
+    // Rewarded ads (INF-036, DEC-0038): AdMob calls this after a completed ad (not the app). Only our ad units count:
+    // AdMob signs every publisher's callbacks, so without that check another app could pay our players.
+    "GET /v1/ads/ssv": async ({ request, db }) => {
+      const units = deps.admobAdUnits ?? [];
+      if (!deps.admobKeys || units.length === 0) throw new ApiError(503, "SERVICE_UNAVAILABLE", "Rewarded ads are not configured");
+      const params = await verifySsv(new URL(request.url).search.slice(1), deps.admobKeys);
+      if (!units.includes(params.ad_unit ?? "")) throw new ApiError(400, "INVALID_REQUEST", "Unexpected ad unit");
+      const accountId = params.user_id ?? "";
+      const transactionId = params.transaction_id ?? "";
+      if (!/^acct_[0-9a-f]{32}$/.test(accountId) || !/^[A-Za-z0-9_-]{1,128}$/.test(transactionId)) {
+        throw new ApiError(400, "INVALID_REQUEST", "user_id and transaction_id are required");
+      }
+      if ((await db.query("SELECT 1 FROM account WHERE account_id = $1", [accountId])).rowCount !== 1) throw new ApiError(404, "NOT_FOUND", "Unknown account");
+      return json(await transaction(db, (tx) => grantVerifiedAd(tx, accountId, transactionId, clock())));
+    },
+
+    // `ad_unit_id`: the unit the app shows (the first of ADMOB_AD_UNIT_IDS); null while ads are not configured, so the
+    // app offers no ad this server could not pay for.
+    "GET /v1/ads/status": async (context) => {
+      const units = deps.admobKeys ? (deps.admobAdUnits ?? []) : [];
+      return json({ ...(await adStatus(context.db, await requireAccount(context), clock())), ad_unit_id: units[0] ?? null });
+    },
+
+    // The Eclipse Blessing (INF-036, DEC-0038). The app sends the Play purchase token after a purchase (and on every
+    // start while one is pending): Google Play is asked first, outside the transaction; the grant and the binding commit
+    // together; the purchase is acknowledged afterwards (a failed acknowledgement is retried by the next verify).
+    "POST /v1/subscription/verify": async (context) => {
+      const accountId = await requireAccount(context);
+      const token = requireString(await readJsonObject(context.request), "purchase_token", 4096);
+      const play = playOrUnavailable();
+      const state = await askPlay(play, token);
+      const now = new Date(clock() * 1000);
+      const result = await transaction(context.db, async (tx) => {
+        await tx.query("SELECT 1 FROM account WHERE account_id = $1 FOR NO KEY UPDATE", [accountId]);
+        const applied = await applySubscription(tx, accountId, token, state, now);
+        return { ...applied, active: applied.active === true, state: await snapshot(tx, accountId, clock()) };
+      });
+      let acknowledged = state.acknowledged;
+      if (!acknowledged && result.active) {
+        try {
+          await play.acknowledge(token, state.productId);
+          await context.db.query("UPDATE subscriptions SET acknowledged = true WHERE purchase_token = $1", [token]);
+          acknowledged = true;
+        } catch (error) {
+          (deps.log ?? consoleLog)({ event: "unhandled_error", request_id: "billing", method: "POST", route: "acknowledge", error: String(error) });
+        }
+      }
+      return json({ ...result, acknowledged });
+    },
+
+    "GET /v1/subscription/status": async (context) => json(await subscriptionStatus(context.db, await requireAccount(context), new Date(clock() * 1000))),
+
+    "POST /v1/subscription/claim": async (context) => {
+      const body = await readJsonObject(context.request);
+      const windowId = body.window_id === undefined || body.window_id === null ? null : body.window_id;
+      if (windowId !== null && !(typeof windowId === "number" && Number.isSafeInteger(windowId) && windowId >= 0)) throw invalid("window_id must be a half-day window id");
+      return mutateNow(context, "subscription_claim", JSON.stringify({ window_id: windowId }), (tx, accountId) => claimEntitlement(tx, accountId, new Date(clock() * 1000), windowId as number | null));
+    },
+
+    // Real-time developer notifications from Google Play through a Pub/Sub push subscription. Every subscription event
+    // re-reads the purchase from Play and applies it (renewals open and pay the next period; refunds and revocations stop
+    // claims); a voided purchase stops claims. A Play failure answers 503 so Pub/Sub delivers the message again.
+    "POST /v1/billing/rtdn": async ({ request, db }) => {
+      if (!deps.pushVerifier) throw new ApiError(503, "SERVICE_UNAVAILABLE", "Developer notifications are not configured");
+      await deps.pushVerifier.verify(request);
+      const note = parseRtdn(await readJsonObject(request));
+      if (note.packageName !== null && note.packageName !== (deps.playPackageName ?? "")) throw invalid("Notification for another app");
+      const tokenHash = note.purchaseToken ? await sha256Hex(note.purchaseToken) : null;
+      await db.query(
+        "INSERT INTO billing_notifications (message_id, kind, notification_type, token_sha256) VALUES ($1, $2, $3, $4) ON CONFLICT (message_id) DO NOTHING",
+        [note.messageId, note.kind, note.notificationType, tokenHash],
+      );
+      const seen = await db.query<{ processed_at: Date | null }>("SELECT processed_at FROM billing_notifications WHERE message_id = $1", [note.messageId]);
+      if (seen.rows[0]?.processed_at) return json({ status: "already processed" });
+      const outcome = await handleNotification(db, note);
+      await db.query("UPDATE billing_notifications SET processed_at = now(), outcome = $2 WHERE message_id = $1", [note.messageId, outcome]);
+      return json({ status: outcome });
     },
 
     "GET /v1/blocks": async (context) => json(await social.listBlocks(context.db, await requireAccount(context))),
@@ -554,7 +686,7 @@ const clientKey = (request: Request): string => request.headers.get("cf-connecti
  * Routes that answer whatever the client version or maintenance state: liveness, the bootstrap that reports both, and
  * the public deletion page (a store requirement, readable during maintenance too).
  */
-const UNGATED = new Set(["GET /healthz", "GET /v1/bootstrap", "GET /account/delete"]);
+const UNGATED = new Set(["GET /healthz", "GET /v1/bootstrap", "GET /account/delete", "GET /v1/ads/ssv", "POST /v1/billing/rtdn"]);
 /** Routes that read no database, so they answer during a database outage too (the bootstrap carries the maintenance notice). */
 const NO_DATABASE = new Set(["GET /v1/bootstrap", "GET /account/delete"]);
 const noDatabase: Db = {
@@ -574,7 +706,8 @@ export function createApp(deps: AppDeps): (request: Request) => Promise<Response
       return { response: errorResponse(new ApiError(known ? 405 : 404, "HTTP_ERROR", known ? "Method Not Allowed" : "Not Found")), route: "unmatched" };
     }
     const answer = (response: Response) => ({ response, route: route.route });
-    if (url.pathname !== "/healthz") {
+    // Liveness and Google's own callbacks (signed; from Google's addresses, many players behind each) skip the IP budget.
+    if (url.pathname !== "/healthz" && url.pathname !== "/v1/ads/ssv" && url.pathname !== "/v1/billing/rtdn") {
       // Sign-in and the web deletion (both verify a Google token) share the tighter sign-in budget.
       const limiter = url.pathname.startsWith("/v1/auth/") || url.pathname === "/account/delete" ? deps.authLimiter : deps.apiLimiter;
       if (limiter && !(await limiter.limit({ key: clientKey(request) })).success) {

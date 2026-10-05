@@ -22,6 +22,8 @@ const HUB_INVENTORY: String = "inventory"
 const HUB_SUMMON: String = "summon"
 const HUB_QUESTS: String = "quests"
 const HUB_FRIENDS: String = "friends"
+const HUB_MAIL: String = "mail"
+const HUB_BLESSING: String = "blessing"
 const HUB_INN_MEAL: String = "inn_meal"
 const HUB_SETTINGS: String = "settings"
 const SETTINGS_SIGN_OUT: String = "sign_out"
@@ -54,6 +56,8 @@ var _boot_job: WorkerJob = null
 var _title: TitleScreen = null
 ## The content-loaded flow waiting for the title's tap.
 var _loaded_flow: GameFlow = null
+## Purchases and ads (INF-036); built on first use. Tests may set their own.
+var monetization: Monetization = null
 var _startup: StartupSequence = null
 var _battle_job: WorkerJob = null
 var _battle_stage: String = ""
@@ -225,6 +229,8 @@ func _present_hub(status: String = "") -> void:
 		{"id": HUB_SUMMON, "label": "Summon"},
 		{"id": HUB_QUESTS, "label": "Quests"},
 		{"id": HUB_FRIENDS, "label": "Friends"},
+		{"id": HUB_MAIL, "label": "Mail"},
+		{"id": HUB_BLESSING, "label": "Eclipse Blessing"},
 		{"id": HUB_SETTINGS, "label": "Settings"},
 	]
 	var meal: int = flow.state.inn_meal_amount()
@@ -253,6 +259,10 @@ func _on_hub_chosen(entry_id: String) -> void:
 			_present_quests()
 		HUB_FRIENDS:
 			_present_friends()
+		HUB_MAIL:
+			_present_mailbox()
+		HUB_BLESSING:
+			_present_blessing()
 		HUB_INN_MEAL:
 			_claim_inn_meal()
 		HUB_SETTINGS:
@@ -687,7 +697,9 @@ func _present_quests(selected: String = "", status: String = "") -> void:
 	quests.load_quests(rows, selected, status)
 	quests.claim_requested.connect(func(kind: String, task_id: String, period: String) -> void: _claim_quest(quests, kind, task_id, period))
 	quests.back_requested.connect(func() -> void: _present_hub())
+	quests.ad_requested.connect(func() -> void: _watch_ad(quests))
 	shell.show_screen(quests)
+	_offer_ad(quests)
 
 
 func _claim_quest(screen: QuestsScreen, kind: String, task_id: String, period: String) -> void:
@@ -702,6 +714,92 @@ func _claim_quest(screen: QuestsScreen, kind: String, task_id: String, period: S
 	else:
 		status = _problem_text(result)
 	_present_quests(selected, status)
+
+
+# -- the Eclipse Blessing and rewarded ads (INF-036) ------------------------------------------------------------------
+
+
+func _monetization() -> Monetization:
+	if monetization == null or monetization._flow != flow:
+		monetization = Monetization.new(Native, flow, str(flow.blessing_rules().get("id", "")))
+	return monetization
+
+
+func _present_blessing(status: String = "") -> void:
+	_show_message("Eclipse Blessing", "Loading...")
+	var view: Outcome = await _monetization().blessing()
+	if not view.is_ok():
+		_present_hub("The Eclipse Blessing could not be loaded: %s" % _problem_text(view))
+		return
+	var can_buy: bool = Native.is_available()
+	var price: String = await _monetization().blessing_price() if can_buy else ""
+	var screen: BlessingScreen = BlessingScreen.new()
+	screen.load_blessing(view.value, flow.blessing_rules(), price, can_buy, status)
+	screen.claim_requested.connect(func() -> void: _blessing_action(screen, "claim"))
+	screen.buy_requested.connect(func() -> void: _blessing_action(screen, "buy"))
+	screen.restore_requested.connect(func() -> void: _blessing_action(screen, "restore"))
+	screen.back_requested.connect(func() -> void: _present_hub())
+	shell.show_screen(screen)
+
+
+func _blessing_action(screen: BlessingScreen, action: String) -> void:
+	screen.set_busy(true)
+	var done: Outcome
+	match action:
+		"claim":
+			done = await _monetization().claim_blessing()
+		"buy":
+			done = await _monetization().buy_blessing(Online.account_id)
+		_:
+			done = await _monetization().restore_blessing()
+	if shell.current != screen:
+		return
+	_present_blessing(blessing_result_text(action, done))
+
+
+## What a Blessing action did, in the player's words.
+static func blessing_result_text(action: String, done: Outcome) -> String:
+	if not done.is_ok():
+		return done.error
+	var value: Dictionary = done.value
+	if action == "claim":
+		return "Claimed %d reward(s): +%d Eclipse Tokens." % [int(value.get("windows", 0)), int(value.get("eclipse_tokens", 0))]
+	if bool(value.get("pending", false)):
+		return "Google Play is still processing the payment; the Blessing starts when it completes."
+	var instant: int = int(value.get("instant_eclipse_tokens", 0))
+	return "Eclipse Blessing active: +%d Eclipse Tokens." % instant if instant > 0 else "Eclipse Blessing restored."
+
+
+## Shows the ad button on the quests screen when the server says an ad would pay now.
+func _offer_ad(screen: QuestsScreen) -> void:
+	if not Native.is_available():
+		return
+	var status: Outcome = await _monetization().ad_status()
+	if shell.current != screen or not status.is_ok():
+		return
+	if status.value.get("ad_unit_id") is String:
+		screen.set_ad(ad_button_text(status.value), Monetization.ad_open(status.value))
+
+
+static func ad_button_text(counts: Dictionary) -> String:
+	return "Watch an ad (+%d)  %d/%d" % [int(counts.get("reward_eclipse_tokens", 0)), int(counts.get("window_views", 0)), int(counts.get("window_cap", 0))]
+
+
+func _watch_ad(screen: QuestsScreen) -> void:
+	screen.set_busy(true)
+	var watched: Outcome = await _monetization().watch_ad(Online.account_id)
+	if shell.current != screen:
+		return
+	var text: String = watched.error
+	if watched.is_ok():
+		var value: Dictionary = watched.value
+		if not bool(value.get("rewarded", false)):
+			text = "The ad was closed before its end: no reward."
+		elif value.get("paid") == true:
+			text = "+%d Eclipse Tokens." % int(value.get("eclipse_tokens", 0))
+		else:
+			text = "Thanks for watching: the reward arrives as soon as Google confirms the ad."
+	_present_quests(screen.selected, text)
 
 
 # -- friends (INF-037) ---------------------------------------------------------------------------------------------
@@ -779,6 +877,42 @@ func _present_blocked(status: String = "") -> void:
 	shell.show_screen(screen)
 
 
+# -- mail and notices (INF-035) -------------------------------------------------------------------------------------
+
+
+func _present_mailbox(status: String = "") -> void:
+	_show_message("Mail", "Loading...")
+	var loaded: Outcome = await flow.mailbox()
+	if not loaded.is_ok():
+		_present_hub("Mail could not be loaded: %s" % _problem_text(loaded))
+		return
+	var screen: MailboxScreen = MailboxScreen.new()
+	screen.load_mailbox((loaded.value as Dictionary)["notices"], (loaded.value as Dictionary)["mail"], status)
+	screen.claim_requested.connect(func(mail_id: String) -> void: _claim_mail(screen, mail_id))
+	screen.back_requested.connect(func() -> void: _present_hub())
+	shell.show_screen(screen)
+
+
+func _claim_mail(screen: MailboxScreen, mail_id: String) -> void:
+	screen.set_busy(true)
+	var claimed: Outcome = await flow.claim_mail(mail_id)
+	if shell.current != screen:
+		return
+	_present_mailbox(mail_claim_text(flow, claimed))
+
+
+## The line the mailbox shows after a claim: what was paid, or why nothing was.
+static func mail_claim_text(game: GameFlow, claimed: Outcome) -> String:
+	if claimed.is_ok():
+		var granted: Variant = (claimed.value as Dictionary).get("granted")
+		return "Received: %s." % game.mail_reward_text(granted if granted is Dictionary else {})
+	if claimed.error_kind == "conflict":
+		return "This mail was already claimed."
+	if claimed.error_kind == "not_found":
+		return "This mail has expired."
+	return claimed.error
+
+
 func _claim_inn_meal() -> void:
 	var result: Outcome = await flow.claim_inn_meal()
 	if not result.is_ok():
@@ -801,6 +935,11 @@ func _present_settings(status: String = "") -> void:
 	actions.append({"id": SETTINGS_CONTACT_SUPPORT, "label": "Contact support"})
 	var settings: SettingsScreen = SettingsScreen.new()
 	settings.load_settings(info, status, actions)
+	var volumes: Dictionary = {}
+	for bus: String in Audio.BUSES:
+		volumes[bus] = Audio.volume(bus)
+	settings.load_volumes(volumes)
+	settings.volume_changed.connect(func(bus: String, linear: float) -> void: Audio.set_volume(bus, linear))
 	settings.back_requested.connect(func() -> void: _present_hub())
 	settings.action_requested.connect(func(action_id: String) -> void:
 		if action_id == SETTINGS_SIGN_OUT:

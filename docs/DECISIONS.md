@@ -617,3 +617,35 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
   500 before, a friendship after).
 - Deleting an account removes its edges on both sides and every report it made or received (cascades).
 
+
+## DEC-0038 — Billing and rewarded ads: server-verified Eclipse Blessing and AdMob SSV
+- Status: ACCEPTED (2026-10-05, engineering; owner decision D-10 put billing and rewarded ads in v1; roadmap INF-036).
+  Activation needs the owner's accounts: D-17 (Play) and D-18 (AdMob).
+- Source: LEGACY (Drive) `server/billing.py`, `client/game_controller.py` (`watch_rewarded_ad`, the blessing methods),
+  `client/screens/blessing_screen.py`, the `android_bridge` adapters, and `economy_part1.json` (`subscription`,
+  `rewarded_ads`), which already held every number. No number was invented: 1,600 instant, 187 per twelve-hour
+  window, 60 windows, 14-day claim grace, 30 days; ads 30 Eclipse Tokens, 4 per half-day window, 8 per UTC day.
+- Eclipse Blessing (Google Play subscription `eclipse_blessing_30d`):
+  - The app sends only the purchase token. The Worker asks Google Play (subscriptionsv2, service account), refuses a
+    purchase tagged for another account (the app sets Play's obfuscated account id to the game account id) or bound
+    to another account, binds it, pays the period's instant grant, then acknowledges the purchase.
+  - The instant grant is paid once per (purchase token, period) ever: the ledger `billing_instant_grants` keeps only the
+    token's SHA-256 and the period, with no account reference, so deleting and recreating an account cannot repeat it.
+  - Twelve-hour windows are claimed by the player (an idempotent mutation), within the period, a missed one for 14 days.
+  - Play's real-time developer notifications (Pub/Sub push, Google OIDC token checked against `RTDN_AUDIENCE` and
+    `RTDN_PUSH_SERVICE_ACCOUNT`) re-read the purchase from Play: a renewal opens and pays the next period even if the
+    app is not opened; a refund, revocation or voided purchase stops further claims. Every message is recorded once.
+  - Refunds take nothing back that was already paid (no negative balances). Engineering default; the owner may change it.
+- Rewarded ads (AdMob): the app shows the ad with the account id as the SSV user id; AdMob calls `/v1/ads/ssv`, signed
+  with ECDSA P-256 by Google's published keys. Only our own ad units pay, because AdMob signs every publisher's
+  callbacks. One payment per transaction id; caps are checked under the account lock. A capped or repeated callback
+  answers 200 so AdMob stops retrying. The app only polls `/v1/ads/status` until the count rises, and offers an ad
+  only when the server names a unit (`ADMOB_AD_UNIT_IDS`), so no ad is shown that the server would not pay for.
+- Consent: Google's UMP form runs before the first ad of a run; without "can request ads" no ad is shown.
+- Android: Play Billing Library 9.1.0, Google Mobile Ads 25.5.0, UMP 4.0.0 in the UomdNative plugin. The AdMob app id
+  is built in from `ADMOB_APP_ID` (Google's sample id until D-18, test ads only).
+- Permission allowlist (`game/tools/verify_apk.sh`, single source): now adds `com.android.vending.BILLING`, `AD_ID`,
+  `ACCESS_NETWORK_STATE`, `WAKE_LOCK`, `FOREGROUND_SERVICE` and AdMob's Privacy Sandbox `ACCESS_ADSERVICES_*` defaults.
+  The advertising ID must be declared in Play's Data safety form (D-18).
+- Not done without the owner's accounts: a license-tester purchase and a real AdMob callback on a device; until then the
+  routes answer 503 (purchases) or the app offers no ad.

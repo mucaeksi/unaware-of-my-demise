@@ -10,6 +10,9 @@ const ANDROID_DEPENDENCIES: Array[String] = [
 	"androidx.credentials:credentials:1.6.0",
 	"androidx.credentials:credentials-play-services-auth:1.6.0",
 	"com.google.android.libraries.identity.googleid:googleid:1.2.1",
+	"com.android.billingclient:billing:9.1.0",
+	"com.google.android.gms:play-services-ads:25.5.0",
+	"com.google.android.ump:user-messaging-platform:4.0.0",
 ]
 
 

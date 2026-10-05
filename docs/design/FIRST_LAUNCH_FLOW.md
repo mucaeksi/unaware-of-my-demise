@@ -111,8 +111,9 @@ at the end).
   `/account/delete`) and "Accept and continue". Accepting is stored on the device (and with the account at the next
   sign-in, so a changed version can be asked again). **[owner]** for the texts; **[build]** for the screen once the
   texts exist. Until then this step is skipped.
-- Rewarded ads (D-10): Google's consent form (UMP SDK) for players in regions that require it appears here, once,
-  before any ad request. **[build]** with the ads adapter (INF-036).
+- Rewarded ads (D-10): Google's consent form (UMP SDK) for players in regions that require it. **[built]** — not in this
+  step: it is asked right before the first ad a player chooses to watch (once per run; DEC-0038), so a player who never
+  watches an ad never sees it, and nothing is requested from AdMob before it.
 - Audio: stays on `flow.title`.
 
 ### [6] Sign-in — when there is no session
@@ -198,6 +199,6 @@ into the opening [9]; Skip with confirmation; the flow slot pack `audio_cues_par
 Tests: GUT `tests/ui/test_first_launch.gd` (title → new player into the opening, returning player to the hub, retries
 skip the title), title and Skip screen tests, audio cue tests; `tools/test_validate_audio.py`.
 
-Still to build: the notices screen [5] (waits on D-15), the ads consent (with INF-036), the download progress bar and
+Still to build: the notices screen [5] (waits on D-15), the download progress bar and
 size [7], the title art promotion
 (`ui/title_key_art`, asset pipeline) and the adaptive icon [1] (art).

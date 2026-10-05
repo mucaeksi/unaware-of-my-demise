@@ -1,23 +1,35 @@
 extends Node
 ## Autoload "Native": facade over the custom Android plugin "UomdNative" (brief 2.11).
 ## Results that arrive later come as signals, never by polling: the AndroidKeyStore key-wrapping calls, and Google sign-in through
-## Credential Manager (`start_google_sign_in` -> `sign_in_finished`, INF-017). Source: res://android/plugins/uomd_native.
+## Credential Manager (`start_google_sign_in` -> `sign_in_finished`, INF-017), and Google Play Billing, Google's consent
+## form and rewarded ads (INF-036: `billing_product`, `purchases_updated`, `purchases_queried`, `consent_finished`,
+## `ad_finished`). Source: res://android/plugins/uomd_native.
 
 signal sign_in_finished(result: Dictionary)
-signal purchase_finished(result: Dictionary)
-signal rewarded_ad_finished(result: Dictionary)
+## {"status": "ok" | "error", "product_id", "title", "price", "offer_token", "error"}
+signal billing_product(result: Dictionary)
+## {"status": "ok" | "cancelled" | "error", "purchases": [{"token", "products", "state", "acknowledged"}], "error"}
+signal purchases_updated(result: Dictionary)
+signal purchases_queried(result: Dictionary)
+## {"status": "ok" | "error", "can_request_ads", "error"}
+signal consent_finished(result: Dictionary)
+## {"status": "rewarded" | "closed" | "failed", "error"}
+signal ad_finished(result: Dictionary)
 
 const PLUGIN_NAME: String = "UomdNative"
+const PLUGIN_SIGNALS: Array[String] = ["sign_in_finished", "billing_product", "purchases_updated", "purchases_queried", "consent_finished", "ad_finished"]
 
 
 func _ready() -> void:
 	if is_available():
-		Engine.get_singleton(PLUGIN_NAME).connect("sign_in_finished", _on_plugin_sign_in_finished)
+		var plugin: Object = Engine.get_singleton(PLUGIN_NAME)
+		for name: String in PLUGIN_SIGNALS:
+			plugin.connect(name, _relay.bind(name))
 
 
 ## The plugin signals from the Android UI thread: re-emit on the main thread.
-func _on_plugin_sign_in_finished(result: Dictionary) -> void:
-	sign_in_finished.emit.call_deferred(result)
+func _relay(result: Dictionary, name: String) -> void:
+	emit_signal.call_deferred(name, result)
 
 
 ## True only on an Android build that ships the plugin.
@@ -52,6 +64,32 @@ func keystore_unwrap(alias: String, blob: PackedByteArray) -> PackedByteArray:
 ## already running); otherwise one `sign_in_finished` follows: {"status": "ok" | "cancelled" | "no_account" | "error", "id_token", "error"}.
 func start_google_sign_in(server_client_id: String, nonce: String) -> bool:
 	return bool(_call("signIn", [server_client_id, nonce], false))
+
+
+## Asks Play about a subscription; one `billing_product` follows when true.
+func billing_query_product(product_id: String) -> bool:
+	return bool(_call("billingQueryProduct", [product_id], false))
+
+
+## Play's purchase sheet for a product `billing_product` returned, tagged with the game account id; one `purchases_updated`
+## follows (also for purchases finished later, e.g. a pending payment).
+func billing_purchase(product_id: String, offer_token: String, account_id: String) -> bool:
+	return bool(_call("billingPurchase", [product_id, offer_token, account_id], false))
+
+
+## The subscriptions Play holds for this Google account (restore); one `purchases_queried` follows when true.
+func billing_query_purchases() -> bool:
+	return bool(_call("billingQueryPurchases", [], false))
+
+
+## Google's consent form where the law asks for it, before any ad; one `consent_finished` follows when true.
+func ads_consent() -> bool:
+	return bool(_call("adsConsent", [], false))
+
+
+## One rewarded ad for `account_id` (AdMob's server-side verification pays it); one `ad_finished` follows when true.
+func ads_show_rewarded(ad_unit_id: String, account_id: String) -> bool:
+	return bool(_call("adsShowRewarded", [ad_unit_id, account_id], false))
 
 
 ## Forgets the account chosen for automatic sign-in (logout).

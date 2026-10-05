@@ -14,6 +14,15 @@ export interface Env {
   CONTENT?: R2Bucket;
   /** The content channel this deployment serves (production, staging); empty = production. */
   CONTENT_CHANNEL?: string;
+  /** Comma-separated AdMob rewarded ad unit ids whose SSV callbacks pay (INF-036); empty = rewarded ads answer 503. */
+  ADMOB_AD_UNIT_IDS?: string;
+  /** Secret: the JSON key of the service account that reads purchases in the Play Console; absent = purchases answer 503. */
+  GOOGLE_PLAY_SERVICE_ACCOUNT?: string;
+  /** The Android package the purchases belong to; empty = io.github.mucaeksi.unawareofmydemise. */
+  PLAY_PACKAGE_NAME?: string;
+  /** The audience and service account of the Pub/Sub push subscription for Play's developer notifications. */
+  RTDN_AUDIENCE?: string;
+  RTDN_PUSH_SERVICE_ACCOUNT?: string;
   AUTH_LIMITER?: RateLimit;
   API_LIMITER?: RateLimit;
 }

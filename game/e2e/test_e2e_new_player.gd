@@ -87,6 +87,13 @@ func test_a_new_player_plays_the_first_chapter_and_relaunches_into_the_same_stat
 	assert_true((await flow.quest_rows()).is_ok())
 	assert_true((await flow.gacha_banners()).is_ok())
 	assert_true((await flow.gacha_history()).is_ok())
+	var box: Outcome = await flow.mailbox()
+	assert_true(box.is_ok(), box.error)
+	assert_eq((box.value as Dictionary)["notices"], [], "nothing published on a fresh database")
+	var ads: Outcome = await flow.backend.ads_status()
+	assert_true(ads.is_ok(), ads.error)
+	assert_eq((ads.value as Dictionary).get("ad_unit_id"), null, "no ad unit configured: the app offers no ad")
+	assert_eq((await flow.backend.subscription_status()).is_ok(), true)
 
 	# Relaunch: a fresh client process with the stored session sees the same player.
 	var before: Dictionary = {"entry": flow.current_entry(), "wallet": flow.wallet(), "revision": flow.state.revision()}
