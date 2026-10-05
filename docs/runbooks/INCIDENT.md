@@ -11,7 +11,17 @@
 | Database | Neon Console → monitoring; `database/verify.sh` for integrity. |
 | Release identity | `GET /v1/bootstrap`: `source_sha`, minimum client version, maintenance. |
 
-No alert is wired yet: nobody is paged on errors. Choosing a channel (email, phone) is owner decision D-06.
+Alerts (owner decision D-06): `.github/workflows/monitor.yml` fails, and GitHub e-mails the owner
+(unawareofmydemise@gmail.com), when:
+
+- the game Worker's `/v1/bootstrap` does not answer 200 twice a minute apart (checked every 15 minutes);
+- the admin Worker answers a server error or nothing (every 15 minutes);
+- `/healthz` (database through Hyperdrive) does not answer 200 (every 3 hours: each check wakes Neon's free compute);
+- the daily retention cron left work undone for two days (every 3 hours, read-only query).
+
+Maintenance is reported in the run summary, not as a failure. Delivery depends on the owner's GitHub notification
+settings: Settings → Notifications → Actions, e-mail on, failed workflows only. The nightly backup
+(`backup.yml`) and the monthly restore drill alert the same way when they fail.
 
 ## Severity
 
