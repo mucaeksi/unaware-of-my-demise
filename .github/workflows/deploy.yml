@@ -210,6 +210,12 @@ jobs:
           url="$(grep -Eo 'https://unaware-of-my-demise-admin\.[A-Za-z0-9.-]+\.workers\.dev' "${RUNNER_TEMP}/admin-deploy.log" | head -n1)"
           [ -n "${url}" ] || { echo "::error::no admin workers.dev URL in the deploy output"; exit 1; }
           # Without an Access token the API must refuse: 401 when Access is configured, 503 when it is not, never data.
-          status="$(curl -s -o /dev/null -w '%{http_code}' "${url}/admin/api/me")"
+          # A new workers.dev host or version can answer 404 for a few seconds after the deploy (run 16 failed so):
+          # only a 404 is retried, for up to 60 s; anything else is judged at once.
+          for _ in $(seq 1 12); do
+            status="$(curl -s -o /dev/null -w '%{http_code}' "${url}/admin/api/me")"
+            [ "${status}" = "404" ] || break
+            sleep 5
+          done
           echo "GET /admin/api/me without Access: HTTP ${status}"
           case "${status}" in 401|403|503|302) ;; *) echo "::error::the admin API answered ${status} without an Access token"; exit 1 ;; esac
