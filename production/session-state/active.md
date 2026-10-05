@@ -2,15 +2,15 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md) — finish it step by step
-Feature: batch 6 (G7: release AAB pipeline INF-039/040/041, end-to-end test INF-042) — PR open
-Task: merge batch 6 when CI (incl. the new e2e job) is green; then write G8 acceptance status and present all owner decisions (D-01…D-13) in one Turkish message
+Feature: roadmap engineering complete through G8 (everything not waiting on an owner decision); batch 6 merged (#27)
+Task: owner decisions D-01…D-13 presented to the owner (2026-10-05); wait for answers, then apply each one where docs/OWNER_DECISIONS.md says it goes
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
-**Updated:** 2026-10-04
+**Updated:** 2026-10-05
 **Owner directives (2026-10-04):** finish the roadmap in order, step by step; the owner presses "auto-continue" when a usage limit hits, so always leave a resumable checkpoint here. Merge to `main` every 3–4 verified steps (batch PRs), push the branch after each commit. Collect every owner decision in `docs/OWNER_DECISIONS.md` and present them together at the end. `narrative/` belongs to another team: do not touch it.
-**Branch:** `claude/adoring-galileo-f7rd3o`. Merged + live: #18–#26 (live `249913e`: admin Worker deployed, API 503 until Access; `/v1/liveops` 200; migrations 0001–0009). Batch 6 commit: 8bea984 (release AAB + e2e).
-**Next step:** merge batch 6 → G8 acceptance section in docs/INFRASTRUCTURE_ROADMAP.md (what is verified, what waits on which owner decision) → final message to the owner with D-01…D-13. Local e2e needs PostgreSQL on TCP 127.0.0.1:54318 with a password (Hyperdrive local mode refuses socket URLs).
+**Branch:** `claude/adoring-galileo-f7rd3o`. Merged + live: #18–#27 (live `7990998`, deploy run 17 green; admin API 503 until Access; migrations 0001–0009). Deploy run 16 (`249913e`) failed only at the admin check (404 right after the admin Worker's first deploy, 503 a minute later); the check now retries a 404 for up to 60 s (on the branch, ships with the next batch).
+**Next step:** apply the owner's answers to D-01…D-13 (each row of docs/OWNER_DECISIONS.md names where it goes); open a PR with the deploy.yml admin-check retry together with the first of them. Local e2e needs PostgreSQL on TCP 127.0.0.1:54318 with a password (Hyperdrive local mode refuses socket URLs).
 **Files in progress:** none
 **Open questions:** `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014, OQ-016 open; OQ-000/005 closed — do not remind); owner decisions collected in `docs/OWNER_DECISIONS.md`.
 **Local test infra (session-local, recreate as needed):** PostgreSQL 18 (production major) from PGDG at `/var/tmp/uomd-pg18` port 54318 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg18&port=54318"`; `PATH=/usr/lib/postgresql/18/bin:$PATH` for database/test.sh); Godot 4.7.2 in the scratchpad (checksum-verified download); Android SDK `/var/tmp/android-sdk`; Godot Android templates `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
