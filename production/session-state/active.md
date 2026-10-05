@@ -2,15 +2,15 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md) — finish it step by step
-Feature: batch 10 (PR #34): owner answers applied — D-09 content key, D-05 nightly encrypted backups, D-06 monitor, D-15 legal drafts, full gacha odds, ad privacy choices
-Task: merge #34 when CI is green; after deploy verify admin (Access + vars) and run publish-content to staging once (first signed content release); then wait for the owner's answers (D-18 reward per ad, legal inputs, AdMob, Play setup)
+Feature: batch 11 (PR #35): rising ad rewards 10→50 (DEC-0043), legal identity/13+/KVKK transfer map, backup shred fix, deploy operator-registration fix
+Task: merge #35 when CI is green; the deploy then registers the operators and redeploys the admin Worker with Access (verify the panel login works for the owner); confirm the backup run on main writes to R2. Then wait for the owner: everything else waits for the first AAB (owner, 2026-10-05: "daha yolumuz uzun")
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-05
 **Owner directives (2026-10-04):** finish the roadmap in order, step by step; the owner presses "auto-continue" when a usage limit hits, so always leave a resumable checkpoint here. Merge to `main` every 3–4 verified steps (batch PRs), push the branch after each commit. Collect every owner decision in `docs/OWNER_DECISIONS.md` and present them together at the end. `narrative/` belongs to another team: do not touch it.
 **Branch:** `claude/adoring-galileo-f7rd3o` fast-forwarded to main after #31. Merged + live: #18–#31 (live `b65a387`, migrations 0001–0012).
-**Next step:** CI on #34 → merge → deploy check (admin API behind Access: 302 anonymous; deploy log has no ACCESS warning) → `publish-content.yml` channel staging (first real signed release, INF-030) → `backup.yml` and `monitor.yml` first manual runs. Owner answers still open: D-18 (30 vs 24 tokens per ad at 5/window; AdMob account), D-17 (Monetization setup: Play Console → app → Monetize with Play → Monetization setup; tier rewards), D-13 (first AAB when the game is ready), legal inputs in `docs/legal/README.md`. Other teams push to `main` directly: merge `origin/main` before each PR merge.
+**Next step:** after #35: deploy run green (operators registered, admin Worker with ACCESS vars), `backup.yml` on main green with an R2 object, owner logs into the admin panel. Waiting for the first AAB (D-13 step 5): first signed content release (`publish-content.yml` needs the AAB's base commit and versionCodes), Play Monetization setup/RTDN (D-17), subscription tiers 5/10/20 USD (rewards TBD) and the subscriber ad rules (D-18), AdMob account. Legal: lawyer review + provider standard contracts per `docs/legal/KVKK_TRANSFERS.md`; open: refund rule, support-mail retention, closing notice. Other teams push to `main` directly: merge `origin/main` before each PR merge.
 **Files in progress:** none
 **Open questions:** `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014, OQ-016 open; OQ-000/005 closed — do not remind); owner decisions collected in `docs/OWNER_DECISIONS.md`.
 **Local test infra (session-local, recreate as needed):** PostgreSQL 18 (production major) from PGDG at `/var/tmp/uomd-pg18` port 54318 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg18&port=54318"`; `PATH=/usr/lib/postgresql/18/bin:$PATH` for database/test.sh); Godot 4.7.2 in the scratchpad (checksum-verified download); Android SDK `/var/tmp/android-sdk`; Godot Android templates `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
