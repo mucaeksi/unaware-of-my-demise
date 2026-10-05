@@ -29,6 +29,7 @@ const HUB_SETTINGS: String = "settings"
 const SETTINGS_SIGN_OUT: String = "sign_out"
 const SETTINGS_DELETE_ACCOUNT: String = "delete_account"
 const SETTINGS_CONTACT_SUPPORT: String = "contact_support"
+const SETTINGS_LICENSES: String = "licenses"
 ## Where players write for help (owner decision D-01); the same address is on the web deletion page (server/src/web.ts).
 const SUPPORT_EMAIL: String = "unawareofmydemise@gmail.com"
 ## The game's store page (the Android package of export_presets.cfg): where "Update" sends a build the server no longer accepts.
@@ -933,6 +934,7 @@ func _present_settings(status: String = "") -> void:
 		actions = [{"id": SETTINGS_SIGN_OUT, "label": "Sign out"}, {"id": SETTINGS_DELETE_ACCOUNT, "label": "Delete account"}]
 	info += "\nSupport: %s" % SUPPORT_EMAIL
 	actions.append({"id": SETTINGS_CONTACT_SUPPORT, "label": "Contact support"})
+	actions.append({"id": SETTINGS_LICENSES, "label": "Licenses"})
 	var settings: SettingsScreen = SettingsScreen.new()
 	settings.load_settings(info, status, actions)
 	var volumes: Dictionary = {}
@@ -947,8 +949,17 @@ func _present_settings(status: String = "") -> void:
 		elif action_id == SETTINGS_DELETE_ACCOUNT:
 			_confirm_account_deletion()
 		elif action_id == SETTINGS_CONTACT_SUPPORT:
-			OS.shell_open(support_mail_uri()))
+			OS.shell_open(support_mail_uri())
+		elif action_id == SETTINGS_LICENSES:
+			_present_licenses())
 	shell.show_screen(settings)
+
+
+func _present_licenses() -> void:
+	var screen: LicensesScreen = LicensesScreen.new()
+	screen.load_text(ThirdPartyNotices.text())
+	screen.back_requested.connect(func() -> void: _present_settings())
+	shell.show_screen(screen)
 
 
 ## A mailto link to support with the build and the account id filled in, so a report can be traced.

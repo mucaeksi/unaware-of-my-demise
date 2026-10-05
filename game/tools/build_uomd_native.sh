@@ -18,7 +18,14 @@ cat > "${plugin_dir}/src/main/res/values/uomd_admob.xml" <<XML
     <string name="uomd_admob_app_id" translatable="false">${admob_app_id}</string>
 </resources>
 XML
-(cd "${plugin_dir}" && gradle --no-daemon assembleDebug assembleRelease)
+(cd "${plugin_dir}" && gradle --no-daemon assembleDebug assembleRelease thirdPartyNotices)
+# INF-040: the shipped libraries' notices are committed; a dependency change must come with the regenerated file.
+notices="${game_dir}/data/legal/android_libraries.json"
+if git -C "${game_dir}" rev-parse --is-inside-work-tree >/dev/null 2>&1 && ! git -C "${game_dir}" diff --quiet -- "${notices}"; then
+  git -C "${game_dir}" --no-pager diff --stat -- "${notices}"
+  echo "::error::game/data/legal/android_libraries.json is stale: commit the file this build regenerated" >&2
+  exit 1
+fi
 mkdir -p "${game_dir}/addons/uomd_native/bin/debug" "${game_dir}/addons/uomd_native/bin/release"
 cp "${plugin_dir}/build/outputs/aar/uomd_native-debug.aar" "${game_dir}/addons/uomd_native/bin/debug/"
 cp "${plugin_dir}/build/outputs/aar/uomd_native-release.aar" "${game_dir}/addons/uomd_native/bin/release/"

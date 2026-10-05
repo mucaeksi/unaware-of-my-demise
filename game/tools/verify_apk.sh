@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Verifies an exported APK against the brief (G2.3, G7): package id, min/target SDK, 64-bit ARM only, the
 # permission list, the UomdNative plugin registration (Google sign-in, INF-017), 16 KB zip alignment and 16 KB ELF
-# segment alignment of every native library.
+# segment alignment of every native library, and the third-party notices against the libraries inside the APK.
 # Usage: verify_apk.sh <apk> [allowed permissions, space separated; default: the game's allowlist below]
 # Needs ANDROID_HOME (build-tools with aapt2 and zipalign) and readelf.
 set -euo pipefail
@@ -74,4 +74,7 @@ if grep -q '"io.github.mucaeksi.uomd.UomdNative"' <<<"${manifest}"; then
 else
   bad "the UomdNative plugin is not registered (game/tools/build_uomd_native.sh before the export)"
 fi
+# INF-040: every library the APK records must be in the third-party notices (the Licenses screen) with its version.
+"$(dirname "${BASH_SOURCE[0]}")/check_apk_notices.py" "${apk}" "$(dirname "${BASH_SOURCE[0]}")/../data/legal/android_libraries.json" \
+  || bad "game/data/legal/android_libraries.json does not match the APK's libraries (tools/build_uomd_native.sh regenerates it)"
 [[ ${fail} -eq 0 ]] && say "APK verification passed" || { say "APK verification FAILED"; exit 1; }
