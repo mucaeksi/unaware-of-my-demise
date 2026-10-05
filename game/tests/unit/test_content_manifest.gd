@@ -98,8 +98,11 @@ func test_a_signed_but_malformed_manifest_is_invalid() -> void:
 	assert_true(ContentManifest.verify(good["bytes"], good["signature"], good["keys"], 1, 0).is_ok(), "Godot-signed manifests verify too")
 
 
-func test_the_app_ships_no_key_until_one_is_registered() -> void:
-	# Owner decision D-09 adds res://data/keys/<key_id>.pem; until then no manifest is trusted (and no patch installs).
+func test_the_app_ships_exactly_the_registered_content_key() -> void:
+	# Owner decision D-09 registered uomd-content-1 (RSA 3072; its private half is only the CONTENT_SIGNING_KEY secret).
 	var shipped: Dictionary = ContentManifest.trusted_keys()
+	assert_eq(shipped.keys(), ["uomd-content-1"])
+	assert_true(shipped["uomd-content-1"] is CryptoKey)
+	assert_true((shipped["uomd-content-1"] as CryptoKey).is_public_only(), "only a public key ever ships")
 	assert_false(shipped.has("uomd-test-1"), "the test key is never a shipped key")
 	assert_eq(ContentManifest.trusted_keys("res://no/such/dir"), {})
