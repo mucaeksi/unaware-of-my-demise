@@ -1,10 +1,16 @@
 # UOMD — Ekran Haritası v1
-Durum: DESIGN_DRAFT. İlk giriş v02 ve ana menü görsel adayı; bütün sistem yerleşim/davranış taslağı.
+Durum: DESIGN_DRAFT. Giriş/patch/araç sayfaları v03 ve ana menü görsel adayı. Oyuncu metinleri İngilizce, ses Japonca. [Sayfa adları ve Godot hedefleri](SCREEN_REGISTRY.json).
 
 ## Ana akış
 ```mermaid
 flowchart TD
-  A[Açılış ve Google giriş] --> H[Sığınak]
+  A[SignInScreen: Google giriş] --> P[PatchScreen: güncelle / doğrula]
+  P --> S[Player snapshot]
+  S --> H[Yeni oyuncu açılışı / Sığınak / açık girişim]
+  P --> U[EntrySettingsScreen / EntryHelpScreen]
+  U --> P
+  P --> X[SignOutConfirmDialog]
+  X --> A
   H --> C[Yolculuk: 7 bölüm ve 35 stage]
   C --> V[VN: savaş öncesi]
   V --> F[Formasyon: 2 ön / 3 arka]
@@ -23,7 +29,10 @@ flowchart TD
 ## Kapsam ve bağımlılıklar
 | Ekran | Yerleşim / amaç | Mevcut bağlantı | Tasarım durumu |
 |---|---|---|---|
-| Title / giriş | Marka, tek giriş CTA, bağlantı/oturum durumu | SignInFlow, Native Credential Manager, Online, ClientRelease | [Ayrı v02 taslağı](ENTRY_SCREEN.md); 10 senaryo, Godot binding bekliyor |
+| SignInScreen | Marka, Google CTA, release/auth durumları | SignInFlow, Native Credential Manager, Online, ClientRelease | [v03](screens/sign_in_screen.md); İngilizce, Godot binding bekliyor |
+| PatchScreen | Giriş sonrası içerik kontrolü/indirme, doğrulama ve retry | Game.update_content / ContentInstaller; progress/cancel binding bekliyor | [v03](screens/patch_screen.md); patch öncesi ve sırasında araçlar açık |
+| EntrySettingsScreen / EntryHelpScreen | Cihaz ayarları, EN/JA bilgi, bağlantı/patch yardımı | AudioDirector / yerel tercihler; shipped UI bağımsızlığı | [Ayrı sayfalar](screens/README.md) |
+| EntryUtilityMenu / SignOutConfirmDialog | Sağ üst Settings/Help/Sign Out; oturum kapatma onayı | Online.log_out + operation cancellation boundary | [Kayıtlı bileşenler](SCREEN_REGISTRY.json) |
 | Sığınak | Kaynaklar, mekân hotspotları, büyük devam kartı, 5 tab | HubScreen + StoryDirector | Ayrıntılı görsel aday |
 | Yolculuk | 7 chapter kartı; mevcut chapter 5 node, kilit/clear/current | StoryIndex + chapter/stage JSON | Etkileşimli yerleşim |
 | Stage detayı | Tavsiye Lv, Ration, düşman/ödül özeti, hazırlan | stage JSON + begin_stage | Sheet |
@@ -53,7 +62,7 @@ flowchart TD
 5. Kalıcı alt navigasyon. Sahne artwork ve navigation ayrı katmanlar; metin görsele basılmaz.
 
 ## Veri kuralları
-Demo stage 1-5, roster 5 örnek sahip olunan yoldaş, örnek cüzdan: canlı oyuncu durumu değildir. Skill ve chapter/stage adları mevcut JSON'dan gelir. Türkçe etiketler localization taslağıdır. Gerçek server authority, currency/pity, state persistence bu taslakta yoktur.
+Demo stage 1-5, roster 5 örnek sahip olunan yoldaş, örnek cüzdan: canlı oyuncu durumu değildir. Skill ve chapter/stage adları mevcut JSON'dan gelir. Oyuncu metni/altyazı İngilizce, ses Japonca; Narrative replik çevirisi yapılmaz. Gerçek server authority, currency/pity ve oyuncu state persistence bu taslakta yoktur.
 
 ## Uygulama sırası
 İlk giriş → Sığınak + ortak tasarım sistemi → Yolculuk/formasyon/savaş → Yoldaşlar/envanter/skills → Çağrı/görevler → Kayıtlar/VN/ayarlar → tüm durumlar ve Android doğrulaması. Seçili Narrative kaynak aktarımı tamamlandı; kaynak/runtime farklarını kapatma ayrı izlenir.

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "status": "DESIGN_DRAFT",
+  "player_text_language": "en",
+  "subtitle_language": "en",
+  "voice_language": "ja",
+  "naming": {
+    "screen_id": "ui.<snake_case>; immutable after registration",
+    "godot_root_node": "PascalCase matching the design name",
+    "file_stem": "snake_case matching the design name",
+    "godot_paths": "Planned targets; these .tscn/.gd files are not implemented by this design change"
+  },
+  "screens": [
+    {
+      "id": "ui.sign_in",
+      "name": "SignInScreen",
+      "route": "sign-in",
+      "type": "screen",
+      "spec": "screens/sign_in_screen.md",
+      "prototype_view": "entry/screens/sign_in_screen.js",
+      "godot_scene": "res://scenes/ui/entry/sign_in_screen.tscn",
+      "godot_script": "res://scripts/ui/entry/sign_in_screen.gd",
+      "access": "public",
+      "signals": ["sign_in_requested", "settings_requested", "help_requested"]
+    },
+    {
+      "id": "ui.patch",
+      "name": "PatchScreen",
+      "route": "patch",
+      "type": "screen",
+      "spec": "screens/patch_screen.md",
+      "prototype_view": "entry/screens/patch_screen.js",
+      "godot_scene": "res://scenes/ui/entry/patch_screen.tscn",
+      "godot_script": "res://scripts/ui/entry/patch_screen.gd",
+      "access": "google_session_required; playable_content_not_required",
+      "signals": ["download_requested", "retry_requested", "enter_game_requested", "restart_requested", "settings_requested", "help_requested", "sign_out_requested"]
+    },
+    {
+      "id": "ui.entry_settings",
+      "name": "EntrySettingsScreen",
+      "route": "settings",
+      "type": "screen",
+      "spec": "screens/entry_settings_screen.md",
+      "prototype_view": "entry/screens/entry_settings_screen.js",
+      "godot_scene": "res://scenes/ui/entry/entry_settings_screen.tscn",
+      "godot_script": "res://scripts/ui/entry/entry_settings_screen.gd",
+      "access": "public; device_local; sign_out_requires_session",
+      "signals": ["back_requested", "volume_changed", "text_size_changed", "reduce_motion_changed", "sign_out_requested"]
+    },
+    {
+      "id": "ui.entry_help",
+      "name": "EntryHelpScreen",
+      "route": "help",
+      "type": "screen",
+      "spec": "screens/entry_help_screen.md",
+      "prototype_view": "entry/screens/entry_help_screen.js",
+      "godot_scene": "res://scenes/ui/entry/entry_help_screen.tscn",
+      "godot_script": "res://scripts/ui/entry/entry_help_screen.gd",
+      "access": "public; shipped_text; no_patch_dependency",
+      "signals": ["back_requested", "privacy_requested"]
+    },
+    {
+      "id": "ui.entry_utility_menu",
+      "name": "EntryUtilityMenu",
+      "type": "component",
+      "spec": "screens/entry_utility_menu.md",
+      "prototype_view": "entry/components/entry_utility_menu.js",
+      "godot_scene": "res://scenes/ui/entry/entry_utility_menu.tscn",
+      "godot_script": "res://scripts/ui/entry/entry_utility_menu.gd",
+      "access": "public; sign_out_visible_only_with_session",
+      "signals": ["settings_requested", "help_requested", "sign_out_requested", "dismissed"]
+    },
+    {
+      "id": "ui.sign_out_confirm",
+      "name": "SignOutConfirmDialog",
+      "type": "dialog",
+      "spec": "screens/sign_out_confirm_dialog.md",
+      "prototype_view": "entry/components/sign_out_confirm_dialog.js",
+      "godot_scene": "res://scenes/ui/entry/sign_out_confirm_dialog.tscn",
+      "godot_script": "res://scripts/ui/entry/sign_out_confirm_dialog.gd",
+      "access": "google_session_required",
+      "signals": ["confirmed", "cancelled"]
+    }
+  ]
+}

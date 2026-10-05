@@ -29,7 +29,7 @@ data = {
     "weapons": [{"id": w["weapon_id"], "name": w["name_en"], "rarity": w["rarity"],
                  "description": w["passive_effect_en"]} for w in read("weapons")["weapons"][:5]],
     "armor": [{"id": a["armor_id"], "name": a["name_en"], "rarity": a["rarity"],
-               "description": "Zırh · Lv 1 · Ekipman tasarım örneği"}
+               "description": "Armor · Lv 1 · Equipment design sample"}
               for a in read("armors")["armors"][:3]],
     "codex": read("lore_text")["codex"],
     "companions": [{"id": s["character_id"], "name": s["name_en"], "parts": [

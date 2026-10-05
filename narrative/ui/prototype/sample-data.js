@@ -1093,19 +1093,19 @@ const SOURCE_DATA = {
       "id": "armor_padded_3_01",
       "name": "Roadworn Wayfarer's Padded Roadcoat",
       "rarity": 3,
-      "description": "Zırh · Lv 1 · Ekipman tasarım örneği"
+      "description": "Armor · Lv 1 · Equipment design sample"
     },
     {
       "id": "armor_padded_3_02",
       "name": "Roadworn Ashbound Padded Roadcoat",
       "rarity": 3,
-      "description": "Zırh · Lv 1 · Ekipman tasarım örneği"
+      "description": "Armor · Lv 1 · Equipment design sample"
     },
     {
       "id": "armor_padded_3_03",
       "name": "Roadworn Lantern-Keeper's Padded Roadcoat",
       "rarity": 3,
-      "description": "Zırh · Lv 1 · Ekipman tasarım örneği"
+      "description": "Armor · Lv 1 · Equipment design sample"
     }
   ],
   "codex": [

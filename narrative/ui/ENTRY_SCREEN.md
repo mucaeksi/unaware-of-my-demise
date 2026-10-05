@@ -1,59 +1,56 @@
-# UI / 01 — İlk oyuna giriş ekranı
+# Entry flow — SignInScreen / PatchScreen / utilities
 
-2026-10-05 · DESIGN_DRAFT / V02. Narrative seçici kaynak aktarımı `395c4b9` / BATCH-0005 ile main'e gönderildikten sonra hazırlanmıştır. Bu çalışma giriş arayüzünü ve durum akışını tasarlar; Godot boot/login kodunu değiştirmez.
+2026-10-05 · DESIGN_DRAFT / V03. Player UI and subtitles: **English**. Voice acting: **Japanese**. The owner corrected the earlier Turkish UI draft; [LANGUAGE_POLICY.md](LANGUAGE_POLICY.md) applies from the first screen. Historical v01/v02 previews are not current acceptance evidence.
 
-## Görsel öneri
-Onaylı `brand_key_art_portrait_r2_v003_with_logo.png` ekranda Mahmut/Fadyme ve marka ile birlikte kullanılır. Kaynak dosya/pixeller değiştirilmez. Logo tek başına yeşil-key RGB olduğundan doğrudan transparanmış gibi bindirilmez; mevcut onaylı kompozisyon kullanılır. Dar telefonda logo ve karakterlerin tamamı contain yerleşiminde kalır. Durum kartı büyüdüğünde artwork alanı gerçek kart yüksekliğine göre küçülür; kart logonun üzerine binmez.
+The entry prototype uses approved logo-bearing key art without changing its bytes. The composition stays contained above the actual control height, preserving characters and logo. Colors remain ink, bone and brass. Settings and Help use a quiet solid background for readable scrolling.
 
-Üstte küçük Part I etiketi ve ses düğmesi; resmin altında sakin bir satır, tek Google CTA; altta Gizlilik/Yardım. Alt ana navigasyon, cüzdan ve mağaza kısayolları giriş ekranında yok. Koyu zemin, kemik metin ve pirinç vurgu ortak tasarım dilidir. Google butonu kendi tanınır beyaz zemini/rengiyle ayrılır.
+## Registered pages and components
 
-İlk giriş: “Google ile Devam Et”. Geri dönen oyuncu: “Devam Et”; aynı account ile tekrar bağlanır. Cihazda kalıcı server session varmış gibi mesaj yazılmaz: güncel `Online` session'ı bellekte tutar; Native Credential Manager remembered choice ile silent/auto-select çalışabilir.
+| Name | Stable ID | Purpose |
+|---|---|---|
+| SignInScreen | `ui.sign_in` | English Google sign-in and release/auth outcomes |
+| PatchScreen | `ui.patch` | Signed-in update gate; no playable content dependency |
+| EntrySettingsScreen | `ui.entry_settings` | Local audio, accessibility and fixed language rows |
+| EntryHelpScreen | `ui.entry_help` | Shipped connection/update help and privacy entry |
+| EntryUtilityMenu | `ui.entry_utility_menu` | Top-right Settings / Help / Sign Out |
+| SignOutConfirmDialog | `ui.sign_out_confirm` | Cancel or sign out; preserve account/progress |
 
-## Akış ve mevcut teknik eşleme
+[SCREEN_REGISTRY.json](SCREEN_REGISTRY.json) defines each spec, view, proposed Godot scene/script path, access condition and intent signals. [screens/](screens/README.md) contains the per-page handoff. These are proposed integration targets; no .tscn or runtime code is added here.
+
+## Flow
+
 ```mermaid
 flowchart TD
-  T[Açılış / giriş] --> L[İçerik yükleme ve release kontrolü]
-  L -->|maintenance| M[Bakım / yeniden dene]
-  L -->|update_required| U[Uygulamayı güncelle]
-  L -->|content_update_required| P[İmzalı içerik güncelle / gerekirse yeniden başlat]
-  L -->|uygun| G[Google kimliği / session]
-  G -->|iptal| T
-  G -->|hesap yok / unavailable / hata| E[Giriş durumunu açıkla]
-  G -->|başarılı| S[Player snapshot]
-  S -->|başarılı| H[Sığınak veya tamamlanmamış girişim]
-  S -->|bağlantı / veri hatası| R[Yeniden bağlan]
+  A[SignInScreen] --> B[Connection / app release preflight]
+  B -->|obsolete app or maintenance| E[English blocked state]
+  B -->|eligible| G[Google session]
+  G -->|cancelled or failed| A
+  G -->|signed in| P[PatchScreen: check files]
+  P -->|update required| D[Download Update]
+  D --> V[Verify / install]
+  V -->|restart required| R[Close Game / fresh boot]
+  V -->|ready| S[Player snapshot]
+  P -->|files current| S
+  S -->|confirmed| H[Opening/tutorial, HubScreen or attempt recovery]
+  P --> U[Settings / Help / account menu]
+  U -->|Back| P
+  U --> C[SignOutConfirmDialog]
+  C -->|Cancel| U
+  C -->|Sign Out| A
 ```
 
-- `StoryDirector.start` / `_on_flow_loaded`: local content load ve boot yüzeyi.
-- `Game.attach`: önce release gate, sonra Google session, sonra snapshot. Prototip aşamaları bu sırayı takip eder.
-- `ClientRelease`: bakım, uygulama güncellemesi ve içerik güncellemesi ayrı. Uygulama update zorunluluğu maintenance'tan önce gelir.
-- `SignInFlow` / `Online.sign_in`: Google nonce/token/session; `cancelled`, `no_account`, `unavailable`, başarısız giriş.
-- `ContentInstaller` / `Game.update_content`: signed pack, doğrulama, mount/restart; görsel progress gerçek byte bilgisi yokken yüzde uydurmaz.
-- Server snapshot sonrası mevcut director davranışı korunmalı: Sığınak veya açık attempt recovery. Yeni hesapta ilk hikâyeyi otomatik başlatmak bu taslakla sessizce eklenmez.
+Pre-patch utilities use only shipped UI/help/device preferences and session presence. They do not need roster, wallet, lore or a snapshot. Settings and Help stay accessible while a patch continues; navigation does not start another operation. Sign Out is session-only, confirms explicitly and invalidates late operation results. Installed verified content and device preferences stay; server account/progress is not deleted.
 
-## Durumlar
-| Durum | Oyuncunun gördüğü | Ana eylem |
-|---|---|---|
-| İlk giriş | Artwork + Google butonu | Google ile Devam Et |
-| Dönen oyuncu | “Yol seni bekliyor” | Devam Et |
-| Release / giriş / sync bekliyor | Kısa durum + belirsiz progress | Geri dön; ikinci gönderim engelli |
-| Bağlantı yok | “Bağlantı kurulamadı” | Yeniden Dene |
-| Google iptal | “Giriş tamamlanmadı”; hata alarmı yok | Girişe Dön |
-| Hesap yok | Cihaza Google hesabı ekleme bilgisi | Yeniden Dene |
-| Unavailable | Bu cihazda giriş kullanılamıyor | Yeniden Dene |
-| Maintenance | “Kısa bir mola”; gerçek server mesajı | Yeniden Dene |
-| App update | “Yeni sürüm hazır” | Doğrulanmış mağaza linki |
-| Content update | “Yol hazırlanıyor” | Verileri Güncelle |
-| Snapshot hatası | “Yolculuğun yüklenemedi” | Yeniden bağlan |
-| Hazır | Sığınağa / recovery'ye geçiş | Devam Et |
+## Current technical mapping and required bindings
 
-Geri dön/iptal sonrasında geç tamamlanan async sonuç eski ekranı açmamalı. Uygulamada in-flight operation ve boot ownership ile sağlanır; taslakta epoch guard bu davranışı gösterir. Backend veya token işlemi yapmaz.
+Main `10b42fb` also has TitleScreen with early-tap/loading ownership and the first-player opening route from [FIRST_LAUNCH_FLOW.md](../../docs/design/FIRST_LAUNCH_FLOW.md). SignInScreen is a separately named credential page. Native Credential Manager / SignInFlow, Online, ClientRelease, ContentInstaller, AssetResolver and AudioDirector exist. `Game.attach` checks release before auth; a content mismatch invokes the update path, where `Game.update_content` signs in before the authenticated content release. The proposed session/patch pages can wrap that order, while app-version/maintenance preflight still blocks early. Current patch/error boot surfaces still use MessageScreen and have not adopted this design.
 
-## Prototip ve kaynaklar
-[entry/index.html](entry/index.html) ayrı etkileşimli giriş taslağıdır. Masaüstü sol panelinden 10 senaryo seçilir; telefonda `?scenario=offline` gibi URL ile aynı durum incelenir. Google butonu gerçek hesabı açmaz. Başarılı örnek akış, önceki Sığınak prototipine bağlanır; oradaki örnek beş kişilik roster gerçek yeni oyuncu başlangıcı değildir.
+Godot integration must separate page navigation from operation ownership, expose actual download byte progress when available, add a controlled cancellation boundary for sign-out, respect atomic install publication, and bind local settings to shared app preferences. Preserve existing app-update priority, signed manifest verification, partial-file resume, restart requirements and first-opening/Hub/attempt recovery behavior. The technical team's first-player opening is preserved; this design changes no runtime, story or economy. Flow audio slots now exist in `audio_cues_part1.json` with null values; cue assignment remains a separate Narrative step, and the owner supplies any main theme.
 
-Ses düğmesi mute görsel durumunu gösterir; müzik oynatmaz. Ana tema kullanıcıya aittir. Gizlilik ve store linki yayın sürümündeki gerçek adreslere bağlanacak; prototip sahte politika, OAuth/client ID, token veya mağaza URL'si üretmez. Yardım sheet'i ve keyboard focus çalışır; reduced-motion tercihinde spinner hareketi kapalıdır.
+## Review prototype
 
-Korunan asset: `narrative/references/key_art/brand_key_art_portrait_r2_v003_with_logo.png`, SHA-256 `896f77249416` ile başlayan mevcut lock kaydı. Yeni opening artwork/karakter tasarımı üretilmedi. Türkçe metinler UI localization taslağı; Narrative replik çevirisi değildir.
+[entry/index.html](entry/index.html) has 13 local flow scenarios. Hash routes: `#sign-in`, `#patch`, `#settings`, `#help`. An unsigned `#patch` link returns to SignInScreen. The explicit review-only `?scenario=content&preview=patch#patch` URL seeds a signed-in sample for direct visual inspection; it does not authenticate anyone.
 
-Sonraki üretim işi: görsel değerlendirme → Godot title/boot Control yerleşimi → gerçek release/login/snapshot outcome binding → Android Back/safe-area/metin ve durum doğrulaması. Native Google giriş altyapısı main'de mevcuttur; OAuth/publication readiness ayrı teknik owner kararlarıyla izlenir.
+Download and verification are timers, never real transfers. Unknown-byte progress stays indeterminate. The successful review transition links to the earlier English Hub wireframe with sample roster/wallet, not the real first-player opening. `Close Game` resets the review; Godot will quit/restart. The real store target is already in StoryDirector; the review keeps external store launching disabled and shows an unavailable outcome. Legal policy text/URL awaits D-15. Help includes the owner-approved support mail address. LocalStorage contains device preferences only; no Google/player data. Audio is not played.
+
+Active images are `ui_sign_in_screen_v003.png`, `ui_patch_screen_v003.png`, `ui_entry_settings_screen_v003.png`, `ui_entry_help_screen_v003.png`, `ui_entry_utility_menu_v003.png`, `ui_sign_out_confirm_dialog_v003.png`. [ENTRY_VERIFICATION.json](ENTRY_VERIFICATION.json) records current browser checks; [archive/ENTRY_VERIFICATION_v002.json](archive/ENTRY_VERIFICATION_v002.json) preserves the old check. Browser review is not Android/Godot/account acceptance.
