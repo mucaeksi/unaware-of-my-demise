@@ -1,3 +1,5 @@
+> **Güncel owner kararı (2026-10-05): Bu görsel set reddedildi ve [Narrative arşivine](https://github.com/mucaeksi/unaware-of-my-demise/tree/main/narrative/archive/visuals_rejected_2026-10-05) alındı. Yeni stil kaynağı yalnız owner afişidir. Bu sayfadaki eski candidate/aktif ifadeleri tarihsel uygulama kaydıdır. [Yeni tasarım devri](https://github.com/mucaeksi/unaware-of-my-demise/blob/main/narrative/design/EXTERNAL_DESIGNER_INTRO_PROMPT_TR.md).**
+
 # SovTaym Studios — logo ve açılış adayı
 
 Owner’ın düz yazılı sayfa yerine logolu açılış istemesi üzerine hazırlandı. Durum: **CANDIDATE**; final tasarım/marka uygunluğu iddiası yok.

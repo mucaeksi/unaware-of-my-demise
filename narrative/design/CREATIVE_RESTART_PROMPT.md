@@ -1,3 +1,5 @@
+> **Son karar (2026-10-05): Önceki bütün görsel adaylar reddedildi. Görsel üretim başka AI’a devredildi; bu eski promptun yeni görsel üretim sırası artık aktif görev değildir. Güncel iş: [devir promptu](EXTERNAL_DESIGNER_INTRO_PROMPT_TR.md), [tek stil referansı](VISUAL_REFERENCE_BRIEF_2026-10-05.md), ardından owner’ın göndereceği assetlerin Godot entegrasyonu.**
+
 # Unaware of My Demise — sanat, UI ve Godot entegrasyonu başlangıç promptu
 
 Kayıt tarihi: **2026-10-05**. Kullanıcı bu promptu yeni oturumda çalışma talimatı olarak kullanacak. Bu promptun kaydedilmesi üretimin başladığı anlamına gelmez. Yeni oturumda kullanıcı yalnız inceleme/plan isterse o sınırı uygula; uygulamayı başlatırsa aşağıdaki sırayla çalış.

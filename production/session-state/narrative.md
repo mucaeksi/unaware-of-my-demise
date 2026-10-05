@@ -2,6 +2,16 @@
 
 Bu kayıt Narrative ve UI tasarım işine aittir. Infrastructure ekibinin `active.md` kaydı ve runtime değişiklikleri ayrı sahipliktedir.
 
+## Güncel görev / görseller reddedildi, dış tasarım AI'ına devir
+
+- Owner: **“Yaptığımız bütün Görselleri Arşivle Narrative içerisinde. Hiç birini beğenmedim, farklı yere yaptırtacağım.”** Ardından aynı afişi tekrar ekledi: **yalnız bu stil referansı; bütün oyun görselleri/butonlar/chibiler uyum içinde**.
+- [Arşiv](../../narrative/archive/visuals_rejected_2026-10-05/README.md) / [MANIFEST](../../narrative/archive/visuals_rejected_2026-10-05/MANIFEST.json): 222 dosya, 123 görsel/video/SVG, 44.437.959 byte; eski UI/prototype/entry, yeni key-art/studio/system ve başlamış app-icon paketi, kaynak/varyant/prompt/provenance/test/capture/runtime görsel eşleri byte eşit. Altı özgün imagegen çıktısının tamamı SHA-256 ile arşivde mevcut.
+- App-icon isteğinde kaynak RGBA üretildi, original mono SVG ve Godot teknik 1024/512/192/64/48/32/432 export'ları hazırlandı. Owner reddi geldiğinde maske/review/Android kontrolü çalıştırılmadı; hazırlanan script arşivde tarihsel. Yeni project icon ve iki Android preset ayarı geri alındı, arşivlenen beş unpublished runtime PNG kaldırıldı. Bu devam turunda **game/ diff'i yok**, pin/backend/workflow/canon/audio değişmedi. Xvfb kapatıldı.
+- [ACTIVE_ART_SET](../../narrative/art/ACTIVE_ART_SET.json), provenance, registry ve eski restart üst notu reddi kaydeder. Önceden commit edilmiş dosyalar/linkler korunur; oyunda eski sanat gösteren tüketiciler reddedilmiş geçici geliştirme placeholder'ıdır. İşlevsel UI/tema/modal/akış altyapısı kaldırılmadı; yeni owner teslimlerine bağlanacak. Eski artwork tekrar final stil/kimlik referansı olarak kullanılmayacak.
+- [Tek referans](../../narrative/design/VISUAL_REFERENCE_BRIEF_2026-10-05.md): owner afişi sohbette görüldü; original file_id/yol/hash elde değil, uydurulmadı. Afiş arşivlenmiş bizim tasarımımız değildir. Mağaza Google Play kontrolü/puan/indirme mockup'ıdır; oyun UI stili afişin illüstrasyon dilinden türetilir.
+- [Dış AI için ilk rol ve oyun tanıtımı promptu](../../narrative/design/EXTERNAL_DESIGNER_INTRO_PROMPT_TR.md), Türkçe iletişim/İngilizce UI/Japonca dub, Veyrhold/Hours/isim/tanıklık, doğru Fadyme–Mahmut dramı, 20 karakter, 7 rota, gerçek 2 Front/3 Rear savaş, tek afiş stilinden UI/chibi/VN uyumu ve ayrı Godot asset teslim koşullarını açıklar. Ayrıntılı karakter/sahne paketleri sonraki tur; ilk AI yanıtı anlama/referans çözümü/çalışma sırası, bütün asset üretimi değil.
+- **Kesin sonraki iş:** owner'ın dış AI’dan göndereceği tasarım/assetleri al, format/alpha/ölçek/canon/consumer eşlemesini doğrula ve uygun gerçek Godot yerlerine entegre et. Yeni artwork üretme veya eski TitleScreen/Fadyme üretim sırasını kendiliğinden sürdürme.
+
 ## Güncel adım / 2 — ortak sanat sistemi
 
 - Owner, 1. adımdan 2. adıma geçilmesini istedi. [ART_SYSTEM_V02](../../narrative/design/ART_SYSTEM_V02.md) uygulandı. Önceki bağımsız v01 teması yerine gerçek AppShell → UiTheme → UiKit/UiScreen zinciri ortak ink/bone/wine/silver font/renk/state/zemin katmanını kullanır; Studio da aynı Theme'e bağlıdır. Oyuncu yönlendirme/sinyal/hesap/auth/patch/tercih deposu değişmedi.

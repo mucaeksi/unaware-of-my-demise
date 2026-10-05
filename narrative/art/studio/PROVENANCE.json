@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "date": "2026-10-05",
-  "status": "CANDIDATE_NOT_OWNER_APPROVED",
+  "status": "REJECTED_BY_OWNER",
   "owner_request": "Replace the plain SovTaym wordmark page with a logo page; use Godot's existing native splash rather than duplicating it",
   "design_record": "narrative/design/STUDIO_SPLASH_V02.md",
   "assets": [
@@ -55,5 +55,14 @@
   },
   "font_provenance": "narrative/art/direction/PROVENANCE.json",
   "studio_name_status": "PRELIMINARY; prior research unchanged",
-  "historical_assets_and_audio_unchanged": true
+  "historical_assets_and_audio_unchanged": true,
+  "historical_status_before_rejection": "CANDIDATE_NOT_OWNER_APPROVED",
+  "owner_decision": {
+    "date": "2026-10-05",
+    "status": "REJECTED_BY_OWNER",
+    "archive": "narrative/archive/visuals_rejected_2026-10-05",
+    "current_visual_reference": "narrative/design/VISUAL_REFERENCE_BRIEF_2026-10-05.md",
+    "reuse_as_final_reference": false,
+    "new_design_source": "External designer AI; owner will deliver files for Godot integration"
+  }
 }

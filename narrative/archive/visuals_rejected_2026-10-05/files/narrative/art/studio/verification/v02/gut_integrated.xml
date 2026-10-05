@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="GutTests" failures="0" tests="33" >
+  <testsuite name="tests/ui/test_startup_sequence.gd" tests="7" failures="0" skipped="0" time="1.312552" >
+      <testcase name="test_silent_startup_visits_studio_title_without_a_second_godot_page" assertions="4" status="pass" classname="tests/ui/test_startup_sequence.gd" time="0.015315" >
+      </testcase>
+      <testcase name="test_focus_loss_freezes_the_timeline_and_resume_continues_it" assertions="3" status="pass" classname="tests/ui/test_startup_sequence.gd" time="0.43471" >
+      </testcase>
+      <testcase name="test_cancelled_startup_cannot_emit_a_late_completion" assertions="2" status="pass" classname="tests/ui/test_startup_sequence.gd" time="0.291383" >
+      </testcase>
+      <testcase name="test_early_title_tap_waits_for_startup_before_fetching_the_player" assertions="9" status="pass" classname="tests/ui/test_startup_sequence.gd" time="0.108978" >
+      </testcase>
+      <testcase name="test_title_also_waits_for_content_when_startup_finishes_first" assertions="5" status="pass" classname="tests/ui/test_startup_sequence.gd" time="0.133545" >
+      </testcase>
+      <testcase name="test_retry_cancels_the_overlay_and_does_not_replay_the_splashes" assertions="4" status="pass" classname="tests/ui/test_startup_sequence.gd" time="0.32368" >
+      </testcase>
+      <testcase name="test_builtin_engine_splash_and_studio_emblem_work_without_a_content_patch" assertions="8" status="pass" classname="tests/ui/test_startup_sequence.gd" time="0.004941" >
+      </testcase>
+  </testsuite>
+  <testsuite name="tests/ui/test_first_launch.gd" tests="6" failures="0" skipped="0" time="0.092281" >
+      <testcase name="test_a_new_player_goes_from_the_title_straight_into_the_opening" assertions="4" status="pass" classname="tests/ui/test_first_launch.gd" time="0.007573" >
+      </testcase>
+      <testcase name="test_a_returning_player_lands_on_the_hub" assertions="3" status="pass" classname="tests/ui/test_first_launch.gd" time="0.032714" >
+      </testcase>
+      <testcase name="test_the_title_has_no_say_in_a_retry" assertions="4" status="pass" classname="tests/ui/test_first_launch.gd" time="0.008613" >
+      </testcase>
+      <testcase name="test_a_long_absence_refreshes_the_hub_and_a_short_one_does_not" assertions="6" status="pass" classname="tests/ui/test_first_launch.gd" time="0.008621" >
+      </testcase>
+      <testcase name="test_a_maintenance_or_update_that_started_meanwhile_shows_on_return" assertions="4" status="pass" classname="tests/ui/test_first_launch.gd" time="0.02069" >
+      </testcase>
+      <testcase name="test_a_return_never_interrupts_a_story_scene" assertions="4" status="pass" classname="tests/ui/test_first_launch.gd" time="0.01407" >
+      </testcase>
+  </testsuite>
+  <testsuite name="tests/unit/test_audio_and_locale.gd" tests="20" failures="0" skipped="0" time="0.944858" >
+      <testcase name="test_the_bus_layout_has_music_voice_and_sfx" assertions="6" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000452" >
+      </testcase>
+      <testcase name="test_runtime_paths_follow_the_stable_ids" assertions="3" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000266" >
+      </testcase>
+      <testcase name="test_missing_audio_is_silence_reported_once" assertions="6" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000371" >
+      </testcase>
+      <testcase name="test_a_new_voice_line_cuts_the_previous_one" assertions="6" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000419" >
+      </testcase>
+      <testcase name="test_music_cross_fades_and_a_missing_cue_fades_the_old_one_out" assertions="12" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000633" >
+      </testcase>
+      <testcase name="test_volumes_are_applied_saved_and_restored" assertions="5" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.001194" >
+      </testcase>
+      <testcase name="test_backgrounding_the_app_pauses_and_resuming_continues" assertions="2" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000579" >
+      </testcase>
+      <testcase name="test_text_follows_the_locale_with_english_as_the_fallback" assertions="7" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000363" >
+      </testcase>
+      <testcase name="test_the_vn_reads_the_player_language_and_plays_recorded_lines" assertions="5" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.004893" >
+      </testcase>
+      <testcase name="test_the_shipped_cue_pack_has_every_slot_and_nothing_assigned_yet" assertions="13" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.001329" >
+      </testcase>
+      <testcase name="test_a_cue_pack_ignores_unknown_slots_and_empty_values" assertions="5" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000381" >
+      </testcase>
+      <testcase name="test_flow_cues_play_their_slot_and_an_unassigned_music_slot_fades_the_music_out" assertions="8" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.00056" >
+      </testcase>
+      <testcase name="test_story_scenes_and_lines_drive_music_ambience_and_effects" assertions="7" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000491" >
+      </testcase>
+      <testcase name="test_stopping_music_when_none_plays_is_quiet" assertions="2" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000381" >
+      </testcase>
+      <testcase name="test_future_main_theme_is_silent_without_a_file_and_does_not_use_fadyme" assertions="5" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000638" >
+      </testcase>
+      <testcase name="test_reserved_main_theme_keeps_its_player_stream_and_fade_across_entry_calls" assertions="7" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.102706" >
+      </testcase>
+      <testcase name="test_assigned_title_cue_overrides_the_future_filename_and_preserves_mute" assertions="5" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.000965" >
+      </testcase>
+      <testcase name="test_backgrounding_preserves_the_entry_fade_until_resume" assertions="4" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.27655" >
+      </testcase>
+      <testcase name="test_entry_ogg_loops_without_mutating_the_imported_resource" assertions="7" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.30323" >
+      </testcase>
+      <testcase name="test_entry_music_started_while_backgrounded_waits_for_resume" assertions="4" status="pass" classname="tests/unit/test_audio_and_locale.gd" time="0.248457" >
+      </testcase>
+  </testsuite>
+</testsuites>

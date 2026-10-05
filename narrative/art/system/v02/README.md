@@ -1,3 +1,5 @@
+> **Güncel owner kararı (2026-10-05): Bu görsel set reddedildi ve [Narrative arşivine](https://github.com/mucaeksi/unaware-of-my-demise/tree/main/narrative/archive/visuals_rejected_2026-10-05) alındı. Yeni stil kaynağı yalnız owner afişidir. Bu sayfadaki eski candidate/aktif ifadeleri tarihsel uygulama kaydıdır. [Yeni tasarım devri](https://github.com/mucaeksi/unaware-of-my-demise/blob/main/narrative/design/EXTERNAL_DESIGNER_INTRO_PROMPT_TR.md).**
+
 # Ortak sanat sistemi v02
 
 2. adımın gerçek Godot teması, yeni oyun amblemi, iki logo dizgisi, 15 SVG utility glyph ve 9-slice frame. Sanat **CANDIDATE**; yerel entegrasyon doğrulandı, owner/Android final kabulü bekler.

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "art_system_v02",
-  "status": "CANDIDATE_RUNTIME_FOUNDATION",
+  "status": "REJECTED_BY_OWNER",
   "assets": [
     {
       "asset_id": "ui/icon_back",
@@ -345,5 +345,14 @@
     "development_review_excluded": true,
     "actual_android_export_verified": false,
     "content_patch_publish_performed": false
+  },
+  "historical_status_before_rejection": "CANDIDATE_RUNTIME_FOUNDATION",
+  "owner_decision": {
+    "date": "2026-10-05",
+    "status": "REJECTED_BY_OWNER",
+    "archive": "narrative/archive/visuals_rejected_2026-10-05",
+    "current_visual_reference": "narrative/design/VISUAL_REFERENCE_BRIEF_2026-10-05.md",
+    "reuse_as_final_reference": false,
+    "new_design_source": "External designer AI; owner will deliver files for Godot integration"
   }
 }

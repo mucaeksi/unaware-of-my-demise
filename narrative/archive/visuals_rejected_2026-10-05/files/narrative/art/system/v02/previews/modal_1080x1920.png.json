@@ -1,0 +1,106 @@
+{
+  "account_requested": false,
+  "controls": [
+    {
+      "disabled": false,
+      "rect": "[P: (64.0, 335.0), S: (466.0, 144.0)]",
+      "text": "Continue",
+      "variation": "PrimaryButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (550.0, 335.0), S: (466.0, 144.0)]",
+      "text": "Selected",
+      "variation": "NavigationButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (64.0, 499.0), S: (466.0, 144.0)]",
+      "text": "Settings",
+      "variation": "SecondaryButton",
+      "visible": true
+    },
+    {
+      "disabled": true,
+      "rect": "[P: (550.0, 499.0), S: (466.0, 144.0)]",
+      "text": "Unavailable",
+      "variation": "SecondaryButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (64.0, 663.0), S: (466.0, 144.0)]",
+      "text": "Sign out",
+      "variation": "DestructiveButton",
+      "visible": true
+    },
+    {
+      "disabled": true,
+      "rect": "[P: (550.0, 663.0), S: (466.0, 144.0)]",
+      "text": "Preparing…",
+      "variation": "PrimaryButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (64.0, 877.0), S: (306.0, 144.0)]",
+      "text": "Shelter",
+      "variation": "NavigationButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (386.0, 877.0), S: (307.0, 144.0)]",
+      "text": "Journey",
+      "variation": "NavigationButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (709.0, 877.0), S: (307.0, 144.0)]",
+      "text": "Summon",
+      "variation": "NavigationButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (64.0, 1494.0), S: (952.0, 144.0)]",
+      "text": "Remember this choice",
+      "variation": "",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (64.0, 1654.0), S: (466.0, 144.0)]",
+      "text": "Back",
+      "variation": "IconButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (550.0, 1654.0), S: (466.0, 144.0)]",
+      "text": "Help",
+      "variation": "IconButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (104.0, 1026.0), S: (424.0, 144.0)]",
+      "text": "Cancel",
+      "variation": "SecondaryButton",
+      "visible": true
+    },
+    {
+      "disabled": false,
+      "rect": "[P: (552.0, 1026.0), S: (424.0, 144.0)]",
+      "text": "Sign out",
+      "variation": "DestructiveButton",
+      "visible": true
+    }
+  ],
+  "engine": "4.6.3-stable (official)",
+  "page": "modal",
+  "viewport": "[P: (0.0, 0.0), S: (1080.0, 1920.0)]"
+}

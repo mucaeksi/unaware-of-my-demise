@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "date": "2026-10-05",
-  "status": "CANDIDATE_NOT_OWNER_APPROVED",
+  "status": "REJECTED_BY_OWNER",
   "baseline_commit": "d5c5cadd2357a5c97aab0b2aac52977151f602bd",
   "world_review": "narrative/design/SOURCE_REVIEW_2026-10-05.json",
   "art_system": "narrative/design/ART_SYSTEM_V01.md",
@@ -135,5 +135,14 @@
     "canon_script_content_unchanged": true,
     "active_startup_auth_patch_audio_unchanged": true,
     "generated_original_outputs_left_in_place": true
+  },
+  "historical_status_before_rejection": "CANDIDATE_NOT_OWNER_APPROVED",
+  "owner_decision": {
+    "date": "2026-10-05",
+    "status": "REJECTED_BY_OWNER",
+    "archive": "narrative/archive/visuals_rejected_2026-10-05",
+    "current_visual_reference": "narrative/design/VISUAL_REFERENCE_BRIEF_2026-10-05.md",
+    "reuse_as_final_reference": false,
+    "new_design_source": "External designer AI; owner will deliver files for Godot integration"
   }
 }

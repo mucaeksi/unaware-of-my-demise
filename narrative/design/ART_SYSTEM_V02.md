@@ -1,3 +1,5 @@
+> **Güncel owner kararı (2026-10-05): Bu görsel set reddedildi ve [Narrative arşivine](https://github.com/mucaeksi/unaware-of-my-demise/tree/main/narrative/archive/visuals_rejected_2026-10-05) alındı. Yeni stil kaynağı yalnız owner afişidir. Bu sayfadaki eski candidate/aktif ifadeleri tarihsel uygulama kaydıdır. [Yeni tasarım devri](https://github.com/mucaeksi/unaware-of-my-demise/blob/main/narrative/design/EXTERNAL_DESIGNER_INTRO_PROMPT_TR.md).**
+
 # Ortak sanat sistemi — 2. adım / v02
 
 2026-10-05. Owner 1. adımdan 2. adıma geçilmesini istedi. **Uygulanan temel, sanat statüsü CANDIDATE.** Önceki v01 ve bütün Legacy kayıtları tarihsel kanıttır. Bu sürümün ortak Theme'i gerçek oyuncu ekranlarında aktiftir; her ekranın final artwork ve yerleşimi kendi sırasındadır.

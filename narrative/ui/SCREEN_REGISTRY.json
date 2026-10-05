@@ -16,7 +16,7 @@
       "name": "EngineSplashScreen",
       "type": "screen",
       "status": "RETIRED_FROM_STARTUP",
-      "art_status": "CANDIDATE",
+      "art_status": "REJECTED_BY_OWNER",
       "spec": "screens/engine_splash_screen.md",
       "godot_scene": "res://scenes/ui/startup/engine_splash_screen.tscn",
       "godot_script": "res://scripts/ui/startup/engine_splash_screen.gd",
@@ -47,7 +47,7 @@
       "name": "StartupSequence",
       "type": "component",
       "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
-      "art_status": "CANDIDATE",
+      "art_status": "REJECTED_BY_OWNER",
       "spec": "screens/startup_sequence.md",
       "godot_scene": "res://scenes/ui/startup/startup_sequence.tscn",
       "godot_script": "res://scripts/ui/startup/startup_sequence.gd",
@@ -239,10 +239,11 @@
     "id": "art_system_v02",
     "runtime_theme": "res://theme/gothic_system_v02.gd",
     "consumer_api": "UiTheme/UiKit/UiScreen",
-    "art_status": "CANDIDATE",
+    "art_status": "REJECTED_BY_OWNER",
     "spec": "../design/ART_SYSTEM_V02.md",
     "verification": "../art/system/v02/VERIFY.json",
-    "all_player_screens_final": false
+    "all_player_screens_final": false,
+    "status": "REJECTED_VISUALS; REUSABLE_IMPLEMENTATION_SCAFFOLD"
   },
   "developer_reviews": [
     {
@@ -254,5 +255,13 @@
       "android_export_excluded": true,
       "verification": "../art/system/v02/VERIFY.json"
     }
-  ]
+  ],
+  "visual_owner_decision": {
+    "date": "2026-10-05",
+    "status": "REJECTED_BY_OWNER",
+    "archive": "narrative/archive/visuals_rejected_2026-10-05",
+    "current_visual_reference": "narrative/design/VISUAL_REFERENCE_BRIEF_2026-10-05.md",
+    "reuse_as_final_reference": false,
+    "new_design_source": "External designer AI; owner will deliver files for Godot integration"
+  }
 }

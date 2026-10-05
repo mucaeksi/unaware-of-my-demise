@@ -1,5 +1,15 @@
 # Oyun tasarım referansı
 
+## Güncel tasarım devri — 2026-10-05
+
+Owner önceki bütün görsel adayları reddetti; yeni görsel tasarım dış AI'a devredildi. **Tek stil referansı owner'ın yeniden gönderdiği Gothic/anime afişi; UI, buton, chibi ve bütün artwork aynı dili taşıyacak.**
+
+- [İlk görev ve oyun tanıtımı promptu](EXTERNAL_DESIGNER_INTRO_PROMPT_TR.md): diğer AI'a afişle birlikte verilecek kapsamlı ilk mesaj.
+- [Tek referansın görsel özeti ve erişim sınırı](VISUAL_REFERENCE_BRIEF_2026-10-05.md).
+- [Reddedilmiş görsel arşivi](../archive/visuals_rejected_2026-10-05/README.md): 222 dosya/123 medya, kaynaklar/varyantlar/önizlemeler/video/prompt/provenance ve runtime karşılıkları hash eşitliğiyle saklandı.
+
+Yeni üretim burada durdu. Android ikonunun henüz commit edilmemiş runtime ayarları geri alındı. Önceki kod/sahne bağlantıları yeni teslimleri alacak geliştirme altyapısıdır; mevcut görseller final referans olarak kullanılmaz. Sıradaki somut iş owner'ın dış AI tasarımlarını uygun Godot tüketicilerine entegre etmektir. Aşağıdaki aşamalar tarihsel kayıttır.
+
 ## Güncel yaratıcı yeniden başlangıç — 2026-10-05
 
 - **2. adım uygulandı:** [Ortak sanat sistemi v02](ART_SYSTEM_V02.md), gerçek aktif UiTheme/UiKit, iki oyun logo dizgisi, 15 SVG glyph ve 9-slice frame. [1080×1920 kimlik](../art/system/v02/previews/identity_1080x1920.png), [bileşenler](../art/system/v02/previews/components_1080x1920.png), [üretim/katalog/geçiş/doğrulama](../art/system/v02/README.md). Yeni sanat candidate, bütün ekran yerleşimleri final değil.

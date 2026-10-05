@@ -1,3 +1,9 @@
+# Son owner kararı — görsel tasarım devri
+
+Önceki UI/görsel adayların tamamı owner tarafından reddedildi ve [arşivlendi](../archive/visuals_rejected_2026-10-05/README.md). Yeni UI, buton, ikon ve chibi dili **yalnız owner'ın afişinden** türetilecek; eski panolar referans değildir. [Dış tasarım AI'ı için ilk prompt](../design/EXTERNAL_DESIGNER_INTRO_PROMPT_TR.md). Mevcut kod/binding altyapısı yeni assetler gelene kadar geliştirme scaffold'ıdır. Aşağıdaki uygulama kayıtları tarihseldir.
+
+---
+
 # UOMD — UI Tasarım Çalışması
 
 **Ortak Godot temeli / 2. adım:** [ART_SYSTEM_V02](../design/ART_SYSTEM_V02.md), aktif UiTheme/UiKit, oyun logo adayları, ikon/button/frame/modal ailesi ve [1080×1920 panolar](../art/system/v02/README.md). Eski HTML DESIGN_DRAFT ve reference lock kayıtları tarihsel kalır; tek tek oyuncu ekranlarının final tasarımı tamamlanmış değildir.

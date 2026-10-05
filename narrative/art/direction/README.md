@@ -1,3 +1,5 @@
+> **Güncel owner kararı (2026-10-05): Bu görsel set reddedildi ve [Narrative arşivine](https://github.com/mucaeksi/unaware-of-my-demise/tree/main/narrative/archive/visuals_rejected_2026-10-05) alındı. Yeni stil kaynağı yalnız owner afişidir. Bu sayfadaki eski candidate/aktif ifadeleri tarihsel uygulama kaydıdır. [Yeni tasarım devri](https://github.com/mucaeksi/unaware-of-my-demise/blob/main/narrative/design/EXTERNAL_DESIGNER_INTRO_PROMPT_TR.md).**
+
 # Yeni ortak sanat adayları — 2026-10-05
 
 Durum: **CANDIDATE**. Dünya/hikâye/20 karakter okumasından sonra üretildi. Bu dizin final karakter sheet'i veya bütün UI'nun tamamlandığına dair kayıt değildir.

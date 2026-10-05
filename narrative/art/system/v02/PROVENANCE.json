@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-05",
-  "status": "CANDIDATE",
+  "status": "REJECTED_BY_OWNER",
   "source_brief": "narrative/design/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
   "canon_logo_basis": "C41 bell/thorn clapper/broken circlet/crimson eclipse ring; title blindness belongs to Mahmut",
   "user_reference": "Conversation Gothic/anime poster seen earlier; original uploaded bytes/file hash unavailable. Initial emblem generation used text only.",
@@ -91,5 +91,14 @@
   "fonts_provenance": "narrative/art/direction/PROVENANCE.json; existing Google Fonts downloads and OFL license bytes retained",
   "lettering": "Native GameLogo Labels with Cinzel; not baked into the generated emblem",
   "final_character_identity_locked": false,
-  "art_owner_approved": false
+  "art_owner_approved": false,
+  "historical_status_before_rejection": "CANDIDATE",
+  "owner_decision": {
+    "date": "2026-10-05",
+    "status": "REJECTED_BY_OWNER",
+    "archive": "narrative/archive/visuals_rejected_2026-10-05",
+    "current_visual_reference": "narrative/design/VISUAL_REFERENCE_BRIEF_2026-10-05.md",
+    "reuse_as_final_reference": false,
+    "new_design_source": "External designer AI; owner will deliver files for Godot integration"
+  }
 }
