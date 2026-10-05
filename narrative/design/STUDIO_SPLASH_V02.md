@@ -24,6 +24,8 @@ Owner ana teması hâlâ yok. `bgm_main_theme.ogg` rezervasyonu ve aynı AudioDi
 
 ## Gerçek önizleme
 
+- **Güncel tam çözünürlüklü teslim:** [1080×1920 stüdyo PNG](../art/studio/previews/v02_1080/studio_1080x1920.png), [1080×1920 gerçek cold-boot MP4](../art/studio/previews/v02_1080/cold_boot_1080x1920.mp4), [native Godot frame](../art/studio/previews/v02_1080/native_godot_1080x1920.png), [ölçü ve kontrol kaydı](../art/studio/previews/v02_1080/VERIFY_HD.json). Küçük önizlemeler büyütülmedi; gerçek Godot viewport'u hedef çözünürlükte yeniden render edildi. Şeffaf logo kaynağı 1254×1254, ekrandaki TextureRect 720×720; logo source/runtime byte'ları aynı.
+- Önceki sohbet teslimindeki `/workspace/...` bağlantıları yalnız çalışma ortamının yerel yollarıydı. Güncel teslimde görsel sohbet içinde doğrudan gösterilir ve gerçek GitHub dosya bağlantıları kullanılır. Private repo için owner'ın GitHub hesabında oturum açması gerekir.
 - [360×640 stüdyo](../art/studio/previews/v01_360/studio_360x640.png)
 - [390×844 stüdyo](../art/studio/previews/v01_390/studio_390x844.png)
 - [Native Godot → studio → mevcut title videosu](../art/studio/previews/cold_boot_v02_360x640.mp4): gerçek main scene, X11 ekran kaydı, 30 fps, 12 saniye, ses dosyası olmadan. Title’a dokunulmadı ve hesap isteği başlatılmadı.

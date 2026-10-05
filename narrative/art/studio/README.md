@@ -5,7 +5,9 @@ Owner’ın düz yazılı sayfa yerine logolu açılış istemesi üzerine hazı
 - [Güncel tasarım ve Godot bağlantısı](../../design/STUDIO_SPLASH_V02.md)
 - [Şeffaf amblem v01](v01/emblem.png) ve [gerçek prompt](v01/logo.prompt.txt)
 - [Üretim izi](PROVENANCE.json), [yerel doğrulama](VERIFY_V02.json)
-- [Küçük telefon sayfası](previews/v01_360/studio_360x640.png), [uzun telefon sayfası](previews/v01_390/studio_390x844.png)
-- [Gerçek açılış videosu](previews/cold_boot_v02_360x640.mp4)
+- [Tam çözünürlükte stüdyo sayfası — 1080×1920](previews/v02_1080/studio_1080x1920.png)
+- [Tam çözünürlükte gerçek açılış videosu — 1080×1920](previews/v02_1080/cold_boot_1080x1920.mp4)
+- [HD önizleme ve çözünürlük kaydı](previews/v02_1080/README.md)
+- Önceki küçük telefon kontrolleri: [360×640](previews/v01_360/studio_360x640.png), [390×844](previews/v01_390/studio_390x844.png), [360×640 video](previews/cold_boot_v02_360x640.mp4).
 
 Godot logosu motorun kendi native ekranıdır. StartupSequence yalnız SovTaym → mevcut title bölümünü yönetir. Amblem source/runtime kopyası birebir; yazılar gerçek Godot Label katmanlarıdır. Eski sanat/startup adayları kendi tarihsel kayıtlarında kalır.

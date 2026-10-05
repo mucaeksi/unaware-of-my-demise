@@ -4,6 +4,7 @@ Bu kayıt Narrative ve UI tasarım işine aittir. Infrastructure ekibinin `activ
 
 ## Güncel revizyon / native Godot ve SovTaym logosu
 
+- Owner düşük çözünürlük ve açılmayan sohbet linklerini bildirdi. Gerçek Godot sahnesinden **1080×1920** stüdyo/title PNG ve native Godot → studio → mevcut title MP4 yeniden alındı; [HD teslim](../../narrative/art/studio/previews/v02_1080/README.md). 1254×1254 logo kaynağı değiştirilmedi; ekranda 720×720 gösterilir. Yerel çalışma yolu yerine doğrudan sohbet görseli ve GitHub dosya URL'leri paylaşılır. Upstream `ede6a8e` checkpoint değişikliği fast-forward ile korundu; runtime değişmedi.
 - Owner, önceki stüdyo düz yazısını yetersiz buldu ve Godot’un kendi APK açılışını kullanmayı hatırlattı. [Logolu açılış v02](../../narrative/design/STUDIO_SPLASH_V02.md) uygulandı: **native Godot → SovTaym amblemi → mevcut title**.
 - Repo’da gizlenen `boot_splash/show_image` true yapıldı; custom image atanmadı, 1200 ms minimum. Yerel runtime’ın kendi Godot logosu X11 kaydında görüldü. Ek `EngineSplashScreen` artık preload/instantiate edilmez; tarihsel sınıf/scene yerinde, registry **RETIRED_FROM_STARTUP**.
 - OpenAI imagegen ile şeffaf kuzgun/kum saati amblemi üretildi. Source/runtime PNG birebir; gerçek scene’de TextureRect, Cinzel SovTaym/STUDIOS ve Inter PRESENTS ayrı node’lar. Koyu dokulu shader parent alpha’yı korur. 360×640 / 390×844 render ve gerçek main cold-boot videosu mevcut.
