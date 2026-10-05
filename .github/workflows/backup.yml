@@ -70,10 +70,12 @@ jobs:
           direct="${DATABASE_URL/-pooler./.}"
           echo "::add-mask::${direct}"
           major="$(tr -d '[:space:]' < database/POSTGRES_MAJOR)"
-          docker run --rm --network host -e DUMP_URL="${direct}" -v "${RUNNER_TEMP}:/work" "postgres:${major}" \
+          # As the runner's user, so the dump stays its file (the plaintext is shredded after encryption).
+          docker run --rm --network host --user "$(id -u):$(id -g)" -e DUMP_URL="${direct}" -v "${RUNNER_TEMP}:/work" "postgres:${major}" \
             sh -c 'pg_dump --dbname="${DUMP_URL}" --format=custom --no-owner --no-privileges --file=/work/production.dump'
           # A dump that pg_restore cannot list is not a backup.
-          docker run --rm -v "${RUNNER_TEMP}:/work" "postgres:${major}" pg_restore --list /work/production.dump > /dev/null
+          docker run --rm --user "$(id -u):$(id -g)" -v "${RUNNER_TEMP}:/work" "postgres:${major}" pg_restore --list /work/production.dump > /dev/null
+          [ -O "${RUNNER_TEMP}/production.dump" ] || { echo "::error::the dump is not the runner's file and could not be shredded"; exit 1; }
       - name: Encrypt for the owner's key
         if: steps.config.outputs.ready == 'true'
         run: |
