@@ -8,13 +8,13 @@ aws-eu-central-1). This runbook says what protects it today, how to restore it, 
 | Layer | State | Limit |
 |---|---|---|
 | Neon point-in-time history | on, `history_retention_seconds = 21600` | **6 hours** back (Free plan `free_v3`) |
-| Off-site logical backups | **none** | owner decision D-05 (`docs/OWNER_DECISIONS.md`) |
+| Off-site logical backups | `.github/workflows/backup.yml`: nightly 02:23 UTC, `pg_dump` encrypted with `age` to the owner's key, R2 bucket `uomd-db-backups` (private) | **30 days** back (bucket lifecycle rule); owner decision D-05 |
 | Branch protection | `production` is not protected | owner decision D-03 |
 | Restore rehearsal | `.github/workflows/restore-drill.yml`, monthly + on demand | proves dump → restore → integrity, not PITR |
 
-Consequence: a mistake noticed more than 6 hours later cannot be undone from Neon history today. Until D-05 is
-decided, the only older copy is whatever the last restore drill proved restorable, and that dump is deliberately
-not kept (it holds player data).
+Consequence: inside 6 hours, Neon's history restores to any second (Restore A); after that, the newest nightly backup
+restores the data as it was that night (Restore B), for 30 days. Only the owner's offline age key opens a backup:
+GitHub, Cloudflare and the workflow hold the public half only, so a leaked bucket token exposes nothing readable.
 
 ## Integrity check (after any restore, rollback or incident)
 
@@ -50,16 +50,24 @@ them again (they are additive, DEC-0020).
 
 ## Restore B: from a logical dump (outside the window, or a new project)
 
-The restore drill is the tested procedure; run the same commands by hand with a kept dump:
+The restore drill is the tested procedure; run the same commands by hand with a nightly backup:
+
+1. Cloudflare → R2 → `uomd-db-backups` → `production/<yyyy>/<mm>/<dd>/` → download the `.dump.age` object of the night
+   wanted (the run summary of `backup.yml` names each object and its SHA-256).
+2. Decrypt on a trusted machine (Cloud Shell is fine; `sudo apt-get install -y age` there) with the owner's offline key
+   file, then remove the key from that machine again:
 
 ```bash
+age --decrypt --identity uomd-backup-age.key --output production.dump <object>.dump.age
 # Client must be the production major (database/POSTGRES_MAJOR); use the direct, non-pooled Neon host.
 pg_restore --dbname="$TARGET_URL" --no-owner --no-privileges --exit-on-error production.dump
 DATABASE_URL="$TARGET_URL" database/verify.sh
+shred -u production.dump uomd-backup-age.key
 ```
 
-Then point Hyperdrive (`unaware-of-my-demise-production`) at the new database and redeploy. Only possible once
-off-site dumps exist (D-05).
+Then point Hyperdrive (`unaware-of-my-demise-production`) at the new database and redeploy. The encryption chain was
+tested locally (2026-10-05): PostgreSQL 18 dump → `age` to a recipient → decrypt → byte-identical, `pg_restore --list`
+accepts it; the workflow refuses a `BACKUP_AGE_RECIPIENT` that is not an `age1…` public key (a pasted private key).
 
 ## Restore drill (rehearsal)
 

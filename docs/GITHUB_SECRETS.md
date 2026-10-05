@@ -23,6 +23,13 @@ secrets, and never in `wrangler.toml`.
 | `STAGING_DATABASE_URL` | secret (environment `staging`) | the staging Neon branch (DEC-0025); `deploy-staging.yml` migrates it with `UOMD_ENVIRONMENT=staging`. Must never be the production URL (the workflow and `migrate.sh` refuse it). |
 | `STAGING_GOOGLE_CLIENT_IDS` | variable (optional) | staging sign-in audiences; defaults to `GOOGLE_CLIENT_IDS` |
 
+## Off-site backups (backup.yml, owner decision D-05)
+
+| Name | Kind | Purpose |
+|---|---|---|
+| `R2_BACKUP_ACCESS_KEY_ID`, `R2_BACKUP_SECRET_ACCESS_KEY` | secrets | R2 API token limited to the bucket `uomd-db-backups` (Object Read & Write) |
+| `BACKUP_AGE_RECIPIENT` | variable | the owner's age public key (`age1…`); backups are encrypted to it. The private key exists only offline with the owner |
+
 ## Android debug APK (CI job `android`, DEC-0016)
 
 | Name | Kind | Purpose |

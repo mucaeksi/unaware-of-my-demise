@@ -15,9 +15,14 @@ signal purchases_queried(result: Dictionary)
 signal consent_finished(result: Dictionary)
 ## {"status": "rewarded" | "closed" | "failed", "error"}
 signal ad_finished(result: Dictionary)
+## {"status": "ok" | "error", "privacy_options_required", "can_request_ads", "error"}
+signal privacy_status(result: Dictionary)
+## {"status": "ok" | "error", "error"}
+signal privacy_options_finished(result: Dictionary)
 
 const PLUGIN_NAME: String = "UomdNative"
-const PLUGIN_SIGNALS: Array[String] = ["sign_in_finished", "billing_product", "purchases_updated", "purchases_queried", "consent_finished", "ad_finished"]
+const PLUGIN_SIGNALS: Array[String] = ["sign_in_finished", "billing_product", "purchases_updated", "purchases_queried", "consent_finished", "ad_finished",
+	"privacy_status", "privacy_options_finished"]
 
 
 func _ready() -> void:
@@ -90,6 +95,17 @@ func ads_consent() -> bool:
 ## One rewarded ad for `account_id` (AdMob's server-side verification pays it); one `ad_finished` follows when true.
 func ads_show_rewarded(ad_unit_id: String, account_id: String) -> bool:
 	return bool(_call("adsShowRewarded", [ad_unit_id, account_id], false))
+
+
+## Whether Settings must offer "Ad privacy choices" (refreshes Google's consent information, shows nothing); one
+## `privacy_status` follows when true.
+func ads_privacy_status() -> bool:
+	return bool(_call("adsPrivacyStatus", [], false))
+
+
+## Google's privacy options form (change or withdraw ad consent); one `privacy_options_finished` follows when true.
+func ads_show_privacy_options() -> bool:
+	return bool(_call("adsShowPrivacyOptions", [], false))
 
 
 ## Forgets the account chosen for automatic sign-in (logout).

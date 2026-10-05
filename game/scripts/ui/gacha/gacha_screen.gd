@@ -118,6 +118,7 @@ static func info_text(banner: GameViews.BannerView) -> String:
 		lines.append("Closes %s UTC" % banner.closes_at.replace("T", " ").trim_suffix("Z").trim_suffix("+00:00"))
 	if not banner.guarantee.is_empty():
 		lines.append(banner.guarantee)
+	lines.append_array(banner.odds)
 	return "\n".join(lines)
 
 

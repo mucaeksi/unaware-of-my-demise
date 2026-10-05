@@ -30,6 +30,7 @@ const SETTINGS_SIGN_OUT: String = "sign_out"
 const SETTINGS_DELETE_ACCOUNT: String = "delete_account"
 const SETTINGS_CONTACT_SUPPORT: String = "contact_support"
 const SETTINGS_LICENSES: String = "licenses"
+const SETTINGS_AD_PRIVACY: String = "ad_privacy"
 ## Where players write for help (owner decision D-01); the same address is on the web deletion page (server/src/web.ts).
 const SUPPORT_EMAIL: String = "unawareofmydemise@gmail.com"
 ## The game's store page (the Android package of export_presets.cfg): where "Update" sends a build the server no longer accepts.
@@ -958,7 +959,8 @@ func _claim_inn_meal() -> void:
 	_present_hub("The inn serves a hot meal: +%d Ration." % granted if granted > 0 else "Today's meal is already eaten.")
 
 
-func _present_settings(status: String = "") -> void:
+## `ad_privacy`: Google's consent applies here, so "Ad privacy choices" is offered (checked after the screen shows).
+func _present_settings(status: String = "", ad_privacy: bool = false) -> void:
 	var version: Dictionary = Engine.get_version_info()
 	var info: String = "Unaware of My Demise  (Godot %s, build %d)" % [str(version.get("string", "")), ClientRelease.version_code()]
 	var actions: Array[Dictionary] = []
@@ -970,6 +972,8 @@ func _present_settings(status: String = "") -> void:
 	info += "\nSupport: %s" % SUPPORT_EMAIL
 	actions.append({"id": SETTINGS_CONTACT_SUPPORT, "label": "Contact support"})
 	actions.append({"id": SETTINGS_LICENSES, "label": "Licenses"})
+	if ad_privacy:
+		actions.append({"id": SETTINGS_AD_PRIVACY, "label": "Ad privacy choices"})
 	var settings: SettingsScreen = SettingsScreen.new()
 	settings.load_settings(info, status, actions)
 	var volumes: Dictionary = {}
@@ -986,8 +990,24 @@ func _present_settings(status: String = "") -> void:
 		elif action_id == SETTINGS_CONTACT_SUPPORT:
 			OS.shell_open(support_mail_uri())
 		elif action_id == SETTINGS_LICENSES:
-			_present_licenses())
+			_present_licenses()
+		elif action_id == SETTINGS_AD_PRIVACY:
+			_show_ad_privacy_choices())
 	shell.show_screen(settings)
+	if not ad_privacy and flow != null and Native.is_available():
+		_offer_ad_privacy_choices(settings, status)
+
+
+## Adds "Ad privacy choices" to the open Settings when Google's consent applies to this player (the EU user consent
+## policy requires a way to change or withdraw it at any time).
+func _offer_ad_privacy_choices(settings: SettingsScreen, status: String) -> void:
+	if await _monetization().privacy_options_required() and shell.current == settings:
+		_present_settings(status, true)
+
+
+func _show_ad_privacy_choices() -> void:
+	var shown: Outcome = await _monetization().show_privacy_options()
+	_present_settings("Your ad privacy choices were saved." if shown.is_ok() else shown.error, true)
 
 
 func _present_licenses() -> void:

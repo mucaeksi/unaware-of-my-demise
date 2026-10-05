@@ -48,6 +48,8 @@ public class UomdNative extends GodotPlugin {
     static final String PURCHASES_QUERIED = "purchases_queried";
     static final String CONSENT_FINISHED = "consent_finished";
     static final String AD_FINISHED = "ad_finished";
+    static final String PRIVACY_STATUS = "privacy_status";
+    static final String PRIVACY_OPTIONS_FINISHED = "privacy_options_finished";
     private static final String TAG = "UomdNative";
     private static final String ANDROID_KEYSTORE = "AndroidKeyStore";
     private static final String TRANSFORMATION = "AES/GCM/NoPadding";
@@ -71,7 +73,8 @@ public class UomdNative extends GodotPlugin {
     public Set<SignalInfo> getPluginSignals() {
         Set<SignalInfo> signals = new HashSet<>();
         signals.add(new SignalInfo(SIGN_IN_FINISHED, Dictionary.class));
-        for (String name : new String[] {BILLING_PRODUCT, PURCHASES_UPDATED, PURCHASES_QUERIED, CONSENT_FINISHED, AD_FINISHED}) {
+        for (String name : new String[] {BILLING_PRODUCT, PURCHASES_UPDATED, PURCHASES_QUERIED, CONSENT_FINISHED, AD_FINISHED,
+                PRIVACY_STATUS, PRIVACY_OPTIONS_FINISHED}) {
             signals.add(new SignalInfo(name, Dictionary.class));
         }
         return signals;
@@ -169,6 +172,32 @@ public class UomdNative extends GodotPlugin {
             return false;
         }
         activity.runOnUiThread(() -> ads.consent(activity, payload -> emitSignal(CONSENT_FINISHED, payload)));
+        lastError = "";
+        return true;
+    }
+
+    /** Whether Settings must offer "Ad privacy choices"; one {@code privacy_status} signal follows (no form is shown). */
+    @UsedByGodot
+    public boolean adsPrivacyStatus() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            lastError = "adsPrivacyStatus: no activity";
+            return false;
+        }
+        activity.runOnUiThread(() -> ads.privacyStatus(activity, payload -> emitSignal(PRIVACY_STATUS, payload)));
+        lastError = "";
+        return true;
+    }
+
+    /** Google's privacy options form (change or withdraw ad consent); one {@code privacy_options_finished} signal follows. */
+    @UsedByGodot
+    public boolean adsShowPrivacyOptions() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            lastError = "adsShowPrivacyOptions: no activity";
+            return false;
+        }
+        activity.runOnUiThread(() -> ads.showPrivacyOptions(activity, payload -> emitSignal(PRIVACY_OPTIONS_FINISHED, payload)));
         lastError = "";
         return true;
     }

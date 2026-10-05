@@ -1,0 +1,90 @@
+# Production monitor (INF-011, owner decision D-06): a failed run is the alert. GitHub e-mails the failure of a scheduled
+# workflow to the account that last changed its schedule (the repository owner; notification address
+# unawareofmydemise@gmail.com, docs/runbooks/INCIDENT.md).
+#
+# Every 15 minutes, without touching the database: the game Worker answers /v1/bootstrap, and the admin Worker answers
+# without a server error. Every 3 hours (and on demand) also the database: /healthz runs a query through Hyperdrive, and
+# a read-only look at what the daily retention cron (03:17 UTC) cleans shows whether it still runs. The database checks
+# are kept rare on purpose: each one wakes Neon's free compute for a few minutes.
+#
+# Maintenance is not a failure (it is announced on purpose); it is noted in the run summary.
+name: Monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+    - cron: "7 */3 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: monitor
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GAME: https://unaware-of-my-demise.muratcaneksiii.workers.dev
+      ADMIN: https://unaware-of-my-demise-admin.muratcaneksiii.workers.dev
+      DEEP: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '7 */3 * * *' }}
+    steps:
+      - name: Game Worker answers (no database)
+        run: |
+          # Two tries a minute apart: one dropped request is not an outage.
+          for attempt in 1 2; do
+            code="$(curl -sS -o "${RUNNER_TEMP}/bootstrap.json" -w '%{http_code}' --max-time 20 "${GAME}/v1/bootstrap" || true)"
+            [ "${code}" = "200" ] && break
+            [ "${attempt}" = "2" ] || sleep 60
+          done
+          [ "${code}" = "200" ] || { echo "::error::${GAME}/v1/bootstrap answered ${code}"; exit 1; }
+          python3 - "${RUNNER_TEMP}/bootstrap.json" <<'PY' >> "${GITHUB_STEP_SUMMARY}"
+          import json, sys
+          data = json.load(open(sys.argv[1]))
+          maintenance = data.get("maintenance") or {}
+          print("## Monitor")
+          print(f"- release `{str(data.get('source_sha'))[:12]}`, minimum versionCode {data.get('min_client_version_code')}")
+          if maintenance.get("active"):
+              print(f"- maintenance is ON: {maintenance.get('message')!r}")
+              print(f"::notice::maintenance is on: {maintenance.get('message')}", file=sys.stderr)
+          PY
+      - name: Admin Worker answers without a server error
+        run: |
+          # Behind Cloudflare Access an anonymous request is sent to the sign-in (3xx/401/403); 5xx or no answer is a failure.
+          code="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "${ADMIN}/admin/api/me" || true)"
+          echo "- admin: HTTP ${code}" >> "${GITHUB_STEP_SUMMARY}"
+          case "${code}" in
+            000|5??) echo "::error::${ADMIN}/admin/api/me answered ${code}"; exit 1 ;;
+          esac
+      - name: Database reachable through the Worker
+        if: env.DEEP == 'true'
+        run: |
+          for attempt in 1 2; do
+            code="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "${GAME}/healthz" || true)"
+            [ "${code}" = "200" ] && break
+            [ "${attempt}" = "2" ] || sleep 60
+          done
+          [ "${code}" = "200" ] || { echo "::error::${GAME}/healthz answered ${code} (database or Hyperdrive)"; exit 1; }
+          echo "- database: reachable" >> "${GITHUB_STEP_SUMMARY}"
+  retention:
+    # The daily cron leaves no run record; what it cleans does. Anything it should have removed more than two runs ago
+    # means it stopped. Read-only, production environment secret.
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '7 */3 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - name: Retention cron still runs
+        run: |
+          if [ -z "${DATABASE_URL}" ]; then echo "::warning::secret DATABASE_URL is not set: retention check skipped"; exit 0; fi
+          # Nonces are deleted 24 h after they expire and open attempts expire after 24 h; 50 h more = two missed runs.
+          stale="$(psql "${DATABASE_URL}" -X -At -v ON_ERROR_STOP=1 -c "
+            SELECT (SELECT count(*) FROM auth_nonces WHERE expires_at < now() - interval '74 hours')
+                 + (SELECT count(*) FROM stage_attempts WHERE status = 'open' AND created_at < now() - interval '74 hours')")"
+          echo "- retention backlog older than two runs: ${stale}" >> "${GITHUB_STEP_SUMMARY}"
+          [ "${stale}" = "0" ] || { echo "::error::the daily retention cron has not run for two days (${stale} rows overdue)"; exit 1; }

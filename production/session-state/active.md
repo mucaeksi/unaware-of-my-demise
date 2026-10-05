@@ -2,15 +2,15 @@
 
 <!-- STATUS -->
 Epic: Infrastructure roadmap (docs/INFRASTRUCTURE_ROADMAP.md) — finish it step by step
-Feature: batch 9 merged (#31 = b65a387, live; deploy run 22 green). Roadmap work that needs no owner input is done.
-Task: owner decisions presented together (2026-10-05); wait for the answers and apply them (docs/OWNER_DECISIONS.md "Answered" + DEC records)
+Feature: batch 10 (PR #34): owner answers applied — D-09 content key, D-05 nightly encrypted backups, D-06 monitor, D-15 legal drafts, full gacha odds, ad privacy choices
+Task: merge #34 when CI is green; after deploy verify admin (Access + vars) and run publish-content to staging once (first signed content release); then wait for the owner's answers (D-18 reward per ad, legal inputs, AdMob, Play setup)
 <!-- /STATUS -->
 
 <!-- CHECKPOINT -->
 **Updated:** 2026-10-05
 **Owner directives (2026-10-04):** finish the roadmap in order, step by step; the owner presses "auto-continue" when a usage limit hits, so always leave a resumable checkpoint here. Merge to `main` every 3–4 verified steps (batch PRs), push the branch after each commit. Collect every owner decision in `docs/OWNER_DECISIONS.md` and present them together at the end. `narrative/` belongs to another team: do not touch it.
 **Branch:** `claude/adoring-galileo-f7rd3o` fast-forwarded to main after #31. Merged + live: #18–#31 (live `b65a387`, migrations 0001–0012).
-**Next step:** apply the owner's answers to D-03…D-06, D-09, D-11…D-19 as they arrive (each unblocks a roadmap item: D-09 → INF-028/030/031; D-11 → INF-033/035 live checks; D-13 → INF-040/043/044; D-17/D-18 → INF-036 activation; D-19 → INF-025 translation table). Unblocked leftover (low value now): INF-008 single-artifact deploy. Other teams push to `main` directly: merge `origin/main` before each PR merge. Local e2e needs PostgreSQL on TCP 127.0.0.1:54318 with a password; restart PG with `su postgres -c pg_ctl ... start` after a worker restart. CI pins Gradle 8.11.1 (scratchpad copy).
+**Next step:** CI on #34 → merge → deploy check (admin API behind Access: 302 anonymous; deploy log has no ACCESS warning) → `publish-content.yml` channel staging (first real signed release, INF-030) → `backup.yml` and `monitor.yml` first manual runs. Owner answers still open: D-18 (30 vs 24 tokens per ad at 5/window; AdMob account), D-17 (Monetization setup: Play Console → app → Monetize with Play → Monetization setup; tier rewards), D-13 (first AAB when the game is ready), legal inputs in `docs/legal/README.md`. Other teams push to `main` directly: merge `origin/main` before each PR merge.
 **Files in progress:** none
 **Open questions:** `docs/OPEN_QUESTIONS.md` (OQ-006, OQ-014, OQ-016 open; OQ-000/005 closed — do not remind); owner decisions collected in `docs/OWNER_DECISIONS.md`.
 **Local test infra (session-local, recreate as needed):** PostgreSQL 18 (production major) from PGDG at `/var/tmp/uomd-pg18` port 54318 (`TEST_ADMIN_DATABASE_URL="postgresql://uomd@localhost/postgres?host=/var/tmp/uomd-pg18&port=54318"`; `PATH=/usr/lib/postgresql/18/bin:$PATH` for database/test.sh); Godot 4.7.2 in the scratchpad (checksum-verified download); Android SDK `/var/tmp/android-sdk`; Godot Android templates `~/.local/share/godot/export_templates/4.7.2.stable`; Gradle `/opt/gradle`. Production deploys only through `.github/workflows/deploy.yml`; no credentials in the session.
@@ -64,7 +64,7 @@ Read after `CLAUDE.md` on every resume. Conversation memory is not authoritative
   against the LEGACY git index (blob sha1 + size). No base64 through the model.
 - GUT source: `add_repo bitwes/Gut` (read) then `git archive v9.7.1`.
 
-## Owner answers received 2026-10-05 (NOT yet applied — apply after the limit reset, when the owner restarts the session)
+## Owner answers received 2026-10-05 (APPLIED 2026-10-05: DEC-0042, OWNER_DECISIONS)
 
 Owner: "do not do these now, just note them". Verbatim intent (Turkish originals summarised):
 - **D-12** Workers Paid: not now. Wait until the game is fully released and uploaded to Play Store as an AAB; continue on Free until then.

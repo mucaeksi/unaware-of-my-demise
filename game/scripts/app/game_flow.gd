@@ -776,6 +776,53 @@ func gacha_banners() -> Outcome:
 	return Outcome.ok(views)
 
 
+## Every rarity's chance per pull, the guarantees and the featured share of a banner type, as Google Play's policy on
+## randomized items asks before a purchase (economy_part1.json `banners`; the server rolls with the same data).
+func banner_odds(banner_type: String) -> PackedStringArray:
+	var banners: Dictionary = rules.quest.economy().get("banners", {})
+	var lines: PackedStringArray = PackedStringArray()
+	var config_key: String = {"character": "character", "weapon": "weapon", "standard_character": "standard_character"}.get(banner_type, "")
+	var config: Dictionary = banners.get(config_key, {}) if banners.get(config_key) is Dictionary else {}
+	if config.is_empty():
+		return lines
+	var five: float = float(config.get("base_five_star_rate", config.get("five_star_base_rate", 0.0)))
+	var hard: int = int(config.get("hard_pity", 0))
+	var rate_line: String = "Odds per pull: 5★ %s%%, 4★ %s%%, 3★ %s%%." % [_percent(five), _percent(float(config.get("four_star_rate", 0.0))),
+		_percent(float(config.get("three_star_rate", 0.0)))]
+	lines.append(rate_line)
+	if config.has("soft_pity_start_pull"):
+		var start: int = int(config["soft_pity_start_pull"])
+		lines.append("From pull %d without a 5★, the 5★ chance rises by %s percentage points each pull (4★ and 3★ share the rest as before); pull %d is a guaranteed 5★." % [
+			start, GameViews.number_text(config.get("soft_pity_increment_percentage_points", 0)), hard])
+	else:
+		lines.append("The 5★ chance stays the same; pull %d without a 5★ is a guaranteed 5★." % hard)
+	lines.append("At least one 4★ or better every %d pulls." % int(config.get("minimum_four_star_or_better_every_n_pulls", 10)))
+	match banner_type:
+		"character":
+			lines.append("A 5★ is the featured character %s%% of the time; after a 5★ that is not, the next 5★ is the featured character. Otherwise it is a 5★ from the Hall of Ancestors (%s)." % [
+				_percent(float(config.get("featured_chance_on_five_star", 0.0))), ", ".join(_standard_five_star_names(banners))])
+		"weapon":
+			lines.append("A 5★ is your selected weapon %s%% of the time. Each other 5★ gives a Fate Knot; with %d Fate Knots the next 5★ is your selected weapon (at most %d pulls in all)." % [
+				_percent(float(config.get("selected_target_chance_on_unprotected_five_star", 0.0))), int(config.get("fate_knots_to_guarantee", 2)),
+				int(config.get("worst_case_pulls_for_target", 0))])
+		"standard_character":
+			lines.append("5★ characters in this hall, equally likely: %s." % ", ".join(_standard_five_star_names(banners)))
+	return lines
+
+
+func _standard_five_star_names(banners: Dictionary) -> PackedStringArray:
+	var names: PackedStringArray = PackedStringArray()
+	var standard: Variant = banners.get("standard_character")
+	for character_id: Variant in ((standard as Dictionary).get("five_star_character_ids", []) if standard is Dictionary else []):
+		names.append(_name_of(str(character_id)))
+	return names
+
+
+## 0.1691326 -> "16.91", 0.025 -> "2.5".
+static func _percent(fraction: float) -> String:
+	return GameViews.number_text(roundf(fraction * 10000.0) / 100.0)
+
+
 func _banner_view(row: Dictionary) -> GameViews.BannerView:
 	var view: GameViews.BannerView = GameViews.BannerView.new()
 	view.banner_id = str(row.get("banner_id", ""))
@@ -789,6 +836,7 @@ func _banner_view(row: Dictionary) -> GameViews.BannerView:
 	view.guarantee = str((guarantee as Dictionary).get("text", "")) if guarantee is Dictionary else ""
 	view.closes_at = str(row["closes_at"]) if row.get("closes_at") != null else ""
 	view.selected_target = str(row["selected_target_id"]) if row.get("selected_target_id") != null else ""
+	view.odds = banner_odds(view.banner_type)
 	var pair_id: String = view.banner_id.get_slice(":", 1) if view.banner_id.contains(":") else ""
 	var pair: Dictionary = _signature_pair(pair_id)
 	match view.banner_type:

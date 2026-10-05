@@ -700,3 +700,26 @@ authority), `PROPOSED` (recommended, awaiting owner), `DECISION_REQUIRED`
     answers.
 - An expired session during the absence is handled as before: the first 401 renews once and repeats the same
   Idempotency-Key.
+
+## DEC-0042 — Owner answers of 2026-10-05: backups, alerts, content key, admin access, scope
+- Status: ACCEPTED (2026-10-05, owner answers; `docs/OWNER_DECISIONS.md`).
+- D-05 backups: Neon stays on its free plan, which keeps 6 hours of history. The off-site backup is
+  `.github/workflows/backup.yml`:
+  - nightly `pg_dump` of production, read-only;
+  - encrypted with `age` to the owner's public key;
+  - uploaded to the private R2 bucket `uomd-db-backups`, deleted after 30 days by its lifecycle rule.
+  - Only the owner's offline key can open a backup.
+- D-06 alerts: `.github/workflows/monitor.yml` fails on an outage; GitHub e-mails the owner at
+  `unawareofmydemise@gmail.com`.
+  - Every 15 minutes: the Worker (no database) and the admin panel.
+  - Every 3 hours: the database and the retention cron. Kept rare so Neon's free compute is not kept awake.
+- D-09: `uomd-content-1` (RSA 3072) is the content-signing key. The app ships its public half; the private half is
+  only in the `CONTENT_SIGNING_KEY` secret and the owner's offline backup.
+- D-11: Cloudflare Access guards the admin Worker. The owner wants the panel to stay well organised and to cover the
+  changes they need to make.
+- D-14: the Worker origin is on the Web OAuth client, so the deletion page's Google button can sign in.
+- D-16, scope: design and creative work, the main theme included, belongs to the other team. This engineering
+  track owns game infrastructure and gameplay.
+- D-19: the game launches in English. Other languages arrive later through content patches.
+- Deferred until the release: D-03 (Neon branch protection needs a paid plan) and D-12 (Workers Paid).
+- Partly done: D-13 and D-17, with progress in OWNER_DECISIONS. D-18: AdMob account pending, plus the reward question.

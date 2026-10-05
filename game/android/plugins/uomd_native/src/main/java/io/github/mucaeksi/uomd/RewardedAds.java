@@ -43,8 +43,35 @@ final class RewardedAds {
         Dictionary payload = new Dictionary();
         payload.put("status", error.isEmpty() ? "ok" : "error");
         payload.put("can_request_ads", consent.canRequestAds());
+        payload.put("privacy_options_required", privacyOptionsRequired(consent));
         payload.put("error", error);
         return payload;
+    }
+
+    private static boolean privacyOptionsRequired(ConsentInformation consent) {
+        return consent.getPrivacyOptionsRequirementStatus() == ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED;
+    }
+
+    /**
+     * Refreshes the consent information without showing any form and emits {@code {"status", "privacy_options_required",
+     * "can_request_ads", "error"}}: whether Settings must offer "Ad privacy choices" (the player's way to change or
+     * withdraw ad consent, which Google's EU user consent policy requires where consent was asked).
+     */
+    void privacyStatus(Activity activity, Consumer<Dictionary> report) {
+        ConsentInformation consent = UserMessagingPlatform.getConsentInformation(activity);
+        consent.requestConsentInfoUpdate(activity, new ConsentRequestParameters.Builder().build(),
+                () -> report.accept(consentPayload(consent, "")),
+                requestError -> report.accept(consentPayload(consent, requestError.getMessage())));
+    }
+
+    /** Shows Google's privacy options form; emits {@code {"status": "ok" | "error", "error"}} when it closes. */
+    void showPrivacyOptions(Activity activity, Consumer<Dictionary> report) {
+        UserMessagingPlatform.showPrivacyOptionsForm(activity, formError -> {
+            Dictionary payload = new Dictionary();
+            payload.put("status", formError == null ? "ok" : "error");
+            payload.put("error", formError == null ? "" : formError.getMessage());
+            report.accept(payload);
+        });
     }
 
     /**

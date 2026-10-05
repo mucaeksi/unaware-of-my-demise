@@ -135,3 +135,25 @@ func test_grouping_matches_python() -> void:
 
 func test_the_exchange_rate_comes_from_the_economy() -> void:
 	assert_eq(_flow.fate_thread_token_cost(), 160)
+
+
+## Google Play's policy on randomized items: every rarity's odds and the guarantees are shown before a pull, from the
+## same authored data the server rolls with.
+func test_every_banner_shows_its_full_odds_before_a_pull() -> void:
+	var character: PackedStringArray = _flow.banner_odds("character")
+	assert_eq(character[0], "Odds per pull: 5★ 2.5%, 4★ 16.91%, 3★ 80.59%.")
+	assert_string_contains(character[1], "From pull 65 without a 5★, the 5★ chance rises by 6 percentage points each pull")
+	assert_string_contains(character[1], "pull 80 is a guaranteed 5★")
+	assert_string_contains(character[3], "featured character 55% of the time")
+	var weapon: PackedStringArray = _flow.banner_odds("weapon")
+	assert_string_contains(weapon[1], "pull 65 without a 5★ is a guaranteed 5★")
+	assert_string_contains(weapon[3], "with 2 Fate Knots the next 5★ is your selected weapon (at most 195 pulls in all)")
+	var standard: PackedStringArray = _flow.banner_odds("standard_character")
+	assert_eq(standard[0], "Odds per pull: 5★ 2%, 4★ 17%, 3★ 81%.")
+	assert_string_contains(standard[3], "equally likely")
+	assert_eq(_flow.banner_odds("unknown"), PackedStringArray())
+	var view: GameViews.BannerView = GameViews.BannerView.new()
+	view.title = "Oath"
+	view.banner_type = "character"
+	view.odds = character
+	assert_string_contains(GachaScreen.info_text(view), character[0], "the screen shows them with the banner")
