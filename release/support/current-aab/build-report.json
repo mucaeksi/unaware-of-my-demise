@@ -1,0 +1,24 @@
+{
+  "native_packaging": "passed",
+  "created_at": "2026-10-08T19:12:47.9690697Z",
+  "distribution": "local_review",
+  "signing": "Godot debug key: local review only; production upload signing remains a release step",
+  "base": {
+    "bytes": 101418860,
+    "path": "F:\\unaware-of-my-demise\\build\\current-aab-20261008-221217-9ccfb2c4\\opening-base.pck",
+    "sha256": "8a92c0ace0ff928ea131ccb34494cee237644532e255054a7108399fade5dc1f"
+  },
+  "bundle": {
+    "bytes": 134505206,
+    "path": "F:\\unaware-of-my-demise\\build\\current-aab-20261008-221217-9ccfb2c4\\opening-review.aab",
+    "sha256": "7bd2bf0bfa85e5e7d387d62e893d4be087c44a5dcda2225785a02bf5e186a652"
+  },
+  "bundletool_validation": "passed",
+  "device_test": "pending_no_device",
+  "patch": {
+    "bytes": 155488,
+    "path": "F:\\unaware-of-my-demise\\build\\current-aab-20261008-221217-9ccfb2c4\\story-content.pck",
+    "sha256": "f2095e3492a1e3f17e76857e0bf2780034162e4ba26ac12e2d7556c271dcee9c"
+  },
+  "patch_policy": "passed"
+}

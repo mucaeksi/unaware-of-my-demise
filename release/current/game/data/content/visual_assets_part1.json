@@ -1,0 +1,740 @@
+{
+  "schema_version": 1,
+  "pack_id": "part1_visual_assets",
+  "asset_status_note": "Existing chapter, character, currency, element and status artwork entries retain their prior brief/prompt-ready state. Shared art system v02 adds bundled runtime candidates with explicit art_approval; in_game is not owner approval.",
+  "status_values": [
+    "brief",
+    "prompt_ready",
+    "generated",
+    "reviewed",
+    "approved",
+    "in_game",
+    "revised",
+    "retired"
+  ],
+  "chapter_environments": [
+    {
+      "id": "forest_whispering_ash",
+      "chapter": 1,
+      "master": "assets/backgrounds/forest_whispering_ash/story_plate_v001.webp",
+      "battle": "assets/backgrounds/forest_whispering_ash/battle_plate_v001.webp",
+      "map": "assets/backgrounds/forest_whispering_ash/map_node_v001.webp",
+      "brief": "Rain-dark road, pale ash canopy, abandoned wayshrine, distant bell tower; warm camp-light at one edge.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "id": "cathedral_saint_luthos",
+      "chapter": 2,
+      "master": "assets/backgrounds/cathedral_saint_luthos/story_plate_v001.webp",
+      "battle": "assets/backgrounds/cathedral_saint_luthos/nave_battle_v001.webp",
+      "map": "assets/backgrounds/cathedral_saint_luthos/map_node_v001.webp",
+      "brief": "Broken rose window, flooded nave, candle archive and a bell tower with no rope.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "id": "village_oakhaven",
+      "chapter": 3,
+      "master": "assets/backgrounds/village_oakhaven/story_plate_v001.webp",
+      "battle": "assets/backgrounds/village_oakhaven/well_battle_v001.webp",
+      "map": "assets/backgrounds/village_oakhaven/map_node_v001.webp",
+      "brief": "Orchard walls, village forge, well and white linen in the square; red remains a rare accent.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "id": "undercity_subterranean",
+      "chapter": 4,
+      "master": "assets/backgrounds/undercity_subterranean/story_plate_v001.webp",
+      "battle": "assets/backgrounds/undercity_subterranean/cistern_battle_v001.webp",
+      "map": "assets/backgrounds/undercity_subterranean/map_node_v001.webp",
+      "brief": "Drainage canals, mushroom lamps, old cisterns and a hidden alchemist ward.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "id": "bridge_forsaken",
+      "chapter": 5,
+      "master": "assets/backgrounds/bridge_forsaken/story_plate_v001.webp",
+      "battle": "assets/backgrounds/bridge_forsaken/bridge_battle_v001.webp",
+      "map": "assets/backgrounds/bridge_forsaken/map_node_v001.webp",
+      "brief": "Great stone span over a fog-filled ravine, torn banners and abandoned siege engines.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "id": "estate_ashen_lord",
+      "chapter": 6,
+      "master": "assets/backgrounds/estate_ashen_lord/story_plate_v001.webp",
+      "battle": "assets/backgrounds/estate_ashen_lord/gallery_battle_v001.webp",
+      "map": "assets/backgrounds/estate_ashen_lord/map_node_v001.webp",
+      "brief": "Soot-dark manor, sealed portrait gallery, glass conservatory and collapsing archive.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "id": "altar_first_eclipse",
+      "chapter": 7,
+      "master": "assets/backgrounds/altar_first_eclipse/story_plate_v001.webp",
+      "battle": "assets/backgrounds/altar_first_eclipse/construct_arena_v001.webp",
+      "map": "assets/backgrounds/altar_first_eclipse/map_node_v001.webp",
+      "brief": "Crown-shaped crater, seven broken bell chains, circular altar and unmoving eclipse.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ]
+    }
+  ],
+  "banner_key_art": [
+    {
+      "id": "oath_01_aveline",
+      "featured_character": "sister_aveline",
+      "file": "assets/banners/oath_01_aveline/key_art_v001.webp",
+      "brief": "Aveline at the rainlit cathedral threshold, lantern raised to shelter pilgrims; no text baked into image.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ],
+      "ui_safe_area": {
+        "top_title_band_percent": 15,
+        "bottom_controls_band_percent": 22,
+        "copy_baked_into_art": false
+      }
+    },
+    {
+      "id": "oath_02_sable",
+      "featured_character": "sable_wren",
+      "file": "assets/banners/oath_02_sable/key_art_v001.webp",
+      "brief": "Sable in a bridge signal tower with one cut bell-rope and fog behind her; silhouette-led, not pin-up.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ],
+      "ui_safe_area": {
+        "top_title_band_percent": 15,
+        "bottom_controls_band_percent": 22,
+        "copy_baked_into_art": false
+      }
+    },
+    {
+      "id": "oath_03_nara",
+      "featured_character": "nara_vell",
+      "file": "assets/banners/oath_03_nara/key_art_v001.webp",
+      "brief": "Nara leads civilians across the Forsaken Bridge while holding the gate against a knight line.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ],
+      "ui_safe_area": {
+        "top_title_band_percent": 15,
+        "bottom_controls_band_percent": 22,
+        "copy_baked_into_art": false
+      }
+    },
+    {
+      "id": "oath_04_mirel",
+      "featured_character": "mirel_quill",
+      "file": "assets/banners/oath_04_mirel/key_art_v001.webp",
+      "brief": "Mirel studies a missing ledger page under a brass lens in the Ashen estate archive.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ],
+      "ui_safe_area": {
+        "top_title_band_percent": 15,
+        "bottom_controls_band_percent": 22,
+        "copy_baked_into_art": false
+      }
+    },
+    {
+      "id": "oath_05_vespera",
+      "featured_character": "vespera_wisp",
+      "file": "assets/banners/oath_05_vespera/key_art_v001.webp",
+      "brief": "Vespera stands amid conservatory reflections aligned like a broken crown; opaque costume and glass focus visible.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ],
+      "ui_safe_area": {
+        "top_title_band_percent": 15,
+        "bottom_controls_band_percent": 22,
+        "copy_baked_into_art": false
+      }
+    }
+  ],
+  "boss_art": [
+    {
+      "id": "boss_eclipse_construct_phase_1",
+      "file": "assets/backgrounds/altar_first_eclipse/eclipse_construct_phase1_v001.webp",
+      "brief": "Stone-and-brass cathedral-scale construct, cracked bell torso, visible chain joints and ankle anchor.",
+      "status": "prompt_ready",
+      "source_px": [
+        1024,
+        1536
+      ],
+      "runtime_px": [
+        768,
+        1152
+      ]
+    },
+    {
+      "id": "boss_eclipse_construct_phase_2",
+      "file": "assets/backgrounds/altar_first_eclipse/eclipse_construct_phase2_v001.webp",
+      "brief": "Same construct in Aether Ward phase, three readable pylons, pale ring of eclipse light and Decay marks.",
+      "status": "prompt_ready",
+      "source_px": [
+        1024,
+        1536
+      ],
+      "runtime_px": [
+        768,
+        1152
+      ]
+    }
+  ],
+  "shared_ui": [
+    {
+      "id": "element_icons",
+      "file": "assets/ui/elements_v001.svg",
+      "brief": "Six player elements with distinct silhouettes and labels; Aether remains boss-only.",
+      "status": "brief"
+    },
+    {
+      "id": "status_icons",
+      "file": "assets/ui/statuses_v001.svg",
+      "brief": "Burn, Soaked, Gust, Fracture, Sanctuary, Dread and boss-only Decay; iconography works without color.",
+      "status": "brief"
+    },
+    {
+      "id": "currencies",
+      "file": "assets/ui/currencies_v001.svg",
+      "brief": "Eclipse Token, Fate's Thread, Silver Crowns, Ration and Focus emblems in a medieval ledger motif.",
+      "status": "brief"
+    },
+    {
+      "id": "icon_back",
+      "file": "assets/ui/gothic/v02/icons/back.svg",
+      "brief": "Shared Gothic UI utility glyph: back.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_check",
+      "file": "assets/ui/gothic/v02/icons/check.svg",
+      "brief": "Shared Gothic UI utility glyph: check.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_checked",
+      "file": "assets/ui/gothic/v02/icons/checked.svg",
+      "brief": "Shared Gothic UI utility glyph: checked.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_chevron",
+      "file": "assets/ui/gothic/v02/icons/chevron.svg",
+      "brief": "Shared Gothic UI utility glyph: chevron.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_close",
+      "file": "assets/ui/gothic/v02/icons/close.svg",
+      "brief": "Shared Gothic UI utility glyph: close.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_companions",
+      "file": "assets/ui/gothic/v02/icons/companions.svg",
+      "brief": "Shared Gothic UI utility glyph: companions.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_help",
+      "file": "assets/ui/gothic/v02/icons/help.svg",
+      "brief": "Shared Gothic UI utility glyph: help.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_home",
+      "file": "assets/ui/gothic/v02/icons/home.svg",
+      "brief": "Shared Gothic UI utility glyph: home.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_journey",
+      "file": "assets/ui/gothic/v02/icons/journey.svg",
+      "brief": "Shared Gothic UI utility glyph: journey.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_lock",
+      "file": "assets/ui/gothic/v02/icons/lock.svg",
+      "brief": "Shared Gothic UI utility glyph: lock.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_records",
+      "file": "assets/ui/gothic/v02/icons/records.svg",
+      "brief": "Shared Gothic UI utility glyph: records.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_settings",
+      "file": "assets/ui/gothic/v02/icons/settings.svg",
+      "brief": "Shared Gothic UI utility glyph: settings.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_summon",
+      "file": "assets/ui/gothic/v02/icons/summon.svg",
+      "brief": "Shared Gothic UI utility glyph: summon.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_unchecked",
+      "file": "assets/ui/gothic/v02/icons/unchecked.svg",
+      "brief": "Shared Gothic UI utility glyph: unchecked.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "icon_waiting",
+      "file": "assets/ui/gothic/v02/icons/waiting.svg",
+      "brief": "Shared Gothic UI utility glyph: waiting.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        64,
+        64
+      ],
+      "runtime_px": [
+        48,
+        48
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "panel_frame_gothic",
+      "file": "assets/ui/gothic/v02/panel_frame.svg",
+      "brief": "Reusable 9-slice metal frame; fixed 32 px texture margins, solid ink panel.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "game_emblem",
+      "file": "assets/branding/uomd/v01/emblem.png",
+      "brief": "Silver bell, organic thorn clapper, broken circlet fragment and fine crimson ring; English lettering remains a separate GameLogo Control.",
+      "status": "in_game",
+      "art_approval": "candidate",
+      "bundle": "base_install",
+      "source_px": [
+        1254,
+        1254
+      ],
+      "transparent_background": true
+    },
+    {
+      "id": "title_key_art",
+      "file": "assets/ui/narrative/v002/title_plate.png",
+      "status": "runtime_candidate",
+      "brief": "Narrative-approved visual reference adaptation; UI presentation only, no story canon change."
+    },
+    {
+      "id": "approved_wordmark",
+      "file": "assets/ui/narrative/v002/approved_wordmark.png",
+      "status": "runtime_candidate",
+      "brief": "Narrative-approved visual reference adaptation; UI presentation only, no story canon change."
+    },
+    {
+      "id": "entry_atmosphere",
+      "file": "assets/ui/narrative/v002/entry_atmosphere.png",
+      "status": "runtime_candidate",
+      "brief": "Narrative-approved visual reference adaptation; UI presentation only, no story canon change."
+    }
+  ],
+  "weapon_banner_key_art": [
+    {
+      "id": "weapon_01_last_vigil",
+      "featured_weapon": "weapon_aveline_last_vigil",
+      "banner_id": "oath_01_aveline",
+      "file": "assets/banners/weapon_01_last_vigil/key_art_v001.webp",
+      "brief": "A reliquary staff and sun-disc lantern held before the flooded Saint Luthos archive; warm light protects a small group of pilgrims; no text baked into image.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ],
+      "ui_safe_area": {
+        "top_title_band_percent": 15,
+        "bottom_controls_band_percent": 22,
+        "copy_baked_into_art": false
+      }
+    },
+    {
+      "id": "weapon_02_broken_bell",
+      "featured_weapon": "weapon_sable_broken_bell",
+      "banner_id": "oath_02_sable",
+      "file": "assets/banners/weapon_02_broken_bell/key_art_v001.webp",
+      "brief": "A pair of narrow courier blades crossed against a severed bell-rope and foggy bridge signal tower; restrained silhouette, no text baked into image.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ],
+      "ui_safe_area": {
+        "top_title_band_percent": 15,
+        "bottom_controls_band_percent": 22,
+        "copy_baked_into_art": false
+      }
+    },
+    {
+      "id": "weapon_03_gatewarden_promise",
+      "featured_weapon": "weapon_nara_gatewarden_promise",
+      "banner_id": "oath_03_nara",
+      "file": "assets/banners/weapon_03_gatewarden_promise/key_art_v001.webp",
+      "brief": "A fortress glaive and compact kite shield braced at the Forsaken Bridge gate, refugees safely behind the shield line; no text baked into image.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ],
+      "ui_safe_area": {
+        "top_title_band_percent": 15,
+        "bottom_controls_band_percent": 22,
+        "copy_baked_into_art": false
+      }
+    },
+    {
+      "id": "weapon_04_unwritten_ledger",
+      "featured_weapon": "weapon_mirel_unwritten_ledger",
+      "banner_id": "oath_04_mirel",
+      "file": "assets/banners/weapon_04_unwritten_ledger/key_art_v001.webp",
+      "brief": "A brass astrolabe folio and stylus dagger beside the missing ledger page under a reading lens in the Ashen estate archive; no text baked into image.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ],
+      "ui_safe_area": {
+        "top_title_band_percent": 15,
+        "bottom_controls_band_percent": 22,
+        "copy_baked_into_art": false
+      }
+    },
+    {
+      "id": "weapon_05_last_hour",
+      "featured_weapon": "weapon_vespera_last_hour",
+      "banner_id": "oath_05_vespera",
+      "file": "assets/banners/weapon_05_last_hour/key_art_v001.webp",
+      "brief": "A glass lantern and focus ring reflected in conservatory panes aligned like a broken crown; opaque magical atmosphere, no text baked into image.",
+      "status": "prompt_ready",
+      "source_px": [
+        1440,
+        2560
+      ],
+      "runtime_px": [
+        1080,
+        1920
+      ],
+      "ui_safe_area": {
+        "top_title_band_percent": 15,
+        "bottom_controls_band_percent": 22,
+        "copy_baked_into_art": false
+      }
+    }
+  ],
+  "canvas_spec": {
+    "orientation": "portrait_only_in_game",
+    "reference_px": [
+      1080,
+      1920
+    ],
+    "aspect_ratio": "9:16",
+    "logical_dp": [
+      360,
+      640
+    ],
+    "source_export_scale": 3,
+    "tall_screen_policy": "extend_background_and_anchor_to_safe_insets; do_not_crop_faces_or_UI_copy",
+    "asset_dimensions_source": "docs/ART_BIBLE.md"
+  },
+  "villain_art": [
+    {
+      "id": "villain_bell_widow",
+      "entity_id": "lady_yseldra_vale",
+      "file": "assets/characters/lady_yseldra_vale/vn_bust_v001.webp",
+      "source_px": [
+        1024,
+        1536
+      ],
+      "runtime_px": [
+        640,
+        960
+      ],
+      "brief": "Adult woman in opaque mourning veil, bone half-mask and mail under split surcoat, cracked handbell tied with red thread; tall severe silhouette, black plum/ash ivory/cold brass. First appearance on forest road; no pin-up styling.",
+      "status": "prompt_ready"
+    },
+    {
+      "id": "villain_clockless_chancellor",
+      "entity_id": "lord_cael_veyr",
+      "file": "assets/characters/lord_cael_veyr/vn_bust_v001.webp",
+      "source_px": [
+        1024,
+        1536
+      ],
+      "runtime_px": [
+        640,
+        960
+      ],
+      "brief": "Adult man in severe black court coat with antique-gold scale panels, empty signet socket and handless watch; face caught in fractured mirror reflection, ink black/aged gold/cold white; final post-confession reveal only.",
+      "status": "prompt_ready"
+    }
+  ]
+}

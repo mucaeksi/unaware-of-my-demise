@@ -1,0 +1,17 @@
+{
+  "base": {
+    "bytes": 101418860,
+    "path": "artifacts/opening-base.pck",
+    "sha256": "8a92c0ace0ff928ea131ccb34494cee237644532e255054a7108399fade5dc1f"
+  },
+  "bundle": {
+    "bytes": 134505206,
+    "path": "artifacts/game.aab",
+    "sha256": "7bd2bf0bfa85e5e7d387d62e893d4be087c44a5dcda2225785a02bf5e186a652"
+  },
+  "bundletool_validation": "passed",
+  "created_at": "2026-10-08T19:12:47.9690697Z",
+  "debug_signature": "verified_local_debug_only",
+  "device_test": "pending_no_device",
+  "distribution": "local_review"
+}

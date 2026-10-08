@@ -1,0 +1,20 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "Transport failed after dispatch of 'editor_screenshot' may have begun. The call may have completed and was deliberately not retried. Inspect the target state before deciding whether another call is safe.",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structured_content": {
+    "error": {
+      "code": "TRANSPORT_OUTCOME_UNKNOWN",
+      "message": "Transport failed after dispatch of 'editor_screenshot' may have begun.",
+      "data": "[omitted]"
+    }
+  },
+  "is_error": true,
+  "result_type": "complete"
+}

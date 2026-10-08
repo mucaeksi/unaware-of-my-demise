@@ -1,0 +1,954 @@
+{
+	"scenes/boot/boot.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Boot",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 3,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/boot.gd"
+					}
+				},
+				"type": "Control"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Background",
+				"owner": ".",
+				"path": "./Background",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"color": {
+						"type": "Color",
+						"value": "Color(0.113, 0.102, 0.169, 1)"
+					},
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 1
+				},
+				"type": "ColorRect"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Safe",
+				"owner": ".",
+				"path": "./Safe",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 1,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/safe_area_container.gd"
+					}
+				},
+				"type": "MarginContainer"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Column",
+				"owner": ".",
+				"path": "./Safe/Column",
+				"properties": {
+					"alignment": 1,
+					"layout_mode": 2,
+					"theme_override_constants/separation": 32
+				},
+				"type": "VBoxContainer"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "TitleLabel",
+				"owner": ".",
+				"path": "./Safe/Column/TitleLabel",
+				"properties": {
+					"autowrap_mode": 3,
+					"horizontal_alignment": 1,
+					"layout_mode": 2,
+					"text": "Unaware of My Demise",
+					"theme_override_font_sizes/font_size": 84
+				},
+				"type": "Label"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "PlaceholderLabel",
+				"owner": ".",
+				"path": "./Safe/Column/PlaceholderLabel",
+				"properties": {
+					"horizontal_alignment": 1,
+					"layout_mode": 2,
+					"text": "DIAGNOSTICS (placeholder screen)",
+					"theme_override_colors/font_color": {
+						"type": "Color",
+						"value": "Color(0.788, 0.635, 0.29, 1)"
+					}
+				},
+				"type": "Label"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "InfoLabel",
+				"owner": ".",
+				"path": "./Safe/Column/InfoLabel",
+				"properties": {
+					"horizontal_alignment": 1,
+					"layout_mode": 2,
+					"text": "-",
+					"unique_name_in_owner": true
+				},
+				"type": "Label"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "SmokeLabel",
+				"owner": ".",
+				"path": "./Safe/Column/SmokeLabel",
+				"properties": {
+					"autowrap_mode": 3,
+					"layout_mode": 2,
+					"text": "-",
+					"theme_override_font_sizes/font_size": 26,
+					"unique_name_in_owner": true
+				},
+				"type": "Label"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "StatsLabel",
+				"owner": ".",
+				"path": "./Safe/Column/StatsLabel",
+				"properties": {
+					"horizontal_alignment": 1,
+					"layout_mode": 2,
+					"text": "-",
+					"theme_override_font_sizes/font_size": 26,
+					"unique_name_in_owner": true
+				},
+				"type": "Label"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "BackButton",
+				"owner": ".",
+				"path": "./Safe/Column/BackButton",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(0, 120)"
+					},
+					"layout_mode": 2,
+					"text": "Back",
+					"unique_name_in_owner": true,
+					"visible": false
+				},
+				"type": "Button"
+			}
+		]
+	},
+	"scenes/main/main.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Main",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 3,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/app_shell.gd"
+					}
+				},
+				"type": "Control"
+			}
+		]
+	},
+	"scenes/ui/common/action_button.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "ActionButton",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(144, 144)"
+					},
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/common/gothic_action_button.gd"
+					},
+					"theme": {
+						"class": "Theme",
+						"path": "res://theme/uomd_production_v001.tres"
+					},
+					"theme_type_variation": {
+						"type": "StringName",
+						"value": "&\"PrimaryButton\""
+					}
+				},
+				"type": "Button"
+			}
+		]
+	},
+	"scenes/ui/common/bottom_nav.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "BottomNav",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/common/ui_bottom_nav.gd"
+					},
+					"theme": {
+						"class": "Theme",
+						"path": "res://theme/uomd_production_v001.tres"
+					}
+				},
+				"type": "PanelContainer"
+			}
+		]
+	},
+	"scenes/ui/common/card.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Card",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(420, 600)"
+					},
+					"theme": {
+						"class": "Theme",
+						"path": "res://theme/uomd_production_v001.tres"
+					},
+					"theme_type_variation": {
+						"type": "StringName",
+						"value": "&\"CompanionCard\""
+					}
+				},
+				"type": "PanelContainer"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Content",
+				"owner": ".",
+				"path": "./Content",
+				"properties": {
+					"layout_mode": 2,
+					"theme_override_constants/separation": 24
+				},
+				"type": "VBoxContainer"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Title",
+				"owner": ".",
+				"path": "./Content/Title",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(0, 48)"
+					},
+					"layout_mode": 2,
+					"text_overrun_behavior": 3,
+					"theme_type_variation": {
+						"type": "StringName",
+						"value": "&\"SmallLabel\""
+					}
+				},
+				"type": "Label"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Portrait",
+				"owner": ".",
+				"path": "./Content/Portrait",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(0, 360)"
+					},
+					"expand_mode": 1,
+					"layout_mode": 2,
+					"size_flags_vertical": 3,
+					"stretch_mode": 5
+				},
+				"type": "TextureRect"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Details",
+				"owner": ".",
+				"path": "./Content/Details",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(0, 68)"
+					},
+					"layout_mode": 2
+				},
+				"type": "VBoxContainer"
+			}
+		]
+	},
+	"scenes/ui/common/confirmation_modal.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "ConfirmationModal",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 3,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/common/gothic_modal.gd"
+					},
+					"theme": {
+						"class": "Theme",
+						"path": "res://theme/uomd_production_v001.tres"
+					}
+				},
+				"type": "Control"
+			}
+		]
+	},
+	"scenes/ui/common/input_field.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "InputField",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(144, 144)"
+					},
+					"theme": {
+						"class": "Theme",
+						"path": "res://theme/uomd_production_v001.tres"
+					}
+				},
+				"type": "LineEdit"
+			}
+		]
+	},
+	"scenes/ui/common/progress_bar.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "ProgressBar",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(144, 32)"
+					},
+					"show_percentage": false,
+					"theme": {
+						"class": "Theme",
+						"path": "res://theme/uomd_production_v001.tres"
+					}
+				},
+				"type": "ProgressBar"
+			}
+		]
+	},
+	"scenes/ui/common/screen_base.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Screen",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 3,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/common/ui_screen.gd"
+					},
+					"theme": {
+						"class": "Theme",
+						"path": "res://theme/uomd_production_v001.tres"
+					}
+				},
+				"type": "Control"
+			}
+		]
+	},
+	"scenes/ui/common/slider.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Slider",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(144, 144)"
+					},
+					"theme": {
+						"class": "Theme",
+						"path": "res://theme/uomd_production_v001.tres"
+					}
+				},
+				"type": "HSlider"
+			}
+		]
+	},
+	"scenes/ui/common/state_view.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "StateView",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/common/ui_state_view.gd"
+					},
+					"theme": {
+						"class": "Theme",
+						"path": "res://theme/uomd_production_v001.tres"
+					}
+				},
+				"type": "PanelContainer"
+			}
+		]
+	},
+	"scenes/ui/common/toggle.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Toggle",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(144, 144)"
+					},
+					"theme": {
+						"class": "Theme",
+						"path": "res://theme/uomd_production_v001.tres"
+					}
+				},
+				"type": "CheckBox"
+			}
+		]
+	},
+	"scenes/ui/entry/entry_screen.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "EntryScreen",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 3,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/entry/entry_screen.gd"
+					}
+				},
+				"type": "Control"
+			}
+		]
+	},
+	"scenes/ui/entry/entry_utility.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "EntryUtility",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 3,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/entry/entry_utility.gd"
+					}
+				},
+				"type": "Control"
+			}
+		]
+	},
+	"scenes/ui/startup/engine_splash_screen.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "EngineSplashScreen",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 3,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/startup/engine_splash_screen.gd"
+					}
+				},
+				"type": "Control"
+			}
+		]
+	},
+	"scenes/ui/startup/startup_sequence.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "StartupSequence",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 3,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/startup/startup_sequence.gd"
+					}
+				},
+				"type": "Control"
+			}
+		]
+	},
+	"scenes/ui/startup/studio_splash_screen.tscn": {
+		"connections": [],
+		"nodes": [
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "StudioSplashScreen",
+				"owner": "",
+				"path": ".",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 3,
+					"mouse_filter": 2,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/startup/studio_splash_screen.gd"
+					}
+				},
+				"type": "Control"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Atmosphere",
+				"owner": ".",
+				"path": "./Atmosphere",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 1,
+					"material": {
+						"class": "ShaderMaterial",
+						"local_to_scene": false,
+						"properties": {
+							"resource_name": "",
+							"script": null,
+							"shader": {
+								"class": "Shader",
+								"path": "res://assets/branding/sovtaym/v01/studio_atmosphere.gdshader"
+							}
+						}
+					},
+					"mouse_filter": 2
+				},
+				"type": "ColorRect"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "SafeArea",
+				"owner": ".",
+				"path": "./SafeArea",
+				"properties": {
+					"anchor_bottom": 1.0,
+					"anchor_right": 1.0,
+					"anchors_preset": 15,
+					"grow_horizontal": 2,
+					"grow_vertical": 2,
+					"layout_mode": 1,
+					"mouse_filter": 2,
+					"script": {
+						"class": "GDScript",
+						"path": "res://scripts/ui/safe_area_container.gd"
+					}
+				},
+				"type": "MarginContainer"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Inset",
+				"owner": ".",
+				"path": "./SafeArea/Inset",
+				"properties": {
+					"layout_mode": 2,
+					"mouse_filter": 2,
+					"theme_override_constants/margin_bottom": 96,
+					"theme_override_constants/margin_left": 96,
+					"theme_override_constants/margin_right": 96,
+					"theme_override_constants/margin_top": 96
+				},
+				"type": "MarginContainer"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Center",
+				"owner": ".",
+				"path": "./SafeArea/Inset/Center",
+				"properties": {
+					"layout_mode": 2,
+					"mouse_filter": 2
+				},
+				"type": "CenterContainer"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Brand",
+				"owner": ".",
+				"path": "./SafeArea/Inset/Center/Brand",
+				"properties": {
+					"layout_mode": 2,
+					"mouse_filter": 2,
+					"theme_override_constants/separation": 24
+				},
+				"type": "VBoxContainer"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Emblem",
+				"owner": ".",
+				"path": "./SafeArea/Inset/Center/Brand/Emblem",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(720, 720)"
+					},
+					"expand_mode": 1,
+					"layout_mode": 2,
+					"mouse_filter": 2,
+					"stretch_mode": 5,
+					"texture": {
+						"class": "CompressedTexture2D",
+						"path": "res://assets/branding/sovtaym/v01/emblem.png"
+					}
+				},
+				"type": "TextureRect"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Wordmark",
+				"owner": ".",
+				"path": "./SafeArea/Inset/Center/Brand/Wordmark",
+				"properties": {
+					"horizontal_alignment": 1,
+					"layout_mode": 2,
+					"text": "SovTaym",
+					"theme_override_colors/font_color": {
+						"type": "Color",
+						"value": "Color(0.93, 0.89, 0.82, 1)"
+					},
+					"theme_override_font_sizes/font_size": 104,
+					"theme_override_fonts/font": {
+						"class": "FontVariation",
+						"local_to_scene": false,
+						"properties": {
+							"base_font": {
+								"class": "FontFile",
+								"path": "res://assets/fonts/art_direction_v01/Cinzel.ttf"
+							},
+							"baseline_offset": 0.0,
+							"fallbacks": [],
+							"opentype_features": {},
+							"palette_custom_colors": {
+								"type": "PackedColorArray",
+								"value": "PackedColorArray()"
+							},
+							"palette_index": 0,
+							"resource_name": "",
+							"script": null,
+							"spacing_bottom": 0,
+							"spacing_glyph": 3,
+							"spacing_space": 0,
+							"spacing_top": 0,
+							"variation_embolden": 0.0,
+							"variation_face_index": 0,
+							"variation_opentype": {
+								"wght": 600.0
+							},
+							"variation_transform": {
+								"type": "Transform2D",
+								"value": "Transform2D(1, 0, 0, 1, 0, 0)"
+							}
+						}
+					}
+				},
+				"type": "Label"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Studios",
+				"owner": ".",
+				"path": "./SafeArea/Inset/Center/Brand/Studios",
+				"properties": {
+					"horizontal_alignment": 1,
+					"layout_mode": 2,
+					"text": "STUDIOS",
+					"theme_override_colors/font_color": {
+						"type": "Color",
+						"value": "Color(0.66, 0.56, 0.41, 1)"
+					},
+					"theme_override_font_sizes/font_size": 34,
+					"theme_override_fonts/font": {
+						"class": "FontVariation",
+						"local_to_scene": false,
+						"properties": {
+							"base_font": {
+								"class": "FontFile",
+								"path": "res://assets/fonts/art_direction_v01/Cinzel.ttf"
+							},
+							"baseline_offset": 0.0,
+							"fallbacks": [],
+							"opentype_features": {},
+							"palette_custom_colors": {
+								"type": "PackedColorArray",
+								"value": "PackedColorArray()"
+							},
+							"palette_index": 0,
+							"resource_name": "",
+							"script": null,
+							"spacing_bottom": 0,
+							"spacing_glyph": 14,
+							"spacing_space": 0,
+							"spacing_top": 0,
+							"variation_embolden": 0.0,
+							"variation_face_index": 0,
+							"variation_opentype": {},
+							"variation_transform": {
+								"type": "Transform2D",
+								"value": "Transform2D(1, 0, 0, 1, 0, 0)"
+							}
+						}
+					}
+				},
+				"type": "Label"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Spacer",
+				"owner": ".",
+				"path": "./SafeArea/Inset/Center/Brand/Spacer",
+				"properties": {
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(0, 52)"
+					},
+					"layout_mode": 2,
+					"mouse_filter": 2
+				},
+				"type": "Control"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Divider",
+				"owner": ".",
+				"path": "./SafeArea/Inset/Center/Brand/Divider",
+				"properties": {
+					"color": {
+						"type": "Color",
+						"value": "Color(0.48, 0.4, 0.29, 0.75)"
+					},
+					"custom_minimum_size": {
+						"type": "Vector2",
+						"value": "Vector2(144, 2)"
+					},
+					"layout_mode": 2,
+					"mouse_filter": 2,
+					"size_flags_horizontal": 4
+				},
+				"type": "ColorRect"
+			},
+			{
+				"groups": [],
+				"index": -1,
+				"instance": "<Object#null>",
+				"name": "Presents",
+				"owner": ".",
+				"path": "./SafeArea/Inset/Center/Brand/Presents",
+				"properties": {
+					"horizontal_alignment": 1,
+					"layout_mode": 2,
+					"text": "PRESENTS",
+					"theme_override_colors/font_color": {
+						"type": "Color",
+						"value": "Color(0.48, 0.48, 0.48, 1)"
+					},
+					"theme_override_font_sizes/font_size": 28
+				},
+				"type": "Label"
+			}
+		]
+	}
+}

@@ -1,0 +1,6 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/ui/common/ui_bottom_nav.gd" id="1"]
+[ext_resource type="Theme" path="res://theme/uomd_production_v001.tres" id="2"]
+[node name="BottomNav" type="PanelContainer"]
+theme = ExtResource("2")
+script = ExtResource("1")

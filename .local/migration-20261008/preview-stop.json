@@ -1,0 +1,20 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"readiness_after\": \"ready\", \"reason\": \"Play/stop is a runtime action\", \"stopped\": true, \"undoable\": false, \"was_running\": true}",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structured_content": {
+    "readiness_after": "ready",
+    "reason": "Play/stop is a runtime action",
+    "stopped": true,
+    "undoable": false,
+    "was_running": true
+  },
+  "is_error": false,
+  "result_type": "complete"
+}

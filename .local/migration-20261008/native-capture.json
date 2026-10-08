@@ -1,0 +1,22 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"result\": {\"height\": 960.0, \"saved\": true, \"visible\": true, \"width\": 540.0}, \"source\": \"game\"}",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structured_content": {
+    "result": {
+      "height": 960.0,
+      "saved": true,
+      "visible": true,
+      "width": 540.0
+    },
+    "source": "game"
+  },
+  "is_error": false,
+  "result_type": "complete"
+}

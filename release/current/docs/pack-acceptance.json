@@ -1,0 +1,25 @@
+{
+  "base_opening_only": true,
+  "base_ready": true,
+  "failures": [],
+  "patch_opening_only": false,
+  "patch_ready": true,
+  "pose_count": 32,
+  "tutorials": [
+    {
+      "completed": true,
+      "outcome": "victory",
+      "stage_id": "T-1"
+    },
+    {
+      "completed": true,
+      "outcome": "victory",
+      "stage_id": "T-2"
+    },
+    {
+      "completed": true,
+      "outcome": "victory",
+      "stage_id": "T-3"
+    }
+  ]
+}

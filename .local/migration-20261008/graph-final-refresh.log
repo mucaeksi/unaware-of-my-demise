@@ -1,0 +1,13 @@
+  AST extraction: 100/118 uncached files (84%)
+  AST extraction: 118/118 uncached files (100%)
+  warning: 1 file(s) had syntax errors and may be partially extracted: game/android/plugins/uomd_native/build.gradle (first error at line 15, no symbols extracted)
+  warning: 29 code file(s) yielded no symbols (0.05 MB) � a data file, or source this extractor models no symbols for: .codex/scripts/bootstrap_skills.ps1, database/tests/0002_ration_and_pull_audit_test.sql, database/tests/0003_state_revision_test.sql, database/tests/0004_data_lifecycle_test.sql, database/tests/0005_economy_journal_test.sql (+24 more)
+[graphify] WARNING: new graph has 25110 nodes but existing graph.json has 25114 (net -4). Refusing to overwrite. Possible causes: missing chunk files from a previous session, or fuzzy dedup collapsed same-named symbols across files during an --update on an already-current graph. Run a full rebuild (/graphify .) to be safe, or pass force=True only if you have verified the reduction is legitimate.
+Traceback (most recent call last):
+  File "F:\unaware-of-my-demise\tools\graphify_project.py", line 304, in <module>
+    build(args.semantic or args.refresh,args.allow_reviewed_shrink)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\unaware-of-my-demise\tools\graphify_project.py", line 262, in build
+    assert wrote,'Graph shrink guard refused write'
+           ^^^^^
+AssertionError: Graph shrink guard refused write

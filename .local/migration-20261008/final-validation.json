@@ -1,0 +1,77 @@
+{
+  "timestamp_utc": "2026-10-08T20:12:13.268042+00:00",
+  "copied_files": 6409,
+  "copied_bytes": 795188011,
+  "extra_exact_copies": [
+    {
+      "path": "build/current-aab-20261008-221217-9ccfb2c4/base-privacy-acceptance.json",
+      "bytes": 242,
+      "sha256": "53c8ed5ce3183b36bb3a9bc0ce8728f8062e3f3c2877fbc02b5cbc69d8b73a82",
+      "source_matches": true
+    },
+    {
+      "path": "build/current-aab-20261008-221217-9ccfb2c4/source-rebuild-acceptance.json",
+      "bytes": 256,
+      "sha256": "ba86587e8ac586dfe56c3440e609ac9d2816a3c0aa0862770972ec18584bb2d6",
+      "source_matches": true
+    },
+    {
+      "path": "game/android/plugins/uomd_native/src/main/res/values/uomd_admob.xml",
+      "bytes": 164,
+      "sha256": "df9210c6fb2b1ad6bbce215e1a14961f767e34dec7d76efb4a3709d9c03016d6",
+      "source_matches": true
+    }
+  ],
+  "missing_copies": [],
+  "original_source_changes": [],
+  "intentional_document_policy_updates": [
+    ".codex/standards/authority.md",
+    ".gitattributes",
+    ".gitignore",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "GODOT_AI_READY.md",
+    "README.md",
+    "docs/PROJECT_MAP.md"
+  ],
+  "unexpected_changed_copies": [],
+  "staged_files": 5845,
+  "largest_staged_files": [
+    [
+      12651123,
+      "narrative/FADYME_MEDIA_ALL/11_Audio_Cues_v001.zip"
+    ],
+    [
+      10714318,
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_Pilot_v001.zip"
+    ],
+    [
+      5203343,
+      "narrative/08_Locations/Reference_Images/forest_whispering_ash/bg_forest_whispering_ash_ordered_v001.png"
+    ],
+    [
+      5203343,
+      "game/assets/ui/narrative/prologue_v001/forest_road.png"
+    ],
+    [
+      5129435,
+      "narrative/08_Locations/Reference_Images/forest_whispering_ash/bg_forest_whispering_ash_battle_plate_ordered_v002.png"
+    ]
+  ],
+  "forbidden_staged_paths": [],
+  "credential_like_content_paths": [],
+  "reviewed_invalid_key_test_literal": "tools/tests/test_materialize_aab.py:61",
+  "archived_git_blob_byte_mismatches": [],
+  "preserved_executable_modes": 15,
+  "executable_mode_failures": [],
+  "gut_tests": 509,
+  "gut_failures": 0,
+  "gut_missing_test_scripts": [],
+  "gut_script_error": false,
+  "private_config_copied": false,
+  "head": "20097e93c39d278d438e9bf99b975625a2d41706",
+  "working_tree_changes_after_staging": [],
+  "commit_created": false,
+  "push_performed": false,
+  "status": "PASS"
+}

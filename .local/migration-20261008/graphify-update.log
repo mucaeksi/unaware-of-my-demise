@@ -1,0 +1,25 @@
+Re-extracting code files in . (no LLM needed)...
+[graphify watch] 2706 file(s) not classified (no supported extension or shebang), skipped: .env.example, .gdignore, .gitattributes, .gitignore, .graphify_version, 10_VO_v001.zip (+2700 more)
+  AST extraction: 100/1319 uncached files (7%) [6 workers]
+  AST extraction: 200/1319 uncached files (15%) [6 workers]
+  AST extraction: 300/1319 uncached files (22%) [6 workers]
+  AST extraction: 400/1319 uncached files (30%) [6 workers]
+  AST extraction: 500/1319 uncached files (37%) [6 workers]
+  AST extraction: 600/1319 uncached files (45%) [6 workers]
+  AST extraction: 700/1319 uncached files (53%) [6 workers]
+  AST extraction: 800/1319 uncached files (60%) [6 workers]
+  AST extraction: 900/1319 uncached files (68%) [6 workers]
+  AST extraction: 1000/1319 uncached files (75%) [6 workers]
+  AST extraction: 1100/1319 uncached files (83%) [6 workers]
+  AST extraction: 1200/1319 uncached files (90%) [6 workers]
+  AST extraction: 1300/1319 uncached files (98%) [6 workers]
+  AST extraction: 1319/1319 uncached files (100%) [6 workers]
+  warning: 1 file(s) had syntax errors and may be partially extracted: game/android/plugins/uomd_native/build.gradle (first error at line 15, no symbols extracted)
+  warning: 30 code file(s) yielded no symbols (0.05 MB) — a data file, or source this extractor models no symbols for: .codex/scripts/bootstrap_skills.ps1, database/tests/0002_ration_and_pull_audit_test.sql, database/tests/0003_state_revision_test.sql, database/tests/0004_data_lifecycle_test.sql, database/tests/0005_economy_journal_test.sql (+25 more)
+Graph has 10576 nodes (above 5000 limit). Building aggregated community view...
+graph.html written (aggregated: 1083 community nodes, 611 cross-community edges)
+Tip: run with --obsidian for full node-level detail.
+[graphify watch] Rebuilt: 10576 nodes, 14947 edges, 1083 communities
+[graphify watch] graph.json, graph.html and GRAPH_REPORT.md updated in graphify-out
+Code graph updated. For doc/paper/image changes run /graphify --update in your AI assistant.
+Tip: set GEMINI_API_KEY or GOOGLE_API_KEY to use Gemini for semantic extraction.

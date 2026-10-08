@@ -1,0 +1,36 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"current_scene\": \"res://scenes/main/main.tscn\", \"game_capture_ready\": false, \"game_status\": {\"active\": false, \"editor_log_cursor\": 0, \"elapsed_msec\": 0, \"helper_expected\": true, \"helper_live\": false, \"ready\": false, \"ready_wait_msec\": 20000, \"run_started_msec\": 0, \"run_token\": 0, \"session_active\": false, \"status\": \"stopped\"}, \"godot_version\": \"4.7.2-stable (official)\", \"helper_live\": false, \"is_playing\": false, \"project_name\": \"Unaware of My Demise\", \"readiness\": \"ready\", \"session_active\": false}",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structured_content": {
+    "current_scene": "res://scenes/main/main.tscn",
+    "game_capture_ready": false,
+    "game_status": {
+      "active": false,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 0,
+      "helper_expected": true,
+      "helper_live": false,
+      "ready": false,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 0,
+      "run_token": 0,
+      "session_active": false,
+      "status": "stopped"
+    },
+    "godot_version": "4.7.2-stable (official)",
+    "helper_live": false,
+    "is_playing": false,
+    "project_name": "Unaware of My Demise",
+    "readiness": "ready",
+    "session_active": false
+  },
+  "is_error": false,
+  "result_type": "complete"
+}

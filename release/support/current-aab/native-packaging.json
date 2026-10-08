@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "dex_files": 5,
+  "class_descriptors": [
+    "Lio/github/mucaeksi/uomd/UomdNative;",
+    "Lio/github/mucaeksi/uomd/GoogleSignIn;",
+    "Lio/github/mucaeksi/uomd/PlayBilling;",
+    "Lio/github/mucaeksi/uomd/RewardedAds;",
+    "Landroidx/credentials/CredentialManager;",
+    "Lcom/google/android/libraries/identity/googleid/GetGoogleIdOption;",
+    "Lcom/android/billingclient/api/BillingClient;",
+    "Lcom/google/android/gms/ads/MobileAds;",
+    "Lcom/google/android/ump/UserMessagingPlatform;"
+  ],
+  "manifest_metadata": [
+    "org.godotengine.plugin.v2.UomdNative",
+    "io.github.mucaeksi.uomd.UomdNative",
+    "com.google.android.gms.ads.APPLICATION_ID"
+  ],
+  "scope": "Packaging evidence; Android device invocation still pending"
+}

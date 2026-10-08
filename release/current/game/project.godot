@@ -1,0 +1,61 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Unaware of My Demise"
+config/description="Part I - Unaware, I Fade. Godot client (GDScript, statically typed)."
+run/main_scene="res://scenes/main/main.tscn"
+config/quit_on_go_back=false
+config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+config/icon="res://icon.svg"
+boot_splash/minimum_display_time=1200
+
+[autoload]
+
+Game="*res://scripts/app/game.gd"
+Online="*res://scripts/app/online.gd"
+Native="*res://scripts/app/native.gd"
+Audio="*res://scripts/app/audio_director.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/size/window_width_override=540
+window/size/window_height_override=960
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/uomd_native/plugin.cfg")
+
+[gui]
+
+theme/custom="res://theme/uomd_production_v001.tres"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+
+[uomd]
+
+online/google_server_client_id="604013824221-n7htgfhfs55njs5ie11ulojsk1tnk6da.apps.googleusercontent.com"
+online/server_url="https://unaware-of-my-demise.muratcaneksiii.workers.dev"
+release/version_code=1

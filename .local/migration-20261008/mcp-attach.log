@@ -1,0 +1,54 @@
+godot-ai attach [PORT_OCCUPIED]: Port 8000 is occupied by a process the bridge cannot adopt: status probe returned HTTP 401.
+Hint: Stop that process or configure Godot AI and the MCP client to use free matching ports.
+Details: {"hint": "Stop that process or configure Godot AI and the MCP client to use free matching ports.", "port": 8000, "retryable": false}
+[10/08/26 23:02:20] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:02:33] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:02:46] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:03:08] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:03:19] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:03:45] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:04:04] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:04:07] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:04:17] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:04:31] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:04:55] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:05:00] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:05:01] Error calling tool 'editor_screenshot'                     
+                    +----------- Traceback (most recent call last) -----------+
+                    | C:\Users\PC\AppData\Local\uv\cache\archive-v0\-vl-Aidn0 |
+                    | rzTBoaY\Lib\site-packages\fastmcp\server\server.py:1505 |
+                    |  in call_tool                                           |
+                    |                                                         |
+                    | C:\Users\PC\AppData\Local\uv\cache\archive-v0\-vl-Aidn0 |
+                    | rzTBoaY\Lib\site-packages\fastmcp\tools\base.py:440 in  |
+                    | _run                                                    |
+                    |                                                         |
+                    |                 ... 5 frames hidden ...                 |
+                    |                                                         |
+                    | C:\Users\PC\AppData\Local\uv\cache\archive-v0\-vl-Aidn0 |
+                    | rzTBoaY\Lib\site-packages\mcp\client\session.py:586 in  |
+                    | send_request                                            |
+                    |                                                         |
+                    | C:\Users\PC\AppData\Local\uv\cache\archive-v0\-vl-Aidn0 |
+                    | rzTBoaY\Lib\site-packages\mcp\shared\jsonrpc_dispatcher |
+                    | .py:444 in send_raw_request                             |
+                    +---------------------------------------------------------+
+                    MCPError: SSE stream ended without a response              
+[10/08/26 23:05:21] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:05:25] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
+[10/08/26 23:05:29] INFO     Starting MCP server 'Godot AI     transport.py:242
+                             attach' with transport 'stdio'                    
