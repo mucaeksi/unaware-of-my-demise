@@ -1,0 +1,312 @@
+{
+  "schema": 1,
+  "root": "res://ui/",
+  "fonts": {
+    "display": {
+      "family": "Cinzel",
+      "included": false,
+      "required_for_final": true
+    },
+    "body": {
+      "family": "Source Sans 3",
+      "included": false,
+      "required_for_final": true
+    }
+  },
+  "components": [
+    {
+      "asset_id": "UOMD_UI_Panel_Standard_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Panel_Standard_9Slice_v001.png",
+      "kind": "panel",
+      "size": [
+        480,
+        320
+      ],
+      "nine_slice": [
+        72,
+        72,
+        72,
+        72
+      ],
+      "state": null,
+      "variant": "standard",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Panel_Hero_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Panel_Hero_9Slice_v001.png",
+      "kind": "panel",
+      "size": [
+        480,
+        320
+      ],
+      "nine_slice": [
+        72,
+        72,
+        72,
+        72
+      ],
+      "state": null,
+      "variant": "hero",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Panel_Modal_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Panel_Modal_9Slice_v001.png",
+      "kind": "panel",
+      "size": [
+        480,
+        320
+      ],
+      "nine_slice": [
+        72,
+        72,
+        72,
+        72
+      ],
+      "state": null,
+      "variant": "modal",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Panel_Sheet_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Panel_Sheet_9Slice_v001.png",
+      "kind": "panel",
+      "size": [
+        480,
+        320
+      ],
+      "nine_slice": [
+        72,
+        72,
+        72,
+        72
+      ],
+      "state": null,
+      "variant": "sheet",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Button_Primary_Default_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Button_Primary_Default_9Slice_v001.png",
+      "kind": "button",
+      "size": [
+        720,
+        168
+      ],
+      "nine_slice": [
+        88,
+        56,
+        88,
+        56
+      ],
+      "state": "default",
+      "variant": "primary",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Button_Primary_Pressed_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Button_Primary_Pressed_9Slice_v001.png",
+      "kind": "button",
+      "size": [
+        720,
+        168
+      ],
+      "nine_slice": [
+        88,
+        56,
+        88,
+        56
+      ],
+      "state": "pressed",
+      "variant": "primary",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Button_Primary_Disabled_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Button_Primary_Disabled_9Slice_v001.png",
+      "kind": "button",
+      "size": [
+        720,
+        168
+      ],
+      "nine_slice": [
+        88,
+        56,
+        88,
+        56
+      ],
+      "state": "disabled",
+      "variant": "primary",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Button_Secondary_Default_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Button_Secondary_Default_9Slice_v001.png",
+      "kind": "button",
+      "size": [
+        720,
+        168
+      ],
+      "nine_slice": [
+        88,
+        56,
+        88,
+        56
+      ],
+      "state": "default",
+      "variant": "secondary",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Button_Secondary_Pressed_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Button_Secondary_Pressed_9Slice_v001.png",
+      "kind": "button",
+      "size": [
+        720,
+        168
+      ],
+      "nine_slice": [
+        88,
+        56,
+        88,
+        56
+      ],
+      "state": "pressed",
+      "variant": "secondary",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Button_Secondary_Disabled_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Button_Secondary_Disabled_9Slice_v001.png",
+      "kind": "button",
+      "size": [
+        720,
+        168
+      ],
+      "nine_slice": [
+        88,
+        56,
+        88,
+        56
+      ],
+      "state": "disabled",
+      "variant": "secondary",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Button_Destructive_Default_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Button_Destructive_Default_9Slice_v001.png",
+      "kind": "button",
+      "size": [
+        720,
+        168
+      ],
+      "nine_slice": [
+        88,
+        56,
+        88,
+        56
+      ],
+      "state": "default",
+      "variant": "destructive",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Button_Destructive_Pressed_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Button_Destructive_Pressed_9Slice_v001.png",
+      "kind": "button",
+      "size": [
+        720,
+        168
+      ],
+      "nine_slice": [
+        88,
+        56,
+        88,
+        56
+      ],
+      "state": "pressed",
+      "variant": "destructive",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Button_Destructive_Disabled_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Button_Destructive_Disabled_9Slice_v001.png",
+      "kind": "button",
+      "size": [
+        720,
+        168
+      ],
+      "nine_slice": [
+        88,
+        56,
+        88,
+        56
+      ],
+      "state": "disabled",
+      "variant": "destructive",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Nav_Backplate_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Nav_Backplate_9Slice_v001.png",
+      "kind": "navigation",
+      "size": [
+        1080,
+        210
+      ],
+      "nine_slice": [
+        72,
+        48,
+        72,
+        48
+      ],
+      "state": null,
+      "variant": null,
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Card_Standard_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Card_Standard_9Slice_v001.png",
+      "kind": "card",
+      "size": [
+        420,
+        600
+      ],
+      "nine_slice": [
+        64,
+        96,
+        64,
+        96
+      ],
+      "state": "default",
+      "variant": "standard",
+      "status": "production_candidate"
+    },
+    {
+      "asset_id": "UOMD_UI_Badge_Standard_9Slice_v001",
+      "path": "res://ui/assets/components/UOMD_UI_Badge_Standard_9Slice_v001.png",
+      "kind": "badge",
+      "size": [
+        240,
+        96
+      ],
+      "nine_slice": [
+        32,
+        28,
+        32,
+        28
+      ],
+      "state": "default",
+      "variant": "standard",
+      "status": "production_candidate"
+    }
+  ],
+  "rules": {
+    "text_baked_into_runtime_texture": false,
+    "safe_area_device_driven": true,
+    "minimum_touch_target_dp": 48,
+    "state_meaning_color_only": false
+  }
+}

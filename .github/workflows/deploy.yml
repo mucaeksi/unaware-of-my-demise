@@ -1,0 +1,237 @@
+# Production deploy (DEC-0003): after CI passes for a push to main (or on demand), apply pending database migrations to
+# Neon, then deploy the Worker and check /healthz. Migrations are additive and run first, so the running Worker keeps
+# working against the newer schema. Uses repository secrets DATABASE_URL and CLOUDFLARE_API_TOKEN and the variable
+# CLOUDFLARE_ACCOUNT_ID; when one is missing every step is skipped with a warning instead of failing main. The optional
+# variable (or secret) GOOGLE_CLIENT_IDS (comma-separated Google OAuth client IDs, the ID-token audiences) enables sign-in; without it, or
+# when it does not look like OAuth client IDs, the Worker deploys with sign-in answering 503.
+# Release identity (INF-004/INF-008): the Worker is told the commit it was built from (RELEASE_SOURCE_SHA, reported by
+# GET /v1/bootstrap and checked after the deploy), and an automatic deploy of a commit older than the one already live
+# (a CI run that finished late) is skipped instead of rolling production back.
+# A manual run (INF-008, docs/runbooks/ROLLBACK.md) deploys the commit in its source_sha input, or the selected branch's
+# head. The commit must be on main and have passed CI; deploying one older than the live commit is a rollback and needs
+# a reason, which the run records in its summary (the run itself is the rollback record).
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: "Commit to deploy (full SHA on main). Empty: the selected branch's head."
+        required: false
+        default: ""
+      reason:
+        description: "Why (required when the commit is older than the live one: a rollback)."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  # The manual-run check that the commit passed CI.
+  actions: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  production:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      # Client IDs are public: the repository variable is the usual home; a secret of the same name also works.
+      GOOGLE_CLIENT_IDS: ${{ vars.GOOGLE_CLIENT_IDS || secrets.GOOGLE_CLIENT_IDS }}
+      # The admin Worker (DEC-0033): Cloudflare Access settings and the operators to register (owner decision D-11).
+      ADMIN_ACCESS_TEAM_DOMAIN: ${{ vars.ADMIN_ACCESS_TEAM_DOMAIN }}
+      ADMIN_ACCESS_AUD: ${{ vars.ADMIN_ACCESS_AUD }}
+      ADMIN_OPERATOR_EMAILS: ${{ vars.ADMIN_OPERATOR_EMAILS }}
+      # Billing and rewarded ads (INF-036, DEC-0038; owner decisions D-17/D-18): each part answers 503 until it is set.
+      GOOGLE_PLAY_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+      RTDN_AUDIENCE: ${{ vars.RTDN_AUDIENCE }}
+      RTDN_PUSH_SERVICE_ACCOUNT: ${{ vars.RTDN_PUSH_SERVICE_ACCOUNT }}
+      ADMOB_AD_UNIT_IDS: ${{ vars.ADMOB_AD_UNIT_IDS }}
+      # The commit this run deploys; the Worker reports it as source_sha.
+      SOURCE_SHA: ${{ github.event.workflow_run.head_sha || inputs.source_sha || github.sha }}
+      DEPLOY_REASON: ${{ inputs.reason }}
+      # The public API endpoint (the client's uomd/online/server_url).
+      PRODUCTION_URL: https://unaware-of-my-demise.muratcaneksiii.workers.dev
+    steps:
+      - name: Check configuration
+        id: config
+        run: |
+          missing=""
+          [ -n "${DATABASE_URL}" ] || missing="${missing} secret:DATABASE_URL"
+          [ -n "${CLOUDFLARE_API_TOKEN}" ] || missing="${missing} secret:CLOUDFLARE_API_TOKEN"
+          [ -n "${CLOUDFLARE_ACCOUNT_ID}" ] || missing="${missing} variable:CLOUDFLARE_ACCOUNT_ID"
+          if [ -n "${missing}" ]; then
+            echo "::warning::Production deploy skipped; missing:${missing}"
+            echo "ready=false" >> "${GITHUB_OUTPUT}"
+          else
+            echo "ready=true" >> "${GITHUB_OUTPUT}"
+          fi
+          # Sign-in audiences: only well-formed OAuth client IDs are passed on (the value itself is never printed).
+          ids="$(printf '%s' "${GOOGLE_CLIENT_IDS}" | tr -d '[:space:]')"
+          if [ -z "${ids}" ]; then
+            echo "::warning::GOOGLE_CLIENT_IDS (repository variable or secret) is not set; sign-in will answer 503"
+            echo "signin=false" >> "${GITHUB_OUTPUT}"
+          elif printf '%s' "${ids}" | grep -Eq '^[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com(,[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com)*$'; then
+            echo "signin=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "::warning::GOOGLE_CLIENT_IDS is not a comma-separated list of OAuth client IDs (<number>-<id>.apps.googleusercontent.com); sign-in will answer 503"
+            echo "signin=false" >> "${GITHUB_OUTPUT}"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.config.outputs.ready == 'true'
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          # Full history: the order check below compares commits.
+          fetch-depth: 0
+      - name: A manual run deploys a tested commit of main
+        if: steps.config.outputs.ready == 'true' && github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          printf '%s' "${SOURCE_SHA}" | grep -Eq '^[0-9a-f]{40}$' || { echo "::error::source_sha must be a full 40-character commit SHA"; exit 1; }
+          git merge-base --is-ancestor "${SOURCE_SHA}" origin/main || { echo "::error::${SOURCE_SHA} is not on main"; exit 1; }
+          passed="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs?head_sha=${SOURCE_SHA}&status=success&per_page=1" --jq '.total_count')"
+          [ "${passed:-0}" -gt 0 ] || { echo "::error::CI has not passed for ${SOURCE_SHA}"; exit 1; }
+          echo "${SOURCE_SHA} is on main and passed CI"
+      - name: Never roll production back automatically
+        id: order
+        if: steps.config.outputs.ready == 'true'
+        run: |
+          # The commit production runs now (empty before the first deploy that reported one, or when unreachable).
+          live="$(curl -fsS --max-time 20 "${PRODUCTION_URL}/v1/bootstrap" | jq -r '.source_sha // empty' 2>/dev/null || true)"
+          echo "live: ${live:-unknown}; this run: ${SOURCE_SHA}"
+          if [ -n "${live}" ] && [ "${live}" != "${SOURCE_SHA}" ] && git merge-base --is-ancestor "${SOURCE_SHA}" "${live}" 2>/dev/null; then
+            if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+              [ -n "${DEPLOY_REASON}" ] || { echo "::error::${SOURCE_SHA} is older than the live ${live}: a rollback needs the reason input"; exit 1; }
+              echo "::warning::Rollback from ${live} to ${SOURCE_SHA}: ${DEPLOY_REASON}"
+              {
+                echo "## Rollback"
+                echo "- from: \`${live}\`"
+                echo "- to: \`${SOURCE_SHA}\`"
+                echo "- by: ${GITHUB_ACTOR}"
+                echo "- reason: ${DEPLOY_REASON}"
+                echo "- migrations stay applied (additive, DEC-0020); migrate.sh warns that the database is ahead of this code."
+              } >> "${GITHUB_STEP_SUMMARY}"
+            else
+              echo "::warning::Skipped: ${SOURCE_SHA} is older than the live ${live} (a late CI completion must not roll production back)"
+              echo "deploy=false" >> "${GITHUB_OUTPUT}"
+              exit 0
+            fi
+          fi
+          echo "deploy=true" >> "${GITHUB_OUTPUT}"
+      - name: Apply pending migrations (Neon)
+        if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
+        env:
+          # The environment guard (DEC-0025): refuses a database recorded as another environment's.
+          UOMD_ENVIRONMENT: production
+        run: |
+          database/migrate.sh
+          # CI tests on database/POSTGRES_MAJOR; a Neon upgrade must be mirrored there (INF-010).
+          expected="$(tr -d '[:space:]' < database/POSTGRES_MAJOR)"
+          actual="$(psql "${DATABASE_URL}" -X -At -c "SELECT current_setting('server_version_num')::int / 10000")"
+          echo "production PostgreSQL major ${actual} (CI tests ${expected})"
+          [ "${actual}" = "${expected}" ] || echo "::warning::production runs PostgreSQL ${actual} but CI tests ${expected}: update database/POSTGRES_MAJOR and the CI service images"
+      - uses: actions/setup-node@v4
+        if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - name: Deploy the Worker
+        if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
+        working-directory: server
+        run: |
+          # The test-only entry (test sign-in) must never be what production runs.
+          grep -Eq '"main": "src/index.ts"' wrangler.jsonc || { echo "::error::wrangler.jsonc main is not src/index.ts"; exit 1; }
+          npm ci
+          # --env= targets the top-level (production) configuration explicitly; env.staging is deploy-staging.yml's.
+          args=(--env= --var "RELEASE_SOURCE_SHA:${SOURCE_SHA}")
+          if [ "${{ steps.config.outputs.signin }}" = "true" ]; then
+            args+=(--var "GOOGLE_CLIENT_IDS:$(printf '%s' "${GOOGLE_CLIENT_IDS}" | tr -d '[:space:]')")
+          fi
+          for name in ADMOB_AD_UNIT_IDS RTDN_AUDIENCE RTDN_PUSH_SERVICE_ACCOUNT; do
+            value="$(printf '%s' "${!name}" | tr -d '[:space:]')"
+            if [ -n "${value}" ]; then args+=(--var "${name}:${value}"); else echo "::notice::${name} is not set (D-17/D-18): that part of billing/ads answers 503"; fi
+          done
+          npx wrangler deploy "${args[@]}" | tee "${RUNNER_TEMP}/deploy.log"
+          # The Play service account key is a Worker secret (never a var, never in the log).
+          if [ -n "${GOOGLE_PLAY_SERVICE_ACCOUNT}" ]; then
+            printf '%s' "${GOOGLE_PLAY_SERVICE_ACCOUNT}" | npx wrangler secret put GOOGLE_PLAY_SERVICE_ACCOUNT --env= >/dev/null
+            echo "GOOGLE_PLAY_SERVICE_ACCOUNT uploaded as a Worker secret"
+          else
+            echo "::notice::GOOGLE_PLAY_SERVICE_ACCOUNT is not set (D-17): purchases answer 503"
+          fi
+      - name: Health check
+        if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
+        run: |
+          url="$(grep -Eo 'https://[A-Za-z0-9.-]+\.workers\.dev' "${RUNNER_TEMP}/deploy.log" | head -n1)"
+          [ -n "${url}" ] || { echo "::error::no workers.dev URL in the deploy output"; exit 1; }
+          healthy=false
+          for attempt in 1 2 3 4 5 6; do
+            if curl -fsS "${url}/healthz"; then echo; healthy=true; break; fi
+            sleep 10
+          done
+          [ "${healthy}" = "true" ] || { echo "::error::${url}/healthz did not answer ok"; exit 1; }
+          # The release contract answers, and production now runs this commit (the edge may need a moment to switch).
+          served=""
+          for attempt in 1 2 3 4 5 6; do
+            served="$(curl -fsS "${url}/v1/bootstrap" | jq -r '.source_sha // empty' || true)"
+            [ "${served}" = "${SOURCE_SHA}" ] && break
+            sleep 10
+          done
+          echo "GET /v1/bootstrap source_sha: ${served:-none} (expected ${SOURCE_SHA})"
+          [ "${served}" = "${SOURCE_SHA}" ] || { echo "::error::production reports source_sha '${served}', expected ${SOURCE_SHA}"; exit 1; }
+          # A configured sign-in rejects a forged credential (401); an unconfigured one answers 503.
+          status="$(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'content-type: application/json' -d '{"credential":"not-a-token"}' "${url}/v1/auth/google")"
+          expected="503"
+          [ "${{ steps.config.outputs.signin }}" = "true" ] && expected="401"
+          echo "POST /v1/auth/google with a forged credential: HTTP ${status} (expected ${expected})"
+          [ "${status}" = "${expected}" ] || { echo "::error::sign-in answered ${status}, expected ${expected}"; exit 1; }
+      # The admin Worker (INF-033, DEC-0033) ships with the same commit. Without Access settings its API answers 503 and
+      # the page holds no data, so it is deployed anyway: Access is switched on for its workers.dev host after it exists.
+      - name: Register operators
+        if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true' && env.ADMIN_OPERATOR_EMAILS != ''
+        env:
+          ADDED_BY: deploy:${{ github.actor }}
+        run: |
+          # Adds missing operators only; never changes or removes an existing admin user (that is an audited admin action).
+          for email in $(printf '%s' "${ADMIN_OPERATOR_EMAILS}" | tr ',' ' ' | tr '[:upper:]' '[:lower:]'); do
+            printf '%s' "${email}" | grep -Eq '^[^@[:space:]]+@[^@[:space:]]+$' || { echo "::error::ADMIN_OPERATOR_EMAILS has an invalid entry"; exit 1; }
+            psql "${DATABASE_URL}" -X -q -v ON_ERROR_STOP=1 -v email="${email}" -v added_by="${ADDED_BY}" \
+              -c "INSERT INTO admin_users (email, role, added_by) VALUES (:'email', 'operator', :'added_by') ON CONFLICT (email) DO NOTHING"
+          done
+          echo "operators registered: $(psql "${DATABASE_URL}" -X -At -c "SELECT count(*) FROM admin_users WHERE disabled_at IS NULL")"
+      - name: Deploy the admin Worker
+        if: steps.config.outputs.ready == 'true' && steps.order.outputs.deploy == 'true'
+        run: |
+          (cd admin && npm ci && npm run build)
+          cd server
+          args=(--config wrangler.admin.jsonc --var "RELEASE_SOURCE_SHA:${SOURCE_SHA}")
+          if [ -n "${ADMIN_ACCESS_TEAM_DOMAIN}" ] && [ -n "${ADMIN_ACCESS_AUD}" ]; then
+            args+=(--var "ACCESS_TEAM_DOMAIN:${ADMIN_ACCESS_TEAM_DOMAIN}" --var "ACCESS_AUD:${ADMIN_ACCESS_AUD}")
+          else
+            echo "::warning::ADMIN_ACCESS_TEAM_DOMAIN / ADMIN_ACCESS_AUD are not set: the admin API answers 503 until Cloudflare Access is set up (D-11)"
+          fi
+          npx wrangler deploy "${args[@]}" | tee "${RUNNER_TEMP}/admin-deploy.log"
+          url="$(grep -Eo 'https://unaware-of-my-demise-admin\.[A-Za-z0-9.-]+\.workers\.dev' "${RUNNER_TEMP}/admin-deploy.log" | head -n1)"
+          [ -n "${url}" ] || { echo "::error::no admin workers.dev URL in the deploy output"; exit 1; }
+          # Without an Access token the API must refuse: 401 when Access is configured, 503 when it is not, never data.
+          # A new workers.dev host or version can answer 404 for a few seconds after the deploy (run 16 failed so):
+          # only a 404 is retried, for up to 60 s; anything else is judged at once.
+          for _ in $(seq 1 12); do
+            status="$(curl -s -o /dev/null -w '%{http_code}' "${url}/admin/api/me")"
+            [ "${status}" = "404" ] || break
+            sleep 5
+          done
+          echo "GET /admin/api/me without Access: HTTP ${status}"
+          case "${status}" in 401|403|503|302) ;; *) echo "::error::the admin API answered ${status} without an Access token"; exit 1 ;; esac

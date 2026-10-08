@@ -1,0 +1,25 @@
+{
+  "source": "https://github.com/Calinou/kenney-particle-pack",
+  "creator": "Kenney Vleugels (Kenney.nl)",
+  "license": "CC0-1.0",
+  "selected_from": "res://assets/third_party/reference/kenney-particles/",
+  "status": "OPENING_PRESENTATION_ADAPTATION",
+  "textures": [
+    "spark_01.png",
+    "light_01.png"
+  ],
+  "adaptation": "Unmodified textures; bounded additive Sprite2D hit feedback. No character art or damage-rule changes.",
+  "revision": "ab7086639ee73be31abd87feb21bf1402d4e8144",
+  "files": [
+    {
+      "path": "light_01.png",
+      "sha256": "e15db5a8ccea012f4df82689f1a829bdaac04fd8a3066a723f157e0b01ffbf0a",
+      "bytes": 86592
+    },
+    {
+      "path": "spark_01.png",
+      "sha256": "ca5e7eac772d5af176f0d45be34f416908859bf28697c31f3ec7f34609919f53",
+      "bytes": 89628
+    }
+  ]
+}

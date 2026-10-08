@@ -1,0 +1,154 @@
+{
+  "repository": "https://github.com/gdquest-demos/godot-4-VFX-assets.git",
+  "commit": "f6034a88877f6ea144ae487694cc8fde82d4da7f",
+  "installed": "2026-10-08",
+  "status": "REFERENCE_ONLY_NOT_INTEGRATED",
+  "shaders_license": "MIT",
+  "original_art_license": "CC-BY-NC-SA-4.0",
+  "original_project": "references/gdquest_vfx/upstream/project.godot",
+  "export_excluded": true,
+  "upstream_files": 259,
+  "shader_count": 35,
+  "shaders": [
+    {
+      "path": "shaders/backgrounds/2d_sky/source/2d_sky.gdshader",
+      "sha256": "2d09986c02e3d2532bb07ec762c6ec2c2b78b7e2c4a70647891e8508a3946803"
+    },
+    {
+      "path": "shaders/backgrounds/space/source/star_field.gdshader",
+      "sha256": "e2de3f7e72e3090a3d9478f2aa28c34a40bc73cd60412506488b94ad9710db5c"
+    },
+    {
+      "path": "shaders/effects/2d_explosion/source/materials/explosion.gdshader",
+      "sha256": "184d5a01e8fb47af321df54bbbf0ecc6e6778be94d4979699c7b9acb578e424a"
+    },
+    {
+      "path": "shaders/effects/2d_explosion/source/materials/explosion_particles.gdshader",
+      "sha256": "88feaa0b37f678a85cbdb8efcc8ec43814f0d918a1cf15997846320013f5c96e"
+    },
+    {
+      "path": "shaders/effects/2d_explosion/source/materials/explosion_red.gdshader",
+      "sha256": "9a22af2cb7e788657260f71c0907d20629d4f53fd1b5c60acfa7cf69c83c9193"
+    },
+    {
+      "path": "shaders/effects/2d_explosion/source/materials/explosion_red_circle.gdshader",
+      "sha256": "464e9758558d18e0eed398c38b05349672c0590ff93cdce4283c2f7aa684c732"
+    },
+    {
+      "path": "shaders/effects/2d_explosion/source/materials/explosion_trace.gdshader",
+      "sha256": "54c0628df54204767cbaf0c73593a8aec50fbac05fa6a2356fed82d27f08a8d2"
+    },
+    {
+      "path": "shaders/effects/2d_explosion/source/materials/smoke.gdshader",
+      "sha256": "31555fa7390d14bca9d7a699e1fa952526a6db067a8939477fa7bc417857f766"
+    },
+    {
+      "path": "shaders/effects/2d_eyeball/source/eyeball.gdshader",
+      "sha256": "9ac9b78069021634d1a91307e39880d8f4fa2afdbda238e94e3bf46cd5194930"
+    },
+    {
+      "path": "shaders/effects/2d_trail/preview/material/star.gdshader",
+      "sha256": "af5725e55e8beb15fa23fae1e4f0585e2d63557dc5eb1a1c8cbc4f8eaeb33101"
+    },
+    {
+      "path": "shaders/effects/2d_trail/preview/material/star_trail.gdshader",
+      "sha256": "e64cb6c8d5e407e6def68e12b058dee96f122b4c75eb80108a96e2e37ca67a43"
+    },
+    {
+      "path": "shaders/effects/2d_vortex/source/2d_vortex.gdshader",
+      "sha256": "12c75bab53e45dbfe46dbd19a18076ddb5b501583f4f8070297617ec4d4af726"
+    },
+    {
+      "path": "shaders/effects/2d_water/source/2d_water.gdshader",
+      "sha256": "94335021900225130248b38843a78df2d2892255ee783f327d82b9c7d1a6382c"
+    },
+    {
+      "path": "shaders/effects/3d_flame/source/flame.gdshader",
+      "sha256": "67d6e7b53348b6e68cfef1c406e0bb343b00bd5f6a186c3d60d039e4257bc63b"
+    },
+    {
+      "path": "shaders/effects/3d_paintball_projectile/source/materials/paint_projectile.gdshader",
+      "sha256": "be68c5d03fcb2d653aefcc2bc4e2fe5e10c9d7f36b0d169a38a321b6e7a80ed8"
+    },
+    {
+      "path": "shaders/effects/3d_paintball_projectile/source/materials/splatter.gdshader",
+      "sha256": "a09ea07224cfe2418bfbdf2600e6208b5fae827a9a708f50f41aa5d207646a2f"
+    },
+    {
+      "path": "shaders/effects/3d_smoke_explosion/source/materials/inner_smoke.gdshader",
+      "sha256": "e40d1838e759ffd7b2b717c027cb27400404fd26d73dabd1dd4dbe9d8b823002"
+    },
+    {
+      "path": "shaders/effects/3d_smoke_explosion/source/materials/outer_smoke.gdshader",
+      "sha256": "a5c306e68b8b2be6bdc2ec1840c9ad97eb5262e727b33d62a14a034a7ff13190"
+    },
+    {
+      "path": "shaders/materials/3d_stylized_water/source/materials/water_shader.gdshader",
+      "sha256": "5dbe9fd358c7c371663eda289513af521706c703ebc72d72001d70f9eb7080f5"
+    },
+    {
+      "path": "shaders/materials/iridescent/source/star_shader.gdshader",
+      "sha256": "ccfe6dbb7e46a6ff096f6fe3803e58fb982d84612a6e14977e474d5efcc2e16e"
+    },
+    {
+      "path": "shaders/to_sort/bomb/bomb_rope.gdshader",
+      "sha256": "0e338d908c9b1a797861d7d26e08a8b449a1a92c7f30617bce3f23b3a65e11f2"
+    },
+    {
+      "path": "shaders/to_sort/bomb/explosion/explosion.gdshader",
+      "sha256": "5b9c338d00b56ef7d402b53cc7e693c535c06cd4f23467076858c197f6af242d"
+    },
+    {
+      "path": "shaders/to_sort/bomb/explosion/explosion_particles.gdshader",
+      "sha256": "88feaa0b37f678a85cbdb8efcc8ec43814f0d918a1cf15997846320013f5c96e"
+    },
+    {
+      "path": "shaders/to_sort/bomb/explosion/explosion_red.gdshader",
+      "sha256": "9a22af2cb7e788657260f71c0907d20629d4f53fd1b5c60acfa7cf69c83c9193"
+    },
+    {
+      "path": "shaders/to_sort/bomb/explosion/explosion_red_circle.gdshader",
+      "sha256": "464e9758558d18e0eed398c38b05349672c0590ff93cdce4283c2f7aa684c732"
+    },
+    {
+      "path": "shaders/to_sort/bomb/explosion/explosion_trace.gdshader",
+      "sha256": "54c0628df54204767cbaf0c73593a8aec50fbac05fa6a2356fed82d27f08a8d2"
+    },
+    {
+      "path": "shaders/to_sort/bomb/explosion/smoke.gdshader",
+      "sha256": "31555fa7390d14bca9d7a699e1fa952526a6db067a8939477fa7bc417857f766"
+    },
+    {
+      "path": "shaders/to_sort/bomb/flame_shape.gdshader",
+      "sha256": "2624b8d911f480d9da105b58adc1a69b3ffc7652af5f86c15102d3c68878ef73"
+    },
+    {
+      "path": "shaders/to_sort/shaders/glow.gdshader",
+      "sha256": "748dd3770b3be7a4e80fa108335cc0a7376d24d6ddb3ca3fc940f1dfd026a40f"
+    },
+    {
+      "path": "shaders/to_sort/shaders/ivy/leaves_wind.gdshader",
+      "sha256": "164c72cc11e81eb91eb66fb6de5dce2878950db3f6b92a52b67c275570ff18eb"
+    },
+    {
+      "path": "shaders/to_sort/shaders/puddle.gdshader",
+      "sha256": "1b4a5cffa844ec1937ddf695fceb5e0045ddd46e9820f6da1d2314f4cb1b5f04"
+    },
+    {
+      "path": "shaders/to_sort/shaders/shadow.gdshader",
+      "sha256": "5ebf3e36ece37beede1e8fef6e0898623244b32980afd4d98fb5815f19932f19"
+    },
+    {
+      "path": "shaders/to_sort/shaders/vignette.gdshader",
+      "sha256": "1c911fc76c0f1b571911ea7f7e5090912c325c2069775c21f649e385c067a19e"
+    },
+    {
+      "path": "shaders/to_sort/shaders/wind_center.gdshader",
+      "sha256": "8e1066423a74f4317378051f075ed66a30b0edb9fcb68e0bb5a6411661e43c2a"
+    },
+    {
+      "path": "shaders/viewer/card/card.gdshader",
+      "sha256": "330260ea72c9839d232ff5233f3a2078e8e16d094c728daaf5cdbc1b5b8318b3"
+    }
+  ]
+}

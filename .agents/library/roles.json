@@ -1,0 +1,242 @@
+[
+  {
+    "name": "accessibility-specialist",
+    "description": "Accessibility standards and assistive features — remapping, text scaling, colorblind modes, screen reader support.",
+    "source": ".claude/agents/accessibility-specialist.md",
+    "sha256": "a2204860e30e5a1cb06d3be231897a40eb0bf76706fb3235b347604ef4114dd3"
+  },
+  {
+    "name": "ai-programmer",
+    "description": "Implements game AI — behavior trees, state machines, pathfinding, perception, decision-making, NPC and enemy behavior, AI debugging.",
+    "source": ".claude/agents/ai-programmer.md",
+    "sha256": "6217559110fac303cd8be9e207366c24e30a368fbc7e18138213f8c4cf086a82"
+  },
+  {
+    "name": "analytics-engineer",
+    "description": "Telemetry and analytics — event tracking, player behavior, A/B test frameworks, dashboard specification, data pipelines.",
+    "source": ".claude/agents/analytics-engineer.md",
+    "sha256": "6faca760f7580b56c0ed512a51413c24c6e9a04698570461784a350d01d5b314"
+  },
+  {
+    "name": "art-director",
+    "description": "Owns visual identity — style guides, art bible, asset standards, color palettes, UI visual direction.",
+    "source": ".claude/agents/art-director.md",
+    "sha256": "830cc883093306efc4230d74b094b5d413219cf76b9fec79e977ff527cebee96"
+  },
+  {
+    "name": "asset-pipeline-manager",
+    "description": "UOMD asset pipeline owner — naming, IDs, metadata, provenance, versioning, Gemini-generated asset staging and promotion.",
+    "source": ".claude/agents/asset-pipeline-manager.md",
+    "sha256": "9bdff827d95f443faf3028c040cbf667f1e3604d2989fa62f5f048d7345e9be2"
+  },
+  {
+    "name": "audio-director",
+    "description": "Owns sonic identity — music direction, sound palette, audio implementation strategy, mix balance.",
+    "source": ".claude/agents/audio-director.md",
+    "sha256": "a528e1660bc5167e5216153fd9690175a50856441dbdff5519aafc358c125130"
+  },
+  {
+    "name": "community-manager",
+    "description": "Player-facing communication — patch notes, social posts, community updates, feedback collection, player bug triage, crisis communication.",
+    "source": ".claude/agents/community-manager.md",
+    "sha256": "90e5fae930dcaf366d173cc2a2b92691284ad1f821f0251c5e9dbcb682da9ef4"
+  },
+  {
+    "name": "creative-director",
+    "description": "Highest creative authority — vision, tone, aesthetic direction. Use when a decision affects game identity or department leads deadlock.",
+    "source": ".claude/agents/creative-director.md",
+    "sha256": "9d504478b6dbd9570ee7e7a41e697248bc1e2d4716438b642cca638207ed98bd"
+  },
+  {
+    "name": "devops-engineer",
+    "description": "Build pipelines, CI/CD configuration, version control workflow, branching strategy, automated test pipelines, deployment infrastructure.",
+    "source": ".claude/agents/devops-engineer.md",
+    "sha256": "053a0fc24ebcbce0776459b7e3e6ee08622537d3d5157a4ce4f6d20516d25e61"
+  },
+  {
+    "name": "economy-designer",
+    "description": "Resource economies — loot tables, sink/faucet analysis, progression curve calibration, economic balance.",
+    "source": ".claude/agents/economy-designer.md",
+    "sha256": "ac3bdc68933c5f6c8fc25556c7b419cbce214612ef23feb0b72a3229a42003bc"
+  },
+  {
+    "name": "engine-programmer",
+    "description": "Core engine systems — rendering pipeline, physics, memory, resource loading, scene management, performance-critical framework code.",
+    "source": ".claude/agents/engine-programmer.md",
+    "sha256": "3ec785dedde198f605d176933c707f2d17359b62bb64d80d38293fae45b1dd27"
+  },
+  {
+    "name": "game-designer",
+    "description": "Mechanical and systems design — core loops, progression, combat, economy, player-facing rules. Mechanics-level questions.",
+    "source": ".claude/agents/game-designer.md",
+    "sha256": "3a48083a35c0535f3d3ad073dd3d804360d4beb42766d0b7719ee15706ea011f"
+  },
+  {
+    "name": "gameplay-programmer",
+    "description": "Implements designed mechanics as code — player systems, combat, interactive features, gameplay system code.",
+    "source": ".claude/agents/gameplay-programmer.md",
+    "sha256": "18715607db0a58133f7c3708cf71920a54f6b290a64195485cba05a17a31f003"
+  },
+  {
+    "name": "godot-csharp-specialist",
+    "description": "Godot 4 C# quality — .NET patterns, attribute-based exports, signal delegates, async patterns, type-safe node access.",
+    "source": ".claude/agents/godot-csharp-specialist.md",
+    "sha256": "1e01084016b84b77ccd4b42d9eff26a32d1e7b8fd344932cd241bddf9393276a"
+  },
+  {
+    "name": "godot-gdextension-specialist",
+    "description": "Native code integration with Godot — GDExtension API, godot-cpp and godot-rust bindings, custom node types, the native boundary.",
+    "source": ".claude/agents/godot-gdextension-specialist.md",
+    "sha256": "63b01db142aaacd9d62668f32cc7c814cc4e5bf6596ea06db2eb0766785277da"
+  },
+  {
+    "name": "godot-gdscript-specialist",
+    "description": "GDScript code quality — static typing enforcement, signal architecture, coroutine patterns, GDScript idioms, typed and performant.",
+    "source": ".claude/agents/godot-gdscript-specialist.md",
+    "sha256": "e9b7a3f31de988b39f90ad7fbcb1e78df30e432247a0b0fa8857550e42f4f2b9"
+  },
+  {
+    "name": "godot-shader-specialist",
+    "description": "Godot rendering customization — shading language, visual shaders, material setup, particle shaders, post-processing.",
+    "source": ".claude/agents/godot-shader-specialist.md",
+    "sha256": "2aad283035c42c3c41da91aa45b4e4d1004529018a53982a8834e29bcc112571"
+  },
+  {
+    "name": "godot-specialist",
+    "description": "Godot 4.7.2 specialist — node/scene architecture, signals, resources, 2D mobile UI, portrait presentation, GDScript patterns, cloud/headless validation.",
+    "source": ".claude/agents/godot-specialist.md",
+    "sha256": "907479431bfdc9f93909cc6a84f7bbdb952f4c3bf14f5c6f730b156718b33b17"
+  },
+  {
+    "name": "lead-programmer",
+    "description": "Lead programmer — code-level architecture, coding standards, code review, API design, refactoring strategy, assigning work to specialist programmers.",
+    "source": ".claude/agents/lead-programmer.md",
+    "sha256": "32443d4f51146886a893f192c7943951ccb8e6deab254d3c50899cf88c47cc34"
+  },
+  {
+    "name": "level-designer",
+    "description": "Spatial design for levels and areas — encounter layouts, pacing, difficulty, layout planning, environmental storytelling.",
+    "source": ".claude/agents/level-designer.md",
+    "sha256": "eac383bbaea1cd3bb08de4a278b78c5418e5981efe740d1d920ff99dafca06b2"
+  },
+  {
+    "name": "live-ops-designer",
+    "description": "Post-launch content — seasonal events, battle passes, content cadence, retention, engagement analytics. Keeps the game fresh.",
+    "source": ".claude/agents/live-ops-designer.md",
+    "sha256": "046a69f494164073a63da2ac2ccd0823add08f000696b467455e3e3a7937e7e7"
+  },
+  {
+    "name": "localization-lead",
+    "description": "Internationalization architecture — i18n system design, string extraction workflows, locale testing, locale-specific issues, translation pipeline.",
+    "source": ".claude/agents/localization-lead.md",
+    "sha256": "4ed7fa4950a998d8bf02738dd057bfea6965b5d9ea933342be0015f62d2967eb"
+  },
+  {
+    "name": "narrative-director",
+    "description": "Story architecture, world-building, character design, dialogue strategy. Narrative structure and direction rather than writing individual lines.",
+    "source": ".claude/agents/narrative-director.md",
+    "sha256": "47b976880df3362e6ebdd529087ba474d98a03a887f0692fe9bb9d6e88c7ae03"
+  },
+  {
+    "name": "network-programmer",
+    "description": "Multiplayer networking — state replication, lag compensation, matchmaking, network protocol, netcode and bandwidth optimization.",
+    "source": ".claude/agents/network-programmer.md",
+    "sha256": "1f00b56eca462d439cba776acc6f4027fb984aa6690946969331e3818b501550"
+  },
+  {
+    "name": "performance-analyst",
+    "description": "Performance analyst — profiling, bottlenecks, memory analysis, frame time investigation, recommends optimizations, tracks metrics over time.",
+    "source": ".claude/agents/performance-analyst.md",
+    "sha256": "06566117a159c4af56780ea0c4c0d6d080c11311d38f41e14914753ef0e83e82"
+  },
+  {
+    "name": "producer",
+    "description": "Production concerns — sprint planning, milestone tracking, risk, scope, cross-department coordination when multiple departments must synchronize.",
+    "source": ".claude/agents/producer.md",
+    "sha256": "b139423d12695a8add8e76682a7b738d60deb28a8bf7d962fb16dd03a23b4656"
+  },
+  {
+    "name": "prototyper",
+    "description": "Throwaway builds — concept prototypes after brainstorm to test an idea is fun before GDDs; vertical slices pre-production. Speed over standards.",
+    "source": ".claude/agents/prototyper.md",
+    "sha256": "100b36232fd07bd8dceecab8b5d6c1146d82c5781573b2f4bfdaa82be1aadf8b"
+  },
+  {
+    "name": "qa-lead",
+    "description": "Test strategy and process — test plan creation, bug severity assessment, regression planning, release quality gates, readiness evaluation.",
+    "source": ".claude/agents/qa-lead.md",
+    "sha256": "5d934ac04710f1ccc4988dc5d75fb4e77e7ef63c2e704151eb08384b7204f27a"
+  },
+  {
+    "name": "qa-tester",
+    "description": "Writes test cases, bug reports, and checklists — test case generation, regression checklist creation, execution documentation.",
+    "source": ".claude/agents/qa-tester.md",
+    "sha256": "35621001a550b05d0c426bcc994266b523e3659e3b9ecc560937f2807d0ce855"
+  },
+  {
+    "name": "release-manager",
+    "description": "Release pipeline — certification checklists, store submissions and page prep, platform requirements, version numbering, release-day coordination.",
+    "source": ".claude/agents/release-manager.md",
+    "sha256": "9d30a1391013028f269631a66488d7e9fa819eb45e5c7f307b7cf3d3b322c1e8"
+  },
+  {
+    "name": "security-engineer",
+    "description": "Protects against cheating, exploits, breaches — anti-cheat measures, secure save data and network comms, player privacy compliance.",
+    "source": ".claude/agents/security-engineer.md",
+    "sha256": "221a50a634824220a5756751648699786ab2f5d721adbfc0b8621b115ffddc6a"
+  },
+  {
+    "name": "sound-designer",
+    "description": "SFX specifications and spec sheets — audio event documentation, mixing parameters, sound category definitions.",
+    "source": ".claude/agents/sound-designer.md",
+    "sha256": "32660339f7a71d9425572ae8e61da6c8f117a50e2fc1e47db9424050488d154e"
+  },
+  {
+    "name": "systems-designer",
+    "description": "Detailed subsystem mechanics — combat formulas, progression curves, crafting recipes, status effect interactions, mathematical modeling of a mechanic.",
+    "source": ".claude/agents/systems-designer.md",
+    "sha256": "700de6b7abb81d43f675fd3a00013488729d49faa5f621bfc2b0f5d018145a0f"
+  },
+  {
+    "name": "technical-artist",
+    "description": "Technical artist bridging art and engineering — shaders, VFX, rendering optimization, art pipeline tools, art-to-engine issues.",
+    "source": ".claude/agents/technical-artist.md",
+    "sha256": "7ebc0cdc2ad6b8742f7b1682b6f83d1755a2d29e334e4ca7980703bd134c8266"
+  },
+  {
+    "name": "technical-director",
+    "description": "High-level technical decisions — engine architecture, technology choices, performance strategy, technical risk, cross-system conflicts.",
+    "source": ".claude/agents/technical-director.md",
+    "sha256": "4cd2330565ebe3aa0edc0021f86af9e5e7762b7edb64f720910e55ede1458c41"
+  },
+  {
+    "name": "tools-programmer",
+    "description": "Internal dev tools — editor extensions, content authoring tools, debug utilities, pipeline automation, editor workflow.",
+    "source": ".claude/agents/tools-programmer.md",
+    "sha256": "43c1111f81aa79dcb62258f16bf21d40ea9b04599c1c4136700c0e1b68c7709c"
+  },
+  {
+    "name": "ui-programmer",
+    "description": "Implements user interface systems — menus, HUDs, inventory screens, dialogue boxes, UI framework code, screen flow.",
+    "source": ".claude/agents/ui-programmer.md",
+    "sha256": "186fb7cf4ddbae9e525780eac688ce21857cfd9cf1c078b75a39ff4d91a3c369"
+  },
+  {
+    "name": "ux-designer",
+    "description": "User experience flows, interaction design, information architecture — user flow mapping, interaction pattern design, onboarding, accessibility requirements.",
+    "source": ".claude/agents/ux-designer.md",
+    "sha256": "41d01d1d474b535aca48f358af0c379836a27221f4b778f2c9dbcc0977112d15"
+  },
+  {
+    "name": "world-builder",
+    "description": "World builder for lore — factions, cultures, history, geography, ecology, world rules. Faction design, lore consistency checks.",
+    "source": ".claude/agents/world-builder.md",
+    "sha256": "bd75e09bb27dd026097fe763bb7d9535a7bb3f1f5768926e1b2c7e224ff6257c"
+  },
+  {
+    "name": "writer",
+    "description": "Writer of player-facing text — dialogue, lore entries, item and ability descriptions, environmental text.",
+    "source": ".claude/agents/writer.md",
+    "sha256": "9a7465efdcec1abe47d4d867e0b8dea036440d09e5a429439fa2ff72e755c180"
+  }
+]

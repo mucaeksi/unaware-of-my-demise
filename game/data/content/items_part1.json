@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "pack_id": "unaware_of_my_demise.part1.items.v1",
+  "game_title": "Unaware of My Demise",
+  "items": [
+    {
+      "item_id": "first_oath_invitation",
+      "name_en": "First Oath Invitation",
+      "kind": "recruit_selector",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_first_oath_invitation",
+      "stack_cap": 1,
+      "xp_value": null,
+      "description_en": "Choose one eligible permanent 4★ character once.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": true
+    },
+    {
+      "item_id": "torn_chronicle_page",
+      "name_en": "Torn Chronicle Page",
+      "kind": "character_xp",
+      "rarity": 3,
+      "brand_mark_id": "mark_items_torn_chronicle_page",
+      "stack_cap": 9999,
+      "xp_value": 100,
+      "description_en": "Grants 100 character XP.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": true
+    },
+    {
+      "item_id": "bound_chronicle",
+      "name_en": "Bound Chronicle",
+      "kind": "character_xp",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_bound_chronicle",
+      "stack_cap": 9999,
+      "xp_value": 500,
+      "description_en": "Grants 500 character XP.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": true
+    },
+    {
+      "item_id": "illuminated_chronicle",
+      "name_en": "Illuminated Chronicle",
+      "kind": "character_xp",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_illuminated_chronicle",
+      "stack_cap": 9999,
+      "xp_value": 2000,
+      "description_en": "Grants 2,000 character XP.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": true
+    },
+    {
+      "item_id": "iron_oath_seal",
+      "name_en": "Iron Oath Seal",
+      "kind": "ascension",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_iron_oath_seal",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Character ascension material for level 6–10 and later tiers.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": false
+    },
+    {
+      "item_id": "alchemy_core",
+      "name_en": "Alchemy Core",
+      "kind": "ascension",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_alchemy_core",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Character ascension material for level 11–15.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": false
+    },
+    {
+      "item_id": "bellglass_shard",
+      "name_en": "Bellglass Shard",
+      "kind": "ascension",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_bellglass_shard",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Character ascension material for level 16–20.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": false
+    },
+    {
+      "item_id": "blacksmith_rivet",
+      "name_en": "Blacksmith Rivet",
+      "kind": "equipment_xp",
+      "rarity": 3,
+      "brand_mark_id": "mark_items_blacksmith_rivet",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Enhances weapons and armor at five-level milestones.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": true
+    },
+    {
+      "item_id": "forge_dust",
+      "name_en": "Forge Dust",
+      "kind": "crafting",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_forge_dust",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Weapon/armor disassembly and blacksmith crafting resource.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": false
+    },
+    {
+      "item_id": "tactical_notes",
+      "name_en": "Tactical Notes",
+      "kind": "skill_rank",
+      "rarity": 3,
+      "brand_mark_id": "mark_items_tactical_notes",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Raises Active skill rank.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": true
+    },
+    {
+      "item_id": "hymn_leaves",
+      "name_en": "Hymn Leaves",
+      "kind": "skill_rank",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_hymn_leaves",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Raises Passive or Ultimate skill rank.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": true
+    },
+    {
+      "item_id": "memory_shard",
+      "name_en": "Memory Shard",
+      "kind": "duplicate_progression",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_memory_shard",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Character-specific duplicate progression material.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": false
+    },
+    {
+      "item_id": "universal_memory_shard",
+      "name_en": "Universal Memory Shard",
+      "kind": "duplicate_progression",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_universal_memory_shard",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Flexible duplicate progression material.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": false
+    },
+    {
+      "item_id": "reliquary_medal",
+      "name_en": "Reliquary Medal",
+      "kind": "boss_shop",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_reliquary_medal",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Boss and event exchange material.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": false
+    },
+    {
+      "item_id": "t3_charm_blueprint",
+      "name_en": "T3 Accessory Blueprint",
+      "kind": "crafting",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_t3_charm_blueprint",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Blueprint for Tier 3 accessories and armor.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": false
+    },
+    {
+      "item_id": "sun_eclipse_token",
+      "name_en": "Sun-Eclipse Event Token",
+      "kind": "event_exchange",
+      "rarity": 4,
+      "brand_mark_id": "mark_items_sun_eclipse_token",
+      "stack_cap": 9999,
+      "xp_value": null,
+      "description_en": "Limited-cycle event exchange token.",
+      "sources": [
+        "story",
+        "12_hour_missions",
+        "resource_hunts",
+        "event_rewards"
+      ],
+      "consumable": true
+    },
+    {
+      "item_id": "unwritten_hour_cinder",
+      "name_en": "Cinder of the Unwritten Hour",
+      "kind": "accessory_reroll_token",
+      "rarity": 5,
+      "brand_mark_id": "mark_items_unwritten_hour_cinder",
+      "stack_cap": 999,
+      "description_en": "A cold cinder used to reroll accessory substats without changing the main stat.",
+      "sources": [
+        "boss_first_clear",
+        "three_day_event",
+        "rare_story_drop"
+      ],
+      "consumable": true
+    },
+    {
+      "item_id": "weapon_tempering_xp",
+      "name_en": "Weapon Tempering XP",
+      "kind": "weapon_xp_virtual_resource",
+      "rarity": null,
+      "brand_mark_id": "mark_items_weapon_tempering_xp",
+      "stack_cap": 999999,
+      "description_en": "Account inventory value granted by dismantling 3★/4★ weapons.",
+      "sources": [
+        "weapon_dismantle"
+      ],
+      "consumable": false
+    }
+  ],
+  "currency_references": [
+    {
+      "item_id": "eclipse_token",
+      "name_en": "Eclipse Token",
+      "kind": "currency_reference",
+      "brand_mark_id": "mark_currencies_eclipse_token",
+      "authoritative_source": "content/economy_part1.json",
+      "wallet_owner": "server"
+    },
+    {
+      "item_id": "fates_thread",
+      "name_en": "Fate's Thread",
+      "kind": "currency_reference",
+      "brand_mark_id": "mark_currencies_fates_thread",
+      "authoritative_source": "content/economy_part1.json",
+      "wallet_owner": "server"
+    },
+    {
+      "item_id": "silver_crowns",
+      "name_en": "Silver Crowns",
+      "kind": "currency_reference",
+      "brand_mark_id": "mark_currencies_silver_crowns",
+      "authoritative_source": "content/economy_part1.json",
+      "wallet_owner": "server"
+    },
+    {
+      "item_id": "ration",
+      "name_en": "Ration",
+      "kind": "currency_reference",
+      "brand_mark_id": "mark_currencies_ration",
+      "authoritative_source": "content/economy_part1.json",
+      "wallet_owner": "server"
+    }
+  ],
+  "progression_rules": {
+    "character_xp": {
+      "torn_chronicle_page": 100,
+      "bound_chronicle": 500,
+      "illuminated_chronicle": 2000
+    },
+    "dismantle_resource_id": "weapon_tempering_xp",
+    "reroll_token_id": "unwritten_hour_cinder"
+  }
+}

@@ -1,0 +1,2647 @@
+{
+  "schema_version": 1,
+  "pack_id": "part1_character_visuals",
+  "game_title": "Unaware of My Demise",
+  "visual_style": "painted anime VN busts plus low-memory chibi battle sprites",
+  "asset_status_note": "Briefs are ready; no generated raster files are included yet.",
+  "characters": [
+    {
+      "id": "mahmut",
+      "name": "Mahmut",
+      "gender": "male",
+      "age": 28,
+      "rarity": 5,
+      "element": "Stone",
+      "role": "tank_bruiser",
+      "acquisition": "free_start",
+      "banner_id": null,
+      "mildly_open_costume": false,
+      "silhouette": "tall weathered knight, dark messy hair and stubble, broad shield profile, tattered oxblood travel cloak",
+      "outfit": "dark worn half-plate; the Crown Guard star remains on the breastplate but the crown above it is hammered away, leaving an empty socket; repaired heater shield, scarred gloves",
+      "weapon": "long arming sword and heater shield",
+      "palette": [
+        "dark steel",
+        "oxblood",
+        "ash"
+      ],
+      "expressions": [
+        "watchful",
+        "dry humor",
+        "protective resolve"
+      ],
+      "story_nodes": [
+        "1-1",
+        "2-5",
+        "5-5",
+        "7-5"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/mahmut/model_sheet_v001.png",
+        "vn_bust": "assets/characters/mahmut/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/mahmut/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/mahmut_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_mahmut",
+      "brand_mark_file": "assets/marks/characters/mark_character_mahmut_v001.svg",
+      "signature_weapon_id": "weapon_mahmut_signature",
+      "weapon_brand_mark_id": "mark_weapon_mahmut_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_mahmut_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_mahmut_basic_oathless_cut",
+        "mark_skill_mahmut_active_broken_crest_guard",
+        "mark_skill_mahmut_passive_a_knight_s_debt",
+        "mark_skill_mahmut_ultimate_last_wall_at_dusk"
+      ]
+    },
+    {
+      "id": "fadyme",
+      "name": "Fadyme",
+      "gender": "female",
+      "age": 22,
+      "rarity": 5,
+      "element": "Veil",
+      "role": "support_dps",
+      "acquisition": "free_start",
+      "banner_id": null,
+      "mildly_open_costume": false,
+      "silhouette": "slender adult heir, pale ash-blonde hair, violet eyes, deep hood with a broken silver crown pin at the clasp, layered travel mantle",
+      "outfit": "high-collar black dress with plum and silver-lilac embroidery, deep plum hooded wool mantle, white scarf, thin gloves, fading embroidery",
+      "weapon": "silver bell focus",
+      "palette": [
+        "plum",
+        "silver",
+        "cold lilac"
+      ],
+      "expressions": [
+        "composed smile",
+        "quiet pain",
+        "honest fear"
+      ],
+      "story_nodes": [
+        "1-1",
+        "3-3",
+        "4-3",
+        "5-4",
+        "7-5"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/fadyme/model_sheet_v001.png",
+        "vn_bust": "assets/characters/fadyme/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/fadyme/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/fadyme_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_fadyme",
+      "brand_mark_file": "assets/marks/characters/mark_character_fadyme_v001.svg",
+      "signature_weapon_id": "weapon_fadyme_signature",
+      "weapon_brand_mark_id": "mark_weapon_fadyme_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_fadyme_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_fadyme_basic_veilglass_thorn",
+        "mark_skill_fadyme_active_borrowed_hour",
+        "mark_skill_fadyme_passive_a_smile_kept",
+        "mark_skill_fadyme_ultimate_the_bell_that_forgets"
+      ]
+    },
+    {
+      "id": "kera_voss",
+      "name": "Kera Voss",
+      "gender": "female",
+      "age": 20,
+      "rarity": 4,
+      "element": "Ember",
+      "role": "alchemist_dps",
+      "acquisition": "gacha",
+      "banner_id": "oath_01_aveline",
+      "mildly_open_costume": false,
+      "silhouette": "petite adult guild alchemist, goggles and flask belt",
+      "outfit": "knee-length work coat-apron, fitted sleeves, sealed glass vials",
+      "weapon": "brass hand mortar and alchemy flasks",
+      "palette": [
+        "ember orange",
+        "dark brown",
+        "brass"
+      ],
+      "expressions": [
+        "tsundere scowl",
+        "focused calculation",
+        "proud grin"
+      ],
+      "story_nodes": [
+        "1-2",
+        "1-3",
+        "3-2",
+        "4-2",
+        "4-5",
+        "7-3"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/kera_voss/model_sheet_v001.png",
+        "vn_bust": "assets/characters/kera_voss/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/kera_voss/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/kera_voss_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_kera_voss",
+      "brand_mark_file": "assets/marks/characters/mark_character_kera_voss_v001.svg",
+      "signature_weapon_id": "weapon_kera_voss_signature",
+      "weapon_brand_mark_id": "mark_weapon_kera_voss_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_kera_voss_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_kera_voss_basic_flask_flick",
+        "mark_skill_kera_voss_active_cinder_tonic",
+        "mark_skill_kera_voss_passive_measure_twice",
+        "mark_skill_kera_voss_ultimate_redoubt_reaction"
+      ]
+    },
+    {
+      "id": "brin_alder",
+      "name": "Brin Alder",
+      "gender": "female",
+      "age": 23,
+      "rarity": 4,
+      "element": "Stone",
+      "role": "tank",
+      "acquisition": "free_story_recruit_and_banner",
+      "banner_id": "oath_01_aveline",
+      "mildly_open_costume": false,
+      "silhouette": "compact sturdy adult forester, broad axe-and-buckler read",
+      "outfit": "fur-collar gambeson, thick gloves, heavy belt and boot guards",
+      "weapon": "hand axe and small tower buckler",
+      "palette": [
+        "pine",
+        "iron",
+        "cream"
+      ],
+      "expressions": [
+        "quiet focus",
+        "protective concern",
+        "small warm smile"
+      ],
+      "story_nodes": [
+        "1-2",
+        "7-2"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/brin_alder/model_sheet_v001.png",
+        "vn_bust": "assets/characters/brin_alder/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/brin_alder/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/brin_alder_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_brin_alder",
+      "brand_mark_file": "assets/marks/characters/mark_character_brin_alder_v001.svg",
+      "signature_weapon_id": "weapon_brin_alder_signature",
+      "weapon_brand_mark_id": "mark_weapon_brin_alder_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_brin_alder_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_brin_alder_basic_rootsplitter",
+        "mark_skill_brin_alder_active_oakbrace",
+        "mark_skill_brin_alder_passive_hold_the_gate",
+        "mark_skill_brin_alder_ultimate_alderwall"
+      ]
+    },
+    {
+      "id": "nixie_vale",
+      "name": "Nixie Vale",
+      "gender": "female",
+      "age": 19,
+      "rarity": 4,
+      "element": "Gale",
+      "role": "ranged_dps",
+      "acquisition": "free_story_recruit_and_banner",
+      "banner_id": "oath_02_sable",
+      "mildly_open_costume": false,
+      "silhouette": "petite adult road scout, hood and map pins",
+      "outfit": "hooded wool cape, layered tunic, fitted riding trousers, trail knife",
+      "weapon": "shortbow and three-part quiver",
+      "palette": [
+        "teal",
+        "ochre",
+        "charcoal"
+      ],
+      "expressions": [
+        "genki grin",
+        "alert listening",
+        "sudden seriousness"
+      ],
+      "story_nodes": [
+        "1-2",
+        "1-4",
+        "2-5",
+        "3-1",
+        "7-1"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/nixie_vale/model_sheet_v001.png",
+        "vn_bust": "assets/characters/nixie_vale/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/nixie_vale/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/nixie_vale_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_nixie_vale",
+      "brand_mark_file": "assets/marks/characters/mark_character_nixie_vale_v001.svg",
+      "signature_weapon_id": "weapon_nixie_vale_signature",
+      "weapon_brand_mark_id": "mark_weapon_nixie_vale_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_nixie_vale_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_nixie_vale_basic_windneedle",
+        "mark_skill_nixie_vale_active_crossdraft_shot",
+        "mark_skill_nixie_vale_passive_trail_mark",
+        "mark_skill_nixie_vale_ultimate_hawk_over_the_pass"
+      ]
+    },
+    {
+      "id": "sister_aveline",
+      "name": "Sister Aveline",
+      "gender": "female",
+      "age": 26,
+      "rarity": 5,
+      "element": "Dawn",
+      "role": "healer",
+      "acquisition": "limited_banner",
+      "banner_id": "oath_01_aveline",
+      "mildly_open_costume": true,
+      "silhouette": "adult field nun, lantern staff and long mantle",
+      "outfit": "ivory surcoat, opaque travel dress, small collar opening, reinforced boots",
+      "weapon": "reliquary staff and sun-disc",
+      "palette": [
+        "ivory",
+        "muted gold",
+        "wine red"
+      ],
+      "expressions": [
+        "compassionate calm",
+        "firm rebuke",
+        "prayerful resolve"
+      ],
+      "story_nodes": [
+        "2-2",
+        "2-4",
+        "6-2",
+        "7-3"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/sister_aveline/model_sheet_v001.png",
+        "vn_bust": "assets/characters/sister_aveline/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/sister_aveline/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/sister_aveline_weapon_v001.webp",
+        "banner_cutout": "assets/banners/oath_01_aveline_cutout_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_sister_aveline",
+      "brand_mark_file": "assets/marks/characters/mark_character_sister_aveline_v001.svg",
+      "signature_weapon_id": "weapon_aveline_last_vigil",
+      "weapon_brand_mark_id": "mark_weapon_aveline_last_vigil",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_aveline_last_vigil_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_sister_aveline_basic_mercy_staff",
+        "mark_skill_sister_aveline_active_quiet_benediction",
+        "mark_skill_sister_aveline_passive_candle_remains",
+        "mark_skill_sister_aveline_ultimate_matins_at_the_last_door"
+      ]
+    },
+    {
+      "id": "sable_wren",
+      "name": "Sable Wren",
+      "gender": "female",
+      "age": 21,
+      "rarity": 5,
+      "element": "Veil",
+      "role": "assassin_dps",
+      "acquisition": "limited_banner",
+      "banner_id": "oath_02_sable",
+      "mildly_open_costume": true,
+      "silhouette": "adult shadow courier, angled short cloak, twin-blade line",
+      "outfit": "opaque fitted gambeson, one bare shoulder under a short cloak, split overskirt over shorts",
+      "weapon": "narrow twin blades and message tube",
+      "palette": [
+        "ink black",
+        "steel blue",
+        "smoke"
+      ],
+      "expressions": [
+        "detached appraisal",
+        "sharp amusement",
+        "hidden remorse"
+      ],
+      "story_nodes": [
+        "5-3",
+        "5-5",
+        "6-1",
+        "7-4"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/sable_wren/model_sheet_v001.png",
+        "vn_bust": "assets/characters/sable_wren/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/sable_wren/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/sable_wren_weapon_v001.webp",
+        "banner_cutout": "assets/banners/oath_02_sable_cutout_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_sable_wren",
+      "brand_mark_file": "assets/marks/characters/mark_character_sable_wren_v001.svg",
+      "signature_weapon_id": "weapon_sable_broken_bell",
+      "weapon_brand_mark_id": "mark_weapon_sable_broken_bell",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_sable_broken_bell_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_sable_wren_basic_wren_s_point",
+        "mark_skill_sable_wren_active_cut_the_thread",
+        "mark_skill_sable_wren_passive_no_footprint",
+        "mark_skill_sable_wren_ultimate_name_taken_in_silence"
+      ]
+    },
+    {
+      "id": "tilda_fen",
+      "name": "Tilda Fen",
+      "gender": "female",
+      "age": 24,
+      "rarity": 4,
+      "element": "Tide",
+      "role": "healer",
+      "acquisition": "gacha",
+      "banner_id": "oath_02_sable",
+      "mildly_open_costume": false,
+      "silhouette": "adult village medic, satchel and staff",
+      "outfit": "layered blue-gray apron dress, full sleeves, weatherproof shawl, bandage pouch",
+      "weapon": "short staff and herb box",
+      "palette": [
+        "tide blue",
+        "cream",
+        "gray"
+      ],
+      "expressions": [
+        "gentle focus",
+        "concern",
+        "reassuring smile"
+      ],
+      "story_nodes": [
+        "4-2",
+        "4-5",
+        "6-3",
+        "7-4"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/tilda_fen/model_sheet_v001.png",
+        "vn_bust": "assets/characters/tilda_fen/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/tilda_fen/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/tilda_fen_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_tilda_fen",
+      "brand_mark_file": "assets/marks/characters/mark_character_tilda_fen_v001.svg",
+      "signature_weapon_id": "weapon_tilda_fen_signature",
+      "weapon_brand_mark_id": "mark_weapon_tilda_fen_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_tilda_fen_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_tilda_fen_basic_reedstaff_tap",
+        "mark_skill_tilda_fen_active_marsh_poultice",
+        "mark_skill_tilda_fen_passive_patient_hands",
+        "mark_skill_tilda_fen_ultimate_rain_on_the_salt_road"
+      ]
+    },
+    {
+      "id": "rikka_ember",
+      "name": "Rikka Ember",
+      "gender": "female",
+      "age": 18,
+      "rarity": 4,
+      "element": "Ember",
+      "role": "bruiser_dps",
+      "acquisition": "gacha",
+      "banner_id": "oath_03_nara",
+      "mildly_open_costume": false,
+      "silhouette": "petite adult kiln guard, oversized proportional hammer",
+      "outfit": "padded brigandine, scarf, elbow plates and practical boots",
+      "weapon": "forge hammer",
+      "palette": [
+        "rust red",
+        "charcoal",
+        "copper"
+      ],
+      "expressions": [
+        "fierce smile",
+        "competitive pout",
+        "earnest worry"
+      ],
+      "story_nodes": [
+        "5-3",
+        "5-5",
+        "7-2"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/rikka_ember/model_sheet_v001.png",
+        "vn_bust": "assets/characters/rikka_ember/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/rikka_ember/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/rikka_ember_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_rikka_ember",
+      "brand_mark_file": "assets/marks/characters/mark_character_rikka_ember_v001.svg",
+      "signature_weapon_id": "weapon_rikka_ember_signature",
+      "weapon_brand_mark_id": "mark_weapon_rikka_ember_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_rikka_ember_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_rikka_ember_basic_bellpoint_thrust",
+        "mark_skill_rikka_ember_active_furnace_lunge",
+        "mark_skill_rikka_ember_passive_marching_heat",
+        "mark_skill_rikka_ember_ultimate_procession_of_sparks"
+      ]
+    },
+    {
+      "id": "mirel_quill",
+      "name": "Mirel Quill",
+      "gender": "female",
+      "age": 25,
+      "rarity": 5,
+      "element": "Dawn",
+      "role": "buffer",
+      "acquisition": "limited_banner",
+      "banner_id": "oath_04_mirel",
+      "mildly_open_costume": true,
+      "silhouette": "adult scholar, ledger harness and astrolabe folio",
+      "outfit": "layered robe, opaque high-neck underlayer, sleeveless outer vest, sleeve guards",
+      "weapon": "brass astrolabe folio and stylus dagger",
+      "palette": [
+        "vellum",
+        "midnight blue",
+        "antique gold"
+      ],
+      "expressions": [
+        "wry observation",
+        "scholarly delight",
+        "quiet alarm"
+      ],
+      "story_nodes": [
+        "2-3",
+        "2-4",
+        "6-2",
+        "7-3"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/mirel_quill/model_sheet_v001.png",
+        "vn_bust": "assets/characters/mirel_quill/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/mirel_quill/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/mirel_quill_weapon_v001.webp",
+        "banner_cutout": "assets/banners/oath_04_mirel_cutout_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_mirel_quill",
+      "brand_mark_file": "assets/marks/characters/mark_character_mirel_quill_v001.svg",
+      "signature_weapon_id": "weapon_mirel_unwritten_ledger",
+      "weapon_brand_mark_id": "mark_weapon_mirel_unwritten_ledger",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_mirel_unwritten_ledger_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_mirel_quill_basic_inkline",
+        "mark_skill_mirel_quill_active_margin_note",
+        "mark_skill_mirel_quill_passive_corrected_record",
+        "mark_skill_mirel_quill_ultimate_decree_of_the_unfallen"
+      ]
+    },
+    {
+      "id": "odelia_pike",
+      "name": "Odelia Pike",
+      "gender": "female",
+      "age": 22,
+      "rarity": 4,
+      "element": "Tide",
+      "role": "debuff_archer",
+      "acquisition": "gacha",
+      "banner_id": "oath_03_nara",
+      "mildly_open_costume": false,
+      "silhouette": "adult marsh archer, long bow and reeds in braid",
+      "outfit": "waxed weather cloak, wrapped forearms, full leggings",
+      "weapon": "long hunting bow with fishbone fletching",
+      "palette": [
+        "marsh green",
+        "bone",
+        "mud brown"
+      ],
+      "expressions": [
+        "skeptical half-smile",
+        "patient aim",
+        "dry surprise"
+      ],
+      "story_nodes": [
+        "3-1",
+        "4-1",
+        "5-4",
+        "7-1"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/odelia_pike/model_sheet_v001.png",
+        "vn_bust": "assets/characters/odelia_pike/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/odelia_pike/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/odelia_pike_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_odelia_pike",
+      "brand_mark_file": "assets/marks/characters/mark_character_odelia_pike_v001.svg",
+      "signature_weapon_id": "weapon_odelia_pike_signature",
+      "weapon_brand_mark_id": "mark_weapon_odelia_pike_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_odelia_pike_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_odelia_pike_basic_saltmark_arrow",
+        "mark_skill_odelia_pike_active_undertow_pin",
+        "mark_skill_odelia_pike_passive_read_the_current",
+        "mark_skill_odelia_pike_ultimate_breakwater_volley"
+      ]
+    },
+    {
+      "id": "pippa_bell",
+      "name": "Pippa Bell",
+      "gender": "female",
+      "age": 20,
+      "rarity": 4,
+      "element": "Gale",
+      "role": "buffer_bard",
+      "acquisition": "gacha",
+      "banner_id": "oath_04_mirel",
+      "mildly_open_costume": false,
+      "silhouette": "petite adult traveling bard, bell charms and lute",
+      "outfit": "closed-neck wool tunic, patched skirt over leggings, weathered shoulder bag",
+      "weapon": "lute, sling and bell chimes",
+      "palette": [
+        "honey",
+        "moss",
+        "wood"
+      ],
+      "expressions": [
+        "open laugh",
+        "quick concern",
+        "quiet courage"
+      ],
+      "story_nodes": [
+        "3-4",
+        "7-3"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/pippa_bell/model_sheet_v001.png",
+        "vn_bust": "assets/characters/pippa_bell/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/pippa_bell/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/pippa_bell_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_pippa_bell",
+      "brand_mark_file": "assets/marks/characters/mark_character_pippa_bell_v001.svg",
+      "signature_weapon_id": "weapon_pippa_bell_signature",
+      "weapon_brand_mark_id": "mark_weapon_pippa_bell_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_pippa_bell_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_pippa_bell_basic_plucked_note",
+        "mark_skill_pippa_bell_active_rally_refrain",
+        "mark_skill_pippa_bell_passive_encore",
+        "mark_skill_pippa_bell_ultimate_a_song_for_the_long_road"
+      ]
+    },
+    {
+      "id": "nara_vell",
+      "name": "Nara Vell",
+      "gender": "female",
+      "age": 27,
+      "rarity": 5,
+      "element": "Stone",
+      "role": "tank_support",
+      "acquisition": "limited_banner",
+      "banner_id": "oath_03_nara",
+      "mildly_open_costume": true,
+      "silhouette": "adult fortress captain, glaive and broad mantle",
+      "outfit": "mail under sleeveless surcoat, reinforced waist belt, narrow collarbone opening, full leg armor",
+      "weapon": "long glaive and compact kite shield",
+      "palette": [
+        "slate",
+        "antique brass",
+        "blue"
+      ],
+      "expressions": [
+        "formal command",
+        "unwavering resolve",
+        "rare warmth"
+      ],
+      "story_nodes": [
+        "5-2",
+        "5-5",
+        "7-2"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/nara_vell/model_sheet_v001.png",
+        "vn_bust": "assets/characters/nara_vell/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/nara_vell/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/nara_vell_weapon_v001.webp",
+        "banner_cutout": "assets/banners/oath_03_nara_cutout_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_nara_vell",
+      "brand_mark_file": "assets/marks/characters/mark_character_nara_vell_v001.svg",
+      "signature_weapon_id": "weapon_nara_gatewarden_promise",
+      "weapon_brand_mark_id": "mark_weapon_nara_gatewarden_promise",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_nara_gatewarden_promise_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_nara_vell_basic_vellian_bash",
+        "mark_skill_nara_vell_active_shelter_angle",
+        "mark_skill_nara_vell_passive_familiar_footsteps",
+        "mark_skill_nara_vell_ultimate_the_narrow_gate"
+      ]
+    },
+    {
+      "id": "clem_marr",
+      "name": "Clem Marr",
+      "gender": "female",
+      "age": 19,
+      "rarity": 3,
+      "element": "Veil",
+      "role": "debuffer",
+      "acquisition": "standard_banner_pool",
+      "banner_id": null,
+      "mildly_open_costume": false,
+      "silhouette": "petite adult graveyard scribe, oversized hood and lantern",
+      "outfit": "hooded coat, sealed cuffs, full-length skirt over leggings, keys at the waist",
+      "weapon": "bone-handled lantern and short ritual knife",
+      "palette": [
+        "dust gray",
+        "faded lilac",
+        "iron"
+      ],
+      "expressions": [
+        "dry boredom",
+        "keen suspicion",
+        "brief alarm"
+      ],
+      "story_nodes": [
+        "4-3",
+        "6-1",
+        "7-3"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/clem_marr/model_sheet_v001.png",
+        "vn_bust": "assets/characters/clem_marr/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/clem_marr/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/clem_marr_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_clem_marr",
+      "brand_mark_file": "assets/marks/characters/mark_character_clem_marr_v001.svg",
+      "signature_weapon_id": "weapon_clem_marr_signature",
+      "weapon_brand_mark_id": "mark_weapon_clem_marr_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_clem_marr_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_clem_marr_basic_chalk_scratch",
+        "mark_skill_clem_marr_active_grave_index",
+        "mark_skill_clem_marr_passive_keep_the_names",
+        "mark_skill_clem_marr_ultimate_epitaph_in_reverse"
+      ]
+    },
+    {
+      "id": "vespera_wisp",
+      "name": "Vespera Wisp",
+      "gender": "female",
+      "age": 23,
+      "rarity": 5,
+      "element": "Veil",
+      "role": "mage_dps",
+      "acquisition": "limited_banner",
+      "banner_id": "oath_05_vespera",
+      "mildly_open_costume": false,
+      "silhouette": "adult veil mage, floating lantern and layered opaque silhouette",
+      "outfit": "opaque fitted bodice, high collar, layered skirt and closed shoulder cape",
+      "weapon": "floating glass lantern and focus ring",
+      "palette": [
+        "violet",
+        "silver",
+        "black"
+      ],
+      "expressions": [
+        "distant curiosity",
+        "knowing smile",
+        "sudden fear"
+      ],
+      "story_nodes": [
+        "6-3",
+        "6-5",
+        "7-4"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/vespera_wisp/model_sheet_v001.png",
+        "vn_bust": "assets/characters/vespera_wisp/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/vespera_wisp/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/vespera_wisp_weapon_v001.webp",
+        "banner_cutout": "assets/banners/oath_05_vespera_cutout_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_vespera_wisp",
+      "brand_mark_file": "assets/marks/characters/mark_character_vespera_wisp_v001.svg",
+      "signature_weapon_id": "weapon_vespera_last_hour",
+      "weapon_brand_mark_id": "mark_weapon_vespera_last_hour",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_vespera_last_hour_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_vespera_wisp_basic_wisp_spark",
+        "mark_skill_vespera_wisp_active_pale_orbit",
+        "mark_skill_vespera_wisp_passive_candle_eater",
+        "mark_skill_vespera_wisp_ultimate_procession_of_pale_lights"
+      ]
+    },
+    {
+      "id": "hana_birch",
+      "name": "Hana Birch",
+      "gender": "female",
+      "age": 18,
+      "rarity": 3,
+      "element": "Stone",
+      "role": "counter_dps",
+      "acquisition": "standard_banner_pool",
+      "banner_id": null,
+      "mildly_open_costume": false,
+      "silhouette": "petite adult hedge duelist, leaf-patch jacket and compact stance",
+      "outfit": "padded jacket, full trousers, stitched elbow and knee patches",
+      "weapon": "short staff made from a recurve bow",
+      "palette": [
+        "birch green",
+        "cream",
+        "bark brown"
+      ],
+      "expressions": [
+        "nervous courage",
+        "stubborn focus",
+        "relieved smile"
+      ],
+      "story_nodes": [
+        "6-2",
+        "6-4",
+        "7-4"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/hana_birch/model_sheet_v001.png",
+        "vn_bust": "assets/characters/hana_birch/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/hana_birch/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/hana_birch_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_hana_birch",
+      "brand_mark_file": "assets/marks/characters/mark_character_hana_birch_v001.svg",
+      "signature_weapon_id": "weapon_hana_birch_signature",
+      "weapon_brand_mark_id": "mark_weapon_hana_birch_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_hana_birch_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_hana_birch_basic_short_hatchet",
+        "mark_skill_hana_birch_active_set_the_snare",
+        "mark_skill_hana_birch_passive_still_as_bark",
+        "mark_skill_hana_birch_ultimate_birchline_ambush"
+      ]
+    },
+    {
+      "id": "thistle_roe",
+      "name": "Thistle Roe",
+      "gender": "female",
+      "age": 21,
+      "rarity": 4,
+      "element": "Gale",
+      "role": "healer_support",
+      "acquisition": "gacha",
+      "banner_id": "oath_05_vespera",
+      "mildly_open_costume": false,
+      "silhouette": "adult hedge healer, hood and thornwood crook",
+      "outfit": "layered wool hood, full sleeves, herb pouch and gaiters",
+      "weapon": "thornwood crook with seed charms",
+      "palette": [
+        "sage",
+        "brown",
+        "pale pink"
+      ],
+      "expressions": [
+        "encouraging smile",
+        "practical focus",
+        "soft worry"
+      ],
+      "story_nodes": [
+        "4-3",
+        "6-3",
+        "7-4"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/thistle_roe/model_sheet_v001.png",
+        "vn_bust": "assets/characters/thistle_roe/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/thistle_roe/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/thistle_roe_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_thistle_roe",
+      "brand_mark_file": "assets/marks/characters/mark_character_thistle_roe_v001.svg",
+      "signature_weapon_id": "weapon_thistle_roe_signature",
+      "weapon_brand_mark_id": "mark_weapon_thistle_roe_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_thistle_roe_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_thistle_roe_basic_seedshot",
+        "mark_skill_thistle_roe_active_windgrown_herb",
+        "mark_skill_thistle_roe_passive_shelter_leaves",
+        "mark_skill_thistle_roe_ultimate_garden_before_winter"
+      ]
+    },
+    {
+      "id": "iona_mist",
+      "name": "Iona Mist",
+      "gender": "female",
+      "age": 24,
+      "rarity": 4,
+      "element": "Tide",
+      "role": "healer",
+      "acquisition": "gacha",
+      "banner_id": "oath_05_vespera",
+      "mildly_open_costume": false,
+      "silhouette": "adult river apothecary, long coat and censer",
+      "outfit": "waterproof coat, scarf, gloves, simple scale apron",
+      "weapon": "tidal censer and glass ampoule",
+      "palette": [
+        "deep teal",
+        "pewter",
+        "mist"
+      ],
+      "expressions": [
+        "quiet reassurance",
+        "clinical focus",
+        "subtle relief"
+      ],
+      "story_nodes": [
+        "4-2",
+        "4-5",
+        "6-3",
+        "7-4"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/iona_mist/model_sheet_v001.png",
+        "vn_bust": "assets/characters/iona_mist/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/iona_mist/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/iona_mist_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_iona_mist",
+      "brand_mark_file": "assets/marks/characters/mark_character_iona_mist_v001.svg",
+      "signature_weapon_id": "weapon_iona_mist_signature",
+      "weapon_brand_mark_id": "mark_weapon_iona_mist_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_iona_mist_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_iona_mist_basic_mistlit_touch",
+        "mark_skill_iona_mist_active_fogbound_remedy",
+        "mark_skill_iona_mist_passive_lantern_watch",
+        "mark_skill_iona_mist_ultimate_safe_harbor_in_fog"
+      ]
+    },
+    {
+      "id": "jori_flint",
+      "name": "Jori Flint",
+      "gender": "female",
+      "age": 20,
+      "rarity": 3,
+      "element": "Ember",
+      "role": "guard",
+      "acquisition": "free_story_recruit",
+      "banner_id": null,
+      "mildly_open_costume": false,
+      "silhouette": "adult forge apprentice with compact shield profile",
+      "outfit": "padded vest, smith apron, knee guards, protective rolled sleeves",
+      "weapon": "compact forge shield and blunt hammer",
+      "palette": [
+        "soot black",
+        "copper",
+        "warm gray"
+      ],
+      "expressions": [
+        "earnest resolve",
+        "stubborn worry",
+        "proud grin"
+      ],
+      "story_nodes": [
+        "3-2",
+        "3-3",
+        "3-5",
+        "7-1"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/jori_flint/model_sheet_v001.png",
+        "vn_bust": "assets/characters/jori_flint/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/jori_flint/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/jori_flint_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_jori_flint",
+      "brand_mark_file": "assets/marks/characters/mark_character_jori_flint_v001.svg",
+      "signature_weapon_id": "weapon_jori_flint_signature",
+      "weapon_brand_mark_id": "mark_weapon_jori_flint_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_jori_flint_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_jori_flint_basic_hammer_tap",
+        "mark_skill_jori_flint_active_forgeguard",
+        "mark_skill_jori_flint_passive_hot_rivet",
+        "mark_skill_jori_flint_ultimate_furnace_door"
+      ]
+    },
+    {
+      "id": "marek_vane",
+      "name": "Marek Vane",
+      "gender": "male",
+      "age": 30,
+      "rarity": 4,
+      "element": "Gale",
+      "role": "control_buffer",
+      "acquisition": "gacha",
+      "banner_id": "oath_04_mirel",
+      "mildly_open_costume": false,
+      "silhouette": "adult wandering herald, long travel coat and banner pennant",
+      "outfit": "travel coat over mail, weathered scarf, quill tube and road bells",
+      "weapon": "short spear, signal horn and banner pennant",
+      "palette": [
+        "storm blue",
+        "brass",
+        "gray"
+      ],
+      "expressions": [
+        "warm reassurance",
+        "guarded memory",
+        "urgent command"
+      ],
+      "story_nodes": [
+        "5-1",
+        "5-5",
+        "7-2"
+      ],
+      "planned_files": {
+        "model_sheet": "assets/characters/marek_vane/model_sheet_v001.png",
+        "vn_bust": "assets/characters/marek_vane/vn_bust_v001.webp",
+        "battle_atlas": "assets/characters/marek_vane/battle_atlas_v001.webp",
+        "weapon": "assets/weapons/marek_vane_weapon_v001.webp"
+      },
+      "image_status": "prompt_ready",
+      "generated_file": null,
+      "brand_mark_id": "mark_character_marek_vane",
+      "brand_mark_file": "assets/marks/characters/mark_character_marek_vane_v001.svg",
+      "signature_weapon_id": "weapon_marek_vane_signature",
+      "weapon_brand_mark_id": "mark_weapon_marek_vane_signature",
+      "weapon_brand_mark_file": "assets/marks/weapons/mark_weapon_marek_vane_signature_v001.svg",
+      "asset_dimensions_px": {
+        "model_sheet_source": [
+          2048,
+          3072
+        ],
+        "vn_bust_source": [
+          1024,
+          1536
+        ],
+        "vn_bust_runtime": [
+          640,
+          960
+        ],
+        "expression_sheet_source": [
+          1536,
+          512
+        ],
+        "expression_icon_runtime": [
+          192,
+          192
+        ],
+        "battle_atlas_source": [
+          1024,
+          1024
+        ],
+        "battle_cell_source": [
+          256,
+          256
+        ],
+        "battle_cell_runtime": [
+          128,
+          128
+        ],
+        "weapon_illustration_source": [
+          1024,
+          1024
+        ],
+        "weapon_illustration_runtime": [
+          512,
+          512
+        ],
+        "ultimate_cut_in_source": [
+          1440,
+          2560
+        ],
+        "ultimate_cut_in_runtime": [
+          1080,
+          1920
+        ],
+        "profile_icon_source": [
+          512,
+          512
+        ],
+        "profile_icon_runtime": [
+          192,
+          192
+        ],
+        "character_mark_master": [
+          512,
+          512
+        ],
+        "character_mark_runtime": [
+          128,
+          128
+        ],
+        "character_mark_compact": [
+          64,
+          64
+        ],
+        "weapon_mark_master": [
+          512,
+          512
+        ],
+        "weapon_mark_runtime": [
+          128,
+          128
+        ],
+        "weapon_mark_compact": [
+          64,
+          64
+        ]
+      },
+      "skill_mark_ids": [
+        "mark_skill_marek_vane_basic_vane_s_measure",
+        "mark_skill_marek_vane_active_broken_meter",
+        "mark_skill_marek_vane_passive_watchman_s_rhythm",
+        "mark_skill_marek_vane_ultimate_march_without_a_banner"
+      ]
+    }
+  ]
+}

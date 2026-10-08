@@ -1,0 +1,37 @@
+{
+  "project": "Unaware of My Demise",
+  "assets": [
+    {
+      "asset_id": "UOMD-P1-FAD-CS-001",
+      "title": "Fadyme Canonical Character Sheet",
+      "png_path": "/mnt/data/uomd_pilot_fadyme/UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png",
+      "json_path": "/mnt/data/uomd_pilot_fadyme/UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.json",
+      "status": "pilot_preview",
+      "godot_ready_status": "approval_board_only"
+    },
+    {
+      "asset_id": "UOMD-P1-FAD-VNP-001",
+      "title": "Fadyme VN Portrait Expression Sheet",
+      "png_path": "/mnt/data/uomd_pilot_fadyme/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png",
+      "json_path": "/mnt/data/uomd_pilot_fadyme/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.json",
+      "status": "pilot_preview",
+      "godot_ready_status": "approval_board_only"
+    },
+    {
+      "asset_id": "UOMD-P1-FAD-CHB-001",
+      "title": "Fadyme Battle Chibi Style Guide",
+      "png_path": "/mnt/data/uomd_pilot_fadyme/UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png",
+      "json_path": "/mnt/data/uomd_pilot_fadyme/UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.json",
+      "status": "pilot_preview",
+      "godot_ready_status": "approval_board_only"
+    },
+    {
+      "asset_id": "UOMD-P1-FAD-UIP-001",
+      "title": "Fadyme UI Integration Preview",
+      "png_path": "/mnt/data/uomd_pilot_fadyme/UOMD_P1_Fadyme_UI_Integration_Preview_v001.png",
+      "json_path": "/mnt/data/uomd_pilot_fadyme/UOMD_P1_Fadyme_UI_Integration_Preview_v001.json",
+      "status": "pilot_preview",
+      "godot_ready_status": "approval_board_only"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "git_ref": "INDEX",
+  "summary": {
+    "protected_files": 55,
+    "locked_files": 26,
+    "runtime_json_files": 27,
+    "runtime_counts": {
+      "chapters": 7,
+      "story_order": 51,
+      "stages": 35,
+      "non_stage_scenes": 16,
+      "main_lines": 409,
+      "unique_main_lines": 409,
+      "characters": 20,
+      "visual_briefs": 20,
+      "character_story_parts": 76,
+      "character_voice_lines": 220
+    },
+    "narrative_inventory_entries": 558,
+    "actions": {
+      "ALREADY_MIGRATED": 26,
+      "EXCLUDE_SUBTREE": 2,
+      "INVENTORY_FOLDER": 68,
+      "LEAVE_IN_DRIVE": 300,
+      "MIGRATE": 163
+    },
+    "verified_transfer_targets": 189
+  },
+  "errors": [],
+  "warnings": [],
+  "date_utc": "2026-10-05",
+  "media": {
+    "png_decode_count": 12,
+    "audio_decode_count": 29,
+    "audio_total_seconds": 520.73,
+    "png_source_status_preserved": true,
+    "loop_offsets_and_sample_rates_verified": 4,
+    "jp_editor_review": "not performed; source DRAFT retained"
+  },
+  "scope": "Source-only Narrative migration; not runtime promotion, JP editorial review or device acceptance",
+  "authored_index_links": {
+    "checked": 528,
+    "missing": []
+  },
+  "secret_pattern_scan": "No high-confidence credential/private-key/bearer-URL patterns in transferred text sources"
+}

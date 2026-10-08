@@ -1,0 +1,30 @@
+{
+ "id": "bgm_battle_field",
+ "kind": "music",
+ "revision": "v002",
+ "status": "APPROVED",
+ "approved_by": "owner",
+ "approved_date": "2026-09-30",
+ "model": "lyria-3.5",
+ "file": "audio/music/bgm_battle_field/bgm_battle_field_v002_loop.ogg",
+ "original": "audio/music/bgm_battle_field/bgm_battle_field_v002_original.mp3",
+ "engine_loop": {
+  "loop": true,
+  "loop_offset_s": 16.7,
+  "loop_offset_samples": 736470,
+  "sample_rate": 44100
+ },
+ "structure": "Starts at the take's own beginning (plays once as intro), then loops the region after loop_offset forever; the last 3 s are pre-blended into the audio before loop_offset, so the jump is seamless.",
+ "file_length_s": 79.93,
+ "intro_from_original_s": 0.0,
+ "loop_region_original_s": [
+  16.7,
+  79.93
+ ],
+ "seam_jump": 0.0136,
+ "typical_step": 0.0096,
+ "pitch_shift_semitones": -2,
+ "key_est": "C minor",
+ "tempo_bpm": 129.2,
+ "note": "Loop is pitch-shifted -2 semitone(s) (ffmpeg rubberband); the _original.mp3 is the untouched Lyria take in its original key, so do not layer or cross-fade it with the loops."
+}

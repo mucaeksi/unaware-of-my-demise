@@ -1,0 +1,30 @@
+{
+ "id": "bgm_ch1_ash_forest_chaotic",
+ "kind": "music",
+ "revision": "v001",
+ "status": "APPROVED",
+ "approved_by": "owner",
+ "approved_date": "2026-09-30",
+ "model": "lyria-3.5",
+ "file": "audio/music/bgm_ch1_ash_forest/bgm_ch1_ash_forest_chaotic_v001_loop.ogg",
+ "original": "audio/music/bgm_ch1_ash_forest/bgm_ch1_ash_forest_chaotic_v001_original.mp3",
+ "engine_loop": {
+  "loop": true,
+  "loop_offset_s": 19.9575,
+  "loop_offset_samples": 880124,
+  "sample_rate": 44100
+ },
+ "structure": "Starts at the take's own beginning (plays once as intro), then loops the region after loop_offset forever; the last 3 s are pre-blended into the audio before loop_offset, so the jump is seamless.",
+ "file_length_s": 101.777,
+ "intro_from_original_s": 0.11,
+ "loop_region_original_s": [
+  20.07,
+  101.89
+ ],
+ "seam_jump": 0.0277,
+ "typical_step": 0.004,
+ "pitch_shift_semitones": 1,
+ "key_est": "E major",
+ "tempo_bpm": 66.3,
+ "note": "Loop is pitch-shifted +1 semitone(s) (ffmpeg rubberband); the _original.mp3 is the untouched Lyria take in its original key, so do not layer or cross-fade it with the loops."
+}

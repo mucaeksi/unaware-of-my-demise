@@ -1,0 +1,985 @@
+{
+  "schema_version": 1,
+  "status": "owner_requested_revision_v002",
+  "source": "docs/design/OPENING_TUTORIAL_REVISION_v006_2026-10-08.md",
+  "language": "en",
+  "voice_language": "ja",
+  "audio": "deferred",
+  "reward_policy": "no Ration, no drops, no story clear; presentation checkpoints only",
+  "chapters": [
+    {
+      "stage_id": "T-1",
+      "title_en": "The First Step",
+      "seed": 81008,
+      "enemies": [
+        {
+          "enemy_id": "bellbound_dead",
+          "count": 2
+        }
+      ],
+      "before": {
+        "scene_id": "tutorial_t1_before",
+        "title_en": "The First Step",
+        "lines": [
+          {
+            "line_id": "tutorial_t1_before_001",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "The last light lay between the trees. Their footsteps had almost found the same rhythm.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t1_before_002",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Keep to the stones. The mud gets deeper ahead.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_before_003",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "The stones have already claimed one boot.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_before_004",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Both boots are still with us.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_before_005",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "You have a comforting way of counting disasters.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_before_006",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "That one is loose. Give me your hand.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_before_007",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "For the stone, or for the whole road?",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_before_008",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "The stone first.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_before_009",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "She took his hand. On the other side, neither let go quite as promptly as the crossing required.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t1_before_010",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "There. An excellent rescue. Very little applause, unfortunately.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_before_011",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "We can live with that.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_before_012",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "Something scraped across the stones ahead. Mahmut turned before she could make another remark.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t1_before_013",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Two of them. Stay beside the wall.",
+            "emotion": "protective",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_before_014",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Beside it. Not behind you. I know the difference.",
+            "emotion": "determined",
+            "hold_seconds": 3.0
+          }
+        ],
+        "location_id": "forest_whispering_ash",
+        "presentation": {
+          "auto": true,
+          "speed": 1,
+          "speaker_pause_seconds": 1.0
+        },
+        "closing_hold_seconds": 3.5
+      },
+      "after": {
+        "scene_id": "tutorial_t1_after",
+        "title_en": "The First Step",
+        "lines": [
+          {
+            "line_id": "tutorial_t1_after_001",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "The road grew quiet again. This time they listened to the silence before moving.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t1_after_002",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Are you hurt?",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_003",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Only my opinion of this road.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_004",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Your sleeve.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_005",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "A branch. It has dreadful manners.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_006",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "He brushed a torn leaf from her shoulder, then found a reason to check his shield.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t1_after_007",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "We can rest here.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_008",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "In the mud? I was hoping your invitation would improve.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_009",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "A dry stone, then.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_010",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Tempting. A roof would make it irresistible.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_011",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "There should be shelter farther along. We stop if you need to.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_012",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "If either of us needs to. That is the arrangement.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_013",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Agreed.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t1_after_014",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "He shortened his stride. She noticed, and chose not to thank him for it aloud.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          }
+        ],
+        "location_id": "forest_whispering_ash",
+        "presentation": {
+          "auto": true,
+          "speed": 1,
+          "speaker_pause_seconds": 1.0
+        },
+        "closing_hold_seconds": 3.5
+      }
+    },
+    {
+      "stage_id": "T-2",
+      "title_en": "A Road Forgotten",
+      "seed": 81009,
+      "enemies": [
+        {
+          "enemy_id": "hollow_pilgrim",
+          "count": 1
+        }
+      ],
+      "before": {
+        "scene_id": "tutorial_t2_before",
+        "title_en": "A Road Forgotten",
+        "lines": [
+          {
+            "line_id": "tutorial_t2_before_001",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "Where the path narrowed, a lone pilgrim dragged one foot around the same worn stones.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t2_before_002",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "It has crossed this patch three times.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_before_003",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Perhaps the road used to end here.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_before_004",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "It does not end here now.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_before_005",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "No. Someone ought to tell it.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_before_006",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "For a moment she watched the empty movement without speaking. Mahmut did not hurry her.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t2_before_007",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Do you ever wonder where they meant to go?",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_before_008",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Sometimes.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_before_009",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "I would rather we reached somewhere ordinary. With an especially ordinary supper.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_before_010",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "That can be arranged.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_before_011",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "The pilgrim stopped. Its head turned toward them.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t2_before_012",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "It has seen us. Keep room to move.",
+            "emotion": "protective",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_before_013",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "And you keep room for me.",
+            "emotion": "determined",
+            "hold_seconds": 3.0
+          }
+        ],
+        "location_id": "forest_whispering_ash",
+        "presentation": {
+          "auto": true,
+          "speed": 1,
+          "speaker_pause_seconds": 1.0
+        },
+        "closing_hold_seconds": 3.5
+      },
+      "after": {
+        "scene_id": "tutorial_t2_after",
+        "title_en": "A Road Forgotten",
+        "lines": [
+          {
+            "line_id": "tutorial_t2_after_001",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "Beyond the narrow path, a fallen stone offered a seat. Mahmut checked the trees before he sat.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t2_after_002",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Sit. The trees have survived your inspection.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_003",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "This strap needs tightening.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_004",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Then hold still. Even your armour is asking for a rest.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_005",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "She drew his wrist toward her and threaded the loose leather through its buckle.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t2_after_006",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "I can do that.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_007",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "I know. You can also let me.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_008",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "He watched her fingers instead of the trees. She kept her eyes on the strap a little longer than necessary.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t2_after_009",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Too tight?",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_010",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "You are supposed to answer that.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_011",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "No.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_012",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "A wonderfully detailed report.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_013",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "The buckle is sound. The work is good.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_014",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Careful. Another sentence and I might mistake that for a compliment.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_015",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "It was one.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_016",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "She smiled down at the finished knot. He looked away first, but not quickly.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t2_after_017",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "There. Your turn to be looked after.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t2_after_018",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "We should do that more evenly.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          }
+        ],
+        "location_id": "forest_whispering_ash",
+        "presentation": {
+          "auto": true,
+          "speed": 1,
+          "speaker_pause_seconds": 1.0
+        },
+        "illustration_id": "roadside_rest",
+        "closing_hold_seconds": 3.5
+      }
+    },
+    {
+      "stage_id": "T-3",
+      "title_en": "A Roof Before Dawn",
+      "seed": 81010,
+      "enemies": [
+        {
+          "enemy_id": "bellbound_dead",
+          "count": 2
+        },
+        {
+          "enemy_id": "hollow_pilgrim",
+          "count": 1
+        }
+      ],
+      "before": {
+        "scene_id": "tutorial_t3_before",
+        "title_en": "A Roof Before Dawn",
+        "lines": [
+          {
+            "line_id": "tutorial_t3_before_001",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "A broken roof appeared through the branches. There was still enough of it to promise a dry corner.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t3_before_002",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "A roof. We stop there.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_003",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "You make it sound as though you ordered it specially.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_004",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "I would have asked for fewer holes.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_005",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "No view of the stars? A severe oversight.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_006",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "I can see the stars outside. I would rather keep the rain there too.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_007",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "She laughed softly. He was still listening when a shape moved beneath the eaves.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t3_before_008",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "The doorway. Two more by the steps.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_009",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "The previous tenants seem reluctant to leave.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_010",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Wait for my shield. Do not let them separate us.",
+            "emotion": "protective",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_011",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "You were very quick to decide we are a pair.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_012",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "We have been walking the same road.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_013",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Then keep your place. I intend to keep mine.",
+            "emotion": "determined",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_before_014",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "This time they stepped forward together.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          }
+        ],
+        "location_id": "forest_whispering_ash",
+        "presentation": {
+          "auto": true,
+          "speed": 1,
+          "speaker_pause_seconds": 1.0
+        },
+        "closing_hold_seconds": 3.5
+      },
+      "after": {
+        "scene_id": "tutorial_t3_after",
+        "title_en": "A Roof Before Dawn",
+        "lines": [
+          {
+            "line_id": "tutorial_t3_after_001",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "Inside, the wind softened to a sound in the rafters. For the first time that evening, neither of them had to walk.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t3_after_002",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Dry enough here. The far corner is better.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_003",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "You have inspected the entire house in one breath.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_004",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "It is not a large house.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_005",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "He laid his cloak over the cold stone. She sat on one edge and left the other unmistakably free.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t3_after_006",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "This seat appears to be available.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_007",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "I will check the doorway.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_008",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "You checked it on the way in.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_009",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "From the other side.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_010",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "An important distinction. Sit before you discover a third side.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_011",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "He sat. His shield rested within reach; her shoulder rested almost within reach of his.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t3_after_012",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "We have enough bread for tonight.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_013",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Actual bread, or another of your possibilities?",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_014",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Actual bread.",
+            "emotion": "dry_humor",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_015",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "A roof and a supper. You should announce your successes more often.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_016",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "She broke the loaf in two, considered the pieces, and put the larger one in his hand.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t3_after_017",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "You gave me more.",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_018",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "A flaw in the architecture of the loaf. Quite beyond my control.",
+            "emotion": "dry_amusement",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_019",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Tomorrow we find a better one.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_020",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "She looked toward the doorway. For a moment her answer did not come.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t3_after_021",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Tomorrow. Yes.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_022",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "What is it?",
+            "emotion": "watchful",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_023",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Nothing that needs solving tonight.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_024",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "It does not have to need solving.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_025",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "That made her turn back to him. The small joke she had prepared went unused.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t3_after_026",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Stay a little while. Before you stand watch.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_027",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "I am here.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_028",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "I know. That was why I asked.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_029",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "He stayed. Outside, the last light left the road; inside, the silence no longer felt empty.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          },
+          {
+            "line_id": "tutorial_t3_after_030",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "We leave when there is light. No hurry.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_031",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "And no walking two steps ahead.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_032",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "Beside you, then.",
+            "emotion": "composed",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_033",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "Then.",
+            "emotion": "soft_smile",
+            "hold_seconds": 3.0
+          },
+          {
+            "line_id": "tutorial_t3_after_034",
+            "speaker_id": "",
+            "speaker_display": "",
+            "text_en": "For tonight, a dry corner, half a loaf, and a place beside each other were enough.",
+            "emotion": "",
+            "hold_seconds": 4.0
+          }
+        ],
+        "location_id": "forest_whispering_ash",
+        "presentation": {
+          "auto": true,
+          "speed": 1,
+          "speaker_pause_seconds": 1.0
+        },
+        "illustration_id": "shelter_evening",
+        "closing_hold_seconds": 5.0
+      }
+    }
+  ],
+  "ending": "patch_screen_then_owner_confirmation_then_native_restart"
+}

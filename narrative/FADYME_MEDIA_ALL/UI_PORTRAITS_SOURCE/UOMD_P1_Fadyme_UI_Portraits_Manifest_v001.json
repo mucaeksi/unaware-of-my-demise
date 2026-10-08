@@ -1,0 +1,76 @@
+{
+  "project": "Unaware of My Demise",
+  "part": "Part I — Unaware, I Fade",
+  "character": "Fadyme",
+  "package": "UI Portrait Runtime Exports",
+  "version": "v001",
+  "engine_target": "Godot 4.7.2 Standard",
+  "platform": "Android portrait-only",
+  "source": "Approved Fadyme VN Composed portrait",
+  "status": "runtime_candidate",
+  "rules": [
+    "Transparent PNG",
+    "No frame baked into character art",
+    "No text baked into character art",
+    "UI frames and rarity treatments must remain separate components",
+    "Default story state only; no spoiler illness details"
+  ],
+  "assets": [
+    {
+      "usage": "CompanionCard",
+      "filename": "UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "resolution": [
+        768,
+        1024
+      ],
+      "suggested_anchor": [
+        384,
+        970
+      ],
+      "alpha": true,
+      "status": "runtime_candidate"
+    },
+    {
+      "usage": "BattleHUD",
+      "filename": "UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "resolution": [
+        512,
+        512
+      ],
+      "suggested_anchor": [
+        256,
+        486
+      ],
+      "alpha": true,
+      "status": "runtime_candidate"
+    },
+    {
+      "usage": "Roster",
+      "filename": "UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "resolution": [
+        512,
+        512
+      ],
+      "suggested_anchor": [
+        256,
+        486
+      ],
+      "alpha": true,
+      "status": "runtime_candidate"
+    },
+    {
+      "usage": "MenuAvatar",
+      "filename": "UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "resolution": [
+        256,
+        256
+      ],
+      "suggested_anchor": [
+        128,
+        244
+      ],
+      "alpha": true,
+      "status": "runtime_candidate"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "protected_files": 8352,
+  "changed_protected": [
+    "game/tests/ui/test_cooldown_battle.gd",
+    "game/tests/ui/test_entry_flow.gd",
+    "game/scripts/app/onboarding_preferences.gd",
+    "game/scripts/art_review/fadyme_pilot.gd",
+    "game/scripts/ui/vn/vn_screen.gd",
+    "game/android/build/.gradle/file-system.probe",
+    "game/android/build/build/outputs/bundle/standardDebug/build-standard-debug.aab",
+    "game/android/build/build/intermediates/intermediary_bundle/standardDebug/packageStandardDebugBundle/intermediary-bundle.aab",
+    "game/android/build/build/intermediates/incremental/standardDebug/mergeStandardDebugResources/compile-file-map.properties",
+    "game/android/build/build/intermediates/incremental/standardDebug/packageStandardDebugResources/compile-file-map.properties",
+    "game/android/build/build/intermediates/asset_pack_bundle/standardDebug/assetPackStandardDebugPreBundleTask/assetPackInstallTime/assetPackInstallTime.zip",
+    "game/android/build/assetPackInstallTime/src/main/assets/assets.sparsepck",
+    "game/android/build/assetPackInstallTime/src/main/assets/scripts/app/onboarding_preferences.gdc",
+    "game/android/build/assetPackInstallTime/src/main/assets/scripts/ui/story_director.gdc",
+    "game/android/build/assetPackInstallTime/src/main/assets/scripts/ui/battle/battle_art.gdc",
+    "game/android/build/assetPackInstallTime/src/main/assets/scripts/ui/entry/entry_onboarding.gdc",
+    "game/android/build/assetPackInstallTime/src/main/assets/scripts/ui/entry/entry_screen.gdc",
+    "game/android/build/assetPackInstallTime/src/main/assets/scripts/ui/entry/prologue_shot.gdc",
+    "game/android/build/assetPackInstallTime/src/main/assets/scripts/ui/vn/vn_screen.gdc",
+    "game/android/build/assetPackInstallTime/src/main/assets/data/entry/tutorial_v001.json",
+    "game/android/build/assetPackInstallTime/src/main/assets/data/presentation/battle_art_v001.json",
+    "game/android/build/.gradle/buildOutputCleanup/buildOutputCleanup.lock",
+    "game/android/build/.gradle/8.11.1/executionHistory/executionHistory.bin",
+    "game/android/build/.gradle/8.11.1/executionHistory/executionHistory.lock",
+    "game/android/build/.gradle/8.11.1/fileHashes/fileHashes.bin",
+    "game/android/build/.gradle/8.11.1/fileHashes/fileHashes.lock",
+    "tools/verify_opening_pack.gd"
+  ],
+  "original_claude_changed": []
+}

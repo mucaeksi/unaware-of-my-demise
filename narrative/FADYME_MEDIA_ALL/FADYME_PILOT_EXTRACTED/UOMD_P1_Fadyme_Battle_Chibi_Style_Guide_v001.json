@@ -1,0 +1,29 @@
+{
+  "project": "Unaware of My Demise",
+  "subtitle": "Part I — Unaware, I Fade",
+  "studio": "SovTaym Studios",
+  "version": "v001",
+  "asset_id": "UOMD-P1-FAD-CHB-001",
+  "asset_title": "Fadyme Battle Chibi Style Guide",
+  "filename": "UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png",
+  "category": "battle_chibi_sheet",
+  "character": "Fadyme",
+  "language": "English visible labels where applicable",
+  "art_direction": "Single-source Gothic dark fantasy + detailed anime/light novel style based on approved REFERENCE poster.",
+  "usage": "Pilot approval board for battle chibi proportions, readability, turnaround, and motion-state direction.",
+  "status": "pilot_preview",
+  "godot_ready_status": "approval_board_only",
+  "intended_engine": "Godot 4.7.2 Standard",
+  "intended_platform": "Android portrait-only 1080x1920 base canvas",
+  "export_format": "PNG",
+  "background": "opaque preview board",
+  "production_notes": "Not a final sprite sheet. Approved design will later be converted into animation-ready exports with pivot, frame order, and state breakdown.",
+  "next_required_exports": [
+    "Transparent separated assets where needed",
+    "Production layer split / component split",
+    "9-slice definitions for UI panels and buttons",
+    "Per-state naming and export rules",
+    "Pivot / anchor metadata for sprites and animations",
+    "Optional JSON or CSV manifest for engine ingestion"
+  ]
+}

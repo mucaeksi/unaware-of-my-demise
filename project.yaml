@@ -1,0 +1,109 @@
+# Unaware of My Demise — CCGS project configuration
+# Source of truth for CCGS routing/automation configuration.
+# Project lore, canon, infrastructure IDs and creative rules are documented in
+# docs/UOMD_PROJECT_CONTEXT.md and the master execution prompt.
+
+schema_version: 1
+
+framework:
+  version: 1.1.2
+  last_upgraded: 2026-10-02
+
+project:
+  name: "Unaware of My Demise"
+  genre: "Dark Fantasy Online Gacha RPG"
+  version: "0.1.0"
+  stage: "Technical Setup"
+  kind: game
+  code_root: "game"
+  narrative_root: "narrative"
+
+modes:
+  review_mode: lean
+  workflow: standard
+  automation: autonomous
+  automation_always_ask:
+    - file_deletions
+    - schema_changes
+  story_granularity: fine
+
+workflow_overrides:
+  edge_cases: true
+  tuning_knobs: true
+  art_bible_strict: true
+  system_overrides: {}
+
+docs:
+  density: thorough
+
+testing:
+  framework: gdunit4
+  strict:
+    logic: true
+    integration: true
+    visual: true
+    ui: true
+    config: true
+
+qa:
+  level: standard
+  coverage_minimum: null
+
+strict_gate_checks: true
+
+team:
+  size: small
+
+platform:
+  multiplayer: false
+  online: true
+  targets: [Mobile]
+  primary_input: "Touch"
+  gamepad_support: "None"
+  touch_support: "Full"
+  cert_tier: none
+
+engine:
+  name: "Godot"
+  version: "4.7.2"
+  language: "GDScript"
+  rendering: "Mobile"
+  physics: "Godot Physics"
+
+specialists:
+  code: "godot-gdscript-specialist"
+  shader: "godot-shader-specialist"
+  ui: "godot-specialist"
+  additional: ["godot-gdextension-specialist"]
+
+naming:
+  classes: PascalCase
+  variables: snake_case
+  constants: SCREAMING_SNAKE
+  signals: past_tense
+  files: snake_case
+  scenes: snake_case
+
+accessibility:
+  target: standard
+
+cadence:
+  sprint_length: "2w"
+  milestone_length: "8w"
+
+performance:
+  target_framerate: 60
+  frame_budget_ms: 16.67
+  draw_call_limit: null
+  memory_ceiling_mb: null
+  enforce: warn
+
+commands:
+  build: "godot --headless --export-debug '<ANDROID_PRESET>'"
+  test: "godot --headless -s -d --remote-debug tcp://127.0.0.1:0 res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a res://tests --ignoreHeadlessMode"
+  run: "godot --path . --windowed --resolution 1080x1920"
+  smoke: "godot --headless --quit-after 5"
+
+features:
+  session_state: on
+  token_budget_warn_at: 0.7

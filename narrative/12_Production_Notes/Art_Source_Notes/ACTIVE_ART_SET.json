@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "date": "2026-10-05",
+  "status": "REJECTED_BY_OWNER_EXTERNAL_DESIGN_PENDING",
+  "authority": "Latest owner: all our visual proposals rejected; only supplied Gothic/anime poster governs visual style; canon/lore governs character/story identity",
+  "system": "narrative/design/ART_SYSTEM_V02.md",
+  "manifest": "narrative/art/system/v02/ASSET_MANIFEST.json",
+  "replacement_map": "narrative/art/system/v02/REPLACEMENT_MAP.json",
+  "bindings": {
+    "shared_ui_theme": {
+      "source": "game/theme/gothic_system_v02.gd",
+      "consumers": [
+        "AppShell",
+        "UiTheme",
+        "UiKit",
+        "UiScreen",
+        "StudioSplashScreen"
+      ],
+      "status": "REJECTED_BY_OWNER; EXISTING_DEVELOPMENT_BINDING_ONLY",
+      "historical_status_before_rejection": "ACTIVE_RUNTIME_CANDIDATE",
+      "final_art_approved": false,
+      "do_not_use_as_style_reference": true
+    },
+    "studio_identity": {
+      "source": "narrative/art/studio/v01/emblem.png",
+      "consumer": "StudioSplashScreen",
+      "status": "REJECTED_BY_OWNER; EXISTING_DEVELOPMENT_BINDING_ONLY",
+      "historical_status_before_rejection": "ACTIVE_RUNTIME_CANDIDATE",
+      "final_art_approved": false,
+      "do_not_use_as_style_reference": true
+    },
+    "game_identity": {
+      "source": "narrative/art/system/v02/game_emblem_v002.png",
+      "consumer": "GameLogo in ArtSystemReviewV02; catalog ui/game_emblem",
+      "status": "REJECTED_BY_OWNER; EXISTING_DEVELOPMENT_BINDING_ONLY",
+      "historical_status_before_rejection": "CANDIDATE; TITLE_COMPOSITION_PENDING",
+      "final_art_approved": false,
+      "do_not_use_as_style_reference": true
+    },
+    "key_art": {
+      "source": "narrative/art/direction/v02/key_art.png",
+      "consumer": "ArtDirectionReviewV01",
+      "status": "REJECTED_BY_OWNER; EXISTING_DEVELOPMENT_BINDING_ONLY",
+      "historical_status_before_rejection": "REVIEW_ONLY; TITLE_PROMOTION_PENDING",
+      "final_art_approved": false,
+      "do_not_use_as_style_reference": true
+    },
+    "fadyme_final": {
+      "source": null,
+      "consumer": null,
+      "status": "EXTERNAL_DESIGN_PENDING",
+      "historical_status_before_rejection": "AFTER_UI_PENDING",
+      "final_art_approved": false,
+      "do_not_use_as_style_reference": true
+    }
+  },
+  "audio_and_voice_reset": false,
+  "old_lock_manifest_preserved": "narrative/references/REFERENCE_SET.lock.json",
+  "owner_decision": {
+    "date": "2026-10-05",
+    "status": "REJECTED_BY_OWNER",
+    "archive": "narrative/archive/visuals_rejected_2026-10-05",
+    "current_visual_reference": "narrative/design/VISUAL_REFERENCE_BRIEF_2026-10-05.md",
+    "reuse_as_final_reference": false,
+    "new_design_source": "External designer AI; owner will deliver files for Godot integration"
+  }
+}

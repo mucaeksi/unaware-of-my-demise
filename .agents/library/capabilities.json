@@ -1,0 +1,2014 @@
+[
+  {
+    "capability": "adopt",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/adopt/SKILL.md",
+        "folder": "adopt",
+        "frontmatter": {
+          "name": "adopt",
+          "description": "\"Brownfield audit — do existing artifacts actually work? Numbered migration plan. Unlike /project-stage-detect, checks compliance not existence.\"",
+          "argument-hint": "\"[focus: full | gdds | adrs | stories | infra]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash, Write, AskUserQuestion, Bash(bash \"*/.claude/skills/adopt/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "9f126d50097315a0271740b1e2185ede7609ae51c17275ef058ca6693dc3b3c9",
+        "lines": 574
+      }
+    ],
+    "card": ".agents/library/capabilities/adopt.md"
+  },
+  {
+    "capability": "architecture-decision",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/architecture-decision/SKILL.md",
+        "folder": "architecture-decision",
+        "frontmatter": {
+          "name": "architecture-decision",
+          "description": "\"Create an ADR documenting a technical decision: context, alternatives considered, consequences.\"",
+          "argument-hint": "\"[title | retrofit <path> | accept <ADR-id>] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, Bash(wc -c *), Bash(bash \"*/.claude/skills/architecture-decision/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "6b3b43c9d0f4ace6411da4ab88c4fcdcf8f0fe377a1fc836ebed4e9ea8e8af3e",
+        "lines": 660
+      }
+    ],
+    "card": ".agents/library/capabilities/architecture-decision.md"
+  },
+  {
+    "capability": "architecture-review",
+    "status": "active",
+    "active_skill": "uomd-architecture-review",
+    "sources": [
+      {
+        "path": ".claude/skills/architecture-review/SKILL.md",
+        "folder": "architecture-review",
+        "frontmatter": {
+          "name": "architecture-review",
+          "description": "\"Traceability matrix mapping GDD requirements to ADRs. Finds gaps, cross-ADR conflicts, engine compatibility. PASS/CONCERNS/NOT ASSESSED/FAIL.\"",
+          "argument-hint": "\"[focus: full | coverage | consistency | engine | single-gdd path/to/gdd.md]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash, Write, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/architecture-review/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "opus"
+        },
+        "sha256": "a08fbede25d5f2cbcc88e310975034470125c1a67bf107236d7398102f0466c3",
+        "lines": 869
+      }
+    ],
+    "card": ".agents/library/capabilities/architecture-review.md"
+  },
+  {
+    "capability": "art-bible",
+    "status": "active",
+    "active_skill": "uomd-art-bible",
+    "sources": [
+      {
+        "path": ".claude/skills/art-bible/SKILL.md",
+        "folder": "art-bible",
+        "frontmatter": {
+          "name": "art-bible",
+          "description": "\"Author the Art Bible — visual identity gating asset production. Run before /map-systems.\"",
+          "argument-hint": "\"[--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/art-bible/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "a74cd846c51e0945dd8366862d6eca5a8942a99cba0362b86640bc090699001f",
+        "lines": 404
+      },
+      {
+        "path": ".agents/skills/art-bible/SKILL.md",
+        "folder": "art-bible",
+        "frontmatter": {
+          "name": "art-bible",
+          "description": "\"Author the Art Bible — visual identity gating asset production. Run before /map-systems.\"",
+          "argument-hint": "\"[--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/art-bible/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "a74cd846c51e0945dd8366862d6eca5a8942a99cba0362b86640bc090699001f",
+        "lines": 404
+      }
+    ],
+    "card": ".agents/library/capabilities/art-bible.md"
+  },
+  {
+    "capability": "asset-audit",
+    "status": "active",
+    "active_skill": "uomd-asset-audit",
+    "sources": [
+      {
+        "path": ".claude/skills/asset-audit/SKILL.md",
+        "folder": "asset-audit",
+        "frontmatter": {
+          "name": "asset-audit",
+          "description": "\"Audit assets against naming conventions, file size budgets, format standards. Finds orphaned assets, missing references.\"",
+          "argument-hint": "\"[category|all]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash(stat *), Bash(file *), Bash(od *), Bash(wc *), Bash(du *)",
+          "model": "sonnet"
+        },
+        "sha256": "eadf2885782fc8414fe173f7c44ff3b0834ba24ec5269682e091406af54e76b7",
+        "lines": 191
+      },
+      {
+        "path": ".agents/skills/asset-audit/SKILL.md",
+        "folder": "asset-audit",
+        "frontmatter": {
+          "name": "asset-audit",
+          "description": "\"Audit assets against naming conventions, file size budgets, format standards. Finds orphaned assets, missing references.\"",
+          "argument-hint": "\"[category|all]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash(stat *), Bash(file *), Bash(od *), Bash(wc *), Bash(du *)",
+          "model": "sonnet"
+        },
+        "sha256": "eadf2885782fc8414fe173f7c44ff3b0834ba24ec5269682e091406af54e76b7",
+        "lines": 191
+      }
+    ],
+    "card": ".agents/library/capabilities/asset-audit.md"
+  },
+  {
+    "capability": "asset-spec",
+    "status": "active",
+    "active_skill": "uomd-asset-spec",
+    "sources": [
+      {
+        "path": ".claude/skills/asset-spec/SKILL.md",
+        "folder": "asset-spec",
+        "frontmatter": {
+          "name": "asset-spec",
+          "description": "\"Per-asset visual specs plus AI generation prompts from GDDs and character profiles. After the art bible.\"",
+          "argument-hint": "\"[system:<name> | level:<name> | character:<name>] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/asset-spec/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "e9cac66c06300496a4c4180165b745ed0ba9ef4e8cffa8c097a95f6eeebe5230",
+        "lines": 410
+      },
+      {
+        "path": ".agents/skills/asset-spec/SKILL.md",
+        "folder": "asset-spec",
+        "frontmatter": {
+          "name": "asset-spec",
+          "description": "\"Per-asset visual specs plus AI generation prompts from GDDs and character profiles. After the art bible.\"",
+          "argument-hint": "\"[system:<name> | level:<name> | character:<name>] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/asset-spec/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "e9cac66c06300496a4c4180165b745ed0ba9ef4e8cffa8c097a95f6eeebe5230",
+        "lines": 410
+      }
+    ],
+    "card": ".agents/library/capabilities/asset-spec.md"
+  },
+  {
+    "capability": "balance-check",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/balance-check/SKILL.md",
+        "folder": "balance-check",
+        "frontmatter": {
+          "name": "balance-check",
+          "description": "\"Find balance outliers, broken progressions, degenerate strategies, economy imbalances in formulas and data. 'Check game balance'.\"",
+          "argument-hint": "\"[system-name|path-to-data-file]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, AskUserQuestion, Bash(bash \"*/.claude/skills/balance-check/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "37cad855a7f47c852e9d0b66387617cd0fe190d73f2208bfe3a07f3606c27b1a",
+        "lines": 200
+      }
+    ],
+    "card": ".agents/library/capabilities/balance-check.md"
+  },
+  {
+    "capability": "brainstorm",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/brainstorm/SKILL.md",
+        "folder": "brainstorm",
+        "frontmatter": {
+          "name": "brainstorm",
+          "description": "\"Guided concept ideation using professional studio techniques, player psychology, creative exploration.\"",
+          "argument-hint": "\"[genre or theme hint, or 'open'] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, WebSearch, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/brainstorm/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "a7e0babdf3681b26dc2d94994a42495597a6bb6ce303b88cd1544a3010fe648c",
+        "lines": 471
+      }
+    ],
+    "card": ".agents/library/capabilities/brainstorm.md"
+  },
+  {
+    "capability": "bug-report",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/bug-report/SKILL.md",
+        "folder": "bug-report",
+        "frontmatter": {
+          "name": "bug-report",
+          "description": "\"Structured bug report from a description, or analyze code for potential bugs. Reproduction steps, severity.\"",
+          "argument-hint": "\"[description] | analyze [path-to-file] | verify [BUG-ID] | close [BUG-ID]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash, Write, Edit, AskUserQuestion, Bash(bash \"*/.claude/skills/bug-report/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "d0395ae9f6ef240886355f42ffc24a6a20df5ed3b3e386e348ef259029b59531",
+        "lines": 197
+      }
+    ],
+    "card": ".agents/library/capabilities/bug-report.md"
+  },
+  {
+    "capability": "bug-triage",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/bug-triage/SKILL.md",
+        "folder": "bug-triage",
+        "frontmatter": {
+          "name": "bug-triage",
+          "description": "\"Re-evaluate open bugs — priority vs severity, assign to sprints, surface systemic trends. Run when the count grows.\"",
+          "argument-hint": "\"[sprint | full | trend]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash(bash \"*/.claude/skills/bug-triage/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "88986266997d33ae6be8b4de93b8544bcf338117c46ef362c79589fea78192c0",
+        "lines": 268
+      }
+    ],
+    "card": ".agents/library/capabilities/bug-triage.md"
+  },
+  {
+    "capability": "camera-systems",
+    "status": "active",
+    "active_skill": "uomd-camera-systems",
+    "sources": [
+      {
+        "path": ".agents/skills/camera-systems/SKILL.md",
+        "folder": "camera-systems",
+        "frontmatter": {
+          "name": "camera-systems",
+          "description": ">"
+        },
+        "sha256": "10052b12881f9abe0251aedb4cffc8f82cd0a6431ef488986ea4f86a1d28d4bf",
+        "lines": 154
+      }
+    ],
+    "card": ".agents/library/capabilities/camera-systems.md"
+  },
+  {
+    "capability": "changelog",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/changelog/SKILL.md",
+        "folder": "changelog",
+        "frontmatter": {
+          "name": "changelog",
+          "description": "\"Auto-generate a changelog from git commits and sprint data. Internal and player-facing versions.\"",
+          "argument-hint": "\"[version|sprint-number]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash, Write, Bash(bash \"*/.claude/skills/changelog/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "5684779b602f8588b30e2328d78bbf7cbaadc1d8305eee2e034b05c1a5bbce1d",
+        "lines": 264
+      }
+    ],
+    "card": ".agents/library/capabilities/changelog.md"
+  },
+  {
+    "capability": "code-review",
+    "status": "active",
+    "active_skill": "uomd-code-review",
+    "sources": [
+      {
+        "path": ".claude/skills/code-review/SKILL.md",
+        "folder": "code-review",
+        "frontmatter": {
+          "name": "code-review",
+          "description": "\"Architectural code review — coding standards, SOLID, testability, performance concerns.\"",
+          "argument-hint": "\"[path-to-file-or-directory]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash(git log *), Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/code-review/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "a104c61223768f2233d1daa3d90543bf6566c9b6bde6a0b0a9081092c8acd07b",
+        "lines": 279
+      }
+    ],
+    "card": ".agents/library/capabilities/code-review.md"
+  },
+  {
+    "capability": "consistency-check",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/consistency-check/SKILL.md",
+        "folder": "consistency-check",
+        "frontmatter": {
+          "name": "consistency-check",
+          "description": "\"Scan GDDs against the entity registry for cross-document conflicts. Grep-first approach targets conflicting sections, different stats.\"",
+          "argument-hint": "\"[full | since-last-review | entity:<name> | item:<name>]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, AskUserQuestion, Bash(bash \"*/.claude/skills/consistency-check/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "6e75dac4220c6d6ab0d7fd313fa7e5657bc9559c15a269721f74fe79edbe7727",
+        "lines": 363
+      }
+    ],
+    "card": ".agents/library/capabilities/consistency-check.md"
+  },
+  {
+    "capability": "content-audit",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/content-audit/SKILL.md",
+        "folder": "content-audit",
+        "frontmatter": {
+          "name": "content-audit",
+          "description": "\"Audit GDD content counts against what's implemented — planned vs built.\"",
+          "argument-hint": "\"[system-name | --summary | (no arg = full audit)]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash(bash \"*/.claude/skills/content-audit/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "bc5e242b46fd05e015857215868e1313c50fb767ce08726cc2d261798ddeae2f",
+        "lines": 320
+      }
+    ],
+    "card": ".agents/library/capabilities/content-audit.md"
+  },
+  {
+    "capability": "create-architecture",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/create-architecture/SKILL.md",
+        "folder": "create-architecture",
+        "frontmatter": {
+          "name": "create-architecture",
+          "description": "\"Author the architecture blueprint before code is written. Validates decisions against the pinned engine, flags knowledge gaps.\"",
+          "argument-hint": "\"[focus-area: full | layers | data-flow | api-boundaries | adr-audit] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, AskUserQuestion, Agent, Bash(bash \"*/.claude/skills/create-architecture/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "7521c92f713a754df4092c62b73aa6efd064e24e95854d568294ad83d6082fc9",
+        "lines": 594
+      }
+    ],
+    "card": ".agents/library/capabilities/create-architecture.md"
+  },
+  {
+    "capability": "create-control-manifest",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/create-control-manifest/SKILL.md",
+        "folder": "create-control-manifest",
+        "frontmatter": {
+          "name": "create-control-manifest",
+          "description": "\"Flat must-do/never-do rules sheet per system and layer, extracted from Accepted ADRs. ADRs explain why; this is actionable.\"",
+          "argument-hint": "\"[update — regenerate from current ADRs] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/create-control-manifest/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "7f8234550e7025eb3db8cd8f9e85cf02e545446c6d5e1c304b5e56bbdac8a996",
+        "lines": 350
+      }
+    ],
+    "card": ".agents/library/capabilities/create-control-manifest.md"
+  },
+  {
+    "capability": "create-epics",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/create-epics/SKILL.md",
+        "folder": "create-epics",
+        "frontmatter": {
+          "name": "create-epics",
+          "description": "\"Turn GDDs plus architecture into epics — one per architectural module, with untraced requirements. Then /create-stories [epic-slug].\"",
+          "argument-hint": "\"[system-name | layer: foundation|core|feature|presentation | all] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/create-epics/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "7a4d61c61be76ffd0008fbbe037c89d39e48681325010d7b60457f34f6ebb07f",
+        "lines": 369
+      }
+    ],
+    "card": ".agents/library/capabilities/create-epics.md"
+  },
+  {
+    "capability": "create-stories",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/create-stories/SKILL.md",
+        "folder": "create-stories",
+        "frontmatter": {
+          "name": "create-stories",
+          "description": "\"Break one epic into implementable stories embedding TR-ID, ADR guidance, acceptance criteria. Reads the control manifest. After /create-epics.\"",
+          "argument-hint": "\"[epic-slug | epic-path] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/create-stories/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "83d5918b53fc215aee049d640fd78cfba6a00ad69829d4594fcd9dbe06392173",
+        "lines": 499
+      }
+    ],
+    "card": ".agents/library/capabilities/create-stories.md"
+  },
+  {
+    "capability": "day-one-patch",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/day-one-patch/SKILL.md",
+        "folder": "day-one-patch",
+        "frontmatter": {
+          "name": "day-one-patch",
+          "description": "\"Day-one launch patch — focused fix for known issues found after gold master. Mini-sprint with QA gate and rollback.\"",
+          "argument-hint": "\"[scope: known-bugs | cert-feedback | all]\"",
+          "user-invocable": "true",
+          "disable-model-invocation": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion",
+          "model": "sonnet"
+        },
+        "sha256": "031d11d6e22b956559ab46dc03d40f41b4b979a383cfc2f0f231fbff2bfc4f9b",
+        "lines": 264
+      }
+    ],
+    "card": ".agents/library/capabilities/day-one-patch.md"
+  },
+  {
+    "capability": "design-review",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/design-review/SKILL.md",
+        "folder": "design-review",
+        "frontmatter": {
+          "name": "design-review",
+          "description": "\"Reviews one design document for completeness, internal consistency, implementability, and design standards. Before handing to programmers.\"",
+          "argument-hint": "\"[path-to-design-doc] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/design-review/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "d21b65ae0895cc210a7d7360691613e348e427bd454321c2c015f567b7df00a6",
+        "lines": 425
+      }
+    ],
+    "card": ".agents/library/capabilities/design-review.md"
+  },
+  {
+    "capability": "design-system",
+    "status": "active",
+    "active_skill": "uomd-design-system",
+    "sources": [
+      {
+        "path": ".claude/skills/design-system/SKILL.md",
+        "folder": "design-system",
+        "frontmatter": {
+          "name": "design-system",
+          "description": "\"Section-by-section GDD authoring for one system — walks through each required section, cross-references dependencies.\"",
+          "argument-hint": "\"<system-name> [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/design-system/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "92e55d07242e080fd78856e3b7255375af1234e7660b87c4e1a86091db3d7040",
+        "lines": 1288
+      },
+      {
+        "path": ".agents/skills/design-system/SKILL.md",
+        "folder": "design-system",
+        "frontmatter": {
+          "name": "design-system",
+          "description": "\"Section-by-section GDD authoring for one system — walks through each required section, cross-references dependencies.\"",
+          "argument-hint": "\"<system-name> [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/design-system/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "92e55d07242e080fd78856e3b7255375af1234e7660b87c4e1a86091db3d7040",
+        "lines": 1288
+      }
+    ],
+    "card": ".agents/library/capabilities/design-system.md"
+  },
+  {
+    "capability": "dev-story",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/dev-story/SKILL.md",
+        "folder": "dev-story",
+        "frontmatter": {
+          "name": "dev-story",
+          "description": "\"Implement a story: ADR guidelines, right programmer agent, code plus test. Then /story-done (/story-readiness before, /code-review after, at standard/full).\"",
+          "argument-hint": "\"[story-path]\"",
+          "user-invocable": "true",
+          "disable-model-invocation": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/dev-story/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "d7d1298109e094e8f74b9ab9a51dd191f7da144a5c7cd3c2a3bd064cbd38322c",
+        "lines": 676
+      }
+    ],
+    "card": ".agents/library/capabilities/dev-story.md"
+  },
+  {
+    "capability": "estimate",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/estimate/SKILL.md",
+        "folder": "estimate",
+        "frontmatter": {
+          "name": "estimate",
+          "description": "\"Estimate task effort from complexity, dependencies, velocity, risk. Structured estimate with confidence levels.\"",
+          "argument-hint": "\"[task-description]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep",
+          "model": "sonnet"
+        },
+        "sha256": "cee5d4daeaed285f97e4a635979e24352fb09b54b7ec333daf9d3ff16fe435a7",
+        "lines": 136
+      }
+    ],
+    "card": ".agents/library/capabilities/estimate.md"
+  },
+  {
+    "capability": "game-ai",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".agents/skills/game-ai/SKILL.md",
+        "folder": "game-ai",
+        "frontmatter": {
+          "name": "game-ai",
+          "description": ">"
+        },
+        "sha256": "c66dc4ff4272373d92714eeb5550131c56a889710129e39e21a860fb8f86c3ac",
+        "lines": 173
+      }
+    ],
+    "card": ".agents/library/capabilities/game-ai.md"
+  },
+  {
+    "capability": "game-feel",
+    "status": "active",
+    "active_skill": "uomd-game-feel",
+    "sources": [
+      {
+        "path": ".agents/skills/game-feel/SKILL.md",
+        "folder": "game-feel",
+        "frontmatter": {
+          "name": "game-feel",
+          "description": ">"
+        },
+        "sha256": "7e3ff247140788e81013614fcbe2e80c95be1d23e6a140f54fb57921ed128ece",
+        "lines": 165
+      }
+    ],
+    "card": ".agents/library/capabilities/game-feel.md"
+  },
+  {
+    "capability": "game-ui-ux",
+    "status": "active",
+    "active_skill": "uomd-game-ui-ux",
+    "sources": [
+      {
+        "path": ".agents/skills/game-ui-ux/SKILL.md",
+        "folder": "game-ui-ux",
+        "frontmatter": {
+          "name": "game-ui-ux",
+          "description": ">"
+        },
+        "sha256": "487350536eb85c3ae551a697a8915775c4a4658bc15b795d380eb94a93a5a502",
+        "lines": 151
+      }
+    ],
+    "card": ".agents/library/capabilities/game-ui-ux.md"
+  },
+  {
+    "capability": "gate-check",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/gate-check/SKILL.md",
+        "folder": "gate-check",
+        "frontmatter": {
+          "name": "gate-check",
+          "description": "\"Ready to advance between development phases? PASS/CONCERNS/NOT ASSESSED/FAIL with blockers and required artifacts. 'Can we move to production?'\"",
+          "argument-hint": "\"[target-phase: systems-design | technical-setup | pre-production | production | polish | release] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash, Write, Edit, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/gate-check/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "opus"
+        },
+        "sha256": "be9c7ee9b8c0489cc75d33a0c31ae153151e74ed6ab1446fbbcb1c5d784dce7b",
+        "lines": 891
+      }
+    ],
+    "card": ".agents/library/capabilities/gate-check.md"
+  },
+  {
+    "capability": "godot-2d-movement",
+    "status": "active",
+    "active_skill": "uomd-godot-2d-movement",
+    "sources": [
+      {
+        "path": ".agents/skills/godot-2d-movement/SKILL.md",
+        "folder": "godot-2d-movement",
+        "frontmatter": {
+          "name": "godot-2d-movement",
+          "description": ">"
+        },
+        "sha256": "67dfa75ea82bb1f6ac63733bddbaf2dabc9950106a1f2c287f55eff6bbe86d4e",
+        "lines": 150
+      }
+    ],
+    "card": ".agents/library/capabilities/godot-2d-movement.md"
+  },
+  {
+    "capability": "godot-animation",
+    "status": "active",
+    "active_skill": "uomd-godot-animation",
+    "sources": [
+      {
+        "path": ".agents/skills/godot-animation/SKILL.md",
+        "folder": "godot-animation",
+        "frontmatter": {
+          "name": "godot-animation",
+          "description": ">"
+        },
+        "sha256": "7dfd0d951204eed3869cc443742684c042541e6e75b3d275afd06de9ef9f4394",
+        "lines": 123
+      }
+    ],
+    "card": ".agents/library/capabilities/godot-animation.md"
+  },
+  {
+    "capability": "godot-gdscript",
+    "status": "active",
+    "active_skill": "uomd-godot-gdscript",
+    "sources": [
+      {
+        "path": ".agents/skills/godot-gdscript/SKILL.md",
+        "folder": "godot-gdscript",
+        "frontmatter": {
+          "name": "godot-gdscript",
+          "description": ">"
+        },
+        "sha256": "3e8e596365c9b2443331b0383522690681ab01502aff47461780b985cb87b1cb",
+        "lines": 130
+      }
+    ],
+    "card": ".agents/library/capabilities/godot-gdscript.md"
+  },
+  {
+    "capability": "godot-gdscript-headless-testing",
+    "status": "active",
+    "active_skill": "uomd-godot-gdscript-headless-testing",
+    "sources": [
+      {
+        "path": ".agents/skills/godot-gdscript-headless-testing/SKILL.md",
+        "folder": "godot-gdscript-headless-testing",
+        "frontmatter": {
+          "name": "godot-gdscript-headless-testing",
+          "description": ">"
+        },
+        "sha256": "e7940ca90ae60a9ed00380d5134a3f2d6c9fb20a28da1cdc46ef799b61fb8bcb",
+        "lines": 188
+      }
+    ],
+    "card": ".agents/library/capabilities/godot-gdscript-headless-testing.md"
+  },
+  {
+    "capability": "godot-nodes-scenes",
+    "status": "active",
+    "active_skill": "uomd-godot-nodes-scenes",
+    "sources": [
+      {
+        "path": ".agents/skills/godot-nodes-scenes/SKILL.md",
+        "folder": "godot-nodes-scenes",
+        "frontmatter": {
+          "name": "godot-nodes-scenes",
+          "description": ">"
+        },
+        "sha256": "c086047a31b88c58b35af5591f363a5b99cb87f817825f3161b6ba6e8209fea8",
+        "lines": 123
+      }
+    ],
+    "card": ".agents/library/capabilities/godot-nodes-scenes.md"
+  },
+  {
+    "capability": "godot-resources",
+    "status": "active",
+    "active_skill": "uomd-godot-resources",
+    "sources": [
+      {
+        "path": ".agents/skills/godot-resources/SKILL.md",
+        "folder": "godot-resources",
+        "frontmatter": {
+          "name": "godot-resources",
+          "description": ">"
+        },
+        "sha256": "eb5cfe9a2b8523c37f577786fd6ca8ba5bf3b4f9e8c17bcfbe70c5de4771bfef",
+        "lines": 120
+      }
+    ],
+    "card": ".agents/library/capabilities/godot-resources.md"
+  },
+  {
+    "capability": "godot-signals-groups",
+    "status": "active",
+    "active_skill": "uomd-godot-signals-groups",
+    "sources": [
+      {
+        "path": ".agents/skills/godot-signals-groups/SKILL.md",
+        "folder": "godot-signals-groups",
+        "frontmatter": {
+          "name": "godot-signals-groups",
+          "description": ">"
+        },
+        "sha256": "71d0800c67dda6ccec7ee5757ed8fe4775ca5d7d4cc7438e4e86efe33184fa7d",
+        "lines": 131
+      }
+    ],
+    "card": ".agents/library/capabilities/godot-signals-groups.md"
+  },
+  {
+    "capability": "godot-tilemap",
+    "status": "active",
+    "active_skill": "uomd-godot-tilemap",
+    "sources": [
+      {
+        "path": ".agents/skills/godot-tilemap/SKILL.md",
+        "folder": "godot-tilemap",
+        "frontmatter": {
+          "name": "godot-tilemap",
+          "description": ">"
+        },
+        "sha256": "1c860e5fb0b1fbec25dcc9a1907cc4d7ae924ffe59f815141b929e4a466ca167",
+        "lines": 130
+      }
+    ],
+    "card": ".agents/library/capabilities/godot-tilemap.md"
+  },
+  {
+    "capability": "godot-ui-control",
+    "status": "active",
+    "active_skill": "uomd-godot-ui-control",
+    "sources": [
+      {
+        "path": ".agents/skills/godot-ui-control/SKILL.md",
+        "folder": "godot-ui-control",
+        "frontmatter": {
+          "name": "godot-ui-control",
+          "description": ">"
+        },
+        "sha256": "a082faf34d6fe5d09d41ed9bbb19f257b840c4482ecb3bb981b15bb8612b432f",
+        "lines": 126
+      }
+    ],
+    "card": ".agents/library/capabilities/godot-ui-control.md"
+  },
+  {
+    "capability": "graphify",
+    "status": "active",
+    "active_skill": "uomd-graphify",
+    "sources": [
+      {
+        "path": ".codex/skills/graphify/SKILL.md",
+        "folder": "graphify",
+        "frontmatter": {
+          "name": "graphify",
+          "description": "\"Use for any question about a codebase, its architecture, file relationships, or project content — especially when graphify-out/ exists, where the question should be treated as a graphify query first. Turns any input (code, docs, papers, images, videos) into a persistent knowledge graph with god nodes, community detection, and query/path/explain tools.\""
+        },
+        "sha256": "ab3be669f19a95232afecacb46dcb42e2354a1da229f3aaae92aeaec8bf3ec28",
+        "lines": 720
+      }
+    ],
+    "card": ".agents/library/capabilities/graphify.md"
+  },
+  {
+    "capability": "help",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/help/SKILL.md",
+        "folder": "help",
+        "frontmatter": {
+          "name": "help",
+          "description": "\"What should I do next? Use when stuck or you don't know what to do.\"",
+          "argument-hint": "\"[optional: what you just finished, e.g. 'finished design-review' or 'stuck on ADRs']\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash(bash \"*/.claude/skills/help/../../hooks/yaml-helper.sh\" resolve_config *), Bash(bash \"*/.claude/skills/help/../../scripts/story-status.sh\"), Bash(bash .claude/scripts/story-status.sh*), Bash(bash .claude/scripts/artifact-check.sh *), Bash(bash \".claude/scripts/artifact-check.sh\" *), Bash(bash ./.claude/scripts/artifact-check.sh *), Bash(git log *)",
+          "model": "haiku"
+        },
+        "sha256": "522fa9d5514db4188173f6c5b5cfb44c34fe3fe85201317949c422aff235a33e",
+        "lines": 375
+      }
+    ],
+    "card": ".agents/library/capabilities/help.md"
+  },
+  {
+    "capability": "hotfix",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/hotfix/SKILL.md",
+        "folder": "hotfix",
+        "frontmatter": {
+          "name": "hotfix",
+          "description": "\"Emergency fix bypassing normal sprint process — hotfix branch, approvals tracked, backport verified, full audit trail.\"",
+          "argument-hint": "\"[bug-id or description]\"",
+          "user-invocable": "true",
+          "disable-model-invocation": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion",
+          "model": "sonnet"
+        },
+        "sha256": "69ce27ea3ef40ad111f94be13d70840d82ac173ae72a1fa3617cb33b3494b687",
+        "lines": 253
+      }
+    ],
+    "card": ".agents/library/capabilities/hotfix.md"
+  },
+  {
+    "capability": "launch-checklist",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/launch-checklist/SKILL.md",
+        "folder": "launch-checklist",
+        "frontmatter": {
+          "name": "launch-checklist",
+          "description": "\"Launch readiness across every department: code, content, store, marketing, community, infrastructure, legal, go/no-go sign-offs.\"",
+          "argument-hint": "\"[launch-date or 'dry-run']\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, AskUserQuestion, Bash(bash \"*/.claude/skills/launch-checklist/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "94da5745b2e9d73a1eb315ea1a51c6ac7c3f67edc6dd775932673488ac84e1b5",
+        "lines": 395
+      }
+    ],
+    "card": ".agents/library/capabilities/launch-checklist.md"
+  },
+  {
+    "capability": "localize",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/localize/SKILL.md",
+        "folder": "localize",
+        "frontmatter": {
+          "name": "localize",
+          "description": "\"Localization pipeline — find hardcoded strings, extract string tables, cultural review, VO, RTL, enforce string freeze.\"",
+          "argument-hint": "\"[scan|extract|validate|status|brief|cultural-review|vo-pipeline|rtl-check|freeze|qa]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/localize/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "488ee8fa4280e5d2feaae40656180129215b8db8abee2016d838bf73e7c0af87",
+        "lines": 464
+      }
+    ],
+    "card": ".agents/library/capabilities/localize.md"
+  },
+  {
+    "capability": "map-systems",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/map-systems/SKILL.md",
+        "folder": "map-systems",
+        "frontmatter": {
+          "name": "map-systems",
+          "description": "\"Decompose a concept into individual systems, map dependencies, prioritize design order, create the systems index.\"",
+          "argument-hint": "\"[next | system-name] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Agent, Bash(bash \"*/.claude/skills/map-systems/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "f03742ae01445105c7f974c097eabc23cbd09d8cc2781482f0f1c1302d9a3080",
+        "lines": 465
+      }
+    ],
+    "card": ".agents/library/capabilities/map-systems.md"
+  },
+  {
+    "capability": "milestone-review",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/milestone-review/SKILL.md",
+        "folder": "milestone-review",
+        "frontmatter": {
+          "name": "milestone-review",
+          "description": "\"Milestone progress review — completeness, quality metrics, risk, go/no-go recommendation. At checkpoints or before a deadline.\"",
+          "argument-hint": "\"[milestone-name|current] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/milestone-review/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "3fccf9c2597b0a7e6959ed7dde53f1832f8da35f40895685f9bdb185db78713f",
+        "lines": 253
+      }
+    ],
+    "card": ".agents/library/capabilities/milestone-review.md"
+  },
+  {
+    "capability": "onboard",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/onboard/SKILL.md",
+        "folder": "onboard",
+        "frontmatter": {
+          "name": "onboard",
+          "description": "\"Onboarding doc for a new contributor or agent — project state, conventions, priorities relevant to the specified role.\"",
+          "argument-hint": "\"[role|area]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash(bash \"*/.claude/skills/onboard/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "haiku"
+        },
+        "sha256": "1fea87375332f8626b7c788f97a778388345beaf3c64c7d5a999afc5ea6a4ec8",
+        "lines": 142
+      }
+    ],
+    "card": ".agents/library/capabilities/onboard.md"
+  },
+  {
+    "capability": "patch-notes",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/patch-notes/SKILL.md",
+        "folder": "patch-notes",
+        "frontmatter": {
+          "name": "patch-notes",
+          "description": "\"Player-facing patch notes from git history and changelogs. Translates developer language into player communication.\"",
+          "argument-hint": "\"[version] [--style brief|detailed|full]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash, Bash(bash \"*/.claude/skills/patch-notes/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "23cf1e7ae25bcdeffd422108c5bc092ac74bec0f24aa08b591f23d747540f1a2",
+        "lines": 253
+      }
+    ],
+    "card": ".agents/library/capabilities/patch-notes.md"
+  },
+  {
+    "capability": "perf-profile",
+    "status": "active",
+    "active_skill": "uomd-perf-profile",
+    "sources": [
+      {
+        "path": ".claude/skills/perf-profile/SKILL.md",
+        "folder": "perf-profile",
+        "frontmatter": {
+          "name": "perf-profile",
+          "description": "\"Performance profiling — find bottlenecks, measure against budgets, produce ranked optimization recommendations.\"",
+          "argument-hint": "\"[system-name or 'full']\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash, Bash(bash \"*/.claude/skills/perf-profile/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "c0e5dcb088ae2b80a7e79750017d149f95cdab5983fd3839240f5f687502cfc5",
+        "lines": 237
+      }
+    ],
+    "card": ".agents/library/capabilities/perf-profile.md"
+  },
+  {
+    "capability": "playtest-report",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/playtest-report/SKILL.md",
+        "folder": "playtest-report",
+        "frontmatter": {
+          "name": "playtest-report",
+          "description": "\"Structured playtest report template, or turn existing playtest notes into structured feedback.\"",
+          "argument-hint": "\"[new|analyze path-to-notes] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/playtest-report/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "e3fb83ac622eb66650b911946306e841669f854748ec11f28ce2716714d8e4b5",
+        "lines": 172
+      }
+    ],
+    "card": ".agents/library/capabilities/playtest-report.md"
+  },
+  {
+    "capability": "project-stage-detect",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/project-stage-detect/SKILL.md",
+        "folder": "project-stage-detect",
+        "frontmatter": {
+          "name": "project-stage-detect",
+          "description": "\"Analyze project state, detect stage, identify gaps, recommend next steps. 'Where are we in development?'\"",
+          "argument-hint": "\"[optional: role filter like 'programmer' or 'designer']\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash(bash \"*/.claude/skills/project-stage-detect/../../hooks/yaml-helper.sh\" resolve_config *), Bash(bash .claude/scripts/artifact-check.sh), Bash(bash \".claude/scripts/artifact-check.sh\"), Bash(bash ./.claude/scripts/artifact-check.sh), Bash(bash .claude/scripts/artifact-check.sh *), Bash(bash \".claude/scripts/artifact-check.sh\" *), Bash(bash ./.claude/scripts/artifact-check.sh *)",
+          "model": "haiku"
+        },
+        "sha256": "4a2e0f9c98883954edfa6089694823415609a051a4811de83f052d667ece63eb",
+        "lines": 292
+      }
+    ],
+    "card": ".agents/library/capabilities/project-stage-detect.md"
+  },
+  {
+    "capability": "propagate-design-change",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/propagate-design-change/SKILL.md",
+        "folder": "propagate-design-change",
+        "frontmatter": {
+          "name": "propagate-design-change",
+          "description": "\"A GDD changed — scan ADRs and the traceability index for now-stale architectural decisions. Impact report, guides resolution.\"",
+          "argument-hint": "\"[path/to/changed-gdd.md] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/propagate-design-change/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "253eae37dc89c2f5db75cae49ca23e275b67cbd81768d7d1c1bcc731567ff3a0",
+        "lines": 338
+      }
+    ],
+    "card": ".agents/library/capabilities/propagate-design-change.md"
+  },
+  {
+    "capability": "prototype",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/prototype/SKILL.md",
+        "folder": "prototype",
+        "frontmatter": {
+          "name": "prototype",
+          "description": "\"Concept prototype before GDDs — throwaway HTML, Engine or Paper build, PROCEED/PIVOT/KILL/NOT ASSESSED. After /brainstorm and /setup-engine.\"",
+          "argument-hint": "\"[concept-description] [--path html|engine|paper] [--review full|lean|solo] [--spike]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/prototype/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "6b4e186d6b5215fdcd7a5660dca970020d3e5df265ca522533ca4a5b0b489979",
+        "lines": 636
+      }
+    ],
+    "card": ".agents/library/capabilities/prototype.md"
+  },
+  {
+    "capability": "qa-plan",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/qa-plan/SKILL.md",
+        "folder": "qa-plan",
+        "frontmatter": {
+          "name": "qa-plan",
+          "description": "\"QA test plan for a sprint — classifies stories by Logic/Integration/Visual/UI, covers automated tests, manual cases, smoke scope.\"",
+          "argument-hint": "\"[sprint | feature: system-name | story: path]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, AskUserQuestion, Bash(bash \"*/.claude/skills/qa-plan/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "a854582e521b3366df834f2197a28705f6cf7e8269cde3409dfc185fb1242890",
+        "lines": 357
+      }
+    ],
+    "card": ".agents/library/capabilities/qa-plan.md"
+  },
+  {
+    "capability": "quick-design",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/quick-design/SKILL.md",
+        "folder": "quick-design",
+        "frontmatter": {
+          "name": "quick-design",
+          "description": "\"Lightweight spec for small changes — tuning adjustments, minor mechanics. Embeds directly into stories; skips full GDD.\"",
+          "argument-hint": "\"[brief description of the change]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, AskUserQuestion, Bash(bash \"*/.claude/skills/quick-design/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "90696274bde6e272da5eab3623e76a0b16958149971242113b5239689d736bf8",
+        "lines": 311
+      }
+    ],
+    "card": ".agents/library/capabilities/quick-design.md"
+  },
+  {
+    "capability": "regression-suite",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/regression-suite/SKILL.md",
+        "folder": "regression-suite",
+        "frontmatter": {
+          "name": "regression-suite",
+          "description": "\"Map test coverage to GDD critical paths, find fixed bugs lacking regression tests, flag drift from new features.\"",
+          "argument-hint": "\"[update | audit | report]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, AskUserQuestion, Bash(bash \"*/.claude/skills/regression-suite/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "715596b033b3abb1deccf9c81768ff4ee73b0f46368f2c9dd1fb8ee7e4b73970",
+        "lines": 335
+      }
+    ],
+    "card": ".agents/library/capabilities/regression-suite.md"
+  },
+  {
+    "capability": "release-checklist",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/release-checklist/SKILL.md",
+        "folder": "release-checklist",
+        "frontmatter": {
+          "name": "release-checklist",
+          "description": "\"Pre-release checklist — build verification, certification requirements, store metadata, launch readiness.\"",
+          "argument-hint": "\"[platform: pc|console|mobile|all]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash(bash \"*/.claude/skills/release-checklist/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "9baffd7eeecbf1c96ae90ddcefaad00078476bc7f4022d939d289aab7afbcc8a",
+        "lines": 328
+      }
+    ],
+    "card": ".agents/library/capabilities/release-checklist.md"
+  },
+  {
+    "capability": "retrospective",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/retrospective/SKILL.md",
+        "folder": "retrospective",
+        "frontmatter": {
+          "name": "retrospective",
+          "description": "\"Sprint or milestone retrospective from completed work, velocity, blockers. Actionable insights for the next iteration.\"",
+          "argument-hint": "\"[sprint-N|milestone-name]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash, AskUserQuestion, Bash(bash \"*/.claude/skills/retrospective/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "3cce692be0e1217b30d0eb1d2f596341c4c11377daa663e4248eef586efd0ad5",
+        "lines": 282
+      }
+    ],
+    "card": ".agents/library/capabilities/retrospective.md"
+  },
+  {
+    "capability": "reverse-document",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/reverse-document/SKILL.md",
+        "folder": "reverse-document",
+        "frontmatter": {
+          "name": "reverse-document",
+          "description": "\"Generate missing design or architecture docs from existing implementation — works backwards from code and prototypes.\"",
+          "argument-hint": "\"<type> <path> (e.g., 'design src/gameplay/combat' or 'architecture Assets/Scripts/Core')\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash(bash \"*/.claude/skills/reverse-document/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "74245b18a937b50b69a8764813bccf0f11420db219041f857852862f4a19699c",
+        "lines": 389
+      }
+    ],
+    "card": ".agents/library/capabilities/reverse-document.md"
+  },
+  {
+    "capability": "review-all-gdds",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/review-all-gdds/SKILL.md",
+        "folder": "review-all-gdds",
+        "frontmatter": {
+          "name": "review-all-gdds",
+          "description": "\"Holistic cross-GDD review — contradictions between systems, dominant strategies, economic imbalance, cognitive overload, pillar drift.\"",
+          "argument-hint": "\"[focus: full | consistency | design-theory | since-last-review]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash, AskUserQuestion, Agent, Bash(bash \"*/.claude/skills/review-all-gdds/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "opus"
+        },
+        "sha256": "f2bb0d7a8a05f7ebaae7d84cfe3870484864d5159586cebe6536d3702fdc9204",
+        "lines": 787
+      }
+    ],
+    "card": ".agents/library/capabilities/review-all-gdds.md"
+  },
+  {
+    "capability": "router",
+    "status": "active",
+    "active_skill": "uomd-router",
+    "sources": [
+      {
+        "path": ".agents/skills/router/SKILL.md",
+        "folder": "router",
+        "frontmatter": {
+          "name": "router",
+          "description": ">"
+        },
+        "sha256": "a8b3e2fddc759db8865844cdb82b407eb482a07681cf2d07cd117d998f037ed0",
+        "lines": 228
+      }
+    ],
+    "card": ".agents/library/capabilities/router.md"
+  },
+  {
+    "capability": "rpg",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".agents/skills/rpg/SKILL.md",
+        "folder": "rpg",
+        "frontmatter": {
+          "name": "rpg",
+          "description": ">"
+        },
+        "sha256": "18fb339feca9ac778e461e64548b11c15d2a446c80bb9f2566355a54f18900ce",
+        "lines": 129
+      }
+    ],
+    "card": ".agents/library/capabilities/rpg.md"
+  },
+  {
+    "capability": "save-systems",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".agents/skills/save-systems/SKILL.md",
+        "folder": "save-systems",
+        "frontmatter": {
+          "name": "save-systems",
+          "description": ">"
+        },
+        "sha256": "80558e3f013f36429042f08801f975b364c5207773e5354eadb217d82077f000",
+        "lines": 161
+      }
+    ],
+    "card": ".agents/library/capabilities/save-systems.md"
+  },
+  {
+    "capability": "scope-check",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/scope-check/SKILL.md",
+        "folder": "scope-check",
+        "frontmatter": {
+          "name": "scope-check",
+          "description": "\"Scope creep check — current scope versus the original plan. Flags additions, quantifies bloat, recommends cuts. 'Any scope creep?'\"",
+          "argument-hint": "\"[feature-name or sprint-N]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash(git log *)",
+          "model": "haiku"
+        },
+        "sha256": "e107c71689aedeb0d1b01ed58da3ea2cdfb0af7e465242d2f47d78d71e5c6434",
+        "lines": 163
+      }
+    ],
+    "card": ".agents/library/capabilities/scope-check.md"
+  },
+  {
+    "capability": "security-audit",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/security-audit/SKILL.md",
+        "folder": "security-audit",
+        "frontmatter": {
+          "name": "security-audit",
+          "description": "\"Security audit — save tampering, cheat vectors, network exploits, data exposure, input validation. Before public or multiplayer release.\"",
+          "argument-hint": "\"[full | network | save | input | quick]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash, Write, Agent, Bash(bash \"*/.claude/skills/security-audit/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "c7ee7cf8a2e973cf7c931217d757bee8f1eceddb25d7c87c33295ff2f6427fcd",
+        "lines": 441
+      }
+    ],
+    "card": ".agents/library/capabilities/security-audit.md"
+  },
+  {
+    "capability": "settings",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/settings/SKILL.md",
+        "folder": "settings",
+        "frontmatter": {
+          "name": "settings",
+          "description": "\"View or change project config — effective merged values, or set locally in project.local.yaml.\"",
+          "argument-hint": "\"[key | key=value | --local key=value]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, AskUserQuestion",
+          "model": "sonnet"
+        },
+        "sha256": "d34fd40603b2195f33821d25f9581352ac5b2b66ff880f3eef96a2be16086b0b",
+        "lines": 459
+      }
+    ],
+    "card": ".agents/library/capabilities/settings.md"
+  },
+  {
+    "capability": "setup-engine",
+    "status": "active",
+    "active_skill": "uomd-setup-engine",
+    "sources": [
+      {
+        "path": ".claude/skills/setup-engine/SKILL.md",
+        "folder": "setup-engine",
+        "frontmatter": {
+          "name": "setup-engine",
+          "description": "\"Verify and maintain the pinned Godot 4.7.2 project configuration for Unaware of My Demise. This project does not select among engines.\""
+        },
+        "sha256": "b517e9b3f5153ff22aead61f6c86e7894b00df316a23691c79299066309d4346",
+        "lines": 60
+      }
+    ],
+    "card": ".agents/library/capabilities/setup-engine.md"
+  },
+  {
+    "capability": "smoke-check",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/smoke-check/SKILL.md",
+        "folder": "smoke-check",
+        "frontmatter": {
+          "name": "smoke-check",
+          "description": "\"Critical-path smoke gate before QA hand-off — runs the automated suite. A failed check means the build is not QA-ready.\"",
+          "argument-hint": "\"[sprint | quick | --platform pc|console|mobile|all]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash, Write, AskUserQuestion, Bash(bash \"*/.claude/skills/smoke-check/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "5650cf167fcc450660cc8331832bb081c6eb1c55215725acf900f8c71aceda36",
+        "lines": 763
+      }
+    ],
+    "card": ".agents/library/capabilities/smoke-check.md"
+  },
+  {
+    "capability": "soak-test",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/soak-test/SKILL.md",
+        "folder": "soak-test",
+        "frontmatter": {
+          "name": "soak-test",
+          "description": "\"Soak test protocol for extended play — what to observe and log for slow leaks, fatigue, late-appearing edge cases.\"",
+          "argument-hint": "\"[duration: 30m | 1h | 2h | 4h] [focus: memory | stability | balance | all]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash(bash \"*/.claude/skills/soak-test/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "b0268c95cc39335008bb7f4122d024adb77cc8e40bb9dfa760b9c267a583a2c0",
+        "lines": 339
+      }
+    ],
+    "card": ".agents/library/capabilities/soak-test.md"
+  },
+  {
+    "capability": "sprint-plan",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/sprint-plan/SKILL.md",
+        "folder": "sprint-plan",
+        "frontmatter": {
+          "name": "sprint-plan",
+          "description": "\"New or updated sprint plan from the current milestone, completed work, and available capacity.\"",
+          "argument-hint": "\"[new|update|status] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/sprint-plan/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "92015a9bf998d5079ce8a1ce72088cfc780fdd06876775a3dcafaa7569062276",
+        "lines": 354
+      }
+    ],
+    "card": ".agents/library/capabilities/sprint-plan.md"
+  },
+  {
+    "capability": "sprint-status",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/sprint-status/SKILL.md",
+        "folder": "sprint-status",
+        "frontmatter": {
+          "name": "sprint-status",
+          "description": "\"Fast, concise sprint snapshot — burndown and emerging risks for situational awareness. 'How is the sprint going?'\"",
+          "argument-hint": "\"[sprint-number or blank for current]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash(bash \"*/.claude/skills/sprint-status/../../hooks/yaml-helper.sh\" resolve_config *), Bash(bash \"*/.claude/skills/sprint-status/../../scripts/story-status.sh\"), Bash(bash .claude/scripts/story-status.sh*)",
+          "model": "haiku"
+        },
+        "sha256": "2622108162d6ed82522eee6cfd7a3b135889fa2cbcdc91ad53d8fe8af50076ee",
+        "lines": 265
+      }
+    ],
+    "card": ".agents/library/capabilities/sprint-status.md"
+  },
+  {
+    "capability": "start",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/start/SKILL.md",
+        "folder": "start",
+        "frontmatter": {
+          "name": "start",
+          "description": "\"First-time onboarding — asks where you are, then guides you to the right workflow.\"",
+          "argument-hint": "\"[no arguments]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, AskUserQuestion",
+          "model": "sonnet"
+        },
+        "sha256": "132cc5a633e86575a2d5cc66bdc07eee56ac70181d8f83a10fcdae589af7efc1",
+        "lines": 412
+      }
+    ],
+    "card": ".agents/library/capabilities/start.md"
+  },
+  {
+    "capability": "story-done",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/story-done/SKILL.md",
+        "folder": "story-done",
+        "frontmatter": {
+          "name": "story-done",
+          "description": "\"End-of-story completion review — verifies each acceptance criterion, checks GDD/ADR deviations, prompts code review, updates status.\"",
+          "argument-hint": "\"[story-file-path] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "disable-model-invocation": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash, Write, Edit, AskUserQuestion, Agent, Bash(bash \"*/.claude/skills/story-done/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "07cbbed6a0d8b3d215389b2778ed588c2af2eb6116df19bf55bcb55fb57edb3c",
+        "lines": 793
+      }
+    ],
+    "card": ".agents/library/capabilities/story-done.md"
+  },
+  {
+    "capability": "story-readiness",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/story-readiness/SKILL.md",
+        "folder": "story-readiness",
+        "frontmatter": {
+          "name": "story-readiness",
+          "description": "\"Is a story implementation-ready? Checks clear acceptance criteria, open questions, ADR refs. READY/NEEDS WORK/BLOCKED/NOT ASSESSED.\"",
+          "argument-hint": "\"[story-file-path or 'all' or 'sprint'] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, AskUserQuestion, Agent, Bash(bash \"*/.claude/skills/story-readiness/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "c3b8ae00afa2a873d6b4387d271a639025a707b1637888927628aa27b590cc92",
+        "lines": 518
+      }
+    ],
+    "card": ".agents/library/capabilities/story-readiness.md"
+  },
+  {
+    "capability": "team-audio",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/team-audio/SKILL.md",
+        "folder": "team-audio",
+        "frontmatter": {
+          "name": "team-audio",
+          "description": "\"Orchestrate the audio team — audio-director, sound-designer, technical-artist, gameplay-programmer — direction through implementation.\"",
+          "argument-hint": "\"[feature or area to design audio for] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/team-audio/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "11852aa3a3bd44e644f5dc113f22826134675ab8fdf41f8ffcd4f797e7a6f9fb",
+        "lines": 253
+      }
+    ],
+    "card": ".agents/library/capabilities/team-audio.md"
+  },
+  {
+    "capability": "team-combat",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/team-combat/SKILL.md",
+        "folder": "team-combat",
+        "frontmatter": {
+          "name": "team-combat",
+          "description": "\"Orchestrate the combat team — game-designer, gameplay-programmer, ai-programmer, technical-artist, sound-designer, qa-tester — design through implement and validate.\"",
+          "argument-hint": "\"[combat feature description] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/team-combat/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "a4e4c33f9f2e45dd15fda354bd8d1cb0ca007d1ca9679de319a4d984b2a30de5",
+        "lines": 264
+      }
+    ],
+    "card": ".agents/library/capabilities/team-combat.md"
+  },
+  {
+    "capability": "team-level",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/team-level/SKILL.md",
+        "folder": "team-level",
+        "frontmatter": {
+          "name": "team-level",
+          "description": "\"Orchestrate the level team — level-designer, narrative-director, world-builder, art-director, systems-designer, qa-tester — for complete area creation.\"",
+          "argument-hint": "\"[level name or area to design] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/team-level/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "68ec9d2f18396ccf1fc7128a3cd3b53de955a3a668fe488f57d80ae320d201a8",
+        "lines": 273
+      }
+    ],
+    "card": ".agents/library/capabilities/team-level.md"
+  },
+  {
+    "capability": "team-live-ops",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/team-live-ops/SKILL.md",
+        "folder": "team-live-ops",
+        "frontmatter": {
+          "name": "team-live-ops",
+          "description": "\"Orchestrate the live-ops team — live-ops-designer, economy-designer, analytics-engineer, community-manager, writer — for a season or live event.\"",
+          "argument-hint": "\"[season name or event description] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/team-live-ops/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "39598b2f8c8ebda7bc4a5365097d3be1333526c96ab48d30499bdf0d08ed58bf",
+        "lines": 240
+      }
+    ],
+    "card": ".agents/library/capabilities/team-live-ops.md"
+  },
+  {
+    "capability": "team-narrative",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/team-narrative/SKILL.md",
+        "folder": "team-narrative",
+        "frontmatter": {
+          "name": "team-narrative",
+          "description": "\"Orchestrate the narrative team — narrative-director, writer, world-builder, level-designer — for story, world lore, narrative-driven levels.\"",
+          "argument-hint": "\"[narrative content description] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/team-narrative/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "a99b07003b9c39ed7b6a1d3da5a5bfa6d123db8fde4aa9faf2af4261ade9432d",
+        "lines": 241
+      }
+    ],
+    "card": ".agents/library/capabilities/team-narrative.md"
+  },
+  {
+    "capability": "team-polish",
+    "status": "active",
+    "active_skill": "uomd-team-polish",
+    "sources": [
+      {
+        "path": ".claude/skills/team-polish/SKILL.md",
+        "folder": "team-polish",
+        "frontmatter": {
+          "name": "team-polish",
+          "description": "\"Orchestrate the polish team — performance-analyst, technical-artist, sound-designer, qa-tester — to optimize and harden a feature or area.\"",
+          "argument-hint": "\"[feature or area to polish] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/team-polish/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "d2bea963ed90742615fb3db77d63f3b7fe508ef8cc78c18344bff4fe009bc38f",
+        "lines": 240
+      },
+      {
+        "path": ".agents/skills/team-polish/SKILL.md",
+        "folder": "team-polish",
+        "frontmatter": {
+          "name": "team-polish",
+          "description": "\"Orchestrate the polish team — performance-analyst, technical-artist, sound-designer, qa-tester — to optimize and harden a feature or area.\"",
+          "argument-hint": "\"[feature or area to polish] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/team-polish/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "d2bea963ed90742615fb3db77d63f3b7fe508ef8cc78c18344bff4fe009bc38f",
+        "lines": 240
+      }
+    ],
+    "card": ".agents/library/capabilities/team-polish.md"
+  },
+  {
+    "capability": "team-qa",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/team-qa/SKILL.md",
+        "folder": "team-qa",
+        "frontmatter": {
+          "name": "team-qa",
+          "description": "\"Orchestrate the QA team through a full testing cycle — qa-lead strategy and test plan, qa-tester case writing, execution, sign-off.\"",
+          "argument-hint": "\"[sprint | feature: system-name] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/team-qa/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "0ab2bc67d3a9569119b138e35c3343a33b2b81c8afa2274b5a004d5703842744",
+        "lines": 385
+      }
+    ],
+    "card": ".agents/library/capabilities/team-qa.md"
+  },
+  {
+    "capability": "team-release",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/team-release/SKILL.md",
+        "folder": "team-release",
+        "frontmatter": {
+          "name": "team-release",
+          "description": "\"Orchestrate the release team — release-manager, qa-lead, devops-engineer, producer — to execute a release from candidate to deployment.\"",
+          "argument-hint": "\"[version number or 'next'] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/team-release/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "d7fbdf2807a2ce18acaf1b2d96477bff23a80c008b9cc0138ab9a66f6ec5e070",
+        "lines": 302
+      }
+    ],
+    "card": ".agents/library/capabilities/team-release.md"
+  },
+  {
+    "capability": "team-ui",
+    "status": "active",
+    "active_skill": "uomd-team-ui",
+    "sources": [
+      {
+        "path": ".claude/skills/team-ui/SKILL.md",
+        "folder": "team-ui",
+        "frontmatter": {
+          "name": "team-ui",
+          "description": "\"Orchestrate the UI team through the UX pipeline — authoring, visual design, implementation, review, polish. Uses /ux-design, /ux-review, studio templates.\"",
+          "argument-hint": "\"[UI feature description] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/team-ui/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "12798f01ced29499eb845addbf0ec1b0f719687f6b774c7b5e4aca301b39fd43",
+        "lines": 303
+      },
+      {
+        "path": ".agents/skills/team-ui/SKILL.md",
+        "folder": "team-ui",
+        "frontmatter": {
+          "name": "team-ui",
+          "description": "\"Orchestrate the UI team through the UX pipeline — authoring, visual design, implementation, review, polish. Uses /ux-design, /ux-review, studio templates.\"",
+          "argument-hint": "\"[UI feature description] [--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, TaskCreate, TaskGet, TaskList, TaskUpdate, Bash(bash \"*/.claude/skills/team-ui/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "12798f01ced29499eb845addbf0ec1b0f719687f6b774c7b5e4aca301b39fd43",
+        "lines": 303
+      }
+    ],
+    "card": ".agents/library/capabilities/team-ui.md"
+  },
+  {
+    "capability": "tech-debt",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/tech-debt/SKILL.md",
+        "folder": "tech-debt",
+        "frontmatter": {
+          "name": "tech-debt",
+          "description": "\"Track, categorize and prioritize technical debt across the codebase — scans for debt indicators, maintains a register.\"",
+          "argument-hint": "\"[scan|add|prioritize|report]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, AskUserQuestion, Bash(bash \"*/.claude/skills/tech-debt/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "db5118f6924d97cd8848157dba5b61fd030a585e50038eeec9af0b29bfcfbf1d",
+        "lines": 210
+      }
+    ],
+    "card": ".agents/library/capabilities/tech-debt.md"
+  },
+  {
+    "capability": "test-evidence-review",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/test-evidence-review/SKILL.md",
+        "folder": "test-evidence-review",
+        "frontmatter": {
+          "name": "test-evidence-review",
+          "description": "\"Quality review of test files and evidence — goes beyond existence, evaluates assertion coverage. ADEQUATE/INCOMPLETE/MISSING/NOT ASSESSED per story.\"",
+          "argument-hint": "\"[story-path | sprint | system-name]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash(bash \"*/.claude/skills/test-evidence-review/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "4fda2284471e7b974fac632ec157896163d533c81cbb1ac46382427e0c4ffd1a",
+        "lines": 356
+      }
+    ],
+    "card": ".agents/library/capabilities/test-evidence-review.md"
+  },
+  {
+    "capability": "test-flakiness",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/test-flakiness/SKILL.md",
+        "folder": "test-flakiness",
+        "frontmatter": {
+          "name": "test-flakiness",
+          "description": "\"Find flaky tests from CI logs — aggregates pass rates, spots intermittent failures, recommends quarantine. After multiple runs.\"",
+          "argument-hint": "\"[ci-log-path | scan | registry]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Bash(bash \"*/.claude/skills/test-flakiness/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "01c9988360bbdaaf1d61c1c7857fc28b9dcc6517b2d6d969d368c14bd9d6aa5c",
+        "lines": 248
+      }
+    ],
+    "card": ".agents/library/capabilities/test-flakiness.md"
+  },
+  {
+    "capability": "test-helpers",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/test-helpers/SKILL.md",
+        "folder": "test-helpers",
+        "frontmatter": {
+          "name": "test-helpers",
+          "description": "\"Generate engine-specific test helper libraries — assertion utilities, factory functions, mocks in the engine's test folder. Reduces boilerplate.\"",
+          "argument-hint": "\"[system-name | all | scaffold]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Bash(bash \"*/.claude/skills/test-helpers/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "bbf26e091df9fbf89a7f5c397044b58f17922289de4b1b7fb435707e1a937b54",
+        "lines": 471
+      }
+    ],
+    "card": ".agents/library/capabilities/test-helpers.md"
+  },
+  {
+    "capability": "test-setup",
+    "status": "active",
+    "active_skill": "uomd-test-setup",
+    "sources": [
+      {
+        "path": ".claude/skills/test-setup/SKILL.md",
+        "folder": "test-setup",
+        "frontmatter": {
+          "name": "test-setup",
+          "description": "\"Set up and verify the UOMD Godot test harness and cloud/headless validation path.\""
+        },
+        "sha256": "27f2407f0320a1fc2de33cd54bde0faf12ba692a65c79dc411bd8f070bac3e60",
+        "lines": 58
+      }
+    ],
+    "card": ".agents/library/capabilities/test-setup.md"
+  },
+  {
+    "capability": "uomd-asset-pipeline",
+    "status": "active",
+    "active_skill": "uomd-asset-pipeline",
+    "sources": [
+      {
+        "path": ".claude/skills/uomd-asset-pipeline/SKILL.md",
+        "folder": "uomd-asset-pipeline",
+        "frontmatter": {
+          "name": "uomd-asset-pipeline",
+          "description": "\"Audit, organize, validate, version and promote UOMD creative assets generated through the Gemini development workflow.\""
+        },
+        "sha256": "d653306e424b8eb1592a182224eb67f12ffce5dce3d1f148359c227a19b08926",
+        "lines": 75
+      },
+      {
+        "path": ".agents/skills/uomd-asset-pipeline/SKILL.md",
+        "folder": "uomd-asset-pipeline",
+        "frontmatter": {
+          "name": "uomd-asset-pipeline",
+          "description": "\"Audit, organize, validate, version and promote UOMD creative assets generated through the Gemini development workflow.\""
+        },
+        "sha256": "d653306e424b8eb1592a182224eb67f12ffce5dce3d1f148359c227a19b08926",
+        "lines": 75
+      }
+    ],
+    "card": ".agents/library/capabilities/uomd-asset-pipeline.md"
+  },
+  {
+    "capability": "ux-design",
+    "status": "active",
+    "active_skill": "uomd-ux-design",
+    "sources": [
+      {
+        "path": ".claude/skills/ux-design/SKILL.md",
+        "folder": "ux-design",
+        "frontmatter": {
+          "name": "ux-design",
+          "description": "\"Section-by-section UX spec authoring for a screen, flow or HUD. Reads the player journey to provide context; also project-wide accessibility.\"",
+          "argument-hint": "\"[screen/flow name] or 'hud' or 'patterns' or 'accessibility'\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, AskUserQuestion, Agent, Bash(bash \"*/.claude/skills/ux-design/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "39287bc970c83b8b523b5170887bf091baf37ef88131794d785f2643590bfd91",
+        "lines": 822
+      }
+    ],
+    "card": ".agents/library/capabilities/ux-design.md"
+  },
+  {
+    "capability": "ux-review",
+    "status": "active",
+    "active_skill": "uomd-ux-review",
+    "sources": [
+      {
+        "path": ".claude/skills/ux-review/SKILL.md",
+        "folder": "ux-review",
+        "frontmatter": {
+          "name": "ux-review",
+          "description": "\"Validate a UX spec, HUD design or pattern library — accessibility, GDD alignment, readiness. APPROVED / NOT ASSESSED / NEEDS REVISION / MAJOR REVISION NEEDED.\"",
+          "argument-hint": "\"[file-path or 'all' or 'hud' or 'patterns']\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash(bash \"*/.claude/skills/ux-review/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "b932cc17ab61aaef1413533c7e1cc5318e9447b74003cd4c51af5ce20793ab80",
+        "lines": 329
+      },
+      {
+        "path": ".agents/skills/ux-review/SKILL.md",
+        "folder": "ux-review",
+        "frontmatter": {
+          "name": "ux-review",
+          "description": "\"Validate a UX spec, HUD design or pattern library — accessibility, GDD alignment, readiness. APPROVED / NOT ASSESSED / NEEDS REVISION / MAJOR REVISION NEEDED.\"",
+          "argument-hint": "\"[file-path or 'all' or 'hud' or 'patterns']\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Bash(bash \"*/.claude/skills/ux-review/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "b932cc17ab61aaef1413533c7e1cc5318e9447b74003cd4c51af5ce20793ab80",
+        "lines": 329
+      }
+    ],
+    "card": ".agents/library/capabilities/ux-review.md"
+  },
+  {
+    "capability": "vertical-slice",
+    "status": "deferred",
+    "active_skill": null,
+    "sources": [
+      {
+        "path": ".claude/skills/vertical-slice/SKILL.md",
+        "folder": "vertical-slice",
+        "frontmatter": {
+          "name": "vertical-slice",
+          "description": "\"Pre-production validation — end-to-end build to confirm the full loop is achievable before committing to Production. After GDDs, architecture, UX specs.\"",
+          "argument-hint": "\"[--review full|lean|solo]\"",
+          "user-invocable": "true",
+          "allowed-tools": "Read, Glob, Grep, Write, Edit, Bash, Agent, AskUserQuestion, Bash(bash \"*/.claude/skills/vertical-slice/../../hooks/yaml-helper.sh\" resolve_config *)",
+          "model": "sonnet"
+        },
+        "sha256": "5ca4cb1420837ed752f5c3b6a4de2454343d11e7d13b36d473418eb56bfb8d0b",
+        "lines": 416
+      }
+    ],
+    "card": ".agents/library/capabilities/vertical-slice.md"
+  }
+]

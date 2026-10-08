@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "status": "MIXED_PLANNED_AND_IMPLEMENTED",
+  "player_text_language": "en",
+  "subtitle_language": "en",
+  "voice_language": "ja",
+  "naming": {
+    "screen_id": "ui.<snake_case>; immutable after registration",
+    "godot_root_node": "PascalCase matching the design name",
+    "file_stem": "snake_case matching the design name",
+    "godot_paths": "Per-screen status is authoritative: existing entry design paths remain planned; startup paths are implemented; TitleScreen is constructed directly."
+  },
+  "screens": [
+    {
+      "id": "ui.engine_splash",
+      "name": "EngineSplashScreen",
+      "type": "screen",
+      "status": "RETIRED_FROM_STARTUP",
+      "art_status": "REJECTED_BY_OWNER",
+      "spec": "screens/engine_splash_screen.md",
+      "godot_scene": "res://scenes/ui/startup/engine_splash_screen.tscn",
+      "godot_script": "res://scripts/ui/startup/engine_splash_screen.gd",
+      "access": "historical manual review only; no startup consumer",
+      "signals": [],
+      "verification": "../art/studio/VERIFY_V02.json",
+      "active": false
+    },
+    {
+      "id": "ui.studio_splash",
+      "name": "StudioSplashScreen",
+      "type": "screen",
+      "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
+      "art_status": "CANDIDATE_EMBLEM_V01",
+      "spec": "screens/studio_splash_screen.md",
+      "godot_scene": "res://scenes/ui/startup/studio_splash_screen.tscn",
+      "godot_script": "res://scripts/ui/startup/studio_splash_screen.gd",
+      "access": "public; shipped_fonts; no_account_or_patch_dependency",
+      "signals": [],
+      "verification": "../art/studio/VERIFY_V02.json",
+      "assets": [
+        "res://assets/branding/sovtaym/v01/emblem.png",
+        "res://assets/branding/sovtaym/v01/studio_atmosphere.gdshader"
+      ]
+    },
+    {
+      "id": "ui.startup_sequence",
+      "name": "StartupSequence",
+      "type": "component",
+      "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
+      "art_status": "REJECTED_BY_OWNER",
+      "spec": "screens/startup_sequence.md",
+      "godot_scene": "res://scenes/ui/startup/startup_sequence.tscn",
+      "godot_script": "res://scripts/ui/startup/startup_sequence.gd",
+      "access": "public; shipped_fonts; no_account_or_patch_dependency",
+      "signals": [
+        "phase_changed(screen_id: String)",
+        "completed"
+      ],
+      "verification": "../art/studio/VERIFY_V02.json"
+    },
+    {
+      "id": "ui.title",
+      "name": "TitleScreen",
+      "type": "screen",
+      "status": "EXISTING_RUNTIME_WITH_STARTUP_READINESS; FINAL_ART_PENDING",
+      "spec": "screens/title_transition_screen.md",
+      "godot_scene": null,
+      "godot_construction": "StoryDirector creates existing TitleScreen directly",
+      "godot_script": "res://scripts/ui/title/title_screen.gd",
+      "access": "public; content_and_startup_ready_before_start",
+      "signals": [
+        "start_requested",
+        "support_requested"
+      ],
+      "verification": "../art/studio/VERIFY_V02.json"
+    },
+    {
+      "id": "ui.sign_in",
+      "name": "SignInScreen",
+      "route": "sign-in",
+      "type": "screen",
+      "spec": "screens/sign_in_screen.md",
+      "prototype_view": "entry/screens/sign_in_screen.js",
+      "godot_scene": "res://scenes/ui/entry/sign_in_screen.tscn",
+      "godot_script": "res://scripts/ui/entry/sign_in_screen.gd",
+      "access": "public",
+      "signals": [
+        "sign_in_requested",
+        "settings_requested",
+        "help_requested"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "id": "ui.patch",
+      "name": "PatchScreen",
+      "route": "patch",
+      "type": "screen",
+      "spec": "screens/patch_screen.md",
+      "prototype_view": "entry/screens/patch_screen.js",
+      "godot_scene": "res://scenes/ui/entry/patch_screen.tscn",
+      "godot_script": "res://scripts/ui/entry/patch_screen.gd",
+      "access": "google_session_required; playable_content_not_required",
+      "signals": [
+        "download_requested",
+        "retry_requested",
+        "enter_game_requested",
+        "restart_requested",
+        "settings_requested",
+        "help_requested",
+        "sign_out_requested"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "id": "ui.entry_settings",
+      "name": "EntrySettingsScreen",
+      "route": "settings",
+      "type": "screen",
+      "spec": "screens/entry_settings_screen.md",
+      "prototype_view": "entry/screens/entry_settings_screen.js",
+      "godot_scene": "res://scenes/ui/entry/entry_settings_screen.tscn",
+      "godot_script": "res://scripts/ui/entry/entry_settings_screen.gd",
+      "access": "public; device_local; sign_out_requires_session",
+      "signals": [
+        "back_requested",
+        "volume_changed",
+        "text_size_changed",
+        "reduce_motion_changed",
+        "sign_out_requested"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "id": "ui.entry_help",
+      "name": "EntryHelpScreen",
+      "route": "help",
+      "type": "screen",
+      "spec": "screens/entry_help_screen.md",
+      "prototype_view": "entry/screens/entry_help_screen.js",
+      "godot_scene": "res://scenes/ui/entry/entry_help_screen.tscn",
+      "godot_script": "res://scripts/ui/entry/entry_help_screen.gd",
+      "access": "public; shipped_text; no_patch_dependency",
+      "signals": [
+        "back_requested",
+        "privacy_requested"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "id": "ui.entry_utility_menu",
+      "name": "EntryUtilityMenu",
+      "type": "component",
+      "spec": "screens/entry_utility_menu.md",
+      "prototype_view": "entry/components/entry_utility_menu.js",
+      "godot_scene": "res://scenes/ui/entry/entry_utility_menu.tscn",
+      "godot_script": "res://scripts/ui/entry/entry_utility_menu.gd",
+      "access": "public; sign_out_visible_only_with_session",
+      "signals": [
+        "settings_requested",
+        "help_requested",
+        "sign_out_requested",
+        "dismissed"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "id": "ui.sign_out_confirm",
+      "name": "SignOutConfirmDialog",
+      "type": "dialog",
+      "spec": "screens/sign_out_confirm_dialog.md",
+      "prototype_view": "entry/components/sign_out_confirm_dialog.js",
+      "godot_scene": "res://scenes/ui/entry/sign_out_confirm_dialog.tscn",
+      "godot_script": "res://scripts/ui/entry/sign_out_confirm_dialog.gd",
+      "access": "google_session_required",
+      "signals": [
+        "confirmed",
+        "cancelled"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "id": "ui.action_button",
+      "name": "GothicActionButton",
+      "type": "component",
+      "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
+      "art_status": "CANDIDATE_SYSTEM_V02",
+      "spec": "../design/ART_SYSTEM_V02.md",
+      "godot_scene": null,
+      "godot_construction": "Reusable code-built Control; UiKit or direct component construction",
+      "godot_script": "res://scripts/ui/common/gothic_action_button.gd",
+      "access": "bundled_base_install; no_account_or_patch_dependency",
+      "signals": [
+        "pressed",
+        "busy_changed(is_busy: bool)"
+      ],
+      "verification": "../art/system/v02/VERIFY.json"
+    },
+    {
+      "id": "ui.confirmation_frame",
+      "name": "GothicModal",
+      "type": "component",
+      "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
+      "art_status": "CANDIDATE_SYSTEM_V02",
+      "spec": "../design/ART_SYSTEM_V02.md",
+      "godot_scene": null,
+      "godot_construction": "Reusable code-built Control; UiKit or direct component construction",
+      "godot_script": "res://scripts/ui/common/gothic_modal.gd",
+      "access": "bundled_base_install; no_account_or_patch_dependency",
+      "signals": [
+        "confirmed",
+        "canceled"
+      ],
+      "verification": "../art/system/v02/VERIFY.json"
+    },
+    {
+      "id": "ui.game_logo",
+      "name": "GameLogo",
+      "type": "component",
+      "status": "IMPLEMENTED_LOCAL_GODOT_4_6_3",
+      "art_status": "CANDIDATE_SYSTEM_V02",
+      "spec": "../design/ART_SYSTEM_V02.md",
+      "godot_scene": null,
+      "godot_construction": "Reusable code-built Control; UiKit or direct component construction",
+      "godot_script": "res://scripts/ui/common/game_logo.gd",
+      "access": "bundled_base_install; no_account_or_patch_dependency",
+      "signals": [],
+      "verification": "../art/system/v02/VERIFY.json"
+    }
+  ],
+  "native_engine_splash": {
+    "owner": "Godot native engine boot; not a second Control screen",
+    "show_image": true,
+    "custom_image": null,
+    "minimum_display_time_ms": 1200,
+    "verification": "../art/studio/VERIFY_V02.json"
+  },
+  "shared_art_system": {
+    "id": "art_system_v02",
+    "runtime_theme": "res://theme/gothic_system_v02.gd",
+    "consumer_api": "UiTheme/UiKit/UiScreen",
+    "art_status": "REJECTED_BY_OWNER",
+    "spec": "../design/ART_SYSTEM_V02.md",
+    "verification": "../art/system/v02/VERIFY.json",
+    "all_player_screens_final": false,
+    "status": "REJECTED_VISUALS; REUSABLE_IMPLEMENTATION_SCAFFOLD"
+  },
+  "developer_reviews": [
+    {
+      "id": "review.art_system_v02",
+      "name": "ArtSystemReviewV02",
+      "godot_scene": "res://scenes/art_review/art_system_review_v02.tscn",
+      "status": "VERIFIED_LOCAL_4_6_3",
+      "player_route": false,
+      "android_export_excluded": true,
+      "verification": "../art/system/v02/VERIFY.json"
+    }
+  ],
+  "visual_owner_decision": {
+    "date": "2026-10-05",
+    "status": "REJECTED_BY_OWNER",
+    "archive": "narrative/archive/visuals_rejected_2026-10-05",
+    "current_visual_reference": "narrative/design/VISUAL_REFERENCE_BRIEF_2026-10-05.md",
+    "reuse_as_final_reference": false,
+    "new_design_source": "External designer AI; owner will deliver files for Godot integration"
+  }
+}

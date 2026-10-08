@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "status": "runtime_candidate_pending_owner_review",
+  "orientation": "portrait_1080x1920",
+  "layout": "player_left_enemy_right",
+  "animation_method": "key_pose_atlas_and_procedural_tween",
+  "states": [
+    "idle",
+    "walk",
+    "basic",
+    "active",
+    "ultimate",
+    "hit",
+    "defeat",
+    "victory"
+  ],
+  "actors": {
+    "fadyme": {
+      "atlas": "res://assets/characters/fadyme/chibi_poses_v003.png",
+      "columns": 4,
+      "rows": 2,
+      "facing": "right",
+      "foot_y": 0.97,
+      "regions": [
+        [
+          25,
+          24,
+          366,
+          431
+        ],
+        [
+          445,
+          29,
+          385,
+          426
+        ],
+        [
+          918,
+          36,
+          453,
+          420
+        ],
+        [
+          1411,
+          24,
+          339,
+          431
+        ],
+        [
+          14,
+          450,
+          466,
+          417
+        ],
+        [
+          503,
+          484,
+          392,
+          381
+        ],
+        [
+          905,
+          537,
+          462,
+          332
+        ],
+        [
+          1376,
+          457,
+          377,
+          413
+        ]
+      ],
+      "foot_y_by_state": {
+        "hit": 0.994750656167979,
+        "ultimate": 0.945,
+        "walk": 0.9953051643192489,
+        "idle": 0.9953596287703016,
+        "basic": 0.9952380952380953,
+        "defeat": 0.9939759036144579,
+        "active": 0.9953596287703016,
+        "victory": 0.9951573849878934
+      },
+      "pose_files": {
+        "ultimate": "res://assets/characters/fadyme/ultimate_pose_v003.png"
+      },
+      "pose_scale_by_state": {
+        "ultimate": 1.12,
+        "idle": 1.0,
+        "walk": 0.988399071925754,
+        "basic": 0.974477958236659,
+        "active": 1.0,
+        "hit": 0.8839907192575406,
+        "defeat": 0.7703016241299304,
+        "victory": 0.9582366589327146
+      },
+      "pivot_x_by_state": {}
+    },
+    "mahmut": {
+      "atlas": "res://assets/characters/mahmut/chibi_poses_v003.png",
+      "columns": 4,
+      "rows": 2,
+      "facing": "right",
+      "foot_y": 0.97,
+      "foot_y_by_state": {
+        "hit": 0.994750656167979,
+        "ultimate": 0.9942857142857143,
+        "walk": 0.9952267303102625,
+        "idle": 0.9952718676122931,
+        "basic": 0.828,
+        "defeat": 0.9938271604938271,
+        "active": 0.95,
+        "victory": 0.995085995085995
+      },
+      "pose_files": {
+        "basic": "res://assets/characters/mahmut/basic_attack_v003.png",
+        "active": "res://assets/characters/mahmut/guard_pose_v003.png"
+      },
+      "pose_scale_by_state": {
+        "basic": 1.52,
+        "idle": 1.0,
+        "walk": 0.9905437352245863,
+        "active": 1.15,
+        "ultimate": 0.8274231678486997,
+        "hit": 0.900709219858156,
+        "defeat": 0.7659574468085106,
+        "victory": 0.9621749408983451
+      },
+      "pivot_x_by_state": {
+        "basic": 0.38,
+        "active": 0.54
+      },
+      "regions": [
+        [
+          14,
+          28,
+          355,
+          423
+        ],
+        [
+          441,
+          32,
+          383,
+          419
+        ],
+        [
+          873,
+          61,
+          576,
+          390
+        ],
+        [
+          1358,
+          55,
+          393,
+          396
+        ],
+        [
+          14,
+          507,
+          422,
+          350
+        ],
+        [
+          471,
+          475,
+          414,
+          381
+        ],
+        [
+          885,
+          531,
+          420,
+          324
+        ],
+        [
+          1346,
+          454,
+          407,
+          407
+        ]
+      ]
+    },
+    "bellbound_dead": {
+      "atlas": "res://assets/enemies/tutorial/bellbound_poses_v003.png",
+      "columns": 2,
+      "rows": 2,
+      "facing": "left",
+      "foot_y": 0.96,
+      "pose_indices": {
+        "active": 1,
+        "ultimate": 1,
+        "victory": 0,
+        "walk": 0,
+        "idle": 0,
+        "hit": 2,
+        "defeat": 3,
+        "basic": 1
+      },
+      "foot_y_by_state": {
+        "active": 0.938,
+        "ultimate": 0.938,
+        "victory": 0.9969088098918083,
+        "walk": 0.9969088098918083,
+        "idle": 0.9969088098918083,
+        "hit": 0.9963768115942029,
+        "defeat": 0.9952941176470588,
+        "basic": 0.938
+      },
+      "regions": [
+        [
+          157,
+          32,
+          373,
+          647
+        ],
+        [
+          592,
+          89,
+          633,
+          590
+        ],
+        [
+          95,
+          673,
+          485,
+          552
+        ],
+        [
+          737,
+          804,
+          500,
+          425
+        ]
+      ],
+      "pose_scale_by_state": {
+        "idle": 1.0,
+        "walk": 1.0,
+        "basic": 1.15,
+        "active": 1.15,
+        "ultimate": 1.15,
+        "hit": 0.8531684698608965,
+        "defeat": 0.6568778979907264,
+        "victory": 1.0
+      },
+      "pose_files": {
+        "basic": "res://assets/enemies/tutorial/bellbound_attack_v003.png",
+        "active": "res://assets/enemies/tutorial/bellbound_attack_v003.png",
+        "ultimate": "res://assets/enemies/tutorial/bellbound_attack_v003.png"
+      },
+      "pivot_x_by_state": {
+        "basic": 0.5,
+        "active": 0.5,
+        "ultimate": 0.5
+      }
+    },
+    "hollow_pilgrim": {
+      "atlas": "res://assets/enemies/tutorial/pilgrim_poses_v003.png",
+      "columns": 2,
+      "rows": 2,
+      "facing": "left",
+      "foot_y": 0.96,
+      "pose_indices": {
+        "active": 1,
+        "ultimate": 1,
+        "victory": 0,
+        "walk": 0,
+        "idle": 0,
+        "hit": 2,
+        "defeat": 3,
+        "basic": 1
+      },
+      "regions": [
+        [
+          128,
+          46,
+          412,
+          564
+        ],
+        [
+          543,
+          121,
+          657,
+          488
+        ],
+        [
+          119,
+          637,
+          493,
+          551
+        ],
+        [
+          761,
+          735,
+          461,
+          455
+        ]
+      ],
+      "foot_y_by_state": {
+        "active": 0.875,
+        "ultimate": 0.875,
+        "victory": 0.9964539007092199,
+        "walk": 0.9964539007092199,
+        "idle": 0.9964539007092199,
+        "hit": 0.9963702359346642,
+        "defeat": 0.9956043956043956,
+        "basic": 0.875
+      },
+      "pose_scale_by_state": {
+        "idle": 1.0,
+        "walk": 1.0,
+        "basic": 1.23,
+        "active": 1.23,
+        "ultimate": 1.23,
+        "hit": 0.9769503546099291,
+        "defeat": 0.8067375886524822,
+        "victory": 1.0
+      },
+      "pose_files": {
+        "basic": "res://assets/enemies/tutorial/pilgrim_attack_v003.png",
+        "active": "res://assets/enemies/tutorial/pilgrim_attack_v003.png",
+        "ultimate": "res://assets/enemies/tutorial/pilgrim_attack_v003.png"
+      },
+      "pivot_x_by_state": {
+        "basic": 0.62,
+        "active": 0.62,
+        "ultimate": 0.62
+      }
+    }
+  },
+  "environments": {
+    "forest_whispering_ash": "res://assets/backgrounds/forest_whispering_ash/side_arena_v001.png"
+  },
+  "portraits": {
+    "mahmut": {
+      "files": {
+        "composed": "res://assets/characters/mahmut/vn_watchful_v001.png",
+        "dry_humor": "res://assets/characters/mahmut/vn_dry_humor_v001.png",
+        "protective_resolve": "res://assets/characters/mahmut/vn_protective_resolve_v001.png"
+      },
+      "emotions": {
+        "watchful": "composed",
+        "protective": "protective_resolve",
+        "protective_resolve": "protective_resolve",
+        "protective resolve": "protective_resolve",
+        "determined": "protective_resolve",
+        "steady": "protective_resolve",
+        "dry_humor": "dry_humor",
+        "dry humor": "dry_humor",
+        "dry_amusement": "dry_humor",
+        "small_smile": "dry_humor"
+      }
+    },
+    "fadyme": {
+      "files": {
+        "composed": "res://assets/characters/fadyme/vn_composed_v001.png",
+        "warm": "res://assets/characters/fadyme/vn_warm_v001.png",
+        "quiet_pain": "res://assets/characters/fadyme/vn_quiet_pain_v001.png",
+        "honest_fear": "res://assets/characters/fadyme/vn_honest_fear_v001.png",
+        "wry": "res://assets/characters/fadyme/vn_wry_v001.png"
+      },
+      "emotions": {
+        "composed": "composed",
+        "determined": "composed",
+        "steady": "composed",
+        "soft_smile": "warm",
+        "small_smile": "warm",
+        "dry_amusement": "wry",
+        "deflecting": "wry",
+        "encouraging": "warm",
+        "sad": "quiet_pain",
+        "breaking": "quiet_pain",
+        "pained_smile": "quiet_pain",
+        "frightened": "honest_fear",
+        "uneasy": "honest_fear"
+      }
+    }
+  },
+  "ultimates": {
+    "fadyme": "res://assets/characters/fadyme/ultimate_cutin_v001.png",
+    "mahmut": "res://assets/characters/mahmut/ultimate_cutin_v001.png"
+  },
+  "illustrations": {
+    "roadside_rest": "res://assets/ui/narrative/tutorial_v002/roadside_rest_v001.png",
+    "shelter_evening": "res://assets/ui/narrative/tutorial_v002/shelter_evening_v001.png"
+  },
+  "content_language": "en",
+  "voice_language": "ja",
+  "voice_status": "deferred; new voice model planned; earlier JP takes retained as unselected creative references",
+  "icons": {
+    "mahmut": "res://assets/characters/mahmut/profile_icon_v001.png",
+    "fadyme": "res://assets/characters/fadyme/profile_icon_v001.png"
+  },
+  "quality_standard": "painted_chibi_v003"
+}

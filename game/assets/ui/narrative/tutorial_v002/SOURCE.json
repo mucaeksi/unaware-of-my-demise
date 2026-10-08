@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-08",
+  "mode": "built-in image_gen",
+  "prompt_record": "Production prompt briefs; preserve the stated identities, poses, framing and constraints when generating further variants.",
+  "assets": [
+    {
+      "path": "game/assets/ui/narrative/prologue_v002/writing_arm_v003.png",
+      "references": [
+        "game/assets/ui/narrative/prologue_v002/writing_hand.png"
+      ],
+      "transparent_background": true,
+      "prompt_brief": "Edit the reference into a complete natural writing arm for a painted dark-fantasy prologue. Keep the pale feminine hand, brown feather quill, dark embroidered sleeve and existing painterly style. Show the entire forearm and a bent elbow leading naturally into the sleeve; no abruptly amputated limb. Quill nib points toward the left at the writing plane. Isolated transparent background, clean alpha edges, no parchment, text, scenery, UI or watermark. The arm will enter from the right of the portrait game frame.",
+      "sha256": "59309818af3a5a2b4b378675f69974ab09f885af7a6d0ccc3896706b356d82a5",
+      "generated_original": "C:/Users/PC/.codex/generated_images/01a11814-2f5c-7360-adf6-2629a8a5706e/exec-89071083-9ccd-4da4-bd1a-0351e0723bce.png"
+    },
+    {
+      "path": "game/assets/ui/narrative/tutorial_v002/roadside_rest_v001.png",
+      "references": [
+        "game/assets/characters/fadyme/vn_warm_v001.png",
+        "game/assets/characters/mahmut/vn_watchful_v001.png"
+      ],
+      "transparent_background": false,
+      "prompt_brief": "Create a finished painted light-novel illustration for the existing dark-fantasy game using both portraits strictly as identity and costume references. Fadyme, an adult woman age 22 with silver hair, violet eyes, a dark embroidered hood and a small bell, sits on the left; Mahmut, an adult man age 28 with brown hair, weathered dark armor and a red scarf/cloak, sits on the right. Both sit naturally on a fallen roadside stone at dusk. Fadyme is smaller and shorter than Mahmut and quietly fastens a loose strap on his gauntlet while he watches her hands with restrained warmth. Gentle unspoken attraction through glances and small gestures, lightly playful but serious, no overt romance. Portrait composition keeps both faces and the shared hand action readable. Cool forest and ruins, warm amber rim light, detailed fabric and metal, consistent established painted quality. No other characters, modern objects, explicit intimacy, spoilers, lettering, UI or watermark.",
+      "sha256": "f431401e2ab09ab677656127e294152226bd5423ab9c68f4b27cb9619e1be721",
+      "generated_original": "C:/Users/PC/.codex/generated_images/01a11814-2f5c-7360-adf6-2629a8a5706e/exec-0d89c274-0e15-4a3c-90ae-4879a4f43f56.png"
+    },
+    {
+      "path": "game/assets/ui/narrative/tutorial_v002/shelter_evening_v001.png",
+      "references": [
+        "game/assets/characters/fadyme/vn_warm_v001.png",
+        "game/assets/characters/mahmut/vn_watchful_v001.png"
+      ],
+      "transparent_background": false,
+      "prompt_brief": "Create a second finished painted light-novel illustration for the existing dark-fantasy game using the same two portraits strictly as identity and costume references. Fadyme, adult age 22, silver hair and violet eyes in her embroidered dark hood and bell, is seated on the left; Mahmut, adult age 28, brown hair, dark armor and red scarf/cloak, is seated beside her on the right, visibly taller and broader. They rest on a stone bench inside a modest abandoned shelter with a broken roof at evening. Fadyme holds a piece of bread and looks through the open side toward the quiet road. Mahmut turns his attention toward her with understated care. Close companionship and hidden attraction, restrained serious expressions, no embrace or overt romance. Both faces, seated bodies and different gaze directions stay clear in a portrait composition. Last amber sunset light against cool violet dusk, textured ancient stone, detailed consistent painted fabrics and armor. No new characters, modern props, canon revelations, lettering, UI or watermark.",
+      "sha256": "4851e29c0aac4947d9b1e4999315afc9fe2e4be6cbce252777aa4c6cacc9e856",
+      "generated_original": "C:/Users/PC/.codex/generated_images/01a11814-2f5c-7360-adf6-2629a8a5706e/exec-a5062174-78b8-43b5-a507-051e8d03422d.png"
+    }
+  ]
+}
