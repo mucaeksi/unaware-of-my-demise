@@ -3127,7 +3127,7 @@
   {
     "path": "AGENTS.md",
     "node_id": "agents",
-    "size_bytes": 6658
+    "size_bytes": 7051
   },
   {
     "path": "CLAUDE.md",
@@ -25867,7 +25867,7 @@
   {
     "path": "narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json",
     "node_id": "narrative_10_vo_line_maps_chirp3_hd_voice_catalog",
-    "size_bytes": 10722
+    "size_bytes": 10894
   },
   {
     "path": "narrative/10_VO/Line_Maps/jp_script_fadyme.json",
@@ -25892,7 +25892,7 @@
   {
     "path": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
     "node_id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
-    "size_bytes": 19802
+    "size_bytes": 19968
   },
   {
     "path": "narrative/10_VO/Recording_Notes/Tools/record_fadyme_vo.py",
@@ -25917,7 +25917,7 @@
   {
     "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
     "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
-    "size_bytes": 6336
+    "size_bytes": 7127
   },
   {
     "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audition_plan.json",
@@ -25942,7 +25942,7 @@
   {
     "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
     "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
-    "size_bytes": 1028
+    "size_bytes": 1146
   },
   {
     "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json",
@@ -25952,7 +25952,7 @@
   {
     "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/workflow_run_status.json",
     "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_workflow_run_status",
-    "size_bytes": 546
+    "size_bytes": 586
   },
   {
     "path": "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.json",

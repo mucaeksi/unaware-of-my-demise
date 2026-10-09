@@ -6,7 +6,7 @@
 # Graph Report - uomd-main-review  (2026-10-09)
 
 ## Corpus Check
-- Large corpus: 3533 files · ~21,206,504 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.
+- Large corpus: 3533 files · ~21,206,669 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.
 
 ## Summary
 - 28812 nodes · 52249 edges · 1064 communities (943 shown, 121 thin omitted)

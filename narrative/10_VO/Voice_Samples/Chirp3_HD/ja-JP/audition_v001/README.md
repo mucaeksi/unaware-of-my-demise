@@ -63,6 +63,17 @@ yükleyerek Cloud TTS erişimini denetler. Servis hesabı JSON'u/key'i veya acce
 token dosyaya/loga yazılmaz. Bu hesabın TTS erişimi başarılı olmadan kayıt seti
 üretilmiş sayılmaz. Kimlik yöntemi manifestte açıkça kaydedilir.
 
+Son kontrol: kullanıcı API etkinleştirmesini bildirdikten sonra
+[Actions 37907743612](https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37907743612)
+yeniden çalıştırıldı. Aynı servis hesabıyla `604013824221` projesi hâlâ
+`SERVICE_DISABLED` döndürdü; etkinleştirme isteği 403 ile reddedildi.
+Gerçek WAV ve sentez çağrısı sayısı **0**. Etkinleştirilen projenin kimliği
+netleştirilmeden erişim çalışıyor kabul edilmez. Bu oturumun runtime kontrolünde
+Google anahtar binding'i görünmedi; GitHub Actions yolu bunu gerektirmez.
+Araç `GOOGLE_CLOUD_API_KEY`, `GOOGLE_API_KEY` ve `GEMINI_API` ortam değişkenlerini
+kabul eder. Google kimlik bilgileri yalnız ses/müzik işlerinde kullanılacak;
+görsel üretimi bu aracın kapsamı dışındadır.
+
 `.github/workflows/chirp3-hd-voice-samples.yml`, yardımcı dal push'ında veya
 manual dispatch ile aynı üretim aracını çalıştırır. Önce güncel main ile
 birleşir; doğrulanmış aynı-istek örneklerini tekrar üretmez. Tam başarılı set,

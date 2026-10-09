@@ -50,6 +50,12 @@ Chirp 3 HD documentation; the plan requests identical pauses/rates for every
 voice. Final Fadyme recordings remain separate. Both pending AAB LFS objects
 were remotely verified and downloaded/hash-checked; preserve normal LFS hooks.
 
+Owner follow-up: a cloud API key was added and provider API activation was
+reported. Use Google credentials only for sound and music; produce images with
+the image-generation tool. A fresh Actions probe still reports SERVICE_DISABLED
+for project 604013824221. Check the enabled project's identity before retrying;
+do not treat reported activation or an unbound runtime key as working access.
+
 ## Graphify
 
 For project/codebase questions with an existing graph, first run `graphify query "<topic>"`; use path/explain for relationships/focused context. Never read graphify-out/graph.json directly. Dirty outputs do not justify skipping queries. Use wiki/index.md when present for broad navigation; GRAPH_REPORT.md only for broad architecture or insufficient scoped results. `/graphify` uses the installed skill; `$uomd-graphify` adds project-specific maintenance.

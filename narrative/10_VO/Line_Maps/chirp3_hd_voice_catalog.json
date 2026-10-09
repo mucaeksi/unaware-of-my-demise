@@ -20,7 +20,7 @@
   ],
   "live_api_response": null,
   "live_verified_at": null,
-  "api_calls": 4,
+  "api_calls": 5,
   "auditions_generated": 0,
   "voices": [
     {
@@ -270,5 +270,7 @@
   "api_call_counter_scope": "Shared authoring CLI only; excludes OAuth, provider documentation, service-setup helper and LFS",
   "google_credentials_source": "EXISTING_GITHUB_GOOGLE_PLAY_SERVICE_ACCOUNT",
   "provider_service_report": "docs/coder/cloud_delivery/google_tts_service_status.json",
-  "provider_docs_reference": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json"
+  "provider_docs_reference": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json",
+  "last_access_check_utc": "2026-10-09T08:53:53.363214+00:00",
+  "last_access_check_workflow": "https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37907743612"
 }
