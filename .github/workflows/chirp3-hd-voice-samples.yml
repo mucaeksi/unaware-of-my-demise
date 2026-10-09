@@ -9,6 +9,7 @@ on:
       - narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audition_plan.json
       - docs/coder/cloud_delivery/lfs_pending_objects.json
       - docs/coder/cloud_delivery/repair_uploaded_lfs.py
+      - docs/coder/cloud_delivery/ensure_google_tts_service.py
   workflow_dispatch:
     inputs:
       google_api_secret:
@@ -48,6 +49,11 @@ jobs:
         run: |
           python3 -m venv "${RUNNER_TEMP}/chirp-google-auth"
           "${RUNNER_TEMP}/chirp-google-auth/bin/python" -m pip install 'google-auth[requests]==2.45.0'
+      - name: Enable only the authorized Cloud TTS service if the existing account permits it
+        continue-on-error: true
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+        run: '"${RUNNER_TEMP}/chirp-google-auth/bin/python" docs/coder/cloud_delivery/ensure_google_tts_service.py'
       - name: Capture official provider authentication reference without credentials
         continue-on-error: true
         run: |
@@ -124,6 +130,9 @@ jobs:
           lfs_report = Path('docs/coder/cloud_delivery/lfs_remote_repair.json')
           if lfs_report.is_file():
               files.append(str(lfs_report))
+          service_report = Path('docs/coder/cloud_delivery/google_tts_service_status.json')
+          if service_report.is_file():
+              files.append(str(service_report))
           subprocess.run(['git', 'add', '--', *files], check=True)
           if subprocess.run(['git', 'diff', '--cached', '--quiet']).returncode:
               message = ('audio: retain all verified Japanese Chirp 3 HD samples'
