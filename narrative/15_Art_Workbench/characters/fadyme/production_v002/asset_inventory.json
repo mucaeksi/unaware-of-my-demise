@@ -153,14 +153,14 @@
     },
     {
       "path": "audio/README.md",
-      "sha256": "4f7eba9ad49a311d1804549d0587315c9261a63a8558c425305c08d00a7ec969",
-      "bytes": 1989,
+      "sha256": "096f70541a10c56be571111145778af2f632bc5b7666df58f3717cfca3a072d2",
+      "bytes": 2175,
       "inclusion": "WORKBENCH_NOT_EXPORTED"
     },
     {
       "path": "audio/STATUS.json",
-      "sha256": "48956778eacf5a1f2d8384c47653444af505661bc7fb6906da2d3dc49653dae1",
-      "bytes": 1178,
+      "sha256": "56aac291a796c7835c7abcfb9ae4b5f7a5247bd04b168cdb76351844282ea98c",
+      "bytes": 1339,
       "inclusion": "WORKBENCH_NOT_EXPORTED"
     },
     {

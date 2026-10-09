@@ -3122,7 +3122,7 @@
   {
     "path": "AGENTS.md",
     "node_id": "agents",
-    "size_bytes": 5201
+    "size_bytes": 5819
   },
   {
     "path": "CLAUDE.md",
@@ -3477,7 +3477,7 @@
   {
     "path": "docs/art/CHIRP3_HD_VOICE_CATALOG.md",
     "node_id": "docs_art_chirp3_hd_voice_catalog",
-    "size_bytes": 3263
+    "size_bytes": 3660
   },
   {
     "path": "docs/art/FREE_2D_LIBRARY_AND_OPENING_CHECKUP_2026-10-08.md",
@@ -25837,7 +25837,7 @@
   {
     "path": "narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json",
     "node_id": "narrative_10_vo_line_maps_chirp3_hd_voice_catalog",
-    "size_bytes": 9402
+    "size_bytes": 10106
   },
   {
     "path": "narrative/10_VO/Line_Maps/jp_script_fadyme.json",
@@ -25860,6 +25860,11 @@
     "size_bytes": 24698
   },
   {
+    "path": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+    "node_id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+    "size_bytes": 13199
+  },
+  {
     "path": "narrative/10_VO/Recording_Notes/Tools/record_fadyme_vo.py",
     "node_id": "narrative_10_vo_recording_notes_tools_record_fadyme_vo",
     "size_bytes": 3672
@@ -25878,6 +25883,36 @@
     "path": "narrative/10_VO/Recording_Notes/character_voice_matrix.md",
     "node_id": "narrative_10_vo_recording_notes_character_voice_matrix",
     "size_bytes": 1928
+  },
+  {
+    "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+    "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+    "size_bytes": 4237
+  },
+  {
+    "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audition_plan.json",
+    "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_audition_plan",
+    "size_bytes": 6529
+  },
+  {
+    "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/authoring_validation.json",
+    "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_authoring_validation",
+    "size_bytes": 545
+  },
+  {
+    "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/gallery_validation.json",
+    "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_gallery_validation",
+    "size_bytes": 215
+  },
+  {
+    "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/index.html",
+    "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_index",
+    "size_bytes": 5961
+  },
+  {
+    "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+    "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+    "size_bytes": 492
   },
   {
     "path": "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.json",
@@ -27507,12 +27542,12 @@
   {
     "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/README.md",
     "node_id": "narrative_15_art_workbench_characters_fadyme_production_v002_audio_readme",
-    "size_bytes": 1989
+    "size_bytes": 2175
   },
   {
     "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/STATUS.json",
     "node_id": "narrative_15_art_workbench_characters_fadyme_production_v002_audio_status",
-    "size_bytes": 1178
+    "size_bytes": 1339
   },
   {
     "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/recording_queue_v002.json",

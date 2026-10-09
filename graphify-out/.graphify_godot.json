@@ -380919,10 +380919,17 @@
     "narrative/10_VO/Missing_VO/Fadyme_Missing_VO.json": "narrative_10_vo_missing_vo_fadyme_missing_vo",
     "narrative/10_VO/Recording_Notes/AUDIO_VO_PLAN_PART1.md": "narrative_10_vo_recording_notes_audio_vo_plan_part1",
     "narrative/10_VO/Recording_Notes/Tools/build_jp_script_fadyme.py": "narrative_10_vo_recording_notes_tools_build_jp_script_fadyme",
+    "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
     "narrative/10_VO/Recording_Notes/Tools/record_fadyme_vo.py": "narrative_10_vo_recording_notes_tools_record_fadyme_vo",
     "narrative/10_VO/Recording_Notes/Tools/split_select_vo.py": "narrative_10_vo_recording_notes_tools_split_select_vo",
     "narrative/10_VO/Recording_Notes/Tools/voice_audition.py": "narrative_10_vo_recording_notes_tools_voice_audition",
     "narrative/10_VO/Recording_Notes/character_voice_matrix.md": "narrative_10_vo_recording_notes_character_voice_matrix",
+    "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+    "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audition_plan.json": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_audition_plan",
+    "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/authoring_validation.json": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_authoring_validation",
+    "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/gallery_validation.json": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_gallery_validation",
+    "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/index.html": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_index",
+    "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
     "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.json": "narrative_11_audio_cues_fadyme_theme_reference_bgm_fadyme_theme_v001_loop_json",
     "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.ogg": "narrative_11_audio_cues_fadyme_theme_reference_bgm_fadyme_theme_v001_loop_ogg",
     "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_original.json": "narrative_11_audio_cues_fadyme_theme_reference_bgm_fadyme_theme_v001_original_json",
@@ -382394,7 +382401,7 @@
     "tools/verify_opening_pack.gd": "tools_verify_opening_pack"
   },
   "statistics": {
-    "inventory_files": 6643,
+    "inventory_files": 6650,
     "godot_source_files": 780,
     "readable_godot_files": 780,
     "source_files_by_extension": {

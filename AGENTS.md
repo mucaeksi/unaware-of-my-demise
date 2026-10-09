@@ -29,6 +29,15 @@ or its 25 takes. Preserve English text/IDs and Japanese voice language. Audio
 production is the final stage with the owner; paid calls are not implied. The
 owner main theme and Fadyme music are not reset by the VO instruction.
 
+Owner update 2026-10-09: explicitly authorized Google API auditions for every
+female and male Chirp 3 HD Japanese voice, using the same long Japanese word,
+text and settings. Preserve samples/configuration on main for future use.
+This sample request does not authorize the separate 241-line final recording
+batch. Use `narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py` and the
+shared `narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/` plan.
+Check live Japanese voice availability; never substitute Gemini TTS or an old
+take. Cloud network/credential settings must actually work before calling.
+
 ## Graphify
 
 For project/codebase questions with an existing graph, first run `graphify query "<topic>"`; use path/explain for relationships/focused context. Never read graphify-out/graph.json directly. Dirty outputs do not justify skipping queries. Use wiki/index.md when present for broad navigation; GRAPH_REPORT.md only for broad architecture or insufficient scoped results. `/graphify` uses the installed skill; `$uomd-graphify` adds project-specific maintenance.

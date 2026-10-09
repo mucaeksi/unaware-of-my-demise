@@ -4,7 +4,7 @@
   "provider_family": "Google Cloud Text-to-Speech Chirp 3 HD",
   "locale": "ja-JP",
   "voice_id": null,
-  "voice_id_status": "CATALOG_SAVED_AUDITION_LATER_NOT_STARTED",
+  "voice_id_status": "ALL_VOICE_SAMPLES_AUTHORIZED_BLOCKED_ACCESS",
   "lines_to_record": 241,
   "legacy_recordings_reused": 0,
   "old_recordings_status": "ARCHIVED_SUPERSEDED",
@@ -13,7 +13,7 @@
   "owner_main_theme": "DO_NOT_REPLACE",
   "fadyme_theme": "PRESERVED_SEPARATELY",
   "direction_source": "docs/design/ENTRY_PRESENTATION_V003_2026-10-07.md",
-  "latest_owner_instruction": "Retain all Chirp 3 HD voice names by gender first; auditions later; audio production last, no game integration",
+  "latest_owner_instruction": "All female/male Chirp 3 HD Japanese voice samples explicitly authorized with shared long word/text; retain on main. Separate final Fadyme 241-line batch after listening/review.",
   "jp_texts_available": 241,
   "new_tutorial_jp_drafts": 40,
   "native_japanese_review": "PENDING_ALL_241",
@@ -23,5 +23,6 @@
   "sfx_files_generated": 0,
   "shared_voice_catalog": "narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json",
   "voice_catalog_verification": "STATIC_REFERENCE_PENDING_LIVE_VOICES_LIST",
-  "auditions_generated": 0
+  "auditions_generated": 0,
+  "shared_audition_package": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001"
 }

@@ -7539,9 +7539,9 @@
       "source_location": "L1",
       "inventory_file": true,
       "extension": ".md",
-      "size_bytes": 5201,
+      "size_bytes": 5819,
       "_origin": "project_inventory",
-      "sha256": "dd7d248844ad8a92e962d374a024e473ebe10c502eaca04ca9cc1ed00160115c"
+      "sha256": "3a3fbb08d479b0df789b3a529375641a5cab5cad40df8e469733593fc3f4a812"
     },
     {
       "id": "claude",
@@ -8366,9 +8366,9 @@
       "source_location": "L1",
       "inventory_file": true,
       "extension": ".md",
-      "size_bytes": 3263,
+      "size_bytes": 3660,
       "_origin": "project_inventory",
-      "sha256": "ef4d02dca23162043293c84c93a19b8d856060c85879388e68f91397e2854438"
+      "sha256": "cc0133459f900fee5f26fc1e09d2f9a331c50b37375d69665a1b6e3e5fbbd53e"
     },
     {
       "id": "docs_art_free_2d_library_and_opening_checkup_2026_10_08",
@@ -64297,7 +64297,7 @@
       "source_location": "L1",
       "inventory_file": true,
       "extension": ".json",
-      "size_bytes": 9402,
+      "size_bytes": 10106,
       "_origin": "project_inventory"
     },
     {
@@ -64346,6 +64346,17 @@
       "_origin": "ast"
     },
     {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "label": "chirp3_hd_audition.py",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L1",
+      "inventory_file": true,
+      "extension": ".py",
+      "size_bytes": 13199,
+      "_origin": "ast"
+    },
+    {
       "id": "narrative_10_vo_recording_notes_tools_record_fadyme_vo",
       "label": "record_fadyme_vo.py",
       "file_type": "code",
@@ -64389,6 +64400,74 @@
       "size_bytes": 1928,
       "_origin": "project_inventory",
       "sha256": "3bb922c1978ece67320ffcacad36d0e745229ae4587e54fd938ce99f7f87a305"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": "L1",
+      "inventory_file": true,
+      "extension": ".md",
+      "size_bytes": 4237,
+      "_origin": "project_inventory",
+      "sha256": "1fcfdb50e022602743d5831a206334fccdcde51122e9ee3d969d5df8cffe80d1"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_audition_plan",
+      "label": "audition_plan.json",
+      "file_type": "concept",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audition_plan.json",
+      "source_location": "L1",
+      "inventory_file": true,
+      "extension": ".json",
+      "size_bytes": 6529,
+      "_origin": "project_inventory"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_authoring_validation",
+      "label": "authoring_validation.json",
+      "file_type": "concept",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/authoring_validation.json",
+      "source_location": "L1",
+      "inventory_file": true,
+      "extension": ".json",
+      "size_bytes": 545,
+      "_origin": "project_inventory"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_gallery_validation",
+      "label": "gallery_validation.json",
+      "file_type": "concept",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/gallery_validation.json",
+      "source_location": "L1",
+      "inventory_file": true,
+      "extension": ".json",
+      "size_bytes": 215,
+      "_origin": "project_inventory"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_index",
+      "label": "index.html",
+      "file_type": "document",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/index.html",
+      "source_location": "L1",
+      "inventory_file": true,
+      "extension": ".html",
+      "size_bytes": 5961,
+      "_origin": "project_inventory",
+      "sha256": "b3463c4bc201bb5e2fa08ca8805cb4b4bf71f510395d8f161c143ddf1a255ed2"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "label": "manifest.json",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L1",
+      "inventory_file": true,
+      "extension": ".json",
+      "size_bytes": 492,
+      "_origin": "ast"
     },
     {
       "id": "narrative_11_audio_cues_fadyme_theme_reference_bgm_fadyme_theme_v001_loop_json",
@@ -68477,9 +68556,9 @@
       "source_location": "L1",
       "inventory_file": true,
       "extension": ".md",
-      "size_bytes": 1989,
+      "size_bytes": 2175,
       "_origin": "project_inventory",
-      "sha256": "4f7eba9ad49a311d1804549d0587315c9261a63a8558c425305c08d00a7ec969"
+      "sha256": "096f70541a10c56be571111145778af2f632bc5b7666df58f3717cfca3a072d2"
     },
     {
       "id": "narrative_15_art_workbench_characters_fadyme_production_v002_audio_status",
@@ -68489,7 +68568,7 @@
       "source_location": "L1",
       "inventory_file": true,
       "extension": ".json",
-      "size_bytes": 1178,
+      "size_bytes": 1339,
       "_origin": "project_inventory"
     },
     {
@@ -87064,6 +87143,38 @@
       "label": "Tools /",
       "file_type": "concept",
       "source_file": "narrative/10_VO/Recording_Notes/Tools",
+      "directory": true,
+      "_origin": "project_inventory"
+    },
+    {
+      "id": "directory_narrative_10_vo_voice_samples",
+      "label": "Voice_Samples /",
+      "file_type": "concept",
+      "source_file": "narrative/10_VO/Voice_Samples",
+      "directory": true,
+      "_origin": "project_inventory"
+    },
+    {
+      "id": "directory_narrative_10_vo_voice_samples_chirp3_hd",
+      "label": "Chirp3_HD /",
+      "file_type": "concept",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD",
+      "directory": true,
+      "_origin": "project_inventory"
+    },
+    {
+      "id": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp",
+      "label": "ja-JP /",
+      "file_type": "concept",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP",
+      "directory": true,
+      "_origin": "project_inventory"
+    },
+    {
+      "id": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001",
+      "label": "audition_v001 /",
+      "file_type": "concept",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001",
       "directory": true,
       "_origin": "project_inventory"
     },
@@ -136408,7 +136519,7 @@
       "label": "Graphify",
       "file_type": "concept",
       "source_file": "AGENTS.md",
-      "source_location": "L32",
+      "source_location": "L41",
       "_origin": "document_structure"
     },
     {
@@ -149940,6 +150051,30 @@
       "_origin": "document_structure"
     },
     {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme_heading_chirp_3_hd___ortak_japonca_ses_denemesi_v001",
+      "label": "Chirp 3 HD · ortak Japonca ses denemesi v001",
+      "file_type": "concept",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": "L1",
+      "_origin": "document_structure"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme_heading_dosyalar_ve_ger_ek_durum",
+      "label": "Dosyalar ve gerçek durum",
+      "file_type": "concept",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": "L26",
+      "_origin": "document_structure"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme_heading__retim___devam",
+      "label": "Üretim / devam",
+      "file_type": "concept",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": "L46",
+      "_origin": "document_structure"
+    },
+    {
       "id": "narrative_11_audio_cues_readme_source_heading_ses_ve_m_zik_kaynaklar_",
       "label": "Ses ve müzik kaynakları",
       "file_type": "concept",
@@ -160729,6 +160864,139 @@
       "_origin": "ast"
     },
     {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
+      "label": "AuthoringError",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L31",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_py_exception",
+      "label": "Exception",
+      "file_type": "code",
+      "source_file": null,
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_timestamp",
+      "label": "timestamp()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L35",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_digest",
+      "label": "digest()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L39",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_canonical",
+      "label": "canonical()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L43",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_save_json",
+      "label": "save_json()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L47",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authorization",
+      "label": "authorization()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L54",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_request_json",
+      "label": "request_json()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L71",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_japanese_voices",
+      "label": "japanese_voices()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L89",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_wav_metrics",
+      "label": "wav_metrics()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L105",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_gallery",
+      "label": "gallery()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L129",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L158",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L235",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_rationale_1",
+      "label": "Google Cloud Chirp 3 HD authoring only; never imported by the game. Run with…",
+      "file_type": "rationale",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_rationale_32",
+      "label": "Contains only a safe error category, never raw provider/auth exceptions.",
+      "file_type": "rationale",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L32",
+      "_origin": "ast"
+    },
+    {
       "id": "narrative_10_vo_recording_notes_tools_record_fadyme_vo_super_group",
       "label": "super_group()",
       "file_type": "code",
@@ -160857,6 +161125,94 @@
       "file_type": "rationale",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/voice_audition.py",
       "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_schema_version",
+      "label": "schema_version",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_status",
+      "label": "status",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_synthesis_calls_attempted",
+      "label": "synthesis_calls_attempted",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_voices_list_calls_attempted",
+      "label": "voices_list_calls_attempted",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_voices",
+      "label": "voices",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_errors",
+      "label": "errors",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_owner_authorized",
+      "label": "owner_authorized",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_performance_review",
+      "label": "performance_review",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_runtime_integration",
+      "label": "runtime_integration",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_updated_at_utc",
+      "label": "updated_at_utc",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_generated_samples",
+      "label": "generated_samples",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L17",
       "_origin": "ast"
     },
     {
@@ -282543,6 +282899,54 @@
       "_origin": "endpoint_catalogue"
     },
     {
+      "id": "array",
+      "label": "array",
+      "file_type": "concept",
+      "source_file": null,
+      "resolution": "external_or_unresolved",
+      "_origin": "endpoint_catalogue"
+    },
+    {
+      "id": "io",
+      "label": "io",
+      "file_type": "concept",
+      "source_file": null,
+      "resolution": "external_or_unresolved",
+      "_origin": "endpoint_catalogue"
+    },
+    {
+      "id": "math",
+      "label": "math",
+      "file_type": "concept",
+      "source_file": null,
+      "resolution": "external_or_unresolved",
+      "_origin": "endpoint_catalogue"
+    },
+    {
+      "id": "urllib_error",
+      "label": "urllib_error",
+      "file_type": "concept",
+      "source_file": null,
+      "resolution": "external_or_unresolved",
+      "_origin": "endpoint_catalogue"
+    },
+    {
+      "id": "urllib_request",
+      "label": "urllib_request",
+      "file_type": "concept",
+      "source_file": null,
+      "resolution": "external_or_unresolved",
+      "_origin": "endpoint_catalogue"
+    },
+    {
+      "id": "wave",
+      "label": "wave",
+      "file_type": "concept",
+      "source_file": null,
+      "resolution": "external_or_unresolved",
+      "_origin": "endpoint_catalogue"
+    },
+    {
       "id": "gen_image",
       "label": "gen_image",
       "file_type": "concept",
@@ -282609,30 +283013,6 @@
     {
       "id": "pil",
       "label": "pil",
-      "file_type": "concept",
-      "source_file": null,
-      "resolution": "external_or_unresolved",
-      "_origin": "endpoint_catalogue"
-    },
-    {
-      "id": "urllib_request",
-      "label": "urllib_request",
-      "file_type": "concept",
-      "source_file": null,
-      "resolution": "external_or_unresolved",
-      "_origin": "endpoint_catalogue"
-    },
-    {
-      "id": "urllib_error",
-      "label": "urllib_error",
-      "file_type": "concept",
-      "source_file": null,
-      "resolution": "external_or_unresolved",
-      "_origin": "endpoint_catalogue"
-    },
-    {
-      "id": "io",
-      "label": "io",
       "file_type": "concept",
       "source_file": null,
       "resolution": "external_or_unresolved",
@@ -289296,6 +289676,54 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo",
+      "target": "directory_narrative_10_vo_voice_samples",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo_voice_samples",
+      "target": "directory_narrative_10_vo_voice_samples_chirp3_hd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo_voice_samples_chirp3_hd",
+      "target": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp",
+      "target": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001",
       "source_location": null,
       "context": "contains",
       "_origin": "project_structural"
@@ -354066,6 +354494,18 @@
     },
     {
       "source": "directory_narrative_10_vo_recording_notes_tools",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo_recording_notes_tools",
       "target": "narrative_10_vo_recording_notes_tools_record_fadyme_vo",
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -354108,6 +354548,78 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/character_voice_matrix.md",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_audition_plan",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audition_plan.json",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_authoring_validation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/authoring_validation.json",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_gallery_validation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/gallery_validation.json",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_index",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/index.html",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
       "source_location": null,
       "context": "contains",
       "_origin": "project_structural"
@@ -464526,13 +465038,37 @@
     },
     {
       "source": "agents",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L36",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "agents",
+      "target": "directory_narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L37",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "agents",
       "target": "agents_heading_graphify",
       "relation": "contains_heading",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L32",
+      "source_location": "L41",
       "context": "contains_heading",
       "_origin": "project_structural"
     },
@@ -472501,6 +473037,18 @@
       "weight": 1.0,
       "source_file": "docs/art/CHIRP3_HD_VOICE_CATALOG.md",
       "source_location": "L47",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "docs_art_chirp3_hd_voice_catalog",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "docs/art/CHIRP3_HD_VOICE_CATALOG.md",
+      "source_location": "L49",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -495545,6 +496093,78 @@
       "_origin": "project_structural"
     },
     {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme_heading_chirp_3_hd___ortak_japonca_ses_denemesi_v001",
+      "relation": "contains_heading",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": "L1",
+      "context": "contains_heading",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme_heading_dosyalar_ve_ger_ek_durum",
+      "relation": "contains_heading",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": "L26",
+      "context": "contains_heading",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_audition_plan",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": "L28",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": "L29",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_index",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": "L31",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme_heading__retim___devam",
+      "relation": "contains_heading",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+      "source_location": "L46",
+      "context": "contains_heading",
+      "_origin": "project_structural"
+    },
+    {
       "source": "narrative_11_audio_cues_readme_source",
       "target": "narrative_11_audio_cues_readme_source_heading_ses_ve_m_zik_kaynaklar_",
       "relation": "contains_heading",
@@ -504091,6 +504711,18 @@
     {
       "source": "narrative_15_art_workbench_characters_fadyme_production_v002_audio_readme",
       "target": "narrative_10_vo_line_maps_chirp3_hd_voice_catalog",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/README.md",
+      "source_location": "L3",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "narrative_15_art_workbench_characters_fadyme_production_v002_audio_readme",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -517912,6 +518544,519 @@
       "confidence_score": 1.0
     },
     {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "array",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "base64",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "hashlib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "io",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "math",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "urllib_error",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "urllib_request",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "wave",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_py_exception",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_timestamp",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_digest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_canonical",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_save_json",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authorization",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_request_json",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_japanese_voices",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_wav_metrics",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_gallery",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L129",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L158",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L235",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authorization",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_request_json",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_canonical",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_request_json",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_japanese_voices",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_wav_metrics",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_gallery",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_save_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L167",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L171",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_digest",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L172",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_canonical",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L172",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_japanese_voices",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L181",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_timestamp",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L182",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_wav_metrics",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L212",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_main",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L246",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_rationale_1",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_rationale_32",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
       "source": "narrative_10_vo_recording_notes_tools_record_fadyme_vo",
       "target": "argparse",
       "relation": "imports",
@@ -518504,6 +519649,127 @@
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/voice_audition.py",
       "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_schema_version",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_synthesis_calls_attempted",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_voices_list_calls_attempted",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_voices",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_errors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_owner_authorized",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_performance_review",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_runtime_integration",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_updated_at_utc",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_generated_samples",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0
@@ -607216,6 +608482,162 @@
       "confidence_score": 1.0,
       "source_file": "game/tools/check_apk_notices.py",
       "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_digest",
+      "target": "hashlib",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_canonical",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_save_json",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_request_json",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_wav_metrics",
+      "target": "wave",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L107",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_wav_metrics",
+      "target": "io",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L107",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_wav_metrics",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L116",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_wav_metrics",
+      "target": "math",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_gallery",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L133",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L159",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_run",
+      "target": "base64",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L209",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_main",
+      "target": "argparse",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L236",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_main",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L247",
       "weight": 1.0,
       "_origin": "ast"
     },
