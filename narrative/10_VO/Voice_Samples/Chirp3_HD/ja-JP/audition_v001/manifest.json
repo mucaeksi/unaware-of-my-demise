@@ -2,7 +2,7 @@
   "schema_version": 1,
   "status": "BLOCKED_OR_INTERRUPTED",
   "synthesis_calls_attempted": 0,
-  "voices_list_calls_attempted": 4,
+  "voices_list_calls_attempted": 5,
   "voices": [],
   "errors": [
     {
@@ -24,12 +24,16 @@
     {
       "at_utc": "2026-10-09T07:47:07.553687+00:00",
       "category": "GOOGLE_HTTP_403_SERVICE_DISABLED"
+    },
+    {
+      "at_utc": "2026-10-09T08:53:53.363199+00:00",
+      "category": "GOOGLE_HTTP_403_SERVICE_DISABLED"
     }
   ],
   "owner_authorized": true,
   "performance_review": "NOT_LISTENED",
   "runtime_integration": false,
-  "updated_at_utc": "2026-10-09T07:47:07.553704+00:00",
+  "updated_at_utc": "2026-10-09T08:53:53.363214+00:00",
   "generated_samples": 0,
   "auth_method": "EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH"
 }
