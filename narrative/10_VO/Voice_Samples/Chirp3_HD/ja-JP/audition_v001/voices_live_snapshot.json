@@ -1,0 +1,337 @@
+{
+  "retrieved_at_utc": "2026-10-09T10:05:00.289848+00:00",
+  "endpoint": "https://texttospeech.googleapis.com/v1/voices",
+  "language_filter": "ja-JP",
+  "response": {
+    "voices": [
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Achernar",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Achird",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Algenib",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Algieba",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Alnilam",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Aoede",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Autonoe",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Callirrhoe",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Charon",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Despina",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Enceladus",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Erinome",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Fenrir",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Gacrux",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Iapetus",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Kore",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Laomedeia",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Leda",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Orus",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Puck",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Pulcherrima",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Rasalgethi",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Sadachbia",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Sadaltager",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Schedar",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Sulafat",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Umbriel",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Vindemiatrix",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Zephyr",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Chirp3-HD-Zubenelgenubi",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Neural2-B",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Neural2-C",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Neural2-D",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Standard-A",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Standard-B",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Standard-C",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Standard-D",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Wavenet-A",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Wavenet-B",
+        "ssmlGender": "FEMALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Wavenet-C",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      },
+      {
+        "languageCodes": [
+          "ja-JP"
+        ],
+        "name": "ja-JP-Wavenet-D",
+        "ssmlGender": "MALE",
+        "naturalSampleRateHertz": 24000
+      }
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "at_utc": "2026-10-09T09:18:25.558397+00:00",
+  "at_utc": "2026-10-09T10:04:55.894055+00:00",
   "service": "texttospeech.googleapis.com",
   "credential_source": "EXISTING_GOOGLE_PLAY_SERVICE_ACCOUNT",
   "billing_configuration_changed": false,
@@ -8,6 +8,5 @@
   "requested_quota_project": "gen-lang-client-0955955681",
   "credential_project_id": "unaware-of-my-demise",
   "credential_service_account_email": "uomd-play-billing@unaware-of-my-demise.iam.gserviceaccount.com",
-  "status": "TTS_SETUP_PENDING",
-  "safe_error_category": "TTS_PROBE_HTTP_403"
+  "status": "TTS_ALREADY_ENABLED_VOICES_ACCESS_VERIFIED"
 }

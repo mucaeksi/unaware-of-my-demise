@@ -1,12 +1,16 @@
-# Google Chirp 3 HD · ortak ses kataloğu
+# Google Chirp 3 HD · ortak Japonca ses kataloğu
 
-2026-10-09 · Fadyme ve sonraki karakterlerin ses seçimi için saklanan standart **30 seslik referans liste**: **14 kadın, 16 erkek**. Henüz bir karaktere ses atanmadı. Kullanıcı tüm kadın/erkek sesler için aynı Japonca metinle Google API örneklerini açıkça istedi; üretim erişim/kimlik nedeniyle bekliyor. Gerçek sentez çağrısı ve yeni ses dosyası sayısı şu anda 0.
+Canlı Google Cloud API ile doğrulandı: **30 ses; 14 kadın, 16 erkek**.
 
-**Doğrulama durumu:** Kullanıcının etkinleştirdiği proje `gen-lang-client-0955955681`. Bu kota projesini kullanan mevcut servis hesabı `USER_PROJECT_DENIED`, API key yolu `CREDENTIALS_MISSING` döndürdü. [Gerekli Service Usage Consumer ayarı](../coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md) hesap kimliğiyle birlikte kayıtlıdır. Canlı Japonca ses listesi ve gerçek WAV örnekleri henüz doğrulanmadı. Kimlik bilgileri dosyalara taşınmadı; aşağıdaki 30 ses referans listedir.
+Canlı liste zamanı (UTC): `2026-10-09T10:05:00.290588+00:00`.
 
-## Kadın · 14
+[Ortak örnek paketi](../../narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md) · [Dinleme galerisi](../../narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/index.html) · [Gerçek üretim manifesti](../../narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json)
 
-| İsim | Japonca voice ID adayı |
+Her ses aynı Japonca metin ve 24 kHz mono LINEAR16 ayarlarıyla üretildi. WAV masterları orijinal API çıktısıdır. Teknik doğrulama tamamlandı; duygu, duraksama, Japonca performans ve karakter seçimi dinleme aşamasındadır. Eski Fadyme kayıtları arşivde kalır; oyuna bağlantı yapılmadı.
+
+## Kadın
+
+| İsim | Doğrulanmış Japonca voice ID |
 |---|---|
 | Achernar | `ja-JP-Chirp3-HD-Achernar` |
 | Aoede | `ja-JP-Chirp3-HD-Aoede` |
@@ -23,9 +27,9 @@
 | Vindemiatrix | `ja-JP-Chirp3-HD-Vindemiatrix` |
 | Zephyr | `ja-JP-Chirp3-HD-Zephyr` |
 
-## Erkek · 16
+## Erkek
 
-| İsim | Japonca voice ID adayı |
+| İsim | Doğrulanmış Japonca voice ID |
 |---|---|
 | Achird | `ja-JP-Chirp3-HD-Achird` |
 | Algenib | `ja-JP-Chirp3-HD-Algenib` |
@@ -44,14 +48,4 @@
 | Umbriel | `ja-JP-Chirp3-HD-Umbriel` |
 | Zubenelgenubi | `ja-JP-Chirp3-HD-Zubenelgenubi` |
 
-Makineyle okunabilir karşılık: [chirp3_hd_voice_catalog.json](../../narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json). Liste tüm karakterler için ortak referanstır; ses isimlerinden yaş, karakter, duygu veya performans niteliği çıkarılmaz. Aynı isimleri kullanan Gemini TTS kayıtları Chirp 3 HD kullanılabilirliğinin kanıtı sayılmaz. Eski Fadyme Sulafat kayıtları arşivde kalır; bu katalog o take'leri yeniden etkinleştirmez.
-
-Güncel [ortak örnek paketi](../../narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md), tüm seslerde aynı uzun Japonca kelimeyi soru/ünlem ve duraksama işaretleriyle kullanır. Örnek çağrıları kullanıcı tarafından yetkilendirildi; aynı izin yeniden sorulmaz. Önce canlı katalog ve erişim çalışmalı. Dinlemeden ses seçimi veya ayrı 241 satırlık üretim başlatılmaz. Gerçek üretim durumu örnek paketinin `manifest.json` dosyasındadır.
-
-Resmi kontrol kaynakları (authentication/Chirp belgeleri Actions üzerinden okundu; canlı ses kataloğu API aktivasyonunu bekliyor):
-
-- https://cloud.google.com/text-to-speech/docs/chirp3-hd
-- https://docs.cloud.google.com/text-to-speech/docs/list-voices-and-types
-- https://cloud.google.com/text-to-speech/docs/reference/rest/v1/voices/list
-
-Bu dosya doğrulanmış canlı snapshot yerine mevcut referans listeyi saklar; test aşamasında API yanıtı, tarih ve dil filtresiyle birlikte yenilenecek.
+[Makine kataloğu](../../narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json). Kapsam, bu API yanıtındaki Japonca Chirp 3 HD sesleridir; başka locale veya Gemini TTS listelerinden kullanılabilirlik çıkarılmadı.

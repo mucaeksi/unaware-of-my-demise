@@ -1,12 +1,12 @@
 {
-  "github_run_id": "37910361637",
+  "github_run_id": "37915312151",
   "github_run_attempt": "1",
-  "source_commit": "e5b5d97181a89954d2c11f5ee0bfdf01e3788b5e",
+  "source_commit": "30bee219b9d5e1cecedec7035aea104417937fbe",
   "google_secret_name": "GEMINI_API",
-  "generation_outcome": "failure",
-  "complete": false,
-  "generated_samples": 0,
-  "synthesis_calls_attempted": 0,
+  "generation_outcome": "success",
+  "complete": true,
+  "generated_samples": 30,
+  "synthesis_calls_attempted": 30,
   "safe_error_categories": [
     "GOOGLE_AUTH_UNAVAILABLE_CONFIGURE_SECURE_ENVIRONMENT_KEY",
     "GOOGLE_HTTP_401_CREDENTIALS_MISSING",

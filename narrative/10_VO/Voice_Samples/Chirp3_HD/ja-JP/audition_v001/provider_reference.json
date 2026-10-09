@@ -1,8 +1,8 @@
 [
   {
     "url": "https://docs.cloud.google.com/text-to-speech/docs/authentication",
-    "retrieved_at_utc": "2026-10-09T09:18:26.560364+00:00",
-    "document_sha256": "223815eda913baefeed680188b8619c45e43ae39478a282c0578c07bc043ba45",
+    "retrieved_at_utc": "2026-10-09T10:04:57.796312+00:00",
+    "document_sha256": "196330be058979d58784355445b84349a2dc92e67ccfacc7bd04a811cc2f4aa7",
     "excerpts": [
       "oud TTS client libraries provide high-level language support for authenticating to Cloud TTS programmatically. To authenticate calls to Google Cloud APIs, client libraries support Application Default Credentials (ADC) ; the libraries look for credentials in a set of defined locations and use those credentials to authenticate requests to the API. With ADC, you can make credentials available to your application in a variety of environments, such as local development or production, without needing to modify your application code. REST You can authenticate to the Cloud TTS API by using your gcloud CLI credentials or by using Application Default Credentials . For more information about authentication for RE",
       "s local development or production, without needing to modify your application code. REST You can authenticate to the Cloud TTS API by using your gcloud CLI credentials or by using Application Default Credentials . For more information about authentication for REST requests, see Authenticate for using REST . User credentials and ADC for Cloud TTS One way to provide credentials to ADC is to use the gcloud CLI to insert your user credentials into a credential file. This file is placed on your local file system where ADC can find it; ADC then uses the provided user credentials to authenticate requests. This method is often used for local development. If you use this method, you might encounter an authentic",
@@ -15,8 +15,8 @@
   },
   {
     "url": "https://docs.cloud.google.com/text-to-speech/docs/chirp3-hd",
-    "retrieved_at_utc": "2026-10-09T09:18:27.240477+00:00",
-    "document_sha256": "c8c948e82182f89eec28f04d6175a724f51b88cd679691cec78b12a123711c4b",
+    "retrieved_at_utc": "2026-10-09T10:04:59.023983+00:00",
+    "document_sha256": "05e68ea8655fc2d80aa31ce3524f69e785d0a1972da3af42d39003206619573c",
     "excerpts": [
       "he client library for Cloud TTS, see Cloud TTS client libraries . For more information, see the Cloud TTS Python API reference documentation . To authenticate to Cloud TTS, set up Application Default Credentials. For more information, see Set up authentication for a local development environment . \"\"\"Synthesizes speech from a stream of input text.\"\"\" from google.cloud import texttospeech client = texttospeech . TextToSpeechClient () # See https://cloud.google.com/text-to-speech/docs/voices for all voices. streaming_config = texttospeech . StreamingSynthesizeConfig ( voice = texttospeech . VoiceSelectionParams ( name = \"en-US-Chirp3-HD-Charon\" , language_code = \"en-US\" , ) ) # Set the config for your st",
       "he client library for Cloud TTS, see Cloud TTS client libraries . For more information, see the Cloud TTS Python API reference documentation . To authenticate to Cloud TTS, set up Application Default Credentials. For more information, see Set up authentication for a local development environment . def synthesize_text (): \"\"\"Synthesizes speech from the input string of text.\"\"\" from google.cloud import texttospeech text = \"Hello there.\" client = texttospeech . TextToSpeechClient () input_text = texttospeech . SynthesisInput ( text = text ) # Note: the voice can also be specified by name. # Names of voices can be retrieved with client.list_voices(). voice = texttospeech . VoiceSelectionParams ( language_c",
@@ -44,8 +44,8 @@
   },
   {
     "url": "https://docs.cloud.google.com/docs/quotas/set-quota-project",
-    "retrieved_at_utc": "2026-10-09T09:18:27.709794+00:00",
-    "document_sha256": "594387164b4f746b8f25d30bf54ae688fdc3b92671054b71516314d740bb3ca4",
+    "retrieved_at_utc": "2026-10-09T10:04:59.722852+00:00",
+    "document_sha256": "22455319044f1b9d4f9c4e4d2ba93c9bd742fdb140add693985b2989f9f413b0",
     "excerpts": [
       "of precedence: Specified in request : The quota project that was specified in the request . (When using client libraries, you can also use environment variables in your requests.) API key : If you use an API key to provide credentials for a request, the project associated with the API key is used as the quota project. Google Cloud CLI credentials : If you use the gcloud CLI to get your access token, and you've authenticated to the gcloud CLI with your user credentials, the gcloud CLI shared project is sometimes used as the quota project. However, not all client-based APIs fall back on the shared project. Service account : If the principal for the API call is a service account, i",
       " in request : The quota project that was specified in the request . (When using client libraries, you can also use environment variables in your requests.) API key : If you use an API key to provide credentials for a request, the project associated with the API key is used as the quota project. Google Cloud CLI credentials : If you use the gcloud CLI to get your access token, and you've authenticated to the gcloud CLI with your user credentials, the gcloud CLI shared project is sometimes used as the quota project. However, not all client-based APIs fall back on the shared project. Service account : If the principal for the API call is a service account, including by impersonatio",
