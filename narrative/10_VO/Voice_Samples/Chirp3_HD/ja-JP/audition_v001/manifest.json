@@ -2,17 +2,22 @@
   "schema_version": 1,
   "status": "BLOCKED_OR_INTERRUPTED",
   "synthesis_calls_attempted": 0,
-  "voices_list_calls_attempted": 0,
+  "voices_list_calls_attempted": 1,
   "voices": [],
   "errors": [
     {
       "at_utc": "2026-10-09T06:40:14.549258+00:00",
       "category": "GOOGLE_AUTH_UNAVAILABLE_CONFIGURE_SECURE_ENVIRONMENT_KEY"
+    },
+    {
+      "at_utc": "2026-10-09T07:19:07.292352+00:00",
+      "category": "GOOGLE_HTTP_401_CREDENTIALS_MISSING"
     }
   ],
   "owner_authorized": true,
   "performance_review": "NOT_LISTENED",
   "runtime_integration": false,
-  "updated_at_utc": "2026-10-09T06:40:14.549270+00:00",
-  "generated_samples": 0
+  "updated_at_utc": "2026-10-09T07:19:07.292376+00:00",
+  "generated_samples": 0,
+  "auth_method": "API_KEY_BINDING"
 }
