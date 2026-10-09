@@ -1,5 +1,7 @@
 # Fadyme — tam oyun denetimi ve tasarım kapsamı · v001 · 2026-10-09
 
+> Superseded audio direction: this v001 report is the historical pre-production baseline. The owner reset all VO after this audit: old Sulafat files are now archived, and **241 new Chirp 3 HD ja-JP recordings** are needed. Do not reuse the older 25/216 figures as the current recording queue. New visual production and handoff live in [production_v002](../production_v002/README.md). Original audit measurements are retained below.
+
 Bu paket üretim öncesi denetimdir. Yeni görsel/ses üretilmedi, adaylara yeni onay verilmedi ve runtime kodu değiştirilmedi. Baz alınan kod: `ccc9f67`. İlk AAB için hazırlanmış düzeltmeler ve build kanıtları Codex'in son AAB teslimidir; bundan sonra Codex oyun/script incelemesi ve asset/tasarım üretir, Claude kod entegrasyonu ve sonraki AAB'leri yapar. Kullanıcı Fadyme'yi ilk tasarım odağı olarak seçti. Kaynaklar `main` için hazırlanır; gönderim gerçekleşmeden GitHub'da mevcut sayılmaz.
 
 ## Sonuç

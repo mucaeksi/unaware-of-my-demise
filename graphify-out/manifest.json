@@ -965,12 +965,6 @@
     "ast_hash": "2ce4ed29d3e58b7761be4516ea32ff94",
     "semantic_hash": ""
   },
-  "narrative/10_VO/Japanese/Fadyme/selection.json": {
-    "mtime": 1791493091.6200438,
-    "seen": 1791495173.1056073,
-    "ast_hash": "32e22175c2808052f8feb140acced866",
-    "semantic_hash": ""
-  },
   "narrative/10_VO/Line_Maps/Fadyme_VO_Master_Line_Map.json": {
     "mtime": 1791493091.6200438,
     "seen": 1791495173.105608,
@@ -1011,18 +1005,6 @@
     "mtime": 1791493091.628459,
     "seen": 1791495173.1056135,
     "ast_hash": "869f555df1f3d51966e7711ed358dc9d",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Recording_Notes/fadyme_casting.json": {
-    "mtime": 1791493091.628459,
-    "seen": 1791495173.1056142,
-    "ast_hash": "fba93ef1817f3dd61254aed05910aa8a",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Recording_Notes/fadyme_selection.json": {
-    "mtime": 1791493091.628459,
-    "seen": 1791495173.105615,
-    "ast_hash": "32e22175c2808052f8feb140acced866",
     "semantic_hash": ""
   },
   "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.json": {
@@ -1319,66 +1301,6 @@
     "ast_hash": "4a249fa070e13ba14a53728417e2b59e",
     "semantic_hash": ""
   },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__selection.json": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1056545,
-    "ast_hash": "32e22175c2808052f8feb140acced866",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Line_Maps__Fadyme_VO_Master_Line_Map.json": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1056557,
-    "ast_hash": "61549265b1791f88f68d7cedd3a04326",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Line_Maps__jp_script_fadyme.json": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1056564,
-    "ast_hash": "730f4d0022b0ee53f3c4d33e836cf7e7",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Missing_VO__Fadyme_Missing_VO.json": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.105657,
-    "ast_hash": "c4fc3532eb69021ef66f0775ab7e354c",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Tools__build_jp_script_fadyme.py": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1056576,
-    "ast_hash": "9f3207a18ee7ed4f43f24c4f5440b123",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Tools__record_fadyme_vo.py": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1056585,
-    "ast_hash": "44fe61777be57c883ac3a7738e8c2881",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Tools__split_select_vo.py": {
-    "mtime": 1791493091.7541244,
-    "seen": 1791495173.1056595,
-    "ast_hash": "3d12ecfacec968e75c4b756e0d5f6738",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Tools__voice_audition.py": {
-    "mtime": 1791493091.7541244,
-    "seen": 1791495173.1056602,
-    "ast_hash": "869f555df1f3d51966e7711ed358dc9d",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__fadyme_casting.json": {
-    "mtime": 1791493091.7541244,
-    "seen": 1791495173.105661,
-    "ast_hash": "fba93ef1817f3dd61254aed05910aa8a",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__fadyme_selection.json": {
-    "mtime": 1791493091.7541244,
-    "seen": 1791495173.1056614,
-    "ast_hash": "32e22175c2808052f8feb140acced866",
-    "semantic_hash": ""
-  },
   "narrative/FADYME_MEDIA_ALL/05_Audio_Cues/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.json": {
     "mtime": 1791493091.7541244,
     "seen": 1791495173.1056623,
@@ -1529,66 +1451,6 @@
     "ast_hash": "a8b284144eb70b8c22529f4e8299901f",
     "semantic_hash": ""
   },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__selection.json": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.105687,
-    "ast_hash": "32e22175c2808052f8feb140acced866",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Line_Maps__Fadyme_VO_Master_Line_Map.json": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1056879,
-    "ast_hash": "61549265b1791f88f68d7cedd3a04326",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Line_Maps__jp_script_fadyme.json": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1056883,
-    "ast_hash": "730f4d0022b0ee53f3c4d33e836cf7e7",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Missing_VO__Fadyme_Missing_VO.json": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1056893,
-    "ast_hash": "c4fc3532eb69021ef66f0775ab7e354c",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Tools__build_jp_script_fadyme.py": {
-    "mtime": 1791493091.942122,
-    "seen": 1791495173.1056905,
-    "ast_hash": "9f3207a18ee7ed4f43f24c4f5440b123",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Tools__record_fadyme_vo.py": {
-    "mtime": 1791493091.942122,
-    "seen": 1791495173.105691,
-    "ast_hash": "44fe61777be57c883ac3a7738e8c2881",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Tools__split_select_vo.py": {
-    "mtime": 1791493091.942122,
-    "seen": 1791495173.1056917,
-    "ast_hash": "3d12ecfacec968e75c4b756e0d5f6738",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Tools__voice_audition.py": {
-    "mtime": 1791493091.942122,
-    "seen": 1791495173.1056929,
-    "ast_hash": "869f555df1f3d51966e7711ed358dc9d",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__fadyme_casting.json": {
-    "mtime": 1791493091.942122,
-    "seen": 1791495173.1056936,
-    "ast_hash": "fba93ef1817f3dd61254aed05910aa8a",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__fadyme_selection.json": {
-    "mtime": 1791493091.942122,
-    "seen": 1791495173.1056945,
-    "ast_hash": "32e22175c2808052f8feb140acced866",
-    "semantic_hash": ""
-  },
   "narrative/FADYME_MEDIA_ALL/PILOT_SOURCE/UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.json": {
     "mtime": 1791493091.942122,
     "seen": 1791495173.1057177,
@@ -1629,66 +1491,6 @@
     "mtime": 1791493091.9594636,
     "seen": 1791495173.1057231,
     "ast_hash": "a8b284144eb70b8c22529f4e8299901f",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__selection.json": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.105724,
-    "ast_hash": "32e22175c2808052f8feb140acced866",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Line_Maps__Fadyme_VO_Master_Line_Map.json": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.1057248,
-    "ast_hash": "61549265b1791f88f68d7cedd3a04326",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Line_Maps__jp_script_fadyme.json": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.1057258,
-    "ast_hash": "730f4d0022b0ee53f3c4d33e836cf7e7",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Missing_VO__Fadyme_Missing_VO.json": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.1057265,
-    "ast_hash": "c4fc3532eb69021ef66f0775ab7e354c",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Tools__build_jp_script_fadyme.py": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.1057274,
-    "ast_hash": "9f3207a18ee7ed4f43f24c4f5440b123",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Tools__record_fadyme_vo.py": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.1057281,
-    "ast_hash": "44fe61777be57c883ac3a7738e8c2881",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Tools__split_select_vo.py": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.105729,
-    "ast_hash": "3d12ecfacec968e75c4b756e0d5f6738",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Tools__voice_audition.py": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.1057298,
-    "ast_hash": "869f555df1f3d51966e7711ed358dc9d",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__fadyme_casting.json": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.1057303,
-    "ast_hash": "fba93ef1817f3dd61254aed05910aa8a",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__fadyme_selection.json": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.105731,
-    "ast_hash": "32e22175c2808052f8feb140acced866",
     "semantic_hash": ""
   },
   "parity/MANIFEST.json": {
@@ -6246,15 +6048,15 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1791521025.4329953,
-    "seen": 1791521287.2443666,
-    "ast_hash": "32dcdfceaf395b0bd5479e4bd71d9664",
+    "mtime": 1791522114.0255113,
+    "seen": 1791525617.2009284,
+    "ast_hash": "eb4f4abe11ef8c278a72d1f3feb4582b",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1791521025.4331992,
-    "seen": 1791521287.2443678,
-    "ast_hash": "77238b22532fc60287cc4fb79ac0c96a",
+    "mtime": 1791522114.0256436,
+    "seen": 1791525617.20093,
+    "ast_hash": "430d0c0c8ddf96c015ae8614ee231709",
     "semantic_hash": ""
   },
   "GAME_TOOLCHAIN.md": {
@@ -6282,9 +6084,9 @@
     "semantic_hash": ""
   },
   "THIRD_PARTY_NOTICE.md": {
-    "mtime": 1791493090.014147,
-    "seen": 1791495173.106597,
-    "ast_hash": "b5f8d8d9f5f8423d38cebbdffffc3716",
+    "mtime": 1791524473.8950808,
+    "seen": 1791525617.2009368,
+    "ast_hash": "36f6c8e0a88e8bbd6404dc3e291fae42",
     "semantic_hash": ""
   },
   "UOMD_FRAMEWORK_MANIFEST.md": {
@@ -6318,9 +6120,9 @@
     "semantic_hash": ""
   },
   "docs/ART_AND_CODE_HANDOFF.md": {
-    "mtime": 1791521025.433388,
-    "seen": 1791521287.2443805,
-    "ast_hash": "00e22962a959286e80463c494c158cca",
+    "mtime": 1791523309.351667,
+    "seen": 1791525617.2009451,
+    "ast_hash": "c82432e31588650714336362e7f344b0",
     "semantic_hash": ""
   },
   "docs/CURRENT_STATE.md": {
@@ -6510,9 +6312,9 @@
     "semantic_hash": ""
   },
   "docs/coder/START_HERE.md": {
-    "mtime": 1791521025.43347,
-    "seen": 1791521287.2444217,
-    "ast_hash": "eaf47c961d550cc38cc64799240d102f",
+    "mtime": 1791523309.3518343,
+    "seen": 1791525617.200993,
+    "ast_hash": "192607c14ee5f9afed41d3028518092e",
     "semantic_hash": ""
   },
   "docs/coder/STORY_CHARACTER_TEMPLATE.md": {
@@ -8015,18 +7817,6 @@
     "ast_hash": "d6e47905f89144cc4c67f0da351ae6d2",
     "semantic_hash": ""
   },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1068373,
-    "ast_hash": "b3c670418ce5f7c906a128c7fa90cc83",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__character_voice_matrix.md": {
-    "mtime": 1791493091.7541244,
-    "seen": 1791495173.106838,
-    "ast_hash": "73c33b518f23fc2eb549f1523d9d4dcc",
-    "semantic_hash": ""
-  },
   "narrative/FADYME_MEDIA_ALL/05_Audio_Cues/README_SOURCE.md": {
     "mtime": 1791493091.8141236,
     "seen": 1791495173.1068568,
@@ -8079,30 +7869,6 @@
     "mtime": 1791493091.9141223,
     "seen": 1791495173.106863,
     "ast_hash": "fd6ce24c6b5e156b5f2118c1de6e96bb",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.106864,
-    "ast_hash": "b3c670418ce5f7c906a128c7fa90cc83",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__character_voice_matrix.md": {
-    "mtime": 1791493091.942122,
-    "seen": 1791495173.1068645,
-    "ast_hash": "73c33b518f23fc2eb549f1523d9d4dcc",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.106865,
-    "ast_hash": "b3c670418ce5f7c906a128c7fa90cc83",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__character_voice_matrix.md": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.1068668,
-    "ast_hash": "73c33b518f23fc2eb549f1523d9d4dcc",
     "semantic_hash": ""
   },
   "parity/README.md": {
@@ -17825,162 +17591,6 @@
     "ast_hash": "7be679f5be801f4813a27cae1f457dd8",
     "semantic_hash": ""
   },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/ch1_camp_005.ogg": {
-    "mtime": 1791493091.6157618,
-    "seen": 1791495173.1084375,
-    "ast_hash": "25218aa4fc96e2d07ed40a16c03fe759",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/ch1_camp_008.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084402,
-    "ast_hash": "f3ef99657ad9c4e1d3313ff1256a0eff",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/ch1_first_oath_004.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.108441,
-    "ast_hash": "77d6341fd303283e7657ae731d15fc7f",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_1_post_002.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.108442,
-    "ast_hash": "fa3e9b6ccdc79fdd8976e5199efe62ac",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_1_pre_002.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084428,
-    "ast_hash": "4bf9c78d3bd3eed7e0e63ddb508d92b1",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_2_pre_003.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084437,
-    "ast_hash": "b53f9d0e700763d8fc5337730bad32f8",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_3_post_002.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084445,
-    "ast_hash": "4de126e31caf1c400645cf684c5b0385",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_4_post_002.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084452,
-    "ast_hash": "598e587af6c49e3ead035ce1b722fc39",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_post_002.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.108446,
-    "ast_hash": "e874594a613880c4391e006f84f84789",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_post_004.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084468,
-    "ast_hash": "e8a464ce53a1c9202446305ceec17984",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_pre_003.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084476,
-    "ast_hash": "644ad1a903fe89369a994ae900790b4d",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/node_2_1_post_002.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084483,
-    "ast_hash": "9dc75a98fad759c267c1969c25448e18",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/node_2_1_pre_003.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084492,
-    "ast_hash": "de0cac44c2965fcc30a98b27c49fd0fb",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/opening_004.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084497,
-    "ast_hash": "1274e5273dcfbfbc72fbaff6e2a42c97",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/opening_006.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084507,
-    "ast_hash": "34de7d488f5716991b2f02fd58c67d7d",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme/opening_012.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084516,
-    "ast_hash": "78950f7fa563290499cae3e1493ab1ac",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme_thought/ch1_camp_006.ogg": {
-    "mtime": 1791493091.616339,
-    "seen": 1791495173.1084526,
-    "ast_hash": "cc9b05e34600fb67e90c70afba644b15",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme_thought/ch1_first_oath_006.ogg": {
-    "mtime": 1791493091.6200438,
-    "seen": 1791495173.1084533,
-    "ast_hash": "615338864d8f776756dab30fa3a7d877",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_1_post_003.ogg": {
-    "mtime": 1791493091.6200438,
-    "seen": 1791495173.1084542,
-    "ast_hash": "9dfdc52f47cbb5e5e55a5b32d519f54c",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_1_pre_003.ogg": {
-    "mtime": 1791493091.6200438,
-    "seen": 1791495173.108455,
-    "ast_hash": "fd6dfca38bb491ba805a7718ec55b257",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_5_post_005.ogg": {
-    "mtime": 1791493091.6200438,
-    "seen": 1791495173.1084554,
-    "ast_hash": "4da379fcef701e9bec4d44d29b36a61c",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_2_1_post_003.ogg": {
-    "mtime": 1791493091.6200438,
-    "seen": 1791495173.1084564,
-    "ast_hash": "579976c032a96400cc82c9848d9d5277",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_001.ogg": {
-    "mtime": 1791493091.6200438,
-    "seen": 1791495173.1084573,
-    "ast_hash": "f34c826c7c59f16a8532ef1ec5658b16",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_002.ogg": {
-    "mtime": 1791493091.6200438,
-    "seen": 1791495173.1084583,
-    "ast_hash": "678d658b0bd100cce07a520b3c4daa48",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_014.ogg": {
-    "mtime": 1791493091.6200438,
-    "seen": 1791495173.1084592,
-    "ast_hash": "9b38c206e42d6afd043fb3c82b84bf7e",
-    "semantic_hash": ""
-  },
-  "narrative/10_VO/Recording_Notes/Fadyme_Sulafat_11_satir.mp3": {
-    "mtime": 1791493091.624835,
-    "seen": 1791495173.1084602,
-    "ast_hash": "7b4914ab38e46107000d4e6c50445808",
-    "semantic_hash": ""
-  },
   "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.ogg": {
     "mtime": 1791493091.630126,
     "seen": 1791495173.1084614,
@@ -18015,162 +17625,6 @@
     "mtime": 1791493091.6941252,
     "seen": 1791495173.1084654,
     "ast_hash": "f49a1404111e2f4fdaf7c2cea41b41cd",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_camp_005.ogg": {
-    "mtime": 1791493091.7461827,
-    "seen": 1791495173.1084666,
-    "ast_hash": "25218aa4fc96e2d07ed40a16c03fe759",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_camp_008.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084688,
-    "ast_hash": "f3ef99657ad9c4e1d3313ff1256a0eff",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084695,
-    "ast_hash": "77d6341fd303283e7657ae731d15fc7f",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084702,
-    "ast_hash": "fa3e9b6ccdc79fdd8976e5199efe62ac",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084707,
-    "ast_hash": "4bf9c78d3bd3eed7e0e63ddb508d92b1",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084716,
-    "ast_hash": "b53f9d0e700763d8fc5337730bad32f8",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084723,
-    "ast_hash": "4de126e31caf1c400645cf684c5b0385",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084733,
-    "ast_hash": "598e587af6c49e3ead035ce1b722fc39",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084743,
-    "ast_hash": "e874594a613880c4391e006f84f84789",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084757,
-    "ast_hash": "e8a464ce53a1c9202446305ceec17984",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084762,
-    "ast_hash": "644ad1a903fe89369a994ae900790b4d",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084769,
-    "ast_hash": "9dc75a98fad759c267c1969c25448e18",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084776,
-    "ast_hash": "de0cac44c2965fcc30a98b27c49fd0fb",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_004.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.108479,
-    "ast_hash": "1274e5273dcfbfbc72fbaff6e2a42c97",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_006.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084797,
-    "ast_hash": "34de7d488f5716991b2f02fd58c67d7d",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_012.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084807,
-    "ast_hash": "78950f7fa563290499cae3e1493ab1ac",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084816,
-    "ast_hash": "cc9b05e34600fb67e90c70afba644b15",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084821,
-    "ast_hash": "615338864d8f776756dab30fa3a7d877",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084826,
-    "ast_hash": "9dfdc52f47cbb5e5e55a5b32d519f54c",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084836,
-    "ast_hash": "fd6dfca38bb491ba805a7718ec55b257",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084843,
-    "ast_hash": "4da379fcef701e9bec4d44d29b36a61c",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084852,
-    "ast_hash": "579976c032a96400cc82c9848d9d5277",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_001.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.108486,
-    "ast_hash": "f34c826c7c59f16a8532ef1ec5658b16",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_002.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084867,
-    "ast_hash": "678d658b0bd100cce07a520b3c4daa48",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_014.ogg": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084874,
-    "ast_hash": "9b38c206e42d6afd043fb3c82b84bf7e",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Fadyme_Sulafat_11_satir.mp3": {
-    "mtime": 1791493091.7507727,
-    "seen": 1791495173.1084886,
-    "ast_hash": "7b4914ab38e46107000d4e6c50445808",
     "semantic_hash": ""
   },
   "narrative/FADYME_MEDIA_ALL/05_Audio_Cues/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.ogg": {
@@ -18279,318 +17733,6 @@
     "mtime": 1791493091.9141223,
     "seen": 1791495173.1085062,
     "ast_hash": "f49a1404111e2f4fdaf7c2cea41b41cd",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_005.ogg": {
-    "mtime": 1791493091.9348745,
-    "seen": 1791495173.1085067,
-    "ast_hash": "25218aa4fc96e2d07ed40a16c03fe759",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_008.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085074,
-    "ast_hash": "f3ef99657ad9c4e1d3313ff1256a0eff",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085083,
-    "ast_hash": "77d6341fd303283e7657ae731d15fc7f",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085093,
-    "ast_hash": "fa3e9b6ccdc79fdd8976e5199efe62ac",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.10851,
-    "ast_hash": "4bf9c78d3bd3eed7e0e63ddb508d92b1",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085107,
-    "ast_hash": "b53f9d0e700763d8fc5337730bad32f8",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085114,
-    "ast_hash": "4de126e31caf1c400645cf684c5b0385",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.108512,
-    "ast_hash": "598e587af6c49e3ead035ce1b722fc39",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085129,
-    "ast_hash": "e874594a613880c4391e006f84f84789",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085138,
-    "ast_hash": "e8a464ce53a1c9202446305ceec17984",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085145,
-    "ast_hash": "644ad1a903fe89369a994ae900790b4d",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085153,
-    "ast_hash": "9dc75a98fad759c267c1969c25448e18",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.108516,
-    "ast_hash": "de0cac44c2965fcc30a98b27c49fd0fb",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_004.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.108517,
-    "ast_hash": "1274e5273dcfbfbc72fbaff6e2a42c97",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_006.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085174,
-    "ast_hash": "34de7d488f5716991b2f02fd58c67d7d",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_012.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085181,
-    "ast_hash": "78950f7fa563290499cae3e1493ab1ac",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085186,
-    "ast_hash": "cc9b05e34600fb67e90c70afba644b15",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085193,
-    "ast_hash": "615338864d8f776756dab30fa3a7d877",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085203,
-    "ast_hash": "9dfdc52f47cbb5e5e55a5b32d519f54c",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.108521,
-    "ast_hash": "fd6dfca38bb491ba805a7718ec55b257",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085224,
-    "ast_hash": "4da379fcef701e9bec4d44d29b36a61c",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085234,
-    "ast_hash": "579976c032a96400cc82c9848d9d5277",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_001.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085238,
-    "ast_hash": "f34c826c7c59f16a8532ef1ec5658b16",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_002.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085248,
-    "ast_hash": "678d658b0bd100cce07a520b3c4daa48",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_014.ogg": {
-    "mtime": 1791493091.939741,
-    "seen": 1791495173.1085258,
-    "ast_hash": "9b38c206e42d6afd043fb3c82b84bf7e",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Fadyme_Sulafat_11_satir.mp3": {
-    "mtime": 1791493091.942122,
-    "seen": 1791495173.1085267,
-    "ast_hash": "7b4914ab38e46107000d4e6c50445808",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_005.ogg": {
-    "mtime": 1791493092.0301208,
-    "seen": 1791495173.1085274,
-    "ast_hash": "25218aa4fc96e2d07ed40a16c03fe759",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_008.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085284,
-    "ast_hash": "f3ef99657ad9c4e1d3313ff1256a0eff",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.108529,
-    "ast_hash": "77d6341fd303283e7657ae731d15fc7f",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085303,
-    "ast_hash": "fa3e9b6ccdc79fdd8976e5199efe62ac",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085308,
-    "ast_hash": "4bf9c78d3bd3eed7e0e63ddb508d92b1",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085317,
-    "ast_hash": "b53f9d0e700763d8fc5337730bad32f8",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085327,
-    "ast_hash": "4de126e31caf1c400645cf684c5b0385",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085331,
-    "ast_hash": "598e587af6c49e3ead035ce1b722fc39",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.108534,
-    "ast_hash": "e874594a613880c4391e006f84f84789",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085348,
-    "ast_hash": "e8a464ce53a1c9202446305ceec17984",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085355,
-    "ast_hash": "644ad1a903fe89369a994ae900790b4d",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085362,
-    "ast_hash": "9dc75a98fad759c267c1969c25448e18",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085372,
-    "ast_hash": "de0cac44c2965fcc30a98b27c49fd0fb",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_004.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.108538,
-    "ast_hash": "1274e5273dcfbfbc72fbaff6e2a42c97",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_006.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085386,
-    "ast_hash": "34de7d488f5716991b2f02fd58c67d7d",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_012.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085393,
-    "ast_hash": "78950f7fa563290499cae3e1493ab1ac",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.10854,
-    "ast_hash": "cc9b05e34600fb67e90c70afba644b15",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085408,
-    "ast_hash": "615338864d8f776756dab30fa3a7d877",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085417,
-    "ast_hash": "9dfdc52f47cbb5e5e55a5b32d519f54c",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085424,
-    "ast_hash": "fd6dfca38bb491ba805a7718ec55b257",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.108543,
-    "ast_hash": "4da379fcef701e9bec4d44d29b36a61c",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.108544,
-    "ast_hash": "579976c032a96400cc82c9848d9d5277",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_001.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085448,
-    "ast_hash": "f34c826c7c59f16a8532ef1ec5658b16",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_002.ogg": {
-    "mtime": 1791493092.0371184,
-    "seen": 1791495173.1085458,
-    "ast_hash": "678d658b0bd100cce07a520b3c4daa48",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_014.ogg": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.108547,
-    "ast_hash": "9b38c206e42d6afd043fb3c82b84bf7e",
-    "semantic_hash": ""
-  },
-  "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Fadyme_Sulafat_11_satir.mp3": {
-    "mtime": 1791493092.0381207,
-    "seen": 1791495173.1085482,
-    "ast_hash": "7b4914ab38e46107000d4e6c50445808",
     "semantic_hash": ""
   },
   "narrative/FADYME_MEDIA_ALL/ch1_camp_005.ogg": {
@@ -20070,9 +19212,9 @@
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/audit_v001/reference_resolution.json": {
-    "mtime": 1791521065.802268,
-    "seen": 1791521287.2423782,
-    "ast_hash": "c935a305ff34b02cd997e0ea2c2c038f",
+    "mtime": 1791522321.8105397,
+    "seen": 1791525617.1987405,
+    "ast_hash": "51caae4cf02dcc18531fa898694c93c7",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/audit_v001/runtime_assets.json": {
@@ -20130,15 +19272,15 @@
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/audit_v001/DESIGN_SCOPE.md": {
-    "mtime": 1791521273.321612,
-    "seen": 1791521287.244759,
-    "ast_hash": "d0c2dd06d3d33dc2a63477a05462dee6",
+    "mtime": 1791523574.8655488,
+    "seen": 1791525617.2013805,
+    "ast_hash": "a1d0426f468062f257a9d7633fa5e99b",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md": {
-    "mtime": 1791521191.066809,
-    "seen": 1791521287.24476,
-    "ast_hash": "671958e3d7cc023e5b0bb5575410a782",
+    "mtime": 1791523309.3520358,
+    "seen": 1791525617.2013824,
+    "ast_hash": "0b3ed43aa9fb9c17dcd791d6d15f2a73",
     "semantic_hash": ""
   },
   "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_attack_v003.png": {
@@ -20247,6 +19389,1722 @@
     "mtime": 1791521349.9472644,
     "seen": 1791521442.3625638,
     "ast_hash": "8ef73bb630b4f76264bff1f2ca92718c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/MANIFEST.json": {
+    "mtime": 1791522113.764973,
+    "seen": 1791525617.1986854,
+    "ast_hash": "6a7384f469b2c2658561c3f92cca23b3",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/selection.json": {
+    "mtime": 1791493091.6200438,
+    "seen": 1791525617.1986878,
+    "ast_hash": "32e22175c2808052f8feb140acced866",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Recording_Notes/fadyme_casting.json": {
+    "mtime": 1791493091.628459,
+    "seen": 1791525617.198689,
+    "ast_hash": "fba93ef1817f3dd61254aed05910aa8a",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Recording_Notes/fadyme_selection.json": {
+    "mtime": 1791493091.628459,
+    "seen": 1791525617.1986907,
+    "ast_hash": "32e22175c2808052f8feb140acced866",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__selection.json": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.198692,
+    "ast_hash": "32e22175c2808052f8feb140acced866",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Line_Maps__Fadyme_VO_Master_Line_Map.json": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.1986935,
+    "ast_hash": "61549265b1791f88f68d7cedd3a04326",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Line_Maps__jp_script_fadyme.json": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.1986947,
+    "ast_hash": "730f4d0022b0ee53f3c4d33e836cf7e7",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Missing_VO__Fadyme_Missing_VO.json": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.1986961,
+    "ast_hash": "c4fc3532eb69021ef66f0775ab7e354c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Tools__build_jp_script_fadyme.py": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.1986978,
+    "ast_hash": "9f3207a18ee7ed4f43f24c4f5440b123",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Tools__record_fadyme_vo.py": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.198699,
+    "ast_hash": "44fe61777be57c883ac3a7738e8c2881",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Tools__split_select_vo.py": {
+    "mtime": 1791493091.7541244,
+    "seen": 1791525617.1987,
+    "ast_hash": "3d12ecfacec968e75c4b756e0d5f6738",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Tools__voice_audition.py": {
+    "mtime": 1791493091.7541244,
+    "seen": 1791525617.1987016,
+    "ast_hash": "869f555df1f3d51966e7711ed358dc9d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__fadyme_casting.json": {
+    "mtime": 1791493091.7541244,
+    "seen": 1791525617.1987026,
+    "ast_hash": "fba93ef1817f3dd61254aed05910aa8a",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__fadyme_selection.json": {
+    "mtime": 1791493091.7541244,
+    "seen": 1791525617.1987035,
+    "ast_hash": "32e22175c2808052f8feb140acced866",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__selection.json": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.1987052,
+    "ast_hash": "32e22175c2808052f8feb140acced866",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Line_Maps__Fadyme_VO_Master_Line_Map.json": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.1987066,
+    "ast_hash": "61549265b1791f88f68d7cedd3a04326",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Line_Maps__jp_script_fadyme.json": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.198708,
+    "ast_hash": "730f4d0022b0ee53f3c4d33e836cf7e7",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Missing_VO__Fadyme_Missing_VO.json": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.198709,
+    "ast_hash": "c4fc3532eb69021ef66f0775ab7e354c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Tools__build_jp_script_fadyme.py": {
+    "mtime": 1791493091.942122,
+    "seen": 1791525617.1987104,
+    "ast_hash": "9f3207a18ee7ed4f43f24c4f5440b123",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Tools__record_fadyme_vo.py": {
+    "mtime": 1791493091.942122,
+    "seen": 1791525617.1987119,
+    "ast_hash": "44fe61777be57c883ac3a7738e8c2881",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Tools__split_select_vo.py": {
+    "mtime": 1791493091.942122,
+    "seen": 1791525617.198713,
+    "ast_hash": "3d12ecfacec968e75c4b756e0d5f6738",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Tools__voice_audition.py": {
+    "mtime": 1791493091.942122,
+    "seen": 1791525617.198714,
+    "ast_hash": "869f555df1f3d51966e7711ed358dc9d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__fadyme_casting.json": {
+    "mtime": 1791493091.942122,
+    "seen": 1791525617.198716,
+    "ast_hash": "fba93ef1817f3dd61254aed05910aa8a",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__fadyme_selection.json": {
+    "mtime": 1791493091.942122,
+    "seen": 1791525617.198717,
+    "ast_hash": "32e22175c2808052f8feb140acced866",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__selection.json": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.1987185,
+    "ast_hash": "32e22175c2808052f8feb140acced866",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Line_Maps__Fadyme_VO_Master_Line_Map.json": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.1987195,
+    "ast_hash": "61549265b1791f88f68d7cedd3a04326",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Line_Maps__jp_script_fadyme.json": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.1987207,
+    "ast_hash": "730f4d0022b0ee53f3c4d33e836cf7e7",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Missing_VO__Fadyme_Missing_VO.json": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.198722,
+    "ast_hash": "c4fc3532eb69021ef66f0775ab7e354c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Tools__build_jp_script_fadyme.py": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.1987226,
+    "ast_hash": "9f3207a18ee7ed4f43f24c4f5440b123",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Tools__record_fadyme_vo.py": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.1987238,
+    "ast_hash": "44fe61777be57c883ac3a7738e8c2881",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Tools__split_select_vo.py": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.1987247,
+    "ast_hash": "3d12ecfacec968e75c4b756e0d5f6738",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Tools__voice_audition.py": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.1987262,
+    "ast_hash": "869f555df1f3d51966e7711ed358dc9d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__fadyme_casting.json": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.1987274,
+    "ast_hash": "fba93ef1817f3dd61254aed05910aa8a",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__fadyme_selection.json": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.198728,
+    "ast_hash": "32e22175c2808052f8feb140acced866",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/clip_contract.json": {
+    "mtime": 1791523641.611432,
+    "seen": 1791525617.198752,
+    "ast_hash": "2985208ecc96c074801aef4bc14a87e5",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/locomotion_regions.json": {
+    "mtime": 1791523309.057581,
+    "seen": 1791525617.1987536,
+    "ast_hash": "7af68ce61c6ff01ab12adf647ba5db78",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/asset_inventory.json": {
+    "mtime": 1791526364.871143,
+    "seen": 1791526380.5016387,
+    "ast_hash": "4aac1dd5ebb34e7da53cedee3862253b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/STATUS.json": {
+    "mtime": 1791526351.2733471,
+    "seen": 1791526380.5016408,
+    "ast_hash": "99b28732fbdd5a406bd3b4037728a9fc",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/recording_queue_v002.json": {
+    "mtime": 1791525210.6686003,
+    "seen": 1791525617.1987576,
+    "ast_hash": "112a9cdd580297935a8dbab37bddc306",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/sfx_cue_design.json": {
+    "mtime": 1791523188.9742682,
+    "seen": 1791525617.1987588,
+    "ast_hash": "ff628b2d59aa1f7c5bee4c95af8744e4",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/tutorial_ja_JP_draft_v002.json": {
+    "mtime": 1791525210.6649826,
+    "seen": 1791525617.1987603,
+    "ast_hash": "3eaf7d2240adc452cd4a53bab018201c",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/shot_list.json": {
+    "mtime": 1791524889.106278,
+    "seen": 1791525617.198762,
+    "ast_hash": "a889f18bc67f2c0c7a43e62d7ed481d1",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/props/prop_regions.json": {
+    "mtime": 1791524584.29871,
+    "seen": 1791525617.1987636,
+    "ast_hash": "22a1b3b47139938e3656b762c9be3e77",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_1.json": {
+    "mtime": 1791526362.2433352,
+    "seen": 1791526380.5016525,
+    "ast_hash": "9c990ee7d5c4edd0471fff09c4fa851e",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_10.json": {
+    "mtime": 1791526362.2882783,
+    "seen": 1791526380.5016544,
+    "ast_hash": "69919795d1e4f5dad75a2b695553e4df",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_11.json": {
+    "mtime": 1791526362.2966304,
+    "seen": 1791526380.501656,
+    "ast_hash": "096bee8bf2bc992e0c59e1d02ff61904",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_12.json": {
+    "mtime": 1791526362.3008435,
+    "seen": 1791526380.5016572,
+    "ast_hash": "425e433acb3eb9fca166866fddf2a928",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_13.json": {
+    "mtime": 1791526362.3084927,
+    "seen": 1791526380.501659,
+    "ast_hash": "177812d752a63662ecdd75f7353aca66",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_14.json": {
+    "mtime": 1791526362.319942,
+    "seen": 1791526380.5016613,
+    "ast_hash": "905b0491cc2e118447adf6887c83f76a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_15.json": {
+    "mtime": 1791526362.3316114,
+    "seen": 1791526380.5016627,
+    "ast_hash": "771682ab31cb211308653b66e128c90b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_16.json": {
+    "mtime": 1791526362.3398607,
+    "seen": 1791526380.5016642,
+    "ast_hash": "a12c1c1c10fa5f64b876caf5f78dfea1",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_17.json": {
+    "mtime": 1791526362.3464615,
+    "seen": 1791526380.5016658,
+    "ast_hash": "217f3a883db994447d6f59f87f256676",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_2.json": {
+    "mtime": 1791526362.2477746,
+    "seen": 1791526380.501667,
+    "ast_hash": "9bd24de6ea0771ddd43659bd485922f8",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_3.json": {
+    "mtime": 1791526362.2517676,
+    "seen": 1791526380.501669,
+    "ast_hash": "89800c45a30813690530bdd944c53a12",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_4.json": {
+    "mtime": 1791526362.2567723,
+    "seen": 1791526380.5016704,
+    "ast_hash": "b7a137a4833089fb5d075de20691ce79",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_5.json": {
+    "mtime": 1791526362.262554,
+    "seen": 1791526380.5016718,
+    "ast_hash": "a11aa81a5fccff9e77884e7e0e7218a5",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_6.json": {
+    "mtime": 1791526362.266438,
+    "seen": 1791526380.5016735,
+    "ast_hash": "473352e8b46160e54144c2cc968f1549",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_7.json": {
+    "mtime": 1791526362.2710338,
+    "seen": 1791526380.5016756,
+    "ast_hash": "923494ee699535bea193a53c1af41414",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_8.json": {
+    "mtime": 1791526362.2756526,
+    "seen": 1791526380.5016775,
+    "ast_hash": "1f1759e0f3a93889ba30a563631cbf03",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_9.json": {
+    "mtime": 1791526362.2825003,
+    "seen": 1791526380.5016792,
+    "ast_hash": "4a6bdf1a251d5c85d1a5cf32d6e15272",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/scene_coverage.json": {
+    "mtime": 1791523574.8653917,
+    "seen": 1791525617.1987865,
+    "ast_hash": "d380cd2e65242c29d74ae047c72cdbc7",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/story_states.json": {
+    "mtime": 1791523574.8646724,
+    "seen": 1791525617.198788,
+    "ast_hash": "fc4b1f667ad20e54e59119c6ba909b56",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/manifest.json": {
+    "mtime": 1791523188.9733524,
+    "seen": 1791525617.198789,
+    "ast_hash": "b49fa5ddef7b395e7e321c283c83d00d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/skill_icon_regions.json": {
+    "mtime": 1791524584.3669584,
+    "seen": 1791525617.19879,
+    "ast_hash": "60e4b6d207b1fc766d2174dd6c42a372",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/cinematic_review.json": {
+    "mtime": 1791525214.584042,
+    "seen": 1791525617.1987913,
+    "ast_hash": "6d519b1addb0036647592839381c5b9f",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/end_alpha_check.json": {
+    "mtime": 1791523486.1447568,
+    "seen": 1791525617.1987925,
+    "ast_hash": "59c47f31eda150442ec2cbc5f68d328d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/gallery_browser.json": {
+    "mtime": 1791525519.556753,
+    "seen": 1791525617.1987934,
+    "ast_hash": "b1b36d7d09cb69438c039987dcea1064",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/native_review.json": {
+    "mtime": 1791523384.787733,
+    "seen": 1791525617.1987948,
+    "ast_hash": "3af8525fcf2a380307603a634dfe1ab0",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/prop_review.json": {
+    "mtime": 1791524836.2368786,
+    "seen": 1791525617.1987967,
+    "ast_hash": "a48dc2229886c5e833740d3929ec5a6c",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_coverage.json": {
+    "mtime": 1791523486.8331342,
+    "seen": 1791525617.1987982,
+    "ast_hash": "46b586236f4fdd0a66755b5d135da0d8",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/SOURCE.json": {
+    "mtime": 1791522851.9046197,
+    "seen": 1791525617.1987996,
+    "ast_hash": "ffa4b2ef11155e42b59380ad9d4b4ea9",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/skill_effect_contract.json": {
+    "mtime": 1791523188.9741204,
+    "seen": 1791525617.1988006,
+    "ast_hash": "be042a0d5d63ff8e2ba412b02453c4ae",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/expression_mapping.json": {
+    "mtime": 1791522186.2486253,
+    "seen": 1791525617.1988022,
+    "ast_hash": "8e8b14816842bfcc703fb44de8f2eb37",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/line_visual_direction.json": {
+    "mtime": 1791525473.6209428,
+    "seen": 1791525617.1988037,
+    "ast_hash": "99543a375aa837b1dc8ac5db12ff0f18",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/portrait_files.json": {
+    "mtime": 1791522851.8708186,
+    "seen": 1791525617.1988053,
+    "ast_hash": "bbe9c7e55cd64fdb31eee9c84f23cd9f",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/README.md": {
+    "mtime": 1791522113.7650723,
+    "seen": 1791525617.2013464,
+    "ast_hash": "85b729ea34c950e52a412cd8b77e8b26",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2013478,
+    "ast_hash": "b3c670418ce5f7c906a128c7fa90cc83",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__character_voice_matrix.md": {
+    "mtime": 1791493091.7541244,
+    "seen": 1791525617.2013488,
+    "ast_hash": "73c33b518f23fc2eb549f1523d9d4dcc",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.20135,
+    "ast_hash": "b3c670418ce5f7c906a128c7fa90cc83",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__character_voice_matrix.md": {
+    "mtime": 1791493091.942122,
+    "seen": 1791525617.2013514,
+    "ast_hash": "73c33b518f23fc2eb549f1523d9d4dcc",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.2013526,
+    "ast_hash": "b3c670418ce5f7c906a128c7fa90cc83",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__character_voice_matrix.md": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.2013538,
+    "ast_hash": "73c33b518f23fc2eb549f1523d9d4dcc",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/README.md": {
+    "mtime": 1791525289.3782547,
+    "seen": 1791525617.2013845,
+    "ast_hash": "49a662b4f9fa46ac23e6af4f6b271d49",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/README.md": {
+    "mtime": 1791523516.5204542,
+    "seen": 1791525617.2013855,
+    "ast_hash": "f147b18c309d17c05aa1dd414a2db38b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/README.md": {
+    "mtime": 1791526351.051248,
+    "seen": 1791526380.5040216,
+    "ast_hash": "678b360937ee5d38e33c01a9eb104e52",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/README.md": {
+    "mtime": 1791524473.8948202,
+    "seen": 1791525617.2013884,
+    "ast_hash": "322e95cefb0cbb45e25b69f1e41c5f71",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/index.html": {
+    "mtime": 1791523835.4759734,
+    "seen": 1791525617.2013893,
+    "ast_hash": "0e1571f4c4bb9cf0e8b53f547366701f",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/props/README.md": {
+    "mtime": 1791524584.3670275,
+    "seen": 1791525617.2013903,
+    "ast_hash": "aa5887469da11157f7528bfab766d1de",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/README.md": {
+    "mtime": 1791523574.8654504,
+    "seen": 1791525617.2013917,
+    "ast_hash": "0537f71feebe80a7b764e56298bd52ca",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/README.md": {
+    "mtime": 1791523188.9735126,
+    "seen": 1791525617.201393,
+    "ast_hash": "2c3355ea496ffc0832a615bc38f9e2c9",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/README.md": {
+    "mtime": 1791525315.3313267,
+    "seen": 1791525617.201394,
+    "ast_hash": "e77ce45de959beaa18a70cd1690755a9",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/README.md": {
+    "mtime": 1791522851.9046626,
+    "seen": 1791525617.2013958,
+    "ast_hash": "29d29b28db222b1f41c6654b388f9413",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/licenses/GDQuest-MIT.txt": {
+    "mtime": 1791493091.3465989,
+    "seen": 1791525617.2013977,
+    "ast_hash": "3ee686245ef2df3495724078c4ba1b21",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/licenses/Kenney-CC0.txt": {
+    "mtime": 1791493091.0581334,
+    "seen": 1791525617.2014012,
+    "ast_hash": "3a3de052c64a0c9ea907c73e21789dce",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/README.md": {
+    "mtime": 1791522238.2622232,
+    "seen": 1791525617.2014034,
+    "ast_hash": "c9ca482b57ec17b24131b4f7311cca46",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/sources/chibi_poses_v003.png": {
+    "mtime": 1791493090.6941383,
+    "seen": 1791525617.2038395,
+    "ast_hash": "3c69aa7879b8d37a59484897d566168b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/sources/idle_walk_sheet_v002.png": {
+    "mtime": 1791523237.051982,
+    "seen": 1791525617.2038412,
+    "ast_hash": "89b045f767a63ae0307d2857501c2502",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/sources/idle_walk_sheet_v002_draft.png": {
+    "mtime": 1791523086.6530762,
+    "seen": 1791525617.2038424,
+    "ast_hash": "834d6995806a94f57860474a463778b4",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/sources/ultimate_pose_v003.png": {
+    "mtime": 1791493090.718138,
+    "seen": 1791525617.2038434,
+    "ast_hash": "31054e6d5461a3f61e06ae5f945555d7",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/clockless_reveal_v002.png": {
+    "mtime": 1791525022.6422331,
+    "seen": 1791525617.2038443,
+    "ast_hash": "cf4b46a27654eaba97ac30490e66ebdb",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/clockless_reveal_v002_draft.png": {
+    "mtime": 1791524701.7935302,
+    "seen": 1791525617.203845,
+    "ast_hash": "cd9096892925f06e6696c796e254784e",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/confession_v002.png": {
+    "mtime": 1791524531.396446,
+    "seen": 1791525617.2038465,
+    "ast_hash": "2ad191f665c1b04bcea6f4507494169b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/opening_letter_v002.png": {
+    "mtime": 1791524272.1434126,
+    "seen": 1791525617.2038474,
+    "ast_hash": "5308f0ab6172f037b87c15dccaac47ed",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/props/props_sheet_v002.png": {
+    "mtime": 1791524584.1217818,
+    "seen": 1791525617.2038481,
+    "ast_hash": "72d2667dc74bebb74589dab83fa4ac11",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/props/props_sheet_v002_draft.png": {
+    "mtime": 1791523747.0851634,
+    "seen": 1791525617.2038496,
+    "ast_hash": "6473359852583379f8e56a887053c980",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/props/props_sheet_v002_spacing_draft.png": {
+    "mtime": 1791524584.1197062,
+    "seen": 1791525617.2038503,
+    "ast_hash": "2dc299dd53649520085b9bd40adb92d6",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/vn_black_gold_hands_v002.png": {
+    "mtime": 1791523626.2472565,
+    "seen": 1791525617.2038512,
+    "ast_hash": "f29347a60496346211c0d644962db40f",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/vn_hidden_blood_scarf_v002.png": {
+    "mtime": 1791523365.3498902,
+    "seen": 1791525617.203852,
+    "ast_hash": "e780eef8462e1d4473a8740f11f3ccea",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/vn_white_lock_v002.png": {
+    "mtime": 1791523448.6443555,
+    "seen": 1791525617.2038531,
+    "ast_hash": "78aa555bf45bcd5d98d153f5efc6ba6d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png": {
+    "mtime": 1791493091.9557793,
+    "seen": 1791525617.2038546,
+    "ast_hash": "7affb4752829d468f5d9429308ee02b2",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png": {
+    "mtime": 1791493091.9594636,
+    "seen": 1791525617.2038558,
+    "ast_hash": "08866210e0e461d45637a6129db0a6d7",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png": {
+    "mtime": 1791493091.9594636,
+    "seen": 1791525617.2038567,
+    "ast_hash": "1ad32c7e5989f88177e8bc381ee931ef",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png": {
+    "mtime": 1791493091.9594636,
+    "seen": 1791525617.2038577,
+    "ast_hash": "4a42e1bb99df6b4a8d9065cb2118441c",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/profile_icon_v001.png": {
+    "mtime": 1791493090.7061381,
+    "seen": 1791525617.2038586,
+    "ast_hash": "e9e188bec4b0d6c34fe91b2e8e104f61",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/skill_icons_v002.png": {
+    "mtime": 1791524050.1586392,
+    "seen": 1791525617.2038598,
+    "ast_hash": "bc78e912cd685719032761e50f16be8b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/ultimate_cutin_v001.png": {
+    "mtime": 1791493090.710138,
+    "seen": 1791525617.2038608,
+    "ast_hash": "de68a320026cf93ef252c3e4c75538f1",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_active.png": {
+    "mtime": 1791523378.1905155,
+    "seen": 1791525617.203862,
+    "ast_hash": "7ca0ef66dc2e6a60fd8550a5a747b517",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_active_reduced.png": {
+    "mtime": 1791523378.3756583,
+    "seen": 1791525617.2038631,
+    "ast_hash": "7ca0ef66dc2e6a60fd8550a5a747b517",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_basic.png": {
+    "mtime": 1791523378.4898577,
+    "seen": 1791525617.2038639,
+    "ast_hash": "89343ccdefacab5194f563ec10772cd6",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_basic_reduced.png": {
+    "mtime": 1791523378.7293031,
+    "seen": 1791525617.2038648,
+    "ast_hash": "d289d28fe818d3b300a61d7af57127c4",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_defeat.png": {
+    "mtime": 1791523378.9541776,
+    "seen": 1791525617.2038658,
+    "ast_hash": "26dfdf64cd123f04ee918285d7ca44df",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_defeat_reduced.png": {
+    "mtime": 1791523379.0940819,
+    "seen": 1791525617.2038672,
+    "ast_hash": "c5565c193489b86eb2ebe561ab895781",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_hit.png": {
+    "mtime": 1791523379.2372725,
+    "seen": 1791525617.203868,
+    "ast_hash": "26d13428217e997bcccad7d45e7f1440",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_hit_reduced.png": {
+    "mtime": 1791523379.3649192,
+    "seen": 1791525617.2038686,
+    "ast_hash": "c5565c193489b86eb2ebe561ab895781",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_idle.png": {
+    "mtime": 1791523379.4900706,
+    "seen": 1791525617.2038696,
+    "ast_hash": "3db4e4c65c997b2e35776de83e88f7c0",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_idle_reduced.png": {
+    "mtime": 1791523379.697852,
+    "seen": 1791525617.2038708,
+    "ast_hash": "23f8d77d402114a2ecd579e759c8b9ca",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_ultimate.png": {
+    "mtime": 1791523380.095238,
+    "seen": 1791525617.2038717,
+    "ast_hash": "6e5f8a5ff82b8e206c7b8b548b3437e6",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_ultimate_reduced.png": {
+    "mtime": 1791523380.5994914,
+    "seen": 1791525617.2038727,
+    "ast_hash": "6e5f8a5ff82b8e206c7b8b548b3437e6",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_victory.png": {
+    "mtime": 1791523380.791511,
+    "seen": 1791525617.2038739,
+    "ast_hash": "9b9d92e5124a2736aaa3fae8feb99351",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_victory_reduced.png": {
+    "mtime": 1791523380.9335797,
+    "seen": 1791525617.2038748,
+    "ast_hash": "9b9d92e5124a2736aaa3fae8feb99351",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_walk.png": {
+    "mtime": 1791523381.073992,
+    "seen": 1791525617.2038763,
+    "ast_hash": "598195b3dfc3541320e9889705554f54",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_walk_reduced.png": {
+    "mtime": 1791523381.2534227,
+    "seen": 1791525617.2038777,
+    "ast_hash": "a59ef3f589464c139ca3f6ebe052eb75",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/cinematic_clockless_reveal_native.png": {
+    "mtime": 1791525214.4724026,
+    "seen": 1791525617.2038786,
+    "ast_hash": "0a9adf953bc88cf54fd5acaee79db5be",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/cinematic_confession_native.png": {
+    "mtime": 1791525213.6886983,
+    "seen": 1791525617.2038794,
+    "ast_hash": "696afe3c8c4d5ca98c39b9bb7c36b1bb",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/cinematic_opening_letter_native.png": {
+    "mtime": 1791525212.5427728,
+    "seen": 1791525617.2038805,
+    "ast_hash": "3220aae8151d7af6a8db31db7431ee6b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_idle_00.png": {
+    "mtime": 1791523384.474222,
+    "seen": 1791525617.2038815,
+    "ast_hash": "c0303b27c1f46391816aab576e78de58",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_idle_01.png": {
+    "mtime": 1791523384.577884,
+    "seen": 1791525617.2038822,
+    "ast_hash": "e1c929aa4c38a2f2fd9f6aa469859643",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_idle_02.png": {
+    "mtime": 1791523384.6843827,
+    "seen": 1791525617.2038832,
+    "ast_hash": "8c0149a5c63358e32c8fbcc0693d262d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_idle_03.png": {
+    "mtime": 1791523384.7859263,
+    "seen": 1791525617.2038844,
+    "ast_hash": "0021c58aaf461b37026e8a66f9475365",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_walk_00.png": {
+    "mtime": 1791523383.6101146,
+    "seen": 1791525617.2038856,
+    "ast_hash": "bee4db7a26c92ebcdeeaeff8f8897eb1",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_walk_01.png": {
+    "mtime": 1791523383.7325668,
+    "seen": 1791525617.2038865,
+    "ast_hash": "37fedcf8e492d046a152c161bb0d1124",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_walk_02.png": {
+    "mtime": 1791523383.8083174,
+    "seen": 1791525617.2038877,
+    "ast_hash": "fa9083f5f932581ab77bf3468679158a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_walk_03.png": {
+    "mtime": 1791523383.912541,
+    "seen": 1791525617.2038884,
+    "ast_hash": "b8ab60283581d1bd1447f2fd642cd079",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_walk_04.png": {
+    "mtime": 1791523384.0485735,
+    "seen": 1791525617.2038894,
+    "ast_hash": "d476f52f4f31b45212aca3a0e5089b5a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_walk_05.png": {
+    "mtime": 1791523384.1724184,
+    "seen": 1791525617.2038908,
+    "ast_hash": "77c6858aa8f69f87420b86ce460c08a5",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_walk_06.png": {
+    "mtime": 1791523384.272553,
+    "seen": 1791525617.2038918,
+    "ast_hash": "01e82faa48fd7fdbf9f5ec5572edebc4",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/frame_walk_07.png": {
+    "mtime": 1791523384.3756847,
+    "seen": 1791525617.2038925,
+    "ast_hash": "2a3039e86ef05323b854bbb3a94f395d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/icons_48px.png": {
+    "mtime": 1791524836.1343825,
+    "seen": 1791525617.2038934,
+    "ast_hash": "5c983bb07e034499d869e18ae800a3e1",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/icons_96px.png": {
+    "mtime": 1791524836.2363665,
+    "seen": 1791525617.2038946,
+    "ast_hash": "9d4f2d72f38069276c49b16cdfefaf35",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/props_atlas_native.png": {
+    "mtime": 1791524835.8880692,
+    "seen": 1791525617.2038956,
+    "ast_hash": "fd9027d3f8c9f4753e508ae1d8776654",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/ui_atlas_native.png": {
+    "mtime": 1791524836.0176115,
+    "seen": 1791525617.2038965,
+    "ast_hash": "efdeb4b9b8e233d3fa079aa56e98d4f3",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_a_smile_kept_end.png": {
+    "mtime": 1791523382.1537626,
+    "seen": 1791525617.2038977,
+    "ast_hash": "e70c11722b2e375042d7ef5feef2b704",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_a_smile_kept_normal.png": {
+    "mtime": 1791523381.9823296,
+    "seen": 1791525617.2038984,
+    "ast_hash": "e370b0e1428c8acc3c5c5f4c64601262",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_a_smile_kept_reduced.png": {
+    "mtime": 1791523382.085074,
+    "seen": 1791525617.2038991,
+    "ast_hash": "e370b0e1428c8acc3c5c5f4c64601262",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_ally_cleanse_end.png": {
+    "mtime": 1791523383.313258,
+    "seen": 1791525617.2038999,
+    "ast_hash": "e70c11722b2e375042d7ef5feef2b704",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_ally_cleanse_normal.png": {
+    "mtime": 1791523383.0921965,
+    "seen": 1791525617.2039015,
+    "ast_hash": "24b15da6c0ecdfe179ac48695796f06d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_ally_cleanse_reduced.png": {
+    "mtime": 1791523383.2084634,
+    "seen": 1791525617.2039022,
+    "ast_hash": "37974d42d3a91ae17ab58a16630987d8",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_ally_restore_end.png": {
+    "mtime": 1791523382.9634466,
+    "seen": 1791525617.203903,
+    "ast_hash": "e70c11722b2e375042d7ef5feef2b704",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_ally_restore_normal.png": {
+    "mtime": 1791523382.8368025,
+    "seen": 1791525617.2039042,
+    "ast_hash": "46fd4cb8df7b0728d74cf774596cd429",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_ally_restore_reduced.png": {
+    "mtime": 1791523382.885186,
+    "seen": 1791525617.203905,
+    "ast_hash": "edd55b183e51b87e72a9d2273a6726f8",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_bell_that_forgets_end.png": {
+    "mtime": 1791523382.551784,
+    "seen": 1791525617.203906,
+    "ast_hash": "e70c11722b2e375042d7ef5feef2b704",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_bell_that_forgets_normal.png": {
+    "mtime": 1791523382.331473,
+    "seen": 1791525617.2039068,
+    "ast_hash": "f4f279209f1dac7b48bbaf35e7f3324c",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_bell_that_forgets_reduced.png": {
+    "mtime": 1791523382.4363544,
+    "seen": 1791525617.2039077,
+    "ast_hash": "e744d1206d4f96626690c89433a3b78a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_borrowed_hour_end.png": {
+    "mtime": 1791523381.8486779,
+    "seen": 1791525617.203909,
+    "ast_hash": "e70c11722b2e375042d7ef5feef2b704",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_borrowed_hour_normal.png": {
+    "mtime": 1791523381.6759667,
+    "seen": 1791525617.20391,
+    "ast_hash": "b3447e74476bbb5908270470bbe41dbb",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_borrowed_hour_reduced.png": {
+    "mtime": 1791523381.769874,
+    "seen": 1791525617.2039108,
+    "ast_hash": "1e2055d9ada8dbabe01f4357d80e477c",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_veilglass_thorn_end.png": {
+    "mtime": 1791523381.5532954,
+    "seen": 1791525617.2039118,
+    "ast_hash": "e70c11722b2e375042d7ef5feef2b704",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_veilglass_thorn_normal.png": {
+    "mtime": 1791523381.3759785,
+    "seen": 1791525617.2039127,
+    "ast_hash": "f5254547529461b6fb5f196c14dab212",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_veilglass_thorn_reduced.png": {
+    "mtime": 1791523381.4664958,
+    "seen": 1791525617.2039137,
+    "ast_hash": "017ee527d4a12817f368231ef4f9d18c",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/textures/light_01.png": {
+    "mtime": 1791493091.3541849,
+    "seen": 1791525617.2039144,
+    "ast_hash": "0a0965cc483bda4713c0d076a85145c2",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/textures/spark_01.png": {
+    "mtime": 1791493091.3541849,
+    "seen": 1791525617.203915,
+    "ast_hash": "b421174e3bc3624826a5d55b218f17ac",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_composed_v001.png": {
+    "mtime": 1791493090.7261379,
+    "seen": 1791525617.203916,
+    "ast_hash": "30d04229ceb7e12df15b4660691a7a7d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_honest_fear_v001.png": {
+    "mtime": 1791493090.7301378,
+    "seen": 1791525617.2039168,
+    "ast_hash": "454f164fe5a5b1d6a7ce3ac8b784f7ca",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_quiet_pain_v001.png": {
+    "mtime": 1791493090.7341378,
+    "seen": 1791525617.2039177,
+    "ast_hash": "f9c2ec2972925a926a7be10c302793a8",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_warm_v001.png": {
+    "mtime": 1791493090.7381377,
+    "seen": 1791525617.2039192,
+    "ast_hash": "193641bc2cac59838723cb647f2c9445",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_wry_v001.png": {
+    "mtime": 1791493090.7461376,
+    "seen": 1791525617.2039206,
+    "ast_hash": "f7c38d822e2ee0705b926e1621aaed82",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_curiosity_v002.png": {
+    "mtime": 1791522238.2355754,
+    "seen": 1791525617.2039213,
+    "ast_hash": "7c5802aa50e386607564bb93dbcf3f86",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_resolve_v002.png": {
+    "mtime": 1791522685.9481676,
+    "seen": 1791525617.2039225,
+    "ast_hash": "2e1f51c92fc589880f9e8a9a6f716a0a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_strain_v002.png": {
+    "mtime": 1791522873.9139276,
+    "seen": 1791525617.2039237,
+    "ast_hash": "906d65ff510592737b31cb3f6754defc",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_vulnerable_v002.png": {
+    "mtime": 1791522951.8210015,
+    "seen": 1791525617.2039244,
+    "ast_hash": "7ffcf196e8c8736b6f89f674da85dd35",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/ch1_camp_005.ogg": {
+    "mtime": 1791493091.6157618,
+    "seen": 1791525617.2042475,
+    "ast_hash": "25218aa4fc96e2d07ed40a16c03fe759",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/ch1_camp_008.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042487,
+    "ast_hash": "f3ef99657ad9c4e1d3313ff1256a0eff",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/ch1_first_oath_004.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042494,
+    "ast_hash": "77d6341fd303283e7657ae731d15fc7f",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_1_post_002.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042506,
+    "ast_hash": "fa3e9b6ccdc79fdd8976e5199efe62ac",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_1_pre_002.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.204252,
+    "ast_hash": "4bf9c78d3bd3eed7e0e63ddb508d92b1",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_2_pre_003.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042532,
+    "ast_hash": "b53f9d0e700763d8fc5337730bad32f8",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_3_post_002.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042542,
+    "ast_hash": "4de126e31caf1c400645cf684c5b0385",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_4_post_002.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042553,
+    "ast_hash": "598e587af6c49e3ead035ce1b722fc39",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_post_002.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042563,
+    "ast_hash": "e874594a613880c4391e006f84f84789",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_post_004.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042575,
+    "ast_hash": "e8a464ce53a1c9202446305ceec17984",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_pre_003.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042584,
+    "ast_hash": "644ad1a903fe89369a994ae900790b4d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_2_1_post_002.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042594,
+    "ast_hash": "9dc75a98fad759c267c1969c25448e18",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_2_1_pre_003.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042603,
+    "ast_hash": "de0cac44c2965fcc30a98b27c49fd0fb",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/opening_004.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.204261,
+    "ast_hash": "1274e5273dcfbfbc72fbaff6e2a42c97",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/opening_006.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042618,
+    "ast_hash": "34de7d488f5716991b2f02fd58c67d7d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/opening_012.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.204263,
+    "ast_hash": "78950f7fa563290499cae3e1493ab1ac",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/ch1_camp_006.ogg": {
+    "mtime": 1791493091.616339,
+    "seen": 1791525617.2042637,
+    "ast_hash": "cc9b05e34600fb67e90c70afba644b15",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/ch1_first_oath_006.ogg": {
+    "mtime": 1791493091.6200438,
+    "seen": 1791525617.2042644,
+    "ast_hash": "615338864d8f776756dab30fa3a7d877",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_1_post_003.ogg": {
+    "mtime": 1791493091.6200438,
+    "seen": 1791525617.204265,
+    "ast_hash": "9dfdc52f47cbb5e5e55a5b32d519f54c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_1_pre_003.ogg": {
+    "mtime": 1791493091.6200438,
+    "seen": 1791525617.2042663,
+    "ast_hash": "fd6dfca38bb491ba805a7718ec55b257",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_5_post_005.ogg": {
+    "mtime": 1791493091.6200438,
+    "seen": 1791525617.2042668,
+    "ast_hash": "4da379fcef701e9bec4d44d29b36a61c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_2_1_post_003.ogg": {
+    "mtime": 1791493091.6200438,
+    "seen": 1791525617.2042677,
+    "ast_hash": "579976c032a96400cc82c9848d9d5277",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_001.ogg": {
+    "mtime": 1791493091.6200438,
+    "seen": 1791525617.2042685,
+    "ast_hash": "f34c826c7c59f16a8532ef1ec5658b16",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_002.ogg": {
+    "mtime": 1791493091.6200438,
+    "seen": 1791525617.2042696,
+    "ast_hash": "678d658b0bd100cce07a520b3c4daa48",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_014.ogg": {
+    "mtime": 1791493091.6200438,
+    "seen": 1791525617.2042706,
+    "ast_hash": "9b38c206e42d6afd043fb3c82b84bf7e",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Recording_Notes/Fadyme_Sulafat_11_satir.mp3": {
+    "mtime": 1791493091.624835,
+    "seen": 1791525617.2042727,
+    "ast_hash": "7b4914ab38e46107000d4e6c50445808",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_camp_005.ogg": {
+    "mtime": 1791493091.7461827,
+    "seen": 1791525617.2042735,
+    "ast_hash": "25218aa4fc96e2d07ed40a16c03fe759",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_camp_008.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042747,
+    "ast_hash": "f3ef99657ad9c4e1d3313ff1256a0eff",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042756,
+    "ast_hash": "77d6341fd303283e7657ae731d15fc7f",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042768,
+    "ast_hash": "fa3e9b6ccdc79fdd8976e5199efe62ac",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042778,
+    "ast_hash": "4bf9c78d3bd3eed7e0e63ddb508d92b1",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042787,
+    "ast_hash": "b53f9d0e700763d8fc5337730bad32f8",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.20428,
+    "ast_hash": "4de126e31caf1c400645cf684c5b0385",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042806,
+    "ast_hash": "598e587af6c49e3ead035ce1b722fc39",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042813,
+    "ast_hash": "e874594a613880c4391e006f84f84789",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042823,
+    "ast_hash": "e8a464ce53a1c9202446305ceec17984",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042835,
+    "ast_hash": "644ad1a903fe89369a994ae900790b4d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042842,
+    "ast_hash": "9dc75a98fad759c267c1969c25448e18",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.204285,
+    "ast_hash": "de0cac44c2965fcc30a98b27c49fd0fb",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_004.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042856,
+    "ast_hash": "1274e5273dcfbfbc72fbaff6e2a42c97",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_006.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042868,
+    "ast_hash": "34de7d488f5716991b2f02fd58c67d7d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_012.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042878,
+    "ast_hash": "78950f7fa563290499cae3e1493ab1ac",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042882,
+    "ast_hash": "cc9b05e34600fb67e90c70afba644b15",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042892,
+    "ast_hash": "615338864d8f776756dab30fa3a7d877",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042904,
+    "ast_hash": "9dfdc52f47cbb5e5e55a5b32d519f54c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042916,
+    "ast_hash": "fd6dfca38bb491ba805a7718ec55b257",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042923,
+    "ast_hash": "4da379fcef701e9bec4d44d29b36a61c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.204293,
+    "ast_hash": "579976c032a96400cc82c9848d9d5277",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_001.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042942,
+    "ast_hash": "f34c826c7c59f16a8532ef1ec5658b16",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_002.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042952,
+    "ast_hash": "678d658b0bd100cce07a520b3c4daa48",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_014.ogg": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042959,
+    "ast_hash": "9b38c206e42d6afd043fb3c82b84bf7e",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Fadyme_Sulafat_11_satir.mp3": {
+    "mtime": 1791493091.7507727,
+    "seen": 1791525617.2042964,
+    "ast_hash": "7b4914ab38e46107000d4e6c50445808",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_005.ogg": {
+    "mtime": 1791493091.9348745,
+    "seen": 1791525617.2042975,
+    "ast_hash": "25218aa4fc96e2d07ed40a16c03fe759",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_008.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2042985,
+    "ast_hash": "f3ef99657ad9c4e1d3313ff1256a0eff",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2042994,
+    "ast_hash": "77d6341fd303283e7657ae731d15fc7f",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043004,
+    "ast_hash": "fa3e9b6ccdc79fdd8976e5199efe62ac",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043016,
+    "ast_hash": "4bf9c78d3bd3eed7e0e63ddb508d92b1",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043025,
+    "ast_hash": "b53f9d0e700763d8fc5337730bad32f8",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043033,
+    "ast_hash": "4de126e31caf1c400645cf684c5b0385",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043045,
+    "ast_hash": "598e587af6c49e3ead035ce1b722fc39",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043052,
+    "ast_hash": "e874594a613880c4391e006f84f84789",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043061,
+    "ast_hash": "e8a464ce53a1c9202446305ceec17984",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043076,
+    "ast_hash": "644ad1a903fe89369a994ae900790b4d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043085,
+    "ast_hash": "9dc75a98fad759c267c1969c25448e18",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043095,
+    "ast_hash": "de0cac44c2965fcc30a98b27c49fd0fb",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_004.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043104,
+    "ast_hash": "1274e5273dcfbfbc72fbaff6e2a42c97",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_006.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043118,
+    "ast_hash": "34de7d488f5716991b2f02fd58c67d7d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_012.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043126,
+    "ast_hash": "78950f7fa563290499cae3e1493ab1ac",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043138,
+    "ast_hash": "cc9b05e34600fb67e90c70afba644b15",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.204315,
+    "ast_hash": "615338864d8f776756dab30fa3a7d877",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043157,
+    "ast_hash": "9dfdc52f47cbb5e5e55a5b32d519f54c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043166,
+    "ast_hash": "fd6dfca38bb491ba805a7718ec55b257",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043173,
+    "ast_hash": "4da379fcef701e9bec4d44d29b36a61c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043185,
+    "ast_hash": "579976c032a96400cc82c9848d9d5277",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_001.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043197,
+    "ast_hash": "f34c826c7c59f16a8532ef1ec5658b16",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_002.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.2043204,
+    "ast_hash": "678d658b0bd100cce07a520b3c4daa48",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_014.ogg": {
+    "mtime": 1791493091.939741,
+    "seen": 1791525617.204322,
+    "ast_hash": "9b38c206e42d6afd043fb3c82b84bf7e",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Fadyme_Sulafat_11_satir.mp3": {
+    "mtime": 1791493091.942122,
+    "seen": 1791525617.2043233,
+    "ast_hash": "7b4914ab38e46107000d4e6c50445808",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_005.ogg": {
+    "mtime": 1791493092.0301208,
+    "seen": 1791525617.204324,
+    "ast_hash": "25218aa4fc96e2d07ed40a16c03fe759",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_008.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043252,
+    "ast_hash": "f3ef99657ad9c4e1d3313ff1256a0eff",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.204326,
+    "ast_hash": "77d6341fd303283e7657ae731d15fc7f",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.204327,
+    "ast_hash": "fa3e9b6ccdc79fdd8976e5199efe62ac",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043285,
+    "ast_hash": "4bf9c78d3bd3eed7e0e63ddb508d92b1",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043293,
+    "ast_hash": "b53f9d0e700763d8fc5337730bad32f8",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043302,
+    "ast_hash": "4de126e31caf1c400645cf684c5b0385",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043312,
+    "ast_hash": "598e587af6c49e3ead035ce1b722fc39",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043324,
+    "ast_hash": "e874594a613880c4391e006f84f84789",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043335,
+    "ast_hash": "e8a464ce53a1c9202446305ceec17984",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043347,
+    "ast_hash": "644ad1a903fe89369a994ae900790b4d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.204336,
+    "ast_hash": "9dc75a98fad759c267c1969c25448e18",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.204337,
+    "ast_hash": "de0cac44c2965fcc30a98b27c49fd0fb",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_004.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.204338,
+    "ast_hash": "1274e5273dcfbfbc72fbaff6e2a42c97",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_006.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043395,
+    "ast_hash": "34de7d488f5716991b2f02fd58c67d7d",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_012.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043402,
+    "ast_hash": "78950f7fa563290499cae3e1493ab1ac",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043417,
+    "ast_hash": "cc9b05e34600fb67e90c70afba644b15",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.204343,
+    "ast_hash": "615338864d8f776756dab30fa3a7d877",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043438,
+    "ast_hash": "9dfdc52f47cbb5e5e55a5b32d519f54c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043445,
+    "ast_hash": "fd6dfca38bb491ba805a7718ec55b257",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.204346,
+    "ast_hash": "4da379fcef701e9bec4d44d29b36a61c",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043467,
+    "ast_hash": "579976c032a96400cc82c9848d9d5277",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_001.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.2043478,
+    "ast_hash": "f34c826c7c59f16a8532ef1ec5658b16",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_002.ogg": {
+    "mtime": 1791493092.0371184,
+    "seen": 1791525617.204349,
+    "ast_hash": "678d658b0bd100cce07a520b3c4daa48",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_014.ogg": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.2043498,
+    "ast_hash": "9b38c206e42d6afd043fb3c82b84bf7e",
+    "semantic_hash": ""
+  },
+  "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Fadyme_Sulafat_11_satir.mp3": {
+    "mtime": 1791493092.0381207,
+    "seen": 1791525617.2043505,
+    "ast_hash": "7b4914ab38e46107000d4e6c50445808",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json": {
+    "mtime": 1791526351.2731948,
+    "seen": 1791526380.501452,
+    "ast_hash": "15fd8f025ab54e9f5aae36af81b41c15",
+    "semantic_hash": ""
+  },
+  "docs/art/CHIRP3_HD_VOICE_CATALOG.md": {
+    "mtime": 1791526350.5832531,
+    "seen": 1791526380.5036352,
+    "ast_hash": "c6e8d0e1f1be750500c53320ca8b02f0",
     "semantic_hash": ""
   }
 }

@@ -1,0 +1,2481 @@
+{
+  "status": "CANDIDATE_VISUAL_SOURCES_VALIDATED_AUDIO_NOT_GENERATED",
+  "new_delivery_pngs": 13,
+  "superseded_generation_drafts": 4,
+  "generation_requests": 17,
+  "used_emotions": 68,
+  "recording_lines": 241,
+  "tutorial_jp_new_drafts": 40,
+  "archive_files_verified": 143,
+  "locked_reference_entries_verified": 26,
+  "game_and_release_diff": "NONE",
+  "api_audio_calls": 0,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "99cca31adf7df01e9115c5a2e32edeb3326e919c5ddea66e9914580baa1e12f9",
+      "bytes": 4351,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "animation/README.md",
+      "sha256": "77aefd3fd3252d7ebfc66909892e6117966088dff162bb3996544224df46fc98",
+      "bytes": 1468,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "animation/clip_contract.json",
+      "sha256": "40fe5eb47f799ebe11d2a78ce787524b3348394365ac63d77c288331c9a42395",
+      "bytes": 6303,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "animation/fadyme_animation_v002.tscn",
+      "sha256": "781f81ab8078cab6e25a5c4da607904c1cdb0f973b98a615599eb8d1446c2aa4",
+      "bytes": 32055,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "animation/fadyme_locomotion_v002.tscn",
+      "sha256": "d15c321f8f3b22b78f1ecdd17197e3c5eeda069735cc6be837ef9ea0326cadd4",
+      "bytes": 378,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "animation/locomotion_regions.json",
+      "sha256": "5ea4f0aaf02e52479c9e6b670599ebabbd124830cdb1b02d0b87e9caad333a26",
+      "bytes": 4436,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "animation/locomotion_spriteframes_v002.tres",
+      "sha256": "b8d7ab6e2edf8f1b348d856d9f6896b44dcb4f72f9f66f56e51064bcd3072fce",
+      "bytes": 2648,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "animation/sources/chibi_poses_v003.png",
+      "sha256": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634",
+      "bytes": 2857888,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.4019343670124268,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "animation/sources/idle_walk_sheet_v002.png",
+      "sha256": "a81a90372c43c327cd32e5325197c78239fb35ae415368bf2da2a8e8c1636f8f",
+      "bytes": 2299121,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.4866698716970381,
+        "corners": [
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      "generation_index": 6,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "animation/sources/idle_walk_sheet_v002_draft.png",
+      "sha256": "fda7a5e2e119d6ea36b090b97e06c62d4b1e097cf052050d1fe72ca73ffb0edd",
+      "bytes": 3075030,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.31898853433216107,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "generation_index": 5,
+      "status": "REJECTED_CLIPPED_SILHOUETTE_DRAFT",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "animation/sources/ultimate_pose_v003.png",
+      "sha256": "1d06c98782fabdcf57ac9f647c107ea8316e39dded124cd86f9716db8fd00c62",
+      "bytes": 2241564,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.4411719817159253,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "audio/README.md",
+      "sha256": "4f7eba9ad49a311d1804549d0587315c9261a63a8558c425305c08d00a7ec969",
+      "bytes": 1989,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "audio/STATUS.json",
+      "sha256": "48956778eacf5a1f2d8384c47653444af505661bc7fb6906da2d3dc49653dae1",
+      "bytes": 1178,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "audio/recording_queue_v002.json",
+      "sha256": "f29fdb22858c6728de99664244e8a8b0d6a29bbfda9f16945bf093ccc7c02ba9",
+      "bytes": 263151,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "audio/sfx_cue_design.json",
+      "sha256": "513647364020bff70f15564c05bd30c604e26e4a00b47e04e7ef04b54991a34e",
+      "bytes": 2383,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "audio/tutorial_ja_JP_draft_v002.json",
+      "sha256": "3cd4b720b78c3bfebd1e687ae5170bdd590efccb02c7d68e4dd9e002e5289538",
+      "bytes": 43860,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "cinematics/README.md",
+      "sha256": "17f545f1b0a9f7081173e965930f5dd6414875946738107f38c26eeafa469534",
+      "bytes": 958,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "cinematics/clockless_reveal_shot_v002.tscn",
+      "sha256": "887f538a9f7f2e902f47e2db6a2dbf2d9e1eb0a8086f9596515a68be5b616d40",
+      "bytes": 1288,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "cinematics/clockless_reveal_v002.png",
+      "sha256": "4dd30e5ad54df9676ca22a204899041850c6889e36e9feb6e8e02ecc0b14970d",
+      "bytes": 2649000,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        941,
+        1672
+      ],
+      "mode": "RGB",
+      "generation_index": 17,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "cinematics/clockless_reveal_v002_draft.png",
+      "sha256": "7dfa0dabde4b6fbd71eec49d661aabee6570f0ad77a1e4bbb880568087306da2",
+      "bytes": 2796617,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        941,
+        1672
+      ],
+      "mode": "RGB",
+      "generation_index": 16,
+      "status": "REJECTED_IDENTITY_MASK_DRAFT",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "cinematics/confession_shot_v002.tscn",
+      "sha256": "7cc99a6a955a48def7fece2a89bcc1eaa9b425c12f76c240b6ddf02a31e0c336",
+      "bytes": 1286,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "cinematics/confession_v002.png",
+      "sha256": "30b40d06140222a93935c961dfc7a0fd45dc64555e8cde3162ff1f0340fd6a3c",
+      "bytes": 2828612,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        941,
+        1672
+      ],
+      "mode": "RGB",
+      "generation_index": 14,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "cinematics/opening_letter_shot_v002.tscn",
+      "sha256": "80cf855925ab278961937e89dc432c9aaea32135500f295387356ce455ba17ea",
+      "bytes": 1286,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "cinematics/opening_letter_v002.png",
+      "sha256": "0b2a7bb8e10a5a5ee7b64159b3edf6e51de8525c490c612752c0ecc780685441",
+      "bytes": 2626369,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        941,
+        1672
+      ],
+      "mode": "RGB",
+      "generation_index": 13,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "cinematics/shot_list.json",
+      "sha256": "663a2a65f621916da49b35194f865f66445d9a0ed82c710ba174a5b8db2069c7",
+      "bytes": 4545,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "index.html",
+      "sha256": "eed2ca3df33414e9863ed389367932a38a4609a4b7a6d17ba6bc214d2163b1cc",
+      "bytes": 7818,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "project.godot",
+      "sha256": "81d4371eff4a84be347b0af3be95684b6580115133ad08da55b48e8c07637ef6",
+      "bytes": 256,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "props/README.md",
+      "sha256": "5ef42b70b77750aa1de8093ebc03cf15bd24b2d52fe4e26cbfda8846e8f6cb03",
+      "bytes": 889,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "props/broken_crown_fragment_v002.tres",
+      "sha256": "1a3ccdfe05f65fca700804fddbccbc7b52c1df0c3e7229d2720503481937f998",
+      "bytes": 194,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "props/handless_watch_v002.tres",
+      "sha256": "edfb40702b8089f02b13befad9bd767c2681e2e57ff5baed337eb0929f1a77fa",
+      "bytes": 196,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "props/hidden_blood_scarf_v002.tres",
+      "sha256": "76b7e2fb491d0c885915bbe8fbf334b79c28528d72d6041517bbe13561d655a7",
+      "bytes": 196,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "props/mother_bell_hairpin_v002.tres",
+      "sha256": "1f2dc816efe4f6cc029bbda3d892566b831f69a2f520bd93191004ebec94db39",
+      "bytes": 194,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "props/mother_portrait_v002.tres",
+      "sha256": "44daee4ac3e122067a0bacbca24798299c0569525b8c1082f6c59452f64ea63c",
+      "bytes": 197,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "props/mother_prayer_book_v002.tres",
+      "sha256": "e075ab546e258fb47dd08325c5a342b8de100aba3fb18202b2c7d74515426e17",
+      "bytes": 195,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "props/opening_letter_glove_v002.tres",
+      "sha256": "55995d45eefcbf2b57b54a0346be1f2f497bfd3f5677ffad5e72c27ce26e55ac",
+      "bytes": 194,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "props/prop_regions.json",
+      "sha256": "93f40ff65aaaa4c588abbb3518497a59cd6e9a51d0d9ff3cb3451824dbb506b4",
+      "bytes": 4132,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "props/props_sheet_v002.png",
+      "sha256": "5d153323ade7a206ed124b38736b251903984e72a8b586479b65370c91ffe1e2",
+      "bytes": 2301751,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 254,
+        "zero_fraction": 0.6544278462727865,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "generation_index": 15,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "props/props_sheet_v002_draft.png",
+      "sha256": "fa86667a487456e2eeb73de4df401d542ba4762a8f3bc9442c58934cf189e826",
+      "bytes": 2845842,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 254,
+        "zero_fraction": 0.4265600840250651,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "generation_index": 10,
+      "status": "SUPERSEDED_DRAFT_NOT_DELIVERY",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "props/props_sheet_v002_spacing_draft.png",
+      "sha256": "83f60bc3829352cef87817598c10bfc9348d93b238c8d21be58efca6c471b55d",
+      "bytes": 2898176,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 254,
+        "zero_fraction": 0.4562053680419922,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "generation_index": 11,
+      "status": "SUPERSEDED_SPACING_DRAFT",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "props/weapon_fadyme_signature_v002.tres",
+      "sha256": "8169a183b87c7e155fda9cd3fbdc10d0c14c391b459ead6744693ab6cf2b6a29",
+      "bytes": 192,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_1.json",
+      "sha256": "79cdc686d4751f3dd43e762cd3495614cfafdcadc986de33b46230d2ff6b15d7",
+      "bytes": 2483,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_10.json",
+      "sha256": "bdfd54e6be70a87456539f2e74a4a690d3f8523b790837dc9ddcc7b5a4ce87dc",
+      "bytes": 3010,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_11.json",
+      "sha256": "8bd91a1ef8681faea49195c0641352ce4e40ad7d446812a84a4090c7020eb44c",
+      "bytes": 2005,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_12.json",
+      "sha256": "eef805f64b597cce2c31589b9634558874d88caec642801f4b1653da490418b7",
+      "bytes": 2069,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_13.json",
+      "sha256": "c40d5654e84d1191efd1696cee23d7e76528a7f275f39f5d1abe855d60027fc5",
+      "bytes": 2376,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_14.json",
+      "sha256": "f9622b1ffb24008fb9201bfa3dc6d4be4cf8276c442834ef05deadacdb6ba651",
+      "bytes": 2871,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_15.json",
+      "sha256": "f96e086c2eb54ef4567a326a4b0df471b601c4e415eb2bd43ee454eff5615aa7",
+      "bytes": 2124,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_16.json",
+      "sha256": "148906435e01a60e44821840530ca18829f1700ce9b436b987fb2b0261caf5eb",
+      "bytes": 3152,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_17.json",
+      "sha256": "e496db6ac3760ca0fade65271d1d0d99ae8970a32ba85b59e8579d70d2bb8e94",
+      "bytes": 2829,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_2.json",
+      "sha256": "550f232594630ee85d69764c04a771b1cc18c2b0dbf6cf85cebd43c7dc8278e8",
+      "bytes": 1720,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_3.json",
+      "sha256": "8d2abf8c1aac05fcffdae9d81209ac6f561f19f7f995b5d9e90a807b5db1d626",
+      "bytes": 1641,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_4.json",
+      "sha256": "f38b8d0e0c5ac431da0801ac9f181c1356c9b0919a8bae94904ce13ba185fe1b",
+      "bytes": 1783,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_5.json",
+      "sha256": "b30f2b82c9faa6ba2919a50b751077ac4215080c999be1e5ef9a66cb21e8e953",
+      "bytes": 2351,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_6.json",
+      "sha256": "323e537f56971aed75bd09dec28a297b6b7b75b6ce05baee5de015c6f33d5594",
+      "bytes": 2139,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_7.json",
+      "sha256": "800e166332ac1793b7b248cd0934f2be8fcd2b6b83ba4e42386c85e435714954",
+      "bytes": 1820,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_8.json",
+      "sha256": "5a0bfdef51d1c482ca67245c7b9212cd5c50b06cb324114903e8ae458dae2d28",
+      "bytes": 1791,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "provenance/generation_9.json",
+      "sha256": "edb1c0a9f19d19a68e1ca83cd754a1a130172ad6a400812204805d89614c1a03",
+      "bytes": 1935,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "story/README.md",
+      "sha256": "f0491d917d54ecbde2c3c2fb54bf260e6895d06fc7ed80fd52ea3c60aed4763a",
+      "bytes": 767,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "story/scene_coverage.json",
+      "sha256": "ca20e107f8d1dc6274a1b784d3d9996344df87a8b6274b21497b6cd4ebe49796",
+      "bytes": 39571,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "story/story_states.json",
+      "sha256": "c7e09e8664f4f410d470c38aa227f45fd97a2c98aea25b41699227e681559dac",
+      "bytes": 1677,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "story/vn_black_gold_hands_v002.png",
+      "sha256": "4ec56cac05a03b1ac67777fa192d8f7f7bbcdcc37748f33a76a62f711166d9fa",
+      "bytes": 2783759,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.1721819897642522,
+        "corners": [
+          0,
+          0,
+          252,
+          251
+        ]
+      },
+      "generation_index": 9,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "story/vn_hidden_blood_scarf_v002.png",
+      "sha256": "d35cceae768c753349f67d62cb9c5723f853e64e9d983acbbe6276910543466a",
+      "bytes": 2862068,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.16706220811330547,
+        "corners": [
+          0,
+          0,
+          248,
+          251
+        ]
+      },
+      "generation_index": 7,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "story/vn_white_lock_v002.png",
+      "sha256": "f0f099ef4c996802410c162a71989cec2ab6fc95995e6d002986bbfb5d275781",
+      "bytes": 2803820,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.17316512011232868,
+        "corners": [
+          0,
+          0,
+          250,
+          252
+        ]
+      },
+      "generation_index": 8,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "ui/README.md",
+      "sha256": "9fdbd5bdbd410b0b9d73f7e3e733eb3acf23bbdee11f9eb4ffd95399e22010a6",
+      "bytes": 481,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "ui/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "sha256": "fbec091c5f016e07a84868e6ad8cbf9def668b5c985253c8bc832299653e25a9",
+      "bytes": 593121,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.0518951416015625,
+        "corners": [
+          0,
+          0,
+          251,
+          251
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "ui/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "sha256": "d60d5a9010f11637eed7c7af2bba960681b69a3a52a87af6132c778d745f0a4c",
+      "bytes": 1549826,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        768,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.17410659790039062,
+        "corners": [
+          0,
+          0,
+          248,
+          243
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "ui/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "sha256": "608d8b73cf2592281199989ec5b37d2bf738578782d5142227cf71af4719a23d",
+      "bytes": 159330,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.0090789794921875,
+        "corners": [
+          0,
+          252,
+          252,
+          251
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "ui/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "sha256": "f4e67003a736a6b747238083ac4e6cb0f4296f2eb7da430cd1de2a727e0d10a1",
+      "bytes": 584893,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.07665252685546875,
+        "corners": [
+          1,
+          0,
+          252,
+          252
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "ui/manifest.json",
+      "sha256": "c5d0bde3ae345f941dd3bd65fdef815fdfc53bd14149963724c6f22933fcd990",
+      "bytes": 1490,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "ui/mark_skill_fadyme_active_borrowed_hour_v002.tres",
+      "sha256": "7fb0840ae4344438194fdeb350d55cc4c88c6728b47e047bfaa65b0bd2eba656",
+      "bytes": 194,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "ui/mark_skill_fadyme_basic_veilglass_thorn_v002.tres",
+      "sha256": "623a53cdc4b4dbcf3a4347ab5d6680f7e30111683d8ae4e5cd2ef1303e9e76d0",
+      "bytes": 192,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "ui/mark_skill_fadyme_passive_a_smile_kept_v002.tres",
+      "sha256": "35d434c6a723d644845d95cf102dd61f721802a97e60d37da02cbf286a868f10",
+      "bytes": 194,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "ui/mark_skill_fadyme_ultimate_the_bell_that_forgets_v002.tres",
+      "sha256": "f06cc38cec248be895b869f73be79b626d5b215da8ce247713c1df0723a4b464",
+      "bytes": 196,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "ui/profile_icon_v001.png",
+      "sha256": "259c166899b70e77c0e27452c813cabbc00e56cb0c6eae59aece7c6d80a91068",
+      "bytes": 2925721,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.2085428701520366,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "ui/skill_icon_regions.json",
+      "sha256": "f2c0c8cb5e371a32cb56087a7009e010386b9a8e0ee9b2876be33f47848204fb",
+      "bytes": 2328,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "ui/skill_icons_v002.png",
+      "sha256": "b1ae002442035ed77b755396b0584576ad72e1a63590a94982eaaea7c1fc787a",
+      "bytes": 1737411,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.5975087057937726,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "generation_index": 12,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "ui/ultimate_cutin_v001.png",
+      "sha256": "c24beba982782dc764078619dd99e53b3f8792495a2602856e9ff4a02dc14161",
+      "bytes": 3621232,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 253,
+        "zero_fraction": 0.07264900207519531,
+        "corners": [
+          0,
+          0,
+          239,
+          15
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "validation/README.md",
+      "sha256": "7aa1f6a6956b8a244f84db89a08a6f0107a16900ed9a45075cefcda03dffec80",
+      "bytes": 1198,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "validation/animation_active.png",
+      "sha256": "1a9bdfd9691d68ae0418a907388ecc5dac421d4fe51cd42d5d225fcdc6571112",
+      "bytes": 107619,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_active_reduced.png",
+      "sha256": "1a9bdfd9691d68ae0418a907388ecc5dac421d4fe51cd42d5d225fcdc6571112",
+      "bytes": 107619,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_basic.png",
+      "sha256": "171e15e7a80a66ea1823a1a7c71076458afb6e1a499ba642f06c6de6c7592a6a",
+      "bytes": 113064,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_basic_reduced.png",
+      "sha256": "fb3f153ff05fda645b0ae770076fe412a33ce0cb6558cb46fbf073b3c483dc16",
+      "bytes": 112946,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_defeat.png",
+      "sha256": "9a53a441ce971422e43cce7ea646385ff509221089ec16a4dac794cc2d715e01",
+      "bytes": 87032,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_defeat_reduced.png",
+      "sha256": "7b7ceb5a9494afaf85e38a897102f829214c04e3362dc955bf28cc87290d32a2",
+      "bytes": 87014,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_hit.png",
+      "sha256": "b1d73ce9fbbc324546d85b7a3e5a5d9c94d946d224baa4726d83bd806c890711",
+      "bytes": 86967,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_hit_reduced.png",
+      "sha256": "7b7ceb5a9494afaf85e38a897102f829214c04e3362dc955bf28cc87290d32a2",
+      "bytes": 87014,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_idle.png",
+      "sha256": "5bd91202753569fe0a9f0b4e605ba7682631b86066a87c5f0c48addce3bec911",
+      "bytes": 111068,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_idle_reduced.png",
+      "sha256": "5959e02f88cfcee5b609c6c04a9a8933966e88a6eb667a31d35367814017e210",
+      "bytes": 111147,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_ultimate.png",
+      "sha256": "6826ef1823839e934c4e6e652999631b9db7c11f1cb4565a1196b30372f5a9ca",
+      "bytes": 813210,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_ultimate_reduced.png",
+      "sha256": "6826ef1823839e934c4e6e652999631b9db7c11f1cb4565a1196b30372f5a9ca",
+      "bytes": 813210,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_victory.png",
+      "sha256": "6d5808c63dcb386152d64c65df5bc9def99fbb42eb5738f11bd498c1dee743ad",
+      "bytes": 100866,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_victory_reduced.png",
+      "sha256": "6d5808c63dcb386152d64c65df5bc9def99fbb42eb5738f11bd498c1dee743ad",
+      "bytes": 100866,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_walk.png",
+      "sha256": "70962cd602c1b95757dced648ff2e8b979f619fa4aa6992bd387901bad4fdff2",
+      "bytes": 112947,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/animation_walk_reduced.png",
+      "sha256": "f54a36b0088774f8f60ce3bd7491c2b1c2d4bc9845e2a9faeaa5b007fc0b49df",
+      "bytes": 113091,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/cinematic_clockless_reveal_native.png",
+      "sha256": "c6b29190261b320836278979fd972032b01f08e464dad33b15028304a34da578",
+      "bytes": 1722425,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        720,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/cinematic_confession_native.png",
+      "sha256": "e31e0b97573bd3253b8383b118e36bb9077f638d67d6dc0fc27156a9cd475c2b",
+      "bytes": 1804753,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        720,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/cinematic_opening_letter_native.png",
+      "sha256": "83f679d654daabcb1ea4d07e883be082d846a99260e54d791a48e9321f8760ac",
+      "bytes": 1704513,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        720,
+        1280
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/cinematic_review.gd",
+      "sha256": "67d4818bae9446f71e6938e18b6ebc2432ffd5ce100daf12050ab07b571a3d3a",
+      "bytes": 1975,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "validation/cinematic_review.json",
+      "sha256": "8e3ad9ad41e614dcfb217bf9a24d3ea3925e708002d00925cbeb0f5be29d1f4d",
+      "bytes": 1058,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "validation/end_alpha_check.json",
+      "sha256": "f84146eeb10b84a5ca46b306c77090811ffa070057c907d89cf3b38f4d4bd5fd",
+      "bytes": 510,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "validation/frame_idle_00.png",
+      "sha256": "f6dd63ee9d2bb56314afda05cb64019fb3f769107f18c8f7617eb63e1bcfd0c2",
+      "bytes": 102830,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_idle_01.png",
+      "sha256": "14928da4f6e887ace5ae812bc66235e895de93452eb3351c3071c636162c9f82",
+      "bytes": 102094,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_idle_02.png",
+      "sha256": "ce0bc7df84c70487181e7b3359259d686521d6e99118f79623e3bdc79e86cf3e",
+      "bytes": 103546,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_idle_03.png",
+      "sha256": "87dba360a5e7c671036c08340dcdb0d39da4cbb273c320da31ffa7e517c9d308",
+      "bytes": 102186,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_walk_00.png",
+      "sha256": "8dcf370ac298d1356480f650378258b0bd115e1eb6813487a5f673b7d48a2247",
+      "bytes": 104806,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_walk_01.png",
+      "sha256": "56f4e3ba5df2d2078e9fd7500d059311970c9f0f0bfde1bb5e1fa3109b9ff4bc",
+      "bytes": 101787,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_walk_02.png",
+      "sha256": "68d767ceb1fe53770f04928dfe722ac41062688ed49ee4c1b5beef163b2b9597",
+      "bytes": 104446,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_walk_03.png",
+      "sha256": "b19afa675ad292f97dd5242ddf5523be577bf03d0d7f19d9d42e1f53863e5e91",
+      "bytes": 101101,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_walk_04.png",
+      "sha256": "4361d55a50a0891c68f73ee6795095c4c31e46216542b32dfddaa1a6ec150229",
+      "bytes": 104442,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_walk_05.png",
+      "sha256": "9a7d4320337e6a909a366e0cc2ac376e6227f0c146848bb337d9f798c5be0c04",
+      "bytes": 105163,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_walk_06.png",
+      "sha256": "22e213198bf022a574fa6a815f76b9be42496b7023cbc5444a706b40492d5cc7",
+      "bytes": 103370,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/frame_walk_07.png",
+      "sha256": "79a245e1302f1395077b890dfd2c26ae99ad6e7468afab9f05e48a4ba9ea5990",
+      "bytes": 105036,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/gallery_browser.json",
+      "sha256": "6dee74b55c4e026ce26dcfb6876d689d47d0a822ebef123c73361f29f5282c21",
+      "bytes": 391,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "validation/icons_48px.png",
+      "sha256": "8b980087d43718529906c3c1af4fa358bbe81231e21e62159bd3f9d8eaeb6e84",
+      "bytes": 19052,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/icons_96px.png",
+      "sha256": "63fb1ad95825e883ae9ee281c9022211f49f493bf4bf1c52febf0eac543bfc8a",
+      "bytes": 49414,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/native_review.gd",
+      "sha256": "5812454fa8a53ab729e206d322466e3949b40f15ff0dafa1c37bc636be3aac97",
+      "bytes": 5183,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "validation/native_review.json",
+      "sha256": "f034b09512ebeafca7979a6cfa27a2a71aaa075bf8f4869328309cef056dfb33",
+      "bytes": 3628,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "validation/prop_review.gd",
+      "sha256": "d63feae9366ba36c4556b01321842698e06740e2dfe7d5df2bbf0b4e90b74845",
+      "bytes": 2518,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "validation/prop_review.json",
+      "sha256": "47dee5938d1e71b7f91185b2c168ed8e52148d1a9a5d9227b7ef80a7057b647d",
+      "bytes": 1048,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "validation/props_atlas_native.png",
+      "sha256": "f13822d51d04b3d3e7c52156b03730399c9b42a8f8f5ad64f133628b1c25de63",
+      "bytes": 308139,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/ui_atlas_native.png",
+      "sha256": "0a32c862503d9156dad7e454a950e125efa1144b9a9c3ab84b08312ab66a557f",
+      "bytes": 224793,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_a_smile_kept_end.png",
+      "sha256": "26f8f2cf6246ce106efe217f496a76378bc3c2a55d656aeb436220d66cca579d",
+      "bytes": 4785,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_a_smile_kept_normal.png",
+      "sha256": "274d799d89ce7c00f5d713a5352397cd5817907fcab84ae1cc871596a4cd83d1",
+      "bytes": 12954,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_a_smile_kept_reduced.png",
+      "sha256": "274d799d89ce7c00f5d713a5352397cd5817907fcab84ae1cc871596a4cd83d1",
+      "bytes": 12954,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_ally_cleanse_end.png",
+      "sha256": "26f8f2cf6246ce106efe217f496a76378bc3c2a55d656aeb436220d66cca579d",
+      "bytes": 4785,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_ally_cleanse_normal.png",
+      "sha256": "938a90a79869327b385e6dac4c5b78910605afd559fda2e498ef4937d9e069ad",
+      "bytes": 11787,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_ally_cleanse_reduced.png",
+      "sha256": "6b24180c2b478b76d515452b518a0d7c1997b68f9529801ddb8e1ad48f9b1a7b",
+      "bytes": 11615,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_ally_restore_end.png",
+      "sha256": "26f8f2cf6246ce106efe217f496a76378bc3c2a55d656aeb436220d66cca579d",
+      "bytes": 4785,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_ally_restore_normal.png",
+      "sha256": "32f1f3df4b7cf0b013732def7c1c90334f09cb43451c038f08bbe7a8cabfce1c",
+      "bytes": 11857,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_ally_restore_reduced.png",
+      "sha256": "6b0a888bcee25a5331bb229a1b91547e6e764567fe68e02e7c475287126cde0d",
+      "bytes": 11725,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_bell_that_forgets_end.png",
+      "sha256": "26f8f2cf6246ce106efe217f496a76378bc3c2a55d656aeb436220d66cca579d",
+      "bytes": 4785,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_bell_that_forgets_normal.png",
+      "sha256": "3db2e0beae832742285026f98d1e38114eb62e8f56c1a8c4e2dc9fb9458497e2",
+      "bytes": 25682,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_bell_that_forgets_reduced.png",
+      "sha256": "4b0336ef7c60a7e5867781ce694f5c6b8b222ed47891737e205ed8ba13f6bc43",
+      "bytes": 25134,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_borrowed_hour_end.png",
+      "sha256": "26f8f2cf6246ce106efe217f496a76378bc3c2a55d656aeb436220d66cca579d",
+      "bytes": 4785,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_borrowed_hour_normal.png",
+      "sha256": "e7772b38a3d27abeb1308958bc684bd17de48c29aec5dfd100b8adedfea42503",
+      "bytes": 22522,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_borrowed_hour_reduced.png",
+      "sha256": "5188cf67d9f506a816f149f532e5cb2ee8a46c15c5e2e3eda2fba4e54a3fb934",
+      "bytes": 22640,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_coverage.json",
+      "sha256": "c90f8561b5b3bcdfb0497fe21096b79e4d412d086e999d716e70cfe6b09006e6",
+      "bytes": 1707,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "validation/vfx_veilglass_thorn_end.png",
+      "sha256": "26f8f2cf6246ce106efe217f496a76378bc3c2a55d656aeb436220d66cca579d",
+      "bytes": 4785,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_veilglass_thorn_normal.png",
+      "sha256": "9d29d779314e6b3050ec2087144581eb5d49f92690a86d907e20adb35caec4fe",
+      "bytes": 7746,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "validation/vfx_veilglass_thorn_reduced.png",
+      "sha256": "8b776392d1a214d2275b1649bca05db04ee887f0e635c0f9f128d468a447d8c0",
+      "bytes": 7731,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1080,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 255,
+        "max": 255,
+        "zero_fraction": 0.0,
+        "corners": [
+          255,
+          255,
+          255,
+          255
+        ]
+      },
+      "status": "NATIVE_RENDERED_REVIEW_EVIDENCE"
+    },
+    {
+      "path": "vfx/README.md",
+      "sha256": "b3b9e4e77e0f629880b74ab5b77c9cbedd2acdf3e105c3639181fa70e9bc5fdf",
+      "bytes": 1206,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/SOURCE.json",
+      "sha256": "ee80957ba6fff8d4b991b6697e5a45fc4be01a0c3c97120c73a3d393b2b70d05",
+      "bytes": 579,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/a_smile_kept.gdshader",
+      "sha256": "4c5ee7e044a22f5abf43bdc97d5db90c50ae83540ce8531f37c5c1db3ff9ca3a",
+      "bytes": 1457,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/a_smile_kept_v002.tscn",
+      "sha256": "63ba342106eb9f68a3af7fe3d755ee3a4ff1ecfc87e82f1d314917d481980222",
+      "bytes": 1780,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/ally_cleanse.gdshader",
+      "sha256": "5cd4a9706b934c34e1b3e247dee49f5922be8b7da839324a2162e6c13b924f02",
+      "bytes": 1464,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/ally_cleanse_v002.tscn",
+      "sha256": "08898ce74a4d36a1f28bb07a433f8aeace7f89c0501de83b484ad10e2345e6c5",
+      "bytes": 1780,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/ally_restore.gdshader",
+      "sha256": "6463129ed523cfe4bb95b83f91ca25a9a1ca017ad90f99c8a259e0c84a2895a4",
+      "bytes": 1464,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/ally_restore_v002.tscn",
+      "sha256": "b3eee678eada1c32fd1c32cd77e067cea00a2793857d149f49e07ca66cf31b53",
+      "bytes": 1780,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/bell_that_forgets.gdshader",
+      "sha256": "163f80eb5409a549e034b69702b65946fff70f5dec5d43e7ab01fa0c0e83d6fd",
+      "bytes": 1421,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/bell_that_forgets_v002.tscn",
+      "sha256": "86b2aa93e31f942392c82ae6cac3d0dcaff56c5bdbc9f4024cd3c72ebec8f452",
+      "bytes": 1785,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/borrowed_hour.gdshader",
+      "sha256": "056e192a37ea213bf5929453ccb8fdd8b60f78ff8fcc819b868c30827671c7ac",
+      "bytes": 1467,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/borrowed_hour_v002.tscn",
+      "sha256": "885929d598ea9dee3b8a2f104b0b55c11089b7076b9c3e6d116ba6db7b27654c",
+      "bytes": 1780,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/licenses/GDQuest-MIT.txt",
+      "sha256": "2bf865b3906a3e6b1b68181393a547ba54b3b6b1a3a0cd47c7394800a509d36f",
+      "bytes": 1059,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/licenses/Kenney-CC0.txt",
+      "sha256": "7edd59126c258e602e69905a0517cf51bedea489b1a69eb06a77edee1769e81e",
+      "bytes": 629,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/skill_effect_contract.json",
+      "sha256": "fd4084ee594fbaa24368de07df2118227c67866e9283ccb3da2dd427576f0505",
+      "bytes": 4150,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/textures/light_01.png",
+      "sha256": "e15db5a8ccea012f4df82689f1a829bdaac04fd8a3066a723f157e0b01ffbf0a",
+      "bytes": 86592,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "P",
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "vfx/textures/spark_01.png",
+      "sha256": "ca5e7eac772d5af176f0d45be34f416908859bf28697c31f3ec7f34609919f53",
+      "bytes": 89628,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "P",
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "vfx/upstream/2d_vortex.gdshader",
+      "sha256": "12c75bab53e45dbfe46dbd19a18076ddb5b501583f4f8070297617ec4d4af726",
+      "bytes": 675,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/veilglass_thorn.gdshader",
+      "sha256": "9687f42cc62dbebf52048a2f05a000135d768d1faeebabdb1b5c05147b3e183e",
+      "bytes": 1414,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vfx/veilglass_thorn_v002.tscn",
+      "sha256": "bd53b9b72f5a9698545abbcf9b419b725fbcdac7307a7eaeda224ed24578b100",
+      "bytes": 1783,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vn/README.md",
+      "sha256": "4479b933bb1ff0f176749b6f0f34d61d867f1bb376ff40139d65160fe3a80b47",
+      "bytes": 1125,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vn/expression_mapping.json",
+      "sha256": "56c9af17ec7fb3c610d6215ee5807d4976871726ad11c3fcdd3ce69123482405",
+      "bytes": 11905,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vn/line_visual_direction.json",
+      "sha256": "1fafa29def949694abb95ec0dba31c3d2e76b0eaba1bbcfd63b9f587d1450e71",
+      "bytes": 271798,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vn/portrait_files.json",
+      "sha256": "945da726a0173fa5f382b5ce06b972696c921a8a34eecac1ba8cc7b3ea14c6e9",
+      "bytes": 452,
+      "inclusion": "WORKBENCH_NOT_EXPORTED"
+    },
+    {
+      "path": "vn/sources/vn_composed_v001.png",
+      "sha256": "68ad5d9f4b3a44998f31e2a63e66e3d0a553befa44ad99fb4c8b32f041b1f290",
+      "bytes": 2853352,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.17357020033983497,
+        "corners": [
+          0,
+          0,
+          248,
+          240
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "vn/sources/vn_honest_fear_v001.png",
+      "sha256": "fa55f2ee3f1f845c1718610cfcbad27520b31200aa5cfcbf03ff7d9077d9d9b3",
+      "bytes": 2782676,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.16037743048136505,
+        "corners": [
+          0,
+          0,
+          248,
+          240
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "vn/sources/vn_quiet_pain_v001.png",
+      "sha256": "16ef3c93da22355d3d3d099bf10711673884acdb48ea157227a46fc528549054",
+      "bytes": 2647984,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.16521486421863393,
+        "corners": [
+          0,
+          0,
+          252,
+          248
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "vn/sources/vn_warm_v001.png",
+      "sha256": "9f5a76e725253ff322e0ad9bd348b8fd3b4fbb5339a07019c8f355ae788c0e32",
+      "bytes": 2949220,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.13923440472920037,
+        "corners": [
+          0,
+          0,
+          245,
+          248
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "vn/sources/vn_wry_v001.png",
+      "sha256": "571cba7f0bedab12737103229958a399ad40acd63fac746d3b212d57a5656346",
+      "bytes": 2743572,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.17009554042916883,
+        "corners": [
+          0,
+          0,
+          252,
+          251
+        ]
+      },
+      "status": "UNCHANGED_REUSED_SOURCE_CANDIDATE",
+      "license": "Repository proprietary owner source"
+    },
+    {
+      "path": "vn/vn_curiosity_v002.png",
+      "sha256": "fb827919861026f39d78710129bc9d8d770c9f07667774ebf3ac08bb8cb1bf8b",
+      "bytes": 2808544,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.17347099701881302,
+        "corners": [
+          0,
+          0,
+          250,
+          251
+        ]
+      },
+      "generation_index": 1,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "vn/vn_resolve_v002.png",
+      "sha256": "0838156beec6724bfdf17ab36017ff524d0c638a642808a5cfee098252b03ab3",
+      "bytes": 2764831,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.17474728589888383,
+        "corners": [
+          0,
+          0,
+          250,
+          251
+        ]
+      },
+      "generation_index": 2,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "vn/vn_strain_v002.png",
+      "sha256": "6ce71fe21f2d9f243b3535a2f2fae65a9cf095bd4cc4ead7162da5076ca07682",
+      "bytes": 2750031,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.1744579428792365,
+        "corners": [
+          0,
+          0,
+          249,
+          252
+        ]
+      },
+      "generation_index": 3,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    },
+    {
+      "path": "vn/vn_vulnerable_v002.png",
+      "sha256": "4e641638f11b4d332d023dd27792397a0b72ebaced2febf33e6a60c9a6fff111",
+      "bytes": 2755030,
+      "inclusion": "WORKBENCH_NOT_EXPORTED",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "zero_fraction": 0.17324333811544215,
+        "corners": [
+          0,
+          0,
+          252,
+          252
+        ]
+      },
+      "generation_index": 4,
+      "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+      "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
+    }
+  ]
+}

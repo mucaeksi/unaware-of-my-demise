@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "generation_index": 17,
+  "prompt": "Correct the TWO antagonist identities in this cinematic while preserving framing, altar mirror, eclipse, empty handless watch, gold scale court coat and overall painting. The WOMAN IS NOT FADYME. She is Lady Yseldra Vale, age34: replace ALL pale blonde/white hair with LONG STRAIGHT VERY DARK BROWN HAIR, largely tucked behind the lifted black-plum mourning veil. Remove the tiny silver bell hairpin, all Fadyme hood-crown ornaments, and jewelry chain necklace: Yseldra has none of those. Her exposed face is a distinct mature 34-year-old woman with grey eyes, stern thin mouth, no smile. Most important: her MASK is a PHYSICAL SEPARATE BONE WHITE IVORY HALF MASK covering the upper-left half of her face including ONE eye, with a clearly raised ivory edge/rim, an eye aperture and a tiny visible dark securing strap at temple. One fine CRACK across the mask's left eye. Absolutely NO cracks painted directly onto flesh; other visible skin smooth. Veil thrown back, mask stays on. Her surcoat black-plum over fitted dark mail, no Fadyme embroidered cloak. Her wax seal chain has seven GRAY WAX disks each visibly split/cut through its center, no uncropped extra seals; the brass handbell is cracked and its clapper tied with a short RED THREAD. No skull, no sword. The MAN is Cael about40 not Mahmut: slightly more mature face with subtle fine eye/smile lines, grey eyes, CLEAN SHAVEN, short orderly dark hair, quiet courtly patience, slender physique. Keep his high-collared black court coat and antique gold scale panels and empty signet socket. Preserve his white watch dial without any hands. Preserve face reflections on black stone so they match corrected characters. No texts UI logos frames or new people. Same opaque portrait cinematic. Main correction: Yseldra must have dark hair, a REAL separately edged half-mask and NO Fadyme family jewelry.",
+  "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+  "transparent_background": false,
+  "reference_paths": [
+    "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/clockless_reveal_v002_draft.png"
+  ],
+  "notes": "Corrected Yseldra dark hair and separate half-mask; no Fadyme jewelry. Existing canon descriptions govern; new antagonist faces remain candidates.",
+  "output_path": "cinematics/clockless_reveal_v002.png",
+  "output_sha256": "4dd30e5ad54df9676ca22a204899041850c6889e36e9feb6e8e02ecc0b14970d",
+  "date": "2026-10-09",
+  "inclusion": "WORKBENCH_NOT_EXPORTED",
+  "references": [
+    {
+      "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/clockless_reveal_v002_draft.png",
+      "sha256": "7dfa0dabde4b6fbd71eec49d661aabee6570f0ad77a1e4bbb880568087306da2"
+    }
+  ]
+}

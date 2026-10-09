@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "generation_index": 14,
+  "prompt": "Create ONE finished story cinematic illustration for part1_emotional_confession, PORTRAIT 9:16, opaque scene, no boards text logos subtitles or UI. Use FIRST reference for Fadyme's exact adult face, costume and LATE STORY STATE; SECOND reference is MAHMUT identity/costume, NOT the background. Gothic painterly anime light-novel material style consistent with both. In a quiet ruined circular altar chamber beneath a dim eclipse, Fadyme sits against low broken stone, exhausted but speaking honestly, wet violet eyes and a very small tear, lips softly parted, adult dignity. Her single BONE WHITE front lock remains plainly visible amid ash-blonde hair, plum hood black silver-lilac dress ivory scarf, tiny separate maternal silver bell hairpin, hood brow broken crown fragment and chain silver bell with fixed thorn clapper. Black-gold fine veins remain on her human fingers/wrist, no metal glove or claws. MAHMUT kneels beside her at the same eye level, messy dark brown hair, amber eyes, light stubble, weathered charcoal plate armor, oxblood/red torn scarf and cloak, no helmet. His shield set aside against stone and sword sheathed. His hand gently meets her veined fingers, no embrace or kiss, quiet companionship, four correct hands total with understandable anatomy. Keep both faces upper-middle and joined hands near center, show kneeling Mahmut clearly without cropping knees entirely. Beyond a broken arch distant indistinct companions wait privately, no identifiable new face or costume in shadows. Eclipse/stone muted cool fill, tiny warm rim, no bright magic explosions or action pose. Bottom20percent simple dark stone / cloaks with low complexity for captions; intimacy and honest confession, not a power cutin. Do not cure or hide the veins; they persist.",
+  "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+  "transparent_background": false,
+  "reference_paths": [
+    "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/vn_black_gold_hands_v002.png",
+    "game/assets/characters/mahmut/vn_watchful_v001.png"
+  ],
+  "notes": "Originals unchanged; outputs copied byte-exact. No runtime integration.",
+  "output_path": "cinematics/confession_v002.png",
+  "output_sha256": "30b40d06140222a93935c961dfc7a0fd45dc64555e8cde3162ff1f0340fd6a3c",
+  "date": "2026-10-09",
+  "inclusion": "WORKBENCH_NOT_EXPORTED",
+  "references": [
+    {
+      "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/vn_black_gold_hands_v002.png",
+      "sha256": "4ec56cac05a03b1ac67777fa192d8f7f7bbcdcc37748f33a76a62f711166d9fa"
+    },
+    {
+      "path": "game/assets/characters/mahmut/vn_watchful_v001.png",
+      "sha256": "3fc41f865a39449e520e78b79c79e828d4654a64f7778849cf2b085137d0a7d0"
+    }
+  ]
+}

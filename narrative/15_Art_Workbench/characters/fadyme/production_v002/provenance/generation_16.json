@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "generation_index": 16,
+  "prompt": "Create one finished game cinematic still for part1_clockless_reveal, PORTRAIT 9:16 with opaque background, matching the reference images' gothic painterly anime light novel MATERIAL style ONLY. Do NOT copy either reference character's face hair costume weapon. Entirely DIFFERENT characters Cael and Yseldra, described here. At the same ruined eclipse altar AFTER everyone else has left, polished BLACK ALTAR STONE in foreground reflects an archway; the reflection ripples and Lord Cael Veyr steps through, carrying an open small watch with NO HANDS and an EMPTY WHITE DIAL. Cael: adult man about40, SLENDER upright courtly, short orderly DARK hair over brow, GREY eyes, CLEAN SHAVEN, fine eye lines, quiet faint patient smile, severe high-collared long BLACK COURT COAT with ANTIQUE GOLD SCALE PANELS on chest and front, travel stained hem, black gloves without insignia. EMPTY SIGNET RING socket on right glove, no gemstone. A few dark mirror fragments hold misaligned reflections of his face; NO MASK on Cael, no crown, no sword or armor plates, no oxblood scarf. In the REFLECTED ARCHWAY behind him is Lady Yseldra: tall straight-backed adult woman, mourning veil lifted behind head for the first time, SEPARATE BONE WHITE HALF MASK still covering one side of face, cracked across one eye, visible grey eye. Black-plum split surcoat over fitted dark chainmail, leather gloves with small bell clapper rings, gray wax seal chain cut through centers, cracked BRASS HANDBELL whose clapper is tied with small RED THREAD. No skull motif, no horn, no full face mask, no red wax or red costume. Her expression solemn and unreadable, no grin. Show court watch empty face, black mirror stone and reflected arch as focal clues. Dim eclipse above ruined chamber, cold white fill, quiet antique gold accents. Subjects upper-middle, bottom20percent low complexity black stone for captions. No Fadyme, Mahmut, other party, text, title, logos, UI or panels. This is a proposed story illustration based on existing canon descriptions, not an approved new character sheet or new lore.",
+  "status": "REJECTED_IDENTITY_MASK_DRAFT",
+  "transparent_background": false,
+  "reference_paths": [
+    "game/assets/characters/fadyme/vn_composed_v001.png",
+    "game/assets/characters/mahmut/vn_watchful_v001.png"
+  ],
+  "notes": "Style references led to incorrect pale hair / Fadyme family pin / ambiguous mask on Yseldra; corrected in generation17. Never use as delivery.",
+  "output_path": "cinematics/clockless_reveal_v002_draft.png",
+  "output_sha256": "7dfa0dabde4b6fbd71eec49d661aabee6570f0ad77a1e4bbb880568087306da2",
+  "date": "2026-10-09",
+  "inclusion": "WORKBENCH_NOT_EXPORTED",
+  "references": [
+    {
+      "path": "game/assets/characters/fadyme/vn_composed_v001.png",
+      "sha256": "68ad5d9f4b3a44998f31e2a63e66e3d0a553befa44ad99fb4c8b32f041b1f290"
+    },
+    {
+      "path": "game/assets/characters/mahmut/vn_watchful_v001.png",
+      "sha256": "3fc41f865a39449e520e78b79c79e828d4654a64f7778849cf2b085137d0a7d0"
+    }
+  ]
+}

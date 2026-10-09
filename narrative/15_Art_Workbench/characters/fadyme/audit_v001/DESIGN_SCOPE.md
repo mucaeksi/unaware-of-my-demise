@@ -1,5 +1,7 @@
 # Fadyme — üretime başlanacak tasarım paketi
 
+> Historical proposed scope. The latest owner instruction overrides its Sulafat/reuse/216-recording section and ordering: old VO archived; all 241 new Chirp 3 HD ja-JP takes, audio last, production only. See [production_v002](../production_v002/README.md).
+
 Status: DESIGN_SCOPE_DRAFT. Character ID: `fadyme`. Yeni asset ID'leri veya creative approval icat edilmedi. Bu belge üretim grubunu tanımlar; bütçe/timing önerileri test edilmeden kesin motor sözleşmesi olmaz.
 
 ## Kimlik ve görsel dil

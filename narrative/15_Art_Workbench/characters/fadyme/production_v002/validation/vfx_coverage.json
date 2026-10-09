@@ -1,0 +1,98 @@
+[
+  {
+    "file": "vfx_ally_restore_normal.png",
+    "viewport": [
+      1080,
+      720
+    ],
+    "changed_pixel_count": 1991,
+    "changed_pixel_fraction": 0.002560442386831276,
+    "visual_bounds": [
+      501,
+      321,
+      579,
+      399
+    ],
+    "sample_phase": 0.45
+  },
+  {
+    "file": "vfx_ally_cleanse_normal.png",
+    "viewport": [
+      1080,
+      720
+    ],
+    "changed_pixel_count": 2008,
+    "changed_pixel_fraction": 0.0025823045267489714,
+    "visual_bounds": [
+      501,
+      321,
+      579,
+      399
+    ],
+    "sample_phase": 0.45
+  },
+  {
+    "file": "vfx_bell_that_forgets_normal.png",
+    "viewport": [
+      1080,
+      720
+    ],
+    "changed_pixel_count": 11018,
+    "changed_pixel_fraction": 0.014169238683127573,
+    "visual_bounds": [
+      432,
+      286,
+      649,
+      427
+    ],
+    "sample_phase": 0.45
+  },
+  {
+    "file": "vfx_veilglass_thorn_normal.png",
+    "viewport": [
+      1080,
+      720
+    ],
+    "changed_pixel_count": 1414,
+    "changed_pixel_fraction": 0.0018184156378600823,
+    "visual_bounds": [
+      437,
+      330,
+      594,
+      387
+    ],
+    "sample_phase": 0.45
+  },
+  {
+    "file": "vfx_a_smile_kept_normal.png",
+    "viewport": [
+      1080,
+      720
+    ],
+    "changed_pixel_count": 2368,
+    "changed_pixel_fraction": 0.003045267489711934,
+    "visual_bounds": [
+      491,
+      311,
+      589,
+      409
+    ],
+    "sample_phase": 0.45
+  },
+  {
+    "file": "vfx_borrowed_hour_normal.png",
+    "viewport": [
+      1080,
+      720
+    ],
+    "changed_pixel_count": 7506,
+    "changed_pixel_fraction": 0.009652777777777777,
+    "visual_bounds": [
+      463,
+      283,
+      617,
+      437
+    ],
+    "sample_phase": 0.45
+  }
+]

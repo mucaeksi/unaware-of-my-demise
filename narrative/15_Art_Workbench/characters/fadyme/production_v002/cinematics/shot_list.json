@@ -1,0 +1,106 @@
+{
+  "status": "PROPOSED_ASSET_SHOT_HANDOFF_NOT_INTEGRATED",
+  "entry_120_second_contract": "UNCHANGED; these independent story shots do not replace Entry timeline",
+  "timing": "Holds are visual design proposals; Claude sets final lengths against approved JP voice durations and authoritative story clock.",
+  "layers": "Three flattened full-scene masters plus separate portrait/prop sources. Full illustrated backgrounds are not falsely claimed as separated clean plates.",
+  "motion": "fixed whole-frame framing; optional 1percent push-in only, no shake; Reduced Motion static hold",
+  "lifecycle": "consumer owns pause/skip/back/replay and cleanup on one clock; asset scenes have no callbacks, routing or download-barrier logic",
+  "shots": [
+    {
+      "scene_id": "opening_sad_scene",
+      "source": "game/data/content/story_script_ch01.json",
+      "image": "opening_letter_v002.png",
+      "story_state": "healthy_default",
+      "shot_intent": "alone for one breath, blood-marked glove against letter, prayer book, candle and rain, ash rising",
+      "proposed_hold_seconds": 8.0,
+      "captions_safe_uv": [
+        0.06,
+        0.78,
+        0.94,
+        0.97
+      ],
+      "audio": "rain bed; distant single bell per script; JP inner voice deferred; no baked audio"
+    },
+    {
+      "scene_id": "vn_3_3 / ch3_road",
+      "source": "game/data/content/story_script_ch03.json",
+      "image": "../story/vn_hidden_blood_scarf_v002.png",
+      "story_state": "hidden_blood_scarf",
+      "shot_intent": "closeup temporarily revealing blood to audience, then scarf concealment",
+      "proposed_hold_seconds": 3.2,
+      "captions_safe_uv": [
+        0.06,
+        0.78,
+        0.94,
+        0.97
+      ],
+      "audio": "one soft breath/cough only when explicitly generated/approved; no new spoken text"
+    },
+    {
+      "scene_id": "vn_4_4 / cs_fadyme_1",
+      "source": [
+        "game/data/content/story_script_ch04.json",
+        "game/data/content/character_stories_part1.json"
+      ],
+      "prop": "../props/mother_prayer_book_v002.tres",
+      "story_state": "healthy_default",
+      "shot_intent": "letter refolded into prayer book; PartII text must remain unreadable",
+      "proposed_hold_seconds": 3.2
+    },
+    {
+      "scene_id": "vn_5_4",
+      "source": "game/data/content/story_script_ch05.json",
+      "image": "../story/vn_white_lock_v002.png",
+      "story_state": "bone_white_lock",
+      "shot_intent": "one stark white lock after bridge pulse; no sudden whole-head whitening",
+      "proposed_hold_seconds": 3.2
+    },
+    {
+      "scene_id": "vn_6_2",
+      "source": "game/data/content/story_script_ch06.json",
+      "prop": "../props/mother_portrait_v002.tres",
+      "story_state": "bone_white_lock",
+      "shot_intent": "same maternal ash hair and bell hairpin, cut-away nameplate; handless watch separate detail",
+      "proposed_hold_seconds": 4.2,
+      "approval_note": "new mother face proposed from canon description, not already approved"
+    },
+    {
+      "scene_id": "vn_7_5 phase_2_ward",
+      "source": "game/data/content/story_script_ch07.json",
+      "image": "../story/vn_black_gold_hands_v002.png",
+      "story_state": "late_debt_hands",
+      "shot_intent": "black-gold finger lines, human hand closes to hide debt; no cure and no new mechanics",
+      "proposed_hold_seconds": 2.2
+    },
+    {
+      "scene_id": "part1_emotional_confession",
+      "source": "game/data/content/story_script_ch07.json",
+      "image": "confession_v002.png",
+      "story_state": "late_debt_hands",
+      "shot_intent": "Mahmut kneels at same eye level, private companionship beneath dim eclipse; joined fingers retain darkness",
+      "proposed_hold_seconds": 10.0,
+      "captions_safe_uv": [
+        0.06,
+        0.78,
+        0.94,
+        0.97
+      ],
+      "audio": "NO MUSIC for first exchange; voice deferred; theme only at existing later cue"
+    },
+    {
+      "scene_id": "part1_clockless_reveal",
+      "source": "game/data/content/story_script_ch07.json",
+      "image": "clockless_reveal_v002.png",
+      "story_state": "late_debt_hands",
+      "shot_intent": "after others leave: Cael through polished black altar reflection, handless watch, Yseldra in reflected arch with veil lifted and separate half-mask",
+      "proposed_hold_seconds": 6.0,
+      "captions_safe_uv": [
+        0.06,
+        0.78,
+        0.94,
+        0.97
+      ],
+      "approval_note": "new antagonist appearances based on canon descriptions; source candidate, not approved character sheets"
+    }
+  ]
+}

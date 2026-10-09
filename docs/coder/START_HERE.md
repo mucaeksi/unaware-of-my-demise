@@ -29,3 +29,5 @@ Keep credentials and signing keys outside the repository. Preparing a change or
 a local review AAB does not authorize store/app publication or paid batches.
 The current owner's cloud/main push authorization is explicit; existing CI and
 its configured automatic Worker/admin deployment may run after a push.
+
+Current Fadyme production update, 2026-10-09: the owner explicitly requests asset production only, no game integration; visual expressions → animation/VFX → story/cinematic/UI → audio last. Old Sulafat VO is archived byte-exact under `narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/`; it must not be promoted. New VO is Google Chirp 3 HD `ja-JP`, voice ID pending audition, all 241 lines need new recordings. Fadyme theme music is preserved. Current staged production: [production_v002](../../narrative/15_Art_Workbench/characters/fadyme/production_v002/README.md). Claude owns runtime bindings/imports/state gates and subsequent AAB work. No paid API batch has been executed.

@@ -12,16 +12,22 @@
 - New character/environment art work is staged in `narrative/15_Art_Workbench/`; current canon/reference sources remain in their existing folders. Preserve stable IDs and source bytes. Runtime promotion follows the explicit art-to-code handoff.
 - Cloud coding/builds may use a GitHub checkout with the pinned Linux toolchain. Keep desktop Editor/runtime/Local UI Preview open when available; a cloud environment without GUI must report native visual validation as pending and use the authorized desktop MCP bridge when available.
 
-## Current first-AAB request
+## Current Fadyme production request
 
-The owner explicitly authorized Codex to fix the review findings and restore
-missing dialogue before concentrating on character/environment design. Prioritize
-the first AAB; see `docs/release/FIRST_AAB_PLAN.md`. Japanese voice and music use
-Google APIs in a step-by-step collaboration with the owner. This closing task does not expand deferred systems or authorize paid batches or
-store publication. Validated `main` pushes are explicitly authorized above.
-After this handoff, further AAB builds and runtime fixes belong to Claude. See
-`narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md` for the owner-selected
-Fadyme audit and design scope. Character designs still follow the established handoff.
+Owner update 2026-10-09: produce the complete Fadyme creative package in order:
+VN expressions/mapping -> true chibi animation and four-skill VFX -> story-state
+variants/cinematic props and UI portraits -> audio last. Codex produces only;
+do not modify game bindings, runtime code, scenes, imports or release artifacts.
+Claude integrates. Existing free VFX libraries may supply license-compatible
+production derivatives. Keep outputs/provenance in the art workbench and push
+validated deliverables to main when network access permits.
+
+Old Fadyme VO is archived, not active production input. The requested replacement
+TTS is Chirp 3 HD / ja-JP, documented in
+`docs/design/ENTRY_PRESENTATION_V003_2026-10-07.md`. Do not reuse Sulafat casting
+or its 25 takes. Preserve English text/IDs and Japanese voice language. Audio
+production is the final stage with the owner; paid calls are not implied. The
+owner main theme and Fadyme music are not reset by the VO instruction.
 
 ## Graphify
 

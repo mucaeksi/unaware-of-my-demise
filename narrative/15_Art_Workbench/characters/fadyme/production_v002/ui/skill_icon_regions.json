@@ -1,0 +1,96 @@
+{
+  "status": "CANDIDATE_ATLAS_RESOURCES_NOT_INTEGRATED",
+  "source_dimensions": [
+    1254,
+    1254
+  ],
+  "alpha_corners": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "raster_editing": "None. PNG bytes unchanged; Godot AtlasTexture crops are editable source resources.",
+  "entries": [
+    {
+      "id": "mark_skill_fadyme_basic_veilglass_thorn",
+      "id_authority": "game/data/content/brand_assets_part1.json",
+      "source": "skill_icons_v002.png",
+      "atlas_texture": "mark_skill_fadyme_basic_veilglass_thorn_v002.tres",
+      "region": [
+        0,
+        0,
+        650,
+        630
+      ],
+      "source_alpha_core_bounds": [
+        28,
+        48,
+        630,
+        604
+      ],
+      "status": "CANDIDATE_NOT_OWNER_APPROVED",
+      "needs_semantic_review": null
+    },
+    {
+      "id": "mark_skill_fadyme_active_borrowed_hour",
+      "id_authority": "game/data/content/brand_assets_part1.json",
+      "source": "skill_icons_v002.png",
+      "atlas_texture": "mark_skill_fadyme_active_borrowed_hour_v002.tres",
+      "region": [
+        650,
+        0,
+        604,
+        630
+      ],
+      "source_alpha_core_bounds": [
+        674,
+        39,
+        1223,
+        613
+      ],
+      "status": "CANDIDATE_NOT_OWNER_APPROVED",
+      "needs_semantic_review": null
+    },
+    {
+      "id": "mark_skill_fadyme_passive_a_smile_kept",
+      "id_authority": "game/data/content/brand_assets_part1.json",
+      "source": "skill_icons_v002.png",
+      "atlas_texture": "mark_skill_fadyme_passive_a_smile_kept_v002.tres",
+      "region": [
+        0,
+        630,
+        620,
+        624
+      ],
+      "source_alpha_core_bounds": [
+        50,
+        682,
+        581,
+        1208
+      ],
+      "status": "CANDIDATE_NOT_OWNER_APPROVED",
+      "needs_semantic_review": null
+    },
+    {
+      "id": "mark_skill_fadyme_ultimate_the_bell_that_forgets",
+      "id_authority": "game/data/content/brand_assets_part1.json",
+      "source": "skill_icons_v002.png",
+      "atlas_texture": "mark_skill_fadyme_ultimate_the_bell_that_forgets_v002.tres",
+      "region": [
+        620,
+        630,
+        634,
+        624
+      ],
+      "source_alpha_core_bounds": [
+        637,
+        647,
+        1245,
+        1215
+      ],
+      "status": "CANDIDATE_NOT_OWNER_APPROVED",
+      "needs_semantic_review": null
+    }
+  ]
+}

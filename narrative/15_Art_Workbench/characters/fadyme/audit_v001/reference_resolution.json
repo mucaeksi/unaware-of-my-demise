@@ -192,11 +192,12 @@
     "declared_path_exists": false,
     "sha256": "9286d062ba537e809f4564fd412e45b3d92476b4a332d3f5fd93af94f61284ce",
     "verified_current_paths": [
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
-      "narrative/10_VO/Recording_Notes/Fadyme_Sulafat_11_satir.mp3"
-    ]
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Recording_Notes/Fadyme_Sulafat_11_satir.mp3"
+    ],
+    "production_status": "HISTORICAL_AUDIO_ARCHIVED_SUPERSEDED_OWNER_2026_10_09"
   },
   {
     "ref": "R23-casting",
@@ -204,11 +205,12 @@
     "declared_path_exists": false,
     "sha256": "4f0d5fb0c928ff65b7a5c9e3baad4151f84276e484301acb897c6ea389f32433",
     "verified_current_paths": [
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__fadyme_casting.json",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__fadyme_casting.json",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__fadyme_casting.json",
-      "narrative/10_VO/Recording_Notes/fadyme_casting.json"
-    ]
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__fadyme_casting.json",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__fadyme_casting.json",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__fadyme_casting.json",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Recording_Notes/fadyme_casting.json"
+    ],
+    "production_status": "HISTORICAL_AUDIO_ARCHIVED_SUPERSEDED_OWNER_2026_10_09"
   },
   {
     "ref": "R17",

@@ -22,3 +22,7 @@ and the GDQuest shader reference folder are excluded from exports. Their own
 license notices, source revisions and per-file hashes are retained locally.
 Game-icons.net icons require their author credit under CC BY 3.0 when selected
 for later use; no Game-icons.net icon is included in the current opening export.
+
+## Fadyme production workbench v002
+
+`narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/` stages GDQuest MIT swirl code (revision `f6034a88877f6ea144ae487694cc8fde82d4da7f`) with its MIT notice and unmodified Kenney CC0 spark/light textures (revision `ab7086639ee73be31abd87feb21bf1402d4e8144`). Original GDQuest CC BY-NC-SA artwork is not redistributed in that production package. These are design candidates outside the game project; no runtime plugin or dependency has been enabled. See the local `SOURCE.json` and `licenses/` for exact reuse.

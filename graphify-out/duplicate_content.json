@@ -407,13 +407,6 @@
     ]
   },
   {
-    "sha256": "b87104b2fdb1610bfb1e7ebfda1a863f15cee5deac6682a38151b6b547a4ac49",
-    "files": [
-      "THIRD_PARTY_NOTICE.md",
-      "release/current/THIRD_PARTY_NOTICE.md"
-    ]
-  },
-  {
     "sha256": "97bd42e1671a05aafa2f52940227e67bb1e60866ded5648bac8cd331120c4976",
     "files": [
       "docs/release/CURRENT_AAB.md",
@@ -445,28 +438,32 @@
     "sha256": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634",
     "files": [
       "game/assets/characters/fadyme/chibi_poses_v003.png",
-      "release/current/game/assets/characters/fadyme/chibi_poses_v003.png"
+      "release/current/game/assets/characters/fadyme/chibi_poses_v003.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/sources/chibi_poses_v003.png"
     ]
   },
   {
     "sha256": "259c166899b70e77c0e27452c813cabbc00e56cb0c6eae59aece7c6d80a91068",
     "files": [
       "game/assets/characters/fadyme/profile_icon_v001.png",
-      "release/current/game/assets/characters/fadyme/profile_icon_v001.png"
+      "release/current/game/assets/characters/fadyme/profile_icon_v001.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/profile_icon_v001.png"
     ]
   },
   {
     "sha256": "c24beba982782dc764078619dd99e53b3f8792495a2602856e9ff4a02dc14161",
     "files": [
       "game/assets/characters/fadyme/ultimate_cutin_v001.png",
-      "release/current/game/assets/characters/fadyme/ultimate_cutin_v001.png"
+      "release/current/game/assets/characters/fadyme/ultimate_cutin_v001.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/ultimate_cutin_v001.png"
     ]
   },
   {
     "sha256": "1d06c98782fabdcf57ac9f647c107ea8316e39dded124cd86f9716db8fd00c62",
     "files": [
       "game/assets/characters/fadyme/ultimate_pose_v003.png",
-      "release/current/game/assets/characters/fadyme/ultimate_pose_v003.png"
+      "release/current/game/assets/characters/fadyme/ultimate_pose_v003.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/sources/ultimate_pose_v003.png"
     ]
   },
   {
@@ -477,7 +474,8 @@
       "release/current/game/assets/characters/fadyme/vn_composed_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_Composed_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_Composed_v001(1).png",
-      "release/current/game/assets/ui/production/v001/entry/fadyme_composed.png"
+      "release/current/game/assets/ui/production/v001/entry/fadyme_composed.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_composed_v001.png"
     ]
   },
   {
@@ -486,7 +484,8 @@
       "game/assets/characters/fadyme/vn_honest_fear_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_HonestFear_v001.png",
       "release/current/game/assets/characters/fadyme/vn_honest_fear_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_HonestFear_v001(1).png"
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_HonestFear_v001(1).png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_honest_fear_v001.png"
     ]
   },
   {
@@ -495,7 +494,8 @@
       "game/assets/characters/fadyme/vn_quiet_pain_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_QuietPain_v001.png",
       "release/current/game/assets/characters/fadyme/vn_quiet_pain_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_QuietPain_v001(1).png"
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_QuietPain_v001(1).png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_quiet_pain_v001.png"
     ]
   },
   {
@@ -504,14 +504,16 @@
       "game/assets/characters/fadyme/vn_warm_v001.png",
       "release/current/game/assets/characters/fadyme/vn_warm_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_Warm_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_Warm_v001(1).png"
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_Warm_v001(1).png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_warm_v001.png"
     ]
   },
   {
     "sha256": "571cba7f0bedab12737103229958a399ad40acd63fac746d3b212d57a5656346",
     "files": [
       "game/assets/characters/fadyme/vn_wry_v001.png",
-      "release/current/game/assets/characters/fadyme/vn_wry_v001.png"
+      "release/current/game/assets/characters/fadyme/vn_wry_v001.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_wry_v001.png"
     ]
   },
   {
@@ -732,7 +734,8 @@
     "files": [
       "game/assets/vfx/kenney_impacts/LICENSE.txt",
       "game/assets/third_party/reference/kenney-particles/LICENSE.txt",
-      "release/current/game/assets/vfx/kenney_impacts/LICENSE.txt"
+      "release/current/game/assets/vfx/kenney_impacts/LICENSE.txt",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/licenses/Kenney-CC0.txt"
     ]
   },
   {
@@ -740,7 +743,8 @@
     "files": [
       "game/assets/vfx/kenney_impacts/light_01.png",
       "game/assets/third_party/reference/kenney-particles/light_01.png",
-      "release/current/game/assets/vfx/kenney_impacts/light_01.png"
+      "release/current/game/assets/vfx/kenney_impacts/light_01.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/textures/light_01.png"
     ]
   },
   {
@@ -748,7 +752,8 @@
     "files": [
       "game/assets/vfx/kenney_impacts/spark_01.png",
       "game/assets/third_party/reference/kenney-particles/spark_01.png",
-      "release/current/game/assets/vfx/kenney_impacts/spark_01.png"
+      "release/current/game/assets/vfx/kenney_impacts/spark_01.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/textures/spark_01.png"
     ]
   },
   {
@@ -1251,6 +1256,13 @@
     ]
   },
   {
+    "sha256": "2bf865b3906a3e6b1b68181393a547ba54b3b6b1a3a0cd47c7394800a509d36f",
+    "files": [
+      "game/assets/vfx/gdquest_reference/LICENSE-MIT.txt",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/licenses/GDQuest-MIT.txt"
+    ]
+  },
+  {
     "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     "files": [
       "game/data/legal/apache-2.0.txt",
@@ -1290,277 +1302,18 @@
     "files": [
       "narrative/06_Characters/_voice_matrix.md",
       "narrative/10_VO/Recording_Notes/character_voice_matrix.md",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__character_voice_matrix.md",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__character_voice_matrix.md",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__character_voice_matrix.md"
-    ]
-  },
-  {
-    "sha256": "b339590b4a6279d9663081cdbab5f4f7c59ffec466e7f4feda802de68ace271a",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/ch1_camp_005.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/ch1_camp_005.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_camp_005.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_005.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_005.ogg"
-    ]
-  },
-  {
-    "sha256": "56e3e6bfe80a634bea44989898614cdd8dfb258fe4b13f2b9eb8721fa96f1653",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/ch1_camp_008.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/ch1_camp_008.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_camp_008.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_008.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_008.ogg"
-    ]
-  },
-  {
-    "sha256": "6a6a6cddbac3e881a9beb4fc4265b3913565b7e49bf6e98f315398f90e739d55",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/ch1_first_oath_004.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/ch1_first_oath_004.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg"
-    ]
-  },
-  {
-    "sha256": "da65c23be989d1e4617fe0393d86c51f681701b7e6edee64e93bc594791485cd",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_1_post_002.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_1_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg"
-    ]
-  },
-  {
-    "sha256": "34c2e1a076ef0e2467380600a94c72394a12dbfcb591775802553702d7677a85",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_1_pre_002.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_1_pre_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg"
-    ]
-  },
-  {
-    "sha256": "c15f65c1c0bcf13706b7f86a74297580df50bd80bee47b71cdf5c8dfaf87c64d",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_2_pre_003.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_2_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg"
-    ]
-  },
-  {
-    "sha256": "4abd5268b520f5e4d13f2dc3a8f72abe7b2160558d9a4dd873b6da31705b5c35",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_3_post_002.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_3_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg"
-    ]
-  },
-  {
-    "sha256": "5cbf5c4d4598e436b58200daa3f377aa8b8d96d54dab23d33c2f2e40f83221c6",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_4_post_002.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_4_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg"
-    ]
-  },
-  {
-    "sha256": "0e8f8fdbfee2349137b5d4bd97849c5acdfb013d856b1b9aaef975c55b21b995",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_5_post_002.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg"
-    ]
-  },
-  {
-    "sha256": "dc74e0e138ce666fed56317395a7bbc05764cc968955774dec2cc898b76bf221",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_5_post_004.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_post_004.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg"
-    ]
-  },
-  {
-    "sha256": "dcfa8ae466c0ecf4851021aa72a3275c3f96009b35e93ed3075be9dc0097276e",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_5_pre_003.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg"
-    ]
-  },
-  {
-    "sha256": "f49530b5ea32a734069a66d0187aa03e4d0f9dc2a5e490ccac20827b76bf2aaf",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_2_1_post_002.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/node_2_1_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg"
-    ]
-  },
-  {
-    "sha256": "e673e4f5a3326afa038f868d05c39b8818531eb9588a1c567b849535b4874679",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_2_1_pre_003.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/node_2_1_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg"
-    ]
-  },
-  {
-    "sha256": "3edc69033091aca6efba2c6cb2ca2e62f4f6bdb035c907f8d7df64a53dc22856",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/opening_004.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/opening_004.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_004.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_004.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_004.ogg"
-    ]
-  },
-  {
-    "sha256": "73fac8b50565003fe08dd35c79b22d769b0f02409b2be0cbde09e0ac50aa94d4",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/opening_006.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/opening_006.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_006.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_006.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_006.ogg"
-    ]
-  },
-  {
-    "sha256": "3b6c23b9974c596e6dc519582e55371518dbc48068c93432395f413e2061b7a3",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/opening_012.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme/opening_012.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_012.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_012.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_012.ogg"
-    ]
-  },
-  {
-    "sha256": "799c072eaa478e72710f4f65bb10390d98c144990b27e814ab9575b3a5d3f290",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/ch1_camp_006.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme_thought/ch1_camp_006.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg"
-    ]
-  },
-  {
-    "sha256": "358275d64a8f22329d5671d914ca9a018416b32e4bbc05b9b18c2627c23918a4",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/ch1_first_oath_006.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme_thought/ch1_first_oath_006.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg"
-    ]
-  },
-  {
-    "sha256": "256f1221c4101ae10c478187e3b7f84018f65782389b32970c6e0b2e3f686536",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_1_post_003.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_1_post_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg"
-    ]
-  },
-  {
-    "sha256": "34d7288f0d129366ab27812a754191dce8cb2feb5d0fe14e16f33dcb9e29dd49",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_1_pre_003.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_1_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg"
-    ]
-  },
-  {
-    "sha256": "3db346f1569fe549fbd6934bcf3b8b55b9d99be4c4178034aa10ac22a4b89af7",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_1_5_post_005.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_5_post_005.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg"
-    ]
-  },
-  {
-    "sha256": "2f409c71666d9998c5f4fd8179ee841d63a69636b29d3e9b42e398792e215024",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/node_2_1_post_003.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_2_1_post_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg"
-    ]
-  },
-  {
-    "sha256": "9a256f8863337bf45c2c5937206c47bb031b63b8bd2e91f921ad74e6c7e3d277",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/opening_001.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_001.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_001.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_001.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_001.ogg"
-    ]
-  },
-  {
-    "sha256": "2e2def4d06a6a150f7c1a8173ad66e9388b606707352a0149c5a3a85c1b29472",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/opening_002.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_002.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_002.ogg"
-    ]
-  },
-  {
-    "sha256": "85875eafba6478b2ef157e01b7f13203d8f37c9ef48636cfd0e1f52079979985",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/opening_014.ogg",
-      "narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_014.ogg",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_014.ogg",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_014.ogg",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_014.ogg"
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__character_voice_matrix.md",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__character_voice_matrix.md",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__character_voice_matrix.md"
     ]
   },
   {
     "sha256": "e790c76d772e6881b81c19af36b9eaa6667aab055efdebff0e0f02a441f948b9",
     "files": [
       "narrative/10_VO/Recording_Notes/AUDIO_VO_PLAN_PART1.md",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md"
-    ]
-  },
-  {
-    "sha256": "9286d062ba537e809f4564fd412e45b3d92476b4a332d3f5fd93af94f61284ce",
-    "files": [
-      "narrative/10_VO/Recording_Notes/Fadyme_Sulafat_11_satir.mp3",
-      "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
-      "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
-      "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Fadyme_Sulafat_11_satir.mp3"
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md"
     ]
   },
   {
@@ -1657,6 +1410,355 @@
     ]
   },
   {
+    "sha256": "b339590b4a6279d9663081cdbab5f4f7c59ffec466e7f4feda802de68ace271a",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/ch1_camp_005.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/ch1_camp_005.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_camp_005.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_005.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_005.ogg"
+    ]
+  },
+  {
+    "sha256": "56e3e6bfe80a634bea44989898614cdd8dfb258fe4b13f2b9eb8721fa96f1653",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/ch1_camp_008.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/ch1_camp_008.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_camp_008.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_008.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_008.ogg"
+    ]
+  },
+  {
+    "sha256": "6a6a6cddbac3e881a9beb4fc4265b3913565b7e49bf6e98f315398f90e739d55",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/ch1_first_oath_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/ch1_first_oath_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg"
+    ]
+  },
+  {
+    "sha256": "da65c23be989d1e4617fe0393d86c51f681701b7e6edee64e93bc594791485cd",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_1_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_1_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg"
+    ]
+  },
+  {
+    "sha256": "34c2e1a076ef0e2467380600a94c72394a12dbfcb591775802553702d7677a85",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_1_pre_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_1_pre_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg"
+    ]
+  },
+  {
+    "sha256": "c15f65c1c0bcf13706b7f86a74297580df50bd80bee47b71cdf5c8dfaf87c64d",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_2_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_2_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg"
+    ]
+  },
+  {
+    "sha256": "4abd5268b520f5e4d13f2dc3a8f72abe7b2160558d9a4dd873b6da31705b5c35",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_3_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_3_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg"
+    ]
+  },
+  {
+    "sha256": "5cbf5c4d4598e436b58200daa3f377aa8b8d96d54dab23d33c2f2e40f83221c6",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_4_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_4_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg"
+    ]
+  },
+  {
+    "sha256": "0e8f8fdbfee2349137b5d4bd97849c5acdfb013d856b1b9aaef975c55b21b995",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_5_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg"
+    ]
+  },
+  {
+    "sha256": "dc74e0e138ce666fed56317395a7bbc05764cc968955774dec2cc898b76bf221",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_5_post_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_post_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg"
+    ]
+  },
+  {
+    "sha256": "dcfa8ae466c0ecf4851021aa72a3275c3f96009b35e93ed3075be9dc0097276e",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_5_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_1_5_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg"
+    ]
+  },
+  {
+    "sha256": "f49530b5ea32a734069a66d0187aa03e4d0f9dc2a5e490ccac20827b76bf2aaf",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_2_1_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_2_1_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg"
+    ]
+  },
+  {
+    "sha256": "e673e4f5a3326afa038f868d05c39b8818531eb9588a1c567b849535b4874679",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_2_1_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/node_2_1_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg"
+    ]
+  },
+  {
+    "sha256": "3edc69033091aca6efba2c6cb2ca2e62f4f6bdb035c907f8d7df64a53dc22856",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/opening_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/opening_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_004.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_004.ogg"
+    ]
+  },
+  {
+    "sha256": "73fac8b50565003fe08dd35c79b22d769b0f02409b2be0cbde09e0ac50aa94d4",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/opening_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/opening_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_006.ogg"
+    ]
+  },
+  {
+    "sha256": "3b6c23b9974c596e6dc519582e55371518dbc48068c93432395f413e2061b7a3",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/opening_012.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme/opening_012.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__opening_012.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme__opening_012.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_012.ogg"
+    ]
+  },
+  {
+    "sha256": "799c072eaa478e72710f4f65bb10390d98c144990b27e814ab9575b3a5d3f290",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/ch1_camp_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/ch1_camp_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg"
+    ]
+  },
+  {
+    "sha256": "358275d64a8f22329d5671d914ca9a018416b32e4bbc05b9b18c2627c23918a4",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/ch1_first_oath_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/ch1_first_oath_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg"
+    ]
+  },
+  {
+    "sha256": "256f1221c4101ae10c478187e3b7f84018f65782389b32970c6e0b2e3f686536",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_1_post_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_1_post_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg"
+    ]
+  },
+  {
+    "sha256": "34d7288f0d129366ab27812a754191dce8cb2feb5d0fe14e16f33dcb9e29dd49",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_1_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_1_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg"
+    ]
+  },
+  {
+    "sha256": "3db346f1569fe549fbd6934bcf3b8b55b9d99be4c4178034aa10ac22a4b89af7",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_1_5_post_005.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_1_5_post_005.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg"
+    ]
+  },
+  {
+    "sha256": "2f409c71666d9998c5f4fd8179ee841d63a69636b29d3e9b42e398792e215024",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/node_2_1_post_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/node_2_1_post_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg"
+    ]
+  },
+  {
+    "sha256": "9a256f8863337bf45c2c5937206c47bb031b63b8bd2e91f921ad74e6c7e3d277",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/opening_001.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_001.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_001.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_001.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_001.ogg"
+    ]
+  },
+  {
+    "sha256": "2e2def4d06a6a150f7c1a8173ad66e9388b606707352a0149c5a3a85c1b29472",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/opening_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_002.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_002.ogg"
+    ]
+  },
+  {
+    "sha256": "85875eafba6478b2ef157e01b7f13203d8f37c9ef48636cfd0e1f52079979985",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/opening_014.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Japanese/Fadyme/fadyme_thought/opening_014.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme_thought__opening_014.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_014.ogg",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_014.ogg"
+    ]
+  },
+  {
+    "sha256": "9286d062ba537e809f4564fd412e45b3d92476b4a332d3f5fd93af94f61284ce",
+    "files": [
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Recording_Notes/Fadyme_Sulafat_11_satir.mp3",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Fadyme_Sulafat_11_satir.mp3"
+    ]
+  },
+  {
+    "sha256": "fbec091c5f016e07a84868e6ad8cbf9def668b5c985253c8bc832299653e25a9",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001(1).png",
+      "narrative/FADYME_MEDIA_ALL/02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "narrative/FADYME_MEDIA_ALL/UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "narrative/FADYME_MEDIA_ALL/FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png"
+    ]
+  },
+  {
+    "sha256": "d60d5a9010f11637eed7c7af2bba960681b69a3a52a87af6132c778d745f0a4c",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001(1).png",
+      "narrative/FADYME_MEDIA_ALL/02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "narrative/FADYME_MEDIA_ALL/UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "narrative/FADYME_MEDIA_ALL/FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png"
+    ]
+  },
+  {
+    "sha256": "608d8b73cf2592281199989ec5b37d2bf738578782d5142227cf71af4719a23d",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001(1).png",
+      "narrative/FADYME_MEDIA_ALL/02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "narrative/FADYME_MEDIA_ALL/UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "narrative/FADYME_MEDIA_ALL/FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png"
+    ]
+  },
+  {
+    "sha256": "f4e67003a736a6b747238083ac4e6cb0f4296f2eb7da430cd1de2a727e0d10a1",
+    "files": [
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_Roster_v001(1).png",
+      "narrative/FADYME_MEDIA_ALL/02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "narrative/FADYME_MEDIA_ALL/UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "narrative/FADYME_MEDIA_ALL/FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/ui/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png"
+    ]
+  },
+  {
+    "sha256": "1a9bdfd9691d68ae0418a907388ecc5dac421d4fe51cd42d5d225fcdc6571112",
+    "files": [
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_active.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_active_reduced.png"
+    ]
+  },
+  {
+    "sha256": "7b7ceb5a9494afaf85e38a897102f829214c04e3362dc955bf28cc87290d32a2",
+    "files": [
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_hit_reduced.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_defeat_reduced.png"
+    ]
+  },
+  {
+    "sha256": "6826ef1823839e934c4e6e652999631b9db7c11f1cb4565a1196b30372f5a9ca",
+    "files": [
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_ultimate.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_ultimate_reduced.png"
+    ]
+  },
+  {
+    "sha256": "6d5808c63dcb386152d64c65df5bc9def99fbb42eb5738f11bd498c1dee743ad",
+    "files": [
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_victory.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/animation_victory_reduced.png"
+    ]
+  },
+  {
+    "sha256": "26f8f2cf6246ce106efe217f496a76378bc3c2a55d656aeb436220d66cca579d",
+    "files": [
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_a_smile_kept_end.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_ally_cleanse_end.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_ally_restore_end.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_borrowed_hour_end.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_veilglass_thorn_end.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_bell_that_forgets_end.png"
+    ]
+  },
+  {
+    "sha256": "274d799d89ce7c00f5d713a5352397cd5817907fcab84ae1cc871596a4cd83d1",
+    "files": [
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_a_smile_kept_normal.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_a_smile_kept_reduced.png"
+    ]
+  },
+  {
     "sha256": "998a5d4c608e5ce57c96ab698d5ed1bb6ab15e9ee22da02e5c3330c0a506fec1",
     "files": [
       "narrative/FADYME_MEDIA_ALL/01_Canonical_Character_Sheet.png",
@@ -1694,46 +1796,6 @@
       "narrative/FADYME_MEDIA_ALL/PILOT_SOURCE/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png",
       "narrative/FADYME_MEDIA_ALL/01_Fadyme_Pilot/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png",
       "narrative/FADYME_MEDIA_ALL/FADYME_PILOT_EXTRACTED/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png"
-    ]
-  },
-  {
-    "sha256": "fbec091c5f016e07a84868e6ad8cbf9def668b5c985253c8bc832299653e25a9",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001(1).png",
-      "narrative/FADYME_MEDIA_ALL/02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
-      "narrative/FADYME_MEDIA_ALL/FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png"
-    ]
-  },
-  {
-    "sha256": "d60d5a9010f11637eed7c7af2bba960681b69a3a52a87af6132c778d745f0a4c",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001(1).png",
-      "narrative/FADYME_MEDIA_ALL/02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
-      "narrative/FADYME_MEDIA_ALL/FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png"
-    ]
-  },
-  {
-    "sha256": "608d8b73cf2592281199989ec5b37d2bf738578782d5142227cf71af4719a23d",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001(1).png",
-      "narrative/FADYME_MEDIA_ALL/02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
-      "narrative/FADYME_MEDIA_ALL/FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png"
-    ]
-  },
-  {
-    "sha256": "f4e67003a736a6b747238083ac4e6cb0f4296f2eb7da430cd1de2a727e0d10a1",
-    "files": [
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_UI_Portrait_Roster_v001(1).png",
-      "narrative/FADYME_MEDIA_ALL/02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
-      "narrative/FADYME_MEDIA_ALL/FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png"
     ]
   },
   {

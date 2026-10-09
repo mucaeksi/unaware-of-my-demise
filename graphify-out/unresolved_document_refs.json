@@ -26301,7 +26301,7 @@
   },
   {
     "source_file": "AGENTS.md",
-    "source_location": "L28",
+    "source_location": "L34",
     "target": "/graphify"
   },
   {
@@ -26348,6 +26348,11 @@
     "source_file": "THIRD_PARTY_NOTICE.md",
     "source_location": "L3",
     "target": ".claude/"
+  },
+  {
+    "source_file": "THIRD_PARTY_NOTICE.md",
+    "source_location": "L28",
+    "target": "licenses/"
   },
   {
     "source_file": "UOMD_FRAMEWORK_MANIFEST.md",
@@ -35890,6 +35895,81 @@
     "target": "tools/archive/"
   },
   {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L32",
+    "target": "tools/gen_audio.py"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L33",
+    "target": "audio/music/motifs/"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L35",
+    "target": "prompts/music/music_part1.md"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L92",
+    "target": "narrative/audio/voice/jp_script_<chapter>.json"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L128",
+    "target": "narrative/audio/voice/jp_script_fadyme.json"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L32",
+    "target": "tools/gen_audio.py"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L33",
+    "target": "audio/music/motifs/"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L35",
+    "target": "prompts/music/music_part1.md"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L92",
+    "target": "narrative/audio/voice/jp_script_<chapter>.json"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L128",
+    "target": "narrative/audio/voice/jp_script_fadyme.json"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L32",
+    "target": "tools/gen_audio.py"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L33",
+    "target": "audio/music/motifs/"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L35",
+    "target": "prompts/music/music_part1.md"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L92",
+    "target": "narrative/audio/voice/jp_script_<chapter>.json"
+  },
+  {
+    "source_file": "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
+    "source_location": "L128",
+    "target": "narrative/audio/voice/jp_script_fadyme.json"
+  },
+  {
     "source_file": "narrative/13_Timeline_Factions_Glossary/Factions/_registry.md",
     "source_location": "L58",
     "target": "docs/NARRATIVE_TECH_HANDOFF_PART1.md"
@@ -35976,23 +36056,28 @@
   },
   {
     "source_file": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/DESIGN_SCOPE.md",
-    "source_location": "L32",
+    "source_location": "L34",
     "target": "assets/audio/voice/<speaker_id>/<line_id>.ogg"
   },
   {
     "source_file": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md",
-    "source_location": "L12",
+    "source_location": "L14",
     "target": "speaker_id/line_id"
   },
   {
     "source_file": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md",
-    "source_location": "L60",
+    "source_location": "L62",
     "target": "stage_id/placement/unlock"
   },
   {
     "source_file": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md",
-    "source_location": "L64",
+    "source_location": "L66",
     "target": "narrative/references/..."
+  },
+  {
+    "source_file": "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/README.md",
+    "source_location": "L5",
+    "target": "user://fadyme-review-evidence"
   },
   {
     "source_file": "narrative/15_Art_Workbench/locations/README.md",
@@ -36000,31 +36085,6 @@
     "target": "existing-location-id>/<version>/"
   },
   {
-    "source_file": "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L32",
-    "target": "tools/gen_audio.py"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L33",
-    "target": "audio/music/motifs/"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L35",
-    "target": "prompts/music/music_part1.md"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L92",
-    "target": "narrative/audio/voice/jp_script_<chapter>.json"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L128",
-    "target": "narrative/audio/voice/jp_script_fadyme.json"
-  },
-  {
     "source_file": "narrative/FADYME_MEDIA_ALL/05_Audio_Cues/README_SOURCE.md",
     "source_location": "L4",
     "target": "voice/jp_script_fadyme.json"
@@ -36428,56 +36488,6 @@
     "source_file": "narrative/FADYME_MEDIA_ALL/FADYME_AUDIO_CUES_EXTRACTED/music_part1_prompt_REFERENCE_ONLY.md",
     "source_location": "L5",
     "target": "audio/music/motifs/"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L32",
-    "target": "tools/gen_audio.py"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L33",
-    "target": "audio/music/motifs/"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L35",
-    "target": "prompts/music/music_part1.md"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L92",
-    "target": "narrative/audio/voice/jp_script_<chapter>.json"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L128",
-    "target": "narrative/audio/voice/jp_script_fadyme.json"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L32",
-    "target": "tools/gen_audio.py"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L33",
-    "target": "audio/music/motifs/"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L35",
-    "target": "prompts/music/music_part1.md"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L92",
-    "target": "narrative/audio/voice/jp_script_<chapter>.json"
-  },
-  {
-    "source_file": "narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__AUDIO_VO_PLAN_PART1.md",
-    "source_location": "L128",
-    "target": "narrative/audio/voice/jp_script_fadyme.json"
   },
   {
     "source_file": "parity/README.md",

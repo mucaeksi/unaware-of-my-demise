@@ -1,30 +1,27 @@
 {
   "date_utc": "2026-10-09",
   "browser": "Chromium",
+  "scope": "FINAL_FADYME_SOURCES_AND_SHARED_VOICE_CATALOG",
   "outbound_network_blocked": true,
   "maps": {
     "graph.html": {
-      "fadyme_search_results": 14,
-      "nodes": 1084,
-      "edges": 2991,
+      "nodes": 1099,
+      "edges": 2994,
       "canvas": true,
-      "selected": [
-        "30"
-      ],
-      "info": "docs/design/FADYME PILOT AND SIDE BATTLE v001 2026-10-08.md\nCommunity: docs/design/FADYME PILOT AND SIDE BATTLE v001 2026-10-08.md\nMembers: 101\nDegree: 28\nNeighbors (28)\ndocs/CURRENT STATE.md\n.agents/library/capabilities\ndocs/DECISIONS.md\n.codex/references/ux-review-checklist.md\ntools/content release.py\ngame/scripts/art review\ndocs/design/TUTORIAL SIDE BY SIDE v001 2026-10-08.md\ngame/scripts/ui\ngame/scripts/art review\ngame/assets/ui\ndocs/design/ENTRY PROLOGUE BEFORE THE ROAD v001.md\ngame/assets/ui\nnarrative/FADYME MEDIA ALL/01 Fadyme Pilot\nnarrative/15 Art Workbench/characters\n.agents/archive/20261008\nrelease/current/game\nnarrative/13 Timeline Factions Glossary/History\ndocs/design/ENTRY PRESENTATION V003 2026-10-07.md\ndocs/design/FIRST LAUNCH FLOW.md\ndocs/design/MANUAL ULTIMATE AND NOVEL v004 2026-10-08.md\ndocs/design/OPENING TUTORIAL REVISION v006 2026-10-08.md\ngame/assets/vfx\ngame/assets/vfx\ngame/assets/vfx\ngame/assets/vfx\ngame/assets/vfx\ntools/project catalog.py\ngame/scripts/ui",
+      "fadyme_search_results": 16,
+      "selection_count": 1,
+      "info": "narrative/13 Archive/fadyme voice sulafat 2026-10-09\nCommunity: narrative/13 Archive/fadyme voice sulafat 2026-10-09\nMembers: 108\nDegree: 11\nNeighbors (11)\ndocs/CURRENT STATE.md\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/12 Production Notes/Tooling Snapshots\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/10 VO/Recording Notes\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/FADYME MEDIA ALL/02 UI Portraits",
       "community_filter_toggled": true,
       "page_errors": [],
       "external_requests": []
     },
     "fadyme.html": {
-      "fadyme_search_results": 20,
-      "nodes": 899,
-      "edges": 1383,
+      "nodes": 1354,
+      "edges": 2065,
       "canvas": true,
-      "selected": [
-        "narrative_fadyme_media_all_04_vo_japanese__fadyme__fadyme__node_1_1_pre_002"
-      ],
-      "info": "Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg\nType: concept\nCommunity: narrative/FADYME MEDIA ALL/04 VO\nSource: narrative/FADYME_MEDIA_ALL/04_VO/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg\nDegree: 2\nNeighbors (2)\nnode_1_1_pre_002.ogg\n04_VO /",
+      "fadyme_search_results": 20,
+      "selection_count": 1,
+      "info": "UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png\nType: image\nCommunity: narrative/FADYME MEDIA ALL/01 Fadyme Pilot\nSource: narrative/FADYME_MEDIA_ALL/FADYME_PILOT_EXTRACTED/UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png\nDegree: 2\nNeighbors (2)\n01_Canonical_Character_Sheet.png\nFADYME_PILOT_EXTRACTED /",
       "community_filter_toggled": true,
       "page_errors": [],
       "external_requests": []

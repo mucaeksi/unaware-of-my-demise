@@ -2,26 +2,26 @@
 input: <in-memory>
 input_stage: provided JSON (normal graph.json is post-build)
 effective_directed: <direct-call>
-nodes: 28291
+nodes: 28747
 unverified_code_nodes: 0
-raw_edges: 51396
-valid_candidate_edges: 51396
+raw_edges: 52093
+valid_candidate_edges: 52093
 missing_endpoint_edges: 0
 dangling_endpoint_edges: 0
 external_reference_edges: 0
 self_loop_edges: 189
 exact_duplicate_edges: 0
-directed_unique_endpoint_pairs: 47157
-directed_same_endpoint_collapsed_edges: 4239
-undirected_unique_endpoint_pairs: 46878
-undirected_same_endpoint_collapsed_edges: 4518
-same_endpoint_group_count: 2344
-relation_variant_groups: 499
+directed_unique_endpoint_pairs: 47794
+directed_same_endpoint_collapsed_edges: 4299
+undirected_unique_endpoint_pairs: 47514
+undirected_same_endpoint_collapsed_edges: 4579
+same_endpoint_group_count: 2396
+relation_variant_groups: 524
 source_file_variant_groups: 0
-source_location_variant_groups: 1860
-context_variant_groups: 36
+source_location_variant_groups: 1861
+context_variant_groups: 62
 post_build_graph_type: DiGraph
-post_build_edges: 47155
+post_build_edges: 47792
 producer_suppression_sites: 12
 producer_suppression_examples:
   - L1749 seen_ids arity=unknown

@@ -30,3 +30,12 @@ Query Graphify first for code relationships when available. After code changes r
 Validated cloud `main` pushes are authorized for this collaboration. Do not independently deploy, publish patches, upload to Play, replace signing keys, invoke paid creative APIs or message another chat without explicit task authorization. Restored `main` workflows may automatically deploy production after successful CI; publication intent must be explicit.
 
 Keep API credentials, signing keys, personal client settings and MCP capability records out of Git. Production and Drive LEGACY originals are read-only. UI/subtitles stay English; voice stays Japanese.
+
+## Fadyme production update — 2026-10-09
+
+Codex produces only: VN mapping/expressions, true chibi animation, four-skill VFX,
+story variants/cinematics/props and UI portraits. Audio is last. Integrate only
+explicit package handoffs; Codex does not bind assets into the game. Old Fadyme
+VO was archived under narrative/13_Archive/; all 241 lines need new Chirp3-HD
+ja-JP recordings with a newly auditioned voice ID. Sulafat is superseded for
+new production. Preserve historical files and the separately retained music.

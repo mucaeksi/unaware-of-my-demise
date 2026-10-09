@@ -1,0 +1,41 @@
+{
+  "status": "CANDIDATE_ASSET_GATE_HANDOFF_NOT_RUNTIME_FLAGS",
+  "integration_owner": "Claude",
+  "gates": [
+    {
+      "state": "healthy_default",
+      "portrait": "../vn/sources/vn_composed_v001.png",
+      "when": "opening through before 5-4 pulse unless a temporary scarf close-up is selected",
+      "default_battle_ui": true
+    },
+    {
+      "state": "hidden_blood_scarf",
+      "portrait": "vn_hidden_blood_scarf_v002.png",
+      "when": "vn_3_3 and ch3_road after cough, or later directed scarf closeups",
+      "persistent": false,
+      "blood_visibility": "to audience in closeup only; hide from Mahmut"
+    },
+    {
+      "state": "bone_white_lock",
+      "portrait": "vn_white_lock_v002.png",
+      "when": "after the bell pulse in vn_5_4; persists through chapter6 and later story",
+      "persistent": true,
+      "early_spoiler_forbidden": true
+    },
+    {
+      "state": "late_debt_hands",
+      "portrait": "vn_black_gold_hands_v002.png",
+      "when": "chapter7 vn_7_5 phase_2_ward and after; prior phase_1 hand concealment uses restrained wrist closeup",
+      "persistent": true,
+      "inherits": "bone_white_lock",
+      "default_battle_ui": false
+    }
+  ],
+  "constraints": [
+    "These are design conditions on existing script placements/triggers, not newly created save flags.",
+    "Temporary blood is not baked into persistent white-lock state.",
+    "Expression/story-state selection matrix is a handoff; a flattened portrait is not an editable facial/hair rig.",
+    "Late-state expression combinations not separately painted are not implied by the mapping.",
+    "Baseline roster/menu/battle assets remain healthy and spoiler-free."
+  ]
+}
