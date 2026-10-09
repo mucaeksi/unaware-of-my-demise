@@ -55,6 +55,11 @@ def main():
         import google.auth.transport.requests
         info = json.loads(os.environ['GOOGLE_SERVICE_ACCOUNT_JSON'])
         report['credential_project_id'] = info.get('project_id')
+        # Public IAM principal only; never persist the private key or credential
+        # JSON. The owner needs this exact identity to grant project usage.
+        email = info.get('client_email', '')
+        if isinstance(email, str) and re.fullmatch(r'[a-z0-9-]+@[a-z0-9-]+\.iam\.gserviceaccount\.com', email):
+            report['credential_service_account_email'] = email
         if info.get('type') != 'service_account' or info.get('token_uri') not in {
                 'https://oauth2.googleapis.com/token', 'https://accounts.google.com/o/oauth2/token'}:
             raise EnableError('SERVICE_ACCOUNT_FORMAT_INVALID')
