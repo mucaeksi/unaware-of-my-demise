@@ -2,7 +2,7 @@
   "schema_version": 1,
   "status": "BLOCKED_OR_INTERRUPTED",
   "synthesis_calls_attempted": 0,
-  "voices_list_calls_attempted": 5,
+  "voices_list_calls_attempted": 7,
   "voices": [],
   "errors": [
     {
@@ -28,12 +28,24 @@
     {
       "at_utc": "2026-10-09T08:53:53.363199+00:00",
       "category": "GOOGLE_HTTP_403_SERVICE_DISABLED"
+    },
+    {
+      "at_utc": "2026-10-09T09:15:47.844354+00:00",
+      "category": "GOOGLE_HTTP_401_CREDENTIALS_MISSING"
     }
   ],
   "owner_authorized": true,
   "performance_review": "NOT_LISTENED",
   "runtime_integration": false,
-  "updated_at_utc": "2026-10-09T08:53:53.363214+00:00",
+  "updated_at_utc": "2026-10-09T09:15:47.844366+00:00",
   "generated_samples": 0,
-  "auth_method": "EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH"
+  "auth_method": "API_KEY_BINDING",
+  "requested_oauth_quota_project": "gen-lang-client-0955955681",
+  "auth_route_failures": [
+    {
+      "at_utc": "2026-10-09T09:15:47.815547+00:00",
+      "auth_method": "EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH",
+      "category": "GOOGLE_HTTP_403_USER_PROJECT_DENIED"
+    }
+  ]
 }
