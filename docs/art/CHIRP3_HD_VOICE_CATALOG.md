@@ -2,7 +2,7 @@
 
 2026-10-09 · Fadyme ve sonraki karakterlerin ses seçimi için saklanan standart **30 seslik referans liste**: **14 kadın, 16 erkek**. Henüz bir karaktere ses atanmadı. Kullanıcı tüm kadın/erkek sesler için aynı Japonca metinle Google API örneklerini açıkça istedi; üretim erişim/kimlik nedeniyle bekliyor. Gerçek sentez çağrısı ve yeni ses dosyası sayısı şu anda 0.
 
-**Doğrulama durumu:** Bu oturumda Google'ın resmi dokümanlarına erişim `CONNECT 403 Forbidden` ile engellendi. Aşağıdaki referans katalog canlı API'den alınmadı; güncel listenin tamamlığı ve her sesin `ja-JP` kullanılabilirliği henüz doğrulanmadı. Japonca kimlikler adlandırma şablonundan oluşturulmuş adaylardır. Denemelerden önce yetkili Google Cloud `voices.list` çıktısıyla ad, dil ve `ssmlGender` doğrulanmalı; eksik veya değişmiş seçenekler katalogda güncellenmeli.
+**Doğrulama durumu:** Bu cloud oturumunun doğrudan Google bağlantısı 403 ile engellendi; resmi authentication/Chirp 3 HD belgeleri daha sonra GitHub Actions üzerinden okundu ve örnek paketinin `provider_reference.json` dosyasına kaydedildi. Mevcut `GEMINI_API` secret’ı bulundu; Cloud TTS iki API-key biçimini 401 ile reddetti. Mevcut Google servis hesabı OAuth erişimi çalıştı, ancak `604013824221` projesinde Cloud TTS kapalı (`SERVICE_DISABLED`); açma isteği 403 aldı. Aşağıdaki katalog canlı API’den alınmadı; güncel Japonca ses kapsamı hâlâ doğrulanmalı. API etkinleştirildiğinde araç canlı listeyi esas alarak tüm kadın/erkek örneklerini üretecek. Kimlik bilgileri dosyalara taşınmadı.
 
 ## Kadın · 14
 
@@ -48,7 +48,7 @@ Makineyle okunabilir karşılık: [chirp3_hd_voice_catalog.json](../../narrative
 
 Güncel [ortak örnek paketi](../../narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md), tüm seslerde aynı uzun Japonca kelimeyi soru/ünlem ve duraksama işaretleriyle kullanır. Örnek çağrıları kullanıcı tarafından yetkilendirildi; aynı izin yeniden sorulmaz. Önce canlı katalog ve erişim çalışmalı. Dinlemeden ses seçimi veya ayrı 241 satırlık üretim başlatılmaz. Gerçek üretim durumu örnek paketinin `manifest.json` dosyasındadır.
 
-Resmi kontrol kaynakları (bu oturumda okunamadı):
+Resmi kontrol kaynakları (authentication/Chirp belgeleri Actions üzerinden okundu; canlı ses kataloğu API aktivasyonunu bekliyor):
 
 - https://cloud.google.com/text-to-speech/docs/chirp3-hd
 - https://docs.cloud.google.com/text-to-speech/docs/list-voices-and-types

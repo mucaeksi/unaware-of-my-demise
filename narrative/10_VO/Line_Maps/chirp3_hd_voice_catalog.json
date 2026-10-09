@@ -7,7 +7,7 @@
   "target_locale": "ja-JP",
   "verification_status": "STATIC_REFERENCE_PENDING_LIVE_VOICES_LIST",
   "current_completeness_verified": false,
-  "verification_note": "Official Google documentation requests failed with CONNECT 403 Forbidden. This catalog is a retained standard reference, not an observed live API response. Japanese IDs are constructed candidates. Verify name, languageCodes and ssmlGender using voices.list before auditions.",
+  "verification_note": "Official documentation was captured via GitHub Actions. The live voices.list call returned SERVICE_DISABLED for the existing OAuth consumer project; current Japanese voice availability/completeness remains unverified. Both API-key interfaces returned 401; existing service account OAuth works. No fresh samples exist.",
   "counts": {
     "total": 30,
     "female": 14,
@@ -20,7 +20,7 @@
   ],
   "live_api_response": null,
   "live_verified_at": null,
-  "api_calls": 0,
+  "api_calls": 4,
   "auditions_generated": 0,
   "voices": [
     {
@@ -28,7 +28,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Achernar",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -36,7 +36,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Aoede",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -44,7 +44,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Autonoe",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -52,7 +52,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Callirrhoe",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -60,7 +60,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Despina",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -68,7 +68,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Erinome",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -76,7 +76,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Gacrux",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -84,7 +84,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Kore",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -92,7 +92,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Laomedeia",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -100,7 +100,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Leda",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -108,7 +108,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Pulcherrima",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -116,7 +116,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Sulafat",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -124,7 +124,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Vindemiatrix",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -132,7 +132,7 @@
       "ssml_gender_reference": "FEMALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Zephyr",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -140,7 +140,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Achird",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -148,7 +148,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Algenib",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -156,7 +156,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Algieba",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -164,7 +164,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Alnilam",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -172,7 +172,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Charon",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -180,7 +180,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Enceladus",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -188,7 +188,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Fenrir",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -196,7 +196,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Iapetus",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -204,7 +204,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Orus",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -212,7 +212,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Puck",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -220,7 +220,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Rasalgethi",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -228,7 +228,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Sadachbia",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -236,7 +236,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Sadaltager",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -244,7 +244,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Schedar",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -252,7 +252,7 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Umbriel",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     },
     {
@@ -260,11 +260,15 @@
       "ssml_gender_reference": "MALE",
       "ja_JP_voice_id_candidate": "ja-JP-Chirp3-HD-Zubenelgenubi",
       "ja_JP_availability": "PENDING_LIVE_VOICES_LIST",
-      "audition_status": "AUTHORIZED_SAMPLE_PENDING_ACCESS",
+      "audition_status": "AUTHORIZED_PENDING_TTS_SERVICE_ENABLE",
       "selected_for_characters": []
     }
   ],
   "audition_authorization": "OWNER_EXPLICITLY_REQUESTED_ALL_FEMALE_AND_MALE_SHARED_JAPANESE_SAMPLES",
   "audition_package": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001",
-  "audition_status": "AUTHORIZED_BLOCKED_GOOGLE_AUTH_AND_NETWORK"
+  "audition_status": "AUTHORIZED_EXISTING_OAUTH_VERIFIED_TTS_SERVICE_DISABLED",
+  "api_call_counter_scope": "Shared authoring CLI only; excludes OAuth, provider documentation, service-setup helper and LFS",
+  "google_credentials_source": "EXISTING_GITHUB_GOOGLE_PLAY_SERVICE_ACCOUNT",
+  "provider_service_report": "docs/coder/cloud_delivery/google_tts_service_status.json",
+  "provider_docs_reference": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json"
 }

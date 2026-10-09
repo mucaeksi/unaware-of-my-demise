@@ -3108,6 +3108,119 @@
       "_origin": "ast"
     },
     {
+      "id": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "label": "ensure_google_tts_service.py",
+      "file_type": "code",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_ensure_google_tts_service_enableerror",
+      "label": "EnableError",
+      "file_type": "code",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L17",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_ensure_google_tts_service_py_exception",
+      "label": "Exception",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_ensure_google_tts_service_call",
+      "label": "call()",
+      "file_type": "code",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_ensure_google_tts_service_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L39",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_ensure_google_tts_service_rationale_1",
+      "label": "Enable only the Cloud TTS service needed for the authorized voice samples. Uses…",
+      "file_type": "rationale",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "label": "repair_uploaded_lfs.py",
+      "file_type": "code",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_repair_uploaded_lfs_repairerror",
+      "label": "RepairError",
+      "file_type": "code",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L18",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_repair_uploaded_lfs_py_exception",
+      "label": "Exception",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_repair_uploaded_lfs_request",
+      "label": "request()",
+      "file_type": "code",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L22",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_repair_uploaded_lfs_batch",
+      "label": "batch()",
+      "file_type": "code",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L36",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_repair_uploaded_lfs_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L42",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_coder_cloud_delivery_repair_uploaded_lfs_rationale_1",
+      "label": "Finish an interrupted, already-uploaded Git LFS transfer in GitHub Actions.…",
+      "file_type": "rationale",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
       "id": "game_mcp",
       "label": ".mcp.json",
       "file_type": "code",
@@ -5437,7 +5550,7 @@
       "label": "AuthoringError",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L31",
+      "source_location": "L32",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast"
@@ -5455,7 +5568,7 @@
       "label": "timestamp()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L35",
+      "source_location": "L36",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5464,7 +5577,7 @@
       "label": "digest()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L39",
+      "source_location": "L40",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5473,7 +5586,7 @@
       "label": "canonical()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L43",
+      "source_location": "L44",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5482,7 +5595,7 @@
       "label": "save_json()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L47",
+      "source_location": "L48",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5491,7 +5604,7 @@
       "label": "authorization()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L54",
+      "source_location": "L55",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5500,7 +5613,7 @@
       "label": "request_json()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L71",
+      "source_location": "L89",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5509,7 +5622,7 @@
       "label": "japanese_voices()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L89",
+      "source_location": "L129",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5518,7 +5631,7 @@
       "label": "wav_metrics()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L105",
+      "source_location": "L145",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5527,7 +5640,16 @@
       "label": "gallery()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L129",
+      "source_location": "L169",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_sync_shared_catalog",
+      "label": "sync_shared_catalog()",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L198",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5536,7 +5658,7 @@
       "label": "run()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L158",
+      "source_location": "L243",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5545,7 +5667,7 @@
       "label": "main()",
       "file_type": "code",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L235",
+      "source_location": "L322",
       "_callable": true,
       "_origin": "ast"
     },
@@ -5558,11 +5680,11 @@
       "_origin": "ast"
     },
     {
-      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_rationale_32",
+      "id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_rationale_33",
       "label": "Contains only a safe error category, never raw provider/auth exceptions.",
       "file_type": "rationale",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L32",
+      "source_location": "L33",
       "_origin": "ast"
     },
     {
@@ -5781,7 +5903,7 @@
       "label": "owner_authorized",
       "file_type": "code",
       "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
-      "source_location": "L13",
+      "source_location": "L29",
       "_origin": "ast"
     },
     {
@@ -5789,7 +5911,7 @@
       "label": "performance_review",
       "file_type": "code",
       "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
-      "source_location": "L14",
+      "source_location": "L30",
       "_origin": "ast"
     },
     {
@@ -5797,7 +5919,7 @@
       "label": "runtime_integration",
       "file_type": "code",
       "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
-      "source_location": "L15",
+      "source_location": "L31",
       "_origin": "ast"
     },
     {
@@ -5805,7 +5927,7 @@
       "label": "updated_at_utc",
       "file_type": "code",
       "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
-      "source_location": "L16",
+      "source_location": "L32",
       "_origin": "ast"
     },
     {
@@ -5813,7 +5935,15 @@
       "label": "generated_samples",
       "file_type": "code",
       "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
-      "source_location": "L17",
+      "source_location": "L33",
+      "_origin": "ast"
+    },
+    {
+      "id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_auth_method",
+      "label": "auth_method",
+      "file_type": "code",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L34",
       "_origin": "ast"
     },
     {
@@ -34892,6 +35022,402 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "urllib_error",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "urllib_request",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "docs_coder_cloud_delivery_ensure_google_tts_service_enableerror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service_enableerror",
+      "target": "docs_coder_cloud_delivery_ensure_google_tts_service_py_exception",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "docs_coder_cloud_delivery_ensure_google_tts_service_call",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "target": "docs_coder_cloud_delivery_ensure_google_tts_service_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service_call",
+      "target": "docs_coder_cloud_delivery_ensure_google_tts_service_enableerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service_main",
+      "target": "docs_coder_cloud_delivery_ensure_google_tts_service_enableerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service_main",
+      "target": "docs_coder_cloud_delivery_ensure_google_tts_service_call",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service_rationale_1",
+      "target": "docs_coder_cloud_delivery_ensure_google_tts_service",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "base64",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "hashlib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "urllib_error",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "urllib_parse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "urllib_request",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs_repairerror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_repairerror",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs_py_exception",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs_request",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs_batch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_request",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs_repairerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_batch",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs_request",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_main",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs_repairerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_main",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs_batch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_main",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs_request",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_rationale_1",
+      "target": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "game_android_plugins_uomd_native_src_main_java_io_github_mucaeksi_uomd_googlesignin",
       "target": "android_app_activity",
       "relation": "imports",
@@ -38765,7 +39291,7 @@
     },
     {
       "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
-      "target": "urllib_request",
+      "target": "urllib_parse",
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -38776,7 +39302,7 @@
     },
     {
       "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
-      "target": "wave",
+      "target": "urllib_request",
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -38787,8 +39313,8 @@
     },
     {
       "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
-      "target": "datetime",
-      "relation": "imports_from",
+      "target": "wave",
+      "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
@@ -38798,7 +39324,7 @@
     },
     {
       "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
-      "target": "pathlib",
+      "target": "datetime",
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -38809,11 +39335,22 @@
     },
     {
       "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
       "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L31",
+      "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38823,7 +39360,7 @@
       "relation": "inherits",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L31",
+      "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38833,7 +39370,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38843,7 +39380,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L39",
+      "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38853,7 +39390,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38863,7 +39400,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L47",
+      "source_location": "L48",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38873,7 +39410,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L54",
+      "source_location": "L55",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38883,7 +39420,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L71",
+      "source_location": "L89",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38893,7 +39430,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L89",
+      "source_location": "L129",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38903,7 +39440,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L105",
+      "source_location": "L145",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38913,7 +39450,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L129",
+      "source_location": "L169",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_sync_shared_catalog",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L198",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38923,7 +39470,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L158",
+      "source_location": "L243",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38933,7 +39480,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L235",
+      "source_location": "L322",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38944,7 +39491,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L68",
+      "source_location": "L69",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38955,7 +39502,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L72",
+      "source_location": "L90",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38966,7 +39513,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L82",
+      "source_location": "L122",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38977,7 +39524,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L97",
+      "source_location": "L137",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38988,7 +39535,29 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L109",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_sync_shared_catalog",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L200",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_sync_shared_catalog",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_save_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L222",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -38999,7 +39568,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L166",
+      "source_location": "L251",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39010,7 +39579,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L167",
+      "source_location": "L252",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39021,7 +39590,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L171",
+      "source_location": "L256",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39032,7 +39601,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L172",
+      "source_location": "L259",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39043,7 +39612,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L172",
+      "source_location": "L259",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39054,7 +39623,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L181",
+      "source_location": "L268",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39065,7 +39634,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L182",
+      "source_location": "L269",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39076,7 +39645,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L212",
+      "source_location": "L299",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39087,7 +39656,18 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L246",
+      "source_location": "L334",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_main",
+      "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_sync_shared_catalog",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L336",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39102,12 +39682,12 @@
       "_origin": "ast"
     },
     {
-      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_rationale_32",
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_rationale_33",
       "target": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authoringerror",
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L32",
+      "source_location": "L33",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39723,7 +40303,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
-      "source_location": "L13",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39733,7 +40313,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
-      "source_location": "L14",
+      "source_location": "L30",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39743,7 +40323,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
-      "source_location": "L15",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39753,7 +40333,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
-      "source_location": "L16",
+      "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -39763,7 +40343,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
-      "source_location": "L17",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+      "target": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest_auth_method",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121622,6 +122212,126 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service_call",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service_main",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service_main",
+      "target": "re",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_ensure_google_tts_service_main",
+      "target": "time",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_request",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_batch",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_main",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_main",
+      "target": "re",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_main",
+      "target": "base64",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_coder_cloud_delivery_repair_uploaded_lfs_main",
+      "target": "hashlib",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+      "source_location": "L98",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "game_tools_check_apk_notices_problems_in",
       "target": "json",
       "relation": "calls",
@@ -121653,7 +122363,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L40",
+      "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121665,7 +122375,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L44",
+      "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121677,7 +122387,19 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L50",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_authorization",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L60",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121689,7 +122411,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L80",
+      "source_location": "L104",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121701,7 +122423,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L107",
+      "source_location": "L147",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121713,7 +122435,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L107",
+      "source_location": "L147",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121725,7 +122447,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L116",
+      "source_location": "L156",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121737,7 +122459,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L125",
+      "source_location": "L165",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121749,7 +122471,19 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L133",
+      "source_location": "L173",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition_sync_shared_catalog",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
+      "source_location": "L202",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121761,7 +122495,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L159",
+      "source_location": "L244",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121773,7 +122507,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L209",
+      "source_location": "L296",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121785,7 +122519,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L236",
+      "source_location": "L323",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -121797,7 +122531,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
-      "source_location": "L247",
+      "source_location": "L337",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -127564,6 +128298,11 @@
     "/workspace/uomd-main-review/database/tests/0012_release_control_test.sql",
     "/workspace/uomd-main-review/database/verify.sh",
     "/workspace/uomd-main-review/docs/art/character_reference/generation_manifest_v003.json",
+    "/workspace/uomd-main-review/docs/coder/cloud_delivery/ensure_google_tts_service.py",
+    "/workspace/uomd-main-review/docs/coder/cloud_delivery/google_tts_service_status.json",
+    "/workspace/uomd-main-review/docs/coder/cloud_delivery/lfs_pending_objects.json",
+    "/workspace/uomd-main-review/docs/coder/cloud_delivery/lfs_remote_repair.json",
+    "/workspace/uomd-main-review/docs/coder/cloud_delivery/repair_uploaded_lfs.py",
     "/workspace/uomd-main-review/docs/migration/BATCH-0002.manifest.json",
     "/workspace/uomd-main-review/docs/migration/BATCH-0005.manifest.json",
     "/workspace/uomd-main-review/docs/release/ASSET_PROVENANCE.json",
@@ -127674,6 +128413,8 @@
     "/workspace/uomd-main-review/narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/authoring_validation.json",
     "/workspace/uomd-main-review/narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/gallery_validation.json",
     "/workspace/uomd-main-review/narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+    "/workspace/uomd-main-review/narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json",
+    "/workspace/uomd-main-review/narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/workflow_run_status.json",
     "/workspace/uomd-main-review/narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.json",
     "/workspace/uomd-main-review/narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_original.json",
     "/workspace/uomd-main-review/narrative/11_Audio_Cues/Music_Source/bgm_battle_field/bgm_battle_field_v002_loop.json",

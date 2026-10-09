@@ -1,27 +1,25 @@
 {
   "date_utc": "2026-10-09",
   "browser": "Chromium",
-  "scope": "FADYME_AND_AUTHORIZED_CHIRP_VOICE_AUDITION_AUTHORING",
+  "scope": "VERIFIED_GITHUB_AUTHORING_LFS_REPAIR_AND_GOOGLE_OAUTH_SERVICE_STATUS",
   "outbound_network_blocked": true,
   "maps": {
     "graph.html": {
-      "nodes": 1146,
-      "edges": 3008,
+      "nodes": 1064,
+      "edges": 2851,
       "canvas": true,
       "fadyme_search_results": 14,
       "selection_count": 1,
-      "info": "narrative/13 Archive/fadyme voice sulafat 2026-10-09\nCommunity: narrative/13 Archive/fadyme voice sulafat 2026-10-09\nMembers: 147\nDegree: 11\nNeighbors (11)\ndocs/CURRENT STATE.md\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/10 VO/Recording Notes\nnarrative/12 Production Notes/Tooling Snapshots\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/13 Archive/fadyme voice sulafat 2026-10-09\nnarrative/10 VO/Recording Notes\nnarrative/15 Art Workbench/characters",
       "community_filter_toggled": true,
       "page_errors": [],
       "external_requests": []
     },
     "fadyme.html": {
       "nodes": 1355,
-      "edges": 2067,
+      "edges": 2065,
       "canvas": true,
       "fadyme_search_results": 20,
       "selection_count": 1,
-      "info": "UOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png\nType: image\nCommunity: narrative/FADYME MEDIA ALL/03 Signature Icons\nSource: narrative/FADYME_MEDIA_ALL/03_Signature_Icons/UOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png\nDegree: 2\nNeighbors (2)\nUOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png\n03_Signature_Icons /",
       "community_filter_toggled": true,
       "page_errors": [],
       "external_requests": []

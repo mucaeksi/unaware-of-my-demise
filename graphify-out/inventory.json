@@ -3080,6 +3080,11 @@
     "size_bytes": 5786
   },
   {
+    "path": ".github/workflows/chirp3-hd-voice-samples.yml",
+    "node_id": "github_workflows_chirp3_hd_voice_samples",
+    "size_bytes": 8172
+  },
+  {
     "path": ".github/workflows/ci.yml",
     "node_id": "github_workflows_ci",
     "size_bytes": 12922
@@ -3122,7 +3127,7 @@
   {
     "path": "AGENTS.md",
     "node_id": "agents",
-    "size_bytes": 5819
+    "size_bytes": 6658
   },
   {
     "path": "CLAUDE.md",
@@ -3477,7 +3482,7 @@
   {
     "path": "docs/art/CHIRP3_HD_VOICE_CATALOG.md",
     "node_id": "docs_art_chirp3_hd_voice_catalog",
-    "size_bytes": 3660
+    "size_bytes": 3973
   },
   {
     "path": "docs/art/FREE_2D_LIBRARY_AND_OPENING_CHECKUP_2026-10-08.md",
@@ -3563,6 +3568,31 @@
     "path": "docs/coder/TEST_PLAN.md",
     "node_id": "docs_coder_test_plan",
     "size_bytes": 1154
+  },
+  {
+    "path": "docs/coder/cloud_delivery/ensure_google_tts_service.py",
+    "node_id": "docs_coder_cloud_delivery_ensure_google_tts_service",
+    "size_bytes": 5352
+  },
+  {
+    "path": "docs/coder/cloud_delivery/google_tts_service_status.json",
+    "node_id": "docs_coder_cloud_delivery_google_tts_service_status",
+    "size_bytes": 515
+  },
+  {
+    "path": "docs/coder/cloud_delivery/lfs_pending_objects.json",
+    "node_id": "docs_coder_cloud_delivery_lfs_pending_objects",
+    "size_bytes": 464
+  },
+  {
+    "path": "docs/coder/cloud_delivery/lfs_remote_repair.json",
+    "node_id": "docs_coder_cloud_delivery_lfs_remote_repair",
+    "size_bytes": 879
+  },
+  {
+    "path": "docs/coder/cloud_delivery/repair_uploaded_lfs.py",
+    "node_id": "docs_coder_cloud_delivery_repair_uploaded_lfs",
+    "size_bytes": 6484
   },
   {
     "path": "docs/design/BATTLE_UI_AND_AAB_VISUAL_v002_2026-10-08.md",
@@ -25837,7 +25867,7 @@
   {
     "path": "narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json",
     "node_id": "narrative_10_vo_line_maps_chirp3_hd_voice_catalog",
-    "size_bytes": 10106
+    "size_bytes": 10722
   },
   {
     "path": "narrative/10_VO/Line_Maps/jp_script_fadyme.json",
@@ -25862,7 +25892,7 @@
   {
     "path": "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py",
     "node_id": "narrative_10_vo_recording_notes_tools_chirp3_hd_audition",
-    "size_bytes": 13199
+    "size_bytes": 19802
   },
   {
     "path": "narrative/10_VO/Recording_Notes/Tools/record_fadyme_vo.py",
@@ -25887,12 +25917,12 @@
   {
     "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
     "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_readme",
-    "size_bytes": 4237
+    "size_bytes": 6336
   },
   {
     "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audition_plan.json",
     "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_audition_plan",
-    "size_bytes": 6529
+    "size_bytes": 7219
   },
   {
     "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/authoring_validation.json",
@@ -25912,7 +25942,17 @@
   {
     "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
     "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
-    "size_bytes": 492
+    "size_bytes": 1028
+  },
+  {
+    "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json",
+    "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_provider_reference",
+    "size_bytes": 18216
+  },
+  {
+    "path": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/workflow_run_status.json",
+    "node_id": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_workflow_run_status",
+    "size_bytes": 546
   },
   {
     "path": "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.json",
@@ -27542,12 +27582,12 @@
   {
     "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/README.md",
     "node_id": "narrative_15_art_workbench_characters_fadyme_production_v002_audio_readme",
-    "size_bytes": 2175
+    "size_bytes": 2289
   },
   {
     "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/STATUS.json",
     "node_id": "narrative_15_art_workbench_characters_fadyme_production_v002_audio_status",
-    "size_bytes": 1339
+    "size_bytes": 1825
   },
   {
     "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/recording_queue_v002.json",

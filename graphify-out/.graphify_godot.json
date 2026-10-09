@@ -376365,6 +376365,7 @@
     ".codex/workflows/system-maintenance.md": "codex_workflows_system_maintenance",
     ".gitattributes": "gitattributes",
     ".github/workflows/backup.yml": "github_workflows_backup",
+    ".github/workflows/chirp3-hd-voice-samples.yml": "github_workflows_chirp3_hd_voice_samples",
     ".github/workflows/ci.yml": "github_workflows_ci",
     ".github/workflows/deploy-staging.yml": "github_workflows_deploy_staging",
     ".github/workflows/deploy.yml": "github_workflows_deploy",
@@ -376462,6 +376463,11 @@
     "docs/coder/START_HERE.md": "docs_coder_start_here",
     "docs/coder/STORY_CHARACTER_TEMPLATE.md": "docs_coder_story_character_template",
     "docs/coder/TEST_PLAN.md": "docs_coder_test_plan",
+    "docs/coder/cloud_delivery/ensure_google_tts_service.py": "docs_coder_cloud_delivery_ensure_google_tts_service",
+    "docs/coder/cloud_delivery/google_tts_service_status.json": "docs_coder_cloud_delivery_google_tts_service_status",
+    "docs/coder/cloud_delivery/lfs_pending_objects.json": "docs_coder_cloud_delivery_lfs_pending_objects",
+    "docs/coder/cloud_delivery/lfs_remote_repair.json": "docs_coder_cloud_delivery_lfs_remote_repair",
+    "docs/coder/cloud_delivery/repair_uploaded_lfs.py": "docs_coder_cloud_delivery_repair_uploaded_lfs",
     "docs/design/BATTLE_UI_AND_AAB_VISUAL_v002_2026-10-08.md": "docs_design_battle_ui_and_aab_visual_v002_2026_10_08",
     "docs/design/BOOTSTRAP_CONTENT_AND_PROLOGUE_AUDIT_2026-10-07.md": "docs_design_bootstrap_content_and_prologue_audit_2026_10_07",
     "docs/design/COOLDOWN_COMBAT_AND_OPENING_v003_2026-10-08.md": "docs_design_cooldown_combat_and_opening_v003_2026_10_08",
@@ -380930,6 +380936,8 @@
     "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/gallery_validation.json": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_gallery_validation",
     "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/index.html": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_index",
     "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_manifest",
+    "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_provider_reference",
+    "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/workflow_run_status.json": "narrative_10_vo_voice_samples_chirp3_hd_ja_jp_audition_v001_workflow_run_status",
     "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.json": "narrative_11_audio_cues_fadyme_theme_reference_bgm_fadyme_theme_v001_loop_json",
     "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.ogg": "narrative_11_audio_cues_fadyme_theme_reference_bgm_fadyme_theme_v001_loop_ogg",
     "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_original.json": "narrative_11_audio_cues_fadyme_theme_reference_bgm_fadyme_theme_v001_original_json",
@@ -382401,7 +382409,7 @@
     "tools/verify_opening_pack.gd": "tools_verify_opening_pack"
   },
   "statistics": {
-    "inventory_files": 6650,
+    "inventory_files": 6658,
     "godot_source_files": 780,
     "readable_godot_files": 780,
     "source_files_by_extension": {
