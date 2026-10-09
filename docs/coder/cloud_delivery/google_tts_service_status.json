@@ -1,0 +1,12 @@
+{
+  "at_utc": "2026-10-09T07:47:04.791156+00:00",
+  "service": "texttospeech.googleapis.com",
+  "credential_source": "EXISTING_GOOGLE_PLAY_SERVICE_ACCOUNT",
+  "billing_configuration_changed": false,
+  "iam_configuration_changed": false,
+  "other_apis_enabled": false,
+  "consumer_project": "projects/604013824221",
+  "activation_url": "https://console.cloud.google.com/apis/library/texttospeech.googleapis.com?project=604013824221",
+  "status": "TTS_SETUP_PENDING",
+  "safe_error_category": "TTS_ENABLE_HTTP_403"
+}
