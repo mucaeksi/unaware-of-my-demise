@@ -2,53 +2,55 @@
 param()
 $ErrorActionPreference = 'Stop'
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
-$canonicalSkills = [IO.Path]::GetFullPath((Join-Path $projectRoot '.codex/skills'))
-$discoverySkills = [IO.Path]::GetFullPath((Join-Path $projectRoot '.agents/skills'))
-$rootPrefix = $projectRoot.TrimEnd('\', '/') + [IO.Path]::DirectorySeparatorChar
-foreach ($checkedPath in @($canonicalSkills, $discoverySkills)) {
-    if (-not $checkedPath.StartsWith($rootPrefix, [StringComparison]::OrdinalIgnoreCase)) {
-        throw "Path escaped the project root: $checkedPath"
+$canonicalSkills = Join-Path $projectRoot '.codex/skills'
+if (-not (Test-Path -LiteralPath $canonicalSkills -PathType Container)) { throw 'Canonical skills are missing. No changes made.' }
+$skills = @(Get-ChildItem -LiteralPath $canonicalSkills -Directory | Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md') -PathType Leaf })
+if ($skills.Count -eq 0) { throw 'No canonical skills. No changes made.' }
+$specs = @(@{ Path = (Join-Path $projectRoot '.agents/skills'); Target = $canonicalSkills; Relative = '../.codex/skills' })
+foreach ($skill in $skills) {
+    $specs += @{ Path = (Join-Path $projectRoot ".claude/skills/$($skill.Name)"); Target = $skill.FullName; Relative = "../../.codex/skills/$($skill.Name)" }
+}
+$pending = @()
+foreach ($spec in $specs) {
+    $parent = Split-Path $spec.Path -Parent
+    while ($parent -ne $projectRoot) {
+        $parentItem = Get-Item -LiteralPath $parent -Force -ErrorAction SilentlyContinue
+        if ($parentItem -and (-not $parentItem.PSIsContainer -or $parentItem.LinkType -in @('Junction', 'SymbolicLink'))) {
+            throw "Discovery parent must be a normal directory: $parent. No changes made."
+        }
+        $parent = Split-Path $parent -Parent
     }
-}
-if (-not (Test-Path -LiteralPath $canonicalSkills -PathType Container)) {
-    throw 'Canonical .codex/skills is missing. No changes made.'
-}
-New-Item -ItemType Directory -Path (Join-Path $projectRoot '.agents') -Force | Out-Null
-$existingBridge = Get-Item -LiteralPath $discoverySkills -Force -ErrorAction SilentlyContinue
-if ($existingBridge) {
-    if ($existingBridge.LinkType -notin @('Junction', 'SymbolicLink')) {
-        throw 'Existing .agents/skills is a normal folder. Back up and verify its contents before moving it; this bootstrap will not replace it.'
+    $existing = Get-Item -LiteralPath $spec.Path -Force -ErrorAction SilentlyContinue
+    if ($existing) {
+        if ($existing.LinkType -in @('Junction', 'SymbolicLink')) {
+            $target = [string](@($existing.Target)[0])
+            if (-not [IO.Path]::IsPathRooted($target)) { $target = Join-Path (Split-Path $spec.Path -Parent) $target }
+            if ([IO.Path]::GetFullPath($target) -eq $spec.Target -and (Test-Path -LiteralPath $spec.Path)) { continue }
+            throw "Conflicting discovery link: $($spec.Path). No changes made."
+        }
+        $isPlaceholder = $false
+        if ($env:OS -eq 'Windows_NT' -and -not $existing.PSIsContainer) {
+            $bytes = [IO.File]::ReadAllBytes($spec.Path)
+            $isPlaceholder = [Convert]::ToBase64String($bytes) -eq [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($spec.Relative))
+        }
+        if (-not $isPlaceholder) { throw "Existing user file/folder: $($spec.Path). No changes made." }
     }
-    $bridgeTarget = [string](@($existingBridge.Target)[0])
-    if (-not [IO.Path]::IsPathRooted($bridgeTarget)) {
-        $bridgeTarget = Join-Path (Split-Path $discoverySkills -Parent) $bridgeTarget
+    $pending += $spec
+}
+foreach ($spec in $pending) {
+    New-Item -ItemType Directory -Path (Split-Path $spec.Path -Parent) -Force | Out-Null
+    if (Test-Path -LiteralPath $spec.Path -PathType Leaf) { Remove-Item -LiteralPath $spec.Path -Force }
+    try {
+        Push-Location (Split-Path $spec.Path -Parent)
+        try { New-Item -ItemType SymbolicLink -Path (Split-Path $spec.Path -Leaf) -Target $spec.Relative | Out-Null }
+        finally { Pop-Location }
+    } catch {
+        if ($env:OS -ne 'Windows_NT' -or (Get-Item -LiteralPath $spec.Path -Force -ErrorAction SilentlyContinue)) { throw }
+        New-Item -ItemType Junction -Path $spec.Path -Target $spec.Target | Out-Null
     }
-    $bridgeTarget = [IO.Path]::GetFullPath($bridgeTarget)
-    if ($bridgeTarget -eq $canonicalSkills -and (Test-Path -LiteralPath $discoverySkills)) {
-        Write-Output "Verified $($existingBridge.LinkType): .agents/skills -> .codex/skills"
-        return
-    }
-    # Remove only the checked link node, never recurse into its target.
-    Remove-Item -LiteralPath $discoverySkills -Force
+    $created = Get-Item -LiteralPath $spec.Path -Force
+    $target = [string](@($created.Target)[0])
+    if (-not [IO.Path]::IsPathRooted($target)) { $target = Join-Path (Split-Path $spec.Path -Parent) $target }
+    if (-not (Test-Path -LiteralPath $spec.Path -PathType Container) -or [IO.Path]::GetFullPath($target) -ne $spec.Target) { throw "Bridge verification failed: $($spec.Path)" }
 }
-try {
-    # The native API stores this target relative to the link's parent directory.
-    [IO.Directory]::CreateSymbolicLink($discoverySkills, '../.codex/skills') | Out-Null
-    Write-Output 'Created relative symbolic link: .agents/skills -> ../.codex/skills'
-} catch {
-    if ($env:OS -ne 'Windows_NT') { throw }
-    if (Get-Item -LiteralPath $discoverySkills -Force -ErrorAction SilentlyContinue) { throw }
-    New-Item -ItemType Junction -Path $discoverySkills -Target $canonicalSkills | Out-Null
-    Write-Output 'Created local Windows junction. Run this bootstrap again after cloning or moving the checkout.'
-}
-$createdBridge = Get-Item -LiteralPath $discoverySkills -Force
-if ($createdBridge.LinkType -notin @('Junction', 'SymbolicLink') -or -not (Test-Path -LiteralPath $discoverySkills)) {
-    throw 'Discovery bridge verification failed.'
-}
-$createdTarget = [string](@($createdBridge.Target)[0])
-if (-not [IO.Path]::IsPathRooted($createdTarget)) {
-    $createdTarget = Join-Path (Split-Path $discoverySkills -Parent) $createdTarget
-}
-if ([IO.Path]::GetFullPath($createdTarget) -ne $canonicalSkills) {
-    throw 'Discovery bridge target does not match canonical .codex/skills.'
-}
+Write-Output "Verified $($skills.Count) canonical skills for Codex and Claude; created $($pending.Count) links."

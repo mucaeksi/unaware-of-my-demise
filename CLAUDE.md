@@ -31,6 +31,18 @@ Validated cloud `main` pushes are authorized for this collaboration. Do not inde
 
 Keep API credentials, signing keys, personal client settings and MCP capability records out of Git. Production and Drive LEGACY originals are read-only. UI/subtitles stay English; voice stays Japanese.
 
+## Shared skills and isolated references — 2026-10-09
+
+All 38 active project skills are canonical under `.codex/skills/`; each Claude
+discovery entry points to that same skill directory. Run the bootstrap after
+clone/move (Windows shortcut `ORTAK_SKILLLERI_KUR.cmd`) and validate both discovery
+paths. Read `.codex/workflows/shared-skills.md`. Original external skill snapshots
+under `.agents/library/upstream/` are inert provenance, not active instructions.
+Pinned Skeleton2D, Phantom Camera 0.11.0.3 and transition shader studies are under
+`references/shared_godot/`, outside `game/`. Their isolated validation does not
+authorize runtime promotion. The installation findings and pending native Claude,
+Windows/device acceptance are in `docs/art/GODOT_SHARED_INSTALL_REPORT_2026-10-09_TR.md`.
+
 ## Fadyme production update — 2026-10-09
 
 Codex produces only: VN mapping/expressions, true chibi animation, four-skill VFX,

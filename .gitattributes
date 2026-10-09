@@ -3,12 +3,17 @@
 *.sh text eol=lf
 # Windows desktop launcher; source is stored canonically as LF in Git.
 /OYUNU_AC.cmd text eol=crlf
+/ORTAK_SKILLLERI_KUR.cmd text eol=crlf
 # Runtime manifests hash exact bytes; use the same content bytes on every OS.
 game/data/content/*.json text eol=lf
 # A sealed release is byte-addressed by FILE_INDEX.json. Never normalize it.
 release/current/** -text whitespace=-blank-at-eol,-blank-at-eof
 # Archived provenance hashes must survive Windows and cloud checkouts exactly.
 .agents/archive/** -text whitespace=-blank-at-eol,-blank-at-eof
+# Shared source pins are byte-addressed; Windows must not normalize them.
+.agents/library/upstream/** -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+references/shared_godot/** -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+game/assets/third_party/reference/** -text whitespace=-blank-at-eol,-blank-at-eof
 *.png binary
 *.jpg binary
 *.jpeg binary

@@ -1,0 +1,988 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "A09",
+      "repository": "godotengine/godot-demo-projects",
+      "commit": "b761b4cd5718a7118f2c95eb55f181d0a5f004f1",
+      "license": "MIT",
+      "files": {
+        "skeleton2d/README.md": {
+          "sha256": "56c9d5fda65aedb58bf13bc0cd70339ec4c8d67904ae86c7130feb90714d4bfb",
+          "bytes": 616
+        },
+        "skeleton2d/icon.webp": {
+          "sha256": "6d518810fa062a1c0723bcaf2ddcad9c8ebf09c3e229773b6395436944d98230",
+          "bytes": 15362
+        },
+        "skeleton2d/icon.webp.import": {
+          "sha256": "fd5e8a8a25bd6f7f445bd591fda20a2d28dad4fc698f571d445a63d7b949b61e",
+          "bytes": 919
+        },
+        "skeleton2d/level/background/cloud_1.png": {
+          "sha256": "24b73757fd5cd367aa2209e902a5679f492362edf07096052bd75752929de330",
+          "bytes": 219
+        },
+        "skeleton2d/level/background/cloud_1.png.import": {
+          "sha256": "b0110effe207bb96f31ffc061fd324c9440464d70515ae58d311021306930ef7",
+          "bytes": 942
+        },
+        "skeleton2d/level/background/cloud_2.png": {
+          "sha256": "d21a9e677976b59e1924aeca0dc809c5b601ef8a57da39f9574070e7278475c1",
+          "bytes": 298
+        },
+        "skeleton2d/level/background/cloud_2.png.import": {
+          "sha256": "927679a451f84a627e6f9cae682f03c5c84f1be82a7ea42ffc9410a1f554f183",
+          "bytes": 942
+        },
+        "skeleton2d/level/background/cloud_3.png": {
+          "sha256": "d90f5de9afc93f88322252ed1e8189cc85a20db80ece4eb667d76074c5e83d99",
+          "bytes": 185
+        },
+        "skeleton2d/level/background/cloud_3.png.import": {
+          "sha256": "39827fa5d4974096b84fc6a82656e1685efdaf56cd492604fccfe15e48a9922a",
+          "bytes": 942
+        },
+        "skeleton2d/level/background/distant_platforms_1.png": {
+          "sha256": "f5dc41b0c2f8f0aa23fef4491b02703e72ce559f0e17dbc365726d8caa00d4d7",
+          "bytes": 3892
+        },
+        "skeleton2d/level/background/distant_platforms_1.png.import": {
+          "sha256": "7d9c99604c55061b18267c270f4eaaef829c8292519d24c4d77322bf2f9fea9a",
+          "bytes": 978
+        },
+        "skeleton2d/level/background/distant_platforms_2.png": {
+          "sha256": "fb07cad4647ea27ed74d53292bef43fb80b8abdd1be8a01aaf429f17c6b4c060",
+          "bytes": 4324
+        },
+        "skeleton2d/level/background/distant_platforms_2.png.import": {
+          "sha256": "0d7e6467b2221066a09d9a371dad392154346ca6bff7b7f39afad614ed08e68b",
+          "bytes": 978
+        },
+        "skeleton2d/level/background/sky.png": {
+          "sha256": "3d3a46b7d33264b57fe5ea8502692232b5368751c7814a52c5bf10fc26d7dba4",
+          "bytes": 833
+        },
+        "skeleton2d/level/background/sky.png.import": {
+          "sha256": "187af46334c0e35c283f7608b9fbea0bd1931d98ed65a1a4fe5dd6d2c61a89cd",
+          "bytes": 930
+        },
+        "skeleton2d/level/level.gd": {
+          "sha256": "0404f208a37bebe678eafa8d83b8c9747912d50d1b3915ed37e9379da363a4cc",
+          "bytes": 354
+        },
+        "skeleton2d/level/level.gd.uid": {
+          "sha256": "4372a4275d6945ec50588f5bd170facb65e20ffe5a6315c70671db6aaee20546",
+          "bytes": 20
+        },
+        "skeleton2d/level/parallax_background.tscn": {
+          "sha256": "84325414277e204b42fa00b7e562ffc7640e9248f83c5a928390605586fa8879",
+          "bytes": 6377
+        },
+        "skeleton2d/level/tileset/tiles_demo.png": {
+          "sha256": "25cd25a8b8a5a68973af0412976b604162ef305d7d257cd94fc2c038da4c7201",
+          "bytes": 2583
+        },
+        "skeleton2d/level/tileset/tiles_demo.png.import": {
+          "sha256": "0d578cedb6d394cddad27830075ff2f756d5b7c20025536e77dc79bbf29eae23",
+          "bytes": 948
+        },
+        "skeleton2d/level/tileset/tileset.tres": {
+          "sha256": "5f14927a3e38cd3e92ff4f582d6cb9c95f0be5d72ea59497804927086fa6b80e",
+          "bytes": 10504
+        },
+        "skeleton2d/level.tscn": {
+          "sha256": "243f0c1aace2f12da43bf9a55c77008d12f702ac273a625c5eaaf63d7d9c6b88",
+          "bytes": 10339
+        },
+        "skeleton2d/player/gBot.png": {
+          "sha256": "cc5ae61db6aa896cbc65a4f6b8c0835aa43034ef5ebccba7643d59e8370b7a57",
+          "bytes": 463481
+        },
+        "skeleton2d/player/gBot.png.import": {
+          "sha256": "07b2d1e1b9e2cbaa09bdeb825d00801344554ff5c2f3d9eba2c86cabff0b1f39",
+          "bytes": 923
+        },
+        "skeleton2d/player/player.gd": {
+          "sha256": "cd9d4809ec96874bbfff6e5a5887d3ccd7dbae59600562414d70bc16dd935917",
+          "bytes": 2890
+        },
+        "skeleton2d/player/player.gd.uid": {
+          "sha256": "03f44e343458fd2f6a98faf7a53bc716af0fa04e7a156649efb49487d0d2a60d",
+          "bytes": 20
+        },
+        "skeleton2d/player/player.tscn": {
+          "sha256": "efb5f6d1d532249396d98ce5c741aabb3a1f3830555954de719d5e57f999e388",
+          "bytes": 81337
+        },
+        "skeleton2d/project.godot": {
+          "sha256": "d0323625dc2e239041a90d5b4151a6aa7383d2f8ce6167a463a404ae0c5e802e",
+          "bytes": 5356
+        },
+        "skeleton2d/screenshots/.gdignore": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "skeleton2d/screenshots/screenshot.png": {
+          "sha256": "74f9eba90925936fc6092a177866c2db9185bb2c8db61d439fbd1bc62aaa04ea",
+          "bytes": 55650
+        },
+        "skeleton2d/LICENSE.md": {
+          "sha256": "0339177149b474f7ff676d32218ecb3a8f2538955610023c3769763720d09e4c",
+          "bytes": 1134
+        }
+      },
+      "status": "ISOLATED_STUDY_NOT_RUNTIME_PROMOTED"
+    },
+    {
+      "id": "A10",
+      "repository": "ramokz/phantom-camera",
+      "commit": "21d3762492e2dc51b448f55438b89b3c19349f96",
+      "license": "MIT",
+      "files": {
+        "phantom_camera/addons/phantom_camera/LICENSE": {
+          "sha256": "9edff15559a55c27d4b0612d73315d0597980d13f7e5b3d4ff80192ea57c76d2",
+          "bytes": 1068
+        },
+        "phantom_camera/addons/phantom_camera/assets/PhantomCameraBtnPrimaryDefault.png": {
+          "sha256": "0ea8a0d7a1d820b1d69746665c425cc155f351aedd00441e9adc9e8d20977a1a",
+          "bytes": 10296
+        },
+        "phantom_camera/addons/phantom_camera/assets/PhantomCameraBtnPrimaryDefault.png.import": {
+          "sha256": "f571ca2b6a2d46905b95cc8817ca184ab5d0b09c753b585f420cbc65c975d055",
+          "bytes": 1023
+        },
+        "phantom_camera/addons/phantom_camera/assets/PhantomCameraBtnPrimaryHover.png": {
+          "sha256": "3d84d9f2a9c2c11b0bb79e9ebb455d217853f75cf653fc5cc21c80a02a28ed2c",
+          "bytes": 9931
+        },
+        "phantom_camera/addons/phantom_camera/assets/PhantomCameraBtnPrimaryHover.png.import": {
+          "sha256": "38442f4acd0f8aafe804e9e65438d9f063e63c57f87c42aa44c7d34376b37c2c",
+          "bytes": 1016
+        },
+        "phantom_camera/addons/phantom_camera/examples/credits.txt": {
+          "sha256": "f85a4aab7734d6b0c7cd7130836dbae8c7b4c6e7cee5044fc256f24117bab316",
+          "bytes": 181
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_example_scene.tscn": {
+          "sha256": "88d3987d897a794a43bddebed9b6bab72b331d6eadd2714392460bed222fae74",
+          "bytes": 17350
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_follow_framed_example_scene.tscn": {
+          "sha256": "b2823c3ae5d977a0e7b1fe742ea1ac84a8cecb990228590dcb9df7cf40b77811",
+          "bytes": 17596
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_follow_group_example_scene.tscn": {
+          "sha256": "fe309ec817bde777c2622700b7159bb6f005fbc8ea1c48250fd945624c598202",
+          "bytes": 17975
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_follow_path_example_scene.tscn": {
+          "sha256": "4a22d1868121712552e1a0b53a42253502d74fe53bfd90324b8b8f96d8d0aaaf",
+          "bytes": 20399
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_limit_example_scene.tscn": {
+          "sha256": "60b9d90826ef202e5a71c3927d910cfbf1709bea39a2cb01e3ce2e330a8b1c67",
+          "bytes": 22684
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_noise_example_scene.tscn": {
+          "sha256": "6e659fcf44187aa0d197c99690ed59f52fcb0ac0edf2402f83156605bf1cd2ad",
+          "bytes": 18361
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_tweening_example_scene.tscn": {
+          "sha256": "94ab1b29df2bdc303cdb1d2c62d90610efc7433837ae94facfdebc37c6527971",
+          "bytes": 22029
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/2D/sub_scenes/playable_character_2d.tscn": {
+          "sha256": "2a57052401760f44b0a972026b41daff11bac05391ab0540e91e646bec56d0bd",
+          "bytes": 4053
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_example_scene.tscn": {
+          "sha256": "735254d287ae901190c31d37cd1c5e10e61953e12d93c646e0e159f333b38154",
+          "bytes": 15558
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_framed_example_scene.tscn": {
+          "sha256": "d8e17bfe19f5ae23a4bdf0755b4dc9d0470d0a5d11fb8efc3ea16482f734c1bb",
+          "bytes": 6528
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_glued_example_scene.tscn": {
+          "sha256": "e6dbf38941c0a2b327bfd25378baacb898bd6a7b7990cb74054b70c85c921af2",
+          "bytes": 7809
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_group_example_scene.tscn": {
+          "sha256": "d683d4157d5750c2ed948a34d8a803bb842537560434b6b236c86caca3932309",
+          "bytes": 7187
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_path_example_scene.tscn": {
+          "sha256": "26503f70532433840e2115e12107ee5fce4274a86c25bb642f489f7fead2c5a8",
+          "bytes": 9706
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_simple_example_scene.tscn": {
+          "sha256": "1b3af4440782fe293776dc44c04d99e99894a75bd0ddd2af7e4d1481bb62af1c",
+          "bytes": 6161
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_third_person_attribtues_example_scene.tscn": {
+          "sha256": "eba108a5a5ac6d7e3a6110c70204bd7340db15027a0b6b5ba288c95d0da74fa7",
+          "bytes": 8211
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_third_person_example_scene.tscn": {
+          "sha256": "6e6eccbd0ea0c58bec476f56f21c73365c5f165fb2dfc1f41c5e21dc8154647a",
+          "bytes": 6909
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_look_at_example_scene.tscn": {
+          "sha256": "8e73ba6bb4441c09f46d29477308e7f0de2539c395c932203169c74710d8622a",
+          "bytes": 7630
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_noise_example_scene.tscn": {
+          "sha256": "df8b5c9b8409a5347466b88b5b17e97f96ef09dd70363f48eb9c4d04d6503111",
+          "bytes": 7428
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_tweening_example_scene.tscn": {
+          "sha256": "77c0249be1c3f6bd1c774e8f9b1c53810a9cb672eedb9d461184eba517e5d86f",
+          "bytes": 9719
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/sub_scenes/playable_character_3d.tscn": {
+          "sha256": "02b4463165708533fcf33814addae32798c6b55bf0904c49efade67956e93fab",
+          "bytes": 1155
+        },
+        "phantom_camera/addons/phantom_camera/examples/example_scenes/3D/sub_scenes/playable_character_third_person_3d.tscn": {
+          "sha256": "d79902a2555cade5fc5294f4cfbb4175dbdf26ef828f88434702bb6299c578bc",
+          "bytes": 1814
+        },
+        "phantom_camera/addons/phantom_camera/examples/models/3d_cube_dark.tscn": {
+          "sha256": "b5a30008bece32cb4658eb87c3efaa3acce5e2bf76bed9aa40c53af11476588d",
+          "bytes": 578
+        },
+        "phantom_camera/addons/phantom_camera/examples/resources/tween/fixed_camera_tween.tres": {
+          "sha256": "f2c25736c7bc7c259d93c501169aa46fba4073eef67a9f838591c9bff03213c6",
+          "bytes": 334
+        },
+        "phantom_camera/addons/phantom_camera/examples/resources/tween/inventory_phantom_camera_2d_tween.tres": {
+          "sha256": "fc7e319032f89f2f450a78c0fbc1cb8a6d1b8a65cf2c3a3aab41293805b77323",
+          "bytes": 334
+        },
+        "phantom_camera/addons/phantom_camera/examples/resources/tween/item_focus_phantom_camera_2d_tween.tres": {
+          "sha256": "db49ab07079fe525d7e253cd6db4d40f92e4bde9946b072e77941a4388e09cd3",
+          "bytes": 334
+        },
+        "phantom_camera/addons/phantom_camera/examples/resources/tween/player_phantom_camera_2d_tween.tres": {
+          "sha256": "9a48a9415d8f36b5b9ee0e07203314502a31be0543833c69b21df81c2f4c47a3",
+          "bytes": 332
+        },
+        "phantom_camera/addons/phantom_camera/examples/resources/tween/player_phantom_camera_3d_tween.tres": {
+          "sha256": "718c7f601743d1a385a6cf544d60d56dfae0dec542485b0efb10d97b857078b0",
+          "bytes": 334
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/2D/2d_room_limit_tween.gd": {
+          "sha256": "0d03739c469083bc9c556a8791faa97701c745f008effc74aeab32471b236e7f",
+          "bytes": 1397
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/2D/2d_room_limit_tween.gd.uid": {
+          "sha256": "6f2f3d7d1c28efc093f774de9c49ecc6c93781e371e5289bff4caba8bb1f804b",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/2D/2d_trigger_area.gd": {
+          "sha256": "158e0baabc750c50da7027c05fdc504a2de5a24e605c99cf80b5951bbd895ba9",
+          "bytes": 396
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/2D/2d_trigger_area.gd.uid": {
+          "sha256": "cb4ebd7bde5bf4e349b2ec29e205cfefec97765002a86cda8f812bdcbc068727",
+          "bytes": 19
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/2D/player_character_body_2d.gd": {
+          "sha256": "431c3f0a6e60be2eb0377166443eef4c39e4b3e522176a582080c14db226f30a",
+          "bytes": 5131
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/2D/player_character_body_2d.gd.uid": {
+          "sha256": "a7f30b3322725fee38cf7dc2762f4b359c3aafdc3010337f497e265fbcebeeb3",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/3d_trigger_area.gd": {
+          "sha256": "3b8a4332a3057c42b2bf8547e4105998454c27bc1196f2cc8b5aebfe0b4d3dd6",
+          "bytes": 525
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/3d_trigger_area.gd.uid": {
+          "sha256": "5b9dbf36d8880eb83e72e36635a4e1dd89a5474092977d42c91ef8a402953e14",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/npc.gd": {
+          "sha256": "9c1c685aa2757f64c4e1f47db645b3fee71b070a03fbdd21f7a46ae4ab905ebb",
+          "bytes": 2508
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/npc.gd.uid": {
+          "sha256": "779471bd31f78235de5155e494d8503abddf09e5045cbbcb7e3811347e32d08e",
+          "bytes": 19
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/path_follow.gd": {
+          "sha256": "24c914af60ee62cdc3c744d4a42c9dbc4bc7191c0a7984838efe698cea15e31a",
+          "bytes": 452
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/path_follow.gd.uid": {
+          "sha256": "bcd099a3faeb6af50a6dd2a155dd9546ca910e50b6d1828794cf07b4f952da96",
+          "bytes": 19
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller.gd": {
+          "sha256": "0c7c255f22cbb5ce1275a564696ed77cf78935893328b82247ab84c10df9dc82",
+          "bytes": 2461
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller.gd.uid": {
+          "sha256": "37d83c7993621df0398e3d5010e2bfd22df6710c5764b87a27bb723145985909",
+          "bytes": 19
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller_first_person.gd": {
+          "sha256": "5648261b8c53f5b1ee691f5d90cf0879f32f670096d24ce76f3fbbfbcc29503c",
+          "bytes": 1785
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller_first_person.gd.uid": {
+          "sha256": "7901f24ff7622d05803278b2ff307acdecc75db12afcb676070b330a9fd3423e",
+          "bytes": 19
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller_third_person.gd": {
+          "sha256": "a783a2c8667adf02f9de2c122be13e98cc556caadde30742a5a67f5bca9bde4e",
+          "bytes": 2888
+        },
+        "phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller_third_person.gd.uid": {
+          "sha256": "9454babf9ded8518a6ed4c90ea947a75b52db9f2195365524d6145df77965f62",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/2D/inventory_container.png": {
+          "sha256": "f0a01505ca189ac1f32db349d51de523c839d37128396cf6a80f1af47c9d62e5",
+          "bytes": 68739
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/2D/inventory_container.png.import": {
+          "sha256": "8d6a59193d3a94f76a75de6cd5d2352bd34abc88b789fabfdbebe2b4817b42e1",
+          "bytes": 1004
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/2D/level_spritesheet.png": {
+          "sha256": "48c44e51fad0ff1787d4d30448176633c84adcff42b06100e87e0d9541a624eb",
+          "bytes": 10314
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/2D/level_spritesheet.png.import": {
+          "sha256": "6f582c81848aabbd54f0ae1092fbce1232aef77f4e81e254c8c3a84b3499f300",
+          "bytes": 998
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/2D/phantom_camera_2d_sprite.png": {
+          "sha256": "17a9285995e615ed9967b4c2b02893382a2c78bd8712448d3b04b5fe9b8ca1cc",
+          "bytes": 1584
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/2D/phantom_camera_2d_sprite.png.import": {
+          "sha256": "c12b8cc6c38d2c869902fb3b197ffad229d3ca300f1f29061c5c3c2dbbd33194",
+          "bytes": 1019
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/2D/player_sprite.svg": {
+          "sha256": "cfc4cb1f590faeddef55725e8f158f5b81eb7df8bc5ffc30e8d835ada6181dc2",
+          "bytes": 1919
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/2D/player_sprite.svg.import": {
+          "sha256": "72f3166e0e3775461c49c238e52d2d79d38f2c559743141bd54bcf233b630950",
+          "bytes": 1083
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/2D/sign_prompt.png": {
+          "sha256": "86fa25adfa32c71c01bcda5c6f1f154dd45a36f383567fb24b051aae19a50222",
+          "bytes": 175934
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/2D/sign_prompt.png.import": {
+          "sha256": "5231af731bba773035adf914efa1196aacd2ec35dbda7f5c2731f91b630a47c4",
+          "bytes": 980
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/3D/checker_pattern_dark.png": {
+          "sha256": "bdadfe8c3fc0170bacbb218bb888974da3426cec65788fb0993814ae3a352daf",
+          "bytes": 2861
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/3D/checker_pattern_dark.png.import": {
+          "sha256": "4e98bb58a634ca3ef97625de1e2db87951b2462af36b2d62f7cc33bc8be64584",
+          "bytes": 1055
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/3D/target.png": {
+          "sha256": "41ab5a0f1175b95c39b6a07964731573ceb1ac04477b1bbc6041b5a50ee19919",
+          "bytes": 96068
+        },
+        "phantom_camera/addons/phantom_camera/examples/textures/3D/target.png.import": {
+          "sha256": "061db3f697683d5f440a444776e509d3c2b8d40c8d01ad54fc45c665aaa19caa",
+          "bytes": 1013
+        },
+        "phantom_camera/addons/phantom_camera/examples/ui/ui_inventory.tscn": {
+          "sha256": "7d01c2565e376692d8f69cee5d43fa011c3c4497c5bfa511ecc5c6348d124632",
+          "bytes": 1130
+        },
+        "phantom_camera/addons/phantom_camera/examples/ui/ui_sign.tscn": {
+          "sha256": "945c4fe9db9ceae3c77e94f99be03284abdf86f4c070f3a1d37a9d61e9a55036",
+          "bytes": 2220
+        },
+        "phantom_camera/addons/phantom_camera/fonts/Nunito-Black.ttf": {
+          "sha256": "d4c55f2287cc5647f26ccb237fad67d3ec15c71d8609a4c7889de294b7ea37cb",
+          "bytes": 131568
+        },
+        "phantom_camera/addons/phantom_camera/fonts/Nunito-Black.ttf.import": {
+          "sha256": "9f1f0bcab2359a58d509c07940886601dcdf8399687337bba25bcdbeb860a323",
+          "bytes": 789
+        },
+        "phantom_camera/addons/phantom_camera/fonts/Nunito-Regular.ttf": {
+          "sha256": "a278cc1894c591fb524cf90abb380deb8baba3ca584cad6939bf47cafe4a6329",
+          "bytes": 131736
+        },
+        "phantom_camera/addons/phantom_camera/fonts/Nunito-Regular.ttf.import": {
+          "sha256": "b59bd6090a8a538665477004b0cce103d5cebe6af79aaba8a6eb24ff7357ace6",
+          "bytes": 795
+        },
+        "phantom_camera/addons/phantom_camera/icons/misc/PriorityOverride.svg": {
+          "sha256": "8573cfbd9173019b0f55912f687508f95aa7b6cdbba8ecd1b5f8b77eef1530b6",
+          "bytes": 1193
+        },
+        "phantom_camera/addons/phantom_camera/icons/misc/PriorityOverride.svg.import": {
+          "sha256": "78dd6113e241336c9a7b334c0168c61719e734ea7c18f9132041a967396969d1",
+          "bytes": 1082
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_2d.svg": {
+          "sha256": "b102678393872faf668ac83b9bd66d0b3e07373ae319deb2331c7e999d77a7df",
+          "bytes": 1340
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_2d.svg.import": {
+          "sha256": "9a2aa73577dc9ad86084cb47794d4fcb8e74ee00363f9826ae28cd72f3062bea",
+          "bytes": 1080
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_3d.svg": {
+          "sha256": "7dfdfee0464f5417de1bc3f7e48daa9f4b4907789fc47c0e02474b7a88d93e35",
+          "bytes": 1340
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_3d.svg.import": {
+          "sha256": "61cee820d83f30d8b0a18b027b3fc505d145e0f812fd42ab496ceed32c12c220",
+          "bytes": 1080
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_camera_3d_resource.svg": {
+          "sha256": "2f09be586bb6c3065d22d782e9741c3bcedb754499913692eee468b32772b1ca",
+          "bytes": 1091
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_camera_3d_resource.svg.import": {
+          "sha256": "cfa1adcae390ec2db46b97e4f1b1a7abeed553a535dd687afb5756a029dab60c",
+          "bytes": 1128
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_gizmo.svg": {
+          "sha256": "77170750906a09b5544cacf85d23d763df38a6f45d4aabce77e3ad744b87ca90",
+          "bytes": 2821
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_gizmo.svg.import": {
+          "sha256": "b83ad00f0a982ec21ea4c9a6b9be6ad4e6595276b62e34d7af41d72a45a40a3a",
+          "bytes": 1136
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_glow_logo.png": {
+          "sha256": "ec9e08eff52b5aae81c303b5c1ff64cd2bb34aa312824e007da2ede51bab0b37",
+          "bytes": 25499
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_glow_logo.png.import": {
+          "sha256": "8f97a466a23f08c9c6baf31541c26e45862d6130b587268efede27f57ee9225a",
+          "bytes": 1004
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_host.svg": {
+          "sha256": "06226797a38b503367f65de1d7b16ec9946e57f25a69fdd41428c15a5a4b0ce4",
+          "bytes": 1976
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_host.svg.import": {
+          "sha256": "accd0d581c3cd68c0fc296ed005ca1d2ed4cc20e7d18520ddc26ae04a5dc0ad1",
+          "bytes": 1112
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_logo.png": {
+          "sha256": "eb20d01e23b464efb54856c3d91e9787960a7cec488f236ffc2744b589ad31fd",
+          "bytes": 70905
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_logo.png.import": {
+          "sha256": "0b8d620584eebbff338c5f54c68229d6cc0b49652f6cfed609b65f5060e2771d",
+          "bytes": 989
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_2d.svg": {
+          "sha256": "64532102798caca4b33c956183c44f29293e77271aa49458167214894974729a",
+          "bytes": 2569
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_2d.svg.import": {
+          "sha256": "24fe1e70fe3843c63f2c535d2708f92933593f00bc7a9ebc60459ba02cb4b3e0",
+          "bytes": 1122
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_3d.svg": {
+          "sha256": "2e53743d2670f7c80f8028fdb3d8d1f991fc1b3db2296ac7b1a25050c0f81094",
+          "bytes": 2569
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_3d.svg.import": {
+          "sha256": "06bbf768968f8edc181f84c5c1eeb25b3fe8b9f283680615cb31255ed30a2606",
+          "bytes": 1170
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_gizmo.svg": {
+          "sha256": "3cb881d696f9c3bcd261edae330a601fa11a6caf55cb16a127af8d428b2fd870",
+          "bytes": 2517
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_gizmo.svg.import": {
+          "sha256": "368fc618fc1c05055ef83f80ab606da598f2129781458d16a9925d3e0eef6181",
+          "bytes": 1179
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_resource.svg": {
+          "sha256": "e74524ffd5939ae9352410dee68ef3fa35670d44d1539845a575a06ff9402c7a",
+          "bytes": 3135
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_resource.svg.import": {
+          "sha256": "458713bd924536caf8484436726a1c0c18d336bc66c59e9b9d504349976a24de",
+          "bytes": 1115
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_tween.svg": {
+          "sha256": "47b08fd4e45919f3927308fe19c8854ffcc392e19f5b64e90bfb4b87d3ca9f72",
+          "bytes": 1095
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_tween.svg.import": {
+          "sha256": "249f572d77974f3a0a23e57bc699512212d84a67a52f2a87e069db2376df7549",
+          "bytes": 1116
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_tween_director.svg": {
+          "sha256": "530587532f76a11d6e270a011f52fc30e23f976f20fc2acd729aea715ac50a47",
+          "bytes": 2104
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_tween_director.svg.import": {
+          "sha256": "58b7682337370951a299dc93f7e5dee06f53e5b75be159b321ac5733dca3f627",
+          "bytes": 1116
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_tween_director_resource.svg": {
+          "sha256": "ea7619905c3f0d42f32a75c7800782ffeac97110cb1a748c092fb5494d6e240b",
+          "bytes": 4082
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_tween_director_resource.svg.import": {
+          "sha256": "1e8474c3426bf95c1c0bb55c80bbb2f5badca6d0433409ad1a75d7d415fe4e47",
+          "bytes": 1143
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_updater_panel_icon.svg": {
+          "sha256": "692963561a4d7f8eb617ca227ee20c36b53ede287294ff9ee23fca684dda8cf3",
+          "bytes": 231
+        },
+        "phantom_camera/addons/phantom_camera/icons/phantom_camera_updater_panel_icon.svg.import": {
+          "sha256": "c70efef503797b053283e1fe51a87a13e10b05b8164f47a8fa42c53b98319ffd",
+          "bytes": 1128
+        },
+        "phantom_camera/addons/phantom_camera/icons/viewfinder/Camera2DIcon.svg": {
+          "sha256": "fb5589767f6d3037a43a7ec09c37a94b120896a31c7d9b42878fc908ec9d8c69",
+          "bytes": 681
+        },
+        "phantom_camera/addons/phantom_camera/icons/viewfinder/Camera2DIcon.svg.import": {
+          "sha256": "9b9bbf942eac1a08a9986b6de618ffb13fd7d4cb8aa88ab6ac832bad9a7d4626",
+          "bytes": 1076
+        },
+        "phantom_camera/addons/phantom_camera/icons/viewfinder/Camera3DIcon.svg": {
+          "sha256": "0d23217cb7eed77e8c671ab3473e5ac9861d9dd01a7839fb637a9cdb136419c7",
+          "bytes": 681
+        },
+        "phantom_camera/addons/phantom_camera/icons/viewfinder/Camera3DIcon.svg.import": {
+          "sha256": "2674103d05c96c4c28456cf2c460226272f4322b9f836596d085a5459c306476",
+          "bytes": 1076
+        },
+        "phantom_camera/addons/phantom_camera/icons/viewfinder/SceneTypesIcon.svg": {
+          "sha256": "13d99e3cddf8a7ac182232c559f69224eefe433b16d8a525148fa61e0bb09ce4",
+          "bytes": 1245
+        },
+        "phantom_camera/addons/phantom_camera/icons/viewfinder/SceneTypesIcon.svg.import": {
+          "sha256": "33989c76b3aa2650070af823a3ed81cf8d3560628e27b449bdf6f48d9c7df983",
+          "bytes": 1082
+        },
+        "phantom_camera/addons/phantom_camera/icons/viewfinder/Select.svg": {
+          "sha256": "0b07e65b7bfcc0b1e0da74219ab8113a56bc05ac3e19cc8945afc8724f1266df",
+          "bytes": 647
+        },
+        "phantom_camera/addons/phantom_camera/icons/viewfinder/Select.svg.import": {
+          "sha256": "c871b7d6ea1f3e95f9a158414f61212a8d4f97c69c71231253a530c6c4bea53b",
+          "bytes": 1057
+        },
+        "phantom_camera/addons/phantom_camera/icons/warning.svg": {
+          "sha256": "705784d6a5b117ac68801e193cead82eead05c98b52526d082dd291d9d12e56a",
+          "bytes": 1077
+        },
+        "phantom_camera/addons/phantom_camera/icons/warning.svg.import": {
+          "sha256": "d347193c269cbc9ff62fc516789a0f720cf384d07d753553358eac7f55efb1ad",
+          "bytes": 1050
+        },
+        "phantom_camera/addons/phantom_camera/inspector/phantom_camera_inspector_plugin.gd": {
+          "sha256": "edc83ab91599051bc369dc26327fbd4dc5713a72ca02861ff0f6dd261562517e",
+          "bytes": 1640
+        },
+        "phantom_camera/addons/phantom_camera/inspector/phantom_camera_inspector_plugin.gd.uid": {
+          "sha256": "9e829d87e99f017c7e2c97255621dc7db21ab48552655ad3fccc8136b0b0c1fe",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/panel/editor.gd.uid": {
+          "sha256": "c72ff4140a897f3c3627c0c6d4c6b73fffa26b5f5a374689b768697182ab5a0e",
+          "bytes": 22
+        },
+        "phantom_camera/addons/phantom_camera/panel/editor.tscn": {
+          "sha256": "5a0d903e4f1c104629808a26d04ddee764cce220c6fe34805027623789b90d5c",
+          "bytes": 935
+        },
+        "phantom_camera/addons/phantom_camera/panel/updater/download_update_panel.tscn": {
+          "sha256": "f3e7acd427ff8997b59bdc9b3a6f507365aed1dd92fb6cf29a56532c19d8138e",
+          "bytes": 9084
+        },
+        "phantom_camera/addons/phantom_camera/panel/updater/update_button.tscn": {
+          "sha256": "df3bc9143f8d6ba2acb11044870497ce6ec869aa0dc27990aae2bccec7f70b10",
+          "bytes": 3714
+        },
+        "phantom_camera/addons/phantom_camera/panel/viewfinder/deadzone_style_box.tres": {
+          "sha256": "1affdbc4f4189b467607cd4d4d39f78213c61a3110d579620b5de08ef29d7e06",
+          "bytes": 395
+        },
+        "phantom_camera/addons/phantom_camera/panel/viewfinder/host_list/host_list.tscn": {
+          "sha256": "dee77c895ab55aba177d30bd3db068f8d2a3fa6b909df20316d4cf307d91ccfe",
+          "bytes": 3087
+        },
+        "phantom_camera/addons/phantom_camera/panel/viewfinder/host_list/host_list_item.tscn": {
+          "sha256": "61fc77ba831397ff8fb3ccab28c81bf1f670fb48e8b9900d0931287ef28583ea",
+          "bytes": 3059
+        },
+        "phantom_camera/addons/phantom_camera/panel/viewfinder/host_list/host_list_item_group.tres": {
+          "sha256": "f074ba327eecb85f565f3823d74ee276fa7bb2ff38bc8c92b7c9e4de17034db5",
+          "bytes": 80
+        },
+        "phantom_camera/addons/phantom_camera/panel/viewfinder/viewfinder_panel.tscn": {
+          "sha256": "ebcea4a5ce10870178fa40f5f607ea624b668ecf06b4bd0468cb360813dcf606",
+          "bytes": 18950
+        },
+        "phantom_camera/addons/phantom_camera/plugin.cfg": {
+          "sha256": "4b46b86e4d62911645868761894b8536464fecf3f81f347585045c692a27d66c",
+          "bytes": 219
+        },
+        "phantom_camera/addons/phantom_camera/plugin.gd": {
+          "sha256": "1f15a14f96852bc15f279eb7cb8ad1fa5b86482d210e4c2755ba11f558eab932",
+          "bytes": 9738
+        },
+        "phantom_camera/addons/phantom_camera/plugin.gd.uid": {
+          "sha256": "fd7a4b2d37025f0a2074948f85df9f24251ed10d2ac2a17d726f88ec3b3fede3",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_3d_gizmo.gd": {
+          "sha256": "75c2c8329e418e2b78d3b48c90bd0c6f99b80dfb56e110132a58250568dc44d6",
+          "bytes": 2678
+        },
+        "phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_3d_gizmo.gd.uid": {
+          "sha256": "ca9f665cd33ec13653bd1d6fae0552b325edda346aa435ac79aa1ce1ff4012b2",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_3d_gizmo_plugin.gd": {
+          "sha256": "6c45ebd3de2c0b1721819e0ebc644b2b9ecd9caacd43e64b66bc20bb8abd27dd",
+          "bytes": 1174
+        },
+        "phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_3d_gizmo_plugin.gd.uid": {
+          "sha256": "a29daafbe313344c5ffae3c245ec6e7754fe56a1449c950b72951d30c05c863f",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_noise_emitter_gizmo_plugin_3d.gd": {
+          "sha256": "1d56e70daae046a98363f7e7640fd9393dd057b0b204363002901cbb2f2bd9ba",
+          "bytes": 888
+        },
+        "phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_noise_emitter_gizmo_plugin_3d.gd.uid": {
+          "sha256": "75cae3a98ae0afa5259cfe3ad087261a3d1528ff0a77fa1f54690b01868c5841",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/managers/PhantomCameraManager.cs": {
+          "sha256": "fdae07a105086ef11901c073e1e94a702f994155dcd83e0ce185019c1c177cff",
+          "bytes": 1465
+        },
+        "phantom_camera/addons/phantom_camera/scripts/managers/PhantomCameraManager.cs.uid": {
+          "sha256": "d39490f357e58af8556480b9af2ed04f59054e4dd363d96a93c50a4307e63b12",
+          "bytes": 22
+        },
+        "phantom_camera/addons/phantom_camera/scripts/managers/phantom_camera_manager.gd": {
+          "sha256": "e2a7598dbf77d6d1cdc09658522e631bb6a7c65990943030de1408594eabe33b",
+          "bytes": 5970
+        },
+        "phantom_camera/addons/phantom_camera/scripts/managers/phantom_camera_manager.gd.uid": {
+          "sha256": "b02dab605bb252cd73c474e9930d10e3b4bb9884feaeb48da7187b91edd46e50",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/editor.gd": {
+          "sha256": "100d3fa1b052c0bebac5c69a2a401862c23f1b02e000cc688c3766df8aaf59f9",
+          "bytes": 322
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/editor.gd.uid": {
+          "sha256": "46f5c04181f62209c2f28f47f432dd18a42beac91053198e38a9178bfcd9f90c",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/updater/download_update_panel.gd": {
+          "sha256": "38417db3ad554202d1c1558e5ec658cf9f1594ab04686c75a7cd59271eb4de11",
+          "bytes": 5152
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/updater/download_update_panel.gd.uid": {
+          "sha256": "1c6c43433f13a9db12ea510b751b7783c4c75b50484368e2e90e81968cd7b253",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/updater/update_button.gd": {
+          "sha256": "8ca238b165b9de91182ddf4006c7a3b47ec1b086979dcea604b9fb12d592a68f",
+          "bytes": 5611
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/updater/update_button.gd.uid": {
+          "sha256": "9cab940a6363cb9a86b09f107284ae31eb813276bca184fa1c9e7eb3abef5f33",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/updater/updater_constants.gd": {
+          "sha256": "ca7687f87288cef2c7f481e991914b53afbf5db04af42fa998c54bfb726cb6c8",
+          "bytes": 292
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/updater/updater_constants.gd.uid": {
+          "sha256": "e2a36a0f4abed52f3954e845a96ad3d1efbec87c77f909c021fe55a263658e37",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/host_list.gd": {
+          "sha256": "702e7f0cd58232ef856481b1218d26a595ad0a03c4944f1106ec2ce60d9c9015",
+          "bytes": 3342
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/host_list.gd.uid": {
+          "sha256": "81c2863094e4c574da4b4bcac5645715684d20bbb45c2a477561dd303b5d1b6d",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/host_list_item.gd": {
+          "sha256": "73d991f5faac7fd5adbe0c30095c9c9ec48b1e7d766eb8f1b07f003980699f8e",
+          "bytes": 1655
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/host_list_item.gd.uid": {
+          "sha256": "35e8b1fb609d50ca6e90db41b95553b69c033e6843e8841f19ab8b92b5eaa40a",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/viewfinder.gd": {
+          "sha256": "316787cf3c92d2f572c4d3a33eecc55ffe59038eec8549cdc8fdeddc32140d84",
+          "bytes": 21831
+        },
+        "phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/viewfinder.gd.uid": {
+          "sha256": "d771188c3ed7ba5a901a975e1662d2e78a0a664b4e4ae6328298e65d64853bad",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera.cs": {
+          "sha256": "187f2bde0b283ee8508a93645e03b4f65b2f4240e894f90caa5d4756825426cb",
+          "bytes": 9800
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera.cs.uid": {
+          "sha256": "c4cfc1b102abda0608f7635cd8cd853b8c35ad0f816c50b50d30b080495dfa74",
+          "bytes": 22
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera2D.cs": {
+          "sha256": "cfefa4930d739fa0904580236e9d3380c8d8052892c0e2a6f09dc6c21dfc1b6b",
+          "bytes": 13455
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera2D.cs.uid": {
+          "sha256": "3e10552dc13f699f7a67bb392ebc92cbad313e5b831c0ee361f89d0462e77d62",
+          "bytes": 23
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera3D.cs": {
+          "sha256": "124583024c1c5e035b849c67e542e811a1908a862aff5b4f4ab51d9cea8a9bf9",
+          "bytes": 19041
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera3D.cs.uid": {
+          "sha256": "5f557a437e21735f1068e65adffd372ab40b320ddc200127956172ed36d098ea",
+          "bytes": 23
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCameraNoiseEmitter2D.cs": {
+          "sha256": "c5b9c3420cd1ba5fe4c55b8f4e96d0bda6fd620acef70da761d7a6a4f4143560",
+          "bytes": 2963
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCameraNoiseEmitter2D.cs.uid": {
+          "sha256": "6d20e07dd74e96b8dad8c2916b93358b135e9a512d6acb79b00fd41f8bd41761",
+          "bytes": 23
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCameraNoiseEmitter3D.cs": {
+          "sha256": "82fb87451a2bef040016223a4030287fd5d4126983fe30ff38b612740fd09963",
+          "bytes": 2963
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCameraNoiseEmitter3D.cs.uid": {
+          "sha256": "a49f5d75b0520ab903b986a5c228d31fe3c89d51a545bcb68d670d1f93a783ba",
+          "bytes": 23
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCameraTweenDirector.cs": {
+          "sha256": "348d6d537b0df529e5f10ef2b8d978acf675db0ef775f6fb71523c0498441e22",
+          "bytes": 589
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd": {
+          "sha256": "5c3d5f188009ee79cc5b01932711da761199efa1368436e83d0e9e195b8bd73d",
+          "bytes": 65222
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd.uid": {
+          "sha256": "fcdad6f6c0ebe9bf9780d45eba83234935b578197e43c8d9e1706a0247e4bf61",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd": {
+          "sha256": "d4fdf54a5b960cb3aa624391ff12a782c44f9118940b7ebb7e745225457fc4a1",
+          "bytes": 111838
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd.uid": {
+          "sha256": "653139d891ca640c82b955ab165ccd57a6a163498b21bd0fbfd37c20475b00ce",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_constants.gd": {
+          "sha256": "0c4e5da54e242957890abd7a1fa4d52f63d006abebe2d9e1091aa2ebd7dc1435",
+          "bytes": 1238
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_constants.gd.uid": {
+          "sha256": "2eb705c6d0638e60d1320ef74c6cc03a594b1c18f2cee5534e5f8519a786b603",
+          "bytes": 19
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd": {
+          "sha256": "6252ea6fdbd549ef6b7f5bc89eb40b1ae6461776af6da63295896a46751a736d",
+          "bytes": 7368
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd.uid": {
+          "sha256": "5db10721ae5149e779407a63f7ee5f245d32a76a0432f87d8dc138acc78c21e4",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_3d.gd": {
+          "sha256": "bce8635889585354184503236378caf9b3d072baac903052ba0d910942af7eab",
+          "bytes": 7519
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_3d.gd.uid": {
+          "sha256": "6bf955d67b223aec2a6ba65ed93ce6eb85c50093d4ad4f00f4b925ea1e9b5490",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_tween_director.gd": {
+          "sha256": "7762a335e5a520036414903e119ed8ed6b6a8e3e1e5bb31f3f05f0f6c18e1633",
+          "bytes": 1702
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_tween_director.gd.uid": {
+          "sha256": "e68ae24cd5e2785ed750c65ff002b2ec88500e3e0f5916a82047b08aa1d09117",
+          "bytes": 19
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera_host/PhantomCameraHost.cs": {
+          "sha256": "ebd964ab13e81e8ddfbd5daf87effbcbbd75ab56de8861f1426287943782bf1d",
+          "bytes": 3440
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera_host/PhantomCameraHost.cs.uid": {
+          "sha256": "0bc182a2ef010986bc9d012f9763842b1e73bb175249ce57860718e6b0459e02",
+          "bytes": 23
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd": {
+          "sha256": "6f7452e16ef1b657b04038e30b54d334a5b960f66651f855f315e0acb02a887a",
+          "bytes": 53501
+        },
+        "phantom_camera/addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd.uid": {
+          "sha256": "fca2e288542b97e4528e818fd330a40a2f636ac0b7827251566fbfee31a7dfbc",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/Camera3DResource.cs": {
+          "sha256": "aa25e45460c476115e53f222ed42e8f40154bf05bc882f694c5669232e0c6ac7",
+          "bytes": 3129
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/Camera3DResource.cs.uid": {
+          "sha256": "68a59cb85babbe067d73e1b3c3bc25d67f8520d227a45e9b7e7566794036b342",
+          "bytes": 22
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraNoise2D.cs": {
+          "sha256": "64df81b9a69b23c93c30bca269b4eb6f6b0bbe08c6cca981475b66ddd18c1654",
+          "bytes": 3890
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraNoise2D.cs.uid": {
+          "sha256": "62b45b82db30092447a3fcbd415be7a5e729a9e3cfd18bd9b76d8fac0eafdded",
+          "bytes": 23
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraNoise3D.cs": {
+          "sha256": "f7d6fda031d8d1972bce2663d60dea4ccf862fd439d41e1f99d5065d1c60700d",
+          "bytes": 5132
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraNoise3D.cs.uid": {
+          "sha256": "bb12177159a3508caf3fe73217a140031b40ed107d3465d991d36e3006c07f00",
+          "bytes": 23
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraTween.cs": {
+          "sha256": "9be8f8c4d50ff8b59ea994b1bec7ac94eebc3c5750605d3b4a9ed6a2038f8c58",
+          "bytes": 1715
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraTween.cs.uid": {
+          "sha256": "a829baf9ddbc40b26c905a9d87217460d9fe774c6ae874682c087e00ef430b86",
+          "bytes": 22
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/TweenDirectorResource.cs": {
+          "sha256": "76ff6f0a4b0a370a49deee5e71025750287a6fa05677375df8619be2dcbd1572",
+          "bytes": 3303
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/camera_3d_resource.gd": {
+          "sha256": "961c5c78eb10128180f5ec715b0895e7b15aa30377808f8bf431247c61c4c7aa",
+          "bytes": 3556
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/camera_3d_resource.gd.uid": {
+          "sha256": "717adcd7c70800076465d400728ca6588479f2833432cc1318508919ff3e6ef7",
+          "bytes": 25
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd": {
+          "sha256": "1a7710fef7952f9c15ae96b737149483b71b5567d3a3cf47545998ca1fc3f1d3",
+          "bytes": 6727
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd.uid": {
+          "sha256": "71bdf48572da81a44ab7c3d3b6f6941f16019b12f8f95d94bfadf43d9f304c8f",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/phantom_camera_noise_3d.gd": {
+          "sha256": "4dcfcb0223503c36c67a410cec9e66dfb280f4f4f28eadb2370ec574da755fdc",
+          "bytes": 9457
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/phantom_camera_noise_3d.gd.uid": {
+          "sha256": "2a0773de5012f0448f93d81a8dba1e76a849c65adde0f73912d058f0a090e2a2",
+          "bytes": 20
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/tween_director_resource.gd": {
+          "sha256": "387d9fe273707e497c756b8b5900d5722da9dc6ffb9aaecfc517c4280efe21ec",
+          "bytes": 5800
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/tween_director_resource.gd.uid": {
+          "sha256": "ab61775f1e3813f5c54043197d5e7652ed8d0af01d6e59fe84e4b682333deb04",
+          "bytes": 19
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/tween_resource.gd": {
+          "sha256": "79690d35585e656a8777977c80e0667f67fa9e58d3dec6dba3d47570b78852f0",
+          "bytes": 2122
+        },
+        "phantom_camera/addons/phantom_camera/scripts/resources/tween_resource.gd.uid": {
+          "sha256": "f0af9728a7274bffa3fc811c4797ce41d429e7806262929cc78b24d38c616d64",
+          "bytes": 19
+        },
+        "phantom_camera/addons/phantom_camera/themes/button_focus.tres": {
+          "sha256": "a1f14c27081a0fd5b5c538450e8818f25f86111cb8fb4fb2c1072dac2e79d568",
+          "bytes": 496
+        },
+        "phantom_camera/addons/phantom_camera/themes/button_hover.tres": {
+          "sha256": "ffe38dc283f25524a7f59bf575e8acd7336f6edb7c7062b32bfb65d67b3119ed",
+          "bytes": 405
+        },
+        "phantom_camera/addons/phantom_camera/themes/button_normal.tres": {
+          "sha256": "af7e3b566870929bced85d1bd4c02d1fa6da46003bbb7b7a9c713b7157851491",
+          "bytes": 497
+        },
+        "phantom_camera/addons/phantom_camera/themes/theme.tres": {
+          "sha256": "248863dd2efafb53d24d8b2e69640deea8bdc4ba0c4f0488ab8dd08540ae2aa2",
+          "bytes": 4073
+        },
+        "phantom_camera/LICENSE": {
+          "sha256": "9edff15559a55c27d4b0612d73315d0597980d13f7e5b3d4ff80192ea57c76d2",
+          "bytes": 1068
+        },
+        "phantom_camera/UPSTREAM_README.md": {
+          "sha256": "97fe53780adb33f484ed4d55d6b682272f58ca7a0d661d6ab62e2cf6bc514a97",
+          "bytes": 18458
+        }
+      },
+      "status": "ISOLATED_STUDY_NOT_RUNTIME_PROMOTED"
+    },
+    {
+      "id": "A11",
+      "repository": "cashew-olddew/Universal-Transition-Shader",
+      "commit": "c4e3e659e1338894fc0818f96e69e422a54d67ed",
+      "license": "CC0-1.0",
+      "files": {
+        "transition/transition.gdshader": {
+          "sha256": "003cc0de6113c08a2adc1be3718aaa61318ce690af877761bd0757f93970a523",
+          "bytes": 5994
+        },
+        "transition/transition.gdshader.uid": {
+          "sha256": "7e4c91b1a1eb837e42e3eb04b87afb4ad7bdcc9a31d7f9c257ced868f1aec3d6",
+          "bytes": 20
+        },
+        "transition/LICENSE": {
+          "sha256": "6d489af6292662d9e36d34ce49423784984a5f6e41d7b58f49b01264df59fa03",
+          "bytes": 7047
+        },
+        "transition/UPSTREAM_README.md": {
+          "sha256": "15a28c7efc6e3abc5e5569432be7e1e3dc6631227b5a49bd42701cc693225ef1",
+          "bytes": 23407
+        },
+        "transition/mask.png": {
+          "sha256": "15c661dd553cf6ecd0fe752bd3e0f418e0755cc4ee7845a6d888945702016413",
+          "bytes": 4801
+        }
+      },
+      "status": "ISOLATED_STUDY_NOT_RUNTIME_PROMOTED"
+    }
+  ]
+}

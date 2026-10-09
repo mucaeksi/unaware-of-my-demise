@@ -112,3 +112,5 @@ func pop_in(node: Control) -> void:
   call tracks, `SpriteFrames`/`AnimatedSprite2D`, and Tween easing/chaining/callbacks,
   read `references/animation-tree-and-tween.md`.
 
+
+Native Skeleton2D reference: [isolated study projects](../../../references/shared_godot/README.md). Use true cutout parts/weighted meshes or drawn frames; GBot is a technical example, not Fadyme artwork. Preserve feet/facing, clip events and interruption contracts.

@@ -1,0 +1,302 @@
+{
+  "date": "2026-10-09",
+  "baseline_commit": "93753f7cd0c5a1828bfac3cf461cea43300b76a3",
+  "files_checked": 1422,
+  "exact_matches": 1391,
+  "mismatches": [
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "blink.gdshader",
+      "expected": "c31f7a7c732910a6d6b81d9a64d04f29a22761a7b5d4ca0d6600af6f663ba512",
+      "actual": "86e58a52f97487611f2095e6ebd7d5c0d503a996e524c0e3a980707b3fccb7e9",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "blur_amount.gdshader",
+      "expected": "45af3d1a3753284c65a77f72c32e630128e3cb969809eceb9d0ec569c3f7581f",
+      "actual": "031ea31c89f5a8a991cf985b8d0e24d974e094e2ee99f3bbe7926b4ec0c47432",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "burning.gdshader",
+      "expected": "32533b61ec1ee537a20338fb039849adc5cb1a9ccad1f0fbebb7cc4592534033",
+      "actual": "3847bd536a33cf9b37de70fc2eeedbb57d27254173d8482a6fd5f09af29e8af8",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "chromatic_aberration.gdshader",
+      "expected": "dd018c80f1001d3c7350d491cfcab89f2e35c8c06ad599e72350fc4f94dade41",
+      "actual": "c7fc606c17b8d151ce664cc1e71d994b5f461abf26fafa6cc7f4bc594a4270f3",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "color_change.gdshader",
+      "expected": "c3ab71f4fdb25cadd2ccf348672a3182dd93eb9f886a46901702756db38900d4",
+      "actual": "0f0662cfa640a0af8740dac282bc5662f08201d7c02dc7a9492793a8637c961f",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "dissolve.gdshader",
+      "expected": "65cedcc28ee7a00c40d8efbd179d1c40c5a9c6db963365c094029560a03a06a9",
+      "actual": "5287840953566afcd33b730a085390b1422501bc7819e44cac4b0bcd26b3d8e6",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "enemy.gdshader",
+      "expected": "a24a4bfc8c6fd75a48a15e6bb6d9275861a4dc6b91adb6ead5c2bf5354440c9b",
+      "actual": "b46ad12e5e7f8662a79ddb91315f47be21416241b222830d554b7aaa731a0f9f",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "energy_barrier.gdshader",
+      "expected": "a1f22d572765acd5b8e8bb7daf3d6c094d1e666731cb9e932f266fd23cbaa8b1",
+      "actual": "9d7559b76995b29f72124b16dc19ff3c61ae17dfe8112575123a4d81101a06e9",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "flash_white.gdshader",
+      "expected": "6a1a5038b27cbf20f8131fe1550ee323df44ac2321c45ba87acb29aa21a17687",
+      "actual": "0428ef6c40e52bba952c40437cdcfabdad8aac0a4fb4ad8a80c179351523d9cd",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "fog.gdshader",
+      "expected": "e2a1f56fbf98f8f264c2d02a29aa2f01ae1bd49f33f7fbb0a5b7a0f692726519",
+      "actual": "60feeb313e9c4014db4d227b9d60931509efc3d10b6f113ae931316ac11e11a6",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "frozen.gdshader",
+      "expected": "c938e1e3836a5c09587ab8e5ae8edb379a6902b431e884e897ee4b62f0dc4310",
+      "actual": "4ad7df712e94dc279749653e3bdd7f307d11c4dc87d2b9373b03f38c95db36ef",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "grayscale.gdshader",
+      "expected": "55f31c945740a7b9173c59d4168a884a688969ad8c8c04d7d38ee9dece7a5a33",
+      "actual": "a82afe4fbe1e095ad853df4f8806b74e0ea5f52ee3be5482310d2f10a852119e",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "heat_distortion.gdshader",
+      "expected": "94bb5d4ce89a1dcfd564fb57cbaa0a2e177014360891198f9e57a28e3531dea4",
+      "actual": "ce6654ffabf14dac30ba0991b28108d8057b1fb97a143672531174590d889fca",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "invisibility.gdshader",
+      "expected": "b929d09dcbe8375fb376fe748e14e7f5ed66d29057ea2fb1494f7a9a023d69e0",
+      "actual": "d6dd98dc172c78e07b38345a303456d8d2167c724fb1085b3998bc66337524d9",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "outline_glow.gdshader",
+      "expected": "c739ba3c91b4560fdfaff56a882b10db2b8edc4a730340eea3f1421e4ed6df4c",
+      "actual": "fd0c4f14b3b7fbcdc92e300e40744324ccb0eae6037ccc9bc87750fcb0339914",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "petrify.gdshader",
+      "expected": "aab8eea9cb738f8f046867f1e570752a5b9f180140df5ab43d0bb05a93ab516b",
+      "actual": "0cc55b87cf87d8262a519518f079f744fee8d64a681cf1f4e20439fc847b435f",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "poison.gdshader",
+      "expected": "738b961ebdbd96b504f8e2e9856837683df4afec9f4cf8b858d00303556563c7",
+      "actual": "830e18457bc466afbbe12ca4b4bd22a746b9646c006972e04dc4a93806d90d8c",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "portal_vortex.gdshader",
+      "expected": "a3b3dbddf814103f6aff58abeb0aa9dbb529473f1d1db02d16564e5527ddecbb",
+      "actual": "045de6a9f0e2af9c024543fb08cd154bee2cb28e04b7ab5969e820fe603c73c3",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "radial_blur.gdshader",
+      "expected": "96e9e769792c7edeb412eeb75b25d5bb3184eb986408a4e985ca0db89ecb5823",
+      "actual": "fed5cf867df69d439b4a6cd92d35be3e6ff4e84fc2711feb9d53ceabf615b10d",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "shake_intensity.gdshader",
+      "expected": "4854b7d638c3cb7f2269b35dd9b22767019176e0ff5a7913f88b80429d1fe498",
+      "actual": "97329bff0e6c990619234731edf9b3d972ce7bddef12827041c36fe528c23ed5",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "starSky.gdshader",
+      "expected": "5747696e5387c1f046fb32996592ca1772a6ce559af102a04e5ed6e9f4764d34",
+      "actual": "ee699ffad249ffef65c1b86e9d9d4333a8e61ee05173658199edeca343ec6f25",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "vignette.gdshader",
+      "expected": "980db24ac5d6ff38a64884277c9f6b13e3852ffc880b2095ff268713a2be68d3",
+      "actual": "016eb55b9dde052dcf8255a95b0f54dfdc51bb0144d15f8545467808f3d780b8",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "water.gdshader",
+      "expected": "8143b543531f18fb416b20979181d8a4d767b40f40945b5b1231854c7afd24a8",
+      "actual": "7899f2d25afaeff5912e06fe8fa53113f7b370b90d84fdc0acbbb809897e23d6",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "godot-vfx-shaders",
+      "file": "water_surface.gdshader",
+      "expected": "1fa2e33044d3fe8955a2e407158b1fa07c4d33447f11237154d7be1237034edc",
+      "actual": "dfe46097dd4d471b4db86e044e2693d8f4b8298b38e72f3f1233dda129a5b6c0",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "game-icons",
+      "file": "delapouite/healing-shield.svg",
+      "expected": "bad12b57c4d2f35a3a8f3b3af17a55e2a5121e356def9c65bd76de11e3b4ef7e",
+      "actual": "e6e93185ef859eb8cd71cdef2de7991995e977a0eab465a30f2a45ac9ed22a25",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "game-icons",
+      "file": "delapouite/hook-swords.svg",
+      "expected": "83a85046b7d674bf0d23aad133e397fd80b831451871d17c467a1e71faf51572",
+      "actual": "7db9145f768cb823742c24982f5359032fe8784ebfd2a52a8f94cf3d8854a929",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "game-icons",
+      "file": "delapouite/magic-broom.svg",
+      "expected": "d574d97c875cd0044ec7005d0f2f27c26ef2b586338a65e241f742862c07646e",
+      "actual": "70907ecbc6722ee43d8c107a36ac5012ed4eff80e9a0d8487d81647def2efd4e",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "game-icons",
+      "file": "delapouite/shield-opposition.svg",
+      "expected": "6ded60fe770ba4034a26969b9168db71183639899cbf0919643a7371532a9ac6",
+      "actual": "da561d49336b438a99ca13bfe29c476e7696330a9c59577bb204adc60c34a18b",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "game-icons",
+      "file": "delapouite/sword-mold.svg",
+      "expected": "2c3aa852db1f3bb2f14419fe9f32abb0e44e1c197aa266efe551af7ab9236a12",
+      "actual": "9a24d4786f11e9b9946590346dc5224cc2929597497a3ae8aa770fa60ccec209",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "game-icons",
+      "file": "lorc/shieldcomb.svg",
+      "expected": "0dc38a7083e2f0ae0dcd69e455d50b48f480530f8f02cab3dd6b9500ec757102",
+      "actual": "bc9b51dab7d1d44d2e1d1f07d07f3d5dd01ea38d9c58c686b1d633781989fede",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    },
+    {
+      "pack": "game-icons",
+      "file": "seregacthtuf/acid-shield.svg",
+      "expected": "648a3b0a9c6134cc3126616ee84363893f04b2e091335bf6c9289184263a2237",
+      "actual": "0566857ccc6e9d017aa4c6da99cfe400a176f230b88fafbe34d6d1a81bd71ad2",
+      "restored_crlf_matches": true,
+      "same_as_pre_install_commit": true
+    }
+  ],
+  "license_mismatches": [
+    {
+      "path": "game/assets/third_party/reference/kenney-particles/LICENSE.txt",
+      "expected": "4afb597023cfbbe495c92bee612074fdff33226e7427b1f879aa66f157fb44ce",
+      "actual": "7edd59126c258e602e69905a0517cf51bedea489b1a69eb06a77edee1769e81e",
+      "restored_crlf_matches": true
+    },
+    {
+      "path": "game/assets/third_party/reference/kenney-smoke/LICENSE.txt",
+      "expected": "16dffa20429eccd9a6ddbffffe7870191974975d192d3934e53da5d486ed2e4f",
+      "actual": "2070f53570f285a213f6ca5e75c1ef75c7104e5530cb533b795a42597b29b055",
+      "restored_crlf_matches": true
+    },
+    {
+      "path": "game/assets/third_party/reference/kenney-light/LICENSE.txt",
+      "expected": "62c31143a7c48c4eb067c57ea90a5d5c3b7d659feb5ee8514d13fc394c7d0e94",
+      "actual": "bd63320439b690e8e44968cdac62ddc30d02a9af81f753a11919582c908fa779",
+      "restored_crlf_matches": true
+    },
+    {
+      "path": "game/assets/third_party/reference/kenney-ui-adventure/LICENSE.txt",
+      "expected": "593b79956190ca70b37ce5d0d1c71dd4b5fb4027d4d1d29a91814e950a36e6bd",
+      "actual": "31239fadb912d292460ccb985da87f006753ada99abae863a16fd0c4c544a242",
+      "restored_crlf_matches": true
+    },
+    {
+      "path": "game/assets/third_party/reference/kenney-fantasy-borders/LICENSE.txt",
+      "expected": "f7185bbb59c1a5dec131621e76bddde6855035224119927bba21f3b0bbc3ca83",
+      "actual": "c42eea52d3c6c56be839fce4df93fe3c85be6705e3249805ae0688212e17b989",
+      "restored_crlf_matches": true
+    },
+    {
+      "path": "game/assets/third_party/reference/godot-vfx-shaders/LICENSE.txt",
+      "expected": "bd0621d83fe71321f22b64453d1a72274c1957cbd32a1f46c7ee16f3322b0fac",
+      "actual": "4a258fb992ef444a86364b9646cac7466611657f30339428c4b1d3c9acb2f7b3",
+      "restored_crlf_matches": true
+    },
+    {
+      "path": "game/assets/third_party/reference/game-icons/LICENSE.txt",
+      "expected": "a63592cca45321707c3e986a2147231182adc3a6a161b4b95f46d244da20e712",
+      "actual": "fac95252798668fab5ea2cb08338f2ebc6bf894a72b19a15af1ca62f0a6d2e79",
+      "restored_crlf_matches": true
+    }
+  ],
+  "status": "EXISTING_LINE_ENDING_PROVENANCE_MISMATCH",
+  "resolution": "Original manifest hashes and reference content preserved. No game source/import changed; reconcile stored-byte versus original-source-byte hashes in a separate reference metadata handoff."
+}

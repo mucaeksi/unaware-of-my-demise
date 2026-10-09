@@ -1,0 +1,464 @@
+{
+  "status": "PASS",
+  "canonical_skills": 38,
+  "loader_comparisons": [
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-accessibility-review",
+      "files": 1,
+      "skill_sha256": "64f008e415d5555f5725eaa8e5e63ab4e79cfd020ed306dbd6d8280b7f43b792"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-accessibility-review",
+      "files": 1,
+      "skill_sha256": "64f008e415d5555f5725eaa8e5e63ab4e79cfd020ed306dbd6d8280b7f43b792"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-android-lifecycle",
+      "files": 1,
+      "skill_sha256": "47a677f1b83c0855cc5a06d671789937e40cbda85a4faa544780f440b76c489f"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-android-lifecycle",
+      "files": 1,
+      "skill_sha256": "47a677f1b83c0855cc5a06d671789937e40cbda85a4faa544780f440b76c489f"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-architecture-review",
+      "files": 1,
+      "skill_sha256": "a696a05c7280f474b5d0cf6a184f27b01eda29323fc715f67bb6164d904df7b7"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-architecture-review",
+      "files": 1,
+      "skill_sha256": "a696a05c7280f474b5d0cf6a184f27b01eda29323fc715f67bb6164d904df7b7"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-art-bible",
+      "files": 1,
+      "skill_sha256": "fcd9fb6b612c00126f379aba313093db19387219a5df0f29da7e1da7c5aeea05"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-art-bible",
+      "files": 1,
+      "skill_sha256": "fcd9fb6b612c00126f379aba313093db19387219a5df0f29da7e1da7c5aeea05"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-asset-audit",
+      "files": 2,
+      "skill_sha256": "55977b2cd1cca1c55ab2380a31858c7368e1063c47217600cfcc2ad3f9ba1044"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-asset-audit",
+      "files": 2,
+      "skill_sha256": "55977b2cd1cca1c55ab2380a31858c7368e1063c47217600cfcc2ad3f9ba1044"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-asset-pipeline",
+      "files": 2,
+      "skill_sha256": "b573c82699477d4ccaa4bcb3be46c2697df537f7dbaa7db0cb403af8927f09d4"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-asset-pipeline",
+      "files": 2,
+      "skill_sha256": "b573c82699477d4ccaa4bcb3be46c2697df537f7dbaa7db0cb403af8927f09d4"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-asset-spec",
+      "files": 1,
+      "skill_sha256": "bf21d1584a1a2710505a5af3fd11433350f5254141634b93e11752df32455bea"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-asset-spec",
+      "files": 1,
+      "skill_sha256": "bf21d1584a1a2710505a5af3fd11433350f5254141634b93e11752df32455bea"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-camera-systems",
+      "files": 3,
+      "skill_sha256": "13bfce60c63c5a782505733b46dd3d3c1170ae54e886a5a62bcc004fd20115ef"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-camera-systems",
+      "files": 3,
+      "skill_sha256": "13bfce60c63c5a782505733b46dd3d3c1170ae54e886a5a62bcc004fd20115ef"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-chibi-animation",
+      "files": 1,
+      "skill_sha256": "3b60d21606bf97d13ca3be05b5e754396aaa046b9d4510dc9d802cc0d50bfdbf"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-chibi-animation",
+      "files": 1,
+      "skill_sha256": "3b60d21606bf97d13ca3be05b5e754396aaa046b9d4510dc9d802cc0d50bfdbf"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-code-review",
+      "files": 1,
+      "skill_sha256": "bfafd690bf90bc6f8b37c16573bb972b2c6c6fd50531f40e27f5dfda985b7e53"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-code-review",
+      "files": 1,
+      "skill_sha256": "bfafd690bf90bc6f8b37c16573bb972b2c6c6fd50531f40e27f5dfda985b7e53"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-cutscene",
+      "files": 1,
+      "skill_sha256": "7d7f7739047204e41ea1038853271a1f8bc1b68d455f4ef8cd293bfb851f94e7"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-cutscene",
+      "files": 1,
+      "skill_sha256": "7d7f7739047204e41ea1038853271a1f8bc1b68d455f4ef8cd293bfb851f94e7"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-design-system",
+      "files": 1,
+      "skill_sha256": "147dcd377f47d977b8eac6babc20d3679bf9df90d5d3c25c6798accd0b6cb362"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-design-system",
+      "files": 1,
+      "skill_sha256": "147dcd377f47d977b8eac6babc20d3679bf9df90d5d3c25c6798accd0b6cb362"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-game-feel",
+      "files": 2,
+      "skill_sha256": "9ae15c8f22976ff3606e7c53c0be075970108678f05adeee7ed533381c5f841e"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-game-feel",
+      "files": 2,
+      "skill_sha256": "9ae15c8f22976ff3606e7c53c0be075970108678f05adeee7ed533381c5f841e"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-game-ui-ux",
+      "files": 2,
+      "skill_sha256": "551d977783ffbdfe976be04fb2df7580d106319b146cfa294c3c2f5a7b621bcf"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-game-ui-ux",
+      "files": 2,
+      "skill_sha256": "551d977783ffbdfe976be04fb2df7580d106319b146cfa294c3c2f5a7b621bcf"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-2d-movement",
+      "files": 2,
+      "skill_sha256": "15caf3bfed51a133055c2b2f108cec0a95219143c36155d7e1117d41623caeac"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-2d-movement",
+      "files": 2,
+      "skill_sha256": "15caf3bfed51a133055c2b2f108cec0a95219143c36155d7e1117d41623caeac"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-animation",
+      "files": 2,
+      "skill_sha256": "63c4ace069451072f3ed549c60907aa2e7dee560c1f1f3b2519a755e5e277d5f"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-animation",
+      "files": 2,
+      "skill_sha256": "63c4ace069451072f3ed549c60907aa2e7dee560c1f1f3b2519a755e5e277d5f"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-audio",
+      "files": 2,
+      "skill_sha256": "b9e638f188bef660db2ebb245b64e87ac8566fa33d6eeee4b395bc4a8389f192"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-audio",
+      "files": 2,
+      "skill_sha256": "b9e638f188bef660db2ebb245b64e87ac8566fa33d6eeee4b395bc4a8389f192"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-gdscript",
+      "files": 2,
+      "skill_sha256": "3326b38b926de103ef8810c642dfc265acdebab4ffad974406cc59010cd80f70"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-gdscript",
+      "files": 2,
+      "skill_sha256": "3326b38b926de103ef8810c642dfc265acdebab4ffad974406cc59010cd80f70"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-gdscript-headless-testing",
+      "files": 1,
+      "skill_sha256": "d9e28b29cadccfdb53d143b0e71cd88095df690a8b76e3f46af564a139c20e6a"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-gdscript-headless-testing",
+      "files": 1,
+      "skill_sha256": "d9e28b29cadccfdb53d143b0e71cd88095df690a8b76e3f46af564a139c20e6a"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-live-review",
+      "files": 1,
+      "skill_sha256": "672a10af4b1e7d9d67447647335d69d6a009a2b32ce414ea64b387db48ba469f"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-live-review",
+      "files": 1,
+      "skill_sha256": "672a10af4b1e7d9d67447647335d69d6a009a2b32ce414ea64b387db48ba469f"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-nodes-scenes",
+      "files": 2,
+      "skill_sha256": "d9c3219706283f01b6a3e0bb79ebde0db8fd37e7f96a60e9d53233dadeee8899"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-nodes-scenes",
+      "files": 2,
+      "skill_sha256": "d9c3219706283f01b6a3e0bb79ebde0db8fd37e7f96a60e9d53233dadeee8899"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-resources",
+      "files": 2,
+      "skill_sha256": "1580ba88838e6798154177fd6ddce49ef2d9b0f0aa93f396ee614e70d35c8e80"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-resources",
+      "files": 2,
+      "skill_sha256": "1580ba88838e6798154177fd6ddce49ef2d9b0f0aa93f396ee614e70d35c8e80"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-shaders",
+      "files": 2,
+      "skill_sha256": "8b3354a10d55607ad955c46868ffd714f4da1410d3b9466be211893681e9c497"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-shaders",
+      "files": 2,
+      "skill_sha256": "8b3354a10d55607ad955c46868ffd714f4da1410d3b9466be211893681e9c497"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-signals-groups",
+      "files": 2,
+      "skill_sha256": "4da93d346a054559061608b22ca69c78ae3d79d59a11ae0344a34bf8577abbd6"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-signals-groups",
+      "files": 2,
+      "skill_sha256": "4da93d346a054559061608b22ca69c78ae3d79d59a11ae0344a34bf8577abbd6"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-tilemap",
+      "files": 2,
+      "skill_sha256": "d8ad341c54ebfe4753c1006abb4ef31c50da14c6c0189b289aacb1d749084920"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-tilemap",
+      "files": 2,
+      "skill_sha256": "d8ad341c54ebfe4753c1006abb4ef31c50da14c6c0189b289aacb1d749084920"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-godot-ui-control",
+      "files": 3,
+      "skill_sha256": "0f7f06a254629372eab19f36eaca6beca7699ab68442f5c33b7c8897e68694fc"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-godot-ui-control",
+      "files": 3,
+      "skill_sha256": "0f7f06a254629372eab19f36eaca6beca7699ab68442f5c33b7c8897e68694fc"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-graphify",
+      "files": 1,
+      "skill_sha256": "40c64e22ea3ed6987b75fd8c6c7c07831c3bb6d3f671f44110da210bb368ef45"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-graphify",
+      "files": 1,
+      "skill_sha256": "40c64e22ea3ed6987b75fd8c6c7c07831c3bb6d3f671f44110da210bb368ef45"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-perf-profile",
+      "files": 2,
+      "skill_sha256": "b3422089fd6657a312c24409da80cc83288c42f302f30904769b9e93b17e19eb"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-perf-profile",
+      "files": 2,
+      "skill_sha256": "b3422089fd6657a312c24409da80cc83288c42f302f30904769b9e93b17e19eb"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-router",
+      "files": 1,
+      "skill_sha256": "7faf5963bfe132f53c954d6ce6ef595b5dd7af4d3d25ba30a9d035a00f1a328b"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-router",
+      "files": 1,
+      "skill_sha256": "7faf5963bfe132f53c954d6ce6ef595b5dd7af4d3d25ba30a9d035a00f1a328b"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-screen-presentation",
+      "files": 1,
+      "skill_sha256": "9e175f68888b4d05c651414902e1ea7aca99bc209d47208a3a25c0f4130fda74"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-screen-presentation",
+      "files": 1,
+      "skill_sha256": "9e175f68888b4d05c651414902e1ea7aca99bc209d47208a3a25c0f4130fda74"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-setup-engine",
+      "files": 1,
+      "skill_sha256": "ffdec01764fe0634c47ff9a42381aa481895aadae01e16dc412e4dc02c63f58d"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-setup-engine",
+      "files": 1,
+      "skill_sha256": "ffdec01764fe0634c47ff9a42381aa481895aadae01e16dc412e4dc02c63f58d"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-shared-skill-validation",
+      "files": 1,
+      "skill_sha256": "9ea8204feeb7d9f61ff85683c044791ff6bb3341165382612541a403d3feb12c"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-shared-skill-validation",
+      "files": 1,
+      "skill_sha256": "9ea8204feeb7d9f61ff85683c044791ff6bb3341165382612541a403d3feb12c"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-team-polish",
+      "files": 1,
+      "skill_sha256": "a1d441394d4e0f5d62d5e905a522a08a1c4fb193d4fd84752c0bf11510ca2833"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-team-polish",
+      "files": 1,
+      "skill_sha256": "a1d441394d4e0f5d62d5e905a522a08a1c4fb193d4fd84752c0bf11510ca2833"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-team-ui",
+      "files": 1,
+      "skill_sha256": "b2a95d5ffa2920a62987207c4ce2e20b51c5e4025b8969276031e2951bfb2009"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-team-ui",
+      "files": 1,
+      "skill_sha256": "b2a95d5ffa2920a62987207c4ce2e20b51c5e4025b8969276031e2951bfb2009"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-test-setup",
+      "files": 1,
+      "skill_sha256": "2759b9008defbb5577637cc42fb595e521d44f4764c4d0f4abbbf04b0a198932"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-test-setup",
+      "files": 1,
+      "skill_sha256": "2759b9008defbb5577637cc42fb595e521d44f4764c4d0f4abbbf04b0a198932"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-ux-design",
+      "files": 1,
+      "skill_sha256": "1133bd84e821c0ec693120c3fe605c3187ef4f8c80077e8ae70fba1716acebc6"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-ux-design",
+      "files": 1,
+      "skill_sha256": "1133bd84e821c0ec693120c3fe605c3187ef4f8c80077e8ae70fba1716acebc6"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-ux-review",
+      "files": 2,
+      "skill_sha256": "626a07c1d05ad1e4b915c3a07b3921c1e1490ccbeafa92b27b2c9c5f84c5e014"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-ux-review",
+      "files": 2,
+      "skill_sha256": "626a07c1d05ad1e4b915c3a07b3921c1e1490ccbeafa92b27b2c9c5f84c5e014"
+    },
+    {
+      "loader": ".agents/skills",
+      "skill": "uomd-vfx",
+      "files": 2,
+      "skill_sha256": "de8fa98efb1c94e4487805acb5623f95900a5219daefc0b6a846ce6443ddb459"
+    },
+    {
+      "loader": ".claude/skills",
+      "skill": "uomd-vfx",
+      "files": 2,
+      "skill_sha256": "de8fa98efb1c94e4487805acb5623f95900a5219daefc0b6a846ce6443ddb459"
+    }
+  ],
+  "errors": [],
+  "native_client_discovery": "NOT_ESTABLISHED_BY_FILESYSTEM_VALIDATION"
+}

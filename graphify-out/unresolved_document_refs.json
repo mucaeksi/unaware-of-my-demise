@@ -26005,6 +26005,351 @@
     "target": "/ux-design accessibility"
   },
   {
+    "source_file": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/SKILL.md",
+    "source_location": "L98",
+    "target": "python -m pip install -r scripts/requirements.txt"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/references/provenance.md",
+    "source_location": "L19",
+    "target": "assets/asset-manifest.json"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/gamedev/skills/godot/godot-audio/references/buses-and-effects.md",
+    "source_location": "L39",
+    "target": "AudioEffectEQ6/EQ10/EQ21"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/assets-pipeline/SKILL.md",
+    "source_location": "L31",
+    "target": ".godot/imported/"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/assets-pipeline/SKILL.md",
+    "source_location": "L34",
+    "target": ".godot/"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/assets-pipeline/SKILL.md",
+    "source_location": "L285",
+    "target": ".godot/"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/assets-pipeline/SKILL.md",
+    "source_location": "L286",
+    "target": "ResourceLoader.load_threaded_request/get_status"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/assets-pipeline/SKILL.md",
+    "source_location": "L294",
+    "target": ".godot/"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/SKILL.md",
+    "source_location": "L100",
+    "target": "VisibleOnScreenNotifier2D/3D"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/SKILL.md",
+    "source_location": "L106",
+    "target": "Area2D/3D"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/SKILL.md",
+    "source_location": "L148",
+    "target": "load(\"res://...\")"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/SKILL.md",
+    "source_location": "L166",
+    "target": "VisibleOnScreenNotifier2D/3D"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/SKILL.md",
+    "source_location": "L173",
+    "target": "Area2D/3D"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/references/cpu-bottlenecks.md",
+    "source_location": "L3",
+    "target": "skills/godot-optimization/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/references/draw-calls.md",
+    "source_location": "L3",
+    "target": "skills/godot-optimization/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/references/memory-management.md",
+    "source_location": "L3",
+    "target": "skills/godot-optimization/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/references/physics-tuning.md",
+    "source_location": "L3",
+    "target": "skills/godot-optimization/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/SKILL.md",
+    "source_location": "L209",
+    "target": "get_joy_vibration_strength/duration/remaining_duration()"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/SKILL.md",
+    "source_location": "L209",
+    "target": "input_devices/joypads/ignore_joypad_on_unfocused_application"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/SKILL.md",
+    "source_location": "L221",
+    "target": "action_up/down/left/right"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/SKILL.md",
+    "source_location": "L309",
+    "target": "user://"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/action-rebinding.md",
+    "source_location": "L3",
+    "target": "skills/input-handling/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/event-propagation.md",
+    "source_location": "L3",
+    "target": "skills/input-handling/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/event-propagation.md",
+    "source_location": "L36",
+    "target": "Node.set_process_input(true/false)"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/gamepad.md",
+    "source_location": "L3",
+    "target": "skills/input-handling/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/gamepad.md",
+    "source_location": "L150",
+    "target": "get/set/clear_joy_motion_sensors_calibration()"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/input-buffering.md",
+    "source_location": "L3",
+    "target": "skills/input-handling/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/mouse.md",
+    "source_location": "L3",
+    "target": "skills/input-handling/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/touch.md",
+    "source_location": "L3",
+    "target": "skills/input-handling/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/mobile-development/SKILL.md",
+    "source_location": "L108",
+    "target": "permissions/<name"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/mobile-development/SKILL.md",
+    "source_location": "L211",
+    "target": "get_accelerometer/gravity/gyroscope/magnetometer"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/mobile-development/SKILL.md",
+    "source_location": "L262",
+    "target": "rendering/textures/vram_compression/import_etc2_astc = true"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/mobile-development/references/plugins.md",
+    "source_location": "L107",
+    "target": "m4gr3d/Godot-Android-Plugin-Template"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/mobile-development/references/plugins.md",
+    "source_location": "L107",
+    "target": "m4gr3d/GDExtension-Android-Plugin-Template"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/mobile-development/references/plugins.md",
+    "source_location": "L149",
+    "target": "res://ios/plugins/"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/mobile-development/references/plugins.md",
+    "source_location": "L157",
+    "target": "godotengine/godot-ios-plugins"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/mobile-development/references/plugins.md",
+    "source_location": "L157",
+    "target": "naithar/godot_ios_plugin"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/SKILL.md",
+    "source_location": "L98",
+    "target": "rotation_velocity_3d_min/max"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/SKILL.md",
+    "source_location": "L134",
+    "target": "scale_3d_min/max"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/SKILL.md",
+    "source_location": "L134",
+    "target": "rotation_3d_min/max"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/SKILL.md",
+    "source_location": "L180",
+    "target": "GPUParticles2D/3D"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/SKILL.md",
+    "source_location": "L212",
+    "target": "ParticleProcessMaterial.AnimSpeedMin/Max"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/SKILL.md",
+    "source_location": "L212",
+    "target": "CanvasItemMaterial.ParticlesAnimHFrames/VFrames"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/attractors-and-collision.md",
+    "source_location": "L3",
+    "target": "skills/particles-vfx/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/flipbook-animation.md",
+    "source_location": "L3",
+    "target": "skills/particles-vfx/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/performance-and-pitfalls.md",
+    "source_location": "L20",
+    "target": "GPUParticles2D/3D"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/performance-and-pitfalls.md",
+    "source_location": "L20",
+    "target": "CPUParticles2D/3D"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/process-material-basics.md",
+    "source_location": "L3",
+    "target": "skills/particles-vfx/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/subemitters.md",
+    "source_location": "L3",
+    "target": "skills/particles-vfx/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/trails.md",
+    "source_location": "L3",
+    "target": "skills/particles-vfx/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/vfx-recipes.md",
+    "source_location": "L3",
+    "target": "skills/particles-vfx/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/phantom-camera/SKILL.md",
+    "source_location": "L34",
+    "target": "addons/phantom_camera/"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/phantom-camera/references/follow-modes.md",
+    "source_location": "L3",
+    "target": "skills/phantom-camera/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/phantom-camera/references/follow-modes.md",
+    "source_location": "L22",
+    "target": "follow_targets: Array[Node2D/3D]"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/phantom-camera/references/follow-modes.md",
+    "source_location": "L80",
+    "target": "/"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/phantom-camera/references/follow-modes.md",
+    "source_location": "L80",
+    "target": "/"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/SKILL.md",
+    "source_location": "L18",
+    "target": ".godot/project.godot"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/SKILL.md",
+    "source_location": "L22",
+    "target": "window/size/viewport_width"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/SKILL.md",
+    "source_location": "L23",
+    "target": "window/size/viewport_height"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/SKILL.md",
+    "source_location": "L24",
+    "target": "window/stretch/mode"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/SKILL.md",
+    "source_location": "L25",
+    "target": "window/stretch/aspect"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/SKILL.md",
+    "source_location": "L26",
+    "target": "window/stretch/scale"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/SKILL.md",
+    "source_location": "L28",
+    "target": "display/window/stretch/mode"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/SKILL.md",
+    "source_location": "L28",
+    "target": "display/window/stretch/aspect"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/SKILL.md",
+    "source_location": "L72",
+    "target": "window/stretch/aspect"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/references/adaptive-layouts.md",
+    "source_location": "L3",
+    "target": "skills/responsive-ui/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/references/dpi-scaling.md",
+    "source_location": "L3",
+    "target": "skills/responsive-ui/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/references/mobile.md",
+    "source_location": "L3",
+    "target": "skills/responsive-ui/SKILL.md"
+  },
+  {
+    "source_file": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/references/pixel-art-setup.md",
+    "source_location": "L3",
+    "target": "skills/responsive-ui/SKILL.md"
+  },
+  {
     "source_file": ".archive/project-docs-20261008/README.md",
     "source_location": "L84",
     "target": "LEGACY/"
@@ -26295,9 +26640,34 @@
     "target": "graphify-out/graph.json"
   },
   {
+    "source_file": ".codex/workflows/shared-skills.md",
+    "source_location": "L5",
+    "target": "python3 .codex/scripts/bootstrap_skills.py"
+  },
+  {
+    "source_file": ".codex/workflows/shared-skills.md",
+    "source_location": "L5",
+    "target": "powershell -NoProfile -ExecutionPolicy Bypass -File .codex/scripts/bootstrap_skills.ps1"
+  },
+  {
+    "source_file": ".codex/workflows/shared-skills.md",
+    "source_location": "L7",
+    "target": "python3 .codex/scripts/validate_system.py"
+  },
+  {
+    "source_file": ".codex/workflows/shared-skills.md",
+    "source_location": "L7",
+    "target": "python3 .codex/scripts/validate_shared_skills.py"
+  },
+  {
     "source_file": ".codex/workflows/system-maintenance.md",
     "source_location": "L7",
     "target": "skills/list"
+  },
+  {
+    "source_file": "AGENTS.md",
+    "source_location": "L6",
+    "target": ".claude/skills/"
   },
   {
     "source_file": "AGENTS.md",
@@ -28968,6 +29338,41 @@
     "source_file": "docs/art/GDQUEST_VFX_REVIEW_2026-10-08.md",
     "source_location": "L52",
     "target": "build/gdquest-vfx-review-20261008/"
+  },
+  {
+    "source_file": "docs/art/GODOT_SHARED_INSTALL_REPORT_2026-10-09_TR.md",
+    "source_location": "L33",
+    "target": "skills/list"
+  },
+  {
+    "source_file": "docs/art/GODOT_SHARED_INSTALL_REPORT_2026-10-09_TR.md",
+    "source_location": "L45",
+    "target": "evidence/"
+  },
+  {
+    "source_file": "docs/art/GODOT_SHARED_INSTALL_REPORT_2026-10-09_TR.md",
+    "source_location": "L52",
+    "target": "uv / local_progress"
+  },
+  {
+    "source_file": "docs/art/GODOT_SHARED_SKILLS_ASSETS_2026-10-09_TR.md",
+    "source_location": "L29",
+    "target": ".claude/skills"
+  },
+  {
+    "source_file": "docs/art/GODOT_SHARED_SKILLS_ASSETS_2026-10-09_TR.md",
+    "source_location": "L125",
+    "target": ".tscn/.tres"
+  },
+  {
+    "source_file": "docs/art/GODOT_SHARED_SKILLS_ASSETS_2026-10-09_TR.md",
+    "source_location": "L147",
+    "target": ".uid/.import"
+  },
+  {
+    "source_file": "docs/art/GODOT_SHARED_SKILLS_ASSETS_2026-10-09_TR.md",
+    "source_location": "L209",
+    "target": "main/master"
   },
   {
     "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
@@ -36843,6 +37248,36 @@
     "source_file": "references/gdquest_vfx/README.md",
     "source_location": "L3",
     "target": "upstream/project.godot"
+  },
+  {
+    "source_file": "references/shared_godot/phantom_camera/UPSTREAM_README.md",
+    "source_location": "L519",
+    "target": "res://addons/phantom_camera/examples"
+  },
+  {
+    "source_file": "references/shared_godot/phantom_camera/UPSTREAM_README.md",
+    "source_location": "L526",
+    "target": "Project/Project Settings/Plugins"
+  },
+  {
+    "source_file": "references/shared_godot/phantom_camera/UPSTREAM_README.md",
+    "source_location": "L531",
+    "target": "Project/Project Settings/Plugins"
+  },
+  {
+    "source_file": "references/shared_godot/phantom_camera/UPSTREAM_README.md",
+    "source_location": "L536",
+    "target": "Project/Project Settings/Plugins"
+  },
+  {
+    "source_file": "references/shared_godot/transition/UPSTREAM_README.md",
+    "source_location": "L555",
+    "target": "assets/recipes"
+  },
+  {
+    "source_file": "references/shared_godot/transition/UPSTREAM_README.md",
+    "source_location": "L564",
+    "target": "assets/recipes"
   },
   {
     "source_file": "release/current/THIRD_PARTY_NOTICE.md",

@@ -660,6 +660,13 @@
     ]
   },
   {
+    "sha256": "0339177149b474f7ff676d32218ecb3a8f2538955610023c3769763720d09e4c",
+    "files": [
+      "game/assets/third_party/reference/godot-sprite-shaders/LICENSE.txt",
+      "references/shared_godot/skeleton2d/LICENSE.md"
+    ]
+  },
+  {
     "sha256": "5590b9716da66d6d84510e5b7f1c6672e840c6d3074759e77c8a68e7270f815a",
     "files": [
       "game/assets/third_party/reference/kenney-fantasy-borders/PNG/Default/Border/panel-border-008.png",

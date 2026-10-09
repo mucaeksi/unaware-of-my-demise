@@ -114,3 +114,5 @@ func _ready() -> void:
   resources, focus neighbor wiring, and `CanvasLayer` for HUDs, read
   `references/layout-and-theming.md`.
 
+
+For the reviewed shared-source additions, read [responsive-ui guidance](references/shared-responsive-ui.md).

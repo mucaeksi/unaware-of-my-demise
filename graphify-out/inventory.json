@@ -2367,7 +2367,12 @@
   {
     "path": ".agents/library/migration-inventory.json",
     "node_id": "agents_library_migration_inventory",
-    "size_bytes": 42808
+    "size_bytes": 43303
+  },
+  {
+    "path": ".agents/library/reference-byte-audit.json",
+    "node_id": "agents_library_reference_byte_audit",
+    "size_bytes": 12867
   },
   {
     "path": ".agents/library/roles.json",
@@ -2575,6 +2580,271 @@
     "size_bytes": 1196
   },
   {
+    "path": ".agents/library/shared-skills-install.json",
+    "node_id": "agents_library_shared_skills_install",
+    "size_bytes": 9786
+  },
+  {
+    "path": ".agents/library/upstream/20261009/README.md",
+    "node_id": "agents_library_upstream_20261009_readme",
+    "size_bytes": 656
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/LICENSE",
+    "node_id": "agents_library_upstream_20261009_gamedev_license",
+    "size_bytes": 11395
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/NOTICE",
+    "node_id": "agents_library_upstream_20261009_gamedev_notice",
+    "size_bytes": 883
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/SKILL.md",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_skill",
+    "size_bytes": 7979
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/agents/openai.yaml",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_agents_openai",
+    "size_bytes": 231
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/assets/art-direction-brief.md",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_assets_art_direction_brief",
+    "size_bytes": 858
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/assets/asset-manifest.json",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_assets_asset_manifest",
+    "size_bytes": 969
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/references/art-direction.md",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_references_art_direction",
+    "size_bytes": 3876
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/references/provenance.md",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_references_provenance",
+    "size_bytes": 2198
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/references/raster-pipeline.md",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_references_raster_pipeline",
+    "size_bytes": 3909
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/references/three-d-pipeline.md",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_references_three_d_pipeline",
+    "size_bytes": 3146
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/scripts/asset_report.py",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_scripts_asset_report",
+    "size_bytes": 4702
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/scripts/build_preview_sheet.py",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_scripts_build_preview_sheet",
+    "size_bytes": 3353
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/disciplines/create-game-assets/scripts/requirements.txt",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_disciplines_create_game_assets_scripts_requirements",
+    "size_bytes": 15
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/godot/godot-audio/SKILL.md",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_godot_godot_audio_skill",
+    "size_bytes": 5240
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/godot/godot-audio/references/buses-and-effects.md",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_godot_godot_audio_references_buses_and_effects",
+    "size_bytes": 3590
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/godot/godot-shaders/SKILL.md",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_godot_godot_shaders_skill",
+    "size_bytes": 5527
+  },
+  {
+    "path": ".agents/library/upstream/20261009/gamedev/skills/godot/godot-shaders/references/shading-language.md",
+    "node_id": "agents_library_upstream_20261009_gamedev_skills_godot_godot_shaders_references_shading_language",
+    "size_bytes": 3992
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/LICENSE",
+    "node_id": "agents_library_upstream_20261009_prompter_license",
+    "size_bytes": 1083
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/assets-pipeline/SKILL.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_assets_pipeline_skill",
+    "size_bytes": 14716
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/assets-pipeline/references/runtime-resource-loading.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_assets_pipeline_references_runtime_resource_loading",
+    "size_bytes": 2323
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/SKILL.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_godot_optimization_skill",
+    "size_bytes": 11865
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/references/cpu-bottlenecks.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_godot_optimization_references_cpu_bottlenecks",
+    "size_bytes": 9225
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/references/draw-calls.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_godot_optimization_references_draw_calls",
+    "size_bytes": 6717
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/references/memory-management.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_godot_optimization_references_memory_management",
+    "size_bytes": 10420
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/godot-optimization/references/physics-tuning.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_godot_optimization_references_physics_tuning",
+    "size_bytes": 5413
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/input-handling/SKILL.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_input_handling_skill",
+    "size_bytes": 15268
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/action-rebinding.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_input_handling_references_action_rebinding",
+    "size_bytes": 6180
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/event-propagation.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_input_handling_references_event_propagation",
+    "size_bytes": 1412
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/gamepad.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_input_handling_references_gamepad",
+    "size_bytes": 6600
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/input-buffering.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_input_handling_references_input_buffering",
+    "size_bytes": 1550
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/mouse.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_input_handling_references_mouse",
+    "size_bytes": 4510
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/input-handling/references/touch.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_input_handling_references_touch",
+    "size_bytes": 1229
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/mobile-development/SKILL.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_mobile_development_skill",
+    "size_bytes": 13118
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/mobile-development/references/crash-debugging.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_mobile_development_references_crash_debugging",
+    "size_bytes": 1280
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/mobile-development/references/iap-and-ads.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_mobile_development_references_iap_and_ads",
+    "size_bytes": 3683
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/mobile-development/references/plugins.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_mobile_development_references_plugins",
+    "size_bytes": 5958
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/SKILL.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_particles_vfx_skill",
+    "size_bytes": 12134
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/attractors-and-collision.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_particles_vfx_references_attractors_and_collision",
+    "size_bytes": 3346
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/flipbook-animation.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_particles_vfx_references_flipbook_animation",
+    "size_bytes": 1781
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/performance-and-pitfalls.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_particles_vfx_references_performance_and_pitfalls",
+    "size_bytes": 4609
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/process-material-basics.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_particles_vfx_references_process_material_basics",
+    "size_bytes": 3708
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/subemitters.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_particles_vfx_references_subemitters",
+    "size_bytes": 2319
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/trails.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_particles_vfx_references_trails",
+    "size_bytes": 2007
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/particles-vfx/references/vfx-recipes.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_particles_vfx_references_vfx_recipes",
+    "size_bytes": 4803
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/phantom-camera/SKILL.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_phantom_camera_skill",
+    "size_bytes": 12983
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/phantom-camera/references/follow-modes.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_phantom_camera_references_follow_modes",
+    "size_bytes": 3473
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/SKILL.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_responsive_ui_skill",
+    "size_bytes": 9432
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/references/adaptive-layouts.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_responsive_ui_references_adaptive_layouts",
+    "size_bytes": 2888
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/references/dpi-scaling.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_responsive_ui_references_dpi_scaling",
+    "size_bytes": 1845
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/references/mobile.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_responsive_ui_references_mobile",
+    "size_bytes": 4787
+  },
+  {
+    "path": ".agents/library/upstream/20261009/prompter/skills/responsive-ui/references/pixel-art-setup.md",
+    "node_id": "agents_library_upstream_20261009_prompter_skills_responsive_ui_references_pixel_art_setup",
+    "size_bytes": 2644
+  },
+  {
     "path": ".archive/project-docs-20261008/GAME_TOOLCHAIN.md",
     "node_id": "archive_project_docs_20261008_game_toolchain",
     "size_bytes": 589
@@ -2736,8 +3006,23 @@
   },
   {
     "path": ".codex/scripts/bootstrap_skills.ps1",
-    "node_id": "codex_scripts_bootstrap_skills",
-    "size_bytes": 2965
+    "node_id": "codex_scripts_bootstrap_skills_ps1",
+    "size_bytes": 3539
+  },
+  {
+    "path": ".codex/scripts/bootstrap_skills.py",
+    "node_id": "codex_scripts_bootstrap_skills_py",
+    "size_bytes": 2768
+  },
+  {
+    "path": ".codex/scripts/test_bootstrap_skills.py",
+    "node_id": "codex_scripts_test_bootstrap_skills",
+    "size_bytes": 3326
+  },
+  {
+    "path": ".codex/scripts/validate_shared_skills.py",
+    "node_id": "codex_scripts_validate_shared_skills",
+    "size_bytes": 3586
   },
   {
     "path": ".codex/scripts/validate_system.py",
@@ -2748,6 +3033,16 @@
     "path": ".codex/scripts/verify_codex.py",
     "node_id": "codex_scripts_verify_codex",
     "size_bytes": 4269
+  },
+  {
+    "path": ".codex/skills/uomd-accessibility-review/SKILL.md",
+    "node_id": "codex_skills_uomd_accessibility_review_skill",
+    "size_bytes": 1613
+  },
+  {
+    "path": ".codex/skills/uomd-android-lifecycle/SKILL.md",
+    "node_id": "codex_skills_uomd_android_lifecycle_skill",
+    "size_bytes": 2036
   },
   {
     "path": ".codex/skills/uomd-architecture-review/SKILL.md",
@@ -2762,12 +3057,22 @@
   {
     "path": ".codex/skills/uomd-asset-audit/SKILL.md",
     "node_id": "codex_skills_uomd_asset_audit_skill",
-    "size_bytes": 723
+    "size_bytes": 821
+  },
+  {
+    "path": ".codex/skills/uomd-asset-audit/references/shared-imports.md",
+    "node_id": "codex_skills_uomd_asset_audit_references_shared_imports",
+    "size_bytes": 604
   },
   {
     "path": ".codex/skills/uomd-asset-pipeline/SKILL.md",
     "node_id": "codex_skills_uomd_asset_pipeline_skill",
-    "size_bytes": 740
+    "size_bytes": 852
+  },
+  {
+    "path": ".codex/skills/uomd-asset-pipeline/references/shared-art-production.md",
+    "node_id": "codex_skills_uomd_asset_pipeline_references_shared_art_production",
+    "size_bytes": 647
   },
   {
     "path": ".codex/skills/uomd-asset-spec/SKILL.md",
@@ -2777,7 +3082,7 @@
   {
     "path": ".codex/skills/uomd-camera-systems/SKILL.md",
     "node_id": "codex_skills_uomd_camera_systems_skill",
-    "size_bytes": 8257
+    "size_bytes": 8369
   },
   {
     "path": ".codex/skills/uomd-camera-systems/references/follow-and-framing.md",
@@ -2785,9 +3090,14 @@
     "size_bytes": 4844
   },
   {
+    "path": ".codex/skills/uomd-camera-systems/references/shared-phantom-camera.md",
+    "node_id": "codex_skills_uomd_camera_systems_references_shared_phantom_camera",
+    "size_bytes": 696
+  },
+  {
     "path": ".codex/skills/uomd-chibi-animation/SKILL.md",
     "node_id": "codex_skills_uomd_chibi_animation_skill",
-    "size_bytes": 740
+    "size_bytes": 1007
   },
   {
     "path": ".codex/skills/uomd-code-review/SKILL.md",
@@ -2837,12 +3147,22 @@
   {
     "path": ".codex/skills/uomd-godot-animation/SKILL.md",
     "node_id": "codex_skills_uomd_godot_animation_skill",
-    "size_bytes": 5343
+    "size_bytes": 5610
   },
   {
     "path": ".codex/skills/uomd-godot-animation/references/animation-tree-and-tween.md",
     "node_id": "codex_skills_uomd_godot_animation_references_animation_tree_and_tween",
     "size_bytes": 4143
+  },
+  {
+    "path": ".codex/skills/uomd-godot-audio/SKILL.md",
+    "node_id": "codex_skills_uomd_godot_audio_skill",
+    "size_bytes": 1914
+  },
+  {
+    "path": ".codex/skills/uomd-godot-audio/references/audio-review.md",
+    "node_id": "codex_skills_uomd_godot_audio_references_audio_review",
+    "size_bytes": 1110
   },
   {
     "path": ".codex/skills/uomd-godot-gdscript-headless-testing/SKILL.md",
@@ -2858,6 +3178,11 @@
     "path": ".codex/skills/uomd-godot-gdscript/references/annotations-and-typing.md",
     "node_id": "codex_skills_uomd_godot_gdscript_references_annotations_and_typing",
     "size_bytes": 3359
+  },
+  {
+    "path": ".codex/skills/uomd-godot-live-review/SKILL.md",
+    "node_id": "codex_skills_uomd_godot_live_review_skill",
+    "size_bytes": 2004
   },
   {
     "path": ".codex/skills/uomd-godot-nodes-scenes/SKILL.md",
@@ -2878,6 +3203,16 @@
     "path": ".codex/skills/uomd-godot-resources/references/resource-patterns.md",
     "node_id": "codex_skills_uomd_godot_resources_references_resource_patterns",
     "size_bytes": 3277
+  },
+  {
+    "path": ".codex/skills/uomd-godot-shaders/SKILL.md",
+    "node_id": "codex_skills_uomd_godot_shaders_skill",
+    "size_bytes": 1859
+  },
+  {
+    "path": ".codex/skills/uomd-godot-shaders/references/canvas-shading.md",
+    "node_id": "codex_skills_uomd_godot_shaders_references_canvas_shading",
+    "size_bytes": 1426
   },
   {
     "path": ".codex/skills/uomd-godot-signals-groups/SKILL.md",
@@ -2902,12 +3237,17 @@
   {
     "path": ".codex/skills/uomd-godot-ui-control/SKILL.md",
     "node_id": "codex_skills_uomd_godot_ui_control_skill",
-    "size_bytes": 5600
+    "size_bytes": 5710
   },
   {
     "path": ".codex/skills/uomd-godot-ui-control/references/layout-and-theming.md",
     "node_id": "codex_skills_uomd_godot_ui_control_references_layout_and_theming",
     "size_bytes": 4112
+  },
+  {
+    "path": ".codex/skills/uomd-godot-ui-control/references/shared-responsive-ui.md",
+    "node_id": "codex_skills_uomd_godot_ui_control_references_shared_responsive_ui",
+    "size_bytes": 549
   },
   {
     "path": ".codex/skills/uomd-graphify/SKILL.md",
@@ -2917,12 +3257,17 @@
   {
     "path": ".codex/skills/uomd-perf-profile/SKILL.md",
     "node_id": "codex_skills_uomd_perf_profile_skill",
-    "size_bytes": 742
+    "size_bytes": 864
+  },
+  {
+    "path": ".codex/skills/uomd-perf-profile/references/shared-android-performance.md",
+    "node_id": "codex_skills_uomd_perf_profile_references_shared_android_performance",
+    "size_bytes": 629
   },
   {
     "path": ".codex/skills/uomd-router/SKILL.md",
     "node_id": "codex_skills_uomd_router_skill",
-    "size_bytes": 968
+    "size_bytes": 1267
   },
   {
     "path": ".codex/skills/uomd-screen-presentation/SKILL.md",
@@ -2933,6 +3278,11 @@
     "path": ".codex/skills/uomd-setup-engine/SKILL.md",
     "node_id": "codex_skills_uomd_setup_engine_skill",
     "size_bytes": 780
+  },
+  {
+    "path": ".codex/skills/uomd-shared-skill-validation/SKILL.md",
+    "node_id": "codex_skills_uomd_shared_skill_validation_skill",
+    "size_bytes": 1900
   },
   {
     "path": ".codex/skills/uomd-team-polish/SKILL.md",
@@ -2957,12 +3307,22 @@
   {
     "path": ".codex/skills/uomd-ux-review/SKILL.md",
     "node_id": "codex_skills_uomd_ux_review_skill",
-    "size_bytes": 751
+    "size_bytes": 857
+  },
+  {
+    "path": ".codex/skills/uomd-ux-review/references/shared-touch-input.md",
+    "node_id": "codex_skills_uomd_ux_review_references_shared_touch_input",
+    "size_bytes": 567
   },
   {
     "path": ".codex/skills/uomd-vfx/SKILL.md",
     "node_id": "codex_skills_uomd_vfx_skill",
-    "size_bytes": 719
+    "size_bytes": 883
+  },
+  {
+    "path": ".codex/skills/uomd-vfx/references/shared-particles.md",
+    "node_id": "codex_skills_uomd_vfx_references_shared_particles",
+    "size_bytes": 587
   },
   {
     "path": ".codex/standards/art-bible.md",
@@ -3065,6 +3425,11 @@
     "size_bytes": 823
   },
   {
+    "path": ".codex/workflows/shared-skills.md",
+    "node_id": "codex_workflows_shared_skills",
+    "size_bytes": 1707
+  },
+  {
     "path": ".codex/workflows/system-maintenance.md",
     "node_id": "codex_workflows_system_maintenance",
     "size_bytes": 1462
@@ -3072,7 +3437,7 @@
   {
     "path": ".gitattributes",
     "node_id": "gitattributes",
-    "size_bytes": 2420
+    "size_bytes": 2760
   },
   {
     "path": ".github/workflows/backup.yml",
@@ -3127,12 +3492,12 @@
   {
     "path": "AGENTS.md",
     "node_id": "agents",
-    "size_bytes": 7399
+    "size_bytes": 7641
   },
   {
     "path": "CLAUDE.md",
     "node_id": "claude",
-    "size_bytes": 4682
+    "size_bytes": 5479
   },
   {
     "path": "GAME_TOOLCHAIN.md",
@@ -3148,6 +3513,11 @@
     "path": "LICENSE",
     "node_id": "license",
     "size_bytes": 586
+  },
+  {
+    "path": "ORTAK_SKILLLERI_KUR.cmd",
+    "node_id": "ortak_skillleri_kur",
+    "size_bytes": 350
   },
   {
     "path": "OYUNU_AC.cmd",
@@ -3498,6 +3868,16 @@
     "path": "docs/art/GDQUEST_VFX_REVIEW_2026-10-08.md",
     "node_id": "docs_art_gdquest_vfx_review_2026_10_08",
     "size_bytes": 7702
+  },
+  {
+    "path": "docs/art/GODOT_SHARED_INSTALL_REPORT_2026-10-09_TR.md",
+    "node_id": "docs_art_godot_shared_install_report_2026_10_09_tr",
+    "size_bytes": 10712
+  },
+  {
+    "path": "docs/art/GODOT_SHARED_SKILLS_ASSETS_2026-10-09_TR.md",
+    "node_id": "docs_art_godot_shared_skills_assets_2026_10_09_tr",
+    "size_bytes": 37046
   },
   {
     "path": "docs/art/character_reference/generation_manifest_v003.json",
@@ -24840,6 +25220,11 @@
     "size_bytes": 4596
   },
   {
+    "path": "game/tests/ui/test_desktop_opening_review.gd.uid",
+    "node_id": "game_tests_ui_test_desktop_opening_review_gd",
+    "size_bytes": 19
+  },
+  {
     "path": "game/tests/ui/test_entry_download.gd",
     "node_id": "game_tests_ui_test_entry_download",
     "size_bytes": 4055
@@ -28600,6 +28985,81 @@
     "size_bytes": 351
   },
   {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/README.md",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_readme",
+    "size_bytes": 834
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/VALIDATION.json",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_validation",
+    "size_bytes": 2788
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/codex-discovery.json",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_codex_discovery",
+    "size_bytes": 225
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/mcp-live-validation.json",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_mcp_live_validation",
+    "size_bytes": 40438
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/phantom_camera-render.log",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_phantom_camera_render",
+    "size_bytes": 549
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/phantom_focus.png",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_phantom_focus",
+    "size_bytes": 4238
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/powershell-validation.json",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_powershell_validation",
+    "size_bytes": 260
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/render-validation.json",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_render_validation",
+    "size_bytes": 1143
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/shared-validation.json",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_shared_validation",
+    "size_bytes": 14714
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/skeleton2d-render.log",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_skeleton2d_render",
+    "size_bytes": 591
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/skeleton2d_native.png",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_skeleton2d_native",
+    "size_bytes": 210879
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/transition-render.log",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_transition_render",
+    "size_bytes": 671
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/transition_0.png",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_transition_0",
+    "size_bytes": 4186
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/transition_1.png",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_transition_1",
+    "size_bytes": 4194
+  },
+  {
+    "path": "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/transition_2.png",
+    "node_id": "narrative_15_art_workbench_shared_godot_setup_v001_evidence_transition_2",
+    "size_bytes": 4186
+  },
+  {
     "path": "narrative/FADYME_MEDIA_ALL/00_APPROVED_VISUAL_CANON_FADYME_MAHMUT_v001.json",
     "node_id": "narrative_fadyme_media_all_00_approved_visual_canon_fadyme_mahmut_v001",
     "size_bytes": 2858
@@ -29560,6 +30020,11 @@
     "size_bytes": 55445
   },
   {
+    "path": "narrative/GODOT_SHARED_INSTALL_REPORT_2026-10-09_TR.md",
+    "node_id": "narrative_godot_shared_install_report_2026_10_09_tr",
+    "size_bytes": 391
+  },
+  {
     "path": "parity/MANIFEST.json",
     "node_id": "parity_manifest",
     "size_bytes": 12116
@@ -29878,6 +30343,1256 @@
     "path": "references/gdquest_vfx/README.md",
     "node_id": "references_gdquest_vfx_readme",
     "size_bytes": 646
+  },
+  {
+    "path": "references/shared_godot/README.md",
+    "node_id": "references_shared_godot_readme",
+    "size_bytes": 1333
+  },
+  {
+    "path": "references/shared_godot/SOURCES.json",
+    "node_id": "references_shared_godot_sources",
+    "size_bytes": 50858
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/LICENSE",
+    "node_id": "references_shared_godot_phantom_camera_license",
+    "size_bytes": 1068
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/UPSTREAM_README.md",
+    "node_id": "references_shared_godot_phantom_camera_upstream_readme",
+    "size_bytes": 18458
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/LICENSE",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_license",
+    "size_bytes": 1068
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/assets/PhantomCameraBtnPrimaryDefault.png",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_assets_phantomcamerabtnprimarydefault",
+    "size_bytes": 10296
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/assets/PhantomCameraBtnPrimaryDefault.png.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_assets_phantomcamerabtnprimarydefault_png",
+    "size_bytes": 1023
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/assets/PhantomCameraBtnPrimaryHover.png",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_assets_phantomcamerabtnprimaryhover",
+    "size_bytes": 9931
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/assets/PhantomCameraBtnPrimaryHover.png.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_assets_phantomcamerabtnprimaryhover_png",
+    "size_bytes": 1016
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/credits.txt",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_credits",
+    "size_bytes": 181
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_2d_2d_example_scene",
+    "size_bytes": 17350
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_follow_framed_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_2d_2d_follow_framed_example_scene",
+    "size_bytes": 17596
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_follow_group_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_2d_2d_follow_group_example_scene",
+    "size_bytes": 17975
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_follow_path_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_2d_2d_follow_path_example_scene",
+    "size_bytes": 20399
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_limit_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_2d_2d_limit_example_scene",
+    "size_bytes": 22684
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_noise_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_2d_2d_noise_example_scene",
+    "size_bytes": 18361
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/2D/2d_tweening_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_2d_2d_tweening_example_scene",
+    "size_bytes": 22029
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/2D/sub_scenes/playable_character_2d.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_2d_sub_scenes_playable_character_2d",
+    "size_bytes": 4053
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_example_scene",
+    "size_bytes": 15558
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_framed_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_follow_framed_example_scene",
+    "size_bytes": 6528
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_glued_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_follow_glued_example_scene",
+    "size_bytes": 7809
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_group_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_follow_group_example_scene",
+    "size_bytes": 7187
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_path_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_follow_path_example_scene",
+    "size_bytes": 9706
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_simple_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_follow_simple_example_scene",
+    "size_bytes": 6161
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_third_person_attribtues_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_follow_third_person_attribtues_example_scene",
+    "size_bytes": 8211
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_follow_third_person_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_follow_third_person_example_scene",
+    "size_bytes": 6909
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_look_at_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_look_at_example_scene",
+    "size_bytes": 7630
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_noise_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_noise_example_scene",
+    "size_bytes": 7428
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/3d_tweening_example_scene.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_3d_tweening_example_scene",
+    "size_bytes": 9719
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/sub_scenes/playable_character_3d.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_sub_scenes_playable_character_3d",
+    "size_bytes": 1155
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/example_scenes/3D/sub_scenes/playable_character_third_person_3d.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_example_scenes_3d_sub_scenes_playable_character_third_person_3d",
+    "size_bytes": 1814
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/models/3d_cube_dark.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_models_3d_cube_dark",
+    "size_bytes": 578
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/resources/tween/fixed_camera_tween.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_resources_tween_fixed_camera_tween",
+    "size_bytes": 334
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/resources/tween/inventory_phantom_camera_2d_tween.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_resources_tween_inventory_phantom_camera_2d_tween",
+    "size_bytes": 334
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/resources/tween/item_focus_phantom_camera_2d_tween.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_resources_tween_item_focus_phantom_camera_2d_tween",
+    "size_bytes": 334
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/resources/tween/player_phantom_camera_2d_tween.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_resources_tween_player_phantom_camera_2d_tween",
+    "size_bytes": 332
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/resources/tween/player_phantom_camera_3d_tween.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_resources_tween_player_phantom_camera_3d_tween",
+    "size_bytes": 334
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/2D/2d_room_limit_tween.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_2d_2d_room_limit_tween",
+    "size_bytes": 1397
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/2D/2d_room_limit_tween.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_2d_2d_room_limit_tween_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/2D/2d_trigger_area.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_2d_2d_trigger_area",
+    "size_bytes": 396
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/2D/2d_trigger_area.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_2d_2d_trigger_area_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/2D/player_character_body_2d.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_2d_player_character_body_2d",
+    "size_bytes": 5131
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/2D/player_character_body_2d.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_2d_player_character_body_2d_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/3d_trigger_area.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_3d_trigger_area",
+    "size_bytes": 525
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/3d_trigger_area.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_3d_trigger_area_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/npc.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_npc",
+    "size_bytes": 2508
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/npc.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_npc_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/path_follow.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_path_follow",
+    "size_bytes": 452
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/path_follow.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_path_follow_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_player_controller",
+    "size_bytes": 2461
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_player_controller_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller_first_person.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_player_controller_first_person",
+    "size_bytes": 1785
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller_first_person.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_player_controller_first_person_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller_third_person.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_player_controller_third_person",
+    "size_bytes": 2888
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/scripts/3D/player_controller_third_person.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_scripts_3d_player_controller_third_person_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/2D/inventory_container.png",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_2d_inventory_container",
+    "size_bytes": 68739
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/2D/inventory_container.png.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_2d_inventory_container_png",
+    "size_bytes": 1004
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/2D/level_spritesheet.png",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_2d_level_spritesheet",
+    "size_bytes": 10314
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/2D/level_spritesheet.png.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_2d_level_spritesheet_png",
+    "size_bytes": 998
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/2D/phantom_camera_2d_sprite.png",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_2d_phantom_camera_2d_sprite",
+    "size_bytes": 1584
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/2D/phantom_camera_2d_sprite.png.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_2d_phantom_camera_2d_sprite_png",
+    "size_bytes": 1019
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/2D/player_sprite.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_2d_player_sprite",
+    "size_bytes": 1919
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/2D/player_sprite.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_2d_player_sprite_svg",
+    "size_bytes": 1083
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/2D/sign_prompt.png",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_2d_sign_prompt",
+    "size_bytes": 175934
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/2D/sign_prompt.png.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_2d_sign_prompt_png",
+    "size_bytes": 980
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/3D/checker_pattern_dark.png",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_3d_checker_pattern_dark",
+    "size_bytes": 2861
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/3D/checker_pattern_dark.png.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_3d_checker_pattern_dark_png",
+    "size_bytes": 1055
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/3D/target.png",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_3d_target",
+    "size_bytes": 96068
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/textures/3D/target.png.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_textures_3d_target_png",
+    "size_bytes": 1013
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/ui/ui_inventory.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_ui_ui_inventory",
+    "size_bytes": 1130
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/examples/ui/ui_sign.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_examples_ui_ui_sign",
+    "size_bytes": 2220
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/fonts/Nunito-Black.ttf",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_fonts_nunito_black",
+    "size_bytes": 131568
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/fonts/Nunito-Black.ttf.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_fonts_nunito_black_ttf",
+    "size_bytes": 789
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/fonts/Nunito-Regular.ttf",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_fonts_nunito_regular",
+    "size_bytes": 131736
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/fonts/Nunito-Regular.ttf.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_fonts_nunito_regular_ttf",
+    "size_bytes": 795
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/misc/PriorityOverride.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_misc_priorityoverride",
+    "size_bytes": 1193
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/misc/PriorityOverride.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_misc_priorityoverride_svg",
+    "size_bytes": 1082
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_2d.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_2d",
+    "size_bytes": 1340
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_2d.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_2d_svg",
+    "size_bytes": 1080
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_3d.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_3d",
+    "size_bytes": 1340
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_3d.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_3d_svg",
+    "size_bytes": 1080
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_camera_3d_resource.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_camera_3d_resource",
+    "size_bytes": 1091
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_camera_3d_resource.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_camera_3d_resource_svg",
+    "size_bytes": 1128
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_gizmo.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_gizmo",
+    "size_bytes": 2821
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_gizmo.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_gizmo_svg",
+    "size_bytes": 1136
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_glow_logo.png",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_glow_logo",
+    "size_bytes": 25499
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_glow_logo.png.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_glow_logo_png",
+    "size_bytes": 1004
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_host.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_host",
+    "size_bytes": 1976
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_host.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_host_svg",
+    "size_bytes": 1112
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_logo.png",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_logo",
+    "size_bytes": 70905
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_logo.png.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_logo_png",
+    "size_bytes": 989
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_2d.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_noise_emitter_2d",
+    "size_bytes": 2569
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_2d.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_noise_emitter_2d_svg",
+    "size_bytes": 1122
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_3d.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_noise_emitter_3d",
+    "size_bytes": 2569
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_3d.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_noise_emitter_3d_svg",
+    "size_bytes": 1170
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_gizmo.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_noise_emitter_gizmo",
+    "size_bytes": 2517
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_emitter_gizmo.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_noise_emitter_gizmo_svg",
+    "size_bytes": 1179
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_resource.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_noise_resource",
+    "size_bytes": 3135
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_noise_resource.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_noise_resource_svg",
+    "size_bytes": 1115
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_tween.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_tween",
+    "size_bytes": 1095
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_tween.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_tween_svg",
+    "size_bytes": 1116
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_tween_director.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_tween_director",
+    "size_bytes": 2104
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_tween_director.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_tween_director_svg",
+    "size_bytes": 1116
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_tween_director_resource.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_tween_director_resource",
+    "size_bytes": 4082
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_tween_director_resource.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_tween_director_resource_svg",
+    "size_bytes": 1143
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_updater_panel_icon.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_updater_panel_icon",
+    "size_bytes": 231
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/phantom_camera_updater_panel_icon.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_phantom_camera_updater_panel_icon_svg",
+    "size_bytes": 1128
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/viewfinder/Camera2DIcon.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_viewfinder_camera2dicon",
+    "size_bytes": 681
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/viewfinder/Camera2DIcon.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_viewfinder_camera2dicon_svg",
+    "size_bytes": 1076
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/viewfinder/Camera3DIcon.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_viewfinder_camera3dicon",
+    "size_bytes": 681
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/viewfinder/Camera3DIcon.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_viewfinder_camera3dicon_svg",
+    "size_bytes": 1076
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/viewfinder/SceneTypesIcon.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_viewfinder_scenetypesicon",
+    "size_bytes": 1245
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/viewfinder/SceneTypesIcon.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_viewfinder_scenetypesicon_svg",
+    "size_bytes": 1082
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/viewfinder/Select.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_viewfinder_select",
+    "size_bytes": 647
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/viewfinder/Select.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_viewfinder_select_svg",
+    "size_bytes": 1057
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/warning.svg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_warning",
+    "size_bytes": 1077
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/icons/warning.svg.import",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_icons_warning_svg",
+    "size_bytes": 1050
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/inspector/phantom_camera_inspector_plugin.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_inspector_phantom_camera_inspector_plugin",
+    "size_bytes": 1640
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/inspector/phantom_camera_inspector_plugin.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_inspector_phantom_camera_inspector_plugin_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/panel/editor.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_panel_editor_gd",
+    "size_bytes": 22
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/panel/editor.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_panel_editor",
+    "size_bytes": 935
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/panel/updater/download_update_panel.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_panel_updater_download_update_panel",
+    "size_bytes": 9084
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/panel/updater/update_button.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_panel_updater_update_button",
+    "size_bytes": 3714
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/panel/viewfinder/deadzone_style_box.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_panel_viewfinder_deadzone_style_box",
+    "size_bytes": 395
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/panel/viewfinder/host_list/host_list.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_panel_viewfinder_host_list_host_list",
+    "size_bytes": 3087
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/panel/viewfinder/host_list/host_list_item.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_panel_viewfinder_host_list_host_list_item",
+    "size_bytes": 3059
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/panel/viewfinder/host_list/host_list_item_group.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_panel_viewfinder_host_list_host_list_item_group",
+    "size_bytes": 80
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/panel/viewfinder/viewfinder_panel.tscn",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_panel_viewfinder_viewfinder_panel",
+    "size_bytes": 18950
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/plugin.cfg",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_plugin_cfg",
+    "size_bytes": 219
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/plugin.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_plugin_gd",
+    "size_bytes": 9738
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/plugin.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_plugin_gd_8e052c07",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_3d_gizmo.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_gizmos_phantom_camera_3d_gizmo",
+    "size_bytes": 2678
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_3d_gizmo.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_gizmos_phantom_camera_3d_gizmo_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_3d_gizmo_plugin.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_gizmos_phantom_camera_3d_gizmo_plugin",
+    "size_bytes": 1174
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_3d_gizmo_plugin.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_gizmos_phantom_camera_3d_gizmo_plugin_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_noise_emitter_gizmo_plugin_3d.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_gizmos_phantom_camera_noise_emitter_gizmo_plugin_3d",
+    "size_bytes": 888
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/gizmos/phantom_camera_noise_emitter_gizmo_plugin_3d.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_gizmos_phantom_camera_noise_emitter_gizmo_plugin_3d_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/managers/PhantomCameraManager.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_managers_phantomcameramanager",
+    "size_bytes": 1465
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/managers/PhantomCameraManager.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_managers_phantomcameramanager_cs",
+    "size_bytes": 22
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/managers/phantom_camera_manager.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_managers_phantom_camera_manager",
+    "size_bytes": 5970
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/managers/phantom_camera_manager.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_managers_phantom_camera_manager_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/editor.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_editor",
+    "size_bytes": 322
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/editor.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_editor_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/updater/download_update_panel.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_updater_download_update_panel",
+    "size_bytes": 5152
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/updater/download_update_panel.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_updater_download_update_panel_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/updater/update_button.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_updater_update_button",
+    "size_bytes": 5611
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/updater/update_button.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_updater_update_button_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/updater/updater_constants.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_updater_updater_constants",
+    "size_bytes": 292
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/updater/updater_constants.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_updater_updater_constants_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/host_list.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_viewfinder_host_list",
+    "size_bytes": 3342
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/host_list.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_viewfinder_host_list_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/host_list_item.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_viewfinder_host_list_item",
+    "size_bytes": 1655
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/host_list_item.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_viewfinder_host_list_item_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/viewfinder.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_viewfinder_viewfinder",
+    "size_bytes": 21831
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/panel/viewfinder/viewfinder.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_panel_viewfinder_viewfinder_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcamera",
+    "size_bytes": 9800
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcamera_cs",
+    "size_bytes": 22
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera2D.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcamera2d",
+    "size_bytes": 13455
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera2D.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcamera2d_cs",
+    "size_bytes": 23
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera3D.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcamera3d",
+    "size_bytes": 19041
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCamera3D.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcamera3d_cs",
+    "size_bytes": 23
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCameraNoiseEmitter2D.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcameranoiseemitter2d",
+    "size_bytes": 2963
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCameraNoiseEmitter2D.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcameranoiseemitter2d_cs",
+    "size_bytes": 23
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCameraNoiseEmitter3D.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcameranoiseemitter3d",
+    "size_bytes": 2963
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCameraNoiseEmitter3D.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcameranoiseemitter3d_cs",
+    "size_bytes": 23
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/PhantomCameraTweenDirector.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantomcameratweendirector",
+    "size_bytes": 589
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_2d",
+    "size_bytes": 65222
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_2d_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_3d",
+    "size_bytes": 111838
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_3d_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_constants.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_constants",
+    "size_bytes": 1238
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_constants.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_constants_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_noise_emitter_2d",
+    "size_bytes": 7368
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_noise_emitter_2d_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_3d.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_noise_emitter_3d",
+    "size_bytes": 7519
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_3d.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_noise_emitter_3d_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_tween_director.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_tween_director",
+    "size_bytes": 1702
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera/phantom_camera_tween_director.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_phantom_camera_tween_director_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera_host/PhantomCameraHost.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_host_phantomcamerahost",
+    "size_bytes": 3440
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera_host/PhantomCameraHost.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_host_phantomcamerahost_cs",
+    "size_bytes": 23
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_host_phantom_camera_host",
+    "size_bytes": 53501
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_phantom_camera_host_phantom_camera_host_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/Camera3DResource.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_camera3dresource",
+    "size_bytes": 3129
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/Camera3DResource.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_camera3dresource_cs",
+    "size_bytes": 22
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraNoise2D.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_phantomcameranoise2d",
+    "size_bytes": 3890
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraNoise2D.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_phantomcameranoise2d_cs",
+    "size_bytes": 23
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraNoise3D.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_phantomcameranoise3d",
+    "size_bytes": 5132
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraNoise3D.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_phantomcameranoise3d_cs",
+    "size_bytes": 23
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraTween.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_phantomcameratween",
+    "size_bytes": 1715
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/PhantomCameraTween.cs.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_phantomcameratween_cs",
+    "size_bytes": 22
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/TweenDirectorResource.cs",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_tweendirectorresource",
+    "size_bytes": 3303
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/camera_3d_resource.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_camera_3d_resource",
+    "size_bytes": 3556
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/camera_3d_resource.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_camera_3d_resource_gd",
+    "size_bytes": 25
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_phantom_camera_noise_2d",
+    "size_bytes": 6727
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_phantom_camera_noise_2d_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/phantom_camera_noise_3d.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_phantom_camera_noise_3d",
+    "size_bytes": 9457
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/phantom_camera_noise_3d.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_phantom_camera_noise_3d_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/tween_director_resource.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_tween_director_resource",
+    "size_bytes": 5800
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/tween_director_resource.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_tween_director_resource_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/tween_resource.gd",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_tween_resource",
+    "size_bytes": 2122
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/scripts/resources/tween_resource.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_scripts_resources_tween_resource_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/themes/button_focus.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_themes_button_focus",
+    "size_bytes": 496
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/themes/button_hover.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_themes_button_hover",
+    "size_bytes": 405
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/themes/button_normal.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_themes_button_normal",
+    "size_bytes": 497
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/addons/phantom_camera/themes/theme.tres",
+    "node_id": "references_shared_godot_phantom_camera_addons_phantom_camera_themes_theme",
+    "size_bytes": 4073
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/project.godot",
+    "node_id": "references_shared_godot_phantom_camera_project",
+    "size_bytes": 477
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/verify.gd",
+    "node_id": "references_shared_godot_phantom_camera_verify",
+    "size_bytes": 2217
+  },
+  {
+    "path": "references/shared_godot/phantom_camera/verify.gd.uid",
+    "node_id": "references_shared_godot_phantom_camera_verify_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/LICENSE.md",
+    "node_id": "references_shared_godot_skeleton2d_license",
+    "size_bytes": 1134
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/README.md",
+    "node_id": "references_shared_godot_skeleton2d_readme",
+    "size_bytes": 616
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/icon.webp",
+    "node_id": "references_shared_godot_skeleton2d_icon",
+    "size_bytes": 15362
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/icon.webp.import",
+    "node_id": "references_shared_godot_skeleton2d_icon_webp",
+    "size_bytes": 919
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level.tscn",
+    "node_id": "references_shared_godot_skeleton2d_level",
+    "size_bytes": 10339
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/cloud_1.png",
+    "node_id": "references_shared_godot_skeleton2d_level_background_cloud_1",
+    "size_bytes": 219
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/cloud_1.png.import",
+    "node_id": "references_shared_godot_skeleton2d_level_background_cloud_1_png",
+    "size_bytes": 942
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/cloud_2.png",
+    "node_id": "references_shared_godot_skeleton2d_level_background_cloud_2",
+    "size_bytes": 298
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/cloud_2.png.import",
+    "node_id": "references_shared_godot_skeleton2d_level_background_cloud_2_png",
+    "size_bytes": 942
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/cloud_3.png",
+    "node_id": "references_shared_godot_skeleton2d_level_background_cloud_3",
+    "size_bytes": 185
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/cloud_3.png.import",
+    "node_id": "references_shared_godot_skeleton2d_level_background_cloud_3_png",
+    "size_bytes": 942
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/distant_platforms_1.png",
+    "node_id": "references_shared_godot_skeleton2d_level_background_distant_platforms_1",
+    "size_bytes": 3892
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/distant_platforms_1.png.import",
+    "node_id": "references_shared_godot_skeleton2d_level_background_distant_platforms_1_png",
+    "size_bytes": 978
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/distant_platforms_2.png",
+    "node_id": "references_shared_godot_skeleton2d_level_background_distant_platforms_2",
+    "size_bytes": 4324
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/distant_platforms_2.png.import",
+    "node_id": "references_shared_godot_skeleton2d_level_background_distant_platforms_2_png",
+    "size_bytes": 978
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/sky.png",
+    "node_id": "references_shared_godot_skeleton2d_level_background_sky",
+    "size_bytes": 833
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/background/sky.png.import",
+    "node_id": "references_shared_godot_skeleton2d_level_background_sky_png",
+    "size_bytes": 930
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/level.gd",
+    "node_id": "references_shared_godot_skeleton2d_level_level",
+    "size_bytes": 354
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/level.gd.uid",
+    "node_id": "references_shared_godot_skeleton2d_level_level_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/parallax_background.tscn",
+    "node_id": "references_shared_godot_skeleton2d_level_parallax_background",
+    "size_bytes": 6377
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/tileset/tiles_demo.png",
+    "node_id": "references_shared_godot_skeleton2d_level_tileset_tiles_demo",
+    "size_bytes": 2583
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/tileset/tiles_demo.png.import",
+    "node_id": "references_shared_godot_skeleton2d_level_tileset_tiles_demo_png",
+    "size_bytes": 948
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/level/tileset/tileset.tres",
+    "node_id": "references_shared_godot_skeleton2d_level_tileset_tileset",
+    "size_bytes": 10504
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/player/gBot.png",
+    "node_id": "references_shared_godot_skeleton2d_player_gbot",
+    "size_bytes": 463481
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/player/gBot.png.import",
+    "node_id": "references_shared_godot_skeleton2d_player_gbot_png",
+    "size_bytes": 923
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/player/player.gd",
+    "node_id": "references_shared_godot_skeleton2d_player_player_gd",
+    "size_bytes": 2890
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/player/player.gd.uid",
+    "node_id": "references_shared_godot_skeleton2d_player_player_gd_caa7be4a",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/player/player.tscn",
+    "node_id": "references_shared_godot_skeleton2d_player_player_tscn",
+    "size_bytes": 81337
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/project.godot",
+    "node_id": "references_shared_godot_skeleton2d_project",
+    "size_bytes": 5356
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/screenshots/.gdignore",
+    "node_id": "references_shared_godot_skeleton2d_screenshots_gdignore",
+    "size_bytes": 0
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/screenshots/screenshot.png",
+    "node_id": "references_shared_godot_skeleton2d_screenshots_screenshot",
+    "size_bytes": 55650
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/verify.gd",
+    "node_id": "references_shared_godot_skeleton2d_verify",
+    "size_bytes": 2205
+  },
+  {
+    "path": "references/shared_godot/skeleton2d/verify.gd.uid",
+    "node_id": "references_shared_godot_skeleton2d_verify_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/transition/LICENSE",
+    "node_id": "references_shared_godot_transition_license",
+    "size_bytes": 7047
+  },
+  {
+    "path": "references/shared_godot/transition/UPSTREAM_README.md",
+    "node_id": "references_shared_godot_transition_upstream_readme",
+    "size_bytes": 23407
+  },
+  {
+    "path": "references/shared_godot/transition/mask.png",
+    "node_id": "references_shared_godot_transition_mask",
+    "size_bytes": 4801
+  },
+  {
+    "path": "references/shared_godot/transition/mask.png.import",
+    "node_id": "references_shared_godot_transition_mask_png",
+    "size_bytes": 915
+  },
+  {
+    "path": "references/shared_godot/transition/project.godot",
+    "node_id": "references_shared_godot_transition_project",
+    "size_bytes": 367
+  },
+  {
+    "path": "references/shared_godot/transition/transition.gdshader",
+    "node_id": "references_shared_godot_transition_transition",
+    "size_bytes": 5994
+  },
+  {
+    "path": "references/shared_godot/transition/transition.gdshader.uid",
+    "node_id": "references_shared_godot_transition_transition_gdshader",
+    "size_bytes": 20
+  },
+  {
+    "path": "references/shared_godot/transition/verify.gd",
+    "node_id": "references_shared_godot_transition_verify",
+    "size_bytes": 2119
+  },
+  {
+    "path": "references/shared_godot/transition/verify.gd.uid",
+    "node_id": "references_shared_godot_transition_verify_gd",
+    "size_bytes": 20
   },
   {
     "path": "release/current/.gitignore",

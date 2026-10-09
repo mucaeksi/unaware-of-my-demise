@@ -141,3 +141,5 @@ func _apply(final_focus: Vector2) -> void:
   cinematic camera blends, and the Cinemachine 3 / Godot Camera2D / PhantomCamera mapping, read
   `references/follow-and-framing.md`.
 
+
+For the reviewed shared-source additions, read [phantom-camera guidance](references/shared-phantom-camera.md).

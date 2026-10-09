@@ -15,6 +15,8 @@
   "adapted_existing_skills": 28,
   "new_skills": 4,
   "active_skills": [
+    "uomd-accessibility-review",
+    "uomd-android-lifecycle",
     "uomd-architecture-review",
     "uomd-art-bible",
     "uomd-asset-audit",
@@ -29,10 +31,13 @@
     "uomd-game-ui-ux",
     "uomd-godot-2d-movement",
     "uomd-godot-animation",
+    "uomd-godot-audio",
     "uomd-godot-gdscript",
     "uomd-godot-gdscript-headless-testing",
+    "uomd-godot-live-review",
     "uomd-godot-nodes-scenes",
     "uomd-godot-resources",
+    "uomd-godot-shaders",
     "uomd-godot-signals-groups",
     "uomd-godot-tilemap",
     "uomd-godot-ui-control",
@@ -41,6 +46,7 @@
     "uomd-router",
     "uomd-screen-presentation",
     "uomd-setup-engine",
+    "uomd-shared-skill-validation",
     "uomd-team-polish",
     "uomd-team-ui",
     "uomd-test-setup",
@@ -501,5 +507,16 @@
     "docs/design/ENTRY_PROLOGUE_CINEMATIC_V002_2026-10-07.md",
     "docs/design/FADYME_PILOT_AND_SIDE_BATTLE_v001_2026-10-08.md",
     "docs/art/GDQUEST_VFX_REVIEW_2026-10-08.md"
-  ]
+  ],
+  "shared_extension_20261009": {
+    "new_skills": [
+      "uomd-accessibility-review",
+      "uomd-android-lifecycle",
+      "uomd-godot-audio",
+      "uomd-godot-live-review",
+      "uomd-godot-shaders",
+      "uomd-shared-skill-validation"
+    ],
+    "manifest": ".agents/library/shared-skills-install.json"
+  }
 }
