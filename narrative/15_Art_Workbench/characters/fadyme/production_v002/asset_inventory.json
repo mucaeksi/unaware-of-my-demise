@@ -13,8 +13,8 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "99cca31adf7df01e9115c5a2e32edeb3326e919c5ddea66e9914580baa1e12f9",
-      "bytes": 4351,
+      "sha256": "427f95e7844f15b990ead2b648641611c564ea8516e782722d73ac618f2f5d4b",
+      "bytes": 4469,
       "inclusion": "WORKBENCH_NOT_EXPORTED"
     },
     {
@@ -153,8 +153,8 @@
     },
     {
       "path": "audio/README.md",
-      "sha256": "1e0a67f905b91ff2d03038b949fa353315fa2fa7f48cbdc3d8104df97339a68c",
-      "bytes": 2361,
+      "sha256": "df6d6f759a7acfb2f141ddb40db7713c19fc20371f3071e353db1d4f078cecd5",
+      "bytes": 2293,
       "inclusion": "WORKBENCH_NOT_EXPORTED"
     },
     {
@@ -2477,5 +2477,15 @@
       "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
       "license": "Repository proprietary owner artwork; actual tool/provider terms apply; no CC0 grant invented"
     }
-  ]
+  ],
+  "api_audio_calls_scope": "FINAL_FADYME_PACKAGE_ONLY_EXCLUDES_SHARED_AUDITIONS",
+  "shared_voice_audition": {
+    "manifest": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+    "manifest_sha256": "dc1f838453cb51ff0578c8a0c00648ebca7224e12cf3315cc08922fcee80087f",
+    "status": "ALL_LIVE_JAPANESE_CHIRP_WAVS_GENERATED_LISTENING_PENDING",
+    "samples": 30,
+    "synthesis_calls": 30,
+    "fadyme_voice_selected": false,
+    "final_fadyme_recordings_generated": 0
+  }
 }

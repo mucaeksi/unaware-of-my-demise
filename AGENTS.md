@@ -38,30 +38,28 @@ shared `narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/` plan.
 Check live Japanese voice availability; never substitute Gemini TTS or an old
 take. Cloud network/credential settings must actually work before calling.
 
-Verified GitHub Actions route: `GEMINI_API` exists and was used, but Cloud TTS
-returned 401 with both API-key interfaces. The existing
-`GOOGLE_PLAY_SERVICE_ACCOUNT` provides valid Google OAuth. Its consumer project
-`604013824221` currently has Cloud TTS disabled; an enable request returned 403.
-Do not ask for another copy of an API key. The authoring workflow and safe
-provider/service reports are in `.github/workflows/chirp3-hd-voice-samples.yml`
-and `docs/coder/cloud_delivery/`. Only the shared sample batch is authorized.
-Synchronous SSML break/prosody support was verified in the current official
-Chirp 3 HD documentation; the plan requests identical pauses/rates for every
-voice. Final Fadyme recordings remain separate. Both pending AAB LFS objects
-were remotely verified and downloaded/hash-checked; preserve normal LFS hooks.
+Verified audio route, 2026-10-09: the existing `GOOGLE_PLAY_SERVICE_ACCOUNT`
+provides OAuth from project `unaware-of-my-demise`. Use the owner-confirmed quota
+project `gen-lang-client-0955955681`; its service access now works. The owner
+resolved the Service Usage Consumer permission for public principal
+`uomd-play-billing@unaware-of-my-demise.iam.gserviceaccount.com`.
+Actions run 37915312151 successfully generated **30 Japanese Chirp 3 HD
+samples: 14 female and 16 male** with the shared SSML template. Real LINEAR16
+WAVs and the live catalog are in the shared sample package on main. Current
+status is GENERATED / OWNER_LISTENING_AND_VOICE_SELECTION_PENDING, not blocked.
+The earlier 401/SERVICE_DISABLED/USER_PROJECT_DENIED entries are historical
+access diagnostics retained in the manifest; do not treat them as current errors.
+Only the shared sample batch is authorized; the separate final 241-line Fadyme
+recording batch and character voice selection remain pending. Do not repeat
+successful synthesis: reuse same-template/hash-verified WAVs.
 
-Owner follow-up: a cloud API key was added and provider API activation was
-reported. Use Google credentials only for sound and music; produce images with
-the image-generation tool. A fresh Actions probe still reports SERVICE_DISABLED
-for project 604013824221. The owner then identified the enabled project as
-`gen-lang-client-0955955681`. OAuth requests now explicitly use that quota
-project; the existing public principal
-`uomd-play-billing@unaware-of-my-demise.iam.gserviceaccount.com` receives
-USER_PROJECT_DENIED. The administrator needs to grant only Service Usage
-Consumer on that audio project; see
-`docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md`. The key-only route
-still returns CREDENTIALS_MISSING. Do not repeat unchanged access probes or
-assume an unbound runtime key works. No synthesis has been attempted.
+Use Google credentials only for sound and music; produce images with the
+image-generation tool. Do not ask for a second key copy. This direct cloud
+executor still has no ready Google binding; the successful Actions OAuth route
+uses existing GitHub secrets in memory. Neither private credential JSON, API key
+values nor OAuth tokens may be written to outputs. Both original pending AAB
+LFS objects were remotely verified and downloaded/hash-checked; preserve normal
+Git/LFS hooks. Claude owns game integration and future AABs.
 
 ## Graphify
 

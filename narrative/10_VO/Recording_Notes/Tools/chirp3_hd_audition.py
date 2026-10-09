@@ -223,6 +223,8 @@ def sync_shared_catalog(out, manifest):
                      'verification_note': 'Verified using the official Google Cloud voices.list API, languageCode=ja-JP. Sample WAVs are original API output; listening review is pending.',
                      'counts': counts, 'live_api_response': package + '/voices_live_snapshot.json',
                      'live_verified_at': manifest['live_catalog_verified_at_utc'],
+                     'last_access_check_utc': manifest['updated_at_utc'],
+                     'requested_oauth_quota_project': manifest.get('requested_oauth_quota_project'),
                      'api_calls': manifest['voices_list_calls_attempted'] + manifest['synthesis_calls_attempted'],
                      'auditions_generated': manifest['generated_samples'],
                      'audition_status': 'ALL_LIVE_JAPANESE_SAMPLES_GENERATED_LISTENING_PENDING',
@@ -233,6 +235,11 @@ def sync_shared_catalog(out, manifest):
                                  'audition_status': 'GENERATED_LISTENING_PENDING',
                                  'sample_file': package + '/' + v['file'],
                                  'sample_sha256': v['sha256'], 'selected_for_characters': []} for v in voices]})
+    run_id = os.environ.get('GITHUB_RUN_ID', '')
+    if re.fullmatch(r'[0-9]+', run_id):
+        previous['last_access_check_workflow'] = ('https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/' + run_id)
+    else:
+        previous.pop('last_access_check_workflow', None)
     save_json(path, previous)
     lines = ['# Google Chirp 3 HD · ortak Japonca ses kataloğu', '',
              f'Canlı Google Cloud API ile doğrulandı: **{counts["total"]} ses; {counts["female"]} kadın, {counts["male"]} erkek**.', '',

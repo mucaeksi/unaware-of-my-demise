@@ -6048,9 +6048,9 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1791537624.0922976,
-    "seen": 1791537642.4792352,
-    "ast_hash": "83df88a9e7191dd7cdb9aea4fd1dd9a7",
+    "mtime": 1791540632.9412434,
+    "seen": 1791540692.9775772,
+    "ast_hash": "2f882286c3215537337006cb6a2b3e79",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -19117,13 +19117,13 @@
   },
   ".local/migration-20261008/copied-files.json": {
     "mtime": 1791493089.9941473,
-    "seen": 1791521287.241929,
+    "seen": 1791540896.985472,
     "ast_hash": "79d698c5d3cfbcceaf1ac90bde79f20f",
     "semantic_hash": ""
   },
   ".local/project-index.json": {
     "mtime": 1791493090.010147,
-    "seen": 1791521287.2420266,
+    "seen": 1791540896.9855332,
     "ast_hash": "e1965f8c69d05dfca5adebc88fe67fd2",
     "semantic_hash": ""
   },
@@ -19608,9 +19608,9 @@
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/asset_inventory.json": {
-    "mtime": 1791537626.707988,
-    "seen": 1791537642.477036,
-    "ast_hash": "35de6ac98ab3f937a87838a793cfe0bb",
+    "mtime": 1791540676.469621,
+    "seen": 1791540692.9751768,
+    "ast_hash": "6aabda05d19914c11e1d36fac3e74b22",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/STATUS.json": {
@@ -19650,104 +19650,104 @@
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_1.json": {
-    "mtime": 1791537624.2654297,
-    "seen": 1791537642.4770505,
+    "mtime": 1791540673.8808315,
+    "seen": 1791540692.9751916,
     "ast_hash": "9c990ee7d5c4edd0471fff09c4fa851e",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_10.json": {
-    "mtime": 1791537624.3073683,
-    "seen": 1791537642.4770527,
+    "mtime": 1791540673.936853,
+    "seen": 1791540692.975193,
     "ast_hash": "69919795d1e4f5dad75a2b695553e4df",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_11.json": {
-    "mtime": 1791537624.3117874,
-    "seen": 1791537642.477055,
+    "mtime": 1791540673.9409642,
+    "seen": 1791540692.9751952,
     "ast_hash": "096bee8bf2bc992e0c59e1d02ff61904",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_12.json": {
-    "mtime": 1791537624.333589,
-    "seen": 1791537642.4770565,
+    "mtime": 1791540673.944264,
+    "seen": 1791540692.9751983,
     "ast_hash": "425e433acb3eb9fca166866fddf2a928",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_13.json": {
-    "mtime": 1791537624.339816,
-    "seen": 1791537642.4770584,
+    "mtime": 1791540673.9479637,
+    "seen": 1791540692.9752002,
     "ast_hash": "177812d752a63662ecdd75f7353aca66",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_14.json": {
-    "mtime": 1791537624.3464308,
-    "seen": 1791537642.4770598,
+    "mtime": 1791540673.9539135,
+    "seen": 1791540692.9752018,
     "ast_hash": "905b0491cc2e118447adf6887c83f76a",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_15.json": {
-    "mtime": 1791537624.3504355,
-    "seen": 1791537642.4770613,
+    "mtime": 1791540673.9575481,
+    "seen": 1791540692.9752033,
     "ast_hash": "771682ab31cb211308653b66e128c90b",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_16.json": {
-    "mtime": 1791537624.3567586,
-    "seen": 1791537642.477063,
+    "mtime": 1791540673.9635384,
+    "seen": 1791540692.9752052,
     "ast_hash": "a12c1c1c10fa5f64b876caf5f78dfea1",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_17.json": {
-    "mtime": 1791537624.3607972,
-    "seen": 1791537642.4770648,
+    "mtime": 1791540673.9672666,
+    "seen": 1791540692.9752073,
     "ast_hash": "217f3a883db994447d6f59f87f256676",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_2.json": {
-    "mtime": 1791537624.2705257,
-    "seen": 1791537642.4770668,
+    "mtime": 1791540673.8852687,
+    "seen": 1791540692.9752097,
     "ast_hash": "9bd24de6ea0771ddd43659bd485922f8",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_3.json": {
-    "mtime": 1791537624.2745185,
-    "seen": 1791537642.4770691,
+    "mtime": 1791540673.8893476,
+    "seen": 1791540692.975212,
     "ast_hash": "89800c45a30813690530bdd944c53a12",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_4.json": {
-    "mtime": 1791537624.2788923,
-    "seen": 1791537642.4770706,
+    "mtime": 1791540673.8934844,
+    "seen": 1791540692.9752142,
     "ast_hash": "b7a137a4833089fb5d075de20691ce79",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_5.json": {
-    "mtime": 1791537624.2849104,
-    "seen": 1791537642.4770725,
+    "mtime": 1791540673.8997195,
+    "seen": 1791540692.9752166,
     "ast_hash": "a11aa81a5fccff9e77884e7e0e7218a5",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_6.json": {
-    "mtime": 1791537624.2892382,
-    "seen": 1791537642.4770744,
+    "mtime": 1791540673.9035575,
+    "seen": 1791540692.9752188,
     "ast_hash": "473352e8b46160e54144c2cc968f1549",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_7.json": {
-    "mtime": 1791537624.2936065,
-    "seen": 1791537642.477076,
+    "mtime": 1791540673.9074383,
+    "seen": 1791540692.9752204,
     "ast_hash": "923494ee699535bea193a53c1af41414",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_8.json": {
-    "mtime": 1791537624.298151,
-    "seen": 1791537642.4770777,
+    "mtime": 1791540673.911275,
+    "seen": 1791540692.975222,
     "ast_hash": "1f1759e0f3a93889ba30a563631cbf03",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/provenance/generation_9.json": {
-    "mtime": 1791537624.3024585,
-    "seen": 1791537642.4770796,
+    "mtime": 1791540673.932774,
+    "seen": 1791540692.975224,
     "ast_hash": "4a6bdf1a251d5c85d1a5cf32d6e15272",
     "semantic_hash": ""
   },
@@ -19884,9 +19884,9 @@
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/README.md": {
-    "mtime": 1791525289.3782547,
-    "seen": 1791525617.2013845,
-    "ast_hash": "49a662b4f9fa46ac23e6af4f6b271d49",
+    "mtime": 1791540632.9423525,
+    "seen": 1791540692.9781928,
+    "ast_hash": "cb23e01280cbd199a3912c659ec0eee1",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/README.md": {
@@ -19896,9 +19896,9 @@
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/audio/README.md": {
-    "mtime": 1791537624.0935838,
-    "seen": 1791537642.4797192,
-    "ast_hash": "3f4f465d341335a41201290f166fd38b",
+    "mtime": 1791540632.9422607,
+    "seen": 1791540692.978197,
+    "ast_hash": "5888fac23a0d232d7c14b86d6fa0c046",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/README.md": {
@@ -21096,27 +21096,27 @@
     "semantic_hash": ""
   },
   "narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json": {
-    "mtime": 1791537624.0931787,
-    "seen": 1791537642.476845,
-    "ast_hash": "772462837f37cf82eee76ad8fdfcf9ae",
+    "mtime": 1791540632.9421186,
+    "seen": 1791540692.974945,
+    "ast_hash": "271095921e8b9e7bfce5cbaaca7c66f3",
     "semantic_hash": ""
   },
   "docs/art/CHIRP3_HD_VOICE_CATALOG.md": {
-    "mtime": 1791537624.0933926,
-    "seen": 1791537642.4792786,
-    "ast_hash": "f91d76c573c87f27f7c5e2a22f4238b8",
+    "mtime": 1791540453.8439496,
+    "seen": 1791540692.9776351,
+    "ast_hash": "eecf3d896dadcd2b57802a5fe1a59fce",
     "semantic_hash": ""
   },
   "narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py": {
-    "mtime": 1791537230.3647082,
-    "seen": 1791537642.4768546,
-    "ast_hash": "302c491f714e1fac370dc39edeb0b0db",
+    "mtime": 1791540632.7026792,
+    "seen": 1791540692.974953,
+    "ast_hash": "498650f7a7dfeee94cd2c92d2a48bff2",
     "semantic_hash": ""
   },
   "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audition_plan.json": {
-    "mtime": 1791531358.2965002,
-    "seen": 1791532682.309282,
-    "ast_hash": "aa9b2c34f63a4d2a32317daa677370f6",
+    "mtime": 1791540249.438197,
+    "seen": 1791540692.974965,
+    "ast_hash": "6c336992e3d825851b8f217f43293a07",
     "semantic_hash": ""
   },
   "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/authoring_validation.json": {
@@ -21126,27 +21126,27 @@
     "semantic_hash": ""
   },
   "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/gallery_validation.json": {
-    "mtime": 1791528185.5580595,
-    "seen": 1791528234.0739777,
-    "ast_hash": "456b257b01df072b4c302d72cddefab4",
+    "mtime": 1791540722.1898196,
+    "seen": 1791540880.558137,
+    "ast_hash": "7782e64a0384a4e55f975cbe02d020df",
     "semantic_hash": ""
   },
   "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json": {
-    "mtime": 1791537531.786181,
-    "seen": 1791537642.4768686,
-    "ast_hash": "b79efe1265ccaddbacbcc3d084e29864",
+    "mtime": 1791540453.9519484,
+    "seen": 1791540692.9749715,
+    "ast_hash": "b89b88525cc6014b79e034cc9831efe5",
     "semantic_hash": ""
   },
   "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md": {
-    "mtime": 1791537624.09265,
-    "seen": 1791537642.4795582,
-    "ast_hash": "4546c59afefa860b67f997c336e57bbe",
+    "mtime": 1791540632.9414642,
+    "seen": 1791540692.977993,
+    "ast_hash": "7d766f5391dccee6c36da0917409d620",
     "semantic_hash": ""
   },
   "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/index.html": {
-    "mtime": 1791528014.5497565,
-    "seen": 1791528234.076387,
-    "ast_hash": "1ea25caa3ace2e33c3f145bf7926a25e",
+    "mtime": 1791540453.911949,
+    "seen": 1791540692.9779944,
+    "ast_hash": "7886835f10aaa0b8acba02f26cffa170",
     "semantic_hash": ""
   },
   "docs/coder/cloud_delivery/ensure_google_tts_service.py": {
@@ -21156,9 +21156,9 @@
     "semantic_hash": ""
   },
   "docs/coder/cloud_delivery/google_tts_service_status.json": {
-    "mtime": 1791537531.7741811,
-    "seen": 1791537642.47665,
-    "ast_hash": "76744b23d526733a2f087fc801ef9bbf",
+    "mtime": 1791540453.8439496,
+    "seen": 1791540692.9747202,
+    "ast_hash": "9bc6e35e9ae400d53bc101cff25a4c2a",
     "semantic_hash": ""
   },
   "docs/coder/cloud_delivery/lfs_pending_objects.json": {
@@ -21180,15 +21180,15 @@
     "semantic_hash": ""
   },
   "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json": {
-    "mtime": 1791537531.786181,
-    "seen": 1791537642.476871,
-    "ast_hash": "3c080f0ca380a6e4d448a5fb51c833d0",
+    "mtime": 1791540453.9519484,
+    "seen": 1791540692.9749744,
+    "ast_hash": "ebb796ad445c280d7c18e3cd86ee23ea",
     "semantic_hash": ""
   },
   "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/workflow_run_status.json": {
-    "mtime": 1791537531.786181,
-    "seen": 1791537642.476873,
-    "ast_hash": "06afdc66044b3dc23250c3c0b178a6ca",
+    "mtime": 1791540453.9519484,
+    "seen": 1791540692.9749794,
+    "ast_hash": "69427df8229b1b119a89964e56e4a1ad",
     "semantic_hash": ""
   },
   ".github/workflows/chirp3-hd-voice-samples.yml": {
@@ -21198,9 +21198,201 @@
     "semantic_hash": ""
   },
   "docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md": {
-    "mtime": 1791537624.0919964,
-    "seen": 1791537642.479305,
-    "ast_hash": "f5476c8205e20036700f2ffe976af374",
+    "mtime": 1791540632.9414077,
+    "seen": 1791540692.9776638,
+    "ast_hash": "ab74a56e810b4f721cf4835e99e5d994",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audio_validation.json": {
+    "mtime": 1791540454.9620607,
+    "seen": 1791540692.9749625,
+    "ast_hash": "7db20dce93b637496fb0b17b9a2db7f2",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/voices_live_snapshot.json": {
+    "mtime": 1791540453.9519484,
+    "seen": 1791540692.9749765,
+    "ast_hash": "df73bacc598613ff598b044adf167c86",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Achernar.wav": {
+    "mtime": 1791540453.8439496,
+    "seen": 1791540692.9827743,
+    "ast_hash": "2139e707f7b3e0a66bd9d5136c63f8b5",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Aoede.wav": {
+    "mtime": 1791540453.8481057,
+    "seen": 1791540692.9827762,
+    "ast_hash": "ba42473fae4b0d9c4873cd53467307bb",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Autonoe.wav": {
+    "mtime": 1791540453.8519495,
+    "seen": 1791540692.9827776,
+    "ast_hash": "a570bbc3c38309ecb852c22bfeef94a0",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Callirrhoe.wav": {
+    "mtime": 1791540453.8679492,
+    "seen": 1791540692.9827785,
+    "ast_hash": "a5058f12859612e4b250819fab8de2c9",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Despina.wav": {
+    "mtime": 1791540453.879949,
+    "seen": 1791540692.98278,
+    "ast_hash": "10ce74514599aff0e38f43e15b23ec19",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Erinome.wav": {
+    "mtime": 1791540453.883949,
+    "seen": 1791540692.9827814,
+    "ast_hash": "8f3f479ea60cc7890d9a75b7abc908c9",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Gacrux.wav": {
+    "mtime": 1791540453.895949,
+    "seen": 1791540692.9827826,
+    "ast_hash": "d23e2c00ccd794cd32e7a0f37d722672",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Kore.wav": {
+    "mtime": 1791540453.8999488,
+    "seen": 1791540692.9827838,
+    "ast_hash": "e1a96aa147f43e982748ead44adaaee8",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Laomedeia.wav": {
+    "mtime": 1791540453.8999488,
+    "seen": 1791540692.9827852,
+    "ast_hash": "a966a37257edb8e47dd731b686c5b487",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Leda.wav": {
+    "mtime": 1791540453.9039488,
+    "seen": 1791540692.982787,
+    "ast_hash": "d2dabfad1d37b05a7b7623f701eb383f",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Pulcherrima.wav": {
+    "mtime": 1791540453.9039488,
+    "seen": 1791540692.982788,
+    "ast_hash": "b30e9b0ab793a21f2968edffaf2296a4",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Sulafat.wav": {
+    "mtime": 1791540453.9039488,
+    "seen": 1791540692.9827893,
+    "ast_hash": "e73bcc4240018aebf3b3cc2e04ae832c",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Vindemiatrix.wav": {
+    "mtime": 1791540453.911949,
+    "seen": 1791540692.9827905,
+    "ast_hash": "e239ed0363410bc0475aca07db501015",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/female/ja-JP-Chirp3-HD-Zephyr.wav": {
+    "mtime": 1791540453.911949,
+    "seen": 1791540692.9827914,
+    "ast_hash": "d66f0fa62b29af1e6975bca6c40e7ced",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Achird.wav": {
+    "mtime": 1791540453.9279487,
+    "seen": 1791540692.9827926,
+    "ast_hash": "fb03f9bd97ef2e425a1f29e626d9cfcc",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Algenib.wav": {
+    "mtime": 1791540453.9279487,
+    "seen": 1791540692.9827945,
+    "ast_hash": "baddfab53aab8cae3d7aacca2f73333a",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Algieba.wav": {
+    "mtime": 1791540453.9319487,
+    "seen": 1791540692.9827955,
+    "ast_hash": "902e49f914093b1e107a49203fc6c44e",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Alnilam.wav": {
+    "mtime": 1791540453.9319487,
+    "seen": 1791540692.9827964,
+    "ast_hash": "c8f2858ed5bb4e8ffaf834ead504bd21",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Charon.wav": {
+    "mtime": 1791540453.9359486,
+    "seen": 1791540692.9827979,
+    "ast_hash": "fe9bf4e7fd723974d13106df7ef40e17",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Enceladus.wav": {
+    "mtime": 1791540453.9359486,
+    "seen": 1791540692.982799,
+    "ast_hash": "842632f68806324734693ced2cc05484",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Fenrir.wav": {
+    "mtime": 1791540453.9399486,
+    "seen": 1791540692.9828002,
+    "ast_hash": "5ac1936b8d2a0460b71b174135754531",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Iapetus.wav": {
+    "mtime": 1791540453.9399486,
+    "seen": 1791540692.9828014,
+    "ast_hash": "5f11bec21e71f5b1f2401a9305ec31dd",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Orus.wav": {
+    "mtime": 1791540453.9399486,
+    "seen": 1791540692.9828026,
+    "ast_hash": "9db5de1e02932638164eddaa18bf4a6e",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Puck.wav": {
+    "mtime": 1791540453.9439485,
+    "seen": 1791540692.982804,
+    "ast_hash": "3edd8e59523afa5040c928755baa9cc8",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Rasalgethi.wav": {
+    "mtime": 1791540453.9439485,
+    "seen": 1791540692.982805,
+    "ast_hash": "5c4f563d766fbed41f94f4d5cd1a754f",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Sadachbia.wav": {
+    "mtime": 1791540453.9479485,
+    "seen": 1791540692.9828062,
+    "ast_hash": "035bd14795e62bdb1d2d4a396e9bc6b0",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Sadaltager.wav": {
+    "mtime": 1791540453.9479485,
+    "seen": 1791540692.9828074,
+    "ast_hash": "a9f37eeae1c6637dc20409b94327eff0",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Schedar.wav": {
+    "mtime": 1791540453.9519484,
+    "seen": 1791540692.9828086,
+    "ast_hash": "18b9d271c206e1ac46b335a89faac3e4",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Umbriel.wav": {
+    "mtime": 1791540453.9519484,
+    "seen": 1791540692.9828095,
+    "ast_hash": "ffe085e8e0e0f0dfc38e7f92039de093",
+    "semantic_hash": ""
+  },
+  "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/male/ja-JP-Chirp3-HD-Zubenelgenubi.wav": {
+    "mtime": 1791540453.9519484,
+    "seen": 1791540692.9828107,
+    "ast_hash": "9d9f05a86c50707f453e31450c9b756a",
     "semantic_hash": ""
   }
 }

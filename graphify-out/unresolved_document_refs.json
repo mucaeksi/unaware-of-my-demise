@@ -26301,7 +26301,7 @@
   },
   {
     "source_file": "AGENTS.md",
-    "source_location": "L68",
+    "source_location": "L66",
     "target": "/graphify"
   },
   {
@@ -29186,7 +29186,7 @@
   },
   {
     "source_file": "docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md",
-    "source_location": "L21",
+    "source_location": "L29",
     "target": "roles/serviceusage.serviceUsageConsumer"
   },
   {
@@ -33293,16 +33293,6 @@
     "source_file": "narrative/10_VO/Recording_Notes/AUDIO_VO_PLAN_PART1.md",
     "source_location": "L128",
     "target": "narrative/audio/voice/jp_script_fadyme.json"
-  },
-  {
-    "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
-    "source_location": "L40",
-    "target": "female/"
-  },
-  {
-    "source_file": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
-    "source_location": "L40",
-    "target": "male/"
   },
   {
     "source_file": "narrative/11_Audio_Cues/README_SOURCE.md",

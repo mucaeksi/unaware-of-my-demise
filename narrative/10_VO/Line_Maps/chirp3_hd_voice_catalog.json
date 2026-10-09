@@ -331,8 +331,8 @@
   "google_credentials_source": "EXISTING_GITHUB_GOOGLE_PLAY_SERVICE_ACCOUNT",
   "provider_service_report": "docs/coder/cloud_delivery/google_tts_service_status.json",
   "provider_docs_reference": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json",
-  "last_access_check_utc": "2026-10-09T09:18:28.109894+00:00",
-  "last_access_check_workflow": "https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37910361637",
+  "last_access_check_utc": "2026-10-09T10:05:41.749411+00:00",
+  "last_access_check_workflow": "https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37915312151",
   "requested_oauth_quota_project": "gen-lang-client-0955955681",
   "access_setup": "docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md",
   "completeness_scope": "ja-JP-Chirp3-HD-*"

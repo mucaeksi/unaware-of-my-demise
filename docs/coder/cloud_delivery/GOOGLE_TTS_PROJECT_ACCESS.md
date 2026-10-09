@@ -8,13 +8,21 @@ Its public IAM principal is `uomd-play-billing@unaware-of-my-demise.iam.gservice
 from project `unaware-of-my-demise`. The authoring workflow explicitly sends
 `x-goog-user-project: gen-lang-client-0955955681` for OAuth requests.
 
-## Verified blocker and exact setup
+## Verified current status
 
-[Actions run 37910361637](https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37910361637)
-verified `403 USER_PROJECT_DENIED` for that OAuth route. The existing `GEMINI_API`
-key route returned `401 CREDENTIALS_MISSING`. Real sample WAVs and synthesis
-attempts remain **0**. Reported API activation is not verified through a successful
-voices-list request while project usage is denied.
+[Actions run 37915312151](https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37915312151) verified voice-list access and generated
+all **30 live Japanese Chirp 3 HD voices: 14 female, 16 male**. The existing
+OAuth service account and explicit owner quota project now work. The service
+report is `TTS_ALREADY_ENABLED_VOICES_ACCESS_VERIFIED`. Thirty original sample
+WAVs were retained on main. Technical WAV/browser checks are separate from the
+owner's listening and character voice-selection review.
+
+The prior OAuth `USER_PROJECT_DENIED` and key-only `CREDENTIALS_MISSING` failures
+are historical, preserved in the manifest. They are not current access blockers.
+No private credentials were copied to the cloud or source control, and the
+assistant did not change IAM or billing. The owner performed the IAM setup.
+
+## IAM setup reference — already resolved for this session
 
 A project administrator can open [IAM for the audio project](https://console.cloud.google.com/iam-admin/iam?project=gen-lang-client-0955955681),
 choose **Grant access**, add the public service-account email above, and grant
@@ -41,13 +49,15 @@ The retrieved public excerpts are in the shared audition `provider_reference.jso
 Only public project/account IDs and safe error enums are stored; private keys,
 credential JSON, API key values and access tokens are never written to outputs.
 
-## Resume
+## Reuse
 
-After the administrator grants project usage, rerun the authoring workflow.
-Its normal plan uses all live Japanese female/male Chirp 3 HD voices and identical
-SSML word/settings. Existing verified WAVs are reused; ambiguous synthesis is
-never automatically retried. The separate 241-line final Fadyme batch remains
-unauthorized by the shared-sample request. There is no game integration.
+The authorized shared batch is complete. Do not re-run successful paid synthesis
+for listening review. Open the package's local `index.html`, listen to the female
+and male filters, and choose character voices with the owner. If the live catalog
+later changes, the workflow reuses existing same-template/hash-verified WAVs and
+only creates missing voices; ambiguous synthesis is never automatically retried.
+The separate 241-line final Fadyme batch remains unauthorized by the shared-sample
+request. There is no game integration.
 
 The current cloud runtime reports no ready Google secret binding; adding a secret
 elsewhere in ChatGPT does not establish an injected variable in this running
