@@ -44,6 +44,16 @@ def main():
     pending = json.loads((here / 'lfs_pending_objects.json').read_text())
     objects = [{'oid': o['oid'], 'size': o['size']} for o in pending['objects']]
     assert len(objects) == 2 and all(re.fullmatch('[0-9a-f]{64}', o['oid']) and o['size'] > 0 for o in objects)
+    previous_path = here / 'lfs_remote_repair.json'
+    if previous_path.is_file():
+        previous = json.loads(previous_path.read_text())
+        expected = {(o['oid'], o['size']) for o in objects}
+        verified = {(o['oid'], o['size']) for o in previous.get('objects', [])
+                    if o.get('status') == 'REMOTE_BYTES_DOWNLOADED_SHA256_VERIFIED'
+                    and o.get('download_sha256') == o['oid'] and o.get('download_bytes') == o['size']}
+        if previous.get('status') == 'ALL_PENDING_REMOTE_LFS_BYTES_SHA256_VERIFIED' and verified == expected:
+            print('Previous remote SHA256 verification retained for the identical two objects; no repeat download.')
+            return 0
     token = os.environ.get('GITHUB_TOKEN')
     report = {'at_utc': datetime.now(timezone.utc).isoformat(), 'objects': [],
               'operation': 'NORMAL_LFS_VERIFY_EXISTING_UPLOAD_AND_DOWNLOAD_HASH',

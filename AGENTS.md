@@ -38,6 +38,18 @@ shared `narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/` plan.
 Check live Japanese voice availability; never substitute Gemini TTS or an old
 take. Cloud network/credential settings must actually work before calling.
 
+Verified GitHub Actions route: `GEMINI_API` exists and was used, but Cloud TTS
+returned 401 with both API-key interfaces. The existing
+`GOOGLE_PLAY_SERVICE_ACCOUNT` provides valid Google OAuth. Its consumer project
+`604013824221` currently has Cloud TTS disabled; an enable request returned 403.
+Do not ask for another copy of an API key. The authoring workflow and safe
+provider/service reports are in `.github/workflows/chirp3-hd-voice-samples.yml`
+and `docs/coder/cloud_delivery/`. Only the shared sample batch is authorized.
+Synchronous SSML break/prosody support was verified in the current official
+Chirp 3 HD documentation; the plan requests identical pauses/rates for every
+voice. Final Fadyme recordings remain separate. Both pending AAB LFS objects
+were remotely verified and downloaded/hash-checked; preserve normal LFS hooks.
+
 ## Graphify
 
 For project/codebase questions with an existing graph, first run `graphify query "<topic>"`; use path/explain for relationships/focused context. Never read graphify-out/graph.json directly. Dirty outputs do not justify skipping queries. Use wiki/index.md when present for broad navigation; GRAPH_REPORT.md only for broad architecture or insufficient scoped results. `/graphify` uses the installed skill; `$uomd-graphify` adds project-specific maintenance.
