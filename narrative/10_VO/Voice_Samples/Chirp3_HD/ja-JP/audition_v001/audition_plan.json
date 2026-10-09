@@ -9,12 +9,12 @@
   "word_ja": "超電導磁気浮上式鉄道",
   "reading_ja": "ちょうでんどうじきふじょうしきてつどう",
   "meaning_tr": "Süperiletken manyetik levitasyon demiryolu",
-  "direction_requested": "Hesitant surprise on the first question; excitement/resolve on the second exclamation. Ellipses request pauses. Actual emotion and pauses await listening review.",
+  "direction_requested": "First question: hesitant surprise at 90% prosody rate; second exclamation: excitement/resolve at 105%. Fixed SSML breaks for every voice. Actual emotional quality awaits listening.",
   "direction_sent_as_api_prompt": false,
-  "pause_control": "TEXT_PUNCTUATION_ONLY_NO_GUARANTEED_DURATION",
+  "pause_control": "SSML_BREAK_450MS_BEFORE_700MS_BETWEEN_250MS_AFTER",
   "request_template": {
     "input": {
-      "text": "……超電導磁気浮上式鉄道……？　超電導磁気浮上式鉄道！"
+      "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
     },
     "voice": {
       "languageCode": "ja-JP"
@@ -213,5 +213,13 @@
   "planned_synthesis_calls_if_reference_matches": 30,
   "postprocessing": "NONE_PRESERVE_PROVIDER_WAV",
   "authentication": "SECURE_ENVIRONMENT_BINDING_OR_VERIFIED_ADC_NO_VALUES_IN_REPO",
-  "final_fadyme_recording_batch_authorized_by_this_plan": false
+  "final_fadyme_recording_batch_authorized_by_this_plan": false,
+  "spoken_text_ja": "……超電導磁気浮上式鉄道……？　超電導磁気浮上式鉄道！",
+  "ssml_verification_status": "OFFICIAL_SYNCHRONOUS_PREVIEW_SUPPORTED",
+  "ssml_source": "https://docs.cloud.google.com/text-to-speech/docs/chirp3-hd",
+  "ssml_evidence": "Official provider reference captured by GitHub Actions and committed on helper branch d1b7a37a332825891da24aa3e76811bcb61756a4; supported synchronous tags include speak, break and prosody.",
+  "uniform_prosody_rates_percent": [
+    90,
+    105
+  ]
 }

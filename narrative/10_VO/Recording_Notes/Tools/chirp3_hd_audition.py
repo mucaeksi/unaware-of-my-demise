@@ -53,6 +53,20 @@ def save_json(path, data):
 
 
 def authorization():
+    if os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON'):
+        try:
+            import google.oauth2.service_account
+            import google.auth.transport.requests
+            info = json.loads(os.environ['GOOGLE_SERVICE_ACCOUNT_JSON'])
+            if info.get('type') != 'service_account' or info.get('token_uri') not in {
+                    'https://oauth2.googleapis.com/token', 'https://accounts.google.com/o/oauth2/token'}:
+                raise ValueError('Unexpected service account credential format')
+            credentials = google.oauth2.service_account.Credentials.from_service_account_info(
+                info, scopes=['https://www.googleapis.com/auth/cloud-platform'])
+            credentials.refresh(google.auth.transport.requests.Request())
+            return {'Authorization': 'Bearer ' + credentials.token}, 'EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH'
+        except Exception:
+            raise AuthoringError('GOOGLE_SERVICE_ACCOUNT_OAUTH_UNAVAILABLE') from None
     for name in ('GOOGLE_CLOUD_API_KEY', 'GOOGLE_API_KEY'):
         if os.environ.get(name):
             key = os.environ[name].strip()
@@ -154,7 +168,7 @@ def wav_metrics(data):
 
 def gallery(out, manifest, plan):
     # Embed data so the gallery opens directly as a local file without fetch/CDNs.
-    view = {'text': plan['request_template']['input']['text'], 'status': manifest['status'],
+    view = {'text': plan.get('spoken_text_ja', plan['request_template']['input'].get('text', '')), 'status': manifest['status'],
             'voices': manifest.get('voices') or plan['planned_reference_voices']}
     payload = json.dumps(view, ensure_ascii=False).replace('<', '\\u003c')
     html = '''<!doctype html><html lang="en"><meta charset="utf-8">
@@ -238,8 +252,10 @@ def run(out, generate=False, transport=request_json, auth=authorization, retry_u
         save_json(manifest_path, manifest)
         return manifest
     template = plan['request_template']
-    if set(template) != {'input', 'voice', 'audioConfig'} or set(template['input']) != {'text'}:
+    if set(template) != {'input', 'voice', 'audioConfig'} or set(template['input']) not in ({'text'}, {'ssml'}):
         raise AuthoringError('REQUEST_TEMPLATE_CHANGED_REQUIRES_REVIEW')
+    if 'ssml' in template['input'] and plan.get('ssml_verification_status') != 'OFFICIAL_SYNCHRONOUS_PREVIEW_SUPPORTED':
+        raise AuthoringError('SSML_PROVIDER_CAPABILITY_NOT_VERIFIED')
     common_hash = digest(canonical(template))
     previous = {v['voice_id']: v for v in manifest['voices']}
     try:

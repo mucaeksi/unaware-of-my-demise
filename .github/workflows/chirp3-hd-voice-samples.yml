@@ -7,6 +7,8 @@ on:
       - .github/workflows/chirp3-hd-voice-samples.yml
       - narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py
       - narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audition_plan.json
+      - docs/coder/cloud_delivery/lfs_pending_objects.json
+      - docs/coder/cloud_delivery/repair_uploaded_lfs.py
   workflow_dispatch:
     inputs:
       google_api_secret:
@@ -37,6 +39,15 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git fetch origin main
           git merge --no-edit origin/main
+      - name: Verify already-uploaded LFS objects using the repository's normal LFS service
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 docs/coder/cloud_delivery/repair_uploaded_lfs.py
+      - name: Install the pinned Google OAuth authoring dependency
+        run: |
+          python3 -m venv "${RUNNER_TEMP}/chirp-google-auth"
+          "${RUNNER_TEMP}/chirp-google-auth/bin/python" -m pip install 'google-auth[requests]==2.45.0'
       - name: Capture official provider authentication reference without credentials
         continue-on-error: true
         run: |
@@ -72,7 +83,8 @@ jobs:
         id: generation
         env:
           GOOGLE_CLOUD_API_KEY: ${{ secrets[inputs.google_api_secret || 'GEMINI_API'] }}
-        run: python3 narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py --generate --sync-shared-catalog
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+        run: '"${RUNNER_TEMP}/chirp-google-auth/bin/python" narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py --generate --sync-shared-catalog'
       - name: Preserve sample masters and safe status as an artifact
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -109,6 +121,9 @@ jobs:
           if complete:
               files += ['docs/art/CHIRP3_HD_VOICE_CATALOG.md',
                         'narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json']
+          lfs_report = Path('docs/coder/cloud_delivery/lfs_remote_repair.json')
+          if lfs_report.is_file():
+              files.append(str(lfs_report))
           subprocess.run(['git', 'add', '--', *files], check=True)
           if subprocess.run(['git', 'diff', '--cached', '--quiet']).returncode:
               message = ('audio: retain all verified Japanese Chirp 3 HD samples'

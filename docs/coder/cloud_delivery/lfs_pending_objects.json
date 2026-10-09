@@ -1,0 +1,14 @@
+{
+  "local_source_commit": "0a4c8cb8ec72552911b861ca1894c4d4f2e77e93",
+  "source_integrity": "Both actual local objects have been fully read and SHA256 verified; prior normal uploads failed only at verify.",
+  "objects": [
+    {
+      "oid": "edd8cf08e42910e0d1845f63334a82add62bbecea7774625c3ffd86f77236456",
+      "size": 134505579
+    },
+    {
+      "oid": "1e4dbe311c6c8f705814579e9c407df491dc8e9ffa6824b385900893b6f02ab1",
+      "size": 101418444
+    }
+  ]
+}
