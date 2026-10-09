@@ -26326,22 +26326,22 @@
   },
   {
     "source_file": "README.md",
-    "source_location": "L5",
+    "source_location": "L10",
     "target": "F:/unaware-of-my-demise"
   },
   {
     "source_file": "README.md",
-    "source_location": "L13",
+    "source_location": "L18",
     "target": ".claude/"
   },
   {
     "source_file": "README.md",
-    "source_location": "L15",
+    "source_location": "L20",
     "target": "python tools/project_catalog.py build"
   },
   {
     "source_file": "README.md",
-    "source_location": "L15",
+    "source_location": "L20",
     "target": "python tools/project_catalog.py find <words> --scope active"
   },
   {

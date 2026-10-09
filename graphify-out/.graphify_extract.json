@@ -7421,7 +7421,7 @@
       "source_location": "L1",
       "inventory_file": true,
       "extension": "",
-      "size_bytes": 2321,
+      "size_bytes": 2420,
       "_origin": "project_inventory"
     },
     {
@@ -7603,6 +7603,17 @@
       "_origin": "project_inventory"
     },
     {
+      "id": "oyunu_ac",
+      "label": "OYUNU_AC.cmd",
+      "file_type": "concept",
+      "source_file": "OYUNU_AC.cmd",
+      "source_location": "L1",
+      "inventory_file": true,
+      "extension": ".cmd",
+      "size_bytes": 229,
+      "_origin": "project_inventory"
+    },
+    {
       "id": "readme",
       "label": "README.md",
       "file_type": "document",
@@ -7610,9 +7621,9 @@
       "source_location": "L1",
       "inventory_file": true,
       "extension": ".md",
-      "size_bytes": 3093,
+      "size_bytes": 3427,
       "_origin": "project_inventory",
-      "sha256": "55881a15d3da56907d57d6af9e4760a253e51a91ca327e1eae46fcc6ccdac4c5"
+      "sha256": "1e30d2d89abb0fcf07f73a612f88f928c335acc45312767103e112bd35e7e38b"
     },
     {
       "id": "third_party_licenses_claude_code_game_studios_mit",
@@ -8451,9 +8462,9 @@
       "source_location": "L1",
       "inventory_file": true,
       "extension": ".md",
-      "size_bytes": 3352,
+      "size_bytes": 4369,
       "_origin": "project_inventory",
-      "sha256": "cc6887307615af4339c7b4f3d9d6ae1cf542d768463c59ef69ca9b1f16c1d081"
+      "sha256": "56e730f3b85c6e92b3d192a0e4d0fbc4008d0bfd2b382e28184466ab6a29e1ff"
     },
     {
       "id": "docs_coder_coder_response_format",
@@ -8466,6 +8477,17 @@
       "size_bytes": 531,
       "_origin": "project_inventory",
       "sha256": "03680d8181b74ed0bae1f18b6069f9e157a329d55b55315d22ac1db56b2af19e"
+    },
+    {
+      "id": "docs_coder_desktop_launcher_validation",
+      "label": "DESKTOP_LAUNCHER_VALIDATION.json",
+      "file_type": "concept",
+      "source_file": "docs/coder/DESKTOP_LAUNCHER_VALIDATION.json",
+      "source_location": "L1",
+      "inventory_file": true,
+      "extension": ".json",
+      "size_bytes": 1107,
+      "_origin": "project_inventory"
     },
     {
       "id": "docs_coder_gacha_online_game_master_cloud_github_drive_execution_prompt_final",
@@ -83033,6 +83055,17 @@
       "_origin": "ast"
     },
     {
+      "id": "tools_start_game",
+      "label": "Start-Game.ps1",
+      "file_type": "code",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L1",
+      "inventory_file": true,
+      "extension": ".ps1",
+      "size_bytes": 5489,
+      "_origin": "ast"
+    },
+    {
       "id": "tools_start_uipreview",
       "label": "Start-UiPreview.ps1",
       "file_type": "code",
@@ -138934,7 +138967,7 @@
       "label": "Cloud steps and publishing scope",
       "file_type": "concept",
       "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
-      "source_location": "L27",
+      "source_location": "L42",
       "_origin": "document_structure"
     },
     {
@@ -138942,7 +138975,7 @@
       "label": "Current role boundary — 2026-10-09",
       "file_type": "concept",
       "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
-      "source_location": "L52",
+      "source_location": "L67",
       "_origin": "document_structure"
     },
     {
@@ -180541,6 +180574,30 @@
       "file_type": "code",
       "source_file": "tools/Build-OpeningBundle.ps1",
       "source_location": "L27",
+      "_origin": "ast"
+    },
+    {
+      "id": "tools_start_game_join_godotarguments",
+      "label": "Join-GodotArguments()",
+      "file_type": "code",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "tools_start_game_invoke_godotandwait",
+      "label": "Invoke-GodotAndWait()",
+      "file_type": "code",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "tools_start_game_test_godotpin",
+      "label": "Test-GodotPin()",
+      "file_type": "code",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L43",
       "_origin": "ast"
     },
     {
@@ -300796,6 +300853,18 @@
     },
     {
       "source": "project_root",
+      "target": "oyunu_ac",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "OYUNU_AC.cmd",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "project_root",
       "target": "readme",
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -301678,6 +301747,18 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "docs/coder/CODER_RESPONSE_FORMAT.md",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_docs_coder",
+      "target": "docs_coder_desktop_launcher_validation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "docs/coder/DESKTOP_LAUNCHER_VALIDATION.json",
       "source_location": null,
       "context": "contains",
       "_origin": "project_structural"
@@ -373186,6 +373267,18 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "tools/Start-EntryPreview.ps1",
+      "source_location": null,
+      "context": "contains",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "directory_tools",
+      "target": "tools_start_game",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "tools/Start-Game.ps1",
       "source_location": null,
       "context": "contains",
       "_origin": "project_structural"
@@ -466864,13 +466957,49 @@
     },
     {
       "source": "readme",
+      "target": "oyunu_ac",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "README.md",
+      "source_location": "L6",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "readme",
+      "target": "directory_game",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "README.md",
+      "source_location": "L7",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "readme",
+      "target": "docs_coder_cloud_main_sync",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "README.md",
+      "source_location": "L8",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "readme",
       "target": "docs_art_and_code_handoff",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L5",
+      "source_location": "L10",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -466882,7 +467011,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L5",
+      "source_location": "L10",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -466894,7 +467023,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L5",
+      "source_location": "L10",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -466906,7 +467035,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L7",
+      "source_location": "L12",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -466918,7 +467047,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L7",
+      "source_location": "L12",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -466930,7 +467059,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L7",
+      "source_location": "L12",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -466942,7 +467071,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L7",
+      "source_location": "L12",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -466954,7 +467083,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L9",
+      "source_location": "L14",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -466966,7 +467095,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L9",
+      "source_location": "L14",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -466978,7 +467107,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L9",
+      "source_location": "L14",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -466990,7 +467119,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L11",
+      "source_location": "L16",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -467002,7 +467131,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L13",
+      "source_location": "L18",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -467014,7 +467143,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L13",
+      "source_location": "L18",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -467026,7 +467155,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L13",
+      "source_location": "L18",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -467038,7 +467167,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L13",
+      "source_location": "L18",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -467050,7 +467179,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L13",
+      "source_location": "L18",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -467062,7 +467191,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L13",
+      "source_location": "L18",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -467074,7 +467203,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L13",
+      "source_location": "L18",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -467086,7 +467215,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L19",
+      "source_location": "L24",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -467098,7 +467227,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L19",
+      "source_location": "L24",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -467110,7 +467239,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "README.md",
-      "source_location": "L21",
+      "source_location": "L26",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -474628,7 +474757,7 @@
     },
     {
       "source": "docs_coder_cloud_main_sync",
-      "target": "game_project",
+      "target": "oyunu_ac",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -474640,13 +474769,37 @@
     },
     {
       "source": "docs_coder_cloud_main_sync",
-      "target": "directory_game",
+      "target": "game_godot_version",
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
       "source_location": "L15",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "docs_coder_cloud_main_sync",
+      "target": "game_project",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
+      "source_location": "L19",
+      "context": "document_path_reference",
+      "_origin": "project_structural"
+    },
+    {
+      "source": "docs_coder_cloud_main_sync",
+      "target": "directory_game",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "weight": 1.0,
+      "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
+      "source_location": "L20",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -474658,7 +474811,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
-      "source_location": "L15",
+      "source_location": "L20",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -474670,7 +474823,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
-      "source_location": "L18",
+      "source_location": "L23",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -474682,7 +474835,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
-      "source_location": "L27",
+      "source_location": "L42",
       "context": "contains_heading",
       "_origin": "project_structural"
     },
@@ -474694,7 +474847,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
-      "source_location": "L49",
+      "source_location": "L64",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -474706,7 +474859,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
-      "source_location": "L50",
+      "source_location": "L65",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -474718,7 +474871,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
-      "source_location": "L52",
+      "source_location": "L67",
       "context": "contains_heading",
       "_origin": "project_structural"
     },
@@ -474730,7 +474883,7 @@
       "confidence_score": 1.0,
       "weight": 1.0,
       "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
-      "source_location": "L57",
+      "source_location": "L72",
       "context": "document_path_reference",
       "_origin": "project_structural"
     },
@@ -583790,6 +583943,61 @@
       "confidence": "EXTRACTED",
       "source_file": "tools/Build-OpeningBundle.ps1",
       "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "tools_start_game",
+      "target": "tools_start_game_join_godotarguments",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "tools_start_game",
+      "target": "tools_start_game_invoke_godotandwait",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "tools_start_game",
+      "target": "tools_start_game_test_godotpin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "tools_start_game_invoke_godotandwait",
+      "target": "tools_start_game_join_godotarguments",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "tools_start_game_test_godotpin",
+      "target": "tools_start_game_invoke_godotandwait",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L46",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0

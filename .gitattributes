@@ -1,6 +1,8 @@
 * text=auto
 # Preserve runnable shell scripts across Windows/cloud checkouts.
 *.sh text eol=lf
+# Windows desktop launcher; source is stored canonically as LF in Git.
+/OYUNU_AC.cmd text eol=crlf
 # Runtime manifests hash exact bytes; use the same content bytes on every OS.
 game/data/content/*.json text eol=lf
 # A sealed release is byte-addressed by FILE_INDEX.json. Never normalize it.

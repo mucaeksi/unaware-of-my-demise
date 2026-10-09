@@ -104,6 +104,7 @@
       "/workspace/uomd-main-review/database/tests/0012_release_control_test.sql",
       "/workspace/uomd-main-review/database/verify.sh",
       "/workspace/uomd-main-review/docs/art/character_reference/generation_manifest_v003.json",
+      "/workspace/uomd-main-review/docs/coder/DESKTOP_LAUNCHER_VALIDATION.json",
       "/workspace/uomd-main-review/docs/coder/cloud_delivery/ensure_google_tts_service.py",
       "/workspace/uomd-main-review/docs/coder/cloud_delivery/google_tts_service_status.json",
       "/workspace/uomd-main-review/docs/coder/cloud_delivery/lfs_pending_objects.json",
@@ -619,6 +620,7 @@
       "/workspace/uomd-main-review/tools/Build-OpeningBundle.ps1",
       "/workspace/uomd-main-review/tools/Install-GdquestVfxReference.ps1",
       "/workspace/uomd-main-review/tools/Start-EntryPreview.ps1",
+      "/workspace/uomd-main-review/tools/Start-Game.ps1",
       "/workspace/uomd-main-review/tools/Start-UiPreview.ps1",
       "/workspace/uomd-main-review/tools/Update-CurrentAAB.ps1",
       "/workspace/uomd-main-review/tools/compare_opening_packs.py",
@@ -3576,10 +3578,10 @@
       "/workspace/uomd-main-review/narrative/FADYME_MEDIA_ALL/opening_014.ogg"
     ]
   },
-  "total_files": 3566,
-  "total_words": 21213633,
+  "total_files": 3568,
+  "total_words": 21214422,
   "needs_graph": true,
-  "warning": "Large corpus: 3566 files · ~21,213,633 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.",
+  "warning": "Large corpus: 3568 files · ~21,214,422 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.",
   "skipped_sensitive": [
     "/workspace/uomd-main-review/.codex/validation/secret-scan.json",
     "/workspace/uomd-main-review/game/data/keys/uomd-content-1.pem",
@@ -3622,6 +3624,7 @@
     "/workspace/uomd-main-review/.local/migration-20261008/mcp-tool-list.log",
     "/workspace/uomd-main-review/.local/migration-20261008/recovery.log",
     "/workspace/uomd-main-review/LICENSE",
+    "/workspace/uomd-main-review/OYUNU_AC.cmd",
     "/workspace/uomd-main-review/admin/.gitignore",
     "/workspace/uomd-main-review/admin/app/globals.css",
     "/workspace/uomd-main-review/admin/public/_headers",

@@ -6072,9 +6072,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1791495122.981083,
-    "seen": 1791495173.1065953,
-    "ast_hash": "fefedd2e05853d8afa5d0c98ab505348",
+    "mtime": 1791542121.93159,
+    "seen": 1791542498.935495,
+    "ast_hash": "d05f8876d983171ea08ef602df9c3e60",
     "semantic_hash": ""
   },
   "THIRD_PARTY_LICENSES/claude-code-game-studios-MIT.txt": {
@@ -19117,13 +19117,13 @@
   },
   ".local/migration-20261008/copied-files.json": {
     "mtime": 1791493089.9941473,
-    "seen": 1791540896.985472,
+    "seen": 1791542516.7576647,
     "ast_hash": "79d698c5d3cfbcceaf1ac90bde79f20f",
     "semantic_hash": ""
   },
   ".local/project-index.json": {
     "mtime": 1791493090.010147,
-    "seen": 1791540896.9855332,
+    "seen": 1791542516.7577596,
     "ast_hash": "e1965f8c69d05dfca5adebc88fe67fd2",
     "semantic_hash": ""
   },
@@ -19188,9 +19188,9 @@
     "semantic_hash": ""
   },
   "docs/coder/CLOUD_MAIN_SYNC.md": {
-    "mtime": 1791521025.4335809,
-    "seen": 1791521287.24441,
-    "ast_hash": "54c71266061822eb816d5f1a6789b70b",
+    "mtime": 1791542122.3835857,
+    "seen": 1791542498.936451,
+    "ast_hash": "c4ecc200bd52a25a5f8d16eae7586c9f",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/fadyme/audit_v001/battle_alpha.json": {
@@ -21393,6 +21393,18 @@
     "mtime": 1791540453.9519484,
     "seen": 1791540692.9828107,
     "ast_hash": "9d9f05a86c50707f453e31450c9b756a",
+    "semantic_hash": ""
+  },
+  "docs/coder/DESKTOP_LAUNCHER_VALIDATION.json": {
+    "mtime": 1791542425.614199,
+    "seen": 1791542498.8959317,
+    "ast_hash": "b8790ae6a3959dd8aec3956465620812",
+    "semantic_hash": ""
+  },
+  "tools/Start-Game.ps1": {
+    "mtime": 1791542078.2398984,
+    "seen": 1791542498.909921,
+    "ast_hash": "ddb9c8c46efb10cf89666ef2b8c8cfb9",
     "semantic_hash": ""
   }
 }

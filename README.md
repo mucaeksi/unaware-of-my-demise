@@ -2,6 +2,11 @@
 
 Dark-fantasy online mobile RPG. Develop locally in `game/`; Android portrait, Godot 4.7.2, typed GDScript, Compatibility renderer. UI and subtitles are English; voice is Japanese.
 
+Windows desktop review: pull `main` in GitHub Desktop, then double-click
+[OYUNU_AC.cmd](OYUNU_AC.cmd). It imports the pulled assets and starts the current
+`game/` source in a 540×960 window. If Godot is not detected, select its executable
+once; the path is remembered locally. [Desktop instructions](docs/coder/CLOUD_MAIN_SYNC.md).
+
 Owner-selected workspace: `F:/unaware-of-my-demise`. **Codex: character/environment art. Claude: coding/integration. Owner: GitHub push/publication.** Start with [Art and code handoff](docs/ART_AND_CODE_HANDOFF.md), [Art workbench](narrative/15_Art_Workbench/README.md) and [Copy verification](docs/release/WORKSPACE_COPY_2026-10-08_TR.md). Existing resource paths were preserved; new art stays outside runtime exports until approved and handed off.
 
 Start with [Project map](docs/PROJECT_MAP.md), [Current state](docs/CURRENT_STATE.md), [Architecture](docs/ARCHITECTURE.md) and [Toolchain](GAME_TOOLCHAIN.md).

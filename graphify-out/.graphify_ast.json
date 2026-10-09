@@ -25886,6 +25886,38 @@
       "_origin": "ast"
     },
     {
+      "id": "tools_start_game",
+      "label": "Start-Game.ps1",
+      "file_type": "code",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "tools_start_game_join_godotarguments",
+      "label": "Join-GodotArguments()",
+      "file_type": "code",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "tools_start_game_invoke_godotandwait",
+      "label": "Invoke-GodotAndWait()",
+      "file_type": "code",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "tools_start_game_test_godotpin",
+      "label": "Test-GodotPin()",
+      "file_type": "code",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L43",
+      "_origin": "ast"
+    },
+    {
       "id": "tools_start_uipreview",
       "label": "Start-UiPreview.ps1",
       "file_type": "code",
@@ -97113,6 +97145,56 @@
       "_origin": "ast"
     },
     {
+      "source": "tools_start_game",
+      "target": "tools_start_game_join_godotarguments",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tools_start_game",
+      "target": "tools_start_game_invoke_godotandwait",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tools_start_game",
+      "target": "tools_start_game_test_godotpin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tools_start_game_invoke_godotandwait",
+      "target": "tools_start_game_join_godotarguments",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tools_start_game_test_godotpin",
+      "target": "tools_start_game_invoke_godotandwait",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "tools/Start-Game.ps1",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "tools_compare_opening_packs",
       "target": "argparse",
       "relation": "imports",
@@ -128458,6 +128540,7 @@
     "/workspace/uomd-main-review/database/tests/0012_release_control_test.sql",
     "/workspace/uomd-main-review/database/verify.sh",
     "/workspace/uomd-main-review/docs/art/character_reference/generation_manifest_v003.json",
+    "/workspace/uomd-main-review/docs/coder/DESKTOP_LAUNCHER_VALIDATION.json",
     "/workspace/uomd-main-review/docs/coder/cloud_delivery/ensure_google_tts_service.py",
     "/workspace/uomd-main-review/docs/coder/cloud_delivery/google_tts_service_status.json",
     "/workspace/uomd-main-review/docs/coder/cloud_delivery/lfs_pending_objects.json",
@@ -128973,6 +129056,7 @@
     "/workspace/uomd-main-review/tools/Build-OpeningBundle.ps1",
     "/workspace/uomd-main-review/tools/Install-GdquestVfxReference.ps1",
     "/workspace/uomd-main-review/tools/Start-EntryPreview.ps1",
+    "/workspace/uomd-main-review/tools/Start-Game.ps1",
     "/workspace/uomd-main-review/tools/Start-UiPreview.ps1",
     "/workspace/uomd-main-review/tools/Update-CurrentAAB.ps1",
     "/workspace/uomd-main-review/tools/compare_opening_packs.py",

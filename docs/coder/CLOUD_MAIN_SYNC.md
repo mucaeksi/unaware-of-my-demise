@@ -11,7 +11,12 @@ preparation was cancelled; it is not a repository deliverable.
 1. In GitHub Desktop select `mucaeksi/unaware-of-my-demise` and branch `main`.
 2. Save any local Godot edits. Use **Fetch origin**, then **Pull origin** when
    new commits are available. GitHub Desktop does not continuously auto-pull files.
-3. Open **`game/project.godot`** in Godot **4.7.2**, then let imports complete.
+3. Double-click **`OYUNU_AC.cmd`** in the repository root. It checks the version in
+   `game/GODOT_VERSION`, completes the imports, then starts the current source in
+   a 540×960 window. It finds `GODOT_EXE`, a remembered executable, PATH or the
+   existing WinGet installation. If none match, select the installed Godot EXE
+   once in the file picker. Download/install is not performed automatically.
+   For editing, open **`game/project.godot`** in Godot **4.7.2**.
    The authoritative editable project is `game/`; `release/current/` is a sealed
    build snapshot and should not be used as the development project.
 4. For the existing Local UI Preview open
@@ -23,6 +28,16 @@ preparation was cancelled; it is not a repository deliverable.
    **Refresh/F5 inside the preview** for supported hot-reloaded UI changes; after
    scene/autoload or navigation changes, stop/re-run the preview if needed.
    A source update is not proof that an old running instance has refreshed.
+
+Every shortcut launch reads the current local source; after a pull, close the old
+game window and launch again. The shortcut does not fetch/pull Git or overwrite
+local edits, and it leaves existing editors/game windows open. Real normal-game
+Google authentication retains the existing account/device requirements.
+
+The selected executable and launch logs are kept outside the checkout at
+`%LOCALAPPDATA%\UnawareOfMyDemise\desktop-launcher\`. An error remains visible in
+the shortcut console; `import.log` and `game.log` provide details. For an explicit
+portable installation, run `OYUNU_AC.cmd -GodotPath "C:\path\Godot.exe"`.
 
 ## Cloud steps and publishing scope
 

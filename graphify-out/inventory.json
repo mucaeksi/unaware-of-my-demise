@@ -3072,7 +3072,7 @@
   {
     "path": ".gitattributes",
     "node_id": "gitattributes",
-    "size_bytes": 2321
+    "size_bytes": 2420
   },
   {
     "path": ".github/workflows/backup.yml",
@@ -3150,9 +3150,14 @@
     "size_bytes": 586
   },
   {
+    "path": "OYUNU_AC.cmd",
+    "node_id": "oyunu_ac",
+    "size_bytes": 229
+  },
+  {
     "path": "README.md",
     "node_id": "readme",
-    "size_bytes": 3093
+    "size_bytes": 3427
   },
   {
     "path": "THIRD_PARTY_LICENSES/claude-code-game-studios-MIT.txt",
@@ -3512,12 +3517,17 @@
   {
     "path": "docs/coder/CLOUD_MAIN_SYNC.md",
     "node_id": "docs_coder_cloud_main_sync",
-    "size_bytes": 3352
+    "size_bytes": 4369
   },
   {
     "path": "docs/coder/CODER_RESPONSE_FORMAT.md",
     "node_id": "docs_coder_coder_response_format",
     "size_bytes": 531
+  },
+  {
+    "path": "docs/coder/DESKTOP_LAUNCHER_VALIDATION.json",
+    "node_id": "docs_coder_desktop_launcher_validation",
+    "size_bytes": 1107
   },
   {
     "path": "docs/coder/GACHA_ONLINE_GAME_MASTER_CLOUD_GITHUB_DRIVE_EXECUTION_PROMPT_FINAL.md",
@@ -33313,6 +33323,11 @@
     "path": "tools/Start-EntryPreview.ps1",
     "node_id": "tools_start_entrypreview",
     "size_bytes": 688
+  },
+  {
+    "path": "tools/Start-Game.ps1",
+    "node_id": "tools_start_game",
+    "size_bytes": 5489
   },
   {
     "path": "tools/Start-UiPreview.ps1",

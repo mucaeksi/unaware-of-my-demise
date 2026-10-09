@@ -376379,6 +376379,7 @@
     "GAME_TOOLCHAIN.md": "game_toolchain",
     "GODOT_AI_READY.md": "godot_ai_ready",
     "LICENSE": "license",
+    "OYUNU_AC.cmd": "oyunu_ac",
     "README.md": "readme",
     "THIRD_PARTY_LICENSES/claude-code-game-studios-MIT.txt": "third_party_licenses_claude_code_game_studios_mit",
     "THIRD_PARTY_NOTICE.md": "third_party_notice",
@@ -376453,6 +376454,7 @@
     "docs/coder/ASSET_INVENTORY_TEMPLATE.md": "docs_coder_asset_inventory_template",
     "docs/coder/CLOUD_MAIN_SYNC.md": "docs_coder_cloud_main_sync",
     "docs/coder/CODER_RESPONSE_FORMAT.md": "docs_coder_coder_response_format",
+    "docs/coder/DESKTOP_LAUNCHER_VALIDATION.json": "docs_coder_desktop_launcher_validation",
     "docs/coder/GACHA_ONLINE_GAME_MASTER_CLOUD_GITHUB_DRIVE_EXECUTION_PROMPT_FINAL.md": "docs_coder_gacha_online_game_master_cloud_github_drive_execution_prompt_final",
     "docs/coder/GIT_STRATEGY.md": "docs_coder_git_strategy",
     "docs/coder/MASTER_PROMPT.md": "docs_coder_master_prompt",
@@ -382409,6 +382411,7 @@
     "tools/Build-OpeningBundle.ps1": "tools_build_openingbundle",
     "tools/Install-GdquestVfxReference.ps1": "tools_install_gdquestvfxreference",
     "tools/Start-EntryPreview.ps1": "tools_start_entrypreview",
+    "tools/Start-Game.ps1": "tools_start_game",
     "tools/Start-UiPreview.ps1": "tools_start_uipreview",
     "tools/Update-CurrentAAB.ps1": "tools_update_currentaab",
     "tools/compare_opening_packs.py": "tools_compare_opening_packs",
@@ -382442,7 +382445,7 @@
     "tools/verify_opening_pack.gd": "tools_verify_opening_pack"
   },
   "statistics": {
-    "inventory_files": 6691,
+    "inventory_files": 6694,
     "godot_source_files": 780,
     "readable_godot_files": 780,
     "source_files_by_extension": {
