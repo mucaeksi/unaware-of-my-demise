@@ -30,6 +30,10 @@ jobs:
     if: github.repository == 'mucaeksi/unaware-of-my-demise'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      # Owner-confirmed project with Cloud Text-to-Speech enabled. This is a
+      # quota selector, not a replacement credential or an IAM grant.
+      GOOGLE_CLOUD_QUOTA_PROJECT: gen-lang-client-0955955681
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:

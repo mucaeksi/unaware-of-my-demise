@@ -19,9 +19,14 @@ class EnableError(Exception):
 
 
 def call(url, token, body=None):
+    headers = {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}
+    project = os.environ.get('GOOGLE_CLOUD_QUOTA_PROJECT', '')
+    if project:
+        if not re.fullmatch(r'[a-z][a-z0-9-]{4,61}[a-z0-9]|[0-9]+', project):
+            raise EnableError('GOOGLE_QUOTA_PROJECT_INVALID')
+        headers['x-goog-user-project'] = project
     request = urllib.request.Request(url, data=json.dumps(body).encode() if body is not None else None,
-                                    headers={'Authorization': 'Bearer ' + token,
-                                             'Content-Type': 'application/json'},
+                                    headers=headers,
                                     method='POST' if body is not None else 'GET')
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
@@ -42,12 +47,14 @@ def main():
               'credential_source': 'EXISTING_GOOGLE_PLAY_SERVICE_ACCOUNT',
               'billing_configuration_changed': False, 'iam_configuration_changed': False,
               'other_apis_enabled': False}
+    report['requested_quota_project'] = os.environ.get('GOOGLE_CLOUD_QUOTA_PROJECT')
     try:
         if not os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON'):
             raise EnableError('EXISTING_SERVICE_ACCOUNT_SECRET_UNAVAILABLE')
         import google.oauth2.service_account
         import google.auth.transport.requests
         info = json.loads(os.environ['GOOGLE_SERVICE_ACCOUNT_JSON'])
+        report['credential_project_id'] = info.get('project_id')
         if info.get('type') != 'service_account' or info.get('token_uri') not in {
                 'https://oauth2.googleapis.com/token', 'https://accounts.google.com/o/oauth2/token'}:
             raise EnableError('SERVICE_ACCOUNT_FORMAT_INVALID')

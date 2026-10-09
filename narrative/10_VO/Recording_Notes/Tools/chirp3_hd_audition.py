@@ -54,8 +54,17 @@ def save_json(path, data):
     temp.replace(path)
 
 
-def authorization():
-    if os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON'):
+def oauth_quota_headers(headers):
+    project = os.environ.get('GOOGLE_CLOUD_QUOTA_PROJECT', '')
+    if project:
+        if not re.fullmatch(r'[a-z][a-z0-9-]{4,61}[a-z0-9]|[0-9]+', project):
+            raise AuthoringError('GOOGLE_QUOTA_PROJECT_INVALID')
+        headers = {**headers, 'x-goog-user-project': project}
+    return headers
+
+
+def authorization(prefer_service_account=True):
+    if prefer_service_account and os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON'):
         try:
             import google.oauth2.service_account
             import google.auth.transport.requests
@@ -66,7 +75,9 @@ def authorization():
             credentials = google.oauth2.service_account.Credentials.from_service_account_info(
                 info, scopes=['https://www.googleapis.com/auth/cloud-platform'])
             credentials.refresh(google.auth.transport.requests.Request())
-            return {'Authorization': 'Bearer ' + credentials.token}, 'EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH'
+            return oauth_quota_headers({'Authorization': 'Bearer ' + credentials.token}), 'EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH'
+        except AuthoringError:
+            raise
         except Exception:
             raise AuthoringError('GOOGLE_SERVICE_ACCOUNT_OAUTH_UNAVAILABLE') from None
     for name in ('GOOGLE_CLOUD_API_KEY', 'GOOGLE_API_KEY', 'GEMINI_API'):
@@ -83,7 +94,7 @@ def authorization():
         headers = {'Authorization': 'Bearer ' + creds.token}
         if creds.quota_project_id:
             headers['x-goog-user-project'] = creds.quota_project_id
-        return headers, 'ADC'
+        return oauth_quota_headers(headers), 'ADC'
     except Exception:
         raise AuthoringError('GOOGLE_AUTH_UNAVAILABLE_CONFIGURE_SECURE_ENVIRONMENT_KEY') from None
 
@@ -112,7 +123,8 @@ def request_json(endpoint, headers, body=None):
                         'API_KEY_IP_ADDRESS_BLOCKED', 'API_KEY_ANDROID_APP_BLOCKED',
                         'API_KEY_IOS_APP_BLOCKED', 'SERVICE_DISABLED', 'BILLING_DISABLED',
                         'CONSUMER_INVALID', 'CREDENTIALS_MISSING', 'ACCESS_TOKEN_EXPIRED',
-                        'IAM_PERMISSION_DENIED', 'RATE_LIMIT_EXCEEDED', 'RESOURCE_EXHAUSTED'}
+                        'IAM_PERMISSION_DENIED', 'USER_PROJECT_DENIED', 'SERVICE_USAGE_DENIED',
+                        'PROJECT_INVALID', 'RATE_LIMIT_EXCEEDED', 'RESOURCE_EXHAUSTED'}
         try:
             details = json.load(error).get('error', {}).get('details', [])
             reason = next((d.get('reason') for d in details if isinstance(d, dict)
@@ -265,8 +277,23 @@ def run(out, generate=False, transport=request_json, auth=authorization, retry_u
             raise AuthoringError('PREVIOUS_CALL_OUTCOME_UNCERTAIN_INSPECT_BEFORE_EXPLICIT_RETRY')
         headers, auth_kind = auth()
         manifest['auth_method'] = auth_kind
+        manifest['requested_oauth_quota_project'] = os.environ.get('GOOGLE_CLOUD_QUOTA_PROJECT')
         manifest['voices_list_calls_attempted'] += 1
-        response = transport('voices?languageCode=ja-JP', headers)
+        try:
+            response = transport('voices?languageCode=ja-JP', headers)
+        except AuthoringError as error:
+            # Try the owner's existing key only for a rejected read-only OAuth
+            # catalog request. Never retry synthesis or ambiguous network calls.
+            if (auth is not authorization or auth_kind != 'EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH'
+                    or not str(error).startswith(('GOOGLE_HTTP_401', 'GOOGLE_HTTP_403'))
+                    or not any(os.environ.get(n) for n in ('GOOGLE_CLOUD_API_KEY', 'GOOGLE_API_KEY', 'GEMINI_API'))):
+                raise
+            manifest.setdefault('auth_route_failures', []).append(
+                {'at_utc': timestamp(), 'auth_method': auth_kind, 'category': str(error)})
+            headers, auth_kind = authorization(prefer_service_account=False)
+            manifest['auth_method'] = auth_kind
+            manifest['voices_list_calls_attempted'] += 1
+            response = transport('voices?languageCode=ja-JP', headers)
         voices = japanese_voices(response)
         save_json(out / 'voices_live_snapshot.json', {'retrieved_at_utc': timestamp(),
                   'endpoint': API + 'voices', 'language_filter': 'ja-JP', 'response': response})
