@@ -6,6 +6,8 @@ Windows desktop review: pull `main` in GitHub Desktop, then double-click
 [OYUNU_AC.cmd](OYUNU_AC.cmd). It imports the pulled assets and starts the current
 `game/` source in a 540×960 window. If Godot is not detected, select its executable
 once; the path is remembered locally. [Desktop instructions](docs/coder/CLOUD_MAIN_SYNC.md).
+The shortcut defaults to a local opening/tutorial review without Google sign-in.
+Use `OYUNU_AC.cmd -Online` for the normal game, or `-ResetReview` to start the review over.
 
 Owner-selected workspace: `F:/unaware-of-my-demise`. **Codex: character/environment art. Claude: coding/integration. Owner: GitHub push/publication.** Start with [Art and code handoff](docs/ART_AND_CODE_HANDOFF.md), [Art workbench](narrative/15_Art_Workbench/README.md) and [Copy verification](docs/release/WORKSPACE_COPY_2026-10-08_TR.md). Existing resource paths were preserved; new art stays outside runtime exports until approved and handed off.
 

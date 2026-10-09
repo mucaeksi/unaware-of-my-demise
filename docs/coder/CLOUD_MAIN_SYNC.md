@@ -17,6 +17,12 @@ preparation was cancelled; it is not a repository deliverable.
    existing WinGet installation. If none match, select the installed Godot EXE
    once in the file picker. Download/install is not performed automatically.
    For editing, open **`game/project.godot`** in Godot **4.7.2**.
+   The shortcut now defaults to **Desktop Review**: Google sign-in is skipped,
+   then Start shows the actual prologue and all three tutorial fights/cutscenes.
+   Review checkpoints use `user://desktop_review/`; completing the tutorial and
+   choosing Restart opens the local menu. Online account actions require the
+   normal game. Use `OYUNU_AC.cmd -Online` for normal Google sign-in, or
+   `OYUNU_AC.cmd -ResetReview` to replay the review from the beginning.
    The authoritative editable project is `game/`; `release/current/` is a sealed
    build snapshot and should not be used as the development project.
 4. For the existing Local UI Preview open

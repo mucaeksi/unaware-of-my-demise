@@ -58,6 +58,7 @@ const OnboardingPreferences = preload("res://scripts/app/onboarding_preferences.
 var shell: AppShell = null
 var flow: GameFlow = null
 var prologue_seen_path: String = EntryStory.SEEN_PATH
+var restart_hint_path: String = EntryRestart.PATH
 
 var _boot_job: WorkerJob = null
 ## The title on show while the content loads behind it (null once the player has tapped or when it was skipped).
@@ -96,7 +97,7 @@ func start(skip_title: bool = false) -> void:
 	if _entry_busy:
 		return
 	_entry = null
-	_resume_after_patch = EntryRestart.consume()
+	_resume_after_patch = EntryRestart.consume(restart_hint_path)
 	_patch_active = false
 	if _startup != null:
 		_startup.cancel()

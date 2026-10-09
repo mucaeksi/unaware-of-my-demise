@@ -2,6 +2,8 @@ param(
     [string]$GodotPath,
     [switch]$ImportOnly,
     [switch]$Headless,
+    [switch]$Online,
+    [switch]$ResetReview,
     [ValidateRange(0, 100000)][int]$QuitAfter = 0
 )
 $ErrorActionPreference = 'Stop'
@@ -93,8 +95,13 @@ try {
     Invoke-GodotAndWait $taskGodot $taskImport 'import' | Out-Null
     if ($ImportOnly) { Write-Host 'Imports complete.'; exit 0 }
     $taskRun = @('--path', $taskGame, '--resolution', '540x960', '--log-file', (Join-Path $taskState 'game.log'))
+    if (!$Online) {
+        $taskRun += @('--scene', 'res://scenes/art_review/desktop_opening_review.tscn')
+        Write-Host 'Desktop review: Google sign-in is skipped; opening and tutorial use local data.'
+    }
     if ($Headless) { $taskRun += '--headless' }
     if ($QuitAfter -gt 0) { $taskRun += @('--quit-after', [string]$QuitAfter) }
+    if ($ResetReview -and !$Online) { $taskRun += @('--', '--reset-review') }
     if ($Headless -or $QuitAfter -gt 0) {
         Invoke-GodotAndWait $taskGodot $taskRun 'game' | Out-Null
     } else {

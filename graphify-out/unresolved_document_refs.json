@@ -26326,22 +26326,22 @@
   },
   {
     "source_file": "README.md",
-    "source_location": "L10",
+    "source_location": "L12",
     "target": "F:/unaware-of-my-demise"
   },
   {
     "source_file": "README.md",
-    "source_location": "L18",
+    "source_location": "L20",
     "target": ".claude/"
   },
   {
     "source_file": "README.md",
-    "source_location": "L20",
+    "source_location": "L22",
     "target": "python tools/project_catalog.py build"
   },
   {
     "source_file": "README.md",
-    "source_location": "L20",
+    "source_location": "L22",
     "target": "python tools/project_catalog.py find <words> --scope active"
   },
   {
@@ -28973,6 +28973,11 @@
     "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
     "source_location": "L11",
     "target": "mucaeksi/unaware-of-my-demise"
+  },
+  {
+    "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
+    "source_location": "L22",
+    "target": "user://desktop_review/"
   },
   {
     "source_file": "docs/coder/GIT_STRATEGY.md",

@@ -3152,12 +3152,12 @@
   {
     "path": "OYUNU_AC.cmd",
     "node_id": "oyunu_ac",
-    "size_bytes": 229
+    "size_bytes": 238
   },
   {
     "path": "README.md",
     "node_id": "readme",
-    "size_bytes": 3427
+    "size_bytes": 3600
   },
   {
     "path": "THIRD_PARTY_LICENSES/claude-code-game-studios-MIT.txt",
@@ -3517,7 +3517,7 @@
   {
     "path": "docs/coder/CLOUD_MAIN_SYNC.md",
     "node_id": "docs_coder_cloud_main_sync",
-    "size_bytes": 4369
+    "size_bytes": 4831
   },
   {
     "path": "docs/coder/CODER_RESPONSE_FORMAT.md",
@@ -3528,6 +3528,11 @@
     "path": "docs/coder/DESKTOP_LAUNCHER_VALIDATION.json",
     "node_id": "docs_coder_desktop_launcher_validation",
     "size_bytes": 1107
+  },
+  {
+    "path": "docs/coder/DESKTOP_OPENING_REVIEW_VALIDATION.json",
+    "node_id": "docs_coder_desktop_opening_review_validation",
+    "size_bytes": 1254
   },
   {
     "path": "docs/coder/GACHA_ONLINE_GAME_MASTER_CLOUD_GITHUB_DRIVE_EXECUTION_PROMPT_FINAL.md",
@@ -23060,6 +23065,11 @@
     "size_bytes": 329
   },
   {
+    "path": "game/scenes/art_review/desktop_opening_review.tscn",
+    "node_id": "game_scenes_art_review_desktop_opening_review",
+    "size_bytes": 332
+  },
+  {
     "path": "game/scenes/art_review/entry_preview.tscn",
     "node_id": "game_scenes_art_review_entry_preview",
     "size_bytes": 301
@@ -23423,6 +23433,16 @@
     "path": "game/scripts/art_review/cinematic_review.gd.uid",
     "node_id": "game_scripts_art_review_cinematic_review_gd",
     "size_bytes": 19
+  },
+  {
+    "path": "game/scripts/art_review/desktop_opening_review.gd",
+    "node_id": "game_scripts_art_review_desktop_opening_review",
+    "size_bytes": 2455
+  },
+  {
+    "path": "game/scripts/art_review/desktop_opening_review.gd.uid",
+    "node_id": "game_scripts_art_review_desktop_opening_review_gd",
+    "size_bytes": 20
   },
   {
     "path": "game/scripts/art_review/entry_preview.gd",
@@ -24477,7 +24497,7 @@
   {
     "path": "game/scripts/ui/story_director.gd",
     "node_id": "game_scripts_ui_story_director",
-    "size_bytes": 57274
+    "size_bytes": 57341
   },
   {
     "path": "game/scripts/ui/story_director.gd.uid",
@@ -24813,6 +24833,11 @@
     "path": "game/tests/ui/test_cooldown_battle.gd.uid",
     "node_id": "game_tests_ui_test_cooldown_battle_gd",
     "size_bytes": 20
+  },
+  {
+    "path": "game/tests/ui/test_desktop_opening_review.gd",
+    "node_id": "game_tests_ui_test_desktop_opening_review",
+    "size_bytes": 4596
   },
   {
     "path": "game/tests/ui/test_entry_download.gd",
@@ -29892,12 +29917,12 @@
   {
     "path": "release/current/artifacts/game.aab",
     "node_id": "release_current_artifacts_game",
-    "size_bytes": 134505579
+    "size_bytes": 134
   },
   {
     "path": "release/current/artifacts/opening-base.pck",
     "node_id": "release_current_artifacts_opening_base",
-    "size_bytes": 101418444
+    "size_bytes": 134
   },
   {
     "path": "release/current/docs/ASSET_PROVENANCE.json",
@@ -33327,7 +33352,7 @@
   {
     "path": "tools/Start-Game.ps1",
     "node_id": "tools_start_game",
-    "size_bytes": 5489
+    "size_bytes": 5829
   },
   {
     "path": "tools/Start-UiPreview.ps1",
