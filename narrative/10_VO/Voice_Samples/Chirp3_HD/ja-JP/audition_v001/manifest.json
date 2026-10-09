@@ -2,7 +2,7 @@
   "schema_version": 1,
   "status": "BLOCKED_OR_INTERRUPTED",
   "synthesis_calls_attempted": 0,
-  "voices_list_calls_attempted": 2,
+  "voices_list_calls_attempted": 3,
   "voices": [],
   "errors": [
     {
@@ -16,12 +16,16 @@
     {
       "at_utc": "2026-10-09T07:24:32.315511+00:00",
       "category": "GOOGLE_HTTP_401_CREDENTIALS_MISSING"
+    },
+    {
+      "at_utc": "2026-10-09T07:39:16.122617+00:00",
+      "category": "GOOGLE_HTTP_403_SERVICE_DISABLED"
     }
   ],
   "owner_authorized": true,
   "performance_review": "NOT_LISTENED",
   "runtime_integration": false,
-  "updated_at_utc": "2026-10-09T07:24:32.315533+00:00",
+  "updated_at_utc": "2026-10-09T07:39:16.122638+00:00",
   "generated_samples": 0,
-  "auth_method": "API_KEY_BINDING"
+  "auth_method": "EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH"
 }

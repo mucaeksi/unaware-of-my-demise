@@ -1,8 +1,8 @@
 [
   {
     "url": "https://docs.cloud.google.com/text-to-speech/docs/authentication",
-    "retrieved_at_utc": "2026-10-09T07:24:31.333352+00:00",
-    "document_sha256": "c9637040d420f62f735e0ad7408deddebe3512a9ba2cb8c803f826fea7cc4eff",
+    "retrieved_at_utc": "2026-10-09T07:39:14.642468+00:00",
+    "document_sha256": "0c5457d29c1b1404358eb2d3101ad2859024d113b869b4679a833c620a077b4f",
     "excerpts": [
       "oud TTS client libraries provide high-level language support for authenticating to Cloud TTS programmatically. To authenticate calls to Google Cloud APIs, client libraries support Application Default Credentials (ADC) ; the libraries look for credentials in a set of defined locations and use those credentials to authenticate requests to the API. With ADC, you can make credentials available to your application in a variety of environments, such as local development or production, without needing to modify your application code. REST You can authenticate to the Cloud TTS API by using your gcloud CLI credentials or by using Application Default Credentials . For more information about authentication for RE",
       "s local development or production, without needing to modify your application code. REST You can authenticate to the Cloud TTS API by using your gcloud CLI credentials or by using Application Default Credentials . For more information about authentication for REST requests, see Authenticate for using REST . User credentials and ADC for Cloud TTS One way to provide credentials to ADC is to use the gcloud CLI to insert your user credentials into a credential file. This file is placed on your local file system where ADC can find it; ADC then uses the provided user credentials to authenticate requests. This method is often used for local development. If you use this method, you might encounter an authentic",
@@ -11,8 +11,8 @@
   },
   {
     "url": "https://docs.cloud.google.com/text-to-speech/docs/chirp3-hd",
-    "retrieved_at_utc": "2026-10-09T07:24:32.142486+00:00",
-    "document_sha256": "71b44aa5cf8a8fb89a8e60b57477d75e5a80bdaca368085951e0c2b1573ef49a",
+    "retrieved_at_utc": "2026-10-09T07:39:15.493384+00:00",
+    "document_sha256": "468868a1b6a1a15ac781bcb6d5b66c497816e191ac64c874263881180cb732b4",
     "excerpts": [
       "he client library for Cloud TTS, see Cloud TTS client libraries . For more information, see the Cloud TTS Python API reference documentation . To authenticate to Cloud TTS, set up Application Default Credentials. For more information, see Set up authentication for a local development environment . \"\"\"Synthesizes speech from a stream of input text.\"\"\" from google.cloud import texttospeech client = texttospeech . TextToSpeechClient () # See https://cloud.google.com/text-to-speech/docs/voices for all voices. streaming_config = texttospeech . StreamingSynthesizeConfig ( voice = texttospeech . VoiceSelectionParams ( name = \"en-US-Chirp3-HD-Charon\" , language_code = \"en-US\" , ) ) # Set the config for your st",
       "he client library for Cloud TTS, see Cloud TTS client libraries . For more information, see the Cloud TTS Python API reference documentation . To authenticate to Cloud TTS, set up Application Default Credentials. For more information, see Set up authentication for a local development environment . def synthesize_text (): \"\"\"Synthesizes speech from the input string of text.\"\"\" from google.cloud import texttospeech text = \"Hello there.\" client = texttospeech . TextToSpeechClient () input_text = texttospeech . SynthesisInput ( text = text ) # Note: the voice can also be specified by name. # Names of voices can be retrieved with client.list_voices(). voice = texttospeech . VoiceSelectionParams ( language_c",

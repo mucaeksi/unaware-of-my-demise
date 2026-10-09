@@ -1,0 +1,25 @@
+{
+  "at_utc": "2026-10-09T07:38:37.690521+00:00",
+  "objects": [
+    {
+      "oid": "edd8cf08e42910e0d1845f63334a82add62bbecea7774625c3ffd86f77236456",
+      "size": 134505579,
+      "status": "REMOTE_BYTES_DOWNLOADED_SHA256_VERIFIED",
+      "verify_http_succeeded": true,
+      "download_bytes": 134505579,
+      "download_sha256": "edd8cf08e42910e0d1845f63334a82add62bbecea7774625c3ffd86f77236456"
+    },
+    {
+      "oid": "1e4dbe311c6c8f705814579e9c407df491dc8e9ffa6824b385900893b6f02ab1",
+      "size": 101418444,
+      "status": "REMOTE_BYTES_DOWNLOADED_SHA256_VERIFIED",
+      "verify_http_succeeded": true,
+      "download_bytes": 101418444,
+      "download_sha256": "1e4dbe311c6c8f705814579e9c407df491dc8e9ffa6824b385900893b6f02ab1"
+    }
+  ],
+  "operation": "NORMAL_LFS_VERIFY_EXISTING_UPLOAD_AND_DOWNLOAD_HASH",
+  "hooks_disabled": false,
+  "pointers_pushed_without_bytes": false,
+  "status": "ALL_PENDING_REMOTE_LFS_BYTES_SHA256_VERIFIED"
+}
