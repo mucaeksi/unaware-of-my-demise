@@ -1263,6 +1263,7 @@
       "/workspace/uomd-main-review/docs/coder/START_HERE.md",
       "/workspace/uomd-main-review/docs/coder/STORY_CHARACTER_TEMPLATE.md",
       "/workspace/uomd-main-review/docs/coder/TEST_PLAN.md",
+      "/workspace/uomd-main-review/docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md",
       "/workspace/uomd-main-review/docs/design/BATTLE_UI_AND_AAB_VISUAL_v002_2026-10-08.md",
       "/workspace/uomd-main-review/docs/design/BOOTSTRAP_CONTENT_AND_PROLOGUE_AUDIT_2026-10-07.md",
       "/workspace/uomd-main-review/docs/design/COOLDOWN_COMBAT_AND_OPENING_v003_2026-10-08.md",
@@ -3543,10 +3544,10 @@
       "/workspace/uomd-main-review/narrative/FADYME_MEDIA_ALL/opening_014.ogg"
     ]
   },
-  "total_files": 3533,
-  "total_words": 21206669,
+  "total_files": 3534,
+  "total_words": 21208951,
   "needs_graph": true,
-  "warning": "Large corpus: 3533 files · ~21,206,669 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.",
+  "warning": "Large corpus: 3534 files · ~21,208,951 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.",
   "skipped_sensitive": [
     "/workspace/uomd-main-review/.codex/validation/secret-scan.json",
     "/workspace/uomd-main-review/game/data/keys/uomd-content-1.pem",

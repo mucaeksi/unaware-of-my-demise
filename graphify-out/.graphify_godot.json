@@ -376463,6 +376463,7 @@
     "docs/coder/START_HERE.md": "docs_coder_start_here",
     "docs/coder/STORY_CHARACTER_TEMPLATE.md": "docs_coder_story_character_template",
     "docs/coder/TEST_PLAN.md": "docs_coder_test_plan",
+    "docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md": "docs_coder_cloud_delivery_google_tts_project_access",
     "docs/coder/cloud_delivery/ensure_google_tts_service.py": "docs_coder_cloud_delivery_ensure_google_tts_service",
     "docs/coder/cloud_delivery/google_tts_service_status.json": "docs_coder_cloud_delivery_google_tts_service_status",
     "docs/coder/cloud_delivery/lfs_pending_objects.json": "docs_coder_cloud_delivery_lfs_pending_objects",
@@ -382409,7 +382410,7 @@
     "tools/verify_opening_pack.gd": "tools_verify_opening_pack"
   },
   "statistics": {
-    "inventory_files": 6658,
+    "inventory_files": 6659,
     "godot_source_files": 780,
     "readable_godot_files": 780,
     "source_files_by_extension": {

@@ -26301,7 +26301,7 @@
   },
   {
     "source_file": "AGENTS.md",
-    "source_location": "L61",
+    "source_location": "L68",
     "target": "/graphify"
   },
   {
@@ -29183,6 +29183,11 @@
     "source_file": "docs/coder/MCP.md",
     "source_location": "L52",
     "target": "/opt/pw-browsers"
+  },
+  {
+    "source_file": "docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md",
+    "source_location": "L21",
+    "target": "roles/serviceusage.serviceUsageConsumer"
   },
   {
     "source_file": "docs/design/BATTLE_UI_AND_AAB_VISUAL_v002_2026-10-08.md",

@@ -53,8 +53,15 @@ were remotely verified and downloaded/hash-checked; preserve normal LFS hooks.
 Owner follow-up: a cloud API key was added and provider API activation was
 reported. Use Google credentials only for sound and music; produce images with
 the image-generation tool. A fresh Actions probe still reports SERVICE_DISABLED
-for project 604013824221. Check the enabled project's identity before retrying;
-do not treat reported activation or an unbound runtime key as working access.
+for project 604013824221. The owner then identified the enabled project as
+`gen-lang-client-0955955681`. OAuth requests now explicitly use that quota
+project; the existing public principal
+`uomd-play-billing@unaware-of-my-demise.iam.gserviceaccount.com` receives
+USER_PROJECT_DENIED. The administrator needs to grant only Service Usage
+Consumer on that audio project; see
+`docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md`. The key-only route
+still returns CREDENTIALS_MISSING. Do not repeat unchanged access probes or
+assume an unbound runtime key works. No synthesis has been attempted.
 
 ## Graphify
 

@@ -2,7 +2,7 @@
 
 2026-10-09 · Fadyme ve sonraki karakterlerin ses seçimi için saklanan standart **30 seslik referans liste**: **14 kadın, 16 erkek**. Henüz bir karaktere ses atanmadı. Kullanıcı tüm kadın/erkek sesler için aynı Japonca metinle Google API örneklerini açıkça istedi; üretim erişim/kimlik nedeniyle bekliyor. Gerçek sentez çağrısı ve yeni ses dosyası sayısı şu anda 0.
 
-**Doğrulama durumu:** Bu cloud oturumunun doğrudan Google bağlantısı 403 ile engellendi; resmi authentication/Chirp 3 HD belgeleri daha sonra GitHub Actions üzerinden okundu ve örnek paketinin `provider_reference.json` dosyasına kaydedildi. Mevcut `GEMINI_API` secret’ı bulundu; Cloud TTS iki API-key biçimini 401 ile reddetti. Mevcut Google servis hesabı OAuth erişimi çalıştı, ancak `604013824221` projesinde Cloud TTS kapalı (`SERVICE_DISABLED`); açma isteği 403 aldı. Aşağıdaki katalog canlı API’den alınmadı; güncel Japonca ses kapsamı hâlâ doğrulanmalı. API etkinleştirildiğinde araç canlı listeyi esas alarak tüm kadın/erkek örneklerini üretecek. Kimlik bilgileri dosyalara taşınmadı.
+**Doğrulama durumu:** Kullanıcının etkinleştirdiği proje `gen-lang-client-0955955681`. Bu kota projesini kullanan mevcut servis hesabı `USER_PROJECT_DENIED`, API key yolu `CREDENTIALS_MISSING` döndürdü. [Gerekli Service Usage Consumer ayarı](../coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md) hesap kimliğiyle birlikte kayıtlıdır. Canlı Japonca ses listesi ve gerçek WAV örnekleri henüz doğrulanmadı. Kimlik bilgileri dosyalara taşınmadı; aşağıdaki 30 ses referans listedir.
 
 ## Kadın · 14
 

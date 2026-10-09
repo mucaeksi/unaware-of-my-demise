@@ -63,13 +63,15 @@ yükleyerek Cloud TTS erişimini denetler. Servis hesabı JSON'u/key'i veya acce
 token dosyaya/loga yazılmaz. Bu hesabın TTS erişimi başarılı olmadan kayıt seti
 üretilmiş sayılmaz. Kimlik yöntemi manifestte açıkça kaydedilir.
 
-Son kontrol: kullanıcı API etkinleştirmesini bildirdikten sonra
-[Actions 37907743612](https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37907743612)
-yeniden çalıştırıldı. Aynı servis hesabıyla `604013824221` projesi hâlâ
-`SERVICE_DISABLED` döndürdü; etkinleştirme isteği 403 ile reddedildi.
-Gerçek WAV ve sentez çağrısı sayısı **0**. Etkinleştirilen projenin kimliği
-netleştirilmeden erişim çalışıyor kabul edilmez. Bu oturumun runtime kontrolünde
-Google anahtar binding'i görünmedi; GitHub Actions yolu bunu gerektirmez.
+Son kontrol: kullanıcı etkinleştirdiği projeyi `gen-lang-client-0955955681`
+olarak bildirdi. [Actions 37910361637](https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37910361637)
+OAuth isteklerinde bu kota projesini kullandı. Mevcut servis hesabı
+`USER_PROJECT_DENIED`; key-only yol `CREDENTIALS_MISSING` döndürdü.
+Gerçek WAV ve sentez çağrısı sayısı **0**. [Gerekli hesap ve kesin IAM ayarı](../../../../../../docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md)
+main'de kayıtlıdır. Yalnız Service Usage Consumer rolü gerekir; anahtar değerinin
+tekrar paylaşılması gerekmez. Ek provider hataları bu izin sağlandıktan sonra
+gerçek çağrıyla değerlendirilir. Bu oturumda hazır Google anahtar binding'i
+hâlâ görünmüyor; mevcut Actions OAuth yolu ikinci bir anahtar kopyası gerektirmez.
 Araç `GOOGLE_CLOUD_API_KEY`, `GOOGLE_API_KEY` ve `GEMINI_API` ortam değişkenlerini
 kabul eder. Google kimlik bilgileri yalnız ses/müzik işlerinde kullanılacak;
 görsel üretimi bu aracın kapsamı dışındadır.

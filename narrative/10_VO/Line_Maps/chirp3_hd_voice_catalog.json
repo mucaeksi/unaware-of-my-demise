@@ -7,7 +7,7 @@
   "target_locale": "ja-JP",
   "verification_status": "STATIC_REFERENCE_PENDING_LIVE_VOICES_LIST",
   "current_completeness_verified": false,
-  "verification_note": "Official documentation was captured via GitHub Actions. The live voices.list call returned SERVICE_DISABLED for the existing OAuth consumer project; current Japanese voice availability/completeness remains unverified. Both API-key interfaces returned 401; existing service account OAuth works. No fresh samples exist.",
+  "verification_note": "The owner enabled project is gen-lang-client-0955955681. Existing OAuth with this explicit quota project returns USER_PROJECT_DENIED; key-only access returns CREDENTIALS_MISSING. No live catalog or WAV generation is verified.",
   "counts": {
     "total": 30,
     "female": 14,
@@ -20,7 +20,7 @@
   ],
   "live_api_response": null,
   "live_verified_at": null,
-  "api_calls": 5,
+  "api_calls": 9,
   "auditions_generated": 0,
   "voices": [
     {
@@ -266,11 +266,13 @@
   ],
   "audition_authorization": "OWNER_EXPLICITLY_REQUESTED_ALL_FEMALE_AND_MALE_SHARED_JAPANESE_SAMPLES",
   "audition_package": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001",
-  "audition_status": "AUTHORIZED_EXISTING_OAUTH_VERIFIED_TTS_SERVICE_DISABLED",
+  "audition_status": "AUTHORIZED_EXISTING_OAUTH_VERIFIED_QUOTA_PROJECT_USAGE_DENIED",
   "api_call_counter_scope": "Shared authoring CLI only; excludes OAuth, provider documentation, service-setup helper and LFS",
   "google_credentials_source": "EXISTING_GITHUB_GOOGLE_PLAY_SERVICE_ACCOUNT",
   "provider_service_report": "docs/coder/cloud_delivery/google_tts_service_status.json",
   "provider_docs_reference": "narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json",
-  "last_access_check_utc": "2026-10-09T08:53:53.363214+00:00",
-  "last_access_check_workflow": "https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37907743612"
+  "last_access_check_utc": "2026-10-09T09:18:28.109894+00:00",
+  "last_access_check_workflow": "https://github.com/mucaeksi/unaware-of-my-demise/actions/runs/37910361637",
+  "requested_oauth_quota_project": "gen-lang-client-0955955681",
+  "access_setup": "docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md"
 }
