@@ -17,6 +17,7 @@ import os
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 import wave
 from datetime import datetime, timezone
@@ -54,7 +55,10 @@ def save_json(path, data):
 def authorization():
     for name in ('GOOGLE_CLOUD_API_KEY', 'GOOGLE_API_KEY'):
         if os.environ.get(name):
-            return {'x-goog-api-key': os.environ[name]}, 'API_KEY_BINDING'
+            key = os.environ[name].strip()
+            if not key or any(ord(c) <= 32 or ord(c) >= 127 for c in key):
+                raise AuthoringError('GOOGLE_API_KEY_BINDING_INVALID_FORMAT')
+            return {'x-goog-api-key': key}, 'API_KEY_BINDING'
     try:
         import google.auth
         import google.auth.transport.requests
@@ -70,7 +74,13 @@ def authorization():
 
 def request_json(endpoint, headers, body=None):
     data = canonical(body) if body is not None else None
-    req = urllib.request.Request(API + endpoint, data=data, headers={
+    headers = dict(headers)
+    url = API + endpoint
+    if 'x-goog-api-key' in headers:
+        # Standard Google REST key parameter. Never persist or log this URL.
+        key = headers.pop('x-goog-api-key')
+        url += ('&' if '?' in url else '?') + urllib.parse.urlencode({'key': key})
+    req = urllib.request.Request(url, data=data, headers={
         **headers, 'Content-Type': 'application/json; charset=utf-8',
         'User-Agent': 'uomd-chirp3-hd-authoring/1',
     }, method='POST' if body is not None else 'GET')

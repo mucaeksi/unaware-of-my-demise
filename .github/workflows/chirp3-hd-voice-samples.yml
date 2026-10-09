@@ -37,6 +37,37 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git fetch origin main
           git merge --no-edit origin/main
+      - name: Capture official provider authentication reference without credentials
+        continue-on-error: true
+        run: |
+          python3 - <<'PY'
+          import datetime, hashlib, html, json, re, urllib.request
+          from pathlib import Path
+          records = []
+          for url in ['https://cloud.google.com/text-to-speech/docs/authentication',
+                      'https://cloud.google.com/text-to-speech/docs/chirp3-hd']:
+              try:
+                  with urllib.request.urlopen(url, timeout=30) as response:
+                      data = response.read()
+                      source_url = response.url
+                  text = data.decode('utf-8')
+                  match = re.search(r'class="devsite-article-body[^\"]*"', text)
+                  if match:
+                      text = text[match.end():]
+                  text = re.sub(r'<(?:script|style)\b[^>]*>.*?</(?:script|style)>', '', text, flags=re.S)
+                  text = html.unescape(re.sub(r'<[^>]+>', ' ', text))
+                  text = re.sub(r'\s+', ' ', text)
+                  excerpts = []
+                  for pattern in [r'API keys?', r'OAuth', r'Application Default Credentials',
+                                  r'SSML', r'pace', r'pause', r'pronunciation']:
+                      excerpts += [text[max(0, m.start()-180):m.end()+500]
+                                   for m in list(re.finditer(pattern, text, re.I))[:5]]
+                  records.append({'url': source_url, 'retrieved_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                                  'document_sha256': hashlib.sha256(data).hexdigest(), 'excerpts': excerpts})
+              except Exception as error:
+                  records.append({'url': url, 'fetch_error_type': type(error).__name__})
+          Path('narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/provider_reference.json').write_text(json.dumps(records, indent=2) + '\n')
+          PY
       - name: Generate the already-authorized same-text Japanese samples
         id: generation
         env:
