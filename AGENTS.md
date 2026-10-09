@@ -1,7 +1,7 @@
 # Unaware of My Demise — Codex project instructions
 
 - Preserve user changes. Owner direction, 2026-10-09: continue work in cloud and commit/push completed, validated changes to `main`; the owner pulls with GitHub Desktop and plays the local Godot project. Current implementation scope is Entry; the owner chooses the next screen. See `docs/coder/CLOUD_MAIN_SYNC.md`.
-- Owner-selected collaboration: Codex produces character/environment designs and creative assets; Claude handles coding and integration. The current cloud task also authorizes Codex review fixes and validated `main` pushes. Store/app publication and paid API batches retain their existing approval requirements. See `docs/ART_AND_CODE_HANDOFF.md`.
+- Owner-selected collaboration: Codex produces character/environment designs and creative assets; Claude handles coding and integration. The current AAB handoff is Codex's final build/review-fix task. Afterwards Codex only inspects the game and produces assets/designs; Claude owns runtime coding, fixes, integration and future AABs. The owner selected Fadyme first, across all scripts and game contexts. Validated design/review/Graphify deliverables may be pushed to `main`. Store/app publication and paid API batches retain their existing approval requirements. See `docs/ART_AND_CODE_HANDOFF.md`.
 - Active skill/agent/standard/workflow source is `.codex/`. Read `.codex/standards/authority.md` when legacy instructions conflict. `.agents/library/` is the consolidated provenance/deferred-capability index. Root `CLAUDE.md` is the current coding handoff; its old takeover instructions are archived and inert.
 - Skill discovery uses `.agents/skills/` linked to `.codex/skills/`. After cloning/moving, run `.codex/scripts/bootstrap_skills.ps1`. Do not maintain duplicate skill copies; project skills use `uomd-` names.
 - Godot 4.7.2, project root `game/`, GDScript, Android portrait. Preserve actual gl_compatibility renderer, strict typing checks, existing architecture and unrelated plugins. Prefer Godot AI MCP for editor-aware operations and complex scene/resource edits.
@@ -17,9 +17,11 @@
 The owner explicitly authorized Codex to fix the review findings and restore
 missing dialogue before concentrating on character/environment design. Prioritize
 the first AAB; see `docs/release/FIRST_AAB_PLAN.md`. Japanese voice and music use
-Google APIs in a step-by-step collaboration with the owner. This task exception
-does not expand deferred systems or authorize paid batches, GitHub pushes or
-publication. Character/environment designs still follow the established handoff.
+Google APIs in a step-by-step collaboration with the owner. This closing task does not expand deferred systems or authorize paid batches or
+store publication. Validated `main` pushes are explicitly authorized above.
+After this handoff, further AAB builds and runtime fixes belong to Claude. See
+`narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md` for the owner-selected
+Fadyme audit and design scope. Character designs still follow the established handoff.
 
 ## Graphify
 

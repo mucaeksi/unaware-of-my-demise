@@ -26301,12 +26301,12 @@
   },
   {
     "source_file": "AGENTS.md",
-    "source_location": "L26",
+    "source_location": "L28",
     "target": "/graphify"
   },
   {
     "source_file": "CLAUDE.md",
-    "source_location": "L22",
+    "source_location": "L28",
     "target": "tools/graphify_project.py --refresh"
   },
   {
@@ -27458,6 +27458,36 @@
     "source_file": "docs/GRAPHIFY_PROJECT_MAP.md",
     "source_location": "L25",
     "target": "semantic-framework/"
+  },
+  {
+    "source_file": "docs/GRAPHIFY_REVIEW_2026-10-09.md",
+    "source_location": "L3",
+    "target": "tools/graphify_project.py --refresh"
+  },
+  {
+    "source_file": "docs/GRAPHIFY_REVIEW_2026-10-09.md",
+    "source_location": "L3",
+    "target": "graphify-out/"
+  },
+  {
+    "source_file": "docs/GRAPHIFY_REVIEW_2026-10-09.md",
+    "source_location": "L7",
+    "target": "graphify-out/graph.html"
+  },
+  {
+    "source_file": "docs/GRAPHIFY_REVIEW_2026-10-09.md",
+    "source_location": "L7",
+    "target": "graphify-out/fadyme.html"
+  },
+  {
+    "source_file": "docs/GRAPHIFY_REVIEW_2026-10-09.md",
+    "source_location": "L16",
+    "target": "graphify-out/coverage.json"
+  },
+  {
+    "source_file": "docs/GRAPHIFY_REVIEW_2026-10-09.md",
+    "source_location": "L16",
+    "target": "graphify-out/browser_validation.json"
   },
   {
     "source_file": "docs/INFRASTRUCTURE_AUDIT.md",
@@ -35943,6 +35973,26 @@
     "source_file": "narrative/15_Art_Workbench/characters/README.md",
     "source_location": "L3",
     "target": "existing-character-id>/<version>/"
+  },
+  {
+    "source_file": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/DESIGN_SCOPE.md",
+    "source_location": "L32",
+    "target": "assets/audio/voice/<speaker_id>/<line_id>.ogg"
+  },
+  {
+    "source_file": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md",
+    "source_location": "L12",
+    "target": "speaker_id/line_id"
+  },
+  {
+    "source_file": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md",
+    "source_location": "L60",
+    "target": "stage_id/placement/unlock"
+  },
+  {
+    "source_file": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md",
+    "source_location": "L64",
+    "target": "narrative/references/..."
   },
   {
     "source_file": "narrative/15_Art_Workbench/locations/README.md",

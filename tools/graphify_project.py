@@ -23,7 +23,7 @@ from graphify.analyze import god_nodes, suggest_questions, surprising_connection
 from graphify.build import build_from_json
 from graphify.cluster import cluster, score_all
 from graphify.diagnostics import diagnose_extraction, format_diagnostic_report
-from graphify.export import to_json
+from graphify.export import to_json, to_html
 from graphify.report import generate
 from graphify.detect import detect, save_manifest
 from graphify.extract import extract
@@ -267,6 +267,32 @@ def build(project_fragments=False, allow_reviewed_shrink=False):
     assert wrote,'Graph shrink guard refused write'
     write('.graphify_labels.json',{str(k):v for k,v in labels.items()})
     write('.graphify_analysis.json',{'communities':{str(k):v for k,v in communities.items()},'cohesion':{str(k):v for k,v in cohesion.items()},'gods':gods,'surprises':surprises,'questions':questions})
+    # Render from this final Godot-aware graph, not the preceding native-only map.
+    # Keep Graphify's pinned renderer bytes; local loading also works offline.
+    vendor = ROOT / 'tools/vendor/vis-network-9.1.6/vis-network.min.js'
+    def render_map(graph, groups, name):
+        target = OUT / name
+        if not to_html(graph, groups, str(target), community_labels=labels, node_limit=5000):
+            raise RuntimeError(f'Graphify did not render {name}')
+        page = target.read_text(encoding='utf-8')
+        page = page.replace('https://unpkg.com/vis-network@9.1.6/standalone/umd/vis-network.min.js',
+                            '../tools/vendor/vis-network-9.1.6/vis-network.min.js')
+        # file:// sibling scripts do not need a CORS request; preserve SRI.
+        page = page.replace('crossorigin="anonymous"', '')
+        target.write_text(page, encoding='utf-8')
+    if not vendor.is_file():
+        raise FileNotFoundError('Missing pinned Graphify renderer; restore tools/vendor/vis-network-9.1.6')
+    render_map(G, communities, 'graph.html')
+    seeds = {n for n, d in G.nodes(data=True) if 'fadyme' in str(d.get('source_file', '')).lower()}
+    focused = set(seeds)
+    for n in seeds:
+        focused.update(G.predecessors(n))
+        focused.update(G.successors(n))
+    focus_graph = G.subgraph(focused).copy()
+    focus_groups = {cid: [n for n in members if n in focused] for cid, members in communities.items()}
+    focus_groups = {cid: members for cid, members in focus_groups.items() if members}
+    render_map(focus_graph, focus_groups, 'fadyme.html')
+    (OUT / '.graph.html.stale').unlink(missing_ok=True)
     summary={'files':len(files),'file_extensions':dict(Counter(Path(p).suffix.lower() for p in files)),
         'source_directories':dict(Counter(p.split('/')[0] for p in files)), 'nodes':len(G),'edges':G.number_of_edges(),'communities':len(communities),
         'document_headings':headings,'resolved_document_refs':resolved_links,'unresolved_document_refs':len(unresolved),

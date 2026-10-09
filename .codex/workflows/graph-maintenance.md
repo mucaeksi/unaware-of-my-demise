@@ -19,3 +19,9 @@ python3 tools/graphify_project.py --refresh
 The saved interpreter path is environment-local; a path from another machine is
 not a runnable cloud interpreter. Generated dependency/cache folders are excluded
 by the helper even when repository Git ignore rules are disabled.
+
+The helper also rebuilds `graph.html` from the final Godot-aware graph and
+`fadyme.html` from Fadyme source nodes plus direct neighbors. Both use the
+pinned local renderer in `tools/vendor/vis-network-9.1.6/` and need no CDN.
+The large overview is aggregated by community; CLI queries retain full detail.
+See `docs/GRAPHIFY_REVIEW_2026-10-09.md` for browser evidence and semantic limits.

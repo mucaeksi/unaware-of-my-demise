@@ -5,15 +5,17 @@ Read [AGENTS.md](../../AGENTS.md), [authority.md](../../.codex/standards/authori
 before choosing work. Older takeover prompts are historical context and do not
 override current owner instructions.
 
-The owner's latest request is to fix review findings, recover missing dialogue,
-and finish the first AAB before expanding creative work. Google APIs will be
-used for Japanese voice and music, together with the owner, step by step.
-See [the first AAB plan](../release/FIRST_AAB_PLAN.md) for scope, evidence and open
-decisions. Codex is authorized to prepare review fixes for this task; ongoing
-character/environment design remains Codex's responsibility and coding/integration
-remains Claude's. The owner now authorizes validated cloud changes to be pushed
-to `main`; desktop review uses GitHub Desktop fetch/pull and the local Godot
-project. See [cloud/main sync](CLOUD_MAIN_SYNC.md).
+The owner's latest request closes Codex's AAB responsibility with the prepared
+first-AAB fixes/build evidence. From here Codex inspects the game/scripts and
+produces assets/designs, starting with all Fadyme contexts. Claude owns future
+coding, fixes, runtime integration and AAB builds. Read the
+[Fadyme audit and design scope](../../narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md)
+for exact missing audio IDs, expression fallbacks, asset measurements and source
+integrity gaps. Japanese voice and music use Google APIs with the owner step by
+step; no paid batch is implied. Validated cloud deliverables are authorized for
+`main`; desktop review uses GitHub Desktop fetch/pull and local Godot.
+See [cloud/main sync](CLOUD_MAIN_SYNC.md) and the
+[first AAB plan](../release/FIRST_AAB_PLAN.md) for the closing technical handoff.
 
 Read [CURRENT_STATE.md](../CURRENT_STATE.md), [PROJECT_MAP.md](../PROJECT_MAP.md),
 [GAME_TOOLCHAIN.md](../../GAME_TOOLCHAIN.md), and the current task's source notes.

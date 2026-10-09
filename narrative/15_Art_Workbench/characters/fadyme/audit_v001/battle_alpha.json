@@ -1,0 +1,781 @@
+{
+  "manifest": "game/data/presentation/battle_art_v001.json",
+  "actors": {
+    "fadyme": {
+      "idle": {
+        "source": "res://assets/characters/fadyme/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          25,
+          24,
+          366,
+          431
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          364,
+          431
+        ],
+        "ground_candidate_y": 1.0,
+        "authored_foot_y": 0.9953596287703016,
+        "ground_error_at_250px": 1.16,
+        "sha256": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634"
+      },
+      "walk": {
+        "source": "res://assets/characters/fadyme/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          445,
+          29,
+          385,
+          426
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          383,
+          424
+        ],
+        "ground_candidate_y": 0.99531,
+        "authored_foot_y": 0.9953051643192489,
+        "ground_error_at_250px": 0.0,
+        "sha256": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634"
+      },
+      "basic": {
+        "source": "res://assets/characters/fadyme/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          918,
+          36,
+          453,
+          420
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          451,
+          418
+        ],
+        "ground_candidate_y": 0.99524,
+        "authored_foot_y": 0.9952380952380953,
+        "ground_error_at_250px": 0.0,
+        "sha256": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634"
+      },
+      "active": {
+        "source": "res://assets/characters/fadyme/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          1411,
+          24,
+          339,
+          431
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          337,
+          429
+        ],
+        "ground_candidate_y": 0.99536,
+        "authored_foot_y": 0.9953596287703016,
+        "ground_error_at_250px": 0.0,
+        "sha256": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634"
+      },
+      "ultimate": {
+        "source": "res://assets/characters/fadyme/ultimate_pose_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "alpha_bounds": [
+          40,
+          109,
+          1231,
+          1186
+        ],
+        "ground_candidate_y": 0.94577,
+        "authored_foot_y": 0.945,
+        "ground_error_at_250px": 0.19,
+        "sha256": "1d06c98782fabdcf57ac9f647c107ea8316e39dded124cd86f9716db8fd00c62"
+      },
+      "hit": {
+        "source": "res://assets/characters/fadyme/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          503,
+          484,
+          392,
+          381
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          390,
+          379
+        ],
+        "ground_candidate_y": 0.99475,
+        "authored_foot_y": 0.994750656167979,
+        "ground_error_at_250px": 0.0,
+        "sha256": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634"
+      },
+      "defeat": {
+        "source": "res://assets/characters/fadyme/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          905,
+          537,
+          462,
+          332
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          460,
+          330
+        ],
+        "ground_candidate_y": 0.99398,
+        "authored_foot_y": 0.9939759036144579,
+        "ground_error_at_250px": 0.0,
+        "sha256": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634"
+      },
+      "victory": {
+        "source": "res://assets/characters/fadyme/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          1376,
+          457,
+          377,
+          413
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          375,
+          411
+        ],
+        "ground_candidate_y": 0.99516,
+        "authored_foot_y": 0.9951573849878934,
+        "ground_error_at_250px": 0.0,
+        "sha256": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634"
+      }
+    },
+    "mahmut": {
+      "idle": {
+        "source": "res://assets/characters/mahmut/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          14,
+          28,
+          355,
+          423
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          353,
+          421
+        ],
+        "ground_candidate_y": 0.99527,
+        "authored_foot_y": 0.9952718676122931,
+        "ground_error_at_250px": 0.0,
+        "sha256": "9a77ec6e6e4a9ffe86907b3ad6c6d2bea16193e686abd1d5c4cafdd044a08a20"
+      },
+      "walk": {
+        "source": "res://assets/characters/mahmut/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          441,
+          32,
+          383,
+          419
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          381,
+          417
+        ],
+        "ground_candidate_y": 0.99523,
+        "authored_foot_y": 0.9952267303102625,
+        "ground_error_at_250px": 0.0,
+        "sha256": "9a77ec6e6e4a9ffe86907b3ad6c6d2bea16193e686abd1d5c4cafdd044a08a20"
+      },
+      "basic": {
+        "source": "res://assets/characters/mahmut/basic_attack_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "alpha_bounds": [
+          49,
+          266,
+          1241,
+          1036
+        ],
+        "ground_candidate_y": 0.82616,
+        "authored_foot_y": 0.828,
+        "ground_error_at_250px": -0.46,
+        "sha256": "69f981f5dbae07eaf7b3fe514661e977fe6b047791655df5573c493ffe733b8c"
+      },
+      "active": {
+        "source": "res://assets/characters/mahmut/guard_pose_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "alpha_bounds": [
+          48,
+          63,
+          1207,
+          1192
+        ],
+        "ground_candidate_y": 0.95056,
+        "authored_foot_y": 0.95,
+        "ground_error_at_250px": 0.14,
+        "sha256": "163fc5695cc4b06feebe62d80e7c0d73d0d462af210f022516fc56abaecd8338"
+      },
+      "ultimate": {
+        "source": "res://assets/characters/mahmut/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          14,
+          507,
+          422,
+          350
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          420,
+          348
+        ],
+        "ground_candidate_y": 0.99429,
+        "authored_foot_y": 0.9942857142857143,
+        "ground_error_at_250px": 0.0,
+        "sha256": "9a77ec6e6e4a9ffe86907b3ad6c6d2bea16193e686abd1d5c4cafdd044a08a20"
+      },
+      "hit": {
+        "source": "res://assets/characters/mahmut/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          471,
+          475,
+          414,
+          381
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          412,
+          379
+        ],
+        "ground_candidate_y": 0.99475,
+        "authored_foot_y": 0.994750656167979,
+        "ground_error_at_250px": 0.0,
+        "sha256": "9a77ec6e6e4a9ffe86907b3ad6c6d2bea16193e686abd1d5c4cafdd044a08a20"
+      },
+      "defeat": {
+        "source": "res://assets/characters/mahmut/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          885,
+          531,
+          420,
+          324
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          418,
+          322
+        ],
+        "ground_candidate_y": 0.99383,
+        "authored_foot_y": 0.9938271604938271,
+        "ground_error_at_250px": 0.0,
+        "sha256": "9a77ec6e6e4a9ffe86907b3ad6c6d2bea16193e686abd1d5c4cafdd044a08a20"
+      },
+      "victory": {
+        "source": "res://assets/characters/mahmut/chibi_poses_v003.png",
+        "source_size": [
+          1774,
+          887
+        ],
+        "mode": "RGBA",
+        "region": [
+          1346,
+          454,
+          407,
+          407
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          405,
+          405
+        ],
+        "ground_candidate_y": 0.99509,
+        "authored_foot_y": 0.995085995085995,
+        "ground_error_at_250px": 0.0,
+        "sha256": "9a77ec6e6e4a9ffe86907b3ad6c6d2bea16193e686abd1d5c4cafdd044a08a20"
+      }
+    },
+    "bellbound_dead": {
+      "idle": {
+        "source": "res://assets/enemies/tutorial/bellbound_poses_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          157,
+          32,
+          373,
+          647
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          371,
+          647
+        ],
+        "ground_candidate_y": 1.0,
+        "authored_foot_y": 0.9969088098918083,
+        "ground_error_at_250px": 0.77,
+        "sha256": "1af25ab7d903016bd81a98f4b72bffa3f3f716fe75f2768fd8f6c5ff836cedd1"
+      },
+      "walk": {
+        "source": "res://assets/enemies/tutorial/bellbound_poses_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          157,
+          32,
+          373,
+          647
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          371,
+          647
+        ],
+        "ground_candidate_y": 1.0,
+        "authored_foot_y": 0.9969088098918083,
+        "ground_error_at_250px": 0.77,
+        "sha256": "1af25ab7d903016bd81a98f4b72bffa3f3f716fe75f2768fd8f6c5ff836cedd1"
+      },
+      "basic": {
+        "source": "res://assets/enemies/tutorial/bellbound_attack_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "alpha_bounds": [
+          17,
+          77,
+          1253,
+          1181
+        ],
+        "ground_candidate_y": 0.94179,
+        "authored_foot_y": 0.938,
+        "ground_error_at_250px": 0.95,
+        "sha256": "13ba8dc5e5dde64b157c854ba58c63358c2d86bc2e97a39b736683b64f586c2d"
+      },
+      "active": {
+        "source": "res://assets/enemies/tutorial/bellbound_attack_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "alpha_bounds": [
+          17,
+          77,
+          1253,
+          1181
+        ],
+        "ground_candidate_y": 0.94179,
+        "authored_foot_y": 0.938,
+        "ground_error_at_250px": 0.95,
+        "sha256": "13ba8dc5e5dde64b157c854ba58c63358c2d86bc2e97a39b736683b64f586c2d"
+      },
+      "ultimate": {
+        "source": "res://assets/enemies/tutorial/bellbound_attack_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "alpha_bounds": [
+          17,
+          77,
+          1253,
+          1181
+        ],
+        "ground_candidate_y": 0.94179,
+        "authored_foot_y": 0.938,
+        "ground_error_at_250px": 0.95,
+        "sha256": "13ba8dc5e5dde64b157c854ba58c63358c2d86bc2e97a39b736683b64f586c2d"
+      },
+      "hit": {
+        "source": "res://assets/enemies/tutorial/bellbound_poses_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          95,
+          673,
+          485,
+          552
+        ],
+        "alpha_bounds": [
+          2,
+          0,
+          483,
+          550
+        ],
+        "ground_candidate_y": 0.99638,
+        "authored_foot_y": 0.9963768115942029,
+        "ground_error_at_250px": 0.0,
+        "sha256": "1af25ab7d903016bd81a98f4b72bffa3f3f716fe75f2768fd8f6c5ff836cedd1"
+      },
+      "defeat": {
+        "source": "res://assets/enemies/tutorial/bellbound_poses_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          737,
+          804,
+          500,
+          425
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          498,
+          423
+        ],
+        "ground_candidate_y": 0.99529,
+        "authored_foot_y": 0.9952941176470588,
+        "ground_error_at_250px": 0.0,
+        "sha256": "1af25ab7d903016bd81a98f4b72bffa3f3f716fe75f2768fd8f6c5ff836cedd1"
+      },
+      "victory": {
+        "source": "res://assets/enemies/tutorial/bellbound_poses_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          157,
+          32,
+          373,
+          647
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          371,
+          647
+        ],
+        "ground_candidate_y": 1.0,
+        "authored_foot_y": 0.9969088098918083,
+        "ground_error_at_250px": 0.77,
+        "sha256": "1af25ab7d903016bd81a98f4b72bffa3f3f716fe75f2768fd8f6c5ff836cedd1"
+      }
+    },
+    "hollow_pilgrim": {
+      "idle": {
+        "source": "res://assets/enemies/tutorial/pilgrim_poses_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          128,
+          46,
+          412,
+          564
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          410,
+          562
+        ],
+        "ground_candidate_y": 0.99645,
+        "authored_foot_y": 0.9964539007092199,
+        "ground_error_at_250px": 0.0,
+        "sha256": "165cb66e91dc324b177040d2a0f1b7b92917e47b2f64d0b3f1e55c0e805b5c56"
+      },
+      "walk": {
+        "source": "res://assets/enemies/tutorial/pilgrim_poses_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          128,
+          46,
+          412,
+          564
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          410,
+          562
+        ],
+        "ground_candidate_y": 0.99645,
+        "authored_foot_y": 0.9964539007092199,
+        "ground_error_at_250px": 0.0,
+        "sha256": "165cb66e91dc324b177040d2a0f1b7b92917e47b2f64d0b3f1e55c0e805b5c56"
+      },
+      "basic": {
+        "source": "res://assets/enemies/tutorial/pilgrim_attack_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "alpha_bounds": [
+          37,
+          166,
+          1233,
+          1099
+        ],
+        "ground_candidate_y": 0.8764,
+        "authored_foot_y": 0.875,
+        "ground_error_at_250px": 0.35,
+        "sha256": "0f4dae03ed7f3f9ef3263aefe493912c589d2c195b93fc79f13a3483a84437a0"
+      },
+      "active": {
+        "source": "res://assets/enemies/tutorial/pilgrim_attack_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "alpha_bounds": [
+          37,
+          166,
+          1233,
+          1099
+        ],
+        "ground_candidate_y": 0.8764,
+        "authored_foot_y": 0.875,
+        "ground_error_at_250px": 0.35,
+        "sha256": "0f4dae03ed7f3f9ef3263aefe493912c589d2c195b93fc79f13a3483a84437a0"
+      },
+      "ultimate": {
+        "source": "res://assets/enemies/tutorial/pilgrim_attack_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "alpha_bounds": [
+          37,
+          166,
+          1233,
+          1099
+        ],
+        "ground_candidate_y": 0.8764,
+        "authored_foot_y": 0.875,
+        "ground_error_at_250px": 0.35,
+        "sha256": "0f4dae03ed7f3f9ef3263aefe493912c589d2c195b93fc79f13a3483a84437a0"
+      },
+      "hit": {
+        "source": "res://assets/enemies/tutorial/pilgrim_poses_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          119,
+          637,
+          493,
+          551
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          491,
+          549
+        ],
+        "ground_candidate_y": 0.99637,
+        "authored_foot_y": 0.9963702359346642,
+        "ground_error_at_250px": 0.0,
+        "sha256": "165cb66e91dc324b177040d2a0f1b7b92917e47b2f64d0b3f1e55c0e805b5c56"
+      },
+      "defeat": {
+        "source": "res://assets/enemies/tutorial/pilgrim_poses_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          761,
+          735,
+          461,
+          455
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          459,
+          453
+        ],
+        "ground_candidate_y": 0.9956,
+        "authored_foot_y": 0.9956043956043956,
+        "ground_error_at_250px": 0.0,
+        "sha256": "165cb66e91dc324b177040d2a0f1b7b92917e47b2f64d0b3f1e55c0e805b5c56"
+      },
+      "victory": {
+        "source": "res://assets/enemies/tutorial/pilgrim_poses_v003.png",
+        "source_size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "region": [
+          128,
+          46,
+          412,
+          564
+        ],
+        "alpha_bounds": [
+          2,
+          2,
+          410,
+          562
+        ],
+        "ground_candidate_y": 0.99645,
+        "authored_foot_y": 0.9964539007092199,
+        "ground_error_at_250px": 0.0,
+        "sha256": "165cb66e91dc324b177040d2a0f1b7b92917e47b2f64d0b3f1e55c0e805b5c56"
+      }
+    }
+  }
+}

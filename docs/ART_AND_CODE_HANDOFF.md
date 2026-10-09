@@ -22,4 +22,4 @@ For desktop review open root `game/project.godot`, keep the existing Godot AI pl
 
 Pushing `main` starts CI; restored workflows can automatically deploy the Worker/admin after successful CI when their configuration is ready. Android release and content publishing remain manual workflows requiring signing/configuration secrets.
 
-Latest task exception: Codex prepares the owner-requested review fixes and missing dialogue restoration before the first AAB/audio collaboration. See [FIRST_AAB_PLAN.md](release/FIRST_AAB_PLAN.md).
+Final AAB exception, owner update 2026-10-09: the prepared review fixes/dialogue restoration and build evidence close Codex's AAB responsibility. Future fixes, runtime integration and AAB work belong to Claude. Codex's ongoing role is game/script inspection and asset/design production, stored on `main`. Fadyme is the selected first character across the opening, seven chapters, companion stories, events, voice bank, combat and UI. See [Fadyme audit and design scope](../narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md) and [FIRST_AAB_PLAN.md](release/FIRST_AAB_PLAN.md).

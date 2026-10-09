@@ -1,0 +1,1028 @@
+[
+  {
+    "source": "game/data/content/story_script_ch01.json",
+    "pointer": "/opening_scene",
+    "scene_id": "opening_sad_scene",
+    "stage_id": null,
+    "placement": "before_stage_1-1",
+    "unlock": null,
+    "direction_en": "Black screen. Rain ticks on an abandoned roadside shrine. Fadyme, alone for one breath, presses a blood-marked glove to a letter and writes by candlelight. She folds the page before Mahmut enters. A distant bell rings once; ash drifts upward instead of down.",
+    "title_en": "A Letter the Rain Could Not Keep"
+  },
+  {
+    "source": "game/data/content/story_script_ch01.json",
+    "pointer": "/scenes/0",
+    "scene_id": "vn_1_1",
+    "stage_id": "1-1",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "At gray dawn, ash leaves whisper the names carved into them. Mahmut hears only wind; Fadyme hears one syllable spoken in her mother’s voice.",
+    "title_en": "The Road That Whispers"
+  },
+  {
+    "source": "game/data/content/story_script_ch01.json",
+    "pointer": "/scenes/1",
+    "scene_id": "vn_1_2",
+    "stage_id": "1-2",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "At a collapsed wayshrine, Brin braces a fallen beam while Bellbound Dead scratch at the woodcutters’ shelter. Nixie has been scouting the road; Kera's herb cart is overturned beside the shrine. All three join the guided five-person battle as story loans.",
+    "title_en": "No Bell in the Trees"
+  },
+  {
+    "source": "game/data/content/story_script_ch01.json",
+    "pointer": "/scenes/2",
+    "scene_id": "vn_1_3",
+    "stage_id": "1-3",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Glass vials roll down a muddy slope. Kera is defending her overturned cart with a brass hand mortar and a look of personal offense.",
+    "title_en": "A Cart of Empty Bottles"
+  },
+  {
+    "source": "game/data/content/story_script_ch01.json",
+    "pointer": "/scenes/3",
+    "scene_id": "vn_1_4",
+    "stage_id": "1-4",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "A twig snaps above the road. Nixie drops from a low branch, bow already drawn at the shadow behind the party.",
+    "title_en": "The Map’s Little Lie"
+  },
+  {
+    "source": "game/data/content/story_script_ch01.json",
+    "pointer": "/scenes/4",
+    "scene_id": "vn_1_5",
+    "stage_id": "1-5",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "A dead wolf rises from the shrine ditch with a cracked bell fused through its jaw. The air goes silent around it.",
+    "title_en": "The Ash-Maw"
+  },
+  {
+    "source": "game/data/content/story_script_ch01.json",
+    "pointer": "/scenes/5",
+    "scene_id": "ch1_first_oath",
+    "stage_id": null,
+    "placement": "after_stage_1-2",
+    "unlock": null,
+    "direction_en": "Inside the wayshrine, the old keeper opens a register of oaths. Brin stands guard at the door.",
+    "title_en": "The Shrine Keeper's Register"
+  },
+  {
+    "source": "game/data/content/story_script_ch01.json",
+    "pointer": "/scenes/6",
+    "scene_id": "ch1_camp",
+    "stage_id": null,
+    "placement": "after_stage_1-5",
+    "unlock": null,
+    "direction_en": "Night after the Ash-Maw. The company camps at the shrine. Far off, a cracked handbell rings once; the ash above the fire drifts up instead of down.",
+    "title_en": "Ash That Falls Upward"
+  },
+  {
+    "source": "game/data/content/story_script_ch02.json",
+    "pointer": "/scenes/0",
+    "scene_id": "vn_2_1",
+    "stage_id": "2-1",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Rain falls through the broken rose window. Fadyme stops at the nave threshold when an unstrung bell answers from above.",
+    "title_en": "Rain in the Nave"
+  },
+  {
+    "source": "game/data/content/story_script_ch02.json",
+    "pointer": "/scenes/1",
+    "scene_id": "vn_2_2",
+    "stage_id": "2-2",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Two Choir Knights sing without moving their mouths. A pale ward passes from shield to shield.",
+    "title_en": "The Choir Without Breath"
+  },
+  {
+    "source": "game/data/content/story_script_ch02.json",
+    "pointer": "/scenes/2",
+    "scene_id": "vn_2_3",
+    "stage_id": "2-3",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Mirel unrolls a guest register under a brass reading lens. One line has been scraped so deeply that the parchment is nearly split.",
+    "title_en": "The Guest Roll"
+  },
+  {
+    "source": "game/data/content/story_script_ch02.json",
+    "pointer": "/scenes/3",
+    "scene_id": "vn_2_4",
+    "stage_id": "2-4",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Aveline lifts a waterlogged page from beneath the font. Mirel holds its edges together while candlelight reveals one surviving sentence.",
+    "title_en": "A Page Beneath the Font"
+  },
+  {
+    "source": "game/data/content/story_script_ch02.json",
+    "pointer": "/scenes/4",
+    "scene_id": "vn_2_5",
+    "stage_id": "2-5",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "At the archive door, Yseldra waits beneath the bell tower. Seven wax seals hang from her chain, each cut through the center.",
+    "title_en": "The Bell-Widow’s Verdict"
+  },
+  {
+    "source": "game/data/content/story_script_ch02.json",
+    "pointer": "/scenes/5",
+    "scene_id": "ch2_road",
+    "stage_id": null,
+    "placement": "after_stage_1-5",
+    "unlock": null,
+    "direction_en": "Morning. Beyond the last ash trees, the bell tower of Saint Luthos rises over flooded fields. It has no rope.",
+    "title_en": "The Tower Across the Fields"
+  },
+  {
+    "source": "game/data/content/story_script_ch02.json",
+    "pointer": "/scenes/6",
+    "scene_id": "ch2_camp",
+    "stage_id": null,
+    "placement": "after_stage_2-5",
+    "unlock": null,
+    "direction_en": "The cathedral refuge after the Bell-Widow's escape. Fadyme finds Mahmut on the tower stair.",
+    "title_en": "What We Did Not Say"
+  },
+  {
+    "source": "game/data/content/story_script_ch03.json",
+    "pointer": "/scenes/0",
+    "scene_id": "vn_3_1",
+    "stage_id": "3-1",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Nixie leads the company beneath bare apple trees. The fruit is still on the branches, but every name board in the orchard is blank.",
+    "title_en": "The Empty Orchard"
+  },
+  {
+    "source": "game/data/content/story_script_ch03.json",
+    "pointer": "/scenes/1",
+    "scene_id": "vn_3_2",
+    "stage_id": "3-2",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Jori has wedged her compact forge shield beneath the gate. She is too small to hold the door alone, but refuses to step away. Kera arrives on the Guild road with her rebuilt cart.",
+    "title_en": "A Smith’s Last Bell"
+  },
+  {
+    "source": "game/data/content/story_script_ch03.json",
+    "pointer": "/scenes/2",
+    "scene_id": "vn_3_3",
+    "stage_id": "3-3",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "A red-vial mercenary tips a flask into the village well. Fadyme raises her silver bell focus; the spell takes more from her than she lets anyone see.",
+    "title_en": "The Well Runs Red"
+  },
+  {
+    "source": "game/data/content/story_script_ch03.json",
+    "pointer": "/scenes/3",
+    "scene_id": "vn_3_4",
+    "stage_id": "3-4",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Pippa sings the lost names back to frightened villagers while a bell charm trembles at her wrist.",
+    "title_en": "The Inn of Borrowed Names"
+  },
+  {
+    "source": "game/data/content/story_script_ch03.json",
+    "pointer": "/scenes/4",
+    "scene_id": "vn_3_5",
+    "stage_id": "3-5",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Captain Rusk raises a signal banner over the orchard road. A volley is already aimed at the well.",
+    "title_en": "The Mercenary Captain"
+  },
+  {
+    "source": "game/data/content/story_script_ch03.json",
+    "pointer": "/scenes/5",
+    "scene_id": "ch3_road",
+    "stage_id": null,
+    "placement": "after_stage_2-5",
+    "unlock": null,
+    "direction_en": "Three days of orchard roads. Fadyme walks slower on the hills; Mahmut adjusts his pace without comment.",
+    "title_en": "Orchard Country"
+  },
+  {
+    "source": "game/data/content/story_script_ch03.json",
+    "pointer": "/scenes/6",
+    "scene_id": "ch3_camp",
+    "stage_id": null,
+    "placement": "after_stage_3-5",
+    "unlock": null,
+    "direction_en": "Oakhaven's inn, after the captain falls. Mahmut sets Rusk's sealed order on the table between them. Nixie has stayed behind in the refuge with Oakhaven's Vale children.",
+    "title_en": "The Sealed Order"
+  },
+  {
+    "source": "game/data/content/story_script_ch04.json",
+    "pointer": "/scenes/0",
+    "scene_id": "vn_4_1",
+    "stage_id": "4-1",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Odelia’s chalk arrows lead beneath the city. The water is still, but something moves against its reflection.",
+    "title_en": "Stairs Below the Cistern"
+  },
+  {
+    "source": "game/data/content/story_script_ch04.json",
+    "pointer": "/scenes/1",
+    "scene_id": "vn_4_2",
+    "stage_id": "4-2",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Tilda and Iona have turned a storage room into a clinic. Kera sets the recovered ledger beside their medicine jars.",
+    "title_en": "The Red Vial Ward"
+  },
+  {
+    "source": "game/data/content/story_script_ch04.json",
+    "pointer": "/scenes/2",
+    "scene_id": "vn_4_3",
+    "stage_id": "4-3",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Clem unlocks a narrow archive room. Mahmut waits at the stairwell while Fadyme asks for a private reading.",
+    "title_en": "The Measure of a Life"
+  },
+  {
+    "source": "game/data/content/story_script_ch04.json",
+    "pointer": "/scenes/3",
+    "scene_id": "vn_4_4",
+    "stage_id": "4-4",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Fadyme returns with a sealed vial. Kera recognizes the mixture from the guild ledger and sees the label is false. Later, alone, Fadyme refolds the letter from the forest road and tucks it deeper into her mother's prayer book.",
+    "title_en": "The Elixir Lie"
+  },
+  {
+    "source": "game/data/content/story_script_ch04.json",
+    "pointer": "/scenes/4",
+    "scene_id": "vn_4_5",
+    "stage_id": "4-5",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "The Matron seals herself behind a glass ward and floods the chamber with corrosive vapor.",
+    "title_en": "The Red Vial Matron"
+  },
+  {
+    "source": "game/data/content/story_script_ch04.json",
+    "pointer": "/scenes/5",
+    "scene_id": "ch4_road",
+    "stage_id": null,
+    "placement": "after_stage_3-5",
+    "unlock": null,
+    "direction_en": "The river city at dusk. Beneath its bridges, drainage mouths breathe cold air. Chalk arrows mark one of them. At the marked mouth, two Red Vial scouts sit bound back to back, alive, a gray seven-notched seal pressed on each collar.",
+    "title_en": "The River City"
+  },
+  {
+    "source": "game/data/content/story_script_ch04.json",
+    "pointer": "/scenes/6",
+    "scene_id": "ch4_camp",
+    "stage_id": null,
+    "placement": "after_stage_4-5",
+    "unlock": null,
+    "direction_en": "They climb out of the Undercity at dawn. Fadyme stops on the last stair to feel the sun.",
+    "title_en": "Up Into the Light"
+  },
+  {
+    "source": "game/data/content/story_script_ch05.json",
+    "pointer": "/scenes/0",
+    "scene_id": "vn_5_1",
+    "stage_id": "5-1",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "A herald’s pennant appears through ravine mist. Marek recognizes the empty crest socket on Mahmut’s armor.",
+    "title_en": "A Banner in the Fog"
+  },
+  {
+    "source": "game/data/content/story_script_ch05.json",
+    "pointer": "/scenes/1",
+    "scene_id": "vn_5_2",
+    "stage_id": "5-2",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Nara braces a narrow gate while two siege winches pull its chains tight.",
+    "title_en": "The Gatekeeper’s Measure"
+  },
+  {
+    "source": "game/data/content/story_script_ch05.json",
+    "pointer": "/scenes/2",
+    "scene_id": "vn_5_3",
+    "stage_id": "5-3",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Sable and Rikka slip into a signal tower while the party draws guards away from the bell rope.",
+    "title_en": "A Knife Between Orders"
+  },
+  {
+    "source": "game/data/content/story_script_ch05.json",
+    "pointer": "/scenes/3",
+    "scene_id": "vn_5_4",
+    "stage_id": "5-4",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Odelia warns the party about mines. A bell pulse crosses the bridge; one lock of Fadyme’s ash-pale hair turns stark white, whiter than bone.",
+    "title_en": "The White Strand"
+  },
+  {
+    "source": "game/data/content/story_script_ch05.json",
+    "pointer": "/scenes/4",
+    "scene_id": "vn_5_5",
+    "stage_id": "5-5",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Marshal Oren waits at the far end of the bridge with a shield line and Mahmut’s old crest painted upside down.",
+    "title_en": "The Commander Who Remained"
+  },
+  {
+    "source": "game/data/content/story_script_ch05.json",
+    "pointer": "/scenes/5",
+    "scene_id": "ch5_road",
+    "stage_id": null,
+    "placement": "after_stage_4-5",
+    "unlock": null,
+    "direction_en": "Four days east. Refugees move the other way, carrying carts and children.",
+    "title_en": "Fog in the Ravine"
+  },
+  {
+    "source": "game/data/content/story_script_ch05.json",
+    "pointer": "/scenes/6",
+    "scene_id": "ch5_camp",
+    "stage_id": null,
+    "placement": "after_stage_5-5",
+    "unlock": null,
+    "direction_en": "Night on the far bank. Mahmut sits with his back to the bridge. Fadyme brings two cups of weak tea.",
+    "title_en": "Watch Kept"
+  },
+  {
+    "source": "game/data/content/story_script_ch06.json",
+    "pointer": "/scenes/0",
+    "scene_id": "vn_6_1",
+    "stage_id": "6-1",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Sable opens the servants’ entrance from inside. A dozen servants wait in the dark, afraid to speak above a whisper.",
+    "title_en": "The Servants’ Entrance"
+  },
+  {
+    "source": "game/data/content/story_script_ch06.json",
+    "pointer": "/scenes/1",
+    "scene_id": "vn_6_2",
+    "stage_id": "6-2",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "The gallery contains portraits with their nameplates cut away. Mirel and Aveline arrive with the cathedral folio; Odelia's message found them. In one portrait, a court official's gloved hand rests beside a watch with no hands.",
+    "title_en": "Portraits Without Names"
+  },
+  {
+    "source": "game/data/content/story_script_ch06.json",
+    "pointer": "/scenes/2",
+    "scene_id": "vn_6_3",
+    "stage_id": "6-3",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Vespera’s glass lantern reveals three hidden anchors around the conservatory. Thistle and Iona, who followed the same message up from the Undercity, set up a field infirmary beneath a stone arch.",
+    "title_en": "The Sealed Conservatory"
+  },
+  {
+    "source": "game/data/content/story_script_ch06.json",
+    "pointer": "/scenes/3",
+    "scene_id": "vn_6_4",
+    "stage_id": "6-4",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "The manor shudders. Fadyme holds a stone arch above a trapped child; the recovered ledger lies open beside a handless-watch drawing.",
+    "title_en": "The Manor Gives Way"
+  },
+  {
+    "source": "game/data/content/story_script_ch06.json",
+    "pointer": "/scenes/4",
+    "scene_id": "vn_6_5",
+    "stage_id": "6-5",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "An old noble’s Wraith steps out of its portrait frame. It wears the same face as every blank nameplate in the gallery.",
+    "title_en": "The Ashen Lord’s Wraith"
+  },
+  {
+    "source": "game/data/content/story_script_ch06.json",
+    "pointer": "/scenes/5",
+    "scene_id": "ch6_road",
+    "stage_id": null,
+    "placement": "after_stage_5-5",
+    "unlock": null,
+    "direction_en": "The estate road climbs through soot-dark pines. A lantern flickers three times from a high window. On the milestone below it, a gray seven-notched seal, still soft.",
+    "title_en": "The Estate Road"
+  },
+  {
+    "source": "game/data/content/story_script_ch06.json",
+    "pointer": "/scenes/6",
+    "scene_id": "ch6_camp",
+    "stage_id": null,
+    "placement": "after_stage_6-5",
+    "unlock": null,
+    "direction_en": "Dawn among the estate ruins. The company divides to reach the altar by safe roads.",
+    "title_en": "Separate Roads"
+  },
+  {
+    "source": "game/data/content/story_script_ch07.json",
+    "pointer": "/scenes/0",
+    "scene_id": "vn_7_1",
+    "stage_id": "7-1",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "A stairway descends through the mountain into the altar. Seven chains cross the passage; each bears the seven-notched gray seal that Yseldra left on Mahmut's shield. Nixie returns with Jori and Odelia.",
+    "title_en": "The Stair of Seven Chains"
+  },
+  {
+    "source": "game/data/content/story_script_ch07.json",
+    "pointer": "/scenes/1",
+    "scene_id": "vn_7_2",
+    "stage_id": "7-2",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "At a fork in the stair, companions who escorted refugees return from the outer route. They do not replace the player's formation; they create a brief, scripted diversion while the five-person party advances.",
+    "title_en": "Those Who Held the Road"
+  },
+  {
+    "source": "game/data/content/story_script_ch07.json",
+    "pointer": "/scenes/2",
+    "scene_id": "vn_7_3",
+    "stage_id": "7-3",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "A round archive is carved into the stairwell. Aveline, Mirel, Clem, Pippa and Kera rebuild the erased record from copied names, bell rubbings and Jori's forge marks.",
+    "title_en": "The Names We Kept"
+  },
+  {
+    "source": "game/data/content/story_script_ch07.json",
+    "pointer": "/scenes/3",
+    "scene_id": "vn_7_4",
+    "stage_id": "7-4",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "At the altar's outer ring, the returned companions raise wards and open an evacuation path. The five-person core party faces the last sentinels while distant friends hold the side lanes in a non-playable set piece.",
+    "title_en": "Before the Last Toll"
+  },
+  {
+    "source": "game/data/content/story_script_ch07.json",
+    "pointer": "/scenes/4",
+    "scene_id": "vn_7_5",
+    "stage_id": "7-5",
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Five heroes enter a circular chamber beneath a suspended black sun. A crownless, clockwork guardian unfolds from the altar. During the battle, the VN camera returns briefly between phases to show Fadyme hiding the ash-dark veins spreading past her wrist.",
+    "title_en": "The Eclipse Construct"
+  },
+  {
+    "source": "game/data/content/story_script_ch07.json",
+    "pointer": "/scenes/4/phase_interludes/0",
+    "scene_id": null,
+    "stage_id": null,
+    "placement": null,
+    "unlock": null,
+    "direction_en": "The chain joints split. The Construct falls to one knee. Fadyme presses a darkening hand beneath her cloak before Mahmut turns.",
+    "title_en": null
+  },
+  {
+    "source": "game/data/content/story_script_ch07.json",
+    "pointer": "/scenes/4/phase_interludes/1",
+    "scene_id": null,
+    "stage_id": null,
+    "placement": null,
+    "unlock": null,
+    "direction_en": "The three pylons ignite. Black-gold lines crawl over Fadyme's fingers; she closes her fist and keeps her voice even.",
+    "title_en": null
+  },
+  {
+    "source": "game/data/content/story_script_ch07.json",
+    "pointer": "/scenes/5",
+    "scene_id": "ch7_road",
+    "stage_id": null,
+    "placement": "after_stage_6-5",
+    "unlock": null,
+    "direction_en": "Two quiet days later. Mahmut and Fadyme reach the crater rim. Below, an eclipse hangs over seven broken chains.",
+    "title_en": "The Crown-Shaped Crater"
+  },
+  {
+    "source": "game/data/content/story_script_ch07.json",
+    "pointer": "/after_battle_scenes/0",
+    "scene_id": "part1_emotional_confession",
+    "stage_id": null,
+    "placement": "after_stage_7-5_before_ending_twist",
+    "unlock": null,
+    "direction_en": "Battle UI dissolves to a still VN composition: Mahmut kneels beside Fadyme under the dim eclipse. The others wait beyond a broken arch, close enough to help but giving them privacy. The narration is quiet; no music for the first exchange.",
+    "title_en": "The Words He Did Not Know"
+  },
+  {
+    "source": "game/data/content/story_script_ch07.json",
+    "pointer": "/after_battle_scenes/1",
+    "scene_id": "part1_clockless_reveal",
+    "stage_id": null,
+    "placement": "after_part1_emotional_confession",
+    "unlock": null,
+    "direction_en": "A reflection moves in the altar's polished black stone after the others leave. A man in a travel-stained chancellor's coat steps through it, carrying a watch with no hands. Yseldra appears in the reflected archway, her veil lifted for the first time.",
+    "title_en": "The Hour That Remained"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/0/parts/0",
+    "scene_id": "cs_mahmut_1",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": null,
+      "after_stage": "2-5"
+    },
+    "direction_en": "Night in the cathedral refuge. Mahmut sits apart, turning his helmet so the empty crest socket catches candlelight. Aveline brings him bread he does not eat.",
+    "title_en": "The Crest and the Hammer"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/0/parts/1",
+    "scene_id": "cs_mahmut_2",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": null,
+      "after_stage": "7-5"
+    },
+    "direction_en": "After Cael's reflection fades. The others sleep on the outer dais. Marek keeps watch; Mahmut cannot sit still.",
+    "title_en": "The Hour I Chose"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/1/parts/0",
+    "scene_id": "cs_fadyme_1",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": null,
+      "after_stage": "4-4"
+    },
+    "direction_en": "A curtained cot in the Undercity ward. Fadyme opens her mother's prayer book; the folded letter from the forest road sits between two psalms. Clem pretends to sort chalk.",
+    "title_en": "Mother's Prayer Book"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/1/parts/1",
+    "scene_id": "cs_fadyme_2",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": null,
+      "after_stage": "6-5"
+    },
+    "direction_en": "Between the Ashen estate and the altar, the company splits onto safe roads. For two days it is only Mahmut and Fadyme, a stolen goat-cheese, and a stream too cold to wash in.",
+    "title_en": "One More Quiet Day"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/2/parts/3",
+    "scene_id": "cs_kera_voss_4",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "kera_voss",
+      "after_stage": "7-5"
+    },
+    "direction_en": "Dawn after the reveal. Kera writes by lantern at the edge of the dais while Fadyme sleeps.",
+    "title_en": "Formula, Incomplete"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/4/parts/0",
+    "scene_id": "cs_nixie_vale_1",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "nixie_vale",
+      "after_stage": "1-4"
+    },
+    "direction_en": "Nixie spreads the false map on a stump and traces the road the wolves learned.",
+    "title_en": "The Map's Other Lie"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/4/parts/2",
+    "scene_id": "cs_nixie_vale_3",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "nixie_vale",
+      "after_stage": "3-5"
+    },
+    "direction_en": "At the refuge, children with register marks crowd around Nixie's bow.",
+    "title_en": "Vale"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/5/parts/0",
+    "scene_id": "cs_sister_aveline_1",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "sister_aveline",
+      "after_stage": "2-2"
+    },
+    "direction_en": "The pilgrim refuge after the Choir Knights fall. Aveline lights candles one by one, counting heads.",
+    "title_en": "Every Candle Lit"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/5/parts/3",
+    "scene_id": "cs_sister_aveline_4",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "sister_aveline",
+      "after_stage": "7-5"
+    },
+    "direction_en": "Night after the reveal. Aveline sits at Fadyme's side while Mahmut walks the dais.",
+    "title_en": "The Last Vigil"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/6/parts/3",
+    "scene_id": "cs_sable_wren_4",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "sable_wren",
+      "after_stage": "7-4"
+    },
+    "direction_en": "Sable leaves the last lantern at the final turn and tells Hana the one thing she has never said.",
+    "title_en": "Lanterns"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/7/parts/0",
+    "scene_id": "cs_tilda_fen_1",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "tilda_fen",
+      "after_stage": "4-2"
+    },
+    "direction_en": "The ward's first night. Three patients become nine.",
+    "title_en": "One Clean Table"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/7/parts/1",
+    "scene_id": "cs_tilda_fen_2",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "tilda_fen",
+      "after_stage": "4-5"
+    },
+    "direction_en": "The ward is quiet. Tilda cleans sea-glass vials and talks about her teacher.",
+    "title_en": "The Salt Road"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/7/parts/2",
+    "scene_id": "cs_tilda_fen_3",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "tilda_fen",
+      "after_stage": "6-3"
+    },
+    "direction_en": "The field infirmary. A servant asks Tilda how long her husband has.",
+    "title_en": "Honest Prognosis"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/8/parts/3",
+    "scene_id": "cs_rikka_ember_4",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "rikka_ember",
+      "after_stage": "7-5"
+    },
+    "direction_en": "The night after the reveal. Rikka sits beside the sleeping Fadyme and, for once, says nothing.",
+    "title_en": "Quiet"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/9/parts/0",
+    "scene_id": "cs_mirel_quill_1",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "mirel_quill",
+      "after_stage": "2-3"
+    },
+    "direction_en": "Mirel studies the scraped register with a reading lens while the others rest.",
+    "title_en": "Marginalia"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/10/parts/2",
+    "scene_id": "cs_odelia_pike_3",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "odelia_pike",
+      "after_stage": "5-4"
+    },
+    "direction_en": "Before the bell pulse, Odelia checks the third span alone.",
+    "title_en": "The Hollow Span"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/11/parts/1",
+    "scene_id": "cs_pippa_bell_2",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "pippa_bell",
+      "after_stage": "3-5"
+    },
+    "direction_en": "At the refuge, Pippa's bell charm trembles against her wrist though no bell is ringing.",
+    "title_en": "The Charm"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/11/parts/2",
+    "scene_id": "cs_pippa_bell_3",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "pippa_bell",
+      "after_stage": "7-3"
+    },
+    "direction_en": "After the record accepts Fadyme's name, the charm at Pippa's wrist rings on its own, once.",
+    "title_en": "Out of Tune"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/11/parts/3",
+    "scene_id": "cs_pippa_bell_4",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "pippa_bell",
+      "after_stage": "7-5"
+    },
+    "direction_en": "Dawn. Pippa sings the Oakhaven names, then adds one more verse.",
+    "title_en": "Encore"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/12/parts/0",
+    "scene_id": "cs_nara_vell_1",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "nara_vell",
+      "after_stage": "5-2"
+    },
+    "direction_en": "The civilians are across. Nara measures the gate chains with a knotted cord.",
+    "title_en": "The Measure"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/13/parts/0",
+    "scene_id": "cs_clem_marr_1",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "clem_marr",
+      "after_stage": "4-3"
+    },
+    "direction_en": "Before the private reading, Clem makes a rubbing of an old grave slab in the archive room.",
+    "title_en": "Rubbings"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/13/parts/1",
+    "scene_id": "cs_clem_marr_2",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "clem_marr",
+      "after_stage": "4-4"
+    },
+    "direction_en": "After the elixir lie. Clem corners Fadyme between patient cots.",
+    "title_en": "Witness"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/14/parts/1",
+    "scene_id": "cs_vespera_wisp_2",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "vespera_wisp",
+      "after_stage": "6-3"
+    },
+    "direction_en": "Later that night, beneath the stone arch.",
+    "title_en": "Price of Study"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/14/parts/2",
+    "scene_id": "cs_vespera_wisp_3",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "vespera_wisp",
+      "after_stage": "6-5"
+    },
+    "direction_en": "The conservatory after the Wraith falls. The glass panes still show a room long gone.",
+    "title_en": "Glass That Remembers"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/15/parts/1",
+    "scene_id": "cs_hana_birch_2",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "hana_birch",
+      "after_stage": "6-4"
+    },
+    "direction_en": "After the collapse, Hana washes dust off her face and does not look at Fadyme's sleeve.",
+    "title_en": "The Promise"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/15/parts/3",
+    "scene_id": "cs_hana_birch_4",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "hana_birch",
+      "after_stage": "7-5"
+    },
+    "direction_en": "After the confession, Hana finds Fadyme awake.",
+    "title_en": "Say It"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/16/parts/0",
+    "scene_id": "cs_thistle_roe_1",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "thistle_roe",
+      "after_stage": "4-3"
+    },
+    "direction_en": "While Fadyme is inside the archive room, Thistle waits outside and shows Mahmut a pressed flower.",
+    "title_en": "Bell Garden"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/16/parts/1",
+    "scene_id": "cs_thistle_roe_2",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "thistle_roe",
+      "after_stage": "6-3"
+    },
+    "direction_en": "In the field infirmary, a pot of owing-bell opens as Fadyme walks past.",
+    "title_en": "The Owing Flower"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/16/parts/3",
+    "scene_id": "cs_thistle_roe_4",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "thistle_roe",
+      "after_stage": "7-5"
+    },
+    "direction_en": "Dawn. Thistle presses a small packet into Fadyme's hand.",
+    "title_en": "Winter Seeds"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/17/parts/0",
+    "scene_id": "cs_iona_mist_1",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "iona_mist",
+      "after_stage": "4-2"
+    },
+    "direction_en": "Iona hangs her river lantern above the ward door.",
+    "title_en": "Lantern Watch"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/17/parts/3",
+    "scene_id": "cs_iona_mist_4",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "iona_mist",
+      "after_stage": "7-5"
+    },
+    "direction_en": "Dawn. Iona makes an offer to Fadyme.",
+    "title_en": "Harbor"
+  },
+  {
+    "source": "game/data/content/character_stories_part1.json",
+    "pointer": "/stories/19/parts/3",
+    "scene_id": "cs_marek_vane_4",
+    "stage_id": null,
+    "placement": null,
+    "unlock": {
+      "requires_owned_character": "marek_vane",
+      "after_stage": "7-5"
+    },
+    "direction_en": "Dawn. Marek plays softly on the dais, without a pennant on his spear.",
+    "title_en": "No Banner"
+  },
+  {
+    "source": "game/data/content/events_part1.json",
+    "pointer": "/events/0/scenes/1",
+    "scene_id": "event_harvest_inn_meal_2",
+    "stage_id": null,
+    "placement": null,
+    "unlock": null,
+    "direction_en": "The innkeeper explains why every traveler gets a free meal twice a day.",
+    "title_en": "The Inn Meal"
+  },
+  {
+    "source": "game/data/content/events_part1.json",
+    "pointer": "/events/0/scenes/2",
+    "scene_id": "event_harvest_inn_meal_3",
+    "stage_id": null,
+    "placement": null,
+    "unlock": null,
+    "direction_en": "Late night. Pippa leads the square in a song of every name collected.",
+    "title_en": "Last Song"
+  },
+  {
+    "source": "game/data/entry/tutorial_v001.json",
+    "pointer": "/chapters/0/before",
+    "scene_id": "tutorial_t1_before",
+    "stage_id": null,
+    "placement": null,
+    "unlock": null,
+    "direction_en": null,
+    "title_en": "The First Step"
+  },
+  {
+    "source": "game/data/entry/tutorial_v001.json",
+    "pointer": "/chapters/0/after",
+    "scene_id": "tutorial_t1_after",
+    "stage_id": null,
+    "placement": null,
+    "unlock": null,
+    "direction_en": null,
+    "title_en": "The First Step"
+  },
+  {
+    "source": "game/data/entry/tutorial_v001.json",
+    "pointer": "/chapters/1/before",
+    "scene_id": "tutorial_t2_before",
+    "stage_id": null,
+    "placement": null,
+    "unlock": null,
+    "direction_en": null,
+    "title_en": "A Road Forgotten"
+  },
+  {
+    "source": "game/data/entry/tutorial_v001.json",
+    "pointer": "/chapters/1/after",
+    "scene_id": "tutorial_t2_after",
+    "stage_id": null,
+    "placement": null,
+    "unlock": null,
+    "direction_en": null,
+    "title_en": "A Road Forgotten"
+  },
+  {
+    "source": "game/data/entry/tutorial_v001.json",
+    "pointer": "/chapters/2/before",
+    "scene_id": "tutorial_t3_before",
+    "stage_id": null,
+    "placement": null,
+    "unlock": null,
+    "direction_en": null,
+    "title_en": "A Roof Before Dawn"
+  },
+  {
+    "source": "game/data/entry/tutorial_v001.json",
+    "pointer": "/chapters/2/after",
+    "scene_id": "tutorial_t3_after",
+    "stage_id": null,
+    "placement": null,
+    "unlock": null,
+    "direction_en": null,
+    "title_en": "A Roof Before Dawn"
+  }
+]

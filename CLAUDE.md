@@ -7,6 +7,12 @@ Owner update, 2026-10-09: continue validated work in cloud and commit/push to
 updates the push responsibility above. See `docs/coder/CLOUD_MAIN_SYNC.md`.
 Store/app publication and paid Google audio batches remain separate decisions.
 
+Latest owner role update, 2026-10-09: this is Codex's final AAB task. Codex now
+reviews the game/scripts and produces assets/designs, starting with everything
+related to Fadyme. Claude owns subsequent runtime fixes, expression mapping, audio
+promotion, scene integration and AAB builds. Read
+`narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md` before integration.
+
 Read `AGENTS.md`, `.codex/standards/authority.md`, `docs/ART_AND_CODE_HANDOFF.md`, `docs/PROJECT_MAP.md`, `docs/ARCHITECTURE.md` and `GAME_TOOLCHAIN.md`. Current owner instructions take precedence. Archived hooks and deployment permissions are inert.
 
 Claude owns Godot code/scenes/UI integration, Android native code, server/database/admin, tests and build tooling within the owner's requested scope. Preserve Godot 4.7.2, GDScript, Android portrait 1080x1920, actual `gl_compatibility`, strict typing, current controllers/autoloads/plugins and the GUT harness. Historical `project.yaml` mismatches do not authorize retargeting.
@@ -21,6 +27,6 @@ Use official Godot AI 4.3.0 and `preview_session.gd` with local sample data. Clo
 
 Query Graphify first for code relationships when available. After code changes run `graphify update .`, then `tools/graphify_project.py --refresh` using the configured Graphify Python interpreter.
 
-The owner intends to push this prepared workspace. Do not independently push, deploy, publish patches, upload to Play, replace signing keys, invoke paid creative APIs or message another chat without explicit task authorization. Restored `main` workflows may automatically deploy production after successful CI; publication intent must be explicit.
+Validated cloud `main` pushes are authorized for this collaboration. Do not independently deploy, publish patches, upload to Play, replace signing keys, invoke paid creative APIs or message another chat without explicit task authorization. Restored `main` workflows may automatically deploy production after successful CI; publication intent must be explicit.
 
 Keep API credentials, signing keys, personal client settings and MCP capability records out of Git. Production and Drive LEGACY originals are read-only. UI/subtitles stay English; voice stays Japanese.

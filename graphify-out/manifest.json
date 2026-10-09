@@ -2772,9 +2772,9 @@
     "semantic_hash": ""
   },
   "tools/graphify_project.py": {
-    "mtime": 1791495962.674878,
-    "seen": 1791495973.5264325,
-    "ast_hash": "fb1f7422762f0785fdb8b9440caca334",
+    "mtime": 1791520875.3539462,
+    "seen": 1791520975.3885899,
+    "ast_hash": "65ff81732baeec7bba507e42a94647bc",
     "semantic_hash": ""
   },
   "tools/import_free_2d_library.py": {
@@ -6180,9 +6180,9 @@
     "semantic_hash": ""
   },
   ".codex/workflows/graph-maintenance.md": {
-    "mtime": 1791495122.9809496,
-    "seen": 1791495173.1065793,
-    "ast_hash": "d82158d2052dc9f4a72dfb169868dd5e",
+    "mtime": 1791521349.9645016,
+    "seen": 1791521442.3625185,
+    "ast_hash": "a27deb9cc6245dae826d55aaab6b000e",
     "semantic_hash": ""
   },
   ".codex/workflows/quality-review.md": {
@@ -6246,15 +6246,15 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1791519877.4096038,
-    "seen": 1791519976.3710036,
-    "ast_hash": "fd3167135e6eb6373a9972e4f8ea2390",
+    "mtime": 1791521025.4329953,
+    "seen": 1791521287.2443666,
+    "ast_hash": "32dcdfceaf395b0bd5479e4bd71d9664",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1791519947.7529483,
-    "seen": 1791519976.3710053,
-    "ast_hash": "f4262876bf7f1beebfcea5c38ffca189",
+    "mtime": 1791521025.4331992,
+    "seen": 1791521287.2443678,
+    "ast_hash": "77238b22532fc60287cc4fb79ac0c96a",
     "semantic_hash": ""
   },
   "GAME_TOOLCHAIN.md": {
@@ -6318,9 +6318,9 @@
     "semantic_hash": ""
   },
   "docs/ART_AND_CODE_HANDOFF.md": {
-    "mtime": 1791519877.8775995,
-    "seen": 1791519976.3710203,
-    "ast_hash": "0a586a0cf9816a9507b1d41f2cb60b46",
+    "mtime": 1791521025.433388,
+    "seen": 1791521287.2443805,
+    "ast_hash": "00e22962a959286e80463c494c158cca",
     "semantic_hash": ""
   },
   "docs/CURRENT_STATE.md": {
@@ -6510,9 +6510,9 @@
     "semantic_hash": ""
   },
   "docs/coder/START_HERE.md": {
-    "mtime": 1791519878.3415952,
-    "seen": 1791519976.3710663,
-    "ast_hash": "74b65a4027ed121b19f4f02e79deb341",
+    "mtime": 1791521025.43347,
+    "seen": 1791521287.2444217,
+    "ast_hash": "eaf47c961d550cc38cc64799240d102f",
     "semantic_hash": ""
   },
   "docs/coder/STORY_CHARACTER_TEMPLATE.md": {
@@ -19975,13 +19975,13 @@
   },
   ".local/migration-20261008/copied-files.json": {
     "mtime": 1791493089.9941473,
-    "seen": 1791496126.790157,
+    "seen": 1791521287.241929,
     "ast_hash": "79d698c5d3cfbcceaf1ac90bde79f20f",
     "semantic_hash": ""
   },
   ".local/project-index.json": {
     "mtime": 1791493090.010147,
-    "seen": 1791496126.7902198,
+    "seen": 1791521287.2420266,
     "ast_hash": "e1965f8c69d05dfca5adebc88fe67fd2",
     "semantic_hash": ""
   },
@@ -20010,9 +20010,9 @@
     "semantic_hash": ""
   },
   "docs/release/validation/20261009/apk-validation.txt": {
-    "mtime": 1791495780.192549,
-    "seen": 1791495792.3118439,
-    "ast_hash": "7e384b4bf2f445051ef0eab62f8aa660",
+    "mtime": 1791520078.123534,
+    "seen": 1791520975.4082823,
+    "ast_hash": "3d26347b87eb76b3b2c0bc1f6ce8eed9",
     "semantic_hash": ""
   },
   "docs/release/validation/20261009/content-audit.txt": {
@@ -20046,9 +20046,207 @@
     "semantic_hash": ""
   },
   "docs/coder/CLOUD_MAIN_SYNC.md": {
-    "mtime": 1791519878.8135908,
-    "seen": 1791519976.3710532,
-    "ast_hash": "3d342af8ab5af726bbb8a0835b18eb78",
+    "mtime": 1791521025.4335809,
+    "seen": 1791521287.24441,
+    "ast_hash": "54c71266061822eb816d5f1a6789b70b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/battle_alpha.json": {
+    "mtime": 1791520947.7373245,
+    "seen": 1791520975.38169,
+    "ast_hash": "9e10b5aaf47085fdce2b3d5233bfc496",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/current_lines.json": {
+    "mtime": 1791520947.7353914,
+    "seen": 1791520975.3816917,
+    "ast_hash": "d3cef0adb8b8acd2c8bd5e985f9c51b8",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/global_planned_asset_paths.json": {
+    "mtime": 1791520947.7656667,
+    "seen": 1791520975.3816931,
+    "ast_hash": "1148a3408e52414cbba23e824c0b3771",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/reference_resolution.json": {
+    "mtime": 1791521065.802268,
+    "seen": 1791521287.2423782,
+    "ast_hash": "c935a305ff34b02cd997e0ea2c2c038f",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/runtime_assets.json": {
+    "mtime": 1791520947.7357361,
+    "seen": 1791520975.3817186,
+    "ast_hash": "8e9c8c64317618ae32938b55d79612a2",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/source_assets.json": {
+    "mtime": 1791520947.7371533,
+    "seen": 1791520975.3817208,
+    "ast_hash": "1aa1c582931677c910b004a26753a2b8",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/summary.json": {
+    "mtime": 1791521273.3546944,
+    "seen": 1791521287.242385,
+    "ast_hash": "b33cec3f33cb70ff7b8379da748472fc",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/voice_decode.json": {
+    "mtime": 1791520950.074331,
+    "seen": 1791520975.3817236,
+    "ast_hash": "9b5c2228b79e365aeae61971e266395a",
+    "semantic_hash": ""
+  },
+  "tools/vendor/vis-network-9.1.6/PROVENANCE.json": {
+    "mtime": 1791520874.6139731,
+    "seen": 1791520975.38888,
+    "ast_hash": "abf5ade8ef515761e1f0307a00add568",
+    "semantic_hash": ""
+  },
+  "tools/vendor/vis-network-9.1.6/vis-network.min.js": {
+    "mtime": 1791520874.612733,
+    "seen": 1791520975.3888814,
+    "ast_hash": "408777e6b4982f8dcfedd958651d25cf",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/reference_recovery.json": {
+    "mtime": 1791521065.8040411,
+    "seen": 1791521287.2423756,
+    "ast_hash": "8403d31e31f44cf2866bd5b17c679693",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/scene_requirements.json": {
+    "mtime": 1791520978.4799633,
+    "seen": 1791521287.2423816,
+    "ast_hash": "6a4fbb6a454931b31bcd914d25b01ac1",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/README.md": {
+    "mtime": 1791521273.350305,
+    "seen": 1791521287.2447536,
+    "ast_hash": "64e637886a443ffc564a99cc2f29e09f",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/DESIGN_SCOPE.md": {
+    "mtime": 1791521273.321612,
+    "seen": 1791521287.244759,
+    "ast_hash": "d0c2dd06d3d33dc2a63477a05462dee6",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md": {
+    "mtime": 1791521191.066809,
+    "seen": 1791521287.24476,
+    "ast_hash": "671958e3d7cc023e5b0bb5575410a782",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_attack_v003.png": {
+    "mtime": 1791521065.5375235,
+    "seen": 1791521287.2471693,
+    "ast_hash": "1009239590a4c5bff196010ad1c90078",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_guard_v003.png": {
+    "mtime": 1791521065.5557349,
+    "seen": 1791521287.2471704,
+    "ast_hash": "2e84f4eeb6619fb61df65d6ec56bb595",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_hit_v003.png": {
+    "mtime": 1791521065.576899,
+    "seen": 1791521287.2471714,
+    "ast_hash": "788da38304a50db8b1293f3200aa56fb",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_idle_v002.png": {
+    "mtime": 1791521065.5948403,
+    "seen": 1791521287.2471719,
+    "ast_hash": "51c3d78ec452a5c008eb6f7e14392a93",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_skill_v002.png": {
+    "mtime": 1791521065.6091306,
+    "seen": 1791521287.2471726,
+    "ast_hash": "c04517cbea683768c3be4a8e06f123f3",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_victory_v002.png": {
+    "mtime": 1791521065.6219766,
+    "seen": 1791521287.2471733,
+    "ast_hash": "bdc67bd1dc76aee30a8f4672c1ef5d39",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/cut_in/cut_in_fadyme_ultimate_v002.png": {
+    "mtime": 1791521065.647182,
+    "seen": 1791521287.2471743,
+    "ast_hash": "786372c214f2e0c090a311c3b4dd4e5d",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/sheet/char-fadyme-uomd.png": {
+    "mtime": 1791521065.6819918,
+    "seen": 1791521287.247175,
+    "ast_hash": "5bc50d1d54578d4da5a89e1d2541f489",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/sheet/chibi_ref_fadyme.png": {
+    "mtime": 1791521065.6899693,
+    "seen": 1791521287.2471755,
+    "ast_hash": "dfdd7c0c2e6c07703ee6ec461fafc522",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_composed_v001.png": {
+    "mtime": 1791521065.6989655,
+    "seen": 1791521287.2471762,
+    "ast_hash": "715831bfb2ac22026f37e5e2cd16c18f",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_honest_fear_v001.png": {
+    "mtime": 1791521065.707562,
+    "seen": 1791521287.2471774,
+    "ast_hash": "9866ae2cd619f9ab50f838dedcc0b0d6",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_quiet_pain_v002.png": {
+    "mtime": 1791521065.7170134,
+    "seen": 1791521287.2471786,
+    "ast_hash": "2ee9f1628ecc46f4df36e7583faa335c",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_warm_v001.png": {
+    "mtime": 1791521065.7262235,
+    "seen": 1791521287.2471793,
+    "ast_hash": "5559a97f762bcae697ec41bde0c1e49a",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/icons/icons_pilot_mixed_16_mixed_v001.png": {
+    "mtime": 1791521065.7396882,
+    "seen": 1791521287.2471807,
+    "ast_hash": "72c1da3fe472569dcbb46aa38af101b8",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003.png": {
+    "mtime": 1791521065.7634988,
+    "seen": 1791521287.247185,
+    "ast_hash": "491b98e451c23d7de471525bbf76fefe",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003_with_logo.png": {
+    "mtime": 1791521065.7848823,
+    "seen": 1791521287.2471862,
+    "ast_hash": "3305b9266ddd8cd716b09b2ffa9c6f50",
+    "semantic_hash": ""
+  },
+  "narrative/14_References/recovered_locked_v001/logo/brand_logo_wordmark_r2_v003.png": {
+    "mtime": 1791521065.799402,
+    "seen": 1791521287.2471874,
+    "ast_hash": "e9328069a701e004b7f841eecad0f2b8",
+    "semantic_hash": ""
+  },
+  "docs/GRAPHIFY_REVIEW_2026-10-09.md": {
+    "mtime": 1791521349.9472644,
+    "seen": 1791521442.3625638,
+    "ast_hash": "8ef73bb630b4f76264bff1f2ca92718c",
     "semantic_hash": ""
   }
 }

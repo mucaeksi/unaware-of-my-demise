@@ -48,3 +48,11 @@ owner decisions; a cloud push is not their execution.
 The current first-AAB status and remaining voice/music/device work are in
 [the fix report](../release/FIRST_AAB_FIX_REPORT_2026-10-09.md) and
 [the first-AAB plan](../release/FIRST_AAB_PLAN.md).
+
+## Current role boundary — 2026-10-09
+
+This closing AAB handoff is Codex's final build task. Subsequent Codex work is
+game/script review and asset/design production, with Fadyme selected first.
+Claude owns runtime fixes/integration and future AABs. Design sources and review
+evidence go to `narrative/15_Art_Workbench/`; generated art keeps its actual
+candidate/approval status when stored on `main`.

@@ -3057,7 +3057,7 @@
   {
     "path": ".codex/workflows/graph-maintenance.md",
     "node_id": "codex_workflows_graph_maintenance",
-    "size_bytes": 1253
+    "size_bytes": 1642
   },
   {
     "path": ".codex/workflows/quality-review.md",
@@ -3122,12 +3122,12 @@
   {
     "path": "AGENTS.md",
     "node_id": "agents",
-    "size_bytes": 4452
+    "size_bytes": 4939
   },
   {
     "path": "CLAUDE.md",
     "node_id": "claude",
-    "size_bytes": 3769
+    "size_bytes": 4162
   },
   {
     "path": "GAME_TOOLCHAIN.md",
@@ -3367,7 +3367,7 @@
   {
     "path": "docs/ART_AND_CODE_HANDOFF.md",
     "node_id": "docs_art_and_code_handoff",
-    "size_bytes": 3888
+    "size_bytes": 4282
   },
   {
     "path": "docs/CURRENT_STATE.md",
@@ -3408,6 +3408,11 @@
     "path": "docs/GRAPHIFY_PROJECT_MAP.md",
     "node_id": "docs_graphify_project_map",
     "size_bytes": 4153
+  },
+  {
+    "path": "docs/GRAPHIFY_REVIEW_2026-10-09.md",
+    "node_id": "docs_graphify_review_2026_10_09",
+    "size_bytes": 2807
   },
   {
     "path": "docs/INFRASTRUCTURE_AUDIT.md",
@@ -3497,7 +3502,7 @@
   {
     "path": "docs/coder/CLOUD_MAIN_SYNC.md",
     "node_id": "docs_coder_cloud_main_sync",
-    "size_bytes": 2948
+    "size_bytes": 3352
   },
   {
     "path": "docs/coder/CODER_RESPONSE_FORMAT.md",
@@ -3542,7 +3547,7 @@
   {
     "path": "docs/coder/START_HERE.md",
     "node_id": "docs_coder_start_here",
-    "size_bytes": 1857
+    "size_bytes": 2017
   },
   {
     "path": "docs/coder/STORY_CHARACTER_TEMPLATE.md",
@@ -3762,7 +3767,7 @@
   {
     "path": "docs/release/validation/20261009/apk-validation.txt",
     "node_id": "docs_release_validation_20261009_apk_validation",
-    "size_bytes": 776
+    "size_bytes": 774
   },
   {
     "path": "docs/release/validation/20261009/base-privacy-acceptance.json",
@@ -26690,6 +26695,96 @@
     "size_bytes": 17777
   },
   {
+    "path": "narrative/14_References/recovered_locked_v001/README.md",
+    "node_id": "narrative_14_references_recovered_locked_v001_readme",
+    "size_bytes": 656
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_attack_v003.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_battle_pose_battle_pose_fadyme_attack_v003",
+    "size_bytes": 3805845
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_guard_v003.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_battle_pose_battle_pose_fadyme_guard_v003",
+    "size_bytes": 3596464
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_hit_v003.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_battle_pose_battle_pose_fadyme_hit_v003",
+    "size_bytes": 3811300
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_idle_v002.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_battle_pose_battle_pose_fadyme_idle_v002",
+    "size_bytes": 3512265
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_skill_v002.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_battle_pose_battle_pose_fadyme_skill_v002",
+    "size_bytes": 3671178
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_victory_v002.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_battle_pose_battle_pose_fadyme_victory_v002",
+    "size_bytes": 3323395
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/cut_in/cut_in_fadyme_ultimate_v002.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_cut_in_cut_in_fadyme_ultimate_v002",
+    "size_bytes": 4999103
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/sheet/char-fadyme-uomd.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_sheet_char_fadyme_uomd",
+    "size_bytes": 6291960
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/sheet/chibi_ref_fadyme.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_sheet_chibi_ref_fadyme",
+    "size_bytes": 549848
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_composed_v001.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_vn_bust_vn_bust_fadyme_composed_v001",
+    "size_bytes": 2177985
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_honest_fear_v001.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_vn_bust_vn_bust_fadyme_honest_fear_v001",
+    "size_bytes": 2151880
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_quiet_pain_v002.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_vn_bust_vn_bust_fadyme_quiet_pain_v002",
+    "size_bytes": 2129468
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_warm_v001.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_fadyme_vn_bust_vn_bust_fadyme_warm_v001",
+    "size_bytes": 2285514
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/icons/icons_pilot_mixed_16_mixed_v001.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_icons_icons_pilot_mixed_16_mixed_v001",
+    "size_bytes": 4416193
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_key_art_brand_key_art_portrait_r2_v003",
+    "size_bytes": 4834987
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003_with_logo.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_key_art_brand_key_art_portrait_r2_v003_with_logo",
+    "size_bytes": 5060959
+  },
+  {
+    "path": "narrative/14_References/recovered_locked_v001/logo/brand_logo_wordmark_r2_v003.png",
+    "node_id": "narrative_14_references_recovered_locked_v001_logo_brand_logo_wordmark_r2_v003",
+    "size_bytes": 3793572
+  },
+  {
     "path": "narrative/15_Art_Workbench/README.md",
     "node_id": "narrative_15_art_workbench_readme",
     "size_bytes": 1557
@@ -26698,6 +26793,66 @@
     "path": "narrative/15_Art_Workbench/characters/README.md",
     "node_id": "narrative_15_art_workbench_characters_readme",
     "size_bytes": 338
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/DESIGN_SCOPE.md",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_design_scope",
+    "size_bytes": 7004
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/README.md",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_readme",
+    "size_bytes": 13332
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/battle_alpha.json",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_battle_alpha",
+    "size_bytes": 18700
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/current_lines.json",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_current_lines",
+    "size_bytes": 213888
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/global_planned_asset_paths.json",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_global_planned_asset_paths",
+    "size_bytes": 88235
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/reference_recovery.json",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_reference_recovery",
+    "size_bytes": 1895
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/reference_resolution.json",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_reference_resolution",
+    "size_bytes": 12868
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/runtime_assets.json",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_runtime_assets",
+    "size_bytes": 4324
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/scene_requirements.json",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_scene_requirements",
+    "size_bytes": 37033
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/source_assets.json",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_source_assets",
+    "size_bytes": 80148
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/summary.json",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_summary",
+    "size_bytes": 7929
+  },
+  {
+    "path": "narrative/15_Art_Workbench/characters/fadyme/audit_v001/voice_decode.json",
+    "node_id": "narrative_15_art_workbench_characters_fadyme_audit_v001_voice_decode",
+    "size_bytes": 6442
   },
   {
     "path": "narrative/15_Art_Workbench/handoff/ASSET_HANDOFF_TEMPLATE.md",
@@ -32062,7 +32217,7 @@
   {
     "path": "tools/graphify_project.py",
     "node_id": "tools_graphify_project",
-    "size_bytes": 20201
+    "size_bytes": 21849
   },
   {
     "path": "tools/import_free_2d_library.py",
@@ -32148,6 +32303,26 @@
     "path": "tools/validate_part1_content.py",
     "node_id": "tools_validate_part1_content",
     "size_bytes": 57873
+  },
+  {
+    "path": "tools/vendor/vis-network-9.1.6/LICENSE-APACHE-2.0",
+    "node_id": "tools_vendor_vis_network_9_1_6_license_apache_2",
+    "size_bytes": 10171
+  },
+  {
+    "path": "tools/vendor/vis-network-9.1.6/LICENSE-MIT",
+    "node_id": "tools_vendor_vis_network_9_1_6_license_mit",
+    "size_bytes": 1084
+  },
+  {
+    "path": "tools/vendor/vis-network-9.1.6/PROVENANCE.json",
+    "node_id": "tools_vendor_vis_network_9_1_6_provenance",
+    "size_bytes": 455
+  },
+  {
+    "path": "tools/vendor/vis-network-9.1.6/vis-network.min.js",
+    "node_id": "tools_vendor_vis_network_9_1_6_vis_network_min",
+    "size_bytes": 702611
   },
   {
     "path": "tools/verify_aab_native.py",
