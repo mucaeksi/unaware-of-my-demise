@@ -221,5 +221,11 @@
   "uniform_prosody_rates_percent": [
     90,
     105
-  ]
+  ],
+  "access_recheck": {
+    "owner_requested_after_iam_instructions": true,
+    "requested_at_utc": "2026-10-09T10:04:09.437931+00:00",
+    "target_quota_project": "gen-lang-client-0955955681",
+    "no_synthesis_retry_authorized_or_needed": true
+  }
 }
