@@ -1,0 +1,93 @@
+name: Chirp 3 HD Japanese voice samples
+
+on:
+  push:
+    branches: [codex/chirp3-hd-voice-samples]
+    paths:
+      - .github/workflows/chirp3-hd-voice-samples.yml
+      - narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py
+      - narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/audition_plan.json
+  workflow_dispatch:
+    inputs:
+      google_api_secret:
+        description: Existing repository secret name for the Google API key (never the key value)
+        required: true
+        default: GEMINI_API
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: chirp3-hd-ja-JP-auditions
+  cancel-in-progress: false
+
+jobs:
+  samples:
+    if: github.repository == 'mucaeksi/unaware-of-my-demise'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+      - name: Include current main and existing samples
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git merge --no-edit origin/main
+      - name: Generate the already-authorized same-text Japanese samples
+        id: generation
+        env:
+          GOOGLE_CLOUD_API_KEY: ${{ secrets[inputs.google_api_secret || 'GEMINI_API'] }}
+        run: python3 narrative/10_VO/Recording_Notes/Tools/chirp3_hd_audition.py --generate --sync-shared-catalog
+      - name: Preserve sample masters and safe status as an artifact
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: chirp3-hd-ja-JP-${{ github.run_id }}-${{ github.run_attempt }}
+          path: narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Commit verified complete samples to main, or failure evidence to the helper branch
+        if: always() && !cancelled()
+        env:
+          GENERATION_OUTCOME: ${{ steps.generation.outcome }}
+          GOOGLE_SECRET_NAME: ${{ inputs.google_api_secret || 'GEMINI_API' }}
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          out = Path('narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001')
+          manifest = json.loads((out / 'manifest.json').read_text())
+          complete = (os.environ['GENERATION_OUTCOME'] == 'success'
+                      and manifest['status'] == 'ALL_LIVE_JAPANESE_CHIRP_WAVS_GENERATED_LISTENING_PENDING'
+                      and manifest.get('generated_samples', 0) > 0)
+          result = {'github_run_id': os.environ['GITHUB_RUN_ID'],
+                    'github_run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+                    'source_commit': os.environ['GITHUB_SHA'],
+                    'google_secret_name': os.environ['GOOGLE_SECRET_NAME'],
+                    'generation_outcome': os.environ['GENERATION_OUTCOME'],
+                    'complete': complete, 'generated_samples': manifest.get('generated_samples', 0),
+                    'synthesis_calls_attempted': manifest.get('synthesis_calls_attempted', 0),
+                    'safe_error_categories': [e['category'] for e in manifest.get('errors', [])]}
+          (out / 'workflow_run_status.json').write_text(json.dumps(result, indent=2) + '\n')
+          files = [str(p) for p in out.rglob('*') if p.is_file()
+                   and p.suffix in ('.json', '.html', '.md', '.wav')]
+          if complete:
+              files += ['docs/art/CHIRP3_HD_VOICE_CATALOG.md',
+                        'narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json']
+          subprocess.run(['git', 'add', '--', *files], check=True)
+          if subprocess.run(['git', 'diff', '--cached', '--quiet']).returncode:
+              message = ('audio: retain all verified Japanese Chirp 3 HD samples'
+                         if complete else 'audio: retain safe Chirp sample run failure evidence')
+              subprocess.run(['git', 'commit', '-m', message], check=True)
+          subprocess.run(['git', 'fetch', 'origin', 'main'], check=True)
+          subprocess.run(['git', 'merge', '--no-edit', 'origin/main'], check=True)
+          # Normal pushes only. Keep partial/error outputs inspectable via Git,
+          # without needing to read secrets or authenticated Actions logs.
+          subprocess.run(['git', 'push', 'origin', 'HEAD:refs/heads/codex/chirp3-hd-voice-samples'], check=True)
+          if complete:
+              subprocess.run(['git', 'push', 'origin', 'HEAD:refs/heads/main'], check=True)
+          PY
