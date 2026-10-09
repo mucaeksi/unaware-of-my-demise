@@ -85,7 +85,7 @@
       "codex_id": "codex_seven_bells",
       "title_en": "The Seven Bells",
       "text_en": "House Veyr bound seven bells to count the hours of the living. They do not heal. They keep the ledger.",
-      "unlock": "always"
+      "unlock": {"after_stage":"2-1"}
     },
     {
       "codex_id": "codex_names",
@@ -97,7 +97,7 @@
       "codex_id": "codex_hollows",
       "title_en": "Hollows",
       "text_en": "Bodies left behind by unpaid hours. Their names are gone; their hours are not.",
-      "unlock": "always"
+      "unlock": {"after_stage":"1-1"}
     },
     {
       "codex_id": "codex_crownfall",
@@ -109,43 +109,43 @@
       "codex_id": "codex_vale",
       "title_en": "Vale Children",
       "text_en": "Children with no registered family are written into road registers as \"Vale\". It is a common name, and a lonely one.",
-      "unlock": "always"
+      "unlock": {"after_stage":"1-4"}
     },
     {
       "codex_id": "codex_inquisition",
       "title_en": "The Seven-Notched Seal",
       "text_en": "The mark of the Royal Inquisition, keepers of sealed records. Its seals still appear on orders no one admits writing.",
-      "unlock": "always"
+      "unlock": {"after_stage":"2-5"}
     },
     {
       "codex_id": "codex_red_vial",
       "title_en": "The Red Vial Guild",
       "text_en": "Alchemists and physicians. One wing keeps antidotes; the other kept a ledger of people.",
-      "unlock": "always"
+      "unlock": {"after_stage":"4-5"}
     },
     {
       "codex_id": "codex_saint_luthos",
       "title_en": "Saint Luthos the Listener",
       "text_en": "He taught that a bell is a prayer the whole village hears, and that names spoken aloud are witnesses for the living.",
-      "unlock": "always"
+      "unlock": {"after_stage":"2-1"}
     },
     {
       "codex_id": "codex_first_eclipse",
       "title_en": "The First Eclipse",
       "text_en": "Generations ago the bells were first fixed with an heir's hours. The eclipse over the altar has not moved since.",
-      "unlock": "always"
+      "unlock": {"after_stage":"7-1"}
     },
     {
       "codex_id": "codex_council",
       "title_en": "The Council of Dukes",
       "text_en": "Seven seals on one uncut cord. They keep the kingdom running, and the throne empty.",
-      "unlock": "always"
+      "unlock": {"after_stage":"6-5"}
     },
     {
       "codex_id": "codex_clockless",
       "title_en": "The Clockless Court",
       "text_en": "A children's story about a court where no one ages. Most people think it is only a story.",
-      "unlock": "always"
+      "unlock": {"after_stage":"7-5"}
     }
   ],
   "banners": {

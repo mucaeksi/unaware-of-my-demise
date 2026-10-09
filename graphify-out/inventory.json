@@ -2,7 +2,7 @@
   {
     "path": ".agents/README.md",
     "node_id": "agents_readme",
-    "size_bytes": 1027
+    "size_bytes": 1020
   },
   {
     "path": ".agents/archive/20261008/original-agents-skills/art-bible/SKILL.md",
@@ -1907,672 +1907,672 @@
   {
     "path": ".agents/library/capabilities.json",
     "node_id": "agents_library_capabilities",
-    "size_bytes": 84732
+    "size_bytes": 82718
   },
   {
     "path": ".agents/library/capabilities/adopt.md",
     "node_id": "agents_library_capabilities_adopt",
-    "size_bytes": 1696
+    "size_bytes": 1653
   },
   {
     "path": ".agents/library/capabilities/architecture-decision.md",
     "node_id": "agents_library_capabilities_architecture_decision",
-    "size_bytes": 1638
+    "size_bytes": 1588
   },
   {
     "path": ".agents/library/capabilities/architecture-review.md",
     "node_id": "agents_library_capabilities_architecture_review",
-    "size_bytes": 2696
+    "size_bytes": 2621
   },
   {
     "path": ".agents/library/capabilities/art-bible.md",
     "node_id": "agents_library_capabilities_art_bible",
-    "size_bytes": 1364
+    "size_bytes": 1333
   },
   {
     "path": ".agents/library/capabilities/asset-audit.md",
     "node_id": "agents_library_capabilities_asset_audit",
-    "size_bytes": 1349
+    "size_bytes": 1319
   },
   {
     "path": ".agents/library/capabilities/asset-spec.md",
     "node_id": "agents_library_capabilities_asset_spec",
-    "size_bytes": 1794
+    "size_bytes": 1749
   },
   {
     "path": ".agents/library/capabilities/balance-check.md",
     "node_id": "agents_library_capabilities_balance_check",
-    "size_bytes": 1252
+    "size_bytes": 1223
   },
   {
     "path": ".agents/library/capabilities/brainstorm.md",
     "node_id": "agents_library_capabilities_brainstorm",
-    "size_bytes": 1017
+    "size_bytes": 994
   },
   {
     "path": ".agents/library/capabilities/bug-report.md",
     "node_id": "agents_library_capabilities_bug_report",
-    "size_bytes": 1016
+    "size_bytes": 987
   },
   {
     "path": ".agents/library/capabilities/bug-triage.md",
     "node_id": "agents_library_capabilities_bug_triage",
-    "size_bytes": 1327
+    "size_bytes": 1289
   },
   {
     "path": ".agents/library/capabilities/camera-systems.md",
     "node_id": "agents_library_capabilities_camera_systems",
-    "size_bytes": 1524
+    "size_bytes": 1499
   },
   {
     "path": ".agents/library/capabilities/changelog.md",
     "node_id": "agents_library_capabilities_changelog",
-    "size_bytes": 1235
+    "size_bytes": 1198
   },
   {
     "path": ".agents/library/capabilities/code-review.md",
     "node_id": "agents_library_capabilities_code_review",
-    "size_bytes": 1686
+    "size_bytes": 1649
   },
   {
     "path": ".agents/library/capabilities/consistency-check.md",
     "node_id": "agents_library_capabilities_consistency_check",
-    "size_bytes": 1431
+    "size_bytes": 1398
   },
   {
     "path": ".agents/library/capabilities/content-audit.md",
     "node_id": "agents_library_capabilities_content_audit",
-    "size_bytes": 1059
+    "size_bytes": 1031
   },
   {
     "path": ".agents/library/capabilities/create-architecture.md",
     "node_id": "agents_library_capabilities_create_architecture",
-    "size_bytes": 1993
+    "size_bytes": 1941
   },
   {
     "path": ".agents/library/capabilities/create-control-manifest.md",
     "node_id": "agents_library_capabilities_create_control_manifest",
-    "size_bytes": 2025
+    "size_bytes": 1971
   },
   {
     "path": ".agents/library/capabilities/create-epics.md",
     "node_id": "agents_library_capabilities_create_epics",
-    "size_bytes": 1205
+    "size_bytes": 1174
   },
   {
     "path": ".agents/library/capabilities/create-stories.md",
     "node_id": "agents_library_capabilities_create_stories",
-    "size_bytes": 1252
+    "size_bytes": 1219
   },
   {
     "path": ".agents/library/capabilities/day-one-patch.md",
     "node_id": "agents_library_capabilities_day_one_patch",
-    "size_bytes": 1192
+    "size_bytes": 1162
   },
   {
     "path": ".agents/library/capabilities/design-review.md",
     "node_id": "agents_library_capabilities_design_review",
-    "size_bytes": 1633
+    "size_bytes": 1598
   },
   {
     "path": ".agents/library/capabilities/design-system.md",
     "node_id": "agents_library_capabilities_design_system",
-    "size_bytes": 2382
+    "size_bytes": 2314
   },
   {
     "path": ".agents/library/capabilities/dev-story.md",
     "node_id": "agents_library_capabilities_dev_story",
-    "size_bytes": 1432
+    "size_bytes": 1396
   },
   {
     "path": ".agents/library/capabilities/estimate.md",
     "node_id": "agents_library_capabilities_estimate",
-    "size_bytes": 1076
+    "size_bytes": 1048
   },
   {
     "path": ".agents/library/capabilities/game-ai.md",
     "node_id": "agents_library_capabilities_game_ai",
-    "size_bytes": 1348
+    "size_bytes": 1324
   },
   {
     "path": ".agents/library/capabilities/game-feel.md",
     "node_id": "agents_library_capabilities_game_feel",
-    "size_bytes": 1470
+    "size_bytes": 1445
   },
   {
     "path": ".agents/library/capabilities/game-ui-ux.md",
     "node_id": "agents_library_capabilities_game_ui_ux",
-    "size_bytes": 1476
+    "size_bytes": 1451
   },
   {
     "path": ".agents/library/capabilities/gate-check.md",
     "node_id": "agents_library_capabilities_gate_check",
-    "size_bytes": 1683
+    "size_bytes": 1641
   },
   {
     "path": ".agents/library/capabilities/godot-2d-movement.md",
     "node_id": "agents_library_capabilities_godot_2d_movement",
-    "size_bytes": 1231
+    "size_bytes": 1207
   },
   {
     "path": ".agents/library/capabilities/godot-animation.md",
     "node_id": "agents_library_capabilities_godot_animation",
-    "size_bytes": 1258
+    "size_bytes": 1234
   },
   {
     "path": ".agents/library/capabilities/godot-gdscript-headless-testing.md",
     "node_id": "agents_library_capabilities_godot_gdscript_headless_testing",
-    "size_bytes": 1307
+    "size_bytes": 1285
   },
   {
     "path": ".agents/library/capabilities/godot-gdscript.md",
     "node_id": "agents_library_capabilities_godot_gdscript",
-    "size_bytes": 1266
+    "size_bytes": 1242
   },
   {
     "path": ".agents/library/capabilities/godot-nodes-scenes.md",
     "node_id": "agents_library_capabilities_godot_nodes_scenes",
-    "size_bytes": 1216
+    "size_bytes": 1192
   },
   {
     "path": ".agents/library/capabilities/godot-resources.md",
     "node_id": "agents_library_capabilities_godot_resources",
-    "size_bytes": 1216
+    "size_bytes": 1192
   },
   {
     "path": ".agents/library/capabilities/godot-signals-groups.md",
     "node_id": "agents_library_capabilities_godot_signals_groups",
-    "size_bytes": 1227
+    "size_bytes": 1203
   },
   {
     "path": ".agents/library/capabilities/godot-tilemap.md",
     "node_id": "agents_library_capabilities_godot_tilemap",
-    "size_bytes": 1231
+    "size_bytes": 1207
   },
   {
     "path": ".agents/library/capabilities/godot-ui-control.md",
     "node_id": "agents_library_capabilities_godot_ui_control",
-    "size_bytes": 1268
+    "size_bytes": 1244
   },
   {
     "path": ".agents/library/capabilities/graphify.md",
     "node_id": "agents_library_capabilities_graphify",
-    "size_bytes": 1786
+    "size_bytes": 1752
   },
   {
     "path": ".agents/library/capabilities/help.md",
     "node_id": "agents_library_capabilities_help",
-    "size_bytes": 1472
+    "size_bytes": 1434
   },
   {
     "path": ".agents/library/capabilities/hotfix.md",
     "node_id": "agents_library_capabilities_hotfix",
-    "size_bytes": 1193
+    "size_bytes": 1160
   },
   {
     "path": ".agents/library/capabilities/launch-checklist.md",
     "node_id": "agents_library_capabilities_launch_checklist",
-    "size_bytes": 1511
+    "size_bytes": 1463
   },
   {
     "path": ".agents/library/capabilities/localize.md",
     "node_id": "agents_library_capabilities_localize",
-    "size_bytes": 1572
+    "size_bytes": 1522
   },
   {
     "path": ".agents/library/capabilities/map-systems.md",
     "node_id": "agents_library_capabilities_map_systems",
-    "size_bytes": 1577
+    "size_bytes": 1539
   },
   {
     "path": ".agents/library/capabilities/milestone-review.md",
     "node_id": "agents_library_capabilities_milestone_review",
-    "size_bytes": 1390
+    "size_bytes": 1353
   },
   {
     "path": ".agents/library/capabilities/onboard.md",
     "node_id": "agents_library_capabilities_onboard",
-    "size_bytes": 1173
+    "size_bytes": 1142
   },
   {
     "path": ".agents/library/capabilities/patch-notes.md",
     "node_id": "agents_library_capabilities_patch_notes",
-    "size_bytes": 1270
+    "size_bytes": 1230
   },
   {
     "path": ".agents/library/capabilities/perf-profile.md",
     "node_id": "agents_library_capabilities_perf_profile",
-    "size_bytes": 1164
+    "size_bytes": 1135
   },
   {
     "path": ".agents/library/capabilities/playtest-report.md",
     "node_id": "agents_library_capabilities_playtest_report",
-    "size_bytes": 1227
+    "size_bytes": 1193
   },
   {
     "path": ".agents/library/capabilities/project-stage-detect.md",
     "node_id": "agents_library_capabilities_project_stage_detect",
-    "size_bytes": 1034
+    "size_bytes": 1009
   },
   {
     "path": ".agents/library/capabilities/propagate-design-change.md",
     "node_id": "agents_library_capabilities_propagate_design_change",
-    "size_bytes": 1301
+    "size_bytes": 1269
   },
   {
     "path": ".agents/library/capabilities/prototype.md",
     "node_id": "agents_library_capabilities_prototype",
-    "size_bytes": 1290
+    "size_bytes": 1258
   },
   {
     "path": ".agents/library/capabilities/qa-plan.md",
     "node_id": "agents_library_capabilities_qa_plan",
-    "size_bytes": 1075
+    "size_bytes": 1048
   },
   {
     "path": ".agents/library/capabilities/quick-design.md",
     "node_id": "agents_library_capabilities_quick_design",
-    "size_bytes": 1233
+    "size_bytes": 1195
   },
   {
     "path": ".agents/library/capabilities/regression-suite.md",
     "node_id": "agents_library_capabilities_regression_suite",
-    "size_bytes": 1433
+    "size_bytes": 1396
   },
   {
     "path": ".agents/library/capabilities/release-checklist.md",
     "node_id": "agents_library_capabilities_release_checklist",
-    "size_bytes": 1281
+    "size_bytes": 1248
   },
   {
     "path": ".agents/library/capabilities/retrospective.md",
     "node_id": "agents_library_capabilities_retrospective",
-    "size_bytes": 1351
+    "size_bytes": 1316
   },
   {
     "path": ".agents/library/capabilities/reverse-document.md",
     "node_id": "agents_library_capabilities_reverse_document",
-    "size_bytes": 1267
+    "size_bytes": 1240
   },
   {
     "path": ".agents/library/capabilities/review-all-gdds.md",
     "node_id": "agents_library_capabilities_review_all_gdds",
-    "size_bytes": 2024
+    "size_bytes": 1973
   },
   {
     "path": ".agents/library/capabilities/router.md",
     "node_id": "agents_library_capabilities_router",
-    "size_bytes": 1872
+    "size_bytes": 1844
   },
   {
     "path": ".agents/library/capabilities/rpg.md",
     "node_id": "agents_library_capabilities_rpg",
-    "size_bytes": 1095
+    "size_bytes": 1070
   },
   {
     "path": ".agents/library/capabilities/save-systems.md",
     "node_id": "agents_library_capabilities_save_systems",
-    "size_bytes": 1216
+    "size_bytes": 1192
   },
   {
     "path": ".agents/library/capabilities/scope-check.md",
     "node_id": "agents_library_capabilities_scope_check",
-    "size_bytes": 1099
+    "size_bytes": 1072
   },
   {
     "path": ".agents/library/capabilities/security-audit.md",
     "node_id": "agents_library_capabilities_security_audit",
-    "size_bytes": 1515
+    "size_bytes": 1477
   },
   {
     "path": ".agents/library/capabilities/settings.md",
     "node_id": "agents_library_capabilities_settings",
-    "size_bytes": 924
+    "size_bytes": 901
   },
   {
     "path": ".agents/library/capabilities/setup-engine.md",
     "node_id": "agents_library_capabilities_setup_engine",
-    "size_bytes": 732
+    "size_bytes": 715
   },
   {
     "path": ".agents/library/capabilities/smoke-check.md",
     "node_id": "agents_library_capabilities_smoke_check",
-    "size_bytes": 1168
+    "size_bytes": 1140
   },
   {
     "path": ".agents/library/capabilities/soak-test.md",
     "node_id": "agents_library_capabilities_soak_test",
-    "size_bytes": 1368
+    "size_bytes": 1334
   },
   {
     "path": ".agents/library/capabilities/sprint-plan.md",
     "node_id": "agents_library_capabilities_sprint_plan",
-    "size_bytes": 1276
+    "size_bytes": 1237
   },
   {
     "path": ".agents/library/capabilities/sprint-status.md",
     "node_id": "agents_library_capabilities_sprint_status",
-    "size_bytes": 1101
+    "size_bytes": 1073
   },
   {
     "path": ".agents/library/capabilities/start.md",
     "node_id": "agents_library_capabilities_start",
-    "size_bytes": 947
+    "size_bytes": 924
   },
   {
     "path": ".agents/library/capabilities/story-done.md",
     "node_id": "agents_library_capabilities_story_done",
-    "size_bytes": 1612
+    "size_bytes": 1571
   },
   {
     "path": ".agents/library/capabilities/story-readiness.md",
     "node_id": "agents_library_capabilities_story_readiness",
-    "size_bytes": 1437
+    "size_bytes": 1397
   },
   {
     "path": ".agents/library/capabilities/team-audio.md",
     "node_id": "agents_library_capabilities_team_audio",
-    "size_bytes": 1021
+    "size_bytes": 1000
   },
   {
     "path": ".agents/library/capabilities/team-combat.md",
     "node_id": "agents_library_capabilities_team_combat",
-    "size_bytes": 1036
+    "size_bytes": 1011
   },
   {
     "path": ".agents/library/capabilities/team-level.md",
     "node_id": "agents_library_capabilities_team_level",
-    "size_bytes": 1155
+    "size_bytes": 1134
   },
   {
     "path": ".agents/library/capabilities/team-live-ops.md",
     "node_id": "agents_library_capabilities_team_live_ops",
-    "size_bytes": 1161
+    "size_bytes": 1134
   },
   {
     "path": ".agents/library/capabilities/team-narrative.md",
     "node_id": "agents_library_capabilities_team_narrative",
-    "size_bytes": 1049
+    "size_bytes": 1024
   },
   {
     "path": ".agents/library/capabilities/team-polish.md",
     "node_id": "agents_library_capabilities_team_polish",
-    "size_bytes": 1137
+    "size_bytes": 1111
   },
   {
     "path": ".agents/library/capabilities/team-qa.md",
     "node_id": "agents_library_capabilities_team_qa",
-    "size_bytes": 1195
+    "size_bytes": 1165
   },
   {
     "path": ".agents/library/capabilities/team-release.md",
     "node_id": "agents_library_capabilities_team_release",
-    "size_bytes": 1068
+    "size_bytes": 1042
   },
   {
     "path": ".agents/library/capabilities/team-ui.md",
     "node_id": "agents_library_capabilities_team_ui",
-    "size_bytes": 1179
+    "size_bytes": 1151
   },
   {
     "path": ".agents/library/capabilities/tech-debt.md",
     "node_id": "agents_library_capabilities_tech_debt",
-    "size_bytes": 914
+    "size_bytes": 892
   },
   {
     "path": ".agents/library/capabilities/test-evidence-review.md",
     "node_id": "agents_library_capabilities_test_evidence_review",
-    "size_bytes": 1278
+    "size_bytes": 1246
   },
   {
     "path": ".agents/library/capabilities/test-flakiness.md",
     "node_id": "agents_library_capabilities_test_flakiness",
-    "size_bytes": 1218
+    "size_bytes": 1188
   },
   {
     "path": ".agents/library/capabilities/test-helpers.md",
     "node_id": "agents_library_capabilities_test_helpers",
-    "size_bytes": 2700
+    "size_bytes": 2649
   },
   {
     "path": ".agents/library/capabilities/test-setup.md",
     "node_id": "agents_library_capabilities_test_setup",
-    "size_bytes": 719
+    "size_bytes": 700
   },
   {
     "path": ".agents/library/capabilities/uomd-asset-pipeline.md",
     "node_id": "agents_library_capabilities_uomd_asset_pipeline",
-    "size_bytes": 1015
+    "size_bytes": 995
   },
   {
     "path": ".agents/library/capabilities/ux-design.md",
     "node_id": "agents_library_capabilities_ux_design",
-    "size_bytes": 2718
+    "size_bytes": 2627
   },
   {
     "path": ".agents/library/capabilities/ux-review.md",
     "node_id": "agents_library_capabilities_ux_review",
-    "size_bytes": 1560
+    "size_bytes": 1526
   },
   {
     "path": ".agents/library/capabilities/vertical-slice.md",
     "node_id": "agents_library_capabilities_vertical_slice",
-    "size_bytes": 1120
+    "size_bytes": 1096
   },
   {
     "path": ".agents/library/documentation-inventory.json",
     "node_id": "agents_library_documentation_inventory",
-    "size_bytes": 281536
+    "size_bytes": 275712
   },
   {
     "path": ".agents/library/migration-inventory.json",
     "node_id": "agents_library_migration_inventory",
-    "size_bytes": 43313
+    "size_bytes": 42808
   },
   {
     "path": ".agents/library/roles.json",
     "node_id": "agents_library_roles",
-    "size_bytes": 13323
+    "size_bytes": 13081
   },
   {
     "path": ".agents/library/roles/accessibility-specialist.md",
     "node_id": "agents_library_roles_accessibility_specialist",
-    "size_bytes": 437
+    "size_bytes": 430
   },
   {
     "path": ".agents/library/roles/ai-programmer.md",
     "node_id": "agents_library_roles_ai_programmer",
-    "size_bytes": 1321
+    "size_bytes": 1302
   },
   {
     "path": ".agents/library/roles/analytics-engineer.md",
     "node_id": "agents_library_roles_analytics_engineer",
-    "size_bytes": 1838
+    "size_bytes": 1811
   },
   {
     "path": ".agents/library/roles/art-director.md",
     "node_id": "agents_library_roles_art_director",
-    "size_bytes": 1341
+    "size_bytes": 1321
   },
   {
     "path": ".agents/library/roles/asset-pipeline-manager.md",
     "node_id": "agents_library_roles_asset_pipeline_manager",
-    "size_bytes": 439
+    "size_bytes": 432
   },
   {
     "path": ".agents/library/roles/audio-director.md",
     "node_id": "agents_library_roles_audio_director",
-    "size_bytes": 1526
+    "size_bytes": 1503
   },
   {
     "path": ".agents/library/roles/community-manager.md",
     "node_id": "agents_library_roles_community_manager",
-    "size_bytes": 446
+    "size_bytes": 439
   },
   {
     "path": ".agents/library/roles/creative-director.md",
     "node_id": "agents_library_roles_creative_director",
-    "size_bytes": 1854
+    "size_bytes": 1827
   },
   {
     "path": ".agents/library/roles/devops-engineer.md",
     "node_id": "agents_library_roles_devops_engineer",
-    "size_bytes": 1442
+    "size_bytes": 1420
   },
   {
     "path": ".agents/library/roles/economy-designer.md",
     "node_id": "agents_library_roles_economy_designer",
-    "size_bytes": 2001
+    "size_bytes": 1973
   },
   {
     "path": ".agents/library/roles/engine-programmer.md",
     "node_id": "agents_library_roles_engine_programmer",
-    "size_bytes": 1648
+    "size_bytes": 1625
   },
   {
     "path": ".agents/library/roles/game-designer.md",
     "node_id": "agents_library_roles_game_designer",
-    "size_bytes": 2210
+    "size_bytes": 2179
   },
   {
     "path": ".agents/library/roles/gameplay-programmer.md",
     "node_id": "agents_library_roles_gameplay_programmer",
-    "size_bytes": 1274
+    "size_bytes": 1253
   },
   {
     "path": ".agents/library/roles/godot-csharp-specialist.md",
     "node_id": "agents_library_roles_godot_csharp_specialist",
-    "size_bytes": 438
+    "size_bytes": 431
   },
   {
     "path": ".agents/library/roles/godot-gdextension-specialist.md",
     "node_id": "agents_library_roles_godot_gdextension_specialist",
-    "size_bytes": 459
+    "size_bytes": 452
   },
   {
     "path": ".agents/library/roles/godot-gdscript-specialist.md",
     "node_id": "agents_library_roles_godot_gdscript_specialist",
-    "size_bytes": 455
+    "size_bytes": 448
   },
   {
     "path": ".agents/library/roles/godot-shader-specialist.md",
     "node_id": "agents_library_roles_godot_shader_specialist",
-    "size_bytes": 437
+    "size_bytes": 430
   },
   {
     "path": ".agents/library/roles/godot-specialist.md",
     "node_id": "agents_library_roles_godot_specialist",
-    "size_bytes": 459
+    "size_bytes": 452
   },
   {
     "path": ".agents/library/roles/lead-programmer.md",
     "node_id": "agents_library_roles_lead_programmer",
-    "size_bytes": 2022
+    "size_bytes": 1998
   },
   {
     "path": ".agents/library/roles/level-designer.md",
     "node_id": "agents_library_roles_level_designer",
-    "size_bytes": 1293
+    "size_bytes": 1274
   },
   {
     "path": ".agents/library/roles/live-ops-designer.md",
     "node_id": "agents_library_roles_live_ops_designer",
-    "size_bytes": 434
+    "size_bytes": 427
   },
   {
     "path": ".agents/library/roles/localization-lead.md",
     "node_id": "agents_library_roles_localization_lead",
-    "size_bytes": 1425
+    "size_bytes": 1403
   },
   {
     "path": ".agents/library/roles/narrative-director.md",
     "node_id": "agents_library_roles_narrative_director",
-    "size_bytes": 2125
+    "size_bytes": 2100
   },
   {
     "path": ".agents/library/roles/network-programmer.md",
     "node_id": "agents_library_roles_network_programmer",
-    "size_bytes": 1451
+    "size_bytes": 1429
   },
   {
     "path": ".agents/library/roles/performance-analyst.md",
     "node_id": "agents_library_roles_performance_analyst",
-    "size_bytes": 1331
+    "size_bytes": 1310
   },
   {
     "path": ".agents/library/roles/producer.md",
     "node_id": "agents_library_roles_producer",
-    "size_bytes": 1527
+    "size_bytes": 1504
   },
   {
     "path": ".agents/library/roles/prototyper.md",
     "node_id": "agents_library_roles_prototyper",
-    "size_bytes": 439
+    "size_bytes": 432
   },
   {
     "path": ".agents/library/roles/qa-lead.md",
     "node_id": "agents_library_roles_qa_lead",
-    "size_bytes": 2494
+    "size_bytes": 2461
   },
   {
     "path": ".agents/library/roles/qa-tester.md",
     "node_id": "agents_library_roles_qa_tester",
-    "size_bytes": 1790
+    "size_bytes": 1763
   },
   {
     "path": ".agents/library/roles/release-manager.md",
     "node_id": "agents_library_roles_release_manager",
-    "size_bytes": 450
+    "size_bytes": 443
   },
   {
     "path": ".agents/library/roles/security-engineer.md",
     "node_id": "agents_library_roles_security_engineer",
-    "size_bytes": 440
+    "size_bytes": 433
   },
   {
     "path": ".agents/library/roles/sound-designer.md",
     "node_id": "agents_library_roles_sound_designer",
-    "size_bytes": 1532
+    "size_bytes": 1509
   },
   {
     "path": ".agents/library/roles/systems-designer.md",
     "node_id": "agents_library_roles_systems_designer",
-    "size_bytes": 1331
+    "size_bytes": 1311
   },
   {
     "path": ".agents/library/roles/technical-artist.md",
     "node_id": "agents_library_roles_technical_artist",
-    "size_bytes": 1523
+    "size_bytes": 1501
   },
   {
     "path": ".agents/library/roles/technical-director.md",
     "node_id": "agents_library_roles_technical_director",
-    "size_bytes": 1384
+    "size_bytes": 1363
   },
   {
     "path": ".agents/library/roles/tools-programmer.md",
     "node_id": "agents_library_roles_tools_programmer",
-    "size_bytes": 1097
+    "size_bytes": 1080
   },
   {
     "path": ".agents/library/roles/ui-programmer.md",
     "node_id": "agents_library_roles_ui_programmer",
-    "size_bytes": 1203
+    "size_bytes": 1184
   },
   {
     "path": ".agents/library/roles/ux-designer.md",
     "node_id": "agents_library_roles_ux_designer",
-    "size_bytes": 1709
+    "size_bytes": 1685
   },
   {
     "path": ".agents/library/roles/world-builder.md",
     "node_id": "agents_library_roles_world_builder",
-    "size_bytes": 2126
+    "size_bytes": 2097
   },
   {
     "path": ".agents/library/roles/writer.md",
     "node_id": "agents_library_roles_writer",
-    "size_bytes": 1215
+    "size_bytes": 1196
   },
   {
     "path": ".archive/project-docs-20261008/GAME_TOOLCHAIN.md",
@@ -2602,132 +2602,132 @@
   {
     "path": ".codex/README.md",
     "node_id": "codex_readme",
-    "size_bytes": 933
+    "size_bytes": 922
   },
   {
     "path": ".codex/agents/animation-artist.toml",
     "node_id": "codex_agents_animation_artist",
-    "size_bytes": 1041
+    "size_bytes": 1038
   },
   {
     "path": ".codex/agents/art-director.toml",
     "node_id": "codex_agents_art_director",
-    "size_bytes": 1003
+    "size_bytes": 1000
   },
   {
     "path": ".codex/agents/asset-pipeline-specialist.toml",
     "node_id": "codex_agents_asset_pipeline_specialist",
-    "size_bytes": 1093
+    "size_bytes": 1090
   },
   {
     "path": ".codex/agents/qa-reviewer.toml",
     "node_id": "codex_agents_qa_reviewer",
-    "size_bytes": 1069
+    "size_bytes": 1066
   },
   {
     "path": ".codex/agents/technical-artist.toml",
     "node_id": "codex_agents_technical_artist",
-    "size_bytes": 1069
+    "size_bytes": 1066
   },
   {
     "path": ".codex/agents/ui-engineer.toml",
     "node_id": "codex_agents_ui_engineer",
-    "size_bytes": 1026
+    "size_bytes": 1023
   },
   {
     "path": ".codex/config.toml",
     "node_id": "codex_config",
-    "size_bytes": 283
+    "size_bytes": 279
   },
   {
     "path": ".codex/hooks.json",
     "node_id": "codex_hooks",
-    "size_bytes": 232
+    "size_bytes": 218
   },
   {
     "path": ".codex/hooks.json.graphify-bak",
     "node_id": "codex_hooks_json",
-    "size_bytes": 259
+    "size_bytes": 245
   },
   {
     "path": ".codex/references/asset-spec-fields.md",
     "node_id": "codex_references_asset_spec_fields",
-    "size_bytes": 1303
+    "size_bytes": 1278
   },
   {
     "path": ".codex/references/templates/accessibility-requirements.md",
     "node_id": "codex_references_templates_accessibility_requirements",
-    "size_bytes": 24403
+    "size_bytes": 24174
   },
   {
     "path": ".codex/references/templates/architecture-decision-record.md",
     "node_id": "codex_references_templates_architecture_decision_record",
-    "size_bytes": 7718
+    "size_bytes": 7512
   },
   {
     "path": ".codex/references/templates/art-bible.md",
     "node_id": "codex_references_templates_art_bible",
-    "size_bytes": 2867
+    "size_bytes": 2800
   },
   {
     "path": ".codex/references/templates/guidance/accessibility-requirements-guide.md",
     "node_id": "codex_references_templates_guidance_accessibility_requirements_guide",
-    "size_bytes": 13620
+    "size_bytes": 13410
   },
   {
     "path": ".codex/references/templates/guidance/hud-design-guide.md",
     "node_id": "codex_references_templates_guidance_hud_design_guide",
-    "size_bytes": 35565
+    "size_bytes": 35185
   },
   {
     "path": ".codex/references/templates/guidance/interaction-pattern-library-guide-game-specific.md",
     "node_id": "codex_references_templates_guidance_interaction_pattern_library_guide_game_specific",
-    "size_bytes": 12557
+    "size_bytes": 12382
   },
   {
     "path": ".codex/references/templates/guidance/interaction-pattern-library-guide-navigation-feedback.md",
     "node_id": "codex_references_templates_guidance_interaction_pattern_library_guide_navigation_feedback",
-    "size_bytes": 9291
+    "size_bytes": 9156
   },
   {
     "path": ".codex/references/templates/guidance/interaction-pattern-library-guide-standard-controls.md",
     "node_id": "codex_references_templates_guidance_interaction_pattern_library_guide_standard_controls",
-    "size_bytes": 41688
+    "size_bytes": 41099
   },
   {
     "path": ".codex/references/templates/guidance/interaction-pattern-library-guide.md",
     "node_id": "codex_references_templates_guidance_interaction_pattern_library_guide",
-    "size_bytes": 1770
+    "size_bytes": 1750
   },
   {
     "path": ".codex/references/templates/guidance/ux-spec-guide.md",
     "node_id": "codex_references_templates_guidance_ux_spec_guide",
-    "size_bytes": 32606
+    "size_bytes": 32163
   },
   {
     "path": ".codex/references/templates/hud-design.md",
     "node_id": "codex_references_templates_hud_design",
-    "size_bytes": 18149
+    "size_bytes": 17818
   },
   {
     "path": ".codex/references/templates/interaction-pattern-library.md",
     "node_id": "codex_references_templates_interaction_pattern_library",
-    "size_bytes": 33922
+    "size_bytes": 33190
   },
   {
     "path": ".codex/references/templates/test-evidence.md",
     "node_id": "codex_references_templates_test_evidence",
-    "size_bytes": 3341
+    "size_bytes": 3246
   },
   {
     "path": ".codex/references/templates/ux-spec.md",
     "node_id": "codex_references_templates_ux_spec",
-    "size_bytes": 16524
+    "size_bytes": 16164
   },
   {
     "path": ".codex/references/ux-review-checklist.md",
     "node_id": "codex_references_ux_review_checklist",
-    "size_bytes": 6649
+    "size_bytes": 6503
   },
   {
     "path": ".codex/scripts/audit_assets.py",
@@ -2752,332 +2752,327 @@
   {
     "path": ".codex/skills/uomd-architecture-review/SKILL.md",
     "node_id": "codex_skills_uomd_architecture_review_skill",
-    "size_bytes": 706
+    "size_bytes": 698
   },
   {
     "path": ".codex/skills/uomd-art-bible/SKILL.md",
     "node_id": "codex_skills_uomd_art_bible_skill",
-    "size_bytes": 738
+    "size_bytes": 730
   },
   {
     "path": ".codex/skills/uomd-asset-audit/SKILL.md",
     "node_id": "codex_skills_uomd_asset_audit_skill",
-    "size_bytes": 731
+    "size_bytes": 723
   },
   {
     "path": ".codex/skills/uomd-asset-pipeline/SKILL.md",
     "node_id": "codex_skills_uomd_asset_pipeline_skill",
-    "size_bytes": 748
+    "size_bytes": 740
   },
   {
     "path": ".codex/skills/uomd-asset-spec/SKILL.md",
     "node_id": "codex_skills_uomd_asset_spec_skill",
-    "size_bytes": 832
+    "size_bytes": 824
   },
   {
     "path": ".codex/skills/uomd-camera-systems/SKILL.md",
     "node_id": "codex_skills_uomd_camera_systems_skill",
-    "size_bytes": 8400
+    "size_bytes": 8257
   },
   {
     "path": ".codex/skills/uomd-camera-systems/references/follow-and-framing.md",
     "node_id": "codex_skills_uomd_camera_systems_references_follow_and_framing",
-    "size_bytes": 4935
+    "size_bytes": 4844
   },
   {
     "path": ".codex/skills/uomd-chibi-animation/SKILL.md",
     "node_id": "codex_skills_uomd_chibi_animation_skill",
-    "size_bytes": 748
+    "size_bytes": 740
   },
   {
     "path": ".codex/skills/uomd-code-review/SKILL.md",
     "node_id": "codex_skills_uomd_code_review_skill",
-    "size_bytes": 713
+    "size_bytes": 705
   },
   {
     "path": ".codex/skills/uomd-cutscene/SKILL.md",
     "node_id": "codex_skills_uomd_cutscene_skill",
-    "size_bytes": 683
+    "size_bytes": 675
   },
   {
     "path": ".codex/skills/uomd-design-system/SKILL.md",
     "node_id": "codex_skills_uomd_design_system_skill",
-    "size_bytes": 788
+    "size_bytes": 780
   },
   {
     "path": ".codex/skills/uomd-game-feel/SKILL.md",
     "node_id": "codex_skills_uomd_game_feel_skill",
-    "size_bytes": 8842
+    "size_bytes": 8688
   },
   {
     "path": ".codex/skills/uomd-game-feel/references/feedback-recipes.md",
     "node_id": "codex_skills_uomd_game_feel_references_feedback_recipes",
-    "size_bytes": 5665
+    "size_bytes": 5565
   },
   {
     "path": ".codex/skills/uomd-game-ui-ux/SKILL.md",
     "node_id": "codex_skills_uomd_game_ui_ux_skill",
-    "size_bytes": 8292
+    "size_bytes": 8152
   },
   {
     "path": ".codex/skills/uomd-game-ui-ux/references/layout-and-flow.md",
     "node_id": "codex_skills_uomd_game_ui_ux_references_layout_and_flow",
-    "size_bytes": 5545
+    "size_bytes": 5432
   },
   {
     "path": ".codex/skills/uomd-godot-2d-movement/SKILL.md",
     "node_id": "codex_skills_uomd_godot_2d_movement_skill",
-    "size_bytes": 5927
+    "size_bytes": 5787
   },
   {
     "path": ".codex/skills/uomd-godot-2d-movement/references/controller-recipes.md",
     "node_id": "codex_skills_uomd_godot_2d_movement_references_controller_recipes",
-    "size_bytes": 3337
+    "size_bytes": 3246
   },
   {
     "path": ".codex/skills/uomd-godot-animation/SKILL.md",
     "node_id": "codex_skills_uomd_godot_animation_skill",
-    "size_bytes": 5457
+    "size_bytes": 5343
   },
   {
     "path": ".codex/skills/uomd-godot-animation/references/animation-tree-and-tween.md",
     "node_id": "codex_skills_uomd_godot_animation_references_animation_tree_and_tween",
-    "size_bytes": 4233
+    "size_bytes": 4143
   },
   {
     "path": ".codex/skills/uomd-godot-gdscript-headless-testing/SKILL.md",
     "node_id": "codex_skills_uomd_godot_gdscript_headless_testing_skill",
-    "size_bytes": 9589
+    "size_bytes": 9406
   },
   {
     "path": ".codex/skills/uomd-godot-gdscript/SKILL.md",
     "node_id": "codex_skills_uomd_godot_gdscript_skill",
-    "size_bytes": 5301
+    "size_bytes": 5180
   },
   {
     "path": ".codex/skills/uomd-godot-gdscript/references/annotations-and-typing.md",
     "node_id": "codex_skills_uomd_godot_gdscript_references_annotations_and_typing",
-    "size_bytes": 3436
+    "size_bytes": 3359
   },
   {
     "path": ".codex/skills/uomd-godot-nodes-scenes/SKILL.md",
     "node_id": "codex_skills_uomd_godot_nodes_scenes_skill",
-    "size_bytes": 5529
+    "size_bytes": 5415
   },
   {
     "path": ".codex/skills/uomd-godot-nodes-scenes/references/tree-and-instancing.md",
     "node_id": "codex_skills_uomd_godot_nodes_scenes_references_tree_and_instancing",
-    "size_bytes": 3099
+    "size_bytes": 3020
   },
   {
     "path": ".codex/skills/uomd-godot-resources/SKILL.md",
     "node_id": "codex_skills_uomd_godot_resources_skill",
-    "size_bytes": 4969
+    "size_bytes": 4858
   },
   {
     "path": ".codex/skills/uomd-godot-resources/references/resource-patterns.md",
     "node_id": "codex_skills_uomd_godot_resources_references_resource_patterns",
-    "size_bytes": 3355
+    "size_bytes": 3277
   },
   {
     "path": ".codex/skills/uomd-godot-signals-groups/SKILL.md",
     "node_id": "codex_skills_uomd_godot_signals_groups_skill",
-    "size_bytes": 5164
+    "size_bytes": 5041
   },
   {
     "path": ".codex/skills/uomd-godot-signals-groups/references/signal-patterns.md",
     "node_id": "codex_skills_uomd_godot_signals_groups_references_signal_patterns",
-    "size_bytes": 3605
+    "size_bytes": 3507
   },
   {
     "path": ".codex/skills/uomd-godot-tilemap/SKILL.md",
     "node_id": "codex_skills_uomd_godot_tilemap_skill",
-    "size_bytes": 5767
+    "size_bytes": 5646
   },
   {
     "path": ".codex/skills/uomd-godot-tilemap/references/tileset-and-terrains.md",
     "node_id": "codex_skills_uomd_godot_tilemap_references_tileset_and_terrains",
-    "size_bytes": 4194
+    "size_bytes": 4099
   },
   {
     "path": ".codex/skills/uomd-godot-ui-control/SKILL.md",
     "node_id": "codex_skills_uomd_godot_ui_control_skill",
-    "size_bytes": 5716
+    "size_bytes": 5600
   },
   {
     "path": ".codex/skills/uomd-godot-ui-control/references/layout-and-theming.md",
     "node_id": "codex_skills_uomd_godot_ui_control_references_layout_and_theming",
-    "size_bytes": 4217
+    "size_bytes": 4112
   },
   {
     "path": ".codex/skills/uomd-graphify/SKILL.md",
     "node_id": "codex_skills_uomd_graphify_skill",
-    "size_bytes": 714
+    "size_bytes": 706
   },
   {
     "path": ".codex/skills/uomd-perf-profile/SKILL.md",
     "node_id": "codex_skills_uomd_perf_profile_skill",
-    "size_bytes": 750
+    "size_bytes": 742
   },
   {
     "path": ".codex/skills/uomd-router/SKILL.md",
     "node_id": "codex_skills_uomd_router_skill",
-    "size_bytes": 976
+    "size_bytes": 968
   },
   {
     "path": ".codex/skills/uomd-screen-presentation/SKILL.md",
     "node_id": "codex_skills_uomd_screen_presentation_skill",
-    "size_bytes": 902
+    "size_bytes": 894
   },
   {
     "path": ".codex/skills/uomd-setup-engine/SKILL.md",
     "node_id": "codex_skills_uomd_setup_engine_skill",
-    "size_bytes": 788
+    "size_bytes": 780
   },
   {
     "path": ".codex/skills/uomd-team-polish/SKILL.md",
     "node_id": "codex_skills_uomd_team_polish_skill",
-    "size_bytes": 781
+    "size_bytes": 773
   },
   {
     "path": ".codex/skills/uomd-team-ui/SKILL.md",
     "node_id": "codex_skills_uomd_team_ui_skill",
-    "size_bytes": 864
+    "size_bytes": 856
   },
   {
     "path": ".codex/skills/uomd-test-setup/SKILL.md",
     "node_id": "codex_skills_uomd_test_setup_skill",
-    "size_bytes": 684
+    "size_bytes": 676
   },
   {
     "path": ".codex/skills/uomd-ux-design/SKILL.md",
     "node_id": "codex_skills_uomd_ux_design_skill",
-    "size_bytes": 824
+    "size_bytes": 816
   },
   {
     "path": ".codex/skills/uomd-ux-review/SKILL.md",
     "node_id": "codex_skills_uomd_ux_review_skill",
-    "size_bytes": 759
+    "size_bytes": 751
   },
   {
     "path": ".codex/skills/uomd-vfx/SKILL.md",
     "node_id": "codex_skills_uomd_vfx_skill",
-    "size_bytes": 727
+    "size_bytes": 719
   },
   {
     "path": ".codex/standards/art-bible.md",
     "node_id": "codex_standards_art_bible",
-    "size_bytes": 2217
+    "size_bytes": 2204
   },
   {
     "path": ".codex/standards/asset-pipeline.md",
     "node_id": "codex_standards_asset_pipeline",
-    "size_bytes": 2216
+    "size_bytes": 2203
   },
   {
     "path": ".codex/standards/authority.md",
     "node_id": "codex_standards_authority",
-    "size_bytes": 3676
+    "size_bytes": 3653
   },
   {
     "path": ".codex/standards/chibi-animation.md",
     "node_id": "codex_standards_chibi_animation",
-    "size_bytes": 2172
+    "size_bytes": 2159
   },
   {
     "path": ".codex/standards/cutscenes.md",
     "node_id": "codex_standards_cutscenes",
-    "size_bytes": 1951
+    "size_bytes": 1938
   },
   {
     "path": ".codex/standards/godot-development.md",
     "node_id": "codex_standards_godot_development",
-    "size_bytes": 1921
+    "size_bytes": 1908
   },
   {
     "path": ".codex/standards/testing.md",
     "node_id": "codex_standards_testing",
-    "size_bytes": 1529
+    "size_bytes": 1520
   },
   {
     "path": ".codex/standards/ui.md",
     "node_id": "codex_standards_ui",
-    "size_bytes": 2739
+    "size_bytes": 2722
   },
   {
     "path": ".codex/standards/vfx.md",
     "node_id": "codex_standards_vfx",
-    "size_bytes": 1940
+    "size_bytes": 1929
   },
   {
     "path": ".codex/validation/audit-tool-tests.json",
     "node_id": "codex_validation_audit_tool_tests",
-    "size_bytes": 245
+    "size_bytes": 234
   },
   {
     "path": ".codex/validation/discovery.json",
     "node_id": "codex_validation_discovery",
-    "size_bytes": 1123
+    "size_bytes": 1080
   },
   {
     "path": ".codex/validation/graph-refresh.json",
     "node_id": "codex_validation_graph_refresh",
-    "size_bytes": 506
+    "size_bytes": 491
   },
   {
     "path": ".codex/validation/preservation.json",
     "node_id": "codex_validation_preservation",
-    "size_bytes": 2393
+    "size_bytes": 2360
   },
   {
     "path": ".codex/validation/secret-scan.json",
     "node_id": "codex_validation_secret_scan",
-    "size_bytes": 136
+    "size_bytes": 129
   },
   {
     "path": ".codex/validation/skill-invocation.json",
     "node_id": "codex_validation_skill_invocation",
-    "size_bytes": 691
+    "size_bytes": 661
   },
   {
     "path": ".codex/workflows/animation-cutscene.md",
     "node_id": "codex_workflows_animation_cutscene",
-    "size_bytes": 814
+    "size_bytes": 807
   },
   {
     "path": ".codex/workflows/asset-audit.md",
     "node_id": "codex_workflows_asset_audit",
-    "size_bytes": 858
+    "size_bytes": 851
   },
   {
     "path": ".codex/workflows/entry-ui.md",
     "node_id": "codex_workflows_entry_ui",
-    "size_bytes": 1242
+    "size_bytes": 1232
   },
   {
     "path": ".codex/workflows/graph-maintenance.md",
     "node_id": "codex_workflows_graph_maintenance",
-    "size_bytes": 894
+    "size_bytes": 1253
   },
   {
     "path": ".codex/workflows/quality-review.md",
     "node_id": "codex_workflows_quality_review",
-    "size_bytes": 830
+    "size_bytes": 823
   },
   {
     "path": ".codex/workflows/system-maintenance.md",
     "node_id": "codex_workflows_system_maintenance",
-    "size_bytes": 1471
-  },
-  {
-    "path": ".env.example",
-    "node_id": "_env",
-    "size_bytes": 521
+    "size_bytes": 1462
   },
   {
     "path": ".gitattributes",
     "node_id": "gitattributes",
-    "size_bytes": 1772
+    "size_bytes": 2321
   },
   {
     "path": ".github/workflows/backup.yml",
@@ -3122,22 +3117,22 @@
   {
     "path": ".gitignore",
     "node_id": "gitignore",
-    "size_bytes": 1579
+    "size_bytes": 53
   },
   {
     "path": "AGENTS.md",
     "node_id": "agents",
-    "size_bytes": 3746
+    "size_bytes": 4452
   },
   {
     "path": "CLAUDE.md",
     "node_id": "claude",
-    "size_bytes": 3345
+    "size_bytes": 3769
   },
   {
     "path": "GAME_TOOLCHAIN.md",
     "node_id": "game_toolchain",
-    "size_bytes": 2042
+    "size_bytes": 2029
   },
   {
     "path": "GODOT_AI_READY.md",
@@ -3152,7 +3147,7 @@
   {
     "path": "README.md",
     "node_id": "readme",
-    "size_bytes": 3006
+    "size_bytes": 3093
   },
   {
     "path": "THIRD_PARTY_LICENSES/claude-code-game-studios-MIT.txt",
@@ -3167,12 +3162,12 @@
   {
     "path": "UOMD_FRAMEWORK_MANIFEST.md",
     "node_id": "uomd_framework_manifest",
-    "size_bytes": 1489
+    "size_bytes": 1461
   },
   {
     "path": "admin/.gitignore",
     "node_id": "admin_gitignore",
-    "size_bytes": 122
+    "size_bytes": 53
   },
   {
     "path": "admin/app/globals.css",
@@ -3367,22 +3362,22 @@
   {
     "path": "docs/ARCHITECTURE.md",
     "node_id": "docs_architecture",
-    "size_bytes": 3030
+    "size_bytes": 3001
   },
   {
     "path": "docs/ART_AND_CODE_HANDOFF.md",
     "node_id": "docs_art_and_code_handoff",
-    "size_bytes": 3372
+    "size_bytes": 3888
   },
   {
     "path": "docs/CURRENT_STATE.md",
     "node_id": "docs_current_state",
-    "size_bytes": 13676
+    "size_bytes": 13487
   },
   {
     "path": "docs/DECISIONS.md",
     "node_id": "docs_decisions",
-    "size_bytes": 66128
+    "size_bytes": 66120
   },
   {
     "path": "docs/DRIVE_LEGACY_ACCESS.md",
@@ -3452,12 +3447,12 @@
   {
     "path": "docs/PROJECT_MAP.md",
     "node_id": "docs_project_map",
-    "size_bytes": 5014
+    "size_bytes": 5103
   },
   {
     "path": "docs/REPOSITORY_INVENTORY.md",
     "node_id": "docs_repository_inventory",
-    "size_bytes": 2417
+    "size_bytes": 2394
   },
   {
     "path": "docs/UOMD_ASSET_PIPELINE.md",
@@ -3487,7 +3482,7 @@
   {
     "path": "docs/art/character_reference/generation_manifest_v003.json",
     "node_id": "docs_art_character_reference_generation_manifest_v003",
-    "size_bytes": 13357
+    "size_bytes": 13186
   },
   {
     "path": "docs/art/character_reference/mahmut_model_sheet_v002.png",
@@ -3498,6 +3493,11 @@
     "path": "docs/coder/ASSET_INVENTORY_TEMPLATE.md",
     "node_id": "docs_coder_asset_inventory_template",
     "size_bytes": 1049
+  },
+  {
+    "path": "docs/coder/CLOUD_MAIN_SYNC.md",
+    "node_id": "docs_coder_cloud_main_sync",
+    "size_bytes": 2948
   },
   {
     "path": "docs/coder/CODER_RESPONSE_FORMAT.md",
@@ -3542,7 +3542,7 @@
   {
     "path": "docs/coder/START_HERE.md",
     "node_id": "docs_coder_start_here",
-    "size_bytes": 1391
+    "size_bytes": 1857
   },
   {
     "path": "docs/coder/STORY_CHARACTER_TEMPLATE.md",
@@ -3602,7 +3602,7 @@
   {
     "path": "docs/design/FIRST_LAUNCH_FLOW.md",
     "node_id": "docs_design_first_launch_flow",
-    "size_bytes": 15943
+    "size_bytes": 15734
   },
   {
     "path": "docs/design/MANUAL_ULTIMATE_AND_NOVEL_v004_2026-10-08.md",
@@ -3617,7 +3617,7 @@
   {
     "path": "docs/design/OPENING_TUTORIAL_REVISION_v006_2026-10-08.md",
     "node_id": "docs_design_opening_tutorial_revision_v006_2026_10_08",
-    "size_bytes": 16400
+    "size_bytes": 16211
   },
   {
     "path": "docs/design/OPENING_UI_POLISH_v007_2026-10-08.md",
@@ -3717,17 +3717,27 @@
   {
     "path": "docs/release/ASSET_PROVENANCE.json",
     "node_id": "docs_release_asset_provenance",
-    "size_bytes": 39263
+    "size_bytes": 38811
   },
   {
     "path": "docs/release/CURRENT_AAB.md",
     "node_id": "docs_release_current_aab",
-    "size_bytes": 5839
+    "size_bytes": 5927
+  },
+  {
+    "path": "docs/release/FIRST_AAB_FIX_REPORT_2026-10-09.md",
+    "node_id": "docs_release_first_aab_fix_report_2026_10_09",
+    "size_bytes": 6691
+  },
+  {
+    "path": "docs/release/FIRST_AAB_PLAN.md",
+    "node_id": "docs_release_first_aab_plan",
+    "size_bytes": 7475
   },
   {
     "path": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
     "node_id": "docs_release_migration_and_cloud_report_2026_10_08_tr",
-    "size_bytes": 22115
+    "size_bytes": 21916
   },
   {
     "path": "docs/release/PROJECT_ORGANIZATION_2026-10-08.md",
@@ -3738,6 +3748,71 @@
     "path": "docs/release/WORKSPACE_COPY_2026-10-08_TR.md",
     "node_id": "docs_release_workspace_copy_2026_10_08_tr",
     "size_bytes": 7048
+  },
+  {
+    "path": "docs/release/dialogue-restoration.json",
+    "node_id": "docs_release_dialogue_restoration",
+    "size_bytes": 39829
+  },
+  {
+    "path": "docs/release/first-aab-voice-inventory.json",
+    "node_id": "docs_release_first_aab_voice_inventory",
+    "size_bytes": 65457
+  },
+  {
+    "path": "docs/release/validation/20261009/apk-validation.txt",
+    "node_id": "docs_release_validation_20261009_apk_validation",
+    "size_bytes": 776
+  },
+  {
+    "path": "docs/release/validation/20261009/base-privacy-acceptance.json",
+    "node_id": "docs_release_validation_20261009_base_privacy_acceptance",
+    "size_bytes": 242
+  },
+  {
+    "path": "docs/release/validation/20261009/content-audit.txt",
+    "node_id": "docs_release_validation_20261009_content_audit",
+    "size_bytes": 870
+  },
+  {
+    "path": "docs/release/validation/20261009/content-bytes.xml",
+    "node_id": "docs_release_validation_20261009_content_bytes",
+    "size_bytes": 573
+  },
+  {
+    "path": "docs/release/validation/20261009/current-integrity.json",
+    "node_id": "docs_release_validation_20261009_current_integrity",
+    "size_bytes": 239
+  },
+  {
+    "path": "docs/release/validation/20261009/e2e.xml",
+    "node_id": "docs_release_validation_20261009_e2e",
+    "size_bytes": 699
+  },
+  {
+    "path": "docs/release/validation/20261009/godot-full.xml",
+    "node_id": "docs_release_validation_20261009_godot_full",
+    "size_bytes": 104966
+  },
+  {
+    "path": "docs/release/validation/20261009/snapshot-tests.txt",
+    "node_id": "docs_release_validation_20261009_snapshot_tests",
+    "size_bytes": 112
+  },
+  {
+    "path": "docs/release/validation/20261009/source-rebuild-acceptance.json",
+    "node_id": "docs_release_validation_20261009_source_rebuild_acceptance",
+    "size_bytes": 245
+  },
+  {
+    "path": "docs/release/validation/20261009/summary.json",
+    "node_id": "docs_release_validation_20261009_summary",
+    "size_bytes": 2173
+  },
+  {
+    "path": "docs/release/validation/20261009/tool-tests.txt",
+    "node_id": "docs_release_validation_20261009_tool_tests",
+    "size_bytes": 306
   },
   {
     "path": "docs/runbooks/BACKUP_RESTORE.md",
@@ -3792,7 +3867,7 @@
   {
     "path": "docs/ui/narrative-v002/README.md",
     "node_id": "docs_ui_narrative_v002_readme",
-    "size_bytes": 13155
+    "size_bytes": 13091
   },
   {
     "path": "docs/ui/production-v001/ENTRY_AUDIT_2026-10-07.md",
@@ -3822,12 +3897,12 @@
   {
     "path": "docs/ui/production-v001/entry-manifest.json",
     "node_id": "docs_ui_production_v001_entry_manifest",
-    "size_bytes": 579
+    "size_bytes": 569
   },
   {
     "path": "docs/ui/production-v001/integration-manifest.json",
     "node_id": "docs_ui_production_v001_integration_manifest",
-    "size_bytes": 14842
+    "size_bytes": 14454
   },
   {
     "path": "docs/ui/production-v001/source/UOMD_Godot_Asset_Path_Manifest_v001.json",
@@ -3882,7 +3957,7 @@
   {
     "path": "docs/ui/production-v001/source/font-source-commit.txt",
     "node_id": "docs_ui_production_v001_source_font_source_commit",
-    "size_bytes": 42
+    "size_bytes": 41
   },
   {
     "path": "game/.gutconfig.json",
@@ -6765,6 +6840,16 @@
     "size_bytes": 20
   },
   {
+    "path": "game/addons/uomd_native/bin/debug/uomd_native-debug.aar",
+    "node_id": "game_addons_uomd_native_bin_debug_uomd_native_debug",
+    "size_bytes": 26577
+  },
+  {
+    "path": "game/addons/uomd_native/bin/release/uomd_native-release.aar",
+    "node_id": "game_addons_uomd_native_bin_release_uomd_native_release",
+    "size_bytes": 25080
+  },
+  {
     "path": "game/addons/uomd_native/export_plugin.gd",
     "node_id": "game_addons_uomd_native_export_plugin",
     "size_bytes": 1426
@@ -6833,6 +6918,11 @@
     "path": "game/android/plugins/uomd_native/src/main/java/io/github/mucaeksi/uomd/UomdNative.java",
     "node_id": "game_android_plugins_uomd_native_src_main_java_io_github_mucaeksi_uomd_uomdnative",
     "size_bytes": 13759
+  },
+  {
+    "path": "game/android/plugins/uomd_native/src/main/res/values/uomd_admob.xml",
+    "node_id": "game_android_plugins_uomd_native_src_main_res_values_uomd_admob",
+    "size_bytes": 163
   },
   {
     "path": "game/assets/art_review/v02/key_art.png",
@@ -7227,7 +7317,7 @@
   {
     "path": "game/assets/third_party/reference/COLLECTION.json",
     "node_id": "game_assets_third_party_reference_collection",
-    "size_bytes": 283759
+    "size_bytes": 276304
   },
   {
     "path": "game/assets/third_party/reference/README.md",
@@ -7237,7 +7327,7 @@
   {
     "path": "game/assets/third_party/reference/game-icons/LICENSE.txt",
     "node_id": "game_assets_third_party_reference_game_icons_license",
-    "size_bytes": 1466
+    "size_bytes": 1421
   },
   {
     "path": "game/assets/third_party/reference/game-icons/badges/shield.svg",
@@ -7492,7 +7582,7 @@
   {
     "path": "game/assets/third_party/reference/game-icons/delapouite/healing-shield.svg",
     "node_id": "game_assets_third_party_reference_game_icons_delapouite_healing_shield",
-    "size_bytes": 294
+    "size_bytes": 293
   },
   {
     "path": "game/assets/third_party/reference/game-icons/delapouite/healing-shield.svg.import",
@@ -7502,7 +7592,7 @@
   {
     "path": "game/assets/third_party/reference/game-icons/delapouite/hook-swords.svg",
     "node_id": "game_assets_third_party_reference_game_icons_delapouite_hook_swords",
-    "size_bytes": 2033
+    "size_bytes": 2032
   },
   {
     "path": "game/assets/third_party/reference/game-icons/delapouite/hook-swords.svg.import",
@@ -7582,7 +7672,7 @@
   {
     "path": "game/assets/third_party/reference/game-icons/delapouite/magic-broom.svg",
     "node_id": "game_assets_third_party_reference_game_icons_delapouite_magic_broom",
-    "size_bytes": 1579
+    "size_bytes": 1578
   },
   {
     "path": "game/assets/third_party/reference/game-icons/delapouite/magic-broom.svg.import",
@@ -7722,7 +7812,7 @@
   {
     "path": "game/assets/third_party/reference/game-icons/delapouite/shield-opposition.svg",
     "node_id": "game_assets_third_party_reference_game_icons_delapouite_shield_opposition",
-    "size_bytes": 1631
+    "size_bytes": 1630
   },
   {
     "path": "game/assets/third_party/reference/game-icons/delapouite/shield-opposition.svg.import",
@@ -7822,7 +7912,7 @@
   {
     "path": "game/assets/third_party/reference/game-icons/delapouite/sword-mold.svg",
     "node_id": "game_assets_third_party_reference_game_icons_delapouite_sword_mold",
-    "size_bytes": 1062
+    "size_bytes": 1061
   },
   {
     "path": "game/assets/third_party/reference/game-icons/delapouite/sword-mold.svg.import",
@@ -9132,7 +9222,7 @@
   {
     "path": "game/assets/third_party/reference/game-icons/lorc/shieldcomb.svg",
     "node_id": "game_assets_third_party_reference_game_icons_lorc_shieldcomb",
-    "size_bytes": 1223
+    "size_bytes": 1222
   },
   {
     "path": "game/assets/third_party/reference/game-icons/lorc/shieldcomb.svg.import",
@@ -9562,7 +9652,7 @@
   {
     "path": "game/assets/third_party/reference/game-icons/seregacthtuf/acid-shield.svg",
     "node_id": "game_assets_third_party_reference_game_icons_seregacthtuf_acid_shield",
-    "size_bytes": 1430
+    "size_bytes": 1429
   },
   {
     "path": "game/assets/third_party/reference/game-icons/seregacthtuf/acid-shield.svg.import",
@@ -9727,12 +9817,12 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/LICENSE.txt",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_license",
-    "size_bytes": 1093
+    "size_bytes": 1073
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/blink.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_blink",
-    "size_bytes": 385
+    "size_bytes": 372
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/blink.gdshader.uid",
@@ -9742,7 +9832,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/blur_amount.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_blur_amount",
-    "size_bytes": 470
+    "size_bytes": 453
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/blur_amount.gdshader.uid",
@@ -9752,7 +9842,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/burning.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_burning",
-    "size_bytes": 1032
+    "size_bytes": 1006
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/burning.gdshader.uid",
@@ -9762,7 +9852,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/chromatic_aberration.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_chromatic_aberration",
-    "size_bytes": 476
+    "size_bytes": 460
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/chromatic_aberration.gdshader.uid",
@@ -9772,7 +9862,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/color_change.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_color_change",
-    "size_bytes": 861
+    "size_bytes": 833
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/color_change.gdshader.uid",
@@ -9782,7 +9872,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/dissolve.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_dissolve",
-    "size_bytes": 878
+    "size_bytes": 855
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/dissolve.gdshader.uid",
@@ -9792,7 +9882,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/enemy.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_enemy",
-    "size_bytes": 881
+    "size_bytes": 853
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/enemy.gdshader.uid",
@@ -9802,7 +9892,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/energy_barrier.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_energy_barrier",
-    "size_bytes": 1076
+    "size_bytes": 1040
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/energy_barrier.gdshader.uid",
@@ -9812,7 +9902,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/flash_white.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_flash_white",
-    "size_bytes": 360
+    "size_bytes": 349
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/flash_white.gdshader.uid",
@@ -9822,7 +9912,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/fog.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_fog",
-    "size_bytes": 717
+    "size_bytes": 694
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/fog.gdshader.uid",
@@ -9832,7 +9922,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/frozen.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_frozen",
-    "size_bytes": 715
+    "size_bytes": 695
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/frozen.gdshader.uid",
@@ -9842,7 +9932,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/grayscale.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_grayscale",
-    "size_bytes": 488
+    "size_bytes": 473
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/grayscale.gdshader.uid",
@@ -9852,7 +9942,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/heat_distortion.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_heat_distortion",
-    "size_bytes": 602
+    "size_bytes": 586
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/heat_distortion.gdshader.uid",
@@ -9862,7 +9952,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/invisibility.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_invisibility",
-    "size_bytes": 880
+    "size_bytes": 859
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/invisibility.gdshader.uid",
@@ -9872,7 +9962,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/outline_glow.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_outline_glow",
-    "size_bytes": 959
+    "size_bytes": 933
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/outline_glow.gdshader.uid",
@@ -9882,7 +9972,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/petrify.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_petrify",
-    "size_bytes": 851
+    "size_bytes": 827
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/petrify.gdshader.uid",
@@ -9892,7 +9982,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/poison.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_poison",
-    "size_bytes": 624
+    "size_bytes": 605
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/poison.gdshader.uid",
@@ -9902,7 +9992,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/portal_vortex.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_portal_vortex",
-    "size_bytes": 1126
+    "size_bytes": 1094
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/portal_vortex.gdshader.uid",
@@ -9912,7 +10002,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/radial_blur.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_radial_blur",
-    "size_bytes": 563
+    "size_bytes": 544
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/radial_blur.gdshader.uid",
@@ -9922,7 +10012,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/shake_intensity.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_shake_intensity",
-    "size_bytes": 278
+    "size_bytes": 268
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/shake_intensity.gdshader.uid",
@@ -9932,7 +10022,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/starSky.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_starsky",
-    "size_bytes": 7889
+    "size_bytes": 7780
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/starSky.gdshader.uid",
@@ -9942,7 +10032,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/vignette.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_vignette",
-    "size_bytes": 684
+    "size_bytes": 664
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/vignette.gdshader.uid",
@@ -9952,7 +10042,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/water.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_water",
-    "size_bytes": 2908
+    "size_bytes": 2836
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/water.gdshader.uid",
@@ -9962,7 +10052,7 @@
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/water_surface.gdshader",
     "node_id": "game_assets_third_party_reference_godot_vfx_shaders_water_surface",
-    "size_bytes": 683
+    "size_bytes": 664
   },
   {
     "path": "game/assets/third_party/reference/godot-vfx-shaders/water_surface.gdshader.uid",
@@ -9972,7 +10062,7 @@
   {
     "path": "game/assets/third_party/reference/kenney-fantasy-borders/LICENSE.txt",
     "node_id": "game_assets_third_party_reference_kenney_fantasy_borders_license",
-    "size_bytes": 794
+    "size_bytes": 765
   },
   {
     "path": "game/assets/third_party/reference/kenney-fantasy-borders/PNG/Default/Border/panel-border-000.png",
@@ -15827,7 +15917,7 @@
   {
     "path": "game/assets/third_party/reference/kenney-light/LICENSE.txt",
     "node_id": "game_assets_third_party_reference_kenney_light_license",
-    "size_bytes": 703
+    "size_bytes": 676
   },
   {
     "path": "game/assets/third_party/reference/kenney-light/Transparent/circle_a.png",
@@ -17352,7 +17442,7 @@
   {
     "path": "game/assets/third_party/reference/kenney-particles/LICENSE.txt",
     "node_id": "game_assets_third_party_reference_kenney_particles_license",
-    "size_bytes": 652
+    "size_bytes": 629
   },
   {
     "path": "game/assets/third_party/reference/kenney-particles/circle_01.png",
@@ -18157,7 +18247,7 @@
   {
     "path": "game/assets/third_party/reference/kenney-smoke/LICENSE.txt",
     "node_id": "game_assets_third_party_reference_kenney_smoke_license",
-    "size_bytes": 486
+    "size_bytes": 473
   },
   {
     "path": "game/assets/third_party/reference/kenney-smoke/PNG/Black smoke/blackSmoke00.png",
@@ -18932,7 +19022,7 @@
   {
     "path": "game/assets/third_party/reference/kenney-ui-adventure/LICENSE.txt",
     "node_id": "game_assets_third_party_reference_kenney_ui_adventure_license",
-    "size_bytes": 713
+    "size_bytes": 686
   },
   {
     "path": "game/assets/third_party/reference/kenney-ui-adventure/PNG/Default/banner_classic_curtain.png",
@@ -21857,7 +21947,7 @@
   {
     "path": "game/assets/ui/narrative/tutorial_v002/SOURCE.json",
     "node_id": "game_assets_ui_narrative_tutorial_v002_source",
-    "size_bytes": 4354
+    "size_bytes": 4315
   },
   {
     "path": "game/assets/ui/narrative/tutorial_v002/roadside_rest_v001.png",
@@ -21892,7 +21982,7 @@
   {
     "path": "game/assets/ui/narrative/v002/disabled.svg",
     "node_id": "game_assets_ui_narrative_v002_disabled",
-    "size_bytes": 1425
+    "size_bytes": 1424
   },
   {
     "path": "game/assets/ui/narrative/v002/disabled.svg.import",
@@ -21922,7 +22012,7 @@
   {
     "path": "game/assets/ui/narrative/v002/icons/mail.svg",
     "node_id": "game_assets_ui_narrative_v002_icons_mail",
-    "size_bytes": 250
+    "size_bytes": 249
   },
   {
     "path": "game/assets/ui/narrative/v002/icons/mail.svg.import",
@@ -21932,7 +22022,7 @@
   {
     "path": "game/assets/ui/narrative/v002/icons/music.svg",
     "node_id": "game_assets_ui_narrative_v002_icons_music",
-    "size_bytes": 284
+    "size_bytes": 283
   },
   {
     "path": "game/assets/ui/narrative/v002/icons/music.svg.import",
@@ -21942,7 +22032,7 @@
   {
     "path": "game/assets/ui/narrative/v002/icons/slider_grip.svg",
     "node_id": "game_assets_ui_narrative_v002_icons_slider_grip",
-    "size_bytes": 259
+    "size_bytes": 258
   },
   {
     "path": "game/assets/ui/narrative/v002/icons/slider_grip.svg.import",
@@ -21952,7 +22042,7 @@
   {
     "path": "game/assets/ui/narrative/v002/icons/speed.svg",
     "node_id": "game_assets_ui_narrative_v002_icons_speed",
-    "size_bytes": 282
+    "size_bytes": 281
   },
   {
     "path": "game/assets/ui/narrative/v002/icons/speed.svg.import",
@@ -21962,7 +22052,7 @@
   {
     "path": "game/assets/ui/narrative/v002/icons/text.svg",
     "node_id": "game_assets_ui_narrative_v002_icons_text",
-    "size_bytes": 248
+    "size_bytes": 247
   },
   {
     "path": "game/assets/ui/narrative/v002/icons/text.svg.import",
@@ -21982,7 +22072,7 @@
   {
     "path": "game/assets/ui/narrative/v002/panel.svg",
     "node_id": "game_assets_ui_narrative_v002_panel",
-    "size_bytes": 1425
+    "size_bytes": 1424
   },
   {
     "path": "game/assets/ui/narrative/v002/panel.svg.import",
@@ -21992,7 +22082,7 @@
   {
     "path": "game/assets/ui/narrative/v002/panel_hero.svg",
     "node_id": "game_assets_ui_narrative_v002_panel_hero",
-    "size_bytes": 1425
+    "size_bytes": 1424
   },
   {
     "path": "game/assets/ui/narrative/v002/panel_hero.svg.import",
@@ -22002,7 +22092,7 @@
   {
     "path": "game/assets/ui/narrative/v002/primary.svg",
     "node_id": "game_assets_ui_narrative_v002_primary",
-    "size_bytes": 1425
+    "size_bytes": 1424
   },
   {
     "path": "game/assets/ui/narrative/v002/primary.svg.import",
@@ -22012,7 +22102,7 @@
   {
     "path": "game/assets/ui/narrative/v002/primary_hover.svg",
     "node_id": "game_assets_ui_narrative_v002_primary_hover",
-    "size_bytes": 1425
+    "size_bytes": 1424
   },
   {
     "path": "game/assets/ui/narrative/v002/primary_hover.svg.import",
@@ -22022,7 +22112,7 @@
   {
     "path": "game/assets/ui/narrative/v002/primary_pressed.svg",
     "node_id": "game_assets_ui_narrative_v002_primary_pressed",
-    "size_bytes": 1425
+    "size_bytes": 1424
   },
   {
     "path": "game/assets/ui/narrative/v002/primary_pressed.svg.import",
@@ -22032,7 +22122,7 @@
   {
     "path": "game/assets/ui/narrative/v002/secondary.svg",
     "node_id": "game_assets_ui_narrative_v002_secondary",
-    "size_bytes": 1425
+    "size_bytes": 1424
   },
   {
     "path": "game/assets/ui/narrative/v002/secondary.svg.import",
@@ -22042,7 +22132,7 @@
   {
     "path": "game/assets/ui/narrative/v002/secondary_hover.svg",
     "node_id": "game_assets_ui_narrative_v002_secondary_hover",
-    "size_bytes": 1425
+    "size_bytes": 1424
   },
   {
     "path": "game/assets/ui/narrative/v002/secondary_hover.svg.import",
@@ -22272,7 +22362,7 @@
   {
     "path": "game/assets/vfx/gdquest_reference/SOURCE.json",
     "node_id": "game_assets_vfx_gdquest_reference_source",
-    "size_bytes": 6524
+    "size_bytes": 6371
   },
   {
     "path": "game/assets/vfx/gdquest_reference/shaders/backgrounds/2d_sky/source/2d_sky.gdshader",
@@ -22627,12 +22717,12 @@
   {
     "path": "game/assets/vfx/kenney_impacts/LICENSE.txt",
     "node_id": "game_assets_vfx_kenney_impacts_license",
-    "size_bytes": 652
+    "size_bytes": 629
   },
   {
     "path": "game/assets/vfx/kenney_impacts/SOURCE.json",
     "node_id": "game_assets_vfx_kenney_impacts_source",
-    "size_bytes": 833
+    "size_bytes": 808
   },
   {
     "path": "game/assets/vfx/kenney_impacts/light_01.png",
@@ -22657,7 +22747,7 @@
   {
     "path": "game/data/content/MANIFEST.json",
     "node_id": "game_data_content_manifest",
-    "size_bytes": 4309
+    "size_bytes": 4191
   },
   {
     "path": "game/data/content/accessories_part1.json",
@@ -22697,7 +22787,7 @@
   {
     "path": "game/data/content/character_stories_part1.json",
     "node_id": "game_data_content_character_stories_part1",
-    "size_bytes": 157420
+    "size_bytes": 157507
   },
   {
     "path": "game/data/content/character_visuals_part1.json",
@@ -22707,7 +22797,7 @@
   {
     "path": "game/data/content/character_voice_lines_part1.json",
     "node_id": "game_data_content_character_voice_lines_part1",
-    "size_bytes": 46728
+    "size_bytes": 48408
   },
   {
     "path": "game/data/content/characters_part1.json",
@@ -22732,7 +22822,7 @@
   {
     "path": "game/data/content/events_part1.json",
     "node_id": "game_data_content_events_part1",
-    "size_bytes": 20922
+    "size_bytes": 20917
   },
   {
     "path": "game/data/content/items_part1.json",
@@ -22742,7 +22832,7 @@
   {
     "path": "game/data/content/lore_text_part1.json",
     "node_id": "game_data_content_lore_text_part1",
-    "size_bytes": 13673
+    "size_bytes": 13790
   },
   {
     "path": "game/data/content/stages_part1.json",
@@ -22752,37 +22842,37 @@
   {
     "path": "game/data/content/story_script_ch01.json",
     "node_id": "game_data_content_story_script_ch01",
-    "size_bytes": 23044
+    "size_bytes": 24126
   },
   {
     "path": "game/data/content/story_script_ch02.json",
     "node_id": "game_data_content_story_script_ch02",
-    "size_bytes": 15165
+    "size_bytes": 16206
   },
   {
     "path": "game/data/content/story_script_ch03.json",
     "node_id": "game_data_content_story_script_ch03",
-    "size_bytes": 13222
+    "size_bytes": 14455
   },
   {
     "path": "game/data/content/story_script_ch04.json",
     "node_id": "game_data_content_story_script_ch04",
-    "size_bytes": 14977
+    "size_bytes": 16370
   },
   {
     "path": "game/data/content/story_script_ch05.json",
     "node_id": "game_data_content_story_script_ch05",
-    "size_bytes": 14056
+    "size_bytes": 15189
   },
   {
     "path": "game/data/content/story_script_ch06.json",
     "node_id": "game_data_content_story_script_ch06",
-    "size_bytes": 14435
+    "size_bytes": 16315
   },
   {
     "path": "game/data/content/story_script_ch07.json",
     "node_id": "game_data_content_story_script_ch07",
-    "size_bytes": 27238
+    "size_bytes": 28483
   },
   {
     "path": "game/data/content/story_script_part1_manifest.json",
@@ -22792,7 +22882,7 @@
   {
     "path": "game/data/content/visual_assets_part1.json",
     "node_id": "game_data_content_visual_assets_part1",
-    "size_bytes": 21877
+    "size_bytes": 21137
   },
   {
     "path": "game/data/content/weapons_part1.json",
@@ -22807,7 +22897,7 @@
   {
     "path": "game/data/entry/tutorial_v001.json",
     "node_id": "game_data_entry_tutorial_v001",
-    "size_bytes": 34857
+    "size_bytes": 33872
   },
   {
     "path": "game/data/keys/README.md",
@@ -22837,7 +22927,7 @@
   {
     "path": "game/data/legal/google-sans-ofl.txt",
     "node_id": "game_data_legal_google_sans_ofl",
-    "size_bytes": 4488
+    "size_bytes": 4395
   },
   {
     "path": "game/data/legal/inter-ofl.txt",
@@ -22852,7 +22942,7 @@
   {
     "path": "game/data/presentation/battle_art_v001.json",
     "node_id": "game_data_presentation_battle_art_v001",
-    "size_bytes": 9789
+    "size_bytes": 9394
   },
   {
     "path": "game/data/stable_ids.lock.json",
@@ -22887,7 +22977,7 @@
   {
     "path": "game/export_presets.cfg",
     "node_id": "game_export_presets",
-    "size_bytes": 5348
+    "size_bytes": 5346
   },
   {
     "path": "game/icon.svg",
@@ -23202,7 +23292,7 @@
   {
     "path": "game/scripts/app/third_party_notices.gd",
     "node_id": "game_scripts_app_third_party_notices",
-    "size_bytes": 3540
+    "size_bytes": 3488
   },
   {
     "path": "game/scripts/app/third_party_notices.gd.uid",
@@ -23372,7 +23462,7 @@
   {
     "path": "game/scripts/art_review/production_ui_preview.gd",
     "node_id": "game_scripts_art_review_production_ui_preview",
-    "size_bytes": 21192
+    "size_bytes": 20762
   },
   {
     "path": "game/scripts/art_review/production_ui_preview.gd.uid",
@@ -23832,7 +23922,7 @@
   {
     "path": "game/scripts/ui/battle/battle_skill_tray.gd",
     "node_id": "game_scripts_ui_battle_battle_skill_tray",
-    "size_bytes": 4891
+    "size_bytes": 4890
   },
   {
     "path": "game/scripts/ui/battle/battle_skill_tray.gd.uid",
@@ -23862,7 +23952,7 @@
   {
     "path": "game/scripts/ui/battle/ultimate_button.gd",
     "node_id": "game_scripts_ui_battle_ultimate_button",
-    "size_bytes": 2865
+    "size_bytes": 2864
   },
   {
     "path": "game/scripts/ui/battle/ultimate_button.gd.uid",
@@ -23992,7 +24082,7 @@
   {
     "path": "game/scripts/ui/common/ui_page_transition.gd",
     "node_id": "game_scripts_ui_common_ui_page_transition",
-    "size_bytes": 5698
+    "size_bytes": 5545
   },
   {
     "path": "game/scripts/ui/common/ui_page_transition.gd.uid",
@@ -24112,7 +24202,7 @@
   {
     "path": "game/scripts/ui/entry/entry_screen.gd",
     "node_id": "game_scripts_ui_entry_entry_screen",
-    "size_bytes": 23702
+    "size_bytes": 23176
   },
   {
     "path": "game/scripts/ui/entry/entry_screen.gd.uid",
@@ -24122,7 +24212,7 @@
   {
     "path": "game/scripts/ui/entry/entry_utility.gd",
     "node_id": "game_scripts_ui_entry_entry_utility",
-    "size_bytes": 11490
+    "size_bytes": 11227
   },
   {
     "path": "game/scripts/ui/entry/entry_utility.gd.uid",
@@ -24332,7 +24422,7 @@
   {
     "path": "game/scripts/ui/story_director.gd",
     "node_id": "game_scripts_ui_story_director",
-    "size_bytes": 58594
+    "size_bytes": 57274
   },
   {
     "path": "game/scripts/ui/story_director.gd.uid",
@@ -24682,7 +24772,7 @@
   {
     "path": "game/tests/ui/test_entry_flow.gd",
     "node_id": "game_tests_ui_test_entry_flow",
-    "size_bytes": 26633
+    "size_bytes": 26060
   },
   {
     "path": "game/tests/ui/test_entry_flow.gd.uid",
@@ -24692,7 +24782,7 @@
   {
     "path": "game/tests/ui/test_entry_focus.gd",
     "node_id": "game_tests_ui_test_entry_focus",
-    "size_bytes": 15317
+    "size_bytes": 15009
   },
   {
     "path": "game/tests/ui/test_entry_focus.gd.uid",
@@ -25132,7 +25222,7 @@
   {
     "path": "game/theme/narrative_kit_v002.gd",
     "node_id": "game_theme_narrative_kit_v002",
-    "size_bytes": 11468
+    "size_bytes": 11266
   },
   {
     "path": "game/theme/narrative_kit_v002.gd.uid",
@@ -25152,7 +25242,7 @@
   {
     "path": "game/theme/uomd_production_v001.tres",
     "node_id": "game_theme_uomd_production_v001",
-    "size_bytes": 65822
+    "size_bytes": 66234
   },
   {
     "path": "game/theme/uomd_theme.tres",
@@ -25172,7 +25262,7 @@
   {
     "path": "game/tools/build_android_debug.sh",
     "node_id": "game_tools_build_android_debug",
-    "size_bytes": 3181
+    "size_bytes": 3199
   },
   {
     "path": "game/tools/build_android_release.sh",
@@ -25282,7 +25372,7 @@
   {
     "path": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
     "node_id": "narrative_00_canon_owner_current_direction_world_story_character_brief_2026_10_05",
-    "size_bytes": 42338
+    "size_bytes": 43169
   },
   {
     "path": "narrative/00_Canon/README.md",
@@ -25647,7 +25737,7 @@
   {
     "path": "narrative/06_Characters/character_visuals_part1_LEGACY_STALE.json",
     "node_id": "narrative_06_characters_character_visuals_part1_legacy_stale",
-    "size_bytes": 70050
+    "size_bytes": 67413
   },
   {
     "path": "narrative/07_Enemies_Bosses/VILLAIN_BIBLE_PART1.md",
@@ -28447,7 +28537,7 @@
   {
     "path": "production/session-state/active.md",
     "node_id": "production_session_state_active",
-    "size_bytes": 19499
+    "size_bytes": 19367
   },
   {
     "path": "production/session-state/narrative.md",
@@ -28468,6 +28558,2846 @@
     "path": "references/gdquest_vfx/README.md",
     "node_id": "references_gdquest_vfx_readme",
     "size_bytes": 646
+  },
+  {
+    "path": "release/current/.gitignore",
+    "node_id": "release_current_gitignore",
+    "size_bytes": 53
+  },
+  {
+    "path": "release/current/.uomd-snapshot-owner.json",
+    "node_id": "release_current_uomd_snapshot_owner",
+    "size_bytes": 37
+  },
+  {
+    "path": "release/current/FILE_INDEX.json",
+    "node_id": "release_current_file_index",
+    "size_bytes": 256814
+  },
+  {
+    "path": "release/current/LICENSE",
+    "node_id": "release_current_license",
+    "size_bytes": 586
+  },
+  {
+    "path": "release/current/README.md",
+    "node_id": "release_current_readme",
+    "size_bytes": 1400
+  },
+  {
+    "path": "release/current/THIRD_PARTY_LICENSES/claude-code-game-studios-MIT.txt",
+    "node_id": "release_current_third_party_licenses_claude_code_game_studios_mit",
+    "size_bytes": 1066
+  },
+  {
+    "path": "release/current/THIRD_PARTY_NOTICE.md",
+    "node_id": "release_current_third_party_notice",
+    "size_bytes": 1307
+  },
+  {
+    "path": "release/current/artifacts/game.aab",
+    "node_id": "release_current_artifacts_game",
+    "size_bytes": 134505579
+  },
+  {
+    "path": "release/current/artifacts/opening-base.pck",
+    "node_id": "release_current_artifacts_opening_base",
+    "size_bytes": 101418444
+  },
+  {
+    "path": "release/current/docs/ASSET_PROVENANCE.json",
+    "node_id": "release_current_docs_asset_provenance",
+    "size_bytes": 38811
+  },
+  {
+    "path": "release/current/docs/CURRENT_AAB.md",
+    "node_id": "release_current_docs_current_aab",
+    "size_bytes": 5927
+  },
+  {
+    "path": "release/current/docs/base-privacy-acceptance.json",
+    "node_id": "release_current_docs_base_privacy_acceptance",
+    "size_bytes": 242
+  },
+  {
+    "path": "release/current/docs/build-report.json",
+    "node_id": "release_current_docs_build_report",
+    "size_bytes": 532
+  },
+  {
+    "path": "release/current/docs/native-packaging.json",
+    "node_id": "release_current_docs_native_packaging",
+    "size_bytes": 765
+  },
+  {
+    "path": "release/current/docs/pack-acceptance.json",
+    "node_id": "release_current_docs_pack_acceptance",
+    "size_bytes": 437
+  },
+  {
+    "path": "release/current/docs/source-rebuild-acceptance.json",
+    "node_id": "release_current_docs_source_rebuild_acceptance",
+    "size_bytes": 245
+  },
+  {
+    "path": "release/current/game/GODOT_VERSION",
+    "node_id": "release_current_game_godot_version",
+    "size_bytes": 13
+  },
+  {
+    "path": "release/current/game/addons/uomd_native/bin/debug/uomd_native-debug.aar",
+    "node_id": "release_current_game_addons_uomd_native_bin_debug_uomd_native_debug",
+    "size_bytes": 26577
+  },
+  {
+    "path": "release/current/game/addons/uomd_native/bin/release/uomd_native-release.aar",
+    "node_id": "release_current_game_addons_uomd_native_bin_release_uomd_native_release",
+    "size_bytes": 25080
+  },
+  {
+    "path": "release/current/game/addons/uomd_native/export_plugin.gd",
+    "node_id": "release_current_game_addons_uomd_native_export_plugin",
+    "size_bytes": 1426
+  },
+  {
+    "path": "release/current/game/addons/uomd_native/export_plugin.gd.uid",
+    "node_id": "release_current_game_addons_uomd_native_export_plugin_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/addons/uomd_native/plugin.cfg",
+    "node_id": "release_current_game_addons_uomd_native_plugin_cfg",
+    "size_bytes": 192
+  },
+  {
+    "path": "release/current/game/addons/uomd_native/plugin.gd",
+    "node_id": "release_current_game_addons_uomd_native_plugin_gd",
+    "size_bytes": 401
+  },
+  {
+    "path": "release/current/game/addons/uomd_native/plugin.gd.uid",
+    "node_id": "release_current_game_addons_uomd_native_plugin_gd_afd2f035",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/android/plugins/uomd_native/build.gradle",
+    "node_id": "release_current_game_android_plugins_uomd_native_build",
+    "size_bytes": 4820
+  },
+  {
+    "path": "release/current/game/android/plugins/uomd_native/gradle.properties",
+    "node_id": "release_current_game_android_plugins_uomd_native_gradle",
+    "size_bytes": 84
+  },
+  {
+    "path": "release/current/game/android/plugins/uomd_native/settings.gradle",
+    "node_id": "release_current_game_android_plugins_uomd_native_settings",
+    "size_bytes": 502
+  },
+  {
+    "path": "release/current/game/android/plugins/uomd_native/src/main/AndroidManifest.xml",
+    "node_id": "release_current_game_android_plugins_uomd_native_src_main_androidmanifest",
+    "size_bytes": 1187
+  },
+  {
+    "path": "release/current/game/android/plugins/uomd_native/src/main/java/io/github/mucaeksi/uomd/GoogleSignIn.java",
+    "node_id": "release_current_game_android_plugins_uomd_native_src_main_java_io_github_mucaeksi_uomd_googlesignin",
+    "size_bytes": 6749
+  },
+  {
+    "path": "release/current/game/android/plugins/uomd_native/src/main/java/io/github/mucaeksi/uomd/PlayBilling.java",
+    "node_id": "release_current_game_android_plugins_uomd_native_src_main_java_io_github_mucaeksi_uomd_playbilling",
+    "size_bytes": 8857
+  },
+  {
+    "path": "release/current/game/android/plugins/uomd_native/src/main/java/io/github/mucaeksi/uomd/RewardedAds.java",
+    "node_id": "release_current_game_android_plugins_uomd_native_src_main_java_io_github_mucaeksi_uomd_rewardedads",
+    "size_bytes": 6301
+  },
+  {
+    "path": "release/current/game/android/plugins/uomd_native/src/main/java/io/github/mucaeksi/uomd/UomdNative.java",
+    "node_id": "release_current_game_android_plugins_uomd_native_src_main_java_io_github_mucaeksi_uomd_uomdnative",
+    "size_bytes": 13759
+  },
+  {
+    "path": "release/current/game/android/plugins/uomd_native/src/main/res/values/uomd_admob.xml",
+    "node_id": "release_current_game_android_plugins_uomd_native_src_main_res_values_uomd_admob",
+    "size_bytes": 163
+  },
+  {
+    "path": "release/current/game/assets/backgrounds/forest_whispering_ash/side_arena_v001.png",
+    "node_id": "release_current_game_assets_backgrounds_forest_whispering_ash_side_arena_v001",
+    "size_bytes": 2463754
+  },
+  {
+    "path": "release/current/game/assets/backgrounds/forest_whispering_ash/side_arena_v001.png.import",
+    "node_id": "release_current_game_assets_backgrounds_forest_whispering_ash_side_arena_v001_png",
+    "size_bytes": 990
+  },
+  {
+    "path": "release/current/game/assets/branding/sovtaym/v01/emblem.png",
+    "node_id": "release_current_game_assets_branding_sovtaym_v01_emblem",
+    "size_bytes": 1715103
+  },
+  {
+    "path": "release/current/game/assets/branding/sovtaym/v01/emblem.png.import",
+    "node_id": "release_current_game_assets_branding_sovtaym_v01_emblem_png",
+    "size_bytes": 950
+  },
+  {
+    "path": "release/current/game/assets/branding/sovtaym/v01/studio_atmosphere.gdshader",
+    "node_id": "release_current_game_assets_branding_sovtaym_v01_studio_atmosphere",
+    "size_bytes": 685
+  },
+  {
+    "path": "release/current/game/assets/branding/sovtaym/v01/studio_atmosphere.gdshader.uid",
+    "node_id": "release_current_game_assets_branding_sovtaym_v01_studio_atmosphere_gdshader",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/assets/branding/uomd/v01/emblem.png",
+    "node_id": "release_current_game_assets_branding_uomd_v01_emblem",
+    "size_bytes": 1229533
+  },
+  {
+    "path": "release/current/game/assets/branding/uomd/v01/emblem.png.import",
+    "node_id": "release_current_game_assets_branding_uomd_v01_emblem_png",
+    "size_bytes": 946
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/chibi_poses_v003.png",
+    "node_id": "release_current_game_assets_characters_fadyme_chibi_poses_v003",
+    "size_bytes": 2857888
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/chibi_poses_v003.png.import",
+    "node_id": "release_current_game_assets_characters_fadyme_chibi_poses_v003_png",
+    "size_bytes": 976
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/profile_icon_v001.png",
+    "node_id": "release_current_game_assets_characters_fadyme_profile_icon_v001",
+    "size_bytes": 2925721
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/profile_icon_v001.png.import",
+    "node_id": "release_current_game_assets_characters_fadyme_profile_icon_v001_png",
+    "size_bytes": 979
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/ultimate_cutin_v001.png",
+    "node_id": "release_current_game_assets_characters_fadyme_ultimate_cutin_v001",
+    "size_bytes": 3621232
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/ultimate_cutin_v001.png.import",
+    "node_id": "release_current_game_assets_characters_fadyme_ultimate_cutin_v001_png",
+    "size_bytes": 984
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/ultimate_pose_v003.png",
+    "node_id": "release_current_game_assets_characters_fadyme_ultimate_pose_v003",
+    "size_bytes": 2241564
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/ultimate_pose_v003.png.import",
+    "node_id": "release_current_game_assets_characters_fadyme_ultimate_pose_v003_png",
+    "size_bytes": 982
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/vn_composed_v001.png",
+    "node_id": "release_current_game_assets_characters_fadyme_vn_composed_v001",
+    "size_bytes": 2853352
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/vn_composed_v001.png.import",
+    "node_id": "release_current_game_assets_characters_fadyme_vn_composed_v001_png",
+    "size_bytes": 976
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/vn_honest_fear_v001.png",
+    "node_id": "release_current_game_assets_characters_fadyme_vn_honest_fear_v001",
+    "size_bytes": 2782676
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/vn_honest_fear_v001.png.import",
+    "node_id": "release_current_game_assets_characters_fadyme_vn_honest_fear_v001_png",
+    "size_bytes": 985
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/vn_quiet_pain_v001.png",
+    "node_id": "release_current_game_assets_characters_fadyme_vn_quiet_pain_v001",
+    "size_bytes": 2647984
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/vn_quiet_pain_v001.png.import",
+    "node_id": "release_current_game_assets_characters_fadyme_vn_quiet_pain_v001_png",
+    "size_bytes": 982
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/vn_warm_v001.png",
+    "node_id": "release_current_game_assets_characters_fadyme_vn_warm_v001",
+    "size_bytes": 2949220
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/vn_warm_v001.png.import",
+    "node_id": "release_current_game_assets_characters_fadyme_vn_warm_v001_png",
+    "size_bytes": 963
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/vn_wry_v001.png",
+    "node_id": "release_current_game_assets_characters_fadyme_vn_wry_v001",
+    "size_bytes": 2743572
+  },
+  {
+    "path": "release/current/game/assets/characters/fadyme/vn_wry_v001.png.import",
+    "node_id": "release_current_game_assets_characters_fadyme_vn_wry_v001_png",
+    "size_bytes": 961
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/basic_attack_v003.png",
+    "node_id": "release_current_game_assets_characters_mahmut_basic_attack_v003",
+    "size_bytes": 1063729
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/basic_attack_v003.png.import",
+    "node_id": "release_current_game_assets_characters_mahmut_basic_attack_v003_png",
+    "size_bytes": 978
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/chibi_poses_v003.png",
+    "node_id": "release_current_game_assets_characters_mahmut_chibi_poses_v003",
+    "size_bytes": 2402496
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/chibi_poses_v003.png.import",
+    "node_id": "release_current_game_assets_characters_mahmut_chibi_poses_v003_png",
+    "size_bytes": 976
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/guard_pose_v003.png",
+    "node_id": "release_current_game_assets_characters_mahmut_guard_pose_v003",
+    "size_bytes": 2063373
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/guard_pose_v003.png.import",
+    "node_id": "release_current_game_assets_characters_mahmut_guard_pose_v003_png",
+    "size_bytes": 973
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/profile_icon_v001.png",
+    "node_id": "release_current_game_assets_characters_mahmut_profile_icon_v001",
+    "size_bytes": 2457131
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/profile_icon_v001.png.import",
+    "node_id": "release_current_game_assets_characters_mahmut_profile_icon_v001_png",
+    "size_bytes": 979
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/ultimate_cutin_v001.png",
+    "node_id": "release_current_game_assets_characters_mahmut_ultimate_cutin_v001",
+    "size_bytes": 3436862
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/ultimate_cutin_v001.png.import",
+    "node_id": "release_current_game_assets_characters_mahmut_ultimate_cutin_v001_png",
+    "size_bytes": 984
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/vn_dry_humor_v001.png",
+    "node_id": "release_current_game_assets_characters_mahmut_vn_dry_humor_v001",
+    "size_bytes": 2937191
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/vn_dry_humor_v001.png.import",
+    "node_id": "release_current_game_assets_characters_mahmut_vn_dry_humor_v001_png",
+    "size_bytes": 978
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/vn_protective_resolve_v001.png",
+    "node_id": "release_current_game_assets_characters_mahmut_vn_protective_resolve_v001",
+    "size_bytes": 2913240
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/vn_protective_resolve_v001.png.import",
+    "node_id": "release_current_game_assets_characters_mahmut_vn_protective_resolve_v001_png",
+    "size_bytes": 1006
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/vn_watchful_v001.png",
+    "node_id": "release_current_game_assets_characters_mahmut_vn_watchful_v001",
+    "size_bytes": 3099935
+  },
+  {
+    "path": "release/current/game/assets/characters/mahmut/vn_watchful_v001.png.import",
+    "node_id": "release_current_game_assets_characters_mahmut_vn_watchful_v001_png",
+    "size_bytes": 975
+  },
+  {
+    "path": "release/current/game/assets/enemies/tutorial/bellbound_attack_v003.png",
+    "node_id": "release_current_game_assets_enemies_tutorial_bellbound_attack_v003",
+    "size_bytes": 1568786
+  },
+  {
+    "path": "release/current/game/assets/enemies/tutorial/bellbound_attack_v003.png.import",
+    "node_id": "release_current_game_assets_enemies_tutorial_bellbound_attack_v003_png",
+    "size_bytes": 990
+  },
+  {
+    "path": "release/current/game/assets/enemies/tutorial/bellbound_poses_v003.png",
+    "node_id": "release_current_game_assets_enemies_tutorial_bellbound_poses_v003",
+    "size_bytes": 1634083
+  },
+  {
+    "path": "release/current/game/assets/enemies/tutorial/bellbound_poses_v003.png.import",
+    "node_id": "release_current_game_assets_enemies_tutorial_bellbound_poses_v003_png",
+    "size_bytes": 986
+  },
+  {
+    "path": "release/current/game/assets/enemies/tutorial/pilgrim_attack_v003.png",
+    "node_id": "release_current_game_assets_enemies_tutorial_pilgrim_attack_v003",
+    "size_bytes": 1505602
+  },
+  {
+    "path": "release/current/game/assets/enemies/tutorial/pilgrim_attack_v003.png.import",
+    "node_id": "release_current_game_assets_enemies_tutorial_pilgrim_attack_v003_png",
+    "size_bytes": 984
+  },
+  {
+    "path": "release/current/game/assets/enemies/tutorial/pilgrim_poses_v003.png",
+    "node_id": "release_current_game_assets_enemies_tutorial_pilgrim_poses_v003",
+    "size_bytes": 1737699
+  },
+  {
+    "path": "release/current/game/assets/enemies/tutorial/pilgrim_poses_v003.png.import",
+    "node_id": "release_current_game_assets_enemies_tutorial_pilgrim_poses_v003_png",
+    "size_bytes": 980
+  },
+  {
+    "path": "release/current/game/assets/fonts/art_direction_v01/Cinzel.ttf",
+    "node_id": "release_current_game_assets_fonts_art_direction_v01_cinzel",
+    "size_bytes": 125468
+  },
+  {
+    "path": "release/current/game/assets/fonts/art_direction_v01/Cinzel.ttf.import",
+    "node_id": "release_current_game_assets_fonts_art_direction_v01_cinzel_ttf",
+    "size_bytes": 774
+  },
+  {
+    "path": "release/current/game/assets/fonts/art_direction_v01/Inter.ttf",
+    "node_id": "release_current_game_assets_fonts_art_direction_v01_inter",
+    "size_bytes": 876576
+  },
+  {
+    "path": "release/current/game/assets/fonts/art_direction_v01/Inter.ttf.import",
+    "node_id": "release_current_game_assets_fonts_art_direction_v01_inter_ttf",
+    "size_bytes": 771
+  },
+  {
+    "path": "release/current/game/assets/fonts/google_signin/GoogleSans.ttf",
+    "node_id": "release_current_game_assets_fonts_google_signin_googlesans",
+    "size_bytes": 4974940
+  },
+  {
+    "path": "release/current/game/assets/fonts/google_signin/GoogleSans.ttf.import",
+    "node_id": "release_current_game_assets_fonts_google_signin_googlesans_ttf",
+    "size_bytes": 782
+  },
+  {
+    "path": "release/current/game/assets/fonts/production_v001/SourceSans3-Regular.ttf",
+    "node_id": "release_current_game_assets_fonts_production_v001_sourcesans3_regular",
+    "size_bytes": 431196
+  },
+  {
+    "path": "release/current/game/assets/fonts/production_v001/SourceSans3-Regular.ttf.import",
+    "node_id": "release_current_game_assets_fonts_production_v001_sourcesans3_regular_ttf",
+    "size_bytes": 811
+  },
+  {
+    "path": "release/current/game/assets/fonts/production_v001/SourceSans3-Semibold.ttf",
+    "node_id": "release_current_game_assets_fonts_production_v001_sourcesans3_semibold",
+    "size_bytes": 425904
+  },
+  {
+    "path": "release/current/game/assets/fonts/production_v001/SourceSans3-Semibold.ttf.import",
+    "node_id": "release_current_game_assets_fonts_production_v001_sourcesans3_semibold_ttf",
+    "size_bytes": 813
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/atmosphere.gdshader",
+    "node_id": "release_current_game_assets_ui_gothic_v02_atmosphere",
+    "size_bytes": 580
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/atmosphere.gdshader.uid",
+    "node_id": "release_current_game_assets_ui_gothic_v02_atmosphere_gdshader",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/back.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_back",
+    "size_bytes": 229
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/back.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_back_svg",
+    "size_bytes": 1040
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/check.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_check",
+    "size_bytes": 220
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/check.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_check_svg",
+    "size_bytes": 1043
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/checked.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_checked",
+    "size_bytes": 269
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/checked.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_checked_svg",
+    "size_bytes": 1049
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/chevron.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_chevron",
+    "size_bytes": 220
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/chevron.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_chevron_svg",
+    "size_bytes": 1049
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/close.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_close",
+    "size_bytes": 225
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/close.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_close_svg",
+    "size_bytes": 1042
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/companions.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_companions",
+    "size_bytes": 299
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/companions.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_companions_svg",
+    "size_bytes": 1058
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/help.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_help",
+    "size_bytes": 285
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/help.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_help_svg",
+    "size_bytes": 1040
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/home.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_home",
+    "size_bytes": 255
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/home.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_home_svg",
+    "size_bytes": 1040
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/journey.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_journey",
+    "size_bytes": 262
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/journey.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_journey_svg",
+    "size_bytes": 1049
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/lock.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_lock",
+    "size_bytes": 290
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/lock.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_lock_svg",
+    "size_bytes": 1040
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/records.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_records",
+    "size_bytes": 291
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/records.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_records_svg",
+    "size_bytes": 1049
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/settings.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_settings",
+    "size_bytes": 332
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/settings.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_settings_svg",
+    "size_bytes": 1051
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/summon.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_summon",
+    "size_bytes": 276
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/summon.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_summon_svg",
+    "size_bytes": 1046
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/unchecked.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_unchecked",
+    "size_bytes": 241
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/unchecked.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_unchecked_svg",
+    "size_bytes": 1055
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/waiting.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_waiting",
+    "size_bytes": 315
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/icons/waiting.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_icons_waiting_svg",
+    "size_bytes": 1049
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/panel_frame.svg",
+    "node_id": "release_current_game_assets_ui_gothic_v02_panel_frame",
+    "size_bytes": 655
+  },
+  {
+    "path": "release/current/game/assets/ui/gothic/v02/panel_frame.svg.import",
+    "node_id": "release_current_game_assets_ui_gothic_v02_panel_frame_svg",
+    "size_bytes": 1055
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v001/crownfall.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v001_crownfall",
+    "size_bytes": 2618061
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v001/crownfall.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v001_crownfall_png",
+    "size_bytes": 965
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v001/forest_road.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v001_forest_road",
+    "size_bytes": 5203343
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v001/forest_road.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v001_forest_road_png",
+    "size_bytes": 971
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v001/living_village.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v001_living_village",
+    "size_bytes": 2613058
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v001/living_village.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v001_living_village_png",
+    "size_bytes": 980
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/bell.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_bell",
+    "size_bytes": 2456208
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/bell.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_bell_png",
+    "size_bytes": 951
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/bell_tower.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_bell_tower",
+    "size_bytes": 2836275
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/bell_tower.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_bell_tower_png",
+    "size_bytes": 971
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/duo_walk.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_duo_walk",
+    "size_bytes": 2279138
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/duo_walk.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_duo_walk_png",
+    "size_bytes": 964
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/fadyme_reunion.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_fadyme_reunion",
+    "size_bytes": 2616486
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/fadyme_reunion.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_fadyme_reunion_png",
+    "size_bytes": 983
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/hill_village.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_hill_village",
+    "size_bytes": 2818903
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/hill_village.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_hill_village_png",
+    "size_bytes": 976
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/mahmut_reunion.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_mahmut_reunion",
+    "size_bytes": 1856616
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/mahmut_reunion.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_mahmut_reunion_png",
+    "size_bytes": 982
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/mahmut_search.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_mahmut_search",
+    "size_bytes": 1954081
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/mahmut_search.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_mahmut_search_png",
+    "size_bytes": 980
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/market_people.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_market_people",
+    "size_bytes": 2114271
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/market_people.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_market_people_png",
+    "size_bytes": 978
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/refugees.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_refugees",
+    "size_bytes": 1954099
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/refugees.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_refugees_png",
+    "size_bytes": 964
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/refugees_walk.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_refugees_walk",
+    "size_bytes": 1854749
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/refugees_walk.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_refugees_walk_png",
+    "size_bytes": 979
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/register.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_register",
+    "size_bytes": 2305491
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/register.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_register_png",
+    "size_bytes": 965
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/search_inn.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_search_inn",
+    "size_bytes": 2437648
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/search_inn.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_search_inn_png",
+    "size_bytes": 971
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/war_fields.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_war_fields",
+    "size_bytes": 3111357
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/war_fields.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_war_fields_png",
+    "size_bytes": 971
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/writing_arm_v003.png",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_writing_arm_v003",
+    "size_bytes": 1113324
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/prologue_v002/writing_arm_v003.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_prologue_v002_writing_arm_v003_png",
+    "size_bytes": 986
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/tutorial_v002/roadside_rest_v001.png",
+    "node_id": "release_current_game_assets_ui_narrative_tutorial_v002_roadside_rest_v001",
+    "size_bytes": 3203854
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/tutorial_v002/roadside_rest_v001.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_tutorial_v002_roadside_rest_v001_png",
+    "size_bytes": 992
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/tutorial_v002/shelter_evening_v001.png",
+    "node_id": "release_current_game_assets_ui_narrative_tutorial_v002_shelter_evening_v001",
+    "size_bytes": 2933585
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/tutorial_v002/shelter_evening_v001.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_tutorial_v002_shelter_evening_v001_png",
+    "size_bytes": 998
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/approved_wordmark.png",
+    "node_id": "release_current_game_assets_ui_narrative_v002_approved_wordmark",
+    "size_bytes": 1245383
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/approved_wordmark.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_approved_wordmark_png",
+    "size_bytes": 980
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/disabled.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_disabled",
+    "size_bytes": 1424
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/disabled.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_disabled_svg",
+    "size_bytes": 1050
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/entry_atmosphere.png",
+    "node_id": "release_current_game_assets_ui_narrative_v002_entry_atmosphere",
+    "size_bytes": 2651304
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/entry_atmosphere.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_entry_atmosphere_png",
+    "size_bytes": 977
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/google_g.png",
+    "node_id": "release_current_game_assets_ui_narrative_v002_google_g",
+    "size_bytes": 33661
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/google_g.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_google_g_png",
+    "size_bytes": 953
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/icons/mail.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_icons_mail",
+    "size_bytes": 249
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/icons/mail.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_icons_mail_svg",
+    "size_bytes": 1044
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/icons/music.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_icons_music",
+    "size_bytes": 283
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/icons/music.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_icons_music_svg",
+    "size_bytes": 1046
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/icons/slider_grip.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_icons_slider_grip",
+    "size_bytes": 258
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/icons/slider_grip.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_icons_slider_grip_svg",
+    "size_bytes": 1065
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/icons/speed.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_icons_speed",
+    "size_bytes": 281
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/icons/speed.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_icons_speed_svg",
+    "size_bytes": 1047
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/icons/text.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_icons_text",
+    "size_bytes": 247
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/icons/text.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_icons_text_svg",
+    "size_bytes": 1043
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/page_reveal.gdshader",
+    "node_id": "release_current_game_assets_ui_narrative_v002_page_reveal",
+    "size_bytes": 1006
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/page_reveal.gdshader.uid",
+    "node_id": "release_current_game_assets_ui_narrative_v002_page_reveal_gdshader",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/panel.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_panel",
+    "size_bytes": 1424
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/panel.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_panel_svg",
+    "size_bytes": 1041
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/panel_hero.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_panel_hero",
+    "size_bytes": 1424
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/panel_hero.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_panel_hero_svg",
+    "size_bytes": 1055
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/primary.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_primary",
+    "size_bytes": 1424
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/primary.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_primary_svg",
+    "size_bytes": 1046
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/primary_hover.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_primary_hover",
+    "size_bytes": 1424
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/primary_hover.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_primary_hover_svg",
+    "size_bytes": 1065
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/primary_pressed.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_primary_pressed",
+    "size_bytes": 1424
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/primary_pressed.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_primary_pressed_svg",
+    "size_bytes": 1071
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/secondary.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_secondary",
+    "size_bytes": 1424
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/secondary.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_secondary_svg",
+    "size_bytes": 1053
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/secondary_hover.svg",
+    "node_id": "release_current_game_assets_ui_narrative_v002_secondary_hover",
+    "size_bytes": 1424
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/secondary_hover.svg.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_secondary_hover_svg",
+    "size_bytes": 1071
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/title_plate.png",
+    "node_id": "release_current_game_assets_ui_narrative_v002_title_plate",
+    "size_bytes": 2793753
+  },
+  {
+    "path": "release/current/game/assets/ui/narrative/v002/title_plate.png.import",
+    "node_id": "release_current_game_assets_ui_narrative_v002_title_plate_png",
+    "size_bytes": 962
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Badge_Standard_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_badge_standard_9slice_v001",
+    "size_bytes": 653
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Badge_Standard_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_badge_standard_9slice_v001_png",
+    "size_bytes": 1043
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Default_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_destructive_default_9slice_v001",
+    "size_bytes": 116181
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Default_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_destructive_default_9slice_v001_png",
+    "size_bytes": 1079
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Disabled_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_destructive_disabled_9slice_v001",
+    "size_bytes": 107808
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Disabled_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_destructive_disabled_9slice_v001_png",
+    "size_bytes": 1082
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Pressed_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_destructive_pressed_9slice_v001",
+    "size_bytes": 113019
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Pressed_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_destructive_pressed_9slice_v001_png",
+    "size_bytes": 1079
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Default_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_primary_default_9slice_v001",
+    "size_bytes": 120528
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Default_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_primary_default_9slice_v001_png",
+    "size_bytes": 1067
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Disabled_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_primary_disabled_9slice_v001",
+    "size_bytes": 107710
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Disabled_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_primary_disabled_9slice_v001_png",
+    "size_bytes": 1070
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Error_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_primary_error_9slice_v001",
+    "size_bytes": 117633
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Error_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_primary_error_9slice_v001_png",
+    "size_bytes": 1061
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Pressed_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_primary_pressed_9slice_v001",
+    "size_bytes": 120806
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Pressed_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_primary_pressed_9slice_v001_png",
+    "size_bytes": 1066
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Success_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_primary_success_9slice_v001",
+    "size_bytes": 117385
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Success_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_primary_success_9slice_v001_png",
+    "size_bytes": 1067
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Default_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_secondary_default_9slice_v001",
+    "size_bytes": 124149
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Default_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_secondary_default_9slice_v001_png",
+    "size_bytes": 1072
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Disabled_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_secondary_disabled_9slice_v001",
+    "size_bytes": 107841
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Disabled_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_secondary_disabled_9slice_v001_png",
+    "size_bytes": 1075
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Pressed_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_secondary_pressed_9slice_v001",
+    "size_bytes": 118640
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Pressed_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_button_secondary_pressed_9slice_v001_png",
+    "size_bytes": 1073
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Card_Standard_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_card_standard_9slice_v001",
+    "size_bytes": 292142
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Card_Standard_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_card_standard_9slice_v001_png",
+    "size_bytes": 1040
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Nav_Backplate_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_nav_backplate_9slice_v001",
+    "size_bytes": 252360
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Nav_Backplate_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_nav_backplate_9slice_v001_png",
+    "size_bytes": 1039
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Hero_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_panel_hero_9slice_v001",
+    "size_bytes": 192835
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Hero_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_panel_hero_9slice_v001_png",
+    "size_bytes": 1030
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Modal_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_panel_modal_9slice_v001",
+    "size_bytes": 192844
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Modal_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_panel_modal_9slice_v001_png",
+    "size_bytes": 1034
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Sheet_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_panel_sheet_9slice_v001",
+    "size_bytes": 191448
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Sheet_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_panel_sheet_9slice_v001_png",
+    "size_bytes": 1034
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Standard_9Slice_v001.png",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_panel_standard_9slice_v001",
+    "size_bytes": 192708
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Standard_9Slice_v001.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_components_uomd_ui_panel_standard_9slice_v001_png",
+    "size_bytes": 1042
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/entry/fadyme_composed.png",
+    "node_id": "release_current_game_assets_ui_production_v001_entry_fadyme_composed",
+    "size_bytes": 2853352
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/entry/fadyme_composed.png.import",
+    "node_id": "release_current_game_assets_ui_production_v001_entry_fadyme_composed_png",
+    "size_bytes": 981
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/icons/offline.svg",
+    "node_id": "release_current_game_assets_ui_production_v001_icons_offline",
+    "size_bytes": 286
+  },
+  {
+    "path": "release/current/game/assets/ui/production/v001/icons/offline.svg.import",
+    "node_id": "release_current_game_assets_ui_production_v001_icons_offline_svg",
+    "size_bytes": 1054
+  },
+  {
+    "path": "release/current/game/assets/vfx/kenney_impacts/LICENSE.txt",
+    "node_id": "release_current_game_assets_vfx_kenney_impacts_license",
+    "size_bytes": 629
+  },
+  {
+    "path": "release/current/game/assets/vfx/kenney_impacts/light_01.png",
+    "node_id": "release_current_game_assets_vfx_kenney_impacts_light_01",
+    "size_bytes": 86592
+  },
+  {
+    "path": "release/current/game/assets/vfx/kenney_impacts/light_01.png.import",
+    "node_id": "release_current_game_assets_vfx_kenney_impacts_light_01_png",
+    "size_bytes": 953
+  },
+  {
+    "path": "release/current/game/assets/vfx/kenney_impacts/spark_01.png",
+    "node_id": "release_current_game_assets_vfx_kenney_impacts_spark_01",
+    "size_bytes": 89628
+  },
+  {
+    "path": "release/current/game/assets/vfx/kenney_impacts/spark_01.png.import",
+    "node_id": "release_current_game_assets_vfx_kenney_impacts_spark_01_png",
+    "size_bytes": 952
+  },
+  {
+    "path": "release/current/game/data/content/MANIFEST.json",
+    "node_id": "release_current_game_data_content_manifest",
+    "size_bytes": 4191
+  },
+  {
+    "path": "release/current/game/data/content/accessories_part1.json",
+    "node_id": "release_current_game_data_content_accessories_part1",
+    "size_bytes": 153868
+  },
+  {
+    "path": "release/current/game/data/content/armors_part1.json",
+    "node_id": "release_current_game_data_content_armors_part1",
+    "size_bytes": 25756
+  },
+  {
+    "path": "release/current/game/data/content/audio_cues_part1.json",
+    "node_id": "release_current_game_data_content_audio_cues_part1",
+    "size_bytes": 750
+  },
+  {
+    "path": "release/current/game/data/content/battle_effects_part1.json",
+    "node_id": "release_current_game_data_content_battle_effects_part1",
+    "size_bytes": 149863
+  },
+  {
+    "path": "release/current/game/data/content/battle_rules_part1.json",
+    "node_id": "release_current_game_data_content_battle_rules_part1",
+    "size_bytes": 16759
+  },
+  {
+    "path": "release/current/game/data/content/brand_assets_part1.json",
+    "node_id": "release_current_game_data_content_brand_assets_part1",
+    "size_bytes": 132580
+  },
+  {
+    "path": "release/current/game/data/content/chapters_part1.json",
+    "node_id": "release_current_game_data_content_chapters_part1",
+    "size_bytes": 35274
+  },
+  {
+    "path": "release/current/game/data/content/character_stories_part1.json",
+    "node_id": "release_current_game_data_content_character_stories_part1",
+    "size_bytes": 157507
+  },
+  {
+    "path": "release/current/game/data/content/character_visuals_part1.json",
+    "node_id": "release_current_game_data_content_character_visuals_part1",
+    "size_bytes": 67413
+  },
+  {
+    "path": "release/current/game/data/content/character_voice_lines_part1.json",
+    "node_id": "release_current_game_data_content_character_voice_lines_part1",
+    "size_bytes": 48408
+  },
+  {
+    "path": "release/current/game/data/content/characters_part1.json",
+    "node_id": "release_current_game_data_content_characters_part1",
+    "size_bytes": 126027
+  },
+  {
+    "path": "release/current/game/data/content/drop_tables_part1.json",
+    "node_id": "release_current_game_data_content_drop_tables_part1",
+    "size_bytes": 18734
+  },
+  {
+    "path": "release/current/game/data/content/economy_part1.json",
+    "node_id": "release_current_game_data_content_economy_part1",
+    "size_bytes": 11118
+  },
+  {
+    "path": "release/current/game/data/content/enemies_part1.json",
+    "node_id": "release_current_game_data_content_enemies_part1",
+    "size_bytes": 116009
+  },
+  {
+    "path": "release/current/game/data/content/events_part1.json",
+    "node_id": "release_current_game_data_content_events_part1",
+    "size_bytes": 20917
+  },
+  {
+    "path": "release/current/game/data/content/items_part1.json",
+    "node_id": "release_current_game_data_content_items_part1",
+    "size_bytes": 9656
+  },
+  {
+    "path": "release/current/game/data/content/lore_text_part1.json",
+    "node_id": "release_current_game_data_content_lore_text_part1",
+    "size_bytes": 13790
+  },
+  {
+    "path": "release/current/game/data/content/stages_part1.json",
+    "node_id": "release_current_game_data_content_stages_part1",
+    "size_bytes": 31368
+  },
+  {
+    "path": "release/current/game/data/content/story_script_part1_manifest.json",
+    "node_id": "release_current_game_data_content_story_script_part1_manifest",
+    "size_bytes": 2394
+  },
+  {
+    "path": "release/current/game/data/content/visual_assets_part1.json",
+    "node_id": "release_current_game_data_content_visual_assets_part1",
+    "size_bytes": 21137
+  },
+  {
+    "path": "release/current/game/data/content/weapons_part1.json",
+    "node_id": "release_current_game_data_content_weapons_part1",
+    "size_bytes": 154377
+  },
+  {
+    "path": "release/current/game/data/entry/prologue_v001.json",
+    "node_id": "release_current_game_data_entry_prologue_v001",
+    "size_bytes": 5144
+  },
+  {
+    "path": "release/current/game/data/entry/tutorial_v001.json",
+    "node_id": "release_current_game_data_entry_tutorial_v001",
+    "size_bytes": 33872
+  },
+  {
+    "path": "release/current/game/data/keys/uomd-content-1.pem",
+    "node_id": "release_current_game_data_keys_uomd_content_1",
+    "size_bytes": 625
+  },
+  {
+    "path": "release/current/game/data/legal/android_libraries.json",
+    "node_id": "release_current_game_data_legal_android_libraries",
+    "size_bytes": 34398
+  },
+  {
+    "path": "release/current/game/data/legal/apache-2.0.txt",
+    "node_id": "release_current_game_data_legal_apache_2_0",
+    "size_bytes": 11358
+  },
+  {
+    "path": "release/current/game/data/legal/cinzel-ofl.txt",
+    "node_id": "release_current_game_data_legal_cinzel_ofl",
+    "size_bytes": 4383
+  },
+  {
+    "path": "release/current/game/data/legal/google-sans-ofl.txt",
+    "node_id": "release_current_game_data_legal_google_sans_ofl",
+    "size_bytes": 4395
+  },
+  {
+    "path": "release/current/game/data/legal/inter-ofl.txt",
+    "node_id": "release_current_game_data_legal_inter_ofl",
+    "size_bytes": 4377
+  },
+  {
+    "path": "release/current/game/data/legal/source-sans-3-ofl.txt",
+    "node_id": "release_current_game_data_legal_source_sans_3_ofl",
+    "size_bytes": 4486
+  },
+  {
+    "path": "release/current/game/data/presentation/battle_art_v001.json",
+    "node_id": "release_current_game_data_presentation_battle_art_v001",
+    "size_bytes": 9394
+  },
+  {
+    "path": "release/current/game/data/stable_ids.lock.json",
+    "node_id": "release_current_game_data_stable_ids_lock",
+    "size_bytes": 16871
+  },
+  {
+    "path": "release/current/game/default_bus_layout.tres",
+    "node_id": "release_current_game_default_bus_layout",
+    "size_bytes": 442
+  },
+  {
+    "path": "release/current/game/export_presets.cfg",
+    "node_id": "release_current_game_export_presets",
+    "size_bytes": 1849
+  },
+  {
+    "path": "release/current/game/icon.svg",
+    "node_id": "release_current_game_icon",
+    "size_bytes": 546
+  },
+  {
+    "path": "release/current/game/icon.svg.import",
+    "node_id": "release_current_game_icon_svg",
+    "size_bytes": 1012
+  },
+  {
+    "path": "release/current/game/project.godot",
+    "node_id": "release_current_game_project",
+    "size_bytes": 1627
+  },
+  {
+    "path": "release/current/game/scenes/boot/boot.tscn",
+    "node_id": "release_current_game_scenes_boot_boot",
+    "size_bytes": 1975
+  },
+  {
+    "path": "release/current/game/scenes/main/main.tscn",
+    "node_id": "release_current_game_scenes_main_main",
+    "size_bytes": 293
+  },
+  {
+    "path": "release/current/game/scenes/ui/common/action_button.tscn",
+    "node_id": "release_current_game_scenes_ui_common_action_button",
+    "size_bytes": 376
+  },
+  {
+    "path": "release/current/game/scenes/ui/common/bottom_nav.tscn",
+    "node_id": "release_current_game_scenes_ui_common_bottom_nav",
+    "size_bytes": 294
+  },
+  {
+    "path": "release/current/game/scenes/ui/common/card.tscn",
+    "node_id": "release_current_game_scenes_ui_common_card",
+    "size_bytes": 822
+  },
+  {
+    "path": "release/current/game/scenes/ui/common/confirmation_modal.tscn",
+    "node_id": "release_current_game_scenes_ui_common_confirmation_modal",
+    "size_bytes": 407
+  },
+  {
+    "path": "release/current/game/scenes/ui/common/input_field.tscn",
+    "node_id": "release_current_game_scenes_ui_common_input_field",
+    "size_bytes": 219
+  },
+  {
+    "path": "release/current/game/scenes/ui/common/progress_bar.tscn",
+    "node_id": "release_current_game_scenes_ui_common_progress_bar",
+    "size_bytes": 246
+  },
+  {
+    "path": "release/current/game/scenes/ui/common/screen_base.tscn",
+    "node_id": "release_current_game_scenes_ui_common_screen_base",
+    "size_bytes": 393
+  },
+  {
+    "path": "release/current/game/scenes/ui/common/slider.tscn",
+    "node_id": "release_current_game_scenes_ui_common_slider",
+    "size_bytes": 214
+  },
+  {
+    "path": "release/current/game/scenes/ui/common/state_view.tscn",
+    "node_id": "release_current_game_scenes_ui_common_state_view",
+    "size_bytes": 294
+  },
+  {
+    "path": "release/current/game/scenes/ui/common/toggle.tscn",
+    "node_id": "release_current_game_scenes_ui_common_toggle",
+    "size_bytes": 215
+  },
+  {
+    "path": "release/current/game/scenes/ui/entry/entry_screen.tscn",
+    "node_id": "release_current_game_scenes_ui_entry_entry_screen",
+    "size_bytes": 297
+  },
+  {
+    "path": "release/current/game/scenes/ui/entry/entry_utility.tscn",
+    "node_id": "release_current_game_scenes_ui_entry_entry_utility",
+    "size_bytes": 299
+  },
+  {
+    "path": "release/current/game/scenes/ui/startup/engine_splash_screen.tscn",
+    "node_id": "release_current_game_scenes_ui_startup_engine_splash_screen",
+    "size_bytes": 330
+  },
+  {
+    "path": "release/current/game/scenes/ui/startup/startup_sequence.tscn",
+    "node_id": "release_current_game_scenes_ui_startup_startup_sequence",
+    "size_bytes": 323
+  },
+  {
+    "path": "release/current/game/scenes/ui/startup/studio_splash_screen.tscn",
+    "node_id": "release_current_game_scenes_ui_startup_studio_splash_screen",
+    "size_bytes": 3552
+  },
+  {
+    "path": "release/current/game/scripts/app/asset_resolver.gd",
+    "node_id": "release_current_game_scripts_app_asset_resolver",
+    "size_bytes": 5111
+  },
+  {
+    "path": "release/current/game/scripts/app/asset_resolver.gd.uid",
+    "node_id": "release_current_game_scripts_app_asset_resolver_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/audio_director.gd",
+    "node_id": "release_current_game_scripts_app_audio_director",
+    "size_bytes": 13470
+  },
+  {
+    "path": "release/current/game/scripts/app/audio_director.gd.uid",
+    "node_id": "release_current_game_scripts_app_audio_director_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/client_release.gd",
+    "node_id": "release_current_game_scripts_app_client_release",
+    "size_bytes": 5101
+  },
+  {
+    "path": "release/current/game/scripts/app/client_release.gd.uid",
+    "node_id": "release_current_game_scripts_app_client_release_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/app/content_installer.gd",
+    "node_id": "release_current_game_scripts_app_content_installer",
+    "size_bytes": 12370
+  },
+  {
+    "path": "release/current/game/scripts/app/content_installer.gd.uid",
+    "node_id": "release_current_game_scripts_app_content_installer_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/content_manifest.gd",
+    "node_id": "release_current_game_scripts_app_content_manifest",
+    "size_bytes": 5944
+  },
+  {
+    "path": "release/current/game/scripts/app/content_manifest.gd.uid",
+    "node_id": "release_current_game_scripts_app_content_manifest_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/device_smoke.gd",
+    "node_id": "release_current_game_scripts_app_device_smoke",
+    "size_bytes": 5566
+  },
+  {
+    "path": "release/current/game/scripts/app/device_smoke.gd.uid",
+    "node_id": "release_current_game_scripts_app_device_smoke_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/entry_restart.gd",
+    "node_id": "release_current_game_scripts_app_entry_restart",
+    "size_bytes": 1245
+  },
+  {
+    "path": "release/current/game/scripts/app/entry_restart.gd.uid",
+    "node_id": "release_current_game_scripts_app_entry_restart_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/app/game.gd",
+    "node_id": "release_current_game_scripts_app_game",
+    "size_bytes": 6718
+  },
+  {
+    "path": "release/current/game/scripts/app/game.gd.uid",
+    "node_id": "release_current_game_scripts_app_game_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/game_backend.gd",
+    "node_id": "release_current_game_scripts_app_game_backend",
+    "size_bytes": 8728
+  },
+  {
+    "path": "release/current/game/scripts/app/game_backend.gd.uid",
+    "node_id": "release_current_game_scripts_app_game_backend_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/game_flow.gd",
+    "node_id": "release_current_game_scripts_app_game_flow",
+    "size_bytes": 50499
+  },
+  {
+    "path": "release/current/game/scripts/app/game_flow.gd.uid",
+    "node_id": "release_current_game_scripts_app_game_flow_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/game_views.gd",
+    "node_id": "release_current_game_scripts_app_game_views",
+    "size_bytes": 5825
+  },
+  {
+    "path": "release/current/game/scripts/app/game_views.gd.uid",
+    "node_id": "release_current_game_scripts_app_game_views_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/app/monetization.gd",
+    "node_id": "release_current_game_scripts_app_monetization",
+    "size_bytes": 9468
+  },
+  {
+    "path": "release/current/game/scripts/app/monetization.gd.uid",
+    "node_id": "release_current_game_scripts_app_monetization_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/native.gd",
+    "node_id": "release_current_game_scripts_app_native",
+    "size_bytes": 5694
+  },
+  {
+    "path": "release/current/game/scripts/app/native.gd.uid",
+    "node_id": "release_current_game_scripts_app_native_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/onboarding_preferences.gd",
+    "node_id": "release_current_game_scripts_app_onboarding_preferences",
+    "size_bytes": 2088
+  },
+  {
+    "path": "release/current/game/scripts/app/onboarding_preferences.gd.uid",
+    "node_id": "release_current_game_scripts_app_onboarding_preferences_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/online.gd",
+    "node_id": "release_current_game_scripts_app_online",
+    "size_bytes": 6856
+  },
+  {
+    "path": "release/current/game/scripts/app/online.gd.uid",
+    "node_id": "release_current_game_scripts_app_online_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/online_backend.gd",
+    "node_id": "release_current_game_scripts_app_online_backend",
+    "size_bytes": 21507
+  },
+  {
+    "path": "release/current/game/scripts/app/online_backend.gd.uid",
+    "node_id": "release_current_game_scripts_app_online_backend_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/player_state.gd",
+    "node_id": "release_current_game_scripts_app_player_state",
+    "size_bytes": 6704
+  },
+  {
+    "path": "release/current/game/scripts/app/player_state.gd.uid",
+    "node_id": "release_current_game_scripts_app_player_state_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/sign_in_flow.gd",
+    "node_id": "release_current_game_scripts_app_sign_in_flow",
+    "size_bytes": 5677
+  },
+  {
+    "path": "release/current/game/scripts/app/sign_in_flow.gd.uid",
+    "node_id": "release_current_game_scripts_app_sign_in_flow_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/story_index.gd",
+    "node_id": "release_current_game_scripts_app_story_index",
+    "size_bytes": 6904
+  },
+  {
+    "path": "release/current/game/scripts/app/story_index.gd.uid",
+    "node_id": "release_current_game_scripts_app_story_index_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/third_party_notices.gd",
+    "node_id": "release_current_game_scripts_app_third_party_notices",
+    "size_bytes": 3488
+  },
+  {
+    "path": "release/current/game/scripts/app/third_party_notices.gd.uid",
+    "node_id": "release_current_game_scripts_app_third_party_notices_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/app/worker_job.gd",
+    "node_id": "release_current_game_scripts_app_worker_job",
+    "size_bytes": 2867
+  },
+  {
+    "path": "release/current/game/scripts/app/worker_job.gd.uid",
+    "node_id": "release_current_game_scripts_app_worker_job_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/action_gauge.gd",
+    "node_id": "release_current_game_scripts_core_battle_action_gauge",
+    "size_bytes": 6501
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/action_gauge.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_action_gauge_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/auto_battle.gd",
+    "node_id": "release_current_game_scripts_core_battle_auto_battle",
+    "size_bytes": 12185
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/auto_battle.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_auto_battle_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/battle_service.gd",
+    "node_id": "release_current_game_scripts_core_battle_battle_service",
+    "size_bytes": 21040
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/battle_service.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_battle_service_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/battle_state.gd",
+    "node_id": "release_current_game_scripts_core_battle_battle_state",
+    "size_bytes": 16340
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/battle_state.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_battle_state_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/battle_unit.gd",
+    "node_id": "release_current_game_scripts_core_battle_battle_unit",
+    "size_bytes": 6283
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/battle_unit.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_battle_unit_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/battle_util.gd",
+    "node_id": "release_current_game_scripts_core_battle_battle_util",
+    "size_bytes": 2675
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/battle_util.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_battle_util_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/damage.gd",
+    "node_id": "release_current_game_scripts_core_battle_damage",
+    "size_bytes": 9724
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/damage.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_damage_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/effect_interpreter.gd",
+    "node_id": "release_current_game_scripts_core_battle_effect_interpreter",
+    "size_bytes": 80684
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/effect_interpreter.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_effect_interpreter_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/encounter_state.gd",
+    "node_id": "release_current_game_scripts_core_battle_encounter_state",
+    "size_bytes": 27730
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/encounter_state.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_encounter_state_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/focus_rules.gd",
+    "node_id": "release_current_game_scripts_core_battle_focus_rules",
+    "size_bytes": 1733
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/focus_rules.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_focus_rules_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/frac.gd",
+    "node_id": "release_current_game_scripts_core_battle_frac",
+    "size_bytes": 4966
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/frac.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_frac_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/gauge_rules.gd",
+    "node_id": "release_current_game_scripts_core_battle_gauge_rules",
+    "size_bytes": 816
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/gauge_rules.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_gauge_rules_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/live_battle.gd",
+    "node_id": "release_current_game_scripts_core_battle_live_battle",
+    "size_bytes": 5195
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/live_battle.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_live_battle_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/victory_star_rules.gd",
+    "node_id": "release_current_game_scripts_core_battle_victory_star_rules",
+    "size_bytes": 2623
+  },
+  {
+    "path": "release/current/game/scripts/core/battle/victory_star_rules.gd.uid",
+    "node_id": "release_current_game_scripts_core_battle_victory_star_rules_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/content/asset_catalog.gd",
+    "node_id": "release_current_game_scripts_core_content_asset_catalog",
+    "size_bytes": 6525
+  },
+  {
+    "path": "release/current/game/scripts/core/content/asset_catalog.gd.uid",
+    "node_id": "release_current_game_scripts_core_content_asset_catalog_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/core/content/audio_cues.gd",
+    "node_id": "release_current_game_scripts_core_content_audio_cues",
+    "size_bytes": 2696
+  },
+  {
+    "path": "release/current/game/scripts/core/content/audio_cues.gd.uid",
+    "node_id": "release_current_game_scripts_core_content_audio_cues_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/content/content_loader.gd",
+    "node_id": "release_current_game_scripts_core_content_content_loader",
+    "size_bytes": 45362
+  },
+  {
+    "path": "release/current/game/scripts/core/content/content_loader.gd.uid",
+    "node_id": "release_current_game_scripts_core_content_content_loader_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/content/content_models.gd",
+    "node_id": "release_current_game_scripts_core_content_content_models",
+    "size_bytes": 9507
+  },
+  {
+    "path": "release/current/game/scripts/core/content/content_models.gd.uid",
+    "node_id": "release_current_game_scripts_core_content_content_models_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/content/localized_text.gd",
+    "node_id": "release_current_game_scripts_core_content_localized_text",
+    "size_bytes": 1527
+  },
+  {
+    "path": "release/current/game/scripts/core/content/localized_text.gd.uid",
+    "node_id": "release_current_game_scripts_core_content_localized_text_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/equipment/equipment.gd",
+    "node_id": "release_current_game_scripts_core_equipment_equipment",
+    "size_bytes": 5338
+  },
+  {
+    "path": "release/current/game/scripts/core/equipment/equipment.gd.uid",
+    "node_id": "release_current_game_scripts_core_equipment_equipment_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/loot/accessory_roller.gd",
+    "node_id": "release_current_game_scripts_core_loot_accessory_roller",
+    "size_bytes": 7682
+  },
+  {
+    "path": "release/current/game/scripts/core/loot/accessory_roller.gd.uid",
+    "node_id": "release_current_game_scripts_core_loot_accessory_roller_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/loot/loot_resolver.gd",
+    "node_id": "release_current_game_scripts_core_loot_loot_resolver",
+    "size_bytes": 20923
+  },
+  {
+    "path": "release/current/game/scripts/core/loot/loot_resolver.gd.uid",
+    "node_id": "release_current_game_scripts_core_loot_loot_resolver_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/progression/big_nat.gd",
+    "node_id": "release_current_game_scripts_core_progression_big_nat",
+    "size_bytes": 6069
+  },
+  {
+    "path": "release/current/game/scripts/core/progression/big_nat.gd.uid",
+    "node_id": "release_current_game_scripts_core_progression_big_nat_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/progression/dec.gd",
+    "node_id": "release_current_game_scripts_core_progression_dec",
+    "size_bytes": 7749
+  },
+  {
+    "path": "release/current/game/scripts/core/progression/dec.gd.uid",
+    "node_id": "release_current_game_scripts_core_progression_dec_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/progression/float_repr.gd",
+    "node_id": "release_current_game_scripts_core_progression_float_repr",
+    "size_bytes": 4692
+  },
+  {
+    "path": "release/current/game/scripts/core/progression/float_repr.gd.uid",
+    "node_id": "release_current_game_scripts_core_progression_float_repr_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/core/progression/progression.gd",
+    "node_id": "release_current_game_scripts_core_progression_progression",
+    "size_bytes": 20738
+  },
+  {
+    "path": "release/current/game/scripts/core/progression/progression.gd.uid",
+    "node_id": "release_current_game_scripts_core_progression_progression_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/quest/quest_progress.gd",
+    "node_id": "release_current_game_scripts_core_quest_quest_progress",
+    "size_bytes": 7052
+  },
+  {
+    "path": "release/current/game/scripts/core/quest/quest_progress.gd.uid",
+    "node_id": "release_current_game_scripts_core_quest_quest_progress_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/quest/reset_clock.gd",
+    "node_id": "release_current_game_scripts_core_quest_reset_clock",
+    "size_bytes": 4264
+  },
+  {
+    "path": "release/current/game/scripts/core/quest/reset_clock.gd.uid",
+    "node_id": "release_current_game_scripts_core_quest_reset_clock_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/rng/cpython_random.gd",
+    "node_id": "release_current_game_scripts_core_rng_cpython_random",
+    "size_bytes": 11048
+  },
+  {
+    "path": "release/current/game/scripts/core/rng/cpython_random.gd.uid",
+    "node_id": "release_current_game_scripts_core_rng_cpython_random_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/rng/crc32.gd",
+    "node_id": "release_current_game_scripts_core_rng_crc32",
+    "size_bytes": 1154
+  },
+  {
+    "path": "release/current/game/scripts/core/rng/crc32.gd.uid",
+    "node_id": "release_current_game_scripts_core_rng_crc32_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/core/story/story_state.gd",
+    "node_id": "release_current_game_scripts_core_story_story_state",
+    "size_bytes": 19398
+  },
+  {
+    "path": "release/current/game/scripts/core/story/story_state.gd.uid",
+    "node_id": "release_current_game_scripts_core_story_story_state_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/core/time/device_clock.gd",
+    "node_id": "release_current_game_scripts_core_time_device_clock",
+    "size_bytes": 651
+  },
+  {
+    "path": "release/current/game/scripts/core/time/device_clock.gd.uid",
+    "node_id": "release_current_game_scripts_core_time_device_clock_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/core/time/trusted_clock.gd",
+    "node_id": "release_current_game_scripts_core_time_trusted_clock",
+    "size_bytes": 2633
+  },
+  {
+    "path": "release/current/game/scripts/core/time/trusted_clock.gd.uid",
+    "node_id": "release_current_game_scripts_core_time_trusted_clock_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/services/outcome.gd",
+    "node_id": "release_current_game_scripts_services_outcome",
+    "size_bytes": 999
+  },
+  {
+    "path": "release/current/game/scripts/services/outcome.gd.uid",
+    "node_id": "release_current_game_scripts_services_outcome_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/services/service_rules.gd",
+    "node_id": "release_current_game_scripts_services_service_rules",
+    "size_bytes": 2886
+  },
+  {
+    "path": "release/current/game/scripts/services/service_rules.gd.uid",
+    "node_id": "release_current_game_scripts_services_service_rules_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/services/support_client.gd",
+    "node_id": "release_current_game_scripts_services_support_client",
+    "size_bytes": 2970
+  },
+  {
+    "path": "release/current/game/scripts/services/support_client.gd.uid",
+    "node_id": "release_current_game_scripts_services_support_client_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/app_shell.gd",
+    "node_id": "release_current_game_scripts_ui_app_shell",
+    "size_bytes": 3249
+  },
+  {
+    "path": "release/current/game/scripts/ui/app_shell.gd.uid",
+    "node_id": "release_current_game_scripts_ui_app_shell_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_actor.gd",
+    "node_id": "release_current_game_scripts_ui_battle_battle_actor",
+    "size_bytes": 9461
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_actor.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_battle_actor_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_art.gd",
+    "node_id": "release_current_game_scripts_ui_battle_battle_art",
+    "size_bytes": 4252
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_art.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_battle_art_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_field.gd",
+    "node_id": "release_current_game_scripts_ui_battle_battle_field",
+    "size_bytes": 7738
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_field.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_battle_field_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_hit_fx.gd",
+    "node_id": "release_current_game_scripts_ui_battle_battle_hit_fx",
+    "size_bytes": 1697
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_hit_fx.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_battle_hit_fx_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_hud_style.gd",
+    "node_id": "release_current_game_scripts_ui_battle_battle_hud_style",
+    "size_bytes": 6427
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_hud_style.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_battle_hud_style_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_playback.gd",
+    "node_id": "release_current_game_scripts_ui_battle_battle_playback",
+    "size_bytes": 20333
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_playback.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_battle_playback_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_screen.gd",
+    "node_id": "release_current_game_scripts_ui_battle_battle_screen",
+    "size_bytes": 17415
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_battle_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_skill_tray.gd",
+    "node_id": "release_current_game_scripts_ui_battle_battle_skill_tray",
+    "size_bytes": 4890
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_skill_tray.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_battle_skill_tray_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_speed_policy.gd",
+    "node_id": "release_current_game_scripts_ui_battle_battle_speed_policy",
+    "size_bytes": 882
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/battle_speed_policy.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_battle_speed_policy_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/live_battle_playback.gd",
+    "node_id": "release_current_game_scripts_ui_battle_live_battle_playback",
+    "size_bytes": 1936
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/live_battle_playback.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_live_battle_playback_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/ultimate_button.gd",
+    "node_id": "release_current_game_scripts_ui_battle_ultimate_button",
+    "size_bytes": 2864
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/ultimate_button.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_ultimate_button_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/ultimate_presentation.gd",
+    "node_id": "release_current_game_scripts_ui_battle_ultimate_presentation",
+    "size_bytes": 3051
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/ultimate_presentation.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_ultimate_presentation_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/unit_card.gd",
+    "node_id": "release_current_game_scripts_ui_battle_unit_card",
+    "size_bytes": 6712
+  },
+  {
+    "path": "release/current/game/scripts/ui/battle/unit_card.gd.uid",
+    "node_id": "release_current_game_scripts_ui_battle_unit_card_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/blessing/blessing_screen.gd",
+    "node_id": "release_current_game_scripts_ui_blessing_blessing_screen",
+    "size_bytes": 3905
+  },
+  {
+    "path": "release/current/game/scripts/ui/blessing/blessing_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_blessing_blessing_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/boot.gd",
+    "node_id": "release_current_game_scripts_ui_boot",
+    "size_bytes": 3012
+  },
+  {
+    "path": "release/current/game/scripts/ui/boot.gd.uid",
+    "node_id": "release_current_game_scripts_ui_boot_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/frame_rate_policy.gd",
+    "node_id": "release_current_game_scripts_ui_common_frame_rate_policy",
+    "size_bytes": 796
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/frame_rate_policy.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_frame_rate_policy_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/game_logo.gd",
+    "node_id": "release_current_game_scripts_ui_common_game_logo",
+    "size_bytes": 1995
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/game_logo.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_game_logo_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/gothic_action_button.gd",
+    "node_id": "release_current_game_scripts_ui_common_gothic_action_button",
+    "size_bytes": 2610
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/gothic_action_button.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_gothic_action_button_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/gothic_modal.gd",
+    "node_id": "release_current_game_scripts_ui_common_gothic_modal",
+    "size_bytes": 4216
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/gothic_modal.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_gothic_modal_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/message_screen.gd",
+    "node_id": "release_current_game_scripts_ui_common_message_screen",
+    "size_bytes": 2002
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/message_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_message_screen_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/narrative_backdrop.gd",
+    "node_id": "release_current_game_scripts_ui_common_narrative_backdrop",
+    "size_bytes": 713
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/narrative_backdrop.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_narrative_backdrop_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_bottom_nav.gd",
+    "node_id": "release_current_game_scripts_ui_common_ui_bottom_nav",
+    "size_bytes": 2729
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_bottom_nav.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_ui_bottom_nav_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_kit.gd",
+    "node_id": "release_current_game_scripts_ui_common_ui_kit",
+    "size_bytes": 5394
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_kit.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_ui_kit_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_page_transition.gd",
+    "node_id": "release_current_game_scripts_ui_common_ui_page_transition",
+    "size_bytes": 5545
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_page_transition.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_ui_page_transition_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_screen.gd",
+    "node_id": "release_current_game_scripts_ui_common_ui_screen",
+    "size_bytes": 2243
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_ui_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_state_view.gd",
+    "node_id": "release_current_game_scripts_ui_common_ui_state_view",
+    "size_bytes": 3156
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_state_view.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_ui_state_view_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_theme.gd",
+    "node_id": "release_current_game_scripts_ui_common_ui_theme",
+    "size_bytes": 2366
+  },
+  {
+    "path": "release/current/game/scripts/ui/common/ui_theme.gd.uid",
+    "node_id": "release_current_game_scripts_ui_common_ui_theme_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/defeat/defeat_screen.gd",
+    "node_id": "release_current_game_scripts_ui_defeat_defeat_screen",
+    "size_bytes": 2271
+  },
+  {
+    "path": "release/current/game/scripts/ui/defeat/defeat_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_defeat_defeat_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_backdrop.gd",
+    "node_id": "release_current_game_scripts_ui_entry_entry_backdrop",
+    "size_bytes": 894
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_backdrop.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_entry_backdrop_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_help_content.gd",
+    "node_id": "release_current_game_scripts_ui_entry_entry_help_content",
+    "size_bytes": 2295
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_help_content.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_entry_help_content_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_masthead.gd",
+    "node_id": "release_current_game_scripts_ui_entry_entry_masthead",
+    "size_bytes": 662
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_masthead.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_entry_masthead_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_onboarding.gd",
+    "node_id": "release_current_game_scripts_ui_entry_entry_onboarding",
+    "size_bytes": 4601
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_onboarding.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_entry_onboarding_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_prologue.gd",
+    "node_id": "release_current_game_scripts_ui_entry_entry_prologue",
+    "size_bytes": 16075
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_prologue.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_entry_prologue_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_prologue_script.gd",
+    "node_id": "release_current_game_scripts_ui_entry_entry_prologue_script",
+    "size_bytes": 2614
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_prologue_script.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_entry_prologue_script_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_quotes.gd",
+    "node_id": "release_current_game_scripts_ui_entry_entry_quotes",
+    "size_bytes": 1625
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_quotes.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_entry_quotes_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_screen.gd",
+    "node_id": "release_current_game_scripts_ui_entry_entry_screen",
+    "size_bytes": 23176
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_entry_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_utility.gd",
+    "node_id": "release_current_game_scripts_ui_entry_entry_utility",
+    "size_bytes": 11227
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/entry_utility.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_entry_utility_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/prologue_shot.gd",
+    "node_id": "release_current_game_scripts_ui_entry_prologue_shot",
+    "size_bytes": 18907
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/prologue_shot.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_prologue_shot_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/tutorial_battle.gd",
+    "node_id": "release_current_game_scripts_ui_entry_tutorial_battle",
+    "size_bytes": 2424
+  },
+  {
+    "path": "release/current/game/scripts/ui/entry/tutorial_battle.gd.uid",
+    "node_id": "release_current_game_scripts_ui_entry_tutorial_battle_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/friends/blocked_screen.gd",
+    "node_id": "release_current_game_scripts_ui_friends_blocked_screen",
+    "size_bytes": 1923
+  },
+  {
+    "path": "release/current/game/scripts/ui/friends/blocked_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_friends_blocked_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/friends/friends_screen.gd",
+    "node_id": "release_current_game_scripts_ui_friends_friends_screen",
+    "size_bytes": 8945
+  },
+  {
+    "path": "release/current/game/scripts/ui/friends/friends_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_friends_friends_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/gacha/gacha_screen.gd",
+    "node_id": "release_current_game_scripts_ui_gacha_gacha_screen",
+    "size_bytes": 8179
+  },
+  {
+    "path": "release/current/game/scripts/ui/gacha/gacha_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_gacha_gacha_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/hub/hub_screen.gd",
+    "node_id": "release_current_game_scripts_ui_hub_hub_screen",
+    "size_bytes": 2407
+  },
+  {
+    "path": "release/current/game/scripts/ui/hub/hub_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_hub_hub_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/inventory/inventory_screen.gd",
+    "node_id": "release_current_game_scripts_ui_inventory_inventory_screen",
+    "size_bytes": 6020
+  },
+  {
+    "path": "release/current/game/scripts/ui/inventory/inventory_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_inventory_inventory_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/licenses/licenses_screen.gd",
+    "node_id": "release_current_game_scripts_ui_licenses_licenses_screen",
+    "size_bytes": 913
+  },
+  {
+    "path": "release/current/game/scripts/ui/licenses/licenses_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_licenses_licenses_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/mailbox/mailbox_screen.gd",
+    "node_id": "release_current_game_scripts_ui_mailbox_mailbox_screen",
+    "size_bytes": 3216
+  },
+  {
+    "path": "release/current/game/scripts/ui/mailbox/mailbox_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_mailbox_mailbox_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/quests/quests_screen.gd",
+    "node_id": "release_current_game_scripts_ui_quests_quests_screen",
+    "size_bytes": 4331
+  },
+  {
+    "path": "release/current/game/scripts/ui/quests/quests_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_quests_quests_screen_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/roster/roster_screen.gd",
+    "node_id": "release_current_game_scripts_ui_roster_roster_screen",
+    "size_bytes": 4143
+  },
+  {
+    "path": "release/current/game/scripts/ui/roster/roster_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_roster_roster_screen_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/safe_area_container.gd",
+    "node_id": "release_current_game_scripts_ui_safe_area_container",
+    "size_bytes": 1428
+  },
+  {
+    "path": "release/current/game/scripts/ui/safe_area_container.gd.uid",
+    "node_id": "release_current_game_scripts_ui_safe_area_container_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/safe_area_math.gd",
+    "node_id": "release_current_game_scripts_ui_safe_area_math",
+    "size_bytes": 1158
+  },
+  {
+    "path": "release/current/game/scripts/ui/safe_area_math.gd.uid",
+    "node_id": "release_current_game_scripts_ui_safe_area_math_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/selector/selector_screen.gd",
+    "node_id": "release_current_game_scripts_ui_selector_selector_screen",
+    "size_bytes": 2571
+  },
+  {
+    "path": "release/current/game/scripts/ui/selector/selector_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_selector_selector_screen_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/settings/settings_screen.gd",
+    "node_id": "release_current_game_scripts_ui_settings_settings_screen",
+    "size_bytes": 3116
+  },
+  {
+    "path": "release/current/game/scripts/ui/settings/settings_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_settings_settings_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/skills/skills_screen.gd",
+    "node_id": "release_current_game_scripts_ui_skills_skills_screen",
+    "size_bytes": 3084
+  },
+  {
+    "path": "release/current/game/scripts/ui/skills/skills_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_skills_skills_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/startup/engine_splash_screen.gd",
+    "node_id": "release_current_game_scripts_ui_startup_engine_splash_screen",
+    "size_bytes": 292
+  },
+  {
+    "path": "release/current/game/scripts/ui/startup/engine_splash_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_startup_engine_splash_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/startup/startup_sequence.gd",
+    "node_id": "release_current_game_scripts_ui_startup_startup_sequence",
+    "size_bytes": 3107
+  },
+  {
+    "path": "release/current/game/scripts/ui/startup/startup_sequence.gd.uid",
+    "node_id": "release_current_game_scripts_ui_startup_startup_sequence_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/startup/startup_splash_screen.gd",
+    "node_id": "release_current_game_scripts_ui_startup_startup_splash_screen",
+    "size_bytes": 2057
+  },
+  {
+    "path": "release/current/game/scripts/ui/startup/startup_splash_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_startup_startup_splash_screen_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/startup/studio_splash_screen.gd",
+    "node_id": "release_current_game_scripts_ui_startup_studio_splash_screen",
+    "size_bytes": 908
+  },
+  {
+    "path": "release/current/game/scripts/ui/startup/studio_splash_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_startup_studio_splash_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/story_director.gd",
+    "node_id": "release_current_game_scripts_ui_story_director",
+    "size_bytes": 57274
+  },
+  {
+    "path": "release/current/game/scripts/ui/story_director.gd.uid",
+    "node_id": "release_current_game_scripts_ui_story_director_gd",
+    "size_bytes": 19
+  },
+  {
+    "path": "release/current/game/scripts/ui/team/team_screen.gd",
+    "node_id": "release_current_game_scripts_ui_team_team_screen",
+    "size_bytes": 5239
+  },
+  {
+    "path": "release/current/game/scripts/ui/team/team_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_team_team_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/title/title_screen.gd",
+    "node_id": "release_current_game_scripts_ui_title_title_screen",
+    "size_bytes": 7689
+  },
+  {
+    "path": "release/current/game/scripts/ui/title/title_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_title_title_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/scripts/ui/vn/vn_screen.gd",
+    "node_id": "release_current_game_scripts_ui_vn_vn_screen",
+    "size_bytes": 21803
+  },
+  {
+    "path": "release/current/game/scripts/ui/vn/vn_screen.gd.uid",
+    "node_id": "release_current_game_scripts_ui_vn_vn_screen_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/shaders/party_portrait.gdshader",
+    "node_id": "release_current_game_shaders_party_portrait",
+    "size_bytes": 309
+  },
+  {
+    "path": "release/current/game/shaders/party_portrait.gdshader.uid",
+    "node_id": "release_current_game_shaders_party_portrait_gdshader",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/theme/gothic_candidate_v01.gd",
+    "node_id": "release_current_game_theme_gothic_candidate_v01",
+    "size_bytes": 3598
+  },
+  {
+    "path": "release/current/game/theme/gothic_candidate_v01.gd.uid",
+    "node_id": "release_current_game_theme_gothic_candidate_v01_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/theme/gothic_system_v02.gd",
+    "node_id": "release_current_game_theme_gothic_system_v02",
+    "size_bytes": 7840
+  },
+  {
+    "path": "release/current/game/theme/gothic_system_v02.gd.uid",
+    "node_id": "release_current_game_theme_gothic_system_v02_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/theme/narrative_kit_v002.gd",
+    "node_id": "release_current_game_theme_narrative_kit_v002",
+    "size_bytes": 11266
+  },
+  {
+    "path": "release/current/game/theme/narrative_kit_v002.gd.uid",
+    "node_id": "release_current_game_theme_narrative_kit_v002_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/theme/production_kit_v001.gd",
+    "node_id": "release_current_game_theme_production_kit_v001",
+    "size_bytes": 3884
+  },
+  {
+    "path": "release/current/game/theme/production_kit_v001.gd.uid",
+    "node_id": "release_current_game_theme_production_kit_v001_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "release/current/game/theme/uomd_production_v001.tres",
+    "node_id": "release_current_game_theme_uomd_production_v001",
+    "size_bytes": 66234
+  },
+  {
+    "path": "release/current/game/theme/uomd_theme.tres",
+    "node_id": "release_current_game_theme_uomd_theme",
+    "size_bytes": 71
+  },
+  {
+    "path": "release/current/game/tools/build_uomd_native.sh",
+    "node_id": "release_current_game_tools_build_uomd_native",
+    "size_bytes": 2250
+  },
+  {
+    "path": "release/current/release.json",
+    "node_id": "release_current_release",
+    "size_bytes": 38137
+  },
+  {
+    "path": "release/current/tools/Build-CurrentAAB.ps1",
+    "node_id": "release_current_tools_build_currentaab",
+    "size_bytes": 5107
+  },
+  {
+    "path": "release/current/tools/pck_inventory.py",
+    "node_id": "release_current_tools_pck_inventory",
+    "size_bytes": 7552
+  },
+  {
+    "path": "release/current/tools/verify_aab_native.py",
+    "node_id": "release_current_tools_verify_aab_native",
+    "size_bytes": 2017
+  },
+  {
+    "path": "release/current/tools/verify_opening_base.gd",
+    "node_id": "release_current_tools_verify_opening_base",
+    "size_bytes": 2659
+  },
+  {
+    "path": "release/support/current-aab/base-privacy-acceptance.json",
+    "node_id": "release_support_current_aab_base_privacy_acceptance",
+    "size_bytes": 242
+  },
+  {
+    "path": "release/support/current-aab/build-report.json",
+    "node_id": "release_support_current_aab_build_report",
+    "size_bytes": 856
+  },
+  {
+    "path": "release/support/current-aab/native-packaging.json",
+    "node_id": "release_support_current_aab_native_packaging",
+    "size_bytes": 765
+  },
+  {
+    "path": "release/support/current-aab/opening-base.pck.inventory.json",
+    "node_id": "release_support_current_aab_opening_base_pck_inventory",
+    "size_bytes": 162022
+  },
+  {
+    "path": "release/support/current-aab/original-scenes.json",
+    "node_id": "release_support_current_aab_original_scenes",
+    "size_bytes": 20829
+  },
+  {
+    "path": "release/support/current-aab/pack-acceptance.json",
+    "node_id": "release_support_current_aab_pack_acceptance",
+    "size_bytes": 389
+  },
+  {
+    "path": "release/support/current-aab/rebuilt-scenes.json",
+    "node_id": "release_support_current_aab_rebuilt_scenes",
+    "size_bytes": 20829
+  },
+  {
+    "path": "release/support/current-aab/scene-list.json",
+    "node_id": "release_support_current_aab_scene_list",
+    "size_bytes": 623
+  },
+  {
+    "path": "release/support/current-aab/source-rebuild-acceptance.json",
+    "node_id": "release_support_current_aab_source_rebuild_acceptance",
+    "size_bytes": 245
+  },
+  {
+    "path": "release/support/current-aab/story-content.pck",
+    "node_id": "release_support_current_aab_story_content",
+    "size_bytes": 164528
+  },
+  {
+    "path": "release/support/current-aab/story-content.pck.inventory.json",
+    "node_id": "release_support_current_aab_story_content_pck_inventory",
+    "size_bytes": 2605
   },
   {
     "path": "scripts/build_patch.ps1",
@@ -28497,7 +31427,7 @@
   {
     "path": "server/e2e/.gitignore",
     "node_id": "server_e2e_gitignore",
-    "size_bytes": 20
+    "size_bytes": 53
   },
   {
     "path": "server/e2e/run.sh",
@@ -29072,7 +32002,7 @@
   {
     "path": "server/wrangler.jsonc",
     "node_id": "server_wrangler",
-    "size_bytes": 3971
+    "size_bytes": 3902
   },
   {
     "path": "skills-lock.json",
@@ -29082,12 +32012,12 @@
   {
     "path": "tools/Build-CurrentAAB.ps1",
     "node_id": "tools_build_currentaab",
-    "size_bytes": 4808
+    "size_bytes": 5107
   },
   {
     "path": "tools/Build-OpeningBundle.ps1",
     "node_id": "tools_build_openingbundle",
-    "size_bytes": 5339
+    "size_bytes": 5687
   },
   {
     "path": "tools/Install-GdquestVfxReference.ps1",
@@ -29132,7 +32062,7 @@
   {
     "path": "tools/graphify_project.py",
     "node_id": "tools_graphify_project",
-    "size_bytes": 19750
+    "size_bytes": 20201
   },
   {
     "path": "tools/import_free_2d_library.py",
@@ -29152,7 +32082,7 @@
   {
     "path": "tools/materialize_aab.py",
     "node_id": "tools_materialize_aab",
-    "size_bytes": 34335
+    "size_bytes": 34507
   },
   {
     "path": "tools/pck_inventory.py",
@@ -29162,7 +32092,7 @@
   {
     "path": "tools/project_catalog.py",
     "node_id": "tools_project_catalog",
-    "size_bytes": 9012
+    "size_bytes": 9505
   },
   {
     "path": "tools/sign_content_manifest.sh",
@@ -29180,9 +32110,19 @@
     "size_bytes": 5239
   },
   {
+    "path": "tools/test_narrative_sources.py",
+    "node_id": "tools_test_narrative_sources",
+    "size_bytes": 3518
+  },
+  {
     "path": "tools/test_pck_inventory.py",
     "node_id": "tools_test_pck_inventory",
     "size_bytes": 5506
+  },
+  {
+    "path": "tools/test_project_catalog.py",
+    "node_id": "tools_test_project_catalog",
+    "size_bytes": 1543
   },
   {
     "path": "tools/test_validate_audio.py",
@@ -29192,7 +32132,7 @@
   {
     "path": "tools/tests/test_materialize_aab.py",
     "node_id": "tools_tests_test_materialize_aab",
-    "size_bytes": 6085
+    "size_bytes": 7290
   },
   {
     "path": "tools/tests/test_verify_aab_native.py",

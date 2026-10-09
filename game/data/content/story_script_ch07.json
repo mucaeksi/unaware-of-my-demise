@@ -29,7 +29,8 @@
         {"line_id": "node_7_1_post_004", "speaker_id": "jori_flint", "speaker_display": "Jori", "text_en": "We made a cage and called it a bridge. My hands will not make that mistake again.", "emotion": "resolved", "voice_track": "jp"},
         {"line_id": "node_7_1_post_003", "speaker_id": "nixie_vale", "speaker_display": "Nixie", "text_en": "The marks point down. We can be sad after we stop the thing below.", "emotion": "brisk", "voice_track": "jp"}
       ],
-      "battle_transition_en": "The upper chain breaks. Below it, a bell rings once without moving its clapper."
+      "battle_transition_en": "The upper chain breaks. Below it, a bell rings once without moving its clapper.",
+      "music_cue":"pre: bgm_ch7_altar (uneasy layer), chains as percussion | post: bgm_ledger_motif (seven notes, then silence where the eighth should be)"
     },
     {
       "scene_id": "vn_7_2",
@@ -51,7 +52,8 @@
         {"line_id": "node_7_2_post_002", "speaker_id": "marek_vane", "speaker_display": "Marek", "text_en": "The road is ours. Go finish what we began.", "emotion": "steady", "voice_track": "jp"},
         {"line_id": "node_7_2_post_003", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "When this is over, I want to hear every detail of that barricade.", "emotion": "warm", "voice_track": "jp"},
         {"line_id": "node_7_2_post_004", "speaker_id": "fadyme_thought", "speaker_display": "Fadyme (thought)", "text_en": "When this is over. I will keep borrowing those words until there are none left.", "emotion": "melancholy", "voice_track": "jp_inner"}
-      ]
+      ],
+      "music_cue":"pre: bgm_held_the_road — full ensemble statement | post: bgm_held_the_road (comic tag for the barricade line)"
     },
     {
       "scene_id": "vn_7_3",
@@ -62,12 +64,14 @@
       "story_guests": ["sister_aveline", "mirel_quill", "clem_marr", "pippa_bell", "kera_voss"],
       "tutorial_cards_en": [{"tutorial_id": "tutorial_silence_field", "trigger": "record_scribe_silence", "pause_battle": true, "copy_en": "The Silence Field delays Focus gain. Protect the record scribe or destroy the field anchor; your five equipped heroes remain the battle team."}],
       "pre_battle_lines": [
-        {"line_id": "node_7_3_pre_001", "speaker_id": "mirel_quill", "speaker_display": "Mirel", "text_en": "The ledger was written over, not burned. Someone needed the names to remain beneath the ink.", "emotion": "focused", "voice_track": "jp"},
-        {"line_id": "node_7_3_pre_002", "speaker_id": "sister_aveline", "speaker_display": "Aveline", "text_en": "I can read the prayer beneath it. The names were offered as witnesses, not sacrifices.", "emotion": "quiet", "voice_track": "jp"},
-        {"line_id": "node_7_3_pre_003", "speaker_id": "clem_marr", "speaker_display": "Clem", "text_en": "Witnesses to what?", "emotion": "curious", "voice_track": "jp"},
-        {"line_id": "node_7_3_pre_004", "speaker_id": "pippa_bell", "speaker_display": "Pippa", "text_en": "To a promise. The last line says, 'Let the lost hour be remembered by the living.'", "emotion": "tender", "voice_track": "jp"},
-        {"line_id": "node_7_3_pre_005", "speaker_id": "kera_voss", "speaker_display": "Kera", "text_en": "There is one space scraped clean. It is the same length as Fadyme's name.", "emotion": "careful", "voice_track": "jp"},
-        {"line_id": "node_7_3_pre_006", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "Then write it back. A name should not vanish just because someone feared what it meant.", "emotion": "composed", "voice_track": "jp"}
+        {"line_id":"node_7_3_pre_001","speaker_id":"mirel_quill","speaker_display":"Mirel","text_en":"The ledger was written over, not burned. Someone needed the names to remain beneath the ink.","emotion":"focused","voice_track":"jp"},
+        {"line_id":"node_7_3_pre_002","speaker_id":"sister_aveline","speaker_display":"Aveline","text_en":"I can read the prayer beneath it. The names were offered as witnesses, not sacrifices.","emotion":"quiet","voice_track":"jp"},
+        {"line_id":"node_7_3_pre_007","speaker_id":"fadyme_thought","speaker_display":"Fadyme (thought)","text_en":"I came here to be offered. They are asking me to be witnessed.","emotion":"tender","voice_track":"jp_inner"},
+        {"line_id":"node_7_3_pre_003","speaker_id":"clem_marr","speaker_display":"Clem","text_en":"Witnesses to what?","emotion":"curious","voice_track":"jp"},
+        {"line_id":"node_7_3_pre_004","speaker_id":"pippa_bell","speaker_display":"Pippa","text_en":"To a promise. The last line says, 'Let the lost hour be remembered by the living.'","emotion":"tender","voice_track":"jp"},
+        {"line_id":"node_7_3_pre_005","speaker_id":"kera_voss","speaker_display":"Kera","text_en":"There is one space scraped clean. It is the same length as Fadyme's name.","emotion":"careful","voice_track":"jp"},
+        {"line_id":"node_7_3_pre_006","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"Then write it back. A name should not vanish just because someone feared what it meant.","emotion":"composed","voice_track":"jp"},
+        {"line_id":"node_7_3_pre_008","speaker_id":"pippa_bell","speaker_display":"Pippa","text_en":"I will sing it while you write. The page will not dare lose its place.","emotion":"bright","voice_track":"jp"}
       ],
       "post_battle_lines": [
         {"line_id": "node_7_3_post_005", "speaker_id": "mirel_quill", "speaker_display": "Mirel", "text_en": "Give me the pen. My hand helped erase it. This time, my hand writes it back.", "emotion": "resolved", "voice_track": "jp"},
@@ -75,7 +79,8 @@
         {"line_id": "node_7_3_post_002", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "Veyr?", "emotion": "surprised", "voice_track": "jp"},
         {"line_id": "node_7_3_post_003", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "My mother's name. It was hers before it was mine.", "emotion": "guarded", "voice_track": "jp"},
         {"line_id": "node_7_3_post_004", "speaker_id": "fadyme_thought", "speaker_display": "Fadyme (thought)", "text_en": "I am sorry. I wanted one more quiet day before you knew even this much.", "emotion": "guilty", "voice_track": "jp_inner"}
-      ]
+      ],
+      "music_cue":"pre: bgm_ledger_motif under the voices reading names | post: bgm_fadyme_theme with choir when the name is written back; this is the emotional peak before the boss"
     },
     {
       "scene_id": "vn_7_4",
@@ -83,7 +88,7 @@
       "title_en": "Before the Last Toll",
       "location_id": "altar_first_eclipse",
       "direction_en": "At the altar's outer ring, the returned companions raise wards and open an evacuation path. The five-person core party faces the last sentinels while distant friends hold the side lanes in a non-playable set piece.",
-      "story_guests": ["sable_wren", "vespera_wisp", "tilda_fen", "iona_mist", "thistle_roe", "hana_birch"],
+      "story_guests": ["sable_wren","vespera_wisp","tilda_fen","iona_mist","thistle_roe","hana_birch","sister_aveline"],
       "tutorial_cards_en": [{"tutorial_id": "tutorial_auto_ultimate_policy", "trigger": "side_altar_charge", "pause_battle": false, "copy_en": "Set Auto Ultimate to 'Boss only' to save Focus for the next phase, or 'Use when ready' for faster clears. The side altar's pulse resolves at the end of the displayed round."}],
       "pre_battle_lines": [
         {"line_id": "node_7_4_pre_001", "speaker_id": "sable_wren", "speaker_display": "Sable", "text_en": "The east passage is clear. I left a lantern at every turn; nobody gets lost in the dark tonight.", "emotion": "assured", "voice_track": "jp"},
@@ -99,7 +104,8 @@
         {"line_id": "node_7_4_post_003", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "As long as you ask me to.", "emotion": "gentle", "voice_track": "jp"},
         {"line_id": "node_7_4_post_004", "speaker_id": "fadyme_thought", "speaker_display": "Fadyme (thought)", "text_en": "I do not know how to ask for forever. I will ask for one more step.", "emotion": "fragile", "voice_track": "jp_inner"}
       ],
-      "battle_transition_en": "The companions seal the side altar. Mahmut and Fadyme pass through the inner gate with their four chosen allies."
+      "battle_transition_en": "The companions seal the side altar. Mahmut and Fadyme pass through the inner gate with their four chosen allies.",
+      "music_cue":"pre: bgm_held_the_road → bgm_tension | post: sting_bell_toll (the pulse stops)"
     },
     {
       "scene_id": "vn_7_5",
@@ -137,7 +143,8 @@
         {"line_id": "node_7_5_post_005", "speaker_id": "fadyme_thought", "speaker_display": "Fadyme (thought)", "text_en": "The dark has reached my heart. I cannot make it wait much longer.", "emotion": "terrified", "voice_track": "jp_inner"}
       ],
       "after_battle_scene_id": "part1_emotional_confession",
-      "battle_transition_en": "The chamber falls silent. Fadyme tries to walk, then collapses. The surviving heroes carry her to the altar's outer dais."
+      "battle_transition_en": "The chamber falls silent. Fadyme tries to walk, then collapses. The surviving heroes carry her to the altar's outer dais.",
+      "music_cue":"pre: bgm_ch7_altar (chaotic layer) | battle: bgm_boss_eclipse_construct (phase 1, phase 2 adds choir and the bell motif) | post: silence after 'HOUR... STILL OWED.'"
     },
     {
       "scene_id": "ch7_road",
@@ -196,7 +203,8 @@
           "emotion": "hopeful",
           "voice_track": "jp_narration"
         }
-      ]
+      ],
+      "music_cue":"bgm_ch7_altar (distant, calm layer) — two quiet days; wind over the crater"
     }
   ],
   "after_battle_scenes": [

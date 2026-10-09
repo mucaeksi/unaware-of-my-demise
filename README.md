@@ -17,3 +17,5 @@ Use `python tools/project_catalog.py build` and `python tools/project_catalog.py
 Server: TypeScript Cloudflare Worker, Hyperdrive and Neon PostgreSQL; private R2 signed content patches. Admin: static Next.js export with a separate Worker. Client presentation is local; account state, economy and rewards remain server-owned. Content patches cannot deliver new executable code.
 
 Reference/source art remains in `narrative/`; approved current direction takes precedence over historical art locks. Production and Drive LEGACY originals are read-only. Original documents replaced during this organization are preserved in `.archive/project-docs-20261008/`.
+
+Current first-AAB repair and audio/design sequence: [FIRST_AAB_PLAN.md](docs/release/FIRST_AAB_PLAN.md).

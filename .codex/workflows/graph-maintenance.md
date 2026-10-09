@@ -9,3 +9,13 @@ After code changes run `graphify update .`, then in PowerShell:
 ```
 
 Native Graphify 0.9.80 alone does not refresh Godot files and may flatten parallel relations. The project helper preserves Godot coverage/directions/relations and flags changed document semantics; it does not call an external LLM API. Dirty graph outputs are expected. Deferred source archives are historical nodes, not active instructions.
+
+For Linux/cloud use the Python environment where `graphifyy==0.9.80` is installed:
+
+```bash
+python3 tools/graphify_project.py --refresh
+```
+
+The saved interpreter path is environment-local; a path from another machine is
+not a runnable cloud interpreter. Generated dependency/cache folders are excluded
+by the helper even when repository Git ignore rules are disabled.

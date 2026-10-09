@@ -14,7 +14,7 @@ out="${1:-${repo_dir}/build/uomd-debug.apk}"
 
 version="$(tr -d '[:space:]' < "${game_dir}/GODOT_VERSION")"        # 4.7.2-stable
 template_version="${version/-/.}"                                   # 4.7.2.stable
-templates="${HOME}/.local/share/godot/export_templates/${template_version}"
+templates="${XDG_DATA_HOME:-${HOME}/.local/share}/godot/export_templates/${template_version}"
 [[ -f "${templates}/android_source.zip" ]] || { echo "export templates ${template_version} are not installed in ${templates}" >&2; exit 2; }
 
 # Editor settings: SDK, JDK and a debug keystore (created once; debug signing only).

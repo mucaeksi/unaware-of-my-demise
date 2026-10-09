@@ -68,7 +68,8 @@
           "text_en": "She says she is fine. I have learned to count how often.",
           "voice_track": "jp",
           "about_character_id": "fadyme",
-          "about": "fadyme"
+          "about": "fadyme",
+          "unlock":{"after_stage":"1-5"}
         },
         {
           "line_id": "vo_mahmut_relationship_2",
@@ -76,7 +77,8 @@
           "text_en": "He taught me the shield. I will not thank him for the rest.",
           "voice_track": "jp",
           "about_character_id": null,
-          "about": "oren"
+          "about": "oren",
+          "unlock":{"after_stage":"5-5"}
         }
       ]
     },
@@ -143,7 +145,8 @@
           "text_en": "He cuts cheese like it owes the Crown money.",
           "voice_track": "jp",
           "about_character_id": "mahmut",
-          "about": "mahmut"
+          "about": "mahmut",
+          "unlock":{"after_stage":"6-5"}
         },
         {
           "line_id": "vo_fadyme_relationship_2",
@@ -151,7 +154,8 @@
           "text_en": "Clem keeps my name in her book. I hope she has good ink.",
           "voice_track": "jp",
           "about_character_id": "clem_marr",
-          "about": "clem_marr"
+          "about": "clem_marr",
+          "unlock":{"after_stage":"7-5"}
         }
       ]
     },
@@ -218,7 +222,8 @@
           "text_en": "I am finishing her formula. Stop asking me when.",
           "voice_track": "jp",
           "about_character_id": "fadyme",
-          "about": "fadyme"
+          "about": "fadyme",
+          "unlock":{"after_stage":"4-4"}
         },
         {
           "line_id": "vo_kera_voss_relationship_2",
@@ -226,7 +231,8 @@
           "text_en": "Tilda says I label things like a threat. Correct.",
           "voice_track": "jp",
           "about_character_id": "tilda_fen",
-          "about": "tilda_fen"
+          "about": "tilda_fen",
+          "unlock":{"after_stage":"4-2"}
         }
       ]
     },
@@ -293,7 +299,8 @@
           "text_en": "He told me I did not have to hold it alone. I am still learning that.",
           "voice_track": "jp",
           "about_character_id": "mahmut",
-          "about": "mahmut"
+          "about": "mahmut",
+          "unlock":{"after_stage":"1-2"}
         },
         {
           "line_id": "vo_brin_alder_relationship_2",
@@ -301,7 +308,8 @@
           "text_en": "Jori builds doors. I stand in them.",
           "voice_track": "jp",
           "about_character_id": "jori_flint",
-          "about": "jori_flint"
+          "about": "jori_flint",
+          "unlock":{"after_stage":"3-4"}
         }
       ]
     },
@@ -368,7 +376,8 @@
           "text_en": "Pippa wrote a song about my register page. It is annoyingly good.",
           "voice_track": "jp",
           "about_character_id": "pippa_bell",
-          "about": "pippa_bell"
+          "about": "pippa_bell",
+          "unlock":{"after_stage":"3-4"}
         },
         {
           "line_id": "vo_nixie_vale_relationship_2",
@@ -376,7 +385,8 @@
           "text_en": "Odelia follows tracks. I make them. We get along.",
           "voice_track": "jp",
           "about_character_id": "odelia_pike",
-          "about": "odelia_pike"
+          "about": "odelia_pike",
+          "unlock":{"after_stage":"4-1"}
         }
       ]
     },
@@ -443,7 +453,8 @@
           "text_en": "I am keeping vigil. She pretends not to notice.",
           "voice_track": "jp",
           "about_character_id": "fadyme",
-          "about": "fadyme"
+          "about": "fadyme",
+          "unlock":{"after_stage":"7-5"}
         },
         {
           "line_id": "vo_sister_aveline_relationship_2",
@@ -451,7 +462,8 @@
           "text_en": "Mirel corrects records. I correct prayers. We are both unpopular with the clergy.",
           "voice_track": "jp",
           "about_character_id": "mirel_quill",
-          "about": "mirel_quill"
+          "about": "mirel_quill",
+          "unlock":{"after_stage":"7-3"}
         }
       ]
     },
@@ -518,7 +530,8 @@
           "text_en": "Hana kept a secret for someone. I told her mine.",
           "voice_track": "jp",
           "about_character_id": "hana_birch",
-          "about": "hana_birch"
+          "about": "hana_birch",
+          "unlock":{"after_stage":"7-4"}
         },
         {
           "line_id": "vo_sable_wren_relationship_2",
@@ -526,7 +539,8 @@
           "text_en": "Rikka is loud. It is restful, somehow.",
           "voice_track": "jp",
           "about_character_id": "rikka_ember",
-          "about": "rikka_ember"
+          "about": "rikka_ember",
+          "unlock":{"after_stage":"5-3"}
         }
       ]
     },
@@ -593,7 +607,8 @@
           "text_en": "Kera labels things like threats. The labels are accurate.",
           "voice_track": "jp",
           "about_character_id": "kera_voss",
-          "about": "kera_voss"
+          "about": "kera_voss",
+          "unlock":{"after_stage":"4-2"}
         },
         {
           "line_id": "vo_tilda_fen_relationship_2",
@@ -601,7 +616,8 @@
           "text_en": "Iona listens. I prescribe. Between us, a healer.",
           "voice_track": "jp",
           "about_character_id": "iona_mist",
-          "about": "iona_mist"
+          "about": "iona_mist",
+          "unlock":{"after_stage":"4-2"}
         }
       ]
     },
@@ -668,7 +684,8 @@
           "text_en": "Brin says my barricades are on fire. They are warm.",
           "voice_track": "jp",
           "about_character_id": "brin_alder",
-          "about": "brin_alder"
+          "about": "brin_alder",
+          "unlock":{"after_stage":"7-2"}
         },
         {
           "line_id": "vo_rikka_ember_relationship_2",
@@ -676,7 +693,8 @@
           "text_en": "Sable never laughs. I am working on it.",
           "voice_track": "jp",
           "about_character_id": "sable_wren",
-          "about": "sable_wren"
+          "about": "sable_wren",
+          "unlock":{"after_stage":"5-3"}
         }
       ]
     },
@@ -743,7 +761,8 @@
           "text_en": "I wrote her name back with my own hand. It was the only amends I had.",
           "voice_track": "jp",
           "about_character_id": "fadyme",
-          "about": "fadyme"
+          "about": "fadyme",
+          "unlock":{"after_stage":"7-3"}
         },
         {
           "line_id": "vo_mirel_quill_relationship_2",
@@ -751,7 +770,8 @@
           "text_en": "Aveline is editing scripture. I am very proud.",
           "voice_track": "jp",
           "about_character_id": "sister_aveline",
-          "about": "sister_aveline"
+          "about": "sister_aveline",
+          "unlock":{"after_stage":"7-3"}
         }
       ]
     },
@@ -818,7 +838,8 @@
           "text_en": "Mirel read my brother's name. I owe her more than I can say.",
           "voice_track": "jp",
           "about_character_id": "mirel_quill",
-          "about": "mirel_quill"
+          "about": "mirel_quill",
+          "unlock":{"after_stage":"7-5"}
         },
         {
           "line_id": "vo_odelia_pike_relationship_2",
@@ -826,7 +847,8 @@
           "text_en": "Nixie makes tracks faster than I can read them.",
           "voice_track": "jp",
           "about_character_id": "nixie_vale",
-          "about": "nixie_vale"
+          "about": "nixie_vale",
+          "unlock":{"after_stage":"4-1"}
         }
       ]
     },
@@ -893,7 +915,8 @@
           "text_en": "Nixie pretends she hates my songs. She hums them.",
           "voice_track": "jp",
           "about_character_id": "nixie_vale",
-          "about": "nixie_vale"
+          "about": "nixie_vale",
+          "unlock":{"after_stage":"3-4"}
         },
         {
           "line_id": "vo_pippa_bell_relationship_2",
@@ -901,7 +924,8 @@
           "text_en": "Veyr rhymes with stayed here. Close enough.",
           "voice_track": "jp",
           "about_character_id": "fadyme",
-          "about": "fadyme"
+          "about": "fadyme",
+          "unlock":{"after_stage":"7-3"}
         }
       ]
     },
@@ -968,7 +992,8 @@
           "text_en": "He is looking for Oren. I told him the truth. It was not enough.",
           "voice_track": "jp",
           "about_character_id": "mahmut",
-          "about": "mahmut"
+          "about": "mahmut",
+          "unlock":{"after_stage":"7-5"}
         },
         {
           "line_id": "vo_nara_vell_relationship_2",
@@ -976,7 +1001,8 @@
           "text_en": "Marek's rhythm is off by a half-step on hills. On purpose.",
           "voice_track": "jp",
           "about_character_id": "marek_vane",
-          "about": "marek_vane"
+          "about": "marek_vane",
+          "unlock":{"after_stage":"5-2"}
         }
       ]
     },
@@ -1043,7 +1069,8 @@
           "text_en": "I keep her name in my book. Every day. Best hand.",
           "voice_track": "jp",
           "about_character_id": "fadyme",
-          "about": "fadyme"
+          "about": "fadyme",
+          "unlock":{"after_stage":"7-5"}
         },
         {
           "line_id": "vo_clem_marr_relationship_2",
@@ -1051,7 +1078,8 @@
           "text_en": "Hana and I are going back for the unmarked row.",
           "voice_track": "jp",
           "about_character_id": "hana_birch",
-          "about": "hana_birch"
+          "about": "hana_birch",
+          "unlock":{"after_stage":"6-1"}
         }
       ]
     },
@@ -1118,7 +1146,8 @@
           "text_en": "Iona asked what it cost. She is the only one who asked.",
           "voice_track": "jp",
           "about_character_id": "iona_mist",
-          "about": "iona_mist"
+          "about": "iona_mist",
+          "unlock":{"after_stage":"6-3"}
         },
         {
           "line_id": "vo_vespera_wisp_relationship_2",
@@ -1126,7 +1155,8 @@
           "text_en": "He wants to consent to something he does not understand. I will not let him.",
           "voice_track": "jp",
           "about_character_id": "mahmut",
-          "about": "mahmut"
+          "about": "mahmut",
+          "unlock":{"after_stage":"7-5"}
         }
       ]
     },
@@ -1193,7 +1223,8 @@
           "text_en": "Sable told me a secret. I will carry it with the other one.",
           "voice_track": "jp",
           "about_character_id": "sable_wren",
-          "about": "sable_wren"
+          "about": "sable_wren",
+          "unlock":{"after_stage":"7-4"}
         },
         {
           "line_id": "vo_hana_birch_relationship_2",
@@ -1201,7 +1232,8 @@
           "text_en": "Clem says every grave gets a 'here'. I agree.",
           "voice_track": "jp",
           "about_character_id": "clem_marr",
-          "about": "clem_marr"
+          "about": "clem_marr",
+          "unlock":{"after_stage":"6-1"}
         }
       ]
     },
@@ -1268,7 +1300,8 @@
           "text_en": "I gave her winter seeds. Somebody sees the spring.",
           "voice_track": "jp",
           "about_character_id": "fadyme",
-          "about": "fadyme"
+          "about": "fadyme",
+          "unlock":{"after_stage":"7-5"}
         },
         {
           "line_id": "vo_thistle_roe_relationship_2",
@@ -1276,7 +1309,8 @@
           "text_en": "Iona says I do not stammer when my hands know what to do.",
           "voice_track": "jp",
           "about_character_id": "iona_mist",
-          "about": "iona_mist"
+          "about": "iona_mist",
+          "unlock":{"after_stage":"7-4"}
         }
       ]
     },
@@ -1343,7 +1377,8 @@
           "text_en": "I say her name every night. She corrects my pronunciation.",
           "voice_track": "jp",
           "about_character_id": "fadyme",
-          "about": "fadyme"
+          "about": "fadyme",
+          "unlock":{"after_stage":"7-5"}
         },
         {
           "line_id": "vo_iona_mist_relationship_2",
@@ -1351,7 +1386,8 @@
           "text_en": "Tilda heals the living. I bring home the lost. We share a table.",
           "voice_track": "jp",
           "about_character_id": "tilda_fen",
-          "about": "tilda_fen"
+          "about": "tilda_fen",
+          "unlock":{"after_stage":"4-2"}
         }
       ]
     },
@@ -1418,7 +1454,8 @@
           "text_en": "Brin stands in doors. I build them. It works.",
           "voice_track": "jp",
           "about_character_id": "brin_alder",
-          "about": "brin_alder"
+          "about": "brin_alder",
+          "unlock":{"after_stage":"3-4"}
         },
         {
           "line_id": "vo_jori_flint_relationship_2",
@@ -1426,7 +1463,8 @@
           "text_en": "I am making a key. Stop asking how long.",
           "voice_track": "jp",
           "about_character_id": "mahmut",
-          "about": "mahmut"
+          "about": "mahmut",
+          "unlock":{"after_stage":"7-5"}
         }
       ]
     },
@@ -1493,7 +1531,8 @@
           "text_en": "I read his treason in eleven villages. I read the truth in one. Not enough yet.",
           "voice_track": "jp",
           "about_character_id": "mahmut",
-          "about": "mahmut"
+          "about": "mahmut",
+          "unlock":{"after_stage":"6-5"}
         },
         {
           "line_id": "vo_marek_vane_relationship_2",
@@ -1501,7 +1540,8 @@
           "text_en": "Nara measures the road. I sing it.",
           "voice_track": "jp",
           "about_character_id": "nara_vell",
-          "about": "nara_vell"
+          "about": "nara_vell",
+          "unlock":{"after_stage":"5-2"}
         }
       ]
     }

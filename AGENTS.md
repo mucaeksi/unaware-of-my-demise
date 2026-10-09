@@ -1,7 +1,7 @@
 # Unaware of My Demise — Codex project instructions
 
-- Work locally and preserve user changes; no GitHub push/publish until the owner changes scope. Current implementation scope is Entry; the owner chooses the next screen.
-- Owner-selected collaboration: Codex produces character/environment designs and creative assets; Claude handles coding and integration; the owner handles GitHub pushes/publication. See `docs/ART_AND_CODE_HANDOFF.md`. Copy preparation does not authorize a commit or push.
+- Preserve user changes. Owner direction, 2026-10-09: continue work in cloud and commit/push completed, validated changes to `main`; the owner pulls with GitHub Desktop and plays the local Godot project. Current implementation scope is Entry; the owner chooses the next screen. See `docs/coder/CLOUD_MAIN_SYNC.md`.
+- Owner-selected collaboration: Codex produces character/environment designs and creative assets; Claude handles coding and integration. The current cloud task also authorizes Codex review fixes and validated `main` pushes. Store/app publication and paid API batches retain their existing approval requirements. See `docs/ART_AND_CODE_HANDOFF.md`.
 - Active skill/agent/standard/workflow source is `.codex/`. Read `.codex/standards/authority.md` when legacy instructions conflict. `.agents/library/` is the consolidated provenance/deferred-capability index. Root `CLAUDE.md` is the current coding handoff; its old takeover instructions are archived and inert.
 - Skill discovery uses `.agents/skills/` linked to `.codex/skills/`. After cloning/moving, run `.codex/scripts/bootstrap_skills.ps1`. Do not maintain duplicate skill copies; project skills use `uomd-` names.
 - Godot 4.7.2, project root `game/`, GDScript, Android portrait. Preserve actual gl_compatibility renderer, strict typing checks, existing architecture and unrelated plugins. Prefer Godot AI MCP for editor-aware operations and complex scene/resource edits.
@@ -11,6 +11,15 @@
 - Current priorities: premium fantasy UI, chibi animation, cinematics/camera, shaders/particles/VFX, visual consistency, asset performance and UX review. Combat AI, economy, summon algorithms and progression are deferred. Summon/character presentation work requires the owner's screen selection.
 - New character/environment art work is staged in `narrative/15_Art_Workbench/`; current canon/reference sources remain in their existing folders. Preserve stable IDs and source bytes. Runtime promotion follows the explicit art-to-code handoff.
 - Cloud coding/builds may use a GitHub checkout with the pinned Linux toolchain. Keep desktop Editor/runtime/Local UI Preview open when available; a cloud environment without GUI must report native visual validation as pending and use the authorized desktop MCP bridge when available.
+
+## Current first-AAB request
+
+The owner explicitly authorized Codex to fix the review findings and restore
+missing dialogue before concentrating on character/environment design. Prioritize
+the first AAB; see `docs/release/FIRST_AAB_PLAN.md`. Japanese voice and music use
+Google APIs in a step-by-step collaboration with the owner. This task exception
+does not expand deferred systems or authorize paid batches, GitHub pushes or
+publication. Character/environment designs still follow the established handoff.
 
 ## Graphify
 

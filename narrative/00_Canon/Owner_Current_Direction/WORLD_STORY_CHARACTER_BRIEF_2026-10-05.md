@@ -8,18 +8,18 @@ Kullanıcının bu oturumdaki talimatı: yeni Gothic/anime referansını hikâye
 
 ## 1. Okuma kapsamı ve kaynak önceliği
 
-[Story Bible](../story/STORY_BIBLE_PART1.md), [Villain Bible](../story/VILLAIN_BIBLE_PART1.md), [tam script ve bütün ekleri](../story/PART1_FULL_SCRIPT.md), [canon ledger](../canon/canon.md), dünya kuralları, timeline, glossary, tarih, faction/mekân/bestiary kaynakları ve 20 karakterin lore modelleri okundu. Voice/visual matrix, karakter paketlerinin statü notları, Art Bible, Costume Guide, marka rehberi ve character/location brief’leri karşılaştırıldı. Sable/Vespera sheet prompt’ları C42 ile karşılaştırıldı; geçmiş üretim araçları çalıştırılmadı.
+[Story Bible](../../01_Story_Bible/STORY_BIBLE_PART1.md), [Villain Bible](../../01_Story_Bible/VILLAIN_BIBLE_PART1.md), [tam script ve bütün ekleri](../../02_Main_Story/PART1_FULL_SCRIPT.md), [canon ledger](../canon.md), dünya kuralları, timeline, glossary, tarih, faction/mekân/bestiary kaynakları ve 20 karakterin lore modelleri okundu. Voice/visual matrix, karakter paketlerinin statü notları, Art Bible, Costume Guide, marka rehberi ve character/location brief’leri karşılaştırıldı. Sable/Vespera sheet prompt’ları C42 ile karşılaştırıldı; geçmiş üretim araçları çalıştırılmadı.
 
 Kaynak JSON’ların metinleri, baştan sona okunmuş tam script ile programatik olarak karşılaştırıldı. Apostrof, Unicode ve boşluk normalizasyonundan sonra bütün **1.072 metin kaydı** okuma kopyasında bulundu. Bu kontrol bir metnin varlığını doğrular; ID/sıra eşitliği veya her metadata alanının eşitliği iddiası değildir.
 
 | Kapsam | Doğrulanan sayı | Kaynak |
 |---|---:|---|
-| Ana hikâye | 7 bölüm, 51 sıra, 419 benzersiz line_id | [bölüm JSON’ları](../content/README.md) |
-| Oynanabilir karakter | 20 | [karakter paketleri](../characters/INDEX.md) |
-| Companion hikâyeleri | 76 parça, 388 line_id | [character_stories_part1.json](../content/character_stories_part1.json) |
-| Event hikâyeleri | 4 event, 12 sahne, 45 line_id | [events_part1.json](../content/events_part1.json) |
-| Karakter VO kataloğu | 220 line_id | [character_voice_lines_part1.json](../content/character_voice_lines_part1.json) |
-| Kullanılan mekân kimlikleri | 44 | [location registry](../lore/locations/registry.md) |
+| Ana hikâye | 7 bölüm, 51 sıra, 419 benzersiz line_id | [bölüm JSON’ları](../../12_Production_Notes/Narrative_Tech_Handoff/README.md) |
+| Oynanabilir karakter | 20 | [karakter paketleri](../../03_Companion_Stories/Character_Source_Packages/INDEX.md) |
+| Companion hikâyeleri | 76 parça, 388 line_id | [character_stories_part1.json](../../09_VN_Scripts/Companion_Stories/character_stories_part1.json) |
+| Event hikâyeleri | 4 event, 12 sahne, 45 line_id | [events_part1.json](../../09_VN_Scripts/Events/events_part1.json) |
+| Karakter VO kataloğu | 220 line_id | [character_voice_lines_part1.json](../../09_VN_Scripts/Voice_Lines/character_voice_lines_part1.json) |
+| Kullanılan mekân kimlikleri | 44 | [location registry](../../08_Locations/Lore/registry.md) |
 
 Dosya hash’leri, okuma yöntemi ve sayı/fark sonuçları [SOURCE_REVIEW_2026-10-05.json](SOURCE_REVIEW_2026-10-05.json) içinde. İnceleme depoya aktarılmış seçili kaynaklar üzerindedir; Drive’da bırakılan 300 dosyanın bu oturumda okunduğu iddia edilmez.
 
@@ -44,7 +44,7 @@ Gündelik dünya taş, demir, deri, yün, eski kâğıt, cam ve mum ışığıyl
 9. Cael’in Ledger’dan çıkardığı **Unwritten Hour**, Crownfall öncesindeki son kaydedilmemiş saattir. O saatin içindeki olaylar bilinmez; kaydedilmiş zamandan çıkan kişinin adı/yüzü hafızadan kayar. Onun yazısını elinde tutan kişi onu tanıyabilir.
 10. Bir Inquisitor’ın çağrı çanı seçtiği taşıyıcıya bağlı kalır. Yseldra’nın kırmızı iple bağladığı tokmak sesi durduramaz.
 
-Tam 11 kuralın kaynağı [world_rules.md](../lore/world_rules.md). Yukarıdaki özet aynı kuralları gruplayarak anlatır.
+Tam 11 kuralın kaynağı [world_rules.md](../../05_Codex_Lore/world_rules.md). Yukarıdaki özet aynı kuralları gruplayarak anlatır.
 
 **Tasarım sonucu (öneri):** dünya yalnız yıkık katedrallerden oluşmamalı. Kayıt tahtası, silinmiş isim, boş mühür yuvası, tamir izi, mum ve paylaşılan yemek gibi gündelik nesneler de aynı ağırlığı taşımalı. Küçük sıcak ışıklar ve yaşayan yerleşimler, dünyanın kaybını ve korunmaya değer tarafını görünür kılar.
 
@@ -65,7 +65,7 @@ Emir zinciri: Audren’in ölümünden sonra Cael, Inquisition mührüyle taşı
 | House Veyr | Çanların kefil evi; neredeyse tükenmiş anne-kız soyu | Küçük gümüş çan biçimli **saç tokası** |
 | Clockless Court | Cael’in kayıtlı zaman dışındaki sarayı; Part II hedefi | Konumu ve üyeleri açık; bu inceleme bir mekân tasarımı icat etmez |
 
-Kaynaklar: [faction registry](../lore/factions/_registry.md), [Crownfall](../lore/history/crownfall.md), [timeline](../lore/timeline.md).
+Kaynaklar: [faction registry](../../13_Timeline_Factions_Glossary/Factions/_registry.md), [Crownfall](../../13_Timeline_Factions_Glossary/History/crownfall.md), [timeline](../../13_Timeline_Factions_Glossary/timeline.md).
 
 ## 4. Ana hikâyenin duygusal omurgası
 
@@ -85,7 +85,7 @@ Mahmut’un sorunu zekâ eksikliği değildir: gerçekçi açıklamalara, saklan
 | 6 — Ashen estate | Anne portresi, Mirel’in suç ortaklığı, yıkılan arşiv ve kurtarılan tek sayfa | İsimsiz portreler, ayrı cam konservatuvar, akrepsiz/yelkovansız saat resmi, taş kemer altındaki çocuk, hizmetli geçidi |
 | 7 — First Eclipse Altar | İsmin geri yazılması; makine düşse de borç sürer; itiraf, sonra Cael | Taç biçimli krater, yedi zincir, yuvarlak arşiv, üç pylon, siyah taş yansıması, ince kızıl tutulma halkası |
 
-Part I yaklaşık üç haftadır; rota günleri [part1_route.md](../lore/locations/part1_route.md) ve script ile belirlenir. Bütün yoldaşlar sürekli yirmi kişilik bir kafile oluşturmaz: sivil tahliyesi, klinik, arşiv ve kendi işleri için ayrılıp yeniden gelirler.
+Part I yaklaşık üç haftadır; rota günleri [part1_route.md](../../08_Locations/Lore/part1_route.md) ve script ile belirlenir. Bütün yoldaşlar sürekli yirmi kişilik bir kafile oluşturmaz: sivil tahliyesi, klinik, arşiv ve kendi işleri için ayrılıp yeniden gelirler.
 
 **Final iki ayrı vuruştur:** Eclipse Construct savaşı → mahrem ve ilk konuşmasında müziksiz itiraf → sessizlik → Cael’in yansıma üzerinden teklifi. Cael Part I savaş boss’u değildir. Fadyme iyileşmez. Mirel’in yazdığı isim, Clem’in günlük kaydı ve Iona’nın gecelik okuması süreyi erteleyen gerçek tanıklıktır; yalnız teselli değildir.
 
@@ -95,144 +95,144 @@ Part I yaklaşık üç haftadır; rota günleri [part1_route.md](../lore/locatio
 
 Yedi bölüm, yedi ayrı çan mekânı demek değildir. **Ashen estate’te çan yoktur; Schedule vardır. Silent Bell başkent Carrowgate’tedir ve Part I’de ziyaret edilmez.** Glass Bell, Glassford altındaki en aşağı sarnıçtadır. Whispering / Ropeless / Harvest / Glass / Forsaken / Silent / Eclipse ayrı tarih ve nesne kimlikleri taşır; Pippa’nın charm’ı Silent Bell parçasıdır.
 
-[Location registry](../lore/locations/registry.md) 44 kullanılan ID içerir. Yedi hub, alt mekânları ve altı yan yol aynı resme indirgenmez. [Location brief’leri](../prompts/asset_pipeline/location_briefs.md) altı yan yol için de metin içerir; registry’deki eski “none” notları bunun güncel durumunu göstermiyor. Ormanın `ordered / uneasy / chaotic` varyantları ayrıdır: bakılan sağlam shrine ile çökmüş shrine aynı anda varsayılan hâl değildir.
+[Location registry](../../08_Locations/Lore/registry.md) 44 kullanılan ID içerir. Yedi hub, alt mekânları ve altı yan yol aynı resme indirgenmez. [Location brief’leri](../../12_Production_Notes/Prompt_Library/asset_pipeline/location_briefs.md) altı yan yol için de metin içerir; registry’deki eski “none” notları bunun güncel durumunu göstermiyor. Ormanın `ordered / uneasy / chaotic` varyantları ayrıdır: bakılan sağlam shrine ile çökmüş shrine aynı anda varsayılan hâl değildir.
 
-[Bestiary](../lore/bestiary.md) ayrımı çizim davranışını belirler: Hollow eski işini tekrarlar; Bellbound zincirle çana bağlanır; Inkbound silinmiş kayıtlarla sarılıdır; Wraith portre/ayna üzerinden tutunur; Ashbound hayvan çan külü yemiştir; Construct ölü beden değil makinedir. Yaşayan Oren, Rusk, Matron, Yseldra ve kült üyeleri aynı zombi görünümüne çevrilmez.
+[Bestiary](../../07_Enemies_Bosses/bestiary.md) ayrımı çizim davranışını belirler: Hollow eski işini tekrarlar; Bellbound zincirle çana bağlanır; Inkbound silinmiş kayıtlarla sarılıdır; Wraith portre/ayna üzerinden tutunur; Ashbound hayvan çan külü yemiştir; Construct ölü beden değil makinedir. Yaşayan Oren, Rusk, Matron, Yseldra ve kült üyeleri aynı zombi görünümüne çevrilmez.
 
 ## 6. Yirmi oynanabilir karakter: kimlik ve çizim karşılığı
 
-Buradaki görsel ayrıntılar yeni sheet değildir; [lore modellerinin](../lore/characters/_README.md) kaynak brief’idir. Yeni tasarımda çizgi, yüz işlenişi, malzeme ayrıntısı ve kompozisyon geliştirilebilir. Hikâyenin kullandığı nesneler ve kimlikler aynı anda korunur. Yaş/element/rarity ve dört skill adı [runtime character pack](../../game/data/content/characters_part1.json) ile de karşılaştırıldı.
+Buradaki görsel ayrıntılar yeni sheet değildir; [lore modellerinin](../../06_Characters/_README.md) kaynak brief’idir. Yeni tasarımda çizgi, yüz işlenişi, malzeme ayrıntısı ve kompozisyon geliştirilebilir. Hikâyenin kullandığı nesneler ve kimlikler aynı anda korunur. Yaş/element/rarity ve dört skill adı [runtime character pack](../../../game/data/content/characters_part1.json) ile de karşılaştırıldı.
 
 ### Mahmut — `mahmut` · 28 · Stone · 5★
 
 Carrowgate’li nalbant oğlu; Crown Guard’da Oren’in yetiştirdiği muhafız. Fadyme’yi teslim etmeyi reddettiği için hain ilan edildi. Dört yıllık arayış ve son iki yıllık beraberlik, uykusuz bakışına ve farklı köylerde tamir edilmiş zırhına yansır. Onun gelişimi, korumayı başkası adına karar vermekten ayırmaktır.
 
-Uzun, geniş omuzlu; koyu dağınık saç, hafif sakal, kahverengi göz; yıpranmış yarım plaka, parçalanmış oxblood pelerin. Göğüste yıldız ve üstünde **dövülerek boş bırakılan taç yuvası**; kılıç kabzasındaki arma yuvası sade demirle doldurulmuş. Kalkan heater biçiminde, görünür yamalı; açılış sonrası kenarında Yseldra’nın gri mührü var. Kısa, kuru mizahlı konuşur; öfke sessizliktir. Pozu koruyucu ama sürekli kahramanca bağıran değildir. Kaynak: [mahmut.md](../lore/characters/mahmut.md), `cs_mahmut_1–2`.
+Uzun, geniş omuzlu; koyu dağınık saç, hafif sakal, kahverengi göz; yıpranmış yarım plaka, parçalanmış oxblood pelerin. Göğüste yıldız ve üstünde **dövülerek boş bırakılan taç yuvası**; kılıç kabzasındaki arma yuvası sade demirle doldurulmuş. Kalkan heater biçiminde, görünür yamalı; açılış sonrası kenarında Yseldra’nın gri mührü var. Kısa, kuru mizahlı konuşur; öfke sessizliktir. Pozu koruyucu ama sürekli kahramanca bağıran değildir. Kaynak: [mahmut.md](../../06_Characters/Playable/mahmut.md), `cs_mahmut_1–2`.
 
 ### Fadyme — `fadyme` · 22 · Veil · 5★
 
 Kralın tanınmış kızı ve anne tarafından son yaşayan çan soyu kızı. Başta durumunu saklar; yolun sonunda tanıklık edilmesini ve kendi seçimini ister. “Kurtarılacak görev” olmaktan çok yol arkadaşı olmayı arzular. Yüzünde ağırbaşlılık, ince mizah ve saklanan yorgunluk birlikte bulunmalı; mutluluk sahneleri de kimliğin parçasıdır.
 
-Uzun soluk kül sarısı saç, **mor göz**, derin erik kapüşon, siyah yüksek yakalı elbise, gümüş-lila işleme, beyaz atkı. Alında kapüşonun ön kenarındaki kırık gümüş taç parçası; yüzün yanında ayrı küçük gümüş çan saç tokası; zincirde **gümüş diken tokmaklı çan**. Bu üç nesne birbirinin yerine kullanılmaz. Default art’ta hastalık izi yok; sahne varyantları ayrı. Mahmut’tan korunmayı bekleyen pasif duruş yerine nazik ama kesin seçimler ve gerektiğinde birlikte savaşma iradesi. Kaynak: [fadyme.md](../lore/characters/fadyme.md), A-001/002/004, C33–35, C40/43.
+Uzun soluk kül sarısı saç, **mor göz**, derin erik kapüşon, siyah yüksek yakalı elbise, gümüş-lila işleme, beyaz atkı. Alında kapüşonun ön kenarındaki kırık gümüş taç parçası; yüzün yanında ayrı küçük gümüş çan saç tokası; zincirde **gümüş diken tokmaklı çan**. Bu üç nesne birbirinin yerine kullanılmaz. Default art’ta hastalık izi yok; sahne varyantları ayrı. Mahmut’tan korunmayı bekleyen pasif duruş yerine nazik ama kesin seçimler ve gerektiğinde birlikte savaşma iradesi. Kaynak: [fadyme.md](../../06_Characters/Playable/fadyme.md), A-001/002/004, C33–35, C40/43.
 
 ### Kera Voss — `kera_voss` · 20 · Ember · 4★
 
 Glassford’lu camcı kızı ve Red Vial archive simyacısı; sormadan yaptığı kan analizlerinin suç ortaklığıyla yüzleşir. Hesper Doyle’ın şapkası ve pirinç havanı kişisel mirastır. Saçı on dört yaşındaki bir kaza nedeniyle kül gümüşüdür, Veyr akrabalığı nedeniyle değildir. Kusursuz formülden etik sorulara geçer; Part II’de eksik formülü Cael’e alternatiftir.
 
-Küçük, hızlı; kısa/omuz boyu dağınık kül gümüşü saç, amber göz; çok geniş koyu şapka ve kor gözlüğü, krem önlükte tek yanık izi, şişe kemeri, pirinç el havanı. Şapka silüeti saçı baskın biçimde ayırır; Fadyme’nin kapüşonu yok. Kahverengi/krem/pirinç, kor turuncusu. Hızlı teknik sözler, yüksek sesle saklanan bakım. Kaynak: [kera_voss.md](../lore/characters/kera_voss.md), `cs_kera_voss_1–4`.
+Küçük, hızlı; kısa/omuz boyu dağınık kül gümüşü saç, amber göz; çok geniş koyu şapka ve kor gözlüğü, krem önlükte tek yanık izi, şişe kemeri, pirinç el havanı. Şapka silüeti saçı baskın biçimde ayırır; Fadyme’nin kapüşonu yok. Kahverengi/krem/pirinç, kor turuncusu. Hızlı teknik sözler, yüksek sesle saklanan bakım. Kaynak: [kera_voss.md](../../06_Characters/Playable/kera_voss.md), `cs_kera_voss_1–4`.
 
 ### Brin Alder — `brin_alder` · 23 · Stone · 4★
 
 Köy muhafızı ve oduncu; babası Bram’ın çocukları kurtarırken çatıyı tutup ölmesi, onun yükü tek başına taşıma alışkanlığının kaynağıdır. Part I’de yardım istemeyi öğrenir. İsmi yeniden oyulan baba ağacı ve iki çatı sahnesi kişisel hikâyesinin somut resimleridir.
 
-Sağlam gövde, uzun tek kahverengi örgü; pine pelerin ve soluk kurt kürkü yaka, krem gambeson; el baltası ve **yuvarlak demir buckler**. Mahmut’un heater’ını, Nara’nın ağır plakasını kullanmaz. Az konuşur; sıcaklık küçük gülümseme ve işe yarayan hareketlerde görünür. Kaynak: [brin_alder.md](../lore/characters/brin_alder.md), `cs_brin_alder_1–4`.
+Sağlam gövde, uzun tek kahverengi örgü; pine pelerin ve soluk kurt kürkü yaka, krem gambeson; el baltası ve **yuvarlak demir buckler**. Mahmut’un heater’ını, Nara’nın ağır plakasını kullanmaz. Az konuşur; sıcaklık küçük gülümseme ve işe yarayan hareketlerde görünür. Kaynak: [brin_alder.md](../../06_Characters/Playable/brin_alder.md), `cs_brin_alder_1–4`.
 
 ### Nixie Vale — `nixie_vale` · 19 · Gale · 4★
 
 Yol kaydına yazılmış, Ochre Wheel kervanında büyümüş izci. Sahiplenilmekten korkar; aidiyeti kendi seçmek ister. Yalan söyleyen haritası, kervandan ayrılma nedeni ve hawk tüyü gerçek geçmişine bağlıdır. Hikâye sonunda ev bir kasaba değil, hareket eden yoldaş çevresidir.
 
-Açık, hızlı ve çok ifadeli yüz; **açık kahverengi saç, amber göz**; teal kapüşonda ochre astar, tüy iğnesi, uzun bağcıklı çizme, kısa yay, harita kutusu. Kapüşon gevşek/çoğunlukla geride; Fadyme’nin yüz saklayan derin kapüşonuyla ayrılır. Tehlikede neşeden düz ciddiyete geçer. Kaynak: [nixie_vale.md](../lore/characters/nixie_vale.md), C5, `cs_nixie_vale_1–4`; eski sheet hair issue açık.
+Açık, hızlı ve çok ifadeli yüz; **açık kahverengi saç, amber göz**; teal kapüşonda ochre astar, tüy iğnesi, uzun bağcıklı çizme, kısa yay, harita kutusu. Kapüşon gevşek/çoğunlukla geride; Fadyme’nin yüz saklayan derin kapüşonuyla ayrılır. Tehlikede neşeden düz ciddiyete geçer. Kaynak: [nixie_vale.md](../../06_Characters/Playable/nixie_vale.md), C5, `cs_nixie_vale_1–4`; eski sheet hair issue açık.
 
 ### Sister Aveline — `sister_aveline` · 26 · Dawn · 5★
 
 Saint Luthos rahibesi; bir tahliyede eksik saydığı çocuk yüzünden daima iki kez sayar. Bakımı kurumdan öne koyar; önceki taşıyıcıları teşekkürle kaydeden Kilise’nin hakikatiyle yüzleşir. Silahının ışığı azizin değil kapının içindeki kişinin içindir.
 
-Kısa bakır/kumral saç, kahverengi göz, çiller, dove-grey örtü; ivory/gri habit, saha önlüğü ve bandaj çantası; kendisinden yüksek **güneş diski fenerli reliquary staff**. Dawn altını küçük ışık odağı. Yumuşak yüz ama kriz anında kesin sayım ve öncelik. C42’ye göre örtülü tasarım. Kaynak: [sister_aveline.md](../lore/characters/sister_aveline.md), `cs_sister_aveline_1–4`.
+Kısa bakır/kumral saç, kahverengi göz, çiller, dove-grey örtü; ivory/gri habit, saha önlüğü ve bandaj çantası; kendisinden yüksek **güneş diski fenerli reliquary staff**. Dawn altını küçük ışık odağı. Yumuşak yüz ama kriz anında kesin sayım ve öncelik. C42’ye göre örtülü tasarım. Kaynak: [sister_aveline.md](../../06_Characters/Playable/sister_aveline.md), `cs_sister_aveline_1–4`.
 
 ### Sable Wren — `sable_wren` · 21 · Veil · 5★
 
 Eski Wren Post kuryesi; Crownfall’dan bir ay sonra Oren’in takip emrini taşıdı. Crownfall teslim emrinin taşıyıcısı değildir. Mühürleri kırıp artık içerideki insanlara kapı açar; karanlıkta sakladığı sırdan başkalarına bıraktığı fenerlere geçer. Hana’ya itirafı karakterin özel bağıdır.
 
-Siyah çene boyu bob ve tek uzun yan tutam, soluk gri göz, ink-blue/charcoal deri, amber **kırık kurye mühürleri**; ters tutulan çift kısa bıçak, kesilmiş çan ipi. Kapüşon aşağıda; iş anında ağıza çekilen cowl. C42’de açık omuz/yakayı destekleyen, opak ve kontrollü zarafet; VN/sheet ve ağır hikâye sahnelerinde sakin, mesleğine uygun kompozisyon. Fısıltılı, kuru, ölçülü; gri Inquisition mühürleriyle karıştırılmaz. Kaynak: [sable_wren.md](../lore/characters/sable_wren.md), [sheet prompt](../prompts/sheets/sable_wren_sheet.md), C36/42.
+Siyah çene boyu bob ve tek uzun yan tutam, soluk gri göz, ink-blue/charcoal deri, amber **kırık kurye mühürleri**; ters tutulan çift kısa bıçak, kesilmiş çan ipi. Kapüşon aşağıda; iş anında ağıza çekilen cowl. C42’de açık omuz/yakayı destekleyen, opak ve kontrollü zarafet; VN/sheet ve ağır hikâye sahnelerinde sakin, mesleğine uygun kompozisyon. Fısıltılı, kuru, ölçülü; gri Inquisition mühürleriyle karıştırılmaz. Kaynak: [sable_wren.md](../../06_Characters/Playable/sable_wren.md), [sheet prompt](../../12_Production_Notes/Prompt_Library/sheets/sable_wren_sheet.md), C36/42.
 
 ### Tilda Fen — `tilda_fen` · 24 · Tide · 4★
 
 Tuz yolu salgınlarında Old Marta’dan öğrendiği açık sözlü sağlıkçı; Iona’yla Undercity kliniğini kurdu. Umut veremeyeceği sözü vermez. Fadyme’nin gizlediği süreye karşı, hastanın zamanını konuşarak kullanmasına izin veren dürüst prognosis aynasıdır.
 
-Bronz ten, çiller, kısa koyu kıvırcık saç, sea-green baş bağı; yağmurluk/oilcloth cape, kıvrılmış kollar, bitki çantası, cam şişeli kamış değnek. Sea green/sand/driftwood. Sürekli işin ortasında, sert görünen ama hastayı bırakmayan yüz. Iona’nın dinleyen ve fener kaldıran duruşuyla ayrılır. Kaynak: [tilda_fen.md](../lore/characters/tilda_fen.md), `cs_tilda_fen_1–4`.
+Bronz ten, çiller, kısa koyu kıvırcık saç, sea-green baş bağı; yağmurluk/oilcloth cape, kıvrılmış kollar, bitki çantası, cam şişeli kamış değnek. Sea green/sand/driftwood. Sürekli işin ortasında, sert görünen ama hastayı bırakmayan yüz. Iona’nın dinleyen ve fener kaldıran duruşuyla ayrılır. Kaynak: [tilda_fen.md](../../06_Characters/Playable/tilda_fen.md), `cs_tilda_fen_1–4`.
 
 ### Rikka Ember — `rikka_ember` · 18 · Ember · 4★
 
 Kiln company tören muhafızı; sessiz Hollow gecesinde ninesini kaybetmesi gürültüsünün nedenidir. Korkuyu kahkaha ve gösteriyle taşır. Son kişisel sahnede uyuyan Fadyme’ye ilk kez sessizlik ve insanların nefesini sunar.
 
-Parlak kızıl çift kalın örgü, yüzde kurum, geniş grin; kapalı kırmızı lamellar, altın kordon; **çan püsküllü mızrak**. Eski görsel JSON’daki forge hammer kullanılmaz; runtime da `spear` der. Kera’nın turuncu şişelerine karşı brick/red/gold ve öne atılan silüet. Kaynak: [rikka_ember.md](../lore/characters/rikka_ember.md), `cs_rikka_ember_1–4`.
+Parlak kızıl çift kalın örgü, yüzde kurum, geniş grin; kapalı kırmızı lamellar, altın kordon; **çan püsküllü mızrak**. Eski görsel JSON’daki forge hammer kullanılmaz; runtime da `spear` der. Kera’nın turuncu şişelerine karşı brick/red/gold ve öne atılan silüet. Kaynak: [rikka_ember.md](../../06_Characters/Playable/rikka_ember.md), `cs_rikka_ember_1–4`.
 
 ### Mirel Quill — `mirel_quill` · 25 · Dawn · 5★
 
 Eski saray kâtibi; Crownfall sonrası kırk silme emrini hızına gurur duyarak kopyaladı. Kendi el yazısını tanıyıp aynı elle isimleri geri yazmayı seçer. Aveline’le kaydı/duayı düzeltme bağı ve Odelia’nın kardeşine tanıklığı, kişisel ilişkileridir.
 
-Siyah sıkı topuzda iki pirinç stylus, yuvarlak pirinç gözlük, mürekkepli parmak; **bottle-green** uzun kollu elbise, belge çantası, astrolabe folio ve stylus dagger. Özenli ve wry; korkarken resmîleşir. C42’den önceki kostüm/renk türevleri kullanılmaz. Kaynak: [mirel_quill.md](../lore/characters/mirel_quill.md), `cs_mirel_quill_1–4`.
+Siyah sıkı topuzda iki pirinç stylus, yuvarlak pirinç gözlük, mürekkepli parmak; **bottle-green** uzun kollu elbise, belge çantası, astrolabe folio ve stylus dagger. Özenli ve wry; korkarken resmîleşir. C42’den önceki kostüm/renk türevleri kullanılmaz. Kaynak: [mirel_quill.md](../../06_Characters/Playable/mirel_quill.md), `cs_mirel_quill_1–4`.
 
 ### Odelia Pike — `odelia_pike` · 22 · Tide · 4★
 
 Kıyı gözcüsü; Undercity’ye giden kardeşi Tomas’ın düğüm biçimli tebeşir izlerini takip eder. Kaçınan konuşması arazi okurken kesinleşir. İzlerin sonunu öğrenmesi kardeşinin adıyla tanıklık edilmesine bağlanır; onu geri getirmiş gibi resmedilmez.
 
-Güneşte koyulaşmış ten, kısa koyu ve tuz sertliğinde saç, **kırmızı örme liman şapkası**, gri-mavi yün ceket, ip düğmeleri, uzun yay, ağ düğümlü oklar. Yerdeki izi okuyan crouch. Nixie’nin kısa yayı, tüyü ve büyük gülüşüyle ayrılır. Kaynak: [odelia_pike.md](../lore/characters/odelia_pike.md), `cs_odelia_pike_1–4`.
+Güneşte koyulaşmış ten, kısa koyu ve tuz sertliğinde saç, **kırmızı örme liman şapkası**, gri-mavi yün ceket, ip düğmeleri, uzun yay, ağ düğümlü oklar. Yerdeki izi okuyan crouch. Nixie’nin kısa yayı, tüyü ve büyük gülüşüyle ayrılır. Kaynak: [odelia_pike.md](../../06_Characters/Playable/odelia_pike.md), `cs_odelia_pike_1–4`.
 
 ### Pippa Bell — `pippa_bell` · 20 · Gale · 4★
 
 Gezici oyuncuların çocuğu; isimleri listeden daha uzun hatırlanan şarkılara yazar. Silent Bell parçası charm’ı başkentli bir mülteciden aldı. Şarkısı kaydın karşısında tanıklık eder; 7-3’te charm cevap verir.
 
-Rose-pink kıvırcık saç, eğik tüylü şapka, eski konser afişlerinden yamalı ceket, küçük lute-sling, titreyen çan charm’ı. Rose/cream/mustard; ayağı sandalyede, çalarken görünen silüet. C42 sahne bluzu için açık omuz izni verir; frame kişiliği ve performans içindir. Neşe bir kostüm filtresi değildir; korkunca şaka kesilir. Kaynak: [pippa_bell.md](../lore/characters/pippa_bell.md), C42, `cs_pippa_bell_1–4`.
+Rose-pink kıvırcık saç, eğik tüylü şapka, eski konser afişlerinden yamalı ceket, küçük lute-sling, titreyen çan charm’ı. Rose/cream/mustard; ayağı sandalyede, çalarken görünen silüet. C42 sahne bluzu için açık omuz izni verir; frame kişiliği ve performans içindir. Neşe bir kostüm filtresi değildir; korkunca şaka kesilir. Kaynak: [pippa_bell.md](../../06_Characters/Playable/pippa_bell.md), C42, `cs_pippa_bell_1–4`.
 
 ### Nara Vell — `nara_vell` · 27 · Stone · 5★
 
 Beş kuşaktır köprü bekçisi Vell ailesinden; annesi Oren’i eğitti. İnsanları emrin önünde tutar. Üç kış önce yetişemediği araba yüzünden saniye ve mesafeleri ölçer. Oren’in yaşadığını söyleyip sonrası hakkında tahminde bulunmaması karakterinin doğruluk sınırıdır.
 
-Küçük ama ağır zırhlı; **koyu kahverengi ten**, kısa siyah saç ve tıraşlı yanlar; stone-grey plaka, dizde Vell armaları, **glaive ve compact kite shield**. Yerleşmiş dik/kapıyı tutan duruş, slate/moss-copper. Brin’in kürk/baltasına ve Mahmut’un pelerinine çevrilmez. Kaynak: [nara_vell.md](../lore/characters/nara_vell.md), `cs_nara_vell_1–4`.
+Küçük ama ağır zırhlı; **koyu kahverengi ten**, kısa siyah saç ve tıraşlı yanlar; stone-grey plaka, dizde Vell armaları, **glaive ve compact kite shield**. Yerleşmiş dik/kapıyı tutan duruş, slate/moss-copper. Brin’in kürk/baltasına ve Mahmut’un pelerinine çevrilmez. Kaynak: [nara_vell.md](../../06_Characters/Playable/nara_vell.md), `cs_nara_vell_1–4`.
 
 ### Clem Marr — `clem_marr` · 19 · Veil · 3★
 
 Glassford’lu mezarcının torunu; okumayı taşlardan öğrendi, eski mezar isimlerini ve kilitli kayıt odalarını çözer. Fadyme’nin yalanına ilk açık tanıklardan biridir. Sonunda onun adını her gün en iyi yazısıyla kaydeder; Hana’yla isimsiz mezar sırasına döneceklerdir.
 
-Küçük yuvarlak yüz, tebeşirli mouse-brown bob; heather-grey iş ceketi, mustard atkı, tebeşir/fırça cepleri, kesik sembollü **ritual lantern**. Diz çöküp taşı okur; macabre mizahı vardır ama yalnız sıkılmış ürkütücü yüz değildir. Kaynak: [clem_marr.md](../lore/characters/clem_marr.md), `cs_clem_marr_1–4`.
+Küçük yuvarlak yüz, tebeşirli mouse-brown bob; heather-grey iş ceketi, mustard atkı, tebeşir/fırça cepleri, kesik sembollü **ritual lantern**. Diz çöküp taşı okur; macabre mizahı vardır ama yalnız sıkılmış ürkütücü yüz değildir. Kaynak: [clem_marr.md](../../06_Characters/Playable/clem_marr.md), `cs_clem_marr_1–4`.
 
 ### Vespera Wisp — `vespera_wisp` · 23 · Veil · 5★
 
 Cam ve zaman araştırmacısı; Glass Bell ward’ına bilerek kendi saatleriyle ödeme yaptı. Genç ama uykuyla düzelmeyen yorgunluğu ve saçındaki tek beyaz tutam bunun izidir. Ana sahnede eksik anlattığı deneyimi companion hikâyesi tamamlar; Cael’in teklifinde rızadan önce bedeli öğrenmeyi savunur.
 
-Uzun midnight-blue saçta **yalnız tek frost-white tutam**, soluk mavi yorgun göz; cam boncuklu yüksek yakalı midnight/teal elbise. C42 ve güncel sheet subject açık omuz/üst sırt ve ayrı bell sleeves tarif eder; eski “fully covered” checklist bununla çelişir. Altıgen eskitilmiş altın cam fener ve sağ elde focus ring; soluk teal/beyaz kırılma ışığı, mor büyü değil. Çok sakin ve ölçülü duruş; zarafet mesafesinden gelir. Kaynak: [vespera_wisp.md](../lore/characters/vespera_wisp.md), [sheet prompt](../prompts/sheets/vespera_wisp_sheet.md), C42.
+Uzun midnight-blue saçta **yalnız tek frost-white tutam**, soluk mavi yorgun göz; cam boncuklu yüksek yakalı midnight/teal elbise. C42 ve güncel sheet subject açık omuz/üst sırt ve ayrı bell sleeves tarif eder; eski “fully covered” checklist bununla çelişir. Altıgen eskitilmiş altın cam fener ve sağ elde focus ring; soluk teal/beyaz kırılma ışığı, mor büyü değil. Çok sakin ve ölçülü duruş; zarafet mesafesinden gelir. Kaynak: [vespera_wisp.md](../../06_Characters/Playable/vespera_wisp.md), [sheet prompt](../../12_Production_Notes/Prompt_Library/sheets/vespera_wisp_sheet.md), C42.
 
 ### Hana Birch — `hana_birch` · 18 · Stone · 3★
 
 Ashen estate bekçisinin kızı; babası evin emirlerini reddedip gittikten sonra çocuklara bakmak için kaldı. Korku titreyen elde görünür, cesaret kapıyı yine açmasındadır. Fadyme’nin gördüğü kolunu saklama sözü taşınan yükdür; finale kadar sessizliğine gerekçe verir.
 
-Bal-kahverengi kısa saç, **birch-white bandana**, rust kapitone saha kıyafeti, diz üstü shield plate, halat ve **küçük kapan + kısa balta**. Eski recurve-bow/staff türevi kullanılmaz; runtime `hatchet_trap`. Sabit crouch, mesafeli çekingen bakış; harekette kesinleşir. Kaynak: [hana_birch.md](../lore/characters/hana_birch.md), `cs_hana_birch_1–4`.
+Bal-kahverengi kısa saç, **birch-white bandana**, rust kapitone saha kıyafeti, diz üstü shield plate, halat ve **küçük kapan + kısa balta**. Eski recurve-bow/staff türevi kullanılmaz; runtime `hatchet_trap`. Sabit crouch, mesafeli çekingen bakış; harekette kesinleşir. Kaynak: [hana_birch.md](../../06_Characters/Playable/hana_birch.md), `cs_hana_birch_1–4`.
 
 ### Thistle Roe — `thistle_roe` · 21 · Gale · 4★
 
 Saint Luthos bahçıvanlarının büyüttüğü, çan külünde bitki yetiştiren kişi. Owing-bell çiçeğinin borçlu saat yanında açmasını bilir; botanik bilgisi kozmetik değildir. Son kış tohumu hediyesi, baharı kendi görmeden başkası için ekme fikridir.
 
-Chestnut çift alçak topuz, geniş **hasır şapka**, kalın bahçe eldiveni, sage elbise üstünde topraklı önlük, tohum kutuları ve thorn crook. Sage/straw/earth. Kera’nın sivri saha şapkasına benzemez. Hafif kekemelik, elleri ne yapacağını bildiğinde kaybolur. Kaynak: [thistle_roe.md](../lore/characters/thistle_roe.md), `cs_thistle_roe_1–4`.
+Chestnut çift alçak topuz, geniş **hasır şapka**, kalın bahçe eldiveni, sage elbise üstünde topraklı önlük, tohum kutuları ve thorn crook. Sage/straw/earth. Kera’nın sivri saha şapkasına benzemez. Hafif kekemelik, elleri ne yapacağını bildiğinde kaybolur. Kaynak: [thistle_roe.md](../../06_Characters/Playable/thistle_roe.md), `cs_thistle_roe_1–4`.
 
 ### Iona Mist — `iona_mist` · 24 · Tide · 4★
 
 Glassford nehir fenercilerinden; boğulanların adını tekneler geçerken okuyarak tanıklık eder. Tilda yaşayanı tedavi ederken Iona kayıp kişiyi ve hatırayı kıyıya yöneltir. Fadyme’nin adını her gece söyleme sözü Law of Hours içinde süreyi erteleyen iştir.
 
-Olive ten, uzun düz siyah saçta mavi parıltı; deep-navy oilskin yağmurluk, kapüşon aşağı; **cam nehir feneri ve tidal censer**. Amber fener ışığı/fog-grey, başı dinlerken hafif eğik. Tilda’nın kıvırcık saçını veya Vespera’nın altıgen fener/sihir silüetini kopyalamaz. Kaynak: [iona_mist.md](../lore/characters/iona_mist.md), `cs_iona_mist_1–4`.
+Olive ten, uzun düz siyah saçta mavi parıltı; deep-navy oilskin yağmurluk, kapüşon aşağı; **cam nehir feneri ve tidal censer**. Amber fener ışığı/fog-grey, başı dinlerken hafif eğik. Tilda’nın kıvırcık saçını veya Vespera’nın altıgen fener/sihir silüetini kopyalamaz. Kaynak: [iona_mist.md](../../06_Characters/Playable/iona_mist.md), `cs_iona_mist_1–4`.
 
 ### Jori Flint — `jori_flint` · 20 · Ember · 3★
 
 Oakhaven demircisi; ailesinin “köprü” diye ürettiği zincirlerin kafes oluşuyla yüzleşir. Kapı yerine insanın yanında hareket eden kalkan yapmak ister. Part II hedefi kırıp geçmek değil, açacak anahtarı üretmektir.
 
-Kısa deriyle bağlı ginger saç, burunda kurum, kollarda yanık çilleri, kalın deri önlük ve kol koruması; **yuvarlak küçük kalkan ve demirci çekici**. Soot/iron/copper; kalkan önde, çekiç hazır. Rikka’ya yanlış aktarılan çekiç silüeti burada anlamlıdır. Kızgın grumbling altında utanç; bakımını emir gibi söyler. Kaynak: [jori_flint.md](../lore/characters/jori_flint.md), `cs_jori_flint_1–4`.
+Kısa deriyle bağlı ginger saç, burunda kurum, kollarda yanık çilleri, kalın deri önlük ve kol koruması; **yuvarlak küçük kalkan ve demirci çekici**. Soot/iron/copper; kalkan önde, çekiç hazır. Rikka’ya yanlış aktarılan çekiç silüeti burada anlamlıdır. Kızgın grumbling altında utanç; bakımını emir gibi söyler. Kaynak: [jori_flint.md](../../06_Characters/Playable/jori_flint.md), `cs_jori_flint_1–4`.
 
 ### Marek Vane — `marek_vane` · 30 · Gale · 4★
 
 Eski sınır askeri ve Crown habercisi; Mahmut’un hainlik emrini on bir köyde okudu. Artık kâğıt yerine insan taşır; gerçeği herkesin önünde geri ilan eder. Yolu “emre uyup yürümek” yerine birlikte yürümeyi kabul eden insanlardan kurar.
 
-Uzun koyu kahverengi bağlı saç, kısa sakal, gri göz; yol pelerini ve kapalı deri ceket; sırtta **viola**, elde **flaması kaldırılmış spear-horn**. Road-brown/faded-blue/brass; yürüyen silüet ve sayılan ritim. Eski visual JSON’daki asılı banner pennant takılmaz. Kaynak: [marek_vane.md](../lore/characters/marek_vane.md), `cs_marek_vane_1–4`.
+Uzun koyu kahverengi bağlı saç, kısa sakal, gri göz; yol pelerini ve kapalı deri ceket; sırtta **viola**, elde **flaması kaldırılmış spear-horn**. Road-brown/faded-blue/brass; yürüyen silüet ve sayılan ritim. Eski visual JSON’daki asılı banner pennant takılmaz. Kaynak: [marek_vane.md](../../06_Characters/Playable/marek_vane.md), `cs_marek_vane_1–4`.
 
 ## 7. Antagonist, NPC ve boss brief’leri
 
-- **Yseldra Vale, 34:** eski Inquisitor; yedi kurbanın suçluluğu ve seçim hakkını kaldıran koruma. Uzun dik duruş, koyu saç; yas örtüsünün altında **ayrı kemik beyazı yarım maske**, bir göz boyunca çatlak; black-plum mail/surcoat; yedi **gri, kesilmiş, çentikli** mühür; kırık pirinç çağrı çanı ve tokmağı bağlayan kırmızı ip. Kafatası veya porselen yüz maskenin yerine geçmez. 2-5 ölümü değil kaçışı gösterir. [yseldra.md](../lore/characters/yseldra.md).
-- **Cael Veyr:** Crownfall’da 41; güncel yaş bilinmez, otomatik 47 yazılmaz. Fadyme’nin **dayısı**; kendi geçmişini kurtarmak için hesabı tekrar yazan nazik tehdit. Koyu saç, gri göz; yüksek siyah court collar, antique-gold scale paneller, boş signet yuvası, **boş kadran ve ibresiz saat**. Yüzü parçalı yansımada; kalıcı maske yok. [cael.md](../lore/characters/cael.md).
+- **Yseldra Vale, 34:** eski Inquisitor; yedi kurbanın suçluluğu ve seçim hakkını kaldıran koruma. Uzun dik duruş, koyu saç; yas örtüsünün altında **ayrı kemik beyazı yarım maske**, bir göz boyunca çatlak; black-plum mail/surcoat; yedi **gri, kesilmiş, çentikli** mühür; kırık pirinç çağrı çanı ve tokmağı bağlayan kırmızı ip. Kafatası veya porselen yüz maskenin yerine geçmez. 2-5 ölümü değil kaçışı gösterir. [yseldra.md](../../06_Characters/Antagonists_NPCs/yseldra.md).
+- **Cael Veyr:** Crownfall’da 41; güncel yaş bilinmez, otomatik 47 yazılmaz. Fadyme’nin **dayısı**; kendi geçmişini kurtarmak için hesabı tekrar yazan nazik tehdit. Koyu saç, gri göz; yüksek siyah court collar, antique-gold scale paneller, boş signet yuvası, **boş kadran ve ibresiz saat**. Yüzü parçalı yansımada; kalıcı maske yok. [cael.md](../../06_Characters/Antagonists_NPCs/cael.md).
 - **Marshal Oren:** Mahmut’un eski öğretmeni; eksik emri onur sayan, köprüyü insanlara açık tutmakta geç kalmış kumandan. Düşmanlığı, pişmanlığı ve sivillere verdiği son hizmet birlikte görünmeli. Köprüden canlı ayrılır; sonrasını ve yaşını icat etmeyiz. Kaynak: 5-5, `cs_nara_vell_2/4`, C2/27.
 - **Captain Rusk:** C.V. ve Inquisition mührünü taşıyan paralı asker; signal banner/volley okunur. Yseldra’nın emrini taşıyan her kişiyi onun sadık astı gibi çizmek yanlış. Kaynak: 3-5 ve enemy lore.
 - **Red Vial Matron:** ledger kanadının insanı tarif malzemesi sayan yöneticisi; glass ward, flask racks ve korozif vapor. Kera’nın archive mirasıyla aynı nesneleri farklı amaç için kullanır. Kaynak: 4-5 ve Red Vial faction.
-- **Ashen Lord / Lord Edric Aske:** yaklaşık altmış yaşındaki asil portresinden tutunan Wraith; Schedule muhafızı, Fadyme’nin annesini sakladı, Cael’e Schedule’ı vermeyi reddetti. Son “Crown’dan sakla” emri hizmetlileri kapatan eve dönüştü. Soot-grey/tarnished-gold/cold-glass; ayna çerçevesi kimliği taşır. **Edric Aske adı Part I’de söylenmez.** [ashen_lord.md](../lore/characters/ashen_lord.md), C38.
+- **Ashen Lord / Lord Edric Aske:** yaklaşık altmış yaşındaki asil portresinden tutunan Wraith; Schedule muhafızı, Fadyme’nin annesini sakladı, Cael’e Schedule’ı vermeyi reddetti. Son “Crown’dan sakla” emri hizmetlileri kapatan eve dönüştü. Soot-grey/tarnished-gold/cold-glass; ayna çerçevesi kimliği taşır. **Edric Aske adı Part I’de söylenmez.** [ashen_lord.md](../../06_Characters/Antagonists_NPCs/ashen_lord.md), C38.
 - **Ash-Maw:** çene içinde Whispering Bell parçası taşıyan ölü kurt; sıradan büyük kurt değildir. Shard hâlâ sayar, common loot süsü yapılmaz. 1-5, world rule 7.
-- **Eclipse Construct:** cathedral ölçeğinde pirinç/taş Hinge, içinde boş çan; crown arches, zincir eklemleri, sunak blokları. Canlı beden veya Cael’in canavar biçimi değildir. Üç pylon, iki faz; makine düşer, çan ve borç sürer. [Story Bible §5](../story/STORY_BIBLE_PART1.md).
+- **Eclipse Construct:** cathedral ölçeğinde pirinç/taş Hinge, içinde boş çan; crown arches, zincir eklemleri, sunak blokları. Canlı beden veya Cael’in canavar biçimi değildir. Üç pylon, iki faz; makine düşer, çan ve borç sürer. [Story Bible §5](../../01_Story_Bible/STORY_BIBLE_PART1.md).
 
 Yan NPC’ler de okundu: shrine keeper, old priest, Undercity alchemist, hizmetliler, mülteciler, innkeeper, potter, ledger agent, Council herald. Adı geçen Hesper Doyle, Old Marta, Tomas Pike, Bram Alder, Liora ve Aren’in yeni yüz/yaş tasarımı bu okuma ile icat edilmedi.
 
@@ -254,7 +254,7 @@ Google Play kartı, yıldız/indirme sayıları, install düğmesi ve tagline mo
 
 ## 9. Spoiler, ifade ve durum kuralları
 
-[SPOILER_UNLOCK_POLICY.md](../canon/SPOILER_UNLOCK_POLICY.md) kaynak gate’lerini korur. Fadyme’nin Veyr soyadı ilk 7-3’te söylenir; Cael’in kimliği/dayılığı itiraftan sonra gelir. Başlangıç title/giriş artwork’ünde klinik prognosis, akrabalık şeması, kralın son sayfasının okunabilir içeriği veya geç hikâye curse state kullanılmaz. Dünya adı Veyrhold ve çan/tutulma sembolleriyle kimlik kurulabilir.
+[SPOILER_UNLOCK_POLICY.md](../SPOILER_UNLOCK_POLICY.md) kaynak gate’lerini korur. Fadyme’nin Veyr soyadı ilk 7-3’te söylenir; Cael’in kimliği/dayılığı itiraftan sonra gelir. Başlangıç title/giriş artwork’ünde klinik prognosis, akrabalık şeması, kralın son sayfasının okunabilir içeriği veya geç hikâye curse state kullanılmaz. Dünya adı Veyrhold ve çan/tutulma sembolleriyle kimlik kurulabilir.
 
 Fadyme’nin dört durumunun onaylı yönü: pale cold fingers → beyaz atkıya saklanan küçük kan lekesi → 5-4’te bir bone-white lock → 7-5’te ince black-gold çizgiler. Crimson curse çizgisi yok. Açılış kaynak metnindeki erken kan iziyle C43 sıralaması arasındaki açık konu aşağıdadır; sıradan profile/default görselde kan veya işaret yok.
 
@@ -275,7 +275,7 @@ UI/subtitles **İngilizce**, voice **Japonca**. Ses tonları birbirinden farklı
 | Açılışta kanın zamanı | `opening_sad_scene.direction_en` blood-marked glove, `opening_007` red stain der; C43 kanı 3-3 adımıyla tarif eder | Özel opening CG üretmeden olay sırasını netleştir; default art’ta kan yok. Yeni başlangıç hikâyesi uydurma |
 | 7-4 takım yönergesi | `vn_7_4.battle_transition_en`: iki lead + “four chosen allies” = altı; hemen sonraki sahne ve battle sözleşmesi beş der | Story CG kadrosunu bu tutarsız ifadeyle kilitleme; normal battle beş. Source satırı bu tur değiştirilmedi |
 | Yan yol registry’si | Registry altı yan yolu “none” işaretler; location_briefs 2026-09-30 altısını da içerir | Mevcut brief’leri kullan; registry notunu üretim adımında güncelle |
-| Source/runtime terfisi | 419/409; 10 eksik line_id, 2 değişen metin; scene music_cue 51/1; VO unlock 40/0; 9 Codex farkı | [RECONCILIATION.md](../migration/RECONCILIATION.md) ve evidence JSON ile ayrı içerik işi; tasarım adına snapshot overwrite yok |
+| Source/runtime terfisi | 419/409; 10 eksik line_id, 2 değişen metin; scene music_cue 51/1; VO unlock 40/0; 9 Codex farkı | [RECONCILIATION.md](../../12_Production_Notes/Migration_Audits/RECONCILIATION.md) ve evidence JSON ile ayrı içerik işi; tasarım adına snapshot overwrite yok |
 | Ana tema | `audio_cues_part1.json` içinde `flow.title=null`; bulunan Fadyme reference theme, owner’ın ana teması değildir | Owner dosyası/cue eşlemesi doğrulanmadan startup müziği tamam sayılmaz |
 | JP ses | 201 satırlık Fadyme script DRAFT/native review pending; 25 seçilmiş dosya | 220 VO metin kaydı üretilmiş kayıt sayısı değildir; audio kabulü ayrı |
 
@@ -285,6 +285,6 @@ UI/subtitles **İngilizce**, voice **Japonca**. Ses tonları birbirinden farklı
 
 Dünya/ana hikâye/20 karakter ve yan içerik okuması tamamlandı. Bu belge çizim brief’lerinin ortak bilgi tabanıdır. Mevcut kaynakların tüm geleceği yazılmış değildir: Part II’nin tamamına ait senaryo olduğu iddia edilmez; kaynaklar yeni karar gelirse yeniden okunur.
 
-Okuma tamamlandıktan sonra **SovTaym Studios** için [gerçek web ön araştırması](STUDIO_NAME_RESEARCH_2026-10-05.md) yapıldı; resmî kayıt sorgularının erişim eksikleri açık kaldı. [İlk ortak sanat sistemi](ART_SYSTEM_V01.md), key-art adayları ve ayrı Godot inceleme sahnesi hazırlandı. Sonraki somut üretim ilk oyun kontrollü **EngineSplashScreen**, ardından stüdyo/title akışıdır; tema dosyası ve aday stüdyo adı somut eksik olarak izlenir. Her oyuncu ekranının önizleme, ayrı ID ve Godot bağlantısı aynı adımda tamamlanır; TitleScreen ile HubScreen ayrılır. UI sisteminden sonra final Fadyme paketi, diğer karakterler ve mekânlar sırayla tamamlanır. Kullanıcının yeni bir öncelik vermesi bu sırayı günceller.
+Okuma tamamlandıktan sonra **SovTaym Studios** için [gerçek web ön araştırması](../../12_Production_Notes/Design_Notes/STUDIO_NAME_RESEARCH_2026-10-05.md) yapıldı; resmî kayıt sorgularının erişim eksikleri açık kaldı. [tarihsel ilk sanat sistemi (reddedilmiş görsel set)](https://github.com/mucaeksi/unaware-of-my-demise/blob/d76cc4c/narrative/design/ART_SYSTEM_V01.md), key-art adayları ve ayrı Godot inceleme sahnesi hazırlandı. Sonraki somut üretim ilk oyun kontrollü **EngineSplashScreen**, ardından stüdyo/title akışıdır; tema dosyası ve aday stüdyo adı somut eksik olarak izlenir. Her oyuncu ekranının önizleme, ayrı ID ve Godot bağlantısı aynı adımda tamamlanır; TitleScreen ile HubScreen ayrılır. UI sisteminden sonra final Fadyme paketi, diğer karakterler ve mekânlar sırayla tamamlanır. Kullanıcının yeni bir öncelik vermesi bu sırayı günceller.
 
 Kaynak okuması önce tamamlandı; yaratıcı üretim bundan sonra başladı. Eklenen artwork ve Godot aday tema/inceleme sahnesi ayrı üretim kaydındadır; kaynak canon/script ve aktif startup/auth/patch/backend değiştirilmedi. Eski üretimin sanat otoritesi güncellendi; orijinaller ve hash kanıtları korundu. Kaynak/render/device kabulü birbirinin yerine kullanılmadı. Okuma için ilgisiz oyun test turu eklenmedi; yeni inceleme sahnesinin kendi import/parse, davranış ve render kontrolleri yapıldı.

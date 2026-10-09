@@ -21,7 +21,8 @@
         {"line_id":"node_5_1_post_001","speaker_id":"marek_vane","speaker_display":"Marek","text_en":"The refugees are across. I will carry your warning to the next watch post.","emotion":"resolved","voice_track":"jp"},
         {"line_id":"node_5_1_post_002","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"You sing as if the bridge is still standing.","emotion":"curious","voice_track":"jp"},
         {"line_id":"node_5_1_post_003","speaker_id":"marek_vane","speaker_display":"Marek","text_en":"A road is not a stone span. It is whoever agrees to walk it.","emotion":"gentle","voice_track":"jp"}
-      ]
+      ],
+      "music_cue":"pre: bgm_ch5_bridge — fog, wind in chains; a solo horn for Marek's pennant | post: bgm_mahmut_theme (Marek recognizes the crest)"
     },
     {
       "scene_id":"vn_5_2","stage_id":"5-2","title_en":"The Gatekeeper’s Measure","location_id":"bridge_forsaken",
@@ -37,7 +38,8 @@
         {"line_id":"node_5_2_post_001","speaker_id":"nara_vell","speaker_display":"Nara","text_en":"The civilians are clear. I will stay with the gate until the last cart crosses.","emotion":"resolved","voice_track":"jp"},
         {"line_id":"node_5_2_post_002","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"You always put yourself between people and the fall.","emotion":"soft","voice_track":"jp"},
         {"line_id":"node_5_2_post_003","speaker_id":"nara_vell","speaker_display":"Nara","text_en":"Someone has to be the first thing the stone hits.","emotion":"plain","voice_track":"jp"}
-      ]
+      ],
+      "music_cue":"pre: bgm_ch5_bridge (uneasy layer), winch ratchets as percussion | post: bgm_warmth"
     },
     {
       "scene_id":"vn_5_3","stage_id":"5-3","title_en":"A Knife Between Orders","location_id":"bridge_forsaken",
@@ -54,7 +56,8 @@
         {"line_id":"node_5_3_post_002","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"My commander signed it.","emotion":"stunned","voice_track":"jp"},
         {"line_id":"node_5_3_post_003","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"Then we ask him why.","emotion":"quiet","voice_track":"jp"},
         {"line_id":"node_5_3_post_004","speaker_id":"sable_wren","speaker_display":"Sable","text_en":"If he answers honestly, I will be surprised.","emotion":"cool","voice_track":"jp"}
-      ]
+      ],
+      "music_cue":"pre: bgm_tension (stealth, pizzicato) | post: bgm_revelation on 'This order names Fadyme.'"
     },
     {
       "scene_id":"vn_5_4","stage_id":"5-4","title_en":"The White Strand","location_id":"bridge_forsaken",
@@ -72,7 +75,8 @@
         {"line_id":"node_5_4_post_005","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"Consistent is not the same as well.","emotion":"quiet","voice_track":"jp"},
         {"line_id":"node_5_4_post_006","speaker_id":"narrator","speaker_display":"Narration","text_en":"She does not answer. For the first time, he does not let the question go, and for the first time, she has nothing ready.","emotion":"somber","voice_track":"jp_narration"},
         {"line_id":"node_5_4_post_004","speaker_id":"fadyme_thought","speaker_display":"Fadyme (thought)","text_en":"A white strand. One more thing the mirror will remember before he does.","emotion":"sad","voice_track":"jp_inner"}
-      ]
+      ],
+      "music_cue":"pre: bgm_ch5_bridge | the bell pulse: sting_bell_toll, then silence while the lock turns white; bgm_fadyme_theme returns only on 'Only tired.' | post: bgm_quiet_sorrow"
     },
     {
       "scene_id":"vn_5_5","stage_id":"5-5","title_en":"The Commander Who Remained","location_id":"bridge_forsaken",
@@ -90,11 +94,14 @@
         {"line_id":"node_5_5_post_001","speaker_id":"marshal_oren","speaker_display":"Oren","text_en":"The Ashen estate has the full schedule. Go before the bridge falls.","emotion":"regret","voice_track":"jp"},
         {"line_id":"node_5_5_post_002","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"You are coming with us.","emotion":"hard","voice_track":"jp"},
         {"line_id":"node_5_5_post_003","speaker_id":"marshal_oren","speaker_display":"Oren","text_en":"No. Someone must keep this span open. I will not fail the people twice.","emotion":"resolved","voice_track":"jp"},
+        {"line_id":"node_5_5_post_005","speaker_id":"rikka_ember","speaker_display":"Rikka","text_en":"My kiln company is guarding the refugee road. They need someone loud. I am extremely loud!","emotion":"determined","voice_track":"jp"},
         {"line_id":"node_5_5_post_004","speaker_id":"fadyme_thought","speaker_display":"Fadyme (thought)","text_en":"The white strand is small. I can still hide something small.","emotion":"sad","voice_track":"jp_inner"}
       ],
-      "battle_transition_en":"Oren stays to hold the bridge; Marek and Nara escort survivors, Rikka returns to her kiln company, and Sable advances toward the estate."
+      "battle_transition_en":"Oren stays to hold the bridge; Marek and Nara escort survivors, Rikka returns to her kiln company, and Sable advances toward the estate.",
+      "music_cue":"pre: bgm_mahmut_theme (minor, slow march) facing Oren | battle: bgm_boss_human (commander variation, march snare) | post: bgm_mahmut_theme, solo cello"
     },
-    {"scene_id": "ch5_road", "placement": "after_stage_4-5", "counts_as_stage": false, "ration_cost": 0, "title_en": "Fog in the Ravine", "location_id": "eastern_ravine_road", "direction_en": "Four days east. Refugees move the other way, carrying carts and children.", "lines": [{"line_id": "ch5_road_001", "speaker_id": "refugee_woman", "speaker_display": "Refugee", "text_en": "Do not cross the old bridge. Soldiers on it. Crown colors, upside down.", "emotion": "afraid", "voice_track": "jp"}, {"line_id": "ch5_road_002", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "Whose soldiers?", "emotion": "hard", "voice_track": "jp"}, {"line_id": "ch5_road_003", "speaker_id": "refugee_woman", "speaker_display": "Refugee", "text_en": "A marshal's. They are looking for a woman with a bell pin.", "emotion": "afraid", "voice_track": "jp"}, {"line_id": "ch5_road_004", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "Then she had better keep her hood up.", "emotion": "wry", "voice_track": "jp"}, {"line_id": "ch5_road_005", "speaker_id": "mahmut_thought", "speaker_display": "Mahmut (thought)", "text_en": "Crown colors, upside down. Oren always hated sloppy banners.", "emotion": "grim", "voice_track": "jp_inner"}]},
+    {"scene_id": "ch5_road", "placement": "after_stage_4-5", "counts_as_stage": false, "ration_cost": 0, "title_en": "Fog in the Ravine", "location_id": "eastern_ravine_road", "direction_en": "Four days east. Refugees move the other way, carrying carts and children.", "lines": [{"line_id": "ch5_road_001", "speaker_id": "refugee_woman", "speaker_display": "Refugee", "text_en": "Do not cross the old bridge. Soldiers on it. Crown colors, upside down.", "emotion": "afraid", "voice_track": "jp"}, {"line_id": "ch5_road_002", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "Whose soldiers?", "emotion": "hard", "voice_track": "jp"}, {"line_id": "ch5_road_003", "speaker_id": "refugee_woman", "speaker_display": "Refugee", "text_en": "A marshal's. They are looking for a woman with a bell pin.", "emotion": "afraid", "voice_track": "jp"}, {"line_id": "ch5_road_004", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "Then she had better keep her hood up.", "emotion": "wry", "voice_track": "jp"}, {"line_id": "ch5_road_005", "speaker_id": "mahmut_thought", "speaker_display": "Mahmut (thought)", "text_en": "Crown colors, upside down. Oren always hated sloppy banners.", "emotion": "grim", "voice_track": "jp_inner"}],
+      "music_cue":"bgm_road (against the flow of refugees; muted)"},
     {
       "scene_id": "ch5_camp",
       "placement": "after_stage_5-5",
@@ -152,7 +159,8 @@
           "emotion": "warm",
           "voice_track": "jp_narration"
         }
-      ]
+      ],
+      "music_cue":"bgm_camp (night, very sparse); two cups of tea: no melody, just a warm pad"
     }
   ]
 }

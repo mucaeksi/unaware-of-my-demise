@@ -667,10 +667,10 @@
             },
             {
               "line_id": "cs_brin_alder_2_002",
-              "speaker_id": "jori_flint",
-              "speaker_display": "Jori",
-              "text_en": "I can recut it. I brought a chisel.",
-              "emotion": "eager",
+              "speaker_id": "shrine_keeper",
+              "speaker_display": "Shrine Keeper",
+              "text_en": "I can recut it. I keep a chisel for the register board.",
+              "emotion": "kind",
               "voice_track": "jp"
             },
             {
@@ -683,9 +683,9 @@
             },
             {
               "line_id": "cs_brin_alder_2_004",
-              "speaker_id": "jori_flint",
-              "speaker_display": "Jori",
-              "text_en": "Then say his name while I cut. Then they are yours.",
+              "speaker_id": "shrine_keeper",
+              "speaker_display": "Shrine Keeper",
+              "text_en": "Then say his name while I cut. Then the letters are yours.",
               "emotion": "earnest",
               "voice_track": "jp"
             },
@@ -728,10 +728,10 @@
             },
             {
               "line_id": "cs_brin_alder_3_002",
-              "speaker_id": "marek_vane",
-              "speaker_display": "Marek",
-              "text_en": "You said this sentence at a shrine once. Mahmut told me.",
-              "emotion": "calm",
+              "speaker_id": "nixie_vale",
+              "speaker_display": "Nixie",
+              "text_en": "You said that at the shrine. Word for word. I was there.",
+              "emotion": "knowing",
               "voice_track": "jp"
             },
             {
@@ -760,9 +760,9 @@
             },
             {
               "line_id": "cs_brin_alder_3_006",
-              "speaker_id": "marek_vane",
-              "speaker_display": "Marek",
-              "text_en": "That is how a road is made.",
+              "speaker_id": "nixie_vale",
+              "speaker_display": "Nixie",
+              "text_en": "Twelve hands and one stubborn woodcutter. That is a road.",
               "emotion": "approving",
               "voice_track": "jp"
             }
@@ -1546,9 +1546,9 @@
             },
             {
               "line_id": "cs_tilda_fen_1_002",
-              "speaker_id": "rikka_ember",
-              "speaker_display": "Rikka",
-              "text_en": "That is fair, but also hurtful.",
+              "speaker_id": "jori_flint",
+              "speaker_display": "Jori",
+              "text_en": "I was not joking. I was complaining.",
               "emotion": "wounded",
               "voice_track": "jp"
             },
@@ -3187,7 +3187,7 @@
               "line_id": "cs_vespera_wisp_3_003",
               "speaker_id": "vespera_wisp",
               "speaker_display": "Vespera",
-              "text_en": "Then the glass has been keeping your absence for twenty years. That is loyalty, of a kind.",
+              "text_en": "Then the glass has been keeping your absence for fifteen years. That is loyalty, of a kind.",
               "emotion": "gentle",
               "voice_track": "jp"
             },

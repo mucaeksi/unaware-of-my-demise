@@ -21,7 +21,8 @@
         {"line_id":"node_4_1_post_001","speaker_id":"odelia_pike","speaker_display":"Odelia","text_en":"The nest is behind us. The Guild ward is ahead.","emotion":"measured","voice_track":"jp"},
         {"line_id":"node_4_1_post_002","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"You did not have to follow us down here.","emotion":"kind","voice_track":"jp"},
         {"line_id":"node_4_1_post_003","speaker_id":"odelia_pike","speaker_display":"Odelia","text_en":"I dislike unanswered tracks. Yours are the loudest.","emotion":"dry","voice_track":"jp"}
-      ]
+      ],
+      "music_cue":"pre: bgm_ch4_undercity — dripping water, low drone | post: bgm_ch4_undercity"
     },
     {
       "scene_id":"vn_4_2","stage_id":"4-2","title_en":"The Red Vial Ward","location_id":"undercity_subterranean",
@@ -40,7 +41,8 @@
         {"line_id":"node_4_2_post_004","speaker_id":"iona_mist","speaker_display":"Iona","text_en":"Then keep breathing while you are in it.","emotion":"quiet","voice_track":"jp"},
         {"line_id":"node_4_2_post_005","speaker_id":"tilda_fen","speaker_display":"Tilda","text_en":"The captain's order you carried, Sir Knight. It does not ask for her. It asks for her blood, sealed and delivered.","emotion":"grim","voice_track":"jp"},
         {"line_id":"node_4_2_post_006","speaker_id":"kera_voss","speaker_display":"Kera","text_en":"Then someone in my Guild wrote a recipe around a person.","emotion":"furious","voice_track":"jp"}
-      ]
+      ],
+      "music_cue":"pre: bgm_warmth (muted: a clinic in a storage room) | post: bgm_quiet_sorrow on 'Fear takes longer.'"
     },
     {
       "scene_id":"vn_4_3","stage_id":"4-3","title_en":"The Measure of a Life","location_id":"undercity_subterranean",
@@ -59,7 +61,8 @@
         {"line_id":"node_4_3_post_003","speaker_id":"clem_marr","speaker_display":"Clem","text_en":"That is a lie.","emotion":"direct","voice_track":"jp"},
         {"line_id":"node_4_3_post_004","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"It is a small one. Let me keep it.","emotion":"pleading","voice_track":"jp"},
         {"line_id":"node_4_3_post_005","speaker_id":"fadyme_thought","speaker_display":"Fadyme (thought)","text_en":"Mahmut has already given enough years to my name.","emotion":"sad","voice_track":"jp_inner"}
-      ]
+      ],
+      "music_cue":"pre: bgm_ch4_undercity (uneasy layer) | post: bgm_fadyme_theme — first time the theme is played in a minor key"
     },
     {
       "scene_id":"vn_4_4","stage_id":"4-4","title_en":"The Elixir Lie","location_id":"undercity_subterranean",
@@ -76,12 +79,13 @@
         {"line_id":"node_4_4_post_001","speaker_id":"kera_voss","speaker_display":"Kera","text_en":"I will try. I will not promise a cure.","emotion":"honest","voice_track":"jp"},
         {"line_id":"node_4_4_post_002","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"That is enough for tonight.","emotion":"tired","voice_track":"jp"},
         {"line_id":"node_4_4_post_003","speaker_id":"fadyme_thought","speaker_display":"Fadyme (thought)","text_en":"He accepted a hope because I asked him to. I will have to live with that.","emotion":"guilt","voice_track":"jp_inner"}
-      ]
+      ],
+      "music_cue":"pre: bgm_tension | post: bgm_fadyme_theme (piano only) while she refolds the letter; silence before 'I will not promise a cure.'"
     },
     {
       "scene_id":"vn_4_5","stage_id":"4-5","title_en":"The Red Vial Matron","location_id":"undercity_subterranean",
       "direction_en":"The Matron seals herself behind a glass ward and floods the chamber with corrosive vapor.",
-      "story_guests":["kera_voss","tilda_fen","iona_mist"],
+      "story_guests":["kera_voss","tilda_fen","iona_mist","jori_flint"],
       "tutorial_cards_en":[{"tutorial_id":"tutorial_boss_break_objects","trigger":"red_vial_flask_racks","pause_battle":true,"copy_en":"Breakable arena objects have their own health bar. Destroy the flask racks to reduce the Matron’s area damage."}],
       "pre_battle_lines":[
         {"line_id":"node_4_5_pre_001","speaker_id":"red_vial_matron","speaker_display":"Red Vial Matron","text_en":"The heir’s blood is not a cure. It is the last ingredient.","emotion":"hungry","voice_track":"jp"},
@@ -91,14 +95,24 @@
       "post_battle_lines":[
         {"line_id":"node_4_5_post_001","speaker_id":"kera_voss","speaker_display":"Kera","text_en":"I am staying to copy every page of the antidote archive.","emotion":"resolved","voice_track":"jp"},
         {"line_id":"node_4_5_post_002","speaker_id":"tilda_fen","speaker_display":"Tilda","text_en":"Iona and I will reopen the clinic. The patients need a door that stays open.","emotion":"firm_kind","voice_track":"jp"},
+        {"line_id":"node_4_5_post_007","speaker_id":"iona_mist","speaker_display":"Iona","text_en":"I will hang the lantern first. People should see the door before they need it.","emotion":"calm","voice_track":"jp"},
         {"line_id":"node_4_5_post_003","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"We will come back for you.","emotion":"promise","voice_track":"jp"},
         {"line_id":"node_4_5_post_004","speaker_id":"kera_voss","speaker_display":"Kera","text_en":"Bring the missing formula. I will bring the rest.","emotion":"determined","voice_track":"jp"},
         {"line_id":"node_4_5_post_006","speaker_id":"jori_flint","speaker_display":"Jori","text_en":"Oakhaven has no smith while I am down here. I am going home to hold the gate. Send word when something needs a door.","emotion":"firm","voice_track":"jp"},
         {"line_id":"node_4_5_post_005","speaker_id":"fadyme_thought","speaker_display":"Fadyme (thought)","text_en":"Weeks. Perhaps less. The words do not become kinder when repeated.","emotion":"sad","voice_track":"jp_inner"}
       ],
-      "battle_transition_en":"Kera remains to preserve the archive; Tilda and Iona return to the clinic."
+      "battle_transition_en":"Kera remains to preserve the archive; Tilda and Iona return to the clinic.",
+      "music_cue":"pre: bgm_tension (glass harmonics) | battle: bgm_boss_human (alchemist variation) | post: bgm_warmth (Kera stays)"
     },
-    {"scene_id": "ch4_road", "placement": "after_stage_3-5", "counts_as_stage": false, "ration_cost": 0, "title_en": "The River City", "location_id": "river_city_gates", "direction_en": "The river city at dusk. Beneath its bridges, drainage mouths breathe cold air. Chalk arrows mark one of them.", "lines": [{"line_id": "ch4_road_001", "speaker_id": "jori_flint", "speaker_display": "Jori", "text_en": "Someone marked that tunnel. Neat arrows. Harbor knots.", "emotion": "observant", "voice_track": "jp"}, {"line_id": "ch4_road_002", "speaker_id": "kera_voss", "speaker_display": "Kera", "text_en": "The Undercity. Everything the city does not want to see goes down there. Including my Guild.", "emotion": "bitter", "voice_track": "jp"}, {"line_id": "ch4_road_003", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "And its healers.", "emotion": "hopeful", "voice_track": "jp"}, {"line_id": "ch4_road_004", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "Stay close below. The dark down there is not like the forest.", "emotion": "protective", "voice_track": "jp"}, {"line_id": "ch4_road_005", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "I know. The forest at least whispered.", "emotion": "light", "voice_track": "jp"}]},
+    {"scene_id": "ch4_road", "placement": "after_stage_3-5", "counts_as_stage": false, "ration_cost": 0, "title_en": "The River City", "location_id": "river_city_gates", "direction_en": "The river city at dusk. Beneath its bridges, drainage mouths breathe cold air. Chalk arrows mark one of them. At the marked mouth, two Red Vial scouts sit bound back to back, alive, a gray seven-notched seal pressed on each collar.", "lines": [
+    {"line_id":"ch4_road_001","speaker_id":"jori_flint","speaker_display":"Jori","text_en":"Someone marked that tunnel. Neat arrows. Harbor knots.","emotion":"observant","voice_track":"jp"},
+    {"line_id":"ch4_road_002","speaker_id":"kera_voss","speaker_display":"Kera","text_en":"The Undercity. Everything the city does not want to see goes down there. Including my Guild.","emotion":"bitter","voice_track":"jp"},
+    {"line_id":"ch4_road_003","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"And its healers.","emotion":"hopeful","voice_track":"jp"},
+    {"line_id":"ch4_road_006","speaker_id":"kera_voss","speaker_display":"Kera","text_en":"Gray wax on Guild scouts, and the scouts still breathing. Someone is hunting my Guild's hunters.","emotion":"sharp","voice_track":"jp"},
+    {"line_id":"ch4_road_004","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"Stay close below. The dark down there is not like the forest.","emotion":"protective","voice_track":"jp"},
+    {"line_id":"ch4_road_005","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"I know. The forest at least whispered.","emotion":"light","voice_track":"jp"}
+    ],
+      "music_cue":"bgm_road (river city at dusk, distant crowd) → bgm_tension at the bound scouts"},
     {
       "scene_id": "ch4_camp",
       "placement": "after_stage_4-5",
@@ -152,11 +166,12 @@
           "line_id": "ch4_camp_006",
           "speaker_id": "mahmut",
           "speaker_display": "Mahmut",
-          "text_en": "East, then. The estate schedule is somewhere past the ravine.",
+          "text_en": "East, then. The altar road crosses the ravine.",
           "emotion": "resolved",
           "voice_track": "jp"
         }
-      ]
+      ],
+      "music_cue":"bgm_fadyme_theme (major, strings join) as she stops in the sun; the brightest cue of Part I"
     }
   ]
 }

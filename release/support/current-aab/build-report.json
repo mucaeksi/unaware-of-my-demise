@@ -1,24 +1,24 @@
 {
-  "native_packaging": "passed",
-  "created_at": "2026-10-08T19:12:47.9690697Z",
+  "device_test": "pending_no_device",
+  "bundle": {
+    "path": "release/current/artifacts/game.aab",
+    "bytes": 134505579,
+    "sha256": "edd8cf08e42910e0d1845f63334a82add62bbecea7774625c3ffd86f77236456"
+  },
+  "bundletool_validation": "passed",
   "distribution": "local_review",
   "signing": "Godot debug key: local review only; production upload signing remains a release step",
   "base": {
-    "bytes": 101418860,
-    "path": "F:\\unaware-of-my-demise\\build\\current-aab-20261008-221217-9ccfb2c4\\opening-base.pck",
-    "sha256": "8a92c0ace0ff928ea131ccb34494cee237644532e255054a7108399fade5dc1f"
+    "path": "release/current/artifacts/opening-base.pck",
+    "bytes": 101418444,
+    "sha256": "1e4dbe311c6c8f705814579e9c407df491dc8e9ffa6824b385900893b6f02ab1"
   },
-  "bundle": {
-    "bytes": 134505206,
-    "path": "F:\\unaware-of-my-demise\\build\\current-aab-20261008-221217-9ccfb2c4\\opening-review.aab",
-    "sha256": "7bd2bf0bfa85e5e7d387d62e893d4be087c44a5dcda2225785a02bf5e186a652"
-  },
-  "bundletool_validation": "passed",
-  "device_test": "pending_no_device",
+  "created_at": "2026-10-08T21:34:50.6403417Z",
+  "native_packaging": "passed",
+  "patch_policy": "passed",
   "patch": {
-    "bytes": 155488,
-    "path": "F:\\unaware-of-my-demise\\build\\current-aab-20261008-221217-9ccfb2c4\\story-content.pck",
-    "sha256": "f2095e3492a1e3f17e76857e0bf2780034162e4ba26ac12e2d7556c271dcee9c"
-  },
-  "patch_policy": "passed"
+    "path": "release/support/current-aab/story-content.pck",
+    "bytes": 164528,
+    "sha256": "9624971c5dbaf9d9097316831934c5bb07c694ce1b7db4cd2fef19f29169e71f"
+  }
 }

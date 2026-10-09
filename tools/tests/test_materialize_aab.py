@@ -124,6 +124,28 @@ class SnapshotTests(unittest.TestCase):
         with self.assertRaisesRegex(m.SnapshotError, "seal mismatch"):
             m.verify_snapshot(folder)
 
+    @unittest.skipIf(os.name == "nt", "POSIX executable permissions")
+    def test_script_copy_preserves_and_verifies_executable_permission(self):
+        folder = self.sealed()
+        script = self.root / "build.sh"
+        script.write_text("#!/bin/sh\nexit 0\n")
+        script.chmod(0o755)
+        writer = m.Writer(self.root, folder)
+        index = json.loads((folder / "FILE_INDEX.json").read_text())
+        writer.rows = {row["path"]: row for row in index["files"]}
+        writer.copy("build.sh", "tools/build.sh")
+        copied = folder / "tools/build.sh"
+        self.assertTrue(copied.stat().st_mode & 0o111)
+        index_blob = m.json_bytes({"files": list(writer.rows.values())})
+        (folder / "FILE_INDEX.json").write_bytes(index_blob)
+        release = json.loads((folder / "release.json").read_text())
+        release["file_index_sha256"] = m.digest(index_blob)
+        (folder / "release.json").write_bytes(m.json_bytes(release))
+        self.assertEqual(m.verify_snapshot(folder, self.root)["status"], "verified")
+        copied.chmod(0o644)
+        with self.assertRaisesRegex(m.SnapshotError, "executable permission missing"):
+            m.verify_snapshot(folder, self.root)
+
 
 if __name__ == "__main__":
     unittest.main()

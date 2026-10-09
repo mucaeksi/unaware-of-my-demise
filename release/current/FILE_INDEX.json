@@ -1,11 +1,11 @@
 {
   "files": [
     {
-      "bytes": 269,
+      "bytes": 53,
       "category": "source_publish_policy",
       "exported_entries": [],
       "path": ".gitignore",
-      "sha256": "ff0a4304bf5b588ebdf8e69dbf8c2ac8fcb7975175b2f3efe3765d6f3c560c9a",
+      "sha256": "c34f0534f50e9e5a4fe540224ddef5d548d3647ae554ebe9e9fd6916ff774759",
       "source": null,
       "source_sha256": null
     },
@@ -28,11 +28,11 @@
       "source_sha256": "8eef9ae421ee1f980aac14d7e29b91064b3ce52d75b23550e12d9fedc10297d6"
     },
     {
-      "bytes": 1395,
+      "bytes": 1400,
       "category": "review_instructions",
       "exported_entries": [],
       "path": "README.md",
-      "sha256": "4937ed22c7cf4b793e97fb5da9845bb11ad50b0ba7ca2a10cff9880b365b20a2",
+      "sha256": "d6467bf89b35d77f90ed10b03e52c59381112fd193b3cbb4214ebf4dfa019ee4",
       "source": null,
       "source_sha256": null
     },
@@ -55,40 +55,40 @@
       "source_sha256": "b87104b2fdb1610bfb1e7ebfda1a863f15cee5deac6682a38151b6b547a4ac49"
     },
     {
-      "bytes": 134505206,
+      "bytes": 134505579,
       "category": "verified_export_artifact",
       "exported_entries": [],
       "path": "artifacts/game.aab",
-      "sha256": "7bd2bf0bfa85e5e7d387d62e893d4be087c44a5dcda2225785a02bf5e186a652",
+      "sha256": "edd8cf08e42910e0d1845f63334a82add62bbecea7774625c3ffd86f77236456",
       "source": null,
       "source_sha256": null
     },
     {
-      "bytes": 101418860,
+      "bytes": 101418444,
       "category": "verified_export_artifact",
       "exported_entries": [],
       "path": "artifacts/opening-base.pck",
-      "sha256": "8a92c0ace0ff928ea131ccb34494cee237644532e255054a7108399fade5dc1f",
+      "sha256": "1e4dbe311c6c8f705814579e9c407df491dc8e9ffa6824b385900893b6f02ab1",
       "source": null,
       "source_sha256": null
     },
     {
-      "bytes": 39263,
+      "bytes": 38811,
       "category": "review_build_support",
       "exported_entries": [],
       "path": "docs/ASSET_PROVENANCE.json",
-      "sha256": "77cf6eb044e18823fdeb612b7a998aeba1232724fed83f965c3acbb22aeaeb47",
+      "sha256": "ac94ca390e237c180b90eeb616da1f639806100e745a213fc1a9fec21ffc369e",
       "source": "docs/release/ASSET_PROVENANCE.json",
-      "source_sha256": "77cf6eb044e18823fdeb612b7a998aeba1232724fed83f965c3acbb22aeaeb47"
+      "source_sha256": "ac94ca390e237c180b90eeb616da1f639806100e745a213fc1a9fec21ffc369e"
     },
     {
-      "bytes": 5839,
+      "bytes": 5927,
       "category": "review_build_support",
       "exported_entries": [],
       "path": "docs/CURRENT_AAB.md",
-      "sha256": "36e70ee2eb72c5717abc64ee41652191986d65708ca225241fa430566c97d1c9",
+      "sha256": "97bd42e1671a05aafa2f52940227e67bb1e60866ded5648bac8cd331120c4976",
       "source": "docs/release/CURRENT_AAB.md",
-      "source_sha256": "36e70ee2eb72c5717abc64ee41652191986d65708ca225241fa430566c97d1c9"
+      "source_sha256": "97bd42e1671a05aafa2f52940227e67bb1e60866ded5648bac8cd331120c4976"
     },
     {
       "bytes": 242,
@@ -96,7 +96,7 @@
       "exported_entries": [],
       "path": "docs/base-privacy-acceptance.json",
       "sha256": "53c8ed5ce3183b36bb3a9bc0ce8728f8062e3f3c2877fbc02b5cbc69d8b73a82",
-      "source": "build/current-aab-20261008-221217-9ccfb2c4/base-privacy-acceptance.json",
+      "source": "docs/release/validation/20261009/base-privacy-acceptance.json",
       "source_sha256": "53c8ed5ce3183b36bb3a9bc0ce8728f8062e3f3c2877fbc02b5cbc69d8b73a82"
     },
     {
@@ -104,7 +104,7 @@
       "category": "review_evidence",
       "exported_entries": [],
       "path": "docs/build-report.json",
-      "sha256": "5344e312f00349183f180ecec7abf3f1bc8dc0a881438c7231f8423ef15673cf",
+      "sha256": "826e6d36bd05c66092f3c8db678814268fd8a450db5c083c616168df8308e885",
       "source": null,
       "source_sha256": null
     },
@@ -127,13 +127,13 @@
       "source_sha256": null
     },
     {
-      "bytes": 256,
+      "bytes": 245,
       "category": "review_evidence",
       "exported_entries": [],
       "path": "docs/source-rebuild-acceptance.json",
-      "sha256": "ba86587e8ac586dfe56c3440e609ac9d2816a3c0aa0862770972ec18584bb2d6",
-      "source": "build/current-aab-20261008-221217-9ccfb2c4/source-rebuild-acceptance.json",
-      "source_sha256": "ba86587e8ac586dfe56c3440e609ac9d2816a3c0aa0862770972ec18584bb2d6"
+      "sha256": "ba0005810e375a2a622871849a9dac9343a3d01605b461eca88a56c502c610eb",
+      "source": "docs/release/validation/20261009/source-rebuild-acceptance.json",
+      "source_sha256": "ba0005810e375a2a622871849a9dac9343a3d01605b461eca88a56c502c610eb"
     },
     {
       "bytes": 13,
@@ -288,13 +288,13 @@
       "source_sha256": "6eeeac18aaf04e3b6ba693bfe7ced0b2481025ac6570eac8752a4ca6ad6152f0"
     },
     {
-      "bytes": 164,
+      "bytes": 163,
       "category": "build_support",
       "exported_entries": [],
       "path": "game/android/plugins/uomd_native/src/main/res/values/uomd_admob.xml",
-      "sha256": "df9210c6fb2b1ad6bbce215e1a14961f767e34dec7d76efb4a3709d9c03016d6",
+      "sha256": "f3dd69753dfe78c9e803639b9819932c1963573a9557ce34c18354bfe4579d97",
       "source": "game/android/plugins/uomd_native/src/main/res/values/uomd_admob.xml",
-      "source_sha256": "df9210c6fb2b1ad6bbce215e1a14961f767e34dec7d76efb4a3709d9c03016d6"
+      "source_sha256": "f3dd69753dfe78c9e803639b9819932c1963573a9557ce34c18354bfe4579d97"
     },
     {
       "bytes": 2463754,
@@ -1771,15 +1771,15 @@
       "source_sha256": "4cc407e77752e94c2b9e069b754dc2d8a6b13f0ef25c042dbd98b07fc52968fb"
     },
     {
-      "bytes": 1425,
+      "bytes": 1424,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/disabled.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/disabled.svg",
-      "sha256": "17d63f7ca80ec4ebdfcb7176b6575c4998e50d9fcf47af9f3ff863f1c8526f60",
+      "sha256": "a084a906ee0681f4544f57eb73e9f06f21e8c6396a7c5cec71111756d072369b",
       "source": "game/assets/ui/narrative/v002/disabled.svg",
-      "source_sha256": "17d63f7ca80ec4ebdfcb7176b6575c4998e50d9fcf47af9f3ff863f1c8526f60"
+      "source_sha256": "a084a906ee0681f4544f57eb73e9f06f21e8c6396a7c5cec71111756d072369b"
     },
     {
       "bytes": 1050,
@@ -1837,15 +1837,15 @@
       "source_sha256": "3881769604c30c64409afed3b2816cc4cbe98e0b1aa4ae091849255949216df9"
     },
     {
-      "bytes": 250,
+      "bytes": 249,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/icons/mail.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/icons/mail.svg",
-      "sha256": "de00e446cab9874b5ca7ed6b8e8ef6a1e9949eaebe55b7e24a1b16fe57baae1b",
+      "sha256": "2dabc303b6f969a32edfb6c99ba51a38e04e6dac0744fe9bb7afc7b268cbfd0c",
       "source": "game/assets/ui/narrative/v002/icons/mail.svg",
-      "source_sha256": "de00e446cab9874b5ca7ed6b8e8ef6a1e9949eaebe55b7e24a1b16fe57baae1b"
+      "source_sha256": "2dabc303b6f969a32edfb6c99ba51a38e04e6dac0744fe9bb7afc7b268cbfd0c"
     },
     {
       "bytes": 1044,
@@ -1859,15 +1859,15 @@
       "source_sha256": "a59baed439a94a6a3f2b75d169ef1dffb728935d3c58abba0f25f633f7bdadbf"
     },
     {
-      "bytes": 284,
+      "bytes": 283,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/icons/music.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/icons/music.svg",
-      "sha256": "03fdad451704cf8df4f9e7a030eb926992ef73522bdcdfb4c6d7b26baf341e1c",
+      "sha256": "4f71fbc4f3506ef8c480af35274c600c506fca0c0648ca12875ec298469266cf",
       "source": "game/assets/ui/narrative/v002/icons/music.svg",
-      "source_sha256": "03fdad451704cf8df4f9e7a030eb926992ef73522bdcdfb4c6d7b26baf341e1c"
+      "source_sha256": "4f71fbc4f3506ef8c480af35274c600c506fca0c0648ca12875ec298469266cf"
     },
     {
       "bytes": 1046,
@@ -1881,15 +1881,15 @@
       "source_sha256": "5a946c799f3a4ab44b9e3b9894a031c66f2b03296ffac8b98f3caaa72121c358"
     },
     {
-      "bytes": 259,
+      "bytes": 258,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/icons/slider_grip.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/icons/slider_grip.svg",
-      "sha256": "474648954a8377a844edffb402237301f2884f16c65c9a361c2bd24c0c979c55",
+      "sha256": "166e001f6750f4ce43a179c2647806edcf5e633ad78caa89bc74c92c0595c9db",
       "source": "game/assets/ui/narrative/v002/icons/slider_grip.svg",
-      "source_sha256": "474648954a8377a844edffb402237301f2884f16c65c9a361c2bd24c0c979c55"
+      "source_sha256": "166e001f6750f4ce43a179c2647806edcf5e633ad78caa89bc74c92c0595c9db"
     },
     {
       "bytes": 1065,
@@ -1903,15 +1903,15 @@
       "source_sha256": "1619c7cd64556128b3d9a4334007e3a70aff47bf24882d3c4275de67b798496d"
     },
     {
-      "bytes": 282,
+      "bytes": 281,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/icons/speed.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/icons/speed.svg",
-      "sha256": "bf70dfd7011c2f31163cb518e119b5e0b1b5eedcb1999fcb790959b08e4dd05b",
+      "sha256": "1fb6e72cf76457475ccae95dfa718a2b8fc57c62200511ea92a63fb839c4c3ab",
       "source": "game/assets/ui/narrative/v002/icons/speed.svg",
-      "source_sha256": "bf70dfd7011c2f31163cb518e119b5e0b1b5eedcb1999fcb790959b08e4dd05b"
+      "source_sha256": "1fb6e72cf76457475ccae95dfa718a2b8fc57c62200511ea92a63fb839c4c3ab"
     },
     {
       "bytes": 1047,
@@ -1925,15 +1925,15 @@
       "source_sha256": "ad1e7556b95db5b4f6fc432d3d2e76692f2d3e4fe1f3d434c2b84a7d860fd3cc"
     },
     {
-      "bytes": 248,
+      "bytes": 247,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/icons/text.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/icons/text.svg",
-      "sha256": "fe6e5cf60de8c104d716a7729808c648cb2d23dfb86c5f66b149511d4187cd05",
+      "sha256": "3777b27a4202939ee9e514465eede8f783d0a4de850b8a4b9b3118c4f8aa22a6",
       "source": "game/assets/ui/narrative/v002/icons/text.svg",
-      "source_sha256": "fe6e5cf60de8c104d716a7729808c648cb2d23dfb86c5f66b149511d4187cd05"
+      "source_sha256": "3777b27a4202939ee9e514465eede8f783d0a4de850b8a4b9b3118c4f8aa22a6"
     },
     {
       "bytes": 1043,
@@ -1969,15 +1969,15 @@
       "source_sha256": "39156b3b6d266ccd07710ddd969bc19f94c5f8c03aa04898c22de36820a8f4de"
     },
     {
-      "bytes": 1425,
+      "bytes": 1424,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/panel.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/panel.svg",
-      "sha256": "664ffe1c30d150038d27d47a71ecced1474f1dcd3b7c241c4adbdc285b754be4",
+      "sha256": "598b0ff6b30ee91b141f5ad854f7aacac43a8db82f4fb21f9e55193fb176c51f",
       "source": "game/assets/ui/narrative/v002/panel.svg",
-      "source_sha256": "664ffe1c30d150038d27d47a71ecced1474f1dcd3b7c241c4adbdc285b754be4"
+      "source_sha256": "598b0ff6b30ee91b141f5ad854f7aacac43a8db82f4fb21f9e55193fb176c51f"
     },
     {
       "bytes": 1041,
@@ -1991,15 +1991,15 @@
       "source_sha256": "c3531f229ad1a0bcab9dc63fb529377eb98b9d43b0d30a6eb60ba92f6a055af8"
     },
     {
-      "bytes": 1425,
+      "bytes": 1424,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/panel_hero.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/panel_hero.svg",
-      "sha256": "9b49c5774fadd43bfc05a78ff42ac83a0e1a38c088b9a8ed619001006454271c",
+      "sha256": "4551b370712d80138e31b030a8b7067f65ddcbc97afa50958d32384ea5a433c5",
       "source": "game/assets/ui/narrative/v002/panel_hero.svg",
-      "source_sha256": "9b49c5774fadd43bfc05a78ff42ac83a0e1a38c088b9a8ed619001006454271c"
+      "source_sha256": "4551b370712d80138e31b030a8b7067f65ddcbc97afa50958d32384ea5a433c5"
     },
     {
       "bytes": 1055,
@@ -2013,15 +2013,15 @@
       "source_sha256": "1ea3702468e53b9a47e092d9711ec5db9bfc16052ac6b061369005b470eab412"
     },
     {
-      "bytes": 1425,
+      "bytes": 1424,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/primary.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/primary.svg",
-      "sha256": "2a9ac3b2450f41ce307afbea084ec9ab1c27a8567c75d95475d7e5df1de5e744",
+      "sha256": "3def01d097047272e5dbfd2ae1f4c2470b2ec542aed23930dd8e9ea144a13bc1",
       "source": "game/assets/ui/narrative/v002/primary.svg",
-      "source_sha256": "2a9ac3b2450f41ce307afbea084ec9ab1c27a8567c75d95475d7e5df1de5e744"
+      "source_sha256": "3def01d097047272e5dbfd2ae1f4c2470b2ec542aed23930dd8e9ea144a13bc1"
     },
     {
       "bytes": 1046,
@@ -2035,15 +2035,15 @@
       "source_sha256": "d5f8187de09ad9c8ac38daf4f17c5e16c9d8448773f4bb1ca9aba6541463a6ac"
     },
     {
-      "bytes": 1425,
+      "bytes": 1424,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/primary_hover.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/primary_hover.svg",
-      "sha256": "ce36167bea18c00162a2ecbaa1e85c1a4b797b454cdddb6d475e514700b0a2f5",
+      "sha256": "bb14afeca387bbc3d656142779a6fc2ab60b7c0aab2af66e007161eae929efbc",
       "source": "game/assets/ui/narrative/v002/primary_hover.svg",
-      "source_sha256": "ce36167bea18c00162a2ecbaa1e85c1a4b797b454cdddb6d475e514700b0a2f5"
+      "source_sha256": "bb14afeca387bbc3d656142779a6fc2ab60b7c0aab2af66e007161eae929efbc"
     },
     {
       "bytes": 1065,
@@ -2057,15 +2057,15 @@
       "source_sha256": "af9f98dbd202dd4f1a584d8af9ab200e6e5d6f243171c3bc16d61c8e657e964c"
     },
     {
-      "bytes": 1425,
+      "bytes": 1424,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/primary_pressed.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/primary_pressed.svg",
-      "sha256": "c74f63267d8fcd515fe48fca6c31691a1b129bc2d6fbaf12915ab7d6a4a4acef",
+      "sha256": "8b08272047fc4d2ed32983316052abc5eda45382c79de366e9a27370b68106f5",
       "source": "game/assets/ui/narrative/v002/primary_pressed.svg",
-      "source_sha256": "c74f63267d8fcd515fe48fca6c31691a1b129bc2d6fbaf12915ab7d6a4a4acef"
+      "source_sha256": "8b08272047fc4d2ed32983316052abc5eda45382c79de366e9a27370b68106f5"
     },
     {
       "bytes": 1071,
@@ -2079,15 +2079,15 @@
       "source_sha256": "3c040693d5429c6f24032ba209ab37584c951409a7ed63c0f932bf0e7bb75f0f"
     },
     {
-      "bytes": 1425,
+      "bytes": 1424,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/secondary.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/secondary.svg",
-      "sha256": "f00b55dd24f8092e486e666aae82a822baa291584ae0a5a58a35642fc76a7c52",
+      "sha256": "37b69aebf97e2c085a335d6a7ef0683f22baa89fa07c96386d588a8b6a811266",
       "source": "game/assets/ui/narrative/v002/secondary.svg",
-      "source_sha256": "f00b55dd24f8092e486e666aae82a822baa291584ae0a5a58a35642fc76a7c52"
+      "source_sha256": "37b69aebf97e2c085a335d6a7ef0683f22baa89fa07c96386d588a8b6a811266"
     },
     {
       "bytes": 1053,
@@ -2101,15 +2101,15 @@
       "source_sha256": "9cca4a43aec7933a82ba8a393e49971f8cdedadfb6287f9caa7b334413c5da92"
     },
     {
-      "bytes": 1425,
+      "bytes": 1424,
       "category": "base_runtime",
       "exported_entries": [
         "assets/ui/narrative/v002/secondary_hover.svg.import"
       ],
       "path": "game/assets/ui/narrative/v002/secondary_hover.svg",
-      "sha256": "86f35e69338324ed64dd7dadd36ad788818cd4081453f9dab8017338d95dcb59",
+      "sha256": "c82e9d63441a6bdf411f8382633108c92570ae42943278259f54ea1235c2b442",
       "source": "game/assets/ui/narrative/v002/secondary_hover.svg",
-      "source_sha256": "86f35e69338324ed64dd7dadd36ad788818cd4081453f9dab8017338d95dcb59"
+      "source_sha256": "c82e9d63441a6bdf411f8382633108c92570ae42943278259f54ea1235c2b442"
     },
     {
       "bytes": 1071,
@@ -2585,15 +2585,15 @@
       "source_sha256": "49ce57a691b0ecb79ec31be51a75c7d69b91cff667b4788f8f287481edec2806"
     },
     {
-      "bytes": 652,
+      "bytes": 629,
       "category": "base_runtime",
       "exported_entries": [
         "assets/vfx/kenney_impacts/LICENSE.txt"
       ],
       "path": "game/assets/vfx/kenney_impacts/LICENSE.txt",
-      "sha256": "4afb597023cfbbe495c92bee612074fdff33226e7427b1f879aa66f157fb44ce",
+      "sha256": "7edd59126c258e602e69905a0517cf51bedea489b1a69eb06a77edee1769e81e",
       "source": "game/assets/vfx/kenney_impacts/LICENSE.txt",
-      "source_sha256": "4afb597023cfbbe495c92bee612074fdff33226e7427b1f879aa66f157fb44ce"
+      "source_sha256": "7edd59126c258e602e69905a0517cf51bedea489b1a69eb06a77edee1769e81e"
     },
     {
       "bytes": 86592,
@@ -2640,15 +2640,15 @@
       "source_sha256": "54156093c494ca8d4ec6048b760a16bd783d9c002fdf9eb0125754f953ad7be4"
     },
     {
-      "bytes": 4309,
+      "bytes": 4191,
       "category": "base_runtime",
       "exported_entries": [
         "data/content/MANIFEST.json"
       ],
       "path": "game/data/content/MANIFEST.json",
-      "sha256": "c3f2a7fc20d0c354b7dfe9e8e997950c9e2a77d22a32bb9f90063e82408403cf",
+      "sha256": "69f816ae9417934b3bea1edfc509035d52e6ef7b0d6c7c3173ae0490beea4861",
       "source": "game/data/content/MANIFEST.json",
-      "source_sha256": "c3f2a7fc20d0c354b7dfe9e8e997950c9e2a77d22a32bb9f90063e82408403cf"
+      "source_sha256": "69f816ae9417934b3bea1edfc509035d52e6ef7b0d6c7c3173ae0490beea4861"
     },
     {
       "bytes": 153868,
@@ -2728,15 +2728,15 @@
       "source_sha256": "54b1dff43f4bf52a6223ea3941711af8b700eb00369490485267265a3d0d64ba"
     },
     {
-      "bytes": 157420,
+      "bytes": 157507,
       "category": "base_runtime",
       "exported_entries": [
         "data/content/character_stories_part1.json"
       ],
       "path": "game/data/content/character_stories_part1.json",
-      "sha256": "f3a908938c64cdb2101d33171a9abf577617a6b46384d532f671d5265a53bb13",
+      "sha256": "b836b05de70a5a72f3c1c0f5446ed165ece57098a03b00ebde1a6e0362fc6381",
       "source": "game/data/content/character_stories_part1.json",
-      "source_sha256": "f3a908938c64cdb2101d33171a9abf577617a6b46384d532f671d5265a53bb13"
+      "source_sha256": "b836b05de70a5a72f3c1c0f5446ed165ece57098a03b00ebde1a6e0362fc6381"
     },
     {
       "bytes": 67413,
@@ -2750,15 +2750,15 @@
       "source_sha256": "64d48982a8c0681462fd52cb71e0c520b1a7981c5ba6bc760fabf78754865b13"
     },
     {
-      "bytes": 46728,
+      "bytes": 48408,
       "category": "base_runtime",
       "exported_entries": [
         "data/content/character_voice_lines_part1.json"
       ],
       "path": "game/data/content/character_voice_lines_part1.json",
-      "sha256": "180ab1ad96234344ae95f19195e94f3168fda3e9d545fe30aabdf51480315ad7",
+      "sha256": "5f9539ab26fe69ccdf702eb3744f83f9585d5b7bfd1a16f2e1609d5431a97210",
       "source": "game/data/content/character_voice_lines_part1.json",
-      "source_sha256": "180ab1ad96234344ae95f19195e94f3168fda3e9d545fe30aabdf51480315ad7"
+      "source_sha256": "5f9539ab26fe69ccdf702eb3744f83f9585d5b7bfd1a16f2e1609d5431a97210"
     },
     {
       "bytes": 126027,
@@ -2805,15 +2805,15 @@
       "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
     },
     {
-      "bytes": 20922,
+      "bytes": 20917,
       "category": "base_runtime",
       "exported_entries": [
         "data/content/events_part1.json"
       ],
       "path": "game/data/content/events_part1.json",
-      "sha256": "739c1bfd1d7ec6c9bac56857914be4113c855871ca0a1a9a56bffd82c4eed59d",
+      "sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
       "source": "game/data/content/events_part1.json",
-      "source_sha256": "739c1bfd1d7ec6c9bac56857914be4113c855871ca0a1a9a56bffd82c4eed59d"
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
     },
     {
       "bytes": 9656,
@@ -2827,15 +2827,15 @@
       "source_sha256": "2c83d67e930f4e3d6663142303c19e8690554878afc5871406debd353abf63be"
     },
     {
-      "bytes": 13673,
+      "bytes": 13790,
       "category": "base_runtime",
       "exported_entries": [
         "data/content/lore_text_part1.json"
       ],
       "path": "game/data/content/lore_text_part1.json",
-      "sha256": "567f0d336244eb264ccb4ba992e7fc6a7e406be4f75422bd153bc058c42de737",
+      "sha256": "24c4b58a7a1d0157602d69cf39074cf06a234af2bff129d9e5540b7265909028",
       "source": "game/data/content/lore_text_part1.json",
-      "source_sha256": "567f0d336244eb264ccb4ba992e7fc6a7e406be4f75422bd153bc058c42de737"
+      "source_sha256": "24c4b58a7a1d0157602d69cf39074cf06a234af2bff129d9e5540b7265909028"
     },
     {
       "bytes": 31368,
@@ -2860,15 +2860,15 @@
       "source_sha256": "95e8b2ddee2d730705add0f17fe983f678c22230bc577c8854d002554e34169b"
     },
     {
-      "bytes": 21877,
+      "bytes": 21137,
       "category": "base_runtime",
       "exported_entries": [
         "data/content/visual_assets_part1.json"
       ],
       "path": "game/data/content/visual_assets_part1.json",
-      "sha256": "d6e523cfa9d41a9d56d1315201d8a8d8267079b5b3afbc33212ccf0dc3aee056",
+      "sha256": "08616a570dd065b66bdbd94ad76610845ae44ede9fd44efd70f5d5ecb0ca4a00",
       "source": "game/data/content/visual_assets_part1.json",
-      "source_sha256": "d6e523cfa9d41a9d56d1315201d8a8d8267079b5b3afbc33212ccf0dc3aee056"
+      "source_sha256": "08616a570dd065b66bdbd94ad76610845ae44ede9fd44efd70f5d5ecb0ca4a00"
     },
     {
       "bytes": 154377,
@@ -2893,15 +2893,15 @@
       "source_sha256": "47f8acec3fb91a6c2a75ed54fb3806339ebab136ccf72d307fd141f070996631"
     },
     {
-      "bytes": 34857,
+      "bytes": 33872,
       "category": "base_runtime",
       "exported_entries": [
         "data/entry/tutorial_v001.json"
       ],
       "path": "game/data/entry/tutorial_v001.json",
-      "sha256": "c073bc0014ef5421f3459074de38245a5bfca73947217fa082bcd0e8deda2d8e",
+      "sha256": "d5419c8bd76f5c75e4c70e116fa97cdd97dfa8e158c852c7c96a988980bbce81",
       "source": "game/data/entry/tutorial_v001.json",
-      "source_sha256": "c073bc0014ef5421f3459074de38245a5bfca73947217fa082bcd0e8deda2d8e"
+      "source_sha256": "d5419c8bd76f5c75e4c70e116fa97cdd97dfa8e158c852c7c96a988980bbce81"
     },
     {
       "bytes": 625,
@@ -2948,15 +2948,15 @@
       "source_sha256": "f2b3029aba64c378bf0963b62945eee15e564fe4330b934c8f2eb058282b5e83"
     },
     {
-      "bytes": 4488,
+      "bytes": 4395,
       "category": "base_runtime",
       "exported_entries": [
         "data/legal/google-sans-ofl.txt"
       ],
       "path": "game/data/legal/google-sans-ofl.txt",
-      "sha256": "2b75ef20f13d83a7514aee452c4782c20cdc9ff2dee17600f44d37a06d4fb958",
+      "sha256": "65ca17f235e1d9adaf2e25fd14d0929c75521ac1e063a48d6824a8e7b7e4466a",
       "source": "game/data/legal/google-sans-ofl.txt",
-      "source_sha256": "2b75ef20f13d83a7514aee452c4782c20cdc9ff2dee17600f44d37a06d4fb958"
+      "source_sha256": "65ca17f235e1d9adaf2e25fd14d0929c75521ac1e063a48d6824a8e7b7e4466a"
     },
     {
       "bytes": 4377,
@@ -2981,15 +2981,15 @@
       "source_sha256": "56af9b9c6715597e458284a474dc118a50a4150e9d547c70f7b4a33c3e6a9328"
     },
     {
-      "bytes": 9789,
+      "bytes": 9394,
       "category": "base_runtime",
       "exported_entries": [
         "data/presentation/battle_art_v001.json"
       ],
       "path": "game/data/presentation/battle_art_v001.json",
-      "sha256": "60c47270305f38baff6f8423fd2c650a3b7dbe7b0c120719506b37a56816b054",
+      "sha256": "ef61439d22fd825c863369b71094d828efd9779d6b213cd5afd3fcfc29d7131f",
       "source": "game/data/presentation/battle_art_v001.json",
-      "source_sha256": "60c47270305f38baff6f8423fd2c650a3b7dbe7b0c120719506b37a56816b054"
+      "source_sha256": "ef61439d22fd825c863369b71094d828efd9779d6b213cd5afd3fcfc29d7131f"
     },
     {
       "bytes": 16871,
@@ -3020,7 +3020,7 @@
       "path": "game/export_presets.cfg",
       "sha256": "bb5d5fff30f19eb82379a340d7b72dcc8b662861bc9189d4d9855129db9fe6ea",
       "source": "game/export_presets.cfg",
-      "source_sha256": "9ce0c40c78bbd75e7880f5ecc1a92d4548cf560e49ce100525bf79247f3ba3ae"
+      "source_sha256": "873405c555e8c7887702d43ab7387475fe03b20795f87a3f4b4b84bbc527458c"
     },
     {
       "bytes": 546,
@@ -3660,15 +3660,15 @@
       "source_sha256": "e54961b9f2148d139ff89133a5c674b216cb2fd312c4a1d8a76f1dca359b5e41"
     },
     {
-      "bytes": 3540,
+      "bytes": 3488,
       "category": "base_runtime",
       "exported_entries": [
         "scripts/app/third_party_notices.gd.remap"
       ],
       "path": "game/scripts/app/third_party_notices.gd",
-      "sha256": "540db8aa0e32296f8e202641ffa1a50f7bc1565be8da969cbf0f0a99d46a8a09",
+      "sha256": "e27a5328fca620807c75badd433955eceabed7c19d6f20a375b5df42ebb70855",
       "source": "game/scripts/app/third_party_notices.gd",
-      "source_sha256": "540db8aa0e32296f8e202641ffa1a50f7bc1565be8da969cbf0f0a99d46a8a09"
+      "source_sha256": "e27a5328fca620807c75badd433955eceabed7c19d6f20a375b5df42ebb70855"
     },
     {
       "bytes": 20,
@@ -4672,15 +4672,15 @@
       "source_sha256": "fb145edf8b09faf103d83400b68831a41e06a9d7191544c3a12b67047fc8aa97"
     },
     {
-      "bytes": 4891,
+      "bytes": 4890,
       "category": "base_runtime",
       "exported_entries": [
         "scripts/ui/battle/battle_skill_tray.gd.remap"
       ],
       "path": "game/scripts/ui/battle/battle_skill_tray.gd",
-      "sha256": "f2cc39949a68bc98885dbdcf0c827179081c9bbf9f7b65bd4591c598af3e8213",
+      "sha256": "cde5bec9ae3f3700e4f8102ac80d85f05a231e05c8b4381ab95b163732c1de27",
       "source": "game/scripts/ui/battle/battle_skill_tray.gd",
-      "source_sha256": "f2cc39949a68bc98885dbdcf0c827179081c9bbf9f7b65bd4591c598af3e8213"
+      "source_sha256": "cde5bec9ae3f3700e4f8102ac80d85f05a231e05c8b4381ab95b163732c1de27"
     },
     {
       "bytes": 20,
@@ -4738,15 +4738,15 @@
       "source_sha256": "d6540c54d5fc1a7441fcc2c2a637ff4f12a5a41c18d17756567b380ef5e246c5"
     },
     {
-      "bytes": 2865,
+      "bytes": 2864,
       "category": "base_runtime",
       "exported_entries": [
         "scripts/ui/battle/ultimate_button.gd.remap"
       ],
       "path": "game/scripts/ui/battle/ultimate_button.gd",
-      "sha256": "2938826c64eb85b1ca55bdbba900482d1d8cc8b75270243268f48bafd0ae9570",
+      "sha256": "b9e8f9f7b58f4647bd927efcff7b0fc613d6ea953207b76b984e698f45dc090f",
       "source": "game/scripts/ui/battle/ultimate_button.gd",
-      "source_sha256": "2938826c64eb85b1ca55bdbba900482d1d8cc8b75270243268f48bafd0ae9570"
+      "source_sha256": "b9e8f9f7b58f4647bd927efcff7b0fc613d6ea953207b76b984e698f45dc090f"
     },
     {
       "bytes": 19,
@@ -5024,15 +5024,15 @@
       "source_sha256": "b6cb50a09311f95e0a0bc1d5f53572ee4687fc1de1c6178f1e50614f2d9959eb"
     },
     {
-      "bytes": 5698,
+      "bytes": 5545,
       "category": "base_runtime",
       "exported_entries": [
         "scripts/ui/common/ui_page_transition.gd.remap"
       ],
       "path": "game/scripts/ui/common/ui_page_transition.gd",
-      "sha256": "e27914dc623fab0888351510597d0b2ab62942914639ca2e470df87218db0d50",
+      "sha256": "5cbdc87f937c7d648505cc32eb6fbf9d2bc7e2e4a3cccf244f4383291cecf569",
       "source": "game/scripts/ui/common/ui_page_transition.gd",
-      "source_sha256": "e27914dc623fab0888351510597d0b2ab62942914639ca2e470df87218db0d50"
+      "source_sha256": "5cbdc87f937c7d648505cc32eb6fbf9d2bc7e2e4a3cccf244f4383291cecf569"
     },
     {
       "bytes": 20,
@@ -5288,15 +5288,15 @@
       "source_sha256": "8cf3d060760bfc88132a8e6f5b0cb8a558a88effb81b44c594b31dc1e0df602a"
     },
     {
-      "bytes": 23702,
+      "bytes": 23176,
       "category": "base_runtime",
       "exported_entries": [
         "scripts/ui/entry/entry_screen.gd.remap"
       ],
       "path": "game/scripts/ui/entry/entry_screen.gd",
-      "sha256": "32c9bbbb300e9ab5548ea758c2a41db335b790c4247c9f410fc5c04f536d1970",
+      "sha256": "92ee96dccf78d514bf24ab04900fa3ac9a2dd4dea6f8ebfc69de49edec9e441c",
       "source": "game/scripts/ui/entry/entry_screen.gd",
-      "source_sha256": "32c9bbbb300e9ab5548ea758c2a41db335b790c4247c9f410fc5c04f536d1970"
+      "source_sha256": "92ee96dccf78d514bf24ab04900fa3ac9a2dd4dea6f8ebfc69de49edec9e441c"
     },
     {
       "bytes": 20,
@@ -5310,15 +5310,15 @@
       "source_sha256": "76d0046e99254e75d4dd7cd792a7cd5de067f01b6b5e754b23de88baf9f163de"
     },
     {
-      "bytes": 11490,
+      "bytes": 11227,
       "category": "base_runtime",
       "exported_entries": [
         "scripts/ui/entry/entry_utility.gd.remap"
       ],
       "path": "game/scripts/ui/entry/entry_utility.gd",
-      "sha256": "0418217b11e85d92c25a6a60f535c32b2e9e7b62744db7fafef356d82b17d795",
+      "sha256": "dc6d4e0df6d30eefaf169002e847753b73744bb71950fc18edd41299386d5754",
       "source": "game/scripts/ui/entry/entry_utility.gd",
-      "source_sha256": "0418217b11e85d92c25a6a60f535c32b2e9e7b62744db7fafef356d82b17d795"
+      "source_sha256": "dc6d4e0df6d30eefaf169002e847753b73744bb71950fc18edd41299386d5754"
     },
     {
       "bytes": 19,
@@ -5772,15 +5772,15 @@
       "source_sha256": "9d4ca6cb996a4a047b79c8278d83e49f70466b3dc551faec64cdea78e223df53"
     },
     {
-      "bytes": 58594,
+      "bytes": 57274,
       "category": "base_runtime",
       "exported_entries": [
         "scripts/ui/story_director.gd.remap"
       ],
       "path": "game/scripts/ui/story_director.gd",
-      "sha256": "080abea0af04c72ecb844c8a854de972ab90ccbb029a1b341aa5ebf89986d26e",
+      "sha256": "700cde69716a717c6a7dc80e6f634d9a0b37b07069e4879392767ea95e917fbc",
       "source": "game/scripts/ui/story_director.gd",
-      "source_sha256": "080abea0af04c72ecb844c8a854de972ab90ccbb029a1b341aa5ebf89986d26e"
+      "source_sha256": "700cde69716a717c6a7dc80e6f634d9a0b37b07069e4879392767ea95e917fbc"
     },
     {
       "bytes": 19,
@@ -5926,15 +5926,15 @@
       "source_sha256": "9c712901a593f136ca3d58a3390cf11881a7ec8f942951b556ec47130ac8b28d"
     },
     {
-      "bytes": 11468,
+      "bytes": 11266,
       "category": "base_runtime",
       "exported_entries": [
         "theme/narrative_kit_v002.gd.remap"
       ],
       "path": "game/theme/narrative_kit_v002.gd",
-      "sha256": "ab51d7ab1ba53c8992ccc92f9e56c11667fd0f715ffda8c522c5b755a6e48fa7",
+      "sha256": "0b86cebd614ec7d69ee0886bfc7145290cc9cd720b60bded6d55869d28f082a2",
       "source": "game/theme/narrative_kit_v002.gd",
-      "source_sha256": "ab51d7ab1ba53c8992ccc92f9e56c11667fd0f715ffda8c522c5b755a6e48fa7"
+      "source_sha256": "0b86cebd614ec7d69ee0886bfc7145290cc9cd720b60bded6d55869d28f082a2"
     },
     {
       "bytes": 20,
@@ -5970,15 +5970,15 @@
       "source_sha256": "bc363b3cc4d17e3760b1b369c1d503a999faf4ef4b4c0102ee5848379b9fb6aa"
     },
     {
-      "bytes": 65822,
+      "bytes": 66234,
       "category": "base_runtime",
       "exported_entries": [
         "theme/uomd_production_v001.tres.remap"
       ],
       "path": "game/theme/uomd_production_v001.tres",
-      "sha256": "384768eae1d0faff9d755314f105feccbac7b1f11aa5d2a87f8fde1e0f49ef3f",
+      "sha256": "0e994e7f28d38ebfa2669dc20b4d2cbb729db842e363b7748069d71a68b1f2cd",
       "source": "game/theme/uomd_production_v001.tres",
-      "source_sha256": "384768eae1d0faff9d755314f105feccbac7b1f11aa5d2a87f8fde1e0f49ef3f"
+      "source_sha256": "0e994e7f28d38ebfa2669dc20b4d2cbb729db842e363b7748069d71a68b1f2cd"
     },
     {
       "bytes": 71,
@@ -5994,6 +5994,7 @@
     {
       "bytes": 2250,
       "category": "build_support",
+      "executable": true,
       "exported_entries": [],
       "path": "game/tools/build_uomd_native.sh",
       "sha256": "01d7301cc4d1c0bce5381ea530e3e8c3cca2b710fc0a81ceebdcfd5410539afb",
@@ -6001,13 +6002,13 @@
       "source_sha256": "01d7301cc4d1c0bce5381ea530e3e8c3cca2b710fc0a81ceebdcfd5410539afb"
     },
     {
-      "bytes": 4808,
+      "bytes": 5107,
       "category": "review_build_support",
       "exported_entries": [],
       "path": "tools/Build-CurrentAAB.ps1",
-      "sha256": "39371ea6c802b30c24a7f4402dc1deaa84c65233feed9bd43d353fdaa348d8be",
+      "sha256": "28bfc7898ec927513a889272fd67cd5cf0030e8a8c176b0a5d9eb6bbe11cbc91",
       "source": "tools/Build-CurrentAAB.ps1",
-      "source_sha256": "39371ea6c802b30c24a7f4402dc1deaa84c65233feed9bd43d353fdaa348d8be"
+      "source_sha256": "28bfc7898ec927513a889272fd67cd5cf0030e8a8c176b0a5d9eb6bbe11cbc91"
     },
     {
       "bytes": 7552,

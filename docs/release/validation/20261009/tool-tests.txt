@@ -1,0 +1,7 @@
+...........::error::bad.pck: scripts/a.gdc: not allowed in a content patch (only data and imported art/audio)
+cannot read pack: [Errno 2] No such file or directory: '/tmp/tmpfsiesmec/missing.pck'
+...........
+----------------------------------------------------------------------
+Ran 22 tests in 0.511s
+
+OK

@@ -75,7 +75,13 @@ def classify(path: str) -> str:
 
 def authored_files(root: Path) -> list[str]:
     result = subprocess.run(['git', '-C', str(root), 'ls-files', '-z', '--cached', '--others', '--exclude-standard'], check=True, capture_output=True)
-    return sorted({p for p in result.stdout.decode('utf-8').split('\0') if p and (root / p).is_file() and not (root / p).is_symlink()})
+    generated = {'.godot', '.gradle', '.wrangler', '.next', 'node_modules', '__pycache__'}
+    return sorted({p for p in result.stdout.decode('utf-8').split('\0')
+                   if p and (root / p).is_file() and not (root / p).is_symlink()
+                   and not p.startswith(('build/', '.local/', 'local-backups/', 'graphify-out/', 'admin/out/', 'server/dist/'))
+                   and not generated.intersection(Path(p).parts)
+                   and not Path(p).name.startswith('.env')
+                   and Path(p).name not in {'next-env.d.ts', 'tsconfig.tsbuildinfo', 'export_credentials.cfg', 'local.properties'}})
 
 
 def release_sources(root: Path) -> set[str]:

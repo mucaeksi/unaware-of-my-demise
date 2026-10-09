@@ -1,6 +1,10 @@
 * text=auto
 # Preserve runnable shell scripts across Windows/cloud checkouts.
 *.sh text eol=lf
+# Runtime manifests hash exact bytes; use the same content bytes on every OS.
+game/data/content/*.json text eol=lf
+# A sealed release is byte-addressed by FILE_INDEX.json. Never normalize it.
+release/current/** -text whitespace=-blank-at-eol,-blank-at-eof
 # Archived provenance hashes must survive Windows and cloud checkouts exactly.
 .agents/archive/** -text whitespace=-blank-at-eol,-blank-at-eof
 *.png binary
@@ -21,6 +25,8 @@ game/tests/fixtures/content_manifest/* binary
 game/assets/fonts/art_direction_v01/*-OFL.txt -text whitespace=-blank-at-eol
 
 # BATCH-0005: preserve audited Legacy source bytes, including original line endings.
+# Covers the reorganized canon, scripts, references and production-note folders too.
+narrative/** -text whitespace=-blank-at-eol,-blank-at-eof
 narrative/canon/** -text whitespace=-blank-at-eol,-blank-at-eof
 narrative/story/*.md -text whitespace=-blank-at-eol,-blank-at-eof
 narrative/lore/** -text whitespace=-blank-at-eol,-blank-at-eof

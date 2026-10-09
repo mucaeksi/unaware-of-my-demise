@@ -19,13 +19,15 @@
       "post_battle_lines":[
         {"line_id":"node_3_1_post_001","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"A village can survive losing a name.","emotion":"quiet","voice_track":"jp"},
         {"line_id":"node_3_1_post_002","speaker_id":"nixie_vale","speaker_display":"Nixie","text_en":"A person should not have to prove they belong in their own home.","emotion":"angry","voice_track":"jp"},
-        {"line_id":"node_3_1_post_003","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"Then we give the names back.","emotion":"resolved","voice_track":"jp"}
-      ]
+        {"line_id":"node_3_1_post_003","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"Then we give the names back.","emotion":"resolved","voice_track":"jp"},
+        {"line_id":"node_3_1_post_004","speaker_id":"fadyme_thought","speaker_display":"Fadyme (thought)","text_en":"Every year I hid, someone else paid my hours.","emotion":"guilty","voice_track":"jp_inner"}
+      ],
+      "music_cue":"pre: bgm_ch3_oakhaven (uneasy layer from the start: the name boards are blank) | post: bgm_ch3_oakhaven"
     },
     {
       "scene_id":"vn_3_2","stage_id":"3-2","title_en":"A Smith’s Last Bell","location_id":"village_oakhaven",
-      "direction_en":"Jori has wedged her compact forge shield beneath the gate. She is too small to hold the door alone, but refuses to step away.",
-      "story_guests":["jori_flint"],
+      "direction_en":"Jori has wedged her compact forge shield beneath the gate. She is too small to hold the door alone, but refuses to step away. Kera arrives on the Guild road with her rebuilt cart.",
+      "story_guests":["jori_flint","kera_voss"],
       "tutorial_cards_en":[{"tutorial_id":"tutorial_guard_and_rear_hunter","trigger":"first_rear_target_enemy","pause_battle":true,"copy_en":"Some hunters can reach Rear heroes. A Front guard can intercept or shield them; formation is set before battle."}],
       "pre_battle_lines":[
         {"line_id":"node_3_2_pre_001","speaker_id":"jori_flint","speaker_display":"Jori","text_en":"If the gate falls, the forge is next. If the forge falls, they take the tools.","emotion":"stubborn","voice_track":"jp"},
@@ -36,12 +38,13 @@
         {"line_id":"node_3_2_post_001","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"You held the gate long enough for everyone to run.","emotion":"respectful","voice_track":"jp"},
         {"line_id":"node_3_2_post_002","speaker_id":"jori_flint","speaker_display":"Jori","text_en":"I made the shield because I was tired of doors being the only thing between us and danger.","emotion":"honest","voice_track":"jp"},
         {"line_id":"node_3_2_post_003","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"Then walk with us. A shield belongs where people need it.","emotion":"warm","voice_track":"jp"}
-      ]
+      ],
+      "music_cue":"pre: bgm_tension (hammered anvil hits in the rhythm) | post: bgm_warmth (Jori held the gate)"
     },
     {
       "scene_id":"vn_3_3","stage_id":"3-3","title_en":"The Well Runs Red","location_id":"village_oakhaven",
       "direction_en":"A red-vial mercenary tips a flask into the village well. Fadyme raises her silver bell focus; the spell takes more from her than she lets anyone see.",
-      "story_guests":[],
+      "story_guests":["jori_flint"],
       "pre_battle_lines":[
         {"line_id":"node_3_3_pre_001","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"Fadyme, take the left side. I have the well.","emotion":"command","voice_track":"jp"},
         {"line_id":"node_3_3_pre_002","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"I can reach both.","emotion":"strained","voice_track":"jp"},
@@ -52,7 +55,8 @@
         {"line_id":"node_3_3_post_001","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"There is red on my gauntlet.","emotion":"concern","voice_track":"jp"},
         {"line_id":"node_3_3_post_002","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"Then the enemy finally managed to hit you.","emotion":"dry","voice_track":"jp"},
         {"line_id":"node_3_3_post_003","speaker_id":"fadyme_thought","speaker_display":"Fadyme (thought)","text_en":"I wiped my own blood on his glove. He must not count the drops.","emotion":"sad","voice_track":"jp_inner"}
-      ]
+      ],
+      "music_cue":"pre: bgm_tension | post: bgm_quiet_sorrow — very quiet; the red on the gauntlet is not scored, leave room"
     },
     {
       "scene_id":"vn_3_4","stage_id":"3-4","title_en":"The Inn of Borrowed Names","location_id":"village_oakhaven",
@@ -70,7 +74,8 @@
         {"line_id":"node_3_4_post_003","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"Then the road has room for one more.","emotion":"warm","voice_track":"jp"},
         {"line_id":"node_3_4_post_004","speaker_id":"narration","speaker_display":"Narration","text_en":"Jori joins permanently as a story recruit.","emotion":"none","voice_track":"none"}
       ],
-      "story_rewards":{"recruit_character_id":"jori_flint"}
+      "story_rewards":{"recruit_character_id":"jori_flint"},
+      "music_cue":"pre: Pippa's song is diegetic: lute and voice only (record with her VO) | post: bgm_warmth"
     },
     {
       "scene_id":"vn_3_5","stage_id":"3-5","title_en":"The Mercenary Captain","location_id":"village_oakhaven",
@@ -83,15 +88,17 @@
         {"line_id":"node_3_5_pre_003","speaker_id":"rusk","speaker_display":"Captain Rusk","text_en":"It was sealed by someone the Crown buried years ago.","emotion":"uneasy","voice_track":"jp"}
       ],
       "post_battle_lines":[
-        {"line_id":"node_3_5_post_001","speaker_id":"kera_voss","speaker_display":"Kera","text_en":"Seven notches. Same wax as the cathedral. There are letters beneath it: C.V.","emotion":"focused","voice_track":"jp"},
+        {"line_id":"node_3_5_post_001","speaker_id":"kera_voss","speaker_display":"Kera","text_en":"Seven notches. Same wax as the seal on your shield. There are letters beneath it: C.V.","emotion":"focused","voice_track":"jp"},
         {"line_id":"node_3_5_post_002","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"Do those initials mean anything to you?","emotion":"questioning","voice_track":"jp"},
         {"line_id":"node_3_5_post_003","speaker_id":"kera_voss","speaker_display":"Kera","text_en":"Not yet. The Red Vial ledger may know.","emotion":"thoughtful","voice_track":"jp"},
         {"line_id":"node_3_5_post_004","speaker_id":"fadyme_thought","speaker_display":"Fadyme (thought)","text_en":"C.V. I saw those letters on my father’s last page.","emotion":"shaken","voice_track":"jp_inner"},
         {"line_id":"node_3_5_post_005","speaker_id":"fadyme","speaker_display":"Fadyme","text_en":"We should find a healer before we open the order.","emotion":"deflecting","voice_track":"jp"},
         {"line_id":"node_3_5_post_006","speaker_id":"mahmut","speaker_display":"Mahmut","text_en":"Then I will carry it, sealed, until we do.","emotion":"steady","voice_track":"jp"}
-      ]
+      ],
+      "music_cue":"pre: bgm_tension, snare roll under the signal banner | battle: bgm_boss_human | post: bgm_ledger_motif on 'Seven notches'"
     },
-    {"scene_id": "ch3_road", "placement": "after_stage_2-5", "counts_as_stage": false, "ration_cost": 0, "title_en": "Orchard Country", "location_id": "orchard_lowlands", "direction_en": "Three days of orchard roads. Fadyme walks slower on the hills; Mahmut adjusts his pace without comment.", "lines": [{"line_id": "ch3_road_001", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "We will stop at the next wall.", "emotion": "casual", "voice_track": "jp"}, {"line_id": "ch3_road_002", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "You stopped at the last wall. And the one before.", "emotion": "dry", "voice_track": "jp"}, {"line_id": "ch3_road_003", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "They were good walls.", "emotion": "deadpan", "voice_track": "jp"}, {"line_id": "ch3_road_004", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "You are pacing yourself for me.", "emotion": "knowing", "voice_track": "jp"}, {"line_id": "ch3_road_005", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "I am pacing myself for the walls.", "emotion": "deadpan", "voice_track": "jp"}, {"line_id": "ch3_road_006", "speaker_id": "narrator", "speaker_display": "Narration", "text_en": "She laughed, and then coughed, and turned her face into her scarf before he could see.", "emotion": "somber", "voice_track": "jp_narration"}]},
+    {"scene_id": "ch3_road", "placement": "after_stage_2-5", "counts_as_stage": false, "ration_cost": 0, "title_en": "Orchard Country", "location_id": "orchard_lowlands", "direction_en": "Three days of orchard roads. Fadyme walks slower on the hills; Mahmut adjusts his pace without comment.", "lines": [{"line_id": "ch3_road_001", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "We will stop at the next wall.", "emotion": "casual", "voice_track": "jp"}, {"line_id": "ch3_road_002", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "You stopped at the last wall. And the one before.", "emotion": "dry", "voice_track": "jp"}, {"line_id": "ch3_road_003", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "They were good walls.", "emotion": "deadpan", "voice_track": "jp"}, {"line_id": "ch3_road_004", "speaker_id": "fadyme", "speaker_display": "Fadyme", "text_en": "You are pacing yourself for me.", "emotion": "knowing", "voice_track": "jp"}, {"line_id": "ch3_road_005", "speaker_id": "mahmut", "speaker_display": "Mahmut", "text_en": "I am pacing myself for the walls.", "emotion": "deadpan", "voice_track": "jp"}, {"line_id": "ch3_road_006", "speaker_id": "narrator", "speaker_display": "Narration", "text_en": "She laughed, and then coughed, and turned her face into her scarf before he could see.", "emotion": "somber", "voice_track": "jp_narration"}],
+      "music_cue":"bgm_road (slower tempo than ch2_road: Fadyme walks slower); hint of bgm_mahmut_theme when he adjusts his pace"},
     {
       "scene_id": "ch3_camp",
       "placement": "after_stage_3-5",
@@ -99,7 +106,7 @@
       "ration_cost": 0,
       "title_en": "The Sealed Order",
       "location_id": "oakhaven_inn",
-      "direction_en": "Oakhaven's inn, after the captain falls. Mahmut sets Rusk's sealed order on the table between them.",
+      "direction_en": "Oakhaven's inn, after the captain falls. Mahmut sets Rusk's sealed order on the table between them. Nixie has stayed behind in the refuge with Oakhaven's Vale children.",
       "lines": [
         {
           "line_id": "ch3_camp_001",
@@ -149,7 +156,8 @@
           "emotion": "decisive",
           "voice_track": "jp"
         }
-      ]
+      ],
+      "music_cue":"bgm_camp (inn version: indoor, fire) → bgm_tension once the sealed order is on the table"
     }
   ]
 }

@@ -37,6 +37,7 @@ CODE = {'.gd','.ts','.tsx','.js','.py','.sql','.sh','.ps1','.java','.gradle','.g
 DOC = {'.md','.txt','.yaml','.yml','.html'}
 MEDIA = {'.png','.jpg','.jpeg','.webp','.svg','.ogg','.mp3','.wav','.ttf','.fnt'}
 SECRET = {'.pem','.key','.p12','.jks','.keystore'}
+GENERATED_DIRS = {'.git', '.godot', '.gradle', '.wrangler', '.next', 'node_modules', '__pycache__'}
 
 def norm(value):
     return re.sub(r'[^a-z0-9_]', '_', value.lower())
@@ -60,7 +61,11 @@ def relative(source):
 def inventory():
     raw=subprocess.check_output(['git','ls-files','--cached','--others','--exclude-standard','-z'],cwd=ROOT)
     paths=sorted(set(raw.decode('utf-8').split('\0'))-{''})
-    return [p for p in paths if (ROOT/p).is_file() and not p.startswith(('graphify-out/','.git/','build/','.local/','local-backups/'))]
+    return [p for p in paths if (ROOT/p).is_file()
+            and not p.startswith(('graphify-out/','.git/','build/','.local/','local-backups/','admin/out/','server/dist/'))
+            and not GENERATED_DIRS.intersection(Path(p).parts)
+            and not Path(p).name.startswith('.env')
+            and Path(p).name not in {'next-env.d.ts', 'tsconfig.tsbuildinfo', 'export_credentials.cfg', 'local.properties'}]
 
 def edge(source,target,relation,path=None,line=None,context=None):
     return {'source':source,'target':target,'relation':relation,'confidence':'EXTRACTED',
@@ -290,8 +295,9 @@ def refresh_sources():
     write('.graphify_ast.json',result)
     write('.graphify_godot.json',extract_godot(ROOT,inventory()))
     save_manifest(detected['files'],root=ROOT,kind='ast')
-    (OUT/'.graphify_python').write_text(sys.executable,encoding='utf-8')
-    (OUT/'.graphify_root').write_text(str(ROOT),encoding='utf-8')
+    # Run from the activated Graphify environment; do not publish a host-only path.
+    (OUT/'.graphify_python').write_text('python',encoding='utf-8')
+    (OUT/'.graphify_root').write_text('.',encoding='utf-8')
 
 if __name__=='__main__':
     sys.stdout.reconfigure(encoding='utf-8',errors='replace')

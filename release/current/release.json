@@ -12,21 +12,21 @@
   },
   "artifacts": {
     "base": {
-      "bytes": 101418860,
+      "bytes": 101418444,
       "path": "artifacts/opening-base.pck",
-      "sha256": "8a92c0ace0ff928ea131ccb34494cee237644532e255054a7108399fade5dc1f"
+      "sha256": "1e4dbe311c6c8f705814579e9c407df491dc8e9ffa6824b385900893b6f02ab1"
     },
     "bundle": {
-      "bytes": 134505206,
+      "bytes": 134505579,
       "path": "artifacts/game.aab",
-      "sha256": "7bd2bf0bfa85e5e7d387d62e893d4be087c44a5dcda2225785a02bf5e186a652"
+      "sha256": "edd8cf08e42910e0d1845f63334a82add62bbecea7774625c3ffd86f77236456"
     }
   },
-  "created_at": "2026-10-08T19:14:22.035164+00:00",
+  "created_at": "2026-10-08T21:39:11.556832+00:00",
   "engine": "4.7.2",
   "export_scope": "opening_bootstrap_through_patch_confirmation_and_restart",
   "exported_entries": 540,
-  "file_index_sha256": "e0cc3f73cd713a9a58eb3e931675fcd392f68ba9314fb00f72761b44f3d196d2",
+  "file_index_sha256": "78200ac16a10f87c6e1f093f2a5eac4ee362b2b465a62fee56544053907d9808",
   "generated_entries": {
     ".godot/exported/133200997/export-19246414aa9fb561ced4b8dce477acec-default_bus_layout.res": "compiled/converted resource mapped by default_bus_layout.tres.remap",
     ".godot/exported/133200997/export-2b1910340353ae43e8173a8645de3d0a-uomd_theme.res": "compiled/converted resource mapped by theme/uomd_theme.tres.remap",

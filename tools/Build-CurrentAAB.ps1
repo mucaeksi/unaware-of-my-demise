@@ -3,12 +3,16 @@ param(
     [Parameter(Mandatory=$true)][string]$Python,
     [string]$OutputDirectory = 'build/standalone-review',
     [string]$BundletoolJar = '',
-    [string]$DebugKeystore = (Join-Path $env:APPDATA 'Godot/keystores/debug.keystore'),
+    [string]$DebugKeystore = '',
     [switch]$PacksOnly
 )
 # Works from the generated folder too: only the opening preset and base are needed.
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+if (-not $DebugKeystore) {
+    $configRoot = if ($env:APPDATA) { $env:APPDATA } elseif ($env:XDG_CONFIG_HOME) { $env:XDG_CONFIG_HOME } else { Join-Path $HOME '.config' }
+    $DebugKeystore = Join-Path $configRoot $(if (([Environment]::OSVersion.Platform -eq [PlatformID]::Win32NT)) { 'Godot/keystores/debug.keystore' } else { 'godot/debug.keystore' })
+}
 $snapshotRoot = Split-Path $PSScriptRoot -Parent
 $gameRoot = Join-Path $snapshotRoot 'game'
 $outputRoot = [IO.Path]::GetFullPath((Join-Path $snapshotRoot $OutputDirectory))

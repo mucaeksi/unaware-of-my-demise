@@ -365,12 +365,119 @@
     ]
   },
   {
+    "sha256": "1fec3ff1a47cfd1450a1b894a5c5675f6aab11103c91aee17f1612ab071e8390",
+    "files": [
+      ".codex/references/templates/guidance/accessibility-requirements-guide.md",
+      ".agents/archive/20261008/sources/.claude/docs/templates/guidance/accessibility-requirements-guide.md"
+    ]
+  },
+  {
+    "sha256": "68c7c3871c959408b5dbcd8a73a4c906f674f7e8d17c03f735f29e9549613e9a",
+    "files": [
+      ".codex/references/templates/guidance/hud-design-guide.md",
+      ".agents/archive/20261008/sources/.claude/docs/templates/guidance/hud-design-guide.md"
+    ]
+  },
+  {
+    "sha256": "9b1f5a15133b220a2275039bcf3281fb34af3ece9c299d8759b66a559e69fc62",
+    "files": [
+      ".codex/references/templates/guidance/interaction-pattern-library-guide-game-specific.md",
+      ".agents/archive/20261008/sources/.claude/docs/templates/guidance/interaction-pattern-library-guide-game-specific.md"
+    ]
+  },
+  {
+    "sha256": "72f3e8f3e5a9347b171cb76d18ce9ae57478bdd61a9c9fcbbf1ae4aff83b0ebd",
+    "files": [
+      ".codex/references/templates/guidance/interaction-pattern-library-guide-navigation-feedback.md",
+      ".agents/archive/20261008/sources/.claude/docs/templates/guidance/interaction-pattern-library-guide-navigation-feedback.md"
+    ]
+  },
+  {
+    "sha256": "47f72f705ffef14cbf81fba6ebb5d914f992a9f06612ce04ec3e90da05a9dfb2",
+    "files": [
+      ".codex/references/templates/guidance/ux-spec-guide.md",
+      ".agents/archive/20261008/sources/.claude/docs/templates/guidance/ux-spec-guide.md"
+    ]
+  },
+  {
+    "sha256": "6ecc068715c0edffc4bc21e5dca450803e0a45af145f72221da23d14e7588359",
+    "files": [
+      "THIRD_PARTY_LICENSES/claude-code-game-studios-MIT.txt",
+      "release/current/THIRD_PARTY_LICENSES/claude-code-game-studios-MIT.txt"
+    ]
+  },
+  {
+    "sha256": "b87104b2fdb1610bfb1e7ebfda1a863f15cee5deac6682a38151b6b547a4ac49",
+    "files": [
+      "THIRD_PARTY_NOTICE.md",
+      "release/current/THIRD_PARTY_NOTICE.md"
+    ]
+  },
+  {
+    "sha256": "97bd42e1671a05aafa2f52940227e67bb1e60866ded5648bac8cd331120c4976",
+    "files": [
+      "docs/release/CURRENT_AAB.md",
+      "release/current/docs/CURRENT_AAB.md"
+    ]
+  },
+  {
+    "sha256": "ccad123fd1a9d1bcf5a4ba43751e857d1e674c0058a81f7c4a3f9b62cc17667a",
+    "files": [
+      "game/assets/backgrounds/forest_whispering_ash/side_arena_v001.png",
+      "release/current/game/assets/backgrounds/forest_whispering_ash/side_arena_v001.png"
+    ]
+  },
+  {
+    "sha256": "b0f78a4110695aab148a9a5d8aa3f3f4470f499d277ed47cde7ce54761d24e47",
+    "files": [
+      "game/assets/branding/sovtaym/v01/emblem.png",
+      "release/current/game/assets/branding/sovtaym/v01/emblem.png"
+    ]
+  },
+  {
+    "sha256": "adb099c502ef937ba01e3eef0077a290445591cf9c18b2c85b7316d0e6e7c9cb",
+    "files": [
+      "game/assets/branding/uomd/v01/emblem.png",
+      "release/current/game/assets/branding/uomd/v01/emblem.png"
+    ]
+  },
+  {
+    "sha256": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634",
+    "files": [
+      "game/assets/characters/fadyme/chibi_poses_v003.png",
+      "release/current/game/assets/characters/fadyme/chibi_poses_v003.png"
+    ]
+  },
+  {
+    "sha256": "259c166899b70e77c0e27452c813cabbc00e56cb0c6eae59aece7c6d80a91068",
+    "files": [
+      "game/assets/characters/fadyme/profile_icon_v001.png",
+      "release/current/game/assets/characters/fadyme/profile_icon_v001.png"
+    ]
+  },
+  {
+    "sha256": "c24beba982782dc764078619dd99e53b3f8792495a2602856e9ff4a02dc14161",
+    "files": [
+      "game/assets/characters/fadyme/ultimate_cutin_v001.png",
+      "release/current/game/assets/characters/fadyme/ultimate_cutin_v001.png"
+    ]
+  },
+  {
+    "sha256": "1d06c98782fabdcf57ac9f647c107ea8316e39dded124cd86f9716db8fd00c62",
+    "files": [
+      "game/assets/characters/fadyme/ultimate_pose_v003.png",
+      "release/current/game/assets/characters/fadyme/ultimate_pose_v003.png"
+    ]
+  },
+  {
     "sha256": "68ad5d9f4b3a44998f31e2a63e66e3d0a553befa44ad99fb4c8b32f041b1f290",
     "files": [
       "game/assets/characters/fadyme/vn_composed_v001.png",
       "game/assets/ui/production/v001/entry/fadyme_composed.png",
+      "release/current/game/assets/characters/fadyme/vn_composed_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_Composed_v001.png",
-      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_Composed_v001(1).png"
+      "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_Composed_v001(1).png",
+      "release/current/game/assets/ui/production/v001/entry/fadyme_composed.png"
     ]
   },
   {
@@ -378,6 +485,7 @@
     "files": [
       "game/assets/characters/fadyme/vn_honest_fear_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_HonestFear_v001.png",
+      "release/current/game/assets/characters/fadyme/vn_honest_fear_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_HonestFear_v001(1).png"
     ]
   },
@@ -386,6 +494,7 @@
     "files": [
       "game/assets/characters/fadyme/vn_quiet_pain_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_QuietPain_v001.png",
+      "release/current/game/assets/characters/fadyme/vn_quiet_pain_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_QuietPain_v001(1).png"
     ]
   },
@@ -393,29 +502,159 @@
     "sha256": "9f5a76e725253ff322e0ad9bd348b8fd3b4fbb5339a07019c8f355ae788c0e32",
     "files": [
       "game/assets/characters/fadyme/vn_warm_v001.png",
+      "release/current/game/assets/characters/fadyme/vn_warm_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_Warm_v001.png",
       "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_VN_Bust_Warm_v001(1).png"
+    ]
+  },
+  {
+    "sha256": "571cba7f0bedab12737103229958a399ad40acd63fac746d3b212d57a5656346",
+    "files": [
+      "game/assets/characters/fadyme/vn_wry_v001.png",
+      "release/current/game/assets/characters/fadyme/vn_wry_v001.png"
+    ]
+  },
+  {
+    "sha256": "69f981f5dbae07eaf7b3fe514661e977fe6b047791655df5573c493ffe733b8c",
+    "files": [
+      "game/assets/characters/mahmut/basic_attack_v003.png",
+      "release/current/game/assets/characters/mahmut/basic_attack_v003.png"
+    ]
+  },
+  {
+    "sha256": "9a77ec6e6e4a9ffe86907b3ad6c6d2bea16193e686abd1d5c4cafdd044a08a20",
+    "files": [
+      "game/assets/characters/mahmut/chibi_poses_v003.png",
+      "release/current/game/assets/characters/mahmut/chibi_poses_v003.png"
+    ]
+  },
+  {
+    "sha256": "163fc5695cc4b06feebe62d80e7c0d73d0d462af210f022516fc56abaecd8338",
+    "files": [
+      "game/assets/characters/mahmut/guard_pose_v003.png",
+      "release/current/game/assets/characters/mahmut/guard_pose_v003.png"
+    ]
+  },
+  {
+    "sha256": "9584ce5e29d05c24445e67db98ad1b2b6ffb9e987ee233e93e46ab7082de32eb",
+    "files": [
+      "game/assets/characters/mahmut/profile_icon_v001.png",
+      "release/current/game/assets/characters/mahmut/profile_icon_v001.png"
+    ]
+  },
+  {
+    "sha256": "d86157c6f21f24e0284da37005bf72493469f43d9e56a7a420115f5b14d9ca8f",
+    "files": [
+      "game/assets/characters/mahmut/ultimate_cutin_v001.png",
+      "release/current/game/assets/characters/mahmut/ultimate_cutin_v001.png"
+    ]
+  },
+  {
+    "sha256": "5f54e98052b790a415bb128b7689d4359d6fc1cbc1a4ef27c44f9f7f282a2b01",
+    "files": [
+      "game/assets/characters/mahmut/vn_dry_humor_v001.png",
+      "release/current/game/assets/characters/mahmut/vn_dry_humor_v001.png"
+    ]
+  },
+  {
+    "sha256": "c1298ccac0910a64598ab7d6a6d19cfc92778b2261a02fd4b2434745224c52ad",
+    "files": [
+      "game/assets/characters/mahmut/vn_protective_resolve_v001.png",
+      "release/current/game/assets/characters/mahmut/vn_protective_resolve_v001.png"
+    ]
+  },
+  {
+    "sha256": "3fc41f865a39449e520e78b79c79e828d4654a64f7778849cf2b085137d0a7d0",
+    "files": [
+      "game/assets/characters/mahmut/vn_watchful_v001.png",
+      "release/current/game/assets/characters/mahmut/vn_watchful_v001.png"
+    ]
+  },
+  {
+    "sha256": "13ba8dc5e5dde64b157c854ba58c63358c2d86bc2e97a39b736683b64f586c2d",
+    "files": [
+      "game/assets/enemies/tutorial/bellbound_attack_v003.png",
+      "release/current/game/assets/enemies/tutorial/bellbound_attack_v003.png"
+    ]
+  },
+  {
+    "sha256": "1af25ab7d903016bd81a98f4b72bffa3f3f716fe75f2768fd8f6c5ff836cedd1",
+    "files": [
+      "game/assets/enemies/tutorial/bellbound_poses_v003.png",
+      "release/current/game/assets/enemies/tutorial/bellbound_poses_v003.png"
+    ]
+  },
+  {
+    "sha256": "0f4dae03ed7f3f9ef3263aefe493912c589d2c195b93fc79f13a3483a84437a0",
+    "files": [
+      "game/assets/enemies/tutorial/pilgrim_attack_v003.png",
+      "release/current/game/assets/enemies/tutorial/pilgrim_attack_v003.png"
+    ]
+  },
+  {
+    "sha256": "165cb66e91dc324b177040d2a0f1b7b92917e47b2f64d0b3f1e55c0e805b5c56",
+    "files": [
+      "game/assets/enemies/tutorial/pilgrim_poses_v003.png",
+      "release/current/game/assets/enemies/tutorial/pilgrim_poses_v003.png"
     ]
   },
   {
     "sha256": "f2b3029aba64c378bf0963b62945eee15e564fe4330b934c8f2eb058282b5e83",
     "files": [
       "game/data/legal/cinzel-ofl.txt",
-      "game/assets/fonts/art_direction_v01/Cinzel-OFL.txt"
+      "game/assets/fonts/art_direction_v01/Cinzel-OFL.txt",
+      "release/current/game/data/legal/cinzel-ofl.txt"
+    ]
+  },
+  {
+    "sha256": "f4d83d34d1f6c741193e4acf4b3dff9531e5a67b6aa65228d00a7db72a4e0f34",
+    "files": [
+      "game/assets/fonts/art_direction_v01/Cinzel.ttf",
+      "release/current/game/assets/fonts/art_direction_v01/Cinzel.ttf"
     ]
   },
   {
     "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
     "files": [
       "game/data/legal/inter-ofl.txt",
-      "game/assets/fonts/art_direction_v01/Inter-OFL.txt"
+      "game/assets/fonts/art_direction_v01/Inter-OFL.txt",
+      "release/current/game/data/legal/inter-ofl.txt"
+    ]
+  },
+  {
+    "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+    "files": [
+      "game/assets/fonts/art_direction_v01/Inter.ttf",
+      "release/current/game/assets/fonts/art_direction_v01/Inter.ttf"
+    ]
+  },
+  {
+    "sha256": "d0a87d835a944b8b40d0e82a5651bb59ab97b936a2aeed5946eb57e7b2a3a90a",
+    "files": [
+      "game/assets/fonts/google_signin/GoogleSans.ttf",
+      "release/current/game/assets/fonts/google_signin/GoogleSans.ttf"
     ]
   },
   {
     "sha256": "56af9b9c6715597e458284a474dc118a50a4150e9d547c70f7b4a33c3e6a9328",
     "files": [
       "game/data/legal/source-sans-3-ofl.txt",
-      "game/assets/fonts/production_v001/SourceSans3-OFL.txt"
+      "game/assets/fonts/production_v001/SourceSans3-OFL.txt",
+      "release/current/game/data/legal/source-sans-3-ofl.txt"
+    ]
+  },
+  {
+    "sha256": "4644c81b86ec9caaa76b634889968ed3c4f4f52f054855933acc7c2b21e53b0f",
+    "files": [
+      "game/assets/fonts/production_v001/SourceSans3-Regular.ttf",
+      "release/current/game/assets/fonts/production_v001/SourceSans3-Regular.ttf"
+    ]
+  },
+  {
+    "sha256": "a3f4f8dcf343a8f24dc61951de93f3ba1558b15cd250ba24af8a40e957081b7d",
+    "files": [
+      "game/assets/fonts/production_v001/SourceSans3-Semibold.ttf",
+      "release/current/game/assets/fonts/production_v001/SourceSans3-Semibold.ttf"
     ]
   },
   {
@@ -489,38 +728,547 @@
     ]
   },
   {
-    "sha256": "4afb597023cfbbe495c92bee612074fdff33226e7427b1f879aa66f157fb44ce",
+    "sha256": "7edd59126c258e602e69905a0517cf51bedea489b1a69eb06a77edee1769e81e",
     "files": [
       "game/assets/vfx/kenney_impacts/LICENSE.txt",
-      "game/assets/third_party/reference/kenney-particles/LICENSE.txt"
+      "game/assets/third_party/reference/kenney-particles/LICENSE.txt",
+      "release/current/game/assets/vfx/kenney_impacts/LICENSE.txt"
     ]
   },
   {
     "sha256": "e15db5a8ccea012f4df82689f1a829bdaac04fd8a3066a723f157e0b01ffbf0a",
     "files": [
       "game/assets/vfx/kenney_impacts/light_01.png",
-      "game/assets/third_party/reference/kenney-particles/light_01.png"
+      "game/assets/third_party/reference/kenney-particles/light_01.png",
+      "release/current/game/assets/vfx/kenney_impacts/light_01.png"
     ]
   },
   {
     "sha256": "ca5e7eac772d5af176f0d45be34f416908859bf28697c31f3ec7f34609919f53",
     "files": [
       "game/assets/vfx/kenney_impacts/spark_01.png",
-      "game/assets/third_party/reference/kenney-particles/spark_01.png"
+      "game/assets/third_party/reference/kenney-particles/spark_01.png",
+      "release/current/game/assets/vfx/kenney_impacts/spark_01.png"
+    ]
+  },
+  {
+    "sha256": "818283fd7232f084e49843a954b6159ff41449ece2a050c5680c0109ee4ef5cf",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/back.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/back.svg"
+    ]
+  },
+  {
+    "sha256": "3b7b2b4721b31c25fa7275b9b08e10bbafb3627caaf889a27740cc8fc66a86e7",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/check.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/check.svg"
+    ]
+  },
+  {
+    "sha256": "4bc153cd755f4d97c0e6e2c7f05512933bb9d702ec1c4b5045966b785c9e1b2b",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/checked.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/checked.svg"
+    ]
+  },
+  {
+    "sha256": "35b9c0ffdd77746e3db8b6d49b6b416393f01c70af84979f57a8e670bdfc39e8",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/chevron.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/chevron.svg"
+    ]
+  },
+  {
+    "sha256": "cca7f84cf02b83475dc9437bcfd9be9628d837bff97e1efbdbb48dec3592e6a1",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/close.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/close.svg"
+    ]
+  },
+  {
+    "sha256": "8ff42a44f6cc8c94af572e8709ef9432383e7f265d5ce481339b037d523b0b37",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/companions.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/companions.svg"
+    ]
+  },
+  {
+    "sha256": "c2f233bae6083ac62aeebe59556f14ce3862dc28df2e96ee44c7b9b85b5993a3",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/help.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/help.svg"
+    ]
+  },
+  {
+    "sha256": "1ed1d31a3342aea7831ee7ab1323b080e6dfd06e2424197a240e5d65e81f5892",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/home.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/home.svg"
+    ]
+  },
+  {
+    "sha256": "69a209982b21a152bb120b91ba9ac2e954aa0416bf2068847e159bf821541702",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/journey.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/journey.svg"
+    ]
+  },
+  {
+    "sha256": "ef427a11887e7c8e9f0cf1a9416729ab165d01c5a1563847b18120241c4af77f",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/lock.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/lock.svg"
+    ]
+  },
+  {
+    "sha256": "eecd6f285cacaa3dc3fa79f7ea1745ed410b42b4dc45fbd8dcf7f22e929d8d5a",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/records.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/records.svg"
+    ]
+  },
+  {
+    "sha256": "382c840a5f74b408419259204d5700e3870ffbe938a9974abdfb4c9425ebaf75",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/settings.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/settings.svg"
+    ]
+  },
+  {
+    "sha256": "fb975be8ea7fdfa6a5055ab145ec63aed557c2b024ecc851e1822c88615a1fb5",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/summon.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/summon.svg"
+    ]
+  },
+  {
+    "sha256": "145950f9923e90f2b65af6f98bd726e2436a1458434bd8f4e4111f2dac84ea38",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/unchecked.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/unchecked.svg"
+    ]
+  },
+  {
+    "sha256": "c367087807758a6057fb91549791e4a4f5356c3b5d7d30c6efdeca1551d045d1",
+    "files": [
+      "game/assets/ui/gothic/v02/icons/waiting.svg",
+      "release/current/game/assets/ui/gothic/v02/icons/waiting.svg"
+    ]
+  },
+  {
+    "sha256": "39ad7c3bc3318a754b7b432e7fd59e5b579fd1e9e39cb06e0187576c32e6693a",
+    "files": [
+      "game/assets/ui/gothic/v02/panel_frame.svg",
+      "release/current/game/assets/ui/gothic/v02/panel_frame.svg"
+    ]
+  },
+  {
+    "sha256": "e5d98424bf5aecc16465644f8401ccb6568e31f6c3ad07a6bec3ca22098aa2c5",
+    "files": [
+      "game/assets/ui/narrative/prologue_v001/crownfall.png",
+      "release/current/game/assets/ui/narrative/prologue_v001/crownfall.png"
     ]
   },
   {
     "sha256": "02751e68cc927cc536eb3a330ddf2df25883b48da2812651047750090a02d2ac",
     "files": [
       "game/assets/ui/narrative/prologue_v001/forest_road.png",
+      "release/current/game/assets/ui/narrative/prologue_v001/forest_road.png",
       "narrative/08_Locations/Reference_Images/forest_whispering_ash/bg_forest_whispering_ash_ordered_v001.png"
+    ]
+  },
+  {
+    "sha256": "7e50a6171297306e019ba5ed76a4a58357b1725683789f3865bd5644b8e2514a",
+    "files": [
+      "game/assets/ui/narrative/prologue_v001/living_village.png",
+      "release/current/game/assets/ui/narrative/prologue_v001/living_village.png"
+    ]
+  },
+  {
+    "sha256": "a9e97eae8ca090924f6713ecc145aedf730037acdeb11720a9214a38d896eb40",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/bell.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/bell.png"
+    ]
+  },
+  {
+    "sha256": "ef323b1742a9c2c20b3fb6cd4cef528973b83234763ee477a1eddbcb61a98607",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/bell_tower.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/bell_tower.png"
+    ]
+  },
+  {
+    "sha256": "574177c3f4627c6352d671fb83a78bb9cd8f063b61b50611973b02522bbb4b8c",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/duo_walk.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/duo_walk.png"
+    ]
+  },
+  {
+    "sha256": "75eddc9f32e602e678801a2d5431e10578d00a532bae6fae3e5f3b7ea74decff",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/fadyme_reunion.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/fadyme_reunion.png"
+    ]
+  },
+  {
+    "sha256": "01063866226d47fe7980fb2142088e035c72ba699f7f613edb489b1b151bde93",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/hill_village.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/hill_village.png"
+    ]
+  },
+  {
+    "sha256": "d538b030c56ddcccff5f6c0430b3b4f0d366e6ff6e4e852b83f02128697a1c29",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/mahmut_reunion.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/mahmut_reunion.png"
+    ]
+  },
+  {
+    "sha256": "d793aafcd22fc47e69bb768a74d4ad55600e648ea766051f9483590e7d8770ed",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/mahmut_search.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/mahmut_search.png"
+    ]
+  },
+  {
+    "sha256": "f342a13f25b86e32aa8e73ef4cdd00752180c2dd21804b4d4520321e2a91d1e7",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/market_people.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/market_people.png"
+    ]
+  },
+  {
+    "sha256": "cb0a13e28e06261e546bbb6849bbffc6c8b788a8a9fd1b86e9e21a17be8295c1",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/refugees.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/refugees.png"
+    ]
+  },
+  {
+    "sha256": "7eb997d88fe348ece161bf3a813af52ce3ade366139183d900559b55fcea898f",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/refugees_walk.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/refugees_walk.png"
+    ]
+  },
+  {
+    "sha256": "a319aca003e0f7c6673c339080cfdda226a2938a18f9e5cbd344b2b28c72bcb6",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/register.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/register.png"
+    ]
+  },
+  {
+    "sha256": "a9f51e62e856c7da56fd33258a13a960831b840451fe4ad7cc6f9660b7e9455b",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/search_inn.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/search_inn.png"
+    ]
+  },
+  {
+    "sha256": "d0446b25dc96741a634a0b053f82b2f64c573f8e7d58735fdd8a16af270361b2",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/war_fields.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/war_fields.png"
+    ]
+  },
+  {
+    "sha256": "59309818af3a5a2b4b378675f69974ab09f885af7a6d0ccc3896706b356d82a5",
+    "files": [
+      "game/assets/ui/narrative/prologue_v002/writing_arm_v003.png",
+      "release/current/game/assets/ui/narrative/prologue_v002/writing_arm_v003.png"
+    ]
+  },
+  {
+    "sha256": "f431401e2ab09ab677656127e294152226bd5423ab9c68f4b27cb9619e1be721",
+    "files": [
+      "game/assets/ui/narrative/tutorial_v002/roadside_rest_v001.png",
+      "release/current/game/assets/ui/narrative/tutorial_v002/roadside_rest_v001.png"
+    ]
+  },
+  {
+    "sha256": "4851e29c0aac4947d9b1e4999315afc9fe2e4be6cbce252777aa4c6cacc9e856",
+    "files": [
+      "game/assets/ui/narrative/tutorial_v002/shelter_evening_v001.png",
+      "release/current/game/assets/ui/narrative/tutorial_v002/shelter_evening_v001.png"
     ]
   },
   {
     "sha256": "6bfc215e3f0ad123e3ac80607102acb202ff9b66af02215968a433334de11f29",
     "files": [
       "game/assets/ui/narrative/v002/approved_wordmark.png",
-      "narrative/FADYME_MEDIA_ALL/UOMD_APPROVED_Primary_Logo_v001.png"
+      "narrative/FADYME_MEDIA_ALL/UOMD_APPROVED_Primary_Logo_v001.png",
+      "release/current/game/assets/ui/narrative/v002/approved_wordmark.png"
+    ]
+  },
+  {
+    "sha256": "a084a906ee0681f4544f57eb73e9f06f21e8c6396a7c5cec71111756d072369b",
+    "files": [
+      "game/assets/ui/narrative/v002/disabled.svg",
+      "release/current/game/assets/ui/narrative/v002/disabled.svg"
+    ]
+  },
+  {
+    "sha256": "1cd3a786e9c1315445d1a4821cb78691f32af5f8bb5fd446f1b4a1fa06be1929",
+    "files": [
+      "game/assets/ui/narrative/v002/entry_atmosphere.png",
+      "release/current/game/assets/ui/narrative/v002/entry_atmosphere.png"
+    ]
+  },
+  {
+    "sha256": "d1ce9c2af0b10a7333abc99bc706f9a6a199e5b65bf3e3009624f076b8638e6a",
+    "files": [
+      "game/assets/ui/narrative/v002/google_g.png",
+      "release/current/game/assets/ui/narrative/v002/google_g.png"
+    ]
+  },
+  {
+    "sha256": "2dabc303b6f969a32edfb6c99ba51a38e04e6dac0744fe9bb7afc7b268cbfd0c",
+    "files": [
+      "game/assets/ui/narrative/v002/icons/mail.svg",
+      "release/current/game/assets/ui/narrative/v002/icons/mail.svg"
+    ]
+  },
+  {
+    "sha256": "4f71fbc4f3506ef8c480af35274c600c506fca0c0648ca12875ec298469266cf",
+    "files": [
+      "game/assets/ui/narrative/v002/icons/music.svg",
+      "release/current/game/assets/ui/narrative/v002/icons/music.svg"
+    ]
+  },
+  {
+    "sha256": "166e001f6750f4ce43a179c2647806edcf5e633ad78caa89bc74c92c0595c9db",
+    "files": [
+      "game/assets/ui/narrative/v002/icons/slider_grip.svg",
+      "release/current/game/assets/ui/narrative/v002/icons/slider_grip.svg"
+    ]
+  },
+  {
+    "sha256": "1fb6e72cf76457475ccae95dfa718a2b8fc57c62200511ea92a63fb839c4c3ab",
+    "files": [
+      "game/assets/ui/narrative/v002/icons/speed.svg",
+      "release/current/game/assets/ui/narrative/v002/icons/speed.svg"
+    ]
+  },
+  {
+    "sha256": "3777b27a4202939ee9e514465eede8f783d0a4de850b8a4b9b3118c4f8aa22a6",
+    "files": [
+      "game/assets/ui/narrative/v002/icons/text.svg",
+      "release/current/game/assets/ui/narrative/v002/icons/text.svg"
+    ]
+  },
+  {
+    "sha256": "598b0ff6b30ee91b141f5ad854f7aacac43a8db82f4fb21f9e55193fb176c51f",
+    "files": [
+      "game/assets/ui/narrative/v002/panel.svg",
+      "release/current/game/assets/ui/narrative/v002/panel.svg"
+    ]
+  },
+  {
+    "sha256": "4551b370712d80138e31b030a8b7067f65ddcbc97afa50958d32384ea5a433c5",
+    "files": [
+      "game/assets/ui/narrative/v002/panel_hero.svg",
+      "release/current/game/assets/ui/narrative/v002/panel_hero.svg"
+    ]
+  },
+  {
+    "sha256": "3def01d097047272e5dbfd2ae1f4c2470b2ec542aed23930dd8e9ea144a13bc1",
+    "files": [
+      "game/assets/ui/narrative/v002/primary.svg",
+      "release/current/game/assets/ui/narrative/v002/primary.svg"
+    ]
+  },
+  {
+    "sha256": "bb14afeca387bbc3d656142779a6fc2ab60b7c0aab2af66e007161eae929efbc",
+    "files": [
+      "game/assets/ui/narrative/v002/primary_hover.svg",
+      "release/current/game/assets/ui/narrative/v002/primary_hover.svg"
+    ]
+  },
+  {
+    "sha256": "8b08272047fc4d2ed32983316052abc5eda45382c79de366e9a27370b68106f5",
+    "files": [
+      "game/assets/ui/narrative/v002/primary_pressed.svg",
+      "release/current/game/assets/ui/narrative/v002/primary_pressed.svg"
+    ]
+  },
+  {
+    "sha256": "37b69aebf97e2c085a335d6a7ef0683f22baa89fa07c96386d588a8b6a811266",
+    "files": [
+      "game/assets/ui/narrative/v002/secondary.svg",
+      "release/current/game/assets/ui/narrative/v002/secondary.svg"
+    ]
+  },
+  {
+    "sha256": "c82e9d63441a6bdf411f8382633108c92570ae42943278259f54ea1235c2b442",
+    "files": [
+      "game/assets/ui/narrative/v002/secondary_hover.svg",
+      "release/current/game/assets/ui/narrative/v002/secondary_hover.svg"
+    ]
+  },
+  {
+    "sha256": "5b0d389f807998b114ea130d72ad3bcb8f5030ef019aa720ed70d63db70e9b0d",
+    "files": [
+      "game/assets/ui/narrative/v002/title_plate.png",
+      "release/current/game/assets/ui/narrative/v002/title_plate.png"
+    ]
+  },
+  {
+    "sha256": "6d717bf346a4966a1bdaa55dada16db35706215b80d2d426a8a5c6e222bbbda7",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Badge_Standard_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Badge_Standard_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "2b689c84c098a6f7270c02766fbeaaf9cb5269441bb06e23f532913d11db20bf",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Default_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Default_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "0d10f63269f00592ac9b2d1f4e6dafc4094ef7e014d2f02c26a9eac73feb0d09",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Disabled_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Disabled_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "dcd42fa72c9b22eb9d24b362c521a60a0ce6088faa60e4fb288bd56df8dbceaf",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Pressed_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Destructive_Pressed_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "2b3647f2230d433c548e38494e999300cafa6473412544ade189d74c0659f9a8",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Default_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Default_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "16675677e61c2da6959cd9301e51566e14c8c0cb9756873f77c5113f2617f783",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Disabled_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Disabled_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "52d8fe5f8bb51fe7ee399f8710de639df13ab63d295a536072427412b8520441",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Error_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Error_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "2beea9f49167be408145f43299b88097f39aaac8218c5c36771b21f1a320a6fa",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Pressed_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Pressed_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "b546ace92c580971258dbcbd228431027c40bb5fb3f94cf3aa9ba41a5fea9506",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Success_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Primary_Success_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "e95e00c501949bf4d4b3c9b1d65b3b017a2b6058bc1723ee52b70c34007d136e",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Default_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Default_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "73e9052ad3831d7812defd1b9438a3a1b5d55c40eca536a95b5a8c949685d573",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Disabled_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Disabled_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "de890f9d069ed56d484b7ddcd6afbeddf87a75a9e826baac4a228d836e039491",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Pressed_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Button_Secondary_Pressed_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "4ddefde1cfe96116abefe19e75eade122ead50c49fd96b7aaa0e754d9e427272",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Card_Standard_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Card_Standard_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "32d450f11257f6d234586654ff6944d37dce12c1f500ca2a3d48dcb214ba1ce1",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Nav_Backplate_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Nav_Backplate_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "d3909ec32d9a605a8f82449b57d05a5455705e279d3b76b7363eefbdcebd27d1",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Panel_Hero_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Hero_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "7e6929931f15ba072c1bf197f26375c6057da4b5b292018aceea2315aef010f4",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Panel_Modal_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Modal_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "89f045df2d993c2a8a6b0d0d59b8d3bb892b26740eb8d33084945ff3b10bbb21",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Panel_Sheet_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Sheet_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "718253985b5080445c171ed7d90d3e4aef693a8103a2feeaeff76113a39ffcab",
+    "files": [
+      "game/assets/ui/production/v001/components/UOMD_UI_Panel_Standard_9Slice_v001.png",
+      "release/current/game/assets/ui/production/v001/components/UOMD_UI_Panel_Standard_9Slice_v001.png"
+    ]
+  },
+  {
+    "sha256": "9d50cad4379457a4aef15d6cde90fb8c2b90826b912fc15164b83221a3309541",
+    "files": [
+      "game/assets/ui/production/v001/icons/offline.svg",
+      "release/current/game/assets/ui/production/v001/icons/offline.svg"
+    ]
+  },
+  {
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "files": [
+      "game/data/legal/apache-2.0.txt",
+      "release/current/game/data/legal/apache-2.0.txt"
+    ]
+  },
+  {
+    "sha256": "65ca17f235e1d9adaf2e25fd14d0929c75521ac1e063a48d6824a8e7b7e4466a",
+    "files": [
+      "game/data/legal/google-sans-ofl.txt",
+      "release/current/game/data/legal/google-sans-ofl.txt"
+    ]
+  },
+  {
+    "sha256": "d598e116f520d2efe046cd52a58d1f2160b8a2711b14f6169fb9a18b70e3e76e",
+    "files": [
+      "game/icon.svg",
+      "release/current/game/icon.svg"
     ]
   },
   {

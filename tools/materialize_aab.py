@@ -359,6 +359,10 @@ class Writer:
         blob = path.read_bytes()
         check_private(source, blob)
         self.put(target or source, transform(blob) if transform else blob, category, source, digest(blob), exported)
+        if path.stat().st_mode & 0o111:
+            destination = self.stage / (target or source)
+            destination.chmod(destination.stat().st_mode | 0o111)
+            self.rows[target or source]["executable"] = True
 
 
 def verify_snapshot(output: Path, project_root: Path | None = None) -> dict[str, object]:
@@ -380,6 +384,8 @@ def verify_snapshot(output: Path, project_root: Path | None = None) -> dict[str,
         check_private(name, path.read_bytes() if path.stat().st_size < 10_000_000 else None)
         if row["sha256"] != file_digest(path) or row["bytes"] != path.stat().st_size:
             raise SnapshotError("Snapshot file was modified: " + name)
+        if os.name != "nt" and row.get("executable") and not path.stat().st_mode & 0o111:
+            raise SnapshotError("Snapshot executable permission missing: " + name)
     actual = set()
     for item in output.rglob("*"):
         assert_not_linked(item)
@@ -477,11 +483,11 @@ def materialize(project_root: Path, build_dir: Path, output: Path | None = None,
             "before exporting. The sole `Android AAB` preset retains Compatibility rendering and strict typing. "
             "The native AARs can be rebuilt with `game/tools/build_uomd_native.sh`; JDK, Android SDK, Gradle and "
             "signing identities are local prerequisites. No private keystore is included.\n\n"
-            "Future owner-authorized Git publishing should include source and notices. `artifacts/` is excluded "
-            "from Git because the review AAB exceeds GitHub's ordinary file size limit; distribute such binaries "
-            "through an authorized Release/upload step. No push or publication is performed by this tool.\n"
+            "Owner-selected Git tracking includes source, notices and artifacts. AAB and base PCK use the "
+            "repository's Git LFS attributes; install Git LFS and fetch their objects before verification. "
+            "Keep credentials and generated caches outside deliverables. No push or publication is performed by this tool.\n"
         ).encode(), "review_instructions")
-        writer.put(".gitignore", b"artifacts/\nbuild/\n.godot/\ngame/.godot/\n__pycache__/\n*.pyc\ngame/addons/uomd_native/bin/\ngame/android/build/\ngame/android/.build_version\ngame/android/plugins/uomd_native/.gradle/\ngame/android/plugins/uomd_native/build/\n.env*\n*.keystore\n*.jks\n*.p12\nexport_credentials.cfg\n", "source_publish_policy")
+        writer.put(".gitignore", b"# Ignore rules disabled at repository owner request.\n", "source_publish_policy")
         index_blob = json_bytes({"schema_version": 1, "files": sorted(writer.rows.values(), key=lambda row: row["path"])})
         (stage / "FILE_INDEX.json").write_bytes(index_blob)
         release = {"schema_version": 1, "owner": OWNER, "status": "local_review",

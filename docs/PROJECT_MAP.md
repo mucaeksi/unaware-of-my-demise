@@ -21,7 +21,7 @@ Current local organization: 2026-10-08. Start here before opening large folders.
 | Native preview | `game/scripts/art_review/preview_session.gd` | `fadyme_pilot.gd`, `game/scenes/art_review/entry_preview.tscn` |
 | Session and release state | `game/scripts/app/game.gd`, `game_flow.gd` | `online.gd`, `installed_content.gd`, `entry_restart.gd` in that folder |
 | Registry and content hashes | `game/data/content/MANIFEST.json` | `game/scripts/core/content/` |
-| API, online rules | `server/src/` | `server/test/`, `server/wrangler.toml` |
+| API, online rules | `server/src/` | `server/test/`, `server/wrangler.jsonc` |
 | Database | `database/migrations/` | `database/README.md` |
 | Admin | `admin/` | Separate Worker and static Next.js export |
 | Current creative direction | `narrative/00_Canon/Owner_Current_Direction/CREATIVE_RESTART_PROMPT.md` | `narrative/FADYME_MEDIA_ALL/00_APPROVED_VISUAL_CANON_FADYME_MAHMUT_v001.json` |
@@ -32,7 +32,7 @@ Current local organization: 2026-10-08. Start here before opening large folders.
 
 ## Fast lookup
 
-Run `python tools/project_catalog.py build` after organization changes. The ignored `.local/project-index.json` catalogues Git-visible authored files, byte counts, hashes, feature tags and membership in the current AAB source. It does not read private key contents. Runtime files keep their paths and UIDs; generated release files point back to their source.
+Run `python tools/project_catalog.py build` after organization changes. The local `.local/project-index.json` catalogues Git-visible authored files, byte counts, hashes, feature tags and membership in the current AAB source. It does not read private key contents. Runtime files keep their paths and UIDs; generated release files point back to their source.
 
 ```powershell
 python tools/project_catalog.py find fadyme --scope aab
@@ -44,4 +44,4 @@ graphify query "Entry tutorial patch restart"
 
 Use Graphify queries first for code relationships, then `path`/`explain` for a selected boundary. `graphify-out/wiki/index.md` is broad navigation. After code changes run `graphify update .` and the project refresh helper as required by `AGENTS.md`. The graph's semantic coverage flags remain explicit; a directory catalogue is not a claim that every historical document is semantically reviewed.
 
-`game/` remains the editable development source. `release/current/` is generated and contains one sealed test version. `build/` keeps ignored build evidence; `.local/` keeps ignored working indexes. Reference collections stay local with provenance and licenses and enter exports only when selected. The secondary Production folder and LEGACY originals remain read-only. Moving Godot resource trees just to tidy folders would break paths and UIDs; this organization uses explicit boundaries and indexed navigation.
+`game/` remains the editable development source. `release/current/` is generated and contains one sealed test version. `build/` keeps build evidence; `.local/` keeps working indexes. Ignore rules were disabled by the owner; select authored deliverables explicitly when preparing a commit. Reference collections stay local with provenance and licenses and enter exports only when selected. The secondary Production folder and LEGACY originals remain read-only. Moving Godot resource trees just to tidy folders would break paths and UIDs; this organization uses explicit boundaries and indexed navigation.

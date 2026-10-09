@@ -26301,17 +26301,12 @@
   },
   {
     "source_file": "AGENTS.md",
-    "source_location": "L17",
+    "source_location": "L26",
     "target": "/graphify"
   },
   {
     "source_file": "CLAUDE.md",
-    "source_location": "L11",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "CLAUDE.md",
-    "source_location": "L17",
+    "source_location": "L22",
     "target": "tools/graphify_project.py --refresh"
   },
   {
@@ -26333,16 +26328,6 @@
     "source_file": "README.md",
     "source_location": "L5",
     "target": "F:/unaware-of-my-demise"
-  },
-  {
-    "source_file": "README.md",
-    "source_location": "L9",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "README.md",
-    "source_location": "L9",
-    "target": "release/current/artifacts/game.aab"
   },
   {
     "source_file": "README.md",
@@ -26492,11 +26477,6 @@
   {
     "source_file": "docs/ARCHITECTURE.md",
     "source_location": "L27",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/ARCHITECTURE.md",
-    "source_location": "L27",
     "target": "build/"
   },
   {
@@ -26533,26 +26513,6 @@
     "source_file": "docs/ART_AND_CODE_HANDOFF.md",
     "source_location": "L10",
     "target": "backgrounds/"
-  },
-  {
-    "source_file": "docs/ART_AND_CODE_HANDOFF.md",
-    "source_location": "L11",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/ART_AND_CODE_HANDOFF.md",
-    "source_location": "L11",
-    "target": "release/support/"
-  },
-  {
-    "source_file": "docs/ART_AND_CODE_HANDOFF.md",
-    "source_location": "L17",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/CURRENT_STATE.md",
-    "source_location": "L7",
-    "target": "release/current/"
   },
   {
     "source_file": "docs/CURRENT_STATE.md",
@@ -27096,11 +27056,6 @@
   },
   {
     "source_file": "docs/DECISIONS.md",
-    "source_location": "L779",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/DECISIONS.md",
     "source_location": "L782",
     "target": "build/project-organization-20261008/"
   },
@@ -27573,6 +27528,11 @@
     "source_file": "docs/INFRASTRUCTURE_ROADMAP.md",
     "source_location": "L30",
     "target": "GET /v1/bootstrap"
+  },
+  {
+    "source_file": "docs/INFRASTRUCTURE_ROADMAP.md",
+    "source_location": "L47",
+    "target": "res://assets/..."
   },
   {
     "source_file": "docs/INFRASTRUCTURE_ROADMAP.md",
@@ -28657,22 +28617,7 @@
   {
     "source_file": "docs/PROJECT_MAP.md",
     "source_location": "L10",
-    "target": "release/current/artifacts/game.aab"
-  },
-  {
-    "source_file": "docs/PROJECT_MAP.md",
-    "source_location": "L10",
-    "target": "release/current/release.json"
-  },
-  {
-    "source_file": "docs/PROJECT_MAP.md",
-    "source_location": "L10",
     "target": "docs/build-report.json"
-  },
-  {
-    "source_file": "docs/PROJECT_MAP.md",
-    "source_location": "L24",
-    "target": "server/wrangler.toml"
   },
   {
     "source_file": "docs/PROJECT_MAP.md",
@@ -28702,11 +28647,6 @@
   {
     "source_file": "docs/PROJECT_MAP.md",
     "source_location": "L47",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/PROJECT_MAP.md",
-    "source_location": "L47",
     "target": "build/"
   },
   {
@@ -28726,18 +28666,8 @@
   },
   {
     "source_file": "docs/REPOSITORY_INVENTORY.md",
-    "source_location": "L3",
-    "target": "release/current/FILE_INDEX.json"
-  },
-  {
-    "source_file": "docs/REPOSITORY_INVENTORY.md",
     "source_location": "L14",
     "target": ".claude/"
-  },
-  {
-    "source_file": "docs/REPOSITORY_INVENTORY.md",
-    "source_location": "L18",
-    "target": "release/current/"
   },
   {
     "source_file": "docs/REPOSITORY_INVENTORY.md",
@@ -29003,6 +28933,11 @@
     "source_file": "docs/art/GDQUEST_VFX_REVIEW_2026-10-08.md",
     "source_location": "L52",
     "target": "build/gdquest-vfx-review-20261008/"
+  },
+  {
+    "source_file": "docs/coder/CLOUD_MAIN_SYNC.md",
+    "source_location": "L11",
+    "target": "mucaeksi/unaware-of-my-demise"
   },
   {
     "source_file": "docs/coder/GIT_STRATEGY.md",
@@ -29481,11 +29416,6 @@
   },
   {
     "source_file": "docs/design/OPENING_UI_POLISH_v007_2026-10-08.md",
-    "source_location": "L33",
-    "target": "release/current"
-  },
-  {
-    "source_file": "docs/design/OPENING_UI_POLISH_v007_2026-10-08.md",
     "source_location": "L36",
     "target": "build/ui-polish-20261008/"
   },
@@ -29577,11 +29507,6 @@
   {
     "source_file": "docs/release/CURRENT_AAB.md",
     "source_location": "L3",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/release/CURRENT_AAB.md",
-    "source_location": "L3",
     "target": "artifacts/game.aab"
   },
   {
@@ -29590,14 +29515,24 @@
     "target": "docs/ASSET_PROVENANCE.json"
   },
   {
-    "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
-    "source_location": "L10",
-    "target": "release/current/"
+    "source_file": "docs/release/FIRST_AAB_FIX_REPORT_2026-10-09.md",
+    "source_location": "L3",
+    "target": "origin/main"
   },
   {
-    "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
-    "source_location": "L27",
-    "target": "release/current/"
+    "source_file": "docs/release/FIRST_AAB_FIX_REPORT_2026-10-09.md",
+    "source_location": "L4",
+    "target": "/workspace/uomd-main-review"
+  },
+  {
+    "source_file": "docs/release/FIRST_AAB_PLAN.md",
+    "source_location": "L3",
+    "target": "origin/main"
+  },
+  {
+    "source_file": "docs/release/FIRST_AAB_PLAN.md",
+    "source_location": "L65",
+    "target": "game/assets/audio/voice/<speaker_id>/<line_id>.ogg"
   },
   {
     "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
@@ -29646,11 +29581,6 @@
   },
   {
     "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
-    "source_location": "L63",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
     "source_location": "L65",
     "target": "references/free_2d/upstream/"
   },
@@ -29686,23 +29616,8 @@
   },
   {
     "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
-    "source_location": "L69",
-    "target": "release/current/artifacts/"
-  },
-  {
-    "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
     "source_location": "L81",
     "target": "materialize_aab.py verify release/current --project-root ."
-  },
-  {
-    "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
-    "source_location": "L90",
-    "target": "release/current/artifacts/game.aab"
-  },
-  {
-    "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
-    "source_location": "L91",
-    "target": "release/current/artifacts/opening-base.pck"
   },
   {
     "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
@@ -29716,11 +29631,6 @@
   },
   {
     "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
-    "source_location": "L104",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/release/MIGRATION_AND_CLOUD_REPORT_2026-10-08_TR.md",
     "source_location": "L183",
     "target": "codex/"
   },
@@ -29731,23 +29641,8 @@
   },
   {
     "source_file": "docs/release/PROJECT_ORGANIZATION_2026-10-08.md",
-    "source_location": "L3",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/release/PROJECT_ORGANIZATION_2026-10-08.md",
     "source_location": "L9",
     "target": ".claude/"
-  },
-  {
-    "source_file": "docs/release/PROJECT_ORGANIZATION_2026-10-08.md",
-    "source_location": "L13",
-    "target": "release/current/game/"
-  },
-  {
-    "source_file": "docs/release/PROJECT_ORGANIZATION_2026-10-08.md",
-    "source_location": "L17",
-    "target": "release/current/artifacts/game.aab"
   },
   {
     "source_file": "docs/release/PROJECT_ORGANIZATION_2026-10-08.md",
@@ -29781,16 +29676,6 @@
   },
   {
     "source_file": "docs/release/WORKSPACE_COPY_2026-10-08_TR.md",
-    "source_location": "L17",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/release/WORKSPACE_COPY_2026-10-08_TR.md",
-    "source_location": "L18",
-    "target": "release/support/current-aab/"
-  },
-  {
-    "source_file": "docs/release/WORKSPACE_COPY_2026-10-08_TR.md",
     "source_location": "L20",
     "target": ".claude/"
   },
@@ -29811,21 +29696,6 @@
   },
   {
     "source_file": "docs/release/WORKSPACE_COPY_2026-10-08_TR.md",
-    "source_location": "L24",
-    "target": "game/addons/uomd_native/bin/"
-  },
-  {
-    "source_file": "docs/release/WORKSPACE_COPY_2026-10-08_TR.md",
-    "source_location": "L53",
-    "target": "release/support/current-aab/story-content.pck"
-  },
-  {
-    "source_file": "docs/release/WORKSPACE_COPY_2026-10-08_TR.md",
-    "source_location": "L62",
-    "target": "release/current/"
-  },
-  {
-    "source_file": "docs/release/WORKSPACE_COPY_2026-10-08_TR.md",
     "source_location": "L64",
     "target": "game/android/build/"
   },
@@ -29833,11 +29703,6 @@
     "source_file": "docs/release/WORKSPACE_COPY_2026-10-08_TR.md",
     "source_location": "L66",
     "target": ".local/migration-20261008/"
-  },
-  {
-    "source_file": "docs/release/WORKSPACE_COPY_2026-10-08_TR.md",
-    "source_location": "L66",
-    "target": "release/current/"
   },
   {
     "source_file": "docs/runbooks/BACKUP_RESTORE.md",
@@ -30881,253 +30746,13 @@
   },
   {
     "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L11",
-    "target": "../story/STORY_BIBLE_PART1.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L11",
-    "target": "../story/VILLAIN_BIBLE_PART1.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L11",
-    "target": "../story/PART1_FULL_SCRIPT.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L11",
-    "target": "../canon/canon.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L17",
-    "target": "../content/README.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L18",
-    "target": "../characters/INDEX.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L19",
-    "target": "../content/character_stories_part1.json"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L20",
-    "target": "../content/events_part1.json"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L21",
-    "target": "../content/character_voice_lines_part1.json"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L22",
-    "target": "../lore/locations/registry.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L47",
-    "target": "../lore/world_rules.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L68",
-    "target": "../lore/factions/_registry.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L68",
-    "target": "../lore/history/crownfall.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L68",
-    "target": "../lore/timeline.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L88",
-    "target": "../lore/locations/part1_route.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L98",
-    "target": "../lore/locations/registry.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L98",
-    "target": "../prompts/asset_pipeline/location_briefs.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
     "source_location": "L98",
     "target": "ordered / uneasy / chaotic"
   },
   {
     "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L100",
-    "target": "../lore/bestiary.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L104",
-    "target": "../lore/characters/_README.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L104",
-    "target": "../../game/data/content/characters_part1.json"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L110",
-    "target": "../lore/characters/mahmut.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L116",
-    "target": "../lore/characters/fadyme.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L122",
-    "target": "../lore/characters/kera_voss.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L128",
-    "target": "../lore/characters/brin_alder.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L134",
-    "target": "../lore/characters/nixie_vale.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L140",
-    "target": "../lore/characters/sister_aveline.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L146",
-    "target": "../lore/characters/sable_wren.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L146",
-    "target": "../prompts/sheets/sable_wren_sheet.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L152",
-    "target": "../lore/characters/tilda_fen.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L158",
-    "target": "../lore/characters/rikka_ember.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L164",
-    "target": "../lore/characters/mirel_quill.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L170",
-    "target": "../lore/characters/odelia_pike.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L176",
-    "target": "../lore/characters/pippa_bell.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L182",
-    "target": "../lore/characters/nara_vell.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L188",
-    "target": "../lore/characters/clem_marr.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L194",
-    "target": "../lore/characters/vespera_wisp.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L194",
-    "target": "../prompts/sheets/vespera_wisp_sheet.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L200",
-    "target": "../lore/characters/hana_birch.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L206",
-    "target": "../lore/characters/thistle_roe.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L212",
-    "target": "../lore/characters/iona_mist.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L218",
-    "target": "../lore/characters/jori_flint.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L224",
-    "target": "../lore/characters/marek_vane.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L228",
-    "target": "../lore/characters/yseldra.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L229",
-    "target": "../lore/characters/cael.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
     "source_location": "L230",
     "target": "cs_nara_vell_2/4"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L233",
-    "target": "../lore/characters/ashen_lord.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L235",
-    "target": "../story/STORY_BIBLE_PART1.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L257",
-    "target": "../canon/SPOILER_UNLOCK_POLICY.md"
-  },
-  {
-    "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
-    "source_location": "L278",
-    "target": "../migration/RECONCILIATION.md"
   },
   {
     "source_file": "narrative/00_Canon/Owner_Current_Direction/WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md",
@@ -36240,6 +35865,11 @@
     "target": "docs/NARRATIVE_TECH_HANDOFF_PART1.md"
   },
   {
+    "source_file": "narrative/13_Timeline_Factions_Glossary/glossary.md",
+    "source_location": "L14",
+    "target": "history/seven_bells.md"
+  },
+  {
     "source_file": "narrative/14_References/Fadyme_README.md",
     "source_location": "L4",
     "target": "../README.md"
@@ -37143,6 +36773,21 @@
     "source_file": "references/gdquest_vfx/README.md",
     "source_location": "L3",
     "target": "upstream/project.godot"
+  },
+  {
+    "source_file": "release/current/THIRD_PARTY_NOTICE.md",
+    "source_location": "L3",
+    "target": ".claude/"
+  },
+  {
+    "source_file": "release/current/docs/CURRENT_AAB.md",
+    "source_location": "L3",
+    "target": "artifacts/game.aab"
+  },
+  {
+    "source_file": "release/current/docs/CURRENT_AAB.md",
+    "source_location": "L41",
+    "target": "docs/ASSET_PROVENANCE.json"
   },
   {
     "source_file": "server/README.md",

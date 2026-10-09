@@ -1,16 +1,16 @@
 {
   "base": {
-    "bytes": 101418860,
+    "bytes": 101418444,
     "path": "artifacts/opening-base.pck",
-    "sha256": "8a92c0ace0ff928ea131ccb34494cee237644532e255054a7108399fade5dc1f"
+    "sha256": "1e4dbe311c6c8f705814579e9c407df491dc8e9ffa6824b385900893b6f02ab1"
   },
   "bundle": {
-    "bytes": 134505206,
+    "bytes": 134505579,
     "path": "artifacts/game.aab",
-    "sha256": "7bd2bf0bfa85e5e7d387d62e893d4be087c44a5dcda2225785a02bf5e186a652"
+    "sha256": "edd8cf08e42910e0d1845f63334a82add62bbecea7774625c3ffd86f77236456"
   },
   "bundletool_validation": "passed",
-  "created_at": "2026-10-08T19:12:47.9690697Z",
+  "created_at": "2026-10-08T21:34:50.6403417Z",
   "debug_signature": "verified_local_debug_only",
   "device_test": "pending_no_device",
   "distribution": "local_review"

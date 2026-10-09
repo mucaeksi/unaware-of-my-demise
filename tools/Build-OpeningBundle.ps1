@@ -3,11 +3,15 @@ param(
     [Parameter(Mandatory=$true)][string]$Python,
     [string]$OutputDirectory = "build/opening-aab-20261008",
     [string]$BundletoolJar = "",
-    [string]$DebugKeystore = (Join-Path $env:APPDATA 'Godot/keystores/debug.keystore'),
+    [string]$DebugKeystore = '',
     [switch]$PacksOnly
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+if (-not $DebugKeystore) {
+    $configRoot = if ($env:APPDATA) { $env:APPDATA } elseif ($env:XDG_CONFIG_HOME) { $env:XDG_CONFIG_HOME } else { Join-Path $HOME '.config' }
+    $DebugKeystore = Join-Path $configRoot $(if (([Environment]::OSVersion.Platform -eq [PlatformID]::Win32NT)) { 'Godot/keystores/debug.keystore' } else { 'godot/debug.keystore' })
+}
 $projectRoot = Split-Path $PSScriptRoot -Parent
 $gameRoot = Join-Path $projectRoot 'game'
 $outputRoot = [System.IO.Path]::GetFullPath((Join-Path $projectRoot $OutputDirectory))
@@ -55,8 +59,8 @@ if (-not $PacksOnly) {
         if (-not (Test-Path -LiteralPath $BundletoolJar)) {
             Invoke-WebRequest -Uri 'https://github.com/google/bundletool/releases/download/1.18.2/bundletool-all-1.18.2.jar' -OutFile $BundletoolJar
         }
-        if ((Get-FileHash -LiteralPath $BundletoolJar -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expectedHash) { throw 'Pinned bundletool checksum mismatch' }
     }
+    if ((Get-FileHash -LiteralPath $BundletoolJar -Algorithm SHA256).Hash.ToLowerInvariant() -ne '378b5434cd1378bef6b2bc527b8c7f0ff2584b273830335bce54d6d0813c8584') { throw 'Pinned bundletool checksum mismatch' }
     Invoke-BuildStep 'bundle-validation' (Get-Command java).Source @('-jar',$BundletoolJar,'validate',('--bundle='+$reviewBundle))
     Invoke-BuildStep 'native-packaging' $Python @((Join-Path $PSScriptRoot 'verify_aab_native.py'),$reviewBundle,'--report',(Join-Path $outputRoot 'native-packaging.json'))
     Invoke-BuildStep 'bundle-manifest' (Get-Command java).Source @('-jar',$BundletoolJar,'dump','manifest',('--bundle='+$reviewBundle),'--module=base')
