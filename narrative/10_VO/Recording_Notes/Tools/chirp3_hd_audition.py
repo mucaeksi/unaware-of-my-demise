@@ -1,7 +1,9 @@
 """Google Cloud Chirp 3 HD authoring only; never imported by the game.
 
 Run with --generate after the owner's sample request. Authentication comes from
-GOOGLE_CLOUD_API_KEY (including proxy bindings) or usable Google ADC. No keys,
+GOOGLE_CLOUD_API_KEY, GOOGLE_API_KEY or GEMINI_API (including proxy bindings),
+an existing service account, or usable Google ADC. Credentials are used only
+for the authorized audio batch; this tool never generates images. No keys,
 tokens, provider error bodies or URLs containing credentials are logged.
 """
 from __future__ import annotations
@@ -67,7 +69,7 @@ def authorization():
             return {'Authorization': 'Bearer ' + credentials.token}, 'EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH'
         except Exception:
             raise AuthoringError('GOOGLE_SERVICE_ACCOUNT_OAUTH_UNAVAILABLE') from None
-    for name in ('GOOGLE_CLOUD_API_KEY', 'GOOGLE_API_KEY'):
+    for name in ('GOOGLE_CLOUD_API_KEY', 'GOOGLE_API_KEY', 'GEMINI_API'):
         if os.environ.get(name):
             key = os.environ[name].strip()
             if not key or any(ord(c) <= 32 or ord(c) >= 127 for c in key):
