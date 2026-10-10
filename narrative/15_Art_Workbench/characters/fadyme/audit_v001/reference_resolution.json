@@ -1,0 +1,273 @@
+[
+  {
+    "ref": "prompts",
+    "declared_path": "narrative/prompts/reference_set/REFERENCE_SET_PART1.md",
+    "declared_path_exists": false,
+    "sha256": "0f49b137580dd27a953073e568979d3d2a82e9c695e4f90e85b315f24d3fbf6c",
+    "verified_current_paths": [
+      "narrative/12_Production_Notes/Prompt_Library/reference_set/REFERENCE_SET_PART1.md"
+    ]
+  },
+  {
+    "ref": "R09",
+    "declared_path": "narrative/references/fadyme/battle_pose/battle_pose_fadyme_attack_v003.png",
+    "declared_path_exists": false,
+    "sha256": "6e9c3a2571598c849bc91afc8881c212573b791aa79fec4beb6beecd63d82042",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_attack_v003.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R12",
+    "declared_path": "narrative/references/fadyme/battle_pose/battle_pose_fadyme_guard_v003.png",
+    "declared_path_exists": false,
+    "sha256": "65b72c2f8adc567deb60eeb06bb0aed6f458aa406ec140f91f8ec1a83165d83c",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_guard_v003.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R10",
+    "declared_path": "narrative/references/fadyme/battle_pose/battle_pose_fadyme_hit_v003.png",
+    "declared_path_exists": false,
+    "sha256": "8cd175b73bcc14096b5cfd8677d862fd4522b353a46378c6b20a6cae8abf58c9",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_hit_v003.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R08",
+    "declared_path": "narrative/references/fadyme/battle_pose/battle_pose_fadyme_idle_v002.png",
+    "declared_path_exists": false,
+    "sha256": "bacb6e29f8474c5e5ac3b98454598466929d28ff92b58972548def9ffbdc02e7",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_idle_v002.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R11",
+    "declared_path": "narrative/references/fadyme/battle_pose/battle_pose_fadyme_skill_v002.png",
+    "declared_path_exists": false,
+    "sha256": "3e4944b9df0f9dc6496aa4d11681a33265d935dd9a68c274d6b27da24174f5db",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_skill_v002.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R13",
+    "declared_path": "narrative/references/fadyme/battle_pose/battle_pose_fadyme_victory_v002.png",
+    "declared_path_exists": false,
+    "sha256": "3b2ee80f646e44247084f807dddab4ff439487e1c32b8a3236afd3bbc4c0e5e5",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_victory_v002.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R14",
+    "declared_path": "narrative/references/fadyme/cut_in/cut_in_fadyme_ultimate_v002.png",
+    "declared_path_exists": false,
+    "sha256": "aa4bbf559b094324399b3392f3dbdce05932c37fa0c34ea3a06c7cb8f746fe09",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/cut_in/cut_in_fadyme_ultimate_v002.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R03",
+    "declared_path": "narrative/references/fadyme/sheet/char-fadyme-uomd.png",
+    "declared_path_exists": false,
+    "sha256": "22a6010ac29639d12ad0f8a703d2a83841f16770c202bd3e98e39f53357a6517",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/sheet/char-fadyme-uomd.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R08-input",
+    "declared_path": "narrative/references/fadyme/sheet/chibi_ref_fadyme.png",
+    "declared_path_exists": false,
+    "sha256": "88d0aeb43470b65b588a7b14abf644755bbfc6cb50a37dce5ed7a70529d113d7",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/sheet/chibi_ref_fadyme.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R18-sidecar",
+    "declared_path": "narrative/references/fadyme/theme/bgm_fadyme_theme_v001_loop.json",
+    "declared_path_exists": false,
+    "sha256": "fb7a2dcb0e6051cf39ff54659911aa663f16f7eb23fe74f8d0cfc44937531768",
+    "verified_current_paths": [
+      "narrative/FADYME_MEDIA_ALL/AUDIO_CUES_SOURCE/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.json",
+      "narrative/FADYME_MEDIA_ALL/FADYME_AUDIO_CUES_EXTRACTED/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.json",
+      "narrative/FADYME_MEDIA_ALL/05_Audio_Cues/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.json",
+      "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.json"
+    ]
+  },
+  {
+    "ref": "R18",
+    "declared_path": "narrative/references/fadyme/theme/bgm_fadyme_theme_v001_loop.ogg",
+    "declared_path_exists": false,
+    "sha256": "bc2c230cf1cd67a8f1b4a7c9669f192f8388f3e1a363b772ce349b3ba6712e79",
+    "verified_current_paths": [
+      "narrative/FADYME_MEDIA_ALL/AUDIO_CUES_SOURCE/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.ogg",
+      "narrative/FADYME_MEDIA_ALL/FADYME_AUDIO_CUES_EXTRACTED/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.ogg",
+      "narrative/FADYME_MEDIA_ALL/05_Audio_Cues/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.ogg",
+      "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.ogg"
+    ]
+  },
+  {
+    "ref": "R18-sidecar",
+    "declared_path": "narrative/references/fadyme/theme/bgm_fadyme_theme_v001_original.json",
+    "declared_path_exists": false,
+    "sha256": "f0639c152c2e01acdb8d9a4cd3deae58e0c00213bfb0b02ccfb7e87ddc813fd9",
+    "verified_current_paths": [
+      "narrative/FADYME_MEDIA_ALL/AUDIO_CUES_SOURCE/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.json",
+      "narrative/FADYME_MEDIA_ALL/FADYME_AUDIO_CUES_EXTRACTED/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.json",
+      "narrative/FADYME_MEDIA_ALL/05_Audio_Cues/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.json",
+      "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_original.json"
+    ]
+  },
+  {
+    "ref": "R18-original",
+    "declared_path": "narrative/references/fadyme/theme/bgm_fadyme_theme_v001_original.mp3",
+    "declared_path_exists": false,
+    "sha256": "ff469fd0001dec0834dea53e8a6cfda7ff849ad64ab3a71a7fc2810f258c87dc",
+    "verified_current_paths": [
+      "narrative/FADYME_MEDIA_ALL/AUDIO_CUES_SOURCE/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.mp3",
+      "narrative/FADYME_MEDIA_ALL/FADYME_AUDIO_CUES_EXTRACTED/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.mp3",
+      "narrative/FADYME_MEDIA_ALL/05_Audio_Cues/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.mp3",
+      "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_original.mp3"
+    ]
+  },
+  {
+    "ref": "R04",
+    "declared_path": "narrative/references/fadyme/vn_bust/vn_bust_fadyme_composed_v001.png",
+    "declared_path_exists": false,
+    "sha256": "62b11e5bacdd2c31c87f1b837c3a2e43d4ce4ea1ba512dd630327b308d195687",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_composed_v001.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R06",
+    "declared_path": "narrative/references/fadyme/vn_bust/vn_bust_fadyme_honest_fear_v001.png",
+    "declared_path_exists": false,
+    "sha256": "3ceef4b10a5806e53ce01b8f2e8f9ff94b78082ddcead4321333fd9f333cfc5f",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_honest_fear_v001.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R05",
+    "declared_path": "narrative/references/fadyme/vn_bust/vn_bust_fadyme_quiet_pain_v002.png",
+    "declared_path_exists": false,
+    "sha256": "435e343c18be08f6378fa8cc0ef570705c475b93e9790a0d6bdef213a2c2f3b3",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_quiet_pain_v002.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R07",
+    "declared_path": "narrative/references/fadyme/vn_bust/vn_bust_fadyme_warm_v001.png",
+    "declared_path_exists": false,
+    "sha256": "9fcd8d2706b10874fff9cc591e75f83500cb549653b03cafb7daae6b39bf41da",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_warm_v001.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R23-ref",
+    "declared_path": "narrative/references/fadyme/voice/Fadyme_Sulafat_11_satir.mp3",
+    "declared_path_exists": false,
+    "sha256": "9286d062ba537e809f4564fd412e45b3d92476b4a332d3f5fd93af94f61284ce",
+    "verified_current_paths": [
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Recording_Notes/Fadyme_Sulafat_11_satir.mp3"
+    ],
+    "production_status": "HISTORICAL_AUDIO_ARCHIVED_SUPERSEDED_OWNER_2026_10_09"
+  },
+  {
+    "ref": "R23-casting",
+    "declared_path": "narrative/references/fadyme/voice/casting.json",
+    "declared_path_exists": false,
+    "sha256": "4f0d5fb0c928ff65b7a5c9e3baad4151f84276e484301acb897c6ea389f32433",
+    "verified_current_paths": [
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/VO_SOURCE/Recording_Notes__fadyme_casting.json",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/FADYME_VO_EXTRACTED/Recording_Notes__fadyme_casting.json",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/FADYME_MEDIA_ALL/04_VO/Recording_Notes__fadyme_casting.json",
+      "narrative/13_Archive/fadyme_voice_sulafat_2026-10-09/narrative/10_VO/Recording_Notes/fadyme_casting.json"
+    ],
+    "production_status": "HISTORICAL_AUDIO_ARCHIVED_SUPERSEDED_OWNER_2026_10_09"
+  },
+  {
+    "ref": "R17",
+    "declared_path": "narrative/references/icons/icons_pilot_mixed_16_mixed_v001.png",
+    "declared_path_exists": false,
+    "sha256": "39139c22ced18ec504c0b55e706673cdffd14fe3be96c5df1221b52f02a9b7ae",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/icons/icons_pilot_mixed_16_mixed_v001.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R02",
+    "declared_path": "narrative/references/key_art/brand_key_art_portrait_r2_v003.png",
+    "declared_path_exists": false,
+    "sha256": "58c54af2d268ce663542960950aace744286c7c4cf5d85b77a814134e3156176",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R02+R01",
+    "declared_path": "narrative/references/key_art/brand_key_art_portrait_r2_v003_with_logo.png",
+    "declared_path_exists": false,
+    "sha256": "896f772494168d538923bd1cbc2e6441050844bd49edc9bb51ce81482f50f670",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003_with_logo.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  },
+  {
+    "ref": "R16",
+    "declared_path": "narrative/references/locations/forest_whispering_ash/bg_forest_whispering_ash_battle_plate_ordered_v002.png",
+    "declared_path_exists": false,
+    "sha256": "0ca976584f8700bc7d103b7b3d6534629d4362c591459a9e1efc236f90a43a32",
+    "verified_current_paths": [
+      "narrative/08_Locations/Reference_Images/forest_whispering_ash/bg_forest_whispering_ash_battle_plate_ordered_v002.png"
+    ]
+  },
+  {
+    "ref": "R15",
+    "declared_path": "narrative/references/locations/forest_whispering_ash/bg_forest_whispering_ash_ordered_v001.png",
+    "declared_path_exists": false,
+    "sha256": "02751e68cc927cc536eb3a330ddf2df25883b48da2812651047750090a02d2ac",
+    "verified_current_paths": [
+      "narrative/08_Locations/Reference_Images/forest_whispering_ash/bg_forest_whispering_ash_ordered_v001.png"
+    ]
+  },
+  {
+    "ref": "R01",
+    "declared_path": "narrative/references/logo/brand_logo_wordmark_r2_v003.png",
+    "declared_path_exists": false,
+    "sha256": "c4a87503d53d5aab2d058f91cc988dd317baf728c093a80281a71988a8e8e4eb",
+    "verified_current_paths": [
+      "narrative/14_References/recovered_locked_v001/logo/brand_logo_wordmark_r2_v003.png"
+    ],
+    "recovered_from_commit": "85ca464e93e1ff55a055125b684973b79da4a4dd"
+  }
+]

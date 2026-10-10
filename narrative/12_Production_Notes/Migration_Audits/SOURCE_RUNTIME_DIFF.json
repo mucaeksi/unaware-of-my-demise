@@ -1,0 +1,553 @@
+{
+  "date": "2026-10-05",
+  "baseline_commit": "7440328ab39e20878732d2515c8347842769899f",
+  "runtime_changed_by_transfer": false,
+  "source_main_lines": 419,
+  "runtime_main_lines": 409,
+  "missing_in_runtime": [
+    "ch4_road_006",
+    "ch6_road_005",
+    "ch6_road_006",
+    "node_3_1_post_004",
+    "node_4_5_post_007",
+    "node_5_5_post_005",
+    "node_6_1_post_004",
+    "node_6_3_post_004",
+    "node_7_3_pre_007",
+    "node_7_3_pre_008"
+  ],
+  "runtime_only_lines": [],
+  "changed_shared_dialogue": [
+    "ch4_camp_006",
+    "node_3_5_post_001"
+  ],
+  "source_scene_order_count": 51,
+  "runtime_scene_order_count": 51,
+  "source_music_cue_fields": 51,
+  "runtime_music_cue_fields": 1,
+  "codex_unlock_differences": [
+    {
+      "id": "codex_seven_bells",
+      "source_unlock": {
+        "after_stage": "2-1"
+      },
+      "runtime_unlock": "always"
+    },
+    {
+      "id": "codex_hollows",
+      "source_unlock": {
+        "after_stage": "1-1"
+      },
+      "runtime_unlock": "always"
+    },
+    {
+      "id": "codex_vale",
+      "source_unlock": {
+        "after_stage": "1-4"
+      },
+      "runtime_unlock": "always"
+    },
+    {
+      "id": "codex_inquisition",
+      "source_unlock": {
+        "after_stage": "2-5"
+      },
+      "runtime_unlock": "always"
+    },
+    {
+      "id": "codex_red_vial",
+      "source_unlock": {
+        "after_stage": "4-5"
+      },
+      "runtime_unlock": "always"
+    },
+    {
+      "id": "codex_saint_luthos",
+      "source_unlock": {
+        "after_stage": "2-1"
+      },
+      "runtime_unlock": "always"
+    },
+    {
+      "id": "codex_first_eclipse",
+      "source_unlock": {
+        "after_stage": "7-1"
+      },
+      "runtime_unlock": "always"
+    },
+    {
+      "id": "codex_council",
+      "source_unlock": {
+        "after_stage": "6-5"
+      },
+      "runtime_unlock": "always"
+    },
+    {
+      "id": "codex_clockless",
+      "source_unlock": {
+        "after_stage": "7-5"
+      },
+      "runtime_unlock": "always"
+    }
+  ],
+  "source_vo_unlock_fields": 40,
+  "runtime_vo_unlock_fields": 0,
+  "jp_script_status": "DRAFT — Narrative & Visual Director; native JP editor review pending",
+  "jp_script_line_ids": 201,
+  "selected_voice_files": 25,
+  "selected_voice_line_ids_match_selection": true,
+  "jp_lines_without_individual_selected_audio": [
+    "ch2_camp_001",
+    "ch2_camp_003",
+    "ch2_camp_005",
+    "ch2_camp_006",
+    "ch2_camp_007",
+    "ch2_road_002",
+    "ch2_road_004",
+    "ch2_road_005",
+    "ch3_camp_002",
+    "ch3_camp_004",
+    "ch3_road_002",
+    "ch3_road_004",
+    "ch4_camp_002",
+    "ch4_camp_004",
+    "ch4_camp_005",
+    "ch4_road_003",
+    "ch4_road_005",
+    "ch5_camp_001",
+    "ch5_camp_003",
+    "ch5_camp_005",
+    "ch5_road_004",
+    "ch6_camp_005",
+    "ch6_road_002",
+    "ch6_road_004",
+    "ch6_road_005",
+    "ch7_road_001",
+    "ch7_road_003",
+    "ch7_road_005",
+    "confession_002",
+    "confession_004",
+    "confession_006",
+    "confession_008",
+    "confession_010",
+    "confession_012",
+    "confession_015",
+    "cs_clem_marr_1_002",
+    "cs_clem_marr_1_004",
+    "cs_clem_marr_2_002",
+    "cs_clem_marr_2_004",
+    "cs_fadyme_1_002",
+    "cs_fadyme_1_004",
+    "cs_fadyme_1_006",
+    "cs_fadyme_1_007",
+    "cs_fadyme_2_001",
+    "cs_fadyme_2_003",
+    "cs_fadyme_2_005",
+    "cs_fadyme_2_007",
+    "cs_hana_birch_2_001",
+    "cs_hana_birch_2_003",
+    "cs_hana_birch_4_002",
+    "cs_hana_birch_4_004",
+    "cs_iona_mist_1_002",
+    "cs_iona_mist_1_004",
+    "cs_iona_mist_4_002",
+    "cs_iona_mist_4_004",
+    "cs_marek_vane_4_001",
+    "cs_marek_vane_4_003",
+    "cs_mirel_quill_1_002",
+    "cs_mirel_quill_1_004",
+    "cs_nara_vell_1_002",
+    "cs_nara_vell_1_004",
+    "cs_nixie_vale_1_004",
+    "cs_nixie_vale_3_004",
+    "cs_odelia_pike_3_002",
+    "cs_odelia_pike_3_004",
+    "cs_pippa_bell_2_002",
+    "cs_pippa_bell_2_004",
+    "cs_pippa_bell_2_005",
+    "cs_pippa_bell_3_004",
+    "cs_pippa_bell_4_002",
+    "cs_pippa_bell_4_004",
+    "cs_rikka_ember_4_002",
+    "cs_rikka_ember_4_004",
+    "cs_sister_aveline_1_002",
+    "cs_sister_aveline_1_004",
+    "cs_sister_aveline_4_001",
+    "cs_sister_aveline_4_003",
+    "cs_sister_aveline_4_005",
+    "cs_thistle_roe_2_002",
+    "cs_thistle_roe_2_004",
+    "cs_thistle_roe_4_002",
+    "cs_thistle_roe_4_004",
+    "cs_tilda_fen_1_004",
+    "cs_tilda_fen_1_006",
+    "cs_tilda_fen_3_003",
+    "cs_tilda_fen_3_005",
+    "cs_vespera_wisp_2_002",
+    "cs_vespera_wisp_2_004",
+    "cs_vespera_wisp_3_002",
+    "cs_vespera_wisp_3_004",
+    "cs_vespera_wisp_3_006",
+    "ending_fadyme_001",
+    "ending_fadyme_002",
+    "ending_fadyme_003",
+    "event_harvest_inn_meal_2_002",
+    "event_harvest_inn_meal_3_003",
+    "node_2_2_post_002",
+    "node_2_3_post_003",
+    "node_2_3_post_004",
+    "node_2_3_pre_002",
+    "node_2_4_post_001",
+    "node_2_4_post_003",
+    "node_2_5_post_005",
+    "node_2_5_post_006",
+    "node_2_5_pre_004",
+    "node_2_5_pre_007",
+    "node_3_1_post_001",
+    "node_3_1_post_004",
+    "node_3_2_post_003",
+    "node_3_3_post_002",
+    "node_3_3_post_003",
+    "node_3_3_pre_002",
+    "node_3_3_pre_004",
+    "node_3_4_pre_003",
+    "node_3_5_post_004",
+    "node_3_5_post_005",
+    "node_4_1_post_002",
+    "node_4_2_post_003",
+    "node_4_3_post_002",
+    "node_4_3_post_004",
+    "node_4_3_post_005",
+    "node_4_3_pre_003",
+    "node_4_4_post_003",
+    "node_4_4_pre_002",
+    "node_4_4_pre_004",
+    "node_4_5_post_005",
+    "node_4_5_pre_003",
+    "node_5_1_post_002",
+    "node_5_2_post_002",
+    "node_5_3_post_003",
+    "node_5_4_post_001",
+    "node_5_4_post_003",
+    "node_5_4_post_004",
+    "node_5_4_pre_002",
+    "node_5_5_post_004",
+    "node_5_5_pre_004",
+    "node_6_1_post_003",
+    "node_6_2_post_001",
+    "node_6_2_post_003",
+    "node_6_2_post_006",
+    "node_6_3_post_002",
+    "node_6_4_post_003",
+    "node_6_4_post_004",
+    "node_6_4_pre_002",
+    "node_6_4_pre_004",
+    "node_6_4_pre_005",
+    "node_6_5_post_003",
+    "node_7_1_post_002",
+    "node_7_1_pre_005",
+    "node_7_2_post_003",
+    "node_7_2_post_004",
+    "node_7_3_post_003",
+    "node_7_3_post_004",
+    "node_7_3_pre_006",
+    "node_7_3_pre_007",
+    "node_7_4_post_002",
+    "node_7_4_post_004",
+    "node_7_4_pre_007",
+    "node_7_5_phase1_002",
+    "node_7_5_phase2_003",
+    "node_7_5_post_002",
+    "node_7_5_post_004",
+    "node_7_5_post_005",
+    "node_7_5_pre_002",
+    "node_7_5_pre_004",
+    "vo_fadyme_active_skill",
+    "vo_fadyme_basic_attack",
+    "vo_fadyme_defeat",
+    "vo_fadyme_first_meeting",
+    "vo_fadyme_idle",
+    "vo_fadyme_low_hp",
+    "vo_fadyme_relationship_1",
+    "vo_fadyme_relationship_2",
+    "vo_fadyme_team_join",
+    "vo_fadyme_ultimate",
+    "vo_fadyme_victory"
+  ],
+  "files": [
+    {
+      "file": "character_stories_part1.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "c4e5104df0a7b263f1e59facb1b4b5db3f79f8546186b553e6b1d9fc53605e4a",
+      "runtime_sha256": "f3a908938c64cdb2101d33171a9abf577617a6b46384d532f671d5265a53bb13",
+      "source_line_ids": 388,
+      "runtime_line_ids": 388,
+      "missing_in_runtime": [],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [
+        "cs_brin_alder_2_002",
+        "cs_brin_alder_2_004",
+        "cs_brin_alder_3_002",
+        "cs_brin_alder_3_006",
+        "cs_tilda_fen_1_002",
+        "cs_vespera_wisp_3_003"
+      ],
+      "changed_shared_dialogue": [
+        "cs_brin_alder_2_002",
+        "cs_brin_alder_2_004",
+        "cs_brin_alder_3_002",
+        "cs_brin_alder_3_006",
+        "cs_tilda_fen_1_002",
+        "cs_vespera_wisp_3_003"
+      ]
+    },
+    {
+      "file": "character_visuals_part1.json",
+      "byte_equal": false,
+      "semantic_equal": true,
+      "source_sha256": "c6b112233a23cf23af6627fd8d7fbd0696de1202abb83f5222083f8073fe2026",
+      "runtime_sha256": "64d48982a8c0681462fd52cb71e0c520b1a7981c5ba6bc760fabf78754865b13",
+      "source_line_ids": 0,
+      "runtime_line_ids": 0,
+      "missing_in_runtime": [],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [],
+      "changed_shared_dialogue": []
+    },
+    {
+      "file": "character_voice_lines_part1.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "82f23b4c397e183ba4692d159407c95426de41ad0a48d7ad7c62e40c84d928c0",
+      "runtime_sha256": "180ab1ad96234344ae95f19195e94f3168fda3e9d545fe30aabdf51480315ad7",
+      "source_line_ids": 220,
+      "runtime_line_ids": 220,
+      "missing_in_runtime": [],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [
+        "vo_brin_alder_relationship_1",
+        "vo_brin_alder_relationship_2",
+        "vo_clem_marr_relationship_1",
+        "vo_clem_marr_relationship_2",
+        "vo_fadyme_relationship_1",
+        "vo_fadyme_relationship_2",
+        "vo_hana_birch_relationship_1",
+        "vo_hana_birch_relationship_2",
+        "vo_iona_mist_relationship_1",
+        "vo_iona_mist_relationship_2",
+        "vo_jori_flint_relationship_1",
+        "vo_jori_flint_relationship_2",
+        "vo_kera_voss_relationship_1",
+        "vo_kera_voss_relationship_2",
+        "vo_mahmut_relationship_1",
+        "vo_mahmut_relationship_2",
+        "vo_marek_vane_relationship_1",
+        "vo_marek_vane_relationship_2",
+        "vo_mirel_quill_relationship_1",
+        "vo_mirel_quill_relationship_2",
+        "vo_nara_vell_relationship_1",
+        "vo_nara_vell_relationship_2",
+        "vo_nixie_vale_relationship_1",
+        "vo_nixie_vale_relationship_2",
+        "vo_odelia_pike_relationship_1",
+        "vo_odelia_pike_relationship_2",
+        "vo_pippa_bell_relationship_1",
+        "vo_pippa_bell_relationship_2",
+        "vo_rikka_ember_relationship_1",
+        "vo_rikka_ember_relationship_2",
+        "vo_sable_wren_relationship_1",
+        "vo_sable_wren_relationship_2",
+        "vo_sister_aveline_relationship_1",
+        "vo_sister_aveline_relationship_2",
+        "vo_thistle_roe_relationship_1",
+        "vo_thistle_roe_relationship_2",
+        "vo_tilda_fen_relationship_1",
+        "vo_tilda_fen_relationship_2",
+        "vo_vespera_wisp_relationship_1",
+        "vo_vespera_wisp_relationship_2"
+      ],
+      "changed_shared_dialogue": []
+    },
+    {
+      "file": "events_part1.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
+      "runtime_sha256": "739c1bfd1d7ec6c9bac56857914be4113c855871ca0a1a9a56bffd82c4eed59d",
+      "source_line_ids": 45,
+      "runtime_line_ids": 45,
+      "missing_in_runtime": [],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [
+        "event_council_herald_2_002"
+      ],
+      "changed_shared_dialogue": [
+        "event_council_herald_2_002"
+      ]
+    },
+    {
+      "file": "lore_text_part1.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "fcebca7bbbc53020f71f5a5024c38dc28fffb2439ecfed49ef4aa6f3cdff3248",
+      "runtime_sha256": "567f0d336244eb264ccb4ba992e7fc6a7e406be4f75422bd153bc058c42de737",
+      "source_line_ids": 0,
+      "runtime_line_ids": 0,
+      "missing_in_runtime": [],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [],
+      "changed_shared_dialogue": []
+    },
+    {
+      "file": "story_script_ch01.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "53e1cf59847fe15b1e7fa70a54a90f08c81fe0f94c4310c8d527844f8d69df21",
+      "runtime_sha256": "7a4252b5c319a709e85bc52aa1502c9d2f2d607ed96db1969e80505fd9369a61",
+      "source_line_ids": 69,
+      "runtime_line_ids": 69,
+      "missing_in_runtime": [],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [
+        "opening_008",
+        "opening_010",
+        "opening_015"
+      ],
+      "changed_shared_dialogue": []
+    },
+    {
+      "file": "story_script_ch02.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "8dc93d395a80583c66955dbe30fca66040d23aa972648a8d062edb22ae32eb0a",
+      "runtime_sha256": "8af525234e0f7205a87c445b08981883b144c9c69fbb66d0c8eb422e1ec7873b",
+      "source_line_ids": 54,
+      "runtime_line_ids": 54,
+      "missing_in_runtime": [],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [
+        "node_2_5_pre_001",
+        "node_2_5_pre_003",
+        "node_2_5_pre_005",
+        "node_2_5_pre_006"
+      ],
+      "changed_shared_dialogue": []
+    },
+    {
+      "file": "story_script_ch03.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "c48d1d1059fce39c2a35723ad4c692f3a7bc05289af8e7daa87b08ae4f333617",
+      "runtime_sha256": "1d0b2352e1e1ffb27dad28f3f7ac8556faf6efbd9779d8098b4cd46b832607ae",
+      "source_line_ids": 48,
+      "runtime_line_ids": 47,
+      "missing_in_runtime": [
+        "node_3_1_post_004"
+      ],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [
+        "node_3_5_post_001"
+      ],
+      "changed_shared_dialogue": [
+        "node_3_5_post_001"
+      ]
+    },
+    {
+      "file": "story_script_ch04.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "775fd32544c516eacce722b7f5b5398c785faab3744f555c8e6310d5e9a864de",
+      "runtime_sha256": "1d26e2d5144f1fea35dbd3977c377c22519797626df37abd5b382585d3cffa0b",
+      "source_line_ids": 54,
+      "runtime_line_ids": 52,
+      "missing_in_runtime": [
+        "ch4_road_006",
+        "node_4_5_post_007"
+      ],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [
+        "ch4_camp_006"
+      ],
+      "changed_shared_dialogue": [
+        "ch4_camp_006"
+      ]
+    },
+    {
+      "file": "story_script_ch05.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "8ea1b07ecba8a8cf27843ce2c2704a360f271459c00d24ebffb85b54db61a83b",
+      "runtime_sha256": "5ddb1fcf6bce46bc15b24ec721d26d9fa82541252c47a7f653c7d6780b1a7e88",
+      "source_line_ids": 49,
+      "runtime_line_ids": 48,
+      "missing_in_runtime": [
+        "node_5_5_post_005"
+      ],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [],
+      "changed_shared_dialogue": []
+    },
+    {
+      "file": "story_script_ch06.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "78d568bd266181e0dc93946e494939bcc85eb87b6317293ee9c01d76fe7dc2d3",
+      "runtime_sha256": "049bbac3d524dffa900299b8e04ab47d40d571ccd8fff05aa21ea12a3a326f7c",
+      "source_line_ids": 54,
+      "runtime_line_ids": 50,
+      "missing_in_runtime": [
+        "ch6_road_005",
+        "ch6_road_006",
+        "node_6_1_post_004",
+        "node_6_3_post_004"
+      ],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [],
+      "changed_shared_dialogue": []
+    },
+    {
+      "file": "story_script_ch07.json",
+      "byte_equal": false,
+      "semantic_equal": false,
+      "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f",
+      "runtime_sha256": "622fb5cd0a37d49eaffa988763cd1288cd5a427e3cd365c740a249a2a07ca2a7",
+      "source_line_ids": 91,
+      "runtime_line_ids": 89,
+      "missing_in_runtime": [
+        "node_7_3_pre_007",
+        "node_7_3_pre_008"
+      ],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [],
+      "changed_shared_dialogue": []
+    },
+    {
+      "file": "story_script_part1_manifest.json",
+      "byte_equal": true,
+      "semantic_equal": true,
+      "source_sha256": "95e8b2ddee2d730705add0f17fe983f678c22230bc577c8854d002554e34169b",
+      "runtime_sha256": "95e8b2ddee2d730705add0f17fe983f678c22230bc577c8854d002554e34169b",
+      "source_line_ids": 0,
+      "runtime_line_ids": 0,
+      "missing_in_runtime": [],
+      "only_in_runtime": [],
+      "changed_shared_line_records": [],
+      "changed_shared_dialogue": []
+    }
+  ],
+  "shared_dialogue_changes": [
+    {
+      "file": "story_script_ch03.json",
+      "line_id": "node_3_5_post_001",
+      "source_text_en": "Seven notches. Same wax as the seal on your shield. There are letters beneath it: C.V.",
+      "runtime_text_en": "Seven notches. Same wax as the cathedral. There are letters beneath it: C.V."
+    },
+    {
+      "file": "story_script_ch04.json",
+      "line_id": "ch4_camp_006",
+      "source_text_en": "East, then. The altar road crosses the ravine.",
+      "runtime_text_en": "East, then. The estate schedule is somewhere past the ravine."
+    }
+  ]
+}

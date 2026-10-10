@@ -1,0 +1,20 @@
+[
+  {
+    "check": "exit-zero-script-error",
+    "exit_code": 1,
+    "pass": true,
+    "output": "Preparing the pulled game source with Godot 4.7.2-stable...\nGodot import reported a script/resource error. Logs: <isolated launcher test state>/UnawareOfMyDemise/desktop-launcher"
+  },
+  {
+    "check": "wrong-engine",
+    "exit_code": 1,
+    "pass": true,
+    "output": "Select Godot 4.7.2-stable. Executable/version check failed: /usr/local/bin/godot"
+  },
+  {
+    "check": "conflicting-mode",
+    "exit_code": 1,
+    "pass": true,
+    "output": "-Online cannot be combined with -OpeningOnly or -ResetReview."
+  }
+]

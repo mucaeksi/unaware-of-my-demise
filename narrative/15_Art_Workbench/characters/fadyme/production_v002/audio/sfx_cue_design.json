@@ -1,0 +1,65 @@
+{
+  "status": "DESIGN_ONLY_AUDIO_LAST_NOT_GENERATED",
+  "reserved_google_family": "lyria-3.5",
+  "isolated_sfx_capability": "NOT_VERIFIED",
+  "format_target": "mono 48kHz WAV source; OGG delivery only after approved quality review",
+  "cues": [
+    {
+      "cue_id": "fadyme_veilglass_launch",
+      "target_seconds": 0.18,
+      "direction_en": "fine silver thorn air cut, dry short cast release; no bell walk sound",
+      "loop": false,
+      "production_status": "NOT_GENERATED"
+    },
+    {
+      "cue_id": "fadyme_veilglass_contact",
+      "target_seconds": 0.24,
+      "direction_en": "soft brittle glass chime, single controlled impact, no heavy shatter",
+      "loop": false,
+      "production_status": "NOT_GENERATED"
+    },
+    {
+      "cue_id": "fadyme_borrowed_hour_release",
+      "target_seconds": 0.65,
+      "direction_en": "one small silver bell strike then a dry interrupted clock tick; restrained Veil tail",
+      "loop": false,
+      "production_status": "NOT_GENERATED"
+    },
+    {
+      "cue_id": "fadyme_borrowed_hour_restore",
+      "target_seconds": 0.45,
+      "direction_en": "warm low healing shimmer localized to receiving ally",
+      "loop": false,
+      "production_status": "NOT_GENERATED"
+    },
+    {
+      "cue_id": "fadyme_a_smile_kept_ward",
+      "target_seconds": 0.4,
+      "direction_en": "muted silver resonance, subtle small protective cue, never a permanent loop",
+      "loop": false,
+      "production_status": "NOT_GENERATED"
+    },
+    {
+      "cue_id": "fadyme_bell_that_forgets_release",
+      "target_seconds": 1.1,
+      "direction_en": "one clear silver bell strike and decaying low Veil overtone, no huge brass church bell",
+      "loop": false,
+      "production_status": "NOT_GENERATED"
+    },
+    {
+      "cue_id": "fadyme_bell_that_forgets_cleanse",
+      "target_seconds": 0.48,
+      "direction_en": "small clean silver droplets, softer than release",
+      "loop": false,
+      "production_status": "NOT_GENERATED"
+    },
+    {
+      "cue_id": "fadyme_chain_cast_rustle",
+      "target_seconds": 0.2,
+      "direction_en": "tiny chain movement only during deliberate cast, no normal-walk ringing",
+      "loop": false,
+      "production_status": "NOT_GENERATED"
+    }
+  ],
+  "mix": "VO remains foreground; no music during first confession exchange. Final loudness measured from generated files; no fake LUFS claim."
+}

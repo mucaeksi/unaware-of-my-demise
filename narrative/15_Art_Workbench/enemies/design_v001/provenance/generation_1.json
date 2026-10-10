@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "date": "2026-10-10",
+  "generation_index": 1,
+  "prompt": "Create a premium dark fantasy game enemy character-design sheet for UNAWARE OF MY DEMISE, chapter 1 WHISPERING ASH. Original illustrated anime/light-novel painterly art with gothic chibi battle characters, 3.5 heads tall for humanoids; precise delicate ink lines, matte layered fabric, aged brass, ash ivory, charcoal, restrained oxblood, warm thin sunset rim light with cold fill. Serious haunted fairytale atmosphere, no cute comedy, no 3D render. Wide landscape sheet, four equal separate vertical columns, dark charcoal neutral background, clean high contrast silhouettes fully visible with generous margins. Each column has one LARGE full-body three-quarter character at top and one smaller distinct attack pose below, one small prop detail inset, English serif name only. Left to right EXACTLY FOUR enemies: 1 ASH WOLF: lean quadruped wolf, slate ash-encrusted fur, ember flecks in chest and restrained amber eyes, low aerodynamic wedge silhouette, long tail; smaller pose crouched before a rear-target leap. No collar or human weapon. 2 BELLBOUND DEAD: compact frail dead humanoid in ragged coal tunic, weathered skull face, aged brass bell on chest with chains visibly connecting ribs and wrist, crooked long grasping arms; smaller reaching attack pulls the wrist chain taut. No heavy armor. 3 HOLLOW PILGRIM: stooped stocky hooded corpse, face obscured in worn ash-beige cowl, large bundled pilgrim backpack, stout wooden walking staff, broad heavy hem, no skull emphasis; smaller pose two-handed weighted staff swing, stays grounded. 4 THE ASH-MAW: enormous wolf carcass shape fused with broken bronze bell shard INTO lower jaw, no attached whole neck bell; mossless coal fur plates, pale ash cracks, dark ember throat. Different from Ash Wolf: huge deep chest, fractured asymmetrical jaw with unmistakable breakable bell metal. Smaller howl pose with jaw opening and concentric muted amber resonance, an inset of the cracked JAW BELL. Visual boss mass larger than other creatures, NOT upright human, no horns, no extra limbs, no gore. Maintain premium Fadyme game's painterly gothic material family, simplify tiny detail at battle scale. No Fadyme, no hero, no Yseldra, no Cael, no generic grim reaper. This is a DESIGN REVIEW SHEET, not a runtime sprite atlas. If file output supported, save PNG to /workspace/unaware-of-my-demise/narrative/15_Art_Workbench/enemies/design_v001/boards/ch01_whispering_ash_v001.png.",
+  "transparent_background": false,
+  "reference_paths": [],
+  "output_path": "boards/ch01_whispering_ash_v001.png",
+  "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+  "inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+  "notes": "Generated PNG copied byte-exact. Editorial design board; no sprite/frame-animation claim.",
+  "output_sha256": "3580adb7c352a3595044dda816e0c044ae51240c6aeeb11f18da0972c3d4b148",
+  "references": []
+}

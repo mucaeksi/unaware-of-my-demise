@@ -1,0 +1,194 @@
+{
+  "root": "narrative/15_Art_Workbench/enemies/design_v001",
+  "files": [
+    {
+      "path": "boards/ch01_whispering_ash_v001.png",
+      "bytes": 2731837,
+      "format": "png",
+      "sha256": "3580adb7c352a3595044dda816e0c044ae51240c6aeeb11f18da0972c3d4b148",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "boards/ch02_saint_luthos_v001.png",
+      "bytes": 2750625,
+      "format": "png",
+      "sha256": "9224507858774aa91ccbc0be868bc72ee5cc71182e6e68fc558f299ba11d205a",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "boards/ch03_oakhaven_v001.png",
+      "bytes": 2835152,
+      "format": "png",
+      "sha256": "72aa4241aab1a0a58f75cdc4cbe4dda7a8f162b661f4f6d772888c72dc3a8d73",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "boards/ch04_undercity_v001.png",
+      "bytes": 2978354,
+      "format": "png",
+      "sha256": "11e3ceb6f954f80f5b903dbe2018909dc8c6efab4bf2a576aea36ce4505ae5b6",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "boards/ch05_forsaken_bridge_v001.png",
+      "bytes": 2906621,
+      "format": "png",
+      "sha256": "37c9dbbd1989ad08b8c1c8b93b3ce67f7a5fb2a7ff349f072dff6ed8434043d1",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "boards/ch05_forsaken_bridge_v002.png",
+      "bytes": 2734025,
+      "format": "png",
+      "sha256": "57eeace6619ee4644e04ebf09789c313cb09a2dd7801be1e73d720bccac14eb5",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "boards/ch06_ashen_estate_v001.png",
+      "bytes": 2837596,
+      "format": "png",
+      "sha256": "64503433694341f9a7c4ab24f4d4f3228967e91a5c877799f98ee27ef1193756",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "boards/ch07_first_eclipse_v001.png",
+      "bytes": 2848305,
+      "format": "png",
+      "sha256": "49e0c7e242f7002a111ce0255c08c33ad94a290d6ca18c5014dfb013b208bc27",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "boards/ch07_first_eclipse_v002.png",
+      "bytes": 2639617,
+      "format": "png",
+      "sha256": "82972c497417468ec7b10ca4fb7a64011d3fcb447d9e5966c4cf885cadeac7ba",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "boards/ch07_first_eclipse_v003.png",
+      "bytes": 2571534,
+      "format": "png",
+      "sha256": "8e299981b7ac8e25f54fa16beb8a4b228cbd196d7eaded9693782846f9466c6a",
+      "width": 1774,
+      "height": 887,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "validation/native/ch01_native.png",
+      "bytes": 588151,
+      "format": "png",
+      "sha256": "ca7d46da1eb6f284b2b42908fc6f960caa320865c5ee144d2ee9647c05049cad",
+      "width": 540,
+      "height": 960,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "validation/native/ch02_native.png",
+      "bytes": 583230,
+      "format": "png",
+      "sha256": "8598e4a851b1ebd0c503ea4cb4a145a65693766451dc7a42aabab66b635bda4a",
+      "width": 540,
+      "height": 960,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "validation/native/ch03_native.png",
+      "bytes": 606382,
+      "format": "png",
+      "sha256": "49158a8ba5d9b8ca0ae24da9c7487e05ea0ce956ca0060c2716ac6373cb7f811",
+      "width": 540,
+      "height": 960,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "validation/native/ch04_native.png",
+      "bytes": 625216,
+      "format": "png",
+      "sha256": "b4c426c9b59f761dff2de3e477258bebfa2151af9ea0e21978383ef5885e4a2b",
+      "width": 540,
+      "height": 960,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "validation/native/ch05_native.png",
+      "bytes": 619446,
+      "format": "png",
+      "sha256": "0d6c5607f4c66d86d72824bfa6673cc44621dc167292cf05eb2e1cce0aeafe9f",
+      "width": 540,
+      "height": 960,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "validation/native/ch06_native.png",
+      "bytes": 528501,
+      "format": "png",
+      "sha256": "71d4e586c1e6858c41b69258532240cff4df4a22fc5d44be20530ca0a968e3e1",
+      "width": 540,
+      "height": 960,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "validation/native/ch07_native.png",
+      "bytes": 593352,
+      "format": "png",
+      "sha256": "4e42bd5334b0e07d6c25fbb6d3b0866abe35fb90357bb4899b45e9d8cd2a8ae4",
+      "width": 540,
+      "height": 960,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    }
+  ],
+  "duplicates": [],
+  "limits": "No writes, full decoding, canon/licensing approval, orphan verdict or mobile performance certification."
+}

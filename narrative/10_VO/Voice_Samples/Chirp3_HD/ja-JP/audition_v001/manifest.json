@@ -1,0 +1,1143 @@
+{
+  "schema_version": 1,
+  "status": "ALL_LIVE_JAPANESE_CHIRP_WAVS_GENERATED_LISTENING_PENDING",
+  "synthesis_calls_attempted": 30,
+  "voices_list_calls_attempted": 10,
+  "voices": [
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Achernar",
+      "name": "Achernar",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Achernar"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "e59a44d771cdf5270bbe95248b57a673f0df0be086861bfd35fe690a880aafca",
+      "file": "female/ja-JP-Chirp3-HD-Achernar.wav",
+      "sha256": "5efc024d38afd1d34756e2f8142864b475df4914d078eef345d9e9946ddc950e",
+      "bytes": 311364,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 155660,
+        "duration_seconds": 6.485833333333333,
+        "peak_linear": 0.795654296875,
+        "rms_linear": 0.12952567067667098,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:01.538225+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Aoede",
+      "name": "Aoede",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Aoede"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "16943317dfe8c14f3b2a2bf3a0e9551ef3cda05229c735fc9357d185cbc1740a",
+      "file": "female/ja-JP-Chirp3-HD-Aoede.wav",
+      "sha256": "612c2d2952de6c8f34c3a8c90f54dca813315d17d7604f68bf199982a0dd9d0e",
+      "bytes": 393570,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 196763,
+        "duration_seconds": 8.198458333333333,
+        "peak_linear": 0.58050537109375,
+        "rms_linear": 0.07999366131712485,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:03.008368+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Autonoe",
+      "name": "Autonoe",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Autonoe"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "40179bc8915b08fd6daf106fe42a14e6e395bd0aedf5fae5596e99ad7d542c6c",
+      "file": "female/ja-JP-Chirp3-HD-Autonoe.wav",
+      "sha256": "0f55a961049aace58f6a8c81c0bdcf08717983b7ee8c2b944c60b631d38f3e8e",
+      "bytes": 344234,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 172095,
+        "duration_seconds": 7.170625,
+        "peak_linear": 0.824554443359375,
+        "rms_linear": 0.12183768686164767,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:04.317540+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Callirrhoe",
+      "name": "Callirrhoe",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Callirrhoe"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "a12d49eba926daef9d2286dee52b84ba057c771ed5571a83e9ea7b4ac1dd5bfa",
+      "file": "female/ja-JP-Chirp3-HD-Callirrhoe.wav",
+      "sha256": "9f8a357cebc3f11214d28976114930d2be94c8e78939741a93da84ab5879bccc",
+      "bytes": 323294,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 161625,
+        "duration_seconds": 6.734375,
+        "peak_linear": 0.726654052734375,
+        "rms_linear": 0.11789879066522745,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:06.298950+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Despina",
+      "name": "Despina",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Despina"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "860c61d4ae5bd7a5e112835ab8cae734ef1bbfbcbcdffb8cb42c93a8fe63c621",
+      "file": "female/ja-JP-Chirp3-HD-Despina.wav",
+      "sha256": "dfd6d86b5b4d02857ecf190f870070ae00379e465d4c56366fb6c860038d0235",
+      "bytes": 383972,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 191964,
+        "duration_seconds": 7.9985,
+        "peak_linear": 0.680633544921875,
+        "rms_linear": 0.11223331537668423,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:07.785068+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Erinome",
+      "name": "Erinome",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Erinome"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "f1e8c5b10fb68df624c02ccfa573374dfe0eb727a7a4623302b34db8a2b9e87c",
+      "file": "female/ja-JP-Chirp3-HD-Erinome.wav",
+      "sha256": "97ec98a629f552329ae3e0803a517e0ca04c224c3395d4eafc2c4411be1f5486",
+      "bytes": 319792,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 159874,
+        "duration_seconds": 6.661416666666667,
+        "peak_linear": 0.841827392578125,
+        "rms_linear": 0.12790802095113946,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:09.079537+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Gacrux",
+      "name": "Gacrux",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Gacrux"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "46fe96e827d88bb02c2a83db9a38daf592edaba87d219de7fbed08e4c83cc110",
+      "file": "female/ja-JP-Chirp3-HD-Gacrux.wav",
+      "sha256": "0300ff354a40f73cb32ba464f56dd57123856da0c37c722e2b9bc8cc5e66f083",
+      "bytes": 366238,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 183097,
+        "duration_seconds": 7.629041666666667,
+        "peak_linear": 0.9996337890625,
+        "rms_linear": 0.15224998049126795,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:10.622320+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Kore",
+      "name": "Kore",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Kore"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "19c8d1bc26e80ad12bf5ed805295e2afca0472f616575bde5109aec7aa58c469",
+      "file": "female/ja-JP-Chirp3-HD-Kore.wav",
+      "sha256": "b3757ce1d92e74a1b2361f67e38245da7ee70b6076ac8fd60043936a42a92e29",
+      "bytes": 322394,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 161175,
+        "duration_seconds": 6.715625,
+        "peak_linear": 0.877197265625,
+        "rms_linear": 0.09443041716633632,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:11.976934+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Laomedeia",
+      "name": "Laomedeia",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Laomedeia"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "40f591f31f62dc33dbd8b093d2843182de8aa1c3bc8b77d92d1546a3b94b5336",
+      "file": "female/ja-JP-Chirp3-HD-Laomedeia.wav",
+      "sha256": "8029e6c5f1677a16a0f0f6d05439a40b005d5fd3e6be2a7950839f860f94caf5",
+      "bytes": 370494,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 185225,
+        "duration_seconds": 7.717708333333333,
+        "peak_linear": 0.85931396484375,
+        "rms_linear": 0.14763274810092317,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:13.401895+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Leda",
+      "name": "Leda",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Leda"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "b8e4b3d639c7e7407fa02aaf663ed99f1ea4ecc9c193453f8f48bb9b3ffe0fce",
+      "file": "female/ja-JP-Chirp3-HD-Leda.wav",
+      "sha256": "eea09fced93af9e7740c39f766c750d7a1ca5af0ff22f60b42e1ea4cc44f1543",
+      "bytes": 322190,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 161073,
+        "duration_seconds": 6.711375,
+        "peak_linear": 0.9998779296875,
+        "rms_linear": 0.1642949392376851,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:14.684889+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Pulcherrima",
+      "name": "Pulcherrima",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Pulcherrima"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "b0632cfbe66d88018faed107822520bd1abdfb3848573d91f79c250ea85b233d",
+      "file": "female/ja-JP-Chirp3-HD-Pulcherrima.wav",
+      "sha256": "b3447812f16dd9971e6eaf3c5f4e891202dfe519bc846cc835c87ab3b0902653",
+      "bytes": 344078,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 172017,
+        "duration_seconds": 7.167375,
+        "peak_linear": 0.94854736328125,
+        "rms_linear": 0.11708009952325828,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:16.016864+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "name": "Sulafat",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Sulafat"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "6951fecf74d21b50edfa33c45981b198e1eb4fd5fcaff0137ec1081122b40523",
+      "file": "female/ja-JP-Chirp3-HD-Sulafat.wav",
+      "sha256": "d311c7751df250cedd5cb03f724c1de8c77c8c2169efee9ce7d0eb3e314a9090",
+      "bytes": 347786,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 173871,
+        "duration_seconds": 7.244625,
+        "peak_linear": 0.9998779296875,
+        "rms_linear": 0.14368378476178356,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:17.396080+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Vindemiatrix",
+      "name": "Vindemiatrix",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Vindemiatrix"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "5a44f47765d68d034b1a515d9a288c6e2fbbd7d2d6bb6137ad2358df07dd7cd6",
+      "file": "female/ja-JP-Chirp3-HD-Vindemiatrix.wav",
+      "sha256": "f478502951eb319d70c015cd53d1145f5593f8ce7ce09dbee353d6bcde450085",
+      "bytes": 358616,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 179286,
+        "duration_seconds": 7.47025,
+        "peak_linear": 0.860198974609375,
+        "rms_linear": 0.12500340360994341,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:18.787454+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Zephyr",
+      "name": "Zephyr",
+      "gender": "FEMALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Zephyr"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "51a67a150f4f8631724d70d03220c72ce8be4b2ef9d0806c9db43f8e923c7204",
+      "file": "female/ja-JP-Chirp3-HD-Zephyr.wav",
+      "sha256": "2e93410b845e1396f369e8f7cca5df35a13a9f737f2a3d9c119145cfb298a122",
+      "bytes": 362284,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 181120,
+        "duration_seconds": 7.546666666666667,
+        "peak_linear": 0.99993896484375,
+        "rms_linear": 0.16904890797527675,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:20.141859+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Achird",
+      "name": "Achird",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Achird"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "6335656774e6536b98fc1dbd4461a2a20ba14729914a35aa953348dd1d7ee5e0",
+      "file": "male/ja-JP-Chirp3-HD-Achird.wav",
+      "sha256": "7302c451b5324d69f98ccf204f162b02dd75489a94d516f588da7b375a255a74",
+      "bytes": 355492,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 177724,
+        "duration_seconds": 7.405166666666666,
+        "peak_linear": 0.856231689453125,
+        "rms_linear": 0.11394978788330204,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:21.543825+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Algenib",
+      "name": "Algenib",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Algenib"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "3e969a2d711fc10d5b6eb5465529cd0933575628379281580affc46e0694c631",
+      "file": "male/ja-JP-Chirp3-HD-Algenib.wav",
+      "sha256": "f27160b2f2589b3a2d5b9af40faa1b8de4c6717b24c63fd184f05b7e8e31e88d",
+      "bytes": 337912,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 168934,
+        "duration_seconds": 7.038916666666666,
+        "peak_linear": 0.724609375,
+        "rms_linear": 0.10794245392286424,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:22.809032+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "name": "Algieba",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Algieba"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "13877108dde6253f48b128c821ca48c5fddff801090ee4e42809e316a8105c0f",
+      "file": "male/ja-JP-Chirp3-HD-Algieba.wav",
+      "sha256": "897a3d5ead3e686b2458c54e74f245d087d268089bd34e5b50ab9e99b57241a2",
+      "bytes": 338396,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 169176,
+        "duration_seconds": 7.049,
+        "peak_linear": 0.79180908203125,
+        "rms_linear": 0.11432442218943636,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:24.132989+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Alnilam",
+      "name": "Alnilam",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Alnilam"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "67a9262f2474eacb2799d3e27b02514371508c92a8e28f5182f7ea8330237a96",
+      "file": "male/ja-JP-Chirp3-HD-Alnilam.wav",
+      "sha256": "299810453c7b2e4beed7842b7d75bed9e80308d37f8560e8e4a43065be708df8",
+      "bytes": 336304,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 168130,
+        "duration_seconds": 7.005416666666667,
+        "peak_linear": 0.99884033203125,
+        "rms_linear": 0.11388108688001408,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:25.417637+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Charon",
+      "name": "Charon",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Charon"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "f5037057a6e98dad8b2b1402ba90056e7316836ccc2eaa1e57dc2866a2cfebdb",
+      "file": "male/ja-JP-Chirp3-HD-Charon.wav",
+      "sha256": "b96748b09d20aa28967f2dd1952edfb517727d8ad08ecb69e1a8c72643b1b518",
+      "bytes": 359588,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 179772,
+        "duration_seconds": 7.4905,
+        "peak_linear": 0.764373779296875,
+        "rms_linear": 0.1147991968346962,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:26.988211+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Enceladus",
+      "name": "Enceladus",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Enceladus"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "7f0a0881256b90b9fa393c1acfd02d7d8c65099ce8dcb00e2ef4d95b638e8dcf",
+      "file": "male/ja-JP-Chirp3-HD-Enceladus.wav",
+      "sha256": "85644cf9f481a98e0dabcfe8855d8801d5b983c9f7d7da623be1704fb6474efc",
+      "bytes": 330358,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 165157,
+        "duration_seconds": 6.881541666666666,
+        "peak_linear": 0.912506103515625,
+        "rms_linear": 0.12661851877744834,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:28.284144+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Fenrir",
+      "name": "Fenrir",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Fenrir"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "fa3e9177dd9a7a5bb8f0b62ff9253bbb231804137338add44f1b88039d4f72ce",
+      "file": "male/ja-JP-Chirp3-HD-Fenrir.wav",
+      "sha256": "7aa5e5d0cb556981c3a22108f8ef4d1587da52c840b8727b5dc685bb09607022",
+      "bytes": 371952,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 185954,
+        "duration_seconds": 7.748083333333334,
+        "peak_linear": 0.70379638671875,
+        "rms_linear": 0.09727455757496965,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:29.685738+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "name": "Iapetus",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Iapetus"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "fea79c2ca665dfa54cc9182c965c0c574c16bf8b2afd86dceba4d77020d5bb02",
+      "file": "male/ja-JP-Chirp3-HD-Iapetus.wav",
+      "sha256": "49f93b90f87ff54f09483074eb25f4115f9c77225f201212845faeff2275a479",
+      "bytes": 340832,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 170394,
+        "duration_seconds": 7.09975,
+        "peak_linear": 0.64727783203125,
+        "rms_linear": 0.11288150398804134,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:30.991214+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Orus",
+      "name": "Orus",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Orus"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "1d66fe1c9b1457eb21ab746305248427c03dba3953656669b11c44b727cbce20",
+      "file": "male/ja-JP-Chirp3-HD-Orus.wav",
+      "sha256": "64c498a6bf550b425f1f02cebea22c170dc5b558982858fe7dee36618c2af0a2",
+      "bytes": 334008,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 166982,
+        "duration_seconds": 6.957583333333333,
+        "peak_linear": 0.61700439453125,
+        "rms_linear": 0.0847544279583324,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:32.263502+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Puck",
+      "name": "Puck",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Puck"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "f8a2429a58dfa21aeb6d7213a6911814b97c1bde12aebeff66bb8d5afd957617",
+      "file": "male/ja-JP-Chirp3-HD-Puck.wav",
+      "sha256": "a7f3b3baba84cc40dafe18687b21d5d881a567e913205b885c1313da7acaf158",
+      "bytes": 356220,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 178088,
+        "duration_seconds": 7.420333333333334,
+        "peak_linear": 0.897064208984375,
+        "rms_linear": 0.10129868862237483,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:33.635340+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Rasalgethi",
+      "name": "Rasalgethi",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Rasalgethi"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "edfb72d64f2ce1166b94a79824a70b5de0f8473010104e60a90390f701ccd359",
+      "file": "male/ja-JP-Chirp3-HD-Rasalgethi.wav",
+      "sha256": "cdefd202f38e37519a97ae7f52a05a381394a12e5265c92c58be3d25a5ed1f68",
+      "bytes": 316152,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 158054,
+        "duration_seconds": 6.585583333333333,
+        "peak_linear": 0.599639892578125,
+        "rms_linear": 0.08789661063300142,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:35.016980+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Sadachbia",
+      "name": "Sadachbia",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Sadachbia"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "95718d2bbdb1e0941c48d75daaac4622493adcb80d646b3f8c50e6a95a173930",
+      "file": "male/ja-JP-Chirp3-HD-Sadachbia.wav",
+      "sha256": "6d839ee4f7d9a2afcd6f4b8b1aeff27b166edffc8359bc1e5464ec9f0b7dd9cf",
+      "bytes": 338910,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 169433,
+        "duration_seconds": 7.059708333333333,
+        "peak_linear": 0.999755859375,
+        "rms_linear": 0.10707172596711399,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:36.277950+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Sadaltager",
+      "name": "Sadaltager",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Sadaltager"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "f402b12e379c1f37a9ba46fc79b674e45ca133714008568649c2ef2efb9f7d0b",
+      "file": "male/ja-JP-Chirp3-HD-Sadaltager.wav",
+      "sha256": "bd9cbbaec93006b2e757b9aef22f8fab4f5a8b8cede33865615b621ae19733ff",
+      "bytes": 345672,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 172814,
+        "duration_seconds": 7.200583333333333,
+        "peak_linear": 0.736663818359375,
+        "rms_linear": 0.08903627307672933,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:37.630331+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Schedar",
+      "name": "Schedar",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Schedar"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "058e000bbaacbef837bae624de672df51c5fe062c45da529c6e293967a1a3e41",
+      "file": "male/ja-JP-Chirp3-HD-Schedar.wav",
+      "sha256": "409c085c55a0ff06340c625eaff565a2430e931a055d97632ed161a5733f26cd",
+      "bytes": 336132,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 168044,
+        "duration_seconds": 7.001833333333333,
+        "peak_linear": 0.717376708984375,
+        "rms_linear": 0.06749704648434446,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:38.931800+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Umbriel",
+      "name": "Umbriel",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Umbriel"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "d524a624185a0e759f0dad092e6d7ce033ff5f7237042ef990edf81878b788c6",
+      "file": "male/ja-JP-Chirp3-HD-Umbriel.wav",
+      "sha256": "461b9f69a10e9228000d9946c5901594eb9322b10449194d3ed705279ecba152",
+      "bytes": 393674,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 196815,
+        "duration_seconds": 8.200625,
+        "peak_linear": 0.910919189453125,
+        "rms_linear": 0.1188273331985915,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:40.454955+00:00",
+      "performance_review": "PENDING_LISTENING"
+    },
+    {
+      "voice_id": "ja-JP-Chirp3-HD-Zubenelgenubi",
+      "name": "Zubenelgenubi",
+      "gender": "MALE",
+      "status": "GENERATED_WAV_VALIDATED",
+      "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b",
+      "request": {
+        "input": {
+          "ssml": "<speak><break time=\"450ms\"/><prosody rate=\"90%\">超電導磁気浮上式鉄道……？</prosody><break time=\"700ms\"/><prosody rate=\"105%\">超電導磁気浮上式鉄道！</prosody><break time=\"250ms\"/></speak>"
+        },
+        "voice": {
+          "languageCode": "ja-JP",
+          "name": "ja-JP-Chirp3-HD-Zubenelgenubi"
+        },
+        "audioConfig": {
+          "audioEncoding": "LINEAR16",
+          "sampleRateHertz": 24000
+        }
+      },
+      "request_sha256": "6c8980d8c732d72f7d99bb223dac49c36eea1a211c30a51b9647f7f234727c28",
+      "file": "male/ja-JP-Chirp3-HD-Zubenelgenubi.wav",
+      "sha256": "a2be9e29e78cc42db2d07a2ad21b835dd0b6cafdcb3285c044588ef6f6e0030a",
+      "bytes": 325404,
+      "metrics": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 162680,
+        "duration_seconds": 6.778333333333333,
+        "peak_linear": 0.6678466796875,
+        "rms_linear": 0.09334992928960004,
+        "clipped_sample_fraction": 0.0
+      },
+      "generated_at_utc": "2026-10-09T10:05:41.747948+00:00",
+      "performance_review": "PENDING_LISTENING"
+    }
+  ],
+  "errors": [
+    {
+      "at_utc": "2026-10-09T06:40:14.549258+00:00",
+      "category": "GOOGLE_AUTH_UNAVAILABLE_CONFIGURE_SECURE_ENVIRONMENT_KEY"
+    },
+    {
+      "at_utc": "2026-10-09T07:19:07.292352+00:00",
+      "category": "GOOGLE_HTTP_401_CREDENTIALS_MISSING"
+    },
+    {
+      "at_utc": "2026-10-09T07:24:32.315511+00:00",
+      "category": "GOOGLE_HTTP_401_CREDENTIALS_MISSING"
+    },
+    {
+      "at_utc": "2026-10-09T07:39:16.122617+00:00",
+      "category": "GOOGLE_HTTP_403_SERVICE_DISABLED"
+    },
+    {
+      "at_utc": "2026-10-09T07:47:07.553687+00:00",
+      "category": "GOOGLE_HTTP_403_SERVICE_DISABLED"
+    },
+    {
+      "at_utc": "2026-10-09T08:53:53.363199+00:00",
+      "category": "GOOGLE_HTTP_403_SERVICE_DISABLED"
+    },
+    {
+      "at_utc": "2026-10-09T09:15:47.844354+00:00",
+      "category": "GOOGLE_HTTP_401_CREDENTIALS_MISSING"
+    },
+    {
+      "at_utc": "2026-10-09T09:18:28.109887+00:00",
+      "category": "GOOGLE_HTTP_401_CREDENTIALS_MISSING"
+    }
+  ],
+  "owner_authorized": true,
+  "performance_review": "NOT_LISTENED",
+  "runtime_integration": false,
+  "updated_at_utc": "2026-10-09T10:05:41.749411+00:00",
+  "generated_samples": 30,
+  "auth_method": "EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH",
+  "requested_oauth_quota_project": "gen-lang-client-0955955681",
+  "auth_route_failures": [
+    {
+      "at_utc": "2026-10-09T09:15:47.815547+00:00",
+      "auth_method": "EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH",
+      "category": "GOOGLE_HTTP_403_USER_PROJECT_DENIED"
+    },
+    {
+      "at_utc": "2026-10-09T09:18:28.056637+00:00",
+      "auth_method": "EXISTING_GITHUB_SERVICE_ACCOUNT_OAUTH",
+      "category": "GOOGLE_HTTP_403_USER_PROJECT_DENIED"
+    }
+  ],
+  "live_catalog_verified_at_utc": "2026-10-09T10:05:00.290588+00:00",
+  "common_request_sha256": "15af2e25f5cb566e9b55a2b1105cf1f7ed54be91da8b7d89a250ef537b64643b"
+}

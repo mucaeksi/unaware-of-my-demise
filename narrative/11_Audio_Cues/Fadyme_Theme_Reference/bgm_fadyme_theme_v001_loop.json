@@ -1,0 +1,29 @@
+{
+ "id": "bgm_fadyme_theme",
+ "kind": "music",
+ "revision": "v001",
+ "status": "APPROVED",
+ "approved_by": "owner",
+ "approved_date": "2026-09-30",
+ "model": "lyria-3.5",
+ "file": "audio/music/bgm_fadyme_theme/bgm_fadyme_theme_v001_loop.ogg",
+ "original": "audio/music/bgm_fadyme_theme/bgm_fadyme_theme_v001_original.mp3",
+ "engine_loop": {
+  "loop": true,
+  "loop_offset_s": 25.232,
+  "loop_offset_samples": 1112729,
+  "sample_rate": 44100
+ },
+ "structure": "Starts at the take's own beginning (plays once as intro), then loops the region after loop_offset forever; the last 3 s are pre-blended into the audio before loop_offset, so the jump is seamless.",
+ "file_length_s": 86.052,
+ "intro_from_original_s": 0.01,
+ "loop_region_original_s": [
+  25.24,
+  86.06
+ ],
+ "seam_jump": 0.0051,
+ "typical_step": 0.0064,
+ "pitch_shift_semitones": 0,
+ "key_est": "D minor",
+ "tempo_bpm": 73.8
+}

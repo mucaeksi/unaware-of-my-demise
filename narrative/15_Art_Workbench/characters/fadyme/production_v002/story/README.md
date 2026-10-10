@@ -1,0 +1,3 @@
+# Story-state sources
+
+Three new full portrait derivatives carry temporary hidden blood, the persistent bone-white lock after 5-4, and late black-gold lines on hands. Story thresholds come from existing chapter directions; no new gameplay flags are created. Healthy battle/menu/roster portraits remain the default. Full portraits are flattened, not invented separate hair/face rigs. Do not imply a complete nine-expression × four-state painted matrix: Claude selects available source compositions and returns any additional required art combinations. The final confession illustration includes the late lock/hand state. All 93 scene/direction records are retained in `scene_coverage.json` for contextual review; shared art coverage does not mean 93 new backgrounds.

@@ -1,0 +1,9 @@
+{
+  "installed_codex": "codex-cli 0.159.0-alpha.3",
+  "expected_project_skills": 38,
+  "discovered_skills": 44,
+  "missing_or_repeated_project_skills": [],
+  "duplicate_names": {},
+  "parser_errors": [],
+  "status": "PASS"
+}

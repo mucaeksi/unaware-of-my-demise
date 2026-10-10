@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "generation_index": 11,
+  "prompt": "BACKGROUND REMOVAL AND PROP CLEANUP. The supplied eight-prop sheet has an unwanted brown cloudy background. REMOVE ALL brown/backdrop/shadow pixels everywhere outside the actual eight object silhouettes. Output TRUE FULLY TRANSPARENT PNG: empty gutters and every four corners must have alpha ZERO. Keep the exact same eight props, positions, grid FOUR columns TWO rows, material colors and framing. Do not place a checkerboard image or colored surface behind them, no floor shadows or glow. Preserve all long thin chains, pin prongs and scarf edges with clean alpha. Keep each object fully separate. Mother painting bottom-right: retain frame and tiny bell hairpin and ash pale hair, but make the mother's face a subtly older adult woman with less youthful Fadyme-like features, mature eyes and fine smile lines, not the exact same face as daughter. No name or crown. All other prop details unchanged, especially watch with NO HANDS, silver weapon thorn clapper fixed, tiny bell hairpin separate, broken circlet fragment irregular. COMPLETE REMOVAL of the cloudy brown background is the main request. All empty space transparent alpha 0.",
+  "status": "SUPERSEDED_SPACING_DRAFT",
+  "transparent_background": true,
+  "reference_paths": [
+    "narrative/15_Art_Workbench/characters/fadyme/production_v002/props/props_sheet_v002_draft.png"
+  ],
+  "notes": "Originals unchanged; outputs copied byte-exact. No runtime integration.",
+  "output_path": "props/props_sheet_v002_spacing_draft.png",
+  "output_sha256": "83f60bc3829352cef87817598c10bfc9348d93b238c8d21be58efca6c471b55d",
+  "date": "2026-10-09",
+  "inclusion": "WORKBENCH_NOT_EXPORTED",
+  "references": [
+    {
+      "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/props/props_sheet_v002_draft.png",
+      "sha256": "fa86667a487456e2eeb73de4df401d542ba4762a8f3bc9442c58934cf189e826"
+    }
+  ]
+}

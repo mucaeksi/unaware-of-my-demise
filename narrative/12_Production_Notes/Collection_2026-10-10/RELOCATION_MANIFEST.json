@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "date": "2026-10-10",
+  "backup": "C:\\Users\\PC\\Documents\\Codex\\2026-10-10\\u-an-projenin-i-inde-hangi\\narrative-consolidation-backup-20261010",
+  "files": [
+    {
+      "source": "docs/design/ENTRY_PROLOGUE_BEFORE_THE_ROAD_v001.md",
+      "target": "narrative/02_Main_Story/Opening_Tutorial/ENTRY_PROLOGUE_BEFORE_THE_ROAD_v001.md",
+      "source_sha256": "9cfd09e47a16fb00e669e620577037c2600957b9fc29cca0626e0e0a945550c4",
+      "target_sha256": "9cfd09e47a16fb00e669e620577037c2600957b9fc29cca0626e0e0a945550c4",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": []
+    },
+    {
+      "source": "docs/design/ENTRY_PROLOGUE_CINEMATIC_V002_2026-10-07.md",
+      "target": "narrative/02_Main_Story/Opening_Tutorial/ENTRY_PROLOGUE_CINEMATIC_V002_2026-10-07.md",
+      "source_sha256": "b015bfe478c0607e2063651a5b40666c4617e9b98542b7bf0249d1d128cc8323",
+      "target_sha256": "b015bfe478c0607e2063651a5b40666c4617e9b98542b7bf0249d1d128cc8323",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": []
+    },
+    {
+      "source": "docs/design/ENTRY_PROLOGUE_GROUNDING_V004_2026-10-07.md",
+      "target": "narrative/02_Main_Story/Opening_Tutorial/ENTRY_PROLOGUE_GROUNDING_V004_2026-10-07.md",
+      "source_sha256": "6b578ba77d7bb8e3ce74655be190388984420531e8afa5247b8e800bf0ab8876",
+      "target_sha256": "6b578ba77d7bb8e3ce74655be190388984420531e8afa5247b8e800bf0ab8876",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": []
+    },
+    {
+      "source": "docs/design/ENTRY_PROLOGUE_IMPLEMENTATION_2026-10-07.md",
+      "target": "narrative/02_Main_Story/Opening_Tutorial/ENTRY_PROLOGUE_IMPLEMENTATION_2026-10-07.md",
+      "source_sha256": "f093f228fc0eec455dd79f4e45cc7a2e2562bcf71be0f91ea9e3c6c5c02b2b03",
+      "target_sha256": "f093f228fc0eec455dd79f4e45cc7a2e2562bcf71be0f91ea9e3c6c5c02b2b03",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": []
+    },
+    {
+      "source": "docs/design/TUTORIAL_SIDE_BY_SIDE_v001_2026-10-08.md",
+      "target": "narrative/02_Main_Story/Opening_Tutorial/TUTORIAL_SIDE_BY_SIDE_v001_2026-10-08.md",
+      "source_sha256": "b28a419d6c252346876eda9c0ebd6c518594cff98d2266c1ce4d61a1be731add",
+      "target_sha256": "b28a419d6c252346876eda9c0ebd6c518594cff98d2266c1ce4d61a1be731add",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": []
+    },
+    {
+      "source": "docs/design/OPENING_TUTORIAL_REVISION_v006_2026-10-08.md",
+      "target": "narrative/02_Main_Story/Opening_Tutorial/OPENING_TUTORIAL_REVISION_v006_2026-10-08.md",
+      "source_sha256": "4c23307d03bbc8c455c6298438077ade355af8ebc617dd71df4457e900ca44ef",
+      "target_sha256": "4c23307d03bbc8c455c6298438077ade355af8ebc617dd71df4457e900ca44ef",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": []
+    },
+    {
+      "source": "docs/design/BOOTSTRAP_CONTENT_AND_PROLOGUE_AUDIT_2026-10-07.md",
+      "target": "narrative/12_Production_Notes/Current_Design/BOOTSTRAP_CONTENT_AND_PROLOGUE_AUDIT_2026-10-07.md",
+      "source_sha256": "03e10719afb217c146e3d7890f89702269103fe7394beb22f4bc7bc2774b6f90",
+      "target_sha256": "03e10719afb217c146e3d7890f89702269103fe7394beb22f4bc7bc2774b6f90",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": []
+    },
+    {
+      "source": "docs/design/OPENING_AAB_AND_CHARACTER_STANDARD_v005_2026-10-08.md",
+      "target": "narrative/12_Production_Notes/Current_Design/OPENING_AAB_AND_CHARACTER_STANDARD_v005_2026-10-08.md",
+      "source_sha256": "373e682248513f6e87091ddc187fdd2d9152b5485e51426f086bc40919a61806",
+      "target_sha256": "a54db73cf9c27456917a5ee3123e6d1dd21efc88a766916c3011866c967a237d",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": [
+        {
+          "old": "../art/character_reference/generation_manifest_v003.json",
+          "new": "../../../docs/art/character_reference/generation_manifest_v003.json"
+        }
+      ]
+    },
+    {
+      "source": "docs/design/FADYME_PILOT_AND_SIDE_BATTLE_v001_2026-10-08.md",
+      "target": "narrative/12_Production_Notes/Current_Design/FADYME_PILOT_AND_SIDE_BATTLE_v001_2026-10-08.md",
+      "source_sha256": "44edc2561b553d2ac34ce10ce1f7a7f9c564867746f01445e6668dba7ab681b1",
+      "target_sha256": "44edc2561b553d2ac34ce10ce1f7a7f9c564867746f01445e6668dba7ab681b1",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": []
+    },
+    {
+      "source": "docs/coder/STORY_CHARACTER_TEMPLATE.md",
+      "target": "narrative/12_Production_Notes/Templates/STORY_CHARACTER_TEMPLATE.md",
+      "source_sha256": "50e2c0730e986dc226fade611b4b978d77d1b2896147467139ede54d20dc5159",
+      "target_sha256": "50e2c0730e986dc226fade611b4b978d77d1b2896147467139ede54d20dc5159",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": []
+    },
+    {
+      "source": "docs/art/CHIRP3_HD_VOICE_CATALOG.md",
+      "target": "narrative/10_VO/Recording_Notes/CHIRP3_HD_VOICE_CATALOG.md",
+      "source_sha256": "e97af6700f7c990686852b4058d233951ff31ba122d9af31cef65e1af1410063",
+      "target_sha256": "021af12fb1e49a8f750c017ee065f25493dae8ca9d2a12228231a80a5297d069",
+      "transformation": "relative Markdown links rebased; narrative prose unchanged",
+      "link_changes": [
+        {
+          "old": "../../narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md",
+          "new": "../Voice_Samples/Chirp3_HD/ja-JP/audition_v001/README.md"
+        },
+        {
+          "old": "../../narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/index.html",
+          "new": "../Voice_Samples/Chirp3_HD/ja-JP/audition_v001/index.html"
+        },
+        {
+          "old": "../../narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json",
+          "new": "../Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json"
+        },
+        {
+          "old": "../../narrative/10_VO/Line_Maps/chirp3_hd_voice_catalog.json",
+          "new": "../Line_Maps/chirp3_hd_voice_catalog.json"
+        }
+      ]
+    }
+  ],
+  "checkpoint_copy": {
+    "source": "production/session-state/narrative.md",
+    "target": "narrative/12_Production_Notes/Session_History/NARRATIVE_CHECKPOINT_2026-10-05.md",
+    "sha256": "b98362abb119bab85b2a77df91a9bd6f6806e88a356d0abc8918ddee16ec8b12"
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "date_utc": "2026-10-09T10:12:02.189398+00:00",
+  "browser": "Chromium / Playwright",
+  "status": "REAL_WAV_GALLERY_FILTERS_METADATA_AND_PLAYBACK_VERIFIED",
+  "scope": "INTERNAL_LOOPBACK_STATIC_HTTP_BROWSER_AUDIO_CHECK_NOT_HUMAN_LISTENING",
+  "direct_file_browser_check": "BLOCKED_BY_MANAGED_BROWSER_FILE_URL_POLICY",
+  "counts": {
+    "total": 30,
+    "female": 14,
+    "male": 16
+  },
+  "decoded_samples": [
+    {
+      "file": "female/ja-JP-Chirp3-HD-Achernar.wav",
+      "duration_seconds": 6.485833,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Aoede.wav",
+      "duration_seconds": 8.198458,
+      "ready_state": 4
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Autonoe.wav",
+      "duration_seconds": 7.170625,
+      "ready_state": 4
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Callirrhoe.wav",
+      "duration_seconds": 6.734375,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Despina.wav",
+      "duration_seconds": 7.9985,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Erinome.wav",
+      "duration_seconds": 6.661417,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Gacrux.wav",
+      "duration_seconds": 7.629042,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Kore.wav",
+      "duration_seconds": 6.715625,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Laomedeia.wav",
+      "duration_seconds": 7.717708,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Leda.wav",
+      "duration_seconds": 6.711375,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Pulcherrima.wav",
+      "duration_seconds": 7.167375,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Sulafat.wav",
+      "duration_seconds": 7.244625,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Vindemiatrix.wav",
+      "duration_seconds": 7.47025,
+      "ready_state": 1
+    },
+    {
+      "file": "female/ja-JP-Chirp3-HD-Zephyr.wav",
+      "duration_seconds": 7.546667,
+      "ready_state": 4
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Achird.wav",
+      "duration_seconds": 7.405167,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Algenib.wav",
+      "duration_seconds": 7.038917,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Algieba.wav",
+      "duration_seconds": 7.049,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Alnilam.wav",
+      "duration_seconds": 7.005417,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Charon.wav",
+      "duration_seconds": 7.4905,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Enceladus.wav",
+      "duration_seconds": 6.881542,
+      "ready_state": 4
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Fenrir.wav",
+      "duration_seconds": 7.748083,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Iapetus.wav",
+      "duration_seconds": 7.09975,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Orus.wav",
+      "duration_seconds": 6.957583,
+      "ready_state": 4
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Puck.wav",
+      "duration_seconds": 7.420333,
+      "ready_state": 4
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Rasalgethi.wav",
+      "duration_seconds": 6.585583,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Sadachbia.wav",
+      "duration_seconds": 7.059708,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Sadaltager.wav",
+      "duration_seconds": 7.200583,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Schedar.wav",
+      "duration_seconds": 7.001833,
+      "ready_state": 4
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Umbriel.wav",
+      "duration_seconds": 8.200625,
+      "ready_state": 1
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Zubenelgenubi.wav",
+      "duration_seconds": 6.778333,
+      "ready_state": 4
+    }
+  ],
+  "playback_progress_checks": [
+    {
+      "file": "female/ja-JP-Chirp3-HD-Achernar.wav",
+      "progress_seconds": 0.242443,
+      "paused": false,
+      "error": null
+    },
+    {
+      "file": "male/ja-JP-Chirp3-HD-Achird.wav",
+      "progress_seconds": 0.228258,
+      "paused": false,
+      "error": null
+    }
+  ],
+  "javascript_errors": [],
+  "external_requests": [],
+  "outbound_network_blocked": true,
+  "listening_review": "PENDING_OWNER_VOICE_SELECTION"
+}

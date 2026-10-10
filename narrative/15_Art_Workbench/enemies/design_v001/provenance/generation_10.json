@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "generation_index": 10,
+  "date": "2026-10-10",
+  "prompt": "Correct the EDITORIAL COMPOSITION of this exact sheet, preserve all four identities and all existing character details. The Eclipse Construct's standing view in the fourth column currently spills its left arm into the third Royal Hollow column. Move/recompose the ENTIRE standing Construct, including both hands, both feet and every chain, so ALL of its silhouette is safely INSIDE the fourth column with at least 20px dark empty padding to that column's left divider and at least 20px to right canvas edge. Make its arm stance narrower, elbows tucked closer to its own mechanical torso, retaining massive power and BOTH planted legs, recessed bell, broken crown hoop, left/right chain joints and clearly chained RIGHT ankle anchor. NO part of Construct may appear anywhere in Royal Hollow's third column. Restore the third column's plain dark empty background where the foreign hand was; keep Royal Hollow itself unchanged and fully intact. Also keep the smaller fourth-column sweeping pose fully contained within its own column, a compact bent-elbow sweep. Preserve the three pylons and two-phase ward insets, labels, first three character poses, original matte gothic art style. No cropping silhouette at dividers; actually recompose the machine to fit. This is a new corrected version, not a new design.",
+  "transparent_background": false,
+  "reference_paths": [
+    "narrative/15_Art_Workbench/enemies/design_v001/boards/ch07_first_eclipse_v002.png"
+  ],
+  "output_path": "boards/ch07_first_eclipse_v003.png",
+  "supersedes": "boards/ch07_first_eclipse_v002.png",
+  "status": "CORRECTED_DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+  "inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+  "output_sha256": "8e299981b7ac8e25f54fa16beb8a4b228cbd196d7eaded9693782846f9466c6a",
+  "references": [
+    {
+      "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch07_first_eclipse_v002.png",
+      "sha256": "82972c497417468ec7b10ca4fb7a64011d3fcb447d9e5966c4cf885cadeac7ba"
+    }
+  ]
+}

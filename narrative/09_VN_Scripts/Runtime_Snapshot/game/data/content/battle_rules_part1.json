@@ -1,0 +1,586 @@
+{
+  "schema_version": 1,
+  "pack_id": "unaware_of_my_demise.part1.battle_rules.v1",
+  "balance_status": "draft_v1_needs_battle_simulation",
+  "party": {
+    "size": 5,
+    "front": 2,
+    "rear": 3,
+    "tutorial_exception": {
+      "stage_id": "1-1",
+      "size": 2
+    }
+  },
+  "turn_queue": {
+    "model": "continuous_action_gauge",
+    "gauge_max": 10000,
+    "initial_gauge": 0,
+    "gauge_gain_per_time_unit": "effective_speed",
+    "effective_speed_floor": 1,
+    "ready_when": "current_gauge >= gauge_max + pending_delay_gauge",
+    "after_action": "subtract_gauge_max_plus_pending_delay; preserve_overflow; clear_pending_delay",
+    "speed_change_timing": "changes_gauge_gain_immediately_without_resetting_current_gauge",
+    "tie_break": "greatest_gauge_overflow_then_player_team_then_slot_index_then_entity_id",
+    "delay_is_fraction_of_next_action_gauge": true,
+    "maximum_pending_delay_fraction": 0.5,
+    "delay_resolution": "pending_delay_gauge_increases_the_next_action_readiness_threshold; multiple_delays_add_to_50_percent_cap",
+    "cycle_definition": "At cycle start snapshot living combatants. A cycle closes when every snapshot member has acted once or died; faster units may act again before closure. Spawned units join at the next cycle.",
+    "per_round_limit_scope": "one_trigger_per_cycle",
+    "cooldown_decrements_at_owner_turn_start": true,
+    "new_wave_gauge": "living units keep current gauge; newly spawned wave enemies start at zero gauge"
+  },
+  "stat_resolution": {
+    "character_base_stat": "base_stats_level_1 + growth_per_level * (level - 1)",
+    "growth_scale_note": "growth_per_level is a small flat increment, authored from a modest percentage of the level-one stat; HP/ATK/DEF/SPD stay in a compact low-integer display scale.",
+    "equipment_flat_order": "add_flat_equipment_before_percent_modifiers",
+    "same_stat_percent_modifiers": "sum_additively_then_apply_once",
+    "effective_stat_rounding": "half_up_to_integer",
+    "minimum_hp": 1,
+    "minimum_defense": 0,
+    "minimum_speed": 1,
+    "res_stat_fallback": "when explicit res is absent, use effective def; RES buffs/debuffs resolve against the same fallback"
+  },
+  "damage": {
+    "formula": "max(1, floor(effective_attack * skill_multiplier * (10 / (10 + max(0, effective_target_defense))) * element_multiplier * product(status_and_other_multipliers) * critical_multiplier))",
+    "defense_scale": 10,
+    "target_defense_resolution": "Choose defender.def for physical damage; choose defender.res for magic/elemental damage; if res is absent, use defender.def.",
+    "defense_stat_by_damage_type": {
+      "physical": "def",
+      "magic": "res",
+      "elemental": "res"
+    },
+    "missing_res_stat_fallback": "def",
+    "element_chart": {
+      "cycle": [
+        "Ember",
+        "Gale",
+        "Stone",
+        "Tide"
+      ],
+      "attacker_is_strong_against_next_element": true,
+      "advantage_multiplier": 1.2,
+      "disadvantage_multiplier": 0.9,
+      "dawn_veil_pair_is_mutually_advantaged": true,
+      "neutral_multiplier": 1.0,
+      "explicit_target_weakness_multiplier": 1.2,
+      "explicit_target_resistance_multiplier": 0.9,
+      "target_override_precedence": "explicit weakness or resistance overrides the cycle; a target cannot list the same element as both"
+    },
+    "modifier_order": [
+      "effective_attack_and_skill_multiplier",
+      "effective_defense_reduction",
+      "element_multiplier",
+      "status_and_other_multipliers",
+      "critical_multiplier",
+      "floor_and_minimum_one",
+      "shield_absorption"
+    ],
+    "same_category_damage_multipliers": "multiply_together_after_defense_and_element_resolution",
+    "critical_chance_default": 0.05,
+    "critical_chance_cap": 1.0,
+    "critical_multiplier_default": 1.5,
+    "critical_roll_scope": "independent_for_each_target_and_each_hit",
+    "minimum_final_damage": 1,
+    "damage_integer_rounding": "floor_per_damage_packet",
+    "hit_count": "each_hit_resolves_defense_element_modifiers_and_critical_independently",
+    "shield_absorption_order": "after_damage_reduction_and_final_damage_resolution; remaining_damage_overflows_to_hp"
+  },
+  "focus": {
+    "maximum": 100,
+    "basic_attack_gain": 20,
+    "active_skill_gain": 25,
+    "taking_hit_gain_per_hit": 5,
+    "taking_hit_gain_max_per_actor_turn": 15,
+    "ultimate_cost": 100,
+    "death_resets_focus": true
+  },
+  "status_timing": {
+    "duration_decrements_at_owner_turn_start": true,
+    "cooldown_decrements_at_owner_turn_start": true,
+    "turn_start_order": [
+      "decrement_existing_cooldowns_and_durations",
+      "tick_damage_over_time",
+      "resolve_owner_turn_start_hooks",
+      "choose_action"
+    ],
+    "same_status_refresh": "higher remaining duration replaces; never stack identical status_id",
+    "dot_tick": "owner turn start after duration decrement and before passive hooks/action",
+    "control_duration_rounding": "minimum one turn when base duration is positive",
+    "status_applied_by_turn_start_hook": "is active for the current action and expires at the next owner-turn decrement"
+  },
+  "statuses": [
+    {
+      "status_id": "burn",
+      "name_en": "Burn",
+      "kind": "damage_over_time",
+      "default_duration_turns": 2,
+      "source_atk_multiplier_per_tick": 0.12,
+      "tags": [
+        "debuff",
+        "damage_over_time"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "soaked",
+      "name_en": "Soaked",
+      "kind": "element_vulnerability_and_reaction",
+      "default_duration_turns": 2,
+      "element_damage_taken_multiplier": {
+        "Tide": 1.1
+      },
+      "reaction_triggers": [
+        {
+          "element": "Gale",
+          "name_en": "Crosscurrent",
+          "bonus_damage_multiplier": 0.15,
+          "consume_status": true
+        },
+        {
+          "element": "Ember",
+          "name_en": "Steamflare",
+          "bonus_damage_multiplier": 0.15,
+          "consume_status": true
+        }
+      ],
+      "tags": [
+        "debuff"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "gust",
+      "name_en": "Gust",
+      "kind": "turn_delay",
+      "default_duration_turns": 1,
+      "next_action_gauge_delay_fraction": 0.15,
+      "consumed_on_next_action": true,
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "fracture",
+      "name_en": "Fracture",
+      "kind": "defense_down",
+      "default_duration_turns": 2,
+      "def_multiplier": 0.85,
+      "tags": [
+        "debuff"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "sanctuary",
+      "name_en": "Sanctuary",
+      "kind": "healing_and_damage_reduction",
+      "default_duration_turns": 2,
+      "damage_taken_multiplier": 0.9,
+      "healing_received_multiplier": 1.1,
+      "tags": [
+        "buff"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "dread",
+      "name_en": "Dread",
+      "kind": "outgoing_damage_and_focus_gain_down",
+      "default_duration_turns": 2,
+      "outgoing_damage_multiplier": 0.9,
+      "focus_gain_multiplier": 0.8,
+      "tags": [
+        "debuff",
+        "dread"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "break",
+      "name_en": "Break",
+      "kind": "boss_stagger_window",
+      "default_duration_turns": 1,
+      "skip_next_action": true,
+      "damage_taken_multiplier": 1.2,
+      "tags": [
+        "control",
+        "break"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "decay",
+      "name_en": "Decay",
+      "kind": "healing_received_down",
+      "default_duration_turns": 2,
+      "healing_received_multiplier": 0.5,
+      "tags": [
+        "debuff"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "taunt",
+      "name_en": "Taunt",
+      "kind": "target_redirect",
+      "default_duration_turns": 2,
+      "redirects_eligible_single_target_attacks": true,
+      "tags": [
+        "buff",
+        "control"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "stoneguard",
+      "name_en": "Stoneguard",
+      "kind": "damage_reduction",
+      "default_duration_turns": 1,
+      "damage_taken_multiplier": 0.92,
+      "tags": [
+        "buff"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "dawnward",
+      "name_en": "Dawnward",
+      "kind": "resistance_buff",
+      "default_duration_turns": 2,
+      "resistance_bonus_pct": 0.1,
+      "tags": [
+        "buff"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "trail_mark",
+      "name_en": "Trail Mark",
+      "kind": "target_priority_mark",
+      "default_duration_turns": 2,
+      "tags": [
+        "mark"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "duel_mark",
+      "name_en": "Duel Mark",
+      "kind": "target_priority_mark",
+      "default_duration_turns": 2,
+      "tags": [
+        "mark",
+        "duel"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "venom",
+      "name_en": "Venom",
+      "kind": "damage_over_time",
+      "default_duration_turns": 2,
+      "source_atk_multiplier_per_tick": 0.1,
+      "tags": [
+        "debuff",
+        "poison"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "soul_link",
+      "name_en": "Soul Link",
+      "kind": "damage_share",
+      "default_duration_turns": 2,
+      "shared_damage_fraction": 0.25,
+      "maximum_shared_damage_per_hit_pct_of_max_hp": 0.15,
+      "tags": [
+        "buff"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    },
+    {
+      "status_id": "soaked_immunity",
+      "name_en": "Dry Ward",
+      "kind": "status_immunity",
+      "default_duration_turns": 1,
+      "immune_status_ids": [
+        "soaked"
+      ],
+      "tags": [
+        "buff"
+      ],
+      "stacking": "refresh_duration",
+      "balance_status": "draft_v1"
+    }
+  ],
+  "effect_interpreter_pack_id": "unaware_of_my_demise.part1.battle_effects.v1",
+  "targeting": {
+    "front_row_protection": "single-target attacks select living Front heroes first unless selector explicitly ignores row",
+    "area_targeting": "target selector is authored per effect operation",
+    "enemy_taunt": "after target selection, redirect eligible single-target hostile actions to a living taunter; area actions are never redirected",
+    "boss_control_duration_multiplier": 0.5,
+    "boss_control_immunities_default": [],
+    "critical_telegraph_interruptible": false
+  },
+  "character_progression": {
+    "level_cap": 20,
+    "xp_curve": "xp_to_next(level) = 90 + 24 * level + 8 * level * level",
+    "stat_rounding": "half_up",
+    "player_level_cap_gate": true,
+    "level_up_silver_crowns": {
+      "base": 100,
+      "increment": 50,
+      "formula": "base + level * increment"
+    },
+    "ascension": [
+      {
+        "cap": 5,
+        "account_level": 1,
+        "items": [],
+        "silver_crowns_cost": 1000
+      },
+      {
+        "cap": 10,
+        "account_level": 5,
+        "items": [
+          {
+            "item_id": "iron_oath_seal",
+            "quantity": 3
+          }
+        ],
+        "silver_crowns_cost": 5000
+      },
+      {
+        "cap": 15,
+        "account_level": 10,
+        "items": [
+          {
+            "item_id": "alchemy_core",
+            "quantity": 5
+          },
+          {
+            "item_id": "iron_oath_seal",
+            "quantity": 5
+          }
+        ],
+        "silver_crowns_cost": 20000
+      },
+      {
+        "cap": 20,
+        "account_level": 15,
+        "items": [
+          {
+            "item_id": "bellglass_shard",
+            "quantity": 8
+          },
+          {
+            "item_id": "alchemy_core",
+            "quantity": 8
+          }
+        ],
+        "silver_crowns_cost": 50000
+      }
+    ]
+  },
+  "account_progression": {
+    "level_cap": 20,
+    "xp_to_next": {
+      "base": 250,
+      "increment": 50,
+      "formula": "base + (level - 1) * increment"
+    },
+    "xp_source": "wallet.account_xp (lifetime total)"
+  },
+  "equipment_progression": {
+    "level_cap": 20,
+    "applies_to": [
+      "weapon",
+      "armor"
+    ],
+    "xp_resource_id": "weapon_tempering_xp",
+    "xp_to_next": {
+      "base": 20,
+      "increment": 5,
+      "formula": "base + level * increment"
+    },
+    "level_up_silver_crowns": {
+      "base": 50,
+      "increment": 25,
+      "formula": "base + level * increment"
+    },
+    "milestone_item_id": "blacksmith_rivet",
+    "milestones": [
+      {
+        "from_level": 5,
+        "item_quantity": 1,
+        "bonus_pct_of_level_1_stats": 0.05
+      },
+      {
+        "from_level": 10,
+        "item_quantity": 2,
+        "bonus_pct_of_level_1_stats": 0.1
+      },
+      {
+        "from_level": 15,
+        "item_quantity": 3,
+        "bonus_pct_of_level_1_stats": 0.15
+      }
+    ],
+    "balance_status": "approved_v1_2026-09-29"
+  },
+  "skill_progression": {
+    "damage_heal_shield_multiplier_bonus_per_rank": 0.1,
+    "max_rank_by_skill_type": {
+      "basic": 3,
+      "active": 3,
+      "ultimate": 3,
+      "passive": 2
+    },
+    "unlock_character_level": {
+      "basic": {
+        "2": 5,
+        "3": 15
+      },
+      "active": {
+        "2": 5,
+        "3": 15
+      },
+      "passive": {
+        "2": 10
+      },
+      "ultimate": {
+        "2": 10,
+        "3": 20
+      }
+    },
+    "upgrade_cost": {
+      "2": {
+        "item_quantity": 3,
+        "silver_crowns": 2000
+      },
+      "3": {
+        "item_quantity": 6,
+        "silver_crowns": 6000
+      }
+    },
+    "upgrade_item_by_skill_type": {
+      "basic": null,
+      "active": "tactical_notes",
+      "passive": "hymn_leaves",
+      "ultimate": "hymn_leaves"
+    },
+    "balance_status": "approved_v1_2026-09-29"
+  },
+  "memory_nodes": [
+    {
+      "node": 1,
+      "shard_cost": 10,
+      "effect": {
+        "type": "stat_pct",
+        "stat": "hp",
+        "value": 0.02
+      }
+    },
+    {
+      "node": 2,
+      "shard_cost": 15,
+      "effect": {
+        "type": "stat_pct",
+        "stat": "atk",
+        "value": 0.02
+      }
+    },
+    {
+      "node": 3,
+      "shard_cost": 20,
+      "effect": {
+        "type": "stat_pct",
+        "stat": "def",
+        "value": 0.02
+      }
+    },
+    {
+      "node": 4,
+      "shard_cost": 25,
+      "effect": {
+        "type": "stat_pct",
+        "stat": "res",
+        "value": 0.03
+      }
+    },
+    {
+      "node": 5,
+      "shard_cost": 30,
+      "effect": {
+        "type": "stat_pct",
+        "stat": "spd",
+        "value": 0.02
+      }
+    },
+    {
+      "node": 6,
+      "shard_cost": 40,
+      "effect": {
+        "type": "start_focus",
+        "value": 10
+      }
+    }
+  ],
+  "auto_battle": {
+    "deterministic_seed_required": true,
+    "skill_order": [
+      "emergency_heal",
+      "ultimate_on_boss",
+      "useful_active",
+      "basic"
+    ],
+    "target_tie_break": [
+      "lowest_hp_percent",
+      "slot_index",
+      "entity_id"
+    ],
+    "heal_priority_hp_percent": 40,
+    "save_ultimate_until_boss": true,
+    "objective_automatic_targeting_authored": true,
+    "single_target_objective_priority": "interrupt_active_telegraph_or_remove_active_boss_damage_ward"
+  },
+  "victory_stars": {
+    "victory_requires_at_least_one_living_hero": true,
+    "loaned_story_heroes_count_as_selected_heroes": true,
+    "three_stars": "all_selected_heroes_alive",
+    "two_stars": "exactly_one_selected_hero_defeated",
+    "one_star": "at_least_two_selected_heroes_defeated",
+    "defeat_stars": 0
+  },
+  "boss_phase_health": {
+    "contract": "fresh_phase_bar",
+    "maximum_hp_formula": "enemy_level_scaled_base_hp * phase.hp_multiplier",
+    "phase_transition_threshold_source": "phase_transition_contract.threshold_pct",
+    "phase_weakness_overrides_same_element_inherited_resistance": true
+  },
+  "story_loan_equipment": {
+    "template_id": "story_loan_standard",
+    "rarity": 3,
+    "armor_id": "armor_padded_3_01",
+    "weapon_selection": "lowest_weapon_id_matching_character_equip_weapon_type",
+    "accessory_set_id": "ash_maw_hide",
+    "accessory_slots": [
+      "necklace",
+      "ring"
+    ],
+    "accessory_roll_seed": "crc32(character_id:stage_id:accessory_id)"
+  }
+}

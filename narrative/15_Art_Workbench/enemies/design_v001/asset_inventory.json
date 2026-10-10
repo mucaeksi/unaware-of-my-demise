@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "date": "2026-10-10",
+  "status": "DESIGN_CANDIDATES_NOT_OWNER_APPROVED",
+  "enemy_count": 26,
+  "standard_enemy_count": 20,
+  "boss_count": 6,
+  "active_boards": 7,
+  "generated_boards_with_retained_drafts": 10,
+  "sources": [
+    {
+      "path": "game/data/content/enemies_part1.json",
+      "sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+    },
+    {
+      "path": "game/data/content/lore_text_part1.json",
+      "sha256": "24c4b58a7a1d0157602d69cf39074cf06a234af2bff129d9e5540b7265909028"
+    },
+    {
+      "path": "narrative/07_Enemies_Bosses/bestiary.md",
+      "sha256": "b70789fe8149b1fba7ef8c4f0bae9c852beb52a7a18e62890b47e6418d5e8b2e"
+    },
+    {
+      "path": "narrative/07_Enemies_Bosses/VILLAIN_BIBLE_PART1.md",
+      "sha256": "70cbcf40f69c67dce93aea1153ef09e0bed0366a165b0dc8a46b8df322f6c180"
+    },
+    {
+      "path": "narrative/06_Characters/Antagonists_NPCs/ashen_lord.md",
+      "sha256": "a4d2bdc26f57767da326c9e13bd771a66926ada98fb8b0334d59e5396761ad53"
+    },
+    {
+      "path": "narrative/06_Characters/Antagonists_NPCs/yseldra.md",
+      "sha256": "83b5743a530038aadc37bd5584e867dbe8dc75d6b88544eff56c5d0902695233"
+    },
+    {
+      "path": "narrative/06_Characters/Antagonists_NPCs/cael.md",
+      "sha256": "affed817d5d7a0918c17ae3f5df49f58728b4a679c62dd1d7c5a16916e13c107"
+    },
+    {
+      "path": "narrative/00_Canon/Owner_Current_Direction/VISUAL_REFERENCE_BRIEF_2026-10-05.md",
+      "sha256": "330ff317b2bd387cf900f35c0129a428b15b45112fa2f5cf5d647cfadd7acbed"
+    },
+    {
+      "path": "narrative/FADYME_MEDIA_ALL/UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png",
+      "sha256": "f0d5b0c84482bb37c3dd23a6ae770ec392206fa7bf084cf120c2007758d516f6"
+    },
+    {
+      "path": "narrative/FADYME_MEDIA_ALL/UOMD_Fadyme_Mahmut_APPROVED_KeyArt_Vertical_v001.png",
+      "sha256": "57eaa9922b429b67a0d97f36867440291e2ff9ef12dc382e814a8d64acc9d5c3"
+    },
+    {
+      "path": "game/assets/enemies/tutorial/common_poses_v002.png",
+      "sha256": "f6dbe8c1d83b90f2a7789226ac0a3fd73326a0f78a8267d6f2cab98d4e7d6dc3"
+    }
+  ],
+  "assets": [
+    {
+      "path": "boards/ch01_whispering_ash_v001.png",
+      "sha256": "3580adb7c352a3595044dda816e0c044ae51240c6aeeb11f18da0972c3d4b148",
+      "bytes": 2731837,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "status": "ACTIVE_DESIGN_CANDIDATE",
+      "purpose": "opaque editorial review board, not alpha battle sprite"
+    },
+    {
+      "path": "boards/ch02_saint_luthos_v001.png",
+      "sha256": "9224507858774aa91ccbc0be868bc72ee5cc71182e6e68fc558f299ba11d205a",
+      "bytes": 2750625,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "status": "ACTIVE_DESIGN_CANDIDATE",
+      "purpose": "opaque editorial review board, not alpha battle sprite"
+    },
+    {
+      "path": "boards/ch03_oakhaven_v001.png",
+      "sha256": "72aa4241aab1a0a58f75cdc4cbe4dda7a8f162b661f4f6d772888c72dc3a8d73",
+      "bytes": 2835152,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "status": "ACTIVE_DESIGN_CANDIDATE",
+      "purpose": "opaque editorial review board, not alpha battle sprite"
+    },
+    {
+      "path": "boards/ch04_undercity_v001.png",
+      "sha256": "11e3ceb6f954f80f5b903dbe2018909dc8c6efab4bf2a576aea36ce4505ae5b6",
+      "bytes": 2978354,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "status": "ACTIVE_DESIGN_CANDIDATE",
+      "purpose": "opaque editorial review board, not alpha battle sprite"
+    },
+    {
+      "path": "boards/ch05_forsaken_bridge_v001.png",
+      "sha256": "37c9dbbd1989ad08b8c1c8b93b3ce67f7a5fb2a7ff349f072dff6ed8434043d1",
+      "bytes": 2906621,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "status": "SUPERSEDED_RETAINED",
+      "purpose": "opaque editorial review board, not alpha battle sprite"
+    },
+    {
+      "path": "boards/ch05_forsaken_bridge_v002.png",
+      "sha256": "57eeace6619ee4644e04ebf09789c313cb09a2dd7801be1e73d720bccac14eb5",
+      "bytes": 2734025,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "status": "ACTIVE_DESIGN_CANDIDATE",
+      "purpose": "opaque editorial review board, not alpha battle sprite"
+    },
+    {
+      "path": "boards/ch06_ashen_estate_v001.png",
+      "sha256": "64503433694341f9a7c4ab24f4d4f3228967e91a5c877799f98ee27ef1193756",
+      "bytes": 2837596,
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "status": "ACTIVE_DESIGN_CANDIDATE",
+      "purpose": "opaque editorial review board, not alpha battle sprite"
+    },
+    {
+      "path": "boards/ch07_first_eclipse_v001.png",
+      "sha256": "49e0c7e242f7002a111ce0255c08c33ad94a290d6ca18c5014dfb013b208bc27",
+      "bytes": 2848305,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "status": "SUPERSEDED_RETAINED",
+      "purpose": "opaque editorial review board, not alpha battle sprite"
+    },
+    {
+      "path": "boards/ch07_first_eclipse_v002.png",
+      "sha256": "82972c497417468ec7b10ca4fb7a64011d3fcb447d9e5966c4cf885cadeac7ba",
+      "bytes": 2639617,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "status": "SUPERSEDED_RETAINED",
+      "purpose": "opaque editorial review board, not alpha battle sprite"
+    },
+    {
+      "path": "boards/ch07_first_eclipse_v003.png",
+      "sha256": "8e299981b7ac8e25f54fa16beb8a4b228cbd196d7eaded9693782846f9466c6a",
+      "bytes": 2571534,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "status": "ACTIVE_DESIGN_CANDIDATE",
+      "purpose": "opaque editorial review board, not alpha battle sprite"
+    }
+  ],
+  "runtime_inclusion": "NONE_WORKBENCH_ONLY",
+  "license_provenance": "Original artwork generated by built-in image_gen.imagegen; no third-party sprite library copied. Provider model identifier not exposed. Existing game references are read-only style/canon inputs, not re-licensed assets.",
+  "production_pending": [
+    "owner identity selection",
+    "individual alpha battle sprites",
+    "battle chibi proportion normalization against Fadyme",
+    "true animation frame sequences",
+    "native battle/background/HUD testing after integration",
+    "VN portraits for named speaking bosses",
+    "voice choice/audio production"
+  ]
+}

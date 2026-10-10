@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "date": "2026-10-10",
+  "generation_index": 7,
+  "prompt": "Transform the supplied chapter-one enemy design sheet into a NEW chapter-specific enemy sheet. Preserve the exact premium gothic painterly illustrated material language, matte aged metal/leather/cloth, controlled warm rim light/cold fill, charcoal background, generous silhouette margins and editorial layout. Do not preserve the previous enemies; replace all figures with the specified original enemies below. Detailed anime/light-novel face drawing translated to restrained battle chibi proportions for humanoids, approximately 3.5 heads tall, serious haunted atmosphere. Wide landscape, equal separate columns: one large full-body 3/4 identity pose at top, a smaller DISTINCT signature attack pose below, small readable prop inset. English names only, no other text. Complete feet/tails/weapons, no overlap between columns. No heroes, no Yseldra/Bell-Widow, no Cael. Design review sheet, not alpha sprite atlas. No comic faces, no gore, no modern crosses, no neon magic or 3D render. EXACTLY FOUR columns left to right. CROWNLESS KNIGHT: LIVING despairing adult knight with uncovered living face, crest scraped off leaving a conspicuous blank breastplate area, charcoal/slate plate, NO SHIELD, long slim two-handed blade; smaller challenge points blade at enemy shield. ECLIPSE SENTINEL: LIVING cult warder, covered hooded human face with visible skin, broad cloth shoulder mantle, small pylon-shaped three-prong staff, coal stone cloth/cold brass; smaller staff plants to create segmented barrier around OWN allies; not a robot. ROYAL HOLLOW: DEAD palace guard, tall empty helmet, absolutely rigid rectangular full shield, pale old ivory tabard and blackened gold; lower one-block brace, no living face, no king crown. ECLIPSE CONSTRUCT: massive ORIGINAL MECHANICAL HINGE, not god or undead; two legs and two arms, crownless broken metal hoop above recessed ECLIPSE BELL in chest, coal stone/bronze frame, chains attached at LEFT ARM JOINT, RIGHT ARM JOINT and SINGLE ANKLE ANCHOR; all three break points visibly separated. THREE SEPARATE FREESTANDING ALTAR PYLONS in small prop inset, never fused into body. Main smaller attack pose front-row mechanical arm sweep; extra compact second-phase inset of same machine with segmented ward, NO third phase. Asymmetric fractured crown arc, no watch, no Cael human face, no skull. Giant boss mass clear, own column wide enough all appendages fit. Restrained small violet core, matte bronze/ivory, no neon aura covering silhouette.",
+  "transparent_background": false,
+  "reference_paths": [
+    "narrative/15_Art_Workbench/enemies/design_v001/boards/ch01_whispering_ash_v001.png"
+  ],
+  "output_path": "boards/ch07_first_eclipse_v001.png",
+  "status": "SUPERSEDED_DESIGN_DRAFT_NOT_FOR_INTEGRATION",
+  "inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+  "notes": "Generated PNG copied byte-exact. Editorial design board; no sprite/frame-animation claim.",
+  "output_sha256": "49e0c7e242f7002a111ce0255c08c33ad94a290d6ca18c5014dfb013b208bc27",
+  "references": [
+    {
+      "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch01_whispering_ash_v001.png",
+      "sha256": "3580adb7c352a3595044dda816e0c044ae51240c6aeeb11f18da0972c3d4b148"
+    }
+  ],
+  "superseded_by": "boards/ch07_first_eclipse_v002.png"
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+  "transparent_background": true,
+  "notes": "Originals unchanged; outputs copied byte-exact. No runtime integration.",
+  "generation_index": 9,
+  "prompt": "Edit this Fadyme story portrait into CHAPTER7 LATE DEBT state at altar: preserve EXACT same adult identity, violet eyes, ONE bone-white front hair lock and rest ash blonde, same waist-up framing, plum hood, black dress silver-lilac embroidery now gently faded, ivory scarf clean, same three separate crown fragment, silver bell side hairpin and necklace chain bell thorn clapper. Her visible right hand still holding the cloak should show THIN BLACK-GOLD LINES creeping beneath the skin from knuckles across fingers and up the wrist, delicate branching ash-dark veins with muted old gold seams. Hand remains anatomically human, five fingers, not armored, not clawed, not metallic glove, no fire or blood. Keep the rest of skin normal, no veins on face, no glowing aura. Facial expression controlled strain with lips slightly parted and worried eyes, hiding the cost. This is a story-gated late variant, not default UI. True transparent background, gothic painterly light novel anime material style and restrained warm rim light. Complete portrait silhouette unchanged.",
+  "reference_paths": [
+    "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/vn_white_lock_v002.png"
+  ],
+  "output_path": "story/vn_black_gold_hands_v002.png",
+  "output_sha256": "4ec56cac05a03b1ac67777fa192d8f7f7bbcdcc37748f33a76a62f711166d9fa",
+  "date": "2026-10-09",
+  "inclusion": "WORKBENCH_NOT_EXPORTED",
+  "references": [
+    {
+      "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/vn_white_lock_v002.png",
+      "sha256": "f0f099ef4c996802410c162a71989cec2ab6fc95995e6d002986bbfb5d275781"
+    }
+  ]
+}

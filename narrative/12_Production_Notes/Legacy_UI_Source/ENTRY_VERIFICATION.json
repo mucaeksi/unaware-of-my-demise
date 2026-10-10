@@ -1,0 +1,630 @@
+{
+  "date_utc": "2026-10-05T04:12:44.928825+00:00",
+  "status": "PASS",
+  "artifact": "Entry flow DESIGN_DRAFT / V03",
+  "languages": {
+    "player_text": "en",
+    "subtitles": "en",
+    "voice": "ja"
+  },
+  "check_count": 65,
+  "checks": [
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "first",
+      "expected": "ready"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "returning",
+      "expected": "ready"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "content",
+      "expected": "available"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "offline",
+      "expected": "Connection unavailable"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "cancelled",
+      "expected": "Sign-in not completed"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "no_account",
+      "expected": "A Google account is needed"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "unavailable",
+      "expected": "Sign-in unavailable"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "maintenance",
+      "expected": "A brief intermission"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "update",
+      "expected": "A new version awaits"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "patch_error",
+      "expected": "Download interrupted"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "verify_error",
+      "expected": "Files could not be verified"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "restart",
+      "expected": "Update complete"
+    },
+    {
+      "check": "flow_scenario",
+      "result": "PASS",
+      "scenario": "sync_error",
+      "expected": "Your journey could not be loaded"
+    },
+    {
+      "check": "unsigned_patch_deep_link_is_rejected",
+      "result": "PASS"
+    },
+    {
+      "check": "download_continues_while_settings_is_open",
+      "result": "PASS",
+      "completion_does_not_navigate": true
+    },
+    {
+      "check": "help_returns_to_current_patch_state",
+      "result": "PASS"
+    },
+    {
+      "check": "sign_out_dialog_focus",
+      "result": "PASS",
+      "cancel_first": true,
+      "tab_wrap": true,
+      "escape_cancels": true,
+      "restores_trigger": true
+    },
+    {
+      "check": "device_preferences_survive_navigation_logout_reload",
+      "result": "PASS",
+      "storage_fields": [
+        "music",
+        "muted",
+        "reduceMotion",
+        "sfx",
+        "textSize",
+        "voice"
+      ],
+      "account_data_stored": false
+    },
+    {
+      "check": "cancel_sign_out_keeps_download",
+      "result": "PASS"
+    },
+    {
+      "check": "confirmed_sign_out_invalidates_late_patch_completion",
+      "result": "PASS"
+    },
+    {
+      "check": "duplicate_sign_in_guard",
+      "result": "PASS"
+    },
+    {
+      "check": "cancel_sign_in_invalidates_late_result",
+      "result": "PASS"
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "state": "SignInScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "state": "PatchScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "state": "EntryUtilityMenu",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "state": "EntrySettingsScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "state": "EntryHelpScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "state": "SignOutConfirmDialog",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "state": "SignInScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "state": "PatchScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "state": "EntryUtilityMenu",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "state": "EntrySettingsScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "state": "EntryHelpScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "state": "SignOutConfirmDialog",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "SignInScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "PatchScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "EntryUtilityMenu",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "EntrySettingsScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "EntryHelpScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "SignOutConfirmDialog",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 432,
+        "height": 960
+      },
+      "state": "SignInScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 432,
+        "height": 960
+      },
+      "state": "PatchScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 432,
+        "height": 960
+      },
+      "state": "EntryUtilityMenu",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 432,
+        "height": 960
+      },
+      "state": "EntrySettingsScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 432,
+        "height": 960
+      },
+      "state": "EntryHelpScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 432,
+        "height": 960
+      },
+      "state": "SignOutConfirmDialog",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1050
+      },
+      "state": "SignInScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1050
+      },
+      "state": "PatchScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1050
+      },
+      "state": "EntryUtilityMenu",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1050
+      },
+      "state": "EntrySettingsScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1050
+      },
+      "state": "EntryHelpScreen",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 1050
+      },
+      "state": "SignOutConfirmDialog",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "state": "EntrySettingsScreen / large text",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "state": "PatchScreen / large text",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "state": "EntryHelpScreen / large text",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "EntrySettingsScreen / large text",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "PatchScreen / large text",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "responsive_layout",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "EntryHelpScreen / large text",
+      "no_overflow": true,
+      "minimum_button_target_px": 44
+    },
+    {
+      "check": "reduced_motion_and_indeterminate_progress",
+      "result": "PASS",
+      "invented_percentage": false
+    },
+    {
+      "check": "browser_integrity",
+      "result": "PASS",
+      "javascript_errors": [],
+      "http_errors": [],
+      "external_requests": []
+    },
+    {
+      "check": "screen_registry",
+      "result": "PASS",
+      "registered_entries": 6,
+      "unique_ids": true,
+      "view_and_spec_present": true,
+      "godot_stems_match": true
+    },
+    {
+      "check": "updated_support_help_and_ready_copy",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "text_size": "standard",
+      "support_address_matches_owner_decision": true,
+      "no_overflow_or_artwork_overlap": true
+    },
+    {
+      "check": "updated_support_help_and_ready_copy",
+      "result": "PASS",
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "text_size": "large",
+      "support_address_matches_owner_decision": true,
+      "no_overflow_or_artwork_overlap": true
+    },
+    {
+      "check": "updated_support_help_and_ready_copy",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "text_size": "standard",
+      "support_address_matches_owner_decision": true,
+      "no_overflow_or_artwork_overlap": true
+    },
+    {
+      "check": "updated_support_help_and_ready_copy",
+      "result": "PASS",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "text_size": "large",
+      "support_address_matches_owner_decision": true,
+      "no_overflow_or_artwork_overlap": true
+    }
+  ],
+  "boundaries": {
+    "google_or_live_account_tested": false,
+    "real_content_download_tested": false,
+    "godot_or_android_device_tested": false,
+    "runtime_changed": false,
+    "approved_reference_pixels_changed": false,
+    "preferences": "Only device preference fields in localStorage",
+    "cancellation": "Timer ownership simulation; transport/atomic-install cancellation adapter still required",
+    "safe_area": "CSS env() accommodation; physical cutout not tested",
+    "progress": "Indeterminate; no fake percentages"
+  },
+  "reference_integrity": {
+    "status": "PASS",
+    "baseline_commit": "10b42fbd09b7a8fdce6bc2b98d7a5a72eec5f388",
+    "protected_files_unchanged": 56,
+    "locked_reference_files_unchanged": 26,
+    "includes_upstream_audio_cues_pack": true,
+    "note": "Runtime MANIFEST/audio cues changes came from the upstream technical-team merge, not this UI change."
+  },
+  "authored_link_check": {
+    "checked": 87,
+    "missing": []
+  },
+  "html_asset_and_link_check": {
+    "checked": 48,
+    "missing": []
+  },
+  "initial_test_basis_revision": "4913b39ee525705d1bdc559d9b70af970e9273a2",
+  "current_integration_basis_revision": "10b42fbd09b7a8fdce6bc2b98d7a5a72eec5f388"
+}

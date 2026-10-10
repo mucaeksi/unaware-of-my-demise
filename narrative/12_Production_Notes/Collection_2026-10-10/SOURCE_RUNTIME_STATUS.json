@@ -1,0 +1,208 @@
+{
+  "canonical_main_lines": 419,
+  "runtime_main_lines": 419,
+  "missing_in_runtime": [],
+  "runtime_only_lines": [],
+  "changed_dialogue": [],
+  "story_order_entries": 51,
+  "playable_characters": 20,
+  "companion_parts": 76,
+  "events": 4,
+  "character_voice_lines": 220,
+  "opening_duration_seconds": 120,
+  "tutorial_chapters": 3,
+  "snapshots": [
+    {
+      "source": "game/data/content/accessories_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/accessories_part1.json",
+      "bytes": 160064,
+      "sha256": "74bff7fb90d0ae8056c534c8c0938d3e218fe04aebc8a446c502905ae329ad00"
+    },
+    {
+      "source": "game/data/content/armors_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/armors_part1.json",
+      "bytes": 26866,
+      "sha256": "27668c63311fcf0db9351b9ddcad7baebb5ea5455f993f8a659abb2fd56e1aa4"
+    },
+    {
+      "source": "game/data/content/audio_cues_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/audio_cues_part1.json",
+      "bytes": 768,
+      "sha256": "44a9364e5f6b31e1a0013c5ac7ad0c41c54934c35a4790dc8fde77a1ca466ab0"
+    },
+    {
+      "source": "game/data/content/battle_effects_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/battle_effects_part1.json",
+      "bytes": 155245,
+      "sha256": "02bfaa960b4412f0ad3a5ace94c804f1c6185379c7a9c070043612f04d302fd3"
+    },
+    {
+      "source": "game/data/content/battle_rules_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/battle_rules_part1.json",
+      "bytes": 17345,
+      "sha256": "35800abdb567bc81474ac5e3ba31007e79490944378e92873351b4b508e48a15"
+    },
+    {
+      "source": "game/data/content/brand_assets_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/brand_assets_part1.json",
+      "bytes": 137690,
+      "sha256": "80eaad32eba741411010844ac0a550ed6551f97be92307e5aa886a2788fa7642"
+    },
+    {
+      "source": "game/data/content/chapters_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/chapters_part1.json",
+      "bytes": 36389,
+      "sha256": "4fd410b433bdaafb7d2a5daef79c9546d6f3820aa6b0dd4f6bb9bb73a997fd00"
+    },
+    {
+      "source": "game/data/content/character_stories_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/character_stories_part1.json",
+      "bytes": 157507,
+      "sha256": "b836b05de70a5a72f3c1c0f5446ed165ece57098a03b00ebde1a6e0362fc6381"
+    },
+    {
+      "source": "game/data/content/character_visuals_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/character_visuals_part1.json",
+      "bytes": 70060,
+      "sha256": "33d9a0221f11b591986bea379ae855d31c6dafad19c48b2e05a410f6c605c092"
+    },
+    {
+      "source": "game/data/content/character_voice_lines_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/character_voice_lines_part1.json",
+      "bytes": 48408,
+      "sha256": "5f9539ab26fe69ccdf702eb3744f83f9585d5b7bfd1a16f2e1609d5431a97210"
+    },
+    {
+      "source": "game/data/content/characters_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json",
+      "bytes": 129829,
+      "sha256": "a449e24e423514b44d9d0a30efca6f5fe3b0d4948b8442d851658637f028b742"
+    },
+    {
+      "source": "game/data/content/drop_tables_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/drop_tables_part1.json",
+      "bytes": 19445,
+      "sha256": "2d8728f32264ef812545b9a3388b38e64ec7d5b2d1a6c130132542198d6db8b4"
+    },
+    {
+      "source": "game/data/content/economy_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/economy_part1.json",
+      "bytes": 11487,
+      "sha256": "23a5c4aa2e698440f2c07ec223ede905d1975a04c59e2845a0d5a6a8e080f136"
+    },
+    {
+      "source": "game/data/content/enemies_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json",
+      "bytes": 119638,
+      "sha256": "5466cba6a28b820b10c667661193a46ea9558199795152d20e504ce7b38382ff"
+    },
+    {
+      "source": "game/data/content/events_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/events_part1.json",
+      "bytes": 20917,
+      "sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "source": "game/data/content/items_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/items_part1.json",
+      "bytes": 10006,
+      "sha256": "9f2c4ea4440747b7646d447644a1909eaf36ff8812a91355724e82c594405378"
+    },
+    {
+      "source": "game/data/content/lore_text_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/lore_text_part1.json",
+      "bytes": 13790,
+      "sha256": "24c4b58a7a1d0157602d69cf39074cf06a234af2bff129d9e5540b7265909028"
+    },
+    {
+      "source": "game/data/content/stages_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json",
+      "bytes": 32520,
+      "sha256": "8ed0c2bde255b1d9d257490e4e1466e0ccb1e1d23f435319358b91fc2223ab77"
+    },
+    {
+      "source": "game/data/content/story_script_ch01.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/story_script_ch01.json",
+      "bytes": 24126,
+      "sha256": "3ed5725b9cad3a263209d5a74b296d358dea53a0c9737d82bc2cb6f06aebb78f"
+    },
+    {
+      "source": "game/data/content/story_script_ch02.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/story_script_ch02.json",
+      "bytes": 16206,
+      "sha256": "6e776ef17076a051597d1506e77eb0a10b2d6474e89844f8291a8ba302dd499c"
+    },
+    {
+      "source": "game/data/content/story_script_ch03.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/story_script_ch03.json",
+      "bytes": 14455,
+      "sha256": "057ea15673ba4e71dc2a54242d692f5bb2f2e8d87e86372cd87b92ebc80f32cf"
+    },
+    {
+      "source": "game/data/content/story_script_ch04.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/story_script_ch04.json",
+      "bytes": 16370,
+      "sha256": "23ce9b04acaac3c39e98999c89726e117abfd8bf86b532eb93f398a553664fff"
+    },
+    {
+      "source": "game/data/content/story_script_ch05.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/story_script_ch05.json",
+      "bytes": 15189,
+      "sha256": "6dcca600600d921d119a1be3e34125eacdc6fab18070f200e37777e0908cc206"
+    },
+    {
+      "source": "game/data/content/story_script_ch06.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/story_script_ch06.json",
+      "bytes": 16315,
+      "sha256": "7805e676bef53c4f02850250a1418bb723acfadf595a2c05913215a6e6c24e67"
+    },
+    {
+      "source": "game/data/content/story_script_ch07.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/story_script_ch07.json",
+      "bytes": 28483,
+      "sha256": "103f2de0b61b361253c08d8e4fe2da9d31c1c03dac24d95e3a760618c27833a5"
+    },
+    {
+      "source": "game/data/content/story_script_part1_manifest.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/story_script_part1_manifest.json",
+      "bytes": 2438,
+      "sha256": "d6d49a3ac4c5f3463752272b2b7ceed26e7bb886155184395e365c406fc75f12"
+    },
+    {
+      "source": "game/data/content/visual_assets_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/visual_assets_part1.json",
+      "bytes": 21877,
+      "sha256": "d6e523cfa9d41a9d56d1315201d8a8d8267079b5b3afbc33212ccf0dc3aee056"
+    },
+    {
+      "source": "game/data/content/weapons_part1.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/weapons_part1.json",
+      "bytes": 159881,
+      "sha256": "c13e2ba22fa55c5d0e27d2353b1aec578cf0befaafab533194ac817a2a242daf"
+    },
+    {
+      "source": "game/data/content/MANIFEST.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/MANIFEST.json",
+      "bytes": 4191,
+      "sha256": "69f816ae9417934b3bea1edfc509035d52e6ef7b0d6c7c3173ae0490beea4861"
+    },
+    {
+      "source": "game/data/entry/prologue_v001.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/prologue_v001.json",
+      "bytes": 5252,
+      "sha256": "975ad29ca79cdda3d8745e97614d954b31a280a0e09232bc33d8223b4e62cb04"
+    },
+    {
+      "source": "game/data/entry/tutorial_v001.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json",
+      "bytes": 34857,
+      "sha256": "c073bc0014ef5421f3459074de38245a5bfca73947217fa082bcd0e8deda2d8e"
+    },
+    {
+      "source": "game/data/stable_ids.lock.json",
+      "snapshot": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/stable_ids.lock.json",
+      "bytes": 17428,
+      "sha256": "cfe7011714a3000c82bbdb857f9cfc898ec290d13bb4ad760b2f4cd22bb94542"
+    }
+  ]
+}

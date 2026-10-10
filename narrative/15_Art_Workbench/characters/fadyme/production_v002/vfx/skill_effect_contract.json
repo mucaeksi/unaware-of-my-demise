@@ -1,0 +1,94 @@
+{
+  "status": "CANDIDATE_NOT_INTEGRATED",
+  "renderer": "gl_compatibility",
+  "contracts": [
+    {
+      "skill_id": "fadyme_basic_veilglass_thorn",
+      "asset": "veilglass_thorn_v002.tscn",
+      "duration_seconds": 0.62,
+      "bounded_canvas_px": [
+        320,
+        144
+      ],
+      "canvas_passes": 2,
+      "particles": 0,
+      "screen_readback": false,
+      "texture_samples_per_shader_fragment": 0,
+      "fallback": "disable Spark; set reduced_motion=true; play effect at normal speed; retain cue envelope",
+      "cleanup": "effect fully alpha-zero at end; consumer frees/releases instance; animation asset has no gameplay callback",
+      "trigger": "existing skill presentation release; never resolves damage/status/heal",
+      "placement": "target center for thorn; enemy arc plus separate ally-local cue for active; caster/party-local ward for passive; enemy group center plus ally-local cleanse cue for ultimate"
+    },
+    {
+      "skill_id": "fadyme_active_borrowed_hour",
+      "asset": "borrowed_hour_v002.tscn",
+      "duration_seconds": 0.95,
+      "bounded_canvas_px": [
+        256,
+        256
+      ],
+      "canvas_passes": 2,
+      "particles": 0,
+      "screen_readback": false,
+      "texture_samples_per_shader_fragment": 0,
+      "fallback": "disable Spark; set reduced_motion=true; play effect at normal speed; retain cue envelope",
+      "cleanup": "effect fully alpha-zero at end; consumer frees/releases instance; animation asset has no gameplay callback",
+      "trigger": "existing skill presentation release; never resolves damage/status/heal",
+      "placement": "target center for thorn; enemy arc plus separate ally-local cue for active; caster/party-local ward for passive; enemy group center plus ally-local cleanse cue for ultimate"
+    },
+    {
+      "skill_id": "fadyme_passive_a_smile_kept",
+      "asset": "a_smile_kept_v002.tscn",
+      "duration_seconds": 0.58,
+      "bounded_canvas_px": [
+        192,
+        192
+      ],
+      "canvas_passes": 2,
+      "particles": 0,
+      "screen_readback": false,
+      "texture_samples_per_shader_fragment": 0,
+      "fallback": "disable Spark; set reduced_motion=true; play effect at normal speed; retain cue envelope",
+      "cleanup": "effect fully alpha-zero at end; consumer frees/releases instance; animation asset has no gameplay callback",
+      "trigger": "existing skill presentation release; never resolves damage/status/heal",
+      "placement": "target center for thorn; enemy arc plus separate ally-local cue for active; caster/party-local ward for passive; enemy group center plus ally-local cleanse cue for ultimate"
+    },
+    {
+      "skill_id": "fadyme_ultimate_the_bell_that_forgets",
+      "asset": "bell_that_forgets_v002.tscn",
+      "duration_seconds": 1.32,
+      "bounded_canvas_px": [
+        384,
+        256
+      ],
+      "canvas_passes": 2,
+      "particles": 0,
+      "screen_readback": false,
+      "texture_samples_per_shader_fragment": 0,
+      "fallback": "disable Spark; set reduced_motion=true; play effect at normal speed; retain cue envelope",
+      "cleanup": "effect fully alpha-zero at end; consumer frees/releases instance; animation asset has no gameplay callback",
+      "trigger": "existing skill presentation release; never resolves damage/status/heal",
+      "placement": "target center for thorn; enemy arc plus separate ally-local cue for active; caster/party-local ward for passive; enemy group center plus ally-local cleanse cue for ultimate"
+    }
+  ],
+  "android_device_acceptance": "NOT_MEASURED",
+  "sfx": "DESIGNED_CUES_ONLY_AUDIO_LAST",
+  "ally_components": [
+    {
+      "skill_ids": [
+        "fadyme_active_borrowed_hour"
+      ],
+      "asset": "ally_restore_v002.tscn",
+      "duration_seconds": 0.58,
+      "trigger": "existing resolved lowest-HP ally recipient; integration must not reselect recipient"
+    },
+    {
+      "skill_ids": [
+        "fadyme_ultimate_the_bell_that_forgets"
+      ],
+      "asset": "ally_cleanse_v002.tscn",
+      "duration_seconds": 0.58,
+      "trigger": "existing resolved allies with cleansed debuff/heal event; no new status calculation"
+    }
+  ]
+}

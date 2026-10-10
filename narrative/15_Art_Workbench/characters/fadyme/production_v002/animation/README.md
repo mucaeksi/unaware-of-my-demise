@@ -1,0 +1,7 @@
+# Fadyme animation sources v002
+
+`fadyme_animation_v002.tscn` contains 8 authored key-pose clips and 8 Reduced Motion counterparts, phase timing and grounded offsets. The v003 originals remain byte-identical. This is an animation asset, not a gameplay controller. AnimationPlayer has no method/callback tracks: an interrupted or defeated actor cannot be returned to idle by a stale callback from this asset. Claude owns event alignment and state transitions. Defeat holds its terminal pose; victory holds until explicitly changed. No mirroring of asymmetric pins is approved.
+
+Property animation is not a bone rig or a complete hand-drawn action sequence. New idle/walk sheets, if present, are independently marked candidate and have their own AtlasTexture/SpriteFrames resources. No Android acceptance is inferred from desktop preview.
+
+Delivered locomotion: `locomotion_spriteframes_v002.tres` and `fadyme_locomotion_v002.tscn` provide 8 walking frames (10 fps) and 4 idle frames (1.667 fps). `locomotion_regions.json` records measured source crops and AtlasTexture margins. Native preview sampled every frame at 240 px height; max core foot-anchor delta 0.0064 px. The rejected clipped first atlas is retained as an explicitly non-delivery draft. The repaired source retains transparent gutter margins around every figure. Artistic loop timing, costume movement and generation consistency remain owner-review candidates; foot measurements are not anatomy approval.

@@ -1,0 +1,2096 @@
+{
+  "root": "narrative/FADYME_MEDIA_ALL",
+  "files": [
+    {
+      "path": "01_Canonical_Character_Sheet.png",
+      "bytes": 2702834,
+      "format": "png",
+      "sha256": "998a5d4c608e5ce57c96ab698d5ed1bb6ab15e9ee22da02e5c3330c0a506fec1",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "01_Fadyme_Pilot/UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png",
+      "bytes": 2795651,
+      "format": "png",
+      "sha256": "f0d5b0c84482bb37c3dd23a6ae770ec392206fa7bf084cf120c2007758d516f6",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "01_Fadyme_Pilot/UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png",
+      "bytes": 2702834,
+      "format": "png",
+      "sha256": "998a5d4c608e5ce57c96ab698d5ed1bb6ab15e9ee22da02e5c3330c0a506fec1",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "01_Fadyme_Pilot/UOMD_P1_Fadyme_UI_Integration_Preview_v001.png",
+      "bytes": 2527099,
+      "format": "png",
+      "sha256": "91efea351a17126ba1e7799ec079ab3e7cfcffcd730b5d111548e68c850d5a22",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "01_Fadyme_Pilot/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png",
+      "bytes": 2731508,
+      "format": "png",
+      "sha256": "30491c10e079e0eaabc13aa592d4e4230ca4a62a8b72c503173f5de36b2ab9ca",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "bytes": 593121,
+      "format": "png",
+      "sha256": "fbec091c5f016e07a84868e6ad8cbf9def668b5c985253c8bc832299653e25a9",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "bytes": 1549826,
+      "format": "png",
+      "sha256": "d60d5a9010f11637eed7c7af2bba960681b69a3a52a87af6132c778d745f0a4c",
+      "width": 768,
+      "height": 1024,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "bytes": 159330,
+      "format": "png",
+      "sha256": "608d8b73cf2592281199989ec5b37d2bf738578782d5142227cf71af4719a23d",
+      "width": 256,
+      "height": 256,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "bytes": 584893,
+      "format": "png",
+      "sha256": "f4e67003a736a6b747238083ac4e6cb0f4296f2eb7da430cd1de2a727e0d10a1",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "02_UI_Portraits/UOMD_P1_Fadyme_UI_Portraits_Production_Board_v001.png",
+      "bytes": 1262318,
+      "format": "png",
+      "sha256": "4ecae876a81d7f81477fc98b45f108017548510641ba8c9827b5ffe0850d18a9",
+      "width": 1400,
+      "height": 1050,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "02_VN_Expression_Sheet.png",
+      "bytes": 2731508,
+      "format": "png",
+      "sha256": "30491c10e079e0eaabc13aa592d4e4230ca4a62a8b72c503173f5de36b2ab9ca",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "03_Battle_Chibi_Style_Guide.png",
+      "bytes": 2795651,
+      "format": "png",
+      "sha256": "f0d5b0c84482bb37c3dd23a6ae770ec392206fa7bf084cf120c2007758d516f6",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BellHairpin_128_v003.png",
+      "bytes": 10610,
+      "format": "png",
+      "sha256": "b0f705a6529ff1e6f6595c5344d4edd08a4351c4d9efd6c7deeb83b0a538d066",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png",
+      "bytes": 97165,
+      "format": "png",
+      "sha256": "d855f16be59ee0ff7c4021374351faf26c3683bfff028f3b6138bd41889d3d7f",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BellNecklace_128_v003.png",
+      "bytes": 12322,
+      "format": "png",
+      "sha256": "b839450aab739bc2a1a4b5e63410123b0fe232131d92f0ce402eb1bc216aeb7a",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BellNecklace_Master_v003.png",
+      "bytes": 109204,
+      "format": "png",
+      "sha256": "ec693eb0cf8fe9b17cdbe596e6c754e9fdabe8e108aa219fe6e26899f6b28e4f",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_128_v003.png",
+      "bytes": 17202,
+      "format": "png",
+      "sha256": "dfaa0fe763bc12f750dbbc7e4168510d237acb32cebcf470d80ead90892dee56",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_Master_v003.png",
+      "bytes": 155545,
+      "format": "png",
+      "sha256": "ff3991f833d8cc14bd0fdb536423e051bcbf79f39cb823897207b0614291e250",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "03_Signature_Icons/UOMD_P1_Fadyme_Icon_ThornClapper_128_v003.png",
+      "bytes": 5505,
+      "format": "png",
+      "sha256": "332894c6f5084f3e10251d3e979a8f7eb288cf34382e8f76f4a22ae2be3d6d41",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "03_Signature_Icons/UOMD_P1_Fadyme_Icon_ThornClapper_Master_v003.png",
+      "bytes": 48345,
+      "format": "png",
+      "sha256": "8d9d8c61486a03ff7f9fa5bc35a3117aefb09bf257d07cbd83600d42a39ff17a",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "03_Signature_Icons/UOMD_P1_Fadyme_Signature_Icons_Production_Board_v003.png",
+      "bytes": 130139,
+      "format": "png",
+      "sha256": "3f1836f749e9b8ba9571fc876907057c3254d128843366db36316217402724a8",
+      "width": 1200,
+      "height": 700,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "04_UI_Integration_Preview.png",
+      "bytes": 2527099,
+      "format": "png",
+      "sha256": "91efea351a17126ba1e7799ec079ab3e7cfcffcd730b5d111548e68c850d5a22",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__ch1_camp_005.ogg",
+      "bytes": 42063,
+      "format": "ogg",
+      "sha256": "b339590b4a6279d9663081cdbab5f4f7c59ffec466e7f4feda802de68ace271a"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__ch1_camp_008.ogg",
+      "bytes": 50761,
+      "format": "ogg",
+      "sha256": "56e3e6bfe80a634bea44989898614cdd8dfb258fe4b13f2b9eb8721fa96f1653"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg",
+      "bytes": 36332,
+      "format": "ogg",
+      "sha256": "6a6a6cddbac3e881a9beb4fc4265b3913565b7e49bf6e98f315398f90e739d55"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg",
+      "bytes": 40878,
+      "format": "ogg",
+      "sha256": "da65c23be989d1e4617fe0393d86c51f681701b7e6edee64e93bc594791485cd"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg",
+      "bytes": 38007,
+      "format": "ogg",
+      "sha256": "34c2e1a076ef0e2467380600a94c72394a12dbfcb591775802553702d7677a85"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg",
+      "bytes": 49334,
+      "format": "ogg",
+      "sha256": "c15f65c1c0bcf13706b7f86a74297580df50bd80bee47b71cdf5c8dfaf87c64d"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg",
+      "bytes": 16193,
+      "format": "ogg",
+      "sha256": "4abd5268b520f5e4d13f2dc3a8f72abe7b2160558d9a4dd873b6da31705b5c35"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg",
+      "bytes": 26816,
+      "format": "ogg",
+      "sha256": "5cbf5c4d4598e436b58200daa3f377aa8b8d96d54dab23d33c2f2e40f83221c6"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg",
+      "bytes": 24260,
+      "format": "ogg",
+      "sha256": "0e8f8fdbfee2349137b5d4bd97849c5acdfb013d856b1b9aaef975c55b21b995"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg",
+      "bytes": 27464,
+      "format": "ogg",
+      "sha256": "dc74e0e138ce666fed56317395a7bbc05764cc968955774dec2cc898b76bf221"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg",
+      "bytes": 38919,
+      "format": "ogg",
+      "sha256": "dcfa8ae466c0ecf4851021aa72a3275c3f96009b35e93ed3075be9dc0097276e"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg",
+      "bytes": 33975,
+      "format": "ogg",
+      "sha256": "f49530b5ea32a734069a66d0187aa03e4d0f9dc2a5e490ccac20827b76bf2aaf"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg",
+      "bytes": 20886,
+      "format": "ogg",
+      "sha256": "e673e4f5a3326afa038f868d05c39b8818531eb9588a1c567b849535b4874679"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__opening_004.ogg",
+      "bytes": 33603,
+      "format": "ogg",
+      "sha256": "3edc69033091aca6efba2c6cb2ca2e62f4f6bdb035c907f8d7df64a53dc22856"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__opening_006.ogg",
+      "bytes": 51138,
+      "format": "ogg",
+      "sha256": "73fac8b50565003fe08dd35c79b22d769b0f02409b2be0cbde09e0ac50aa94d4"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme__opening_012.ogg",
+      "bytes": 18058,
+      "format": "ogg",
+      "sha256": "3b6c23b9974c596e6dc519582e55371518dbc48068c93432395f413e2061b7a3"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg",
+      "bytes": 48144,
+      "format": "ogg",
+      "sha256": "799c072eaa478e72710f4f65bb10390d98c144990b27e814ab9575b3a5d3f290"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg",
+      "bytes": 62211,
+      "format": "ogg",
+      "sha256": "358275d64a8f22329d5671d914ca9a018416b32e4bbc05b9b18c2627c23918a4"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg",
+      "bytes": 54806,
+      "format": "ogg",
+      "sha256": "256f1221c4101ae10c478187e3b7f84018f65782389b32970c6e0b2e3f686536"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg",
+      "bytes": 44363,
+      "format": "ogg",
+      "sha256": "34d7288f0d129366ab27812a754191dce8cb2feb5d0fe14e16f33dcb9e29dd49"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg",
+      "bytes": 45181,
+      "format": "ogg",
+      "sha256": "3db346f1569fe549fbd6934bcf3b8b55b9d99be4c4178034aa10ac22a4b89af7"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg",
+      "bytes": 30603,
+      "format": "ogg",
+      "sha256": "2f409c71666d9998c5f4fd8179ee841d63a69636b29d3e9b42e398792e215024"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme_thought__opening_001.ogg",
+      "bytes": 98820,
+      "format": "ogg",
+      "sha256": "9a256f8863337bf45c2c5937206c47bb031b63b8bd2e91f921ad74e6c7e3d277"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme_thought__opening_002.ogg",
+      "bytes": 90639,
+      "format": "ogg",
+      "sha256": "2e2def4d06a6a150f7c1a8173ad66e9388b606707352a0149c5a3a85c1b29472"
+    },
+    {
+      "path": "04_VO/Japanese__Fadyme__fadyme_thought__opening_014.ogg",
+      "bytes": 55445,
+      "format": "ogg",
+      "sha256": "85875eafba6478b2ef157e01b7f13203d8f37c9ef48636cfd0e1f52079979985"
+    },
+    {
+      "path": "04_VO/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "bytes": 515541,
+      "format": "mp3",
+      "sha256": "9286d062ba537e809f4564fd412e45b3d92476b4a332d3f5fd93af94f61284ce"
+    },
+    {
+      "path": "05_Audio_Cues/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.ogg",
+      "bytes": 1628819,
+      "format": "ogg",
+      "sha256": "bc2c230cf1cd67a8f1b4a7c9669f192f8388f3e1a363b772ce349b3ba6712e79"
+    },
+    {
+      "path": "05_Audio_Cues/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.mp3",
+      "bytes": 2924477,
+      "format": "mp3",
+      "sha256": "ff469fd0001dec0834dea53e8a6cfda7ff849ad64ab3a71a7fc2810f258c87dc"
+    },
+    {
+      "path": "05_Audio_Cues/Music_Source__bgm_battle_field__bgm_battle_field_v002_loop.ogg",
+      "bytes": 1719905,
+      "format": "ogg",
+      "sha256": "548830e74e7d40f0515653b11b9b20314177dc7c1ee55ae10017453a0adb26f7"
+    },
+    {
+      "path": "05_Audio_Cues/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_calm_v001_loop.ogg",
+      "bytes": 2222818,
+      "format": "ogg",
+      "sha256": "2c92582719d99f3b95d2159d45c3891530de9976a675686ab801179c000be582"
+    },
+    {
+      "path": "05_Audio_Cues/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_chaotic_v001_loop.ogg",
+      "bytes": 2146003,
+      "format": "ogg",
+      "sha256": "d35e1ab6d3f284e9d31b570a7ba379dd11aac1f5c8e3d86173acd3dc6e2a68e5"
+    },
+    {
+      "path": "05_Audio_Cues/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_uneasy_v001_loop.ogg",
+      "bytes": 2010959,
+      "format": "ogg",
+      "sha256": "7f3e7124121ec4eeb7fa419d6284320feb6b7b31a5ec2f7cba4141dd3be12b45"
+    },
+    {
+      "path": "AUDIO_CUES_SOURCE/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.ogg",
+      "bytes": 1628819,
+      "format": "ogg",
+      "sha256": "bc2c230cf1cd67a8f1b4a7c9669f192f8388f3e1a363b772ce349b3ba6712e79"
+    },
+    {
+      "path": "AUDIO_CUES_SOURCE/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.mp3",
+      "bytes": 2924477,
+      "format": "mp3",
+      "sha256": "ff469fd0001dec0834dea53e8a6cfda7ff849ad64ab3a71a7fc2810f258c87dc"
+    },
+    {
+      "path": "AUDIO_CUES_SOURCE/Music_Source__bgm_battle_field__bgm_battle_field_v002_loop.ogg",
+      "bytes": 1719905,
+      "format": "ogg",
+      "sha256": "548830e74e7d40f0515653b11b9b20314177dc7c1ee55ae10017453a0adb26f7"
+    },
+    {
+      "path": "AUDIO_CUES_SOURCE/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_calm_v001_loop.ogg",
+      "bytes": 2222818,
+      "format": "ogg",
+      "sha256": "2c92582719d99f3b95d2159d45c3891530de9976a675686ab801179c000be582"
+    },
+    {
+      "path": "AUDIO_CUES_SOURCE/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_chaotic_v001_loop.ogg",
+      "bytes": 2146003,
+      "format": "ogg",
+      "sha256": "d35e1ab6d3f284e9d31b570a7ba379dd11aac1f5c8e3d86173acd3dc6e2a68e5"
+    },
+    {
+      "path": "AUDIO_CUES_SOURCE/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_uneasy_v001_loop.ogg",
+      "bytes": 2010959,
+      "format": "ogg",
+      "sha256": "7f3e7124121ec4eeb7fa419d6284320feb6b7b31a5ec2f7cba4141dd3be12b45"
+    },
+    {
+      "path": "FADYME_AUDIO_CUES_EXTRACTED/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.ogg",
+      "bytes": 1628819,
+      "format": "ogg",
+      "sha256": "bc2c230cf1cd67a8f1b4a7c9669f192f8388f3e1a363b772ce349b3ba6712e79"
+    },
+    {
+      "path": "FADYME_AUDIO_CUES_EXTRACTED/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.mp3",
+      "bytes": 2924477,
+      "format": "mp3",
+      "sha256": "ff469fd0001dec0834dea53e8a6cfda7ff849ad64ab3a71a7fc2810f258c87dc"
+    },
+    {
+      "path": "FADYME_AUDIO_CUES_EXTRACTED/Music_Source__bgm_battle_field__bgm_battle_field_v002_loop.ogg",
+      "bytes": 1719905,
+      "format": "ogg",
+      "sha256": "548830e74e7d40f0515653b11b9b20314177dc7c1ee55ae10017453a0adb26f7"
+    },
+    {
+      "path": "FADYME_AUDIO_CUES_EXTRACTED/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_calm_v001_loop.ogg",
+      "bytes": 2222818,
+      "format": "ogg",
+      "sha256": "2c92582719d99f3b95d2159d45c3891530de9976a675686ab801179c000be582"
+    },
+    {
+      "path": "FADYME_AUDIO_CUES_EXTRACTED/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_chaotic_v001_loop.ogg",
+      "bytes": 2146003,
+      "format": "ogg",
+      "sha256": "d35e1ab6d3f284e9d31b570a7ba379dd11aac1f5c8e3d86173acd3dc6e2a68e5"
+    },
+    {
+      "path": "FADYME_AUDIO_CUES_EXTRACTED/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_uneasy_v001_loop.ogg",
+      "bytes": 2010959,
+      "format": "ogg",
+      "sha256": "7f3e7124121ec4eeb7fa419d6284320feb6b7b31a5ec2f7cba4141dd3be12b45"
+    },
+    {
+      "path": "FADYME_PILOT_EXTRACTED/UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png",
+      "bytes": 2795651,
+      "format": "png",
+      "sha256": "f0d5b0c84482bb37c3dd23a6ae770ec392206fa7bf084cf120c2007758d516f6",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_PILOT_EXTRACTED/UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png",
+      "bytes": 2702834,
+      "format": "png",
+      "sha256": "998a5d4c608e5ce57c96ab698d5ed1bb6ab15e9ee22da02e5c3330c0a506fec1",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_PILOT_EXTRACTED/UOMD_P1_Fadyme_UI_Integration_Preview_v001.png",
+      "bytes": 2527099,
+      "format": "png",
+      "sha256": "91efea351a17126ba1e7799ec079ab3e7cfcffcd730b5d111548e68c850d5a22",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_PILOT_EXTRACTED/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png",
+      "bytes": 2731508,
+      "format": "png",
+      "sha256": "30491c10e079e0eaabc13aa592d4e4230ca4a62a8b72c503173f5de36b2ab9ca",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BellHairpin_128_v003.png",
+      "bytes": 10610,
+      "format": "png",
+      "sha256": "b0f705a6529ff1e6f6595c5344d4edd08a4351c4d9efd6c7deeb83b0a538d066",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png",
+      "bytes": 97165,
+      "format": "png",
+      "sha256": "d855f16be59ee0ff7c4021374351faf26c3683bfff028f3b6138bd41889d3d7f",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BellNecklace_128_v003.png",
+      "bytes": 12322,
+      "format": "png",
+      "sha256": "b839450aab739bc2a1a4b5e63410123b0fe232131d92f0ce402eb1bc216aeb7a",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BellNecklace_Master_v003.png",
+      "bytes": 109204,
+      "format": "png",
+      "sha256": "ec693eb0cf8fe9b17cdbe596e6c754e9fdabe8e108aa219fe6e26899f6b28e4f",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_128_v003.png",
+      "bytes": 17202,
+      "format": "png",
+      "sha256": "dfaa0fe763bc12f750dbbc7e4168510d237acb32cebcf470d80ead90892dee56",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_Master_v003.png",
+      "bytes": 155545,
+      "format": "png",
+      "sha256": "ff3991f833d8cc14bd0fdb536423e051bcbf79f39cb823897207b0614291e250",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_ThornClapper_128_v003.png",
+      "bytes": 5505,
+      "format": "png",
+      "sha256": "332894c6f5084f3e10251d3e979a8f7eb288cf34382e8f76f4a22ae2be3d6d41",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_ThornClapper_Master_v003.png",
+      "bytes": 48345,
+      "format": "png",
+      "sha256": "8d9d8c61486a03ff7f9fa5bc35a3117aefb09bf257d07cbd83600d42a39ff17a",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Signature_Icons_Production_Board_v003.png",
+      "bytes": 130139,
+      "format": "png",
+      "sha256": "3f1836f749e9b8ba9571fc876907057c3254d128843366db36316217402724a8",
+      "width": 1200,
+      "height": 700,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "bytes": 593121,
+      "format": "png",
+      "sha256": "fbec091c5f016e07a84868e6ad8cbf9def668b5c985253c8bc832299653e25a9",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "bytes": 1549826,
+      "format": "png",
+      "sha256": "d60d5a9010f11637eed7c7af2bba960681b69a3a52a87af6132c778d745f0a4c",
+      "width": 768,
+      "height": 1024,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "bytes": 159330,
+      "format": "png",
+      "sha256": "608d8b73cf2592281199989ec5b37d2bf738578782d5142227cf71af4719a23d",
+      "width": 256,
+      "height": 256,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "bytes": 584893,
+      "format": "png",
+      "sha256": "f4e67003a736a6b747238083ac4e6cb0f4296f2eb7da430cd1de2a727e0d10a1",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portraits_Production_Board_v001.png",
+      "bytes": 1262318,
+      "format": "png",
+      "sha256": "4ecae876a81d7f81477fc98b45f108017548510641ba8c9827b5ffe0850d18a9",
+      "width": 1400,
+      "height": 1050,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_005.ogg",
+      "bytes": 42063,
+      "format": "ogg",
+      "sha256": "b339590b4a6279d9663081cdbab5f4f7c59ffec466e7f4feda802de68ace271a"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_008.ogg",
+      "bytes": 50761,
+      "format": "ogg",
+      "sha256": "56e3e6bfe80a634bea44989898614cdd8dfb258fe4b13f2b9eb8721fa96f1653"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg",
+      "bytes": 36332,
+      "format": "ogg",
+      "sha256": "6a6a6cddbac3e881a9beb4fc4265b3913565b7e49bf6e98f315398f90e739d55"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg",
+      "bytes": 40878,
+      "format": "ogg",
+      "sha256": "da65c23be989d1e4617fe0393d86c51f681701b7e6edee64e93bc594791485cd"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg",
+      "bytes": 38007,
+      "format": "ogg",
+      "sha256": "34c2e1a076ef0e2467380600a94c72394a12dbfcb591775802553702d7677a85"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg",
+      "bytes": 49334,
+      "format": "ogg",
+      "sha256": "c15f65c1c0bcf13706b7f86a74297580df50bd80bee47b71cdf5c8dfaf87c64d"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg",
+      "bytes": 16193,
+      "format": "ogg",
+      "sha256": "4abd5268b520f5e4d13f2dc3a8f72abe7b2160558d9a4dd873b6da31705b5c35"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg",
+      "bytes": 26816,
+      "format": "ogg",
+      "sha256": "5cbf5c4d4598e436b58200daa3f377aa8b8d96d54dab23d33c2f2e40f83221c6"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg",
+      "bytes": 24260,
+      "format": "ogg",
+      "sha256": "0e8f8fdbfee2349137b5d4bd97849c5acdfb013d856b1b9aaef975c55b21b995"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg",
+      "bytes": 27464,
+      "format": "ogg",
+      "sha256": "dc74e0e138ce666fed56317395a7bbc05764cc968955774dec2cc898b76bf221"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg",
+      "bytes": 38919,
+      "format": "ogg",
+      "sha256": "dcfa8ae466c0ecf4851021aa72a3275c3f96009b35e93ed3075be9dc0097276e"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg",
+      "bytes": 33975,
+      "format": "ogg",
+      "sha256": "f49530b5ea32a734069a66d0187aa03e4d0f9dc2a5e490ccac20827b76bf2aaf"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg",
+      "bytes": 20886,
+      "format": "ogg",
+      "sha256": "e673e4f5a3326afa038f868d05c39b8818531eb9588a1c567b849535b4874679"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_004.ogg",
+      "bytes": 33603,
+      "format": "ogg",
+      "sha256": "3edc69033091aca6efba2c6cb2ca2e62f4f6bdb035c907f8d7df64a53dc22856"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_006.ogg",
+      "bytes": 51138,
+      "format": "ogg",
+      "sha256": "73fac8b50565003fe08dd35c79b22d769b0f02409b2be0cbde09e0ac50aa94d4"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_012.ogg",
+      "bytes": 18058,
+      "format": "ogg",
+      "sha256": "3b6c23b9974c596e6dc519582e55371518dbc48068c93432395f413e2061b7a3"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg",
+      "bytes": 48144,
+      "format": "ogg",
+      "sha256": "799c072eaa478e72710f4f65bb10390d98c144990b27e814ab9575b3a5d3f290"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg",
+      "bytes": 62211,
+      "format": "ogg",
+      "sha256": "358275d64a8f22329d5671d914ca9a018416b32e4bbc05b9b18c2627c23918a4"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg",
+      "bytes": 54806,
+      "format": "ogg",
+      "sha256": "256f1221c4101ae10c478187e3b7f84018f65782389b32970c6e0b2e3f686536"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg",
+      "bytes": 44363,
+      "format": "ogg",
+      "sha256": "34d7288f0d129366ab27812a754191dce8cb2feb5d0fe14e16f33dcb9e29dd49"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg",
+      "bytes": 45181,
+      "format": "ogg",
+      "sha256": "3db346f1569fe549fbd6934bcf3b8b55b9d99be4c4178034aa10ac22a4b89af7"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg",
+      "bytes": 30603,
+      "format": "ogg",
+      "sha256": "2f409c71666d9998c5f4fd8179ee841d63a69636b29d3e9b42e398792e215024"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_001.ogg",
+      "bytes": 98820,
+      "format": "ogg",
+      "sha256": "9a256f8863337bf45c2c5937206c47bb031b63b8bd2e91f921ad74e6c7e3d277"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_002.ogg",
+      "bytes": 90639,
+      "format": "ogg",
+      "sha256": "2e2def4d06a6a150f7c1a8173ad66e9388b606707352a0149c5a3a85c1b29472"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_014.ogg",
+      "bytes": 55445,
+      "format": "ogg",
+      "sha256": "85875eafba6478b2ef157e01b7f13203d8f37c9ef48636cfd0e1f52079979985"
+    },
+    {
+      "path": "FADYME_VO_EXTRACTED/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "bytes": 515541,
+      "format": "mp3",
+      "sha256": "9286d062ba537e809f4564fd412e45b3d92476b4a332d3f5fd93af94f61284ce"
+    },
+    {
+      "path": "PILOT_SOURCE/UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png",
+      "bytes": 2795651,
+      "format": "png",
+      "sha256": "f0d5b0c84482bb37c3dd23a6ae770ec392206fa7bf084cf120c2007758d516f6",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "PILOT_SOURCE/UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png",
+      "bytes": 2702834,
+      "format": "png",
+      "sha256": "998a5d4c608e5ce57c96ab698d5ed1bb6ab15e9ee22da02e5c3330c0a506fec1",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "PILOT_SOURCE/UOMD_P1_Fadyme_UI_Integration_Preview_v001.png",
+      "bytes": 2527099,
+      "format": "png",
+      "sha256": "91efea351a17126ba1e7799ec079ab3e7cfcffcd730b5d111548e68c850d5a22",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "PILOT_SOURCE/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png",
+      "bytes": 2731508,
+      "format": "png",
+      "sha256": "30491c10e079e0eaabc13aa592d4e4230ca4a62a8b72c503173f5de36b2ab9ca",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BellHairpin_128_v003.png",
+      "bytes": 10610,
+      "format": "png",
+      "sha256": "b0f705a6529ff1e6f6595c5344d4edd08a4351c4d9efd6c7deeb83b0a538d066",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png",
+      "bytes": 97165,
+      "format": "png",
+      "sha256": "d855f16be59ee0ff7c4021374351faf26c3683bfff028f3b6138bd41889d3d7f",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BellNecklace_128_v003.png",
+      "bytes": 12322,
+      "format": "png",
+      "sha256": "b839450aab739bc2a1a4b5e63410123b0fe232131d92f0ce402eb1bc216aeb7a",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BellNecklace_Master_v003.png",
+      "bytes": 109204,
+      "format": "png",
+      "sha256": "ec693eb0cf8fe9b17cdbe596e6c754e9fdabe8e108aa219fe6e26899f6b28e4f",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_128_v003.png",
+      "bytes": 17202,
+      "format": "png",
+      "sha256": "dfaa0fe763bc12f750dbbc7e4168510d237acb32cebcf470d80ead90892dee56",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_Master_v003.png",
+      "bytes": 155545,
+      "format": "png",
+      "sha256": "ff3991f833d8cc14bd0fdb536423e051bcbf79f39cb823897207b0614291e250",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_ThornClapper_128_v003.png",
+      "bytes": 5505,
+      "format": "png",
+      "sha256": "332894c6f5084f3e10251d3e979a8f7eb288cf34382e8f76f4a22ae2be3d6d41",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_ThornClapper_Master_v003.png",
+      "bytes": 48345,
+      "format": "png",
+      "sha256": "8d9d8c61486a03ff7f9fa5bc35a3117aefb09bf257d07cbd83600d42a39ff17a",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Signature_Icons_Production_Board_v003.png",
+      "bytes": 130139,
+      "format": "png",
+      "sha256": "3f1836f749e9b8ba9571fc876907057c3254d128843366db36316217402724a8",
+      "width": 1200,
+      "height": 700,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "bytes": 593121,
+      "format": "png",
+      "sha256": "fbec091c5f016e07a84868e6ad8cbf9def668b5c985253c8bc832299653e25a9",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "bytes": 1549826,
+      "format": "png",
+      "sha256": "d60d5a9010f11637eed7c7af2bba960681b69a3a52a87af6132c778d745f0a4c",
+      "width": 768,
+      "height": 1024,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "bytes": 159330,
+      "format": "png",
+      "sha256": "608d8b73cf2592281199989ec5b37d2bf738578782d5142227cf71af4719a23d",
+      "width": 256,
+      "height": 256,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "bytes": 584893,
+      "format": "png",
+      "sha256": "f4e67003a736a6b747238083ac4e6cb0f4296f2eb7da430cd1de2a727e0d10a1",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portraits_Production_Board_v001.png",
+      "bytes": 1262318,
+      "format": "png",
+      "sha256": "4ecae876a81d7f81477fc98b45f108017548510641ba8c9827b5ffe0850d18a9",
+      "width": 1400,
+      "height": 1050,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_APPROVED_Primary_Logo_v001.png",
+      "bytes": 1245383,
+      "format": "png",
+      "sha256": "6bfc215e3f0ad123e3ac80607102acb202ff9b66af02215968a433334de11f29",
+      "width": 2048,
+      "height": 682,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_Fadyme_Mahmut_APPROVED_KeyArt_Square_v001.png",
+      "bytes": 3482574,
+      "format": "png",
+      "sha256": "02c0b7493e0cbc3d717535c54c9c51bb673662fd4e2ceadb44c962b987243360",
+      "width": 1254,
+      "height": 1254,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_Fadyme_Mahmut_APPROVED_KeyArt_Vertical_v001.png",
+      "bytes": 3584506,
+      "format": "png",
+      "sha256": "57eaa9922b429b67a0d97f36867440291e2ff9ef12dc382e814a8d64acc9d5c3",
+      "width": 941,
+      "height": 1672,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Battle_Chibi_Runtime_Production_Board_v001.png",
+      "bytes": 3117091,
+      "format": "png",
+      "sha256": "4fdf2cca69e46cf365408d0cc71132a26f400534bdfde65c6d7bd2c098215ae3",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Battle_Chibi_Runtime_SpriteSheet_Board_v002.png",
+      "bytes": 2921086,
+      "format": "png",
+      "sha256": "497deaac94a3dc84bdd717763eccf29d584bde9106183c2539abbfb2c66c34c0",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Battle_Chibi_Runtime_SpriteSheet_Board_v003.png",
+      "bytes": 3162698,
+      "format": "png",
+      "sha256": "ac540126517bebaef665dde624514df4b89a77ce450694595f197c7451497376",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Battle_Chibi_Runtime_SpriteSheet_Board_v004.png",
+      "bytes": 3028331,
+      "format": "png",
+      "sha256": "aa6f91bbe2f95d9b5ac84aba5bc8025d113b85acb70270754d5bb9921aed64dd",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png",
+      "bytes": 2795651,
+      "format": "png",
+      "sha256": "f0d5b0c84482bb37c3dd23a6ae770ec392206fa7bf084cf120c2007758d516f6",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png",
+      "bytes": 2702834,
+      "format": "png",
+      "sha256": "998a5d4c608e5ce57c96ab698d5ed1bb6ab15e9ee22da02e5c3330c0a506fec1",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Icon_BellHairpin_128_v003.png",
+      "bytes": 10610,
+      "format": "png",
+      "sha256": "b0f705a6529ff1e6f6595c5344d4edd08a4351c4d9efd6c7deeb83b0a538d066",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png",
+      "bytes": 97165,
+      "format": "png",
+      "sha256": "d855f16be59ee0ff7c4021374351faf26c3683bfff028f3b6138bd41889d3d7f",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Icon_BellNecklace_128_v003.png",
+      "bytes": 12322,
+      "format": "png",
+      "sha256": "b839450aab739bc2a1a4b5e63410123b0fe232131d92f0ce402eb1bc216aeb7a",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Icon_BellNecklace_Master_v003.png",
+      "bytes": 109204,
+      "format": "png",
+      "sha256": "ec693eb0cf8fe9b17cdbe596e6c754e9fdabe8e108aa219fe6e26899f6b28e4f",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Icon_BrokenCrownFragment_128_v003.png",
+      "bytes": 17202,
+      "format": "png",
+      "sha256": "dfaa0fe763bc12f750dbbc7e4168510d237acb32cebcf470d80ead90892dee56",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Icon_BrokenCrownFragment_Master_v003.png",
+      "bytes": 155545,
+      "format": "png",
+      "sha256": "ff3991f833d8cc14bd0fdb536423e051bcbf79f39cb823897207b0614291e250",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Icon_ThornClapper_128_v003.png",
+      "bytes": 5505,
+      "format": "png",
+      "sha256": "332894c6f5084f3e10251d3e979a8f7eb288cf34382e8f76f4a22ae2be3d6d41",
+      "width": 128,
+      "height": 128,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Icon_ThornClapper_Master_v003.png",
+      "bytes": 48345,
+      "format": "png",
+      "sha256": "8d9d8c61486a03ff7f9fa5bc35a3117aefb09bf257d07cbd83600d42a39ff17a",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_Signature_Icons_Production_Board_v003.png",
+      "bytes": 130139,
+      "format": "png",
+      "sha256": "3f1836f749e9b8ba9571fc876907057c3254d128843366db36316217402724a8",
+      "width": 1200,
+      "height": 700,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_UI_Integration_Preview_v001.png",
+      "bytes": 2527099,
+      "format": "png",
+      "sha256": "91efea351a17126ba1e7799ec079ab3e7cfcffcd730b5d111548e68c850d5a22",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001(1).png",
+      "bytes": 593121,
+      "format": "png",
+      "sha256": "fbec091c5f016e07a84868e6ad8cbf9def668b5c985253c8bc832299653e25a9",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "bytes": 593121,
+      "format": "png",
+      "sha256": "fbec091c5f016e07a84868e6ad8cbf9def668b5c985253c8bc832299653e25a9",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001(1).png",
+      "bytes": 1549826,
+      "format": "png",
+      "sha256": "d60d5a9010f11637eed7c7af2bba960681b69a3a52a87af6132c778d745f0a4c",
+      "width": 768,
+      "height": 1024,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "bytes": 1549826,
+      "format": "png",
+      "sha256": "d60d5a9010f11637eed7c7af2bba960681b69a3a52a87af6132c778d745f0a4c",
+      "width": 768,
+      "height": 1024,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001(1).png",
+      "bytes": 159330,
+      "format": "png",
+      "sha256": "608d8b73cf2592281199989ec5b37d2bf738578782d5142227cf71af4719a23d",
+      "width": 256,
+      "height": 256,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "bytes": 159330,
+      "format": "png",
+      "sha256": "608d8b73cf2592281199989ec5b37d2bf738578782d5142227cf71af4719a23d",
+      "width": 256,
+      "height": 256,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_UI_Portrait_Roster_v001(1).png",
+      "bytes": 584893,
+      "format": "png",
+      "sha256": "f4e67003a736a6b747238083ac4e6cb0f4296f2eb7da430cd1de2a727e0d10a1",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "bytes": 584893,
+      "format": "png",
+      "sha256": "f4e67003a736a6b747238083ac4e6cb0f4296f2eb7da430cd1de2a727e0d10a1",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_UI_Portraits_Production_Board_v001.png",
+      "bytes": 1262318,
+      "format": "png",
+      "sha256": "4ecae876a81d7f81477fc98b45f108017548510641ba8c9827b5ffe0850d18a9",
+      "width": 1400,
+      "height": 1050,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_VN_Bust_Composed_v001(1).png",
+      "bytes": 2853352,
+      "format": "png",
+      "sha256": "68ad5d9f4b3a44998f31e2a63e66e3d0a553befa44ad99fb4c8b32f041b1f290",
+      "width": 1086,
+      "height": 1448,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_VN_Bust_Composed_v001.png",
+      "bytes": 2853352,
+      "format": "png",
+      "sha256": "68ad5d9f4b3a44998f31e2a63e66e3d0a553befa44ad99fb4c8b32f041b1f290",
+      "width": 1086,
+      "height": 1448,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_VN_Bust_HonestFear_v001(1).png",
+      "bytes": 2782676,
+      "format": "png",
+      "sha256": "fa55f2ee3f1f845c1718610cfcbad27520b31200aa5cfcbf03ff7d9077d9d9b3",
+      "width": 1086,
+      "height": 1448,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_VN_Bust_HonestFear_v001.png",
+      "bytes": 2782676,
+      "format": "png",
+      "sha256": "fa55f2ee3f1f845c1718610cfcbad27520b31200aa5cfcbf03ff7d9077d9d9b3",
+      "width": 1086,
+      "height": 1448,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_VN_Bust_QuietPain_v001(1).png",
+      "bytes": 2647984,
+      "format": "png",
+      "sha256": "16ef3c93da22355d3d3d099bf10711673884acdb48ea157227a46fc528549054",
+      "width": 1086,
+      "height": 1448,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_VN_Bust_QuietPain_v001.png",
+      "bytes": 2647984,
+      "format": "png",
+      "sha256": "16ef3c93da22355d3d3d099bf10711673884acdb48ea157227a46fc528549054",
+      "width": 1086,
+      "height": 1448,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_VN_Bust_Warm_v001(1).png",
+      "bytes": 2949220,
+      "format": "png",
+      "sha256": "9f5a76e725253ff322e0ad9bd348b8fd3b4fbb5339a07019c8f355ae788c0e32",
+      "width": 1086,
+      "height": 1448,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_VN_Bust_Warm_v001.png",
+      "bytes": 2949220,
+      "format": "png",
+      "sha256": "9f5a76e725253ff322e0ad9bd348b8fd3b4fbb5339a07019c8f355ae788c0e32",
+      "width": 1086,
+      "height": 1448,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": true,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png",
+      "bytes": 2731508,
+      "format": "png",
+      "sha256": "30491c10e079e0eaabc13aa592d4e4230ca4a62a8b72c503173f5de36b2ab9ca",
+      "width": 1122,
+      "height": 1402,
+      "bit_depth": 8,
+      "alpha_channel_or_transparency": false,
+      "decode_status": "header/chunks inspected; full pixel decoding not assessed"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_005.ogg",
+      "bytes": 42063,
+      "format": "ogg",
+      "sha256": "b339590b4a6279d9663081cdbab5f4f7c59ffec466e7f4feda802de68ace271a"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_008.ogg",
+      "bytes": 50761,
+      "format": "ogg",
+      "sha256": "56e3e6bfe80a634bea44989898614cdd8dfb258fe4b13f2b9eb8721fa96f1653"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg",
+      "bytes": 36332,
+      "format": "ogg",
+      "sha256": "6a6a6cddbac3e881a9beb4fc4265b3913565b7e49bf6e98f315398f90e739d55"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg",
+      "bytes": 40878,
+      "format": "ogg",
+      "sha256": "da65c23be989d1e4617fe0393d86c51f681701b7e6edee64e93bc594791485cd"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg",
+      "bytes": 38007,
+      "format": "ogg",
+      "sha256": "34c2e1a076ef0e2467380600a94c72394a12dbfcb591775802553702d7677a85"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg",
+      "bytes": 49334,
+      "format": "ogg",
+      "sha256": "c15f65c1c0bcf13706b7f86a74297580df50bd80bee47b71cdf5c8dfaf87c64d"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg",
+      "bytes": 16193,
+      "format": "ogg",
+      "sha256": "4abd5268b520f5e4d13f2dc3a8f72abe7b2160558d9a4dd873b6da31705b5c35"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg",
+      "bytes": 26816,
+      "format": "ogg",
+      "sha256": "5cbf5c4d4598e436b58200daa3f377aa8b8d96d54dab23d33c2f2e40f83221c6"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg",
+      "bytes": 24260,
+      "format": "ogg",
+      "sha256": "0e8f8fdbfee2349137b5d4bd97849c5acdfb013d856b1b9aaef975c55b21b995"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg",
+      "bytes": 27464,
+      "format": "ogg",
+      "sha256": "dc74e0e138ce666fed56317395a7bbc05764cc968955774dec2cc898b76bf221"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg",
+      "bytes": 38919,
+      "format": "ogg",
+      "sha256": "dcfa8ae466c0ecf4851021aa72a3275c3f96009b35e93ed3075be9dc0097276e"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg",
+      "bytes": 33975,
+      "format": "ogg",
+      "sha256": "f49530b5ea32a734069a66d0187aa03e4d0f9dc2a5e490ccac20827b76bf2aaf"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg",
+      "bytes": 20886,
+      "format": "ogg",
+      "sha256": "e673e4f5a3326afa038f868d05c39b8818531eb9588a1c567b849535b4874679"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__opening_004.ogg",
+      "bytes": 33603,
+      "format": "ogg",
+      "sha256": "3edc69033091aca6efba2c6cb2ca2e62f4f6bdb035c907f8d7df64a53dc22856"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__opening_006.ogg",
+      "bytes": 51138,
+      "format": "ogg",
+      "sha256": "73fac8b50565003fe08dd35c79b22d769b0f02409b2be0cbde09e0ac50aa94d4"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme__opening_012.ogg",
+      "bytes": 18058,
+      "format": "ogg",
+      "sha256": "3b6c23b9974c596e6dc519582e55371518dbc48068c93432395f413e2061b7a3"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg",
+      "bytes": 48144,
+      "format": "ogg",
+      "sha256": "799c072eaa478e72710f4f65bb10390d98c144990b27e814ab9575b3a5d3f290"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg",
+      "bytes": 62211,
+      "format": "ogg",
+      "sha256": "358275d64a8f22329d5671d914ca9a018416b32e4bbc05b9b18c2627c23918a4"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg",
+      "bytes": 54806,
+      "format": "ogg",
+      "sha256": "256f1221c4101ae10c478187e3b7f84018f65782389b32970c6e0b2e3f686536"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg",
+      "bytes": 44363,
+      "format": "ogg",
+      "sha256": "34d7288f0d129366ab27812a754191dce8cb2feb5d0fe14e16f33dcb9e29dd49"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg",
+      "bytes": 45181,
+      "format": "ogg",
+      "sha256": "3db346f1569fe549fbd6934bcf3b8b55b9d99be4c4178034aa10ac22a4b89af7"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg",
+      "bytes": 30603,
+      "format": "ogg",
+      "sha256": "2f409c71666d9998c5f4fd8179ee841d63a69636b29d3e9b42e398792e215024"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_001.ogg",
+      "bytes": 98820,
+      "format": "ogg",
+      "sha256": "9a256f8863337bf45c2c5937206c47bb031b63b8bd2e91f921ad74e6c7e3d277"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_002.ogg",
+      "bytes": 90639,
+      "format": "ogg",
+      "sha256": "2e2def4d06a6a150f7c1a8173ad66e9388b606707352a0149c5a3a85c1b29472"
+    },
+    {
+      "path": "VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_014.ogg",
+      "bytes": 55445,
+      "format": "ogg",
+      "sha256": "85875eafba6478b2ef157e01b7f13203d8f37c9ef48636cfd0e1f52079979985"
+    },
+    {
+      "path": "VO_SOURCE/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "bytes": 515541,
+      "format": "mp3",
+      "sha256": "9286d062ba537e809f4564fd412e45b3d92476b4a332d3f5fd93af94f61284ce"
+    },
+    {
+      "path": "ch1_camp_005.ogg",
+      "bytes": 42063,
+      "format": "ogg",
+      "sha256": "b339590b4a6279d9663081cdbab5f4f7c59ffec466e7f4feda802de68ace271a"
+    },
+    {
+      "path": "ch1_camp_006.ogg",
+      "bytes": 48144,
+      "format": "ogg",
+      "sha256": "799c072eaa478e72710f4f65bb10390d98c144990b27e814ab9575b3a5d3f290"
+    },
+    {
+      "path": "ch1_camp_008.ogg",
+      "bytes": 50761,
+      "format": "ogg",
+      "sha256": "56e3e6bfe80a634bea44989898614cdd8dfb258fe4b13f2b9eb8721fa96f1653"
+    },
+    {
+      "path": "ch1_first_oath_004.ogg",
+      "bytes": 36332,
+      "format": "ogg",
+      "sha256": "6a6a6cddbac3e881a9beb4fc4265b3913565b7e49bf6e98f315398f90e739d55"
+    },
+    {
+      "path": "ch1_first_oath_006.ogg",
+      "bytes": 62211,
+      "format": "ogg",
+      "sha256": "358275d64a8f22329d5671d914ca9a018416b32e4bbc05b9b18c2627c23918a4"
+    },
+    {
+      "path": "node_1_1_post_002.ogg",
+      "bytes": 40878,
+      "format": "ogg",
+      "sha256": "da65c23be989d1e4617fe0393d86c51f681701b7e6edee64e93bc594791485cd"
+    },
+    {
+      "path": "node_1_1_post_003.ogg",
+      "bytes": 54806,
+      "format": "ogg",
+      "sha256": "256f1221c4101ae10c478187e3b7f84018f65782389b32970c6e0b2e3f686536"
+    },
+    {
+      "path": "node_1_1_pre_002.ogg",
+      "bytes": 38007,
+      "format": "ogg",
+      "sha256": "34c2e1a076ef0e2467380600a94c72394a12dbfcb591775802553702d7677a85"
+    },
+    {
+      "path": "node_1_1_pre_003.ogg",
+      "bytes": 44363,
+      "format": "ogg",
+      "sha256": "34d7288f0d129366ab27812a754191dce8cb2feb5d0fe14e16f33dcb9e29dd49"
+    },
+    {
+      "path": "node_1_2_pre_003.ogg",
+      "bytes": 49334,
+      "format": "ogg",
+      "sha256": "c15f65c1c0bcf13706b7f86a74297580df50bd80bee47b71cdf5c8dfaf87c64d"
+    },
+    {
+      "path": "node_1_3_post_002.ogg",
+      "bytes": 16193,
+      "format": "ogg",
+      "sha256": "4abd5268b520f5e4d13f2dc3a8f72abe7b2160558d9a4dd873b6da31705b5c35"
+    },
+    {
+      "path": "node_1_4_post_002.ogg",
+      "bytes": 26816,
+      "format": "ogg",
+      "sha256": "5cbf5c4d4598e436b58200daa3f377aa8b8d96d54dab23d33c2f2e40f83221c6"
+    },
+    {
+      "path": "node_1_5_post_002.ogg",
+      "bytes": 24260,
+      "format": "ogg",
+      "sha256": "0e8f8fdbfee2349137b5d4bd97849c5acdfb013d856b1b9aaef975c55b21b995"
+    },
+    {
+      "path": "node_1_5_post_004.ogg",
+      "bytes": 27464,
+      "format": "ogg",
+      "sha256": "dc74e0e138ce666fed56317395a7bbc05764cc968955774dec2cc898b76bf221"
+    },
+    {
+      "path": "node_1_5_post_005.ogg",
+      "bytes": 45181,
+      "format": "ogg",
+      "sha256": "3db346f1569fe549fbd6934bcf3b8b55b9d99be4c4178034aa10ac22a4b89af7"
+    },
+    {
+      "path": "node_1_5_pre_003.ogg",
+      "bytes": 38919,
+      "format": "ogg",
+      "sha256": "dcfa8ae466c0ecf4851021aa72a3275c3f96009b35e93ed3075be9dc0097276e"
+    },
+    {
+      "path": "node_2_1_post_002.ogg",
+      "bytes": 33975,
+      "format": "ogg",
+      "sha256": "f49530b5ea32a734069a66d0187aa03e4d0f9dc2a5e490ccac20827b76bf2aaf"
+    },
+    {
+      "path": "node_2_1_post_003.ogg",
+      "bytes": 30603,
+      "format": "ogg",
+      "sha256": "2f409c71666d9998c5f4fd8179ee841d63a69636b29d3e9b42e398792e215024"
+    },
+    {
+      "path": "node_2_1_pre_003.ogg",
+      "bytes": 20886,
+      "format": "ogg",
+      "sha256": "e673e4f5a3326afa038f868d05c39b8818531eb9588a1c567b849535b4874679"
+    },
+    {
+      "path": "opening_001.ogg",
+      "bytes": 98820,
+      "format": "ogg",
+      "sha256": "9a256f8863337bf45c2c5937206c47bb031b63b8bd2e91f921ad74e6c7e3d277"
+    },
+    {
+      "path": "opening_002.ogg",
+      "bytes": 90639,
+      "format": "ogg",
+      "sha256": "2e2def4d06a6a150f7c1a8173ad66e9388b606707352a0149c5a3a85c1b29472"
+    },
+    {
+      "path": "opening_004.ogg",
+      "bytes": 33603,
+      "format": "ogg",
+      "sha256": "3edc69033091aca6efba2c6cb2ca2e62f4f6bdb035c907f8d7df64a53dc22856"
+    },
+    {
+      "path": "opening_006.ogg",
+      "bytes": 51138,
+      "format": "ogg",
+      "sha256": "73fac8b50565003fe08dd35c79b22d769b0f02409b2be0cbde09e0ac50aa94d4"
+    },
+    {
+      "path": "opening_012.ogg",
+      "bytes": 18058,
+      "format": "ogg",
+      "sha256": "3b6c23b9974c596e6dc519582e55371518dbc48068c93432395f413e2061b7a3"
+    },
+    {
+      "path": "opening_014.ogg",
+      "bytes": 55445,
+      "format": "ogg",
+      "sha256": "85875eafba6478b2ef157e01b7f13203d8f37c9ef48636cfd0e1f52079979985"
+    }
+  ],
+  "duplicates": [
+    [
+      "01_Canonical_Character_Sheet.png",
+      "01_Fadyme_Pilot/UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png",
+      "FADYME_PILOT_EXTRACTED/UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png",
+      "PILOT_SOURCE/UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png",
+      "UOMD_P1_Fadyme_Canonical_Character_Sheet_v001.png"
+    ],
+    [
+      "01_Fadyme_Pilot/UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png",
+      "03_Battle_Chibi_Style_Guide.png",
+      "FADYME_PILOT_EXTRACTED/UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png",
+      "PILOT_SOURCE/UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png",
+      "UOMD_P1_Fadyme_Battle_Chibi_Style_Guide_v001.png"
+    ],
+    [
+      "01_Fadyme_Pilot/UOMD_P1_Fadyme_UI_Integration_Preview_v001.png",
+      "04_UI_Integration_Preview.png",
+      "FADYME_PILOT_EXTRACTED/UOMD_P1_Fadyme_UI_Integration_Preview_v001.png",
+      "PILOT_SOURCE/UOMD_P1_Fadyme_UI_Integration_Preview_v001.png",
+      "UOMD_P1_Fadyme_UI_Integration_Preview_v001.png"
+    ],
+    [
+      "01_Fadyme_Pilot/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png",
+      "02_VN_Expression_Sheet.png",
+      "FADYME_PILOT_EXTRACTED/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png",
+      "PILOT_SOURCE/UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png",
+      "UOMD_P1_Fadyme_VN_Portrait_Expression_Sheet_v001.png"
+    ],
+    [
+      "02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png",
+      "UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001(1).png",
+      "UOMD_P1_Fadyme_UI_Portrait_BattleHUD_v001.png"
+    ],
+    [
+      "02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png",
+      "UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001(1).png",
+      "UOMD_P1_Fadyme_UI_Portrait_CompanionCard_v001.png"
+    ],
+    [
+      "02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png",
+      "UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001(1).png",
+      "UOMD_P1_Fadyme_UI_Portrait_MenuAvatar_v001.png"
+    ],
+    [
+      "02_UI_Portraits/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png",
+      "UOMD_P1_Fadyme_UI_Portrait_Roster_v001(1).png",
+      "UOMD_P1_Fadyme_UI_Portrait_Roster_v001.png"
+    ],
+    [
+      "02_UI_Portraits/UOMD_P1_Fadyme_UI_Portraits_Production_Board_v001.png",
+      "FADYME_UI_PORTRAITS_EXTRACTED/UOMD_P1_Fadyme_UI_Portraits_Production_Board_v001.png",
+      "UI_PORTRAITS_SOURCE/UOMD_P1_Fadyme_UI_Portraits_Production_Board_v001.png",
+      "UOMD_P1_Fadyme_UI_Portraits_Production_Board_v001.png"
+    ],
+    [
+      "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BellHairpin_128_v003.png",
+      "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BellHairpin_128_v003.png",
+      "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BellHairpin_128_v003.png",
+      "UOMD_P1_Fadyme_Icon_BellHairpin_128_v003.png"
+    ],
+    [
+      "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png",
+      "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png",
+      "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png",
+      "UOMD_P1_Fadyme_Icon_BellHairpin_Master_v003.png"
+    ],
+    [
+      "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BellNecklace_128_v003.png",
+      "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BellNecklace_128_v003.png",
+      "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BellNecklace_128_v003.png",
+      "UOMD_P1_Fadyme_Icon_BellNecklace_128_v003.png"
+    ],
+    [
+      "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BellNecklace_Master_v003.png",
+      "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BellNecklace_Master_v003.png",
+      "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BellNecklace_Master_v003.png",
+      "UOMD_P1_Fadyme_Icon_BellNecklace_Master_v003.png"
+    ],
+    [
+      "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_128_v003.png",
+      "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_128_v003.png",
+      "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_128_v003.png",
+      "UOMD_P1_Fadyme_Icon_BrokenCrownFragment_128_v003.png"
+    ],
+    [
+      "03_Signature_Icons/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_Master_v003.png",
+      "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_Master_v003.png",
+      "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_BrokenCrownFragment_Master_v003.png",
+      "UOMD_P1_Fadyme_Icon_BrokenCrownFragment_Master_v003.png"
+    ],
+    [
+      "03_Signature_Icons/UOMD_P1_Fadyme_Icon_ThornClapper_128_v003.png",
+      "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_ThornClapper_128_v003.png",
+      "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_ThornClapper_128_v003.png",
+      "UOMD_P1_Fadyme_Icon_ThornClapper_128_v003.png"
+    ],
+    [
+      "03_Signature_Icons/UOMD_P1_Fadyme_Icon_ThornClapper_Master_v003.png",
+      "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Icon_ThornClapper_Master_v003.png",
+      "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Icon_ThornClapper_Master_v003.png",
+      "UOMD_P1_Fadyme_Icon_ThornClapper_Master_v003.png"
+    ],
+    [
+      "03_Signature_Icons/UOMD_P1_Fadyme_Signature_Icons_Production_Board_v003.png",
+      "FADYME_SIGNATURE_ICONS_EXTRACTED/UOMD_P1_Fadyme_Signature_Icons_Production_Board_v003.png",
+      "SIGNATURE_ICONS_SOURCE/UOMD_P1_Fadyme_Signature_Icons_Production_Board_v003.png",
+      "UOMD_P1_Fadyme_Signature_Icons_Production_Board_v003.png"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__ch1_camp_005.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_005.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_005.ogg",
+      "ch1_camp_005.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__ch1_camp_008.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_camp_008.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__ch1_camp_008.ogg",
+      "ch1_camp_008.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__ch1_first_oath_004.ogg",
+      "ch1_first_oath_004.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_post_002.ogg",
+      "node_1_1_post_002.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_1_pre_002.ogg",
+      "node_1_1_pre_002.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_2_pre_003.ogg",
+      "node_1_2_pre_003.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_3_post_002.ogg",
+      "node_1_3_post_002.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_4_post_002.ogg",
+      "node_1_4_post_002.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_002.ogg",
+      "node_1_5_post_002.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_post_004.ogg",
+      "node_1_5_post_004.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__node_1_5_pre_003.ogg",
+      "node_1_5_pre_003.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_post_002.ogg",
+      "node_2_1_post_002.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__node_2_1_pre_003.ogg",
+      "node_2_1_pre_003.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__opening_004.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_004.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__opening_004.ogg",
+      "opening_004.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__opening_006.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_006.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__opening_006.ogg",
+      "opening_006.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme__opening_012.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme__opening_012.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme__opening_012.ogg",
+      "opening_012.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_camp_006.ogg",
+      "ch1_camp_006.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme_thought__ch1_first_oath_006.ogg",
+      "ch1_first_oath_006.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_post_003.ogg",
+      "node_1_1_post_003.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_1_pre_003.ogg",
+      "node_1_1_pre_003.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_1_5_post_005.ogg",
+      "node_1_5_post_005.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme_thought__node_2_1_post_003.ogg",
+      "node_2_1_post_003.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme_thought__opening_001.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_001.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_001.ogg",
+      "opening_001.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme_thought__opening_002.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_002.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_002.ogg",
+      "opening_002.ogg"
+    ],
+    [
+      "04_VO/Japanese__Fadyme__fadyme_thought__opening_014.ogg",
+      "FADYME_VO_EXTRACTED/Japanese__Fadyme__fadyme_thought__opening_014.ogg",
+      "VO_SOURCE/Japanese__Fadyme__fadyme_thought__opening_014.ogg",
+      "opening_014.ogg"
+    ],
+    [
+      "04_VO/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "FADYME_VO_EXTRACTED/Recording_Notes__Fadyme_Sulafat_11_satir.mp3",
+      "VO_SOURCE/Recording_Notes__Fadyme_Sulafat_11_satir.mp3"
+    ],
+    [
+      "05_Audio_Cues/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.ogg",
+      "AUDIO_CUES_SOURCE/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.ogg",
+      "FADYME_AUDIO_CUES_EXTRACTED/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_loop.ogg"
+    ],
+    [
+      "05_Audio_Cues/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.mp3",
+      "AUDIO_CUES_SOURCE/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.mp3",
+      "FADYME_AUDIO_CUES_EXTRACTED/Fadyme_Theme_Reference__bgm_fadyme_theme_v001_original.mp3"
+    ],
+    [
+      "05_Audio_Cues/Music_Source__bgm_battle_field__bgm_battle_field_v002_loop.ogg",
+      "AUDIO_CUES_SOURCE/Music_Source__bgm_battle_field__bgm_battle_field_v002_loop.ogg",
+      "FADYME_AUDIO_CUES_EXTRACTED/Music_Source__bgm_battle_field__bgm_battle_field_v002_loop.ogg"
+    ],
+    [
+      "05_Audio_Cues/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_calm_v001_loop.ogg",
+      "AUDIO_CUES_SOURCE/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_calm_v001_loop.ogg",
+      "FADYME_AUDIO_CUES_EXTRACTED/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_calm_v001_loop.ogg"
+    ],
+    [
+      "05_Audio_Cues/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_chaotic_v001_loop.ogg",
+      "AUDIO_CUES_SOURCE/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_chaotic_v001_loop.ogg",
+      "FADYME_AUDIO_CUES_EXTRACTED/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_chaotic_v001_loop.ogg"
+    ],
+    [
+      "05_Audio_Cues/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_uneasy_v001_loop.ogg",
+      "AUDIO_CUES_SOURCE/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_uneasy_v001_loop.ogg",
+      "FADYME_AUDIO_CUES_EXTRACTED/Music_Source__bgm_ch1_ash_forest__bgm_ch1_ash_forest_uneasy_v001_loop.ogg"
+    ],
+    [
+      "UOMD_P1_Fadyme_VN_Bust_Composed_v001(1).png",
+      "UOMD_P1_Fadyme_VN_Bust_Composed_v001.png"
+    ],
+    [
+      "UOMD_P1_Fadyme_VN_Bust_HonestFear_v001(1).png",
+      "UOMD_P1_Fadyme_VN_Bust_HonestFear_v001.png"
+    ],
+    [
+      "UOMD_P1_Fadyme_VN_Bust_QuietPain_v001(1).png",
+      "UOMD_P1_Fadyme_VN_Bust_QuietPain_v001.png"
+    ],
+    [
+      "UOMD_P1_Fadyme_VN_Bust_Warm_v001(1).png",
+      "UOMD_P1_Fadyme_VN_Bust_Warm_v001.png"
+    ]
+  ],
+  "limits": "No writes, full decoding, canon/licensing approval, orphan verdict or mobile performance certification."
+}

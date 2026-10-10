@@ -1,0 +1,53 @@
+{
+	"loaded_atlas_resources": [
+		{
+			"loaded": true,
+			"resource": "weapon_fadyme_signature_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "mother_bell_hairpin_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "broken_crown_fragment_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "mother_prayer_book_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "opening_letter_glove_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "hidden_blood_scarf_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "handless_watch_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "mother_portrait_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "mark_skill_fadyme_basic_veilglass_thorn_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "mark_skill_fadyme_active_borrowed_hour_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "mark_skill_fadyme_passive_a_smile_kept_v002.tres"
+		},
+		{
+			"loaded": true,
+			"resource": "mark_skill_fadyme_ultimate_the_bell_that_forgets_v002.tres"
+		}
+	],
+	"runtime_integration": false
+}

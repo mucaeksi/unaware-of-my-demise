@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "generation_index": 15,
+  "prompt": "Repair SPACING in this eight-prop alpha atlas. Same props, material design, same adult mature mother painting, no new objects. FOUR equal columns TWO equal rows. Scale each prop down to only 65percent of its cell width and 72percent height; center it in its own cell. LARGE EMPTY FULLY TRANSPARENT GUTTERS around all four sides of every prop. The current scarf fringes and watch top creep into neighboring crops: absolutely NO item, chain, fabric edge, frame or shadow may cross into another cell. Keep all eight COMPLETE silhouettes with all chain loops and pin prongs. Canvas remains landscape 3:2. Row1: chain bell weapon fixed thorn clapper; tiny separate bell hairpin; irregular broken crown fragment; worn prayer book. Row2: folded letter plus blood-marked black glove; ivory blood-marked folded scarf; empty handless watch with chain; framed mature mother portrait with cut-away nameplate. No text, no card panels, no white boxes, no surface shadows. All EMPTY pixels must be alpha0; keep true RGBA transparency. Preserve gentle painterly gothic metals, cloth and faces. The main change is smaller objects and much more transparent breathing room, not new decorative filigree.",
+  "status": "GENERATED_CANDIDATE_NOT_OWNER_APPROVED",
+  "transparent_background": true,
+  "reference_paths": [
+    "narrative/15_Art_Workbench/characters/fadyme/production_v002/props/props_sheet_v002_spacing_draft.png"
+  ],
+  "notes": "Input was called props_sheet_v002.png at request time; those exact bytes are now retained as props_sheet_v002_spacing_draft.png.",
+  "output_path": "props/props_sheet_v002.png",
+  "output_sha256": "5d153323ade7a206ed124b38736b251903984e72a8b586479b65370c91ffe1e2",
+  "date": "2026-10-09",
+  "inclusion": "WORKBENCH_NOT_EXPORTED",
+  "references": [
+    {
+      "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/props/props_sheet_v002_spacing_draft.png",
+      "sha256": "83f60bc3829352cef87817598c10bfc9348d93b238c8d21be58efca6c471b55d"
+    }
+  ]
+}
