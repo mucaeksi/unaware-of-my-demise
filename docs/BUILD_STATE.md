@@ -29,10 +29,10 @@ and **9 e2e tests passed, 1 skipped by design** (the one-way "publish a release"
 | Item | Value | Verified by |
 |---|---|---|
 | Game (Phaser client + public API) | https://uomd-game-staging.muratcaneksiii.workers.dev | `GET /api/v1/health` → `ok:true`, D1 ok (2 migrations), R2 ok, `current_release:null`; index 200; roster endpoint returns 20 characters from remote D1; security headers present |
-| Control Center | https://uomd-admin-staging.muratcaneksiii.workers.dev | `GET /admin/api/health` → `auth_configured:false, signing_configured:false`; every data route answers **503 admin_auth_not_configured** (fails closed — verified with `curl`) |
+| Control Center | https://uomd-admin-staging.muratcaneksiii.workers.dev | `GET /admin/api/health` → `auth_configured:false, signing_configured:true` (signing key set by the `signing-key` job; private half never printed); every data route answers **503 admin_auth_not_configured** (fails closed — verified with `curl`) |
 | Remote D1 `uomd-staging` | 2 migrations, 20 characters, 0 releases, 0 admins | direct SQL read through the Cloudflare API |
 | Browser smoke test on the deployed URL | desktop passed (boot, WebGL, T-1 played to victory); phone passed on rerun; the first phone run failed once on an input-timing race in the test helper (fixed: it now waits for the skill panel and polls for the verdict) | `npm run e2e:remote` (`tests/e2e/remote.spec.ts`); the deploy workflow now runs it as job `smoke` |
-Remaining on staging: Access application + `ACCESS_AUD`, signing key (job `signing-key` in `deploy.yml`), first owner, first published release.
+Remaining on staging: Access application + `ACCESS_AUD`, first owner, first published release (the signing key is done).
 
 ## 2. End-to-end evidence (Playwright 1.56.1, Chromium, WebGL via SwiftShader)
 Projects: `landscape-desktop` 1280×720 and `phone-landscape` 1200×540 touch (dpr 2). Both play the **real** flow through

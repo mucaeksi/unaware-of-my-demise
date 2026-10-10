@@ -3,8 +3,8 @@
     {
       "kty": "EC",
       "crv": "P-256",
-      "x": "y2Lg2DQgv8gvAizD36tQWJ_GLu8hutQLQDPRbP_7XkI",
-      "y": "g7_FNcDHTrTvQ29ZUyfTjPBoI5pbQPe4_VpT-voaejc",
+      "x": "VXuwEWj7AAFE5aHR6YTr8FsRp2RcMtXUQV7suRRSK7s",
+      "y": "FPCZaCAXOXusdrq55f_pZHgf3rd-JVsAPqvD4RkUkdc",
       "kid": "uomd-staging-2026-10"
     }
   ]

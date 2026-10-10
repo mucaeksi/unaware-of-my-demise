@@ -30,9 +30,10 @@ MFA required by your IdP policy; copy the **Application Audience (AUD) tag** int
 First admin: add a row to `admin_users` (owner) — see `docs/ARCHITECTURE.md` §Control Center.
 
 ### 3. `CONTENT_SIGNING_KEY` (Worker secret on `uomd-admin-<env>`; ES256 private JWK)
-**Status: not set yet** (`GET /admin/api/health` on staging reports `signing_configured:false`). An earlier note here claimed it was
-already uploaded; that was wrong — the Worker did not exist until the first deploy. The key pair generated in the first session
-lives only in that session's scratch space and is **abandoned** (nothing was ever signed with it).
+**Status: set for staging (2026-10-10, Actions run 38082535422, job `signing-key`)** — `GET /admin/api/health` on the deployed staging
+Worker reports `signing_configured:true`. The private half exists only as the Worker secret (the job never printed or stored it);
+the matching public key is committed in `content/keys/trusted_public_keys.json` (kid `uomd-staging-2026-10`). An earlier note here claimed the
+key was already uploaded; that was wrong at the time (the Worker did not exist yet). The first-session key pair stayed in scratch space and is abandoned (nothing was ever signed with it).
 Preferred way, with no human handling of the private key: run the GitHub workflow **Deploy** (`deploy.yml`) for `staging` with the
 boolean input `bootstrap_signing_key` ticked (job `signing-key`, runs after the deploy). It generates the pair inside the job, stores the private half only as the Worker
 secret (never printed, never uploaded, never in the repository) and prints the **public** key, which must then be committed to
