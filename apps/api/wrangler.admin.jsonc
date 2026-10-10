@@ -1,6 +1,6 @@
 {
   // UOMD Control Center Worker: admin SPA + /admin/api/*, protected by Cloudflare Access (verified again in code).
-  // Secrets (never in this file): CONTENT_SIGNING_KEY. Variables set per environment by CI: ACCESS_AUD, ADMIN_BOOTSTRAP_OWNERS.
+  // Secrets (never in this file): CONTENT_SIGNING_KEY. ACCESS_AUD is the (public, non-secret) Audience tag of the Access application that protects the Worker; the first owner lives in D1 (admin_users), not in this file.
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "uomd-admin",
   "main": "src/admin.ts",
@@ -20,7 +20,7 @@
     "staging": {
       "name": "uomd-admin-staging",
       "workers_dev": true,
-      "vars": { "ENVIRONMENT": "staging", "ACCESS_TEAM_DOMAIN": "red-sky-901e.cloudflareaccess.com", "CONTENT_SIGNING_KID": "uomd-staging-2026-10" },
+      "vars": { "ENVIRONMENT": "staging", "ACCESS_TEAM_DOMAIN": "red-sky-901e.cloudflareaccess.com", "ACCESS_AUD": "c5ad7faf31ab4e7c60eb4483fc1cdf776ef17a54f296a0e201fbf5e76ebff31e", "CONTENT_SIGNING_KID": "uomd-staging-2026-10" },
       "assets": { "directory": "../admin/dist", "binding": "ASSETS", "run_worker_first": ["/admin/api/*"], "not_found_handling": "single-page-application" },
       "d1_databases": [{ "binding": "DB", "database_name": "uomd-staging", "database_id": "687f9735-ee4c-4611-aa16-2fae99e51911", "migrations_dir": "migrations" }],
       "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "uomd-content-staging" }]

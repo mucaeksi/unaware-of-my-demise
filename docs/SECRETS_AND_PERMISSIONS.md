@@ -22,14 +22,14 @@ account `0c942d19…`):
 Add as: GitHub → Settings → Secrets and variables → Actions → *Repository secret* `CLOUDFLARE_API_TOKEN`
 (optionally variable `CLOUDFLARE_ACCOUNT_ID`; the workflow defaults to the account above).
 
-### 2. Cloudflare Access for the Control Center
-The admin Worker verifies the Access JWT itself (audience + issuer) and **fails closed** until `ACCESS_AUD` is set in
-`apps/api/wrangler.admin.jsonc`. Steps: Zero Trust → Access → Applications → add *Self-hosted* app for the Worker
-`uomd-admin-staging`, policy "allow: your email / Cloudflare account members" (same pattern as the legacy admin app),
-MFA required by your IdP policy; copy the **Application Audience (AUD) tag** into the wrangler var `ACCESS_AUD`.
-No commit needed: set the GitHub **variables** `ACCESS_AUD_STAGING` (the AUD tag) and `ADMIN_BOOTSTRAP_OWNERS_STAGING` (the owner's e-mail,
-comma separated) and re-run the *Deploy* workflow; it passes them to the Worker with `wrangler deploy --var`. The first request carrying a valid Access
-token for that e-mail creates the `owner` row (audited); alternatively add the row to `admin_users` yourself (see `docs/ARCHITECTURE.md` §Control Center).
+### 2. Cloudflare Access for the Control Center — **done for staging (owner-authorised 2026-10-10)**
+Access application `uomd-admin-staging - Cloudflare Workers` (id `a15f4607-a497-4444-a1fd-e4a5cbc020d9`, destination = the Worker `uomd-admin-staging`,
+session 24 h) reuses the existing reusable policy **"Cloudflare account members"** (allow). The account has exactly one member (the owner, Super Administrator),
+so only the owner can pass Access. Verified with `curl`: an unauthenticated request to the Worker now answers **302 → `red-sky-901e.cloudflareaccess.com`**
+(before: 503 from the Worker itself). Defence in depth: the Worker still verifies the Access JWT (issuer + audience) and maps the e-mail to a role in D1; the
+audience tag `ACCESS_AUD` (public, non-secret) is committed in `apps/api/wrangler.admin.jsonc`; the first owner row was inserted directly into the
+staging D1 `admin_users` with an audit entry (the owner's e-mail is not stored in the repository).
+Still optional: a CI **service token** for `publish-content.yml` (see §4) — not created, because its secret would have to pass through this assistant's context.
 
 ### 3. `CONTENT_SIGNING_KEY` (Worker secret on `uomd-admin-<env>`; ES256 private JWK)
 **Status: set for staging (2026-10-10, Actions run 38082535422, job `signing-key`)** — `GET /admin/api/health` on the deployed staging
