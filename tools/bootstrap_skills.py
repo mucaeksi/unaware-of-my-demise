@@ -116,7 +116,7 @@ def main():
     need = ["UOMD_Claude_Phaser_Toolkit_2026-10-10.zip", "awesome-gamedev-agent-skills-1.1.0.zip"]
     if any(k not in supplied for k in need):
         raise SystemExit("Missing required ZIP: " + ", ".join(k for k in need if k not in supplied))
-    copied = copy_entries(supplied[need[0]], lambda p: p if p.startswith((".claude/skills/", ".claude/third-party-licenses/")) else None)
+    copied = copy_entries(supplied[need[0]], lambda p: p if p.startswith((".claude/skills/", ".claude/third-party-licenses/")) and not p.startswith(".claude/skills/cloudflare-neon-liveops/") else None)
     def gamedev_map(p):
         mark = "/skills/"
         if mark not in p: return None
