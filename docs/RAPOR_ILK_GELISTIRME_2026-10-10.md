@@ -24,9 +24,9 @@ Bu rapor yalnızca bu ortamda gerçekten çalıştırılıp gözlenen şeyleri "
 **Eksik / sizden gereken** (yalnızca adlar; değerleri sohbete yazmayın):
 | Ad | Nerede | Neden |
 |---|---|---|
-| Cloudflare Access uygulaması (`uomd-admin-staging.muratcaneksiii.workers.dev`) + `ACCESS_AUD` (Application Audience tag; gizli değil, `apps/api/wrangler.admin.jsonc` içine yazılır) | Zero Trust → Access → Applications | Kontrol Merkezi şu an **bilerek kapalı** (503). Erişim politikası **onayınız** gerektirir; önerim yalnızca sizin kimliğiniz (mevcut eski admin uygulamasında "Cloudflare account members" politikası var) |
-| İlk owner | `ADMIN_BOOTSTRAP_OWNERS` (Worker değişkeni) veya `admin_users` satırı | Admin'e ilk girecek e-posta |
-| `CONTENT_SIGNING_KEY` | Worker secret (staging) | İmzalı içerik yayını için. İş akışı anahtarı job içinde üretip yalnızca secret'a yazar (bkz. §5); sonra yalnız **genel** anahtarı commit ederiz |
+| Cloudflare Access uygulaması (`uomd-admin-staging.muratcaneksiii.workers.dev`) → GitHub **variable** `ACCESS_AUD_STAGING` (Application Audience tag; gizli değil) | Zero Trust → Access → Applications; sonra GitHub → Settings → Variables | Kontrol Merkezi şu an **bilerek kapalı** (503). Erişim politikası **onayınız** gerektirir (güvenlik izni genişletmesi); önerim yalnızca sizin kimliğiniz. Mevcut eski admin uygulamasında "Cloudflare account members" politikası var. Not: Access uygulamasını Cloudflare MCP üzerinden oluşturabilecek yetkim olabilir ama sizin onayınız olmadan yapmadım |
+| İlk owner → GitHub **variable** `ADMIN_BOOTSTRAP_OWNERS_STAGING` (e-posta) | GitHub Variables | Admin'e ilk girecek kimlik; deploy iş akışı `wrangler deploy --var` ile geçirir, repoya yazılmaz |
+| ~~`CONTENT_SIGNING_KEY`~~ | **Tamamlandı** — Worker secret (staging) | İş akışındaki `signing-key` job'ı anahtarı üretip yalnızca secret'a yazdı (hiç yazdırılmadı); `signing_configured:true` doğrulandı; genel anahtar `content/keys/trusted_public_keys.json` içinde |
 | `CF_ACCESS_CLIENT_ID`, `CF_ACCESS_CLIENT_SECRET` (GitHub secrets) + `ADMIN_URL_STAGING` (variable) | GitHub → Settings → Secrets/Variables; Access → Service auth | `publish-content.yml` ile CI'dan içerik yayını (isteğe bağlı) |
 | Context7 API anahtarı | MCP ortamı (Git'e değil) | Context7 kotası |
 | `GOOGLE_CLIENT_IDS`, Play servis hesabı, RTDN, AdMob kimlikleri | Google Cloud / Play / AdMob konsolları | Android aşamasında (bu milestone'da gerekmedi) |

@@ -27,7 +27,9 @@ The admin Worker verifies the Access JWT itself (audience + issuer) and **fails 
 `apps/api/wrangler.admin.jsonc`. Steps: Zero Trust → Access → Applications → add *Self-hosted* app for the Worker
 `uomd-admin-staging`, policy "allow: your email / Cloudflare account members" (same pattern as the legacy admin app),
 MFA required by your IdP policy; copy the **Application Audience (AUD) tag** into the wrangler var `ACCESS_AUD`.
-First admin: add a row to `admin_users` (owner) — see `docs/ARCHITECTURE.md` §Control Center.
+No commit needed: set the GitHub **variables** `ACCESS_AUD_STAGING` (the AUD tag) and `ADMIN_BOOTSTRAP_OWNERS_STAGING` (the owner's e-mail,
+comma separated) and re-run the *Deploy* workflow; it passes them to the Worker with `wrangler deploy --var`. The first request carrying a valid Access
+token for that e-mail creates the `owner` row (audited); alternatively add the row to `admin_users` yourself (see `docs/ARCHITECTURE.md` §Control Center).
 
 ### 3. `CONTENT_SIGNING_KEY` (Worker secret on `uomd-admin-<env>`; ES256 private JWK)
 **Status: set for staging (2026-10-10, Actions run 38082535422, job `signing-key`)** — `GET /admin/api/health` on the deployed staging
