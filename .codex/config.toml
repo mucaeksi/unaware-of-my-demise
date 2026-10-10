@@ -1,4 +1,0 @@
-# Project custom agents are discovered from .codex/agents/*.toml.
-# Skills are bridged from .agents/skills to .codex/skills by bootstrap_skills.ps1.
-# Inherit the owner's existing model, effort, permissions, MCP and plugin settings.
-# No override is required for this migration.

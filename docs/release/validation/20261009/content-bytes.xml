@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="GutTests" failures="0" tests="2" >
-  <testsuite name="tests/unit/test_content_copy.gd" tests="2" failures="0" skipped="0" time="0.03267" >
-      <testcase name="test_manifest_lists_the_shipped_files" assertions="2" status="pass" classname="tests/unit/test_content_copy.gd" time="0.000841" >
-      </testcase>
-      <testcase name="test_every_file_matches_its_sha256_and_parses" assertions="84" status="pass" classname="tests/unit/test_content_copy.gd" time="0.031829" >
-      </testcase>
-  </testsuite>
-</testsuites>

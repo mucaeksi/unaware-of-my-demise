@@ -1,9 +1,0 @@
-{
-  "old_nodes": 25114,
-  "proposed_nodes": 25110,
-  "reviewed": true,
-  "reason": "Current documentation replaced obsolete Godot AI setup sections and refreshed workspace/handoff notes. Final copy audit shows no missing files, no unexpected changed copies, and no changed application/art sources. The native/Godot refresh already completed; only the final graph write was guarded because the node count decreased by four.",
-  "expected_authored_inventory": 5845,
-  "expected_readable_godot_sources": 592,
-  "graph_json_read_directly": false
-}

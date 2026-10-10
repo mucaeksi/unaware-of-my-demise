@@ -1,8 +1,0 @@
-package=io.github.mucaeksi.unawareofmydemise minSdk=28 targetSdk=36 native-code='arm64-v8a' size=187891440 bytes
-permissions: android.permission.ACCESS_ADSERVICES_AD_ID android.permission.ACCESS_ADSERVICES_ATTRIBUTION android.permission.ACCESS_ADSERVICES_TOPICS android.permission.ACCESS_NETWORK_STATE android.permission.FOREGROUND_SERVICE android.permission.INTERNET android.permission.WAKE_LOCK com.android.vending.BILLING com.google.android.gms.permission.AD_ID io.github.mucaeksi.unawareofmydemise.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-zipalign -P 16: ok
-  lib/arm64-v8a/libc++_shared.so: LOAD align 0x4000
-  lib/arm64-v8a/libgodot_android.so: LOAD align 0x4000
-UomdNative plugin: registered
-third-party notices: 61 recorded libraries checked
-APK verification passed

@@ -1,9 +1,0 @@
-{
-  "gdquest_repository": "https://github.com/gdquest-demos/godot-4-VFX-assets",
-  "gdquest_revision": "f6034a88877f6ea144ae487694cc8fde82d4da7f",
-  "reuse": "MIT swirl function only; original copied upstream source retained; original NC art not copied",
-  "kenney_revision": "ab7086639ee73be31abd87feb21bf1402d4e8144",
-  "kenney_license": "CC0-1.0",
-  "samplers": "Unmodified Kenney spark and light; quad is a Godot GradientTexture2D.",
-  "new_design": "Bounded thorn, broken clock arc, bell ward and concentric bell pulse; deterministic progress uniform; no screen texture."
-}

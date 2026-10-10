@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3]
-[ext_resource type="Theme" path="res://theme/uomd_production_v001.tres" id="1"]
-[node name="Slider" type="HSlider"]
-custom_minimum_size = Vector2(144, 144)
-theme = ExtResource("1")
