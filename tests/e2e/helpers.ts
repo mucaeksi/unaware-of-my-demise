@@ -92,8 +92,12 @@ export async function manualTurn(page: Page, info: TestInfo, skillIndex = 0): Pr
       const s = (window as any).__UOMD__.game.scene.getScene('Battle');
       return { panel: Boolean(s.skillLayer), selected: Boolean(s.selected) };
     });
-  // the prompt exists a moment before its skill buttons do; a tap in between would be ignored, as it would be for a player
-  await expect.poll(async () => (await battle()).panel, { timeout: 15_000 }).toBe(true);
+  // The engine already holds the next prompt while the previous turn's animations are still playing, and the skill buttons
+  // appear only afterwards; a tap in between would be ignored, as it would be for a player. Animation time stretches on slow
+  // CI GPUs (Phaser caps the frame delta), so this wait is generous and logs how long it really took.
+  const waitStart = Date.now();
+  await expect.poll(async () => (await battle()).panel, { timeout: 120_000 }).toBe(true);
+  console.log(`[${info.project.name}] skill panel ready ${Date.now() - waitStart} ms after the engine prompt`);
   await tap(page, info, x, 960);
   if (!(await expect.poll(async () => (await battle()).selected, { timeout: 2_500 }).toBe(true).then(() => true, () => false))) await tap(page, info, x, 960);
   await page.waitForTimeout(350);
