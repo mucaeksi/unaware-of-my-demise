@@ -17,8 +17,7 @@
     "lint": "eslint .",
     "build:content": "tsx tools/build_content.ts && tsx tools/make_release.ts --dir content/base --id rel_0001 --generation 1 --channel staging --notes \"Base content shipped inside the app: tutorial T-1\" --created-at 2026-10-10T00:00:00.000Z --out content/base/release.json",
     "build": "npm run build:content && npm run build -w @uomd/game && npm run build -w @uomd/admin",
-    "e2e": "playwright test -c tests/e2e/playwright.config.ts",
-    "release:patch:staging": "tsx tools/make_release.ts --dir content/patches/rel_0002_road_forgotten --id rel_0002 --generation 2 --channel staging --depends rel_0001:1 --notes \"Adds tutorial T-2 (Hollow Pilgrim) as a data-only patch\" --created-at 2026-10-10T00:00:00.000Z --out content/releases/rel_0002.staging.json"
+    "e2e": "playwright test -c tests/e2e/playwright.config.ts"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

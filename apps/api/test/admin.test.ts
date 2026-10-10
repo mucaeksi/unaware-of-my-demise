@@ -55,6 +55,22 @@ describe('Cloudflare Access authentication (fails closed)', () => {
   });
 });
 
+describe('cross-site request protection', () => {
+  it('refuses state-changing browser requests that are not same-origin, allows service clients and same-origin', async () => {
+    const patch = (headers: Record<string, string>) =>
+      admin('/admin/api/characters/fadyme', { method: 'PATCH', ...json({ expectedVersion: 1, name_en: 'Fadyme Veyr' }), headers: { 'Content-Type': 'application/json', ...headers } });
+    const cross = await patch({ 'Sec-Fetch-Site': 'cross-site', Origin: 'https://evil.example.com' });
+    expect(cross.status).toBe(403);
+    expect((await cross.json<{ error: string }>()).error).toBe('cross_site_request');
+    expect((await patch({ Origin: 'https://evil.example.com' })).status).toBe(403);
+    expect((await patch({ 'Sec-Fetch-Site': 'same-site' })).status).toBe(403);
+    expect((await patch({ 'Sec-Fetch-Site': 'same-origin', Origin: 'https://admin.test' })).status).toBe(200);
+    // a version bump above means the refused calls changed nothing
+    const row = await baseEnv.DB.prepare("SELECT version FROM characters WHERE id = 'fadyme'").first<{ version: number }>();
+    expect(row?.version).toBe(2);
+  });
+});
+
 describe('role based access', () => {
   it('viewers read, operators write, owners manage users', async () => {
     await baseEnv.DB.batch([
@@ -138,6 +154,14 @@ describe('asset catalog, system status, audit trail', () => {
     const res = await game('/api/v1/health');
     expect(res.status).toBe(200);
     expect(await res.json()).toMatchObject({ ok: true, d1: { ok: true, migrations_applied: 2 }, r2: { ok: true }, environment: 'dev' });
+  });
+
+  it('public health never leaks internal error text outside dev', async () => {
+    const broken = { prepare: () => { throw new Error('no such table: d1_migrations (secret detail)'); } } as unknown as D1Database;
+    const prod = await (await game('/api/v1/health', {}, { DB: broken, ENVIRONMENT: 'staging' })).text();
+    expect(prod).not.toContain('secret detail');
+    const dev = await (await game('/api/v1/health', {}, { DB: broken, ENVIRONMENT: 'dev' })).text();
+    expect(dev).toContain('secret detail');
   });
 
   it('unknown API paths 404 as JSON with security headers', async () => {

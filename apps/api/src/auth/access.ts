@@ -29,6 +29,15 @@ export function accessKeys(teamDomain: string): JWTVerifyGetKey {
   return k;
 }
 
+function localKeys(url: string): JWTVerifyGetKey {
+  let k = remoteKeys.get(url);
+  if (!k) {
+    k = createRemoteJWKSet(new URL(url), { cooldownDuration: 1000 });
+    remoteKeys.set(url, k);
+  }
+  return k;
+}
+
 function tokenFrom(req: Request): string | null {
   const header = req.headers.get('Cf-Access-Jwt-Assertion');
   if (header) return header;
@@ -42,18 +51,22 @@ function tokenFrom(req: Request): string | null {
  * maps the identity to a role in D1. Fails CLOSED: with no Access config nothing is admitted.
  */
 export async function authenticate(req: Request, env: AdminEnv, getKey?: (teamDomain: string) => JWTVerifyGetKey): Promise<AdminIdentity> {
+  // Local development only: a test-only JWKS (never honoured outside ENVIRONMENT=dev) so e2e tests can use explicit test identities.
+  const resolver = getKey ?? (env.ENVIRONMENT === 'dev' && env.ACCESS_JWKS_URL ? () => localKeys(env.ACCESS_JWKS_URL as string) : accessKeys);
   if (!env.ACCESS_TEAM_DOMAIN || !env.ACCESS_AUD) throw new AuthError(503, 'admin_auth_not_configured', 'Cloudflare Access is not configured for this Worker');
   const token = tokenFrom(req);
   if (!token) throw new AuthError(401, 'missing_token', 'no Cloudflare Access token');
   let payload;
   try {
-    ({ payload } = await jwtVerify(token, (getKey ?? accessKeys)(env.ACCESS_TEAM_DOMAIN), {
+    ({ payload } = await jwtVerify(token, resolver(env.ACCESS_TEAM_DOMAIN), {
       issuer: `https://${env.ACCESS_TEAM_DOMAIN}`,
       audience: env.ACCESS_AUD,
       algorithms: ['RS256']
     }));
-  } catch {
-    throw new AuthError(401, 'invalid_token', 'Cloudflare Access token rejected');
+  } catch (e) {
+    // the reason is only revealed in local development, never from a deployed Worker
+    const why = env.ENVIRONMENT === 'dev' ? ` (${e instanceof Error ? `${e.name}: ${e.message}` : String(e)})` : '';
+    throw new AuthError(401, 'invalid_token', `Cloudflare Access token rejected${why}`);
   }
   const email = typeof payload.email === 'string' ? payload.email.toLowerCase() : undefined;
   const common = typeof payload.common_name === 'string' ? payload.common_name : undefined;

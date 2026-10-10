@@ -37,16 +37,18 @@ export function createGameApp(): Hono<{ Bindings: GameEnv }> {
     try {
       const m = await c.env.DB.prepare('SELECT COUNT(*) AS n FROM d1_migrations').first<{ n: number }>();
       const meta = await c.env.DB.prepare('SELECT 1').run();
-      d1 = { ok: true, latency_ms: Date.now() - t0, migrations_applied: m?.n ?? 0, size_bytes: meta.meta.size_after };
+      d1 = { ok: true, latency_ms: Date.now() - t0, migrations_applied: m?.n ?? 0 };
+      void meta;
     } catch (e) {
-      d1 = { ok: false, error: String(e instanceof Error ? e.message : e) };
+      // this route is public: error text (table names, SQL) is only exposed in local development
+      d1 = { ok: false, ...(c.env.ENVIRONMENT === 'dev' ? { error: String(e instanceof Error ? e.message : e) } : {}) };
     }
     let r2: Record<string, unknown>;
     try {
       await c.env.CONTENT.list({ limit: 1 });
       r2 = { ok: true };
     } catch (e) {
-      r2 = { ok: false, error: String(e instanceof Error ? e.message : e) };
+      r2 = { ok: false, ...(c.env.ENVIRONMENT === 'dev' ? { error: String(e instanceof Error ? e.message : e) } : {}) };
     }
     const store = new ContentStore(c.env.DB, c.env.CONTENT);
     const current = await store.publishedManifest(c.env.CONTENT_CHANNEL).catch(() => null);

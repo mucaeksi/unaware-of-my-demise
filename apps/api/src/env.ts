@@ -24,6 +24,8 @@ export interface AdminEnv {
   ACCESS_TEAM_DOMAIN?: string;
   /** Application Audience (AUD) tag of the Access application protecting this Worker */
   ACCESS_AUD?: string;
+  /** dev-only: URL of a test JWKS used instead of Cloudflare's (ignored unless ENVIRONMENT is dev) */
+  ACCESS_JWKS_URL?: string;
   /** comma separated emails that are created as `owner` on their first authenticated request */
   ADMIN_BOOTSTRAP_OWNERS?: string;
   /** secret: ES256 private JWK (JSON) used to sign content manifests */

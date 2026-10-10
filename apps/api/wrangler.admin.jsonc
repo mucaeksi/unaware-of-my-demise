@@ -5,6 +5,7 @@
   "name": "uomd-admin",
   "main": "src/admin.ts",
   "compatibility_date": "2026-10-01",
+  "account_id": "0c942d198668a8b1a8e8ee699651b817",
   "workers_dev": true,
   "observability": { "enabled": true },
   "env": {

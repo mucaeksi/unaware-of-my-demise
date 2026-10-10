@@ -71,6 +71,19 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     if (e instanceof AuthError) return c.json({ error: e.code, message: e.message }, e.status);
     return onError(e, c);
   });
+  // The Access cookie travels with any request a browser makes to this origin, so state-changing requests must be
+  // same-origin. Non-browser clients (CI with an Access service token) send neither header and are unaffected.
+  app.use('/admin/api/*', async (c, next) => {
+    const method = c.req.method;
+    if (method !== 'GET' && method !== 'HEAD' && method !== 'OPTIONS') {
+      const site = c.req.header('Sec-Fetch-Site');
+      const origin = c.req.header('Origin');
+      if ((site && site !== 'same-origin' && site !== 'none') || (origin && origin !== new URL(c.req.url).origin)) {
+        throw new AuthError(403, 'cross_site_request', 'state-changing requests must be same-origin');
+      }
+    }
+    await next();
+  });
 
   const need = (min: Role): MiddlewareHandler<Ctx> => async (c, next) => {
     const who = await authenticate(c.req.raw, c.env, deps.getKey);
