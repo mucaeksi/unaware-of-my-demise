@@ -17,6 +17,8 @@ TARGET = ROOT / ".claude" / "skills"
 LICENSES = ROOT / ".claude" / "third-party-licenses"
 PHASER_SHA = "02d8931b626d9764c133cbb3fbf99966c03c757c"
 PINNED = {
+    "Cloudflare_Security_Audit_Skill_2026-10-10.zip": "f62b7cbc0c9a8358f68bf486e9d68220d9897c573f5f099d61ff4a9063f0ef01",
+    
     "UOMD_Claude_Phaser_Toolkit_2026-10-10.zip": "b0d0143222a5040371ce763398ebc60d592631929eef284f1a750ca65973e0b0",
     "awesome-gamedev-agent-skills-1.1.0.zip": "9c37ba03278bbbe8ca74facb8f45227ba1b5d9bcf9be483afebd410cba8251ee",
     "chrome-devtools-mcp-chrome-devtools-mcp-v1.10.1.zip": "64b334194c8ea0ee1afcc5aacdb4e2f0f6c4de1c84ad89d2dbeb390c8c6beec4",
@@ -60,13 +62,43 @@ def copy_entries(archive: Path, pick) -> int:
             count += 1
     return count
 
+def install_cloudflare_security_skill(archive: Path) -> int:
+    """Download the 20-source-file official Cloudflare skill at a pinned commit.
+    The uploaded ZIP contains only a manifest and installer; verify it before using
+    the manifest. Never run downloaded code during installation.
+    """
+    with ZipFile(archive) as z:
+        prefix = "cloudflare-security-audit-installer/"
+        manifest = json.loads(z.read(prefix + "manifest.json"))
+        license_text = z.read(prefix + "LICENSE")
+    approved_commit = "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8"
+    files = manifest.get("files", {})
+    if manifest.get("commit") != approved_commit or len(files) != 20:
+        raise RuntimeError("Cloudflare security skill manifest mismatch")
+    target = TARGET / "security-audit"
+    for name, meta in files.items():
+        if name.startswith(".") or "/" in name or "\\\\" in name:
+            raise ValueError("Invalid Cloudflare security skill path")
+        if not isinstance(meta.get("size"), int) or not (0 < meta["size"] < 200000):
+            raise ValueError("Invalid Cloudflare security skill size")
+        url = ("https://raw.githubusercontent.com/cloudflare/security-audit-skill/"
+               + approved_commit + "/skills/security-audit/" + name)
+        with urlopen(Request(url, headers={"User-Agent":"UOMD-locked-bootstrap"}),timeout=35) as response:
+            data = response.read(meta["size"] + 1)
+        blob = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\\0" + data).hexdigest()
+        if len(data) != meta["size"] or blob != meta["git_blob_sha1"]:
+            raise RuntimeError("Cloudflare security-audit integrity mismatch: " + name)
+        write_safe(target / name, data)
+    write_safe(LICENSES / "cloudflare-security-audit/LICENSE", license_text)
+    return len(files)
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--offline", action="store_true", help="Do not fetch official Phaser skills")
     parser.add_argument("--verify", action="store_true", help="Validate already installed skills only")
     args = parser.parse_args()
     if args.verify:
-        expected = ["ponytail", "graphify", "ui-ux-pro-max", "phaser4-engine", "phaser4-battle", "game-ui-ux", "sprites-and-images", "scenes"]
+        expected = ["ponytail", "graphify", "ui-ux-pro-max", "phaser4-engine", "phaser4-battle", "game-ui-ux", "sprites-and-images", "scenes", "security-audit"]
         missing = [name for name in expected if not (TARGET / name / "SKILL.md").is_file()]
         print("Installed skill files:", len(list(TARGET.glob("*/SKILL.md"))))
         if missing: raise SystemExit("Missing skills: " + ", ".join(missing))
@@ -95,6 +127,8 @@ def main():
             return ".claude/skills/" + name + "/" + "/".join(rel[2:])
         return None
     copied += copy_entries(supplied[need[1]], gamedev_map)
+    if "Cloudflare_Security_Audit_Skill_2026-10-10.zip" in supplied:
+        copied += install_cloudflare_security_skill(supplied["Cloudflare_Security_Audit_Skill_2026-10-10.zip"])
     # Retain license for the copied game-dev skills.
     with ZipFile(supplied[need[1]]) as z:
         lic = next(x for x in z.namelist() if x.endswith("/LICENSE"))
@@ -120,7 +154,7 @@ def main():
     }
     write_safe(ROOT / ".claude" / "skills-lock.json", (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode())
     print("PASS: copied", copied, "archive files; downloaded", downloaded, "official Phaser skills; installed", len(lock["skill_file_sha256"]), "skills.")
-    if not args.offline: main_verify = [name for name in ("ponytail", "graphify", "ui-ux-pro-max", "phaser4-engine", "game-ui-ux", "sprites-and-images") if not (TARGET / name / "SKILL.md").exists()]
+    if not args.offline: main_verify = [name for name in ("ponytail", "graphify", "ui-ux-pro-max", "phaser4-engine", "game-ui-ux", "sprites-and-images", "security-audit") if not (TARGET / name / "SKILL.md").exists()]
     else: main_verify = []
     if main_verify: raise SystemExit("Unexpected missing skills: " + ", ".join(main_verify))
 
