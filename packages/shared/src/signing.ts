@@ -52,9 +52,9 @@ export async function verifyPayload(payload: SignedPayload, trustedKeys: readonl
 }
 
 export async function generateSigningKeyPair(): Promise<{ publicJwk: JsonWebKey; privateJwk: JsonWebKey }> {
-  const pair = await crypto.subtle.generateKey(ALG, true, ['sign', 'verify']);
+  const pair = (await crypto.subtle.generateKey(ALG, true, ['sign', 'verify'])) as CryptoKeyPair;
   return {
-    publicJwk: await crypto.subtle.exportKey('jwk', pair.publicKey),
-    privateJwk: await crypto.subtle.exportKey('jwk', pair.privateKey)
+    publicJwk: (await crypto.subtle.exportKey('jwk', pair.publicKey)) as JsonWebKey,
+    privateJwk: (await crypto.subtle.exportKey('jwk', pair.privateKey)) as JsonWebKey
   };
 }

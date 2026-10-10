@@ -29,19 +29,20 @@ export function classify(path: string): FileKind {
   return 'other_data';
 }
 
-/** Builds (and schema-validates) an UNSIGNED manifest from file contents. */
-export async function buildManifest(meta: ReleaseMeta, files: { path: string; bytes: Uint8Array }[]): Promise<ContentManifest> {
-  const entries = [];
-  for (const f of [...files].sort((a, b) => (a.path < b.path ? -1 : 1))) {
-    const ext = f.path.split('.').pop()?.toLowerCase() as AllowedExtension;
-    entries.push({
-      path: f.path,
-      sha256: await sha256Hex(f.bytes),
-      bytes: f.bytes.byteLength,
-      media_type: MEDIA_TYPE_BY_EXTENSION[ext],
-      kind: classify(f.path)
+export interface FileEntry {
+  path: string;
+  sha256: string;
+  bytes: number;
+}
+
+/** Builds (and schema-validates) an UNSIGNED manifest from already-hashed file entries. */
+export function manifestFromEntries(meta: ReleaseMeta, files: readonly FileEntry[]): ContentManifest {
+  const entries = [...files]
+    .sort((a, b) => (a.path < b.path ? -1 : 1))
+    .map((f) => {
+      const ext = f.path.split('.').pop()?.toLowerCase() as AllowedExtension;
+      return { path: f.path, sha256: f.sha256, bytes: f.bytes, media_type: MEDIA_TYPE_BY_EXTENSION[ext], kind: classify(f.path) };
     });
-  }
   const manifest = {
     schema_version: 1,
     release: { id: meta.releaseId, generation: meta.generation, channel: meta.channel, created_at: meta.createdAt ?? new Date().toISOString(), notes: meta.notes },
@@ -52,6 +53,13 @@ export async function buildManifest(meta: ReleaseMeta, files: { path: string; by
     files: entries
   };
   return ContentManifest.parse(manifest);
+}
+
+/** Builds (and schema-validates) an UNSIGNED manifest from file contents. */
+export async function buildManifest(meta: ReleaseMeta, files: { path: string; bytes: Uint8Array }[]): Promise<ContentManifest> {
+  const entries: FileEntry[] = [];
+  for (const f of files) entries.push({ path: f.path, sha256: await sha256Hex(f.bytes), bytes: f.bytes.byteLength });
+  return manifestFromEntries(meta, entries);
 }
 
 export async function signManifest(manifest: ContentManifest, privateKey: CryptoKey, kid: string): Promise<ContentManifest> {

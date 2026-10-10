@@ -1,0 +1,51 @@
+import { sha256Hex } from '@uomd/shared';
+import { MEDIA_TYPE_BY_EXTENSION, type AllowedExtension } from '@uomd/content-schema';
+
+const baseJson = import.meta.glob('../../../content/base/**/*.json', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
+const patchJson = import.meta.glob('../../../content/patches/rel_0002_road_forgotten/**/*.json', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
+
+export interface TestFile {
+  path: string;
+  bytes: Uint8Array;
+  mediaType: string;
+  sha256: string;
+}
+
+const enc = new TextEncoder();
+const mediaOf = (path: string): string => MEDIA_TYPE_BY_EXTENSION[path.split('.').pop() as AllowedExtension];
+
+async function file(path: string, bytes: Uint8Array): Promise<TestFile> {
+  return { path, bytes, mediaType: mediaOf(path), sha256: await sha256Hex(bytes) };
+}
+
+function rel(key: string, marker: string): string {
+  return key.slice(key.indexOf(marker) + marker.length);
+}
+
+/** Real compiled JSON content; binary media is replaced by unique stand-in bytes (only existence matters server-side). */
+async function build(json: Record<string, string>, marker: string, binaryPaths: string[]): Promise<TestFile[]> {
+  const out: TestFile[] = [];
+  for (const [k, text] of Object.entries(json)) {
+    const p = rel(k, marker);
+    if (p === 'release.json') continue;
+    out.push(await file(p, enc.encode(text)));
+  }
+  for (const p of binaryPaths) out.push(await file(p, enc.encode(`stand-in binary for ${p}`)));
+  return out;
+}
+
+export async function baseFiles(): Promise<TestFile[]> {
+  const art = JSON.parse(Object.entries(baseJson).find(([k]) => k.endsWith('base/art/art_manifest.json'))?.[1] as string);
+  const bin = new Set<string>([
+    ...Object.values<{ image: string }>(art.atlases).map((a) => a.image),
+    ...(Object.values(art.backgrounds) as string[]),
+    ...Object.values<{ file: string }>(art.music).map((m) => m.file),
+    ...(Object.values(art.ui) as string[]),
+    ...Object.values<{ images: Record<string, string> }>(art.portraits).flatMap((p) => Object.values(p.images))
+  ]);
+  return build(baseJson, '/content/base/', [...bin]);
+}
+
+export async function patchFiles(): Promise<TestFile[]> {
+  return build(patchJson, '/content/patches/rel_0002_road_forgotten/', ['art/atlas_hollow_pilgrim.webp']);
+}

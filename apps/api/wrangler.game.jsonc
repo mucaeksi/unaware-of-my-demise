@@ -1,0 +1,30 @@
+{
+  // Public game Worker: serves the Phaser client (static assets) and /api/v1/*.
+  // There is deliberately NO top-level/production deployment here; production needs the owner's approval.
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "uomd-game",
+  "main": "src/game.ts",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  "env": {
+    "dev": {
+      "name": "uomd-game-dev",
+      "workers_dev": true,
+      "vars": { "ENVIRONMENT": "dev", "CONTENT_CHANNEL": "dev" },
+      "assets": { "directory": "../game/dist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+      "d1_databases": [{ "binding": "DB", "database_name": "uomd-dev", "database_id": "0512d420-db4b-4851-8971-71c138f713cb", "migrations_dir": "migrations" }],
+      "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "uomd-content-dev" }],
+      "ratelimits": [{ "name": "API_LIMITER", "namespace_id": "2101", "simple": { "limit": 120, "period": 60 } }]
+    },
+    "staging": {
+      "name": "uomd-game-staging",
+      "workers_dev": true,
+      "vars": { "ENVIRONMENT": "staging", "CONTENT_CHANNEL": "staging" },
+      "assets": { "directory": "../game/dist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+      "d1_databases": [{ "binding": "DB", "database_name": "uomd-staging", "database_id": "687f9735-ee4c-4611-aa16-2fae99e51911", "migrations_dir": "migrations" }],
+      "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "uomd-content-staging" }],
+      "ratelimits": [{ "name": "API_LIMITER", "namespace_id": "2102", "simple": { "limit": 120, "period": 60 } }]
+    }
+  }
+}
