@@ -1,0 +1,40 @@
+name: Bootstrap Claude project skills
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "skill-sources/**"
+      - "tools/bootstrap_skills.py"
+      - ".github/workflows/skills-bootstrap.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  install-reviewed-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify pinned sources and install curated skills
+        run: python3 tools/bootstrap_skills.py
+      - name: Structural verification
+        run: |
+          python3 tools/bootstrap_skills.py --verify
+          python3 tools/skills_doctor.py
+      - name: Commit pinned skill files (not third-party hooks)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/skills .claude/third-party-licenses .claude/skills-lock.json
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+          else
+            git commit -m "chore: install vetted project skills from locked sources"
+            git push
+          fi

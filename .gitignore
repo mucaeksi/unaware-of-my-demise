@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+coverage/
+graphify-out/
+.playwright/
+test-results/
+.claude/cache/
+__pycache__/
+*.pyc
+.DS_Store
