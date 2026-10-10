@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "date": "2026-10-10",
+  "generation_index": 3,
+  "prompt": "Transform the supplied chapter-one enemy design sheet into a NEW chapter-specific enemy sheet. Preserve the exact premium gothic painterly illustrated material language, matte aged metal/leather/cloth, controlled warm rim light/cold fill, charcoal background, generous silhouette margins and editorial layout. Do not preserve the previous enemies; replace all figures with the specified original enemies below. Detailed anime/light-novel face drawing translated to restrained battle chibi proportions for humanoids, approximately 3.5 heads tall, serious haunted atmosphere. Wide landscape, equal separate columns: one large full-body 3/4 identity pose at top, a smaller DISTINCT signature attack pose below, small readable prop inset. English names only, no other text. Complete feet/tails/weapons, no overlap between columns. No heroes, no Yseldra/Bell-Widow, no Cael. Design review sheet, not alpha sprite atlas. No comic faces, no gore, no modern crosses, no neon magic or 3D render. EXACTLY FOUR columns left to right. CORRUPTED MERCENARY: LIVING rough adult hired blade, broad short silhouette, mismatched rusted shoulder plate over dark leather and oxblood scraps, heavy single axe, tiny red-glass dose pouch; attack below drinks a small dose before powerful cleave, no gore. ORCHARD GHOUL: DEAD swollen pear-shaped farm corpse, work apron, sack scraps, broad muddy feet, ash-grey skin, low head and dull red-harvest cloth; attack crouching open-mouth bite, NO TREE ROOTS/no plant monster, only rooted posture. RED VIAL SCOUT: LIVING slender nimble hooded courier, short grey leather cape, small handheld dart crossbow, route-scroll cylinder at hip, few red vials; attack precise rear-row dart aiming, no huge rifle. CAPTAIN RUSK: LIVING stern adult mercenary captain, short dark hair with one grey temple, long asymmetric charcoal/oxblood coat, copper fastenings, one narrow dueling sword, sealed old order pouch and clearly SEPARATE SIGNAL BANNER beside him; smaller sword-point challenge, inset banner call open hand. Rusk has practical mercenary prestige, not royal uniform, no skull. Palette charcoal, earth, worn oxblood with restrained Gale silver. Banner separate prop and order pouch readable.",
+  "transparent_background": false,
+  "reference_paths": [
+    "narrative/15_Art_Workbench/enemies/design_v001/boards/ch01_whispering_ash_v001.png"
+  ],
+  "output_path": "boards/ch03_oakhaven_v001.png",
+  "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+  "inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+  "notes": "Generated PNG copied byte-exact. Editorial design board; no sprite/frame-animation claim.",
+  "output_sha256": "72aa4241aab1a0a58f75cdc4cbe4dda7a8f162b661f4f6d772888c72dc3a8d73",
+  "references": [
+    {
+      "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch01_whispering_ash_v001.png",
+      "sha256": "3580adb7c352a3595044dda816e0c044ae51240c6aeeb11f18da0972c3d4b148"
+    }
+  ]
+}

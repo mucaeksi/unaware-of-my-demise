@@ -6048,15 +6048,15 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1791567714.4244998,
-    "seen": 1791570447.3565416,
-    "ast_hash": "727780f3f4e38ad00794baec1c3de13b",
+    "mtime": 1791607775.3902872,
+    "seen": 1791607849.8357952,
+    "ast_hash": "7acd7eb5a28c1d58b9950edce6f6eb60",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1791567714.4247472,
-    "seen": 1791570447.356543,
-    "ast_hash": "60466537f57b34de3340a6de27d6bd81",
+    "mtime": 1791607775.9982798,
+    "seen": 1791607849.8357968,
+    "ast_hash": "cd98e499c5083d44c28d84f19fc14a50",
     "semantic_hash": ""
   },
   "GAME_TOOLCHAIN.md": {
@@ -7794,9 +7794,9 @@
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/README.md": {
-    "mtime": 1791559932.2132773,
-    "seen": 1791566411.8426025,
-    "ast_hash": "fee73035101e401e9bb3fc23dd9005da",
+    "mtime": 1791607776.5942726,
+    "seen": 1791607849.8545997,
+    "ast_hash": "9dea9be4a2db67c61b4703bdd40a60d1",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/characters/README.md": {
@@ -19117,13 +19117,13 @@
   },
   ".local/migration-20261008/copied-files.json": {
     "mtime": 1791559926.4589984,
-    "seen": 1791605174.6152678,
+    "seen": 1791607946.9297662,
     "ast_hash": "79d698c5d3cfbcceaf1ac90bde79f20f",
     "semantic_hash": ""
   },
   ".local/project-index.json": {
     "mtime": 1791559926.4789984,
-    "seen": 1791605174.615327,
+    "seen": 1791607946.9298267,
     "ast_hash": "e1965f8c69d05dfca5adebc88fe67fd2",
     "semantic_hash": ""
   },
@@ -22815,6 +22815,234 @@
     "mtime": 1791604878.2513678,
     "seen": 1791605174.615807,
     "ast_hash": "99fe44fc2e75303eee1ff206cdffaa8a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/asset_inventory.json": {
+    "mtime": 1791607619.3532522,
+    "seen": 1791607849.7106066,
+    "ast_hash": "4c977e9adb6f5783af7e5592984585aa",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/design_cards.json": {
+    "mtime": 1791607618.013914,
+    "seen": 1791607849.7106102,
+    "ast_hash": "230ab14fe2ca76a6d2099b04e4585770",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_1.json": {
+    "mtime": 1791607619.2329104,
+    "seen": 1791607849.710613,
+    "ast_hash": "a15a91724ec40705e4c3f94c2c2de920",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_2.json": {
+    "mtime": 1791607619.248017,
+    "seen": 1791607849.710619,
+    "ast_hash": "ca10004b58a7511e2994bf3733aa0673",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_3.json": {
+    "mtime": 1791607619.2562683,
+    "seen": 1791607849.7106209,
+    "ast_hash": "d742c5b056ded844100afa82509dac01",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_4.json": {
+    "mtime": 1791607619.3005013,
+    "seen": 1791607849.7106235,
+    "ast_hash": "ad54eeaf0d8db5aab236a5bce6d18fe5",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_5.json": {
+    "mtime": 1791607828.3187714,
+    "seen": 1791607849.7106252,
+    "ast_hash": "390879ddbcb9d3978c81c199128c9e8a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_6.json": {
+    "mtime": 1791607619.3181832,
+    "seen": 1791607849.710627,
+    "ast_hash": "8dbe8c3670da8aec0124c2f606228d9f",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_7.json": {
+    "mtime": 1791607828.3189666,
+    "seen": 1791607849.7106283,
+    "ast_hash": "21f20eb782216e815e1020a0017c11cf",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_8.json": {
+    "mtime": 1791607619.3319683,
+    "seen": 1791607849.7106304,
+    "ast_hash": "31458ccb136d88d2a0403a16643d4c33",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_9.json": {
+    "mtime": 1791607828.3190727,
+    "seen": 1791607849.7106328,
+    "ast_hash": "182559293235e20af930a2414cc8fdfc",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/native_result.json": {
+    "mtime": 1791607678.4541733,
+    "seen": 1791607849.7106364,
+    "ast_hash": "3f52f0493604370eb4f484ee86e16a01",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/DESIGN_BIBLE_TR.md": {
+    "mtime": 1791607618.0141976,
+    "seen": 1791607849.8550625,
+    "ast_hash": "7f2fe7c5b61529a89c18a436af182806",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/HANDOFF_TR.md": {
+    "mtime": 1791607619.354673,
+    "seen": 1791607849.8550642,
+    "ast_hash": "a476f87d7654e69101713cfc0215b0f0",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/README.md": {
+    "mtime": 1791607619.354637,
+    "seen": 1791607849.8550656,
+    "ast_hash": "a2ce0cb2841dc254bde15af644bdb990",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/index.html": {
+    "mtime": 1791607619.354557,
+    "seen": 1791607849.8550675,
+    "ast_hash": "ecc5a06c8f5e035dd2367c3d00c71cd3",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/boards/ch01_whispering_ash_v001.png": {
+    "mtime": 1791606951.6124258,
+    "seen": 1791607538.8036888,
+    "ast_hash": "3a569e7dfae542b3169042ce59df4f7b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/boards/ch02_saint_luthos_v001.png": {
+    "mtime": 1791606952.4444153,
+    "seen": 1791607538.8036907,
+    "ast_hash": "14f40eccf1a14622e21c2146267fc935",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/boards/ch03_oakhaven_v001.png": {
+    "mtime": 1791606953.2324057,
+    "seen": 1791607538.8036916,
+    "ast_hash": "583e974ca3a76751a283c0a63bf69195",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/boards/ch04_undercity_v001.png": {
+    "mtime": 1791606954.0280633,
+    "seen": 1791607538.803693,
+    "ast_hash": "8a2666b2aadc324012934ab02ff6b901",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/boards/ch05_forsaken_bridge_v001.png": {
+    "mtime": 1791606954.8403854,
+    "seen": 1791607538.803694,
+    "ast_hash": "eda8c4e1b4f6a906dd4c455e808a9c64",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/boards/ch05_forsaken_bridge_v002.png": {
+    "mtime": 1791607207.3331954,
+    "seen": 1791607538.8036954,
+    "ast_hash": "02bde1e8a0d8a8b20773429bb9bb5011",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/boards/ch06_ashen_estate_v001.png": {
+    "mtime": 1791606955.6403756,
+    "seen": 1791607538.8036966,
+    "ast_hash": "539f9e0dd1d6edf232ef1338e05f1fba",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/boards/ch07_first_eclipse_v001.png": {
+    "mtime": 1791606956.4155192,
+    "seen": 1791607538.8036978,
+    "ast_hash": "5af9c0f0c42bf0c6f7714228d444cb6d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/boards/ch07_first_eclipse_v002.png": {
+    "mtime": 1791607208.1313374,
+    "seen": 1791607538.8036995,
+    "ast_hash": "5a5972686f2813c2cc5fec58fa71103b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch01_native.png": {
+    "mtime": 1791607627.4022968,
+    "seen": 1791607850.0290709,
+    "ast_hash": "5386ce77a64f50294b7a0ca8883d1aa5",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch02_native.png": {
+    "mtime": 1791607627.715416,
+    "seen": 1791607850.0290725,
+    "ast_hash": "80bb4df22b289d61c85cd7c57d3852bf",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch03_native.png": {
+    "mtime": 1791607628.0200982,
+    "seen": 1791607850.0290744,
+    "ast_hash": "4baa8b26cb7ce5b7e066929e6e0556e0",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch04_native.png": {
+    "mtime": 1791607628.3321671,
+    "seen": 1791607850.0290754,
+    "ast_hash": "5ac9ba4734ab44a866b2ddffaf5e619d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch05_native.png": {
+    "mtime": 1791607628.642748,
+    "seen": 1791607850.0290766,
+    "ast_hash": "3e46a10f1ea9e8aa26d0ec66f4047d39",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch06_native.png": {
+    "mtime": 1791607628.9438305,
+    "seen": 1791607850.0290778,
+    "ast_hash": "50f1a7ffffb93e12ee576cf613c47b32",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch07_native.png": {
+    "mtime": 1791607629.398296,
+    "seen": 1791607850.02908,
+    "ast_hash": "18d4b2f052def8cc68f00fd9ea16c74e",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_10.json": {
+    "mtime": 1791607619.2414398,
+    "seen": 1791607849.7106168,
+    "ast_hash": "555a20dfb43dc4029a9f93663afeb7ee",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/asset_audit.json": {
+    "mtime": 1791607733.524076,
+    "seen": 1791607849.7106345,
+    "ast_hash": "8c1e8351f6524f376c6fe7891741c805",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/package_checks.json": {
+    "mtime": 1791607734.2429965,
+    "seen": 1791607849.7106373,
+    "ast_hash": "d66e36a9e436c779580e347361692a31",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/REPORT_TR.md": {
+    "mtime": 1791607678.191455,
+    "seen": 1791607849.8550687,
+    "ast_hash": "600f51d9ecb89c2a49ab3d800b99c2aa",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/validation/native_review.gd.txt": {
+    "mtime": 1791607678.4543087,
+    "seen": 1791607849.85507,
+    "ast_hash": "97c23a07b54090e25a7a5a3e6bf18d97",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/enemies/design_v001/boards/ch07_first_eclipse_v003.png": {
+    "mtime": 1791607595.9281454,
+    "seen": 1791607850.0290687,
+    "ast_hash": "f5a01dd2917300f79d9c2f3c15b24e46",
     "semantic_hash": ""
   }
 }

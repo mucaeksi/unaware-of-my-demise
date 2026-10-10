@@ -1,0 +1,866 @@
+{
+  "schema": 1,
+  "version": "v001",
+  "date": "2026-10-10",
+  "status": "DESIGN_CANDIDATES",
+  "cards": [
+    {
+      "enemy_id": "ash_wolf",
+      "name_en": "Ash Wolf",
+      "first_design_chapter": 1,
+      "role": "flanker",
+      "element": "Ember",
+      "canon_lore_en": "Wolves that ate from bell-ash in the Whispering Forest. They hunt whoever walks apart from the pack.",
+      "silhouette_tr": "Alçak, uzun kama; sivri burun ve geriye uzanan kuyruk.",
+      "palette_materials_tr": "Kül kaplı füme kürk; göğüste az miktarda amber çatlak.",
+      "costume_props_tr": "Çan külü yemiş normal kurt; tasmaya veya insan silahına ihtiyaç yok.",
+      "attack_language_tr": "Pack Lunge: arka ayaklar sıkışır, gövde hedefe yönelir; hedef işareti sıçramadan önce görünür.",
+      "animation_handoff_tr": "Dört ayak, nefes, çömelme, sıçrama, darbe, yere yığılma.",
+      "constraints_tr": "Diğerinden daha küçük ve çevik; Ash-Maw ile aynı boy/çene yapılmaz.",
+      "skills_source": [
+        "ash_wolf_basic",
+        "ash_wolf_pack_lunge"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch01_whispering_ash_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "bellbound_dead",
+      "name_en": "Bellbound Dead",
+      "first_design_chapter": 1,
+      "role": "swarm",
+      "element": "Veil",
+      "canon_lore_en": "Hollows wired to a bell by their own chains. Alone they are weak; the bell never sends one alone.",
+      "silhouette_tr": "Çökük göğüs, sarkık uzun kollar; zincirle bölünmüş ince dikey gövde.",
+      "palette_materials_tr": "Kömür bez, kirli kemik, soğuk pirinç.",
+      "costume_props_tr": "Göğüs çanı; göğüs ve bileği bağlayan kendi zincirleri. Mevcut tutorial tasarımı korunur.",
+      "attack_language_tr": "Tolling Grab: bilek zinciri gerilir, çan eğilir; kavrama ve Dread işareti ayrı okunur.",
+      "animation_handoff_tr": "Çan salınımı, uzanma, zincir çekme, darbe, çökme.",
+      "constraints_tr": "Ağır zırhlı şövalye değildir; kırmızı parıltı bütün yüzeyi kaplamaz.",
+      "skills_source": [
+        "bellbound_dead_basic",
+        "bellbound_dead_tolling_grab"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch01_whispering_ash_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "hollow_pilgrim",
+      "name_en": "Hollow Pilgrim",
+      "first_design_chapter": 1,
+      "role": "slow_vanguard",
+      "element": "Veil",
+      "canon_lore_en": "A pilgrim whose hours ran out on the road but whose feet did not. Slow, stubborn, heavy.",
+      "silhouette_tr": "Kambur geniş üçgen; yük çantası ve yere basan tek kalın asa.",
+      "palette_materials_tr": "Kül beji kaba dokuma; mat kahverengi deri.",
+      "costume_props_tr": "Yüzü karanlık başlıkta; yıpranmış yol yükü. Mevcut tutorial kimliği korunur.",
+      "attack_language_tr": "Pilgrim’s Weight: iki el asaya geçer, ağır salınım; Stoneguard sonrası ayaklar sabitlenir.",
+      "animation_handoff_tr": "Yavaş adım, yük nefesi, asa kaldırma, ağırlıklı vurma, diz çökme.",
+      "constraints_tr": "Havada uçan hayalet ya da hızlı suikastçı yapılmaz.",
+      "skills_source": [
+        "hollow_pilgrim_basic",
+        "hollow_pilgrim_pilgrim_s_weight"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch01_whispering_ash_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "boss_ash_maw",
+      "name_en": "The Ash-Maw",
+      "first_design_chapter": 1,
+      "role": "beast_boss",
+      "element": "Ember",
+      "canon_lore_en": "A wolf carcass fused with a shard of the Whispering Bell. Not a wolf: what the bell left wearing one.",
+      "silhouette_tr": "Derin dev göğüs; alçak dört ayak; asimetrik parçalanmış alt çene.",
+      "palette_materials_tr": "İs siyahı kürk levhaları, kül beyazı yarık, amber boğaz.",
+      "costume_props_tr": "Whispering Bell parçası alt çeneye kaynamış; break hedefi jaw_bell.",
+      "attack_language_tr": "Jaw-Bell: çene parçası keskin kenar ışığı alır; Ash Howl öncesi boğaz açılır. Kırılınca yankı kesilir.",
+      "animation_handoff_tr": "Ağır nefes, çene hazırlık, uluma, kesintiye uğrama, ikinci faz, düşüş.",
+      "constraints_tr": "Boynuz/ejderha/ikinci kafa yok; çeneye takılan tam bir kolye çanı değil.",
+      "skills_source": [
+        "boss_ash_maw_basic",
+        "boss_ash_maw_ash_howl"
+      ],
+      "phase_ids": [
+        "jaw_bell",
+        "ash_howl"
+      ],
+      "objective_ids": [
+        "jaw_bell"
+      ],
+      "board_path": "boards/ch01_whispering_ash_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "choir_knight",
+      "name_en": "Choir Knight",
+      "first_design_chapter": 2,
+      "role": "elite_guard",
+      "element": "Dawn",
+      "canon_lore_en": "Oath-armor of the Saint Luthos choir guard. It sings without breath and strikes back when a brother is struck.",
+      "silhouette_tr": "Yüksek organ-borusu miğfer; simetrik dar zırh ve düz kılıç.",
+      "palette_materials_tr": "Mat kirli ivory, oksit pirinç, sönük Dawn altın.",
+      "costume_props_tr": "Saint Luthos oath-armor; boş miğfer yarığı ve koro levha ritmi.",
+      "attack_language_tr": "Unison Verdict: kılıç dik tutulur, miğfer yarıkları aynı ritimde parlar; saldırı yönü sonra açılır.",
+      "animation_handoff_tr": "Dik nöbet, bir arada rezonans, kılıç hükmü, zırh sarsılması, boş zırh düşüşü.",
+      "constraints_tr": "Dawn iyi/kötü etiketi değildir; modern kilise haçı veya Yseldra maskesi kullanılmaz.",
+      "skills_source": [
+        "choir_knight_basic",
+        "choir_knight_unison_verdict"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch02_saint_luthos_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "hollow_cleric",
+      "name_en": "Hollow Cleric",
+      "first_design_chapter": 2,
+      "role": "ranged_caster",
+      "element": "Veil",
+      "canon_lore_en": "A grave scribe that still keeps its ledger. It mends its own and curses whoever looks weakest.",
+      "silhouette_tr": "Eğik uzun cübbe; açık defter tek büyük yatay leke.",
+      "palette_materials_tr": "Kül ivory, kararmış mürekkep, mat mor-gri.",
+      "costume_props_tr": "Mezar kayıt kâtibi; defter, kemik inceliğinde parmaklar, mum izi.",
+      "attack_language_tr": "Grave Litany: yaralı müttefike dönüp defter açma=iyileştirme; zayıf kahramana dönüp kapatma=lanet.",
+      "animation_handoff_tr": "Sayfa çevirme, müttefike okuma, düşmana lanet, darbe, dizlerin çözülmesi.",
+      "constraints_tr": "Healer/caster iki hareketi ayrılır; yeni bir summon veya sahte rahip kimliği eklenmez.",
+      "skills_source": [
+        "hollow_cleric_basic",
+        "hollow_cleric_grave_litany"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch02_saint_luthos_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "inkbound_dead",
+      "name_en": "Inkbound Dead",
+      "first_design_chapter": 2,
+      "role": "ranged_caster",
+      "element": "Veil",
+      "canon_lore_en": "A corpse wrapped in erased records. The ink it bleeds marks the living for the dead.",
+      "silhouette_tr": "Asimetrik kâğıt sargılar; bir kolda yere sarkan kayıt şeritleri.",
+      "palette_materials_tr": "Kirli parşömen; mat siyah mürekkep; soğuk gri.",
+      "costume_props_tr": "Silinmiş kayıtlarla sarılı ceset; harfler okunur spoiler metni değildir.",
+      "attack_language_tr": "Black Margin: kayıt şeritleri hedefe yönelir, mürekkep kenarı oluşur; Trail Mark ikonu darbeden bağımsız.",
+      "animation_handoff_tr": "Şerit kıpırtısı, işaret yazma, mürekkep atımı, parçalanan sargı, çökme.",
+      "constraints_tr": "Kafatası ana kimlik değildir; Estate Wraith’in portre çerçevesi kullanılmaz.",
+      "skills_source": [
+        "inkbound_dead_basic",
+        "inkbound_dead_black_margin"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch02_saint_luthos_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "corrupted_mercenary",
+      "name_en": "Corrupted Mercenary",
+      "first_design_chapter": 3,
+      "role": "bruiser",
+      "element": "Ember",
+      "canon_lore_en": "Hired blades of the Red Vial ledger wing, fed on red glass that makes them strong and careless.",
+      "silhouette_tr": "Geniş omuzlu kısa kama; ağır tek balta ve eksik eşleşen zırh.",
+      "palette_materials_tr": "Paslı çelik, koyu deri, az oxblood; kırmızı cam doz cebi.",
+      "costume_props_tr": "Ledger wing tarafından tutulmuş yaşayan paralı asker; Rusk birliğinin yıpranmış rengi.",
+      "attack_language_tr": "Paid in Blood: doz cebine el, göğüste kısa güç vurgusu, sonra ağır saldırı; HP bedeli okunur.",
+      "animation_handoff_tr": "Yaşayan nefes, doz alma, ağır yarma, gerileme, silahı bırakma.",
+      "constraints_tr": "İskelet veya şeytan yapılmaz; kırmızı cam güç verir, beden sürekli yanmaz.",
+      "skills_source": [
+        "corrupted_mercenary_basic",
+        "corrupted_mercenary_paid_in_blood"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch03_oakhaven_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "orchard_ghoul",
+      "name_en": "Orchard Ghoul",
+      "first_design_chapter": 3,
+      "role": "bruiser",
+      "element": "Veil",
+      "canon_lore_en": "The Oakhaven dead, bloated from the red harvest. The more it feeds, the harder it becomes to cut.",
+      "silhouette_tr": "Şişkin armut gövde; eğik küçük baş; çamura basan geniş ayaklar.",
+      "palette_materials_tr": "Soluk kül ten, çürük hasat oxblood, toprak kahvesi.",
+      "costume_props_tr": "Oakhaven’in red harvest ölüsü; yırtılmış iş önlüğü, hasat çuvalı parçaları.",
+      "attack_language_tr": "Rooted Bite: çömelip köklenir, çene öne açılır; beslenme sonrası kabuk vurgusu DEF artışını gösterir.",
+      "animation_handoff_tr": "Ağır salınım, çömelme, ısırma, geri beslenme, düşme.",
+      "constraints_tr": "Gore yok; bitki elementi/gerçek ağaç canavarı veya yeni kök immobilize yeteneği eklenmez.",
+      "skills_source": [
+        "orchard_ghoul_basic",
+        "orchard_ghoul_rooted_bite"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch03_oakhaven_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "red_vial_scout",
+      "name_en": "Red Vial Scout",
+      "first_design_chapter": 3,
+      "role": "flanker",
+      "element": "Gale",
+      "canon_lore_en": "A Guild courier with a poison dart and a route-marking shot. It reports to whoever pays in seals.",
+      "silhouette_tr": "İnce öne eğilen diagonal; kısa pelerin ve tek küçük dart arbaleti.",
+      "palette_materials_tr": "Soluk deri, kömür bez, kısıtlı kırmızı vial; Gale soluk gümüş.",
+      "costume_props_tr": "Yaşayan Guild kuryesi; rota silindir kutusu, az sayıda cam iğne.",
+      "attack_language_tr": "Glass Needle: arbalet arka sıraya yönelir; rota çizgisi ve venom damlası şekille ayrılır.",
+      "animation_handoff_tr": "Hızlı adım, nişan, dart salma, yanal kaçınma, diz çökme.",
+      "constraints_tr": "Kera veya diğer oynanabilir alchemist kıyafetleri kopyalanmaz; görünmezlik yok.",
+      "skills_source": [
+        "red_vial_scout_basic",
+        "red_vial_scout_glass_needle"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch03_oakhaven_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "boss_captain_rusk",
+      "name_en": "Captain Rusk",
+      "first_design_chapter": 3,
+      "role": "duelist_boss",
+      "element": "Gale",
+      "canon_lore_en": "A mercenary captain carrying an order sealed by someone the Crown buried years ago.",
+      "silhouette_tr": "Uzun asimetrik kaptan pelerini; tek ince uzun düello kılıcı, yükselen sancak.",
+      "palette_materials_tr": "Kömür deri, eski bakır, mat oxblood, sert Gale gümüş.",
+      "costume_props_tr": "Yaşayan paralı asker kaptanı; eski mühürlü emir kılıfı ve ayrı signal_banner. Yüz/saç öneridir.",
+      "attack_language_tr": "Captain’s Duel: tek Front hedefe kılıç ucu; Banner Call: sancak yönüne açık el. Banner kırılınca çağrı söner.",
+      "animation_handoff_tr": "Kendinden emin nefes, düello hazırlığı, kesiş, çağrı, sancak kesintisi, yenilgi.",
+      "constraints_tr": "Oren’in kraliyet üniforması değil; Yseldra gibi çan/maskeye sahip değil.",
+      "skills_source": [
+        "boss_captain_rusk_basic",
+        "boss_captain_rusk_duel_cut",
+        "boss_captain_rusk_banner_call"
+      ],
+      "phase_ids": [
+        "captain_duel",
+        "banner_call"
+      ],
+      "objective_ids": [
+        "signal_banner"
+      ],
+      "board_path": "boards/ch03_oakhaven_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "chain_cultist",
+      "name_en": "Chain Cultist",
+      "first_design_chapter": 4,
+      "role": "support",
+      "element": "Veil",
+      "canon_lore_en": "Chain-bearers of the First Eclipse. They pray to an eclipse that never moves and share one another's wounds.",
+      "silhouette_tr": "Kapalı başlık altında düğüm göğüs; iki yana açılan zincirlerle geniş üçgen.",
+      "palette_materials_tr": "Kömür bez, kurşun gri, az mor Veil.",
+      "costume_props_tr": "Yaşayan First Eclipse mensubu; göğüste zincir düğümü. Kırık tutulma biçimi tasarım önerisi.",
+      "attack_language_tr": "Knot the Breath: eller düğüm üstüne kapanır; düşman müttefiklerine ince zincir hatları=soul_link.",
+      "animation_handoff_tr": "Düğüm solunumu, ortak dua, bağlama, bağ kopması, yere düşüş.",
+      "constraints_tr": "Bağlı hedefler kahramanlar değil kendi müttefikleri; yeni düşman çekme yeteneği yok.",
+      "skills_source": [
+        "chain_cultist_basic",
+        "chain_cultist_knot_the_breath"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch04_undercity_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "glass_viper",
+      "name_en": "Glass Viper",
+      "first_design_chapter": 4,
+      "role": "assassin",
+      "element": "Tide",
+      "canon_lore_en": "A glass-scaled serpent bred in the Red Vial cisterns. Fast, fragile, and never sold to anyone who asked what it was for.",
+      "silhouette_tr": "İnce S kıvrımı; sivri küçük baş; kırılgan cam sırt ritmi.",
+      "palette_materials_tr": "Kirli saydam mavi-gri cam, soğuk Tide iç ışığı, çok az kırmızı tortu.",
+      "costume_props_tr": "Red Vial sarnıçlarında yetişmiş cam pullu yılan; doğal yılan anatomisi.",
+      "attack_language_tr": "Brittle Venom: S kıvrımı sıkışır, küçük diş öne yönelir; venom damla biçimi.",
+      "animation_handoff_tr": "S kıpırtısı, sıkışma, hızlı atılma, cam darbe titreşimi, çözülme.",
+      "constraints_tr": "Kobra kanadı/insan gövdesi/ejderha yok; kırılganlık ağ gibi çatlakla gösterilir.",
+      "skills_source": [
+        "glass_viper_basic",
+        "glass_viper_brittle_venom"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch04_undercity_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "red_vial_alchemist",
+      "name_en": "Red Vial Alchemist",
+      "first_design_chapter": 4,
+      "role": "ranged_caster",
+      "element": "Ember",
+      "canon_lore_en": "A ledger-wing bomber. Break the flask rack and the formula breaks with it.",
+      "silhouette_tr": "Geniş alet önlüğü; sağ-sol rack çıkıntısı; atış eli ayrı okunur.",
+      "palette_materials_tr": "Kömür deri, kirli cam teal, Ember amber, kontrollü kırmızı vial.",
+      "costume_props_tr": "Yaşayan ledger-wing bomber; yüzü sade yarım solunum örtüsüyle kapalı öneri.",
+      "attack_language_tr": "Corrosive Phial: seçili flask yukarı kalkar, arka sıra hedefi açılır; atış tek temiz yay izler.",
+      "animation_handoff_tr": "Flask seçme, omuz hazırlığı, atış, sıçrama geri tepmesi, yenilgi.",
+      "constraints_tr": "Kera’nın özgünlüğü korunur; normal rack gameplay break hedefi olarak eklenmez.",
+      "skills_source": [
+        "red_vial_alchemist_basic",
+        "red_vial_alchemist_corrosive_phial"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch04_undercity_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "boss_red_vial_matron",
+      "name_en": "The Red Vial Matron",
+      "first_design_chapter": 4,
+      "role": "alchemist_boss",
+      "element": "Ember",
+      "canon_lore_en": "Head of the Red Vial ledger wing. She believes the heir's blood is the last ingredient.",
+      "silhouette_tr": "Dik yetişkin yönetici; geniş iş önlüğü ve iki ayrı düşük flask rack.",
+      "palette_materials_tr": "Kömür ceket, şarap kırmızısı, kirli cam teal, mat bakır.",
+      "costume_props_tr": "Ledger wing başı; hesap defteri ve iki ayrı flask rack. Erişkin yüz/saç öneridir.",
+      "attack_language_tr": "Glass Ward: iki rack arasında ince koruma konturu; Corrosive Flasks: iki aşamalı atış, rack kırılınca ward söner.",
+      "animation_handoff_tr": "Hesap kontrolü, ward, çift atış, rack kesintisi, ikinci faz, yenilgi.",
+      "constraints_tr": "Pin-up/çılgın cadı değil; Fadyme’nin kanını tasarımda gore ile göstermeyin.",
+      "skills_source": [
+        "boss_red_vial_matron_basic",
+        "boss_red_vial_matron_corrosive_flasks"
+      ],
+      "phase_ids": [
+        "glass_ward",
+        "corrosive_flasks"
+      ],
+      "objective_ids": [
+        "flask_rack_left",
+        "flask_rack_right"
+      ],
+      "board_path": "boards/ch04_undercity_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "bridge_revenant",
+      "name_en": "Bridge Revenant",
+      "first_design_chapter": 5,
+      "role": "spectral_guard",
+      "element": "Veil",
+      "canon_lore_en": "A drowned sentry of the old span. It still hooks anyone who stands at the front, as if the gate had never fallen.",
+      "silhouette_tr": "Kambur uzun nöbetçi; aşağı sarkan tek kancalı zincir büyük negatif boşluk açar.",
+      "palette_materials_tr": "Islak kurşun zırh, çamurlu kül bez, soğuk gri su izleri.",
+      "costume_props_tr": "Boğulmuş eski köprü sentry’si; zincir kancası, paslı dar miğfer.",
+      "attack_language_tr": "Chain Drag: kanca Front hedefe uzanır, zincir gergin tek çizgi; Fracture sonrası kırık levha işareti.",
+      "animation_handoff_tr": "Islak salınım, kanca hazırlık, çekiş, darbe, zincirle çöken gövde.",
+      "constraints_tr": "Bellbound’dan göğüs çanı olmamasıyla ayrılır; yaşayan Oren askeri gibi yüz verilmez.",
+      "skills_source": [
+        "bridge_revenant_basic",
+        "bridge_revenant_chain_drag"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch05_forsaken_bridge_v002.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "corrupted_crown_guard",
+      "name_en": "Corrupted Crown Guard",
+      "first_design_chapter": 5,
+      "role": "elite_guard",
+      "element": "Stone",
+      "canon_lore_en": "Crown Guard soldiers still following Crown-era orders. The shield comes up before the signal strike, as it was drilled.",
+      "silhouette_tr": "Kompakt dikdörtgen; büyük tam kalkan ve kısa mızrak.",
+      "palette_materials_tr": "Eski slate çelik, mat oxblood, kirli ivory kraliyet kumaşı.",
+      "costume_props_tr": "Yaşayan eski Crown Guard; disiplinli sıra kıyafeti, hasarlı crest.",
+      "attack_language_tr": "Formation Brace: kalkan önce yükselir, yaralı düşman müttefikine koruma açılır; sonra kısa saldırı.",
+      "animation_handoff_tr": "Asker nefesi, brace, koruma, mızrak vuruşu, yenilgi.",
+      "constraints_tr": "Royal Hollow ile aynı ceset yüzü değil; crest tamamen kazınmış Crownless da değil.",
+      "skills_source": [
+        "corrupted_crown_guard_basic",
+        "corrupted_crown_guard_formation_brace"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch05_forsaken_bridge_v002.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "lost_vow_knight",
+      "name_en": "Lost-Vow Knight",
+      "first_design_chapter": 5,
+      "role": "elite_duelist",
+      "element": "Stone",
+      "canon_lore_en": "A dead knight of a broken order. It punishes every shield it sees, because its own failed.",
+      "silhouette_tr": "Yırtık oath pelerini; kırılmış eski kalkan kalıntısı ve iki elli geniş kılıç.",
+      "palette_materials_tr": "Kül çelik, soluk kirli beyaz, sönen Stone gri.",
+      "costume_props_tr": "Bozulmuş yeminin ölü şövalyesi; eski kalkanının kırığı belde.",
+      "attack_language_tr": "Oath Sever: kılıç zırh çizgisinde yükselir; hedef kalkanında kesik şekli; shield hasarı ayrı okunur.",
+      "animation_handoff_tr": "Ölü nöbet, iki elli kurma, yarma, darbe, zırhın boşalması.",
+      "constraints_tr": "Yaşayan Crownless ile karıştırılmaz; kırık kendi kalkanı elinde etkin block yapmaz.",
+      "skills_source": [
+        "lost_vow_knight_basic",
+        "lost_vow_knight_oath_sever"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch05_forsaken_bridge_v002.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "boss_marshal_oren",
+      "name_en": "Marshal Oren",
+      "first_design_chapter": 5,
+      "role": "commander_boss",
+      "element": "Stone",
+      "canon_lore_en": "Mahmut's former commander. He signed the order; he did not know the rite would hollow her out.",
+      "silhouette_tr": "Geniş disiplinli yetişkin komutan; ağır heater shield, tek uzun komuta kılıcı.",
+      "palette_materials_tr": "Mat slate çelik, oxblood pelerin, yıpranmış ivory, az eski altın.",
+      "costume_props_tr": "Mahmut’un eski komutanı; ters çevrilmiş eski Crown crest; ayrı signal_standard. Yüz önerisi olgun, kısa gri saç.",
+      "attack_language_tr": "Shield Formation: kalkan yatay hizaya oturur; Bridge Strike: komuta eli/standard sinyali ve Front sıra vuruş hattı.",
+      "animation_handoff_tr": "Nöbet, emir, kalkan formasyon, köprü darbesi, tereddüt, yenilgi ama ölüm animasyonu değil.",
+      "constraints_tr": "Yaşayan insan; demon/çürümüş yüz yok. Sivilleri kurtarıp köprüde kalışını silmeyin.",
+      "skills_source": [
+        "boss_marshal_oren_basic",
+        "boss_marshal_oren_formation_order",
+        "boss_marshal_oren_bridge_strike"
+      ],
+      "phase_ids": [
+        "shield_formation",
+        "bridge_strike"
+      ],
+      "objective_ids": [
+        "signal_standard"
+      ],
+      "board_path": "boards/ch05_forsaken_bridge_v002.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "estate_wraith",
+      "name_en": "Estate Wraith",
+      "first_design_chapter": 6,
+      "role": "spectral_caster",
+      "element": "Veil",
+      "canon_lore_en": "A noble shade of the Ashen estate. Having lost its name, it borrows the strongest protection it can see.",
+      "silhouette_tr": "İnce kayan üst gövde; küçük kırık oval portre çerçevesi ve kaybolan etek.",
+      "palette_materials_tr": "Kül gri soylu kumaş, kirli altın, soğuk cam teal.",
+      "costume_props_tr": "Büyük evin adını yitirmiş noble shade’i; portre/mirror bağını taşır.",
+      "attack_language_tr": "Portrait Borrowing: çerçeve korunacak kahramana yönelir; kopyalanan buff sembolü çerçevede tek kez görünür.",
+      "animation_handoff_tr": "Portre salınımı, yüz yankısı, buff kopya, cam vuruş, silinme.",
+      "constraints_tr": "Ashen Lord’un yüzü her sıradan wraith’e eklenmez; yeni yüz canon’ı oluşturulmaz.",
+      "skills_source": [
+        "estate_wraith_basic",
+        "estate_wraith_portrait_borrowing"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch06_ashen_estate_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "noble_retainer",
+      "name_en": "Noble Retainer",
+      "first_design_chapter": 6,
+      "role": "support_guard",
+      "element": "Dawn",
+      "canon_lore_en": "The ghost of a household attendant. It still steps in front of the most wounded master.",
+      "silhouette_tr": "Alçak eğilen hizmetkâr; iki yana açılan kollar ve geniş servis kumaşı.",
+      "palette_materials_tr": "Mat eski ivory, kömür hizmet ceketi, çok az soğuk teal.",
+      "costume_props_tr": "Hanenin ölü attendant’ı; hizmet tepsisi görsel öneri, silah değil.",
+      "attack_language_tr": "Household Interpose: en yaralı düşman müttefikine dönüp önüne geçer; bir darbe intercept okunur.",
+      "animation_handoff_tr": "Servis nöbeti, sahip önüne geçiş, tek intercept, sarsılma, hayaletin sönmesi.",
+      "constraints_tr": "Yaşayan insan veya şövalye yapılmaz; data faction farkı raporlanır, sessizce değiştirilmez.",
+      "skills_source": [
+        "noble_retainer_basic",
+        "noble_retainer_household_interpose"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch06_ashen_estate_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "boss_ashen_lord_wraith",
+      "name_en": "The Ashen Lord's Wraith",
+      "first_design_chapter": 6,
+      "role": "spectral_boss",
+      "element": "Veil",
+      "canon_lore_en": "The Ashen Lord, who once hid the bell-keeper's daughter from the Crown. He kept her face and lost her name.",
+      "silhouette_tr": "Uzun soylu üst gövde; büyük dikdörtgen ayna çerçevesi; dumanla kaybolan alt beden.",
+      "palette_materials_tr": "Kül gri, tarnished gold, soğuk cam teal.",
+      "costume_props_tr": "Yaklaşık 60 yaşında portrait’teki asil; isim plakası kesilmiş; mirror_frame ayrı hedef.",
+      "attack_language_tr": "Portrait Double: çerçevede tek savunma buff yankısı; Falling Gallery: üstte boş portreler yönlenir ve arka sıraya kırık cam düşer.",
+      "animation_handoff_tr": "Sessiz portre, emir eli, aynada kopya, çerçeve kesintisi, düşen galeri, sönme.",
+      "constraints_tr": "Kafatası/gore yok; kişisel adı Part I oyuncu etiketinde yazılmaz; gizleyen son görevi korunur.",
+      "skills_source": [
+        "boss_ashen_lord_wraith_basic",
+        "boss_ashen_wraith_mirror_shard",
+        "boss_ashen_wraith_falling_gallery"
+      ],
+      "phase_ids": [
+        "portrait_double",
+        "falling_gallery"
+      ],
+      "objective_ids": [
+        "mirror_frame"
+      ],
+      "board_path": "boards/ch06_ashen_estate_v001.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "crownless_knight",
+      "name_en": "Crownless Knight",
+      "first_design_chapter": 7,
+      "role": "elite_guard",
+      "element": "Stone",
+      "canon_lore_en": "A knight who stripped his own crest, not out of defiance but despair. It hates shields and ignores fear.",
+      "silhouette_tr": "Dik yaşayan düellocu; kazınmış crest alanı, ince iki elli kılıç, kalkansız açık gövde.",
+      "palette_materials_tr": "Kömür slate, kül ivory, çıplak kazınmış metal.",
+      "costume_props_tr": "Crest’ini çaresizlikten kendi sökmüş yaşayan Crown Guard kalıntısı.",
+      "attack_language_tr": "Crestless Challenge: kılıç ucu hedef kalkanına sabitlenir; savunma yarmadan önce omuz geriye döner.",
+      "animation_handoff_tr": "Yaşayan nefes, meydan okuma, shield kesiş, gerileme, diz düşüşü.",
+      "constraints_tr": "Lost-Vow’dan canlı yüz/crest boşluğu/kalkansızlık ile ayrılır; yeni fear büyüsü yok.",
+      "skills_source": [
+        "crownless_knight_basic",
+        "crownless_knight_crestless_challenge"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch07_first_eclipse_v003.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "eclipse_sentinel",
+      "name_en": "Eclipse Sentinel",
+      "first_design_chapter": 7,
+      "role": "warder",
+      "element": "Veil",
+      "canon_lore_en": "Warders of the First Eclipse who feed the altar's barrier through its pylons.",
+      "silhouette_tr": "Dik sütun; elde küçük üç ayaklı pylon anahtarı, geniş omuz mantle.",
+      "palette_materials_tr": "Kömür taş bez, kirli pirinç, kısıtlı Veil mor.",
+      "costume_props_tr": "Yaşayan First Eclipse warder; pylon biçimli asa tasarım önerisi.",
+      "attack_language_tr": "Pylon Ward: asa yere iner; kendi müttefikleri çevresinde segmentli koruma konturu.",
+      "animation_handoff_tr": "Nöbet, asa indirme, ward, kanal bozulması, yenilgi.",
+      "constraints_tr": "Construct/robot değildir; Cael’in watch/scale coat sembolleri taşınmaz.",
+      "skills_source": [
+        "eclipse_sentinel_basic",
+        "eclipse_sentinel_pylon_ward"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch07_first_eclipse_v003.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "royal_hollow",
+      "name_en": "Royal Hollow",
+      "first_design_chapter": 7,
+      "role": "armored_vanguard",
+      "element": "Stone",
+      "canon_lore_en": "A palace guard still standing at a post that no longer exists. It blocks one blow each round, as it always did.",
+      "silhouette_tr": "Dik boş taht nöbeti; çok geniş katı kalkan, yüksek boş miğfer.",
+      "palette_materials_tr": "Kül çelik, soluk ivory tabard, kararmış altın.",
+      "costume_props_tr": "Artık bulunmayan saray postunu koruyan ölü guard; donmuş disiplin.",
+      "attack_language_tr": "Empty Throne: kalkan ilk darbe için kapanır; blok konturu kırılınca tekrar vurulabilirliği açık gösterilir.",
+      "animation_handoff_tr": "Ölü nöbet, ilk block, kısa strike, zırh sarsılması, boş zırh düşüşü.",
+      "constraints_tr": "Corrupted Crown Guard’dan boş miğfer/nefessiz duruş ile ayrılır; tahta oturan kral değildir.",
+      "skills_source": [
+        "royal_hollow_basic",
+        "royal_hollow_empty_throne"
+      ],
+      "phase_ids": [],
+      "objective_ids": [],
+      "board_path": "boards/ch07_first_eclipse_v003.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    },
+    {
+      "enemy_id": "boss_eclipse_construct",
+      "name_en": "Eclipse Construct",
+      "first_design_chapter": 7,
+      "role": "mythic_construct_boss",
+      "element": "Veil",
+      "canon_lore_en": "The hinge of the First Eclipse Altar, built around the Eclipse Bell. It is the instrument, not the author.",
+      "silhouette_tr": "Dev dik mekanik çerçeve; boş kırık taç halkası, iç Eclipse Bell, dış zincir eklemleri.",
+      "palette_materials_tr": "Kömür taş, eski bronz, kül ivory, küçük soğuk Veil çekirdek.",
+      "costume_props_tr": "Hinge: mekanizma, ölü/tanrı/Cael’in bedeni değil. İki kol ve iki ayak, solda/sağda joint ve tek ankle anchor; üç ayrı altar pylon.",
+      "attack_language_tr": "Crownless Frame: Front sweep çizgisi; üç joint açık hedef. Aether Ward: 50% geçişte segmentli ward; pylons ve Eclipse Pulse ayrı okunur.",
+      "animation_handoff_tr": "Mekanik nöbet, sweep kurma, eklem break/stagger, tek faz geçişi, ward pulse, makine çöküşü.",
+      "constraints_tr": "Üçüncü faz icat edilmez; Cael final boss diye etiketlenmez; background pylons gövdeye kaynamaz.",
+      "skills_source": [
+        "boss_eclipse_construct_basic",
+        "boss_eclipse_construct_crownfall_sweep",
+        "boss_eclipse_construct_eclipse_pulse"
+      ],
+      "phase_ids": [
+        "crownless_frame",
+        "aether_ward"
+      ],
+      "objective_ids": [
+        "chain_joint_left",
+        "chain_joint_right",
+        "ankle_anchor",
+        "altar_pylon_left",
+        "altar_pylon_center",
+        "altar_pylon_right"
+      ],
+      "board_path": "boards/ch07_first_eclipse_v003.png",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "runtime_inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+      "technical_contract": {
+        "sheet": "opaque review board, not sprite atlas",
+        "battle_target_height_px": "normal 160–210, boss 230–300; proposed, native validation pending",
+        "sprite_delivery": "future separate full-silhouette alpha PNGs, no labels/background",
+        "anchor": "future bottom-centre planted foot; beast support footprint; floating wraith logical ground anchor",
+        "animation": "written choreography only; no frame animation generated in this design package",
+        "color_alternative": "silhouette/prop/pose plus existing text intent; no color-only target cue"
+      }
+    }
+  ],
+  "reserved_final_individual_designs": [
+    {
+      "character_id": "yseldra",
+      "enemy_id": "boss_bell_widow",
+      "reason": "Same character, not an additional monster."
+    },
+    {
+      "character_id": "cael",
+      "enemy_id": null,
+      "reason": "Part I reveal antagonist, not combat boss."
+    }
+  ]
+}

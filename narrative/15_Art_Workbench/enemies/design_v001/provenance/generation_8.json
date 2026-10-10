@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "tool": "image_gen.imagegen",
+  "provider_model_id": "NOT_EXPOSED_BY_TOOL",
+  "generation_index": 8,
+  "date": "2026-10-10",
+  "prompt": "Edit this enemy design sheet with ONLY the following canon corrections, preserve all four characters, names, painterly material style, faces, poses, column layout and every other visual. Column 3 LOST-VOW KNIGHT: REMOVE the large intact shield in its standing pose completely. BOTH hands must visibly hold its single broad two-handed sword. Its own old shield must be only a SMALL JAGGED TRIANGULAR FRAGMENT, about the size of one forearm, hanging uselessly at its belt, never covering torso and never held as active shield. In lower attacking pose also ensure no intact shield, only the same small broken fragment at waist. Its inset must show that visibly BROKEN JAGGED SHIELD FRAGMENT instead of intact shield or jewelry. Column 4 MARSHAL OREN: replace the decorative upright emblems on his breastplate, shield and SEPARATE STANDARD with a single simple heraldic THREE-POINT CROWN SEWN UPSIDE DOWN: points visibly face DOWN toward ground, crown band on top. This inversion must be obvious, same inverted royal crown on shield and separate standard, in standing and action poses and inset. Keep the second soldier's upright old crest unchanged. Oren remains a dignified LIVING adult with short iron-grey hair, NOT a corpse or demon. First drowned revenant and second Crown Guard untouched. No new characters, no extra hands, no missing names. Full complete silhouettes and all weapon tips inside safe margins. Output a new corrected review board.",
+  "transparent_background": false,
+  "reference_paths": [
+    "narrative/15_Art_Workbench/enemies/design_v001/boards/ch05_forsaken_bridge_v001.png"
+  ],
+  "output_path": "boards/ch05_forsaken_bridge_v002.png",
+  "supersedes": "boards/ch05_forsaken_bridge_v001.png",
+  "status": "CORRECTED_DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+  "inclusion": "WORKBENCH_ONLY_NOT_EXPORTED",
+  "output_sha256": "57eeace6619ee4644e04ebf09789c313cb09a2dd7801be1e73d720bccac14eb5",
+  "references": [
+    {
+      "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch05_forsaken_bridge_v001.png",
+      "sha256": "37c9dbbd1989ad08b8c1c8b93b3ce67f7a5fb2a7ff349f072dff6ed8434043d1"
+    }
+  ]
+}

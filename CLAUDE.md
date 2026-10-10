@@ -61,3 +61,14 @@ validated fixes and asset integration. Preserve canon, stable IDs, source art,
 online authority and sealed release/current; no new AAB is requested.
 The desktop full-story review is isolated from online accounts and purchases.
 Final voice selection and paid production batches remain separate.
+
+## Enemy design handoff — 2026-10-10
+
+Owner priority: all enemies/lesser villains before the remaining 18 playable
+characters; Yseldra and Cael last, individually. The 20 ordinary enemies and six
+other bosses have concept boards/cards under
+`narrative/15_Art_Workbench/enemies/design_v001/`; read `HANDOFF_TR.md` and
+`validation/REPORT_TR.md`. These are opaque concept sheets, not production alpha
+sprites/animation atlases. Preserve `boss_bell_widow` = Yseldra, no duplicate
+monster and no new Cael combat encounter. Runtime integration is a separate
+Claude handoff; current game/release bindings were preserved in this art pass.

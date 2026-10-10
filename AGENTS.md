@@ -82,3 +82,12 @@ validated fixes and asset integration. Preserve canon, stable IDs, source art,
 online authority and sealed release/current; no new AAB is requested.
 The desktop full-story review is isolated from online accounts and purchases.
 Final voice selection and paid production batches remain separate.
+
+## Owner update — enemy design priority, 2026-10-10
+
+Before the remaining 18 playable characters, design enemies and lesser villains.
+Reserve the two main antagonists, Yseldra and Cael, for separate individual passes
+at the end. `boss_bell_widow` is Yseldra's existing combat identity, not a second
+character; Cael is not the Part I combat boss. The 26 other identity designs are
+staged in `narrative/15_Art_Workbench/enemies/design_v001/`. Design candidates do
+not count as alpha sprites, animation frames or integrated runtime assets.

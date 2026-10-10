@@ -3492,12 +3492,12 @@
   {
     "path": "AGENTS.md",
     "node_id": "agents",
-    "size_bytes": 8226
+    "size_bytes": 8766
   },
   {
     "path": "CLAUDE.md",
     "node_id": "claude",
-    "size_bytes": 6064
+    "size_bytes": 6698
   },
   {
     "path": "GAME_TOOLCHAIN.md",
@@ -28407,7 +28407,7 @@
   {
     "path": "narrative/15_Art_Workbench/README.md",
     "node_id": "narrative_15_art_workbench_readme",
-    "size_bytes": 1557
+    "size_bytes": 1836
   },
   {
     "path": "narrative/15_Art_Workbench/characters/README.md",
@@ -29343,6 +29343,196 @@
     "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_vulnerable_v002.png",
     "node_id": "narrative_15_art_workbench_characters_fadyme_production_v002_vn_vn_vulnerable_v002",
     "size_bytes": 2755030
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/DESIGN_BIBLE_TR.md",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_design_bible_tr",
+    "size_bytes": 23139
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/HANDOFF_TR.md",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_handoff_tr",
+    "size_bytes": 4048
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/README.md",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_readme",
+    "size_bytes": 1816
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/asset_inventory.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_asset_inventory",
+    "size_bytes": 6562
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch01_whispering_ash_v001.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_boards_ch01_whispering_ash_v001",
+    "size_bytes": 2731837
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch02_saint_luthos_v001.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_boards_ch02_saint_luthos_v001",
+    "size_bytes": 2750625
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch03_oakhaven_v001.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_boards_ch03_oakhaven_v001",
+    "size_bytes": 2835152
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch04_undercity_v001.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_boards_ch04_undercity_v001",
+    "size_bytes": 2978354
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch05_forsaken_bridge_v001.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_boards_ch05_forsaken_bridge_v001",
+    "size_bytes": 2906621
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch05_forsaken_bridge_v002.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_boards_ch05_forsaken_bridge_v002",
+    "size_bytes": 2734025
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch06_ashen_estate_v001.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_boards_ch06_ashen_estate_v001",
+    "size_bytes": 2837596
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch07_first_eclipse_v001.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_boards_ch07_first_eclipse_v001",
+    "size_bytes": 2848305
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch07_first_eclipse_v002.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_boards_ch07_first_eclipse_v002",
+    "size_bytes": 2639617
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch07_first_eclipse_v003.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_boards_ch07_first_eclipse_v003",
+    "size_bytes": 2571534
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/design_cards.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_design_cards",
+    "size_bytes": 51385
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/index.html",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_index",
+    "size_bytes": 24279
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_1.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_provenance_generation_1",
+    "size_bytes": 3011
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_10.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_provenance_generation_10",
+    "size_bytes": 2140
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_2.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_provenance_generation_2",
+    "size_bytes": 2838
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_3.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_provenance_generation_3",
+    "size_bytes": 3077
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_4.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_provenance_generation_4",
+    "size_bytes": 3178
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_5.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_provenance_generation_5",
+    "size_bytes": 3217
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_6.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_provenance_generation_6",
+    "size_bytes": 3250
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_7.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_provenance_generation_7",
+    "size_bytes": 3416
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_8.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_provenance_generation_8",
+    "size_bytes": 2288
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/provenance/generation_9.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_provenance_generation_9",
+    "size_bytes": 2406
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/REPORT_TR.md",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_report_tr",
+    "size_bytes": 3873
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/asset_audit.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_asset_audit",
+    "size_bytes": 6799
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch01_native.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_native_ch01_native",
+    "size_bytes": 588151
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch02_native.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_native_ch02_native",
+    "size_bytes": 583230
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch03_native.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_native_ch03_native",
+    "size_bytes": 606382
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch04_native.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_native_ch04_native",
+    "size_bytes": 625216
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch05_native.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_native_ch05_native",
+    "size_bytes": 619446
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch06_native.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_native_ch06_native",
+    "size_bytes": 528501
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/native/ch07_native.png",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_native_ch07_native",
+    "size_bytes": 593352
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/native_result.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_native_result",
+    "size_bytes": 2189
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/native_review.gd.txt",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_native_review_gd",
+    "size_bytes": 5128
+  },
+  {
+    "path": "narrative/15_Art_Workbench/enemies/design_v001/validation/package_checks.json",
+    "node_id": "narrative_15_art_workbench_enemies_design_v001_validation_package_checks",
+    "size_bytes": 361
   },
   {
     "path": "narrative/15_Art_Workbench/full_game_review_v001/README.md",
