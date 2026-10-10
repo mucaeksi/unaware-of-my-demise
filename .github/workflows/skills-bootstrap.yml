@@ -8,6 +8,10 @@ on:
       - "tools/bootstrap_skills.py"
       - ".github/workflows/skills-bootstrap.yml"
 
+concurrency:
+  group: uomd-skills-main
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
@@ -39,5 +43,8 @@ jobs:
             echo "Nothing to commit"
           else
             git commit -m "chore: install vetted project skills from locked sources"
-            git push
+            # Do not overwrite newer README/source commits made while CI was running.
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi
