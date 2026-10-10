@@ -1,0 +1,71 @@
+name: Deploy Cloudflare environment
+# Deploys the game Worker (+static client) and the Control Center Worker to the DEV or STAGING Cloudflare
+# environment, applies D1 migrations and seeds data. Production is NOT deployable from here (owner approval).
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        type: choice
+        options: [staging, dev]
+        default: staging
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-${{ inputs.environment || 'staging' }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TARGET: ${{ inputs.environment || 'staging' }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || '0c942d198668a8b1a8e8ee699651b817' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check configuration (names only, never values)
+        run: |
+          if [ -z "${CLOUDFLARE_API_TOKEN}" ]; then
+            echo "::error::Missing GitHub secret CLOUDFLARE_API_TOKEN (see docs/SECRETS_AND_PERMISSIONS.md for the exact scopes)"; exit 1
+          fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build game client for this channel
+        run: npm run build -w @uomd/game
+        env:
+          VITE_CONTENT_CHANNEL: ${{ env.TARGET }}
+      - run: npm run build -w @uomd/admin
+      - name: Apply D1 migrations
+        working-directory: apps/api
+        run: npx wrangler d1 migrations apply DB --remote -c wrangler.game.jsonc --env "$TARGET"
+      - name: Seed characters (idempotent, keeps edited rows)
+        working-directory: apps/api
+        run: npx wrangler d1 execute DB --remote -c wrangler.game.jsonc --env "$TARGET" --file seed/characters.sql
+      - name: Deploy game Worker
+        id: game
+        working-directory: apps/api
+        run: npx wrangler deploy -c wrangler.game.jsonc --env "$TARGET" --keep-vars | tee "$RUNNER_TEMP/game.log"
+      - name: Deploy Control Center Worker
+        working-directory: apps/api
+        run: npx wrangler deploy -c wrangler.admin.jsonc --env "$TARGET" --keep-vars | tee "$RUNNER_TEMP/admin.log"
+      - name: Health check
+        run: |
+          url=$(grep -oE 'https://[a-zA-Z0-9.-]+\.workers\.dev' "$RUNNER_TEMP/game.log" | head -1)
+          echo "game: $url"
+          for i in 1 2 3 4 5 6; do
+            code=$(curl -s -o health.json -w '%{http_code}' "$url/api/v1/health" || true)
+            [ "$code" = "200" ] && break; sleep 5
+          done
+          cat health.json; echo
+          [ "$code" = "200" ]
+          echo "### Deployed $TARGET" >> "$GITHUB_STEP_SUMMARY"
+          echo "Game: $url" >> "$GITHUB_STEP_SUMMARY"

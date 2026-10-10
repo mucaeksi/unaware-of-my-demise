@@ -1,0 +1,76 @@
+name: CI
+on:
+  push:
+    branches: [main, "claude/**"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: lint, typecheck, unit + Workers tests, builds
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - name: Unit tests (combat, story, patch, schema) + Workers/D1/R2 tests (Miniflare) + game
+        run: npm test
+      - name: Build game and admin
+        run: |
+          npm run build -w @uomd/game
+          npm run build -w @uomd/admin
+
+  e2e:
+    name: browser end-to-end (real Phaser WebGL + Workers + D1 + R2 locally)
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e
+      - name: Keep screenshots and traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-evidence
+          path: |
+            .cache/e2e-shots
+            .cache/e2e-results
+          if-no-files-found: ignore
+          retention-days: 14
+
+  content-reproducible:
+    name: content builds reproducibly from narrative + approved legacy art (informational)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the approved legacy tutorial art is read from Git history
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build:content
+      - name: Committed content must equal rebuilt content
+        run: git diff --exit-code -- content
