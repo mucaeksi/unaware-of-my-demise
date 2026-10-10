@@ -180,3 +180,33 @@ export async function buildBackground(src: { legacy: string } | { repo: string }
 export function validateArt(manifest: unknown): ArtManifest {
   return ArtManifest.parse(manifest);
 }
+
+/** Removes a flat chroma-key green background (generator green screens) and returns trimmed WebP. */
+export async function buildKeyedImage(src: { legacy: string } | { repo: string }, maxWidth: number): Promise<{ bytes: Buffer; hash: string }> {
+  const buf = srcBuf(src);
+  const { data, info } = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i] as number, g = data[i + 1] as number, b = data[i + 2] as number;
+    const dominance = g - Math.max(r, b);
+    if (dominance > 40) {
+      const a = Math.max(0, Math.min(1, 1 - (dominance - 40) / 90));
+      data[i + 3] = Math.round((data[i + 3] as number) * a);
+      data[i + 1] = Math.min(g, Math.max(r, b)); // despill
+    }
+  }
+  const keyed = sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } });
+  const out = await keyed.trim({ threshold: 8 }).resize({ width: maxWidth, withoutEnlargement: true, kernel: 'lanczos3' }).webp({ quality: 88, alphaQuality: 95, effort: 5 }).toBuffer();
+  return { bytes: out, hash: sha256(buf) };
+}
+
+/** Key art with a baked alpha ramp on its left edge so it melts into any background. */
+export async function buildFadedKeyArt(src: { legacy: string } | { repo: string }, width: number): Promise<{ bytes: Buffer; hash: string }> {
+  const buf = srcBuf(src);
+  const resized = await sharp(buf).resize({ width, withoutEnlargement: true, kernel: 'lanczos3' }).ensureAlpha().png().toBuffer();
+  const meta = await sharp(resized).metadata();
+  const mask = Buffer.from(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${meta.width}" height="${meta.height}"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="1"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/></svg>`
+  );
+  const out = await sharp(resized).composite([{ input: mask, blend: 'dest-in' }]).webp({ quality: 84, alphaQuality: 90, effort: 5 }).toBuffer();
+  return { bytes: out, hash: sha256(buf) };
+}

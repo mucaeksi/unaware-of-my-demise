@@ -113,75 +113,75 @@
     },
     "atlas_bellbound_dead": {
       "image": "art/atlas_bellbound_dead.webp",
-      "width": 1687,
-      "height": 404,
+      "width": 1435,
+      "height": 344,
       "frames": {
         "basic": [
           2,
           2,
-          449,
-          400
+          381,
+          340
         ],
         "idle": [
-          453,
+          385,
           2,
-          229,
-          400
+          195,
+          340
         ],
         "active": [
-          684,
+          582,
           2,
-          391,
-          363
+          332,
+          309
         ],
         "hit": [
-          1077,
+          916,
           2,
-          298,
-          341
+          254,
+          290
         ],
         "defeat": [
-          1377,
+          1172,
           2,
-          308,
-          261
+          261,
+          222
         ]
       }
     },
     "atlas_hollow_pilgrim": {
       "image": "art/atlas_hollow_pilgrim.webp",
-      "width": 1793,
-      "height": 801,
+      "width": 1863,
+      "height": 384,
       "frames": {
         "basic": [
           2,
           2,
-          564,
-          440
+          487,
+          380
         ],
         "idle": [
-          568,
+          491,
           2,
-          321,
-          440
+          278,
+          380
         ],
         "hit": [
-          891,
+          771,
           2,
-          385,
-          430
+          333,
+          371
         ],
         "active": [
-          1278,
+          1106,
           2,
-          513,
-          381
+          443,
+          329
         ],
         "defeat": [
+          1551,
           2,
-          444,
-          359,
-          355
+          310,
+          307
         ]
       }
     }
@@ -300,7 +300,7 @@
     "bellbound_dead": {
       "atlas": "atlas_bellbound_dead",
       "facing": "left",
-      "height_px": 400,
+      "height_px": 340,
       "states": {
         "idle": {
           "frame": "idle",
@@ -355,7 +355,7 @@
     "hollow_pilgrim": {
       "atlas": "atlas_hollow_pilgrim",
       "facing": "left",
-      "height_px": 440,
+      "height_px": 380,
       "states": {
         "idle": {
           "frame": "idle",
@@ -452,5 +452,8 @@
       "duration_s": 101.777
     }
   },
-  "ui": {}
+  "ui": {
+    "logo": "art/ui_logo.webp",
+    "key_art": "art/ui_key_art.webp"
+  }
 }

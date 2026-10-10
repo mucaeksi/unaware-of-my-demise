@@ -11,6 +11,8 @@ import { ChapterIndex, type ArtManifest, type StoryScene, type UnitAnimState } f
 import { buildEncounter, buildScene, buildUnitPack, emotionsUsed, tutorialChapter } from './lib/data';
 import {
   buildBackground,
+  buildFadedKeyArt,
+  buildKeyedImage,
   buildPortrait,
   buildUnitAtlas,
   srcId,
@@ -67,7 +69,7 @@ const UNIT_ART: Record<string, UnitArtConfig> = {
   bellbound_dead: {
     artKey: 'bellbound_dead',
     facing: 'left',
-    heightPx: 400,
+    heightPx: 340,
     poses: sheetPoses(
       `${ENM}/bellbound_poses_v003.png`,
       [[157, 32, 373, 647], [592, 89, 633, 590], [95, 673, 485, 552], [737, 804, 500, 425]],
@@ -78,7 +80,7 @@ const UNIT_ART: Record<string, UnitArtConfig> = {
   hollow_pilgrim: {
     artKey: 'hollow_pilgrim',
     facing: 'left',
-    heightPx: 440,
+    heightPx: 380,
     poses: sheetPoses(
       `${ENM}/pilgrim_poses_v003.png`,
       [[128, 46, 412, 564], [543, 121, 657, 488], [119, 637, 493, 551], [761, 735, 461, 455]],
@@ -109,6 +111,11 @@ const PORTRAIT_FILES: Record<string, Record<string, { legacy: string } | { repo:
 
 const BG_FILES: Record<string, { legacy: string }> = {
   forest_whispering_ash: L('game/assets/backgrounds/forest_whispering_ash/side_arena_v001.png')
+};
+
+const UI_FILES = {
+  logo: { repo: 'narrative/14_References/recovered_locked_v001/logo/brand_logo_wordmark_r2_v003.png' },
+  key_art: { repo: 'narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003.png' }
 };
 
 const MUSIC_SRC = 'narrative/11_Audio_Cues/Music_Source/bgm_ch1_ash_forest';
@@ -208,7 +215,16 @@ async function main(): Promise<void> {
       provenance.push({ output: `${outDir}/${rel}`, sha256: sha256(bytes), sources: { [m.file]: sha256(bytes) } });
       music[cue] = { file: rel, loop_start_s: meta.engine_loop.loop_offset_s, duration_s: meta.file_length_s };
     }
-    return validateArt({ schema_version: 1, atlases, units, portraits, backgrounds, music, ui: {} });
+    const ui: ArtManifest['ui'] = {};
+    const logo = await buildKeyedImage(UI_FILES.logo, 1400);
+    writeOut(`${outDir}/art/ui_logo.webp`, logo.bytes);
+    provenance.push({ output: `${outDir}/art/ui_logo.webp`, sha256: sha256(logo.bytes), sources: { [srcId(UI_FILES.logo)]: logo.hash } });
+    ui.logo = 'art/ui_logo.webp';
+    const key = await buildFadedKeyArt(UI_FILES.key_art, 760);
+    writeOut(`${outDir}/art/ui_key_art.webp`, key.bytes);
+    provenance.push({ output: `${outDir}/art/ui_key_art.webp`, sha256: sha256(key.bytes), sources: { [srcId(UI_FILES.key_art)]: key.hash } });
+    ui.key_art = 'art/ui_key_art.webp';
+    return validateArt({ schema_version: 1, atlases, units, portraits, backgrounds, music, ui });
   }
 
   const putJson = (outDir: string, rel: string, value: unknown, sources: Record<string, string>): void => {

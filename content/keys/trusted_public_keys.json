@@ -1,0 +1,11 @@
+{
+  "keys": [
+    {
+      "kty": "EC",
+      "crv": "P-256",
+      "x": "y2Lg2DQgv8gvAizD36tQWJ_GLu8hutQLQDPRbP_7XkI",
+      "y": "g7_FNcDHTrTvQ29ZUyfTjPBoI5pbQPe4_VpT-voaejc",
+      "kid": "uomd-staging-2026-10"
+    }
+  ]
+}

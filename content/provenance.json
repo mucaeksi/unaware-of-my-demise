@@ -21,7 +21,7 @@
     },
     {
       "output": "content/base/art/atlas_bellbound_dead.webp",
-      "sha256": "9a375a78e713c381e53814e5c36893218b37eeb9060c8c5351886d8a9410b39d",
+      "sha256": "fc259f42d1641a163c66ca218bbd5750e89724109c3ca8e02dcd19e4ae0972cb",
       "sources": {
         "git:game/assets/enemies/tutorial/bellbound_poses_v003.png": "1af25ab7d903016bd81a98f4b72bffa3f3f716fe75f2768fd8f6c5ff836cedd1",
         "git:game/assets/enemies/tutorial/bellbound_attack_v003.png": "13ba8dc5e5dde64b157c854ba58c63358c2d86bc2e97a39b736683b64f586c2d"
@@ -98,8 +98,22 @@
       }
     },
     {
+      "output": "content/base/art/ui_logo.webp",
+      "sha256": "b84ad0324a510ab5604764cc64ef63e468cad8088d29c341c24949530f18efb8",
+      "sources": {
+        "narrative/14_References/recovered_locked_v001/logo/brand_logo_wordmark_r2_v003.png": "c4a87503d53d5aab2d058f91cc988dd317baf728c093a80281a71988a8e8e4eb"
+      }
+    },
+    {
+      "output": "content/base/art/ui_key_art.webp",
+      "sha256": "4eb31eb391369b4dca9d83ad8a8939811303e33385e831387127f63fb37411f1",
+      "sources": {
+        "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003.png": "58c54af2d268ce663542960950aace744286c7c4cf5d85b77a814134e3156176"
+      }
+    },
+    {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "0d975aa35dfc21398473e7aa018b9721ee5f61460838bc30e09a152e4391b855",
+      "sha256": "e21ce58901467bec58cb830fb6adb2f95f4744ed4a5c1198311241bc5a661d5a",
       "sources": {}
     },
     {
@@ -154,7 +168,7 @@
     },
     {
       "output": "content/patches/rel_0002_road_forgotten/art/atlas_bellbound_dead.webp",
-      "sha256": "9a375a78e713c381e53814e5c36893218b37eeb9060c8c5351886d8a9410b39d",
+      "sha256": "fc259f42d1641a163c66ca218bbd5750e89724109c3ca8e02dcd19e4ae0972cb",
       "sources": {
         "git:game/assets/enemies/tutorial/bellbound_poses_v003.png": "1af25ab7d903016bd81a98f4b72bffa3f3f716fe75f2768fd8f6c5ff836cedd1",
         "git:game/assets/enemies/tutorial/bellbound_attack_v003.png": "13ba8dc5e5dde64b157c854ba58c63358c2d86bc2e97a39b736683b64f586c2d"
@@ -162,7 +176,7 @@
     },
     {
       "output": "content/patches/rel_0002_road_forgotten/art/atlas_hollow_pilgrim.webp",
-      "sha256": "7d986660137a8bc2cc7cdecfb924e7bc171ae5b170c47b959499eff545afdaab",
+      "sha256": "d7539d3c55d14d9af32c23e2517cb0aad809e90602dc37ac3aa8b45ce827236c",
       "sources": {
         "git:game/assets/enemies/tutorial/pilgrim_poses_v003.png": "165cb66e91dc324b177040d2a0f1b7b92917e47b2f64d0b3f1e55c0e805b5c56",
         "git:game/assets/enemies/tutorial/pilgrim_attack_v003.png": "0f4dae03ed7f3f9ef3263aefe493912c589d2c195b93fc79f13a3483a84437a0"
@@ -239,8 +253,22 @@
       }
     },
     {
+      "output": "content/patches/rel_0002_road_forgotten/art/ui_logo.webp",
+      "sha256": "b84ad0324a510ab5604764cc64ef63e468cad8088d29c341c24949530f18efb8",
+      "sources": {
+        "narrative/14_References/recovered_locked_v001/logo/brand_logo_wordmark_r2_v003.png": "c4a87503d53d5aab2d058f91cc988dd317baf728c093a80281a71988a8e8e4eb"
+      }
+    },
+    {
+      "output": "content/patches/rel_0002_road_forgotten/art/ui_key_art.webp",
+      "sha256": "4eb31eb391369b4dca9d83ad8a8939811303e33385e831387127f63fb37411f1",
+      "sources": {
+        "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003.png": "58c54af2d268ce663542960950aace744286c7c4cf5d85b77a814134e3156176"
+      }
+    },
+    {
       "output": "content/patches/rel_0002_road_forgotten/art/art_manifest.json",
-      "sha256": "e0254aa8718e60f305a3846cbfc7d1099059ec3fd2b7ee59d009ea7d28c01708",
+      "sha256": "856fce56edf900d87ae525ac0ce4c2fd7780483a947d8f64f59241b9f3780670",
       "sources": {}
     },
     {

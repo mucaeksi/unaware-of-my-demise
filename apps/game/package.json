@@ -1,0 +1,27 @@
+{
+  "name": "@uomd/game",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/sync-content.mjs && vite",
+    "build": "node scripts/sync-content.mjs && tsc -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "sync:content": "node scripts/sync-content.mjs"
+  },
+  "dependencies": {
+    "@fontsource/cinzel": "5.2.8",
+    "@fontsource/cormorant-garamond": "5.2.11",
+    "@uomd/combat": "*",
+    "@uomd/content-schema": "*",
+    "@uomd/patch": "*",
+    "@uomd/shared": "*",
+    "@uomd/story": "*",
+    "phaser": "4.2.1"
+  },
+  "devDependencies": {
+    "vite": "7.3.7"
+  }
+}

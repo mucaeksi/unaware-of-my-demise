@@ -113,38 +113,38 @@
     },
     "atlas_bellbound_dead": {
       "image": "art/atlas_bellbound_dead.webp",
-      "width": 1687,
-      "height": 404,
+      "width": 1435,
+      "height": 344,
       "frames": {
         "basic": [
           2,
           2,
-          449,
-          400
+          381,
+          340
         ],
         "idle": [
-          453,
+          385,
           2,
-          229,
-          400
+          195,
+          340
         ],
         "active": [
-          684,
+          582,
           2,
-          391,
-          363
+          332,
+          309
         ],
         "hit": [
-          1077,
+          916,
           2,
-          298,
-          341
+          254,
+          290
         ],
         "defeat": [
-          1377,
+          1172,
           2,
-          308,
-          261
+          261,
+          222
         ]
       }
     }
@@ -263,7 +263,7 @@
     "bellbound_dead": {
       "atlas": "atlas_bellbound_dead",
       "facing": "left",
-      "height_px": 400,
+      "height_px": 340,
       "states": {
         "idle": {
           "frame": "idle",
@@ -360,5 +360,8 @@
       "duration_s": 101.777
     }
   },
-  "ui": {}
+  "ui": {
+    "logo": "art/ui_logo.webp",
+    "key_art": "art/ui_key_art.webp"
+  }
 }

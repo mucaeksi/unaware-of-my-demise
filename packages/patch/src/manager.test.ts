@@ -1,0 +1,244 @@
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import { beforeAll, describe, expect, it } from 'vitest';
+import type { ContentManifest, ManifestFile } from '@uomd/content-schema';
+import { generateSigningKeyPair, importPrivateKey, sha256Hex, type PublicKeyJwk } from '@uomd/shared';
+import { MemoryStorage, PatchManager, buildManifest, signManifest, type BaseContent, type PatchEnv, type RemoteSource } from './index';
+
+const ROOT = new URL('../../../content/', import.meta.url).pathname;
+const walk = (dir: string, rel = ''): string[] =>
+  readdirSync(join(dir, rel)).flatMap((n) => {
+    const r = rel ? `${rel}/${n}` : n;
+    return statSync(join(dir, r)).isDirectory() ? walk(dir, r) : [r];
+  });
+const load = (dir: string): { path: string; bytes: Uint8Array }[] => walk(dir).map((p) => ({ path: p, bytes: new Uint8Array(readFileSync(join(dir, p))) }));
+
+let publicJwk: PublicKeyJwk;
+let privateKey: CryptoKey;
+let otherPublic: PublicKeyJwk;
+let baseFiles: { path: string; bytes: Uint8Array }[];
+let patchFiles: { path: string; bytes: Uint8Array }[];
+let base: BaseContent;
+
+beforeAll(async () => {
+  const kp = await generateSigningKeyPair();
+  publicJwk = { ...(kp.publicJwk as PublicKeyJwk), kid: 'test-1' };
+  privateKey = await importPrivateKey(kp.privateJwk);
+  otherPublic = { ...((await generateSigningKeyPair()).publicJwk as PublicKeyJwk), kid: 'test-1' };
+  baseFiles = load(join(ROOT, 'base'));
+  patchFiles = load(join(ROOT, 'patches/rel_0002_road_forgotten'));
+  const hashes: Record<string, string> = {};
+  for (const f of baseFiles) hashes[f.path] = await sha256Hex(f.bytes);
+  base = {
+    releaseId: 'rel_0001',
+    generation: 1,
+    files: hashes,
+    read: async (p) => {
+      const f = baseFiles.find((x) => x.path === p);
+      if (!f) throw new Error(`base has no ${p}`);
+      return f.bytes;
+    }
+  };
+});
+
+async function signedPatch(over: Partial<Parameters<typeof buildManifest>[0]> = {}, files = patchFiles): Promise<ContentManifest> {
+  const m = await buildManifest(
+    { releaseId: 'rel_0002', generation: 2, channel: 'staging', notes: 'test', minClient: '0.1.0', dependsOn: { releaseId: 'rel_0001', generation: 1 }, ...over },
+    files
+  );
+  return signManifest(m, privateKey, 'test-1');
+}
+
+class FakeRemote implements RemoteSource {
+  fetched: string[] = [];
+  failFirst = new Map<string, number>();
+  corrupt = new Set<string>();
+  offline = false;
+  constructor(public manifest: unknown, private readonly objects: Map<string, Uint8Array>) {}
+  async fetchManifest(): Promise<unknown | null> {
+    if (this.offline) throw new Error('network down');
+    return this.manifest;
+  }
+  async fetchObject(sha: string, f: ManifestFile): Promise<Uint8Array> {
+    this.fetched.push(f.path);
+    const left = this.failFirst.get(sha) ?? 0;
+    if (left > 0) {
+      this.failFirst.set(sha, left - 1);
+      throw new Error('connection reset');
+    }
+    const bytes = this.objects.get(sha);
+    if (!bytes) throw new Error('404');
+    if (this.corrupt.has(sha)) {
+      const c = new Uint8Array(bytes);
+      c[0] = (c[0] ?? 0) ^ 0xff;
+      return c;
+    }
+    return bytes;
+  }
+}
+
+async function objectsOf(files: { path: string; bytes: Uint8Array }[]): Promise<Map<string, Uint8Array>> {
+  const m = new Map<string, Uint8Array>();
+  for (const f of files) m.set(await sha256Hex(f.bytes), f.bytes);
+  return m;
+}
+
+const env = (over: Partial<PatchEnv> = {}): PatchEnv => ({
+  channel: 'staging',
+  clientVersion: '0.1.0',
+  supportedContentSchema: 1,
+  trustedKeys: [publicJwk],
+  installId: 'install-a',
+  storageBudgetBytes: 50 * 1024 * 1024,
+  validate: () => undefined,
+  sleep: async () => undefined,
+  ...over
+});
+
+async function setup(over: Partial<PatchEnv> = {}, manifestOver: Parameters<typeof signedPatch>[0] = {}) {
+  const manifest = await signedPatch(manifestOver);
+  const remote = new FakeRemote(manifest, await objectsOf(patchFiles));
+  const storage = new MemoryStorage();
+  const pm = new PatchManager(env(over), storage, remote, base);
+  return { manifest, remote, storage, pm };
+}
+
+describe('PatchManager', () => {
+  it('applies a signed patch, downloads only missing bytes, and serves patched files through the overlay', async () => {
+    const { pm, remote, storage } = await setup();
+    const out = await pm.checkAndApply();
+    expect(out).toMatchObject({ status: 'applied', releaseId: 'rel_0002', generation: 2 });
+    // files byte-identical to the base (e.g. unchanged atlases) are never downloaded
+    expect(remote.fetched.every((p) => patchFiles.some((f) => f.path === p))).toBe(true);
+    expect((await storage.getState())?.active?.releaseId).toBe('rel_0002');
+    const idx = JSON.parse(new TextDecoder().decode(await pm.read('chapters/chapter_index.json')));
+    expect(idx.chapters[0].nodes.map((n: { node_id: string }) => n.node_id)).toEqual(['t1', 't2']);
+    // a path the patch does not touch still comes from the embedded base
+    expect((await pm.read('audio/bgm_ch1_ash_forest_calm.ogg')).byteLength).toBeGreaterThan(1000);
+    expect((await pm.checkAndApply()).status).toBe('up_to_date');
+  });
+
+  it('rejects a manifest with a bad or untrusted signature and leaves state untouched', async () => {
+    const { pm, storage } = await setup({ trustedKeys: [otherPublic] });
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'bad_signature' });
+    expect(await storage.getState()).toBeNull();
+  });
+
+  it('rejects tampered manifest contents (signature no longer matches)', async () => {
+    const { manifest, storage } = await setup();
+    const tampered = structuredClone(manifest) as ContentManifest;
+    tampered.release.notes = 'evil';
+    const pm = new PatchManager(env(), storage, new FakeRemote(tampered, await objectsOf(patchFiles)), base);
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'bad_signature' });
+  });
+
+  it('rejects unsigned manifests and malformed/hostile paths', async () => {
+    const m = await buildManifest({ releaseId: 'rel_0002', generation: 2, channel: 'staging', notes: 'x', minClient: '0.1.0' }, patchFiles);
+    const storage = new MemoryStorage();
+    const unsigned = new PatchManager(env(), storage, new FakeRemote(m, new Map()), base);
+    expect(await unsigned.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'bad_signature' });
+    const hostile = structuredClone(m) as ContentManifest;
+    (hostile.files[0] as ManifestFile).path = '../../escape.json';
+    const pm = new PatchManager(env(), storage, new FakeRemote(hostile, new Map()), base);
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'malformed_manifest' });
+  });
+
+  it('retries a flaky download and finishes; a persistently corrupted object is rejected with hash_mismatch', async () => {
+    const flaky = await setup();
+    const some = flaky.manifest.files.find((f) => f.path === 'story/tutorial_t2_before.json') as ManifestFile;
+    flaky.remote.failFirst.set(some.sha256, 2);
+    expect((await flaky.pm.checkAndApply()).status).toBe('applied');
+
+    const bad = await setup();
+    const target = bad.manifest.files.find((f) => f.path === 'encounters/tutorial_t2.json') as ManifestFile;
+    bad.remote.corrupt.add(target.sha256);
+    expect(await bad.pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'hash_mismatch' });
+    expect((await bad.storage.getState())?.active ?? null).toBeNull();
+    // the corrupt object was never stored
+    expect(await bad.storage.hasObject(target.sha256)).toBe(false);
+  });
+
+  it('resumes after an interruption: objects already stored are not downloaded again', async () => {
+    const first = await setup();
+    const last = first.manifest.files[first.manifest.files.length - 1] as ManifestFile;
+    first.remote.failFirst.set(last.sha256, 99);
+    expect(await first.pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'download_failed' });
+    const stored = (await first.storage.listObjects()).length;
+    expect(stored).toBeGreaterThan(0);
+    first.remote.failFirst.clear();
+    first.remote.fetched.length = 0;
+    expect((await first.pm.checkAndApply()).status).toBe('applied');
+    expect(first.remote.fetched.length).toBeLessThan(first.manifest.files.length);
+  });
+
+  it('enforces compatibility: client range, channel, content schema, dependency', async () => {
+    expect(await (await setup({ clientVersion: '0.0.9' })).pm.checkAndApply()).toMatchObject({ reason: 'client_too_old' });
+    expect(await (await setup({ clientVersion: '2.0.0' }, { maxClient: '1.9.9' })).pm.checkAndApply()).toMatchObject({ reason: 'client_too_new' });
+    expect(await (await setup({}, { channel: 'dev' })).pm.checkAndApply()).toMatchObject({ reason: 'wrong_channel' });
+    expect(await (await setup({}, { contentSchema: 2 })).pm.checkAndApply()).toMatchObject({ reason: 'schema_too_new' });
+    expect(await (await setup({}, { dependsOn: { releaseId: 'rel_9999', generation: 1 } })).pm.checkAndApply()).toMatchObject({ reason: 'dependency_mismatch' });
+  });
+
+  it('refuses downgrades (generation must increase) and a patch over the storage budget', async () => {
+    const stale = await setup({}, { generation: 1, dependsOn: undefined });
+    expect(await stale.pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'stale_generation' });
+    const big = await setup({ storageBudgetBytes: 100 });
+    expect(await big.pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'storage_budget' });
+  });
+
+  it('semantic validation failure keeps the old release and denies the new one for this device', async () => {
+    const { pm, storage } = await setup({
+      validate: () => {
+        throw new Error('encounter references unknown unit');
+      }
+    });
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'validation_failed' });
+    const st = await storage.getState();
+    expect(st?.active).toBeNull();
+    expect(st?.denied).toContain('rel_0002');
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'denied_release' });
+  });
+
+  it('offline: reports offline and keeps serving the active release', async () => {
+    const { pm, remote } = await setup();
+    await pm.checkAndApply();
+    remote.offline = true;
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'offline' });
+    expect((await pm.read('chapters/chapter_index.json')).byteLength).toBeGreaterThan(10);
+  });
+
+  it('percentage rollout buckets by install id deterministically', async () => {
+    let applied = 0;
+    for (let i = 0; i < 40; i++) {
+      const { pm } = await setup({ installId: `device-${i}` }, { rolloutPercent: 50 });
+      if ((await pm.checkAndApply()).status === 'applied') applied++;
+    }
+    expect(applied).toBeGreaterThan(8);
+    expect(applied).toBeLessThan(32);
+    const zero = await setup({}, { rolloutPercent: 0 });
+    expect((await zero.pm.checkAndApply()).status).toBe('up_to_date');
+  });
+
+  it('kill switch returns the device to the embedded base; rollback restores the previous release', async () => {
+    const { pm, storage, remote } = await setup();
+    await pm.checkAndApply();
+    const kill = await signedPatch({ generation: 3, killSwitch: true });
+    remote.manifest = kill;
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'reverted_to_base' });
+    expect((await storage.getState())?.active).toBeNull();
+    const idx = JSON.parse(new TextDecoder().decode(await pm.read('chapters/chapter_index.json')));
+    expect(idx.chapters[0].nodes).toHaveLength(1); // base index again
+  });
+
+  it('rolls back to the previous release when a stored object is corrupted on disk', async () => {
+    const { pm, storage } = await setup();
+    await pm.checkAndApply();
+    const st = await storage.getState();
+    const victim = st?.active?.manifest.files.find((f) => f.path === 'chapters/chapter_index.json') as ManifestFile;
+    await storage.putObject(victim.sha256, new TextEncoder().encode('{"tampered":true}'));
+    const bytes = await pm.read('chapters/chapter_index.json'); // detects, rolls back, serves base
+    expect(JSON.parse(new TextDecoder().decode(bytes)).chapters[0].nodes).toHaveLength(1);
+    expect((await storage.getState())?.active).toBeNull();
+    expect((await storage.getState())?.denied).toContain('rel_0002');
+  });
+});
