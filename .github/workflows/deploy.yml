@@ -9,6 +9,10 @@ on:
         type: choice
         options: [staging, dev]
         default: staging
+      bootstrap_signing_key:
+        description: "REPLACES the content-signing key of that environment (private half stays in the Worker secret, public half is printed). Staging only."
+        type: boolean
+        default: false
   push:
     branches: [main]
 
@@ -101,3 +105,36 @@ jobs:
             .cache/e2e-remote-results
           if-no-files-found: ignore
           retention-days: 14
+
+  signing-key:
+    name: replace the content-signing key (explicit opt-in)
+    needs: deploy
+    if: ${{ inputs.bootstrap_signing_key == true && inputs.environment == 'staging' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TARGET: ${{ inputs.environment }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || '0c942d198668a8b1a8e8ee699651b817' }}
+    steps:
+      # Generates the ES256 pair INSIDE this job and stores the private half only as the Worker secret CONTENT_SIGNING_KEY of
+      # uomd-admin-<env>: never printed, never uploaded, never written into the repository. Only the PUBLIC key is printed;
+      # commit it to content/keys/trusted_public_keys.json (clients trust a signature only if that key is embedded in the build),
+      # then redeploy the game. Rotate in production by adding a second kid instead of replacing one.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Generate key, store private half as Worker secret, print public half
+        run: |
+          set -euo pipefail
+          kid=$(grep -A4 "\"$TARGET\": {" apps/api/wrangler.admin.jsonc | grep -oE '"CONTENT_SIGNING_KID": "[^"]+"' | head -1 | cut -d'"' -f4)
+          [ -n "$kid" ] || { echo "::error::could not read CONTENT_SIGNING_KID for $TARGET"; exit 1; }
+          dir=$(mktemp -d)
+          npx tsx tools/gen_signing_key.ts --kid "$kid" --out "$dir" > /dev/null
+          npx wrangler secret put CONTENT_SIGNING_KEY --env "$TARGET" -c apps/api/wrangler.admin.jsonc < "$dir/$kid.private.jwk.json" > /dev/null
+          shred -u "$dir/$kid.private.jwk.json" 2>/dev/null || rm -f "$dir/$kid.private.jwk.json"
+          echo "Secret CONTENT_SIGNING_KEY updated for uomd-admin-$TARGET (kid $kid). PUBLIC key (safe to commit):"
+          node -e "const k=require('./content/keys/trusted_public_keys.json').keys.filter(x=>x.kid===process.argv[1]).pop(); console.log('PUBLIC_KEY_JSON ' + JSON.stringify(k))" "$kid"

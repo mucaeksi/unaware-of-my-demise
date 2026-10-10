@@ -33,8 +33,8 @@ First admin: add a row to `admin_users` (owner) — see `docs/ARCHITECTURE.md` �
 **Status: not set yet** (`GET /admin/api/health` on staging reports `signing_configured:false`). An earlier note here claimed it was
 already uploaded; that was wrong — the Worker did not exist until the first deploy. The key pair generated in the first session
 lives only in that session's scratch space and is **abandoned** (nothing was ever signed with it).
-Preferred way, with no human handling of the private key: run the GitHub workflow **Bootstrap content signing key**
-(`bootstrap-signing-key.yml`, staging, confirm `REPLACE`). It generates the pair inside the job, stores the private half only as the Worker
+Preferred way, with no human handling of the private key: run the GitHub workflow **Deploy** (`deploy.yml`) for `staging` with the
+boolean input `bootstrap_signing_key` ticked (job `signing-key`, runs after the deploy). It generates the pair inside the job, stores the private half only as the Worker
 secret (never printed, never uploaded, never in the repository) and prints the **public** key, which must then be committed to
 `content/keys/trusted_public_keys.json` (replacing the `uomd-staging-2026-10` entry) before the next game deploy, because clients
 trust a manifest signature only if that public key is embedded in the build.
