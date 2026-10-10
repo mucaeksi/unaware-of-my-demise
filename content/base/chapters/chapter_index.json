@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "chapters": [
+    {
+      "chapter_id": "tutorial",
+      "title_en": "Before the Road",
+      "nodes": [
+        {
+          "node_id": "t1",
+          "title_en": "The First Step",
+          "kind": "battle",
+          "encounter": "encounters/tutorial_t1.json"
+        }
+      ]
+    }
+  ]
+}

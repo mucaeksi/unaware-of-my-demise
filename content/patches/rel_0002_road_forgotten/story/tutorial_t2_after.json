@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "scene_id": "tutorial_t2_after",
+  "title_en": "A Road Forgotten",
+  "location_id": "forest_whispering_ash",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "bgm_ch1_ash_forest_calm"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.8
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t2_after_001",
+      "text": "Beyond the narrow path, a fallen stone offered a seat. Mahmut checked the trees before he sat.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Sit. The trees have survived your inspection.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "This strap needs tightening.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then hold still. Even your armour is asking for a rest.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t2_after_005",
+      "text": "She drew his wrist toward her and threaded the loose leather through its buckle.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_006",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "I can do that.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_007",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I know. You can also let me.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t2_after_008",
+      "text": "He watched her fingers instead of the trees. She kept her eyes on the strap a little longer than necessary.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_009",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Too tight?",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_010",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You are supposed to answer that.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_011",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "No.",
+      "emotion": "dry_humor",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_012",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A wonderfully detailed report.",
+      "emotion": "soft_smile",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_013",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "The buckle is sound. The work is good.",
+      "emotion": "dry_humor",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_014",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Careful. Another sentence and I might mistake that for a compliment.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_015",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "It was one.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t2_after_016",
+      "text": "She smiled down at the finished knot. He looked away first, but not quickly.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_017",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "There. Your turn to be looked after.",
+      "emotion": "soft_smile",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_after_018",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We should do that more evenly.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tutorial_t2_after_done"
+    },
+    {
+      "op": "fade",
+      "direction": "out",
+      "seconds": 0.6
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2.after",
+    "source_sha256": "d5419c8bd76f5c75e4c70e116fa97cdd97dfa8e158c852c7c96a988980bbce81"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "encounter_id": "tutorial_t1",
+  "stage_id": "T-1",
+  "title_en": "The First Step",
+  "location_id": "forest_whispering_ash",
+  "seed": 81008,
+  "music_cue": "bgm_ch1_ash_forest_chaotic",
+  "party": [
+    {
+      "unit_id": "mahmut",
+      "level": 1,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "fadyme",
+      "level": 1,
+      "slot": 1,
+      "row": "rear"
+    }
+  ],
+  "enemies": [
+    {
+      "unit_id": "bellbound_dead",
+      "level": 1,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "bellbound_dead",
+      "level": 1,
+      "slot": 1,
+      "row": "front"
+    }
+  ],
+  "pre_story": "story/tutorial_t1_before.json",
+  "post_story": "story/tutorial_t1_after.json",
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-1",
+    "source_sha256": "d5419c8bd76f5c75e4c70e116fa97cdd97dfa8e158c852c7c96a988980bbce81"
+  }
+}

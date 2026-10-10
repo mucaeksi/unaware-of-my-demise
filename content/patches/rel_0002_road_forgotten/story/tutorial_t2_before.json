@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "scene_id": "tutorial_t2_before",
+  "title_en": "A Road Forgotten",
+  "location_id": "forest_whispering_ash",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "bgm_ch1_ash_forest_calm"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.8
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t2_before_001",
+      "text": "Where the path narrowed, a lone pilgrim dragged one foot around the same worn stones.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_before_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "It has crossed this patch three times.",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_before_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Perhaps the road used to end here.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_before_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "It does not end here now.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_before_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "No. Someone ought to tell it.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t2_before_006",
+      "text": "For a moment she watched the empty movement without speaking. Mahmut did not hurry her.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_before_007",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Do you ever wonder where they meant to go?",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_before_008",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Sometimes.",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_before_009",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I would rather we reached somewhere ordinary. With an especially ordinary supper.",
+      "emotion": "soft_smile",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_before_010",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "That can be arranged.",
+      "emotion": "dry_humor",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t2_before_011",
+      "text": "The pilgrim stopped. Its head turned toward them.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_before_012",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "It has seen us. Keep room to move.",
+      "emotion": "protective",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t2_before_013",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "And you keep room for me.",
+      "emotion": "determined",
+      "hold_seconds": 3
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tutorial_t2_before_done"
+    },
+    {
+      "op": "fade",
+      "direction": "out",
+      "seconds": 0.6
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2.before",
+    "source_sha256": "d5419c8bd76f5c75e4c70e116fa97cdd97dfa8e158c852c7c96a988980bbce81"
+  }
+}

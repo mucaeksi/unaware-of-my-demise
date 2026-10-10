@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "scene_id": "tutorial_t1_before",
+  "title_en": "The First Step",
+  "location_id": "forest_whispering_ash",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "bgm_ch1_ash_forest_calm"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.8
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t1_before_001",
+      "text": "The last light lay between the trees. Their footsteps had almost found the same rhythm.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Keep to the stones. The mud gets deeper ahead.",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "The stones have already claimed one boot.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Both boots are still with us.",
+      "emotion": "dry_humor",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You have a comforting way of counting disasters.",
+      "emotion": "soft_smile",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_006",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "That one is loose. Give me your hand.",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_007",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "For the stone, or for the whole road?",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_008",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "The stone first.",
+      "emotion": "dry_humor",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t1_before_009",
+      "text": "She took his hand. On the other side, neither let go quite as promptly as the crossing required.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_010",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "There. An excellent rescue. Very little applause, unfortunately.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_011",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We can live with that.",
+      "emotion": "dry_humor",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t1_before_012",
+      "text": "Something scraped across the stones ahead. Mahmut turned before she could make another remark.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_013",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Two of them. Stay beside the wall.",
+      "emotion": "protective",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_before_014",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Beside it. Not behind you. I know the difference.",
+      "emotion": "determined",
+      "hold_seconds": 3
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tutorial_t1_before_done"
+    },
+    {
+      "op": "fade",
+      "direction": "out",
+      "seconds": 0.6
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-1.before",
+    "source_sha256": "d5419c8bd76f5c75e4c70e116fa97cdd97dfa8e158c852c7c96a988980bbce81"
+  }
+}
