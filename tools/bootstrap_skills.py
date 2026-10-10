@@ -85,7 +85,7 @@ def install_cloudflare_security_skill(archive: Path) -> int:
                + approved_commit + "/skills/security-audit/" + name)
         with urlopen(Request(url, headers={"User-Agent":"UOMD-locked-bootstrap"}),timeout=35) as response:
             data = response.read(meta["size"] + 1)
-        blob = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\\0" + data).hexdigest()
+        blob = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
         if len(data) != meta["size"] or blob != meta["git_blob_sha1"]:
             raise RuntimeError("Cloudflare security-audit integrity mismatch: " + name)
         write_safe(target / name, data)
