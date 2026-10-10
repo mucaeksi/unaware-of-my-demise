@@ -92,12 +92,12 @@ func test_long_hub_menu_scrolls_to_the_focused_last_action() -> void:
 	hub.theme = UiTheme.create()
 	add_child_autofree(hub)
 	var entries: Array[Dictionary] = []
-	# The real hub can offer eleven actions, including Inn Meal and debug Diagnostics.
-	for index: int in range(11):
+	# Overflow a two-column hub even at the full portrait reference size.
+	for index: int in range(31):
 		entries.append({"id": str(index), "label": "Menu action %d" % index})
 	hub.load_hub("", entries)
 	await wait_process_frames(3)
-	var last: Button = hub._buttons["10"]
+	var last: Button = hub._buttons["30"]
 	last.grab_focus()
 	await wait_process_frames(3)
 	var scroll: ScrollContainer = hub._menu.get_parent() as ScrollContainer

@@ -14,6 +14,7 @@ var art_size: float = ART_SIZE
 var max_visual_width: float = INF
 var is_objective: bool = false
 var card: UnitCard = null
+var _locomotion: AnimatedSprite2D
 var _sprite: Sprite2D = null
 var _fallback: Label = null
 var _motion: Tween = null
@@ -38,6 +39,13 @@ func _build(view: BattlePlayback.UnitView) -> void:
 	_sprite = Sprite2D.new()
 	_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	add_child(_sprite)
+	var locomotion_path: String = str(BattleArt.actor_data(art_id).get("locomotion", ""))
+	if not locomotion_path.is_empty():
+		_locomotion = AnimatedSprite2D.new()
+		_locomotion.sprite_frames = load(locomotion_path) as SpriteFrames
+		_locomotion.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		_locomotion.centered = false
+		add_child(_locomotion)
 	_hit_fx = HitFx.new()
 	_hit_fx.name = "ImpactFx"
 	_hit_fx.position = Vector2(0, -80)
@@ -56,6 +64,7 @@ func _build(view: BattlePlayback.UnitView) -> void:
 	refresh(view)
 
 func _ready() -> void:
+	_set_pose(animation_state)
 	call_deferred("_fit_hud")
 
 func _fit_hud() -> void:
@@ -67,7 +76,7 @@ func _fit_hud() -> void:
 func _process(delta: float) -> void:
 	_clock += delta * _pace
 	_fx = maxf(0.0, _fx - delta * _pace * 1.7)
-	if animation_state == "idle" and _sprite.texture != null:
+	if animation_state == "idle" and _sprite.texture != null and not UiPageTransition.reduced_for(self) and (_locomotion == null or not _locomotion.visible):
 		var scalar: float = _render_size() / _sprite.texture.get_height()
 		var breath: float = 1.0 + sin(_clock * 2.1) * 0.009
 		_sprite.scale = Vector2(scalar, scalar * breath)
@@ -102,10 +111,21 @@ func _draw() -> void:
 
 func _set_pose(state: String) -> void:
 	animation_state = state
+	if _locomotion != null:
+		_locomotion.visible = state in ["idle", "walk"] and not UiPageTransition.reduced_for(self)
+		if _locomotion.visible:
+			_locomotion.play(state)
+			_locomotion.speed_scale = _pace
+			_locomotion.flip_h = not facing_right
+			var frame_scale: float = art_size / 350.0
+			_locomotion.scale = Vector2.ONE * frame_scale
+			_locomotion.position = Vector2(-180.0, -347.0) * frame_scale
+		else:
+			_locomotion.stop()
 	var art: AtlasTexture = BattleArt.pose(art_id, state)
 	_sprite.texture = art
 	_sprite.rotation = 0.0
-	_sprite.visible = art != null
+	_sprite.visible = art != null and (_locomotion == null or not _locomotion.visible)
 	_fallback.visible = art == null and not is_objective
 	if art == null:
 		_fallback.position = Vector2(-art_size * 0.25, -art_size * 0.8)
@@ -138,6 +158,10 @@ func animate(state: String, pace: float = 1.0, return_to_idle: bool = true) -> v
 	if not alive and state != "defeat":
 		return
 	set_pace(pace)
+	if UiPageTransition.reduced_for(self):
+		_cancel_motion()
+		_set_pose(state)
+		return
 	if state == "hit" and _hit_fx != null:
 		_hit_fx.position.y = -art_size * 0.42
 		_hit_fx.burst(art_size / ART_SIZE, pace)
@@ -198,6 +222,7 @@ func animate(state: String, pace: float = 1.0, return_to_idle: bool = true) -> v
 
 func set_pace(value: float) -> void:
 	_pace = maxf(0.01,value)
+	if _locomotion != null: _locomotion.speed_scale = _pace
 	if _hit_fx != null: _hit_fx.set_pace(_pace)
 	if _motion != null and _motion.is_valid(): _motion.set_speed_scale(_pace)
 	if _reaction != null and _reaction.is_valid(): _reaction.set_speed_scale(_pace)

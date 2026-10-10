@@ -768,9 +768,9 @@
     "semantic_hash": ""
   },
   "game/data/presentation/battle_art_v001.json": {
-    "mtime": 1791559930.3902926,
-    "seen": 1791566411.8412411,
-    "ast_hash": "b52b6ca94b14d29a7baa7a8aba8f8ef1",
+    "mtime": 1791568013.3241093,
+    "seen": 1791570447.3270514,
+    "ast_hash": "308e9eab5d13fda52b22edd38cef462c",
     "semantic_hash": ""
   },
   "game/data/stable_ids.lock.json": {
@@ -6048,15 +6048,15 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1791566455.7128308,
-    "seen": 1791566616.2420297,
-    "ast_hash": "8320f620ccecfddd313e752e98373090",
+    "mtime": 1791567714.4244998,
+    "seen": 1791570447.3565416,
+    "ast_hash": "727780f3f4e38ad00794baec1c3de13b",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1791566456.2168245,
-    "seen": 1791566616.2420309,
-    "ast_hash": "896846b657a8f987bda29ced315513f9",
+    "mtime": 1791567714.4247472,
+    "seen": 1791570447.356543,
+    "ast_hash": "60466537f57b34de3340a6de27d6bd81",
     "semantic_hash": ""
   },
   "GAME_TOOLCHAIN.md": {
@@ -6084,9 +6084,9 @@
     "semantic_hash": ""
   },
   "THIRD_PARTY_NOTICE.md": {
-    "mtime": 1791559926.4875782,
-    "seen": 1791566411.8423083,
-    "ast_hash": "36f6c8e0a88e8bbd6404dc3e291fae42",
+    "mtime": 1791604487.058813,
+    "seen": 1791604490.4265888,
+    "ast_hash": "e16f6b4fa3a3832c1d9f57fa23ed44c5",
     "semantic_hash": ""
   },
   "UOMD_FRAMEWORK_MANIFEST.md": {
@@ -19117,13 +19117,13 @@
   },
   ".local/migration-20261008/copied-files.json": {
     "mtime": 1791559926.4589984,
-    "seen": 1791566616.2401905,
+    "seen": 1791605174.6152678,
     "ast_hash": "79d698c5d3cfbcceaf1ac90bde79f20f",
     "semantic_hash": ""
   },
   ".local/project-index.json": {
     "mtime": 1791559926.4789984,
-    "seen": 1791566616.2402463,
+    "seen": 1791605174.615327,
     "ast_hash": "e1965f8c69d05dfca5adebc88fe67fd2",
     "semantic_hash": ""
   },
@@ -21402,9 +21402,9 @@
     "semantic_hash": ""
   },
   "tools/Start-Game.ps1": {
-    "mtime": 1791565603.0353658,
-    "seen": 1791566411.8416474,
-    "ast_hash": "f7edd018e3b61f73c9fade91ba1aa957",
+    "mtime": 1791569511.7388835,
+    "seen": 1791570447.3379526,
+    "ast_hash": "71332f04d45de9f1a21612c687b5d08f",
     "semantic_hash": ""
   },
   "docs/coder/DESKTOP_OPENING_REVIEW_VALIDATION.json": {
@@ -22236,9 +22236,9 @@
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/shared_godot_setup_v001/VALIDATION.json": {
-    "mtime": 1791566968.0263977,
-    "seen": 1791566995.7280948,
-    "ast_hash": "1f5e3ad4975785947f678652f0ae610a",
+    "mtime": 1791566996.2137518,
+    "seen": 1791570447.3316395,
+    "ast_hash": "e9a8d9276fe1e8dcc8da48f77f0dc79c",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/codex-discovery.json": {
@@ -22266,15 +22266,15 @@
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/shared-validation.json": {
-    "mtime": 1791566968.0231526,
-    "seen": 1791566995.7281015,
+    "mtime": 1791566996.21383,
+    "seen": 1791570447.3317435,
     "ast_hash": "0010ace18ed959f012eeeac1aa8406bf",
     "semantic_hash": ""
   },
   "docs/art/GODOT_SHARED_INSTALL_REPORT_2026-10-09_TR.md": {
-    "mtime": 1791566968.0271645,
-    "seen": 1791566995.7310967,
-    "ast_hash": "bdfa2735a93ea1e51103e8f010b0d9fb",
+    "mtime": 1791566996.2134876,
+    "seen": 1791570447.357152,
+    "ast_hash": "39bd50458c8b5102adb2cb2bf8a07860",
     "semantic_hash": ""
   },
   "narrative/15_Art_Workbench/shared_godot_setup_v001/README.md": {
@@ -22287,6 +22287,534 @@
     "mtime": 1791566968.0272179,
     "seen": 1791566995.7315438,
     "ast_hash": "a32f9e3541b9ec14156917d5b06172be",
+    "semantic_hash": ""
+  },
+  "game/assets/backgrounds/forest_whispering_ash/SOURCE_story_v001.json": {
+    "mtime": 1791569587.6426466,
+    "seen": 1791570447.3261642,
+    "ast_hash": "f507d0ad5578adaafe0349ec9732ee07",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/SOURCE.json": {
+    "mtime": 1791568013.3168638,
+    "seen": 1791570447.326166,
+    "ast_hash": "0e23082b9e185ffcb68adc561066c2f4",
+    "semantic_hash": ""
+  },
+  "docs/coder/PLAY_LATEST_GAME_PROMPT_TR.md": {
+    "mtime": 1791570316.2434218,
+    "seen": 1791570447.3573682,
+    "ast_hash": "700d4679017266a12aac178e0da876db",
+    "semantic_hash": ""
+  },
+  "docs/design/FULL_GAME_REVIEW_2026-10-09_TR.md": {
+    "mtime": 1791605131.4438765,
+    "seen": 1791605174.8250046,
+    "ast_hash": "70df6da4750e7746bf3fbc8a584be1b5",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/vfx/licenses/GDQuest-MIT.txt": {
+    "mtime": 1791568013.314398,
+    "seen": 1791570447.359017,
+    "ast_hash": "3ee686245ef2df3495724078c4ba1b21",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/vfx/licenses/Kenney-CC0.txt": {
+    "mtime": 1791568013.3145678,
+    "seen": 1791570447.359018,
+    "ast_hash": "3a3de052c64a0c9ea907c73e21789dce",
+    "semantic_hash": ""
+  },
+  "game/assets/backgrounds/forest_whispering_ash/story_ordered_v001.png": {
+    "mtime": 1791568013.3216968,
+    "seen": 1791570447.3651998,
+    "ast_hash": "dca318c700395d08ae6010b63a1aa4e4",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/animation/sources/idle_walk_sheet_v002.png": {
+    "mtime": 1791568013.3035479,
+    "seen": 1791570447.3653092,
+    "ast_hash": "89b045f767a63ae0307d2857501c2502",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/cinematics/clockless_reveal_v002.png": {
+    "mtime": 1791568013.297836,
+    "seen": 1791570447.3653104,
+    "ast_hash": "cf4b46a27654eaba97ac30490e66ebdb",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/cinematics/confession_v002.png": {
+    "mtime": 1791568013.259638,
+    "seen": 1791570447.3653114,
+    "ast_hash": "2ad191f665c1b04bcea6f4507494169b",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/cinematics/opening_letter_v002.png": {
+    "mtime": 1791568013.2572863,
+    "seen": 1791570447.3653123,
+    "ast_hash": "5308f0ab6172f037b87c15dccaac47ed",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/story/vn_black_gold_hands_v002.png": {
+    "mtime": 1791568013.252509,
+    "seen": 1791570447.3653128,
+    "ast_hash": "f29347a60496346211c0d644962db40f",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/story/vn_hidden_blood_scarf_v002.png": {
+    "mtime": 1791568013.237011,
+    "seen": 1791570447.3653138,
+    "ast_hash": "e780eef8462e1d4473a8740f11f3ccea",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/story/vn_white_lock_v002.png": {
+    "mtime": 1791568013.2418168,
+    "seen": 1791570447.3653145,
+    "ast_hash": "78aa555bf45bcd5d98d153f5efc6ba6d",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/vfx/textures/light_01.png": {
+    "mtime": 1791568013.3147984,
+    "seen": 1791570447.3653154,
+    "ast_hash": "0a0965cc483bda4713c0d076a85145c2",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/vfx/textures/spark_01.png": {
+    "mtime": 1791568013.3161995,
+    "seen": 1791570447.3653162,
+    "ast_hash": "b421174e3bc3624826a5d55b218f17ac",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/vn/vn_curiosity_v002.png": {
+    "mtime": 1791568013.202753,
+    "seen": 1791570447.3653166,
+    "ast_hash": "7c5802aa50e386607564bb93dbcf3f86",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/vn/vn_resolve_v002.png": {
+    "mtime": 1791568013.2162616,
+    "seen": 1791570447.3653173,
+    "ast_hash": "2e1f51c92fc589880f9e8a9a6f716a0a",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/vn/vn_strain_v002.png": {
+    "mtime": 1791568013.2268472,
+    "seen": 1791570447.3653183,
+    "ast_hash": "906d65ff510592737b31cb3f6754defc",
+    "semantic_hash": ""
+  },
+  "game/assets/characters/fadyme/production_v002/vn/vn_vulnerable_v002.png": {
+    "mtime": 1791568013.233698,
+    "seen": 1791570447.3653195,
+    "ast_hash": "7ffcf196e8c8736b6f89f674da85dd35",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/acceptance.json": {
+    "mtime": 1791605131.443583,
+    "seen": 1791605174.6157968,
+    "ast_hash": "fff6a4917f0b1ef0279fd49b8a09e3d5",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/launcher-guards.json": {
+    "mtime": 1791570454.6775067,
+    "seen": 1791570477.0109901,
+    "ast_hash": "7279fde71240f6ff01cb3f55214b3ace",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/runtime.json": {
+    "mtime": 1791604162.7389426,
+    "seen": 1791604206.4062986,
+    "ast_hash": "8db523325ed4cc58dc4082e31af0f776",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/README.md": {
+    "mtime": 1791605131.4468744,
+    "seen": 1791605174.8257892,
+    "ast_hash": "65abc91138708ea3a16897a5d3b41769",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/01-title.png": {
+    "mtime": 1791570454.620945,
+    "seen": 1791570477.0626342,
+    "ast_hash": "8c3e57ed8ea5fdae987e099602125407",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/02-entry.png": {
+    "mtime": 1791570454.622398,
+    "seen": 1791570477.0626354,
+    "ast_hash": "b56a44884bca2e1cd9b101329ca6fd75",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/03-prologue.png": {
+    "mtime": 1791570454.6234477,
+    "seen": 1791570477.0626364,
+    "ast_hash": "a4bb4f89086edc04a2e0dab03db31d8b",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/04-tutorial-0-before.png": {
+    "mtime": 1791570454.6246874,
+    "seen": 1791570477.0626369,
+    "ast_hash": "0603df16074799557d322f1e39eb280e",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/04-tutorial-1-before.png": {
+    "mtime": 1791570454.6272154,
+    "seen": 1791570477.0626378,
+    "ast_hash": "7af579d691297ae0271aa2d01e020b52",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/04-tutorial-2-before.png": {
+    "mtime": 1791570454.6288693,
+    "seen": 1791570477.0626388,
+    "ast_hash": "93eff9ffc4a088f49205b216ea34889c",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/05-tutorial-0-battle.png": {
+    "mtime": 1791570454.625596,
+    "seen": 1791570477.06264,
+    "ast_hash": "1ca8d513124534b32d5a627f7611b7e4",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/05-tutorial-1-battle.png": {
+    "mtime": 1791570454.6273985,
+    "seen": 1791570477.0626407,
+    "ast_hash": "115450981b7ce75eba673779b8bcaa90",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/05-tutorial-2-battle.png": {
+    "mtime": 1791570454.6298647,
+    "seen": 1791570477.0626416,
+    "ast_hash": "5e50c1aee5ebe30df712a74ec6308824",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/06-tutorial-0-after.png": {
+    "mtime": 1791570454.6262963,
+    "seen": 1791570477.0626423,
+    "ast_hash": "3186cd3a04fff58e1d535a2c22496fee",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/06-tutorial-1-after.png": {
+    "mtime": 1791570454.6276689,
+    "seen": 1791570477.0626435,
+    "ast_hash": "13129e78b75320271eb9c9d1f08357d0",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/06-tutorial-2-after.png": {
+    "mtime": 1791570454.630927,
+    "seen": 1791570477.062644,
+    "ast_hash": "7bf6b03f5145f7864856225a6d750b6e",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/07-shelter.png": {
+    "mtime": 1791570454.6321478,
+    "seen": 1791570477.0626452,
+    "ast_hash": "f19229b20ac5e0d555aa23f410d6d916",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/08-opening-letter.png": {
+    "mtime": 1791570454.6331735,
+    "seen": 1791570477.0626457,
+    "ast_hash": "d2aa9499f3ef9ef31facfb0770447498",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/09-main-battle.png": {
+    "mtime": 1791570454.6342525,
+    "seen": 1791570477.0626469,
+    "ast_hash": "caacfdd0d7cc4dc3a1a32e2047241291",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/animation-idle.png": {
+    "mtime": 1791570454.6576505,
+    "seen": 1791570477.0626476,
+    "ast_hash": "ae543cdefc18764c82c9b38f5eb4893c",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/animation-walk.png": {
+    "mtime": 1791570454.6586068,
+    "seen": 1791570477.062648,
+    "ast_hash": "6c3907be29f97d3fc9b94120c657c85a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-a_smile_kept-normal.png": {
+    "mtime": 1791570454.6612167,
+    "seen": 1791570477.0626488,
+    "ast_hash": "b80a28d596d8fa14af6728248a0b2526",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-a_smile_kept-reduced.png": {
+    "mtime": 1791570454.668081,
+    "seen": 1791570477.0626495,
+    "ast_hash": "13e487b4ae50b66fb13cd844880beb54",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_cleanse-normal.png": {
+    "mtime": 1791570454.6642642,
+    "seen": 1791570477.0626504,
+    "ast_hash": "73c85e129a3cae0a2879d39ae6721442",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_cleanse-reduced.png": {
+    "mtime": 1791570454.6715868,
+    "seen": 1791570477.0626514,
+    "ast_hash": "411aeafb73366f8f03c2a74d12d0bdcd",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_restore-normal.png": {
+    "mtime": 1791570454.663207,
+    "seen": 1791570477.0626523,
+    "ast_hash": "73c85e129a3cae0a2879d39ae6721442",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_restore-reduced.png": {
+    "mtime": 1791570454.6701078,
+    "seen": 1791570477.0626533,
+    "ast_hash": "411aeafb73366f8f03c2a74d12d0bdcd",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-bell_that_forgets-normal.png": {
+    "mtime": 1791570454.6624453,
+    "seen": 1791570477.0626538,
+    "ast_hash": "1f87a2253da5278011cbeeb6b32c072d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-bell_that_forgets-reduced.png": {
+    "mtime": 1791570454.6688864,
+    "seen": 1791570477.0626545,
+    "ast_hash": "17137bf59e53b5c1fe40d026265d4936",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-borrowed_hour-normal.png": {
+    "mtime": 1791570454.6604443,
+    "seen": 1791570477.0626554,
+    "ast_hash": "84c0bf6539918e49ec77fb8bbc7bf57a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-borrowed_hour-reduced.png": {
+    "mtime": 1791570454.6673121,
+    "seen": 1791570477.0626562,
+    "ast_hash": "7348742d49204bbd827545b57b37601e",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-cleared-false.png": {
+    "mtime": 1791570454.6656847,
+    "seen": 1791570477.0626574,
+    "ast_hash": "e13bac95858fbff954f144aef9295c95",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-cleared-true.png": {
+    "mtime": 1791570454.6730142,
+    "seen": 1791570477.062658,
+    "ast_hash": "411aeafb73366f8f03c2a74d12d0bdcd",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-veilglass_thorn-normal.png": {
+    "mtime": 1791570454.6594267,
+    "seen": 1791570477.062659,
+    "ast_hash": "73f4693a38e222939f6e2987c4343aea",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-veilglass_thorn-reduced.png": {
+    "mtime": 1791570454.666522,
+    "seen": 1791570477.0626597,
+    "ast_hash": "5e563906f47da3fd33decee670663281",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-accessibility-1080x1920.png": {
+    "mtime": 1791570454.651212,
+    "seen": 1791570477.0626607,
+    "ast_hash": "2473ff7fa43b24799e0bba6178507d9a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-accessibility-1080x2400.png": {
+    "mtime": 1791570454.6548507,
+    "seen": 1791570477.0626614,
+    "ast_hash": "9a15c5210e40cf206ca4f034b03f2825",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-accessibility-720x1600.png": {
+    "mtime": 1791570454.6472292,
+    "seen": 1791570477.0626624,
+    "ast_hash": "c15bedc8c6574b7d3274fac29305838f",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-reader-1080x1920.png": {
+    "mtime": 1791570454.6514292,
+    "seen": 1791570477.062663,
+    "ast_hash": "3f3b5672af0e14241c1b58eb53067abe",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-reader-1080x2400.png": {
+    "mtime": 1791570454.6559753,
+    "seen": 1791570477.0626643,
+    "ast_hash": "4909b975cc170bd99f9b7ff9a0f5137e",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-reader-720x1600.png": {
+    "mtime": 1791570454.6475308,
+    "seen": 1791570477.062665,
+    "ast_hash": "09fb12565aedc3610ba6b46cea975bd2",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-settings-1080x1920.png": {
+    "mtime": 1791570454.650049,
+    "seen": 1791570477.0626657,
+    "ast_hash": "dfc0458d5c54819a826c0cb5fc39e677",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-settings-1080x2400.png": {
+    "mtime": 1791570454.653659,
+    "seen": 1791570477.0626664,
+    "ast_hash": "cc40d5dc5d0cf131d50c3a0e23463abf",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-settings-720x1600.png": {
+    "mtime": 1791570454.646556,
+    "seen": 1791570477.0626674,
+    "ast_hash": "66e9ee1d2b9cff9bb3f85ca89576d0f6",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-1080x1920.png": {
+    "mtime": 1791570454.6481493,
+    "seen": 1791570477.0626683,
+    "ast_hash": "fc0e17bbf43f4a86659b3619bb370d99",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-1080x2400.png": {
+    "mtime": 1791570454.6525748,
+    "seen": 1791570477.0626693,
+    "ast_hash": "70a5da87b3ec33021e92daa2f1bb37bc",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-720x1600.png": {
+    "mtime": 1791570454.6462364,
+    "seen": 1791570477.06267,
+    "ast_hash": "645f3d385b3672b6acbc82d9352da669",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-scrolled-1080x1920.png": {
+    "mtime": 1791570454.6490195,
+    "seen": 1791570477.0626714,
+    "ast_hash": "12b7803da9491fd09b797308c8e04333",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-scrolled-1080x2400.png": {
+    "mtime": 1791570454.6530983,
+    "seen": 1791570477.0626721,
+    "ast_hash": "c1123fd945d5761e255c0d1d6ad72c6a",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-scrolled-720x1600.png": {
+    "mtime": 1791570454.6464453,
+    "seen": 1791570477.062673,
+    "ast_hash": "7f123c0106a81b28de31e16fcd8b3473",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/menu-inventory.png": {
+    "mtime": 1791570454.6431828,
+    "seen": 1791570477.0626743,
+    "ast_hash": "c3eb6d53281aee2df5df818208291816",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/menu-records.png": {
+    "mtime": 1791570454.6454008,
+    "seen": 1791570477.062675,
+    "ast_hash": "db68aedf59558b038704dad8cb57c534",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/menu-settings.png": {
+    "mtime": 1791570454.6443179,
+    "seen": 1791570477.0626757,
+    "ast_hash": "bbf36856c0d8481c17a14d88d968dd18",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/menu-team.png": {
+    "mtime": 1791570454.6422791,
+    "seen": 1791570477.0626767,
+    "ast_hash": "89ca14fe325de378566de74eeed202d2",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-part1_clockless_reveal.png": {
+    "mtime": 1791570454.6407557,
+    "seen": 1791570477.0626776,
+    "ast_hash": "aa40bcfd95d9e5e794400e1462b15c7f",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-part1_emotional_confession.png": {
+    "mtime": 1791570454.6399143,
+    "seen": 1791570477.0626783,
+    "ast_hash": "6958f7b135ddb135ec1659a841ce6c8d",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_3_3_post.png": {
+    "mtime": 1791570454.6356857,
+    "seen": 1791570477.0626793,
+    "ast_hash": "4ebb41b5ff47b61aef9ca9a3fa8f861e",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_3_3_pre.png": {
+    "mtime": 1791570454.6352398,
+    "seen": 1791570477.0626802,
+    "ast_hash": "5ead1a8ea4103c3518aa7c053cd41917",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_5_4_post.png": {
+    "mtime": 1791570454.6364613,
+    "seen": 1791570477.0626814,
+    "ast_hash": "57ad8659c25ce4203a09f45da7cffd0f",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_5_4_pre.png": {
+    "mtime": 1791570454.6358964,
+    "seen": 1791570477.0626822,
+    "ast_hash": "818bb47b905fb181fd275140aa521a1f",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_7_5_post.png": {
+    "mtime": 1791570454.6393602,
+    "seen": 1791570477.0626829,
+    "ast_hash": "e0f9aceb2c48906e439aa17527ebcf37",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_7_5_pre.png": {
+    "mtime": 1791570454.6380868,
+    "seen": 1791570477.0626838,
+    "ast_hash": "3be3b264aaea8ab2d725ecfadca7d122",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/cold-start.json": {
+    "mtime": 1791604162.7338748,
+    "seen": 1791604206.4062922,
+    "ast_hash": "a1c366a059748b51f5a030f60e21c48e",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/final-desktop-start.png": {
+    "mtime": 1791604162.733479,
+    "seen": 1791604206.4278395,
+    "ast_hash": "4b585cf36837ece84f2b4c1edc06da86",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/busy-back-native.json": {
+    "mtime": 1791604487.0592754,
+    "seen": 1791604575.1541023,
+    "ast_hash": "ec4932a81daf33aac8cf33e92be1e837",
+    "semantic_hash": ""
+  },
+  "game/data/legal/gdquest-vfx-mit.txt": {
+    "mtime": 1791604487.0573342,
+    "seen": 1791604575.427986,
+    "ast_hash": "3ee686245ef2df3495724078c4ba1b21",
+    "semantic_hash": ""
+  },
+  "game/data/legal/kenney-particles-cc0.txt": {
+    "mtime": 1791604487.0574522,
+    "seen": 1791604575.427993,
+    "ast_hash": "3a3de052c64a0c9ea907c73e21789dce",
+    "semantic_hash": ""
+  },
+  "narrative/15_Art_Workbench/full_game_review_v001/evidence/tested-source.json": {
+    "mtime": 1791604878.2513678,
+    "seen": 1791605174.615807,
+    "ast_hash": "99fe44fc2e75303eee1ff206cdffaa8a",
     "semantic_hash": ""
   }
 }

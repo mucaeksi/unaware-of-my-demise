@@ -1,9 +1,9 @@
 class_name UiPageTransition
 extends Control
 ## GPU-frozen outgoing page, slow eclipse fade and drifting veil. Routing and verified state commit immediately.
-const PAGE_SECONDS: float = 3.2
-const UTILITY_SECONDS: float = 2.6
-const PHASE_SECONDS: float = 1.4
+const PAGE_SECONDS: float = 0.22
+const UTILITY_SECONDS: float = 0.24
+const PHASE_SECONDS: float = 0.22
 const VEIL_PATH: String = "res://assets/ui/narrative/v002/page_reveal.gdshader"
 
 var duration: float = PAGE_SECONDS

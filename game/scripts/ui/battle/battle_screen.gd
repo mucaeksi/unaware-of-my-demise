@@ -318,14 +318,14 @@ func request_ultimate(entity_id: String) -> void:
 	_skill_tray.casting = true
 	_skill_tray.refresh()
 	_speed_button.disabled = true
-	for actor: BattleActor in _arena.actors.values(): actor.set_pace(0.1)
+	_arena.set_pace(0.1)
 	_cinematic.begin(playback.unit(entity_id))
 
 func _ultimate_impact(entity_id: String) -> void:
 	_casting = false
 	_skill_tray.casting = false
 	_refresh_speed_control()
-	for actor: BattleActor in _arena.actors.values(): actor.set_pace(float(speed()))
+	_arena.set_pace(float(speed()))
 	if playback is LivePlayback:
 		(playback as LivePlayback).cast_ultimate(entity_id)
 		advance_time(0.0)
@@ -355,7 +355,7 @@ func cycle_speed() -> void:
 		return
 	_speed_index = (_speed_index + 1) % SPEEDS.size()
 	_refresh_speed_control()
-	for actor: BattleActor in _arena.actors.values(): actor.set_pace(float(speed()))
+	_arena.set_pace(float(speed()))
 
 
 func _refresh_cards() -> void:

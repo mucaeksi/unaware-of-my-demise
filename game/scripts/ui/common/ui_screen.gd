@@ -13,7 +13,7 @@ var _built: bool = false
 
 
 func _init() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 
 func _ready() -> void:
@@ -29,14 +29,14 @@ func ensure_built() -> void:
 	# The shared shader supplies the ink palette; white avoids multiplying it twice.
 	background.color = Color.WHITE
 	background.material = UiTheme.GothicTheme.background_material()
-	background.set_anchors_preset(Control.PRESET_FULL_RECT)
+	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(background)
 	if _uses_ambient_backdrop():
 		var atmosphere: NarrativeBackdrop = NarrativeBackdrop.new()
 		add_child(atmosphere)
 	var safe: SafeAreaContainer = SafeAreaContainer.new()
-	safe.set_anchors_preset(Control.PRESET_FULL_RECT)
+	safe.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(safe)
 	var padding: MarginContainer = MarginContainer.new()
 	padding.add_theme_constant_override("margin_left", PADDING_SIDE)
@@ -62,4 +62,7 @@ func _uses_ambient_backdrop() -> bool:
 
 ## The Android back button while this screen is showing: true = handled here, false = let the shell decide.
 func handle_back() -> bool:
+	if has_signal("back_requested"):
+		emit_signal("back_requested")
+		return true
 	return false

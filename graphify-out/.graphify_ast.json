@@ -31722,7 +31722,7 @@
       "label": "Join-GodotArguments()",
       "file_type": "code",
       "source_file": "tools/Start-Game.ps1",
-      "source_location": "L21",
+      "source_location": "L22",
       "_origin": "ast"
     },
     {
@@ -31730,7 +31730,7 @@
       "label": "Invoke-GodotAndWait()",
       "file_type": "code",
       "source_file": "tools/Start-Game.ps1",
-      "source_location": "L27",
+      "source_location": "L28",
       "_origin": "ast"
     },
     {
@@ -31738,7 +31738,7 @@
       "label": "Test-GodotPin()",
       "file_type": "code",
       "source_file": "tools/Start-Game.ps1",
-      "source_location": "L45",
+      "source_location": "L52",
       "_origin": "ast"
     },
     {
@@ -113852,7 +113852,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tools/Start-Game.ps1",
-      "source_location": "L21",
+      "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -113862,7 +113862,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tools/Start-Game.ps1",
-      "source_location": "L27",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -113872,7 +113872,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tools/Start-Game.ps1",
-      "source_location": "L45",
+      "source_location": "L52",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -113882,7 +113882,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "tools/Start-Game.ps1",
-      "source_location": "L30",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -113892,7 +113892,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "tools/Start-Game.ps1",
-      "source_location": "L48",
+      "source_location": "L55",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -145498,6 +145498,8 @@
     "/workspace/unaware-of-my-demise/game/android/plugins/uomd_native/src/main/java/io/github/mucaeksi/uomd/PlayBilling.java",
     "/workspace/unaware-of-my-demise/game/android/plugins/uomd_native/src/main/java/io/github/mucaeksi/uomd/RewardedAds.java",
     "/workspace/unaware-of-my-demise/game/android/plugins/uomd_native/src/main/java/io/github/mucaeksi/uomd/UomdNative.java",
+    "/workspace/unaware-of-my-demise/game/assets/backgrounds/forest_whispering_ash/SOURCE_story_v001.json",
+    "/workspace/unaware-of-my-demise/game/assets/characters/fadyme/production_v002/SOURCE.json",
     "/workspace/unaware-of-my-demise/game/assets/third_party/reference/COLLECTION.json",
     "/workspace/unaware-of-my-demise/game/assets/ui/narrative/prologue_v001/provenance.json",
     "/workspace/unaware-of-my-demise/game/assets/ui/narrative/prologue_v002/provenance.json",
@@ -145712,6 +145714,12 @@
     "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/expression_mapping.json",
     "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/line_visual_direction.json",
     "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/portrait_files.json",
+    "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/full_game_review_v001/evidence/acceptance.json",
+    "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/full_game_review_v001/evidence/busy-back-native.json",
+    "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/full_game_review_v001/evidence/cold-start.json",
+    "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/full_game_review_v001/evidence/launcher-guards.json",
+    "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/full_game_review_v001/evidence/runtime.json",
+    "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/full_game_review_v001/evidence/tested-source.json",
     "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/shared_godot_setup_v001/VALIDATION.json",
     "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/codex-discovery.json",
     "/workspace/unaware-of-my-demise/narrative/15_Art_Workbench/shared_godot_setup_v001/evidence/mcp-live-validation.json",

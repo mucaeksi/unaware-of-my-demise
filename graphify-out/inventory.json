@@ -3437,7 +3437,7 @@
   {
     "path": ".gitattributes",
     "node_id": "gitattributes",
-    "size_bytes": 2760
+    "size_bytes": 2796
   },
   {
     "path": ".github/workflows/backup.yml",
@@ -3492,12 +3492,12 @@
   {
     "path": "AGENTS.md",
     "node_id": "agents",
-    "size_bytes": 7641
+    "size_bytes": 8226
   },
   {
     "path": "CLAUDE.md",
     "node_id": "claude",
-    "size_bytes": 5479
+    "size_bytes": 6064
   },
   {
     "path": "GAME_TOOLCHAIN.md",
@@ -3522,7 +3522,7 @@
   {
     "path": "OYUNU_AC.cmd",
     "node_id": "oyunu_ac",
-    "size_bytes": 238
+    "size_bytes": 322
   },
   {
     "path": "README.md",
@@ -3537,7 +3537,7 @@
   {
     "path": "THIRD_PARTY_NOTICE.md",
     "node_id": "third_party_notice",
-    "size_bytes": 1870
+    "size_bytes": 2329
   },
   {
     "path": "UOMD_FRAMEWORK_MANIFEST.md",
@@ -3950,6 +3950,11 @@
     "size_bytes": 1282
   },
   {
+    "path": "docs/coder/PLAY_LATEST_GAME_PROMPT_TR.md",
+    "node_id": "docs_coder_play_latest_game_prompt_tr",
+    "size_bytes": 1650
+  },
+  {
     "path": "docs/coder/START_HERE.md",
     "node_id": "docs_coder_start_here",
     "size_bytes": 2707
@@ -4043,6 +4048,11 @@
     "path": "docs/design/FIRST_LAUNCH_FLOW.md",
     "node_id": "docs_design_first_launch_flow",
     "size_bytes": 15734
+  },
+  {
+    "path": "docs/design/FULL_GAME_REVIEW_2026-10-09_TR.md",
+    "node_id": "docs_design_full_game_review_2026_10_09_tr",
+    "size_bytes": 17428
   },
   {
     "path": "docs/design/MANUAL_ULTIMATE_AND_NOVEL_v004_2026-10-08.md",
@@ -7380,6 +7390,11 @@
     "size_bytes": 1395
   },
   {
+    "path": "game/assets/backgrounds/forest_whispering_ash/SOURCE_story_v001.json",
+    "node_id": "game_assets_backgrounds_forest_whispering_ash_source_story_v001",
+    "size_bytes": 361
+  },
+  {
     "path": "game/assets/backgrounds/forest_whispering_ash/side_arena_v001.png",
     "node_id": "game_assets_backgrounds_forest_whispering_ash_side_arena_v001",
     "size_bytes": 2463754
@@ -7388,6 +7403,16 @@
     "path": "game/assets/backgrounds/forest_whispering_ash/side_arena_v001.png.import",
     "node_id": "game_assets_backgrounds_forest_whispering_ash_side_arena_v001_png",
     "size_bytes": 990
+  },
+  {
+    "path": "game/assets/backgrounds/forest_whispering_ash/story_ordered_v001.png",
+    "node_id": "game_assets_backgrounds_forest_whispering_ash_story_ordered_v001",
+    "size_bytes": 5203343
+  },
+  {
+    "path": "game/assets/backgrounds/forest_whispering_ash/story_ordered_v001.png.import",
+    "node_id": "game_assets_backgrounds_forest_whispering_ash_story_ordered_v001_png",
+    "size_bytes": 999
   },
   {
     "path": "game/assets/branding/sovtaym/v01/emblem.png",
@@ -7438,6 +7463,256 @@
     "path": "game/assets/characters/fadyme/chibi_poses_v003.png.import",
     "node_id": "game_assets_characters_fadyme_chibi_poses_v003_png",
     "size_bytes": 976
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/SOURCE.json",
+    "node_id": "game_assets_characters_fadyme_production_v002_source",
+    "size_bytes": 9814
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/animation/locomotion_spriteframes_v002.tres",
+    "node_id": "game_assets_characters_fadyme_production_v002_animation_locomotion_spriteframes_v002",
+    "size_bytes": 2648
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/animation/sources/idle_walk_sheet_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_animation_sources_idle_walk_sheet_v002",
+    "size_bytes": 2299121
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/animation/sources/idle_walk_sheet_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_animation_sources_idle_walk_sheet_v002_png",
+    "size_bytes": 1023
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/cinematics/clockless_reveal_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_cinematics_clockless_reveal_v002",
+    "size_bytes": 2649000
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/cinematics/clockless_reveal_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_cinematics_clockless_reveal_v002_png",
+    "size_bytes": 1019
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/cinematics/confession_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_cinematics_confession_v002",
+    "size_bytes": 2828612
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/cinematics/confession_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_cinematics_confession_v002_png",
+    "size_bytes": 1001
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/cinematics/opening_letter_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_cinematics_opening_letter_v002",
+    "size_bytes": 2626369
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/cinematics/opening_letter_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_cinematics_opening_letter_v002_png",
+    "size_bytes": 1013
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/story/vn_black_gold_hands_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_story_vn_black_gold_hands_v002",
+    "size_bytes": 2783759
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/story/vn_black_gold_hands_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_story_vn_black_gold_hands_v002_png",
+    "size_bytes": 1023
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/story/vn_hidden_blood_scarf_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_story_vn_hidden_blood_scarf_v002",
+    "size_bytes": 2862068
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/story/vn_hidden_blood_scarf_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_story_vn_hidden_blood_scarf_v002_png",
+    "size_bytes": 1029
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/story/vn_white_lock_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_story_vn_white_lock_v002",
+    "size_bytes": 2803820
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/story/vn_white_lock_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_story_vn_white_lock_v002_png",
+    "size_bytes": 1004
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/a_smile_kept.gdshader",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_a_smile_kept",
+    "size_bytes": 1457
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/a_smile_kept.gdshader.uid",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_a_smile_kept_gdshader",
+    "size_bytes": 20
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/a_smile_kept_v002.tscn",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_a_smile_kept_v002",
+    "size_bytes": 1780
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/ally_cleanse.gdshader",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_ally_cleanse",
+    "size_bytes": 1464
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/ally_cleanse.gdshader.uid",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_ally_cleanse_gdshader",
+    "size_bytes": 20
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/ally_cleanse_v002.tscn",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_ally_cleanse_v002",
+    "size_bytes": 1780
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/ally_restore.gdshader",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_ally_restore",
+    "size_bytes": 1464
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/ally_restore.gdshader.uid",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_ally_restore_gdshader",
+    "size_bytes": 20
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/ally_restore_v002.tscn",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_ally_restore_v002",
+    "size_bytes": 1780
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/bell_that_forgets.gdshader",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_bell_that_forgets",
+    "size_bytes": 1421
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/bell_that_forgets.gdshader.uid",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_bell_that_forgets_gdshader",
+    "size_bytes": 20
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/bell_that_forgets_v002.tscn",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_bell_that_forgets_v002",
+    "size_bytes": 1785
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/borrowed_hour.gdshader",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_borrowed_hour",
+    "size_bytes": 1467
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/borrowed_hour.gdshader.uid",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_borrowed_hour_gdshader",
+    "size_bytes": 20
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/borrowed_hour_v002.tscn",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_borrowed_hour_v002",
+    "size_bytes": 1780
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/licenses/GDQuest-MIT.txt",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_licenses_gdquest_mit",
+    "size_bytes": 1059
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/licenses/Kenney-CC0.txt",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_licenses_kenney_cc0",
+    "size_bytes": 629
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/textures/light_01.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_textures_light_01",
+    "size_bytes": 86592
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/textures/light_01.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_textures_light_01_png",
+    "size_bytes": 982
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/textures/spark_01.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_textures_spark_01",
+    "size_bytes": 89628
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/textures/spark_01.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_textures_spark_01_png",
+    "size_bytes": 982
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/upstream/2d_vortex.gdshader",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_upstream_2d_vortex",
+    "size_bytes": 675
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/upstream/2d_vortex.gdshader.uid",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_upstream_2d_vortex_gdshader",
+    "size_bytes": 20
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/veilglass_thorn.gdshader",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_veilglass_thorn",
+    "size_bytes": 1414
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/veilglass_thorn.gdshader.uid",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_veilglass_thorn_gdshader",
+    "size_bytes": 20
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vfx/veilglass_thorn_v002.tscn",
+    "node_id": "game_assets_characters_fadyme_production_v002_vfx_veilglass_thorn_v002",
+    "size_bytes": 1783
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vn/vn_curiosity_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_vn_vn_curiosity_v002",
+    "size_bytes": 2808544
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vn/vn_curiosity_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_vn_vn_curiosity_v002_png",
+    "size_bytes": 998
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vn/vn_resolve_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_vn_vn_resolve_v002",
+    "size_bytes": 2764831
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vn/vn_resolve_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_vn_vn_resolve_v002_png",
+    "size_bytes": 993
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vn/vn_strain_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_vn_vn_strain_v002",
+    "size_bytes": 2750031
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vn/vn_strain_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_vn_vn_strain_v002_png",
+    "size_bytes": 990
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vn/vn_vulnerable_v002.png",
+    "node_id": "game_assets_characters_fadyme_production_v002_vn_vn_vulnerable_v002",
+    "size_bytes": 2755030
+  },
+  {
+    "path": "game/assets/characters/fadyme/production_v002/vn/vn_vulnerable_v002.png.import",
+    "node_id": "game_assets_characters_fadyme_production_v002_vn_vn_vulnerable_v002_png",
+    "size_bytes": 1002
   },
   {
     "path": "game/assets/characters/fadyme/profile_icon_v001.png",
@@ -23365,6 +23640,11 @@
     "size_bytes": 4383
   },
   {
+    "path": "game/data/legal/gdquest-vfx-mit.txt",
+    "node_id": "game_data_legal_gdquest_vfx_mit",
+    "size_bytes": 1059
+  },
+  {
     "path": "game/data/legal/google-sans-ofl.txt",
     "node_id": "game_data_legal_google_sans_ofl",
     "size_bytes": 4395
@@ -23375,6 +23655,11 @@
     "size_bytes": 4377
   },
   {
+    "path": "game/data/legal/kenney-particles-cc0.txt",
+    "node_id": "game_data_legal_kenney_particles_cc0",
+    "size_bytes": 629
+  },
+  {
     "path": "game/data/legal/source-sans-3-ofl.txt",
     "node_id": "game_data_legal_source_sans_3_ofl",
     "size_bytes": 4486
@@ -23382,7 +23667,7 @@
   {
     "path": "game/data/presentation/battle_art_v001.json",
     "node_id": "game_data_presentation_battle_art_v001",
-    "size_bytes": 9394
+    "size_bytes": 12574
   },
   {
     "path": "game/data/stable_ids.lock.json",
@@ -23443,6 +23728,11 @@
     "path": "game/scenes/art_review/art_system_review_v02.tscn",
     "node_id": "game_scenes_art_review_art_system_review_v02",
     "size_bytes": 329
+  },
+  {
+    "path": "game/scenes/art_review/desktop_game_review.tscn",
+    "node_id": "game_scenes_art_review_desktop_game_review",
+    "size_bytes": 312
   },
   {
     "path": "game/scenes/art_review/desktop_opening_review.tscn",
@@ -23727,11 +24017,21 @@
   {
     "path": "game/scripts/app/story_index.gd",
     "node_id": "game_scripts_app_story_index",
-    "size_bytes": 6904
+    "size_bytes": 7046
   },
   {
     "path": "game/scripts/app/story_index.gd.uid",
     "node_id": "game_scripts_app_story_index_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "game/scripts/app/story_records.gd",
+    "node_id": "game_scripts_app_story_records",
+    "size_bytes": 2396
+  },
+  {
+    "path": "game/scripts/app/story_records.gd.uid",
+    "node_id": "game_scripts_app_story_records_gd",
     "size_bytes": 20
   },
   {
@@ -23815,13 +24115,33 @@
     "size_bytes": 19
   },
   {
+    "path": "game/scripts/art_review/desktop_game_review.gd",
+    "node_id": "game_scripts_art_review_desktop_game_review",
+    "size_bytes": 724
+  },
+  {
+    "path": "game/scripts/art_review/desktop_game_review.gd.uid",
+    "node_id": "game_scripts_art_review_desktop_game_review_gd",
+    "size_bytes": 20
+  },
+  {
     "path": "game/scripts/art_review/desktop_opening_review.gd",
     "node_id": "game_scripts_art_review_desktop_opening_review",
-    "size_bytes": 2455
+    "size_bytes": 2662
   },
   {
     "path": "game/scripts/art_review/desktop_opening_review.gd.uid",
     "node_id": "game_scripts_art_review_desktop_opening_review_gd",
+    "size_bytes": 20
+  },
+  {
+    "path": "game/scripts/art_review/desktop_story_backend.gd",
+    "node_id": "game_scripts_art_review_desktop_story_backend",
+    "size_bytes": 6953
+  },
+  {
+    "path": "game/scripts/art_review/desktop_story_backend.gd.uid",
+    "node_id": "game_scripts_art_review_desktop_story_backend_gd",
     "size_bytes": 20
   },
   {
@@ -24297,7 +24617,7 @@
   {
     "path": "game/scripts/ui/app_shell.gd",
     "node_id": "game_scripts_ui_app_shell",
-    "size_bytes": 3249
+    "size_bytes": 3474
   },
   {
     "path": "game/scripts/ui/app_shell.gd.uid",
@@ -24307,7 +24627,7 @@
   {
     "path": "game/scripts/ui/battle/battle_actor.gd",
     "node_id": "game_scripts_ui_battle_battle_actor",
-    "size_bytes": 9461
+    "size_bytes": 10614
   },
   {
     "path": "game/scripts/ui/battle/battle_actor.gd.uid",
@@ -24317,7 +24637,7 @@
   {
     "path": "game/scripts/ui/battle/battle_art.gd",
     "node_id": "game_scripts_ui_battle_battle_art",
-    "size_bytes": 4252
+    "size_bytes": 5809
   },
   {
     "path": "game/scripts/ui/battle/battle_art.gd.uid",
@@ -24327,7 +24647,7 @@
   {
     "path": "game/scripts/ui/battle/battle_field.gd",
     "node_id": "game_scripts_ui_battle_battle_field",
-    "size_bytes": 7738
+    "size_bytes": 10646
   },
   {
     "path": "game/scripts/ui/battle/battle_field.gd.uid",
@@ -24357,7 +24677,7 @@
   {
     "path": "game/scripts/ui/battle/battle_playback.gd",
     "node_id": "game_scripts_ui_battle_battle_playback",
-    "size_bytes": 20333
+    "size_bytes": 20443
   },
   {
     "path": "game/scripts/ui/battle/battle_playback.gd.uid",
@@ -24367,7 +24687,7 @@
   {
     "path": "game/scripts/ui/battle/battle_screen.gd",
     "node_id": "game_scripts_ui_battle_battle_screen",
-    "size_bytes": 17415
+    "size_bytes": 17268
   },
   {
     "path": "game/scripts/ui/battle/battle_screen.gd.uid",
@@ -24417,7 +24737,7 @@
   {
     "path": "game/scripts/ui/battle/ultimate_presentation.gd",
     "node_id": "game_scripts_ui_battle_ultimate_presentation",
-    "size_bytes": 3051
+    "size_bytes": 3192
   },
   {
     "path": "game/scripts/ui/battle/ultimate_presentation.gd.uid",
@@ -24437,7 +24757,7 @@
   {
     "path": "game/scripts/ui/blessing/blessing_screen.gd",
     "node_id": "game_scripts_ui_blessing_blessing_screen",
-    "size_bytes": 3905
+    "size_bytes": 4068
   },
   {
     "path": "game/scripts/ui/blessing/blessing_screen.gd.uid",
@@ -24537,7 +24857,7 @@
   {
     "path": "game/scripts/ui/common/ui_page_transition.gd",
     "node_id": "game_scripts_ui_common_ui_page_transition",
-    "size_bytes": 5545
+    "size_bytes": 5548
   },
   {
     "path": "game/scripts/ui/common/ui_page_transition.gd.uid",
@@ -24547,7 +24867,7 @@
   {
     "path": "game/scripts/ui/common/ui_screen.gd",
     "node_id": "game_scripts_ui_common_ui_screen",
-    "size_bytes": 2243
+    "size_bytes": 2359
   },
   {
     "path": "game/scripts/ui/common/ui_screen.gd.uid",
@@ -24707,7 +25027,7 @@
   {
     "path": "game/scripts/ui/friends/friends_screen.gd",
     "node_id": "game_scripts_ui_friends_friends_screen",
-    "size_bytes": 8945
+    "size_bytes": 9108
   },
   {
     "path": "game/scripts/ui/friends/friends_screen.gd.uid",
@@ -24717,7 +25037,7 @@
   {
     "path": "game/scripts/ui/gacha/gacha_screen.gd",
     "node_id": "game_scripts_ui_gacha_gacha_screen",
-    "size_bytes": 8179
+    "size_bytes": 8342
   },
   {
     "path": "game/scripts/ui/gacha/gacha_screen.gd.uid",
@@ -24727,7 +25047,7 @@
   {
     "path": "game/scripts/ui/hub/hub_screen.gd",
     "node_id": "game_scripts_ui_hub_hub_screen",
-    "size_bytes": 2407
+    "size_bytes": 4437
   },
   {
     "path": "game/scripts/ui/hub/hub_screen.gd.uid",
@@ -24757,7 +25077,7 @@
   {
     "path": "game/scripts/ui/mailbox/mailbox_screen.gd",
     "node_id": "game_scripts_ui_mailbox_mailbox_screen",
-    "size_bytes": 3216
+    "size_bytes": 3379
   },
   {
     "path": "game/scripts/ui/mailbox/mailbox_screen.gd.uid",
@@ -24767,7 +25087,7 @@
   {
     "path": "game/scripts/ui/quests/quests_screen.gd",
     "node_id": "game_scripts_ui_quests_quests_screen",
-    "size_bytes": 4331
+    "size_bytes": 4494
   },
   {
     "path": "game/scripts/ui/quests/quests_screen.gd.uid",
@@ -24775,9 +25095,19 @@
     "size_bytes": 19
   },
   {
+    "path": "game/scripts/ui/records/records_screen.gd",
+    "node_id": "game_scripts_ui_records_records_screen",
+    "size_bytes": 1181
+  },
+  {
+    "path": "game/scripts/ui/records/records_screen.gd.uid",
+    "node_id": "game_scripts_ui_records_records_screen_gd",
+    "size_bytes": 20
+  },
+  {
     "path": "game/scripts/ui/roster/roster_screen.gd",
     "node_id": "game_scripts_ui_roster_roster_screen",
-    "size_bytes": 4143
+    "size_bytes": 4329
   },
   {
     "path": "game/scripts/ui/roster/roster_screen.gd.uid",
@@ -24807,7 +25137,7 @@
   {
     "path": "game/scripts/ui/selector/selector_screen.gd",
     "node_id": "game_scripts_ui_selector_selector_screen",
-    "size_bytes": 2571
+    "size_bytes": 3178
   },
   {
     "path": "game/scripts/ui/selector/selector_screen.gd.uid",
@@ -24817,7 +25147,7 @@
   {
     "path": "game/scripts/ui/settings/settings_screen.gd",
     "node_id": "game_scripts_ui_settings_settings_screen",
-    "size_bytes": 3116
+    "size_bytes": 3960
   },
   {
     "path": "game/scripts/ui/settings/settings_screen.gd.uid",
@@ -24877,7 +25207,7 @@
   {
     "path": "game/scripts/ui/story_director.gd",
     "node_id": "game_scripts_ui_story_director",
-    "size_bytes": 57341
+    "size_bytes": 59508
   },
   {
     "path": "game/scripts/ui/story_director.gd.uid",
@@ -24887,7 +25217,7 @@
   {
     "path": "game/scripts/ui/team/team_screen.gd",
     "node_id": "game_scripts_ui_team_team_screen",
-    "size_bytes": 5239
+    "size_bytes": 5378
   },
   {
     "path": "game/scripts/ui/team/team_screen.gd.uid",
@@ -24907,7 +25237,7 @@
   {
     "path": "game/scripts/ui/vn/vn_screen.gd",
     "node_id": "game_scripts_ui_vn_vn_screen",
-    "size_bytes": 21803
+    "size_bytes": 22613
   },
   {
     "path": "game/scripts/ui/vn/vn_screen.gd.uid",
@@ -25227,7 +25557,7 @@
   {
     "path": "game/tests/ui/test_entry_download.gd",
     "node_id": "game_tests_ui_test_entry_download",
-    "size_bytes": 4055
+    "size_bytes": 4476
   },
   {
     "path": "game/tests/ui/test_entry_download.gd.uid",
@@ -25307,7 +25637,7 @@
   {
     "path": "game/tests/ui/test_gothic_components.gd",
     "node_id": "game_tests_ui_test_gothic_components",
-    "size_bytes": 4102
+    "size_bytes": 4089
   },
   {
     "path": "game/tests/ui/test_gothic_components.gd.uid",
@@ -25373,6 +25703,16 @@
     "path": "game/tests/ui/test_production_ui.gd.uid",
     "node_id": "game_tests_ui_test_production_ui_gd",
     "size_bytes": 19
+  },
+  {
+    "path": "game/tests/ui/test_review_navigation.gd",
+    "node_id": "game_tests_ui_test_review_navigation",
+    "size_bytes": 2320
+  },
+  {
+    "path": "game/tests/ui/test_review_navigation.gd.uid",
+    "node_id": "game_tests_ui_test_review_navigation_gd",
+    "size_bytes": 20
   },
   {
     "path": "game/tests/ui/test_safe_area_lifecycle.gd",
@@ -25515,6 +25855,16 @@
     "size_bytes": 20
   },
   {
+    "path": "game/tests/unit/test_desktop_story_backend.gd",
+    "node_id": "game_tests_unit_test_desktop_story_backend",
+    "size_bytes": 3727
+  },
+  {
+    "path": "game/tests/unit/test_desktop_story_backend.gd.uid",
+    "node_id": "game_tests_unit_test_desktop_story_backend_gd",
+    "size_bytes": 19
+  },
+  {
     "path": "game/tests/unit/test_device_smoke.gd",
     "node_id": "game_tests_unit_test_device_smoke",
     "size_bytes": 2449
@@ -25627,12 +25977,22 @@
   {
     "path": "game/tests/unit/test_story_index.gd",
     "node_id": "game_tests_unit_test_story_index",
-    "size_bytes": 6298
+    "size_bytes": 7106
   },
   {
     "path": "game/tests/unit/test_story_index.gd.uid",
     "node_id": "game_tests_unit_test_story_index_gd",
     "size_bytes": 19
+  },
+  {
+    "path": "game/tests/unit/test_story_records.gd",
+    "node_id": "game_tests_unit_test_story_records",
+    "size_bytes": 2098
+  },
+  {
+    "path": "game/tests/unit/test_story_records.gd.uid",
+    "node_id": "game_tests_unit_test_story_records_gd",
+    "size_bytes": 20
   },
   {
     "path": "game/tests/unit/test_support_client.gd",
@@ -25788,6 +26148,16 @@
     "path": "game/tools/check_gut_report.sh",
     "node_id": "game_tools_check_gut_report",
     "size_bytes": 2211
+  },
+  {
+    "path": "game/tools/full_game_review.gd",
+    "node_id": "game_tools_full_game_review",
+    "size_bytes": 10730
+  },
+  {
+    "path": "game/tools/full_game_review.gd.uid",
+    "node_id": "game_tools_full_game_review_gd",
+    "size_bytes": 20
   },
   {
     "path": "game/tools/generate_manual_battle_fixture.gd",
@@ -28973,6 +29343,351 @@
     "path": "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_vulnerable_v002.png",
     "node_id": "narrative_15_art_workbench_characters_fadyme_production_v002_vn_vn_vulnerable_v002",
     "size_bytes": 2755030
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/README.md",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_readme",
+    "size_bytes": 620
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/01-title.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_01_title",
+    "size_bytes": 1056680
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/02-entry.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_02_entry",
+    "size_bytes": 1007881
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/03-prologue.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_03_prologue",
+    "size_bytes": 864659
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/04-tutorial-0-before.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_04_tutorial_0_before",
+    "size_bytes": 533595
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/04-tutorial-1-before.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_04_tutorial_1_before",
+    "size_bytes": 535159
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/04-tutorial-2-before.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_04_tutorial_2_before",
+    "size_bytes": 535567
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/05-tutorial-0-battle.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_05_tutorial_0_battle",
+    "size_bytes": 628046
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/05-tutorial-1-battle.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_05_tutorial_1_battle",
+    "size_bytes": 634646
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/05-tutorial-2-battle.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_05_tutorial_2_battle",
+    "size_bytes": 615852
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/06-tutorial-0-after.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_06_tutorial_0_after",
+    "size_bytes": 534484
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/06-tutorial-1-after.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_06_tutorial_1_after",
+    "size_bytes": 898941
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/06-tutorial-2-after.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_06_tutorial_2_after",
+    "size_bytes": 849033
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/07-shelter.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_07_shelter",
+    "size_bytes": 533177
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/08-opening-letter.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_08_opening_letter",
+    "size_bytes": 779533
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/09-main-battle.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_09_main_battle",
+    "size_bytes": 621488
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/acceptance.json",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_acceptance",
+    "size_bytes": 574
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/animation-idle.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_animation_idle",
+    "size_bytes": 788574
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/animation-walk.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_animation_walk",
+    "size_bytes": 788492
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/busy-back-native.json",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_busy_back_native",
+    "size_bytes": 1490
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/cold-start.json",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_cold_start",
+    "size_bytes": 1319
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/content-audit.log",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_content_audit",
+    "size_bytes": 870
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/final-desktop-start.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_final_desktop_start",
+    "size_bytes": 1057231
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-a_smile_kept-normal.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_a_smile_kept_normal",
+    "size_bytes": 789441
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-a_smile_kept-reduced.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_a_smile_kept_reduced",
+    "size_bytes": 788404
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_cleanse-normal.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_ally_cleanse_normal",
+    "size_bytes": 788453
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_cleanse-reduced.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_ally_cleanse_reduced",
+    "size_bytes": 788308
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_restore-normal.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_ally_restore_normal",
+    "size_bytes": 788453
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_restore-reduced.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_ally_restore_reduced",
+    "size_bytes": 788308
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-bell_that_forgets-normal.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_bell_that_forgets_normal",
+    "size_bytes": 789752
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-bell_that_forgets-reduced.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_bell_that_forgets_reduced",
+    "size_bytes": 789369
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-borrowed_hour-normal.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_borrowed_hour_normal",
+    "size_bytes": 790250
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-borrowed_hour-reduced.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_borrowed_hour_reduced",
+    "size_bytes": 789966
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-cleared-false.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_cleared_false",
+    "size_bytes": 788737
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-cleared-true.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_cleared_true",
+    "size_bytes": 788308
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-veilglass_thorn-normal.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_veilglass_thorn_normal",
+    "size_bytes": 788678
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-veilglass_thorn-reduced.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_fx_veilglass_thorn_reduced",
+    "size_bytes": 788331
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/gut-525.log",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_gut_525",
+    "size_bytes": 45251
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-accessibility-1080x1920.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_accessibility_1080x1920",
+    "size_bytes": 537119
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-accessibility-1080x2400.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_accessibility_1080x2400",
+    "size_bytes": 683355
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-accessibility-720x1600.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_accessibility_720x1600",
+    "size_bytes": 318299
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-reader-1080x1920.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_reader_1080x1920",
+    "size_bytes": 644499
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-reader-1080x2400.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_reader_1080x2400",
+    "size_bytes": 943891
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-reader-720x1600.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_reader_720x1600",
+    "size_bytes": 292676
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-settings-1080x1920.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_settings_1080x1920",
+    "size_bytes": 595066
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-settings-1080x2400.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_settings_1080x2400",
+    "size_bytes": 683313
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-settings-720x1600.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_settings_720x1600",
+    "size_bytes": 384565
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-1080x1920.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_shelter_1080x1920",
+    "size_bytes": 524945
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-1080x2400.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_shelter_1080x2400",
+    "size_bytes": 654141
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-720x1600.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_shelter_720x1600",
+    "size_bytes": 340025
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-scrolled-1080x1920.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_shelter_scrolled_1080x1920",
+    "size_bytes": 524958
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-scrolled-1080x2400.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_shelter_scrolled_1080x2400",
+    "size_bytes": 654212
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/large-shelter-scrolled-720x1600.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_large_shelter_scrolled_720x1600",
+    "size_bytes": 274800
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/launcher-guards.json",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_launcher_guards",
+    "size_bytes": 616
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/launcher.log",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_launcher",
+    "size_bytes": 229
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/menu-inventory.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_menu_inventory",
+    "size_bytes": 592976
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/menu-records.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_menu_records",
+    "size_bytes": 431301
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/menu-settings.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_menu_settings",
+    "size_bytes": 569366
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/menu-team.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_menu_team",
+    "size_bytes": 499607
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/runtime.json",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_runtime",
+    "size_bytes": 35770
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-part1_clockless_reveal.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_story_part1_clockless_reveal",
+    "size_bytes": 834121
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-part1_emotional_confession.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_story_part1_emotional_confession",
+    "size_bytes": 877706
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_3_3_post.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_story_vn_3_3_post",
+    "size_bytes": 679539
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_3_3_pre.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_story_vn_3_3_pre",
+    "size_bytes": 680751
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_5_4_post.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_story_vn_5_4_post",
+    "size_bytes": 781836
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_5_4_pre.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_story_vn_5_4_pre",
+    "size_bytes": 283908
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_7_5_post.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_story_vn_7_5_post",
+    "size_bytes": 279397
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/story-vn_7_5_pre.png",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_story_vn_7_5_pre",
+    "size_bytes": 679745
+  },
+  {
+    "path": "narrative/15_Art_Workbench/full_game_review_v001/evidence/tested-source.json",
+    "node_id": "narrative_15_art_workbench_full_game_review_v001_evidence_tested_source",
+    "size_bytes": 7140
   },
   {
     "path": "narrative/15_Art_Workbench/handoff/ASSET_HANDOFF_TEMPLATE.md",
@@ -35067,7 +35782,7 @@
   {
     "path": "tools/Start-Game.ps1",
     "node_id": "tools_start_game",
-    "size_bytes": 5829
+    "size_bytes": 6654
   },
   {
     "path": "tools/Start-UiPreview.ps1",

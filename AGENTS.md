@@ -72,3 +72,13 @@ After code changes run `graphify update .`, then rebuild Godot/directed/parallel
 ```
 
 The project helper preserves unchanged document fragments and flags changed semantics without an external LLM API.
+
+## Owner update — full game review, 2026-10-09
+
+The owner explicitly requested Codex to review/design the entire authored game,
+fix discovered runtime/design issues and repair OYUNU_AC.cmd. This task overrides
+the earlier Entry-only and art-only/Codex-versus-Claude restriction for these
+validated fixes and asset integration. Preserve canon, stable IDs, source art,
+online authority and sealed release/current; no new AAB is requested.
+The desktop full-story review is isolated from online accounts and purchases.
+Final voice selection and paid production batches remain separate.

@@ -95,3 +95,9 @@ func notice_count() -> int:
 func press_claim(mail_id: String) -> void:
 	if _claim_buttons.has(mail_id):
 		(_claim_buttons[mail_id] as Button).pressed.emit()
+
+
+## Android Back/Escape follows the visible Back button while an action is pending.
+func handle_back() -> bool:
+	if not _busy: back_requested.emit()
+	return true

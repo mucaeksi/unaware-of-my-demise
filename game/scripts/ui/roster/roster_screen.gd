@@ -4,6 +4,8 @@ extends UiScreen
 ## battle: `StoryState.resolve_battle_roster` puts the first picks in the front row and the rest in the rear, so the screen shows the order as
 ## a numbered strip and not just as ticks. The caller checks the selection (`GameFlow.validate_roster_selection`) and reports back with `show_error`.
 
+signal back_requested
+
 signal confirmed(selected: Array[String])
 
 var stage_id: String = ""
@@ -33,6 +35,9 @@ func _build(column: VBoxContainer) -> void:
 	_confirm_button = UiKit.button(tr("Start Battle"), false, UiTheme.PRIMARY)
 	_confirm_button.pressed.connect(confirm)
 	column.add_child(_confirm_button)
+	var back: Button = UiKit.button("Back to Shelter", false, UiTheme.SECONDARY)
+	back.pressed.connect(func() -> void: back_requested.emit())
+	column.add_child(back)
 
 
 ## Resets the screen for one stage. `preselected` seeds the pick order (the default party, or the one that just lost).

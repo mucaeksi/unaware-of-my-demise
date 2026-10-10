@@ -1,0 +1,90 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=3]
+
+[ext_resource type="Texture2D" path="sources/idle_walk_sheet_v002.png" id="1"]
+
+[sub_resource type="AtlasTexture" id="Frame_0"]
+atlas = ExtResource("1")
+region = Rect2(34, 45, 272, 326)
+margin = Rect2(44.0, 24, 88, 24)
+
+[sub_resource type="AtlasTexture" id="Frame_1"]
+atlas = ExtResource("1")
+region = Rect2(399, 45, 268, 326)
+margin = Rect2(46.0, 24, 92, 24)
+
+[sub_resource type="AtlasTexture" id="Frame_2"]
+atlas = ExtResource("1")
+region = Rect2(757, 45, 277, 326)
+margin = Rect2(41.5, 24, 83, 24)
+
+[sub_resource type="AtlasTexture" id="Frame_3"]
+atlas = ExtResource("1")
+region = Rect2(1126, 43, 261, 327)
+margin = Rect2(49.5, 23, 99, 23)
+
+[sub_resource type="AtlasTexture" id="Frame_4"]
+atlas = ExtResource("1")
+region = Rect2(42, 400, 271, 327)
+margin = Rect2(44.5, 23, 89, 23)
+
+[sub_resource type="AtlasTexture" id="Frame_5"]
+atlas = ExtResource("1")
+region = Rect2(396, 400, 276, 328)
+margin = Rect2(42.0, 22, 84, 22)
+
+[sub_resource type="AtlasTexture" id="Frame_6"]
+atlas = ExtResource("1")
+region = Rect2(763, 402, 272, 325)
+margin = Rect2(44.0, 25, 88, 25)
+
+[sub_resource type="AtlasTexture" id="Frame_7"]
+atlas = ExtResource("1")
+region = Rect2(1121, 401, 279, 326)
+margin = Rect2(40.5, 24, 81, 24)
+
+[sub_resource type="AtlasTexture" id="Frame_8"]
+atlas = ExtResource("1")
+region = Rect2(45, 754, 274, 318)
+margin = Rect2(43.0, 32, 86, 32)
+
+[sub_resource type="AtlasTexture" id="Frame_9"]
+atlas = ExtResource("1")
+region = Rect2(412, 753, 261, 319)
+margin = Rect2(49.5, 31, 99, 31)
+
+[sub_resource type="AtlasTexture" id="Frame_10"]
+atlas = ExtResource("1")
+region = Rect2(770, 754, 270, 318)
+margin = Rect2(45.0, 32, 90, 32)
+
+[sub_resource type="AtlasTexture" id="Frame_11"]
+atlas = ExtResource("1")
+region = Rect2(1131, 754, 268, 318)
+margin = Rect2(46.0, 32, 92, 32)
+
+[resource]
+animations = [{
+"frames": [
+{"duration": 1.0, "texture": SubResource("Frame_0")},
+{"duration": 1.0, "texture": SubResource("Frame_1")},
+{"duration": 1.0, "texture": SubResource("Frame_2")},
+{"duration": 1.0, "texture": SubResource("Frame_3")},
+{"duration": 1.0, "texture": SubResource("Frame_4")},
+{"duration": 1.0, "texture": SubResource("Frame_5")},
+{"duration": 1.0, "texture": SubResource("Frame_6")},
+{"duration": 1.0, "texture": SubResource("Frame_7")}
+],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}, {
+"frames": [
+{"duration": 1.0, "texture": SubResource("Frame_8")},
+{"duration": 1.0, "texture": SubResource("Frame_9")},
+{"duration": 1.0, "texture": SubResource("Frame_10")},
+{"duration": 1.0, "texture": SubResource("Frame_11")}
+],
+"loop": true,
+"name": &"idle",
+"speed": 1.6666667
+}]

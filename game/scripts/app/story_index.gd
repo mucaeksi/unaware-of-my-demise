@@ -157,8 +157,9 @@ func _half_scene(stage_id: String, field: String, suffix: String) -> Dictionary:
 	if not (lines is Array) or (lines as Array).is_empty():
 		error = "Stage '%s' scene '%s' has no %s" % [stage_id, str(scene.get("scene_id")), field]
 		return {}
-	return {
-		"scene_id": "%s%s" % [str(scene.get("scene_id")), suffix],
-		"title_en": scene.get("title_en", ""),
-		"lines": lines,
-	}
+	var half: Dictionary = scene.duplicate(true)
+	for line_field: String in ["pre_battle_lines", "battle_lines", "post_battle_lines"]:
+		half.erase(line_field)
+	half["scene_id"] = "%s%s" % [str(scene.get("scene_id")), suffix]
+	half["lines"] = lines.duplicate(true)
+	return half

@@ -50,9 +50,14 @@ func test_ten_second_quote_clock_runs_only_during_download_and_stops_on_phase_ch
 	assert_false(entry._quote_timer.is_stopped(), "presenting before tree entry still starts the clock")
 	assert_false(entry._download_quote.text.is_empty())
 	var first: String = entry._download_quote.text
+	# Observe the first real timeout. A busy machine can process several quote
+	# rotations before a fixed 75 ms sleep resumes, cycling back to `first`.
+	var rotated: Array[String] = []
+	entry._quote_timer.timeout.connect(func() -> void: rotated.append(entry._download_quote.text), CONNECT_ONE_SHOT)
 	entry._quote_timer.start(0.05)
-	await wait_seconds(0.075)
-	assert_ne(entry._download_quote.text, first, "the Timer changes the quote")
+	await wait_for_signal(entry._quote_timer.timeout, 2.0)
+	assert_false(rotated.is_empty(), "the real Timer emits its first timeout")
+	if not rotated.is_empty(): assert_ne(rotated[0], first, "the first timeout changes the quote")
 	assert_eq(entry._download_quote.modulate.a, 1.0, "reduced motion changes quotes without fading")
 	entry.present("verifying", true)
 	var last: String = entry._download_quote.text

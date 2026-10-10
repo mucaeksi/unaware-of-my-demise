@@ -239,3 +239,9 @@ func _refresh() -> void:
 	_exchange.visible = _token_cost > 0
 	_exchange.text = "Exchange %d Eclipse Tokens for 1 Fate's Thread" % _token_cost
 	_exchange.disabled = _busy or _eclipse_tokens < _token_cost
+
+
+## Android Back/Escape follows the visible Back button while an action is pending.
+func handle_back() -> bool:
+	if not _busy: back_requested.emit()
+	return true

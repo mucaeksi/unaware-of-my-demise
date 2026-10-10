@@ -30,7 +30,7 @@ var director: StoryDirector = null
 func _init() -> void:
 	# The shipped interface is English, including locale-sensitive font shaping.
 	TranslationServer.set_locale("en")
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var preferences: ConfigFile = ConfigFile.new()
 	preferences.load("user://settings.cfg")
 	text_scale = clampf(float(preferences.get_value("ui", "text_scale", 1.0)), 1.0, 1.25)
@@ -74,7 +74,17 @@ func show_screen(screen: Control) -> void:
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_WM_GO_BACK_REQUEST:
-			if current != null and current.has_method("handle_back") and bool(current.call("handle_back")):
-				return
-			if director != null:
-				director.on_back_unhandled()
+			handle_back()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and not event.is_echo():
+		handle_back()
+		get_viewport().set_input_as_handled()
+
+
+func handle_back() -> void:
+	if current != null and current.has_method("handle_back") and bool(current.call("handle_back")):
+		return
+	if director != null:
+		director.on_back_unhandled()

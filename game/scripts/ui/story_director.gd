@@ -23,6 +23,7 @@ const HUB_SUMMON: String = "summon"
 const HUB_QUESTS: String = "quests"
 const HUB_FRIENDS: String = "friends"
 const HUB_MAIL: String = "mail"
+const HUB_RECORDS: String = "records"
 const HUB_BLESSING: String = "blessing"
 const HUB_INN_MEAL: String = "inn_meal"
 const HUB_SETTINGS: String = "settings"
@@ -490,7 +491,8 @@ func _present_hub(status: String = "") -> void:
 	var over: bool = flow.is_finished() and not flow.needs_first_oath_selection()
 	var entries: Array[Dictionary] = [
 		{"id": HUB_CONTINUE, "label": "Epilogue" if over else "Continue Story"},
-		{"id": HUB_TEAM, "label": "Team"},
+		{"id": HUB_TEAM, "label": "Companions"},
+		{"id": HUB_RECORDS, "label": "Story Records"},
 		{"id": HUB_INVENTORY, "label": "Inventory"},
 		{"id": HUB_SUMMON, "label": "Summon"},
 		{"id": HUB_QUESTS, "label": "Quests"},
@@ -505,7 +507,17 @@ func _present_hub(status: String = "") -> void:
 	if OS.is_debug_build():
 		entries.append({"id": HUB_DIAGNOSTICS, "label": "Diagnostics"})
 	var hub: HubScreen = HubScreen.new()
+	if shell.has_meta("local_story_review"):
+		status = "Local Story Review · Assisted battles. Separate local progress. Online services require Online mode." + ("\n" + status if not status.is_empty() else "")
 	hub.load_hub(summary, entries, status)
+	var upcoming: String = flow.current_entry()
+	var context: String = "Part I · Journey complete"
+	if not upcoming.is_empty():
+		if flow.is_stage(upcoming):
+			context = "Next · " + _stage_title(upcoming)
+		else:
+			context = "Next · " + str(flow.story_index.narrative_scene(upcoming).get("title_en", "Continue the journey"))
+	hub.load_journey(context)
 	hub.chosen.connect(_on_hub_chosen)
 	shell.show_screen(hub)
 	Audio.play_flow_cue(AudioCues.FLOW_HUB)
@@ -525,6 +537,8 @@ func _on_hub_chosen(entry_id: String) -> void:
 			_present_quests()
 		HUB_FRIENDS:
 			_present_friends()
+		HUB_RECORDS:
+			_present_records()
 		HUB_MAIL:
 			_present_mailbox()
 		HUB_BLESSING:
@@ -569,6 +583,8 @@ func _present_vn(scene: Dictionary, on_finished: Callable) -> void:
 		_show_message("This scene cannot be shown", screen.error, [{"id": "hub", "label": "Back to the menu"}] as Array[Dictionary]).chosen.connect(func(_action_id: String) -> void: _present_hub(), CONNECT_ONE_SHOT)
 		return
 	screen.finished.connect(on_finished, CONNECT_ONE_SHOT)
+	screen.exit_requested.connect(func() -> void: _present_hub())
+	screen.set_exit_label("Return to Shelter")
 	shell.show_screen(screen)
 
 
@@ -600,15 +616,19 @@ func _present_first_oath() -> void:
 	var selector: SelectorScreen = SelectorScreen.new()
 	selector.load_choices(flow.first_oath_choices(), "First Oath Invitation: choose one hero")
 	selector.confirmed.connect(_confirm_first_oath)
+	selector.back_requested.connect(func() -> void: _present_hub())
 	shell.show_screen(selector)
 
 
 func _confirm_first_oath(character_id: String) -> void:
+	var selector: SelectorScreen = shell.current as SelectorScreen
+	if selector == null or selector.busy: return
+	selector.set_busy(true)
 	var claimed: Outcome = await flow.claim_first_oath(character_id)
+	if shell.current != selector: return
+	selector.set_busy(false)
 	if not claimed.is_ok():
-		var selector: SelectorScreen = shell.current as SelectorScreen
-		if selector != null:
-			selector.show_error(claimed.error)
+		selector.show_error(claimed.error)
 		return
 	_present_current_entry()
 
@@ -632,6 +652,7 @@ func _present_roster(stage_id: String, preselected: Variant = null) -> void:
 	var roster: RosterScreen = RosterScreen.new()
 	roster.load_stage(stage_id, flow.party_size(), flow.roster_candidates(), flow.guest_display_names(stage_id), start)
 	roster.confirmed.connect(func(selected: Array[String]) -> void: _confirm_roster(stage_id, selected))
+	roster.back_requested.connect(func() -> void: _present_hub())
 	shell.show_screen(roster)
 
 
@@ -1233,6 +1254,14 @@ func _present_settings(status: String = "", ad_privacy: bool = false) -> void:
 	for bus: String in Audio.BUSES:
 		volumes[bus] = Audio.volume(bus)
 	settings.load_volumes(volumes)
+	settings.load_accessibility(shell.text_scale, shell.reduced_motion)
+	settings.text_scale_changed.connect(func(value: float) -> void:
+		shell.text_scale = value
+		shell.theme = UiTheme.create(value)
+		shell.save_ui_preferences())
+	settings.motion_changed.connect(func(value: bool) -> void:
+		shell.reduced_motion = value
+		shell.save_ui_preferences())
 	settings.volume_changed.connect(func(bus: String, linear: float) -> void: Audio.set_volume(bus, linear))
 	settings.back_requested.connect(func() -> void: _present_hub())
 	settings.action_requested.connect(func(action_id: String) -> void:
@@ -1319,3 +1348,20 @@ func _show_message(title: String, message: String, actions: Array[Dictionary] = 
 	screen.load_message(title, message, actions, "loading" if presentation_state.is_empty() and actions.is_empty() else presentation_state)
 	shell.show_screen(screen)
 	return screen
+
+
+func _present_records() -> void:
+	var screen: RecordsScreen = RecordsScreen.new()
+	screen.load_records(StoryRecords.rows(flow))
+	screen.back_requested.connect(func() -> void: _present_hub())
+	screen.replay_requested.connect(func(scene: Dictionary) -> void:
+		var reader: VnScreen = VnScreen.new()
+		if not reader.load_scene(scene):
+			_show_message("Record could not be read", reader.error, [{"id":"back", "label":"Back to Records"}] as Array[Dictionary]).chosen.connect(func(_id: String) -> void: _present_records(), CONNECT_ONE_SHOT)
+			reader.free()
+			return
+		reader.finished.connect(_present_records, CONNECT_ONE_SHOT)
+		reader.exit_requested.connect(_present_records)
+		reader.set_exit_label("Return to Records")
+		shell.show_screen(reader))
+	shell.show_screen(screen)

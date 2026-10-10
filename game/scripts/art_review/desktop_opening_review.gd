@@ -4,6 +4,9 @@ const Preferences = preload("res://scripts/app/onboarding_preferences.gd")
 const REVIEW_ROOT: String = "user://desktop_review"
 const REVIEW_ACCOUNT: String = "desktop-opening-review"
 
+var review_root: String = REVIEW_ROOT
+var review_account: String = REVIEW_ACCOUNT
+
 class ReviewBackend extends GameBackend:
 	var snapshot: Dictionary = {}
 
@@ -14,37 +17,31 @@ class ReviewBackend extends GameBackend:
 		return Outcome.fail(KIND_OFFLINE, "This action requires the online game. The desktop review includes the opening and tutorial.")
 
 func _ready() -> void:
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	if not OS.has_feature("editor") or OS.get_name() not in ["Windows", "Linux", "macOS"]:
 		push_error("Desktop review requires the desktop Godot editor executable.")
 		get_tree().quit(1)
 		return
-	DirAccess.make_dir_recursive_absolute(REVIEW_ROOT)
+	DirAccess.make_dir_recursive_absolute(review_root)
 	# Preview checkpoints and mounted content are separate from the real account.
-	Online.account_id = REVIEW_ACCOUNT
-	Online.onboarding_path = REVIEW_ROOT + "/onboarding.cfg"
-	Online.preferences_path = REVIEW_ROOT + "/auth.cfg"
+	Online.account_id = review_account
+	Online.onboarding_path = review_root + "/onboarding.cfg"
+	Online.preferences_path = review_root + "/auth.cfg"
 	Online.session_token = ""
 	Online.is_new_account = true
 	ProjectSettings.set_setting(Online.SERVER_URL_SETTING, "")
-	Game.content = ContentInstaller.new(null, -1, REVIEW_ROOT + "/content")
+	Game.content = ContentInstaller.new(null, -1, review_root + "/content")
 	if "--reset-review" in OS.get_cmdline_user_args():
 		DirAccess.remove_absolute(Online.onboarding_path)
-		DirAccess.remove_absolute(REVIEW_ROOT + "/prologue.cfg")
-	Preferences.register(Online.onboarding_path, REVIEW_ACCOUNT, true)
+		DirAccess.remove_absolute(review_root + "/prologue.cfg")
+	Preferences.register(Online.onboarding_path, review_account, true)
 	flow = GameFlow.create()
-	var local: ReviewBackend = ReviewBackend.new()
-	if flow.is_ready():
-		local.snapshot = JSON.parse_string(JSON.stringify({
-			"schema_version": PlayerState.SCHEMA_VERSION,
-			"story_state": flow.rules.story.to_persisted_dict(flow.rules.story.new_player_state()),
-			"wallet": {"silver_crowns": 0, "eclipse_tokens": 0, "account_xp": 0},
-		}))
-	backend = local
+	backend = _create_backend()
 	DisplayServer.window_set_title("Unaware of My Demise · Desktop Review")
 	director = StoryDirector.new()
 	director.shell = self
-	director.prologue_seen_path = REVIEW_ROOT + "/prologue.cfg"
-	director.restart_hint_path = REVIEW_ROOT + "/restart.cfg"
+	director.prologue_seen_path = review_root + "/prologue.cfg"
+	director.restart_hint_path = review_root + "/restart.cfg"
 	director.restart_client = _continue_review
 	add_child(director)
 	director.start()
@@ -55,3 +52,13 @@ func _continue_review() -> bool:
 	director.start(true)
 	director._connect_entry()
 	return true
+
+func _create_backend() -> GameBackend:
+	var local: ReviewBackend = ReviewBackend.new()
+	if flow.is_ready():
+		local.snapshot = JSON.parse_string(JSON.stringify({
+			"schema_version": PlayerState.SCHEMA_VERSION,
+			"story_state": flow.rules.story.to_persisted_dict(flow.rules.story.new_player_state()),
+			"wallet": {"silver_crowns": 0, "eclipse_tokens": 0, "account_xp": 0},
+		}))
+	return local

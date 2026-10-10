@@ -9,6 +9,7 @@ extends UiScreen
 ## changes play when the line shows.
 
 signal finished
+signal exit_requested
 
 const BASE_AUTO_SECONDS: float = 3.2
 const MIN_LINE_SECONDS: float = 5.5
@@ -33,11 +34,15 @@ var voice_stream_resolver: Callable = Callable()
 ## Visual-only local review can defer all audio without changing shipped takes.
 var audio_enabled: bool = true
 
+var _scene_id: String = ""
+var _after_stage: String = ""
+
 var _lines: Array[Dictionary] = []
 var _index: int = 0
 var _auto_speed: int = 0
 var _done: bool = false
 
+var _exit_button: Button
 var _title_label: Label = null
 var _stage_panel: PanelContainer = null
 var _background: TextureRect = null
@@ -95,6 +100,10 @@ func _build(column: VBoxContainer) -> void:
 	BattleHudStyle.label(_reader_progress,24,BattleHudStyle.MUTED)
 	header.add_child(_reader_progress)
 	column.add_child(header)
+	_exit_button = UiKit.button("Return", false, UiTheme.SECONDARY)
+	_exit_button.visible = false
+	_exit_button.pressed.connect(func() -> void: exit_requested.emit())
+	column.add_child(_exit_button)
 
 	_stage_panel = PanelContainer.new()
 	_stage_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -234,7 +243,11 @@ func load_scene(scene: Dictionary) -> bool:
 	_done = false
 	_last_speaker = ""
 	_closing_hold = maxf(BASE_AUTO_SECONDS, float(scene.get("closing_hold_seconds", 3.5)))
+	_scene_id = str(scene.get("scene_id", scene.get("story_id", "")))
+	_after_stage = str(scene.get("unlock", {}).get("after_stage", ""))
 	_illustration = BattleArt.illustration(str(scene.get("illustration_id", ""))) if assets == null else null
+	if assets == null and _illustration == null:
+		_illustration = BattleArt.scene_illustration(_scene_id)
 	if _log_panel.visible:
 		toggle_log()
 	if audio_enabled:
@@ -244,7 +257,8 @@ func load_scene(scene: Dictionary) -> bool:
 	_background_reference = "background/%s/story" % location if not location.is_empty() else ""
 	_show_art(_background, _background_reference)
 	if assets == null and not _background.visible:
-		var candidate_background: Texture2D = BattleArt.background(location)
+		var candidate_background: Texture2D = BattleArt.story_background(location)
+		if candidate_background == null: candidate_background = BattleArt.background(location)
 		if candidate_background != null:
 			_background.texture = candidate_background
 			_background.visible = true
@@ -349,7 +363,7 @@ func _show_line() -> void:
 	_show_art(_bust, _bust_reference)
 	# The shipped Fadyme expression set follows authored emotions; tests/tooling
 	# with an injected asset resolver keep their isolated catalog contract.
-	var expression: Texture2D = BattleArt.portrait(speaker_id, str(line.get("emotion", ""))) if assets == null else null
+	var expression: Texture2D = BattleArt.story_portrait(speaker_id, str(line.get("emotion", "")), _scene_id, str(line.get("line_id", "")), _after_stage) if assets == null else null
 	if expression != null:
 		_bust.texture = expression
 		_bust.visible = true
@@ -556,3 +570,9 @@ func _refresh_readability() -> void:
 	_dialogue_panel.custom_minimum_size.y = 310 * font_scale
 	for button: Button in [_back_button,_auto_button,_log_button,_next_button]:
 		button.add_theme_font_size_override("font_size",roundi(32 * font_scale))
+
+
+func set_exit_label(caption: String) -> void:
+	ensure_built()
+	_exit_button.text = caption
+	_exit_button.show()

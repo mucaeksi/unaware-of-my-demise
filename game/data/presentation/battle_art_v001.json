@@ -94,7 +94,8 @@
         "defeat": 0.7703016241299304,
         "victory": 0.9582366589327146
       },
-      "pivot_x_by_state": {}
+      "pivot_x_by_state": {},
+      "locomotion": "res://assets/characters/fadyme/production_v002/animation/locomotion_spriteframes_v002.tres"
     },
     "mahmut": {
       "atlas": "res://assets/characters/mahmut/chibi_poses_v003.png",
@@ -357,22 +358,91 @@
         "warm": "res://assets/characters/fadyme/vn_warm_v001.png",
         "quiet_pain": "res://assets/characters/fadyme/vn_quiet_pain_v001.png",
         "honest_fear": "res://assets/characters/fadyme/vn_honest_fear_v001.png",
-        "wry": "res://assets/characters/fadyme/vn_wry_v001.png"
+        "wry": "res://assets/characters/fadyme/vn_wry_v001.png",
+        "curiosity": "res://assets/characters/fadyme/production_v002/vn/vn_curiosity_v002.png",
+        "resolve": "res://assets/characters/fadyme/production_v002/vn/vn_resolve_v002.png",
+        "strain": "res://assets/characters/fadyme/production_v002/vn/vn_strain_v002.png",
+        "vulnerable": "res://assets/characters/fadyme/production_v002/vn/vn_vulnerable_v002.png"
       },
       "emotions": {
         "composed": "composed",
-        "determined": "composed",
         "steady": "composed",
+        "controlled": "composed",
+        "quiet": "composed",
+        "soft": "composed",
+        "low": "composed",
+        "careful": "composed",
+        "observant": "composed",
+        "perceptive": "composed",
+        "serious": "composed",
         "soft_smile": "warm",
         "small_smile": "warm",
+        "encouraging": "warm",
+        "smile": "warm",
+        "smiling": "warm",
+        "warm": "warm",
+        "gentle": "warm",
+        "kind": "warm",
+        "relieved": "warm",
+        "hopeful": "warm",
+        "tender": "warm",
+        "touched": "warm",
+        "content": "warm",
         "dry_amusement": "wry",
         "deflecting": "wry",
-        "encouraging": "warm",
+        "dry": "wry",
+        "wry": "wry",
+        "knowing": "wry",
+        "light": "wry",
+        "amused": "wry",
+        "laughing": "wry",
         "sad": "quiet_pain",
         "breaking": "quiet_pain",
         "pained_smile": "quiet_pain",
+        "wistful": "quiet_pain",
+        "guilt": "quiet_pain",
+        "guilty": "quiet_pain",
+        "hurt": "quiet_pain",
+        "bittersweet": "quiet_pain",
+        "melancholy": "quiet_pain",
         "frightened": "honest_fear",
-        "uneasy": "honest_fear"
+        "uneasy": "honest_fear",
+        "fear": "honest_fear",
+        "shaken": "honest_fear",
+        "stunned": "honest_fear",
+        "terrified": "honest_fear",
+        "afraid": "honest_fear",
+        "disbelief": "honest_fear",
+        "wary": "honest_fear",
+        "curious": "curiosity",
+        "focused": "curiosity",
+        "sharp": "curiosity",
+        "determined": "resolve",
+        "firm": "resolve",
+        "defiant": "resolve",
+        "cold": "resolve",
+        "guarded": "resolve",
+        "strained": "strain",
+        "breathless": "strain",
+        "weak_smile": "strain",
+        "false_calm": "strain",
+        "false_reassurance": "strain",
+        "vulnerable": "vulnerable",
+        "fragile": "vulnerable",
+        "pleading": "vulnerable",
+        "honest": "vulnerable",
+        "tearful": "vulnerable",
+        "weak_laugh": "vulnerable"
+      },
+      "line_overrides": {
+        "node_3_3_pre_004": "strain",
+        "confession_012": "vulnerable",
+        "ending_fadyme_003": "vulnerable"
+      },
+      "story_states": {
+        "hidden_blood_scarf": "res://assets/characters/fadyme/production_v002/story/vn_hidden_blood_scarf_v002.png",
+        "bone_white_lock": "res://assets/characters/fadyme/production_v002/story/vn_white_lock_v002.png",
+        "late_debt_hands": "res://assets/characters/fadyme/production_v002/story/vn_black_gold_hands_v002.png"
       }
     }
   },
@@ -391,5 +461,13 @@
     "mahmut": "res://assets/characters/mahmut/profile_icon_v001.png",
     "fadyme": "res://assets/characters/fadyme/profile_icon_v001.png"
   },
-  "quality_standard": "painted_chibi_v003"
+  "quality_standard": "painted_chibi_v003",
+  "scene_illustrations": {
+    "opening_sad_scene": "res://assets/characters/fadyme/production_v002/cinematics/opening_letter_v002.png",
+    "part1_emotional_confession": "res://assets/characters/fadyme/production_v002/cinematics/confession_v002.png",
+    "part1_clockless_reveal": "res://assets/characters/fadyme/production_v002/cinematics/clockless_reveal_v002.png"
+  },
+  "story_environments": {
+    "forest_whispering_ash": "res://assets/backgrounds/forest_whispering_ash/story_ordered_v001.png"
+  }
 }

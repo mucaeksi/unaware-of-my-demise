@@ -3,8 +3,11 @@ extends UiScreen
 ## Single-choice hero selector (port of client/screens/selector_screen.py): exactly one pick from a fixed pool, currently the First Oath
 ## Invitation. The choices form one toggle group and Confirm stays disabled until something is picked.
 
+signal back_requested
+
 signal confirmed(character_id: String)
 
+var busy: bool = false
 var selected: String = ""
 
 var _title_label: Label = null
@@ -29,6 +32,9 @@ func _build(column: VBoxContainer) -> void:
 	_confirm_button.disabled = true
 	_confirm_button.pressed.connect(confirm)
 	column.add_child(_confirm_button)
+	var back: Button = UiKit.button("Back to Shelter", false, UiTheme.SECONDARY)
+	back.pressed.connect(func() -> void: handle_back())
+	column.add_child(back)
 
 
 ## Resets the screen for one round of picking.
@@ -44,6 +50,9 @@ func load_choices(candidates: Array[GameFlow.RosterCandidate], title: String = "
 	_title_label.text = title
 	for candidate: GameFlow.RosterCandidate in candidates:
 		var button: Button = UiKit.button(UiKit.hero_line(candidate), true)
+		button.icon = BattleArt.icon(candidate.character_id)
+		button.expand_icon = true
+		button.add_theme_constant_override("icon_max_width", 96)
 		button.button_group = _group
 		button.toggled.connect(_on_toggled.bind(candidate.character_id))
 		_list.add_child(button)
@@ -80,5 +89,15 @@ func show_error(message: String) -> void:
 
 
 func confirm() -> void:
-	if not selected.is_empty():
+	if not busy and not selected.is_empty():
 		confirmed.emit(selected)
+
+
+func set_busy(value: bool) -> void:
+	busy = value
+	_confirm_button.disabled = busy or selected.is_empty()
+	for button: Button in _buttons.values(): button.disabled = busy
+
+func handle_back() -> bool:
+	if not busy: back_requested.emit()
+	return true

@@ -248,3 +248,9 @@ func _refresh() -> void:
 		(_action_buttons[action] as Button).disabled = _busy or row == null or not _allowed(action, row)
 	_add_button.disabled = _busy
 	_rename_button.disabled = _busy or not _rename_allowed
+
+
+## Android Back/Escape follows the visible Back button while an action is pending.
+func handle_back() -> bool:
+	if not _busy: back_requested.emit()
+	return true

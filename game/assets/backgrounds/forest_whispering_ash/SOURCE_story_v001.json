@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "source": "narrative/08_Locations/Reference_Images/forest_whispering_ash/bg_forest_whispering_ash_ordered_v001.png",
+  "runtime": "game/assets/backgrounds/forest_whispering_ash/story_ordered_v001.png",
+  "sha256": "02751e68cc927cc536eb3a330ddf2df25883b48da2812651047750090a02d2ac",
+  "method": "byte_exact",
+  "source_masters": "preserved"
+}

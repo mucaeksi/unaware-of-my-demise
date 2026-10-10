@@ -58,6 +58,9 @@ func load_team(members: Array[GameViews.TeamMember], xp_items: Array[GameViews.X
 	selected = ""
 	for member: GameViews.TeamMember in members:
 		var button: Button = UiKit.button(member_text(member), true)
+		button.icon = BattleArt.icon(member.character_id)
+		button.expand_icon = true
+		button.add_theme_constant_override("icon_max_width", 96)
 		button.button_group = _group
 		button.toggled.connect(_on_member_toggled.bind(member.character_id))
 		_list.add_child(button)

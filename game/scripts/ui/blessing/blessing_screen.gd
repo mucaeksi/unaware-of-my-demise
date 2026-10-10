@@ -98,3 +98,9 @@ func _refresh() -> void:
 	_claim_button.text = "Claim (%d)" % _claimable if _claimable > 0 else "Claim"
 	_buy_button.disabled = _busy or not _can_buy
 	_restore_button.disabled = _busy or not _can_buy
+
+
+## Android Back/Escape follows the visible Back button while an action is pending.
+func handle_back() -> bool:
+	if not _busy: back_requested.emit()
+	return true

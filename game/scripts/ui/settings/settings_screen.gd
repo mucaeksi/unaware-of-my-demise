@@ -6,6 +6,9 @@ extends UiScreen
 
 signal back_requested
 signal action_requested(action_id: String)
+signal text_scale_changed(value: float)
+signal motion_changed(value: bool)
+
 signal volume_changed(bus: String, linear: float)
 
 ## Slider order and labels (the Audio autoload's bus names).
@@ -15,20 +18,23 @@ var _info_label: Label = null
 var _status_label: Label = null
 var _actions: VBoxContainer = null
 var _volumes: VBoxContainer = null
+var _accessibility: VBoxContainer
 var _sliders: Dictionary = {}
 
 
 func _build(column: VBoxContainer) -> void:
 	column.add_child(UiKit.label("Settings", UiTheme.TITLE))
+	var content: VBoxContainer = UiKit.scroll_column(column, 18)
 	_info_label = UiKit.label("")
-	column.add_child(_info_label)
+	content.add_child(_info_label)
 	_status_label = UiKit.label("", UiTheme.DIM)
-	column.add_child(_status_label)
+	content.add_child(_status_label)
 	_volumes = UiKit.column(8)
-	column.add_child(_volumes)
+	content.add_child(_volumes)
 	_actions = UiKit.column(16)
-	column.add_child(_actions)
-	column.add_child(UiKit.spacer(0, true))
+	content.add_child(_actions)
+	_accessibility = UiKit.column(12)
+	content.add_child(_accessibility)
 	var back: Button = UiKit.button("Back")
 	back.pressed.connect(func() -> void: back_requested.emit())
 	column.add_child(back)
@@ -86,3 +92,17 @@ func info_text() -> String:
 
 func status_text() -> String:
 	return _status_label.text
+
+
+func load_accessibility(text_scale: float, reduced_motion: bool) -> void:
+	ensure_built()
+	UiKit.clear(_accessibility)
+	_accessibility.add_child(UiKit.label("Accessibility", UiTheme.TITLE))
+	var large: Button = UiKit.button("Large Text", true)
+	large.button_pressed = text_scale > 1.0
+	large.toggled.connect(func(enabled: bool) -> void: text_scale_changed.emit(1.25 if enabled else 1.0))
+	_accessibility.add_child(large)
+	var motion: Button = UiKit.button("Reduced Motion", true)
+	motion.button_pressed = reduced_motion
+	motion.toggled.connect(func(enabled: bool) -> void: motion_changed.emit(enabled))
+	_accessibility.add_child(motion)

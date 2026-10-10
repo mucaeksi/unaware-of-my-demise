@@ -49,8 +49,8 @@ func cancel() -> void:
 	set_process(false)
 
 func _layout() -> void:
-	var reveal: float = clampf(_elapsed/0.32,0,1)
-	var eased: float = 1.0-pow(1.0-reveal,3)
+	var reveal: float = 1.0 if UiPageTransition.reduced_for(self) else clampf(_elapsed/0.32,0,1)
+	var eased: float = 1.0 if UiPageTransition.reduced_for(self) else 1.0-pow(1.0-reveal,3)
 	_portrait.position = Vector2(size.x*(0.12+(1.0-eased)*0.28),size.y*0.12)
 	_portrait.size = Vector2(size.x*0.76,size.y*0.62)
 	_portrait.modulate.a = minf(reveal*1.5,1)
@@ -74,6 +74,7 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	if not _active: return
 	draw_rect(Rect2(Vector2.ZERO,size),Color(0.018,0.01,0.035,0.78))
+	if UiPageTransition.reduced_for(self): return
 	var center: Vector2 = size*Vector2(0.5,0.42)
 	var radius: float = size.x*(0.30+clampf(_elapsed/DURATION,0,1)*0.10)
 	if _stone:

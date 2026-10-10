@@ -1,0 +1,7 @@
+Part I content audit passed: 29 JSON files; 20 characters / 80 skills; 27 enemies; 180 weapons; 36 armors; 42 accessory templates; 35 stages.
+Battle effect contract: 80 skills; 58 enemy actions; 2 enemy passive profiles; 11 boss signature actions; 14 boss phases; 31 selectors; all operation, selector, event, predicate, status, and phase links resolve.
+Story coverage: all 20 playable characters and 419 unique line IDs resolve; 5 text-only narration cards are deliberately unvoiced.
+Account XP: 30 daily windows x 400 + 1300 first-clear boss XP = 13300 XP through the Level 20 cap.
+Stable brand mark references resolved: 246 registered marks.
+Rule keys: 118 battle_rules keys classified (58 runtime-consumed, 60 descriptive/pinned).
+Gacha math: 15-day repeatable baseline 8800 Tokens / 55 pulls; subscription 12820 Tokens; character soft-pity probabilities normalize.

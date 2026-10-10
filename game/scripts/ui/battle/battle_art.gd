@@ -96,3 +96,29 @@ static func icon(art_id: String) -> Texture2D:
 	cropped.region = Rect2(Vector2((dimensions.x-edge)*0.5,dimensions.y*0.03),Vector2.ONE*edge)
 	cropped.filter_clip = true
 	return cropped
+
+
+static func story_portrait(character_id: String, emotion: String, scene_id: String, line_id: String, after_stage: String = "") -> Texture2D:
+	if character_id != "fadyme": return portrait(character_id, emotion)
+	var spec: Dictionary = data().get("portraits", {}).get("fadyme", {})
+	var state: String = ""
+	# Scene context, rather than the current account cursor, also keeps old replays spoiler-safe.
+	if after_stage == "7-5" or scene_id == "vn_7_5_post" or scene_id in ["part1_emotional_confession", "part1_clockless_reveal"]:
+		state = "late_debt_hands"
+	elif (not after_stage.is_empty() and after_stage >= "5-4") or scene_id == "vn_5_4_post" or scene_id.begins_with("vn_5_5") or scene_id.begins_with("vn_6_") or scene_id.begins_with("vn_7_") or scene_id in ["ch5_camp", "ch6_road", "ch6_camp", "ch7_road"]:
+		state = "bone_white_lock"
+	elif line_id == "node_3_3_pre_004" or line_id == "node_3_3_post_003":
+		state = "hidden_blood_scarf"
+	if not state.is_empty():
+		var state_art: Texture2D = texture(str(spec.get("story_states", {}).get(state, "")))
+		if state_art != null: return state_art
+	var alias: String = str(spec.get("line_overrides", {}).get(line_id, spec.get("emotions", {}).get(emotion, "composed")))
+	return texture(str(spec.get("files", {}).get(alias, "")))
+
+
+static func scene_illustration(scene_id: String) -> Texture2D:
+	return texture(str(data().get("scene_illustrations", {}).get(scene_id, "")))
+
+
+static func story_background(location: String) -> Texture2D:
+	return texture(str(data().get("story_environments", {}).get(location, "")))

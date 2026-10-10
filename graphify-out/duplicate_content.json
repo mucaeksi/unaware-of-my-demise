@@ -421,6 +421,15 @@
     ]
   },
   {
+    "sha256": "02751e68cc927cc536eb3a330ddf2df25883b48da2812651047750090a02d2ac",
+    "files": [
+      "game/assets/ui/narrative/prologue_v001/forest_road.png",
+      "game/assets/backgrounds/forest_whispering_ash/story_ordered_v001.png",
+      "release/current/game/assets/ui/narrative/prologue_v001/forest_road.png",
+      "narrative/08_Locations/Reference_Images/forest_whispering_ash/bg_forest_whispering_ash_ordered_v001.png"
+    ]
+  },
+  {
     "sha256": "b0f78a4110695aab148a9a5d8aa3f3f4470f499d277ed47cde7ce54761d24e47",
     "files": [
       "game/assets/branding/sovtaym/v01/emblem.png",
@@ -440,6 +449,123 @@
       "game/assets/characters/fadyme/chibi_poses_v003.png",
       "release/current/game/assets/characters/fadyme/chibi_poses_v003.png",
       "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/sources/chibi_poses_v003.png"
+    ]
+  },
+  {
+    "sha256": "a81a90372c43c327cd32e5325197c78239fb35ae415368bf2da2a8e8c1636f8f",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/animation/sources/idle_walk_sheet_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/animation/sources/idle_walk_sheet_v002.png"
+    ]
+  },
+  {
+    "sha256": "4dd30e5ad54df9676ca22a204899041850c6889e36e9feb6e8e02ecc0b14970d",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/cinematics/clockless_reveal_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/clockless_reveal_v002.png"
+    ]
+  },
+  {
+    "sha256": "30b40d06140222a93935c961dfc7a0fd45dc64555e8cde3162ff1f0340fd6a3c",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/cinematics/confession_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/confession_v002.png"
+    ]
+  },
+  {
+    "sha256": "0b2a7bb8e10a5a5ee7b64159b3edf6e51de8525c490c612752c0ecc780685441",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/cinematics/opening_letter_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/cinematics/opening_letter_v002.png"
+    ]
+  },
+  {
+    "sha256": "4ec56cac05a03b1ac67777fa192d8f7f7bbcdcc37748f33a76a62f711166d9fa",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/story/vn_black_gold_hands_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/vn_black_gold_hands_v002.png"
+    ]
+  },
+  {
+    "sha256": "d35cceae768c753349f67d62cb9c5723f853e64e9d983acbbe6276910543466a",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/story/vn_hidden_blood_scarf_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/vn_hidden_blood_scarf_v002.png"
+    ]
+  },
+  {
+    "sha256": "f0f099ef4c996802410c162a71989cec2ab6fc95995e6d002986bbfb5d275781",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/story/vn_white_lock_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/story/vn_white_lock_v002.png"
+    ]
+  },
+  {
+    "sha256": "2bf865b3906a3e6b1b68181393a547ba54b3b6b1a3a0cd47c7394800a509d36f",
+    "files": [
+      "game/data/legal/gdquest-vfx-mit.txt",
+      "game/assets/vfx/gdquest_reference/LICENSE-MIT.txt",
+      "game/assets/characters/fadyme/production_v002/vfx/licenses/GDQuest-MIT.txt",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/licenses/GDQuest-MIT.txt"
+    ]
+  },
+  {
+    "sha256": "7edd59126c258e602e69905a0517cf51bedea489b1a69eb06a77edee1769e81e",
+    "files": [
+      "game/data/legal/kenney-particles-cc0.txt",
+      "game/assets/vfx/kenney_impacts/LICENSE.txt",
+      "game/assets/third_party/reference/kenney-particles/LICENSE.txt",
+      "game/assets/characters/fadyme/production_v002/vfx/licenses/Kenney-CC0.txt",
+      "release/current/game/assets/vfx/kenney_impacts/LICENSE.txt",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/licenses/Kenney-CC0.txt"
+    ]
+  },
+  {
+    "sha256": "e15db5a8ccea012f4df82689f1a829bdaac04fd8a3066a723f157e0b01ffbf0a",
+    "files": [
+      "game/assets/vfx/kenney_impacts/light_01.png",
+      "game/assets/third_party/reference/kenney-particles/light_01.png",
+      "game/assets/characters/fadyme/production_v002/vfx/textures/light_01.png",
+      "release/current/game/assets/vfx/kenney_impacts/light_01.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/textures/light_01.png"
+    ]
+  },
+  {
+    "sha256": "ca5e7eac772d5af176f0d45be34f416908859bf28697c31f3ec7f34609919f53",
+    "files": [
+      "game/assets/vfx/kenney_impacts/spark_01.png",
+      "game/assets/third_party/reference/kenney-particles/spark_01.png",
+      "game/assets/characters/fadyme/production_v002/vfx/textures/spark_01.png",
+      "release/current/game/assets/vfx/kenney_impacts/spark_01.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/textures/spark_01.png"
+    ]
+  },
+  {
+    "sha256": "fb827919861026f39d78710129bc9d8d770c9f07667774ebf3ac08bb8cb1bf8b",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/vn/vn_curiosity_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_curiosity_v002.png"
+    ]
+  },
+  {
+    "sha256": "0838156beec6724bfdf17ab36017ff524d0c638a642808a5cfee098252b03ab3",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/vn/vn_resolve_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_resolve_v002.png"
+    ]
+  },
+  {
+    "sha256": "6ce71fe21f2d9f243b3535a2f2fae65a9cf095bd4cc4ead7162da5076ca07682",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/vn/vn_strain_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_strain_v002.png"
+    ]
+  },
+  {
+    "sha256": "4e641638f11b4d332d023dd27792397a0b72ebaced2febf33e6a60c9a6fff111",
+    "files": [
+      "game/assets/characters/fadyme/production_v002/vn/vn_vulnerable_v002.png",
+      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_vulnerable_v002.png"
     ]
   },
   {
@@ -737,33 +863,6 @@
     ]
   },
   {
-    "sha256": "7edd59126c258e602e69905a0517cf51bedea489b1a69eb06a77edee1769e81e",
-    "files": [
-      "game/assets/vfx/kenney_impacts/LICENSE.txt",
-      "game/assets/third_party/reference/kenney-particles/LICENSE.txt",
-      "release/current/game/assets/vfx/kenney_impacts/LICENSE.txt",
-      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/licenses/Kenney-CC0.txt"
-    ]
-  },
-  {
-    "sha256": "e15db5a8ccea012f4df82689f1a829bdaac04fd8a3066a723f157e0b01ffbf0a",
-    "files": [
-      "game/assets/vfx/kenney_impacts/light_01.png",
-      "game/assets/third_party/reference/kenney-particles/light_01.png",
-      "release/current/game/assets/vfx/kenney_impacts/light_01.png",
-      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/textures/light_01.png"
-    ]
-  },
-  {
-    "sha256": "ca5e7eac772d5af176f0d45be34f416908859bf28697c31f3ec7f34609919f53",
-    "files": [
-      "game/assets/vfx/kenney_impacts/spark_01.png",
-      "game/assets/third_party/reference/kenney-particles/spark_01.png",
-      "release/current/game/assets/vfx/kenney_impacts/spark_01.png",
-      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/textures/spark_01.png"
-    ]
-  },
-  {
     "sha256": "818283fd7232f084e49843a954b6159ff41449ece2a050c5680c0109ee4ef5cf",
     "files": [
       "game/assets/ui/gothic/v02/icons/back.svg",
@@ -880,14 +979,6 @@
     "files": [
       "game/assets/ui/narrative/prologue_v001/crownfall.png",
       "release/current/game/assets/ui/narrative/prologue_v001/crownfall.png"
-    ]
-  },
-  {
-    "sha256": "02751e68cc927cc536eb3a330ddf2df25883b48da2812651047750090a02d2ac",
-    "files": [
-      "game/assets/ui/narrative/prologue_v001/forest_road.png",
-      "release/current/game/assets/ui/narrative/prologue_v001/forest_road.png",
-      "narrative/08_Locations/Reference_Images/forest_whispering_ash/bg_forest_whispering_ash_ordered_v001.png"
     ]
   },
   {
@@ -1260,13 +1351,6 @@
     "files": [
       "game/assets/ui/production/v001/icons/offline.svg",
       "release/current/game/assets/ui/production/v001/icons/offline.svg"
-    ]
-  },
-  {
-    "sha256": "2bf865b3906a3e6b1b68181393a547ba54b3b6b1a3a0cd47c7394800a509d36f",
-    "files": [
-      "game/assets/vfx/gdquest_reference/LICENSE-MIT.txt",
-      "narrative/15_Art_Workbench/characters/fadyme/production_v002/vfx/licenses/GDQuest-MIT.txt"
     ]
   },
   {
@@ -1763,6 +1847,21 @@
     "files": [
       "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_a_smile_kept_normal.png",
       "narrative/15_Art_Workbench/characters/fadyme/production_v002/validation/vfx_a_smile_kept_reduced.png"
+    ]
+  },
+  {
+    "sha256": "a53f82b6b05d1fdc41160f43ce5b9e8c645b1c29a2f8144e771f796ff0b9a79f",
+    "files": [
+      "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_cleanse-normal.png",
+      "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_restore-normal.png"
+    ]
+  },
+  {
+    "sha256": "a56f9176c07e256b6733e8c23315af9e5f5817eec2137e87fe274a707361288f",
+    "files": [
+      "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-cleared-true.png",
+      "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_cleanse-reduced.png",
+      "narrative/15_Art_Workbench/full_game_review_v001/evidence/fx-ally_restore-reduced.png"
     ]
   },
   {

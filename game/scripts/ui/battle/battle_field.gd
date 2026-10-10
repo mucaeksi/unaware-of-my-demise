@@ -3,6 +3,15 @@ extends Control
 ## Portrait-phone arena: player left -> right; enemy right -> left.
 ## Logical Front/Rear slots remain engine-owned. Later waves share their slot.
 
+const FADYME_FX: String = "res://assets/characters/fadyme/production_v002/vfx/"
+const FX_SKILLS: Dictionary = {
+	"fadyme_basic_veilglass_thorn": "veilglass_thorn",
+	"fadyme_active_borrowed_hour": "borrowed_hour",
+	"fadyme_passive_a_smile_kept": "a_smile_kept",
+	"fadyme_ultimate_the_bell_that_forgets": "bell_that_forgets",
+}
+var _effects: Array[Node2D] = []
+var _skill_by_source: Dictionary = {}
 var actors: Dictionary = {}
 var _views: Array[BattlePlayback.UnitView] = []
 var _background: TextureRect = null
@@ -17,6 +26,8 @@ func populate(views: Array[BattlePlayback.UnitView], environment: String = "fore
 		remove_child(child)
 		child.queue_free()
 	actors.clear()
+	_effects.clear()
+	_skill_by_source.clear()
 	_views = views
 	_background = TextureRect.new()
 	_background.texture = BattleArt.background(environment)
@@ -144,6 +155,19 @@ func cue(cue_data: BattlePlayback.Cue, pace: float) -> void:
 	var actor: BattleActor = actors.get(cue_data.unit_id)
 	if actor == null:
 		return
+	if cue_data.kind in [BattlePlayback.CUE_ACTION, BattlePlayback.CUE_PASSIVE]:
+		_skill_by_source[cue_data.unit_id] = cue_data.skill_id
+		if actor.art_id == "fadyme" and FX_SKILLS.has(cue_data.skill_id):
+			var anchor: Vector2 = actor.position + Vector2(0, -actor.art_size * 0.45)
+			if cue_data.action_type in ["active", "ultimate"] and cue_data.kind == BattlePlayback.CUE_ACTION:
+				anchor = size * Vector2(0.70 if actor.facing_right else 0.30, 0.45)
+			_skill_effect(str(FX_SKILLS[cue_data.skill_id]), anchor, pace)
+	elif cue_data.kind == BattlePlayback.CUE_HEAL and cue_data.amount > 0:
+		var source: BattleActor = actors.get(cue_data.source_id)
+		if source != null and source.art_id == "fadyme":
+			var skill_id: String = str(_skill_by_source.get(cue_data.source_id, ""))
+			var effect_name: String = "ally_cleanse" if skill_id == "fadyme_ultimate_the_bell_that_forgets" else "ally_restore"
+			_skill_effect(effect_name, actor.position + Vector2(0, -actor.art_size * 0.45), pace)
 	match cue_data.kind:
 		BattlePlayback.CUE_ACTION:
 			actor.animate(cue_data.action_type if cue_data.action_type in ["active", "ultimate"] else "basic", pace)
@@ -174,3 +198,35 @@ func finish(outcome: String) -> void:
 		var actor: BattleActor = value
 		if actor.alive:
 			actor.animate("victory" if outcome == "victory" and actor.facing_right else "idle")
+
+
+func set_pace(pace: float) -> void:
+	for actor: BattleActor in actors.values(): actor.set_pace(pace)
+	for effect: Node2D in _effects:
+		if is_instance_valid(effect):
+			(effect.get_node("AnimationPlayer") as AnimationPlayer).speed_scale = maxf(0.01, pace)
+
+
+func _skill_effect(effect_name: String, anchor: Vector2, pace: float) -> void:
+	if not is_inside_tree(): return
+	for index: int in range(_effects.size() - 1, -1, -1):
+		if not is_instance_valid(_effects[index]): _effects.remove_at(index)
+	if _effects.size() >= 12: return
+	var packed: PackedScene = load(FADYME_FX + effect_name + "_v002.tscn") as PackedScene
+	if packed == null: return
+	var effect: Node2D = packed.instantiate() as Node2D
+	effect.position = anchor
+	effect.z_index = 1200
+	effect.scale = Vector2.ONE * clampf(size.x / 1080.0, 0.45, 1.0)
+	add_child(effect)
+	_effects.append(effect)
+	var visual: Sprite2D = effect.get_node("Visual") as Sprite2D
+	var material: ShaderMaterial = visual.material as ShaderMaterial
+	material.set_shader_parameter("reduced_motion", UiPageTransition.reduced_for(self))
+	if UiPageTransition.reduced_for(self):
+		var spark: CanvasItem = effect.get_node_or_null("Spark") as CanvasItem
+		if spark != null: spark.hide()
+	var animation: AnimationPlayer = effect.get_node("AnimationPlayer") as AnimationPlayer
+	animation.speed_scale = maxf(0.01, pace)
+	animation.animation_finished.connect(func(_clip: StringName) -> void: effect.queue_free(), CONNECT_ONE_SHOT)
+	animation.play("effect")

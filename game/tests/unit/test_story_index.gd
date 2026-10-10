@@ -141,3 +141,18 @@ func test_a_broken_pack_is_rejected_with_a_reason() -> void:
 
 	var empty_order: StoryIndex = StoryIndex.load_dir(_pack("empty_order", {"story_order": []}, {}))
 	assert_string_contains(empty_order.load_error, "story_order")
+
+func test_stage_halves_preserve_presentation_context_without_repeating_other_lines() -> void:
+	var original: Dictionary = _index._stage_scenes["1-1"]
+	var before: Dictionary = original.duplicate(true)
+	var pre: Dictionary = _index.pre_battle_scene("1-1")
+	var post: Dictionary = _index.post_battle_scene("1-1")
+	assert_eq(pre.get("location_id"), original.get("location_id"))
+	assert_eq(pre.get("music_cue_id"), original.get("music_cue_id"))
+	assert_eq(post.get("ambience_cue_id"), original.get("ambience_cue_id"))
+	assert_false(pre.has("post_battle_lines"))
+	assert_false(post.has("pre_battle_lines"))
+	assert_eq(pre["lines"], original["pre_battle_lines"])
+	assert_eq(post["lines"], original["post_battle_lines"])
+	pre["lines"].clear()
+	assert_eq(original, before, "a reader must not mutate canon content")

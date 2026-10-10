@@ -360,6 +360,7 @@ func _apply(event: Dictionary, cues: Array[Cue]) -> void:
 				_sync_hp(target, event)
 			var healed: int = int(event.get("amount", 0))
 			_push(cues, CUE_HEAL, str(event.get("target_id", "")), healed, false, "%s recovers %d HP." % [_label(target, str(event.get("target_id", ""))), healed])
+			cues[-1].source_id = str(event.get("source_id", ""))
 		"status_applied":
 			var afflicted: UnitView = unit(str(event.get("target_id", "")))
 			if afflicted != null:
@@ -371,6 +372,7 @@ func _apply(event: Dictionary, cues: Array[Cue]) -> void:
 		"passive_triggered":
 			var passive_owner: UnitView = unit(str(event.get("owner_id", "")))
 			_push(cues, CUE_PASSIVE, str(event.get("owner_id", "")), 0, false, "%s: %s." % [_label(passive_owner, str(event.get("owner_id", ""))), _skill_name(str(event.get("skill_id", "")))])
+			cues[-1].skill_id = str(event.get("skill_id", ""))
 		"enemy_intent_resolved":
 			_push(cues, CUE_INTENT, str(event.get("enemy_id", "")), 0, false, "")
 		"boss_telegraph_started":

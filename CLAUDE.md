@@ -51,3 +51,13 @@ explicit package handoffs; Codex does not bind assets into the game. Old Fadyme
 VO was archived under narrative/13_Archive/; all 241 lines need new Chirp3-HD
 ja-JP recordings with a newly auditioned voice ID. Sulafat is superseded for
 new production. Preserve historical files and the separately retained music.
+
+## Owner update — full game review, 2026-10-09
+
+The owner explicitly requested Codex to review/design the entire authored game,
+fix discovered runtime/design issues and repair OYUNU_AC.cmd. This task overrides
+the earlier Entry-only and art-only/Codex-versus-Claude restriction for these
+validated fixes and asset integration. Preserve canon, stable IDs, source art,
+online authority and sealed release/current; no new AAB is requested.
+The desktop full-story review is isolated from online accounts and purchases.
+Final voice selection and paid production batches remain separate.

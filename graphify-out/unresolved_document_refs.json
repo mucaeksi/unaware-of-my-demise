@@ -29595,6 +29595,11 @@
     "target": "/opt/pw-browsers"
   },
   {
+    "source_file": "docs/coder/PLAY_LATEST_GAME_PROMPT_TR.md",
+    "source_location": "L19",
+    "target": "user://desktop_story_review"
+  },
+  {
     "source_file": "docs/coder/cloud_delivery/GOOGLE_TTS_PROJECT_ACCESS.md",
     "source_location": "L29",
     "target": "roles/serviceusage.serviceUsageConsumer"
@@ -29833,6 +29838,11 @@
     "source_file": "docs/design/FIRST_LAUNCH_FLOW.md",
     "source_location": "L209",
     "target": "ui/title_key_art"
+  },
+  {
+    "source_file": "docs/design/FULL_GAME_REVIEW_2026-10-09_TR.md",
+    "source_location": "L21",
+    "target": "user://desktop_story_review"
   },
   {
     "source_file": "docs/design/OPENING_AAB_AND_CHARACTER_STANDARD_v005_2026-10-08.md",

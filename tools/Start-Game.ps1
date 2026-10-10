@@ -3,6 +3,7 @@ param(
     [switch]$ImportOnly,
     [switch]$Headless,
     [switch]$Online,
+    [switch]$OpeningOnly,
     [switch]$ResetReview,
     [ValidateRange(0, 100000)][int]$QuitAfter = 0
 )
@@ -39,7 +40,13 @@ function Invoke-GodotAndWait([string]$Executable, [string[]]$Arguments, [string]
     if ($taskProcess.ExitCode -ne 0) {
         throw "Godot $LogName failed (exit $($taskProcess.ExitCode)). Logs: $taskState"
     }
-    return Get-Content -LiteralPath $taskOptions.RedirectStandardOutput -Raw
+    $taskOutput = Get-Content -LiteralPath $taskOptions.RedirectStandardOutput -Raw
+    $taskErrors = Get-Content -LiteralPath $taskOptions.RedirectStandardError -Raw
+    # Godot may return zero even when an imported script could not compile.
+    if (($taskOutput + "`n" + $taskErrors) -match '(?im)(SCRIPT ERROR:|Parse Error:|Failed to load script|Failed loading resource:)') {
+        throw "Godot $LogName reported a script/resource error. Logs: $taskState"
+    }
+    return $taskOutput
 }
 
 function Test-GodotPin([string]$Candidate) {
@@ -54,6 +61,7 @@ try {
     if (!(Test-Path -LiteralPath (Join-Path $taskGame 'project.godot'))) {
         throw 'game/project.godot is missing. Run this launcher from the complete repository.'
     }
+    if ($Online -and ($OpeningOnly -or $ResetReview)) { throw '-Online cannot be combined with -OpeningOnly or -ResetReview.' }
     $taskGodot = $null
     if ($GodotPath) {
         if (!(Test-GodotPin $GodotPath)) { throw "Select Godot $taskPin. Executable/version check failed: $GodotPath" }
@@ -96,8 +104,10 @@ try {
     if ($ImportOnly) { Write-Host 'Imports complete.'; exit 0 }
     $taskRun = @('--path', $taskGame, '--resolution', '540x960', '--log-file', (Join-Path $taskState 'game.log'))
     if (!$Online) {
-        $taskRun += @('--scene', 'res://scenes/art_review/desktop_opening_review.tscn')
-        Write-Host 'Desktop review: Google sign-in is skipped; opening and tutorial use local data.'
+        $taskScene = if ($OpeningOnly) { 'res://scenes/art_review/desktop_opening_review.tscn' } else { 'res://scenes/art_review/desktop_game_review.tscn' }
+        $taskRun += @('--scene', $taskScene)
+        if ($OpeningOnly) { Write-Host 'Opening-only rehearsal selected.' }
+        else { Write-Host 'Full Part I review: opening + seven chapters + Story Records. Separate local progress; assisted battles. Google/purchases require -Online.' }
     }
     if ($Headless) { $taskRun += '--headless' }
     if ($QuitAfter -gt 0) { $taskRun += @('--quit-after', [string]$QuitAfter) }
