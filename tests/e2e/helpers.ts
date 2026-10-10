@@ -4,7 +4,8 @@ import { expect, type Page, type TestInfo } from '@playwright/test';
 import { join } from 'node:path';
 
 export const SHOTS = join(new URL('../../.cache/e2e-shots', import.meta.url).pathname);
-export const GAME = 'http://127.0.0.1:8787';
+/** Local stack by default; `UOMD_REMOTE_GAME_URL` points the remote smoke test at a deployed environment. */
+export const GAME = (process.env.UOMD_REMOTE_GAME_URL ?? 'http://127.0.0.1:8787').replace(/\/$/, '');
 export const ADMIN = 'http://127.0.0.1:8788';
 export const REF_W = 1920;
 export const REF_H = 1080;
@@ -86,7 +87,15 @@ export async function manualTurn(page: Page, info: TestInfo, skillIndex = 0): Pr
   if (!p.prompt) return;
   const n = p.prompt.options.length;
   const x = REF_W / 2 - ((n - 1) * (380 + 24)) / 2 + skillIndex * (380 + 24);
+  const battle = (): Promise<{ panel: boolean; selected: boolean }> =>
+    page.evaluate(() => {
+      const s = (window as any).__UOMD__.game.scene.getScene('Battle');
+      return { panel: Boolean(s.skillLayer), selected: Boolean(s.selected) };
+    });
+  // the prompt exists a moment before its skill buttons do; a tap in between would be ignored, as it would be for a player
+  await expect.poll(async () => (await battle()).panel, { timeout: 15_000 }).toBe(true);
   await tap(page, info, x, 960);
+  if (!(await expect.poll(async () => (await battle()).selected, { timeout: 2_500 }).toBe(true).then(() => true, () => false))) await tap(page, info, x, 960);
   await page.waitForTimeout(350);
   const opt = p.prompt.options[skillIndex];
   if (opt?.needsTarget) {
@@ -95,4 +104,22 @@ export async function manualTurn(page: Page, info: TestInfo, skillIndex = 0): Pr
   } else {
     await tap(page, info, x, 960);
   }
+}
+
+/** The result panel appears some time after the battle ends (longer on slow CI GPUs); poll until the server verdict is final. */
+export async function serverVerification(page: Page, timeout = 45_000): Promise<string> {
+  let text = '';
+  await expect
+    .poll(
+      async () => {
+        text = await page.evaluate(() => {
+          const s = (window as any).__UOMD__.game.scene.getScene('Battle');
+          return s.children.list.map((c: any) => c.text ?? '').find((t: string) => t.startsWith('Server verification')) ?? '';
+        });
+        return text !== '' && !text.endsWith('checking…');
+      },
+      { timeout, intervals: [500] }
+    )
+    .toBe(true);
+  return text;
 }

@@ -4,14 +4,15 @@
 | Where | Item | Status |
 |---|---|---|
 | Cloudflare account `0c942d198668a8b1a8e8ee699651b817` | Workers.dev subdomain `muratcaneksiii`; Zero Trust org `red-sky-901e.cloudflareaccess.com` | present |
-| Cloudflare (created by this work) | D1 `uomd-dev` (`0512d420-…`), D1 `uomd-staging` (`687f9735-…`), R2 `uomd-content-dev`, R2 `uomd-content-staging` | created, empty until the first deploy |
+| Cloudflare (created by this work) | D1 `uomd-dev` (`0512d420-…`), D1 `uomd-staging` (`687f9735-…`), R2 `uomd-content-dev`, R2 `uomd-content-staging` | created. **staging is deployed** (migrations 2/2, 20 characters seeded, Workers `uomd-game-staging`, `uomd-admin-staging`); dev remote is still empty |
 | Cloudflare (legacy, untouched) | Workers `unaware-of-my-demise`, `unaware-of-my-demise-admin`; Hyperdrive → Neon; R2 `unaware-of-my-demise-content`, `uomd-db-backups`; Access app on the legacy admin Worker | present |
-| GitHub Actions (from legacy workflows; presence not readable) | `CLOUDFLARE_API_TOKEN` (secret), `CLOUDFLARE_ACCOUNT_ID` (variable), `GOOGLE_PLAY_SERVICE_ACCOUNT`, Android keystore secrets, Neon URLs | presumed |
+| GitHub Actions | `CLOUDFLARE_API_TOKEN` (secret) | **verified by use (2026-10-10, run 38081525826)**: D1 migrations + seed, Worker + static-asset deploys and the health check all succeeded for staging, so the token has at least Workers Scripts/D1/R2 edit on this account. Its exact scope list is not readable from here |
+| GitHub Actions (presence not readable) | `CLOUDFLARE_ACCOUNT_ID` (variable, optional), `GOOGLE_PLAY_SERVICE_ACCOUNT`, Android keystore secrets, Neon URLs | presumed from legacy workflows |
 | Claude Code cloud environment | Gemini credential injected by the proxy for `*.googleapis.com` | working (model list verified) |
 
 ## What this repository's workflows need
-### 1. `CLOUDFLARE_API_TOKEN` (GitHub Actions secret, repository level) — **likely needs wider scopes**
-The legacy token was documented as *Workers Scripts Edit, Hyperdrive Read, R2 Edit (bucket `unaware-of-my-demise-content` only)*.
+### 1. `CLOUDFLARE_API_TOKEN` (GitHub Actions secret, repository level) — **works for staging deploys (verified)**
+Verified: it can deploy both Workers, apply D1 migrations and write R2-bound Workers (see above). The legacy token was documented as *Workers Scripts Edit, Hyperdrive Read, R2 Edit (bucket `unaware-of-my-demise-content` only)*.
 `.github/workflows/deploy.yml` additionally needs (create in Cloudflare Dashboard → My Profile → API Tokens, scoped to
 account `0c942d19…`):
 - Account → **Workers Scripts: Edit** (deploy Workers + static assets)
@@ -29,10 +30,16 @@ MFA required by your IdP policy; copy the **Application Audience (AUD) tag** int
 First admin: add a row to `admin_users` (owner) — see `docs/ARCHITECTURE.md` §Control Center.
 
 ### 3. `CONTENT_SIGNING_KEY` (Worker secret on `uomd-admin-<env>`; ES256 private JWK)
-Generate with `npx tsx tools/gen_signing_key.ts --kid <id> --out <dir outside repo>`; upload with
-`npx wrangler secret put CONTENT_SIGNING_KEY --env staging -c apps/api/wrangler.admin.jsonc`; commit **only** the public key
-(`content/keys/trusted_public_keys.json`). Rotate by adding a second `kid` before retiring the first.
-(Staging key `uomd-staging-2026-10` was generated in this session and its private half was set only as a Worker secret.)
+**Status: not set yet** (`GET /admin/api/health` on staging reports `signing_configured:false`). An earlier note here claimed it was
+already uploaded; that was wrong — the Worker did not exist until the first deploy. The key pair generated in the first session
+lives only in that session's scratch space and is **abandoned** (nothing was ever signed with it).
+Preferred way, with no human handling of the private key: run the GitHub workflow **Bootstrap content signing key**
+(`bootstrap-signing-key.yml`, staging, confirm `REPLACE`). It generates the pair inside the job, stores the private half only as the Worker
+secret (never printed, never uploaded, never in the repository) and prints the **public** key, which must then be committed to
+`content/keys/trusted_public_keys.json` (replacing the `uomd-staging-2026-10` entry) before the next game deploy, because clients
+trust a manifest signature only if that public key is embedded in the build.
+Manual alternative: `npx tsx tools/gen_signing_key.ts --kid <id> --out <dir outside repo>` then
+`npx wrangler secret put CONTENT_SIGNING_KEY --env staging -c apps/api/wrangler.admin.jsonc`. Rotate by adding a second `kid`.
 
 ### 4. Publishing from CI (optional): Access **service token**
 Zero Trust → Access → Service auth → create token, add it to the Access policy, then store as GitHub secrets
@@ -46,7 +53,7 @@ Zero Trust → Access → Service auth → create token, add it to the Access po
 | Play Developer API | `GOOGLE_PLAY_SERVICE_ACCOUNT` (already presumed) + Play Console API access | Play Console → Users and permissions |
 | RTDN | `RTDN_AUDIENCE`, `RTDN_PUSH_SERVICE_ACCOUNT`, Pub/Sub topic | Google Cloud Pub/Sub |
 | AdMob | `ADMOB_APP_ID`, ad-unit IDs, server-side verification key | AdMob console |
-| Paid media generation | **spending limit + approval** before any Veo/Lyria/image batch | owner decision |
+| Paid media generation | **spending guard implemented, budget = $0 until you approve**: `content/budget/media_budget.json` (`approved_usd`, `per_batch_cap_usd`, `approved_by/at`); every generation script must run `npx tsx tools/media_budget.ts reserve …` first and is blocked (exit 1) without an approved, sufficient budget; actual costs are settled and recorded (`packages/shared/src/budget.ts`, 6 tests). Also set a hard quota/budget alert on the Google Cloud project (Billing → Budgets & alerts) — the repo guard cannot see charges made outside it. | owner decision: amount + per-batch cap |
 
 ### 6. Context7 (developer tooling)
 API key from https://context7.com/dashboard, configured in your local/cloud MCP environment (not committed).

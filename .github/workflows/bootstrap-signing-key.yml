@@ -1,0 +1,54 @@
+name: Bootstrap content signing key
+# Creates the ES256 content-signing key INSIDE this job and stores its private half only as the Worker secret
+# CONTENT_SIGNING_KEY of uomd-admin-<env>. The private key is never printed, uploaded, or written inside the
+# repository; only the PUBLIC key is printed (it is public by design and goes into content/keys/trusted_public_keys.json).
+# Clients will not trust releases signed by a key that is not listed there, so after running this, commit the printed
+# public key and redeploy the game. Re-running REPLACES the key: releases already published stay valid for installed
+# clients only while their old public key remains listed in trusted_public_keys.json (rotate by adding a new kid instead).
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        type: choice
+        # only staging: dev would need its own CONTENT_SIGNING_KID first (clients trust keys by kid, so two keys may not share one)
+        options: [staging]
+        default: staging
+      confirm:
+        description: Type REPLACE to confirm replacing the signing key of that environment
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TARGET: ${{ inputs.environment }}
+      CONFIRM: ${{ inputs.confirm }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || '0c942d198668a8b1a8e8ee699651b817' }}
+    steps:
+      - name: Guard
+        run: |
+          [ "$CONFIRM" = "REPLACE" ] || { echo "::error::confirmation text must be exactly REPLACE"; exit 1; }
+          [ -n "$CLOUDFLARE_API_TOKEN" ] || { echo "::error::Missing GitHub secret CLOUDFLARE_API_TOKEN"; exit 1; }
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Generate key, store private half as Worker secret, print public half
+        run: |
+          set -euo pipefail
+          kid=$(grep -A4 "\"$TARGET\": {" apps/api/wrangler.admin.jsonc | grep -oE '"CONTENT_SIGNING_KID": "[^"]+"' | head -1 | cut -d'"' -f4)
+          [ -n "$kid" ] || { echo "::error::could not read CONTENT_SIGNING_KID for $TARGET"; exit 1; }
+          dir=$(mktemp -d)
+          npx tsx tools/gen_signing_key.ts --kid "$kid" --out "$dir" > /dev/null
+          npx wrangler secret put CONTENT_SIGNING_KEY --env "$TARGET" -c apps/api/wrangler.admin.jsonc < "$dir/$kid.private.jwk.json" > /dev/null
+          shred -u "$dir/$kid.private.jwk.json" 2>/dev/null || rm -f "$dir/$kid.private.jwk.json"
+          echo "Secret CONTENT_SIGNING_KEY updated for uomd-admin-$TARGET (kid $kid). Public key (safe to commit):"
+          node -e "const k=require('./content/keys/trusted_public_keys.json').keys.filter(x=>x.kid===process.argv[1]).pop(); console.log(JSON.stringify(k))" "$kid"

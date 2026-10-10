@@ -8,7 +8,7 @@ Miniflare/Workers runtime, not a deployed Cloudflare environment; **NOT DONE** =
 | Area | Result | Evidence |
 |---|---|---|
 | Monorepo (npm workspaces, TS 5.9 strict) | VERIFIED | `npm run typecheck` → 0 errors in 8 workspaces; `npm run lint` (ESLint 10 flat config) clean |
-| Shared primitives (sha256, canonical JSON, semver, ES256 sign/verify, seeded RNG) | VERIFIED | `packages/shared` 8 tests |
+| Shared primitives (sha256, canonical JSON, semver, ES256 sign/verify, seeded RNG) + media-spend guard | VERIFIED | `packages/shared` 14 tests (8 primitives, 6 budget guard) |
 | Content schema (closed effect grammar, safe paths, story/encounter/manifest schemas, cross-reference validator) | VERIFIED | `packages/content-schema` 31 tests |
 | Deterministic combat engine (narrative `battle_rules`: action gauge, damage formula, element chart, focus, statuses, replay) | VERIFIED | `packages/combat` 20 tests (determinism, replay hash, illegal-action rejection, MAX_TURNS) |
 | Story VM (labels, choices, checkpoints, save/resume) | VERIFIED | `packages/story` 5 tests |
@@ -17,13 +17,22 @@ Miniflare/Workers runtime, not a deployed Cloudflare environment; **NOT DONE** =
 | Phaser 4.2.1 game (title → story VM → 5v5-capable tactical battle → victory/verification → chapters) | LOCAL | Playwright e2e in real Chromium/WebGL, 2 viewports (see §2); screenshots in `docs/evidence/` |
 | Data-only content patching (new chapter node + new enemy unit + story delivered from R2 to the *unchanged* client; rollback to embedded base) | LOCAL | e2e `live data patch` (desktop) + `apps/api/test/content.test.ts` "real patch manager applies the published patch end to end" |
 | Control Center v0 (React SPA): dashboard (D1/R2 health, channels, table counts), characters (20 seeded, optimistic concurrency, audit), asset catalog with provenance, patch list/publish/rollback/kill, audit log, user roles | LOCAL | e2e `admin.spec.ts` on both viewports against real D1/R2 (Miniflare) with a test-only Access identity |
-| CI workflows (`ci.yml`: lint, typecheck, tests, builds, e2e, reproducible-content check; `deploy.yml`; `publish-content.yml`) | NOT RUN YET | YAML parses; first run happens when this branch is pushed |
+| CI workflows | VERIFIED on PR #36 (first run) | `lint, typecheck, unit + Workers tests, builds` ✓; `content builds reproducibly from narrative + approved legacy art` ✓ (committed content == rebuilt content); Playwright e2e job ran 8 ✓ / 1 ✘ / 1 skipped — the ✘ was a fixed-sleep race on the slower CI GPU (result panel not yet drawn after 2.5 s), replaced by polling in the next commit; `deploy.yml` ✓ (staging). `publish-content.yml` and `bootstrap-signing-key.yml` have not been run |
 | Skills bootstrap CI | VERIFIED (earlier runs 5 and 7 green; `tools/skills_doctor.py` PASS, 57 skill files) | `docs/SKILLS_MCP_STATUS.md` |
 | Security review | VERIFIED | `docs/SECURITY_REVIEW_2026-10-10.md` (5 findings fixed, residual risks listed). `npm audit`: 1 low (esbuild dev-server file read on Windows; dev tooling only) |
 | Secret scan of the working tree (private JWK members, PEM blocks, `AIza…`, `cfut_…`, `ghp_…`, `sk-…`) | VERIFIED | no matches; `.env*`, `.cache/`, `.wrangler/` are git-ignored |
 
-Test totals at the last full run: **118 unit/Workers tests** (api 38, game 3, combat 20, content-schema 31, patch 13, shared 8, story 5)
+Test totals at the last full run: **124 unit/Workers tests** (api 38, game 3, combat 20, content-schema 31, patch 13, shared 14, story 5)
 and **9 e2e tests passed, 1 skipped by design** (the one-way "publish a release" scenario runs on the first project only).
+
+## 1b. Deployed staging environment (GitHub Actions run 38081525826 `deploy.yml`, 2026-10-10, all steps green)
+| Item | Value | Verified by |
+|---|---|---|
+| Game (Phaser client + public API) | https://uomd-game-staging.muratcaneksiii.workers.dev | `GET /api/v1/health` → `ok:true`, D1 ok (2 migrations), R2 ok, `current_release:null`; index 200; roster endpoint returns 20 characters from remote D1; security headers present |
+| Control Center | https://uomd-admin-staging.muratcaneksiii.workers.dev | `GET /admin/api/health` → `auth_configured:false, signing_configured:false`; every data route answers **503 admin_auth_not_configured** (fails closed — verified with `curl`) |
+| Remote D1 `uomd-staging` | 2 migrations, 20 characters, 0 releases, 0 admins | direct SQL read through the Cloudflare API |
+| Browser smoke test on the deployed URL | desktop passed (boot, WebGL, T-1 played to victory); phone passed on rerun; the first phone run failed once on an input-timing race in the test helper (fixed: it now waits for the skill panel and polls for the verdict) | `npm run e2e:remote` (`tests/e2e/remote.spec.ts`); the deploy workflow now runs it as job `smoke` |
+Remaining on staging: Access application + `ACCESS_AUD`, signing key (workflow ready), first owner, first published release.
 
 ## 2. End-to-end evidence (Playwright 1.56.1, Chromium, WebGL via SwiftShader)
 Projects: `landscape-desktop` 1280×720 and `phone-landscape` 1200×540 touch (dpr 2). Both play the **real** flow through
@@ -40,7 +49,7 @@ Screenshots taken by the e2e run (WebP, `docs/evidence/`): `desktop-01-title`, `
 `admin-desktop-dashboard`, `admin-desktop-patches`. They are test artifacts, not marketing art; the full set plus traces is uploaded by CI (`e2e-evidence`).
 
 ## 3. Not done / not verifiable here (do not assume)
-- **No Cloudflare preview URL exists yet.** Remote D1 (`uomd-dev`, `uomd-staging`) are empty (no migrations applied) and no `uomd-*` Workers are deployed (checked via the Cloudflare API on 2026-10-10). A deployment needs the GitHub secret `CLOUDFLARE_API_TOKEN` with the scopes in `SECRETS_AND_PERMISSIONS.md`.
+- **Staging preview is DEPLOYED and verified (details in §1b).** What is still missing on it: a published content release (needs the admin API, i.e. Access + signing key), so server replay verification answers "release not published" and the game plays its embedded base content.
 - Cloudflare Access application + `ACCESS_AUD`, `CONTENT_SIGNING_KEY` Worker secret, first owner — **owner/approval actions**.
 - Real-device/Android/WebView testing, Capacitor project, Google sign-in, Play Billing, AdMob/UMP, gacha, shop, mail, accounts, RTDN: **NOT DONE** (outside this milestone).
 - Content: only tutorial T-1 (base) and T-2 (patch). Chibi/battle art for 18 of 20 characters and 25 of 27 enemies does not exist; engine effect coverage is 3/20 characters and 9/27 enemies (`COMBAT_RULES.md`).

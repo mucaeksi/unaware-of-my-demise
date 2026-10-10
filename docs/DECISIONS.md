@@ -12,3 +12,4 @@
 | D-08 | `.npmrc legacy-peer-deps=true` | npm 10 arborist crashes on the peer graph; versions are pinned explicitly |
 | D-09 | Apps pin Vite 7.3.7; Vitest 4 pulls Vite 8 for tests only | Phaser/React builds verified on 7; revisit when consolidating |
 | D-10 | Combat rule ambiguities resolved as listed in COMBAT_RULES.md | Needs owner confirmation |
+- **Paid media guard (2026-10-10):** generation is blocked by default (`approved_usd: 0`). Approval is a reviewed commit of `content/budget/media_budget.json` by the owner; reservations/settlements are appended to the same file so spend is auditable in Git.

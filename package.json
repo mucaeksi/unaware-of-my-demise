@@ -17,7 +17,8 @@
     "lint": "eslint .",
     "build:content": "tsx tools/build_content.ts && tsx tools/make_release.ts --dir content/base --id rel_0001 --generation 1 --channel staging --notes \"Base content shipped inside the app: tutorial T-1\" --created-at 2026-10-10T00:00:00.000Z --out content/base/release.json",
     "build": "npm run build:content && npm run build -w @uomd/game && npm run build -w @uomd/admin",
-    "e2e": "playwright test -c tests/e2e/playwright.config.ts"
+    "e2e": "playwright test -c tests/e2e/playwright.config.ts",
+    "e2e:remote": "playwright test -c tests/e2e/playwright.remote.config.ts"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

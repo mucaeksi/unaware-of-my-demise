@@ -600,6 +600,11 @@ export class BattleScene extends Phaser.Scene {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ releaseId: await content.activeReleaseId(), encounterPath: this.cfg.encounterPath, actions: this.recorded, clientLogHash: logHash })
       });
+      if (res.status === 404) {
+        // the server is reachable but this content release is not published there (e.g. a fresh environment)
+        if (label.active) label.setText('Server verification: this release is not published on the server').setColor(T.dim);
+        return;
+      }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const out = (await res.json()) as { valid: boolean; match: boolean; logHash: string };
       if (this.dead || !label.active) return;

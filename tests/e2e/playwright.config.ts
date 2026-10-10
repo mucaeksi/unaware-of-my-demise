@@ -6,6 +6,7 @@ export default defineConfig({
   testDir: '.',
   globalSetup: './global-setup.ts',
   testMatch: '*.spec.ts',
+  testIgnore: 'remote.spec.ts', // runs only through playwright.remote.config.ts against a deployed URL
   timeout: 240_000,
   expect: { timeout: 20_000 },
   workers: 1,

@@ -17,7 +17,7 @@ Not covered: penetration testing against a deployed environment (none is deploye
 ## Verified controls (with the test or code that proves them)
 **Authentication / authorization (Control Center)**
 - Cloudflare Access JWT is verified *in the Worker* (RS256, issuer = team domain, audience = AUD tag, expiry, signature via the team JWKS). A direct hit on `*.workers.dev` without a valid token gets 401; the static SPA shell is public but contains no data and no secrets. Tests: wrong audience / issuer / key / expired → 401.
-- **Fails closed**: without `ACCESS_TEAM_DOMAIN` + `ACCESS_AUD` every data route returns 503 (`admin_auth_not_configured`). Test present.
+- **Fails closed**: without `ACCESS_TEAM_DOMAIN` + `ACCESS_AUD` every data route returns 503 (`admin_auth_not_configured`). Test present, and confirmed on the **deployed** staging Worker with `curl` (`/admin/api/system` → 503; `/admin/api/health` reports `auth_configured:false`).
 - RBAC in D1 (`viewer` < `operator` < `owner`); unknown identities get 403; bootstrap owners (`ADMIN_BOOTSTRAP_OWNERS`) are created once and audited; an owner cannot demote themself (409).
 - `ACCESS_JWKS_URL` (test JWKS) is ignored unless `ENVIRONMENT=dev`; JWT rejection reasons are only echoed in dev.
 - Service tokens map to `svc:<common_name>` and need an explicit `admin_users` row.
@@ -46,4 +46,6 @@ Not covered: penetration testing against a deployed environment (none is deploye
 4. **Secrets in the legacy stack** (Neon URLs, Play service account, Android keystore) are presumed in GitHub secrets; they were not read, rotated or used. Decommissioning legacy Neon/Hyperdrive is an owner decision (README states D1 exclusivity).
 5. **Context7 key** and the skill-lock refresh remain owner actions (see `SKILLS_MCP_STATUS.md`).
 6. The admin SPA bundle is publicly fetchable on `*.workers.dev`; put the Worker behind a custom domain + Access (not just `workers.dev`) before sharing the URL.
-7. Third-party dependency advisories were not scanned online in this sandbox beyond `npm audit` output recorded in `BUILD_STATE.md`.
+7. The game build exposes `window.__UOMD__` (game + services) for browser tests. It reveals nothing a client does not already hold, but production builds should strip it behind a build flag before store release.
+8. Paid media generation is guarded by `content/budget/media_budget.json` (default $0, owner-approved only; `docs/SECRETS_AND_PERMISSIONS.md`). It cannot see charges made outside the repo: set a budget alert on the Google Cloud project too.
+9. Dependency advisories: `npm audit` against the registry reported one low-severity, dev-tooling-only issue (esbuild dev server, Windows). No other software-composition scanner was run.

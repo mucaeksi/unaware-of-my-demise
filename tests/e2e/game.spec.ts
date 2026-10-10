@@ -1,6 +1,6 @@
  
 import { expect, test } from '@playwright/test';
-import { ADMIN, SHOTS, REF_H, REF_W, activeScene, manualTurn, openGame, probeBattle, skipStory, tap, waitScene } from './helpers';
+import { ADMIN, SHOTS, REF_H, REF_W, activeScene, manualTurn, openGame, probeBattle, serverVerification, skipStory, tap, waitScene } from './helpers';
 import { publishPatch } from './stack';
 
 const jwt = (): string => process.env.E2E_ADMIN_JWT as string;
@@ -42,12 +42,8 @@ test('plays tutorial T-1 from the title: story -> turn-based battle -> victory -
   await expect.poll(async () => (await probeBattle(page)).result, { timeout: 120_000 }).not.toBeNull();
   const result = (await probeBattle(page)).result;
   expect(result?.winner).toBe('player');
-  await page.waitForTimeout(2500);
+  const label = await serverVerification(page);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-05-victory.png` });
-  const label = await page.evaluate(() => {
-    const s = (window as any).__UOMD__.game.scene.getScene('Battle');
-    return s.children.list.map((c) => c.text ?? '').find((t) => t.startsWith('Server verification')) ?? '';
-  });
   expect(label).toContain('✓ replay matches');
 
   // continue -> post-battle story -> back to chapters
@@ -110,11 +106,7 @@ test('live data patch: publish rel_0002 while the unchanged client runs -> new c
   await tap(page, info, REF_W - 365, 70); // Auto
   await tap(page, info, REF_W - 150, 70); // x2
   await expect.poll(async () => (await probeBattle(page)).result, { timeout: 120_000 }).not.toBeNull();
-  await page.waitForTimeout(2500);
-  const label = await page.evaluate(() => {
-    const s = (window as any).__UOMD__.game.scene.getScene('Battle');
-    return s.children.list.map((c) => c.text ?? '').find((t) => t.startsWith('Server verification')) ?? '';
-  });
+  const label = await serverVerification(page);
   expect(label).toContain('✓ replay matches');
 
   // roll the device back to the embedded base

@@ -1,7 +1,8 @@
 name: CI
 on:
+  # branches are covered by their pull request; pushing to both would run every job twice
   push:
-    branches: [main, "claude/**"]
+    branches: [main]
   pull_request:
 
 concurrency:

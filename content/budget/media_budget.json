@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "currency": "USD",
+  "approved_usd": 0,
+  "per_batch_cap_usd": 0,
+  "approved_by": null,
+  "approved_at": null,
+  "entries": []
+}
