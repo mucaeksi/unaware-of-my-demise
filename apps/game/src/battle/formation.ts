@@ -8,8 +8,9 @@ export interface Spot {
   depthScale: number;
 }
 
-const GROUND_TOP = 480;
-const GROUND_BOTTOM = 720;
+// The band ends at 670 so the lowest name plate + enemy intent tag (up to ~810) never runs into the description line (y 868).
+const GROUND_TOP = 470;
+const GROUND_BOTTOM = 670;
 const ROW_X: Record<Side, Record<Row, number>> = {
   player: { front: 700, rear: 400 },
   enemy: { front: REF_W - 700, rear: REF_W - 400 }

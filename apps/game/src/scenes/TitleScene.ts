@@ -189,7 +189,8 @@ export class TitleScene extends Phaser.Scene {
     this.overlay = this.add.container(0, 0, items).setDepth(DEPTH.modal);
   }
 
-  private openPatchLab(): void {
+  /** Opens the content-update panel (also used by automated tests). */
+  openPatchLab(): void {
     if (!PATCH_LAB_ENABLED) return;
     const { content } = Services.ready();
     const { items, cx, cy } = this.openOverlay('CONTENT UPDATES', 1300, 820);

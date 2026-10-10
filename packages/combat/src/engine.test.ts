@@ -22,19 +22,12 @@ describe('turn order', () => {
   it('previewOrder matches the real order of the next actors', () => {
     const b = Battle.create(noCrit(basePack()), encounterT1());
     b.advance();
-    const predicted = b.previewOrder(8);
-    const real: string[] = [];
-    let step = { prompt: b.prompt(), result: b.result } as { prompt: ReturnType<Battle['prompt']>; result: Battle['result'] };
-    // consume turns by always using basic attacks; record actor ids from turn_start events
+    const predicted = b.previewOrder(9); // [Fadyme (now), then the next 8]
     const start = b.log.length;
-    for (let i = 0; i < 4 && !step.result; i++) {
-      const a = b.autoAction();
-      const s = b.act(a);
-      step = s;
-    }
-    for (const e of events(b.log.slice(start - 1), 'turn_start')) real.push(e.actor);
-    // the first predicted actor is the one already prompted; compare the following ones
-    expect(real.slice(0, 5)).toEqual(predicted.slice(0, real.slice(0, 5).length));
+    for (let i = 0; i < 4 && !b.result; i++) b.act(b.autoAction());
+    // the preview assumes nobody dies or changes speed, so only the first turns are comparable
+    const real = events(b.log.slice(start - 1), 'turn_start').map((e) => e.actor);
+    expect(real.slice(0, 5)).toEqual(predicted.slice(0, 5));
   });
 });
 
@@ -62,9 +55,8 @@ describe('damage rules', () => {
 
   it('minimum damage is 1 and shields absorb before HP', () => {
     const b = Battle.create(pack, encounterT1());
-    let step = b.advance();
-    // Fadyme basic, then play on until Mahmut can cast Broken Crest Guard
-    step = b.act({ skillId: 'fadyme_basic_veilglass_thorn', targetId: E0 });
+    b.advance();
+    const step = b.act({ skillId: 'fadyme_basic_veilglass_thorn', targetId: E0 });
     const dmgToPlayers = events(step.events, 'damage').filter((d) => d.target.startsWith('player'));
     for (const d of dmgToPlayers) expect(d.amount).toBeGreaterThanOrEqual(1);
   });

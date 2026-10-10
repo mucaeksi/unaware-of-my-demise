@@ -1,3 +1,4 @@
+/* global URL, console */
 // Copies the embedded base release into public/ so Vite serves/ships it at /content/base/.
 import { cpSync, mkdirSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';

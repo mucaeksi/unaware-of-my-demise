@@ -1,6 +1,6 @@
 import type Phaser from 'phaser';
 import { ArtLibrary } from './content/ArtLibrary';
-import { ContentService } from './content/ContentService';
+import { type ContentService } from './content/ContentService';
 
 /** Process-wide singletons the scenes share (there is exactly one content stack per page). */
 export const Services = {

@@ -1,0 +1,21 @@
+import { defineConfig } from '@playwright/test';
+
+const GL = ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'];
+
+export default defineConfig({
+  testDir: '.',
+  globalSetup: './global-setup.ts',
+  testMatch: '*.spec.ts',
+  timeout: 240_000,
+  expect: { timeout: 20_000 },
+  workers: 1,
+  fullyParallel: false,
+  reporter: [['list']],
+  outputDir: '../../.cache/e2e-results',
+  use: { launchOptions: { args: GL }, trace: 'retain-on-failure' },
+  projects: [
+    { name: 'landscape-desktop', use: { viewport: { width: 1280, height: 720 } } },
+    // 20:9 phone in landscape with touch (letterboxing / safe-area path)
+    { name: 'phone-landscape', use: { viewport: { width: 1200, height: 540 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 } }
+  ]
+});

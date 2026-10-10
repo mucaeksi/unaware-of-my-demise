@@ -27,25 +27,26 @@ export class ChaptersScene extends Phaser.Scene {
     const baseNodes = new Set(baseIndex.chapters.flatMap((c) => c.nodes.map((n) => n.node_id)));
     const progress = Progress.load();
     const active = await content.activeReleaseId();
+    const titles = new Map(index.chapters.flatMap((c) => c.nodes.map((n): [string, string] => [n.node_id, n.title_en])));
 
     let y = 250;
     for (const ch of index.chapters) {
       txt(this, 330, y - 20, ch.title_en.toUpperCase(), { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: T.dim }).setOrigin(0, 0.5);
       y += 70;
       for (const node of ch.nodes) {
-        this.row(node, y, progress, baseNodes.has(node.node_id) ? null : active);
+        this.row(node, y, progress, titles, baseNodes.has(node.node_id) ? null : active);
         y += 160;
       }
     }
     new Button(this, 270, REF_H - 90, { label: 'BACK', w: 340, onClick: () => this.scene.start('Title') });
   }
 
-  private row(node: Node, y: number, progress: Record<string, { stars: number }>, patchedBy: string | null): void {
+  private row(node: Node, y: number, progress: Record<string, { stars: number }>, titles: Map<string, string>, patchedBy: string | null): void {
     const done = progress[node.node_id];
     const locked = Boolean(node.requires && !progress[node.requires]);
     const bg = panel(this, REF_W / 2, y, 1300, 138, locked ? 'dim' : 'normal');
     const name = title(this, 0, 0, node.title_en.toUpperCase(), 42, locked ? T.dim : T.text).setOrigin(0, 0.5).setPosition(REF_W / 2 - 600, y - 20);
-    const sub = txt(this, REF_W / 2 - 600, y + 28, locked ? `Locked — finish "${node.requires}" first` : node.kind === 'battle' ? 'Story and battle' : 'Story', { fontSize: '30px', color: T.dim });
+    const sub = txt(this, REF_W / 2 - 600, y + 28, locked ? `Locked — finish "${titles.get(node.requires ?? '') ?? node.requires}" first` : node.kind === 'battle' ? 'Story and battle' : 'Story', { fontSize: '30px', color: T.dim });
     if (patchedBy) {
       const tag = panel(this, REF_W / 2 + 330, y - 28, 270, 56, 'hot');
       txt(this, REF_W / 2 + 330, y - 28, `NEW · ${patchedBy}`, { fontFamily: F.display, fontSize: '22px', fontStyle: '600', color: T.gold }).setOrigin(0.5);
@@ -57,9 +58,15 @@ export class ChaptersScene extends Phaser.Scene {
       stars.fillStyle(on ? C.goldHi : 0x2a1e32, 1);
       stars.fillCircle(REF_W / 2 + 480 + i * 44 - 44, y + 24, 14);
     }
-    bg.setInteractive({ useHandCursor: !locked }).on('pointerup', () => {
-      if (!locked) void playNode(this, node);
-    });
+    // a card only fires for a press that began on it: the tap that closed the previous scene must not fall through
+    let pressed = false;
+    bg.setInteractive({ useHandCursor: !locked })
+      .on('pointerdown', () => (pressed = true))
+      .on('pointerout', () => (pressed = false))
+      .on('pointerup', () => {
+        if (!locked && pressed) void playNode(this, node);
+        pressed = false;
+      });
     void name;
     void sub;
   }

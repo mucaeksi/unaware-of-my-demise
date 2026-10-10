@@ -8,7 +8,7 @@ import {
 } from '@uomd/content-schema';
 import { PatchManager, type BaseContent, type PatchOutcome, type PatchState } from '@uomd/patch';
 import { sha256Hex, type PublicKeyJwk } from '@uomd/shared';
-import trusted from '../../../../content/keys/trusted_public_keys.json';
+import trusted from '@uomd-trusted-keys';
 import { BASE_CONTENT_URL, CHANNEL, CLIENT_VERSION, PATCH_STORAGE_BUDGET, SUPPORTED_CONTENT_SCHEMA } from '../config';
 import { openContentStorage } from '../platform/idbStorage';
 import { prefs } from '../platform/prefs';

@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import type Phaser from 'phaser';
 import type { ArtManifest, UnitAnimState } from '@uomd/content-schema';
 import type { ContentService } from './ContentService';
 

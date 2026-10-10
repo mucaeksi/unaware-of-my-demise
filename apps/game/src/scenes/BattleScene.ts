@@ -158,8 +158,9 @@ export class BattleScene extends Phaser.Scene {
     this.autoBtn = new Button(this, REF_W - 365, 70, { label: 'AUTO', w: 210, h: 100, fontSize: 30, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
     new Button(this, REF_W - 585, 70, { label: 'MENU', w: 210, h: 100, fontSize: 30, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
 
-    this.descText = txt(this, REF_W / 2, 832, '', { fontSize: '31px', color: T.text, align: 'center', wordWrap: { width: 1500 } }).setOrigin(0.5).setDepth(DEPTH.hud);
-    this.hintText = txt(this, REF_W / 2, 786, '', { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setDepth(DEPTH.hud);
+    // between the title block and the speed/auto/menu buttons there is free room at the top: the turn hint lives there
+    this.descText = txt(this, REF_W / 2, 860, '', { fontSize: '28px', color: T.text, align: 'center', wordWrap: { width: 1640 } }).setOrigin(0.5).setDepth(DEPTH.hud);
+    this.hintText = txt(this, 830, 62, '', { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setDepth(DEPTH.hud);
     this.refreshHud();
   }
 

@@ -3,7 +3,9 @@
   "compilerOptions": {
     "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "types": ["vite/client"],
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": { "@uomd-trusted-keys": ["../../content/keys/trusted_public_keys.json"] }
   },
-  "include": ["src", "vite.config.ts"]
+  "include": ["src"]
 }

@@ -81,6 +81,7 @@ export class Button extends Phaser.GameObjects.Container {
   private readonly label: Phaser.GameObjects.Text;
   private readonly subLabel: Phaser.GameObjects.Text | null;
   private enabled = true;
+  private pressed = false;
   private readonly variant: PanelVariant;
   private readonly bw: number;
   private readonly bh: number;
@@ -99,15 +100,21 @@ export class Button extends Phaser.GameObjects.Container {
     this.setSize(this.bw, this.bh);
     this.setInteractive({ useHandCursor: true });
     this.on('pointerover', () => this.enabled && this.hover(true));
-    this.on('pointerout', () => this.hover(false));
+    this.on('pointerout', () => {
+      this.pressed = false;
+      this.hover(false);
+    });
     this.on('pointerdown', () => {
       if (!this.enabled) return;
+      this.pressed = true;
       this.setScale(0.97);
       Sfx.tap();
     });
     this.on('pointerup', () => {
       this.setScale(1);
-      if (this.enabled) opts.onClick();
+      // only a press that began on this button counts, so the tap that opened a scene cannot click through
+      if (this.enabled && this.pressed) opts.onClick();
+      this.pressed = false;
     });
     scene.add.existing(this);
   }
