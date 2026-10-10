@@ -1,0 +1,594 @@
+{
+  "schema_version": 1,
+  "pack_id": "patch_units",
+  "units": [
+    {
+      "unit_id": "mahmut",
+      "kind": "character",
+      "name_en": "Mahmut",
+      "element": "Stone",
+      "role": "tank_bruiser",
+      "rarity": 5,
+      "formation_affinity": "front",
+      "base_stats": {
+        "hp": 14,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.7,
+        "atk": 0.12,
+        "def": 0.1,
+        "spd": 0.16
+      },
+      "skills": [
+        {
+          "skill_id": "mahmut_basic_oathless_cut",
+          "name_en": "Oathless Cut",
+          "type": "basic",
+          "element": "Stone",
+          "description_en": "Deals physical damage equal to 100% of ATK to one enemy. If Mahmut is in the Front Row, he gains Stoneguard, reducing damage taken by 8% for 1 turn.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "self",
+              "when": {
+                "predicate": "owner_in_row",
+                "value": "front"
+              },
+              "status_id": "stoneguard",
+              "duration_turns": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "mahmut_active_broken_crest_guard",
+          "name_en": "Broken Crest Guard",
+          "type": "active",
+          "element": "Stone",
+          "description_en": "Grants Mahmut and the ally with the lowest HP a shield equal to 180% of Mahmut's ATK. For 2 turns, Mahmut redirects 50% of single-target attacks aimed at that ally to himself.",
+          "player_target": "none",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "self_and_lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 1.8,
+              "duration_turns": 2
+            },
+            {
+              "op": "grant_redirect",
+              "target_selector_id": "self",
+              "protected_ally_selector_id": "lowest_hp_ally",
+              "redirected_fraction": 0.5,
+              "duration_turns": 2,
+              "eligible_action_types": [
+                "basic",
+                "active",
+                "ultimate"
+              ]
+            }
+          ]
+        },
+        {
+          "skill_id": "mahmut_passive_a_knight_s_debt",
+          "name_en": "A Knight's Debt",
+          "type": "passive",
+          "element": "Stone",
+          "description_en": "While shielded, Mahmut counters an enemy Basic Attack for 60% of his ATK and gains 5 Focus. Triggers once per turn.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "before_damage_received",
+              "effect_ops": [
+                {
+                  "op": "damage",
+                  "target_selector_id": "event_source",
+                  "damage_type": "physical",
+                  "scale_stat": "atk",
+                  "multiplier": 0.6,
+                  "no_focus_gain": true
+                },
+                {
+                  "op": "gain_focus",
+                  "target_selector_id": "self",
+                  "amount": 5
+                }
+              ],
+              "condition": {
+                "predicate": "owner_has_shield"
+              },
+              "limit": {
+                "per_owner_turn": 1
+              },
+              "event_filter": {
+                "incoming_action_type": "basic"
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "mahmut_ultimate_last_wall_at_dusk",
+          "name_en": "Last Wall at Dusk",
+          "type": "ultimate",
+          "element": "Stone",
+          "description_en": "Deals physical damage equal to 220% of ATK to all Front Row enemies, Taunts them for 2 turns, and grants all allies a shield equal to 120% of Mahmut's DEF. The shield still applies if a boss resists Taunt.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "front_row_enemies",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 2.2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "taunt",
+              "duration_turns": 2
+            },
+            {
+              "op": "grant_shield",
+              "target_selector_id": "all_allies",
+              "scale_stat": "def",
+              "multiplier": 1.2,
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "art_key": "mahmut",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#mahmut",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "fadyme",
+      "kind": "character",
+      "name_en": "Fadyme",
+      "element": "Veil",
+      "role": "support_dps",
+      "rarity": 5,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 11,
+        "atk": 3,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.55,
+        "atk": 0.18,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "fadyme_basic_veilglass_thorn",
+          "name_en": "Veilglass Thorn",
+          "type": "basic",
+          "element": "Veil",
+          "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1
+            },
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "when": {
+                "predicate": "last_target_has_status",
+                "value": "dread"
+              },
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "skill_id": "fadyme_active_borrowed_hour",
+          "name_en": "Borrowed Hour",
+          "type": "active",
+          "element": "Veil",
+          "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.6
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "dread",
+              "duration_turns": 2
+            },
+            {
+              "op": "heal",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "fadyme_passive_a_smile_kept",
+          "name_en": "A Smile Kept",
+          "type": "passive",
+          "element": "Veil",
+          "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "owner_turn_start",
+              "effect_ops": [
+                {
+                  "op": "modify_stat",
+                  "target_selector_id": "all_allies",
+                  "stat_id": "veil_res",
+                  "mode": "add_pct",
+                  "amount": 0.08,
+                  "duration_turns": 1
+                }
+              ],
+              "condition": {
+                "predicate": "owner_hp_below_pct",
+                "value": 50
+              },
+              "limit": {
+                "per_battle": 2
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "fadyme_ultimate_the_bell_that_forgets",
+          "name_en": "The Bell That Forgets",
+          "type": "ultimate",
+          "element": "Veil",
+          "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.8
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "dread",
+              "duration_turns": 2
+            },
+            {
+              "op": "remove_status",
+              "target_selector_id": "all_allies",
+              "category": "debuff",
+              "count": 1,
+              "selection": "oldest_applied"
+            },
+            {
+              "op": "heal_per_removed_status",
+              "target_selector_id": "lowest_hp_allies",
+              "scale_stat": "atk",
+              "multiplier": 0.4,
+              "maximum_targets": 3,
+              "maximum_total_stacks": 3,
+              "requires_successful_cleanse": true
+            }
+          ]
+        }
+      ],
+      "art_key": "fadyme",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#fadyme",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "bellbound_dead",
+      "kind": "enemy",
+      "name_en": "Bellbound Dead",
+      "element": "Veil",
+      "role": "swarm",
+      "base_stats": {
+        "hp": 5,
+        "atk": 1,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.05,
+        "def": 0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "bellbound_dead_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "bellbound_dead_tolling_grab",
+          "name_en": "Tolling Grab",
+          "type": "signature",
+          "description_en": "Low-tier bell-wired remains; individually weak, dangerous in numbers.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.15
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "dread",
+              "duration_turns": 1,
+              "chance": 0.25
+            }
+          ]
+        }
+      ],
+      "intent_skill_id": "bellbound_dead_tolling_grab",
+      "art_key": "bellbound_dead",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#bellbound_dead",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "hollow_pilgrim",
+      "kind": "enemy",
+      "name_en": "Hollow Pilgrim",
+      "element": "Veil",
+      "role": "slow_vanguard",
+      "base_stats": {
+        "hp": 8,
+        "atk": 1,
+        "def": 2,
+        "spd": 3
+      },
+      "growth_per_level": {
+        "hp": 0.4,
+        "atk": 0.05,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "hollow_pilgrim_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "hollow_pilgrim_pilgrim_s_weight",
+          "name_en": "Pilgrim's Weight",
+          "type": "signature",
+          "description_en": "A slow, stubborn frontliner with high HP and a crushing step.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.5
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "self",
+              "status_id": "stoneguard",
+              "duration_turns": 1
+            }
+          ]
+        }
+      ],
+      "intent_skill_id": "hollow_pilgrim_pilgrim_s_weight",
+      "art_key": "hollow_pilgrim",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#hollow_pilgrim",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    }
+  ],
+  "rules": {
+    "schema_version": 1,
+    "gauge_max": 10000,
+    "max_pending_delay_fraction": 0.5,
+    "defense_scale": 10,
+    "focus": {
+      "maximum": 100,
+      "basic_gain": 20,
+      "active_gain": 25,
+      "hit_gain": 5,
+      "hit_gain_cap_per_turn": 15,
+      "ultimate_cost": 100
+    },
+    "crit": {
+      "chance": 0.05,
+      "multiplier": 1.5
+    },
+    "element": {
+      "cycle": [
+        "Ember",
+        "Gale",
+        "Stone",
+        "Tide"
+      ],
+      "advantage": 1.2,
+      "disadvantage": 0.9,
+      "neutral": 1,
+      "weakness": 1.2,
+      "resistance": 0.9,
+      "mutual_pairs": [
+        [
+          "Dawn",
+          "Veil"
+        ]
+      ]
+    },
+    "auto_battle": {
+      "heal_priority_hp_percent": 40,
+      "save_ultimate_until_boss": true
+    },
+    "statuses": [
+      {
+        "status_id": "fracture",
+        "name_en": "Fracture",
+        "kind": "defense_down",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "def_multiplier": 0.85
+      },
+      {
+        "status_id": "sanctuary",
+        "name_en": "Sanctuary",
+        "kind": "healing_and_damage_reduction",
+        "category": "buff",
+        "default_duration_turns": 2,
+        "damage_taken_multiplier": 0.9,
+        "healing_received_multiplier": 1.1
+      },
+      {
+        "status_id": "dread",
+        "name_en": "Dread",
+        "kind": "outgoing_damage_and_focus_gain_down",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "outgoing_damage_multiplier": 0.9,
+        "focus_gain_multiplier": 0.8
+      },
+      {
+        "status_id": "break",
+        "name_en": "Break",
+        "kind": "boss_stagger_window",
+        "category": "control",
+        "default_duration_turns": 1,
+        "damage_taken_multiplier": 1.2,
+        "skip_next_action": true
+      },
+      {
+        "status_id": "decay",
+        "name_en": "Decay",
+        "kind": "healing_received_down",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "healing_received_multiplier": 0.5
+      },
+      {
+        "status_id": "taunt",
+        "name_en": "Taunt",
+        "kind": "target_redirect",
+        "category": "buff",
+        "default_duration_turns": 2,
+        "redirects_single_target_attacks": true
+      },
+      {
+        "status_id": "stoneguard",
+        "name_en": "Stoneguard",
+        "kind": "damage_reduction",
+        "category": "buff",
+        "default_duration_turns": 1,
+        "damage_taken_multiplier": 0.92
+      }
+    ]
+  }
+}

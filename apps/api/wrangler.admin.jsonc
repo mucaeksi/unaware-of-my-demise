@@ -1,0 +1,29 @@
+{
+  // UOMD Control Center Worker: admin SPA + /admin/api/*, protected by Cloudflare Access (verified again in code).
+  // Secrets (never in this file): CONTENT_SIGNING_KEY. Variables set per environment by CI: ACCESS_AUD, ADMIN_BOOTSTRAP_OWNERS.
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "uomd-admin",
+  "main": "src/admin.ts",
+  "compatibility_date": "2026-10-01",
+  "account_id": "0c942d198668a8b1a8e8ee699651b817",
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  "env": {
+    "dev": {
+      "name": "uomd-admin-dev",
+      "workers_dev": true,
+      "vars": { "ENVIRONMENT": "dev", "ACCESS_TEAM_DOMAIN": "red-sky-901e.cloudflareaccess.com", "CONTENT_SIGNING_KID": "uomd-staging-2026-10" },
+      "assets": { "directory": "../admin/dist", "binding": "ASSETS", "run_worker_first": ["/admin/api/*"], "not_found_handling": "single-page-application" },
+      "d1_databases": [{ "binding": "DB", "database_name": "uomd-dev", "database_id": "0512d420-db4b-4851-8971-71c138f713cb", "migrations_dir": "migrations" }],
+      "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "uomd-content-dev" }]
+    },
+    "staging": {
+      "name": "uomd-admin-staging",
+      "workers_dev": true,
+      "vars": { "ENVIRONMENT": "staging", "ACCESS_TEAM_DOMAIN": "red-sky-901e.cloudflareaccess.com", "CONTENT_SIGNING_KID": "uomd-staging-2026-10" },
+      "assets": { "directory": "../admin/dist", "binding": "ASSETS", "run_worker_first": ["/admin/api/*"], "not_found_handling": "single-page-application" },
+      "d1_databases": [{ "binding": "DB", "database_name": "uomd-staging", "database_id": "687f9735-ee4c-4611-aa16-2fae99e51911", "migrations_dir": "migrations" }],
+      "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "uomd-content-staging" }]
+    }
+  }
+}

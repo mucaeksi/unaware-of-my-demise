@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "release": {
+    "id": "rel_0001",
+    "generation": 1,
+    "channel": "staging",
+    "created_at": "2026-10-10T00:00:00.000Z",
+    "notes": "Base content shipped inside the app: tutorial T-1"
+  },
+  "compat": {
+    "min_client": "0.1.0",
+    "content_schema": 1
+  },
+  "rollout": {
+    "percent": 100,
+    "kill_switch": false
+  },
+  "files": [
+    {
+      "path": "art/art_manifest.json",
+      "sha256": "e21ce58901467bec58cb830fb6adb2f95f4744ed4a5c1198311241bc5a661d5a",
+      "bytes": 7289,
+      "media_type": "application/json",
+      "kind": "art_manifest"
+    },
+    {
+      "path": "art/atlas_bellbound_dead.webp",
+      "sha256": "fc259f42d1641a163c66ca218bbd5750e89724109c3ca8e02dcd19e4ae0972cb",
+      "bytes": 157916,
+      "media_type": "image/webp",
+      "kind": "atlas_image"
+    },
+    {
+      "path": "art/atlas_fadyme.webp",
+      "sha256": "dfc696e0acc2542426a8990c9df01650ee021079165a8f7f42cba7419ec10b00",
+      "bytes": 458320,
+      "media_type": "image/webp",
+      "kind": "atlas_image"
+    },
+    {
+      "path": "art/atlas_mahmut.webp",
+      "sha256": "4937c5bebfc68c4b517c45ac4140473d34f8d22bcf375352f056d28b9fb1dd73",
+      "bytes": 409262,
+      "media_type": "image/webp",
+      "kind": "atlas_image"
+    },
+    {
+      "path": "art/bg_forest_whispering_ash.webp",
+      "sha256": "8e1675b8a2615d4b336916a7b39f0b96d87b742d6a05958d7c077fe21cbcdb3b",
+      "bytes": 167016,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/portrait_fadyme_composed.webp",
+      "sha256": "7fef1082bdd336b2a99b2881dc450fdae92ae38975664bf444dc7d4d2deb9289",
+      "bytes": 305672,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_fadyme_resolve.webp",
+      "sha256": "f08c47aa63c9732e852320ab6d1405517c333ae8d80cfa603688a5a85202da6f",
+      "bytes": 205968,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_fadyme_warm.webp",
+      "sha256": "c980b69e260f1ccf0d40f54266441aa658d05bc717e7ea50b9577014f595565f",
+      "bytes": 288238,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_fadyme_wry.webp",
+      "sha256": "eabeb23ac88a5a0a16ab244be0655fadb80c049d1fe31ccb6b1c407f35ea857f",
+      "bytes": 205632,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_mahmut_composed.webp",
+      "sha256": "f61c6d032242ac1bd142c24b7b0fd86ced1f999ab53bf41ca1b2130b44d3c139",
+      "bytes": 277762,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_mahmut_dry_humor.webp",
+      "sha256": "ef3a48a3c21e971de99ea4a3b555bd71ee5fd5b613e747c85807117e119ef823",
+      "bytes": 210216,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_mahmut_protective_resolve.webp",
+      "sha256": "c7a8ddc6a93c33af47099e4b66e46b725516cb90f508a8a8cedbada11162bea8",
+      "bytes": 209122,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/ui_key_art.webp",
+      "sha256": "4eb31eb391369b4dca9d83ad8a8939811303e33385e831387127f63fb37411f1",
+      "bytes": 77100,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_logo.webp",
+      "sha256": "b84ad0324a510ab5604764cc64ef63e468cad8088d29c341c24949530f18efb8",
+      "bytes": 169904,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "audio/bgm_ch1_ash_forest_calm.ogg",
+      "sha256": "2c92582719d99f3b95d2159d45c3891530de9976a675686ab801179c000be582",
+      "bytes": 2222818,
+      "media_type": "audio/ogg",
+      "kind": "audio"
+    },
+    {
+      "path": "audio/bgm_ch1_ash_forest_chaotic.ogg",
+      "sha256": "d35e1ab6d3f284e9d31b570a7ba379dd11aac1f5c8e3d86173acd3dc6e2a68e5",
+      "bytes": 2146003,
+      "media_type": "audio/ogg",
+      "kind": "audio"
+    },
+    {
+      "path": "chapters/chapter_index.json",
+      "sha256": "a04a7cb37b32f6a1a9299b2143040d5d7571e20a52d3d9b3961caefc4b72364b",
+      "bytes": 321,
+      "media_type": "application/json",
+      "kind": "chapter_index"
+    },
+    {
+      "path": "encounters/tutorial_t1.json",
+      "sha256": "c938a58967e5de2ee690c82f4b06b1f24438850f0ffedab6800580b87ea18a54",
+      "bytes": 955,
+      "media_type": "application/json",
+      "kind": "encounter"
+    },
+    {
+      "path": "story/tutorial_t1_after.json",
+      "sha256": "18e40c3d850a63e70ec58fc77cee3c6d2ee381374e29adea4e729e0d5788f513",
+      "bytes": 4209,
+      "media_type": "application/json",
+      "kind": "story_scene"
+    },
+    {
+      "path": "story/tutorial_t1_before.json",
+      "sha256": "00ff70e5b84590f157dd91d8f390b19448977ce1c53a7153ba2402ecdba6a140",
+      "bytes": 4351,
+      "media_type": "application/json",
+      "kind": "story_scene"
+    },
+    {
+      "path": "units/unit_pack.json",
+      "sha256": "d2cf29d60af57f600ad0962d072b6209a71ce2b74320b7f4bf864e4706614dc7",
+      "bytes": 15709,
+      "media_type": "application/json",
+      "kind": "unit_pack"
+    }
+  ]
+}

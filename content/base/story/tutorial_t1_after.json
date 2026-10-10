@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "scene_id": "tutorial_t1_after",
+  "title_en": "The First Step",
+  "location_id": "forest_whispering_ash",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "bgm_ch1_ash_forest_calm"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.8
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t1_after_001",
+      "text": "The road grew quiet again. This time they listened to the silence before moving.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Are you hurt?",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Only my opinion of this road.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Your sleeve.",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A branch. It has dreadful manners.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t1_after_006",
+      "text": "He brushed a torn leaf from her shoulder, then found a reason to check his shield.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_007",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We can rest here.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_008",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "In the mud? I was hoping your invitation would improve.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_009",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "A dry stone, then.",
+      "emotion": "dry_humor",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_010",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Tempting. A roof would make it irresistible.",
+      "emotion": "soft_smile",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_011",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "There should be shelter farther along. We stop if you need to.",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_012",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "If either of us needs to. That is the arrangement.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t1_after_013",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Agreed.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t1_after_014",
+      "text": "He shortened his stride. She noticed, and chose not to thank him for it aloud.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tutorial_t1_after_done"
+    },
+    {
+      "op": "fade",
+      "direction": "out",
+      "seconds": 0.6
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-1.after",
+    "source_sha256": "d5419c8bd76f5c75e4c70e116fa97cdd97dfa8e158c852c7c96a988980bbce81"
+  }
+}

@@ -1,0 +1,149 @@
+name: Deploy Cloudflare environment
+# Deploys the game Worker (+static client) and the Control Center Worker to the DEV or STAGING Cloudflare
+# environment, applies D1 migrations and seeds data. Production is NOT deployable from here (owner approval).
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        type: choice
+        options: [staging, dev]
+        default: staging
+      bootstrap_signing_key:
+        description: "REPLACES the content-signing key of that environment (private half stays in the Worker secret, public half is printed). Staging only."
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-${{ inputs.environment || 'staging' }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      game_url: ${{ steps.health.outputs.game_url }}
+    env:
+      TARGET: ${{ inputs.environment || 'staging' }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || '0c942d198668a8b1a8e8ee699651b817' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check configuration (names only, never values)
+        run: |
+          if [ -z "${CLOUDFLARE_API_TOKEN}" ]; then
+            echo "::error::Missing GitHub secret CLOUDFLARE_API_TOKEN (see docs/SECRETS_AND_PERMISSIONS.md for the exact scopes)"; exit 1
+          fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build game client for this channel
+        run: npm run build -w @uomd/game
+        env:
+          VITE_CONTENT_CHANNEL: ${{ env.TARGET }}
+      - run: npm run build -w @uomd/admin
+      - name: Apply D1 migrations
+        working-directory: apps/api
+        run: npx wrangler d1 migrations apply DB --remote -c wrangler.game.jsonc --env "$TARGET"
+      - name: Seed characters (idempotent, keeps edited rows)
+        working-directory: apps/api
+        run: npx wrangler d1 execute DB --remote -c wrangler.game.jsonc --env "$TARGET" --file seed/characters.sql
+      - name: Deploy game Worker
+        id: game
+        working-directory: apps/api
+        run: npx wrangler deploy -c wrangler.game.jsonc --env "$TARGET" --keep-vars | tee "$RUNNER_TEMP/game.log"
+      - name: Deploy Control Center Worker
+        working-directory: apps/api
+        # ACCESS_AUD (the Access application's Audience tag, not secret) and the first owner's e-mail come from GitHub
+        # *variables* so nothing about the owner has to be committed; empty = keep what the Worker already has (fails closed).
+        env:
+          ACCESS_AUD: ${{ inputs.environment == 'dev' && vars.ACCESS_AUD_DEV || vars.ACCESS_AUD_STAGING }}
+          BOOTSTRAP_OWNERS: ${{ inputs.environment == 'dev' && vars.ADMIN_BOOTSTRAP_OWNERS_DEV || vars.ADMIN_BOOTSTRAP_OWNERS_STAGING }}
+        run: |
+          extra=()
+          [ -n "$ACCESS_AUD" ] && extra+=(--var "ACCESS_AUD:$ACCESS_AUD")
+          [ -n "$BOOTSTRAP_OWNERS" ] && extra+=(--var "ADMIN_BOOTSTRAP_OWNERS:$BOOTSTRAP_OWNERS")
+          npx wrangler deploy -c wrangler.admin.jsonc --env "$TARGET" --keep-vars "${extra[@]}" | tee "$RUNNER_TEMP/admin.log"
+      - name: Health check
+        id: health
+        run: |
+          url=$(grep -oE 'https://[a-zA-Z0-9.-]+\.workers\.dev' "$RUNNER_TEMP/game.log" | head -1)
+          echo "game: $url"
+          echo "game_url=$url" >> "$GITHUB_OUTPUT"
+          for i in 1 2 3 4 5 6; do
+            code=$(curl -s -o health.json -w '%{http_code}' "$url/api/v1/health" || true)
+            [ "$code" = "200" ] && break; sleep 5
+          done
+          cat health.json; echo
+          [ "$code" = "200" ]
+          echo "### Deployed $TARGET" >> "$GITHUB_STEP_SUMMARY"
+          echo "Game: $url" >> "$GITHUB_STEP_SUMMARY"
+
+  smoke:
+    name: browser smoke test of the deployed game
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Boot and play T-1 on the deployed URL (desktop + phone landscape)
+        run: npm run e2e:remote
+        env:
+          UOMD_REMOTE_GAME_URL: ${{ needs.deploy.outputs.game_url }}
+      - name: Keep screenshots and traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployed-smoke-evidence
+          path: |
+            .cache/e2e-shots
+            .cache/e2e-remote-results
+          if-no-files-found: ignore
+          retention-days: 14
+
+  signing-key:
+    name: replace the content-signing key (explicit opt-in)
+    needs: deploy
+    if: ${{ inputs.bootstrap_signing_key == true && inputs.environment == 'staging' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TARGET: ${{ inputs.environment }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || '0c942d198668a8b1a8e8ee699651b817' }}
+    steps:
+      # Generates the ES256 pair INSIDE this job and stores the private half only as the Worker secret CONTENT_SIGNING_KEY of
+      # uomd-admin-<env>: never printed, never uploaded, never written into the repository. Only the PUBLIC key is printed;
+      # commit it to content/keys/trusted_public_keys.json (clients trust a signature only if that key is embedded in the build),
+      # then redeploy the game. Rotate in production by adding a second kid instead of replacing one.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Generate key, store private half as Worker secret, print public half
+        run: |
+          set -euo pipefail
+          kid=$(grep -A4 "\"$TARGET\": {" apps/api/wrangler.admin.jsonc | grep -oE '"CONTENT_SIGNING_KID": "[^"]+"' | head -1 | cut -d'"' -f4)
+          [ -n "$kid" ] || { echo "::error::could not read CONTENT_SIGNING_KID for $TARGET"; exit 1; }
+          dir=$(mktemp -d)
+          npx tsx tools/gen_signing_key.ts --kid "$kid" --out "$dir" > /dev/null
+          npx wrangler secret put CONTENT_SIGNING_KEY --env "$TARGET" -c apps/api/wrangler.admin.jsonc < "$dir/$kid.private.jwk.json" > /dev/null
+          shred -u "$dir/$kid.private.jwk.json" 2>/dev/null || rm -f "$dir/$kid.private.jwk.json"
+          echo "Secret CONTENT_SIGNING_KEY updated for uomd-admin-$TARGET (kid $kid). PUBLIC key (safe to commit):"
+          node -e "const k=require('./content/keys/trusted_public_keys.json').keys.filter(x=>x.kid===process.argv[1]).pop(); console.log('PUBLIC_KEY_JSON ' + JSON.stringify(k))" "$kid"

@@ -1,0 +1,60 @@
+name: Publish content release
+# Publishes a content directory through the Control Center API (upload -> validate -> draft -> sign -> publish).
+# Needs a Cloudflare Access SERVICE TOKEN with an admin role (see docs/SECRETS_AND_PERMISSIONS.md).
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options: [staging, dev]
+        default: staging
+      directory:
+        description: Content directory in the repo
+        default: content/patches/rel_0002_road_forgotten
+      release_id:
+        description: New release id (snake_case, unique)
+        default: rel_0002
+      depends_on:
+        description: Release this one builds on (empty for a base release)
+        default: rel_0001
+      notes:
+        default: Data-only content patch
+      rollout_percent:
+        default: "100"
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+      CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+      ADMIN_URL_STAGING: ${{ vars.ADMIN_URL_STAGING }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check configuration
+        run: |
+          [ -n "$CF_ACCESS_CLIENT_ID" ] && [ -n "$CF_ACCESS_CLIENT_SECRET" ] || { echo "::error::Missing GitHub secrets CF_ACCESS_CLIENT_ID / CF_ACCESS_CLIENT_SECRET"; exit 1; }
+          [ -n "$ADMIN_URL_STAGING" ] || echo "::warning::GitHub variable ADMIN_URL_STAGING is not set"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Publish
+        # inputs are passed through env, never interpolated into the script (no shell injection from dispatch inputs)
+        env:
+          ADMIN_URL: ${{ inputs.environment == 'dev' && vars.ADMIN_URL_DEV || vars.ADMIN_URL_STAGING }}
+          IN_ENV: ${{ inputs.environment }}
+          IN_DIR: ${{ inputs.directory }}
+          IN_ID: ${{ inputs.release_id }}
+          IN_DEPENDS: ${{ inputs.depends_on }}
+          IN_NOTES: ${{ inputs.notes }}
+          IN_ROLLOUT: ${{ inputs.rollout_percent }}
+        run: |
+          args=(--admin "$ADMIN_URL" --dir "$IN_DIR" --id "$IN_ID" --channel "$IN_ENV" --notes "$IN_NOTES" --rollout "$IN_ROLLOUT" --publish)
+          [ -n "$IN_DEPENDS" ] && args+=(--depends "$IN_DEPENDS")
+          npx tsx tools/publish_release.ts "${args[@]}"
