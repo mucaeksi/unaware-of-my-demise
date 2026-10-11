@@ -1,0 +1,70 @@
+name: D1 backup
+# Daily logical export of the staging D1 database: verified (loads into a fresh SQLite, integrity_check, key tables present),
+# age-encrypted to the owner's PUBLIC key and stored in the R2 bucket uomd-db-backups (its lifecycle rule expires old copies).
+# Cloudflare D1 Time Travel is the first line of recovery; this is the independent, restorable copy.
+# Needs: secret CLOUDFLARE_API_TOKEN, variable BACKUP_AGE_RECIPIENT (an age PUBLIC key; the private key stays with the owner).
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Database to back up
+        type: choice
+        options: [staging, dev]
+        default: staging
+  schedule:
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backup-${{ inputs.environment || 'staging' }}
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      TARGET: ${{ inputs.environment || 'staging' }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || '0c942d198668a8b1a8e8ee699651b817' }}
+      AGE_RECIPIENT: ${{ vars.BACKUP_AGE_RECIPIENT }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check configuration (names only, never values)
+        run: |
+          [ -n "${CLOUDFLARE_API_TOKEN}" ] || { echo "::error::Missing GitHub secret CLOUDFLARE_API_TOKEN"; exit 1; }
+          [ -n "${AGE_RECIPIENT}" ] || { echo "::error::Missing GitHub variable BACKUP_AGE_RECIPIENT (an age public key, starts with age1)"; exit 1; }
+          case "${AGE_RECIPIENT}" in age1*) ;; *) echo "::error::BACKUP_AGE_RECIPIENT must be an age PUBLIC key (age1...)"; exit 1;; esac
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq age sqlite3
+      - name: Export
+        working-directory: apps/api
+        run: |
+          mkdir -p "$RUNNER_TEMP/b"
+          npx wrangler d1 export DB --remote -c wrangler.game.jsonc --env "$TARGET" --output "$RUNNER_TEMP/b/d1.sql"
+      - name: Verify the export is restorable (fresh SQLite, integrity, key tables)
+        run: |
+          sqlite3 "$RUNNER_TEMP/b/restore.db" < "$RUNNER_TEMP/b/d1.sql"
+          test "$(sqlite3 "$RUNNER_TEMP/b/restore.db" 'PRAGMA integrity_check;')" = "ok"
+          for t in characters players wallets ledger audit_log gacha_pulls banners; do
+            sqlite3 "$RUNNER_TEMP/b/restore.db" "SELECT COUNT(*) FROM $t;" > /dev/null || { echo "::error::table $t missing in the export"; exit 1; }
+          done
+          echo "players=$(sqlite3 "$RUNNER_TEMP/b/restore.db" 'SELECT COUNT(*) FROM players;') ledger=$(sqlite3 "$RUNNER_TEMP/b/restore.db" 'SELECT COUNT(*) FROM ledger;')"
+          # ledger must reconcile with wallets: a backup that does not is itself an alert
+          test "$(sqlite3 "$RUNNER_TEMP/b/restore.db" 'SELECT COUNT(*) FROM (SELECT w.player_id FROM wallets w LEFT JOIN (SELECT player_id, currency, SUM(delta) s FROM ledger GROUP BY 1,2) l ON l.player_id=w.player_id AND l.currency=w.currency WHERE w.balance <> COALESCE(l.s,0));')" = "0" || { echo "::error::wallet balances do not reconcile with the ledger"; exit 1; }
+      - name: Encrypt (age, public key only) and upload to R2
+        working-directory: apps/api
+        run: |
+          stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+          age -r "${AGE_RECIPIENT}" -o "$RUNNER_TEMP/b/d1-${TARGET}-${stamp}.sql.age" "$RUNNER_TEMP/b/d1.sql"
+          npx wrangler r2 object put "uomd-db-backups/d1/${TARGET}/d1-${TARGET}-${stamp}.sql.age" --file "$RUNNER_TEMP/b/d1-${TARGET}-${stamp}.sql.age" --remote
+          echo "stored d1/${TARGET}/d1-${TARGET}-${stamp}.sql.age ($(stat -c %s "$RUNNER_TEMP/b/d1-${TARGET}-${stamp}.sql.age") bytes)"
+      - name: Time Travel is available (point-in-time recovery bookmark)
+        working-directory: apps/api
+        run: npx wrangler d1 time-travel info DB -c wrangler.game.jsonc --env "$TARGET"
