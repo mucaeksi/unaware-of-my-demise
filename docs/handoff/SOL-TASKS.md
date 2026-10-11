@@ -4,7 +4,8 @@ Tick a box only when committed and accepted; add `commit <hash> - what is left`.
 - [x] SOL-1 Combat effect specification and test vectors (`docs/combat/OPS_SPEC.md`, `docs/combat/vectors/*.json`)
   - commit `0cdc0a07` — accepted: 22 missing-op sections, 44 op scenarios + 10 status scenarios; JSON/HP/Focus/coverage checked. Left: Claude resolves C01–C39 and implements the adapter/engine replay; these are proposed vectors, not passing engine tests.
 - [ ] SOL-2 Store and legal texts, EN (TR deferred by owner 2026-10-11) (`docs/store/`)
-- [ ] SOL-3 Android real-device QA plan (`docs/QA_ANDROID.md`)
+- [x] SOL-3 Android real-device QA plan (`docs/QA_ANDROID.md`)
+  - commit `c18fc30e` — accepted: all first-AAB identity/payment/ad/consent/offline acceptance areas have device steps and exact backend evidence. Left: physical-device execution and listed implementation/configuration blockers.
 - [ ] SOL-4 Runbook (`docs/RUNBOOK.md`)
 - [ ] SOL-5 Media production queue (`docs/media/QUEUE.md`)
 - [ ] SOL-6 Localization catalog, EN source only (TR deferred by owner 2026-10-11; `docs/i18n/STRINGS.md`)
