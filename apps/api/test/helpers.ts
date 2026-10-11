@@ -48,7 +48,64 @@ const googleKeys = await generateKeyPair('RS256');
 export const ADMOB_UNIT = 'ca-app-pub-3940256099942544/5224354917';
 const ssvPair = (await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify'])) as CryptoKeyPair;
 const ssvSpki = btoa(String.fromCharCode(...new Uint8Array((await crypto.subtle.exportKey('spki', ssvPair.publicKey)) as ArrayBuffer)));
+import type { PlayClient, ProductPurchase, SubscriptionPurchase } from '../src/billing/play';
+
+/** In-memory Google Play: tests script purchases/subscriptions and observe acknowledge/consume calls. */
+export const fakePlay = {
+  products: new Map<string, ProductPurchase>(),
+  subs: new Map<string, SubscriptionPurchase>(),
+  calls: [] as string[],
+  failAck: false,
+  reset(): void {
+    this.products.clear();
+    this.subs.clear();
+    this.calls = [];
+    this.failAck = false;
+  }
+};
+const playClient: PlayClient = {
+  async getProduct(_id, token) {
+    const p = fakePlay.products.get(token);
+    if (!p) throw new Error('unknown token');
+    return p;
+  },
+  async getSubscription(token) {
+    const s = fakePlay.subs.get(token);
+    if (!s) throw new Error('unknown token');
+    return s;
+  },
+  async acknowledgeProduct(id, token) {
+    fakePlay.calls.push(`ack:${id}:${token}`);
+  },
+  async consumeProduct(id, token) {
+    if (fakePlay.failAck) throw new Error('play down');
+    fakePlay.calls.push(`consume:${id}:${token}`);
+    const p = fakePlay.products.get(token);
+    if (p) p.consumed = true;
+  },
+  async acknowledgeSubscription(id, token) {
+    if (fakePlay.failAck) throw new Error('play down');
+    fakePlay.calls.push(`ack_sub:${id}:${token}`);
+    const s = fakePlay.subs.get(token);
+    if (s) s.acknowledged = true;
+  }
+};
+
+/** Signs a Pub/Sub push token like Google does for an authenticated push subscription. */
+export const RTDN_AUDIENCE = 'https://game.test/api/v1/billing/rtdn';
+export const RTDN_SA = 'rtdn-push@project.iam.gserviceaccount.com';
+export async function pushToken(over: { aud?: string; email?: string; wrongKey?: boolean } = {}): Promise<string> {
+  return new SignJWT({ email: over.email ?? RTDN_SA, email_verified: true })
+    .setProtectedHeader({ alg: 'RS256', kid: 'g1' })
+    .setIssuer('https://accounts.google.com')
+    .setAudience(over.aud ?? RTDN_AUDIENCE)
+    .setIssuedAt()
+    .setExpirationTime('10m')
+    .sign((over.wrongKey ? other : googleKeys).privateKey);
+}
+
 const gameApp = createGameApp({
+  play: () => playClient,
   getGoogleKey: (async () => googleKeys.publicKey) as unknown as JWTVerifyGetKey,
   admobKeys: async () => [{ keyId: 4242, base64: ssvSpki }]
 });
@@ -91,7 +148,7 @@ export async function admin(path: string, init: RequestInit & { as?: string | nu
 }
 
 export async function game(path: string, init: RequestInit = {}, over: Partial<GameEnv> = {}): Promise<Response> {
-  return await gameApp.fetch(new Request(`https://game.test${path}`, init), { ...(baseEnv as GameEnv), GOOGLE_CLIENT_IDS: GOOGLE_CLIENT, ADMOB_AD_UNIT_IDS: ADMOB_UNIT, ...over });
+  return await gameApp.fetch(new Request(`https://game.test${path}`, init), { ...(baseEnv as GameEnv), GOOGLE_CLIENT_IDS: GOOGLE_CLIENT, ADMOB_AD_UNIT_IDS: ADMOB_UNIT, PLAY_PACKAGE_NAME: 'app.uomd.test', RTDN_AUDIENCE, RTDN_PUSH_SERVICE_ACCOUNT: RTDN_SA, ...over });
 }
 
 /** Signs a test player in through the real endpoint and returns the bearer header plus the player id. */

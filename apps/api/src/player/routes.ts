@@ -6,6 +6,9 @@ import { HttpError } from '../content/store';
 import { d1RateLimit } from '../http';
 import type { GameEnv } from '../env';
 import { activeBanners, convertEclipseToFates, disclosure, pullGacha } from '../gacha/service';
+import { PlayApi, type PlayClient } from '../billing/play';
+import { authenticatePush, handleRtdn } from '../billing/rtdn';
+import { billingTag, listProducts, syncSubscriptionMail, verifyPurchase } from '../billing/service';
 import { adStatus, beginAd, grantAd, AD } from '../ads/service';
 import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, submitBattle, writeSave } from '../progress/service';
@@ -33,7 +36,7 @@ async function body<T>(c: { req: { text(): Promise<string> } }, schema: z.ZodTyp
 }
 
 /** Account, session, wallet and gacha endpoints. Authenticated routes use the opaque bearer session (see auth.ts). */
-export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?: SsvKeyFetcher } = {}): void {
+export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?: SsvKeyFetcher; play?: (env: GameEnv) => PlayClient } = {}): void {
   const perMinute = async (env: GameEnv, key: string, limit: number): Promise<void> => {
     if (!(await d1RateLimit(env.DB, `${key}`.slice(0, 80), limit, 60))) throw new HttpError(429, 'rate_limited', 'too many requests');
   };
@@ -66,6 +69,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/save', authed);
   app.use('/api/v1/ads/status', authed);
   app.use('/api/v1/ads/begin', authed);
+  app.use('/api/v1/shop/verify', authed);
   app.use('/api/v1/mail/*', authed);
 
   app.post('/api/v1/auth/logout', async (c) => {
@@ -75,7 +79,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
 
   app.get('/api/v1/me', async (c) => {
     const p = await c.env.DB.prepare('SELECT id, display_name, created_at FROM players WHERE id = ?1').bind(c.get('playerId')).first<{ id: string; display_name: string | null; created_at: string }>();
-    return c.json({ id: p?.id, displayName: p?.display_name ?? null, createdAt: p?.created_at });
+    return c.json({ id: p?.id, displayName: p?.display_name ?? null, createdAt: p?.created_at, billingTag: await billingTag(c.get('playerId')) });
   });
 
   app.get('/api/v1/wallet', async (c) => {
@@ -123,7 +127,10 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     return c.json(await convertEclipseToFates(c.env.DB, c.get('playerId'), input.count, input.requestId));
   });
 
-  app.get('/api/v1/mail', async (c) => c.json({ mail: await listMail(c.env.DB, c.get('playerId')) }));
+  app.get('/api/v1/mail', async (c) => {
+    await syncSubscriptionMail(c.env.DB, c.get('playerId')); // subscription half-day entitlements arrive as mail
+    return c.json({ mail: await listMail(c.env.DB, c.get('playerId')) });
+  });
 
   const MailId = z.coerce.number().int().min(1).max(Number.MAX_SAFE_INTEGER);
   app.post('/api/v1/mail/:id/read', async (c) => {
@@ -179,5 +186,30 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     if (Math.abs(Date.now() - ssv.timestampMs) > AD.maxAgeMs) throw new HttpError(400, 'bad_ssv', 'callback is too old');
     // 200 for every verified callback (Google retries other codes); the body says whether the view paid out
     return c.json(await grantAd(c.env.DB, ssv.userId, ssv.adUnit, ssv.transactionId, ssv.customData));
+  });
+
+  const playFor = (env: GameEnv): PlayClient => (opts.play ? opts.play(env) : new PlayApi(env));
+  const Verify = z.object({ productId: z.string().regex(/^[a-z][a-z0-9_.]{1,99}$/), purchaseToken: z.string().min(10).max(4096) }).strict();
+
+  app.get('/api/v1/shop/products', async (c) => c.json({ products: await listProducts(c.env.DB) }, 200, { 'Cache-Control': 'public, max-age=60' }));
+
+  app.post('/api/v1/shop/verify', async (c) => {
+    await perMinute(c.env, `verify:${c.get('playerId')}`, 20);
+    const input = await body(c, Verify, 6000);
+    return c.json(await verifyPurchase(c.env.DB, playFor(c.env), c.get('playerId'), input));
+  });
+
+  // Google Pub/Sub push (RTDN): refunds, revocations, renewals. Authenticated by the push OIDC token, never by the body.
+  app.post('/api/v1/billing/rtdn', async (c) => {
+    await authenticatePush(c.req.raw, c.env, opts.getGoogleKey);
+    const raw = await c.req.text();
+    if (raw.length > 64 * 1024) throw new HttpError(413, 'too_large', 'request body too large');
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      throw new HttpError(400, 'bad_request', 'invalid JSON');
+    }
+    return c.json(await handleRtdn(c.env.DB, c.env, playFor(c.env), parsed));
   });
 }

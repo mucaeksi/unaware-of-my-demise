@@ -15,7 +15,7 @@ export const NewMail = z
     attachments: z.array(Attachment).max(10).default([]),
     /** days the mail stays claimable (canon: unclaimed completed rewards stay 7 days; subscription grace 14) */
     expiresInDays: z.number().int().min(1).max(365).default(14),
-    sourceKey: z.string().regex(/^[A-Za-z0-9:_-]{1,100}$/).optional()
+    sourceKey: z.string().regex(/^[A-Za-z0-9:_.-]{1,120}$/).optional()
   })
   .strict();
 export type NewMail = z.input<typeof NewMail>;
@@ -69,6 +69,12 @@ export async function claimMail(db: D1Database, playerId: string, mailId: number
   const mail = parse(row);
   if (mail.claimed_at) throw new HttpError(409, 'already_claimed', 'this mail was already claimed');
   if (mail.expires_at <= now.toISOString()) throw new HttpError(409, 'expired', 'this mail has expired');
+  const src = await db.prepare('SELECT source_key FROM mail WHERE id = ?1').bind(mailId).first<{ source_key: string | null }>();
+  const order = /^sub:([^:]+):/.exec(src?.source_key ?? '')?.[1];
+  if (order) {
+    const p = await db.prepare('SELECT state FROM purchases WHERE order_id = ?1').bind(order).first<{ state: string }>();
+    if (p?.state === 'refunded') throw new HttpError(409, 'revoked', 'this entitlement was revoked by a refund');
+  }
 
   const items = mail.attachments.filter((a): a is Extract<Attachment, { type: 'character' }> => a.type === 'character');
   const rarity = new Map<string, number>();

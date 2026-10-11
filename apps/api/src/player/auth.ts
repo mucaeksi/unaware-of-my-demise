@@ -15,7 +15,7 @@ export interface GoogleClaims {
 let googleKeys: JWTVerifyGetKey | undefined;
 const testKeys = new Map<string, JWTVerifyGetKey>();
 
-function keyResolver(env: GameEnv): JWTVerifyGetKey {
+export function googleKeyResolver(env: GameEnv): JWTVerifyGetKey {
   // a test JWKS is honoured only in local development, never from a deployed Worker
   if (env.ENVIRONMENT === 'dev' && env.GOOGLE_JWKS_URL) {
     let k = testKeys.get(env.GOOGLE_JWKS_URL);
@@ -33,7 +33,7 @@ export async function verifyGoogleIdToken(idToken: string, env: GameEnv, getKey?
   const audiences = (env.GOOGLE_CLIENT_IDS ?? '').split(',').map((s) => s.trim()).filter(Boolean);
   if (audiences.length === 0) throw new HttpError(503, 'sign_in_not_configured', 'Google sign-in is not configured for this environment');
   try {
-    const { payload } = await jwtVerify(idToken, getKey ?? keyResolver(env), {
+    const { payload } = await jwtVerify(idToken, getKey ?? googleKeyResolver(env), {
       issuer: ['https://accounts.google.com', 'accounts.google.com'],
       audience: audiences,
       algorithms: ['RS256']

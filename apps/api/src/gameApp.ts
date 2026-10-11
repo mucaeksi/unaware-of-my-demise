@@ -8,6 +8,7 @@ import { d1RateLimit, onError, securityHeaders } from './http';
 import type { Channel } from '@uomd/content-schema';
 import type { GameEnv } from './env';
 import type { SsvKeyFetcher } from './ads/ssv';
+import type { PlayClient } from './billing/play';
 import { registerPlayerRoutes } from './player/routes';
 import type { JWTVerifyGetKey } from 'jose';
 
@@ -29,7 +30,7 @@ async function limited(env: GameEnv, req: Request, bucket: string, limit: number
 }
 
 /** Public game API. Everything here is safe to call from an untrusted client. */
-export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?: SsvKeyFetcher } = {}): Hono<{ Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } }> {
+export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?: SsvKeyFetcher; play?: (env: GameEnv) => PlayClient } = {}): Hono<{ Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } }> {
   const app = new Hono<{ Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } }>();
   app.use('*', securityHeaders);
   app.onError(onError);
