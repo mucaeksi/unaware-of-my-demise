@@ -12,7 +12,7 @@ const dst = join(ROOT, 'docs/evidence');
 if (!existsSync(src)) throw new Error('no .cache/e2e-shots: run `npm run e2e` first');
 const NAME: Record<string, string> = {
   '01-title': 'title', '02-story': 'story', '03-battle': 'battle', '05-victory': 'victory', '06-patch-lab': 'patch-lab', '07-chapters-patched': 'chapters',
-  '10-account-signed-out': 'account-signed-out', '11-summon': 'summon', '12-summon-result': 'summon-result', '13-mail': 'mail', '14-roster': 'roster'
+  '10-account-signed-out': 'account-signed-out', '11-summon': 'summon', '12-summon-result': 'summon-result', '13-mail': 'mail', '14-roster': 'roster', '15-character': 'character', '16-errands': 'errands', '17-armory': 'armory'
 };
 let n = 0;
 for (const f of readdirSync(src)) {
@@ -20,7 +20,7 @@ for (const f of readdirSync(src)) {
   const base = m?.[2] ? NAME[m[2]] : undefined;
   if (!m || !base) continue;
   const phone = m[1] === 'phone-landscape';
-  if (phone && !['battle', 'summon', 'summon-result', 'mail', 'roster', 'title'].includes(base)) continue;
+  if (phone && !['battle', 'summon', 'summon-result', 'mail', 'roster', 'character', 'errands', 'armory', 'title'].includes(base)) continue;
   await sharp(join(src, f)).resize({ width: phone ? 1200 : 1280, withoutEnlargement: true }).webp({ quality: 82 }).toFile(join(dst, `${phone ? 'phone' : 'desktop'}-${base}.webp`));
   n++;
 }

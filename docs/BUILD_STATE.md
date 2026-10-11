@@ -23,8 +23,8 @@ Miniflare/Workers runtime, not a deployed Cloudflare environment; **NOT DONE** =
 | Security review | VERIFIED | `docs/SECURITY_REVIEW_2026-10-10.md` (5 findings fixed, residual risks listed). `npm audit`: 1 low (esbuild dev-server file read on Windows; dev tooling only) |
 | Secret scan of the working tree (private JWK members, PEM blocks, `AIza…`, `cfut_…`, `ghp_…`, `sk-…`) | VERIFIED | no matches; `.env*`, `.cache/`, `.wrangler/` are git-ignored |
 
-Test totals at the last full run: **167 unit/Workers tests** (api 52, game 3, combat 20, content-schema 31, economy 14, patch 13, shared 22, story 5)
-and **9 e2e tests passed, 1 skipped by design** (the one-way "publish a release" scenario runs on the first project only).
+Test totals at the last full run (2026-10-11): **263 unit/Workers tests** (api 129, game 3, combat 20, content-schema 31, economy 40, patch 13, shared 22, story 5)
+and **11 e2e tests passed, 1 skipped by design** (desktop + phone; account flow now also visits Companion, Errands, Armory) (the one-way "publish a release" scenario runs on the first project only).
 
 ## 1b. Deployed staging environment (GitHub Actions run 38081525826 `deploy.yml`, 2026-10-10, all steps green)
 | Item | Value | Verified by |
