@@ -4,3 +4,4 @@ export * from './semver';
 export * from './signing';
 export * from './rng';
 export * from './budget';
+export * from './media';

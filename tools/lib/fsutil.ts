@@ -5,7 +5,10 @@ import { dirname, join } from 'node:path';
 
 export const ROOT = new URL('../../', import.meta.url).pathname.replace(/\/$/, '');
 
-/** The legacy Godot runtime snapshot that owns the approved tutorial art (see content/SOURCES.md). */
+/**
+ * Commit that still holds the approved legacy tutorial art the content build reads through `git show` (retired Godot-era tree,
+ * also kept on the read-only branch archive/godot-era). Provisional until Google-generated art replaces it; see content/provenance.json.
+ */
 export const LEGACY_COMMIT = '25dc0b2521d90a44a1125a8ceba328adf84babda';
 
 export const sha256 = (data: Buffer | string): string => createHash('sha256').update(data).digest('hex');

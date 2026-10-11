@@ -1,4 +1,4 @@
-> **Archived 2026-10-11:** the images/audio this document links to were moved out of `main` (still in branch `archive/pre-cleanup-2026-10-10`; index: `narrative/ARCHIVE.md`, references: `reference/`). Links to them are historical.
+> **Archived 2026-10-11:** the images/audio this document links to were moved out of `main` (still in branch `archive/pre-cleanup-2026-10-10`; index: `narrative/ARCHIVE.md`, references: `reference/`). Links to them are historical. The locked originals of `fadyme/sheet/char-fadyme-uomd.png` and `chibi_ref_fadyme.png` now live byte-exact in `reference/locked/fadyme/sheet/` (paths in `REFERENCE_SET.lock.json` are the pre-move paths); logo and key art stay here because the content build reads them.
 
 # Recovered historical locked anchors
 
