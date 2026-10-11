@@ -54,7 +54,7 @@ export async function buildParty(db: D1Database, playerId: string, encounter: En
   if (front.length === 0 && rest.length > 0) front.push(rest.shift() as (typeof members)[number]);
   const out: PartyMember[] = [];
   front.forEach((m, i) => out.push(strip(m, i, 'front')));
-  rest.forEach((m, i) => out.push(strip(m, FRONT + i, 'rear')));
+  rest.forEach((m, i) => out.push(strip(m, front.length + i, 'rear')));
   return BattleParty.parse(out);
 }
 

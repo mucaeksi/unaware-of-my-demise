@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_1_1",
+  "stage_id": "1-1",
+  "title_en": "The Road That Whispers",
+  "location_id": "forest_whispering_ash",
+  "seed": 2376268755,
+  "party_mode": "fixed",
+  "party": [
+    {
+      "unit_id": "mahmut",
+      "level": 1,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "fadyme",
+      "level": 1,
+      "slot": 1,
+      "row": "rear"
+    }
+  ],
+  "enemies": [
+    {
+      "unit_id": "ash_wolf",
+      "level": 1,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "ash_wolf",
+      "level": 1,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "hollow_pilgrim",
+      "level": 1,
+      "slot": 2,
+      "row": "front"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#1-1"
+  }
+}

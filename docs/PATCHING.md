@@ -33,5 +33,5 @@ semantic validation failure, offline, rollout buckets, kill switch, on-disk corr
 ## Compatibility matrix (current)
 | Client | Content schema | Notes |
 |---|---|---|
-| 0.1.x | 1 | first runtime; effect grammar v1 (9 ops, 7 statuses) |
+| 0.1.x | 1 | first runtime; effect grammar v2 (all 34 narrative ops, 15 statuses, boss phases/objectives/telegraphs, owned-hero parties). No store build has shipped with grammar v1, so no compatibility break exists yet. |
 Future rows are added whenever the grammar/schema gains capabilities (older clients ignore releases with a higher `content_schema`).

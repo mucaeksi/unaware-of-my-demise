@@ -113,13 +113,15 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
     }
   };
   if (index) {
+    // a node may require any node of the campaign (the server gates on the player's progress rows, which are global)
+    const allNodes = new Set(index.chapters.flatMap((c) => c.nodes.map((x) => x.node_id)));
     for (const ch of index.chapters) {
       const ids = new Set<string>();
       for (const n of ch.nodes) {
         nodes++;
         if (ids.has(n.node_id)) problems.push(`chapter ${ch.chapter_id}: duplicate node ${n.node_id}`);
         ids.add(n.node_id);
-        if (n.requires && !ch.nodes.some((o) => o.node_id === n.requires)) problems.push(`node ${n.node_id}: requires unknown node ${n.requires}`);
+        if (n.requires && !allNodes.has(n.requires)) problems.push(`node ${n.node_id}: requires unknown node ${n.requires}`);
         if (n.kind === 'story') {
           if (!n.story) problems.push(`node ${n.node_id}: story node without story path`);
           else checkScene(n.story);
@@ -129,6 +131,7 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
           const enc = parse(n.encounter, Encounter);
           if (!enc) continue;
           for (const e of [...enc.party, ...enc.enemies]) if (!units.has(e.unit_id)) problems.push(`${n.encounter}: unknown unit ${e.unit_id}`);
+          for (const g of enc.guests ?? []) if (!units.has(g)) problems.push(`${n.encounter}: unknown guest ${g}`);
           if (art && !art.backgrounds[enc.location_id]) problems.push(`${n.encounter}: no background for ${enc.location_id}`);
           if (art && enc.music_cue && !art.music[enc.music_cue]) problems.push(`${n.encounter}: unknown music cue ${enc.music_cue}`);
           if (enc.pre_story) checkScene(enc.pre_story, enc.location_id);

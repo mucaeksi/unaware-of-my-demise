@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_2_3",
+  "stage_id": "2-3",
+  "title_en": "The Guest Roll",
+  "location_id": "cathedral_saint_luthos",
+  "seed": 1140546920,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "mirel_quill"
+  ],
+  "enemies": [
+    {
+      "unit_id": "inkbound_dead",
+      "level": 4,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "inkbound_dead",
+      "level": 4,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "hollow_cleric",
+      "level": 4,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#2-3"
+  }
+}

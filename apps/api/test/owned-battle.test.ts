@@ -3,7 +3,7 @@ import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { playAuto } from '@uomd/combat';
 import { BattleParty, Encounter, UnitPack } from '@uomd/content-schema';
 import { sha256Hex } from '@uomd/shared';
-import { baseFiles, type TestFile } from './fixtures';
+import { baseFiles, campaignFiles, type TestFile } from './fixtures';
 import { admin, entries, game, post, resetContent, seedCanonCatalog, signIn, upload } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
@@ -122,3 +122,34 @@ describe('owned-hero battles are fought with a server-frozen party', () => {
     expect(await r.json()).toEqual({ sessionId: null, party: null, expiresAt: null });
   });
 });
+
+describe('the Part I campaign release', () => {
+  it('stage 1-2: three story loans plus the two starters, and clearing it recruits Brin', async () => {
+    const set = await campaignFiles();
+    await resetContent();
+    await upload(set);
+    expect((await admin('/admin/api/releases', { method: 'POST', body: JSON.stringify({ id: 'rel_0001', channel: 'dev', notes: 'campaign', files: entries(set) }), headers: { 'Content-Type': 'application/json' } })).status).toBe(201);
+    expect((await admin('/admin/api/releases/rel_0001/publish', { method: 'POST', body: '{}', headers: { 'Content-Type': 'application/json' } })).status).toBe(200);
+    const campaignPack = UnitPack.parse(JSON.parse(dec.decode(set.find((f) => f.path === 'units/unit_pack.json')!.bytes)));
+    const campaignEnc = Encounter.parse(JSON.parse(dec.decode(set.find((f) => f.path === 'encounters/stage_1_2.json')!.bytes)));
+    const { auth, playerId } = await signIn(`sub-camp-${rid()}`);
+    expect((await game('/api/v1/progress/battle/start', post({ releaseId: 'rel_0001', nodeId: 'stage_1_1' }, auth))).status).toBe(200); // the tutorial stage is fixed, no session
+    await db().prepare("INSERT INTO player_progress (player_id, node_id, stars, clears, first_cleared_at, updated_at) VALUES (?1, 'stage_1_1', 3, 1, '2026-01-01T00:00:00Z', '2026-01-01T00:00:00Z')").bind(playerId).run();
+    const started = (await (await game('/api/v1/progress/battle/start', post({ releaseId: 'rel_0001', nodeId: 'stage_1_2' }, auth))).json()) as { sessionId: string; party: unknown };
+    const party = BattleParty.parse(started.party);
+    expect(party.map((m) => m.unit_id).sort()).toEqual(['brin_alder', 'fadyme', 'kera_voss', 'mahmut', 'nixie_vale']);
+    expect(party.filter((m) => m.loan).map((m) => m.unit_id).sort()).toEqual(['brin_alder', 'kera_voss', 'nixie_vale']);
+    expect(new Set(party.map((m) => m.slot)).size).toBe(5);
+    const played = playAuto(campaignPack, campaignEnc, party);
+    expect(played.battle.result?.winner).toBe('player');
+    await db().prepare("INSERT OR REPLACE INTO player_ration (player_id, value, at_ms) VALUES (?1, 100, ?2)").bind(playerId, Date.now()).run();
+    const done = await submit(auth, { nodeId: 'stage_1_2', sessionId: started.sessionId, actions: played.actions });
+    expect(done.status).toBe(200);
+    const j = (await done.json()) as { firstClear: boolean; rewards: { type: string; itemId?: string }[] };
+    expect(j.firstClear).toBe(true);
+    expect(j.rewards).toContainEqual(expect.objectContaining({ type: 'character', itemId: 'brin_alder' }));
+    const owned = await db().prepare("SELECT 1 AS x FROM player_items WHERE player_id = ?1 AND item_type = 'character' AND item_id = 'brin_alder'").bind(playerId).first();
+    expect(owned).not.toBeNull();
+  });
+});
+

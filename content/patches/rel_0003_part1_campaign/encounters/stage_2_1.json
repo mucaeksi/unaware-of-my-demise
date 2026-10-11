@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_2_1",
+  "stage_id": "2-1",
+  "title_en": "Rain in the Nave",
+  "location_id": "cathedral_saint_luthos",
+  "seed": 1688387663,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "hollow_cleric",
+      "level": 3,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "hollow_cleric",
+      "level": 3,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "inkbound_dead",
+      "level": 3,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#2-1"
+  }
+}

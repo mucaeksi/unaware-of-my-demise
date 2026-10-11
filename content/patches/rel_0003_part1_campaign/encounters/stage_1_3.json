@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_1_3",
+  "stage_id": "1-3",
+  "title_en": "A Cart of Empty Bottles",
+  "location_id": "forest_whispering_ash",
+  "seed": 3494604086,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "kera_voss"
+  ],
+  "enemies": [
+    {
+      "unit_id": "hollow_pilgrim",
+      "level": 2,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "hollow_pilgrim",
+      "level": 2,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "ash_wolf",
+      "level": 2,
+      "slot": 2,
+      "row": "rear"
+    },
+    {
+      "unit_id": "ash_wolf",
+      "level": 2,
+      "slot": 3,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#1-3"
+  }
+}

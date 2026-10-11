@@ -1,0 +1,492 @@
+{
+  "schema_version": 1,
+  "chapters": [
+    {
+      "chapter_id": "tutorial",
+      "title_en": "Before the Road",
+      "nodes": [
+        {
+          "node_id": "t1",
+          "title_en": "The First Step",
+          "kind": "battle",
+          "encounter": "encounters/tutorial_t1.json"
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch01_whispering_ash_forest",
+      "title_en": "Whispering Ash Forest",
+      "nodes": [
+        {
+          "node_id": "stage_1_1",
+          "title_en": "The Road That Whispers",
+          "kind": "battle",
+          "encounter": "encounters/stage_1_1.json",
+          "ration_class": "tutorial",
+          "drop": {
+            "table": "story_forest_common"
+          }
+        },
+        {
+          "node_id": "stage_1_2",
+          "title_en": "No Bell in the Trees",
+          "kind": "battle",
+          "encounter": "encounters/stage_1_2.json",
+          "requires": "stage_1_1",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "character",
+                "itemId": "brin_alder"
+              },
+              {
+                "type": "item",
+                "itemId": "first_oath_invitation",
+                "quantity": 1
+              }
+            ],
+            "three_star": [],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_forest_common"
+          }
+        },
+        {
+          "node_id": "stage_1_3",
+          "title_en": "A Cart of Empty Bottles",
+          "kind": "battle",
+          "encounter": "encounters/stage_1_3.json",
+          "requires": "stage_1_2",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_forest_common"
+          }
+        },
+        {
+          "node_id": "stage_1_4",
+          "title_en": "The Map's Little Lie",
+          "kind": "battle",
+          "encounter": "encounters/stage_1_4.json",
+          "requires": "stage_1_3",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "character",
+                "itemId": "nixie_vale"
+              }
+            ],
+            "three_star": [],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_forest_common"
+          }
+        },
+        {
+          "node_id": "stage_1_5",
+          "title_en": "The Ash-Maw",
+          "kind": "battle",
+          "encounter": "encounters/stage_1_5.json",
+          "requires": "stage_1_4",
+          "ration_class": "campaign",
+          "boss": true,
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "ash_maw_hide"
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch02_ruined_cathedral",
+      "title_en": "The Ruined Cathedral of Saint Luthos",
+      "nodes": [
+        {
+          "node_id": "stage_2_1",
+          "title_en": "Rain in the Nave",
+          "kind": "battle",
+          "encounter": "encounters/stage_2_1.json",
+          "requires": "stage_1_5",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_cathedral_common"
+          }
+        },
+        {
+          "node_id": "stage_2_2",
+          "title_en": "The Choir Without Breath",
+          "kind": "battle",
+          "encounter": "encounters/stage_2_2.json",
+          "requires": "stage_2_1",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_cathedral_common"
+          }
+        },
+        {
+          "node_id": "stage_2_3",
+          "title_en": "The Guest Roll",
+          "kind": "battle",
+          "encounter": "encounters/stage_2_3.json",
+          "requires": "stage_2_2",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_cathedral_common"
+          }
+        },
+        {
+          "node_id": "stage_2_4",
+          "title_en": "A Page Beneath the Font",
+          "kind": "battle",
+          "encounter": "encounters/stage_2_4.json",
+          "requires": "stage_2_3",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_cathedral_common"
+          }
+        },
+        {
+          "node_id": "stage_2_5",
+          "title_en": "The Bell-Widow's Verdict",
+          "kind": "battle",
+          "encounter": "encounters/stage_2_5.json",
+          "requires": "stage_2_4",
+          "ration_class": "campaign",
+          "boss": true,
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "widow_verdict"
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch03_oakhaven_red_harvest",
+      "title_en": "Oakhaven, the Red Harvest",
+      "nodes": [
+        {
+          "node_id": "stage_3_1",
+          "title_en": "The Empty Orchard",
+          "kind": "battle",
+          "encounter": "encounters/stage_3_1.json",
+          "requires": "stage_2_5",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_oakhaven_common"
+          }
+        },
+        {
+          "node_id": "stage_3_2",
+          "title_en": "A Smith's Last Bell",
+          "kind": "battle",
+          "encounter": "encounters/stage_3_2.json",
+          "requires": "stage_3_1",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_oakhaven_common"
+          }
+        },
+        {
+          "node_id": "stage_3_3",
+          "title_en": "The Well Runs Red",
+          "kind": "battle",
+          "encounter": "encounters/stage_3_3.json",
+          "requires": "stage_3_2",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_oakhaven_common"
+          }
+        },
+        {
+          "node_id": "stage_3_4",
+          "title_en": "The Inn of Borrowed Names",
+          "kind": "battle",
+          "encounter": "encounters/stage_3_4.json",
+          "requires": "stage_3_3",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "character",
+                "itemId": "jori_flint"
+              }
+            ],
+            "three_star": [],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_oakhaven_common"
+          }
+        },
+        {
+          "node_id": "stage_3_5",
+          "title_en": "The Mercenary Captain",
+          "kind": "battle",
+          "encounter": "encounters/stage_3_5.json",
+          "requires": "stage_3_4",
+          "ration_class": "campaign",
+          "boss": true,
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "road_captain_oath"
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch04_subterranean_undercity",
+      "title_en": "The Subterranean Undercity",
+      "nodes": [
+        {
+          "node_id": "stage_4_1",
+          "title_en": "Stairs Below the Cistern",
+          "kind": "battle",
+          "encounter": "encounters/stage_4_1.json",
+          "requires": "stage_3_5",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_undercity_common"
+          }
+        },
+        {
+          "node_id": "stage_4_2",
+          "title_en": "The Red Vial Ward",
+          "kind": "battle",
+          "encounter": "encounters/stage_4_2.json",
+          "requires": "stage_4_1",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_undercity_common"
+          }
+        },
+        {
+          "node_id": "stage_4_3",
+          "title_en": "The Measure of a Life",
+          "kind": "battle",
+          "encounter": "encounters/stage_4_3.json",
+          "requires": "stage_4_2",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_undercity_common"
+          }
+        },
+        {
+          "node_id": "stage_4_4",
+          "title_en": "The Elixir Lie",
+          "kind": "battle",
+          "encounter": "encounters/stage_4_4.json",
+          "requires": "stage_4_3",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_undercity_common"
+          }
+        },
+        {
+          "node_id": "stage_4_5",
+          "title_en": "The Red Vial Matron",
+          "kind": "battle",
+          "encounter": "encounters/stage_4_5.json",
+          "requires": "stage_4_4",
+          "ration_class": "campaign",
+          "boss": true,
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "red_vial_residue"
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch05_bridge_of_the_forsaken",
+      "title_en": "The Bridge of the Forsaken",
+      "nodes": [
+        {
+          "node_id": "stage_5_1",
+          "title_en": "A Banner in the Fog",
+          "kind": "battle",
+          "encounter": "encounters/stage_5_1.json",
+          "requires": "stage_4_5",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_bridge_common"
+          }
+        },
+        {
+          "node_id": "stage_5_2",
+          "title_en": "The Gatekeeper's Measure",
+          "kind": "battle",
+          "encounter": "encounters/stage_5_2.json",
+          "requires": "stage_5_1",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_bridge_common"
+          }
+        },
+        {
+          "node_id": "stage_5_3",
+          "title_en": "A Knife Between Orders",
+          "kind": "battle",
+          "encounter": "encounters/stage_5_3.json",
+          "requires": "stage_5_2",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_bridge_common"
+          }
+        },
+        {
+          "node_id": "stage_5_4",
+          "title_en": "The White Strand",
+          "kind": "battle",
+          "encounter": "encounters/stage_5_4.json",
+          "requires": "stage_5_3",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_bridge_common"
+          }
+        },
+        {
+          "node_id": "stage_5_5",
+          "title_en": "The Commander Who Remained",
+          "kind": "battle",
+          "encounter": "encounters/stage_5_5.json",
+          "requires": "stage_5_4",
+          "ration_class": "campaign",
+          "boss": true,
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "bridgewarden_plating"
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch06_ashen_lord_estate",
+      "title_en": "The Ashen Lord's Estate",
+      "nodes": [
+        {
+          "node_id": "stage_6_1",
+          "title_en": "The Servants' Entrance",
+          "kind": "battle",
+          "encounter": "encounters/stage_6_1.json",
+          "requires": "stage_5_5",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_estate_common"
+          }
+        },
+        {
+          "node_id": "stage_6_2",
+          "title_en": "Portraits Without Names",
+          "kind": "battle",
+          "encounter": "encounters/stage_6_2.json",
+          "requires": "stage_6_1",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_estate_common"
+          }
+        },
+        {
+          "node_id": "stage_6_3",
+          "title_en": "The Sealed Conservatory",
+          "kind": "battle",
+          "encounter": "encounters/stage_6_3.json",
+          "requires": "stage_6_2",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_estate_common"
+          }
+        },
+        {
+          "node_id": "stage_6_4",
+          "title_en": "The Manor Gives Way",
+          "kind": "battle",
+          "encounter": "encounters/stage_6_4.json",
+          "requires": "stage_6_3",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_estate_common"
+          }
+        },
+        {
+          "node_id": "stage_6_5",
+          "title_en": "The Ashen Lord's Wraith",
+          "kind": "battle",
+          "encounter": "encounters/stage_6_5.json",
+          "requires": "stage_6_4",
+          "ration_class": "campaign",
+          "boss": true,
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "nameless_gallery"
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch07_altar_first_eclipse",
+      "title_en": "The Altar of the First Eclipse",
+      "nodes": [
+        {
+          "node_id": "stage_7_1",
+          "title_en": "The Stair of Seven Chains",
+          "kind": "battle",
+          "encounter": "encounters/stage_7_1.json",
+          "requires": "stage_6_5",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_altar_common"
+          }
+        },
+        {
+          "node_id": "stage_7_2",
+          "title_en": "Those Who Held the Road",
+          "kind": "battle",
+          "encounter": "encounters/stage_7_2.json",
+          "requires": "stage_7_1",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_altar_common"
+          }
+        },
+        {
+          "node_id": "stage_7_3",
+          "title_en": "The Names We Kept",
+          "kind": "battle",
+          "encounter": "encounters/stage_7_3.json",
+          "requires": "stage_7_2",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_altar_common"
+          }
+        },
+        {
+          "node_id": "stage_7_4",
+          "title_en": "Before the Last Toll",
+          "kind": "battle",
+          "encounter": "encounters/stage_7_4.json",
+          "requires": "stage_7_3",
+          "ration_class": "campaign",
+          "drop": {
+            "table": "story_altar_common"
+          }
+        },
+        {
+          "node_id": "stage_7_5",
+          "title_en": "The Eclipse Construct",
+          "kind": "battle",
+          "encounter": "encounters/stage_7_5.json",
+          "requires": "stage_7_4",
+          "ration_class": "campaign",
+          "boss": true,
+          "drop": {
+            "table": "story_boss_final",
+            "boss_set_id": "first_eclipse"
+          }
+        }
+      ]
+    }
+  ]
+}

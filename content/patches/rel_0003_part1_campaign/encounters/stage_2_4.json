@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_2_4",
+  "stage_id": "2-4",
+  "title_en": "A Page Beneath the Font",
+  "location_id": "cathedral_saint_luthos",
+  "seed": 2128707858,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "sister_aveline",
+    "mirel_quill"
+  ],
+  "enemies": [
+    {
+      "unit_id": "choir_knight",
+      "level": 5,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "inkbound_dead",
+      "level": 5,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "inkbound_dead",
+      "level": 5,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#2-4"
+  }
+}

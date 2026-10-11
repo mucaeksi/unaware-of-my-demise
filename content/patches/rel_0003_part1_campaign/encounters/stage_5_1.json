@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_5_1",
+  "stage_id": "5-1",
+  "title_en": "A Banner in the Fog",
+  "location_id": "bridge_forsaken",
+  "seed": 1792103959,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "marek_vane"
+  ],
+  "enemies": [
+    {
+      "unit_id": "lost_vow_knight",
+      "level": 12,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "lost_vow_knight",
+      "level": 12,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "bridge_revenant",
+      "level": 12,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#5-1"
+  }
+}

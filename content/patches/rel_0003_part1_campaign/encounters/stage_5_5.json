@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_5_5",
+  "stage_id": "5-5",
+  "title_en": "The Commander Who Remained",
+  "location_id": "bridge_forsaken",
+  "seed": 46132590,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "marek_vane",
+    "nara_vell",
+    "sable_wren",
+    "rikka_ember"
+  ],
+  "enemies": [
+    {
+      "unit_id": "boss_marshal_oren",
+      "level": 15,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "corrupted_crown_guard",
+      "level": 15,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "corrupted_crown_guard",
+      "level": 15,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#5-5"
+  }
+}

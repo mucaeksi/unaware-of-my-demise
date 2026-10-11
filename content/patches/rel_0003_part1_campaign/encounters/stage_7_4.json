@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_7_4",
+  "stage_id": "7-4",
+  "title_en": "Before the Last Toll",
+  "location_id": "altar_first_eclipse",
+  "seed": 3133363356,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "sable_wren",
+    "vespera_wisp",
+    "tilda_fen",
+    "iona_mist",
+    "thistle_roe",
+    "hana_birch"
+  ],
+  "enemies": [
+    {
+      "unit_id": "crownless_knight",
+      "level": 19,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "crownless_knight",
+      "level": 19,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "eclipse_sentinel",
+      "level": 19,
+      "slot": 2,
+      "row": "rear"
+    },
+    {
+      "unit_id": "eclipse_sentinel",
+      "level": 19,
+      "slot": 3,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#7-4"
+  }
+}

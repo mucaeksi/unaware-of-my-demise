@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_6_5",
+  "stage_id": "6-5",
+  "title_en": "The Ashen Lord's Wraith",
+  "location_id": "estate_ashen_lord",
+  "seed": 3980674015,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "mirel_quill",
+    "sister_aveline",
+    "vespera_wisp"
+  ],
+  "enemies": [
+    {
+      "unit_id": "boss_ashen_lord_wraith",
+      "level": 18,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "inkbound_dead",
+      "level": 18,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "inkbound_dead",
+      "level": 18,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#6-5"
+  }
+}

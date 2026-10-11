@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_3_3",
+  "stage_id": "3-3",
+  "title_en": "The Well Runs Red",
+  "location_id": "village_oakhaven",
+  "seed": 840731214,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "corrupted_mercenary",
+      "level": 7,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "corrupted_mercenary",
+      "level": 7,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "red_vial_scout",
+      "level": 7,
+      "slot": 2,
+      "row": "rear"
+    },
+    {
+      "unit_id": "red_vial_scout",
+      "level": 7,
+      "slot": 3,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#3-3"
+  }
+}

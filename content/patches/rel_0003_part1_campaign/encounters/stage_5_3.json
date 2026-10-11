@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_5_3",
+  "stage_id": "5-3",
+  "title_en": "A Knife Between Orders",
+  "location_id": "bridge_forsaken",
+  "seed": 3043164423,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "sable_wren",
+    "rikka_ember"
+  ],
+  "enemies": [
+    {
+      "unit_id": "lost_vow_knight",
+      "level": 13,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "lost_vow_knight",
+      "level": 13,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "bridge_revenant",
+      "level": 13,
+      "slot": 2,
+      "row": "rear"
+    },
+    {
+      "unit_id": "bridge_revenant",
+      "level": 13,
+      "slot": 3,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#5-3"
+  }
+}

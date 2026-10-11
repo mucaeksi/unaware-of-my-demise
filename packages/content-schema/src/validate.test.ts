@@ -16,6 +16,11 @@ const overlay = (): Map<string, Uint8Array> => {
   for (const [k, v] of load(join(ROOT, 'patches/rel_0002_road_forgotten'))) m.set(k, v);
   return m;
 };
+const campaign = (): Map<string, Uint8Array> => {
+  const m = load(join(ROOT, 'base'));
+  for (const [k, v] of load(join(ROOT, 'patches/rel_0003_part1_campaign'))) m.set(k, v);
+  return m;
+};
 const enc = new TextEncoder();
 
 describe('validateContentSet', () => {
@@ -24,6 +29,16 @@ describe('validateContentSet', () => {
   });
   it('accepts base + patch rel_0002 as one effective set', () => {
     expect(validateContentSet(overlay())).toMatchObject({ nodes: 2, units: 4, scenes: 4 });
+  });
+  it('accepts base + the Part I campaign (35 stages, the full cast, placeholder art) as one effective set', () => {
+    expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 36, units: 47 });
+  });
+  it('rejects a campaign stage that names a guest the unit pack does not contain', () => {
+    const m = campaign();
+    const bad = JSON.parse(new TextDecoder().decode(m.get('encounters/stage_1_2.json')));
+    bad.guests = ['ghost_hero'];
+    m.set('encounters/stage_1_2.json', enc.encode(JSON.stringify(bad)));
+    expect(() => validateContentSet(m)).toThrow(/unknown guest ghost_hero/);
   });
   it('rejects an encounter whose enemy unit does not exist', () => {
     const m = overlay();

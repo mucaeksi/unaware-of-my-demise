@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_7_3",
+  "stage_id": "7-3",
+  "title_en": "The Names We Kept",
+  "location_id": "altar_first_eclipse",
+  "seed": 2987141459,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "sister_aveline",
+    "mirel_quill",
+    "clem_marr",
+    "pippa_bell",
+    "kera_voss"
+  ],
+  "enemies": [
+    {
+      "unit_id": "royal_hollow",
+      "level": 19,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "royal_hollow",
+      "level": 19,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "eclipse_sentinel",
+      "level": 19,
+      "slot": 2,
+      "row": "rear"
+    },
+    {
+      "unit_id": "eclipse_sentinel",
+      "level": 19,
+      "slot": 3,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#7-3"
+  }
+}

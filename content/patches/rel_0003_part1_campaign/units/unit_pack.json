@@ -1,0 +1,5981 @@
+{
+  "schema_version": 1,
+  "pack_id": "part1_campaign",
+  "units": [
+    {
+      "unit_id": "mahmut",
+      "kind": "character",
+      "name_en": "Mahmut",
+      "element": "Stone",
+      "role": "tank_bruiser",
+      "rarity": 5,
+      "formation_affinity": "front",
+      "base_stats": {
+        "hp": 14,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.7,
+        "atk": 0.12,
+        "def": 0.1,
+        "spd": 0.16
+      },
+      "skills": [
+        {
+          "skill_id": "mahmut_basic_oathless_cut",
+          "name_en": "Oathless Cut",
+          "type": "basic",
+          "element": "Stone",
+          "description_en": "Deals physical damage equal to 100% of ATK to one enemy. If Mahmut is in the Front Row, he gains Stoneguard, reducing damage taken by 8% for 1 turn.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "self",
+              "when": {
+                "predicate": "owner_in_row",
+                "value": "front"
+              },
+              "status_id": "stoneguard",
+              "duration_turns": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "mahmut_active_broken_crest_guard",
+          "name_en": "Broken Crest Guard",
+          "type": "active",
+          "element": "Stone",
+          "description_en": "Grants Mahmut and the ally with the lowest HP a shield equal to 180% of Mahmut's ATK. For 2 turns, Mahmut redirects 50% of single-target attacks aimed at that ally to himself.",
+          "player_target": "none",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "self_and_lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 1.8,
+              "duration_turns": 2
+            },
+            {
+              "op": "grant_redirect",
+              "target_selector_id": "self",
+              "protected_ally_selector_id": "lowest_hp_ally",
+              "redirected_fraction": 0.5,
+              "duration_turns": 2,
+              "eligible_action_types": [
+                "basic",
+                "active",
+                "ultimate"
+              ]
+            }
+          ]
+        },
+        {
+          "skill_id": "mahmut_passive_a_knight_s_debt",
+          "name_en": "A Knight's Debt",
+          "type": "passive",
+          "element": "Stone",
+          "description_en": "While shielded, Mahmut counters an enemy Basic Attack for 60% of his ATK and gains 5 Focus. Triggers once per turn.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "before_damage_received",
+              "effect_ops": [
+                {
+                  "op": "damage",
+                  "target_selector_id": "event_source",
+                  "damage_type": "physical",
+                  "scale_stat": "atk",
+                  "multiplier": 0.6,
+                  "no_focus_gain": true
+                },
+                {
+                  "op": "gain_focus",
+                  "target_selector_id": "self",
+                  "amount": 5
+                }
+              ],
+              "condition": {
+                "predicate": "owner_has_shield"
+              },
+              "limit": {
+                "per_owner_turn": 1
+              },
+              "event_filter": {
+                "incoming_action_type": "basic"
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "mahmut_ultimate_last_wall_at_dusk",
+          "name_en": "Last Wall at Dusk",
+          "type": "ultimate",
+          "element": "Stone",
+          "description_en": "Deals physical damage equal to 220% of ATK to all Front Row enemies, Taunts them for 2 turns, and grants all allies a shield equal to 120% of Mahmut's DEF. The shield still applies if a boss resists Taunt.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "front_row_enemies",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 2.2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "taunt",
+              "duration_turns": 2
+            },
+            {
+              "op": "grant_shield",
+              "target_selector_id": "all_allies",
+              "scale_stat": "def",
+              "multiplier": 1.2,
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "art_key": "mahmut",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#mahmut",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "fadyme",
+      "kind": "character",
+      "name_en": "Fadyme",
+      "element": "Veil",
+      "role": "support_dps",
+      "rarity": 5,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 11,
+        "atk": 3,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.55,
+        "atk": 0.18,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "fadyme_basic_veilglass_thorn",
+          "name_en": "Veilglass Thorn",
+          "type": "basic",
+          "element": "Veil",
+          "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1
+            },
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "when": {
+                "predicate": "last_target_has_status",
+                "value": "dread"
+              },
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "skill_id": "fadyme_active_borrowed_hour",
+          "name_en": "Borrowed Hour",
+          "type": "active",
+          "element": "Veil",
+          "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.6
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "dread",
+              "duration_turns": 2
+            },
+            {
+              "op": "heal",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "fadyme_passive_a_smile_kept",
+          "name_en": "A Smile Kept",
+          "type": "passive",
+          "element": "Veil",
+          "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "owner_turn_start",
+              "effect_ops": [
+                {
+                  "op": "modify_stat",
+                  "target_selector_id": "all_allies",
+                  "stat_id": "veil_res",
+                  "mode": "add_pct",
+                  "amount": 0.08,
+                  "duration_turns": 1
+                }
+              ],
+              "condition": {
+                "predicate": "owner_hp_below_pct",
+                "value": 50
+              },
+              "limit": {
+                "per_battle": 2
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "fadyme_ultimate_the_bell_that_forgets",
+          "name_en": "The Bell That Forgets",
+          "type": "ultimate",
+          "element": "Veil",
+          "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.8
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "dread",
+              "duration_turns": 2
+            },
+            {
+              "op": "remove_status",
+              "target_selector_id": "all_allies",
+              "category": "debuff",
+              "count": 1,
+              "selection": "oldest_applied"
+            },
+            {
+              "op": "heal_per_removed_status",
+              "target_selector_id": "lowest_hp_allies",
+              "scale_stat": "atk",
+              "multiplier": 0.4,
+              "maximum_targets": 3,
+              "maximum_total_stacks": 3,
+              "requires_successful_cleanse": true
+            }
+          ]
+        }
+      ],
+      "art_key": "fadyme",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#fadyme",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "kera_voss",
+      "kind": "character",
+      "name_en": "Kera Voss",
+      "element": "Ember",
+      "role": "alchemist_dps",
+      "rarity": 4,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 10,
+        "atk": 3,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.5,
+        "atk": 0.18,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "kera_voss_basic_flask_flick",
+          "name_en": "Flask Flick",
+          "type": "basic",
+          "element": "Ember",
+          "description_en": "Deals Ember damage equal to 100% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "kera_voss_active_cinder_tonic",
+          "name_en": "Cinder Tonic",
+          "type": "active",
+          "element": "Ember",
+          "description_en": "Deals Ember damage equal to 150% of ATK to one enemy and inflicts Burn for 2 turns.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.5
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "single_enemy",
+              "status_id": "burn",
+              "duration_turns": 2
+            }
+          ]
+        },
+        {
+          "skill_id": "kera_voss_passive_measure_twice",
+          "name_en": "Measure Twice",
+          "type": "passive",
+          "element": "Ember",
+          "description_en": "When Kera hits a Burned target, she has a 10% chance to deal 40% ATK splash damage to one random other enemy. This splash cannot retrigger Measure Twice.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "after_damage_dealt",
+              "effect_ops": [
+                {
+                  "op": "damage",
+                  "target_selector_id": "random_other_enemy",
+                  "damage_type": "elemental",
+                  "scale_stat": "atk",
+                  "multiplier": 0.4,
+                  "hit_count": 1,
+                  "can_trigger_passives": false
+                }
+              ],
+              "condition": {
+                "predicate": "last_target_has_status",
+                "value": "burn"
+              },
+              "limit": {
+                "per_damage_action": 1,
+                "chance": 0.1
+              },
+              "event_filter": {
+                "damage_action_type": "basic_or_skill"
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "kera_voss_ultimate_redoubt_reaction",
+          "name_en": "Redoubt Reaction",
+          "type": "ultimate",
+          "element": "Ember",
+          "description_en": "Deals Ember damage equal to 190% of ATK to all enemies. Damage increases by 10% for each Burned enemy, up to 30%.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.9,
+              "modifiers": [
+                {
+                  "condition": {
+                    "predicate": "count_enemies_with_status",
+                    "value": "burn"
+                  },
+                  "add_multiplier_per_count": 0.1,
+                  "maximum_count": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "art_key": "kera_voss",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#kera_voss",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "brin_alder",
+      "kind": "character",
+      "name_en": "Brin Alder",
+      "element": "Stone",
+      "role": "tank",
+      "rarity": 4,
+      "formation_affinity": "front",
+      "base_stats": {
+        "hp": 15,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.75,
+        "atk": 0.12,
+        "def": 0.1,
+        "spd": 0.16
+      },
+      "skills": [
+        {
+          "skill_id": "brin_alder_basic_rootsplitter",
+          "name_en": "Rootsplitter",
+          "type": "basic",
+          "element": "Stone",
+          "description_en": "Deals Stone damage equal to 100% of ATK to one enemy. Brin gains a barrier equal to 5% of her DEF for 1 turn.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            },
+            {
+              "op": "grant_shield",
+              "target_selector_id": "self",
+              "scale_stat": "def",
+              "multiplier": 0.05,
+              "duration_turns": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "brin_alder_active_oakbrace",
+          "name_en": "Oakbrace",
+          "type": "active",
+          "element": "Stone",
+          "description_en": "Taunts enemies and increases Brin's DEF by 15% for 2 turns.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "taunt",
+              "duration_turns": 2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "self",
+              "stat_id": "def",
+              "mode": "add_pct",
+              "amount": 0.15,
+              "duration_turns": 2
+            }
+          ]
+        },
+        {
+          "skill_id": "brin_alder_passive_hold_the_gate",
+          "name_en": "Hold the Gate",
+          "type": "passive",
+          "element": "Stone",
+          "description_en": "While Taunting, Brin takes 10% less damage.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "continuous_modifiers": [
+            {
+              "event": "before_damage_received",
+              "condition": {
+                "predicate": "owner_has_status",
+                "value": "taunt"
+              },
+              "target": "self",
+              "damage_multiplier": 0.9
+            }
+          ]
+        },
+        {
+          "skill_id": "brin_alder_ultimate_alderwall",
+          "name_en": "Alderwall",
+          "type": "ultimate",
+          "element": "Stone",
+          "description_en": "Deals Stone damage equal to 170% of ATK to Front Row enemies and grants all allies a shield equal to 100% of Brin's DEF.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "front_row_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.7
+            },
+            {
+              "op": "grant_shield",
+              "target_selector_id": "all_allies",
+              "scale_stat": "def",
+              "multiplier": 1,
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "art_key": "brin_alder",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#brin_alder",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "nixie_vale",
+      "kind": "character",
+      "name_en": "Nixie Vale",
+      "element": "Gale",
+      "role": "ranged_dps",
+      "rarity": 4,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 10,
+        "atk": 3,
+        "def": 1,
+        "spd": 6
+      },
+      "growth_per_level": {
+        "hp": 0.5,
+        "atk": 0.18,
+        "def": 0.05,
+        "spd": 0.24
+      },
+      "skills": [
+        {
+          "skill_id": "nixie_vale_basic_windneedle",
+          "name_en": "Windneedle",
+          "type": "basic",
+          "element": "Gale",
+          "description_en": "Deals Gale damage equal to 100% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "nixie_vale_active_crossdraft_shot",
+          "name_en": "Crossdraft Shot",
+          "type": "active",
+          "element": "Gale",
+          "description_en": "Deals Gale damage equal to 170% of ATK to one enemy and reduces its Speed by 15% for 1 turn.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.7
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "previous_op_targets",
+              "stat_id": "spd",
+              "mode": "add_pct",
+              "amount": -0.15,
+              "duration_turns": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "nixie_vale_passive_trail_mark",
+          "name_en": "Trail Mark",
+          "type": "passive",
+          "element": "Gale",
+          "description_en": "Nixie's first attack marks the enemy with the lowest DEF for 2 turns. All allies deal 5% more damage to the marked target.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "after_damage_dealt",
+              "effect_ops": [
+                {
+                  "op": "apply_status",
+                  "target_selector_id": "enemy_with_lowest_def",
+                  "status_id": "trail_mark",
+                  "duration_turns": 2
+                }
+              ],
+              "limit": {
+                "per_battle": 1
+              },
+              "event_filter": {
+                "owner_action_type": "any_attack"
+              }
+            }
+          ],
+          "continuous_modifiers": [
+            {
+              "event": "before_damage_dealt",
+              "condition": {
+                "predicate": "target_has_status_tag",
+                "value": "mark"
+              },
+              "target": "previous_op_targets",
+              "damage_multiplier": 1.05,
+              "applies_to": "all_allies_while_owner_alive"
+            }
+          ]
+        },
+        {
+          "skill_id": "nixie_vale_ultimate_hawk_over_the_pass",
+          "name_en": "Hawk Over the Pass",
+          "type": "ultimate",
+          "element": "Gale",
+          "description_en": "Deals Gale damage equal to 300% of ATK to the enemy with the highest ATK. Nixie gains 20 Focus if the target is defeated.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "enemy_with_highest_atk",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 3
+            },
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "when": {
+                "predicate": "last_target_defeated"
+              },
+              "amount": 20
+            }
+          ]
+        }
+      ],
+      "art_key": "nixie_vale",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#nixie_vale",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "sister_aveline",
+      "kind": "character",
+      "name_en": "Sister Aveline",
+      "element": "Dawn",
+      "role": "healer",
+      "rarity": 5,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 12,
+        "atk": 2,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.6,
+        "atk": 0.12,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "sister_aveline_basic_mercy_staff",
+          "name_en": "Mercy Staff",
+          "type": "basic",
+          "element": "Dawn",
+          "description_en": "Deals Dawn damage equal to 90% of ATK to one enemy and heals the ally with the lowest HP for 20% of Aveline's ATK.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 0.9
+            },
+            {
+              "op": "heal",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 0.2
+            }
+          ]
+        },
+        {
+          "skill_id": "sister_aveline_active_quiet_benediction",
+          "name_en": "Quiet Benediction",
+          "type": "active",
+          "element": "Dawn",
+          "description_en": "Heals all allies for 110% of Aveline's ATK and removes 1 debuff from each.",
+          "player_target": "none",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "all_allies",
+              "scale_stat": "atk",
+              "multiplier": 1.1
+            },
+            {
+              "op": "remove_status",
+              "target_selector_id": "all_allies",
+              "category": "debuff",
+              "count": 1,
+              "selection": "oldest_applied"
+            }
+          ]
+        },
+        {
+          "skill_id": "sister_aveline_passive_candle_remains",
+          "name_en": "Candle Remains",
+          "type": "passive",
+          "element": "Dawn",
+          "description_en": "The first time an ally falls below 25% HP, grants them a shield equal to 80% of Aveline's ATK. Triggers once per battle.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "ally_hp_threshold_crossed",
+              "effect_ops": [
+                {
+                  "op": "grant_shield",
+                  "target_selector_id": "event_target",
+                  "scale_stat": "atk",
+                  "multiplier": 0.8,
+                  "duration_turns": 2
+                }
+              ],
+              "condition": {
+                "predicate": "event_target_hp_at_or_below_pct",
+                "value": 25
+              },
+              "limit": {
+                "per_battle": 1
+              },
+              "event_filter": {
+                "team": "player"
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "sister_aveline_ultimate_matins_at_the_last_door",
+          "name_en": "Matins at the Last Door",
+          "type": "ultimate",
+          "element": "Dawn",
+          "description_en": "Heals all allies for 220% of Aveline's ATK and grants Dawnward, increasing all RES by 10% for 2 turns.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "all_allies",
+              "scale_stat": "atk",
+              "multiplier": 2.2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_allies",
+              "status_id": "dawnward",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "art_key": "sister_aveline",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#sister_aveline",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "sable_wren",
+      "kind": "character",
+      "name_en": "Sable Wren",
+      "element": "Veil",
+      "role": "assassin_dps",
+      "rarity": 5,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 10,
+        "atk": 3,
+        "def": 1,
+        "spd": 6
+      },
+      "growth_per_level": {
+        "hp": 0.5,
+        "atk": 0.18,
+        "def": 0.05,
+        "spd": 0.24
+      },
+      "skills": [
+        {
+          "skill_id": "sable_wren_basic_wren_s_point",
+          "name_en": "Wren's Point",
+          "type": "basic",
+          "element": "Veil",
+          "description_en": "Deals Veil damage equal to 110% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.1
+            }
+          ]
+        },
+        {
+          "skill_id": "sable_wren_active_cut_the_thread",
+          "name_en": "Cut the Thread",
+          "type": "active",
+          "element": "Veil",
+          "description_en": "Deals Veil damage equal to 180% of ATK to one enemy. Deals 30% more damage if the target is marked or Dreaded.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.8,
+              "modifiers": [
+                {
+                  "condition": {
+                    "predicate": "target_has_any_status_tag",
+                    "value": "mark_or_dread"
+                  },
+                  "multiplier": 1.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "skill_id": "sable_wren_passive_no_footprint",
+          "name_en": "No Footprint",
+          "type": "passive",
+          "element": "Veil",
+          "description_en": "Sable takes 50% less damage from the first attack that hits her in battle.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "before_damage_received",
+              "effect_ops": [
+                {
+                  "op": "modify_incoming_damage",
+                  "target_selector_id": "self",
+                  "multiplier": 0.5
+                }
+              ],
+              "limit": {
+                "per_battle": 1
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "sable_wren_ultimate_name_taken_in_silence",
+          "name_en": "Name Taken in Silence",
+          "type": "ultimate",
+          "element": "Veil",
+          "description_en": "Deals Veil damage equal to 330% of ATK to the enemy with the lowest HP. If the target is defeated, deals 100% of ATK as splash damage to a random enemy.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 3.3
+            },
+            {
+              "op": "damage",
+              "target_selector_id": "random_other_enemy",
+              "when": {
+                "predicate": "last_primary_target_defeated"
+              },
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1,
+              "hit_count": 1,
+              "can_trigger_passives": false
+            }
+          ]
+        }
+      ],
+      "art_key": "sable_wren",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#sable_wren",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "tilda_fen",
+      "kind": "character",
+      "name_en": "Tilda Fen",
+      "element": "Tide",
+      "role": "healer",
+      "rarity": 4,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 12,
+        "atk": 2,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.6,
+        "atk": 0.12,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "tilda_fen_basic_reedstaff_tap",
+          "name_en": "Reedstaff Tap",
+          "type": "basic",
+          "element": "Tide",
+          "description_en": "Deals Tide damage equal to 90% of ATK to one enemy and heals the ally with the lowest HP for 15% of Tilda's ATK.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 0.9
+            },
+            {
+              "op": "heal",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 0.15
+            }
+          ]
+        },
+        {
+          "skill_id": "tilda_fen_active_marsh_poultice",
+          "name_en": "Marsh Poultice",
+          "type": "active",
+          "element": "Tide",
+          "description_en": "Heals the ally with the lowest HP for 170% of Tilda's ATK and increases their DEF by 10% for 2 turns.",
+          "player_target": "none",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 1.7
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "last_heal_target",
+              "stat_id": "def",
+              "mode": "add_pct",
+              "amount": 0.1,
+              "duration_turns": 2
+            }
+          ]
+        },
+        {
+          "skill_id": "tilda_fen_passive_patient_hands",
+          "name_en": "Patient Hands",
+          "type": "passive",
+          "element": "Tide",
+          "description_en": "When Tilda heals an ally, that ally becomes immune to Soaked for 1 turn.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "after_ally_healed",
+              "effect_ops": [
+                {
+                  "op": "apply_status",
+                  "target_selector_id": "event_target",
+                  "status_id": "soaked_immunity",
+                  "duration_turns": 1
+                }
+              ],
+              "limit": {
+                "per_event": 1
+              },
+              "event_filter": {
+                "source_is_owner": true
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "tilda_fen_ultimate_rain_on_the_salt_road",
+          "name_en": "Rain on the Salt Road",
+          "type": "ultimate",
+          "element": "Tide",
+          "description_en": "Heals all allies for 180% of Tilda's ATK, then heals them for 35% of her ATK at the start of their turn for 2 turns.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "all_allies",
+              "scale_stat": "atk",
+              "multiplier": 1.8
+            },
+            {
+              "op": "apply_regeneration",
+              "target_selector_id": "all_allies",
+              "scale_stat": "atk",
+              "multiplier": 0.35,
+              "ticks": 2,
+              "tick_event": "owner_turn_start",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "art_key": "tilda_fen",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#tilda_fen",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "rikka_ember",
+      "kind": "character",
+      "name_en": "Rikka Ember",
+      "element": "Ember",
+      "role": "bruiser_dps",
+      "rarity": 4,
+      "formation_affinity": "front",
+      "base_stats": {
+        "hp": 12,
+        "atk": 3,
+        "def": 2,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.6,
+        "atk": 0.18,
+        "def": 0.1,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "rikka_ember_basic_bellpoint_thrust",
+          "name_en": "Bellpoint Thrust",
+          "type": "basic",
+          "element": "Ember",
+          "description_en": "Deals Ember damage equal to 105% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.05
+            }
+          ]
+        },
+        {
+          "skill_id": "rikka_ember_active_furnace_lunge",
+          "name_en": "Furnace Lunge",
+          "type": "active",
+          "element": "Ember",
+          "description_en": "Deals Ember damage equal to 180% of ATK to one enemy. Deals 25% more damage if the target is Burned.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.8,
+              "modifiers": [
+                {
+                  "condition": {
+                    "predicate": "target_has_status",
+                    "value": "burn"
+                  },
+                  "multiplier": 1.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "skill_id": "rikka_ember_passive_marching_heat",
+          "name_en": "Marching Heat",
+          "type": "passive",
+          "element": "Ember",
+          "description_en": "Rikka gains 5 Focus when hit, once per turn.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "after_damage_received",
+              "effect_ops": [
+                {
+                  "op": "gain_focus",
+                  "target_selector_id": "self",
+                  "amount": 5
+                }
+              ],
+              "limit": {
+                "per_owner_turn": 1
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "rikka_ember_ultimate_procession_of_sparks",
+          "name_en": "Procession of Sparks",
+          "type": "ultimate",
+          "element": "Ember",
+          "description_en": "Deals Ember damage equal to 210% of ATK to all enemies and inflicts Burn for 2 turns.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 2.1
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "burn",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "art_key": "rikka_ember",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#rikka_ember",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "mirel_quill",
+      "kind": "character",
+      "name_en": "Mirel Quill",
+      "element": "Dawn",
+      "role": "buffer",
+      "rarity": 5,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 11,
+        "atk": 2,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.55,
+        "atk": 0.12,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "mirel_quill_basic_inkline",
+          "name_en": "Inkline",
+          "type": "basic",
+          "element": "Dawn",
+          "description_en": "Deals Dawn damage equal to 100% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "mirel_quill_active_margin_note",
+          "name_en": "Margin Note",
+          "type": "active",
+          "element": "Dawn",
+          "description_en": "Increases one ally's ATK by 18% and Speed by 10% for 2 turns.",
+          "player_target": "ally",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "modify_stat",
+              "target_selector_id": "selected_ally",
+              "stat_id": "atk",
+              "mode": "add_pct",
+              "amount": 0.18,
+              "duration_turns": 2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "selected_ally",
+              "stat_id": "spd",
+              "mode": "add_pct",
+              "amount": 0.1,
+              "duration_turns": 2
+            }
+          ]
+        },
+        {
+          "skill_id": "mirel_quill_passive_corrected_record",
+          "name_en": "Corrected Record",
+          "type": "passive",
+          "element": "Dawn",
+          "description_en": "Mirel gains 5 Focus when a buffed ally uses a Basic Attack.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "after_ally_action",
+              "effect_ops": [
+                {
+                  "op": "gain_focus",
+                  "target_selector_id": "self",
+                  "amount": 5
+                }
+              ],
+              "condition": {
+                "predicate": "event_actor_has_any_buff"
+              },
+              "limit": {
+                "per_event": 1
+              },
+              "event_filter": {
+                "ally_action_type": "basic"
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "mirel_quill_ultimate_decree_of_the_unfallen",
+          "name_en": "Decree of the Unfallen",
+          "type": "ultimate",
+          "element": "Dawn",
+          "description_en": "Increases all allies' ATK by 20% and DEF by 15% for 2 turns. Reduces their debuff durations by 1 turn.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "atk",
+              "mode": "add_pct",
+              "amount": 0.2,
+              "duration_turns": 2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "def",
+              "mode": "add_pct",
+              "amount": 0.15,
+              "duration_turns": 2
+            },
+            {
+              "op": "reduce_status_durations",
+              "target_selector_id": "all_allies",
+              "category": "debuff",
+              "amount_turns": 1,
+              "minimum_remaining_turns": 0
+            }
+          ]
+        }
+      ],
+      "art_key": "mirel_quill",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#mirel_quill",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "odelia_pike",
+      "kind": "character",
+      "name_en": "Odelia Pike",
+      "element": "Tide",
+      "role": "debuff_archer",
+      "rarity": 4,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 11,
+        "atk": 2,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.55,
+        "atk": 0.12,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "odelia_pike_basic_saltmark_arrow",
+          "name_en": "Saltmark Arrow",
+          "type": "basic",
+          "element": "Tide",
+          "description_en": "Deals Tide damage equal to 100% of ATK to one enemy. Has a 20% chance to inflict Soaked.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "soaked",
+              "duration_turns": 2,
+              "chance": 0.2
+            }
+          ]
+        },
+        {
+          "skill_id": "odelia_pike_active_undertow_pin",
+          "name_en": "Undertow Pin",
+          "type": "active",
+          "element": "Tide",
+          "description_en": "Deals Tide damage equal to 160% of ATK to one enemy and reduces its DEF by 15% for 2 turns.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.6
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "fracture",
+              "duration_turns": 2
+            }
+          ]
+        },
+        {
+          "skill_id": "odelia_pike_passive_read_the_current",
+          "name_en": "Read the Current",
+          "type": "passive",
+          "element": "Tide",
+          "description_en": "Odelia deals 10% more damage to Soaked enemies.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "continuous_modifiers": [
+            {
+              "event": "before_damage_dealt",
+              "condition": {
+                "predicate": "target_has_status",
+                "value": "soaked"
+              },
+              "target": "previous_op_targets",
+              "damage_multiplier": 1.1,
+              "applies_to": "self"
+            }
+          ]
+        },
+        {
+          "skill_id": "odelia_pike_ultimate_breakwater_volley",
+          "name_en": "Breakwater Volley",
+          "type": "ultimate",
+          "element": "Tide",
+          "description_en": "Deals Tide damage equal to 175% of ATK to all enemies, inflicts Soaked, and reduces their Speed by 10% for 1 turn.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.75
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "soaked",
+              "duration_turns": 2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "previous_op_targets",
+              "stat_id": "spd",
+              "mode": "add_pct",
+              "amount": -0.1,
+              "duration_turns": 1
+            }
+          ]
+        }
+      ],
+      "art_key": "odelia_pike",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#odelia_pike",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "pippa_bell",
+      "kind": "character",
+      "name_en": "Pippa Bell",
+      "element": "Gale",
+      "role": "buffer_bard",
+      "rarity": 4,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 11,
+        "atk": 2,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.55,
+        "atk": 0.12,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "pippa_bell_basic_plucked_note",
+          "name_en": "Plucked Note",
+          "type": "basic",
+          "element": "Gale",
+          "description_en": "Deals Gale damage equal to 90% of ATK to one enemy. Grants 5 Focus to the ally with the lowest Focus.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 0.9
+            },
+            {
+              "op": "gain_focus",
+              "target_selector_id": "ally_with_lowest_focus",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "skill_id": "pippa_bell_active_rally_refrain",
+          "name_en": "Rally Refrain",
+          "type": "active",
+          "element": "Gale",
+          "description_en": "Increases all allies' Speed by 12% and ATK by 10% for 2 turns.",
+          "player_target": "none",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "spd",
+              "mode": "add_pct",
+              "amount": 0.12,
+              "duration_turns": 2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "atk",
+              "mode": "add_pct",
+              "amount": 0.1,
+              "duration_turns": 2
+            }
+          ]
+        },
+        {
+          "skill_id": "pippa_bell_passive_encore",
+          "name_en": "Encore!",
+          "type": "passive",
+          "element": "Gale",
+          "description_en": "Pippa gains 10 Focus when an ally uses an Ultimate. Triggers once per round.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "after_ally_ultimate",
+              "effect_ops": [
+                {
+                  "op": "gain_focus",
+                  "target_selector_id": "self",
+                  "amount": 10
+                }
+              ],
+              "limit": {
+                "per_round": 1
+              },
+              "event_filter": {
+                "exclude_owner": true
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "pippa_bell_ultimate_a_song_for_the_long_road",
+          "name_en": "A Song for the Long Road",
+          "type": "ultimate",
+          "element": "Gale",
+          "description_en": "Reduces all allies' current cooldowns by 1, to a minimum of 1, and grants all allies 20 Focus.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "reduce_cooldowns",
+              "target_selector_id": "all_allies",
+              "amount_turns": 1,
+              "minimum_remaining_turns": 1
+            },
+            {
+              "op": "gain_focus",
+              "target_selector_id": "all_allies",
+              "amount": 20
+            }
+          ]
+        }
+      ],
+      "art_key": "pippa_bell",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#pippa_bell",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "nara_vell",
+      "kind": "character",
+      "name_en": "Nara Vell",
+      "element": "Stone",
+      "role": "tank_support",
+      "rarity": 5,
+      "formation_affinity": "front",
+      "base_stats": {
+        "hp": 15,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.75,
+        "atk": 0.12,
+        "def": 0.1,
+        "spd": 0.16
+      },
+      "skills": [
+        {
+          "skill_id": "nara_vell_basic_vellian_bash",
+          "name_en": "Vellian Bash",
+          "type": "basic",
+          "element": "Stone",
+          "description_en": "Deals Stone damage equal to 100% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "nara_vell_active_shelter_angle",
+          "name_en": "Shelter Angle",
+          "type": "active",
+          "element": "Stone",
+          "description_en": "Reduces damage taken by one ally by 25% for 2 turns. Nara Taunts enemies for 1 turn.",
+          "player_target": "ally",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "grant_damage_reduction",
+              "target_selector_id": "selected_ally",
+              "damage_taken_multiplier": 0.75,
+              "duration_turns": 2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "self",
+              "status_id": "taunt",
+              "duration_turns": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "nara_vell_passive_familiar_footsteps",
+          "name_en": "Familiar Footsteps",
+          "type": "passive",
+          "element": "Stone",
+          "description_en": "While Nara is in the Front Row, all Rear Row allies take 10% less damage during the first turn.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "before_damage_received",
+              "effect_ops": [
+                {
+                  "op": "modify_incoming_damage",
+                  "target_selector_id": "event_target",
+                  "multiplier": 0.9
+                }
+              ],
+              "condition": {
+                "all": [
+                  {
+                    "predicate": "owner_in_row",
+                    "value": "front"
+                  },
+                  {
+                    "predicate": "target_in_row",
+                    "value": "rear"
+                  },
+                  {
+                    "predicate": "round_number_at_most",
+                    "value": 1
+                  }
+                ]
+              },
+              "limit": {
+                "per_event": 1
+              },
+              "event_filter": {
+                "team": "player"
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "nara_vell_ultimate_the_narrow_gate",
+          "name_en": "The Narrow Gate",
+          "type": "ultimate",
+          "element": "Stone",
+          "description_en": "Increases all allies' DEF by 20% for 2 turns. For 2 turns, each enemy's first single-target attack is redirected to Nara and deals 30% less damage.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "def",
+              "mode": "add_pct",
+              "amount": 0.2,
+              "duration_turns": 2
+            },
+            {
+              "op": "grant_opening_guard",
+              "target_selector_id": "self",
+              "duration_rounds": 2,
+              "target_override": "first_single_target_attack_per_enemy",
+              "damage_taken_multiplier": 0.7
+            }
+          ]
+        }
+      ],
+      "art_key": "nara_vell",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#nara_vell",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "clem_marr",
+      "kind": "character",
+      "name_en": "Clem Marr",
+      "element": "Veil",
+      "role": "debuffer",
+      "rarity": 3,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 11,
+        "atk": 2,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.55,
+        "atk": 0.12,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "clem_marr_basic_chalk_scratch",
+          "name_en": "Chalk Scratch",
+          "type": "basic",
+          "element": "Veil",
+          "description_en": "Deals Veil damage equal to 95% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 0.95
+            }
+          ]
+        },
+        {
+          "skill_id": "clem_marr_active_grave_index",
+          "name_en": "Grave Index",
+          "type": "active",
+          "element": "Veil",
+          "description_en": "Deals Veil damage equal to 140% of ATK to one enemy and reduces its ATK by 12% for 2 turns.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.4
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "previous_op_targets",
+              "stat_id": "atk",
+              "mode": "add_pct",
+              "amount": -0.12,
+              "duration_turns": 2
+            }
+          ]
+        },
+        {
+          "skill_id": "clem_marr_passive_keep_the_names",
+          "name_en": "Keep the Names",
+          "type": "passive",
+          "element": "Veil",
+          "description_en": "The first allied attack against each Dreaded enemy deals 8% more damage.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "before_damage_dealt",
+              "effect_ops": [
+                {
+                  "op": "modify_outgoing_damage",
+                  "target_selector_id": "self",
+                  "multiplier": 1.08
+                }
+              ],
+              "condition": {
+                "predicate": "target_has_status",
+                "value": "dread"
+              },
+              "limit": {
+                "per_target_per_battle": 1
+              },
+              "event_filter": {
+                "owner_action_type": "any_attack",
+                "team": "player"
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "clem_marr_ultimate_epitaph_in_reverse",
+          "name_en": "Epitaph in Reverse",
+          "type": "ultimate",
+          "element": "Veil",
+          "description_en": "Deals Veil damage equal to 145% of ATK to all enemies and removes 1 random buff from each target.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.45
+            },
+            {
+              "op": "remove_status",
+              "target_selector_id": "previous_op_targets",
+              "category": "buff",
+              "count": 1,
+              "selection": "random_applied_buff"
+            }
+          ]
+        }
+      ],
+      "art_key": "clem_marr",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#clem_marr",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "vespera_wisp",
+      "kind": "character",
+      "name_en": "Vespera Wisp",
+      "element": "Veil",
+      "role": "mage_dps",
+      "rarity": 5,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 10,
+        "atk": 3,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.5,
+        "atk": 0.18,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "vespera_wisp_basic_wisp_spark",
+          "name_en": "Wisp Spark",
+          "type": "basic",
+          "element": "Veil",
+          "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "vespera_wisp_active_pale_orbit",
+          "name_en": "Pale Orbit",
+          "type": "active",
+          "element": "Veil",
+          "description_en": "Deals Veil magic damage equal to 130% of ATK to all enemies and inflicts Dread on one target.",
+          "player_target": "none",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.3
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "lowest_hp_enemy",
+              "status_id": "dread",
+              "duration_turns": 2
+            }
+          ]
+        },
+        {
+          "skill_id": "vespera_wisp_passive_candle_eater",
+          "name_en": "Candle-Eater",
+          "type": "passive",
+          "element": "Veil",
+          "description_en": "Vespera gains 10 Focus when a Dreaded enemy is defeated.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "after_enemy_defeated",
+              "effect_ops": [
+                {
+                  "op": "gain_focus",
+                  "target_selector_id": "self",
+                  "amount": 10
+                }
+              ],
+              "condition": {
+                "predicate": "event_target_had_status",
+                "value": "dread"
+              },
+              "limit": {
+                "per_event": 1
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "vespera_wisp_ultimate_procession_of_pale_lights",
+          "name_en": "Procession of Pale Lights",
+          "type": "ultimate",
+          "element": "Veil",
+          "description_en": "Deals Veil magic damage equal to 220% of ATK to all enemies. Deals 20% more damage to Dreaded targets.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 2.2,
+              "modifiers": [
+                {
+                  "condition": {
+                    "predicate": "target_has_status",
+                    "value": "dread"
+                  },
+                  "multiplier": 1.2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "art_key": "vespera_wisp",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#vespera_wisp",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "hana_birch",
+      "kind": "character",
+      "name_en": "Hana Birch",
+      "element": "Stone",
+      "role": "counter_dps",
+      "rarity": 3,
+      "formation_affinity": "front",
+      "base_stats": {
+        "hp": 12,
+        "atk": 3,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.6,
+        "atk": 0.18,
+        "def": 0.1,
+        "spd": 0.16
+      },
+      "skills": [
+        {
+          "skill_id": "hana_birch_basic_short_hatchet",
+          "name_en": "Short Hatchet",
+          "type": "basic",
+          "element": "Stone",
+          "description_en": "Deals Stone damage equal to 100% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "hana_birch_active_set_the_snare",
+          "name_en": "Set the Snare",
+          "type": "active",
+          "element": "Stone",
+          "description_en": "Deals Stone damage equal to 120% of ATK to one enemy. If it attacks before Hana's next turn, it takes counter damage equal to 80% of Hana's ATK.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            },
+            {
+              "op": "arm_counter",
+              "target_selector_id": "previous_op_targets",
+              "event": "target_action_before_owner_next_turn",
+              "scale_stat": "atk",
+              "multiplier": 0.8,
+              "damage_type": "physical",
+              "consume_on_trigger": true
+            }
+          ]
+        },
+        {
+          "skill_id": "hana_birch_passive_still_as_bark",
+          "name_en": "Still as Bark",
+          "type": "passive",
+          "element": "Stone",
+          "description_en": "If Hana takes no damage during a turn, her next attack deals 20% more damage.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "after_round_end",
+              "effect_ops": [
+                {
+                  "op": "arm_next_attack_bonus",
+                  "target_selector_id": "self",
+                  "damage_multiplier": 1.2,
+                  "consume_on_attack": true
+                }
+              ],
+              "condition": {
+                "predicate": "owner_took_no_damage_this_round"
+              },
+              "limit": {
+                "one_pending_bonus": true
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "hana_birch_ultimate_birchline_ambush",
+          "name_en": "Birchline Ambush",
+          "type": "ultimate",
+          "element": "Stone",
+          "description_en": "Deals Stone damage equal to 250% of ATK to one enemy and inflicts Fracture for 2 turns. Deals 40% more damage if the target has already attacked.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 2.5,
+              "modifiers": [
+                {
+                  "condition": {
+                    "predicate": "target_has_acted_this_battle"
+                  },
+                  "multiplier": 1.4
+                }
+              ]
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "fracture",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "art_key": "hana_birch",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#hana_birch",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "thistle_roe",
+      "kind": "character",
+      "name_en": "Thistle Roe",
+      "element": "Gale",
+      "role": "healer_support",
+      "rarity": 4,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 12,
+        "atk": 2,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.6,
+        "atk": 0.12,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "thistle_roe_basic_seedshot",
+          "name_en": "Seedshot",
+          "type": "basic",
+          "element": "Gale",
+          "description_en": "Deals Gale damage equal to 90% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 0.9
+            }
+          ]
+        },
+        {
+          "skill_id": "thistle_roe_active_windgrown_herb",
+          "name_en": "Windgrown Herb",
+          "type": "active",
+          "element": "Gale",
+          "description_en": "Heals the ally with the lowest HP for 150% of Thistle's ATK and removes 1 debuff.",
+          "player_target": "none",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 1.5
+            },
+            {
+              "op": "remove_status",
+              "target_selector_id": "last_heal_target",
+              "category": "debuff",
+              "count": 1,
+              "selection": "oldest_applied"
+            }
+          ]
+        },
+        {
+          "skill_id": "thistle_roe_passive_shelter_leaves",
+          "name_en": "Shelter Leaves",
+          "type": "passive",
+          "element": "Gale",
+          "description_en": "At the start of her turn, if Thistle is above 80% HP, grants the ally with the lowest HP a shield equal to 5% of her ATK for 1 turn.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "owner_turn_start",
+              "effect_ops": [
+                {
+                  "op": "grant_shield",
+                  "target_selector_id": "lowest_hp_ally",
+                  "scale_stat": "atk",
+                  "multiplier": 0.05,
+                  "duration_turns": 1
+                }
+              ],
+              "condition": {
+                "predicate": "owner_hp_above_pct",
+                "value": 80
+              },
+              "limit": {
+                "per_event": 1
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "thistle_roe_ultimate_garden_before_winter",
+          "name_en": "Garden Before Winter",
+          "type": "ultimate",
+          "element": "Gale",
+          "description_en": "Heals all allies for 140% of Thistle's ATK and increases their Speed by 8% for 2 turns.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "all_allies",
+              "scale_stat": "atk",
+              "multiplier": 1.4
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "spd",
+              "mode": "add_pct",
+              "amount": 0.08,
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "art_key": "thistle_roe",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#thistle_roe",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "iona_mist",
+      "kind": "character",
+      "name_en": "Iona Mist",
+      "element": "Tide",
+      "role": "healer",
+      "rarity": 4,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 12,
+        "atk": 2,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.6,
+        "atk": 0.12,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "iona_mist_basic_mistlit_touch",
+          "name_en": "Mistlit Touch",
+          "type": "basic",
+          "element": "Tide",
+          "description_en": "Deals Tide damage equal to 90% of ATK to one enemy and heals the ally with the lowest HP for 15% of Iona's ATK.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 0.9
+            },
+            {
+              "op": "heal",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 0.15
+            }
+          ]
+        },
+        {
+          "skill_id": "iona_mist_active_fogbound_remedy",
+          "name_en": "Fogbound Remedy",
+          "type": "active",
+          "element": "Tide",
+          "description_en": "Heals one ally for 180% of Iona's ATK and removes 1 debuff.",
+          "player_target": "ally",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "selected_ally",
+              "scale_stat": "atk",
+              "multiplier": 1.8
+            },
+            {
+              "op": "remove_status",
+              "target_selector_id": "last_heal_target",
+              "category": "debuff",
+              "count": 1,
+              "selection": "oldest_applied"
+            }
+          ]
+        },
+        {
+          "skill_id": "iona_mist_passive_lantern_watch",
+          "name_en": "Lantern Watch",
+          "type": "passive",
+          "element": "Tide",
+          "description_en": "When an ally falls below 30% HP, Iona heals them for 50% of her ATK. Triggers once per battle.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "event_hooks": [
+            {
+              "event": "ally_hp_threshold_crossed",
+              "effect_ops": [
+                {
+                  "op": "heal",
+                  "target_selector_id": "event_target",
+                  "scale_stat": "atk",
+                  "multiplier": 0.5
+                }
+              ],
+              "condition": {
+                "predicate": "event_target_hp_at_or_below_pct",
+                "value": 30
+              },
+              "limit": {
+                "per_battle": 1
+              },
+              "event_filter": {
+                "team": "player"
+              }
+            }
+          ]
+        },
+        {
+          "skill_id": "iona_mist_ultimate_safe_harbor_in_fog",
+          "name_en": "Safe Harbor in Fog",
+          "type": "ultimate",
+          "element": "Tide",
+          "description_en": "Heals all allies for 160% of Iona's ATK. For 2 turns, reduces the damage of the first hit each ally takes by 20%.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "all_allies",
+              "scale_stat": "atk",
+              "multiplier": 1.6
+            },
+            {
+              "op": "grant_first_hit_guard",
+              "target_selector_id": "all_allies",
+              "damage_taken_multiplier": 0.8,
+              "duration_turns": 2,
+              "hits_per_target": 1
+            }
+          ]
+        }
+      ],
+      "art_key": "iona_mist",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#iona_mist",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "jori_flint",
+      "kind": "character",
+      "name_en": "Jori Flint",
+      "element": "Ember",
+      "role": "guard",
+      "rarity": 3,
+      "formation_affinity": "front",
+      "base_stats": {
+        "hp": 14,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.7,
+        "atk": 0.12,
+        "def": 0.1,
+        "spd": 0.16
+      },
+      "skills": [
+        {
+          "skill_id": "jori_flint_basic_hammer_tap",
+          "name_en": "Hammer Tap",
+          "type": "basic",
+          "element": "Ember",
+          "description_en": "Deals Ember damage equal to 95% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 0.95
+            }
+          ]
+        },
+        {
+          "skill_id": "jori_flint_active_forgeguard",
+          "name_en": "Forgeguard",
+          "type": "active",
+          "element": "Ember",
+          "description_en": "Grants the ally with the lowest HP a shield equal to 100% of Jori's DEF for 2 turns.",
+          "player_target": "none",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "def",
+              "multiplier": 1,
+              "duration_turns": 2
+            }
+          ]
+        },
+        {
+          "skill_id": "jori_flint_passive_hot_rivet",
+          "name_en": "Hot Rivet",
+          "type": "passive",
+          "element": "Ember",
+          "description_en": "While shielded, Jori's Basic Attacks deal 15% more damage.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "continuous_modifiers": [
+            {
+              "event": "before_damage_dealt",
+              "condition": {
+                "all": [
+                  {
+                    "predicate": "owner_has_shield"
+                  },
+                  {
+                    "predicate": "owner_action_type",
+                    "value": "basic"
+                  }
+                ]
+              },
+              "target": "previous_op_targets",
+              "damage_multiplier": 1.15,
+              "applies_to": "self"
+            }
+          ]
+        },
+        {
+          "skill_id": "jori_flint_ultimate_furnace_door",
+          "name_en": "Furnace Door",
+          "type": "ultimate",
+          "element": "Ember",
+          "description_en": "Deals Ember damage equal to 160% of ATK to Front Row enemies, inflicts Burn for 1 turn, and Taunts enemies for 2 turns.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "front_row_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.6
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "burn",
+              "duration_turns": 1
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "taunt",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "art_key": "jori_flint",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#jori_flint",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "marek_vane",
+      "kind": "character",
+      "name_en": "Marek Vane",
+      "element": "Gale",
+      "role": "control_buffer",
+      "rarity": 4,
+      "formation_affinity": "rear",
+      "base_stats": {
+        "hp": 11,
+        "atk": 2,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.55,
+        "atk": 0.12,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "skills": [
+        {
+          "skill_id": "marek_vane_basic_vane_s_measure",
+          "name_en": "Vane's Measure",
+          "type": "basic",
+          "element": "Gale",
+          "description_en": "Deals Gale damage equal to 100% of ATK to one enemy.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "marek_vane_active_broken_meter",
+          "name_en": "Broken Meter",
+          "type": "active",
+          "element": "Gale",
+          "description_en": "Deals Gale damage equal to 140% of ATK to one enemy and delays its next turn by 15%.",
+          "player_target": "enemy",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.4
+            },
+            {
+              "op": "delay_next_action",
+              "target_selector_id": "previous_op_targets",
+              "gauge_fraction": 0.15
+            }
+          ]
+        },
+        {
+          "skill_id": "marek_vane_passive_watchman_s_rhythm",
+          "name_en": "Watchman's Rhythm",
+          "type": "passive",
+          "element": "Gale",
+          "description_en": "While Marek is in the Rear Row, Front Row allies gain 5% DEF.",
+          "player_target": "enemy",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 0,
+          "effect_ops": [],
+          "continuous_modifiers": [
+            {
+              "event": "stat_snapshot",
+              "condition": {
+                "predicate": "owner_in_row",
+                "value": "rear"
+              },
+              "target": "front_row_allies",
+              "stat_id": "def",
+              "mode": "add_pct",
+              "amount": 0.05
+            }
+          ]
+        },
+        {
+          "skill_id": "marek_vane_ultimate_march_without_a_banner",
+          "name_en": "March Without a Banner",
+          "type": "ultimate",
+          "element": "Gale",
+          "description_en": "Increases all allies' Speed by 15% and RES by 10% for 2 turns, then delays each enemy's next action gauge by 5%.",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "ai_priority": 40,
+          "effect_ops": [
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "spd",
+              "mode": "add_pct",
+              "amount": 0.15,
+              "duration_turns": 2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "res",
+              "mode": "add_pct",
+              "amount": 0.1,
+              "duration_turns": 2
+            },
+            {
+              "op": "delay_next_action",
+              "target_selector_id": "all_enemies",
+              "gauge_fraction": 0.05
+            }
+          ]
+        }
+      ],
+      "art_key": "marek_vane",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#marek_vane",
+        "source_sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+      }
+    },
+    {
+      "unit_id": "ash_wolf",
+      "kind": "enemy",
+      "name_en": "Ash Wolf",
+      "element": "Ember",
+      "role": "flanker",
+      "base_stats": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 6
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Tide",
+        "Dawn"
+      ],
+      "resistances": [
+        "Ember"
+      ],
+      "skills": [
+        {
+          "skill_id": "ash_wolf_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "ash_wolf_pack_lunge",
+          "name_en": "Pack Lunge",
+          "type": "signature",
+          "description_en": "A fast beast that marks an isolated Rear target.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_rear_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.35
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "trail_mark",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "faction_id": "ashbound_beasts",
+      "intent_skill_id": "ash_wolf_pack_lunge",
+      "art_key": "ash_wolf",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#ash_wolf",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "bellbound_dead",
+      "kind": "enemy",
+      "name_en": "Bellbound Dead",
+      "element": "Veil",
+      "role": "swarm",
+      "base_stats": {
+        "hp": 5,
+        "atk": 1,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.05,
+        "def": 0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "bellbound_dead_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "bellbound_dead_tolling_grab",
+          "name_en": "Tolling Grab",
+          "type": "signature",
+          "description_en": "Low-tier bell-wired remains; individually weak, dangerous in numbers.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.15
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "dread",
+              "duration_turns": 1,
+              "chance": 0.25
+            }
+          ]
+        }
+      ],
+      "faction_id": "hollow_host",
+      "intent_skill_id": "bellbound_dead_tolling_grab",
+      "art_key": "bellbound_dead",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#bellbound_dead",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "bridge_revenant",
+      "kind": "enemy",
+      "name_en": "Bridge Revenant",
+      "element": "Veil",
+      "role": "spectral_guard",
+      "base_stats": {
+        "hp": 7,
+        "atk": 1,
+        "def": 1,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.35,
+        "atk": 0.05,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Stone"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "bridge_revenant_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "bridge_revenant_chain_drag",
+          "name_en": "Chain Drag",
+          "type": "signature",
+          "description_en": "A drowned sentry hooks a Front defender, deals a crushing chain blow and Fractures the guard.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_front_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.25
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "fracture",
+              "duration_turns": 1
+            }
+          ]
+        }
+      ],
+      "faction_id": "hollow_host",
+      "intent_skill_id": "bridge_revenant_chain_drag",
+      "art_key": "bridge_revenant",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#bridge_revenant",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "chain_cultist",
+      "kind": "enemy",
+      "name_en": "Chain Cultist",
+      "element": "Veil",
+      "role": "support",
+      "base_stats": {
+        "hp": 5,
+        "atk": 1,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.05,
+        "def": 0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Gale"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "chain_cultist_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "chain_cultist_knot_the_breath",
+          "name_en": "Knot the Breath",
+          "type": "signature",
+          "description_en": "A support cultist who links allies and shares a portion of their wounds.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemy_allies",
+              "status_id": "soul_link",
+              "duration_turns": 2,
+              "shared_damage_fraction": 0.25
+            }
+          ]
+        }
+      ],
+      "faction_id": "first_eclipse_cult",
+      "intent_skill_id": "chain_cultist_knot_the_breath",
+      "art_key": "chain_cultist",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#chain_cultist",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "choir_knight",
+      "kind": "enemy",
+      "name_en": "Choir Knight",
+      "element": "Dawn",
+      "role": "elite_guard",
+      "base_stats": {
+        "hp": 9,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.45,
+        "atk": 0.1,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Veil",
+        "Ember"
+      ],
+      "resistances": [
+        "Dawn"
+      ],
+      "skills": [
+        {
+          "skill_id": "choir_knight_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "choir_knight_unison_verdict",
+          "name_en": "Unison Verdict",
+          "type": "signature",
+          "description_en": "Elite oath-armor that counterattacks when another Hollow is struck.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.35
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [
+        {
+          "event": "ally_damaged",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "event_source",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 0.65,
+              "no_focus_gain": true,
+              "can_trigger_passives": false
+            }
+          ],
+          "limit": {
+            "per_round": 1
+          },
+          "event_filter": {
+            "event_target_faction_is": "hollow_host"
+          }
+        }
+      ],
+      "faction_id": "hollow_host",
+      "status_immunities": [
+        "dread"
+      ],
+      "intent_skill_id": "choir_knight_unison_verdict",
+      "art_key": "choir_knight",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#choir_knight",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "corrupted_crown_guard",
+      "kind": "enemy",
+      "name_en": "Corrupted Crown Guard",
+      "element": "Stone",
+      "role": "elite_guard",
+      "base_stats": {
+        "hp": 9,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.45,
+        "atk": 0.1,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Gale",
+        "Veil"
+      ],
+      "resistances": [
+        "Stone"
+      ],
+      "skills": [
+        {
+          "skill_id": "corrupted_crown_guard_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "corrupted_crown_guard_formation_brace",
+          "name_en": "Formation Brace",
+          "type": "signature",
+          "description_en": "A disciplined guard that raises an ally shield before its signal strike.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "lowest_hp_enemy_ally",
+              "scale_stat": "def",
+              "multiplier": 0.6,
+              "duration_turns": 2
+            },
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 0.9
+            }
+          ]
+        }
+      ],
+      "faction_id": "crown_remnant",
+      "status_immunities": [
+        "dread"
+      ],
+      "intent_skill_id": "corrupted_crown_guard_formation_brace",
+      "art_key": "corrupted_crown_guard",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#corrupted_crown_guard",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "corrupted_mercenary",
+      "kind": "enemy",
+      "name_en": "Corrupted Mercenary",
+      "element": "Ember",
+      "role": "bruiser",
+      "base_stats": {
+        "hp": 7,
+        "atk": 2,
+        "def": 1,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.35,
+        "atk": 0.1,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Tide",
+        "Dawn"
+      ],
+      "resistances": [
+        "Ember"
+      ],
+      "skills": [
+        {
+          "skill_id": "corrupted_mercenary_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "corrupted_mercenary_paid_in_blood",
+          "name_en": "Paid in Blood",
+          "type": "signature",
+          "description_en": "A hired fighter using a risky self-buff and heavy single-target blows.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "pay_hp_cost",
+              "target_selector_id": "self",
+              "max_hp_fraction": 0.08,
+              "cannot_reduce_below": 1
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "self",
+              "stat_id": "atk",
+              "mode": "add_pct",
+              "amount": 0.25,
+              "duration_turns": 2
+            },
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.55
+            }
+          ]
+        }
+      ],
+      "faction_id": "red_vial_guild",
+      "intent_skill_id": "corrupted_mercenary_paid_in_blood",
+      "art_key": "corrupted_mercenary",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#corrupted_mercenary",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "crownless_knight",
+      "kind": "enemy",
+      "name_en": "Crownless Knight",
+      "element": "Stone",
+      "role": "elite_guard",
+      "base_stats": {
+        "hp": 9,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.45,
+        "atk": 0.1,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Veil",
+        "Gale"
+      ],
+      "resistances": [
+        "Stone"
+      ],
+      "skills": [
+        {
+          "skill_id": "crownless_knight_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "crownless_knight_crestless_challenge",
+          "name_en": "Crestless Challenge",
+          "type": "signature",
+          "description_en": "A stripped-plate duelist that deals extra damage to shields and resists Dread.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.45,
+              "shield_damage_multiplier": 1.5
+            }
+          ]
+        }
+      ],
+      "faction_id": "crown_remnant",
+      "status_immunities": [
+        "dread"
+      ],
+      "intent_skill_id": "crownless_knight_crestless_challenge",
+      "art_key": "crownless_knight",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#crownless_knight",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "eclipse_sentinel",
+      "kind": "enemy",
+      "name_en": "Eclipse Sentinel",
+      "element": "Veil",
+      "role": "warder",
+      "base_stats": {
+        "hp": 6,
+        "atk": 1,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.3,
+        "atk": 0.05,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Stone"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "eclipse_sentinel_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "eclipse_sentinel_pylon_ward",
+          "name_en": "Pylon Ward",
+          "type": "signature",
+          "description_en": "A ranged warder that channels a barrier through altar pylons.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "all_enemy_allies",
+              "scale_stat": "def",
+              "multiplier": 0.35,
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "faction_id": "first_eclipse_cult",
+      "intent_skill_id": "eclipse_sentinel_pylon_ward",
+      "art_key": "eclipse_sentinel",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#eclipse_sentinel",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "estate_wraith",
+      "kind": "enemy",
+      "name_en": "Estate Wraith",
+      "element": "Veil",
+      "role": "spectral_caster",
+      "base_stats": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "estate_wraith_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "estate_wraith_portrait_borrowing",
+          "name_en": "Portrait Borrowing",
+          "type": "signature",
+          "description_en": "A drifting noble shade that copies one shield from the most-buffed opposing unit.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "copy_buff",
+              "target_selector_id": "self",
+              "source_selector_id": "enemy_with_most_buffs",
+              "category": "buff",
+              "maximum_count": 1,
+              "duration_turns": 2
+            },
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 0.9
+            }
+          ]
+        }
+      ],
+      "faction_id": "ashen_estate_dead",
+      "intent_skill_id": "estate_wraith_portrait_borrowing",
+      "art_key": "estate_wraith",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#estate_wraith",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "glass_viper",
+      "kind": "enemy",
+      "name_en": "Glass Viper",
+      "element": "Tide",
+      "role": "assassin",
+      "base_stats": {
+        "hp": 4,
+        "atk": 2,
+        "def": 0,
+        "spd": 6
+      },
+      "growth_per_level": {
+        "hp": 0.2,
+        "atk": 0.1,
+        "def": 0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Ember",
+        "Stone"
+      ],
+      "resistances": [
+        "Tide"
+      ],
+      "skills": [
+        {
+          "skill_id": "glass_viper_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "glass_viper_brittle_venom",
+          "name_en": "Brittle Venom",
+          "type": "signature",
+          "description_en": "A glass-scaled experimental serpent; fast, fragile and poison-prone.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_rear_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "venom",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "faction_id": "red_vial_guild",
+      "intent_skill_id": "glass_viper_brittle_venom",
+      "art_key": "glass_viper",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#glass_viper",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "hollow_cleric",
+      "kind": "enemy",
+      "name_en": "Hollow Cleric",
+      "element": "Veil",
+      "role": "ranged_caster",
+      "base_stats": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "hollow_cleric_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "hollow_cleric_grave_litany",
+          "name_en": "Grave Litany",
+          "type": "signature",
+          "description_en": "A grave scribe that heals its most-injured ally below 70% HP; otherwise it curses the weakest foe.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "most_injured_enemy_ally",
+              "when": {
+                "predicate": "enemy_ally_hp_below_pct",
+                "value": 70
+              },
+              "scale_stat": "atk",
+              "multiplier": 0.9
+            },
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_enemy",
+              "when": {
+                "predicate": "no_enemy_ally_below_pct",
+                "value": 70
+              },
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.1
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "when": {
+                "predicate": "no_enemy_ally_below_pct",
+                "value": 70
+              },
+              "status_id": "dread",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "faction_id": "hollow_host",
+      "intent_skill_id": "hollow_cleric_grave_litany",
+      "art_key": "hollow_cleric",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#hollow_cleric",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "hollow_pilgrim",
+      "kind": "enemy",
+      "name_en": "Hollow Pilgrim",
+      "element": "Veil",
+      "role": "slow_vanguard",
+      "base_stats": {
+        "hp": 8,
+        "atk": 1,
+        "def": 2,
+        "spd": 3
+      },
+      "growth_per_level": {
+        "hp": 0.4,
+        "atk": 0.05,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "hollow_pilgrim_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "hollow_pilgrim_pilgrim_s_weight",
+          "name_en": "Pilgrim's Weight",
+          "type": "signature",
+          "description_en": "A slow, stubborn frontliner with high HP and a crushing step.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.5
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "self",
+              "status_id": "stoneguard",
+              "duration_turns": 1
+            }
+          ]
+        }
+      ],
+      "faction_id": "hollow_host",
+      "intent_skill_id": "hollow_pilgrim_pilgrim_s_weight",
+      "art_key": "hollow_pilgrim",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#hollow_pilgrim",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "inkbound_dead",
+      "kind": "enemy",
+      "name_en": "Inkbound Dead",
+      "element": "Veil",
+      "role": "ranged_caster",
+      "base_stats": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Gale"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "inkbound_dead_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "inkbound_dead_black_margin",
+          "name_en": "Black Margin",
+          "type": "signature",
+          "description_en": "A paper-wrapped corpse that marks targets with debuff ink.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_enemy",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "trail_mark",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "faction_id": "ashen_estate_dead",
+      "intent_skill_id": "inkbound_dead_black_margin",
+      "art_key": "inkbound_dead",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#inkbound_dead",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "lost_vow_knight",
+      "kind": "enemy",
+      "name_en": "Lost-Vow Knight",
+      "element": "Stone",
+      "role": "elite_duelist",
+      "base_stats": {
+        "hp": 8,
+        "atk": 2,
+        "def": 1,
+        "spd": 6
+      },
+      "growth_per_level": {
+        "hp": 0.4,
+        "atk": 0.1,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Veil",
+        "Ember"
+      ],
+      "resistances": [
+        "Stone"
+      ],
+      "skills": [
+        {
+          "skill_id": "lost_vow_knight_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "lost_vow_knight_oath_sever",
+          "name_en": "Oath Sever",
+          "type": "signature",
+          "description_en": "An elite dead knight who punishes shields and exposed Front units.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_front_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.45,
+              "shield_damage_multiplier": 1.5
+            },
+            {
+              "op": "remove_shield",
+              "target_selector_id": "previous_op_targets",
+              "amount_fraction": 0.2
+            }
+          ]
+        }
+      ],
+      "faction_id": "hollow_host",
+      "status_immunities": [
+        "dread"
+      ],
+      "intent_skill_id": "lost_vow_knight_oath_sever",
+      "art_key": "lost_vow_knight",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#lost_vow_knight",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "noble_retainer",
+      "kind": "enemy",
+      "name_en": "Noble Retainer",
+      "element": "Dawn",
+      "role": "support_guard",
+      "base_stats": {
+        "hp": 7,
+        "atk": 1,
+        "def": 1,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.35,
+        "atk": 0.05,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Veil",
+        "Ember"
+      ],
+      "resistances": [
+        "Dawn"
+      ],
+      "skills": [
+        {
+          "skill_id": "noble_retainer_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "noble_retainer_household_interpose",
+          "name_en": "Household Interpose",
+          "type": "signature",
+          "description_en": "An attendant's ghost intercepts the next single-target strike for its most-injured ally.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "grant_intercept",
+              "target_selector_id": "self",
+              "protected_ally_selector_id": "lowest_hp_enemy_ally",
+              "redirected_fraction": 1,
+              "duration_turns": 2,
+              "maximum_intercepts": 1
+            }
+          ]
+        }
+      ],
+      "faction_id": "crown_remnant",
+      "intent_skill_id": "noble_retainer_household_interpose",
+      "art_key": "noble_retainer",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#noble_retainer",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "orchard_ghoul",
+      "kind": "enemy",
+      "name_en": "Orchard Ghoul",
+      "element": "Veil",
+      "role": "bruiser",
+      "base_stats": {
+        "hp": 7,
+        "atk": 2,
+        "def": 1,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.35,
+        "atk": 0.1,
+        "def": 0.05,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "orchard_ghoul_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "orchard_ghoul_rooted_bite",
+          "name_en": "Rooted Bite",
+          "type": "signature",
+          "description_en": "A bloated orchard dead that gains defense while feeding.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "self",
+              "stat_id": "def",
+              "mode": "add_pct",
+              "amount": 0.1,
+              "duration_turns": 2
+            },
+            {
+              "op": "heal",
+              "target_selector_id": "self",
+              "when": {
+                "predicate": "damage_dealt_at_least_pct_of_target_hp",
+                "value": 10
+              },
+              "scale_stat": "atk",
+              "multiplier": 0.2
+            }
+          ]
+        }
+      ],
+      "faction_id": "hollow_host",
+      "intent_skill_id": "orchard_ghoul_rooted_bite",
+      "art_key": "orchard_ghoul",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#orchard_ghoul",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "red_vial_alchemist",
+      "kind": "enemy",
+      "name_en": "Red Vial Alchemist",
+      "element": "Ember",
+      "role": "ranged_caster",
+      "base_stats": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Tide",
+        "Gale"
+      ],
+      "resistances": [
+        "Ember"
+      ],
+      "skills": [
+        {
+          "skill_id": "red_vial_alchemist_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "red_vial_alchemist_corrosive_phial",
+          "name_en": "Corrosive Phial",
+          "type": "signature",
+          "description_en": "A back-row bomber whose flask racks can be interrupted.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "rear_row_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "venom",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "faction_id": "red_vial_guild",
+      "intent_skill_id": "red_vial_alchemist_corrosive_phial",
+      "art_key": "red_vial_alchemist",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#red_vial_alchemist",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "red_vial_scout",
+      "kind": "enemy",
+      "name_en": "Red Vial Scout",
+      "element": "Gale",
+      "role": "flanker",
+      "base_stats": {
+        "hp": 5,
+        "atk": 2,
+        "def": 0,
+        "spd": 6
+      },
+      "growth_per_level": {
+        "hp": 0.25,
+        "atk": 0.1,
+        "def": 0,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Stone",
+        "Tide"
+      ],
+      "resistances": [
+        "Gale"
+      ],
+      "skills": [
+        {
+          "skill_id": "red_vial_scout_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "red_vial_scout_glass_needle",
+          "name_en": "Glass Needle",
+          "type": "signature",
+          "description_en": "A quick courier with a poison dart and a route-marking shot.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "lowest_hp_rear_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.25
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "venom",
+              "duration_turns": 2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "trail_mark",
+              "duration_turns": 2
+            }
+          ]
+        }
+      ],
+      "faction_id": "red_vial_guild",
+      "intent_skill_id": "red_vial_scout_glass_needle",
+      "art_key": "red_vial_scout",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#red_vial_scout",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "royal_hollow",
+      "kind": "enemy",
+      "name_en": "Royal Hollow",
+      "element": "Stone",
+      "role": "armored_vanguard",
+      "base_stats": {
+        "hp": 9,
+        "atk": 1,
+        "def": 2,
+        "spd": 3
+      },
+      "growth_per_level": {
+        "hp": 0.45,
+        "atk": 0.05,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Veil",
+        "Gale"
+      ],
+      "resistances": [
+        "Stone"
+      ],
+      "skills": [
+        {
+          "skill_id": "royal_hollow_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "royal_hollow_empty_throne",
+          "name_en": "Empty Throne",
+          "type": "signature",
+          "description_en": "A heavily armoured royal remnant that blocks one attack per round.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            }
+          ]
+        }
+      ],
+      "passive_hooks": [
+        {
+          "event": "before_damage_received",
+          "effect_ops": [
+            {
+              "op": "block_attack",
+              "target_selector_id": "self",
+              "maximum_hits": 1
+            }
+          ],
+          "limit": {
+            "per_round": 1
+          }
+        }
+      ],
+      "faction_id": "crown_remnant",
+      "status_immunities": [
+        "dread"
+      ],
+      "intent_skill_id": "royal_hollow_empty_throne",
+      "art_key": "royal_hollow",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#royal_hollow",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "boss_ash_maw",
+      "kind": "enemy",
+      "name_en": "The Ash-Maw",
+      "element": "Ember",
+      "role": "beast_boss",
+      "base_stats": {
+        "hp": 20,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 1,
+        "atk": 0.1,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Stone",
+        "Tide"
+      ],
+      "resistances": [
+        "Ember"
+      ],
+      "skills": [
+        {
+          "skill_id": "boss_ash_maw_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "boss_ash_maw_ash_howl",
+          "name_en": "Jaw-Bell",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.4
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "burn",
+              "duration_turns": 1
+            }
+          ],
+          "phase_ids": [
+            "jaw_bell",
+            "ash_howl"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "jaw_bell"
+          }
+        }
+      ],
+      "faction_id": "ashbound_beasts",
+      "boss": {
+        "phases": [
+          {
+            "phase_id": "jaw_bell",
+            "name_en": "Jaw-Bell",
+            "transition": "battle_start",
+            "transition_hp_percent": null,
+            "hp_multiplier": 1,
+            "atk_multiplier": 1,
+            "def_multiplier": 1,
+            "weaknesses": [
+              "Stone",
+              "Ember"
+            ],
+            "signature_action_id": "boss_ash_maw_ash_howl",
+            "tauntable": true,
+            "objectives": [
+              {
+                "objective_id": "jaw_bell",
+                "name_en": "Jaw Bell",
+                "max_hp": 4,
+                "targetable_by_player": true,
+                "persists_across_phases": true,
+                "on_destroyed": [
+                  {
+                    "op": "cancel_boss_telegraph",
+                    "target_selector_id": "boss",
+                    "action_id": "boss_ash_maw_ash_howl"
+                  }
+                ]
+              }
+            ],
+            "enter_ops": [],
+            "passive_ops": []
+          },
+          {
+            "phase_id": "ash_howl",
+            "name_en": "Ash Howl",
+            "transition": "at_hp_percent",
+            "transition_hp_percent": 0.5,
+            "hp_multiplier": 0.72,
+            "atk_multiplier": 1.15,
+            "def_multiplier": 1.12,
+            "weaknesses": [
+              "Stone",
+              "Tide"
+            ],
+            "signature_action_id": "boss_ash_maw_ash_howl",
+            "tauntable": true,
+            "objectives": [],
+            "enter_ops": [],
+            "passive_ops": []
+          }
+        ],
+        "preserve_status_ids": [
+          "break"
+        ],
+        "clear_status_category": "debuff",
+        "control_duration_multiplier": 0.5
+      },
+      "intent_skill_id": "boss_ash_maw_ash_howl",
+      "art_key": "boss_ash_maw",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#boss_ash_maw",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "boss_bell_widow",
+      "kind": "enemy",
+      "name_en": "The Bell-Widow",
+      "element": "Veil",
+      "role": "ritual_boss",
+      "base_stats": {
+        "hp": 22,
+        "atk": 2,
+        "def": 3,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 1.1,
+        "atk": 0.1,
+        "def": 0.15,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "boss_bell_widow_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "boss_bell_widow_charged_judgement",
+          "name_en": "Wax Seal",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.35
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "dread",
+              "duration_turns": 2
+            }
+          ],
+          "phase_ids": [
+            "wax_seal",
+            "widow_verdict"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "wax_seal"
+          }
+        }
+      ],
+      "faction_id": "villain_boss",
+      "boss": {
+        "phases": [
+          {
+            "phase_id": "wax_seal",
+            "name_en": "Wax Seal",
+            "transition": "battle_start",
+            "transition_hp_percent": null,
+            "hp_multiplier": 1,
+            "atk_multiplier": 0.92,
+            "def_multiplier": 1,
+            "weaknesses": [
+              "Dawn",
+              "Ember"
+            ],
+            "signature_action_id": "boss_bell_widow_charged_judgement",
+            "tauntable": true,
+            "objectives": [
+              {
+                "objective_id": "wax_seal",
+                "name_en": "Wax Seal",
+                "max_hp": 5,
+                "targetable_by_player": true,
+                "persists_across_phases": true,
+                "on_destroyed": [
+                  {
+                    "op": "remove_boss_modifier",
+                    "target_selector_id": "boss",
+                    "modifier_id": "wax_seal_ward"
+                  }
+                ]
+              }
+            ],
+            "enter_ops": [],
+            "passive_ops": [
+              {
+                "op": "boss_damage_taken_modifier",
+                "target_selector_id": "self",
+                "multiplier": 0.8,
+                "modifier_id": "wax_seal_ward",
+                "until_objective_destroyed": "wax_seal"
+              }
+            ]
+          },
+          {
+            "phase_id": "widow_verdict",
+            "name_en": "Widow's Verdict",
+            "transition": "at_hp_percent",
+            "transition_hp_percent": 0.5,
+            "hp_multiplier": 0.72,
+            "atk_multiplier": 1.18,
+            "def_multiplier": 1.12,
+            "weaknesses": [
+              "Dawn",
+              "Ember"
+            ],
+            "signature_action_id": "boss_bell_widow_charged_judgement",
+            "tauntable": true,
+            "objectives": [],
+            "enter_ops": [],
+            "passive_ops": []
+          }
+        ],
+        "preserve_status_ids": [
+          "break"
+        ],
+        "clear_status_category": "debuff",
+        "control_duration_multiplier": 0.5
+      },
+      "intent_skill_id": "boss_bell_widow_charged_judgement",
+      "art_key": "boss_bell_widow",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#boss_bell_widow",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "boss_captain_rusk",
+      "kind": "enemy",
+      "name_en": "Captain Rusk",
+      "element": "Gale",
+      "role": "duelist_boss",
+      "base_stats": {
+        "hp": 24,
+        "atk": 2,
+        "def": 3,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 1.2,
+        "atk": 0.1,
+        "def": 0.15,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Stone",
+        "Tide"
+      ],
+      "resistances": [
+        "Gale"
+      ],
+      "skills": [
+        {
+          "skill_id": "boss_captain_rusk_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "boss_captain_rusk_duel_cut",
+          "name_en": "Captain's Duel",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "duel_marked_enemy",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.8
+            }
+          ],
+          "phase_ids": [
+            "captain_duel"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "interruptible_by_control": false
+          }
+        },
+        {
+          "skill_id": "boss_captain_rusk_banner_call",
+          "name_en": "Banner Call",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 4,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "summon_enemies",
+              "target_selector_id": "self",
+              "enemy_id": "corrupted_mercenary",
+              "count": 2,
+              "only_if_objective_alive": "signal_banner"
+            }
+          ],
+          "phase_ids": [
+            "banner_call"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "signal_banner"
+          }
+        }
+      ],
+      "faction_id": "red_vial_guild",
+      "boss": {
+        "phases": [
+          {
+            "phase_id": "captain_duel",
+            "name_en": "Captain's Duel",
+            "transition": "battle_start",
+            "transition_hp_percent": null,
+            "hp_multiplier": 1,
+            "atk_multiplier": 1,
+            "def_multiplier": 1,
+            "weaknesses": [
+              "Stone",
+              "Tide"
+            ],
+            "signature_action_id": "boss_captain_rusk_duel_cut",
+            "tauntable": true,
+            "objectives": [],
+            "enter_ops": [
+              {
+                "op": "apply_status",
+                "target_selector_id": "front_row_enemies",
+                "status_id": "duel_mark",
+                "duration_turns": 2
+              }
+            ],
+            "passive_ops": []
+          },
+          {
+            "phase_id": "banner_call",
+            "name_en": "Banner Call",
+            "transition": "at_hp_percent",
+            "transition_hp_percent": 0.5,
+            "hp_multiplier": 0.72,
+            "atk_multiplier": 1.12,
+            "def_multiplier": 1.12,
+            "weaknesses": [
+              "Stone",
+              "Tide"
+            ],
+            "signature_action_id": "boss_captain_rusk_banner_call",
+            "tauntable": true,
+            "objectives": [
+              {
+                "objective_id": "signal_banner",
+                "name_en": "Signal Banner",
+                "max_hp": 4,
+                "targetable_by_player": true,
+                "on_destroyed": [
+                  {
+                    "op": "cancel_boss_telegraph",
+                    "target_selector_id": "boss",
+                    "action_id": "boss_captain_rusk_banner_call"
+                  }
+                ]
+              }
+            ],
+            "enter_ops": [],
+            "passive_ops": []
+          }
+        ],
+        "preserve_status_ids": [
+          "break"
+        ],
+        "clear_status_category": "debuff",
+        "control_duration_multiplier": 0.5
+      },
+      "intent_skill_id": "boss_captain_rusk_duel_cut",
+      "art_key": "boss_captain_rusk",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#boss_captain_rusk",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "boss_red_vial_matron",
+      "kind": "enemy",
+      "name_en": "The Red Vial Matron",
+      "element": "Ember",
+      "role": "alchemist_boss",
+      "base_stats": {
+        "hp": 26,
+        "atk": 2,
+        "def": 4,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 1.3,
+        "atk": 0.1,
+        "def": 0.2,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Tide",
+        "Gale"
+      ],
+      "resistances": [
+        "Ember"
+      ],
+      "skills": [
+        {
+          "skill_id": "boss_red_vial_matron_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "boss_red_vial_matron_corrosive_flasks",
+          "name_en": "Glass Ward",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.2,
+              "hit_count": 2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "all_enemies",
+              "status_id": "fracture",
+              "duration_turns": 2
+            }
+          ],
+          "phase_ids": [
+            "glass_ward",
+            "corrosive_flasks"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_all_objectives_destroyed": [
+              "flask_rack_left",
+              "flask_rack_right"
+            ]
+          }
+        }
+      ],
+      "faction_id": "red_vial_guild",
+      "boss": {
+        "phases": [
+          {
+            "phase_id": "glass_ward",
+            "name_en": "Glass Ward",
+            "transition": "battle_start",
+            "transition_hp_percent": null,
+            "hp_multiplier": 1,
+            "atk_multiplier": 0.95,
+            "def_multiplier": 1,
+            "weaknesses": [
+              "Tide",
+              "Gale"
+            ],
+            "signature_action_id": "boss_red_vial_matron_corrosive_flasks",
+            "tauntable": true,
+            "objectives": [
+              {
+                "objective_id": "flask_rack_left",
+                "name_en": "Left Flask Rack",
+                "max_hp": 3,
+                "targetable_by_player": true
+              },
+              {
+                "objective_id": "flask_rack_right",
+                "name_en": "Right Flask Rack",
+                "max_hp": 3,
+                "targetable_by_player": true
+              }
+            ],
+            "enter_ops": [],
+            "passive_ops": [
+              {
+                "op": "boss_damage_taken_modifier",
+                "target_selector_id": "self",
+                "multiplier": 0.85,
+                "modifier_id": "glass_racks_ward",
+                "while_any_objective_alive": [
+                  "flask_rack_left",
+                  "flask_rack_right"
+                ]
+              }
+            ]
+          },
+          {
+            "phase_id": "corrosive_flasks",
+            "name_en": "Corrosive Flasks",
+            "transition": "at_hp_percent",
+            "transition_hp_percent": 0.5,
+            "hp_multiplier": 0.72,
+            "atk_multiplier": 1.14,
+            "def_multiplier": 1.12,
+            "weaknesses": [
+              "Tide",
+              "Gale"
+            ],
+            "signature_action_id": "boss_red_vial_matron_corrosive_flasks",
+            "tauntable": true,
+            "objectives": [],
+            "enter_ops": [],
+            "passive_ops": []
+          }
+        ],
+        "preserve_status_ids": [
+          "break"
+        ],
+        "clear_status_category": "debuff",
+        "control_duration_multiplier": 0.5
+      },
+      "intent_skill_id": "boss_red_vial_matron_corrosive_flasks",
+      "art_key": "boss_red_vial_matron",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#boss_red_vial_matron",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "boss_marshal_oren",
+      "kind": "enemy",
+      "name_en": "Marshal Oren",
+      "element": "Stone",
+      "role": "commander_boss",
+      "base_stats": {
+        "hp": 28,
+        "atk": 3,
+        "def": 4,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 1.4,
+        "atk": 0.15,
+        "def": 0.2,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Gale",
+        "Veil"
+      ],
+      "resistances": [
+        "Stone"
+      ],
+      "skills": [
+        {
+          "skill_id": "boss_marshal_oren_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "boss_marshal_oren_formation_order",
+          "name_en": "Shield Formation",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "self_and_enemy_guards",
+              "scale_stat": "def",
+              "multiplier": 0.45,
+              "duration_turns": 2
+            }
+          ],
+          "phase_ids": [
+            "shield_formation"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_objective_destroyed": "signal_standard"
+          }
+        },
+        {
+          "skill_id": "boss_marshal_oren_bridge_strike",
+          "name_en": "Bridge Strike",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "front_row_enemies",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.65,
+              "multiplier_if_objective_alive": {
+                "objective_id": "signal_standard",
+                "multiplier": 1.15
+              }
+            }
+          ],
+          "phase_ids": [
+            "bridge_strike"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "interruptible_by_control": false
+          }
+        }
+      ],
+      "faction_id": "crown_remnant",
+      "boss": {
+        "phases": [
+          {
+            "phase_id": "shield_formation",
+            "name_en": "Shield Formation",
+            "transition": "battle_start",
+            "transition_hp_percent": null,
+            "hp_multiplier": 1,
+            "atk_multiplier": 0.9,
+            "def_multiplier": 1,
+            "weaknesses": [
+              "Gale",
+              "Veil"
+            ],
+            "signature_action_id": "boss_marshal_oren_formation_order",
+            "tauntable": true,
+            "objectives": [
+              {
+                "objective_id": "signal_standard",
+                "name_en": "Signal Standard",
+                "max_hp": 4,
+                "targetable_by_player": true,
+                "persists_across_phases": true,
+                "on_destroyed": [
+                  {
+                    "op": "remove_shield",
+                    "target_selector_id": "boss_and_enemy_guards",
+                    "shield_source_id": "formation_guard"
+                  }
+                ]
+              }
+            ],
+            "enter_ops": [
+              {
+                "op": "grant_shield",
+                "target_selector_id": "self_and_enemy_guards",
+                "scale_stat": "def",
+                "multiplier": 0.6,
+                "duration_turns": 2,
+                "shield_source_id": "formation_guard"
+              }
+            ],
+            "passive_ops": []
+          },
+          {
+            "phase_id": "bridge_strike",
+            "name_en": "Bridge Strike",
+            "transition": "at_hp_percent",
+            "transition_hp_percent": 0.5,
+            "hp_multiplier": 0.72,
+            "atk_multiplier": 1.18,
+            "def_multiplier": 1.12,
+            "weaknesses": [
+              "Gale",
+              "Veil"
+            ],
+            "signature_action_id": "boss_marshal_oren_bridge_strike",
+            "tauntable": true,
+            "objectives": [],
+            "enter_ops": [],
+            "passive_ops": []
+          }
+        ],
+        "preserve_status_ids": [
+          "break"
+        ],
+        "clear_status_category": "debuff",
+        "control_duration_multiplier": 0.5
+      },
+      "intent_skill_id": "boss_marshal_oren_formation_order",
+      "art_key": "boss_marshal_oren",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#boss_marshal_oren",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "boss_ashen_lord_wraith",
+      "kind": "enemy",
+      "name_en": "The Ashen Lord's Wraith",
+      "element": "Veil",
+      "role": "spectral_boss",
+      "base_stats": {
+        "hp": 30,
+        "atk": 3,
+        "def": 5,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 1.5,
+        "atk": 0.15,
+        "def": 0.25,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "boss_ashen_lord_wraith_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "boss_ashen_wraith_mirror_shard",
+          "name_en": "Portrait Double",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.2
+            }
+          ],
+          "phase_ids": [
+            "portrait_double"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "remove_copied_shields_if_objective_destroyed": "mirror_frame"
+          }
+        },
+        {
+          "skill_id": "boss_ashen_wraith_falling_gallery",
+          "name_en": "Falling Gallery",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "rear_row_enemies",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.5
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "rear_row_enemies",
+              "status_id": "dread",
+              "duration_turns": 1
+            }
+          ],
+          "phase_ids": [
+            "falling_gallery"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "interruptible_by_control": false
+          }
+        }
+      ],
+      "faction_id": "ashen_estate_dead",
+      "boss": {
+        "phases": [
+          {
+            "phase_id": "portrait_double",
+            "name_en": "Portrait Double",
+            "transition": "battle_start",
+            "transition_hp_percent": null,
+            "hp_multiplier": 1,
+            "atk_multiplier": 0.95,
+            "def_multiplier": 1,
+            "weaknesses": [
+              "Dawn",
+              "Ember"
+            ],
+            "signature_action_id": "boss_ashen_wraith_mirror_shard",
+            "tauntable": true,
+            "objectives": [
+              {
+                "objective_id": "mirror_frame",
+                "name_en": "Mirror Frame",
+                "max_hp": 4,
+                "targetable_by_player": true,
+                "persists_across_phases": true,
+                "on_destroyed": [
+                  {
+                    "op": "remove_copied_statuses",
+                    "target_selector_id": "boss",
+                    "category": "shield"
+                  }
+                ]
+              }
+            ],
+            "enter_ops": [
+              {
+                "op": "copy_buff",
+                "target_selector_id": "self",
+                "source_selector_id": "enemy_with_most_buffs",
+                "category": "shield",
+                "maximum_count": 1,
+                "duration_turns": 2
+              }
+            ],
+            "passive_ops": []
+          },
+          {
+            "phase_id": "falling_gallery",
+            "name_en": "Falling Gallery",
+            "transition": "at_hp_percent",
+            "transition_hp_percent": 0.5,
+            "hp_multiplier": 0.72,
+            "atk_multiplier": 1.18,
+            "def_multiplier": 1.12,
+            "weaknesses": [
+              "Dawn",
+              "Ember"
+            ],
+            "signature_action_id": "boss_ashen_wraith_falling_gallery",
+            "tauntable": true,
+            "objectives": [],
+            "enter_ops": [],
+            "passive_ops": []
+          }
+        ],
+        "preserve_status_ids": [
+          "break"
+        ],
+        "clear_status_category": "debuff",
+        "control_duration_multiplier": 0.5
+      },
+      "intent_skill_id": "boss_ashen_wraith_mirror_shard",
+      "art_key": "boss_ashen_lord_wraith",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#boss_ashen_lord_wraith",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    },
+    {
+      "unit_id": "boss_eclipse_construct",
+      "kind": "enemy",
+      "name_en": "Eclipse Construct",
+      "element": "Veil",
+      "role": "mythic_construct_boss",
+      "base_stats": {
+        "hp": 32,
+        "atk": 3,
+        "def": 5,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 1.6,
+        "atk": 0.15,
+        "def": 0.25,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Stone",
+        "Dawn"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "boss_eclipse_construct_basic",
+          "name_en": "Boss Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "boss_eclipse_construct_crownfall_sweep",
+          "name_en": "Crownless Frame",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "front_row_enemies",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.55,
+              "multiplier_if_all_objectives_alive": {
+                "multiplier": 1.15
+              }
+            }
+          ],
+          "phase_ids": [
+            "crownless_frame"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_all_objectives_destroyed": [
+              "chain_joint_left",
+              "chain_joint_right",
+              "ankle_anchor"
+            ]
+          }
+        },
+        {
+          "skill_id": "boss_eclipse_construct_eclipse_pulse",
+          "name_en": "Aether Ward",
+          "type": "signature",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "magic",
+              "scale_stat": "atk",
+              "multiplier": 1.6
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "lowest_hp_enemy",
+              "status_id": "decay",
+              "duration_turns": 2
+            }
+          ],
+          "phase_ids": [
+            "aether_ward"
+          ],
+          "telegraph": {
+            "player_actions_before_resolution": 1,
+            "interrupt_if_all_objectives_destroyed": [
+              "altar_pylon_left",
+              "altar_pylon_center",
+              "altar_pylon_right"
+            ]
+          }
+        }
+      ],
+      "faction_id": "first_eclipse_cult",
+      "boss": {
+        "phases": [
+          {
+            "phase_id": "crownless_frame",
+            "name_en": "Crownless Frame",
+            "transition": "battle_start",
+            "transition_hp_percent": null,
+            "hp_multiplier": 1,
+            "atk_multiplier": 1,
+            "def_multiplier": 1,
+            "weaknesses": [
+              "Stone",
+              "Dawn"
+            ],
+            "signature_action_id": "boss_eclipse_construct_crownfall_sweep",
+            "tauntable": true,
+            "objectives": [
+              {
+                "objective_id": "chain_joint_left",
+                "name_en": "Left Chain Joint",
+                "max_hp": 3,
+                "targetable_by_player": true
+              },
+              {
+                "objective_id": "chain_joint_right",
+                "name_en": "Right Chain Joint",
+                "max_hp": 3,
+                "targetable_by_player": true
+              },
+              {
+                "objective_id": "ankle_anchor",
+                "name_en": "Ankle Anchor",
+                "max_hp": 4,
+                "targetable_by_player": true,
+                "on_destroyed": [
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "boss",
+                    "status_id": "break",
+                    "duration_turns": 1
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "boss",
+                    "status_id": "fracture",
+                    "duration_turns": 2
+                  }
+                ]
+              }
+            ],
+            "enter_ops": [],
+            "passive_ops": []
+          },
+          {
+            "phase_id": "aether_ward",
+            "name_en": "Aether Ward",
+            "transition": "at_hp_percent",
+            "transition_hp_percent": 0.5,
+            "hp_multiplier": 0.72,
+            "atk_multiplier": 1.15,
+            "def_multiplier": 1.12,
+            "weaknesses": [
+              "Stone",
+              "Dawn"
+            ],
+            "signature_action_id": "boss_eclipse_construct_eclipse_pulse",
+            "tauntable": true,
+            "objectives": [
+              {
+                "objective_id": "altar_pylon_left",
+                "name_en": "Left Altar Pylon",
+                "max_hp": 3,
+                "targetable_by_player": true,
+                "on_destroyed": [
+                  {
+                    "op": "clear_status_if_all_objectives_destroyed",
+                    "target_selector_id": "boss",
+                    "objective_ids": [
+                      "altar_pylon_left",
+                      "altar_pylon_center",
+                      "altar_pylon_right"
+                    ],
+                    "status_id": "decay"
+                  }
+                ]
+              },
+              {
+                "objective_id": "altar_pylon_center",
+                "name_en": "Central Altar Pylon",
+                "max_hp": 3,
+                "targetable_by_player": true,
+                "on_destroyed": [
+                  {
+                    "op": "clear_status_if_all_objectives_destroyed",
+                    "target_selector_id": "boss",
+                    "objective_ids": [
+                      "altar_pylon_left",
+                      "altar_pylon_center",
+                      "altar_pylon_right"
+                    ],
+                    "status_id": "decay"
+                  }
+                ]
+              },
+              {
+                "objective_id": "altar_pylon_right",
+                "name_en": "Right Altar Pylon",
+                "max_hp": 3,
+                "targetable_by_player": true,
+                "on_destroyed": [
+                  {
+                    "op": "clear_status_if_all_objectives_destroyed",
+                    "target_selector_id": "boss",
+                    "objective_ids": [
+                      "altar_pylon_left",
+                      "altar_pylon_center",
+                      "altar_pylon_right"
+                    ],
+                    "status_id": "decay"
+                  }
+                ]
+              }
+            ],
+            "enter_ops": [
+              {
+                "op": "apply_status",
+                "target_selector_id": "lowest_hp_enemy",
+                "status_id": "decay",
+                "duration_turns": 2
+              }
+            ],
+            "passive_ops": [
+              {
+                "op": "boss_damage_taken_modifier",
+                "target_selector_id": "self",
+                "multiplier": 0.65,
+                "modifier_id": "aether_ward",
+                "while_any_objective_alive": [
+                  "altar_pylon_left",
+                  "altar_pylon_center",
+                  "altar_pylon_right"
+                ]
+              }
+            ]
+          }
+        ],
+        "preserve_status_ids": [
+          "break"
+        ],
+        "clear_status_category": "debuff",
+        "control_duration_multiplier": 0.5
+      },
+      "intent_skill_id": "boss_eclipse_construct_crownfall_sweep",
+      "art_key": "boss_eclipse_construct",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#boss_eclipse_construct",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
+    }
+  ],
+  "rules": {
+    "schema_version": 1,
+    "gauge_max": 10000,
+    "max_pending_delay_fraction": 0.5,
+    "defense_scale": 10,
+    "focus": {
+      "maximum": 100,
+      "basic_gain": 20,
+      "active_gain": 25,
+      "hit_gain": 5,
+      "hit_gain_cap_per_turn": 15,
+      "ultimate_cost": 100
+    },
+    "crit": {
+      "chance": 0.05,
+      "multiplier": 1.5
+    },
+    "element": {
+      "cycle": [
+        "Ember",
+        "Gale",
+        "Stone",
+        "Tide"
+      ],
+      "advantage": 1.2,
+      "disadvantage": 0.9,
+      "neutral": 1,
+      "weakness": 1.2,
+      "resistance": 0.9,
+      "mutual_pairs": [
+        [
+          "Dawn",
+          "Veil"
+        ]
+      ]
+    },
+    "auto_battle": {
+      "heal_priority_hp_percent": 40,
+      "save_ultimate_until_boss": true
+    },
+    "skill_rank_bonus": 0.1,
+    "statuses": [
+      {
+        "status_id": "burn",
+        "name_en": "Burn",
+        "kind": "damage_over_time",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "tags": [
+          "debuff",
+          "damage_over_time"
+        ],
+        "dot_atk_multiplier": 0.12
+      },
+      {
+        "status_id": "soaked",
+        "name_en": "Soaked",
+        "kind": "element_vulnerability_and_reaction",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "tags": [
+          "debuff"
+        ],
+        "element_damage_taken_multiplier": {
+          "Tide": 1.1
+        },
+        "reactions": [
+          {
+            "element": "Gale",
+            "name_en": "Crosscurrent",
+            "bonus_damage_multiplier": 0.15,
+            "consume_status": true
+          },
+          {
+            "element": "Ember",
+            "name_en": "Steamflare",
+            "bonus_damage_multiplier": 0.15,
+            "consume_status": true
+          }
+        ]
+      },
+      {
+        "status_id": "gust",
+        "name_en": "Gust",
+        "kind": "turn_delay",
+        "category": "debuff",
+        "default_duration_turns": 1,
+        "next_action_gauge_delay_fraction": 0.15
+      },
+      {
+        "status_id": "fracture",
+        "name_en": "Fracture",
+        "kind": "defense_down",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "def_multiplier": 0.85,
+        "tags": [
+          "debuff"
+        ]
+      },
+      {
+        "status_id": "sanctuary",
+        "name_en": "Sanctuary",
+        "kind": "healing_and_damage_reduction",
+        "category": "buff",
+        "default_duration_turns": 2,
+        "damage_taken_multiplier": 0.9,
+        "healing_received_multiplier": 1.1,
+        "tags": [
+          "buff"
+        ]
+      },
+      {
+        "status_id": "dread",
+        "name_en": "Dread",
+        "kind": "outgoing_damage_and_focus_gain_down",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "outgoing_damage_multiplier": 0.9,
+        "focus_gain_multiplier": 0.8,
+        "tags": [
+          "debuff",
+          "dread"
+        ]
+      },
+      {
+        "status_id": "break",
+        "name_en": "Break",
+        "kind": "boss_stagger_window",
+        "category": "control",
+        "default_duration_turns": 1,
+        "damage_taken_multiplier": 1.2,
+        "skip_next_action": true,
+        "tags": [
+          "control",
+          "break"
+        ]
+      },
+      {
+        "status_id": "decay",
+        "name_en": "Decay",
+        "kind": "healing_received_down",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "healing_received_multiplier": 0.5,
+        "tags": [
+          "debuff"
+        ]
+      },
+      {
+        "status_id": "taunt",
+        "name_en": "Taunt",
+        "kind": "target_redirect",
+        "category": "buff",
+        "default_duration_turns": 2,
+        "redirects_single_target_attacks": true,
+        "tags": [
+          "buff",
+          "control"
+        ]
+      },
+      {
+        "status_id": "stoneguard",
+        "name_en": "Stoneguard",
+        "kind": "damage_reduction",
+        "category": "buff",
+        "default_duration_turns": 1,
+        "damage_taken_multiplier": 0.92,
+        "tags": [
+          "buff"
+        ]
+      },
+      {
+        "status_id": "dawnward",
+        "name_en": "Dawnward",
+        "kind": "resistance_buff",
+        "category": "buff",
+        "default_duration_turns": 2,
+        "res_multiplier": 1.1,
+        "tags": [
+          "buff"
+        ]
+      },
+      {
+        "status_id": "trail_mark",
+        "name_en": "Trail Mark",
+        "kind": "target_priority_mark",
+        "category": "mark",
+        "default_duration_turns": 2,
+        "tags": [
+          "mark"
+        ]
+      },
+      {
+        "status_id": "duel_mark",
+        "name_en": "Duel Mark",
+        "kind": "target_priority_mark",
+        "category": "mark",
+        "default_duration_turns": 2,
+        "tags": [
+          "mark",
+          "duel"
+        ]
+      },
+      {
+        "status_id": "venom",
+        "name_en": "Venom",
+        "kind": "damage_over_time",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "tags": [
+          "debuff",
+          "poison"
+        ],
+        "dot_atk_multiplier": 0.1
+      },
+      {
+        "status_id": "soul_link",
+        "name_en": "Soul Link",
+        "kind": "damage_share",
+        "category": "buff",
+        "default_duration_turns": 2,
+        "tags": [
+          "buff"
+        ],
+        "shared_damage_cap_fraction": 0.15
+      },
+      {
+        "status_id": "soaked_immunity",
+        "name_en": "Dry Ward",
+        "kind": "status_immunity",
+        "category": "buff",
+        "default_duration_turns": 1,
+        "tags": [
+          "buff"
+        ],
+        "immune_status_ids": [
+          "soaked"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_3_1",
+  "stage_id": "3-1",
+  "title_en": "The Empty Orchard",
+  "location_id": "village_oakhaven",
+  "seed": 2996618979,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "nixie_vale"
+  ],
+  "enemies": [
+    {
+      "unit_id": "orchard_ghoul",
+      "level": 6,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "orchard_ghoul",
+      "level": 6,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "orchard_ghoul",
+      "level": 6,
+      "slot": 2,
+      "row": "rear"
+    },
+    {
+      "unit_id": "red_vial_scout",
+      "level": 6,
+      "slot": 3,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#3-1"
+  }
+}

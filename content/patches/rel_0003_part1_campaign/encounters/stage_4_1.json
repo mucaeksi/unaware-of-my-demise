@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_4_1",
+  "stage_id": "4-1",
+  "title_en": "Stairs Below the Cistern",
+  "location_id": "undercity_subterranean",
+  "seed": 1234749163,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "odelia_pike"
+  ],
+  "enemies": [
+    {
+      "unit_id": "glass_viper",
+      "level": 9,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "glass_viper",
+      "level": 9,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "glass_viper",
+      "level": 9,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#4-1"
+  }
+}

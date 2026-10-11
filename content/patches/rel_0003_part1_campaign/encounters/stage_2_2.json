@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_2_2",
+  "stage_id": "2-2",
+  "title_en": "The Choir Without Breath",
+  "location_id": "cathedral_saint_luthos",
+  "seed": 1170981778,
+  "party_mode": "owned",
+  "party": [],
+  "guests": [
+    "sister_aveline"
+  ],
+  "enemies": [
+    {
+      "unit_id": "choir_knight",
+      "level": 4,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "choir_knight",
+      "level": 4,
+      "slot": 1,
+      "row": "front"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 2.5,
+    "applies_to": [
+      "hp",
+      "atk"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#2-2"
+  }
+}
