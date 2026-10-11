@@ -21,7 +21,17 @@
     "staging": {
       "name": "uomd-game-staging",
       "workers_dev": true,
-      "vars": { "ENVIRONMENT": "staging", "CONTENT_CHANNEL": "staging", "ADMOB_APP_ID": "ca-app-pub-4258559369390965~2559970251", "ADMOB_AD_UNIT_IDS": "ca-app-pub-4258559369390965/3553164322" },
+      "vars": {
+        "ENVIRONMENT": "staging",
+        "CONTENT_CHANNEL": "staging",
+        "ADMOB_APP_ID": "ca-app-pub-4258559369390965~2559970251",
+        "ADMOB_AD_UNIT_IDS": "ca-app-pub-4258559369390965/3553164322",
+        // public identifiers (not secrets): OAuth Web client = Google ID token audience; Play package; Pub/Sub push identity for RTDN
+        "GOOGLE_CLIENT_IDS": "604013824221-n7htgfhfs55njs5ie11ulojsk1tnk6da.apps.googleusercontent.com",
+        "PLAY_PACKAGE_NAME": "io.github.mucaeksi.unawareofmydemise",
+        "RTDN_PUSH_SERVICE_ACCOUNT": "uomd-play-billing@unaware-of-my-demise.iam.gserviceaccount.com",
+        "RTDN_AUDIENCE": "https://uomd-game-staging.muratcaneksiii.workers.dev/api/v1/billing/rtdn"
+      },
       "assets": { "directory": "../game/dist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
       "d1_databases": [{ "binding": "DB", "database_name": "uomd-staging", "database_id": "687f9735-ee4c-4611-aa16-2fae99e51911", "migrations_dir": "migrations" }],
       "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "uomd-content-staging" }],
