@@ -9,7 +9,8 @@ Tick a box only when committed and accepted; add `commit <hash> - what is left`.
   - commit `c18fc30e` — accepted: all first-AAB identity/payment/ad/consent/offline acceptance areas have device steps and exact backend evidence. Left: physical-device execution and listed implementation/configuration blockers.
 - [x] SOL-4 Runbook (`docs/RUNBOOK.md`)
   - commit `a10e4637` — accepted: source-backed logs/rollback/D1 restore/signing/refund/reset procedures and UNKNOWN gaps. Left: operator restore rehearsal and R01–R06 decisions; plaintext probe flagged to Claude.
-- [ ] SOL-5 Media production queue (`docs/media/QUEUE.md`)
+- [x] SOL-5 Media production queue (`docs/media/QUEUE.md`)
+  - commit `181aa9f9` — accepted: exact 20/27 catalog IDs, 235 English prompts, tutorial-first priority, Japanese VO rules and budget arithmetic checked. Left: reference/candidate approval, casting/transcripts, export contracts and staged Google production; no generation.
 - [x] SOL-6 Localization catalog, EN source only (TR deferred by owner 2026-10-11; `docs/i18n/STRINGS.md`)
   - commit `c9774625` — accepted for owner EN-only scope: 38 production source files, 375 stable keys and all 1,378 literal occurrences classified; source hashes and placeholders checked. Left: Claude wires keys, dynamic server/narrative/native text and Japanese dialogue bindings.
 - [ ] SOL-7 Economy tuning proposal (`docs/economy/TUNING_PROPOSAL.md`)

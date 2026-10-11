@@ -1,0 +1,485 @@
+{
+  "schema": "uomd.economy-proposal.simulator.v1",
+  "status": "PROPOSAL_NOT_APPLIED",
+  "date": "2026-10-11",
+  "execution": {
+    "mode": "LOCAL_SOURCE_FUNCTION_NOT_HTTP",
+    "function": "analyzeFlow",
+    "source": "packages/economy/src/flow.ts",
+    "compiler": "TypeScript 5.9.3 transpileModule ES2022/CommonJS; no project source edits",
+    "api_equivalence": "GET /admin/api/economy/defaults; POST /admin/api/economy/flow invokes the same analyzeFlow function; no authenticated live request made"
+  },
+  "source_sha256": {
+    "packages/economy/src/flow.ts": "d13633d1cc18309c5fccf22b199869d91f424b229506deae61818a5f33a02477",
+    "packages/economy/src/progression.ts": "ee8e9497fdde5df188f20a10de06c9a23f21bc4fb53f43302247af0044056c2f",
+    "tools/seed_catalog.ts": "8cddba67677efff6faf76d6ed9035774822b5ff605eae9c5b2a2e7793d194d06",
+    "apps/api/src/admin/ops.ts": "79577839a306ce8f4c797e81c53e54bf9987c3f0aa2766dd1223901e99fb1c5f",
+    "apps/api/src/ads/service.ts": "4db75763f96e948212225d3bfcc078b756b0b24f2863a2363838171fb60a3908",
+    "apps/api/src/progress/service.ts": "f0bac40b460af627267489b056bb5a4ba79378ad7cec3de27e57b741dd3ed204",
+    "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/economy_part1.json": "f82c3941248e835967dc699ae2a73871c4108238be93467876431db24cbcb88e",
+    "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/battle_rules_part1.json": "6f3785c3f43993ba67ff59a7f9a0dc7576d7e560518b1f8d15c030858a538e9c",
+    "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/drop_tables_part1.json": "d0bf997c4ff58249cf12f4e3bbb1d09447df1875b85de4e81a1ac08a8aa15190"
+  },
+  "fee_totals": {
+    "character_level_1_to_20": 570,
+    "character_paid_ascensions": [
+      30,
+      60,
+      80
+    ],
+    "character_progression_total": 740,
+    "character_skill_rank_total": 130,
+    "character_with_skills_total": 870,
+    "equipment_level_1_to_20": 494
+  },
+  "runs": [
+    {
+      "id": "source_defaults",
+      "assumption": "Unmodified DEFAULT_FLOW; ads 240/day is obsolete under current rolling cap.",
+      "report": {
+        "model": {
+          "days": 30,
+          "startBalance": 0,
+          "income": {
+            "tasks": 240,
+            "weekly": 114.28571428571429,
+            "ads": 240,
+            "subscription": 0
+          },
+          "pullCost": 160,
+          "upgradeStepFee": 150,
+          "upgradeStepsWantedPerDay": 2,
+          "upgradeStepsAvailable": 40,
+          "shopSpendPerDay": 0
+        },
+        "incomePerDay": 594,
+        "results": [
+          {
+            "archetype": "all_in_wishes",
+            "pulls": 110,
+            "upgradeSteps": 1,
+            "blockedDays": 29,
+            "longestBlockedRun": 23,
+            "endBalance": 79,
+            "totalIncome": 17829
+          },
+          {
+            "archetype": "balanced",
+            "pulls": 73,
+            "upgradeSteps": 40,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 149,
+            "totalIncome": 17829
+          },
+          {
+            "archetype": "never_wishes",
+            "pulls": 0,
+            "upgradeSteps": 40,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 11829,
+            "totalIncome": 17829
+          }
+        ],
+        "recoveryDays": 1,
+        "floorHolds": true,
+        "maxSafeStepFee": 297,
+        "stepFeeInPulls": 0.9375
+      },
+      "net_recovery_days_after_shop": 1
+    },
+    {
+      "id": "strict_floor_no_ads",
+      "assumption": "Proposed daily supply only; highest ascension fee; no winning, upgrade-task, stage, weekly, ad or paid income.",
+      "report": {
+        "model": {
+          "days": 30,
+          "startBalance": 0,
+          "income": {
+            "tasks": 80,
+            "weekly": 0,
+            "ads": 0,
+            "subscription": 0
+          },
+          "pullCost": 160,
+          "upgradeStepFee": 80,
+          "upgradeStepsWantedPerDay": 1,
+          "upgradeStepsAvailable": 22,
+          "shopSpendPerDay": 0
+        },
+        "incomePerDay": 80,
+        "results": [
+          {
+            "archetype": "all_in_wishes",
+            "pulls": 4,
+            "upgradeSteps": 22,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 0,
+            "totalIncome": 2400
+          },
+          {
+            "archetype": "balanced",
+            "pulls": 4,
+            "upgradeSteps": 22,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 0,
+            "totalIncome": 2400
+          },
+          {
+            "archetype": "never_wishes",
+            "pulls": 0,
+            "upgradeSteps": 22,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 640,
+            "totalIncome": 2400
+          }
+        ],
+        "recoveryDays": 1,
+        "floorHolds": true,
+        "maxSafeStepFee": 80,
+        "stepFeeInPulls": 0.5
+      },
+      "net_recovery_days_after_shop": 1
+    },
+    {
+      "id": "normal_no_ads",
+      "assumption": "Proposed 240 task tokens/day + six campaign wins × 4 repeat tokens folded into tasks (schema has no stage field); two characters with 22 steps each, equal mean fee proxy.",
+      "report": {
+        "model": {
+          "days": 30,
+          "startBalance": 0,
+          "income": {
+            "tasks": 264,
+            "weekly": 114.28571428571429,
+            "ads": 0,
+            "subscription": 0
+          },
+          "pullCost": 160,
+          "upgradeStepFee": 33.63636363636363,
+          "upgradeStepsWantedPerDay": 2,
+          "upgradeStepsAvailable": 44,
+          "shopSpendPerDay": 0
+        },
+        "incomePerDay": 378,
+        "results": [
+          {
+            "archetype": "all_in_wishes",
+            "pulls": 61,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 109,
+            "totalIncome": 11349
+          },
+          {
+            "archetype": "balanced",
+            "pulls": 61,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 109,
+            "totalIncome": 11349
+          },
+          {
+            "archetype": "never_wishes",
+            "pulls": 0,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 9869,
+            "totalIncome": 11349
+          }
+        ],
+        "recoveryDays": 1,
+        "floorHolds": true,
+        "maxSafeStepFee": 189,
+        "stepFeeInPulls": 0.2102272727272727
+      },
+      "net_recovery_days_after_shop": 1
+    },
+    {
+      "id": "normal_no_ads_max_fee",
+      "assumption": "Same normal workload; conservatively treat every step as maximum ascension cost, not actual fee curve.",
+      "report": {
+        "model": {
+          "days": 30,
+          "startBalance": 0,
+          "income": {
+            "tasks": 264,
+            "weekly": 114.28571428571429,
+            "ads": 0,
+            "subscription": 0
+          },
+          "pullCost": 160,
+          "upgradeStepFee": 80,
+          "upgradeStepsWantedPerDay": 2,
+          "upgradeStepsAvailable": 44,
+          "shopSpendPerDay": 0
+        },
+        "incomePerDay": 378,
+        "results": [
+          {
+            "archetype": "all_in_wishes",
+            "pulls": 60,
+            "upgradeSteps": 21,
+            "blockedDays": 9,
+            "longestBlockedRun": 1,
+            "endBalance": 69,
+            "totalIncome": 11349
+          },
+          {
+            "archetype": "balanced",
+            "pulls": 48,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 149,
+            "totalIncome": 11349
+          },
+          {
+            "archetype": "never_wishes",
+            "pulls": 0,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 7829,
+            "totalIncome": 11349
+          }
+        ],
+        "recoveryDays": 1,
+        "floorHolds": true,
+        "maxSafeStepFee": 189,
+        "stepFeeInPulls": 0.5
+      },
+      "net_recovery_days_after_shop": 1
+    },
+    {
+      "id": "normal_optional_ads",
+      "assumption": "Upper sustained optional ads: 5 per rolling 12h × 30, twice per day; not guaranteed daily ad inventory.",
+      "report": {
+        "model": {
+          "days": 30,
+          "startBalance": 0,
+          "income": {
+            "tasks": 264,
+            "weekly": 114.28571428571429,
+            "ads": 300,
+            "subscription": 0
+          },
+          "pullCost": 160,
+          "upgradeStepFee": 33.63636363636363,
+          "upgradeStepsWantedPerDay": 2,
+          "upgradeStepsAvailable": 44,
+          "shopSpendPerDay": 0
+        },
+        "incomePerDay": 678,
+        "results": [
+          {
+            "archetype": "all_in_wishes",
+            "pulls": 120,
+            "upgradeSteps": 34,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 5,
+            "totalIncome": 20349
+          },
+          {
+            "archetype": "balanced",
+            "pulls": 117,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 149,
+            "totalIncome": 20349
+          },
+          {
+            "archetype": "never_wishes",
+            "pulls": 0,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 18869,
+            "totalIncome": 20349
+          }
+        ],
+        "recoveryDays": 1,
+        "floorHolds": true,
+        "maxSafeStepFee": 339,
+        "stepFeeInPulls": 0.2102272727272727
+      },
+      "net_recovery_days_after_shop": 1
+    },
+    {
+      "id": "normal_subscription",
+      "assumption": "Subscription 1600 instant once + 187 × two halfday entitlements/day; no optional ads.",
+      "report": {
+        "model": {
+          "days": 30,
+          "startBalance": 1600,
+          "income": {
+            "tasks": 264,
+            "weekly": 114.28571428571429,
+            "ads": 0,
+            "subscription": 374
+          },
+          "pullCost": 160,
+          "upgradeStepFee": 33.63636363636363,
+          "upgradeStepsWantedPerDay": 2,
+          "upgradeStepsAvailable": 44,
+          "shopSpendPerDay": 0
+        },
+        "incomePerDay": 752,
+        "results": [
+          {
+            "archetype": "all_in_wishes",
+            "pulls": 143,
+            "upgradeSteps": 38,
+            "blockedDays": 9,
+            "longestBlockedRun": 1,
+            "endBalance": 10,
+            "totalIncome": 22569
+          },
+          {
+            "archetype": "balanced",
+            "pulls": 141,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 129,
+            "totalIncome": 22569
+          },
+          {
+            "archetype": "never_wishes",
+            "pulls": 0,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 22689,
+            "totalIncome": 22569
+          }
+        ],
+        "recoveryDays": 1,
+        "floorHolds": true,
+        "maxSafeStepFee": 376,
+        "stepFeeInPulls": 0.2102272727272727
+      },
+      "net_recovery_days_after_shop": 1
+    },
+    {
+      "id": "normal_shop_stress",
+      "assumption": "Optional shop stress; source function deducts shop first but recoveryDays does NOT subtract it.",
+      "report": {
+        "model": {
+          "days": 30,
+          "startBalance": 0,
+          "income": {
+            "tasks": 264,
+            "weekly": 114.28571428571429,
+            "ads": 0,
+            "subscription": 0
+          },
+          "pullCost": 160,
+          "upgradeStepFee": 33.63636363636363,
+          "upgradeStepsWantedPerDay": 2,
+          "upgradeStepsAvailable": 44,
+          "shopSpendPerDay": 40
+        },
+        "incomePerDay": 378,
+        "results": [
+          {
+            "archetype": "all_in_wishes",
+            "pulls": 60,
+            "upgradeSteps": 16,
+            "blockedDays": 14,
+            "longestBlockedRun": 1,
+            "endBalance": 10,
+            "totalIncome": 11349
+          },
+          {
+            "archetype": "balanced",
+            "pulls": 54,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 29,
+            "totalIncome": 11349
+          },
+          {
+            "archetype": "never_wishes",
+            "pulls": 0,
+            "upgradeSteps": 44,
+            "blockedDays": 0,
+            "longestBlockedRun": 0,
+            "endBalance": 8669,
+            "totalIncome": 11349
+          }
+        ],
+        "recoveryDays": 1,
+        "floorHolds": true,
+        "maxSafeStepFee": 189,
+        "stepFeeInPulls": 0.2102272727272727
+      },
+      "net_recovery_days_after_shop": 1
+    },
+    {
+      "id": "floor_spent_on_shop",
+      "assumption": "Deliberate counterexample: source floorHolds=true although shop leaves no funds. Shows gross-income recovery metric limitation.",
+      "report": {
+        "model": {
+          "days": 30,
+          "startBalance": 0,
+          "income": {
+            "tasks": 80,
+            "weekly": 0,
+            "ads": 0,
+            "subscription": 0
+          },
+          "pullCost": 160,
+          "upgradeStepFee": 80,
+          "upgradeStepsWantedPerDay": 1,
+          "upgradeStepsAvailable": 22,
+          "shopSpendPerDay": 80
+        },
+        "incomePerDay": 80,
+        "results": [
+          {
+            "archetype": "all_in_wishes",
+            "pulls": 0,
+            "upgradeSteps": 0,
+            "blockedDays": 30,
+            "longestBlockedRun": 30,
+            "endBalance": 0,
+            "totalIncome": 2400
+          },
+          {
+            "archetype": "balanced",
+            "pulls": 0,
+            "upgradeSteps": 0,
+            "blockedDays": 30,
+            "longestBlockedRun": 30,
+            "endBalance": 0,
+            "totalIncome": 2400
+          },
+          {
+            "archetype": "never_wishes",
+            "pulls": 0,
+            "upgradeSteps": 0,
+            "blockedDays": 30,
+            "longestBlockedRun": 30,
+            "endBalance": 0,
+            "totalIncome": 2400
+          }
+        ],
+        "recoveryDays": 1,
+        "floorHolds": true,
+        "maxSafeStepFee": 80,
+        "stepFeeInPulls": 0.5
+      },
+      "net_recovery_days_after_shop": null
+    }
+  ]
+}
