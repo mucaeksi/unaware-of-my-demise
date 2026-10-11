@@ -7,7 +7,7 @@ const GL = ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swifts
 export default defineConfig({
   testDir: '.',
   testMatch: 'remote.spec.ts',
-  timeout: 240_000,
+  timeout: 360_000,
   expect: { timeout: 30_000 },
   workers: 1,
   reporter: [['list']],

@@ -24,10 +24,11 @@ test('deployed client boots, renders WebGL and plays tutorial T-1 to victory', a
   await waitScene(page, 'Story');
   await skipStory(page, info, 'Battle');
   await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 60_000 }).toContain('fadyme');
+  await tap(page, info, REF_W - 150, 70); // x2
+  await tap(page, info, REF_W - 150, 70); // x3 (software GL on CI stretches animation time)
   await manualTurn(page, info, 0);
   await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 60_000 }).toContain('mahmut');
   await tap(page, info, REF_W - 365, 70); // Auto
-  await tap(page, info, REF_W - 150, 70); // x2
   await expect.poll(async () => (await probeBattle(page)).result, { timeout: 150_000 }).not.toBeNull();
   expect((await probeBattle(page)).result?.winner).toBe('player');
   const label = await serverVerification(page);

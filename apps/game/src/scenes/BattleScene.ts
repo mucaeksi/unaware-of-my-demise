@@ -192,7 +192,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private toggleSpeed(): void {
-    this.speed = this.speed === 1 ? 2 : 1;
+    this.speed = this.speed >= 3 ? 1 : this.speed + 1; // ×1 → ×2 → ×3 → ×1
     this.time.timeScale = this.speed;
     this.tweens.timeScale = this.speed;
     this.speedBtn.setLabel(`×${this.speed}`);

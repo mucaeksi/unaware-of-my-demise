@@ -30,15 +30,18 @@ test('plays tutorial T-1 from the title: story -> turn-based battle -> victory -
   await skipStory(page, info, 'Battle');
   await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 30_000 }).toContain('fadyme');
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-03-battle.png` });
+  // animation time depends on the rendering speed of the machine (software GL on CI is several times slower than a
+  // phone GPU), so play at the fastest speed the game offers, exactly as an impatient player would
+  await tap(page, info, REF_W - 150, 70); // x2
+  await tap(page, info, REF_W - 150, 70); // x3
 
   // two manual turns through the real UI (select, then confirm target) ...
   await manualTurn(page, info, 0);
   await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 40_000 }).toContain('mahmut');
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-04-after-first-hit.png` });
   await manualTurn(page, info, 0);
-  // ... then hand over to Auto Battle at x2 speed
+  // ... then hand over to Auto Battle (speed is already x3)
   await tap(page, info, REF_W - 365, 70);
-  await tap(page, info, REF_W - 150, 70);
   await expect.poll(async () => (await probeBattle(page)).result, { timeout: 120_000 }).not.toBeNull();
   const result = (await probeBattle(page)).result;
   expect(result?.winner).toBe('player');
@@ -103,8 +106,9 @@ test('live data patch: publish rel_0002 while the unchanged client runs -> new c
     return s.battle.combatants.filter((c) => c.id.startsWith('enemy')).map((c) => c.def.unit_id);
   });
   expect(enemy).toEqual(['hollow_pilgrim']); // a unit that does not exist in the installed app build
-  await tap(page, info, REF_W - 365, 70); // Auto
   await tap(page, info, REF_W - 150, 70); // x2
+  await tap(page, info, REF_W - 150, 70); // x3
+  await tap(page, info, REF_W - 365, 70); // Auto
   await expect.poll(async () => (await probeBattle(page)).result, { timeout: 120_000 }).not.toBeNull();
   const label = await serverVerification(page);
   expect(label).toContain('✓ replay matches');
