@@ -1,0 +1,1594 @@
+{
+  "vector_format": "uomd.combat-conformance.v1",
+  "cases": [
+    {
+      "id": "burn_decrement_then_tick",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "Source ATK 20 snapshot; no hit Focus.",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "burn",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": null,
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "owner_turn_start",
+            "actor": "e"
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 98,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "burn",
+                    "turns_left": 1,
+                    "source_id": "p",
+                    "seq": 1
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        },
+        {
+          "action": {
+            "kind": "owner_turn_start",
+            "actor": "e"
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 98,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "venom_decrement_then_tick",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "Source ATK 20 snapshot; no hit Focus.",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "venom",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": null,
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "owner_turn_start",
+            "actor": "e"
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 98,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "venom",
+                    "turns_left": 1,
+                    "source_id": "p",
+                    "seq": 1
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        },
+        {
+          "action": {
+            "kind": "owner_turn_start",
+            "actor": "e"
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 98,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "soaked_tide",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "Packet fixture isolates Soaked \u00d71.1 from element chart.",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "soaked",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": null,
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "outgoing_attack",
+            "source": "p",
+            "target": "e",
+            "action_type": "basic",
+            "damage_type": "physical",
+            "base_damage": 20,
+            "grant_action_focus": false,
+            "element": "Tide",
+            "element_factor": 1
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 78,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 5,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "soaked",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 1
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "soaked_reaction_consumes",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "C24 proposal 20\u00d71.15.",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "soaked",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": null,
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "outgoing_attack",
+            "source": "p",
+            "target": "e",
+            "action_type": "basic",
+            "damage_type": "physical",
+            "base_damage": 20,
+            "grant_action_focus": false,
+            "element": "Gale",
+            "element_factor": 1
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 77,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 5,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "gust_refresh_no_extra_delay",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "C25 proposal; icon consumed after delayed action, not at normal duration decrement.",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": null,
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "execute_ops",
+            "actor": "p",
+            "effect_ops": [
+              {
+                "op": "apply_status",
+                "target_selector_id": "self",
+                "status_id": "gust",
+                "duration_turns": 1
+              },
+              {
+                "op": "apply_status",
+                "target_selector_id": "self",
+                "status_id": "gust",
+                "duration_turns": 1
+              }
+            ]
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 1500,
+                "statuses": [
+                  {
+                    "status_id": "gust",
+                    "turns_left": 1,
+                    "source_id": "p",
+                    "seq": 1
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "dawnward_res",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "Effective RES = half_up(10\u00d71.1)=11; adapter asserts effective_stats.res=11.",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 10,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "dawnward",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": null,
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "stat_snapshot",
+            "actor": "p"
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 10,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "dawnward",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 1
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          },
+          "assertions": {
+            "effective_stats": {
+              "p": {
+                "res": 11
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "trail_mark_no_intrinsic_multiplier",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "trail_mark",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": null,
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "outgoing_attack",
+            "source": "p",
+            "target": "e",
+            "action_type": "basic",
+            "damage_type": "physical",
+            "base_damage": 20,
+            "grant_action_focus": false
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 80,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 5,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "trail_mark",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 1
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "duel_mark_no_intrinsic_multiplier",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "duel_mark",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": null,
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "outgoing_attack",
+            "source": "p",
+            "target": "e",
+            "action_type": "basic",
+            "damage_type": "physical",
+            "base_damage": 20,
+            "grant_action_focus": false
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 80,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 5,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "duel_mark",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 1
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "soul_link_two_recipients",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "C29 proposal: 20\u00d7.25=5 shared; no recursive Focus.",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "soul_link",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "a",
+            "side": "player",
+            "slot": 1,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "soul_link",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 2
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": null,
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "incoming_attack",
+            "source": "e",
+            "target": "p",
+            "action_type": "basic",
+            "damage_type": "physical",
+            "base_damage": 20,
+            "grant_action_focus": false
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 85,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 5,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "soul_link",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 1
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "a",
+                "side": "player",
+                "slot": 1,
+                "row": "front",
+                "hp": 95,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "soul_link",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 2
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "dry_ward_prevents_only_soaked",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "soaked_immunity",
+                "turns_left": 1,
+                "source_id": "p",
+                "seq": 1
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": null,
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "execute_ops",
+            "actor": "p",
+            "effect_ops": [
+              {
+                "op": "apply_status",
+                "target_selector_id": "self",
+                "status_id": "soaked",
+                "duration_turns": 2
+              }
+            ]
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "soaked_immunity",
+                    "turns_left": 1,
+                    "source_id": "p",
+                    "seq": 1
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        },
+        {
+          "action": {
+            "kind": "owner_turn_start",
+            "actor": "p"
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": null,
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

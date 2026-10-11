@@ -1,0 +1,373 @@
+{
+  "vector_format": "uomd.combat-conformance.v1",
+  "operation": "boss_damage_taken_modifier",
+  "spec": "../OPS_SPEC.md",
+  "cases": [
+    {
+      "id": "upsert_not_stack",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {
+            "left": {
+              "hp": 4,
+              "alive": true
+            },
+            "right": {
+              "hp": 4,
+              "alive": true
+            }
+          },
+          "boss_id": "e",
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "execute_ops",
+            "actor": "e",
+            "effect_ops": [
+              {
+                "op": "boss_damage_taken_modifier",
+                "target_selector_id": "boss",
+                "multiplier": 0.85,
+                "modifier_id": "ward",
+                "while_any_objective_alive": [
+                  "left",
+                  "right"
+                ]
+              },
+              {
+                "op": "boss_damage_taken_modifier",
+                "target_selector_id": "boss",
+                "multiplier": 0.85,
+                "modifier_id": "ward",
+                "while_any_objective_alive": [
+                  "left",
+                  "right"
+                ]
+              }
+            ]
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {
+                "left": {
+                  "hp": 4,
+                  "alive": true
+                },
+                "right": {
+                  "hp": 4,
+                  "alive": true
+                }
+              },
+              "boss_id": "e",
+              "modifiers": {
+                "ward": 0.85
+              },
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "last_objective_removes_ward",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {
+            "left": {
+              "hp": 4,
+              "alive": true
+            },
+            "right": {
+              "hp": 4,
+              "alive": true
+            }
+          },
+          "boss_id": "e",
+          "modifiers": {
+            "ward": 0.85
+          },
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "objective_destroyed",
+            "objective_id": "left"
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {
+                "left": {
+                  "hp": 0,
+                  "alive": false
+                },
+                "right": {
+                  "hp": 4,
+                  "alive": true
+                }
+              },
+              "boss_id": "e",
+              "modifiers": {
+                "ward": 0.85
+              },
+              "telegraph": null
+            }
+          }
+        },
+        {
+          "action": {
+            "kind": "objective_destroyed",
+            "objective_id": "right"
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {
+                "left": {
+                  "hp": 0,
+                  "alive": false
+                },
+                "right": {
+                  "hp": 0,
+                  "alive": false
+                }
+              },
+              "boss_id": "e",
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3948 @@
+{
+  "source_revision": "5c83e3d1",
+  "source_directory": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/",
+  "operations": {
+    "damage": [
+      {
+        "user": "mahmut",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "mahmut",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "event_source",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 0.6,
+          "no_focus_gain": true
+        }
+      },
+      {
+        "user": "mahmut",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 2.2
+        }
+      },
+      {
+        "user": "fadyme",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "fadyme",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        }
+      },
+      {
+        "user": "fadyme",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.8
+        }
+      },
+      {
+        "user": "kera_voss",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "kera_voss",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.5,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "kera_voss",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "random_other_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 0.4,
+          "hit_count": 1,
+          "can_trigger_passives": false
+        }
+      },
+      {
+        "user": "kera_voss",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.9,
+          "modifiers": [
+            {
+              "condition": {
+                "predicate": "count_enemies_with_status",
+                "value": "burn"
+              },
+              "add_multiplier_per_count": 0.1,
+              "maximum_count": 3
+            }
+          ]
+        }
+      },
+      {
+        "user": "brin_alder",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "brin_alder",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.7
+        }
+      },
+      {
+        "user": "nixie_vale",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "nixie_vale",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.7
+        }
+      },
+      {
+        "user": "nixie_vale",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "enemy_with_highest_atk",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 3.0
+        }
+      },
+      {
+        "user": "sister_aveline",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        }
+      },
+      {
+        "user": "sable_wren",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.1,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "sable_wren",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.8,
+          "modifiers": [
+            {
+              "condition": {
+                "predicate": "target_has_any_status_tag",
+                "value": "mark_or_dread"
+              },
+              "multiplier": 1.3
+            }
+          ]
+        }
+      },
+      {
+        "user": "sable_wren",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 3.3
+        }
+      },
+      {
+        "user": "sable_wren",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "random_other_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.0,
+          "when": {
+            "predicate": "last_primary_target_defeated"
+          },
+          "hit_count": 1,
+          "can_trigger_passives": false
+        }
+      },
+      {
+        "user": "tilda_fen",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        }
+      },
+      {
+        "user": "rikka_ember",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.05,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "rikka_ember",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.8,
+          "modifiers": [
+            {
+              "condition": {
+                "predicate": "target_has_status",
+                "value": "burn"
+              },
+              "multiplier": 1.25
+            }
+          ]
+        }
+      },
+      {
+        "user": "rikka_ember",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 2.1,
+          "scale_stat": "atk",
+          "target_selector_id": "all_enemies"
+        }
+      },
+      {
+        "user": "mirel_quill",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "odelia_pike",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "odelia_pike",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        }
+      },
+      {
+        "user": "odelia_pike",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.75
+        }
+      },
+      {
+        "user": "pippa_bell",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        }
+      },
+      {
+        "user": "nara_vell",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "clem_marr",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 0.95,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "clem_marr",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.4
+        }
+      },
+      {
+        "user": "clem_marr",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.45
+        }
+      },
+      {
+        "user": "vespera_wisp",
+        "data": {
+          "op": "damage",
+          "damage_type": "magic",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "vespera_wisp",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.3
+        }
+      },
+      {
+        "user": "vespera_wisp",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 2.2,
+          "modifiers": [
+            {
+              "condition": {
+                "predicate": "target_has_status",
+                "value": "dread"
+              },
+              "multiplier": 1.2
+            }
+          ]
+        }
+      },
+      {
+        "user": "hana_birch",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "hana_birch",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        }
+      },
+      {
+        "user": "hana_birch",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 2.5,
+          "modifiers": [
+            {
+              "condition": {
+                "predicate": "target_has_acted_this_battle"
+              },
+              "multiplier": 1.4
+            }
+          ]
+        }
+      },
+      {
+        "user": "thistle_roe",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 0.9,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "iona_mist",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        }
+      },
+      {
+        "user": "jori_flint",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 0.95,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "jori_flint",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        }
+      },
+      {
+        "user": "marek_vane",
+        "data": {
+          "op": "damage",
+          "damage_type": "elemental",
+          "multiplier": 1.0,
+          "scale_stat": "atk",
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "marek_vane",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.4
+        }
+      },
+      {
+        "user": "ash_wolf",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "ash_wolf",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_rear_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.35
+        }
+      },
+      {
+        "user": "bellbound_dead",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "bellbound_dead",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.15
+        }
+      },
+      {
+        "user": "bridge_revenant",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "bridge_revenant",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_front_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.25
+        }
+      },
+      {
+        "user": "chain_cultist",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "choir_knight",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "choir_knight",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.35
+        }
+      },
+      {
+        "user": "choir_knight",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "event_source",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 0.65,
+          "no_focus_gain": true,
+          "can_trigger_passives": false
+        }
+      },
+      {
+        "user": "corrupted_crown_guard",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "corrupted_crown_guard",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        }
+      },
+      {
+        "user": "corrupted_mercenary",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "corrupted_mercenary",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.55
+        }
+      },
+      {
+        "user": "crownless_knight",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "crownless_knight",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.45,
+          "shield_damage_multiplier": 1.5
+        }
+      },
+      {
+        "user": "eclipse_sentinel",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "estate_wraith",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "estate_wraith",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 0.9
+        }
+      },
+      {
+        "user": "glass_viper",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "glass_viper",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_rear_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        }
+      },
+      {
+        "user": "hollow_cleric",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "hollow_cleric",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_enemy",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.1,
+          "when": {
+            "predicate": "no_enemy_ally_below_pct",
+            "value": 70
+          }
+        }
+      },
+      {
+        "user": "hollow_pilgrim",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "hollow_pilgrim",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.5
+        }
+      },
+      {
+        "user": "inkbound_dead",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "inkbound_dead",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_enemy",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "lost_vow_knight",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "lost_vow_knight",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_front_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.45,
+          "shield_damage_multiplier": 1.5
+        }
+      },
+      {
+        "user": "noble_retainer",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "orchard_ghoul",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "orchard_ghoul",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        }
+      },
+      {
+        "user": "red_vial_alchemist",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "red_vial_alchemist",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "rear_row_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        }
+      },
+      {
+        "user": "red_vial_scout",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "red_vial_scout",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "lowest_hp_rear_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.25
+        }
+      },
+      {
+        "user": "royal_hollow",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "royal_hollow",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        }
+      },
+      {
+        "user": "boss_ash_maw",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "boss_ash_maw",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.4
+        }
+      },
+      {
+        "user": "boss_bell_widow",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "boss_bell_widow",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.35
+        }
+      },
+      {
+        "user": "boss_captain_rusk",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "boss_captain_rusk",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "duel_marked_enemy",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.8
+        }
+      },
+      {
+        "user": "boss_red_vial_matron",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "boss_red_vial_matron",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "elemental",
+          "scale_stat": "atk",
+          "multiplier": 1.2,
+          "hit_count": 2
+        }
+      },
+      {
+        "user": "boss_marshal_oren",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "boss_marshal_oren",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.65,
+          "multiplier_if_objective_alive": {
+            "objective_id": "signal_standard",
+            "multiplier": 1.15
+          }
+        }
+      },
+      {
+        "user": "boss_ashen_lord_wraith",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "boss_ashen_lord_wraith",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.2
+        }
+      },
+      {
+        "user": "boss_ashen_lord_wraith",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "rear_row_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.5
+        }
+      },
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "single_enemy_default",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "front_row_enemies",
+          "damage_type": "physical",
+          "scale_stat": "atk",
+          "multiplier": 1.55,
+          "multiplier_if_all_objectives_alive": {
+            "multiplier": 1.15
+          }
+        }
+      },
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "damage",
+          "target_selector_id": "all_enemies",
+          "damage_type": "magic",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        }
+      }
+    ],
+    "apply_status": [
+      {
+        "user": "mahmut",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "self",
+          "status_id": "stoneguard",
+          "duration_turns": 1,
+          "when": {
+            "predicate": "owner_in_row",
+            "value": "front"
+          }
+        }
+      },
+      {
+        "user": "mahmut",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "taunt",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "fadyme",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "dread",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "fadyme",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "dread",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "kera_voss",
+        "data": {
+          "op": "apply_status",
+          "status_id": "burn",
+          "duration_turns": 2,
+          "target_selector_id": "single_enemy"
+        }
+      },
+      {
+        "user": "brin_alder",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "taunt",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "nixie_vale",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "enemy_with_lowest_def",
+          "status_id": "trail_mark",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "sister_aveline",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "all_allies",
+          "status_id": "dawnward",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "tilda_fen",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "event_target",
+          "status_id": "soaked_immunity",
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "rikka_ember",
+        "data": {
+          "op": "apply_status",
+          "status_id": "burn",
+          "duration_turns": 2,
+          "target_selector_id": "all_enemies"
+        }
+      },
+      {
+        "user": "odelia_pike",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "soaked",
+          "duration_turns": 2,
+          "chance": 0.2
+        }
+      },
+      {
+        "user": "odelia_pike",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "fracture",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "odelia_pike",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "soaked",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "nara_vell",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "self",
+          "status_id": "taunt",
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "vespera_wisp",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "lowest_hp_enemy",
+          "status_id": "dread",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "hana_birch",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "fracture",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "jori_flint",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "burn",
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "jori_flint",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "taunt",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "ash_wolf",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "trail_mark",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "bellbound_dead",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "dread",
+          "duration_turns": 1,
+          "chance": 0.25
+        }
+      },
+      {
+        "user": "bridge_revenant",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "fracture",
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "chain_cultist",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "all_enemy_allies",
+          "status_id": "soul_link",
+          "duration_turns": 2,
+          "shared_damage_fraction": 0.25
+        }
+      },
+      {
+        "user": "glass_viper",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "venom",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "hollow_cleric",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "dread",
+          "duration_turns": 2,
+          "when": {
+            "predicate": "no_enemy_ally_below_pct",
+            "value": 70
+          }
+        }
+      },
+      {
+        "user": "hollow_pilgrim",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "self",
+          "status_id": "stoneguard",
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "inkbound_dead",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "trail_mark",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "red_vial_alchemist",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "venom",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "red_vial_scout",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "venom",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "red_vial_scout",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "previous_op_targets",
+          "status_id": "trail_mark",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "boss_ash_maw",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "burn",
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "boss_bell_widow",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "dread",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "boss_captain_rusk",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "front_row_enemies",
+          "status_id": "duel_mark",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "boss_red_vial_matron",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "fracture",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "boss_ashen_lord_wraith",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "rear_row_enemies",
+          "status_id": "dread",
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "lowest_hp_enemy",
+          "status_id": "decay",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "boss",
+          "status_id": "break",
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "boss",
+          "status_id": "fracture",
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "apply_status",
+          "target_selector_id": "lowest_hp_enemy",
+          "status_id": "decay",
+          "duration_turns": 2
+        }
+      }
+    ],
+    "grant_shield": [
+      {
+        "user": "mahmut",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "self_and_lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.8,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "mahmut",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "all_allies",
+          "scale_stat": "def",
+          "multiplier": 1.2,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "brin_alder",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "self",
+          "scale_stat": "def",
+          "multiplier": 0.05,
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "brin_alder",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "all_allies",
+          "scale_stat": "def",
+          "multiplier": 1.0,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "sister_aveline",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "event_target",
+          "scale_stat": "atk",
+          "multiplier": 0.8,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "thistle_roe",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 0.05,
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "jori_flint",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "def",
+          "multiplier": 1.0,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "corrupted_crown_guard",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "lowest_hp_enemy_ally",
+          "scale_stat": "def",
+          "multiplier": 0.6,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "eclipse_sentinel",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "all_enemy_allies",
+          "scale_stat": "def",
+          "multiplier": 0.35,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "boss_marshal_oren",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "self_and_enemy_guards",
+          "scale_stat": "def",
+          "multiplier": 0.45,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "boss_marshal_oren",
+        "data": {
+          "op": "grant_shield",
+          "target_selector_id": "self_and_enemy_guards",
+          "scale_stat": "def",
+          "multiplier": 0.6,
+          "duration_turns": 2,
+          "shield_source_id": "formation_guard"
+        }
+      }
+    ],
+    "grant_redirect": [
+      {
+        "user": "mahmut",
+        "data": {
+          "op": "grant_redirect",
+          "target_selector_id": "self",
+          "protected_ally_selector_id": "lowest_hp_ally",
+          "redirected_fraction": 0.5,
+          "duration_turns": 2,
+          "eligible_action_types": [
+            "basic",
+            "active",
+            "ultimate"
+          ]
+        }
+      }
+    ],
+    "gain_focus": [
+      {
+        "user": "mahmut",
+        "data": {
+          "op": "gain_focus",
+          "target_selector_id": "self",
+          "amount": 5
+        }
+      },
+      {
+        "user": "fadyme",
+        "data": {
+          "op": "gain_focus",
+          "target_selector_id": "self",
+          "amount": 5,
+          "when": {
+            "predicate": "last_target_has_status",
+            "value": "dread"
+          }
+        }
+      },
+      {
+        "user": "nixie_vale",
+        "data": {
+          "op": "gain_focus",
+          "target_selector_id": "self",
+          "amount": 20,
+          "when": {
+            "predicate": "last_target_defeated"
+          }
+        }
+      },
+      {
+        "user": "rikka_ember",
+        "data": {
+          "op": "gain_focus",
+          "target_selector_id": "self",
+          "amount": 5
+        }
+      },
+      {
+        "user": "mirel_quill",
+        "data": {
+          "op": "gain_focus",
+          "target_selector_id": "self",
+          "amount": 5
+        }
+      },
+      {
+        "user": "pippa_bell",
+        "data": {
+          "op": "gain_focus",
+          "target_selector_id": "ally_with_lowest_focus",
+          "amount": 5
+        }
+      },
+      {
+        "user": "pippa_bell",
+        "data": {
+          "op": "gain_focus",
+          "target_selector_id": "self",
+          "amount": 10
+        }
+      },
+      {
+        "user": "pippa_bell",
+        "data": {
+          "op": "gain_focus",
+          "target_selector_id": "all_allies",
+          "amount": 20
+        }
+      },
+      {
+        "user": "vespera_wisp",
+        "data": {
+          "op": "gain_focus",
+          "target_selector_id": "self",
+          "amount": 10
+        }
+      }
+    ],
+    "heal": [
+      {
+        "user": "fadyme",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.0
+        }
+      },
+      {
+        "user": "sister_aveline",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 0.2
+        }
+      },
+      {
+        "user": "sister_aveline",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 1.1
+        }
+      },
+      {
+        "user": "sister_aveline",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 2.2
+        }
+      },
+      {
+        "user": "tilda_fen",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 0.15
+        }
+      },
+      {
+        "user": "tilda_fen",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.7
+        }
+      },
+      {
+        "user": "tilda_fen",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 1.8
+        }
+      },
+      {
+        "user": "thistle_roe",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.5
+        }
+      },
+      {
+        "user": "thistle_roe",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 1.4
+        }
+      },
+      {
+        "user": "iona_mist",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 0.15
+        }
+      },
+      {
+        "user": "iona_mist",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "selected_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.8
+        }
+      },
+      {
+        "user": "iona_mist",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "event_target",
+          "scale_stat": "atk",
+          "multiplier": 0.5
+        }
+      },
+      {
+        "user": "iona_mist",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 1.6
+        }
+      },
+      {
+        "user": "hollow_cleric",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "most_injured_enemy_ally",
+          "scale_stat": "atk",
+          "multiplier": 0.9,
+          "when": {
+            "predicate": "enemy_ally_hp_below_pct",
+            "value": 70
+          }
+        }
+      },
+      {
+        "user": "orchard_ghoul",
+        "data": {
+          "op": "heal",
+          "target_selector_id": "self",
+          "scale_stat": "atk",
+          "multiplier": 0.2,
+          "when": {
+            "predicate": "damage_dealt_at_least_pct_of_target_hp",
+            "value": 10
+          }
+        }
+      }
+    ],
+    "modify_stat": [
+      {
+        "user": "fadyme",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "veil_res",
+          "mode": "add_pct",
+          "amount": 0.08,
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "brin_alder",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "nixie_vale",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "previous_op_targets",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": -0.15,
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "tilda_fen",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "last_heal_target",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "mirel_quill",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "selected_ally",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.18,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "mirel_quill",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "selected_ally",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "mirel_quill",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.2,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "mirel_quill",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "odelia_pike",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "previous_op_targets",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": -0.1,
+          "duration_turns": 1
+        }
+      },
+      {
+        "user": "pippa_bell",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.12,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "pippa_bell",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "nara_vell",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.2,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "clem_marr",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "previous_op_targets",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": -0.12,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "thistle_roe",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.08,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "marek_vane",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "marek_vane",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "res",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "corrupted_mercenary",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.25,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "orchard_ghoul",
+        "data": {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        }
+      }
+    ],
+    "remove_status": [
+      {
+        "user": "fadyme",
+        "data": {
+          "op": "remove_status",
+          "target_selector_id": "all_allies",
+          "category": "debuff",
+          "count": 1,
+          "selection": "oldest_applied"
+        }
+      },
+      {
+        "user": "sister_aveline",
+        "data": {
+          "op": "remove_status",
+          "target_selector_id": "all_allies",
+          "category": "debuff",
+          "count": 1,
+          "selection": "oldest_applied"
+        }
+      },
+      {
+        "user": "clem_marr",
+        "data": {
+          "op": "remove_status",
+          "target_selector_id": "previous_op_targets",
+          "category": "buff",
+          "count": 1,
+          "selection": "random_applied_buff"
+        }
+      },
+      {
+        "user": "thistle_roe",
+        "data": {
+          "op": "remove_status",
+          "target_selector_id": "last_heal_target",
+          "category": "debuff",
+          "count": 1,
+          "selection": "oldest_applied"
+        }
+      },
+      {
+        "user": "iona_mist",
+        "data": {
+          "op": "remove_status",
+          "target_selector_id": "last_heal_target",
+          "category": "debuff",
+          "count": 1,
+          "selection": "oldest_applied"
+        }
+      }
+    ],
+    "heal_per_removed_status": [
+      {
+        "user": "fadyme",
+        "data": {
+          "op": "heal_per_removed_status",
+          "target_selector_id": "lowest_hp_allies",
+          "scale_stat": "atk",
+          "multiplier": 0.4,
+          "maximum_targets": 3,
+          "maximum_total_stacks": 3,
+          "requires_successful_cleanse": true
+        }
+      }
+    ],
+    "modify_incoming_damage": [
+      {
+        "user": "sable_wren",
+        "data": {
+          "op": "modify_incoming_damage",
+          "target_selector_id": "self",
+          "multiplier": 0.5
+        }
+      },
+      {
+        "user": "nara_vell",
+        "data": {
+          "op": "modify_incoming_damage",
+          "target_selector_id": "event_target",
+          "multiplier": 0.9
+        }
+      }
+    ],
+    "apply_regeneration": [
+      {
+        "user": "tilda_fen",
+        "data": {
+          "op": "apply_regeneration",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 0.35,
+          "ticks": 2,
+          "tick_event": "owner_turn_start",
+          "duration_turns": 2
+        }
+      }
+    ],
+    "reduce_status_durations": [
+      {
+        "user": "mirel_quill",
+        "data": {
+          "op": "reduce_status_durations",
+          "target_selector_id": "all_allies",
+          "category": "debuff",
+          "amount_turns": 1,
+          "minimum_remaining_turns": 0
+        }
+      }
+    ],
+    "reduce_cooldowns": [
+      {
+        "user": "pippa_bell",
+        "data": {
+          "op": "reduce_cooldowns",
+          "target_selector_id": "all_allies",
+          "amount_turns": 1,
+          "minimum_remaining_turns": 1
+        }
+      }
+    ],
+    "grant_damage_reduction": [
+      {
+        "user": "nara_vell",
+        "data": {
+          "op": "grant_damage_reduction",
+          "target_selector_id": "selected_ally",
+          "damage_taken_multiplier": 0.75,
+          "duration_turns": 2
+        }
+      }
+    ],
+    "grant_opening_guard": [
+      {
+        "user": "nara_vell",
+        "data": {
+          "op": "grant_opening_guard",
+          "target_selector_id": "self",
+          "duration_rounds": 2,
+          "target_override": "first_single_target_attack_per_enemy",
+          "damage_taken_multiplier": 0.7
+        }
+      }
+    ],
+    "modify_outgoing_damage": [
+      {
+        "user": "clem_marr",
+        "data": {
+          "op": "modify_outgoing_damage",
+          "target_selector_id": "self",
+          "multiplier": 1.08
+        }
+      }
+    ],
+    "arm_counter": [
+      {
+        "user": "hana_birch",
+        "data": {
+          "op": "arm_counter",
+          "target_selector_id": "previous_op_targets",
+          "event": "target_action_before_owner_next_turn",
+          "scale_stat": "atk",
+          "multiplier": 0.8,
+          "damage_type": "physical",
+          "consume_on_trigger": true
+        }
+      }
+    ],
+    "arm_next_attack_bonus": [
+      {
+        "user": "hana_birch",
+        "data": {
+          "op": "arm_next_attack_bonus",
+          "target_selector_id": "self",
+          "damage_multiplier": 1.2,
+          "consume_on_attack": true
+        }
+      }
+    ],
+    "grant_first_hit_guard": [
+      {
+        "user": "iona_mist",
+        "data": {
+          "op": "grant_first_hit_guard",
+          "target_selector_id": "all_allies",
+          "damage_taken_multiplier": 0.8,
+          "duration_turns": 2,
+          "hits_per_target": 1
+        }
+      }
+    ],
+    "delay_next_action": [
+      {
+        "user": "marek_vane",
+        "data": {
+          "op": "delay_next_action",
+          "target_selector_id": "previous_op_targets",
+          "gauge_fraction": 0.15
+        }
+      },
+      {
+        "user": "marek_vane",
+        "data": {
+          "op": "delay_next_action",
+          "target_selector_id": "all_enemies",
+          "gauge_fraction": 0.05
+        }
+      }
+    ],
+    "pay_hp_cost": [
+      {
+        "user": "corrupted_mercenary",
+        "data": {
+          "op": "pay_hp_cost",
+          "target_selector_id": "self",
+          "max_hp_fraction": 0.08,
+          "cannot_reduce_below": 1
+        }
+      }
+    ],
+    "copy_buff": [
+      {
+        "user": "estate_wraith",
+        "data": {
+          "op": "copy_buff",
+          "target_selector_id": "self",
+          "source_selector_id": "enemy_with_most_buffs",
+          "category": "buff",
+          "maximum_count": 1,
+          "duration_turns": 2
+        }
+      },
+      {
+        "user": "boss_ashen_lord_wraith",
+        "data": {
+          "op": "copy_buff",
+          "target_selector_id": "self",
+          "source_selector_id": "enemy_with_most_buffs",
+          "category": "shield",
+          "maximum_count": 1,
+          "duration_turns": 2
+        }
+      }
+    ],
+    "remove_shield": [
+      {
+        "user": "lost_vow_knight",
+        "data": {
+          "op": "remove_shield",
+          "target_selector_id": "previous_op_targets",
+          "amount_fraction": 0.2
+        }
+      },
+      {
+        "user": "boss_marshal_oren",
+        "data": {
+          "op": "remove_shield",
+          "target_selector_id": "boss_and_enemy_guards",
+          "shield_source_id": "formation_guard"
+        }
+      }
+    ],
+    "grant_intercept": [
+      {
+        "user": "noble_retainer",
+        "data": {
+          "op": "grant_intercept",
+          "target_selector_id": "self",
+          "protected_ally_selector_id": "lowest_hp_enemy_ally",
+          "redirected_fraction": 1.0,
+          "duration_turns": 2,
+          "maximum_intercepts": 1
+        }
+      }
+    ],
+    "block_attack": [
+      {
+        "user": "royal_hollow",
+        "data": {
+          "op": "block_attack",
+          "target_selector_id": "self",
+          "maximum_hits": 1
+        }
+      }
+    ],
+    "cancel_boss_telegraph": [
+      {
+        "user": "boss_ash_maw",
+        "data": {
+          "op": "cancel_boss_telegraph",
+          "target_selector_id": "boss",
+          "action_id": "boss_ash_maw_ash_howl"
+        }
+      },
+      {
+        "user": "boss_captain_rusk",
+        "data": {
+          "op": "cancel_boss_telegraph",
+          "target_selector_id": "boss",
+          "action_id": "boss_captain_rusk_banner_call"
+        }
+      }
+    ],
+    "remove_boss_modifier": [
+      {
+        "user": "boss_bell_widow",
+        "data": {
+          "op": "remove_boss_modifier",
+          "target_selector_id": "boss",
+          "modifier_id": "wax_seal_ward"
+        }
+      }
+    ],
+    "boss_damage_taken_modifier": [
+      {
+        "user": "boss_bell_widow",
+        "data": {
+          "op": "boss_damage_taken_modifier",
+          "target_selector_id": "self",
+          "multiplier": 0.8,
+          "modifier_id": "wax_seal_ward",
+          "until_objective_destroyed": "wax_seal"
+        }
+      },
+      {
+        "user": "boss_red_vial_matron",
+        "data": {
+          "op": "boss_damage_taken_modifier",
+          "target_selector_id": "self",
+          "multiplier": 0.85,
+          "modifier_id": "glass_racks_ward",
+          "while_any_objective_alive": [
+            "flask_rack_left",
+            "flask_rack_right"
+          ]
+        }
+      },
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "boss_damage_taken_modifier",
+          "target_selector_id": "self",
+          "multiplier": 0.65,
+          "modifier_id": "aether_ward",
+          "while_any_objective_alive": [
+            "altar_pylon_left",
+            "altar_pylon_center",
+            "altar_pylon_right"
+          ]
+        }
+      }
+    ],
+    "summon_enemies": [
+      {
+        "user": "boss_captain_rusk",
+        "data": {
+          "op": "summon_enemies",
+          "target_selector_id": "self",
+          "enemy_id": "corrupted_mercenary",
+          "count": 2,
+          "only_if_objective_alive": "signal_banner"
+        }
+      }
+    ],
+    "remove_copied_statuses": [
+      {
+        "user": "boss_ashen_lord_wraith",
+        "data": {
+          "op": "remove_copied_statuses",
+          "target_selector_id": "boss",
+          "category": "shield"
+        }
+      }
+    ],
+    "clear_status_if_all_objectives_destroyed": [
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "clear_status_if_all_objectives_destroyed",
+          "target_selector_id": "boss",
+          "objective_ids": [
+            "altar_pylon_left",
+            "altar_pylon_center",
+            "altar_pylon_right"
+          ],
+          "status_id": "decay"
+        }
+      },
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "clear_status_if_all_objectives_destroyed",
+          "target_selector_id": "boss",
+          "objective_ids": [
+            "altar_pylon_left",
+            "altar_pylon_center",
+            "altar_pylon_right"
+          ],
+          "status_id": "decay"
+        }
+      },
+      {
+        "user": "boss_eclipse_construct",
+        "data": {
+          "op": "clear_status_if_all_objectives_destroyed",
+          "target_selector_id": "boss",
+          "objective_ids": [
+            "altar_pylon_left",
+            "altar_pylon_center",
+            "altar_pylon_right"
+          ],
+          "status_id": "decay"
+        }
+      }
+    ]
+  },
+  "selectors": {
+    "single_enemy": [
+      "brin_alder",
+      "clem_marr",
+      "fadyme",
+      "hana_birch",
+      "iona_mist",
+      "jori_flint",
+      "kera_voss",
+      "mahmut",
+      "marek_vane",
+      "mirel_quill",
+      "nara_vell",
+      "nixie_vale",
+      "odelia_pike",
+      "pippa_bell",
+      "rikka_ember",
+      "sable_wren",
+      "sister_aveline",
+      "thistle_roe",
+      "tilda_fen",
+      "vespera_wisp"
+    ],
+    "self": [
+      "boss_ashen_lord_wraith",
+      "boss_bell_widow",
+      "boss_captain_rusk",
+      "boss_eclipse_construct",
+      "boss_red_vial_matron",
+      "brin_alder",
+      "clem_marr",
+      "corrupted_mercenary",
+      "estate_wraith",
+      "fadyme",
+      "hana_birch",
+      "hollow_pilgrim",
+      "mahmut",
+      "mirel_quill",
+      "nara_vell",
+      "nixie_vale",
+      "noble_retainer",
+      "orchard_ghoul",
+      "pippa_bell",
+      "rikka_ember",
+      "royal_hollow",
+      "sable_wren",
+      "vespera_wisp"
+    ],
+    "self_and_lowest_hp_ally": [
+      "mahmut"
+    ],
+    "lowest_hp_ally": [
+      "fadyme",
+      "iona_mist",
+      "jori_flint",
+      "mahmut",
+      "sister_aveline",
+      "thistle_roe",
+      "tilda_fen"
+    ],
+    "event_source": [
+      "choir_knight",
+      "mahmut"
+    ],
+    "front_row_enemies": [
+      "boss_captain_rusk",
+      "boss_eclipse_construct",
+      "boss_marshal_oren",
+      "brin_alder",
+      "jori_flint",
+      "mahmut"
+    ],
+    "all_enemies": [
+      "boss_ash_maw",
+      "boss_bell_widow",
+      "boss_eclipse_construct",
+      "boss_red_vial_matron",
+      "brin_alder",
+      "clem_marr",
+      "fadyme",
+      "jori_flint",
+      "kera_voss",
+      "mahmut",
+      "marek_vane",
+      "odelia_pike",
+      "rikka_ember",
+      "vespera_wisp"
+    ],
+    "all_allies": [
+      "brin_alder",
+      "fadyme",
+      "iona_mist",
+      "mahmut",
+      "marek_vane",
+      "mirel_quill",
+      "nara_vell",
+      "pippa_bell",
+      "sister_aveline",
+      "thistle_roe",
+      "tilda_fen"
+    ],
+    "previous_op_targets": [
+      "ash_wolf",
+      "bellbound_dead",
+      "bridge_revenant",
+      "clem_marr",
+      "fadyme",
+      "glass_viper",
+      "hana_birch",
+      "hollow_cleric",
+      "inkbound_dead",
+      "jori_flint",
+      "lost_vow_knight",
+      "marek_vane",
+      "nixie_vale",
+      "odelia_pike",
+      "red_vial_alchemist",
+      "red_vial_scout"
+    ],
+    "lowest_hp_allies": [
+      "fadyme"
+    ],
+    "random_other_enemy": [
+      "kera_voss",
+      "sable_wren"
+    ],
+    "enemy_with_lowest_def": [
+      "nixie_vale"
+    ],
+    "enemy_with_highest_atk": [
+      "nixie_vale"
+    ],
+    "event_target": [
+      "iona_mist",
+      "nara_vell",
+      "sister_aveline",
+      "tilda_fen"
+    ],
+    "lowest_hp_enemy": [
+      "boss_eclipse_construct",
+      "hollow_cleric",
+      "inkbound_dead",
+      "sable_wren",
+      "vespera_wisp"
+    ],
+    "last_heal_target": [
+      "iona_mist",
+      "thistle_roe",
+      "tilda_fen"
+    ],
+    "selected_ally": [
+      "iona_mist",
+      "mirel_quill",
+      "nara_vell"
+    ],
+    "ally_with_lowest_focus": [
+      "pippa_bell"
+    ],
+    "lowest_hp_rear_enemy": [
+      "ash_wolf",
+      "glass_viper",
+      "red_vial_scout"
+    ],
+    "single_enemy_default": [
+      "ash_wolf",
+      "bellbound_dead",
+      "boss_ash_maw",
+      "boss_ashen_lord_wraith",
+      "boss_bell_widow",
+      "boss_captain_rusk",
+      "boss_eclipse_construct",
+      "boss_marshal_oren",
+      "boss_red_vial_matron",
+      "bridge_revenant",
+      "chain_cultist",
+      "choir_knight",
+      "corrupted_crown_guard",
+      "corrupted_mercenary",
+      "crownless_knight",
+      "eclipse_sentinel",
+      "estate_wraith",
+      "glass_viper",
+      "hollow_cleric",
+      "hollow_pilgrim",
+      "inkbound_dead",
+      "lost_vow_knight",
+      "noble_retainer",
+      "orchard_ghoul",
+      "red_vial_alchemist",
+      "red_vial_scout",
+      "royal_hollow"
+    ],
+    "lowest_hp_front_enemy": [
+      "bridge_revenant",
+      "lost_vow_knight"
+    ],
+    "all_enemy_allies": [
+      "chain_cultist",
+      "eclipse_sentinel"
+    ],
+    "lowest_hp_enemy_ally": [
+      "corrupted_crown_guard",
+      "noble_retainer"
+    ],
+    "enemy_with_most_buffs": [
+      "boss_ashen_lord_wraith",
+      "estate_wraith"
+    ],
+    "most_injured_enemy_ally": [
+      "hollow_cleric"
+    ],
+    "rear_row_enemies": [
+      "boss_ashen_lord_wraith",
+      "red_vial_alchemist"
+    ],
+    "boss": [
+      "boss_ash_maw",
+      "boss_ashen_lord_wraith",
+      "boss_bell_widow",
+      "boss_captain_rusk",
+      "boss_eclipse_construct"
+    ],
+    "duel_marked_enemy": [
+      "boss_captain_rusk"
+    ],
+    "self_and_enemy_guards": [
+      "boss_marshal_oren"
+    ],
+    "boss_and_enemy_guards": [
+      "boss_marshal_oren"
+    ]
+  },
+  "predicates": {
+    "owner_in_row": [
+      "mahmut",
+      "marek_vane",
+      "nara_vell"
+    ],
+    "owner_has_shield": [
+      "jori_flint",
+      "mahmut"
+    ],
+    "last_target_has_status": [
+      "fadyme",
+      "kera_voss"
+    ],
+    "owner_hp_below_pct": [
+      "fadyme"
+    ],
+    "count_enemies_with_status": [
+      "kera_voss"
+    ],
+    "owner_has_status": [
+      "brin_alder"
+    ],
+    "target_has_status_tag": [
+      "nixie_vale"
+    ],
+    "last_target_defeated": [
+      "nixie_vale"
+    ],
+    "event_target_hp_at_or_below_pct": [
+      "iona_mist",
+      "sister_aveline"
+    ],
+    "target_has_any_status_tag": [
+      "sable_wren"
+    ],
+    "last_primary_target_defeated": [
+      "sable_wren"
+    ],
+    "target_has_status": [
+      "clem_marr",
+      "odelia_pike",
+      "rikka_ember",
+      "vespera_wisp"
+    ],
+    "event_actor_has_any_buff": [
+      "mirel_quill"
+    ],
+    "target_in_row": [
+      "nara_vell"
+    ],
+    "round_number_at_most": [
+      "nara_vell"
+    ],
+    "event_target_had_status": [
+      "vespera_wisp"
+    ],
+    "owner_took_no_damage_this_round": [
+      "hana_birch"
+    ],
+    "target_has_acted_this_battle": [
+      "hana_birch"
+    ],
+    "owner_hp_above_pct": [
+      "thistle_roe"
+    ],
+    "owner_action_type": [
+      "jori_flint"
+    ],
+    "enemy_ally_hp_below_pct": [
+      "hollow_cleric"
+    ],
+    "no_enemy_ally_below_pct": [
+      "hollow_cleric"
+    ],
+    "damage_dealt_at_least_pct_of_target_hp": [
+      "orchard_ghoul"
+    ]
+  },
+  "hooks": {
+    "before_damage_received": [
+      {
+        "user": "mahmut",
+        "data": {
+          "event": "before_damage_received",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "event_source",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 0.6,
+              "no_focus_gain": true
+            },
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "amount": 5
+            }
+          ],
+          "condition": {
+            "predicate": "owner_has_shield"
+          },
+          "limit": {
+            "per_owner_turn": 1
+          },
+          "event_filter": {
+            "incoming_action_type": "basic"
+          }
+        }
+      },
+      {
+        "user": "brin_alder",
+        "data": {
+          "event": "before_damage_received",
+          "condition": {
+            "predicate": "owner_has_status",
+            "value": "taunt"
+          },
+          "target": "self",
+          "damage_multiplier": 0.9
+        }
+      },
+      {
+        "user": "sable_wren",
+        "data": {
+          "event": "before_damage_received",
+          "effect_ops": [
+            {
+              "op": "modify_incoming_damage",
+              "target_selector_id": "self",
+              "multiplier": 0.5
+            }
+          ],
+          "limit": {
+            "per_battle": 1
+          }
+        }
+      },
+      {
+        "user": "nara_vell",
+        "data": {
+          "event": "before_damage_received",
+          "effect_ops": [
+            {
+              "op": "modify_incoming_damage",
+              "target_selector_id": "event_target",
+              "multiplier": 0.9
+            }
+          ],
+          "condition": {
+            "all": [
+              {
+                "predicate": "owner_in_row",
+                "value": "front"
+              },
+              {
+                "predicate": "target_in_row",
+                "value": "rear"
+              },
+              {
+                "predicate": "round_number_at_most",
+                "value": 1
+              }
+            ]
+          },
+          "limit": {
+            "per_event": 1
+          },
+          "event_filter": {
+            "team": "player"
+          }
+        }
+      },
+      {
+        "user": "royal_hollow",
+        "data": {
+          "event": "before_damage_received",
+          "effect_ops": [
+            {
+              "op": "block_attack",
+              "target_selector_id": "self",
+              "maximum_hits": 1
+            }
+          ],
+          "limit": {
+            "per_round": 1
+          }
+        }
+      }
+    ],
+    "owner_turn_start": [
+      {
+        "user": "fadyme",
+        "data": {
+          "event": "owner_turn_start",
+          "effect_ops": [
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "veil_res",
+              "mode": "add_pct",
+              "amount": 0.08,
+              "duration_turns": 1
+            }
+          ],
+          "condition": {
+            "predicate": "owner_hp_below_pct",
+            "value": 50
+          },
+          "limit": {
+            "per_battle": 2
+          }
+        }
+      },
+      {
+        "user": "thistle_roe",
+        "data": {
+          "event": "owner_turn_start",
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 0.05,
+              "duration_turns": 1
+            }
+          ],
+          "condition": {
+            "predicate": "owner_hp_above_pct",
+            "value": 80
+          },
+          "limit": {
+            "per_event": 1
+          }
+        }
+      }
+    ],
+    "after_damage_dealt": [
+      {
+        "user": "kera_voss",
+        "data": {
+          "event": "after_damage_dealt",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "random_other_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 0.4,
+              "hit_count": 1,
+              "can_trigger_passives": false
+            }
+          ],
+          "condition": {
+            "predicate": "last_target_has_status",
+            "value": "burn"
+          },
+          "limit": {
+            "chance": 0.1,
+            "per_damage_action": 1
+          },
+          "event_filter": {
+            "damage_action_type": "basic_or_skill"
+          }
+        }
+      },
+      {
+        "user": "nixie_vale",
+        "data": {
+          "event": "after_damage_dealt",
+          "effect_ops": [
+            {
+              "op": "apply_status",
+              "target_selector_id": "enemy_with_lowest_def",
+              "status_id": "trail_mark",
+              "duration_turns": 2
+            }
+          ],
+          "limit": {
+            "per_battle": 1
+          },
+          "event_filter": {
+            "owner_action_type": "any_attack"
+          }
+        }
+      }
+    ],
+    "before_damage_dealt": [
+      {
+        "user": "nixie_vale",
+        "data": {
+          "event": "before_damage_dealt",
+          "condition": {
+            "predicate": "target_has_status_tag",
+            "value": "mark"
+          },
+          "target": "previous_op_targets",
+          "damage_multiplier": 1.05,
+          "applies_to": "all_allies_while_owner_alive"
+        }
+      },
+      {
+        "user": "odelia_pike",
+        "data": {
+          "event": "before_damage_dealt",
+          "condition": {
+            "predicate": "target_has_status",
+            "value": "soaked"
+          },
+          "target": "previous_op_targets",
+          "damage_multiplier": 1.1,
+          "applies_to": "self"
+        }
+      },
+      {
+        "user": "clem_marr",
+        "data": {
+          "event": "before_damage_dealt",
+          "effect_ops": [
+            {
+              "op": "modify_outgoing_damage",
+              "target_selector_id": "self",
+              "multiplier": 1.08
+            }
+          ],
+          "condition": {
+            "predicate": "target_has_status",
+            "value": "dread"
+          },
+          "limit": {
+            "per_target_per_battle": 1
+          },
+          "event_filter": {
+            "owner_action_type": "any_attack"
+          }
+        }
+      },
+      {
+        "user": "jori_flint",
+        "data": {
+          "event": "before_damage_dealt",
+          "condition": {
+            "all": [
+              {
+                "predicate": "owner_has_shield"
+              },
+              {
+                "predicate": "owner_action_type",
+                "value": "basic"
+              }
+            ]
+          },
+          "target": "previous_op_targets",
+          "damage_multiplier": 1.15,
+          "applies_to": "self"
+        }
+      }
+    ],
+    "ally_hp_threshold_crossed": [
+      {
+        "user": "sister_aveline",
+        "data": {
+          "event": "ally_hp_threshold_crossed",
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "event_target",
+              "scale_stat": "atk",
+              "multiplier": 0.8,
+              "duration_turns": 2
+            }
+          ],
+          "condition": {
+            "predicate": "event_target_hp_at_or_below_pct",
+            "value": 25
+          },
+          "limit": {
+            "per_battle": 1
+          },
+          "event_filter": {
+            "team": "player"
+          }
+        }
+      },
+      {
+        "user": "iona_mist",
+        "data": {
+          "event": "ally_hp_threshold_crossed",
+          "effect_ops": [
+            {
+              "op": "heal",
+              "target_selector_id": "event_target",
+              "scale_stat": "atk",
+              "multiplier": 0.5
+            }
+          ],
+          "condition": {
+            "predicate": "event_target_hp_at_or_below_pct",
+            "value": 30
+          },
+          "limit": {
+            "per_battle": 1
+          },
+          "event_filter": {
+            "team": "player"
+          }
+        }
+      }
+    ],
+    "after_ally_healed": [
+      {
+        "user": "tilda_fen",
+        "data": {
+          "event": "after_ally_healed",
+          "effect_ops": [
+            {
+              "op": "apply_status",
+              "target_selector_id": "event_target",
+              "status_id": "soaked_immunity",
+              "duration_turns": 1
+            }
+          ],
+          "limit": {
+            "per_event": 1
+          },
+          "event_filter": {
+            "source_is_owner": true
+          }
+        }
+      }
+    ],
+    "after_damage_received": [
+      {
+        "user": "rikka_ember",
+        "data": {
+          "event": "after_damage_received",
+          "effect_ops": [
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "amount": 5
+            }
+          ],
+          "limit": {
+            "per_owner_turn": 1
+          }
+        }
+      }
+    ],
+    "after_ally_action": [
+      {
+        "user": "mirel_quill",
+        "data": {
+          "event": "after_ally_action",
+          "effect_ops": [
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "amount": 5
+            }
+          ],
+          "condition": {
+            "predicate": "event_actor_has_any_buff"
+          },
+          "limit": {
+            "per_event": 1
+          },
+          "event_filter": {
+            "ally_action_type": "basic"
+          }
+        }
+      }
+    ],
+    "after_ally_ultimate": [
+      {
+        "user": "pippa_bell",
+        "data": {
+          "event": "after_ally_ultimate",
+          "effect_ops": [
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "amount": 10
+            }
+          ],
+          "limit": {
+            "per_round": 1
+          },
+          "event_filter": {
+            "exclude_owner": true
+          }
+        }
+      }
+    ],
+    "after_enemy_defeated": [
+      {
+        "user": "vespera_wisp",
+        "data": {
+          "event": "after_enemy_defeated",
+          "effect_ops": [
+            {
+              "op": "gain_focus",
+              "target_selector_id": "self",
+              "amount": 10
+            }
+          ],
+          "condition": {
+            "predicate": "event_target_had_status",
+            "value": "dread"
+          },
+          "limit": {
+            "per_event": 1
+          }
+        }
+      }
+    ],
+    "target_action_before_owner_next_turn": [
+      {
+        "user": "hana_birch",
+        "data": {
+          "op": "arm_counter",
+          "target_selector_id": "previous_op_targets",
+          "event": "target_action_before_owner_next_turn",
+          "scale_stat": "atk",
+          "multiplier": 0.8,
+          "damage_type": "physical",
+          "consume_on_trigger": true
+        }
+      }
+    ],
+    "after_round_end": [
+      {
+        "user": "hana_birch",
+        "data": {
+          "event": "after_round_end",
+          "effect_ops": [
+            {
+              "op": "arm_next_attack_bonus",
+              "target_selector_id": "self",
+              "damage_multiplier": 1.2,
+              "consume_on_attack": true
+            }
+          ],
+          "condition": {
+            "predicate": "owner_took_no_damage_this_round"
+          },
+          "limit": {
+            "one_pending_bonus": true
+          }
+        }
+      }
+    ],
+    "stat_snapshot": [
+      {
+        "user": "marek_vane",
+        "data": {
+          "event": "stat_snapshot",
+          "condition": {
+            "predicate": "owner_in_row",
+            "value": "rear"
+          },
+          "target": "front_row_allies",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.05
+        }
+      }
+    ],
+    "ally_damaged": [
+      {
+        "user": "choir_knight",
+        "data": {
+          "event": "ally_damaged",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "event_source",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 0.65,
+              "no_focus_gain": true,
+              "can_trigger_passives": false
+            }
+          ],
+          "limit": {
+            "per_round": 1
+          },
+          "event_filter": {
+            "event_target_faction_is": "hollow_host"
+          }
+        }
+      }
+    ]
+  },
+  "effects_contract": {
+    "resolution_order": [
+      "validate_actor_and_cost",
+      "resolve_targets",
+      "effect_ops_in_array_order",
+      "post_action_hooks",
+      "death_checks",
+      "boss_objectives_and_phase_transition"
+    ],
+    "targeting": {
+      "team_relation": "ally is the acting unit's team; enemy is the opposing team; event_source/event_target use the event record",
+      "front_row_protection": "single_enemy_default selects living Front heroes before Rear; selectors that name a row or lowest/highest/random explicitly bypass the default row rule",
+      "taunt": "redirect after selector and before damage; only eligible single-target hostile actions",
+      "target_ties": "lowest slot index then stable entity_id",
+      "dead_targets": "filter before each operation; an empty target set skips that operation",
+      "manual_objective_targeting": "A player-selected, damageable boss objective overrides a single-target damage op's selector for that action. Auto selectors never choose objectives unless explicitly authored. Area attacks do not include objectives unless their selector names them."
+    },
+    "condition_language": {
+      "boolean_nodes": [
+        "all",
+        "any",
+        "not"
+      ],
+      "leaf_key": "predicate",
+      "unknown_predicate": "content_load_error",
+      "evaluation": "effect-time snapshot after prior operation resolves"
+    },
+    "status_tag_groups": {
+      "mark_or_dread": [
+        "mark",
+        "dread"
+      ]
+    },
+    "predicates": [
+      "owner_in_row",
+      "owner_hp_below_pct",
+      "owner_hp_above_pct",
+      "owner_has_shield",
+      "owner_has_status",
+      "owner_action_type",
+      "owner_took_no_damage_this_round",
+      "last_target_has_status",
+      "last_target_has_status_tag",
+      "last_target_defeated",
+      "last_primary_target_defeated",
+      "target_has_status",
+      "target_has_status_tag",
+      "target_has_any_status_tag",
+      "target_has_acted_this_battle",
+      "target_in_row",
+      "event_target_hp_at_or_below_pct",
+      "event_target_had_status",
+      "event_actor_has_any_buff",
+      "event_source_faction_is",
+      "count_enemies_with_status",
+      "enemy_ally_hp_below_pct",
+      "no_enemy_ally_below_pct",
+      "damage_dealt_at_least_pct_of_target_hp",
+      "round_number_at_most"
+    ],
+    "events": [
+      "battle_start",
+      "stat_snapshot",
+      "owner_turn_start",
+      "before_damage_dealt",
+      "after_damage_dealt",
+      "before_damage_received",
+      "after_damage_received",
+      "after_ally_healed",
+      "ally_hp_threshold_crossed",
+      "after_ally_action",
+      "after_ally_ultimate",
+      "ally_damaged",
+      "after_enemy_defeated",
+      "after_round_end",
+      "target_action_before_owner_next_turn"
+    ],
+    "event_hook_schema": {
+      "required": [
+        "event",
+        "effect_ops"
+      ],
+      "optional": [
+        "condition",
+        "event_filter",
+        "limit"
+      ],
+      "event_filter_fields": [
+        "incoming_action_type",
+        "damage_action_type",
+        "team",
+        "owner_action_type",
+        "ally_action_type",
+        "event_target_faction_is",
+        "source_is_owner",
+        "exclude_owner"
+      ],
+      "limit_fields": [
+        "per_event",
+        "per_battle",
+        "per_round",
+        "per_owner_turn",
+        "per_target_per_battle",
+        "per_damage_action",
+        "chance",
+        "one_pending_bonus"
+      ]
+    },
+    "continuous_modifier_schema": {
+      "required": [
+        "event",
+        "condition",
+        "target"
+      ],
+      "supported_outputs": [
+        "damage_multiplier",
+        "stat_id+mode+amount"
+      ],
+      "owner_must_be_alive": true
+    },
+    "operations": [
+      "damage",
+      "heal",
+      "heal_per_removed_status",
+      "grant_shield",
+      "apply_status",
+      "remove_status",
+      "reduce_status_durations",
+      "modify_stat",
+      "modify_incoming_damage",
+      "modify_outgoing_damage",
+      "grant_damage_reduction",
+      "grant_redirect",
+      "grant_intercept",
+      "grant_first_hit_guard",
+      "grant_opening_guard",
+      "gain_focus",
+      "delay_next_action",
+      "reduce_cooldowns",
+      "apply_regeneration",
+      "arm_counter",
+      "arm_next_attack_bonus",
+      "grant_status_immunity",
+      "remove_shield",
+      "copy_buff",
+      "block_attack",
+      "pay_hp_cost",
+      "boss_damage_taken_modifier",
+      "summon_enemies",
+      "cancel_boss_telegraph",
+      "remove_boss_modifier",
+      "remove_copied_statuses",
+      "clear_status_if_all_objectives_destroyed"
+    ],
+    "operation_schemas": {
+      "damage": {
+        "required": [
+          "target_selector_id",
+          "damage_type",
+          "scale_stat",
+          "multiplier"
+        ],
+        "optional": [
+          "when",
+          "chance",
+          "hit_count",
+          "modifiers",
+          "no_focus_gain",
+          "can_trigger_passives",
+          "shield_damage_multiplier",
+          "multiplier_if_objective_alive",
+          "multiplier_if_all_objectives_alive"
+        ]
+      },
+      "heal": {
+        "required": [
+          "target_selector_id",
+          "scale_stat",
+          "multiplier"
+        ],
+        "optional": [
+          "when",
+          "chance"
+        ]
+      },
+      "heal_per_removed_status": {
+        "required": [
+          "target_selector_id",
+          "scale_stat",
+          "multiplier",
+          "maximum_targets",
+          "maximum_total_stacks",
+          "requires_successful_cleanse"
+        ]
+      },
+      "grant_shield": {
+        "required": [
+          "target_selector_id",
+          "scale_stat",
+          "multiplier",
+          "duration_turns"
+        ],
+        "optional": [
+          "when",
+          "shield_source_id"
+        ]
+      },
+      "apply_status": {
+        "required": [
+          "target_selector_id",
+          "status_id",
+          "duration_turns"
+        ],
+        "optional": [
+          "when",
+          "chance",
+          "shared_damage_fraction",
+          "consume_on_single_target_action"
+        ]
+      },
+      "remove_status": {
+        "required": [
+          "target_selector_id",
+          "category",
+          "count",
+          "selection"
+        ],
+        "optional": [
+          "status_id"
+        ]
+      },
+      "reduce_status_durations": {
+        "required": [
+          "target_selector_id",
+          "category",
+          "amount_turns",
+          "minimum_remaining_turns"
+        ]
+      },
+      "modify_stat": {
+        "required": [
+          "target_selector_id",
+          "stat_id",
+          "mode",
+          "amount",
+          "duration_turns"
+        ],
+        "optional": [
+          "when"
+        ]
+      },
+      "modify_incoming_damage": {
+        "required": [
+          "target_selector_id",
+          "multiplier"
+        ],
+        "optional": [
+          "when"
+        ]
+      },
+      "modify_outgoing_damage": {
+        "required": [
+          "target_selector_id",
+          "multiplier"
+        ],
+        "optional": [
+          "when"
+        ]
+      },
+      "grant_damage_reduction": {
+        "required": [
+          "target_selector_id",
+          "damage_taken_multiplier",
+          "duration_turns"
+        ]
+      },
+      "grant_redirect": {
+        "required": [
+          "target_selector_id",
+          "protected_ally_selector_id",
+          "redirected_fraction",
+          "duration_turns",
+          "eligible_action_types"
+        ]
+      },
+      "grant_intercept": {
+        "required": [
+          "target_selector_id",
+          "protected_ally_selector_id",
+          "redirected_fraction",
+          "duration_turns"
+        ],
+        "optional": [
+          "maximum_intercepts"
+        ]
+      },
+      "grant_first_hit_guard": {
+        "required": [
+          "target_selector_id",
+          "damage_taken_multiplier",
+          "duration_turns",
+          "hits_per_target"
+        ]
+      },
+      "grant_opening_guard": {
+        "required": [
+          "target_selector_id",
+          "duration_rounds",
+          "target_override",
+          "damage_taken_multiplier"
+        ]
+      },
+      "gain_focus": {
+        "required": [
+          "target_selector_id",
+          "amount"
+        ],
+        "optional": [
+          "when"
+        ]
+      },
+      "delay_next_action": {
+        "required": [
+          "target_selector_id",
+          "gauge_fraction"
+        ]
+      },
+      "reduce_cooldowns": {
+        "required": [
+          "target_selector_id",
+          "amount_turns",
+          "minimum_remaining_turns"
+        ]
+      },
+      "apply_regeneration": {
+        "required": [
+          "target_selector_id",
+          "scale_stat",
+          "multiplier",
+          "ticks",
+          "tick_event",
+          "duration_turns"
+        ]
+      },
+      "arm_counter": {
+        "required": [
+          "target_selector_id",
+          "event",
+          "scale_stat",
+          "multiplier",
+          "damage_type",
+          "consume_on_trigger"
+        ]
+      },
+      "arm_next_attack_bonus": {
+        "required": [
+          "target_selector_id",
+          "damage_multiplier",
+          "consume_on_attack"
+        ]
+      },
+      "grant_status_immunity": {
+        "required": [
+          "target_selector_id",
+          "status_id",
+          "duration_turns"
+        ]
+      },
+      "remove_shield": {
+        "required": [
+          "target_selector_id"
+        ],
+        "optional": [
+          "amount_fraction",
+          "shield_source_id"
+        ]
+      },
+      "copy_buff": {
+        "required": [
+          "target_selector_id",
+          "source_selector_id",
+          "category",
+          "maximum_count",
+          "duration_turns"
+        ]
+      },
+      "block_attack": {
+        "required": [
+          "target_selector_id",
+          "maximum_hits"
+        ]
+      },
+      "pay_hp_cost": {
+        "required": [
+          "target_selector_id",
+          "max_hp_fraction",
+          "cannot_reduce_below"
+        ]
+      },
+      "boss_damage_taken_modifier": {
+        "required": [
+          "target_selector_id",
+          "multiplier"
+        ],
+        "optional": [
+          "modifier_id",
+          "until_objective_destroyed",
+          "while_any_objective_alive"
+        ]
+      },
+      "summon_enemies": {
+        "required": [
+          "target_selector_id",
+          "enemy_id",
+          "count"
+        ],
+        "optional": [
+          "only_if_objective_alive"
+        ]
+      },
+      "cancel_boss_telegraph": {
+        "required": [
+          "target_selector_id",
+          "action_id"
+        ]
+      },
+      "remove_boss_modifier": {
+        "required": [
+          "target_selector_id",
+          "modifier_id"
+        ]
+      },
+      "remove_copied_statuses": {
+        "required": [
+          "target_selector_id",
+          "category"
+        ]
+      },
+      "clear_status_if_all_objectives_destroyed": {
+        "required": [
+          "target_selector_id",
+          "objective_ids",
+          "status_id"
+        ]
+      }
+    },
+    "operation_rules": {
+      "arrays_execute_in_order": true,
+      "chance_range": [
+        0.0,
+        1.0
+      ],
+      "multipliers_are_decimal": true,
+      "percent_stat_amounts_are_decimal": true,
+      "duration_unit": "target_owner_turns",
+      "same_status": "refresh_to_greater_remaining_duration; never duplicate same status_id",
+      "shield": "absorbs resolved damage after damage-reduction modifiers; independent shields add; clamp total shield to 2x max_hp",
+      "healing": "apply healing_received modifiers then clamp to missing HP",
+      "cleanse": "remove matching debuffs before any later heal operation",
+      "focus": "clamp to 0..100; death resets to zero",
+      "cooldown": "decrement at actor turn start before passive start-turn hooks; reduction cannot go below each op minimum",
+      "turn_delay": "add floor(gauge_max * gauge_fraction) to target pending_delay_gauge; this raises its next readiness threshold; pending delay accumulates to 0.5 gauge_max and clears after that action resolves",
+      "gust_status": "on application add its authored next_action_gauge_delay_fraction to pending delay; keep the icon until the delayed action resolves, then consume it",
+      "round_cycle": "per_round hook limits and after_round_end use the gauge cycle defined by battle_rules_part1.json",
+      "boss_control": "halve control duration, minimum one turn; critical telegraphs ignore control unless the action has a break-objective interrupt rule",
+      "passive_recursion": "counter/splash damage cannot trigger its own source hook unless can_trigger_passives is explicitly true",
+      "damage_rounding": "apply effective attack and skill scaling, defense, element, conditional/status modifiers, one crit roll per hit, then floor each damage packet with minimum 1"
+    },
+    "target_selectors": [
+      "single_enemy",
+      "single_enemy_default",
+      "front_row_enemies",
+      "rear_row_enemies",
+      "all_enemies",
+      "lowest_hp_enemy",
+      "enemy_with_lowest_def",
+      "enemy_with_highest_atk",
+      "lowest_hp_rear_enemy",
+      "lowest_hp_front_enemy",
+      "random_other_enemy",
+      "all_allies",
+      "selected_ally",
+      "lowest_hp_ally",
+      "lowest_hp_allies",
+      "ally_with_lowest_focus",
+      "front_row_allies",
+      "event_source",
+      "event_target",
+      "previous_op_targets",
+      "last_heal_target",
+      "self",
+      "boss",
+      "self_and_lowest_hp_ally",
+      "self_and_enemy_guards",
+      "boss_and_enemy_guards",
+      "all_enemy_allies",
+      "lowest_hp_enemy_ally",
+      "most_injured_enemy_ally",
+      "duel_marked_enemy",
+      "enemy_with_most_buffs"
+    ],
+    "selector_rules": {
+      "single_enemy": {
+        "kind": "manual_single",
+        "side": "opposing",
+        "auto_fallback": "single_enemy_default"
+      },
+      "single_enemy_default": {
+        "kind": "row_priority_single",
+        "side": "opposing",
+        "row_priority": [
+          "front",
+          "rear"
+        ],
+        "within_row": "lowest_slot_index",
+        "tie_break": "entity_id"
+      },
+      "front_row_enemies": {
+        "kind": "all_by_row",
+        "side": "opposing",
+        "row": "front"
+      },
+      "rear_row_enemies": {
+        "kind": "all_by_row",
+        "side": "opposing",
+        "row": "rear"
+      },
+      "all_enemies": {
+        "kind": "all_living",
+        "side": "opposing"
+      },
+      "lowest_hp_enemy": {
+        "kind": "minimum_stat",
+        "side": "opposing",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "enemy_with_lowest_def": {
+        "kind": "minimum_stat",
+        "side": "opposing",
+        "stat": "def",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "enemy_with_highest_atk": {
+        "kind": "maximum_stat",
+        "side": "opposing",
+        "stat": "atk",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "lowest_hp_rear_enemy": {
+        "kind": "minimum_stat_by_row",
+        "side": "opposing",
+        "row": "rear",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "lowest_hp_front_enemy": {
+        "kind": "minimum_stat_by_row",
+        "side": "opposing",
+        "row": "front",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "random_other_enemy": {
+        "kind": "random_excluding_last_primary",
+        "side": "opposing",
+        "rng": "battle_seed_stream",
+        "empty_fallback": "lowest_hp_enemy"
+      },
+      "all_allies": {
+        "kind": "all_living",
+        "side": "actor"
+      },
+      "selected_ally": {
+        "kind": "manual_single",
+        "side": "actor",
+        "auto_fallback": "lowest_hp_ally"
+      },
+      "lowest_hp_ally": {
+        "kind": "minimum_stat",
+        "side": "actor",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "lowest_hp_allies": {
+        "kind": "ordered_minimum_stat_set",
+        "side": "actor",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ],
+        "maximum_targets": "operation_field_or_all"
+      },
+      "ally_with_lowest_focus": {
+        "kind": "minimum_stat",
+        "side": "actor",
+        "stat": "focus",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "front_row_allies": {
+        "kind": "all_by_row",
+        "side": "actor",
+        "row": "front"
+      },
+      "event_source": {
+        "kind": "event_reference",
+        "reference": "source",
+        "missing_fallback": "empty"
+      },
+      "event_target": {
+        "kind": "event_reference",
+        "reference": "target",
+        "missing_fallback": "empty"
+      },
+      "previous_op_targets": {
+        "kind": "previous_operation_result",
+        "missing_fallback": "empty"
+      },
+      "last_heal_target": {
+        "kind": "previous_successful_heal_target",
+        "missing_fallback": "empty"
+      },
+      "self": {
+        "kind": "actor"
+      },
+      "boss": {
+        "kind": "encounter_boss",
+        "missing_fallback": "empty"
+      },
+      "self_and_lowest_hp_ally": {
+        "kind": "actor_plus_minimum_stat",
+        "side": "actor",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "self_and_enemy_guards": {
+        "kind": "actor_plus_tagged_allies",
+        "side": "actor",
+        "tag": "guard"
+      },
+      "boss_and_enemy_guards": {
+        "kind": "boss_plus_tagged_allies",
+        "side": "boss_team",
+        "tag": "guard"
+      },
+      "all_enemy_allies": {
+        "kind": "all_living",
+        "side": "actor",
+        "authoring_note": "An enemy-authored skill selects its own faction, which is the enemy team from the player's viewpoint."
+      },
+      "lowest_hp_enemy_ally": {
+        "kind": "minimum_stat",
+        "side": "actor",
+        "stat": "hp_fraction",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "most_injured_enemy_ally": {
+        "kind": "maximum_missing_hp",
+        "side": "actor",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "duel_marked_enemy": {
+        "kind": "lowest_hp_with_status",
+        "side": "opposing",
+        "status_id": "duel_mark",
+        "empty_fallback": "single_enemy_default",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      },
+      "enemy_with_most_buffs": {
+        "kind": "maximum_status_count",
+        "side": "opposing",
+        "status_category": "buff",
+        "tie_break": [
+          "slot_index",
+          "entity_id"
+        ]
+      }
+    },
+    "boss_objectives": {
+      "damageable_by_player": true,
+      "takes_elemental_and_physical_damage": true,
+      "not_a_party_slot": true,
+      "destroyed_at_hp_zero": true,
+      "destroyed_objective_cannot_be_repaired_unless_explicitly_authored": true,
+      "stage_progression": "objective damage is encounter-local and is not persisted across retries"
+    },
+    "enemy_ai": {
+      "basic_action_always_available": true,
+      "signature_action_rule": "use when its cooldown is zero and phase/conditions match; otherwise Basic",
+      "signature_cooldown_starts_after_resolution": true,
+      "boss_intent_visibility": "when a boss signature reaches Action Gauge readiness, show its intent and hold resolution for one living player action opportunity",
+      "intent_resolution": "control does not cancel a held telegraph; after the next player action opportunity it resolves unless its authored break-objective interrupt fires"
+    }
+  }
+}

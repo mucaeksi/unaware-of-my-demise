@@ -1,0 +1,328 @@
+{
+  "vector_format": "uomd.combat-conformance.v1",
+  "operation": "remove_copied_statuses",
+  "spec": "../OPS_SPEC.md",
+  "cases": [
+    {
+      "id": "copied_shields_only",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "sanctuary",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1,
+                "copied": true,
+                "origin_unit": "p"
+              }
+            ],
+            "shields": [
+              {
+                "amount": 5,
+                "turns_left": 2,
+                "copied": true,
+                "origin_unit": "p"
+              },
+              {
+                "amount": 8,
+                "turns_left": 2,
+                "shield_source_id": "native"
+              }
+            ],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": "e",
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "execute_ops",
+            "actor": "p",
+            "effect_ops": [
+              {
+                "op": "remove_copied_statuses",
+                "target_selector_id": "boss",
+                "category": "shield"
+              }
+            ]
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "sanctuary",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 1,
+                    "copied": true,
+                    "origin_unit": "p"
+                  }
+                ],
+                "shields": [
+                  {
+                    "amount": 8,
+                    "turns_left": 2,
+                    "shield_source_id": "native"
+                  }
+                ],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": "e",
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "repeat_noop",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "sanctuary",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1,
+                "copied": true,
+                "origin_unit": "p"
+              }
+            ],
+            "shields": [
+              {
+                "amount": 8,
+                "turns_left": 2,
+                "shield_source_id": "native"
+              }
+            ],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {},
+          "boss_id": "e",
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "execute_ops",
+            "actor": "p",
+            "effect_ops": [
+              {
+                "op": "remove_copied_statuses",
+                "target_selector_id": "boss",
+                "category": "shield"
+              },
+              {
+                "op": "remove_copied_statuses",
+                "target_selector_id": "boss",
+                "category": "shield"
+              }
+            ]
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "sanctuary",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 1,
+                    "copied": true,
+                    "origin_unit": "p"
+                  }
+                ],
+                "shields": [
+                  {
+                    "amount": 8,
+                    "turns_left": 2,
+                    "shield_source_id": "native"
+                  }
+                ],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {},
+              "boss_id": "e",
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

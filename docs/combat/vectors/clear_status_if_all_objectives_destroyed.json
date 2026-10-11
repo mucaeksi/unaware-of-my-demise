@@ -1,0 +1,356 @@
+{
+  "vector_format": "uomd.combat-conformance.v1",
+  "operation": "clear_status_if_all_objectives_destroyed",
+  "spec": "../OPS_SPEC.md",
+  "cases": [
+    {
+      "id": "one_alive_preserves",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "decay",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1
+              },
+              {
+                "status_id": "dread",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 2
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {
+            "left": {
+              "hp": 0,
+              "alive": false
+            },
+            "right": {
+              "hp": 4,
+              "alive": true
+            }
+          },
+          "boss_id": "e",
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "execute_ops",
+            "actor": "p",
+            "effect_ops": [
+              {
+                "op": "clear_status_if_all_objectives_destroyed",
+                "target_selector_id": "boss",
+                "objective_ids": [
+                  "left",
+                  "right"
+                ],
+                "status_id": "decay"
+              }
+            ]
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "decay",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 1
+                  },
+                  {
+                    "status_id": "dread",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 2
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {
+                "left": {
+                  "hp": 0,
+                  "alive": false
+                },
+                "right": {
+                  "hp": 4,
+                  "alive": true
+                }
+              },
+              "boss_id": "e",
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "all_destroyed_cleanse_one",
+      "seed": 1,
+      "critical_chance": 0,
+      "element": "Stone",
+      "status": "proposed_conformance_not_engine_replayed",
+      "note": "",
+      "initial": {
+        "units": [
+          {
+            "id": "p",
+            "side": "player",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          },
+          {
+            "id": "e",
+            "side": "enemy",
+            "slot": 0,
+            "row": "front",
+            "hp": 100,
+            "max_hp": 100,
+            "atk": 20,
+            "defense": 0,
+            "res": 0,
+            "spd": 10,
+            "focus": 0,
+            "alive": true,
+            "gauge": 0,
+            "pending_delay": 0,
+            "statuses": [
+              {
+                "status_id": "decay",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 1
+              },
+              {
+                "status_id": "dread",
+                "turns_left": 2,
+                "source_id": "p",
+                "seq": 2
+              }
+            ],
+            "shields": [],
+            "cooldowns": {},
+            "transient": {}
+          }
+        ],
+        "encounter": {
+          "cycle": 1,
+          "objectives": {
+            "left": {
+              "hp": 0,
+              "alive": false
+            },
+            "right": {
+              "hp": 0,
+              "alive": false
+            }
+          },
+          "boss_id": "e",
+          "modifiers": {},
+          "telegraph": null
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "execute_ops",
+            "actor": "p",
+            "effect_ops": [
+              {
+                "op": "clear_status_if_all_objectives_destroyed",
+                "target_selector_id": "boss",
+                "objective_ids": [
+                  "left",
+                  "right"
+                ],
+                "status_id": "decay"
+              },
+              {
+                "op": "clear_status_if_all_objectives_destroyed",
+                "target_selector_id": "boss",
+                "objective_ids": [
+                  "left",
+                  "right"
+                ],
+                "status_id": "decay"
+              }
+            ]
+          },
+          "expected": {
+            "units": [
+              {
+                "id": "p",
+                "side": "player",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              },
+              {
+                "id": "e",
+                "side": "enemy",
+                "slot": 0,
+                "row": "front",
+                "hp": 100,
+                "max_hp": 100,
+                "atk": 20,
+                "defense": 0,
+                "res": 0,
+                "spd": 10,
+                "focus": 0,
+                "alive": true,
+                "gauge": 0,
+                "pending_delay": 0,
+                "statuses": [
+                  {
+                    "status_id": "dread",
+                    "turns_left": 2,
+                    "source_id": "p",
+                    "seq": 2
+                  }
+                ],
+                "shields": [],
+                "cooldowns": {},
+                "transient": {}
+              }
+            ],
+            "encounter": {
+              "cycle": 1,
+              "objectives": {
+                "left": {
+                  "hp": 0,
+                  "alive": false
+                },
+                "right": {
+                  "hp": 0,
+                  "alive": false
+                }
+              },
+              "boss_id": "e",
+              "modifiers": {},
+              "telegraph": null
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
