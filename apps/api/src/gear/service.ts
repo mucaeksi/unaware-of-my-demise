@@ -258,8 +258,8 @@ export function rerollGear(db: D1Database, playerId: string, id: number, input: 
 }
 
 /** Final combat stats of an owned character: level growth + equipped gear + set bonuses. This is what a server-verified party will use. */
-export async function characterStats(db: D1Database, playerId: string, characterId: string): Promise<Record<string, unknown>> {
-  const cfg = await loadProgressionConfig(db);
+export async function computeCharacterStats(db: D1Database, playerId: string, characterId: string, cfg?: ProgressionConfig): Promise<{ characterId: string; level: number; stats: { hp: number; atk: number; def: number; spd: number }; other: Record<string, number>; equipped: { id: number; slot: string; name: string }[] }> {
+  cfg ??= await loadProgressionConfig(db);
   const ch = await db
     .prepare("SELECT c.base_hp, c.base_atk, c.base_def, c.base_spd, c.growth_hp, c.growth_atk, c.growth_def, c.growth_spd, c.role FROM player_items i JOIN characters c ON c.id = i.item_id WHERE i.player_id = ?1 AND i.item_type = 'character' AND i.item_id = ?2")
     .bind(playerId, characterId)
@@ -286,4 +286,8 @@ export async function characterStats(db: D1Database, playerId: string, character
   const gear = aggregateGear(cfg, pieces, roleStat, sets);
   const stats = finalStats({ hp: ch.base_hp, atk: ch.base_atk, def: ch.base_def, spd: ch.base_spd }, { hp: ch.growth_hp, atk: ch.growth_atk, def: ch.growth_def, spd: ch.growth_spd }, level, gear);
   return { characterId, level, stats, other: gear.other, equipped: results.map((g) => ({ id: g.id, slot: g.slot, name: g.name_en })) };
+}
+
+export async function characterStats(db: D1Database, playerId: string, characterId: string): Promise<Record<string, unknown>> {
+  return computeCharacterStats(db, playerId, characterId);
 }

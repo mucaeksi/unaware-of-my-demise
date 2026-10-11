@@ -11,7 +11,7 @@ import { authenticatePush, handleRtdn } from '../billing/rtdn';
 import { billingTag, listProducts, syncSubscriptionMail, verifyPurchase } from '../billing/service';
 import { adStatus, beginAd, grantAd, AD } from '../ads/service';
 import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
-import { BattleSubmission, getProgress, readSave, submitBattle, writeSave } from '../progress/service';
+import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, writeSave } from '../progress/service';
 import { ascendGear, characterStats, dismantleGear, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
 import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
 import { deleteAccount, exportAccount } from '../account/service';
@@ -186,6 +186,13 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   });
 
   app.get('/api/v1/progress', async (c) => c.json(await getProgress(c.env.DB, c.get('playerId'))));
+
+  // step 1 of an owned-hero battle: the server freezes the party (team, gear, ranks, story loans) the client must fight with
+  app.post('/api/v1/progress/battle/start', async (c) => {
+    await perMinute(c.env, `battlestart:${c.get('playerId')}`, 30);
+    const input = await body(c, z.object({ releaseId: z.string().regex(/^[a-z][a-z0-9_]{1,47}$/), nodeId: z.string().regex(/^[a-z][a-z0-9_]{1,79}$/) }).strict(), 4 * 1024);
+    return c.json(await startBattle(c.env, c.get('playerId'), input));
+  });
 
   app.post('/api/v1/progress/battle', async (c) => {
     await perMinute(c.env, `battle:${c.get('playerId')}`, 20);

@@ -52,11 +52,12 @@ for (const a of acc.accessories) {
 
 // ---- characters: growth, weapon type, skills
 interface Skill { skill_id: string; name_en: string; type: string; [k: string]: unknown }
-interface Char { character_id: string; signature_weapon_id: string; growth_per_level: { hp: number; atk: number; def: number; spd: number }; skills: Skill[] }
+interface Char { character_id: string; formation_affinity?: string; signature_weapon_id: string; growth_per_level: { hp: number; atk: number; def: number; spd: number }; skills: Skill[] }
 const sigType = new Map(wp.weapons.filter((w) => w.owner_character_id).map((w) => [w.owner_character_id as string, w.weapon_type]));
 for (const c of rd<{ characters: Char[] }>('characters_part1.json').characters) {
   const g = c.growth_per_level;
   add(`UPDATE characters SET growth_hp = ${g.hp}, growth_atk = ${g.atk}, growth_def = ${g.def}, growth_spd = ${g.spd}, weapon_type = ${q(sigType.get(c.character_id))}, signature_weapon_id = ${q(c.signature_weapon_id)} WHERE id = ${q(c.character_id)} AND growth_hp = 0 AND growth_atk = 0;`);
+  add(`UPDATE characters SET formation_affinity = ${q(c.formation_affinity)} WHERE id = ${q(c.character_id)} AND formation_affinity IS NULL;`);
   for (const s of c.skills) {
     const { skill_id, name_en, type, ...rest } = s;
     add(`INSERT OR IGNORE INTO character_skills (skill_id, character_id, type, name_en, data_json) VALUES (${q(skill_id)}, ${q(c.character_id)}, ${q(type)}, ${q(name_en)}, ${j(rest)});`);

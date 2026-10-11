@@ -1,0 +1,85 @@
+import { BattleParty, type Encounter, type PartyMember } from '@uomd/content-schema';
+import { finalStats, type ProgressionConfig } from '@uomd/economy';
+import { HttpError } from '../content/store';
+import { computeCharacterStats } from '../gear/service';
+import { loadProgressionConfig } from '../progression/characters';
+
+interface TeamMember {
+  characterId: string;
+  slot: number;
+  row: 'front' | 'rear';
+}
+
+const FRONT = 2;
+
+/**
+ * The party the server fights with for an owned-hero stage: story guests first (they take slots before the player's own heroes,
+ * canon: "Brin, Nixie and Kera are story loans so the two starters can field five"), then the player's active team in its formation
+ * order. Stats are computed here (level growth + equipped gear + set bonuses); the client never supplies any of them.
+ * Heroes the published unit pack does not contain are skipped, so an old release can never crash a battle.
+ */
+export async function buildParty(db: D1Database, playerId: string, encounter: Encounter, unitIds: ReadonlySet<string>, cfg?: ProgressionConfig): Promise<BattleParty> {
+  cfg ??= await loadProgressionConfig(db);
+  const stageLevel = Math.max(...encounter.enemies.map((e) => e.level), 1);
+  const members: (Omit<PartyMember, 'slot' | 'row'> & { affinity: 'front' | 'rear' | null })[] = [];
+
+  for (const id of (encounter.guests ?? []).filter((g) => unitIds.has(g)).slice(0, 5)) {
+    const ch = await db
+      .prepare('SELECT base_hp, base_atk, base_def, base_spd, growth_hp, growth_atk, growth_def, growth_spd, formation_affinity FROM characters WHERE id = ?1')
+      .bind(id)
+      .first<{ base_hp: number; base_atk: number; base_def: number; base_spd: number; growth_hp: number; growth_atk: number; growth_def: number; growth_spd: number; formation_affinity: string | null }>();
+    if (!ch) continue;
+    // story loans fight with their own level curve (no gear): the loan equipment template is not modelled yet
+    const stats = finalStats({ hp: ch.base_hp, atk: ch.base_atk, def: ch.base_def, spd: ch.base_spd }, { hp: ch.growth_hp, atk: ch.growth_atk, def: ch.growth_def, spd: ch.growth_spd }, stageLevel, { flat: {}, pct: {}, other: {} });
+    members.push({ unit_id: id, level: stageLevel, stats, loan: true, affinity: ch.formation_affinity === 'front' || ch.formation_affinity === 'rear' ? ch.formation_affinity : null });
+  }
+
+  const room = 5 - members.length;
+  if (room > 0) {
+    for (const t of await ownedTeam(db, playerId, unitIds)) {
+      if (members.length >= 5) break;
+      if (members.some((m) => m.unit_id === t.characterId)) continue; // a guest already stands in for this hero
+      const st = await computeCharacterStats(db, playerId, t.characterId, cfg);
+      const ranks = await db.prepare('SELECT skill_ranks FROM player_chars WHERE player_id = ?1 AND character_id = ?2').bind(playerId, t.characterId).first<{ skill_ranks: string }>();
+      const skillRanks = ranks ? (JSON.parse(ranks.skill_ranks) as Record<string, number>) : {};
+      members.push({ unit_id: t.characterId, level: st.level, stats: st.stats, ...(Object.keys(skillRanks).length ? { skill_ranks: skillRanks } : {}), affinity: t.row });
+    }
+  }
+  if (members.length === 0) throw new HttpError(409, 'no_team', 'you have no hero to send into battle');
+
+  // formation: two front, three rear. Heroes keep the row they asked for while room lasts, guests follow their canon affinity.
+  const front = members.filter((m) => m.affinity === 'front').slice(0, FRONT);
+  const rest = members.filter((m) => !front.includes(m));
+  while (front.length < FRONT && rest.length > 0 && members.length > 3) front.push(rest.shift() as (typeof members)[number]);
+  if (front.length === 0 && rest.length > 0) front.push(rest.shift() as (typeof members)[number]);
+  const out: PartyMember[] = [];
+  front.forEach((m, i) => out.push(strip(m, i, 'front')));
+  rest.forEach((m, i) => out.push(strip(m, FRONT + i, 'rear')));
+  return BattleParty.parse(out);
+}
+
+function strip(m: { affinity: 'front' | 'rear' | null } & Omit<PartyMember, 'slot' | 'row'>, slot: number, row: 'front' | 'rear'): PartyMember {
+  const { affinity: _affinity, ...rest } = m;
+  void _affinity;
+  return { ...rest, slot, row };
+}
+
+/** The active preset, or — when the player never made one — their strongest owned heroes, so a new account can fight immediately. */
+async function ownedTeam(db: D1Database, playerId: string, unitIds: ReadonlySet<string>): Promise<TeamMember[]> {
+  const row = await db.prepare('SELECT members_json FROM player_teams WHERE player_id = ?1 AND active = 1').bind(playerId).first<{ members_json: string }>();
+  if (row) {
+    const t = (JSON.parse(row.members_json) as TeamMember[]).filter((m) => unitIds.has(m.characterId));
+    if (t.length) return [...t].sort((a, b) => a.slot - b.slot);
+  }
+  const owned = (
+    await db
+      .prepare(
+        `SELECT i.item_id AS id, COALESCE(pc.level, 1) AS level, c.formation_affinity AS affinity FROM player_items i JOIN characters c ON c.id = i.item_id
+         LEFT JOIN player_chars pc ON pc.player_id = i.player_id AND pc.character_id = i.item_id
+         WHERE i.player_id = ?1 AND i.item_type = 'character' ORDER BY level DESC, i.item_id`
+      )
+      .bind(playerId)
+      .all<{ id: string; level: number; affinity: string | null }>()
+  ).results.filter((r) => unitIds.has(r.id));
+  return owned.slice(0, 5).map((r, i) => ({ characterId: r.id, slot: i, row: r.affinity === 'front' ? 'front' : 'rear' }));
+}

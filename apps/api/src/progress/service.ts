@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ChapterIndex, Encounter, RATION_COST, UnitPack, type RewardAttachment } from '@uomd/content-schema';
+import { BattleParty, ChapterIndex, Encounter, RATION_COST, UnitPack, type RewardAttachment } from '@uomd/content-schema';
 import { replayBattle } from '@uomd/combat';
 import { RATION_CAP, rationNextMs, rationNow, rationSpend, type RationState } from '@uomd/economy';
 import { sha256Hex } from '@uomd/shared';
@@ -7,6 +7,7 @@ import { ContentStore, HttpError } from '../content/store';
 import { grantStatements } from '../db/grants';
 import { taskEventStatements } from '../tasks/service';
 import { rollNodeDrops } from './drops';
+import { buildParty } from './party';
 import type { GameEnv } from '../env';
 
 export const BattleSubmission = z
@@ -14,6 +15,8 @@ export const BattleSubmission = z
     releaseId: z.string().regex(/^[a-z][a-z0-9_]{1,47}$/),
     nodeId: z.string().regex(/^[a-z][a-z0-9_]{1,79}$/),
     requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/),
+    /** owned-hero stages: the session returned by /progress/battle/start (the party is frozen in it) */
+    sessionId: z.string().regex(/^[a-f0-9]{32}$/).optional(),
     actions: z.array(z.object({ skillId: z.string().max(80), targetId: z.string().max(80).optional() }).strict()).max(600)
   })
   .strict();
@@ -47,6 +50,65 @@ export async function getProgress(db: D1Database, playerId: string, nowMs = Date
   return { nodes: results, ration: { value: r.state.value, cap: RATION_CAP, nextMs: rationNextMs(r.stored, nowMs) } };
 }
 
+
+interface Stage {
+  node: ReturnType<typeof ChapterIndex.parse>['chapters'][number]['nodes'][number];
+  pack: UnitPack;
+  encounter: Encounter;
+}
+
+/** The published node, its unit pack and encounter, after the "previous node cleared" gate. */
+async function loadStage(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, releaseId: string, nodeId: string): Promise<Stage> {
+  const db = env.DB;
+  const store = new ContentStore(db, env.CONTENT);
+  const rel = await store.getRelease(releaseId);
+  if (!rel || rel.state !== 'published' || rel.channel !== env.CONTENT_CHANNEL) throw new HttpError(404, 'unknown_release', 'release is not published on this channel');
+  const dec = new TextDecoder();
+  const indexBytes = await store.effectiveBytes(releaseId, 'chapters/chapter_index.json');
+  if (!indexBytes) throw new HttpError(404, 'unknown_node', 'release has no chapter index');
+  const index = ChapterIndex.parse(JSON.parse(dec.decode(indexBytes)));
+  const node = index.chapters.flatMap((c) => c.nodes).find((n) => n.node_id === nodeId);
+  if (!node || node.kind !== 'battle' || !node.encounter) throw new HttpError(404, 'unknown_node', 'no such battle node in this release');
+  if (node.requires) {
+    const req = await db.prepare('SELECT stars FROM player_progress WHERE player_id = ?1 AND node_id = ?2').bind(playerId, node.requires).first<{ stars: number }>();
+    if (!req || req.stars < 1) throw new HttpError(403, 'node_locked', `clear ${node.requires} first`);
+  }
+  const [packBytes, encBytes] = await Promise.all([store.effectiveBytes(releaseId, 'units/unit_pack.json'), store.effectiveBytes(releaseId, node.encounter)]);
+  if (!packBytes || !encBytes) throw new HttpError(404, 'unknown_encounter', 'encounter is not part of that release');
+  return { node, pack: UnitPack.parse(JSON.parse(dec.decode(packBytes))), encounter: Encounter.parse(JSON.parse(dec.decode(encBytes))) };
+}
+
+const SESSION_TTL_MS = 2 * 3_600_000;
+const MAX_OPEN_SESSIONS = 10;
+
+export interface BattleStart {
+  sessionId: string | null;
+  /** the exact player side to fight with (owned-hero stages), or null for fixed story encounters */
+  party: BattleParty | null;
+  expiresAt: string | null;
+}
+
+/**
+ * Step 1 of an owned-hero battle: freezes the party the server computed from the player's team, gear, ranks and the stage's story loans.
+ * The client must fight with exactly this party; the submit step replays against the frozen copy, never against live data.
+ */
+export async function startBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, input: { releaseId: string; nodeId: string }, now = new Date()): Promise<BattleStart> {
+  const stage = await loadStage(env, playerId, input.releaseId, input.nodeId);
+  if ((stage.encounter.party_mode ?? 'fixed') !== 'owned') return { sessionId: null, party: null, expiresAt: null };
+  const party = await buildParty(env.DB, playerId, stage.encounter, new Set(stage.pack.units.map((u) => u.unit_id)));
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  const id = [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('');
+  const expiresAt = new Date(now.getTime() + SESSION_TTL_MS).toISOString();
+  await env.DB.batch([
+    env.DB.prepare('DELETE FROM battle_sessions WHERE player_id = ?1 AND (expires_at < ?2 OR consumed_at IS NOT NULL)').bind(playerId, now.toISOString()),
+    // a player can hold a handful of open sessions; the oldest ones make room
+    env.DB.prepare(`DELETE FROM battle_sessions WHERE player_id = ?1 AND id IN (SELECT id FROM battle_sessions WHERE player_id = ?1 ORDER BY created_at DESC LIMIT -1 OFFSET ?2)`).bind(playerId, MAX_OPEN_SESSIONS - 1),
+    env.DB.prepare('INSERT INTO battle_sessions (id, player_id, release_id, node_id, party_json, created_at, expires_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)').bind(id, playerId, input.releaseId, input.nodeId, JSON.stringify(party), now.toISOString(), expiresAt)
+  ]);
+  return { sessionId: id, party, expiresAt };
+}
+
 /**
  * Accepts a battle result ONLY by re-simulating it on the server (deterministic engine + published content), then in one
  * atomic batch: pays Ration, upserts node progress, grants first-clear / three-star / repeat rewards and records the claim.
@@ -68,23 +130,23 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
   const first = await replay();
   if (first) return first;
 
-  const store = new ContentStore(db, env.CONTENT);
-  const rel = await store.getRelease(input.releaseId);
-  if (!rel || rel.state !== 'published' || rel.channel !== env.CONTENT_CHANNEL) throw new HttpError(404, 'unknown_release', 'release is not published on this channel');
-  const dec = new TextDecoder();
-  const indexBytes = await store.effectiveBytes(input.releaseId, 'chapters/chapter_index.json');
-  if (!indexBytes) throw new HttpError(404, 'unknown_node', 'release has no chapter index');
-  const index = ChapterIndex.parse(JSON.parse(dec.decode(indexBytes)));
-  const node = index.chapters.flatMap((c) => c.nodes).find((n) => n.node_id === input.nodeId);
-  if (!node || node.kind !== 'battle' || !node.encounter) throw new HttpError(404, 'unknown_node', 'no such battle node in this release');
-
-  if (node.requires) {
-    const req = await db.prepare('SELECT stars FROM player_progress WHERE player_id = ?1 AND node_id = ?2').bind(playerId, node.requires).first<{ stars: number }>();
-    if (!req || req.stars < 1) throw new HttpError(403, 'node_locked', `clear ${node.requires} first`);
+  const stage = await loadStage(env, playerId, input.releaseId, input.nodeId);
+  const node = stage.node;
+  let party: BattleParty | undefined;
+  let sessionRow: { id: string } | null = null;
+  if ((stage.encounter.party_mode ?? 'fixed') === 'owned') {
+    if (!input.sessionId) throw new HttpError(400, 'session_required', 'this stage is fought with your own heroes: start it first');
+    const sess = await db
+      .prepare('SELECT id, release_id, node_id, party_json, expires_at, consumed_at FROM battle_sessions WHERE id = ?1 AND player_id = ?2')
+      .bind(input.sessionId, playerId)
+      .first<{ id: string; release_id: string; node_id: string; party_json: string; expires_at: string; consumed_at: string | null }>();
+    if (!sess || sess.release_id !== input.releaseId || sess.node_id !== input.nodeId) throw new HttpError(404, 'unknown_session', 'no such battle session for this stage');
+    if (sess.consumed_at) throw new HttpError(409, 'session_used', 'this battle session was already submitted');
+    if (Date.parse(sess.expires_at) < nowMs) throw new HttpError(409, 'session_expired', 'this battle session expired; start the stage again');
+    party = BattleParty.parse(JSON.parse(sess.party_json));
+    sessionRow = { id: sess.id };
   }
-  const [packBytes, encBytes] = await Promise.all([store.effectiveBytes(input.releaseId, 'units/unit_pack.json'), store.effectiveBytes(input.releaseId, node.encounter)]);
-  if (!packBytes || !encBytes) throw new HttpError(404, 'unknown_encounter', 'encounter is not part of that release');
-  const out = await replayBattle(UnitPack.parse(JSON.parse(dec.decode(packBytes))), Encounter.parse(JSON.parse(dec.decode(encBytes))), input.actions);
+  const out = await replayBattle(stage.pack, stage.encounter, input.actions, party);
   if (!out.valid || !out.complete || out.result?.winner !== 'player') {
     throw new HttpError(422, 'battle_not_won', out.valid ? (out.complete ? 'the battle was not won' : 'the action list does not finish the battle') : (out.error ?? 'illegal action list'));
   }
@@ -124,6 +186,12 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
       ration: { spent: cost }
     };
     const batch: D1PreparedStatement[] = [];
+    if (sessionRow) {
+      batch.push(
+        db.prepare('UPDATE battle_sessions SET consumed_at = ?2 WHERE id = ?1 AND consumed_at IS NULL').bind(sessionRow.id, now.toISOString()),
+        db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)')
+      );
+    }
     if (cost > 0 && spent) {
       batch.push(
         db.prepare('INSERT OR IGNORE INTO player_ration (player_id, value, at_ms) VALUES (?1, ?2, ?3)').bind(playerId, ration.stored.value, ration.stored.atMs),
