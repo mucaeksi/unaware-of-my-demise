@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a1_layout",
+  "title_en": "A Place to Use the Book",
+  "location_id": "dr_refuge_desk",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_desk"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_layout_001",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "The shelf gives us space to sort the pages. We must keep the route to it clear.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_layout_002",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "The wall table lets people come to the record. We must hold this entrance steady.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_layout_003",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "The book has no preference. Its readers do.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "mirel_quill"
+    },
+    {
+      "op": "hide",
+      "character": "sister_aveline"
+    },
+    {
+      "op": "choice",
+      "prompt": "Prepare the working place.",
+      "options": [
+        {
+          "id": "dr_layout_shelf",
+          "text": "Move the records to the dry side room.",
+          "goto": "shelf"
+        },
+        {
+          "id": "dr_layout_desk",
+          "text": "Prepare the sheltered wall table.",
+          "goto": "desk"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "shelf"
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_layout_004",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "Page numbers outward. Then we can find the line without turning everything over.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_layout_005",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "I will keep the waiting place beside the door.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "mirel_quill"
+    },
+    {
+      "op": "hide",
+      "character": "sister_aveline"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "desk"
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_layout_006",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Keep the opening wide enough for two people to pass.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_layout_007",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "I will make the slips face the reader, rather than the wall.",
+      "emotion": "precise"
+    },
+    {
+      "op": "hide",
+      "character": "mirel_quill"
+    },
+    {
+      "op": "hide",
+      "character": "sister_aveline"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a1_layout_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

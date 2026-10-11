@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_job_wood_1",
+  "title_en": "Under the Table",
+  "location_id": "od_table_work",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "od_table_work"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_1_001",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Hold it there. No, lower. I need the board level, not impressed.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_1_002",
+      "speaker": "od_helper",
+      "speaker_display": "Helper",
+      "text": "Will it hold that many people?",
+      "emotion": "worried"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_1_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "It will hold the dishes. The people get chairs.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_1_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I was looking forward to standing on it.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_1_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "You can disappoint yourself before the soup does it for you.",
+      "emotion": "dry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_job_wood_1_006",
+      "text": "The helper laughs and stops gripping the board hard enough to shake it."
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_1_007",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "There. You can let go of that end. I have this one.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_1_008",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Is that your best table-making voice?",
+      "emotion": "bright"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_1_009",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "It is my voice for people putting their fingers where the hammer goes.",
+      "emotion": "annoyed"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_job_wood_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

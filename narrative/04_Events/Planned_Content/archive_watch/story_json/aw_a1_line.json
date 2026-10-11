@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "scene_id": "aw_a1_line",
+  "title_en": "Choose the First Reading",
+  "location_id": "undercity_antidote_archive",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_antidote_archive"
+    },
+    {
+      "op": "music",
+      "cue_id": "aw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_line_001",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "A reaching threat asks you to look past the first body.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_line_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "A heavy front asks you not to forget the body nearest you.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_line_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Choose one emphasis. You will still see the other.",
+      "emotion": "precise"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "choice",
+      "prompt": "Choose the line emphasis.",
+      "options": [
+        {
+          "id": "aw_line_steady",
+          "text": "Practice holding steady front pressure.",
+          "goto": "steady"
+        },
+        {
+          "id": "aw_line_reach",
+          "text": "Practice noticing the reaching threat.",
+          "goto": "reach"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "steady"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_line_004",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Keep enough room to recover. There is no virtue in panicking early.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_line_005",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Steady front. Recorded. It is a choice, not a score.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "reach"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_line_006",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Check who can reach past the line before choosing the nearest target.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_line_007",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Reaching threat. Recorded. The diagram will not hide it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "aw_a1_line_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "tactical_archive_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_a4_quiet_echo",
+  "title_en": "A Place beside the Noise",
+  "location_id": "oakhaven_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "oakhaven_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_quiet_echo_001",
+      "speaker": "od_guest",
+      "speaker_display": "Guest",
+      "text": "I thought I might listen from here.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_quiet_echo_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "It is a good place to listen.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_quiet_echo_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Nobody needs to move closer.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_quiet_echo_004",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "If you want to join, you will hear where your line belongs.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_a4_quiet_echo_005",
+      "text": "The guest keeps the space they chose. The song can reach it."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_a4_quiet_echo_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

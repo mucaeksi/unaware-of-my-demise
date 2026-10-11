@@ -1,0 +1,320 @@
+{
+  "checked_at_utc": "2026-10-11T09:08:34.380Z",
+  "validated_against_main": "99df3cf",
+  "source_integrity": "PASS: source hashes and all copied canon fields unchanged",
+  "story_schema": "PASS: 31 exports",
+  "script_equivalence": "PASS: 316 unique lines",
+  "graph": "PASS: 32 complete paths; all 39 nodes reachable",
+  "runner": "PASS: save/restore after every line, before pending choice, and at scene checkpoints; pending choice saving rejected as expected",
+  "encounters": "PASS: 8 referenced variants, 2 front / 3 rear",
+  "replay_catalog": "PASS: 2 bounded segments and all conversation targets",
+  "rewards": "UNDECIDED",
+  "scene_count": 31,
+  "line_count": 316,
+  "canon_line_count": 11,
+  "decision_combinations": 32,
+  "encounter_variants": 8,
+  "battles_per_first_run": 5,
+  "first_path_lines": [
+    224,
+    225
+  ],
+  "first_path_words": [
+    2194,
+    2284
+  ],
+  "limits": [
+    "VM and authoring validation; no event API, production roster balance, visual/audio playback, Android or signed patch test.",
+    "Combat role feasibility prototype is separately tested; it does not replace canonical hero/unit or production balance mappings."
+  ],
+  "paths": [
+    {
+      "prep": "clean",
+      "route": "coast",
+      "approach": "show",
+      "focus": "kera",
+      "line_count": 224,
+      "words": 2204,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "coast",
+      "approach": "show",
+      "focus": "tilda",
+      "line_count": 224,
+      "words": 2209,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "coast",
+      "approach": "show",
+      "focus": "iona",
+      "line_count": 224,
+      "words": 2208,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "coast",
+      "approach": "show",
+      "focus": "odelia",
+      "line_count": 224,
+      "words": 2194,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "coast",
+      "approach": "listen",
+      "focus": "kera",
+      "line_count": 224,
+      "words": 2219,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "coast",
+      "approach": "listen",
+      "focus": "tilda",
+      "line_count": 224,
+      "words": 2224,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "coast",
+      "approach": "listen",
+      "focus": "iona",
+      "line_count": 224,
+      "words": 2223,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "coast",
+      "approach": "listen",
+      "focus": "odelia",
+      "line_count": 224,
+      "words": 2209,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "load",
+      "approach": "show",
+      "focus": "kera",
+      "line_count": 225,
+      "words": 2244,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "load",
+      "approach": "show",
+      "focus": "tilda",
+      "line_count": 225,
+      "words": 2249,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "load",
+      "approach": "show",
+      "focus": "iona",
+      "line_count": 225,
+      "words": 2248,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "load",
+      "approach": "show",
+      "focus": "odelia",
+      "line_count": 225,
+      "words": 2234,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "load",
+      "approach": "listen",
+      "focus": "kera",
+      "line_count": 225,
+      "words": 2259,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "load",
+      "approach": "listen",
+      "focus": "tilda",
+      "line_count": 225,
+      "words": 2264,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "load",
+      "approach": "listen",
+      "focus": "iona",
+      "line_count": 225,
+      "words": 2263,
+      "battles": 5
+    },
+    {
+      "prep": "clean",
+      "route": "load",
+      "approach": "listen",
+      "focus": "odelia",
+      "line_count": 225,
+      "words": 2249,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "coast",
+      "approach": "show",
+      "focus": "kera",
+      "line_count": 224,
+      "words": 2224,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "coast",
+      "approach": "show",
+      "focus": "tilda",
+      "line_count": 224,
+      "words": 2229,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "coast",
+      "approach": "show",
+      "focus": "iona",
+      "line_count": 224,
+      "words": 2228,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "coast",
+      "approach": "show",
+      "focus": "odelia",
+      "line_count": 224,
+      "words": 2214,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "coast",
+      "approach": "listen",
+      "focus": "kera",
+      "line_count": 224,
+      "words": 2239,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "coast",
+      "approach": "listen",
+      "focus": "tilda",
+      "line_count": 224,
+      "words": 2244,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "coast",
+      "approach": "listen",
+      "focus": "iona",
+      "line_count": 224,
+      "words": 2243,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "coast",
+      "approach": "listen",
+      "focus": "odelia",
+      "line_count": 224,
+      "words": 2229,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "load",
+      "approach": "show",
+      "focus": "kera",
+      "line_count": 225,
+      "words": 2264,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "load",
+      "approach": "show",
+      "focus": "tilda",
+      "line_count": 225,
+      "words": 2269,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "load",
+      "approach": "show",
+      "focus": "iona",
+      "line_count": 225,
+      "words": 2268,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "load",
+      "approach": "show",
+      "focus": "odelia",
+      "line_count": 225,
+      "words": 2254,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "load",
+      "approach": "listen",
+      "focus": "kera",
+      "line_count": 225,
+      "words": 2279,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "load",
+      "approach": "listen",
+      "focus": "tilda",
+      "line_count": 225,
+      "words": 2284,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "load",
+      "approach": "listen",
+      "focus": "iona",
+      "line_count": 225,
+      "words": 2283,
+      "battles": 5
+    },
+    {
+      "prep": "scout",
+      "route": "load",
+      "approach": "listen",
+      "focus": "odelia",
+      "line_count": 225,
+      "words": 2269,
+      "battles": 5
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a1_handoff",
+  "title_en": "Show the Next Hands",
+  "location_id": "or_relief_stop",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_relief_stop"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_handoff_001",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "We can start with finding and replacing supplies, or with keeping the way through open.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_handoff_002",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "The first needs a steady entrance. The second needs the reaching threat noticed early.",
+      "emotion": "measured"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_handoff_003",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "Tell me what to try. I will do it, rather than promise I understood.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nara_vell"
+    },
+    {
+      "op": "hide",
+      "character": "marek_vane"
+    },
+    {
+      "op": "choice",
+      "prompt": "Begin the handover.",
+      "options": [
+        {
+          "id": "or_handoff_supply",
+          "text": "Teach the supply handover first.",
+          "goto": "supply"
+        },
+        {
+          "id": "or_handoff_passage",
+          "text": "Teach the open passage first.",
+          "goto": "passage"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "supply"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_handoff_004",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "Find a cloth, bring it to the bench, then show where the next one waits.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_handoff_005",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "I will watch the approach while you learn the order.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "nara_vell"
+    },
+    {
+      "op": "hide",
+      "character": "marek_vane"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "passage"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_handoff_006",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Walk it as if you had never seen this stop. Tell us where you must hesitate.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_handoff_007",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "I will carry the empty basket through after you.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "nara_vell"
+    },
+    {
+      "op": "hide",
+      "character": "marek_vane"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a1_handoff_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

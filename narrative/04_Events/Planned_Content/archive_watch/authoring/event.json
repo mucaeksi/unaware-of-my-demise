@@ -1,0 +1,904 @@
+{
+  "authoring_schema_version": 1,
+  "status": "complete_authored_draft_not_deployed",
+  "event_id": "tactical_archive_watch",
+  "title_en": "Archive Watch",
+  "title_tr": "Arşiv Nöbeti",
+  "content_kind": "isolated_tactical_practice",
+  "canon_source_event_id": null,
+  "delivery": "future_declarative_content_patch",
+  "unlock": {
+    "after_stage": "4-5",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "availability": {
+    "publish_at": null,
+    "expires_at": null
+  },
+  "rewards": {
+    "status": "undecided_by_owner",
+    "binding": null
+  },
+  "entry_node": "aw_a1_book",
+  "completion_node": "aw_complete",
+  "state_keys": {
+    "line": [
+      "steady",
+      "reach"
+    ],
+    "response": [
+      "interrupt",
+      "endure"
+    ],
+    "review": [
+      "steady",
+      "reach"
+    ]
+  },
+  "validation_cases": [
+    {
+      "line": "steady",
+      "response": "interrupt",
+      "review": "steady"
+    },
+    {
+      "line": "steady",
+      "response": "interrupt",
+      "review": "reach"
+    },
+    {
+      "line": "steady",
+      "response": "endure",
+      "review": "steady"
+    },
+    {
+      "line": "steady",
+      "response": "endure",
+      "review": "reach"
+    },
+    {
+      "line": "reach",
+      "response": "interrupt",
+      "review": "steady"
+    },
+    {
+      "line": "reach",
+      "response": "interrupt",
+      "review": "reach"
+    },
+    {
+      "line": "reach",
+      "response": "endure",
+      "review": "steady"
+    },
+    {
+      "line": "reach",
+      "response": "endure",
+      "review": "reach"
+    }
+  ],
+  "expected_battles_per_run": 3,
+  "sources": [
+    {
+      "path": "narrative/07_Enemies_Bosses/bestiary.md",
+      "sha256": "b70789fe8149b1fba7ef8c4f0bae9c852beb52a7a18e62890b47e6418d5e8b2e"
+    },
+    {
+      "path": "narrative/01_Story_Bible/STORY_BIBLE_PART1.md",
+      "sha256": "7f1d798e2fa4491f8d4e5870e1378bf84d2b2fffcaeaea73a0f65b9f434b9f2c"
+    },
+    {
+      "path": "narrative/00_Canon/SPOILER_UNLOCK_POLICY.md",
+      "sha256": "14c09c1795a3a3373ada44e25b1e1f49015abba72b030323733c2e9abbafa7c8"
+    },
+    {
+      "path": "narrative/05_Codex_Lore/world_rules.md",
+      "sha256": "0c1afcab2dd07302798aa36ff6ad9c517e00e4bef75bf7fd45bd93970f35a373"
+    },
+    {
+      "path": "narrative/03_Companion_Stories/character_stories_part1.json",
+      "sha256": "c4e5104df0a7b263f1e59facb1b4b5db3f79f8546186b553e6b1d9fc53605e4a"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/kera_voss.md",
+      "sha256": "7aba38465821b713a287f9630b21daa4043da65e5fd87dc577ace47c607dbb3b"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/tilda_fen.md",
+      "sha256": "29048ba7310ab36fbbdc9fb89e03867b9e213a326915a6a6a92f42af26fe9149"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/iona_mist.md",
+      "sha256": "f53cfe3f482fa6629be6dc6aa36f8847d2e60c78583b4681aa66f7892d9e3a87"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/odelia_pike.md",
+      "sha256": "77d6a972e78872f0cd7488803a0a102ae131f00a3507520b9bda80802c64c882"
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "aw_a1_book",
+      "act": 1,
+      "title_en": "Three Cases, No New Attack",
+      "location_id": "undercity_antidote_archive",
+      "direction_en": "An archive casebook frames isolated battle reconstructions. No live dead are brought into the clinic; these are not repeated canon assaults.",
+      "purpose_tr": "Noncanonsimulationframe; actualclinicalarmy attacks yok.",
+      "music_cue": "aw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "aw_a1_book_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Kera opens a casebook on a clear table. Three diagrams show roads already known, and threats already met.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "aw_a1_book_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Three cases. No new alarm. No patients needed for demonstration.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a1_book_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "An excellent beginning for a training plan.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a1_book_004",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Are we reading or trying another way through?",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a1_book_005",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Both. A diagram is less convincing when nobody can use it.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a1_book_006",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Then we keep the case separate from the people who lived it.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a1_book_007",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The book stays in the archive. The exercise opens as a reconstruction, not as another journey in their day.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "aw_a1_line",
+      "act": 1,
+      "title_en": "Choose the First Reading",
+      "location_id": "undercity_antidote_archive",
+      "direction_en": "The line choice selects fixed formations in cases one and three; it creates no permanent stat buff.",
+      "purpose_tr": "Line2×response2=4profiles; preparationselectsno globalstatus.",
+      "music_cue": "aw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "aw_a1_line_001",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "A reaching threat asks you to look past the first body.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a1_line_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "A heavy front asks you not to forget the body nearest you.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a1_line_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Choose one emphasis. You will still see the other.",
+          "emotion": "precise",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Choose the line emphasis.",
+        "state_key": "line",
+        "options": [
+          {
+            "id": "aw_line_steady",
+            "value": "steady",
+            "text_en": "Practice holding steady front pressure.",
+            "consequence_en": "Case one uses two front pressure units; case three carries this emphasis.",
+            "lines": [
+              {
+                "line_id": "aw_a1_line_004",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "Keep enough room to recover. There is no virtue in panicking early.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "aw_a1_line_005",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "Steady front. Recorded. It is a choice, not a score.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "aw_line_reach",
+            "value": "reach",
+            "text_en": "Practice noticing the reaching threat.",
+            "consequence_en": "Case one includes a clear rear-reaching attacker; case three carries this emphasis.",
+            "lines": [
+              {
+                "line_id": "aw_a1_line_006",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "Check who can reach past the line before choosing the nearest target.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "aw_a1_line_007",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "Reaching threat. Recorded. The diagram will not hide it.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "aw_a1_response",
+      "act": 1,
+      "title_en": "Choose the Second Reading",
+      "location_id": "undercity_antidote_archive",
+      "direction_en": "The response choice selects case two and final combinations. Both supported tactics can finish.",
+      "purpose_tr": "Responsefixedprofile selection; no engineinput timing/reflex.",
+      "music_cue": "aw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "aw_a1_response_001",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "A supporting enemy can be stopped early. Or its pressure can be outlasted while we keep the party ready.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a1_response_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The case must be readable either way. Nobody needs an answer we hid in the notes.",
+          "emotion": "precise",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a1_response_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "That includes the author of the notes.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Choose the support-pressure exercise.",
+        "state_key": "response",
+        "options": [
+          {
+            "id": "aw_response_interrupt",
+            "value": "interrupt",
+            "text_en": "Practice early support target priority.",
+            "consequence_en": "Case two exposes a priority support; no special interrupt button is required.",
+            "lines": [
+              {
+                "line_id": "aw_a1_response_004",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "Then I will watch where the support can be reached.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "aw_a1_response_005",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "And keep the front ready while you choose it.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "aw_response_endure",
+            "value": "endure",
+            "text_en": "Practice recovery under support pressure.",
+            "consequence_en": "Case two emphasizes sustainable pressure; target priority can still win.",
+            "lines": [
+              {
+                "line_id": "aw_a1_response_006",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "Then read the incoming action before spending your recovery.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "aw_a1_response_007",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "An economical answer. I approve when it does not get anyone killed.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "aw_a2_before",
+      "act": 2,
+      "title_en": "Case One: Look Past the First Body",
+      "location_id": "aw_case_board",
+      "direction_en": "Case one begins with fresh battle state. Only exercise units appear; the scene is a casebook reconstruction.",
+      "purpose_tr": "Case1 fullfresh5v5. Runtime battlehost mustapplyreset.",
+      "music_cue": "aw_case",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "aw_a2_before_001",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "First case. Look at the whole line before picking the first target.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a2_before_002",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The nearest threat is visible. So is the one behind it.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a2_before_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Winning slowly is permitted. Failing to notice pressure is what we are practicing against.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a2_before_004",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The first case opens on its own. No wound from another exercise follows into it.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "aw_a2_after",
+      "act": 2,
+      "title_en": "An Answer Worth Keeping",
+      "location_id": "aw_case_board",
+      "direction_en": "Feedback reports the selected emphasis and completion, not an invented combat metric or claim about the player’s actions.",
+      "purpose_tr": "No fake“youusedheal”dynamicfeedback; actualresult victoryonly.",
+      "music_cue": "aw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "aw_a2_after_001",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "The case is complete. You can try another line without rewriting this one.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a2_after_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Keep the chosen emphasis beside the result. Victory alone does not tell us what we intended.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a2_after_003",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The book would become shorter if it did.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a2_after_004",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "It would become less useful.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a2_after_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The next diagram is its own exercise, with the party ready to begin again.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "aw_a3_before",
+      "act": 3,
+      "title_en": "Case Two: Pressure with a Source",
+      "location_id": "aw_case_board",
+      "direction_en": "Case two uses the chosen support profile and fresh party resources. No battle is in the archive room.",
+      "purpose_tr": "Case2 responsevars2. Intenttable no lore.",
+      "music_cue": "aw_case",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "aw_a3_before_001",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Second case. The pressure has a source. Read its intent before choosing your response.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a3_before_002",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "You may remove it early or stay ready while it acts. The exercise must allow both.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a3_before_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Do not confuse a slower victory with a failed one.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a3_before_004",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "And do not confuse the nearest enemy with the source.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a3_before_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The second diagram opens without carrying wounds from the first.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "aw_a3_after",
+      "act": 3,
+      "title_en": "The Response in the Notes",
+      "location_id": "aw_case_board",
+      "direction_en": "Completion is recorded beside the intended response; no mastery payout or star condition.",
+      "purpose_tr": "Tuning authoringline incharacterKeraacceptabletalkscientific; no measurablebalancepromise.",
+      "music_cue": "aw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "aw_a3_after_001",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Enough pressure to read. Enough room to answer.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a3_after_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The same pressure should leave room for more than one answer.",
+          "emotion": "precise",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a3_after_003",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "The people in the original case could not try another answer. Our notes must remember that.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a3_after_004",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The notes keep the exercise separate from its source.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "aw_a4_before",
+      "act": 4,
+      "title_en": "Case Three: Keep Both Questions",
+      "location_id": "aw_case_board",
+      "direction_en": "The final case combines line and response selections. Four fixed references, no random modifier code.",
+      "purpose_tr": "Case3 4fixedprofiles; no superscript/gacha lock.",
+      "music_cue": "aw_case",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "aw_a4_before_001",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Last case. The front question and the support question arrive together.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a4_before_002",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Look beyond the first threat without abandoning the people in front.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a4_before_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Keep the party ready without letting the pressure become invisible.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a4_before_004",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "The notes are not asking you to be fast. They are asking you to keep both questions in sight.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a4_before_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The final reconstruction opens on its own, with the chosen threats in sight.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "aw_a4_profile",
+      "act": 4,
+      "title_en": "What We Chose to Practice",
+      "location_id": "undercity_antidote_archive",
+      "direction_en": "Choose a closing discussion about either reading without changing the saved exercise profile. No unobserved combat metric is reported.",
+      "purpose_tr": "Review seçimi bağımsızclosure, profile4×review2=8validpaths; no correctnessscore.",
+      "music_cue": "aw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "aw_a4_profile_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The casebook shows the chosen emphasis beside three completed exercises.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Choose the closing discussion.",
+        "state_key": "review",
+        "options": [
+          {
+            "id": "aw_review_steady",
+            "value": "steady",
+            "text_en": "Review the steady-front reading.",
+            "consequence_en": "A short note on keeping the front question visible; no new battle or reward.",
+            "lines": [
+              {
+                "line_id": "aw_a4_profile_002",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "Holding the front is useful when it leaves room for someone else to answer the support.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "aw_a4_profile_003",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "A front that lasts long enough for the next decision. That is the intended lesson.",
+                "emotion": "precise",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "aw_review_reach",
+            "value": "reach",
+            "text_en": "Review the reaching-threat reading.",
+            "consequence_en": "A short note on looking beyond the front; no new battle or reward.",
+            "lines": [
+              {
+                "line_id": "aw_a4_profile_004",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "The farther threat needs attention before distance makes it look harmless.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "aw_a4_profile_005",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "And the people in front still need room to stay ready while you choose it.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "aw_a4_end",
+      "act": 4,
+      "title_en": "Close the Book, Keep the Question",
+      "location_id": "undercity_antidote_archive",
+      "direction_en": "End the isolated session. Account progression and original event choices are untouched; rewards remain undecided.",
+      "purpose_tr": "Nodailyreset/leaderboardloop; futureonlyrepeatnotcanonnewattacks.",
+      "music_cue": "aw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "aw_a4_end_001",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "You can close the book. Another profile will still be here.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a4_end_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "And the clinic will still need its table.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a4_end_003",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Try another case when you want another answer. Not because a bell tells you to hurry back.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a4_end_004",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "A useful exercise. No one had to make the road dangerous again.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "aw_a4_end_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Kera closes the diagrams. Outside the exercise, the archive remains an archive.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    }
+  ],
+  "graph": [
+    {
+      "node_id": "aw_a1_book",
+      "kind": "story",
+      "ref": "aw_a1_book",
+      "transitions": [
+        {
+          "to": "aw_a1_line"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_a1_line",
+      "kind": "story",
+      "ref": "aw_a1_line",
+      "transitions": [
+        {
+          "to": "aw_a1_response"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_a1_response",
+      "kind": "story",
+      "ref": "aw_a1_response",
+      "transitions": [
+        {
+          "to": "aw_a2_before"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_a2_before",
+      "kind": "story",
+      "ref": "aw_a2_before",
+      "transitions": [
+        {
+          "to": "aw_b01"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_b01",
+      "kind": "battle",
+      "ref": {
+        "select_by": "line",
+        "variants": {
+          "steady": "aw_enc_first_steady",
+          "reach": "aw_enc_first_reach"
+        }
+      },
+      "transitions": [
+        {
+          "to": "aw_a2_after"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_a2_after",
+      "kind": "story",
+      "ref": "aw_a2_after",
+      "transitions": [
+        {
+          "to": "aw_a3_before"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_a3_before",
+      "kind": "story",
+      "ref": "aw_a3_before",
+      "transitions": [
+        {
+          "to": "aw_b02"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_b02",
+      "kind": "battle",
+      "ref": {
+        "select_by": "response",
+        "variants": {
+          "interrupt": "aw_enc_second_interrupt",
+          "endure": "aw_enc_second_endure"
+        }
+      },
+      "transitions": [
+        {
+          "to": "aw_a3_after"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_a3_after",
+      "kind": "story",
+      "ref": "aw_a3_after",
+      "transitions": [
+        {
+          "to": "aw_a4_before"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_a4_before",
+      "kind": "story",
+      "ref": "aw_a4_before",
+      "transitions": [
+        {
+          "to": "aw_b03"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_b03",
+      "kind": "battle",
+      "ref": {
+        "select_by_all": [
+          "line",
+          "response"
+        ],
+        "variants": {
+          "steady__interrupt": "aw_enc_final_steady_interrupt",
+          "steady__endure": "aw_enc_final_steady_endure",
+          "reach__interrupt": "aw_enc_final_reach_interrupt",
+          "reach__endure": "aw_enc_final_reach_endure"
+        }
+      },
+      "transitions": [
+        {
+          "to": "aw_a4_profile"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_a4_profile",
+      "kind": "story",
+      "ref": "aw_a4_profile",
+      "transitions": [
+        {
+          "to": "aw_a4_end"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_a4_end",
+      "kind": "story",
+      "ref": "aw_a4_end",
+      "transitions": [
+        {
+          "to": "aw_complete"
+        }
+      ]
+    },
+    {
+      "node_id": "aw_complete",
+      "kind": "complete",
+      "ref": null,
+      "transitions": []
+    }
+  ],
+  "min_client_version": null,
+  "compatibility_note_tr": "Story exports mevcut StoryScene grammar; graph/encounter JSON authoring formatıdır. Medya/roster ve server adapter sonraki aşama."
+}

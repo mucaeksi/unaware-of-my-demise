@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a4_end",
+  "title_en": "A Place That Continues",
+  "location_id": "or_relief_stop",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_relief_stop"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_end_001",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "Will you be back?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_end_002",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "We will walk with the next people who need the road. You know how to keep this place.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_end_003",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Ask for help before the waiting space closes. You do not have to manage every arrival alone.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "or_a4_end_004",
+      "text": "A new volunteer takes the basket. The first stays seated long enough to finish the water."
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_end_005",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "They have already become better at resting than we are.",
+      "emotion": "wry"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_end_006",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Then we taught something useful.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a4_end_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

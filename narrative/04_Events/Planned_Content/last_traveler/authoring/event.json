@@ -1,0 +1,1494 @@
+{
+  "authoring_schema_version": 1,
+  "status": "complete_authored_draft_not_deployed",
+  "event_id": "side_quest_last_traveler",
+  "title_en": "For the Last Traveler",
+  "title_tr": "Son Geçen İçin",
+  "content_kind": "permanent_side_quest",
+  "canon_source_event_id": null,
+  "delivery": "future_declarative_content_patch",
+  "unlock": {
+    "after_stage": "1-4",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "availability": {
+    "publish_at": null,
+    "expires_at": null
+  },
+  "rewards": {
+    "status": "undecided_by_owner",
+    "binding": null
+  },
+  "entry_node": "lt_a1_sign",
+  "completion_node": "lt_complete",
+  "state_keys": {
+    "method": [
+      "scout",
+      "brace"
+    ],
+    "plan": [
+      "scout_tracks",
+      "scout_sound",
+      "brace_bank",
+      "brace_beam"
+    ],
+    "focus": [
+      "brin",
+      "nixie"
+    ]
+  },
+  "validation_cases": [
+    {
+      "method": "scout",
+      "plan": "scout_tracks",
+      "focus": "brin"
+    },
+    {
+      "method": "scout",
+      "plan": "scout_tracks",
+      "focus": "nixie"
+    },
+    {
+      "method": "scout",
+      "plan": "scout_sound",
+      "focus": "brin"
+    },
+    {
+      "method": "scout",
+      "plan": "scout_sound",
+      "focus": "nixie"
+    },
+    {
+      "method": "brace",
+      "plan": "brace_bank",
+      "focus": "brin"
+    },
+    {
+      "method": "brace",
+      "plan": "brace_bank",
+      "focus": "nixie"
+    },
+    {
+      "method": "brace",
+      "plan": "brace_beam",
+      "focus": "brin"
+    },
+    {
+      "method": "brace",
+      "plan": "brace_beam",
+      "focus": "nixie"
+    }
+  ],
+  "expected_battles_per_run": 1,
+  "sources": [
+    {
+      "path": "narrative/01_Story_Bible/STORY_BIBLE_PART1.md",
+      "sha256": "7f1d798e2fa4491f8d4e5870e1378bf84d2b2fffcaeaea73a0f65b9f434b9f2c"
+    },
+    {
+      "path": "narrative/00_Canon/SPOILER_UNLOCK_POLICY.md",
+      "sha256": "14c09c1795a3a3373ada44e25b1e1f49015abba72b030323733c2e9abbafa7c8"
+    },
+    {
+      "path": "narrative/05_Codex_Lore/world_rules.md",
+      "sha256": "0c1afcab2dd07302798aa36ff6ad9c517e00e4bef75bf7fd45bd93970f35a373"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/brin_alder.md",
+      "sha256": "f04487e626df91aa3bd7869903d32546634198fefff623ea4a749a129dafb374"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/nixie_vale.md",
+      "sha256": "d0bd90c6e7591f26987540d0d4d325f79b4e1298151cd14702e0eb6b3dd136a8"
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "lt_a1_sign",
+      "act": 1,
+      "title_en": "The Fallen Sign",
+      "location_id": "lt_forest_junction",
+      "direction_en": "A small route sign lies face-down beside the forest path. No carved personal name is being restored, and no royal clue is visible.",
+      "purpose_tr": "1-4 sonrası kısa yol aralığı; ana false-map olayını çözmez, silinen isim/kraliyet kaydı bulunmaz.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a1_sign_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "At the bend beyond the shrine, the sign is lying where nobody can read it without leaving the road.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "lt_a1_sign_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "That is an unhelpful place for a helpful thing.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_sign_003",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "The post is loose. I can stand it up again.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_sign_004",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "Wait. We should see why it fell.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_sign_005",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "A sign that tells us to step off the path deserves a little suspicion.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_sign_006",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "There are tracks behind it. Not all of them came from the road.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_sign_007",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "Something is moving at the far bend.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_sign_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Brin turns the sign face-up without pushing it into the earth.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "lt_a1_sign_009",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "We clear the passage before anyone follows it.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "lt_a1_load",
+      "act": 1,
+      "title_en": "Not All on One Shoulder",
+      "location_id": "lt_forest_junction",
+      "direction_en": "Brin tests the post with her shoulder while Nixie studies the lane. The others stand within sight rather than leaving them on a new expedition.",
+      "purpose_tr": "Paylaşılan emek; Brin’in büyük companion dönüm noktasını veya babasının olayını yeniden anlatmaz.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a1_load_001",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "The footing is soft here.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_load_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "I can find where it stops being soft.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_load_003",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "I can keep it steady while you look.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_load_004",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "Set it down until we have chosen the place. You do not need to hold it for us to talk.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_load_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Brin lowers the post. Nothing important falls with it.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "lt_a1_load_006",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "A useful beginning.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_load_007",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "I was afraid the plan would involve all of us leaning against it until evening.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_load_008",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "That would be a bad plan.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "lt_a1_method",
+      "act": 1,
+      "title_en": "Read the Road or Brace It",
+      "location_id": "lt_forest_junction",
+      "direction_en": "Two approaches are offered with visible tactical previews. They are methods, not a choice between saving one group and abandoning another.",
+      "purpose_tr": "İki ana yaklaşım. Yöntem alt seçimi farklı hazır encounter profiline bağlanır.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a1_method_001",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "I can read the turn first. Find what is coming and where it can reach.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_method_002",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "Or we brace the narrow side. Give the people behind us a clear place to wait.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_method_003",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "Either can work. Tell us what you need from the rest of us.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a1_method_004",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "Preferably before we all volunteer for the same end of a post.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Choose the first approach.",
+        "state_key": "method",
+        "options": [
+          {
+            "id": "lt_method_scout",
+            "value": "scout",
+            "text_en": "Read the turn — identify the reaching threat.",
+            "consequence_en": "Nixie leads. Inspect tracks or listen at the bend; rear threats are visible before battle.",
+            "lines": [
+              {
+                "line_id": "lt_a1_method_005",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "Stay where you can see the sign. I will not go beyond the first tree.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a1_method_006",
+                "speaker_id": "brin_alder",
+                "speaker_display": "Brin",
+                "text_en": "I will watch the space behind you.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a1_method_007",
+                "speaker_id": "mahmut",
+                "speaker_display": "Mahmut",
+                "text_en": "Call before you need us to move.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "lt_method_brace",
+            "value": "brace",
+            "text_en": "Brace the passage — steady the front line.",
+            "consequence_en": "Brin leads. Choose the bank or beam footing; front pressure is visible before battle.",
+            "lines": [
+              {
+                "line_id": "lt_a1_method_008",
+                "speaker_id": "brin_alder",
+                "speaker_display": "Brin",
+                "text_en": "We need a solid footing, not a taller barrier.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a1_method_009",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "I will check both approaches while you choose it.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a1_method_010",
+                "speaker_id": "fadyme",
+                "speaker_display": "Fadyme",
+                "text_en": "Then neither of you has to watch everything.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "lt_a2_scout_1",
+      "act": 2,
+      "title_en": "The Turn in the Leaves",
+      "location_id": "lt_scout_bend",
+      "direction_en": "Nixie stays in sight. Leaves cross a trail of dragging marks. All environmental clues are described in text, not hidden touch targets.",
+      "purpose_tr": "Sabit ipucu sunumu; pixel hunt, gizli zamanlayıcı veya yeni bell lore yok.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a2_scout_1_001",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "See the leaves along the edge? Something crossed the soft ground after they fell.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_1_002",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "A heavy step?",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_1_003",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "A dragging one. And this mark keeps going after the turn.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_1_004",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "We can read that part without following it.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_1_005",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "What else do you hear?",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_1_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "A faint knock comes from behind the bend. It does not follow the wind.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "lt_a2_scout_1_007",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Enough to choose what we watch first.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "lt_a2_scout_2",
+      "act": 2,
+      "title_en": "Two Ways to Check",
+      "location_id": "lt_scout_bend",
+      "direction_en": "Choose a visible observation. Both reveal a playable threat profile; neither gives a secret correct-answer reward.",
+      "purpose_tr": "İki geçerli okuma. İpuçları NPC kimliği/borcu hakkında çıkarım yapmaz.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a2_scout_2_001",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "The track tells us where something can reach. The knock tells us where the dead turn together.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_2_002",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "We can prepare for one first, without forgetting the other.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_2_003",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "Choose it. We stay within sight.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Which observation leads the preparation?",
+        "state_key": "plan",
+        "options": [
+          {
+            "id": "lt_plan_scout_tracks",
+            "value": "scout_tracks",
+            "text_en": "Inspect the dragging tracks — rear-line threat.",
+            "consequence_en": "Battle profile emphasizes a reaching attacker; a bellbound support is still visible.",
+            "lines": [
+              {
+                "line_id": "lt_a2_scout_2_004",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "The dragging staff can reach around the front. Keep the rear where we can protect it.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a2_scout_2_005",
+                "speaker_id": "brin_alder",
+                "speaker_display": "Brin",
+                "text_en": "I can hold the nearest one while you choose the attacker.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a2_scout_2_006",
+                "speaker_id": "fadyme",
+                "speaker_display": "Fadyme",
+                "text_en": "Then I will stay where both of you can see me.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "lt_plan_scout_sound",
+            "value": "scout_sound",
+            "text_en": "Listen at the bend — support threat.",
+            "consequence_en": "Battle profile emphasizes the bellbound support; reaching attacks remain visible.",
+            "lines": [
+              {
+                "line_id": "lt_a2_scout_2_007",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "The knock comes before the others move. We will see the bellbound one as soon as we step out.",
+                "emotion": "serious",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a2_scout_2_008",
+                "speaker_id": "mahmut",
+                "speaker_display": "Mahmut",
+                "text_en": "A target to notice. Not a reason to chase without checking the lane.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a2_scout_2_009",
+                "speaker_id": "brin_alder",
+                "speaker_display": "Brin",
+                "text_en": "I will keep the space behind us clear.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "lt_a2_scout_3",
+      "act": 2,
+      "title_en": "A Mark before the Bend",
+      "location_id": "lt_forest_junction",
+      "direction_en": "Nixie tests an arrow from the direction a new traveler will approach. The sign marks safe space, not a magic seal.",
+      "purpose_tr": "Keşif yaklaşımının sonuç hazırlığı; savaş öncesi birleşir.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a2_scout_3_001",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Here. They can see it before the turn.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_3_002",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "Not where you were standing when you drew it.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_3_003",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "You checked it from the other side.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_3_004",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "That is where someone will need it.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_3_005",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "A map improved by having more than one pair of feet.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_scout_3_006",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "We have the observation. Now we clear the passage.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "lt_a2_brace_1",
+      "act": 2,
+      "title_en": "The Footing",
+      "location_id": "lt_brace_bank",
+      "direction_en": "Brin compares a firm bank and a fallen beam. Both are intact enough to use. No engineering minigame or endangered NPC stands under them.",
+      "purpose_tr": "Tek başına dayanma motifine küçük katkı; Two Roofs gibi companion’ın merkezî seçimi kopyalanmaz.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a2_brace_1_001",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "The bank is firm. The beam is dry underneath.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_1_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "The narrow side is open from both. We can see the turn.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_1_003",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "Which place lets you share the work?",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_1_004",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "Either, if someone watches the side I cannot.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_1_005",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "We can do that.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_1_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Brin tests the ground once more, then steps back far enough for Nixie to see it too.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "lt_a2_brace_2",
+      "act": 2,
+      "title_en": "A Place to Hold",
+      "location_id": "lt_brace_bank",
+      "direction_en": "The support choice changes the visible enemy formation, never whether a beam crushes a traveler.",
+      "purpose_tr": "İki eşit hazırlık; geçici global shield/status veya yeni item yaratmaz.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a2_brace_2_001",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "The bank leaves a wide place behind us. The beam keeps the narrow line straight.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_2_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "If we use the bank, I can watch farther across. If we use the beam, I can watch the near gap.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_2_003",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "Both keep the road open. Choose the line you want to hold.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Choose the defensive footing.",
+        "state_key": "plan",
+        "options": [
+          {
+            "id": "lt_plan_brace_bank",
+            "value": "brace_bank",
+            "text_en": "Use the firm bank — steady front pressure.",
+            "consequence_en": "Battle profile emphasizes two front threats; recovery remains viable.",
+            "lines": [
+              {
+                "line_id": "lt_a2_brace_2_004",
+                "speaker_id": "brin_alder",
+                "speaker_display": "Brin",
+                "text_en": "Then we hold where nobody has to crowd behind me.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a2_brace_2_005",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "I will watch across the opening. Call if you need the pressure off one side.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a2_brace_2_006",
+                "speaker_id": "brin_alder",
+                "speaker_display": "Brin",
+                "text_en": "I will.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "lt_plan_brace_beam",
+            "value": "brace_beam",
+            "text_en": "Use the dry beam — front and support priority.",
+            "consequence_en": "Battle profile emphasizes a front threat with visible support behind it.",
+            "lines": [
+              {
+                "line_id": "lt_a2_brace_2_007",
+                "speaker_id": "brin_alder",
+                "speaker_display": "Brin",
+                "text_en": "The beam gives us a straight line. Nobody stands on it.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a2_brace_2_008",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "I will watch the gap beside it. The support behind the dead is visible from here.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a2_brace_2_009",
+                "speaker_id": "fadyme",
+                "speaker_display": "Fadyme",
+                "text_en": "A useful beam, with no volunteers underneath it.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "lt_a2_brace_3",
+      "act": 2,
+      "title_en": "The Other Side",
+      "location_id": "lt_forest_junction",
+      "direction_en": "Brin and Nixie rehearse a simple call before the fight. The rehearsal is a conversation, not a reflex test.",
+      "purpose_tr": "Yan görevin insanî çekirdeği; büyük karakter arc’ı tamamlanmaz.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a2_brace_3_001",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "I can keep this side clear.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_3_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Then I will check the other side.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_3_003",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "Call if you need me.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_3_004",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "You too.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a2_brace_3_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Brin nods as if it is an instruction worth remembering.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "lt_a2_brace_3_006",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "Good. We move together when the line is ready.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "lt_a3_watch",
+      "act": 3,
+      "title_en": "The Open Passage",
+      "location_id": "lt_forest_passage",
+      "direction_en": "The enemies are visible beyond the chosen footing. No traveler is a target or a sixth ally on the battlefield.",
+      "purpose_tr": "B01 dört plan varyantından biri. Canlı yolcu savaş alanına girmez.",
+      "music_cue": "lt_threat",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a3_watch_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The first dead figure appears around the bend. A staff strikes the post and keeps dragging.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "lt_a3_watch_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "There. The others are behind it.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a3_watch_003",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "We have space. Keep it.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a3_watch_004",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "The road is clear behind us.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a3_watch_005",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "Look at their intentions before choosing the first target.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a3_watch_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The fallen sign stays face-up, outside the fighting ground.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "lt_a3_clear",
+      "act": 3,
+      "title_en": "The Sign Stands",
+      "location_id": "lt_forest_junction",
+      "direction_en": "After standard victory, the group sets the sign on sound ground. The travelers approach only when the lane is safe.",
+      "purpose_tr": "Standard zafer tek şart. Ustalık/üç yıldız hikâye veya ödül kilidi değil.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a3_clear_001",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "Steady now.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a3_clear_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "And the arrow points before the turn.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a3_clear_003",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "I will check the far side one more time.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a3_clear_004",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "We have built a very small thing with a great deal of advice.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a3_clear_005",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "It only has to be useful.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a3_clear_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Nixie reads it from the road. Brin lets go of the post. It stays where it was put.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "lt_a3_clear_007",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Useful from this side too.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "lt_a4_traveler",
+      "act": 4,
+      "title_en": "The Last Traveler",
+      "location_id": "lt_forest_junction",
+      "direction_en": "A living traveler waits at the edge of the cleared passage. They are unnamed, event-scoped, and not a missing royal witness.",
+      "purpose_tr": "İsim/şahitlik dünyası korunur; kayıt zorunluluğu yeniden yazılmaz, gerçek isim girişi veya tanımsız soy yok.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a4_traveler_001",
+          "speaker_id": "lt_traveler",
+          "speaker_display": "Traveler",
+          "text_en": "Is the turn clear?",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_traveler_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Yes. Follow the mark before the bend. The sign is facing you now.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_traveler_003",
+          "speaker_id": "lt_traveler",
+          "speaker_display": "Traveler",
+          "text_en": "I was waiting for somebody else to take it first.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_traveler_004",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "You can take your time.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_traveler_005",
+          "speaker_id": "lt_traveler",
+          "speaker_display": "Traveler",
+          "text_en": "Do you need my name for the register?",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_traveler_006",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "The shrine keeper can help you with the register. We are clearing the road.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_traveler_007",
+          "speaker_id": "lt_traveler",
+          "speaker_display": "Traveler",
+          "text_en": "Then I will give it there.",
+          "emotion": "relieved",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_traveler_008",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "A sensible place to stop.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_traveler_009",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The traveler tests the footing, then walks through without needing to hurry.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "lt_a4_pause",
+      "act": 4,
+      "title_en": "One More Look",
+      "location_id": "lt_forest_junction",
+      "direction_en": "The traveler is safely beyond the turn. The company waits just long enough to see the sign work without being explained.",
+      "purpose_tr": "Son geçen, rota gününün son yolcusudur; ölüm/Last Bell kehaneti değildir.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a4_pause_001",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "They did not ask which way again.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_pause_002",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "They could see it.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_pause_003",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "That is a useful kind of answer.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_pause_004",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "We should continue before the road grows busy.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_pause_005",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "It is allowed to grow busy. That is what we fixed it for.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_pause_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Mahmut looks at the path, then nods. They gather their things without taking down the sign.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "lt_a4_company",
+      "act": 4,
+      "title_en": "A Small Thing Shared",
+      "location_id": "lt_forest_junction",
+      "direction_en": "Choose a short reflection with Brin or Nixie. Both preserve the same modest outcome.",
+      "purpose_tr": "İki replay edilebilir mini kapanış; NPC sonucu veya gelecek companion gate’i değişmez.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a4_company_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The post no longer needs a shoulder. The company has one quiet moment before moving on.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Whose small change do you notice?",
+        "state_key": "focus",
+        "options": [
+          {
+            "id": "lt_focus_brin",
+            "value": "brin",
+            "text_en": "Brin, watching without holding the post.",
+            "consequence_en": "A brief reflection on work that can be shared.",
+            "lines": [
+              {
+                "line_id": "lt_a4_company_002",
+                "speaker_id": "mahmut",
+                "speaker_display": "Mahmut",
+                "text_en": "It stayed when you let go.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a4_company_003",
+                "speaker_id": "brin_alder",
+                "speaker_display": "Brin",
+                "text_en": "We chose the ground before I held it.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a4_company_004",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "That was a very good improvement to the plan.",
+                "emotion": "small_smile",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a4_company_005",
+                "speaker_id": "brin_alder",
+                "speaker_display": "Brin",
+                "text_en": "You watched the side I could not.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a4_company_006",
+                "speaker_id": "fadyme",
+                "speaker_display": "Fadyme",
+                "text_en": "And you both told us where to stand.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a4_company_007",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "Brin checks the post once with her hand, not her whole weight.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              }
+            ]
+          },
+          {
+            "id": "lt_focus_nixie",
+            "value": "nixie",
+            "text_en": "Nixie, reading the mark from the road.",
+            "consequence_en": "A brief reflection on another person checking her view.",
+            "lines": [
+              {
+                "line_id": "lt_a4_company_008",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "Brin saw the mark from where the traveler would need it.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a4_company_009",
+                "speaker_id": "brin_alder",
+                "speaker_display": "Brin",
+                "text_en": "You drew it where it could be seen.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a4_company_010",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "After you looked.",
+                "emotion": "small_smile",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a4_company_011",
+                "speaker_id": "fadyme",
+                "speaker_display": "Fadyme",
+                "text_en": "An arrow with a second opinion. We should keep the idea.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a4_company_012",
+                "speaker_id": "mahmut",
+                "speaker_display": "Mahmut",
+                "text_en": "We can use it at the next turn.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "lt_a4_company_013",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "Nixie leaves the chalk in her pouch. This mark does not need another correction.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "lt_a4_end",
+      "act": 4,
+      "title_en": "A Road Left Open",
+      "location_id": "lt_forest_junction",
+      "direction_en": "The company leaves on its established route. The sign and clear passage remain; no new expedition delays the journey.",
+      "purpose_tr": "Ortak bitiş. 1-5 ve Ch2 olayları aynı; Brin’in 2-1 ayrılışı değiştirilmez.",
+      "music_cue": "lt_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "lt_a4_end_001",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Ready?",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_end_002",
+          "speaker_id": "brin_alder",
+          "speaker_display": "Brin",
+          "text_en": "Ready.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_end_003",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "Good. I was beginning to think the sign might join the company.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_end_004",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "It has a place to stay.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "lt_a4_end_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Behind them, the road bends out of sight. The arrow points before it does.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    }
+  ],
+  "graph": [
+    {
+      "node_id": "lt_a1_sign",
+      "kind": "story",
+      "ref": "lt_a1_sign",
+      "transitions": [
+        {
+          "to": "lt_a1_load"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a1_load",
+      "kind": "story",
+      "ref": "lt_a1_load",
+      "transitions": [
+        {
+          "to": "lt_a1_method"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a1_method",
+      "kind": "story",
+      "ref": "lt_a1_method",
+      "transitions": [
+        {
+          "to": "lt_a2_scout_1",
+          "when": {
+            "state_key": "method",
+            "equals": "scout"
+          }
+        },
+        {
+          "to": "lt_a2_brace_1",
+          "when": {
+            "state_key": "method",
+            "equals": "brace"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a2_scout_1",
+      "kind": "story",
+      "ref": "lt_a2_scout_1",
+      "transitions": [
+        {
+          "to": "lt_a2_scout_2"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a2_scout_2",
+      "kind": "story",
+      "ref": "lt_a2_scout_2",
+      "transitions": [
+        {
+          "to": "lt_a2_scout_3"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a2_scout_3",
+      "kind": "story",
+      "ref": "lt_a2_scout_3",
+      "transitions": [
+        {
+          "to": "lt_a3_watch"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a2_brace_1",
+      "kind": "story",
+      "ref": "lt_a2_brace_1",
+      "transitions": [
+        {
+          "to": "lt_a2_brace_2"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a2_brace_2",
+      "kind": "story",
+      "ref": "lt_a2_brace_2",
+      "transitions": [
+        {
+          "to": "lt_a2_brace_3"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a2_brace_3",
+      "kind": "story",
+      "ref": "lt_a2_brace_3",
+      "transitions": [
+        {
+          "to": "lt_a3_watch"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a3_watch",
+      "kind": "story",
+      "ref": "lt_a3_watch",
+      "transitions": [
+        {
+          "to": "lt_b01"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_b01",
+      "kind": "battle",
+      "ref": {
+        "select_by": "plan",
+        "variants": {
+          "scout_tracks": "lt_enc_scout_tracks",
+          "scout_sound": "lt_enc_scout_sound",
+          "brace_bank": "lt_enc_brace_bank",
+          "brace_beam": "lt_enc_brace_beam"
+        }
+      },
+      "transitions": [
+        {
+          "to": "lt_a3_clear"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a3_clear",
+      "kind": "story",
+      "ref": "lt_a3_clear",
+      "transitions": [
+        {
+          "to": "lt_a4_traveler"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a4_traveler",
+      "kind": "story",
+      "ref": "lt_a4_traveler",
+      "transitions": [
+        {
+          "to": "lt_a4_pause"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a4_pause",
+      "kind": "story",
+      "ref": "lt_a4_pause",
+      "transitions": [
+        {
+          "to": "lt_a4_company"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a4_company",
+      "kind": "story",
+      "ref": "lt_a4_company",
+      "transitions": [
+        {
+          "to": "lt_a4_end"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_a4_end",
+      "kind": "story",
+      "ref": "lt_a4_end",
+      "transitions": [
+        {
+          "to": "lt_complete"
+        }
+      ]
+    },
+    {
+      "node_id": "lt_complete",
+      "kind": "complete",
+      "ref": null,
+      "transitions": []
+    }
+  ],
+  "min_client_version": null,
+  "compatibility_note_tr": "Story exports mevcut StoryScene grammar; graph/encounter JSON authoring formatıdır. Medya/roster ve server adapter sonraki aşama."
+}

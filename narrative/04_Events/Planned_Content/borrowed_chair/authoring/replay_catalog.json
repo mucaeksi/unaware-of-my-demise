@@ -1,0 +1,23 @@
+{
+  "event_id": "side_story_borrowed_chair",
+  "session_kind": "isolated_replay",
+  "mutates_original_progress": false,
+  "reward_binding": null,
+  "scene_replays": [
+    "bc_a1_stack",
+    "bc_a1_walk",
+    "bc_a2_door",
+    "bc_a3_inside",
+    "bc_a3_end"
+  ],
+  "conversation_replays": [
+    {
+      "scene_id": "bc_a2_door",
+      "choice_id": "bc_voice_jori"
+    },
+    {
+      "scene_id": "bc_a2_door",
+      "choice_id": "bc_voice_pippa"
+    }
+  ]
+}

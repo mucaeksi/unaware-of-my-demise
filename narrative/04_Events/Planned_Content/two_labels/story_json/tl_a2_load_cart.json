@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a2_load_cart",
+  "title_en": "The Cart with No Driver",
+  "location_id": "tl_load_road",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_load_road"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cart_001",
+      "speaker": "tl_carter",
+      "speaker_display": "Carter",
+      "text": "Do not come through the middle. That wheel drops when you touch it.",
+      "emotion": "worried"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cart_002",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "We can use the side, one at a time.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cart_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Are you hurt?",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cart_004",
+      "speaker": "tl_carter",
+      "speaker_display": "Carter",
+      "text": "Just waiting. They came down from the sheds. I got behind the beam.",
+      "emotion": "worried"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cart_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Stay where you have cover. We will clear the lane.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cart_006",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Someone is turning that wheel from the other side.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cart_007",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Two ahead. The others are following the noise.",
+      "emotion": "serious"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cart_008",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "We hold the front while the load gets through. Do not spend everything in the first exchange.",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a2_load_cart_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

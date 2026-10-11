@@ -1,0 +1,74 @@
+{
+  "backgrounds": [
+    {
+      "location_id": "lt_brace_bank",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "lt_forest_junction",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "lt_forest_passage",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "lt_scout_bend",
+      "status": "unproduced_or_source_reference_only"
+    }
+  ],
+  "music": [
+    {
+      "cue_id": "lt_threat",
+      "status": "unproduced"
+    },
+    {
+      "cue_id": "lt_work",
+      "status": "unproduced"
+    }
+  ],
+  "portraits": [
+    {
+      "character_id": "brin_alder",
+      "emotions": [
+        "calm",
+        "focused",
+        "gentle",
+        "quiet"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "fadyme",
+      "emotions": [
+        "focused",
+        "gentle",
+        "quiet",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "mahmut",
+      "emotions": [
+        "calm",
+        "focused"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "nixie_vale",
+      "emotions": [
+        "bright",
+        "calm",
+        "focused",
+        "quiet",
+        "serious",
+        "small_smile",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    }
+  ],
+  "voice_status": "English source complete; Japanese translation and audio not produced."
+}

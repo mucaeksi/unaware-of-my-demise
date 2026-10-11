@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a4_delivery_done",
+  "title_en": "Nothing Owed",
+  "location_id": "tl_harbor_lane",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_harbor_lane"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_delivery_done_001",
+      "speaker": "tl_patient",
+      "speaker_display": "Patient",
+      "text": "What do you need from us?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_delivery_done_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "A dry place for the unopened bottles. Someone to read the instructions with Tilda.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_delivery_done_003",
+      "speaker": "tl_patient",
+      "speaker_display": "Patient",
+      "text": "I meant in return.",
+      "emotion": "worried"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_delivery_done_004",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "You may tell the next person where to find us. You do not have to.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_delivery_done_005",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Ask for help if the fever does not ease or anything gets worse. Do not wait because the bottle was free.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_delivery_done_006",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The path to the bakery is clear.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a4_delivery_done_007",
+      "text": "The patient takes the written directions before the bottle. Kera notices, and leaves both within reach."
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_delivery_done_008",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "There. No second price.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a4_delivery_done_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

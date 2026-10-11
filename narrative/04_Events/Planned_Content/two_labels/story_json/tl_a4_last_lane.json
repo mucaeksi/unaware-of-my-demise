@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a4_last_lane",
+  "title_en": "The Last Delivery",
+  "location_id": "tl_harbor_lane",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_harbor_lane"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a4_last_lane_001",
+      "text": "The last crate is lighter. The road to put it down is not."
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_last_lane_002",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "They are caught between the wall and the racks. We cannot carry past them.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_last_lane_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The people beyond this lane have been waiting since before we arrived.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_last_lane_004",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Then we do this carefully. They do not need a broken crate arriving first.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_last_lane_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "It is on dry ground. We can leave it here until the way is clear.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_last_lane_006",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The bell draws them together. The others reach through the gaps. Do not chase the sound without looking at the hands.",
+      "emotion": "serious"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_last_lane_007",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "We have crossed two roads and kept every stopper in place.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_last_lane_008",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "That was the easy part. One more clear passage.",
+      "emotion": "dry"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a4_last_lane_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a3_safe",
+  "title_en": "Use It Again",
+  "location_id": "or_relief_stop",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_relief_stop"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a3_safe_001",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "The approach is clear. Show us the order once more.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a3_safe_002",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "Waiting space here. Passing space there. Supplies brought forward without blocking either.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a3_safe_003",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "And who can explain it if you are resting?",
+      "emotion": "measured"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a3_safe_004",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "The next volunteer. I will show them before I sit down.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "or_a3_safe_005",
+      "text": "Marek leaves the supply board in the volunteer’s hands."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a3_safe_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

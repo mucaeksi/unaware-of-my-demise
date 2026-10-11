@@ -1,0 +1,22 @@
+{
+  "event_id": "side_story_borrowed_chair",
+  "gate": {
+    "after_stage": "3-5",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false,
+    "requires_completed_content": {
+      "canonical_source_event_id": "event_harvest_inn_meal",
+      "accepted_working_alias": "event_one_dish_one_name",
+      "runtime_completion_mapping": null
+    }
+  },
+  "physical_character_earliest_stages": {
+    "jori_flint": "3-2",
+    "pippa_bell": "3-4"
+  },
+  "timeline_tr": "3-5 ve Harvest tamamlanması gerekir; source/working alias eşlemesi sonradan bağlanır. Görülmemiş bir kapanış anı, yeni bir ertesi gün değil. Onarılmış sandalye meydanda kalır. İkinci şölen, şarkı provası veya charm/çan reveal’i yok.",
+  "core_action_tr": "Tek ilişkisel seçim ve emanet dönüşü",
+  "new_text_status": "authored_narrative_for_future_patch; not a replacement of canon main story",
+  "source_main": "99df3cf"
+}

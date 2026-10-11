@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_job_road_1",
+  "title_en": "The Storehouse Turn",
+  "location_id": "od_storehouse_lane",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "od_storehouse_lane"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_1_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Not the steps. A short route becomes a long route when the soup goes down it first.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_1_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The soup is not leaving my hands.",
+      "emotion": "annoyed"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_1_003",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Then you have a very good reason to avoid the steps.",
+      "emotion": "bright"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_1_004",
+      "speaker": "od_helper",
+      "speaker_display": "Helper",
+      "text": "The bowls are fragile.",
+      "emotion": "worried"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_1_005",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "So we carry them low and stop at the turn. I will see who is coming the other way.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_1_006",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "You make fetching bowls sound like a heroic expedition.",
+      "emotion": "bright"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_1_007",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Everything sounds heroic until somebody asks how many bowls came back.",
+      "emotion": "wry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_job_road_1_008",
+      "text": "Nixie moves the heaviest bundle to the hand closest to the wall."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_job_road_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

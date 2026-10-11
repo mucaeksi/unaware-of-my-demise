@@ -1,0 +1,55 @@
+line_id,speaker_id,speaker_display,text_en,emotion,voice_track,text_ja,recording_status
+aw_a1_book_001,narrator,Narration,"Kera opens a casebook on a clear table. Three diagrams show roads already known, and threats already met.",composed,jp_narration,,not_recorded_in_this_package
+aw_a1_book_002,kera_voss,Kera,Three cases. No new alarm. No patients needed for demonstration.,focused,jp,,not_recorded_in_this_package
+aw_a1_book_003,tilda_fen,Tilda,An excellent beginning for a training plan.,dry,jp,,not_recorded_in_this_package
+aw_a1_book_004,odelia_pike,Odelia,Are we reading or trying another way through?,calm,jp,,not_recorded_in_this_package
+aw_a1_book_005,kera_voss,Kera,Both. A diagram is less convincing when nobody can use it.,focused,jp,,not_recorded_in_this_package
+aw_a1_book_006,iona_mist,Iona,Then we keep the case separate from the people who lived it.,gentle,jp,,not_recorded_in_this_package
+aw_a1_book_007,narrator,Narration,"The book stays in the archive. The exercise opens as a reconstruction, not as another journey in their day.",composed,jp_narration,,not_recorded_in_this_package
+aw_a1_line_001,odelia_pike,Odelia,A reaching threat asks you to look past the first body.,focused,jp,,not_recorded_in_this_package
+aw_a1_line_002,tilda_fen,Tilda,A heavy front asks you not to forget the body nearest you.,focused,jp,,not_recorded_in_this_package
+aw_a1_line_003,kera_voss,Kera,Choose one emphasis. You will still see the other.,precise,jp,,not_recorded_in_this_package
+aw_a1_line_004,tilda_fen,Tilda,Keep enough room to recover. There is no virtue in panicking early.,calm,jp,,not_recorded_in_this_package
+aw_a1_line_005,kera_voss,Kera,"Steady front. Recorded. It is a choice, not a score.",focused,jp,,not_recorded_in_this_package
+aw_a1_line_006,odelia_pike,Odelia,Check who can reach past the line before choosing the nearest target.,focused,jp,,not_recorded_in_this_package
+aw_a1_line_007,kera_voss,Kera,Reaching threat. Recorded. The diagram will not hide it.,focused,jp,,not_recorded_in_this_package
+aw_a1_response_001,iona_mist,Iona,A supporting enemy can be stopped early. Or its pressure can be outlasted while we keep the party ready.,calm,jp,,not_recorded_in_this_package
+aw_a1_response_002,kera_voss,Kera,The case must be readable either way. Nobody needs an answer we hid in the notes.,precise,jp,,not_recorded_in_this_package
+aw_a1_response_003,tilda_fen,Tilda,That includes the author of the notes.,dry,jp,,not_recorded_in_this_package
+aw_a1_response_004,odelia_pike,Odelia,Then I will watch where the support can be reached.,focused,jp,,not_recorded_in_this_package
+aw_a1_response_005,iona_mist,Iona,And keep the front ready while you choose it.,calm,jp,,not_recorded_in_this_package
+aw_a1_response_006,tilda_fen,Tilda,Then read the incoming action before spending your recovery.,focused,jp,,not_recorded_in_this_package
+aw_a1_response_007,kera_voss,Kera,An economical answer. I approve when it does not get anyone killed.,wry,jp,,not_recorded_in_this_package
+aw_a2_before_001,kera_voss,Kera,First case. Look at the whole line before picking the first target.,focused,jp,,not_recorded_in_this_package
+aw_a2_before_002,odelia_pike,Odelia,The nearest threat is visible. So is the one behind it.,calm,jp,,not_recorded_in_this_package
+aw_a2_before_003,tilda_fen,Tilda,Winning slowly is permitted. Failing to notice pressure is what we are practicing against.,focused,jp,,not_recorded_in_this_package
+aw_a2_before_004,narrator,Narration,The first case opens on its own. No wound from another exercise follows into it.,composed,jp_narration,,not_recorded_in_this_package
+aw_a2_after_001,iona_mist,Iona,The case is complete. You can try another line without rewriting this one.,gentle,jp,,not_recorded_in_this_package
+aw_a2_after_002,kera_voss,Kera,Keep the chosen emphasis beside the result. Victory alone does not tell us what we intended.,focused,jp,,not_recorded_in_this_package
+aw_a2_after_003,odelia_pike,Odelia,The book would become shorter if it did.,wry,jp,,not_recorded_in_this_package
+aw_a2_after_004,tilda_fen,Tilda,It would become less useful.,calm,jp,,not_recorded_in_this_package
+aw_a2_after_005,narrator,Narration,"The next diagram is its own exercise, with the party ready to begin again.",composed,jp_narration,,not_recorded_in_this_package
+aw_a3_before_001,kera_voss,Kera,Second case. The pressure has a source. Read its intent before choosing your response.,focused,jp,,not_recorded_in_this_package
+aw_a3_before_002,iona_mist,Iona,You may remove it early or stay ready while it acts. The exercise must allow both.,calm,jp,,not_recorded_in_this_package
+aw_a3_before_003,tilda_fen,Tilda,Do not confuse a slower victory with a failed one.,focused,jp,,not_recorded_in_this_package
+aw_a3_before_004,odelia_pike,Odelia,And do not confuse the nearest enemy with the source.,focused,jp,,not_recorded_in_this_package
+aw_a3_before_005,narrator,Narration,The second diagram opens without carrying wounds from the first.,composed,jp_narration,,not_recorded_in_this_package
+aw_a3_after_001,tilda_fen,Tilda,Enough pressure to read. Enough room to answer.,calm,jp,,not_recorded_in_this_package
+aw_a3_after_002,kera_voss,Kera,The same pressure should leave room for more than one answer.,precise,jp,,not_recorded_in_this_package
+aw_a3_after_003,iona_mist,Iona,The people in the original case could not try another answer. Our notes must remember that.,gentle,jp,,not_recorded_in_this_package
+aw_a3_after_004,narrator,Narration,The notes keep the exercise separate from its source.,composed,jp_narration,,not_recorded_in_this_package
+aw_a4_before_001,kera_voss,Kera,Last case. The front question and the support question arrive together.,focused,jp,,not_recorded_in_this_package
+aw_a4_before_002,odelia_pike,Odelia,Look beyond the first threat without abandoning the people in front.,focused,jp,,not_recorded_in_this_package
+aw_a4_before_003,tilda_fen,Tilda,Keep the party ready without letting the pressure become invisible.,focused,jp,,not_recorded_in_this_package
+aw_a4_before_004,iona_mist,Iona,The notes are not asking you to be fast. They are asking you to keep both questions in sight.,calm,jp,,not_recorded_in_this_package
+aw_a4_before_005,narrator,Narration,"The final reconstruction opens on its own, with the chosen threats in sight.",composed,jp_narration,,not_recorded_in_this_package
+aw_a4_profile_001,narrator,Narration,The casebook shows the chosen emphasis beside three completed exercises.,composed,jp_narration,,not_recorded_in_this_package
+aw_a4_profile_002,tilda_fen,Tilda,Holding the front is useful when it leaves room for someone else to answer the support.,calm,jp,,not_recorded_in_this_package
+aw_a4_profile_003,kera_voss,Kera,A front that lasts long enough for the next decision. That is the intended lesson.,precise,jp,,not_recorded_in_this_package
+aw_a4_profile_004,odelia_pike,Odelia,The farther threat needs attention before distance makes it look harmless.,focused,jp,,not_recorded_in_this_package
+aw_a4_profile_005,iona_mist,Iona,And the people in front still need room to stay ready while you choose it.,calm,jp,,not_recorded_in_this_package
+aw_a4_end_001,kera_voss,Kera,You can close the book. Another profile will still be here.,focused,jp,,not_recorded_in_this_package
+aw_a4_end_002,tilda_fen,Tilda,And the clinic will still need its table.,dry,jp,,not_recorded_in_this_package
+aw_a4_end_003,iona_mist,Iona,Try another case when you want another answer. Not because a bell tells you to hurry back.,gentle,jp,,not_recorded_in_this_package
+aw_a4_end_004,odelia_pike,Odelia,A useful exercise. No one had to make the road dangerous again.,calm,jp,,not_recorded_in_this_package
+aw_a4_end_005,narrator,Narration,"Kera closes the diagrams. Outside the exercise, the archive remains an archive.",composed,jp_narration,,not_recorded_in_this_package

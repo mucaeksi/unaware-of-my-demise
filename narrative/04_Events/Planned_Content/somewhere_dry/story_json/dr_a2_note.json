@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a2_note",
+  "title_en": "The Limit Written Down",
+  "location_id": "dr_refuge_desk",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_desk"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_note_001",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "There. The note says what was legible and what was not.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_note_002",
+      "speaker": "dr_carrier",
+      "speaker_display": "Carrier",
+      "text": "Is an unclear place allowed in the book?",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_note_003",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "It was already there. Now it is admitted.",
+      "emotion": "precise"
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_note_004",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "And you have a place to leave the bundle while it is checked.",
+      "emotion": "warm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a2_note_005",
+      "text": "The carrier places the slip flat on the board instead of trying to unfold the wet corner again."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a2_note_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

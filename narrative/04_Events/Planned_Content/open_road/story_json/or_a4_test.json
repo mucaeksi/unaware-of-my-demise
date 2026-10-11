@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a4_test",
+  "title_en": "Who Shows the Next Person",
+  "location_id": "or_relief_stop",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_relief_stop"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_test_001",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "One more check. We should see this work with an unfamiliar pair of hands.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_test_002",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Or with an unexpected pause. Both happen on roads.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nara_vell"
+    },
+    {
+      "op": "hide",
+      "character": "marek_vane"
+    },
+    {
+      "op": "choice",
+      "prompt": "Check the handover.",
+      "options": [
+        {
+          "id": "or_test_newcomer",
+          "text": "Let a new volunteer explain the order.",
+          "goto": "newcomer"
+        },
+        {
+          "id": "or_test_pause",
+          "text": "Rehearse a pause with the current volunteer.",
+          "goto": "pause"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "newcomer"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_test_003",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "I will show them once, then let them show me.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_test_004",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "Good. Leave room for their question before answering it.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_test_005",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "And watch where their feet hesitate.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "nara_vell"
+    },
+    {
+      "op": "hide",
+      "character": "marek_vane"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "pause"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_test_006",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "I can stop at the bench without stopping the next person at the entrance.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_test_007",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Show us. Slowly is a useful speed for this check.",
+      "emotion": "measured"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_test_008",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "I will be the next person with the empty basket.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "nara_vell"
+    },
+    {
+      "op": "hide",
+      "character": "marek_vane"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a4_test_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

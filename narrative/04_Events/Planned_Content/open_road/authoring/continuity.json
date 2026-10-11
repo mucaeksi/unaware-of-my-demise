@@ -1,0 +1,17 @@
+{
+  "event_id": "side_quest_open_road",
+  "gate": {
+    "after_stage": "5-5",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "physical_character_earliest_stages": {
+    "nara_vell": "5-2",
+    "marek_vane": "5-1"
+  },
+  "timeline_tr": "Sivillerle kalan ikilinin mevcut yan rotası; Mahmut/Fadyme geri dönmez. Köprünün kaderi ve Oren’in yeri hakkında yeni bilgi yok. Last Cart, Oren’s Teacher ve Refugee Measure tekrarlanmaz. Yalnız bilinen Hollow düşmanlar kullanılır; yaşayan Crown Guard bu paketten çıkarıldı.",
+  "core_action_tr": "Yardımı devretmek ve devri prova etmek",
+  "new_text_status": "authored_narrative_for_future_patch; not a replacement of canon main story",
+  "source_main": "99df3cf"
+}

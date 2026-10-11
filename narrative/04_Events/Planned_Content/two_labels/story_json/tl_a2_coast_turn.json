@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a2_coast_turn",
+  "title_en": "The Blind Turn",
+  "location_id": "tl_coast_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_coast_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_turn_001",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The road looks straight. It turns behind those nets.",
+      "emotion": "serious"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_turn_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Can we take the crates around the other side?",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_turn_003",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "No. But we can see what is waiting before it sees all of us.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_turn_004",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "I will stand where the others can see the lantern.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_turn_005",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Nobody runs after a target around the wall alone.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_coast_turn_006",
+      "text": "A staff drags against stone. Beyond it, a small iron bell knocks against a dead chest."
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_turn_007",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Two kinds of movement. The bell draws attention. The staff reaches past it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_turn_008",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Then attention is not our only problem.",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a2_coast_turn_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

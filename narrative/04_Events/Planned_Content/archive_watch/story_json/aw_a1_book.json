@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "scene_id": "aw_a1_book",
+  "title_en": "Three Cases, No New Attack",
+  "location_id": "undercity_antidote_archive",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_antidote_archive"
+    },
+    {
+      "op": "music",
+      "cue_id": "aw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "aw_a1_book_001",
+      "text": "Kera opens a casebook on a clear table. Three diagrams show roads already known, and threats already met."
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_book_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Three cases. No new alarm. No patients needed for demonstration.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_book_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "An excellent beginning for a training plan.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_book_004",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Are we reading or trying another way through?",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_book_005",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Both. A diagram is less convincing when nobody can use it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a1_book_006",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Then we keep the case separate from the people who lived it.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "aw_a1_book_007",
+      "text": "The book stays in the archive. The exercise opens as a reconstruction, not as another journey in their day."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "aw_a1_book_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "tactical_archive_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

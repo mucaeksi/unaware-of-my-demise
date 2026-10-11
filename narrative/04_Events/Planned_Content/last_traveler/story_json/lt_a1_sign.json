@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a1_sign",
+  "title_en": "The Fallen Sign",
+  "location_id": "lt_forest_junction",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_forest_junction"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a1_sign_001",
+      "text": "At the bend beyond the shrine, the sign is lying where nobody can read it without leaving the road."
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_sign_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "That is an unhelpful place for a helpful thing.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_sign_003",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "The post is loose. I can stand it up again.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_sign_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Wait. We should see why it fell.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_sign_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A sign that tells us to step off the path deserves a little suspicion.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_sign_006",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "There are tracks behind it. Not all of them came from the road.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_sign_007",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "Something is moving at the far bend.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a1_sign_008",
+      "text": "Brin turns the sign face-up without pushing it into the earth."
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_sign_009",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We clear the passage before anyone follows it.",
+      "emotion": "calm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a1_sign_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

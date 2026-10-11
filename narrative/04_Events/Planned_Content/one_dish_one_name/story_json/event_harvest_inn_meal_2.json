@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "scene_id": "event_harvest_inn_meal_2",
+  "title_en": "The Inn Meal",
+  "location_id": "oakhaven_inn",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "oakhaven_inn"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "event_harvest_inn_meal_2_001",
+      "speaker": "oakhaven_innkeeper",
+      "speaker_display": "Innkeeper",
+      "text": "After Crownfall, travelers stopped paying. So we stopped charging. Twice a day, a meal, no coin.",
+      "emotion": "warm"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "event_harvest_inn_meal_2_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "That is generous.",
+      "emotion": "touched"
+    },
+    {
+      "op": "say",
+      "line_id": "event_harvest_inn_meal_2_003",
+      "speaker": "oakhaven_innkeeper",
+      "speaker_display": "Innkeeper",
+      "text": "It is practical. A fed traveler says their name at the door. A hungry one slips past the register.",
+      "emotion": "wry"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_harvest_inn_meal_2_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "So the meal is a count.",
+      "emotion": "observant"
+    },
+    {
+      "op": "say",
+      "line_id": "event_harvest_inn_meal_2_005",
+      "speaker": "oakhaven_innkeeper",
+      "speaker_display": "Innkeeper",
+      "text": "The meal is a meal, knight. The count is a bonus.",
+      "emotion": "laughing"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "event_harvest_inn_meal_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/04_Events/events_part1.json",
+    "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
+    "note": "Verbatim canon source."
+  }
+}

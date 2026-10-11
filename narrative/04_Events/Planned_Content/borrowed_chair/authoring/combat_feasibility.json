@@ -1,0 +1,12 @@
+{
+  "status": "TECHNICAL_FEASIBILITY_ONLY_NOT_PRODUCTION_BALANCE",
+  "source_main": "99df3cf",
+  "source_tutorial_pack_sha256": "d2cf29d60af57f600ad0962d072b6209a71ce2b74320b7f4bf864e4706614dc7",
+  "fixtures": [],
+  "limits": [
+    "The five party proxies clone only Mahmut/Fadyme tutorial kits; they do not represent the actual free/loan roster at any story gate.",
+    "Enemy role proxies use existing effect grammar and substitute tutorial art references. Canonical unit/skill/AI/media mapping is still required.",
+    "Normalized level 1 and enemy HP +/-20% test tunability and bounded battles, not final chapter difficulty.",
+    "No Android, event API, server claim, assets or live content patch tested."
+  ]
+}

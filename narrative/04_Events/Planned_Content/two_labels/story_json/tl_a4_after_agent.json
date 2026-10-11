@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a4_after_agent",
+  "title_en": "The Paper Left Behind",
+  "location_id": "tl_clinic_table",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_clinic_table"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_after_agent_001",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "He comes through here often. People know the seal on his paper.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_after_agent_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "They should know what is inside the bottle, too.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_after_agent_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "And who to find when they have a question.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_after_agent_004",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Do we take his paper down?",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_after_agent_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "It is their wall.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a4_after_agent_006",
+      "text": "The baker picks up the old sales paper and sets it beside the stove, away from the medicine."
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_after_agent_007",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "I can find another use for it.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_after_agent_008",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Not the instructions. Those are still useful paper.",
+      "emotion": "wry"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_after_agent_009",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "I noticed.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a4_after_agent_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "scene_id": "aw_a4_before",
+  "title_en": "Case Three: Keep Both Questions",
+  "location_id": "aw_case_board",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "aw_case_board"
+    },
+    {
+      "op": "music",
+      "cue_id": "aw_case"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a4_before_001",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Last case. The front question and the support question arrive together.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a4_before_002",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Look beyond the first threat without abandoning the people in front.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a4_before_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Keep the party ready without letting the pressure become invisible.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a4_before_004",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "The notes are not asking you to be fast. They are asking you to keep both questions in sight.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "aw_a4_before_005",
+      "text": "The final reconstruction opens on its own, with the chosen threats in sight."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "aw_a4_before_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "tactical_archive_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

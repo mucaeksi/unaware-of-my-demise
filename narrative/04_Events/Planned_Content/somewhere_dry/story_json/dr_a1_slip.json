@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a1_slip",
+  "title_en": "Two Places on One Line",
+  "location_id": "dr_refuge_desk",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_desk"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_slip_001",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "The day is clear. The receiving place is not.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_slip_002",
+      "speaker": "dr_carrier",
+      "speaker_display": "Carrier",
+      "text": "I borrowed it before the rain. I do not want to put it where nobody finds it.",
+      "emotion": "worried"
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_slip_003",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Nobody will send you back into the rain for an unclear line.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_slip_004",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "Nor will we improve the line by guessing confidently.",
+      "emotion": "precise"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a1_slip_005",
+      "text": "The original slip remains beside the book. Mirel writes its page number on a dry scrap."
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_slip_006",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "There is a dry side room, and a sound table beside this wall. Which can we make ready first?",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a1_slip_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

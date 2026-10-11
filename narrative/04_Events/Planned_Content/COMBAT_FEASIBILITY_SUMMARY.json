@@ -1,0 +1,109 @@
+{
+  "status": "PASS",
+  "simulation_runs": 288,
+  "deterministic_replays": 96,
+  "packages": [
+    {
+      "folder": "iki-etiket-v1",
+      "status": "PASS: schema-compatible proxies complete under existing combat engine",
+      "prototype_count": 8,
+      "simulation_runs": 72,
+      "base_replay_checks": 24,
+      "player_wins": 72,
+      "turn_range": [
+        16,
+        38
+      ],
+      "production_balance": "NOT_CERTIFIED"
+    },
+    {
+      "folder": "bir-tabak-bir-isim-v1",
+      "status": "PASS: schema-compatible proxies complete under existing combat engine",
+      "prototype_count": 3,
+      "simulation_runs": 27,
+      "base_replay_checks": 9,
+      "player_wins": 27,
+      "turn_range": [
+        24,
+        42
+      ],
+      "production_balance": "NOT_CERTIFIED"
+    },
+    {
+      "folder": "son-gecen-icin-v1",
+      "status": "PASS: schema-compatible proxies complete under existing combat engine",
+      "prototype_count": 4,
+      "simulation_runs": 36,
+      "base_replay_checks": 12,
+      "player_wins": 36,
+      "turn_range": [
+        16,
+        30
+      ],
+      "production_balance": "NOT_CERTIFIED"
+    },
+    {
+      "folder": "kuru-bir-yer-v1",
+      "status": "PASS: schema-compatible proxies complete under existing combat engine",
+      "prototype_count": 2,
+      "simulation_runs": 18,
+      "base_replay_checks": 6,
+      "player_wins": 18,
+      "turn_range": [
+        23,
+        38
+      ],
+      "production_balance": "NOT_CERTIFIED"
+    },
+    {
+      "folder": "tutulmayi-bekleyenler-v1",
+      "status": "PASS: schema-compatible proxies complete under existing combat engine",
+      "prototype_count": 5,
+      "simulation_runs": 45,
+      "base_replay_checks": 15,
+      "player_wins": 45,
+      "turn_range": [
+        19,
+        38
+      ],
+      "production_balance": "NOT_CERTIFIED"
+    },
+    {
+      "folder": "acik-yol-v1",
+      "status": "PASS: schema-compatible proxies complete under existing combat engine",
+      "prototype_count": 2,
+      "simulation_runs": 18,
+      "base_replay_checks": 6,
+      "player_wins": 18,
+      "turn_range": [
+        18,
+        31
+      ],
+      "production_balance": "NOT_CERTIFIED"
+    },
+    {
+      "folder": "arsiv-nobeti-v1",
+      "status": "PASS: schema-compatible proxies complete under existing combat engine",
+      "prototype_count": 8,
+      "simulation_runs": 72,
+      "base_replay_checks": 24,
+      "player_wins": 72,
+      "turn_range": [
+        13,
+        31
+      ],
+      "production_balance": "NOT_CERTIFIED"
+    },
+    {
+      "folder": "odunc-bir-sandalye-v1",
+      "status": "PASS: schema-compatible proxies complete under existing combat engine",
+      "prototype_count": 0,
+      "simulation_runs": 0,
+      "base_replay_checks": 0,
+      "player_wins": 0,
+      "turn_range": [],
+      "production_balance": "NOT_CERTIFIED"
+    }
+  ],
+  "production_balance": "NOT_CERTIFIED; actual roster and numeric chapter tuning remain to bind"
+}

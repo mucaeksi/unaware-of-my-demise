@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a4_traveler",
+  "title_en": "The Last Traveler",
+  "location_id": "lt_forest_junction",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_forest_junction"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_traveler_001",
+      "speaker": "lt_traveler",
+      "speaker_display": "Traveler",
+      "text": "Is the turn clear?",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_traveler_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Yes. Follow the mark before the bend. The sign is facing you now.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_traveler_003",
+      "speaker": "lt_traveler",
+      "speaker_display": "Traveler",
+      "text": "I was waiting for somebody else to take it first.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_traveler_004",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "You can take your time.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_traveler_005",
+      "speaker": "lt_traveler",
+      "speaker_display": "Traveler",
+      "text": "Do you need my name for the register?",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_traveler_006",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "The shrine keeper can help you with the register. We are clearing the road.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_traveler_007",
+      "speaker": "lt_traveler",
+      "speaker_display": "Traveler",
+      "text": "Then I will give it there.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_traveler_008",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A sensible place to stop.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a4_traveler_009",
+      "text": "The traveler tests the footing, then walks through without needing to hurry."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a4_traveler_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

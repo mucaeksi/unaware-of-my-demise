@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a5_load_memory",
+  "title_en": "Something Still Dry",
+  "location_id": "tl_clinic_table",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_clinic_table"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_load_memory_001",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "There is still a clean fold left.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_load_memory_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "We kept one. That is different from forgetting to use it.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_load_memory_003",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "The carter offered to bring questions back with the next load.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_load_memory_004",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "He knows where the road is clear now.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_load_memory_005",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Then he has a useful job. We should not give him six more because he said yes to one.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_load_memory_006",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "You have made restraint sound like a packing instruction.",
+      "emotion": "wry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_load_memory_007",
+      "text": "Tilda puts the cloth where the first hand opening the kit will find it."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a5_load_memory_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

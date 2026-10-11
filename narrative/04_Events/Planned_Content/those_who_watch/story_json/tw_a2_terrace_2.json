@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a2_terrace_2",
+  "title_en": "Room to Rest and See",
+  "location_id": "tw_terrace_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tw_terrace_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_2_001",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "The bench is low enough to sit without blocking anyone’s view.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "thistle_roe"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_2_002",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "I see less of the valley from here.",
+      "emotion": "curious"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_2_003",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Then write less of the valley. There is no duty to invent the part behind stone.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_2_004",
+      "speaker": "tw_lantern_carrier",
+      "speaker_display": "Lantern Carrier",
+      "text": "The people who sat here last year survived with very modest views.",
+      "emotion": "wry"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_2_005",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "There is more to see when people are not trying to see over one another.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a2_terrace_2_006",
+      "text": "Thistle moves a loose basket out of the walking space, not into the sight line."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a2_terrace_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

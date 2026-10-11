@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_job_song_3",
+  "title_en": "Not a Solo",
+  "location_id": "od_song_corner",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "od_song_corner"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_song_3_001",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Once together. You may miss the note, but do not lose the person beside you.",
+      "emotion": "bright"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_song_3_002",
+      "speaker": "od_helper",
+      "speaker_display": "Helper",
+      "text": "I have already missed three notes.",
+      "emotion": "amused"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_song_3_003",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "A vigorous beginning.",
+      "emotion": "wry"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_song_3_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Will the song still work?",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_song_3_005",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "It is a song, Kera. The point is that we are singing it.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_song_3_006",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Good. I was worried it needed a bottle.",
+      "emotion": "dry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_job_song_3_007",
+      "text": "The refrain wanders off-key, finds another voice, and comes back changed."
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_song_3_008",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Keep that part.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_job_song_3_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

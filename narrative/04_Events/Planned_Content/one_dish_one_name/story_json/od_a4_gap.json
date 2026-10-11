@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_a4_gap",
+  "title_en": "An Empty Place",
+  "location_id": "oakhaven_inn",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "oakhaven_inn"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_001",
+      "speaker": "od_guest",
+      "speaker_display": "Guest",
+      "text": "I can say a name. I do not think I can sing it in front of everyone.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_002",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Speaking is allowed to remain speaking.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "This seat is steady.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "That is Jori's highest recommendation.",
+      "emotion": "bright"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You can sit before deciding how loud to be.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_006",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "There is room to pass behind the chair.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_a4_gap_007",
+      "text": "The guest touches the back of the chair, then looks toward the open square."
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "choice",
+      "prompt": "How should the company make room?",
+      "options": [
+        {
+          "id": "od_welcome_join",
+          "text": "Invite them into the table conversation.",
+          "goto": "join"
+        },
+        {
+          "id": "od_welcome_quiet",
+          "text": "Keep them company without asking for a story.",
+          "goto": "quiet"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "join"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_008",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "We are comparing the chairs. You can help us settle the matter.",
+      "emotion": "bright"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_009",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "There is no matter. They are all chairs.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_010",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "That is one side of the argument.",
+      "emotion": "wry"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_011",
+      "speaker": "od_guest",
+      "speaker_display": "Guest",
+      "text": "This one is a very good chair.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_012",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A decisive answer.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_013",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I will sit here for a moment.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_014",
+      "speaker": "od_guest",
+      "speaker_display": "Guest",
+      "text": "You do not have to.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_015",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I know. I would like to.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_gap_016",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "I will bring the bread within reach.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_a4_gap_017",
+      "text": "The guest sits. The silence does not ask them to fill it."
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_a4_gap_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

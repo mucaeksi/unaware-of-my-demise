@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a2_brace_1",
+  "title_en": "The Footing",
+  "location_id": "lt_brace_bank",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_brace_bank"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_1_001",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "The bank is firm. The beam is dry underneath.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_1_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "The narrow side is open from both. We can see the turn.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_1_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Which place lets you share the work?",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_1_004",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "Either, if someone watches the side I cannot.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_1_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "We can do that.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a2_brace_1_006",
+      "text": "Brin tests the ground once more, then steps back far enough for Nixie to see it too."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a2_brace_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_job_road_2",
+  "title_en": "Who Carries the Last Stack",
+  "location_id": "od_storehouse_lane",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "od_storehouse_lane"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_2_001",
+      "speaker": "od_helper",
+      "speaker_display": "Helper",
+      "text": "I can take the last stack too.",
+      "emotion": "strained"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_2_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Wait. Take a breath first.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_2_003",
+      "speaker": "od_helper",
+      "speaker_display": "Helper",
+      "text": "Everyone else is moving.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_2_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Then they can keep moving around us.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_2_005",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I have a free hand. The pot only needs one until someone starts criticizing it.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_2_006",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "I will save my criticism for the square.",
+      "emotion": "wry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_job_road_2_007",
+      "text": "The stack changes hands without a bowl being dropped."
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_2_008",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "There. Faster without pretending it was lighter.",
+      "emotion": "bright"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_2_009",
+      "speaker": "od_helper",
+      "speaker_display": "Helper",
+      "text": "I thought you would tell me to hurry.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_2_010",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I know where we are going. We can get there with all the bowls.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_job_road_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

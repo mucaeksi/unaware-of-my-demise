@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "scene_id": "event_sun_eclipse_day_2",
+  "title_en": "The Breath",
+  "location_id": "highland_ridge",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "highland_ridge"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "event_sun_eclipse_day_2_001",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "The owing-bells are all opening. All of them. The whole ridge.",
+      "emotion": "frightened"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_sun_eclipse_day_2_002",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "It is not breathing. It is recounting. Every owed hour in the valley, checked at once.",
+      "emotion": "grave"
+    },
+    {
+      "op": "say",
+      "line_id": "event_sun_eclipse_day_2_003",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "Why t-today?",
+      "emotion": "tense"
+    },
+    {
+      "op": "say",
+      "line_id": "event_sun_eclipse_day_2_004",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Because someone set a day for it. Machines keep calendars. So do chancellors.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "event_sun_eclipse_day_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/04_Events/events_part1.json",
+    "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
+    "note": "Verbatim canon source."
+  }
+}

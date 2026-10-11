@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a2_desk_2",
+  "title_en": "A Reader at the Table",
+  "location_id": "dr_refuge_desk",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_desk"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_desk_2_001",
+      "speaker": "dr_carrier",
+      "speaker_display": "Carrier",
+      "text": "I thought the table was for the people keeping the book.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_desk_2_002",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "It is for the book being read.",
+      "emotion": "precise"
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_desk_2_003",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Which includes you.",
+      "emotion": "warm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a2_desk_2_004",
+      "text": "Mirel turns the board toward the carrier. Aveline rests a dry blanket across the chair back."
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_desk_2_005",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "You can point to what you remember. We will not make the page say it first.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_desk_2_006",
+      "speaker": "dr_carrier",
+      "speaker_display": "Carrier",
+      "text": "I remember the blue cord around the bundle.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a2_desk_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

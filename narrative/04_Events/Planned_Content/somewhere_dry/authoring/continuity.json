@@ -1,0 +1,17 @@
+{
+  "event_id": "side_quest_somewhere_dry",
+  "gate": {
+    "after_stage": "2-3",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "physical_character_earliest_stages": {
+    "mirel_quill": "2-3",
+    "sister_aveline": "2-2"
+  },
+  "timeline_tr": "2-3 ile 2-4 arasındaki mevcut sığınak işi. Keten defteri kraliyet kaydı değildir. Mirel’in kendi erasure suçunu fark etmesi 6-2’de, dua sayfası 2-4’te, Aveline’in ruhban itirafı 2-5’te kalır.",
+  "core_action_tr": "Belgeyi incelemek ve güvenilir bilgiyle kullanmak",
+  "new_text_status": "authored_narrative_for_future_patch; not a replacement of canon main story",
+  "source_main": "99df3cf"
+}

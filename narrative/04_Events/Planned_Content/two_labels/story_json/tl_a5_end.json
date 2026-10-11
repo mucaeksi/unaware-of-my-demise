@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a5_end",
+  "title_en": "Room on the Notice",
+  "location_id": "tl_salt_fork",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_salt_fork"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_end_001",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The turn is clear. We can stay together on the way back.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_end_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The next notice needs a place for questions.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_end_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "And a place for whoever answers them to sit down.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_end_004",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "We can leave both.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_end_005",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "It will be a very large notice.",
+      "emotion": "wry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_end_006",
+      "text": "The crates knock gently as they walk. Paper labels remain tied to their handles."
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_end_007",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Do we take those off?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_end_008",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "No. They still say who brought them.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_end_009",
+      "text": "Nothing about the road has become easy. It is only easier to know whom to ask."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a5_end_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

@@ -1,0 +1,317 @@
+line_id,speaker_id,speaker_display,text_en,emotion,voice_track,text_ja,recording_status
+event_guild_salt_fever_1_001,kera_voss,Kera,Salt-road fever in the coastal villages. The ledger wing sold the cure. We are giving it away.,defiant,jp,,not_recorded_in_this_package
+event_guild_salt_fever_1_002,tilda_fen,Tilda,With what staff? You have three shelves and a temper.,dry,jp,,not_recorded_in_this_package
+event_guild_salt_fever_1_003,kera_voss,Kera,"I have you, Iona, and a harbor archer who knows the coast.",smug,jp,,not_recorded_in_this_package
+event_guild_salt_fever_1_004,odelia_pike,Odelia,I did not agree to this.,hesitant,jp,,not_recorded_in_this_package
+event_guild_salt_fever_1_005,kera_voss,Kera,You agreed with your face.,tsundere,jp,,not_recorded_in_this_package
+tl_a1_crates_001,narrator,Narration,The last shelf holds enough bottles to make the table look generous. The open crates make it look smaller.,composed,jp_narration,,not_recorded_in_this_package
+tl_a1_crates_002,tilda_fen,Tilda,Four people. Three crates. Which of those is carrying the table?,dry,jp,,not_recorded_in_this_package
+tl_a1_crates_003,kera_voss,Kera,"The table stays here. We are taking cloth, clean water, and the medicine.",focused,jp,,not_recorded_in_this_package
+tl_a1_crates_004,iona_mist,Iona,And a place for the bottles we open. They cannot travel beside the sealed ones.,gentle,jp,,not_recorded_in_this_package
+tl_a1_crates_005,kera_voss,Kera,I know how to pack a crate.,annoyed,jp,,not_recorded_in_this_package
+tl_a1_crates_006,tilda_fen,Tilda,Good. I know how to unpack one someone has sat on.,dry,jp,,not_recorded_in_this_package
+tl_a1_crates_007,odelia_pike,Odelia,There are two ways past the old salt sheds. We can choose when we reach the fork.,hesitant,jp,,not_recorded_in_this_package
+tl_a1_crates_008,kera_voss,Kera,Which is shorter?,focused,jp,,not_recorded_in_this_package
+tl_a1_crates_009,odelia_pike,Odelia,That depends on what is standing in it.,serious,jp,,not_recorded_in_this_package
+tl_a1_crates_010,iona_mist,Iona,Then we leave room to change our minds.,calm,jp,,not_recorded_in_this_package
+tl_a1_crates_011,narrator,Narration,Iona slips a folded cloth beneath the handles. Odelia tests each knot before lifting anything.,composed,jp_narration,,not_recorded_in_this_package
+tl_a1_crates_012,kera_voss,Kera,This is a dispatch. Not a rescue of my packing habits.,wry,jp,,not_recorded_in_this_package
+tl_a1_crates_013,tilda_fen,Tilda,We can do two useful things at once.,dry,jp,,not_recorded_in_this_package
+tl_a1_preparation_001,odelia_pike,Odelia,The roads look open from here. The last bend is where they stop looking open.,focused,jp,,not_recorded_in_this_package
+tl_a1_preparation_002,tilda_fen,Tilda,"There is also fever sweat, dirty water, and whatever the road throws on us.",focused,jp,,not_recorded_in_this_package
+tl_a1_preparation_003,kera_voss,Kera,You have both made persuasive arguments against going anywhere.,annoyed,jp,,not_recorded_in_this_package
+tl_a1_preparation_004,iona_mist,Iona,They have made arguments for being ready.,gentle,jp,,not_recorded_in_this_package
+tl_a1_preparation_005,odelia_pike,Odelia,I can walk ahead and mark the bad approaches.,hesitant,jp,,not_recorded_in_this_package
+tl_a1_preparation_006,tilda_fen,Tilda,Or we prepare the field kit where we can still see what we are doing.,focused,jp,,not_recorded_in_this_package
+tl_a1_preparation_007,kera_voss,Kera,Both will be useful. Which do we do first?,focused,jp,,not_recorded_in_this_package
+tl_a1_gate_001,narrator,Narration,"At the service gate, a dead hand works the same latch again and again. The gate has no door left to open.",composed,jp_narration,,not_recorded_in_this_package
+tl_a1_gate_002,odelia_pike,Odelia,Stop. Something behind the shutter is moving with it.,serious,jp,,not_recorded_in_this_package
+tl_a1_gate_003,kera_voss,Kera,The yard was clear this morning.,focused,jp,,not_recorded_in_this_package
+tl_a1_gate_004,tilda_fen,Tilda,It has had a busy morning.,dry,jp,,not_recorded_in_this_package
+tl_a1_gate_005,iona_mist,Iona,Keep the crates behind us. There is room along the wall.,calm,jp,,not_recorded_in_this_package
+tl_a1_gate_006,odelia_pike,Odelia,"The one with the cord is making the others turn. Deal with that first, or hold until it cannot reach us.",focused,jp,,not_recorded_in_this_package
+tl_a1_gate_007,kera_voss,Kera,Bottles down. Hands free.,focused,jp,,not_recorded_in_this_package
+tl_a1_gate_008,narrator,Narration,They lower the crates together. No bottle breaks.,composed,jp_narration,,not_recorded_in_this_package
+tl_a1_after_gate_001,odelia_pike,Odelia,Clear to the first bend.,calm,jp,,not_recorded_in_this_package
+tl_a1_after_gate_002,kera_voss,Kera,Stoppers intact. Labels dry.,focused,jp,,not_recorded_in_this_package
+tl_a1_after_gate_003,tilda_fen,Tilda,You checked the labels before the glass.,dry,jp,,not_recorded_in_this_package
+tl_a1_after_gate_004,kera_voss,Kera,The labels are easier to frighten.,wry,jp,,not_recorded_in_this_package
+tl_a1_after_gate_005,iona_mist,Iona,This handle is cutting into your fingers. Put your hand here.,gentle,jp,,not_recorded_in_this_package
+tl_a1_after_gate_006,odelia_pike,Odelia,I can take it.,hesitant,jp,,not_recorded_in_this_package
+tl_a1_after_gate_007,iona_mist,Iona,I know. That is why I am sharing it.,calm,jp,,not_recorded_in_this_package
+tl_a1_after_gate_008,narrator,Narration,Odelia shifts her grip. The crate settles between them instead of against one shoulder.,composed,jp_narration,,not_recorded_in_this_package
+tl_a1_fork_001,odelia_pike,Odelia,The coast path bends below the watch posts. You can see far. So can anything waiting there.,focused,jp,,not_recorded_in_this_package
+tl_a1_fork_002,tilda_fen,Tilda,"The load road has shelter, but no room to step aside. We will need to keep the front steady.",focused,jp,,not_recorded_in_this_package
+tl_a1_fork_003,kera_voss,Kera,Both reach the villages?,focused,jp,,not_recorded_in_this_package
+tl_a1_fork_004,odelia_pike,Odelia,Yes. They meet before the harbor.,calm,jp,,not_recorded_in_this_package
+tl_a1_fork_005,iona_mist,Iona,Then we are choosing how to arrive. Not who gets medicine.,gentle,jp,,not_recorded_in_this_package
+tl_a1_fork_006,kera_voss,Kera,A mercifully sensible map.,wry,jp,,not_recorded_in_this_package
+tl_a1_fork_007,odelia_pike,Odelia,It is not the map that will carry the crates.,quiet,jp,,not_recorded_in_this_package
+tl_a2_coast_wall_001,narrator,Narration,The coast road smells of wet rope. A line of dead figures stands where the watch used to change hands.,composed,jp_narration,,not_recorded_in_this_package
+tl_a2_coast_wall_002,odelia_pike,Odelia,Do not bunch up under the wall.,serious,jp,,not_recorded_in_this_package
+tl_a2_coast_wall_003,kera_voss,Kera,They are looking at the crates.,focused,jp,,not_recorded_in_this_package
+tl_a2_coast_wall_004,odelia_pike,Odelia,They are looking at the movement. Keep our back line away from the opening.,focused,jp,,not_recorded_in_this_package
+tl_a2_coast_wall_005,tilda_fen,Tilda,I preferred them when they were looking at nothing.,dry,jp,,not_recorded_in_this_package
+tl_a2_coast_wall_006,iona_mist,Iona,There is a flat place behind us. We can set the load down there.,calm,jp,,not_recorded_in_this_package
+tl_a2_coast_wall_007,odelia_pike,Odelia,One of them is already leaning past the others. That is the threat to watch.,focused,jp,,not_recorded_in_this_package
+tl_a2_coast_wall_008,kera_voss,Kera,Then we stop it leaning any farther.,focused,jp,,not_recorded_in_this_package
+tl_a2_coast_steps_001,narrator,Narration,"Past the wall, Odelia slows beside three narrow steps worn hollow at the edges.",composed,jp_narration,,not_recorded_in_this_package
+tl_a2_coast_steps_002,kera_voss,Kera,A bad footing?,curious,jp,,not_recorded_in_this_package
+tl_a2_coast_steps_003,odelia_pike,Odelia,No. I know these steps.,quiet,jp,,not_recorded_in_this_package
+tl_a2_coast_steps_004,tilda_fen,Tilda,We can stop for a breath.,calm,jp,,not_recorded_in_this_package
+tl_a2_coast_steps_005,odelia_pike,Odelia,I was only checking the shutter.,hesitant,jp,,not_recorded_in_this_package
+tl_a2_coast_steps_006,iona_mist,Iona,Then we will wait while you check it.,gentle,jp,,not_recorded_in_this_package
+tl_a2_coast_steps_007,narrator,Narration,"Odelia touches the edge of the shutter, where an old latch has been moved twice.",composed,jp_narration,,not_recorded_in_this_package
+tl_a2_coast_steps_008,odelia_pike,Odelia,People used to leave bread here to cool. Even when they knew someone would take it.,quiet,jp,,not_recorded_in_this_package
+tl_a2_coast_steps_009,kera_voss,Kera,That sounds like a poor arrangement for bread.,quiet,jp,,not_recorded_in_this_package
+tl_a2_coast_steps_010,odelia_pike,Odelia,It was a good arrangement for us.,small_smile,jp,,not_recorded_in_this_package
+tl_a2_coast_steps_011,tilda_fen,Tilda,Then we should arrive before the next batch is cold.,dry,jp,,not_recorded_in_this_package
+tl_a2_coast_steps_012,narrator,Narration,Odelia moves on. Nobody asks her to turn the memory into an explanation.,composed,jp_narration,,not_recorded_in_this_package
+tl_a2_coast_turn_001,odelia_pike,Odelia,The road looks straight. It turns behind those nets.,serious,jp,,not_recorded_in_this_package
+tl_a2_coast_turn_002,kera_voss,Kera,Can we take the crates around the other side?,focused,jp,,not_recorded_in_this_package
+tl_a2_coast_turn_003,odelia_pike,Odelia,No. But we can see what is waiting before it sees all of us.,focused,jp,,not_recorded_in_this_package
+tl_a2_coast_turn_004,iona_mist,Iona,I will stand where the others can see the lantern.,calm,jp,,not_recorded_in_this_package
+tl_a2_coast_turn_005,tilda_fen,Tilda,Nobody runs after a target around the wall alone.,focused,jp,,not_recorded_in_this_package
+tl_a2_coast_turn_006,narrator,Narration,"A staff drags against stone. Beyond it, a small iron bell knocks against a dead chest.",composed,jp_narration,,not_recorded_in_this_package
+tl_a2_coast_turn_007,odelia_pike,Odelia,Two kinds of movement. The bell draws attention. The staff reaches past it.,focused,jp,,not_recorded_in_this_package
+tl_a2_coast_turn_008,kera_voss,Kera,Then attention is not our only problem.,focused,jp,,not_recorded_in_this_package
+tl_a2_coast_arrival_001,odelia_pike,Odelia,Here. Above the splash line.,calm,jp,,not_recorded_in_this_package
+tl_a2_coast_arrival_002,kera_voss,Kera,You knew where that would be.,focused,jp,,not_recorded_in_this_package
+tl_a2_coast_arrival_003,odelia_pike,Odelia,The sea usually leaves the same things alone.,hesitant,jp,,not_recorded_in_this_package
+tl_a2_coast_arrival_004,tilda_fen,Tilda,Useful. Unlike people.,dry,jp,,not_recorded_in_this_package
+tl_a2_coast_arrival_005,iona_mist,Iona,The handle is yours again. We can lower it together.,gentle,jp,,not_recorded_in_this_package
+tl_a2_coast_arrival_006,narrator,Narration,The crates touch the bench with a single dull knock.,composed,jp_narration,,not_recorded_in_this_package
+tl_a2_coast_arrival_007,odelia_pike,Odelia,I thought I would want to walk past all of it.,small_smile,jp,,not_recorded_in_this_package
+tl_a2_coast_arrival_008,kera_voss,Kera,We still need a guide who knows where to stop.,quiet,jp,,not_recorded_in_this_package
+tl_a2_coast_arrival_009,odelia_pike,Odelia,Then stop here.,calm,jp,,not_recorded_in_this_package
+tl_a2_load_sheds_001,narrator,Narration,The old load road is quiet until a cart wheel begins to turn without a horse.,composed,jp_narration,,not_recorded_in_this_package
+tl_a2_load_sheds_002,odelia_pike,Odelia,The far door is open. Something has been dragging the cart in and out.,focused,jp,,not_recorded_in_this_package
+tl_a2_load_sheds_003,tilda_fen,Tilda,Keep a clear space behind our front line. I need to reach them.,focused,jp,,not_recorded_in_this_package
+tl_a2_load_sheds_004,kera_voss,Kera,We could push straight through.,focused,jp,,not_recorded_in_this_package
+tl_a2_load_sheds_005,tilda_fen,Tilda,You could. Then I would have to collect you.,dry,jp,,not_recorded_in_this_package
+tl_a2_load_sheds_006,iona_mist,Iona,There is enough room to hold here and pass the load back.,calm,jp,,not_recorded_in_this_package
+tl_a2_load_sheds_007,odelia_pike,Odelia,The nearest dead will reach us first. The ones behind it cannot pass unless we give them space.,serious,jp,,not_recorded_in_this_package
+tl_a2_load_sheds_008,kera_voss,Kera,Then we do not give them space.,focused,jp,,not_recorded_in_this_package
+tl_a2_load_cloth_001,narrator,Narration,Tilda shakes rain from her cape before she touches the field kit.,composed,jp_narration,,not_recorded_in_this_package
+tl_a2_load_cloth_002,kera_voss,Kera,That is our last clean outer cloth.,focused,jp,,not_recorded_in_this_package
+tl_a2_load_cloth_003,tilda_fen,Tilda,No. That is the cloth you put on top. The clean one is still inside.,dry,jp,,not_recorded_in_this_package
+tl_a2_load_cloth_004,kera_voss,Kera,I know what I packed.,annoyed,jp,,not_recorded_in_this_package
+tl_a2_load_cloth_005,iona_mist,Iona,You both packed it.,gentle,jp,,not_recorded_in_this_package
+tl_a2_load_cloth_006,narrator,Narration,For a moment only the rain speaks.,composed,jp_narration,,not_recorded_in_this_package
+tl_a2_load_cloth_007,tilda_fen,Tilda,People see a healer arrive and think the waiting is finished.,quiet,jp,,not_recorded_in_this_package
+tl_a2_load_cloth_008,kera_voss,Kera,We have brought the treatment.,quiet,jp,,not_recorded_in_this_package
+tl_a2_load_cloth_009,tilda_fen,Tilda,"Yes. We still have to ask, examine, explain, and stay long enough to notice trouble.",focused,jp,,not_recorded_in_this_package
+tl_a2_load_cloth_010,iona_mist,Iona,Arriving is the first useful thing. It is not the only one.,calm,jp,,not_recorded_in_this_package
+tl_a2_load_cloth_011,kera_voss,Kera,"Then we keep enough cloth for the last patient, too.",quiet,jp,,not_recorded_in_this_package
+tl_a2_load_cloth_012,narrator,Narration,Tilda gives her the dry fold. This time Kera puts it where someone else can reach it.,composed,jp_narration,,not_recorded_in_this_package
+tl_a2_load_cart_001,tl_carter,Carter,Do not come through the middle. That wheel drops when you touch it.,worried,jp,,not_recorded_in_this_package
+tl_a2_load_cart_002,odelia_pike,Odelia,"We can use the side, one at a time.",focused,jp,,not_recorded_in_this_package
+tl_a2_load_cart_003,tilda_fen,Tilda,Are you hurt?,focused,jp,,not_recorded_in_this_package
+tl_a2_load_cart_004,tl_carter,Carter,Just waiting. They came down from the sheds. I got behind the beam.,worried,jp,,not_recorded_in_this_package
+tl_a2_load_cart_005,iona_mist,Iona,Stay where you have cover. We will clear the lane.,calm,jp,,not_recorded_in_this_package
+tl_a2_load_cart_006,kera_voss,Kera,Someone is turning that wheel from the other side.,focused,jp,,not_recorded_in_this_package
+tl_a2_load_cart_007,odelia_pike,Odelia,Two ahead. The others are following the noise.,serious,jp,,not_recorded_in_this_package
+tl_a2_load_cart_008,tilda_fen,Tilda,We hold the front while the load gets through. Do not spend everything in the first exchange.,focused,jp,,not_recorded_in_this_package
+tl_a2_load_arrival_001,tl_carter,Carter,You could have left the cart. You had your own load.,relieved,jp,,not_recorded_in_this_package
+tl_a2_load_arrival_002,tilda_fen,Tilda,The cart is still there. We helped the person.,dry,jp,,not_recorded_in_this_package
+tl_a2_load_arrival_003,iona_mist,Iona,Wait until the wheel is braced before you move it.,gentle,jp,,not_recorded_in_this_package
+tl_a2_load_arrival_004,odelia_pike,Odelia,The harbor is past that low roof. I will show you the dry path.,focused,jp,,not_recorded_in_this_package
+tl_a2_load_arrival_005,narrator,Narration,The carter nods toward the covered crates.,composed,jp_narration,,not_recorded_in_this_package
+tl_a2_load_arrival_006,tl_carter,Carter,Medicine?,curious,jp,,not_recorded_in_this_package
+tl_a2_load_arrival_007,kera_voss,Kera,For the salt fever. No charge.,focused,jp,,not_recorded_in_this_package
+tl_a2_load_arrival_008,tl_carter,Carter,Then people will want to know why.,quiet,jp,,not_recorded_in_this_package
+tl_a2_load_arrival_009,tilda_fen,Tilda,Yes. They will.,quiet,jp,,not_recorded_in_this_package
+tl_a2_load_arrival_010,narrator,Narration,The road widens. This time nobody has to walk behind the load.,composed,jp_narration,,not_recorded_in_this_package
+event_guild_salt_fever_2_001,tilda_fen,Tilda,This is where I learned. My teacher treated this fever with salt and honesty.,reflective,jp,,not_recorded_in_this_package
+event_guild_salt_fever_2_002,odelia_pike,Odelia,My brother and I stole bread from that bakery.,small_smile,jp,,not_recorded_in_this_package
+event_guild_salt_fever_2_003,iona_mist,Iona,Then we will pay it back with medicine.,gentle,jp,,not_recorded_in_this_package
+tl_a3_bakery_001,tl_baker,Baker,You can use the side room. The table is clean enough for bread. I do not know about medicine.,guarded,jp,,not_recorded_in_this_package
+tl_a3_bakery_002,tilda_fen,Tilda,Then we clean it once more. Thank you.,focused,jp,,not_recorded_in_this_package
+tl_a3_bakery_003,odelia_pike,Odelia,We will not need the ovens.,hesitant,jp,,not_recorded_in_this_package
+tl_a3_bakery_004,tl_baker,Baker,Good. They are occupied.,dry,jp,,not_recorded_in_this_package
+tl_a3_bakery_005,narrator,Narration,"The baker notices Odelia's cap, then looks back at the crates. Recognition is left unspoken.",composed,jp_narration,,not_recorded_in_this_package
+tl_a3_bakery_006,tl_baker,Baker,A free bottle usually comes with a second question.,guarded,jp,,not_recorded_in_this_package
+tl_a3_bakery_007,kera_voss,Kera,Mine comes with instructions.,focused,jp,,not_recorded_in_this_package
+tl_a3_bakery_008,tl_baker,Baker,And after the instructions?,serious,jp,,not_recorded_in_this_package
+tl_a3_bakery_009,iona_mist,Iona,You may ask us something. You do not owe us an answer.,gentle,jp,,not_recorded_in_this_package
+tl_a3_bakery_010,tilda_fen,Tilda,"Nobody is giving a blood sample, signing a debt, or promising a favor for this treatment.",focused,jp,,not_recorded_in_this_package
+tl_a3_bakery_011,kera_voss,Kera,I will write that down.,quiet,jp,,not_recorded_in_this_package
+tl_a3_bakery_012,tl_baker,Baker,Write it where the next person can see it.,quiet,jp,,not_recorded_in_this_package
+tl_a3_questions_001,kera_voss,Kera,The label is correct.,focused,jp,,not_recorded_in_this_package
+tl_a3_questions_002,tilda_fen,Tilda,You have told the bottle. Tell the person.,dry,jp,,not_recorded_in_this_package
+tl_a3_questions_003,kera_voss,Kera,"Dose, contents, maker. What else?",annoyed,jp,,not_recorded_in_this_package
+tl_a3_questions_004,iona_mist,Iona,What they may ask before they take it.,gentle,jp,,not_recorded_in_this_package
+tl_a3_questions_005,odelia_pike,Odelia,And whether they can say no.,quiet,jp,,not_recorded_in_this_package
+tl_a3_questions_006,kera_voss,Kera,Fine. I am adding a line.,quiet,jp,,not_recorded_in_this_package
+tl_a3_questions_007,tl_patient,Patient,"Will you tell us what is in it, or just tell us it works?",worried,jp,,not_recorded_in_this_package
+tl_a3_questions_008,narrator,Narration,Kera takes her hand off the nearest bottle. There is room for the question on the table.,composed,jp_narration,,not_recorded_in_this_package
+tl_a3_boundary_001,odelia_pike,Odelia,The next lane is not clear. The dead are turning at the net racks.,serious,jp,,not_recorded_in_this_package
+tl_a3_boundary_002,tilda_fen,Tilda,The people inside stay inside. We do not carry the queue into this.,focused,jp,,not_recorded_in_this_package
+tl_a3_boundary_003,kera_voss,Kera,There is one crate left for the far end of the harbor.,focused,jp,,not_recorded_in_this_package
+tl_a3_boundary_004,iona_mist,Iona,It stays behind the door until we can carry it safely.,calm,jp,,not_recorded_in_this_package
+tl_a3_boundary_005,odelia_pike,Odelia,"We will need room behind the front line. If they reach the turn, they will spread along it.",focused,jp,,not_recorded_in_this_package
+tl_a3_boundary_006,tilda_fen,Tilda,Check the kit before we step out. Recovery matters more than looking fast.,focused,jp,,not_recorded_in_this_package
+tl_a3_boundary_007,kera_voss,Kera,"And if we surveyed the approach, we use what we saw.",focused,jp,,not_recorded_in_this_package
+tl_a3_boundary_008,narrator,Narration,Iona hangs the lantern where both the door and the turn remain visible.,composed,jp_narration,,not_recorded_in_this_package
+tl_a3_boundary_009,iona_mist,Iona,A boundary. Not a lure.,calm,jp,,not_recorded_in_this_package
+tl_a3_after_boundary_001,narrator,Narration,The lantern returns to its hook. The people inside have not moved from the dry benches.,composed,jp_narration,,not_recorded_in_this_package
+tl_a3_after_boundary_002,tl_patient,Patient,Did we make you stay longer?,worried,jp,,not_recorded_in_this_package
+tl_a3_after_boundary_003,tilda_fen,Tilda,You did not make the road unsafe.,focused,jp,,not_recorded_in_this_package
+tl_a3_after_boundary_004,kera_voss,Kera,We knew where we were taking the crates.,quiet,jp,,not_recorded_in_this_package
+tl_a3_after_boundary_005,iona_mist,Iona,Now we have room to finish the work.,gentle,jp,,not_recorded_in_this_package
+tl_a3_after_boundary_006,odelia_pike,Odelia,The far lane is clear as well. I checked it on the way back.,calm,jp,,not_recorded_in_this_package
+tl_a3_after_boundary_007,tilda_fen,Tilda,Then sit down for one minute before you check it again.,dry,jp,,not_recorded_in_this_package
+tl_a3_after_boundary_008,odelia_pike,Odelia,I can still see it from the door.,hesitant,jp,,not_recorded_in_this_package
+tl_a3_after_boundary_009,kera_voss,Kera,A remarkable compromise. Take it.,wry,jp,,not_recorded_in_this_package
+tl_a4_last_lane_001,narrator,Narration,The last crate is lighter. The road to put it down is not.,composed,jp_narration,,not_recorded_in_this_package
+tl_a4_last_lane_002,odelia_pike,Odelia,They are caught between the wall and the racks. We cannot carry past them.,focused,jp,,not_recorded_in_this_package
+tl_a4_last_lane_003,kera_voss,Kera,The people beyond this lane have been waiting since before we arrived.,focused,jp,,not_recorded_in_this_package
+tl_a4_last_lane_004,tilda_fen,Tilda,Then we do this carefully. They do not need a broken crate arriving first.,focused,jp,,not_recorded_in_this_package
+tl_a4_last_lane_005,iona_mist,Iona,It is on dry ground. We can leave it here until the way is clear.,calm,jp,,not_recorded_in_this_package
+tl_a4_last_lane_006,odelia_pike,Odelia,The bell draws them together. The others reach through the gaps. Do not chase the sound without looking at the hands.,serious,jp,,not_recorded_in_this_package
+tl_a4_last_lane_007,kera_voss,Kera,We have crossed two roads and kept every stopper in place.,focused,jp,,not_recorded_in_this_package
+tl_a4_last_lane_008,tilda_fen,Tilda,That was the easy part. One more clear passage.,dry,jp,,not_recorded_in_this_package
+tl_a4_delivery_done_001,tl_patient,Patient,What do you need from us?,quiet,jp,,not_recorded_in_this_package
+tl_a4_delivery_done_002,kera_voss,Kera,A dry place for the unopened bottles. Someone to read the instructions with Tilda.,focused,jp,,not_recorded_in_this_package
+tl_a4_delivery_done_003,tl_patient,Patient,I meant in return.,worried,jp,,not_recorded_in_this_package
+tl_a4_delivery_done_004,iona_mist,Iona,You may tell the next person where to find us. You do not have to.,gentle,jp,,not_recorded_in_this_package
+tl_a4_delivery_done_005,tilda_fen,Tilda,Ask for help if the fever does not ease or anything gets worse. Do not wait because the bottle was free.,focused,jp,,not_recorded_in_this_package
+tl_a4_delivery_done_006,odelia_pike,Odelia,The path to the bakery is clear.,calm,jp,,not_recorded_in_this_package
+tl_a4_delivery_done_007,narrator,Narration,"The patient takes the written directions before the bottle. Kera notices, and leaves both within reach.",composed,jp_narration,,not_recorded_in_this_package
+tl_a4_delivery_done_008,kera_voss,Kera,There. No second price.,quiet,jp,,not_recorded_in_this_package
+tl_a4_echo_show_001,tl_patient,Patient,I told the people at the shelter we saw the sealed crates opened.,quiet,jp,,not_recorded_in_this_package
+tl_a4_echo_show_002,kera_voss,Kera,"Good. Tell them they may ask to see the next one, too.",focused,jp,,not_recorded_in_this_package
+tl_a4_echo_show_003,tilda_fen,Tilda,And that the table has sides. That part is apparently important.,dry,jp,,not_recorded_in_this_package
+tl_a4_echo_show_004,odelia_pike,Odelia,They moved the bench without being asked.,small_smile,jp,,not_recorded_in_this_package
+tl_a4_echo_show_005,iona_mist,Iona,They knew what they wanted to see.,gentle,jp,,not_recorded_in_this_package
+tl_a4_echo_show_006,narrator,Narration,"On the table, the explanation has more fingerprints than the bottle.",composed,jp_narration,,not_recorded_in_this_package
+tl_a4_echo_listen_001,tl_patient,Patient,Someone at the shelter asked me what you wanted in return. I knew what to say.,quiet,jp,,not_recorded_in_this_package
+tl_a4_echo_listen_002,iona_mist,Iona,"And if they have another question, they can come here.",gentle,jp,,not_recorded_in_this_package
+tl_a4_echo_listen_003,kera_voss,Kera,Or write it. We have room left on the paper.,focused,jp,,not_recorded_in_this_package
+tl_a4_echo_listen_004,tilda_fen,Tilda,She checked. Twice.,dry,jp,,not_recorded_in_this_package
+tl_a4_echo_listen_005,odelia_pike,Odelia,They brought the bench closer so they could hear.,small_smile,jp,,not_recorded_in_this_package
+tl_a4_echo_listen_006,narrator,Narration,"On the table, the question has left a small crease in the paper. Kera does not flatten it away.",composed,jp_narration,,not_recorded_in_this_package
+event_guild_salt_fever_3_001,red_vial_agent,Ledger Agent,"You are ruining a market, alchemist.",cold,jp,,not_recorded_in_this_package
+event_guild_salt_fever_3_002,kera_voss,Kera,"I am labeling it correctly. Yours says ""cure"". Mine says ""cure, free, and the name of who made it"".",fierce,jp,,not_recorded_in_this_package
+event_guild_salt_fever_3_003,narrator,Narration,The villagers took Kera's bottles. The agent left with a full crate and an empty road.,satisfied,jp_narration,,not_recorded_in_this_package
+tl_a4_after_agent_001,tl_baker,Baker,He comes through here often. People know the seal on his paper.,quiet,jp,,not_recorded_in_this_package
+tl_a4_after_agent_002,kera_voss,Kera,"They should know what is inside the bottle, too.",quiet,jp,,not_recorded_in_this_package
+tl_a4_after_agent_003,tilda_fen,Tilda,And who to find when they have a question.,focused,jp,,not_recorded_in_this_package
+tl_a4_after_agent_004,odelia_pike,Odelia,Do we take his paper down?,hesitant,jp,,not_recorded_in_this_package
+tl_a4_after_agent_005,iona_mist,Iona,It is their wall.,calm,jp,,not_recorded_in_this_package
+tl_a4_after_agent_006,narrator,Narration,"The baker picks up the old sales paper and sets it beside the stove, away from the medicine.",composed,jp_narration,,not_recorded_in_this_package
+tl_a4_after_agent_007,tl_baker,Baker,I can find another use for it.,dry,jp,,not_recorded_in_this_package
+tl_a4_after_agent_008,kera_voss,Kera,Not the instructions. Those are still useful paper.,wry,jp,,not_recorded_in_this_package
+tl_a4_after_agent_009,tl_baker,Baker,I noticed.,small_smile,jp,,not_recorded_in_this_package
+tl_a5_quiet_001,narrator,Narration,The crates are empty. The benches are not. Tilda speaks quietly to the last person waiting.,composed,jp_narration,,not_recorded_in_this_package
+tl_a5_quiet_002,kera_voss,Kera,They have enough for the next delivery as well.,quiet,jp,,not_recorded_in_this_package
+tl_a5_quiet_003,tilda_fen,Tilda,They have enough treatment for the cases we examined. We return to the archive and check what else is needed.,focused,jp,,not_recorded_in_this_package
+tl_a5_quiet_004,kera_voss,Kera,That is what I meant.,quiet,jp,,not_recorded_in_this_package
+tl_a5_quiet_005,tilda_fen,Tilda,Then put that on the next notice.,dry,jp,,not_recorded_in_this_package
+tl_a5_quiet_006,iona_mist,Iona,I left space beside the instructions for questions to come back with the cart.,gentle,jp,,not_recorded_in_this_package
+tl_a5_quiet_007,odelia_pike,Odelia,You expect them to ask more?,quiet,jp,,not_recorded_in_this_package
+tl_a5_quiet_008,iona_mist,Iona,I hope they can.,calm,jp,,not_recorded_in_this_package
+tl_a5_quiet_009,narrator,Narration,"Kera turns a spare label over. For once, she leaves the blank side blank.",composed,jp_narration,,not_recorded_in_this_package
+tl_a5_coast_memory_001,odelia_pike,Odelia,The shutter was not painted the same color.,quiet,jp,,not_recorded_in_this_package
+tl_a5_coast_memory_002,kera_voss,Kera,On the coast path?,curious,jp,,not_recorded_in_this_package
+tl_a5_coast_memory_003,odelia_pike,Odelia,Yes. I kept looking for something exactly as I left it.,hesitant,jp,,not_recorded_in_this_package
+tl_a5_coast_memory_004,iona_mist,Iona,You still found the way.,gentle,jp,,not_recorded_in_this_package
+tl_a5_coast_memory_005,odelia_pike,Odelia,I found somewhere to put the crate down.,quiet,jp,,not_recorded_in_this_package
+tl_a5_coast_memory_006,tilda_fen,Tilda,That was the part the rest of us needed.,dry,jp,,not_recorded_in_this_package
+tl_a5_coast_memory_007,narrator,Narration,Odelia folds the route sketch along a new crease. The steps still have a place on it.,composed,jp_narration,,not_recorded_in_this_package
+tl_a5_load_memory_001,kera_voss,Kera,There is still a clean fold left.,quiet,jp,,not_recorded_in_this_package
+tl_a5_load_memory_002,tilda_fen,Tilda,We kept one. That is different from forgetting to use it.,calm,jp,,not_recorded_in_this_package
+tl_a5_load_memory_003,iona_mist,Iona,The carter offered to bring questions back with the next load.,gentle,jp,,not_recorded_in_this_package
+tl_a5_load_memory_004,odelia_pike,Odelia,He knows where the road is clear now.,calm,jp,,not_recorded_in_this_package
+tl_a5_load_memory_005,tilda_fen,Tilda,Then he has a useful job. We should not give him six more because he said yes to one.,dry,jp,,not_recorded_in_this_package
+tl_a5_load_memory_006,kera_voss,Kera,You have made restraint sound like a packing instruction.,wry,jp,,not_recorded_in_this_package
+tl_a5_load_memory_007,narrator,Narration,Tilda puts the cloth where the first hand opening the kit will find it.,composed,jp_narration,,not_recorded_in_this_package
+tl_a5_bread_001,tl_baker,Baker,For the road. It was coming out of the oven anyway.,calm,jp,,not_recorded_in_this_package
+tl_a5_bread_002,odelia_pike,Odelia,We can pay for it.,hesitant,jp,,not_recorded_in_this_package
+tl_a5_bread_003,tl_baker,Baker,You can take it before it cools.,dry,jp,,not_recorded_in_this_package
+tl_a5_bread_004,kera_voss,Kera,The medicine was not a bargain for bread.,quiet,jp,,not_recorded_in_this_package
+tl_a5_bread_005,tl_baker,Baker,I know. Neither is this.,quiet,jp,,not_recorded_in_this_package
+tl_a5_bread_006,narrator,Narration,"Odelia breaks a piece carefully, then passes the larger part to Tilda.",composed,jp_narration,,not_recorded_in_this_package
+tl_a5_bread_007,tilda_fen,Tilda,Do not choose my portion for me. I have worked very hard to remain difficult.,dry,jp,,not_recorded_in_this_package
+tl_a5_bread_008,odelia_pike,Odelia,Then choose this one.,small_smile,jp,,not_recorded_in_this_package
+tl_a5_bread_009,iona_mist,Iona,We can eat before we carry the empty crates back.,gentle,jp,,not_recorded_in_this_package
+tl_a5_bread_010,narrator,Narration,"For a little while, nobody needs anything explained.",composed,jp_narration,,not_recorded_in_this_package
+tl_a5_company_001,narrator,Narration,The road back is clear enough to wait for one conversation.,composed,jp_narration,,not_recorded_in_this_package
+tl_a5_company_002,kera_voss,Kera,We should go before I find something else to label.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_003,tilda_fen,Tilda,You have already labeled the empty crates.,dry,jp,,not_recorded_in_this_package
+tl_a5_company_004,iona_mist,Iona,Then we have a moment.,gentle,jp,,not_recorded_in_this_package
+tl_a5_end_001,odelia_pike,Odelia,The turn is clear. We can stay together on the way back.,calm,jp,,not_recorded_in_this_package
+tl_a5_end_002,kera_voss,Kera,The next notice needs a place for questions.,focused,jp,,not_recorded_in_this_package
+tl_a5_end_003,tilda_fen,Tilda,And a place for whoever answers them to sit down.,dry,jp,,not_recorded_in_this_package
+tl_a5_end_004,iona_mist,Iona,We can leave both.,gentle,jp,,not_recorded_in_this_package
+tl_a5_end_005,kera_voss,Kera,It will be a very large notice.,wry,jp,,not_recorded_in_this_package
+tl_a5_end_006,narrator,Narration,The crates knock gently as they walk. Paper labels remain tied to their handles.,composed,jp_narration,,not_recorded_in_this_package
+tl_a5_end_007,odelia_pike,Odelia,Do we take those off?,quiet,jp,,not_recorded_in_this_package
+tl_a5_end_008,kera_voss,Kera,No. They still say who brought them.,quiet,jp,,not_recorded_in_this_package
+tl_a5_end_009,narrator,Narration,Nothing about the road has become easy. It is only easier to know whom to ask.,composed,jp_narration,,not_recorded_in_this_package
+tl_a1_preparation_008,tilda_fen,Tilda,Clean cloth here. Treatment tools here. Nothing goes back into the medicine crate.,focused,jp,,not_recorded_in_this_package
+tl_a1_preparation_009,kera_voss,Kera,I have labeled the pockets.,focused,jp,,not_recorded_in_this_package
+tl_a1_preparation_010,tilda_fen,Tilda,"You have labeled one of them ""obvious"".",dry,jp,,not_recorded_in_this_package
+tl_a1_preparation_011,kera_voss,Kera,It is the pocket for the obvious things.,wry,jp,,not_recorded_in_this_package
+tl_a1_preparation_012,iona_mist,Iona,I will keep the kit within reach.,gentle,jp,,not_recorded_in_this_package
+tl_a1_preparation_013,odelia_pike,Odelia,Then I will watch the turns from the cart.,calm,jp,,not_recorded_in_this_package
+tl_a1_preparation_014,odelia_pike,Odelia,I will mark where the path narrows. A small mark. Not one that sends everyone following it.,focused,jp,,not_recorded_in_this_package
+tl_a1_preparation_015,kera_voss,Kera,What if we cannot find it?,focused,jp,,not_recorded_in_this_package
+tl_a1_preparation_016,odelia_pike,Odelia,You will. It will point at the part you should be looking at.,serious,jp,,not_recorded_in_this_package
+tl_a1_preparation_017,iona_mist,Iona,We will wait at the bend until we can see you.,gentle,jp,,not_recorded_in_this_package
+tl_a1_preparation_018,tilda_fen,Tilda,"And the kit comes with me. Prepared or not, I refuse to misplace it.",dry,jp,,not_recorded_in_this_package
+tl_a1_preparation_019,kera_voss,Kera,Good. Nobody has been outvoted by a pocket.,wry,jp,,not_recorded_in_this_package
+tl_a1_fork_008,odelia_pike,Odelia,"Single file at the open bend. Watch the sea wall, not the water.",focused,jp,,not_recorded_in_this_package
+tl_a1_fork_009,tilda_fen,Tilda,Tell that to the water when it comes over the wall.,dry,jp,,not_recorded_in_this_package
+tl_a1_fork_010,kera_voss,Kera,"If the water has a complaint, it may submit it in writing.",wry,jp,,not_recorded_in_this_package
+tl_a1_fork_011,iona_mist,Iona,I will keep the cloth over the glass.,gentle,jp,,not_recorded_in_this_package
+tl_a1_fork_012,tilda_fen,Tilda,Stay close enough to pass the kit. Far enough that one fallen crate does not stop all of us.,focused,jp,,not_recorded_in_this_package
+tl_a1_fork_013,odelia_pike,Odelia,I will check the shed doors before we reach them.,focused,jp,,not_recorded_in_this_package
+tl_a1_fork_014,kera_voss,Kera,Nothing leaves the crates until we find a dry place.,focused,jp,,not_recorded_in_this_package
+tl_a1_fork_015,iona_mist,Iona,Then we make one if we need it.,gentle,jp,,not_recorded_in_this_package
+tl_a3_questions_009,kera_voss,Kera,You may watch from that side of the table. These stay sealed until Tilda needs them.,focused,jp,,not_recorded_in_this_package
+tl_a3_questions_010,tilda_fen,Tilda,That means she is pleased you asked.,dry,jp,,not_recorded_in_this_package
+tl_a3_questions_011,kera_voss,Kera,It means the table has sides for a reason.,annoyed,jp,,not_recorded_in_this_package
+tl_a3_questions_012,iona_mist,Iona,Ask us to stop if something is unclear.,gentle,jp,,not_recorded_in_this_package
+tl_a3_questions_013,tl_patient,Patient,Can the others watch too?,quiet,jp,,not_recorded_in_this_package
+tl_a3_questions_014,kera_voss,Kera,Yes. Leave room for the person being treated.,quiet,jp,,not_recorded_in_this_package
+tl_a3_questions_015,odelia_pike,Odelia,I will move the bench where they can see.,calm,jp,,not_recorded_in_this_package
+tl_a3_questions_016,iona_mist,Iona,What would you like to know first?,gentle,jp,,not_recorded_in_this_package
+tl_a3_questions_017,tl_patient,Patient,Why does the same Guild sell one bottle and give away another?,worried,jp,,not_recorded_in_this_package
+tl_a3_questions_018,kera_voss,Kera,"We are the archive wing. We made these, and we are responsible for what we brought.",quiet,jp,,not_recorded_in_this_package
+tl_a3_questions_019,tilda_fen,Tilda,You are right to ask. We will answer what we know and say when we do not.,focused,jp,,not_recorded_in_this_package
+tl_a3_questions_020,iona_mist,Iona,You can keep asking after the bottles are gone.,calm,jp,,not_recorded_in_this_package
+tl_a3_questions_021,kera_voss,Kera,Preferably before I pack the table.,wry,jp,,not_recorded_in_this_package
+tl_a3_questions_022,odelia_pike,Odelia,The table stays here.,small_smile,jp,,not_recorded_in_this_package
+tl_a5_company_005,iona_mist,Iona,You wrote your name larger on the second label.,gentle,jp,,not_recorded_in_this_package
+tl_a5_company_006,kera_voss,Kera,The first one did not have enough room.,hesitant,jp,,not_recorded_in_this_package
+tl_a5_company_007,iona_mist,Iona,You made room.,calm,jp,,not_recorded_in_this_package
+tl_a5_company_008,kera_voss,Kera,"If something is wrong, they should know who brought it.",quiet,jp,,not_recorded_in_this_package
+tl_a5_company_009,tilda_fen,Tilda,And if something is right.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_010,kera_voss,Kera,That is not what the name is for.,hesitant,jp,,not_recorded_in_this_package
+tl_a5_company_011,odelia_pike,Odelia,It can be for both.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_012,narrator,Narration,Kera presses the loose label flat against an empty crate. She leaves the name where it can be read.,composed,jp_narration,,not_recorded_in_this_package
+tl_a5_company_013,kera_voss,Kera,You were the first to tell them we would stay for questions.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_014,tilda_fen,Tilda,People are used to a seller leaving when the bottle changes hands.,focused,jp,,not_recorded_in_this_package
+tl_a5_company_015,iona_mist,Iona,You stayed after the last one did.,gentle,jp,,not_recorded_in_this_package
+tl_a5_company_016,tilda_fen,Tilda,There was still someone on the bench.,dry,jp,,not_recorded_in_this_package
+tl_a5_company_017,odelia_pike,Odelia,There is not now.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_018,narrator,Narration,"Tilda looks at the empty place, then puts the kit down instead of checking it again.",composed,jp_narration,,not_recorded_in_this_package
+tl_a5_company_019,tilda_fen,Tilda,Good. Then I can sit there.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_020,kera_voss,Kera,A practical use for a successful treatment room.,wry,jp,,not_recorded_in_this_package
+tl_a5_company_021,odelia_pike,Odelia,You let them leave without telling us their names.,hesitant,jp,,not_recorded_in_this_package
+tl_a5_company_022,iona_mist,Iona,They came for medicine. We were not registering them for a journey.,gentle,jp,,not_recorded_in_this_package
+tl_a5_company_023,kera_voss,Kera,Some stayed and asked to write it down anyway.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_024,iona_mist,Iona,Then they chose something to leave with us.,calm,jp,,not_recorded_in_this_package
+tl_a5_company_025,tilda_fen,Tilda,The baker chose bread. A sound decision.,dry,jp,,not_recorded_in_this_package
+tl_a5_company_026,odelia_pike,Odelia,It felt different when nobody asked for it first.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_027,iona_mist,Iona,Yes.,gentle,jp,,not_recorded_in_this_package
+tl_a5_company_028,narrator,Narration,Iona lifts the lantern from its hook. Its light falls on the bread before the road.,composed,jp_narration,,not_recorded_in_this_package
+tl_a5_company_029,kera_voss,Kera,You got us here.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_030,odelia_pike,Odelia,I knew the roads.,hesitant,jp,,not_recorded_in_this_package
+tl_a5_company_031,tilda_fen,Tilda,Roads rarely carry their own crates.,dry,jp,,not_recorded_in_this_package
+tl_a5_company_032,iona_mist,Iona,"You showed us where to wait, too.",gentle,jp,,not_recorded_in_this_package
+tl_a5_company_033,odelia_pike,Odelia,I thought coming back would mean answering questions I cannot answer.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_034,kera_voss,Kera,You answered the ones we needed today.,quiet,jp,,not_recorded_in_this_package
+tl_a5_company_035,odelia_pike,Odelia,Then I can show you the way back.,small_smile,jp,,not_recorded_in_this_package
+tl_a5_company_036,narrator,Narration,She folds the sketch without hiding it beneath the crate.,composed,jp_narration,,not_recorded_in_this_package

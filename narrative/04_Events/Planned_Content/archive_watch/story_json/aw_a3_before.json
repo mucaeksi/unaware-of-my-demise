@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "scene_id": "aw_a3_before",
+  "title_en": "Case Two: Pressure with a Source",
+  "location_id": "aw_case_board",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "aw_case_board"
+    },
+    {
+      "op": "music",
+      "cue_id": "aw_case"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a3_before_001",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Second case. The pressure has a source. Read its intent before choosing your response.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a3_before_002",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "You may remove it early or stay ready while it acts. The exercise must allow both.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a3_before_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Do not confuse a slower victory with a failed one.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a3_before_004",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "And do not confuse the nearest enemy with the source.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "aw_a3_before_005",
+      "text": "The second diagram opens without carrying wounds from the first."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "aw_a3_before_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "tactical_archive_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "event_id": "tactical_archive_watch",
+  "session_kind": "isolated_replay",
+  "mutates_original_progress": false,
+  "reward_binding": null,
+  "scene_replays": [
+    "aw_a1_book",
+    "aw_a1_line",
+    "aw_a1_response",
+    "aw_a2_before",
+    "aw_a2_after",
+    "aw_a3_before",
+    "aw_a3_after",
+    "aw_a4_before",
+    "aw_a4_profile",
+    "aw_a4_end"
+  ],
+  "exercise_replays": [
+    {
+      "entry_node": "aw_a2_before",
+      "stop_before_node": "aw_a2_after",
+      "expected_scenes": 1,
+      "expected_battles": 1,
+      "initial_state_required": [
+        "line",
+        "response"
+      ]
+    },
+    {
+      "entry_node": "aw_a3_before",
+      "stop_before_node": "aw_a3_after",
+      "expected_scenes": 1,
+      "expected_battles": 1,
+      "initial_state_required": [
+        "line",
+        "response"
+      ]
+    },
+    {
+      "entry_node": "aw_a4_before",
+      "stop_before_node": "aw_a4_profile",
+      "expected_scenes": 1,
+      "expected_battles": 1,
+      "initial_state_required": [
+        "line",
+        "response"
+      ]
+    }
+  ],
+  "conversation_replays": [
+    {
+      "scene_id": "aw_a4_profile",
+      "choice_id": "aw_review_steady"
+    },
+    {
+      "scene_id": "aw_a4_profile",
+      "choice_id": "aw_review_reach"
+    }
+  ],
+  "battle_state_policy": "fresh_hp_focus_cooldowns_each_case; future host binding required"
+}

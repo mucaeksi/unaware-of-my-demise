@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_job_wood_3",
+  "title_en": "Room for the Bowl",
+  "location_id": "od_table_work",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "od_table_work"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_3_001",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "This gap stays open.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_3_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "For the food?",
+      "emotion": "curious"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_3_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "For whoever carries it. And whoever cannot step over three people to sit down.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_3_004",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "A very considerate gap.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_3_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Do not sing at it. It is already doing its job.",
+      "emotion": "dry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_job_wood_3_006",
+      "text": "A helper sets the last bowl down. The table does not move."
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_3_007",
+      "speaker": "od_helper",
+      "speaker_display": "Helper",
+      "text": "You can hear the difference.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_3_008",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "I prefer the part you cannot hear.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_job_wood_3_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

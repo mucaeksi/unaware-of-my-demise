@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a4_heard",
+  "title_en": "A Sound Kept in Someone’s Words",
+  "location_id": "highland_village",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "highland_village"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_heard_001",
+      "speaker": "tw_lantern_carrier",
+      "speaker_display": "Lantern Carrier",
+      "text": "Will you write that I was frightened?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_heard_002",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "If that is part you want kept. Or only the sound.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_heard_003",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "You get to choose your own line.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_heard_004",
+      "speaker": "tw_lantern_carrier",
+      "speaker_display": "Lantern Carrier",
+      "text": "The sound first. I will decide about the rest later.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a4_heard_005",
+      "text": "Clem writes the short account and reads it back at the carrier’s pace."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a4_heard_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

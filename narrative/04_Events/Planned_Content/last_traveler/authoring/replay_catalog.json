@@ -1,0 +1,46 @@
+{
+  "event_id": "side_quest_last_traveler",
+  "session_kind": "isolated_replay",
+  "mutates_original_progress": false,
+  "reward_binding": null,
+  "scene_replays": [
+    "lt_a1_sign",
+    "lt_a1_load",
+    "lt_a1_method",
+    "lt_a2_scout_1",
+    "lt_a2_scout_2",
+    "lt_a2_scout_3",
+    "lt_a2_brace_1",
+    "lt_a2_brace_2",
+    "lt_a2_brace_3",
+    "lt_a3_watch",
+    "lt_a3_clear",
+    "lt_a4_traveler",
+    "lt_a4_pause",
+    "lt_a4_company",
+    "lt_a4_end"
+  ],
+  "method_replays": [
+    {
+      "method": "scout",
+      "entry_node": "lt_a2_scout_1",
+      "stop_before_node": "lt_a3_watch"
+    },
+    {
+      "method": "brace",
+      "entry_node": "lt_a2_brace_1",
+      "stop_before_node": "lt_a3_watch"
+    }
+  ],
+  "conversation_replays": [
+    {
+      "scene_id": "lt_a4_company",
+      "choice_id": "lt_focus_brin"
+    },
+    {
+      "scene_id": "lt_a4_company",
+      "choice_id": "lt_focus_nixie"
+    }
+  ],
+  "note_tr": "Alternatif yöntem üç sahnelik replay. Battle replay ayrı denenebilir; ilk tur ve future reward claim değişmez."
+}

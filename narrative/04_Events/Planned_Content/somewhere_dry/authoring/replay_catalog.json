@@ -1,0 +1,54 @@
+{
+  "event_id": "side_quest_somewhere_dry",
+  "session_kind": "isolated_replay",
+  "mutates_original_progress": false,
+  "reward_binding": null,
+  "scene_replays": [
+    "dr_a1_edge",
+    "dr_a1_slip",
+    "dr_a1_layout",
+    "dr_a2_shelf_1",
+    "dr_a2_shelf_2",
+    "dr_a2_desk_1",
+    "dr_a2_desk_2",
+    "dr_a2_reading",
+    "dr_a2_note",
+    "dr_a2_ask",
+    "dr_a3_passage",
+    "dr_a3_clear",
+    "dr_a4_found",
+    "dr_a4_end"
+  ],
+  "segment_replays": [
+    {
+      "entry_node": "dr_a2_shelf_1",
+      "stop_before_node": "dr_a2_reading",
+      "initial_state": {
+        "layout": "shelf"
+      },
+      "expected_scenes": 2,
+      "expected_battles": 0
+    },
+    {
+      "entry_node": "dr_a2_desk_1",
+      "stop_before_node": "dr_a2_reading",
+      "initial_state": {
+        "layout": "desk"
+      },
+      "expected_scenes": 2,
+      "expected_battles": 0
+    }
+  ],
+  "conversation_replays": [
+    {
+      "scene_id": "dr_a2_reading",
+      "choice_id": "dr_reading_note",
+      "followup_scene": "dr_a2_note"
+    },
+    {
+      "scene_id": "dr_a2_reading",
+      "choice_id": "dr_reading_ask",
+      "followup_scene": "dr_a2_ask"
+    }
+  ]
+}

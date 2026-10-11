@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a1_need",
+  "title_en": "A Stop with Two Edges",
+  "location_id": "or_relief_stop",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_relief_stop"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_need_001",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "If we put everything close to the bench, the next group can reach it.",
+      "emotion": "worried"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_need_002",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "And if the boxes close the approach, they cannot reach the bench.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_need_003",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "We need an order that works when the two of us have gone ahead.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_need_004",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "I thought keeping you here was the safer plan.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_need_005",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "A useful place should not depend on one pair of shoulders.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "or_a1_need_006",
+      "text": "Marek sets his spear beside the supply board. He does not start a marching song."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a1_need_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a1_preparation",
+  "title_en": "Before the Road",
+  "location_id": "undercity_antidote_archive",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_antidote_archive"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_001",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The roads look open from here. The last bend is where they stop looking open.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "There is also fever sweat, dirty water, and whatever the road throws on us.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "You have both made persuasive arguments against going anywhere.",
+      "emotion": "annoyed"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_004",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "They have made arguments for being ready.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_005",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I can walk ahead and mark the bad approaches.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_006",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Or we prepare the field kit where we can still see what we are doing.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_007",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Both will be useful. Which do we do first?",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "choice",
+      "prompt": "Choose the first preparation.",
+      "options": [
+        {
+          "id": "tl_prep_clean",
+          "text": "Prepare the field kit — focus on sustained pressure.",
+          "goto": "clean"
+        },
+        {
+          "id": "tl_prep_scout",
+          "text": "Survey the approaches — focus on target priority.",
+          "goto": "scout"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "clean"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_008",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Clean cloth here. Treatment tools here. Nothing goes back into the medicine crate.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_009",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I have labeled the pockets.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_010",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "You have labeled one of them \"obvious\".",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_011",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "It is the pocket for the obvious things.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_012",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "I will keep the kit within reach.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_013",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Then I will watch the turns from the cart.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "scout"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_014",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I will mark where the path narrows. A small mark. Not one that sends everyone following it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_015",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "What if we cannot find it?",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_016",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "You will. It will point at the part you should be looking at.",
+      "emotion": "serious"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_017",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "We will wait at the bend until we can see you.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_018",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "And the kit comes with me. Prepared or not, I refuse to misplace it.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_preparation_019",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Good. Nobody has been outvoted by a pocket.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a1_preparation_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "backgrounds": [
+    {
+      "location_id": "dr_dry_room",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "dr_refuge_desk",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "dr_refuge_passage",
+      "status": "unproduced_or_source_reference_only"
+    }
+  ],
+  "music": [
+    {
+      "cue_id": "dr_work",
+      "status": "unproduced"
+    }
+  ],
+  "portraits": [
+    {
+      "character_id": "mirel_quill",
+      "emotions": [
+        "calm",
+        "focused",
+        "precise",
+        "quiet",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "sister_aveline",
+      "emotions": [
+        "calm",
+        "focused",
+        "gentle",
+        "warm"
+      ],
+      "status": "canonical_identity_mapping_required"
+    }
+  ],
+  "voice_status": "English source complete; Japanese translation and audio not produced."
+}

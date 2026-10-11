@@ -1,0 +1,44 @@
+{
+  "checked_at_utc": "2026-10-11T09:08:34.472Z",
+  "validated_against_main": "99df3cf",
+  "source_integrity": "PASS: source hashes and all copied canon fields unchanged",
+  "story_schema": "PASS: 5 exports",
+  "script_equivalence": "PASS: 37 unique lines",
+  "graph": "PASS: 2 complete paths; all 6 nodes reachable",
+  "runner": "PASS: save/restore after every line, before pending choice, and at scene checkpoints; pending choice saving rejected as expected",
+  "encounters": "PASS: 0 referenced variants, 2 front / 3 rear",
+  "replay_catalog": "PASS: 0 bounded segments and all conversation targets",
+  "rewards": "UNDECIDED",
+  "scene_count": 5,
+  "line_count": 37,
+  "canon_line_count": 0,
+  "decision_combinations": 2,
+  "encounter_variants": 0,
+  "battles_per_first_run": 0,
+  "first_path_lines": [
+    33,
+    33
+  ],
+  "first_path_words": [
+    332,
+    333
+  ],
+  "limits": [
+    "VM and authoring validation; no event API, production roster balance, visual/audio playback, Android or signed patch test.",
+    "Combat role feasibility prototype is separately tested; it does not replace canonical hero/unit or production balance mappings."
+  ],
+  "paths": [
+    {
+      "voice": "jori",
+      "line_count": 33,
+      "words": 333,
+      "battles": 0
+    },
+    {
+      "voice": "pippa",
+      "line_count": 33,
+      "words": 332,
+      "battles": 0
+    }
+  ]
+}

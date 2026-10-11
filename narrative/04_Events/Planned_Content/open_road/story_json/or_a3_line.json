@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a3_line",
+  "title_en": "The Remaining Threat",
+  "location_id": "or_safe_approach",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_safe_approach"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "or_a3_line_001",
+      "text": "A dead guard drags its weapon over the far stones. Others follow where the firm ground narrows."
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a3_line_002",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Everyone behind the stop. This is the line we keep, not a line you join.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a3_line_003",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "Read the one supporting the formation. The nearest blade is not the only threat.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a3_line_004",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "Do we move the people again?",
+      "emotion": "worried"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a3_line_005",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "They have safe room. Keep it clear for them.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "or_a3_line_006",
+      "text": "The two step forward without asking the volunteers to hold a weapon."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a3_line_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

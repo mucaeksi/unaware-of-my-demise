@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "scene_id": "event_harvest_inn_meal_1",
+  "title_en": "A Table for Everyone",
+  "location_id": "oakhaven_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "oakhaven_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "event_harvest_inn_meal_1_001",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Rule of the Harvest Supper: one dish, one name. You say the name, you get a bowl.",
+      "emotion": "bright"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_harvest_inn_meal_1_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I brought a dish. It is technically soup.",
+      "emotion": "defensive"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_harvest_inn_meal_1_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "It is moving.",
+      "emotion": "horrified"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_harvest_inn_meal_1_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "It is effervescent.",
+      "emotion": "tsundere"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_harvest_inn_meal_1_005",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I will eat it! For the festival!",
+      "emotion": "heroic"
+    },
+    {
+      "op": "narrate",
+      "line_id": "event_harvest_inn_meal_1_006",
+      "text": "Nixie ate it. Nixie was fine. Nixie glowed faintly for an hour."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "event_harvest_inn_meal_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/04_Events/events_part1.json",
+    "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
+    "note": "Verbatim canon source."
+  }
+}

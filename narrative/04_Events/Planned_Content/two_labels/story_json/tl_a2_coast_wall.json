@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a2_coast_wall",
+  "title_en": "Below the Sea Wall",
+  "location_id": "tl_coast_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_coast_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_coast_wall_001",
+      "text": "The coast road smells of wet rope. A line of dead figures stands where the watch used to change hands."
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_wall_002",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Do not bunch up under the wall.",
+      "emotion": "serious"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_wall_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "They are looking at the crates.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_wall_004",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "They are looking at the movement. Keep our back line away from the opening.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_wall_005",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "I preferred them when they were looking at nothing.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_wall_006",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "There is a flat place behind us. We can set the load down there.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_wall_007",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "One of them is already leaning past the others. That is the threat to watch.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_wall_008",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Then we stop it leaning any farther.",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a2_coast_wall_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

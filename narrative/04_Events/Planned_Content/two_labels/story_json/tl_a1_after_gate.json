@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a1_after_gate",
+  "title_en": "Four Handles",
+  "location_id": "tl_archive_yard",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_archive_yard"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_after_gate_001",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Clear to the first bend.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_after_gate_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Stoppers intact. Labels dry.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_after_gate_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "You checked the labels before the glass.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_after_gate_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The labels are easier to frighten.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_after_gate_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "This handle is cutting into your fingers. Put your hand here.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_after_gate_006",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I can take it.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_after_gate_007",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "I know. That is why I am sharing it.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a1_after_gate_008",
+      "text": "Odelia shifts her grip. The crate settles between them instead of against one shoulder."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a1_after_gate_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

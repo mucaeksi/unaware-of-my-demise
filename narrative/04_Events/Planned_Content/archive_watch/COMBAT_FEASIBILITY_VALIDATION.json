@@ -1,0 +1,806 @@
+{
+  "status": "PASS: schema-compatible proxies complete under existing combat engine",
+  "prototype_count": 8,
+  "simulation_runs": 72,
+  "base_replay_checks": 24,
+  "player_wins": 72,
+  "turn_range": [
+    13,
+    31
+  ],
+  "production_balance": "NOT_CERTIFIED",
+  "results": [
+    {
+      "encounter_id": "aw_enc_first_steady",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_first_steady",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_first_steady",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_first_steady",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_first_steady",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_first_steady",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_first_steady",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_first_steady",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_first_steady",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_first_reach",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 15
+      },
+      "action_count": 11
+    },
+    {
+      "encounter_id": "aw_enc_first_reach",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 15
+      },
+      "action_count": 11
+    },
+    {
+      "encounter_id": "aw_enc_first_reach",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 15
+      },
+      "action_count": 11
+    },
+    {
+      "encounter_id": "aw_enc_first_reach",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "aw_enc_first_reach",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "aw_enc_first_reach",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "aw_enc_first_reach",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_first_reach",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_first_reach",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_second_interrupt",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 13
+      },
+      "action_count": 10
+    },
+    {
+      "encounter_id": "aw_enc_second_interrupt",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 13
+      },
+      "action_count": 10
+    },
+    {
+      "encounter_id": "aw_enc_second_interrupt",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 13
+      },
+      "action_count": 10
+    },
+    {
+      "encounter_id": "aw_enc_second_interrupt",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "aw_enc_second_interrupt",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "aw_enc_second_interrupt",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_second_interrupt",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_second_interrupt",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_second_interrupt",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_second_endure",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 16
+      },
+      "action_count": 11
+    },
+    {
+      "encounter_id": "aw_enc_second_endure",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 16
+      },
+      "action_count": 11
+    },
+    {
+      "encounter_id": "aw_enc_second_endure",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 16
+      },
+      "action_count": 11
+    },
+    {
+      "encounter_id": "aw_enc_second_endure",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_second_endure",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_second_endure",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_second_endure",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_second_endure",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_second_endure",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_interrupt",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_interrupt",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_interrupt",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_interrupt",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_interrupt",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_interrupt",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_interrupt",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_interrupt",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_interrupt",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 27
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_endure",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_endure",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_endure",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_endure",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_endure",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_endure",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_endure",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 29
+      },
+      "action_count": 20
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_endure",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 29
+      },
+      "action_count": 20
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_endure",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 29
+      },
+      "action_count": 20
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_interrupt",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_interrupt",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_interrupt",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_interrupt",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_interrupt",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_interrupt",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 25
+      },
+      "action_count": 17
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_interrupt",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 30
+      },
+      "action_count": 21
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_interrupt",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 29
+      },
+      "action_count": 20
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_interrupt",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 30
+      },
+      "action_count": 21
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_endure",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_endure",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_endure",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_endure",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_endure",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_endure",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_endure",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 31
+      },
+      "action_count": 22
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_endure",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 30
+      },
+      "action_count": 21
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_endure",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 31
+      },
+      "action_count": 22
+    }
+  ]
+}

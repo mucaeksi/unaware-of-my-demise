@@ -1,0 +1,348 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_a5_company",
+  "title_en": "What the Evening Kept",
+  "location_id": "oakhaven_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "oakhaven_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_001",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "One last useful thing. A conversation nobody has to carry.",
+      "emotion": "bright"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "You make everything sound like work.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_003",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Only the enjoyable work.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "choice",
+      "prompt": "Whose small success do you notice?",
+      "options": [
+        {
+          "id": "od_focus_jori",
+          "text": "Jori, checking the repaired chair.",
+          "goto": "jori"
+        },
+        {
+          "id": "od_focus_nixie",
+          "text": "Nixie, beside the storehouse doorway.",
+          "goto": "nixie"
+        },
+        {
+          "id": "od_focus_pippa",
+          "text": "Pippa, folding the final verse.",
+          "goto": "pippa"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "jori"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "It did not move once.",
+      "emotion": "bright"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "The pad fits.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_006",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Someone sat in the middle instead of hiding it at the end.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_007",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "That was the useful part.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_a5_company_008",
+      "text": "Jori turns the chair to face the table again."
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_009",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Leave it here. Somebody will need it tomorrow.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "nixie"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_010",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "The helper found the storehouse without calling you.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_011",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Good. They remembered the turn.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_012",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "And you got to sit down.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_013",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I thought I would be checking the turn all evening.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_a5_company_014",
+      "text": "She starts to rise for the next load, then sees the helper already teaching someone else the route."
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_015",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Tomorrow I may draw a very good route to breakfast.",
+      "emotion": "bright"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "pippa"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_016",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Are you keeping the wrong notes?",
+      "emotion": "curious"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_017",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "They were somebody's way of getting into the song.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_018",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Mine was particularly inventive.",
+      "emotion": "bright"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_019",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "I have made a respectful note of it.",
+      "emotion": "wry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_a5_company_020",
+      "text": "Pippa folds the sheet with the corrections still visible."
+    },
+    {
+      "op": "say",
+      "line_id": "od_a5_company_021",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "I will not make it tidier than the evening was.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_a5_company_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

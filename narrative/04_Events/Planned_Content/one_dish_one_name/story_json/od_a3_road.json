@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_a3_road",
+  "title_en": "Before the Last Load",
+  "location_id": "od_outer_lane",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "od_outer_lane"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a3_road_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Stop at the storehouse door. The lane beyond it is not clear.",
+      "emotion": "serious"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a3_road_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Leave the serving things inside. Nobody carries them through a fight.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a3_road_003",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "The square can keep setting places. We will clear this turn.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a3_road_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The ones in front are moving when that bellbound corpse does.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a3_road_005",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "And one behind them is reaching past. Read both before we commit.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a3_road_006",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "We can hold the front and choose our opening.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a3_road_007",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "No hurry that costs someone the road back.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_a3_road_008",
+      "text": "The load stays on dry boards. The group steps into the lane with empty hands ready for weapons."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_a3_road_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

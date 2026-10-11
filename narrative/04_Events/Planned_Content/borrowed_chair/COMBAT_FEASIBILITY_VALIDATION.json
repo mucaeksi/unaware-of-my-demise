@@ -1,0 +1,10 @@
+{
+  "status": "PASS: schema-compatible proxies complete under existing combat engine",
+  "prototype_count": 0,
+  "simulation_runs": 0,
+  "base_replay_checks": 0,
+  "player_wins": 0,
+  "turn_range": [],
+  "production_balance": "NOT_CERTIFIED",
+  "results": []
+}

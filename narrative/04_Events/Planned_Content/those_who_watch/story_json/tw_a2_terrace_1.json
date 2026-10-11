@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a2_terrace_1",
+  "title_en": "The Firm Approach",
+  "location_id": "tw_terrace_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tw_terrace_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_1_001",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "This bend stays for waiting. The next stretch stays for the fight.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_1_002",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "Two close threats, and a supporting one behind them.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_1_003",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Hold the line where the ground is firm. You do not need to win the whole path at once.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "thistle_roe"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_1_004",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "The watchers can see us from below. Let us leave them a clear way up.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a2_terrace_1_005",
+      "text": "The carrier keeps the lamps beside the waiting bench."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a2_terrace_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

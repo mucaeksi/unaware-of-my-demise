@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a1_road",
+  "title_en": "The People Going Up",
+  "location_id": "eastern_highland_road",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "eastern_highland_road"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a1_road_001",
+      "text": "The highland road has more footsteps than carts today. People carry wrapped food and small lamps that will not be needed until they come down."
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_road_002",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "We leave the narrow shelf for anyone coming back. The watchers go up on this side.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_road_003",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "Watchers. That sounds more respectable than people looking at the sky.",
+      "emotion": "curious"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_road_004",
+      "speaker": "tw_lantern_carrier",
+      "speaker_display": "Lantern Carrier",
+      "text": "It sounds shorter when you need them to move.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_road_005",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "There is room to rest before the climb?",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_road_006",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "At the lower terrace. And at the ridge, if you do not crowd its edge.",
+      "emotion": "warm"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_road_007",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Then we can see without making someone stand where they should not.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a1_road_008",
+      "text": "The guide and lantern carrier stay with the three travelers, a small group inside the larger procession."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a1_road_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

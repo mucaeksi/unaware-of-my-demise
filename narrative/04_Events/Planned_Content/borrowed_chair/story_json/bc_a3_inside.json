@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "scene_id": "bc_a3_inside",
+  "title_en": "Where the Seat Usually Stands",
+  "location_id": "bc_house_door",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "bc_house_door"
+    },
+    {
+      "op": "music",
+      "cue_id": "bc_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "bc_a3_inside_001",
+      "text": "The chair returns to the patch of floor beside the low window. The owner rests one hand on its back."
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a3_inside_002",
+      "speaker": "bc_householder",
+      "speaker_display": "Householder",
+      "text": "The square sounded different with everybody sitting close.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a3_inside_003",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Will you lend it again?",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a3_inside_004",
+      "speaker": "bc_householder",
+      "speaker_display": "Householder",
+      "text": "Ask when there is another supper. I might bring onions again.",
+      "emotion": "warm"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a3_inside_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "We will remember the door.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "bc_a3_inside_006",
+      "text": "The red cloth stays tied beneath the seat. It catches the light from the low window."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "bc_a3_inside_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_story_borrowed_chair/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

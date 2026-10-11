@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a3_passage",
+  "title_en": "Before the Next Person",
+  "location_id": "dr_refuge_passage",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_passage"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a3_passage_001",
+      "text": "A scrape travels along the outer passage. Aveline sets the carrier’s board safely inside."
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a3_passage_002",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Keep this doorway clear. Nobody waiting here comes into the fight.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a3_passage_003",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "One behind the armor is sustaining the line. Look before choosing the target.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a3_passage_004",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "We have room to hold. We have a reason to keep it.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a3_passage_005",
+      "text": "The book remains on dry wood. The two women face the approach, not the waiting bench."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a3_passage_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

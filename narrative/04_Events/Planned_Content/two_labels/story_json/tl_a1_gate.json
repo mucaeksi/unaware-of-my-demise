@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a1_gate",
+  "title_en": "The Yard Gate",
+  "location_id": "tl_archive_yard",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_archive_yard"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a1_gate_001",
+      "text": "At the service gate, a dead hand works the same latch again and again. The gate has no door left to open."
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_gate_002",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Stop. Something behind the shutter is moving with it.",
+      "emotion": "serious"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_gate_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The yard was clear this morning.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_gate_004",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "It has had a busy morning.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_gate_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Keep the crates behind us. There is room along the wall.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_gate_006",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The one with the cord is making the others turn. Deal with that first, or hold until it cannot reach us.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_gate_007",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Bottles down. Hands free.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a1_gate_008",
+      "text": "They lower the crates together. No bottle breaks."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a1_gate_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

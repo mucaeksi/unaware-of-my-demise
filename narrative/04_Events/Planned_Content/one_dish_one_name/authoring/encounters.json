@@ -1,0 +1,161 @@
+{
+  "authoring_schema_version": 1,
+  "encounters": [
+    {
+      "encounter_id": "od_enc_wood_road",
+      "title_en": "A Steady Passage",
+      "location_id": "od_outer_lane",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Standart ön sıra baskısı; sayısal dengesi sonra."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Standart ön sıra baskısı; sayısal dengesi sonra."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "Önceden derlenmiş rear-row targeting varyantı; niyeti gösterilir."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "İzinli destek profili; niyeti gösterilir."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Standart ön sıra baskısı; sayısal dengesi sonra."
+        }
+      ],
+      "tactical_focus_tr": "Dengeli ön dayanıklılık ve bir arka tehdit.",
+      "briefing_en": "The serving load stays safely inside. Read the visible threats; a steady defensive party can also win.",
+      "counterplay_tr": "Hedef önceliği veya savunma/recovery; üç plan benzer zorlukta dengelenir. İşler stat buff’ı üretmez.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "od_enc_road_song",
+      "title_en": "The Reaching Line",
+      "location_id": "od_outer_lane",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Standart ön sıra baskısı; sayısal dengesi sonra."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Standart ön sıra baskısı; sayısal dengesi sonra."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "Önceden derlenmiş rear-row targeting varyantı; niyeti gösterilir."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "Önceden derlenmiş rear-row targeting varyantı; niyeti gösterilir."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "İzinli destek profili; niyeti gösterilir."
+        }
+      ],
+      "tactical_focus_tr": "İki arka tehdidi destek baskısıyla sıralamak.",
+      "briefing_en": "The serving load stays safely inside. Read the visible threats; a steady defensive party can also win.",
+      "counterplay_tr": "Hedef önceliği veya savunma/recovery; üç plan benzer zorlukta dengelenir. İşler stat buff’ı üretmez.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "od_enc_song_wood",
+      "title_en": "Hold the Turn",
+      "location_id": "od_outer_lane",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "İzinli destek profili; niyeti gösterilir."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Standart ön sıra baskısı; sayısal dengesi sonra."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "İzinli destek profili; niyeti gösterilir."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Standart ön sıra baskısı; sayısal dengesi sonra."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Standart ön sıra baskısı; sayısal dengesi sonra."
+        }
+      ],
+      "tactical_focus_tr": "Ön baskıyı tutarken destek tehdidini azaltmak.",
+      "briefing_en": "The serving load stays safely inside. Read the visible threats; a steady defensive party can also win.",
+      "counterplay_tr": "Hedef önceliği veya savunma/recovery; üç plan benzer zorlukta dengelenir. İşler stat buff’ı üretmez.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    }
+  ]
+}

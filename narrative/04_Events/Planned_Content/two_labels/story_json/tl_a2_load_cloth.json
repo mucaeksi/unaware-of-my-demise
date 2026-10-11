@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a2_load_cloth",
+  "title_en": "A Dry Fold",
+  "location_id": "tl_load_road",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_load_road"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_load_cloth_001",
+      "text": "Tilda shakes rain from her cape before she touches the field kit."
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cloth_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "That is our last clean outer cloth.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cloth_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "No. That is the cloth you put on top. The clean one is still inside.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cloth_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I know what I packed.",
+      "emotion": "annoyed"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cloth_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "You both packed it.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_load_cloth_006",
+      "text": "For a moment only the rain speaks."
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cloth_007",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "People see a healer arrive and think the waiting is finished.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cloth_008",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "We have brought the treatment.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cloth_009",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Yes. We still have to ask, examine, explain, and stay long enough to notice trouble.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cloth_010",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Arriving is the first useful thing. It is not the only one.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_cloth_011",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Then we keep enough cloth for the last patient, too.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_load_cloth_012",
+      "text": "Tilda gives her the dry fold. This time Kera puts it where someone else can reach it."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a2_load_cloth_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

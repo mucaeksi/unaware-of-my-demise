@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_a4_join_echo",
+  "title_en": "A Small Argument",
+  "location_id": "oakhaven_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "oakhaven_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_join_echo_001",
+      "speaker": "od_guest",
+      "speaker_display": "Guest",
+      "text": "Are you still arguing about the chairs?",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_join_echo_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "We have moved on to bowls.",
+      "emotion": "bright"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_join_echo_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "There is still no argument.",
+      "emotion": "dry"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a4_join_echo_004",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Stay here if you like. The song starts from wherever you are standing.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_a4_join_echo_005",
+      "text": "The guest stays close enough to hear a familiar voice."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_a4_join_echo_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

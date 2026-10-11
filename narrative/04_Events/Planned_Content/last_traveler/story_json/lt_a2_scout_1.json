@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a2_scout_1",
+  "title_en": "The Turn in the Leaves",
+  "location_id": "lt_scout_bend",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_scout_bend"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_1_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "See the leaves along the edge? Something crossed the soft ground after they fell.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_1_002",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "A heavy step?",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_1_003",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "A dragging one. And this mark keeps going after the turn.",
+      "emotion": "serious"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_1_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "We can read that part without following it.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_1_005",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "What else do you hear?",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a2_scout_1_006",
+      "text": "A faint knock comes from behind the bend. It does not follow the wind."
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_1_007",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Enough to choose what we watch first.",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a2_scout_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

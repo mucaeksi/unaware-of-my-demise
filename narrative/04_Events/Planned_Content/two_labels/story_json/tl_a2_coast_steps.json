@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a2_coast_steps",
+  "title_en": "The Steps That Remain",
+  "location_id": "tl_coast_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_coast_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_coast_steps_001",
+      "text": "Past the wall, Odelia slows beside three narrow steps worn hollow at the edges."
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_steps_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "A bad footing?",
+      "emotion": "curious"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_steps_003",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "No. I know these steps.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_steps_004",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "We can stop for a breath.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_steps_005",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I was only checking the shutter.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_steps_006",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Then we will wait while you check it.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_coast_steps_007",
+      "text": "Odelia touches the edge of the shutter, where an old latch has been moved twice."
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_steps_008",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "People used to leave bread here to cool. Even when they knew someone would take it.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_steps_009",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "That sounds like a poor arrangement for bread.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_steps_010",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "It was a good arrangement for us.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_steps_011",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Then we should arrive before the next batch is cold.",
+      "emotion": "dry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_coast_steps_012",
+      "text": "Odelia moves on. Nobody asks her to turn the memory into an explanation."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a2_coast_steps_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

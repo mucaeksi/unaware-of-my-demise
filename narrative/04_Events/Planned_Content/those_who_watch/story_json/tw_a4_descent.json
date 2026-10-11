@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a4_descent",
+  "title_en": "A Road Down for Everyone",
+  "location_id": "tw_lower_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tw_lower_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_descent_001",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "The lower return path is blocked. Wait at the landing until we clear it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_descent_002",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "The people behind us have space to rest. Keep that space out of the fight.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_descent_003",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "A reaching threat and a support. Read both before we move.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "thistle_roe"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_descent_004",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "We do not need a battle to explain the sky. We do need one to open this road.",
+      "emotion": "serious"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a4_descent_005",
+      "text": "The lantern carrier leaves the lamps at the landing. The travelers face the known dead below it."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a4_descent_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

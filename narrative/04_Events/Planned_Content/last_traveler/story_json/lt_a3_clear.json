@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a3_clear",
+  "title_en": "The Sign Stands",
+  "location_id": "lt_forest_junction",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_forest_junction"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a3_clear_001",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "Steady now.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a3_clear_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "And the arrow points before the turn.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a3_clear_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "I will check the far side one more time.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a3_clear_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "We have built a very small thing with a great deal of advice.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a3_clear_005",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "It only has to be useful.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a3_clear_006",
+      "text": "Nixie reads it from the road. Brin lets go of the post. It stays where it was put."
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a3_clear_007",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Useful from this side too.",
+      "emotion": "bright"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a3_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

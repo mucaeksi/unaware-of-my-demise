@@ -1,0 +1,265 @@
+{
+  "authoring_schema_version": 1,
+  "encounters": [
+    {
+      "encounter_id": "tw_enc_ridge_1",
+      "title_en": "The Watchers Road",
+      "location_id": "tw_upper_turn",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Standart ön hat profili."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Standart ön hat profili."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "inkbound_dead",
+          "role_tr": "arka işaret baskısı",
+          "behavior_brief_tr": "İzinli rear row mark/damage selector; visible intent."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "inkbound_dead",
+          "role_tr": "arka işaret baskısı",
+          "behavior_brief_tr": "İzinli rear row mark/damage selector; visible intent."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_cleric",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli destek/recovery profili."
+        }
+      ],
+      "tactical_focus_tr": "İki reaching tehdidin targetönceliği.",
+      "briefing_en": "The villagers wait on safe ground. Read the visible front, reaching threat and support; the eclipse has no battle modifier.",
+      "counterplay_tr": "Standard zafer; ücretsizuygunloan roster. No timedcrowd/escort/majorboss.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "tw_enc_ridge_2",
+      "title_en": "The Watchers Road",
+      "location_id": "tw_upper_turn",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "choir_knight",
+          "role_tr": "ön zırh",
+          "behavior_brief_tr": "İzinli guard/ward profili; kaynak geçmişchapterfamily."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Standart ön hat profili."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "inkbound_dead",
+          "role_tr": "arka işaret baskısı",
+          "behavior_brief_tr": "İzinli rear row mark/damage selector; visible intent."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "hollow_cleric",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli destek/recovery profili."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Standart ön hat profili."
+        }
+      ],
+      "tactical_focus_tr": "Destek ve reaching tehdidi aynı anda okumak.",
+      "briefing_en": "The villagers wait on safe ground. Read the visible front, reaching threat and support; the eclipse has no battle modifier.",
+      "counterplay_tr": "Standard zafer; ücretsizuygunloan roster. No timedcrowd/escort/majorboss.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "tw_enc_terrace_1",
+      "title_en": "The Watchers Road",
+      "location_id": "tw_upper_turn",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "choir_knight",
+          "role_tr": "ön zırh",
+          "behavior_brief_tr": "İzinli guard/ward profili; kaynak geçmişchapterfamily."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "choir_knight",
+          "role_tr": "ön zırh",
+          "behavior_brief_tr": "İzinli guard/ward profili; kaynak geçmişchapterfamily."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_cleric",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli destek/recovery profili."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Standart ön hat profili."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Standart ön hat profili."
+        }
+      ],
+      "tactical_focus_tr": "Ön basıncı tutma.",
+      "briefing_en": "The villagers wait on safe ground. Read the visible front, reaching threat and support; the eclipse has no battle modifier.",
+      "counterplay_tr": "Standard zafer; ücretsizuygunloan roster. No timedcrowd/escort/majorboss.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "tw_enc_terrace_2",
+      "title_en": "The Watchers Road",
+      "location_id": "tw_upper_turn",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "choir_knight",
+          "role_tr": "ön zırh",
+          "behavior_brief_tr": "İzinli guard/ward profili; kaynak geçmişchapterfamily."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Standart ön hat profili."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_cleric",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli destek/recovery profili."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "hollow_cleric",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli destek/recovery profili."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "inkbound_dead",
+          "role_tr": "arka işaret baskısı",
+          "behavior_brief_tr": "İzinli rear row mark/damage selector; visible intent."
+        }
+      ],
+      "tactical_focus_tr": "Ön basınç devamederken destekleri ayırma.",
+      "briefing_en": "The villagers wait on safe ground. Read the visible front, reaching threat and support; the eclipse has no battle modifier.",
+      "counterplay_tr": "Standard zafer; ücretsizuygunloan roster. No timedcrowd/escort/majorboss.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "tw_enc_return",
+      "title_en": "The Watchers Road",
+      "location_id": "tw_lower_path",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Standart ön hat profili."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "choir_knight",
+          "role_tr": "ön zırh",
+          "behavior_brief_tr": "İzinli guard/ward profili; kaynak geçmişchapterfamily."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "inkbound_dead",
+          "role_tr": "arka işaret baskısı",
+          "behavior_brief_tr": "İzinli rear row mark/damage selector; visible intent."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "hollow_cleric",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli destek/recovery profili."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Standart ön hat profili."
+        }
+      ],
+      "tactical_focus_tr": "Seyir sonrası karma tehdit; kaynakpulse effect yok.",
+      "briefing_en": "The villagers wait on safe ground. Read the visible front, reaching threat and support; the eclipse has no battle modifier.",
+      "counterplay_tr": "Standard zafer; ücretsizuygunloan roster. No timedcrowd/escort/majorboss.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    }
+  ]
+}

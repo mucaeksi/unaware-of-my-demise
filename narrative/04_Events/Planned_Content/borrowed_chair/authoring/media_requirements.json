@@ -1,0 +1,42 @@
+{
+  "backgrounds": [
+    {
+      "location_id": "bc_house_door",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "oakhaven_square",
+      "status": "unproduced_or_source_reference_only"
+    }
+  ],
+  "music": [
+    {
+      "cue_id": "bc_work",
+      "status": "unproduced"
+    }
+  ],
+  "portraits": [
+    {
+      "character_id": "jori_flint",
+      "emotions": [
+        "calm",
+        "dry",
+        "focused",
+        "quiet"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "pippa_bell",
+      "emotions": [
+        "bright",
+        "gentle",
+        "quiet",
+        "small_smile",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    }
+  ],
+  "voice_status": "English source complete; Japanese translation and audio not produced."
+}

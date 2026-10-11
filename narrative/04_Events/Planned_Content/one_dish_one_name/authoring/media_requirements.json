@@ -1,0 +1,117 @@
+{
+  "backgrounds": [
+    {
+      "location_id": "oakhaven_inn",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "oakhaven_square",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "od_outer_lane",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "od_song_corner",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "od_storehouse_lane",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "od_table_work",
+      "status": "unproduced_or_source_reference_only"
+    }
+  ],
+  "music": [
+    {
+      "cue_id": "od_threat",
+      "status": "unproduced"
+    },
+    {
+      "cue_id": "od_work",
+      "status": "unproduced"
+    }
+  ],
+  "portraits": [
+    {
+      "character_id": "fadyme",
+      "emotions": [
+        "calm",
+        "gentle",
+        "touched",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "jori_flint",
+      "emotions": [
+        "annoyed",
+        "calm",
+        "curious",
+        "dry",
+        "focused",
+        "horrified",
+        "quiet",
+        "serious",
+        "worried"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "kera_voss",
+      "emotions": [
+        "annoyed",
+        "defensive",
+        "dry",
+        "focused",
+        "quiet",
+        "tsundere",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "mahmut",
+      "emotions": [
+        "calm",
+        "observant",
+        "quiet"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "nixie_vale",
+      "emotions": [
+        "bright",
+        "calm",
+        "curious",
+        "focused",
+        "heroic",
+        "quiet",
+        "serious",
+        "small_smile",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "pippa_bell",
+      "emotions": [
+        "bright",
+        "calm",
+        "focused",
+        "gentle",
+        "joyful",
+        "quiet",
+        "small_smile",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    }
+  ],
+  "voice_status": "English source complete; Japanese translation and audio not produced."
+}

@@ -1,0 +1,213 @@
+{
+  "authoring_schema_version": 1,
+  "encounters": [
+    {
+      "encounter_id": "lt_enc_scout_tracks",
+      "title_en": "Read the Tracks",
+      "location_id": "lt_forest_passage",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Kaynak Ash Wolf’un ön sıraya baskısı; sayı dengesi sonra."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Kaynak Ash Wolf’un ön sıraya baskısı; sayı dengesi sonra."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "İzinli rear targeting varyantı; niyeti önceden görünür."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "İzinli destek profili; niyeti önceden görünür."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standard ön hedef baskısı."
+        }
+      ],
+      "tactical_focus_tr": "Arka tehdit önceliği.",
+      "briefing_en": "The traveler is outside the fight. Read the visible threats; both target priority and steady defense can succeed.",
+      "counterplay_tr": "Ücretsiz 1-4 sonrası beşli veya uygun loan ile kazanılabilir. Tek element ve üç yıldız şartı yok.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "lt_enc_scout_sound",
+      "title_en": "Read the Sound",
+      "location_id": "lt_forest_passage",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Kaynak Ash Wolf’un ön sıraya baskısı; sayı dengesi sonra."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standard ön hedef baskısı."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "İzinli destek profili; niyeti önceden görünür."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "İzinli destek profili; niyeti önceden görünür."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "İzinli rear targeting varyantı; niyeti önceden görünür."
+        }
+      ],
+      "tactical_focus_tr": "İki destek tehdidini fark etmek.",
+      "briefing_en": "The traveler is outside the fight. Read the visible threats; both target priority and steady defense can succeed.",
+      "counterplay_tr": "Ücretsiz 1-4 sonrası beşli veya uygun loan ile kazanılabilir. Tek element ve üç yıldız şartı yok.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "lt_enc_brace_bank",
+      "title_en": "Hold the Bank",
+      "location_id": "lt_forest_passage",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Kaynak Ash Wolf’un ön sıraya baskısı; sayı dengesi sonra."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Kaynak Ash Wolf’un ön sıraya baskısı; sayı dengesi sonra."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standard ön hedef baskısı."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "İzinli destek profili; niyeti önceden görünür."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standard ön hedef baskısı."
+        }
+      ],
+      "tactical_focus_tr": "Ön sırayı istikrarlı tutmak.",
+      "briefing_en": "The traveler is outside the fight. Read the visible threats; both target priority and steady defense can succeed.",
+      "counterplay_tr": "Ücretsiz 1-4 sonrası beşli veya uygun loan ile kazanılabilir. Tek element ve üç yıldız şartı yok.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "lt_enc_brace_beam",
+      "title_en": "Hold the Straight Line",
+      "location_id": "lt_forest_passage",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "İzinli destek profili; niyeti önceden görünür."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Kaynak Ash Wolf’un ön sıraya baskısı; sayı dengesi sonra."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "İzinli destek profili; niyeti önceden görünür."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standard ön hedef baskısı."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standard ön hedef baskısı."
+        }
+      ],
+      "tactical_focus_tr": "Ön baskıyla destek hedefini birlikte yönetmek.",
+      "briefing_en": "The traveler is outside the fight. Read the visible threats; both target priority and steady defense can succeed.",
+      "counterplay_tr": "Ücretsiz 1-4 sonrası beşli veya uygun loan ile kazanılabilir. Tek element ve üç yıldız şartı yok.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    }
+  ]
+}

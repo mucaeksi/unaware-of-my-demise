@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a5_company",
+  "title_en": "What Each Watcher Kept",
+  "location_id": "highland_village",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "highland_village"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a5_company_001",
+      "text": "The guide folds the village record. The three travelers have a quiet moment before taking their established road again."
+    },
+    {
+      "op": "choice",
+      "prompt": "Whose view do you keep beside the account?",
+      "options": [
+        {
+          "id": "tw_focus_clem",
+          "text": "Clem and the ordinary record.",
+          "goto": "clem"
+        },
+        {
+          "id": "tw_focus_vespera",
+          "text": "Vespera and the unanswered question.",
+          "goto": "vespera"
+        },
+        {
+          "id": "tw_focus_thistle",
+          "text": "Thistle and the place to sit.",
+          "goto": "thistle"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "clem"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_company_002",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "The guide did not ask me to write the best account. Only my own.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_company_003",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "That is a better record than one with no room left.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_company_004",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "I will leave room. Even if the next watcher has dreadful handwriting.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a5_company_005",
+      "text": "She makes the margin a little wider before folding the page."
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "hide",
+      "character": "vespera_wisp"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "vespera"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_company_006",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "You still have questions.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_company_007",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Yes. I have better boundaries for them now.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "thistle_roe"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_company_008",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "I may borrow that phrase.",
+      "emotion": "curious"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_company_009",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Borrow the boundaries too.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "hide",
+      "character": "vespera_wisp"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "thistle"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_company_010",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "They kept asking what the sound meant. I could only give them a place to sit.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "thistle_roe"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_company_011",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "They asked more clearly after they sat down.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_company_012",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "A useful place is an answer to a useful question.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a5_company_013",
+      "text": "Thistle checks that the bench is dry before leaving it for the next watcher."
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "hide",
+      "character": "vespera_wisp"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a5_company_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

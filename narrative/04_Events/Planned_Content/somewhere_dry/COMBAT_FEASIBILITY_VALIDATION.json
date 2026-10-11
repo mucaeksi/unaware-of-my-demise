@@ -1,0 +1,212 @@
+{
+  "status": "PASS: schema-compatible proxies complete under existing combat engine",
+  "prototype_count": 2,
+  "simulation_runs": 18,
+  "base_replay_checks": 6,
+  "player_wins": 18,
+  "turn_range": [
+    23,
+    38
+  ],
+  "production_balance": "NOT_CERTIFIED",
+  "results": [
+    {
+      "encounter_id": "dr_enc_shelf",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 23
+      },
+      "action_count": 16
+    },
+    {
+      "encounter_id": "dr_enc_shelf",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 23
+      },
+      "action_count": 16
+    },
+    {
+      "encounter_id": "dr_enc_shelf",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 23
+      },
+      "action_count": 16
+    },
+    {
+      "encounter_id": "dr_enc_shelf",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "dr_enc_shelf",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "dr_enc_shelf",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "dr_enc_shelf",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 32
+      },
+      "action_count": 22
+    },
+    {
+      "encounter_id": "dr_enc_shelf",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 32
+      },
+      "action_count": 22
+    },
+    {
+      "encounter_id": "dr_enc_shelf",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 32
+      },
+      "action_count": 22
+    },
+    {
+      "encounter_id": "dr_enc_desk",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 28
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "dr_enc_desk",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 28
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "dr_enc_desk",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 28
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "dr_enc_desk",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 31
+      },
+      "action_count": 21
+    },
+    {
+      "encounter_id": "dr_enc_desk",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 31
+      },
+      "action_count": 21
+    },
+    {
+      "encounter_id": "dr_enc_desk",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 31
+      },
+      "action_count": 21
+    },
+    {
+      "encounter_id": "dr_enc_desk",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 37
+      },
+      "action_count": 24
+    },
+    {
+      "encounter_id": "dr_enc_desk",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 38
+      },
+      "action_count": 25
+    },
+    {
+      "encounter_id": "dr_enc_desk",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 38
+      },
+      "action_count": 25
+    }
+  ]
+}

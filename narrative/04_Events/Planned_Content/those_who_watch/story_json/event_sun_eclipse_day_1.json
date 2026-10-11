@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "scene_id": "event_sun_eclipse_day_1",
+  "title_en": "An Old Holy Day",
+  "location_id": "eastern_highland_road",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "eastern_highland_road"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "event_sun_eclipse_day_1_001",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "Sun-Eclipse Day. Once a year the villages say the black sun breathes.",
+      "emotion": "curious"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_sun_eclipse_day_1_002",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Does it?",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "event_sun_eclipse_day_1_003",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "Every grave-keeper's record says yes. Every scholar's says no. I trust grave-keepers.",
+      "emotion": "cheerful"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "event_sun_eclipse_day_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/04_Events/events_part1.json",
+    "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
+    "note": "Verbatim canon source."
+  }
+}

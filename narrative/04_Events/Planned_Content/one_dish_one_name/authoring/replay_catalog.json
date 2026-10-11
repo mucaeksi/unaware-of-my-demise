@@ -1,0 +1,63 @@
+{
+  "event_id": "event_one_dish_one_name",
+  "session_kind": "isolated_replay",
+  "mutates_original_progress": false,
+  "reward_binding": null,
+  "scene_replays": [
+    "od_a1_square",
+    "od_a1_plan",
+    "od_job_wood_1",
+    "od_job_wood_2",
+    "od_job_wood_3",
+    "od_job_road_1",
+    "od_job_road_2",
+    "od_job_road_3",
+    "od_job_song_1",
+    "od_job_song_2",
+    "od_job_song_3",
+    "od_a3_road",
+    "od_a3_clear",
+    "event_harvest_inn_meal_1",
+    "od_a3_after_soup",
+    "event_harvest_inn_meal_2",
+    "od_a4_gap",
+    "od_a4_join_echo",
+    "od_a4_quiet_echo",
+    "event_harvest_inn_meal_3",
+    "od_a5_after_song",
+    "od_a5_company",
+    "od_a5_end"
+  ],
+  "activity_replays": [
+    {
+      "activity": "wood",
+      "entry_node": "od_job_wood_1",
+      "stop_after_node": "od_job_wood_3"
+    },
+    {
+      "activity": "road",
+      "entry_node": "od_job_road_1",
+      "stop_after_node": "od_job_road_3"
+    },
+    {
+      "activity": "song",
+      "entry_node": "od_job_song_1",
+      "stop_after_node": "od_job_song_3"
+    }
+  ],
+  "conversation_replays": [
+    {
+      "scene_id": "od_a5_company",
+      "choice_id": "od_focus_jori"
+    },
+    {
+      "scene_id": "od_a5_company",
+      "choice_id": "od_focus_nixie"
+    },
+    {
+      "scene_id": "od_a5_company",
+      "choice_id": "od_focus_pippa"
+    }
+  ],
+  "note_tr": "İlk turda seçilmeyen üçüncü iş üç sahnelik replay olarak açılır. İş planı ve canon completion kaydı değişmez."
+}

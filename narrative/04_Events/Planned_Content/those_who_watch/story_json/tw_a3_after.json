@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a3_after",
+  "title_en": "After the Humming",
+  "location_id": "highland_ridge",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "highland_ridge"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a3_after_001",
+      "text": "The humming leaves the air before the crowd remembers how to speak at its usual volume."
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_after_002",
+      "speaker": "tw_lantern_carrier",
+      "speaker_display": "Lantern Carrier",
+      "text": "I heard mine with the valley’s. I have never heard it like that.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_after_003",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "Sit for a moment. You do not have to stand while you find the words.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "thistle_roe"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_after_004",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "I will write that the rim flickered and the bells answered together.",
+      "emotion": "serious"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_after_005",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "And keep the explanation beside it, rather than inside the observation.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_after_006",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "We go down in small groups. The road has not become wider because everyone wants it now.",
+      "emotion": "calm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a3_after_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

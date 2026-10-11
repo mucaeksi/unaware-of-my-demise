@@ -1,0 +1,342 @@
+{
+  "status": "PASS",
+  "source_main": "99df3cf",
+  "packages": [
+    {
+      "folder": "iki-etiket-v1",
+      "event_id": "event_two_labels",
+      "gate": "4-5",
+      "character_gate": "PASS",
+      "enemy_family_and_chapter": "PASS",
+      "vo_equivalence": "PASS",
+      "scenes": 31,
+      "lines": 316,
+      "canonical_lines": 11,
+      "paths": 32,
+      "first_run_battles": 5,
+      "encounter_variants": 8,
+      "chapters": 5
+    },
+    {
+      "folder": "bir-tabak-bir-isim-v1",
+      "event_id": "event_one_dish_one_name",
+      "gate": "3-5",
+      "character_gate": "PASS",
+      "enemy_family_and_chapter": "PASS",
+      "vo_equivalence": "PASS",
+      "scenes": 23,
+      "lines": 209,
+      "canonical_lines": 14,
+      "paths": 18,
+      "first_run_battles": 1,
+      "encounter_variants": 3,
+      "chapters": 5
+    },
+    {
+      "folder": "son-gecen-icin-v1",
+      "event_id": "side_quest_last_traveler",
+      "gate": "1-4",
+      "character_gate": "PASS",
+      "enemy_family_and_chapter": "PASS",
+      "vo_equivalence": "PASS",
+      "scenes": 15,
+      "lines": 116,
+      "canonical_lines": 0,
+      "paths": 8,
+      "first_run_battles": 1,
+      "encounter_variants": 4,
+      "chapters": 4
+    },
+    {
+      "folder": "kuru-bir-yer-v1",
+      "event_id": "side_quest_somewhere_dry",
+      "gate": "2-3",
+      "character_gate": "PASS",
+      "enemy_family_and_chapter": "PASS",
+      "vo_equivalence": "PASS",
+      "scenes": 14,
+      "lines": 82,
+      "canonical_lines": 0,
+      "paths": 4,
+      "first_run_battles": 1,
+      "encounter_variants": 2,
+      "chapters": 4
+    },
+    {
+      "folder": "tutulmayi-bekleyenler-v1",
+      "event_id": "event_those_who_watch",
+      "gate": "6-5",
+      "character_gate": "PASS",
+      "enemy_family_and_chapter": "PASS",
+      "vo_equivalence": "PASS",
+      "scenes": 23,
+      "lines": 137,
+      "canonical_lines": 10,
+      "paths": 12,
+      "first_run_battles": 3,
+      "encounter_variants": 5,
+      "chapters": 5
+    },
+    {
+      "folder": "acik-yol-v1",
+      "event_id": "side_quest_open_road",
+      "gate": "5-5",
+      "character_gate": "PASS",
+      "enemy_family_and_chapter": "PASS",
+      "vo_equivalence": "PASS",
+      "scenes": 13,
+      "lines": 77,
+      "canonical_lines": 0,
+      "paths": 4,
+      "first_run_battles": 1,
+      "encounter_variants": 2,
+      "chapters": 4
+    },
+    {
+      "folder": "arsiv-nobeti-v1",
+      "event_id": "tactical_archive_watch",
+      "gate": "4-5",
+      "character_gate": "PASS",
+      "enemy_family_and_chapter": "PASS",
+      "vo_equivalence": "PASS",
+      "scenes": 10,
+      "lines": 54,
+      "canonical_lines": 0,
+      "paths": 8,
+      "first_run_battles": 3,
+      "encounter_variants": 8,
+      "chapters": 4
+    },
+    {
+      "folder": "odunc-bir-sandalye-v1",
+      "event_id": "side_story_borrowed_chair",
+      "gate": "3-5",
+      "character_gate": "PASS",
+      "enemy_family_and_chapter": "PASS",
+      "vo_equivalence": "PASS",
+      "scenes": 5,
+      "lines": 37,
+      "canonical_lines": 0,
+      "paths": 2,
+      "first_run_battles": 0,
+      "encounter_variants": 0,
+      "chapters": 3
+    }
+  ],
+  "totals": {
+    "scenes": 134,
+    "lines": 1028,
+    "canonical_lines": 35,
+    "paths": 88,
+    "first_run_battles": 15,
+    "encounter_variants": 32,
+    "chapters": 34
+  },
+  "lexical_overlap": {
+    "method": "8-word sequence Jaccard on new dialogue only; excludes copied canon; does not prove plot uniqueness",
+    "cross_package_long_exact_duplicates": [],
+    "pair_scores": [
+      {
+        "a": "iki-etiket-v1",
+        "b": "bir-tabak-bir-isim-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "iki-etiket-v1",
+        "b": "son-gecen-icin-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "iki-etiket-v1",
+        "b": "kuru-bir-yer-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "iki-etiket-v1",
+        "b": "tutulmayi-bekleyenler-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "iki-etiket-v1",
+        "b": "acik-yol-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "iki-etiket-v1",
+        "b": "arsiv-nobeti-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "iki-etiket-v1",
+        "b": "odunc-bir-sandalye-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "bir-tabak-bir-isim-v1",
+        "b": "son-gecen-icin-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "bir-tabak-bir-isim-v1",
+        "b": "kuru-bir-yer-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "bir-tabak-bir-isim-v1",
+        "b": "tutulmayi-bekleyenler-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "bir-tabak-bir-isim-v1",
+        "b": "acik-yol-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "bir-tabak-bir-isim-v1",
+        "b": "arsiv-nobeti-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "bir-tabak-bir-isim-v1",
+        "b": "odunc-bir-sandalye-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "son-gecen-icin-v1",
+        "b": "kuru-bir-yer-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "son-gecen-icin-v1",
+        "b": "tutulmayi-bekleyenler-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "son-gecen-icin-v1",
+        "b": "acik-yol-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "son-gecen-icin-v1",
+        "b": "arsiv-nobeti-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "son-gecen-icin-v1",
+        "b": "odunc-bir-sandalye-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "kuru-bir-yer-v1",
+        "b": "tutulmayi-bekleyenler-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "kuru-bir-yer-v1",
+        "b": "acik-yol-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "kuru-bir-yer-v1",
+        "b": "arsiv-nobeti-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "kuru-bir-yer-v1",
+        "b": "odunc-bir-sandalye-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "tutulmayi-bekleyenler-v1",
+        "b": "acik-yol-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "tutulmayi-bekleyenler-v1",
+        "b": "arsiv-nobeti-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "tutulmayi-bekleyenler-v1",
+        "b": "odunc-bir-sandalye-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "acik-yol-v1",
+        "b": "arsiv-nobeti-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "acik-yol-v1",
+        "b": "odunc-bir-sandalye-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      },
+      {
+        "a": "arsiv-nobeti-v1",
+        "b": "odunc-bir-sandalye-v1",
+        "shared_8_word_sequences": 0,
+        "jaccard": 0.0
+      }
+    ]
+  },
+  "source_hashes": {
+    "narrative/06_Characters/Playable/kera_voss.md": "7aba38465821b713a287f9630b21daa4043da65e5fd87dc577ace47c607dbb3b",
+    "narrative/06_Characters/Playable/tilda_fen.md": "29048ba7310ab36fbbdc9fb89e03867b9e213a326915a6a6a92f42af26fe9149",
+    "narrative/06_Characters/Playable/iona_mist.md": "f53cfe3f482fa6629be6dc6aa36f8847d2e60c78583b4681aa66f7892d9e3a87",
+    "narrative/06_Characters/Playable/odelia_pike.md": "77d6a972e78872f0cd7488803a0a102ae131f00a3507520b9bda80802c64c882",
+    "narrative/06_Characters/Playable/jori_flint.md": "abc934f7f02032f5bd860c8925c06f91f1e3e23915c0d84295974a6d90061633",
+    "narrative/06_Characters/Playable/nixie_vale.md": "d0bd90c6e7591f26987540d0d4d325f79b4e1298151cd14702e0eb6b3dd136a8",
+    "narrative/06_Characters/Playable/pippa_bell.md": "9b79738769a039146a232cc8db5ebdd6295e0359889b9741fab32546a0a99690",
+    "narrative/06_Characters/Playable/fadyme.md": "4cb12a31b619f93f5f88f394838f2e83306058954676a11da0d4b6942c40f325",
+    "narrative/06_Characters/Playable/mahmut.md": "32ef96265e4ace7948d011b20188b12f3f055fd7cf77ba37dd1445aa7fc30bf0",
+    "narrative/06_Characters/Playable/brin_alder.md": "f04487e626df91aa3bd7869903d32546634198fefff623ea4a749a129dafb374",
+    "narrative/06_Characters/Playable/mirel_quill.md": "37605bed9e0811785435de9d67ddc0eccd45750df1fb9b78126590d3371a3a1b",
+    "narrative/06_Characters/Playable/sister_aveline.md": "8a7ffad91d85c487488eb2ee4980107231977951cf0acf50d20c758ac34ceb5e",
+    "narrative/06_Characters/Playable/clem_marr.md": "1f9c7023085cf13778b4c2db8132000fa6dc648e2bf902d39c292ea848fe2ae4",
+    "narrative/06_Characters/Playable/vespera_wisp.md": "73de740ec2ef6d7f3e202e09f902ebb4d8270dc162c8fe738b2c1458a217339a",
+    "narrative/06_Characters/Playable/thistle_roe.md": "0a27220b868dee231aa82cf7079afcfd34a9c9ef8dfe49f53be9aa13d018fb5f",
+    "narrative/06_Characters/Playable/nara_vell.md": "191e39a62401ad6ae90b39beb02ae4998c1a7a58fc2f76c6b626a2a2ebbf10ac",
+    "narrative/06_Characters/Playable/marek_vane.md": "63dec63f5312abdc52c7c7f6cb343b99347947ad727da68d24131e2a2cd6f0c6",
+    "narrative/01_Story_Bible/STORY_BIBLE_PART1.md": "7f1d798e2fa4491f8d4e5870e1378bf84d2b2fffcaeaea73a0f65b9f434b9f2c",
+    "narrative/07_Enemies_Bosses/bestiary.md": "b70789fe8149b1fba7ef8c4f0bae9c852beb52a7a18e62890b47e6418d5e8b2e",
+    "narrative/00_Canon/SPOILER_UNLOCK_POLICY.md": "14c09c1795a3a3373ada44e25b1e1f49015abba72b030323733c2e9abbafa7c8",
+    "narrative/03_Companion_Stories/character_stories_part1.json": "c4e5104df0a7b263f1e59facb1b4b5db3f79f8546186b553e6b1d9fc53605e4a",
+    "narrative/05_Codex_Lore/world_rules.md": "0c1afcab2dd07302798aa36ff6ad9c517e00e4bef75bf7fd45bd93970f35a373",
+    "narrative/04_Events/events_part1.json": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+  },
+  "dependencies": {
+    "side_story_borrowed_chair": "event_one_dish_one_name"
+  },
+  "limits": [
+    "Gate checks use narrative stages and bestiary chapter data; live progression IDs and unit encounter release mapping still require integration.",
+    "Character/world continuity and distinct core actions also received editorial review; automated lexical checks alone cannot certify narrative quality.",
+    "Production roster balance, Japanese localization, generated media, Android and live release are not complete."
+  ]
+}

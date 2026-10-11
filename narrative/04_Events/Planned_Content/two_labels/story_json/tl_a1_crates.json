@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a1_crates",
+  "title_en": "What Goes in the Crate",
+  "location_id": "undercity_antidote_archive",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_antidote_archive"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a1_crates_001",
+      "text": "The last shelf holds enough bottles to make the table look generous. The open crates make it look smaller."
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Four people. Three crates. Which of those is carrying the table?",
+      "emotion": "dry"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The table stays here. We are taking cloth, clean water, and the medicine.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_004",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "And a place for the bottles we open. They cannot travel beside the sealed ones.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_005",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I know how to pack a crate.",
+      "emotion": "annoyed"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_006",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Good. I know how to unpack one someone has sat on.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_007",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "There are two ways past the old salt sheds. We can choose when we reach the fork.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_008",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Which is shorter?",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_009",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "That depends on what is standing in it.",
+      "emotion": "serious"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_010",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Then we leave room to change our minds.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a1_crates_011",
+      "text": "Iona slips a folded cloth beneath the handles. Odelia tests each knot before lifting anything."
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_012",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "This is a dispatch. Not a rescue of my packing habits.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_crates_013",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "We can do two useful things at once.",
+      "emotion": "dry"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a1_crates_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

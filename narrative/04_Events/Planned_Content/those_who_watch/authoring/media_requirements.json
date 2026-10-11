@@ -1,0 +1,85 @@
+{
+  "backgrounds": [
+    {
+      "location_id": "eastern_highland_road",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "highland_ridge",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "highland_village",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "tw_lower_path",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "tw_ridge_path",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "tw_terrace_path",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "tw_upper_turn",
+      "status": "unproduced_or_source_reference_only"
+    }
+  ],
+  "music": [
+    {
+      "cue_id": "tw_threat",
+      "status": "unproduced"
+    },
+    {
+      "cue_id": "tw_work",
+      "status": "unproduced"
+    }
+  ],
+  "portraits": [
+    {
+      "character_id": "clem_marr",
+      "emotions": [
+        "bright",
+        "calm",
+        "cheerful",
+        "curious",
+        "delighted",
+        "focused",
+        "gentle",
+        "quiet",
+        "serious",
+        "small_smile",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "thistle_roe",
+      "emotions": [
+        "calm",
+        "curious",
+        "focused",
+        "frightened",
+        "gentle",
+        "quiet",
+        "tense"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "vespera_wisp",
+      "emotions": [
+        "dry",
+        "focused",
+        "grave",
+        "quiet"
+      ],
+      "status": "canonical_identity_mapping_required"
+    }
+  ],
+  "voice_status": "English source complete; Japanese translation and audio not produced."
+}

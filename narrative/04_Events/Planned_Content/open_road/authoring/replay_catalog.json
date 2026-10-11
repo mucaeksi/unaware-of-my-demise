@@ -1,0 +1,53 @@
+{
+  "event_id": "side_quest_open_road",
+  "session_kind": "isolated_replay",
+  "mutates_original_progress": false,
+  "reward_binding": null,
+  "scene_replays": [
+    "or_a1_after",
+    "or_a1_need",
+    "or_a1_handoff",
+    "or_a2_supply_1",
+    "or_a2_supply_2",
+    "or_a2_passage_1",
+    "or_a2_passage_2",
+    "or_a3_line",
+    "or_a3_safe",
+    "or_a4_test",
+    "or_a4_newcomer",
+    "or_a4_pause",
+    "or_a4_end"
+  ],
+  "segment_replays": [
+    {
+      "entry_node": "or_a2_supply_1",
+      "stop_before_node": "or_a3_line",
+      "initial_state": {
+        "handoff": "supply"
+      },
+      "expected_scenes": 2,
+      "expected_battles": 0
+    },
+    {
+      "entry_node": "or_a2_passage_1",
+      "stop_before_node": "or_a3_line",
+      "initial_state": {
+        "handoff": "passage"
+      },
+      "expected_scenes": 2,
+      "expected_battles": 0
+    }
+  ],
+  "conversation_replays": [
+    {
+      "scene_id": "or_a4_test",
+      "choice_id": "or_test_newcomer",
+      "followup_scene": "or_a4_newcomer"
+    },
+    {
+      "scene_id": "or_a4_test",
+      "choice_id": "or_test_pause",
+      "followup_scene": "or_a4_pause"
+    }
+  ]
+}
