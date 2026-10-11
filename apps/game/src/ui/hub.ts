@@ -29,10 +29,14 @@ export abstract class HubScene extends Phaser.Scene {
     this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x0a0610, 0.88);
     sceneFadeIn(this, 350);
     title(this, REF_W / 2, 70, this.heading, 60, T.gold);
-    new Button(this, 190, REF_H - 80, { label: 'BACK', w: 300, h: 110, onClick: () => this.scene.start(this.backTo) });
+    new Button(this, 190, REF_H - 80, { label: 'BACK', w: 300, h: 110, onClick: () => this.goBack() });
     this.walletText = txt(this, REF_W - 60, 70, '', { fontSize: '30px', color: T.text }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
     this.body = this.add.container(0, 0);
     void this.refresh();
+  }
+
+  protected goBack(): void {
+    this.scene.start(this.backTo);
   }
 
   /** Re-renders the body (and the wallet strip). */

@@ -10,6 +10,8 @@ export class AccountScene extends HubScene {
   protected readonly heading = 'ACCOUNT';
   protected override readonly needsSignIn = false;
 
+  private confirmDelete = false;
+
   constructor() {
     super('Account');
   }
@@ -31,7 +33,9 @@ export class AccountScene extends HubScene {
     this.add_(txt(this, REF_W / 2, 470, save.version === 0 ? 'No cloud save yet.' : `Cloud save v${save.version} · ${save.updatedAt ?? ''}`, { fontSize: '34px' }).setOrigin(0.5));
     this.add_(new Button(this, REF_W / 2 - 330, 590, { label: 'UPLOAD SAVE', w: 600, onClick: () => void this.upload(save.version) }));
     this.add_(new Button(this, REF_W / 2 + 330, 590, { label: 'DOWNLOAD SAVE', w: 600, onClick: () => void this.download() }).setEnabled(save.version > 0));
-    this.add_(new Button(this, REF_W / 2, 770, { label: 'SIGN OUT', w: 520, variant: 'danger', onClick: () => void this.signOut() }));
+    this.add_(new Button(this, REF_W / 2 - 330, 730, { label: 'EXPORT MY DATA', w: 600, onClick: () => void this.exportData() }));
+    this.add_(new Button(this, REF_W / 2 + 330, 730, { label: 'SIGN OUT', w: 600, onClick: () => void this.signOut() }));
+    this.add_(new Button(this, REF_W / 2, 880, { label: this.confirmDelete ? 'TAP AGAIN TO DELETE FOREVER' : 'DELETE ACCOUNT', sub: this.confirmDelete ? 'progress, wallet and roster cannot be restored' : undefined, w: 900, h: 130, variant: 'danger', onClick: () => void this.deleteAccount() }));
   }
 
   private async signIn(): Promise<void> {
@@ -40,6 +44,38 @@ export class AccountScene extends HubScene {
       if (!token) return;
       const p = await Services.api.signInWithIdToken(token);
       this.say(p.isNew ? 'Welcome, wayfarer. Your company awaits.' : 'Welcome back.');
+      await this.refresh();
+    } catch (e) {
+      this.say(errText(e));
+    }
+  }
+
+  private async exportData(): Promise<void> {
+    try {
+      const data = await Services.api.exportAccount();
+      const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'unaware-of-my-demise-data.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      this.say('Your data was saved as a file');
+    } catch (e) {
+      this.say(errText(e));
+    }
+  }
+
+  private async deleteAccount(): Promise<void> {
+    if (!this.confirmDelete) {
+      this.confirmDelete = true;
+      this.time.delayedCall(6000, () => { this.confirmDelete = false; void this.refresh(); });
+      await this.refresh();
+      return;
+    }
+    try {
+      await Services.api.deleteAccount();
+      this.confirmDelete = false;
+      this.say('Your account was deleted');
       await this.refresh();
     } catch (e) {
       this.say(errText(e));

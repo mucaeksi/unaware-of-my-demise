@@ -55,12 +55,66 @@ export interface PullResponse {
   cost: { currency: 'eclipse_token'; perPull: number; amount: number };
   replayed: boolean;
 }
+/** What a reward can contain (mirrors the server's closed grammar). */
+export type Attachment =
+  | { type: 'currency'; currency: string; amount: number }
+  | { type: 'character'; itemId: string }
+  | { type: 'item'; itemId: string; quantity: number }
+  | { type: 'gear'; gearId: string }
+  | { type: 'account_xp'; amount: number };
+
+export interface SkillView {
+  skillId: string;
+  type: string;
+  name: string;
+  rank: number;
+  maxRank: number;
+  next: { rank: number; unlockLevel: number; itemId: string; quantity: number; fee: number } | null;
+}
+export interface CharacterView {
+  id: string;
+  level: number;
+  xp: number;
+  xpToNext: number | null;
+  ascension: number;
+  cap: number;
+  nextAscension: { cap: number; accountLevel: number; items: { itemId: string; quantity: number }[]; fee: number; requiresNode?: string } | null;
+  skills: SkillView[];
+}
+export interface GearView {
+  id: number;
+  gearId: string;
+  slot: 'weapon' | 'armor' | 'necklace' | 'ring';
+  name: string;
+  rarity: number;
+  level: number;
+  levelCap: number;
+  equippedBy: string | null;
+  locked: boolean;
+  stats: { main: { stat: string; value: number }; subs: { stat: string; value: number }[] } | null;
+  passive: { name: string; text?: string } | null;
+}
+export interface TaskView {
+  id: string;
+  title: string;
+  objective: { type: string; count: number };
+  progress: number;
+  done: boolean;
+  claimed: boolean;
+  rewards: Attachment[];
+}
+export interface TasksResponse {
+  serverTimeMs: number;
+  daily: null | { periodKey: string; endsAtMs: number; tasks: TaskView[]; completion: { ready: boolean; claimed: boolean; rewards: Attachment[] } };
+  weekly: (TaskView & { periodKey: string; endsAtMs: number; running: boolean })[];
+}
+
 export interface MailItem {
   id: number;
   kind: string;
   title: string;
   body: string;
-  attachments: ({ type: 'currency'; currency: string; amount: number } | { type: 'character'; itemId: string })[];
+  attachments: Attachment[];
   created_at: string;
   expires_at: string;
   claimed_at: string | null;
@@ -190,6 +244,53 @@ export class GameApi extends EventTarget {
   writeSave(expectedVersion: number, data: Record<string, unknown>): Promise<{ version: number }> {
     return this.call('PUT', '/api/v1/save', { expectedVersion, data });
   }
+  characters(): Promise<{ account: { level: number; xp: number }; characters: CharacterView[] }> {
+    return this.call('GET', '/api/v1/characters/mine');
+  }
+  levelUp(id: string, items: { itemId: string; quantity: number }[]): Promise<{ level: number }> {
+    return this.call('POST', `/api/v1/characters/${id}/level-up`, { requestId: newRequestId(), items });
+  }
+  ascend(id: string): Promise<{ ascension: number }> {
+    return this.call('POST', `/api/v1/characters/${id}/ascend`, { requestId: newRequestId() });
+  }
+  upgradeSkill(id: string, skillId: string): Promise<{ rank: number }> {
+    return this.call('POST', `/api/v1/characters/${id}/skills/${skillId}/upgrade`, { requestId: newRequestId() });
+  }
+  characterStats(id: string): Promise<{ level: number; stats: Record<string, number> }> {
+    return this.call('GET', `/api/v1/characters/${id}/stats`);
+  }
+  async stacks(): Promise<{ item_id: string; qty: number }[]> {
+    return (await this.call<{ stacks: { item_id: string; qty: number }[] }>('GET', '/api/v1/stacks')).stacks;
+  }
+  async gear(): Promise<GearView[]> {
+    return (await this.call<{ gear: GearView[] }>('GET', '/api/v1/gear')).gear;
+  }
+  equip(gearId: number, characterId: string): Promise<unknown> {
+    return this.call('POST', `/api/v1/gear/${gearId}/equip`, { characterId });
+  }
+  unequip(gearId: number): Promise<unknown> {
+    return this.call('POST', `/api/v1/gear/${gearId}/unequip`, {});
+  }
+  tasks(): Promise<TasksResponse> {
+    return this.call('GET', '/api/v1/tasks');
+  }
+  claimTask(periodKey: string, taskId: string): Promise<unknown> {
+    return this.call('POST', '/api/v1/tasks/claim', { periodKey, taskId });
+  }
+  exportAccount(): Promise<Record<string, unknown>> {
+    return this.call('GET', '/api/v1/account/export');
+  }
+  async deleteAccount(): Promise<void> {
+    await this.call('POST', '/api/v1/account/delete', { confirm: 'DELETE' });
+    this.store(null);
+  }
+  async catalogNames(): Promise<Map<string, string>> {
+    const c = await this.call<{ items: { item_id: string; name_en: string; xp_value: number | null; kind: string }[]; gear: { gear_id: string; name_en: string }[] }>('GET', '/api/v1/catalog', undefined, false);
+    this.xpItems = c.items.filter((i) => i.kind === 'character_xp' && i.xp_value).map((i) => ({ itemId: i.item_id, xp: i.xp_value as number })).sort((a, b) => a.xp - b.xp);
+    return new Map([...c.items.map((i): [string, string] => [i.item_id, i.name_en]), ...c.gear.map((g): [string, string] => [g.gear_id, g.name_en])]);
+  }
+  /** character-XP items by ascending xp value (filled by catalogNames) */
+  xpItems: { itemId: string; xp: number }[] = [];
   async flags(): Promise<Record<string, { enabled: boolean; value: unknown }>> {
     return (await this.call<{ flags: Record<string, { enabled: boolean; value: unknown }> }>('GET', '/api/v1/flags', undefined, false)).flags;
   }

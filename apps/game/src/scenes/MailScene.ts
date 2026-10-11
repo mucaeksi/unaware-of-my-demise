@@ -20,9 +20,9 @@ export class MailScene extends HubScene {
   }
 
   protected async build(): Promise<void> {
-    const [mail, roster] = await Promise.all([Services.api.mail(), Services.api.roster()]);
+    const [mail, roster, catalog] = await Promise.all([Services.api.mail(), Services.api.roster(), Services.api.catalogNames()]);
     this.mail = mail;
-    this.names = new Map(roster.map((c) => [c.id, c.name_en]));
+    this.names = new Map([...catalog, ...roster.map((c): [string, string] => [c.id, c.name_en])]);
     this.draw();
   }
 

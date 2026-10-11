@@ -3,6 +3,7 @@ import { api, type ApiError, type Health, type Me } from './api';
 import { Assets } from './pages/Assets';
 import { Audit } from './pages/Audit';
 import { Banners } from './pages/Banners';
+import { Catalog } from './pages/Catalog';
 import { Characters } from './pages/Characters';
 import { Dashboard } from './pages/Dashboard';
 import { Economy } from './pages/Economy';
@@ -12,7 +13,7 @@ import { Players } from './pages/Players';
 import { Releases } from './pages/Releases';
 import { Shop } from './pages/Shop';
 
-const PAGES = ['Dashboard', 'Development', 'Players', 'Banners', 'Economy', 'Shop', 'Flags', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
+const PAGES = ['Dashboard', 'Development', 'Players', 'Banners', 'Economy', 'Shop', 'Flags', 'Catalog', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
 type Page = (typeof PAGES)[number];
 
 export function useToast(): { toast: string | null; say: (m: string) => void } {
@@ -78,6 +79,7 @@ export function App(): ReactNode {
         {me && page === 'Economy' ? <Economy say={say} /> : null}
         {me && page === 'Shop' ? <Shop me={me} say={say} /> : null}
         {me && page === 'Flags' ? <Flags me={me} say={say} /> : null}
+        {me && page === 'Catalog' ? <Catalog me={me} say={say} /> : null}
         {me && page === 'Characters' ? <Characters me={me} say={say} /> : null}
         {me && page === 'Assets' ? <Assets me={me} say={say} /> : null}
         {me && page === 'Patches' ? <Releases me={me} say={say} /> : null}

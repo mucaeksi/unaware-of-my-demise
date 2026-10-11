@@ -1,42 +1,34 @@
 {
   "now": [
     {
-      "title": "Upgrade system data model",
-      "detail": "XP books / ascension items as quest-earned items, level caps by account level, fee curves in Eclipse Tokens, admin editor; the Economy page already models the sink side."
+      "title": "Control Center walkthrough with you",
+      "detail": "All server systems are built (accounts, gacha, mail, shop/ads/billing logic, character growth, gear, drops, errands, teams, account export/delete). Log in at the admin URL and we go through every page together; leave notes in Development > Feedback."
     },
     {
       "title": "UI design review with you",
-      "detail": "Every screen is visible in Development > Live preview and Screens; leave notes in Feedback."
+      "detail": "Client screens are functional skeletons on purpose (Summon, Roster, Companion, Armory, Errands, Mail, Shop, Account). Design of the panels is done together."
     }
   ],
   "next": [
-    {
-      "title": "Upgrade system",
-      "detail": "XP books and ascension items as quest-earned items; level caps by account level; fee curves in the main currency; admin editor."
-    },
-    {
-      "title": "Team builder, character detail, equipment, weapon catalog",
-      "detail": "Needed before weapon banners can be activated."
-    },
-    {
-      "title": "Daily / half-day task engine",
-      "detail": "Canon 12-hour windows; pays the guaranteed income floor."
-    },
-    {
-      "title": "Account deletion / data export, consent flow",
-      "detail": "Store compliance."
-    },
     {
       "title": "Android shell (Capacitor) + native bridges",
       "detail": "Google sign-in, Play Billing, AdMob rewarded ads; emulator tests in CI."
     },
     {
       "title": "Combat coverage 3/20 -> 20/20 characters, boss phases, Sweep/AFK",
-      "detail": ""
+      "detail": "Party-based battles (team presets are stored and validated server-side already) wait for this."
+    },
+    {
+      "title": "Team builder screen + gear level-up/dismantle/reroll screens",
+      "detail": "The server side exists and is tested; client screens follow the design review."
+    },
+    {
+      "title": "Consent flow (UMP) and store compliance docs",
+      "detail": "Account export/delete is built."
     },
     {
       "title": "Final math pass",
-      "detail": "All reward amounts (ad payout, task payouts, stage rewards, upgrade fees) are placeholders until this pass, as you decided."
+      "detail": "All reward amounts (ad payout, task payouts, drop quantities, stage rewards, upgrade fees) are placeholders until this pass, as you decided."
     }
   ],
   "blockedOnOwner": [
@@ -50,7 +42,7 @@
     },
     {
       "title": "AdMob: enter the server-side verification callback URL",
-      "detail": "URL and app-ads.txt line are in docs/AAB_ACCESS_PLAN.md (ids already received)."
+      "detail": "Retry 'verify callback URL' in AdMob after the latest staging deploy (the earlier 400 is fixed). app-ads.txt waits for a website."
     },
     {
       "title": "Android keystore",

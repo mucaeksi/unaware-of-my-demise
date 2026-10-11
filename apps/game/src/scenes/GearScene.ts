@@ -1,0 +1,75 @@
+import { REF_W } from '../config';
+import type { GearView } from '../net/api';
+import { Services } from '../services';
+import { errText, HubScene } from '../ui/hub';
+import { stars } from '../ui/format';
+import { Button, txt } from '../ui/kit';
+import { F, T } from '../ui/theme';
+
+const PER_PAGE = 6;
+const statLine = (g: GearView): string => (g.stats ? [g.stats.main, ...g.stats.subs].map((s) => `${s.stat.replace('_pct', '%')} ${s.value}`).join(' · ') : (g.passive?.name ?? ''));
+
+/** Gear list. Opened from a companion it filters to one slot and offers Equip; opened alone it lists everything. */
+export class GearScene extends HubScene {
+  protected readonly heading = 'ARMORY';
+  private characterId: string | null = null;
+  private slot: GearView['slot'] | null = null;
+  private page = 0;
+  private list: GearView[] = [];
+  private busy = false;
+
+  constructor() {
+    super('Gear');
+  }
+
+  init(data: { characterId?: string; slot?: GearView['slot'] }): void {
+    this.characterId = data.characterId ?? null;
+    this.slot = data.slot ?? null;
+    this.page = 0;
+  }
+
+  protected override goBack(): void {
+    if (this.characterId) this.scene.start('Character', { id: this.characterId });
+    else this.scene.start('Home');
+  }
+
+  protected async build(): Promise<void> {
+    const all = await Services.api.gear();
+    this.list = all.filter((g) => (this.slot ? g.slot === this.slot : true));
+    this.draw();
+  }
+
+  private draw(): void {
+    this.body.removeAll(true);
+    this.add_(txt(this, REF_W / 2, 160, this.slot ? `${this.slot} · ${this.list.length} owned` : `${this.list.length} items`, { fontSize: '36px', color: T.dim }).setOrigin(0.5));
+    this.list.slice(this.page * PER_PAGE, (this.page + 1) * PER_PAGE).forEach((g, i) => {
+      const y = 260 + i * 120;
+      const mine = this.characterId !== null && g.equippedBy === this.characterId;
+      this.card(REF_W / 2 - 100, y, 1500, 108, mine ? 'hot' : 'normal');
+      this.add_(txt(this, 190, y - 24, `${g.name}  ${stars(g.rarity)}`, { fontFamily: F.display, fontSize: '28px', fontStyle: '600' }).setOrigin(0, 0.5));
+      this.add_(txt(this, 190, y + 22, `${g.slot} · Lv ${g.level}/${g.levelCap}${g.equippedBy ? ` · on ${g.equippedBy}` : ''}   ${statLine(g)}`, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
+      if (this.characterId) {
+        this.add_(new Button(this, REF_W - 250, y, { label: mine ? 'REMOVE' : 'EQUIP', w: 280, h: 90, fontSize: 28, variant: mine ? 'normal' : 'hot', onClick: () => void this.act(async () => { if (mine) await Services.api.unequip(g.id); else await Services.api.equip(g.id, this.characterId as string); this.say(mine ? 'Removed' : 'Equipped'); }) }));
+      }
+    });
+    const pages = Math.max(1, Math.ceil(this.list.length / PER_PAGE));
+    if (pages > 1) {
+      this.add_(new Button(this, REF_W / 2 - 220, 980, { label: '‹', w: 160, h: 100, fontSize: 56, onClick: () => { this.page = (this.page + pages - 1) % pages; this.draw(); } }));
+      this.add_(txt(this, REF_W / 2, 980, `${this.page + 1} / ${pages}`, { fontSize: '36px' }).setOrigin(0.5));
+      this.add_(new Button(this, REF_W / 2 + 220, 980, { label: '›', w: 160, h: 100, fontSize: 56, onClick: () => { this.page = (this.page + 1) % pages; this.draw(); } }));
+    }
+  }
+
+  private async act(fn: () => Promise<void>): Promise<void> {
+    if (this.busy) return;
+    this.busy = true;
+    try {
+      await fn();
+      await this.refresh();
+    } catch (e) {
+      this.say(errText(e));
+    } finally {
+      this.busy = false;
+    }
+  }
+}

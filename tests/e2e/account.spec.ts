@@ -50,7 +50,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   // the browser has no native identity provider: the Account screen says so and does not offer a fake login
   await tap(page, info, REF_W - 200, 80); // COMPANY
   await waitScene(page, 'Home');
-  await tap(page, info, 960, 560); // ACCOUNT
+  await tap(page, info, 440, 720); // ACCOUNT
   await waitScene(page, 'Account');
   await page.waitForTimeout(800);
   expect(await page.evaluate(() => (window as any).__UOMD__.services.identity.kind)).toBe('none');
@@ -70,7 +70,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   await goto(page, 'Home');
   await waitScene(page, 'Home');
   await page.waitForTimeout(800);
-  await tap(page, info, 440, 330); // SUMMON
+  await tap(page, info, 440, 290); // SUMMON
   await waitScene(page, 'Summon');
   await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Summon').banners?.length ?? 0), { timeout: 20_000 }).toBeGreaterThan(0);
   await page.waitForTimeout(2500); // software GL stretches the scene fade; the evidence shot must be fully faded in
@@ -102,6 +102,31 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-14-roster.png` });
   const items = await call(page, '/api/v1/inventory');
   expect(items.items.map((i: any) => i.item_id)).toEqual(expect.arrayContaining(['mahmut', 'fadyme']));
+
+  // companion detail: tap a roster card, see level / skills / stats / gear slots; level up with an XP item the server grants as mail
+  await tap(page, info, 340, 330); // first card
+  await waitScene(page, 'Character');
+  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character').body?.length ?? 0), { timeout: 20_000 }).toBeGreaterThan(5);
+  await page.waitForTimeout(2500);
+  await page.screenshot({ path: `${SHOTS}/${info.project.name}-15-character.png` });
+  const mine = await call(page, '/api/v1/characters/mine');
+  expect(mine.characters.length).toBeGreaterThanOrEqual(2);
+  expect(mine.characters[0].skills.length).toBeGreaterThan(0);
+
+  // errands: the server-side 12-hour window is visible
+  await goto(page, 'Tasks');
+  await waitScene(page, 'Tasks');
+  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Tasks').body?.length ?? 0), { timeout: 20_000 }).toBeGreaterThan(5);
+  await page.waitForTimeout(2500);
+  await page.screenshot({ path: `${SHOTS}/${info.project.name}-16-errands.png` });
+  const tasks = await call(page, '/api/v1/tasks');
+  expect(tasks.daily.tasks.length).toBeGreaterThan(0);
+
+  // armory
+  await goto(page, 'Gear');
+  await waitScene(page, 'Gear');
+  await page.waitForTimeout(2500);
+  await page.screenshot({ path: `${SHOTS}/${info.project.name}-17-armory.png` });
 
   // sign out revokes the session on the server
   await page.evaluate(() => (window as any).__UOMD__.services.api.signOut());

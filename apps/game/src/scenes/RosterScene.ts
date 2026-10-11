@@ -33,12 +33,12 @@ export class RosterScene extends HubScene {
     slice.forEach((c, i) => {
       const x = 340 + (i % 4) * 415;
       const y = 330 + Math.floor(i / 4) * 215;
-      this.card(x, y, 390, 190, c.rarity === 5 ? 'hot' : 'normal');
+      this.card(x, y, 390, 190, c.rarity === 5 ? 'hot' : 'normal').setInteractive({ useHandCursor: true }).on('pointerup', () => this.scene.start('Character', { id: c.id }));
       const nm = this.add_(txt(this, x, y - 52, c.name, { fontFamily: F.display, fontSize: '32px', fontStyle: '600', color: c.rarity === 5 ? '#ffd86b' : T.text }).setOrigin(0.5));
       if (nm.width > 350) nm.setScale(350 / nm.width);
       this.add_(txt(this, x, y - 8, stars(c.rarity), { fontSize: '32px', color: '#ffd86b' }).setOrigin(0.5));
       this.add_(txt(this, x, y + 32, `${c.element} · ${c.role.replaceAll('_', ' ')}`, { fontSize: '24px', color: T.dim }).setOrigin(0.5));
-      this.add_(txt(this, x, y + 68, c.copies > 1 || c.shards ? `copies ${c.copies} · shards ${c.shards}` : 'owned', { fontSize: '24px', color: T.dim }).setOrigin(0.5));
+      this.add_(txt(this, x, y + 68, c.copies > 1 || c.shards ? `copies ${c.copies} · shards ${c.shards}` : 'tap for details', { fontSize: '24px', color: T.dim }).setOrigin(0.5));
     });
     const pages = Math.max(1, Math.ceil(this.list.length / PER_PAGE));
     if (pages > 1) {

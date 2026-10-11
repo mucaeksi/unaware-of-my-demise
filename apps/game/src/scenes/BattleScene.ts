@@ -8,6 +8,7 @@ import { Sfx } from '../audio/Sfx';
 import { spotFor } from '../battle/formation';
 import { UnitView } from '../battle/UnitView';
 import { prefs } from '../platform/prefs';
+import { describeAttachment } from '../ui/format';
 import { Services } from '../services';
 import { Button, panel, sceneFadeIn, title, toast, txt } from '../ui/kit';
 import { C, DEPTH, F, SIZE, T, hex } from '../ui/theme';
@@ -601,7 +602,8 @@ export class BattleScene extends Phaser.Scene {
       const { content } = Services.ready();
       const r = await api.submitBattle(await content.activeReleaseId(), this.cfg.nodeId, this.recorded);
       if (this.dead) return;
-      const gained = r.rewards.length ? ` · rewards: ${r.rewards.map((a) => (a.type === 'currency' ? `${a.amount} ${a.currency.replaceAll('_', ' ')}` : a.itemId)).join(', ')}` : '';
+      const names = r.rewards.length ? await api.catalogNames().catch(() => new Map<string, string>()) : new Map<string, string>();
+      const gained = r.rewards.length ? ` · rewards: ${r.rewards.map((a) => describeAttachment(a, names)).join(', ')}` : '';
       toast(this, `Progress saved to your account${gained}`);
     } catch (e) {
       if (!this.dead) toast(this, e instanceof Error ? `Progress not saved: ${e.message}` : 'Progress not saved');
