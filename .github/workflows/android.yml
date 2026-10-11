@@ -1,8 +1,8 @@
 name: Android build
 # Builds the Capacitor Android shell: a signed release AAB (for Google Play) and a debug APK that is smoke-tested on an emulator.
-# The Play UPLOAD keystore is generated here ONCE (random password, never printed) and kept in the private R2 bucket
-# uomd-android-signing; later runs reuse it. If the owner prefers GitHub secrets, set ANDROID_KEYSTORE_B64 + ANDROID_KEYSTORE_PASSWORD
-# (+ ANDROID_KEY_ALIAS) and those win. Play App Signing (default for new apps) keeps the real app-signing key at Google.
+# Signs with the Play UPLOAD key from the GitHub secrets ANDROID_KEYSTORE_B64 + ANDROID_KEYSTORE_PASSWORD (+ ANDROID_KEY_ALIAS=upload).
+# The key itself was generated once outside CI (see docs/AAB_ACCESS_PLAN.md) and is held by the owner; CI never creates one.
+# Play App Signing (default for new apps) keeps the real app-signing key at Google.
 on:
   workflow_dispatch:
     inputs:
@@ -14,9 +14,6 @@ on:
         type: choice
         options: [staging, dev]
         default: staging
-  push:
-    branches: [main]
-    paths: ['apps/android/**', 'apps/game/**', 'packages/**', '.github/workflows/android.yml']
 
 concurrency:
   group: android-build
@@ -54,7 +51,7 @@ jobs:
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null 2>&1 || true
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" >/dev/null
-      - name: Upload keystore (reuse, or generate once)
+      - name: Upload keystore (from secrets)
         id: ks
         run: |
           set -euo pipefail
@@ -65,20 +62,10 @@ jobs:
             echo "$SECRET_KS_B64" | base64 -d > "$KS"
             PASS="$SECRET_KS_PASS"; ALIAS="${SECRET_KS_ALIAS:-upload}"
             echo "source=github-secrets" >> "$GITHUB_OUTPUT"
-          elif npx wrangler r2 object get uomd-android-signing/upload.jks --file "$KS" --remote >/dev/null 2>&1 \
-            && npx wrangler r2 object get uomd-android-signing/upload.pass --file "$RUNNER_TEMP/ks/upload.pass" --remote >/dev/null 2>&1; then
-            PASS="$(cat "$RUNNER_TEMP/ks/upload.pass")"
-            echo "source=r2" >> "$GITHUB_OUTPUT"
           else
-            [ -n "${CLOUDFLARE_API_TOKEN}" ] || { echo "::error::no keystore secret and no CLOUDFLARE_API_TOKEN to keep a generated one"; exit 1; }
-            PASS="$(openssl rand -base64 33 | tr -d '=+/\n' | cut -c1-32)"
-            echo "::add-mask::$PASS"
-            keytool -genkeypair -v -keystore "$KS" -storetype PKCS12 -alias upload -keyalg RSA -keysize 2048 -validity 10000 \
-              -storepass "$PASS" -keypass "$PASS" -dname "CN=Unaware of My Demise upload key, O=UOMD" >/dev/null 2>&1
-            printf '%s' "$PASS" > "$RUNNER_TEMP/ks/upload.pass"
-            npx wrangler r2 object put uomd-android-signing/upload.jks --file "$KS" --remote >/dev/null
-            npx wrangler r2 object put uomd-android-signing/upload.pass --file "$RUNNER_TEMP/ks/upload.pass" --remote >/dev/null
-            echo "source=generated-now" >> "$GITHUB_OUTPUT"
+            # NEVER generate a new key here: the upload key is registered with Google Play, a different key would be rejected.
+            echo "::error::No upload keystore. Add the GitHub secrets ANDROID_KEYSTORE_B64 (base64 of the .jks), ANDROID_KEYSTORE_PASSWORD and ANDROID_KEY_ALIAS (upload) from the backup files the owner received."
+            exit 1
           fi
           echo "::add-mask::$PASS"
           echo "UOMD_KEYSTORE_FILE=$KS" >> "$GITHUB_ENV"
