@@ -64,9 +64,9 @@ export async function waitScene(page: Page, key: string, timeout = 60_000): Prom
 }
 
 /** Taps through dialogue until `target` scene is active. */
-export async function skipStory(page: Page, info: TestInfo, target: string): Promise<void> {
+export async function skipStory(page: Page, info: TestInfo, target: string, maxTaps = 160): Promise<void> {
   let last = '';
-  for (let i = 0; i < 160; i++) {
+  for (let i = 0; i < maxTaps; i++) {
     const { now, finished } = await page.evaluate(() => {
       const g = (window as any).__UOMD__.game;
       return { now: g.scene.getScenes(true).map((s: any) => s.sys.settings.key).join(','), finished: Boolean(g.scene.getScene('Story')?.finished) };
@@ -140,4 +140,23 @@ export async function serverVerification(page: Page, timeout = 45_000): Promise<
     )
     .toBe(true);
   return text;
+}
+
+/**
+ * Test driver for battles that have no Auto button (the opening tutorials): answers every pending prompt with the engine's own Auto
+ * policy, exactly what the Auto toggle does, until the result exists. Real players press skills; this only saves time after the manual turns.
+ */
+export async function finishBattleWithPolicy(page: Page, timeout = 240_000): Promise<void> {
+  const start = Date.now();
+  for (;;) {
+    const done = await page.evaluate(() => {
+      const s = (window as any).__UOMD__.game.scene.getScene('Battle');
+      if (s?.battle?.result) return true;
+      if (s?.pendingResolve) s.pendingResolve(s.battle.autoAction());
+      return false;
+    });
+    if (done) return;
+    if (Date.now() - start > timeout) throw new Error('battle did not finish in time');
+    await page.waitForTimeout(250);
+  }
 }

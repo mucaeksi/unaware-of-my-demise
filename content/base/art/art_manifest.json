@@ -455,5 +455,6 @@
   "ui": {
     "logo": "art/ui_logo.webp",
     "key_art": "art/ui_key_art.webp"
-  }
+  },
+  "stills": {}
 }

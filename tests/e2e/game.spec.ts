@@ -1,6 +1,6 @@
  
 import { expect, test } from '@playwright/test';
-import { ADMIN, SHOTS, REF_H, REF_W, manualTurn, openGame, probeBattle, serverVerification, skipStory, tap, waitScene } from './helpers';
+import { ADMIN, SHOTS, REF_H, REF_W, finishBattleWithPolicy, manualTurn, openGame, probeBattle, serverVerification, skipStory, tap, waitScene } from './helpers';
 
 const jwt = (): string => process.env.E2E_ADMIN_JWT as string;
 
@@ -26,21 +26,19 @@ test('plays tutorial T-1 from the title: story -> turn-based battle -> victory -
   await waitScene(page, 'Story');
   await page.waitForTimeout(3000);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-02-story.png` });
-  await skipStory(page, info, 'Battle');
+  await skipStory(page, info, 'Battle', 400);
   await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 30_000 }).toContain('fadyme');
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-03-battle.png` });
-  // animation time depends on the rendering speed of the machine (software GL on CI is several times slower than a
-  // phone GPU), so play at the fastest speed the game offers, exactly as an impatient player would
-  await tap(page, info, REF_W - 150, 70); // x2
-  await tap(page, info, REF_W - 150, 70); // x3
+  // the opening tutorial has no speed button and no Auto (the encounter's ui block hides them)
+  expect(await page.evaluate(() => { const s = (window as any).__UOMD__.game.scene.getScene('Battle'); return [s.speedBtn, s.autoBtn]; })).toEqual([null, null]);
 
   // two manual turns through the real UI (select, then confirm target) ...
   await manualTurn(page, info, 0);
   await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 40_000 }).toContain('mahmut');
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-04-after-first-hit.png` });
   await manualTurn(page, info, 0);
-  // ... then hand over to Auto Battle (speed is already x3)
-  await tap(page, info, REF_W - 365, 70);
+  // ... then the test driver answers the remaining prompts with the engine policy (a player would keep pressing skills)
+  await finishBattleWithPolicy(page);
   await expect.poll(async () => (await probeBattle(page)).result, { timeout: 120_000 }).not.toBeNull();
   const result = (await probeBattle(page)).result;
   expect(result?.winner).toBe('player');
@@ -51,7 +49,7 @@ test('plays tutorial T-1 from the title: story -> turn-based battle -> victory -
   // continue -> post-battle story -> back to chapters
   await tap(page, info, REF_W / 2 - 250, 760);
   await waitScene(page, 'Story');
-  await skipStory(page, info, 'Chapters');
+  await skipStory(page, info, 'Chapters', 400);
   const sys = await request.get(`${ADMIN}/admin/api/system`, { headers: { 'Cf-Access-Jwt-Assertion': jwt() } });
   const audit = (await sys.json()) as { d1: { counts: { battle_audit: number } } };
   expect(audit.d1.counts.battle_audit).toBeGreaterThanOrEqual(1);

@@ -64,7 +64,7 @@ export const StoryScene = z
      * reveal, minimum reading holds, speaker-change pauses. Absent = the regular story reader (text speed setting, Skip, log).
      */
     presentation: z.object({ auto: z.boolean(), speaker_pause_seconds: z.number().min(0).max(3) }).strict().optional(),
-    /** shared illustration shown for the whole scene instead of portraits (art manifest ui entry `illustration_<id>`); portraits are the fallback */
+    /** shared illustration shown for the whole scene instead of portraits (art manifest `stills` entry named by the id); portraits are the fallback */
     illustration_id: Id.optional(),
     /** how long the last line of the scene stays before the scene ends */
     closing_hold_seconds: z.number().min(0).max(10).optional(),

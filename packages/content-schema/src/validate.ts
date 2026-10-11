@@ -93,6 +93,7 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
       ...Object.values(art.backgrounds),
       ...Object.values(art.music).map((m) => m.file),
       ...Object.values(art.ui),
+      ...Object.values(art.stills),
       ...Object.values(art.portraits).flatMap((p) => Object.values(p.images))
     ];
     for (const p of need) if (!files.has(p)) problems.push(`art manifest references missing file ${p}`);
@@ -104,6 +105,7 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
     const s = parse(path, StoryScene);
     if (!s) return;
     scenes++;
+    // a scene that names an illustration the art manifest does not ship simply runs on its portraits (the stand-in period); it is never an error
     if (expectedLocation && s.location_id !== expectedLocation) problems.push(`${path}: location ${s.location_id} differs from encounter ${expectedLocation}`);
     if (art) {
       for (const c of s.commands) {

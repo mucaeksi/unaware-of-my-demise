@@ -13,7 +13,8 @@
   },
   "scripts": {
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present && npm run test:tools",
+    "test:tools": "vitest run --root tools",
     "lint": "eslint .",
     "build:content": "tsx tools/build_content.ts && tsx tools/make_release.ts --dir content/base --id rel_0001 --generation 1 --channel staging --notes \"Base content shipped inside the app: first-install flow (prologue + tutorials T-1..T-3)\" --created-at 2026-10-10T00:00:00.000Z --out content/base/release.json",
     "build:campaign": "tsx tools/build_campaign.ts",

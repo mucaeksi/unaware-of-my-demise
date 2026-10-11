@@ -8,6 +8,7 @@ import { API_BASE } from '../config';
 import { loadCurrencyName } from '../net/currency';
 import { detectIdentity } from '../net/identity';
 import { initConsent } from '../net/store';
+import phaserLogoUrl from '../assets/phaser-pixel-large-shaded.png';
 import { Services } from '../services';
 import type { SplashInit } from './SplashScene';
 
@@ -30,6 +31,7 @@ export class BootScene extends Phaser.Scene {
       /* system serif fallback is acceptable */
     }
     this.makeFxTextures();
+    await this.loadEngineLogo();
     const wa = this.sound as Phaser.Sound.WebAudioSoundManager;
     if (wa.context) {
       Music.init(this.sound);
@@ -68,6 +70,22 @@ export class BootScene extends Phaser.Scene {
       }
       return false;
     }
+  }
+
+  /**
+   * The official pixel-art Phaser logo (the logo page offers it for use in games), bundled with the app so the engine credit never waits for
+   * the network or the content service. A failure only means the splash falls back to the text wordmark.
+   */
+  private loadEngineLogo(): Promise<void> {
+    return new Promise((resolve) => {
+      this.load.image('phaser_logo', phaserLogoUrl);
+      this.load.once(Phaser.Loader.Events.COMPLETE, () => {
+        this.textures.get('phaser_logo')?.setFilter(Phaser.Textures.FilterMode.NEAREST);
+        resolve();
+      });
+      this.load.once(Phaser.Loader.Events.FILE_LOAD_ERROR, () => resolve());
+      this.load.start();
+    });
   }
 
   /** Background patch check: never blocks the first frame; offline start is the normal case. */

@@ -25,6 +25,7 @@ export class ArtLibrary {
   private readonly bgKeys = new Map<string, string>();
   private readonly musicKeys = new Map<string, { key: string; loopStart: number; duration: number }>();
   private readonly uiKeys = new Map<string, string>();
+  private readonly stillKeys = new Map<string, string>();
 
   constructor(private readonly content: ContentService, readonly art: ArtManifest) {}
 
@@ -152,6 +153,29 @@ export class ArtLibrary {
       queue.push({ type: 'image', key: ref.key, url: ref.url });
     }
     await this.run(scene, queue);
+  }
+
+  /** Loads full-frame stills (prologue plates, event illustrations) on demand; ids the manifest does not ship are skipped without error. */
+  async loadStills(scene: Phaser.Scene, ids: readonly string[]): Promise<void> {
+    const queue: Queued[] = [];
+    for (const id of ids) {
+      const path = this.art.stills[id];
+      if (!path || this.stillKeys.has(id)) continue;
+      const ref = await this.content.asset(path);
+      this.stillKeys.set(id, ref.key);
+      queue.push({ type: 'image', key: ref.key, url: ref.url });
+    }
+    await this.run(scene, queue);
+  }
+
+  /** Texture key of a loaded still, or null when the content does not ship it (callers fall back to a stand-in). */
+  still(id: string): string | null {
+    return this.stillKeys.get(id) ?? null;
+  }
+
+  /** The art-manifest ids a prologue scene may use, most specific first. */
+  static plateIds(sceneId: string, visual: string): string[] {
+    return [`prologue_${sceneId}`, `prologue_${visual}`];
   }
 
   ui(name: string): string | null {

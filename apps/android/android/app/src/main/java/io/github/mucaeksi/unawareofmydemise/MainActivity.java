@@ -13,6 +13,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(UomdGoogleSignInPlugin.class);
         registerPlugin(UomdBillingPlugin.class);
         registerPlugin(UomdAdsPlugin.class);
+        registerPlugin(UomdAppPlugin.class);
         super.onCreate(savedInstanceState);
         enterImmersive();
     }

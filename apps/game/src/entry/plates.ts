@@ -4,7 +4,7 @@ import { REF_H, REF_W } from '../config';
 /**
  * Painted stand-ins for the prologue plates (village / crownfall / road): gradients and silhouettes only, no characters, no signs, nothing
  * that could contradict canon. They keep the whole interlude playable and timed until the generated plates replace them
- * (the art manifest `ui` entries `prologue_<visual>` take precedence automatically).
+ * (the art manifest `ui` entries `prologue_<scene id>` / `prologue_<visual>` stills take precedence automatically).
  */
 type Painter = (g: Phaser.GameObjects.Graphics) => void;
 
@@ -12,7 +12,7 @@ const V = (x: number, y: number): Phaser.Math.Vector2 => new Phaser.Math.Vector2
 const SIL = 0x0d0812;
 
 const sky = (g: Phaser.GameObjects.Graphics, top: number, bottom: number, horizon: number): void => {
-  g.fillGradientStyle(top, top, bottom, bottom, 1);
+  g.fillGradientStyle(top, top, bottom, bottom, 1, 1, 1, 1);
   g.fillRect(0, 0, REF_W, horizon);
 };
 
@@ -40,8 +40,8 @@ const PAINT: Record<string, Painter> = {
       g.fillRect(x + w * 0.2, y + h * 0.35, 26, 34);
       g.fillRect(x + w * 0.6, y + h * 0.35, 26, 34);
     }
-    g.fillStyle(0x24142e, 0.55);
-    g.fillRect(0, 700, REF_W, 120);
+    g.fillGradientStyle(0x24142e, 0x24142e, 0x24142e, 0x24142e, 0, 0, 0.5, 0.5);
+    g.fillRect(0, 690, REF_W, 120);
   },
   /** The capital after Crownfall: broken gate towers against smoke, a dim red-grey sky. */
   crownfall: (g) => {
@@ -59,8 +59,8 @@ const PAINT: Record<string, Painter> = {
       g.fillStyle(0x6c6072, a);
       g.fillPoints([V(x - w / 4, 780), V(x - w / 2, 430), V(x - w, 90), V(x + w, 70), V(x + w / 2, 440), V(x + w / 4, 780)], true);
     }
-    g.fillStyle(0x8f1d3a, 0.1);
-    g.fillRect(0, 700, REF_W, 110);
+    g.fillGradientStyle(0x8f1d3a, 0x8f1d3a, 0x8f1d3a, 0x8f1d3a, 0, 0, 0.16, 0.16);
+    g.fillRect(0, 690, REF_W, 120);
   },
   /** The road after the walls: dusk, a track to the vanishing point, tree lines, two small silhouettes walking together. */
   road: (g) => {
@@ -84,8 +84,8 @@ const PAINT: Record<string, Painter> = {
       g.fillCircle(x, 690 - 66 * s, 15 * s);
       g.fillPoints([V(x - 22 * s, 760), V(x - 12 * s, 690 - 48 * s), V(x + 12 * s, 690 - 48 * s), V(x + 22 * s, 760)], true);
     }
-    g.fillStyle(0xcfa3a0, 0.1);
-    g.fillRect(0, 560, REF_W, 80);
+    g.fillGradientStyle(0xcfa3a0, 0xcfa3a0, 0xcfa3a0, 0xcfa3a0, 0, 0, 0.16, 0.16);
+    g.fillRect(0, 540, REF_W, 100);
   }
 };
 

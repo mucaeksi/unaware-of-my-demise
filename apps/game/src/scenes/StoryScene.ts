@@ -111,6 +111,7 @@ export class StoryScene extends Phaser.Scene {
       }
       await Promise.all([
         art.loadBackground(this, this.data0.location_id),
+        this.data0.illustration_id ? art.loadStills(this, [this.data0.illustration_id]).catch(() => undefined) : Promise.resolve(),
         art.loadPortraits(this, [...chars]),
         ...[...cues].map((q) => art.loadMusic(this, q))
       ]);
@@ -140,7 +141,7 @@ export class StoryScene extends Phaser.Scene {
     if (!prefs().reducedMotion) this.tweens.add({ targets: this.bg, scale: cover * 1.08, duration: 40000, ease: 'Sine.easeInOut', yoyo: true, repeat: -1 });
 
     // a shared illustration (roadside_rest, shelter_evening) replaces the backdrop and the portraits for the whole scene when the content ships it
-    const illustrationKey = this.data0.illustration_id ? art.ui(`illustration_${this.data0.illustration_id}`) : null;
+    const illustrationKey = this.data0.illustration_id ? art.still(this.data0.illustration_id) : null;
     if (illustrationKey) {
       this.illustration = this.add.image(REF_W / 2, REF_H / 2, illustrationKey).setDepth(DEPTH.bg + 1);
       this.illustration.setScale(Math.max(REF_W / this.illustration.width, REF_H / this.illustration.height));
@@ -169,7 +170,7 @@ export class StoryScene extends Phaser.Scene {
     this.namePlate = this.add.container(0, 0, [plateBg, this.nameText]).setDepth(DEPTH.hud + 2).setVisible(false);
     this.bodyText = txt(this, -770, -88, '', { fontSize: '40px', color: T.text, lineSpacing: 6, wordWrap: { width: 1540 } });
     this.caret = txt(this, 770, 86, '▼', { fontSize: '32px', color: T.gold }).setOrigin(1, 0.5).setVisible(false);
-    this.box = this.add.container(REF_W / 2, 930, [panelBg, this.bodyText, this.caret]).setDepth(DEPTH.hud);
+    this.box = this.add.container(REF_W / 2, 902, [panelBg, this.bodyText, this.caret]).setDepth(DEPTH.hud);
 
     // cutscenes have no Skip and a single on/off Auto toggle (v006); the regular reader keeps Skip
     if (!this.cutscene) this.skipBtn = new Button(this, REF_W - 150, 70, { label: 'SKIP', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
@@ -336,7 +337,7 @@ export class StoryScene extends Phaser.Scene {
       const a = this.actors.get(e.speaker);
       const left = !a || a.side === 'left';
       this.nameText.setText(e.speakerDisplay.toUpperCase());
-      this.namePlate.setPosition(left ? 330 : REF_W - 330, 784);
+      this.namePlate.setPosition(left ? 330 : REF_W - 330, 756);
     }
     const cps = this.cutscene ? CUTSCENE.cps : this.skip ? 400 : CPS[prefs().textSpeed];
     let n = 0;

@@ -1,6 +1,6 @@
 # Game flow — first install to "the game proper"
 
-Status: **design for owner review (2026-10-11)**. Sources: the owner's brief of 2026-10-11, `narrative/02_Main_Story/Opening_Tutorial/OPENING_TUTORIAL_REVISION_v006_2026-10-08.md`
+Status: **implemented as a skeleton (2026-10-11), verified end to end by `tests/e2e/zzz-entry-flow.spec.ts`; art is placeholder until the generation phase.** Review screenshots: `.cache/e2e-shots/*f7*`, `*f1*`. Sources: the owner's brief of 2026-10-11, `narrative/02_Main_Story/Opening_Tutorial/OPENING_TUTORIAL_REVISION_v006_2026-10-08.md`
 (the approved script and timing rules), `narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/{prologue,tutorial}_v001.json`.
 Scope of the app build: **everything up to the first restart**. Whatever comes after (chapters 1-1 ..., events, gacha content) arrives only through patches.
 
@@ -59,15 +59,23 @@ A small parallel scene (`PatchBar`) sits above all other scenes at the bottom ed
 
 The base is built from the narrative sources by `tools/build_content.ts` (currently T-1 only; T-2 is a patch, T-3 does not exist yet — both move into the base).
 
-## 7. Build order (each step: code + tests + screenshots for your review)
+## 7. Build order — status
 
-1. **F1** Splash → studio card → first-run menu skeleton (real fonts, fades, strings from one file).
-2. **F2** Entry state machine + checkpoint + Google sign-in step.
-3. **F3** Background patch manager with progress events + the bottom bar.
-4. **F4** Prologue player (9 scenes, placeholder painted gradients per `visual`: village / crownfall / road; the art arrives in the art phase).
-5. **F5** Cutscene rules, T-3 content, tutorial battle flags.
-6. **F6** Patch page, confirmation, restart (web reload now; Android native relaunch is a plugin change → part of the next AAB), returning-player routing.
-7. **F7** End-to-end test of the whole chain with a fake slow patch + review screenshots; then **F8** a new AAB.
+| Step | Status | Where |
+|---|---|---|
+| **F1** engine credit (official pixel-art Phaser logo, bundled) -> studio card -> first-run menu | done | `SplashScene`, `StudioScene`, `TitleScene` (first-run layout), `entry/state.ts` |
+| **F2** entry state machine, account checkpoint, sign-in step | done | `entry/state.ts` + `entry/sync.ts` (furthest progress wins, other account never leaks), API `GET/PUT /api/v1/entry` (`player_entry`, monotonic, deleted/exported with the account) |
+| **F3** background patch (staged, with progress) + bottom bar | done | `PatchManager` staged releases + `onProgress`, `patch/PatchService.ts`, `PatchBarScene` (registered last = always on top) |
+| **F4** prologue player, 9 scenes / 120 s | done (painted stand-in plates) | `PrologueScene`, `entry/plates.ts`; plates come from the art manifest `stills` (`prologue_<scene id>`, family fallback `prologue_<visual>`) when shipped |
+| **F5** v006 cutscene rules, T-3 content, tutorial battle flags | done | `StoryScene` (`presentation` block), `entry/cutscene.ts` (+tests), `entry/tutorial.ts`, encounter `ui` block, `BattleScene` tutorial result panel |
+| **F6** download page, confirmation, one restart, returning-player routing | done (web reload; Android relaunch plugin `UomdApp.restart` lands with the next AAB, until then the shell reloads the web layer) | `FinishScene`, `platform/native.ts restartGame`, boot `activateStaged()` for a completed entry |
+| **F7** whole-chain e2e + review screenshots | done | `zzz-entry-flow.spec.ts` (prologue timing, full chain with a deliberately slowed patch, late patch, failed download + retry) |
+| **F8** new AAB | next, after the art pass | needs the `UomdApp.restart` plugin, generated art in the base (`docs/media/EXPORT_PIPELINE.md`), version bump |
+
+Implementation notes that differ from the first sketch: the patch is **staged, not activated**, during the flow (the story and tutorials never change
+content under the player; the restart switches it on without a network); the first-run door in a browser build is **PREVIEW BUILD** (no Google
+identity exists there; `VITE_PREVIEW_FLOW=false` in the AAB build removes it); "Made with Phaser" uses the pixel-art logo the Phaser logo page
+offers for games (`docs/THIRD_PARTY.md`); a `?fastintro` query shortens the cosmetic timings for automation only.
 
 ## 8. Open points (defaults in brackets; tell me where you disagree)
 

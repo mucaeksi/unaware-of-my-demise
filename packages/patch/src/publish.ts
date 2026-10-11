@@ -24,7 +24,7 @@ export function classify(path: string): FileKind {
   if (path === 'art/art_manifest.json') return 'art_manifest';
   if (path.startsWith('art/atlas_')) return 'atlas_image';
   if (path.startsWith('art/portrait_')) return 'portrait';
-  if (path.startsWith('art/bg_')) return 'background';
+  if (path.startsWith('art/bg_') || path.startsWith('art/still_')) return 'background';
   if (path.startsWith('audio/')) return 'audio';
   return 'other_data';
 }

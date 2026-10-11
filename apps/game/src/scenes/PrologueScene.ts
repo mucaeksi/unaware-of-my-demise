@@ -6,6 +6,7 @@ import { markPrologueSeen } from '../entry/state';
 import { recordEntry } from '../entry/sync';
 import { plateKey } from '../entry/plates';
 import { prefs } from '../platform/prefs';
+import { ArtLibrary } from '../content/ArtLibrary';
 import { Services } from '../services';
 import { Button, txt } from '../ui/kit';
 import { C, DEPTH, F, T } from '../ui/theme';
@@ -64,6 +65,9 @@ export class PrologueScene extends Phaser.Scene {
       const { content } = Services.ready();
       const entry = await content.entryIndex();
       this.data0 = await content.prologue(entry.prologue);
+      // plates are loaded here, not at boot (the stills group is lazy); a plate the content does not ship is drawn as a painted stand-in
+      const ids = this.data0.scenes.flatMap((sc) => ArtLibrary.plateIds(sc.id, sc.visual));
+      await Services.art?.loadStills(this, ids).catch((e: unknown) => console.warn('prologue plates unavailable', e));
     } catch (e) {
       // the prologue is a presentation: if it cannot load, the road must still open
       console.error('prologue unavailable', e);
@@ -95,7 +99,7 @@ export class PrologueScene extends Phaser.Scene {
   }
 
   private showPlate(scene: PrologueData, first: boolean, holdMs: number): void {
-    const art = Services.art?.ui(`prologue_${scene.visual}`);
+    const art = ArtLibrary.plateIds(scene.id, scene.visual).map((id) => Services.art?.still(id)).find((k) => k) ?? null;
     const img = this.add.image(REF_W / 2, REF_H / 2, plateKey(this, scene.visual, art)).setDepth(DEPTH.bg + this.index).setAlpha(0);
     const cover = Math.max(REF_W / img.width, REF_H / img.height);
     const calm = prefs().reducedMotion;

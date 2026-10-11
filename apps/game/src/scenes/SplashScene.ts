@@ -33,8 +33,11 @@ export class SplashScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(0x000000);
     document.getElementById('boot')?.classList.add('done');
 
-    const made = txt(this, REF_W / 2, REF_H / 2 - 62, S.splash.made, { fontFamily: F.body, fontSize: '34px', fontStyle: '500', color: T.dim }).setOrigin(0.5).setLetterSpacing(14);
-    const word = txt(this, REF_W / 2, REF_H / 2 + 22, S.splash.engine, { fontFamily: F.display, fontSize: '128px', fontStyle: '700', color: '#f1ece4' }).setOrigin(0.5).setLetterSpacing(22);
+    const made = txt(this, REF_W / 2, REF_H / 2 - 112, S.splash.made, { fontFamily: F.body, fontSize: '34px', fontStyle: '500', color: T.dim }).setOrigin(0.5).setLetterSpacing(14);
+    // the official pixel-art logo at a whole-number scale (4x = 832 x 200); the text wordmark if the file could not load
+    const word: Phaser.GameObjects.Image | Phaser.GameObjects.Text = this.textures.exists('phaser_logo')
+      ? this.add.image(REF_W / 2, REF_H / 2 + 6, 'phaser_logo').setScale(4).setTint(0xf1ece4)
+      : txt(this, REF_W / 2, REF_H / 2 + 6, S.splash.engine, { fontFamily: F.display, fontSize: '128px', fontStyle: '700', color: '#f1ece4' }).setOrigin(0.5).setLetterSpacing(22);
     const rule = this.add.rectangle(REF_W / 2, REF_H / 2 + 112, 520, 3, C.silver, 0.7).setScale(0.02, 1);
     const all = [made, word, rule];
     all.forEach((o) => o.setAlpha(0));
@@ -42,7 +45,8 @@ export class SplashScene extends Phaser.Scene {
     const calm = prefs().reducedMotion;
     this.tweens.add({ targets: all, alpha: 1, duration: FADE_IN, ease: 'Sine.easeOut' });
     this.tweens.add({ targets: rule, scaleX: 1, duration: FADE_IN + HOLD, ease: 'Cubic.easeInOut' });
-    if (!calm) this.tweens.add({ targets: word, scale: 1.035, duration: FADE_IN + HOLD + FADE_OUT, ease: 'Sine.easeInOut' });
+    // no scale drift on the pixel logo: a non-integer scale would blur it
+    void calm;
 
     const animation = new Promise<void>((resolve) => {
       this.time.delayedCall(FADE_IN + HOLD, () => {

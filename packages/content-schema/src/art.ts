@@ -38,7 +38,13 @@ export const ArtManifest = z
     portraits: z.record(Id, z.object({ emotions: z.record(z.string(), Id), images: z.record(Id, SafeAssetPath) }).strict()),
     backgrounds: z.record(Id, SafeAssetPath),
     music: z.record(Id, z.object({ file: SafeAssetPath, loop_start_s: z.number().min(0), duration_s: z.number().positive() }).strict()).default({}),
-    ui: z.record(Id, SafeAssetPath).default({})
+    ui: z.record(Id, SafeAssetPath).default({}),
+    /**
+     * Full-frame story art that is loaded on demand, never at boot: the prologue plates (`prologue_<scene id>`, optional family fallback
+     * `prologue_<visual>`) and the shared event illustrations (the narrative's `illustration_id`). Additive field with a default, so older
+     * manifests stay valid.
+     */
+    stills: z.record(Id, SafeAssetPath).default({})
   })
   .strict()
   .superRefine((art, ctx) => {

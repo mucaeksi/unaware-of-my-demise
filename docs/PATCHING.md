@@ -23,12 +23,32 @@ assigned) → `POST /releases/:id/publish` (re-validate, sign with the Worker se
 Rollback and kill switch create a **new higher generation** pointing at older files, so no device ever moves backwards.
 Production publish/rollback require the `owner` role.
 
-## Demonstrated (automated, local stack — `tests/e2e/game.spec.ts`)
-Installed client (base rel_0001: only tutorial T-1, no Hollow Pilgrim unit) → operator publishes `rel_0002` → "Check now" →
-chapter list shows **T-2** and a unit that does not exist in the app build → battle verified by the server against `rel_0002` →
-reload keeps the patch (IndexedDB) → rollback to base. Unit tests cover bad signature, tampered manifest, hostile paths,
-hash mismatch, flaky/interrupted downloads, client/channel/schema/dependency incompatibility, downgrade, storage budget,
-semantic validation failure, offline, rollout buckets, kill switch, on-disk corruption.
+## Staged releases (first install)
+`PatchManager.checkAndApply({ activate: false, onProgress })` downloads, verifies and validates a release and then **parks it as `state.staged`**
+instead of switching it on. The objects stay in storage (GC keeps active, previous and staged). The next start calls `activateStaged()`:
+it needs **no network**, re-checks every stored object's hash, re-runs the semantic validation over the exact file set, and activates
+atomically (a damaged stage is dropped, never half applied). Used by the first-install flow (`docs/GAME_FLOW.md`): the story and the three
+tutorials keep running on the content they started with while the rest of the game downloads; "Restart & Enter Game" is what activates it.
+`onProgress` reports `checking -> downloading (files/bytes, streamed) -> verifying -> activating`; `ApiRemote.fetchObject` streams the body so a
+single big object still moves the bar.
+
+## Content split (what ships in the app vs. what is a patch)
+- **Base release `rel_0001` (embedded in the app)**: the first-install flow only — `entry/entry_index.json`, `entry/prologue.json` (the 120 s
+  interlude, copied verbatim from the narrative), tutorials T-1..T-3 (stories, encounters with the `ui` block that hides speed/Auto), the four
+  units (Mahmut, Fadyme, Bellbound Dead, Hollow Pilgrim), their art, the tutorial chapter.
+- **Patches (everything after the first restart)**: `content/patches/rel_0003_part1_campaign` (35 stages, the full cast, balance, chapter index).
+  Built by `tools/build_campaign.ts` over the base; run `npm run build:content` first, then `npm run build:campaign`.
+- The former `rel_0002_road_forgotten` demo patch is retired: T-2 is part of the base now, and the campaign patch is the multi-file fixture
+  for the patch manager, publisher and e2e tests.
+
+## Demonstrated (automated, local stack — `tests/e2e/zz-campaign.spec.ts`, `tests/e2e/zzz-entry-flow.spec.ts`)
+Installed client (base: tutorial T-1..T-3 only) → operator publishes the campaign patch → "Check now" in the content-updates panel →
+the chapter list shows the whole campaign and units that do not exist in the app build → owned-hero battles verified by the server against
+the patched release → reload keeps the patch (IndexedDB) → rollback to base. First install: sign-in gate → patch downloads in the background
+(slowed on purpose) while the prologue and tutorials play → download page or confirmation → one restart activates the staged release.
+Unit tests cover bad signature, tampered manifest, hostile paths, hash mismatch, flaky/interrupted downloads, client/channel/schema/dependency
+incompatibility, downgrade, storage budget, semantic validation failure, offline, rollout buckets, kill switch, on-disk corruption, progress
+events, staged activation (offline), damaged stage, GC of staged objects.
 
 ## Compatibility matrix (current)
 | Client | Content schema | Notes |

@@ -132,7 +132,7 @@ async function boot(): Promise<Stack> {
   };
 }
 
-/** The Part I campaign (35 stages) as a data patch over the base release. */
-export function publishCampaign(adminJwt: string): Promise<void> {
-  return sh('npx', ['tsx', 'tools/publish_release.ts', '--admin', `http://127.0.0.1:${PORTS.admin}`, '--dir', 'content/patches/rel_0003_part1_campaign', '--id', 'rel_0003', '--channel', 'dev', '--depends', 'rel_0001', '--notes', 'Part I campaign', '--publish'], ROOT, { UOMD_ADMIN_JWT: adminJwt });
+/** The Part I campaign (35 stages) as a data patch over the base release. A release id can be published once per stack, so a later scenario passes its own. */
+export function publishCampaign(adminJwt: string, id = 'rel_0003'): Promise<void> {
+  return sh('npx', ['tsx', 'tools/publish_release.ts', '--admin', `http://127.0.0.1:${PORTS.admin}`, '--dir', 'content/patches/rel_0003_part1_campaign', '--id', id, '--channel', 'dev', '--depends', 'rel_0001', '--notes', 'Part I campaign', '--publish'], ROOT, { UOMD_ADMIN_JWT: adminJwt });
 }
