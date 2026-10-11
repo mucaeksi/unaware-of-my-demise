@@ -75,3 +75,11 @@ Once `CLOUDFLARE_API_TOKEN` (scopes above) is present: run workflow *Deploy Clou
 - Google generation: owner-approved **1000 TL/month** (recorded as $20/month, $3/batch, max 3 paid attempts per asset; enforced by `media_budget.json` + guard); tooling ready (`tools/gen_image.ts`, `tools/media_budget.ts`, `reference/`). The Gemini request shape has not been exercised against the live API.
 - Known open items (owner): Google budget amount; Neon project + legacy GitHub secrets + R2 backup token; Claude account Preferences still say Godot; visual canon (locked plum hood vs crimson chibi atlas in `content/base`); CI service token if releases should be published from GitHub (otherwise publish through the Access-protected admin UI/API).
 
+
+
+## Deploy path (since 2026-10-11): Cloudflare Workers Builds
+GitHub Actions on the owner's account is blocked by a billing/spending-limit state, so staging is deployed by **Cloudflare Workers Builds** (git integration, runs in Cloudflare, free build minutes; build token `unaware-of-my-demise-workers`).
+- Push to `main` -> two builds: **uomd-game-staging** (`npm ci && VITE_CONTENT_CHANNEL=staging npm run build -w @uomd/game`; deploy = D1 migrations + seeds + `wrangler deploy --env staging --keep-vars`) and **uomd-admin-staging** (`npm run build -w @uomd/admin`; deploy = `wrangler deploy -c wrangler.admin.jsonc --env staging --keep-vars`). Path filters skip narrative/docs-only pushes for the game Worker; the admin Worker also rebuilds on `docs/*` (the Development page reads them).
+- Configuration lives in Cloudflare (API: `/accounts/{id}/builds/workers/{script_tag}`), not in the repo. Public identifiers (Google client, Play package, RTDN identity) are in `apps/api/wrangler.game.jsonc`; secrets (Play service-account key, content signing key) stay as Worker secrets and survive deploys.
+- Verified 2026-10-11 on `7a43315`: both builds succeeded; staging answers the WebView CORS preflight for `https://localhost` only, health ok, 15 migrations, catalog seeded.
+- The old workflows (`deploy.yml`, `ci.yml`) are kept for when GitHub Actions is usable again; tests and e2e are run in the Claude sandbox meanwhile.
