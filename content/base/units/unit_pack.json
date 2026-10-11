@@ -403,6 +403,7 @@
           ]
         }
       ],
+      "faction_id": "hollow_host",
       "intent_skill_id": "bellbound_dead_tolling_grab",
       "art_key": "bellbound_dead",
       "provenance": {
@@ -453,12 +454,62 @@
     },
     "statuses": [
       {
+        "status_id": "burn",
+        "name_en": "Burn",
+        "kind": "damage_over_time",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "tags": [
+          "debuff",
+          "damage_over_time"
+        ],
+        "dot_atk_multiplier": 0.12
+      },
+      {
+        "status_id": "soaked",
+        "name_en": "Soaked",
+        "kind": "element_vulnerability_and_reaction",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "tags": [
+          "debuff"
+        ],
+        "element_damage_taken_multiplier": {
+          "Tide": 1.1
+        },
+        "reactions": [
+          {
+            "element": "Gale",
+            "name_en": "Crosscurrent",
+            "bonus_damage_multiplier": 0.15,
+            "consume_status": true
+          },
+          {
+            "element": "Ember",
+            "name_en": "Steamflare",
+            "bonus_damage_multiplier": 0.15,
+            "consume_status": true
+          }
+        ]
+      },
+      {
+        "status_id": "gust",
+        "name_en": "Gust",
+        "kind": "turn_delay",
+        "category": "debuff",
+        "default_duration_turns": 1,
+        "next_action_gauge_delay_fraction": 0.15
+      },
+      {
         "status_id": "fracture",
         "name_en": "Fracture",
         "kind": "defense_down",
         "category": "debuff",
         "default_duration_turns": 2,
-        "def_multiplier": 0.85
+        "def_multiplier": 0.85,
+        "tags": [
+          "debuff"
+        ]
       },
       {
         "status_id": "sanctuary",
@@ -467,7 +518,10 @@
         "category": "buff",
         "default_duration_turns": 2,
         "damage_taken_multiplier": 0.9,
-        "healing_received_multiplier": 1.1
+        "healing_received_multiplier": 1.1,
+        "tags": [
+          "buff"
+        ]
       },
       {
         "status_id": "dread",
@@ -476,7 +530,11 @@
         "category": "debuff",
         "default_duration_turns": 2,
         "outgoing_damage_multiplier": 0.9,
-        "focus_gain_multiplier": 0.8
+        "focus_gain_multiplier": 0.8,
+        "tags": [
+          "debuff",
+          "dread"
+        ]
       },
       {
         "status_id": "break",
@@ -485,7 +543,11 @@
         "category": "control",
         "default_duration_turns": 1,
         "damage_taken_multiplier": 1.2,
-        "skip_next_action": true
+        "skip_next_action": true,
+        "tags": [
+          "control",
+          "break"
+        ]
       },
       {
         "status_id": "decay",
@@ -493,7 +555,10 @@
         "kind": "healing_received_down",
         "category": "debuff",
         "default_duration_turns": 2,
-        "healing_received_multiplier": 0.5
+        "healing_received_multiplier": 0.5,
+        "tags": [
+          "debuff"
+        ]
       },
       {
         "status_id": "taunt",
@@ -501,7 +566,11 @@
         "kind": "target_redirect",
         "category": "buff",
         "default_duration_turns": 2,
-        "redirects_single_target_attacks": true
+        "redirects_single_target_attacks": true,
+        "tags": [
+          "buff",
+          "control"
+        ]
       },
       {
         "status_id": "stoneguard",
@@ -509,7 +578,78 @@
         "kind": "damage_reduction",
         "category": "buff",
         "default_duration_turns": 1,
-        "damage_taken_multiplier": 0.92
+        "damage_taken_multiplier": 0.92,
+        "tags": [
+          "buff"
+        ]
+      },
+      {
+        "status_id": "dawnward",
+        "name_en": "Dawnward",
+        "kind": "resistance_buff",
+        "category": "buff",
+        "default_duration_turns": 2,
+        "res_multiplier": 1.1,
+        "tags": [
+          "buff"
+        ]
+      },
+      {
+        "status_id": "trail_mark",
+        "name_en": "Trail Mark",
+        "kind": "target_priority_mark",
+        "category": "mark",
+        "default_duration_turns": 2,
+        "tags": [
+          "mark"
+        ]
+      },
+      {
+        "status_id": "duel_mark",
+        "name_en": "Duel Mark",
+        "kind": "target_priority_mark",
+        "category": "mark",
+        "default_duration_turns": 2,
+        "tags": [
+          "mark",
+          "duel"
+        ]
+      },
+      {
+        "status_id": "venom",
+        "name_en": "Venom",
+        "kind": "damage_over_time",
+        "category": "debuff",
+        "default_duration_turns": 2,
+        "tags": [
+          "debuff",
+          "poison"
+        ],
+        "dot_atk_multiplier": 0.1
+      },
+      {
+        "status_id": "soul_link",
+        "name_en": "Soul Link",
+        "kind": "damage_share",
+        "category": "buff",
+        "default_duration_turns": 2,
+        "tags": [
+          "buff"
+        ],
+        "shared_damage_cap_fraction": 0.15
+      },
+      {
+        "status_id": "soaked_immunity",
+        "name_en": "Dry Ward",
+        "kind": "status_immunity",
+        "category": "buff",
+        "default_duration_turns": 1,
+        "tags": [
+          "buff"
+        ],
+        "immune_status_ids": [
+          "soaked"
+        ]
       }
     ]
   }

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { Element, Id, SafeAssetPath } from './primitives';
-import { EffectOp, EventHook } from './effects';
+import { ContinuousModifier, EffectOp, EventHook } from './effects';
 
 export const SkillType = z.enum(['basic', 'active', 'passive', 'ultimate', 'signature']);
 export type SkillType = z.infer<typeof SkillType>;
@@ -13,14 +13,15 @@ export const SkillDef = z
     /** Overrides the unit element for this skill's damage; absent = the unit's own element. */
     element: Element.optional(),
     description_en: z.string().max(400),
-    /** Who the player must pick: a single enemy, or nothing (the effect selectors resolve the rest). */
-    player_target: z.enum(['enemy', 'none']),
+    /** Who the player must pick: a single enemy, a single ally, or nothing (the effect selectors resolve the rest). */
+    player_target: z.enum(['enemy', 'ally', 'none']),
     cooldown_turns: z.number().int().min(0).max(10),
     focus_cost: z.number().int().min(0).max(100),
     /** Higher = preferred by enemy AI / Auto Battle when several skills are ready. */
     ai_priority: z.number().int().min(0).max(100),
     effect_ops: z.array(EffectOp).max(8),
     event_hooks: z.array(EventHook).max(4).optional(),
+    continuous_modifiers: z.array(ContinuousModifier).max(4).optional(),
     icon: z.string().max(80).optional()
   })
   .strict();
@@ -56,6 +57,11 @@ export const UnitDef = z
     weaknesses: z.array(Element).optional(),
     resistances: z.array(Element).optional(),
     skills: z.array(SkillDef).min(1).max(8),
+    /** Hooks / always-on rules that belong to the unit rather than to one of its skills (enemy passives). */
+    passive_hooks: z.array(EventHook).max(4).optional(),
+    continuous_modifiers: z.array(ContinuousModifier).max(4).optional(),
+    faction_id: Id.optional(),
+    status_immunities: z.array(Id).max(8).optional(),
     /** Enemy intent shown to the player before the action resolves. */
     intent_skill_id: Id.optional(),
     /** Key into the art manifest. */
@@ -78,7 +84,20 @@ export const StatusDef = z
     def_multiplier: z.number().positive().optional(),
     focus_gain_multiplier: z.number().positive().optional(),
     skip_next_action: z.boolean().optional(),
-    redirects_single_target_attacks: z.boolean().optional()
+    redirects_single_target_attacks: z.boolean().optional(),
+    res_multiplier: z.number().positive().optional(),
+    tags: z.array(Id).max(6).optional(),
+    /** Damage over time: source ATK x this, dealt at the owner's turn start (shields absorb, no focus, no hooks). */
+    dot_atk_multiplier: z.number().positive().optional(),
+    /** Per element, extra damage taken while the status lasts. */
+    element_damage_taken_multiplier: z.partialRecord(Element, z.number().positive()).optional(),
+    /** Hit by one of these elements: +bonus damage and (optionally) the status is consumed. */
+    reactions: z.array(z.object({ element: Element, name_en: z.string(), bonus_damage_multiplier: z.number().min(0).max(1), consume_status: z.boolean() }).strict()).max(4).optional(),
+    /** Applying it delays the target's next action by this fraction of the gauge. */
+    next_action_gauge_delay_fraction: z.number().min(0).max(1).optional(),
+    immune_status_ids: z.array(Id).max(4).optional(),
+    /** soul_link: cap on the damage shared per hit, as a fraction of the damaged unit's max HP. */
+    shared_damage_cap_fraction: z.number().min(0).max(1).optional()
   })
   .strict();
 export type StatusDef = z.infer<typeof StatusDef>;

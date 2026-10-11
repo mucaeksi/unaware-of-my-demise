@@ -158,8 +158,8 @@
     },
     {
       "path": "units/unit_pack.json",
-      "sha256": "d2cf29d60af57f600ad0962d072b6209a71ce2b74320b7f4bf864e4706614dc7",
-      "bytes": 15709,
+      "sha256": "ac7b401bff70edb2873c300f47b9581aadc15d4d2cde5ac2e1e84dc8d791917a",
+      "bytes": 18933,
       "media_type": "application/json",
       "kind": "unit_pack"
     }

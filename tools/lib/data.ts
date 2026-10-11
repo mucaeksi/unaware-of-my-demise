@@ -21,16 +21,12 @@ type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-ex
 
 const srcHash = (rel: string): string => sha256(fileBytes(`${NARR}/${rel}`));
 
-/** Statuses the shipped engine implements; the rest stay out of runtime packs until supported. */
-const SUPPORTED_STATUSES = new Set(['dread', 'stoneguard', 'taunt', 'break', 'decay', 'fracture', 'sanctuary']);
-
 export function buildRules(): RulesDef {
   const rules = readJson<Json>(`${NARR}/content/battle_rules_part1.json`);
   const statuses: StatusDef[] = [];
   for (const s of rules.statuses as Json[]) {
-    if (!SUPPORTED_STATUSES.has(s.status_id)) continue;
     const tags: string[] = s.tags ?? [];
-    const category = tags.includes('control') && !tags.includes('buff') ? 'control' : tags.includes('buff') ? 'buff' : 'debuff';
+    const category = tags.includes('control') && !tags.includes('buff') ? 'control' : tags.includes('buff') ? 'buff' : tags.includes('mark') ? 'mark' : 'debuff';
     const def: Record<string, unknown> = {
       status_id: s.status_id,
       name_en: s.name_en,
@@ -38,11 +34,22 @@ export function buildRules(): RulesDef {
       category,
       default_duration_turns: s.default_duration_turns
     };
+    if (tags.length) def.tags = tags;
     for (const k of ['outgoing_damage_multiplier', 'damage_taken_multiplier', 'healing_received_multiplier', 'def_multiplier', 'focus_gain_multiplier'] as const) {
       if (typeof s[k] === 'number') def[k] = s[k];
     }
     if (s.skip_next_action === true) def.skip_next_action = true;
     if (s.redirects_eligible_single_target_attacks === true) def.redirects_single_target_attacks = true;
+    // `resistance_bonus_pct` (Dawnward) is a percentage bonus to RES
+    if (typeof s.resistance_bonus_pct === 'number') def.res_multiplier = 1 + s.resistance_bonus_pct;
+    if (typeof s.source_atk_multiplier_per_tick === 'number') def.dot_atk_multiplier = s.source_atk_multiplier_per_tick;
+    if (s.element_damage_taken_multiplier) def.element_damage_taken_multiplier = s.element_damage_taken_multiplier;
+    if (s.reaction_triggers) {
+      def.reactions = (s.reaction_triggers as Json[]).map((r) => ({ element: r.element, name_en: r.name_en, bonus_damage_multiplier: r.bonus_damage_multiplier, consume_status: r.consume_status === true }));
+    }
+    if (typeof s.next_action_gauge_delay_fraction === 'number') def.next_action_gauge_delay_fraction = s.next_action_gauge_delay_fraction;
+    if (s.immune_status_ids) def.immune_status_ids = s.immune_status_ids;
+    if (typeof s.maximum_shared_damage_per_hit_pct_of_max_hp === 'number') def.shared_damage_cap_fraction = s.maximum_shared_damage_per_hit_pct_of_max_hp;
     statuses.push(def as unknown as StatusDef);
   }
   const dmg = rules.damage;
@@ -88,6 +95,16 @@ function convertHook(h: Json): Json {
   return out;
 }
 
+/**
+ * Where the machine-readable hook contradicts the player-facing description, the description wins and the
+ * correction is listed here (and in docs/COMBAT_RULES.md): Keep the Names promises "the first ALLIED attack".
+ */
+const HOOK_OVERRIDES: Record<string, (h: Json) => void> = {
+  clem_marr_passive_keep_the_names: (h) => {
+    h.event_filter = { ...(h.event_filter ?? {}), team: 'player' };
+  }
+};
+
 function characterSkill(s: Json): SkillDef {
   const out: Json = {
     skill_id: s.skill_id,
@@ -95,13 +112,17 @@ function characterSkill(s: Json): SkillDef {
     type: s.type,
     element: s.element,
     description_en: s.description_en,
-    player_target: s.target_rule === 'single_enemy' ? 'enemy' : 'none',
+    player_target: s.target_rule === 'single_enemy' ? 'enemy' : s.target_rule === 'single_ally' ? 'ally' : 'none',
     cooldown_turns: s.cooldown_turns ?? 0,
     focus_cost: s.focus_cost ?? 0,
     ai_priority: s.auto_priority ?? 0,
     effect_ops: (s.effect_ops as Json[]).map(convertOp)
   };
-  if (s.event_hooks?.length) out.event_hooks = (s.event_hooks as Json[]).map(convertHook);
+  if (s.event_hooks?.length) {
+    out.event_hooks = (s.event_hooks as Json[]).map(convertHook);
+    HOOK_OVERRIDES[s.skill_id]?.((out.event_hooks as Json[])[0] as Json);
+  }
+  if (s.continuous_modifiers?.length) out.continuous_modifiers = s.continuous_modifiers;
   return SkillDef.parse(out);
 }
 
@@ -154,6 +175,10 @@ export function buildEnemy(id: string): UnitDef {
     weaknesses: e.weaknesses,
     resistances: e.resistances,
     skills,
+    passive_hooks: e.passive_hooks?.length ? (e.passive_hooks as Json[]).map(convertHook) : undefined,
+    continuous_modifiers: e.continuous_modifiers?.length ? e.continuous_modifiers : undefined,
+    faction_id: e.faction_id,
+    status_immunities: e.status_immunities?.length ? e.status_immunities : undefined,
     intent_skill_id: e.intent?.action_id,
     art_key: e.enemy_id,
     provenance: { source: `${NARR}/content/enemies_part1.json#${id}`, source_sha256: srcHash('content/enemies_part1.json') }

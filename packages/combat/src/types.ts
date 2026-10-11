@@ -9,6 +9,10 @@ export interface StatusInstance {
   turnsLeft: number;
   sourceId: string;
   seq: number;
+  /** soul_link: shared fraction. */
+  value?: number;
+  /** damage over time: source ATK snapshot taken when applied. */
+  power?: number;
 }
 export interface StatMod {
   stat: StatKey;
@@ -25,6 +29,33 @@ export interface RedirectInstance {
   fraction: number;
   turnsLeft: number;
   eligible: readonly string[];
+  /** grant_intercept: remaining interceptions. */
+  hitsLeft?: number;
+}
+export interface RegenInstance {
+  sourceId: string;
+  amount: number;
+  ticksLeft: number;
+  turnsLeft: number;
+}
+export interface DamageReduction {
+  mult: number;
+  turnsLeft: number;
+  /** first-hit guards disappear after this many hits. */
+  hitsLeft?: number;
+}
+export interface OpeningGuard {
+  mult: number;
+  roundsLeft: number;
+  /** enemies whose first single-target attack was already redirected. */
+  used: string[];
+}
+export interface CounterInstance {
+  ownerId: string;
+  scaleStat: 'atk' | 'def' | 'hp';
+  multiplier: number;
+  damageType: 'physical' | 'magic' | 'elemental';
+  consume: boolean;
 }
 
 export interface Combatant {
@@ -46,8 +77,18 @@ export interface Combatant {
   mods: StatMod[];
   shields: ShieldInstance[];
   redirects: RedirectInstance[];
+  regens: RegenInstance[];
+  reductions: DamageReduction[];
+  openingGuard: OpeningGuard | null;
+  counters: CounterInstance[];
+  nextAttackBonus: number | null;
+  acted: boolean;
+  tookDamageThisRound: boolean;
+  lastHealTarget: string | null;
   hookBattleCount: Record<string, number>;
   hookTurnCount: Record<string, number>;
+  hookRoundCount: Record<string, number>;
+  hookTargetCount: Record<string, number>;
   alive: boolean;
 }
 
@@ -67,6 +108,8 @@ export type BattleEvent =
       elementMultiplier: number;
       redirectedFrom?: string;
       counter?: boolean;
+      /** damage over time / soul-link share: the status that caused it. */
+      dot?: string;
     }
   | { type: 'heal'; source: string; target: string; amount: number; hpAfter: number }
   | { type: 'shield'; source: string; target: string; amount: number }
@@ -77,6 +120,13 @@ export type BattleEvent =
   | { type: 'redirect_granted'; protector: string; protected: string; fraction: number; turns: number }
   | { type: 'hook_triggered'; unit: string; skill: string; event: string }
   | { type: 'defeat'; unit: string }
+  | { type: 'hp_cost'; unit: string; amount: number; hpAfter: number }
+  | { type: 'blocked'; unit: string; source: string }
+  | { type: 'delay'; unit: string; fraction: number }
+  | { type: 'shield_removed'; unit: string; amount: number }
+  | { type: 'buff_copied'; source: string; target: string; what: string }
+  | { type: 'reaction'; unit: string; name: string; bonus: number }
+  | { type: 'round_end'; round: number }
   | { type: 'battle_end'; winner: Side; stars: 0 | 1 | 2 | 3 };
 
 export interface SkillOption {

@@ -118,7 +118,7 @@
     },
     {
       "output": "content/base/units/unit_pack.json",
-      "sha256": "d2cf29d60af57f600ad0962d072b6209a71ce2b74320b7f4bf864e4706614dc7",
+      "sha256": "ac7b401bff70edb2873c300f47b9581aadc15d4d2cde5ac2e1e84dc8d791917a",
       "sources": {
         "narrative": "characters_part1.json,enemies_part1.json,battle_rules_part1.json"
       }
@@ -273,7 +273,7 @@
     },
     {
       "output": "content/patches/rel_0002_road_forgotten/units/unit_pack.json",
-      "sha256": "58ae2f79269733a96259ef65574a800dd123c3c69db4114eeb0474d214efbace",
+      "sha256": "4ca93ee4da627e276cd8bb38fb56a04c9d293c0f33ca76cf76032cf9e3e70453",
       "sources": {
         "narrative": "characters_part1.json,enemies_part1.json,battle_rules_part1.json"
       }

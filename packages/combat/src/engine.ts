@@ -1,4 +1,4 @@
-import type { EffectOp, Element, Encounter, EventHook, Predicate, RulesDef, SkillDef, StatusDef, TargetSelector, UnitDef, UnitPack } from '@uomd/content-schema';
+import type { ContinuousModifier, EffectOp, Element, Encounter, EventHook, HookEvent, Predicate, RulesDef, SkillDef, StatusDef, TargetSelector, UnitDef, UnitPack } from '@uomd/content-schema';
 import { Rng } from '@uomd/shared';
 import {
   IllegalActionError,
@@ -10,6 +10,7 @@ import {
   type Side,
   type SkillOption,
   type StatKey,
+  type StatusInstance,
   type StepResult,
   type TurnPrompt
 } from './types';
@@ -21,6 +22,17 @@ const roundHalfUp = (x: number): number => Math.floor(x + 0.5 + 1e-9);
 
 type ActionKind = 'basic' | 'active' | 'ultimate' | 'signature';
 
+/** One damage packet while it is being resolved; hooks and continuous modifiers scale it before it lands. */
+interface Packet {
+  source: Combatant;
+  target: Combatant;
+  outMult: number;
+  inMult: number;
+  blocked: boolean;
+  /** null for counters, damage over time and shared damage. */
+  actionKind: ActionKind | null;
+}
+
 interface Ctx {
   actor: Combatant;
   skill: SkillDef;
@@ -28,10 +40,43 @@ interface Ctx {
   prev: Combatant[];
   lastTargets: Combatant[];
   removedStacks: number;
+  /** the unit that caused the event (the attacker, the healer, the defeater) */
   eventSource: Combatant | null;
+  /** the unit the event is about (the damaged / healed / defeated unit) */
+  eventTarget: Combatant | null;
+  eventActor: Combatant | null;
   inHook: boolean;
+  /** true: no hook or continuous-modifier hook fires from effects in this context */
+  suppressHooks: boolean;
   actionKind: ActionKind | null;
+  actionId: number;
+  primary: Combatant | null;
+  packet: Packet | null;
+  lastDamage: number;
+  lastDamageTarget: Combatant | null;
+  healed: Combatant[];
+  /** opening guards that redirected this action's single-target hit: guard owner id -> damage multiplier */
+  guarded: Map<string, number>;
+  attackBonus: number | null;
+  targetStatuses: string[];
 }
+
+interface HookInfo {
+  actor: Combatant | null;
+  target: Combatant | null;
+  actionKind: ActionKind | null;
+  actionId: number;
+  packet: Packet | null;
+  targetStatuses?: string[];
+}
+
+interface HookEntry {
+  key: string;
+  skill: SkillDef;
+  hook: EventHook;
+}
+
+const ATTACK_KINDS: readonly ActionKind[] = ['basic', 'active', 'ultimate', 'signature'];
 
 /**
  * Deterministic 5v5 turn-based battle core (rules: narrative battle_rules_part1.json, interpreted in
@@ -46,6 +91,11 @@ export class Battle {
   private readonly statusDefs = new Map<string, StatusDef>();
   private readonly rng: Rng;
   private statusSeq = 0;
+  private actionSeq = 0;
+  private round = 1;
+  private readonly actedThisRound = new Set<string>();
+  private readonly actionMarks = new Map<string, number>();
+  private readonly hookCache = new WeakMap<UnitDef, { hooks: HookEntry[]; mods: ContinuousModifier[] }>();
   private turnCounter = 0;
   private current: Combatant | null = null;
   private outcome: BattleResult | null = null;
@@ -105,8 +155,18 @@ export class Battle {
       mods: [],
       shields: [],
       redirects: [],
+      regens: [],
+      reductions: [],
+      openingGuard: null,
+      counters: [],
+      nextAttackBonus: null,
+      acted: false,
+      tookDamageThisRound: false,
+      lastHealTarget: null,
       hookBattleCount: {},
       hookTurnCount: {},
+      hookRoundCount: {},
+      hookTargetCount: {},
       alive: true
     };
   }
@@ -144,9 +204,13 @@ export class Battle {
       if (m.mode === 'add_flat') flat += m.amount;
       else pct += m.amount;
     }
+    pct += this.snapshotPct(c, stat);
     let value = (baseVal + flat) * (1 + pct);
     if (stat === 'def' || (stat === 'res' && c.base.res === null)) {
       for (const s of c.statuses) value *= this.statusDefs.get(s.statusId)?.def_multiplier ?? 1;
+    }
+    if (stat === 'res') {
+      for (const s of c.statuses) value *= this.statusDefs.get(s.statusId)?.res_multiplier ?? 1;
     }
     const min = stat === 'spd' ? 1 : 0;
     return Math.max(min, roundHalfUp(value));
@@ -166,13 +230,65 @@ export class Battle {
     return c.statuses.some((s) => s.statusId === id);
   }
 
+  private hasTag(c: Combatant, tag: string): boolean {
+    return c.statuses.some((s) => this.statusDefs.get(s.statusId)?.tags?.includes(tag));
+  }
+
+  private buffCount(c: Combatant): number {
+    let n = c.statuses.filter((s) => this.statusDefs.get(s.statusId)?.category === 'buff').length;
+    n += c.mods.filter((m) => m.amount > 0).length;
+    n += c.shields.filter((s) => s.amount > 0).length;
+    return n;
+  }
+
+  // ---------------------------------------------------------------- hooks and modifiers of a unit
+
+  private rulesOf(u: Combatant): { hooks: HookEntry[]; mods: ContinuousModifier[] } {
+    let r = this.hookCache.get(u.def);
+    if (!r) {
+      const hooks: HookEntry[] = [];
+      const mods: ContinuousModifier[] = [];
+      for (const skill of u.def.skills) {
+        for (const [i, hook] of (skill.event_hooks ?? []).entries()) hooks.push({ key: `${skill.skill_id}:${i}`, skill, hook });
+        mods.push(...(skill.continuous_modifiers ?? []));
+      }
+      const first = u.def.skills[0];
+      if (first) for (const [i, hook] of (u.def.passive_hooks ?? []).entries()) hooks.push({ key: `unit:${i}`, skill: first, hook });
+      mods.push(...(u.def.continuous_modifiers ?? []));
+      r = { hooks, mods };
+      this.hookCache.set(u.def, r);
+    }
+    return r;
+  }
+
+  /** Percent stat bonuses granted by living allies' always-on rules (e.g. Marek's Watchman's Rhythm). */
+  private snapshotPct(c: Combatant, stat: 'atk' | 'def' | 'spd' | 'res'): number {
+    let pct = 0;
+    for (const u of this.combatants) {
+      if (!u.alive || u.side !== c.side) continue;
+      for (const m of this.rulesOf(u).mods) {
+        if (m.event !== 'stat_snapshot' || m.stat_id !== stat) continue;
+        const hit = m.target === 'self' ? u === c : m.target === 'all_allies' ? true : c.row === 'front';
+        if (hit && this.holds(m.condition, this.bareCtx(u), u)) pct += m.amount;
+      }
+    }
+    return pct;
+  }
+
   /** Single-target attacks must pick a living front-row unit while one exists. */
   legalEnemyTargets(actor: Combatant): Combatant[] {
+    const guard = this.guardOwner(actor);
+    if (guard) return [guard];
     const opp = this.opponents(actor);
     const front = opp.filter((o) => o.row === 'front');
     const pool = front.length > 0 ? front : opp;
     const taunter = this.tauntSource(actor);
     return taunter ? [taunter] : pool;
+  }
+
+  /** An opposing unit whose opening guard has not yet caught this actor's first single-target attack. */
+  private guardOwner(actor: Combatant): Combatant | null {
+    return this.opponents(actor).find((c) => c.openingGuard !== null && c.openingGuard.roundsLeft > 0 && !c.openingGuard.used.includes(actor.id)) ?? null;
   }
 
   private tauntSource(actor: Combatant): Combatant | null {
@@ -285,7 +401,7 @@ export class Battle {
     const actor = this.current;
     if (!actor) throw new IllegalActionError('no player turn is pending');
     const skill = this.validate(actor, action);
-    this.executeSkill(actor, skill, skill.player_target === 'enemy' ? this.unit(action.targetId as string) : null);
+    this.executeSkill(actor, skill, skill.player_target !== 'none' ? this.unit(action.targetId as string) : null);
     this.finishTurn(actor);
     this.current = null;
     return this.runUntilInput(start);
@@ -354,6 +470,25 @@ export class Battle {
     actor.gauge -= this.threshold(actor);
     actor.pendingDelay = 0;
     this.checkEnd();
+    if (!this.outcome) this.trackRound(actor);
+  }
+
+  /**
+   * A round ends once every unit that is alive has taken a turn since the last one ended. Round-scoped
+   * rules (round_number_at_most, once-per-round hooks, "took no damage this round", opening guards) key off this.
+   */
+  private trackRound(actor: Combatant): void {
+    this.actedThisRound.add(actor.id);
+    if (!this.combatants.every((c) => !c.alive || this.actedThisRound.has(c.id))) return;
+    this.fire('after_round_end', { actor: null, target: null, actionKind: null, actionId: 0, packet: null });
+    this.emit({ type: 'round_end', round: this.round });
+    this.round++;
+    this.actedThisRound.clear();
+    for (const c of this.combatants) {
+      c.tookDamageThisRound = false;
+      c.hookRoundCount = {};
+      if (c.openingGuard && --c.openingGuard.roundsLeft <= 0) c.openingGuard = null;
+    }
   }
 
   private checkEnd(): void {
@@ -388,6 +523,8 @@ export class Battle {
       const v = actor.cooldowns[k] ?? 0;
       if (v > 0) actor.cooldowns[k] = v - 1;
     }
+    // a damage-over-time status ticks once per turn it was alive for, including the turn it expires on
+    const dots = actor.statuses.filter((s) => this.statusDefs.get(s.statusId)?.dot_atk_multiplier !== undefined).map((s) => ({ ...s }));
     for (const s of [...actor.statuses]) {
       s.turnsLeft -= 1;
       if (s.turnsLeft <= 0) {
@@ -397,10 +534,30 @@ export class Battle {
     }
     actor.mods = actor.mods.filter((m) => --m.turnsLeft > 0);
     actor.shields = actor.shields.filter((s) => --s.turnsLeft > 0);
-    for (const c of this.combatants) c.redirects = c.redirects.filter((r) => (r.protectorId === actor.id ? --r.turnsLeft > 0 : true));
+    actor.reductions = actor.reductions.filter((r) => --r.turnsLeft > 0);
+    for (const c of this.combatants) {
+      c.redirects = c.redirects.filter((r) => (r.protectorId === actor.id ? --r.turnsLeft > 0 : true));
+      // a counter armed by this unit lapses when its next turn begins
+      c.counters = c.counters.filter((k) => k.ownerId !== actor.id);
+    }
     actor.hookTurnCount = {};
     actor.focusGainedThisTurn = 0;
-    this.fireHooks(actor, 'owner_turn_start', null, null);
+    for (const s of dots) {
+      if (!actor.alive) break;
+      const d = this.statusDefs.get(s.statusId);
+      if (!d || d.dot_atk_multiplier === undefined) continue;
+      this.receive(null, this.combatants.find((c) => c.id === s.sourceId) ?? actor, actor, Math.max(1, Math.floor((s.power ?? 0) * d.dot_atk_multiplier + 1e-9)), { dot: s.statusId });
+    }
+    for (const r of [...actor.regens]) {
+      if (!actor.alive) break;
+      r.turnsLeft -= 1;
+      if (r.ticksLeft > 0) {
+        r.ticksLeft -= 1;
+        this.healUnit(this.combatants.find((c) => c.id === r.sourceId) ?? actor, actor, Math.floor(r.amount * this.statusProduct(actor, 'healing_received_multiplier')), null);
+      }
+      if (r.ticksLeft <= 0 || r.turnsLeft <= 0) actor.regens.splice(actor.regens.indexOf(r), 1);
+    }
+    if (actor.alive) this.fire('owner_turn_start', { actor, target: null, actionKind: null, actionId: 0, packet: null });
   }
 
   private consumeSkip(actor: Combatant): string | null {
@@ -431,7 +588,7 @@ export class Battle {
       .filter((s) => s.type !== 'passive')
       .map((s) => {
         const u = this.usable(actor, s);
-        const needsTarget = s.player_target === 'enemy';
+        const needsTarget = s.player_target !== 'none';
         const option: SkillOption = {
           skillId: s.skill_id,
           name: s.name_en,
@@ -439,7 +596,7 @@ export class Battle {
           available: u.ok,
           cooldownLeft: actor.cooldowns[s.skill_id] ?? 0,
           needsTarget,
-          legalTargets: needsTarget ? this.legalEnemyTargets(actor).map((t) => t.id) : [],
+          legalTargets: s.player_target === 'enemy' ? this.legalEnemyTargets(actor).map((t) => t.id) : s.player_target === 'ally' ? this.allies(actor).map((t) => t.id) : [],
           def: s
         };
         if (u.reason) option.reason = u.reason;
@@ -453,8 +610,8 @@ export class Battle {
     if (!skill || skill.type === 'passive') throw new IllegalActionError(`unit ${actor.id} cannot use ${action.skillId}`);
     const u = this.usable(actor, skill);
     if (!u.ok) throw new IllegalActionError(`skill ${skill.skill_id} unavailable: ${u.reason}`);
-    if (skill.player_target === 'enemy') {
-      const legal = this.legalEnemyTargets(actor).map((t) => t.id);
+    if (skill.player_target !== 'none') {
+      const legal = (skill.player_target === 'enemy' ? this.legalEnemyTargets(actor) : this.allies(actor)).map((t) => t.id);
       if (!action.targetId || !legal.includes(action.targetId)) throw new IllegalActionError(`illegal target ${action.targetId ?? '(none)'} for ${skill.skill_id}`);
     } else if (action.targetId !== undefined) {
       throw new IllegalActionError(`skill ${skill.skill_id} takes no target`);
@@ -485,39 +642,100 @@ export class Battle {
 
   // ---------------------------------------------------------------- execution
 
+  private newCtx(actor: Combatant, skill: SkillDef, over: Partial<Ctx> = {}): Ctx {
+    return {
+      actor,
+      skill,
+      chosen: null,
+      prev: [],
+      lastTargets: [],
+      removedStacks: 0,
+      eventSource: null,
+      eventTarget: null,
+      eventActor: null,
+      inHook: false,
+      suppressHooks: false,
+      actionKind: null,
+      actionId: 0,
+      primary: null,
+      packet: null,
+      lastDamage: 0,
+      lastDamageTarget: null,
+      healed: [],
+      guarded: new Map(),
+      attackBonus: null,
+      targetStatuses: [],
+      ...over
+    };
+  }
+
+  /** A context with no action behind it, for evaluating always-on rules. */
+  private bareCtx(owner: Combatant, over: Partial<Ctx> = {}): Ctx {
+    return this.newCtx(owner, owner.def.skills[0] as SkillDef, over);
+  }
+
   private executeSkill(actor: Combatant, skill: SkillDef, chosen: Combatant | null): void {
     const kind = skill.type === 'passive' ? null : (skill.type as ActionKind);
-    const ctx: Ctx = { actor, skill, chosen, prev: [], lastTargets: [], removedStacks: 0, eventSource: null, inHook: false, actionKind: kind };
+    if (!this.triggerCounters(actor)) return;
+    actor.acted = true;
+    const ctx = this.newCtx(actor, skill, { chosen, actionKind: kind, actionId: ++this.actionSeq });
+    const attacks = skill.effect_ops.some((o) => o.op === 'damage');
+    if (attacks && actor.nextAttackBonus !== null) {
+      ctx.attackBonus = actor.nextAttackBonus;
+      actor.nextAttackBonus = null;
+    }
     const firstOp = skill.effect_ops[0];
-    const shown = firstOp ? this.resolve(firstOp.target_selector_id, ctx) : [];
+    const shown = firstOp ? this.resolve(firstOp.target_selector_id, ctx, true) : [];
     this.emit({ type: 'skill_used', actor: actor.id, skill: skill.skill_id, skillType: skill.type, targets: shown.map((t) => t.id) });
     if (skill.type === 'ultimate') actor.focus = Math.max(0, actor.focus - skill.focus_cost);
     for (const op of skill.effect_ops) this.applyOp(op, ctx);
     if (skill.type === 'basic') this.addFocus(actor, this.rules.focus.basic_gain, true);
     else if (skill.type === 'active') this.addFocus(actor, this.rules.focus.active_gain, true);
     if (skill.cooldown_turns > 0) actor.cooldowns[skill.skill_id] = skill.cooldown_turns;
+    if (kind && actor.alive) {
+      const info: HookInfo = { actor, target: null, actionKind: kind, actionId: ctx.actionId, packet: null };
+      this.fire('after_ally_action', info);
+      if (kind === 'ultimate') this.fire('after_ally_ultimate', info);
+    }
   }
 
-  private resolve(sel: TargetSelector, ctx: Ctx): Combatant[] {
+  /** Counters armed on the acting unit fire before its action; false = it died to the counter. */
+  private triggerCounters(actor: Combatant): boolean {
+    for (const c of [...actor.counters]) {
+      actor.counters.splice(actor.counters.indexOf(c), 1);
+      const owner = this.combatants.find((u) => u.id === c.ownerId);
+      if (!owner || !owner.alive) continue;
+      const cctx = this.newCtx(owner, owner.def.skills[0] as SkillDef, { inHook: true, suppressHooks: true, eventSource: actor, eventTarget: actor });
+      this.applyOp(
+        { op: 'damage', target_selector_id: 'event_source', damage_type: c.damageType, scale_stat: c.scaleStat, multiplier: c.multiplier, no_focus_gain: true },
+        cctx
+      );
+      if (!actor.alive) return false;
+    }
+    return true;
+  }
+
+  private resolve(sel: TargetSelector, ctx: Ctx, peek = false): Combatant[] {
     const a = ctx.actor;
+    const opp = (): Combatant[] => this.opponents(a);
     switch (sel) {
       case 'single_enemy': {
         const chosen = ctx.chosen;
         if (!chosen) return [];
         const taunter = this.tauntSource(a);
         const t = taunter ?? chosen;
-        return t.alive ? [t] : [];
+        return t.alive ? [this.guarded(ctx, a, t, peek)] : [];
       }
       case 'single_enemy_default': {
         const t = this.pickDefaultTarget(a);
-        return t ? [t] : [];
+        return t ? [this.guarded(ctx, a, t, peek)] : [];
       }
       case 'all_enemies':
-        return this.opponents(a);
+        return opp();
       case 'front_row_enemies':
-        return this.opponents(a).filter((c) => c.row === 'front');
+        return opp().filter((c) => c.row === 'front');
       case 'rear_row_enemies':
-        return this.opponents(a).filter((c) => c.row === 'rear');
+        return opp().filter((c) => c.row === 'rear');
       case 'self':
         return a.alive ? [a] : [];
       case 'lowest_hp_ally':
@@ -534,25 +752,134 @@ export class Battle {
         return ctx.prev.filter((c) => c.alive);
       case 'event_source':
         return ctx.eventSource && ctx.eventSource.alive ? [ctx.eventSource] : [];
+      case 'event_target':
+        return ctx.eventTarget && ctx.eventTarget.alive ? [ctx.eventTarget] : [];
+      case 'selected_ally':
+        return ctx.chosen && ctx.chosen.alive ? [ctx.chosen] : [];
+      case 'last_heal_target': {
+        const fromAction = ctx.healed.filter((c) => c.alive);
+        if (fromAction.length > 0) return fromAction;
+        const remembered = this.combatants.find((c) => c.id === a.lastHealTarget && c.alive);
+        return remembered ? [remembered] : [];
+      }
+      case 'ally_with_lowest_focus':
+        return [...this.allies(a)].sort((x, y) => x.focus - y.focus || x.slot - y.slot || (x.id < y.id ? -1 : 1)).slice(0, 1);
+      case 'front_row_allies':
+        return this.allies(a).filter((c) => c.row === 'front');
+      case 'random_other_enemy': {
+        if (peek) return [];
+        const skip = ctx.primary ?? ctx.eventTarget;
+        const pool = opp().filter((c) => c !== skip);
+        if (pool.length === 0) return [];
+        const pick = pool[Math.min(pool.length - 1, Math.floor(this.rng.next() * pool.length))];
+        return pick ? [pick] : [];
+      }
+      case 'enemy_with_lowest_def':
+        return [...opp()].sort((x, y) => this.effStat(x, 'def') - this.effStat(y, 'def') || x.slot - y.slot || (x.id < y.id ? -1 : 1)).slice(0, 1);
+      case 'enemy_with_highest_atk':
+        return [...opp()].sort((x, y) => this.effStat(y, 'atk') - this.effStat(x, 'atk') || x.slot - y.slot || (x.id < y.id ? -1 : 1)).slice(0, 1);
+      case 'enemy_with_most_buffs': {
+        const best = [...opp()].sort((x, y) => this.buffCount(y) - this.buffCount(x) || x.slot - y.slot || (x.id < y.id ? -1 : 1))[0];
+        return best && this.buffCount(best) > 0 ? [best] : [];
+      }
+      case 'lowest_hp_enemy':
+        return this.byLowestHp(opp()).slice(0, 1);
+      // a row-bound pick falls back to the whole opposing side when that row is empty, so a skill is never wasted
+      case 'lowest_hp_front_enemy': {
+        const row = opp().filter((c) => c.row === 'front');
+        return this.byLowestHp(row.length > 0 ? row : opp()).slice(0, 1);
+      }
+      case 'lowest_hp_rear_enemy': {
+        const row = opp().filter((c) => c.row === 'rear');
+        return this.byLowestHp(row.length > 0 ? row : opp()).slice(0, 1);
+      }
+      case 'all_enemy_allies':
+        return this.allies(a);
+      case 'lowest_hp_enemy_ally':
+        return this.byLowestHp(this.allies(a).filter((c) => c !== a)).slice(0, 1);
+      case 'most_injured_enemy_ally':
+        return [...this.allies(a).filter((c) => c !== a)].sort((x, y) => x.hp / x.maxHp - y.hp / y.maxHp || x.slot - y.slot || (x.id < y.id ? -1 : 1)).slice(0, 1);
     }
+  }
+
+  /** Opening guards (Nara's ultimate) take over each enemy's first single-target attack and soften it. */
+  private guarded(ctx: Ctx, attacker: Combatant, target: Combatant, peek: boolean): Combatant {
+    const g = target.openingGuard;
+    if (peek || target.side === attacker.side || !g || g.roundsLeft <= 0 || g.used.includes(attacker.id)) return target;
+    g.used.push(attacker.id);
+    ctx.guarded.set(target.id, g.mult);
+    return target;
   }
 
   private byLowestHp(list: Combatant[]): Combatant[] {
     return [...list].sort((a, b) => a.hp - b.hp || a.slot - b.slot || (a.id < b.id ? -1 : 1));
   }
 
+  private hasAnyBuff(c: Combatant): boolean {
+    return this.buffCount(c) > 0;
+  }
+
   private holds(pred: Predicate | undefined, ctx: Ctx, owner: Combatant): boolean {
     if (!pred) return true;
+    if ('all' in pred) return pred.all.every((p) => this.holds(p, ctx, owner));
+    if ('any' in pred) return pred.any.some((p) => this.holds(p, ctx, owner));
+    const target = ctx.eventTarget;
+    const hp = (c: Combatant): number => (c.hp / c.maxHp) * 100;
     switch (pred.predicate) {
       case 'last_target_has_status':
         return ctx.lastTargets.some((t) => this.hasStatus(t, pred.value));
       case 'owner_in_row':
         return owner.row === pred.value;
       case 'owner_hp_below_pct':
-        return (owner.hp / owner.maxHp) * 100 < pred.value;
+        return hp(owner) < pred.value;
+      case 'owner_hp_above_pct':
+        return hp(owner) > pred.value;
       case 'owner_has_shield':
         return this.shieldTotal(owner) > 0;
+      case 'owner_has_status':
+        return this.hasStatus(owner, pred.value);
+      case 'owner_action_type':
+        return (ctx.packet?.actionKind ?? ctx.actionKind) === pred.value;
+      case 'owner_took_no_damage_this_round':
+        return !owner.tookDamageThisRound;
+      case 'target_has_status':
+        return target !== null && this.hasStatus(target, pred.value);
+      case 'target_has_status_tag':
+        return target !== null && this.hasTag(target, pred.value);
+      case 'target_has_any_status_tag':
+        return target !== null && pred.value.split('_or_').some((tag) => this.hasTag(target, tag));
+      case 'target_in_row':
+        return target !== null && target.row === pred.value;
+      case 'target_has_acted_this_battle':
+        return target !== null && target.acted;
+      case 'round_number_at_most':
+        return this.round <= pred.value;
+      case 'last_target_defeated':
+        return ctx.lastTargets.some((t) => !t.alive);
+      case 'last_primary_target_defeated':
+        return ctx.primary !== null && !ctx.primary.alive;
+      case 'event_target_hp_at_or_below_pct':
+        return target !== null && hp(target) <= pred.value;
+      case 'event_target_had_status':
+        return ctx.targetStatuses.includes(pred.value);
+      case 'event_actor_has_any_buff':
+        return ctx.eventActor !== null && this.hasAnyBuff(ctx.eventActor);
+      case 'enemy_ally_hp_below_pct':
+        return this.allies(owner).some((c) => c !== owner && hp(c) < pred.value);
+      case 'no_enemy_ally_below_pct':
+        return !this.allies(owner).some((c) => c !== owner && hp(c) < pred.value);
+      case 'damage_dealt_at_least_pct_of_target_hp':
+        return ctx.lastDamageTarget !== null && ctx.lastDamage >= (ctx.lastDamageTarget.maxHp * pred.value) / 100;
+      case 'count_enemies_with_status':
+        return this.predicateCount(pred, ctx, owner) > 0;
     }
+  }
+
+  /** How many units a counting predicate matches (any other predicate: 1 when it holds). */
+  private predicateCount(pred: Predicate, ctx: Ctx, owner: Combatant): number {
+    if (!('predicate' in pred)) return this.holds(pred, ctx, owner) ? 1 : 0;
+    if (pred.predicate === 'count_enemies_with_status') return this.opponents(owner).filter((c) => this.hasStatus(c, pred.value)).length;
+    return this.holds(pred, ctx, owner) ? 1 : 0;
   }
 
   private scale(c: Combatant, stat: 'atk' | 'def' | 'hp'): number {
@@ -566,21 +893,22 @@ export class Battle {
       case 'damage': {
         const element: Element = ctx.skill.element ?? ctx.actor.def.element;
         const single = op.target_selector_id === 'single_enemy' || op.target_selector_id === 'single_enemy_default';
-        for (const t of targets) this.dealDamage(ctx, t, op, element, single);
+        if (!ctx.primary && targets[0]) ctx.primary = targets[0];
+        for (const t of targets) for (let h = 0; h < (op.hit_count ?? 1); h++) this.dealDamage(ctx, t, op, element, single);
         ctx.lastTargets = targets;
         break;
       }
       case 'heal': {
         for (const t of targets) {
           const raw = Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier);
-          this.healUnit(ctx.actor, t, Math.max(1, Math.floor(raw * this.statusProduct(t, 'healing_received_multiplier'))));
+          this.healUnit(ctx.actor, t, Math.max(1, Math.floor(raw * this.statusProduct(t, 'healing_received_multiplier'))), ctx);
         }
         break;
       }
       case 'apply_status': {
         for (const t of targets) {
           if (op.chance !== undefined && this.rng.next() >= op.chance) continue;
-          this.applyStatus(ctx.actor, t, op.status_id, op.duration_turns);
+          this.applyStatus(ctx.actor, t, op.status_id, op.duration_turns, op.shared_damage_fraction);
         }
         break;
       }
@@ -588,7 +916,7 @@ export class Battle {
         for (const t of targets) {
           for (let n = 0; n < op.count; n++) {
             const cands = t.statuses.filter((s) => this.statusDefs.get(s.statusId)?.category === op.category).sort((a, b) => a.seq - b.seq);
-            const victim = cands[0];
+            const victim = op.selection === 'random_applied_buff' ? cands[Math.min(cands.length - 1, Math.floor(this.rng.next() * cands.length))] : cands[0];
             if (!victim) break;
             t.statuses.splice(t.statuses.indexOf(victim), 1);
             ctx.removedStacks++;
@@ -615,6 +943,15 @@ export class Battle {
         }
         break;
       }
+      case 'grant_intercept': {
+        for (const p of this.resolve(op.protected_ally_selector_id, ctx)) {
+          if (p === ctx.actor) continue;
+          p.redirects = p.redirects.filter((r) => r.protectorId !== ctx.actor.id);
+          p.redirects.push({ protectorId: ctx.actor.id, fraction: op.redirected_fraction, turnsLeft: op.duration_turns, eligible: ATTACK_KINDS, hitsLeft: op.maximum_intercepts });
+          this.emit({ type: 'redirect_granted', protector: ctx.actor.id, protected: p.id, fraction: op.redirected_fraction, turns: op.duration_turns });
+        }
+        break;
+      }
       case 'gain_focus': {
         for (const t of targets) this.addFocus(t, op.amount, false);
         break;
@@ -630,31 +967,173 @@ export class Battle {
         if (op.requires_successful_cleanse && ctx.removedStacks === 0) break;
         const stacks = Math.min(ctx.removedStacks, op.maximum_total_stacks);
         const per = Math.max(1, Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier * stacks));
-        for (const t of targets.slice(0, op.maximum_targets)) this.healUnit(ctx.actor, t, Math.floor(per * this.statusProduct(t, 'healing_received_multiplier')));
+        for (const t of targets.slice(0, op.maximum_targets)) this.healUnit(ctx.actor, t, Math.floor(per * this.statusProduct(t, 'healing_received_multiplier')), ctx);
+        break;
+      }
+      // packet modifiers act on the damage packet the surrounding hook was fired for (the selector only names whose rule it is)
+      case 'modify_incoming_damage':
+      case 'modify_outgoing_damage': {
+        if (!ctx.packet) break;
+        if (op.op === 'modify_incoming_damage') ctx.packet.inMult *= op.multiplier;
+        else ctx.packet.outMult *= op.multiplier;
+        break;
+      }
+      case 'block_attack': {
+        if (ctx.packet) ctx.packet.blocked = true;
+        break;
+      }
+      case 'grant_damage_reduction': {
+        for (const t of targets) t.reductions.push({ mult: op.damage_taken_multiplier, turnsLeft: op.duration_turns });
+        break;
+      }
+      case 'grant_first_hit_guard': {
+        for (const t of targets) t.reductions.push({ mult: op.damage_taken_multiplier, turnsLeft: op.duration_turns, hitsLeft: op.hits_per_target });
+        break;
+      }
+      case 'grant_opening_guard': {
+        for (const t of targets) t.openingGuard = { mult: op.damage_taken_multiplier, roundsLeft: op.duration_rounds, used: [] };
+        break;
+      }
+      case 'apply_regeneration': {
+        for (const t of targets) {
+          t.regens = t.regens.filter((r) => r.sourceId !== ctx.actor.id);
+          t.regens.push({ sourceId: ctx.actor.id, amount: Math.max(1, Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier)), ticksLeft: op.ticks, turnsLeft: op.duration_turns });
+        }
+        break;
+      }
+      case 'reduce_status_durations': {
+        for (const t of targets) {
+          for (const s of [...t.statuses]) {
+            if (this.statusDefs.get(s.statusId)?.category !== op.category || s.turnsLeft <= op.minimum_remaining_turns) continue;
+            s.turnsLeft = Math.max(op.minimum_remaining_turns, s.turnsLeft - op.amount_turns);
+            if (s.turnsLeft <= 0) {
+              t.statuses.splice(t.statuses.indexOf(s), 1);
+              this.emit({ type: 'status_removed', target: t.id, status: s.statusId, reason: 'cleansed' });
+            }
+          }
+        }
+        break;
+      }
+      case 'reduce_cooldowns': {
+        for (const t of targets) {
+          for (const k of Object.keys(t.cooldowns)) {
+            const v = t.cooldowns[k] ?? 0;
+            if (v > op.minimum_remaining_turns) t.cooldowns[k] = Math.max(op.minimum_remaining_turns, v - op.amount_turns);
+          }
+        }
+        break;
+      }
+      case 'delay_next_action': {
+        for (const t of targets) this.delay(t, op.gauge_fraction);
+        break;
+      }
+      case 'pay_hp_cost': {
+        for (const t of targets) {
+          const cost = Math.max(1, Math.floor(t.maxHp * op.max_hp_fraction + 1e-9));
+          const next = Math.max(op.cannot_reduce_below, t.hp - cost);
+          const paid = t.hp - next;
+          if (paid <= 0) continue;
+          t.hp = next;
+          this.emit({ type: 'hp_cost', unit: t.id, amount: paid, hpAfter: t.hp });
+        }
+        break;
+      }
+      case 'arm_counter': {
+        for (const t of targets) {
+          t.counters = t.counters.filter((c) => c.ownerId !== ctx.actor.id);
+          t.counters.push({ ownerId: ctx.actor.id, scaleStat: op.scale_stat, multiplier: op.multiplier, damageType: op.damage_type, consume: true });
+        }
+        break;
+      }
+      case 'arm_next_attack_bonus': {
+        for (const t of targets) if (t.nextAttackBonus === null) t.nextAttackBonus = op.damage_multiplier;
+        break;
+      }
+      case 'copy_buff': {
+        const source = this.resolve(op.source_selector_id, ctx)[0];
+        if (!source) break;
+        for (const t of targets) this.copyBuffs(source, t, op.category, op.maximum_count, op.duration_turns);
+        break;
+      }
+      case 'remove_shield': {
+        for (const t of targets) {
+          let removed = 0;
+          for (const s of t.shields) {
+            const cut = Math.min(s.amount, Math.max(1, Math.ceil(s.amount * op.amount_fraction - 1e-9)));
+            s.amount -= cut;
+            removed += cut;
+          }
+          t.shields = t.shields.filter((s) => s.amount > 0);
+          if (removed > 0) this.emit({ type: 'shield_removed', unit: t.id, amount: removed });
+        }
         break;
       }
     }
     ctx.prev = targets;
   }
 
-  private applyStatus(source: Combatant, target: Combatant, statusId: string, turns: number): void {
+  private copyBuffs(source: Combatant, target: Combatant, category: 'buff' | 'shield', max: number, duration: number): void {
+    let left = max;
+    if (category === 'shield') {
+      for (const s of [...source.shields].sort((a, b) => b.amount - a.amount)) {
+        if (left-- <= 0) break;
+        target.shields.push({ amount: s.amount, turnsLeft: duration });
+        this.emit({ type: 'buff_copied', source: source.id, target: target.id, what: 'shield' });
+      }
+      return;
+    }
+    for (const s of source.statuses.filter((x) => this.statusDefs.get(x.statusId)?.category === 'buff').sort((a, b) => a.seq - b.seq)) {
+      if (left-- <= 0) return;
+      this.applyStatus(target, target, s.statusId, duration);
+      this.emit({ type: 'buff_copied', source: source.id, target: target.id, what: s.statusId });
+    }
+    for (const m of source.mods.filter((x) => x.amount > 0)) {
+      if (left-- <= 0) return;
+      target.mods.push({ ...m, turnsLeft: duration });
+      this.emit({ type: 'buff_copied', source: source.id, target: target.id, what: `${m.stat}_${m.mode}` });
+    }
+  }
+
+  private delay(target: Combatant, fraction: number): void {
+    if (!target.alive || fraction <= 0) return;
+    const cap = Math.floor(this.rules.max_pending_delay_fraction * this.rules.gauge_max);
+    target.pendingDelay = Math.min(cap, target.pendingDelay + Math.round(fraction * this.rules.gauge_max));
+    this.emit({ type: 'delay', unit: target.id, fraction });
+  }
+
+  private applyStatus(source: Combatant, target: Combatant, statusId: string, turns: number, value?: number): void {
     if (!target.alive) return;
-    if (!this.statusDefs.has(statusId)) throw new Error(`unknown status ${statusId}`);
+    const def = this.statusDefs.get(statusId);
+    if (!def) throw new Error(`unknown status ${statusId}`);
+    if (target.def.status_immunities?.includes(statusId)) return;
+    if (target.statuses.some((s) => this.statusDefs.get(s.statusId)?.immune_status_ids?.includes(statusId))) return;
+    const power = def.dot_atk_multiplier !== undefined ? this.effStat(source, 'atk') : undefined;
     const existing = target.statuses.find((s) => s.statusId === statusId);
     if (existing) {
       existing.turnsLeft = Math.max(existing.turnsLeft, turns);
       existing.sourceId = source.id;
+      if (value !== undefined) existing.value = value;
+      if (power !== undefined) existing.power = power;
     } else {
-      target.statuses.push({ statusId, turnsLeft: turns, sourceId: source.id, seq: ++this.statusSeq });
+      const inst: StatusInstance = { statusId, turnsLeft: turns, sourceId: source.id, seq: ++this.statusSeq };
+      if (value !== undefined) inst.value = value;
+      if (power !== undefined) inst.power = power;
+      target.statuses.push(inst);
     }
     this.emit({ type: 'status_applied', source: source.id, target: target.id, status: statusId, turns });
+    if (def.next_action_gauge_delay_fraction !== undefined) this.delay(target, def.next_action_gauge_delay_fraction);
   }
 
-  private healUnit(source: Combatant, target: Combatant, amount: number): void {
+  private healUnit(source: Combatant, target: Combatant, amount: number, ctx: Ctx | null): void {
     if (!target.alive || amount <= 0) return;
     const applied = Math.min(amount, target.maxHp - target.hp);
     target.hp += applied;
+    source.lastHealTarget = target.id;
     this.emit({ type: 'heal', source: source.id, target: target.id, amount: applied, hpAfter: target.hp });
+    if (ctx) {
+      ctx.healed.push(target);
+      if (!ctx.suppressHooks) this.fire('after_ally_healed', { actor: source, target, actionKind: ctx.actionKind, actionId: ctx.actionId, packet: null });
+    }
   }
 
   private addFocus(unit: Combatant, amount: number, scaled: boolean): void {
@@ -681,44 +1160,153 @@ export class Battle {
       for (const m of target.mods) if (m.stat === 'veil_res' && m.mode === 'add_pct') pct += m.amount;
       veilRes = Math.max(0, 1 - pct);
     }
-    const raw =
+    // per-target conditional multipliers of the op itself
+    let mult = op.multiplier;
+    if (op.modifiers) {
+      const saved = ctx.eventTarget;
+      ctx.eventTarget = target;
+      for (const m of op.modifiers) {
+        if ('multiplier' in m) {
+          if (this.holds(m.condition, ctx, attacker)) mult *= m.multiplier;
+        } else {
+          mult += Math.min(this.predicateCount(m.condition, ctx, attacker), m.maximum_count) * m.add_multiplier_per_count;
+        }
+      }
+      ctx.eventTarget = saved;
+    }
+    // element-bound status effects on the target (Soaked): extra damage taken and one-shot reactions
+    let elementTaken = 1;
+    let reaction = 0;
+    const consumed: StatusInstance[] = [];
+    for (const s of target.statuses) {
+      const d = this.statusDefs.get(s.statusId);
+      elementTaken *= d?.element_damage_taken_multiplier?.[element] ?? 1;
+      for (const r of d?.reactions ?? []) {
+        if (r.element !== element) continue;
+        reaction += r.bonus_damage_multiplier;
+        if (r.consume_status) consumed.push(s);
+        this.emit({ type: 'reaction', unit: target.id, name: r.name_en, bonus: r.bonus_damage_multiplier });
+      }
+    }
+    for (const s of consumed) {
+      target.statuses.splice(target.statuses.indexOf(s), 1);
+      this.emit({ type: 'status_removed', target: target.id, status: s.statusId, reason: 'expired' });
+    }
+    const attackKind = ctx.inHook ? null : ctx.actionKind;
+    const base =
       this.scale(attacker, op.scale_stat === 'hp' ? 'hp' : op.scale_stat) *
-      op.multiplier *
+      mult *
       (this.rules.defense_scale / (this.rules.defense_scale + Math.max(0, defStat))) *
       elementMult *
       this.statusProduct(attacker, 'outgoing_damage_multiplier') *
       this.statusProduct(target, 'damage_taken_multiplier') *
       veilRes *
       (crit ? this.rules.crit.multiplier : 1);
+
+    const packet: Packet = { source: attacker, target, outMult: 1, inMult: 1, blocked: false, actionKind: attackKind };
+    const hooked = attackKind !== null && !ctx.suppressHooks && op.can_trigger_passives !== false;
+    const info: HookInfo = { actor: attacker, target, actionKind: attackKind, actionId: ctx.actionId, packet };
+    if (hooked) this.fire('before_damage_dealt', info);
+    this.applyContinuous(packet, 'before_damage_dealt');
+    if (hooked) this.fire('before_damage_received', info);
+    this.applyContinuous(packet, 'before_damage_received');
+    if (packet.blocked) {
+      this.emit({ type: 'blocked', unit: target.id, source: attacker.id });
+      return;
+    }
+
+    let guard = 1;
+    if (single && ctx.guarded.has(target.id)) guard = ctx.guarded.get(target.id) ?? 1;
+    let reduction = 1;
+    for (const r of [...target.reductions]) {
+      reduction *= r.mult;
+      if (r.hitsLeft !== undefined && --r.hitsLeft <= 0) target.reductions.splice(target.reductions.indexOf(r), 1);
+    }
+    const raw =
+      base * elementTaken * (1 + reaction) * (attackKind && ctx.attackBonus !== null ? ctx.attackBonus : 1) * packet.outMult * packet.inMult * guard * reduction;
     const dmg = Math.max(1, Math.floor(raw + 1e-9));
+    ctx.lastDamage = dmg;
+    ctx.lastDamageTarget = target;
 
     let toTarget = dmg;
-    const redirect = single && ctx.actionKind ? target.redirects.find((r) => r.eligible.includes(ctx.actionKind as string)) : undefined;
+    const redirect = single && attackKind ? target.redirects.find((r) => r.eligible.includes(attackKind) && (r.hitsLeft === undefined || r.hitsLeft > 0)) : undefined;
     if (redirect) {
       const protector = this.combatants.find((c) => c.id === redirect.protectorId && c.alive);
       if (protector && protector !== target) {
         const share = roundHalfUp(dmg * redirect.fraction);
         toTarget = dmg - share;
-        if (share > 0) this.receive(ctx, attacker, protector, share, crit, elementMult, op.no_focus_gain === true, target.id);
+        if (redirect.hitsLeft !== undefined && --redirect.hitsLeft <= 0) target.redirects.splice(target.redirects.indexOf(redirect), 1);
+        if (share > 0) this.receive(ctx, attacker, protector, share, { crit, elementMult, noFocus: op.no_focus_gain === true, redirectedFrom: target.id, shieldMult: op.shield_damage_multiplier, fireHooks: true });
       }
     }
-    if (toTarget > 0) this.receive(ctx, attacker, target, toTarget, crit, elementMult, op.no_focus_gain === true);
+    if (toTarget > 0) this.receive(ctx, attacker, target, toTarget, { crit, elementMult, noFocus: op.no_focus_gain === true, shieldMult: op.shield_damage_multiplier });
+    if (hooked && attacker.alive) this.fire('after_damage_dealt', info);
   }
 
-  private receive(ctx: Ctx, source: Combatant, target: Combatant, amount: number, crit: boolean, elementMult: number, noFocus: boolean, redirectedFrom?: string): void {
+  /** Always-on rules (Brin's Hold the Gate, Nixie's Trail Mark, Jori's Hot Rivet, ...) scale the packet. */
+  private applyContinuous(packet: Packet, event: 'before_damage_dealt' | 'before_damage_received'): void {
+    for (const u of this.combatants) {
+      if (!u.alive) continue;
+      for (const m of this.rulesOf(u).mods) {
+        if (m.event === 'stat_snapshot' || m.event !== event) continue;
+        if (event === 'before_damage_dealt') {
+          const scope = m.applies_to === 'all_allies_while_owner_alive' ? packet.source.side === u.side : packet.source === u;
+          if (!scope) continue;
+        } else if (packet.target !== u) continue;
+        const cctx = this.bareCtx(u, { eventTarget: packet.target, eventActor: packet.source, packet });
+        if (!this.holds(m.condition, cctx, u)) continue;
+        if (event === 'before_damage_dealt') packet.outMult *= m.damage_multiplier;
+        else packet.inMult *= m.damage_multiplier;
+      }
+    }
+  }
+
+  private receive(
+    ctx: Ctx | null,
+    source: Combatant,
+    target: Combatant,
+    amount: number,
+    o: { crit?: boolean; elementMult?: number; noFocus?: boolean; redirectedFrom?: string; shieldMult?: number | undefined; dot?: string; fireHooks?: boolean } = {}
+  ): void {
     if (!target.alive) return;
-    if (!ctx.inHook && ctx.actionKind) this.fireHooks(target, 'before_damage_received', source, ctx.actionKind);
-    let remaining = amount;
+    const real = ctx !== null && o.dot === undefined;
+    const attackKind = real && !ctx.inHook ? ctx.actionKind : null;
+    const hooked = real && attackKind !== null && !ctx.suppressHooks;
+    if (o.fireHooks && hooked) this.fire('before_damage_received', { actor: source, target, actionKind: attackKind, actionId: ctx.actionId, packet: null });
+    let incoming = amount;
+    // Soul Link: a share of each hit is taken by the other linked units instead
+    const link = target.statuses.find((s) => this.statusDefs.get(s.statusId)?.shared_damage_cap_fraction !== undefined);
+    if (link && o.dot !== 'soul_link') {
+      const def = this.statusDefs.get(link.statusId);
+      const others = this.living(target.side).filter((c) => c !== target && c.statuses.some((s) => s.statusId === link.statusId));
+      const cap = Math.floor(target.maxHp * (def?.shared_damage_cap_fraction ?? 0));
+      const share = Math.min(Math.floor(incoming * (link.value ?? 0)), cap);
+      if (others.length > 0 && share > 0) {
+        incoming -= share;
+        const each = Math.max(1, Math.floor(share / others.length));
+        for (const c of others) this.receive(null, source, c, each, { dot: 'soul_link' });
+      }
+    }
+    let remaining = incoming;
     let absorbed = 0;
+    const sm = o.shieldMult ?? 1;
     while (remaining > 0 && target.shields.length > 0) {
       const s = target.shields[0];
       if (!s) break;
-      const take = Math.min(s.amount, remaining);
-      s.amount -= take;
-      remaining -= take;
-      absorbed += take;
+      const need = Math.ceil(remaining * sm - 1e-9);
+      if (s.amount >= need) {
+        s.amount -= need;
+        absorbed += remaining;
+        remaining = 0;
+      } else {
+        const soaked = Math.min(remaining, Math.floor(s.amount / sm + 1e-9));
+        absorbed += soaked;
+        remaining -= soaked;
+        s.amount = 0;
+      }
       if (s.amount <= 0) target.shields.shift();
     }
+    const hpBefore = target.hp;
     target.hp = Math.max(0, target.hp - remaining);
     const ev: BattleEvent = {
       type: 'damage',
@@ -727,23 +1315,32 @@ export class Battle {
       amount: remaining,
       absorbed,
       hpAfter: target.hp,
-      crit,
-      elementMultiplier: elementMult
+      crit: o.crit ?? false,
+      elementMultiplier: o.elementMult ?? 1
     };
-    if (redirectedFrom) ev.redirectedFrom = redirectedFrom;
-    if (ctx.inHook) ev.counter = true;
+    if (o.redirectedFrom) ev.redirectedFrom = o.redirectedFrom;
+    if (o.dot) ev.dot = o.dot;
+    if (ctx?.inHook) ev.counter = true;
     this.emit(ev);
+    if (remaining + absorbed > 0) target.tookDamageThisRound = true;
     if (target.hp === 0) {
+      const statusesAtDeath = target.statuses.map((s) => s.statusId);
       target.alive = false;
       target.shields = [];
       target.statuses = [];
       target.mods = [];
       target.redirects = [];
+      target.regens = [];
+      target.reductions = [];
+      target.openingGuard = null;
+      target.counters = [];
+      target.nextAttackBonus = null;
       target.focus = 0;
       this.emit({ type: 'defeat', unit: target.id });
+      if (o.dot !== 'soul_link') this.fire('after_enemy_defeated', { actor: source, target, actionKind: attackKind, actionId: ctx?.actionId ?? 0, packet: null, targetStatuses: statusesAtDeath });
       return;
     }
-    if (!noFocus && remaining + absorbed > 0) {
+    if (!o.noFocus && o.dot === undefined && remaining + absorbed > 0) {
       const room = this.rules.focus.hit_gain_cap_per_turn - target.focusGainedThisTurn;
       const gain = Math.min(this.rules.focus.hit_gain, Math.max(0, room));
       if (gain > 0) {
@@ -751,24 +1348,98 @@ export class Battle {
         this.addFocus(target, gain, false);
       }
     }
+    if (hooked && target.hp < hpBefore) {
+      const info: HookInfo = { actor: source, target, actionKind: attackKind, actionId: ctx.actionId, packet: null };
+      this.fire('after_damage_received', info);
+      this.fire('ally_damaged', info);
+      this.fire('ally_hp_threshold_crossed', info);
+    }
   }
 
   // ---------------------------------------------------------------- hooks
 
-  private fireHooks(owner: Combatant, event: EventHook['event'], source: Combatant | null, incoming: ActionKind | null): void {
-    if (!owner.alive) return;
-    for (const skill of owner.def.skills) {
-      for (const [i, hook] of (skill.event_hooks ?? []).entries()) {
-        if (hook.event !== event) continue;
-        if (hook.event_filter && hook.event_filter.incoming_action_type !== incoming) continue;
-        const ctx: Ctx = { actor: owner, skill, chosen: null, prev: [], lastTargets: [], removedStacks: 0, eventSource: source, inHook: true, actionKind: null };
+  private scopeOk(owner: Combatant, hook: EventHook, info: HookInfo): boolean {
+    const f = hook.event_filter;
+    const same = (u: Combatant | null): boolean => u !== null && u.side === owner.side;
+    const team = f?.team !== undefined;
+    let ok: boolean;
+    switch (hook.event) {
+      case 'owner_turn_start':
+        ok = info.actor === owner;
+        break;
+      case 'before_damage_dealt':
+      case 'after_damage_dealt':
+        ok = info.actor === owner || (team && same(info.actor));
+        break;
+      case 'before_damage_received':
+      case 'after_damage_received':
+        ok = info.target === owner || (team && same(info.target));
+        break;
+      case 'ally_damaged':
+        ok = same(info.target) && info.target !== owner;
+        break;
+      case 'ally_hp_threshold_crossed':
+      case 'after_ally_healed':
+        ok = same(info.target);
+        break;
+      case 'after_ally_action':
+      case 'after_ally_ultimate':
+        ok = same(info.actor);
+        break;
+      case 'after_enemy_defeated':
+        ok = info.target !== null && info.target.side !== owner.side;
+        break;
+      case 'after_round_end':
+        ok = true;
+        break;
+    }
+    if (!ok || !f) return ok;
+    if (f.incoming_action_type !== undefined && info.actionKind !== f.incoming_action_type) return false;
+    if (f.damage_action_type !== undefined && info.actionKind === null) return false;
+    if (f.owner_action_type !== undefined && info.actionKind === null) return false;
+    if (f.source_is_owner && info.actor !== owner) return false;
+    if (f.exclude_owner && info.actor === owner) return false;
+    if (f.ally_action_type !== undefined && info.actionKind !== f.ally_action_type) return false;
+    if (f.event_target_faction_is !== undefined && info.target?.def.faction_id !== f.event_target_faction_is) return false;
+    return true;
+  }
+
+  /** Runs every living unit's hooks for an event. */
+  private fire(event: HookEvent, info: HookInfo): void {
+    for (const owner of [...this.combatants]) {
+      if (!owner.alive) continue;
+      for (const entry of this.rulesOf(owner).hooks) {
+        const hook = entry.hook;
+        if (hook.event !== event || !this.scopeOk(owner, hook, info)) continue;
+        const ctx = this.newCtx(owner, entry.skill, {
+          eventSource: info.actor,
+          eventTarget: info.target,
+          eventActor: info.actor,
+          lastTargets: info.target ? [info.target] : [],
+          inHook: true,
+          suppressHooks: true,
+          actionId: info.actionId,
+          packet: info.packet,
+          targetStatuses: info.targetStatuses ?? []
+        });
         if (!this.holds(hook.condition, ctx, owner)) continue;
-        const key = `${skill.skill_id}:${i}`;
-        if (hook.limit?.per_battle !== undefined && (owner.hookBattleCount[key] ?? 0) >= hook.limit.per_battle) continue;
-        if (hook.limit?.per_owner_turn !== undefined && (owner.hookTurnCount[key] ?? 0) >= hook.limit.per_owner_turn) continue;
+        const lim = hook.limit;
+        const key = entry.key;
+        const tkey = `${key}>${info.target?.id ?? ''}`;
+        if (lim?.per_battle !== undefined && (owner.hookBattleCount[key] ?? 0) >= lim.per_battle) continue;
+        if (lim?.per_owner_turn !== undefined && (owner.hookTurnCount[key] ?? 0) >= lim.per_owner_turn) continue;
+        if (lim?.per_round !== undefined && (owner.hookRoundCount[key] ?? 0) >= lim.per_round) continue;
+        if (lim?.per_target_per_battle !== undefined && (owner.hookTargetCount[tkey] ?? 0) >= lim.per_target_per_battle) continue;
+        const mark = `${owner.id}|${key}`;
+        if (lim?.per_damage_action !== undefined && info.actionId > 0 && this.actionMarks.get(mark) === info.actionId) continue;
+        if (lim?.one_pending_bonus && owner.nextAttackBonus !== null) continue;
+        if (lim?.chance !== undefined && this.rng.next() >= lim.chance) continue;
         owner.hookBattleCount[key] = (owner.hookBattleCount[key] ?? 0) + 1;
         owner.hookTurnCount[key] = (owner.hookTurnCount[key] ?? 0) + 1;
-        this.emit({ type: 'hook_triggered', unit: owner.id, skill: skill.skill_id, event });
+        owner.hookRoundCount[key] = (owner.hookRoundCount[key] ?? 0) + 1;
+        owner.hookTargetCount[tkey] = (owner.hookTargetCount[tkey] ?? 0) + 1;
+        if (info.actionId > 0) this.actionMarks.set(mark, info.actionId);
+        this.emit({ type: 'hook_triggered', unit: owner.id, skill: entry.skill.skill_id, event });
         for (const op of hook.effect_ops) this.applyOp(op, ctx);
       }
     }

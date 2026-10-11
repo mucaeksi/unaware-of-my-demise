@@ -540,8 +540,42 @@ export class BattleScene extends Phaser.Scene {
         await this.wait(560);
         break;
       }
+      case 'hp_cost': {
+        const v = this.view(e.unit);
+        this.float(v, `-${e.amount} HP`, T.crimson, 30);
+        v.setHp(e.hpAfter, this.battle.unit(e.unit).maxHp);
+        await this.wait(200);
+        break;
+      }
+      case 'blocked': {
+        this.float(this.view(e.unit), 'BLOCKED', T.shield, 40);
+        Sfx.guard();
+        await this.wait(240);
+        break;
+      }
+      case 'delay': {
+        this.float(this.view(e.unit), 'DELAYED', T.crimson, 30);
+        await this.wait(160);
+        break;
+      }
+      case 'shield_removed': {
+        this.float(this.view(e.unit), 'SHIELD BROKEN', T.crimson, 28);
+        await this.wait(160);
+        break;
+      }
+      case 'buff_copied': {
+        this.float(this.view(e.target), 'COPIED', T.gold, 28);
+        await this.wait(160);
+        break;
+      }
+      case 'reaction': {
+        this.float(this.view(e.unit), e.name.toUpperCase(), T.gold, 32);
+        await this.wait(200);
+        break;
+      }
       case 'battle_start':
       case 'battle_end':
+      case 'round_end':
         break;
     }
   }
