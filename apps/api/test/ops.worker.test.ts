@@ -6,7 +6,7 @@ import { runBackup } from '../src/ops/backup';
 import { dumpDatabase, sqlLiteral } from '../src/ops/dump';
 import type { OpsEnv } from '../src/ops/env';
 import { runHealth } from '../src/ops/health';
-import { CRON_BACKUP, CRON_HEALTH, runScheduled } from '../src/ops';
+import { CRON_BACKUP, CRON_HEALTH, backupIsOverdue, runScheduled } from '../src/ops';
 import { signIn } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
@@ -79,10 +79,32 @@ describe('uomd-ops: encrypted backup and health', () => {
     expect(healthy.checks.filter((c) => c.name !== 'backup_fresh').every((c) => c.ok)).toBe(true);
     const open = await runHealth({ DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: '', TARGET: 'test', GAME: fetcher(200), ADMIN: fetcher(200) });
     expect(open.checks.find((c) => c.name === 'admin_protected')?.ok).toBe(false);
-    await runScheduled(CRON_HEALTH, { DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: '', TARGET: 'test', GAME: down, ADMIN: down });
-    const row = await db().prepare("SELECT ok FROM ops_runs WHERE kind = 'health' ORDER BY id DESC LIMIT 1").first<{ ok: number }>();
-    expect(row?.ok).toBe(0);
     expect(CRON_BACKUP).toBe('17 3 * * *');
+  });
+
+  it('a health tick records its probe and takes the missed backup itself, but not again within the cooldown', async () => {
+    await db().prepare('DELETE FROM ops_runs').run();
+    const bucket = fakeBucket();
+    const env = { DB: db(), BACKUPS: bucket as unknown as R2Bucket, AGE_RECIPIENT: await identityToRecipient(await generateX25519Identity()), TARGET: 'test', GAME: down, ADMIN: down } satisfies OpsEnv;
+    expect(await backupIsOverdue(env)).toBe(true);
+    await runScheduled(CRON_HEALTH, env);
+    const health = await db().prepare("SELECT ok FROM ops_runs WHERE kind = 'health' ORDER BY id DESC LIMIT 1").first<{ ok: number }>();
+    expect(health?.ok).toBe(0);
+    const backups = await db().prepare("SELECT ok FROM ops_runs WHERE kind = 'backup'").all<{ ok: number }>();
+    expect(backups.results).toEqual([{ ok: 1 }]);
+    expect(bucket.objects.size).toBeGreaterThanOrEqual(2); // dump + manifest
+    await runScheduled(CRON_HEALTH, env);
+    expect((await db().prepare("SELECT COUNT(*) AS n FROM ops_runs WHERE kind = 'backup'").first<{ n: number }>())?.n).toBe(1);
+    expect(await backupIsOverdue(env, new Date(Date.now() + 31 * 3_600_000))).toBe(true);
+    expect(await backupIsOverdue(env, new Date(Date.now() + 5 * 3_600_000))).toBe(false);
+  });
+
+  it('a failing catch-up backup is recorded and not retried on every tick', async () => {
+    await db().prepare('DELETE FROM ops_runs').run();
+    const env = { DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: 'not-a-key', TARGET: 'test', GAME: fetcher(200), ADMIN: fetcher(401) } satisfies OpsEnv;
+    await expect(runScheduled(CRON_HEALTH, env)).rejects.toThrow();
+    expect(await backupIsOverdue(env)).toBe(false);
+    await db().prepare('DELETE FROM ops_runs').run();
   });
 });
 

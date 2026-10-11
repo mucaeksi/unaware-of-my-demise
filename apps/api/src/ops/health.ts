@@ -27,7 +27,7 @@ export async function runHealth(env: OpsEnv, now = new Date()): Promise<HealthRe
   });
   await probe('backup_fresh', async () => {
     const last = await env.DB.prepare("SELECT at FROM ops_runs WHERE kind = 'backup' AND ok = 1 ORDER BY id DESC LIMIT 1").first<{ at: string }>();
-    if (!last) return { ok: now.getTime() - Date.parse('2026-10-12T00:00:00Z') < 0, detail: 'no backup yet' }; // grace until the first nightly run
+    if (!last) return { ok: false, detail: 'no backup yet' };
     const hours = (now.getTime() - Date.parse(last.at)) / 3_600_000;
     return { ok: hours < 36, detail: `${hours.toFixed(1)} h old` };
   });
