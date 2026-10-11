@@ -66,7 +66,7 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
       await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 45_000 }).toBeTruthy();
     } catch (e) {
       const texts = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').children.list.map((c: any) => c.text).filter(Boolean).join(' | '));
-      throw new Error(`battle never prompted; problems: ${problems.join(' | ')}; on screen: ${texts}; ${String(e)}`);
+      throw new Error(`battle never prompted; problems: ${problems.join(' | ')}; on screen: ${texts}`, { cause: e });
     }
     await tap(page, info, REF_W - 150, 70); // x2
     await tap(page, info, REF_W - 150, 70); // x3
