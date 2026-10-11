@@ -1,0 +1,5551 @@
+{
+  "catalog_version": 1,
+  "source_revision": "5c83e3d1",
+  "parser": "TypeScript 5.9.3 AST (same pin as root package.json; downloaded without lifecycle hooks)",
+  "english_locale": "en",
+  "turkish": "deferred_by_owner_2026-10-11",
+  "dialogue_voice_locale": "ja-JP",
+  "key_policy": "Opaque allocated IDs; preserve keys across moves/copy edits. Never renumber/reuse existing sNNN IDs. Append new IDs; retired keys remain reserved. Line/offset/source_hash are provenance only.",
+  "files_sha256": {
+    "apps/game/src/audio/Music.ts": "5896314fe4e65475ea3b92dc69a6906cb365051d521a4c36d882f35d97690950",
+    "apps/game/src/audio/Sfx.ts": "145d3919f2140bfbf39207b288e853eeb91f5316d6041230949f7e19d0562188",
+    "apps/game/src/battle/UnitView.ts": "6d5dfc08b0ab2d0dfc253227347d029fc40fe73c59de97ebfbeaebc31b8ab962",
+    "apps/game/src/battle/formation.ts": "6171db8e8e170f7f548aaa2d512ddf21f57026f8558fbeeff5cac263401ab7bb",
+    "apps/game/src/config.ts": "5fea2e21047791635e5480f53c62ff2fa7d67e0a13dae808e6844c31e02807b7",
+    "apps/game/src/content/ArtLibrary.ts": "e4ae06e64bb3b92f43dd126cb1722fdfc91847edfae8be070c424ccd76df0881",
+    "apps/game/src/content/ContentService.ts": "23971099f46daad9784a4d1ac5ebba2da71cda3e2516305d8cc3f59130a1062b",
+    "apps/game/src/content/remote.ts": "693a6e7e4d23f54d5d1df695ee2792331bec767ef1e5e61588f8a8970586cbf6",
+    "apps/game/src/content/validator.ts": "dc3f3c04ceec0c25ce0a01ef70ac8b317e3b943e4fbb1c65b4c5ee0faad01663",
+    "apps/game/src/flow.ts": "3150058c9e6eb0b3961e851b91380aa0ff99f9feba05f2c82422c182ee96ec0c",
+    "apps/game/src/main.ts": "4728d27d8533a2e023cd09290ca822deef536e2c0286785d1907a9bc105f23b7",
+    "apps/game/src/net/api.ts": "4827db875485bc4cebc43d730f9e61d55636a8c6f7a280d0c38588a5dc588874",
+    "apps/game/src/net/currency.ts": "b3165ffce289466962166e33a42cdce24e84ca6e7b2d0f496e8c2fb288abd234",
+    "apps/game/src/net/identity.ts": "d70fe56b341e88a47a812e84152a8dfb70b576efd18282789986e32546d0d850",
+    "apps/game/src/net/store.ts": "9859b2451c668699cbc4e46ca2e41c729362ea012a83f0c40adedb4e15e500f8",
+    "apps/game/src/platform/idbStorage.ts": "ad63dbc77e7f37b77985a9e501054d94e300cef3a978129431776fe60c5ac627",
+    "apps/game/src/platform/native.ts": "7c608138b7f728ca61f845aa031e454bc9083d1ea84265da4e66f8f74912c20e",
+    "apps/game/src/platform/prefs.ts": "84eae5c7b4a7816ccb9c32314e5ebbced94ab82d5d1c93ea8ad7b1381b9c3a39",
+    "apps/game/src/platform/safeArea.ts": "c5edf411a6219e50385d63207028d8d451a01d6339af5de515d1f18f3bb41b6e",
+    "apps/game/src/scenes/AccountScene.ts": "bad40b05f2add067814fbe5b7bf997d364c255af9bb58e79c4e048545f4b4ec4",
+    "apps/game/src/scenes/BattleScene.ts": "66bcd5a4f7834621baa4142676ef0a39c792c178a42a2f5f11f594415db7207d",
+    "apps/game/src/scenes/BootScene.ts": "affe17e0fd65dc92920e9c1818b90860609466830d5e941ae169f76dc81e5f05",
+    "apps/game/src/scenes/ChaptersScene.ts": "a672ecb46b1497fb0713a761834c257f147a4caa0dfc74e839ffe986c1ee4678",
+    "apps/game/src/scenes/CharacterScene.ts": "11ba8dad235658f2a2ff6682f4a03601be954e4c89aaa072a4b9d138093eb363",
+    "apps/game/src/scenes/GearScene.ts": "c1258ca4d767e7dd1703087c47b69e49dd4e8c3c65bf70b909cad7f009f99484",
+    "apps/game/src/scenes/HomeScene.ts": "5eb37c0544395969043b240bc0dbf4adb6fbd982f09a4b3405a31b05709ceee8",
+    "apps/game/src/scenes/MailScene.ts": "5805ee6d3d485fd9b4044bbf1b99ce47ed140b5072e4158124570a13ded3136f",
+    "apps/game/src/scenes/RosterScene.ts": "c5011cb518f59e0704f45a55e4cff97a9816bdfd4015f27a3a03ccc26eeec6bf",
+    "apps/game/src/scenes/ShopScene.ts": "7611ec89f61cdf2346add01df265cfd95b3e79077418363619f354f0a72aab06",
+    "apps/game/src/scenes/StoryScene.ts": "d90b6fc7bb04568dbffce76b25bfecbff0e006da61961655c2d95cfde9a59fef",
+    "apps/game/src/scenes/SummonScene.ts": "a65c3ae4cc550966ffeddcd9fae822d6548977cfab65c42d77d52b963f98803f",
+    "apps/game/src/scenes/TasksScene.ts": "4fb23ff1328d255a5ca59fc721ff7411be5c5285535d34db3aa144d23cb7e08c",
+    "apps/game/src/scenes/TitleScene.ts": "58aec9b8a86e4dc3e2f23ca029dce074dfd9f4a5e8686ca9e7bc1048769ba62c",
+    "apps/game/src/services.ts": "6bd13c1a5df5762e2d41aa14b80de02a0c70f091d7e2414609bc0103881197ff",
+    "apps/game/src/ui/format.ts": "d0c020cc3d5c7fb9461217b1b9a973cac97e87324527cde31df2bfde1e584d0f",
+    "apps/game/src/ui/hub.ts": "a546ed1eaf0ff41969d9c35fea444274caea4b7c4239974a23b94242e61ccd93",
+    "apps/game/src/ui/kit.ts": "d3860a9c00635e3f411abbe1f525d2b249a3ae7d6d972d9236dff5cf21d8db48",
+    "apps/game/src/ui/theme.ts": "2e6518b31fdaf4b84b1da521c9bcfa1ca533865285c7101df6c4c8607d4a38f2"
+  },
+  "entries": [
+    {
+      "source": "apps/game/src/battle/UnitView.ts",
+      "line": 69,
+      "offset": 3674,
+      "raw": "'▼'",
+      "english": "▼",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.battle.unitview.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/battle/UnitView.ts",
+      "line": 135,
+      "offset": 5981,
+      "raw": "'▼'",
+      "english": "▼",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.battle.unitview.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/battle/UnitView.ts",
+      "line": 149,
+      "offset": 6593,
+      "raw": "`▸ ${text} → ${targetsLabel}`",
+      "english": "▸ {p1} → {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "text"
+        },
+        {
+          "name": "p2",
+          "expression": "targetsLabel"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.battle.unitview.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/battle/UnitView.ts",
+      "line": 149,
+      "offset": 6625,
+      "raw": "`▸ ${text}`",
+      "english": "▸ {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "text"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.battle.unitview.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/battle/UnitView.ts",
+      "line": 154,
+      "offset": 6855,
+      "raw": "`SH ${shield}`",
+      "english": "SH {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "shield"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.battle.unitview.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/battle/UnitView.ts",
+      "line": 155,
+      "offset": 6927,
+      "raw": "`${statusNames.get(s.statusId) ?? s.statusId} ${s.turnsLeft}`",
+      "english": "{p1} {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "statusNames.get(s.statusId) ?? s.statusId"
+        },
+        {
+          "name": "p2",
+          "expression": "s.turnsLeft"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.battle.unitview.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/battle/UnitView.ts",
+      "line": 155,
+      "offset": 6995,
+      "raw": "'  ·  '",
+      "english": "  ·  ",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.battle.unitview.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/ArtLibrary.ts",
+      "line": 37,
+      "offset": 1547,
+      "raw": "`failed to load ${file.key}`",
+      "english": "failed to load {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "file.key"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.artlibrary.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/ArtLibrary.ts",
+      "line": 52,
+      "offset": 2103,
+      "raw": "`no art for unit ${k}`",
+      "english": "no art for unit {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "k"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.artlibrary.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/ArtLibrary.ts",
+      "line": 72,
+      "offset": 3071,
+      "raw": "`unit art ${artKey} not loaded`",
+      "english": "unit art {p1} not loaded",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "artKey"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.artlibrary.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/ArtLibrary.ts",
+      "line": 79,
+      "offset": 3362,
+      "raw": "`unit ${artKey} has no idle state`",
+      "english": "unit {p1} has no idle state",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "artKey"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.artlibrary.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/ArtLibrary.ts",
+      "line": 106,
+      "offset": 4491,
+      "raw": "`no background for ${location}`",
+      "english": "no background for {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "location"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.artlibrary.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/ArtLibrary.ts",
+      "line": 131,
+      "offset": 5611,
+      "raw": "`background ${location} not loaded`",
+      "english": "background {p1} not loaded",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "location"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.artlibrary.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/ContentService.ts",
+      "line": 28,
+      "offset": 1003,
+      "raw": "`base release manifest missing (HTTP ${res.status})`",
+      "english": "base release manifest missing (HTTP {p1})",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "res.status"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.contentservice.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/ContentService.ts",
+      "line": 39,
+      "offset": 1488,
+      "raw": "`base content has no ${path}`",
+      "english": "base content has no {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "path"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.contentservice.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/ContentService.ts",
+      "line": 41,
+      "offset": 1613,
+      "raw": "`base file ${path}: HTTP ${r.status}`",
+      "english": "base file {p1}: HTTP {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "path"
+        },
+        {
+          "name": "p2",
+          "expression": "r.status"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.contentservice.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/ContentService.ts",
+      "line": 44,
+      "offset": 1812,
+      "raw": "`base file ${path} failed its integrity check`",
+      "english": "base file {p1} failed its integrity check",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "path"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.contentservice.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/remote.ts",
+      "line": 12,
+      "offset": 688,
+      "raw": "`manifest request failed: HTTP ${res.status}`",
+      "english": "manifest request failed: HTTP {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "res.status"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.remote.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/content/remote.ts",
+      "line": 18,
+      "offset": 964,
+      "raw": "`object ${sha256.slice(0, 8)} failed: HTTP ${res.status}`",
+      "english": "object {p1} failed: HTTP {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "sha256.slice(0, 8)"
+        },
+        {
+          "name": "p2",
+          "expression": "res.status"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.content.remote.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/main.ts",
+      "line": 47,
+      "offset": 1905,
+      "raw": "'The graphics context was lost. Reload to continue.'",
+      "english": "The graphics context was lost. Reload to continue.",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.main.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/main.ts",
+      "line": 52,
+      "offset": 2149,
+      "raw": "`This device cannot run the game: ${e instanceof Error ? e.message : String(e)}`",
+      "english": "This device cannot run the game: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "e instanceof Error ? e.message : String(e)"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.main.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/net/api.ts",
+      "line": 181,
+      "offset": 5831,
+      "raw": "`HTTP ${res.status}`",
+      "english": "HTTP {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "res.status"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.net.api.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/net/currency.ts",
+      "line": 2,
+      "offset": 191,
+      "raw": "\"Bell's Remains\"",
+      "english": "Bell's Remains",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.net.currency.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/net/identity.ts",
+      "line": 16,
+      "offset": 632,
+      "raw": "'Google sign-in is available in the Android app'",
+      "english": "Google sign-in is available in the Android app",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.net.identity.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/net/store.ts",
+      "line": 11,
+      "offset": 540,
+      "raw": "'Purchases run inside the Android app'",
+      "english": "Purchases run inside the Android app",
+      "placeholders": [],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.net.store.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/net/store.ts",
+      "line": 63,
+      "offset": 2700,
+      "raw": "'Rewarded ads run inside the Android app'",
+      "english": "Rewarded ads run inside the Android app",
+      "placeholders": [],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.net.store.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/platform/idbStorage.ts",
+      "line": 54,
+      "offset": 2068,
+      "raw": "'no indexedDB'",
+      "english": "no indexedDB",
+      "placeholders": [],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.platform.idbstorage.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/platform/idbStorage.ts",
+      "line": 63,
+      "offset": 2479,
+      "raw": "'indexedDB blocked'",
+      "english": "indexedDB blocked",
+      "placeholders": [],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.platform.idbstorage.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 11,
+      "offset": 430,
+      "raw": "'ACCOUNT'",
+      "english": "ACCOUNT",
+      "placeholders": [],
+      "classification": "catalog:heading",
+      "key": "game.scenes.accountscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 24,
+      "offset": 752,
+      "raw": "'Your account is a Google account. Progress, rolls and purchases are bound to it and survive a reinstall.'",
+      "english": "Your account is a Google account. Progress, rolls and purchases are bound to it and survive a reinstall.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 26,
+      "offset": 1051,
+      "raw": "'SIGN IN WITH GOOGLE'",
+      "english": "SIGN IN WITH GOOGLE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.accountscene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 27,
+      "offset": 1236,
+      "raw": "'Google sign-in runs inside the Android app. This browser build cannot sign in.'",
+      "english": "Google sign-in runs inside the Android app. This browser build cannot sign in.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 31,
+      "offset": 1480,
+      "raw": "'Wayfarer'",
+      "english": "Wayfarer",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 32,
+      "offset": 1586,
+      "raw": "`Player ${me.id}`",
+      "english": "Player {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "me.id"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 34,
+      "offset": 1758,
+      "raw": "'No cloud save yet.'",
+      "english": "No cloud save yet.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 34,
+      "offset": 1781,
+      "raw": "`Cloud save v${save.version} · ${save.updatedAt ?? ''}`",
+      "english": "Cloud save v{p1} · {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "save.version"
+        },
+        {
+          "name": "p2",
+          "expression": "save.updatedAt ?? ''"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 35,
+      "offset": 1939,
+      "raw": "'UPLOAD SAVE'",
+      "english": "UPLOAD SAVE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.accountscene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 36,
+      "offset": 2075,
+      "raw": "'DOWNLOAD SAVE'",
+      "english": "DOWNLOAD SAVE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.accountscene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 37,
+      "offset": 2232,
+      "raw": "'EXPORT MY DATA'",
+      "english": "EXPORT MY DATA",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.accountscene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 38,
+      "offset": 2363,
+      "raw": "'SIGN OUT'",
+      "english": "SIGN OUT",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.accountscene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 40,
+      "offset": 2553,
+      "raw": "'PRIVACY OPTIONS (ADS)'",
+      "english": "PRIVACY OPTIONS (ADS)",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.accountscene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 40,
+      "offset": 2647,
+      "raw": "'Privacy choice updated'",
+      "english": "Privacy choice updated",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s014",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 41,
+      "offset": 2791,
+      "raw": "'TAP AGAIN TO DELETE FOREVER'",
+      "english": "TAP AGAIN TO DELETE FOREVER",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.accountscene.s015",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 41,
+      "offset": 2823,
+      "raw": "'DELETE ACCOUNT'",
+      "english": "DELETE ACCOUNT",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.accountscene.s016",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 41,
+      "offset": 2867,
+      "raw": "'progress, wallet and roster cannot be restored'",
+      "english": "progress, wallet and roster cannot be restored",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.accountscene.s017",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 49,
+      "offset": 3238,
+      "raw": "'Welcome, wayfarer. Your company awaits.'",
+      "english": "Welcome, wayfarer. Your company awaits.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s018",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 49,
+      "offset": 3282,
+      "raw": "'Welcome back.'",
+      "english": "Welcome back.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s019",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 65,
+      "offset": 3790,
+      "raw": "'Your data was saved as a file'",
+      "english": "Your data was saved as a file",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s020",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 82,
+      "offset": 4279,
+      "raw": "'Your account was deleted'",
+      "english": "Your account was deleted",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s021",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 92,
+      "offset": 4522,
+      "raw": "'Signed out'",
+      "english": "Signed out",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s022",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 99,
+      "offset": 4742,
+      "raw": "'Saved to the cloud'",
+      "english": "Saved to the cloud",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s023",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 101,
+      "offset": 4852,
+      "raw": "'The cloud save changed on another device. Download it first.'",
+      "english": "The cloud save changed on another device. Download it first.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s024",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/AccountScene.ts",
+      "line": 111,
+      "offset": 5292,
+      "raw": "'Cloud progress merged into this device'",
+      "english": "Cloud progress merged into this device",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.accountscene.s025",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 91,
+      "offset": 3561,
+      "raw": "'This battle could not be loaded'",
+      "english": "This battle could not be loaded",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 93,
+      "offset": 3860,
+      "raw": "'BACK'",
+      "english": "BACK",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.battlescene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 156,
+      "offset": 6500,
+      "raw": "`${this.encounter.stage_id}  ·  ${this.encounter.title_en}`",
+      "english": "{p1}  ·  {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.encounter.stage_id"
+        },
+        {
+          "name": "p2",
+          "expression": "this.encounter.title_en"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 158,
+      "offset": 6702,
+      "raw": "'TURN ORDER'",
+      "english": "TURN ORDER",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 160,
+      "offset": 6860,
+      "raw": "'×1'",
+      "english": "×1",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.battlescene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 161,
+      "offset": 7016,
+      "raw": "'AUTO'",
+      "english": "AUTO",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.battlescene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 162,
+      "offset": 7158,
+      "raw": "'MENU'",
+      "english": "MENU",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.battlescene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 201,
+      "offset": 9287,
+      "raw": "`×${this.speed}`",
+      "english": "×{p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.speed"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 206,
+      "offset": 9408,
+      "raw": "'AUTO ✓'",
+      "english": "AUTO ✓",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 206,
+      "offset": 9419,
+      "raw": "'AUTO'",
+      "english": "AUTO",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 217,
+      "offset": 9867,
+      "raw": "'PAUSED'",
+      "english": "PAUSED",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 218,
+      "offset": 9938,
+      "raw": "'RESUME'",
+      "english": "RESUME",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.battlescene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 219,
+      "offset": 10040,
+      "raw": "'RETREAT'",
+      "english": "RETREAT",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.battlescene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 219,
+      "offset": 10056,
+      "raw": "'Leave the battle'",
+      "english": "Leave the battle",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.battlescene.s014",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 293,
+      "offset": 12558,
+      "raw": "`${actor.def.name_en.toUpperCase()}'S TURN`",
+      "english": "{p1}'S TURN",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "actor.def.name_en.toUpperCase()"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s015",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 294,
+      "offset": 12640,
+      "raw": "`Passive — ${passive.name_en}: ${passive.description_en}`",
+      "english": "Passive — {p1}: {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "passive.name_en"
+        },
+        {
+          "name": "p2",
+          "expression": "passive.description_en"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s016",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 297,
+      "offset": 12823,
+      "raw": "'ULTIMATE'",
+      "english": "ULTIMATE",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.battlescene.s017",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 297,
+      "offset": 12857,
+      "raw": "'BASIC'",
+      "english": "BASIC",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.battlescene.s018",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 297,
+      "offset": 12867,
+      "raw": "'SKILL'",
+      "english": "SKILL",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.battlescene.s019",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 298,
+      "offset": 12936,
+      "raw": "`Cooldown ${o.cooldownLeft}`",
+      "english": "Cooldown {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "o.cooldownLeft"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.battlescene.s020",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 298,
+      "offset": 12967,
+      "raw": "`Focus ${actor.focus}/${o.def.focus_cost}`",
+      "english": "Focus {p1}/{p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "actor.focus"
+        },
+        {
+          "name": "p2",
+          "expression": "o.def.focus_cost"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.battlescene.s021",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 329,
+      "offset": 14366,
+      "raw": "'TAP THE SKILL AGAIN OR THE TARGET'",
+      "english": "TAP THE SKILL AGAIN OR THE TARGET",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s022",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 329,
+      "offset": 14404,
+      "raw": "'CHOOSE A TARGET'",
+      "english": "CHOOSE A TARGET",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s023",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 332,
+      "offset": 14545,
+      "raw": "'TAP AGAIN TO CAST'",
+      "english": "TAP AGAIN TO CAST",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s024",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 352,
+      "offset": 15086,
+      "raw": "`no view for ${id}`",
+      "english": "no view for {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "id"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.scenes.battlescene.s025",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 423,
+      "offset": 18427,
+      "raw": "'STAGGERED'",
+      "english": "STAGGERED",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.battlescene.s026",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 466,
+      "offset": 20564,
+      "raw": "'COUNTER'",
+      "english": "COUNTER",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.battlescene.s027",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 467,
+      "offset": 20637,
+      "raw": "'INTERCEPT'",
+      "english": "INTERCEPT",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.battlescene.s028",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 468,
+      "offset": 20716,
+      "raw": "`-${e.amount}!`",
+      "english": "-{p1}!",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "e.amount"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.battlescene.s029",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 468,
+      "offset": 20734,
+      "raw": "`-${e.amount}`",
+      "english": "-{p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "e.amount"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.battlescene.s030",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 469,
+      "offset": 20878,
+      "raw": "'BLOCKED'",
+      "english": "BLOCKED",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.battlescene.s031",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 469,
+      "offset": 20890,
+      "raw": "`(${e.absorbed} absorbed)`",
+      "english": "({p1} absorbed)",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "e.absorbed"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.battlescene.s032",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 482,
+      "offset": 21502,
+      "raw": "`+${e.amount}`",
+      "english": "+{p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "e.amount"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.battlescene.s033",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 491,
+      "offset": 21812,
+      "raw": "`+${e.amount} SHIELD`",
+      "english": "+{p1} SHIELD",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "e.amount"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.battlescene.s034",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 505,
+      "offset": 22378,
+      "raw": "'CLEANSED'",
+      "english": "CLEANSED",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.battlescene.s035",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 509,
+      "offset": 22491,
+      "raw": "`${e.stat.replace('_', ' ').toUpperCase()} ${e.amount >= 0 ? '▲' : '▼'}`",
+      "english": "{p1} {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "e.stat.replace('_', ' ').toUpperCase()"
+        },
+        {
+          "name": "p2",
+          "expression": "e.amount >= 0 ? '▲' : '▼'"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.battlescene.s036",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 509,
+      "offset": 22552,
+      "raw": "'▲'",
+      "english": "▲",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.battlescene.s037",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 509,
+      "offset": 22558,
+      "raw": "'▼'",
+      "english": "▼",
+      "placeholders": [],
+      "classification": "catalog:symbol or display fallback",
+      "key": "game.scenes.battlescene.s038",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 516,
+      "offset": 22786,
+      "raw": "'ULTIMATE READY'",
+      "english": "ULTIMATE READY",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.battlescene.s039",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 522,
+      "offset": 22962,
+      "raw": "'GUARDING'",
+      "english": "GUARDING",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.battlescene.s040",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 569,
+      "offset": 24542,
+      "raw": "'VICTORY'",
+      "english": "VICTORY",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s041",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 569,
+      "offset": 24554,
+      "raw": "'DEFEAT'",
+      "english": "DEFEAT",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s042",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 586,
+      "offset": 25311,
+      "raw": "`${result.turns} turns  ·  ${this.recorded.length} actions`",
+      "english": "{p1} turns  ·  {p2} actions",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "result.turns"
+        },
+        {
+          "name": "p2",
+          "expression": "this.recorded.length"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s043",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 587,
+      "offset": 25495,
+      "raw": "'Server verification: checking…'",
+      "english": "Server verification: checking…",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s044",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 591,
+      "offset": 25760,
+      "raw": "'CONTINUE'",
+      "english": "CONTINUE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.battlescene.s045",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 591,
+      "offset": 25773,
+      "raw": "'RETRY'",
+      "english": "RETRY",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.battlescene.s046",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 592,
+      "offset": 25978,
+      "raw": "'LEAVE'",
+      "english": "LEAVE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.battlescene.s047",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 606,
+      "offset": 26698,
+      "raw": "` · rewards: ${r.rewards.map((a) => describeAttachment(a, names)).join(', ')}`",
+      "english": " · rewards: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "r.rewards.map((a) => describeAttachment(a, names)).join(', ')"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.battlescene.s048",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 607,
+      "offset": 26801,
+      "raw": "`Progress saved to your account${gained}`",
+      "english": "Progress saved to your account{p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "gained"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s049",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 609,
+      "offset": 26918,
+      "raw": "`Progress not saved: ${e.message}`",
+      "english": "Progress not saved: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "e.message"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s050",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 609,
+      "offset": 26955,
+      "raw": "'Progress not saved'",
+      "english": "Progress not saved",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s051",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 625,
+      "offset": 27804,
+      "raw": "'Server verification: this release is not published on the server'",
+      "english": "Server verification: this release is not published on the server",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s052",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 628,
+      "offset": 27948,
+      "raw": "`HTTP ${res.status}`",
+      "english": "HTTP {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "res.status"
+        }
+      ],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.scenes.battlescene.s053",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 631,
+      "offset": 28158,
+      "raw": "`Server verification: ✓ replay matches (${out.logHash.slice(0, 10)})`",
+      "english": "Server verification: ✓ replay matches ({p1})",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "out.logHash.slice(0, 10)"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s054",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 632,
+      "offset": 28272,
+      "raw": "'Server verification: ✗ replay rejected'",
+      "english": "Server verification: ✗ replay rejected",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s055",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BattleScene.ts",
+      "line": 634,
+      "offset": 28387,
+      "raw": "'Server verification: unavailable offline'",
+      "english": "Server verification: unavailable offline",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.battlescene.s056",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/BootScene.ts",
+      "line": 48,
+      "offset": 1715,
+      "raw": "`The game could not start: ${e instanceof Error ? e.message : String(e)}`",
+      "english": "The game could not start: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "e instanceof Error ? e.message : String(e)"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.bootscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ChaptersScene.ts",
+      "line": 22,
+      "offset": 828,
+      "raw": "'CHAPTERS'",
+      "english": "CHAPTERS",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.chaptersscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ChaptersScene.ts",
+      "line": 40,
+      "offset": 1769,
+      "raw": "'BACK'",
+      "english": "BACK",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.chaptersscene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ChaptersScene.ts",
+      "line": 48,
+      "offset": 2381,
+      "raw": "`Locked — finish \"${titles.get(node.requires ?? '') ?? node.requires}\" first`",
+      "english": "Locked — finish \"{p1}\" first",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "titles.get(node.requires ?? '') ?? node.requires"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.chaptersscene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ChaptersScene.ts",
+      "line": 48,
+      "offset": 2486,
+      "raw": "'Story and battle'",
+      "english": "Story and battle",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.chaptersscene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ChaptersScene.ts",
+      "line": 48,
+      "offset": 2507,
+      "raw": "'Story'",
+      "english": "Story",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.chaptersscene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ChaptersScene.ts",
+      "line": 51,
+      "offset": 2687,
+      "raw": "`NEW · ${patchedBy}`",
+      "english": "NEW · {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "patchedBy"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.chaptersscene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 9,
+      "offset": 297,
+      "raw": "'weapon'",
+      "english": "weapon",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.characterscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Source token is also a machine identifier; map display text separately, do not translate the identifier in data/API calls. UI uppercases this token."
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 9,
+      "offset": 307,
+      "raw": "'armor'",
+      "english": "armor",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.characterscene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Source token is also a machine identifier; map display text separately, do not translate the identifier in data/API calls. UI uppercases this token."
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 9,
+      "offset": 316,
+      "raw": "'necklace'",
+      "english": "necklace",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.characterscene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Source token is also a machine identifier; map display text separately, do not translate the identifier in data/API calls. UI uppercases this token."
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 9,
+      "offset": 328,
+      "raw": "'ring'",
+      "english": "ring",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.characterscene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Source token is also a machine identifier; map display text separately, do not translate the identifier in data/API calls. UI uppercases this token."
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 13,
+      "offset": 558,
+      "raw": "'COMPANION'",
+      "english": "COMPANION",
+      "placeholders": [],
+      "classification": "catalog:heading",
+      "key": "game.scenes.characterscene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 32,
+      "offset": 1235,
+      "raw": "'You do not own this companion.'",
+      "english": "You do not own this companion.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 40,
+      "offset": 1736,
+      "raw": "`${stars(meta.rarity)}   ${meta.element} · ${meta.role.replaceAll('_', ' ')}`",
+      "english": "{p1}   {p2} · {p3}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "stars(meta.rarity)"
+        },
+        {
+          "name": "p2",
+          "expression": "meta.element"
+        },
+        {
+          "name": "p3",
+          "expression": "meta.role.replaceAll('_', ' ')"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 41,
+      "offset": 1902,
+      "raw": "`Level ${c.level} / ${c.cap}    Ascension ${c.ascension}`",
+      "english": "Level {p1} / {p2}    Ascension {p3}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "c.level"
+        },
+        {
+          "name": "p2",
+          "expression": "c.cap"
+        },
+        {
+          "name": "p3",
+          "expression": "c.ascension"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 42,
+      "offset": 2056,
+      "raw": "'Maximum level'",
+      "english": "Maximum level",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 42,
+      "offset": 2074,
+      "raw": "`XP ${c.xp} / ${c.xpToNext}`",
+      "english": "XP {p1} / {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "c.xp"
+        },
+        {
+          "name": "p2",
+          "expression": "c.xpToNext"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 44,
+      "offset": 2223,
+      "raw": "'hp'",
+      "english": "hp",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Source token is also a machine identifier; map display text separately, do not translate the identifier in data/API calls. UI uppercases this token."
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 44,
+      "offset": 2229,
+      "raw": "'atk'",
+      "english": "atk",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Source token is also a machine identifier; map display text separately, do not translate the identifier in data/API calls. UI uppercases this token."
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 44,
+      "offset": 2236,
+      "raw": "'def'",
+      "english": "def",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Source token is also a machine identifier; map display text separately, do not translate the identifier in data/API calls. UI uppercases this token."
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 44,
+      "offset": 2243,
+      "raw": "'spd'",
+      "english": "spd",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s014",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Source token is also a machine identifier; map display text separately, do not translate the identifier in data/API calls. UI uppercases this token."
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 44,
+      "offset": 2261,
+      "raw": "`${k.toUpperCase()} ${Math.round(s[k] ?? 0)}`",
+      "english": "{p1} {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "k.toUpperCase()"
+        },
+        {
+          "name": "p2",
+          "expression": "Math.round(s[k] ?? 0)"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s015",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 48,
+      "offset": 2559,
+      "raw": "'LEVEL UP'",
+      "english": "LEVEL UP",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.characterscene.s016",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 48,
+      "offset": 2585,
+      "raw": "`uses 1 ${nm(xpItem.itemId)}`",
+      "english": "uses 1 {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "nm(xpItem.itemId)"
+        }
+      ],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.characterscene.s017",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 48,
+      "offset": 2617,
+      "raw": "'no XP items'",
+      "english": "no XP items",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.characterscene.s018",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 48,
+      "offset": 2824,
+      "raw": "'Level up'",
+      "english": "Level up",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s019",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 51,
+      "offset": 3084,
+      "raw": "'ASCEND'",
+      "english": "ASCEND",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.characterscene.s020",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 51,
+      "offset": 3105,
+      "raw": "`→ cap ${asc.cap} · account Lv ${asc.accountLevel}`",
+      "english": "→ cap {p1} · account Lv {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "asc.cap"
+        },
+        {
+          "name": "p2",
+          "expression": "asc.accountLevel"
+        }
+      ],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.characterscene.s021",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 51,
+      "offset": 3159,
+      "raw": "'fully ascended'",
+      "english": "fully ascended",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.characterscene.s022",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 51,
+      "offset": 3286,
+      "raw": "'Ascended'",
+      "english": "Ascended",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s023",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 52,
+      "offset": 3368,
+      "raw": "`${asc.items.map((i) => `${nm(i.itemId)} ${(have.get(i.itemId) ?? 0)}/${i.quantity}`).join('  ·  ')}  ·  ${Math.ceil(asc.fee)} ${currency.name}`",
+      "english": "{p1}  ·  {p2} {p3}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "asc.items.map((i) => `${nm(i.itemId)} ${(have.get(i.itemId) ?? 0)}/${i.quantity}`).join('  ·  ')"
+        },
+        {
+          "name": "p2",
+          "expression": "Math.ceil(asc.fee)"
+        },
+        {
+          "name": "p3",
+          "expression": "currency.name"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s024",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 52,
+      "offset": 3392,
+      "raw": "`${nm(i.itemId)} ${(have.get(i.itemId) ?? 0)}/${i.quantity}`",
+      "english": "{p1} {p2}/{p3}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "nm(i.itemId)"
+        },
+        {
+          "name": "p2",
+          "expression": "(have.get(i.itemId) ?? 0)"
+        },
+        {
+          "name": "p3",
+          "expression": "i.quantity"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s025",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 52,
+      "offset": 3459,
+      "raw": "'  ·  '",
+      "english": "  ·  ",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s026",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 55,
+      "offset": 3617,
+      "raw": "'SKILLS'",
+      "english": "SKILLS",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s027",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 60,
+      "offset": 3940,
+      "raw": "`${sk.type} · rank ${sk.rank}/${sk.maxRank}`",
+      "english": "{p1} · rank {p2}/{p3}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "sk.type"
+        },
+        {
+          "name": "p2",
+          "expression": "sk.rank"
+        },
+        {
+          "name": "p3",
+          "expression": "sk.maxRank"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s028",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 63,
+      "offset": 4222,
+      "raw": "'RANK UP'",
+      "english": "RANK UP",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.characterscene.s029",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 63,
+      "offset": 4234,
+      "raw": "'MAX'",
+      "english": "MAX",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.characterscene.s030",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 63,
+      "offset": 4250,
+      "raw": "`${nm(n.itemId)} ×${n.quantity}`",
+      "english": "{p1} ×{p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "nm(n.itemId)"
+        },
+        {
+          "name": "p2",
+          "expression": "n.quantity"
+        }
+      ],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.characterscene.s031",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 63,
+      "offset": 4422,
+      "raw": "`${sk.name} improved`",
+      "english": "{p1} improved",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "sk.name"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s032",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 72,
+      "offset": 4867,
+      "raw": "'— empty —'",
+      "english": "— empty —",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.characterscene.s033",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/CharacterScene.ts",
+      "line": 74,
+      "offset": 5103,
+      "raw": "'CHANGE'",
+      "english": "CHANGE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.characterscene.s034",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 10,
+      "offset": 398,
+      "raw": "`${s.stat.replace('_pct', '%')} ${s.value}`",
+      "english": "{p1} {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "s.stat.replace('_pct', '%')"
+        },
+        {
+          "name": "p2",
+          "expression": "s.value"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.gearscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 10,
+      "offset": 424,
+      "raw": "'%'",
+      "english": "%",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.gearscene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 14,
+      "offset": 674,
+      "raw": "'ARMORY'",
+      "english": "ARMORY",
+      "placeholders": [],
+      "classification": "catalog:heading",
+      "key": "game.scenes.gearscene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 44,
+      "offset": 1532,
+      "raw": "`${this.slot} · ${this.list.length} owned`",
+      "english": "{p1} · {p2} owned",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.slot"
+        },
+        {
+          "name": "p2",
+          "expression": "this.list.length"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.gearscene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 44,
+      "offset": 1577,
+      "raw": "`${this.list.length} items`",
+      "english": "{p1} items",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.list.length"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.gearscene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 49,
+      "offset": 1975,
+      "raw": "`${g.name}  ${stars(g.rarity)}`",
+      "english": "{p1}  {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "g.name"
+        },
+        {
+          "name": "p2",
+          "expression": "stars(g.rarity)"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.gearscene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 50,
+      "offset": 2130,
+      "raw": "`${g.slot} · Lv ${g.level}/${g.levelCap}${g.equippedBy ? ` · on ${g.equippedBy}` : ''}   ${statLine(g)}`",
+      "english": "{p1} · Lv {p2}/{p3}{p4}   {p5}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "g.slot"
+        },
+        {
+          "name": "p2",
+          "expression": "g.level"
+        },
+        {
+          "name": "p3",
+          "expression": "g.levelCap"
+        },
+        {
+          "name": "p4",
+          "expression": "g.equippedBy ? ` · on ${g.equippedBy}` : ''"
+        },
+        {
+          "name": "p5",
+          "expression": "statLine(g)"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.gearscene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 50,
+      "offset": 2187,
+      "raw": "` · on ${g.equippedBy}`",
+      "english": " · on {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "g.equippedBy"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.gearscene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 52,
+      "offset": 2389,
+      "raw": "'REMOVE'",
+      "english": "REMOVE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.gearscene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 52,
+      "offset": 2400,
+      "raw": "'EQUIP'",
+      "english": "EQUIP",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.gearscene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 52,
+      "offset": 2640,
+      "raw": "'Removed'",
+      "english": "Removed",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.gearscene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 52,
+      "offset": 2652,
+      "raw": "'Equipped'",
+      "english": "Equipped",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.gearscene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 57,
+      "offset": 2845,
+      "raw": "'‹'",
+      "english": "‹",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.gearscene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 58,
+      "offset": 3004,
+      "raw": "`${this.page + 1} / ${pages}`",
+      "english": "{p1} / {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.page + 1"
+        },
+        {
+          "name": "p2",
+          "expression": "pages"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.gearscene.s014",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/GearScene.ts",
+      "line": 59,
+      "offset": 3138,
+      "raw": "'›'",
+      "english": "›",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.gearscene.s015",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 9,
+      "offset": 304,
+      "raw": "'THE COMPANY'",
+      "english": "THE COMPANY",
+      "placeholders": [],
+      "classification": "catalog:heading",
+      "key": "game.scenes.homescene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 20,
+      "offset": 618,
+      "raw": "'SUMMON'",
+      "english": "SUMMON",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 20,
+      "offset": 633,
+      "raw": "'Banners, rates, pity'",
+      "english": "Banners, rates, pity",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 21,
+      "offset": 691,
+      "raw": "'ROSTER'",
+      "english": "ROSTER",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 21,
+      "offset": 706,
+      "raw": "'Your company'",
+      "english": "Your company",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 22,
+      "offset": 756,
+      "raw": "'ERRANDS'",
+      "english": "ERRANDS",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 22,
+      "offset": 772,
+      "raw": "'Daily and weekly'",
+      "english": "Daily and weekly",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 23,
+      "offset": 825,
+      "raw": "'ARMORY'",
+      "english": "ARMORY",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 23,
+      "offset": 840,
+      "raw": "'Weapons and relics'",
+      "english": "Weapons and relics",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 24,
+      "offset": 894,
+      "raw": "'MAIL'",
+      "english": "MAIL",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 24,
+      "offset": 907,
+      "raw": "'Rewards and notices'",
+      "english": "Rewards and notices",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 25,
+      "offset": 962,
+      "raw": "'SHOP'",
+      "english": "SHOP",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 25,
+      "offset": 975,
+      "raw": "'Offers and ads'",
+      "english": "Offers and ads",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 26,
+      "offset": 1025,
+      "raw": "'ACCOUNT'",
+      "english": "ACCOUNT",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s014",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 26,
+      "offset": 1056,
+      "raw": "'Signed in'",
+      "english": "Signed in",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s015",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 26,
+      "offset": 1070,
+      "raw": "'Sign in'",
+      "english": "Sign in",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.homescene.s016",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 33,
+      "offset": 1484,
+      "raw": "'Your progress, wallet and rolls are kept on the server.'",
+      "english": "Your progress, wallet and rolls are kept on the server.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.homescene.s017",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 33,
+      "offset": 1544,
+      "raw": "'Sign in to keep your progress, wallet and rolls on the server.'",
+      "english": "Sign in to keep your progress, wallet and rolls on the server.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.homescene.s018",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 36,
+      "offset": 1799,
+      "raw": "'The servers are in maintenance: some actions may be refused.'",
+      "english": "The servers are in maintenance: some actions may be refused.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.homescene.s019",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/HomeScene.ts",
+      "line": 38,
+      "offset": 1976,
+      "raw": "'Offline: server features are unavailable.'",
+      "english": "Offline: server features are unavailable.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.homescene.s020",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 12,
+      "offset": 390,
+      "raw": "'MAIL'",
+      "english": "MAIL",
+      "placeholders": [],
+      "classification": "catalog:heading",
+      "key": "game.scenes.mailscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 32,
+      "offset": 1046,
+      "raw": "`${open.length} waiting`",
+      "english": "{p1} waiting",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "open.length"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.mailscene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 32,
+      "offset": 1073,
+      "raw": "'Nothing is waiting for you.'",
+      "english": "Nothing is waiting for you.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.mailscene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 39,
+      "offset": 1618,
+      "raw": "`${describeAttachments(m.attachments, this.names)}   ·   ${done ? 'claimed' : `expires ${m.expires_at.slice(0, 10)}`}`",
+      "english": "{p1}   ·   {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "describeAttachments(m.attachments, this.names)"
+        },
+        {
+          "name": "p2",
+          "expression": "done ? 'claimed' : `expires ${m.expires_at.slice(0, 10)}`"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.mailscene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 39,
+      "offset": 1684,
+      "raw": "'claimed'",
+      "english": "claimed",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.mailscene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 39,
+      "offset": 1696,
+      "raw": "`expires ${m.expires_at.slice(0, 10)}`",
+      "english": "expires {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "m.expires_at.slice(0, 10)"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.mailscene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 40,
+      "offset": 1859,
+      "raw": "'CLAIMED'",
+      "english": "CLAIMED",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.mailscene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 40,
+      "offset": 1871,
+      "raw": "'CLAIM'",
+      "english": "CLAIM",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.mailscene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 44,
+      "offset": 2162,
+      "raw": "'‹'",
+      "english": "‹",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.mailscene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 45,
+      "offset": 2321,
+      "raw": "`${this.page + 1} / ${pages}`",
+      "english": "{p1} / {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.page + 1"
+        },
+        {
+          "name": "p2",
+          "expression": "pages"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.mailscene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 46,
+      "offset": 2455,
+      "raw": "'›'",
+      "english": "›",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.mailscene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 48,
+      "offset": 2649,
+      "raw": "'CLAIM ALL'",
+      "english": "CLAIM ALL",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.mailscene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/MailScene.ts",
+      "line": 57,
+      "offset": 2969,
+      "raw": "`Claimed: ${describeAttachments(m.attachments, this.names)}`",
+      "english": "Claimed: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "describeAttachments(m.attachments, this.names)"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.mailscene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/RosterScene.ts",
+      "line": 11,
+      "offset": 326,
+      "raw": "'ROSTER'",
+      "english": "ROSTER",
+      "placeholders": [],
+      "classification": "catalog:heading",
+      "key": "game.scenes.rosterscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/RosterScene.ts",
+      "line": 31,
+      "offset": 1268,
+      "raw": "`${this.list.length} of ${total} companions`",
+      "english": "{p1} of {p2} companions",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.list.length"
+        },
+        {
+          "name": "p2",
+          "expression": "total"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.rosterscene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/RosterScene.ts",
+      "line": 40,
+      "offset": 2123,
+      "raw": "`${c.element} · ${c.role.replaceAll('_', ' ')}`",
+      "english": "{p1} · {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "c.element"
+        },
+        {
+          "name": "p2",
+          "expression": "c.role.replaceAll('_', ' ')"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.rosterscene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/RosterScene.ts",
+      "line": 41,
+      "offset": 2289,
+      "raw": "`copies ${c.copies} · shards ${c.shards}`",
+      "english": "copies {p1} · shards {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "c.copies"
+        },
+        {
+          "name": "p2",
+          "expression": "c.shards"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.rosterscene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/RosterScene.ts",
+      "line": 41,
+      "offset": 2333,
+      "raw": "'tap for details'",
+      "english": "tap for details",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.rosterscene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/RosterScene.ts",
+      "line": 45,
+      "offset": 2569,
+      "raw": "'‹'",
+      "english": "‹",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.rosterscene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/RosterScene.ts",
+      "line": 46,
+      "offset": 2733,
+      "raw": "`${this.page + 1} / ${pages}`",
+      "english": "{p1} / {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.page + 1"
+        },
+        {
+          "name": "p2",
+          "expression": "pages"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.rosterscene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/RosterScene.ts",
+      "line": 47,
+      "offset": 2867,
+      "raw": "'›'",
+      "english": "›",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.rosterscene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 13,
+      "offset": 610,
+      "raw": "'SHOP'",
+      "english": "SHOP",
+      "placeholders": [],
+      "classification": "catalog:heading",
+      "key": "game.scenes.shopscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 26,
+      "offset": 1026,
+      "raw": "`${restored} earlier purchase(s) restored`",
+      "english": "{p1} earlier purchase(s) restored",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "restored"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 31,
+      "offset": 1268,
+      "raw": "'Payments are handled by Google Play.'",
+      "english": "Payments are handled by Google Play.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 31,
+      "offset": 1309,
+      "raw": "'Purchases and rewarded ads run inside the Android app.'",
+      "english": "Purchases and rewarded ads run inside the Android app.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 32,
+      "offset": 1487,
+      "raw": "'No offers are on sale yet.'",
+      "english": "No offers are on sale yet.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 36,
+      "offset": 1741,
+      "raw": "'Watch a memory'",
+      "english": "Watch a memory",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 37,
+      "offset": 1878,
+      "raw": "`${ads.reward} ${currencyLabel()} per view · ${ads.perWindow - ads.windowViews} of ${ads.perWindow} left in the last 12 hours`",
+      "english": "{p1} {p2} per view · {p3} of {p4} left in the last 12 hours",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "ads.reward"
+        },
+        {
+          "name": "p2",
+          "expression": "currencyLabel()"
+        },
+        {
+          "name": "p3",
+          "expression": "ads.perWindow - ads.windowViews"
+        },
+        {
+          "name": "p4",
+          "expression": "ads.perWindow"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 38,
+      "offset": 2122,
+      "raw": "'WATCH'",
+      "english": "WATCH",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.shopscene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 46,
+      "offset": 2551,
+      "raw": "`${p.subscription.duration_days}-day blessing: tokens now and twice a day`",
+      "english": "{p1}-day blessing: tokens now and twice a day",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "p.subscription.duration_days"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.shopscene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 47,
+      "offset": 2679,
+      "raw": "`${g.amount} ${currencyLabel(g.currency)}`",
+      "english": "{p1} {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "g.amount"
+        },
+        {
+          "name": "p2",
+          "expression": "currencyLabel(g.currency)"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.shopscene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 49,
+      "offset": 2911,
+      "raw": "'BUY'",
+      "english": "BUY",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.shopscene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 59,
+      "offset": 3235,
+      "raw": "'Purchase complete. Check your mail and wallet.'",
+      "english": "Purchase complete. Check your mail and wallet.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 59,
+      "offset": 3319,
+      "raw": "'Already delivered.'",
+      "english": "Already delivered.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 59,
+      "offset": 3367,
+      "raw": "'Payment is pending; it will be delivered when it clears.'",
+      "english": "Payment is pending; it will be delivered when it clears.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s014",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 59,
+      "offset": 3454,
+      "raw": "'Purchase cancelled.'",
+      "english": "Purchase cancelled.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s015",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 59,
+      "offset": 3478,
+      "raw": "'The purchase could not be confirmed.'",
+      "english": "The purchase could not be confirmed.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s016",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 73,
+      "offset": 3825,
+      "raw": "'Thank you. The reward is on its way to your wallet.'",
+      "english": "Thank you. The reward is on its way to your wallet.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s017",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 73,
+      "offset": 3904,
+      "raw": "'The memory was cut short: no reward this time.'",
+      "english": "The memory was cut short: no reward this time.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s018",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 73,
+      "offset": 3971,
+      "raw": "'No memory is available right now. Try again later.'",
+      "english": "No memory is available right now. Try again later.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s019",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 73,
+      "offset": 4047,
+      "raw": "'Ads need your privacy choice first (Account > Privacy options).'",
+      "english": "Ads need your privacy choice first (Account > Privacy options).",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s020",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/ShopScene.ts",
+      "line": 73,
+      "offset": 4115,
+      "raw": "'The ad could not be shown.'",
+      "english": "The ad could not be shown.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.shopscene.s021",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 113,
+      "offset": 3421,
+      "raw": "'This scene could not be loaded'",
+      "english": "This scene could not be loaded",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.storyscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 115,
+      "offset": 3726,
+      "raw": "'BACK'",
+      "english": "BACK",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.storyscene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 148,
+      "offset": 5660,
+      "raw": "'▼'",
+      "english": "▼",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.storyscene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 151,
+      "offset": 5911,
+      "raw": "'SKIP'",
+      "english": "SKIP",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.storyscene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 152,
+      "offset": 6071,
+      "raw": "'AUTO'",
+      "english": "AUTO",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.storyscene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 153,
+      "offset": 6216,
+      "raw": "'LOG'",
+      "english": "LOG",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.storyscene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 340,
+      "offset": 12777,
+      "raw": "'AUTO ✓'",
+      "english": "AUTO ✓",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.storyscene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 340,
+      "offset": 12788,
+      "raw": "'AUTO'",
+      "english": "AUTO",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.storyscene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 346,
+      "offset": 12967,
+      "raw": "'SKIP ✓'",
+      "english": "SKIP ✓",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.storyscene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 346,
+      "offset": 12978,
+      "raw": "'SKIP'",
+      "english": "SKIP",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.storyscene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 382,
+      "offset": 14434,
+      "raw": "'BACKLOG'",
+      "english": "BACKLOG",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.storyscene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 385,
+      "offset": 14556,
+      "raw": "`${l.speakerDisplay.toUpperCase()}  `",
+      "english": "{p1}  ",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "l.speakerDisplay.toUpperCase()"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.storyscene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 386,
+      "offset": 14629,
+      "raw": "`${who}${l.text}`",
+      "english": "{p1}{p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "who"
+        },
+        {
+          "name": "p2",
+          "expression": "l.text"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.storyscene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/StoryScene.ts",
+      "line": 390,
+      "offset": 14863,
+      "raw": "'CLOSE'",
+      "english": "CLOSE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.storyscene.s014",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 15,
+      "offset": 627,
+      "raw": "'SUMMON'",
+      "english": "SUMMON",
+      "placeholders": [],
+      "classification": "catalog:heading",
+      "key": "game.scenes.summonscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 46,
+      "offset": 1626,
+      "raw": "'No banner is open right now.'",
+      "english": "No banner is open right now.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 54,
+      "offset": 2117,
+      "raw": "`${this.idx + 1} / ${this.banners.length}${b.endsAt ? `   ·   ends ${b.endsAt.slice(0, 10)}` : ''}`",
+      "english": "{p1} / {p2}{p3}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.idx + 1"
+        },
+        {
+          "name": "p2",
+          "expression": "this.banners.length"
+        },
+        {
+          "name": "p3",
+          "expression": "b.endsAt ? `   ·   ends ${b.endsAt.slice(0, 10)}` : ''"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 54,
+      "offset": 2171,
+      "raw": "`   ·   ends ${b.endsAt.slice(0, 10)}`",
+      "english": "   ·   ends {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "b.endsAt.slice(0, 10)"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 56,
+      "offset": 2358,
+      "raw": "'‹'",
+      "english": "‹",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 57,
+      "offset": 2561,
+      "raw": "'›'",
+      "english": "›",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 61,
+      "offset": 2754,
+      "raw": "`Featured: ${b.pools.fiveFeatured.map((i) => this.name(i)).join(', ')} — ${pct(b.featured.chance, 0)} on a 5★${b.featured.lossesToGuarantee === 1 ? ', guaranteed after a miss' : `, guaranteed after ${b.featured.lossesToGuarantee} misses`}`",
+      "english": "Featured: {p1} — {p2} on a 5★{p3}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "b.pools.fiveFeatured.map((i) => this.name(i)).join(', ')"
+        },
+        {
+          "name": "p2",
+          "expression": "pct(b.featured.chance, 0)"
+        },
+        {
+          "name": "p3",
+          "expression": "b.featured.lossesToGuarantee === 1 ? ', guaranteed after a miss' : `, guaranteed after ${b.featured.lossesToGuarantee} misses`"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 61,
+      "offset": 2902,
+      "raw": "', guaranteed after a miss'",
+      "english": ", guaranteed after a miss",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.summonscene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 61,
+      "offset": 2932,
+      "raw": "`, guaranteed after ${b.featured.lossesToGuarantee} misses`",
+      "english": ", guaranteed after {p1} misses",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "b.featured.lossesToGuarantee"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 61,
+      "offset": 2996,
+      "raw": "`5★ pool: ${b.pools.fiveOther.map((i) => this.name(i)).join(', ')}`",
+      "english": "5★ pool: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "b.pools.fiveOther.map((i) => this.name(i)).join(', ')"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 63,
+      "offset": 3091,
+      "raw": "`5★ rate ${pct(b.baseFiveStarRate)}${b.softPity ? `, rising ${pct(b.softPity.increment, 0)} per pull from pull ${b.softPity.startPull}` : ''}, guaranteed by pull ${b.hardPity}`",
+      "english": "5★ rate {p1}{p2}, guaranteed by pull {p3}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "pct(b.baseFiveStarRate)"
+        },
+        {
+          "name": "p2",
+          "expression": "b.softPity ? `, rising ${pct(b.softPity.increment, 0)} per pull from pull ${b.softPity.startPull}` : ''"
+        },
+        {
+          "name": "p3",
+          "expression": "b.hardPity"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 63,
+      "offset": 3141,
+      "raw": "`, rising ${pct(b.softPity.increment, 0)} per pull from pull ${b.softPity.startPull}`",
+      "english": ", rising {p1} per pull from pull {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "pct(b.softPity.increment, 0)"
+        },
+        {
+          "name": "p2",
+          "expression": "b.softPity.startPull"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 65,
+      "offset": 3287,
+      "raw": "`A 4★ or better at least every ${b.minFourStarEvery} pulls. A 10-pull has no bonus rate.`",
+      "english": "A 4★ or better at least every {p1} pulls. A 10-pull has no bonus rate.",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "b.minFourStarEvery"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 66,
+      "offset": 3384,
+      "raw": "`Average ${b.analysis.expectedPullsPerFiveStar.toFixed(1)} pulls per 5★${b.analysis.expectedPullsPerTarget ? `, ${b.analysis.expectedPullsPerTarget.toFixed(1)} per featured (at most ${b.analysis.worstCasePullsForTarget})` : ''}`",
+      "english": "Average {p1} pulls per 5★{p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "b.analysis.expectedPullsPerFiveStar.toFixed(1)"
+        },
+        {
+          "name": "p2",
+          "expression": "b.analysis.expectedPullsPerTarget ? `, ${b.analysis.expectedPullsPerTarget.toFixed(1)} per featured (at most ${b.analysis.worstCasePullsForTarget})` : ''"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s014",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 66,
+      "offset": 3493,
+      "raw": "`, ${b.analysis.expectedPullsPerTarget.toFixed(1)} per featured (at most ${b.analysis.worstCasePullsForTarget})`",
+      "english": ", {p1} per featured (at most {p2})",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "b.analysis.expectedPullsPerTarget.toFixed(1)"
+        },
+        {
+          "name": "p2",
+          "expression": "b.analysis.worstCasePullsForTarget"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s015",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 71,
+      "offset": 3819,
+      "raw": "'PITY'",
+      "english": "PITY",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s016",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 72,
+      "offset": 3957,
+      "raw": "`Pull ${next} of ${b.hardPity}`",
+      "english": "Pull {p1} of {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "next"
+        },
+        {
+          "name": "p2",
+          "expression": "b.hardPity"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s017",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 77,
+      "offset": 4411,
+      "raw": "`5★ chance on the next pull: ${pct(rateNow)}`",
+      "english": "5★ chance on the next pull: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "pct(rateNow)"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s018",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 79,
+      "offset": 4622,
+      "raw": "'The next 5★ is the featured one.'",
+      "english": "The next 5★ is the featured one.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s019",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 79,
+      "offset": 4672,
+      "raw": "`Misses so far: ${p.lost} / ${b.featured.lossesToGuarantee}`",
+      "english": "Misses so far: {p1} / {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "p.lost"
+        },
+        {
+          "name": "p2",
+          "expression": "b.featured.lossesToGuarantee"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s020",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 80,
+      "offset": 4849,
+      "raw": "`4★ guaranteed in ${Math.max(1, b.minFourStarEvery - p.pity4)} pull(s)`",
+      "english": "4★ guaranteed in {p1} pull(s)",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "Math.max(1, b.minFourStarEvery - p.pity4)"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s021",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 82,
+      "offset": 5079,
+      "raw": "`TARGET: ${this.name(this.target ?? '')}`",
+      "english": "TARGET: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.name(this.target ?? '')"
+        }
+      ],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s022",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 86,
+      "offset": 5385,
+      "raw": "'PULL ×1'",
+      "english": "PULL ×1",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s023",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 86,
+      "offset": 5401,
+      "raw": "`${one.toLocaleString('en-US')} ${currency.name}`",
+      "english": "{p1} {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "one.toLocaleString('en-US')"
+        },
+        {
+          "name": "p2",
+          "expression": "currency.name"
+        }
+      ],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s024",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 87,
+      "offset": 5622,
+      "raw": "'PULL ×10'",
+      "english": "PULL ×10",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s025",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 87,
+      "offset": 5639,
+      "raw": "`${(one * 10).toLocaleString('en-US')} ${currency.name}`",
+      "english": "{p1} {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "(one * 10).toLocaleString('en-US')"
+        },
+        {
+          "name": "p2",
+          "expression": "currency.name"
+        }
+      ],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s026",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 89,
+      "offset": 5946,
+      "raw": "`You have ${this.balance.toLocaleString('en-US')} ${currency.name}. The same currency pays for upgrades and the shop: after ×10 you keep ${Math.max(0, this.balance - one * 10).toLocaleString('en-US')}.`",
+      "english": "You have {p1} {p2}. The same currency pays for upgrades and the shop: after ×10 you keep {p3}.",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "this.balance.toLocaleString('en-US')"
+        },
+        {
+          "name": "p2",
+          "expression": "currency.name"
+        },
+        {
+          "name": "p3",
+          "expression": "Math.max(0, this.balance - one * 10).toLocaleString('en-US')"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s027",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 90,
+      "offset": 6254,
+      "raw": "'POOLS'",
+      "english": "POOLS",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s028",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 91,
+      "offset": 6382,
+      "raw": "'HISTORY'",
+      "english": "HISTORY",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s029",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 120,
+      "offset": 7540,
+      "raw": "'RESULT (already rolled)'",
+      "english": "RESULT (already rolled)",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.summonscene.s030",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 120,
+      "offset": 7568,
+      "raw": "'THE THREAD PULLS TIGHT'",
+      "english": "THE THREAD PULLS TIGHT",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.summonscene.s031",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 131,
+      "offset": 8413,
+      "raw": "`+${p.shards} shards`",
+      "english": "+{p1} shards",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "p.shards"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s032",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 131,
+      "offset": 8466,
+      "raw": "'NEW · guaranteed'",
+      "english": "NEW · guaranteed",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s033",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 131,
+      "offset": 8487,
+      "raw": "'NEW'",
+      "english": "NEW",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.summonscene.s034",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 139,
+      "offset": 8908,
+      "raw": "'CLOSE'",
+      "english": "CLOSE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s035",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 144,
+      "offset": 9158,
+      "raw": "'POOLS & RATES'",
+      "english": "POOLS & RATES",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.summonscene.s036",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 145,
+      "offset": 9287,
+      "raw": "'—'",
+      "english": "—",
+      "placeholders": [],
+      "classification": "catalog:symbol or display fallback",
+      "key": "game.scenes.summonscene.s037",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 147,
+      "offset": 9318,
+      "raw": "`5★ featured: ${list(b.pools.fiveFeatured)}`",
+      "english": "5★ featured: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "list(b.pools.fiveFeatured)"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s038",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 148,
+      "offset": 9370,
+      "raw": "`5★ other: ${list(b.pools.fiveOther)}`",
+      "english": "5★ other: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "list(b.pools.fiveOther)"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s039",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 149,
+      "offset": 9416,
+      "raw": "`4★: ${list(b.pools.four)}`",
+      "english": "4★: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "list(b.pools.four)"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.summonscene.s040",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 150,
+      "offset": 9451,
+      "raw": "`3★: ${list(b.pools.three)}`",
+      "english": "3★: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "list(b.pools.three)"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.summonscene.s041",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 152,
+      "offset": 9497,
+      "raw": "`Duplicates become character-bound Memory Shards: 5★ ${b.duplicateShards['5']}, 4★ ${b.duplicateShards['4']}, 3★ ${b.duplicateShards['3']}.`",
+      "english": "Duplicates become character-bound Memory Shards: 5★ {p1}, 4★ {p2}, 3★ {p3}.",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "b.duplicateShards['5']"
+        },
+        {
+          "name": "p2",
+          "expression": "b.duplicateShards['4']"
+        },
+        {
+          "name": "p3",
+          "expression": "b.duplicateShards['3']"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s042",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 153,
+      "offset": 9645,
+      "raw": "`Pity is kept per account and shared between banners of the same kind.`",
+      "english": "Pity is kept per account and shared between banners of the same kind.",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.summonscene.s043",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 156,
+      "offset": 9908,
+      "raw": "'CLOSE'",
+      "english": "CLOSE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s044",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 163,
+      "offset": 10223,
+      "raw": "'YOUR LAST PULLS'",
+      "english": "YOUR LAST PULLS",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.summonscene.s045",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 164,
+      "offset": 10316,
+      "raw": "`${stars(r.rarity).padEnd(5, ' ')}  ${this.name(r.item_id)}  ·  ${r.banner_id}  ·  pull ${r.pull_number}${r.duplicate ? '  (duplicate)' : ''}`",
+      "english": "{p1}  {p2}  ·  {p3}  ·  pull {p4}{p5}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "stars(r.rarity).padEnd(5, ' ')"
+        },
+        {
+          "name": "p2",
+          "expression": "this.name(r.item_id)"
+        },
+        {
+          "name": "p3",
+          "expression": "r.banner_id"
+        },
+        {
+          "name": "p4",
+          "expression": "r.pull_number"
+        },
+        {
+          "name": "p5",
+          "expression": "r.duplicate ? '  (duplicate)' : ''"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.summonscene.s046",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 164,
+      "offset": 10436,
+      "raw": "'  (duplicate)'",
+      "english": "  (duplicate)",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.summonscene.s047",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 164,
+      "offset": 10473,
+      "raw": "'Nothing yet.'",
+      "english": "Nothing yet.",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.summonscene.s048",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/SummonScene.ts",
+      "line": 166,
+      "offset": 10639,
+      "raw": "'CLOSE'",
+      "english": "CLOSE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.summonscene.s049",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 11,
+      "offset": 408,
+      "raw": "`${Math.floor(m / 1440)}d ${Math.floor((m % 1440) / 60)}h`",
+      "english": "{p1}d {p2}h",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "Math.floor(m / 1440)"
+        },
+        {
+          "name": "p2",
+          "expression": "Math.floor((m % 1440) / 60)"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.tasksscene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 11,
+      "offset": 469,
+      "raw": "`${Math.floor(m / 60)}h ${m % 60}m`",
+      "english": "{p1}h {p2}m",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "Math.floor(m / 60)"
+        },
+        {
+          "name": "p2",
+          "expression": "m % 60"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.tasksscene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 16,
+      "offset": 707,
+      "raw": "'ERRANDS'",
+      "english": "ERRANDS",
+      "placeholders": [],
+      "classification": "catalog:heading",
+      "key": "game.scenes.tasksscene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 28,
+      "offset": 1150,
+      "raw": "`${v.title}   ${v.progress}/${v.objective.count}`",
+      "english": "{p1}   {p2}/{p3}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "v.title"
+        },
+        {
+          "name": "p2",
+          "expression": "v.progress"
+        },
+        {
+          "name": "p3",
+          "expression": "v.objective.count"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.tasksscene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 29,
+      "offset": 1358,
+      "raw": "`${describeAttachments(v.rewards, names)}${note ? `   ·   ${note}` : ''}`",
+      "english": "{p1}{p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "describeAttachments(v.rewards, names)"
+        },
+        {
+          "name": "p2",
+          "expression": "note ? `   ·   ${note}` : ''"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.tasksscene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 29,
+      "offset": 1408,
+      "raw": "`   ·   ${note}`",
+      "english": "   ·   {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "note"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.tasksscene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 30,
+      "offset": 1559,
+      "raw": "'CLAIMED'",
+      "english": "CLAIMED",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.tasksscene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 30,
+      "offset": 1571,
+      "raw": "'CLAIM'",
+      "english": "CLAIM",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.tasksscene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 35,
+      "offset": 1840,
+      "raw": "`THIS WINDOW · ends in ${left(d.endsAtMs - t.serverTimeMs)}`",
+      "english": "THIS WINDOW · ends in {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "left(d.endsAtMs - t.serverTimeMs)"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.tasksscene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 38,
+      "offset": 2091,
+      "raw": "'Window complete'",
+      "english": "Window complete",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.tasksscene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 41,
+      "offset": 2364,
+      "raw": "'THIS WEEK'",
+      "english": "THIS WEEK",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.tasksscene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 43,
+      "offset": 2534,
+      "raw": "`ends in ${left(w.endsAtMs - t.serverTimeMs)}`",
+      "english": "ends in {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "left(w.endsAtMs - t.serverTimeMs)"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.tasksscene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 43,
+      "offset": 2583,
+      "raw": "'claim before it expires'",
+      "english": "claim before it expires",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.tasksscene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 45,
+      "offset": 2691,
+      "raw": "'No errands right now.'",
+      "english": "No errands right now.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.tasksscene.s014",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TasksScene.ts",
+      "line": 53,
+      "offset": 2963,
+      "raw": "'Reward claimed'",
+      "english": "Reward claimed",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.tasksscene.s015",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 15,
+      "offset": 621,
+      "raw": "'No check yet'",
+      "english": "No check yet",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.titlescene.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 18,
+      "offset": 709,
+      "raw": "`Up to date (${o.releaseId})`",
+      "english": "Up to date ({p1})",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "o.releaseId"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.titlescene.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 18,
+      "offset": 741,
+      "raw": "'Up to date (embedded base)'",
+      "english": "Up to date (embedded base)",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.titlescene.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 20,
+      "offset": 804,
+      "raw": "`Applied ${o.releaseId} · ${o.downloadedFiles} files · ${(o.downloadedBytes / 1024).toFixed(0)} KB`",
+      "english": "Applied {p1} · {p2} files · {p3} KB",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "o.releaseId"
+        },
+        {
+          "name": "p2",
+          "expression": "o.downloadedFiles"
+        },
+        {
+          "name": "p3",
+          "expression": "(o.downloadedBytes / 1024).toFixed(0)"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.titlescene.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 22,
+      "offset": 947,
+      "raw": "'Reverted to embedded base (kill switch)'",
+      "english": "Reverted to embedded base (kill switch)",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.titlescene.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 24,
+      "offset": 1023,
+      "raw": "'Offline — using installed content'",
+      "english": "Offline — using installed content",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.titlescene.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 26,
+      "offset": 1094,
+      "raw": "`Rejected: ${o.reason}`",
+      "english": "Rejected: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "o.reason"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.titlescene.s007",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 70,
+      "offset": 2808,
+      "raw": "'PART I  ·  UNAWARE, I FADE'",
+      "english": "PART I  ·  UNAWARE, I FADE",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s008",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 72,
+      "offset": 2996,
+      "raw": "'BEGIN'",
+      "english": "BEGIN",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s009",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 72,
+      "offset": 3010,
+      "raw": "'The First Step'",
+      "english": "The First Step",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s010",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 73,
+      "offset": 3151,
+      "raw": "'CHAPTERS'",
+      "english": "CHAPTERS",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s011",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 74,
+      "offset": 3258,
+      "raw": "'SETTINGS'",
+      "english": "SETTINGS",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s012",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 75,
+      "offset": 3372,
+      "raw": "'COMPANY'",
+      "english": "COMPANY",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s013",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 123,
+      "offset": 5191,
+      "raw": "`CONTENT ${active}${active !== content.base.releaseId ? ' (patch)' : ''}  ·  ${CHANNEL}  ·  v${CLIENT_VERSION}${PATCH_LAB_ENABLED ? '  ·  tap for details' : ''}`",
+      "english": "CONTENT {p1}{p2}  ·  {p3}  ·  v{p4}{p5}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "active"
+        },
+        {
+          "name": "p2",
+          "expression": "active !== content.base.releaseId ? ' (patch)' : ''"
+        },
+        {
+          "name": "p3",
+          "expression": "CHANNEL"
+        },
+        {
+          "name": "p4",
+          "expression": "CLIENT_VERSION"
+        },
+        {
+          "name": "p5",
+          "expression": "PATCH_LAB_ENABLED ? '  ·  tap for details' : ''"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s014",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 123,
+      "offset": 5247,
+      "raw": "' (patch)'",
+      "english": " (patch)",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s015",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 123,
+      "offset": 5323,
+      "raw": "'  ·  tap for details'",
+      "english": "  ·  tap for details",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s016",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 128,
+      "offset": 5489,
+      "raw": "`New content downloaded: ${out.releaseId}`",
+      "english": "New content downloaded: {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "out.releaseId"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s017",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 129,
+      "offset": 5555,
+      "raw": "'Content returned to the installed base'",
+      "english": "Content returned to the installed base",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s018",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 152,
+      "offset": 6410,
+      "raw": "'SETTINGS'",
+      "english": "SETTINGS",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s019",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 155,
+      "offset": 6550,
+      "raw": "'Music'",
+      "english": "Music",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s020",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 156,
+      "offset": 6578,
+      "raw": "`${Math.round(prefs().musicVolume * 100)}%`",
+      "english": "{p1}%",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "Math.round(prefs().musicVolume * 100)"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.titlescene.s021",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 161,
+      "offset": 6934,
+      "raw": "'Effects'",
+      "english": "Effects",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s022",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 162,
+      "offset": 6964,
+      "raw": "`${Math.round(prefs().sfxVolume * 100)}%`",
+      "english": "{p1}%",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "Math.round(prefs().sfxVolume * 100)"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.titlescene.s023",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 167,
+      "offset": 7324,
+      "raw": "'Text speed'",
+      "english": "Text speed",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s024",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 170,
+      "offset": 7560,
+      "raw": "'normal'",
+      "english": "normal",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.titlescene.s025",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 170,
+      "offset": 7578,
+      "raw": "'fast'",
+      "english": "fast",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.titlescene.s026",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 170,
+      "offset": 7592,
+      "raw": "'slow'",
+      "english": "slow",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.titlescene.s027",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 173,
+      "offset": 7663,
+      "raw": "'Reduced motion'",
+      "english": "Reduced motion",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s028",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 174,
+      "offset": 7725,
+      "raw": "'ON'",
+      "english": "ON",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.titlescene.s029",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 174,
+      "offset": 7732,
+      "raw": "'OFF'",
+      "english": "OFF",
+      "placeholders": [],
+      "classification": "catalog:display token",
+      "key": "game.scenes.titlescene.s030",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 184,
+      "offset": 8274,
+      "raw": "'−'",
+      "english": "−",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s031",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 185,
+      "offset": 8422,
+      "raw": "'+'",
+      "english": "+",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s032",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 188,
+      "offset": 8608,
+      "raw": "'RESET PROGRESS'",
+      "english": "RESET PROGRESS",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s033",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 188,
+      "offset": 8714,
+      "raw": "'Progress cleared'",
+      "english": "Progress cleared",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s034",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 189,
+      "offset": 8803,
+      "raw": "'CLOSE'",
+      "english": "CLOSE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s035",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 197,
+      "offset": 9161,
+      "raw": "'CONTENT UPDATES'",
+      "english": "CONTENT UPDATES",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s036",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 198,
+      "offset": 9239,
+      "raw": "'Reading state…'",
+      "english": "Reading state…",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s037",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 203,
+      "offset": 9479,
+      "raw": "`Embedded base:  ${content.base.releaseId}  (generation ${content.base.generation})`",
+      "english": "Embedded base:  {p1}  (generation {p2})",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "content.base.releaseId"
+        },
+        {
+          "name": "p2",
+          "expression": "content.base.generation"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.titlescene.s038",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 204,
+      "offset": 9573,
+      "raw": "`Active patch:   ${st.active ? `${st.active.releaseId}  (generation ${st.active.generation}, ${st.active.manifest.files.length} files)` : 'none'}`",
+      "english": "Active patch:   {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "st.active ? `${st.active.releaseId}  (generation ${st.active.generation}, ${st.active.manifest.files.length} files)` : 'none'"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.titlescene.s039",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 204,
+      "offset": 9604,
+      "raw": "`${st.active.releaseId}  (generation ${st.active.generation}, ${st.active.manifest.files.length} files)`",
+      "english": "{p1}  (generation {p2}, {p3} files)",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "st.active.releaseId"
+        },
+        {
+          "name": "p2",
+          "expression": "st.active.generation"
+        },
+        {
+          "name": "p3",
+          "expression": "st.active.manifest.files.length"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.titlescene.s040",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 204,
+      "offset": 9711,
+      "raw": "'none'",
+      "english": "none",
+      "placeholders": [],
+      "classification": "catalog:symbol or display fallback",
+      "key": "game.scenes.titlescene.s041",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 205,
+      "offset": 9729,
+      "raw": "`Rollback target:  ${st.previous ? st.previous.releaseId : st.active ? 'embedded base' : '—'}`",
+      "english": "Rollback target:  {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "st.previous ? st.previous.releaseId : st.active ? 'embedded base' : '—'"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.titlescene.s042",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 205,
+      "offset": 9800,
+      "raw": "'embedded base'",
+      "english": "embedded base",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.titlescene.s043",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 205,
+      "offset": 9818,
+      "raw": "'—'",
+      "english": "—",
+      "placeholders": [],
+      "classification": "catalog:symbol or display fallback",
+      "key": "game.scenes.titlescene.s044",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 206,
+      "offset": 9833,
+      "raw": "`Denied on this device:  ${st.denied.length ? st.denied.join(', ') : 'none'}`",
+      "english": "Denied on this device:  {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "st.denied.length ? st.denied.join(', ') : 'none'"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.titlescene.s045",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 206,
+      "offset": 9902,
+      "raw": "'none'",
+      "english": "none",
+      "placeholders": [],
+      "classification": "catalog:symbol or display fallback",
+      "key": "game.scenes.titlescene.s046",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 207,
+      "offset": 9920,
+      "raw": "`Channel: ${CHANNEL}   ·   client v${CLIENT_VERSION}   ·   storage: ${content.persistent ? 'IndexedDB' : 'memory (not persistent)'}`",
+      "english": "Channel: {p1}   ·   client v{p2}   ·   storage: {p3}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "CHANNEL"
+        },
+        {
+          "name": "p2",
+          "expression": "CLIENT_VERSION"
+        },
+        {
+          "name": "p3",
+          "expression": "content.persistent ? 'IndexedDB' : 'memory (not persistent)'"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.titlescene.s047",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 207,
+      "offset": 10011,
+      "raw": "'IndexedDB'",
+      "english": "IndexedDB",
+      "placeholders": [],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.scenes.titlescene.s048",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 207,
+      "offset": 10025,
+      "raw": "'memory (not persistent)'",
+      "english": "memory (not persistent)",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.scenes.titlescene.s049",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 208,
+      "offset": 10062,
+      "raw": "`Last check:  ${describe(content.lastCheck.outcome)}`",
+      "english": "Last check:  {p1}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "describe(content.lastCheck.outcome)"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.scenes.titlescene.s050",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 215,
+      "offset": 10282,
+      "raw": "'CHECK NOW'",
+      "english": "CHECK NOW",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s051",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 218,
+      "offset": 10365,
+      "raw": "'Checking for content updates…'",
+      "english": "Checking for content updates…",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s052",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 227,
+      "offset": 10733,
+      "raw": "'ROLL BACK'",
+      "english": "ROLL BACK",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s053",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 235,
+      "offset": 11017,
+      "raw": "'Rolled back'",
+      "english": "Rolled back",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s054",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 235,
+      "offset": 11033,
+      "raw": "'Already on the embedded base'",
+      "english": "Already on the embedded base",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.scenes.titlescene.s055",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/scenes/TitleScene.ts",
+      "line": 238,
+      "offset": 11138,
+      "raw": "'CLOSE'",
+      "english": "CLOSE",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.scenes.titlescene.s056",
+      "voice": "not_voiced_ui",
+      "translation_tr": null,
+      "display_note": "Patch-lab diagnostic UI; visible only when the feature is enabled."
+    },
+    {
+      "source": "apps/game/src/services.ts",
+      "line": 15,
+      "offset": 618,
+      "raw": "'services not initialised'",
+      "english": "services not initialised",
+      "placeholders": [],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.services.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/services.ts",
+      "line": 21,
+      "offset": 888,
+      "raw": "'content service missing'",
+      "english": "content service missing",
+      "placeholders": [],
+      "classification": "catalog:diagnostic may reach UI",
+      "key": "game.services.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/format.ts",
+      "line": 6,
+      "offset": 216,
+      "raw": "'★'",
+      "english": "★",
+      "placeholders": [],
+      "classification": "catalog:symbol or display fallback",
+      "key": "game.ui.format.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/format.ts",
+      "line": 10,
+      "offset": 368,
+      "raw": "`${a.amount.toLocaleString('en-US')} ${currencyLabel(a.currency)}`",
+      "english": "{p1} {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "a.amount.toLocaleString('en-US')"
+        },
+        {
+          "name": "p2",
+          "expression": "currencyLabel(a.currency)"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.ui.format.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/format.ts",
+      "line": 12,
+      "offset": 522,
+      "raw": "`${names.get(a.itemId) ?? a.itemId} ×${a.quantity}`",
+      "english": "{p1} ×{p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "names.get(a.itemId) ?? a.itemId"
+        },
+        {
+          "name": "p2",
+          "expression": "a.quantity"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.ui.format.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/format.ts",
+      "line": 14,
+      "offset": 662,
+      "raw": "`${a.amount} account XP`",
+      "english": "{p1} account XP",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "a.amount"
+        }
+      ],
+      "classification": "catalog:format/template",
+      "key": "game.ui.format.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/format.ts",
+      "line": 19,
+      "offset": 829,
+      "raw": "'No attachment'",
+      "english": "No attachment",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.ui.format.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/format.ts",
+      "line": 22,
+      "offset": 963,
+      "raw": "`${(x * 100).toFixed(digits).replace(/\\.0+$/, '')} %`",
+      "english": "{p1} %",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "(x * 100).toFixed(digits).replace(/\\.0+$/, '')"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.ui.format.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/hub.ts",
+      "line": 9,
+      "offset": 421,
+      "raw": "'This feature is switched off for now.'",
+      "english": "This feature is switched off for now.",
+      "placeholders": [],
+      "classification": "catalog:prose/format",
+      "key": "game.ui.hub.s001",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/hub.ts",
+      "line": 9,
+      "offset": 463,
+      "raw": "`${e.message} (${e.code})`",
+      "english": "{p1} ({p2})",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "e.message"
+        },
+        {
+          "name": "p2",
+          "expression": "e.code"
+        }
+      ],
+      "classification": "catalog:manual review of computed/enum display",
+      "key": "game.ui.hub.s002",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/hub.ts",
+      "line": 31,
+      "offset": 1566,
+      "raw": "'BACK'",
+      "english": "BACK",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.ui.hub.s003",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/hub.ts",
+      "line": 47,
+      "offset": 2177,
+      "raw": "'Sign in to use this screen.'",
+      "english": "Sign in to use this screen.",
+      "placeholders": [],
+      "classification": "catalog:render context",
+      "key": "game.ui.hub.s004",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/hub.ts",
+      "line": 48,
+      "offset": 2309,
+      "raw": "'ACCOUNT'",
+      "english": "ACCOUNT",
+      "placeholders": [],
+      "classification": "catalog:label/text",
+      "key": "game.ui.hub.s005",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    },
+    {
+      "source": "apps/game/src/ui/hub.ts",
+      "line": 61,
+      "offset": 2661,
+      "raw": "`${currency.name} ${this.balance.toLocaleString('en-US')}`",
+      "english": "{p1} {p2}",
+      "placeholders": [
+        {
+          "name": "p1",
+          "expression": "currency.name"
+        },
+        {
+          "name": "p2",
+          "expression": "this.balance.toLocaleString('en-US')"
+        }
+      ],
+      "classification": "catalog:render context",
+      "key": "game.ui.hub.s006",
+      "voice": "not_voiced_ui",
+      "translation_tr": null
+    }
+  ]
+}
