@@ -126,7 +126,10 @@ export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?
     const [packBytes, encBytes] = await Promise.all([store.effectiveBytes(body.releaseId, 'units/unit_pack.json'), store.effectiveBytes(body.releaseId, body.encounterPath)]);
     if (!packBytes || !encBytes) throw new HttpError(404, 'unknown_encounter', 'encounter is not part of that release');
     const dec = new TextDecoder();
-    const out = await replayBattle(UnitPack.parse(JSON.parse(dec.decode(packBytes))), Encounter.parse(JSON.parse(dec.decode(encBytes))), body.actions);
+    const encounter = Encounter.parse(JSON.parse(dec.decode(encBytes)));
+    // owned-hero stages have no fixed player side: they are only verified through an account's battle session
+    if ((encounter.party_mode ?? 'fixed') === 'owned') throw new HttpError(422, 'owned_party_required', 'this stage is verified when you claim it with your own party');
+    const out = await replayBattle(UnitPack.parse(JSON.parse(dec.decode(packBytes))), encounter, body.actions);
     const match = body.clientLogHash === out.logHash;
     const day = new Date().toISOString().slice(0, 10);
     const caller = await sha256Hex(`${c.req.header('CF-Connecting-IP') ?? 'local'}|${day}`);

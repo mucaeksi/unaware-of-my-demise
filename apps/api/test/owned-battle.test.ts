@@ -115,6 +115,11 @@ describe('owned-hero battles are fought with a server-frozen party', () => {
     expect(party.find((m) => m.unit_id === 'fadyme')?.loan).toBe(true);
   });
 
+  it('the anonymous replay endpoint refuses an owned-hero stage instead of failing', async () => {
+    const r = await game('/api/v1/battles/verify', post({ releaseId: 'rel_0001', encounterPath: 'encounters/owned_o1.json', actions: [], clientLogHash: 'a'.repeat(64) }));
+    expect(r.status).toBe(422);
+  });
+
   it('a fixed story encounter needs no session and starts with a null party', async () => {
     const { auth } = await signIn(`sub-ob-${rid()}`);
     const r = await start(auth, 't1');

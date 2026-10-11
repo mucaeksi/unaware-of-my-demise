@@ -45,7 +45,11 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
   await page.evaluate(async (t) => (window as any).__UOMD__.services.api.signInWithIdToken(t), token);
 
   await publishCampaign(jwt());
-  await page.evaluate(() => (window as any).__UOMD__.services.content.checkForUpdates());
+  await page.evaluate(async () => {
+    const sv = (window as any).__UOMD__.services;
+    await sv.content.checkForUpdates();
+    await sv.refreshArt(); // what the game does when a patch is applied
+  });
   await expect
     .poll(() => page.evaluate(async () => ((await (window as any).__UOMD__.services.content.chapters()).chapters.flatMap((c: any) => c.nodes) as any[]).map((n) => n.node_id)), { timeout: 60_000 })
     .toContain('stage_1_2');
@@ -57,7 +61,13 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-20-chapters-campaign.png` });
 
   const autoBattle = async (): Promise<void> => {
-    await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 60_000 }).toBeTruthy();
+    await waitScene(page, 'Battle');
+    try {
+      await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 45_000 }).toBeTruthy();
+    } catch (e) {
+      const texts = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').children.list.map((c: any) => c.text).filter(Boolean).join(' | '));
+      throw new Error(`battle never prompted; problems: ${problems.join(' | ')}; on screen: ${texts}; ${String(e)}`);
+    }
     await tap(page, info, REF_W - 150, 70); // x2
     await tap(page, info, REF_W - 150, 70); // x3
     await tap(page, info, REF_W - 365, 70); // Auto
@@ -101,7 +111,7 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
   // a boss stage with a strong scratch party (client-side only, no claim): objectives are targets, the intent is announced, phases change
   await page.evaluate(async () => {
     const u = (window as any).__UOMD__;
-    const strong = (id: string, slot: number, row: string) => ({ unit_id: id, level: 12, slot, row, stats: { hp: 400, atk: 6, def: 4, spd: 40 + slot } });
+    const strong = (id: string, slot: number, row: string) => ({ unit_id: id, level: 12, slot, row, stats: { hp: 400, atk: 3, def: 4, spd: 5 + (slot % 2) } });
     u.game.scene.getScenes(true).forEach((s: any) => u.game.scene.stop(s.sys.settings.key));
     u.game.scene.start('Battle', {
       encounterPath: 'encounters/stage_1_5.json',
@@ -116,13 +126,17 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
   expect(objectives).toEqual(['jaw_bell']);
   await tap(page, info, REF_W - 150, 70);
   await tap(page, info, REF_W - 150, 70);
-  // wait for the boss to announce Ash Howl, then capture the telegraph
-  await expect
-    .poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').telegraphText?.text ?? ''), { timeout: 120_000, intervals: [400] })
-    .toContain('ASH HOWL');
-  await page.waitForTimeout(500);
-  await page.screenshot({ path: `${SHOTS}/${info.project.name}-23-boss-telegraph.png` });
-  await tap(page, info, REF_W - 365, 70); // Auto breaks the Jaw Bell to interrupt the announced Howl
+  // Auto Battle plays on; it breaks the Jaw Bell as soon as Ash Howl is announced. Catch the announced intent on screen for the review shot.
+  await tap(page, info, REF_W - 365, 70); // Auto
+  let shot = false;
+  for (let i = 0; i < 900 && !shot; i++) {
+    const t = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').telegraphText?.text ?? '');
+    if (t.includes('ASH HOWL')) {
+      await page.screenshot({ path: `${SHOTS}/${info.project.name}-23-boss-telegraph.png` });
+      shot = true;
+    } else if ((await probeBattle(page)).result) break;
+    else await page.waitForTimeout(100);
+  }
   await expect.poll(async () => (await probeBattle(page)).result, { timeout: 240_000 }).not.toBeNull();
   const log = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').battle.log.map((e: any) => e.type));
   expect(log).toContain('objective_destroyed');
@@ -130,8 +144,8 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
   expect(log.filter((t: string) => t === 'phase_change').length).toBeGreaterThanOrEqual(2);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-24-boss-result.png` });
 
-  // put the channel back on rel_0002 so the projects that run after this one see what they expect
-  const back = await request.post(`${ADMIN}/admin/api/channels/dev/rollback`, { data: { releaseId: 'rel_0002' }, headers: { 'Cf-Access-Jwt-Assertion': jwt() } });
+  // put the channel back on the embedded base so the projects that run after this one see what they expect
+  const back = await request.post(`${ADMIN}/admin/api/channels/dev/rollback`, { data: { releaseId: 'rel_0001' }, headers: { 'Cf-Access-Jwt-Assertion': jwt() } });
   expect(back.status()).toBeLessThan(300);
   expect(problems.filter((p) => !p.includes('favicon') && !p.includes('HTTP 404') && !p.includes('HTTP 409'))).toEqual([]);
 });

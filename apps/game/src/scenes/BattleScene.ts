@@ -694,7 +694,7 @@ export class BattleScene extends Phaser.Scene {
     }
     txt(this, REF_W / 2, 560, `${result.turns} turns  ·  ${this.recorded.length} actions`, { fontSize: '34px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
     const verify = txt(this, REF_W / 2, 618, 'Server verification: checking…', { fontSize: '30px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
-    if (this.cfg.sessionId) verify.setText('Server verification: at the claim (owned-hero stage)');
+    if (this.cfg.sessionId || this.encounter.party_mode === 'owned') verify.setText('Server verification: at the claim (owned-hero stage)');
     else void this.verifyOnServer(verify);
     if (won) void this.claimProgress();
 

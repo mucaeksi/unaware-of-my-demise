@@ -50,7 +50,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   // the browser has no native identity provider: the Account screen says so and does not offer a fake login
   await tap(page, info, REF_W - 200, 80); // COMPANY
   await waitScene(page, 'Home');
-  await tap(page, info, 440, 720); // ACCOUNT
+  await tap(page, info, 960, 720); // ACCOUNT (third row, second tile since TEAM joined the hub)
   await waitScene(page, 'Account');
   await page.waitForTimeout(800);
   expect(await page.evaluate(() => (window as any).__UOMD__.services.identity.kind)).toBe('none');
