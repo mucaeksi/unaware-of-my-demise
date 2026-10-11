@@ -6,7 +6,8 @@ Tick a box only when committed and accepted; add `commit <hash> - what is left`.
 - [ ] SOL-2 Store and legal texts, EN (TR deferred by owner 2026-10-11) (`docs/store/`)
 - [x] SOL-3 Android real-device QA plan (`docs/QA_ANDROID.md`)
   - commit `c18fc30e` — accepted: all first-AAB identity/payment/ad/consent/offline acceptance areas have device steps and exact backend evidence. Left: physical-device execution and listed implementation/configuration blockers.
-- [ ] SOL-4 Runbook (`docs/RUNBOOK.md`)
+- [x] SOL-4 Runbook (`docs/RUNBOOK.md`)
+  - commit `a10e4637` — accepted: source-backed logs/rollback/D1 restore/signing/refund/reset procedures and UNKNOWN gaps. Left: operator restore rehearsal and R01–R06 decisions; plaintext probe flagged to Claude.
 - [ ] SOL-5 Media production queue (`docs/media/QUEUE.md`)
 - [ ] SOL-6 Localization catalog, EN source only (TR deferred by owner 2026-10-11; `docs/i18n/STRINGS.md`)
 - [ ] SOL-7 Economy tuning proposal (`docs/economy/TUNING_PROPOSAL.md`)
