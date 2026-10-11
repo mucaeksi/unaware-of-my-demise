@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 import { z } from 'zod';
 import { Encounter, UnitPack } from '@uomd/content-schema';
 import { replayBattle } from '@uomd/combat';
@@ -33,6 +34,17 @@ async function limited(env: GameEnv, req: Request, bucket: string, limit: number
 export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?: SsvKeyFetcher; play?: (env: GameEnv) => PlayClient } = {}): Hono<{ Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } }> {
   const app = new Hono<{ Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } }>();
   app.use('*', securityHeaders);
+  // The Android shell (Capacitor WebView) runs the client from https://localhost and calls this API cross-origin. Auth is a bearer token
+  // (no cookies), so an allow-list of exact origins with no credentials is enough; any other origin gets no CORS headers.
+  app.use(
+    '/api/*',
+    cors({
+      origin: (origin, c) => (['https://localhost', 'capacitor://localhost', ...(c.env.ALLOWED_ORIGINS ?? '').split(',').map((o: string) => o.trim()).filter(Boolean)].includes(origin) ? origin : null),
+      allowHeaders: ['Authorization', 'Content-Type'],
+      allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      maxAge: 86_400
+    })
+  );
   app.onError(onError);
 
   app.get('/api/v1/health', async (c) => {

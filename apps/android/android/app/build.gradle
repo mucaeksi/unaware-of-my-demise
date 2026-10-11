@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace = "io.github.mucaeksi.unawareofmydemise"
+    compileSdk = rootProject.ext.compileSdkVersion
+    buildFeatures { buildConfig = true }
+    signingConfigs {
+        release {
+            // CI signs with the upload key it generated (see .github/workflows/android.yml); absent locally => unsigned release
+            def ks = System.getenv("UOMD_KEYSTORE_FILE")
+            if (ks) {
+                storeFile file(ks)
+                storePassword System.getenv("UOMD_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("UOMD_KEY_ALIAS") ?: "upload"
+                keyPassword System.getenv("UOMD_KEY_PASSWORD") ?: System.getenv("UOMD_KEYSTORE_PASSWORD")
+            }
+        }
+    }
+    defaultConfig {
+        applicationId "io.github.mucaeksi.unawareofmydemise"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        // CI passes the build number; the Play Console needs a strictly increasing versionCode per upload
+        versionCode Integer.parseInt(System.getenv("UOMD_VERSION_CODE") ?: "1")
+        versionName(System.getenv("UOMD_VERSION_NAME") ?: "0.1.0")
+        // public identifiers (not secrets): OAuth Web client (Google ID token audience) and the AdMob ids
+        buildConfigField "String", "GOOGLE_WEB_CLIENT_ID", "\"" + (System.getenv("UOMD_GOOGLE_WEB_CLIENT_ID") ?: "604013824221-n7htgfhfs55njs5ie11ulojsk1tnk6da.apps.googleusercontent.com") + "\""
+        manifestPlaceholders = [admobAppId: (System.getenv("UOMD_ADMOB_APP_ID") ?: "ca-app-pub-4258559369390965~2559970251")]
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        aaptOptions {
+             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    buildTypes {
+        debug {
+            // Google's sample rewarded unit: shows TEST ads only (never real ads against the real unit while developing)
+            buildConfigField "String", "REWARDED_UNIT_ID", "\"ca-app-pub-3940256099942544/5224354917\""
+        }
+        release {
+            minifyEnabled false
+            buildConfigField "String", "REWARDED_UNIT_ID", "\"" + (System.getenv("UOMD_ADMOB_REWARDED_UNIT") ?: "ca-app-pub-4258559369390965/3553164322") + "\""
+            if (System.getenv("UOMD_KEYSTORE_FILE")) signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation project(':capacitor-android')
+    // native Google sign-in (Credential Manager + Google ID token), Play Billing, AdMob + UMP consent
+    implementation 'androidx.credentials:credentials:1.5.0'
+    implementation 'androidx.credentials:credentials-play-services-auth:1.5.0'
+    implementation 'com.google.android.libraries.identity.googleid:googleid:1.1.1'
+    implementation 'com.android.billingclient:billing:8.0.0'
+    implementation 'com.google.android.gms:play-services-ads:24.6.0'
+    implementation 'com.google.android.ump:user-messaging-platform:3.2.0'
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+}
+
+apply from: 'capacitor.build.gradle'
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@uomd/android",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Capacitor Android shell of Unaware of My Demise (native Google sign-in, Play Billing, AdMob/UMP bridges). The native project in ./android is committed and reproducible in CI.",
+  "scripts": {
+    "sync": "cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.3",
+    "@capacitor/core": "8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.3"
+  }
+}

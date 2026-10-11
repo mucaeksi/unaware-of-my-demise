@@ -68,3 +68,17 @@ describe('Google sign-in and sessions', () => {
     expect((await game('/api/v1/auth/google', post({ idToken: await googleIdToken('sub-banned') }))).status).toBe(403);
   });
 });
+
+describe('CORS for the Android shell', () => {
+  it('answers the preflight of the Capacitor WebView origin and no other origin', async () => {
+    const ok = await game('/api/v1/wallet', { method: 'OPTIONS', headers: { Origin: 'https://localhost', 'Access-Control-Request-Method': 'GET', 'Access-Control-Request-Headers': 'authorization' } });
+    expect(ok.status).toBeLessThan(300);
+    expect(ok.headers.get('Access-Control-Allow-Origin')).toBe('https://localhost');
+    expect(ok.headers.get('Access-Control-Allow-Headers')?.toLowerCase()).toContain('authorization');
+    expect(ok.headers.get('Access-Control-Allow-Credentials')).toBeNull();
+    const evil = await game('/api/v1/wallet', { method: 'OPTIONS', headers: { Origin: 'https://evil.example', 'Access-Control-Request-Method': 'GET' } });
+    expect(evil.headers.get('Access-Control-Allow-Origin')).toBeNull();
+    const plain = await game('/api/v1/health', { headers: { Origin: 'https://localhost' } });
+    expect(plain.headers.get('Access-Control-Allow-Origin')).toBe('https://localhost');
+  });
+});

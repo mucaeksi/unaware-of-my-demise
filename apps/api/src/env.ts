@@ -20,6 +20,8 @@ export interface GameEnv {
   ADMOB_AD_UNIT_IDS?: string;
   /** Android application id registered in Play Console (public) */
   PLAY_PACKAGE_NAME?: string;
+  /** extra exact web origins allowed to call the game API from a browser/WebView (comma separated); the Capacitor origins are built in */
+  ALLOWED_ORIGINS?: string;
   /** secret: Play Developer API service account JSON; billing fails closed when absent */
   GOOGLE_PLAY_SERVICE_ACCOUNT?: string;
   /** audience of the Pub/Sub push OIDC token (RTDN); RTDN is refused when unset */
