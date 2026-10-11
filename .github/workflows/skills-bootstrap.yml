@@ -26,15 +26,15 @@ jobs:
         with:
           python-version: "3.12"
       - name: Verify pinned sources and install curated skills
-        if: ${{ hashFiles('skill-sources/UOMD_Claude_Phaser_Toolkit_2026-10-10.zip') != '' && hashFiles('skill-sources/awesome-gamedev-agent-skills-1.1.0.zip') != '' }}
+        if: ${{ hashFiles('skill-sources/UOMD_Claude_Phaser_Toolkit_2026-10-10.zip') != '' }}
         run: python3 tools/bootstrap_skills.py
       - name: Structural verification
-        if: ${{ hashFiles('skill-sources/UOMD_Claude_Phaser_Toolkit_2026-10-10.zip') != '' && hashFiles('skill-sources/awesome-gamedev-agent-skills-1.1.0.zip') != '' }}
+        if: ${{ hashFiles('skill-sources/UOMD_Claude_Phaser_Toolkit_2026-10-10.zip') != '' }}
         run: |
           python3 tools/bootstrap_skills.py --verify
           python3 tools/skills_doctor.py
       - name: Commit pinned skill files (not third-party hooks)
-        if: ${{ hashFiles('skill-sources/UOMD_Claude_Phaser_Toolkit_2026-10-10.zip') != '' && hashFiles('skill-sources/awesome-gamedev-agent-skills-1.1.0.zip') != '' }}
+        if: ${{ hashFiles('skill-sources/UOMD_Claude_Phaser_Toolkit_2026-10-10.zip') != '' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

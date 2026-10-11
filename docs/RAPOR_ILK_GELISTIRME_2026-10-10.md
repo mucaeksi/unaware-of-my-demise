@@ -14,7 +14,7 @@ Bu rapor yalnızca bu ortamda gerçekten çalıştırılıp gözlenen şeyleri "
 | Graphify | Çalışıyor (`graphify update .` → 5840 düğüm / 8731 kenar; MCP sorguları yanıt verdi). Anlamsal doküman çıkarımı API anahtarı gerektirir, çalıştırılmadı |
 | Ponytail, Phaser skill'leri (28), UI/UX Pro Max, Cloudflare security-audit | Yüklü ve kullanıldı (kod incelemesi, Phaser 4 API doğrulaması, güvenlik denetimi, tasarım jetonları) |
 | Chrome DevTools MCP | Orijinal yapılandırma çalışmıyordu (Chrome yok, root). `tools/mcp_chrome_devtools.sh` ile düzeltildi; stdio JSON-RPC ile doğrulandı (30 araç). Sonraki oturumda devreye girer |
-| Context7 | **Engelli**: aylık kota doldu — API anahtarı gerekli (aşağıda) |
+| Context7 | **Kaldırıldı** (sahip kararı, 2026-10-11) |
 | Cloudflare MCP / GitHub MCP | Çalışıyor (OAuth); D1/R2/Workers/Access okuma ve D1/R2 oluşturma doğrulandı |
 | Gemini | Erişilebilir; **hiç ücretli üretim yapılmadı** |
 
@@ -28,7 +28,6 @@ Bu rapor yalnızca bu ortamda gerçekten çalıştırılıp gözlenen şeyleri "
 | İlk owner → GitHub **variable** `ADMIN_BOOTSTRAP_OWNERS_STAGING` (e-posta) | GitHub Variables | Admin'e ilk girecek kimlik; deploy iş akışı `wrangler deploy --var` ile geçirir, repoya yazılmaz |
 | ~~`CONTENT_SIGNING_KEY`~~ | **Tamamlandı** — Worker secret (staging) | İş akışındaki `signing-key` job'ı anahtarı üretip yalnızca secret'a yazdı (hiç yazdırılmadı); `signing_configured:true` doğrulandı; genel anahtar `content/keys/trusted_public_keys.json` içinde |
 | `CF_ACCESS_CLIENT_ID`, `CF_ACCESS_CLIENT_SECRET` (GitHub secrets) + `ADMIN_URL_STAGING` (variable) | GitHub → Settings → Secrets/Variables; Access → Service auth | `publish-content.yml` ile CI'dan içerik yayını (isteğe bağlı) |
-| Context7 API anahtarı | MCP ortamı (Git'e değil) | Context7 kotası |
 | `GOOGLE_CLIENT_IDS`, Play servis hesabı, RTDN, AdMob kimlikleri | Google Cloud / Play / AdMob konsolları | Android aşamasında (bu milestone'da gerekmedi) |
 | Google üretim bütçesi | `content/budget/media_budget.json` + GCP bütçe uyarısı | Ücretli üretimden önce onayınız (varsayılan 0 USD, kod ile engelli) |
 Ayrıntı ve ek açıklamalar: `docs/SECRETS_AND_PERMISSIONS.md`.
@@ -53,6 +52,6 @@ npm workspaces monoreposu (TS strict). `packages/`: `shared` (sha256, kanonik JS
 
 ## 7. Sonraki adımlar
 1. Access uygulaması + `ACCESS_AUD` + ilk owner için onayınız → ardından `CONTENT_SIGNING_KEY` ve `rel_0001`/`rel_0002` staging yayını; sonra sunucu doğrulaması "release not published" yerine "✓ replay matches" gösterir.
-2. Eski Neon/Hyperdrive/Worker kaldırma planı kararı; görsel kanon (kızıl pelerin / erik başlık) kararı; Google üretim bütçesi; Context7 anahtarı.
+2. Eski Neon/Hyperdrive/Worker kaldırma planı kararı; görsel kanon (kızıl pelerin / erik başlık) kararı; Google üretim bütçesi.
 3. Motor etki kapsamı (sersemletme/kalkan/DoT aileleri) → 3/20 karakterden genişletme; T-3 tutorial sahnesini veri yaması olarak staging kanalında yayınlama.
 4. Android (Capacitor) iskeleti ve gerçek cihaz testi; Google girişi — bu milestone dışında.

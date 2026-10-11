@@ -18,7 +18,7 @@ Miniflare/Workers runtime, not a deployed Cloudflare environment; **NOT DONE** =
 | Data-only content patching (new chapter node + new enemy unit + story delivered from R2 to the *unchanged* client; rollback to embedded base) | LOCAL | e2e `live data patch` (desktop) + `apps/api/test/content.test.ts` "real patch manager applies the published patch end to end" |
 | Control Center v0 (React SPA): dashboard (D1/R2 health, channels, table counts), characters (20 seeded, optimistic concurrency, audit), asset catalog with provenance, patch list/publish/rollback/kill, audit log, user roles | LOCAL | e2e `admin.spec.ts` on both viewports against real D1/R2 (Miniflare) with a test-only Access identity |
 | CI workflows | VERIFIED green on PR #36, head `51ef302` | `lint, typecheck, unit + Workers tests, builds` ✓; `content builds reproducibly from narrative + approved legacy art` ✓ (committed content == rebuilt content); Playwright e2e ✓ (9 passed, 1 skipped by design). It took three runs to get there, and each red run was a real timing defect in the *test helpers* on the slower CI GPU, not in the game: (1) fixed 2.5 s sleep before reading the server verdict → polling; (2) the skill-panel wait of 15 s was too tight — measured **15.1 s on the runner vs 2.9 s locally** (software rendering stretches animation time) → 120 s with the duration logged. `deploy.yml` ✓ twice (staging) incl. the browser smoke job (desktop + phone). `publish-content.yml` has not been run (GitHub only allows dispatching a *new* workflow file once it exists on `main`; `deploy.yml` already exists there, so it carries the signing-key job) |
-| Skills bootstrap CI | VERIFIED (earlier runs 5 and 7 green; `tools/skills_doctor.py` PASS, 57 skill files) | `docs/SKILLS_MCP_STATUS.md` |
+| Skills bootstrap CI | VERIFIED (earlier runs 5 and 7 green; `tools/skills_doctor.py` PASS, now 46 skill files after removing Context7 and the 10 Godot-derived discipline skills) | `docs/SKILLS_MCP_STATUS.md` |
 | Security review | VERIFIED | `docs/SECURITY_REVIEW_2026-10-10.md` (5 findings fixed, residual risks listed). `npm audit`: 1 low (esbuild dev-server file read on Windows; dev tooling only) |
 | Secret scan of the working tree (private JWK members, PEM blocks, `AIza…`, `cfut_…`, `ghp_…`, `sk-…`) | VERIFIED | no matches; `.env*`, `.cache/`, `.wrangler/` are git-ignored |
 
@@ -62,7 +62,6 @@ Screenshots taken by the e2e run (WebP, `docs/evidence/`): `desktop-01-title`, `
 3. Legacy Neon/Hyperdrive/Workers decommission (README: D1 only). Not touched.
 4. Visual canon: crimson cape on approved chibi sheets vs deep-plum hood on the locked sheet.
 5. Gemini/Google media budget before any Veo/Lyria/image batch.
-6. Context7 API key.
 7. Preferences file mentions Godot 4.7.2; the README and the directive say Phaser 4.2.1 — the project follows the README.
 
 ## 5. Exact next implementation step

@@ -44,7 +44,7 @@ Not covered: penetration testing against a deployed environment (none is deploye
 2. **Rate limiting of the public API on Cloudflare**: the `API_LIMITER` binding must exist in the account's Workers rate-limit namespace; until then the D1 fallback is used (correct but adds a D1 write per verify call). Add edge WAF rate rules before public launch.
 3. **Replay verification is advisory** today (it records `battle_audit`); no economy/progression is granted from it yet. When rewards become server-side, grant only from the server-computed result.
 4. **Secrets in the legacy stack** (Neon URLs, Play service account, Android keystore) are presumed in GitHub secrets; they were not read, rotated or used. Decommissioning legacy Neon/Hyperdrive is an owner decision (README states D1 exclusivity).
-5. **Context7 key** and the skill-lock refresh remain owner actions (see `SKILLS_MCP_STATUS.md`).
+5. Context7 was removed on 2026-10-10 (owner decision), so no key or hosted-MCP exposure remains.
 6. The admin SPA bundle is publicly fetchable on `*.workers.dev`; put the Worker behind a custom domain + Access (not just `workers.dev`) before sharing the URL.
 7. The game build exposes `window.__UOMD__` (game + services) for browser tests. It reveals nothing a client does not already hold, but production builds should strip it behind a build flag before store release.
 8. Paid media generation is guarded by `content/budget/media_budget.json` (default $0, owner-approved only; `docs/SECRETS_AND_PERMISSIONS.md`). It cannot see charges made outside the repo: set a budget alert on the Google Cloud project too.

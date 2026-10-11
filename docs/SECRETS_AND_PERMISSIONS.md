@@ -58,8 +58,7 @@ Zero Trust → Access → Service auth → create token, add it to the Access po
 | AdMob | `ADMOB_APP_ID`, ad-unit IDs, server-side verification key | AdMob console |
 | Paid media generation | **spending guard implemented, budget = $0 until you approve**: `content/budget/media_budget.json` (`approved_usd`, `per_batch_cap_usd`, `approved_by/at`); every generation script must run `npx tsx tools/media_budget.ts reserve …` first and is blocked (exit 1) without an approved, sufficient budget; actual costs are settled and recorded (`packages/shared/src/budget.ts`, 6 tests). Also set a hard quota/budget alert on the Google Cloud project (Billing → Budgets & alerts) — the repo guard cannot see charges made outside it. | owner decision: amount + per-batch cap |
 
-### 6. Context7 (developer tooling)
-API key from https://context7.com/dashboard, configured in your local/cloud MCP environment (not committed).
+### 6. Context7 — removed (owner decision 2026-10-10); no key needed.
 
 ## Verified without exposing values
 - Cloudflare OAuth (MCP) can list/create Workers scripts, D1, R2 and read Access apps — **not** a substitute for the CI token.

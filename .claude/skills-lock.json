@@ -7,9 +7,7 @@
   "pinned_archive_sha256": {
     "Cloudflare_Security_Audit_Skill_2026-10-10.zip": "f62b7cbc0c9a8358f68bf486e9d68220d9897c573f5f099d61ff4a9063f0ef01",
     "UOMD_Claude_Phaser_Toolkit_2026-10-10.zip": "b0d0143222a5040371ce763398ebc60d592631929eef284f1a750ca65973e0b0",
-    "awesome-gamedev-agent-skills-1.1.0.zip": "9c37ba03278bbbe8ca74facb8f45227ba1b5d9bcf9be483afebd410cba8251ee",
     "chrome-devtools-mcp-chrome-devtools-mcp-v1.10.1.zip": "64b334194c8ea0ee1afcc5aacdb4e2f0f6c4de1c84ad89d2dbeb390c8c6beec4",
-    "context7--upstash-context7-mcp-4.3.0.zip": "d32e5f631666ba63617c5c40aa6990a0df2f625c7aeed9d01df339d5099fdafe",
     "graphify-0.9.84.zip": "4c811563bcf67404e6e0db0a3456fe632800c92a242d81e314938406211478d0",
     "ponytail-5.1.0.zip": "8fa83a6a1f5f0ca980445f789d3a747ee9999959bbc4176ea6f73e4f3dbcb8bd",
     "ui-ux-pro-max-skill-2.15.0.zip": "99cadc867d71f4c77d29441ad15e5b47490e5998c0f926e5d16da185fb4eb455"
@@ -18,22 +16,15 @@
     "actions-and-utilities": "afcda53523029354d59f51b4abebb2a509e2c08f0372638cd209470a2cff3bdc",
     "animations": "ea86dbfe87da895799995e36e7a3382be8a069d60f4b075077b1cdac74a68383",
     "audio-and-sound": "c17c36b104d287846157ba5aceaf64f59fb5b5700e80d74ddd2b73beb3b0700a",
-    "audio-design": "85738d8ab96797348c62734440ee266d9e779492c61b5c1fe3e135ec4dc087bb",
-    "camera-systems": "fbd75ed17389dfb4430347ac1fc11c7c7a243ba4327ea6d425d47ab9952866fb",
     "cameras": "3c07e8d97539c0df6906612a046c8e86078fa0dc0e4a00485713189a0c0cc9b4",
     "chrome-devtools": "dc9b3cd25a8f05f366e2979d1d598bb0122d2e58431fd961e20cd68e7392e030",
     "cloudflare-d1-liveops": "64387b0a773f9374384ad6602830c7f6c43b0e07a9af43f4d1d9363d3caf4ec0",
-    "context7-mcp": "29ef59d342876991f1a07297959748b57647063b1f7c7db4761fd36137655ade",
     "curves-and-paths": "5334b72730b45bcb5c3adffe68831c1890febd99e5cb41afcd4eba603f1838db",
     "data-manager": "401f5aacb4cf6ae849267851071dd7d0ba2e47a86d50c8de664e19ee5a7e41f5",
-    "dialogue-systems": "8c39ba14fd086769912e9d3754d8134f355069c98133d9641a424261e42c6e59",
     "events-system": "aa6f05286584e1301f37ff1f4e74bf26166c44d294a05a88b055d42083717957",
     "filters-and-postfx": "451c4e60b738fb491693b5f4063c622f8e2807a56a39680e4b5ffd140de8c996",
-    "game-ai": "76e8412176fc0c9e8bbde9f74032b7446c15d528a18ad8492999ec28b7286b95",
-    "game-feel": "89dc36afaeb46c9d03dbd8e87a14a04d1ce15f8da3b0ef1dc79314e876a8d72a",
     "game-object-components": "ccfa17b9df05e0b8d3da34b9cded23b3b239ca47536fa586388ecdedafff6ecc",
     "game-setup-and-config": "d93abdb3123d74583a6792081c54a90cd8f0e8d3ddeee476d1e96a401b9f12a9",
-    "game-ui-ux": "a950af7eb94c65c51a80ca5dea9a91a9fd907d3f7338cc08d57f9120fded5aad",
     "geometry-and-math": "b03b95ae172a541b3ff7447efde10e004e0c12b580324ae50f9f614e7a8cc452",
     "google-anime-media": "b81c6f2d7cc269d0d010e301f688cd4c1f51c0961eab7e12281fcbd3af74a9bf",
     "graphics-and-shapes": "524e103f0331b73b47c98352555bf3519ed7f01f07be5458bd7f1cb5acddb389",
@@ -42,7 +33,6 @@
     "input-keyboard-mouse-touch": "ef3753ade8ec8278af1918c775e1a02cbd0005080478b8f2e5979539f58050d8",
     "loading-assets": "2ba246be24e434d3647dd62cd1b51ac70258a57c1963b97a960a80e1aca8b638",
     "particles": "02d3c380502ece0898933a045868d2a3e5050dc3466d7b3aba94cee0ba5cd2c1",
-    "performance-optimization": "54cbf9da75bcefe72209d7103fb7b128a5d17822ed0528ff44e28f9cb45140ce",
     "phaser4-anime-ui": "3fbc23f3e01d1711a009270770e4a6f56ded1ef83c53809e389baeb9ff2c890b",
     "phaser4-battle": "d4e0385f532fa8e8d7fc3ba2199bc9d5f7d4cb5f8c530a2d3e88d5718570c255",
     "phaser4-chibi-animation": "226ac166ff37afecca5391acdd2b00c80ac213fe3d46cfe22f0537903cea9bee",
@@ -58,8 +48,6 @@
     "ponytail-help": "2927276bc9c10221ce8bcf80adb798db130cd70eb33a95db91ab3a0d105f5109",
     "ponytail-review": "33fe4ebe22a460924e5d4a261e223df22e409cc94ab76182bee9fb91a3ef022e",
     "render-textures": "9c44b258b4b69e41ff330bb504536cd45aa10be2402e76df876de9da1463f3bd",
-    "rpg": "ef8f7b93d9853c5fc138428f6af21f3299aeaa3df44de2bf1bd76db15df4b432",
-    "save-systems": "20dba7985d2fc5a2ca73bf212a8b7410ecc2d8bc1670551719541228bfe35485",
     "scale-and-responsive": "32ddfb9ea66ff2a3640df7adf40d1b0173560bb94737ac79405e09a43cd70e8a",
     "scenes": "31a07e16634d7b49e33cdb681576e158037d4856d40aaa8f7177d662da47cfa8",
     "security-audit": "5e3e96a1e438d8f35fef0a1e38f02d4f00e2bdf910401b7dfe00e6779c6dac85",
@@ -70,7 +58,6 @@
     "tweens": "08bdb1c76848cae80dfc9c7720f79041d46eef2f790399a5d248b254ea87b8b4",
     "ui-ux-pro-max": "b99e07d65c66f3a231c0f2a94bfe4aff2ef41e89e1f16645fd760c8c603c6eab",
     "v3-to-v4-migration": "a7d2e1533ecb06874f54e4b93383e6b2c14f6c1dac13f0a10a0d7fe56b6020c3",
-    "v4-new-features": "6b4e2ae40e31e5537f36e4734191f7bea50907d0cce2aafde8dfa1a5bd03a6cf",
-    "visual-novel": "9b4fb31c58eb442b26bed1626c8e01d3c6a56308badd35309364df9f52613da8"
+    "v4-new-features": "6b4e2ae40e31e5537f36e4734191f7bea50907d0cce2aafde8dfa1a5bd03a6cf"
   }
 }
