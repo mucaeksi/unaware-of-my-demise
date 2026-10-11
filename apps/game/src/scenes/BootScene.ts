@@ -3,6 +3,7 @@ import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { ContentService } from '../content/ContentService';
 import { prefs } from '../platform/prefs';
+import { detectIdentity } from '../net/identity';
 import { Services } from '../services';
 
 const UPDATE_TIMEOUT_MS = 4000;
@@ -29,6 +30,7 @@ export class BootScene extends Phaser.Scene {
       Music.init(this.sound);
       Sfx.init(wa.context, wa.masterVolumeNode ?? wa.context.destination);
     }
+    Services.identity = detectIdentity();
     try {
       Services.content = await ContentService.create();
       const art = await Services.refreshArt();

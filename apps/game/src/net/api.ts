@@ -1,0 +1,198 @@
+import { API_BASE } from '../config';
+
+export class ApiError extends Error {
+  constructor(
+    readonly status: number,
+    readonly code: string,
+    message: string,
+    readonly detail?: unknown
+  ) {
+    super(message);
+  }
+}
+
+const KEY = 'uomd.session.v1';
+interface Session {
+  token: string;
+  expiresAt: string;
+}
+
+export interface Wallets {
+  silver_crowns?: number;
+  eclipse_token?: number;
+  fates_thread?: number;
+}
+export interface BannerInfo {
+  id: string;
+  title: string;
+  kind: 'character' | 'weapon';
+  pityGroup: string;
+  startsAt: string | null;
+  endsAt: string | null;
+  hardPity: number;
+  baseFiveStarRate: number;
+  softPity: { startPull: number; increment: number } | null;
+  featured: { chance: number; lossesToGuarantee: number; targetMode: 'fixed' | 'selectable' } | null;
+  minFourStarEvery: number;
+  pools: { fiveFeatured: string[]; fiveOther: string[]; four: string[]; three: string[] };
+  duplicateShards: Record<string, number>;
+  analysis: { consolidatedFiveStarRate: number; expectedPullsPerFiveStar: number; expectedPullsPerTarget: number | null; worstCasePullsForTarget: number | null };
+}
+export interface PullRecord {
+  seq: number;
+  pullNumber: number;
+  rarity: 3 | 4 | 5;
+  itemId: string;
+  outcome: string;
+  duplicate: boolean;
+  shards: number;
+  upgraded: boolean;
+}
+export interface PullResponse {
+  pulls: PullRecord[];
+  balance: number;
+  pity: { pity5: number; pity4: number; lost: number; hardPity: number };
+  replayed: boolean;
+}
+export interface MailItem {
+  id: number;
+  kind: string;
+  title: string;
+  body: string;
+  attachments: ({ type: 'currency'; currency: string; amount: number } | { type: 'character'; itemId: string })[];
+  created_at: string;
+  expires_at: string;
+  claimed_at: string | null;
+}
+export interface Product {
+  productId: string;
+  kind: 'consumable' | 'subscription';
+  title: string;
+  grants: { type: string; currency?: string; amount?: number; itemId?: string }[];
+  subscription: { duration_days: number } | null;
+}
+
+export const newRequestId = (): string => (globalThis.crypto?.randomUUID ? globalThis.crypto.randomUUID().replaceAll('-', '') : `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 12)}`);
+
+/** Typed client for the game API. The session token is an opaque bearer kept in localStorage (never logged). */
+export class GameApi extends EventTarget {
+  private session: Session | null = null;
+
+  constructor(private readonly base = API_BASE) {
+    super();
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) {
+        const s = JSON.parse(raw) as Session;
+        if (typeof s.token === 'string' && Date.parse(s.expiresAt) > Date.now()) this.session = s;
+      }
+    } catch {
+      /* private mode: stay signed out */
+    }
+  }
+
+  get signedIn(): boolean {
+    return this.session !== null;
+  }
+
+  private store(s: Session | null): void {
+    this.session = s;
+    try {
+      if (s) localStorage.setItem(KEY, JSON.stringify(s));
+      else localStorage.removeItem(KEY);
+    } catch {
+      /* ignore */
+    }
+    this.dispatchEvent(new Event('auth'));
+  }
+
+  /** Raw typed call. Public so the browser test harness can reach endpoints the UI does not wrap yet. */
+  async call<T>(method: string, path: string, body?: unknown, auth = true): Promise<T> {
+    const res = await fetch(`${this.base}${path}`, {
+      method,
+      headers: { ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}), ...(auth && this.session ? { Authorization: `Bearer ${this.session.token}` } : {}) },
+      ...(body !== undefined ? { body: JSON.stringify(body) } : {})
+    });
+    const text = await res.text();
+    let json: unknown = null;
+    try {
+      json = text ? JSON.parse(text) : null;
+    } catch {
+      /* non-JSON error page */
+    }
+    if (!res.ok) {
+      const e = (json ?? {}) as { error?: string; message?: string; detail?: unknown };
+      if (res.status === 401 && auth && this.session) this.store(null); // expired or revoked: back to signed out
+      throw new ApiError(res.status, e.error ?? 'http_error', e.message ?? `HTTP ${res.status}`, e.detail);
+    }
+    return json as T;
+  }
+
+  async signInWithIdToken(idToken: string): Promise<{ id: string; displayName: string | null; isNew: boolean }> {
+    const r = await this.call<{ token: string; expiresAt: string; player: { id: string; displayName: string | null; isNew: boolean } }>('POST', '/api/v1/auth/google', { idToken }, false);
+    this.store({ token: r.token, expiresAt: r.expiresAt });
+    return r.player;
+  }
+
+  async signOut(): Promise<void> {
+    try {
+      await this.call('POST', '/api/v1/auth/logout', {});
+    } catch {
+      /* the server may already have dropped the session */
+    }
+    this.store(null);
+  }
+
+  me = (): Promise<{ id: string; displayName: string | null; createdAt: string; billingTag: string }> => this.call('GET', '/api/v1/me');
+  async wallet(): Promise<Wallets> {
+    return (await this.call<{ wallets: Wallets }>('GET', '/api/v1/wallet')).wallets;
+  }
+  async inventory(): Promise<{ item_type: string; item_id: string; copies: number; shards: number }[]> {
+    return (await this.call<{ items: { item_type: string; item_id: string; copies: number; shards: number }[] }>('GET', '/api/v1/inventory')).items;
+  }
+  async roster(): Promise<{ id: string; name_en: string; rarity: number; element: string; role: string }[]> {
+    return (await this.call<{ characters: { id: string; name_en: string; rarity: number; element: string; role: string }[] }>('GET', '/api/v1/characters', undefined, false)).characters;
+  }
+  async banners(): Promise<BannerInfo[]> {
+    return (await this.call<{ banners: BannerInfo[] }>('GET', '/api/v1/banners', undefined, false)).banners;
+  }
+  async gachaState(): Promise<{ pity_group: string; pity5: number; pity4: number; lost: number }[]> {
+    return (await this.call<{ pity: { pity_group: string; pity5: number; pity4: number; lost: number }[] }>('GET', '/api/v1/gacha/state')).pity;
+  }
+  pull(bannerId: string, count: 1 | 10, target?: string): Promise<PullResponse> {
+    return this.call('POST', '/api/v1/gacha/pull', { bannerId, count, requestId: newRequestId(), ...(target ? { target } : {}) });
+  }
+  async history(): Promise<{ id: number; banner_id: string; pull_number: number; rarity: number; item_id: string; outcome: string; duplicate: number; at: string }[]> {
+    return (await this.call<{ pulls: { id: number; banner_id: string; pull_number: number; rarity: number; item_id: string; outcome: string; duplicate: number; at: string }[] }>('GET', '/api/v1/gacha/history?limit=40')).pulls;
+  }
+  convertFates(count: number): Promise<{ converted: number; eclipse_token: number; fates_thread: number }> {
+    return this.call('POST', '/api/v1/economy/convert-fates', { count, requestId: newRequestId() });
+  }
+  async mail(): Promise<MailItem[]> {
+    return (await this.call<{ mail: MailItem[] }>('GET', '/api/v1/mail')).mail;
+  }
+  claimMail(id: number): Promise<{ claimed: MailItem['attachments'] }> {
+    return this.call('POST', `/api/v1/mail/${id}/claim`, {});
+  }
+  async products(): Promise<Product[]> {
+    return (await this.call<{ products: Product[] }>('GET', '/api/v1/shop/products', undefined, false)).products;
+  }
+  adStatus(): Promise<{ windowViews: number; dayViews: number; perWindow: number; perDay: number; reward: number }> {
+    return this.call('GET', '/api/v1/ads/status');
+  }
+  progress(): Promise<{ nodes: { node_id: string; stars: number; clears: number }[]; ration: { value: number; cap: number; nextMs: number } }> {
+    return this.call('GET', '/api/v1/progress');
+  }
+  submitBattle(releaseId: string, nodeId: string, actions: { skillId: string; targetId?: string }[]): Promise<{ stars: number; firstClear: boolean; rewards: MailItem['attachments']; ration: { spent: number; value: number } }> {
+    return this.call('POST', '/api/v1/progress/battle', { releaseId, nodeId, requestId: newRequestId(), actions });
+  }
+  readSave(): Promise<{ version: number; data: Record<string, unknown>; updatedAt: string | null }> {
+    return this.call('GET', '/api/v1/save');
+  }
+  writeSave(expectedVersion: number, data: Record<string, unknown>): Promise<{ version: number }> {
+    return this.call('PUT', '/api/v1/save', { expectedVersion, data });
+  }
+  async flags(): Promise<Record<string, { enabled: boolean; value: unknown }>> {
+    return (await this.call<{ flags: Record<string, { enabled: boolean; value: unknown }> }>('GET', '/api/v1/flags', undefined, false)).flags;
+  }
+}

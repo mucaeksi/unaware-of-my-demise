@@ -23,6 +23,7 @@ export async function playNode(scene: Phaser.Scene, node: Node): Promise<void> {
   const startBattle = (s: Phaser.Scene): void =>
     void s.scene.start('Battle', {
       encounterPath: node.encounter,
+      nodeId: node.node_id,
       onBack: toChapters,
       onDone: (b: Phaser.Scene, outcome: { won: boolean; stars: number }) => {
         Progress.complete(node.node_id, outcome.stars);

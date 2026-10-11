@@ -72,6 +72,7 @@ export class TitleScene extends Phaser.Scene {
     new Button(this, 500, 640, { label: 'BEGIN', sub: 'The First Step', w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.begin() });
     new Button(this, 500, 786, { label: 'CHAPTERS', w: 560, h: 120, onClick: () => this.go('Chapters') });
     new Button(this, 500, 920, { label: 'SETTINGS', w: 560, h: 120, onClick: () => this.openSettings() });
+    new Button(this, REF_W - 200, 80, { label: 'COMPANY', w: 340, h: 110, fontSize: 30, onClick: () => this.go('Home') });
 
     this.chipText = txt(this, 60, REF_H - 36, '', { fontSize: '24px', color: T.dim }).setOrigin(0, 0.5).setDepth(DEPTH.hud);
     if (PATCH_LAB_ENABLED) {

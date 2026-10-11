@@ -1,11 +1,15 @@
 import type Phaser from 'phaser';
 import { ArtLibrary } from './content/ArtLibrary';
 import { type ContentService } from './content/ContentService';
+import { GameApi } from './net/api';
+import { type IdentityProvider } from './net/identity';
 
 /** Process-wide singletons the scenes share (there is exactly one content stack per page). */
 export const Services = {
   content: null as ContentService | null,
   art: null as ArtLibrary | null,
+  api: new GameApi(),
+  identity: null as IdentityProvider | null,
 
   ready(): { content: ContentService; art: ArtLibrary } {
     if (!this.content || !this.art) throw new Error('services not initialised');

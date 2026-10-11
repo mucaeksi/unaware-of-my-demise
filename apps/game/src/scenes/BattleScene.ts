@@ -9,7 +9,7 @@ import { spotFor } from '../battle/formation';
 import { UnitView } from '../battle/UnitView';
 import { prefs } from '../platform/prefs';
 import { Services } from '../services';
-import { Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
+import { Button, panel, sceneFadeIn, title, toast, txt } from '../ui/kit';
 import { C, DEPTH, F, SIZE, T, hex } from '../ui/theme';
 
 export interface BattleOutcome {
@@ -18,6 +18,8 @@ export interface BattleOutcome {
 }
 export interface BattleInit {
   encounterPath: string;
+  /** chapter node being played: lets a signed-in player's win be claimed on the server */
+  nodeId?: string;
   onDone: (scene: Phaser.Scene, outcome: BattleOutcome) => void;
   onBack: (scene: Phaser.Scene) => void;
 }
@@ -583,11 +585,27 @@ export class BattleScene extends Phaser.Scene {
     txt(this, REF_W / 2, 560, `${result.turns} turns  ·  ${this.recorded.length} actions`, { fontSize: '34px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
     const verify = txt(this, REF_W / 2, 618, 'Server verification: checking…', { fontSize: '30px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
     void this.verifyOnServer(verify);
+    if (won) void this.claimProgress();
 
     const primary = new Button(this, REF_W / 2 - 250, 760, { label: won ? 'CONTINUE' : 'RETRY', w: 440, onClick: () => (won ? this.cfg.onDone(this, { won, stars: result.stars }) : this.scene.restart(this.cfg)) }).setDepth(DEPTH.modal + 2);
     new Button(this, REF_W / 2 + 250, 760, { label: 'LEAVE', w: 440, onClick: () => this.cfg.onBack(this) }).setDepth(DEPTH.modal + 2);
     void box;
     void primary;
+  }
+
+  /** Signed-in players: the server re-simulates the win again, pays Ration and grants the stage rewards. */
+  private async claimProgress(): Promise<void> {
+    const api = Services.api;
+    if (!api.signedIn || !this.cfg.nodeId) return;
+    try {
+      const { content } = Services.ready();
+      const r = await api.submitBattle(await content.activeReleaseId(), this.cfg.nodeId, this.recorded);
+      if (this.dead) return;
+      const gained = r.rewards.length ? ` · rewards: ${r.rewards.map((a) => (a.type === 'currency' ? `${a.amount} ${a.currency.replaceAll('_', ' ')}` : a.itemId)).join(', ')}` : '';
+      toast(this, `Progress saved to your account${gained}`);
+    } catch (e) {
+      if (!this.dead) toast(this, e instanceof Error ? `Progress not saved: ${e.message}` : 'Progress not saved');
+    }
   }
 
   /** Asks the Worker to re-simulate the battle; the client result is only accepted if hashes agree. */

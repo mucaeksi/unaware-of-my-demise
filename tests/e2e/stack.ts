@@ -16,6 +16,7 @@ export const PORTS = { game: 8787, admin: 8788, jwks: 8799 };
 export const TEAM = 'e2e-team.local';
 export const AUD = 'e2e-audience';
 export const OWNER = 'e2e-owner@example.com';
+export const GOOGLE_CLIENT = 'e2e-client.apps.googleusercontent.com';
 
 export interface Stack {
   adminJwt: string;
@@ -89,9 +90,13 @@ async function boot(): Promise<Stack> {
   // test-only identities and keys (never reused anywhere else)
   const rsa = await generateKeyPair('RS256', { extractable: true });
   const jwk = { ...(await exportJWK(rsa.publicKey)), kid: 'k1', alg: 'RS256', use: 'sig' };
-  jwksServer = createServer((_req, res) => {
+  // a second, unrelated key pair plays "Google" for ID tokens (the game Worker honours a test JWKS only in ENVIRONMENT=dev)
+  const googleRsa = await generateKeyPair('RS256', { extractable: true });
+  const googleJwk = { ...(await exportJWK(googleRsa.publicKey)), kid: 'g1', alg: 'RS256', use: 'sig' };
+  process.env.E2E_GOOGLE_PRIVATE_JWK = JSON.stringify({ ...(await exportJWK(googleRsa.privateKey)), kid: 'g1', alg: 'RS256' });
+  jwksServer = createServer((req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ keys: [jwk] }));
+    res.end(JSON.stringify({ keys: [req.url?.startsWith('/google') ? googleJwk : jwk] }));
   }).listen(PORTS.jwks, '127.0.0.1');
   const adminJwt = await new SignJWT({ email: OWNER }).setProtectedHeader({ alg: 'RS256', kid: 'k1' }).setIssuer(`https://${TEAM}`).setAudience(AUD).setIssuedAt().setExpirationTime('6h').sign(rsa.privateKey);
 
@@ -109,10 +114,11 @@ async function boot(): Promise<Stack> {
   const persist = ['--persist-to', STATE];
   await sh('npx', ['wrangler', 'd1', 'migrations', 'apply', 'DB', '--local', ...persist, '-c', 'wrangler.game.jsonc', '--env', 'dev'], api);
   await sh('npx', ['wrangler', 'd1', 'execute', 'DB', '--local', ...persist, '-c', 'wrangler.game.jsonc', '--env', 'dev', '--file', 'seed/characters.sql'], api);
+  await sh('npx', ['wrangler', 'd1', 'execute', 'DB', '--local', ...persist, '-c', 'wrangler.game.jsonc', '--env', 'dev', '--file', 'seed/banners.sql'], api);
 
   start('admin', ['dev', '-c', 'wrangler.admin.jsonc', '--env', 'dev', '--port', String(PORTS.admin), '--inspector-port', '9301', ...persist, '--var', `ACCESS_TEAM_DOMAIN:${TEAM}`, '--var', `ACCESS_AUD:${AUD}`, '--var', `ACCESS_JWKS_URL:http://127.0.0.1:${PORTS.jwks}/jwks.json`, '--var', `ADMIN_BOOTSTRAP_OWNERS:${OWNER}`, '--var', `CONTENT_SIGNING_KEY:${JSON.stringify({ ...signing.privateJwk, kid })}`, '--var', `CONTENT_SIGNING_KID:${kid}`], api);
   await waitFor(`http://127.0.0.1:${PORTS.admin}/admin/api/health`);
-  start('game', ['dev', '-c', 'wrangler.game.jsonc', '--env', 'dev', '--port', String(PORTS.game), '--inspector-port', '9302', ...persist], api);
+  start('game', ['dev', '-c', 'wrangler.game.jsonc', '--env', 'dev', '--port', String(PORTS.game), '--inspector-port', '9302', ...persist, '--var', `GOOGLE_CLIENT_IDS:${GOOGLE_CLIENT}`, '--var', `GOOGLE_JWKS_URL:http://127.0.0.1:${PORTS.jwks}/google.json`], api);
   await waitFor(`http://127.0.0.1:${PORTS.game}/api/v1/health`);
 
   const publish = (dir: string, id: string, extra: string[] = []): Promise<void> =>
