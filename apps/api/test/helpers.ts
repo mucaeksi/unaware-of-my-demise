@@ -127,8 +127,9 @@ function rawToDer(raw: Uint8Array): Uint8Array {
 }
 
 /** Builds an AdMob SSV callback URL path signed like Google does (ECDSA P-256 over the query without signature/key_id). */
-export async function ssvPath(params: Record<string, string>, over: { badSignature?: boolean; keyId?: string; reorder?: boolean; test?: boolean } = {}): Promise<string> {
-  const message = new URLSearchParams(params).toString();
+export async function ssvPath(params: Record<string, string>, over: { badSignature?: boolean; keyId?: string; reorder?: boolean; test?: boolean; rawApostrophe?: boolean } = {}): Promise<string> {
+  // `rawApostrophe`: Google signs the query exactly as it sends it; a reward name such as "Bell's Remains" may arrive with a literal '
+  const message = over.rawApostrophe ? new URLSearchParams(params).toString().replace(/%27/g, "'") : new URLSearchParams(params).toString();
   const sig = new Uint8Array(await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, over.test ? ssvTestPair.privateKey : ssvPair.privateKey, new TextEncoder().encode(over.badSignature ? `${message}&tampered` : message)));
   const b64u = btoa(String.fromCharCode(...rawToDer(sig))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   return over.reorder ? `/api/v1/ads/ssv?key_id=${over.keyId ?? (over.test ? '4343' : '4242')}&${message}&signature=${b64u}` : `/api/v1/ads/ssv?${message}&signature=${b64u}&key_id=${over.keyId ?? (over.test ? '4343' : '4242')}`;

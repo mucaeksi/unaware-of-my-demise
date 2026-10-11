@@ -98,10 +98,21 @@ export async function verifySsv(rawQuery: string, fetchKeys: SsvKeyFetcher): Pro
     key = keys.find((k) => String(k.keyId) === keyId);
   }
   if (!key) throw new HttpError(400, 'bad_ssv', 'unknown verifier key');
-  let ok: boolean;
+  // Google signs the query exactly as it sends it, but the runtime hands us a URL that the URL parser already normalised: it escapes the
+  // characters of the "query percent-encode set" (' " < >), so a reward name like "Bell's Remains" arrives as %27. Try the message as seen,
+  // then with those characters restored; a signature can only match the form that was really signed.
+  const restored = message.replace(/%27/g, "'").replace(/%22/g, '"').replace(/%3C/gi, '<').replace(/%3E/gi, '>');
+  const candidates = restored === message ? [message] : [message, restored];
+  let ok = false;
   try {
     const pub = await crypto.subtle.importKey('spki', b64(key.base64), { name: 'ECDSA', namedCurve: 'P-256' }, false, ['verify']);
-    ok = await crypto.subtle.verify({ name: 'ECDSA', hash: 'SHA-256' }, pub, derToRaw(b64(signature)), new TextEncoder().encode(message));
+    const sig = derToRaw(b64(signature));
+    for (const m of candidates) {
+      if (await crypto.subtle.verify({ name: 'ECDSA', hash: 'SHA-256' }, pub, sig, new TextEncoder().encode(m))) {
+        ok = true;
+        break;
+      }
+    }
   } catch {
     ok = false;
   }

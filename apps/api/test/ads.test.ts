@@ -14,6 +14,23 @@ async function view(auth: Record<string, string>, playerId: string, over: Record
 }
 
 describe('rewarded ads (AdMob server-side verification)', () => {
+  it("accepts a callback whose reward name contains an apostrophe sent literally (the URL parser escapes it to %27 before the Worker sees it)", async () => {
+    const { auth, playerId } = await signIn(`sub-adapo-${uid()}`);
+    const begin = (await (await game('/api/v1/ads/begin', post({}, auth))).json()) as { nonce: string };
+    const path = await ssvPath({ ad_network: '5450213213286189855', ad_unit: ADMOB_UNIT_NUMERIC, custom_data: begin.nonce, reward_amount: '1', reward_item: "Bell's Remains", timestamp: String(Date.now()), transaction_id: `tx${uid()}`, user_id: playerId }, { rawApostrophe: true });
+    expect(path).toContain("Bell's");
+    const res = await game(path);
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ granted: true });
+    // the same, signed by the TEST key (AdMob's "verify URL" button): acknowledged, never paid
+    const t = await game(await ssvPath({ ad_network: '5450213213286189855', ad_unit: '1234567890', reward_amount: '20', reward_item: "Bell's Remains", timestamp: String(Date.now()), transaction_id: '123456789' }, { test: true, rawApostrophe: true }));
+    expect(t.status).toBe(200);
+    expect(await t.json()).toEqual({ granted: false, reason: 'test_callback' });
+    // a tampered message is still refused
+    const bad = await game(await ssvPath({ ad_unit: ADMOB_UNIT_NUMERIC, reward_item: "Bell's Remains", timestamp: String(Date.now()), transaction_id: `tx${uid()}` }, { rawApostrophe: true, badSignature: true }));
+    expect(bad.status).toBe(400);
+  });
+
   it('der -> raw conversion handles short integers and padding bytes', () => {
     const der = Uint8Array.from([0x30, 0x08, 0x02, 0x02, 0x00, 0xff, 0x02, 0x02, 0x01, 0x02]);
     const raw = derToRaw(der);

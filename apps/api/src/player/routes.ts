@@ -221,7 +221,12 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     const units = (c.env.ADMOB_AD_UNIT_IDS ?? '').split(',').map((s) => s.trim()).filter(Boolean);
     if (units.length === 0) throw new HttpError(503, 'ads_not_configured', 'rewarded ads are not configured for this environment');
     const url = new URL(c.req.url);
-    const ssv = await verifySsv(url.search, opts.admobKeys ?? googleKeyFetcher);
+    // a rejected callback is logged with its reason (never the signature or user data) so a misconfigured AdMob setup can be diagnosed
+    const ssv = await verifySsv(url.search, opts.admobKeys ?? googleKeyFetcher).catch((e: unknown) => {
+      const p = url.searchParams;
+      console.warn('ssv_rejected', JSON.stringify({ reason: e instanceof Error ? e.message : String(e), keyId: p.get('key_id'), adUnit: p.get('ad_unit'), params: [...p.keys()].join(','), queryLength: url.search.length }));
+      throw e;
+    });
     // AdMob's "verify URL" button and test ads are signed with Google's test key: acknowledge, pay nothing
     if (ssv.viaTestKey) return c.json({ granted: false, reason: 'test_callback' });
     // AdMob's callback carries the numeric unit id (the part after the slash of ca-app-pub-<publisher>/<unit>); configuration may hold either form
