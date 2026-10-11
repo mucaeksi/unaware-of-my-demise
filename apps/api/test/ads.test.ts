@@ -101,6 +101,25 @@ describe('rewarded ads (AdMob server-side verification)', () => {
   });
 });
 
+describe('AdMob URL verification and test callbacks', () => {
+  it('the "verify URL" request (no user_id, no custom_data, Google test key) is answered 200 and pays nothing', async () => {
+    const path = await ssvPath({ ad_network: '5450213213286189855', ad_unit: ADMOB_UNIT_NUMERIC, reward_amount: '1', reward_item: 'token', timestamp: String(Date.now()), transaction_id: `tx${uid()}` }, { test: true });
+    const res = await game(path);
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ granted: false, reason: 'test_callback' });
+  });
+  it('a test-key callback never pays even with a valid player and nonce; a live-key callback without user_id is acknowledged without payout', async () => {
+    const { auth, playerId } = await signIn(`sub-adtest-${uid()}`);
+    const begin = (await (await game('/api/v1/ads/begin', post({}, auth))).json()) as { nonce: string };
+    const test = await game(await ssvPath({ ad_unit: ADMOB_UNIT_NUMERIC, custom_data: begin.nonce, timestamp: String(Date.now()), transaction_id: `tx${uid()}`, user_id: playerId }, { test: true }));
+    expect(await test.json()).toEqual({ granted: false, reason: 'test_callback' });
+    const live = await game(await ssvPath({ ad_unit: ADMOB_UNIT_NUMERIC, timestamp: String(Date.now()), transaction_id: `tx${uid()}` }));
+    expect(live.status).toBe(200);
+    expect(await live.json()).toEqual({ granted: false, reason: 'bad_nonce' });
+    expect(((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token ?? 0).toBe(0);
+  });
+});
+
 describe('currency name', () => {
   it('the main currency is called Bell\'s Remains and the name is served as data', async () => {
     expect(await (await game('/api/v1/currency')).json()).toEqual({ id: 'eclipse_token', name: "Bell's Remains" });

@@ -4,21 +4,28 @@ export interface SsvKey {
   keyId: number | string;
   /** base64 of the SPKI DER public key */
   base64: string;
+  /** a key from Google's TEST list: it signs AdMob's URL-verification request and test ads, and must never pay a reward */
+  test?: boolean;
 }
 export type SsvKeyFetcher = () => Promise<SsvKey[]>;
 
 export const ADMOB_KEYS_URL = 'https://www.gstatic.com/admob/reward/verifier-keys.json';
+export const ADMOB_TEST_KEYS_URL = 'https://www.gstatic.com/admob/reward/verifier-keys-test.json';
 let cache: { at: number; keys: SsvKey[] } | undefined;
 
-/** Google's public AdMob verifier keys (rotated rarely; cached for an hour, refreshed when a key id is unknown). */
+/** Google's public AdMob verifier keys, live and test (rotated rarely; cached for an hour, refreshed when a key id is unknown). */
 export const googleKeyFetcher: SsvKeyFetcher = async () => {
   if (cache && Date.now() - cache.at < 3_600_000) return cache.keys;
-  const res = await fetch(ADMOB_KEYS_URL);
-  if (!res.ok) throw new HttpError(503, 'ssv_keys_unavailable', 'AdMob verifier keys could not be fetched');
-  const j = (await res.json()) as { keys?: SsvKey[] };
-  if (!Array.isArray(j.keys) || j.keys.length === 0) throw new HttpError(503, 'ssv_keys_unavailable', 'AdMob verifier key list is empty');
-  cache = { at: Date.now(), keys: j.keys };
-  return j.keys;
+  const get = async (url: string, test: boolean): Promise<SsvKey[]> => {
+    const res = await fetch(url);
+    if (!res.ok) throw new HttpError(503, 'ssv_keys_unavailable', 'AdMob verifier keys could not be fetched');
+    const j = (await res.json()) as { keys?: SsvKey[] };
+    if (!Array.isArray(j.keys) || j.keys.length === 0) throw new HttpError(503, 'ssv_keys_unavailable', 'AdMob verifier key list is empty');
+    return j.keys.map((k) => ({ keyId: k.keyId, base64: k.base64, ...(test ? { test: true } : {}) }));
+  };
+  const [live, test] = await Promise.all([get(ADMOB_KEYS_URL, false), get(ADMOB_TEST_KEYS_URL, true).catch(() => [] as SsvKey[])]);
+  cache = { at: Date.now(), keys: [...live, ...test] };
+  return cache.keys;
 };
 
 const b64 = (s: string): Uint8Array => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(s.length / 4) * 4, '=')), (c) => c.charCodeAt(0));
@@ -58,6 +65,8 @@ export function derToRaw(der: Uint8Array): Uint8Array {
 }
 
 export interface SsvParams {
+  /** signed by Google's test key (AdMob's "verify URL" button and test ads): answer 200, never grant */
+  viaTestKey: boolean;
   adUnit: string;
   transactionId: string;
   userId: string;
@@ -101,9 +110,11 @@ export async function verifySsv(rawQuery: string, fetchKeys: SsvKeyFetcher): Pro
   const ts = Number(p.get('timestamp'));
   const adUnit = p.get('ad_unit');
   const transactionId = p.get('transaction_id');
-  const userId = p.get('user_id');
-  if (!adUnit || !transactionId || !userId || !Number.isFinite(ts)) throw new HttpError(400, 'bad_ssv', 'missing parameters');
+  const userId = p.get('user_id') ?? '';
+  // AdMob's own URL check sends neither user_id nor custom_data: those are validated later, only a payout needs them
+  if (!adUnit || !transactionId || !Number.isFinite(ts)) throw new HttpError(400, 'bad_ssv', 'missing parameters');
   return {
+    viaTestKey: key.test === true,
     adUnit,
     transactionId,
     userId,

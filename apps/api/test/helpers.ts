@@ -49,6 +49,9 @@ export const ADMOB_UNIT = 'ca-app-pub-4258559369390965/3553164322';
 /** AdMob's callback carries only the numeric unit id */
 export const ADMOB_UNIT_NUMERIC = '3553164322';
 const ssvPair = (await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify'])) as CryptoKeyPair;
+const ssvTestPair = (await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify'])) as CryptoKeyPair;
+const spkiB64 = async (k: CryptoKey): Promise<string> => btoa(String.fromCharCode(...new Uint8Array((await crypto.subtle.exportKey('spki', k)) as ArrayBuffer)));
+const ssvTestSpki = await spkiB64(ssvTestPair.publicKey);
 const ssvSpki = btoa(String.fromCharCode(...new Uint8Array((await crypto.subtle.exportKey('spki', ssvPair.publicKey)) as ArrayBuffer)));
 import type { PlayClient, ProductPurchase, SubscriptionPurchase } from '../src/billing/play';
 
@@ -109,7 +112,7 @@ export async function pushToken(over: { aud?: string; email?: string; wrongKey?:
 const gameApp = createGameApp({
   play: () => playClient,
   getGoogleKey: (async () => googleKeys.publicKey) as unknown as JWTVerifyGetKey,
-  admobKeys: async () => [{ keyId: 4242, base64: ssvSpki }]
+  admobKeys: async () => [{ keyId: 4242, base64: ssvSpki }, { keyId: 4343, base64: ssvTestSpki, test: true }]
 });
 
 function rawToDer(raw: Uint8Array): Uint8Array {
@@ -124,11 +127,11 @@ function rawToDer(raw: Uint8Array): Uint8Array {
 }
 
 /** Builds an AdMob SSV callback URL path signed like Google does (ECDSA P-256 over the query without signature/key_id). */
-export async function ssvPath(params: Record<string, string>, over: { badSignature?: boolean; keyId?: string; reorder?: boolean } = {}): Promise<string> {
+export async function ssvPath(params: Record<string, string>, over: { badSignature?: boolean; keyId?: string; reorder?: boolean; test?: boolean } = {}): Promise<string> {
   const message = new URLSearchParams(params).toString();
-  const sig = new Uint8Array(await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, ssvPair.privateKey, new TextEncoder().encode(over.badSignature ? `${message}&tampered` : message)));
+  const sig = new Uint8Array(await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, over.test ? ssvTestPair.privateKey : ssvPair.privateKey, new TextEncoder().encode(over.badSignature ? `${message}&tampered` : message)));
   const b64u = btoa(String.fromCharCode(...rawToDer(sig))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-  return over.reorder ? `/api/v1/ads/ssv?key_id=${over.keyId ?? '4242'}&${message}&signature=${b64u}` : `/api/v1/ads/ssv?${message}&signature=${b64u}&key_id=${over.keyId ?? '4242'}`;
+  return over.reorder ? `/api/v1/ads/ssv?key_id=${over.keyId ?? (over.test ? '4343' : '4242')}&${message}&signature=${b64u}` : `/api/v1/ads/ssv?${message}&signature=${b64u}&key_id=${over.keyId ?? (over.test ? '4343' : '4242')}`;
 }
 
 export async function googleIdToken(sub: string, over: { aud?: string; iss?: string; expired?: boolean; wrongKey?: boolean; name?: string } = {}): Promise<string> {
