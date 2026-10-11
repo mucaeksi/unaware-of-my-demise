@@ -145,6 +145,16 @@ export class ArtLibrary {
     return this.musicKeys.get(cue) ?? null;
   }
 
+  /**
+   * The art library is rebuilt after every content patch (new instance, empty key maps), and a patch can land while the splash and studio
+   * cards are still playing. Menu-level scenes therefore call this first: it (re)loads the boot images and the title backdrop for THIS library
+   * (textures that already exist are skipped), so a scene never meets an art library that has not loaded what it draws.
+   */
+  async ensureBoot(scene: Phaser.Scene): Promise<void> {
+    await this.loadUi(scene);
+    await this.loadBackground(scene, 'forest_whispering_ash');
+  }
+
   async loadUi(scene: Phaser.Scene): Promise<void> {
     const queue: Queued[] = [];
     for (const [name, path] of Object.entries(this.art.ui)) {

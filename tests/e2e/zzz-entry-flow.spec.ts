@@ -51,6 +51,7 @@ const textsOf = (page: Page, scene: string): Promise<string[]> =>
     const out: string[] = [];
     const walk = (list: any[]): void => {
       for (const c of list) {
+        if (c.visible === false) continue; // hidden objects (e.g. the restart button while the download runs) are not on screen
         if (typeof c.text === 'string') out.push(c.text);
         if (Array.isArray(c.list)) walk(c.list);
       }

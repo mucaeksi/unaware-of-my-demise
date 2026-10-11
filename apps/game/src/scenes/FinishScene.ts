@@ -30,10 +30,12 @@ export class FinishScene extends Phaser.Scene {
     super('Finish');
   }
 
-  create(): void {
+  async create(): Promise<void> {
     this.restarting = false;
     this.shown = null;
     const { art } = Services.ready();
+    await art.ensureBoot(this).catch(() => undefined);
+    if (!this.sys.isActive()) return;
     this.cameras.main.setBackgroundColor(0x0a0610);
     try {
       const bg = this.add.image(REF_W / 2, REF_H / 2, art.background('forest_whispering_ash')).setAlpha(0.35);

@@ -45,12 +45,15 @@ export class TitleScene extends Phaser.Scene {
     super('Title');
   }
 
-  create(): void {
+  async create(): Promise<void> {
     this.overlay = null;
     this.audioStarted = false;
     this.busy = false;
     this.firstRun = loadEntry().phase !== 'completed';
     const { art } = Services.ready();
+    // a patch can have replaced the art library while the splash played: make sure it has loaded what this screen draws
+    await art.ensureBoot(this).catch((e: unknown) => console.warn('menu art unavailable', e));
+    if (!this.sys.isActive()) return;
     this.cameras.main.setBackgroundColor(0x0a0610);
 
     const bg = this.add.image(REF_W / 2, REF_H / 2, art.background('forest_whispering_ash'));
