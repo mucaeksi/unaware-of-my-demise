@@ -19,7 +19,7 @@ export const ProgressionConfig = z
         xp: z.object({ a: z.number(), b: z.number(), c: z.number() }).strict(),
         fee: Fee,
         /** a level-up fee for one level L -> L+1 is ceil(base + L * increment) */
-        ascension: z.array(z.object({ cap: z.number().int().min(1), accountLevel: z.number().int().min(1), items: z.array(Item).max(6), fee: z.number().min(0) }).strict()).max(10),
+        ascension: z.array(z.object({ cap: z.number().int().min(1), accountLevel: z.number().int().min(1), items: z.array(Item).max(6), fee: z.number().min(0), /** optional story gate: this chapter node must be cleared (canon: "Story Ch. 3") */ requiresNode: z.string().optional() }).strict()).max(10),
         skills: z
           .object({
             /** character level required for each rank (index 0 = rank 2) */

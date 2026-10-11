@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { RewardAttachment } from '@uomd/content-schema';
-import { CANON } from '@uomd/economy';
 import { sha256Hex } from '@uomd/shared';
 import { HttpError } from '../content/store';
+import { grantStatements } from '../db/grants';
 import { balanceOf, ledgerStatements } from '../db/ledger';
 import { sendMail } from '../mail/service';
 import type { PlayClient } from './play';
@@ -43,21 +43,6 @@ export async function listProducts(db: D1Database): Promise<Record<string, unkno
   return results.map((r) => ({ productId: r.product_id, kind: r.kind, title: r.title_en, grants: JSON.parse(r.grants), subscription: r.sub_config ? JSON.parse(r.sub_config) : null }));
 }
 
-function grantStatements(db: D1Database, playerId: string, prefix: string, atts: RewardAttachment[], reason: string): D1PreparedStatement[] {
-  const out: D1PreparedStatement[] = [];
-  atts.forEach((a, i) => {
-    if (a.type === 'currency') out.push(...ledgerStatements(db, { playerId, currency: a.currency, delta: a.amount, reason, idempotencyKey: `${prefix}:${i}` }));
-    else {
-      out.push(
-        db
-          .prepare("INSERT INTO player_items (player_id, item_type, item_id, copies, shards) VALUES (?1, 'character', ?2, 1, 0) ON CONFLICT (player_id, item_type, item_id) DO UPDATE SET copies = copies + 1, shards = shards + ?3")
-          .bind(playerId, a.itemId, CANON.duplicateShards[4])
-      );
-    }
-  });
-  return out;
-}
-
 const event = (db: D1Database, source: 'verify' | 'rtdn' | 'system', orderId: string | null, type: string, detail: Record<string, unknown> = {}): D1PreparedStatement =>
   db.prepare('INSERT INTO purchase_events (source, order_id, type, detail) VALUES (?1, ?2, ?3, ?4)').bind(source, orderId, type, JSON.stringify(detail));
 
@@ -92,7 +77,7 @@ export async function verifyPurchase(db: D1Database, play: PlayClient, playerId:
     try {
       await db.batch([
         db.prepare("INSERT INTO purchases (order_id, player_id, product_id, kind, token_hash, period_start, granted_at) VALUES (?1, ?2, ?3, 'consumable', ?4, ?5, ?5)").bind(p.orderId, playerId, product.product_id, th, now.toISOString()),
-        ...grantStatements(db, playerId, `iap:${p.orderId}`, grants, `purchase:${product.product_id}`),
+        ...(await grantStatements(db, playerId, grants, { keyPrefix: `iap:${p.orderId}`, reason: `purchase:${product.product_id}` })),
         event(db, 'verify', p.orderId, 'granted', { productId: product.product_id })
       ]);
     } catch (e) {
@@ -147,7 +132,7 @@ async function grantSubscriptionPeriod(
   try {
     await db.batch([
       db.prepare("INSERT INTO purchases (order_id, player_id, product_id, kind, token_hash, period_start, period_end, granted_at) VALUES (?1, ?2, ?3, 'subscription', ?4, ?5, ?6, ?7)").bind(orderId, playerId, product.product_id, th, periodStart, periodEnd, now.toISOString()),
-      ...grantStatements(db, playerId, `iap:${orderId}:instant`, cfg.instant, `subscription:${product.product_id}`),
+      ...(await grantStatements(db, playerId, cfg.instant, { keyPrefix: `iap:${orderId}:instant`, reason: `subscription:${product.product_id}` })),
       event(db, source, orderId, 'period_granted', { productId: product.product_id, periodEnd })
     ]);
   } catch (e) {

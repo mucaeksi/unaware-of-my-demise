@@ -187,3 +187,15 @@ export async function resetContent(): Promise<void> {
     db.prepare('DELETE FROM rate_counters')
   ]);
 }
+
+/** Seeds the 20 canon characters (stats are not the point here) and the canon catalog: the same SQL the deploy workflow runs. */
+export async function seedCanonCatalog(): Promise<void> {
+  const d = baseEnv.DB;
+  const ids: [string, number][] = [['mahmut', 5], ['fadyme', 5], ['kera_voss', 4], ['brin_alder', 4], ['nixie_vale', 4], ['sister_aveline', 5], ['sable_wren', 5], ['tilda_fen', 4], ['rikka_ember', 4], ['mirel_quill', 5], ['odelia_pike', 4], ['pippa_bell', 4], ['nara_vell', 5], ['clem_marr', 3], ['vespera_wisp', 5], ['hana_birch', 3], ['thistle_roe', 4], ['iona_mist', 4], ['jori_flint', 3], ['marek_vane', 4]];
+  for (const [id, r] of ids) {
+    await d.prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd) VALUES (?1,?1,?2,'Stone','tank',20,?3,10,2,2,4)").bind(id, r, id === 'mahmut' || id === 'fadyme' ? 'free_start' : 'gacha').run();
+  }
+  const sql = Object.values(import.meta.glob('../seed/catalog.sql', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>)[0] as string;
+  const stmts = sql.split(/;\n(?=(?:INSERT|UPDATE) )/).map((x) => x.replace(/^--.*\n/, '').trim().replace(/;$/, '')).filter(Boolean);
+  for (let i = 0; i < stmts.length; i += 50) await d.batch(stmts.slice(i, i + 50).map((s) => d.prepare(s)));
+}

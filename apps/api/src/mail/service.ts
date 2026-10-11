@@ -1,8 +1,7 @@
 import { z } from 'zod';
 import { RewardAttachment } from '@uomd/content-schema';
-import { CANON } from '@uomd/economy';
 import { HttpError } from '../content/store';
-import { ledgerStatements } from '../db/ledger';
+import { grantStatements } from '../db/grants';
 
 export const Attachment = RewardAttachment;
 export type Attachment = RewardAttachment;
@@ -76,29 +75,11 @@ export async function claimMail(db: D1Database, playerId: string, mailId: number
     if (p?.state === 'refunded') throw new HttpError(409, 'revoked', 'this entitlement was revoked by a refund');
   }
 
-  const items = mail.attachments.filter((a): a is Extract<Attachment, { type: 'character' }> => a.type === 'character');
-  const rarity = new Map<string, number>();
-  for (const it of items) {
-    const c = await db.prepare("SELECT rarity FROM characters WHERE id = ?1 AND status <> 'retired'").bind(it.itemId).first<{ rarity: number }>();
-    if (!c) throw new HttpError(422, 'unknown_item', `attachment ${it.itemId} does not exist`);
-    rarity.set(it.itemId, c.rarity);
-  }
   const batch: D1PreparedStatement[] = [
     db.prepare('UPDATE mail SET claimed_at = ?3, read_at = COALESCE(read_at, ?3) WHERE id = ?1 AND player_id = ?2 AND claimed_at IS NULL AND expires_at > ?3').bind(mailId, playerId, now.toISOString()),
-    db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)')
+    db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+    ...(await grantStatements(db, playerId, mail.attachments, { keyPrefix: `mail:${mailId}`, reason: `mail:${mail.kind}` }))
   ];
-  mail.attachments.forEach((a, i) => {
-    if (a.type === 'currency') {
-      batch.push(...ledgerStatements(db, { playerId, currency: a.currency, delta: a.amount, reason: `mail:${mail.kind}`, idempotencyKey: `mail:${mailId}:${i}` }));
-    } else {
-      const shards = CANON.duplicateShards[(rarity.get(a.itemId) ?? 3) as 3 | 4 | 5] ?? 2;
-      batch.push(
-        db
-          .prepare("INSERT INTO player_items (player_id, item_type, item_id, copies, shards) VALUES (?1, 'character', ?2, 1, 0) ON CONFLICT (player_id, item_type, item_id) DO UPDATE SET copies = copies + 1, shards = shards + ?3")
-          .bind(playerId, a.itemId, shards)
-      );
-    }
-  });
   batch.push(db.prepare('DELETE FROM tx_guard'));
   try {
     await db.batch(batch);

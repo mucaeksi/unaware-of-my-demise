@@ -1,22 +1,13 @@
 import { env } from 'cloudflare:workers';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { ProgressionConfig } from '@uomd/economy';
-import { admin, game } from './helpers';
+import { admin, game, seedCanonCatalog } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 const j = (method: string, body: unknown, as?: string) => ({ method, body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' }, ...(as ? { as } : {}) });
 
-/** the seed is the canon import: running it against the migrated schema proves both agree */
-export async function loadCatalogSeed(): Promise<void> {
-  const sql = Object.values(import.meta.glob('../seed/catalog.sql', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>)[0] as string;
-  const stmts = sql.split(/;\n(?=(?:INSERT|UPDATE) )/).map((x) => x.replace(/^--.*\n/, '').trim().replace(/;$/, '')).filter(Boolean);
-  for (let i = 0; i < stmts.length; i += 50) await db().batch(stmts.slice(i, i + 50).map((s) => db().prepare(s)));
-}
-
 beforeAll(async () => {
-  const ids: [string, number][] = [['mahmut', 5], ['fadyme', 5], ['kera_voss', 4], ['brin_alder', 4], ['nixie_vale', 4], ['sister_aveline', 5], ['sable_wren', 5], ['tilda_fen', 4], ['rikka_ember', 4], ['mirel_quill', 5], ['odelia_pike', 4], ['pippa_bell', 4], ['nara_vell', 5], ['clem_marr', 3], ['vespera_wisp', 5], ['hana_birch', 3], ['thistle_roe', 4], ['iona_mist', 4], ['jori_flint', 3], ['marek_vane', 4]];
-  for (const [id, r] of ids) await db().prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd) VALUES (?1,?1,?2,'Stone','tank',20,'gacha',10,2,2,4)").bind(id, r).run();
-  await loadCatalogSeed();
+  await seedCanonCatalog();
   await db().prepare("INSERT OR IGNORE INTO admin_users (email, role, created_by) VALUES ('viewer@example.com','viewer','test'), ('operator@example.com','operator','test')").run();
 });
 
@@ -31,7 +22,7 @@ describe('canon catalog seed', () => {
     expect(await count('SELECT COUNT(*) AS n FROM accessory_sets')).toBe(7);
     expect(await count('SELECT COUNT(*) AS n FROM weapon_types')).toBe(20);
     expect(await count('SELECT COUNT(*) AS n FROM character_skills')).toBe(80);
-    await loadCatalogSeed();
+    await seedCanonCatalog();
     expect(await count("SELECT COUNT(*) AS n FROM gear_defs WHERE slot = 'weapon'")).toBe(180);
     const m = await db().prepare("SELECT growth_hp, growth_atk, weapon_type, signature_weapon_id FROM characters WHERE id = 'mahmut'").first();
     expect(m).toMatchObject({ growth_hp: 0.7, growth_atk: 0.12, weapon_type: 'arming_sword', signature_weapon_id: 'weapon_mahmut_signature' });

@@ -4,7 +4,11 @@ import { Id } from './primitives';
 /** One thing a reward can grant. D-17: the game has ONE main currency (eclipse_token); everything else is an item/material. A closed grammar: the server applies these through the ledger / inventory only. */
 export const RewardAttachment = z.discriminatedUnion('type', [
   z.object({ type: z.literal('currency'), currency: z.literal('eclipse_token'), amount: z.number().int().min(1).max(1_000_000_000) }).strict(),
-  z.object({ type: z.literal('character'), itemId: Id }).strict()
+  z.object({ type: z.literal('character'), itemId: Id }).strict(),
+  /** a stackable material (books, seals, rivets, ...): see item_defs */
+  z.object({ type: z.literal('item'), itemId: Id, quantity: z.number().int().min(1).max(9999) }).strict(),
+  /** account (player level) experience */
+  z.object({ type: z.literal('account_xp'), amount: z.number().int().min(1).max(1_000_000) }).strict()
 ]);
 export type RewardAttachment = z.infer<typeof RewardAttachment>;
 

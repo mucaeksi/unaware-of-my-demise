@@ -1,10 +1,10 @@
 import { z } from 'zod';
 import { ChapterIndex, Encounter, RATION_COST, UnitPack, type RewardAttachment } from '@uomd/content-schema';
 import { replayBattle } from '@uomd/combat';
-import { CANON, RATION_CAP, rationNextMs, rationNow, rationSpend, type RationState } from '@uomd/economy';
+import { RATION_CAP, rationNextMs, rationNow, rationSpend, type RationState } from '@uomd/economy';
 import { sha256Hex } from '@uomd/shared';
 import { ContentStore, HttpError } from '../content/store';
-import { ledgerStatements } from '../db/ledger';
+import { grantStatements } from '../db/grants';
 import type { GameEnv } from '../env';
 
 export const BattleSubmission = z
@@ -43,13 +43,6 @@ export async function getProgress(db: D1Database, playerId: string, nowMs = Date
   const { results } = await db.prepare('SELECT node_id, stars, clears, best_turns FROM player_progress WHERE player_id = ?1 ORDER BY node_id').bind(playerId).all();
   const r = await rationRow(db, playerId, nowMs);
   return { nodes: results, ration: { value: r.state.value, cap: RATION_CAP, nextMs: rationNextMs(r.stored, nowMs) } };
-}
-
-function itemStatements(db: D1Database, playerId: string, a: Extract<RewardAttachment, { type: 'character' }>, rarity: number): D1PreparedStatement {
-  const shards = CANON.duplicateShards[rarity as 3 | 4 | 5] ?? 2;
-  return db
-    .prepare("INSERT INTO player_items (player_id, item_type, item_id, copies, shards) VALUES (?1, 'character', ?2, 1, 0) ON CONFLICT (player_id, item_type, item_id) DO UPDATE SET copies = copies + 1, shards = shards + ?3")
-    .bind(playerId, a.itemId, shards);
 }
 
 /**
@@ -98,14 +91,6 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
   const cost = node.ration_class ? RATION_COST[node.ration_class] : 0;
   const rewardsDef = node.rewards ?? { first_clear: [], three_star: [], repeat: [] };
 
-  const rarities = new Map<string, number>();
-  for (const a of [...rewardsDef.first_clear, ...rewardsDef.three_star, ...rewardsDef.repeat]) {
-    if (a.type !== 'character' || rarities.has(a.itemId)) continue;
-    const c = await db.prepare("SELECT rarity FROM characters WHERE id = ?1 AND status <> 'retired'").bind(a.itemId).first<{ rarity: number }>();
-    if (!c) throw new HttpError(503, 'reward_misconfigured', `reward item ${a.itemId} does not exist`);
-    rarities.set(a.itemId, c.rarity);
-  }
-
   for (let attempt = 0; attempt < 5; attempt++) {
     const seen = attempt > 0 ? await replay() : null;
     if (seen) return seen;
@@ -150,10 +135,8 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
         )
         .bind(playerId, input.nodeId, stars, turns, now.toISOString())
     );
-    for (const g of grants) {
-      if (g.a.type === 'currency') batch.push(...ledgerStatements(db, { playerId, currency: g.a.currency, delta: g.a.amount, reason: `stage:${input.nodeId}`, idempotencyKey: g.key }));
-      else batch.push(itemStatements(db, playerId, g.a, rarities.get(g.a.itemId) ?? 3));
-    }
+    // one-time rewards keep stable keys (first clear / three stars), repeat rewards are keyed by the request
+    for (const g of grants) batch.push(...(await grantStatements(db, playerId, [g.a], { keyPrefix: g.key, reason: `stage:${input.nodeId}` })));
     batch.push(
       db.prepare('INSERT INTO battle_claims (player_id, request_id, release_id, node_id, result_json) VALUES (?1, ?2, ?3, ?4, ?5)').bind(playerId, input.requestId, input.releaseId, input.nodeId, JSON.stringify(outcome)),
       db

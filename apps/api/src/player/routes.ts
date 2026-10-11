@@ -12,6 +12,7 @@ import { billingTag, listProducts, syncSubscriptionMail, verifyPurchase } from '
 import { adStatus, beginAd, grantAd, AD } from '../ads/service';
 import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, submitBattle, writeSave } from '../progress/service';
+import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
 import { claimMail, listMail, markRead } from '../mail/service';
 import { issueSession, playerForGoogle, resolveSession, revokeSession, verifyGoogleIdToken } from './auth';
 
@@ -92,6 +93,8 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/wallet', authed);
   app.use('/api/v1/inventory', authed);
   app.use('/api/v1/gacha/*', authed);
+  app.use('/api/v1/characters/*', authed);
+  app.use('/api/v1/stacks', authed);
   app.use('/api/v1/mail', authed);
   app.use('/api/v1/progress', authed);
   app.use('/api/v1/progress/*', authed);
@@ -242,5 +245,31 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
       throw new HttpError(400, 'bad_request', 'invalid JSON');
     }
     return c.json(await handleRtdn(c.env.DB, c.env, playFor(c.env), parsed));
+  });
+
+  app.get('/api/v1/characters/mine', async (c) => c.json(await listCharacters(c.env.DB, c.get('playerId'))));
+  app.get('/api/v1/stacks', async (c) => {
+    const { results } = await c.env.DB.prepare('SELECT item_id, qty FROM player_stacks WHERE player_id = ?1 AND qty > 0 ORDER BY item_id').bind(c.get('playerId')).all();
+    return c.json({ stacks: results });
+  });
+  const CharId = /^[a-z][a-z0-9_]{1,79}$/;
+  app.post('/api/v1/characters/:id/level-up', async (c) => {
+    await perMinute(c.env, `levelup:${c.get('playerId')}`, 60);
+    const id = c.req.param('id');
+    if (!CharId.test(id)) throw new HttpError(400, 'bad_request', 'invalid character id');
+    return c.json(await levelUpCharacter(c.env.DB, c.get('playerId'), id, await body(c, LevelUpBody)));
+  });
+  app.post('/api/v1/characters/:id/ascend', async (c) => {
+    await perMinute(c.env, `ascend:${c.get('playerId')}`, 30);
+    const id = c.req.param('id');
+    if (!CharId.test(id)) throw new HttpError(400, 'bad_request', 'invalid character id');
+    return c.json(await ascendCharacter(c.env.DB, c.get('playerId'), id, await body(c, RequestOnly)));
+  });
+  app.post('/api/v1/characters/:id/skills/:skillId/upgrade', async (c) => {
+    await perMinute(c.env, `skill:${c.get('playerId')}`, 60);
+    const id = c.req.param('id');
+    const skillId = c.req.param('skillId');
+    if (!CharId.test(id) || !/^[a-z][a-z0-9_]{1,119}$/.test(skillId)) throw new HttpError(400, 'bad_request', 'invalid id');
+    return c.json(await upgradeSkill(c.env.DB, c.get('playerId'), id, skillId, await body(c, RequestOnly)));
   });
 }
