@@ -1,4 +1,5 @@
-export type Currency = 'silver_crowns' | 'eclipse_token' | 'fates_thread';
+/** D-17: one main currency. (Legacy ids stay valid in the database for history; nothing new is ever written to them.) */
+export type Currency = 'eclipse_token';
 
 export interface LedgerEntry {
   playerId: string;

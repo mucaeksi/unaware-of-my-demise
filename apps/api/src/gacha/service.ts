@@ -42,7 +42,7 @@ export interface PullResponse {
   bannerId: string;
   pityGroup: string;
   pulls: PullRecord[];
-  cost: { currency: 'fates_thread'; amount: number };
+  cost: { currency: 'eclipse_token'; perPull: number; amount: number };
   pity: PityState & { hardPity: number };
   balance: number;
   replayed: boolean;
@@ -69,7 +69,7 @@ async function storedResult(db: D1Database, playerId: string, input: PullInput):
 /**
  * Server-authoritative pull. One D1 batch (= one transaction) does ALL of:
  *   optimistic-concurrency update of the pity counters (guarded: a concurrent pull aborts and we retry with fresh state),
- *   the Fate's Thread debit (ledger + CHECK balance >= 0), the request record, the pull journal and the inventory grants.
+ *   the Eclipse Token debit (ledger + CHECK balance >= 0), the request record, the pull journal and the inventory grants.
  * A replayed requestId returns the stored result and never pulls twice.
  */
 export async function pullGacha(db: D1Database, playerId: string, input: PullInput, opts: { now?: Date; roll?: Roll } = {}): Promise<PullResponse> {
@@ -77,7 +77,7 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
   const roll = opts.roll ?? cryptoRoll;
   const replay = async (): Promise<PullResponse | null> => {
     const stored = await storedResult(db, playerId, input);
-    return stored ? { ...stored, balance: await balanceOf(db, playerId, 'fates_thread'), replayed: true } : null;
+    return stored ? { ...stored, balance: await balanceOf(db, playerId, 'eclipse_token'), replayed: true } : null;
   };
   const again = await replay();
   if (again) return again;
@@ -125,7 +125,7 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
       bannerId: input.bannerId,
       pityGroup: config.pityGroup,
       pulls: records,
-      cost: { currency: 'fates_thread', amount: input.count * CANON.fatesThreadPerPull },
+      cost: { currency: 'eclipse_token', perPull: config.costPerPull, amount: input.count * config.costPerPull },
       pity: { ...pulled.state, hardPity: config.hardPity }
     };
 
@@ -138,7 +138,7 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
       db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
       ...ledgerStatements(db, {
         playerId,
-        currency: 'fates_thread',
+        currency: 'eclipse_token',
         delta: -response.cost.amount,
         reason: `gacha:${input.bannerId}`,
         idempotencyKey: `gacha:${playerId}:${input.requestId}`
@@ -164,11 +164,11 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
 
     try {
       await db.batch(batch);
-      return { ...response, balance: await balanceOf(db, playerId, 'fates_thread'), replayed: false };
+      return { ...response, balance: await balanceOf(db, playerId, 'eclipse_token'), replayed: false };
     } catch (e) {
       const msg = String(e instanceof Error ? e.message : e);
       if (/CHECK constraint failed: ok = 1/i.test(msg)) continue; // lost the race for the pity counters: recompute from fresh state
-      if (/CHECK constraint failed: balance >= 0/i.test(msg)) throw new HttpError(402, 'insufficient_funds', "not enough Fate's Thread");
+      if (/CHECK constraint failed: balance >= 0/i.test(msg)) throw new HttpError(402, 'insufficient_funds', 'not enough Eclipse Tokens');
       if (/UNIQUE constraint failed: (gacha_requests|ledger)\./i.test(msg)) {
         const dup = await replay();
         if (dup) return dup;
@@ -178,29 +178,6 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
     }
   }
   throw new HttpError(409, 'busy', 'too many simultaneous pulls on this account, try again');
-}
-
-export async function convertEclipseToFates(db: D1Database, playerId: string, count: number, requestId: string): Promise<{ converted: number; eclipse_token: number; fates_thread: number; replayed: boolean }> {
-  const read = async (): Promise<{ eclipse_token: number; fates_thread: number }> => ({
-    eclipse_token: await balanceOf(db, playerId, 'eclipse_token'),
-    fates_thread: await balanceOf(db, playerId, 'fates_thread')
-  });
-  try {
-    await db.batch([
-      ...ledgerStatements(db, { playerId, currency: 'eclipse_token', delta: -count * CANON.eclipseTokensPerFatesThread, reason: 'convert_to_fates_thread', idempotencyKey: `convert:${playerId}:${requestId}:debit` }),
-      ...ledgerStatements(db, { playerId, currency: 'fates_thread', delta: count, reason: 'convert_from_eclipse_token', idempotencyKey: `convert:${playerId}:${requestId}:credit` })
-    ]);
-    return { converted: count, ...(await read()), replayed: false };
-  } catch (e) {
-    const msg = String(e instanceof Error ? e.message : e);
-    if (/CHECK constraint failed: balance >= 0/i.test(msg)) throw new HttpError(402, 'insufficient_funds', 'not enough Eclipse Tokens');
-    if (/UNIQUE constraint failed: ledger\.idempotency_key/i.test(msg)) {
-      const prior = await db.prepare('SELECT delta FROM ledger WHERE idempotency_key = ?1').bind(`convert:${playerId}:${requestId}:credit`).first<{ delta: number }>();
-      if (prior?.delta !== count) throw new HttpError(409, 'request_id_reused', 'this requestId was already used for a different conversion');
-      return { converted: count, ...(await read()), replayed: true };
-    }
-    throw e;
-  }
 }
 
 /** Public banner disclosure: exact rates, pity and pool lists (required rate transparency). */
@@ -213,7 +190,7 @@ export function disclosure(row: BannerRow, config: BannerConfig): Record<string,
     pityGroup: config.pityGroup,
     startsAt: row.starts_at,
     endsAt: row.ends_at,
-    cost: { currency: 'fates_thread', perPull: CANON.fatesThreadPerPull },
+    cost: { currency: 'eclipse_token', perPull: config.costPerPull },
     hardPity: config.hardPity,
     baseFiveStarRate: config.baseFiveStarRate,
     softPity: config.softPity,

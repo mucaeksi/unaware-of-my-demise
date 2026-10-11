@@ -44,6 +44,8 @@ export const BannerConfig = z
     threeStarWeight: z.number().positive(),
     /** every N-th pull without a 4-star-or-better is upgraded to a 4-star (canon 10) */
     minFourStarEvery: z.number().int().min(2),
+    /** price of one pull in the single main currency (D-17); data, so a banner or event can price itself differently */
+    costPerPull: z.number().int().min(1).max(1_000_000).default(160),
     pools: z
       .object({
         fiveFeatured: z.array(Id).max(64),
@@ -91,8 +93,9 @@ export const CANON = {
   fourStarWeight: 17,
   threeStarWeight: 81,
   minFourStarEvery: 10,
-  fatesThreadPerPull: 1,
-  eclipseTokensPerFatesThread: 160,
+  /** D-17: one main currency. A pull costs this many Eclipse Tokens (canon conversion rate 160 : 1 folded into the price) */
+  mainCurrency: 'eclipse_token',
+  pullCost: 160,
   duplicateShards: { 5: 10, 4: 5, 3: 2 } as Record<3 | 4 | 5, number>
 } as const;
 
@@ -103,7 +106,7 @@ export interface CatalogPools {
   fiveStandard: string[];
 }
 
-const common = { fourStarWeight: CANON.fourStarWeight, threeStarWeight: CANON.threeStarWeight, minFourStarEvery: CANON.minFourStarEvery } as const;
+const common = { fourStarWeight: CANON.fourStarWeight, threeStarWeight: CANON.threeStarWeight, minFourStarEvery: CANON.minFourStarEvery, costPerPull: CANON.pullCost } as const;
 
 /** Limited character banner (canon: 2.5 %, soft pity from pull 65 (+6 pp), hard pity 80, 55 % target, lost-target guarantee). */
 export function limitedCharacterBanner(id: string, featured: string, c: CatalogPools): BannerConfig {

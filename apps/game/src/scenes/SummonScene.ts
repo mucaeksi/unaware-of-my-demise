@@ -81,25 +81,13 @@ export class SummonScene extends HubScene {
       this.add_(new Button(this, 1400, 725, { label: `TARGET: ${this.name(this.target ?? '')}`, w: 640, h: 90, fontSize: 28, onClick: () => { const list = b.pools.fiveFeatured; this.target = list[(list.indexOf(this.target ?? '') + 1) % list.length]; this.draw(); } }));
     }
 
-    this.add_(new Button(this, 760, 860, { label: 'PULL ×1', sub: "1 Fate's Thread", w: 400, h: 140, fontSize: 42, variant: 'hot', onClick: () => void this.pull(b, 1) }));
-    this.add_(new Button(this, 1180, 860, { label: 'PULL ×10', sub: "10 Fate's Thread", w: 400, h: 140, fontSize: 42, variant: 'hot', onClick: () => void this.pull(b, 10) }));
-    this.add_(new Button(this, 700, 990, { label: '160 ECLIPSE → 1 THREAD', w: 520, h: 100, fontSize: 24, onClick: () => void this.convert() }));
-    this.add_(new Button(this, 1130, 990, { label: 'POOLS', w: 300, h: 100, fontSize: 28, onClick: () => this.showPools(b) }));
-    this.add_(new Button(this, 1450, 990, { label: 'HISTORY', w: 300, h: 100, fontSize: 28, onClick: () => void this.showHistory() }));
-  }
-
-  private async convert(): Promise<void> {
-    if (this.busy) return;
-    this.busy = true;
-    try {
-      const r = await Services.api.convertFates(1);
-      this.say(`Converted: ${r.fates_thread} Fate's Thread, ${r.eclipse_token} Eclipse Tokens left`);
-      await this.updateWallet();
-    } catch (e) {
-      this.say(errText(e));
-    } finally {
-      this.busy = false;
-    }
+    const one = b.cost.perPull;
+    this.add_(new Button(this, 760, 860, { label: 'PULL ×1', sub: `${one.toLocaleString('en-US')} Eclipse`, w: 400, h: 140, fontSize: 42, variant: 'hot', onClick: () => void this.pull(b, 1) }).setEnabled(this.balance >= one));
+    this.add_(new Button(this, 1180, 860, { label: 'PULL ×10', sub: `${(one * 10).toLocaleString('en-US')} Eclipse`, w: 400, h: 140, fontSize: 42, variant: 'hot', onClick: () => void this.pull(b, 10) }).setEnabled(this.balance >= one * 10));
+    // the same currency pays for upgrades and shop items: show what a pull leaves behind
+    this.add_(txt(this, 970, 945, `You have ${this.balance.toLocaleString('en-US')} Eclipse Tokens. The same tokens pay for upgrades and the shop: after ×10 you keep ${Math.max(0, this.balance - one * 10).toLocaleString('en-US')}.`, { fontSize: '27px', color: T.dim }).setOrigin(0.5));
+    this.add_(new Button(this, 760, 1020, { label: 'POOLS', w: 300, h: 90, fontSize: 28, onClick: () => this.showPools(b) }));
+    this.add_(new Button(this, 1180, 1020, { label: 'HISTORY', w: 300, h: 90, fontSize: 28, onClick: () => void this.showHistory() }));
   }
 
   private async pull(b: BannerInfo, count: 1 | 10): Promise<void> {

@@ -20,7 +20,9 @@ async function putBanner(id: string, cfg: unknown, over: { status?: string; star
     .bind(id, id, JSON.stringify(cfg), over.starts ?? null, over.ends ?? null, over.status ?? 'active')
     .run();
 }
-const fund = (playerId: string, amount: number, key = rid()) => applyLedger(db(), { playerId, currency: 'fates_thread', delta: amount, reason: 'test_grant', idempotencyKey: `fund:${key}` });
+/** D-17: one currency. Tests think in pulls; a pull costs 160 Eclipse Tokens. */
+const P = 160;
+const fund = (playerId: string, pulls: number, key = rid()) => applyLedger(db(), { playerId, currency: 'eclipse_token', delta: pulls * P, reason: 'test_grant', idempotencyKey: `fund:${key}` });
 
 beforeAll(async () => {
   await putBanner('hall_of_ancestors', standardCharacterBanner('hall_of_ancestors', POOLS));
@@ -53,18 +55,19 @@ describe('pull', () => {
     const one = await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_ancestors', count: 1, requestId: rid() }, auth));
     expect(one.status).toBe(200);
     const o = (await one.json()) as { pulls: { rarity: number; itemId: string }[]; balance: number; pity: { pity5: number }; replayed: boolean };
-    expect(o).toMatchObject({ balance: 10, replayed: false });
+    expect(o).toMatchObject({ balance: 10 * P, replayed: false });
     expect(o.pulls).toHaveLength(1);
     const ten = await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_ancestors', count: 10, requestId: rid() }, auth));
     const t = (await ten.json()) as { pulls: { rarity: number; seq: number; duplicate: boolean; shards: number }[]; balance: number };
     expect(t.balance).toBe(0);
+    expect(((await (await game('/api/v1/gacha/history?limit=1', { headers: auth })).json()) as { pulls: unknown[] }).pulls).toHaveLength(1);
     expect(t.pulls.map((p) => p.seq)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
     // every ten-pull contains a 4-star or better (10 consecutive 3-stars are impossible with the guarantee)
     expect(t.pulls.some((p) => p.rarity >= 4)).toBe(true);
 
     const journal = await db().prepare('SELECT COUNT(*) AS n FROM gacha_pulls WHERE player_id = ?1').bind(playerId).first<{ n: number }>();
     expect(journal?.n).toBe(11);
-    const ledger = await db().prepare("SELECT SUM(delta) AS s FROM ledger WHERE player_id = ?1 AND currency = 'fates_thread'").bind(playerId).first<{ s: number }>();
+    const ledger = await db().prepare("SELECT SUM(delta) AS s FROM ledger WHERE player_id = ?1 AND currency = 'eclipse_token'").bind(playerId).first<{ s: number }>();
     expect(ledger?.s).toBe(0); // grants and debits reconcile exactly with the wallet
     const state = (await (await game('/api/v1/gacha/state', { headers: auth })).json()) as { pity: { pity_group: string }[] };
     expect(state.pity.map((p) => p.pity_group)).toEqual(['standard_character']);
@@ -85,7 +88,7 @@ describe('pull', () => {
     expect(((await res.json()) as { error: string }).error).toBe('insufficient_funds');
     expect((await db().prepare('SELECT COUNT(*) AS n FROM gacha_pulls WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(0);
     expect((await db().prepare('SELECT COUNT(*) AS n FROM pity_state WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(0);
-    expect((await db().prepare("SELECT balance FROM wallets WHERE player_id = ?1 AND currency = 'fates_thread'").bind(playerId).first<{ balance: number }>())?.balance).toBe(9);
+    expect((await db().prepare("SELECT balance FROM wallets WHERE player_id = ?1 AND currency = 'eclipse_token'").bind(playerId).first<{ balance: number }>())?.balance).toBe(9 * P);
   });
 
   it('a replayed requestId returns the stored pulls and never charges or pulls twice; reuse for another pull is 409', async () => {
@@ -96,7 +99,7 @@ describe('pull', () => {
     const b = (await (await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_ancestors', count: 10, requestId: id }, auth))).json()) as { pulls: unknown[]; balance: number; replayed: boolean };
     expect(b.replayed).toBe(true);
     expect(b.pulls).toEqual(a.pulls);
-    expect(b.balance).toBe(10);
+    expect(b.balance).toBe(10 * P);
     const other = await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_ancestors', count: 1, requestId: id }, auth));
     expect(other.status).toBe(409);
     expect((await db().prepare('SELECT COUNT(*) AS n FROM gacha_pulls WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(10);
@@ -111,7 +114,7 @@ describe('pull', () => {
     const bodies = (await Promise.all(rs.map((r) => r.json()))) as { replayed: boolean; pulls: unknown[] }[];
     expect(bodies.filter((x) => !x.replayed)).toHaveLength(1);
     expect(new Set(bodies.map((x) => JSON.stringify(x.pulls))).size).toBe(1);
-    expect((await db().prepare("SELECT balance FROM wallets WHERE player_id = ?1 AND currency = 'fates_thread'").bind(playerId).first<{ balance: number }>())?.balance).toBe(20);
+    expect((await db().prepare("SELECT balance FROM wallets WHERE player_id = ?1 AND currency = 'eclipse_token'").bind(playerId).first<{ balance: number }>())?.balance).toBe(20 * P);
     expect((await db().prepare('SELECT COUNT(*) AS n FROM gacha_pulls WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(10);
   });
 
@@ -125,8 +128,8 @@ describe('pull', () => {
     const busy = codes.filter((c) => c === 409).length;
     expect(ok + broke + busy).toBe(28);
     expect(ok).toBeLessThanOrEqual(15);
-    const bal = (await db().prepare("SELECT balance FROM wallets WHERE player_id = ?1 AND currency = 'fates_thread'").bind(playerId).first<{ balance: number }>())!.balance;
-    expect(bal).toBe(15 - ok);
+    const bal = (await db().prepare("SELECT balance FROM wallets WHERE player_id = ?1 AND currency = 'eclipse_token'").bind(playerId).first<{ balance: number }>())!.balance;
+    expect(bal).toBe((15 - ok) * P);
     const journal = (await db().prepare('SELECT COUNT(*) AS n FROM gacha_pulls WHERE player_id = ?1').bind(playerId).first<{ n: number }>())!.n;
     expect(journal).toBe(ok);
     // pity counters are consistent with the journal: every pull is journalled with a strictly increasing pull number inside its cycle
@@ -190,22 +193,45 @@ describe('pull', () => {
     expect((await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_armaments', count: 1, requestId: rid(), target: 'sig_zzz' }, auth))).status).toBe(422);
     expect((await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_armaments', count: 1, requestId: rid(), target: 'sig_a' }, auth))).status).toBe(200);
     // none of the refusals cost anything
-    expect((await db().prepare("SELECT balance FROM wallets WHERE player_id = ?1 AND currency = 'fates_thread'").bind(playerId).first<{ balance: number }>())?.balance).toBe(9);
+    expect((await db().prepare("SELECT balance FROM wallets WHERE player_id = ?1 AND currency = 'eclipse_token'").bind(playerId).first<{ balance: number }>())?.balance).toBe(9 * P);
   });
 });
 
-describe('Eclipse Token -> Fate\'s Thread conversion (160 : 1, irreversible)', () => {
-  it('converts atomically, is idempotent and refuses without funds', async () => {
-    const { auth, playerId } = await signIn(`sub-conv-${rid()}`);
-    await applyLedger(db(), { playerId, currency: 'eclipse_token', delta: 500, reason: 'test_grant', idempotencyKey: `fund:${rid()}` });
-    const id = rid();
-    const a = await game('/api/v1/economy/convert-fates', post({ count: 3, requestId: id }, auth));
-    expect(await a.json()).toMatchObject({ converted: 3, eclipse_token: 20, fates_thread: 3, replayed: false });
-    const again = await game('/api/v1/economy/convert-fates', post({ count: 3, requestId: id }, auth));
-    expect(await again.json()).toMatchObject({ eclipse_token: 20, fates_thread: 3, replayed: true });
-    expect((await game('/api/v1/economy/convert-fates', post({ count: 4, requestId: id }, auth))).status).toBe(409);
-    const broke = await game('/api/v1/economy/convert-fates', post({ count: 1, requestId: rid() }, auth));
-    expect(broke.status).toBe(402);
-    expect(await (await game('/api/v1/wallet', { headers: auth })).json()).toEqual({ wallets: { eclipse_token: 20, fates_thread: 3 } });
+describe('single main currency (D-17)', () => {
+  it('prices a pull in Eclipse Tokens from the banner data and discloses it; the old conversion endpoint is gone', async () => {
+    const list = (await (await game('/api/v1/banners')).json()) as { banners: { id: string; cost: { currency: string; perPull: number } }[] };
+    expect(list.banners.find((b) => b.id === 'hall_of_ancestors')?.cost).toEqual({ currency: 'eclipse_token', perPull: 160 });
+    const { auth, playerId } = await signIn(`sub-single-${rid()}`);
+    await fund(playerId, 1);
+    const r = await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_ancestors', count: 1, requestId: rid() }, auth));
+    expect(((await r.json()) as { cost: { amount: number; currency: string } }).cost).toEqual({ currency: 'eclipse_token', perPull: 160, amount: 160 });
+    expect(await (await game('/api/v1/wallet', { headers: auth })).json()).toEqual({ wallets: { eclipse_token: 0 } });
+    expect((await game('/api/v1/economy/convert-fates', post({ count: 1, requestId: rid() }, auth))).status).toBe(404);
+  });
+
+  it('a banner can price itself differently (data, not code)', async () => {
+    const cfg = JSON.parse(((await db().prepare("SELECT config_json FROM banners WHERE id = 'hall_of_ancestors'").first<{ config_json: string }>())!).config_json);
+    await putBanner('cheap_banner', { ...cfg, id: 'cheap_banner', costPerPull: 100 });
+    const { auth, playerId } = await signIn(`sub-cheap-${rid()}`);
+    await applyLedger(db(), { playerId, currency: 'eclipse_token', delta: 1000, reason: 'test_grant', idempotencyKey: `fund:${rid()}` });
+    const r = await game('/api/v1/gacha/pull', post({ bannerId: 'cheap_banner', count: 10, requestId: rid() }, auth));
+    expect(((await r.json()) as { balance: number }).balance).toBe(0);
+  });
+
+  it('migration 0009 folds legacy Fate\'s Thread (x160) and Silver Crowns (/100) into the main currency and keeps the ledger reconciled', async () => {
+    const sql = Object.values(import.meta.glob('../migrations/0009_single_currency.sql', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>)[0] as string;
+    const fold = sql.split(/;\s*\n/).map((x) => x.replace(/^(--.*\n)+/gm, '').trim()).filter((x) => /^(INSERT|UPDATE wallets)/.test(x));
+    const pid = `p_${'a'.repeat(32)}`;
+    await db().prepare('INSERT OR IGNORE INTO players (id) VALUES (?1)').bind(pid).run();
+    await db().prepare("DELETE FROM wallets WHERE player_id = ?1").bind(pid).run();
+    await db().batch([
+      db().prepare("INSERT INTO wallets (player_id, currency, balance) VALUES (?1, 'fates_thread', 3), (?1, 'silver_crowns', 12345), (?1, 'eclipse_token', 50)").bind(pid),
+      db().prepare("INSERT INTO ledger (player_id, currency, delta, reason, idempotency_key) VALUES (?1, 'fates_thread', 3, 't', 'm9:f'), (?1, 'silver_crowns', 12345, 't', 'm9:s'), (?1, 'eclipse_token', 50, 't', 'm9:e')").bind(pid)
+    ]);
+    for (const stmt of fold) await db().prepare(stmt).run();
+    const w = Object.fromEntries((await db().prepare('SELECT currency, balance FROM wallets WHERE player_id = ?1').bind(pid).all<{ currency: string; balance: number }>()).results.map((r) => [r.currency, r.balance]));
+    expect(w).toEqual({ fates_thread: 0, silver_crowns: 0, eclipse_token: 50 + 3 * 160 + 123 });
+    const rec = await db().prepare('SELECT currency, SUM(delta) AS s FROM ledger WHERE player_id = ?1 GROUP BY currency').bind(pid).all<{ currency: string; s: number }>();
+    for (const r of rec.results) expect(r.s, r.currency).toBe(w[r.currency]);
   });
 });

@@ -5,7 +5,7 @@ import { sha256Hex } from '@uomd/shared';
 import { HttpError } from '../content/store';
 import { d1RateLimit } from '../http';
 import type { GameEnv } from '../env';
-import { activeBanners, convertEclipseToFates, disclosure, pullGacha } from '../gacha/service';
+import { activeBanners, disclosure, pullGacha } from '../gacha/service';
 import { PlayApi, type PlayClient } from '../billing/play';
 import { authenticatePush, handleRtdn } from '../billing/rtdn';
 import { billingTag, listProducts, syncSubscriptionMail, verifyPurchase } from '../billing/service';
@@ -23,7 +23,6 @@ const SignIn = z.object({ idToken: z.string().min(100).max(8192) }).strict();
 const Pull = z
   .object({ bannerId: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/), count: z.union([z.literal(1), z.literal(10)]), requestId: RequestId, target: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/).optional() })
   .strict();
-const Convert = z.object({ count: z.number().int().min(1).max(100), requestId: RequestId }).strict();
 
 async function body<T>(c: { req: { text(): Promise<string> } }, schema: z.ZodType<T>, max = 8192 + 512): Promise<T> {
   const raw = await c.req.text();
@@ -76,7 +75,6 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/wallet', authed);
   app.use('/api/v1/inventory', authed);
   app.use('/api/v1/gacha/*', authed);
-  app.use('/api/v1/economy/*', authed);
   app.use('/api/v1/mail', authed);
   app.use('/api/v1/progress', authed);
   app.use('/api/v1/progress/*', authed);
@@ -134,12 +132,6 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
       .bind(c.get('playerId'), before, limit)
       .all();
     return c.json({ pulls: results, next: results.length === limit ? (results[results.length - 1] as { id: number }).id : null });
-  });
-
-  app.post('/api/v1/economy/convert-fates', async (c) => {
-    await perMinute(c.env, `convert:${c.get('playerId')}`, 30);
-    const input = await body(c, Convert);
-    return c.json(await convertEclipseToFates(c.env.DB, c.get('playerId'), input.count, input.requestId));
   });
 
   app.get('/api/v1/mail', async (c) => {

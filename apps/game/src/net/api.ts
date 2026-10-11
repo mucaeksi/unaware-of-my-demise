@@ -17,10 +17,9 @@ interface Session {
   expiresAt: string;
 }
 
+/** D-17: one main currency. */
 export interface Wallets {
-  silver_crowns?: number;
   eclipse_token?: number;
-  fates_thread?: number;
 }
 export interface BannerInfo {
   id: string;
@@ -33,6 +32,7 @@ export interface BannerInfo {
   baseFiveStarRate: number;
   softPity: { startPull: number; increment: number } | null;
   featured: { chance: number; lossesToGuarantee: number; targetMode: 'fixed' | 'selectable' } | null;
+  cost: { currency: 'eclipse_token'; perPull: number };
   minFourStarEvery: number;
   pools: { fiveFeatured: string[]; fiveOther: string[]; four: string[]; three: string[] };
   duplicateShards: Record<string, number>;
@@ -52,6 +52,7 @@ export interface PullResponse {
   pulls: PullRecord[];
   balance: number;
   pity: { pity5: number; pity4: number; lost: number; hardPity: number };
+  cost: { currency: 'eclipse_token'; perPull: number; amount: number };
   replayed: boolean;
 }
 export interface MailItem {
@@ -164,9 +165,6 @@ export class GameApi extends EventTarget {
   }
   async history(): Promise<{ id: number; banner_id: string; pull_number: number; rarity: number; item_id: string; outcome: string; duplicate: number; at: string }[]> {
     return (await this.call<{ pulls: { id: number; banner_id: string; pull_number: number; rarity: number; item_id: string; outcome: string; duplicate: number; at: string }[] }>('GET', '/api/v1/gacha/history?limit=40')).pulls;
-  }
-  convertFates(count: number): Promise<{ converted: number; eclipse_token: number; fates_thread: number }> {
-    return this.call('POST', '/api/v1/economy/convert-fates', { count, requestId: newRequestId() });
   }
   async mail(): Promise<MailItem[]> {
     return (await this.call<{ mail: MailItem[] }>('GET', '/api/v1/mail')).mail;

@@ -1,6 +1,6 @@
 import type { MailItem } from '../net/api';
 
-export const CURRENCY_NAME: Record<string, string> = { silver_crowns: 'Silver Crowns', eclipse_token: 'Eclipse Tokens', fates_thread: "Fate's Thread" };
+export const CURRENCY_NAME: Record<string, string> = { eclipse_token: 'Eclipse Tokens' };
 
 export const stars = (n: number): string => '★'.repeat(n);
 

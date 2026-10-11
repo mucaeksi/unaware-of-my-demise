@@ -97,7 +97,7 @@ export function Players({ me, say }: { me: Me; say: (m: string) => void }): Reac
             <form className="row" onSubmit={sendMail} aria-label="Send compensation mail">
               <input name="title" placeholder="mail title" required maxLength={120} />
               <input name="body" placeholder="message" maxLength={2000} />
-              <select name="currency"><option>eclipse_token</option><option>silver_crowns</option><option>fates_thread</option></select>
+              <select name="currency"><option>eclipse_token</option></select>
               <input name="amount" type="number" min="0" max="1000000" defaultValue="0" aria-label="amount" />
               <input name="reason" placeholder="audit reason" required minLength={3} maxLength={200} />
               <button className="btn primary" type="submit">Send mail</button>
@@ -106,7 +106,7 @@ export function Players({ me, say }: { me: Me; say: (m: string) => void }): Reac
           {isOwner ? (
             <>
               <form className="row" onSubmit={adjust} aria-label="Adjust balance">
-                <select name="currency"><option>eclipse_token</option><option>silver_crowns</option><option>fates_thread</option></select>
+                <select name="currency"><option>eclipse_token</option></select>
                 <input name="delta" type="number" required aria-label="delta" />
                 <input name="reason" placeholder="audit reason" required minLength={3} maxLength={200} />
                 <button className="btn danger" type="submit">Adjust balance</button>

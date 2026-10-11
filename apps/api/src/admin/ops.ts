@@ -70,14 +70,14 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     const who = c.get('admin').identity;
     if (!(await c.env.DB.prepare('SELECT 1 AS ok FROM players WHERE id = ?1').bind(id.data).first())) throw new HttpError(404, 'no_such_player', 'player not found');
     // grants above this size need an owner (compensation is real money's worth)
-    const big = b.mail.attachments.some((a) => a.type === 'currency' && a.amount > 5000 && a.currency !== 'silver_crowns');
+    const big = b.mail.attachments.some((a) => a.type === 'currency' && a.amount > 5000);
     if (big && !atLeast(c.get('admin').role, 'owner')) throw new HttpError(403, 'insufficient_role', 'premium grants above 5000 need an owner');
     const sent = await sendMail(c.env.DB, id.data, b.mail, who);
     await audit(c.env.DB, who, 'player.mail', id.data, { mailId: sent.id, reason: b.reason, attachments: b.mail.attachments });
     return c.json(sent, 201);
   });
 
-  const Adjust = z.object({ currency: z.enum(['silver_crowns', 'eclipse_token', 'fates_thread']), delta: z.number().int().min(-1_000_000).max(1_000_000).refine((n) => n !== 0), reason: Reason, requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/) }).strict();
+  const Adjust = z.object({ currency: z.literal('eclipse_token'), delta: z.number().int().min(-1_000_000).max(1_000_000).refine((n) => n !== 0), reason: Reason, requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/) }).strict();
   app.post('/admin/api/players/:id/adjust', need('owner'), async (c) => {
     const id = PlayerId.safeParse(c.req.param('id'));
     if (!id.success) throw new HttpError(400, 'bad_request', 'invalid player id');

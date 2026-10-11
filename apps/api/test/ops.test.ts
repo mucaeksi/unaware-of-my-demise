@@ -22,11 +22,11 @@ const cfg = (id: string, featured = 'ops_five_a') => limitedCharacterBanner(id, 
 describe('players', () => {
   it('search and detail show wallets, ledger, pulls, items and sessions; roles and ids are validated', async () => {
     const { playerId } = await signIn(`sub-adm-${rid()}`);
-    await applyLedger(db(), { playerId, currency: 'fates_thread', delta: 3, reason: 'test', idempotencyKey: `t:${rid()}` });
+    await applyLedger(db(), { playerId, currency: 'eclipse_token', delta: 3, reason: 'test', idempotencyKey: `t:${rid()}` });
     const list = (await (await admin(`/admin/api/players?q=${playerId.slice(0, 10)}`, { as: 'viewer@example.com' })).json()) as { players: { id: string }[] };
     expect(list.players.map((p) => p.id)).toContain(playerId);
     const detail = (await (await admin(`/admin/api/players/${playerId}`, { as: 'viewer@example.com' })).json()) as { wallets: { currency: string; balance: number }[]; ledger: unknown[]; activeSessions: number };
-    expect(detail.wallets).toEqual([{ currency: 'fates_thread', balance: 3 }]);
+    expect(detail.wallets).toEqual([{ currency: 'eclipse_token', balance: 3 }]);
     expect(detail.ledger).toHaveLength(1);
     expect(detail.activeSessions).toBe(1);
     expect((await admin('/admin/api/players/not-an-id', { as: 'viewer@example.com' })).status).toBe(400);
@@ -55,7 +55,7 @@ describe('players', () => {
   it('owner-only balance adjustment is idempotent, cannot overdraw, and ban revokes sessions at once', async () => {
     const { auth, playerId } = await signIn(`sub-adj-${rid()}`);
     const id = rid();
-    const body = { currency: 'silver_crowns', delta: 500, reason: 'manual correction', requestId: id };
+    const body = { currency: 'eclipse_token', delta: 500, reason: 'manual correction', requestId: id };
     expect((await admin(`/admin/api/players/${playerId}/adjust`, j('POST', body, 'operator@example.com'))).status).toBe(403);
     expect(await (await admin(`/admin/api/players/${playerId}/adjust`, j('POST', body))).json()).toEqual({ applied: true, balance: 500 });
     expect(await (await admin(`/admin/api/players/${playerId}/adjust`, j('POST', body))).json()).toEqual({ applied: false, balance: 500 });
@@ -97,7 +97,7 @@ describe('banners', () => {
     const id = `ops_live_${rid()}`.replace(/-/g, '_').toLowerCase().slice(0, 40);
     await admin(`/admin/api/banners/${id}`, j('PUT', { title_en: 'Live Oath', config: cfg(id), expectedVersion: 0 }));
     const { auth, playerId } = await signIn(`sub-live-${rid()}`);
-    await applyLedger(db(), { playerId, currency: 'fates_thread', delta: 5, reason: 'test', idempotencyKey: `t:${rid()}` });
+    await applyLedger(db(), { playerId, currency: 'eclipse_token', delta: 800, reason: 'test', idempotencyKey: `t:${rid()}` });
     const pull = () => game('/api/v1/gacha/pull', post({ bannerId: id, count: 1, requestId: rid() }, auth));
     expect((await pull()).status).toBe(404); // draft
     expect((await admin(`/admin/api/banners/${id}/state`, j('POST', { action: 'activate', startsAt: '2026-01-02T00:00:00.000Z', endsAt: '2026-01-01T00:00:00.000Z' }))).status).toBe(422);
@@ -147,7 +147,7 @@ describe('shop, flags, ads', () => {
 
   it('feature flags are brakes: switching gacha, shop and ads off blocks them at once, and back on restores them', async () => {
     const { auth, playerId } = await signIn(`sub-flag-${rid()}`);
-    await applyLedger(db(), { playerId, currency: 'fates_thread', delta: 10, reason: 'test', idempotencyKey: `t:${rid()}` });
+    await applyLedger(db(), { playerId, currency: 'eclipse_token', delta: 1600, reason: 'test', idempotencyKey: `t:${rid()}` });
     const flags = (await (await game('/api/v1/flags')).json()) as { flags: Record<string, { enabled: boolean }> };
     expect(flags.flags['gacha.enabled']?.enabled).toBe(true);
     const version = async (key: string) => ((await (await admin('/admin/api/flags', { as: 'viewer@example.com' })).json()) as { flags: { key: string; version: number }[] }).flags.find((f) => f.key === key)!.version;

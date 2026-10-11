@@ -63,8 +63,8 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   const pid: string = player.id;
 
   // an operator funds the account through the Control Center API (owner-only, audited)
-  const adj = await admin(request, `/admin/api/players/${pid}/adjust`, { currency: 'fates_thread', delta: 12, reason: 'e2e funding', requestId: `e2e_${info.project.name}_fund` });
-  expect(adj.balance).toBeGreaterThanOrEqual(12);
+  const adj = await admin(request, `/admin/api/players/${pid}/adjust`, { currency: 'eclipse_token', delta: 1920, reason: 'e2e funding', requestId: `e2e_${info.project.name}_fund` });
+  expect(adj.balance).toBeGreaterThanOrEqual(1920);
 
   // Home -> Summon: pull a 10-pull through the real UI
   await goto(page, 'Home');
@@ -82,7 +82,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   const hist = await call(page, '/api/v1/gacha/history?limit=40');
   expect(hist.pulls.some((p: any) => p.rarity >= 4)).toBe(true); // every ten-pull has a 4-star or better
   const wallet = await call(page, '/api/v1/wallet');
-  expect(wallet.wallets.fates_thread).toBe((adj.balance as number) - 10);
+  expect(wallet.wallets.eclipse_token).toBe((adj.balance as number) - 1600); // a ten-pull costs 10 x 160 of the single main currency
 
   // Mail: an operator sends a compensation, the player claims it in the UI
   await admin(request, `/admin/api/players/${pid}/mail`, { reason: 'e2e compensation', mail: { kind: 'compensation', title: 'Thank you for testing', attachments: [{ type: 'currency', currency: 'eclipse_token', amount: 320 }] } });
@@ -92,7 +92,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   await page.waitForTimeout(500);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-13-mail.png` });
   await tap(page, info, REF_W - 250, 290); // CLAIM (first row)
-  await expect.poll(async () => (await call(page, '/api/v1/wallet')).wallets.eclipse_token ?? 0, { timeout: 20_000 }).toBe(320);
+  await expect.poll(async () => (await call(page, '/api/v1/wallet')).wallets.eclipse_token ?? 0, { timeout: 20_000 }).toBe((adj.balance as number) - 1600 + 320);
 
   // Roster lists the free-start company plus whatever the pulls brought
   await goto(page, 'Roster');

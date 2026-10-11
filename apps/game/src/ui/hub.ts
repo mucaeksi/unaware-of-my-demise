@@ -14,6 +14,8 @@ export const errText = (e: unknown): string => (e instanceof ApiError ? (e.code 
 export abstract class HubScene extends Phaser.Scene {
   protected body!: Phaser.GameObjects.Container;
   private walletText!: Phaser.GameObjects.Text;
+  /** last known balance of the single main currency (for planning hints) */
+  protected balance = 0;
   protected abstract readonly heading: string;
   protected readonly needsSignIn: boolean = true;
   protected readonly backTo: string = 'Home';
@@ -51,7 +53,8 @@ export abstract class HubScene extends Phaser.Scene {
   }
 
   private showWallet(w: Wallets): void {
-    this.walletText?.setText(`Fate's Thread ${w.fates_thread ?? 0}   ·   Eclipse Tokens ${w.eclipse_token ?? 0}   ·   Silver Crowns ${w.silver_crowns ?? 0}`);
+    this.balance = w.eclipse_token ?? 0;
+    this.walletText?.setText(`Eclipse Tokens ${this.balance.toLocaleString('en-US')}`);
   }
 
   /** Cheap wallet refresh after an action. */

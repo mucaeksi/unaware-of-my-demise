@@ -11,7 +11,7 @@ beforeEach(async () => {
   await db().prepare('INSERT INTO players (id) VALUES (?1)').bind(player).run();
 });
 
-const credit = (key: string, delta: number) => applyLedger(db(), { playerId: player, currency: 'silver_crowns', delta, reason: 'test', idempotencyKey: key });
+const credit = (key: string, delta: number) => applyLedger(db(), { playerId: player, currency: 'eclipse_token', delta, reason: 'test', idempotencyKey: key });
 
 describe('D1 ledger', () => {
   it('credits, debits and records immutable rows', async () => {

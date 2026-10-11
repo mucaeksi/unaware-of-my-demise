@@ -8,6 +8,7 @@ import { admin, entries, game, post, resetContent, signIn, upload } from './help
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 let base: TestFile[];
 let actions: { skillId: string; targetId?: string }[];
+let three = false;
 const dec = new TextDecoder();
 let n = 0;
 const rid = (): string => `b_${++n}_${Math.random().toString(36).slice(2, 10)}`;
@@ -15,7 +16,9 @@ const rid = (): string => `b_${++n}_${Math.random().toString(36).slice(2, 10)}`;
 beforeAll(async () => {
   const files = await baseFiles();
   const find = (p: string) => files.find((f) => f.path === p) as TestFile;
-  actions = playAuto(UnitPack.parse(JSON.parse(dec.decode(find('units/unit_pack.json').bytes))), Encounter.parse(JSON.parse(dec.decode(find('encounters/tutorial_t1.json').bytes)))).actions;
+  const played = playAuto(UnitPack.parse(JSON.parse(dec.decode(find('units/unit_pack.json').bytes))), Encounter.parse(JSON.parse(dec.decode(find('encounters/tutorial_t1.json').bytes))));
+  actions = played.actions;
+  three = played.battle.result?.stars === 3;
 
   // a release whose chapter index carries rewards and a ration cost, plus a gated second node using the same encounter
   const index = JSON.parse(dec.decode(find('chapters/chapter_index.json').bytes));
@@ -23,8 +26,8 @@ beforeAll(async () => {
   t1.ration_class = 'campaign';
   t1.rewards = {
     first_clear: [{ type: 'currency', currency: 'eclipse_token', amount: 100 }, { type: 'character', itemId: 'prog_hero' }],
-    three_star: [{ type: 'currency', currency: 'fates_thread', amount: 2 }],
-    repeat: [{ type: 'currency', currency: 'silver_crowns', amount: 1000 }]
+    three_star: [{ type: 'currency', currency: 'eclipse_token', amount: 50 }],
+    repeat: [{ type: 'currency', currency: 'eclipse_token', amount: 1000 }]
   };
   index.chapters[0].nodes.push({ node_id: 't1b', title_en: 'Gated', kind: 'battle', encounter: t1.encounter, requires: 't1c' });
   index.chapters[0].nodes.push({ node_id: 't1c', title_en: 'Free', kind: 'battle', encounter: t1.encounter, requires: 't1' });
@@ -52,9 +55,8 @@ describe('server-verified battle progress', () => {
     const j = (await res.json()) as { stars: number; firstClear: boolean; newThreeStar: boolean; ration: { spent: number; value: number }; rewards: unknown[]; replayed: boolean };
     expect(j).toMatchObject({ firstClear: true, replayed: false, ration: { spent: 6, value: 94 } });
     const wallet = (await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> };
-    expect(wallet.wallets.eclipse_token).toBe(100);
-    expect(wallet.wallets.silver_crowns).toBe(1000);
-    expect(wallet.wallets.fates_thread ?? 0).toBe(j.newThreeStar ? 2 : 0);
+    expect(j.newThreeStar).toBe(three);
+    expect(wallet.wallets.eclipse_token).toBe(100 + 1000 + (three ? 50 : 0));
     const inv = (await (await game('/api/v1/inventory', { headers: auth })).json()) as { items: { item_id: string }[] };
     expect(inv.items.map((i) => i.item_id)).toContain('prog_hero');
 
@@ -63,8 +65,7 @@ describe('server-verified battle progress', () => {
     expect(again.status).toBe(200);
     expect(await again.json()).toMatchObject({ firstClear: false, ration: { spent: 6, value: 88 } });
     const w2 = (await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> };
-    expect(w2.wallets.eclipse_token).toBe(100);
-    expect(w2.wallets.silver_crowns).toBe(2000);
+    expect(w2.wallets.eclipse_token).toBe(100 + 2000 + (three ? 50 : 0));
     const prog = (await (await game('/api/v1/progress', { headers: auth })).json()) as { nodes: { node_id: string; stars: number; clears: number }[]; ration: { value: number; cap: number } };
     expect(prog.nodes).toMatchObject([{ node_id: 't1', clears: 2 }]);
     expect(prog.ration).toMatchObject({ value: 88, cap: 100 });
@@ -82,8 +83,7 @@ describe('server-verified battle progress', () => {
     const bodies = (await Promise.all(rs.map((r) => r.json()))) as { replayed: boolean }[];
     expect(bodies.filter((b) => !b.replayed)).toHaveLength(1);
     const w = (await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> };
-    expect(w.wallets.silver_crowns).toBe(1000);
-    expect(w.wallets.eclipse_token).toBe(100);
+    expect(w.wallets.eclipse_token).toBe(100 + 1000 + (three ? 50 : 0));
     expect(((await (await game('/api/v1/progress', { headers: auth })).json()) as { ration: { value: number } }).ration.value).toBe(94);
   });
 
@@ -94,8 +94,7 @@ describe('server-verified battle progress', () => {
     expect(ok + rs.filter((r) => r.status === 409 || r.status === 429).length).toBe(12);
     expect(ok).toBeGreaterThanOrEqual(1);
     const w = (await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> };
-    expect(w.wallets.eclipse_token).toBe(100); // first clear exactly once
-    expect(w.wallets.silver_crowns).toBe(1000 * ok);
+    expect(w.wallets.eclipse_token).toBe(100 + 1000 * ok + (three ? 50 : 0)); // first clear (and the 3-star bonus) exactly once
     expect(((await (await game('/api/v1/progress', { headers: auth })).json()) as { ration: { value: number } }).ration.value).toBe(100 - 6 * ok);
     expect((await db().prepare('SELECT COUNT(*) AS n FROM tx_guard').first<{ n: number }>())?.n).toBe(0);
   });
