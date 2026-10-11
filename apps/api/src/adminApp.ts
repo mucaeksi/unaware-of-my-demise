@@ -7,6 +7,7 @@ import { ContentStore, HttpError, loadSigner, MAX_OBJECT_BYTES } from './content
 import { audit, auditIfChanged, auditStatement } from './db/audit';
 import { onError, securityHeaders } from './http';
 import type { AdminEnv } from './env';
+import { registerOps } from './admin/ops';
 
 type Ctx = { Bindings: AdminEnv; Variables: { admin: AdminIdentity } };
 
@@ -249,6 +250,8 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     ]);
     return c.json({ email, role: b.role });
   });
+
+  registerOps(app, need);
 
   app.all('/admin/api/*', (c) => c.json({ error: 'not_found', message: 'no such endpoint' }, 404));
   return app;

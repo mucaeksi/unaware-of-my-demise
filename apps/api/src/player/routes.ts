@@ -41,6 +41,20 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     if (!(await d1RateLimit(env.DB, `${key}`.slice(0, 80), limit, 60))) throw new HttpError(429, 'rate_limited', 'too many requests');
   };
 
+  /** Feature flags are the emergency brakes: a missing flag counts as ON so a fresh database is not locked out. */
+  const flagOn = async (env: GameEnv, key: string): Promise<boolean> => {
+    const r = await env.DB.prepare('SELECT enabled FROM feature_flags WHERE key = ?1').bind(key).first<{ enabled: number }>();
+    return r ? r.enabled === 1 : true;
+  };
+  const requireFlag = async (env: GameEnv, key: string): Promise<void> => {
+    if (!(await flagOn(env, key))) throw new HttpError(503, 'feature_disabled', 'this feature is temporarily switched off');
+  };
+
+  app.get('/api/v1/flags', async (c) => {
+    const { results } = await c.env.DB.prepare('SELECT key, enabled, value_json FROM feature_flags ORDER BY key').all<{ key: string; enabled: number; value_json: string }>();
+    return c.json({ flags: Object.fromEntries(results.map((r) => [r.key, { enabled: r.enabled === 1, value: JSON.parse(r.value_json) }])) }, 200, { 'Cache-Control': 'public, max-age=15' });
+  });
+
   app.post('/api/v1/auth/google', async (c) => {
     const ip = c.req.header('CF-Connecting-IP') ?? 'local';
     await perMinute(c.env, `signin:${(await sha256Hex(ip)).slice(0, 32)}`, 20);
@@ -103,6 +117,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   });
 
   app.post('/api/v1/gacha/pull', async (c) => {
+    await requireFlag(c.env, 'gacha.enabled');
     await perMinute(c.env, `pull:${c.get('playerId')}`, 30);
     const input = await body(c, Pull);
     return c.json(await pullGacha(c.env.DB, c.get('playerId'), input));
@@ -172,6 +187,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
 
   // step 1 of a rewarded view: the client gets a one-time nonce and passes it to AdMob as ServerSideVerificationOptions.customData
   app.post('/api/v1/ads/begin', async (c) => {
+    await requireFlag(c.env, 'ads.rewarded.enabled');
     await perMinute(c.env, `adbegin:${c.get('playerId')}`, 10);
     return c.json(await beginAd(c.env.DB, c.get('playerId')));
   });
@@ -184,6 +200,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     const ssv = await verifySsv(url.search, opts.admobKeys ?? googleKeyFetcher);
     if (!units.includes(ssv.adUnit)) throw new HttpError(400, 'bad_ssv', 'ad unit is not ours');
     if (Math.abs(Date.now() - ssv.timestampMs) > AD.maxAgeMs) throw new HttpError(400, 'bad_ssv', 'callback is too old');
+    if (!(await flagOn(c.env, 'ads.rewarded.enabled'))) return c.json({ granted: false, reason: 'disabled' });
     // 200 for every verified callback (Google retries other codes); the body says whether the view paid out
     return c.json(await grantAd(c.env.DB, ssv.userId, ssv.adUnit, ssv.transactionId, ssv.customData));
   });
@@ -194,6 +211,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.get('/api/v1/shop/products', async (c) => c.json({ products: await listProducts(c.env.DB) }, 200, { 'Cache-Control': 'public, max-age=60' }));
 
   app.post('/api/v1/shop/verify', async (c) => {
+    await requireFlag(c.env, 'shop.enabled');
     await perMinute(c.env, `verify:${c.get('playerId')}`, 20);
     const input = await body(c, Verify, 6000);
     return c.json(await verifyPurchase(c.env.DB, playFor(c.env), c.get('playerId'), input));

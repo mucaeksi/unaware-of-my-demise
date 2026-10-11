@@ -2,11 +2,15 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { api, type ApiError, type Health, type Me } from './api';
 import { Assets } from './pages/Assets';
 import { Audit } from './pages/Audit';
+import { Banners } from './pages/Banners';
 import { Characters } from './pages/Characters';
 import { Dashboard } from './pages/Dashboard';
+import { Flags } from './pages/Flags';
+import { Players } from './pages/Players';
 import { Releases } from './pages/Releases';
+import { Shop } from './pages/Shop';
 
-const PAGES = ['Dashboard', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
+const PAGES = ['Dashboard', 'Players', 'Banners', 'Shop', 'Flags', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
 type Page = (typeof PAGES)[number];
 
 export function useToast(): { toast: string | null; say: (m: string) => void } {
@@ -66,6 +70,10 @@ export function App(): ReactNode {
       <main>
         {!me ? <ErrorNotice error={err} /> : null}
         {me && page === 'Dashboard' ? <Dashboard health={health} /> : null}
+        {me && page === 'Players' ? <Players me={me} say={say} /> : null}
+        {me && page === 'Banners' ? <Banners me={me} say={say} /> : null}
+        {me && page === 'Shop' ? <Shop me={me} say={say} /> : null}
+        {me && page === 'Flags' ? <Flags me={me} say={say} /> : null}
         {me && page === 'Characters' ? <Characters me={me} say={say} /> : null}
         {me && page === 'Assets' ? <Assets me={me} say={say} /> : null}
         {me && page === 'Patches' ? <Releases me={me} say={say} /> : null}
