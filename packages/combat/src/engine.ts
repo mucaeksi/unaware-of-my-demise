@@ -465,14 +465,16 @@ export class Battle {
   }
 
   /** Enemy intent preview: the skill (and target when single-target) the enemy will use next. */
-  intentFor(enemyId: string): { skillId: string; skillName: string; targetId: string | null } | null {
+  intentFor(enemyId: string): { skillId: string; skillName: string; targetId: string | null; announced: boolean } | null {
     const c = this.unit(enemyId);
-    if (!c.alive || c.side !== 'enemy') return null;
-    const skill = this.chooseEnemySkill(c);
+    if (!c.alive || c.side !== 'enemy' || c.objective) return null;
+    // an announced boss intent is what the player must answer; otherwise the skill the enemy would pick now
+    const pending = c.boss?.telegraph ? c.def.skills.find((k) => k.skill_id === c.boss?.telegraph?.skillId) : undefined;
+    const skill = pending ?? this.chooseEnemySkill(c);
     if (!skill) return null;
     const sel = skill.effect_ops[0]?.target_selector_id;
     const target = sel === 'single_enemy' || sel === 'single_enemy_default' ? this.pickDefaultTarget(c) : null;
-    return { skillId: skill.skill_id, skillName: skill.name_en, targetId: target?.id ?? null };
+    return { skillId: skill.skill_id, skillName: skill.name_en, targetId: target?.id ?? null, announced: pending !== undefined };
   }
 
   prompt(): TurnPrompt | null {

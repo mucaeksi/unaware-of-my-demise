@@ -4,6 +4,7 @@ import '@fontsource/cormorant-garamond/latin-500.css';
 import '@fontsource/cormorant-garamond/latin-500-italic.css';
 import Phaser from 'phaser';
 import { REF_H, REF_W } from './config';
+import { playNode } from './flow';
 import { BattleScene } from './scenes/BattleScene';
 import { BootScene } from './scenes/BootScene';
 import { AccountScene } from './scenes/AccountScene';
@@ -17,6 +18,7 @@ import { ShopScene } from './scenes/ShopScene';
 import { StoryScene } from './scenes/StoryScene';
 import { SummonScene } from './scenes/SummonScene';
 import { TasksScene } from './scenes/TasksScene';
+import { TeamScene } from './scenes/TeamScene';
 import { TitleScene } from './scenes/TitleScene';
 import { Services } from './services';
 
@@ -40,14 +42,14 @@ try {
     fps: { target: 60 },
     input: { touch: { capture: true }, activePointers: 2 },
     banner: false,
-    scene: [BootScene, TitleScene, ChaptersScene, StoryScene, BattleScene, HomeScene, SummonScene, RosterScene, MailScene, ShopScene, AccountScene, CharacterScene, GearScene, TasksScene]
+    scene: [BootScene, TitleScene, ChaptersScene, StoryScene, BattleScene, HomeScene, SummonScene, RosterScene, MailScene, ShopScene, AccountScene, CharacterScene, GearScene, TasksScene, TeamScene]
   });
   game.canvas?.addEventListener('webglcontextlost', (e) => {
     e.preventDefault();
     fatal('The graphics context was lost. Reload to continue.');
   });
   // test/debug hook (read-only handles; no privileged state is exposed)
-  (window as unknown as { __UOMD__: unknown }).__UOMD__ = { game, services: Services };
+  (window as unknown as { __UOMD__: unknown }).__UOMD__ = { game, services: Services, playNode };
 } catch (e) {
   fatal(`This device cannot run the game: ${e instanceof Error ? e.message : String(e)}`);
 }

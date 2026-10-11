@@ -1,4 +1,17 @@
+import type { BattleParty } from '@uomd/content-schema';
 import { API_BASE } from '../config';
+
+export interface TeamMember {
+  characterId: string;
+  slot: number;
+  row: 'front' | 'rear';
+}
+export interface TeamPreset {
+  slot: number;
+  name: string;
+  active: boolean;
+  members: TeamMember[];
+}
 
 export class ApiError extends Error {
   constructor(
@@ -235,8 +248,24 @@ export class GameApi extends EventTarget {
   progress(): Promise<{ nodes: { node_id: string; stars: number; clears: number }[]; ration: { value: number; cap: number; nextMs: number } }> {
     return this.call('GET', '/api/v1/progress');
   }
-  submitBattle(releaseId: string, nodeId: string, actions: { skillId: string; targetId?: string }[]): Promise<{ stars: number; firstClear: boolean; rewards: MailItem['attachments']; ration: { spent: number; value: number } }> {
-    return this.call('POST', '/api/v1/progress/battle', { releaseId, nodeId, requestId: newRequestId(), actions });
+  submitBattle(releaseId: string, nodeId: string, actions: { skillId: string; targetId?: string }[], sessionId?: string): Promise<{ stars: number; firstClear: boolean; rewards: MailItem['attachments']; ration: { spent: number; value: number } }> {
+    return this.call('POST', '/api/v1/progress/battle', { releaseId, nodeId, requestId: newRequestId(), actions, ...(sessionId ? { sessionId } : {}) });
+  }
+  /** Owned-hero stages: the server freezes the party (team, gear stats, ranks, story loans) the battle must be fought with. */
+  startBattle(releaseId: string, nodeId: string): Promise<{ sessionId: string | null; party: BattleParty | null; expiresAt: string | null }> {
+    return this.call('POST', '/api/v1/progress/battle/start', { releaseId, nodeId });
+  }
+  teams(): Promise<{ teams: TeamPreset[] }> {
+    return this.call('GET', '/api/v1/teams');
+  }
+  saveTeam(slot: number, name: string, members: TeamMember[]): Promise<unknown> {
+    return this.call('PUT', `/api/v1/teams/${slot}`, { name, members });
+  }
+  activateTeam(slot: number): Promise<unknown> {
+    return this.call('POST', `/api/v1/teams/${slot}/activate`, {});
+  }
+  deleteTeam(slot: number): Promise<unknown> {
+    return this.call('DELETE', `/api/v1/teams/${slot}`);
   }
   readSave(): Promise<{ version: number; data: Record<string, unknown>; updatedAt: string | null }> {
     return this.call('GET', '/api/v1/save');

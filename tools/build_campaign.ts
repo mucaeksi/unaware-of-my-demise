@@ -123,6 +123,19 @@ for (const u of pack.units) {
   unitArt[u.art_key] = { atlas: 'atlas_placeholder', facing: 'right', height_px: u.role.includes('boss') ? 420 : 340, states };
   placeholders.push(u.art_key);
 }
+// breakable boss objectives are drawn from one generic "weak point" icon until each gets its own art
+const OW = 192;
+const objSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${OW}" height="${OW}"><circle cx="96" cy="96" r="80" fill="#3b2a4d" stroke="#e7c36a" stroke-width="6"/><path d="M60 120 L96 52 L132 120 Z" fill="none" stroke="#e7c36a" stroke-width="7" stroke-linejoin="round"/><circle cx="96" cy="108" r="7" fill="#e7c36a"/></svg>`;
+writeOut(`${OUT}/art/atlas_objective.webp`, await sharp(Buffer.from(objSvg)).webp({ quality: 85 }).toBuffer());
+atlases.atlas_objective = { image: 'art/atlas_objective.webp', width: OW, height: OW, frames: { idle: [0, 0, OW, OW] } };
+for (const u of pack.units) {
+  for (const o of u.boss?.phases.flatMap((p) => p.objectives) ?? []) {
+    if (unitArt[o.objective_id]) continue;
+    const states = Object.fromEntries(['idle', 'walk', 'basic', 'active', 'ultimate', 'hit', 'defeat', 'victory'].map((st) => [st, { frame: 'idle', scale: 1, foot_y: 0.97, pivot_x: 0.5 }]));
+    unitArt[o.objective_id] = { atlas: 'atlas_objective', facing: 'left', height_px: 150, states };
+  }
+}
+
 // placeholder backdrops for the locations that have no painted background yet (a dim gradient, one colour per place)
 const TINT: Record<string, [string, string]> = {
   cathedral_saint_luthos: ['#4a3b64', '#14101f'],

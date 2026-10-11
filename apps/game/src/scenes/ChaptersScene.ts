@@ -9,6 +9,8 @@ import { playNode } from '../flow';
 type Node = ChapterIndex['chapters'][number]['nodes'][number];
 
 export class ChaptersScene extends Phaser.Scene {
+  private dragged = false;
+
   constructor() {
     super('Chapters');
   }
@@ -17,9 +19,9 @@ export class ChaptersScene extends Phaser.Scene {
     const { content, art } = Services.ready();
     this.cameras.main.setBackgroundColor(0x0a0610);
     void art.addBackdrop(this, 'forest_whispering_ash', -20);
-    this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x0a0610, 0.82).setDepth(-10);
+    this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x0a0610, 0.82).setDepth(-10).setScrollFactor(0);
     sceneFadeIn(this, 400);
-    title(this, REF_W / 2, 100, 'CHAPTERS', 64, T.gold);
+    this.dragged = false;
 
     const index = await content.chapters();
     const baseIndex = JSON.parse(new TextDecoder().decode(await content.base.read('chapters/chapter_index.json'))) as ChapterIndex;
@@ -29,15 +31,43 @@ export class ChaptersScene extends Phaser.Scene {
     const titles = new Map(index.chapters.flatMap((c) => c.nodes.map((n): [string, string] => [n.node_id, n.title_en])));
 
     let y = 250;
+    let firstOpen = -1;
     for (const ch of index.chapters) {
       txt(this, 330, y - 20, ch.title_en.toUpperCase(), { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: T.dim }).setOrigin(0, 0.5);
       y += 70;
       for (const node of ch.nodes) {
+        if (firstOpen < 0 && !progress[node.node_id] && !(node.requires && !progress[node.requires])) firstOpen = y;
         this.row(node, y, progress, titles, baseNodes.has(node.node_id) ? null : active);
         y += 160;
       }
     }
-    new Button(this, 270, REF_H - 90, { label: 'BACK', w: 340, onClick: () => this.scene.start('Title') });
+    // the campaign is longer than the screen: drag or wheel to scroll, the heading and BACK stay put
+    const height = y + 160;
+    const cam = this.cameras.main;
+    cam.setBounds(0, 0, REF_W, Math.max(REF_H, height));
+    cam.scrollY = Phaser.Math.Clamp((firstOpen < 0 ? 0 : firstOpen) - 420, 0, Math.max(0, height - REF_H));
+    let startY = 0;
+    let startScroll = 0;
+    this.input.on('pointerdown', (p: Phaser.Input.Pointer) => {
+      startY = p.y;
+      startScroll = cam.scrollY;
+      this.dragged = false;
+    });
+    this.input.on('pointermove', (p: Phaser.Input.Pointer) => {
+      if (!p.isDown) return;
+      const dy = startY - p.y;
+      if (Math.abs(dy) > 14) this.dragged = true;
+      if (this.dragged) cam.scrollY = Phaser.Math.Clamp(startScroll + dy, 0, Math.max(0, height - REF_H));
+    });
+    this.input.on('wheel', (_p: unknown, _o: unknown, _dx: number, dy: number) => {
+      cam.scrollY = Phaser.Math.Clamp(cam.scrollY + dy, 0, Math.max(0, height - REF_H));
+    });
+    const head = this.add.rectangle(REF_W / 2, 70, REF_W, 150, 0x0a0610, 0.92).setScrollFactor(0).setDepth(50);
+    const hd = title(this, REF_W / 2, 100, 'CHAPTERS', 64, T.gold).setScrollFactor(0).setDepth(51);
+    const back = new Button(this, 270, REF_H - 90, { label: 'BACK', w: 340, onClick: () => this.scene.start('Title') }).setScrollFactor(0).setDepth(51);
+    void head;
+    void hd;
+    void back;
   }
 
   private row(node: Node, y: number, progress: Record<string, { stars: number }>, titles: Map<string, string>, patchedBy: string | null): void {
@@ -63,7 +93,7 @@ export class ChaptersScene extends Phaser.Scene {
       .on('pointerdown', () => (pressed = true))
       .on('pointerout', () => (pressed = false))
       .on('pointerup', () => {
-        if (!locked && pressed) void playNode(this, node);
+        if (!locked && pressed && !this.dragged) void playNode(this, node);
         pressed = false;
       });
     void name;

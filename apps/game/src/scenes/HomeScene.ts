@@ -19,6 +19,7 @@ export class HomeScene extends HubScene {
     const tiles: { label: string; sub: string; scene: string }[] = [
       { label: 'SUMMON', sub: 'Banners, rates, pity', scene: 'Summon' },
       { label: 'ROSTER', sub: 'Your company', scene: 'Roster' },
+      { label: 'TEAM', sub: 'Formation and presets', scene: 'Team' },
       { label: 'ERRANDS', sub: 'Daily and weekly', scene: 'Tasks' },
       { label: 'ARMORY', sub: 'Weapons and relics', scene: 'Gear' },
       { label: 'MAIL', sub: 'Rewards and notices', scene: 'Mail' },

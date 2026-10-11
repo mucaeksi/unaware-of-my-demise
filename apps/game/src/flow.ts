@@ -1,8 +1,47 @@
 import type Phaser from 'phaser';
-import type { ChapterIndex } from '@uomd/content-schema';
+import type { ChapterIndex, Encounter } from '@uomd/content-schema';
+import { errText } from './ui/hub';
+import { toast } from './ui/kit';
 import { Progress, Services } from './services';
 
 type Node = ChapterIndex['chapters'][number]['nodes'][number];
+
+/**
+ * Starts the Battle scene for a node. Fixed (story) encounters just run. Owned-hero stages first ask the server for the frozen party
+ * (team, gear stats, skill ranks, story loans) and fight with exactly that; a signed-out player is sent to the Account screen.
+ * Retrying a lost owned-hero battle starts a fresh session.
+ */
+export async function launchBattle(scene: Phaser.Scene, node: Node, enc: Encounter, onDone: (s: Phaser.Scene) => void): Promise<void> {
+  const { content } = Services.ready();
+  const toChapters = (s: Phaser.Scene): void => void s.scene.start('Chapters');
+  const base = {
+    encounterPath: node.encounter,
+    nodeId: node.node_id,
+    onBack: toChapters,
+    onDone: (b: Phaser.Scene, outcome: { won: boolean; stars: number }) => {
+      Progress.complete(node.node_id, outcome.stars);
+      onDone(b);
+    },
+    onRetry: (b: Phaser.Scene) => void launchBattle(b, node, enc, onDone)
+  };
+  if ((enc.party_mode ?? 'fixed') !== 'owned') {
+    scene.scene.start('Battle', base);
+    return;
+  }
+  const api = Services.api;
+  if (!api.signedIn) {
+    toast(scene, 'Sign in to fight with your own company.', 3200);
+    scene.scene.start('Account');
+    return;
+  }
+  try {
+    const started = await api.startBattle(await content.activeReleaseId(), node.node_id);
+    if (!started.party || !started.sessionId) throw new Error('the server did not return a party for this stage');
+    scene.scene.start('Battle', { ...base, party: started.party, sessionId: started.sessionId });
+  } catch (e) {
+    toast(scene, errText(e), 3800);
+  }
+}
 
 /** Plays a chapter node: pre-story -> battle -> post-story -> progress. Pure data-driven routing. */
 export async function playNode(scene: Phaser.Scene, node: Node): Promise<void> {
@@ -20,17 +59,10 @@ export async function playNode(scene: Phaser.Scene, node: Node): Promise<void> {
   if (!node.encounter) return;
   const enc = await content.encounter(node.encounter);
   const toChapters = (s: Phaser.Scene): void => void s.scene.start('Chapters');
-  const startBattle = (s: Phaser.Scene): void =>
-    void s.scene.start('Battle', {
-      encounterPath: node.encounter,
-      nodeId: node.node_id,
-      onBack: toChapters,
-      onDone: (b: Phaser.Scene, outcome: { won: boolean; stars: number }) => {
-        Progress.complete(node.node_id, outcome.stars);
-        if (enc.post_story) b.scene.start('Story', { path: enc.post_story, onDone: toChapters });
-        else toChapters(b);
-      }
-    });
-  if (enc.pre_story) scene.scene.start('Story', { path: enc.pre_story, onDone: startBattle });
-  else startBattle(scene);
+  const afterBattle = (b: Phaser.Scene): void => {
+    if (enc.post_story) b.scene.start('Story', { path: enc.post_story, onDone: toChapters });
+    else toChapters(b);
+  };
+  if (enc.pre_story) scene.scene.start('Story', { path: enc.pre_story, onDone: (s: Phaser.Scene) => void launchBattle(s, node, enc, afterBattle) });
+  else await launchBattle(scene, node, enc, afterBattle);
 }

@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { Battle, type BattleEvent, type PlayerAction, type SkillOption, type TurnPrompt } from '@uomd/combat';
-import type { Encounter, SkillDef, UnitPack } from '@uomd/content-schema';
+import type { BattleParty, Encounter, SkillDef, UnitPack } from '@uomd/content-schema';
 import { canonicalJson, sha256Hex } from '@uomd/shared';
 import { API_BASE, REF_H, REF_W } from '../config';
 import { Music } from '../audio/Music';
@@ -23,6 +23,11 @@ export interface BattleInit {
   nodeId?: string;
   onDone: (scene: Phaser.Scene, outcome: BattleOutcome) => void;
   onBack: (scene: Phaser.Scene) => void;
+  /** owned-hero stages: the party and session frozen by the server (see flow.ts launchBattle) */
+  party?: BattleParty;
+  sessionId?: string;
+  /** a lost owned-hero battle needs a fresh server session, so retrying goes back through the flow */
+  onRetry?: (scene: Phaser.Scene) => void;
 }
 
 const ELEMENT_COLOR: Record<string, number> = { Veil: C.veil, Stone: 0xe0d2b0, Ember: 0xff8a4c, Tide: 0x6cc4ff, Gale: 0x9be8c3, Dawn: 0xffe9a8 };
@@ -44,6 +49,7 @@ export class BattleScene extends Phaser.Scene {
   private skillLayer: Phaser.GameObjects.Container | null = null;
   private descText!: Phaser.GameObjects.Text;
   private hintText!: Phaser.GameObjects.Text;
+  private telegraphText!: Phaser.GameObjects.Text;
   private autoBtn!: Button;
   private speedBtn!: Button;
   private pendingResolve: ((a: PlayerAction) => void) | null = null;
@@ -80,8 +86,10 @@ export class BattleScene extends Phaser.Scene {
     try {
       this.encounter = await content.encounter(this.cfg.encounterPath);
       this.pack = await content.unitPack();
+      this.battle = Battle.create(this.pack, this.encounter, this.cfg.party);
       const defs = new Map(this.pack.units.map((u) => [u.unit_id, u]));
-      const artKeys = [...this.encounter.party, ...this.encounter.enemies].map((e) => defs.get(e.unit_id)?.art_key ?? e.unit_id);
+      // breakable objectives are combatants too: their art keys come from the battle itself
+      const artKeys = this.battle.combatants.map((c) => defs.get(c.def.unit_id)?.art_key ?? c.def.art_key);
       await Promise.all([
         art.loadBackground(this, this.encounter.location_id),
         art.loadUnits(this, artKeys),
@@ -94,7 +102,6 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
     for (const s of this.pack.rules.statuses) this.statusNames.set(s.status_id, { name: s.name_en, category: s.category });
-    this.battle = Battle.create(this.pack, this.encounter);
     this.buildWorld();
     this.buildHud();
     sceneFadeIn(this, 600);
@@ -135,7 +142,7 @@ export class BattleScene extends Phaser.Scene {
 
     const defs = new Map(this.pack.units.map((u) => [u.unit_id, u]));
     for (const side of ['player', 'enemy'] as const) {
-      const list = this.battle.combatants.filter((c) => c.side === side && !c.objective); // objectives and the boss telegraph need their own presentation (UI stage)
+      const list = this.battle.combatants.filter((c) => c.side === side);
       for (const row of ['front', 'rear'] as const) {
         const inRow = list.filter((c) => c.row === row).sort((a, b) => a.slot - b.slot);
         inRow.forEach((c, i) => {
@@ -164,6 +171,7 @@ export class BattleScene extends Phaser.Scene {
     // between the title block and the speed/auto/menu buttons there is free room at the top: the turn hint lives there
     this.descText = txt(this, REF_W / 2, 860, '', { fontSize: '28px', color: T.text, align: 'center', wordWrap: { width: 1640 } }).setOrigin(0.5).setDepth(DEPTH.hud);
     this.hintText = txt(this, 830, 62, '', { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setDepth(DEPTH.hud);
+    this.telegraphText = txt(this, REF_W - 60, 150, '', { fontFamily: F.display, fontSize: '30px', fontStyle: '700', color: T.crimson, stroke: '#0a0610', strokeThickness: 5 }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
     this.refreshHud();
   }
 
@@ -186,10 +194,10 @@ export class BattleScene extends Phaser.Scene {
     for (const [id, v] of this.views) {
       const c = this.battle.unit(id);
       v.setBadges(c, new Map([...this.statusNames].map(([k, s]) => [k, s.name])));
-      if (c.side === 'enemy') {
+      if (c.side === 'enemy' && !c.objective) {
         const intent = c.alive ? this.battle.intentFor(id) : null;
         const tgt = intent?.targetId ? this.battle.unit(intent.targetId).def.name_en.toUpperCase() : undefined;
-        v.setIntent(intent ? intent.skillName.toUpperCase() : null, tgt);
+        v.setIntent(intent ? `${intent.announced ? '⚠ ' : ''}${intent.skillName.toUpperCase()}` : null, tgt);
       }
     }
   }
@@ -345,6 +353,38 @@ export class BattleScene extends Phaser.Scene {
     this.submit = null;
   }
 
+  /** Reinforcements called mid-battle: load their art, add a view and spread the enemy side again. */
+  private async addSummoned(id: string): Promise<void> {
+    const { art } = Services.ready();
+    const c = this.battle.unit(id);
+    const defs = new Map(this.pack.units.map((u) => [u.unit_id, u]));
+    const artKey = defs.get(c.def.unit_id)?.art_key ?? c.def.art_key;
+    await art.loadUnits(this, [artKey]);
+    if (this.dead) return;
+    const spot = spotFor(c.side, c.row, 0, 1);
+    const v = new UnitView(this, art, { id: c.id, name: c.def.name_en, side: c.side, artKey, maxHp: c.maxHp, hp: c.hp, spot }, prefs().reducedMotion);
+    v.setDepth(DEPTH.units + spot.y);
+    v.on('pointerup', () => this.onUnitTapped(v));
+    this.views.set(c.id, v);
+    this.relayout(c.side);
+    this.float(v, 'REINFORCEMENTS', T.crimson, 34);
+    await this.wait(420);
+  }
+
+  private relayout(side: 'player' | 'enemy'): void {
+    const list = this.battle.combatants.filter((c) => c.side === side);
+    for (const row of ['front', 'rear'] as const) {
+      const inRow = list.filter((c) => c.row === row).sort((a, b) => a.slot - b.slot);
+      inRow.forEach((c, i) => {
+        const v = this.views.get(c.id);
+        if (!v) return;
+        const spot = spotFor(side, row, i, inRow.length);
+        v.glideTo(spot);
+        v.setDepth(DEPTH.units + spot.y);
+      });
+    }
+  }
+
   // ------------------------------------------------------------------ presentation
 
   private view(id: string): UnitView {
@@ -426,6 +466,7 @@ export class BattleScene extends Phaser.Scene {
       }
       case 'skill_used': {
         await this.settleAction();
+        if (this.telegraphText.text) this.telegraphText.setText('');
         const v = this.view(e.actor);
         const def = this.skillDef(e.actor, e.skill);
         const ult = e.skillType === 'ultimate';
@@ -573,6 +614,40 @@ export class BattleScene extends Phaser.Scene {
         await this.wait(200);
         break;
       }
+      case 'phase_change': {
+        const v = this.view(e.unit);
+        v.setHp(e.hp, e.maxHp);
+        const name = this.battle.unit(e.unit).def.boss?.phases.find((p) => p.phase_id === e.phase)?.name_en ?? e.phase;
+        if (this.battle.log.filter((x) => x.type === 'phase_change').length > 1) {
+          void this.banner(`Phase: ${name}`, true);
+          if (!reduced) this.cameras.main.shake(260, 0.008);
+          await this.wait(700);
+        }
+        break;
+      }
+      case 'telegraph': {
+        const v = this.view(e.unit);
+        this.float(v, `⚠ ${e.skillName.toUpperCase()}`, T.crimson, 34);
+        this.telegraphText.setText(`⚠ ${v.unitName.toUpperCase()} PREPARES ${e.skillName.toUpperCase()}`);
+        Sfx.guard();
+        await this.wait(420);
+        break;
+      }
+      case 'telegraph_cancelled': {
+        this.float(this.view(e.unit), 'INTERRUPTED', T.gold, 42);
+        this.telegraphText.setText('');
+        await this.wait(380);
+        break;
+      }
+      case 'objective_destroyed': {
+        const o = [...this.views.values()].find((x) => x.artKey === e.objective);
+        if (o) this.float(o, 'DESTROYED', T.gold, 38);
+        break;
+      }
+      case 'summon': {
+        await this.addSummoned(e.unit);
+        break;
+      }
       case 'battle_start':
       case 'battle_end':
       case 'round_end':
@@ -619,10 +694,11 @@ export class BattleScene extends Phaser.Scene {
     }
     txt(this, REF_W / 2, 560, `${result.turns} turns  ·  ${this.recorded.length} actions`, { fontSize: '34px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
     const verify = txt(this, REF_W / 2, 618, 'Server verification: checking…', { fontSize: '30px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
-    void this.verifyOnServer(verify);
+    if (this.cfg.sessionId) verify.setText('Server verification: at the claim (owned-hero stage)');
+    else void this.verifyOnServer(verify);
     if (won) void this.claimProgress();
 
-    const primary = new Button(this, REF_W / 2 - 250, 760, { label: won ? 'CONTINUE' : 'RETRY', w: 440, onClick: () => (won ? this.cfg.onDone(this, { won, stars: result.stars }) : this.scene.restart(this.cfg)) }).setDepth(DEPTH.modal + 2);
+    const primary = new Button(this, REF_W / 2 - 250, 760, { label: won ? 'CONTINUE' : 'RETRY', w: 440, onClick: () => (won ? this.cfg.onDone(this, { won, stars: result.stars }) : this.cfg.onRetry ? this.cfg.onRetry(this) : this.scene.restart(this.cfg)) }).setDepth(DEPTH.modal + 2);
     new Button(this, REF_W / 2 + 250, 760, { label: 'LEAVE', w: 440, onClick: () => this.cfg.onBack(this) }).setDepth(DEPTH.modal + 2);
     void box;
     void primary;
@@ -634,7 +710,7 @@ export class BattleScene extends Phaser.Scene {
     if (!api.signedIn || !this.cfg.nodeId) return;
     try {
       const { content } = Services.ready();
-      const r = await api.submitBattle(await content.activeReleaseId(), this.cfg.nodeId, this.recorded);
+      const r = await api.submitBattle(await content.activeReleaseId(), this.cfg.nodeId, this.recorded, this.cfg.sessionId);
       if (this.dead) return;
       const names = r.rewards.length ? await api.catalogNames().catch(() => new Map<string, string>()) : new Map<string, string>();
       const gained = r.rewards.length ? ` · rewards: ${r.rewards.map((a) => describeAttachment(a, names)).join(', ')}` : '';

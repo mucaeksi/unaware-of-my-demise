@@ -21,7 +21,8 @@ export class UnitView extends Phaser.GameObjects.Container {
   readonly id: string;
   readonly side: 'player' | 'enemy';
   readonly artKey: string;
-  readonly spot: Spot;
+  spot: Spot;
+  readonly unitName: string;
   private readonly sprite: Phaser.GameObjects.Image;
   private readonly shadow: Phaser.GameObjects.Ellipse;
   private readonly ring: Phaser.GameObjects.Ellipse;
@@ -40,6 +41,7 @@ export class UnitView extends Phaser.GameObjects.Container {
   constructor(scene: Phaser.Scene, private readonly art: ArtLibrary, init: ViewInit, private readonly reduced: boolean) {
     super(scene, init.spot.x, init.spot.y);
     this.id = init.id;
+    this.unitName = init.name;
     this.side = init.side;
     this.artKey = init.artKey;
     this.spot = init.spot;
@@ -75,6 +77,13 @@ export class UnitView extends Phaser.GameObjects.Container {
     this.setInteractive(new Phaser.Geom.Rectangle(-w / 2, -u.heightPx * this.spot.depthScale, w, u.heightPx * this.spot.depthScale + 70), Phaser.Geom.Rectangle.Contains);
     scene.add.existing(this);
     if (!reduced) this.startBreathing();
+  }
+
+  /** Reinforcements arrive and the side is spread again: glide to the new formation spot (plate included). */
+  glideTo(spot: Spot): void {
+    this.spot = spot;
+    this.scene.tweens.add({ targets: this, x: spot.x, y: spot.y, duration: 320, ease: 'Quad.easeInOut' });
+    this.scene.tweens.add({ targets: this.plate, x: spot.x, y: spot.y + 44, duration: 320, ease: 'Quad.easeInOut' });
   }
 
   private placeTags(): void {

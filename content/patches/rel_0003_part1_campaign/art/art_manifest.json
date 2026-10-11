@@ -197,6 +197,19 @@
           384
         ]
       }
+    },
+    "atlas_objective": {
+      "image": "art/atlas_objective.webp",
+      "width": 192,
+      "height": 192,
+      "frames": {
+        "idle": [
+          0,
+          0,
+          192,
+          192
+        ]
+      }
     }
   },
   "units": {
@@ -2734,6 +2747,721 @@
       "atlas": "atlas_placeholder",
       "facing": "right",
       "height_px": 420,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "jaw_bell": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "wax_seal": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "signal_banner": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "flask_rack_left": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "flask_rack_right": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "signal_standard": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "mirror_frame": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "chain_joint_left": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "chain_joint_right": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "ankle_anchor": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "altar_pylon_left": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "altar_pylon_center": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "basic": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "active": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "ultimate": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "hit": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "defeat": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.97,
+          "pivot_x": 0.5
+        }
+      }
+    },
+    "altar_pylon_right": {
+      "atlas": "atlas_objective",
+      "facing": "left",
+      "height_px": 150,
       "states": {
         "idle": {
           "frame": "idle",
