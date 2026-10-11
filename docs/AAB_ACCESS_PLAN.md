@@ -45,3 +45,10 @@ configured as an identity provider). No password is involved at any point.
   `https://uomd-game-staging.muratcaneksiii.workers.dev/api/v1/ads/ssv` (production gets its own URL later). AdMob's callback sends the numeric unit id; the Worker accepts either form.
 - **app-ads.txt** (needed on the developer website listed in the Play listing): `google.com, pub-4258559369390965, DIRECT, f08c47fec0942fa0`.
 - During development the Android build must use Google's **test ad unit ids**, never the live unit (live ads on test devices can get the account flagged for invalid traffic).
+
+## Play / Google identifiers (received 2026-10-11, public)
+- Android package name (fixed in Play Console): `io.github.mucaeksi.unawareofmydemise` (deploy default for `PLAY_PACKAGE_NAME`).
+- OAuth Web client (used as `GOOGLE_CLIENT_IDS`; its ID token audience is what the Android Credential Manager returns): `604013824221-n7htgfhfs55njs5ie11ulojsk1tnk6da.apps.googleusercontent.com`.
+- OAuth Android client (needs the package name above + the upload/App-signing SHA-1 once the keystore exists): `604013824221-e70vq2aq1glagljh81igslm7rmpekm78.apps.googleusercontent.com`.
+- Play billing service account (invited in Play Console): `uomd-play-billing@unaware-of-my-demise.iam.gserviceaccount.com`.
+- Pub/Sub: push subscription `uomdsub`, pull subscription `play-rtdn-sub` (unused by the game). The push subscription must use the staging RTDN endpoint with OIDC auth (audience = the endpoint URL).

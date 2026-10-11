@@ -72,7 +72,7 @@ jobs:
         # drift: configure the Pub/Sub push subscription (endpoint AND audience) to exactly https://uomd-game-<env>.<subdomain>.workers.dev/api/v1/billing/rtdn.
         env:
           GOOGLE_CLIENT_IDS: ${{ vars.GOOGLE_CLIENT_IDS }}
-          PLAY_PACKAGE_NAME: ${{ vars.PLAY_PACKAGE_NAME }}
+          PLAY_PACKAGE_NAME: ${{ vars.PLAY_PACKAGE_NAME || 'io.github.mucaeksi.unawareofmydemise' }}
           RTDN_PUSH_SERVICE_ACCOUNT: ${{ vars.RTDN_PUSH_SERVICE_ACCOUNT }}
           PLAY_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
         run: |
