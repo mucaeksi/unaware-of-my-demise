@@ -136,7 +136,7 @@ describe('asset catalog, system status, audit trail', () => {
     const s = (await res.json()) as { d1: { ok: boolean; counts: Record<string, number>; migrations: { name: string }[] }; r2: { ok: boolean }; limits: { d1_rows_read_per_day: number }; auth: { access_configured: boolean } };
     expect(s.d1.ok).toBe(true);
     expect(s.d1.counts.characters).toBe(1);
-    expect(s.d1.migrations.map((m) => m.name)).toEqual(['0001_core.sql', '0002_economy_ledger.sql', '0003_player_core.sql', '0004_mail.sql', '0005_progress.sql', '0006_ads.sql', '0007_billing.sql', '0008_flags.sql', '0009_single_currency.sql', '0010_dev_notes.sql', '0011_currency_name.sql', '0012_catalog.sql', '0013_player_progression.sql', '0014_tasks.sql']);
+    expect(s.d1.migrations.map((m) => m.name)).toEqual(['0001_core.sql', '0002_economy_ledger.sql', '0003_player_core.sql', '0004_mail.sql', '0005_progress.sql', '0006_ads.sql', '0007_billing.sql', '0008_flags.sql', '0009_single_currency.sql', '0010_dev_notes.sql', '0011_currency_name.sql', '0012_catalog.sql', '0013_player_progression.sql', '0014_tasks.sql', '0015_teams.sql']);
     expect(s.r2.ok).toBe(true);
     expect(s.limits.d1_rows_read_per_day).toBe(5_000_000);
     expect(s.auth.access_configured).toBe(true);
@@ -153,7 +153,7 @@ describe('asset catalog, system status, audit trail', () => {
   it('game health reports D1 + R2', async () => {
     const res = await game('/api/v1/health');
     expect(res.status).toBe(200);
-    expect(await res.json()).toMatchObject({ ok: true, d1: { ok: true, migrations_applied: 14 }, r2: { ok: true }, environment: 'dev' });
+    expect(await res.json()).toMatchObject({ ok: true, d1: { ok: true, migrations_applied: 15 }, r2: { ok: true }, environment: 'dev' });
   });
 
   it('public health never leaks internal error text outside dev', async () => {

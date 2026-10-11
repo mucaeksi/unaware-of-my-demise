@@ -14,6 +14,8 @@ import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, submitBattle, writeSave } from '../progress/service';
 import { ascendGear, characterStats, dismantleGear, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
 import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
+import { deleteAccount, exportAccount } from '../account/service';
+import { activateTeam, deleteTeam, listTeams, saveTeam, TeamBody } from '../teams/service';
 import { claimTask, listTasks } from '../tasks/service';
 import { claimMail, listMail, markRead } from '../mail/service';
 import { issueSession, playerForGoogle, resolveSession, revokeSession, verifyGoogleIdToken } from './auth';
@@ -97,6 +99,10 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/gacha/*', authed);
   app.use('/api/v1/characters/*', authed);
   app.use('/api/v1/stacks', authed);
+  app.use('/api/v1/teams', authed);
+  app.use('/api/v1/teams/*', authed);
+  app.use('/api/v1/account', authed);
+  app.use('/api/v1/account/*', authed);
   app.use('/api/v1/tasks', authed);
   app.use('/api/v1/tasks/*', authed);
   app.use('/api/v1/gear', authed);
@@ -279,6 +285,12 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     return c.json(await upgradeSkill(c.env.DB, c.get('playerId'), id, skillId, await body(c, RequestOnly)));
   });
 
+  app.get('/api/v1/teams', async (c) => c.json(await listTeams(c.env.DB, c.get('playerId'))));
+  app.put('/api/v1/teams/:slot', async (c) => c.json(await saveTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')), await body(c, TeamBody))));
+  app.post('/api/v1/teams/:slot/activate', async (c) => c.json(await activateTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')))));
+  app.delete('/api/v1/teams/:slot', async (c) => c.json(await deleteTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')))));
+  app.get('/api/v1/account/export', async (c) => c.json(await exportAccount(c.env.DB, c.get('playerId'))));
+  app.post('/api/v1/account/delete', async (c) => c.json(await deleteAccount(c.env.DB, c.get('playerId'), (await body(c, z.object({ confirm: z.string().max(20) }).strict())).confirm)));
   app.get('/api/v1/tasks', async (c) => c.json(await listTasks(c.env.DB, c.get('playerId'))));
   app.post('/api/v1/tasks/claim', async (c) => c.json(await claimTask(c.env.DB, c.get('playerId'), await body(c, z.object({ periodKey: z.string().regex(/^[dw]:[0-9T:-]{10,13}(:[a-z][a-z0-9_]{1,79})?$/), taskId: z.string().regex(/^_?[a-z][a-z0-9_]{1,79}$/) }).strict()))));
   app.get('/api/v1/gear', async (c) => c.json({ gear: await listGear(c.env.DB, c.get('playerId')) }));
