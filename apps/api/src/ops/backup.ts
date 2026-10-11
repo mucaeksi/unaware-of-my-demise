@@ -23,6 +23,5 @@ export async function runBackup(env: OpsEnv, now = new Date()): Promise<BackupRe
   const key = `d1/${env.TARGET}/d1-${env.TARGET}-${stamp}.sql.age`;
   await env.BACKUPS.put(key, cipher, { customMetadata: { sha256_plain: await sha256Hex(dump.sql), tables: String(Object.keys(dump.tables).length) } });
   await env.BACKUPS.put(`${key}.manifest.json`, JSON.stringify({ createdAt: now.toISOString(), target: env.TARGET, bytes: cipher.byteLength, plainBytes: plain.byteLength, sha256Plain: await sha256Hex(dump.sql), tables: dump.tables, atomic: dump.atomic, reconciled: dump.reconciled }, null, 2), { httpMetadata: { contentType: 'application/json' } });
-  if (env.BACKUP_PROBE === '1') await env.BACKUPS.put(`probe/${env.TARGET}-${stamp}.sql`, plain);
   return { key, bytes: cipher.byteLength, tables: dump.tables, reconciled: dump.reconciled };
 }
