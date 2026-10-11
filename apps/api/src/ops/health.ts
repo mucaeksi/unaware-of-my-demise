@@ -16,14 +16,14 @@ export async function runHealth(env: OpsEnv, now = new Date()): Promise<HealthRe
     }
   };
   await probe('game', async () => {
-    const r = await fetch(`${env.GAME_URL}/api/v1/health`, { headers: { 'User-Agent': 'uomd-ops' } });
+    const r = await env.GAME.fetch('https://game.internal/api/v1/health', { headers: { 'User-Agent': 'uomd-ops' } });
     const j = (await r.json().catch(() => ({}))) as { ok?: boolean };
     return { ok: r.status === 200 && j.ok === true, detail: `HTTP ${r.status}` };
   });
   await probe('admin_protected', async () => {
-    const r = await fetch(`${env.ADMIN_URL}/admin/api/system`, { redirect: 'manual', headers: { 'User-Agent': 'uomd-ops' } });
-    // Cloudflare Access must answer an anonymous request with a redirect to its login (or a 401/403): never data
-    return { ok: [301, 302, 303, 307, 308, 401, 403].includes(r.status), detail: `HTTP ${r.status}` };
+    // A service binding bypasses the Access edge, so this proves the Worker's OWN check: no Access JWT, no data
+    const r = await env.ADMIN.fetch('https://admin.internal/admin/api/system', { redirect: 'manual', headers: { 'User-Agent': 'uomd-ops' } });
+    return { ok: [401, 403].includes(r.status), detail: `HTTP ${r.status}` };
   });
   await probe('backup_fresh', async () => {
     const last = await env.DB.prepare("SELECT at FROM ops_runs WHERE kind = 'backup' AND ok = 1 ORDER BY id DESC LIMIT 1").first<{ at: string }>();

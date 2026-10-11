@@ -16,10 +16,12 @@
       "vars": {
         "TARGET": "staging",
         "BACKUP_PROBE": "1",
-        "AGE_RECIPIENT": "age1fgavu2yjcvl9tqsrer4f6zvmdw497gp8c595wwhjt3tu2dum8dlqxca864",
-        "GAME_URL": "https://uomd-game-staging.muratcaneksiii.workers.dev",
-        "ADMIN_URL": "https://uomd-admin-staging.muratcaneksiii.workers.dev"
+        "AGE_RECIPIENT": "age1fgavu2yjcvl9tqsrer4f6zvmdw497gp8c595wwhjt3tu2dum8dlqxca864"
       },
+      "services": [
+        { "binding": "GAME", "service": "uomd-game-staging" },
+        { "binding": "ADMIN", "service": "uomd-admin-staging" }
+      ],
       "d1_databases": [{ "binding": "DB", "database_name": "uomd-staging", "database_id": "687f9735-ee4c-4611-aa16-2fae99e51911", "migrations_dir": "migrations" }],
       "r2_buckets": [{ "binding": "BACKUPS", "bucket_name": "uomd-db-backups" }]
     }

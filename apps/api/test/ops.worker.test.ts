@@ -1,6 +1,6 @@
 import { env } from 'cloudflare:workers';
 import { Decrypter, generateX25519Identity, identityToRecipient } from 'age-encryption';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { applyLedger } from '../src/db/ledger';
 import { runBackup } from '../src/ops/backup';
 import { dumpDatabase, sqlLiteral } from '../src/ops/dump';
@@ -41,12 +41,15 @@ describe('uomd-ops: logical dump', () => {
   });
 });
 
+const fetcher = (status: number): Fetcher => ({ fetch: async () => new Response(JSON.stringify({ ok: true }), { status }) }) as unknown as Fetcher;
+const down = { fetch: async () => { throw new Error('down'); } } as unknown as Fetcher;
+
 describe('uomd-ops: encrypted backup and health', () => {
   it('encrypts to the public key only; the owner can decrypt; a manifest is stored', async () => {
     await signIn(`sub-bk-${Math.random().toString(36).slice(2)}`);
     const id = await generateX25519Identity();
     const bucket = fakeBucket();
-    const ops = { DB: db(), BACKUPS: bucket as unknown as R2Bucket, AGE_RECIPIENT: await identityToRecipient(id), TARGET: 'test', GAME_URL: 'https://example.invalid', ADMIN_URL: 'https://example.invalid' } satisfies OpsEnv;
+    const ops = { DB: db(), BACKUPS: bucket as unknown as R2Bucket, AGE_RECIPIENT: await identityToRecipient(id), TARGET: 'test', GAME: fetcher(200), ADMIN: fetcher(401) } satisfies OpsEnv;
     const r = await runBackup(ops, new Date('2026-10-11T03:17:00Z'));
     expect(r.key).toBe('d1/test/d1-test-20261011T031700Z.sql.age');
     const cipher = bucket.objects.get(r.key) as Uint8Array;
@@ -64,20 +67,22 @@ describe('uomd-ops: encrypted backup and health', () => {
   it('a wallet that does not match the ledger makes the backup fail loudly', async () => {
     const { playerId } = await signIn(`sub-bad-${Math.random().toString(36).slice(2)}`);
     await db().prepare("INSERT INTO wallets (player_id, currency, balance) VALUES (?1, 'eclipse_token', 5) ON CONFLICT (player_id, currency) DO UPDATE SET balance = 5").bind(playerId).run();
-    await expect(runBackup({ DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: await identityToRecipient(await generateX25519Identity()), TARGET: 'test', GAME_URL: '', ADMIN_URL: '' })).rejects.toThrow(/reconcile/);
+    await expect(runBackup({ DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: await identityToRecipient(await generateX25519Identity()), TARGET: 'test', GAME: fetcher(200), ADMIN: fetcher(401) })).rejects.toThrow(/reconcile/);
     await db().prepare('DELETE FROM wallets WHERE player_id = ?1').bind(playerId).run();
   });
 
   it('health reports unreachable targets as not ok and the schedule records a row', async () => {
-    const spy = vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('down'));
-    const h = await runHealth({ DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: '', TARGET: 'test', GAME_URL: 'http://127.0.0.1:1', ADMIN_URL: 'http://127.0.0.1:1' });
+    const h = await runHealth({ DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: '', TARGET: 'test', GAME: down, ADMIN: down });
     expect(h.ok).toBe(false);
     expect(h.checks.find((c) => c.name === 'game')?.ok).toBe(false);
-    await runScheduled(CRON_HEALTH, { DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: '', TARGET: 'test', GAME_URL: 'http://127.0.0.1:1', ADMIN_URL: 'http://127.0.0.1:1' });
+    const healthy = await runHealth({ DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: '', TARGET: 'test', GAME: fetcher(200), ADMIN: fetcher(401) });
+    expect(healthy.checks.filter((c) => c.name !== 'backup_fresh').every((c) => c.ok)).toBe(true);
+    const open = await runHealth({ DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: '', TARGET: 'test', GAME: fetcher(200), ADMIN: fetcher(200) });
+    expect(open.checks.find((c) => c.name === 'admin_protected')?.ok).toBe(false);
+    await runScheduled(CRON_HEALTH, { DB: db(), BACKUPS: fakeBucket() as unknown as R2Bucket, AGE_RECIPIENT: '', TARGET: 'test', GAME: down, ADMIN: down });
     const row = await db().prepare("SELECT ok FROM ops_runs WHERE kind = 'health' ORDER BY id DESC LIMIT 1").first<{ ok: number }>();
     expect(row?.ok).toBe(0);
     expect(CRON_BACKUP).toBe('17 3 * * *');
-    spy.mockRestore();
   });
 });
 
