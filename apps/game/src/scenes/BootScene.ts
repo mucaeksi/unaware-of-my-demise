@@ -3,6 +3,8 @@ import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { ContentService } from '../content/ContentService';
 import { prefs } from '../platform/prefs';
+import { API_BASE } from '../config';
+import { loadCurrencyName } from '../net/currency';
 import { detectIdentity } from '../net/identity';
 import { Services } from '../services';
 
@@ -31,6 +33,7 @@ export class BootScene extends Phaser.Scene {
       Sfx.init(wa.context, wa.masterVolumeNode ?? wa.context.destination);
     }
     Services.identity = detectIdentity();
+    void loadCurrencyName(API_BASE);
     try {
       Services.content = await ContentService.create();
       const art = await Services.refreshArt();

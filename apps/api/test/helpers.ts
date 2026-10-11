@@ -45,7 +45,9 @@ export function adminEnv(over: Partial<AdminEnv> = {}): AdminEnv {
 const adminApp = createAdminApp({ getKey });
 export const GOOGLE_CLIENT = 'test-client-1.apps.googleusercontent.com';
 const googleKeys = await generateKeyPair('RS256');
-export const ADMOB_UNIT = 'ca-app-pub-3940256099942544/5224354917';
+export const ADMOB_UNIT = 'ca-app-pub-4258559369390965/3553164322';
+/** AdMob's callback carries only the numeric unit id */
+export const ADMOB_UNIT_NUMERIC = '3553164322';
 const ssvPair = (await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify'])) as CryptoKeyPair;
 const ssvSpki = btoa(String.fromCharCode(...new Uint8Array((await crypto.subtle.exportKey('spki', ssvPair.publicKey)) as ArrayBuffer)));
 import type { PlayClient, ProductPurchase, SubscriptionPurchase } from '../src/billing/play';

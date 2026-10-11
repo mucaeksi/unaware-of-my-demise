@@ -22,7 +22,7 @@ export function Economy({ say }: { say: (m: string) => void }): ReactNode {
   return (
     <>
       <header className="page"><h2>Economy (one currency)</h2></header>
-      <p>Everything is paid in Eclipse Tokens. Change a price or an income and see what happens to a player who puts everything into wishes, a balanced player and one who never wishes. Income defaults are the canon values; the upgrade and shop numbers are placeholders to tune.</p>
+      <p>Everything is paid in the one main currency (Bell's Remains). Change a price or an income and see what happens to a player who puts everything into wishes, a balanced player and one who never wishes. Income defaults are the canon values; the upgrade and shop numbers are placeholders to tune.</p>
       <div className="row" style={{ flexWrap: 'wrap' }}>
         {num('Days', () => m.days, (v) => setM({ ...m, days: v }))}
         {num('Pull cost', () => m.pullCost, (v) => setM({ ...m, pullCost: v }))}

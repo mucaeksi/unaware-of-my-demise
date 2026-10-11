@@ -38,3 +38,10 @@ store and can be revoked in one click. Passwords are never requested, pasted or 
 The Control Center sits behind Cloudflare Access. To sign in with a Google account, give me **only the e-mail address**; I add it
 to the Access policy (One-time PIN to that mailbox works immediately; "Sign in with Google" needs the Web OAuth client from step 3
 configured as an identity provider). No password is involved at any point.
+
+## AdMob (received 2026-10-11, public identifiers)
+- Publisher: `pub-4258559369390965`; app: `ca-app-pub-4258559369390965~2559970251`; rewarded unit: `ca-app-pub-4258559369390965/3553164322` (cap: 5 per 12 h, same rule on the server).
+- **Server-side verification callback URL to enter in AdMob** (rewarded unit -> server-side verification): staging
+  `https://uomd-game-staging.muratcaneksiii.workers.dev/api/v1/ads/ssv` (production gets its own URL later). AdMob's callback sends the numeric unit id; the Worker accepts either form.
+- **app-ads.txt** (needed on the developer website listed in the Play listing): `google.com, pub-4258559369390965, DIRECT, f08c47fec0942fa0`.
+- During development the Android build must use Google's **test ad unit ids**, never the live unit (live ads on test devices can get the account flagged for invalid traffic).

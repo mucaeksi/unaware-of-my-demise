@@ -2,7 +2,7 @@ import { REF_W } from '../config';
 import type { Product } from '../net/api';
 import { Services } from '../services';
 import { errText, HubScene } from '../ui/hub';
-import { CURRENCY_NAME } from '../ui/format';
+import { currencyLabel } from '../ui/format';
 import { Button, txt } from '../ui/kit';
 import { F, T } from '../ui/theme';
 
@@ -24,7 +24,7 @@ export class ShopScene extends HubScene {
     if (ads) {
       this.card(REF_W / 2, 940, 1400, 130, 'normal');
       this.add_(txt(this, 300, 915, 'Watch a memory', { fontFamily: F.display, fontSize: '34px', fontStyle: '600' }).setOrigin(0, 0.5));
-      this.add_(txt(this, 300, 965, `${ads.reward} Eclipse Tokens per view · ${ads.perWindow - ads.windowViews} left this half-day · ${ads.perDay - ads.dayViews} left today`, { fontSize: '26px', color: T.dim }).setOrigin(0, 0.5));
+      this.add_(txt(this, 300, 965, `${ads.reward} ${currencyLabel()} per view · ${ads.perWindow - ads.windowViews} of ${ads.perWindow} left in the last 12 hours`, { fontSize: '26px', color: T.dim }).setOrigin(0, 0.5));
       this.add_(new Button(this, REF_W - 330, 940, { label: 'WATCH', w: 300, h: 100, fontSize: 32, variant: 'hot', onClick: () => void this.watch() }).setEnabled(native && ads.windowViews < ads.perWindow));
     }
   }
@@ -34,7 +34,7 @@ export class ShopScene extends HubScene {
     this.add_(txt(this, 300, y - 26, p.title, { fontFamily: F.display, fontSize: '34px', fontStyle: '600' }).setOrigin(0, 0.5));
     const what = p.subscription
       ? `${p.subscription.duration_days}-day blessing: tokens now and twice a day`
-      : p.grants.map((g) => (g.type === 'currency' ? `${g.amount} ${CURRENCY_NAME[g.currency ?? ''] ?? g.currency}` : (g.itemId ?? ''))).join(' · ');
+      : p.grants.map((g) => (g.type === 'currency' ? `${g.amount} ${currencyLabel(g.currency)}` : (g.itemId ?? ''))).join(' · ');
     this.add_(txt(this, 300, y + 24, what, { fontSize: '26px', color: T.dim }).setOrigin(0, 0.5));
     this.add_(new Button(this, REF_W - 330, y, { label: 'BUY', w: 300, h: 100, fontSize: 32, variant: 'hot', onClick: () => this.say('Opening Google Play…') }).setEnabled(native));
   }

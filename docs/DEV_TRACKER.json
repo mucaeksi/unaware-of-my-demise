@@ -33,6 +33,10 @@
     {
       "title": "Combat coverage 3/20 -> 20/20 characters, boss phases, Sweep/AFK",
       "detail": ""
+    },
+    {
+      "title": "Final math pass",
+      "detail": "All reward amounts (ad payout, task payouts, stage rewards, upgrade fees) are placeholders until this pass, as you decided."
     }
   ],
   "blockedOnOwner": [
@@ -45,16 +49,12 @@
       "detail": "Invite the service account email under Users and permissions; create the app."
     },
     {
-      "title": "AdMob: app + rewarded ad unit IDs",
-      "detail": "Needed for the SSV allow-list (ADMOB_AD_UNIT_IDS)."
+      "title": "AdMob: enter the server-side verification callback URL",
+      "detail": "URL and app-ads.txt line are in docs/AAB_ACCESS_PLAN.md (ids already received)."
     },
     {
       "title": "Android keystore",
       "detail": "Upload key for signing; never leaves the owner/CI secrets."
-    },
-    {
-      "title": "Your Google e-mail for the Control Center login",
-      "detail": "Only the e-mail address; never a password."
     },
     {
       "title": "age private key",
@@ -85,6 +85,24 @@
       "date": "2026-10-11",
       "text": "If a test or step fails more than twice: raise reasoning, note it, move on.",
       "status": "working agreement"
+    },
+    {
+      "from": "owner",
+      "date": "2026-10-11",
+      "text": "Currency name in the style of 'Bell's Remains', fitting the story.",
+      "status": "done: Bell's Remains (D-17)"
+    },
+    {
+      "from": "owner",
+      "date": "2026-10-11",
+      "text": "Rewarded ads: max 5 per 12 hours, mirrored in the game; rewards decided in the final math pass.",
+      "status": "done: D-18"
+    },
+    {
+      "from": "owner",
+      "date": "2026-10-11",
+      "text": "Control Center login with unawareofmydemise@gmail.com.",
+      "status": "done: D-19"
     }
   ]
 }

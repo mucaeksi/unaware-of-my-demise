@@ -12,7 +12,7 @@
     "dev": {
       "name": "uomd-game-dev",
       "workers_dev": true,
-      "vars": { "ENVIRONMENT": "dev", "CONTENT_CHANNEL": "dev" },
+      "vars": { "ENVIRONMENT": "dev", "CONTENT_CHANNEL": "dev", "ADMOB_APP_ID": "ca-app-pub-4258559369390965~2559970251", "ADMOB_AD_UNIT_IDS": "ca-app-pub-4258559369390965/3553164322" },
       "assets": { "directory": "../game/dist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
       "d1_databases": [{ "binding": "DB", "database_name": "uomd-dev", "database_id": "0512d420-db4b-4851-8971-71c138f713cb", "migrations_dir": "migrations" }],
       "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "uomd-content-dev" }],
@@ -21,7 +21,7 @@
     "staging": {
       "name": "uomd-game-staging",
       "workers_dev": true,
-      "vars": { "ENVIRONMENT": "staging", "CONTENT_CHANNEL": "staging" },
+      "vars": { "ENVIRONMENT": "staging", "CONTENT_CHANNEL": "staging", "ADMOB_APP_ID": "ca-app-pub-4258559369390965~2559970251", "ADMOB_AD_UNIT_IDS": "ca-app-pub-4258559369390965/3553164322" },
       "assets": { "directory": "../game/dist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
       "d1_databases": [{ "binding": "DB", "database_name": "uomd-staging", "database_id": "687f9735-ee4c-4611-aa16-2fae99e51911", "migrations_dir": "migrations" }],
       "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "uomd-content-staging" }],

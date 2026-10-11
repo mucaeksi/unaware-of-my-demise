@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { REF_H, REF_W } from '../config';
 import { ApiError, type Wallets } from '../net/api';
+import { currency } from '../net/currency';
 import { Services } from '../services';
 import { Button, panel, sceneFadeIn, title, toast, txt } from './kit';
 import { DEPTH, T } from './theme';
@@ -54,7 +55,7 @@ export abstract class HubScene extends Phaser.Scene {
 
   private showWallet(w: Wallets): void {
     this.balance = w.eclipse_token ?? 0;
-    this.walletText?.setText(`Eclipse Tokens ${this.balance.toLocaleString('en-US')}`);
+    this.walletText?.setText(`${currency.name} ${this.balance.toLocaleString('en-US')}`);
   }
 
   /** Cheap wallet refresh after an action. */

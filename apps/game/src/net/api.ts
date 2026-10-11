@@ -175,7 +175,7 @@ export class GameApi extends EventTarget {
   async products(): Promise<Product[]> {
     return (await this.call<{ products: Product[] }>('GET', '/api/v1/shop/products', undefined, false)).products;
   }
-  adStatus(): Promise<{ windowViews: number; dayViews: number; perWindow: number; perDay: number; reward: number }> {
+  adStatus(): Promise<{ windowViews: number; perWindow: number; reward: number; nextSlotAt: string | null }> {
     return this.call('GET', '/api/v1/ads/status');
   }
   progress(): Promise<{ nodes: { node_id: string; stars: number; clears: number }[]; ration: { value: number; cap: number; nextMs: number } }> {

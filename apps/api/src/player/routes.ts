@@ -49,6 +49,12 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     if (!(await flagOn(env, key))) throw new HttpError(503, 'feature_disabled', 'this feature is temporarily switched off');
   };
 
+  /** Display name of the single main currency (data, renameable without a client release). */
+  app.get('/api/v1/currency', async (c) => {
+    const r = await c.env.DB.prepare("SELECT id, display_name FROM currencies WHERE retired = 0 AND kind = 'premium_earnable' LIMIT 1").first<{ id: string; display_name: string }>();
+    return c.json({ id: r?.id ?? 'eclipse_token', name: r?.display_name ?? "Bell's Remains" }, 200, { 'Cache-Control': 'public, max-age=300' });
+  });
+
   app.get('/api/v1/flags', async (c) => {
     const { results } = await c.env.DB.prepare('SELECT key, enabled, value_json FROM feature_flags ORDER BY key').all<{ key: string; enabled: number; value_json: string }>();
     return c.json({ flags: Object.fromEntries(results.map((r) => [r.key, { enabled: r.enabled === 1, value: JSON.parse(r.value_json) }])) }, 200, { 'Cache-Control': 'public, max-age=15' });
@@ -190,7 +196,9 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     if (units.length === 0) throw new HttpError(503, 'ads_not_configured', 'rewarded ads are not configured for this environment');
     const url = new URL(c.req.url);
     const ssv = await verifySsv(url.search, opts.admobKeys ?? googleKeyFetcher);
-    if (!units.includes(ssv.adUnit)) throw new HttpError(400, 'bad_ssv', 'ad unit is not ours');
+    // AdMob's callback carries the numeric unit id (the part after the slash of ca-app-pub-<publisher>/<unit>); configuration may hold either form
+    const unitId = (u: string): string => u.slice(u.lastIndexOf('/') + 1);
+    if (!units.some((u) => unitId(u) === unitId(ssv.adUnit))) throw new HttpError(400, 'bad_ssv', 'ad unit is not ours');
     if (Math.abs(Date.now() - ssv.timestampMs) > AD.maxAgeMs) throw new HttpError(400, 'bad_ssv', 'callback is too old');
     if (!(await flagOn(c.env, 'ads.rewarded.enabled'))) return c.json({ granted: false, reason: 'disabled' });
     // 200 for every verified callback (Google retries other codes); the body says whether the view paid out

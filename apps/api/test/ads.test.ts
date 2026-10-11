@@ -1,7 +1,7 @@
 import { env } from 'cloudflare:workers';
 import { describe, expect, it } from 'vitest';
 import { derToRaw } from '../src/ads/ssv';
-import { ADMOB_UNIT, game, post, signIn, ssvPath } from './helpers';
+import { ADMOB_UNIT, ADMOB_UNIT_NUMERIC, game, post, signIn, ssvPath } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 let n = 0;
@@ -9,7 +9,7 @@ const uid = (): string => `${++n}${Math.random().toString(36).slice(2, 10)}`;
 
 async function view(auth: Record<string, string>, playerId: string, over: Record<string, string> = {}, opts: Parameters<typeof ssvPath>[1] = {}): Promise<Response> {
   const begin = (await (await game('/api/v1/ads/begin', post({}, auth))).json()) as { nonce: string };
-  const path = await ssvPath({ ad_network: '5450213213286189855', ad_unit: ADMOB_UNIT, custom_data: begin.nonce, reward_amount: '1', reward_item: 'token', timestamp: String(Date.now()), transaction_id: `tx${uid()}`, user_id: playerId, ...over }, opts);
+  const path = await ssvPath({ ad_network: '5450213213286189855', ad_unit: ADMOB_UNIT_NUMERIC, custom_data: begin.nonce, reward_amount: '1', reward_item: 'token', timestamp: String(Date.now()), transaction_id: `tx${uid()}`, user_id: playerId, ...over }, opts);
   return game(path);
 }
 
@@ -34,34 +34,34 @@ describe('rewarded ads (AdMob server-side verification)', () => {
     const dup = await view(auth, playerId, { transaction_id: tx });
     expect(await dup.json()).toEqual({ granted: false, reason: 'duplicate' });
     expect(((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token).toBe(30);
-    expect(await (await game('/api/v1/ads/status', { headers: auth })).json()).toMatchObject({ windowViews: 1, dayViews: 1, perWindow: 4, perDay: 8, reward: 30 });
+    expect(await (await game('/api/v1/ads/status', { headers: auth })).json()).toMatchObject({ windowViews: 1, perWindow: 5, reward: 30 });
   });
 
-  it('enforces 4 per 12-hour window; the 5th view is refused before it starts and in the callback', async () => {
+  it('enforces 5 per rolling 12 hours; the 6th view is refused before it starts and in the callback', async () => {
     const { auth, playerId } = await signIn(`sub-adcap-${uid()}`);
     const paid: number[] = [];
-    for (let i = 0; i < 4; i++) paid.push(((await (await view(auth, playerId)).json()) as { granted: boolean }).granted ? 1 : 0);
-    expect(paid).toEqual([1, 1, 1, 1]);
+    for (let i = 0; i < 5; i++) paid.push(((await (await view(auth, playerId)).json()) as { granted: boolean }).granted ? 1 : 0);
+    expect(paid).toEqual([1, 1, 1, 1, 1]);
     const begin = await game('/api/v1/ads/begin', post({}, auth));
     expect(begin.status).toBe(429);
     expect(((await begin.json()) as { error: string }).error).toBe('ad_cap_reached');
     // a nonce obtained earlier cannot be used to exceed the cap either
     await db().prepare("INSERT INTO ad_nonces (nonce, player_id, expires_at) VALUES ('0123456789abcdef0123', ?1, '2999-01-01T00:00:00.000Z')").bind(playerId).run();
-    const extra = await game(await ssvPath({ ad_unit: ADMOB_UNIT, custom_data: '0123456789abcdef0123', timestamp: String(Date.now()), transaction_id: `tx${uid()}`, user_id: playerId }));
+    const extra = await game(await ssvPath({ ad_unit: ADMOB_UNIT_NUMERIC, custom_data: '0123456789abcdef0123', timestamp: String(Date.now()), transaction_id: `tx${uid()}`, user_id: playerId }));
     expect(await extra.json()).toEqual({ granted: false, reason: 'window_cap' });
-    expect(((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token).toBe(120);
+    expect(((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token).toBe(150);
   });
 
-  it('parallel callbacks cannot exceed the window cap', async () => {
+  it('parallel callbacks cannot exceed the cap', async () => {
     const { auth, playerId } = await signIn(`sub-adpar-${uid()}`);
     const nonces: string[] = [];
-    for (let i = 0; i < 4; i++) nonces.push(((await (await game('/api/v1/ads/begin', post({}, auth))).json()) as { nonce: string }).nonce);
-    for (let i = 0; i < 4; i++) nonces.push(`ffffffffffffffffffff${i}`.slice(0, 24));
-    await db().batch(nonces.slice(4).map((x) => db().prepare("INSERT INTO ad_nonces (nonce, player_id, expires_at) VALUES (?1, ?2, '2999-01-01T00:00:00.000Z')").bind(x, playerId)));
+    for (let i = 0; i < 5; i++) nonces.push(((await (await game('/api/v1/ads/begin', post({}, auth))).json()) as { nonce: string }).nonce);
+    for (let i = 0; i < 5; i++) nonces.push(`ffffffffffffffffffff${i}`.slice(0, 24));
+    await db().batch(nonces.slice(5).map((x) => db().prepare("INSERT INTO ad_nonces (nonce, player_id, expires_at) VALUES (?1, ?2, '2999-01-01T00:00:00.000Z')").bind(x, playerId)));
     const rs = await Promise.all(nonces.map(async (nonce) => game(await ssvPath({ ad_unit: ADMOB_UNIT, custom_data: nonce, timestamp: String(Date.now()), transaction_id: `tx${uid()}`, user_id: playerId }))));
     const out = (await Promise.all(rs.map((r) => r.json()))) as { granted: boolean }[];
-    expect(out.filter((o) => o.granted)).toHaveLength(4);
-    expect(((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token).toBe(120);
+    expect(out.filter((o) => o.granted)).toHaveLength(5);
+    expect(((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token).toBe(150);
   });
 
   it('rejects tampering, wrong key, wrong order, foreign ad units, old callbacks and unknown/foreign/used nonces', async () => {
@@ -98,5 +98,11 @@ describe('rewarded ads (AdMob server-side verification)', () => {
     expect(await r.json()).toEqual({ granted: false, reason: 'bad_nonce' });
     expect((await game('/api/v1/ads/status')).status).toBe(401);
     expect(auth).toBeTruthy();
+  });
+});
+
+describe('currency name', () => {
+  it('the main currency is called Bell\'s Remains and the name is served as data', async () => {
+    expect(await (await game('/api/v1/currency')).json()).toEqual({ id: 'eclipse_token', name: "Bell's Remains" });
   });
 });
