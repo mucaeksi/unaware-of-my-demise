@@ -1,0 +1,49 @@
+{
+  "status": "reviewed_authored_expansion_not_new_canon_truth",
+  "gate": "4-5",
+  "physical_cast": [
+    "jori_flint",
+    "ac_mera_holt",
+    "ac_tovin_reed"
+  ],
+  "new_npcs": [
+    {
+      "id": "ac_mera_holt",
+      "role": "local register keeper; precise about missing facts, never invents names"
+    },
+    {
+      "id": "ac_tovin_reed",
+      "role": "living yard foreman; signed erasure orders, gradual admission, accountability remains at ending"
+    }
+  ],
+  "time": "10 first-clear sorties total at most 80 combat minutes plus paused story; optional local watch after 4-5, before Jori joins altar defense; no canonical extra days added",
+  "repeats": "archival encounter reconstructions, not time loops, new physical marches, or regenerated canonical dead",
+  "main_link": "Oakhaven supply road remains blocked despite Rusk defeat; Jori returns to hold gate after 4-5; no new sealed-order contents or future villain clues",
+  "world_law": "unwitnessed dead repeat tasks; records preserve evidence and names, never instantly cure Hollows or restore stolen hours; village witnesses still needed at ending",
+  "bans": [
+    "eighth_bell",
+    "hours_upgrade_currency",
+    "Fadyme_cure",
+    "PartII_reveal",
+    "Rusk_resurrection",
+    "new_royal_seal_revelation",
+    "ledger_cancels_debt",
+    "pretend_main_turn_kit_runs_realtime"
+  ],
+  "reference_games": {
+    "Vampire Survivors": "movement+autoattack+run build principle only",
+    "Heaven Burns Red": "relationships and chapter breathers",
+    "Reverse: 1999": "restrained theatrical staging",
+    "AFK Arena": "short repeat-entry and stored loadout convenience",
+    "BrownDust2": "threat shapes and visible lanes",
+    "Morimens": "later replay build exploration"
+  },
+  "original_signature": [
+    "same yard changes from wage tally to place of witness",
+    "ordered recovery routes oppose running in endless circles",
+    "one owned lead plus four event-adapted supports",
+    "10 distinct route/hazard/boss combinations",
+    "fixed readable warning times across threat ranks"
+  ],
+  "research_limit": "reference-game principles from project README/design knowledge; no claim of current-version direct play or exhaustive external research; Phaser feasibility lab is separate evidence"
+}

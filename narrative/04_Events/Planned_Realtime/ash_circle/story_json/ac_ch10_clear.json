@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch10_clear",
+  "title_en": "Leave the Road Open: The Record",
+  "location_id": "ac_gate",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_gate"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch10_clear_001",
+      "text": "The last carrier breaks apart on the road. No bell sounds, and no light rises from the pit."
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_clear_002",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I thought there would be a sign.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_clear_003",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "There is a road people can use. There is a record they can read. Those are our signs.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_clear_004",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "The dead still need witnesses. The village will send people who remember, not another captain.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_clear_005",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "And until they come?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_clear_006",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "We keep the list open.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_clear_007",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "I have a gate to hold. You have a gate to stop closing.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch10_clear_008",
+      "text": "Mera leaves one clean space at the end of the page. It is not a name invented to make the work feel finished."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch10_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

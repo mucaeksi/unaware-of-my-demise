@@ -1,0 +1,76 @@
+{
+  "authoring_schema_version": 1,
+  "identity_status": "canonical_family_new_realtime_adapter; not_turn_combat_kit",
+  "roles": {
+    "hollow_pilgrim": {
+      "hp": 18,
+      "speed": 72,
+      "contact_damage": 8,
+      "xp": 1,
+      "shape": "bent_back",
+      "behavior": "approach_current_hero_position",
+      "projectile": null
+    },
+    "ash_wolf": {
+      "hp": 14,
+      "speed": 104,
+      "contact_damage": 9,
+      "xp": 1,
+      "shape": "low_four_leg",
+      "behavior": "approach; warned_straight_lunge_each_150_ticks",
+      "projectile": null
+    },
+    "orchard_ghoul": {
+      "hp": 32,
+      "speed": 52,
+      "contact_damage": 12,
+      "xp": 2,
+      "shape": "wide_shoulder",
+      "behavior": "approach; cannot_close_corridor_below_192_units",
+      "projectile": null
+    },
+    "hollow_cleric": {
+      "hp": 22,
+      "speed": 42,
+      "contact_damage": 7,
+      "xp": 2,
+      "shape": "tall_staff",
+      "behavior": "approach_to_range_300_then_warned_shot_each_120_ticks",
+      "projectile": {
+        "speed": 150,
+        "damage": 9,
+        "ttl_ticks": 75
+      }
+    },
+    "inkbound_dead": {
+      "hp": 26,
+      "speed": 48,
+      "contact_damage": 8,
+      "xp": 2,
+      "shape": "paper_ribbons",
+      "behavior": "approach; emit_delayed_ink_at_sampled_hero_position_each_180_ticks",
+      "projectile": null
+    }
+  },
+  "contact": {
+    "global_hero_iframes_ticks": 24,
+    "one_contact_damage_event_per_tick": true,
+    "touch_damage_rechecks_iframe": true
+  },
+  "elite": {
+    "every_nth_successful_spawn": 30,
+    "hp_multiplier": 2.2,
+    "speed_multiplier": 1.0,
+    "damage_multiplier": 1.15,
+    "xp_multiplier": 4,
+    "max_live": 4,
+    "warning_ticks": 45
+  },
+  "family_provenance": {
+    "hollow_pilgrim": "narrative/07_Enemies_Bosses/bestiary.md",
+    "ash_wolf": "narrative/07_Enemies_Bosses/bestiary.md",
+    "orchard_ghoul": "narrative/07_Enemies_Bosses/bestiary.md",
+    "hollow_cleric": "narrative/07_Enemies_Bosses/bestiary.md",
+    "inkbound_dead": "narrative/07_Enemies_Bosses/bestiary.md"
+  }
+}

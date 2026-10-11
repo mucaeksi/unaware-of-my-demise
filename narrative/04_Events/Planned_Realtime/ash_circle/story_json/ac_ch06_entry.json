@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch06_entry",
+  "title_en": "The Book's Empty Margin",
+  "location_id": "ac_ledger",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_ledger"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_entry_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "There were two books. One for loads. One for advances.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_entry_002",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The clerk said the second was private.",
+      "emotion": "guarded"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_entry_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Private is a useful word when everyone else pays.",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_entry_004",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Here. The names were cut out, not crossed out.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_entry_005",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I saw the scraps in the stove. I thought they were mistakes.",
+      "emotion": "ashamed"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_entry_006",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Then today we keep the margins. Missing words have edges.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_entry_007",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Keep moving. That thing is tracing where we stood.",
+      "emotion": "firm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch06_entry_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

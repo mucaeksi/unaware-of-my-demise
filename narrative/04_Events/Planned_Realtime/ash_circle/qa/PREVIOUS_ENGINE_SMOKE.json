@@ -1,0 +1,80 @@
+{
+  "status": "HISTORICAL_ISOLATED_ENGINE_SMOKE_NOT_EVENT_TEST",
+  "historical_repository_head": "698c7471573e68c8814a8205be4e93a1b6d6958e",
+  "source_report_sha256": "bdbff91a39b2e0a4d37f5aa49a90f97fccc5359291b9be1d11c90511955914e1",
+  "native_android_tested": false,
+  "event_shared_sim_tested": false,
+  "observation": {
+    "status": "PASS_ENGINE_API_SMOKE",
+    "phaser": "4.2.1",
+    "renderer": 2,
+    "glRenderer": "WebKit WebGL",
+    "capabilities": [
+      "pointer movement",
+      "automatic projectiles",
+      "enemy pursuit",
+      "Arcade overlap damage",
+      "pooled enemies/projectiles/XP",
+      "XP level-up pause and upgrade",
+      "camera follow"
+    ],
+    "cases": [
+      {
+        "enemyTarget": 80,
+        "projectileCap": 64,
+        "activeEnemies": 80,
+        "enemyPool": 80,
+        "projectilePool": 64,
+        "xpPool": 20,
+        "kills": 36,
+        "xp": 20,
+        "levelUps": 5,
+        "upgrades": 5,
+        "poolReuses": 143,
+        "frames": 216,
+        "medianRenderDeltaMs": 16.659999999999947,
+        "p95RenderDeltaMs": 21.66999999999989
+      },
+      {
+        "enemyTarget": 160,
+        "projectileCap": 128,
+        "activeEnemies": 160,
+        "enemyPool": 160,
+        "projectilePool": 64,
+        "xpPool": 29,
+        "kills": 80,
+        "xp": 53,
+        "levelUps": 13,
+        "upgrades": 13,
+        "poolReuses": 282,
+        "frames": 128,
+        "medianRenderDeltaMs": 38.32999999999993,
+        "p95RenderDeltaMs": 71.67000000000007
+      },
+      {
+        "enemyTarget": 320,
+        "projectileCap": 256,
+        "activeEnemies": 319,
+        "enemyPool": 320,
+        "projectilePool": 64,
+        "xpPool": 29,
+        "kills": 106,
+        "xp": 86,
+        "levelUps": 21,
+        "upgrades": 21,
+        "poolReuses": 363,
+        "frames": 131,
+        "medianRenderDeltaMs": 36.66000000000022,
+        "p95RenderDeltaMs": 68.34000000000015
+      }
+    ],
+    "pageErrors": [],
+    "limits": [
+      "Synthetic single-texture placeholders in Linux headless Chromium with SwiftShader software rendering.",
+      "Not an Android device, WebView benchmark, sustained thermal test, real-art stress test or guaranteed enemy capacity.",
+      "No production game/core/schema/backend/own-roster integration or rewards.",
+      "Final level-up path includes forced XP setup; does not validate progression balance.",
+      "Frame timings include paused upgrade choices and are not a stable throughput benchmark."
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch09_clear",
+  "title_en": "The Yard Must Open: The Record",
+  "location_id": "ac_kiln",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_kiln"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch09_clear_001",
+      "text": "The final chain drops. The gates stay open when the kiln arm turns."
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_clear_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "A door should not need someone crushed beneath it to remain a door.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_clear_003",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The binding is intact. Most slips are blank; three still carry letters.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_clear_004",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "Will three letters be enough?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_clear_005",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Enough to ask the families. Never enough to decide for them.",
+      "emotion": "firm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch09_clear_006",
+      "text": "Beyond the yard, Oakhaven's ordinary lamps become visible through the gap."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch09_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch09_entry",
+  "title_en": "The Yard Must Open",
+  "location_id": "ac_kiln",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_kiln"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_entry_001",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The kiln's lever draws all three gate chains. One pull can close the whole yard.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_entry_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "A prison that calls itself a workplace.",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_entry_003",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The clerk has tied the binding to the last chain. Cut the chain, keep the book.",
+      "emotion": "guarded"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_entry_004",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The tender follows the heat vents. It was his last duty.",
+      "emotion": "uneasy"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_entry_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Then we stop feeding the duty. No more charcoal goes in.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_entry_006",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Keep every warning line visible. We need our way out as much as the way in.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_entry_007",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I can open the first link from this side.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch09_entry_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,1958 @@
+{
+  "authoring_schema_version": 1,
+  "scene_language": "en",
+  "voice_target_language": "ja",
+  "status": "authored_preproduction",
+  "scenes": [
+    {
+      "scene_id": "ac_opening",
+      "act": 1,
+      "title_en": "An Open Space on the Map",
+      "location_id": "ac_gate",
+      "direction_en": "Late afternoon. Jori stays at Oakhaven; only yard workers appear inside the new location.",
+      "purpose_tr": "4-5 sonrası Jori dönüşü. Ana gizem, sealed order ve Fadyme açıklaması kullanılmaz.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_opening_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "On returning to Oakhaven, Jori finds a supply cart waiting outside the gate. Its driver will not cross the charcoal yard.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_opening_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "The captain is gone. Why is the road still empty?",
+          "emotion": "tense",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_opening_003",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The captain was not the first reason it emptied.",
+          "emotion": "guarded",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_opening_004",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The yard has its own dead. We kept working around them until there was no way through.",
+          "emotion": "uneasy",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_opening_005",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "And you waited for the village to notice?",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_opening_006",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I waited for someone else to sign the closure.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_opening_007",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "I brought the old survey. One yard, ten places we have to account for.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_opening_008",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "We open the road, keep the records, and leave the dead to people who can truly witness them.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_opening_009",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "That is all I am asking. It is already more than anyone has promised us.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_terms",
+      "act": 1,
+      "title_en": "A Road, Not a Cure",
+      "location_id": "ac_gate",
+      "direction_en": "Mera marks three routes. This choice changes only an optional log note, not the objectives.",
+      "purpose_tr": "Ton seçimi tüm içerikleri erişilebilir bırakır.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_terms_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "You can read the yard from its gate, its loads, or its missing workers. We need all three before we close the record.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_terms_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Start with the thing you can keep in sight. We will follow it through.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "What will you keep in sight?",
+        "state_key": "watch_note",
+        "options": [
+          {
+            "id": "ac_watch_note_road",
+            "value": "road",
+            "text_en": "A road people can use.",
+            "consequence_en": "Log note only; every chapter remains available.",
+            "lines": [
+              {
+                "line_id": "ac_terms_003",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "Then keep the exits open. We will need them when the work turns against us.",
+                "emotion": "firm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "ac_terms_004",
+                "speaker_id": "ac_mera_holt",
+                "speaker_display": "Mera",
+                "text_en": "I will mark the usable routes beside the old survey.",
+                "emotion": "composed",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "ac_watch_note_record",
+            "value": "record",
+            "text_en": "A record people can trust.",
+            "consequence_en": "Log note only; every chapter remains available.",
+            "lines": [
+              {
+                "line_id": "ac_terms_005",
+                "speaker_id": "ac_mera_holt",
+                "speaker_display": "Mera",
+                "text_en": "Then we keep the damaged page with the clean one. Nothing disappears to make our account easier.",
+                "emotion": "firm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "ac_terms_006",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "And no guess becomes a name.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "ac_watch_note_workers",
+            "value": "workers",
+            "text_en": "A place for the missing.",
+            "consequence_en": "Log note only; every chapter remains available.",
+            "lines": [
+              {
+                "line_id": "ac_terms_007",
+                "speaker_id": "ac_tovin_reed",
+                "speaker_display": "Tovin",
+                "text_en": "I can remember some of them. You will hear where my memory stops.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "ac_terms_008",
+                "speaker_id": "ac_mera_holt",
+                "speaker_display": "Mera",
+                "text_en": "We leave that space open for the people who know.",
+                "emotion": "firm",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "ac_setback",
+      "act": 1,
+      "title_en": "Back Through the Gate",
+      "location_id": "ac_gate",
+      "direction_en": "Generic first defeat scene. Thereafter a short UI message replaces the full scene.",
+      "purpose_tr": "Kaybedilen koşu XP yükseltmeleri sıfırlanır; temizlenen bölümler silinmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_setback_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Mera moves the lamp to the gate. The chalk marks beyond it are still where she left them.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_setback_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "We withdraw before another name has to be added to the missing.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_setback_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "Did we lose the whole route?",
+          "emotion": "uneasy",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_setback_004",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "No. We lost this attempt. We know the way back in.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_setback_005",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The record stays. Rest, change what you carry, and begin this part again.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_reconstruction",
+      "act": 10,
+      "title_en": "A Route Remembered",
+      "location_id": "ac_gate",
+      "direction_en": "Post-clear replay framing. Reconstructed encounters have no new canonical casualties.",
+      "purpose_tr": "Yeniden oynanış yazar düzeyinde rekonstrüksiyon; evren içi gerçek zaman döngüsü veya yeni ölüm değildir.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_reconstruction_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "I have drawn each route as we found it. The marks show the attacks we had to pass.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_reconstruction_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "A road map is useful. Knowing where it nearly killed you is better.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_reconstruction_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "May I practice the routes too?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_reconstruction_004",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Yes. On the record. No one goes back into danger just to prove the first crossing counted.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_reconstruction_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The yard survey lies flat beneath the lamps. Its routes can be studied again without closing the real gate.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch01_entry",
+      "act": 1,
+      "title_en": "The Open Gate",
+      "location_id": "ac_gate",
+      "direction_en": "Chapter 1, before deployment. Cut to the same yard, at the named landmark.",
+      "purpose_tr": "Tebeşir işaretlerini topla; geçit boyunca geri dön. İlk koşu hareket ve otomatik saldırıyı öğretir.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch01_entry_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Jori lifts the bar with her shoulder. The charcoal yard opens onto a road of overturned handcarts.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch01_entry_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "This gate faces the village. Whatever we leave behind it will reach the houses first.",
+          "emotion": "tense",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_entry_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The carts stopped before the captain came. We had nowhere left to put the charcoal.",
+          "emotion": "guarded",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_entry_004",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "And no one left who could tell me which workers were missing.",
+          "emotion": "composed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_entry_005",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Then we start with the road. No bell, no shouting. Let the dead follow our feet.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_entry_006",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "I will mark what we know. You bring back what can still be read.",
+          "emotion": "composed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_entry_007",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "Stay on the pale chalk. The dark lines are cracks, not paths.",
+          "emotion": "uneasy",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch01_breather",
+      "act": 1,
+      "title_en": "The Open Gate: The Safe Mark",
+      "location_id": "ac_gate",
+      "direction_en": "At combat tick 7200, freeze combat and all timers, then play this brief scene. Existing enemies remain paused.",
+      "purpose_tr": "Bir defalık durak; aynı koşuda yeniden tetiklenmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch01_breather_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The first mark is visible again. The scale house is farther in.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_breather_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "That carrier keeps circling the same empty cart.",
+          "emotion": "uneasy",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_breather_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Leave room to pass it. A shield is no use if we close our own way out.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch01_clear",
+      "act": 1,
+      "title_en": "The Open Gate: The Record",
+      "location_id": "ac_gate",
+      "direction_en": "Only after the server accepts the complete chapter victory. No dialogue appears during active dodging.",
+      "purpose_tr": "Onaylı ilk zafer sonrası; skip olsa da idempotent sahne checkpoint kaydı tutulur.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch01_clear_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The carrier falls beside its cart. Under the handle is a small plate, worn smooth on one side.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch01_clear_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "A worker's number. No name.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_clear_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "We used numbers to settle loads. It was quicker.",
+          "emotion": "ashamed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_clear_004",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Quicker for who?",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_clear_005",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "For the man paying us.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch01_clear_006",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "I will keep the plate. We need the book that gave it a name.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch02_entry",
+      "act": 2,
+      "title_en": "Weight Without Names",
+      "location_id": "ac_weighbridge",
+      "direction_en": "Chapter 2, before deployment. Cut to the same yard, at the named landmark.",
+      "purpose_tr": "Üç tartı levhasını farklı yaklaşım yönlerinden topla; paralel düşman hatlarının arasından geç.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch02_entry_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The scale arm rocks although nothing rests on the platform.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch02_entry_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Each plate is a week's tally. The names should be on the back.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_entry_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The foreman kept that side against the wall.",
+          "emotion": "guarded",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_entry_004",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Which foreman?",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_entry_005",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "Me.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_entry_006",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Then you can tell us which screws to loosen.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_entry_007",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "All three. I will not ask you to leave one behind.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch02_breather",
+      "act": 2,
+      "title_en": "Weight Without Names: The Safe Mark",
+      "location_id": "ac_weighbridge",
+      "direction_en": "At combat tick 7200, freeze combat and all timers, then play this brief scene. Existing enemies remain paused.",
+      "purpose_tr": "Bir defalık durak; aynı koşuda yeniden tetiklenmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch02_breather_001",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The crossing lane opens when the scale arm drops. Do not wait underneath it.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_breather_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "One plate has the word 'advance'. A wage paid before the work.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_breather_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Or a debt made to look like one.",
+          "emotion": "tense",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch02_clear",
+      "act": 2,
+      "title_en": "Weight Without Names: The Record",
+      "location_id": "ac_weighbridge",
+      "direction_en": "Only after the server accepts the complete chapter victory. No dialogue appears during active dodging.",
+      "purpose_tr": "Onaylı ilk zafer sonrası; skip olsa da idempotent sahne checkpoint kaydı tutulur.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch02_clear_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The backs were filed clean. There are no names here.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_clear_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I signed that order. I thought the mill kept the originals.",
+          "emotion": "ashamed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_clear_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Thinking is not the same as asking.",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_clear_004",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The totals do not match. These workers delivered more than they were paid for.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_clear_005",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The dispatch rack holds the next set. I can show you.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch02_clear_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Mera wraps the plates separately. An empty space is still evidence when someone made it empty.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch03_entry",
+      "act": 3,
+      "title_en": "The Route That Changed",
+      "location_id": "ac_dispatch",
+      "direction_en": "Chapter 3, before deployment. Cut to the same yard, at the named landmark.",
+      "purpose_tr": "Eski sevk etiketlerini güney-doğu-kuzey rotasında al; kurt kıskacında yön değiştir.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch03_entry_001",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The road ran south. Those tags point north.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_entry_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Toward the pits.",
+          "emotion": "tense",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_entry_003",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "A new route was stamped over the old one. This ink is ordinary. Someone chose it.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_entry_004",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I was told the south bridge could not take another load.",
+          "emotion": "guarded",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_entry_005",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Did you see the bridge?",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_entry_006",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "No.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_entry_007",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "We will read the instruction we have, not invent the one we want.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch03_breather",
+      "act": 3,
+      "title_en": "The Route That Changed: The Safe Mark",
+      "location_id": "ac_dispatch",
+      "direction_en": "At combat tick 7200, freeze combat and all timers, then play this brief scene. Existing enemies remain paused.",
+      "purpose_tr": "Bir defalık durak; aynı koşuda yeniden tetiklenmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch03_breather_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The tags carry the yard stamp. No royal seal.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_breather_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Good. Keep the captain's business out of this. Oakhaven has enough wounds of its own.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_breather_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The largest wolf follows the broken cart. It turns late. Give it a wide corner.",
+          "emotion": "uneasy",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch03_clear",
+      "act": 3,
+      "title_en": "The Route That Changed: The Record",
+      "location_id": "ac_dispatch",
+      "direction_en": "Only after the server accepts the complete chapter victory. No dialogue appears during active dodging.",
+      "purpose_tr": "Onaylı ilk zafer sonrası; skip olsa da idempotent sahne checkpoint kaydı tutulur.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch03_clear_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "All three loads were redirected to the same storage pit.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_clear_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The pit was already full.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_clear_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Full of charcoal?",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_clear_004",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "That is what the tally says.",
+          "emotion": "ashamed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_clear_005",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "That is what you let the tally say.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch03_clear_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The tags dry beneath a stone. Their arrows disagree with the road, but agree with each other.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch04_entry",
+      "act": 4,
+      "title_en": "A Borrowed Dry Place",
+      "location_id": "ac_shelter",
+      "direction_en": "Chapter 4, before deployment. Cut to the same yard, at the named landmark.",
+      "purpose_tr": "Çevredeki üç sığınak mandalını aç; merkez etrafında dönen tehdide tek yönde bağımlı kalma.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch04_entry_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "A child's mitten hangs inside the stock shelter. Rain has hardened the cloth against its nail.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch04_entry_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "There were families here.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_entry_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "They came with the seasonal crews. The village had no beds left.",
+          "emotion": "guarded",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_entry_004",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "And you locked the only dry roof?",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_entry_005",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "After the deliveries stopped. I thought they had all gone.",
+          "emotion": "ashamed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_entry_006",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "We open it before we decide what that thought is worth.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_entry_007",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Three latches. Keep the door's swing clear.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch04_breather",
+      "act": 4,
+      "title_en": "A Borrowed Dry Place: The Safe Mark",
+      "location_id": "ac_shelter",
+      "direction_en": "At combat tick 7200, freeze combat and all timers, then play this brief scene. Existing enemies remain paused.",
+      "purpose_tr": "Bir defalık durak; aynı koşuda yeniden tetiklenmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch04_breather_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "A stool, two bowls, four blankets. This was a room, not a store.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_breather_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The keeper still shuts every open shutter.",
+          "emotion": "uneasy",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_breather_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Move around it. Do not fight the whole roof at once.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch04_clear",
+      "act": 4,
+      "title_en": "A Borrowed Dry Place: The Record",
+      "location_id": "ac_shelter",
+      "direction_en": "Only after the server accepts the complete chapter victory. No dialogue appears during active dodging.",
+      "purpose_tr": "Onaylı ilk zafer sonrası; skip olsa da idempotent sahne checkpoint kaydı tutulur.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch04_clear_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The shelter opens onto a wall of pencilled heights. The smallest mark ends below Jori's shoulder.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch04_clear_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "These marks belong in the register too.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_clear_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I only counted the hands that could lift a sack.",
+          "emotion": "ashamed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_clear_004",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Children are not the part of a load you can leave out.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_clear_005",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "We cannot tell who lived from a mark alone. I will write 'family present', and keep the wall.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch04_clear_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "For the first time, Tovin carries something from the yard that cannot be sold.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch05_entry",
+      "act": 5,
+      "title_en": "Under the Black Water",
+      "location_id": "ac_cistern",
+      "direction_en": "Chapter 5, before deployment. Cut to the same yard, at the named landmark.",
+      "purpose_tr": "Üç sabit tahliye kolunu sırayla çevir; su şeritlerinin değişen güvenli tarafını kullan.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch05_entry_001",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The cistern drains below the storage pit. If we empty it, the boards may still be there.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_entry_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Paper will not survive that water.",
+          "emotion": "guarded",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_entry_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Then we save the wood it was nailed to.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_entry_004",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "Three handles. The middle one opens both channels if you turn it first.",
+          "emotion": "uneasy",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_entry_005",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Left, right, middle. I have marked them.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_entry_006",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "And if the marks wash away?",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_entry_007",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I stay here and call the order.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch05_breather",
+      "act": 5,
+      "title_en": "Under the Black Water: The Safe Mark",
+      "location_id": "ac_cistern",
+      "direction_en": "At combat tick 7200, freeze combat and all timers, then play this brief scene. Existing enemies remain paused.",
+      "purpose_tr": "Bir defalık durak; aynı koşuda yeniden tetiklenmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch05_breather_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The ink on the water is moving against the current.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_breather_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Keep it off the boards. Breaking a chain does not read what was chained.",
+          "emotion": "tense",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_breather_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The west rim is dry. The next drain is on your right.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch05_clear",
+      "act": 5,
+      "title_en": "Under the Black Water: The Record",
+      "location_id": "ac_cistern",
+      "direction_en": "Only after the server accepts the complete chapter victory. No dialogue appears during active dodging.",
+      "purpose_tr": "Onaylı ilk zafer sonrası; skip olsa da idempotent sahne checkpoint kaydı tutulur.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch05_clear_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The boards were turned face down before they were sunk.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_clear_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "They told me it would stop arguments over pay.",
+          "emotion": "ashamed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_clear_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "It stopped people proving they had been here.",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_clear_004",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Do not scrape them clean. Even a crossed-out letter may be all a family has.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_clear_005",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I will bring cloth. Clean cloth this time.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch05_clear_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Black water leaves the channel. The earth beneath it keeps the shape of every board.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch06_entry",
+      "act": 6,
+      "title_en": "The Book's Empty Margin",
+      "location_id": "ac_ledger",
+      "direction_en": "Chapter 6, before deployment. Cut to the same yard, at the named landmark.",
+      "purpose_tr": "Üç ayrı defter yaprağını al; hareket izi bırakan mürekkep yüzünden aynı yolu hemen tekrar kullanma.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch06_entry_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "There were two books. One for loads. One for advances.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_entry_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The clerk said the second was private.",
+          "emotion": "guarded",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_entry_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Private is a useful word when everyone else pays.",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_entry_004",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Here. The names were cut out, not crossed out.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_entry_005",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I saw the scraps in the stove. I thought they were mistakes.",
+          "emotion": "ashamed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_entry_006",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Then today we keep the margins. Missing words have edges.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_entry_007",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Keep moving. That thing is tracing where we stood.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch06_breather",
+      "act": 6,
+      "title_en": "The Book's Empty Margin: The Safe Mark",
+      "location_id": "ac_ledger",
+      "direction_en": "At combat tick 7200, freeze combat and all timers, then play this brief scene. Existing enemies remain paused.",
+      "purpose_tr": "Bir defalık durak; aynı koşuda yeniden tetiklenmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch06_breather_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The clerk carried the missing names on separate slips. Some may still be caught in the binding.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_breather_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The ink joins at the corner. Cross the room, not your old trail.",
+          "emotion": "uneasy",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_breather_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "A fresh path costs less than a stubborn one.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch06_clear",
+      "act": 6,
+      "title_en": "The Book's Empty Margin: The Record",
+      "location_id": "ac_ledger",
+      "direction_en": "Only after the server accepts the complete chapter victory. No dialogue appears during active dodging.",
+      "purpose_tr": "Onaylı ilk zafer sonrası; skip olsa da idempotent sahne checkpoint kaydı tutulur.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch06_clear_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "There is a receipt for the boards. Tovin's mark beside the clerk's.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_clear_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I cannot say I did not know what my hand did.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_clear_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "You can stop asking the paper to take the blame.",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_clear_004",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "This copy stays intact. We will put your account beside it, not over it.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_clear_005",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "Write that I signed. Write that I was paid.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch06_clear_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Mera sets a clean sheet beside the damaged one. For once, the second account does not replace the first.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch07_entry",
+      "act": 7,
+      "title_en": "An Empty Cart Returns",
+      "location_id": "ac_cart",
+      "direction_en": "Chapter 7, before deployment. Cut to the same yard, at the named landmark.",
+      "purpose_tr": "Bir araba üç durakta oyuncu yakındayken ilerler; temas menzilinde beklemek yerine önden koridor aç.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch07_entry_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Tovin pulls a wheel free. The cart under the shelter is too narrow for charcoal sacks.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch07_entry_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I told the crews to use the pit until someone came for the dead.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_entry_003",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Did you send for anyone?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_entry_004",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I wrote the request. I did not send it.",
+          "emotion": "ashamed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_entry_005",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Because the yard would close.",
+          "emotion": "tense",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_entry_006",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "Yes.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_entry_007",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Then we move the cart now. Empty. No more pretending a journey happened because you wrote it down.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch07_breather",
+      "act": 7,
+      "title_en": "An Empty Cart Returns: The Safe Mark",
+      "location_id": "ac_cart",
+      "direction_en": "At combat tick 7200, freeze combat and all timers, then play this brief scene. Existing enemies remain paused.",
+      "purpose_tr": "Bir defalık durak; aynı koşuda yeniden tetiklenmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch07_breather_001",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Let the cart stop if you need room. Its wheels are not a clock.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_breather_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The dead follow the handle. Clear the next corner before you draw them there.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_breather_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I remember this route. I should have used it.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch07_clear",
+      "act": 7,
+      "title_en": "An Empty Cart Returns: The Record",
+      "location_id": "ac_cart",
+      "direction_en": "Only after the server accepts the complete chapter victory. No dialogue appears during active dodging.",
+      "purpose_tr": "Onaylı ilk zafer sonrası; skip olsa da idempotent sahne checkpoint kaydı tutulur.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch07_clear_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The cart reaches the open gate with no burden to deliver. Tovin keeps both hands on the handle.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch07_clear_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "We do not know how many were taken to the pit. We write that plainly.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_clear_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "And we stop calling it storage.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_clear_004",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "Will saying it change what is under there?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_clear_005",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "It changes what the next person is told. That is what we can promise.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch07_clear_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "On the yard map, Mera strikes one word through once. The mark remains readable.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch08_entry",
+      "act": 8,
+      "title_en": "What the Pit Keeps",
+      "location_id": "ac_pit",
+      "direction_en": "Chapter 8, before deployment. Cut to the same yard, at the named landmark.",
+      "purpose_tr": "Açık çukur kenarındaki üç taşı işaretle; kül fırtınalarının önceden görünen yönüne göre yol değiştir.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch08_entry_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The pit holds sacks, broken tools and a shoe with the foot still inside it. Nothing here has a proper place.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch08_entry_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "No one dumps another load here.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_entry_003",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Markers first. We do not enter until the ground and the dead are safe to approach.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_entry_004",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I said the shortage would pass if we kept the carts running.",
+          "emotion": "ashamed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_entry_005",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "The carts kept running. The shortage became people.",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_entry_006",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "There are two kinds of marks on these tools. We may have more than one crew to account for.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_entry_007",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I will name both. Even the ones who left.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch08_breather",
+      "act": 8,
+      "title_en": "What the Pit Keeps: The Safe Mark",
+      "location_id": "ac_pit",
+      "direction_en": "At combat tick 7200, freeze combat and all timers, then play this brief scene. Existing enemies remain paused.",
+      "purpose_tr": "Bir defalık durak; aynı koşuda yeniden tetiklenmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch08_breather_001",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The gust runs from the kiln to the pit. Watch the hanging cloth, not the dust at your feet.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_breather_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "One spade has a child's height scratched into its shaft. A parent kept count.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_breather_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Then keep the spade. Do not make the mark prettier.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch08_clear",
+      "act": 8,
+      "title_en": "What the Pit Keeps: The Record",
+      "location_id": "ac_pit",
+      "direction_en": "Only after the server accepts the complete chapter victory. No dialogue appears during active dodging.",
+      "purpose_tr": "Onaylı ilk zafer sonrası; skip olsa da idempotent sahne checkpoint kaydı tutulur.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch08_clear_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The rim is marked. No names guessed, no bodies moved without a witness.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_clear_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I can remember eleven workers. Not all their families.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_clear_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Then eleven is where we start, not where we stop.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_clear_004",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "I will leave the list open. Anyone missing may be written here without proving what they earned.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch08_clear_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The first new sign at the pit forbids a load. The second asks a question: Who is still missing?",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch08_clear_006",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I should have asked that before there was a pit.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch09_entry",
+      "act": 9,
+      "title_en": "The Yard Must Open",
+      "location_id": "ac_kiln",
+      "direction_en": "Chapter 9, before deployment. Cut to the same yard, at the named landmark.",
+      "purpose_tr": "Üç çıkış zincirini sök; iki dik ateş hattı aynı anda kapandığında kalan çeyreği bul.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch09_entry_001",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The kiln's lever draws all three gate chains. One pull can close the whole yard.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_entry_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "A prison that calls itself a workplace.",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_entry_003",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The clerk has tied the binding to the last chain. Cut the chain, keep the book.",
+          "emotion": "guarded",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_entry_004",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The tender follows the heat vents. It was his last duty.",
+          "emotion": "uneasy",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_entry_005",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Then we stop feeding the duty. No more charcoal goes in.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_entry_006",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Keep every warning line visible. We need our way out as much as the way in.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_entry_007",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I can open the first link from this side.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch09_breather",
+      "act": 9,
+      "title_en": "The Yard Must Open: The Safe Mark",
+      "location_id": "ac_kiln",
+      "direction_en": "At combat tick 7200, freeze combat and all timers, then play this brief scene. Existing enemies remain paused.",
+      "purpose_tr": "Bir defalık durak; aynı koşuda yeniden tetiklenmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch09_breather_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Two chains are free. The last is under the kiln arm.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_breather_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Let it sweep. Cross behind it, not under it.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_breather_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "The north corner is clear. I have marked it twice.",
+          "emotion": "tense",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch09_clear",
+      "act": 9,
+      "title_en": "The Yard Must Open: The Record",
+      "location_id": "ac_kiln",
+      "direction_en": "Only after the server accepts the complete chapter victory. No dialogue appears during active dodging.",
+      "purpose_tr": "Onaylı ilk zafer sonrası; skip olsa da idempotent sahne checkpoint kaydı tutulur.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch09_clear_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The final chain drops. The gates stay open when the kiln arm turns.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch09_clear_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "A door should not need someone crushed beneath it to remain a door.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_clear_003",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The binding is intact. Most slips are blank; three still carry letters.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_clear_004",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "Will three letters be enough?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_clear_005",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Enough to ask the families. Never enough to decide for them.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch09_clear_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Beyond the yard, Oakhaven's ordinary lamps become visible through the gap.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch10_entry",
+      "act": 10,
+      "title_en": "Leave the Road Open",
+      "location_id": "ac_gate",
+      "direction_en": "Chapter 10, before deployment. Cut to the same yard, at the named landmark.",
+      "purpose_tr": "Arenanın üç bölgesindeki tanık direklerini etkinleştir; önceki hareket dilini üç boss fazında birleştir.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch10_entry_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Mera pins the damaged book beneath a clear board. Beside it, Tovin's account is held open by his own hammer.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch10_entry_002",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "Both stay. The missing names, and the man who helped remove them.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_entry_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I will answer when they come.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_entry_004",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "You will also keep the road clear for them.",
+          "emotion": "stern",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_entry_005",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The last carrier has scraps from every corner of the yard. It keeps bringing the load home.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_entry_006",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Then give it no closed gate to lean on.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_entry_007",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "Three posts. The gate, the shelter, the pit. I will keep a lamp at each.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch10_breather",
+      "act": 10,
+      "title_en": "Leave the Road Open: The Safe Mark",
+      "location_id": "ac_gate",
+      "direction_en": "At combat tick 7200, freeze combat and all timers, then play this brief scene. Existing enemies remain paused.",
+      "purpose_tr": "Bir defalık durak; aynı koşuda yeniden tetiklenmez.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch10_breather_001",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "The posts are standing. The pages will not be washed away tonight.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_breather_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "The carrier is turning back toward the gate. Leave its first sweep room.",
+          "emotion": "tense",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_breather_003",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I will not close it behind you.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "ac_ch10_clear",
+      "act": 10,
+      "title_en": "Leave the Road Open: The Record",
+      "location_id": "ac_gate",
+      "direction_en": "Only after the server accepts the complete chapter victory. No dialogue appears during active dodging.",
+      "purpose_tr": "Onaylı ilk zafer sonrası; skip olsa da idempotent sahne checkpoint kaydı tutulur.",
+      "music_cue": "ac_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "ac_ch10_clear_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The last carrier breaks apart on the road. No bell sounds, and no light rises from the pit.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "ac_ch10_clear_002",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "I thought there would be a sign.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_clear_003",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "There is a road people can use. There is a record they can read. Those are our signs.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_clear_004",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "The dead still need witnesses. The village will send people who remember, not another captain.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_clear_005",
+          "speaker_id": "ac_tovin_reed",
+          "speaker_display": "Tovin",
+          "text_en": "And until they come?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_clear_006",
+          "speaker_id": "ac_mera_holt",
+          "speaker_display": "Mera",
+          "text_en": "We keep the list open.",
+          "emotion": "firm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_clear_007",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "I have a gate to hold. You have a gate to stop closing.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "ac_ch10_clear_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Mera leaves one clean space at the end of the page. It is not a name invented to make the work feel finished.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    }
+  ]
+}

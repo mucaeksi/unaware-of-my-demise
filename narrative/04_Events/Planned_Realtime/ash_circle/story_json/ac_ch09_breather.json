@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch09_breather",
+  "title_en": "The Yard Must Open: The Safe Mark",
+  "location_id": "ac_kiln",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_kiln"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_breather_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Two chains are free. The last is under the kiln arm.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_breather_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Let it sweep. Cross behind it, not under it.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch09_breather_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The north corner is clear. I have marked it twice.",
+      "emotion": "tense"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch09_breather_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

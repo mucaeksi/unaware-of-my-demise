@@ -1,0 +1,267 @@
+{
+  "arena_id": "ac_charcoal_yard",
+  "authoring_schema_version": 1,
+  "world_size": [
+    4096,
+    3072
+  ],
+  "playable_bounds": {
+    "x": 256,
+    "y": 256,
+    "width": 3584,
+    "height": 2560
+  },
+  "camera_view_world": [
+    1024,
+    576
+  ],
+  "hud_reference": [
+    1920,
+    1080
+  ],
+  "actor_radius": 16,
+  "hero_speed_units_per_second": 240,
+  "landmarks": {
+    "gate": {
+      "center": [
+        2048,
+        512
+      ],
+      "radius": 160
+    },
+    "weighbridge": {
+      "center": [
+        1000,
+        1000
+      ],
+      "radius": 160
+    },
+    "dispatch": {
+      "center": [
+        3160,
+        850
+      ],
+      "radius": 150
+    },
+    "shelter": {
+      "center": [
+        3200,
+        2100
+      ],
+      "radius": 200
+    },
+    "cistern": {
+      "center": [
+        1000,
+        2250
+      ],
+      "radius": 210
+    },
+    "ledger": {
+      "center": [
+        1500,
+        1000
+      ],
+      "radius": 130
+    },
+    "cart": {
+      "center": [
+        2800,
+        2100
+      ],
+      "radius": 130
+    },
+    "pit": {
+      "center": [
+        2048,
+        2480
+      ],
+      "radius": 250
+    },
+    "kiln": {
+      "center": [
+        2048,
+        1536
+      ],
+      "radius": 210
+    }
+  },
+  "collision": "outer_bounds_only_in_initial_slice; decorative landmarks nonblocking",
+  "final_collision_proposal": {
+    "status": "requires_navigation_QA_before_enable",
+    "blocks": [
+      [
+        1848,
+        1336,
+        120,
+        120
+      ],
+      [
+        2128,
+        1620,
+        120,
+        120
+      ]
+    ],
+    "min_corridor_width": 192
+  },
+  "spawn": {
+    "outside_camera_margin_world": 96,
+    "min_distance_from_hero": 220,
+    "min_distance_from_current_objective": 160,
+    "warning_seconds": 1.2,
+    "boundary_fallback": "visible warned portals on farthest legal side; never spawn on hero",
+    "search_attempts_max": 16,
+    "failure": "skip_batch_no_backlog"
+  },
+  "objective_interaction": {
+    "radius": 64,
+    "channel_ticks": 30,
+    "must_hold_button": true,
+    "movement_or_damage_cancels": true,
+    "contact_grace_on_complete_ticks": 9
+  },
+  "visual_change_policy": "same_geometry_all_10_chapters; decals, water strips, lamps and hazards change",
+  "chapter_positions": {
+    "1": [
+      [
+        2048,
+        512
+      ],
+      [
+        1000,
+        1000
+      ],
+      [
+        3160,
+        850
+      ]
+    ],
+    "2": [
+      [
+        1000,
+        1000
+      ],
+      [
+        1500,
+        1000
+      ],
+      [
+        2048,
+        512
+      ]
+    ],
+    "3": [
+      [
+        3160,
+        850
+      ],
+      [
+        3200,
+        2100
+      ],
+      [
+        2048,
+        512
+      ]
+    ],
+    "4": [
+      [
+        3200,
+        2100
+      ],
+      [
+        2800,
+        2100
+      ],
+      [
+        3160,
+        850
+      ]
+    ],
+    "5": [
+      [
+        1000,
+        2250
+      ],
+      [
+        1000,
+        1000
+      ],
+      [
+        2048,
+        2480
+      ]
+    ],
+    "6": [
+      [
+        1500,
+        1000
+      ],
+      [
+        3160,
+        850
+      ],
+      [
+        1000,
+        1000
+      ]
+    ],
+    "7": [
+      [
+        2800,
+        2100
+      ],
+      [
+        3200,
+        2100
+      ],
+      [
+        2048,
+        512
+      ]
+    ],
+    "8": [
+      [
+        2048,
+        2480
+      ],
+      [
+        1000,
+        2250
+      ],
+      [
+        3200,
+        2100
+      ]
+    ],
+    "9": [
+      [
+        2048,
+        1536
+      ],
+      [
+        3160,
+        850
+      ],
+      [
+        2048,
+        512
+      ]
+    ],
+    "10": [
+      [
+        2048,
+        512
+      ],
+      [
+        3200,
+        2100
+      ],
+      [
+        2048,
+        2480
+      ]
+    ]
+  }
+}

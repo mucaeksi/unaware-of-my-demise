@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch06_clear",
+  "title_en": "The Book's Empty Margin: The Record",
+  "location_id": "ac_ledger",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_ledger"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_clear_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "There is a receipt for the boards. Tovin's mark beside the clerk's.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_clear_002",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I cannot say I did not know what my hand did.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_clear_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "You can stop asking the paper to take the blame.",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_clear_004",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "This copy stays intact. We will put your account beside it, not over it.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch06_clear_005",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "Write that I signed. Write that I was paid.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch06_clear_006",
+      "text": "Mera sets a clean sheet beside the damaged one. For once, the second account does not replace the first."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch06_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

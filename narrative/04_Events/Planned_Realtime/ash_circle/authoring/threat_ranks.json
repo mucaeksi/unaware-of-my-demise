@@ -1,0 +1,89 @@
+{
+  "ranks": [
+    {
+      "rank": 0,
+      "name_en": "Survey",
+      "enemy_hp_multiplier": 1.0,
+      "enemy_damage_multiplier": 1.0,
+      "boss_hp_multiplier": 1.0,
+      "boss_damage_multiplier": 1.0,
+      "spawn_batch_extra": 0,
+      "enemy_speed_multiplier": 1.0,
+      "warnings_scaled": false,
+      "live_cap": 160,
+      "numeric_status": "untested_balance_draft"
+    },
+    {
+      "rank": 1,
+      "name_en": "Threat 1",
+      "enemy_hp_multiplier": 1.18,
+      "enemy_damage_multiplier": 1.1,
+      "boss_hp_multiplier": 1.15,
+      "boss_damage_multiplier": 1.08,
+      "spawn_batch_extra": 1,
+      "enemy_speed_multiplier": 1.025,
+      "warnings_scaled": false,
+      "live_cap": 160,
+      "numeric_status": "untested_balance_draft"
+    },
+    {
+      "rank": 2,
+      "name_en": "Threat 2",
+      "enemy_hp_multiplier": 1.36,
+      "enemy_damage_multiplier": 1.2,
+      "boss_hp_multiplier": 1.3,
+      "boss_damage_multiplier": 1.16,
+      "spawn_batch_extra": 2,
+      "enemy_speed_multiplier": 1.05,
+      "warnings_scaled": false,
+      "live_cap": 160,
+      "numeric_status": "untested_balance_draft"
+    },
+    {
+      "rank": 3,
+      "name_en": "Threat 3",
+      "enemy_hp_multiplier": 1.54,
+      "enemy_damage_multiplier": 1.3,
+      "boss_hp_multiplier": 1.45,
+      "boss_damage_multiplier": 1.24,
+      "spawn_batch_extra": 3,
+      "enemy_speed_multiplier": 1.075,
+      "warnings_scaled": false,
+      "live_cap": 160,
+      "numeric_status": "untested_balance_draft"
+    },
+    {
+      "rank": 4,
+      "name_en": "Threat 4",
+      "enemy_hp_multiplier": 1.72,
+      "enemy_damage_multiplier": 1.4,
+      "boss_hp_multiplier": 1.6,
+      "boss_damage_multiplier": 1.32,
+      "spawn_batch_extra": 4,
+      "enemy_speed_multiplier": 1.1,
+      "warnings_scaled": false,
+      "live_cap": 160,
+      "numeric_status": "untested_balance_draft"
+    },
+    {
+      "rank": 5,
+      "name_en": "Threat 5",
+      "enemy_hp_multiplier": 1.9,
+      "enemy_damage_multiplier": 1.5,
+      "boss_hp_multiplier": 1.75,
+      "boss_damage_multiplier": 1.4,
+      "spawn_batch_extra": 5,
+      "enemy_speed_multiplier": 1.125,
+      "warnings_scaled": false,
+      "live_cap": 160,
+      "numeric_status": "untested_balance_draft"
+    }
+  ],
+  "first_release_authored_cells": 60,
+  "max_rank": 5,
+  "more_ranks": "append only after device and balance validation; no unbounded auto-generated stat inflation",
+  "unlock": "rank 0 chapters 1..10 in order; after rank r chapter 10 clear, unlock rank r+1 chapter 1; within rank chapters in order",
+  "replay": "any unlocked rank/chapter; fixed encounter seed per revision/rank/chapter, immutable party snapshot per attempt; no rank reset on loss",
+  "long_term": "evergreen availability, party/build experiments, self-best records per cell; no forced daily energy, limited time deadline or endless mob promise",
+  "main_story_gate_once": "after first unlock, all sixty cells depend only on event progress; no further campaign clears"
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch07_entry",
+  "title_en": "An Empty Cart Returns",
+  "location_id": "ac_cart",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_cart"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch07_entry_001",
+      "text": "Tovin pulls a wheel free. The cart under the shelter is too narrow for charcoal sacks."
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_entry_002",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I told the crews to use the pit until someone came for the dead.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_entry_003",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Did you send for anyone?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_entry_004",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I wrote the request. I did not send it.",
+      "emotion": "ashamed"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_entry_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Because the yard would close.",
+      "emotion": "tense"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_entry_006",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "Yes.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_entry_007",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Then we move the cart now. Empty. No more pretending a journey happened because you wrote it down.",
+      "emotion": "firm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch07_entry_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch10_entry",
+  "title_en": "Leave the Road Open",
+  "location_id": "ac_gate",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_gate"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch10_entry_001",
+      "text": "Mera pins the damaged book beneath a clear board. Beside it, Tovin's account is held open by his own hammer."
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_entry_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Both stay. The missing names, and the man who helped remove them.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_entry_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I will answer when they come.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_entry_004",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "You will also keep the road clear for them.",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_entry_005",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The last carrier has scraps from every corner of the yard. It keeps bringing the load home.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_entry_006",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Then give it no closed gate to lean on.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch10_entry_007",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "Three posts. The gate, the shelter, the pit. I will keep a lamp at each.",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch10_entry_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

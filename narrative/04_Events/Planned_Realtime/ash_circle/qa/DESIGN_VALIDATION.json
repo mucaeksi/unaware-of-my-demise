@@ -1,0 +1,26 @@
+{
+  "status": "PASS_DESIGN_REFERENCES_ONLY",
+  "chapters": 10,
+  "arena_count": 1,
+  "cells": 60,
+  "source_hashes_checked": 14,
+  "timeline_batch_definitions_checked": 600,
+  "scheduled_batches_all_cells": 3600,
+  "upgrade_offer_reference_checks": 9500,
+  "progress_reference_checks": 608,
+  "story_refs_and_CSV": "PASS",
+  "geometry_deadline_lower_bounds": "PASS",
+  "monotone_pre_cap_HP_demand": "PASS",
+  "roster_ID_and_free_access_refs": "PASS",
+  "protocol_vector_checks": 12,
+  "does_not_prove": [
+    "playable_module",
+    "server_replay",
+    "real_collision_safety",
+    "difficulty_monotonicity_in_play",
+    "free_roster_balance",
+    "Android_fps",
+    "actual_cloudflare_cpu"
+  ],
+  "runtime_enable_allowed": false
+}

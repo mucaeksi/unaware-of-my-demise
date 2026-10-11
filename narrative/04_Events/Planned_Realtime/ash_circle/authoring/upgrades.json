@@ -1,0 +1,344 @@
+{
+  "cards": [
+    {
+      "card_id": "ac_slot0_force",
+      "name_en": "Lead: Force",
+      "family": "slot0",
+      "kind": "force",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        12,
+        24,
+        36,
+        48
+      ],
+      "applies_to_slot": 0,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot0_tempo",
+      "name_en": "Lead: Tempo",
+      "family": "slot0",
+      "kind": "tempo",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "applies_to_slot": 0,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot0_reach",
+      "name_en": "Lead: Reach",
+      "family": "slot0",
+      "kind": "reach",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "applies_to_slot": 0,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot1_force",
+      "name_en": "Support 1: Force",
+      "family": "slot1",
+      "kind": "force",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        12,
+        24,
+        36,
+        48
+      ],
+      "applies_to_slot": 1,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot1_tempo",
+      "name_en": "Support 1: Tempo",
+      "family": "slot1",
+      "kind": "tempo",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "applies_to_slot": 1,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot1_reach",
+      "name_en": "Support 1: Reach",
+      "family": "slot1",
+      "kind": "reach",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "applies_to_slot": 1,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot2_force",
+      "name_en": "Support 2: Force",
+      "family": "slot2",
+      "kind": "force",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        12,
+        24,
+        36,
+        48
+      ],
+      "applies_to_slot": 2,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot2_tempo",
+      "name_en": "Support 2: Tempo",
+      "family": "slot2",
+      "kind": "tempo",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "applies_to_slot": 2,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot2_reach",
+      "name_en": "Support 2: Reach",
+      "family": "slot2",
+      "kind": "reach",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "applies_to_slot": 2,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot3_force",
+      "name_en": "Support 3: Force",
+      "family": "slot3",
+      "kind": "force",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        12,
+        24,
+        36,
+        48
+      ],
+      "applies_to_slot": 3,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot3_tempo",
+      "name_en": "Support 3: Tempo",
+      "family": "slot3",
+      "kind": "tempo",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "applies_to_slot": 3,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot3_reach",
+      "name_en": "Support 3: Reach",
+      "family": "slot3",
+      "kind": "reach",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "applies_to_slot": 3,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot4_force",
+      "name_en": "Support 4: Force",
+      "family": "slot4",
+      "kind": "force",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        12,
+        24,
+        36,
+        48
+      ],
+      "applies_to_slot": 4,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot4_tempo",
+      "name_en": "Support 4: Tempo",
+      "family": "slot4",
+      "kind": "tempo",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "applies_to_slot": 4,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_slot4_reach",
+      "name_en": "Support 4: Reach",
+      "family": "slot4",
+      "kind": "reach",
+      "rank_cap": 4,
+      "values_percent_by_rank": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "applies_to_slot": 4,
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_vigor",
+      "name_en": "Vigor",
+      "family": "utility",
+      "kind": "vigor",
+      "rank_cap": 4,
+      "values_by_rank": [
+        10,
+        20,
+        30,
+        40
+      ],
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_stride",
+      "name_en": "Stride",
+      "family": "utility",
+      "kind": "stride",
+      "rank_cap": 4,
+      "values_by_rank": [
+        4,
+        8,
+        12,
+        16
+      ],
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_gather",
+      "name_en": "Gather",
+      "family": "utility",
+      "kind": "gather",
+      "rank_cap": 4,
+      "values_by_rank": [
+        16,
+        32,
+        48,
+        64
+      ],
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_ward",
+      "name_en": "Ward",
+      "family": "utility",
+      "kind": "ward",
+      "rank_cap": 4,
+      "values_by_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "repeatable": false
+    },
+    {
+      "card_id": "ac_recovery",
+      "name_en": "Recovery",
+      "family": "utility",
+      "kind": "recovery",
+      "rank_cap": 4,
+      "values_by_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "repeatable": false
+    }
+  ],
+  "offer_count": 3,
+  "unique_offer_ids": true,
+  "selection": "seeded shuffle of eligible card IDs sorted lexically; pick first 3; same draft is restored after crash",
+  "eligibility": "rank < rank_cap; no unavailable-slot cards since all 5 slots are required",
+  "starting_level": 1,
+  "max_level": 20,
+  "choices_per_run_max": 19,
+  "xp_needed_for_next_level": [
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    40,
+    44,
+    48,
+    52,
+    56,
+    60,
+    64,
+    68,
+    72,
+    76,
+    80
+  ],
+  "xp_after_level_cap": "no more upgrade popups; pickups tracked only for recap",
+  "pause_simulation_during_offer": true,
+  "reroll": false,
+  "banish": false,
+  "evolution": "not_in_initial_release; no hidden combinations",
+  "effects": {
+    "force": "slot damage multiplier 1 + value/100",
+    "tempo": "slot cooldown floor(base_ticks * (1 - value/100)); minimum 12 ticks",
+    "reach": "multiply range and area dimensions by 1 + value/100; pierce unchanged",
+    "vigor": "max HP + value; heal only same delta once on rank acquisition",
+    "stride": "hero speed times 1 + value/100",
+    "gather": "pickup radius + value",
+    "ward": "flat damage reduction; total damage minimum 1",
+    "recovery": "heal value HP per 300 ticks; stacks with capped support mends"
+  },
+  "composition_rule": "same card uses current rank total not cumulative sum of rank values; independent multipliers ordered and quantized per simulation spec",
+  "run_reset": "all cards and run XP reset at new attempt; resumable current run preserves them; no hours or currency spent"
+}

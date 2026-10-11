@@ -1,0 +1,190 @@
+line_id,speaker_id,speaker_display,text_en,emotion,voice_track,text_ja,recording_status
+ac_opening_001,narrator,Narration,"On returning to Oakhaven, Jori finds a supply cart waiting outside the gate. Its driver will not cross the charcoal yard.",composed,jp_narration,,not_recorded
+ac_opening_002,jori_flint,Jori,The captain is gone. Why is the road still empty?,tense,jp,,not_recorded
+ac_opening_003,ac_mera_holt,Mera,The captain was not the first reason it emptied.,guarded,jp,,not_recorded
+ac_opening_004,ac_tovin_reed,Tovin,The yard has its own dead. We kept working around them until there was no way through.,uneasy,jp,,not_recorded
+ac_opening_005,jori_flint,Jori,And you waited for the village to notice?,stern,jp,,not_recorded
+ac_opening_006,ac_tovin_reed,Tovin,I waited for someone else to sign the closure.,quiet,jp,,not_recorded
+ac_opening_007,ac_mera_holt,Mera,"I brought the old survey. One yard, ten places we have to account for.",firm,jp,,not_recorded
+ac_opening_008,jori_flint,Jori,"We open the road, keep the records, and leave the dead to people who can truly witness them.",firm,jp,,not_recorded
+ac_opening_009,ac_mera_holt,Mera,That is all I am asking. It is already more than anyone has promised us.,quiet,jp,,not_recorded
+ac_terms_001,ac_mera_holt,Mera,"You can read the yard from its gate, its loads, or its missing workers. We need all three before we close the record.",firm,jp,,not_recorded
+ac_terms_002,jori_flint,Jori,Start with the thing you can keep in sight. We will follow it through.,firm,jp,,not_recorded
+ac_terms_003,jori_flint,Jori,Then keep the exits open. We will need them when the work turns against us.,firm,jp,,not_recorded
+ac_terms_004,ac_mera_holt,Mera,I will mark the usable routes beside the old survey.,composed,jp,,not_recorded
+ac_terms_005,ac_mera_holt,Mera,Then we keep the damaged page with the clean one. Nothing disappears to make our account easier.,firm,jp,,not_recorded
+ac_terms_006,jori_flint,Jori,And no guess becomes a name.,quiet,jp,,not_recorded
+ac_terms_007,ac_tovin_reed,Tovin,I can remember some of them. You will hear where my memory stops.,quiet,jp,,not_recorded
+ac_terms_008,ac_mera_holt,Mera,We leave that space open for the people who know.,firm,jp,,not_recorded
+ac_setback_001,narrator,Narration,Mera moves the lamp to the gate. The chalk marks beyond it are still where she left them.,composed,jp_narration,,not_recorded
+ac_setback_002,ac_mera_holt,Mera,We withdraw before another name has to be added to the missing.,firm,jp,,not_recorded
+ac_setback_003,ac_tovin_reed,Tovin,Did we lose the whole route?,uneasy,jp,,not_recorded
+ac_setback_004,jori_flint,Jori,No. We lost this attempt. We know the way back in.,firm,jp,,not_recorded
+ac_setback_005,ac_mera_holt,Mera,"The record stays. Rest, change what you carry, and begin this part again.",focused,jp,,not_recorded
+ac_reconstruction_001,ac_mera_holt,Mera,I have drawn each route as we found it. The marks show the attacks we had to pass.,focused,jp,,not_recorded
+ac_reconstruction_002,jori_flint,Jori,A road map is useful. Knowing where it nearly killed you is better.,firm,jp,,not_recorded
+ac_reconstruction_003,ac_tovin_reed,Tovin,May I practice the routes too?,quiet,jp,,not_recorded
+ac_reconstruction_004,ac_mera_holt,Mera,Yes. On the record. No one goes back into danger just to prove the first crossing counted.,firm,jp,,not_recorded
+ac_reconstruction_005,narrator,Narration,The yard survey lies flat beneath the lamps. Its routes can be studied again without closing the real gate.,composed,jp_narration,,not_recorded
+ac_ch01_entry_001,narrator,Narration,Jori lifts the bar with her shoulder. The charcoal yard opens onto a road of overturned handcarts.,composed,jp_narration,,not_recorded
+ac_ch01_entry_002,jori_flint,Jori,This gate faces the village. Whatever we leave behind it will reach the houses first.,tense,jp,,not_recorded
+ac_ch01_entry_003,ac_tovin_reed,Tovin,The carts stopped before the captain came. We had nowhere left to put the charcoal.,guarded,jp,,not_recorded
+ac_ch01_entry_004,ac_mera_holt,Mera,And no one left who could tell me which workers were missing.,composed,jp,,not_recorded
+ac_ch01_entry_005,jori_flint,Jori,"Then we start with the road. No bell, no shouting. Let the dead follow our feet.",firm,jp,,not_recorded
+ac_ch01_entry_006,ac_mera_holt,Mera,I will mark what we know. You bring back what can still be read.,composed,jp,,not_recorded
+ac_ch01_entry_007,ac_tovin_reed,Tovin,"Stay on the pale chalk. The dark lines are cracks, not paths.",uneasy,jp,,not_recorded
+ac_ch01_breather_001,ac_mera_holt,Mera,The first mark is visible again. The scale house is farther in.,focused,jp,,not_recorded
+ac_ch01_breather_002,ac_tovin_reed,Tovin,That carrier keeps circling the same empty cart.,uneasy,jp,,not_recorded
+ac_ch01_breather_003,jori_flint,Jori,Leave room to pass it. A shield is no use if we close our own way out.,firm,jp,,not_recorded
+ac_ch01_clear_001,narrator,Narration,"The carrier falls beside its cart. Under the handle is a small plate, worn smooth on one side.",composed,jp_narration,,not_recorded
+ac_ch01_clear_002,ac_mera_holt,Mera,A worker's number. No name.,quiet,jp,,not_recorded
+ac_ch01_clear_003,ac_tovin_reed,Tovin,We used numbers to settle loads. It was quicker.,ashamed,jp,,not_recorded
+ac_ch01_clear_004,jori_flint,Jori,Quicker for who?,stern,jp,,not_recorded
+ac_ch01_clear_005,ac_tovin_reed,Tovin,For the man paying us.,quiet,jp,,not_recorded
+ac_ch01_clear_006,ac_mera_holt,Mera,I will keep the plate. We need the book that gave it a name.,firm,jp,,not_recorded
+ac_ch02_entry_001,narrator,Narration,The scale arm rocks although nothing rests on the platform.,composed,jp_narration,,not_recorded
+ac_ch02_entry_002,ac_mera_holt,Mera,Each plate is a week's tally. The names should be on the back.,focused,jp,,not_recorded
+ac_ch02_entry_003,ac_tovin_reed,Tovin,The foreman kept that side against the wall.,guarded,jp,,not_recorded
+ac_ch02_entry_004,jori_flint,Jori,Which foreman?,stern,jp,,not_recorded
+ac_ch02_entry_005,ac_tovin_reed,Tovin,Me.,quiet,jp,,not_recorded
+ac_ch02_entry_006,ac_mera_holt,Mera,Then you can tell us which screws to loosen.,firm,jp,,not_recorded
+ac_ch02_entry_007,ac_tovin_reed,Tovin,All three. I will not ask you to leave one behind.,quiet,jp,,not_recorded
+ac_ch02_breather_001,ac_tovin_reed,Tovin,The crossing lane opens when the scale arm drops. Do not wait underneath it.,focused,jp,,not_recorded
+ac_ch02_breather_002,ac_mera_holt,Mera,One plate has the word 'advance'. A wage paid before the work.,quiet,jp,,not_recorded
+ac_ch02_breather_003,jori_flint,Jori,Or a debt made to look like one.,tense,jp,,not_recorded
+ac_ch02_clear_001,ac_mera_holt,Mera,The backs were filed clean. There are no names here.,focused,jp,,not_recorded
+ac_ch02_clear_002,ac_tovin_reed,Tovin,I signed that order. I thought the mill kept the originals.,ashamed,jp,,not_recorded
+ac_ch02_clear_003,jori_flint,Jori,Thinking is not the same as asking.,stern,jp,,not_recorded
+ac_ch02_clear_004,ac_mera_holt,Mera,The totals do not match. These workers delivered more than they were paid for.,firm,jp,,not_recorded
+ac_ch02_clear_005,ac_tovin_reed,Tovin,The dispatch rack holds the next set. I can show you.,quiet,jp,,not_recorded
+ac_ch02_clear_006,narrator,Narration,Mera wraps the plates separately. An empty space is still evidence when someone made it empty.,composed,jp_narration,,not_recorded
+ac_ch03_entry_001,ac_tovin_reed,Tovin,The road ran south. Those tags point north.,focused,jp,,not_recorded
+ac_ch03_entry_002,jori_flint,Jori,Toward the pits.,tense,jp,,not_recorded
+ac_ch03_entry_003,ac_mera_holt,Mera,A new route was stamped over the old one. This ink is ordinary. Someone chose it.,focused,jp,,not_recorded
+ac_ch03_entry_004,ac_tovin_reed,Tovin,I was told the south bridge could not take another load.,guarded,jp,,not_recorded
+ac_ch03_entry_005,jori_flint,Jori,Did you see the bridge?,stern,jp,,not_recorded
+ac_ch03_entry_006,ac_tovin_reed,Tovin,No.,quiet,jp,,not_recorded
+ac_ch03_entry_007,ac_mera_holt,Mera,"We will read the instruction we have, not invent the one we want.",firm,jp,,not_recorded
+ac_ch03_breather_001,ac_mera_holt,Mera,The tags carry the yard stamp. No royal seal.,focused,jp,,not_recorded
+ac_ch03_breather_002,jori_flint,Jori,Good. Keep the captain's business out of this. Oakhaven has enough wounds of its own.,firm,jp,,not_recorded
+ac_ch03_breather_003,ac_tovin_reed,Tovin,The largest wolf follows the broken cart. It turns late. Give it a wide corner.,uneasy,jp,,not_recorded
+ac_ch03_clear_001,ac_mera_holt,Mera,All three loads were redirected to the same storage pit.,focused,jp,,not_recorded
+ac_ch03_clear_002,ac_tovin_reed,Tovin,The pit was already full.,quiet,jp,,not_recorded
+ac_ch03_clear_003,jori_flint,Jori,Full of charcoal?,stern,jp,,not_recorded
+ac_ch03_clear_004,ac_tovin_reed,Tovin,That is what the tally says.,ashamed,jp,,not_recorded
+ac_ch03_clear_005,ac_mera_holt,Mera,That is what you let the tally say.,quiet,jp,,not_recorded
+ac_ch03_clear_006,narrator,Narration,"The tags dry beneath a stone. Their arrows disagree with the road, but agree with each other.",composed,jp_narration,,not_recorded
+ac_ch04_entry_001,narrator,Narration,A child's mitten hangs inside the stock shelter. Rain has hardened the cloth against its nail.,composed,jp_narration,,not_recorded
+ac_ch04_entry_002,ac_mera_holt,Mera,There were families here.,quiet,jp,,not_recorded
+ac_ch04_entry_003,ac_tovin_reed,Tovin,They came with the seasonal crews. The village had no beds left.,guarded,jp,,not_recorded
+ac_ch04_entry_004,jori_flint,Jori,And you locked the only dry roof?,stern,jp,,not_recorded
+ac_ch04_entry_005,ac_tovin_reed,Tovin,After the deliveries stopped. I thought they had all gone.,ashamed,jp,,not_recorded
+ac_ch04_entry_006,ac_mera_holt,Mera,We open it before we decide what that thought is worth.,firm,jp,,not_recorded
+ac_ch04_entry_007,jori_flint,Jori,Three latches. Keep the door's swing clear.,firm,jp,,not_recorded
+ac_ch04_breather_001,ac_mera_holt,Mera,"A stool, two bowls, four blankets. This was a room, not a store.",quiet,jp,,not_recorded
+ac_ch04_breather_002,ac_tovin_reed,Tovin,The keeper still shuts every open shutter.,uneasy,jp,,not_recorded
+ac_ch04_breather_003,jori_flint,Jori,Move around it. Do not fight the whole roof at once.,firm,jp,,not_recorded
+ac_ch04_clear_001,narrator,Narration,The shelter opens onto a wall of pencilled heights. The smallest mark ends below Jori's shoulder.,composed,jp_narration,,not_recorded
+ac_ch04_clear_002,ac_mera_holt,Mera,These marks belong in the register too.,quiet,jp,,not_recorded
+ac_ch04_clear_003,ac_tovin_reed,Tovin,I only counted the hands that could lift a sack.,ashamed,jp,,not_recorded
+ac_ch04_clear_004,jori_flint,Jori,Children are not the part of a load you can leave out.,quiet,jp,,not_recorded
+ac_ch04_clear_005,ac_mera_holt,Mera,"We cannot tell who lived from a mark alone. I will write 'family present', and keep the wall.",firm,jp,,not_recorded
+ac_ch04_clear_006,narrator,Narration,"For the first time, Tovin carries something from the yard that cannot be sold.",composed,jp_narration,,not_recorded
+ac_ch05_entry_001,ac_tovin_reed,Tovin,"The cistern drains below the storage pit. If we empty it, the boards may still be there.",focused,jp,,not_recorded
+ac_ch05_entry_002,ac_mera_holt,Mera,Paper will not survive that water.,guarded,jp,,not_recorded
+ac_ch05_entry_003,jori_flint,Jori,Then we save the wood it was nailed to.,firm,jp,,not_recorded
+ac_ch05_entry_004,ac_tovin_reed,Tovin,Three handles. The middle one opens both channels if you turn it first.,uneasy,jp,,not_recorded
+ac_ch05_entry_005,ac_mera_holt,Mera,"Left, right, middle. I have marked them.",focused,jp,,not_recorded
+ac_ch05_entry_006,jori_flint,Jori,And if the marks wash away?,firm,jp,,not_recorded
+ac_ch05_entry_007,ac_tovin_reed,Tovin,I stay here and call the order.,focused,jp,,not_recorded
+ac_ch05_breather_001,ac_mera_holt,Mera,The ink on the water is moving against the current.,focused,jp,,not_recorded
+ac_ch05_breather_002,jori_flint,Jori,Keep it off the boards. Breaking a chain does not read what was chained.,tense,jp,,not_recorded
+ac_ch05_breather_003,ac_tovin_reed,Tovin,The west rim is dry. The next drain is on your right.,firm,jp,,not_recorded
+ac_ch05_clear_001,ac_mera_holt,Mera,The boards were turned face down before they were sunk.,quiet,jp,,not_recorded
+ac_ch05_clear_002,ac_tovin_reed,Tovin,They told me it would stop arguments over pay.,ashamed,jp,,not_recorded
+ac_ch05_clear_003,jori_flint,Jori,It stopped people proving they had been here.,stern,jp,,not_recorded
+ac_ch05_clear_004,ac_mera_holt,Mera,Do not scrape them clean. Even a crossed-out letter may be all a family has.,firm,jp,,not_recorded
+ac_ch05_clear_005,ac_tovin_reed,Tovin,I will bring cloth. Clean cloth this time.,quiet,jp,,not_recorded
+ac_ch05_clear_006,narrator,Narration,Black water leaves the channel. The earth beneath it keeps the shape of every board.,composed,jp_narration,,not_recorded
+ac_ch06_entry_001,ac_mera_holt,Mera,There were two books. One for loads. One for advances.,focused,jp,,not_recorded
+ac_ch06_entry_002,ac_tovin_reed,Tovin,The clerk said the second was private.,guarded,jp,,not_recorded
+ac_ch06_entry_003,jori_flint,Jori,Private is a useful word when everyone else pays.,stern,jp,,not_recorded
+ac_ch06_entry_004,ac_mera_holt,Mera,"Here. The names were cut out, not crossed out.",quiet,jp,,not_recorded
+ac_ch06_entry_005,ac_tovin_reed,Tovin,I saw the scraps in the stove. I thought they were mistakes.,ashamed,jp,,not_recorded
+ac_ch06_entry_006,ac_mera_holt,Mera,Then today we keep the margins. Missing words have edges.,firm,jp,,not_recorded
+ac_ch06_entry_007,jori_flint,Jori,Keep moving. That thing is tracing where we stood.,firm,jp,,not_recorded
+ac_ch06_breather_001,ac_mera_holt,Mera,The clerk carried the missing names on separate slips. Some may still be caught in the binding.,focused,jp,,not_recorded
+ac_ch06_breather_002,ac_tovin_reed,Tovin,"The ink joins at the corner. Cross the room, not your old trail.",uneasy,jp,,not_recorded
+ac_ch06_breather_003,jori_flint,Jori,A fresh path costs less than a stubborn one.,firm,jp,,not_recorded
+ac_ch06_clear_001,ac_mera_holt,Mera,There is a receipt for the boards. Tovin's mark beside the clerk's.,focused,jp,,not_recorded
+ac_ch06_clear_002,ac_tovin_reed,Tovin,I cannot say I did not know what my hand did.,quiet,jp,,not_recorded
+ac_ch06_clear_003,jori_flint,Jori,You can stop asking the paper to take the blame.,stern,jp,,not_recorded
+ac_ch06_clear_004,ac_mera_holt,Mera,"This copy stays intact. We will put your account beside it, not over it.",firm,jp,,not_recorded
+ac_ch06_clear_005,ac_tovin_reed,Tovin,Write that I signed. Write that I was paid.,quiet,jp,,not_recorded
+ac_ch06_clear_006,narrator,Narration,"Mera sets a clean sheet beside the damaged one. For once, the second account does not replace the first.",composed,jp_narration,,not_recorded
+ac_ch07_entry_001,narrator,Narration,Tovin pulls a wheel free. The cart under the shelter is too narrow for charcoal sacks.,composed,jp_narration,,not_recorded
+ac_ch07_entry_002,ac_tovin_reed,Tovin,I told the crews to use the pit until someone came for the dead.,quiet,jp,,not_recorded
+ac_ch07_entry_003,ac_mera_holt,Mera,Did you send for anyone?,quiet,jp,,not_recorded
+ac_ch07_entry_004,ac_tovin_reed,Tovin,I wrote the request. I did not send it.,ashamed,jp,,not_recorded
+ac_ch07_entry_005,jori_flint,Jori,Because the yard would close.,tense,jp,,not_recorded
+ac_ch07_entry_006,ac_tovin_reed,Tovin,Yes.,quiet,jp,,not_recorded
+ac_ch07_entry_007,ac_mera_holt,Mera,Then we move the cart now. Empty. No more pretending a journey happened because you wrote it down.,firm,jp,,not_recorded
+ac_ch07_breather_001,jori_flint,Jori,Let the cart stop if you need room. Its wheels are not a clock.,firm,jp,,not_recorded
+ac_ch07_breather_002,ac_mera_holt,Mera,The dead follow the handle. Clear the next corner before you draw them there.,focused,jp,,not_recorded
+ac_ch07_breather_003,ac_tovin_reed,Tovin,I remember this route. I should have used it.,quiet,jp,,not_recorded
+ac_ch07_clear_001,narrator,Narration,The cart reaches the open gate with no burden to deliver. Tovin keeps both hands on the handle.,composed,jp_narration,,not_recorded
+ac_ch07_clear_002,ac_mera_holt,Mera,We do not know how many were taken to the pit. We write that plainly.,firm,jp,,not_recorded
+ac_ch07_clear_003,jori_flint,Jori,And we stop calling it storage.,quiet,jp,,not_recorded
+ac_ch07_clear_004,ac_tovin_reed,Tovin,Will saying it change what is under there?,quiet,jp,,not_recorded
+ac_ch07_clear_005,ac_mera_holt,Mera,It changes what the next person is told. That is what we can promise.,quiet,jp,,not_recorded
+ac_ch07_clear_006,narrator,Narration,"On the yard map, Mera strikes one word through once. The mark remains readable.",composed,jp_narration,,not_recorded
+ac_ch08_entry_001,narrator,Narration,"The pit holds sacks, broken tools and a shoe with the foot still inside it. Nothing here has a proper place.",composed,jp_narration,,not_recorded
+ac_ch08_entry_002,jori_flint,Jori,No one dumps another load here.,quiet,jp,,not_recorded
+ac_ch08_entry_003,ac_mera_holt,Mera,Markers first. We do not enter until the ground and the dead are safe to approach.,firm,jp,,not_recorded
+ac_ch08_entry_004,ac_tovin_reed,Tovin,I said the shortage would pass if we kept the carts running.,ashamed,jp,,not_recorded
+ac_ch08_entry_005,jori_flint,Jori,The carts kept running. The shortage became people.,stern,jp,,not_recorded
+ac_ch08_entry_006,ac_mera_holt,Mera,There are two kinds of marks on these tools. We may have more than one crew to account for.,focused,jp,,not_recorded
+ac_ch08_entry_007,ac_tovin_reed,Tovin,I will name both. Even the ones who left.,quiet,jp,,not_recorded
+ac_ch08_breather_001,ac_tovin_reed,Tovin,"The gust runs from the kiln to the pit. Watch the hanging cloth, not the dust at your feet.",focused,jp,,not_recorded
+ac_ch08_breather_002,ac_mera_holt,Mera,One spade has a child's height scratched into its shaft. A parent kept count.,quiet,jp,,not_recorded
+ac_ch08_breather_003,jori_flint,Jori,Then keep the spade. Do not make the mark prettier.,firm,jp,,not_recorded
+ac_ch08_clear_001,ac_mera_holt,Mera,"The rim is marked. No names guessed, no bodies moved without a witness.",firm,jp,,not_recorded
+ac_ch08_clear_002,ac_tovin_reed,Tovin,I can remember eleven workers. Not all their families.,quiet,jp,,not_recorded
+ac_ch08_clear_003,jori_flint,Jori,"Then eleven is where we start, not where we stop.",quiet,jp,,not_recorded
+ac_ch08_clear_004,ac_mera_holt,Mera,I will leave the list open. Anyone missing may be written here without proving what they earned.,firm,jp,,not_recorded
+ac_ch08_clear_005,narrator,Narration,The first new sign at the pit forbids a load. The second asks a question: Who is still missing?,composed,jp_narration,,not_recorded
+ac_ch08_clear_006,ac_tovin_reed,Tovin,I should have asked that before there was a pit.,quiet,jp,,not_recorded
+ac_ch09_entry_001,ac_tovin_reed,Tovin,The kiln's lever draws all three gate chains. One pull can close the whole yard.,focused,jp,,not_recorded
+ac_ch09_entry_002,jori_flint,Jori,A prison that calls itself a workplace.,stern,jp,,not_recorded
+ac_ch09_entry_003,ac_mera_holt,Mera,"The clerk has tied the binding to the last chain. Cut the chain, keep the book.",guarded,jp,,not_recorded
+ac_ch09_entry_004,ac_tovin_reed,Tovin,The tender follows the heat vents. It was his last duty.,uneasy,jp,,not_recorded
+ac_ch09_entry_005,jori_flint,Jori,Then we stop feeding the duty. No more charcoal goes in.,firm,jp,,not_recorded
+ac_ch09_entry_006,ac_mera_holt,Mera,Keep every warning line visible. We need our way out as much as the way in.,firm,jp,,not_recorded
+ac_ch09_entry_007,ac_tovin_reed,Tovin,I can open the first link from this side.,quiet,jp,,not_recorded
+ac_ch09_breather_001,ac_mera_holt,Mera,Two chains are free. The last is under the kiln arm.,focused,jp,,not_recorded
+ac_ch09_breather_002,jori_flint,Jori,"Let it sweep. Cross behind it, not under it.",firm,jp,,not_recorded
+ac_ch09_breather_003,ac_tovin_reed,Tovin,The north corner is clear. I have marked it twice.,tense,jp,,not_recorded
+ac_ch09_clear_001,narrator,Narration,The final chain drops. The gates stay open when the kiln arm turns.,composed,jp_narration,,not_recorded
+ac_ch09_clear_002,jori_flint,Jori,A door should not need someone crushed beneath it to remain a door.,quiet,jp,,not_recorded
+ac_ch09_clear_003,ac_mera_holt,Mera,The binding is intact. Most slips are blank; three still carry letters.,focused,jp,,not_recorded
+ac_ch09_clear_004,ac_tovin_reed,Tovin,Will three letters be enough?,quiet,jp,,not_recorded
+ac_ch09_clear_005,ac_mera_holt,Mera,Enough to ask the families. Never enough to decide for them.,firm,jp,,not_recorded
+ac_ch09_clear_006,narrator,Narration,"Beyond the yard, Oakhaven's ordinary lamps become visible through the gap.",composed,jp_narration,,not_recorded
+ac_ch10_entry_001,narrator,Narration,"Mera pins the damaged book beneath a clear board. Beside it, Tovin's account is held open by his own hammer.",composed,jp_narration,,not_recorded
+ac_ch10_entry_002,ac_mera_holt,Mera,"Both stay. The missing names, and the man who helped remove them.",firm,jp,,not_recorded
+ac_ch10_entry_003,ac_tovin_reed,Tovin,I will answer when they come.,quiet,jp,,not_recorded
+ac_ch10_entry_004,jori_flint,Jori,You will also keep the road clear for them.,stern,jp,,not_recorded
+ac_ch10_entry_005,ac_mera_holt,Mera,The last carrier has scraps from every corner of the yard. It keeps bringing the load home.,focused,jp,,not_recorded
+ac_ch10_entry_006,jori_flint,Jori,Then give it no closed gate to lean on.,firm,jp,,not_recorded
+ac_ch10_entry_007,ac_tovin_reed,Tovin,"Three posts. The gate, the shelter, the pit. I will keep a lamp at each.",focused,jp,,not_recorded
+ac_ch10_breather_001,ac_mera_holt,Mera,The posts are standing. The pages will not be washed away tonight.,firm,jp,,not_recorded
+ac_ch10_breather_002,jori_flint,Jori,The carrier is turning back toward the gate. Leave its first sweep room.,tense,jp,,not_recorded
+ac_ch10_breather_003,ac_tovin_reed,Tovin,I will not close it behind you.,firm,jp,,not_recorded
+ac_ch10_clear_001,narrator,Narration,"The last carrier breaks apart on the road. No bell sounds, and no light rises from the pit.",composed,jp_narration,,not_recorded
+ac_ch10_clear_002,ac_tovin_reed,Tovin,I thought there would be a sign.,quiet,jp,,not_recorded
+ac_ch10_clear_003,ac_mera_holt,Mera,There is a road people can use. There is a record they can read. Those are our signs.,quiet,jp,,not_recorded
+ac_ch10_clear_004,jori_flint,Jori,"The dead still need witnesses. The village will send people who remember, not another captain.",firm,jp,,not_recorded
+ac_ch10_clear_005,ac_tovin_reed,Tovin,And until they come?,quiet,jp,,not_recorded
+ac_ch10_clear_006,ac_mera_holt,Mera,We keep the list open.,firm,jp,,not_recorded
+ac_ch10_clear_007,jori_flint,Jori,I have a gate to hold. You have a gate to stop closing.,quiet,jp,,not_recorded
+ac_ch10_clear_008,narrator,Narration,Mera leaves one clean space at the end of the page. It is not a name invented to make the work feel finished.,composed,jp_narration,,not_recorded

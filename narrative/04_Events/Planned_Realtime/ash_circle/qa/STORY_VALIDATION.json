@@ -1,0 +1,11 @@
+{
+  "status": "PASS_CURRENT_STORY_SCHEMA_AND_VM",
+  "scenes": 34,
+  "lines_all_variants": 189,
+  "paths": 36,
+  "save_restore_line_checks": 193,
+  "choice_checks": 3,
+  "checkpoint_restore_checks": 36,
+  "scope": "Current StoryScene and StoryRunner; no media renderer/controller/server event implementation",
+  "runtime_enable_allowed": false
+}

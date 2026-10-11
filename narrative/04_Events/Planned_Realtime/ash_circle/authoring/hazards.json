@@ -1,0 +1,61 @@
+{
+  "hazards": {
+    "shutter": {
+      "shape": "sector",
+      "radius": 140,
+      "warning_ticks": 45,
+      "active_ticks": 12,
+      "cooldown_ticks": 180,
+      "damage": 12,
+      "counter": "leave_the_sector"
+    },
+    "water": {
+      "shape": "strip",
+      "width": 96,
+      "warning_ticks": 60,
+      "active_ticks": 90,
+      "cooldown_ticks": 240,
+      "damage": 0,
+      "slow_percent": 20,
+      "counter": "use_dry_parallel_rim"
+    },
+    "ink": {
+      "shape": "disk",
+      "radius": 48,
+      "warning_ticks": 45,
+      "active_ticks": 60,
+      "cooldown_ticks": 210,
+      "damage": 10,
+      "counter": "leave_sampled_position_before_ink_settles"
+    },
+    "gust": {
+      "shape": "strip",
+      "width": 112,
+      "warning_ticks": 60,
+      "active_ticks": 18,
+      "cooldown_ticks": 240,
+      "damage": 12,
+      "counter": "cross_warning_strip; no_forced_displacement"
+    },
+    "heat": {
+      "shape": "strip",
+      "width": 120,
+      "warning_ticks": 60,
+      "active_ticks": 45,
+      "cooldown_ticks": 270,
+      "damage": 14,
+      "counter": "use_reserved_clear_quadrant"
+    }
+  },
+  "max_concurrent": 3,
+  "safety": {
+    "minimum_warning_ticks": 45,
+    "union_must_leave_reachable_safe_disk_radius": 96,
+    "minimum_escape_gap": 192,
+    "objective_exclusion_radius": 96,
+    "max_directed_enemy_projectiles_during_heat": 8,
+    "failed_safety_check": "delay_hazard_30_ticks_then_skip_after_3_retries",
+    "boss_hazard_priority": "boss_damaging_shape_first; suppress_conflicting_ambient_hazard"
+  },
+  "render": "outline+shape_icon+optional_sound; never_color_only; no_damaging_asset_opacity_zero"
+}

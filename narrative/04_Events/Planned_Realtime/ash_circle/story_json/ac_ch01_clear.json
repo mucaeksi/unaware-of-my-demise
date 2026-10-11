@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch01_clear",
+  "title_en": "The Open Gate: The Record",
+  "location_id": "ac_gate",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_gate"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch01_clear_001",
+      "text": "The carrier falls beside its cart. Under the handle is a small plate, worn smooth on one side."
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_clear_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "A worker's number. No name.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_clear_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "We used numbers to settle loads. It was quicker.",
+      "emotion": "ashamed"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_clear_004",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Quicker for who?",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_clear_005",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "For the man paying us.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_clear_006",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "I will keep the plate. We need the book that gave it a name.",
+      "emotion": "firm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch01_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

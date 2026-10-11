@@ -1,0 +1,280 @@
+{
+  "triggers": [
+    {
+      "scene_id": "ac_opening",
+      "trigger": "first_gate_open",
+      "required_seen": []
+    },
+    {
+      "scene_id": "ac_terms",
+      "trigger": "opening_done",
+      "required_seen": [
+        "ac_opening"
+      ]
+    },
+    {
+      "scene_id": "ac_setback",
+      "trigger": "first_defeat_after_opening",
+      "required_seen": [
+        "ac_terms"
+      ]
+    },
+    {
+      "scene_id": "ac_reconstruction",
+      "trigger": "first_base_chapter10_accepted",
+      "required_seen": [
+        "ac_ch10_clear"
+      ]
+    },
+    {
+      "scene_id": "ac_ch01_entry",
+      "trigger": "first_base_chapter1_entry",
+      "required_seen": [
+        "ac_terms"
+      ]
+    },
+    {
+      "scene_id": "ac_ch01_breather",
+      "trigger": "first_story_attempt_chapter1_tick7200",
+      "required_seen": [
+        "ac_ch01_entry"
+      ],
+      "clock_paused": true,
+      "seen_policy": "per_run_checkpoint; skip_button_after_account_has_seen"
+    },
+    {
+      "scene_id": "ac_ch01_clear",
+      "trigger": "first_base_chapter1_accepted",
+      "required_seen": [
+        "ac_ch01_entry"
+      ],
+      "seen_policy": "account_story_seen; dialogue skip writes final checkpoint"
+    },
+    {
+      "scene_id": "ac_ch02_entry",
+      "trigger": "first_base_chapter2_entry",
+      "required_seen": [
+        "ac_ch01_clear"
+      ]
+    },
+    {
+      "scene_id": "ac_ch02_breather",
+      "trigger": "first_story_attempt_chapter2_tick7200",
+      "required_seen": [
+        "ac_ch02_entry"
+      ],
+      "clock_paused": true,
+      "seen_policy": "per_run_checkpoint; skip_button_after_account_has_seen"
+    },
+    {
+      "scene_id": "ac_ch02_clear",
+      "trigger": "first_base_chapter2_accepted",
+      "required_seen": [
+        "ac_ch02_entry"
+      ],
+      "seen_policy": "account_story_seen; dialogue skip writes final checkpoint"
+    },
+    {
+      "scene_id": "ac_ch03_entry",
+      "trigger": "first_base_chapter3_entry",
+      "required_seen": [
+        "ac_ch02_clear"
+      ]
+    },
+    {
+      "scene_id": "ac_ch03_breather",
+      "trigger": "first_story_attempt_chapter3_tick7200",
+      "required_seen": [
+        "ac_ch03_entry"
+      ],
+      "clock_paused": true,
+      "seen_policy": "per_run_checkpoint; skip_button_after_account_has_seen"
+    },
+    {
+      "scene_id": "ac_ch03_clear",
+      "trigger": "first_base_chapter3_accepted",
+      "required_seen": [
+        "ac_ch03_entry"
+      ],
+      "seen_policy": "account_story_seen; dialogue skip writes final checkpoint"
+    },
+    {
+      "scene_id": "ac_ch04_entry",
+      "trigger": "first_base_chapter4_entry",
+      "required_seen": [
+        "ac_ch03_clear"
+      ]
+    },
+    {
+      "scene_id": "ac_ch04_breather",
+      "trigger": "first_story_attempt_chapter4_tick7200",
+      "required_seen": [
+        "ac_ch04_entry"
+      ],
+      "clock_paused": true,
+      "seen_policy": "per_run_checkpoint; skip_button_after_account_has_seen"
+    },
+    {
+      "scene_id": "ac_ch04_clear",
+      "trigger": "first_base_chapter4_accepted",
+      "required_seen": [
+        "ac_ch04_entry"
+      ],
+      "seen_policy": "account_story_seen; dialogue skip writes final checkpoint"
+    },
+    {
+      "scene_id": "ac_ch05_entry",
+      "trigger": "first_base_chapter5_entry",
+      "required_seen": [
+        "ac_ch04_clear"
+      ]
+    },
+    {
+      "scene_id": "ac_ch05_breather",
+      "trigger": "first_story_attempt_chapter5_tick7200",
+      "required_seen": [
+        "ac_ch05_entry"
+      ],
+      "clock_paused": true,
+      "seen_policy": "per_run_checkpoint; skip_button_after_account_has_seen"
+    },
+    {
+      "scene_id": "ac_ch05_clear",
+      "trigger": "first_base_chapter5_accepted",
+      "required_seen": [
+        "ac_ch05_entry"
+      ],
+      "seen_policy": "account_story_seen; dialogue skip writes final checkpoint"
+    },
+    {
+      "scene_id": "ac_ch06_entry",
+      "trigger": "first_base_chapter6_entry",
+      "required_seen": [
+        "ac_ch05_clear"
+      ]
+    },
+    {
+      "scene_id": "ac_ch06_breather",
+      "trigger": "first_story_attempt_chapter6_tick7200",
+      "required_seen": [
+        "ac_ch06_entry"
+      ],
+      "clock_paused": true,
+      "seen_policy": "per_run_checkpoint; skip_button_after_account_has_seen"
+    },
+    {
+      "scene_id": "ac_ch06_clear",
+      "trigger": "first_base_chapter6_accepted",
+      "required_seen": [
+        "ac_ch06_entry"
+      ],
+      "seen_policy": "account_story_seen; dialogue skip writes final checkpoint"
+    },
+    {
+      "scene_id": "ac_ch07_entry",
+      "trigger": "first_base_chapter7_entry",
+      "required_seen": [
+        "ac_ch06_clear"
+      ]
+    },
+    {
+      "scene_id": "ac_ch07_breather",
+      "trigger": "first_story_attempt_chapter7_tick7200",
+      "required_seen": [
+        "ac_ch07_entry"
+      ],
+      "clock_paused": true,
+      "seen_policy": "per_run_checkpoint; skip_button_after_account_has_seen"
+    },
+    {
+      "scene_id": "ac_ch07_clear",
+      "trigger": "first_base_chapter7_accepted",
+      "required_seen": [
+        "ac_ch07_entry"
+      ],
+      "seen_policy": "account_story_seen; dialogue skip writes final checkpoint"
+    },
+    {
+      "scene_id": "ac_ch08_entry",
+      "trigger": "first_base_chapter8_entry",
+      "required_seen": [
+        "ac_ch07_clear"
+      ]
+    },
+    {
+      "scene_id": "ac_ch08_breather",
+      "trigger": "first_story_attempt_chapter8_tick7200",
+      "required_seen": [
+        "ac_ch08_entry"
+      ],
+      "clock_paused": true,
+      "seen_policy": "per_run_checkpoint; skip_button_after_account_has_seen"
+    },
+    {
+      "scene_id": "ac_ch08_clear",
+      "trigger": "first_base_chapter8_accepted",
+      "required_seen": [
+        "ac_ch08_entry"
+      ],
+      "seen_policy": "account_story_seen; dialogue skip writes final checkpoint"
+    },
+    {
+      "scene_id": "ac_ch09_entry",
+      "trigger": "first_base_chapter9_entry",
+      "required_seen": [
+        "ac_ch08_clear"
+      ]
+    },
+    {
+      "scene_id": "ac_ch09_breather",
+      "trigger": "first_story_attempt_chapter9_tick7200",
+      "required_seen": [
+        "ac_ch09_entry"
+      ],
+      "clock_paused": true,
+      "seen_policy": "per_run_checkpoint; skip_button_after_account_has_seen"
+    },
+    {
+      "scene_id": "ac_ch09_clear",
+      "trigger": "first_base_chapter9_accepted",
+      "required_seen": [
+        "ac_ch09_entry"
+      ],
+      "seen_policy": "account_story_seen; dialogue skip writes final checkpoint"
+    },
+    {
+      "scene_id": "ac_ch10_entry",
+      "trigger": "first_base_chapter10_entry",
+      "required_seen": [
+        "ac_ch09_clear"
+      ]
+    },
+    {
+      "scene_id": "ac_ch10_breather",
+      "trigger": "first_story_attempt_chapter10_tick7200",
+      "required_seen": [
+        "ac_ch10_entry"
+      ],
+      "clock_paused": true,
+      "seen_policy": "per_run_checkpoint; skip_button_after_account_has_seen"
+    },
+    {
+      "scene_id": "ac_ch10_clear",
+      "trigger": "first_base_chapter10_accepted",
+      "required_seen": [
+        "ac_ch10_entry"
+      ],
+      "seen_policy": "account_story_seen; dialogue skip writes final checkpoint"
+    }
+  ],
+  "priority_on_results": [
+    "verification",
+    "progress_transaction",
+    "post_scene",
+    "reconstruction_if_ch10",
+    "result_UI"
+  ],
+  "reconstruction_mode": "rank>0 or already cleared base chapter; breather dialogue optional archival playback, no new canon claim",
+  "choice_binding": "StoryRunner stores option IDs only; controller maps ac_watch_note_* to watch_note; never gate combat on tone choice",
+  "scene_preview": "isolated read-only StoryRunner; never writes run progress or reward claims"
+}

@@ -1,0 +1,81 @@
+{
+  "status": "specification_not_implemented",
+  "tick_rate": 30,
+  "position_quantum": "1/256 world unit integer",
+  "velocity_quantum": "1/256 world unit per tick integer",
+  "hp_and_damage": "integer; round half up after complete effect product; floor damage at 1 after reductions",
+  "coordinates": "positive arena values; squared integer distance; no float trig in gameplay; checked-in integer lookup for heading, boomerang path and spawn angular proposals",
+  "rng": "specified xorshift32 with nonzero seed, unsigned 32-bit operations; stream names spawn, loot, upgrade; derive from session seed with fixed recorded salts; publish vectors before implementation",
+  "ordering": [
+    "apply_validated_inputs",
+    "objective_interaction",
+    "spawn_scheduler",
+    "enemy_intents",
+    "player_casts",
+    "movement_and_clamp",
+    "collision_candidates_sorted_by_actor_ids",
+    "damage_and_iframes",
+    "death_and_xp",
+    "pickup_and_upgrade_offer",
+    "loss_if_hero_dead",
+    "victory_if_boss_killed_and_objectives_done",
+    "objective_deadline_or_boss_timeout_failure_if_not_won",
+    "checkpoint_digest"
+  ],
+  "input": {
+    "movement": "two signed int8 axes; magnitude <=127, quantized controller axis; deterministic normalization via integer lookup",
+    "interaction": "boolean",
+    "boss_focus": "boolean",
+    "upgrade": "card_id belonging to saved offer",
+    "pause": "explicit reason and tick; not an extra free movement input",
+    "delta_max_ticks": 900
+  },
+  "ties": "hero death takes priority over boss death; objective deadline check after that tick interaction; final tick accepts kill if hero alive before timeout failure",
+  "collision": "circle-circle/segment-circle with integer arithmetic and stable entity order; no authoritative Phaser Arcade collision callbacks",
+  "overflow": "apply tuning caps in shared simulation; rejected batch still advances schedule/PRNG with no backlog",
+  "rendering": "Phaser visuals project shared state. Arcade acceptable isolated research/prototype only; renderer collision is not server proof",
+  "input_log_limit": {
+    "max_ticks": 14400,
+    "max_events": 30000,
+    "request_compressed_bytes": 262144,
+    "decompressed_bytes": 2097152,
+    "chunk_events": 1024,
+    "exceed_behavior": "close invalid session with explanation; never silently truncate"
+  },
+  "replay_validation": "headless same shared simulator seeded from server snapshot; compare objective, boss, HP, elapsed tick, upgrade legality, input count and checkpoints; client result never authoritative",
+  "CPU_gate": "full 480s replay and chunk/checkpoint verification benchmark required on selected Cloudflare Worker plan; synchronous 14400-tick replay must not be assumed to fit CPU limits",
+  "verification_fallback": "split deterministic replay via Queue jobs/checkpoints, provisional result until complete; do not replace proof with client score trust",
+  "server_clock": "rate-limit impossible combat-time claims and concurrent sessions; pause durations allowed but do not advance combat",
+  "security_scope": "separate mode endpoint; main BattleSubmission max600 turn actions cannot encode realtime log; no main combat currency/drops/tasks hook",
+  "integer_arithmetic": "positions squared within Number safe range; segment/dot-product cross-products must use BigInt or checked equivalent; never unsafe JS multiplication beyond 2^53-1",
+  "movement_normalization": "axes limited [-127,127]; if squared magnitude >127^2 use ceil_sqrt and integer rescale toward zero to radius<=127; speed/30 per tick, integer remainder carried by actor",
+  "rng_exact": {
+    "algorithm": "xorshift32: x ^= x << 13; x ^= x >>> 17; x ^= x << 5; return x >>> 0",
+    "nonzero_seed": true,
+    "streams_salts_hex": {
+      "spawn": "0x9e3779b9",
+      "loot": "0x85ebca6b",
+      "upgrade": "0xc2b2ae35"
+    },
+    "stream_initial": "seed XOR salt, replace zero with 0x6d2b79f5",
+    "shuffle": "Fisher-Yates descending i=len-1..1; j=nextUint32() % (i+1); fixed algorithm/version, slight modulo bias accepted for nonmonetized draft"
+  },
+  "effect_order": [
+    "base_slot_damage",
+    "support_slot_0.65_if_slot>0",
+    "slot_force_rank",
+    "capped_support_precision_sum",
+    "round_half_up_once",
+    "target_flat_ward_or_contact_brace_if_applicable",
+    "minimum_damage_1"
+  ],
+  "cooldown_rule": "floor(base_ticks*(1-slot_tempo_percent/100)*(1-capped_support_tempo_sum/100)); min12; cast cooldown advances even if pool rejects cast",
+  "reach_rule": "base shape dimensions*(1+slot_reach_percent/100)*(1+capped_support_wide_cast_sum/100); quantize position dimensions round half up; no pierce scaling",
+  "damage_source_rule": "one target hit per cast/hazard activation except boomerang at most once on outgoing and once on return; global hero iframe still applies; expiry of iframe never permits same static hazard activation to hit again",
+  "deadline_order_clarification": "process all damage first; if alive accept same-tick boss death before timeout; objective completion at exact10800 is allowed, then boss transition; otherwise loss",
+  "boss_shapes": "anchor at boss position when warning starts unless fixed arena-axis attack; relative axis line locks then; attack shape is final damage shape; phase change cancels old attacks without damage",
+  "safe_area_check": "shared deterministic reachability approximation or exact test required; boss shapes use same safe-disk check as ambient; no warning may be dropped by cosmetic budget",
+  "progress_migration": "new ranks append stable cell IDs after60; existing highest preserved. Numerical retuning forks simulation_revision, keeps best records separate.",
+  "phase_presentation_pause": "30 ticks-equivalent (1 second presentation) freezes combat tick; renderer/controller countdown then acknowledged resume input. Never count down a paused simulation timer.",
+  "boss_source_ids": "each distinct lunge or damaging pulse receives stable attack activation ID; repeated overlap in one activation cannot deal more damage"
+}

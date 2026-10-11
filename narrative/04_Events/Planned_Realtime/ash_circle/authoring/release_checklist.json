@@ -1,0 +1,55 @@
+{
+  "package_state": "preproduction_complete",
+  "runtime_feature_default": false,
+  "required_client_feature": "realtime_survival_v1",
+  "minimum_client_version": null,
+  "gates": [
+    {
+      "id": "gate_node_mapping",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    },
+    {
+      "id": "strict_survival_schema",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    },
+    {
+      "id": "shared_integer_sim_golden_vectors",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    },
+    {
+      "id": "server_session_replay_D1",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    },
+    {
+      "id": "mobile_lifecycle",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    },
+    {
+      "id": "Android_low_mid_named_soaks",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    },
+    {
+      "id": "sixty_cell_free_roster_balance",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    },
+    {
+      "id": "content_digest_revision_retention",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    },
+    {
+      "id": "approved_media_or_explicit_preview_fallback",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    },
+    {
+      "id": "reward_energy_owner_binding",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    },
+    {
+      "id": "client_backend_compatibility",
+      "status": "PENDING_IMPLEMENTATION_OR_OWNER_DECISION"
+    }
+  ],
+  "content_only_push_opens_mode": false,
+  "normal_main_ci_may_run": true,
+  "deployment_env": "existing main push workflow targets staging; production/runtime enable not claimed"
+}

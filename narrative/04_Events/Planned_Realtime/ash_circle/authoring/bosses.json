@@ -1,0 +1,552 @@
+{
+  "bosses": [
+    {
+      "boss_id": "charcoal_carrier",
+      "name_en": "Charcoal Carrier",
+      "canonical_family": "hollow_pilgrim",
+      "unique_canon_person": false,
+      "hp": 750,
+      "contact_damage": 16,
+      "speed": 58,
+      "arena_id": "ac_charcoal_yard",
+      "phase_thresholds_hp_percent": [
+        100,
+        50
+      ],
+      "phases": [
+        {
+          "hp_below_percent": 100,
+          "sequence": [
+            "warned_lunge",
+            "cart_sector"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "sidestep_then_cross_behind"
+        },
+        {
+          "hp_below_percent": 50,
+          "sequence": [
+            "cart_sector",
+            "warned_lunge"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "sidestep_then_cross_behind"
+        }
+      ],
+      "targeting": "boss is always reachable and damageable; no forced build immunity",
+      "body_radius": 36,
+      "breakbar": null,
+      "timeout_ticks": 3600
+    },
+    {
+      "boss_id": "scale_minder",
+      "name_en": "Scale Minder",
+      "canonical_family": "hollow_pilgrim",
+      "unique_canon_person": false,
+      "hp": 850,
+      "contact_damage": 16,
+      "speed": 58,
+      "arena_id": "ac_charcoal_yard",
+      "phase_thresholds_hp_percent": [
+        100,
+        50
+      ],
+      "phases": [
+        {
+          "hp_below_percent": 100,
+          "sequence": [
+            "parallel_stomp",
+            "counterweight_disk"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "cross_between_two_lanes"
+        },
+        {
+          "hp_below_percent": 50,
+          "sequence": [
+            "counterweight_disk",
+            "parallel_stomp"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "cross_between_two_lanes"
+        }
+      ],
+      "targeting": "boss is always reachable and damageable; no forced build immunity",
+      "body_radius": 36,
+      "breakbar": null,
+      "timeout_ticks": 3600
+    },
+    {
+      "boss_id": "road_hound",
+      "name_en": "Road Hound",
+      "canonical_family": "ash_wolf",
+      "unique_canon_person": false,
+      "hp": 950,
+      "contact_damage": 16,
+      "speed": 92,
+      "arena_id": "ac_charcoal_yard",
+      "phase_thresholds_hp_percent": [
+        100,
+        50
+      ],
+      "phases": [
+        {
+          "hp_below_percent": 100,
+          "sequence": [
+            "two_locked_lunges",
+            "rest_window"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "change_direction_after_first_lunge"
+        },
+        {
+          "hp_below_percent": 50,
+          "sequence": [
+            "rest_window",
+            "two_locked_lunges"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "change_direction_after_first_lunge"
+        }
+      ],
+      "targeting": "boss is always reachable and damageable; no forced build immunity",
+      "body_radius": 36,
+      "breakbar": null,
+      "timeout_ticks": 3600
+    },
+    {
+      "boss_id": "shelter_warden",
+      "name_en": "Shelter Warden",
+      "canonical_family": "orchard_ghoul",
+      "unique_canon_person": false,
+      "hp": 1050,
+      "contact_damage": 16,
+      "speed": 58,
+      "arena_id": "ac_charcoal_yard",
+      "phase_thresholds_hp_percent": [
+        100,
+        50
+      ],
+      "phases": [
+        {
+          "hp_below_percent": 100,
+          "sequence": [
+            "rotating_sector",
+            "rest_window"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "rotate_with_open_side_then_reverse"
+        },
+        {
+          "hp_below_percent": 50,
+          "sequence": [
+            "rest_window",
+            "rotating_sector"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "rotate_with_open_side_then_reverse"
+        }
+      ],
+      "targeting": "boss is always reachable and damageable; no forced build immunity",
+      "body_radius": 36,
+      "breakbar": null,
+      "timeout_ticks": 3600
+    },
+    {
+      "boss_id": "sluice_turner",
+      "name_en": "Sluice Turner",
+      "canonical_family": "hollow_pilgrim",
+      "unique_canon_person": false,
+      "hp": 1150,
+      "contact_damage": 16,
+      "speed": 58,
+      "arena_id": "ac_charcoal_yard",
+      "phase_thresholds_hp_percent": [
+        100,
+        50
+      ],
+      "phases": [
+        {
+          "hp_below_percent": 100,
+          "sequence": [
+            "water_pair",
+            "delayed_disk"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "use_dry_rim_and_leave_mark"
+        },
+        {
+          "hp_below_percent": 50,
+          "sequence": [
+            "delayed_disk",
+            "water_pair"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "use_dry_rim_and_leave_mark"
+        }
+      ],
+      "targeting": "boss is always reachable and damageable; no forced build immunity",
+      "body_radius": 36,
+      "breakbar": null,
+      "timeout_ticks": 3600
+    },
+    {
+      "boss_id": "ledger_clerk",
+      "name_en": "Ledger Clerk",
+      "canonical_family": "inkbound_dead",
+      "unique_canon_person": false,
+      "hp": 1250,
+      "contact_damage": 16,
+      "speed": 58,
+      "arena_id": "ac_charcoal_yard",
+      "phase_thresholds_hp_percent": [
+        100,
+        50
+      ],
+      "phases": [
+        {
+          "hp_below_percent": 100,
+          "sequence": [
+            "three_sampled_ink",
+            "rest_window"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "avoid_retracing_last_positions"
+        },
+        {
+          "hp_below_percent": 50,
+          "sequence": [
+            "rest_window",
+            "three_sampled_ink"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "avoid_retracing_last_positions"
+        }
+      ],
+      "targeting": "boss is always reachable and damageable; no forced build immunity",
+      "body_radius": 36,
+      "breakbar": null,
+      "timeout_ticks": 3600
+    },
+    {
+      "boss_id": "cart_hauler",
+      "name_en": "Cart Hauler",
+      "canonical_family": "orchard_ghoul",
+      "unique_canon_person": false,
+      "hp": 1350,
+      "contact_damage": 16,
+      "speed": 58,
+      "arena_id": "ac_charcoal_yard",
+      "phase_thresholds_hp_percent": [
+        100,
+        50
+      ],
+      "phases": [
+        {
+          "hp_below_percent": 100,
+          "sequence": [
+            "cart_sector",
+            "summon_front"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "clear_next_route_without_body_blocking"
+        },
+        {
+          "hp_below_percent": 50,
+          "sequence": [
+            "summon_front",
+            "cart_sector"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "clear_next_route_without_body_blocking"
+        }
+      ],
+      "targeting": "boss is always reachable and damageable; no forced build immunity",
+      "body_radius": 36,
+      "breakbar": null,
+      "timeout_ticks": 3600
+    },
+    {
+      "boss_id": "pit_digger",
+      "name_en": "Pit Digger",
+      "canonical_family": "orchard_ghoul",
+      "unique_canon_person": false,
+      "hp": 1450,
+      "contact_damage": 16,
+      "speed": 58,
+      "arena_id": "ac_charcoal_yard",
+      "phase_thresholds_hp_percent": [
+        100,
+        50
+      ],
+      "phases": [
+        {
+          "hp_below_percent": 100,
+          "sequence": [
+            "gust_strip",
+            "delayed_disk"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "cross_gust_before_commitment"
+        },
+        {
+          "hp_below_percent": 50,
+          "sequence": [
+            "delayed_disk",
+            "gust_strip"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "cross_gust_before_commitment"
+        }
+      ],
+      "targeting": "boss is always reachable and damageable; no forced build immunity",
+      "body_radius": 36,
+      "breakbar": null,
+      "timeout_ticks": 3600
+    },
+    {
+      "boss_id": "kiln_tender",
+      "name_en": "Kiln Tender",
+      "canonical_family": "hollow_cleric",
+      "unique_canon_person": false,
+      "hp": 1550,
+      "contact_damage": 16,
+      "speed": 58,
+      "arena_id": "ac_charcoal_yard",
+      "phase_thresholds_hp_percent": [
+        100,
+        50
+      ],
+      "phases": [
+        {
+          "hp_below_percent": 100,
+          "sequence": [
+            "heat_cross",
+            "rest_window"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "move_to_reserved_safe_quadrant"
+        },
+        {
+          "hp_below_percent": 50,
+          "sequence": [
+            "rest_window",
+            "heat_cross"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "move_to_reserved_safe_quadrant"
+        }
+      ],
+      "targeting": "boss is always reachable and damageable; no forced build immunity",
+      "body_radius": 36,
+      "breakbar": null,
+      "timeout_ticks": 3600
+    },
+    {
+      "boss_id": "last_load",
+      "name_en": "The Last Load",
+      "canonical_family": "hollow_pilgrim",
+      "unique_canon_person": false,
+      "hp": 1650,
+      "contact_damage": 16,
+      "speed": 58,
+      "arena_id": "ac_charcoal_yard",
+      "phase_thresholds_hp_percent": [
+        100,
+        66,
+        33
+      ],
+      "phases": [
+        {
+          "hp_below_percent": 100,
+          "sequence": [
+            "parallel_stomp",
+            "rest_window"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "read_phase_shape_and_keep_exit"
+        },
+        {
+          "hp_below_percent": 66,
+          "sequence": [
+            "three_sampled_ink",
+            "rest_window"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "read_phase_shape_and_keep_exit"
+        },
+        {
+          "hp_below_percent": 33,
+          "sequence": [
+            "heat_cross",
+            "rest_window"
+          ],
+          "ambient_hazards_enabled": false,
+          "hp_refill": false,
+          "phase_change_pause_ticks": 30,
+          "counterplay": "read_phase_shape_and_keep_exit"
+        }
+      ],
+      "targeting": "boss is always reachable and damageable; no forced build immunity",
+      "body_radius": 36,
+      "breakbar": null,
+      "timeout_ticks": 3600
+    }
+  ],
+  "attack_profiles": {
+    "warned_lunge": {
+      "warning_ticks": 45,
+      "active_ticks": 18,
+      "recovery_ticks": 36,
+      "range": 260,
+      "width": 56,
+      "damage": 16,
+      "aim": "lock_at_warning_start"
+    },
+    "cart_sector": {
+      "warning_ticks": 60,
+      "active_ticks": 12,
+      "recovery_ticks": 42,
+      "radius": 180,
+      "arc_deg": 90,
+      "damage": 18,
+      "aim": "lock_at_warning_start"
+    },
+    "parallel_stomp": {
+      "warning_ticks": 60,
+      "active_ticks": 15,
+      "recovery_ticks": 45,
+      "width": 96,
+      "lane_separation": 256,
+      "damage": 16,
+      "aim": "arena_axis_no_tracking"
+    },
+    "counterweight_disk": {
+      "warning_ticks": 60,
+      "active_ticks": 15,
+      "recovery_ticks": 45,
+      "radius": 80,
+      "damage": 18,
+      "aim": "hero_sample_at_warning_start"
+    },
+    "two_locked_lunges": {
+      "warning_ticks": 45,
+      "active_ticks": 15,
+      "recovery_ticks": 45,
+      "second_warning_ticks": 45,
+      "second_active_ticks": 15,
+      "range": 220,
+      "width": 56,
+      "damage": 15,
+      "aim": "new_locked_sample_each_lunge"
+    },
+    "rest_window": {
+      "warning_ticks": 0,
+      "active_ticks": 0,
+      "recovery_ticks": 90,
+      "damage": 0,
+      "aim": "none"
+    },
+    "rotating_sector": {
+      "warning_ticks": 60,
+      "active_ticks": 30,
+      "recovery_ticks": 45,
+      "radius": 180,
+      "arc_deg": 120,
+      "damage": 18,
+      "aim": "fixed_sweep_origin; angular_path_visible_in_warning"
+    },
+    "water_pair": {
+      "warning_ticks": 60,
+      "active_ticks": 90,
+      "recovery_ticks": 45,
+      "width": 96,
+      "lane_separation": 256,
+      "damage": 0,
+      "slow_percent": 20,
+      "aim": "fixed_axis"
+    },
+    "delayed_disk": {
+      "warning_ticks": 60,
+      "active_ticks": 15,
+      "recovery_ticks": 45,
+      "radius": 80,
+      "damage": 18,
+      "aim": "hero_sample_at_warning_start"
+    },
+    "three_sampled_ink": {
+      "warning_ticks": 60,
+      "active_ticks": 60,
+      "recovery_ticks": 60,
+      "samples_interval_ticks": 15,
+      "radius": 48,
+      "damage": 12,
+      "aim": "three_past_positions; one_combined_damage_source_per_tick"
+    },
+    "summon_front": {
+      "warning_ticks": 60,
+      "active_ticks": 1,
+      "recovery_ticks": 60,
+      "spawn_count": 8,
+      "damage": 0,
+      "aim": "far_portal_placement_rules; consumes_live_budget"
+    },
+    "gust_strip": {
+      "warning_ticks": 60,
+      "active_ticks": 18,
+      "recovery_ticks": 45,
+      "width": 112,
+      "damage": 16,
+      "aim": "fixed_kiln_to_pit_line"
+    },
+    "heat_cross": {
+      "warning_ticks": 75,
+      "active_ticks": 45,
+      "recovery_ticks": 60,
+      "width": 120,
+      "damage": 18,
+      "aim": "two_perpendicular_strips; safe_quadrant_reserved"
+    }
+  },
+  "interpretation": "New role names for yard enemies; not repeated named main-story bosses."
+}

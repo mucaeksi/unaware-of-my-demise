@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_setback",
+  "title_en": "Back Through the Gate",
+  "location_id": "ac_gate",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_gate"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_setback_001",
+      "text": "Mera moves the lamp to the gate. The chalk marks beyond it are still where she left them."
+    },
+    {
+      "op": "say",
+      "line_id": "ac_setback_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "We withdraw before another name has to be added to the missing.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_setback_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "Did we lose the whole route?",
+      "emotion": "uneasy"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_setback_004",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "No. We lost this attempt. We know the way back in.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_setback_005",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The record stays. Rest, change what you carry, and begin this part again.",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_setback_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch05_entry",
+  "title_en": "Under the Black Water",
+  "location_id": "ac_cistern",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_cistern"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_entry_001",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The cistern drains below the storage pit. If we empty it, the boards may still be there.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_entry_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Paper will not survive that water.",
+      "emotion": "guarded"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_entry_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Then we save the wood it was nailed to.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_entry_004",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "Three handles. The middle one opens both channels if you turn it first.",
+      "emotion": "uneasy"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_entry_005",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Left, right, middle. I have marked them.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_entry_006",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "And if the marks wash away?",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_entry_007",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I stay here and call the order.",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch05_entry_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

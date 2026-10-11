@@ -1,0 +1,74 @@
+{
+  "generated_in_this_task": false,
+  "paid_calls": 0,
+  "arena": {
+    "count": 1,
+    "world_size": [
+      4096,
+      3072
+    ],
+    "tiles": "512-square tiles, max 2048 atlas textures; layer crop/cull; no giant unprofiled full RGBA texture",
+    "landmark_overlays": 9,
+    "geometry_identical": true
+  },
+  "enemy_atlas_families": [
+    "hollow_pilgrim",
+    "ash_wolf",
+    "orchard_ghoul",
+    "hollow_cleric",
+    "inkbound_dead"
+  ],
+  "boss_silhouettes": {
+    "count": 10,
+    "base_families": 5,
+    "approach": "derived elite silhouettes + unique readable props; not ten paid bespoke skeletons"
+  },
+  "hero_views": {
+    "canonical_count": 20,
+    "approach": "reuse approved chibi source if available; directional movement slices required; no assumption existing portrait is a movement rig"
+  },
+  "NPC_portraits": {
+    "optional": 2,
+    "ids": [
+      "ac_mera_holt",
+      "ac_tovin_reed"
+    ],
+    "text_only_fallback": true
+  },
+  "VN_background_ids": [
+    "ac_cart",
+    "ac_cistern",
+    "ac_dispatch",
+    "ac_gate",
+    "ac_kiln",
+    "ac_ledger",
+    "ac_pit",
+    "ac_shelter",
+    "ac_weighbridge"
+  ],
+  "VN_background_approach": "crops from same approved arena painting with safe readable horizon; do not charge as nine distinct arenas",
+  "music": [
+    {
+      "id": "ac_work",
+      "loop": "one original low-density yard theme; boss stems optional"
+    }
+  ],
+  "sfx": [
+    "spawn_warning",
+    "hazard_warning",
+    "auto_cast_family_6",
+    "contact",
+    "pickup",
+    "upgrade",
+    "boss_phase",
+    "objective_complete"
+  ],
+  "VO": {
+    "english_source_lines": 189,
+    "japanese_translation": "not_produced",
+    "recording": "not_produced",
+    "only_story_voice": "no constant combat chatter; VN pauses combat"
+  },
+  "production_budget": "existing project approved monthly limit; estimate and approve actual batch within owner budget before paid production",
+  "art_direction": "gothic anime, charcoal/iron/copper palette, readable low chibi silhouettes; no borrowed Survivors assets, names, UI, maps, weapon combinations"
+}

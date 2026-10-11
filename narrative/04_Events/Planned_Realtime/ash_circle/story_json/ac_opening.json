@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_opening",
+  "title_en": "An Open Space on the Map",
+  "location_id": "ac_gate",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_gate"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_opening_001",
+      "text": "On returning to Oakhaven, Jori finds a supply cart waiting outside the gate. Its driver will not cross the charcoal yard."
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_opening_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "The captain is gone. Why is the road still empty?",
+      "emotion": "tense"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_opening_003",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The captain was not the first reason it emptied.",
+      "emotion": "guarded"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_opening_004",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The yard has its own dead. We kept working around them until there was no way through.",
+      "emotion": "uneasy"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_opening_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "And you waited for the village to notice?",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_opening_006",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I waited for someone else to sign the closure.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_opening_007",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "I brought the old survey. One yard, ten places we have to account for.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_opening_008",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "We open the road, keep the records, and leave the dead to people who can truly witness them.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_opening_009",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "That is all I am asking. It is already more than anyone has promised us.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_opening_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

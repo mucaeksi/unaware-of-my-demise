@@ -1,0 +1,71 @@
+{
+  "patterns": {
+    "approach": {
+      "portal_angles_deg": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "active_portals": 1
+    },
+    "fan": {
+      "portal_angles_deg": [
+        0,
+        45,
+        90
+      ],
+      "active_portals": 2
+    },
+    "parallel": {
+      "portal_angles_deg": [
+        90,
+        270
+      ],
+      "active_portals": 2,
+      "lanes_separation": 224
+    },
+    "pincer": {
+      "portal_angles_deg": [
+        0,
+        180
+      ],
+      "active_portals": 2,
+      "open_axes_deg": [
+        90,
+        270
+      ]
+    },
+    "orbit": {
+      "portal_angles_deg": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "active_portals": 2,
+      "rotation_period_ticks": 180
+    },
+    "front_arc": {
+      "relative_to": "cart_heading",
+      "portal_angles_deg": [
+        -45,
+        0,
+        45
+      ],
+      "active_portals": 2
+    },
+    "rear_arc": {
+      "relative_to": "cart_heading",
+      "portal_angles_deg": [
+        135,
+        180,
+        225
+      ],
+      "active_portals": 2
+    }
+  },
+  "placement_contract": "angles propose portals, not unconditional coordinates; arena spawn checks always apply; no viewport enclosure ring",
+  "heading_fallback": "chapter7 cart heading; other chapters hero last nonzero quantized movement heading, north if none; lock at warning start",
+  "batch_order": "portals stable clockwise, enemy IDs monotonic, integer PRNG state advances even when placement rejected"
+}

@@ -1,0 +1,80 @@
+{
+  "weapons": {
+    "rivet": {
+      "name_en": "Rivet Guard",
+      "kind": "sector_melee",
+      "damage": 10,
+      "cooldown_ticks": 30,
+      "range": 112,
+      "arc_deg": 100,
+      "pierce": 6,
+      "ttl_ticks": 1,
+      "theme": "Stone"
+    },
+    "cinder": {
+      "name_en": "Cinder Flask",
+      "kind": "lob_disk",
+      "damage": 7,
+      "cooldown_ticks": 45,
+      "range": 280,
+      "radius": 48,
+      "pierce": 5,
+      "ttl_ticks": 30,
+      "theme": "Ember"
+    },
+    "needle": {
+      "name_en": "Wind Needle",
+      "kind": "straight_projectile",
+      "damage": 8,
+      "cooldown_ticks": 21,
+      "range": 450,
+      "speed": 360,
+      "pierce": 1,
+      "ttl_ticks": 38,
+      "theme": "Gale"
+    },
+    "script": {
+      "name_en": "Witness Mark",
+      "kind": "target_disk",
+      "damage": 8,
+      "cooldown_ticks": 42,
+      "range": 300,
+      "radius": 42,
+      "pierce": 5,
+      "ttl_ticks": 18,
+      "theme": "Dawn"
+    },
+    "mist": {
+      "name_en": "Returning Mist",
+      "kind": "boomerang",
+      "damage": 6,
+      "cooldown_ticks": 33,
+      "range": 250,
+      "speed": 240,
+      "pierce": 3,
+      "ttl_ticks": 60,
+      "theme": "Tide"
+    },
+    "thread": {
+      "name_en": "Shadow Thread",
+      "kind": "line_beam",
+      "damage": 9,
+      "cooldown_ticks": 36,
+      "range": 330,
+      "width": 32,
+      "pierce": 4,
+      "ttl_ticks": 1,
+      "theme": "Veil"
+    }
+  },
+  "auto_target": {
+    "selector": "nearest_threat_then_lowest_spawn_id",
+    "lock": "at_cast_tick",
+    "offscreen_targeting": "within_camera_view_expanded_96",
+    "boss_priority": "only_if_nearest; player may enable boss_focus_toggle",
+    "no_target": "skip_cast_without_projectile"
+  },
+  "support_baseline_damage_multiplier": 0.65,
+  "damage_rule": "each cast deals once per enemy per pass; boomerang max 2 passes; no per-frame disk or beam damage",
+  "balance": "normalized_initial_proto_not_certified"
+}

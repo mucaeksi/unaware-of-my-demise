@@ -1,0 +1,1726 @@
+{
+  "chapters": [
+    {
+      "chapter": 1,
+      "chapter_id": "ac_ch01",
+      "title_en": "The Open Gate",
+      "title_tr": "Açık Kapı",
+      "arena_id": "ac_charcoal_yard",
+      "start_position": [
+        2048,
+        512
+      ],
+      "requires": {
+        "story_after_stage": "4-5",
+        "highest_base_chapter": 0
+      },
+      "combat_clock_ticks": 14400,
+      "duration_seconds": 480,
+      "boss_start_tick": 10800,
+      "breather_tick": 7200,
+      "scenes": {
+        "entry": "ac_ch01_entry",
+        "breather": "ac_ch01_breather",
+        "clear": "ac_ch01_clear"
+      },
+      "objective": {
+        "objective_id": "trail_marks",
+        "kind": "ordered_interactions",
+        "count": 3,
+        "positions": [
+          [
+            2048,
+            512
+          ],
+          [
+            1000,
+            1000
+          ],
+          [
+            3160,
+            850
+          ]
+        ],
+        "available_tick_by_stage": [
+          0,
+          3600,
+          7200
+        ],
+        "interaction_ticks": 30,
+        "must_hold_button": true,
+        "movement_or_damage_cancels": true,
+        "deadline_tick": 10800,
+        "failure": "objective_incomplete_at_boss_start_ends_attempt",
+        "progress": "run_local_reset_on_new_attempt",
+        "boss_gate": "all_objective_stages_complete"
+      },
+      "briefing_en": "The yard was meant to keep the carts moving. Someone shut its gate from the inside.",
+      "hint_en": "Three chalk marks lead from the gate to the weighbridge. Follow them before the ash covers them.",
+      "objective_en": "Clear the chalk trail.",
+      "gameplay_intent_tr": "Tebeşir işaretlerini topla; geçit boyunca geri dön. İlk koşu hareket ve otomatik saldırıyı öğretir.",
+      "waves": [
+        {
+          "phase": 1,
+          "start_tick": 0,
+          "end_tick": 1800,
+          "batch_interval_ticks": 180,
+          "batch_size": 3,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "Tanıştır; rotayı gör."
+        },
+        {
+          "phase": 2,
+          "start_tick": 1800,
+          "end_tick": 3600,
+          "batch_interval_ticks": 180,
+          "batch_size": 3,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "İlk hat yön değişimi."
+        },
+        {
+          "phase": 3,
+          "start_tick": 3600,
+          "end_tick": 5400,
+          "batch_interval_ticks": 180,
+          "batch_size": 4,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "İkinci işaret ve elit baskısı."
+        },
+        {
+          "phase": 4,
+          "start_tick": 5400,
+          "end_tick": 7200,
+          "batch_interval_ticks": 180,
+          "batch_size": 4,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "Okuma arası sonrası açı değişimi."
+        },
+        {
+          "phase": 5,
+          "start_tick": 7200,
+          "end_tick": 9000,
+          "batch_interval_ticks": 180,
+          "batch_size": 5,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Son işaret, yol planlama."
+        },
+        {
+          "phase": 6,
+          "start_tick": 9000,
+          "end_tick": 10800,
+          "batch_interval_ticks": 180,
+          "batch_size": 5,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Boss öncesi açık kaçış yönünü koru."
+        }
+      ],
+      "boss_id": "charcoal_carrier",
+      "base_enemy_hp_multiplier": 1.0,
+      "base_enemy_damage_multiplier": 1.0,
+      "balance_status": "prototype_values_unplaytested",
+      "victory": "objective_complete AND boss_killed_before_tick_14400 AND hero_hp_above_zero",
+      "boss_transition": {
+        "despawn_regulars_without_xp": true,
+        "collect_existing_xp_then_remove": true,
+        "pause_clock_telegraph_ticks": 45,
+        "boss_first_attack_delay_ticks": 60,
+        "objectives_frozen": true
+      }
+    },
+    {
+      "chapter": 2,
+      "chapter_id": "ac_ch02",
+      "title_en": "Weight Without Names",
+      "title_tr": "İsimsiz Tartı",
+      "arena_id": "ac_charcoal_yard",
+      "start_position": [
+        1000,
+        1000
+      ],
+      "requires": {
+        "highest_base_chapter": 1
+      },
+      "combat_clock_ticks": 14400,
+      "duration_seconds": 480,
+      "boss_start_tick": 10800,
+      "breather_tick": 7200,
+      "scenes": {
+        "entry": "ac_ch02_entry",
+        "breather": "ac_ch02_breather",
+        "clear": "ac_ch02_clear"
+      },
+      "objective": {
+        "objective_id": "scale_plates",
+        "kind": "ordered_interactions",
+        "count": 3,
+        "positions": [
+          [
+            1000,
+            1000
+          ],
+          [
+            1500,
+            1000
+          ],
+          [
+            2048,
+            512
+          ]
+        ],
+        "available_tick_by_stage": [
+          0,
+          3600,
+          7200
+        ],
+        "interaction_ticks": 30,
+        "must_hold_button": true,
+        "movement_or_damage_cancels": true,
+        "deadline_tick": 10800,
+        "failure": "objective_incomplete_at_boss_start_ends_attempt",
+        "progress": "run_local_reset_on_new_attempt",
+        "boss_gate": "all_objective_stages_complete"
+      },
+      "briefing_en": "The weighbridge counted every load and no one who carried it.",
+      "hint_en": "Three loose plates remain. Keep moving across the lanes; a straight retreat leads into the next line.",
+      "objective_en": "Recover the scale plates.",
+      "gameplay_intent_tr": "Üç tartı levhasını farklı yaklaşım yönlerinden topla; paralel düşman hatlarının arasından geç.",
+      "waves": [
+        {
+          "phase": 1,
+          "start_tick": 0,
+          "end_tick": 1800,
+          "batch_interval_ticks": 180,
+          "batch_size": 4,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "parallel",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "Tanıştır; rotayı gör."
+        },
+        {
+          "phase": 2,
+          "start_tick": 1800,
+          "end_tick": 3600,
+          "batch_interval_ticks": 180,
+          "batch_size": 4,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "İlk hat yön değişimi."
+        },
+        {
+          "phase": 3,
+          "start_tick": 3600,
+          "end_tick": 5400,
+          "batch_interval_ticks": 180,
+          "batch_size": 5,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "parallel",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "İkinci işaret ve elit baskısı."
+        },
+        {
+          "phase": 4,
+          "start_tick": 5400,
+          "end_tick": 7200,
+          "batch_interval_ticks": 180,
+          "batch_size": 5,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "Okuma arası sonrası açı değişimi."
+        },
+        {
+          "phase": 5,
+          "start_tick": 7200,
+          "end_tick": 9000,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "parallel",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Son işaret, yol planlama."
+        },
+        {
+          "phase": 6,
+          "start_tick": 9000,
+          "end_tick": 10800,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Boss öncesi açık kaçış yönünü koru."
+        }
+      ],
+      "boss_id": "scale_minder",
+      "base_enemy_hp_multiplier": 1.06,
+      "base_enemy_damage_multiplier": 1.025,
+      "balance_status": "prototype_values_unplaytested",
+      "victory": "objective_complete AND boss_killed_before_tick_14400 AND hero_hp_above_zero",
+      "boss_transition": {
+        "despawn_regulars_without_xp": true,
+        "collect_existing_xp_then_remove": true,
+        "pause_clock_telegraph_ticks": 45,
+        "boss_first_attack_delay_ticks": 60,
+        "objectives_frozen": true
+      }
+    },
+    {
+      "chapter": 3,
+      "chapter_id": "ac_ch03",
+      "title_en": "The Route That Changed",
+      "title_tr": "Değiştirilen Yol",
+      "arena_id": "ac_charcoal_yard",
+      "start_position": [
+        3160,
+        850
+      ],
+      "requires": {
+        "highest_base_chapter": 2
+      },
+      "combat_clock_ticks": 14400,
+      "duration_seconds": 480,
+      "boss_start_tick": 10800,
+      "breather_tick": 7200,
+      "scenes": {
+        "entry": "ac_ch03_entry",
+        "breather": "ac_ch03_breather",
+        "clear": "ac_ch03_clear"
+      },
+      "objective": {
+        "objective_id": "dispatch_tags",
+        "kind": "ordered_interactions",
+        "count": 3,
+        "positions": [
+          [
+            3160,
+            850
+          ],
+          [
+            3200,
+            2100
+          ],
+          [
+            2048,
+            512
+          ]
+        ],
+        "available_tick_by_stage": [
+          0,
+          3600,
+          7200
+        ],
+        "interaction_ticks": 30,
+        "must_hold_button": true,
+        "movement_or_damage_cancels": true,
+        "deadline_tick": 10800,
+        "failure": "objective_incomplete_at_boss_start_ends_attempt",
+        "progress": "run_local_reset_on_new_attempt",
+        "boss_gate": "all_objective_stages_complete"
+      },
+      "briefing_en": "The dispatch tags sent the last carts back into the yard.",
+      "hint_en": "Recover the tags along the outer road. The wolves close from two sides; turn through the open third.",
+      "objective_en": "Recover the dispatch tags.",
+      "gameplay_intent_tr": "Eski sevk etiketlerini güney-doğu-kuzey rotasında al; kurt kıskacında yön değiştir.",
+      "waves": [
+        {
+          "phase": 1,
+          "start_tick": 0,
+          "end_tick": 1800,
+          "batch_interval_ticks": 180,
+          "batch_size": 4,
+          "family_weights": {
+            "ash_wolf": 3,
+            "hollow_pilgrim": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "Tanıştır; rotayı gör."
+        },
+        {
+          "phase": 2,
+          "start_tick": 1800,
+          "end_tick": 3600,
+          "batch_interval_ticks": 180,
+          "batch_size": 4,
+          "family_weights": {
+            "ash_wolf": 3,
+            "hollow_pilgrim": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "İlk hat yön değişimi."
+        },
+        {
+          "phase": 3,
+          "start_tick": 3600,
+          "end_tick": 5400,
+          "batch_interval_ticks": 180,
+          "batch_size": 5,
+          "family_weights": {
+            "ash_wolf": 3,
+            "hollow_pilgrim": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "İkinci işaret ve elit baskısı."
+        },
+        {
+          "phase": 4,
+          "start_tick": 5400,
+          "end_tick": 7200,
+          "batch_interval_ticks": 180,
+          "batch_size": 5,
+          "family_weights": {
+            "ash_wolf": 3,
+            "hollow_pilgrim": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "Okuma arası sonrası açı değişimi."
+        },
+        {
+          "phase": 5,
+          "start_tick": 7200,
+          "end_tick": 9000,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "ash_wolf": 3,
+            "hollow_pilgrim": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Son işaret, yol planlama."
+        },
+        {
+          "phase": 6,
+          "start_tick": 9000,
+          "end_tick": 10800,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "ash_wolf": 3,
+            "hollow_pilgrim": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Boss öncesi açık kaçış yönünü koru."
+        }
+      ],
+      "boss_id": "road_hound",
+      "base_enemy_hp_multiplier": 1.12,
+      "base_enemy_damage_multiplier": 1.05,
+      "balance_status": "prototype_values_unplaytested",
+      "victory": "objective_complete AND boss_killed_before_tick_14400 AND hero_hp_above_zero",
+      "boss_transition": {
+        "despawn_regulars_without_xp": true,
+        "collect_existing_xp_then_remove": true,
+        "pause_clock_telegraph_ticks": 45,
+        "boss_first_attack_delay_ticks": 60,
+        "objectives_frozen": true
+      }
+    },
+    {
+      "chapter": 4,
+      "chapter_id": "ac_ch04",
+      "title_en": "A Borrowed Dry Place",
+      "title_tr": "Geçici Kuru Yer",
+      "arena_id": "ac_charcoal_yard",
+      "start_position": [
+        3200,
+        2100
+      ],
+      "requires": {
+        "highest_base_chapter": 3
+      },
+      "combat_clock_ticks": 14400,
+      "duration_seconds": 480,
+      "boss_start_tick": 10800,
+      "breather_tick": 7200,
+      "scenes": {
+        "entry": "ac_ch04_entry",
+        "breather": "ac_ch04_breather",
+        "clear": "ac_ch04_clear"
+      },
+      "objective": {
+        "objective_id": "shelter_latches",
+        "kind": "ordered_interactions",
+        "count": 3,
+        "positions": [
+          [
+            3200,
+            2100
+          ],
+          [
+            2800,
+            2100
+          ],
+          [
+            3160,
+            850
+          ]
+        ],
+        "available_tick_by_stage": [
+          0,
+          3600,
+          7200
+        ],
+        "interaction_ticks": 30,
+        "must_hold_button": true,
+        "movement_or_damage_cancels": true,
+        "deadline_tick": 10800,
+        "failure": "objective_incomplete_at_boss_start_ends_attempt",
+        "progress": "run_local_reset_on_new_attempt",
+        "boss_gate": "all_objective_stages_complete"
+      },
+      "briefing_en": "The shelter was locked to protect the stock from the rain.",
+      "hint_en": "Release its three latches. Circle the shelter without standing in the sweep of the broken shutter.",
+      "objective_en": "Open the shelter latches.",
+      "gameplay_intent_tr": "Çevredeki üç sığınak mandalını aç; merkez etrafında dönen tehdide tek yönde bağımlı kalma.",
+      "waves": [
+        {
+          "phase": 1,
+          "start_tick": 0,
+          "end_tick": 1800,
+          "batch_interval_ticks": 180,
+          "batch_size": 5,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "orbit",
+          "ambient_hazard_ids": [
+            "shutter"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "Tanıştır; rotayı gör."
+        },
+        {
+          "phase": 2,
+          "start_tick": 1800,
+          "end_tick": 3600,
+          "batch_interval_ticks": 180,
+          "batch_size": 5,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [
+            "shutter"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "İlk hat yön değişimi."
+        },
+        {
+          "phase": 3,
+          "start_tick": 3600,
+          "end_tick": 5400,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "orbit",
+          "ambient_hazard_ids": [
+            "shutter"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "İkinci işaret ve elit baskısı."
+        },
+        {
+          "phase": 4,
+          "start_tick": 5400,
+          "end_tick": 7200,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [
+            "shutter"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "Okuma arası sonrası açı değişimi."
+        },
+        {
+          "phase": 5,
+          "start_tick": 7200,
+          "end_tick": 9000,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "orbit",
+          "ambient_hazard_ids": [
+            "shutter"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Son işaret, yol planlama."
+        },
+        {
+          "phase": 6,
+          "start_tick": 9000,
+          "end_tick": 10800,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [
+            "shutter"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Boss öncesi açık kaçış yönünü koru."
+        }
+      ],
+      "boss_id": "shelter_warden",
+      "base_enemy_hp_multiplier": 1.18,
+      "base_enemy_damage_multiplier": 1.075,
+      "balance_status": "prototype_values_unplaytested",
+      "victory": "objective_complete AND boss_killed_before_tick_14400 AND hero_hp_above_zero",
+      "boss_transition": {
+        "despawn_regulars_without_xp": true,
+        "collect_existing_xp_then_remove": true,
+        "pause_clock_telegraph_ticks": 45,
+        "boss_first_attack_delay_ticks": 60,
+        "objectives_frozen": true
+      }
+    },
+    {
+      "chapter": 5,
+      "chapter_id": "ac_ch05",
+      "title_en": "Under the Black Water",
+      "title_tr": "Kara Suyun Altı",
+      "arena_id": "ac_charcoal_yard",
+      "start_position": [
+        1000,
+        2250
+      ],
+      "requires": {
+        "highest_base_chapter": 4
+      },
+      "combat_clock_ticks": 14400,
+      "duration_seconds": 480,
+      "boss_start_tick": 10800,
+      "breather_tick": 7200,
+      "scenes": {
+        "entry": "ac_ch05_entry",
+        "breather": "ac_ch05_breather",
+        "clear": "ac_ch05_clear"
+      },
+      "objective": {
+        "objective_id": "drain_handles",
+        "kind": "ordered_interactions",
+        "count": 3,
+        "positions": [
+          [
+            1000,
+            2250
+          ],
+          [
+            1000,
+            1000
+          ],
+          [
+            2048,
+            2480
+          ]
+        ],
+        "available_tick_by_stage": [
+          0,
+          3600,
+          7200
+        ],
+        "interaction_ticks": 30,
+        "must_hold_button": true,
+        "movement_or_damage_cancels": true,
+        "deadline_tick": 10800,
+        "failure": "objective_incomplete_at_boss_start_ends_attempt",
+        "progress": "run_local_reset_on_new_attempt",
+        "boss_gate": "all_objective_stages_complete"
+      },
+      "briefing_en": "Runoff has reached the old name boards.",
+      "hint_en": "Turn the drain handles in their marked order. The dark water slows your feet; the pale rim stays clear.",
+      "objective_en": "Drain the cistern channels.",
+      "gameplay_intent_tr": "Üç sabit tahliye kolunu sırayla çevir; su şeritlerinin değişen güvenli tarafını kullan.",
+      "waves": [
+        {
+          "phase": 1,
+          "start_tick": 0,
+          "end_tick": 1800,
+          "batch_interval_ticks": 180,
+          "batch_size": 5,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [
+            "water"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "Tanıştır; rotayı gör."
+        },
+        {
+          "phase": 2,
+          "start_tick": 1800,
+          "end_tick": 3600,
+          "batch_interval_ticks": 180,
+          "batch_size": 5,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1
+          },
+          "spawn_pattern": "parallel",
+          "ambient_hazard_ids": [
+            "water"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "İlk hat yön değişimi."
+        },
+        {
+          "phase": 3,
+          "start_tick": 3600,
+          "end_tick": 5400,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [
+            "water"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "İkinci işaret ve elit baskısı."
+        },
+        {
+          "phase": 4,
+          "start_tick": 5400,
+          "end_tick": 7200,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1
+          },
+          "spawn_pattern": "parallel",
+          "ambient_hazard_ids": [
+            "water"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "Okuma arası sonrası açı değişimi."
+        },
+        {
+          "phase": 5,
+          "start_tick": 7200,
+          "end_tick": 9000,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [
+            "water"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Son işaret, yol planlama."
+        },
+        {
+          "phase": 6,
+          "start_tick": 9000,
+          "end_tick": 10800,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [
+            "water"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Boss öncesi açık kaçış yönünü koru."
+        }
+      ],
+      "boss_id": "sluice_turner",
+      "base_enemy_hp_multiplier": 1.24,
+      "base_enemy_damage_multiplier": 1.1,
+      "balance_status": "prototype_values_unplaytested",
+      "victory": "objective_complete AND boss_killed_before_tick_14400 AND hero_hp_above_zero",
+      "boss_transition": {
+        "despawn_regulars_without_xp": true,
+        "collect_existing_xp_then_remove": true,
+        "pause_clock_telegraph_ticks": 45,
+        "boss_first_attack_delay_ticks": 60,
+        "objectives_frozen": true
+      }
+    },
+    {
+      "chapter": 6,
+      "chapter_id": "ac_ch06",
+      "title_en": "The Book's Empty Margin",
+      "title_tr": "Boş Kenar",
+      "arena_id": "ac_charcoal_yard",
+      "start_position": [
+        1500,
+        1000
+      ],
+      "requires": {
+        "highest_base_chapter": 5
+      },
+      "combat_clock_ticks": 14400,
+      "duration_seconds": 480,
+      "boss_start_tick": 10800,
+      "breather_tick": 7200,
+      "scenes": {
+        "entry": "ac_ch06_entry",
+        "breather": "ac_ch06_breather",
+        "clear": "ac_ch06_clear"
+      },
+      "objective": {
+        "objective_id": "ledger_leaves",
+        "kind": "ordered_interactions",
+        "count": 3,
+        "positions": [
+          [
+            1500,
+            1000
+          ],
+          [
+            3160,
+            850
+          ],
+          [
+            1000,
+            1000
+          ]
+        ],
+        "available_tick_by_stage": [
+          0,
+          3600,
+          7200
+        ],
+        "interaction_ticks": 30,
+        "must_hold_button": true,
+        "movement_or_damage_cancels": true,
+        "deadline_tick": 10800,
+        "failure": "objective_incomplete_at_boss_start_ends_attempt",
+        "progress": "run_local_reset_on_new_attempt",
+        "boss_gate": "all_objective_stages_complete"
+      },
+      "briefing_en": "The clerk kept a second book beneath the scale house.",
+      "hint_en": "Recover its loose leaves. Ink follows recent paths; leave yourself a new way back.",
+      "objective_en": "Recover the ledger leaves.",
+      "gameplay_intent_tr": "Üç ayrı defter yaprağını al; hareket izi bırakan mürekkep yüzünden aynı yolu hemen tekrar kullanma.",
+      "waves": [
+        {
+          "phase": 1,
+          "start_tick": 0,
+          "end_tick": 1800,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "inkbound_dead": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [
+            "ink"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "Tanıştır; rotayı gör."
+        },
+        {
+          "phase": 2,
+          "start_tick": 1800,
+          "end_tick": 3600,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "inkbound_dead": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [
+            "ink"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "İlk hat yön değişimi."
+        },
+        {
+          "phase": 3,
+          "start_tick": 3600,
+          "end_tick": 5400,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "inkbound_dead": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [
+            "ink"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "İkinci işaret ve elit baskısı."
+        },
+        {
+          "phase": 4,
+          "start_tick": 5400,
+          "end_tick": 7200,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "inkbound_dead": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [
+            "ink"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "Okuma arası sonrası açı değişimi."
+        },
+        {
+          "phase": 5,
+          "start_tick": 7200,
+          "end_tick": 9000,
+          "batch_interval_ticks": 180,
+          "batch_size": 8,
+          "family_weights": {
+            "inkbound_dead": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [
+            "ink"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Son işaret, yol planlama."
+        },
+        {
+          "phase": 6,
+          "start_tick": 9000,
+          "end_tick": 10800,
+          "batch_interval_ticks": 180,
+          "batch_size": 8,
+          "family_weights": {
+            "inkbound_dead": 3,
+            "hollow_cleric": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [
+            "ink"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Boss öncesi açık kaçış yönünü koru."
+        }
+      ],
+      "boss_id": "ledger_clerk",
+      "base_enemy_hp_multiplier": 1.3,
+      "base_enemy_damage_multiplier": 1.125,
+      "balance_status": "prototype_values_unplaytested",
+      "victory": "objective_complete AND boss_killed_before_tick_14400 AND hero_hp_above_zero",
+      "boss_transition": {
+        "despawn_regulars_without_xp": true,
+        "collect_existing_xp_then_remove": true,
+        "pause_clock_telegraph_ticks": 45,
+        "boss_first_attack_delay_ticks": 60,
+        "objectives_frozen": true
+      }
+    },
+    {
+      "chapter": 7,
+      "chapter_id": "ac_ch07",
+      "title_en": "An Empty Cart Returns",
+      "title_tr": "Boş Arabayı Döndürmek",
+      "arena_id": "ac_charcoal_yard",
+      "start_position": [
+        2800,
+        2100
+      ],
+      "requires": {
+        "highest_base_chapter": 6
+      },
+      "combat_clock_ticks": 14400,
+      "duration_seconds": 480,
+      "boss_start_tick": 10800,
+      "breather_tick": 7200,
+      "scenes": {
+        "entry": "ac_ch07_entry",
+        "breather": "ac_ch07_breather",
+        "clear": "ac_ch07_clear"
+      },
+      "objective": {
+        "objective_id": "cart_stops",
+        "kind": "escort_stops",
+        "count": 3,
+        "positions": [
+          [
+            2800,
+            2100
+          ],
+          [
+            3200,
+            2100
+          ],
+          [
+            2048,
+            512
+          ]
+        ],
+        "available_tick_by_stage": [
+          0,
+          3600,
+          7200
+        ],
+        "interaction_ticks": 30,
+        "must_hold_button": true,
+        "movement_or_damage_cancels": true,
+        "deadline_tick": 10800,
+        "failure": "objective_incomplete_at_boss_start_ends_attempt",
+        "progress": "run_local_reset_on_new_attempt",
+        "boss_gate": "all_objective_stages_complete",
+        "escort": {
+          "cart_speed": 72,
+          "hero_presence_radius": 180,
+          "stops_dwell_ticks": 30,
+          "cart_has_hp": false,
+          "follows_fixed_segments": true,
+          "distance_check": "Euclidean hero-cart; cart advances only with hero present",
+          "no_progress_while_paused": true
+        }
+      },
+      "briefing_en": "The burial cart was left under the shelter instead of taken to the village.",
+      "hint_en": "Move it through three stops. It rolls only while you are close; clear the next bend before it reaches you.",
+      "objective_en": "Return the empty burial cart.",
+      "gameplay_intent_tr": "Bir araba üç durakta oyuncu yakındayken ilerler; temas menzilinde beklemek yerine önden koridor aç.",
+      "waves": [
+        {
+          "phase": 1,
+          "start_tick": 0,
+          "end_tick": 1800,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "front_arc",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "Tanıştır; rotayı gör."
+        },
+        {
+          "phase": 2,
+          "start_tick": 1800,
+          "end_tick": 3600,
+          "batch_interval_ticks": 180,
+          "batch_size": 6,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "rear_arc",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "İlk hat yön değişimi."
+        },
+        {
+          "phase": 3,
+          "start_tick": 3600,
+          "end_tick": 5400,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "front_arc",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "İkinci işaret ve elit baskısı."
+        },
+        {
+          "phase": 4,
+          "start_tick": 5400,
+          "end_tick": 7200,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "Okuma arası sonrası açı değişimi."
+        },
+        {
+          "phase": 5,
+          "start_tick": 7200,
+          "end_tick": 9000,
+          "batch_interval_ticks": 180,
+          "batch_size": 8,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "front_arc",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Son işaret, yol planlama."
+        },
+        {
+          "phase": 6,
+          "start_tick": 9000,
+          "end_tick": 10800,
+          "batch_interval_ticks": 180,
+          "batch_size": 8,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1
+          },
+          "spawn_pattern": "rear_arc",
+          "ambient_hazard_ids": [],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Boss öncesi açık kaçış yönünü koru."
+        }
+      ],
+      "boss_id": "cart_hauler",
+      "base_enemy_hp_multiplier": 1.36,
+      "base_enemy_damage_multiplier": 1.15,
+      "balance_status": "prototype_values_unplaytested",
+      "victory": "objective_complete AND boss_killed_before_tick_14400 AND hero_hp_above_zero",
+      "boss_transition": {
+        "despawn_regulars_without_xp": true,
+        "collect_existing_xp_then_remove": true,
+        "pause_clock_telegraph_ticks": 45,
+        "boss_first_attack_delay_ticks": 60,
+        "objectives_frozen": true
+      }
+    },
+    {
+      "chapter": 8,
+      "chapter_id": "ac_ch08",
+      "title_en": "What the Pit Keeps",
+      "title_tr": "Çukurun Sakladığı",
+      "arena_id": "ac_charcoal_yard",
+      "start_position": [
+        2048,
+        2480
+      ],
+      "requires": {
+        "highest_base_chapter": 7
+      },
+      "combat_clock_ticks": 14400,
+      "duration_seconds": 480,
+      "boss_start_tick": 10800,
+      "breather_tick": 7200,
+      "scenes": {
+        "entry": "ac_ch08_entry",
+        "breather": "ac_ch08_breather",
+        "clear": "ac_ch08_clear"
+      },
+      "objective": {
+        "objective_id": "pit_markers",
+        "kind": "ordered_interactions",
+        "count": 3,
+        "positions": [
+          [
+            2048,
+            2480
+          ],
+          [
+            1000,
+            2250
+          ],
+          [
+            3200,
+            2100
+          ]
+        ],
+        "available_tick_by_stage": [
+          0,
+          3600,
+          7200
+        ],
+        "interaction_ticks": 30,
+        "must_hold_button": true,
+        "movement_or_damage_cancels": true,
+        "deadline_tick": 10800,
+        "failure": "objective_incomplete_at_boss_start_ends_attempt",
+        "progress": "run_local_reset_on_new_attempt",
+        "boss_gate": "all_objective_stages_complete"
+      },
+      "briefing_en": "The pit must be marked before another load is tipped into it.",
+      "hint_en": "Set three markers along the rim. The ash gust shows its line before it crosses; keep an open route behind you.",
+      "objective_en": "Mark the burial pit.",
+      "gameplay_intent_tr": "Açık çukur kenarındaki üç taşı işaretle; kül fırtınalarının önceden görünen yönüne göre yol değiştir.",
+      "waves": [
+        {
+          "phase": 1,
+          "start_tick": 0,
+          "end_tick": 1800,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [
+            "gust"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "Tanıştır; rotayı gör."
+        },
+        {
+          "phase": 2,
+          "start_tick": 1800,
+          "end_tick": 3600,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [
+            "gust"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "İlk hat yön değişimi."
+        },
+        {
+          "phase": 3,
+          "start_tick": 3600,
+          "end_tick": 5400,
+          "batch_interval_ticks": 180,
+          "batch_size": 8,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "parallel",
+          "ambient_hazard_ids": [
+            "gust"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "İkinci işaret ve elit baskısı."
+        },
+        {
+          "phase": 4,
+          "start_tick": 5400,
+          "end_tick": 7200,
+          "batch_interval_ticks": 180,
+          "batch_size": 8,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [
+            "gust"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "Okuma arası sonrası açı değişimi."
+        },
+        {
+          "phase": 5,
+          "start_tick": 7200,
+          "end_tick": 9000,
+          "batch_interval_ticks": 180,
+          "batch_size": 9,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [
+            "gust"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Son işaret, yol planlama."
+        },
+        {
+          "phase": 6,
+          "start_tick": 9000,
+          "end_tick": 10800,
+          "batch_interval_ticks": 180,
+          "batch_size": 9,
+          "family_weights": {
+            "orchard_ghoul": 3,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "parallel",
+          "ambient_hazard_ids": [
+            "gust"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Boss öncesi açık kaçış yönünü koru."
+        }
+      ],
+      "boss_id": "pit_digger",
+      "base_enemy_hp_multiplier": 1.42,
+      "base_enemy_damage_multiplier": 1.175,
+      "balance_status": "prototype_values_unplaytested",
+      "victory": "objective_complete AND boss_killed_before_tick_14400 AND hero_hp_above_zero",
+      "boss_transition": {
+        "despawn_regulars_without_xp": true,
+        "collect_existing_xp_then_remove": true,
+        "pause_clock_telegraph_ticks": 45,
+        "boss_first_attack_delay_ticks": 60,
+        "objectives_frozen": true
+      }
+    },
+    {
+      "chapter": 9,
+      "chapter_id": "ac_ch09",
+      "title_en": "The Yard Must Open",
+      "title_tr": "Avluyu Açmak",
+      "arena_id": "ac_charcoal_yard",
+      "start_position": [
+        2048,
+        1536
+      ],
+      "requires": {
+        "highest_base_chapter": 8
+      },
+      "combat_clock_ticks": 14400,
+      "duration_seconds": 480,
+      "boss_start_tick": 10800,
+      "breather_tick": 7200,
+      "scenes": {
+        "entry": "ac_ch09_entry",
+        "breather": "ac_ch09_breather",
+        "clear": "ac_ch09_clear"
+      },
+      "objective": {
+        "objective_id": "gate_chains",
+        "kind": "ordered_interactions",
+        "count": 3,
+        "positions": [
+          [
+            2048,
+            1536
+          ],
+          [
+            3160,
+            850
+          ],
+          [
+            2048,
+            512
+          ]
+        ],
+        "available_tick_by_stage": [
+          0,
+          3600,
+          7200
+        ],
+        "interaction_ticks": 30,
+        "must_hold_button": true,
+        "movement_or_damage_cancels": true,
+        "deadline_tick": 10800,
+        "failure": "objective_incomplete_at_boss_start_ends_attempt",
+        "progress": "run_local_reset_on_new_attempt",
+        "boss_gate": "all_objective_stages_complete"
+      },
+      "briefing_en": "The clerk's last chains still close every exit when the kiln turns.",
+      "hint_en": "Release the exit chains. The kiln marks its next lanes before they burn. A warning line always leaves a way through.",
+      "objective_en": "Release the exit chains.",
+      "gameplay_intent_tr": "Üç çıkış zincirini sök; iki dik ateş hattı aynı anda kapandığında kalan çeyreği bul.",
+      "waves": [
+        {
+          "phase": 1,
+          "start_tick": 0,
+          "end_tick": 1800,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "parallel",
+          "ambient_hazard_ids": [
+            "heat"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "Tanıştır; rotayı gör."
+        },
+        {
+          "phase": 2,
+          "start_tick": 1800,
+          "end_tick": 3600,
+          "batch_interval_ticks": 180,
+          "batch_size": 7,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [
+            "heat"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "İlk hat yön değişimi."
+        },
+        {
+          "phase": 3,
+          "start_tick": 3600,
+          "end_tick": 5400,
+          "batch_interval_ticks": 180,
+          "batch_size": 8,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [
+            "heat"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "İkinci işaret ve elit baskısı."
+        },
+        {
+          "phase": 4,
+          "start_tick": 5400,
+          "end_tick": 7200,
+          "batch_interval_ticks": 180,
+          "batch_size": 8,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "parallel",
+          "ambient_hazard_ids": [
+            "heat"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "Okuma arası sonrası açı değişimi."
+        },
+        {
+          "phase": 5,
+          "start_tick": 7200,
+          "end_tick": 9000,
+          "batch_interval_ticks": 180,
+          "batch_size": 9,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [
+            "heat"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Son işaret, yol planlama."
+        },
+        {
+          "phase": 6,
+          "start_tick": 9000,
+          "end_tick": 10800,
+          "batch_interval_ticks": 180,
+          "batch_size": 9,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [
+            "heat"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Boss öncesi açık kaçış yönünü koru."
+        }
+      ],
+      "boss_id": "kiln_tender",
+      "base_enemy_hp_multiplier": 1.48,
+      "base_enemy_damage_multiplier": 1.2,
+      "balance_status": "prototype_values_unplaytested",
+      "victory": "objective_complete AND boss_killed_before_tick_14400 AND hero_hp_above_zero",
+      "boss_transition": {
+        "despawn_regulars_without_xp": true,
+        "collect_existing_xp_then_remove": true,
+        "pause_clock_telegraph_ticks": 45,
+        "boss_first_attack_delay_ticks": 60,
+        "objectives_frozen": true
+      }
+    },
+    {
+      "chapter": 10,
+      "chapter_id": "ac_ch10",
+      "title_en": "Leave the Road Open",
+      "title_tr": "Yolu Açık Bırak",
+      "arena_id": "ac_charcoal_yard",
+      "start_position": [
+        2048,
+        512
+      ],
+      "requires": {
+        "highest_base_chapter": 9
+      },
+      "combat_clock_ticks": 14400,
+      "duration_seconds": 480,
+      "boss_start_tick": 10800,
+      "breather_tick": 7200,
+      "scenes": {
+        "entry": "ac_ch10_entry",
+        "breather": "ac_ch10_breather",
+        "clear": "ac_ch10_clear"
+      },
+      "objective": {
+        "objective_id": "witness_posts",
+        "kind": "ordered_interactions",
+        "count": 3,
+        "positions": [
+          [
+            2048,
+            512
+          ],
+          [
+            3200,
+            2100
+          ],
+          [
+            2048,
+            2480
+          ]
+        ],
+        "available_tick_by_stage": [
+          0,
+          3600,
+          7200
+        ],
+        "interaction_ticks": 30,
+        "must_hold_button": true,
+        "movement_or_damage_cancels": true,
+        "deadline_tick": 10800,
+        "failure": "objective_incomplete_at_boss_start_ends_attempt",
+        "progress": "run_local_reset_on_new_attempt",
+        "boss_gate": "all_objective_stages_complete"
+      },
+      "briefing_en": "The yard is open. Its last load still circles the road that once kept it shut.",
+      "hint_en": "Set the witness posts and clear the final carrier. A standing record marks the place; it does not promise the dead are healed.",
+      "objective_en": "Set the witness posts.",
+      "gameplay_intent_tr": "Arenanın üç bölgesindeki tanık direklerini etkinleştir; önceki hareket dilini üç boss fazında birleştir.",
+      "waves": [
+        {
+          "phase": 1,
+          "start_tick": 0,
+          "end_tick": 1800,
+          "batch_interval_ticks": 180,
+          "batch_size": 8,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "approach",
+          "ambient_hazard_ids": [
+            "water"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "Tanıştır; rotayı gör."
+        },
+        {
+          "phase": 2,
+          "start_tick": 1800,
+          "end_tick": 3600,
+          "batch_interval_ticks": 180,
+          "batch_size": 8,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "parallel",
+          "ambient_hazard_ids": [
+            "water"
+          ],
+          "objective_stage_available": 1,
+          "pressure_intent_tr": "İlk hat yön değişimi."
+        },
+        {
+          "phase": 3,
+          "start_tick": 3600,
+          "end_tick": 5400,
+          "batch_interval_ticks": 180,
+          "batch_size": 9,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "pincer",
+          "ambient_hazard_ids": [
+            "ink"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "İkinci işaret ve elit baskısı."
+        },
+        {
+          "phase": 4,
+          "start_tick": 5400,
+          "end_tick": 7200,
+          "batch_interval_ticks": 180,
+          "batch_size": 9,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "orbit",
+          "ambient_hazard_ids": [
+            "ink"
+          ],
+          "objective_stage_available": 2,
+          "pressure_intent_tr": "Okuma arası sonrası açı değişimi."
+        },
+        {
+          "phase": 5,
+          "start_tick": 7200,
+          "end_tick": 9000,
+          "batch_interval_ticks": 180,
+          "batch_size": 10,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "front_arc",
+          "ambient_hazard_ids": [
+            "heat"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Son işaret, yol planlama."
+        },
+        {
+          "phase": 6,
+          "start_tick": 9000,
+          "end_tick": 10800,
+          "batch_interval_ticks": 180,
+          "batch_size": 10,
+          "family_weights": {
+            "hollow_pilgrim": 3,
+            "orchard_ghoul": 1,
+            "inkbound_dead": 1,
+            "ash_wolf": 1
+          },
+          "spawn_pattern": "fan",
+          "ambient_hazard_ids": [
+            "heat"
+          ],
+          "objective_stage_available": 3,
+          "pressure_intent_tr": "Boss öncesi açık kaçış yönünü koru."
+        }
+      ],
+      "boss_id": "last_load",
+      "base_enemy_hp_multiplier": 1.54,
+      "base_enemy_damage_multiplier": 1.225,
+      "balance_status": "prototype_values_unplaytested",
+      "victory": "objective_complete AND boss_killed_before_tick_14400 AND hero_hp_above_zero",
+      "boss_transition": {
+        "despawn_regulars_without_xp": true,
+        "collect_existing_xp_then_remove": true,
+        "pause_clock_telegraph_ticks": 45,
+        "boss_first_attack_delay_ticks": 60,
+        "objectives_frozen": true
+      }
+    }
+  ],
+  "combat_tick_rate": 30,
+  "timeline_note": "6 one-minute wave phases then 2-minute boss allowance; wall time pauses during VN/choices/background."
+}

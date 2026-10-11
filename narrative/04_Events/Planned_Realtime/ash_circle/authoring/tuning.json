@@ -1,0 +1,45 @@
+{
+  "status": "prototype_budget_not_android_certification",
+  "hard_budgets": {
+    "enemy_live": 160,
+    "elite_live": 4,
+    "boss_live": 1,
+    "player_projectile_live": 96,
+    "enemy_projectile_live": 32,
+    "xp_pickup_live": 80,
+    "ambient_hazard_live": 3,
+    "damage_text_live": 12,
+    "vfx_live": 24
+  },
+  "enemy_cap_includes_elites_and_boss": true,
+  "overflow": {
+    "enemy": "skip_spawns_no_backlog_no_xp_grant",
+    "player_projectile": "skip newest cast, reserve minimum 12 slots for lead; cooldown still advances",
+    "enemy_projectile": "skip_newest; never_reuse_live_damage_body",
+    "xp": "merge_into_nearest_existing_pickup_preserve_integer_value",
+    "ambient_hazard": "skip_newest",
+    "vfx": "drop_cosmetic_only"
+  },
+  "quality_tiers": {
+    "low": {
+      "render_scale": 0.65,
+      "vfx_live": 8,
+      "damage_text_live": 0
+    },
+    "standard": {
+      "render_scale": 0.8,
+      "vfx_live": 16,
+      "damage_text_live": 6
+    },
+    "high": {
+      "render_scale": 1,
+      "vfx_live": 24,
+      "damage_text_live": 12
+    }
+  },
+  "shared_gameplay_caps_across_quality_tiers": true,
+  "target_device_gate": "named Android low/mid target devices must pass 8-min C10 R5 soak; target 30 stable rendered FPS, no growing pools, bounded memory; 60 render optional",
+  "retune_rule": "if 160 cannot meet device gate, lower shared gameplay cap in next simulation revision and revalidate all chapters; do not silently vary by phone",
+  "render": "atlas images; no per-enemy UnitView containers/text/tweens; sprite pool independent of logical simulation; cull graphics not authoritative entities",
+  "simulation": "30 integer ticks/s; renderer interpolates; never frame delta drives damage"
+}

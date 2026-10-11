@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch02_entry",
+  "title_en": "Weight Without Names",
+  "location_id": "ac_weighbridge",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_weighbridge"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch02_entry_001",
+      "text": "The scale arm rocks although nothing rests on the platform."
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_entry_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Each plate is a week's tally. The names should be on the back.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_entry_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The foreman kept that side against the wall.",
+      "emotion": "guarded"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_entry_004",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Which foreman?",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_entry_005",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "Me.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_entry_006",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Then you can tell us which screws to loosen.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_entry_007",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "All three. I will not ask you to leave one behind.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch02_entry_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}
