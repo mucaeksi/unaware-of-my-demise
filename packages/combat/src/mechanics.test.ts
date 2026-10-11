@@ -552,3 +552,39 @@ describe('team-scoped damage hooks', () => {
   });
 });
 
+describe('owned-hero parties: server stats, skill ranks and stage tuning', () => {
+  const striker = (): UnitSpec => ({ id: 'striker', atk: 10, hp: 50, spd: 100, skills: [{ id: 'str_basic', ops: [dmg('single_enemy', 1)], target: 'enemy' }] });
+
+  it("a server party replaces the encounter's player side and its stats override the unit's own curve", () => {
+    const b = duel([striker()], [dummy()], {}, { party: [{ unit_id: 'striker', level: 7, slot: 0, row: 'front', stats: { hp: 321, atk: 77, def: 9, spd: 100 } }] });
+    const u = b.unit(P(0, 'striker'));
+    expect([u.maxHp, u.hp, u.base.atk, u.base.def]).toEqual([321, 321, 77, 9]);
+    b.advance();
+    const step = b.act({ skillId: 'str_basic', targetId: E(0, 'dummy') });
+    expect(ev(step.events, 'damage')[0]?.amount).toBe(77);
+  });
+
+  it('a skill rank above 1 raises that skill by the configured bonus per rank; start Focus is honoured', () => {
+    const at = (rank: number): number => {
+      const b = duel([striker()], [dummy()], {}, { party: [{ unit_id: 'striker', level: 1, slot: 0, row: 'front', stats: { hp: 50, atk: 100, def: 0, spd: 100 }, skill_ranks: { str_basic: rank }, start_focus: 30 }] });
+      expect(b.unit(P(0, 'striker')).focus).toBe(30);
+      b.advance();
+      return ev(b.act({ skillId: 'str_basic', targetId: E(0, 'dummy') }).events, 'damage')[0]?.amount ?? 0;
+    };
+    expect(at(1)).toBe(100);
+    expect(at(2)).toBe(110);
+    expect(at(3)).toBe(120);
+  });
+
+  it('enemy_stat_multiplier scales only the listed stats of every enemy', () => {
+    const b = duel([striker()], [dummy('foe', { hp: 100, atk: 10 })], {}, { tuning: { value: 2.5, applies_to: ['hp', 'atk'] } });
+    const f = b.unit(E(0, 'foe'));
+    expect([f.maxHp, f.base.atk]).toEqual([250, 25]);
+    expect(f.base.def).toBe(0);
+  });
+
+  it('an empty party is refused', () => {
+    expect(() => duel([striker()], [dummy()], {}, { party: [] })).toThrow(/at least one/);
+  });
+});
+

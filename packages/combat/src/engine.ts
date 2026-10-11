@@ -1,4 +1,4 @@
-import type { BossObjective, ContinuousModifier, EffectOp, Element, Encounter, EventHook, HookEvent, Predicate, RulesDef, SkillDef, StatusDef, TargetSelector, UnitDef, UnitPack } from '@uomd/content-schema';
+import type { BattleParty, BossObjective, ContinuousModifier, EffectOp, Element, Encounter, EventHook, HookEvent, Predicate, RulesDef, SkillDef, StatusDef, TargetSelector, UnitDef, UnitPack } from '@uomd/content-schema';
 import { Rng } from '@uomd/shared';
 import {
   IllegalActionError,
@@ -103,30 +103,67 @@ export class Battle {
   private outcome: BattleResult | null = null;
   private readonly startingPlayers: number;
 
-  private constructor(pack: UnitPack, encounter: Encounter) {
+  private constructor(pack: UnitPack, encounter: Encounter, party?: BattleParty) {
     this.rules = pack.rules;
     for (const s of pack.rules.statuses) this.statusDefs.set(s.status_id, s);
     this.rng = new Rng(encounter.seed);
     for (const u of pack.units) this.defs.set(u.unit_id, u);
     const defs = this.defs;
     const slotsSeen = new Set<string>();
-    const add = (side: Side, e: Encounter['party'][number]): void => {
+    const add = (side: Side, e: Encounter['party'][number] & Partial<BattleParty[number]>): void => {
       const def = defs.get(e.unit_id);
       if (!def) throw new Error(`encounter references unknown unit ${e.unit_id}`);
       const key = `${side}:${e.slot}`;
       if (slotsSeen.has(key)) throw new Error(`duplicate slot ${key}`);
       slotsSeen.add(key);
-      this.combatants.push(this.makeCombatant(def, side, e.slot, e.row, e.level));
+      const c = this.makeCombatant(def, side, e.slot, e.row, e.level);
+      if (side === 'player') this.applyPartyOverrides(c, e);
+      else this.applyEnemyTuning(c, encounter.enemy_stat_multiplier);
+      this.combatants.push(c);
     };
-    for (const p of encounter.party) add('player', p);
+    const members = party ?? encounter.party;
+    if (members.length === 0) throw new Error('a battle needs at least one player-side unit');
+    for (const p of members) add('player', p);
     for (const e of encounter.enemies) add('enemy', e);
-    this.startingPlayers = encounter.party.length;
+    this.startingPlayers = members.length;
     this.log.push({ type: 'battle_start', seed: encounter.seed });
     for (const c of [...this.combatants]) if (c.def.boss) this.initBoss(c);
   }
 
-  static create(pack: UnitPack, encounter: Encounter): Battle {
-    return new Battle(pack, encounter);
+  /**
+   * `party` (owned-hero battles) replaces the encounter's own player side; the server builds it from the player's team, so the
+   * client can never choose stats, ranks or levels.
+   */
+  static create(pack: UnitPack, encounter: Encounter, party?: BattleParty): Battle {
+    return new Battle(pack, encounter, party);
+  }
+
+  /** Server-computed final stats, skill ranks and opening Focus of a player-side unit. */
+  private applyPartyOverrides(c: Combatant, m: Partial<BattleParty[number]>): void {
+    if (m.stats) {
+      c.maxHp = c.hp = Math.max(1, m.stats.hp);
+      c.base.atk = m.stats.atk;
+      c.base.def = m.stats.def;
+      c.base.spd = Math.max(1, m.stats.spd);
+      if (m.stats.res !== undefined) c.base.res = m.stats.res;
+    }
+    if (m.skill_ranks) c.skillRanks = { ...m.skill_ranks };
+    if (m.start_focus) c.focus = Math.min(this.rules.focus.maximum, m.start_focus);
+  }
+
+  private applyEnemyTuning(c: Combatant, tuning: Encounter['enemy_stat_multiplier']): void {
+    if (!tuning) return;
+    const k = tuning.value;
+    if (tuning.applies_to.includes('hp')) c.maxHp = c.hp = Math.max(1, roundHalfUp(c.maxHp * k));
+    if (tuning.applies_to.includes('atk')) c.base.atk = roundHalfUp(c.base.atk * k);
+    if (tuning.applies_to.includes('def')) c.base.def = roundHalfUp(c.base.def * k);
+    if (tuning.applies_to.includes('spd')) c.base.spd = Math.max(1, roundHalfUp(c.base.spd * k));
+  }
+
+  /** x(1 + bonus per rank above 1) for the damage / heal / shield amounts of the skill being executed. */
+  private rankFactor(c: Combatant, skillId: string): number {
+    const rank = c.skillRanks[skillId] ?? 1;
+    return 1 + (this.rules.skill_rank_bonus ?? 0) * (rank - 1);
   }
 
   // ---------------------------------------------------------------- construction
@@ -171,6 +208,7 @@ export class Battle {
       hookTurnCount: {},
       hookRoundCount: {},
       hookTargetCount: {},
+      skillRanks: {},
       alive: true,
       boss: null,
       objective: null,
@@ -727,7 +765,8 @@ export class Battle {
       actor.counters.splice(actor.counters.indexOf(c), 1);
       const owner = this.combatants.find((u) => u.id === c.ownerId);
       if (!owner || !owner.alive) continue;
-      const cctx = this.newCtx(owner, owner.def.skills[0] as SkillDef, { inHook: true, suppressHooks: true, eventSource: actor, eventTarget: actor });
+      const armedBy = owner.def.skills.find((k) => k.skill_id === c.skillId) ?? (owner.def.skills[0] as SkillDef);
+      const cctx = this.newCtx(owner, armedBy, { inHook: true, suppressHooks: true, eventSource: actor, eventTarget: actor });
       this.applyOp(
         { op: 'damage', target_selector_id: 'event_source', damage_type: c.damageType, scale_stat: c.scaleStat, multiplier: c.multiplier, no_focus_gain: true },
         cctx
@@ -934,7 +973,7 @@ export class Battle {
       }
       case 'heal': {
         for (const t of targets) {
-          const raw = Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier);
+          const raw = Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier * this.rankFactor(ctx.actor, ctx.skill.skill_id));
           this.healUnit(ctx.actor, t, Math.max(1, Math.floor(raw * this.statusProduct(t, 'healing_received_multiplier'))), ctx);
         }
         break;
@@ -961,7 +1000,7 @@ export class Battle {
       }
       case 'grant_shield': {
         for (const t of targets) {
-          const amount = Math.max(1, Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier));
+          const amount = Math.max(1, Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier * this.rankFactor(ctx.actor, ctx.skill.skill_id)));
           t.shields.push(op.shield_source_id ? { amount, turnsLeft: op.duration_turns, sourceId: op.shield_source_id } : { amount, turnsLeft: op.duration_turns });
           this.emit({ type: 'shield', source: ctx.actor.id, target: t.id, amount });
         }
@@ -1000,7 +1039,7 @@ export class Battle {
       case 'heal_per_removed_status': {
         if (op.requires_successful_cleanse && ctx.removedStacks === 0) break;
         const stacks = Math.min(ctx.removedStacks, op.maximum_total_stacks);
-        const per = Math.max(1, Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier * stacks));
+        const per = Math.max(1, Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier * stacks * this.rankFactor(ctx.actor, ctx.skill.skill_id)));
         for (const t of targets.slice(0, op.maximum_targets)) this.healUnit(ctx.actor, t, Math.floor(per * this.statusProduct(t, 'healing_received_multiplier')), ctx);
         break;
       }
@@ -1031,7 +1070,7 @@ export class Battle {
       case 'apply_regeneration': {
         for (const t of targets) {
           t.regens = t.regens.filter((r) => r.sourceId !== ctx.actor.id);
-          t.regens.push({ sourceId: ctx.actor.id, amount: Math.max(1, Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier)), ticksLeft: op.ticks, turnsLeft: op.duration_turns });
+          t.regens.push({ sourceId: ctx.actor.id, amount: Math.max(1, Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier * this.rankFactor(ctx.actor, ctx.skill.skill_id))), ticksLeft: op.ticks, turnsLeft: op.duration_turns });
         }
         break;
       }
@@ -1075,7 +1114,7 @@ export class Battle {
       case 'arm_counter': {
         for (const t of targets) {
           t.counters = t.counters.filter((c) => c.ownerId !== ctx.actor.id);
-          t.counters.push({ ownerId: ctx.actor.id, scaleStat: op.scale_stat, multiplier: op.multiplier, damageType: op.damage_type, consume: true });
+          t.counters.push({ ownerId: ctx.actor.id, skillId: ctx.skill.skill_id, scaleStat: op.scale_stat, multiplier: op.multiplier, damageType: op.damage_type, consume: true });
         }
         break;
       }
@@ -1254,7 +1293,7 @@ export class Battle {
       veilRes = Math.max(0, 1 - pct);
     }
     // per-target conditional multipliers of the op itself
-    let mult = op.multiplier;
+    let mult = op.multiplier * this.rankFactor(attacker, ctx.skill.skill_id);
     if (op.multiplier_if_objective_alive && this.objectiveAlive(op.multiplier_if_objective_alive.objective_id)) mult *= op.multiplier_if_objective_alive.multiplier;
     if (op.multiplier_if_all_objectives_alive) {
       const mine = this.combatants.filter((c) => c.objective?.bossId === attacker.id);

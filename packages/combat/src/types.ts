@@ -57,6 +57,8 @@ export interface OpeningGuard {
 }
 export interface CounterInstance {
   ownerId: string;
+  /** the skill that armed it (its rank scales the counter) */
+  skillId: string;
   scaleStat: 'atk' | 'def' | 'hp';
   multiplier: number;
   damageType: 'physical' | 'magic' | 'elemental';
@@ -124,6 +126,8 @@ export interface Combatant {
   hookTurnCount: Record<string, number>;
   hookRoundCount: Record<string, number>;
   hookTargetCount: Record<string, number>;
+  /** skill_id -> rank (absent = 1) */
+  skillRanks: Record<string, number>;
   alive: boolean;
   boss: BossState | null;
   /** set for breakable objectives: they are targets, never actors, and never count for victory */

@@ -195,6 +195,8 @@ export const RulesDef = z
       })
       .strict(),
     auto_battle: z.object({ heal_priority_hp_percent: z.number(), save_ultimate_until_boss: z.boolean() }).strict(),
+    /** each skill rank above 1 multiplies the damage / heal / shield amounts of that skill by (1 + this x (rank - 1)) */
+    skill_rank_bonus: z.number().min(0).max(1).optional(),
     statuses: z.array(StatusDef)
   })
   .strict();

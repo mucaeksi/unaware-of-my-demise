@@ -1,4 +1,4 @@
-import { Encounter, SkillDef, UnitDef, UnitPack, type EffectOp, type EventHook, type ContinuousModifier } from '@uomd/content-schema';
+import { Encounter, type BattleParty, SkillDef, UnitDef, UnitPack, type EffectOp, type EventHook, type ContinuousModifier } from '@uomd/content-schema';
 import { buildRules } from '../../../tools/lib/data';
 import { Battle, type BattleEvent } from './index';
 
@@ -68,7 +68,7 @@ export const unit = (u: UnitSpec) =>
     ...(u.boss ? { boss: u.boss } : {})
   });
 
-export function duel(players: UnitSpec[], enemies: UnitSpec[], rows: { p?: ('front' | 'rear')[]; e?: ('front' | 'rear')[] } = {}): Battle {
+export function duel(players: UnitSpec[], enemies: UnitSpec[], rows: { p?: ('front' | 'rear')[]; e?: ('front' | 'rear')[] } = {}, opts: { party?: BattleParty; tuning?: Encounter['enemy_stat_multiplier'] } = {}): Battle {
   const pack = UnitPack.parse({ schema_version: 1, pack_id: 'synthetic', units: [...players, ...enemies].map(unit), rules: RULES });
   const enc = Encounter.parse({
     schema_version: 1,
@@ -79,9 +79,10 @@ export function duel(players: UnitSpec[], enemies: UnitSpec[], rows: { p?: ('fro
     seed: 7,
     party: players.map((p, i) => ({ unit_id: p.id, level: 1, slot: i, row: rows.p?.[i] ?? (i < 2 ? 'front' : 'rear') })),
     enemies: enemies.map((e, i) => ({ unit_id: e.id, level: 1, slot: i, row: rows.e?.[i] ?? (i < 2 ? 'front' : 'rear') })),
+    ...(opts.tuning ? { enemy_stat_multiplier: opts.tuning } : {}),
     provenance: { source: 'test' }
   });
-  return Battle.create(pack, enc);
+  return Battle.create(pack, enc, opts.party);
 }
 export const P = (i: number, id: string) => `player:${i}:${id}`;
 export const E = (i: number, id: string) => `enemy:${i}:${id}`;

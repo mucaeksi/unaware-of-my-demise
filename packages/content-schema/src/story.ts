@@ -85,6 +85,29 @@ export const StoryScene = z
   });
 export type StoryScene = z.infer<typeof StoryScene>;
 
+/** One hero on the player's side of a battle. Content encounters list fixed (story) members; owned-hero battles get them from the server. */
+export const PartyMember = z
+  .object({
+    unit_id: Id,
+    level: z.number().int().min(1).max(20),
+    slot: z.number().int().min(0).max(4),
+    row: z.enum(['front', 'rear']),
+    /** final combat stats computed by the server (level growth + gear + set bonuses); absent = the unit's own level curve */
+    stats: z
+      .object({ hp: z.number().int().min(1).max(100_000), atk: z.number().int().min(0).max(100_000), def: z.number().int().min(0).max(100_000), spd: z.number().int().min(1).max(10_000), res: z.number().int().min(0).max(100_000).optional() })
+      .strict()
+      .optional(),
+    /** skill_id -> rank (1-3); each rank above 1 raises damage/heal/shield multipliers of that skill */
+    skill_ranks: z.record(Id, z.number().int().min(1).max(3)).optional(),
+    start_focus: z.number().int().min(0).max(100).optional(),
+    /** story loan: not owned by the player */
+    loan: z.boolean().optional()
+  })
+  .strict();
+export type PartyMember = z.infer<typeof PartyMember>;
+export const BattleParty = z.array(PartyMember).min(1).max(5);
+export type BattleParty = z.infer<typeof BattleParty>;
+
 export const Encounter = z
   .object({
     schema_version: z.literal(1),
@@ -94,20 +117,29 @@ export const Encounter = z
     location_id: Id,
     seed: z.number().int().min(0).max(0xffffffff),
     music_cue: Id.optional(),
+    /**
+     * fixed: the party below is the whole player side (tutorial). owned: the server composes it from the player's team plus the
+     * story `guests` (see `BattleParty`); `party` is then only a preview/fallback and may be empty.
+     */
+    party_mode: z.enum(['fixed', 'owned']).optional(),
     /** Narrative runtime allows a 2-unit tutorial party; every other encounter is 5v5. */
     party: z
       .array(z.object({ unit_id: Id, level: z.number().int().min(1).max(20), slot: z.number().int().min(0).max(4), row: z.enum(['front', 'rear']) }).strict())
-      .min(1)
       .max(5),
+    /** story loan heroes that join the player's team for this stage (they take slots before the player's own heroes) */
+    guests: z.array(Id).max(6).optional(),
     enemies: z
       .array(z.object({ unit_id: Id, level: z.number().int().min(1).max(20), slot: z.number().int().min(0).max(4), row: z.enum(['front', 'rear']) }).strict())
       .min(1)
       .max(5),
+    /** stage tuning from the narrative (`enemy_stat_multiplier`): applied to the listed stats of every enemy after level scaling */
+    enemy_stat_multiplier: z.object({ value: z.number().min(0.1).max(10), applies_to: z.array(z.enum(['hp', 'atk', 'def', 'spd'])).min(1).max(4) }).strict().optional(),
     pre_story: SafeAssetPath.optional(),
     post_story: SafeAssetPath.optional(),
     provenance: z.object({ source: z.string(), source_sha256: z.string().optional() }).strict()
   })
-  .strict();
+  .strict()
+  .refine((e) => (e.party_mode ?? 'fixed') === 'owned' || e.party.length >= 1, 'a fixed encounter needs at least one party member');
 export type Encounter = z.infer<typeof Encounter>;
 
 const ChapterNode = z

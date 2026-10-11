@@ -452,6 +452,7 @@
       "heal_priority_hp_percent": 40,
       "save_ultimate_until_boss": true
     },
+    "skill_rank_bonus": 0.1,
     "statuses": [
       {
         "status_id": "burn",

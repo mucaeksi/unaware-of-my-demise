@@ -1,4 +1,4 @@
-import type { Encounter, UnitPack } from '@uomd/content-schema';
+import type { BattleParty, Encounter, UnitPack } from '@uomd/content-schema';
 import { canonicalJson, sha256Hex } from '@uomd/shared';
 import { Battle } from './engine';
 import { IllegalActionError, type BattleResult, type PlayerAction } from './types';
@@ -19,8 +19,8 @@ export interface ReplayOutput {
  * actions. Any illegal action (wrong skill, wrong target, cooldown/focus violation, acting after the
  * battle ended) makes the replay invalid. The client's visual result is never trusted.
  */
-export async function replayBattle(pack: UnitPack, encounter: Encounter, actions: readonly PlayerAction[]): Promise<ReplayOutput> {
-  const battle = Battle.create(pack, encounter);
+export async function replayBattle(pack: UnitPack, encounter: Encounter, actions: readonly PlayerAction[], party?: BattleParty): Promise<ReplayOutput> {
+  const battle = Battle.create(pack, encounter, party);
   let step = battle.advance();
   let i = 0;
   try {
@@ -48,8 +48,8 @@ export async function replayBattle(pack: UnitPack, encounter: Encounter, actions
 }
 
 /** Plays a whole battle with the Auto Battle policy; returns the recorded actions (replayable). */
-export function playAuto(pack: UnitPack, encounter: Encounter): { battle: Battle; actions: PlayerAction[] } {
-  const battle = Battle.create(pack, encounter);
+export function playAuto(pack: UnitPack, encounter: Encounter, party?: BattleParty): { battle: Battle; actions: PlayerAction[] } {
+  const battle = Battle.create(pack, encounter, party);
   const actions: PlayerAction[] = [];
   let step = battle.advance();
   while (!step.result) {
