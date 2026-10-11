@@ -1,13 +1,11 @@
 import { z } from 'zod';
+import { RewardAttachment } from '@uomd/content-schema';
 import { CANON } from '@uomd/economy';
 import { HttpError } from '../content/store';
 import { ledgerStatements } from '../db/ledger';
 
-export const Attachment = z.discriminatedUnion('type', [
-  z.object({ type: z.literal('currency'), currency: z.enum(['silver_crowns', 'eclipse_token', 'fates_thread']), amount: z.number().int().min(1).max(1_000_000_000) }).strict(),
-  z.object({ type: z.literal('character'), itemId: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/) }).strict()
-]);
-export type Attachment = z.infer<typeof Attachment>;
+export const Attachment = RewardAttachment;
+export type Attachment = RewardAttachment;
 
 export const NewMail = z
   .object({

@@ -6,6 +6,7 @@ import { HttpError } from '../content/store';
 import { d1RateLimit } from '../http';
 import type { GameEnv } from '../env';
 import { activeBanners, convertEclipseToFates, disclosure, pullGacha } from '../gacha/service';
+import { BattleSubmission, getProgress, readSave, submitBattle, writeSave } from '../progress/service';
 import { claimMail, listMail, markRead } from '../mail/service';
 import { issueSession, playerForGoogle, resolveSession, revokeSession, verifyGoogleIdToken } from './auth';
 
@@ -58,6 +59,9 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/gacha/*', authed);
   app.use('/api/v1/economy/*', authed);
   app.use('/api/v1/mail', authed);
+  app.use('/api/v1/progress', authed);
+  app.use('/api/v1/progress/*', authed);
+  app.use('/api/v1/save', authed);
   app.use('/api/v1/mail/*', authed);
 
   app.post('/api/v1/auth/logout', async (c) => {
@@ -129,5 +133,27 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     const id = MailId.safeParse(c.req.param('id'));
     if (!id.success) throw new HttpError(400, 'bad_request', 'invalid mail id');
     return c.json(await claimMail(c.env.DB, c.get('playerId'), id.data));
+  });
+
+  app.get('/api/v1/progress', async (c) => c.json(await getProgress(c.env.DB, c.get('playerId'))));
+
+  app.post('/api/v1/progress/battle', async (c) => {
+    await perMinute(c.env, `battle:${c.get('playerId')}`, 20);
+    const input = await body(c, BattleSubmission, 64 * 1024);
+    return c.json(await submitBattle(c.env, c.get('playerId'), input));
+  });
+
+  app.get('/api/v1/save', async (c) => c.json(await readSave(c.env.DB, c.get('playerId'))));
+  app.put('/api/v1/save', async (c) => {
+    await perMinute(c.env, `save:${c.get('playerId')}`, 30);
+    const raw = await c.req.text();
+    if (raw.length > 70_000) throw new HttpError(413, 'save_too_large', 'cloud save is limited to 64 KB');
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      throw new HttpError(400, 'bad_request', 'invalid JSON');
+    }
+    return c.json(await writeSave(c.env.DB, c.get('playerId'), parsed));
   });
 }

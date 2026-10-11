@@ -194,3 +194,21 @@ describe('simulation against the exact numbers (seeded, deterministic)', () => {
     expect(sim.pullsToTarget!.p99).toBeLessThanOrEqual(195);
   });
 });
+
+import { rationNextMs, rationNow, rationSpend, RATION_CAP, RATION_REGEN_MS } from './index';
+describe('ration (energy)', () => {
+  it('regenerates one per 300 s up to the cap and keeps the partial step', () => {
+    const s = { value: 10, atMs: 0 };
+    expect(rationNow(s, RATION_REGEN_MS * 3 + 1000)).toEqual({ value: 13, atMs: RATION_REGEN_MS * 3 });
+    expect(rationNow(s, RATION_REGEN_MS * 1000).value).toBe(RATION_CAP);
+    expect(rationNextMs(s, RATION_REGEN_MS * 3 + 1000)).toBe(RATION_REGEN_MS - 1000);
+    expect(rationNextMs({ value: RATION_CAP, atMs: 0 }, 5)).toBe(0);
+  });
+  it('spending is refused without enough ration and starts the clock when leaving a full tank', () => {
+    expect(rationSpend({ value: 5, atMs: 0 }, 6, 0)).toBeNull();
+    expect(rationSpend({ value: 5, atMs: 0 }, 5, 0)).toEqual({ value: 0, atMs: 0 });
+    const full = rationSpend({ value: RATION_CAP, atMs: 0 }, 6, 10_000_000);
+    expect(full).toEqual({ value: 94, atMs: 10_000_000 });
+    expect(rationSpend({ value: 10, atMs: 0 }, -1, 0)).toBeNull();
+  });
+});

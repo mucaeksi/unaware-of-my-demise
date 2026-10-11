@@ -5,3 +5,4 @@ export * from './story';
 export * from './art';
 export * from './manifest';
 export * from './validate';
+export * from './rewards';

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { Id, LineId, SafeAssetPath } from './primitives';
+import { NodeRewards, RationClass } from './rewards';
 
 /**
  * Declarative story commands. The runtime (packages/story) is the only interpreter; scenes are pure
@@ -116,7 +117,10 @@ const ChapterNode = z
     kind: z.enum(['story', 'battle']),
     story: SafeAssetPath.optional(),
     encounter: SafeAssetPath.optional(),
-    requires: Id.optional()
+    requires: Id.optional(),
+    /** battle nodes: what a win costs (Ration) and grants; the server reads this from the published release, never from the client */
+    ration_class: RationClass.optional(),
+    rewards: NodeRewards.optional()
   })
   .strict();
 

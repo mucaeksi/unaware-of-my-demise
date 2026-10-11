@@ -83,7 +83,11 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
   if (again) return again;
 
   const { config } = await loadBanner(db, input.bannerId, now);
-  for (let attempt = 0; attempt < 4; attempt++) {
+  for (let attempt = 0; attempt < 5; attempt++) {
+    if (attempt > 0) {
+      const seen = await replay(); // an identical request may have won while this one was retrying
+      if (seen) return seen;
+    }
     const stateRow = await db
       .prepare('SELECT pity5, pity4, lost, version FROM pity_state WHERE player_id = ?1 AND pity_group = ?2')
       .bind(playerId, config.pityGroup)
