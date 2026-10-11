@@ -6,3 +6,4 @@ export * from './art';
 export * from './manifest';
 export * from './validate';
 export * from './rewards';
+export * from './tasks';

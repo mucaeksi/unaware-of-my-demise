@@ -6,3 +6,4 @@ export * from './flow';
 export * from './progression';
 export * from './gear';
 export * from './drops';
+export * from './periods';

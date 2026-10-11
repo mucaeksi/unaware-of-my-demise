@@ -5,6 +5,7 @@ import { RATION_CAP, rationNextMs, rationNow, rationSpend, type RationState } fr
 import { sha256Hex } from '@uomd/shared';
 import { ContentStore, HttpError } from '../content/store';
 import { grantStatements } from '../db/grants';
+import { taskEventStatements } from '../tasks/service';
 import { rollNodeDrops } from './drops';
 import type { GameEnv } from '../env';
 
@@ -144,6 +145,8 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
       ...(firstClear ? [] : [db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)')])
     );
     // one-time rewards keep stable keys (first clear / three stars), repeat rewards are keyed by the request
+    // task progress counts only Ration-consuming wins (canon eligibility), in the same atomic batch
+    if (cost > 0) batch.push(...(await taskEventStatements(db, playerId, { eligible_wins: 1, ...(node.boss ? { boss_wins: 1 } : {}), ...(stars === 3 ? { three_star_wins: 1 } : {}) }, nowMs)));
     for (const g of grants) batch.push(...(await grantStatements(db, playerId, [g.a], { keyPrefix: g.key, reason: `stage:${input.nodeId}` })));
     batch.push(
       db.prepare('INSERT INTO battle_claims (player_id, request_id, release_id, node_id, result_json) VALUES (?1, ?2, ?3, ?4, ?5)').bind(playerId, input.requestId, input.releaseId, input.nodeId, JSON.stringify(outcome)),

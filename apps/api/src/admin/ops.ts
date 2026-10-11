@@ -8,7 +8,7 @@ import { applyLedger } from '../db/ledger';
 import type { AdminEnv } from '../env';
 import { NewMail, sendMail } from '../mail/service';
 import { SubConfig } from '../billing/service';
-import { RewardAttachment } from '@uomd/content-schema';
+import { RewardAttachment, TaskConfig } from '@uomd/content-schema';
 
 type Ctx = { Bindings: AdminEnv; Variables: { admin: AdminIdentity } };
 type Guard = (min: Role) => MiddlewareHandler<Ctx>;
@@ -267,16 +267,8 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
   });
 
   /** every concrete item / gear id a drop table names must exist and not be retired (pools are resolved at roll time) */
-  const dropRefsExist = async (db: D1Database, cfg: DropConfig): Promise<void> => {
-    const items = new Set<string>();
-    const gears = new Set<string>();
-    for (const t of Object.values(cfg.tables)) {
-      for (const e of [...t.repeat, ...t.firstClear]) {
-        if (e.kind === 'item') items.add(e.itemId);
-        else if (e.kind === 'item_pool') e.itemIds.forEach((i) => items.add(i));
-        else if (e.kind === 'gear') gears.add(e.gearId);
-      }
-    }
+  /** every concrete item / gear id a config names must exist and not be retired (pools are resolved at roll time) */
+  const refsExist = async (db: D1Database, items: Set<string>, gears: Set<string>, what: string): Promise<void> => {
     const missing = async (table: 'item_defs' | 'gear_defs', col: string, ids: Set<string>): Promise<string[]> => {
       const all = [...ids];
       const found = new Set<string>();
@@ -288,9 +280,30 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
       return all.filter((i) => !found.has(i));
     };
     const bad = [...(await missing('item_defs', 'item_id', items)), ...(await missing('gear_defs', 'gear_id', gears))];
-    if (bad.length) throw new HttpError(422, 'unknown_items', `drop tables name unknown or retired ids: ${bad.slice(0, 5).join(', ')}`);
+    if (bad.length) throw new HttpError(422, 'unknown_items', `${what} name unknown or retired ids: ${bad.slice(0, 5).join(', ')}`);
   };
-  const CONFIG_SCHEMAS: Record<string, z.ZodType<unknown>> = { progression: ProgressionConfig, drops: DropConfig, gear: z.object({ note: z.string().max(400).default(''), roleStat: z.record(z.string(), z.string()), equipSlots: z.array(z.enum(['weapon', 'armor', 'necklace', 'ring'])).min(1), rerollCost: z.object({ itemId: z.string(), quantityByRarity: z.record(z.string(), z.number().int().min(1)) }).strict() }).strict() };
+  const dropRefsExist = async (db: D1Database, cfg: DropConfig): Promise<void> => {
+    const items = new Set<string>();
+    const gears = new Set<string>();
+    for (const t of Object.values(cfg.tables)) {
+      for (const e of [...t.repeat, ...t.firstClear]) {
+        if (e.kind === 'item') items.add(e.itemId);
+        else if (e.kind === 'item_pool') e.itemIds.forEach((i) => items.add(i));
+        else if (e.kind === 'gear') gears.add(e.gearId);
+      }
+    }
+    await refsExist(db, items, gears, 'drop tables');
+  };
+  const taskRefsExist = async (db: D1Database, cfg: TaskConfig): Promise<void> => {
+    const items = new Set<string>();
+    const gears = new Set<string>();
+    for (const r of [...cfg.daily.tasks.flatMap((t) => t.rewards), ...cfg.daily.completion.rewards, ...cfg.weekly.segments.flatMap((t) => t.rewards)]) {
+      if (r.type === 'item') items.add(r.itemId);
+      else if (r.type === 'gear') gears.add(r.gearId);
+    }
+    await refsExist(db, items, gears, 'task rewards');
+  };
+  const CONFIG_SCHEMAS: Record<string, z.ZodType<unknown>> = { progression: ProgressionConfig, drops: DropConfig, tasks: TaskConfig, gear: z.object({ note: z.string().max(400).default(''), roleStat: z.record(z.string(), z.string()), equipSlots: z.array(z.enum(['weapon', 'armor', 'necklace', 'ring'])).min(1), rerollCost: z.object({ itemId: z.string(), quantityByRarity: z.record(z.string(), z.number().int().min(1)) }).strict() }).strict() };
   app.get('/admin/api/config/:key', need('viewer'), async (c) => {
     const row = await c.env.DB.prepare('SELECT key, value_json, version, updated_at, updated_by FROM game_config WHERE key = ?1').bind(c.req.param('key')).first<{ key: string; value_json: string; version: number; updated_at: string; updated_by: string }>();
     if (!row) throw new HttpError(404, 'no_such_config', 'unknown config key');
@@ -304,6 +317,7 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     const parsed = schema.safeParse(b.value);
     if (!parsed.success) throw new HttpError(422, 'invalid_config', parsed.error.issues.slice(0, 3).map((i) => `${i.path.join('.')}: ${i.message}`).join('; '));
     if (key === 'drops') await dropRefsExist(c.env.DB, parsed.data as DropConfig);
+    if (key === 'tasks') await taskRefsExist(c.env.DB, parsed.data as TaskConfig);
     const who = c.get('admin').identity;
     const db = c.env.DB;
     const res = await db.batch([

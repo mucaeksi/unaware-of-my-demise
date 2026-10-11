@@ -3,6 +3,7 @@ import { accountLevelFromXp, applyCharacterXp, characterLevelCap, characterXpToN
 import { HttpError } from '../content/store';
 import { stackSpend } from '../db/grants';
 import { balanceOf, ledgerStatements } from '../db/ledger';
+import { taskEventStatements } from '../tasks/service';
 
 export async function loadProgressionConfig(db: D1Database): Promise<ProgressionConfig> {
   const row = await db.prepare("SELECT value_json FROM game_config WHERE key = 'progression'").first<{ value_json: string }>();
@@ -127,6 +128,7 @@ async function characterOp(db: D1Database, playerId: string, characterId: string
       db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
       ...plan.items.map((i) => stackSpend(db, playerId, i.itemId, i.quantity)),
       ...(plan.fee > 0 ? ledgerStatements(db, { playerId, currency: 'eclipse_token', delta: -plan.fee, reason: `${kind}:${characterId}`, idempotencyKey: `prog:${playerId}:${requestId}` }) : []),
+      ...(kind === 'level_up' ? await taskEventStatements(db, playerId, { level_ups: 1 }) : []),
       db.prepare('INSERT INTO progression_requests (player_id, request_id, kind, result_json) VALUES (?1, ?2, ?3, ?4)').bind(playerId, requestId, `${kind}:${characterId}`, JSON.stringify(response)),
       db.prepare('DELETE FROM tx_guard')
     ];

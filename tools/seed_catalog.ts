@@ -7,6 +7,7 @@
  */
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { TaskConfig } from '../packages/content-schema/src/index';
 import { DropConfig, ProgressionConfig } from '../packages/economy/src/index';
 import { ROOT, readJson } from './lib/fsutil';
 
@@ -122,6 +123,27 @@ const drops = DropConfig.parse({
   tables: Object.fromEntries(dropTables.map((t) => [t.drop_table_id, { repeat: t.repeatable_rewards.map(dropEntry), firstClear: t.first_clear_rewards.map(dropEntry) }]))
 });
 add(`INSERT OR IGNORE INTO game_config (key, value_json) VALUES ('drops', ${j(drops)});`);
+
+// ---- task engine (canon economy_part1.json). Silver Crown payouts are retired with the currency (D-17); character XP pays as XP books
+// (Bound Chronicle = 500 XP). All payouts are PLACEHOLDERS for the final math pass. The ad task lives in the ad service (5 per rolling 12 h).
+const eco = rd<{ daily_schedule: { window_seconds: number; tasks: { id: string; objective: { type: string; count: number }; eclipse_token?: number; character_xp?: number }[]; window_completion: { requires: string[]; character_xp: number; account_xp: number } }; weekly_cycle: { completed_unclaimed_mail_days: number; segments: { id: string; start_day: number; duration_days: number; focus: string; eclipse_token: number; character_xp: number; objective: { type: string; count: number } }[] } }>('economy_part1.json');
+const tokens = (n: number | undefined): unknown[] => (n ? [{ type: 'currency', currency: 'eclipse_token', amount: n }] : []);
+const books = (xp: number | undefined): unknown[] => (xp ? [{ type: 'item', itemId: 'bound_chronicle', quantity: Math.max(1, Math.round(xp / 500)) }] : []);
+const objectiveOf = (o: { type: string; count: number }): { type: string; count: number } => ({ type: o.type === 'successful_level_up' ? 'level_ups' : o.type, count: o.count });
+const title = (id: string): string => id.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase());
+const tasks = TaskConfig.parse({
+  note: 'Canon task structure (UTC 12-hour windows, Monday weekly cycle). Payouts are placeholders (Silver Crowns dropped, character XP as XP books); tuned in the final math pass.',
+  windowHours: eco.daily_schedule.window_seconds / 3600,
+  daily: {
+    tasks: eco.daily_schedule.tasks.filter((t) => t.id !== 'watch_rewarded_memory').map((t) => ({ id: t.id, title_en: title(t.id), objective: objectiveOf(t.objective), rewards: [...tokens(t.eclipse_token), ...books(t.character_xp)] })),
+    completion: { requires: eco.daily_schedule.window_completion.requires, rewards: [...books(eco.daily_schedule.window_completion.character_xp), { type: 'account_xp', amount: eco.daily_schedule.window_completion.account_xp }] }
+  },
+  weekly: {
+    claimGraceDays: eco.weekly_cycle.completed_unclaimed_mail_days,
+    segments: eco.weekly_cycle.segments.map((g) => ({ id: g.id, title_en: title(g.id), startDay: g.start_day, durationDays: g.duration_days, objective: objectiveOf(g.objective), rewards: [...tokens(g.eclipse_token), ...books(g.character_xp)] }))
+  }
+});
+add(`INSERT OR IGNORE INTO game_config (key, value_json) VALUES ('tasks', ${j(tasks)});`);
 
 writeFileSync(join(ROOT, 'apps/api/seed/catalog.sql'), `${lines.join('\n')}\n`);
 console.log(`${items.length} items, ${wp.weapons.length} weapons, ${acc.accessories.length} accessories -> apps/api/seed/catalog.sql (${lines.length} statements)`);

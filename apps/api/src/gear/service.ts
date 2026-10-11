@@ -5,6 +5,7 @@ import { stackAdd, stackSpend } from '../db/grants';
 import { balanceOf, ledgerStatements } from '../db/ledger';
 import { cryptoRoll } from '../db/rng';
 import { loadProgressionConfig } from '../progression/characters';
+import { taskEventStatements } from '../tasks/service';
 
 export const GearRequest = z.object({ requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/) }).strict();
 export const EquipBody = z.object({ characterId: z.string().regex(/^[a-z][a-z0-9_]{1,79}$/) }).strict();
@@ -116,6 +117,7 @@ async function gearOp(db: D1Database, playerId: string, id: number, requestId: s
       db.prepare('UPDATE player_gear SET version = version + 1 WHERE id = ?1 AND player_id = ?2 AND version = ?3').bind(id, playerId, g.version),
       db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
       ...statements,
+      ...(kind === 'gear_level' ? await taskEventStatements(db, playerId, { level_ups: 1 }) : []),
       db.prepare('INSERT INTO progression_requests (player_id, request_id, kind, result_json) VALUES (?1, ?2, ?3, ?4)').bind(playerId, requestId, `${kind}:${id}`, JSON.stringify(response)),
       db.prepare('DELETE FROM tx_guard')
     ];
