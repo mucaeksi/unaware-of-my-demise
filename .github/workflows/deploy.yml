@@ -67,7 +67,26 @@ jobs:
       - name: Deploy game Worker
         id: game
         working-directory: apps/api
-        run: npx wrangler deploy -c wrangler.game.jsonc --env "$TARGET" --keep-vars | tee "$RUNNER_TEMP/game.log"
+        # Public identifiers come from GitHub *variables*, the Play service-account key from a GitHub *secret* (stored as a Worker secret,
+        # never printed). Empty = keep what the Worker already has. RTDN_AUDIENCE is derived from this deployment's own URL so it can never
+        # drift: configure the Pub/Sub push subscription (endpoint AND audience) to exactly https://uomd-game-<env>.<subdomain>.workers.dev/api/v1/billing/rtdn.
+        env:
+          GOOGLE_CLIENT_IDS: ${{ vars.GOOGLE_CLIENT_IDS }}
+          PLAY_PACKAGE_NAME: ${{ vars.PLAY_PACKAGE_NAME }}
+          RTDN_PUSH_SERVICE_ACCOUNT: ${{ vars.RTDN_PUSH_SERVICE_ACCOUNT }}
+          PLAY_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+        run: |
+          extra=()
+          [ -n "$GOOGLE_CLIENT_IDS" ] && extra+=(--var "GOOGLE_CLIENT_IDS:$GOOGLE_CLIENT_IDS")
+          [ -n "$PLAY_PACKAGE_NAME" ] && extra+=(--var "PLAY_PACKAGE_NAME:$PLAY_PACKAGE_NAME")
+          if [ -n "$RTDN_PUSH_SERVICE_ACCOUNT" ]; then
+            extra+=(--var "RTDN_PUSH_SERVICE_ACCOUNT:$RTDN_PUSH_SERVICE_ACCOUNT" --var "RTDN_AUDIENCE:https://uomd-game-$TARGET.muratcaneksiii.workers.dev/api/v1/billing/rtdn")
+          fi
+          npx wrangler deploy -c wrangler.game.jsonc --env "$TARGET" --keep-vars "${extra[@]}" | tee "$RUNNER_TEMP/game.log"
+          if [ -n "$PLAY_SERVICE_ACCOUNT" ]; then
+            printf '%s' "$PLAY_SERVICE_ACCOUNT" | npx wrangler secret put GOOGLE_PLAY_SERVICE_ACCOUNT -c wrangler.game.jsonc --env "$TARGET" > /dev/null
+            echo "Play service-account key stored as a Worker secret"
+          fi
       - name: Deploy Control Center Worker
         working-directory: apps/api
         # ACCESS_AUD (the Access application's Audience tag, not secret) and the first owner's e-mail come from GitHub
