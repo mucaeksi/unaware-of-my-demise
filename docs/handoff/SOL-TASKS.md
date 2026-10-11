@@ -9,7 +9,8 @@ Tick a box only when committed and accepted; add `commit <hash> - what is left`.
 - [ ] SOL-5 Media production queue (`docs/media/QUEUE.md`)
 - [ ] SOL-6 Localization catalog, EN source only (TR deferred by owner 2026-10-11; `docs/i18n/STRINGS.md`)
 - [ ] SOL-7 Economy tuning proposal (`docs/economy/TUNING_PROPOSAL.md`)
-- [ ] SOL-8 Side-story requirements for the engine (`docs/handoff/EVENT_REQUIREMENTS.md`)
+- [x] SOL-8 Side-story requirements for the engine (`docs/handoff/EVENT_REQUIREMENTS.md`)
+  - commit `5a82fae3` — accepted: all 8 packages / 32 encounter variants audited against grammar, enemy IDs and null rewards. Left: production mappings, rewards, event state and Japanese media bindings.
 
 Owner scope (2026-10-11): English player text only for now; all produced spoken dialogue must be Japanese (`ja-JP`, Chirp 3 HD). No media generation is authorized by this handoff task.
 
