@@ -7,6 +7,8 @@ import { ContentStore, HttpError } from './content/store';
 import { d1RateLimit, onError, securityHeaders } from './http';
 import type { Channel } from '@uomd/content-schema';
 import type { GameEnv } from './env';
+import { registerPlayerRoutes } from './player/routes';
+import type { JWTVerifyGetKey } from 'jose';
 
 const ChannelParam = z.enum(['dev', 'staging', 'production']);
 const VerifyBody = z
@@ -26,8 +28,8 @@ async function limited(env: GameEnv, req: Request, bucket: string, limit: number
 }
 
 /** Public game API. Everything here is safe to call from an untrusted client. */
-export function createGameApp(): Hono<{ Bindings: GameEnv }> {
-  const app = new Hono<{ Bindings: GameEnv }>();
+export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey } = {}): Hono<{ Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } }> {
+  const app = new Hono<{ Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } }>();
   app.use('*', securityHeaders);
   app.onError(onError);
 
@@ -119,6 +121,8 @@ export function createGameApp(): Hono<{ Bindings: GameEnv }> {
       .run();
     return c.json({ valid: out.valid, complete: out.complete, match, result: out.result, logHash: out.logHash, ...(out.error ? { error: out.error } : {}) });
   });
+
+  registerPlayerRoutes(app, opts);
 
   app.all('/api/*', (c) => c.json({ error: 'not_found', message: 'no such endpoint' }, 404));
   return app;

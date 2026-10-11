@@ -13,7 +13,8 @@ Miniflare/Workers runtime, not a deployed Cloudflare environment; **NOT DONE** =
 | Deterministic combat engine (narrative `battle_rules`: action gauge, damage formula, element chart, focus, statuses, replay) | VERIFIED | `packages/combat` 20 tests (determinism, replay hash, illegal-action rejection, MAX_TURNS) |
 | Story VM (labels, choices, checkpoints, save/resume) | VERIFIED | `packages/story` 5 tests |
 | Patch manager (signature, generation monotonicity, compat, depends_on, rollout, resume, per-file SHA-256, atomic state, rollback, corrupt-object auto-rollback) | VERIFIED | `packages/patch` 13 tests |
-| Cloudflare Workers API (Hono) on D1 + R2: game API, admin API, Access JWT auth + RBAC, signed releases, battle replay verification, ledger | LOCAL | `apps/api` 38 tests in the Workers runtime (Miniflare D1/R2) incl. 50-way concurrent ledger debit, idempotency, append-only triggers, CSRF guard |
+| Cloudflare Workers API (Hono) on D1 + R2: game API, admin API, Access JWT auth + RBAC, signed releases, battle replay verification, ledger, Google sign-in + sessions, server-side gacha | LOCAL | `apps/api` 52 tests in the Workers runtime (Miniflare D1/R2) incl. 50-way concurrent ledger debit, idempotency, append-only triggers, CSRF guard, Google token verification, atomic gacha pulls (12 identical + 28 simultaneous requests) |
+| Gacha / economy engine (canonical rates, pity, 55 % target, Fate Knots, min 4★, exact analysis, simulator) | VERIFIED | `packages/economy` 14 tests; migration `0003_player_core.sql` (not yet applied to remote staging: the next Deploy run does it) |
 | Phaser 4.2.1 game (title → story VM → 5v5-capable tactical battle → victory/verification → chapters) | LOCAL | Playwright e2e in real Chromium/WebGL, 2 viewports (see §2); screenshots in `docs/evidence/` |
 | Data-only content patching (new chapter node + new enemy unit + story delivered from R2 to the *unchanged* client; rollback to embedded base) | LOCAL | e2e `live data patch` (desktop) + `apps/api/test/content.test.ts` "real patch manager applies the published patch end to end" |
 | Control Center v0 (React SPA): dashboard (D1/R2 health, channels, table counts), characters (20 seeded, optimistic concurrency, audit), asset catalog with provenance, patch list/publish/rollback/kill, audit log, user roles | LOCAL | e2e `admin.spec.ts` on both viewports against real D1/R2 (Miniflare) with a test-only Access identity |
@@ -22,7 +23,7 @@ Miniflare/Workers runtime, not a deployed Cloudflare environment; **NOT DONE** =
 | Security review | VERIFIED | `docs/SECURITY_REVIEW_2026-10-10.md` (5 findings fixed, residual risks listed). `npm audit`: 1 low (esbuild dev-server file read on Windows; dev tooling only) |
 | Secret scan of the working tree (private JWK members, PEM blocks, `AIza…`, `cfut_…`, `ghp_…`, `sk-…`) | VERIFIED | no matches; `.env*`, `.cache/`, `.wrangler/` are git-ignored |
 
-Test totals at the last full run: **129 unit/Workers tests** (api 38, game 3, combat 20, content-schema 31, patch 13, shared 19, story 5)
+Test totals at the last full run: **167 unit/Workers tests** (api 52, game 3, combat 20, content-schema 31, economy 14, patch 13, shared 22, story 5)
 and **9 e2e tests passed, 1 skipped by design** (the one-way "publish a release" scenario runs on the first project only).
 
 ## 1b. Deployed staging environment (GitHub Actions run 38081525826 `deploy.yml`, 2026-10-10, all steps green)

@@ -105,7 +105,7 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     const probe = await db.prepare('SELECT 1').run();
     const latency = Date.now() - t0;
     const counts: Record<string, number> = {};
-    for (const t of ['characters', 'assets', 'content_objects', 'content_releases', 'release_files', 'battle_audit', 'audit_log', 'admin_users', 'players', 'ledger'] as const) {
+    for (const t of ['characters', 'assets', 'content_objects', 'content_releases', 'release_files', 'battle_audit', 'audit_log', 'admin_users', 'players', 'ledger', 'gacha_pulls', 'banners'] as const) {
       const r = await db.prepare(`SELECT COUNT(*) AS n FROM ${t}`).first<{ n: number }>();
       counts[t] = r?.n ?? 0;
     }

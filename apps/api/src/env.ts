@@ -12,6 +12,10 @@ export interface GameEnv {
   API_LIMITER?: RateLimit;
   ENVIRONMENT: Environment;
   CONTENT_CHANNEL: Environment;
+  /** comma separated Google OAuth client IDs (Android + web) accepted as ID-token audience; sign-in fails closed when absent */
+  GOOGLE_CLIENT_IDS?: string;
+  /** dev-only: URL of a test JWKS used instead of Google's (ignored unless ENVIRONMENT is dev) */
+  GOOGLE_JWKS_URL?: string;
 }
 
 /** Bindings of the Control Center Worker (static admin SPA + /admin/api, behind Cloudflare Access). */
