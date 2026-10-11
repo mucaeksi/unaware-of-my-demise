@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a2_terrace_3",
+  "title_en": "The Upper Landing",
+  "location_id": "tw_terrace_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tw_terrace_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_3_001",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "The upper landing is not clear yet. The terrace remains safe while we make it so.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_3_002",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "The support is behind the nearest dead. I can hold while it is chosen.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_3_003",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "A steady opening. Keep it rather than chasing the first gap.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "thistle_roe"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_terrace_3_004",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "Nobody watching needs to join the fight to earn the view.",
+      "emotion": "serious"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a2_terrace_3_005",
+      "text": "The group steps toward the landing. The villagers stay seated until the road is open."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a2_terrace_3_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

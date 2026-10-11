@@ -1,0 +1,18 @@
+{
+  "event_id": "event_those_who_watch",
+  "gate": {
+    "after_stage": "6-5",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "physical_character_earliest_stages": {
+    "clem_marr": "4-3",
+    "vespera_wisp": "6-3",
+    "thistle_roe": "4-3"
+  },
+  "timeline_tr": "Kaynak Sun-Eclipse üç sahnesi/10 satırı aynen. Üç karaktere bir yerel guide ve lantern carrier eşlik eder; beş token cümlesinin beşlisi yeni taslakta böyle kurulur. Mahmut/Fadyme çağrılmaz. Tokendan yeni cüzdan yapılmaz; Part II teklifi/Clockless Court veya kralın katili açılmaz.",
+  "core_action_tr": "Gözlem, bakış açısı ve tutulmanın gerilimi",
+  "new_text_status": "authored_narrative_for_future_patch; not a replacement of canon main story",
+  "source_main": "99df3cf"
+}

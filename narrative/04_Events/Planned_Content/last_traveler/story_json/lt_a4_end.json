@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a4_end",
+  "title_en": "A Road Left Open",
+  "location_id": "lt_forest_junction",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_forest_junction"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_end_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Ready?",
+      "emotion": "bright"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_end_002",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "Ready.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_end_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Good. I was beginning to think the sign might join the company.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_end_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "It has a place to stay.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a4_end_005",
+      "text": "Behind them, the road bends out of sight. The arrow points before it does."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a4_end_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

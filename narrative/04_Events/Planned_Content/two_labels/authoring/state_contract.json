@@ -1,0 +1,30 @@
+{
+  "event_id": "event_two_labels",
+  "schema_version": 1,
+  "account_key_fields": [
+    "player_id",
+    "event_id",
+    "story_revision"
+  ],
+  "progress_fields": [
+    "active_node_id",
+    "story_save",
+    "completed_node_ids",
+    "prep",
+    "route",
+    "approach",
+    "focus",
+    "completed"
+  ],
+  "story_save_shape": {
+    "sceneId": "string",
+    "index": "integer",
+    "choices": "string[]"
+  },
+  "completion_event": "tl_complete",
+  "reward_binding": null,
+  "retry_policy": "Stay at battle node until server verifies victory; retries are same intent, not new completion.",
+  "replay_policy": "Separate replay session; cannot mutate canonical choices, quest progress, event completion, or future reward claims.",
+  "alternative_route_policy": "Post-completion replay of 4 route scenes and 2 battles, with optional matching Act 5 callback; shared story remains viewable without replaying it.",
+  "migration_policy": "Stable scene/line/node/choice IDs; pin in-progress revision. On incompatible change restart current scene with notice, preserving completed nodes and original choices. Never remint rewards."
+}

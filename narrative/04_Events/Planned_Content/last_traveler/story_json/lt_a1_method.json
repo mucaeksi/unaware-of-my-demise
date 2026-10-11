@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a1_method",
+  "title_en": "Read the Road or Brace It",
+  "location_id": "lt_forest_junction",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_forest_junction"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_method_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I can read the turn first. Find what is coming and where it can reach.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_method_002",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "Or we brace the narrow side. Give the people behind us a clear place to wait.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_method_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Either can work. Tell us what you need from the rest of us.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_method_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Preferably before we all volunteer for the same end of a post.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "choice",
+      "prompt": "Choose the first approach.",
+      "options": [
+        {
+          "id": "lt_method_scout",
+          "text": "Read the turn — identify the reaching threat.",
+          "goto": "scout"
+        },
+        {
+          "id": "lt_method_brace",
+          "text": "Brace the passage — steady the front line.",
+          "goto": "brace"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "scout"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_method_005",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Stay where you can see the sign. I will not go beyond the first tree.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_method_006",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "I will watch the space behind you.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_method_007",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Call before you need us to move.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "brace"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_method_008",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "We need a solid footing, not a taller barrier.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_method_009",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I will check both approaches while you choose it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a1_method_010",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then neither of you has to watch everything.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a1_method_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

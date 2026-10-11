@@ -1,0 +1,83 @@
+line_id,speaker_id,speaker_display,text_en,emotion,voice_track,text_ja,recording_status
+dr_a1_edge_001,narrator,Narration,Water has reached the edge of the linen book. A dark line climbs the page without asking where the writing ends.,composed,jp_narration,,not_recorded_in_this_package
+dr_a1_edge_002,mirel_quill,Mirel,Lift the cover. Not the wet corner.,focused,jp,,not_recorded_in_this_package
+dr_a1_edge_003,sister_aveline,Aveline,And leave the passage clear. Someone is coming through with a blanket.,calm,jp,,not_recorded_in_this_package
+dr_a1_edge_004,dr_carrier,Carrier,I was told my slip would show where to return it.,hesitant,jp,,not_recorded_in_this_package
+dr_a1_edge_005,mirel_quill,Mirel,It should. A book that cannot be used is merely heavy paper.,precise,jp,,not_recorded_in_this_package
+dr_a1_edge_006,sister_aveline,Aveline,Sit on this side while we make it useful again.,warm,jp,,not_recorded_in_this_package
+dr_a1_edge_007,narrator,Narration,Mirel lays an empty board beneath the book. Aveline moves the chair without moving the person out of reach.,composed,jp_narration,,not_recorded_in_this_package
+dr_a1_slip_001,mirel_quill,Mirel,The day is clear. The receiving place is not.,focused,jp,,not_recorded_in_this_package
+dr_a1_slip_002,dr_carrier,Carrier,I borrowed it before the rain. I do not want to put it where nobody finds it.,worried,jp,,not_recorded_in_this_package
+dr_a1_slip_003,sister_aveline,Aveline,Nobody will send you back into the rain for an unclear line.,gentle,jp,,not_recorded_in_this_package
+dr_a1_slip_004,mirel_quill,Mirel,Nor will we improve the line by guessing confidently.,precise,jp,,not_recorded_in_this_package
+dr_a1_slip_005,narrator,Narration,The original slip remains beside the book. Mirel writes its page number on a dry scrap.,composed,jp_narration,,not_recorded_in_this_package
+dr_a1_slip_006,sister_aveline,Aveline,"There is a dry side room, and a sound table beside this wall. Which can we make ready first?",focused,jp,,not_recorded_in_this_package
+dr_a1_layout_001,mirel_quill,Mirel,The shelf gives us space to sort the pages. We must keep the route to it clear.,focused,jp,,not_recorded_in_this_package
+dr_a1_layout_002,sister_aveline,Aveline,The wall table lets people come to the record. We must hold this entrance steady.,focused,jp,,not_recorded_in_this_package
+dr_a1_layout_003,mirel_quill,Mirel,The book has no preference. Its readers do.,wry,jp,,not_recorded_in_this_package
+dr_a1_layout_004,mirel_quill,Mirel,Page numbers outward. Then we can find the line without turning everything over.,focused,jp,,not_recorded_in_this_package
+dr_a1_layout_005,sister_aveline,Aveline,I will keep the waiting place beside the door.,calm,jp,,not_recorded_in_this_package
+dr_a1_layout_006,sister_aveline,Aveline,Keep the opening wide enough for two people to pass.,focused,jp,,not_recorded_in_this_package
+dr_a1_layout_007,mirel_quill,Mirel,"I will make the slips face the reader, rather than the wall.",precise,jp,,not_recorded_in_this_package
+dr_a2_shelf_1_001,mirel_quill,Mirel,This stack stays in order. A dry mistake is still a mistake.,focused,jp,,not_recorded_in_this_package
+dr_a2_shelf_1_002,sister_aveline,Aveline,"I have brought a cloth for the bench, not the book.",warm,jp,,not_recorded_in_this_package
+dr_a2_shelf_1_003,mirel_quill,Mirel,Thank you. The book is not the only thing waiting here.,quiet,jp,,not_recorded_in_this_package
+dr_a2_shelf_1_004,narrator,Narration,The carrier settles close enough to see the slips being moved.,composed,jp_narration,,not_recorded_in_this_package
+dr_a2_shelf_1_005,dr_carrier,Carrier,I can recognize mine from here.,relieved,jp,,not_recorded_in_this_package
+dr_a2_shelf_1_006,mirel_quill,Mirel,Good. Recognition is useful evidence. We will keep it beside the page number.,precise,jp,,not_recorded_in_this_package
+dr_a2_shelf_2_001,sister_aveline,Aveline,This crate goes behind the bench. Nobody should have to step over it to reach the shelf.,focused,jp,,not_recorded_in_this_package
+dr_a2_shelf_2_002,mirel_quill,Mirel,An excellent shelving rule. I wish more scribes had feet.,wry,jp,,not_recorded_in_this_package
+dr_a2_shelf_2_003,dr_carrier,Carrier,I could hold the stack.,hesitant,jp,,not_recorded_in_this_package
+dr_a2_shelf_2_004,mirel_quill,Mirel,Hold the dry board instead. You need not risk the slip twice.,calm,jp,,not_recorded_in_this_package
+dr_a2_shelf_2_005,narrator,Narration,The pages settle on the shelf with their numbers visible. The carrier keeps the original on the board.,composed,jp_narration,,not_recorded_in_this_package
+dr_a2_shelf_2_006,sister_aveline,Aveline,Now we can look without making you stand in the doorway.,warm,jp,,not_recorded_in_this_package
+dr_a2_desk_1_001,sister_aveline,Aveline,This side for waiting. That side for anyone walking through.,focused,jp,,not_recorded_in_this_package
+dr_a2_desk_1_002,mirel_quill,Mirel,The original goes here. New notes go on the clean board.,precise,jp,,not_recorded_in_this_package
+dr_a2_desk_1_003,dr_carrier,Carrier,Why not write the clearer answer on the slip?,curious,jp,,not_recorded_in_this_package
+dr_a2_desk_1_004,mirel_quill,Mirel,Because we have not earned a clearer answer yet.,calm,jp,,not_recorded_in_this_package
+dr_a2_desk_1_005,narrator,Narration,"Aveline shifts the lamp. The blurred line remains blurred, but can be seen without leaning into the passage.",composed,jp_narration,,not_recorded_in_this_package
+dr_a2_desk_1_006,sister_aveline,Aveline,At least nobody has to read in the dark while we ask.,gentle,jp,,not_recorded_in_this_package
+dr_a2_desk_2_001,dr_carrier,Carrier,I thought the table was for the people keeping the book.,quiet,jp,,not_recorded_in_this_package
+dr_a2_desk_2_002,mirel_quill,Mirel,It is for the book being read.,precise,jp,,not_recorded_in_this_package
+dr_a2_desk_2_003,sister_aveline,Aveline,Which includes you.,warm,jp,,not_recorded_in_this_package
+dr_a2_desk_2_004,narrator,Narration,Mirel turns the board toward the carrier. Aveline rests a dry blanket across the chair back.,composed,jp_narration,,not_recorded_in_this_package
+dr_a2_desk_2_005,mirel_quill,Mirel,You can point to what you remember. We will not make the page say it first.,focused,jp,,not_recorded_in_this_package
+dr_a2_desk_2_006,dr_carrier,Carrier,I remember the blue cord around the bundle.,relieved,jp,,not_recorded_in_this_package
+dr_a2_reading_001,mirel_quill,Mirel,The slip tells us the day. The blue cord may tell us which return point lent it.,focused,jp,,not_recorded_in_this_package
+dr_a2_reading_002,sister_aveline,Aveline,"We can record the limit of what we know, or ask the keeper of the bundles.",calm,jp,,not_recorded_in_this_package
+dr_a2_reading_003,mirel_quill,Mirel,"Either is honest. Only one pretends the water never touched the line, and we will not do that.",precise,jp,,not_recorded_in_this_package
+dr_a2_reading_004,mirel_quill,Mirel,"A separate note. Clear date, unclear place, blue cord remembered by the carrier.",focused,jp,,not_recorded_in_this_package
+dr_a2_reading_005,sister_aveline,Aveline,The refuge keeper can receive it safely without inventing a destination.,calm,jp,,not_recorded_in_this_package
+dr_a2_reading_006,dr_carrier,Carrier,Then I can return it here and let them check.,relieved,jp,,not_recorded_in_this_package
+dr_a2_reading_007,sister_aveline,Aveline,I will ask from the door. Stay warm while we check.,focused,jp,,not_recorded_in_this_package
+dr_a2_reading_008,mirel_quill,Mirel,"A confirmed answer belongs on a new note, with where it came from.",precise,jp,,not_recorded_in_this_package
+dr_a2_reading_009,dr_carrier,Carrier,I can show the cord. It is still on the bundle.,quiet,jp,,not_recorded_in_this_package
+dr_a2_note_001,mirel_quill,Mirel,There. The note says what was legible and what was not.,focused,jp,,not_recorded_in_this_package
+dr_a2_note_002,dr_carrier,Carrier,Is an unclear place allowed in the book?,hesitant,jp,,not_recorded_in_this_package
+dr_a2_note_003,mirel_quill,Mirel,It was already there. Now it is admitted.,precise,jp,,not_recorded_in_this_package
+dr_a2_note_004,sister_aveline,Aveline,And you have a place to leave the bundle while it is checked.,warm,jp,,not_recorded_in_this_package
+dr_a2_note_005,narrator,Narration,The carrier places the slip flat on the board instead of trying to unfold the wet corner again.,composed,jp_narration,,not_recorded_in_this_package
+dr_a2_ask_001,sister_aveline,Aveline,Blue cords return here. The keeper tied them herself before the rain.,calm,jp,,not_recorded_in_this_package
+dr_a2_ask_002,mirel_quill,Mirel,Then I will note that she confirmed it. I will not mend the original handwriting into ours.,focused,jp,,not_recorded_in_this_package
+dr_a2_ask_003,dr_carrier,Carrier,I thought I had forgotten the way.,relieved,jp,,not_recorded_in_this_package
+dr_a2_ask_004,sister_aveline,Aveline,The line got wet. You did not do anything wrong.,warm,jp,,not_recorded_in_this_package
+dr_a2_ask_005,narrator,Narration,"The cord lies beside the note, an ordinary small thing that helped an answer become clear.",composed,jp_narration,,not_recorded_in_this_package
+dr_a3_passage_001,narrator,Narration,A scrape travels along the outer passage. Aveline sets the carrier’s board safely inside.,composed,jp_narration,,not_recorded_in_this_package
+dr_a3_passage_002,sister_aveline,Aveline,Keep this doorway clear. Nobody waiting here comes into the fight.,focused,jp,,not_recorded_in_this_package
+dr_a3_passage_003,mirel_quill,Mirel,One behind the armor is sustaining the line. Look before choosing the target.,focused,jp,,not_recorded_in_this_package
+dr_a3_passage_004,sister_aveline,Aveline,We have room to hold. We have a reason to keep it.,calm,jp,,not_recorded_in_this_package
+dr_a3_passage_005,narrator,Narration,"The book remains on dry wood. The two women face the approach, not the waiting bench.",composed,jp_narration,,not_recorded_in_this_package
+dr_a3_clear_001,sister_aveline,Aveline,Clear. Bring the board when you are ready.,calm,jp,,not_recorded_in_this_package
+dr_a3_clear_002,mirel_quill,Mirel,The slips are still in order.,focused,jp,,not_recorded_in_this_package
+dr_a3_clear_003,dr_carrier,Carrier,And I know where to bring the bundle.,quiet,jp,,not_recorded_in_this_package
+dr_a3_clear_004,sister_aveline,Aveline,Good. Let someone else carry it through the door with you.,warm,jp,,not_recorded_in_this_package
+dr_a3_clear_005,narrator,Narration,The next reader comes inside without balancing over a crate.,composed,jp_narration,,not_recorded_in_this_package
+dr_a4_found_001,dr_carrier,Carrier,This is the page. I can see the day now.,relieved,jp,,not_recorded_in_this_package
+dr_a4_found_002,mirel_quill,Mirel,The day was clear before. We have made it easier to find.,precise,jp,,not_recorded_in_this_package
+dr_a4_found_003,sister_aveline,Aveline,And easier to use without standing in the wet.,warm,jp,,not_recorded_in_this_package
+dr_a4_found_004,narrator,Narration,The bundle rests beside the return desk. Its final receiving entry is left to the keeper who accepts it.,composed,jp_narration,,not_recorded_in_this_package
+dr_a4_found_005,mirel_quill,Mirel,We can leave an honest place for the next line.,quiet,jp,,not_recorded_in_this_package
+dr_a4_end_001,sister_aveline,Aveline,The record has somewhere to wait. So do the people.,gentle,jp,,not_recorded_in_this_package
+dr_a4_end_002,mirel_quill,Mirel,I may borrow that wording for the shelf rules.,wry,jp,,not_recorded_in_this_package
+dr_a4_end_003,sister_aveline,Aveline,You may. Keep the shelf within reach.,warm,jp,,not_recorded_in_this_package
+dr_a4_end_004,narrator,Narration,Mirel sets a dry board beneath the next slip. Aveline opens space for the next reader.,composed,jp_narration,,not_recorded_in_this_package

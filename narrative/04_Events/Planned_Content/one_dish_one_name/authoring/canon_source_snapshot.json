@@ -1,0 +1,158 @@
+{
+  "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
+  "event": {
+    "event_id": "event_harvest_inn_meal",
+    "title_en": "The Red Harvest Supper",
+    "event_type": "festival",
+    "canon_status": "canon",
+    "timeline_placement": "after stage 3-5",
+    "unlock": {
+      "after_stage": "3-5"
+    },
+    "purpose_en": "Oakhaven's first festival after the mercenaries. Daily life, comedy and names; explains the Inn Meal custom.",
+    "featured_character_ids": [
+      "nixie_vale",
+      "pippa_bell",
+      "jori_flint",
+      "kera_voss"
+    ],
+    "scenes": [
+      {
+        "scene_id": "event_harvest_inn_meal_1",
+        "title_en": "A Table for Everyone",
+        "location_id": "oakhaven_square",
+        "direction_en": "The square is set with long tables. Every guest must bring one dish and one name.",
+        "lines": [
+          {
+            "line_id": "event_harvest_inn_meal_1_001",
+            "speaker_id": "pippa_bell",
+            "speaker_display": "Pippa",
+            "text_en": "Rule of the Harvest Supper: one dish, one name. You say the name, you get a bowl.",
+            "emotion": "bright",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_1_002",
+            "speaker_id": "kera_voss",
+            "speaker_display": "Kera",
+            "text_en": "I brought a dish. It is technically soup.",
+            "emotion": "defensive",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_1_003",
+            "speaker_id": "jori_flint",
+            "speaker_display": "Jori",
+            "text_en": "It is moving.",
+            "emotion": "horrified",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_1_004",
+            "speaker_id": "kera_voss",
+            "speaker_display": "Kera",
+            "text_en": "It is effervescent.",
+            "emotion": "tsundere",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_1_005",
+            "speaker_id": "nixie_vale",
+            "speaker_display": "Nixie",
+            "text_en": "I will eat it! For the festival!",
+            "emotion": "heroic",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_1_006",
+            "speaker_id": "narrator",
+            "speaker_display": "Narration",
+            "text_en": "Nixie ate it. Nixie was fine. Nixie glowed faintly for an hour.",
+            "emotion": "comic",
+            "voice_track": "jp_narration"
+          }
+        ]
+      },
+      {
+        "scene_id": "event_harvest_inn_meal_2",
+        "title_en": "The Inn Meal",
+        "location_id": "oakhaven_inn",
+        "direction_en": "The innkeeper explains why every traveler gets a free meal twice a day.",
+        "lines": [
+          {
+            "line_id": "event_harvest_inn_meal_2_001",
+            "speaker_id": "oakhaven_innkeeper",
+            "speaker_display": "Innkeeper",
+            "text_en": "After Crownfall, travelers stopped paying. So we stopped charging. Twice a day, a meal, no coin.",
+            "emotion": "warm",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_2_002",
+            "speaker_id": "fadyme",
+            "speaker_display": "Fadyme",
+            "text_en": "That is generous.",
+            "emotion": "touched",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_2_003",
+            "speaker_id": "oakhaven_innkeeper",
+            "speaker_display": "Innkeeper",
+            "text_en": "It is practical. A fed traveler says their name at the door. A hungry one slips past the register.",
+            "emotion": "wry",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_2_004",
+            "speaker_id": "mahmut",
+            "speaker_display": "Mahmut",
+            "text_en": "So the meal is a count.",
+            "emotion": "observant",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_2_005",
+            "speaker_id": "oakhaven_innkeeper",
+            "speaker_display": "Innkeeper",
+            "text_en": "The meal is a meal, knight. The count is a bonus.",
+            "emotion": "laughing",
+            "voice_track": "jp"
+          }
+        ]
+      },
+      {
+        "scene_id": "event_harvest_inn_meal_3",
+        "title_en": "Last Song",
+        "location_id": "oakhaven_square",
+        "direction_en": "Late night. Pippa leads the square in a song of every name collected.",
+        "lines": [
+          {
+            "line_id": "event_harvest_inn_meal_3_001",
+            "speaker_id": "pippa_bell",
+            "speaker_display": "Pippa",
+            "text_en": "Last verse! Everyone who brought a name, sing it with me!",
+            "emotion": "joyful",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_3_002",
+            "speaker_id": "narrator",
+            "speaker_display": "Narration",
+            "text_en": "Two hundred voices, off-key and loud. Somewhere, a bell rang, and nobody stopped singing.",
+            "emotion": "warm",
+            "voice_track": "jp_narration"
+          },
+          {
+            "line_id": "event_harvest_inn_meal_3_003",
+            "speaker_id": "fadyme_thought",
+            "speaker_display": "Fadyme (thought)",
+            "text_en": "The bell cannot count a square this loud. For one night, it is losing.",
+            "emotion": "content",
+            "voice_track": "jp_inner"
+          }
+        ]
+      }
+    ]
+  }
+}

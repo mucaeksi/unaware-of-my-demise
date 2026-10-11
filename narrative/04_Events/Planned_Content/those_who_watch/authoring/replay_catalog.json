@@ -1,0 +1,75 @@
+{
+  "event_id": "event_those_who_watch",
+  "session_kind": "isolated_replay",
+  "mutates_original_progress": false,
+  "reward_binding": null,
+  "scene_replays": [
+    "tw_a1_road",
+    "event_sun_eclipse_day_1",
+    "tw_a1_questions",
+    "tw_a1_place",
+    "tw_a2_ridge_1",
+    "tw_a2_ridge_2",
+    "tw_a2_ridge_3",
+    "tw_a2_ridge_4",
+    "tw_a2_terrace_1",
+    "tw_a2_terrace_2",
+    "tw_a2_terrace_3",
+    "tw_a2_terrace_4",
+    "event_sun_eclipse_day_2",
+    "tw_a3_after",
+    "tw_a3_account",
+    "tw_a4_descent",
+    "tw_a4_clear",
+    "tw_a4_seen",
+    "tw_a4_heard",
+    "event_sun_eclipse_day_3",
+    "tw_a5_token",
+    "tw_a5_company",
+    "tw_a5_end"
+  ],
+  "segment_replays": [
+    {
+      "entry_node": "tw_a2_ridge_1",
+      "stop_before_node": "event_sun_eclipse_day_2",
+      "initial_state": {
+        "place": "ridge"
+      },
+      "expected_scenes": 4,
+      "expected_battles": 2
+    },
+    {
+      "entry_node": "tw_a2_terrace_1",
+      "stop_before_node": "event_sun_eclipse_day_2",
+      "initial_state": {
+        "place": "terrace"
+      },
+      "expected_scenes": 4,
+      "expected_battles": 2
+    }
+  ],
+  "conversation_replays": [
+    {
+      "scene_id": "tw_a5_company",
+      "choice_id": "tw_focus_clem"
+    },
+    {
+      "scene_id": "tw_a5_company",
+      "choice_id": "tw_focus_vespera"
+    },
+    {
+      "scene_id": "tw_a5_company",
+      "choice_id": "tw_focus_thistle"
+    },
+    {
+      "scene_id": "tw_a3_account",
+      "choice_id": "tw_account_seen",
+      "followup_scene": "tw_a4_seen"
+    },
+    {
+      "scene_id": "tw_a3_account",
+      "choice_id": "tw_account_heard",
+      "followup_scene": "tw_a4_heard"
+    }
+  ]
+}

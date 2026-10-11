@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a3_after_boundary",
+  "title_en": "The Door Stays Open",
+  "location_id": "tl_clinic_table",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_clinic_table"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a3_after_boundary_001",
+      "text": "The lantern returns to its hook. The people inside have not moved from the dry benches."
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_after_boundary_002",
+      "speaker": "tl_patient",
+      "speaker_display": "Patient",
+      "text": "Did we make you stay longer?",
+      "emotion": "worried"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_after_boundary_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "You did not make the road unsafe.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_after_boundary_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "We knew where we were taking the crates.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_after_boundary_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Now we have room to finish the work.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_after_boundary_006",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The far lane is clear as well. I checked it on the way back.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_after_boundary_007",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Then sit down for one minute before you check it again.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_after_boundary_008",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I can still see it from the door.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_after_boundary_009",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "A remarkable compromise. Take it.",
+      "emotion": "wry"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a3_after_boundary_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

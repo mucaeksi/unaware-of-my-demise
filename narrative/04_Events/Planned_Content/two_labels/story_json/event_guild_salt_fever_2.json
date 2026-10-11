@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "scene_id": "event_guild_salt_fever_2",
+  "title_en": "The Coast Road",
+  "location_id": "salt_road_coast",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "salt_road_coast"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_guild_salt_fever_2_001",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "This is where I learned. My teacher treated this fever with salt and honesty.",
+      "emotion": "reflective"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_guild_salt_fever_2_002",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "My brother and I stole bread from that bakery.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_guild_salt_fever_2_003",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Then we will pay it back with medicine.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "event_guild_salt_fever_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/04_Events/events_part1.json",
+    "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
+    "note": "Verbatim source lines."
+  }
+}

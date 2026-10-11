@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a4_company",
+  "title_en": "A Small Thing Shared",
+  "location_id": "lt_forest_junction",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_forest_junction"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a4_company_001",
+      "text": "The post no longer needs a shoulder. The company has one quiet moment before moving on."
+    },
+    {
+      "op": "choice",
+      "prompt": "Whose small change do you notice?",
+      "options": [
+        {
+          "id": "lt_focus_brin",
+          "text": "Brin, watching without holding the post.",
+          "goto": "brin"
+        },
+        {
+          "id": "lt_focus_nixie",
+          "text": "Nixie, reading the mark from the road.",
+          "goto": "nixie"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "brin"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_company_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "It stayed when you let go.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_company_003",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "We chose the ground before I held it.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_company_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "That was a very good improvement to the plan.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_company_005",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "You watched the side I could not.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_company_006",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "And you both told us where to stand.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a4_company_007",
+      "text": "Brin checks the post once with her hand, not her whole weight."
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "nixie"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_company_008",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Brin saw the mark from where the traveler would need it.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_company_009",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "You drew it where it could be seen.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_company_010",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "After you looked.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_company_011",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "An arrow with a second opinion. We should keep the idea.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a4_company_012",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We can use it at the next turn.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a4_company_013",
+      "text": "Nixie leaves the chalk in her pouch. This mark does not need another correction."
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a4_company_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

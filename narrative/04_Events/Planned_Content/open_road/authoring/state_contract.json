@@ -1,0 +1,32 @@
+{
+  "event_id": "side_quest_open_road",
+  "schema_version": 1,
+  "account_key_fields": [
+    "player_id",
+    "event_id",
+    "story_revision"
+  ],
+  "progress_fields": [
+    "active_node_id",
+    "story_save",
+    "completed_node_ids",
+    "choices",
+    "completed"
+  ],
+  "state_keys": {
+    "handoff": [
+      "supply",
+      "passage"
+    ],
+    "test": [
+      "newcomer",
+      "pause"
+    ]
+  },
+  "reward_binding": null,
+  "energy_cost": null,
+  "retry_policy": "Server verified victory required; retry remains same node and does not alter completed state.",
+  "save_policy": "Save scene cursor/choices at safe line boundaries and scene-end checkpoint; save before pending choices.",
+  "replay_policy": "Independent session; never overwrites original decisions or future reward claims.",
+  "migration_policy": "Pin in-progress revision; preserve stable IDs, completed nodes and choices; never silently restart the whole story."
+}

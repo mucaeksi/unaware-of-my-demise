@@ -1,0 +1,117 @@
+line_id,speaker_id,speaker_display,text_en,emotion,voice_track,text_ja,recording_status
+lt_a1_sign_001,narrator,Narration,"At the bend beyond the shrine, the sign is lying where nobody can read it without leaving the road.",composed,jp_narration,,not_recorded_in_this_package
+lt_a1_sign_002,nixie_vale,Nixie,That is an unhelpful place for a helpful thing.,focused,jp,,not_recorded_in_this_package
+lt_a1_sign_003,brin_alder,Brin,The post is loose. I can stand it up again.,calm,jp,,not_recorded_in_this_package
+lt_a1_sign_004,mahmut,Mahmut,Wait. We should see why it fell.,focused,jp,,not_recorded_in_this_package
+lt_a1_sign_005,fadyme,Fadyme,A sign that tells us to step off the path deserves a little suspicion.,wry,jp,,not_recorded_in_this_package
+lt_a1_sign_006,nixie_vale,Nixie,There are tracks behind it. Not all of them came from the road.,focused,jp,,not_recorded_in_this_package
+lt_a1_sign_007,brin_alder,Brin,Something is moving at the far bend.,focused,jp,,not_recorded_in_this_package
+lt_a1_sign_008,narrator,Narration,Brin turns the sign face-up without pushing it into the earth.,composed,jp_narration,,not_recorded_in_this_package
+lt_a1_sign_009,mahmut,Mahmut,We clear the passage before anyone follows it.,calm,jp,,not_recorded_in_this_package
+lt_a1_load_001,brin_alder,Brin,The footing is soft here.,focused,jp,,not_recorded_in_this_package
+lt_a1_load_002,nixie_vale,Nixie,I can find where it stops being soft.,bright,jp,,not_recorded_in_this_package
+lt_a1_load_003,brin_alder,Brin,I can keep it steady while you look.,calm,jp,,not_recorded_in_this_package
+lt_a1_load_004,mahmut,Mahmut,Set it down until we have chosen the place. You do not need to hold it for us to talk.,calm,jp,,not_recorded_in_this_package
+lt_a1_load_005,narrator,Narration,Brin lowers the post. Nothing important falls with it.,composed,jp_narration,,not_recorded_in_this_package
+lt_a1_load_006,fadyme,Fadyme,A useful beginning.,gentle,jp,,not_recorded_in_this_package
+lt_a1_load_007,nixie_vale,Nixie,I was afraid the plan would involve all of us leaning against it until evening.,wry,jp,,not_recorded_in_this_package
+lt_a1_load_008,brin_alder,Brin,That would be a bad plan.,quiet,jp,,not_recorded_in_this_package
+lt_a1_method_001,nixie_vale,Nixie,I can read the turn first. Find what is coming and where it can reach.,focused,jp,,not_recorded_in_this_package
+lt_a1_method_002,brin_alder,Brin,Or we brace the narrow side. Give the people behind us a clear place to wait.,focused,jp,,not_recorded_in_this_package
+lt_a1_method_003,mahmut,Mahmut,Either can work. Tell us what you need from the rest of us.,calm,jp,,not_recorded_in_this_package
+lt_a1_method_004,fadyme,Fadyme,Preferably before we all volunteer for the same end of a post.,wry,jp,,not_recorded_in_this_package
+lt_a1_method_005,nixie_vale,Nixie,Stay where you can see the sign. I will not go beyond the first tree.,focused,jp,,not_recorded_in_this_package
+lt_a1_method_006,brin_alder,Brin,I will watch the space behind you.,calm,jp,,not_recorded_in_this_package
+lt_a1_method_007,mahmut,Mahmut,Call before you need us to move.,calm,jp,,not_recorded_in_this_package
+lt_a1_method_008,brin_alder,Brin,"We need a solid footing, not a taller barrier.",focused,jp,,not_recorded_in_this_package
+lt_a1_method_009,nixie_vale,Nixie,I will check both approaches while you choose it.,focused,jp,,not_recorded_in_this_package
+lt_a1_method_010,fadyme,Fadyme,Then neither of you has to watch everything.,gentle,jp,,not_recorded_in_this_package
+lt_a2_scout_1_001,nixie_vale,Nixie,See the leaves along the edge? Something crossed the soft ground after they fell.,focused,jp,,not_recorded_in_this_package
+lt_a2_scout_1_002,brin_alder,Brin,A heavy step?,calm,jp,,not_recorded_in_this_package
+lt_a2_scout_1_003,nixie_vale,Nixie,A dragging one. And this mark keeps going after the turn.,serious,jp,,not_recorded_in_this_package
+lt_a2_scout_1_004,fadyme,Fadyme,We can read that part without following it.,quiet,jp,,not_recorded_in_this_package
+lt_a2_scout_1_005,mahmut,Mahmut,What else do you hear?,focused,jp,,not_recorded_in_this_package
+lt_a2_scout_1_006,narrator,Narration,A faint knock comes from behind the bend. It does not follow the wind.,composed,jp_narration,,not_recorded_in_this_package
+lt_a2_scout_1_007,nixie_vale,Nixie,Enough to choose what we watch first.,focused,jp,,not_recorded_in_this_package
+lt_a2_scout_2_001,nixie_vale,Nixie,The track tells us where something can reach. The knock tells us where the dead turn together.,focused,jp,,not_recorded_in_this_package
+lt_a2_scout_2_002,brin_alder,Brin,"We can prepare for one first, without forgetting the other.",focused,jp,,not_recorded_in_this_package
+lt_a2_scout_2_003,mahmut,Mahmut,Choose it. We stay within sight.,calm,jp,,not_recorded_in_this_package
+lt_a2_scout_2_004,nixie_vale,Nixie,The dragging staff can reach around the front. Keep the rear where we can protect it.,focused,jp,,not_recorded_in_this_package
+lt_a2_scout_2_005,brin_alder,Brin,I can hold the nearest one while you choose the attacker.,calm,jp,,not_recorded_in_this_package
+lt_a2_scout_2_006,fadyme,Fadyme,Then I will stay where both of you can see me.,focused,jp,,not_recorded_in_this_package
+lt_a2_scout_2_007,nixie_vale,Nixie,The knock comes before the others move. We will see the bellbound one as soon as we step out.,serious,jp,,not_recorded_in_this_package
+lt_a2_scout_2_008,mahmut,Mahmut,A target to notice. Not a reason to chase without checking the lane.,focused,jp,,not_recorded_in_this_package
+lt_a2_scout_2_009,brin_alder,Brin,I will keep the space behind us clear.,calm,jp,,not_recorded_in_this_package
+lt_a2_scout_3_001,nixie_vale,Nixie,Here. They can see it before the turn.,focused,jp,,not_recorded_in_this_package
+lt_a2_scout_3_002,brin_alder,Brin,Not where you were standing when you drew it.,quiet,jp,,not_recorded_in_this_package
+lt_a2_scout_3_003,nixie_vale,Nixie,You checked it from the other side.,small_smile,jp,,not_recorded_in_this_package
+lt_a2_scout_3_004,brin_alder,Brin,That is where someone will need it.,calm,jp,,not_recorded_in_this_package
+lt_a2_scout_3_005,fadyme,Fadyme,A map improved by having more than one pair of feet.,wry,jp,,not_recorded_in_this_package
+lt_a2_scout_3_006,mahmut,Mahmut,We have the observation. Now we clear the passage.,focused,jp,,not_recorded_in_this_package
+lt_a2_brace_1_001,brin_alder,Brin,The bank is firm. The beam is dry underneath.,focused,jp,,not_recorded_in_this_package
+lt_a2_brace_1_002,nixie_vale,Nixie,The narrow side is open from both. We can see the turn.,focused,jp,,not_recorded_in_this_package
+lt_a2_brace_1_003,mahmut,Mahmut,Which place lets you share the work?,calm,jp,,not_recorded_in_this_package
+lt_a2_brace_1_004,brin_alder,Brin,"Either, if someone watches the side I cannot.",quiet,jp,,not_recorded_in_this_package
+lt_a2_brace_1_005,fadyme,Fadyme,We can do that.,gentle,jp,,not_recorded_in_this_package
+lt_a2_brace_1_006,narrator,Narration,"Brin tests the ground once more, then steps back far enough for Nixie to see it too.",composed,jp_narration,,not_recorded_in_this_package
+lt_a2_brace_2_001,brin_alder,Brin,The bank leaves a wide place behind us. The beam keeps the narrow line straight.,focused,jp,,not_recorded_in_this_package
+lt_a2_brace_2_002,nixie_vale,Nixie,"If we use the bank, I can watch farther across. If we use the beam, I can watch the near gap.",focused,jp,,not_recorded_in_this_package
+lt_a2_brace_2_003,mahmut,Mahmut,Both keep the road open. Choose the line you want to hold.,calm,jp,,not_recorded_in_this_package
+lt_a2_brace_2_004,brin_alder,Brin,Then we hold where nobody has to crowd behind me.,focused,jp,,not_recorded_in_this_package
+lt_a2_brace_2_005,nixie_vale,Nixie,I will watch across the opening. Call if you need the pressure off one side.,focused,jp,,not_recorded_in_this_package
+lt_a2_brace_2_006,brin_alder,Brin,I will.,calm,jp,,not_recorded_in_this_package
+lt_a2_brace_2_007,brin_alder,Brin,The beam gives us a straight line. Nobody stands on it.,focused,jp,,not_recorded_in_this_package
+lt_a2_brace_2_008,nixie_vale,Nixie,I will watch the gap beside it. The support behind the dead is visible from here.,focused,jp,,not_recorded_in_this_package
+lt_a2_brace_2_009,fadyme,Fadyme,"A useful beam, with no volunteers underneath it.",wry,jp,,not_recorded_in_this_package
+lt_a2_brace_3_001,brin_alder,Brin,I can keep this side clear.,calm,jp,,not_recorded_in_this_package
+lt_a2_brace_3_002,nixie_vale,Nixie,Then I will check the other side.,focused,jp,,not_recorded_in_this_package
+lt_a2_brace_3_003,brin_alder,Brin,Call if you need me.,quiet,jp,,not_recorded_in_this_package
+lt_a2_brace_3_004,nixie_vale,Nixie,You too.,small_smile,jp,,not_recorded_in_this_package
+lt_a2_brace_3_005,narrator,Narration,Brin nods as if it is an instruction worth remembering.,composed,jp_narration,,not_recorded_in_this_package
+lt_a2_brace_3_006,mahmut,Mahmut,Good. We move together when the line is ready.,calm,jp,,not_recorded_in_this_package
+lt_a3_watch_001,narrator,Narration,The first dead figure appears around the bend. A staff strikes the post and keeps dragging.,composed,jp_narration,,not_recorded_in_this_package
+lt_a3_watch_002,nixie_vale,Nixie,There. The others are behind it.,serious,jp,,not_recorded_in_this_package
+lt_a3_watch_003,brin_alder,Brin,We have space. Keep it.,focused,jp,,not_recorded_in_this_package
+lt_a3_watch_004,fadyme,Fadyme,The road is clear behind us.,focused,jp,,not_recorded_in_this_package
+lt_a3_watch_005,mahmut,Mahmut,Look at their intentions before choosing the first target.,focused,jp,,not_recorded_in_this_package
+lt_a3_watch_006,narrator,Narration,"The fallen sign stays face-up, outside the fighting ground.",composed,jp_narration,,not_recorded_in_this_package
+lt_a3_clear_001,brin_alder,Brin,Steady now.,calm,jp,,not_recorded_in_this_package
+lt_a3_clear_002,nixie_vale,Nixie,And the arrow points before the turn.,focused,jp,,not_recorded_in_this_package
+lt_a3_clear_003,mahmut,Mahmut,I will check the far side one more time.,calm,jp,,not_recorded_in_this_package
+lt_a3_clear_004,fadyme,Fadyme,We have built a very small thing with a great deal of advice.,wry,jp,,not_recorded_in_this_package
+lt_a3_clear_005,brin_alder,Brin,It only has to be useful.,quiet,jp,,not_recorded_in_this_package
+lt_a3_clear_006,narrator,Narration,Nixie reads it from the road. Brin lets go of the post. It stays where it was put.,composed,jp_narration,,not_recorded_in_this_package
+lt_a3_clear_007,nixie_vale,Nixie,Useful from this side too.,bright,jp,,not_recorded_in_this_package
+lt_a4_traveler_001,lt_traveler,Traveler,Is the turn clear?,hesitant,jp,,not_recorded_in_this_package
+lt_a4_traveler_002,nixie_vale,Nixie,Yes. Follow the mark before the bend. The sign is facing you now.,calm,jp,,not_recorded_in_this_package
+lt_a4_traveler_003,lt_traveler,Traveler,I was waiting for somebody else to take it first.,quiet,jp,,not_recorded_in_this_package
+lt_a4_traveler_004,brin_alder,Brin,You can take your time.,gentle,jp,,not_recorded_in_this_package
+lt_a4_traveler_005,lt_traveler,Traveler,Do you need my name for the register?,hesitant,jp,,not_recorded_in_this_package
+lt_a4_traveler_006,mahmut,Mahmut,The shrine keeper can help you with the register. We are clearing the road.,calm,jp,,not_recorded_in_this_package
+lt_a4_traveler_007,lt_traveler,Traveler,Then I will give it there.,relieved,jp,,not_recorded_in_this_package
+lt_a4_traveler_008,fadyme,Fadyme,A sensible place to stop.,gentle,jp,,not_recorded_in_this_package
+lt_a4_traveler_009,narrator,Narration,"The traveler tests the footing, then walks through without needing to hurry.",composed,jp_narration,,not_recorded_in_this_package
+lt_a4_pause_001,nixie_vale,Nixie,They did not ask which way again.,quiet,jp,,not_recorded_in_this_package
+lt_a4_pause_002,brin_alder,Brin,They could see it.,calm,jp,,not_recorded_in_this_package
+lt_a4_pause_003,fadyme,Fadyme,That is a useful kind of answer.,gentle,jp,,not_recorded_in_this_package
+lt_a4_pause_004,mahmut,Mahmut,We should continue before the road grows busy.,focused,jp,,not_recorded_in_this_package
+lt_a4_pause_005,nixie_vale,Nixie,It is allowed to grow busy. That is what we fixed it for.,wry,jp,,not_recorded_in_this_package
+lt_a4_pause_006,narrator,Narration,"Mahmut looks at the path, then nods. They gather their things without taking down the sign.",composed,jp_narration,,not_recorded_in_this_package
+lt_a4_company_001,narrator,Narration,The post no longer needs a shoulder. The company has one quiet moment before moving on.,composed,jp_narration,,not_recorded_in_this_package
+lt_a4_company_002,mahmut,Mahmut,It stayed when you let go.,calm,jp,,not_recorded_in_this_package
+lt_a4_company_003,brin_alder,Brin,We chose the ground before I held it.,quiet,jp,,not_recorded_in_this_package
+lt_a4_company_004,nixie_vale,Nixie,That was a very good improvement to the plan.,small_smile,jp,,not_recorded_in_this_package
+lt_a4_company_005,brin_alder,Brin,You watched the side I could not.,calm,jp,,not_recorded_in_this_package
+lt_a4_company_006,fadyme,Fadyme,And you both told us where to stand.,gentle,jp,,not_recorded_in_this_package
+lt_a4_company_007,narrator,Narration,"Brin checks the post once with her hand, not her whole weight.",composed,jp_narration,,not_recorded_in_this_package
+lt_a4_company_008,nixie_vale,Nixie,Brin saw the mark from where the traveler would need it.,quiet,jp,,not_recorded_in_this_package
+lt_a4_company_009,brin_alder,Brin,You drew it where it could be seen.,calm,jp,,not_recorded_in_this_package
+lt_a4_company_010,nixie_vale,Nixie,After you looked.,small_smile,jp,,not_recorded_in_this_package
+lt_a4_company_011,fadyme,Fadyme,An arrow with a second opinion. We should keep the idea.,wry,jp,,not_recorded_in_this_package
+lt_a4_company_012,mahmut,Mahmut,We can use it at the next turn.,calm,jp,,not_recorded_in_this_package
+lt_a4_company_013,narrator,Narration,Nixie leaves the chalk in her pouch. This mark does not need another correction.,composed,jp_narration,,not_recorded_in_this_package
+lt_a4_end_001,nixie_vale,Nixie,Ready?,bright,jp,,not_recorded_in_this_package
+lt_a4_end_002,brin_alder,Brin,Ready.,calm,jp,,not_recorded_in_this_package
+lt_a4_end_003,fadyme,Fadyme,Good. I was beginning to think the sign might join the company.,wry,jp,,not_recorded_in_this_package
+lt_a4_end_004,mahmut,Mahmut,It has a place to stay.,calm,jp,,not_recorded_in_this_package
+lt_a4_end_005,narrator,Narration,"Behind them, the road bends out of sight. The arrow points before it does.",composed,jp_narration,,not_recorded_in_this_package

@@ -1,0 +1,105 @@
+{
+  "backgrounds": [
+    {
+      "location_id": "salt_road_coast",
+      "status": "reference_only_or_new_media_required"
+    },
+    {
+      "location_id": "tl_archive_yard",
+      "status": "reference_only_or_new_media_required"
+    },
+    {
+      "location_id": "tl_clinic_table",
+      "status": "reference_only_or_new_media_required"
+    },
+    {
+      "location_id": "tl_coast_path",
+      "status": "reference_only_or_new_media_required"
+    },
+    {
+      "location_id": "tl_harbor_lane",
+      "status": "reference_only_or_new_media_required"
+    },
+    {
+      "location_id": "tl_harbor_square",
+      "status": "reference_only_or_new_media_required"
+    },
+    {
+      "location_id": "tl_load_road",
+      "status": "reference_only_or_new_media_required"
+    },
+    {
+      "location_id": "tl_salt_fork",
+      "status": "reference_only_or_new_media_required"
+    },
+    {
+      "location_id": "undercity_antidote_archive",
+      "status": "reference_only_or_new_media_required"
+    }
+  ],
+  "music": [
+    {
+      "cue_id": "tl_market",
+      "status": "unproduced"
+    },
+    {
+      "cue_id": "tl_threat",
+      "status": "unproduced"
+    },
+    {
+      "cue_id": "tl_work",
+      "status": "unproduced"
+    }
+  ],
+  "portraits": [
+    {
+      "character_id": "iona_mist",
+      "emotions": [
+        "calm",
+        "gentle"
+      ],
+      "status": "canonical_identity_reuse_with_emotion_mapping_required"
+    },
+    {
+      "character_id": "kera_voss",
+      "emotions": [
+        "annoyed",
+        "curious",
+        "defiant",
+        "fierce",
+        "focused",
+        "hesitant",
+        "quiet",
+        "smug",
+        "tsundere",
+        "wry"
+      ],
+      "status": "canonical_identity_reuse_with_emotion_mapping_required"
+    },
+    {
+      "character_id": "odelia_pike",
+      "emotions": [
+        "calm",
+        "focused",
+        "hesitant",
+        "quiet",
+        "serious",
+        "small_smile"
+      ],
+      "status": "canonical_identity_reuse_with_emotion_mapping_required"
+    },
+    {
+      "character_id": "tilda_fen",
+      "emotions": [
+        "calm",
+        "dry",
+        "focused",
+        "quiet",
+        "reflective"
+      ],
+      "status": "canonical_identity_reuse_with_emotion_mapping_required"
+    }
+  ],
+  "npc_display": "Nameplate only; no portrait dependency in exported story commands.",
+  "audio_translation": "English source text complete; Japanese translation and recorded voice not delivered."
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a2_ridge_3",
+  "title_en": "The Last Open Stretch",
+  "location_id": "tw_ridge_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tw_ridge_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_3_001",
+      "speaker": "tw_lantern_carrier",
+      "speaker_display": "Lantern Carrier",
+      "text": "The ridge opens beyond this stretch. Nobody climbs round the dead to save time.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_3_002",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "The nearest one holds the line. Something behind it is keeping it moving.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_3_003",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Then notice the support and the reach together.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "thistle_roe"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_3_004",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "Two things to write down after. One thing to choose first.",
+      "emotion": "serious"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a2_ridge_3_005",
+      "text": "The group leaves its waiting space clear before stepping forward."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a2_ridge_3_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a2_brace_2",
+  "title_en": "A Place to Hold",
+  "location_id": "lt_brace_bank",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_brace_bank"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_2_001",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "The bank leaves a wide place behind us. The beam keeps the narrow line straight.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_2_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "If we use the bank, I can watch farther across. If we use the beam, I can watch the near gap.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_2_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Both keep the road open. Choose the line you want to hold.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "choice",
+      "prompt": "Choose the defensive footing.",
+      "options": [
+        {
+          "id": "lt_plan_brace_bank",
+          "text": "Use the firm bank — steady front pressure.",
+          "goto": "brace_bank"
+        },
+        {
+          "id": "lt_plan_brace_beam",
+          "text": "Use the dry beam — front and support priority.",
+          "goto": "brace_beam"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "brace_bank"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_2_004",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "Then we hold where nobody has to crowd behind me.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_2_005",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I will watch across the opening. Call if you need the pressure off one side.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_2_006",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "I will.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "brace_beam"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_2_007",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "The beam gives us a straight line. Nobody stands on it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_2_008",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I will watch the gap beside it. The support behind the dead is visible from here.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_2_009",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A useful beam, with no volunteers underneath it.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a2_brace_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

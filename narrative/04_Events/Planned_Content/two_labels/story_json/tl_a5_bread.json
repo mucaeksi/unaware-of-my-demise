@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a5_bread",
+  "title_en": "Bread, with No Conditions",
+  "location_id": "tl_clinic_table",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_clinic_table"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_bread_001",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "For the road. It was coming out of the oven anyway.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_bread_002",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "We can pay for it.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_bread_003",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "You can take it before it cools.",
+      "emotion": "dry"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_bread_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The medicine was not a bargain for bread.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_bread_005",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "I know. Neither is this.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_bread_006",
+      "text": "Odelia breaks a piece carefully, then passes the larger part to Tilda."
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_bread_007",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Do not choose my portion for me. I have worked very hard to remain difficult.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_bread_008",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Then choose this one.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_bread_009",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "We can eat before we carry the empty crates back.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_bread_010",
+      "text": "For a little while, nobody needs anything explained."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a5_bread_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

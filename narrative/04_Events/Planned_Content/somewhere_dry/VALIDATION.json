@@ -1,0 +1,60 @@
+{
+  "checked_at_utc": "2026-10-11T09:08:34.444Z",
+  "validated_against_main": "99df3cf",
+  "source_integrity": "PASS: source hashes and all copied canon fields unchanged",
+  "story_schema": "PASS: 14 exports",
+  "script_equivalence": "PASS: 82 unique lines",
+  "graph": "PASS: 4 complete paths; all 16 nodes reachable",
+  "runner": "PASS: save/restore after every line, before pending choice, and at scene checkpoints; pending choice saving rejected as expected",
+  "encounters": "PASS: 2 referenced variants, 2 front / 3 rear",
+  "replay_catalog": "PASS: 2 bounded segments and all conversation targets",
+  "rewards": "UNDECIDED",
+  "scene_count": 14,
+  "line_count": 82,
+  "canon_line_count": 0,
+  "decision_combinations": 4,
+  "encounter_variants": 2,
+  "battles_per_first_run": 1,
+  "first_path_lines": [
+    60,
+    60
+  ],
+  "first_path_words": [
+    721,
+    733
+  ],
+  "limits": [
+    "VM and authoring validation; no event API, production roster balance, visual/audio playback, Android or signed patch test.",
+    "Combat role feasibility prototype is separately tested; it does not replace canonical hero/unit or production balance mappings."
+  ],
+  "paths": [
+    {
+      "layout": "shelf",
+      "reading": "note",
+      "line_count": 60,
+      "words": 728,
+      "battles": 1
+    },
+    {
+      "layout": "shelf",
+      "reading": "ask",
+      "line_count": 60,
+      "words": 733,
+      "battles": 1
+    },
+    {
+      "layout": "desk",
+      "reading": "note",
+      "line_count": 60,
+      "words": 721,
+      "battles": 1
+    },
+    {
+      "layout": "desk",
+      "reading": "ask",
+      "line_count": 60,
+      "words": 726,
+      "battles": 1
+    }
+  ]
+}

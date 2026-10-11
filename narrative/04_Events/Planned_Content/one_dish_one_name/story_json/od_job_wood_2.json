@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_job_wood_2",
+  "title_en": "A Chair without a Match",
+  "location_id": "od_table_work",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "od_table_work"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_job_wood_2_001",
+      "text": "Some chairs were borrowed from kitchens. One was borrowed from somewhere that owned no other furniture."
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_2_002",
+      "speaker": "od_helper",
+      "speaker_display": "Helper",
+      "text": "We could hide that one at the end.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_2_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "We could fix it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_2_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I like that answer. The end keeps getting all the interesting chairs.",
+      "emotion": "bright"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_2_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Put your foot on the pad while I fit it. Not on my hand.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_2_006",
+      "speaker": "od_helper",
+      "speaker_display": "Helper",
+      "text": "There. It does not rock now.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_2_007",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Leave it near the middle. Someone should get to sit close without feeling borrowed.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_wood_2_008",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "It is a chair. It does not ask who brought it.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_job_wood_2_009",
+      "text": "She puts it where the light reaches the seat."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_job_wood_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

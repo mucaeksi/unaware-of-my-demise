@@ -1,0 +1,421 @@
+{
+  "authoring_schema_version": 1,
+  "encounters": [
+    {
+      "encounter_id": "aw_enc_first_steady",
+      "title_en": "Archive Case Reconstruction",
+      "location_id": "aw_case_board",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "İzinli guard profili; family remains known."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli support/recovery effect."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        }
+      ],
+      "tactical_focus_tr": "Ön dayanıklılık.",
+      "briefing_en": "Practice reconstruction. Read visible intentions. Each case starts with fresh party resources.",
+      "counterplay_tr": "Standard zafer; no masteredstars. Prototypelevel/rolepack tuning separately, not publishedskillclaim.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "aw_enc_first_reach",
+      "title_en": "Archive Case Reconstruction",
+      "location_id": "aw_case_board",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "İzinli rear_row_enemies selector."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli support/recovery effect."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        }
+      ],
+      "tactical_focus_tr": "Reachingtehdit.",
+      "briefing_en": "Practice reconstruction. Read visible intentions. Each case starts with fresh party resources.",
+      "counterplay_tr": "Standard zafer; no masteredstars. Prototypelevel/rolepack tuning separately, not publishedskillclaim.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "aw_enc_second_interrupt",
+      "title_en": "Archive Case Reconstruction",
+      "location_id": "aw_case_board",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli support/recovery effect."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        }
+      ],
+      "tactical_focus_tr": "Destek hedefi açığı.",
+      "briefing_en": "Practice reconstruction. Read visible intentions. Each case starts with fresh party resources.",
+      "counterplay_tr": "Standard zafer; no masteredstars. Prototypelevel/rolepack tuning separately, not publishedskillclaim.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "aw_enc_second_endure",
+      "title_en": "Archive Case Reconstruction",
+      "location_id": "aw_case_board",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "İzinli guard profili; family remains known."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli support/recovery effect."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        }
+      ],
+      "tactical_focus_tr": "Sürdürülebilir destek baskısı.",
+      "briefing_en": "Practice reconstruction. Read visible intentions. Each case starts with fresh party resources.",
+      "counterplay_tr": "Standard zafer; no masteredstars. Prototypelevel/rolepack tuning separately, not publishedskillclaim.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_interrupt",
+      "title_en": "Archive Case Reconstruction",
+      "location_id": "aw_case_board",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "İzinli guard profili; family remains known."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli support/recovery effect."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        }
+      ],
+      "tactical_focus_tr": "steady önceliği + interrupt response.",
+      "briefing_en": "Practice reconstruction. Read visible intentions. Each case starts with fresh party resources.",
+      "counterplay_tr": "Standard zafer; no masteredstars. Prototypelevel/rolepack tuning separately, not publishedskillclaim.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "aw_enc_final_steady_endure",
+      "title_en": "Archive Case Reconstruction",
+      "location_id": "aw_case_board",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "İzinli guard profili; family remains known."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli support/recovery effect."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        }
+      ],
+      "tactical_focus_tr": "steady önceliği + endure response.",
+      "briefing_en": "Practice reconstruction. Read visible intentions. Each case starts with fresh party resources.",
+      "counterplay_tr": "Standard zafer; no masteredstars. Prototypelevel/rolepack tuning separately, not publishedskillclaim.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_interrupt",
+      "title_en": "Archive Case Reconstruction",
+      "location_id": "aw_case_board",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "İzinli rear_row_enemies selector."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli support/recovery effect."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "ash_wolf",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart tek hedef baskısı."
+        }
+      ],
+      "tactical_focus_tr": "reach önceliği + interrupt response.",
+      "briefing_en": "Practice reconstruction. Read visible intentions. Each case starts with fresh party resources.",
+      "counterplay_tr": "Standard zafer; no masteredstars. Prototypelevel/rolepack tuning separately, not publishedskillclaim.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "aw_enc_final_reach_endure",
+      "title_en": "Archive Case Reconstruction",
+      "location_id": "aw_case_board",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "İzinli rear_row_enemies selector."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "bellbound_dead",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli support/recovery effect."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "ön basınç",
+          "behavior_brief_tr": "Standart ön damage profili."
+        }
+      ],
+      "tactical_focus_tr": "reach önceliği + endure response.",
+      "briefing_en": "Practice reconstruction. Read visible intentions. Each case starts with fresh party resources.",
+      "counterplay_tr": "Standard zafer; no masteredstars. Prototypelevel/rolepack tuning separately, not publishedskillclaim.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    }
+  ]
+}

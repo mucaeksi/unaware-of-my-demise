@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a1_after",
+  "title_en": "Beyond the Crossing",
+  "location_id": "or_relief_stop",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_relief_stop"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "or_a1_after_001",
+      "text": "Beyond the crossing, a stretch of firm ground has become a place to stop. It needs to become a place other people can use."
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_after_002",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Keep the exit wide. Resting people should not become a wall for arriving people.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_after_003",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "The volunteers have brought water and cloth. They need to know where each belongs.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_after_004",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "We can keep it going if someone shows us the order.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_after_005",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Then we will show you. After that, you will show us.",
+      "emotion": "measured"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a1_after_006",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "She accepts demonstrations more readily than thanks.",
+      "emotion": "wry"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a1_after_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

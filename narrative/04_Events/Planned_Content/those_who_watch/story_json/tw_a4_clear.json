@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a4_clear",
+  "title_en": "The Next Small Group",
+  "location_id": "tw_lower_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tw_lower_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_clear_001",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "The turn is clear. The first group can go at its own pace.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_clear_002",
+      "speaker": "tw_lantern_carrier",
+      "speaker_display": "Lantern Carrier",
+      "text": "I can carry the lamps without asking everyone to hurry.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_clear_003",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "Good. Somebody will still need light lower down.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_clear_004",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Let the road decide the pace, rather than the fear.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a4_clear_005",
+      "text": "Clem folds the account away before helping the next watcher stand."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a4_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

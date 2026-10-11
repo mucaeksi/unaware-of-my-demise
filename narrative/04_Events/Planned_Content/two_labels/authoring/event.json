@@ -1,0 +1,3503 @@
+{
+  "authoring_schema_version": 1,
+  "status": "complete_authored_draft_not_deployed",
+  "event_id": "event_two_labels",
+  "canon_source_event_id": "event_guild_salt_fever",
+  "title_en": "Two Labels",
+  "title_tr": "İki Etiket",
+  "delivery": "future_declarative_content_patch",
+  "availability": {
+    "publish_at": null,
+    "expires_at": null
+  },
+  "unlock": {
+    "after_stage": "4-5",
+    "ownership_required": false,
+    "payment_required": false,
+    "runtime_stage_mapping": null,
+    "note_tr": "Canon stage 4-5 server completion; runtime stage eşlemesi tam Part I progression entegrasyonunda yapılır."
+  },
+  "rewards": {
+    "status": "undecided_by_owner",
+    "binding": null
+  },
+  "entry_node": "event_guild_salt_fever_1",
+  "completion_node": "tl_complete",
+  "state_keys": {
+    "prep": [
+      "clean",
+      "scout"
+    ],
+    "route": [
+      "coast",
+      "load"
+    ],
+    "approach": [
+      "show",
+      "listen"
+    ],
+    "focus": [
+      "kera",
+      "tilda",
+      "iona",
+      "odelia"
+    ]
+  },
+  "characters": [
+    "iona_mist",
+    "kera_voss",
+    "odelia_pike",
+    "tilda_fen"
+  ],
+  "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
+  "scenes": [
+    {
+      "scene_id": "event_guild_salt_fever_1",
+      "title_en": "A Dispatch Posted",
+      "location_id": "undercity_antidote_archive",
+      "direction_en": "Kera nails the archive wing's first public notice to its own door.",
+      "lines": [
+        {
+          "line_id": "event_guild_salt_fever_1_001",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Salt-road fever in the coastal villages. The ledger wing sold the cure. We are giving it away.",
+          "emotion": "defiant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_guild_salt_fever_1_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "With what staff? You have three shelves and a temper.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_guild_salt_fever_1_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "I have you, Iona, and a harbor archer who knows the coast.",
+          "emotion": "smug",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_guild_salt_fever_1_004",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "I did not agree to this.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_guild_salt_fever_1_005",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "You agreed with your face.",
+          "emotion": "tsundere",
+          "voice_track": "jp"
+        }
+      ],
+      "act": 1,
+      "purpose_tr": "Mevcut duyuru: işin amacı ve dört karakter; konuşmalar aynen korunur.",
+      "provenance_kind": "canon_verbatim",
+      "music_cue": "tl_work",
+      "source_path": "narrative/04_Events/events_part1.json",
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "scene_id": "tl_a1_crates",
+      "act": 1,
+      "title_en": "What Goes in the Crate",
+      "location_id": "undercity_antidote_archive",
+      "direction_en": "Open crates on the archive table. Kera ties paper labels to stoppered bottles. Iona has cleared a place for clean cloth.",
+      "purpose_tr": "Ekip iş bölümünü kurar; üç kasa görev prop’udur, cüzdan veya tüketilebilir event parası değildir.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a1_crates_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The last shelf holds enough bottles to make the table look generous. The open crates make it look smaller.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a1_crates_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Four people. Three crates. Which of those is carrying the table?",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_crates_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The table stays here. We are taking cloth, clean water, and the medicine.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_crates_004",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "And a place for the bottles we open. They cannot travel beside the sealed ones.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_crates_005",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "I know how to pack a crate.",
+          "emotion": "annoyed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_crates_006",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Good. I know how to unpack one someone has sat on.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_crates_007",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "There are two ways past the old salt sheds. We can choose when we reach the fork.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_crates_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Which is shorter?",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_crates_009",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "That depends on what is standing in it.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_crates_010",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Then we leave room to change our minds.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_crates_011",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Iona slips a folded cloth beneath the handles. Odelia tests each knot before lifting anything.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a1_crates_012",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "This is a dispatch. Not a rescue of my packing habits.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_crates_013",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "We can do two useful things at once.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a1_preparation",
+      "act": 1,
+      "title_en": "Before the Road",
+      "location_id": "undercity_antidote_archive",
+      "direction_en": "Tilda separates a field kit. Odelia unrolls a rough route sketch beside it. No map puzzle or hidden hotspot is required.",
+      "purpose_tr": "İki hazırlık da her rotayla uyumlu; seçimin avantajı ilgili sonraki karşılaşma brifinginde görünür.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a1_preparation_001",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The roads look open from here. The last bend is where they stop looking open.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_preparation_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "There is also fever sweat, dirty water, and whatever the road throws on us.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_preparation_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "You have both made persuasive arguments against going anywhere.",
+          "emotion": "annoyed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_preparation_004",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "They have made arguments for being ready.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_preparation_005",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "I can walk ahead and mark the bad approaches.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_preparation_006",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Or we prepare the field kit where we can still see what we are doing.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_preparation_007",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Both will be useful. Which do we do first?",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Choose the first preparation.",
+        "state_key": "prep",
+        "options": [
+          {
+            "id": "tl_prep_clean",
+            "value": "clean",
+            "text_en": "Prepare the field kit — focus on sustained pressure.",
+            "consequence_en": "Prioritize recovery during sustained pressure; both routes remain available.",
+            "lines": [
+              {
+                "line_id": "tl_a1_preparation_008",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "Clean cloth here. Treatment tools here. Nothing goes back into the medicine crate.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_preparation_009",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "I have labeled the pockets.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_preparation_010",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "You have labeled one of them \"obvious\".",
+                "emotion": "dry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_preparation_011",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "It is the pocket for the obvious things.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_preparation_012",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "I will keep the kit within reach.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_preparation_013",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "Then I will watch the turns from the cart.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "tl_prep_scout",
+            "value": "scout",
+            "text_en": "Survey the approaches — focus on target priority.",
+            "consequence_en": "Prioritize advance warning and target selection; both routes remain available.",
+            "lines": [
+              {
+                "line_id": "tl_a1_preparation_014",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "I will mark where the path narrows. A small mark. Not one that sends everyone following it.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_preparation_015",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "What if we cannot find it?",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_preparation_016",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "You will. It will point at the part you should be looking at.",
+                "emotion": "serious",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_preparation_017",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "We will wait at the bend until we can see you.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_preparation_018",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "And the kit comes with me. Prepared or not, I refuse to misplace it.",
+                "emotion": "dry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_preparation_019",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "Good. Nobody has been outvoted by a pocket.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "tl_a1_gate",
+      "act": 1,
+      "title_en": "The Yard Gate",
+      "location_id": "tl_archive_yard",
+      "direction_en": "At the outer service gate, ruined carts leave a narrow passage. A moving bell cord appears beyond a leaning shutter.",
+      "purpose_tr": "B01 savaş öncesi; tehdit okunur, taşınan ilacı savaş HP barına dönüştürmez.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_threat",
+      "lines": [
+        {
+          "line_id": "tl_a1_gate_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "At the service gate, a dead hand works the same latch again and again. The gate has no door left to open.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a1_gate_002",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Stop. Something behind the shutter is moving with it.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_gate_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The yard was clear this morning.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_gate_004",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "It has had a busy morning.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_gate_005",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Keep the crates behind us. There is room along the wall.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_gate_006",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The one with the cord is making the others turn. Deal with that first, or hold until it cannot reach us.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_gate_007",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Bottles down. Hands free.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_gate_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "They lower the crates together. No bottle breaks.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a1_after_gate",
+      "act": 1,
+      "title_en": "Four Handles",
+      "location_id": "tl_archive_yard",
+      "direction_en": "The gate is clear. Everyone checks one crate seam or knot; no victory makes medicine or money appear.",
+      "purpose_tr": "Zafer sonrası işbirliği; Odelia’nın tek başına yük taşıma alışkanlığına küçük temas.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a1_after_gate_001",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Clear to the first bend.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_after_gate_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Stoppers intact. Labels dry.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_after_gate_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "You checked the labels before the glass.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_after_gate_004",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The labels are easier to frighten.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_after_gate_005",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "This handle is cutting into your fingers. Put your hand here.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_after_gate_006",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "I can take it.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_after_gate_007",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "I know. That is why I am sharing it.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_after_gate_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Odelia shifts her grip. The crate settles between them instead of against one shoulder.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a1_fork",
+      "act": 1,
+      "title_en": "Two Roads, One Delivery",
+      "location_id": "tl_salt_fork",
+      "direction_en": "A salt-stained sign points toward the coast. Wheel tracks climb away through the sheds. Route previews stay visible until chosen.",
+      "purpose_tr": "Kalıcı rota kararı; iki yol aynı canon kıyı sahnesine birleşir.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a1_fork_001",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The coast path bends below the watch posts. You can see far. So can anything waiting there.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_fork_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "The load road has shelter, but no room to step aside. We will need to keep the front steady.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_fork_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Both reach the villages?",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_fork_004",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Yes. They meet before the harbor.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_fork_005",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Then we are choosing how to arrive. Not who gets medicine.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_fork_006",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "A mercifully sensible map.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a1_fork_007",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "It is not the map that will carry the crates.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Choose the delivery route.",
+        "state_key": "route",
+        "options": [
+          {
+            "id": "tl_route_coast",
+            "value": "coast",
+            "text_en": "Take the coast path — rear-line threats.",
+            "consequence_en": "Two battles emphasizing rear-line threats and target priority. Odelia leads.",
+            "lines": [
+              {
+                "line_id": "tl_a1_fork_008",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "Single file at the open bend. Watch the sea wall, not the water.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_fork_009",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "Tell that to the water when it comes over the wall.",
+                "emotion": "dry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_fork_010",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "If the water has a complaint, it may submit it in writing.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_fork_011",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "I will keep the cloth over the glass.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "tl_route_load",
+            "value": "load",
+            "text_en": "Take the old load road — sustained front-line pressure.",
+            "consequence_en": "Two battles emphasizing front-line pressure and recovery. Tilda and Iona lead.",
+            "lines": [
+              {
+                "line_id": "tl_a1_fork_012",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "Stay close enough to pass the kit. Far enough that one fallen crate does not stop all of us.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_fork_013",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "I will check the shed doors before we reach them.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_fork_014",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "Nothing leaves the crates until we find a dry place.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a1_fork_015",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "Then we make one if we need it.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "tl_a2_coast_wall",
+      "act": 2,
+      "title_en": "Below the Sea Wall",
+      "location_id": "tl_coast_path",
+      "direction_en": "The water is far below. On the wall above, dead figures turn toward the movement of the covered crates.",
+      "purpose_tr": "B02C: arka sıra baskısı; kaynak düşmanların yeni taktik düzeni.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_threat",
+      "lines": [
+        {
+          "line_id": "tl_a2_coast_wall_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The coast road smells of wet rope. A line of dead figures stands where the watch used to change hands.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a2_coast_wall_002",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Do not bunch up under the wall.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_wall_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "They are looking at the crates.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_wall_004",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "They are looking at the movement. Keep our back line away from the opening.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_wall_005",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "I preferred them when they were looking at nothing.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_wall_006",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "There is a flat place behind us. We can set the load down there.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_wall_007",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "One of them is already leaning past the others. That is the threat to watch.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_wall_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Then we stop it leaning any farther.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a2_coast_steps",
+      "act": 2,
+      "title_en": "The Steps That Remain",
+      "location_id": "tl_coast_path",
+      "direction_en": "The cleared watch steps pass an old bread-stall alcove. A shutter is closed; no new clue about Tomas is visible.",
+      "purpose_tr": "Odelia’nın liman aidiyeti; kardeşinin adı, akıbeti veya companion gizemi açılmaz.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a2_coast_steps_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Past the wall, Odelia slows beside three narrow steps worn hollow at the edges.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "A bad footing?",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_003",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "No. I know these steps.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_004",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "We can stop for a breath.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_005",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "I was only checking the shutter.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_006",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Then we will wait while you check it.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_007",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Odelia touches the edge of the shutter, where an old latch has been moved twice.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_008",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "People used to leave bread here to cool. Even when they knew someone would take it.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_009",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "That sounds like a poor arrangement for bread.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_010",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "It was a good arrangement for us.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_011",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Then we should arrive before the next batch is cold.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_steps_012",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Odelia moves on. Nobody asks her to turn the memory into an explanation.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a2_coast_turn",
+      "act": 2,
+      "title_en": "The Blind Turn",
+      "location_id": "tl_coast_path",
+      "direction_en": "Salt nets and a low wall break sightlines. The threat is shown before deployment, not hidden behind a surprise attack.",
+      "purpose_tr": "B03C: erken görünür öncelik problemi; oyuncu iki hedefi nasıl sıralayacağını seçer.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_threat",
+      "lines": [
+        {
+          "line_id": "tl_a2_coast_turn_001",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The road looks straight. It turns behind those nets.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_turn_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Can we take the crates around the other side?",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_turn_003",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "No. But we can see what is waiting before it sees all of us.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_turn_004",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "I will stand where the others can see the lantern.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_turn_005",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Nobody runs after a target around the wall alone.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_turn_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "A staff drags against stone. Beyond it, a small iron bell knocks against a dead chest.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a2_coast_turn_007",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Two kinds of movement. The bell draws attention. The staff reaches past it.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_turn_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Then attention is not our only problem.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a2_coast_arrival",
+      "act": 2,
+      "title_en": "A Place to Put It Down",
+      "location_id": "tl_harbor_square",
+      "direction_en": "The route opens into the harbor. Odelia finds a dry bench for the crates without asking permission to recognize her own road.",
+      "purpose_tr": "Kıyı rotası karakter payoff’u; ortak canon sahnesine geçiş.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a2_coast_arrival_001",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Here. Above the splash line.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_arrival_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "You knew where that would be.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_arrival_003",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The sea usually leaves the same things alone.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_arrival_004",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Useful. Unlike people.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_arrival_005",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "The handle is yours again. We can lower it together.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_arrival_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The crates touch the bench with a single dull knock.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a2_coast_arrival_007",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "I thought I would want to walk past all of it.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_arrival_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "We still need a guide who knows where to stop.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_coast_arrival_009",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Then stop here.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a2_load_sheds",
+      "act": 2,
+      "title_en": "Between the Salt Sheds",
+      "location_id": "tl_load_road",
+      "direction_en": "Collapsed sheds compress the road to a single lane. The front line can see the coming pressure clearly.",
+      "purpose_tr": "B02L: iki ön sıra tehdidi ve devam eden baskı; hızlı öldürme tek çözüm değil.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_threat",
+      "lines": [
+        {
+          "line_id": "tl_a2_load_sheds_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The old load road is quiet until a cart wheel begins to turn without a horse.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a2_load_sheds_002",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The far door is open. Something has been dragging the cart in and out.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_sheds_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Keep a clear space behind our front line. I need to reach them.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_sheds_004",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "We could push straight through.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_sheds_005",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "You could. Then I would have to collect you.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_sheds_006",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "There is enough room to hold here and pass the load back.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_sheds_007",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The nearest dead will reach us first. The ones behind it cannot pass unless we give them space.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_sheds_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Then we do not give them space.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a2_load_cloth",
+      "act": 2,
+      "title_en": "A Dry Fold",
+      "location_id": "tl_load_road",
+      "direction_en": "In the lee of a shed, Tilda replaces wet outer cloth. A sheltered pause is practical rather than a second clinic origin story.",
+      "purpose_tr": "Tilda’nın dürüst bakım anlayışı; eski teacher/clinic companion sahnesini yeniden anlatmaz.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a2_load_cloth_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Tilda shakes rain from her cape before she touches the field kit.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "That is our last clean outer cloth.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "No. That is the cloth you put on top. The clean one is still inside.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_004",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "I know what I packed.",
+          "emotion": "annoyed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_005",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "You both packed it.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "For a moment only the rain speaks.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_007",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "People see a healer arrive and think the waiting is finished.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "We have brought the treatment.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_009",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Yes. We still have to ask, examine, explain, and stay long enough to notice trouble.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_010",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Arriving is the first useful thing. It is not the only one.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_011",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Then we keep enough cloth for the last patient, too.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cloth_012",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Tilda gives her the dry fold. This time Kera puts it where someone else can reach it.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a2_load_cart",
+      "act": 2,
+      "title_en": "The Cart with No Driver",
+      "location_id": "tl_load_road",
+      "direction_en": "An overturned cart blocks a shallow cut. A living carter waits behind a roof beam; the enemies are visible in the lane, not holding a hostage.",
+      "purpose_tr": "B03L: savunma/iyileştirme kaynaklarını yönetme; yaşayan NPC savaş slotu değildir.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_threat",
+      "lines": [
+        {
+          "line_id": "tl_a2_load_cart_001",
+          "speaker_id": "tl_carter",
+          "speaker_display": "Carter",
+          "text_en": "Do not come through the middle. That wheel drops when you touch it.",
+          "emotion": "worried",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cart_002",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "We can use the side, one at a time.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cart_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Are you hurt?",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cart_004",
+          "speaker_id": "tl_carter",
+          "speaker_display": "Carter",
+          "text_en": "Just waiting. They came down from the sheds. I got behind the beam.",
+          "emotion": "worried",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cart_005",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Stay where you have cover. We will clear the lane.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cart_006",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Someone is turning that wheel from the other side.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cart_007",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Two ahead. The others are following the noise.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_cart_008",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "We hold the front while the load gets through. Do not spend everything in the first exchange.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a2_load_arrival",
+      "act": 2,
+      "title_en": "The Road Opens",
+      "location_id": "tl_harbor_square",
+      "direction_en": "The carter has a clear road. The group carries the medicine the last distance on foot; no escort mission teleports a patient into the battle.",
+      "purpose_tr": "Yük rotası güven sorusunu kurar; ortak canon kıyı sahnesine geçiş.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a2_load_arrival_001",
+          "speaker_id": "tl_carter",
+          "speaker_display": "Carter",
+          "text_en": "You could have left the cart. You had your own load.",
+          "emotion": "relieved",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_arrival_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "The cart is still there. We helped the person.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_arrival_003",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Wait until the wheel is braced before you move it.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_arrival_004",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The harbor is past that low roof. I will show you the dry path.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_arrival_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The carter nods toward the covered crates.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a2_load_arrival_006",
+          "speaker_id": "tl_carter",
+          "speaker_display": "Carter",
+          "text_en": "Medicine?",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_arrival_007",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "For the salt fever. No charge.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_arrival_008",
+          "speaker_id": "tl_carter",
+          "speaker_display": "Carter",
+          "text_en": "Then people will want to know why.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_arrival_009",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Yes. They will.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a2_load_arrival_010",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The road widens. This time nobody has to walk behind the load.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "event_guild_salt_fever_2",
+      "title_en": "The Coast Road",
+      "location_id": "salt_road_coast",
+      "direction_en": "The salt villages. Tilda treats patients; Odelia guides them through her old harbor.",
+      "lines": [
+        {
+          "line_id": "event_guild_salt_fever_2_001",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "This is where I learned. My teacher treated this fever with salt and honesty.",
+          "emotion": "reflective",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_guild_salt_fever_2_002",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "My brother and I stole bread from that bakery.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_guild_salt_fever_2_003",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Then we will pay it back with medicine.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        }
+      ],
+      "act": 3,
+      "purpose_tr": "Mevcut kıyı sahnesi: Tilda’nın öğrenimi, Odelia’nın fırın anısı, Iona’nın cevabı aynen.",
+      "provenance_kind": "canon_verbatim",
+      "music_cue": "tl_work",
+      "source_path": "narrative/04_Events/events_part1.json",
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "scene_id": "tl_a3_bakery",
+      "act": 3,
+      "title_en": "The Bakery Door",
+      "location_id": "tl_clinic_table",
+      "direction_en": "A baker opens a dry side room. Their face is not a new permanent character portrait; a nameplate and an empty table are sufficient.",
+      "purpose_tr": "Yeni sıradan NPC rolü; yeni Guild patronu ve başka kan örneği olay örgüsü yok.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a3_bakery_001",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "You can use the side room. The table is clean enough for bread. I do not know about medicine.",
+          "emotion": "guarded",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_bakery_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Then we clean it once more. Thank you.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_bakery_003",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "We will not need the ovens.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_bakery_004",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "Good. They are occupied.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_bakery_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The baker notices Odelia's cap, then looks back at the crates. Recognition is left unspoken.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a3_bakery_006",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "A free bottle usually comes with a second question.",
+          "emotion": "guarded",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_bakery_007",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Mine comes with instructions.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_bakery_008",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "And after the instructions?",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_bakery_009",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "You may ask us something. You do not owe us an answer.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_bakery_010",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Nobody is giving a blood sample, signing a debt, or promising a favor for this treatment.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_bakery_011",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "I will write that down.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_bakery_012",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "Write it where the next person can see it.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a3_questions",
+      "act": 3,
+      "title_en": "A Line for Questions",
+      "location_id": "tl_clinic_table",
+      "direction_en": "Kera places two labels side by side: a short formula label and a clear public label. No readable recipe gives real medical instructions.",
+      "purpose_tr": "İki eşit sosyal dal; seçimin final öncesi kısa karşılığı bulunur, güven sayacı yok.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a3_questions_001",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The label is correct.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_questions_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "You have told the bottle. Tell the person.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_questions_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Dose, contents, maker. What else?",
+          "emotion": "annoyed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_questions_004",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "What they may ask before they take it.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_questions_005",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "And whether they can say no.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_questions_006",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Fine. I am adding a line.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_questions_007",
+          "speaker_id": "tl_patient",
+          "speaker_display": "Patient",
+          "text_en": "Will you tell us what is in it, or just tell us it works?",
+          "emotion": "worried",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_questions_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Kera takes her hand off the nearest bottle. There is room for the question on the table.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ],
+      "choice": {
+        "prompt_en": "How should the group begin?",
+        "state_key": "approach",
+        "options": [
+          {
+            "id": "tl_approach_show",
+            "value": "show",
+            "text_en": "Show the sealed supplies and explain.",
+            "consequence_en": "The villagers can inspect the preparation. No medicine is taken without agreement.",
+            "lines": [
+              {
+                "line_id": "tl_a3_questions_009",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "You may watch from that side of the table. These stay sealed until Tilda needs them.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_010",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "That means she is pleased you asked.",
+                "emotion": "dry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_011",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "It means the table has sides for a reason.",
+                "emotion": "annoyed",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_012",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "Ask us to stop if something is unclear.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_013",
+                "speaker_id": "tl_patient",
+                "speaker_display": "Patient",
+                "text_en": "Can the others watch too?",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_014",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "Yes. Leave room for the person being treated.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_015",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "I will move the bench where they can see.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "tl_approach_listen",
+            "value": "listen",
+            "text_en": "Ask what worries them first.",
+            "consequence_en": "The villagers can question the offer before deciding. No medicine is taken without agreement.",
+            "lines": [
+              {
+                "line_id": "tl_a3_questions_016",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "What would you like to know first?",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_017",
+                "speaker_id": "tl_patient",
+                "speaker_display": "Patient",
+                "text_en": "Why does the same Guild sell one bottle and give away another?",
+                "emotion": "worried",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_018",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "We are the archive wing. We made these, and we are responsible for what we brought.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_019",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "You are right to ask. We will answer what we know and say when we do not.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_020",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "You can keep asking after the bottles are gone.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_021",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "Preferably before I pack the table.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a3_questions_022",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "The table stays here.",
+                "emotion": "small_smile",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "tl_a3_boundary",
+      "act": 3,
+      "title_en": "A Lantern at the Boundary",
+      "location_id": "tl_harbor_square",
+      "direction_en": "While patients wait safely inside, the group checks the next delivery lane. A safe barrier separates the clinic from the enemies.",
+      "purpose_tr": "B04; hazırlık iki encounter varyantından birini seçer, NPC’ler savaşta hedef olamaz.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_threat",
+      "lines": [
+        {
+          "line_id": "tl_a3_boundary_001",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The next lane is not clear. The dead are turning at the net racks.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_boundary_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "The people inside stay inside. We do not carry the queue into this.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_boundary_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "There is one crate left for the far end of the harbor.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_boundary_004",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "It stays behind the door until we can carry it safely.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_boundary_005",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "We will need room behind the front line. If they reach the turn, they will spread along it.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_boundary_006",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Check the kit before we step out. Recovery matters more than looking fast.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_boundary_007",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "And if we surveyed the approach, we use what we saw.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_boundary_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Iona hangs the lantern where both the door and the turn remain visible.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a3_boundary_009",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "A boundary. Not a lure.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a3_after_boundary",
+      "act": 3,
+      "title_en": "The Door Stays Open",
+      "location_id": "tl_clinic_table",
+      "direction_en": "The lane is clear. Tilda checks a waiting patient; the public scene continues regardless of optional battle mastery.",
+      "purpose_tr": "Başarıyla gelen güven; başka köye yetişememe veya süreli hasta ölümü sistemi yok.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a3_after_boundary_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The lantern returns to its hook. The people inside have not moved from the dry benches.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a3_after_boundary_002",
+          "speaker_id": "tl_patient",
+          "speaker_display": "Patient",
+          "text_en": "Did we make you stay longer?",
+          "emotion": "worried",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_after_boundary_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "You did not make the road unsafe.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_after_boundary_004",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "We knew where we were taking the crates.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_after_boundary_005",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Now we have room to finish the work.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_after_boundary_006",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The far lane is clear as well. I checked it on the way back.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_after_boundary_007",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Then sit down for one minute before you check it again.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_after_boundary_008",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "I can still see it from the door.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a3_after_boundary_009",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "A remarkable compromise. Take it.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a4_last_lane",
+      "act": 4,
+      "title_en": "The Last Delivery",
+      "location_id": "tl_harbor_lane",
+      "direction_en": "A narrow lane leads to the outer salt-workers’ shelter. The final visible group of dead blocks the passage; no vendor is commanding them.",
+      "purpose_tr": "B05 sentez: ön baskı + arka tehdit; satıcıyla fiziksel boss savaşı yok.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_threat",
+      "lines": [
+        {
+          "line_id": "tl_a4_last_lane_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The last crate is lighter. The road to put it down is not.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a4_last_lane_002",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "They are caught between the wall and the racks. We cannot carry past them.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_last_lane_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The people beyond this lane have been waiting since before we arrived.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_last_lane_004",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Then we do this carefully. They do not need a broken crate arriving first.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_last_lane_005",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "It is on dry ground. We can leave it here until the way is clear.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_last_lane_006",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The bell draws them together. The others reach through the gaps. Do not chase the sound without looking at the hands.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_last_lane_007",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "We have crossed two roads and kept every stopper in place.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_last_lane_008",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "That was the easy part. One more clear passage.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a4_delivery_done",
+      "act": 4,
+      "title_en": "Nothing Owed",
+      "location_id": "tl_harbor_lane",
+      "direction_en": "The passage is clear. A crate rests beside a dry door; the group hands over explanations and stays for questions.",
+      "purpose_tr": "Genel, kurgusal bakım; gerçek doz/tıbbi tarif yok. Ödül vaatleri diyalogda geçmez.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a4_delivery_done_001",
+          "speaker_id": "tl_patient",
+          "speaker_display": "Patient",
+          "text_en": "What do you need from us?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_delivery_done_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "A dry place for the unopened bottles. Someone to read the instructions with Tilda.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_delivery_done_003",
+          "speaker_id": "tl_patient",
+          "speaker_display": "Patient",
+          "text_en": "I meant in return.",
+          "emotion": "worried",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_delivery_done_004",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "You may tell the next person where to find us. You do not have to.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_delivery_done_005",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Ask for help if the fever does not ease or anything gets worse. Do not wait because the bottle was free.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_delivery_done_006",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The path to the bakery is clear.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_delivery_done_007",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The patient takes the written directions before the bottle. Kera notices, and leaves both within reach.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a4_delivery_done_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "There. No second price.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a4_echo_show",
+      "act": 4,
+      "title_en": "What They Saw",
+      "location_id": "tl_clinic_table",
+      "direction_en": "A patient recalls the inspected supplies. This is the payoff of showing, not a superior trust outcome.",
+      "purpose_tr": "Show dalı geri dönüşü; ortak mevcut satıcı sahnesine bağlanır.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a4_echo_show_001",
+          "speaker_id": "tl_patient",
+          "speaker_display": "Patient",
+          "text_en": "I told the people at the shelter we saw the sealed crates opened.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_echo_show_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Good. Tell them they may ask to see the next one, too.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_echo_show_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "And that the table has sides. That part is apparently important.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_echo_show_004",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "They moved the bench without being asked.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_echo_show_005",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "They knew what they wanted to see.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_echo_show_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "On the table, the explanation has more fingerprints than the bottle.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a4_echo_listen",
+      "act": 4,
+      "title_en": "What They Asked",
+      "location_id": "tl_clinic_table",
+      "direction_en": "A patient repeats an answered question. This is the payoff of listening, not a superior trust outcome.",
+      "purpose_tr": "Listen dalı geri dönüşü; ortak mevcut satıcı sahnesine bağlanır.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a4_echo_listen_001",
+          "speaker_id": "tl_patient",
+          "speaker_display": "Patient",
+          "text_en": "Someone at the shelter asked me what you wanted in return. I knew what to say.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_echo_listen_002",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "And if they have another question, they can come here.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_echo_listen_003",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Or write it. We have room left on the paper.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_echo_listen_004",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "She checked. Twice.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_echo_listen_005",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "They brought the bench closer so they could hear.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_echo_listen_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "On the table, the question has left a small crease in the paper. Kera does not flatten it away.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "event_guild_salt_fever_3",
+      "title_en": "Two Labels",
+      "location_id": "salt_road_coast",
+      "direction_en": "A ledger-wing agent arrives selling the same cure at ten times the price.",
+      "lines": [
+        {
+          "line_id": "event_guild_salt_fever_3_001",
+          "speaker_id": "red_vial_agent",
+          "speaker_display": "Ledger Agent",
+          "text_en": "You are ruining a market, alchemist.",
+          "emotion": "cold",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_guild_salt_fever_3_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "I am labeling it correctly. Yours says \"cure\". Mine says \"cure, free, and the name of who made it\".",
+          "emotion": "fierce",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_guild_salt_fever_3_003",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The villagers took Kera's bottles. The agent left with a full crate and an empty road.",
+          "emotion": "satisfied",
+          "voice_track": "jp_narration"
+        }
+      ],
+      "act": 4,
+      "purpose_tr": "Mevcut satıcı sahnesi aynen: iki etiket, şişelerin seçilmesi ve satıcının ayrılması.",
+      "provenance_kind": "canon_verbatim",
+      "music_cue": "tl_market",
+      "source_path": "narrative/04_Events/events_part1.json",
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "scene_id": "tl_a4_after_agent",
+      "act": 4,
+      "title_en": "The Paper Left Behind",
+      "location_id": "tl_clinic_table",
+      "direction_en": "The agent has gone. Their old sales paper remains beside the public instructions. The group does not turn the departure into a new conspiracy.",
+      "purpose_tr": "Küçük toplumsal kazanım; satıcı dövülmez, ölüm veya yeni Guild lideri ifşa edilmez.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a4_after_agent_001",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "He comes through here often. People know the seal on his paper.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_after_agent_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "They should know what is inside the bottle, too.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_after_agent_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "And who to find when they have a question.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_after_agent_004",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Do we take his paper down?",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_after_agent_005",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "It is their wall.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_after_agent_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The baker picks up the old sales paper and sets it beside the stove, away from the medicine.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a4_after_agent_007",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "I can find another use for it.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_after_agent_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Not the instructions. Those are still useful paper.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a4_after_agent_009",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "I noticed.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a5_quiet",
+      "act": 5,
+      "title_en": "The Quiet After Work",
+      "location_id": "tl_clinic_table",
+      "direction_en": "Work is winding down. The bottles are not instant miraculous cures; instructions and follow-up arrangements remain beside each delivery.",
+      "purpose_tr": "Tam ve mucizevi tedavi iddiası yok; görev sonu gelecekteki iş ihtiyacını belirler, yeni zorunlu quest açmaz.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a5_quiet_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The crates are empty. The benches are not. Tilda speaks quietly to the last person waiting.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a5_quiet_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "They have enough for the next delivery as well.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_quiet_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "They have enough treatment for the cases we examined. We return to the archive and check what else is needed.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_quiet_004",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "That is what I meant.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_quiet_005",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Then put that on the next notice.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_quiet_006",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "I left space beside the instructions for questions to come back with the cart.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_quiet_007",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "You expect them to ask more?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_quiet_008",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "I hope they can.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_quiet_009",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Kera turns a spare label over. For once, she leaves the blank side blank.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a5_coast_memory",
+      "act": 5,
+      "title_en": "A Familiar Step",
+      "location_id": "tl_harbor_square",
+      "direction_en": "At the edge of the square, Odelia looks back toward the sea-wall steps. This callback plays only for the coast route.",
+      "purpose_tr": "Kıyı rotası final callback’i; Tomas hakkındaki açık soru korunur.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a5_coast_memory_001",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The shutter was not painted the same color.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_coast_memory_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "On the coast path?",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_coast_memory_003",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Yes. I kept looking for something exactly as I left it.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_coast_memory_004",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "You still found the way.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_coast_memory_005",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "I found somewhere to put the crate down.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_coast_memory_006",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "That was the part the rest of us needed.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_coast_memory_007",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Odelia folds the route sketch along a new crease. The steps still have a place on it.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a5_load_memory",
+      "act": 5,
+      "title_en": "Something Still Dry",
+      "location_id": "tl_clinic_table",
+      "direction_en": "Tilda folds the unused clean cloth. This callback plays only for the load-road route.",
+      "purpose_tr": "Yük rotası final callback’i; yardımın sürekliliği, sonsuz talep değil.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a5_load_memory_001",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "There is still a clean fold left.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_load_memory_002",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "We kept one. That is different from forgetting to use it.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_load_memory_003",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "The carter offered to bring questions back with the next load.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_load_memory_004",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "He knows where the road is clear now.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_load_memory_005",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Then he has a useful job. We should not give him six more because he said yes to one.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_load_memory_006",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "You have made restraint sound like a packing instruction.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_load_memory_007",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Tilda puts the cloth where the first hand opening the kit will find it.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a5_bread",
+      "act": 5,
+      "title_en": "Bread, with No Conditions",
+      "location_id": "tl_clinic_table",
+      "direction_en": "The baker sets warm bread beside the empty crates, away from the medicine. It is a story prop, not an inventory or reward grant.",
+      "purpose_tr": "Mevcut fırın anısına küçük karşılık; işlevsel ödül tanımlanmaz.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a5_bread_001",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "For the road. It was coming out of the oven anyway.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_bread_002",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "We can pay for it.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_bread_003",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "You can take it before it cools.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_bread_004",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The medicine was not a bargain for bread.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_bread_005",
+          "speaker_id": "tl_baker",
+          "speaker_display": "Baker",
+          "text_en": "I know. Neither is this.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_bread_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Odelia breaks a piece carefully, then passes the larger part to Tilda.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a5_bread_007",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "Do not choose my portion for me. I have worked very hard to remain difficult.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_bread_008",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Then choose this one.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_bread_009",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "We can eat before we carry the empty crates back.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_bread_010",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "For a little while, nobody needs anything explained.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tl_a5_company",
+      "act": 5,
+      "title_en": "Before They Leave",
+      "location_id": "tl_harbor_square",
+      "direction_en": "The group rests at the dry bench. Choose one brief conversation; all options rejoin the same ending. Other conversations are available in replay.",
+      "purpose_tr": "Dört isteğe bağlı ekip anı. Sonuç değişmez; tümü replay’de okunabilir, ödül bağlanmaz.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a5_company_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The road back is clear enough to wait for one conversation.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a5_company_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "We should go before I find something else to label.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_company_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "You have already labeled the empty crates.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_company_004",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "Then we have a moment.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Who do you sit beside?",
+        "state_key": "focus",
+        "options": [
+          {
+            "id": "tl_focus_kera",
+            "value": "kera",
+            "text_en": "Kera, with the spare label.",
+            "consequence_en": "A conversation about making the maker visible.",
+            "lines": [
+              {
+                "line_id": "tl_a5_company_005",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "You wrote your name larger on the second label.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_006",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "The first one did not have enough room.",
+                "emotion": "hesitant",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_007",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "You made room.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_008",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "If something is wrong, they should know who brought it.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_009",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "And if something is right.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_010",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "That is not what the name is for.",
+                "emotion": "hesitant",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_011",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "It can be for both.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_012",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "Kera presses the loose label flat against an empty crate. She leaves the name where it can be read.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              }
+            ]
+          },
+          {
+            "id": "tl_focus_tilda",
+            "value": "tilda",
+            "text_en": "Tilda, beside the folded kit.",
+            "consequence_en": "A conversation about care after arrival.",
+            "lines": [
+              {
+                "line_id": "tl_a5_company_013",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "You were the first to tell them we would stay for questions.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_014",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "People are used to a seller leaving when the bottle changes hands.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_015",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "You stayed after the last one did.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_016",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "There was still someone on the bench.",
+                "emotion": "dry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_017",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "There is not now.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_018",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "Tilda looks at the empty place, then puts the kit down instead of checking it again.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              },
+              {
+                "line_id": "tl_a5_company_019",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "Good. Then I can sit there.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_020",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "A practical use for a successful treatment room.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "tl_focus_iona",
+            "value": "iona",
+            "text_en": "Iona, where the lantern is hanging.",
+            "consequence_en": "A conversation about help without an obligation.",
+            "lines": [
+              {
+                "line_id": "tl_a5_company_021",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "You let them leave without telling us their names.",
+                "emotion": "hesitant",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_022",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "They came for medicine. We were not registering them for a journey.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_023",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "Some stayed and asked to write it down anyway.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_024",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "Then they chose something to leave with us.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_025",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "The baker chose bread. A sound decision.",
+                "emotion": "dry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_026",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "It felt different when nobody asked for it first.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_027",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "Yes.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_028",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "Iona lifts the lantern from its hook. Its light falls on the bread before the road.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              }
+            ]
+          },
+          {
+            "id": "tl_focus_odelia",
+            "value": "odelia",
+            "text_en": "Odelia, with the folded route sketch.",
+            "consequence_en": "A conversation about being useful in a familiar place.",
+            "lines": [
+              {
+                "line_id": "tl_a5_company_029",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "You got us here.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_030",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "I knew the roads.",
+                "emotion": "hesitant",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_031",
+                "speaker_id": "tilda_fen",
+                "speaker_display": "Tilda",
+                "text_en": "Roads rarely carry their own crates.",
+                "emotion": "dry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_032",
+                "speaker_id": "iona_mist",
+                "speaker_display": "Iona",
+                "text_en": "You showed us where to wait, too.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_033",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "I thought coming back would mean answering questions I cannot answer.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_034",
+                "speaker_id": "kera_voss",
+                "speaker_display": "Kera",
+                "text_en": "You answered the ones we needed today.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_035",
+                "speaker_id": "odelia_pike",
+                "speaker_display": "Odelia",
+                "text_en": "Then I can show you the way back.",
+                "emotion": "small_smile",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tl_a5_company_036",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "She folds the sketch without hiding it beneath the crate.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "tl_a5_end",
+      "act": 5,
+      "title_en": "Room on the Notice",
+      "location_id": "tl_salt_fork",
+      "direction_en": "At the fork on the return, all four carry the empty crates. No named villain, royal secret, or cure for Fadyme is revealed.",
+      "purpose_tr": "Ortak bitiş; event completed burada yazılır. Ana hikâye ve diğer görevler etkilenmez.",
+      "provenance_kind": "new_authored_expansion",
+      "music_cue": "tl_work",
+      "lines": [
+        {
+          "line_id": "tl_a5_end_001",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "The turn is clear. We can stay together on the way back.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_end_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The next notice needs a place for questions.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_end_003",
+          "speaker_id": "tilda_fen",
+          "speaker_display": "Tilda",
+          "text_en": "And a place for whoever answers them to sit down.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_end_004",
+          "speaker_id": "iona_mist",
+          "speaker_display": "Iona",
+          "text_en": "We can leave both.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_end_005",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "It will be a very large notice.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_end_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The crates knock gently as they walk. Paper labels remain tied to their handles.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tl_a5_end_007",
+          "speaker_id": "odelia_pike",
+          "speaker_display": "Odelia",
+          "text_en": "Do we take those off?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_end_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "No. They still say who brought them.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tl_a5_end_009",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Nothing about the road has become easy. It is only easier to know whom to ask.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    }
+  ],
+  "graph": [
+    {
+      "node_id": "event_guild_salt_fever_1",
+      "kind": "story",
+      "ref": "event_guild_salt_fever_1",
+      "transitions": [
+        {
+          "to": "tl_a1_crates"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a1_crates",
+      "kind": "story",
+      "ref": "tl_a1_crates",
+      "transitions": [
+        {
+          "to": "tl_a1_preparation"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a1_preparation",
+      "kind": "story",
+      "ref": "tl_a1_preparation",
+      "transitions": [
+        {
+          "to": "tl_a1_gate"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a1_gate",
+      "kind": "story",
+      "ref": "tl_a1_gate",
+      "transitions": [
+        {
+          "to": "tl_b01"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_b01",
+      "kind": "battle",
+      "ref": "tl_enc_gate",
+      "transitions": [
+        {
+          "to": "tl_a1_after_gate"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a1_after_gate",
+      "kind": "story",
+      "ref": "tl_a1_after_gate",
+      "transitions": [
+        {
+          "to": "tl_a1_fork"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a1_fork",
+      "kind": "story",
+      "ref": "tl_a1_fork",
+      "transitions": [
+        {
+          "to": "tl_a2_coast_wall",
+          "when": {
+            "state_key": "route",
+            "equals": "coast"
+          }
+        },
+        {
+          "to": "tl_a2_load_sheds",
+          "when": {
+            "state_key": "route",
+            "equals": "load"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a2_coast_wall",
+      "kind": "story",
+      "ref": "tl_a2_coast_wall",
+      "transitions": [
+        {
+          "to": "tl_b02c"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_b02c",
+      "kind": "battle",
+      "ref": "tl_enc_coast_wall",
+      "transitions": [
+        {
+          "to": "tl_a2_coast_steps"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a2_coast_steps",
+      "kind": "story",
+      "ref": "tl_a2_coast_steps",
+      "transitions": [
+        {
+          "to": "tl_a2_coast_turn"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a2_coast_turn",
+      "kind": "story",
+      "ref": "tl_a2_coast_turn",
+      "transitions": [
+        {
+          "to": "tl_b03c"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_b03c",
+      "kind": "battle",
+      "ref": "tl_enc_coast_turn",
+      "transitions": [
+        {
+          "to": "tl_a2_coast_arrival"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a2_coast_arrival",
+      "kind": "story",
+      "ref": "tl_a2_coast_arrival",
+      "transitions": [
+        {
+          "to": "event_guild_salt_fever_2"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a2_load_sheds",
+      "kind": "story",
+      "ref": "tl_a2_load_sheds",
+      "transitions": [
+        {
+          "to": "tl_b02l"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_b02l",
+      "kind": "battle",
+      "ref": "tl_enc_load_sheds",
+      "transitions": [
+        {
+          "to": "tl_a2_load_cloth"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a2_load_cloth",
+      "kind": "story",
+      "ref": "tl_a2_load_cloth",
+      "transitions": [
+        {
+          "to": "tl_a2_load_cart"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a2_load_cart",
+      "kind": "story",
+      "ref": "tl_a2_load_cart",
+      "transitions": [
+        {
+          "to": "tl_b03l"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_b03l",
+      "kind": "battle",
+      "ref": "tl_enc_load_cart",
+      "transitions": [
+        {
+          "to": "tl_a2_load_arrival"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a2_load_arrival",
+      "kind": "story",
+      "ref": "tl_a2_load_arrival",
+      "transitions": [
+        {
+          "to": "event_guild_salt_fever_2"
+        }
+      ]
+    },
+    {
+      "node_id": "event_guild_salt_fever_2",
+      "kind": "story",
+      "ref": "event_guild_salt_fever_2",
+      "transitions": [
+        {
+          "to": "tl_a3_bakery"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a3_bakery",
+      "kind": "story",
+      "ref": "tl_a3_bakery",
+      "transitions": [
+        {
+          "to": "tl_a3_questions"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a3_questions",
+      "kind": "story",
+      "ref": "tl_a3_questions",
+      "transitions": [
+        {
+          "to": "tl_a3_boundary"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a3_boundary",
+      "kind": "story",
+      "ref": "tl_a3_boundary",
+      "transitions": [
+        {
+          "to": "tl_b04"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_b04",
+      "kind": "battle",
+      "ref": {
+        "select_by": "prep",
+        "variants": {
+          "clean": "tl_enc_boundary_clean",
+          "scout": "tl_enc_boundary_scout"
+        }
+      },
+      "transitions": [
+        {
+          "to": "tl_a3_after_boundary"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a3_after_boundary",
+      "kind": "story",
+      "ref": "tl_a3_after_boundary",
+      "transitions": [
+        {
+          "to": "tl_a4_last_lane"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a4_last_lane",
+      "kind": "story",
+      "ref": "tl_a4_last_lane",
+      "transitions": [
+        {
+          "to": "tl_b05"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_b05",
+      "kind": "battle",
+      "ref": "tl_enc_last_lane",
+      "transitions": [
+        {
+          "to": "tl_a4_delivery_done"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a4_delivery_done",
+      "kind": "story",
+      "ref": "tl_a4_delivery_done",
+      "transitions": [
+        {
+          "to": "tl_a4_echo_show",
+          "when": {
+            "state_key": "approach",
+            "equals": "show"
+          }
+        },
+        {
+          "to": "tl_a4_echo_listen",
+          "when": {
+            "state_key": "approach",
+            "equals": "listen"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a4_echo_show",
+      "kind": "story",
+      "ref": "tl_a4_echo_show",
+      "transitions": [
+        {
+          "to": "event_guild_salt_fever_3"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a4_echo_listen",
+      "kind": "story",
+      "ref": "tl_a4_echo_listen",
+      "transitions": [
+        {
+          "to": "event_guild_salt_fever_3"
+        }
+      ]
+    },
+    {
+      "node_id": "event_guild_salt_fever_3",
+      "kind": "story",
+      "ref": "event_guild_salt_fever_3",
+      "transitions": [
+        {
+          "to": "tl_a4_after_agent"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a4_after_agent",
+      "kind": "story",
+      "ref": "tl_a4_after_agent",
+      "transitions": [
+        {
+          "to": "tl_a5_quiet"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a5_quiet",
+      "kind": "story",
+      "ref": "tl_a5_quiet",
+      "transitions": [
+        {
+          "to": "tl_a5_coast_memory",
+          "when": {
+            "state_key": "route",
+            "equals": "coast"
+          }
+        },
+        {
+          "to": "tl_a5_load_memory",
+          "when": {
+            "state_key": "route",
+            "equals": "load"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a5_coast_memory",
+      "kind": "story",
+      "ref": "tl_a5_coast_memory",
+      "transitions": [
+        {
+          "to": "tl_a5_bread"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a5_load_memory",
+      "kind": "story",
+      "ref": "tl_a5_load_memory",
+      "transitions": [
+        {
+          "to": "tl_a5_bread"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a5_bread",
+      "kind": "story",
+      "ref": "tl_a5_bread",
+      "transitions": [
+        {
+          "to": "tl_a5_company"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a5_company",
+      "kind": "story",
+      "ref": "tl_a5_company",
+      "transitions": [
+        {
+          "to": "tl_a5_end"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_a5_end",
+      "kind": "story",
+      "ref": "tl_a5_end",
+      "transitions": [
+        {
+          "to": "tl_complete"
+        }
+      ]
+    },
+    {
+      "node_id": "tl_complete",
+      "kind": "complete",
+      "ref": null,
+      "transitions": []
+    }
+  ],
+  "requires_capabilities": [
+    "event_stage_gate",
+    "event_graph_v1",
+    "persistent_event_choices",
+    "story_checkpoint_resume",
+    "verified_event_battles",
+    "event_replay_isolation",
+    "chapter4_character_and_enemy_content"
+  ],
+  "min_client_version": null,
+  "compatibility_note_tr": "Bu authoring JSON mevcut manifest schema’sının doğrudan event payload’u değildir. Derlenmiş story JSON ayrı; graph adapter ve medya/karakter içerikleri gerekli. Runtime’a yerleştirilmedi."
+}

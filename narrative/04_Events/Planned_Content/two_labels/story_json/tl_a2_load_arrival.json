@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a2_load_arrival",
+  "title_en": "The Road Opens",
+  "location_id": "tl_harbor_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_harbor_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_arrival_001",
+      "speaker": "tl_carter",
+      "speaker_display": "Carter",
+      "text": "You could have left the cart. You had your own load.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_arrival_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "The cart is still there. We helped the person.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_arrival_003",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Wait until the wheel is braced before you move it.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_arrival_004",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The harbor is past that low roof. I will show you the dry path.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_load_arrival_005",
+      "text": "The carter nods toward the covered crates."
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_arrival_006",
+      "speaker": "tl_carter",
+      "speaker_display": "Carter",
+      "text": "Medicine?",
+      "emotion": "curious"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_arrival_007",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "For the salt fever. No charge.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_arrival_008",
+      "speaker": "tl_carter",
+      "speaker_display": "Carter",
+      "text": "Then people will want to know why.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_arrival_009",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Yes. They will.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_load_arrival_010",
+      "text": "The road widens. This time nobody has to walk behind the load."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a2_load_arrival_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

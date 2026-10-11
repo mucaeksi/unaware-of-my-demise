@@ -1,0 +1,1081 @@
+{
+  "authoring_schema_version": 1,
+  "status": "complete_authored_draft_not_deployed",
+  "event_id": "side_quest_open_road",
+  "title_en": "An Open Road",
+  "title_tr": "Açık Yol",
+  "content_kind": "permanent_side_quest",
+  "canon_source_event_id": null,
+  "delivery": "future_declarative_content_patch",
+  "unlock": {
+    "after_stage": "5-5",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "availability": {
+    "publish_at": null,
+    "expires_at": null
+  },
+  "rewards": {
+    "status": "undecided_by_owner",
+    "binding": null
+  },
+  "entry_node": "or_a1_after",
+  "completion_node": "or_complete",
+  "state_keys": {
+    "handoff": [
+      "supply",
+      "passage"
+    ],
+    "test": [
+      "newcomer",
+      "pause"
+    ]
+  },
+  "validation_cases": [
+    {
+      "handoff": "supply",
+      "test": "newcomer"
+    },
+    {
+      "handoff": "supply",
+      "test": "pause"
+    },
+    {
+      "handoff": "passage",
+      "test": "newcomer"
+    },
+    {
+      "handoff": "passage",
+      "test": "pause"
+    }
+  ],
+  "expected_battles_per_run": 1,
+  "sources": [
+    {
+      "path": "narrative/07_Enemies_Bosses/bestiary.md",
+      "sha256": "b70789fe8149b1fba7ef8c4f0bae9c852beb52a7a18e62890b47e6418d5e8b2e"
+    },
+    {
+      "path": "narrative/01_Story_Bible/STORY_BIBLE_PART1.md",
+      "sha256": "7f1d798e2fa4491f8d4e5870e1378bf84d2b2fffcaeaea73a0f65b9f434b9f2c"
+    },
+    {
+      "path": "narrative/00_Canon/SPOILER_UNLOCK_POLICY.md",
+      "sha256": "14c09c1795a3a3373ada44e25b1e1f49015abba72b030323733c2e9abbafa7c8"
+    },
+    {
+      "path": "narrative/05_Codex_Lore/world_rules.md",
+      "sha256": "0c1afcab2dd07302798aa36ff6ad9c517e00e4bef75bf7fd45bd93970f35a373"
+    },
+    {
+      "path": "narrative/03_Companion_Stories/character_stories_part1.json",
+      "sha256": "c4e5104df0a7b263f1e59facb1b4b5db3f79f8546186b553e6b1d9fc53605e4a"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/nara_vell.md",
+      "sha256": "191e39a62401ad6ae90b39beb02ae4998c1a7a58fc2f76c6b626a2a2ebbf10ac"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/marek_vane.md",
+      "sha256": "63dec63f5312abdc52c7c7f6cb343b99347947ad727da68d24131e2a2cd6f0c6"
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "or_a1_after",
+      "act": 1,
+      "title_en": "Beyond the Crossing",
+      "location_id": "or_relief_stop",
+      "direction_en": "Nara and Marek are on the safe side with survivors. The bridge and Oren are off-screen; no fate is assigned to either.",
+      "purpose_tr": "5-5 yan sivil rota; Mahmut/Fadyme geri dönmez.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a1_after_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Beyond the crossing, a stretch of firm ground has become a place to stop. It needs to become a place other people can use.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "or_a1_after_002",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "Keep the exit wide. Resting people should not become a wall for arriving people.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_after_003",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "The volunteers have brought water and cloth. They need to know where each belongs.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_after_004",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "We can keep it going if someone shows us the order.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_after_005",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "Then we will show you. After that, you will show us.",
+          "emotion": "measured",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_after_006",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "She accepts demonstrations more readily than thanks.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "or_a1_need",
+      "act": 1,
+      "title_en": "A Stop with Two Edges",
+      "location_id": "or_relief_stop",
+      "direction_en": "Supplies and the passage are both necessary. No survivor is assigned a hidden death outcome.",
+      "purpose_tr": "Yardım düzeninin devri; Refugee Measure şarkısı tekrar değil.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a1_need_001",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "If we put everything close to the bench, the next group can reach it.",
+          "emotion": "worried",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_need_002",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "And if the boxes close the approach, they cannot reach the bench.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_need_003",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "We need an order that works when the two of us have gone ahead.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_need_004",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "I thought keeping you here was the safer plan.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_need_005",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "A useful place should not depend on one pair of shoulders.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_need_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Marek sets his spear beside the supply board. He does not start a marching song.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "or_a1_handoff",
+      "act": 1,
+      "title_en": "Show the Next Hands",
+      "location_id": "or_relief_stop",
+      "direction_en": "Choose which operational task to teach first. Both are completed before the handover.",
+      "purpose_tr": "Handoff sırası iki farklı rehearsal ve battle düzeni.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a1_handoff_001",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "We can start with finding and replacing supplies, or with keeping the way through open.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_handoff_002",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "The first needs a steady entrance. The second needs the reaching threat noticed early.",
+          "emotion": "measured",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a1_handoff_003",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "Tell me what to try. I will do it, rather than promise I understood.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Begin the handover.",
+        "state_key": "handoff",
+        "options": [
+          {
+            "id": "or_handoff_supply",
+            "value": "supply",
+            "text_en": "Teach the supply handover first.",
+            "consequence_en": "Show stock placement and replacement; battle emphasizes a steady front.",
+            "lines": [
+              {
+                "line_id": "or_a1_handoff_004",
+                "speaker_id": "marek_vane",
+                "speaker_display": "Marek",
+                "text_en": "Find a cloth, bring it to the bench, then show where the next one waits.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "or_a1_handoff_005",
+                "speaker_id": "nara_vell",
+                "speaker_display": "Nara",
+                "text_en": "I will watch the approach while you learn the order.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "or_handoff_passage",
+            "value": "passage",
+            "text_en": "Teach the open passage first.",
+            "consequence_en": "Show waiting and passing space; battle emphasizes the reaching threat.",
+            "lines": [
+              {
+                "line_id": "or_a1_handoff_006",
+                "speaker_id": "nara_vell",
+                "speaker_display": "Nara",
+                "text_en": "Walk it as if you had never seen this stop. Tell us where you must hesitate.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "or_a1_handoff_007",
+                "speaker_id": "marek_vane",
+                "speaker_display": "Marek",
+                "text_en": "I will carry the empty basket through after you.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "or_a2_supply_1",
+      "act": 2,
+      "title_en": "Where the Next Cloth Waits",
+      "location_id": "or_supply_board",
+      "direction_en": "The volunteer demonstrates a simple stock handover. Supplies are story props, not reward inventory.",
+      "purpose_tr": "Görünür stok işleyişi; yapı/üretim ekonomisi eklenmez.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a2_supply_1_001",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "One here, one brought forward, the empty cloth marker laid flat.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_supply_1_002",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "Good. How does the next person see that the stack is low?",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_supply_1_003",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "I could call for you.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_supply_1_004",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "Try a person who will still be here.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_supply_1_005",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "The keeper at the bench can see a flat marker. Put it where their eyes already go.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_supply_1_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The volunteer moves the marker, then starts the handover again.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "or_a2_supply_2",
+      "act": 2,
+      "title_en": "An Order Someone Else Can Use",
+      "location_id": "or_supply_board",
+      "direction_en": "The route through is also cleared. The volunteer can repeat the procedure without Marek doing it for them.",
+      "purpose_tr": "Supply dalı tamam; herikiiş de biter.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a2_supply_2_001",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "Now pretend I am sitting at the bench. What do you need from me?",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_supply_2_002",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "Leave the opening clear. Put the used cloth here, so the clean stack stays clean.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_supply_2_003",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "That is an instruction people can follow.",
+          "emotion": "measured",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_supply_2_004",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "And one I can follow while sitting down. A rare luxury.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_supply_2_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The exit remains open. The board holds enough room for another pair of hands.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "or_a2_passage_1",
+      "act": 2,
+      "title_en": "Walk It Once",
+      "location_id": "or_waiting_lane",
+      "direction_en": "Nara asks the volunteer to walk the passage at an ordinary pace. No real-time civilian pathfinding is required.",
+      "purpose_tr": "İşaret/tabela tamiri değil işlevsel mekân düzeni ve rehearsal.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a2_passage_1_001",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "Here I would stop. I cannot see whether that space is for waiting or passing.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_passage_1_002",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "Then separate the bench from the opening. Do not make the tired person guess.",
+          "emotion": "measured",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_passage_1_003",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "The supply basket can wait inside the marked space.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_passage_1_004",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "That leaves the turn open.",
+          "emotion": "relieved",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_passage_1_005",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "Try it again from the other side. Nobody arriving owes us knowledge of the first side.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_passage_1_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The volunteer returns by the same clear opening, without taking the shortest line across the bench.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "or_a2_passage_2",
+      "act": 2,
+      "title_en": "Leave the Opening",
+      "location_id": "or_waiting_lane",
+      "direction_en": "The supplies are made accessible too. Marek gives a small practical instruction rather than a procession song.",
+      "purpose_tr": "Passage dalı tamam; yeni kalıcı buildsystem yok.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a2_passage_2_001",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "Water within reach of someone seated. Extra cloth behind it, where it stays dry.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_passage_2_002",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "And nobody waits inside the opening, even when the bench is full.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_passage_2_003",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "What do you do when it is full?",
+          "emotion": "measured",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_passage_2_004",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "Ask the next group to stop on the firm ground here. I do not press them against the exit.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_passage_2_005",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "Good. That is a place, not a crowd.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a2_passage_2_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Marek puts the empty basket down where its owner can find it again.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "or_a3_line",
+      "act": 3,
+      "title_en": "The Remaining Threat",
+      "location_id": "or_safe_approach",
+      "direction_en": "Known bridge dead approach the outer ground. Survivors and volunteers remain safely behind the relief point.",
+      "purpose_tr": "B01 standard battle; sivil escortAI yok.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a3_line_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "A dead guard drags its weapon over the far stones. Others follow where the firm ground narrows.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "or_a3_line_002",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "Everyone behind the stop. This is the line we keep, not a line you join.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a3_line_003",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "Read the one supporting the formation. The nearest blade is not the only threat.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a3_line_004",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "Do we move the people again?",
+          "emotion": "worried",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a3_line_005",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "They have safe room. Keep it clear for them.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a3_line_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The two step forward without asking the volunteers to hold a weapon.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "or_a3_safe",
+      "act": 3,
+      "title_en": "Use It Again",
+      "location_id": "or_relief_stop",
+      "direction_en": "After standard victory, the handover demonstration resumes without repeating the battle.",
+      "purpose_tr": "Savaş sonrası işlevsel kontrol; kast yaralanma kaybı cezaları yok.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a3_safe_001",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "The approach is clear. Show us the order once more.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a3_safe_002",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "Waiting space here. Passing space there. Supplies brought forward without blocking either.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a3_safe_003",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "And who can explain it if you are resting?",
+          "emotion": "measured",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a3_safe_004",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "The next volunteer. I will show them before I sit down.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a3_safe_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Marek leaves the supply board in the volunteer’s hands.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "or_a4_test",
+      "act": 4,
+      "title_en": "Who Shows the Next Person",
+      "location_id": "or_relief_stop",
+      "direction_en": "Choose a teach-back check. This is not a hidden correct answer or a character affection score.",
+      "purpose_tr": "Ustalık/timing puanı değil iki somut teach-back callback.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a4_test_001",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "One more check. We should see this work with an unfamiliar pair of hands.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_test_002",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "Or with an unexpected pause. Both happen on roads.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Check the handover.",
+        "state_key": "test",
+        "options": [
+          {
+            "id": "or_test_newcomer",
+            "value": "newcomer",
+            "text_en": "Let a new volunteer explain the order.",
+            "consequence_en": "See whether the instructions work without Nara or Marek leading.",
+            "lines": [
+              {
+                "line_id": "or_a4_test_003",
+                "speaker_id": "or_volunteer",
+                "speaker_display": "Volunteer",
+                "text_en": "I will show them once, then let them show me.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "or_a4_test_004",
+                "speaker_id": "marek_vane",
+                "speaker_display": "Marek",
+                "text_en": "Good. Leave room for their question before answering it.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "or_a4_test_005",
+                "speaker_id": "nara_vell",
+                "speaker_display": "Nara",
+                "text_en": "And watch where their feet hesitate.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "or_test_pause",
+            "value": "pause",
+            "text_en": "Rehearse a pause with the current volunteer.",
+            "consequence_en": "See how they keep the passage clear while someone rests.",
+            "lines": [
+              {
+                "line_id": "or_a4_test_006",
+                "speaker_id": "or_volunteer",
+                "speaker_display": "Volunteer",
+                "text_en": "I can stop at the bench without stopping the next person at the entrance.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "or_a4_test_007",
+                "speaker_id": "nara_vell",
+                "speaker_display": "Nara",
+                "text_en": "Show us. Slowly is a useful speed for this check.",
+                "emotion": "measured",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "or_a4_test_008",
+                "speaker_id": "marek_vane",
+                "speaker_display": "Marek",
+                "text_en": "I will be the next person with the empty basket.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "or_a4_newcomer",
+      "act": 4,
+      "title_en": "A Second Explanation",
+      "location_id": "or_relief_stop",
+      "direction_en": "A second local volunteer repeats the order off-screen; no new named companion appears.",
+      "purpose_tr": "Newcomer sonrasıcallback; Marek refugees şarkısı yok.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a4_newcomer_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The new volunteer asks where the empty marker goes. The first points to the board instead of to Marek.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "or_a4_newcomer_002",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "They did not need to call us.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_newcomer_003",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "They knew whom to ask.",
+          "emotion": "measured",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_newcomer_004",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "And now two of us can show it.",
+          "emotion": "relieved",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_newcomer_005",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "That is the useful number for today.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "or_a4_pause",
+      "act": 4,
+      "title_en": "A Place to Stop",
+      "location_id": "or_relief_stop",
+      "direction_en": "The volunteer demonstrates resting without closing the access lane.",
+      "purpose_tr": "Pause callback; NaraLastCart travması tekrar değil.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a4_pause_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The volunteer sits at the bench. Marek passes with the basket without turning sideways.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "or_a4_pause_002",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "Enough room. Keep that distance when the next group arrives.",
+          "emotion": "measured",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_pause_003",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "I thought sitting down meant leaving the work.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_pause_004",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "It means letting the next person do it for a while.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_pause_005",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "The opening is still open.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "or_a4_end",
+      "act": 4,
+      "title_en": "A Place That Continues",
+      "location_id": "or_relief_stop",
+      "direction_en": "Nara and Marek continue the established survivor escort route. Neither predicts the bridge fate or Oren whereabouts.",
+      "purpose_tr": "Ortak bitiş. Off-screen devam 7-2return korunur.",
+      "music_cue": "or_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "or_a4_end_001",
+          "speaker_id": "or_volunteer",
+          "speaker_display": "Volunteer",
+          "text_en": "Will you be back?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_end_002",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "We will walk with the next people who need the road. You know how to keep this place.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_end_003",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "Ask for help before the waiting space closes. You do not have to manage every arrival alone.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_end_004",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "A new volunteer takes the basket. The first stays seated long enough to finish the water.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "or_a4_end_005",
+          "speaker_id": "marek_vane",
+          "speaker_display": "Marek",
+          "text_en": "They have already become better at resting than we are.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "or_a4_end_006",
+          "speaker_id": "nara_vell",
+          "speaker_display": "Nara",
+          "text_en": "Then we taught something useful.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    }
+  ],
+  "graph": [
+    {
+      "node_id": "or_a1_after",
+      "kind": "story",
+      "ref": "or_a1_after",
+      "transitions": [
+        {
+          "to": "or_a1_need"
+        }
+      ]
+    },
+    {
+      "node_id": "or_a1_need",
+      "kind": "story",
+      "ref": "or_a1_need",
+      "transitions": [
+        {
+          "to": "or_a1_handoff"
+        }
+      ]
+    },
+    {
+      "node_id": "or_a1_handoff",
+      "kind": "story",
+      "ref": "or_a1_handoff",
+      "transitions": [
+        {
+          "to": "or_a2_supply_1",
+          "when": {
+            "state_key": "handoff",
+            "equals": "supply"
+          }
+        },
+        {
+          "to": "or_a2_passage_1",
+          "when": {
+            "state_key": "handoff",
+            "equals": "passage"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "or_a2_supply_1",
+      "kind": "story",
+      "ref": "or_a2_supply_1",
+      "transitions": [
+        {
+          "to": "or_a2_supply_2"
+        }
+      ]
+    },
+    {
+      "node_id": "or_a2_supply_2",
+      "kind": "story",
+      "ref": "or_a2_supply_2",
+      "transitions": [
+        {
+          "to": "or_a3_line"
+        }
+      ]
+    },
+    {
+      "node_id": "or_a2_passage_1",
+      "kind": "story",
+      "ref": "or_a2_passage_1",
+      "transitions": [
+        {
+          "to": "or_a2_passage_2"
+        }
+      ]
+    },
+    {
+      "node_id": "or_a2_passage_2",
+      "kind": "story",
+      "ref": "or_a2_passage_2",
+      "transitions": [
+        {
+          "to": "or_a3_line"
+        }
+      ]
+    },
+    {
+      "node_id": "or_a3_line",
+      "kind": "story",
+      "ref": "or_a3_line",
+      "transitions": [
+        {
+          "to": "or_b01"
+        }
+      ]
+    },
+    {
+      "node_id": "or_b01",
+      "kind": "battle",
+      "ref": {
+        "select_by": "handoff",
+        "variants": {
+          "supply": "or_enc_supply",
+          "passage": "or_enc_passage"
+        }
+      },
+      "transitions": [
+        {
+          "to": "or_a3_safe"
+        }
+      ]
+    },
+    {
+      "node_id": "or_a3_safe",
+      "kind": "story",
+      "ref": "or_a3_safe",
+      "transitions": [
+        {
+          "to": "or_a4_test"
+        }
+      ]
+    },
+    {
+      "node_id": "or_a4_test",
+      "kind": "story",
+      "ref": "or_a4_test",
+      "transitions": [
+        {
+          "to": "or_a4_newcomer",
+          "when": {
+            "state_key": "test",
+            "equals": "newcomer"
+          }
+        },
+        {
+          "to": "or_a4_pause",
+          "when": {
+            "state_key": "test",
+            "equals": "pause"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "or_a4_newcomer",
+      "kind": "story",
+      "ref": "or_a4_newcomer",
+      "transitions": [
+        {
+          "to": "or_a4_end"
+        }
+      ]
+    },
+    {
+      "node_id": "or_a4_pause",
+      "kind": "story",
+      "ref": "or_a4_pause",
+      "transitions": [
+        {
+          "to": "or_a4_end"
+        }
+      ]
+    },
+    {
+      "node_id": "or_a4_end",
+      "kind": "story",
+      "ref": "or_a4_end",
+      "transitions": [
+        {
+          "to": "or_complete"
+        }
+      ]
+    },
+    {
+      "node_id": "or_complete",
+      "kind": "complete",
+      "ref": null,
+      "transitions": []
+    }
+  ],
+  "min_client_version": null,
+  "compatibility_note_tr": "Story exports mevcut StoryScene grammar; graph/encounter JSON authoring formatıdır. Medya/roster ve server adapter sonraki aşama."
+}

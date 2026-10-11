@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a3_watch",
+  "title_en": "The Open Passage",
+  "location_id": "lt_forest_passage",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_forest_passage"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a3_watch_001",
+      "text": "The first dead figure appears around the bend. A staff strikes the post and keeps dragging."
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a3_watch_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "There. The others are behind it.",
+      "emotion": "serious"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a3_watch_003",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "We have space. Keep it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a3_watch_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "The road is clear behind us.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a3_watch_005",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Look at their intentions before choosing the first target.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a3_watch_006",
+      "text": "The fallen sign stays face-up, outside the fighting ground."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a3_watch_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

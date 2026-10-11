@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_a1_plan",
+  "title_en": "Two Useful Things",
+  "location_id": "oakhaven_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "oakhaven_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_001",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "These boards need bracing before anyone puts hot food on them.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "There are serving things waiting at the storehouse. I know the turn with the least mud.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_003",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "And the last verse needs room for names of every length.",
+      "emotion": "bright"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "You cannot all have the same pair of hands.",
+      "emotion": "annoyed"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_005",
+      "speaker": "oakhaven_innkeeper",
+      "speaker_display": "Innkeeper",
+      "text": "You do not have to. Choose two jobs. We will finish the other together.",
+      "emotion": "warm"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_006",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Nobody misses supper because we liked a different errand.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_007",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Good. I like a map with more than one useful road.",
+      "emotion": "bright"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "choice",
+      "prompt": "Choose two jobs to help with.",
+      "options": [
+        {
+          "id": "od_plan_wood_road",
+          "text": "Brace the tables, then help with deliveries.",
+          "goto": "wood_road"
+        },
+        {
+          "id": "od_plan_road_song",
+          "text": "Help with deliveries, then prepare the verse.",
+          "goto": "road_song"
+        },
+        {
+          "id": "od_plan_song_wood",
+          "text": "Prepare the verse, then brace the tables.",
+          "goto": "song_wood"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "wood_road"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_008",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Wood first. A clear place for the bowls makes the rest easier.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_009",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Then we bring the bowls. Excellent division of worrying.",
+      "emotion": "bright"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_010",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "I will borrow other voices for the verse.",
+      "emotion": "bright"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "road_song"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_011",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "We start at the storehouse. Nothing heavy through the market steps.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_012",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Then we make room in the song for the people carrying it.",
+      "emotion": "bright"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_013",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "I will find someone who can hold the other end of a board.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "song_wood"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_014",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Song first. It is harder to find a name once everyone has a mouthful.",
+      "emotion": "bright"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_015",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Then the tables. It is harder to hold a bowl once everyone is on the ground.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_a1_plan_016",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I will make sure the serving things find us.",
+      "emotion": "bright"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_a1_plan_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

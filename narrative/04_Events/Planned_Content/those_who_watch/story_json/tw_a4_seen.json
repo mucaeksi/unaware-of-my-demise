@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a4_seen",
+  "title_en": "A View Kept Honestly",
+  "location_id": "highland_village",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "highland_village"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_seen_001",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "You wrote that the rise hid part of the valley.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_seen_002",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "It did. I was tempted to borrow the wider view from the person beside me.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_seen_003",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "You may quote them. You may not pretend their eyes were yours.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a4_seen_004",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "A demanding village record. I am beginning to approve of it.",
+      "emotion": "wry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a4_seen_005",
+      "text": "The guide leaves room beside Clem’s account for another watcher to add their own."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a4_seen_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

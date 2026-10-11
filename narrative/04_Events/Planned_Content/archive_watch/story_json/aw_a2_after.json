@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "scene_id": "aw_a2_after",
+  "title_en": "An Answer Worth Keeping",
+  "location_id": "aw_case_board",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "aw_case_board"
+    },
+    {
+      "op": "music",
+      "cue_id": "aw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a2_after_001",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "The case is complete. You can try another line without rewriting this one.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a2_after_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Keep the chosen emphasis beside the result. Victory alone does not tell us what we intended.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a2_after_003",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The book would become shorter if it did.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a2_after_004",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "It would become less useful.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "aw_a2_after_005",
+      "text": "The next diagram is its own exercise, with the party ready to begin again."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "aw_a2_after_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "tactical_archive_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

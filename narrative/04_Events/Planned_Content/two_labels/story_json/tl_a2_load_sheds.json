@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a2_load_sheds",
+  "title_en": "Between the Salt Sheds",
+  "location_id": "tl_load_road",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_load_road"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_load_sheds_001",
+      "text": "The old load road is quiet until a cart wheel begins to turn without a horse."
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_sheds_002",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The far door is open. Something has been dragging the cart in and out.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_sheds_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Keep a clear space behind our front line. I need to reach them.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_sheds_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "We could push straight through.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_sheds_005",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "You could. Then I would have to collect you.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_sheds_006",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "There is enough room to hold here and pass the load back.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_sheds_007",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The nearest dead will reach us first. The ones behind it cannot pass unless we give them space.",
+      "emotion": "serious"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_load_sheds_008",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Then we do not give them space.",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a2_load_sheds_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

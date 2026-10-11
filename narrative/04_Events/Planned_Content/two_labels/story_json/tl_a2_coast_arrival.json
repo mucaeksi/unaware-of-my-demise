@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a2_coast_arrival",
+  "title_en": "A Place to Put It Down",
+  "location_id": "tl_harbor_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_harbor_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_arrival_001",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Here. Above the splash line.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_arrival_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "You knew where that would be.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_arrival_003",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The sea usually leaves the same things alone.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_arrival_004",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Useful. Unlike people.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_arrival_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "The handle is yours again. We can lower it together.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a2_coast_arrival_006",
+      "text": "The crates touch the bench with a single dull knock."
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_arrival_007",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I thought I would want to walk past all of it.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_arrival_008",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "We still need a guide who knows where to stop.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a2_coast_arrival_009",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Then stop here.",
+      "emotion": "calm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a2_coast_arrival_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

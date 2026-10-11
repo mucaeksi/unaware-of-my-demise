@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a2_scout_2",
+  "title_en": "Two Ways to Check",
+  "location_id": "lt_scout_bend",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_scout_bend"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_2_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "The track tells us where something can reach. The knock tells us where the dead turn together.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_2_002",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "We can prepare for one first, without forgetting the other.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_2_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Choose it. We stay within sight.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "choice",
+      "prompt": "Which observation leads the preparation?",
+      "options": [
+        {
+          "id": "lt_plan_scout_tracks",
+          "text": "Inspect the dragging tracks — rear-line threat.",
+          "goto": "scout_tracks"
+        },
+        {
+          "id": "lt_plan_scout_sound",
+          "text": "Listen at the bend — support threat.",
+          "goto": "scout_sound"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "scout_tracks"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_2_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "The dragging staff can reach around the front. Keep the rear where we can protect it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_2_005",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "I can hold the nearest one while you choose the attacker.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_2_006",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then I will stay where both of you can see me.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "fadyme"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "scout_sound"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_2_007",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "The knock comes before the others move. We will see the bellbound one as soon as we step out.",
+      "emotion": "serious"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_2_008",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "A target to notice. Not a reason to chase without checking the lane.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_2_009",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "I will keep the space behind us clear.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "hide",
+      "character": "mahmut"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a2_scout_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

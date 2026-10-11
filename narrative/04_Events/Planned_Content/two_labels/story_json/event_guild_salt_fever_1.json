@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "scene_id": "event_guild_salt_fever_1",
+  "title_en": "A Dispatch Posted",
+  "location_id": "undercity_antidote_archive",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_antidote_archive"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "event_guild_salt_fever_1_001",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Salt-road fever in the coastal villages. The ledger wing sold the cure. We are giving it away.",
+      "emotion": "defiant"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_guild_salt_fever_1_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "With what staff? You have three shelves and a temper.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "event_guild_salt_fever_1_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I have you, Iona, and a harbor archer who knows the coast.",
+      "emotion": "smug"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "event_guild_salt_fever_1_004",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I did not agree to this.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "event_guild_salt_fever_1_005",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "You agreed with your face.",
+      "emotion": "tsundere"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "event_guild_salt_fever_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/04_Events/events_part1.json",
+    "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
+    "note": "Verbatim source lines."
+  }
+}

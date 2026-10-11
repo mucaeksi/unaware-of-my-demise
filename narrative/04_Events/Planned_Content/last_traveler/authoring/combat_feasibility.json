@@ -1,0 +1,5063 @@
+{
+  "status": "TECHNICAL_FEASIBILITY_ONLY_NOT_PRODUCTION_BALANCE",
+  "source_main": "99df3cf",
+  "source_tutorial_pack_sha256": "d2cf29d60af57f600ad0962d072b6209a71ce2b74320b7f4bf864e4706614dc7",
+  "fixtures": [
+    {
+      "authoring_encounter_id": "lt_enc_scout_tracks",
+      "unit_pack": {
+        "schema_version": 1,
+        "pack_id": "qa_lt_enc_scout_tracks",
+        "units": [
+          {
+            "unit_id": "qa_party_0",
+            "kind": "character",
+            "name_en": "Feasibility proxy 1 (not a canonical hero)",
+            "element": "Stone",
+            "role": "tank_bruiser",
+            "rarity": 5,
+            "formation_affinity": "front",
+            "base_stats": {
+              "hp": 14,
+              "atk": 2,
+              "def": 2,
+              "spd": 4
+            },
+            "growth_per_level": {
+              "hp": 0.7,
+              "atk": 0.12,
+              "def": 0.1,
+              "spd": 0.16
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_0_basic",
+                "name_en": "Oathless Cut",
+                "type": "basic",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 100% of ATK to one enemy. If Mahmut is in the Front Row, he gains Stoneguard, reducing damage taken by 8% for 1 turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "owner_in_row",
+                      "value": "front"
+                    },
+                    "status_id": "stoneguard",
+                    "duration_turns": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_active",
+                "name_en": "Broken Crest Guard",
+                "type": "active",
+                "element": "Stone",
+                "description_en": "Grants Mahmut and the ally with the lowest HP a shield equal to 180% of Mahmut's ATK. For 2 turns, Mahmut redirects 50% of single-target attacks aimed at that ally to himself.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "self_and_lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8,
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_redirect",
+                    "target_selector_id": "self",
+                    "protected_ally_selector_id": "lowest_hp_ally",
+                    "redirected_fraction": 0.5,
+                    "duration_turns": 2,
+                    "eligible_action_types": [
+                      "basic",
+                      "active",
+                      "ultimate"
+                    ]
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_passive",
+                "name_en": "A Knight's Debt",
+                "type": "passive",
+                "element": "Stone",
+                "description_en": "While shielded, Mahmut counters an enemy Basic Attack for 60% of his ATK and gains 5 Focus. Triggers once per turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "before_damage_received",
+                    "effect_ops": [
+                      {
+                        "op": "damage",
+                        "target_selector_id": "event_source",
+                        "damage_type": "physical",
+                        "scale_stat": "atk",
+                        "multiplier": 0.6,
+                        "no_focus_gain": true
+                      },
+                      {
+                        "op": "gain_focus",
+                        "target_selector_id": "self",
+                        "amount": 5
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_has_shield"
+                    },
+                    "limit": {
+                      "per_owner_turn": 1
+                    },
+                    "event_filter": {
+                      "incoming_action_type": "basic"
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_ultimate",
+                "name_en": "Last Wall at Dusk",
+                "type": "ultimate",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 220% of ATK to all Front Row enemies, Taunts them for 2 turns, and grants all allies a shield equal to 120% of Mahmut's DEF. The shield still applies if a boss resists Taunt.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "front_row_enemies",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 2.2
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "all_enemies",
+                    "status_id": "taunt",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "all_allies",
+                    "scale_stat": "def",
+                    "multiplier": 1.2,
+                    "duration_turns": 2
+                  }
+                ]
+              }
+            ],
+            "art_key": "mahmut",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_1",
+            "kind": "character",
+            "name_en": "Feasibility proxy 2 (not a canonical hero)",
+            "element": "Stone",
+            "role": "tank_bruiser",
+            "rarity": 5,
+            "formation_affinity": "front",
+            "base_stats": {
+              "hp": 14,
+              "atk": 2,
+              "def": 2,
+              "spd": 4
+            },
+            "growth_per_level": {
+              "hp": 0.7,
+              "atk": 0.12,
+              "def": 0.1,
+              "spd": 0.16
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_1_basic",
+                "name_en": "Oathless Cut",
+                "type": "basic",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 100% of ATK to one enemy. If Mahmut is in the Front Row, he gains Stoneguard, reducing damage taken by 8% for 1 turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "owner_in_row",
+                      "value": "front"
+                    },
+                    "status_id": "stoneguard",
+                    "duration_turns": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_active",
+                "name_en": "Broken Crest Guard",
+                "type": "active",
+                "element": "Stone",
+                "description_en": "Grants Mahmut and the ally with the lowest HP a shield equal to 180% of Mahmut's ATK. For 2 turns, Mahmut redirects 50% of single-target attacks aimed at that ally to himself.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "self_and_lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8,
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_redirect",
+                    "target_selector_id": "self",
+                    "protected_ally_selector_id": "lowest_hp_ally",
+                    "redirected_fraction": 0.5,
+                    "duration_turns": 2,
+                    "eligible_action_types": [
+                      "basic",
+                      "active",
+                      "ultimate"
+                    ]
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_passive",
+                "name_en": "A Knight's Debt",
+                "type": "passive",
+                "element": "Stone",
+                "description_en": "While shielded, Mahmut counters an enemy Basic Attack for 60% of his ATK and gains 5 Focus. Triggers once per turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "before_damage_received",
+                    "effect_ops": [
+                      {
+                        "op": "damage",
+                        "target_selector_id": "event_source",
+                        "damage_type": "physical",
+                        "scale_stat": "atk",
+                        "multiplier": 0.6,
+                        "no_focus_gain": true
+                      },
+                      {
+                        "op": "gain_focus",
+                        "target_selector_id": "self",
+                        "amount": 5
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_has_shield"
+                    },
+                    "limit": {
+                      "per_owner_turn": 1
+                    },
+                    "event_filter": {
+                      "incoming_action_type": "basic"
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_ultimate",
+                "name_en": "Last Wall at Dusk",
+                "type": "ultimate",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 220% of ATK to all Front Row enemies, Taunts them for 2 turns, and grants all allies a shield equal to 120% of Mahmut's DEF. The shield still applies if a boss resists Taunt.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "front_row_enemies",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 2.2
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "all_enemies",
+                    "status_id": "taunt",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "all_allies",
+                    "scale_stat": "def",
+                    "multiplier": 1.2,
+                    "duration_turns": 2
+                  }
+                ]
+              }
+            ],
+            "art_key": "mahmut",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_2",
+            "kind": "character",
+            "name_en": "Feasibility proxy 3 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_2_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_3",
+            "kind": "character",
+            "name_en": "Feasibility proxy 4 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_3_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_4",
+            "kind": "character",
+            "name_en": "Feasibility proxy 5 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_4_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_tracks_0",
+            "kind": "enemy",
+            "name_en": "QA ash_wolf: front",
+            "element": "Stone",
+            "role": "front",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_scout_tracks_0_basic",
+                "name_en": "qa_lt_enc_scout_tracks_0_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_scout_tracks_0_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for ash_wolf; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_tracks_1",
+            "kind": "enemy",
+            "name_en": "QA ash_wolf: front",
+            "element": "Stone",
+            "role": "front",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_scout_tracks_1_basic",
+                "name_en": "qa_lt_enc_scout_tracks_1_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_scout_tracks_1_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for ash_wolf; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_tracks_2",
+            "kind": "enemy",
+            "name_en": "QA hollow_pilgrim: reach",
+            "element": "Stone",
+            "role": "reach",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 5
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_scout_tracks_2_basic",
+                "name_en": "qa_lt_enc_scout_tracks_2_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_lt_enc_scout_tracks_2_reach",
+                "name_en": "qa_lt_enc_scout_tracks_2_reach",
+                "type": "active",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 70,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "rear_row_enemies",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 0.55
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_scout_tracks_2_reach",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for hollow_pilgrim; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_tracks_3",
+            "kind": "enemy",
+            "name_en": "QA bellbound_dead: support",
+            "element": "Stone",
+            "role": "support",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_scout_tracks_3_basic",
+                "name_en": "qa_lt_enc_scout_tracks_3_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_lt_enc_scout_tracks_3_heal",
+                "name_en": "qa_lt_enc_scout_tracks_3_heal",
+                "type": "active",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 70,
+                "effect_ops": [
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 0.75
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_scout_tracks_3_heal",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for bellbound_dead; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_tracks_4",
+            "kind": "enemy",
+            "name_en": "QA hollow_pilgrim: light",
+            "element": "Stone",
+            "role": "light",
+            "base_stats": {
+              "hp": 5,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_scout_tracks_4_basic",
+                "name_en": "qa_lt_enc_scout_tracks_4_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_scout_tracks_4_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for hollow_pilgrim; canonical skill/art binding required."
+            }
+          }
+        ],
+        "rules": {
+          "schema_version": 1,
+          "gauge_max": 10000,
+          "max_pending_delay_fraction": 0.5,
+          "defense_scale": 10,
+          "focus": {
+            "maximum": 100,
+            "basic_gain": 20,
+            "active_gain": 25,
+            "hit_gain": 5,
+            "hit_gain_cap_per_turn": 15,
+            "ultimate_cost": 100
+          },
+          "crit": {
+            "chance": 0.05,
+            "multiplier": 1.5
+          },
+          "element": {
+            "cycle": [
+              "Ember",
+              "Gale",
+              "Stone",
+              "Tide"
+            ],
+            "advantage": 1.2,
+            "disadvantage": 0.9,
+            "neutral": 1,
+            "weakness": 1.2,
+            "resistance": 0.9,
+            "mutual_pairs": [
+              [
+                "Dawn",
+                "Veil"
+              ]
+            ]
+          },
+          "auto_battle": {
+            "heal_priority_hp_percent": 40,
+            "save_ultimate_until_boss": true
+          },
+          "statuses": [
+            {
+              "status_id": "fracture",
+              "name_en": "Fracture",
+              "kind": "defense_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "def_multiplier": 0.85
+            },
+            {
+              "status_id": "sanctuary",
+              "name_en": "Sanctuary",
+              "kind": "healing_and_damage_reduction",
+              "category": "buff",
+              "default_duration_turns": 2,
+              "damage_taken_multiplier": 0.9,
+              "healing_received_multiplier": 1.1
+            },
+            {
+              "status_id": "dread",
+              "name_en": "Dread",
+              "kind": "outgoing_damage_and_focus_gain_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "outgoing_damage_multiplier": 0.9,
+              "focus_gain_multiplier": 0.8
+            },
+            {
+              "status_id": "break",
+              "name_en": "Break",
+              "kind": "boss_stagger_window",
+              "category": "control",
+              "default_duration_turns": 1,
+              "damage_taken_multiplier": 1.2,
+              "skip_next_action": true
+            },
+            {
+              "status_id": "decay",
+              "name_en": "Decay",
+              "kind": "healing_received_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "healing_received_multiplier": 0.5
+            },
+            {
+              "status_id": "taunt",
+              "name_en": "Taunt",
+              "kind": "target_redirect",
+              "category": "buff",
+              "default_duration_turns": 2,
+              "redirects_single_target_attacks": true
+            },
+            {
+              "status_id": "stoneguard",
+              "name_en": "Stoneguard",
+              "kind": "damage_reduction",
+              "category": "buff",
+              "default_duration_turns": 1,
+              "damage_taken_multiplier": 0.92
+            }
+          ]
+        }
+      },
+      "encounter": {
+        "schema_version": 1,
+        "encounter_id": "qa_lt_enc_scout_tracks",
+        "stage_id": "design_proxy",
+        "title_en": "Technical role feasibility (not production balance)",
+        "location_id": "lt_forest_passage",
+        "seed": 17,
+        "party": [
+          {
+            "unit_id": "qa_party_0",
+            "level": 1,
+            "slot": 0,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_party_1",
+            "level": 1,
+            "slot": 1,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_party_2",
+            "level": 1,
+            "slot": 2,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_party_3",
+            "level": 1,
+            "slot": 3,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_party_4",
+            "level": 1,
+            "slot": 4,
+            "row": "rear"
+          }
+        ],
+        "enemies": [
+          {
+            "unit_id": "qa_lt_enc_scout_tracks_0",
+            "level": 1,
+            "slot": 0,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_tracks_1",
+            "level": 1,
+            "slot": 1,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_tracks_2",
+            "level": 1,
+            "slot": 2,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_tracks_3",
+            "level": 1,
+            "slot": 3,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_tracks_4",
+            "level": 1,
+            "slot": 4,
+            "row": "rear"
+          }
+        ],
+        "provenance": {
+          "source": "Normalized tutorial-kit proxy. No canonical character loan or published reward."
+        }
+      },
+      "role_mapping": [
+        {
+          "slot": 0,
+          "canonical_family": "ash_wolf",
+          "prototype_role": "front"
+        },
+        {
+          "slot": 1,
+          "canonical_family": "ash_wolf",
+          "prototype_role": "front"
+        },
+        {
+          "slot": 2,
+          "canonical_family": "hollow_pilgrim",
+          "prototype_role": "reach"
+        },
+        {
+          "slot": 3,
+          "canonical_family": "bellbound_dead",
+          "prototype_role": "support"
+        },
+        {
+          "slot": 4,
+          "canonical_family": "hollow_pilgrim",
+          "prototype_role": "light"
+        }
+      ]
+    },
+    {
+      "authoring_encounter_id": "lt_enc_scout_sound",
+      "unit_pack": {
+        "schema_version": 1,
+        "pack_id": "qa_lt_enc_scout_sound",
+        "units": [
+          {
+            "unit_id": "qa_party_0",
+            "kind": "character",
+            "name_en": "Feasibility proxy 1 (not a canonical hero)",
+            "element": "Stone",
+            "role": "tank_bruiser",
+            "rarity": 5,
+            "formation_affinity": "front",
+            "base_stats": {
+              "hp": 14,
+              "atk": 2,
+              "def": 2,
+              "spd": 4
+            },
+            "growth_per_level": {
+              "hp": 0.7,
+              "atk": 0.12,
+              "def": 0.1,
+              "spd": 0.16
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_0_basic",
+                "name_en": "Oathless Cut",
+                "type": "basic",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 100% of ATK to one enemy. If Mahmut is in the Front Row, he gains Stoneguard, reducing damage taken by 8% for 1 turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "owner_in_row",
+                      "value": "front"
+                    },
+                    "status_id": "stoneguard",
+                    "duration_turns": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_active",
+                "name_en": "Broken Crest Guard",
+                "type": "active",
+                "element": "Stone",
+                "description_en": "Grants Mahmut and the ally with the lowest HP a shield equal to 180% of Mahmut's ATK. For 2 turns, Mahmut redirects 50% of single-target attacks aimed at that ally to himself.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "self_and_lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8,
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_redirect",
+                    "target_selector_id": "self",
+                    "protected_ally_selector_id": "lowest_hp_ally",
+                    "redirected_fraction": 0.5,
+                    "duration_turns": 2,
+                    "eligible_action_types": [
+                      "basic",
+                      "active",
+                      "ultimate"
+                    ]
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_passive",
+                "name_en": "A Knight's Debt",
+                "type": "passive",
+                "element": "Stone",
+                "description_en": "While shielded, Mahmut counters an enemy Basic Attack for 60% of his ATK and gains 5 Focus. Triggers once per turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "before_damage_received",
+                    "effect_ops": [
+                      {
+                        "op": "damage",
+                        "target_selector_id": "event_source",
+                        "damage_type": "physical",
+                        "scale_stat": "atk",
+                        "multiplier": 0.6,
+                        "no_focus_gain": true
+                      },
+                      {
+                        "op": "gain_focus",
+                        "target_selector_id": "self",
+                        "amount": 5
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_has_shield"
+                    },
+                    "limit": {
+                      "per_owner_turn": 1
+                    },
+                    "event_filter": {
+                      "incoming_action_type": "basic"
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_ultimate",
+                "name_en": "Last Wall at Dusk",
+                "type": "ultimate",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 220% of ATK to all Front Row enemies, Taunts them for 2 turns, and grants all allies a shield equal to 120% of Mahmut's DEF. The shield still applies if a boss resists Taunt.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "front_row_enemies",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 2.2
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "all_enemies",
+                    "status_id": "taunt",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "all_allies",
+                    "scale_stat": "def",
+                    "multiplier": 1.2,
+                    "duration_turns": 2
+                  }
+                ]
+              }
+            ],
+            "art_key": "mahmut",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_1",
+            "kind": "character",
+            "name_en": "Feasibility proxy 2 (not a canonical hero)",
+            "element": "Stone",
+            "role": "tank_bruiser",
+            "rarity": 5,
+            "formation_affinity": "front",
+            "base_stats": {
+              "hp": 14,
+              "atk": 2,
+              "def": 2,
+              "spd": 4
+            },
+            "growth_per_level": {
+              "hp": 0.7,
+              "atk": 0.12,
+              "def": 0.1,
+              "spd": 0.16
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_1_basic",
+                "name_en": "Oathless Cut",
+                "type": "basic",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 100% of ATK to one enemy. If Mahmut is in the Front Row, he gains Stoneguard, reducing damage taken by 8% for 1 turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "owner_in_row",
+                      "value": "front"
+                    },
+                    "status_id": "stoneguard",
+                    "duration_turns": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_active",
+                "name_en": "Broken Crest Guard",
+                "type": "active",
+                "element": "Stone",
+                "description_en": "Grants Mahmut and the ally with the lowest HP a shield equal to 180% of Mahmut's ATK. For 2 turns, Mahmut redirects 50% of single-target attacks aimed at that ally to himself.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "self_and_lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8,
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_redirect",
+                    "target_selector_id": "self",
+                    "protected_ally_selector_id": "lowest_hp_ally",
+                    "redirected_fraction": 0.5,
+                    "duration_turns": 2,
+                    "eligible_action_types": [
+                      "basic",
+                      "active",
+                      "ultimate"
+                    ]
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_passive",
+                "name_en": "A Knight's Debt",
+                "type": "passive",
+                "element": "Stone",
+                "description_en": "While shielded, Mahmut counters an enemy Basic Attack for 60% of his ATK and gains 5 Focus. Triggers once per turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "before_damage_received",
+                    "effect_ops": [
+                      {
+                        "op": "damage",
+                        "target_selector_id": "event_source",
+                        "damage_type": "physical",
+                        "scale_stat": "atk",
+                        "multiplier": 0.6,
+                        "no_focus_gain": true
+                      },
+                      {
+                        "op": "gain_focus",
+                        "target_selector_id": "self",
+                        "amount": 5
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_has_shield"
+                    },
+                    "limit": {
+                      "per_owner_turn": 1
+                    },
+                    "event_filter": {
+                      "incoming_action_type": "basic"
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_ultimate",
+                "name_en": "Last Wall at Dusk",
+                "type": "ultimate",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 220% of ATK to all Front Row enemies, Taunts them for 2 turns, and grants all allies a shield equal to 120% of Mahmut's DEF. The shield still applies if a boss resists Taunt.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "front_row_enemies",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 2.2
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "all_enemies",
+                    "status_id": "taunt",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "all_allies",
+                    "scale_stat": "def",
+                    "multiplier": 1.2,
+                    "duration_turns": 2
+                  }
+                ]
+              }
+            ],
+            "art_key": "mahmut",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_2",
+            "kind": "character",
+            "name_en": "Feasibility proxy 3 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_2_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_3",
+            "kind": "character",
+            "name_en": "Feasibility proxy 4 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_3_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_4",
+            "kind": "character",
+            "name_en": "Feasibility proxy 5 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_4_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_sound_0",
+            "kind": "enemy",
+            "name_en": "QA ash_wolf: front",
+            "element": "Stone",
+            "role": "front",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_scout_sound_0_basic",
+                "name_en": "qa_lt_enc_scout_sound_0_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_scout_sound_0_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for ash_wolf; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_sound_1",
+            "kind": "enemy",
+            "name_en": "QA hollow_pilgrim: light",
+            "element": "Stone",
+            "role": "light",
+            "base_stats": {
+              "hp": 5,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_scout_sound_1_basic",
+                "name_en": "qa_lt_enc_scout_sound_1_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_scout_sound_1_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for hollow_pilgrim; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_sound_2",
+            "kind": "enemy",
+            "name_en": "QA bellbound_dead: support",
+            "element": "Stone",
+            "role": "support",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_scout_sound_2_basic",
+                "name_en": "qa_lt_enc_scout_sound_2_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_lt_enc_scout_sound_2_heal",
+                "name_en": "qa_lt_enc_scout_sound_2_heal",
+                "type": "active",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 70,
+                "effect_ops": [
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 0.75
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_scout_sound_2_heal",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for bellbound_dead; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_sound_3",
+            "kind": "enemy",
+            "name_en": "QA bellbound_dead: support",
+            "element": "Stone",
+            "role": "support",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_scout_sound_3_basic",
+                "name_en": "qa_lt_enc_scout_sound_3_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_lt_enc_scout_sound_3_heal",
+                "name_en": "qa_lt_enc_scout_sound_3_heal",
+                "type": "active",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 70,
+                "effect_ops": [
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 0.75
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_scout_sound_3_heal",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for bellbound_dead; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_sound_4",
+            "kind": "enemy",
+            "name_en": "QA hollow_pilgrim: reach",
+            "element": "Stone",
+            "role": "reach",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 5
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_scout_sound_4_basic",
+                "name_en": "qa_lt_enc_scout_sound_4_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_lt_enc_scout_sound_4_reach",
+                "name_en": "qa_lt_enc_scout_sound_4_reach",
+                "type": "active",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 70,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "rear_row_enemies",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 0.55
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_scout_sound_4_reach",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for hollow_pilgrim; canonical skill/art binding required."
+            }
+          }
+        ],
+        "rules": {
+          "schema_version": 1,
+          "gauge_max": 10000,
+          "max_pending_delay_fraction": 0.5,
+          "defense_scale": 10,
+          "focus": {
+            "maximum": 100,
+            "basic_gain": 20,
+            "active_gain": 25,
+            "hit_gain": 5,
+            "hit_gain_cap_per_turn": 15,
+            "ultimate_cost": 100
+          },
+          "crit": {
+            "chance": 0.05,
+            "multiplier": 1.5
+          },
+          "element": {
+            "cycle": [
+              "Ember",
+              "Gale",
+              "Stone",
+              "Tide"
+            ],
+            "advantage": 1.2,
+            "disadvantage": 0.9,
+            "neutral": 1,
+            "weakness": 1.2,
+            "resistance": 0.9,
+            "mutual_pairs": [
+              [
+                "Dawn",
+                "Veil"
+              ]
+            ]
+          },
+          "auto_battle": {
+            "heal_priority_hp_percent": 40,
+            "save_ultimate_until_boss": true
+          },
+          "statuses": [
+            {
+              "status_id": "fracture",
+              "name_en": "Fracture",
+              "kind": "defense_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "def_multiplier": 0.85
+            },
+            {
+              "status_id": "sanctuary",
+              "name_en": "Sanctuary",
+              "kind": "healing_and_damage_reduction",
+              "category": "buff",
+              "default_duration_turns": 2,
+              "damage_taken_multiplier": 0.9,
+              "healing_received_multiplier": 1.1
+            },
+            {
+              "status_id": "dread",
+              "name_en": "Dread",
+              "kind": "outgoing_damage_and_focus_gain_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "outgoing_damage_multiplier": 0.9,
+              "focus_gain_multiplier": 0.8
+            },
+            {
+              "status_id": "break",
+              "name_en": "Break",
+              "kind": "boss_stagger_window",
+              "category": "control",
+              "default_duration_turns": 1,
+              "damage_taken_multiplier": 1.2,
+              "skip_next_action": true
+            },
+            {
+              "status_id": "decay",
+              "name_en": "Decay",
+              "kind": "healing_received_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "healing_received_multiplier": 0.5
+            },
+            {
+              "status_id": "taunt",
+              "name_en": "Taunt",
+              "kind": "target_redirect",
+              "category": "buff",
+              "default_duration_turns": 2,
+              "redirects_single_target_attacks": true
+            },
+            {
+              "status_id": "stoneguard",
+              "name_en": "Stoneguard",
+              "kind": "damage_reduction",
+              "category": "buff",
+              "default_duration_turns": 1,
+              "damage_taken_multiplier": 0.92
+            }
+          ]
+        }
+      },
+      "encounter": {
+        "schema_version": 1,
+        "encounter_id": "qa_lt_enc_scout_sound",
+        "stage_id": "design_proxy",
+        "title_en": "Technical role feasibility (not production balance)",
+        "location_id": "lt_forest_passage",
+        "seed": 17,
+        "party": [
+          {
+            "unit_id": "qa_party_0",
+            "level": 1,
+            "slot": 0,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_party_1",
+            "level": 1,
+            "slot": 1,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_party_2",
+            "level": 1,
+            "slot": 2,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_party_3",
+            "level": 1,
+            "slot": 3,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_party_4",
+            "level": 1,
+            "slot": 4,
+            "row": "rear"
+          }
+        ],
+        "enemies": [
+          {
+            "unit_id": "qa_lt_enc_scout_sound_0",
+            "level": 1,
+            "slot": 0,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_sound_1",
+            "level": 1,
+            "slot": 1,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_sound_2",
+            "level": 1,
+            "slot": 2,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_sound_3",
+            "level": 1,
+            "slot": 3,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_lt_enc_scout_sound_4",
+            "level": 1,
+            "slot": 4,
+            "row": "rear"
+          }
+        ],
+        "provenance": {
+          "source": "Normalized tutorial-kit proxy. No canonical character loan or published reward."
+        }
+      },
+      "role_mapping": [
+        {
+          "slot": 0,
+          "canonical_family": "ash_wolf",
+          "prototype_role": "front"
+        },
+        {
+          "slot": 1,
+          "canonical_family": "hollow_pilgrim",
+          "prototype_role": "light"
+        },
+        {
+          "slot": 2,
+          "canonical_family": "bellbound_dead",
+          "prototype_role": "support"
+        },
+        {
+          "slot": 3,
+          "canonical_family": "bellbound_dead",
+          "prototype_role": "support"
+        },
+        {
+          "slot": 4,
+          "canonical_family": "hollow_pilgrim",
+          "prototype_role": "reach"
+        }
+      ]
+    },
+    {
+      "authoring_encounter_id": "lt_enc_brace_bank",
+      "unit_pack": {
+        "schema_version": 1,
+        "pack_id": "qa_lt_enc_brace_bank",
+        "units": [
+          {
+            "unit_id": "qa_party_0",
+            "kind": "character",
+            "name_en": "Feasibility proxy 1 (not a canonical hero)",
+            "element": "Stone",
+            "role": "tank_bruiser",
+            "rarity": 5,
+            "formation_affinity": "front",
+            "base_stats": {
+              "hp": 14,
+              "atk": 2,
+              "def": 2,
+              "spd": 4
+            },
+            "growth_per_level": {
+              "hp": 0.7,
+              "atk": 0.12,
+              "def": 0.1,
+              "spd": 0.16
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_0_basic",
+                "name_en": "Oathless Cut",
+                "type": "basic",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 100% of ATK to one enemy. If Mahmut is in the Front Row, he gains Stoneguard, reducing damage taken by 8% for 1 turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "owner_in_row",
+                      "value": "front"
+                    },
+                    "status_id": "stoneguard",
+                    "duration_turns": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_active",
+                "name_en": "Broken Crest Guard",
+                "type": "active",
+                "element": "Stone",
+                "description_en": "Grants Mahmut and the ally with the lowest HP a shield equal to 180% of Mahmut's ATK. For 2 turns, Mahmut redirects 50% of single-target attacks aimed at that ally to himself.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "self_and_lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8,
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_redirect",
+                    "target_selector_id": "self",
+                    "protected_ally_selector_id": "lowest_hp_ally",
+                    "redirected_fraction": 0.5,
+                    "duration_turns": 2,
+                    "eligible_action_types": [
+                      "basic",
+                      "active",
+                      "ultimate"
+                    ]
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_passive",
+                "name_en": "A Knight's Debt",
+                "type": "passive",
+                "element": "Stone",
+                "description_en": "While shielded, Mahmut counters an enemy Basic Attack for 60% of his ATK and gains 5 Focus. Triggers once per turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "before_damage_received",
+                    "effect_ops": [
+                      {
+                        "op": "damage",
+                        "target_selector_id": "event_source",
+                        "damage_type": "physical",
+                        "scale_stat": "atk",
+                        "multiplier": 0.6,
+                        "no_focus_gain": true
+                      },
+                      {
+                        "op": "gain_focus",
+                        "target_selector_id": "self",
+                        "amount": 5
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_has_shield"
+                    },
+                    "limit": {
+                      "per_owner_turn": 1
+                    },
+                    "event_filter": {
+                      "incoming_action_type": "basic"
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_ultimate",
+                "name_en": "Last Wall at Dusk",
+                "type": "ultimate",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 220% of ATK to all Front Row enemies, Taunts them for 2 turns, and grants all allies a shield equal to 120% of Mahmut's DEF. The shield still applies if a boss resists Taunt.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "front_row_enemies",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 2.2
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "all_enemies",
+                    "status_id": "taunt",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "all_allies",
+                    "scale_stat": "def",
+                    "multiplier": 1.2,
+                    "duration_turns": 2
+                  }
+                ]
+              }
+            ],
+            "art_key": "mahmut",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_1",
+            "kind": "character",
+            "name_en": "Feasibility proxy 2 (not a canonical hero)",
+            "element": "Stone",
+            "role": "tank_bruiser",
+            "rarity": 5,
+            "formation_affinity": "front",
+            "base_stats": {
+              "hp": 14,
+              "atk": 2,
+              "def": 2,
+              "spd": 4
+            },
+            "growth_per_level": {
+              "hp": 0.7,
+              "atk": 0.12,
+              "def": 0.1,
+              "spd": 0.16
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_1_basic",
+                "name_en": "Oathless Cut",
+                "type": "basic",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 100% of ATK to one enemy. If Mahmut is in the Front Row, he gains Stoneguard, reducing damage taken by 8% for 1 turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "owner_in_row",
+                      "value": "front"
+                    },
+                    "status_id": "stoneguard",
+                    "duration_turns": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_active",
+                "name_en": "Broken Crest Guard",
+                "type": "active",
+                "element": "Stone",
+                "description_en": "Grants Mahmut and the ally with the lowest HP a shield equal to 180% of Mahmut's ATK. For 2 turns, Mahmut redirects 50% of single-target attacks aimed at that ally to himself.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "self_and_lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8,
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_redirect",
+                    "target_selector_id": "self",
+                    "protected_ally_selector_id": "lowest_hp_ally",
+                    "redirected_fraction": 0.5,
+                    "duration_turns": 2,
+                    "eligible_action_types": [
+                      "basic",
+                      "active",
+                      "ultimate"
+                    ]
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_passive",
+                "name_en": "A Knight's Debt",
+                "type": "passive",
+                "element": "Stone",
+                "description_en": "While shielded, Mahmut counters an enemy Basic Attack for 60% of his ATK and gains 5 Focus. Triggers once per turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "before_damage_received",
+                    "effect_ops": [
+                      {
+                        "op": "damage",
+                        "target_selector_id": "event_source",
+                        "damage_type": "physical",
+                        "scale_stat": "atk",
+                        "multiplier": 0.6,
+                        "no_focus_gain": true
+                      },
+                      {
+                        "op": "gain_focus",
+                        "target_selector_id": "self",
+                        "amount": 5
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_has_shield"
+                    },
+                    "limit": {
+                      "per_owner_turn": 1
+                    },
+                    "event_filter": {
+                      "incoming_action_type": "basic"
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_ultimate",
+                "name_en": "Last Wall at Dusk",
+                "type": "ultimate",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 220% of ATK to all Front Row enemies, Taunts them for 2 turns, and grants all allies a shield equal to 120% of Mahmut's DEF. The shield still applies if a boss resists Taunt.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "front_row_enemies",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 2.2
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "all_enemies",
+                    "status_id": "taunt",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "all_allies",
+                    "scale_stat": "def",
+                    "multiplier": 1.2,
+                    "duration_turns": 2
+                  }
+                ]
+              }
+            ],
+            "art_key": "mahmut",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_2",
+            "kind": "character",
+            "name_en": "Feasibility proxy 3 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_2_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_3",
+            "kind": "character",
+            "name_en": "Feasibility proxy 4 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_3_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_4",
+            "kind": "character",
+            "name_en": "Feasibility proxy 5 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_4_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_bank_0",
+            "kind": "enemy",
+            "name_en": "QA ash_wolf: front",
+            "element": "Stone",
+            "role": "front",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_brace_bank_0_basic",
+                "name_en": "qa_lt_enc_brace_bank_0_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_brace_bank_0_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for ash_wolf; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_bank_1",
+            "kind": "enemy",
+            "name_en": "QA ash_wolf: front",
+            "element": "Stone",
+            "role": "front",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_brace_bank_1_basic",
+                "name_en": "qa_lt_enc_brace_bank_1_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_brace_bank_1_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for ash_wolf; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_bank_2",
+            "kind": "enemy",
+            "name_en": "QA hollow_pilgrim: light",
+            "element": "Stone",
+            "role": "light",
+            "base_stats": {
+              "hp": 5,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_brace_bank_2_basic",
+                "name_en": "qa_lt_enc_brace_bank_2_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_brace_bank_2_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for hollow_pilgrim; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_bank_3",
+            "kind": "enemy",
+            "name_en": "QA bellbound_dead: support",
+            "element": "Stone",
+            "role": "support",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_brace_bank_3_basic",
+                "name_en": "qa_lt_enc_brace_bank_3_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_lt_enc_brace_bank_3_heal",
+                "name_en": "qa_lt_enc_brace_bank_3_heal",
+                "type": "active",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 70,
+                "effect_ops": [
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 0.75
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_brace_bank_3_heal",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for bellbound_dead; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_bank_4",
+            "kind": "enemy",
+            "name_en": "QA hollow_pilgrim: light",
+            "element": "Stone",
+            "role": "light",
+            "base_stats": {
+              "hp": 5,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_brace_bank_4_basic",
+                "name_en": "qa_lt_enc_brace_bank_4_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_brace_bank_4_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for hollow_pilgrim; canonical skill/art binding required."
+            }
+          }
+        ],
+        "rules": {
+          "schema_version": 1,
+          "gauge_max": 10000,
+          "max_pending_delay_fraction": 0.5,
+          "defense_scale": 10,
+          "focus": {
+            "maximum": 100,
+            "basic_gain": 20,
+            "active_gain": 25,
+            "hit_gain": 5,
+            "hit_gain_cap_per_turn": 15,
+            "ultimate_cost": 100
+          },
+          "crit": {
+            "chance": 0.05,
+            "multiplier": 1.5
+          },
+          "element": {
+            "cycle": [
+              "Ember",
+              "Gale",
+              "Stone",
+              "Tide"
+            ],
+            "advantage": 1.2,
+            "disadvantage": 0.9,
+            "neutral": 1,
+            "weakness": 1.2,
+            "resistance": 0.9,
+            "mutual_pairs": [
+              [
+                "Dawn",
+                "Veil"
+              ]
+            ]
+          },
+          "auto_battle": {
+            "heal_priority_hp_percent": 40,
+            "save_ultimate_until_boss": true
+          },
+          "statuses": [
+            {
+              "status_id": "fracture",
+              "name_en": "Fracture",
+              "kind": "defense_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "def_multiplier": 0.85
+            },
+            {
+              "status_id": "sanctuary",
+              "name_en": "Sanctuary",
+              "kind": "healing_and_damage_reduction",
+              "category": "buff",
+              "default_duration_turns": 2,
+              "damage_taken_multiplier": 0.9,
+              "healing_received_multiplier": 1.1
+            },
+            {
+              "status_id": "dread",
+              "name_en": "Dread",
+              "kind": "outgoing_damage_and_focus_gain_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "outgoing_damage_multiplier": 0.9,
+              "focus_gain_multiplier": 0.8
+            },
+            {
+              "status_id": "break",
+              "name_en": "Break",
+              "kind": "boss_stagger_window",
+              "category": "control",
+              "default_duration_turns": 1,
+              "damage_taken_multiplier": 1.2,
+              "skip_next_action": true
+            },
+            {
+              "status_id": "decay",
+              "name_en": "Decay",
+              "kind": "healing_received_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "healing_received_multiplier": 0.5
+            },
+            {
+              "status_id": "taunt",
+              "name_en": "Taunt",
+              "kind": "target_redirect",
+              "category": "buff",
+              "default_duration_turns": 2,
+              "redirects_single_target_attacks": true
+            },
+            {
+              "status_id": "stoneguard",
+              "name_en": "Stoneguard",
+              "kind": "damage_reduction",
+              "category": "buff",
+              "default_duration_turns": 1,
+              "damage_taken_multiplier": 0.92
+            }
+          ]
+        }
+      },
+      "encounter": {
+        "schema_version": 1,
+        "encounter_id": "qa_lt_enc_brace_bank",
+        "stage_id": "design_proxy",
+        "title_en": "Technical role feasibility (not production balance)",
+        "location_id": "lt_forest_passage",
+        "seed": 17,
+        "party": [
+          {
+            "unit_id": "qa_party_0",
+            "level": 1,
+            "slot": 0,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_party_1",
+            "level": 1,
+            "slot": 1,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_party_2",
+            "level": 1,
+            "slot": 2,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_party_3",
+            "level": 1,
+            "slot": 3,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_party_4",
+            "level": 1,
+            "slot": 4,
+            "row": "rear"
+          }
+        ],
+        "enemies": [
+          {
+            "unit_id": "qa_lt_enc_brace_bank_0",
+            "level": 1,
+            "slot": 0,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_bank_1",
+            "level": 1,
+            "slot": 1,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_bank_2",
+            "level": 1,
+            "slot": 2,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_bank_3",
+            "level": 1,
+            "slot": 3,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_bank_4",
+            "level": 1,
+            "slot": 4,
+            "row": "rear"
+          }
+        ],
+        "provenance": {
+          "source": "Normalized tutorial-kit proxy. No canonical character loan or published reward."
+        }
+      },
+      "role_mapping": [
+        {
+          "slot": 0,
+          "canonical_family": "ash_wolf",
+          "prototype_role": "front"
+        },
+        {
+          "slot": 1,
+          "canonical_family": "ash_wolf",
+          "prototype_role": "front"
+        },
+        {
+          "slot": 2,
+          "canonical_family": "hollow_pilgrim",
+          "prototype_role": "light"
+        },
+        {
+          "slot": 3,
+          "canonical_family": "bellbound_dead",
+          "prototype_role": "support"
+        },
+        {
+          "slot": 4,
+          "canonical_family": "hollow_pilgrim",
+          "prototype_role": "light"
+        }
+      ]
+    },
+    {
+      "authoring_encounter_id": "lt_enc_brace_beam",
+      "unit_pack": {
+        "schema_version": 1,
+        "pack_id": "qa_lt_enc_brace_beam",
+        "units": [
+          {
+            "unit_id": "qa_party_0",
+            "kind": "character",
+            "name_en": "Feasibility proxy 1 (not a canonical hero)",
+            "element": "Stone",
+            "role": "tank_bruiser",
+            "rarity": 5,
+            "formation_affinity": "front",
+            "base_stats": {
+              "hp": 14,
+              "atk": 2,
+              "def": 2,
+              "spd": 4
+            },
+            "growth_per_level": {
+              "hp": 0.7,
+              "atk": 0.12,
+              "def": 0.1,
+              "spd": 0.16
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_0_basic",
+                "name_en": "Oathless Cut",
+                "type": "basic",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 100% of ATK to one enemy. If Mahmut is in the Front Row, he gains Stoneguard, reducing damage taken by 8% for 1 turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "owner_in_row",
+                      "value": "front"
+                    },
+                    "status_id": "stoneguard",
+                    "duration_turns": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_active",
+                "name_en": "Broken Crest Guard",
+                "type": "active",
+                "element": "Stone",
+                "description_en": "Grants Mahmut and the ally with the lowest HP a shield equal to 180% of Mahmut's ATK. For 2 turns, Mahmut redirects 50% of single-target attacks aimed at that ally to himself.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "self_and_lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8,
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_redirect",
+                    "target_selector_id": "self",
+                    "protected_ally_selector_id": "lowest_hp_ally",
+                    "redirected_fraction": 0.5,
+                    "duration_turns": 2,
+                    "eligible_action_types": [
+                      "basic",
+                      "active",
+                      "ultimate"
+                    ]
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_passive",
+                "name_en": "A Knight's Debt",
+                "type": "passive",
+                "element": "Stone",
+                "description_en": "While shielded, Mahmut counters an enemy Basic Attack for 60% of his ATK and gains 5 Focus. Triggers once per turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "before_damage_received",
+                    "effect_ops": [
+                      {
+                        "op": "damage",
+                        "target_selector_id": "event_source",
+                        "damage_type": "physical",
+                        "scale_stat": "atk",
+                        "multiplier": 0.6,
+                        "no_focus_gain": true
+                      },
+                      {
+                        "op": "gain_focus",
+                        "target_selector_id": "self",
+                        "amount": 5
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_has_shield"
+                    },
+                    "limit": {
+                      "per_owner_turn": 1
+                    },
+                    "event_filter": {
+                      "incoming_action_type": "basic"
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_0_ultimate",
+                "name_en": "Last Wall at Dusk",
+                "type": "ultimate",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 220% of ATK to all Front Row enemies, Taunts them for 2 turns, and grants all allies a shield equal to 120% of Mahmut's DEF. The shield still applies if a boss resists Taunt.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "front_row_enemies",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 2.2
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "all_enemies",
+                    "status_id": "taunt",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "all_allies",
+                    "scale_stat": "def",
+                    "multiplier": 1.2,
+                    "duration_turns": 2
+                  }
+                ]
+              }
+            ],
+            "art_key": "mahmut",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_1",
+            "kind": "character",
+            "name_en": "Feasibility proxy 2 (not a canonical hero)",
+            "element": "Stone",
+            "role": "tank_bruiser",
+            "rarity": 5,
+            "formation_affinity": "front",
+            "base_stats": {
+              "hp": 14,
+              "atk": 2,
+              "def": 2,
+              "spd": 4
+            },
+            "growth_per_level": {
+              "hp": 0.7,
+              "atk": 0.12,
+              "def": 0.1,
+              "spd": 0.16
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_1_basic",
+                "name_en": "Oathless Cut",
+                "type": "basic",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 100% of ATK to one enemy. If Mahmut is in the Front Row, he gains Stoneguard, reducing damage taken by 8% for 1 turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "owner_in_row",
+                      "value": "front"
+                    },
+                    "status_id": "stoneguard",
+                    "duration_turns": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_active",
+                "name_en": "Broken Crest Guard",
+                "type": "active",
+                "element": "Stone",
+                "description_en": "Grants Mahmut and the ally with the lowest HP a shield equal to 180% of Mahmut's ATK. For 2 turns, Mahmut redirects 50% of single-target attacks aimed at that ally to himself.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "self_and_lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8,
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_redirect",
+                    "target_selector_id": "self",
+                    "protected_ally_selector_id": "lowest_hp_ally",
+                    "redirected_fraction": 0.5,
+                    "duration_turns": 2,
+                    "eligible_action_types": [
+                      "basic",
+                      "active",
+                      "ultimate"
+                    ]
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_passive",
+                "name_en": "A Knight's Debt",
+                "type": "passive",
+                "element": "Stone",
+                "description_en": "While shielded, Mahmut counters an enemy Basic Attack for 60% of his ATK and gains 5 Focus. Triggers once per turn.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "before_damage_received",
+                    "effect_ops": [
+                      {
+                        "op": "damage",
+                        "target_selector_id": "event_source",
+                        "damage_type": "physical",
+                        "scale_stat": "atk",
+                        "multiplier": 0.6,
+                        "no_focus_gain": true
+                      },
+                      {
+                        "op": "gain_focus",
+                        "target_selector_id": "self",
+                        "amount": 5
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_has_shield"
+                    },
+                    "limit": {
+                      "per_owner_turn": 1
+                    },
+                    "event_filter": {
+                      "incoming_action_type": "basic"
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_1_ultimate",
+                "name_en": "Last Wall at Dusk",
+                "type": "ultimate",
+                "element": "Stone",
+                "description_en": "Deals physical damage equal to 220% of ATK to all Front Row enemies, Taunts them for 2 turns, and grants all allies a shield equal to 120% of Mahmut's DEF. The shield still applies if a boss resists Taunt.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "front_row_enemies",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 2.2
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "all_enemies",
+                    "status_id": "taunt",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "grant_shield",
+                    "target_selector_id": "all_allies",
+                    "scale_stat": "def",
+                    "multiplier": 1.2,
+                    "duration_turns": 2
+                  }
+                ]
+              }
+            ],
+            "art_key": "mahmut",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_2",
+            "kind": "character",
+            "name_en": "Feasibility proxy 3 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_2_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_2_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_3",
+            "kind": "character",
+            "name_en": "Feasibility proxy 4 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_3_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_3_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_party_4",
+            "kind": "character",
+            "name_en": "Feasibility proxy 5 (not a canonical hero)",
+            "element": "Veil",
+            "role": "support_dps",
+            "rarity": 5,
+            "formation_affinity": "rear",
+            "base_stats": {
+              "hp": 11,
+              "atk": 3,
+              "def": 1,
+              "spd": 5
+            },
+            "growth_per_level": {
+              "hp": 0.55,
+              "atk": 0.18,
+              "def": 0.05,
+              "spd": 0.2
+            },
+            "skills": [
+              {
+                "skill_id": "qa_party_4_basic",
+                "name_en": "Veilglass Thorn",
+                "type": "basic",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 100% of ATK to one enemy. Fadyme gains 5 additional Focus if the target is Dreaded.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 10,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  },
+                  {
+                    "op": "gain_focus",
+                    "target_selector_id": "self",
+                    "when": {
+                      "predicate": "last_target_has_status",
+                      "value": "dread"
+                    },
+                    "amount": 5
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_active",
+                "name_en": "Borrowed Hour",
+                "type": "active",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 160% of ATK to one enemy and inflicts Dread for 2 turns. Heals the ally with the lowest HP for 100% of Fadyme's ATK.",
+                "player_target": "enemy",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.6
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_passive",
+                "name_en": "A Smile Kept",
+                "type": "passive",
+                "element": "Veil",
+                "description_en": "At the start of her turn, if Fadyme is below 50% HP, all allies gain 8% Veil RES for 1 turn. Triggers up to 2 times per battle.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 0,
+                "effect_ops": [],
+                "event_hooks": [
+                  {
+                    "event": "owner_turn_start",
+                    "effect_ops": [
+                      {
+                        "op": "modify_stat",
+                        "target_selector_id": "all_allies",
+                        "stat_id": "veil_res",
+                        "mode": "add_pct",
+                        "amount": 0.08,
+                        "duration_turns": 1
+                      }
+                    ],
+                    "condition": {
+                      "predicate": "owner_hp_below_pct",
+                      "value": 50
+                    },
+                    "limit": {
+                      "per_battle": 2
+                    }
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_party_4_ultimate",
+                "name_en": "The Bell That Forgets",
+                "type": "ultimate",
+                "element": "Veil",
+                "description_en": "Deals Veil magic damage equal to 180% of ATK to all enemies and inflicts Dread for 2 turns. Removes 1 debuff from each ally, then heals the allies with the lowest HP for 40% of Fadyme's ATK per debuff removed, up to 3 debuffs.",
+                "player_target": "none",
+                "cooldown_turns": 0,
+                "focus_cost": 100,
+                "ai_priority": 40,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "all_enemies",
+                    "damage_type": "magic",
+                    "scale_stat": "atk",
+                    "multiplier": 1.8
+                  },
+                  {
+                    "op": "apply_status",
+                    "target_selector_id": "previous_op_targets",
+                    "status_id": "dread",
+                    "duration_turns": 2
+                  },
+                  {
+                    "op": "remove_status",
+                    "target_selector_id": "all_allies",
+                    "category": "debuff",
+                    "count": 1,
+                    "selection": "oldest_applied"
+                  },
+                  {
+                    "op": "heal_per_removed_status",
+                    "target_selector_id": "lowest_hp_allies",
+                    "scale_stat": "atk",
+                    "multiplier": 0.4,
+                    "maximum_targets": 3,
+                    "maximum_total_stacks": 3,
+                    "requires_successful_cleanse": true
+                  }
+                ]
+              }
+            ],
+            "art_key": "fadyme",
+            "provenance": {
+              "source": "Technical feasibility fixture; clone of shipped tutorial kit, not production roster."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_beam_0",
+            "kind": "enemy",
+            "name_en": "QA bellbound_dead: support",
+            "element": "Stone",
+            "role": "support",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_brace_beam_0_basic",
+                "name_en": "qa_lt_enc_brace_beam_0_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_lt_enc_brace_beam_0_heal",
+                "name_en": "qa_lt_enc_brace_beam_0_heal",
+                "type": "active",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 70,
+                "effect_ops": [
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 0.75
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_brace_beam_0_heal",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for bellbound_dead; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_beam_1",
+            "kind": "enemy",
+            "name_en": "QA ash_wolf: front",
+            "element": "Stone",
+            "role": "front",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_brace_beam_1_basic",
+                "name_en": "qa_lt_enc_brace_beam_1_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_brace_beam_1_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for ash_wolf; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_beam_2",
+            "kind": "enemy",
+            "name_en": "QA bellbound_dead: support",
+            "element": "Stone",
+            "role": "support",
+            "base_stats": {
+              "hp": 8,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_brace_beam_2_basic",
+                "name_en": "qa_lt_enc_brace_beam_2_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "skill_id": "qa_lt_enc_brace_beam_2_heal",
+                "name_en": "qa_lt_enc_brace_beam_2_heal",
+                "type": "active",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "none",
+                "cooldown_turns": 2,
+                "focus_cost": 0,
+                "ai_priority": 70,
+                "effect_ops": [
+                  {
+                    "op": "heal",
+                    "target_selector_id": "lowest_hp_ally",
+                    "scale_stat": "atk",
+                    "multiplier": 0.75
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_brace_beam_2_heal",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for bellbound_dead; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_beam_3",
+            "kind": "enemy",
+            "name_en": "QA hollow_pilgrim: light",
+            "element": "Stone",
+            "role": "light",
+            "base_stats": {
+              "hp": 5,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_brace_beam_3_basic",
+                "name_en": "qa_lt_enc_brace_beam_3_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_brace_beam_3_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for hollow_pilgrim; canonical skill/art binding required."
+            }
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_beam_4",
+            "kind": "enemy",
+            "name_en": "QA hollow_pilgrim: light",
+            "element": "Stone",
+            "role": "light",
+            "base_stats": {
+              "hp": 5,
+              "atk": 2,
+              "def": 0,
+              "spd": 4
+            },
+            "skills": [
+              {
+                "skill_id": "qa_lt_enc_brace_beam_4_basic",
+                "name_en": "qa_lt_enc_brace_beam_4_basic",
+                "type": "basic",
+                "description_en": "Design feasibility proxy; not canonical enemy skill.",
+                "player_target": "enemy",
+                "cooldown_turns": 0,
+                "focus_cost": 0,
+                "ai_priority": 30,
+                "effect_ops": [
+                  {
+                    "op": "damage",
+                    "target_selector_id": "single_enemy",
+                    "damage_type": "physical",
+                    "scale_stat": "atk",
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ],
+            "intent_skill_id": "qa_lt_enc_brace_beam_4_basic",
+            "art_key": "bellbound_dead",
+            "provenance": {
+              "source": "Authoring role proxy for hollow_pilgrim; canonical skill/art binding required."
+            }
+          }
+        ],
+        "rules": {
+          "schema_version": 1,
+          "gauge_max": 10000,
+          "max_pending_delay_fraction": 0.5,
+          "defense_scale": 10,
+          "focus": {
+            "maximum": 100,
+            "basic_gain": 20,
+            "active_gain": 25,
+            "hit_gain": 5,
+            "hit_gain_cap_per_turn": 15,
+            "ultimate_cost": 100
+          },
+          "crit": {
+            "chance": 0.05,
+            "multiplier": 1.5
+          },
+          "element": {
+            "cycle": [
+              "Ember",
+              "Gale",
+              "Stone",
+              "Tide"
+            ],
+            "advantage": 1.2,
+            "disadvantage": 0.9,
+            "neutral": 1,
+            "weakness": 1.2,
+            "resistance": 0.9,
+            "mutual_pairs": [
+              [
+                "Dawn",
+                "Veil"
+              ]
+            ]
+          },
+          "auto_battle": {
+            "heal_priority_hp_percent": 40,
+            "save_ultimate_until_boss": true
+          },
+          "statuses": [
+            {
+              "status_id": "fracture",
+              "name_en": "Fracture",
+              "kind": "defense_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "def_multiplier": 0.85
+            },
+            {
+              "status_id": "sanctuary",
+              "name_en": "Sanctuary",
+              "kind": "healing_and_damage_reduction",
+              "category": "buff",
+              "default_duration_turns": 2,
+              "damage_taken_multiplier": 0.9,
+              "healing_received_multiplier": 1.1
+            },
+            {
+              "status_id": "dread",
+              "name_en": "Dread",
+              "kind": "outgoing_damage_and_focus_gain_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "outgoing_damage_multiplier": 0.9,
+              "focus_gain_multiplier": 0.8
+            },
+            {
+              "status_id": "break",
+              "name_en": "Break",
+              "kind": "boss_stagger_window",
+              "category": "control",
+              "default_duration_turns": 1,
+              "damage_taken_multiplier": 1.2,
+              "skip_next_action": true
+            },
+            {
+              "status_id": "decay",
+              "name_en": "Decay",
+              "kind": "healing_received_down",
+              "category": "debuff",
+              "default_duration_turns": 2,
+              "healing_received_multiplier": 0.5
+            },
+            {
+              "status_id": "taunt",
+              "name_en": "Taunt",
+              "kind": "target_redirect",
+              "category": "buff",
+              "default_duration_turns": 2,
+              "redirects_single_target_attacks": true
+            },
+            {
+              "status_id": "stoneguard",
+              "name_en": "Stoneguard",
+              "kind": "damage_reduction",
+              "category": "buff",
+              "default_duration_turns": 1,
+              "damage_taken_multiplier": 0.92
+            }
+          ]
+        }
+      },
+      "encounter": {
+        "schema_version": 1,
+        "encounter_id": "qa_lt_enc_brace_beam",
+        "stage_id": "design_proxy",
+        "title_en": "Technical role feasibility (not production balance)",
+        "location_id": "lt_forest_passage",
+        "seed": 17,
+        "party": [
+          {
+            "unit_id": "qa_party_0",
+            "level": 1,
+            "slot": 0,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_party_1",
+            "level": 1,
+            "slot": 1,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_party_2",
+            "level": 1,
+            "slot": 2,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_party_3",
+            "level": 1,
+            "slot": 3,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_party_4",
+            "level": 1,
+            "slot": 4,
+            "row": "rear"
+          }
+        ],
+        "enemies": [
+          {
+            "unit_id": "qa_lt_enc_brace_beam_0",
+            "level": 1,
+            "slot": 0,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_beam_1",
+            "level": 1,
+            "slot": 1,
+            "row": "front"
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_beam_2",
+            "level": 1,
+            "slot": 2,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_beam_3",
+            "level": 1,
+            "slot": 3,
+            "row": "rear"
+          },
+          {
+            "unit_id": "qa_lt_enc_brace_beam_4",
+            "level": 1,
+            "slot": 4,
+            "row": "rear"
+          }
+        ],
+        "provenance": {
+          "source": "Normalized tutorial-kit proxy. No canonical character loan or published reward."
+        }
+      },
+      "role_mapping": [
+        {
+          "slot": 0,
+          "canonical_family": "bellbound_dead",
+          "prototype_role": "support"
+        },
+        {
+          "slot": 1,
+          "canonical_family": "ash_wolf",
+          "prototype_role": "front"
+        },
+        {
+          "slot": 2,
+          "canonical_family": "bellbound_dead",
+          "prototype_role": "support"
+        },
+        {
+          "slot": 3,
+          "canonical_family": "hollow_pilgrim",
+          "prototype_role": "light"
+        },
+        {
+          "slot": 4,
+          "canonical_family": "hollow_pilgrim",
+          "prototype_role": "light"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "The five party proxies clone only Mahmut/Fadyme tutorial kits; they do not represent the actual free/loan roster at any story gate.",
+    "Enemy role proxies use existing effect grammar and substitute tutorial art references. Canonical unit/skill/AI/media mapping is still required.",
+    "Normalized level 1 and enemy HP +/-20% test tunability and bounded battles, not final chapter difficulty.",
+    "No Android, event API, server claim, assets or live content patch tested."
+  ]
+}

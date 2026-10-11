@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a2_shelf_1",
+  "title_en": "Page Numbers Outward",
+  "location_id": "dr_dry_room",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_dry_room"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_shelf_1_001",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "This stack stays in order. A dry mistake is still a mistake.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_shelf_1_002",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "I have brought a cloth for the bench, not the book.",
+      "emotion": "warm"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_shelf_1_003",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "Thank you. The book is not the only thing waiting here.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a2_shelf_1_004",
+      "text": "The carrier settles close enough to see the slips being moved."
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_shelf_1_005",
+      "speaker": "dr_carrier",
+      "speaker_display": "Carrier",
+      "text": "I can recognize mine from here.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_shelf_1_006",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "Good. Recognition is useful evidence. We will keep it beside the page number.",
+      "emotion": "precise"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a2_shelf_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

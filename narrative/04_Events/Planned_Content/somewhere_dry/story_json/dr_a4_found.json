@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a4_found",
+  "title_en": "The Right Page",
+  "location_id": "dr_refuge_desk",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_desk"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a4_found_001",
+      "speaker": "dr_carrier",
+      "speaker_display": "Carrier",
+      "text": "This is the page. I can see the day now.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a4_found_002",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "The day was clear before. We have made it easier to find.",
+      "emotion": "precise"
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a4_found_003",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "And easier to use without standing in the wet.",
+      "emotion": "warm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a4_found_004",
+      "text": "The bundle rests beside the return desk. Its final receiving entry is left to the keeper who accepts it."
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a4_found_005",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "We can leave an honest place for the next line.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a4_found_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

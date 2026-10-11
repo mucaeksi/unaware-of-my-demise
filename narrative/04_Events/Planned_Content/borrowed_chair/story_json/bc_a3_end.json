@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "bc_a3_end",
+  "title_en": "Twelve Steps Back",
+  "location_id": "oakhaven_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "oakhaven_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "bc_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a3_end_001",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "She kept a different part of the evening than I did.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a3_end_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "She was sitting somewhere else.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a3_end_003",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "That is annoyingly sensible.",
+      "emotion": "wry"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a3_end_004",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Keep your hands free. There are bowls to bring inside.",
+      "emotion": "dry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "bc_a3_end_005",
+      "text": "They return to the square while the last dishes are being stacked. The chair is already home."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "bc_a3_end_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_story_borrowed_chair/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

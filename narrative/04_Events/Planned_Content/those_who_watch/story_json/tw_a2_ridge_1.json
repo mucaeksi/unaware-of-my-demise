@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a2_ridge_1",
+  "title_en": "The Open Turn",
+  "location_id": "tw_ridge_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tw_ridge_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_1_001",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "Wait below the white stone. We clear the turn before anyone climbs past it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_1_002",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "The one at the back is reaching around the nearest bodies.",
+      "emotion": "serious"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_1_003",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Notice the reach. Do not follow it off the firm line.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_1_004",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "There is room for the rear to stay together here.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a2_ridge_1_005",
+      "text": "The lantern carrier sets the wrapped lamps down on safe ground."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a2_ridge_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

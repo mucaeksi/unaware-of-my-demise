@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a4_pause",
+  "title_en": "A Place to Stop",
+  "location_id": "or_relief_stop",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_relief_stop"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "or_a4_pause_001",
+      "text": "The volunteer sits at the bench. Marek passes with the basket without turning sideways."
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_pause_002",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Enough room. Keep that distance when the next group arrives.",
+      "emotion": "measured"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_pause_003",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "I thought sitting down meant leaving the work.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_pause_004",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "It means letting the next person do it for a while.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a4_pause_005",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "The opening is still open.",
+      "emotion": "calm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a4_pause_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

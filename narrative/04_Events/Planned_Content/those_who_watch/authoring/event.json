@@ -1,0 +1,1908 @@
+{
+  "authoring_schema_version": 1,
+  "status": "complete_authored_draft_not_deployed",
+  "event_id": "event_those_who_watch",
+  "title_en": "Those Who Watch",
+  "title_tr": "Tutulmayı Bekleyenler",
+  "content_kind": "story_event",
+  "canon_source_event_id": "event_sun_eclipse_day",
+  "delivery": "future_declarative_content_patch",
+  "unlock": {
+    "after_stage": "6-5",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "availability": {
+    "publish_at": null,
+    "expires_at": null
+  },
+  "rewards": {
+    "status": "undecided_by_owner",
+    "binding": null
+  },
+  "entry_node": "tw_a1_road",
+  "completion_node": "tw_complete",
+  "state_keys": {
+    "place": [
+      "ridge",
+      "terrace"
+    ],
+    "account": [
+      "seen",
+      "heard"
+    ],
+    "focus": [
+      "clem",
+      "vespera",
+      "thistle"
+    ]
+  },
+  "validation_cases": [
+    {
+      "place": "ridge",
+      "account": "seen",
+      "focus": "clem"
+    },
+    {
+      "place": "ridge",
+      "account": "seen",
+      "focus": "vespera"
+    },
+    {
+      "place": "ridge",
+      "account": "seen",
+      "focus": "thistle"
+    },
+    {
+      "place": "ridge",
+      "account": "heard",
+      "focus": "clem"
+    },
+    {
+      "place": "ridge",
+      "account": "heard",
+      "focus": "vespera"
+    },
+    {
+      "place": "ridge",
+      "account": "heard",
+      "focus": "thistle"
+    },
+    {
+      "place": "terrace",
+      "account": "seen",
+      "focus": "clem"
+    },
+    {
+      "place": "terrace",
+      "account": "seen",
+      "focus": "vespera"
+    },
+    {
+      "place": "terrace",
+      "account": "seen",
+      "focus": "thistle"
+    },
+    {
+      "place": "terrace",
+      "account": "heard",
+      "focus": "clem"
+    },
+    {
+      "place": "terrace",
+      "account": "heard",
+      "focus": "vespera"
+    },
+    {
+      "place": "terrace",
+      "account": "heard",
+      "focus": "thistle"
+    }
+  ],
+  "expected_battles_per_run": 3,
+  "sources": [
+    {
+      "path": "narrative/07_Enemies_Bosses/bestiary.md",
+      "sha256": "b70789fe8149b1fba7ef8c4f0bae9c852beb52a7a18e62890b47e6418d5e8b2e"
+    },
+    {
+      "path": "narrative/01_Story_Bible/STORY_BIBLE_PART1.md",
+      "sha256": "7f1d798e2fa4491f8d4e5870e1378bf84d2b2fffcaeaea73a0f65b9f434b9f2c"
+    },
+    {
+      "path": "narrative/00_Canon/SPOILER_UNLOCK_POLICY.md",
+      "sha256": "14c09c1795a3a3373ada44e25b1e1f49015abba72b030323733c2e9abbafa7c8"
+    },
+    {
+      "path": "narrative/05_Codex_Lore/world_rules.md",
+      "sha256": "0c1afcab2dd07302798aa36ff6ad9c517e00e4bef75bf7fd45bd93970f35a373"
+    },
+    {
+      "path": "narrative/03_Companion_Stories/character_stories_part1.json",
+      "sha256": "c4e5104df0a7b263f1e59facb1b4b5db3f79f8546186b553e6b1d9fc53605e4a"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/clem_marr.md",
+      "sha256": "1f9c7023085cf13778b4c2db8132000fa6dc648e2bf902d39c292ea848fe2ae4"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/vespera_wisp.md",
+      "sha256": "73de740ec2ef6d7f3e202e09f902ebb4d8270dc162c8fe738b2c1458a217339a"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/thistle_roe.md",
+      "sha256": "0a27220b868dee231aa82cf7079afcfd34a9c9ef8dfe49f53be9aa13d018fb5f"
+    },
+    {
+      "path": "narrative/04_Events/events_part1.json",
+      "sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "tw_a1_road",
+      "act": 1,
+      "title_en": "The People Going Up",
+      "location_id": "eastern_highland_road",
+      "direction_en": "On the separate safe altar route, Clem, Vespera and Thistle meet a local guide and lantern carrier. These two ordinary villagers complete the five-person viewing group in the new expansion.",
+      "purpose_tr": "Kaynak beş token için iki event-scoped köylü eklenir; Fadyme/Mahmut çağrılmaz.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a1_road_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The highland road has more footsteps than carts today. People carry wrapped food and small lamps that will not be needed until they come down.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tw_a1_road_002",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "We leave the narrow shelf for anyone coming back. The watchers go up on this side.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_road_003",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "Watchers. That sounds more respectable than people looking at the sky.",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_road_004",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "It sounds shorter when you need them to move.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_road_005",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "There is room to rest before the climb?",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_road_006",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "At the lower terrace. And at the ridge, if you do not crowd its edge.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_road_007",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Then we can see without making someone stand where they should not.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_road_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The guide and lantern carrier stay with the three travelers, a small group inside the larger procession.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "event_sun_eclipse_day_1",
+      "title_en": "An Old Holy Day",
+      "location_id": "eastern_highland_road",
+      "direction_en": "On their own safe route to the altar, Clem, Vespera and Thistle join highland villagers climbing to watch the far mountain where the eclipse hangs.",
+      "lines": [
+        {
+          "line_id": "event_sun_eclipse_day_1_001",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "Sun-Eclipse Day. Once a year the villages say the black sun breathes.",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_sun_eclipse_day_1_002",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Does it?",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_sun_eclipse_day_1_003",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "Every grave-keeper's record says yes. Every scholar's says no. I trust grave-keepers.",
+          "emotion": "cheerful",
+          "voice_track": "jp"
+        }
+      ],
+      "act": 1,
+      "purpose_tr": "Canon An Old Holy Day üç satır aynen; sourceafter6-5.",
+      "provenance_kind": "canon_verbatim",
+      "music_cue": "tw_work",
+      "source_path": "narrative/04_Events/events_part1.json",
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "scene_id": "tw_a1_questions",
+      "act": 1,
+      "title_en": "What the Records Say",
+      "location_id": "eastern_highland_road",
+      "direction_en": "Clem talks about records without disclosing Fadyme secrets. Vespera distinguishes observation from explanations.",
+      "purpose_tr": "Metodoloji curiosity; sonraki büyükmekanizmaya kesincevap yok.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a1_questions_001",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "I would like to read the village record after we watch.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_questions_002",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Before and after would be better.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_questions_003",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "You think they will change it?",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_questions_004",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "I think we will ask different questions after seeing something.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_questions_005",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "And we should choose a place before the crowd fills it.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_questions_006",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "The open ridge gives a wider view. The terrace gives firmer room behind you.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_questions_007",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "We can reach either. The first turn needs clearing before the slower walkers come.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a1_place",
+      "act": 1,
+      "title_en": "Where to Watch",
+      "location_id": "tw_upper_turn",
+      "direction_en": "Both viewing places see the same source eclipse event. The party clears the first approach before villagers use it.",
+      "purpose_tr": "İki rota2encounterve4storyscenede ayrışır; viewpoint sourceeventi değiştirmez.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a1_place_001",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "The open path lets the far threats reach around. On the terrace path the closest dead press harder.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_place_002",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "We can prepare for either. Nobody goes ahead of the clear road.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a1_place_003",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Choose where we stand. It will not choose what the sky does.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Choose the viewing place.",
+        "state_key": "place",
+        "options": [
+          {
+            "id": "tw_place_ridge",
+            "value": "ridge",
+            "text_en": "Take the open ridge.",
+            "consequence_en": "Two approach fights emphasize reaching attackers and target priority.",
+            "lines": [
+              {
+                "line_id": "tw_a1_place_004",
+                "speaker_id": "clem_marr",
+                "speaker_display": "Clem",
+                "text_en": "Wide view. I can write what changed without borrowing someone’s shoulder.",
+                "emotion": "bright",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a1_place_005",
+                "speaker_id": "thistle_roe",
+                "speaker_display": "Thistle",
+                "text_en": "And I will keep a place behind the first row for anyone needing to sit.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "tw_place_terrace",
+            "value": "terrace",
+            "text_en": "Take the sheltered terrace.",
+            "consequence_en": "Two approach fights emphasize steady front pressure and supporting enemies.",
+            "lines": [
+              {
+                "line_id": "tw_a1_place_006",
+                "speaker_id": "thistle_roe",
+                "speaker_display": "Thistle",
+                "text_en": "Firm ground, and room to stop. That will help people look without leaning.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a1_place_007",
+                "speaker_id": "vespera_wisp",
+                "speaker_display": "Vespera",
+                "text_en": "A narrower view can still be an honest one.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "tw_a2_ridge_1",
+      "act": 2,
+      "title_en": "The Open Turn",
+      "location_id": "tw_ridge_path",
+      "direction_en": "The villagers wait below the first turn. Enemies are known earlier-chapter dead, not a new eclipse-created species.",
+      "purpose_tr": "Ridge B01 önce; gerçek ölü tehdidi pulse nedeniyle yeni üretilmiş sayılmaz.",
+      "music_cue": "tw_threat",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a2_ridge_1_001",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "Wait below the white stone. We clear the turn before anyone climbs past it.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_1_002",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "The one at the back is reaching around the nearest bodies.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_1_003",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Notice the reach. Do not follow it off the firm line.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_1_004",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "There is room for the rear to stay together here.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_1_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The lantern carrier sets the wrapped lamps down on safe ground.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a2_ridge_2",
+      "act": 2,
+      "title_en": "A View with a Limit",
+      "location_id": "tw_ridge_path",
+      "direction_en": "After the first fight, Clem notes where the view ends. No free-text notebook feature is required.",
+      "purpose_tr": "Observationvstakecertainty; noteordinarywrittenprop.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a2_ridge_2_001",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "I can see the valley mouth, but not the road behind that rise.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_2_002",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Write both. A limit is part of a useful account.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_2_003",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "The grave-keepers are less demanding.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_2_004",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "The grave-keepers ask which stone you actually saw.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_2_005",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "A fair correction. I like this village already.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_2_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Thistle checks the firm edge while the group climbs into the cleared turn.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a2_ridge_3",
+      "act": 2,
+      "title_en": "The Last Open Stretch",
+      "location_id": "tw_ridge_path",
+      "direction_en": "A second visible threat blocks access to the viewing area. The locals stay behind the cleared line.",
+      "purpose_tr": "RidgeB02önce rolkombinasyonu farklı.",
+      "music_cue": "tw_threat",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a2_ridge_3_001",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "The ridge opens beyond this stretch. Nobody climbs round the dead to save time.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_3_002",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "The nearest one holds the line. Something behind it is keeping it moving.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_3_003",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Then notice the support and the reach together.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_3_004",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "Two things to write down after. One thing to choose first.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_3_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The group leaves its waiting space clear before stepping forward.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a2_ridge_4",
+      "act": 2,
+      "title_en": "A Safe Edge",
+      "location_id": "highland_ridge",
+      "direction_en": "The small five-person group reaches the ridge. The wider village crowd stays within marked safe viewing room.",
+      "purpose_tr": "Firstnooncanonöncesi güvenli seyir; kamerafizikengineyok.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a2_ridge_4_001",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "Here. You can see without standing at the edge.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_4_002",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "Leave this space for anyone who needs to sit.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_4_003",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "The mountain looks closer than it did from the road.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_4_004",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "The distance has not changed. Our view has.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_4_005",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "That is a good reason to climb. A worse reason to lean.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_ridge_4_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The lamps remain wrapped. There is enough daylight to see one another’s faces.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a2_terrace_1",
+      "act": 2,
+      "title_en": "The Firm Approach",
+      "location_id": "tw_terrace_path",
+      "direction_en": "The villagers wait at a safe bend. The narrow approach emphasizes front-line pressure.",
+      "purpose_tr": "TerraceB01önce; standart5v5.",
+      "music_cue": "tw_threat",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a2_terrace_1_001",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "This bend stays for waiting. The next stretch stays for the fight.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_1_002",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "Two close threats, and a supporting one behind them.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_1_003",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Hold the line where the ground is firm. You do not need to win the whole path at once.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_1_004",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "The watchers can see us from below. Let us leave them a clear way up.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_1_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The carrier keeps the lamps beside the waiting bench.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a2_terrace_2",
+      "act": 2,
+      "title_en": "Room to Rest and See",
+      "location_id": "tw_terrace_path",
+      "direction_en": "After the first fight, the group tests the terrace viewpoint. People can still observe the source event.",
+      "purpose_tr": "Terrace humanview scene; karakterbüyüksecret çözülmez.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a2_terrace_2_001",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "The bench is low enough to sit without blocking anyone’s view.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_2_002",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "I see less of the valley from here.",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_2_003",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Then write less of the valley. There is no duty to invent the part behind stone.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_2_004",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "The people who sat here last year survived with very modest views.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_2_005",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "There is more to see when people are not trying to see over one another.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_2_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Thistle moves a loose basket out of the walking space, not into the sight line.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a2_terrace_3",
+      "act": 2,
+      "title_en": "The Upper Landing",
+      "location_id": "tw_terrace_path",
+      "direction_en": "The second encounter protects access to the landing; enemies are outside the waiting terrace.",
+      "purpose_tr": "TerraceB02önce; noescortAI/real-timecrowd.",
+      "music_cue": "tw_threat",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a2_terrace_3_001",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "The upper landing is not clear yet. The terrace remains safe while we make it so.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_3_002",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "The support is behind the nearest dead. I can hold while it is chosen.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_3_003",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "A steady opening. Keep it rather than chasing the first gap.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_3_004",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "Nobody watching needs to join the fight to earn the view.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_3_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The group steps toward the landing. The villagers stay seated until the road is open.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a2_terrace_4",
+      "act": 2,
+      "title_en": "The View from the Landing",
+      "location_id": "highland_ridge",
+      "direction_en": "The protected landing shares the canonical ridge location. No new event result is attached to the route.",
+      "purpose_tr": "SourceTheBreathaynılocation; viewednoonbeforestage7.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a2_terrace_4_001",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "There. The rim of the black sun is above that shoulder of rock.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_4_002",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "I can see it from the bench.",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_4_003",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "That was the useful part of the plan.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_4_004",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Keep your account at the height of your own eyes.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_4_005",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "And your feet on this side of the last stone.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a2_terrace_4_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The little group watches with the other villagers. Nobody needs to hold someone else upright to see.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "event_sun_eclipse_day_2",
+      "title_en": "The Breath",
+      "location_id": "highland_ridge",
+      "direction_en": "At noon the eclipse's rim flickers. Every bell pin, charm and bell in the valley hums at once.",
+      "lines": [
+        {
+          "line_id": "event_sun_eclipse_day_2_001",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "The owing-bells are all opening. All of them. The whole ridge.",
+          "emotion": "frightened",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_sun_eclipse_day_2_002",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "It is not breathing. It is recounting. Every owed hour in the valley, checked at once.",
+          "emotion": "grave",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_sun_eclipse_day_2_003",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "Why t-today?",
+          "emotion": "tense",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_sun_eclipse_day_2_004",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Because someone set a day for it. Machines keep calendars. So do chancellors.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ],
+      "act": 3,
+      "purpose_tr": "Canon The Breath dört satır aynen: owingbell/recount/calendar açıklaması kaynak sınırında.",
+      "provenance_kind": "canon_verbatim",
+      "music_cue": "tw_work",
+      "source_path": "narrative/04_Events/events_part1.json",
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "scene_id": "tw_a3_after",
+      "act": 3,
+      "title_en": "After the Humming",
+      "location_id": "highland_ridge",
+      "direction_en": "The collective hum has passed. The source phenomenon is not stopped, cleansed or defeated by a battle.",
+      "purpose_tr": "Duyulanilemekanizmayıayırır; bellmagic cancel yok.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a3_after_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The humming leaves the air before the crowd remembers how to speak at its usual volume.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "tw_a3_after_002",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "I heard mine with the valley’s. I have never heard it like that.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a3_after_003",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "Sit for a moment. You do not have to stand while you find the words.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a3_after_004",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "I will write that the rim flickered and the bells answered together.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a3_after_005",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "And keep the explanation beside it, rather than inside the observation.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a3_after_006",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "We go down in small groups. The road has not become wider because everyone wants it now.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a3_account",
+      "act": 3,
+      "title_en": "What to Keep in the Account",
+      "location_id": "highland_ridge",
+      "direction_en": "Choose an emphasis for the ordinary local account. Both preserve the source explanation and uncertainty about its authors.",
+      "purpose_tr": "Eyewitnessstyle değişir, cannonrecountbilgisinisilmez.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a3_account_001",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "The guide keeps a record of what the watchers noticed. I can help make today’s useful.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a3_account_002",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "People may remember the sound before they remember the sky.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a3_account_003",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "We need not make all memories look alike.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Choose the emphasis of the account.",
+        "state_key": "account",
+        "options": [
+          {
+            "id": "tw_account_seen",
+            "value": "seen",
+            "text_en": "Describe the view and its limits.",
+            "consequence_en": "Record the rim and viewpoint; a visual observation callback.",
+            "lines": [
+              {
+                "line_id": "tw_a3_account_004",
+                "speaker_id": "clem_marr",
+                "speaker_display": "Clem",
+                "text_en": "The rim flickered. I will say where we stood when we saw it.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a3_account_005",
+                "speaker_id": "vespera_wisp",
+                "speaker_display": "Vespera",
+                "text_en": "And where the stone interrupted the view.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a3_account_006",
+                "speaker_id": "tw_guide",
+                "speaker_display": "Guide",
+                "text_en": "That will help the next reader understand what you actually saw.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "tw_account_heard",
+            "value": "heard",
+            "text_en": "Record what the watchers heard.",
+            "consequence_en": "Keep the collective sound and a person’s account; a listening callback.",
+            "lines": [
+              {
+                "line_id": "tw_a3_account_007",
+                "speaker_id": "thistle_roe",
+                "speaker_display": "Thistle",
+                "text_en": "We can start with the sound. You do not have to explain the whole valley.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a3_account_008",
+                "speaker_id": "tw_lantern_carrier",
+                "speaker_display": "Lantern Carrier",
+                "text_en": "Mine joined the others. That is what I know.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a3_account_009",
+                "speaker_id": "clem_marr",
+                "speaker_display": "Clem",
+                "text_en": "Then that is the line I will keep beside what we saw.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "tw_a4_descent",
+      "act": 4,
+      "title_en": "A Road Down for Everyone",
+      "location_id": "tw_lower_path",
+      "direction_en": "The outer return path has a known supporting-dead threat. The villagers wait at a safe landing; the hum is not a new combat modifier.",
+      "purpose_tr": "B03common; eclipsehourcount savaşbuff/debuff değil.",
+      "music_cue": "tw_threat",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a4_descent_001",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "The lower return path is blocked. Wait at the landing until we clear it.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_descent_002",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "The people behind us have space to rest. Keep that space out of the fight.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_descent_003",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "A reaching threat and a support. Read both before we move.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_descent_004",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "We do not need a battle to explain the sky. We do need one to open this road.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_descent_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The lantern carrier leaves the lamps at the landing. The travelers face the known dead below it.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a4_clear",
+      "act": 4,
+      "title_en": "The Next Small Group",
+      "location_id": "tw_lower_path",
+      "direction_en": "The cleared road is used by small groups. No timed civilian failure simulation.",
+      "purpose_tr": "Threatcleared objective; sourcephenomenonuntouched.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a4_clear_001",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "The turn is clear. The first group can go at its own pace.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_clear_002",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "I can carry the lamps without asking everyone to hurry.",
+          "emotion": "relieved",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_clear_003",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "Good. Somebody will still need light lower down.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_clear_004",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "Let the road decide the pace, rather than the fear.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_clear_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Clem folds the account away before helping the next watcher stand.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a4_seen",
+      "act": 4,
+      "title_en": "A View Kept Honestly",
+      "location_id": "highland_village",
+      "direction_en": "Callback for the visual account. The local record has a viewpoint note; no new codex answer is unlocked.",
+      "purpose_tr": "Seen callbackteklif; uncertainty withoutmysterysolve.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a4_seen_001",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "You wrote that the rise hid part of the valley.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_seen_002",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "It did. I was tempted to borrow the wider view from the person beside me.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_seen_003",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "You may quote them. You may not pretend their eyes were yours.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_seen_004",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "A demanding village record. I am beginning to approve of it.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_seen_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The guide leaves room beside Clem’s account for another watcher to add their own.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a4_heard",
+      "act": 4,
+      "title_en": "A Sound Kept in Someone’s Words",
+      "location_id": "highland_village",
+      "direction_en": "Callback for listening. The lantern carrier chooses a brief account without revealing a secret identity.",
+      "purpose_tr": "Heardcallbacknamesprivacyconsent; sourcewitnessrule consistent.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a4_heard_001",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "Will you write that I was frightened?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_heard_002",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "If that is part you want kept. Or only the sound.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_heard_003",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "You get to choose your own line.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_heard_004",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "The sound first. I will decide about the rest later.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a4_heard_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Clem writes the short account and reads it back at the carrier’s pace.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "event_sun_eclipse_day_3",
+      "title_en": "Tokens",
+      "location_id": "highland_village",
+      "direction_en": "The villagers give each traveler a stamped token so the eclipse will \"know they watched\".",
+      "lines": [
+        {
+          "line_id": "event_sun_eclipse_day_3_001",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "Sun-Eclipse tokens. Superstition. I am keeping five.",
+          "emotion": "delighted",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_sun_eclipse_day_3_002",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "Why five?",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_sun_eclipse_day_3_003",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "One for each of us who watched. So somebody knows we were here.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        }
+      ],
+      "act": 5,
+      "purpose_tr": "Canon Tokens üç satır aynen. Beşli sourcecümlesine uygun newviewinggroup; token prop only.",
+      "provenance_kind": "canon_verbatim",
+      "music_cue": "tw_work",
+      "source_path": "narrative/04_Events/events_part1.json",
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "scene_id": "tw_a5_token",
+      "act": 5,
+      "title_en": "Five Ordinary Pieces",
+      "location_id": "highland_village",
+      "direction_en": "Clem has five stamped keepsakes for the three travelers, guide and lantern carrier. They are props, not a new currency or defined reward.",
+      "purpose_tr": "Fivekeeperexplained authorednotcanon sourceextraidentityclaim; propnoeconomicreward.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a5_token_001",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "You have enough for the little group. You may take them.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_token_002",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "I did count before keeping five. I am capable of restraint when given clear instructions.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_token_003",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "You asked whether there were larger ones.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_token_004",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "A separate inquiry.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_token_005",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "It will be easier to remember where we stood than what we were afraid of.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_token_006",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "I would like both to be remembered honestly.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_token_007",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Clem wraps the five pieces in cloth. None has made the bells quiet or the day’s account complete.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "tw_a5_company",
+      "act": 5,
+      "title_en": "What Each Watcher Kept",
+      "location_id": "highland_village",
+      "direction_en": "Choose a short closing perspective. Nobody discloses the Part II offer or concludes the calendar’s author.",
+      "purpose_tr": "3distinctcharacterclosure; no repeatsowncompanionreveal.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a5_company_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The guide folds the village record. The three travelers have a quiet moment before taking their established road again.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Whose view do you keep beside the account?",
+        "state_key": "focus",
+        "options": [
+          {
+            "id": "tw_focus_clem",
+            "value": "clem",
+            "text_en": "Clem and the ordinary record.",
+            "consequence_en": "A closing about making room for more than one account.",
+            "lines": [
+              {
+                "line_id": "tw_a5_company_002",
+                "speaker_id": "clem_marr",
+                "speaker_display": "Clem",
+                "text_en": "The guide did not ask me to write the best account. Only my own.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a5_company_003",
+                "speaker_id": "vespera_wisp",
+                "speaker_display": "Vespera",
+                "text_en": "That is a better record than one with no room left.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a5_company_004",
+                "speaker_id": "clem_marr",
+                "speaker_display": "Clem",
+                "text_en": "I will leave room. Even if the next watcher has dreadful handwriting.",
+                "emotion": "small_smile",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a5_company_005",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "She makes the margin a little wider before folding the page.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              }
+            ]
+          },
+          {
+            "id": "tw_focus_vespera",
+            "value": "vespera",
+            "text_en": "Vespera and the unanswered question.",
+            "consequence_en": "A closing about a useful limit to an explanation.",
+            "lines": [
+              {
+                "line_id": "tw_a5_company_006",
+                "speaker_id": "thistle_roe",
+                "speaker_display": "Thistle",
+                "text_en": "You still have questions.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a5_company_007",
+                "speaker_id": "vespera_wisp",
+                "speaker_display": "Vespera",
+                "text_en": "Yes. I have better boundaries for them now.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a5_company_008",
+                "speaker_id": "clem_marr",
+                "speaker_display": "Clem",
+                "text_en": "I may borrow that phrase.",
+                "emotion": "curious",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a5_company_009",
+                "speaker_id": "vespera_wisp",
+                "speaker_display": "Vespera",
+                "text_en": "Borrow the boundaries too.",
+                "emotion": "dry",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "tw_focus_thistle",
+            "value": "thistle",
+            "text_en": "Thistle and the place to sit.",
+            "consequence_en": "A closing about care while people try to understand.",
+            "lines": [
+              {
+                "line_id": "tw_a5_company_010",
+                "speaker_id": "thistle_roe",
+                "speaker_display": "Thistle",
+                "text_en": "They kept asking what the sound meant. I could only give them a place to sit.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a5_company_011",
+                "speaker_id": "clem_marr",
+                "speaker_display": "Clem",
+                "text_en": "They asked more clearly after they sat down.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a5_company_012",
+                "speaker_id": "vespera_wisp",
+                "speaker_display": "Vespera",
+                "text_en": "A useful place is an answer to a useful question.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "tw_a5_company_013",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "Thistle checks that the bench is dry before leaving it for the next watcher.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "tw_a5_end",
+      "act": 5,
+      "title_en": "A Record and a Road",
+      "location_id": "eastern_highland_road",
+      "direction_en": "The three resume their existing safe altar route. The locals stay with the village record; no extra story day or reunion.",
+      "purpose_tr": "SamePartIroute; cliffhangerreveal7onlynoextraannualwait.",
+      "music_cue": "tw_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "tw_a5_end_001",
+          "speaker_id": "tw_guide",
+          "speaker_display": "Guide",
+          "text_en": "Your road continues past the lower terrace. Keep to the firm side when it turns.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_end_002",
+          "speaker_id": "clem_marr",
+          "speaker_display": "Clem",
+          "text_en": "And keep the village account. I would like to read it again if I come this way.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_end_003",
+          "speaker_id": "tw_lantern_carrier",
+          "speaker_display": "Lantern Carrier",
+          "text_en": "It has room for another visit.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_end_004",
+          "speaker_id": "thistle_roe",
+          "speaker_display": "Thistle",
+          "text_en": "Thank you for the place to sit.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_end_005",
+          "speaker_id": "vespera_wisp",
+          "speaker_display": "Vespera",
+          "text_en": "And for not asking the sky to become simpler than it was.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "tw_a5_end_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The travelers leave on the road they were already taking. Behind them, the village keeps several accounts of one noon.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    }
+  ],
+  "graph": [
+    {
+      "node_id": "tw_a1_road",
+      "kind": "story",
+      "ref": "tw_a1_road",
+      "transitions": [
+        {
+          "to": "event_sun_eclipse_day_1"
+        }
+      ]
+    },
+    {
+      "node_id": "event_sun_eclipse_day_1",
+      "kind": "story",
+      "ref": "event_sun_eclipse_day_1",
+      "transitions": [
+        {
+          "to": "tw_a1_questions"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a1_questions",
+      "kind": "story",
+      "ref": "tw_a1_questions",
+      "transitions": [
+        {
+          "to": "tw_a1_place"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a1_place",
+      "kind": "story",
+      "ref": "tw_a1_place",
+      "transitions": [
+        {
+          "to": "tw_a2_ridge_1",
+          "when": {
+            "state_key": "place",
+            "equals": "ridge"
+          }
+        },
+        {
+          "to": "tw_a2_terrace_1",
+          "when": {
+            "state_key": "place",
+            "equals": "terrace"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a2_ridge_1",
+      "kind": "story",
+      "ref": "tw_a2_ridge_1",
+      "transitions": [
+        {
+          "to": "tw_b01_ridge"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_b01_ridge",
+      "kind": "battle",
+      "ref": "tw_enc_ridge_1",
+      "transitions": [
+        {
+          "to": "tw_a2_ridge_2"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a2_ridge_2",
+      "kind": "story",
+      "ref": "tw_a2_ridge_2",
+      "transitions": [
+        {
+          "to": "tw_a2_ridge_3"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a2_ridge_3",
+      "kind": "story",
+      "ref": "tw_a2_ridge_3",
+      "transitions": [
+        {
+          "to": "tw_b02_ridge"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_b02_ridge",
+      "kind": "battle",
+      "ref": "tw_enc_ridge_2",
+      "transitions": [
+        {
+          "to": "tw_a2_ridge_4"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a2_ridge_4",
+      "kind": "story",
+      "ref": "tw_a2_ridge_4",
+      "transitions": [
+        {
+          "to": "event_sun_eclipse_day_2"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a2_terrace_1",
+      "kind": "story",
+      "ref": "tw_a2_terrace_1",
+      "transitions": [
+        {
+          "to": "tw_b01_terrace"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_b01_terrace",
+      "kind": "battle",
+      "ref": "tw_enc_terrace_1",
+      "transitions": [
+        {
+          "to": "tw_a2_terrace_2"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a2_terrace_2",
+      "kind": "story",
+      "ref": "tw_a2_terrace_2",
+      "transitions": [
+        {
+          "to": "tw_a2_terrace_3"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a2_terrace_3",
+      "kind": "story",
+      "ref": "tw_a2_terrace_3",
+      "transitions": [
+        {
+          "to": "tw_b02_terrace"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_b02_terrace",
+      "kind": "battle",
+      "ref": "tw_enc_terrace_2",
+      "transitions": [
+        {
+          "to": "tw_a2_terrace_4"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a2_terrace_4",
+      "kind": "story",
+      "ref": "tw_a2_terrace_4",
+      "transitions": [
+        {
+          "to": "event_sun_eclipse_day_2"
+        }
+      ]
+    },
+    {
+      "node_id": "event_sun_eclipse_day_2",
+      "kind": "story",
+      "ref": "event_sun_eclipse_day_2",
+      "transitions": [
+        {
+          "to": "tw_a3_after"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a3_after",
+      "kind": "story",
+      "ref": "tw_a3_after",
+      "transitions": [
+        {
+          "to": "tw_a3_account"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a3_account",
+      "kind": "story",
+      "ref": "tw_a3_account",
+      "transitions": [
+        {
+          "to": "tw_a4_descent"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a4_descent",
+      "kind": "story",
+      "ref": "tw_a4_descent",
+      "transitions": [
+        {
+          "to": "tw_b03"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_b03",
+      "kind": "battle",
+      "ref": "tw_enc_return",
+      "transitions": [
+        {
+          "to": "tw_a4_clear"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a4_clear",
+      "kind": "story",
+      "ref": "tw_a4_clear",
+      "transitions": [
+        {
+          "to": "tw_a4_seen",
+          "when": {
+            "state_key": "account",
+            "equals": "seen"
+          }
+        },
+        {
+          "to": "tw_a4_heard",
+          "when": {
+            "state_key": "account",
+            "equals": "heard"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a4_seen",
+      "kind": "story",
+      "ref": "tw_a4_seen",
+      "transitions": [
+        {
+          "to": "event_sun_eclipse_day_3"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a4_heard",
+      "kind": "story",
+      "ref": "tw_a4_heard",
+      "transitions": [
+        {
+          "to": "event_sun_eclipse_day_3"
+        }
+      ]
+    },
+    {
+      "node_id": "event_sun_eclipse_day_3",
+      "kind": "story",
+      "ref": "event_sun_eclipse_day_3",
+      "transitions": [
+        {
+          "to": "tw_a5_token"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a5_token",
+      "kind": "story",
+      "ref": "tw_a5_token",
+      "transitions": [
+        {
+          "to": "tw_a5_company"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a5_company",
+      "kind": "story",
+      "ref": "tw_a5_company",
+      "transitions": [
+        {
+          "to": "tw_a5_end"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_a5_end",
+      "kind": "story",
+      "ref": "tw_a5_end",
+      "transitions": [
+        {
+          "to": "tw_complete"
+        }
+      ]
+    },
+    {
+      "node_id": "tw_complete",
+      "kind": "complete",
+      "ref": null,
+      "transitions": []
+    }
+  ],
+  "min_client_version": null,
+  "compatibility_note_tr": "Story exports mevcut StoryScene grammar; graph/encounter JSON authoring formatıdır. Medya/roster ve server adapter sonraki aşama."
+}

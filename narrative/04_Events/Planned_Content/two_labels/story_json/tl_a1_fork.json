@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a1_fork",
+  "title_en": "Two Roads, One Delivery",
+  "location_id": "tl_salt_fork",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_salt_fork"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_001",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The coast path bends below the watch posts. You can see far. So can anything waiting there.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "The load road has shelter, but no room to step aside. We will need to keep the front steady.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Both reach the villages?",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_004",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Yes. They meet before the harbor.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Then we are choosing how to arrive. Not who gets medicine.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_006",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "A mercifully sensible map.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_007",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "It is not the map that will carry the crates.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "choice",
+      "prompt": "Choose the delivery route.",
+      "options": [
+        {
+          "id": "tl_route_coast",
+          "text": "Take the coast path — rear-line threats.",
+          "goto": "coast"
+        },
+        {
+          "id": "tl_route_load",
+          "text": "Take the old load road — sustained front-line pressure.",
+          "goto": "load"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "coast"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_008",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Single file at the open bend. Watch the sea wall, not the water.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_009",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Tell that to the water when it comes over the wall.",
+      "emotion": "dry"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_010",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "If the water has a complaint, it may submit it in writing.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_011",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "I will keep the cloth over the glass.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "load"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_012",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Stay close enough to pass the kit. Far enough that one fallen crate does not stop all of us.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_013",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I will check the shed doors before we reach them.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_014",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Nothing leaves the crates until we find a dry place.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a1_fork_015",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Then we make one if we need it.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a1_fork_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

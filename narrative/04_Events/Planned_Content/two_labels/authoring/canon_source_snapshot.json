@@ -1,0 +1,135 @@
+{
+  "source_path": "narrative/04_Events/events_part1.json",
+  "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693",
+  "event": {
+    "event_id": "event_guild_salt_fever",
+    "title_en": "Guild Dispatch: Salt-Road Fever",
+    "event_type": "guild",
+    "canon_status": "canon",
+    "timeline_placement": "after stage 4-5",
+    "unlock": {
+      "after_stage": "4-5"
+    },
+    "purpose_en": "The Red Vial archive wing's first public dispatch after the Matron. Faction development and Tilda/Odelia/Kera focus.",
+    "featured_character_ids": [
+      "tilda_fen",
+      "iona_mist",
+      "odelia_pike",
+      "kera_voss"
+    ],
+    "scenes": [
+      {
+        "scene_id": "event_guild_salt_fever_1",
+        "title_en": "A Dispatch Posted",
+        "location_id": "undercity_antidote_archive",
+        "direction_en": "Kera nails the archive wing's first public notice to its own door.",
+        "lines": [
+          {
+            "line_id": "event_guild_salt_fever_1_001",
+            "speaker_id": "kera_voss",
+            "speaker_display": "Kera",
+            "text_en": "Salt-road fever in the coastal villages. The ledger wing sold the cure. We are giving it away.",
+            "emotion": "defiant",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_guild_salt_fever_1_002",
+            "speaker_id": "tilda_fen",
+            "speaker_display": "Tilda",
+            "text_en": "With what staff? You have three shelves and a temper.",
+            "emotion": "dry",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_guild_salt_fever_1_003",
+            "speaker_id": "kera_voss",
+            "speaker_display": "Kera",
+            "text_en": "I have you, Iona, and a harbor archer who knows the coast.",
+            "emotion": "smug",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_guild_salt_fever_1_004",
+            "speaker_id": "odelia_pike",
+            "speaker_display": "Odelia",
+            "text_en": "I did not agree to this.",
+            "emotion": "hesitant",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_guild_salt_fever_1_005",
+            "speaker_id": "kera_voss",
+            "speaker_display": "Kera",
+            "text_en": "You agreed with your face.",
+            "emotion": "tsundere",
+            "voice_track": "jp"
+          }
+        ]
+      },
+      {
+        "scene_id": "event_guild_salt_fever_2",
+        "title_en": "The Coast Road",
+        "location_id": "salt_road_coast",
+        "direction_en": "The salt villages. Tilda treats patients; Odelia guides them through her old harbor.",
+        "lines": [
+          {
+            "line_id": "event_guild_salt_fever_2_001",
+            "speaker_id": "tilda_fen",
+            "speaker_display": "Tilda",
+            "text_en": "This is where I learned. My teacher treated this fever with salt and honesty.",
+            "emotion": "reflective",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_guild_salt_fever_2_002",
+            "speaker_id": "odelia_pike",
+            "speaker_display": "Odelia",
+            "text_en": "My brother and I stole bread from that bakery.",
+            "emotion": "small_smile",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_guild_salt_fever_2_003",
+            "speaker_id": "iona_mist",
+            "speaker_display": "Iona",
+            "text_en": "Then we will pay it back with medicine.",
+            "emotion": "gentle",
+            "voice_track": "jp"
+          }
+        ]
+      },
+      {
+        "scene_id": "event_guild_salt_fever_3",
+        "title_en": "Two Labels",
+        "location_id": "salt_road_coast",
+        "direction_en": "A ledger-wing agent arrives selling the same cure at ten times the price.",
+        "lines": [
+          {
+            "line_id": "event_guild_salt_fever_3_001",
+            "speaker_id": "red_vial_agent",
+            "speaker_display": "Ledger Agent",
+            "text_en": "You are ruining a market, alchemist.",
+            "emotion": "cold",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_guild_salt_fever_3_002",
+            "speaker_id": "kera_voss",
+            "speaker_display": "Kera",
+            "text_en": "I am labeling it correctly. Yours says \"cure\". Mine says \"cure, free, and the name of who made it\".",
+            "emotion": "fierce",
+            "voice_track": "jp"
+          },
+          {
+            "line_id": "event_guild_salt_fever_3_003",
+            "speaker_id": "narrator",
+            "speaker_display": "Narration",
+            "text_en": "The villagers took Kera's bottles. The agent left with a full crate and an empty road.",
+            "emotion": "satisfied",
+            "voice_track": "jp_narration"
+          }
+        ]
+      }
+    ]
+  }
+}

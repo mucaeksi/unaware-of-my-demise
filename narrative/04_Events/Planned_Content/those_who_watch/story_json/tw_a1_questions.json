@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a1_questions",
+  "title_en": "What the Records Say",
+  "location_id": "eastern_highland_road",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "eastern_highland_road"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_questions_001",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "I would like to read the village record after we watch.",
+      "emotion": "bright"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_questions_002",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Before and after would be better.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_questions_003",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "You think they will change it?",
+      "emotion": "curious"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_questions_004",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "I think we will ask different questions after seeing something.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_questions_005",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "And we should choose a place before the crowd fills it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_questions_006",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "The open ridge gives a wider view. The terrace gives firmer room behind you.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a1_questions_007",
+      "speaker": "tw_lantern_carrier",
+      "speaker_display": "Lantern Carrier",
+      "text": "We can reach either. The first turn needs clearing before the slower walkers come.",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a1_questions_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

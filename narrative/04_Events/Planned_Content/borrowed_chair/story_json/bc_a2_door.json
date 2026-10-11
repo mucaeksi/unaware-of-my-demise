@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "scene_id": "bc_a2_door",
+  "title_en": "The Door and the Chair",
+  "location_id": "bc_house_door",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "bc_house_door"
+    },
+    {
+      "op": "music",
+      "cue_id": "bc_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_001",
+      "speaker": "bc_householder",
+      "speaker_display": "Householder",
+      "text": "There it is. I thought you might decide it belonged to the square now.",
+      "emotion": "warm"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "It belonged to the square for supper. It belongs here again.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_003",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "It had a very good evening.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_004",
+      "speaker": "bc_householder",
+      "speaker_display": "Householder",
+      "text": "It is a chair. I had the evening.",
+      "emotion": "wry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "bc_a2_door_005",
+      "text": "Jori turns the seat to pass the threshold without scraping it."
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "choice",
+      "prompt": "Who leads the short thank-you?",
+      "options": [
+        {
+          "id": "bc_voice_jori",
+          "text": "Let Jori speak about the borrowed work.",
+          "goto": "jori"
+        },
+        {
+          "id": "bc_voice_pippa",
+          "text": "Let Pippa share a small supper memory.",
+          "goto": "pippa"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "jori"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_006",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "The brace held. Thank you for lending something you use.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_007",
+      "speaker": "bc_householder",
+      "speaker_display": "Householder",
+      "text": "I sit here when I peel onions. Tonight somebody else got the seat.",
+      "emotion": "warm"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_008",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Then we brought it back before the next bowl of onions.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_009",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "A considerate timetable.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "pippa"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_010",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "I saw you laugh before the last verse. Jori was defending the soup from criticism.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_011",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "I was criticizing the soup.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_012",
+      "speaker": "bc_householder",
+      "speaker_display": "Householder",
+      "text": "Yes. That was the part I liked.",
+      "emotion": "amused"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a2_door_013",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Then that is a very good part to keep.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "hide",
+      "character": "pippa_bell"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "bc_a2_door_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_story_borrowed_chair/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

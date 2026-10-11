@@ -1,0 +1,109 @@
+{
+  "authoring_schema_version": 1,
+  "encounters": [
+    {
+      "encounter_id": "or_enc_supply",
+      "title_en": "Beyond the Crossing",
+      "location_id": "or_safe_approach",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "bridge_revenant",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "İzinli frontline damage; köprü lore intentte yok."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "bridge_revenant",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "İzinli frontline damage; köprü lore intentte yok."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_cleric",
+          "role_tr": "destek baskısı",
+          "behavior_brief_tr": "İzinli heal/support profili; yaşayan Crown Guard bu karşılaşmaya eklenmez."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "lost_vow_knight",
+          "role_tr": "yakın tehdit",
+          "behavior_brief_tr": "Standart ön hedef; kaynak family mapping entegrasyonda."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "lost_vow_knight",
+          "role_tr": "yakın tehdit",
+          "behavior_brief_tr": "Standart ön hedef; kaynak family mapping entegrasyonda."
+        }
+      ],
+      "tactical_focus_tr": "Ön hattı sabit tutup destek baskısını azaltmak.",
+      "briefing_en": "The survivors stay behind the relief point. Check the front pressure and the threat supporting it.",
+      "counterplay_tr": "Standard zafer, iki yöntemde de recovery mümkün; sivil HP yok.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "or_enc_passage",
+      "title_en": "Beyond the Crossing",
+      "location_id": "or_safe_approach",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "bridge_revenant",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "İzinli frontline damage; köprü lore intentte yok."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "lost_vow_knight",
+          "role_tr": "yakın tehdit",
+          "behavior_brief_tr": "Standart ön hedef; kaynak family mapping entegrasyonda."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_pilgrim",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "İzinli rear_row_enemies selector; niyet açık."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "hollow_cleric",
+          "role_tr": "destek baskısı",
+          "behavior_brief_tr": "İzinli heal/support profili; yaşayan Crown Guard bu karşılaşmaya eklenmez."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "lost_vow_knight",
+          "role_tr": "yakın tehdit",
+          "behavior_brief_tr": "Standart ön hedef; kaynak family mapping entegrasyonda."
+        }
+      ],
+      "tactical_focus_tr": "Arka sıraya ulaşan tehdidi önceliklendirmek.",
+      "briefing_en": "The survivors stay behind the relief point. Check the front pressure and the threat supporting it.",
+      "counterplay_tr": "Standard zafer, iki yöntemde de recovery mümkün; sivil HP yok.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    }
+  ]
+}

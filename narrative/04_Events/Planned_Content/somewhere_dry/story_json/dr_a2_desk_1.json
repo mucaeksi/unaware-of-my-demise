@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a2_desk_1",
+  "title_en": "The Wall Table",
+  "location_id": "dr_refuge_desk",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_desk"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_desk_1_001",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "This side for waiting. That side for anyone walking through.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_desk_1_002",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "The original goes here. New notes go on the clean board.",
+      "emotion": "precise"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_desk_1_003",
+      "speaker": "dr_carrier",
+      "speaker_display": "Carrier",
+      "text": "Why not write the clearer answer on the slip?",
+      "emotion": "curious"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_desk_1_004",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "Because we have not earned a clearer answer yet.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a2_desk_1_005",
+      "text": "Aveline shifts the lamp. The blurred line remains blurred, but can be seen without leaning into the passage."
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_desk_1_006",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "At least nobody has to read in the dark while we ask.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a2_desk_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

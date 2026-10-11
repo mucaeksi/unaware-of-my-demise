@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a5_end",
+  "title_en": "A Record and a Road",
+  "location_id": "eastern_highland_road",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "eastern_highland_road"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_end_001",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "Your road continues past the lower terrace. Keep to the firm side when it turns.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_end_002",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "And keep the village account. I would like to read it again if I come this way.",
+      "emotion": "bright"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_end_003",
+      "speaker": "tw_lantern_carrier",
+      "speaker_display": "Lantern Carrier",
+      "text": "It has room for another visit.",
+      "emotion": "warm"
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_end_004",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "Thank you for the place to sit.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a5_end_005",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "And for not asking the sky to become simpler than it was.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a5_end_006",
+      "text": "The travelers leave on the road they were already taking. Behind them, the village keeps several accounts of one noon."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a5_end_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

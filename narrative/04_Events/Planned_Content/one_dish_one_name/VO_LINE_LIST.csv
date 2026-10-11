@@ -1,0 +1,210 @@
+line_id,speaker_id,speaker_display,text_en,emotion,voice_track,text_ja,recording_status
+od_a1_square_001,narrator,Narration,The square has been loud with orders for days. Now the loudest order is where to put a chair.,composed,jp_narration,,not_recorded_in_this_package
+od_a1_square_002,jori_flint,Jori,Not there. The leg will catch in the drain.,focused,jp,,not_recorded_in_this_package
+od_a1_square_003,nixie_vale,Nixie,Then we put the short people at that end. They will not notice.,bright,jp,,not_recorded_in_this_package
+od_a1_square_004,jori_flint,Jori,They will notice falling over.,annoyed,jp,,not_recorded_in_this_package
+od_a1_square_005,pippa_bell,Pippa,A table that applauds when you sit down. Very festive.,bright,jp,,not_recorded_in_this_package
+od_a1_square_006,kera_voss,Kera,I have brought a contribution.,focused,jp,,not_recorded_in_this_package
+od_a1_square_007,jori_flint,Jori,Is it meant to be making that noise?,serious,jp,,not_recorded_in_this_package
+od_a1_square_008,kera_voss,Kera,That is a cooking noise.,defensive,jp,,not_recorded_in_this_package
+od_a1_square_009,pippa_bell,Pippa,We will discover what it is called when it reaches a bowl.,wry,jp,,not_recorded_in_this_package
+od_a1_square_010,narrator,Narration,A helper carries a stack of bowls past them. Everyone steps aside at a different speed.,composed,jp_narration,,not_recorded_in_this_package
+od_a1_square_011,oakhaven_innkeeper,Innkeeper,"If you have a free hand, there is work for it. If you have two, I will be delighted.",warm,jp,,not_recorded_in_this_package
+od_a1_plan_001,jori_flint,Jori,These boards need bracing before anyone puts hot food on them.,focused,jp,,not_recorded_in_this_package
+od_a1_plan_002,nixie_vale,Nixie,There are serving things waiting at the storehouse. I know the turn with the least mud.,focused,jp,,not_recorded_in_this_package
+od_a1_plan_003,pippa_bell,Pippa,And the last verse needs room for names of every length.,bright,jp,,not_recorded_in_this_package
+od_a1_plan_004,kera_voss,Kera,You cannot all have the same pair of hands.,annoyed,jp,,not_recorded_in_this_package
+od_a1_plan_005,oakhaven_innkeeper,Innkeeper,You do not have to. Choose two jobs. We will finish the other together.,warm,jp,,not_recorded_in_this_package
+od_a1_plan_006,pippa_bell,Pippa,Nobody misses supper because we liked a different errand.,gentle,jp,,not_recorded_in_this_package
+od_a1_plan_007,nixie_vale,Nixie,Good. I like a map with more than one useful road.,bright,jp,,not_recorded_in_this_package
+od_a1_plan_008,jori_flint,Jori,Wood first. A clear place for the bowls makes the rest easier.,focused,jp,,not_recorded_in_this_package
+od_a1_plan_009,nixie_vale,Nixie,Then we bring the bowls. Excellent division of worrying.,bright,jp,,not_recorded_in_this_package
+od_a1_plan_010,pippa_bell,Pippa,I will borrow other voices for the verse.,bright,jp,,not_recorded_in_this_package
+od_a1_plan_011,nixie_vale,Nixie,We start at the storehouse. Nothing heavy through the market steps.,focused,jp,,not_recorded_in_this_package
+od_a1_plan_012,pippa_bell,Pippa,Then we make room in the song for the people carrying it.,bright,jp,,not_recorded_in_this_package
+od_a1_plan_013,jori_flint,Jori,I will find someone who can hold the other end of a board.,focused,jp,,not_recorded_in_this_package
+od_a1_plan_014,pippa_bell,Pippa,Song first. It is harder to find a name once everyone has a mouthful.,bright,jp,,not_recorded_in_this_package
+od_a1_plan_015,jori_flint,Jori,Then the tables. It is harder to hold a bowl once everyone is on the ground.,dry,jp,,not_recorded_in_this_package
+od_a1_plan_016,nixie_vale,Nixie,I will make sure the serving things find us.,bright,jp,,not_recorded_in_this_package
+od_job_wood_1_001,jori_flint,Jori,"Hold it there. No, lower. I need the board level, not impressed.",focused,jp,,not_recorded_in_this_package
+od_job_wood_1_002,od_helper,Helper,Will it hold that many people?,worried,jp,,not_recorded_in_this_package
+od_job_wood_1_003,jori_flint,Jori,It will hold the dishes. The people get chairs.,calm,jp,,not_recorded_in_this_package
+od_job_wood_1_004,nixie_vale,Nixie,I was looking forward to standing on it.,wry,jp,,not_recorded_in_this_package
+od_job_wood_1_005,jori_flint,Jori,You can disappoint yourself before the soup does it for you.,dry,jp,,not_recorded_in_this_package
+od_job_wood_1_006,narrator,Narration,The helper laughs and stops gripping the board hard enough to shake it.,composed,jp_narration,,not_recorded_in_this_package
+od_job_wood_1_007,jori_flint,Jori,There. You can let go of that end. I have this one.,quiet,jp,,not_recorded_in_this_package
+od_job_wood_1_008,pippa_bell,Pippa,Is that your best table-making voice?,bright,jp,,not_recorded_in_this_package
+od_job_wood_1_009,jori_flint,Jori,It is my voice for people putting their fingers where the hammer goes.,annoyed,jp,,not_recorded_in_this_package
+od_job_wood_2_001,narrator,Narration,Some chairs were borrowed from kitchens. One was borrowed from somewhere that owned no other furniture.,composed,jp_narration,,not_recorded_in_this_package
+od_job_wood_2_002,od_helper,Helper,We could hide that one at the end.,hesitant,jp,,not_recorded_in_this_package
+od_job_wood_2_003,jori_flint,Jori,We could fix it.,focused,jp,,not_recorded_in_this_package
+od_job_wood_2_004,nixie_vale,Nixie,I like that answer. The end keeps getting all the interesting chairs.,bright,jp,,not_recorded_in_this_package
+od_job_wood_2_005,jori_flint,Jori,Put your foot on the pad while I fit it. Not on my hand.,quiet,jp,,not_recorded_in_this_package
+od_job_wood_2_006,od_helper,Helper,There. It does not rock now.,relieved,jp,,not_recorded_in_this_package
+od_job_wood_2_007,pippa_bell,Pippa,Leave it near the middle. Someone should get to sit close without feeling borrowed.,gentle,jp,,not_recorded_in_this_package
+od_job_wood_2_008,jori_flint,Jori,It is a chair. It does not ask who brought it.,quiet,jp,,not_recorded_in_this_package
+od_job_wood_2_009,narrator,Narration,She puts it where the light reaches the seat.,composed,jp_narration,,not_recorded_in_this_package
+od_job_wood_3_001,jori_flint,Jori,This gap stays open.,focused,jp,,not_recorded_in_this_package
+od_job_wood_3_002,nixie_vale,Nixie,For the food?,curious,jp,,not_recorded_in_this_package
+od_job_wood_3_003,jori_flint,Jori,For whoever carries it. And whoever cannot step over three people to sit down.,calm,jp,,not_recorded_in_this_package
+od_job_wood_3_004,pippa_bell,Pippa,A very considerate gap.,gentle,jp,,not_recorded_in_this_package
+od_job_wood_3_005,jori_flint,Jori,Do not sing at it. It is already doing its job.,dry,jp,,not_recorded_in_this_package
+od_job_wood_3_006,narrator,Narration,A helper sets the last bowl down. The table does not move.,composed,jp_narration,,not_recorded_in_this_package
+od_job_wood_3_007,od_helper,Helper,You can hear the difference.,relieved,jp,,not_recorded_in_this_package
+od_job_wood_3_008,jori_flint,Jori,I prefer the part you cannot hear.,quiet,jp,,not_recorded_in_this_package
+od_job_road_1_001,nixie_vale,Nixie,Not the steps. A short route becomes a long route when the soup goes down it first.,focused,jp,,not_recorded_in_this_package
+od_job_road_1_002,kera_voss,Kera,The soup is not leaving my hands.,annoyed,jp,,not_recorded_in_this_package
+od_job_road_1_003,nixie_vale,Nixie,Then you have a very good reason to avoid the steps.,bright,jp,,not_recorded_in_this_package
+od_job_road_1_004,od_helper,Helper,The bowls are fragile.,worried,jp,,not_recorded_in_this_package
+od_job_road_1_005,nixie_vale,Nixie,So we carry them low and stop at the turn. I will see who is coming the other way.,focused,jp,,not_recorded_in_this_package
+od_job_road_1_006,pippa_bell,Pippa,You make fetching bowls sound like a heroic expedition.,bright,jp,,not_recorded_in_this_package
+od_job_road_1_007,nixie_vale,Nixie,Everything sounds heroic until somebody asks how many bowls came back.,wry,jp,,not_recorded_in_this_package
+od_job_road_1_008,narrator,Narration,Nixie moves the heaviest bundle to the hand closest to the wall.,composed,jp_narration,,not_recorded_in_this_package
+od_job_road_2_001,od_helper,Helper,I can take the last stack too.,strained,jp,,not_recorded_in_this_package
+od_job_road_2_002,nixie_vale,Nixie,Wait. Take a breath first.,focused,jp,,not_recorded_in_this_package
+od_job_road_2_003,od_helper,Helper,Everyone else is moving.,hesitant,jp,,not_recorded_in_this_package
+od_job_road_2_004,nixie_vale,Nixie,Then they can keep moving around us.,calm,jp,,not_recorded_in_this_package
+od_job_road_2_005,kera_voss,Kera,I have a free hand. The pot only needs one until someone starts criticizing it.,quiet,jp,,not_recorded_in_this_package
+od_job_road_2_006,pippa_bell,Pippa,I will save my criticism for the square.,wry,jp,,not_recorded_in_this_package
+od_job_road_2_007,narrator,Narration,The stack changes hands without a bowl being dropped.,composed,jp_narration,,not_recorded_in_this_package
+od_job_road_2_008,nixie_vale,Nixie,There. Faster without pretending it was lighter.,bright,jp,,not_recorded_in_this_package
+od_job_road_2_009,od_helper,Helper,I thought you would tell me to hurry.,relieved,jp,,not_recorded_in_this_package
+od_job_road_2_010,nixie_vale,Nixie,I know where we are going. We can get there with all the bowls.,quiet,jp,,not_recorded_in_this_package
+od_job_road_3_001,nixie_vale,Nixie,"If we need another load, can you show the next pair of hands where we went?",focused,jp,,not_recorded_in_this_package
+od_job_road_3_002,jori_flint,Jori,You are making them lead the way back?,curious,jp,,not_recorded_in_this_package
+od_job_road_3_003,nixie_vale,Nixie,They know the steps now. I do not have to carry every bowl to know it will arrive.,bright,jp,,not_recorded_in_this_package
+od_job_road_3_004,pippa_bell,Pippa,That sounds like a holiday.,wry,jp,,not_recorded_in_this_package
+od_job_road_3_005,nixie_vale,Nixie,Only if nobody asks me to carry the tables.,serious,jp,,not_recorded_in_this_package
+od_job_road_3_006,narrator,Narration,She hands over the empty sling and follows while the helper chooses the turn.,composed,jp_narration,,not_recorded_in_this_package
+od_job_road_3_007,od_helper,Helper,This way.,calm,jp,,not_recorded_in_this_package
+od_job_road_3_008,nixie_vale,Nixie,Good. It is not only my route now.,small_smile,jp,,not_recorded_in_this_package
+od_job_song_1_001,pippa_bell,Pippa,"Short names, long names, names that need a second breath. There is room.",bright,jp,,not_recorded_in_this_package
+od_job_song_1_002,od_guest,Guest,Mine will spoil the rhythm.,hesitant,jp,,not_recorded_in_this_package
+od_job_song_1_003,pippa_bell,Pippa,Then the rhythm can improve itself.,gentle,jp,,not_recorded_in_this_package
+od_job_song_1_004,nixie_vale,Nixie,A sensible rhythm. We should invite it more often.,bright,jp,,not_recorded_in_this_package
+od_job_song_1_005,od_guest,Guest,Could I bring my mother's name instead?,quiet,jp,,not_recorded_in_this_package
+od_job_song_1_006,pippa_bell,Pippa,If that is the name you wish us to sing.,gentle,jp,,not_recorded_in_this_package
+od_job_song_1_007,narrator,Narration,"Pippa leaves a space before writing. The guest says it once, then again slowly.",composed,jp_narration,,not_recorded_in_this_package
+od_job_song_1_008,pippa_bell,Pippa,Like that?,focused,jp,,not_recorded_in_this_package
+od_job_song_1_009,od_guest,Guest,Like that.,relieved,jp,,not_recorded_in_this_package
+od_job_song_2_001,od_guest,Guest,I can give you a name. I would rather not give you the story.,hesitant,jp,,not_recorded_in_this_package
+od_job_song_2_002,pippa_bell,Pippa,I asked for one line. I did not ask for every page.,gentle,jp,,not_recorded_in_this_package
+od_job_song_2_003,jori_flint,Jori,We can keep a seat where you do not have to face the square.,calm,jp,,not_recorded_in_this_package
+od_job_song_2_004,od_guest,Guest,I might join the song. Later.,quiet,jp,,not_recorded_in_this_package
+od_job_song_2_005,pippa_bell,Pippa,Then later is a perfectly good time for it.,gentle,jp,,not_recorded_in_this_package
+od_job_song_2_006,narrator,Narration,Pippa rehearses the syllables softly enough that only the guest can correct them.,composed,jp_narration,,not_recorded_in_this_package
+od_job_song_2_007,nixie_vale,Nixie,You changed the tune.,quiet,jp,,not_recorded_in_this_package
+od_job_song_2_008,pippa_bell,Pippa,The name was doing nothing wrong.,small_smile,jp,,not_recorded_in_this_package
+od_job_song_3_001,pippa_bell,Pippa,"Once together. You may miss the note, but do not lose the person beside you.",bright,jp,,not_recorded_in_this_package
+od_job_song_3_002,od_helper,Helper,I have already missed three notes.,amused,jp,,not_recorded_in_this_package
+od_job_song_3_003,pippa_bell,Pippa,A vigorous beginning.,wry,jp,,not_recorded_in_this_package
+od_job_song_3_004,kera_voss,Kera,Will the song still work?,dry,jp,,not_recorded_in_this_package
+od_job_song_3_005,pippa_bell,Pippa,"It is a song, Kera. The point is that we are singing it.",gentle,jp,,not_recorded_in_this_package
+od_job_song_3_006,jori_flint,Jori,Good. I was worried it needed a bottle.,dry,jp,,not_recorded_in_this_package
+od_job_song_3_007,narrator,Narration,"The refrain wanders off-key, finds another voice, and comes back changed.",composed,jp_narration,,not_recorded_in_this_package
+od_job_song_3_008,pippa_bell,Pippa,Keep that part.,quiet,jp,,not_recorded_in_this_package
+od_a3_road_001,nixie_vale,Nixie,Stop at the storehouse door. The lane beyond it is not clear.,serious,jp,,not_recorded_in_this_package
+od_a3_road_002,jori_flint,Jori,Leave the serving things inside. Nobody carries them through a fight.,focused,jp,,not_recorded_in_this_package
+od_a3_road_003,pippa_bell,Pippa,The square can keep setting places. We will clear this turn.,quiet,jp,,not_recorded_in_this_package
+od_a3_road_004,kera_voss,Kera,The ones in front are moving when that bellbound corpse does.,focused,jp,,not_recorded_in_this_package
+od_a3_road_005,nixie_vale,Nixie,And one behind them is reaching past. Read both before we commit.,focused,jp,,not_recorded_in_this_package
+od_a3_road_006,jori_flint,Jori,We can hold the front and choose our opening.,focused,jp,,not_recorded_in_this_package
+od_a3_road_007,pippa_bell,Pippa,No hurry that costs someone the road back.,calm,jp,,not_recorded_in_this_package
+od_a3_road_008,narrator,Narration,The load stays on dry boards. The group steps into the lane with empty hands ready for weapons.,composed,jp_narration,,not_recorded_in_this_package
+od_a3_clear_001,od_helper,Helper,The last stack is here.,relieved,jp,,not_recorded_in_this_package
+od_a3_clear_002,jori_flint,Jori,Set it on the brace. Not the edge.,focused,jp,,not_recorded_in_this_package
+od_a3_clear_003,nixie_vale,Nixie,The helper can show the way back if anyone needs another load.,bright,jp,,not_recorded_in_this_package
+od_a3_clear_004,pippa_bell,Pippa,And the verse has enough room for the new arrivals.,bright,jp,,not_recorded_in_this_package
+od_a3_clear_005,oakhaven_innkeeper,Innkeeper,Then sit before somebody finds you another useful thing to do.,warm,jp,,not_recorded_in_this_package
+od_a3_clear_006,kera_voss,Kera,My contribution first.,focused,jp,,not_recorded_in_this_package
+od_a3_clear_007,jori_flint,Jori,That depends on what it is doing now.,worried,jp,,not_recorded_in_this_package
+od_a3_clear_008,narrator,Narration,Kera lifts the lid with the seriousness of someone presenting a thesis.,composed,jp_narration,,not_recorded_in_this_package
+event_harvest_inn_meal_1_001,pippa_bell,Pippa,"Rule of the Harvest Supper: one dish, one name. You say the name, you get a bowl.",bright,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_1_002,kera_voss,Kera,I brought a dish. It is technically soup.,defensive,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_1_003,jori_flint,Jori,It is moving.,horrified,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_1_004,kera_voss,Kera,It is effervescent.,tsundere,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_1_005,nixie_vale,Nixie,I will eat it! For the festival!,heroic,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_1_006,narrator,Narration,Nixie ate it. Nixie was fine. Nixie glowed faintly for an hour.,comic,jp_narration,,not_recorded_in_this_package
+od_a3_after_soup_001,nixie_vale,Nixie,It was very memorable.,bright,jp,,not_recorded_in_this_package
+od_a3_after_soup_002,kera_voss,Kera,That is not an accepted tasting category.,defensive,jp,,not_recorded_in_this_package
+od_a3_after_soup_003,jori_flint,Jori,It is now.,dry,jp,,not_recorded_in_this_package
+od_a3_after_soup_004,pippa_bell,Pippa,We can put it in the program. Soup: memorable. Tables: upright.,wry,jp,,not_recorded_in_this_package
+od_a3_after_soup_005,narrator,Narration,"The helper passes the next bowl. For once, no one tells them to hurry.",composed,jp_narration,,not_recorded_in_this_package
+od_a3_after_soup_006,oakhaven_innkeeper,Innkeeper,There is ordinary bread if you need something with fewer opinions.,warm,jp,,not_recorded_in_this_package
+od_a3_after_soup_007,nixie_vale,Nixie,I can support both kinds of food.,bright,jp,,not_recorded_in_this_package
+od_a3_after_soup_008,kera_voss,Kera,A scientifically fair response.,wry,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_2_001,oakhaven_innkeeper,Innkeeper,"After Crownfall, travelers stopped paying. So we stopped charging. Twice a day, a meal, no coin.",warm,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_2_002,fadyme,Fadyme,That is generous.,touched,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_2_003,oakhaven_innkeeper,Innkeeper,It is practical. A fed traveler says their name at the door. A hungry one slips past the register.,wry,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_2_004,mahmut,Mahmut,So the meal is a count.,observant,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_2_005,oakhaven_innkeeper,Innkeeper,"The meal is a meal, knight. The count is a bonus.",laughing,jp,,not_recorded_in_this_package
+od_a4_gap_001,od_guest,Guest,I can say a name. I do not think I can sing it in front of everyone.,hesitant,jp,,not_recorded_in_this_package
+od_a4_gap_002,pippa_bell,Pippa,Speaking is allowed to remain speaking.,gentle,jp,,not_recorded_in_this_package
+od_a4_gap_003,jori_flint,Jori,This seat is steady.,calm,jp,,not_recorded_in_this_package
+od_a4_gap_004,nixie_vale,Nixie,That is Jori's highest recommendation.,bright,jp,,not_recorded_in_this_package
+od_a4_gap_005,fadyme,Fadyme,You can sit before deciding how loud to be.,gentle,jp,,not_recorded_in_this_package
+od_a4_gap_006,mahmut,Mahmut,There is room to pass behind the chair.,calm,jp,,not_recorded_in_this_package
+od_a4_gap_007,narrator,Narration,"The guest touches the back of the chair, then looks toward the open square.",composed,jp_narration,,not_recorded_in_this_package
+od_a4_gap_008,pippa_bell,Pippa,We are comparing the chairs. You can help us settle the matter.,bright,jp,,not_recorded_in_this_package
+od_a4_gap_009,jori_flint,Jori,There is no matter. They are all chairs.,dry,jp,,not_recorded_in_this_package
+od_a4_gap_010,nixie_vale,Nixie,That is one side of the argument.,wry,jp,,not_recorded_in_this_package
+od_a4_gap_011,od_guest,Guest,This one is a very good chair.,small_smile,jp,,not_recorded_in_this_package
+od_a4_gap_012,fadyme,Fadyme,A decisive answer.,wry,jp,,not_recorded_in_this_package
+od_a4_gap_013,fadyme,Fadyme,I will sit here for a moment.,gentle,jp,,not_recorded_in_this_package
+od_a4_gap_014,od_guest,Guest,You do not have to.,quiet,jp,,not_recorded_in_this_package
+od_a4_gap_015,fadyme,Fadyme,I know. I would like to.,calm,jp,,not_recorded_in_this_package
+od_a4_gap_016,mahmut,Mahmut,I will bring the bread within reach.,calm,jp,,not_recorded_in_this_package
+od_a4_gap_017,narrator,Narration,The guest sits. The silence does not ask them to fill it.,composed,jp_narration,,not_recorded_in_this_package
+od_a4_join_echo_001,od_guest,Guest,Are you still arguing about the chairs?,small_smile,jp,,not_recorded_in_this_package
+od_a4_join_echo_002,nixie_vale,Nixie,We have moved on to bowls.,bright,jp,,not_recorded_in_this_package
+od_a4_join_echo_003,jori_flint,Jori,There is still no argument.,dry,jp,,not_recorded_in_this_package
+od_a4_join_echo_004,pippa_bell,Pippa,Stay here if you like. The song starts from wherever you are standing.,gentle,jp,,not_recorded_in_this_package
+od_a4_join_echo_005,narrator,Narration,The guest stays close enough to hear a familiar voice.,composed,jp_narration,,not_recorded_in_this_package
+od_a4_quiet_echo_001,od_guest,Guest,I thought I might listen from here.,quiet,jp,,not_recorded_in_this_package
+od_a4_quiet_echo_002,fadyme,Fadyme,It is a good place to listen.,gentle,jp,,not_recorded_in_this_package
+od_a4_quiet_echo_003,mahmut,Mahmut,Nobody needs to move closer.,calm,jp,,not_recorded_in_this_package
+od_a4_quiet_echo_004,pippa_bell,Pippa,"If you want to join, you will hear where your line belongs.",gentle,jp,,not_recorded_in_this_package
+od_a4_quiet_echo_005,narrator,Narration,The guest keeps the space they chose. The song can reach it.,composed,jp_narration,,not_recorded_in_this_package
+event_harvest_inn_meal_3_001,pippa_bell,Pippa,"Last verse! Everyone who brought a name, sing it with me!",joyful,jp,,not_recorded_in_this_package
+event_harvest_inn_meal_3_002,narrator,Narration,"Two hundred voices, off-key and loud. Somewhere, a bell rang, and nobody stopped singing.",warm,jp_narration,,not_recorded_in_this_package
+event_harvest_inn_meal_3_003,fadyme_thought,Fadyme (thought),"The bell cannot count a square this loud. For one night, it is losing.",content,jp_inner,,not_recorded_in_this_package
+od_a5_after_song_001,narrator,Narration,The verse ends before the square decides to become quiet.,composed,jp_narration,,not_recorded_in_this_package
+od_a5_after_song_002,pippa_bell,Pippa,They kept the long name in time.,quiet,jp,,not_recorded_in_this_package
+od_a5_after_song_003,nixie_vale,Nixie,Mostly.,bright,jp,,not_recorded_in_this_package
+od_a5_after_song_004,pippa_bell,Pippa,Mostly is a generous place to meet.,wry,jp,,not_recorded_in_this_package
+od_a5_after_song_005,jori_flint,Jori,Nobody spilled a bowl when they stood up.,calm,jp,,not_recorded_in_this_package
+od_a5_after_song_006,kera_voss,Kera,That is not solely the table's achievement.,focused,jp,,not_recorded_in_this_package
+od_a5_after_song_007,fadyme,Fadyme,You may share the credit with the soup.,wry,jp,,not_recorded_in_this_package
+od_a5_after_song_008,narrator,Narration,For a moment Mahmut looks at the empty bowls instead of the road out.,composed,jp_narration,,not_recorded_in_this_package
+od_a5_after_song_009,mahmut,Mahmut,We should help put these away.,quiet,jp,,not_recorded_in_this_package
+od_a5_after_song_010,oakhaven_innkeeper,Innkeeper,After you have finished sitting down.,warm,jp,,not_recorded_in_this_package
+od_a5_company_001,pippa_bell,Pippa,One last useful thing. A conversation nobody has to carry.,bright,jp,,not_recorded_in_this_package
+od_a5_company_002,jori_flint,Jori,You make everything sound like work.,dry,jp,,not_recorded_in_this_package
+od_a5_company_003,nixie_vale,Nixie,Only the enjoyable work.,wry,jp,,not_recorded_in_this_package
+od_a5_company_004,nixie_vale,Nixie,It did not move once.,bright,jp,,not_recorded_in_this_package
+od_a5_company_005,jori_flint,Jori,The pad fits.,calm,jp,,not_recorded_in_this_package
+od_a5_company_006,pippa_bell,Pippa,Someone sat in the middle instead of hiding it at the end.,gentle,jp,,not_recorded_in_this_package
+od_a5_company_007,jori_flint,Jori,That was the useful part.,quiet,jp,,not_recorded_in_this_package
+od_a5_company_008,narrator,Narration,Jori turns the chair to face the table again.,composed,jp_narration,,not_recorded_in_this_package
+od_a5_company_009,jori_flint,Jori,Leave it here. Somebody will need it tomorrow.,quiet,jp,,not_recorded_in_this_package
+od_a5_company_010,jori_flint,Jori,The helper found the storehouse without calling you.,calm,jp,,not_recorded_in_this_package
+od_a5_company_011,nixie_vale,Nixie,Good. They remembered the turn.,small_smile,jp,,not_recorded_in_this_package
+od_a5_company_012,pippa_bell,Pippa,And you got to sit down.,gentle,jp,,not_recorded_in_this_package
+od_a5_company_013,nixie_vale,Nixie,I thought I would be checking the turn all evening.,quiet,jp,,not_recorded_in_this_package
+od_a5_company_014,narrator,Narration,"She starts to rise for the next load, then sees the helper already teaching someone else the route.",composed,jp_narration,,not_recorded_in_this_package
+od_a5_company_015,nixie_vale,Nixie,Tomorrow I may draw a very good route to breakfast.,bright,jp,,not_recorded_in_this_package
+od_a5_company_016,jori_flint,Jori,Are you keeping the wrong notes?,curious,jp,,not_recorded_in_this_package
+od_a5_company_017,pippa_bell,Pippa,They were somebody's way of getting into the song.,gentle,jp,,not_recorded_in_this_package
+od_a5_company_018,nixie_vale,Nixie,Mine was particularly inventive.,bright,jp,,not_recorded_in_this_package
+od_a5_company_019,pippa_bell,Pippa,I have made a respectful note of it.,wry,jp,,not_recorded_in_this_package
+od_a5_company_020,narrator,Narration,Pippa folds the sheet with the corrections still visible.,composed,jp_narration,,not_recorded_in_this_package
+od_a5_company_021,pippa_bell,Pippa,I will not make it tidier than the evening was.,quiet,jp,,not_recorded_in_this_package
+od_a5_end_001,narrator,Narration,"The bowls go back in stacks. The chairs go back one at a time, except the repaired one.",composed,jp_narration,,not_recorded_in_this_package
+od_a5_end_002,oakhaven_innkeeper,Innkeeper,That one can stay.,warm,jp,,not_recorded_in_this_package
+od_a5_end_003,jori_flint,Jori,It will need a dry place if it rains.,quiet,jp,,not_recorded_in_this_package
+od_a5_end_004,nixie_vale,Nixie,There is a very good way to the storehouse.,bright,jp,,not_recorded_in_this_package
+od_a5_end_005,pippa_bell,Pippa,And there is room left on the next sheet.,gentle,jp,,not_recorded_in_this_package
+od_a5_end_006,kera_voss,Kera,I may revise my contribution.,wry,jp,,not_recorded_in_this_package
+od_a5_end_007,fadyme,Fadyme,A table for everyone. A pot for the very brave.,wry,jp,,not_recorded_in_this_package
+od_a5_end_008,mahmut,Mahmut,Come on. Before she explains the recipe.,calm,jp,,not_recorded_in_this_package
+od_a5_end_009,narrator,Narration,They leave a clear space between the tables. It will be useful when someone arrives tomorrow.,composed,jp_narration,,not_recorded_in_this_package

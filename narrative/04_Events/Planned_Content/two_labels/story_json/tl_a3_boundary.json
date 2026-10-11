@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a3_boundary",
+  "title_en": "A Lantern at the Boundary",
+  "location_id": "tl_harbor_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_harbor_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_threat"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_boundary_001",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The next lane is not clear. The dead are turning at the net racks.",
+      "emotion": "serious"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_boundary_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "The people inside stay inside. We do not carry the queue into this.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_boundary_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "There is one crate left for the far end of the harbor.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_boundary_004",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "It stays behind the door until we can carry it safely.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_boundary_005",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "We will need room behind the front line. If they reach the turn, they will spread along it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_boundary_006",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Check the kit before we step out. Recovery matters more than looking fast.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_boundary_007",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "And if we surveyed the approach, we use what we saw.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a3_boundary_008",
+      "text": "Iona hangs the lantern where both the door and the turn remain visible."
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_boundary_009",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "A boundary. Not a lure.",
+      "emotion": "calm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a3_boundary_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

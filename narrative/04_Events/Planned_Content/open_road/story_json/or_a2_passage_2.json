@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a2_passage_2",
+  "title_en": "Leave the Opening",
+  "location_id": "or_waiting_lane",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_waiting_lane"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_passage_2_001",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "Water within reach of someone seated. Extra cloth behind it, where it stays dry.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_passage_2_002",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "And nobody waits inside the opening, even when the bench is full.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_passage_2_003",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "What do you do when it is full?",
+      "emotion": "measured"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_passage_2_004",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "Ask the next group to stop on the firm ground here. I do not press them against the exit.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_passage_2_005",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Good. That is a place, not a crowd.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "or_a2_passage_2_006",
+      "text": "Marek puts the empty basket down where its owner can find it again."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a2_passage_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

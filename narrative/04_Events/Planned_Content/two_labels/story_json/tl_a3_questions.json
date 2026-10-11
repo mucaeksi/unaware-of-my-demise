@@ -1,0 +1,358 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a3_questions",
+  "title_en": "A Line for Questions",
+  "location_id": "tl_clinic_table",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_clinic_table"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_001",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The label is correct.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "You have told the bottle. Tell the person.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Dose, contents, maker. What else?",
+      "emotion": "annoyed"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_004",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "What they may ask before they take it.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_005",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "And whether they can say no.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_006",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Fine. I am adding a line.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_007",
+      "speaker": "tl_patient",
+      "speaker_display": "Patient",
+      "text": "Will you tell us what is in it, or just tell us it works?",
+      "emotion": "worried"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a3_questions_008",
+      "text": "Kera takes her hand off the nearest bottle. There is room for the question on the table."
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "choice",
+      "prompt": "How should the group begin?",
+      "options": [
+        {
+          "id": "tl_approach_show",
+          "text": "Show the sealed supplies and explain.",
+          "goto": "show"
+        },
+        {
+          "id": "tl_approach_listen",
+          "text": "Ask what worries them first.",
+          "goto": "listen"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "show"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_009",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "You may watch from that side of the table. These stay sealed until Tilda needs them.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_010",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "That means she is pleased you asked.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_011",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "It means the table has sides for a reason.",
+      "emotion": "annoyed"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_012",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Ask us to stop if something is unclear.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_013",
+      "speaker": "tl_patient",
+      "speaker_display": "Patient",
+      "text": "Can the others watch too?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_014",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Yes. Leave room for the person being treated.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_015",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I will move the bench where they can see.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "listen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_016",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "What would you like to know first?",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_017",
+      "speaker": "tl_patient",
+      "speaker_display": "Patient",
+      "text": "Why does the same Guild sell one bottle and give away another?",
+      "emotion": "worried"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_018",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "We are the archive wing. We made these, and we are responsible for what we brought.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_019",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "You are right to ask. We will answer what we know and say when we do not.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_020",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "You can keep asking after the bottles are gone.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_021",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Preferably before I pack the table.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_questions_022",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The table stays here.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a3_questions_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

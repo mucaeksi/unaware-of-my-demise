@@ -1,0 +1,19 @@
+{
+  "event_id": "side_quest_last_traveler",
+  "gate": {
+    "after_stage": "1-4",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "physical_character_earliest_stages": {
+    "brin_alder": "1-2",
+    "nixie_vale": "1-4",
+    "fadyme": "1-1",
+    "mahmut": "1-1"
+  },
+  "timeline_tr": "1-4 sonrası mevcut yol aralığı. Brin’in 2-1 ayrılışı, babası ve Nixie’nin soy/false-map sırları korunur.",
+  "core_action_tr": "Geçidi okumak ve küçük fiziksel hazırlık",
+  "new_text_status": "authored_narrative_for_future_patch; not a replacement of canon main story",
+  "source_main": "99df3cf"
+}

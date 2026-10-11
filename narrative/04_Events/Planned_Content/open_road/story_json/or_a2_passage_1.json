@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a2_passage_1",
+  "title_en": "Walk It Once",
+  "location_id": "or_waiting_lane",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_waiting_lane"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_passage_1_001",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "Here I would stop. I cannot see whether that space is for waiting or passing.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_passage_1_002",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Then separate the bench from the opening. Do not make the tired person guess.",
+      "emotion": "measured"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_passage_1_003",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "The supply basket can wait inside the marked space.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_passage_1_004",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "That leaves the turn open.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_passage_1_005",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Try it again from the other side. Nobody arriving owes us knowledge of the first side.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "or_a2_passage_1_006",
+      "text": "The volunteer returns by the same clear opening, without taking the shortest line across the bench."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a2_passage_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

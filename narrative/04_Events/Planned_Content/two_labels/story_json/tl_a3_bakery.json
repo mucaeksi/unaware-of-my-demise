@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a3_bakery",
+  "title_en": "The Bakery Door",
+  "location_id": "tl_clinic_table",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_clinic_table"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_001",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "You can use the side room. The table is clean enough for bread. I do not know about medicine.",
+      "emotion": "guarded"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Then we clean it once more. Thank you.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_003",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "We will not need the ovens.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_004",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "Good. They are occupied.",
+      "emotion": "dry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a3_bakery_005",
+      "text": "The baker notices Odelia's cap, then looks back at the crates. Recognition is left unspoken."
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_006",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "A free bottle usually comes with a second question.",
+      "emotion": "guarded"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_007",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Mine comes with instructions.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_008",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "And after the instructions?",
+      "emotion": "serious"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_009",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "You may ask us something. You do not owe us an answer.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_010",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Nobody is giving a blood sample, signing a debt, or promising a favor for this treatment.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_011",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I will write that down.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a3_bakery_012",
+      "speaker": "tl_baker",
+      "speaker_display": "Baker",
+      "text": "Write it where the next person can see it.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a3_bakery_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a4_end",
+  "title_en": "Two Dry Places",
+  "location_id": "dr_refuge_desk",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_desk"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a4_end_001",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "The record has somewhere to wait. So do the people.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a4_end_002",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "I may borrow that wording for the shelf rules.",
+      "emotion": "wry"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a4_end_003",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "You may. Keep the shelf within reach.",
+      "emotion": "warm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a4_end_004",
+      "text": "Mirel sets a dry board beneath the next slip. Aveline opens space for the next reader."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a4_end_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,138 @@
+line_id,speaker_id,speaker_display,text_en,emotion,voice_track,text_ja,recording_status
+tw_a1_road_001,narrator,Narration,The highland road has more footsteps than carts today. People carry wrapped food and small lamps that will not be needed until they come down.,composed,jp_narration,,not_recorded_in_this_package
+tw_a1_road_002,tw_guide,Guide,We leave the narrow shelf for anyone coming back. The watchers go up on this side.,calm,jp,,not_recorded_in_this_package
+tw_a1_road_003,clem_marr,Clem,Watchers. That sounds more respectable than people looking at the sky.,curious,jp,,not_recorded_in_this_package
+tw_a1_road_004,tw_lantern_carrier,Lantern Carrier,It sounds shorter when you need them to move.,wry,jp,,not_recorded_in_this_package
+tw_a1_road_005,thistle_roe,Thistle,There is room to rest before the climb?,gentle,jp,,not_recorded_in_this_package
+tw_a1_road_006,tw_guide,Guide,"At the lower terrace. And at the ridge, if you do not crowd its edge.",warm,jp,,not_recorded_in_this_package
+tw_a1_road_007,vespera_wisp,Vespera,Then we can see without making someone stand where they should not.,quiet,jp,,not_recorded_in_this_package
+tw_a1_road_008,narrator,Narration,"The guide and lantern carrier stay with the three travelers, a small group inside the larger procession.",composed,jp_narration,,not_recorded_in_this_package
+event_sun_eclipse_day_1_001,clem_marr,Clem,Sun-Eclipse Day. Once a year the villages say the black sun breathes.,curious,jp,,not_recorded_in_this_package
+event_sun_eclipse_day_1_002,vespera_wisp,Vespera,Does it?,dry,jp,,not_recorded_in_this_package
+event_sun_eclipse_day_1_003,clem_marr,Clem,Every grave-keeper's record says yes. Every scholar's says no. I trust grave-keepers.,cheerful,jp,,not_recorded_in_this_package
+tw_a1_questions_001,clem_marr,Clem,I would like to read the village record after we watch.,bright,jp,,not_recorded_in_this_package
+tw_a1_questions_002,vespera_wisp,Vespera,Before and after would be better.,dry,jp,,not_recorded_in_this_package
+tw_a1_questions_003,clem_marr,Clem,You think they will change it?,curious,jp,,not_recorded_in_this_package
+tw_a1_questions_004,vespera_wisp,Vespera,I think we will ask different questions after seeing something.,quiet,jp,,not_recorded_in_this_package
+tw_a1_questions_005,thistle_roe,Thistle,And we should choose a place before the crowd fills it.,focused,jp,,not_recorded_in_this_package
+tw_a1_questions_006,tw_guide,Guide,The open ridge gives a wider view. The terrace gives firmer room behind you.,calm,jp,,not_recorded_in_this_package
+tw_a1_questions_007,tw_lantern_carrier,Lantern Carrier,We can reach either. The first turn needs clearing before the slower walkers come.,focused,jp,,not_recorded_in_this_package
+tw_a1_place_001,tw_guide,Guide,The open path lets the far threats reach around. On the terrace path the closest dead press harder.,focused,jp,,not_recorded_in_this_package
+tw_a1_place_002,thistle_roe,Thistle,We can prepare for either. Nobody goes ahead of the clear road.,calm,jp,,not_recorded_in_this_package
+tw_a1_place_003,vespera_wisp,Vespera,Choose where we stand. It will not choose what the sky does.,quiet,jp,,not_recorded_in_this_package
+tw_a1_place_004,clem_marr,Clem,Wide view. I can write what changed without borrowing someone’s shoulder.,bright,jp,,not_recorded_in_this_package
+tw_a1_place_005,thistle_roe,Thistle,And I will keep a place behind the first row for anyone needing to sit.,focused,jp,,not_recorded_in_this_package
+tw_a1_place_006,thistle_roe,Thistle,"Firm ground, and room to stop. That will help people look without leaning.",focused,jp,,not_recorded_in_this_package
+tw_a1_place_007,vespera_wisp,Vespera,A narrower view can still be an honest one.,quiet,jp,,not_recorded_in_this_package
+tw_a2_ridge_1_001,tw_guide,Guide,Wait below the white stone. We clear the turn before anyone climbs past it.,focused,jp,,not_recorded_in_this_package
+tw_a2_ridge_1_002,clem_marr,Clem,The one at the back is reaching around the nearest bodies.,serious,jp,,not_recorded_in_this_package
+tw_a2_ridge_1_003,vespera_wisp,Vespera,Notice the reach. Do not follow it off the firm line.,focused,jp,,not_recorded_in_this_package
+tw_a2_ridge_1_004,thistle_roe,Thistle,There is room for the rear to stay together here.,focused,jp,,not_recorded_in_this_package
+tw_a2_ridge_1_005,narrator,Narration,The lantern carrier sets the wrapped lamps down on safe ground.,composed,jp_narration,,not_recorded_in_this_package
+tw_a2_ridge_2_001,clem_marr,Clem,"I can see the valley mouth, but not the road behind that rise.",focused,jp,,not_recorded_in_this_package
+tw_a2_ridge_2_002,vespera_wisp,Vespera,Write both. A limit is part of a useful account.,quiet,jp,,not_recorded_in_this_package
+tw_a2_ridge_2_003,clem_marr,Clem,The grave-keepers are less demanding.,wry,jp,,not_recorded_in_this_package
+tw_a2_ridge_2_004,tw_guide,Guide,The grave-keepers ask which stone you actually saw.,calm,jp,,not_recorded_in_this_package
+tw_a2_ridge_2_005,clem_marr,Clem,A fair correction. I like this village already.,bright,jp,,not_recorded_in_this_package
+tw_a2_ridge_2_006,narrator,Narration,Thistle checks the firm edge while the group climbs into the cleared turn.,composed,jp_narration,,not_recorded_in_this_package
+tw_a2_ridge_3_001,tw_lantern_carrier,Lantern Carrier,The ridge opens beyond this stretch. Nobody climbs round the dead to save time.,focused,jp,,not_recorded_in_this_package
+tw_a2_ridge_3_002,thistle_roe,Thistle,The nearest one holds the line. Something behind it is keeping it moving.,focused,jp,,not_recorded_in_this_package
+tw_a2_ridge_3_003,vespera_wisp,Vespera,Then notice the support and the reach together.,focused,jp,,not_recorded_in_this_package
+tw_a2_ridge_3_004,clem_marr,Clem,Two things to write down after. One thing to choose first.,serious,jp,,not_recorded_in_this_package
+tw_a2_ridge_3_005,narrator,Narration,The group leaves its waiting space clear before stepping forward.,composed,jp_narration,,not_recorded_in_this_package
+tw_a2_ridge_4_001,tw_guide,Guide,Here. You can see without standing at the edge.,calm,jp,,not_recorded_in_this_package
+tw_a2_ridge_4_002,thistle_roe,Thistle,Leave this space for anyone who needs to sit.,focused,jp,,not_recorded_in_this_package
+tw_a2_ridge_4_003,clem_marr,Clem,The mountain looks closer than it did from the road.,quiet,jp,,not_recorded_in_this_package
+tw_a2_ridge_4_004,vespera_wisp,Vespera,The distance has not changed. Our view has.,quiet,jp,,not_recorded_in_this_package
+tw_a2_ridge_4_005,tw_lantern_carrier,Lantern Carrier,That is a good reason to climb. A worse reason to lean.,wry,jp,,not_recorded_in_this_package
+tw_a2_ridge_4_006,narrator,Narration,The lamps remain wrapped. There is enough daylight to see one another’s faces.,composed,jp_narration,,not_recorded_in_this_package
+tw_a2_terrace_1_001,tw_guide,Guide,This bend stays for waiting. The next stretch stays for the fight.,focused,jp,,not_recorded_in_this_package
+tw_a2_terrace_1_002,thistle_roe,Thistle,"Two close threats, and a supporting one behind them.",focused,jp,,not_recorded_in_this_package
+tw_a2_terrace_1_003,vespera_wisp,Vespera,Hold the line where the ground is firm. You do not need to win the whole path at once.,focused,jp,,not_recorded_in_this_package
+tw_a2_terrace_1_004,clem_marr,Clem,The watchers can see us from below. Let us leave them a clear way up.,quiet,jp,,not_recorded_in_this_package
+tw_a2_terrace_1_005,narrator,Narration,The carrier keeps the lamps beside the waiting bench.,composed,jp_narration,,not_recorded_in_this_package
+tw_a2_terrace_2_001,thistle_roe,Thistle,The bench is low enough to sit without blocking anyone’s view.,focused,jp,,not_recorded_in_this_package
+tw_a2_terrace_2_002,clem_marr,Clem,I see less of the valley from here.,curious,jp,,not_recorded_in_this_package
+tw_a2_terrace_2_003,vespera_wisp,Vespera,Then write less of the valley. There is no duty to invent the part behind stone.,quiet,jp,,not_recorded_in_this_package
+tw_a2_terrace_2_004,tw_lantern_carrier,Lantern Carrier,The people who sat here last year survived with very modest views.,wry,jp,,not_recorded_in_this_package
+tw_a2_terrace_2_005,tw_guide,Guide,There is more to see when people are not trying to see over one another.,calm,jp,,not_recorded_in_this_package
+tw_a2_terrace_2_006,narrator,Narration,"Thistle moves a loose basket out of the walking space, not into the sight line.",composed,jp_narration,,not_recorded_in_this_package
+tw_a2_terrace_3_001,tw_guide,Guide,The upper landing is not clear yet. The terrace remains safe while we make it so.,focused,jp,,not_recorded_in_this_package
+tw_a2_terrace_3_002,thistle_roe,Thistle,The support is behind the nearest dead. I can hold while it is chosen.,focused,jp,,not_recorded_in_this_package
+tw_a2_terrace_3_003,vespera_wisp,Vespera,A steady opening. Keep it rather than chasing the first gap.,focused,jp,,not_recorded_in_this_package
+tw_a2_terrace_3_004,clem_marr,Clem,Nobody watching needs to join the fight to earn the view.,serious,jp,,not_recorded_in_this_package
+tw_a2_terrace_3_005,narrator,Narration,The group steps toward the landing. The villagers stay seated until the road is open.,composed,jp_narration,,not_recorded_in_this_package
+tw_a2_terrace_4_001,tw_lantern_carrier,Lantern Carrier,There. The rim of the black sun is above that shoulder of rock.,calm,jp,,not_recorded_in_this_package
+tw_a2_terrace_4_002,clem_marr,Clem,I can see it from the bench.,curious,jp,,not_recorded_in_this_package
+tw_a2_terrace_4_003,thistle_roe,Thistle,That was the useful part of the plan.,gentle,jp,,not_recorded_in_this_package
+tw_a2_terrace_4_004,vespera_wisp,Vespera,Keep your account at the height of your own eyes.,quiet,jp,,not_recorded_in_this_package
+tw_a2_terrace_4_005,tw_guide,Guide,And your feet on this side of the last stone.,warm,jp,,not_recorded_in_this_package
+tw_a2_terrace_4_006,narrator,Narration,The little group watches with the other villagers. Nobody needs to hold someone else upright to see.,composed,jp_narration,,not_recorded_in_this_package
+event_sun_eclipse_day_2_001,thistle_roe,Thistle,The owing-bells are all opening. All of them. The whole ridge.,frightened,jp,,not_recorded_in_this_package
+event_sun_eclipse_day_2_002,vespera_wisp,Vespera,"It is not breathing. It is recounting. Every owed hour in the valley, checked at once.",grave,jp,,not_recorded_in_this_package
+event_sun_eclipse_day_2_003,thistle_roe,Thistle,Why t-today?,tense,jp,,not_recorded_in_this_package
+event_sun_eclipse_day_2_004,vespera_wisp,Vespera,Because someone set a day for it. Machines keep calendars. So do chancellors.,quiet,jp,,not_recorded_in_this_package
+tw_a3_after_001,narrator,Narration,The humming leaves the air before the crowd remembers how to speak at its usual volume.,composed,jp_narration,,not_recorded_in_this_package
+tw_a3_after_002,tw_lantern_carrier,Lantern Carrier,I heard mine with the valley’s. I have never heard it like that.,quiet,jp,,not_recorded_in_this_package
+tw_a3_after_003,thistle_roe,Thistle,Sit for a moment. You do not have to stand while you find the words.,gentle,jp,,not_recorded_in_this_package
+tw_a3_after_004,clem_marr,Clem,I will write that the rim flickered and the bells answered together.,serious,jp,,not_recorded_in_this_package
+tw_a3_after_005,vespera_wisp,Vespera,"And keep the explanation beside it, rather than inside the observation.",quiet,jp,,not_recorded_in_this_package
+tw_a3_after_006,tw_guide,Guide,We go down in small groups. The road has not become wider because everyone wants it now.,calm,jp,,not_recorded_in_this_package
+tw_a3_account_001,clem_marr,Clem,The guide keeps a record of what the watchers noticed. I can help make today’s useful.,focused,jp,,not_recorded_in_this_package
+tw_a3_account_002,thistle_roe,Thistle,People may remember the sound before they remember the sky.,gentle,jp,,not_recorded_in_this_package
+tw_a3_account_003,vespera_wisp,Vespera,We need not make all memories look alike.,quiet,jp,,not_recorded_in_this_package
+tw_a3_account_004,clem_marr,Clem,The rim flickered. I will say where we stood when we saw it.,focused,jp,,not_recorded_in_this_package
+tw_a3_account_005,vespera_wisp,Vespera,And where the stone interrupted the view.,quiet,jp,,not_recorded_in_this_package
+tw_a3_account_006,tw_guide,Guide,That will help the next reader understand what you actually saw.,calm,jp,,not_recorded_in_this_package
+tw_a3_account_007,thistle_roe,Thistle,We can start with the sound. You do not have to explain the whole valley.,gentle,jp,,not_recorded_in_this_package
+tw_a3_account_008,tw_lantern_carrier,Lantern Carrier,Mine joined the others. That is what I know.,quiet,jp,,not_recorded_in_this_package
+tw_a3_account_009,clem_marr,Clem,Then that is the line I will keep beside what we saw.,focused,jp,,not_recorded_in_this_package
+tw_a4_descent_001,tw_guide,Guide,The lower return path is blocked. Wait at the landing until we clear it.,focused,jp,,not_recorded_in_this_package
+tw_a4_descent_002,thistle_roe,Thistle,The people behind us have space to rest. Keep that space out of the fight.,focused,jp,,not_recorded_in_this_package
+tw_a4_descent_003,vespera_wisp,Vespera,A reaching threat and a support. Read both before we move.,focused,jp,,not_recorded_in_this_package
+tw_a4_descent_004,clem_marr,Clem,We do not need a battle to explain the sky. We do need one to open this road.,serious,jp,,not_recorded_in_this_package
+tw_a4_descent_005,narrator,Narration,The lantern carrier leaves the lamps at the landing. The travelers face the known dead below it.,composed,jp_narration,,not_recorded_in_this_package
+tw_a4_clear_001,tw_guide,Guide,The turn is clear. The first group can go at its own pace.,calm,jp,,not_recorded_in_this_package
+tw_a4_clear_002,tw_lantern_carrier,Lantern Carrier,I can carry the lamps without asking everyone to hurry.,relieved,jp,,not_recorded_in_this_package
+tw_a4_clear_003,thistle_roe,Thistle,Good. Somebody will still need light lower down.,gentle,jp,,not_recorded_in_this_package
+tw_a4_clear_004,vespera_wisp,Vespera,"Let the road decide the pace, rather than the fear.",quiet,jp,,not_recorded_in_this_package
+tw_a4_clear_005,narrator,Narration,Clem folds the account away before helping the next watcher stand.,composed,jp_narration,,not_recorded_in_this_package
+tw_a4_seen_001,tw_guide,Guide,You wrote that the rise hid part of the valley.,focused,jp,,not_recorded_in_this_package
+tw_a4_seen_002,clem_marr,Clem,It did. I was tempted to borrow the wider view from the person beside me.,calm,jp,,not_recorded_in_this_package
+tw_a4_seen_003,vespera_wisp,Vespera,You may quote them. You may not pretend their eyes were yours.,quiet,jp,,not_recorded_in_this_package
+tw_a4_seen_004,clem_marr,Clem,A demanding village record. I am beginning to approve of it.,wry,jp,,not_recorded_in_this_package
+tw_a4_seen_005,narrator,Narration,The guide leaves room beside Clem’s account for another watcher to add their own.,composed,jp_narration,,not_recorded_in_this_package
+tw_a4_heard_001,tw_lantern_carrier,Lantern Carrier,Will you write that I was frightened?,quiet,jp,,not_recorded_in_this_package
+tw_a4_heard_002,clem_marr,Clem,If that is part you want kept. Or only the sound.,gentle,jp,,not_recorded_in_this_package
+tw_a4_heard_003,thistle_roe,Thistle,You get to choose your own line.,gentle,jp,,not_recorded_in_this_package
+tw_a4_heard_004,tw_lantern_carrier,Lantern Carrier,The sound first. I will decide about the rest later.,calm,jp,,not_recorded_in_this_package
+tw_a4_heard_005,narrator,Narration,Clem writes the short account and reads it back at the carrier’s pace.,composed,jp_narration,,not_recorded_in_this_package
+event_sun_eclipse_day_3_001,clem_marr,Clem,Sun-Eclipse tokens. Superstition. I am keeping five.,delighted,jp,,not_recorded_in_this_package
+event_sun_eclipse_day_3_002,thistle_roe,Thistle,Why five?,curious,jp,,not_recorded_in_this_package
+event_sun_eclipse_day_3_003,clem_marr,Clem,One for each of us who watched. So somebody knows we were here.,gentle,jp,,not_recorded_in_this_package
+tw_a5_token_001,tw_guide,Guide,You have enough for the little group. You may take them.,warm,jp,,not_recorded_in_this_package
+tw_a5_token_002,clem_marr,Clem,I did count before keeping five. I am capable of restraint when given clear instructions.,bright,jp,,not_recorded_in_this_package
+tw_a5_token_003,vespera_wisp,Vespera,You asked whether there were larger ones.,dry,jp,,not_recorded_in_this_package
+tw_a5_token_004,clem_marr,Clem,A separate inquiry.,wry,jp,,not_recorded_in_this_package
+tw_a5_token_005,thistle_roe,Thistle,It will be easier to remember where we stood than what we were afraid of.,gentle,jp,,not_recorded_in_this_package
+tw_a5_token_006,tw_lantern_carrier,Lantern Carrier,I would like both to be remembered honestly.,quiet,jp,,not_recorded_in_this_package
+tw_a5_token_007,narrator,Narration,Clem wraps the five pieces in cloth. None has made the bells quiet or the day’s account complete.,composed,jp_narration,,not_recorded_in_this_package
+tw_a5_company_001,narrator,Narration,The guide folds the village record. The three travelers have a quiet moment before taking their established road again.,composed,jp_narration,,not_recorded_in_this_package
+tw_a5_company_002,clem_marr,Clem,The guide did not ask me to write the best account. Only my own.,quiet,jp,,not_recorded_in_this_package
+tw_a5_company_003,vespera_wisp,Vespera,That is a better record than one with no room left.,quiet,jp,,not_recorded_in_this_package
+tw_a5_company_004,clem_marr,Clem,I will leave room. Even if the next watcher has dreadful handwriting.,small_smile,jp,,not_recorded_in_this_package
+tw_a5_company_005,narrator,Narration,She makes the margin a little wider before folding the page.,composed,jp_narration,,not_recorded_in_this_package
+tw_a5_company_006,thistle_roe,Thistle,You still have questions.,gentle,jp,,not_recorded_in_this_package
+tw_a5_company_007,vespera_wisp,Vespera,Yes. I have better boundaries for them now.,quiet,jp,,not_recorded_in_this_package
+tw_a5_company_008,clem_marr,Clem,I may borrow that phrase.,curious,jp,,not_recorded_in_this_package
+tw_a5_company_009,vespera_wisp,Vespera,Borrow the boundaries too.,dry,jp,,not_recorded_in_this_package
+tw_a5_company_010,thistle_roe,Thistle,They kept asking what the sound meant. I could only give them a place to sit.,quiet,jp,,not_recorded_in_this_package
+tw_a5_company_011,clem_marr,Clem,They asked more clearly after they sat down.,gentle,jp,,not_recorded_in_this_package
+tw_a5_company_012,vespera_wisp,Vespera,A useful place is an answer to a useful question.,quiet,jp,,not_recorded_in_this_package
+tw_a5_company_013,narrator,Narration,Thistle checks that the bench is dry before leaving it for the next watcher.,composed,jp_narration,,not_recorded_in_this_package
+tw_a5_end_001,tw_guide,Guide,Your road continues past the lower terrace. Keep to the firm side when it turns.,calm,jp,,not_recorded_in_this_package
+tw_a5_end_002,clem_marr,Clem,And keep the village account. I would like to read it again if I come this way.,bright,jp,,not_recorded_in_this_package
+tw_a5_end_003,tw_lantern_carrier,Lantern Carrier,It has room for another visit.,warm,jp,,not_recorded_in_this_package
+tw_a5_end_004,thistle_roe,Thistle,Thank you for the place to sit.,gentle,jp,,not_recorded_in_this_package
+tw_a5_end_005,vespera_wisp,Vespera,And for not asking the sky to become simpler than it was.,quiet,jp,,not_recorded_in_this_package
+tw_a5_end_006,narrator,Narration,"The travelers leave on the road they were already taking. Behind them, the village keeps several accounts of one noon.",composed,jp_narration,,not_recorded_in_this_package

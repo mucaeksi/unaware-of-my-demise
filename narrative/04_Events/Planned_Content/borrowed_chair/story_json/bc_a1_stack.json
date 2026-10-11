@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "scene_id": "bc_a1_stack",
+  "title_en": "One of the Returning Chairs",
+  "location_id": "oakhaven_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "oakhaven_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "bc_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "bc_a1_stack_001",
+      "text": "Among the chairs going home, one has a strip of red cloth tied beneath the seat. Jori checks the knot before lifting it."
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a1_stack_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "This one belongs to the house with the low door.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a1_stack_003",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "I remember the owner. She brought the sharp little onions.",
+      "emotion": "bright"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a1_stack_004",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "You remember everybody by the sound or the food.",
+      "emotion": "dry"
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a1_stack_005",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "Very reliable methods of finding people at supper.",
+      "emotion": "wry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "bc_a1_stack_006",
+      "text": "The repaired chair stays in the square, where the innkeeper said it could stay."
+    },
+    {
+      "op": "say",
+      "line_id": "bc_a1_stack_007",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Take the other side. The door is lower than the chair is wide.",
+      "emotion": "calm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "bc_a1_stack_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_story_borrowed_chair/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

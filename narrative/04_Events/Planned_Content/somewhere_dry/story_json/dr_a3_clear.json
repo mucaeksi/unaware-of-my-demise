@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a3_clear",
+  "title_en": "A Passage for Readers",
+  "location_id": "dr_refuge_passage",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_passage"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a3_clear_001",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Clear. Bring the board when you are ready.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a3_clear_002",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "The slips are still in order.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a3_clear_003",
+      "speaker": "dr_carrier",
+      "speaker_display": "Carrier",
+      "text": "And I know where to bring the bundle.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a3_clear_004",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Good. Let someone else carry it through the door with you.",
+      "emotion": "warm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a3_clear_005",
+      "text": "The next reader comes inside without balancing over a crate."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a3_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

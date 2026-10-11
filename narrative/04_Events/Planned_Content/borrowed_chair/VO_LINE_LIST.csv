@@ -1,0 +1,38 @@
+line_id,speaker_id,speaker_display,text_en,emotion,voice_track,text_ja,recording_status
+bc_a1_stack_001,narrator,Narration,"Among the chairs going home, one has a strip of red cloth tied beneath the seat. Jori checks the knot before lifting it.",composed,jp_narration,,not_recorded_in_this_package
+bc_a1_stack_002,jori_flint,Jori,This one belongs to the house with the low door.,focused,jp,,not_recorded_in_this_package
+bc_a1_stack_003,pippa_bell,Pippa,I remember the owner. She brought the sharp little onions.,bright,jp,,not_recorded_in_this_package
+bc_a1_stack_004,jori_flint,Jori,You remember everybody by the sound or the food.,dry,jp,,not_recorded_in_this_package
+bc_a1_stack_005,pippa_bell,Pippa,Very reliable methods of finding people at supper.,wry,jp,,not_recorded_in_this_package
+bc_a1_stack_006,narrator,Narration,"The repaired chair stays in the square, where the innkeeper said it could stay.",composed,jp_narration,,not_recorded_in_this_package
+bc_a1_stack_007,jori_flint,Jori,Take the other side. The door is lower than the chair is wide.,calm,jp,,not_recorded_in_this_package
+bc_a1_walk_001,pippa_bell,Pippa,I could make a verse of the return journey.,bright,jp,,not_recorded_in_this_package
+bc_a1_walk_002,jori_flint,Jori,It is twelve steps.,dry,jp,,not_recorded_in_this_package
+bc_a1_walk_003,pippa_bell,Pippa,A short verse.,wry,jp,,not_recorded_in_this_package
+bc_a1_walk_004,jori_flint,Jori,Keep your hand under the seat. That will be more useful.,calm,jp,,not_recorded_in_this_package
+bc_a1_walk_005,narrator,Narration,Pippa adjusts her grip. They reach the door without an audience following them.,composed,jp_narration,,not_recorded_in_this_package
+bc_a1_walk_006,pippa_bell,Pippa,Useful can be quiet. I am practicing.,quiet,jp,,not_recorded_in_this_package
+bc_a2_door_001,bc_householder,Householder,There it is. I thought you might decide it belonged to the square now.,warm,jp,,not_recorded_in_this_package
+bc_a2_door_002,jori_flint,Jori,It belonged to the square for supper. It belongs here again.,calm,jp,,not_recorded_in_this_package
+bc_a2_door_003,pippa_bell,Pippa,It had a very good evening.,gentle,jp,,not_recorded_in_this_package
+bc_a2_door_004,bc_householder,Householder,It is a chair. I had the evening.,wry,jp,,not_recorded_in_this_package
+bc_a2_door_005,narrator,Narration,Jori turns the seat to pass the threshold without scraping it.,composed,jp_narration,,not_recorded_in_this_package
+bc_a2_door_006,jori_flint,Jori,The brace held. Thank you for lending something you use.,quiet,jp,,not_recorded_in_this_package
+bc_a2_door_007,bc_householder,Householder,I sit here when I peel onions. Tonight somebody else got the seat.,warm,jp,,not_recorded_in_this_package
+bc_a2_door_008,jori_flint,Jori,Then we brought it back before the next bowl of onions.,calm,jp,,not_recorded_in_this_package
+bc_a2_door_009,pippa_bell,Pippa,A considerate timetable.,wry,jp,,not_recorded_in_this_package
+bc_a2_door_010,pippa_bell,Pippa,I saw you laugh before the last verse. Jori was defending the soup from criticism.,gentle,jp,,not_recorded_in_this_package
+bc_a2_door_011,jori_flint,Jori,I was criticizing the soup.,dry,jp,,not_recorded_in_this_package
+bc_a2_door_012,bc_householder,Householder,Yes. That was the part I liked.,amused,jp,,not_recorded_in_this_package
+bc_a2_door_013,pippa_bell,Pippa,Then that is a very good part to keep.,small_smile,jp,,not_recorded_in_this_package
+bc_a3_inside_001,narrator,Narration,The chair returns to the patch of floor beside the low window. The owner rests one hand on its back.,composed,jp_narration,,not_recorded_in_this_package
+bc_a3_inside_002,bc_householder,Householder,The square sounded different with everybody sitting close.,quiet,jp,,not_recorded_in_this_package
+bc_a3_inside_003,pippa_bell,Pippa,Will you lend it again?,gentle,jp,,not_recorded_in_this_package
+bc_a3_inside_004,bc_householder,Householder,Ask when there is another supper. I might bring onions again.,warm,jp,,not_recorded_in_this_package
+bc_a3_inside_005,jori_flint,Jori,We will remember the door.,calm,jp,,not_recorded_in_this_package
+bc_a3_inside_006,narrator,Narration,The red cloth stays tied beneath the seat. It catches the light from the low window.,composed,jp_narration,,not_recorded_in_this_package
+bc_a3_end_001,pippa_bell,Pippa,She kept a different part of the evening than I did.,quiet,jp,,not_recorded_in_this_package
+bc_a3_end_002,jori_flint,Jori,She was sitting somewhere else.,calm,jp,,not_recorded_in_this_package
+bc_a3_end_003,pippa_bell,Pippa,That is annoyingly sensible.,wry,jp,,not_recorded_in_this_package
+bc_a3_end_004,jori_flint,Jori,Keep your hands free. There are bowls to bring inside.,dry,jp,,not_recorded_in_this_package
+bc_a3_end_005,narrator,Narration,They return to the square while the last dishes are being stacked. The chair is already home.,composed,jp_narration,,not_recorded_in_this_package

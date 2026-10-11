@@ -1,0 +1,50 @@
+{
+  "backgrounds": [
+    {
+      "location_id": "or_relief_stop",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "or_safe_approach",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "or_supply_board",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "or_waiting_lane",
+      "status": "unproduced_or_source_reference_only"
+    }
+  ],
+  "music": [
+    {
+      "cue_id": "or_work",
+      "status": "unproduced"
+    }
+  ],
+  "portraits": [
+    {
+      "character_id": "marek_vane",
+      "emotions": [
+        "calm",
+        "focused",
+        "gentle",
+        "quiet",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "nara_vell",
+      "emotions": [
+        "calm",
+        "focused",
+        "measured",
+        "quiet"
+      ],
+      "status": "canonical_identity_mapping_required"
+    }
+  ],
+  "voice_status": "English source complete; Japanese translation and audio not produced."
+}

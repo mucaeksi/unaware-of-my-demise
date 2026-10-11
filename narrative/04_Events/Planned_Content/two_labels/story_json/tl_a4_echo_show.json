@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a4_echo_show",
+  "title_en": "What They Saw",
+  "location_id": "tl_clinic_table",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_clinic_table"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_echo_show_001",
+      "speaker": "tl_patient",
+      "speaker_display": "Patient",
+      "text": "I told the people at the shelter we saw the sealed crates opened.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_echo_show_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Good. Tell them they may ask to see the next one, too.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_echo_show_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "And that the table has sides. That part is apparently important.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_echo_show_004",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "They moved the bench without being asked.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a4_echo_show_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "They knew what they wanted to see.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a4_echo_show_006",
+      "text": "On the table, the explanation has more fingerprints than the bottle."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a4_echo_show_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

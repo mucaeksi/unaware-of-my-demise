@@ -1,0 +1,60 @@
+{
+  "backgrounds": [
+    {
+      "location_id": "aw_case_board",
+      "status": "unproduced_or_source_reference_only"
+    },
+    {
+      "location_id": "undercity_antidote_archive",
+      "status": "unproduced_or_source_reference_only"
+    }
+  ],
+  "music": [
+    {
+      "cue_id": "aw_case",
+      "status": "unproduced"
+    },
+    {
+      "cue_id": "aw_work",
+      "status": "unproduced"
+    }
+  ],
+  "portraits": [
+    {
+      "character_id": "iona_mist",
+      "emotions": [
+        "calm",
+        "gentle"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "kera_voss",
+      "emotions": [
+        "focused",
+        "precise",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "odelia_pike",
+      "emotions": [
+        "calm",
+        "focused",
+        "wry"
+      ],
+      "status": "canonical_identity_mapping_required"
+    },
+    {
+      "character_id": "tilda_fen",
+      "emotions": [
+        "calm",
+        "dry",
+        "focused"
+      ],
+      "status": "canonical_identity_mapping_required"
+    }
+  ],
+  "voice_status": "English source complete; Japanese translation and audio not produced."
+}

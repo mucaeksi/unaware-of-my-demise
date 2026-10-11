@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a2_scout_3",
+  "title_en": "A Mark before the Bend",
+  "location_id": "lt_forest_junction",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_forest_junction"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_3_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Here. They can see it before the turn.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_3_002",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "Not where you were standing when you drew it.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_3_003",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "You checked it from the other side.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_3_004",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "That is where someone will need it.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "brin_alder"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_3_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A map improved by having more than one pair of feet.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_scout_3_006",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We have the observation. Now we clear the passage.",
+      "emotion": "focused"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a2_scout_3_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

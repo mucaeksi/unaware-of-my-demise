@@ -1,0 +1,583 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a5_company",
+  "title_en": "Before They Leave",
+  "location_id": "tl_harbor_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_harbor_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_company_001",
+      "text": "The road back is clear enough to wait for one conversation."
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "We should go before I find something else to label.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "You have already labeled the empty crates.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_004",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Then we have a moment.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "choice",
+      "prompt": "Who do you sit beside?",
+      "options": [
+        {
+          "id": "tl_focus_kera",
+          "text": "Kera, with the spare label.",
+          "goto": "kera"
+        },
+        {
+          "id": "tl_focus_tilda",
+          "text": "Tilda, beside the folded kit.",
+          "goto": "tilda"
+        },
+        {
+          "id": "tl_focus_iona",
+          "text": "Iona, where the lantern is hanging.",
+          "goto": "iona"
+        },
+        {
+          "id": "tl_focus_odelia",
+          "text": "Odelia, with the folded route sketch.",
+          "goto": "odelia"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "kera"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_005",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "You wrote your name larger on the second label.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_006",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The first one did not have enough room.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_007",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "You made room.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_008",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "If something is wrong, they should know who brought it.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_009",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "And if something is right.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_010",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "That is not what the name is for.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_011",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "It can be for both.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_company_012",
+      "text": "Kera presses the loose label flat against an empty crate. She leaves the name where it can be read."
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "tilda"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_013",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "You were the first to tell them we would stay for questions.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_014",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "People are used to a seller leaving when the bottle changes hands.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_015",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "You stayed after the last one did.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_016",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "There was still someone on the bench.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_017",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "There is not now.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_company_018",
+      "text": "Tilda looks at the empty place, then puts the kit down instead of checking it again."
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_019",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Good. Then I can sit there.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_020",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "A practical use for a successful treatment room.",
+      "emotion": "wry"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "iona"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_021",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "You let them leave without telling us their names.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_022",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "They came for medicine. We were not registering them for a journey.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_023",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Some stayed and asked to write it down anyway.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_024",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Then they chose something to leave with us.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_025",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "The baker chose bread. A sound decision.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_026",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "It felt different when nobody asked for it first.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_027",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "Yes.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_company_028",
+      "text": "Iona lifts the lantern from its hook. Its light falls on the bread before the road."
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "odelia"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_029",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "You got us here.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_030",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I knew the roads.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_031",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Roads rarely carry their own crates.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_032",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "You showed us where to wait, too.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_033",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I thought coming back would mean answering questions I cannot answer.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_034",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "You answered the ones we needed today.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_company_035",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Then I can show you the way back.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_company_036",
+      "text": "She folds the sketch without hiding it beneath the crate."
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a5_company_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

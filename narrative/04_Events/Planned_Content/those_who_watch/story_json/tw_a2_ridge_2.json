@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a2_ridge_2",
+  "title_en": "A View with a Limit",
+  "location_id": "tw_ridge_path",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tw_ridge_path"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_2_001",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "I can see the valley mouth, but not the road behind that rise.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_2_002",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Write both. A limit is part of a useful account.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_2_003",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "The grave-keepers are less demanding.",
+      "emotion": "wry"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_2_004",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "The grave-keepers ask which stone you actually saw.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a2_ridge_2_005",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "A fair correction. I like this village already.",
+      "emotion": "bright"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tw_a2_ridge_2_006",
+      "text": "Thistle checks the firm edge while the group climbs into the cleared turn."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a2_ridge_2_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "event_id": "event_two_labels",
+  "unlock": "after_canonical_event_completion",
+  "session_kind": "isolated_replay",
+  "mutates_original_progress": false,
+  "reward_binding": null,
+  "route_replays": [
+    {
+      "replay_id": "tl_replay_coast",
+      "route": "coast",
+      "entry_node": "tl_a2_coast_wall",
+      "stop_before_node": "event_guild_salt_fever_2",
+      "optional_scene": "tl_a5_coast_memory"
+    },
+    {
+      "replay_id": "tl_replay_load",
+      "route": "load",
+      "entry_node": "tl_a2_load_sheds",
+      "stop_before_node": "event_guild_salt_fever_2",
+      "optional_scene": "tl_a5_load_memory"
+    }
+  ],
+  "conversation_replays": [
+    {
+      "replay_id": "tl_replay_focus_kera",
+      "scene_id": "tl_a5_company",
+      "choice_id": "tl_focus_kera",
+      "stop_at": "scene_end"
+    },
+    {
+      "replay_id": "tl_replay_focus_tilda",
+      "scene_id": "tl_a5_company",
+      "choice_id": "tl_focus_tilda",
+      "stop_at": "scene_end"
+    },
+    {
+      "replay_id": "tl_replay_focus_iona",
+      "scene_id": "tl_a5_company",
+      "choice_id": "tl_focus_iona",
+      "stop_at": "scene_end"
+    },
+    {
+      "replay_id": "tl_replay_focus_odelia",
+      "scene_id": "tl_a5_company",
+      "choice_id": "tl_focus_odelia",
+      "stop_at": "scene_end"
+    }
+  ],
+  "approach_replays": [
+    {
+      "replay_id": "tl_replay_show",
+      "scene_id": "tl_a3_questions",
+      "choice_id": "tl_approach_show",
+      "followup_scene": "tl_a4_echo_show",
+      "stop_at": "followup_scene_end"
+    },
+    {
+      "replay_id": "tl_replay_listen",
+      "scene_id": "tl_a3_questions",
+      "choice_id": "tl_approach_listen",
+      "followup_scene": "tl_a4_echo_listen",
+      "stop_at": "followup_scene_end"
+    }
+  ],
+  "scene_replays": [
+    "event_guild_salt_fever_1",
+    "tl_a1_crates",
+    "tl_a1_preparation",
+    "tl_a1_gate",
+    "tl_a1_after_gate",
+    "tl_a1_fork",
+    "tl_a2_coast_wall",
+    "tl_a2_coast_steps",
+    "tl_a2_coast_turn",
+    "tl_a2_coast_arrival",
+    "tl_a2_load_sheds",
+    "tl_a2_load_cloth",
+    "tl_a2_load_cart",
+    "tl_a2_load_arrival",
+    "event_guild_salt_fever_2",
+    "tl_a3_bakery",
+    "tl_a3_questions",
+    "tl_a3_boundary",
+    "tl_a3_after_boundary",
+    "tl_a4_last_lane",
+    "tl_a4_delivery_done",
+    "tl_a4_echo_show",
+    "tl_a4_echo_listen",
+    "event_guild_salt_fever_3",
+    "tl_a4_after_agent",
+    "tl_a5_quiet",
+    "tl_a5_coast_memory",
+    "tl_a5_load_memory",
+    "tl_a5_bread",
+    "tl_a5_company",
+    "tl_a5_end"
+  ],
+  "notes_tr": "Graph replay stop sınırı uygulanır; ortak Act3/4/5 tekrar zorunlu değildir. İlk tur tercihi veya completed flag’i değişmez; ödül politikası henüz seçilmedi."
+}

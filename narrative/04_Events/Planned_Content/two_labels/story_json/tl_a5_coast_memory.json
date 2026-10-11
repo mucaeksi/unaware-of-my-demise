@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a5_coast_memory",
+  "title_en": "A Familiar Step",
+  "location_id": "tl_harbor_square",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_harbor_square"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_coast_memory_001",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The shutter was not painted the same color.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_coast_memory_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "On the coast path?",
+      "emotion": "curious"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_coast_memory_003",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Yes. I kept looking for something exactly as I left it.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_coast_memory_004",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "You still found the way.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_coast_memory_005",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I found somewhere to put the crate down.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_coast_memory_006",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "That was the part the rest of us needed.",
+      "emotion": "dry"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_coast_memory_007",
+      "text": "Odelia folds the route sketch along a new crease. The steps still have a place on it."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a5_coast_memory_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

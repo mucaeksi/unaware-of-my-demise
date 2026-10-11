@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "scene_id": "aw_a3_after",
+  "title_en": "The Response in the Notes",
+  "location_id": "aw_case_board",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "aw_case_board"
+    },
+    {
+      "op": "music",
+      "cue_id": "aw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a3_after_001",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Enough pressure to read. Enough room to answer.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a3_after_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The same pressure should leave room for more than one answer.",
+      "emotion": "precise"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a3_after_003",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "The people in the original case could not try another answer. Our notes must remember that.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "narrate",
+      "line_id": "aw_a3_after_004",
+      "text": "The notes keep the exercise separate from its source."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "aw_a3_after_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "tactical_archive_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

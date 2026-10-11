@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "scene_id": "tl_a5_quiet",
+  "title_en": "The Quiet After Work",
+  "location_id": "tl_clinic_table",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "tl_clinic_table"
+    },
+    {
+      "op": "music",
+      "cue_id": "tl_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_quiet_001",
+      "text": "The crates are empty. The benches are not. Tilda speaks quietly to the last person waiting."
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_quiet_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "They have enough for the next delivery as well.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_quiet_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "They have enough treatment for the cases we examined. We return to the archive and check what else is needed.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_quiet_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "That is what I meant.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_quiet_005",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Then put that on the next notice.",
+      "emotion": "dry"
+    },
+    {
+      "op": "hide",
+      "character": "tilda_fen"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_quiet_006",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "I left space beside the instructions for questions to come back with the cart.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "hide",
+      "character": "iona_mist"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_quiet_007",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "You expect them to ask more?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "odelia_pike"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tl_a5_quiet_008",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "I hope they can.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tl_a5_quiet_009",
+      "text": "Kera turns a spare label over. For once, she leaves the blank side blank."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tl_a5_quiet_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "iki-etiket-v1/authoring/event.json",
+    "note": "New expansion; authored for owner review. Not published."
+  }
+}

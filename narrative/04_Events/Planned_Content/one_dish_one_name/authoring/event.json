@@ -1,0 +1,2518 @@
+{
+  "authoring_schema_version": 1,
+  "status": "complete_authored_draft_not_deployed",
+  "event_id": "event_one_dish_one_name",
+  "title_en": "One Dish, One Name",
+  "title_tr": "Bir Tabak, Bir İsim",
+  "content_kind": "story_event",
+  "canon_source_event_id": "event_harvest_inn_meal",
+  "delivery": "future_declarative_content_patch",
+  "unlock": {
+    "after_stage": "3-5",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "availability": {
+    "publish_at": null,
+    "expires_at": null
+  },
+  "rewards": {
+    "status": "undecided_by_owner",
+    "binding": null
+  },
+  "entry_node": "od_a1_square",
+  "completion_node": "od_complete",
+  "state_keys": {
+    "plan": [
+      "wood_road",
+      "road_song",
+      "song_wood"
+    ],
+    "welcome": [
+      "join",
+      "quiet"
+    ],
+    "focus": [
+      "jori",
+      "nixie",
+      "pippa"
+    ]
+  },
+  "validation_cases": [
+    {
+      "plan": "wood_road",
+      "welcome": "join",
+      "focus": "jori"
+    },
+    {
+      "plan": "wood_road",
+      "welcome": "join",
+      "focus": "nixie"
+    },
+    {
+      "plan": "wood_road",
+      "welcome": "join",
+      "focus": "pippa"
+    },
+    {
+      "plan": "wood_road",
+      "welcome": "quiet",
+      "focus": "jori"
+    },
+    {
+      "plan": "wood_road",
+      "welcome": "quiet",
+      "focus": "nixie"
+    },
+    {
+      "plan": "wood_road",
+      "welcome": "quiet",
+      "focus": "pippa"
+    },
+    {
+      "plan": "road_song",
+      "welcome": "join",
+      "focus": "jori"
+    },
+    {
+      "plan": "road_song",
+      "welcome": "join",
+      "focus": "nixie"
+    },
+    {
+      "plan": "road_song",
+      "welcome": "join",
+      "focus": "pippa"
+    },
+    {
+      "plan": "road_song",
+      "welcome": "quiet",
+      "focus": "jori"
+    },
+    {
+      "plan": "road_song",
+      "welcome": "quiet",
+      "focus": "nixie"
+    },
+    {
+      "plan": "road_song",
+      "welcome": "quiet",
+      "focus": "pippa"
+    },
+    {
+      "plan": "song_wood",
+      "welcome": "join",
+      "focus": "jori"
+    },
+    {
+      "plan": "song_wood",
+      "welcome": "join",
+      "focus": "nixie"
+    },
+    {
+      "plan": "song_wood",
+      "welcome": "join",
+      "focus": "pippa"
+    },
+    {
+      "plan": "song_wood",
+      "welcome": "quiet",
+      "focus": "jori"
+    },
+    {
+      "plan": "song_wood",
+      "welcome": "quiet",
+      "focus": "nixie"
+    },
+    {
+      "plan": "song_wood",
+      "welcome": "quiet",
+      "focus": "pippa"
+    }
+  ],
+  "expected_battles_per_run": 1,
+  "sources": [
+    {
+      "path": "narrative/04_Events/events_part1.json",
+      "sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "path": "narrative/00_Canon/SPOILER_UNLOCK_POLICY.md",
+      "sha256": "14c09c1795a3a3373ada44e25b1e1f49015abba72b030323733c2e9abbafa7c8"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/pippa_bell.md",
+      "sha256": "9b79738769a039146a232cc8db5ebdd6295e0359889b9741fab32546a0a99690"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/jori_flint.md",
+      "sha256": "abc934f7f02032f5bd860c8925c06f91f1e3e23915c0d84295974a6d90061633"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/nixie_vale.md",
+      "sha256": "d0bd90c6e7591f26987540d0d4d325f79b4e1298151cd14702e0eb6b3dd136a8"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/kera_voss.md",
+      "sha256": "7aba38465821b713a287f9630b21daa4043da65e5fd87dc577ace47c607dbb3b"
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "od_a1_square",
+      "act": 1,
+      "title_en": "Before the Bowls",
+      "location_id": "oakhaven_square",
+      "direction_en": "The square is being swept. Long tables are still separated, with small piles of borrowed chairs beside them.",
+      "purpose_tr": "Mercenary Captain sonrası günlük yaşam; meydandaki korku mizahın hedefi değildir.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a1_square_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The square has been loud with orders for days. Now the loudest order is where to put a chair.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_a1_square_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Not there. The leg will catch in the drain.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_square_003",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Then we put the short people at that end. They will not notice.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_square_004",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "They will notice falling over.",
+          "emotion": "annoyed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_square_005",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "A table that applauds when you sit down. Very festive.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_square_006",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "I have brought a contribution.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_square_007",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Is it meant to be making that noise?",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_square_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "That is a cooking noise.",
+          "emotion": "defensive",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_square_009",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "We will discover what it is called when it reaches a bowl.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_square_010",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "A helper carries a stack of bowls past them. Everyone steps aside at a different speed.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_a1_square_011",
+          "speaker_id": "oakhaven_innkeeper",
+          "speaker_display": "Innkeeper",
+          "text_en": "If you have a free hand, there is work for it. If you have two, I will be delighted.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_a1_plan",
+      "act": 1,
+      "title_en": "Two Useful Things",
+      "location_id": "oakhaven_square",
+      "direction_en": "Jori points to the tables, Nixie to the lane, Pippa to a blank song sheet. Local helpers handle the job the company does not choose.",
+      "purpose_tr": "Üç plan ikişer görev oynatır. Seçilmeyen iş NPC yardımıyla tamamlanır; sahne ve encounter farkı yaratır.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a1_plan_001",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "These boards need bracing before anyone puts hot food on them.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_plan_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "There are serving things waiting at the storehouse. I know the turn with the least mud.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_plan_003",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "And the last verse needs room for names of every length.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_plan_004",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "You cannot all have the same pair of hands.",
+          "emotion": "annoyed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_plan_005",
+          "speaker_id": "oakhaven_innkeeper",
+          "speaker_display": "Innkeeper",
+          "text_en": "You do not have to. Choose two jobs. We will finish the other together.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_plan_006",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Nobody misses supper because we liked a different errand.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a1_plan_007",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Good. I like a map with more than one useful road.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Choose two jobs to help with.",
+        "state_key": "plan",
+        "options": [
+          {
+            "id": "od_plan_wood_road",
+            "value": "wood_road",
+            "text_en": "Brace the tables, then help with deliveries.",
+            "consequence_en": "Jori and Nixie scenes; battle favors steady formation and target priority.",
+            "lines": [
+              {
+                "line_id": "od_a1_plan_008",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "Wood first. A clear place for the bowls makes the rest easier.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a1_plan_009",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "Then we bring the bowls. Excellent division of worrying.",
+                "emotion": "bright",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a1_plan_010",
+                "speaker_id": "pippa_bell",
+                "speaker_display": "Pippa",
+                "text_en": "I will borrow other voices for the verse.",
+                "emotion": "bright",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "od_plan_road_song",
+            "value": "road_song",
+            "text_en": "Help with deliveries, then prepare the verse.",
+            "consequence_en": "Nixie and Pippa scenes; battle highlights reaching attackers and support.",
+            "lines": [
+              {
+                "line_id": "od_a1_plan_011",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "We start at the storehouse. Nothing heavy through the market steps.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a1_plan_012",
+                "speaker_id": "pippa_bell",
+                "speaker_display": "Pippa",
+                "text_en": "Then we make room in the song for the people carrying it.",
+                "emotion": "bright",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a1_plan_013",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "I will find someone who can hold the other end of a board.",
+                "emotion": "focused",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "od_plan_song_wood",
+            "value": "song_wood",
+            "text_en": "Prepare the verse, then brace the tables.",
+            "consequence_en": "Pippa and Jori scenes; battle highlights support and front-line pressure.",
+            "lines": [
+              {
+                "line_id": "od_a1_plan_014",
+                "speaker_id": "pippa_bell",
+                "speaker_display": "Pippa",
+                "text_en": "Song first. It is harder to find a name once everyone has a mouthful.",
+                "emotion": "bright",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a1_plan_015",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "Then the tables. It is harder to hold a bowl once everyone is on the ground.",
+                "emotion": "dry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a1_plan_016",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "I will make sure the serving things find us.",
+                "emotion": "bright",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "od_job_wood_1",
+      "act": 2,
+      "title_en": "Under the Table",
+      "location_id": "od_table_work",
+      "direction_en": "Jori kneels beneath a long table. A helper holds the other end of a brace. Tools and nails are story props, not items to grind.",
+      "purpose_tr": "Jori’nin zanaati insanları rahatlatır; gizli altar chains veya aile suçluluğu açıklanmaz.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_job_wood_1_001",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Hold it there. No, lower. I need the board level, not impressed.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_1_002",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "Will it hold that many people?",
+          "emotion": "worried",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_1_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "It will hold the dishes. The people get chairs.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_1_004",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "I was looking forward to standing on it.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_1_005",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "You can disappoint yourself before the soup does it for you.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_1_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The helper laughs and stops gripping the board hard enough to shake it.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_job_wood_1_007",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "There. You can let go of that end. I have this one.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_1_008",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Is that your best table-making voice?",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_1_009",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "It is my voice for people putting their fingers where the hammer goes.",
+          "emotion": "annoyed",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_job_wood_2",
+      "act": 2,
+      "title_en": "A Chair without a Match",
+      "location_id": "od_table_work",
+      "direction_en": "The chairs do not match. Jori tests the lowest one and replaces a loose foot with a fitted wooden pad.",
+      "purpose_tr": "Aitlik motifini küçük nesneyle anlatır; ekstra sosyal puan veya mobilya ekonomisi yok.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_job_wood_2_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Some chairs were borrowed from kitchens. One was borrowed from somewhere that owned no other furniture.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_job_wood_2_002",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "We could hide that one at the end.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_2_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "We could fix it.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_2_004",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "I like that answer. The end keeps getting all the interesting chairs.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_2_005",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Put your foot on the pad while I fit it. Not on my hand.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_2_006",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "There. It does not rock now.",
+          "emotion": "relieved",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_2_007",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Leave it near the middle. Someone should get to sit close without feeling borrowed.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_2_008",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "It is a chair. It does not ask who brought it.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_2_009",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "She puts it where the light reaches the seat.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_job_wood_3",
+      "act": 2,
+      "title_en": "Room for the Bowl",
+      "location_id": "od_table_work",
+      "direction_en": "The table is tested with empty bowls. The shared path leaves space for serving and for someone moving slowly.",
+      "purpose_tr": "Table yardımının tamamlanması; yapı çevre prop’u, savaş shield buff’ı değildir.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_job_wood_3_001",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "This gap stays open.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_3_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "For the food?",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_3_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "For whoever carries it. And whoever cannot step over three people to sit down.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_3_004",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "A very considerate gap.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_3_005",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Do not sing at it. It is already doing its job.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_3_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "A helper sets the last bowl down. The table does not move.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_job_wood_3_007",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "You can hear the difference.",
+          "emotion": "relieved",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_wood_3_008",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "I prefer the part you cannot hear.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_job_road_1",
+      "act": 2,
+      "title_en": "The Storehouse Turn",
+      "location_id": "od_storehouse_lane",
+      "direction_en": "Nixie studies the route between the storehouse and the square. She chooses a level path; no faction mystery is hidden in the map.",
+      "purpose_tr": "Nixie’nin yol okuma becerisi; false map companion hikâyesi kopyalanmaz.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_job_road_1_001",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Not the steps. A short route becomes a long route when the soup goes down it first.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_1_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The soup is not leaving my hands.",
+          "emotion": "annoyed",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_1_003",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Then you have a very good reason to avoid the steps.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_1_004",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "The bowls are fragile.",
+          "emotion": "worried",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_1_005",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "So we carry them low and stop at the turn. I will see who is coming the other way.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_1_006",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "You make fetching bowls sound like a heroic expedition.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_1_007",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Everything sounds heroic until somebody asks how many bowls came back.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_1_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Nixie moves the heaviest bundle to the hand closest to the wall.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_job_road_2",
+      "act": 2,
+      "title_en": "Who Carries the Last Stack",
+      "location_id": "od_storehouse_lane",
+      "direction_en": "A stack is heavier than the helper expected. Nixie asks for a pause before offering another pair of hands.",
+      "purpose_tr": "Hız ve yardım arasında seçim; fetch-count farm veya kaza kaybetme cezaları yok.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_job_road_2_001",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "I can take the last stack too.",
+          "emotion": "strained",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_2_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Wait. Take a breath first.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_2_003",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "Everyone else is moving.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_2_004",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Then they can keep moving around us.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_2_005",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "I have a free hand. The pot only needs one until someone starts criticizing it.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_2_006",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "I will save my criticism for the square.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_2_007",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The stack changes hands without a bowl being dropped.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_job_road_2_008",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "There. Faster without pretending it was lighter.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_2_009",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "I thought you would tell me to hurry.",
+          "emotion": "relieved",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_2_010",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "I know where we are going. We can get there with all the bowls.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_job_road_3",
+      "act": 2,
+      "title_en": "The Next Pair of Hands",
+      "location_id": "od_storehouse_lane",
+      "direction_en": "Nixie asks the helper to lead the last part of the delivery route. They learn the turn by walking it together, without a new road sign.",
+      "purpose_tr": "Nixie taşıma işini devreder; Son Geçen’in yol tabelası motifi tekrarlanmaz, home/registry arc’ı çözülmez.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_job_road_3_001",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "If we need another load, can you show the next pair of hands where we went?",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_3_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "You are making them lead the way back?",
+          "emotion": "curious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_3_003",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "They know the steps now. I do not have to carry every bowl to know it will arrive.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_3_004",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "That sounds like a holiday.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_3_005",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Only if nobody asks me to carry the tables.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_3_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "She hands over the empty sling and follows while the helper chooses the turn.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_job_road_3_007",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "This way.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_road_3_008",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Good. It is not only my route now.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_job_song_1",
+      "act": 2,
+      "title_en": "A Name That Fits",
+      "location_id": "od_song_corner",
+      "direction_en": "Pippa keeps a sheet for the shared final verse. The musical activity is dialogue, not an implemented rhythm game.",
+      "purpose_tr": "Şarkıya kişi tarafından sunulan isim; gerçek isim toplama veya serbest kullanıcı verisi girişi yok.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_job_song_1_001",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Short names, long names, names that need a second breath. There is room.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_1_002",
+          "speaker_id": "od_guest",
+          "speaker_display": "Guest",
+          "text_en": "Mine will spoil the rhythm.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_1_003",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Then the rhythm can improve itself.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_1_004",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "A sensible rhythm. We should invite it more often.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_1_005",
+          "speaker_id": "od_guest",
+          "speaker_display": "Guest",
+          "text_en": "Could I bring my mother's name instead?",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_1_006",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "If that is the name you wish us to sing.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_1_007",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Pippa leaves a space before writing. The guest says it once, then again slowly.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_job_song_1_008",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Like that?",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_1_009",
+          "speaker_id": "od_guest",
+          "speaker_display": "Guest",
+          "text_en": "Like that.",
+          "emotion": "relieved",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_job_song_2",
+      "act": 2,
+      "title_en": "The Quiet Verse",
+      "location_id": "od_song_corner",
+      "direction_en": "A guest wants to offer a name without telling its story publicly. Pippa rehearses quietly, without insisting on performance.",
+      "purpose_tr": "Names-as-witness motifinin günlük ifadesi; korku çözülmüş veya borç iptal edilmiş sayılmaz.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_job_song_2_001",
+          "speaker_id": "od_guest",
+          "speaker_display": "Guest",
+          "text_en": "I can give you a name. I would rather not give you the story.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_2_002",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "I asked for one line. I did not ask for every page.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_2_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "We can keep a seat where you do not have to face the square.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_2_004",
+          "speaker_id": "od_guest",
+          "speaker_display": "Guest",
+          "text_en": "I might join the song. Later.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_2_005",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Then later is a perfectly good time for it.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_2_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Pippa rehearses the syllables softly enough that only the guest can correct them.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_job_song_2_007",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "You changed the tune.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_2_008",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "The name was doing nothing wrong.",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_job_song_3",
+      "act": 2,
+      "title_en": "Not a Solo",
+      "location_id": "od_song_corner",
+      "direction_en": "Pippa rehearses the refrain with helpers. They disagree about a note and keep singing; no magical effect is implied.",
+      "purpose_tr": "Mekanik saat transferi veya büyüsel çan susturma yok; kaynaktaki toplu şarkıyı hazırlayan insanî prova.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_job_song_3_001",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Once together. You may miss the note, but do not lose the person beside you.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_3_002",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "I have already missed three notes.",
+          "emotion": "amused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_3_003",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "A vigorous beginning.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_3_004",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "Will the song still work?",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_3_005",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "It is a song, Kera. The point is that we are singing it.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_3_006",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Good. I was worried it needed a bottle.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_job_song_3_007",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The refrain wanders off-key, finds another voice, and comes back changed.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_job_song_3_008",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Keep that part.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_a3_road",
+      "act": 3,
+      "title_en": "Before the Last Load",
+      "location_id": "od_outer_lane",
+      "direction_en": "The last serving load waits inside the storehouse. Common dead block the outer lane; the supper square remains safe.",
+      "purpose_tr": "B01’in üç plan varyantı; festival sırasında yeni baskın veya satıcı/insan boss yok.",
+      "music_cue": "od_threat",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a3_road_001",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Stop at the storehouse door. The lane beyond it is not clear.",
+          "emotion": "serious",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_road_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Leave the serving things inside. Nobody carries them through a fight.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_road_003",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "The square can keep setting places. We will clear this turn.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_road_004",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "The ones in front are moving when that bellbound corpse does.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_road_005",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "And one behind them is reaching past. Read both before we commit.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_road_006",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "We can hold the front and choose our opening.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_road_007",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "No hurry that costs someone the road back.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_road_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The load stays on dry boards. The group steps into the lane with empty hands ready for weapons.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_a3_clear",
+      "act": 3,
+      "title_en": "The Load Arrives",
+      "location_id": "oakhaven_square",
+      "direction_en": "After the single road battle, helpers carry serving supplies through the cleared turn. The chosen jobs and the unchosen job are all complete.",
+      "purpose_tr": "Mevcut A Table for Everyone sahnesine doğrudan hazırlık; hiçbir ödül veya yemek item’i yaratılmaz.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a3_clear_001",
+          "speaker_id": "od_helper",
+          "speaker_display": "Helper",
+          "text_en": "The last stack is here.",
+          "emotion": "relieved",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_clear_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Set it on the brace. Not the edge.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_clear_003",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "The helper can show the way back if anyone needs another load.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_clear_004",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "And the verse has enough room for the new arrivals.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_clear_005",
+          "speaker_id": "oakhaven_innkeeper",
+          "speaker_display": "Innkeeper",
+          "text_en": "Then sit before somebody finds you another useful thing to do.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_clear_006",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "My contribution first.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_clear_007",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "That depends on what it is doing now.",
+          "emotion": "worried",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_clear_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Kera lifts the lid with the seriousness of someone presenting a thesis.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "event_harvest_inn_meal_1",
+      "title_en": "A Table for Everyone",
+      "location_id": "oakhaven_square",
+      "direction_en": "The square is set with long tables. Every guest must bring one dish and one name.",
+      "lines": [
+        {
+          "line_id": "event_harvest_inn_meal_1_001",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Rule of the Harvest Supper: one dish, one name. You say the name, you get a bowl.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_1_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "I brought a dish. It is technically soup.",
+          "emotion": "defensive",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_1_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "It is moving.",
+          "emotion": "horrified",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_1_004",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "It is effervescent.",
+          "emotion": "tsundere",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_1_005",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "I will eat it! For the festival!",
+          "emotion": "heroic",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_1_006",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Nixie ate it. Nixie was fine. Nixie glowed faintly for an hour.",
+          "emotion": "comic",
+          "voice_track": "jp_narration"
+        }
+      ],
+      "act": 3,
+      "purpose_tr": "Kaynak A Table for Everyone sahnesinin altı repliği aynen; Kera’nın çorbası ve Nixie’nin hafif parlaması korunur.",
+      "provenance_kind": "canon_verbatim",
+      "music_cue": "od_work",
+      "source_path": "narrative/04_Events/events_part1.json",
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "scene_id": "od_a3_after_soup",
+      "act": 3,
+      "title_en": "The Next Bowl",
+      "location_id": "oakhaven_square",
+      "direction_en": "After the canonical comic moment, Nixie sits comfortably. Her glow is temporary source narration, not a gameplay buff or illness.",
+      "purpose_tr": "Kaynaktaki mizahı sürdürür; şüpheli gerçek tarif, kalıcı glow stat’ı veya sağlık tehdidi yok.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a3_after_soup_001",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "It was very memorable.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_after_soup_002",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "That is not an accepted tasting category.",
+          "emotion": "defensive",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_after_soup_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "It is now.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_after_soup_004",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "We can put it in the program. Soup: memorable. Tables: upright.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_after_soup_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The helper passes the next bowl. For once, no one tells them to hurry.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_a3_after_soup_006",
+          "speaker_id": "oakhaven_innkeeper",
+          "speaker_display": "Innkeeper",
+          "text_en": "There is ordinary bread if you need something with fewer opinions.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_after_soup_007",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "I can support both kinds of food.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a3_after_soup_008",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "A scientifically fair response.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "event_harvest_inn_meal_2",
+      "title_en": "The Inn Meal",
+      "location_id": "oakhaven_inn",
+      "direction_en": "The innkeeper explains why every traveler gets a free meal twice a day.",
+      "lines": [
+        {
+          "line_id": "event_harvest_inn_meal_2_001",
+          "speaker_id": "oakhaven_innkeeper",
+          "speaker_display": "Innkeeper",
+          "text_en": "After Crownfall, travelers stopped paying. So we stopped charging. Twice a day, a meal, no coin.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_2_002",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "That is generous.",
+          "emotion": "touched",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_2_003",
+          "speaker_id": "oakhaven_innkeeper",
+          "speaker_display": "Innkeeper",
+          "text_en": "It is practical. A fed traveler says their name at the door. A hungry one slips past the register.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_2_004",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "So the meal is a count.",
+          "emotion": "observant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_2_005",
+          "speaker_id": "oakhaven_innkeeper",
+          "speaker_display": "Innkeeper",
+          "text_en": "The meal is a meal, knight. The count is a bonus.",
+          "emotion": "laughing",
+          "voice_track": "jp"
+        }
+      ],
+      "act": 4,
+      "purpose_tr": "Kaynak Inn Meal sahnesinin beş repliği aynen; Fadyme/Mahmut yerleşmiş canon varlığı korunur.",
+      "provenance_kind": "canon_verbatim",
+      "music_cue": "od_work",
+      "source_path": "narrative/04_Events/events_part1.json",
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "scene_id": "od_a4_gap",
+      "act": 4,
+      "title_en": "An Empty Place",
+      "location_id": "oakhaven_inn",
+      "direction_en": "A guest pauses near a remaining seat. Bowls are being served, and the guest has offered a name without a public story.",
+      "purpose_tr": "İki eşit yaklaşım; isim sunmak ile hikâyesini sahnede anlatmaya zorlamak ayrılır.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a4_gap_001",
+          "speaker_id": "od_guest",
+          "speaker_display": "Guest",
+          "text_en": "I can say a name. I do not think I can sing it in front of everyone.",
+          "emotion": "hesitant",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_gap_002",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Speaking is allowed to remain speaking.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_gap_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "This seat is steady.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_gap_004",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "That is Jori's highest recommendation.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_gap_005",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "You can sit before deciding how loud to be.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_gap_006",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "There is room to pass behind the chair.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_gap_007",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The guest touches the back of the chair, then looks toward the open square.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ],
+      "choice": {
+        "prompt_en": "How should the company make room?",
+        "state_key": "welcome",
+        "options": [
+          {
+            "id": "od_welcome_join",
+            "value": "join",
+            "text_en": "Invite them into the table conversation.",
+            "consequence_en": "A gentle invitation; the guest may still decline the song.",
+            "lines": [
+              {
+                "line_id": "od_a4_gap_008",
+                "speaker_id": "pippa_bell",
+                "speaker_display": "Pippa",
+                "text_en": "We are comparing the chairs. You can help us settle the matter.",
+                "emotion": "bright",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a4_gap_009",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "There is no matter. They are all chairs.",
+                "emotion": "dry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a4_gap_010",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "That is one side of the argument.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a4_gap_011",
+                "speaker_id": "od_guest",
+                "speaker_display": "Guest",
+                "text_en": "This one is a very good chair.",
+                "emotion": "small_smile",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a4_gap_012",
+                "speaker_id": "fadyme",
+                "speaker_display": "Fadyme",
+                "text_en": "A decisive answer.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "od_welcome_quiet",
+            "value": "quiet",
+            "text_en": "Keep them company without asking for a story.",
+            "consequence_en": "A quiet seat; joining the song remains their decision.",
+            "lines": [
+              {
+                "line_id": "od_a4_gap_013",
+                "speaker_id": "fadyme",
+                "speaker_display": "Fadyme",
+                "text_en": "I will sit here for a moment.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a4_gap_014",
+                "speaker_id": "od_guest",
+                "speaker_display": "Guest",
+                "text_en": "You do not have to.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a4_gap_015",
+                "speaker_id": "fadyme",
+                "speaker_display": "Fadyme",
+                "text_en": "I know. I would like to.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a4_gap_016",
+                "speaker_id": "mahmut",
+                "speaker_display": "Mahmut",
+                "text_en": "I will bring the bread within reach.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a4_gap_017",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "The guest sits. The silence does not ask them to fill it.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "od_a4_join_echo",
+      "act": 4,
+      "title_en": "A Small Argument",
+      "location_id": "oakhaven_square",
+      "direction_en": "The earlier invited guest comes to the square beside the company. Nobody asks them to lead.",
+      "purpose_tr": "Join tercihi callback’i; ortak Last Song sahnesine bağlanır.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a4_join_echo_001",
+          "speaker_id": "od_guest",
+          "speaker_display": "Guest",
+          "text_en": "Are you still arguing about the chairs?",
+          "emotion": "small_smile",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_join_echo_002",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "We have moved on to bowls.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_join_echo_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "There is still no argument.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_join_echo_004",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Stay here if you like. The song starts from wherever you are standing.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_join_echo_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The guest stays close enough to hear a familiar voice.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_a4_quiet_echo",
+      "act": 4,
+      "title_en": "A Place beside the Noise",
+      "location_id": "oakhaven_square",
+      "direction_en": "The quiet guest approaches the edge of the square. Fadyme does not turn their presence into a confession.",
+      "purpose_tr": "Quiet tercihi callback’i; ortak Last Song sahnesine bağlanır.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a4_quiet_echo_001",
+          "speaker_id": "od_guest",
+          "speaker_display": "Guest",
+          "text_en": "I thought I might listen from here.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_quiet_echo_002",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "It is a good place to listen.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_quiet_echo_003",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "Nobody needs to move closer.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_quiet_echo_004",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "If you want to join, you will hear where your line belongs.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a4_quiet_echo_005",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The guest keeps the space they chose. The song can reach it.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    },
+    {
+      "scene_id": "event_harvest_inn_meal_3",
+      "title_en": "Last Song",
+      "location_id": "oakhaven_square",
+      "direction_en": "Late night. Pippa leads the square in a song of every name collected.",
+      "lines": [
+        {
+          "line_id": "event_harvest_inn_meal_3_001",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Last verse! Everyone who brought a name, sing it with me!",
+          "emotion": "joyful",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_3_002",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "Two hundred voices, off-key and loud. Somewhere, a bell rang, and nobody stopped singing.",
+          "emotion": "warm",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "event_harvest_inn_meal_3_003",
+          "speaker_id": "fadyme_thought",
+          "speaker_display": "Fadyme (thought)",
+          "text_en": "The bell cannot count a square this loud. For one night, it is losing.",
+          "emotion": "content",
+          "voice_track": "jp_inner"
+        }
+      ],
+      "act": 5,
+      "purpose_tr": "Kaynak Last Song sahnesinin üç repliği aynen. Fadyme’nin iç sözü mecazdır; gerçek çan mekanizmasını iptal eden effect değildir.",
+      "provenance_kind": "canon_verbatim",
+      "music_cue": "od_work",
+      "source_path": "narrative/04_Events/events_part1.json",
+      "source_sha256": "68c39d3be767b32404ad5de1ee3dc537196d6e989f48a1d8aabeaadf3020b693"
+    },
+    {
+      "scene_id": "od_a5_after_song",
+      "act": 5,
+      "title_en": "After the Last Verse",
+      "location_id": "oakhaven_square",
+      "direction_en": "The crowd disperses slowly. Pippa closes the song sheet; Jori listens for the tables moving and hears only chairs.",
+      "purpose_tr": "Büyük duygusal reveal yok; Fadyme’nin hastalığı ve royal adı bu event’te ifşa edilmez.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a5_after_song_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The verse ends before the square decides to become quiet.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_a5_after_song_002",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "They kept the long name in time.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_after_song_003",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Mostly.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_after_song_004",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "Mostly is a generous place to meet.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_after_song_005",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "Nobody spilled a bowl when they stood up.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_after_song_006",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "That is not solely the table's achievement.",
+          "emotion": "focused",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_after_song_007",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "You may share the credit with the soup.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_after_song_008",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "For a moment Mahmut looks at the empty bowls instead of the road out.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_a5_after_song_009",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "We should help put these away.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_after_song_010",
+          "speaker_id": "oakhaven_innkeeper",
+          "speaker_display": "Innkeeper",
+          "text_en": "After you have finished sitting down.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        }
+      ]
+    },
+    {
+      "scene_id": "od_a5_company",
+      "act": 5,
+      "title_en": "What the Evening Kept",
+      "location_id": "oakhaven_square",
+      "direction_en": "A short conversation can happen before clearing the square. All three choices lead to the same ending.",
+      "purpose_tr": "Üç kısa kapanış anı; ownership, trust puanı veya ödül tercihi yok.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a5_company_001",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "One last useful thing. A conversation nobody has to carry.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_company_002",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "You make everything sound like work.",
+          "emotion": "dry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_company_003",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "Only the enjoyable work.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        }
+      ],
+      "choice": {
+        "prompt_en": "Whose small success do you notice?",
+        "state_key": "focus",
+        "options": [
+          {
+            "id": "od_focus_jori",
+            "value": "jori",
+            "text_en": "Jori, checking the repaired chair.",
+            "consequence_en": "Talk about making a place that follows a person.",
+            "lines": [
+              {
+                "line_id": "od_a5_company_004",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "It did not move once.",
+                "emotion": "bright",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_005",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "The pad fits.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_006",
+                "speaker_id": "pippa_bell",
+                "speaker_display": "Pippa",
+                "text_en": "Someone sat in the middle instead of hiding it at the end.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_007",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "That was the useful part.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_008",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "Jori turns the chair to face the table again.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              },
+              {
+                "line_id": "od_a5_company_009",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "Leave it here. Somebody will need it tomorrow.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "od_focus_nixie",
+            "value": "nixie",
+            "text_en": "Nixie, beside the storehouse doorway.",
+            "consequence_en": "Talk about a route others can use without her.",
+            "lines": [
+              {
+                "line_id": "od_a5_company_010",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "The helper found the storehouse without calling you.",
+                "emotion": "calm",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_011",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "Good. They remembered the turn.",
+                "emotion": "small_smile",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_012",
+                "speaker_id": "pippa_bell",
+                "speaker_display": "Pippa",
+                "text_en": "And you got to sit down.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_013",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "I thought I would be checking the turn all evening.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_014",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "She starts to rise for the next load, then sees the helper already teaching someone else the route.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              },
+              {
+                "line_id": "od_a5_company_015",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "Tomorrow I may draw a very good route to breakfast.",
+                "emotion": "bright",
+                "voice_track": "jp"
+              }
+            ]
+          },
+          {
+            "id": "od_focus_pippa",
+            "value": "pippa",
+            "text_en": "Pippa, folding the final verse.",
+            "consequence_en": "Talk about letting a song belong to more than its singer.",
+            "lines": [
+              {
+                "line_id": "od_a5_company_016",
+                "speaker_id": "jori_flint",
+                "speaker_display": "Jori",
+                "text_en": "Are you keeping the wrong notes?",
+                "emotion": "curious",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_017",
+                "speaker_id": "pippa_bell",
+                "speaker_display": "Pippa",
+                "text_en": "They were somebody's way of getting into the song.",
+                "emotion": "gentle",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_018",
+                "speaker_id": "nixie_vale",
+                "speaker_display": "Nixie",
+                "text_en": "Mine was particularly inventive.",
+                "emotion": "bright",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_019",
+                "speaker_id": "pippa_bell",
+                "speaker_display": "Pippa",
+                "text_en": "I have made a respectful note of it.",
+                "emotion": "wry",
+                "voice_track": "jp"
+              },
+              {
+                "line_id": "od_a5_company_020",
+                "speaker_id": "narrator",
+                "speaker_display": "Narration",
+                "text_en": "Pippa folds the sheet with the corrections still visible.",
+                "emotion": "composed",
+                "voice_track": "jp_narration"
+              },
+              {
+                "line_id": "od_a5_company_021",
+                "speaker_id": "pippa_bell",
+                "speaker_display": "Pippa",
+                "text_en": "I will not make it tidier than the evening was.",
+                "emotion": "quiet",
+                "voice_track": "jp"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "od_a5_end",
+      "act": 5,
+      "title_en": "A Table for Tomorrow",
+      "location_id": "oakhaven_square",
+      "direction_en": "The group clears dishes but leaves the repaired tables. A shared feast changes no magical law and reveals no plot secret.",
+      "purpose_tr": "Ortak bitiş; ilk event tamamlanması burada, canon fiziksel çan/borç sonucu değişmez.",
+      "music_cue": "od_work",
+      "provenance_kind": "new_authored_expansion",
+      "lines": [
+        {
+          "line_id": "od_a5_end_001",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "The bowls go back in stacks. The chairs go back one at a time, except the repaired one.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        },
+        {
+          "line_id": "od_a5_end_002",
+          "speaker_id": "oakhaven_innkeeper",
+          "speaker_display": "Innkeeper",
+          "text_en": "That one can stay.",
+          "emotion": "warm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_end_003",
+          "speaker_id": "jori_flint",
+          "speaker_display": "Jori",
+          "text_en": "It will need a dry place if it rains.",
+          "emotion": "quiet",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_end_004",
+          "speaker_id": "nixie_vale",
+          "speaker_display": "Nixie",
+          "text_en": "There is a very good way to the storehouse.",
+          "emotion": "bright",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_end_005",
+          "speaker_id": "pippa_bell",
+          "speaker_display": "Pippa",
+          "text_en": "And there is room left on the next sheet.",
+          "emotion": "gentle",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_end_006",
+          "speaker_id": "kera_voss",
+          "speaker_display": "Kera",
+          "text_en": "I may revise my contribution.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_end_007",
+          "speaker_id": "fadyme",
+          "speaker_display": "Fadyme",
+          "text_en": "A table for everyone. A pot for the very brave.",
+          "emotion": "wry",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_end_008",
+          "speaker_id": "mahmut",
+          "speaker_display": "Mahmut",
+          "text_en": "Come on. Before she explains the recipe.",
+          "emotion": "calm",
+          "voice_track": "jp"
+        },
+        {
+          "line_id": "od_a5_end_009",
+          "speaker_id": "narrator",
+          "speaker_display": "Narration",
+          "text_en": "They leave a clear space between the tables. It will be useful when someone arrives tomorrow.",
+          "emotion": "composed",
+          "voice_track": "jp_narration"
+        }
+      ]
+    }
+  ],
+  "graph": [
+    {
+      "node_id": "od_a1_square",
+      "kind": "story",
+      "ref": "od_a1_square",
+      "transitions": [
+        {
+          "to": "od_a1_plan"
+        }
+      ]
+    },
+    {
+      "node_id": "od_a1_plan",
+      "kind": "story",
+      "ref": "od_a1_plan",
+      "transitions": [
+        {
+          "to": "od_job_wood_1",
+          "when": {
+            "state_key": "plan",
+            "equals": "wood_road"
+          }
+        },
+        {
+          "to": "od_job_road_1",
+          "when": {
+            "state_key": "plan",
+            "equals": "road_song"
+          }
+        },
+        {
+          "to": "od_job_song_1",
+          "when": {
+            "state_key": "plan",
+            "equals": "song_wood"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "od_job_wood_1",
+      "kind": "story",
+      "ref": "od_job_wood_1",
+      "transitions": [
+        {
+          "to": "od_job_wood_2"
+        }
+      ]
+    },
+    {
+      "node_id": "od_job_wood_2",
+      "kind": "story",
+      "ref": "od_job_wood_2",
+      "transitions": [
+        {
+          "to": "od_job_wood_3"
+        }
+      ]
+    },
+    {
+      "node_id": "od_job_wood_3",
+      "kind": "story",
+      "ref": "od_job_wood_3",
+      "transitions": [
+        {
+          "to": "od_job_road_1",
+          "when": {
+            "state_key": "plan",
+            "equals": "wood_road"
+          }
+        },
+        {
+          "to": "od_a3_road",
+          "when": {
+            "state_key": "plan",
+            "equals": "song_wood"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "od_job_road_1",
+      "kind": "story",
+      "ref": "od_job_road_1",
+      "transitions": [
+        {
+          "to": "od_job_road_2"
+        }
+      ]
+    },
+    {
+      "node_id": "od_job_road_2",
+      "kind": "story",
+      "ref": "od_job_road_2",
+      "transitions": [
+        {
+          "to": "od_job_road_3"
+        }
+      ]
+    },
+    {
+      "node_id": "od_job_road_3",
+      "kind": "story",
+      "ref": "od_job_road_3",
+      "transitions": [
+        {
+          "to": "od_a3_road",
+          "when": {
+            "state_key": "plan",
+            "equals": "wood_road"
+          }
+        },
+        {
+          "to": "od_job_song_1",
+          "when": {
+            "state_key": "plan",
+            "equals": "road_song"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "od_job_song_1",
+      "kind": "story",
+      "ref": "od_job_song_1",
+      "transitions": [
+        {
+          "to": "od_job_song_2"
+        }
+      ]
+    },
+    {
+      "node_id": "od_job_song_2",
+      "kind": "story",
+      "ref": "od_job_song_2",
+      "transitions": [
+        {
+          "to": "od_job_song_3"
+        }
+      ]
+    },
+    {
+      "node_id": "od_job_song_3",
+      "kind": "story",
+      "ref": "od_job_song_3",
+      "transitions": [
+        {
+          "to": "od_a3_road",
+          "when": {
+            "state_key": "plan",
+            "equals": "road_song"
+          }
+        },
+        {
+          "to": "od_job_wood_1",
+          "when": {
+            "state_key": "plan",
+            "equals": "song_wood"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "od_a3_road",
+      "kind": "story",
+      "ref": "od_a3_road",
+      "transitions": [
+        {
+          "to": "od_b01"
+        }
+      ]
+    },
+    {
+      "node_id": "od_b01",
+      "kind": "battle",
+      "ref": {
+        "select_by": "plan",
+        "variants": {
+          "wood_road": "od_enc_wood_road",
+          "road_song": "od_enc_road_song",
+          "song_wood": "od_enc_song_wood"
+        }
+      },
+      "transitions": [
+        {
+          "to": "od_a3_clear"
+        }
+      ]
+    },
+    {
+      "node_id": "od_a3_clear",
+      "kind": "story",
+      "ref": "od_a3_clear",
+      "transitions": [
+        {
+          "to": "event_harvest_inn_meal_1"
+        }
+      ]
+    },
+    {
+      "node_id": "event_harvest_inn_meal_1",
+      "kind": "story",
+      "ref": "event_harvest_inn_meal_1",
+      "transitions": [
+        {
+          "to": "od_a3_after_soup"
+        }
+      ]
+    },
+    {
+      "node_id": "od_a3_after_soup",
+      "kind": "story",
+      "ref": "od_a3_after_soup",
+      "transitions": [
+        {
+          "to": "event_harvest_inn_meal_2"
+        }
+      ]
+    },
+    {
+      "node_id": "event_harvest_inn_meal_2",
+      "kind": "story",
+      "ref": "event_harvest_inn_meal_2",
+      "transitions": [
+        {
+          "to": "od_a4_gap"
+        }
+      ]
+    },
+    {
+      "node_id": "od_a4_gap",
+      "kind": "story",
+      "ref": "od_a4_gap",
+      "transitions": [
+        {
+          "to": "od_a4_join_echo",
+          "when": {
+            "state_key": "welcome",
+            "equals": "join"
+          }
+        },
+        {
+          "to": "od_a4_quiet_echo",
+          "when": {
+            "state_key": "welcome",
+            "equals": "quiet"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "od_a4_join_echo",
+      "kind": "story",
+      "ref": "od_a4_join_echo",
+      "transitions": [
+        {
+          "to": "event_harvest_inn_meal_3"
+        }
+      ]
+    },
+    {
+      "node_id": "od_a4_quiet_echo",
+      "kind": "story",
+      "ref": "od_a4_quiet_echo",
+      "transitions": [
+        {
+          "to": "event_harvest_inn_meal_3"
+        }
+      ]
+    },
+    {
+      "node_id": "event_harvest_inn_meal_3",
+      "kind": "story",
+      "ref": "event_harvest_inn_meal_3",
+      "transitions": [
+        {
+          "to": "od_a5_after_song"
+        }
+      ]
+    },
+    {
+      "node_id": "od_a5_after_song",
+      "kind": "story",
+      "ref": "od_a5_after_song",
+      "transitions": [
+        {
+          "to": "od_a5_company"
+        }
+      ]
+    },
+    {
+      "node_id": "od_a5_company",
+      "kind": "story",
+      "ref": "od_a5_company",
+      "transitions": [
+        {
+          "to": "od_a5_end"
+        }
+      ]
+    },
+    {
+      "node_id": "od_a5_end",
+      "kind": "story",
+      "ref": "od_a5_end",
+      "transitions": [
+        {
+          "to": "od_complete"
+        }
+      ]
+    },
+    {
+      "node_id": "od_complete",
+      "kind": "complete",
+      "ref": null,
+      "transitions": []
+    }
+  ],
+  "min_client_version": null,
+  "compatibility_note_tr": "Story exports mevcut StoryScene grammar; graph/encounter JSON authoring formatıdır. Medya/roster ve server adapter sonraki aşama."
+}

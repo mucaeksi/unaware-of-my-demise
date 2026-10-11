@@ -1,0 +1,96 @@
+{
+  "checked_at_utc": "2026-10-11T09:08:34.439Z",
+  "validated_against_main": "99df3cf",
+  "source_integrity": "PASS: source hashes and all copied canon fields unchanged",
+  "story_schema": "PASS: 15 exports",
+  "script_equivalence": "PASS: 116 unique lines",
+  "graph": "PASS: 8 complete paths; all 17 nodes reachable",
+  "runner": "PASS: save/restore after every line, before pending choice, and at scene checkpoints; pending choice saving rejected as expected",
+  "encounters": "PASS: 4 referenced variants, 2 front / 3 rear",
+  "replay_catalog": "PASS: 2 bounded segments and all conversation targets",
+  "rewards": "UNDECIDED",
+  "scene_count": 15,
+  "line_count": 116,
+  "canon_line_count": 0,
+  "decision_combinations": 8,
+  "encounter_variants": 4,
+  "battles_per_first_run": 1,
+  "first_path_lines": [
+    82,
+    83
+  ],
+  "first_path_words": [
+    768,
+    791
+  ],
+  "limits": [
+    "VM and authoring validation; no event API, production roster balance, visual/audio playback, Android or signed patch test.",
+    "Combat role feasibility prototype is separately tested; it does not replace canonical hero/unit or production balance mappings."
+  ],
+  "paths": [
+    {
+      "method": "scout",
+      "plan": "scout_tracks",
+      "focus": "brin",
+      "line_count": 83,
+      "words": 784,
+      "battles": 1
+    },
+    {
+      "method": "scout",
+      "plan": "scout_tracks",
+      "focus": "nixie",
+      "line_count": 83,
+      "words": 789,
+      "battles": 1
+    },
+    {
+      "method": "scout",
+      "plan": "scout_sound",
+      "focus": "brin",
+      "line_count": 83,
+      "words": 786,
+      "battles": 1
+    },
+    {
+      "method": "scout",
+      "plan": "scout_sound",
+      "focus": "nixie",
+      "line_count": 83,
+      "words": 791,
+      "battles": 1
+    },
+    {
+      "method": "brace",
+      "plan": "brace_bank",
+      "focus": "brin",
+      "line_count": 82,
+      "words": 768,
+      "battles": 1
+    },
+    {
+      "method": "brace",
+      "plan": "brace_bank",
+      "focus": "nixie",
+      "line_count": 82,
+      "words": 773,
+      "battles": 1
+    },
+    {
+      "method": "brace",
+      "plan": "brace_beam",
+      "focus": "brin",
+      "line_count": 82,
+      "words": 776,
+      "battles": 1
+    },
+    {
+      "method": "brace",
+      "plan": "brace_beam",
+      "focus": "nixie",
+      "line_count": 82,
+      "words": 781,
+      "battles": 1
+    }
+  ]
+}

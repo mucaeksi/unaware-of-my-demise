@@ -1,0 +1,21 @@
+{
+  "event_id": "event_one_dish_one_name",
+  "gate": {
+    "after_stage": "3-5",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "physical_character_earliest_stages": {
+    "jori_flint": "3-2",
+    "nixie_vale": "1-4",
+    "pippa_bell": "3-4",
+    "kera_voss": "1-3",
+    "fadyme": "1-1",
+    "mahmut": "1-1"
+  },
+  "timeline_tr": "Kaynak Harvest üç sahnesi/14 satırı korunur. Pippa charm sırrı ve Jori’nin sonraki aile/çan sahneleri yeni metinde açılmaz.",
+  "core_action_tr": "İki işten oluşan şölen hazırlığı",
+  "new_text_status": "authored_narrative_for_future_patch; not a replacement of canon main story",
+  "source_main": "99df3cf"
+}

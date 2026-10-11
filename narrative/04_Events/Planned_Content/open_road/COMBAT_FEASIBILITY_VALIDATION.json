@@ -1,0 +1,212 @@
+{
+  "status": "PASS: schema-compatible proxies complete under existing combat engine",
+  "prototype_count": 2,
+  "simulation_runs": 18,
+  "base_replay_checks": 6,
+  "player_wins": 18,
+  "turn_range": [
+    18,
+    31
+  ],
+  "production_balance": "NOT_CERTIFIED",
+  "results": [
+    {
+      "encounter_id": "or_enc_supply",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "or_enc_supply",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "or_enc_supply",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 18
+      },
+      "action_count": 12
+    },
+    {
+      "encounter_id": "or_enc_supply",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "or_enc_supply",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "or_enc_supply",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "or_enc_supply",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 30
+      },
+      "action_count": 21
+    },
+    {
+      "encounter_id": "or_enc_supply",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 30
+      },
+      "action_count": 21
+    },
+    {
+      "encounter_id": "or_enc_supply",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 30
+      },
+      "action_count": 21
+    },
+    {
+      "encounter_id": "or_enc_passage",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "or_enc_passage",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "or_enc_passage",
+      "enemy_hp_multiplier": 0.8,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 19
+      },
+      "action_count": 13
+    },
+    {
+      "encounter_id": "or_enc_passage",
+      "enemy_hp_multiplier": 1,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "or_enc_passage",
+      "enemy_hp_multiplier": 1,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "or_enc_passage",
+      "enemy_hp_multiplier": 1,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 26
+      },
+      "action_count": 18
+    },
+    {
+      "encounter_id": "or_enc_passage",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 17,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 31
+      },
+      "action_count": 22
+    },
+    {
+      "encounter_id": "or_enc_passage",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 71,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 30
+      },
+      "action_count": 21
+    },
+    {
+      "encounter_id": "or_enc_passage",
+      "enemy_hp_multiplier": 1.2,
+      "seed": 311,
+      "result": {
+        "winner": "player",
+        "stars": 3,
+        "turns": 31
+      },
+      "action_count": 22
+    }
+  ]
+}

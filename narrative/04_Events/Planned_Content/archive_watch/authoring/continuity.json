@@ -1,0 +1,19 @@
+{
+  "event_id": "tactical_archive_watch",
+  "gate": {
+    "after_stage": "4-5",
+    "runtime_stage_mapping": null,
+    "ownership_required": false,
+    "payment_required": false
+  },
+  "physical_character_earliest_stages": {
+    "kera_voss": "1-3",
+    "tilda_fen": "4-2",
+    "iona_mist": "4-2",
+    "odelia_pike": "4-1"
+  },
+  "timeline_tr": "Fiziksel ekip yalnız kısa arşiv VN’sinde; savaşlar izole canlandırmadır. Gerçek düşmanlar kliniğe taşınmaz. Dynamic modifier, günlük zorunluluk, leaderboard veya yeni farm ödülü seçilmedi.",
+  "core_action_tr": "Dört sabit profil üzerinde üç taktik vaka",
+  "new_text_status": "authored_narrative_for_future_patch; not a replacement of canon main story",
+  "source_main": "99df3cf"
+}

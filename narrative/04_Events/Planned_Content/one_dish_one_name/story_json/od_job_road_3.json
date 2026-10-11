@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "scene_id": "od_job_road_3",
+  "title_en": "The Next Pair of Hands",
+  "location_id": "od_storehouse_lane",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "od_storehouse_lane"
+    },
+    {
+      "op": "music",
+      "cue_id": "od_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_3_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "If we need another load, can you show the next pair of hands where we went?",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_3_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "You are making them lead the way back?",
+      "emotion": "curious"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_3_003",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "They know the steps now. I do not have to carry every bowl to know it will arrive.",
+      "emotion": "bright"
+    },
+    {
+      "op": "show",
+      "character": "pippa_bell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_3_004",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "That sounds like a holiday.",
+      "emotion": "wry"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_3_005",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Only if nobody asks me to carry the tables.",
+      "emotion": "serious"
+    },
+    {
+      "op": "narrate",
+      "line_id": "od_job_road_3_006",
+      "text": "She hands over the empty sling and follows while the helper chooses the turn."
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_3_007",
+      "speaker": "od_helper",
+      "speaker_display": "Helper",
+      "text": "This way.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "od_job_road_3_008",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Good. It is not only my route now.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "od_job_road_3_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_one_dish_one_name/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

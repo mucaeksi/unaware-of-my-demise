@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "scene_id": "or_a2_supply_1",
+  "title_en": "Where the Next Cloth Waits",
+  "location_id": "or_supply_board",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "or_supply_board"
+    },
+    {
+      "op": "music",
+      "cue_id": "or_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_supply_1_001",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "One here, one brought forward, the empty cloth marker laid flat.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_supply_1_002",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "Good. How does the next person see that the stack is low?",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_supply_1_003",
+      "speaker": "or_volunteer",
+      "speaker_display": "Volunteer",
+      "text": "I could call for you.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_supply_1_004",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "Try a person who will still be here.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "nara_vell",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "or_a2_supply_1_005",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "The keeper at the bench can see a flat marker. Put it where their eyes already go.",
+      "emotion": "calm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "or_a2_supply_1_006",
+      "text": "The volunteer moves the marker, then starts the handover again."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "or_a2_supply_1_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_open_road/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

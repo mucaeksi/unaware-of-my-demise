@@ -1,0 +1,70 @@
+{
+  "authoring_schema_version": 1,
+  "event_id": "side_quest_last_traveler",
+  "status": "adjustable_design_contract_not_live_config",
+  "reference_stage": "1-4",
+  "reference_chapter_level_range": [
+    1,
+    3
+  ],
+  "production_roster_mapping": null,
+  "seed_policy": "fixed_per_encounter_revision",
+  "victory_rule": "standard_enemy_team_defeated",
+  "formation": {
+    "party_slots": 5,
+    "enemy_slots": 5,
+    "front": 2,
+    "rear": 3
+  },
+  "prototype_adjustment": {
+    "enemy_hp_multiplier": {
+      "default": 1,
+      "min": 0.8,
+      "max": 1.2,
+      "tested": [
+        0.8,
+        1,
+        1.2
+      ]
+    },
+    "party_fixture": "normalized tutorial-kit proxies at level 1; not stage balance"
+  },
+  "production_adjustment": {
+    "unit_level_bounds": [
+      1,
+      20
+    ],
+    "chapter_level_target": [
+      1,
+      3
+    ],
+    "base_stats": [
+      "hp",
+      "atk",
+      "def",
+      "spd"
+    ],
+    "skill_fields": [
+      "cooldown_turns",
+      "focus_cost",
+      "ai_priority",
+      "effect_ops"
+    ],
+    "constraints": [
+      "No new effect ops or selectors outside shipped grammar.",
+      "No hidden change of story result/reward/gate as a difficulty parameter.",
+      "Counterplay preview must change with actual skill/intent binding.",
+      "Fixed enemy count and rows; compare both choices with actual free/loan roster."
+    ]
+  },
+  "immutable_story_fields": [
+    "stable_scene_and_line_ids",
+    "canon_verbatim_text",
+    "gate_information_order",
+    "chosen_branch_and_completed_progress",
+    "replay_isolation"
+  ],
+  "reward_binding": null,
+  "energy_cost": null,
+  "min_client_version": null
+}

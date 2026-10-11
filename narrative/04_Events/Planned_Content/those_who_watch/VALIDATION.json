@@ -1,0 +1,128 @@
+{
+  "checked_at_utc": "2026-10-11T09:08:34.457Z",
+  "validated_against_main": "99df3cf",
+  "source_integrity": "PASS: source hashes and all copied canon fields unchanged",
+  "story_schema": "PASS: 23 exports",
+  "script_equivalence": "PASS: 137 unique lines",
+  "graph": "PASS: 12 complete paths; all 29 nodes reachable",
+  "runner": "PASS: save/restore after every line, before pending choice, and at scene checkpoints; pending choice saving rejected as expected",
+  "encounters": "PASS: 5 referenced variants, 2 front / 3 rear",
+  "replay_catalog": "PASS: 2 bounded segments and all conversation targets",
+  "rewards": "UNDECIDED",
+  "scene_count": 23,
+  "line_count": 137,
+  "canon_line_count": 10,
+  "decision_combinations": 12,
+  "encounter_variants": 5,
+  "battles_per_first_run": 3,
+  "first_path_lines": [
+    97,
+    97
+  ],
+  "first_path_words": [
+    1103,
+    1176
+  ],
+  "limits": [
+    "VM and authoring validation; no event API, production roster balance, visual/audio playback, Android or signed patch test.",
+    "Combat role feasibility prototype is separately tested; it does not replace canonical hero/unit or production balance mappings."
+  ],
+  "paths": [
+    {
+      "place": "ridge",
+      "account": "seen",
+      "focus": "clem",
+      "line_count": 97,
+      "words": 1139,
+      "battles": 3
+    },
+    {
+      "place": "ridge",
+      "account": "seen",
+      "focus": "vespera",
+      "line_count": 97,
+      "words": 1112,
+      "battles": 3
+    },
+    {
+      "place": "ridge",
+      "account": "seen",
+      "focus": "thistle",
+      "line_count": 97,
+      "words": 1139,
+      "battles": 3
+    },
+    {
+      "place": "ridge",
+      "account": "heard",
+      "focus": "clem",
+      "line_count": 97,
+      "words": 1130,
+      "battles": 3
+    },
+    {
+      "place": "ridge",
+      "account": "heard",
+      "focus": "vespera",
+      "line_count": 97,
+      "words": 1103,
+      "battles": 3
+    },
+    {
+      "place": "ridge",
+      "account": "heard",
+      "focus": "thistle",
+      "line_count": 97,
+      "words": 1130,
+      "battles": 3
+    },
+    {
+      "place": "terrace",
+      "account": "seen",
+      "focus": "clem",
+      "line_count": 97,
+      "words": 1176,
+      "battles": 3
+    },
+    {
+      "place": "terrace",
+      "account": "seen",
+      "focus": "vespera",
+      "line_count": 97,
+      "words": 1149,
+      "battles": 3
+    },
+    {
+      "place": "terrace",
+      "account": "seen",
+      "focus": "thistle",
+      "line_count": 97,
+      "words": 1176,
+      "battles": 3
+    },
+    {
+      "place": "terrace",
+      "account": "heard",
+      "focus": "clem",
+      "line_count": 97,
+      "words": 1167,
+      "battles": 3
+    },
+    {
+      "place": "terrace",
+      "account": "heard",
+      "focus": "vespera",
+      "line_count": 97,
+      "words": 1140,
+      "battles": 3
+    },
+    {
+      "place": "terrace",
+      "account": "heard",
+      "focus": "thistle",
+      "line_count": 97,
+      "words": 1167,
+      "battles": 3
+    }
+  ]
+}

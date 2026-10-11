@@ -1,0 +1,109 @@
+{
+  "authoring_schema_version": 1,
+  "encounters": [
+    {
+      "encounter_id": "dr_enc_shelf",
+      "title_en": "The Refuge Approach",
+      "location_id": "dr_refuge_passage",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "choir_knight",
+          "role_tr": "ön zırh",
+          "behavior_brief_tr": "İzinli ön baskı profili; ward bağı varsa açık intent."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "inkbound_dead",
+          "role_tr": "işaret baskısı",
+          "behavior_brief_tr": "Mevcut mark/status grammar ile sınırlı; lore intent panelinde yok."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_cleric",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli heal profili; destek hedefi görünür."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "inkbound_dead",
+          "role_tr": "işaret baskısı",
+          "behavior_brief_tr": "Mevcut mark/status grammar ile sınırlı; lore intent panelinde yok."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "inkbound_dead",
+          "role_tr": "işaret baskısı",
+          "behavior_brief_tr": "Mevcut mark/status grammar ile sınırlı; lore intent panelinde yok."
+        }
+      ],
+      "tactical_focus_tr": "Destek hedefini azaltıp approach açmak.",
+      "briefing_en": "The waiting people and records are outside the fight. Read the armored front and the supporting cleric.",
+      "counterplay_tr": "Standard zafer; sustain veya destek önceliği. Belge savunma HP/minigame yok.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    },
+    {
+      "encounter_id": "dr_enc_desk",
+      "title_en": "The Refuge Approach",
+      "location_id": "dr_refuge_passage",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "slot": 0,
+          "row": "front",
+          "base_unit_id": "choir_knight",
+          "role_tr": "ön zırh",
+          "behavior_brief_tr": "İzinli ön baskı profili; ward bağı varsa açık intent."
+        },
+        {
+          "slot": 1,
+          "row": "front",
+          "base_unit_id": "choir_knight",
+          "role_tr": "ön zırh",
+          "behavior_brief_tr": "İzinli ön baskı profili; ward bağı varsa açık intent."
+        },
+        {
+          "slot": 2,
+          "row": "rear",
+          "base_unit_id": "hollow_cleric",
+          "role_tr": "destek",
+          "behavior_brief_tr": "İzinli heal profili; destek hedefi görünür."
+        },
+        {
+          "slot": 3,
+          "row": "rear",
+          "base_unit_id": "inkbound_dead",
+          "role_tr": "işaret baskısı",
+          "behavior_brief_tr": "Mevcut mark/status grammar ile sınırlı; lore intent panelinde yok."
+        },
+        {
+          "slot": 4,
+          "row": "rear",
+          "base_unit_id": "inkbound_dead",
+          "role_tr": "işaret baskısı",
+          "behavior_brief_tr": "Mevcut mark/status grammar ile sınırlı; lore intent panelinde yok."
+        }
+      ],
+      "tactical_focus_tr": "Ön baskıyı yönetirken tek desteği takip etmek.",
+      "briefing_en": "The waiting people and records are outside the fight. Read the armored front and the supporting cleric.",
+      "counterplay_tr": "Standard zafer; sustain veya destek önceliği. Belge savunma HP/minigame yok.",
+      "reward_binding": null,
+      "energy_cost": null,
+      "balance_status": "numeric_stats_and_permitted_ai_profiles_not_simulated",
+      "optional_mastery": null
+    }
+  ]
+}

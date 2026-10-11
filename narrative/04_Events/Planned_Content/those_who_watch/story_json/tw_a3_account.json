@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "scene_id": "tw_a3_account",
+  "title_en": "What to Keep in the Account",
+  "location_id": "highland_ridge",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "highland_ridge"
+    },
+    {
+      "op": "music",
+      "cue_id": "tw_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_account_001",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "The guide keeps a record of what the watchers noticed. I can help make today’s useful.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_account_002",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "People may remember the sound before they remember the sky.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_account_003",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "We need not make all memories look alike.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "thistle_roe"
+    },
+    {
+      "op": "hide",
+      "character": "vespera_wisp"
+    },
+    {
+      "op": "choice",
+      "prompt": "Choose the emphasis of the account.",
+      "options": [
+        {
+          "id": "tw_account_seen",
+          "text": "Describe the view and its limits.",
+          "goto": "seen"
+        },
+        {
+          "id": "tw_account_heard",
+          "text": "Record what the watchers heard.",
+          "goto": "heard"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "seen"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_account_004",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "The rim flickered. I will say where we stood when we saw it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_account_005",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "And where the stone interrupted the view.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_account_006",
+      "speaker": "tw_guide",
+      "speaker_display": "Guide",
+      "text": "That will help the next reader understand what you actually saw.",
+      "emotion": "calm"
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "hide",
+      "character": "vespera_wisp"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "heard"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_account_007",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "We can start with the sound. You do not have to explain the whole valley.",
+      "emotion": "gentle"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_account_008",
+      "speaker": "tw_lantern_carrier",
+      "speaker_display": "Lantern Carrier",
+      "text": "Mine joined the others. That is what I know.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "thistle_roe"
+    },
+    {
+      "op": "show",
+      "character": "clem_marr",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "tw_a3_account_009",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "Then that is the line I will keep beside what we saw.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "clem_marr"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tw_a3_account_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "event_those_who_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

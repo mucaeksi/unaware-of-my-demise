@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "scene_id": "aw_a2_before",
+  "title_en": "Case One: Look Past the First Body",
+  "location_id": "aw_case_board",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "aw_case_board"
+    },
+    {
+      "op": "music",
+      "cue_id": "aw_case"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a2_before_001",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "First case. Look at the whole line before picking the first target.",
+      "emotion": "focused"
+    },
+    {
+      "op": "hide",
+      "character": "kera_voss"
+    },
+    {
+      "op": "show",
+      "character": "odelia_pike",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a2_before_002",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "The nearest threat is visible. So is the one behind it.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "tilda_fen",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "aw_a2_before_003",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Winning slowly is permitted. Failing to notice pressure is what we are practicing against.",
+      "emotion": "focused"
+    },
+    {
+      "op": "narrate",
+      "line_id": "aw_a2_before_004",
+      "text": "The first case opens on its own. No wound from another exercise follows into it."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "aw_a2_before_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "tactical_archive_watch/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

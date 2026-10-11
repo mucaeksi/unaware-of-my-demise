@@ -1,0 +1,429 @@
+{
+  "authoring_schema_version": 1,
+  "encounters": [
+    {
+      "encounter_id": "tl_enc_gate",
+      "title_en": "The Yard Gate",
+      "location_id": "tl_archive_yard",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 0,
+          "row": "front",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Öndeki hedefe standart baskı."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 1,
+          "row": "front",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Öndeki hedefe standart baskı."
+        },
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 2,
+          "row": "rear",
+          "role_tr": "öncelikli tehdit",
+          "behavior_brief_tr": "Bellbound niyeti destek baskısını görünür yapar; mevcut izinli davranıştan seçilir."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 3,
+          "row": "rear",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart hedef seçimi."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 4,
+          "row": "rear",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart hedef seçimi."
+        }
+      ],
+      "tactical_focus_tr": "Öncelikli destek tehdidini okumak.",
+      "briefing_en": "Read the bellbound threat before committing your strongest action. A steady defensive approach can also win.",
+      "counterplay_tr": "Öncelikli hedefi erken düşürmek veya savunma/iyileştirme ile basıncı karşılamak.",
+      "optional_mastery_tr": "Öncelikli Bellbound hedefini ilk düşman zafer zinciri oluşmadan durdurma; kesin condition battle grammar üzerinden bağlanır.",
+      "mastery_reward_binding": null,
+      "reward_binding": null,
+      "balance_status": "numeric_stats_and_ai_bindings_require_combat_validation",
+      "safety_tr": "NPC ve ilaç kasa prop’ları combat slot/HP/escort hedefi değildir. Dört kahraman loan olabilir; oyuncunun beşlisi korunur."
+    },
+    {
+      "encounter_id": "tl_enc_coast_wall",
+      "title_en": "Below the Sea Wall",
+      "location_id": "tl_coast_path",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 0,
+          "row": "front",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Ön sırayı meşgul eder."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 1,
+          "row": "front",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Ön sırayı meşgul eder."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 2,
+          "row": "rear",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "Arka sıra hedefe yönelen desteklenmiş target selector gerekir."
+        },
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 3,
+          "row": "rear",
+          "role_tr": "destek tehdidi",
+          "behavior_brief_tr": "Önceden gösterilen niyet."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 4,
+          "row": "rear",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart baskı."
+        }
+      ],
+      "tactical_focus_tr": "Arka sıra tehditleri.",
+      "briefing_en": "One threat reaches toward the rear line. Protect it or remove the attacker; speed alone is not required.",
+      "counterplay_tr": "Arka saldırganı önceliklendirme, heal/shield ya da uygun savunma kompozisyonu.",
+      "optional_mastery_tr": "İşaretli arka saldırı çözülmeden ilgili saldırganı durdurmak; ödül kararı yok.",
+      "mastery_reward_binding": null,
+      "reward_binding": null,
+      "balance_status": "numeric_stats_and_ai_bindings_require_combat_validation",
+      "safety_tr": "NPC ve ilaç kasa prop’ları combat slot/HP/escort hedefi değildir. Dört kahraman loan olabilir; oyuncunun beşlisi korunur."
+    },
+    {
+      "encounter_id": "tl_enc_coast_turn",
+      "title_en": "The Blind Turn",
+      "location_id": "tl_coast_path",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 0,
+          "row": "front",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Ön sıraya baskı."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 1,
+          "row": "front",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Ön sıraya baskı."
+        },
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 2,
+          "row": "rear",
+          "role_tr": "bell desteği",
+          "behavior_brief_tr": "Destek niyeti önce görünür."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 3,
+          "row": "rear",
+          "role_tr": "arka saldırgan",
+          "behavior_brief_tr": "Arka saldırı önce görünür."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 4,
+          "row": "rear",
+          "role_tr": "hafif takip",
+          "behavior_brief_tr": "Standart baskı."
+        }
+      ],
+      "tactical_focus_tr": "Destek tehdidi ile arka saldırgan arasında sıra seçmek.",
+      "briefing_en": "The bell is visible, but it is not the only danger. Check both intended actions before choosing your priority.",
+      "counterplay_tr": "Önce destek tehdidi veya önce arka saldırgan; her ikisi de ücretsiz/loan kadroyla test edilmeli.",
+      "optional_mastery_tr": "İki etiketli threat aksiyonundan birini önceden durdurmak; dar tur limiti yok.",
+      "mastery_reward_binding": null,
+      "reward_binding": null,
+      "balance_status": "numeric_stats_and_ai_bindings_require_combat_validation",
+      "safety_tr": "NPC ve ilaç kasa prop’ları combat slot/HP/escort hedefi değildir. Dört kahraman loan olabilir; oyuncunun beşlisi korunur."
+    },
+    {
+      "encounter_id": "tl_enc_load_sheds",
+      "title_en": "Between the Salt Sheds",
+      "location_id": "tl_load_road",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 0,
+          "row": "front",
+          "role_tr": "ön ağır baskı",
+          "behavior_brief_tr": "Güçlü ama önceden görülen front niyeti."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 1,
+          "row": "front",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Ön hedefe devam eden baskı."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 2,
+          "row": "rear",
+          "role_tr": "takip",
+          "behavior_brief_tr": "Ön baskı."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 3,
+          "row": "rear",
+          "role_tr": "takip",
+          "behavior_brief_tr": "Ön baskı."
+        },
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 4,
+          "row": "rear",
+          "role_tr": "arka destek",
+          "behavior_brief_tr": "Hafif destek niyeti."
+        }
+      ],
+      "tactical_focus_tr": "Sürekli ön baskıyı yönetmek.",
+      "briefing_en": "Expect sustained pressure on the front. Keep recovery available; there is no turn-limit victory requirement.",
+      "counterplay_tr": "Savunma ve recovery önceliği; arka destek erken öldürülebilir veya baskı dayanılarak karşılanabilir.",
+      "optional_mastery_tr": "Hiçbir front kahramanı düşmeden standard zafer; tüm hikâye koşulları bundan bağımsız.",
+      "mastery_reward_binding": null,
+      "reward_binding": null,
+      "balance_status": "numeric_stats_and_ai_bindings_require_combat_validation",
+      "safety_tr": "NPC ve ilaç kasa prop’ları combat slot/HP/escort hedefi değildir. Dört kahraman loan olabilir; oyuncunun beşlisi korunur."
+    },
+    {
+      "encounter_id": "tl_enc_load_cart",
+      "title_en": "The Cart with No Driver",
+      "location_id": "tl_load_road",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 0,
+          "row": "front",
+          "role_tr": "ön ağır baskı",
+          "behavior_brief_tr": "Front niyeti."
+        },
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 1,
+          "row": "front",
+          "role_tr": "ön ağır baskı",
+          "behavior_brief_tr": "Eş zamanlı ölümcül olmayan front niyeti."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 2,
+          "row": "rear",
+          "role_tr": "takip",
+          "behavior_brief_tr": "Standart baskı."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 3,
+          "row": "rear",
+          "role_tr": "takip",
+          "behavior_brief_tr": "Standart baskı."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 4,
+          "row": "rear",
+          "role_tr": "takip",
+          "behavior_brief_tr": "Standart baskı."
+        }
+      ],
+      "tactical_focus_tr": "İki ön tehdide karşı kaynak sıralaması.",
+      "briefing_en": "Two front threats apply pressure together. You may break one quickly or stabilize your party before spending your burst.",
+      "counterplay_tr": "Tek hedef burst veya daha uzun savunma. NPC tamamen combat dışında güvenli kalır.",
+      "optional_mastery_tr": "Bir ön tehdidi ilk açık güçlü aksiyonundan önce düşürme; toplam tur eşiği yok.",
+      "mastery_reward_binding": null,
+      "reward_binding": null,
+      "balance_status": "numeric_stats_and_ai_bindings_require_combat_validation",
+      "safety_tr": "NPC ve ilaç kasa prop’ları combat slot/HP/escort hedefi değildir. Dört kahraman loan olabilir; oyuncunun beşlisi korunur."
+    },
+    {
+      "encounter_id": "tl_enc_boundary_clean",
+      "title_en": "A Clear Boundary — Field Kit",
+      "location_id": "tl_harbor_square",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 0,
+          "row": "front",
+          "role_tr": "ön baskı",
+          "behavior_brief_tr": "Sürdürülen front baskısı."
+        },
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 1,
+          "row": "front",
+          "role_tr": "ön niyet",
+          "behavior_brief_tr": "Önceden görülen, survivable aksiyon."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 2,
+          "row": "rear",
+          "role_tr": "takip",
+          "behavior_brief_tr": "Standart baskı."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 3,
+          "row": "rear",
+          "role_tr": "takip",
+          "behavior_brief_tr": "Standart baskı."
+        },
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 4,
+          "row": "rear",
+          "role_tr": "destek",
+          "behavior_brief_tr": "Destek niyeti."
+        }
+      ],
+      "tactical_focus_tr": "Kit hazırlığı: recovery teması, geçici buff gerektirmeyen encounter varyantı.",
+      "briefing_en": "Your field-kit preparation suits a steady hold. Recovery and defense remain valid answers to the pressure.",
+      "counterplay_tr": "Kalıcı stat/skill değişmez. Kit seçimi farklı desteklenmiş encounter profili seçer; yeni geçici cleanse op’u icat edilmez.",
+      "optional_mastery_tr": "Recovery uyguladıktan sonra zafer; mevcut verifier bunu ayıramazsa yalnız first-clear kaydı tutulur.",
+      "mastery_reward_binding": null,
+      "reward_binding": null,
+      "balance_status": "numeric_stats_and_ai_bindings_require_combat_validation",
+      "safety_tr": "NPC ve ilaç kasa prop’ları combat slot/HP/escort hedefi değildir. Dört kahraman loan olabilir; oyuncunun beşlisi korunur."
+    },
+    {
+      "encounter_id": "tl_enc_boundary_scout",
+      "title_en": "A Clear Boundary — Survey",
+      "location_id": "tl_harbor_square",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 0,
+          "row": "front",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Ön baskı."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 1,
+          "row": "front",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Ön baskı."
+        },
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 2,
+          "row": "rear",
+          "role_tr": "öncelikli destek",
+          "behavior_brief_tr": "Brifingde slotu ve izinli niyeti açık gösterilir."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 3,
+          "row": "rear",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "Brifingde slotu ve izinli niyeti açık gösterilir."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 4,
+          "row": "rear",
+          "role_tr": "takip",
+          "behavior_brief_tr": "Standart baskı."
+        }
+      ],
+      "tactical_focus_tr": "Keşif hazırlığı: daha net hedef önceliği sunan varyant.",
+      "briefing_en": "The survey identifies the bellbound support and the reaching attacker. Inspect their slots before you deploy.",
+      "counterplay_tr": "Normal intent herkes için görünür kalır. Keşif oyuncusu diğer seçimin bilgi erişimini azaltmaz; farklı encounter kompozisyonu seçilir.",
+      "optional_mastery_tr": "Brifingdeki iki tehdidin birini ilk niyetinden önce durdurma; ödül kararı yok.",
+      "mastery_reward_binding": null,
+      "reward_binding": null,
+      "balance_status": "numeric_stats_and_ai_bindings_require_combat_validation",
+      "safety_tr": "NPC ve ilaç kasa prop’ları combat slot/HP/escort hedefi değildir. Dört kahraman loan olabilir; oyuncunun beşlisi korunur."
+    },
+    {
+      "encounter_id": "tl_enc_last_lane",
+      "title_en": "The Last Delivery",
+      "location_id": "tl_harbor_lane",
+      "format": "5v5_2_front_3_rear",
+      "victory": "standard_enemy_team_defeated",
+      "loss": "retry_same_node_no_story_penalty",
+      "enemy_slots": [
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 0,
+          "row": "front",
+          "role_tr": "ön ağır",
+          "behavior_brief_tr": "Front niyeti."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 1,
+          "row": "front",
+          "role_tr": "ön tutucu",
+          "behavior_brief_tr": "Ön baskı."
+        },
+        {
+          "base_unit_id": "bellbound_dead",
+          "slot": 2,
+          "row": "rear",
+          "role_tr": "destek",
+          "behavior_brief_tr": "Açık destek niyeti."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 3,
+          "row": "rear",
+          "role_tr": "arka tehdit",
+          "behavior_brief_tr": "Açık rear selector."
+        },
+        {
+          "base_unit_id": "hollow_pilgrim",
+          "slot": 4,
+          "row": "rear",
+          "role_tr": "takip",
+          "behavior_brief_tr": "Standart baskı."
+        }
+      ],
+      "tactical_focus_tr": "Ön dayanıklılık + arka hedef önceliğini birleştirme.",
+      "briefing_en": "Keep the front stable while reading the rear threat. The vendor is not part of this battle.",
+      "counterplay_tr": "Hızlı tek hedef çözümü veya dengeli recovery. Ani enrage, yeni boss fazı ve zorunlu element yok.",
+      "optional_mastery_tr": "Standart zaferin yanında opsiyonel iki threat interruption; condition ve ödül bağlama ayrı karar.",
+      "mastery_reward_binding": null,
+      "reward_binding": null,
+      "balance_status": "numeric_stats_and_ai_bindings_require_combat_validation",
+      "safety_tr": "NPC ve ilaç kasa prop’ları combat slot/HP/escort hedefi değildir. Dört kahraman loan olabilir; oyuncunun beşlisi korunur."
+    }
+  ]
+}

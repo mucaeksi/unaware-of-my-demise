@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a1_edge",
+  "title_en": "The Damp Edge",
+  "location_id": "dr_refuge_desk",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_desk"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a1_edge_001",
+      "text": "Water has reached the edge of the linen book. A dark line climbs the page without asking where the writing ends."
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_edge_002",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "Lift the cover. Not the wet corner.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_edge_003",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "And leave the passage clear. Someone is coming through with a blanket.",
+      "emotion": "calm"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_edge_004",
+      "speaker": "dr_carrier",
+      "speaker_display": "Carrier",
+      "text": "I was told my slip would show where to return it.",
+      "emotion": "hesitant"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_edge_005",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "It should. A book that cannot be used is merely heavy paper.",
+      "emotion": "precise"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a1_edge_006",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Sit on this side while we make it useful again.",
+      "emotion": "warm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a1_edge_007",
+      "text": "Mirel lays an empty board beneath the book. Aveline moves the chair without moving the person out of reach."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a1_edge_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

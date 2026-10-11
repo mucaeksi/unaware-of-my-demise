@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "dr_a2_ask",
+  "title_en": "The Cord and the Keeper",
+  "location_id": "dr_refuge_desk",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "dr_refuge_desk"
+    },
+    {
+      "op": "music",
+      "cue_id": "dr_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_ask_001",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Blue cords return here. The keeper tied them herself before the rain.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_ask_002",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "Then I will note that she confirmed it. I will not mend the original handwriting into ours.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_ask_003",
+      "speaker": "dr_carrier",
+      "speaker_display": "Carrier",
+      "text": "I thought I had forgotten the way.",
+      "emotion": "relieved"
+    },
+    {
+      "op": "say",
+      "line_id": "dr_a2_ask_004",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "The line got wet. You did not do anything wrong.",
+      "emotion": "warm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "dr_a2_ask_005",
+      "text": "The cord lies beside the note, an ordinary small thing that helped an answer become clear."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "dr_a2_ask_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_somewhere_dry/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

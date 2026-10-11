@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "scene_id": "lt_a2_brace_3",
+  "title_en": "The Other Side",
+  "location_id": "lt_forest_junction",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "lt_forest_junction"
+    },
+    {
+      "op": "music",
+      "cue_id": "lt_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "brin_alder",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_3_001",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "I can keep this side clear.",
+      "emotion": "calm"
+    },
+    {
+      "op": "show",
+      "character": "nixie_vale",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_3_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Then I will check the other side.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_3_003",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "Call if you need me.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_3_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "You too.",
+      "emotion": "small_smile"
+    },
+    {
+      "op": "narrate",
+      "line_id": "lt_a2_brace_3_005",
+      "text": "Brin nods as if it is an instruction worth remembering."
+    },
+    {
+      "op": "hide",
+      "character": "nixie_vale"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "lt_a2_brace_3_006",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Good. We move together when the line is ready.",
+      "emotion": "calm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "lt_a2_brace_3_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "side_quest_last_traveler/authoring/event.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}
