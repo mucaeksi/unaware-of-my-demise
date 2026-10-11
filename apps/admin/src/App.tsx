@@ -5,12 +5,14 @@ import { Audit } from './pages/Audit';
 import { Banners } from './pages/Banners';
 import { Characters } from './pages/Characters';
 import { Dashboard } from './pages/Dashboard';
+import { Economy } from './pages/Economy';
+import { Development } from './pages/Development';
 import { Flags } from './pages/Flags';
 import { Players } from './pages/Players';
 import { Releases } from './pages/Releases';
 import { Shop } from './pages/Shop';
 
-const PAGES = ['Dashboard', 'Players', 'Banners', 'Shop', 'Flags', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
+const PAGES = ['Dashboard', 'Development', 'Players', 'Banners', 'Economy', 'Shop', 'Flags', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
 type Page = (typeof PAGES)[number];
 
 export function useToast(): { toast: string | null; say: (m: string) => void } {
@@ -70,8 +72,10 @@ export function App(): ReactNode {
       <main>
         {!me ? <ErrorNotice error={err} /> : null}
         {me && page === 'Dashboard' ? <Dashboard health={health} /> : null}
+        {me && page === 'Development' ? <Development me={me} say={say} /> : null}
         {me && page === 'Players' ? <Players me={me} say={say} /> : null}
         {me && page === 'Banners' ? <Banners me={me} say={say} /> : null}
+        {me && page === 'Economy' ? <Economy say={say} /> : null}
         {me && page === 'Shop' ? <Shop me={me} say={say} /> : null}
         {me && page === 'Flags' ? <Flags me={me} say={say} /> : null}
         {me && page === 'Characters' ? <Characters me={me} say={say} /> : null}

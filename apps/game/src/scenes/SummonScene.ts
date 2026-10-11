@@ -82,12 +82,12 @@ export class SummonScene extends HubScene {
     }
 
     const one = b.cost.perPull;
-    this.add_(new Button(this, 760, 860, { label: 'PULL ×1', sub: `${one.toLocaleString('en-US')} Eclipse`, w: 400, h: 140, fontSize: 42, variant: 'hot', onClick: () => void this.pull(b, 1) }).setEnabled(this.balance >= one));
-    this.add_(new Button(this, 1180, 860, { label: 'PULL ×10', sub: `${(one * 10).toLocaleString('en-US')} Eclipse`, w: 400, h: 140, fontSize: 42, variant: 'hot', onClick: () => void this.pull(b, 10) }).setEnabled(this.balance >= one * 10));
+    this.add_(new Button(this, 760, 850, { label: 'PULL ×1', sub: `${one.toLocaleString('en-US')} Eclipse`, w: 400, h: 130, fontSize: 42, variant: 'hot', onClick: () => void this.pull(b, 1) }).setEnabled(this.balance >= one));
+    this.add_(new Button(this, 1180, 850, { label: 'PULL ×10', sub: `${(one * 10).toLocaleString('en-US')} Eclipse`, w: 400, h: 130, fontSize: 42, variant: 'hot', onClick: () => void this.pull(b, 10) }).setEnabled(this.balance >= one * 10));
     // the same currency pays for upgrades and shop items: show what a pull leaves behind
-    this.add_(txt(this, 970, 945, `You have ${this.balance.toLocaleString('en-US')} Eclipse Tokens. The same tokens pay for upgrades and the shop: after ×10 you keep ${Math.max(0, this.balance - one * 10).toLocaleString('en-US')}.`, { fontSize: '27px', color: T.dim }).setOrigin(0.5));
-    this.add_(new Button(this, 760, 1020, { label: 'POOLS', w: 300, h: 90, fontSize: 28, onClick: () => this.showPools(b) }));
-    this.add_(new Button(this, 1180, 1020, { label: 'HISTORY', w: 300, h: 90, fontSize: 28, onClick: () => void this.showHistory() }));
+    this.add_(txt(this, 970, 952, `You have ${this.balance.toLocaleString('en-US')} Eclipse Tokens. The same tokens pay for upgrades and the shop: after ×10 you keep ${Math.max(0, this.balance - one * 10).toLocaleString('en-US')}.`, { fontSize: '27px', color: T.dim }).setOrigin(0.5));
+    this.add_(new Button(this, 760, 1026, { label: 'POOLS', w: 300, h: 84, fontSize: 28, onClick: () => this.showPools(b) }));
+    this.add_(new Button(this, 1180, 1026, { label: 'HISTORY', w: 300, h: 84, fontSize: 28, onClick: () => void this.showHistory() }));
   }
 
   private async pull(b: BannerInfo, count: 1 | 10): Promise<void> {

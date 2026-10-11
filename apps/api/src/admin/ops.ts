@@ -1,6 +1,6 @@
 import type { Context, Hono, MiddlewareHandler } from 'hono';
 import { z } from 'zod';
-import { analyzeBanner, BannerConfig, simulateBanner } from '@uomd/economy';
+import { analyzeBanner, analyzeFlow, BannerConfig, DEFAULT_FLOW, simulateBanner } from '@uomd/economy';
 import { atLeast, type AdminIdentity, type Role } from '../auth/access';
 import { HttpError } from '../content/store';
 import { audit, auditIfChanged, auditStatement } from '../db/audit';
@@ -210,6 +210,22 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     return c.json({ exact: analyzeBanner(cfg.data), simulated: simulateBanner(cfg.data, { accounts: b.accounts, pullsPerAccount: b.pullsPerAccount, seed: b.seed, ...(b.target ? { target: b.target } : {}) }) });
   });
 
+  // ------------------------------------------------------------------ economy model (single currency, D-17)
+  const Flow = z
+    .object({
+      days: z.number().int().min(1).max(365).default(30),
+      startBalance: z.number().min(0).max(1e9).default(0),
+      income: z.object({ tasks: z.number().min(0).max(1e6), weekly: z.number().min(0).max(1e6), ads: z.number().min(0).max(1e6), subscription: z.number().min(0).max(1e6) }).strict().default(DEFAULT_FLOW.income),
+      pullCost: z.number().int().min(1).max(1e6).default(DEFAULT_FLOW.pullCost),
+      upgradeStepFee: z.number().min(0).max(1e9).default(DEFAULT_FLOW.upgradeStepFee),
+      upgradeStepsWantedPerDay: z.number().min(0).max(1000).default(DEFAULT_FLOW.upgradeStepsWantedPerDay),
+      upgradeStepsAvailable: z.number().int().min(0).max(1e6).default(DEFAULT_FLOW.upgradeStepsAvailable),
+      shopSpendPerDay: z.number().min(0).max(1e9).default(0)
+    })
+    .strict();
+  app.get('/admin/api/economy/defaults', need('viewer'), (c) => c.json({ model: DEFAULT_FLOW }));
+  app.post('/admin/api/economy/flow', need('viewer'), async (c) => c.json(analyzeFlow(await body(c, Flow))));
+
   // ------------------------------------------------------------------ shop
   app.get('/admin/api/products', need('viewer'), async (c) => {
     const { results } = await c.env.DB.prepare('SELECT product_id, kind, title_en, grants, sub_config, active, updated_at, updated_by FROM shop_products ORDER BY product_id').all();
@@ -273,5 +289,39 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
           ]);
     if (res[0]?.meta.changes !== 1) throw new HttpError(409, 'version_conflict', 'flag changed or already exists; reload and retry');
     return c.json({ key, version: b.expectedVersion + 1 });
+  });
+
+  // ------------------------------------------------------------------ development tracker (design feedback loop)
+  app.get('/admin/api/dev/notes', need('viewer'), async (c) => {
+    const st = c.req.query('status');
+    const { results } = await c.env.DB
+      .prepare("SELECT id, area, kind, body, status, resolution, created_by, created_at, updated_by, updated_at FROM dev_notes WHERE (?1 IS NULL OR status = ?1) ORDER BY CASE status WHEN 'open' THEN 0 WHEN 'in_progress' THEN 1 ELSE 2 END, id DESC LIMIT 200")
+      .bind(st && ['open', 'in_progress', 'done', 'wontfix'].includes(st) ? st : null)
+      .all();
+    return c.json({ notes: results });
+  });
+
+  const NewNote = z.object({ area: z.string().min(2).max(60), kind: z.enum(['feedback', 'change_request', 'approved', 'question', 'idea']), body: z.string().min(1).max(4000) }).strict();
+  app.post('/admin/api/dev/notes', need('viewer'), async (c) => {
+    const b = await body(c, NewNote);
+    const who = c.get('admin').identity;
+    const row = await c.env.DB.prepare('INSERT INTO dev_notes (area, kind, body, created_by) VALUES (?1, ?2, ?3, ?4) RETURNING id').bind(b.area, b.kind, b.body, who).first<{ id: number }>();
+    await audit(c.env.DB, who, 'devnote.create', String(row?.id), { area: b.area, kind: b.kind });
+    return c.json({ id: row?.id }, 201);
+  });
+
+  const NoteState = z.object({ status: z.enum(['open', 'in_progress', 'done', 'wontfix']), resolution: z.string().max(2000).default('') }).strict();
+  app.patch('/admin/api/dev/notes/:id', need('operator'), async (c) => {
+    const id = Number(c.req.param('id'));
+    if (!Number.isInteger(id) || id < 1) throw new HttpError(400, 'bad_request', 'invalid note id');
+    const b = await body(c, NoteState);
+    const who = c.get('admin').identity;
+    const db = c.env.DB;
+    const res = await db.batch([
+      db.prepare("UPDATE dev_notes SET status = ?2, resolution = ?3, updated_by = ?4, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id = ?1").bind(id, b.status, b.resolution, who),
+      auditIfChanged(db, who, 'devnote.status', String(id), { status: b.status })
+    ]);
+    if (res[0]?.meta.changes !== 1) throw new HttpError(404, 'no_such_note', 'note not found');
+    return c.json({ id, status: b.status });
   });
 }

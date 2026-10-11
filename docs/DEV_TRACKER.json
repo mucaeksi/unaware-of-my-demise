@@ -1,0 +1,90 @@
+{
+  "now": [
+    {
+      "title": "Upgrade system data model",
+      "detail": "XP books / ascension items as quest-earned items, level caps by account level, fee curves in Eclipse Tokens, admin editor; the Economy page already models the sink side."
+    },
+    {
+      "title": "UI design review with you",
+      "detail": "Every screen is visible in Development > Live preview and Screens; leave notes in Feedback."
+    }
+  ],
+  "next": [
+    {
+      "title": "Upgrade system",
+      "detail": "XP books and ascension items as quest-earned items; level caps by account level; fee curves in the main currency; admin editor."
+    },
+    {
+      "title": "Team builder, character detail, equipment, weapon catalog",
+      "detail": "Needed before weapon banners can be activated."
+    },
+    {
+      "title": "Daily / half-day task engine",
+      "detail": "Canon 12-hour windows; pays the guaranteed income floor."
+    },
+    {
+      "title": "Account deletion / data export, consent flow",
+      "detail": "Store compliance."
+    },
+    {
+      "title": "Android shell (Capacitor) + native bridges",
+      "detail": "Google sign-in, Play Billing, AdMob rewarded ads; emulator tests in CI."
+    },
+    {
+      "title": "Combat coverage 3/20 -> 20/20 characters, boss phases, Sweep/AFK",
+      "detail": ""
+    }
+  ],
+  "blockedOnOwner": [
+    {
+      "title": "Google Cloud: OAuth client IDs (Android + Web)",
+      "detail": "Needed for real Google sign-in. Steps in docs/AAB_ACCESS_PLAN.md."
+    },
+    {
+      "title": "Play Console: app + service account access + products",
+      "detail": "Invite the service account email under Users and permissions; create the app."
+    },
+    {
+      "title": "AdMob: app + rewarded ad unit IDs",
+      "detail": "Needed for the SSV allow-list (ADMOB_AD_UNIT_IDS)."
+    },
+    {
+      "title": "Android keystore",
+      "detail": "Upload key for signing; never leaves the owner/CI secrets."
+    },
+    {
+      "title": "Your Google e-mail for the Control Center login",
+      "detail": "Only the e-mail address; never a password."
+    },
+    {
+      "title": "age private key",
+      "detail": "Only to rehearse a backup restore."
+    }
+  ],
+  "ideas": [
+    {
+      "from": "owner",
+      "date": "2026-10-11",
+      "text": "One main currency for the whole game; materials (books) from quest-style tasks.",
+      "status": "decided: D-17"
+    },
+    {
+      "from": "owner",
+      "date": "2026-10-11",
+      "text": "Finish UI + all infrastructure + admin first; only art production remains afterwards.",
+      "status": "in progress"
+    },
+    {
+      "from": "owner",
+      "date": "2026-10-11",
+      "text": "A place in the admin panel to follow development and review the UI together.",
+      "status": "this page"
+    },
+    {
+      "from": "owner",
+      "date": "2026-10-11",
+      "text": "If a test or step fails more than twice: raise reasoning, note it, move on.",
+      "status": "working agreement"
+    }
+  ]
+}

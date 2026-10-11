@@ -167,3 +167,37 @@ describe('shop, flags, ads', () => {
     expect((await admin('/admin/api/flags/Bad Key', j('PUT', { enabled: true, expectedVersion: 0 }))).status).toBe(400);
   });
 });
+
+describe('development tracker notes', () => {
+  it('anyone with a role can leave feedback; operators move it along; notes are never rewritten or deleted', async () => {
+    const mk = (body: unknown, as?: string) => admin('/admin/api/dev/notes', j('POST', body, as));
+    const created = await mk({ area: 'Summon', kind: 'change_request', body: 'The result cards should show the rarity glow.' }, 'viewer@example.com');
+    expect(created.status).toBe(201);
+    const { id } = (await created.json()) as { id: number };
+    expect((await mk({ area: 'x', kind: 'idea', body: 'too short area' })).status).toBe(400);
+    expect((await mk({ area: 'Summon', kind: 'nonsense', body: 'x' })).status).toBe(400);
+    const open = (await (await admin('/admin/api/dev/notes?status=open', { as: 'viewer@example.com' })).json()) as { notes: { id: number; status: string; created_by: string }[] };
+    expect(open.notes.find((n) => n.id === id)).toMatchObject({ status: 'open', created_by: 'viewer@example.com' });
+    expect((await admin(`/admin/api/dev/notes/${id}`, j('PATCH', { status: 'done', resolution: 'x' }, 'viewer@example.com'))).status).toBe(403);
+    expect((await admin(`/admin/api/dev/notes/${id}`, j('PATCH', { status: 'done', resolution: 'Glow added in commit abc123.' }, 'operator@example.com'))).status).toBe(200);
+    const done = (await (await admin('/admin/api/dev/notes?status=done', { as: 'viewer@example.com' })).json()) as { notes: { id: number; resolution: string; updated_by: string }[] };
+    expect(done.notes.find((n) => n.id === id)).toMatchObject({ resolution: 'Glow added in commit abc123.', updated_by: 'operator@example.com' });
+    expect((await admin('/admin/api/dev/notes/99999', j('PATCH', { status: 'done' }))).status).toBe(404);
+    await expect(db().prepare("UPDATE dev_notes SET body = 'edited' WHERE id = ?1").bind(id).run()).rejects.toThrow(/cannot be rewritten/);
+    await expect(db().prepare('DELETE FROM dev_notes WHERE id = ?1').bind(id).run()).rejects.toThrow(/design record/);
+  });
+});
+
+describe('economy model endpoint', () => {
+  it('returns the three archetypes and the floor rule; rejects nonsense', async () => {
+    const d = (await (await admin('/admin/api/economy/defaults', { as: 'viewer@example.com' })).json()) as { model: { pullCost: number } };
+    expect(d.model.pullCost).toBe(160);
+    const r = await admin('/admin/api/economy/flow', j('POST', { upgradeStepFee: 150 }, 'viewer@example.com'));
+    expect(r.status).toBe(200);
+    const out = (await r.json()) as { results: { archetype: string }[]; floorHolds: boolean; recoveryDays: number };
+    expect(out.results.map((x) => x.archetype)).toEqual(['all_in_wishes', 'balanced', 'never_wishes']);
+    expect(out.floorHolds).toBe(true);
+    expect((await admin('/admin/api/economy/flow', j('POST', { days: 0 }))).status).toBe(400);
+    expect((await admin('/admin/api/economy/flow', j('POST', { extra: 1 }))).status).toBe(400);
+  });
+});

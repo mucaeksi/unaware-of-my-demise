@@ -35,6 +35,8 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || '0c942d198668a8b1a8e8ee699651b817' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 60 # the admin build lists recent commits on the Development page
       - name: Check configuration (names only, never values)
         run: |
           if [ -z "${CLOUDFLARE_API_TOKEN}" ]; then

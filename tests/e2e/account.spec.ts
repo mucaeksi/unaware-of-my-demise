@@ -73,7 +73,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   await tap(page, info, 440, 330); // SUMMON
   await waitScene(page, 'Summon');
   await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Summon').banners?.length ?? 0), { timeout: 20_000 }).toBeGreaterThan(0);
-  await page.waitForTimeout(600);
+  await page.waitForTimeout(2500); // software GL stretches the scene fade; the evidence shot must be fully faded in
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-11-summon.png` });
   await tap(page, info, 1180, 860); // PULL x10
   await expect.poll(async () => (await call(page, '/api/v1/gacha/history?limit=40')).pulls.length, { timeout: 30_000 }).toBeGreaterThanOrEqual(10);
@@ -89,7 +89,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   await goto(page, 'Mail');
   await waitScene(page, 'Mail');
   await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Mail').mail?.length ?? 0), { timeout: 20_000 }).toBeGreaterThan(0);
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(2500);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-13-mail.png` });
   await tap(page, info, REF_W - 250, 290); // CLAIM (first row)
   await expect.poll(async () => (await call(page, '/api/v1/wallet')).wallets.eclipse_token ?? 0, { timeout: 20_000 }).toBe((adj.balance as number) - 1600 + 320);
@@ -98,7 +98,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   await goto(page, 'Roster');
   await waitScene(page, 'Roster');
   await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Roster').list?.length ?? 0), { timeout: 20_000 }).toBeGreaterThanOrEqual(2);
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(2500);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-14-roster.png` });
   const items = await call(page, '/api/v1/inventory');
   expect(items.items.map((i: any) => i.item_id)).toEqual(expect.arrayContaining(['mahmut', 'fadyme']));

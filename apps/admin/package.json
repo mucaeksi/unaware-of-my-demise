@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -p tsconfig.json && vite build",
     "typecheck": "tsc -p tsconfig.json",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "prebuild": "tsx ../../tools/build_progress.ts"
   },
   "dependencies": {
     "@fontsource/cinzel": "5.2.8",

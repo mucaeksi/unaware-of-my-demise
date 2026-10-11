@@ -212,3 +212,37 @@ describe('ration (energy)', () => {
     expect(rationSpend({ value: 10, atMs: 0 }, -1, 0)).toBeNull();
   });
 });
+
+import { analyzeFlow, DEFAULT_FLOW, simulateFlow } from './index';
+describe('single-currency flow model (D-17)', () => {
+  it('canon income defaults add up to the canon 15-day figure (about 8,800 tokens)', () => {
+    const r = analyzeFlow({ ...DEFAULT_FLOW, days: 15 });
+    expect(r.incomePerDay).toBeGreaterThan(580);
+    expect(r.incomePerDay).toBeLessThan(600);
+    expect(r.results[0]!.totalIncome).toBeGreaterThan(8700);
+    expect(r.results[0]!.totalIncome).toBeLessThan(9000);
+  });
+  it('pure all-in stalls upgrades but is never locked out: one day of paused wishes pays the day\'s steps (floor rule)', () => {
+    const r = analyzeFlow(DEFAULT_FLOW);
+    const [allIn, balanced] = r.results;
+    expect(r.recoveryDays).toBe(1); // 2 steps x 150 = 300 <= ~594 a day
+    expect(r.floorHolds).toBe(true);
+    expect(allIn!.upgradeSteps).toBeLessThan(balanced!.upgradeSteps); // wishing first starves upgrades
+    expect(balanced!.blockedDays).toBe(0);
+    expect(balanced!.pulls).toBeGreaterThan(0); // and the balanced player still wishes with what remains
+  });
+  it('a fee above what a day earns breaks the floor rule and the model says so', () => {
+    const m = { ...DEFAULT_FLOW, upgradeStepFee: 700, upgradeStepsWantedPerDay: 1 };
+    const r = analyzeFlow(m);
+    expect(r.floorHolds).toBe(false);
+    expect(r.recoveryDays).toBe(2);
+    expect(r.maxSafeStepFee).toBe(594);
+    expect(simulateFlow(m, 'balanced').blockedDays).toBeGreaterThan(0);
+  });
+  it('never wishing piles tokens up; demand stops at the gate', () => {
+    const r = simulateFlow({ ...DEFAULT_FLOW, upgradeStepsAvailable: 5 }, 'never_wishes');
+    expect(r.upgradeSteps).toBe(5);
+    expect(r.pulls).toBe(0);
+    expect(r.endBalance).toBeGreaterThan(10000);
+  });
+});
