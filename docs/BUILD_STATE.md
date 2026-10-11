@@ -58,10 +58,10 @@ Screenshots taken by the e2e run (WebP, `docs/evidence/`): `desktop-01-title`, `
 
 ## 4. Decisions needed from the owner
 1. CI token scopes / permission to proceed with staging deploy (exact scopes in `SECRETS_AND_PERMISSIONS.md`).
-2. Access policy for the Control Center (who is allowed; recommended: only the owner's identity) and creating the Access application.
-3. Legacy Neon/Hyperdrive/Workers decommission (README: D1 only). Not touched.
+2. ~~Access policy for the Control Center~~ **Done 2026-10-10 (owner-authorised):** Access application + audience tag + owner row; see `SECRETS_AND_PERMISSIONS.md` §2.
+3. ~~Legacy Neon/Hyperdrive/Workers decommission~~ **Done on 2026-10-11 for everything inside Cloudflare** (see `SECRETS_AND_PERMISSIONS.md`). Owner checklist for what lies outside: (a) delete or suspend the Neon project/branches (take a fresh `pg_dump` first only if real player/test data matters — the stored dump is from 2026-10-05); (b) delete the GitHub Actions secrets `DATABASE_URL`, `STAGING_DATABASE_URL`, `R2_BACKUP_ACCESS_KEY_ID`, `R2_BACKUP_SECRET_ACCESS_KEY` and variable `BACKUP_AGE_RECIPIENT`; (c) revoke the R2 backup S3 token in the Cloudflare dashboard; (d) remove any Play RTDN Pub/Sub push subscription that targets `unaware-of-my-demise.muratcaneksiii.workers.dev`; (e) delete R2 bucket `uomd-db-backups` (or let its lifecycle rule expire the single object on ~2026-11-04); (f) account Preferences still say Godot 4.7.2 — change them.
 4. Visual canon: crimson cape on approved chibi sheets vs deep-plum hood on the locked sheet.
-5. Gemini/Google media budget before any Veo/Lyria/image batch.
+5. **Google media budget — no approved amount exists anywhere** (README gives the policy but no figure; `content/budget/media_budget.json` is `approved_usd: 0`; Drive and Git history hold none; Billing/Budgets cannot be read from this sandbox, only the Gemini model list was ever checked). Please tell me the amount and per-batch cap (or check AI Studio → Spend and Cloud Billing → Budgets for project `gen-lang-client-0955955681`) and I record it in the budget file; also set a hard cap on Google's side.
 7. Preferences file mentions Godot 4.7.2; the README and the directive say Phaser 4.2.1 — the project follows the README.
 
 ## 5. Exact next implementation step
