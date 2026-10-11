@@ -1,6 +1,6 @@
 import type { Context, Hono, MiddlewareHandler } from 'hono';
 import { z } from 'zod';
-import { analyzeBanner, analyzeFlow, BannerConfig, DEFAULT_FLOW, simulateBanner } from '@uomd/economy';
+import { analyzeBanner, analyzeFlow, BannerConfig, DEFAULT_FLOW, ProgressionConfig, simulateBanner } from '@uomd/economy';
 import { atLeast, type AdminIdentity, type Role } from '../auth/access';
 import { HttpError } from '../content/store';
 import { audit, auditIfChanged, auditStatement } from '../db/audit';
@@ -225,6 +225,64 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     .strict();
   app.get('/admin/api/economy/defaults', need('viewer'), (c) => c.json({ model: DEFAULT_FLOW }));
   app.post('/admin/api/economy/flow', need('viewer'), async (c) => c.json(analyzeFlow(await body(c, Flow))));
+
+  // ------------------------------------------------------------------ catalog and tunable rules
+  app.get('/admin/api/catalog/summary', need('viewer'), async (c) => {
+    const db = c.env.DB;
+    const [items, gear, sets] = await Promise.all([
+      db.prepare('SELECT kind, COUNT(*) AS n FROM item_defs GROUP BY kind ORDER BY kind').all(),
+      db.prepare('SELECT slot, rarity, COUNT(*) AS n FROM gear_defs GROUP BY slot, rarity ORDER BY slot, rarity').all(),
+      db.prepare('SELECT set_id, name_en, pieces_for_bonus FROM accessory_sets ORDER BY set_id').all()
+    ]);
+    return c.json({ items: items.results, gear: gear.results, sets: sets.results });
+  });
+  app.get('/admin/api/catalog/items', need('viewer'), async (c) => c.json({ items: (await c.env.DB.prepare('SELECT item_id, name_en, kind, rarity, stack_cap, xp_value, consumable, status, version FROM item_defs ORDER BY kind, item_id').all()).results }));
+  app.get('/admin/api/catalog/gear', need('viewer'), async (c) => {
+    const slot = c.req.query('slot');
+    const { results } = await c.env.DB
+      .prepare('SELECT gear_id, slot, name_en, rarity, family, tier, set_id, owner_character_id, banner_id, level_cap, status, version FROM gear_defs WHERE (?1 IS NULL OR slot = ?1) ORDER BY slot, rarity DESC, gear_id LIMIT 400')
+      .bind(slot && ['weapon', 'armor', 'necklace', 'ring'].includes(slot) ? slot : null)
+      .all();
+    return c.json({ gear: results });
+  });
+  const ItemPatch = z.object({ expectedVersion: z.number().int().min(1), name_en: z.string().min(1).max(80).optional(), status: z.enum(['active', 'hidden', 'retired']).optional(), xp_value: z.number().int().min(0).max(10_000_000).nullable().optional() }).strict();
+  app.patch('/admin/api/catalog/items/:id', need('operator'), async (c) => {
+    const id = c.req.param('id');
+    const p = await body(c, ItemPatch);
+    const who = c.get('admin').identity;
+    const db = c.env.DB;
+    const res = await db.batch([
+      db
+        .prepare("UPDATE item_defs SET name_en = COALESCE(?3, name_en), status = COALESCE(?4, status), xp_value = CASE WHEN ?5 = 1 THEN ?6 ELSE xp_value END, version = version + 1, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now'), updated_by = ?7 WHERE item_id = ?1 AND version = ?2")
+        .bind(id, p.expectedVersion, p.name_en ?? null, p.status ?? null, p.xp_value !== undefined ? 1 : 0, p.xp_value ?? null, who),
+      auditIfChanged(db, who, 'catalog.item', id, { ...p })
+    ]);
+    if (res[0]?.meta.changes !== 1) throw new HttpError(409, 'version_conflict', 'item not found or changed since you loaded it');
+    return c.json({ item_id: id });
+  });
+
+  const CONFIG_SCHEMAS: Record<string, z.ZodType<unknown>> = { progression: ProgressionConfig, gear: z.object({ note: z.string().max(400).default(''), roleStat: z.record(z.string(), z.string()), equipSlots: z.array(z.enum(['weapon', 'armor', 'necklace', 'ring'])).min(1), rerollCost: z.object({ itemId: z.string(), quantityByRarity: z.record(z.string(), z.number().int().min(1)) }).strict() }).strict() };
+  app.get('/admin/api/config/:key', need('viewer'), async (c) => {
+    const row = await c.env.DB.prepare('SELECT key, value_json, version, updated_at, updated_by FROM game_config WHERE key = ?1').bind(c.req.param('key')).first<{ key: string; value_json: string; version: number; updated_at: string; updated_by: string }>();
+    if (!row) throw new HttpError(404, 'no_such_config', 'unknown config key');
+    return c.json({ key: row.key, value: JSON.parse(row.value_json), version: row.version, updated_at: row.updated_at, updated_by: row.updated_by });
+  });
+  app.put('/admin/api/config/:key', need('operator'), async (c) => {
+    const key = c.req.param('key');
+    const schema = CONFIG_SCHEMAS[key];
+    if (!schema) throw new HttpError(404, 'no_such_config', 'unknown config key');
+    const b = await body(c, z.object({ value: z.unknown(), expectedVersion: z.number().int().min(1) }).strict(), 100_000);
+    const parsed = schema.safeParse(b.value);
+    if (!parsed.success) throw new HttpError(422, 'invalid_config', parsed.error.issues.slice(0, 3).map((i) => `${i.path.join('.')}: ${i.message}`).join('; '));
+    const who = c.get('admin').identity;
+    const db = c.env.DB;
+    const res = await db.batch([
+      db.prepare("UPDATE game_config SET value_json = ?2, version = version + 1, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now'), updated_by = ?3 WHERE key = ?1 AND version = ?4").bind(key, JSON.stringify(parsed.data), who, b.expectedVersion),
+      auditIfChanged(db, who, 'config.update', key, { expectedVersion: b.expectedVersion })
+    ]);
+    if (res[0]?.meta.changes !== 1) throw new HttpError(409, 'version_conflict', 'config changed since you loaded it');
+    return c.json({ key, version: b.expectedVersion + 1 });
+  });
 
   // ------------------------------------------------------------------ shop
   app.get('/admin/api/products', need('viewer'), async (c) => {

@@ -115,6 +115,7 @@ async function boot(): Promise<Stack> {
   await sh('npx', ['wrangler', 'd1', 'migrations', 'apply', 'DB', '--local', ...persist, '-c', 'wrangler.game.jsonc', '--env', 'dev'], api);
   await sh('npx', ['wrangler', 'd1', 'execute', 'DB', '--local', ...persist, '-c', 'wrangler.game.jsonc', '--env', 'dev', '--file', 'seed/characters.sql'], api);
   await sh('npx', ['wrangler', 'd1', 'execute', 'DB', '--local', ...persist, '-c', 'wrangler.game.jsonc', '--env', 'dev', '--file', 'seed/banners.sql'], api);
+  await sh('npx', ['wrangler', 'd1', 'execute', 'DB', '--local', ...persist, '-c', 'wrangler.game.jsonc', '--env', 'dev', '--file', 'seed/catalog.sql'], api);
 
   start('admin', ['dev', '-c', 'wrangler.admin.jsonc', '--env', 'dev', '--port', String(PORTS.admin), '--inspector-port', '9301', ...persist, '--var', `ACCESS_TEAM_DOMAIN:${TEAM}`, '--var', `ACCESS_AUD:${AUD}`, '--var', `ACCESS_JWKS_URL:http://127.0.0.1:${PORTS.jwks}/jwks.json`, '--var', `ADMIN_BOOTSTRAP_OWNERS:${OWNER}`, '--var', `CONTENT_SIGNING_KEY:${JSON.stringify({ ...signing.privateJwk, kid })}`, '--var', `CONTENT_SIGNING_KID:${kid}`], api);
   await waitFor(`http://127.0.0.1:${PORTS.admin}/admin/api/health`);

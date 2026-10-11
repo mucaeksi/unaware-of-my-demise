@@ -55,6 +55,17 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     return c.json({ id: r?.id ?? 'eclipse_token', name: r?.display_name ?? "Bell's Remains" }, 200, { 'Cache-Control': 'public, max-age=300' });
   });
 
+  /** Public catalog: material definitions, gear definitions (compact) and the progression rules, so the client can show costs and names. */
+  app.get('/api/v1/catalog', async (c) => {
+    const db = c.env.DB;
+    const [items, gear, cfg] = await Promise.all([
+      db.prepare("SELECT item_id, name_en, kind, rarity, xp_value, consumable FROM item_defs WHERE status <> 'retired' ORDER BY kind, item_id").all(),
+      db.prepare("SELECT gear_id, slot, name_en, rarity, family, tier, set_id, owner_character_id, level_cap, base_json, growth_json FROM gear_defs WHERE status <> 'retired' ORDER BY slot, rarity DESC, gear_id").all(),
+      db.prepare('SELECT key, value_json FROM game_config').all<{ key: string; value_json: string }>()
+    ]);
+    return c.json({ items: items.results, gear: gear.results, config: Object.fromEntries(cfg.results.map((r) => [r.key, JSON.parse(r.value_json)])) }, 200, { 'Cache-Control': 'public, max-age=60' });
+  });
+
   app.get('/api/v1/flags', async (c) => {
     const { results } = await c.env.DB.prepare('SELECT key, enabled, value_json FROM feature_flags ORDER BY key').all<{ key: string; enabled: number; value_json: string }>();
     return c.json({ flags: Object.fromEntries(results.map((r) => [r.key, { enabled: r.enabled === 1, value: JSON.parse(r.value_json) }])) }, 200, { 'Cache-Control': 'public, max-age=15' });

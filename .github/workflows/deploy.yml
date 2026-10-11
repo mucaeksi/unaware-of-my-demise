@@ -58,6 +58,9 @@ jobs:
       - name: Seed characters (idempotent, keeps edited rows)
         working-directory: apps/api
         run: npx wrangler d1 execute DB --remote -c wrangler.game.jsonc --env "$TARGET" --file seed/characters.sql
+      - name: Seed the catalog and tunable rules (idempotent, never overwrites an operator edit)
+        working-directory: apps/api
+        run: npx wrangler d1 execute DB --remote -c wrangler.game.jsonc --env "$TARGET" --file seed/catalog.sql
       - name: Seed banners (idempotent, never overwrites an operator-edited banner)
         working-directory: apps/api
         run: npx wrangler d1 execute DB --remote -c wrangler.game.jsonc --env "$TARGET" --file seed/banners.sql
