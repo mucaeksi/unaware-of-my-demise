@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_reconstruction",
+  "title_en": "A Route Remembered",
+  "location_id": "ac_gate",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_gate"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_reconstruction_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "I have drawn each route as we found it. The marks show the attacks we had to pass.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_reconstruction_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "A road map is useful. Knowing where it nearly killed you is better.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_reconstruction_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "May I practice the routes too?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_reconstruction_004",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Yes. On the record. No one goes back into danger just to prove the first crossing counted.",
+      "emotion": "firm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_reconstruction_005",
+      "text": "The yard survey lies flat beneath the lamps. Its routes can be studied again without closing the real gate."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_reconstruction_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

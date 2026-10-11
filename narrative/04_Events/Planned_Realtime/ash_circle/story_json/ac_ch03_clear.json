@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch03_clear",
+  "title_en": "The Route That Changed: The Record",
+  "location_id": "ac_dispatch",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_dispatch"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_clear_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "All three loads were redirected to the same storage pit.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_clear_002",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The pit was already full.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_clear_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Full of charcoal?",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_clear_004",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "That is what the tally says.",
+      "emotion": "ashamed"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_clear_005",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "That is what you let the tally say.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch03_clear_006",
+      "text": "The tags dry beneath a stone. Their arrows disagree with the road, but agree with each other."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch03_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

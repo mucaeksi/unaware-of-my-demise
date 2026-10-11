@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch07_clear",
+  "title_en": "An Empty Cart Returns: The Record",
+  "location_id": "ac_cart",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_cart"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch07_clear_001",
+      "text": "The cart reaches the open gate with no burden to deliver. Tovin keeps both hands on the handle."
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_clear_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "We do not know how many were taken to the pit. We write that plainly.",
+      "emotion": "firm"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_clear_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "And we stop calling it storage.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_clear_004",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "Will saying it change what is under there?",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_clear_005",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "It changes what the next person is told. That is what we can promise.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch07_clear_006",
+      "text": "On the yard map, Mera strikes one word through once. The mark remains readable."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch07_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch05_breather",
+  "title_en": "Under the Black Water: The Safe Mark",
+  "location_id": "ac_cistern",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_cistern"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_breather_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The ink on the water is moving against the current.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_breather_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Keep it off the boards. Breaking a chain does not read what was chained.",
+      "emotion": "tense"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_breather_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The west rim is dry. The next drain is on your right.",
+      "emotion": "firm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch05_breather_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

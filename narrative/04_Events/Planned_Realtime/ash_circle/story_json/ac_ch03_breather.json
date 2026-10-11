@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch03_breather",
+  "title_en": "The Route That Changed: The Safe Mark",
+  "location_id": "ac_dispatch",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_dispatch"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_breather_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The tags carry the yard stamp. No royal seal.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_breather_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Good. Keep the captain's business out of this. Oakhaven has enough wounds of its own.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_breather_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The largest wolf follows the broken cart. It turns late. Give it a wide corner.",
+      "emotion": "uneasy"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch03_breather_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

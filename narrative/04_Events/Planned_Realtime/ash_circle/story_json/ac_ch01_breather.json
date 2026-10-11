@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch01_breather",
+  "title_en": "The Open Gate: The Safe Mark",
+  "location_id": "ac_gate",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_gate"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_breather_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The first mark is visible again. The scale house is farther in.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_breather_002",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "That carrier keeps circling the same empty cart.",
+      "emotion": "uneasy"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_breather_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Leave room to pass it. A shield is no use if we close our own way out.",
+      "emotion": "firm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch01_breather_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

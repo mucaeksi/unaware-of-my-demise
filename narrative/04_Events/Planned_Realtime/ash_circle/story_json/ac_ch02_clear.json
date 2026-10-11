@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch02_clear",
+  "title_en": "Weight Without Names: The Record",
+  "location_id": "ac_weighbridge",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_weighbridge"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_clear_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The backs were filed clean. There are no names here.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_clear_002",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I signed that order. I thought the mill kept the originals.",
+      "emotion": "ashamed"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_clear_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Thinking is not the same as asking.",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_clear_004",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The totals do not match. These workers delivered more than they were paid for.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_clear_005",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The dispatch rack holds the next set. I can show you.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch02_clear_006",
+      "text": "Mera wraps the plates separately. An empty space is still evidence when someone made it empty."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch02_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

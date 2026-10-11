@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch05_clear",
+  "title_en": "Under the Black Water: The Record",
+  "location_id": "ac_cistern",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_cistern"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_clear_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The boards were turned face down before they were sunk.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_clear_002",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "They told me it would stop arguments over pay.",
+      "emotion": "ashamed"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_clear_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "It stopped people proving they had been here.",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_clear_004",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Do not scrape them clean. Even a crossed-out letter may be all a family has.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch05_clear_005",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I will bring cloth. Clean cloth this time.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch05_clear_006",
+      "text": "Black water leaves the channel. The earth beneath it keeps the shape of every board."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch05_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

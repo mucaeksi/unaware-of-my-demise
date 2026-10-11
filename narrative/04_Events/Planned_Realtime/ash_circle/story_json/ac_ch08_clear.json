@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch08_clear",
+  "title_en": "What the Pit Keeps: The Record",
+  "location_id": "ac_pit",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_pit"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_clear_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The rim is marked. No names guessed, no bodies moved without a witness.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_clear_002",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I can remember eleven workers. Not all their families.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_clear_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Then eleven is where we start, not where we stop.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_clear_004",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "I will leave the list open. Anyone missing may be written here without proving what they earned.",
+      "emotion": "firm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch08_clear_005",
+      "text": "The first new sign at the pit forbids a load. The second asks a question: Who is still missing?"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_clear_006",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I should have asked that before there was a pit.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch08_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

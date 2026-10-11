@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch08_entry",
+  "title_en": "What the Pit Keeps",
+  "location_id": "ac_pit",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_pit"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch08_entry_001",
+      "text": "The pit holds sacks, broken tools and a shoe with the foot still inside it. Nothing here has a proper place."
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_entry_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "No one dumps another load here.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_entry_003",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Markers first. We do not enter until the ground and the dead are safe to approach.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_entry_004",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I said the shortage would pass if we kept the carts running.",
+      "emotion": "ashamed"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_entry_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "The carts kept running. The shortage became people.",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_entry_006",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "There are two kinds of marks on these tools. We may have more than one crew to account for.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_entry_007",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I will name both. Even the ones who left.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch08_entry_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

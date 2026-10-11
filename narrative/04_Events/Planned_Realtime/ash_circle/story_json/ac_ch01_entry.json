@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch01_entry",
+  "title_en": "The Open Gate",
+  "location_id": "ac_gate",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_gate"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch01_entry_001",
+      "text": "Jori lifts the bar with her shoulder. The charcoal yard opens onto a road of overturned handcarts."
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_entry_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "This gate faces the village. Whatever we leave behind it will reach the houses first.",
+      "emotion": "tense"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_entry_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The carts stopped before the captain came. We had nowhere left to put the charcoal.",
+      "emotion": "guarded"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_entry_004",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "And no one left who could tell me which workers were missing.",
+      "emotion": "composed"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_entry_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Then we start with the road. No bell, no shouting. Let the dead follow our feet.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_entry_006",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "I will mark what we know. You bring back what can still be read.",
+      "emotion": "composed"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch01_entry_007",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "Stay on the pale chalk. The dark lines are cracks, not paths.",
+      "emotion": "uneasy"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch01_entry_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

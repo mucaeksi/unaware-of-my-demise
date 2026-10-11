@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch04_clear",
+  "title_en": "A Borrowed Dry Place: The Record",
+  "location_id": "ac_shelter",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_shelter"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch04_clear_001",
+      "text": "The shelter opens onto a wall of pencilled heights. The smallest mark ends below Jori's shoulder."
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_clear_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "These marks belong in the register too.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_clear_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I only counted the hands that could lift a sack.",
+      "emotion": "ashamed"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_clear_004",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Children are not the part of a load you can leave out.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_clear_005",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "We cannot tell who lived from a mark alone. I will write 'family present', and keep the wall.",
+      "emotion": "firm"
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch04_clear_006",
+      "text": "For the first time, Tovin carries something from the yard that cannot be sold."
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch04_clear_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

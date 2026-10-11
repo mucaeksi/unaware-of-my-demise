@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch04_entry",
+  "title_en": "A Borrowed Dry Place",
+  "location_id": "ac_shelter",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_shelter"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "narrate",
+      "line_id": "ac_ch04_entry_001",
+      "text": "A child's mitten hangs inside the stock shelter. Rain has hardened the cloth against its nail."
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_entry_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "There were families here.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_entry_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "They came with the seasonal crews. The village had no beds left.",
+      "emotion": "guarded"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_entry_004",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "And you locked the only dry roof?",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_entry_005",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "After the deliveries stopped. I thought they had all gone.",
+      "emotion": "ashamed"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_entry_006",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "We open it before we decide what that thought is worth.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_entry_007",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Three latches. Keep the door's swing clear.",
+      "emotion": "firm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch04_entry_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch03_entry",
+  "title_en": "The Route That Changed",
+  "location_id": "ac_dispatch",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_dispatch"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_entry_001",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The road ran south. Those tags point north.",
+      "emotion": "focused"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_entry_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Toward the pits.",
+      "emotion": "tense"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_entry_003",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "A new route was stamped over the old one. This ink is ordinary. Someone chose it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_entry_004",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I was told the south bridge could not take another load.",
+      "emotion": "guarded"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_entry_005",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Did you see the bridge?",
+      "emotion": "stern"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_entry_006",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "No.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch03_entry_007",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "We will read the instruction we have, not invent the one we want.",
+      "emotion": "firm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch03_entry_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

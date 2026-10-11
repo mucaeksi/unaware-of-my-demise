@@ -1,0 +1,365 @@
+{
+  "scope": "new design reference state model, not shipped server",
+  "steps": [
+    {
+      "cell": 1,
+      "rank": 0,
+      "chapter": 1,
+      "highest_after": 1
+    },
+    {
+      "cell": 2,
+      "rank": 0,
+      "chapter": 2,
+      "highest_after": 2
+    },
+    {
+      "cell": 3,
+      "rank": 0,
+      "chapter": 3,
+      "highest_after": 3
+    },
+    {
+      "cell": 4,
+      "rank": 0,
+      "chapter": 4,
+      "highest_after": 4
+    },
+    {
+      "cell": 5,
+      "rank": 0,
+      "chapter": 5,
+      "highest_after": 5
+    },
+    {
+      "cell": 6,
+      "rank": 0,
+      "chapter": 6,
+      "highest_after": 6
+    },
+    {
+      "cell": 7,
+      "rank": 0,
+      "chapter": 7,
+      "highest_after": 7
+    },
+    {
+      "cell": 8,
+      "rank": 0,
+      "chapter": 8,
+      "highest_after": 8
+    },
+    {
+      "cell": 9,
+      "rank": 0,
+      "chapter": 9,
+      "highest_after": 9
+    },
+    {
+      "cell": 10,
+      "rank": 0,
+      "chapter": 10,
+      "highest_after": 10
+    },
+    {
+      "cell": 11,
+      "rank": 1,
+      "chapter": 1,
+      "highest_after": 11
+    },
+    {
+      "cell": 12,
+      "rank": 1,
+      "chapter": 2,
+      "highest_after": 12
+    },
+    {
+      "cell": 13,
+      "rank": 1,
+      "chapter": 3,
+      "highest_after": 13
+    },
+    {
+      "cell": 14,
+      "rank": 1,
+      "chapter": 4,
+      "highest_after": 14
+    },
+    {
+      "cell": 15,
+      "rank": 1,
+      "chapter": 5,
+      "highest_after": 15
+    },
+    {
+      "cell": 16,
+      "rank": 1,
+      "chapter": 6,
+      "highest_after": 16
+    },
+    {
+      "cell": 17,
+      "rank": 1,
+      "chapter": 7,
+      "highest_after": 17
+    },
+    {
+      "cell": 18,
+      "rank": 1,
+      "chapter": 8,
+      "highest_after": 18
+    },
+    {
+      "cell": 19,
+      "rank": 1,
+      "chapter": 9,
+      "highest_after": 19
+    },
+    {
+      "cell": 20,
+      "rank": 1,
+      "chapter": 10,
+      "highest_after": 20
+    },
+    {
+      "cell": 21,
+      "rank": 2,
+      "chapter": 1,
+      "highest_after": 21
+    },
+    {
+      "cell": 22,
+      "rank": 2,
+      "chapter": 2,
+      "highest_after": 22
+    },
+    {
+      "cell": 23,
+      "rank": 2,
+      "chapter": 3,
+      "highest_after": 23
+    },
+    {
+      "cell": 24,
+      "rank": 2,
+      "chapter": 4,
+      "highest_after": 24
+    },
+    {
+      "cell": 25,
+      "rank": 2,
+      "chapter": 5,
+      "highest_after": 25
+    },
+    {
+      "cell": 26,
+      "rank": 2,
+      "chapter": 6,
+      "highest_after": 26
+    },
+    {
+      "cell": 27,
+      "rank": 2,
+      "chapter": 7,
+      "highest_after": 27
+    },
+    {
+      "cell": 28,
+      "rank": 2,
+      "chapter": 8,
+      "highest_after": 28
+    },
+    {
+      "cell": 29,
+      "rank": 2,
+      "chapter": 9,
+      "highest_after": 29
+    },
+    {
+      "cell": 30,
+      "rank": 2,
+      "chapter": 10,
+      "highest_after": 30
+    },
+    {
+      "cell": 31,
+      "rank": 3,
+      "chapter": 1,
+      "highest_after": 31
+    },
+    {
+      "cell": 32,
+      "rank": 3,
+      "chapter": 2,
+      "highest_after": 32
+    },
+    {
+      "cell": 33,
+      "rank": 3,
+      "chapter": 3,
+      "highest_after": 33
+    },
+    {
+      "cell": 34,
+      "rank": 3,
+      "chapter": 4,
+      "highest_after": 34
+    },
+    {
+      "cell": 35,
+      "rank": 3,
+      "chapter": 5,
+      "highest_after": 35
+    },
+    {
+      "cell": 36,
+      "rank": 3,
+      "chapter": 6,
+      "highest_after": 36
+    },
+    {
+      "cell": 37,
+      "rank": 3,
+      "chapter": 7,
+      "highest_after": 37
+    },
+    {
+      "cell": 38,
+      "rank": 3,
+      "chapter": 8,
+      "highest_after": 38
+    },
+    {
+      "cell": 39,
+      "rank": 3,
+      "chapter": 9,
+      "highest_after": 39
+    },
+    {
+      "cell": 40,
+      "rank": 3,
+      "chapter": 10,
+      "highest_after": 40
+    },
+    {
+      "cell": 41,
+      "rank": 4,
+      "chapter": 1,
+      "highest_after": 41
+    },
+    {
+      "cell": 42,
+      "rank": 4,
+      "chapter": 2,
+      "highest_after": 42
+    },
+    {
+      "cell": 43,
+      "rank": 4,
+      "chapter": 3,
+      "highest_after": 43
+    },
+    {
+      "cell": 44,
+      "rank": 4,
+      "chapter": 4,
+      "highest_after": 44
+    },
+    {
+      "cell": 45,
+      "rank": 4,
+      "chapter": 5,
+      "highest_after": 45
+    },
+    {
+      "cell": 46,
+      "rank": 4,
+      "chapter": 6,
+      "highest_after": 46
+    },
+    {
+      "cell": 47,
+      "rank": 4,
+      "chapter": 7,
+      "highest_after": 47
+    },
+    {
+      "cell": 48,
+      "rank": 4,
+      "chapter": 8,
+      "highest_after": 48
+    },
+    {
+      "cell": 49,
+      "rank": 4,
+      "chapter": 9,
+      "highest_after": 49
+    },
+    {
+      "cell": 50,
+      "rank": 4,
+      "chapter": 10,
+      "highest_after": 50
+    },
+    {
+      "cell": 51,
+      "rank": 5,
+      "chapter": 1,
+      "highest_after": 51
+    },
+    {
+      "cell": 52,
+      "rank": 5,
+      "chapter": 2,
+      "highest_after": 52
+    },
+    {
+      "cell": 53,
+      "rank": 5,
+      "chapter": 3,
+      "highest_after": 53
+    },
+    {
+      "cell": 54,
+      "rank": 5,
+      "chapter": 4,
+      "highest_after": 54
+    },
+    {
+      "cell": 55,
+      "rank": 5,
+      "chapter": 5,
+      "highest_after": 55
+    },
+    {
+      "cell": 56,
+      "rank": 5,
+      "chapter": 6,
+      "highest_after": 56
+    },
+    {
+      "cell": 57,
+      "rank": 5,
+      "chapter": 7,
+      "highest_after": 57
+    },
+    {
+      "cell": 58,
+      "rank": 5,
+      "chapter": 8,
+      "highest_after": 58
+    },
+    {
+      "cell": 59,
+      "rank": 5,
+      "chapter": 9,
+      "highest_after": 59
+    },
+    {
+      "cell": 60,
+      "rank": 5,
+      "chapter": 10,
+      "highest_after": 60
+    }
+  ]
+}

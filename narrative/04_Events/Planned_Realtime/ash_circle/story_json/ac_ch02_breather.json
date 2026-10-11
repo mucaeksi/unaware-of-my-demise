@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch02_breather",
+  "title_en": "Weight Without Names: The Safe Mark",
+  "location_id": "ac_weighbridge",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_weighbridge"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_breather_001",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The crossing lane opens when the scale arm drops. Do not wait underneath it.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_breather_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "One plate has the word 'advance'. A wage paid before the work.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch02_breather_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Or a debt made to look like one.",
+      "emotion": "tense"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch02_breather_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

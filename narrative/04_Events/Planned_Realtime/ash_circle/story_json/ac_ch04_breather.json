@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch04_breather",
+  "title_en": "A Borrowed Dry Place: The Safe Mark",
+  "location_id": "ac_shelter",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_shelter"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_breather_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "A stool, two bowls, four blankets. This was a room, not a store.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_breather_002",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The keeper still shuts every open shutter.",
+      "emotion": "uneasy"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch04_breather_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Move around it. Do not fight the whole roof at once.",
+      "emotion": "firm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch04_breather_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

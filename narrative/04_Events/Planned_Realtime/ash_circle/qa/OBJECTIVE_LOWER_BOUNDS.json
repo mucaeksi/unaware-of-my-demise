@@ -1,0 +1,105 @@
+{
+  "scope": "unopposed geometry lower bound, not hazard/collision/playability proof",
+  "chapters": [
+    {
+      "chapter": 1,
+      "unopposed_min_finish_tick": 7230,
+      "arrivals": [
+        30,
+        3630,
+        7230
+      ],
+      "proof_scope": "geometry/time lower bound only"
+    },
+    {
+      "chapter": 2,
+      "unopposed_min_finish_tick": 7230,
+      "arrivals": [
+        30,
+        3630,
+        7230
+      ],
+      "proof_scope": "geometry/time lower bound only"
+    },
+    {
+      "chapter": 3,
+      "unopposed_min_finish_tick": 7230,
+      "arrivals": [
+        30,
+        3630,
+        7230
+      ],
+      "proof_scope": "geometry/time lower bound only"
+    },
+    {
+      "chapter": 4,
+      "unopposed_min_finish_tick": 7230,
+      "arrivals": [
+        30,
+        3630,
+        7230
+      ],
+      "proof_scope": "geometry/time lower bound only"
+    },
+    {
+      "chapter": 5,
+      "unopposed_min_finish_tick": 7230,
+      "arrivals": [
+        30,
+        3630,
+        7230
+      ],
+      "proof_scope": "geometry/time lower bound only"
+    },
+    {
+      "chapter": 6,
+      "unopposed_min_finish_tick": 7230,
+      "arrivals": [
+        30,
+        3630,
+        7230
+      ],
+      "proof_scope": "geometry/time lower bound only"
+    },
+    {
+      "chapter": 7,
+      "unopposed_min_finish_tick": 7230,
+      "arrivals": [
+        30,
+        3630,
+        7230
+      ],
+      "proof_scope": "geometry/time lower bound only"
+    },
+    {
+      "chapter": 8,
+      "unopposed_min_finish_tick": 7230,
+      "arrivals": [
+        30,
+        3630,
+        7230
+      ],
+      "proof_scope": "geometry/time lower bound only"
+    },
+    {
+      "chapter": 9,
+      "unopposed_min_finish_tick": 7230,
+      "arrivals": [
+        30,
+        3630,
+        7230
+      ],
+      "proof_scope": "geometry/time lower bound only"
+    },
+    {
+      "chapter": 10,
+      "unopposed_min_finish_tick": 7230,
+      "arrivals": [
+        30,
+        3630,
+        7230
+      ],
+      "proof_scope": "geometry/time lower bound only"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "authoring_schema_version": 1,
+  "mode_id": "ash_circle",
+  "title_en": "Ash Circle",
+  "title_tr": "Kül Çemberi",
+  "status": "complete_preproduction_not_implemented",
+  "content_kind": "standalone_realtime_party_survival",
+  "future_patch": true,
+  "arena_id": "ac_charcoal_yard",
+  "chapter_count": 10,
+  "unlock": {
+    "after_stage": "4-5",
+    "runtime_node_id": null,
+    "resolution": "explicit mapping to authoritative completed stage adapter before enable; legacy stage label is not presumed current Node ID",
+    "grant_once": true,
+    "minimum_unique_owned_heroes": 5,
+    "payment_required": false
+  },
+  "availability": {
+    "persistent": true,
+    "publish_at": null,
+    "expires_at": null,
+    "season_reset": false
+  },
+  "party": {
+    "unique_owned": 5,
+    "directly_controlled": 1,
+    "support_ability_slots": 4,
+    "growth": "normalized_event_only",
+    "requires_gacha": false
+  },
+  "progression": {
+    "separate_from_campaign": true,
+    "unlock_order": "10 chapters followed by 5 threat ranks of 10; one victory per cell persists",
+    "xp": "run_local",
+    "permanent_stats": false,
+    "permanent_build_unlocks": false,
+    "no_main_daily_task_side_effects": true
+  },
+  "rewards": {
+    "status": "undecided_by_owner",
+    "binding": null,
+    "currency_new": false
+  },
+  "energy_cost": null,
+  "min_client_version": null,
+  "implementation_needed": [
+    "new_scene",
+    "shared_realtime_simulation",
+    "server_session_verification",
+    "mode_save_tables",
+    "admin_content_schema",
+    "mobile_lifecycle",
+    "media"
+  ],
+  "ready_for": [
+    "design_review",
+    "engineering_vertical_slice"
+  ],
+  "not_ready_for": [
+    "runtime_enable",
+    "Android_release",
+    "balance_certification"
+  ],
+  "sources": [
+    {
+      "path": "README.md",
+      "sha256": "87e45e826013d00af4618404a13449d4472c5e9314b33319a321a1f2dd172ddc"
+    },
+    {
+      "path": "apps/game/package.json",
+      "sha256": "2e12b9ae3ae7c649c2da0fb49ac0ac7de40a5a8d0f1471ccb6559820a55e08c4"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "sha256": "4728d27d8533a2e023cd09290ca822deef536e2c0286785d1907a9bc105f23b7"
+    },
+    {
+      "path": "apps/game/src/scenes/BattleScene.ts",
+      "sha256": "66bcd5a4f7834621baa4142676ef0a39c792c178a42a2f5f11f594415db7207d"
+    },
+    {
+      "path": "apps/api/src/progress/service.ts",
+      "sha256": "f0bac40b460af627267489b056bb5a4ba79378ad7cec3de27e57b741dd3ed204"
+    },
+    {
+      "path": "packages/content-schema/src/story.ts",
+      "sha256": "bac2306786935d1183d7e514793a4f798501890186b03b4f82b322050d3d91c4"
+    },
+    {
+      "path": "packages/content-schema/src/primitives.ts",
+      "sha256": "4f8351a916b15d75061356945b67c3809cee47d2436ee07520730ed2052c269d"
+    },
+    {
+      "path": "packages/story/src/runner.ts",
+      "sha256": "c6311871ca85fa6df8ebeef4e3f92a305fe2e575d2c56b28b29c9e6de05677f2"
+    },
+    {
+      "path": "narrative/01_Story_Bible/STORY_BIBLE_PART1.md",
+      "sha256": "7f1d798e2fa4491f8d4e5870e1378bf84d2b2fffcaeaea73a0f65b9f434b9f2c"
+    },
+    {
+      "path": "narrative/02_Main_Story/story_script_part1_manifest.json",
+      "sha256": "95e8b2ddee2d730705add0f17fe983f678c22230bc577c8854d002554e34169b"
+    },
+    {
+      "path": "narrative/05_Codex_Lore/world_rules.md",
+      "sha256": "0c1afcab2dd07302798aa36ff6ad9c517e00e4bef75bf7fd45bd93970f35a373"
+    },
+    {
+      "path": "narrative/07_Enemies_Bosses/bestiary.md",
+      "sha256": "b70789fe8149b1fba7ef8c4f0bae9c852beb52a7a18e62890b47e6418d5e8b2e"
+    },
+    {
+      "path": "narrative/06_Characters/Playable/jori_flint.md",
+      "sha256": "abc934f7f02032f5bd860c8925c06f91f1e3e23915c0d84295974a6d90061633"
+    },
+    {
+      "path": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json",
+      "sha256": "77f2507c5c35e8ced7975b6b43153da49b9407c40c677e38d42b53f00cb6199f"
+    }
+  ]
+}

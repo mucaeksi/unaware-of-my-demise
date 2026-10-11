@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch07_breather",
+  "title_en": "An Empty Cart Returns: The Safe Mark",
+  "location_id": "ac_cart",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_cart"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_breather_001",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Let the cart stop if you need room. Its wheels are not a clock.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_breather_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "The dead follow the handle. Clear the next corner before you draw them there.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch07_breather_003",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I remember this route. I should have used it.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch07_breather_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

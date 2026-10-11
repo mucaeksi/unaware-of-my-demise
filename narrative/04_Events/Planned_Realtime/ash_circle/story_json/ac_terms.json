@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_terms",
+  "title_en": "A Road, Not a Cure",
+  "location_id": "ac_gate",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_gate"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_terms_001",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "You can read the yard from its gate, its loads, or its missing workers. We need all three before we close the record.",
+      "emotion": "firm"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_terms_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Start with the thing you can keep in sight. We will follow it through.",
+      "emotion": "firm"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "choice",
+      "prompt": "What will you keep in sight?",
+      "options": [
+        {
+          "id": "ac_watch_note_road",
+          "text": "A road people can use.",
+          "goto": "road"
+        },
+        {
+          "id": "ac_watch_note_record",
+          "text": "A record people can trust.",
+          "goto": "record"
+        },
+        {
+          "id": "ac_watch_note_workers",
+          "text": "A place for the missing.",
+          "goto": "workers"
+        }
+      ]
+    },
+    {
+      "op": "label",
+      "name": "road"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_terms_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Then keep the exits open. We will need them when the work turns against us.",
+      "emotion": "firm"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_terms_004",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "I will mark the usable routes beside the old survey.",
+      "emotion": "composed"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "record"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_terms_005",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "Then we keep the damaged page with the clean one. Nothing disappears to make our account easier.",
+      "emotion": "firm"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_terms_006",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "And no guess becomes a name.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "hide",
+      "character": "jori_flint"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "workers"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_terms_007",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "I can remember some of them. You will hear where my memory stops.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_terms_008",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "We leave that space open for the people who know.",
+      "emotion": "firm"
+    },
+    {
+      "op": "goto",
+      "label": "choice_join"
+    },
+    {
+      "op": "label",
+      "name": "choice_join"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_terms_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

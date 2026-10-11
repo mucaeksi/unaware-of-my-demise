@@ -1,0 +1,83 @@
+{
+  "scope": "proposed RNG/axis contract vectors, not server/client integration",
+  "xorshift32_seed": 1,
+  "next_uint32": [
+    270369,
+    67634689,
+    2647435461,
+    307599695,
+    2398689233
+  ],
+  "axis_vectors": [
+    {
+      "input": [
+        0,
+        0
+      ],
+      "normalized": [
+        0,
+        0
+      ]
+    },
+    {
+      "input": [
+        127,
+        0
+      ],
+      "normalized": [
+        127,
+        0
+      ]
+    },
+    {
+      "input": [
+        -127,
+        0
+      ],
+      "normalized": [
+        -127,
+        0
+      ]
+    },
+    {
+      "input": [
+        127,
+        127
+      ],
+      "normalized": [
+        89,
+        89
+      ]
+    },
+    {
+      "input": [
+        -127,
+        -127
+      ],
+      "normalized": [
+        -89,
+        -89
+      ]
+    },
+    {
+      "input": [
+        100,
+        100
+      ],
+      "normalized": [
+        89,
+        89
+      ]
+    },
+    {
+      "input": [
+        100,
+        20
+      ],
+      "normalized": [
+        100,
+        20
+      ]
+    }
+  ]
+}

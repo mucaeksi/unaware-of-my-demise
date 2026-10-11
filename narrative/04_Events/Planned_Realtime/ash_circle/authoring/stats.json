@@ -1,0 +1,15 @@
+{
+  "chapters": 10,
+  "arenas": 1,
+  "threat_ranks_including_base": 6,
+  "authored_cells": 60,
+  "scenes": 34,
+  "lines_all_variants": 189,
+  "story_choice_paths": 3,
+  "enemy_families": 5,
+  "boss_profiles": 10,
+  "roster_adapters": 20,
+  "upgrade_cards": 20,
+  "script_language": "en",
+  "voice_translation_recording_complete": false
+}

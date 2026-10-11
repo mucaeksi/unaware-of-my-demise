@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "simulation_revision": "ac_sim_draft_1",
+  "state_model_status": "proposed_new_feature_contract_not_existing_API",
+  "account_key": [
+    "player_id",
+    "mode_id"
+  ],
+  "account_fields": [
+    "unlock_granted",
+    "highest_verified_cell",
+    "story_seen_ids",
+    "watch_note",
+    "best_by_cell"
+  ],
+  "run_key": [
+    "player_id",
+    "mode_id",
+    "run_id"
+  ],
+  "run_fields": [
+    "cell",
+    "simulation_revision",
+    "content_digest",
+    "seed",
+    "roster_snapshot",
+    "normalized_loadout",
+    "tick",
+    "integer_sim_state",
+    "prng_state",
+    "input_cursor",
+    "selected_card_ranks",
+    "pending_offer_ids",
+    "checkpoint_hash",
+    "story_save",
+    "breather_seen_this_run",
+    "status"
+  ],
+  "states": [
+    "prepared",
+    "active",
+    "paused",
+    "pending_verification",
+    "accepted",
+    "defeated",
+    "abandoned",
+    "rejected"
+  ],
+  "transitions": {
+    "prepared": [
+      "active",
+      "abandoned"
+    ],
+    "active": [
+      "paused",
+      "pending_verification",
+      "defeated",
+      "abandoned"
+    ],
+    "paused": [
+      "active",
+      "abandoned"
+    ],
+    "pending_verification": [
+      "accepted",
+      "defeated",
+      "rejected"
+    ],
+    "accepted": [],
+    "defeated": [],
+    "abandoned": [],
+    "rejected": []
+  },
+  "progress_commit": "verified victory uses D1 transaction and unique(player_id,run_id); highest_verified_cell only increases for next unlocked cell; repeated callback returns same result; reward grants absent",
+  "cell_index_formula": "rank * 10 + chapter; initially highest_verified_cell=0; selectable cell <= min(60,highest_verified_cell+1)",
+  "best_order": [
+    "boss_remaining_ticks DESC",
+    "damage_taken ASC",
+    "run_id ASC"
+  ],
+  "best_key": [
+    "player_id",
+    "mode_id",
+    "simulation_revision",
+    "rank",
+    "chapter"
+  ],
+  "defeat": "current run ends; new attempt resets XP/objectives/build, leaves highest_verified_cell unchanged",
+  "abandon": "same as defeat without defeat story; cannot submit abandoned run",
+  "resume": "restore exact pinned revision and seed, integer state and input prefix; an offer is saved before display; server validates reconstructed input prefix before accepting resume",
+  "scene_save": "save before pending choice; restore StoryRunner cursor/option IDs; full-scene skip writes seen checkpoint, never awards victory",
+  "checkpoint_interval_ticks": 900,
+  "checkpoint_is_progress": false,
+  "pause_input": "explicit event at tick; tick never advances while paused",
+  "offline": "practice only until verified-resume adapter exists; no authoritative unlock or reward; UI marks local result pending",
+  "multi_device": "one active authoritative session per player/mode; server session generation CAS rejects stale device; second device offers resume or explicit abandonment",
+  "migration": "keep active revisions through bounded retirement window; expired unsupported attempt closes without progress debit; future entry uses new revision; do not reinterpret old seed/stats",
+  "retirement_window_days": 7,
+  "retirement_behavior": "server clock only expires session, not active combat time; warn user in session UI; rewards still undefined"
+}

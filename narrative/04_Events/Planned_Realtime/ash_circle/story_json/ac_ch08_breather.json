@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "scene_id": "ac_ch08_breather",
+  "title_en": "What the Pit Keeps: The Safe Mark",
+  "location_id": "ac_pit",
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ac_pit"
+    },
+    {
+      "op": "music",
+      "cue_id": "ac_work"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.35
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_breather_001",
+      "speaker": "ac_tovin_reed",
+      "speaker_display": "Tovin",
+      "text": "The gust runs from the kiln to the pit. Watch the hanging cloth, not the dust at your feet.",
+      "emotion": "focused"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_breather_002",
+      "speaker": "ac_mera_holt",
+      "speaker_display": "Mera",
+      "text": "One spade has a child's height scratched into its shaft. A parent kept count.",
+      "emotion": "quiet"
+    },
+    {
+      "op": "show",
+      "character": "jori_flint",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ac_ch08_breather_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Then keep the spade. Do not make the mark prettier.",
+      "emotion": "firm"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ac_ch08_breather_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "ash_circle/authoring/story.json",
+    "note": "New authored narrative expansion; not deployed."
+  }
+}

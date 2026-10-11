@@ -1,0 +1,246 @@
+{
+  "adapters": [
+    {
+      "character_id": "mahmut",
+      "lead_weapon": "rivet",
+      "support_weapon": "rivet",
+      "support_trait": "brace",
+      "canonical_element": "Stone",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "fadyme",
+      "lead_weapon": "thread",
+      "support_weapon": "thread",
+      "support_trait": "veil_step",
+      "canonical_element": "Veil",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "kera_voss",
+      "lead_weapon": "cinder",
+      "support_weapon": "cinder",
+      "support_trait": "wide_cast",
+      "canonical_element": "Ember",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "brin_alder",
+      "lead_weapon": "rivet",
+      "support_weapon": "rivet",
+      "support_trait": "brace",
+      "canonical_element": "Stone",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "nixie_vale",
+      "lead_weapon": "needle",
+      "support_weapon": "needle",
+      "support_trait": "scout",
+      "canonical_element": "Gale",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "sister_aveline",
+      "lead_weapon": "script",
+      "support_weapon": "script",
+      "support_trait": "mend",
+      "canonical_element": "Dawn",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "sable_wren",
+      "lead_weapon": "thread",
+      "support_weapon": "thread",
+      "support_trait": "precision",
+      "canonical_element": "Veil",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "tilda_fen",
+      "lead_weapon": "mist",
+      "support_weapon": "mist",
+      "support_trait": "mend",
+      "canonical_element": "Tide",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "rikka_ember",
+      "lead_weapon": "cinder",
+      "support_weapon": "cinder",
+      "support_trait": "precision",
+      "canonical_element": "Ember",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "mirel_quill",
+      "lead_weapon": "script",
+      "support_weapon": "script",
+      "support_trait": "wide_cast",
+      "canonical_element": "Dawn",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "odelia_pike",
+      "lead_weapon": "mist",
+      "support_weapon": "mist",
+      "support_trait": "precision",
+      "canonical_element": "Tide",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "pippa_bell",
+      "lead_weapon": "needle",
+      "support_weapon": "needle",
+      "support_trait": "tempo",
+      "canonical_element": "Gale",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "nara_vell",
+      "lead_weapon": "rivet",
+      "support_weapon": "rivet",
+      "support_trait": "brace",
+      "canonical_element": "Stone",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "clem_marr",
+      "lead_weapon": "thread",
+      "support_weapon": "thread",
+      "support_trait": "precision",
+      "canonical_element": "Veil",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "vespera_wisp",
+      "lead_weapon": "thread",
+      "support_weapon": "thread",
+      "support_trait": "wide_cast",
+      "canonical_element": "Veil",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "hana_birch",
+      "lead_weapon": "rivet",
+      "support_weapon": "rivet",
+      "support_trait": "precision",
+      "canonical_element": "Stone",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "thistle_roe",
+      "lead_weapon": "needle",
+      "support_weapon": "needle",
+      "support_trait": "mend",
+      "canonical_element": "Gale",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "iona_mist",
+      "lead_weapon": "mist",
+      "support_weapon": "mist",
+      "support_trait": "mend",
+      "canonical_element": "Tide",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "jori_flint",
+      "lead_weapon": "cinder",
+      "support_weapon": "cinder",
+      "support_trait": "brace",
+      "canonical_element": "Ember",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    },
+    {
+      "character_id": "marek_vane",
+      "lead_weapon": "needle",
+      "support_weapon": "needle",
+      "support_trait": "tempo",
+      "canonical_element": "Gale",
+      "owned_required": true,
+      "canonical_kit_copied": false
+    }
+  ],
+  "traits": {
+    "brace": {
+      "effect": "flat_contact_damage_reduction",
+      "value": 1,
+      "stack_cap": 3
+    },
+    "veil_step": {
+      "effect": "post_hit_extra_iframes_ticks",
+      "value": 3,
+      "stack_cap": 1
+    },
+    "wide_cast": {
+      "effect": "area_percent",
+      "value": 6,
+      "stack_cap": 3
+    },
+    "scout": {
+      "effect": "pickup_radius_add",
+      "value": 16,
+      "stack_cap": 1
+    },
+    "mend": {
+      "effect": "heal_hp_per_300_combat_ticks",
+      "value": 1,
+      "stack_cap": 3
+    },
+    "precision": {
+      "effect": "damage_percent",
+      "value": 4,
+      "stack_cap": 3
+    },
+    "tempo": {
+      "effect": "cooldown_reduction_percent",
+      "value": 3,
+      "stack_cap": 3
+    }
+  },
+  "all_roles_may_lead": true,
+  "lead_trait_applies": false,
+  "trait_stacking": "sum same trait up to cap; distinct identity required; excess shown in loadout UI",
+  "roster_safety": "no loan, gacha or rarity condition; 5 unique owned characters; availability checked by server; canonical guaranteed selector is sufficient alongside free starters/recruits",
+  "narrative_presence": "formation follows Oath representation; owned roster does not assert physical story travel, double location or new canonical dialogue",
+  "base_hero": {
+    "hp": 100,
+    "speed": 240,
+    "pickup_radius": 72,
+    "dash": null,
+    "crit": false,
+    "element_advantage": false
+  },
+  "excluded_main_inputs": [
+    "level",
+    "rarity",
+    "duplicates",
+    "awakening",
+    "gear",
+    "main_skill_level",
+    "main_formation_row",
+    "main_status_effects"
+  ],
+  "party_lock": "lead and four supports snapshot at start; next attempt may change; no five following sprites or AI agents",
+  "revision_rule": "unknown future hero disables selection in this mode until explicit adapter ships; never infer kit silently"
+}
