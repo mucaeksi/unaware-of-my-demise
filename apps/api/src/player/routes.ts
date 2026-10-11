@@ -6,6 +6,8 @@ import { HttpError } from '../content/store';
 import { d1RateLimit } from '../http';
 import type { GameEnv } from '../env';
 import { activeBanners, convertEclipseToFates, disclosure, pullGacha } from '../gacha/service';
+import { adStatus, beginAd, grantAd, AD } from '../ads/service';
+import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, submitBattle, writeSave } from '../progress/service';
 import { claimMail, listMail, markRead } from '../mail/service';
 import { issueSession, playerForGoogle, resolveSession, revokeSession, verifyGoogleIdToken } from './auth';
@@ -31,7 +33,7 @@ async function body<T>(c: { req: { text(): Promise<string> } }, schema: z.ZodTyp
 }
 
 /** Account, session, wallet and gacha endpoints. Authenticated routes use the opaque bearer session (see auth.ts). */
-export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyGetKey } = {}): void {
+export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?: SsvKeyFetcher } = {}): void {
   const perMinute = async (env: GameEnv, key: string, limit: number): Promise<void> => {
     if (!(await d1RateLimit(env.DB, `${key}`.slice(0, 80), limit, 60))) throw new HttpError(429, 'rate_limited', 'too many requests');
   };
@@ -62,6 +64,8 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/progress', authed);
   app.use('/api/v1/progress/*', authed);
   app.use('/api/v1/save', authed);
+  app.use('/api/v1/ads/status', authed);
+  app.use('/api/v1/ads/begin', authed);
   app.use('/api/v1/mail/*', authed);
 
   app.post('/api/v1/auth/logout', async (c) => {
@@ -155,5 +159,25 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
       throw new HttpError(400, 'bad_request', 'invalid JSON');
     }
     return c.json(await writeSave(c.env.DB, c.get('playerId'), parsed));
+  });
+
+  app.get('/api/v1/ads/status', async (c) => c.json(await adStatus(c.env.DB, c.get('playerId'))));
+
+  // step 1 of a rewarded view: the client gets a one-time nonce and passes it to AdMob as ServerSideVerificationOptions.customData
+  app.post('/api/v1/ads/begin', async (c) => {
+    await perMinute(c.env, `adbegin:${c.get('playerId')}`, 10);
+    return c.json(await beginAd(c.env.DB, c.get('playerId')));
+  });
+
+  // Google calls this URL after a rewarded ad; the signature (ECDSA, Google's key) proves it. Only OUR ad units may grant.
+  app.get('/api/v1/ads/ssv', async (c) => {
+    const units = (c.env.ADMOB_AD_UNIT_IDS ?? '').split(',').map((s) => s.trim()).filter(Boolean);
+    if (units.length === 0) throw new HttpError(503, 'ads_not_configured', 'rewarded ads are not configured for this environment');
+    const url = new URL(c.req.url);
+    const ssv = await verifySsv(url.search, opts.admobKeys ?? googleKeyFetcher);
+    if (!units.includes(ssv.adUnit)) throw new HttpError(400, 'bad_ssv', 'ad unit is not ours');
+    if (Math.abs(Date.now() - ssv.timestampMs) > AD.maxAgeMs) throw new HttpError(400, 'bad_ssv', 'callback is too old');
+    // 200 for every verified callback (Google retries other codes); the body says whether the view paid out
+    return c.json(await grantAd(c.env.DB, ssv.userId, ssv.adUnit, ssv.transactionId, ssv.customData));
   });
 }

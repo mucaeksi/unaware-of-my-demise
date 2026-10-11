@@ -16,6 +16,8 @@ export interface GameEnv {
   GOOGLE_CLIENT_IDS?: string;
   /** dev-only: URL of a test JWKS used instead of Google's (ignored unless ENVIRONMENT is dev) */
   GOOGLE_JWKS_URL?: string;
+  /** comma separated AdMob rewarded ad unit ids this game owns; SSV callbacks for other units are ignored (fail closed when unset) */
+  ADMOB_AD_UNIT_IDS?: string;
 }
 
 /** Bindings of the Control Center Worker (static admin SPA + /admin/api, behind Cloudflare Access). */

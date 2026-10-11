@@ -45,7 +45,32 @@ export function adminEnv(over: Partial<AdminEnv> = {}): AdminEnv {
 const adminApp = createAdminApp({ getKey });
 export const GOOGLE_CLIENT = 'test-client-1.apps.googleusercontent.com';
 const googleKeys = await generateKeyPair('RS256');
-const gameApp = createGameApp({ getGoogleKey: (async () => googleKeys.publicKey) as unknown as JWTVerifyGetKey });
+export const ADMOB_UNIT = 'ca-app-pub-3940256099942544/5224354917';
+const ssvPair = (await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify'])) as CryptoKeyPair;
+const ssvSpki = btoa(String.fromCharCode(...new Uint8Array((await crypto.subtle.exportKey('spki', ssvPair.publicKey)) as ArrayBuffer)));
+const gameApp = createGameApp({
+  getGoogleKey: (async () => googleKeys.publicKey) as unknown as JWTVerifyGetKey,
+  admobKeys: async () => [{ keyId: 4242, base64: ssvSpki }]
+});
+
+function rawToDer(raw: Uint8Array): Uint8Array {
+  const enc = (v: Uint8Array): number[] => {
+    let a = [...v];
+    while (a.length > 1 && a[0] === 0) a = a.slice(1);
+    if ((a[0] as number) & 0x80) a = [0, ...a];
+    return [0x02, a.length, ...a];
+  };
+  const body = [...enc(raw.slice(0, 32)), ...enc(raw.slice(32))];
+  return Uint8Array.from([0x30, body.length, ...body]);
+}
+
+/** Builds an AdMob SSV callback URL path signed like Google does (ECDSA P-256 over the query without signature/key_id). */
+export async function ssvPath(params: Record<string, string>, over: { badSignature?: boolean; keyId?: string; reorder?: boolean } = {}): Promise<string> {
+  const message = new URLSearchParams(params).toString();
+  const sig = new Uint8Array(await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, ssvPair.privateKey, new TextEncoder().encode(over.badSignature ? `${message}&tampered` : message)));
+  const b64u = btoa(String.fromCharCode(...rawToDer(sig))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  return over.reorder ? `/api/v1/ads/ssv?key_id=${over.keyId ?? '4242'}&${message}&signature=${b64u}` : `/api/v1/ads/ssv?${message}&signature=${b64u}&key_id=${over.keyId ?? '4242'}`;
+}
 
 export async function googleIdToken(sub: string, over: { aud?: string; iss?: string; expired?: boolean; wrongKey?: boolean; name?: string } = {}): Promise<string> {
   let jwt = new SignJWT({ email: `${sub}@example.com`, email_verified: true, name: over.name ?? 'Test Player', padding: 'x'.repeat(80) })
@@ -66,7 +91,7 @@ export async function admin(path: string, init: RequestInit & { as?: string | nu
 }
 
 export async function game(path: string, init: RequestInit = {}, over: Partial<GameEnv> = {}): Promise<Response> {
-  return await gameApp.fetch(new Request(`https://game.test${path}`, init), { ...(baseEnv as GameEnv), GOOGLE_CLIENT_IDS: GOOGLE_CLIENT, ...over });
+  return await gameApp.fetch(new Request(`https://game.test${path}`, init), { ...(baseEnv as GameEnv), GOOGLE_CLIENT_IDS: GOOGLE_CLIENT, ADMOB_AD_UNIT_IDS: ADMOB_UNIT, ...over });
 }
 
 /** Signs a test player in through the real endpoint and returns the bearer header plus the player id. */
