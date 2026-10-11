@@ -13,7 +13,7 @@ export default defineConfig({
   fullyParallel: false,
   reporter: [['list']],
   outputDir: '../../.cache/e2e-results',
-  use: { launchOptions: { args: GL }, trace: 'retain-on-failure' },
+  use: { launchOptions: { args: GL, ...(process.env.UOMD_CHROMIUM_PATH ? { executablePath: process.env.UOMD_CHROMIUM_PATH } : {}) }, trace: 'retain-on-failure' },
   projects: [
     { name: 'landscape-desktop', use: { viewport: { width: 1280, height: 720 } } },
     // 20:9 phone in landscape with touch (letterboxing / safe-area path)

@@ -1,3 +1,4 @@
+import type { VersionMetadata } from './monitoring';
 export type Environment = 'dev' | 'staging' | 'production';
 
 export interface RateLimit {
@@ -6,6 +7,7 @@ export interface RateLimit {
 
 /** Bindings of the public game Worker (also serves the static game client). */
 export interface GameEnv {
+  CF_VERSION_METADATA?: VersionMetadata;
   DB: D1Database;
   CONTENT: R2Bucket;
   ASSETS: Fetcher;
@@ -32,6 +34,8 @@ export interface GameEnv {
 
 /** Bindings of the Control Center Worker (static admin SPA + /admin/api, behind Cloudflare Access). */
 export interface AdminEnv {
+  GAME?: Fetcher;
+  CF_VERSION_METADATA?: VersionMetadata;
   DB: D1Database;
   CONTENT: R2Bucket;
   ASSETS: Fetcher;

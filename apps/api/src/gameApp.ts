@@ -1,3 +1,4 @@
+import { requestMonitoring } from './monitoring';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { z } from 'zod';
@@ -34,6 +35,7 @@ async function limited(env: GameEnv, req: Request, bucket: string, limit: number
 export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?: SsvKeyFetcher; play?: (env: GameEnv) => PlayClient } = {}): Hono<{ Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } }> {
   const app = new Hono<{ Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } }>();
   app.use('*', securityHeaders);
+  app.use('*', requestMonitoring('game'));
   // The Android shell (Capacitor WebView) runs the client from https://localhost and calls this API cross-origin. Auth is a bearer token
   // (no cookies), so an allow-list of exact origins with no credentials is enough; any other origin gets no CORS headers.
   app.use(
@@ -69,7 +71,7 @@ export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?
     const store = new ContentStore(c.env.DB, c.env.CONTENT);
     const current = await store.publishedManifest(c.env.CONTENT_CHANNEL).catch(() => null);
     const ok = d1.ok === true && r2.ok === true;
-    return c.json({ ok, service: 'uomd-game', environment: c.env.ENVIRONMENT, channel: c.env.CONTENT_CHANNEL, time: new Date().toISOString(), d1, r2, current_release: current?.releaseId ?? null }, ok ? 200 : 503);
+    return c.json({ ok, service: 'uomd-game', version: c.env.CF_VERSION_METADATA ?? null, environment: c.env.ENVIRONMENT, channel: c.env.CONTENT_CHANNEL, time: new Date().toISOString(), d1, r2, current_release: current?.releaseId ?? null }, ok ? 200 : 503);
   });
 
   app.get('/api/v1/content/channels/:channel/manifest', async (c) => {

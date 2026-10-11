@@ -1,3 +1,5 @@
+import { registerMonitoring } from './admin/monitoring';
+import { requestMonitoring } from './monitoring';
 import { Hono, type MiddlewareHandler } from 'hono';
 import type { JWTVerifyGetKey } from 'jose';
 import { z } from 'zod';
@@ -68,6 +70,7 @@ export interface AdminDeps {
 export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
   const app = new Hono<Ctx>();
   app.use('*', securityHeaders);
+  app.use('*', requestMonitoring('admin'));
   app.onError((e, c) => {
     if (e instanceof AuthError) return c.json({ error: e.code, message: e.message }, e.status);
     return onError(e, c);
@@ -95,7 +98,7 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
   const store = (env: AdminEnv): ContentStore => new ContentStore(env.DB, env.CONTENT);
 
   // public, reveals nothing sensitive: lets the SPA show "auth not configured" without a login
-  app.get('/admin/api/health', (c) => c.json({ ok: true, service: 'uomd-admin', environment: c.env.ENVIRONMENT, auth_configured: Boolean(c.env.ACCESS_TEAM_DOMAIN && c.env.ACCESS_AUD), signing_configured: Boolean(c.env.CONTENT_SIGNING_KEY && c.env.CONTENT_SIGNING_KID) }));
+  app.get('/admin/api/health', (c) => c.json({ ok: true, service: 'uomd-admin', version: c.env.CF_VERSION_METADATA ?? null, environment: c.env.ENVIRONMENT, auth_configured: Boolean(c.env.ACCESS_TEAM_DOMAIN && c.env.ACCESS_AUD), signing_configured: Boolean(c.env.CONTENT_SIGNING_KEY && c.env.CONTENT_SIGNING_KID) }));
 
   app.get('/admin/api/me', need('viewer'), (c) => c.json(c.get('admin')));
 
@@ -252,6 +255,7 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
   });
 
   registerOps(app, need);
+  registerMonitoring(app, need);
 
   app.all('/admin/api/*', (c) => c.json({ error: 'not_found', message: 'no such endpoint' }, 404));
   return app;

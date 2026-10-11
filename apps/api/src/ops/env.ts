@@ -1,4 +1,6 @@
+import type { VersionMetadata } from '../monitoring';
 export interface OpsEnv {
+  CF_VERSION_METADATA?: VersionMetadata;
   DB: D1Database;
   BACKUPS: R2Bucket;
   /** age PUBLIC key (age1...) the backups are encrypted to; the private key stays with the owner */

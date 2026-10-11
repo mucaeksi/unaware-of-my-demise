@@ -44,3 +44,12 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.65); }
 .toast { position: fixed; right: 20px; bottom: 20px; background: var(--panel-2); border: 1px solid var(--silver); padding: 10px 16px; border-radius: 10px; z-index: 5; }
 @media (max-width: 800px) { .shell { grid-template-columns: 1fr; } nav { position: static; height: auto; flex-direction: row; flex-wrap: wrap; gap: 4px; overflow: visible; } nav .who { width: 100%; } main { padding: 16px; } table { display: block; overflow-x: auto; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+.monitor-metrics { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.monitor-table { overflow-x: auto; }
+.monitor-table table { min-width: 920px; }
+.monitor-version { overflow-wrap: anywhere; }
+
+.monitor-page > .card { margin-bottom: 20px; }
+.monitor-page .muted { color: var(--dim); font-size: 13px; }
+main:has(.monitor-page) { min-width: 0; }

@@ -1,3 +1,4 @@
+import { pruneMonitoring } from './monitoring';
 import { runBackup } from './ops/backup';
 import type { OpsEnv } from './ops/env';
 import { runHealth } from './ops/health';
@@ -8,7 +9,7 @@ export const CRON_HEALTH = '*/15 * * * *';
 
 async function record(env: OpsEnv, kind: 'backup' | 'health', ok: boolean, detail: unknown): Promise<void> {
   await env.DB.batch([
-    env.DB.prepare('INSERT INTO ops_runs (kind, ok, detail_json) VALUES (?1, ?2, ?3)').bind(kind, ok ? 1 : 0, JSON.stringify(detail).slice(0, 3900)),
+    env.DB.prepare('INSERT INTO ops_runs (kind, ok, detail_json) VALUES (?1, ?2, ?3)').bind(kind, ok ? 1 : 0, JSON.stringify({ ...(detail as Record<string, unknown>), version: env.CF_VERSION_METADATA ?? null }).slice(0, 3900)),
     env.DB.prepare("DELETE FROM ops_runs WHERE at < strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-30 days')")
   ]);
 }
@@ -38,6 +39,7 @@ export async function backupIsOverdue(env: OpsEnv, now = new Date()): Promise<bo
 }
 
 export async function runScheduled(cron: string, env: OpsEnv): Promise<void> {
+  await pruneMonitoring(env.DB).catch(() => { console.warn('monitoring_cleanup_failed'); });
   if (cron === CRON_HEALTH) {
     const h = await runHealth(env);
     await record(env, 'health', h.ok, h);

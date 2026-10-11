@@ -1,3 +1,4 @@
+import { Monitoring } from './pages/Monitoring';
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { api, type ApiError, type Health, type Me } from './api';
 import { Assets } from './pages/Assets';
@@ -13,7 +14,7 @@ import { Players } from './pages/Players';
 import { Releases } from './pages/Releases';
 import { Shop } from './pages/Shop';
 
-const PAGES = ['Dashboard', 'Development', 'Players', 'Banners', 'Economy', 'Shop', 'Flags', 'Catalog', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
+const PAGES = ['Dashboard', 'Monitoring', 'Development', 'Players', 'Banners', 'Economy', 'Shop', 'Flags', 'Catalog', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
 type Page = (typeof PAGES)[number];
 
 export function useToast(): { toast: string | null; say: (m: string) => void } {
@@ -72,6 +73,7 @@ export function App(): ReactNode {
       </nav>
       <main>
         {!me ? <ErrorNotice error={err} /> : null}
+        {me && page === 'Monitoring' ? <Monitoring navigate={setPage} /> : null}
         {me && page === 'Dashboard' ? <Dashboard health={health} /> : null}
         {me && page === 'Development' ? <Development me={me} say={say} /> : null}
         {me && page === 'Players' ? <Players me={me} say={say} /> : null}

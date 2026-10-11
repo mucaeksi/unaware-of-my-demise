@@ -1,4 +1,5 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { usePolling } from '../usePolling';
+import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { api, ApiError, type Me } from '../api';
 import { ErrorNotice } from '../App';
 
@@ -30,12 +31,13 @@ function gameUrl(): string {
 
 export function Development({ me, say }: { me: Me; say: (m: string) => void }): ReactNode {
   const [tab, setTab] = useState<Tab>('Overview');
-  const [p, setP] = useState<Progress | null>(null);
-  const [err, setErr] = useState<unknown>(null);
-  const [area, setArea] = useState('General');
-  useEffect(() => {
-    fetch('/dev/progress.json', { cache: 'no-cache' }).then((r) => (r.ok ? (r.json() as Promise<Progress>) : Promise.reject(new Error('progress.json missing'))), (e: unknown) => Promise.reject(e)).then(setP).catch(setErr);
+  const readProgress = useCallback(async (signal: AbortSignal): Promise<Progress> => {
+    const r = await fetch('/dev/progress.json', { cache: 'no-cache', signal });
+    if (!r.ok) throw new Error('progress.json missing');
+    return r.json() as Promise<Progress>;
   }, []);
+  const { data: p, error: err } = usePolling(readProgress);
+  const [area, setArea] = useState('General');
   if (err) return <ErrorNotice error={err} />;
   if (!p) return <p>Loading development data…</p>;
   return (
