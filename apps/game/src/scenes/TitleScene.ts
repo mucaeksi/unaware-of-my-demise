@@ -1,6 +1,9 @@
 import Phaser from 'phaser';
 import type { PatchOutcome } from '@uomd/patch';
-import { CHANNEL, CLIENT_VERSION, PATCH_LAB_ENABLED, REF_H, REF_W } from '../config';
+import { CHANNEL, CLIENT_VERSION, PATCH_LAB_ENABLED, PREVIEW_FLOW_ENABLED, REF_H, REF_W } from '../config';
+import { advance, signInWithGoogle } from '../entry/flow';
+import { loadEntry } from '../entry/state';
+import { S } from '../entry/strings';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { prefs, setPref } from '../platform/prefs';
@@ -31,6 +34,9 @@ export class TitleScene extends Phaser.Scene {
   private chipText!: Phaser.GameObjects.Text;
   private overlay: Phaser.GameObjects.Container | null = null;
   private audioStarted = false;
+  /** true until the entry flow (prologue, tutorials, patch page) has been completed once on this account/device */
+  private firstRun = false;
+  private busy = false;
 
   constructor() {
     super('Title');
@@ -39,6 +45,8 @@ export class TitleScene extends Phaser.Scene {
   create(): void {
     this.overlay = null;
     this.audioStarted = false;
+    this.busy = false;
+    this.firstRun = loadEntry().phase !== 'completed';
     const { art } = Services.ready();
     this.cameras.main.setBackgroundColor(0x0a0610);
 
@@ -67,12 +75,10 @@ export class TitleScene extends Phaser.Scene {
       this.tweens.add({ targets: logo, alpha: 1, y: 258, duration: 1400, ease: 'Cubic.easeOut' });
       if (!prefs().reducedMotion) this.tweens.add({ targets: logo, y: 266, duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut', delay: 1400 });
     }
-    txt(this, 500, 478, 'PART I  ·  UNAWARE, I FADE', { fontFamily: F.display, fontSize: '30px', fontStyle: '600', color: '#c9b6e4' }).setOrigin(0.5).setLetterSpacing(4);
+    txt(this, 500, 478, S.menu.tagline, { fontFamily: F.display, fontSize: '30px', fontStyle: '600', color: '#c9b6e4' }).setOrigin(0.5).setLetterSpacing(4);
 
-    new Button(this, 500, 640, { label: 'BEGIN', sub: 'The First Step', w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.begin() });
-    new Button(this, 500, 786, { label: 'CHAPTERS', w: 560, h: 120, onClick: () => this.go('Chapters') });
-    new Button(this, 500, 920, { label: 'SETTINGS', w: 560, h: 120, onClick: () => this.openSettings() });
-    new Button(this, REF_W - 200, 80, { label: 'COMPANY', w: 340, h: 110, fontSize: 30, onClick: () => this.go('Home') });
+    if (this.firstRun) this.buildFirstRunMenu();
+    else this.buildFullMenu();
 
     this.chipText = txt(this, 60, REF_H - 36, '', { fontSize: '24px', color: T.dim }).setOrigin(0, 0.5).setDepth(DEPTH.hud);
     if (PATCH_LAB_ENABLED) {
@@ -87,6 +93,44 @@ export class TitleScene extends Phaser.Scene {
     });
     this.input.once('pointerdown', () => void this.startAudio());
     sceneFadeIn(this, 700);
+  }
+
+  /** First install: the only doors are sign-in (or Continue when a session exists) and Settings. */
+  private buildFirstRunMenu(): void {
+    const signedIn = Services.api.signedIn;
+    const native = Services.identity?.kind === 'native';
+    if (signedIn) {
+      new Button(this, 500, 640, { label: S.menu.cont, sub: S.menu.contSub, w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.enter() });
+    } else if (native) {
+      new Button(this, 500, 640, { label: S.menu.signIn, sub: S.menu.signInSub, w: 640, h: 128, fontSize: 38, variant: 'hot', onClick: () => void this.enter() });
+    } else if (PREVIEW_FLOW_ENABLED) {
+      new Button(this, 500, 640, { label: S.menu.preview, sub: S.menu.previewSub, w: 640, h: 128, fontSize: 40, variant: 'hot', onClick: () => void this.enter() });
+    } else {
+      new Button(this, 500, 640, { label: S.menu.signIn, w: 640, h: 128, fontSize: 38, variant: 'dim', onClick: () => undefined }).setEnabled(false);
+      txt(this, 500, 730, S.menu.webNote, { fontSize: '30px', color: T.dim }).setOrigin(0.5);
+    }
+    new Button(this, 500, 800, { label: S.menu.settings, w: 560, h: 120, onClick: () => this.openSettings() });
+  }
+
+  private buildFullMenu(): void {
+    new Button(this, 500, 640, { label: 'BEGIN', sub: 'The First Step', w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.begin() });
+    new Button(this, 500, 786, { label: 'CHAPTERS', w: 560, h: 120, onClick: () => this.go('Chapters') });
+    new Button(this, 500, 920, { label: 'SETTINGS', w: 560, h: 120, onClick: () => this.openSettings() });
+    new Button(this, REF_W - 200, 80, { label: 'COMPANY', w: 340, h: 110, fontSize: 30, onClick: () => this.go('Home') });
+  }
+
+  /** Sign in (native) when needed, then continue with the first unfinished entry step. */
+  private async enter(): Promise<void> {
+    if (this.busy) return;
+    this.busy = true;
+    void this.startAudio();
+    if (!Services.api.signedIn && Services.identity?.kind === 'native') {
+      if ((await signInWithGoogle(this)) !== 'ok') {
+        this.busy = false;
+        return;
+      }
+    }
+    advance(this);
   }
 
   private async startAudio(): Promise<void> {
@@ -149,7 +193,7 @@ export class TitleScene extends Phaser.Scene {
   }
 
   private openSettings(): void {
-    const { items, cx, cy } = this.openOverlay('SETTINGS', 1100, 780);
+    const { items, cx, cy } = this.openOverlay('SETTINGS', 1100, 880);
     const rows: { label: string; get: () => string; dec: () => void; inc: () => void }[] = [
       {
         label: 'Music',
@@ -177,7 +221,7 @@ export class TitleScene extends Phaser.Scene {
       }
     ];
     rows.forEach((r, i) => {
-      const y = cy - 190 + i * 130;
+      const y = cy - 230 + i * 125;
       items.push(txt(this, cx - 470, y, r.label, { fontSize: '40px' }).setOrigin(0, 0.5));
       const value = txt(this, cx + 190, y, r.get(), { fontFamily: F.display, fontSize: '36px', fontStyle: '600', color: T.gold }).setOrigin(0.5);
       items.push(value);
@@ -185,8 +229,12 @@ export class TitleScene extends Phaser.Scene {
       items.push(new Button(this, cx + 350, y, { label: '+', w: 130, h: 100, fontSize: 48, onClick: () => { r.inc(); value.setText(r.get()); } }));
       items.push(value);
     });
-    items.push(new Button(this, cx - 250, cy + 300, { label: 'RESET PROGRESS', w: 430, variant: 'danger', fontSize: 26, onClick: () => { Progress.reset(); toast(this, 'Progress cleared'); } }));
-    items.push(new Button(this, cx + 250, cy + 300, { label: 'CLOSE', w: 430, onClick: () => this.closeOverlay() }));
+    if (this.firstRun) {
+      items.push(new Button(this, cx, cy + 340, { label: 'CLOSE', w: 560, onClick: () => this.closeOverlay() }));
+    } else {
+      items.push(new Button(this, cx - 250, cy + 340, { label: 'RESET PROGRESS', w: 430, variant: 'danger', fontSize: 26, onClick: () => { Progress.reset(); toast(this, 'Progress cleared'); } }));
+      items.push(new Button(this, cx + 250, cy + 340, { label: 'CLOSE', w: 430, onClick: () => this.closeOverlay() }));
+    }
     this.overlay = this.add.container(0, 0, items).setDepth(DEPTH.modal);
   }
 

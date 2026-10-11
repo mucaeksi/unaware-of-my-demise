@@ -15,6 +15,8 @@ import { HomeScene } from './scenes/HomeScene';
 import { MailScene } from './scenes/MailScene';
 import { RosterScene } from './scenes/RosterScene';
 import { ShopScene } from './scenes/ShopScene';
+import { SplashScene } from './scenes/SplashScene';
+import { StudioScene } from './scenes/StudioScene';
 import { StoryScene } from './scenes/StoryScene';
 import { SummonScene } from './scenes/SummonScene';
 import { TasksScene } from './scenes/TasksScene';
@@ -42,7 +44,7 @@ try {
     fps: { target: 60 },
     input: { touch: { capture: true }, activePointers: 2 },
     banner: false,
-    scene: [BootScene, TitleScene, ChaptersScene, StoryScene, BattleScene, HomeScene, SummonScene, RosterScene, MailScene, ShopScene, AccountScene, CharacterScene, GearScene, TasksScene, TeamScene]
+    scene: [BootScene, SplashScene, StudioScene, TitleScene, ChaptersScene, StoryScene, BattleScene, HomeScene, SummonScene, RosterScene, MailScene, ShopScene, AccountScene, CharacterScene, GearScene, TasksScene, TeamScene]
   });
   game.canvas?.addEventListener('webglcontextlost', (e) => {
     e.preventDefault();

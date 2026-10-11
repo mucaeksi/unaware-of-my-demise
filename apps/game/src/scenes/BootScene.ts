@@ -8,6 +8,7 @@ import { loadCurrencyName } from '../net/currency';
 import { detectIdentity } from '../net/identity';
 import { initConsent } from '../net/store';
 import { Services } from '../services';
+import type { SplashInit } from './SplashScene';
 
 const UPDATE_TIMEOUT_MS = 4000;
 
@@ -36,23 +37,33 @@ export class BootScene extends Phaser.Scene {
     Services.identity = detectIdentity();
     void initConsent(); // Android: UMP consent form where the region requires it, then the ads SDK (no-op in a browser)
     void loadCurrencyName(API_BASE);
+    // the engine credit plays while content and menu art load behind it
+    const ready = this.loadEverything();
+    this.scene.launch('Splash', { ready } satisfies SplashInit); // Boot stays alive: its loader serves the loads above until Splash ends it
+    void ready.then((ok) => {
+      if (ok) {
+        void this.checkForUpdates();
+        void prefs();
+      }
+    });
+  }
+
+  /** Content service, art library and the menu art. Reports a fatal startup error on the page and resolves false when it fails. */
+  private async loadEverything(): Promise<boolean> {
     try {
       Services.content = await ContentService.create();
       const art = await Services.refreshArt();
       await art.loadUi(this);
       await art.loadBackground(this, 'forest_whispering_ash');
+      return true;
     } catch (e) {
       const fatal = document.getElementById('fatal');
       if (fatal) {
         fatal.style.display = 'grid';
         fatal.textContent = `The game could not start: ${e instanceof Error ? e.message : String(e)}`;
       }
-      return;
+      return false;
     }
-    document.getElementById('boot')?.classList.add('done');
-    this.scene.start('Title');
-    void this.checkForUpdates();
-    void prefs();
   }
 
   /** Background patch check: never blocks the first frame; offline start is the normal case. */

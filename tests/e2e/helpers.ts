@@ -10,8 +10,20 @@ export const ADMIN = 'http://127.0.0.1:8788';
 export const REF_W = 1920;
 export const REF_H = 1080;
 
-export async function openGame(page: Page, path = '/'): Promise<string[]> {
+export interface OpenOptions {
+  /** start as a brand-new install (first-run flow); default is a returning player whose entry flow is completed */
+  fresh?: boolean;
+  /** keep the real splash/studio timings (default collapses them with ?fastintro) */
+  realIntro?: boolean;
+  /** wait for this scene instead of Title */
+  until?: string;
+}
+
+const COMPLETED = JSON.stringify({ phase: 'completed', prologue: true, tutorials: 3, updatedAt: '2026-10-11T00:00:00.000Z' });
+
+export async function openGame(page: Page, path = '/', opts: OpenOptions = {}): Promise<string[]> {
   const problems: string[] = [];
+  if (!opts.fresh) await page.addInitScript((v) => { try { if (!localStorage.getItem('uomd.entry.v1')) localStorage.setItem('uomd.entry.v1', v); } catch { /* ignore */ } }, COMPLETED);
   page.on('console', (m) => {
     if (m.type() === 'error') problems.push(`console.error: ${m.text()}`);
   });
@@ -20,8 +32,10 @@ export async function openGame(page: Page, path = '/'): Promise<string[]> {
   page.on('response', (r) => {
     if (r.status() >= 400 && !r.url().includes('/api/v1/content/channels/')) problems.push(`HTTP ${r.status()}: ${r.url()}`);
   });
-  await page.goto(`${GAME}${path}`);
-  await page.waitForFunction(() => (window as any).__UOMD__?.game.scene.isActive('Title'), null, { timeout: 60_000 });
+  const url = `${GAME}${path}${opts.realIntro ? '' : `${path.includes('?') ? '&' : '?'}fastintro`}`;
+  await page.goto(url);
+  const until = opts.until ?? 'Title';
+  await page.waitForFunction((k) => (window as any).__UOMD__?.game.scene.isActive(k), until, { timeout: 60_000 });
   await page.waitForTimeout(1200);
   return problems;
 }
