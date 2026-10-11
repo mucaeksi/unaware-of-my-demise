@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "purpose": "Prompt/visual references for Google-generated art. Not shippable assets.",
+  "archive_ref": "branch archive/pre-cleanup-2026-10-10 (full pre-cleanup tree); older Godot-era tree: branch archive/godot-era",
+  "byte_exact_originals": [
+    {
+      "file": "reference/locked/fadyme/sheet/char-fadyme-uomd.png",
+      "role": "CANONICAL Fadyme model sheet (turnaround, expressions, palette, materials, chibi/battle sprites)",
+      "status": "LOCKED_OWNER_APPROVED"
+    },
+    {
+      "file": "reference/locked/fadyme/sheet/chibi_ref_fadyme.png",
+      "role": "Fadyme chibi reference crop (low resolution)",
+      "status": "LOCKED_OWNER_APPROVED"
+    },
+    {
+      "file": "narrative/14_References/recovered_locked_v001/logo/brand_logo_wordmark_r2_v003.png",
+      "role": "Brand wordmark (also read by the content build)",
+      "status": "LOCKED_OWNER_APPROVED"
+    },
+    {
+      "file": "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003.png",
+      "role": "Key art (also read by the content build)",
+      "status": "LOCKED_OWNER_APPROVED"
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "fadyme_vn_bust_composed_v001",
+      "role": "Fadyme visual-novel bust (expression reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_vn_bust_composed_v001.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 173986,
+      "sha256": "7254e88f2c300e9c031e473620cea6b81e3c049f353d5905b9fbeb8ab5a97347",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_composed_v001.png",
+        "bytes": 2177985,
+        "sha256": "62b11e5bacdd2c31c87f1b837c3a2e43d4ce4ea1ba512dd630327b308d195687"
+      }
+    },
+    {
+      "id": "fadyme_vn_bust_honest_fear_v001",
+      "role": "Fadyme visual-novel bust (expression reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_vn_bust_honest_fear_v001.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 177154,
+      "sha256": "e40a711508ab814616fe06908955aef1f94593d57b1167dc026aa253f335dfb5",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_honest_fear_v001.png",
+        "bytes": 2151880,
+        "sha256": "3ceef4b10a5806e53ce01b8f2e8f9ff94b78082ddcead4321333fd9f333cfc5f"
+      }
+    },
+    {
+      "id": "fadyme_vn_bust_quiet_pain_v002",
+      "role": "Fadyme visual-novel bust (expression reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_vn_bust_quiet_pain_v002.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 170002,
+      "sha256": "fae25d1127cecc892ab75fba618e919c927a9a22829c8c565919931edfb22c4a",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_quiet_pain_v002.png",
+        "bytes": 2129468,
+        "sha256": "435e343c18be08f6378fa8cc0ef570705c475b93e9790a0d6bdef213a2c2f3b3"
+      }
+    },
+    {
+      "id": "fadyme_vn_bust_warm_v001",
+      "role": "Fadyme visual-novel bust (expression reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_vn_bust_warm_v001.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 198842,
+      "sha256": "756ffa5e96cbc5b61f7a629641168d90a4f9b343bcea65bdd974134a3d98aafe",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/vn_bust/vn_bust_fadyme_warm_v001.png",
+        "bytes": 2285514,
+        "sha256": "9fcd8d2706b10874fff9cc591e75f83500cb549653b03cafb7daae6b39bf41da"
+      }
+    },
+    {
+      "id": "fadyme_battle_pose_attack_v003",
+      "role": "Fadyme chibi battle pose (pose/silhouette reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_battle_pose_attack_v003.webp",
+      "width": 1030,
+      "height": 1536,
+      "bytes": 105420,
+      "sha256": "99c172185488396d366a4465e6d77cd070b7d334a194b913ffb9679b9b35f290",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_attack_v003.png",
+        "bytes": 3805845,
+        "sha256": "6e9c3a2571598c849bc91afc8881c212573b791aa79fec4beb6beecd63d82042"
+      }
+    },
+    {
+      "id": "fadyme_battle_pose_guard_v003",
+      "role": "Fadyme chibi battle pose (pose/silhouette reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_battle_pose_guard_v003.webp",
+      "width": 1030,
+      "height": 1536,
+      "bytes": 91664,
+      "sha256": "281e83ebf46e3ba37d9472b2715ce88305fe413ae74a7bc86dbcd3d6cf10daae",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_guard_v003.png",
+        "bytes": 3596464,
+        "sha256": "65b72c2f8adc567deb60eeb06bb0aed6f458aa406ec140f91f8ec1a83165d83c"
+      }
+    },
+    {
+      "id": "fadyme_battle_pose_hit_v003",
+      "role": "Fadyme chibi battle pose (pose/silhouette reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_battle_pose_hit_v003.webp",
+      "width": 1030,
+      "height": 1536,
+      "bytes": 100792,
+      "sha256": "7be4e2ce9a54cf1e3267b47326772066638bd3714588084f63b40855675134cf",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_hit_v003.png",
+        "bytes": 3811300,
+        "sha256": "8cd175b73bcc14096b5cfd8677d862fd4522b353a46378c6b20a6cae8abf58c9"
+      }
+    },
+    {
+      "id": "fadyme_battle_pose_idle_v002",
+      "role": "Fadyme chibi battle pose (pose/silhouette reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_battle_pose_idle_v002.webp",
+      "width": 1030,
+      "height": 1536,
+      "bytes": 89602,
+      "sha256": "9ff1339f864d79ba1e0f891e4c964c2f29c696648b41952f8acacd014219bf7c",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_idle_v002.png",
+        "bytes": 3512265,
+        "sha256": "bacb6e29f8474c5e5ac3b98454598466929d28ff92b58972548def9ffbdc02e7"
+      }
+    },
+    {
+      "id": "fadyme_battle_pose_skill_v002",
+      "role": "Fadyme chibi battle pose (pose/silhouette reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_battle_pose_skill_v002.webp",
+      "width": 1030,
+      "height": 1536,
+      "bytes": 100596,
+      "sha256": "b8e98ec4947a8bb93b6434b28a60486451c6d897d05bae79db1662cbc335172f",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_skill_v002.png",
+        "bytes": 3671178,
+        "sha256": "3e4944b9df0f9dc6496aa4d11681a33265d935dd9a68c274d6b27da24174f5db"
+      }
+    },
+    {
+      "id": "fadyme_battle_pose_victory_v002",
+      "role": "Fadyme chibi battle pose (pose/silhouette reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_battle_pose_victory_v002.webp",
+      "width": 1030,
+      "height": 1536,
+      "bytes": 92032,
+      "sha256": "4cc4001cc286ff15efff91d41c370382f1a38f809e095c240515552698bff737",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/battle_pose/battle_pose_fadyme_victory_v002.png",
+        "bytes": 3323395,
+        "sha256": "3b2ee80f646e44247084f807dddab4ff439487e1c32b8a3236afd3bbc4c0e5e5"
+      }
+    },
+    {
+      "id": "fadyme_cut_in_ultimate_v002",
+      "role": "Fadyme ultimate cut-in (composition reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/fadyme_cut_in_ultimate_v002.webp",
+      "width": 1030,
+      "height": 1536,
+      "bytes": 108104,
+      "sha256": "fb045890170b4b2c0f7c1c583784cac7c2bca31a6e1666dfedffa2e2f8091ed1",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/fadyme/cut_in/cut_in_fadyme_ultimate_v002.png",
+        "bytes": 4999103,
+        "sha256": "aa4bbf559b094324399b3392f3dbdce05932c37fa0c34ea3a06c7cb8f746fe09"
+      }
+    },
+    {
+      "id": "icons_pilot_mixed_16",
+      "role": "UI icon style sheet",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/icons_pilot_mixed_16.webp",
+      "width": 1536,
+      "height": 1536,
+      "bytes": 209882,
+      "sha256": "67420cf3131644095640f131b0a8edfc3c431bb6a0f6e779ed3ddb5a837d8c04",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/icons/icons_pilot_mixed_16_mixed_v001.png",
+        "bytes": 4416193,
+        "sha256": "39139c22ced18ec504c0b55e706673cdffd14fe3be96c5df1221b52f02a9b7ae"
+      }
+    },
+    {
+      "id": "brand_key_art_with_logo_v003",
+      "role": "Key art with logo (brand composition reference)",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/brand_key_art_with_logo_v003.webp",
+      "width": 857,
+      "height": 1536,
+      "bytes": 101574,
+      "sha256": "e511ff43cd6d8168a23fe61265f6467d30bf643038eb4121eb8534cfe441b6e0",
+      "derived_from": {
+        "path_at_archive": "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003_with_logo.png",
+        "bytes": 5060959,
+        "sha256": "896f772494168d538923bd1cbc2e6441050844bd49edc9bb51ce81482f50f670"
+      }
+    },
+    {
+      "id": "forest_whispering_ash_ordered_v001",
+      "role": "Location plate: Whispering Ash forest",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/forest_whispering_ash_ordered_v001.webp",
+      "width": 1030,
+      "height": 1536,
+      "bytes": 117338,
+      "sha256": "1bc5832aa6d1b0e3435f184e7593107eb4046b88962540412b01356371f18149",
+      "derived_from": {
+        "path_at_archive": "narrative/08_Locations/Reference_Images/forest_whispering_ash/bg_forest_whispering_ash_ordered_v001.png",
+        "bytes": 5203343,
+        "sha256": "02751e68cc927cc536eb3a330ddf2df25883b48da2812651047750090a02d2ac"
+      }
+    },
+    {
+      "id": "forest_whispering_ash_battle_plate_v002",
+      "role": "Location plate: Whispering Ash battle arena",
+      "status": "LOCKED_OWNER_APPROVED",
+      "file": "reference/derived/forest_whispering_ash_battle_plate_v002.webp",
+      "width": 1030,
+      "height": 1536,
+      "bytes": 126090,
+      "sha256": "82d4e315e7f0c7d8be7f560709a59dc6eb2a605aeda07e78578f426b49b5776b",
+      "derived_from": {
+        "path_at_archive": "narrative/08_Locations/Reference_Images/forest_whispering_ash/bg_forest_whispering_ash_battle_plate_ordered_v002.png",
+        "bytes": 5129435,
+        "sha256": "0ca976584f8700bc7d103b7b3d6534629d4362c591459a9e1efc236f90a43a32"
+      }
+    },
+    {
+      "id": "enemy_board_ch01_whispering_ash_v001",
+      "role": "Enemy design board (silhouette / design intent; text lives in design_cards.json)",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "file": "reference/derived/enemy_board_ch01_whispering_ash_v001.webp",
+      "width": 1536,
+      "height": 768,
+      "bytes": 192938,
+      "sha256": "d611a347195840874604315755a9a6820860e701eb3825ab8bcb8afc09199261",
+      "derived_from": {
+        "path_at_archive": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch01_whispering_ash_v001.png",
+        "bytes": 2731837,
+        "sha256": "3580adb7c352a3595044dda816e0c044ae51240c6aeeb11f18da0972c3d4b148"
+      }
+    },
+    {
+      "id": "enemy_board_ch02_saint_luthos_v001",
+      "role": "Enemy design board (silhouette / design intent; text lives in design_cards.json)",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "file": "reference/derived/enemy_board_ch02_saint_luthos_v001.webp",
+      "width": 1536,
+      "height": 768,
+      "bytes": 204978,
+      "sha256": "e9929ddf42d26b069fab4e32e0f91f0d6070da8f77fbf06545ff78f1df114121",
+      "derived_from": {
+        "path_at_archive": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch02_saint_luthos_v001.png",
+        "bytes": 2750625,
+        "sha256": "9224507858774aa91ccbc0be868bc72ee5cc71182e6e68fc558f299ba11d205a"
+      }
+    },
+    {
+      "id": "enemy_board_ch03_oakhaven_v001",
+      "role": "Enemy design board (silhouette / design intent; text lives in design_cards.json)",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "file": "reference/derived/enemy_board_ch03_oakhaven_v001.webp",
+      "width": 1536,
+      "height": 768,
+      "bytes": 222212,
+      "sha256": "6f8467dc5ae48e0f90a92cf80e2668c7af10f304863234e0fe8a6d8f2594c0b2",
+      "derived_from": {
+        "path_at_archive": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch03_oakhaven_v001.png",
+        "bytes": 2835152,
+        "sha256": "72aa4241aab1a0a58f75cdc4cbe4dda7a8f162b661f4f6d772888c72dc3a8d73"
+      }
+    },
+    {
+      "id": "enemy_board_ch04_undercity_v001",
+      "role": "Enemy design board (silhouette / design intent; text lives in design_cards.json)",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "file": "reference/derived/enemy_board_ch04_undercity_v001.webp",
+      "width": 1536,
+      "height": 768,
+      "bytes": 251894,
+      "sha256": "2c8195dfc565d20289b472b13e7957bb6158a1b4a557476bfd8a1d3a0ccb4d77",
+      "derived_from": {
+        "path_at_archive": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch04_undercity_v001.png",
+        "bytes": 2978354,
+        "sha256": "11e3ceb6f954f80f5b903dbe2018909dc8c6efab4bf2a576aea36ce4505ae5b6"
+      }
+    },
+    {
+      "id": "enemy_board_ch05_forsaken_bridge_v002",
+      "role": "Enemy design board (silhouette / design intent; text lives in design_cards.json)",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "file": "reference/derived/enemy_board_ch05_forsaken_bridge_v002.webp",
+      "width": 1536,
+      "height": 768,
+      "bytes": 232016,
+      "sha256": "1931434d5642c9372f4f268632d21d32b779128c8a8abb7f136c3c50cfa36fa0",
+      "derived_from": {
+        "path_at_archive": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch05_forsaken_bridge_v002.png",
+        "bytes": 2734025,
+        "sha256": "57eeace6619ee4644e04ebf09789c313cb09a2dd7801be1e73d720bccac14eb5"
+      }
+    },
+    {
+      "id": "enemy_board_ch06_ashen_estate_v001",
+      "role": "Enemy design board (silhouette / design intent; text lives in design_cards.json)",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "file": "reference/derived/enemy_board_ch06_ashen_estate_v001.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 253482,
+      "sha256": "eab6cc41c79e63e12419ced50997ff8f4363bda7992f898c609e3dd6f2954ce8",
+      "derived_from": {
+        "path_at_archive": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch06_ashen_estate_v001.png",
+        "bytes": 2837596,
+        "sha256": "64503433694341f9a7c4ab24f4d4f3228967e91a5c877799f98ee27ef1193756"
+      }
+    },
+    {
+      "id": "enemy_board_ch07_first_eclipse_v003",
+      "role": "Enemy design board (silhouette / design intent; text lives in design_cards.json)",
+      "status": "DESIGN_CANDIDATE_NOT_OWNER_APPROVED",
+      "file": "reference/derived/enemy_board_ch07_first_eclipse_v003.webp",
+      "width": 1536,
+      "height": 768,
+      "bytes": 205888,
+      "sha256": "ac330412caf075c6208812665d845e6c95d0c944e2c6b8cdec49c98e0f5b4bfa",
+      "derived_from": {
+        "path_at_archive": "narrative/15_Art_Workbench/enemies/design_v001/boards/ch07_first_eclipse_v003.png",
+        "bytes": 2571534,
+        "sha256": "8e299981b7ac8e25f54fa16beb8a4b228cbd196d7eaded9693782846f9466c6a"
+      }
+    }
+  ],
+  "derivatives_total_bytes": 3526486
+}

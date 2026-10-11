@@ -1,3 +1,5 @@
+> **Archived 2026-10-11:** the images/audio this document links to were moved out of `main` (still in branch `archive/pre-cleanup-2026-10-10`; index: `narrative/ARCHIVE.md`, references: `reference/`). Links to them are historical.
+
 # Part I düşman tasarımları — 2026-10-10
 
 **20 standart düşman + 6 bölüm boss’u: 26 tasarım kimliği.** Yedi bölüm sayfası, her karakter için tasarım kartı, saldırı/animasyon yönü ve kaynak/provenance envanteri.

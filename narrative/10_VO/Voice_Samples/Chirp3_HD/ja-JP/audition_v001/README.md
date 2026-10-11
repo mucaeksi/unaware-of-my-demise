@@ -1,3 +1,5 @@
+> **Archived 2026-10-11:** the images/audio this document links to were moved out of `main` (still in branch `archive/pre-cleanup-2026-10-10`; index: `narrative/ARCHIVE.md`, references: `reference/`). Links to them are historical.
+
 # Chirp 3 HD · ortak Japonca ses denemesi v001
 
 **Gerçek üretim tamamlandı: 30 ses, 14 kadın ve 16 erkek.**

@@ -1,3 +1,5 @@
+> **Archived 2026-10-11:** the images/audio this document links to were moved out of `main` (still in branch `archive/pre-cleanup-2026-10-10`; index: `narrative/ARCHIVE.md`, references: `reference/`). Links to them are historical.
+
 # Character and environment art workbench
 
 Codex's owner-authorized creative staging area. Claude consumes explicit approved handoffs for runtime integration. Existing canon, original references and approved asset versions remain in their established paths.

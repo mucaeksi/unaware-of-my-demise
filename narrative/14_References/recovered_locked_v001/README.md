@@ -1,3 +1,5 @@
+> **Archived 2026-10-11:** the images/audio this document links to were moved out of `main` (still in branch `archive/pre-cleanup-2026-10-10`; index: `narrative/ARCHIVE.md`, references: `reference/`). Links to them are historical.
+
 # Recovered historical locked anchors
 
 Seventeen original locked reference files were recovered byte for byte from

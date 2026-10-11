@@ -94,13 +94,10 @@ const PORTRAIT_FILES: Record<string, Record<string, { legacy: string } | { repo:
   fadyme: {
     composed: { repo: `${VN_SRC}/sources/vn_composed_v001.png` },
     warm: { repo: `${VN_SRC}/sources/vn_warm_v001.png` },
-    quiet_pain: { repo: `${VN_SRC}/sources/vn_quiet_pain_v001.png` },
-    honest_fear: { repo: `${VN_SRC}/sources/vn_honest_fear_v001.png` },
     wry: { repo: `${VN_SRC}/sources/vn_wry_v001.png` },
-    curiosity: { repo: `${VN_SRC}/vn_curiosity_v002.png` },
-    resolve: { repo: `${VN_SRC}/vn_resolve_v002.png` },
-    strain: { repo: `${VN_SRC}/vn_strain_v002.png` },
-    vulnerable: { repo: `${VN_SRC}/vn_vulnerable_v002.png` }
+    resolve: { repo: `${VN_SRC}/vn_resolve_v002.png` }
+    // quiet_pain, honest_fear, curiosity, strain and vulnerable were archived on 2026-10-10 (all portraits are being
+    // regenerated with Google models); a scene that needs one fails with "no portrait source for fadyme/<key>".
   },
   mahmut: {
     composed: L(`${CHR}/mahmut/vn_watchful_v001.png`),

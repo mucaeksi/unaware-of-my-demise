@@ -15,7 +15,7 @@
 | D-11 | 2026-10-10 owner: Context7 removed (MCP server, skill, ZIP); bootstrap excludes it | free tier was quota-limited without a key; replaced by installed type definitions + official Phaser skills |
 | D-12 | 2026-10-10 owner: all Godot material removed; Phaser 4 only; the 10 third-party discipline skills and their ZIP removed | they carried GDScript/Godot guidance; history kept on the read-only archive branch `archive/godot-era` |
 | D-13 | 2026-10-10 owner: legacy Neon/Hyperdrive/Workers stack retired, D1 only | executed 2026-10-11: 2 Workers, Hyperdrive, empty R2 bucket, legacy Access app and 2 stray policies deleted; `uomd-db-backups` kept (1 encrypted dump, expires ~2026-11-04); Neon itself and legacy GitHub secrets are owner actions |
-| D-14 | 2026-10-10 owner: all visuals/audio regenerated with Google models; old media archived and used only as references | `content/base` art is provisional until replaced through data patches |
+| D-14 | 2026-10-10 owner: all visuals/audio regenerated with Google models; old media archived and used only as references | executed 2026-10-11: 195 media files (170 MB) left main (`narrative/ARCHIVE.md`, manifest with SHA-256), curated `reference/` set (2 byte-exact locked sheets + 22 derivatives); `content/base` art is provisional until replaced through data patches |
 | D-15 | 2026-10-10 owner: Control Center behind Cloudflare Access (account members = owner) | created via API with the owner's authorisation |
 | D-16 | 2026-10-10 owner: push every verified step to `main`, keep it tidy, archive branch before deleting | squash-merged PR #36 as the first example |
 

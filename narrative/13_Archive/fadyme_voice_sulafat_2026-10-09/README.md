@@ -1,3 +1,5 @@
+> **Archived 2026-10-11:** the images/audio this document links to were moved out of `main` (still in branch `archive/pre-cleanup-2026-10-10`; index: `narrative/ARCHIVE.md`, references: `reference/`). Links to them are historical.
+
 # Eski Fadyme VO — arşiv
 
 Kullanıcı 2026-10-09 tarihinde eski seslerin arşivlenmesini ve yeni TTS ile devam edilmesini istedi. Bu klasördeki Sulafat kayıtları ve casting/take metadata yalnız tarihsel kaynaktır; yeni üretimde veya runtime handoffunda kullanılmaz. Dosyalar byte-exact taşındı, SHA-256 kayıtları MANIFEST.json içinde.
