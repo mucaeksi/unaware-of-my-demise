@@ -4,6 +4,34 @@ import { ErrorNotice } from '../App';
 
 const mb = (n: number): string => `${(n / 1024 / 1024).toFixed(2)} MB`;
 
+interface OpsRun { id: number; ok: boolean; at: string; detail: { key?: string; bytes?: number; error?: string; checks?: { name: string; ok: boolean; detail: string }[] } }
+interface OpsStatus { lastGoodBackupAt: string | null; backups: OpsRun[]; health: OpsRun[] }
+
+function Operations(): ReactNode {
+  const [o, setO] = useState<OpsStatus | null>(null);
+  const [err, setErr] = useState<unknown>(null);
+  useEffect(() => { api<OpsStatus>('/ops').then(setO).catch(setErr); }, []);
+  if (err) return <ErrorNotice error={err} />;
+  if (!o) return null;
+  const h = o.health[0];
+  const ageH = o.lastGoodBackupAt ? (Date.now() - Date.parse(o.lastGoodBackupAt)) / 3_600_000 : null;
+  return (
+    <>
+      <h3 style={{ margin: '22px 0 8px' }}>Operations (Cloudflare cron Worker)</h3>
+      <div className="grid">
+        <div className="card"><h3>Last good backup</h3><div className="big">{ageH === null ? 'none yet' : `${ageH.toFixed(1)} h ago`}</div><div className="mono">{o.lastGoodBackupAt ?? 'the first nightly run is 03:17 UTC'} · age-encrypted in R2 uomd-db-backups</div></div>
+        <div className="card"><h3>Health probe (every 15 min)</h3><div className="big"><span className={`badge ${h?.ok ? 'ok' : 'bad'}`}>{h ? (h.ok ? 'healthy' : 'attention') : 'waiting'}</span></div><div className="mono">{h ? `${h.at} · ${(h.detail.checks ?? []).map((c) => `${c.name}: ${c.ok ? 'ok' : c.detail}`).join(' · ')}` : 'no probe has run yet'}</div></div>
+      </div>
+      {o.backups.length > 0 ? (
+        <table>
+          <thead><tr><th>Backup run</th><th>Result</th><th>Object</th></tr></thead>
+          <tbody>{o.backups.map((b) => <tr key={b.id}><td>{b.at}</td><td><span className={`badge ${b.ok ? 'ok' : 'bad'}`}>{b.ok ? 'ok' : 'failed'}</span></td><td className="mono">{b.ok ? `${b.detail.key} (${((b.detail.bytes ?? 0) / 1024).toFixed(0)} KB)` : b.detail.error}</td></tr>)}</tbody>
+        </table>
+      ) : null}
+    </>
+  );
+}
+
 export function Dashboard({ health }: { health: Health | null }): ReactNode {
   const [s, setS] = useState<SystemStatus | null>(null);
   const [err, setErr] = useState<unknown>(null);
@@ -37,6 +65,7 @@ export function Dashboard({ health }: { health: Health | null }): ReactNode {
           ))}
         </tbody>
       </table>
+      <Operations />
       <h3 style={{ margin: '22px 0 8px' }}>Table row counts</h3>
       <div className="grid">
         {Object.entries(s.d1.counts).map(([k, v]) => (<div className="card" key={k}><h3>{k}</h3><div className="big">{v}</div></div>))}

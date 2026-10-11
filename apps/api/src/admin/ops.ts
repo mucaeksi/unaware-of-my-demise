@@ -231,6 +231,18 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
   app.get('/admin/api/economy/defaults', need('viewer'), (c) => c.json({ model: DEFAULT_FLOW }));
   app.post('/admin/api/economy/flow', need('viewer'), async (c) => c.json(analyzeFlow(await body(c, Flow))));
 
+  // ------------------------------------------------------------------ operations (written by the uomd-ops cron Worker)
+  app.get('/admin/api/ops', need('viewer'), async (c) => {
+    const db = c.env.DB;
+    const [backups, health, lastGood] = await Promise.all([
+      db.prepare("SELECT id, ok, detail_json, at FROM ops_runs WHERE kind = 'backup' ORDER BY id DESC LIMIT 10").all<{ id: number; ok: number; detail_json: string; at: string }>(),
+      db.prepare("SELECT id, ok, detail_json, at FROM ops_runs WHERE kind = 'health' ORDER BY id DESC LIMIT 20").all<{ id: number; ok: number; detail_json: string; at: string }>(),
+      db.prepare("SELECT at FROM ops_runs WHERE kind = 'backup' AND ok = 1 ORDER BY id DESC LIMIT 1").first<{ at: string }>()
+    ]);
+    const parse = (r: { id: number; ok: number; detail_json: string; at: string }) => ({ id: r.id, ok: r.ok === 1, at: r.at, detail: JSON.parse(r.detail_json) as unknown });
+    return c.json({ lastGoodBackupAt: lastGood?.at ?? null, backups: backups.results.map(parse), health: health.results.map(parse) });
+  });
+
   // ------------------------------------------------------------------ catalog and tunable rules
   app.get('/admin/api/catalog/summary', need('viewer'), async (c) => {
     const db = c.env.DB;

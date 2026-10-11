@@ -1,0 +1,26 @@
+{
+  // Operations Worker: runs only on a schedule (no routes, no workers.dev). Nightly age-encrypted D1 backup into R2 + health probes.
+  // Variables here are public identifiers; there are no secrets (the backup is encrypted to the owner's PUBLIC age key).
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "uomd-ops",
+  "main": "src/ops.ts",
+  "compatibility_date": "2026-10-01",
+  "account_id": "0c942d198668a8b1a8e8ee699651b817",
+  "workers_dev": false,
+  "observability": { "enabled": true },
+  "env": {
+    "staging": {
+      "name": "uomd-ops-staging",
+      "workers_dev": false,
+      "triggers": { "crons": ["17 3 * * *", "*/15 * * * *"] },
+      "vars": {
+        "TARGET": "staging",
+        "AGE_RECIPIENT": "age1fgavu2yjcvl9tqsrer4f6zvmdw497gp8c595wwhjt3tu2dum8dlqxca864",
+        "GAME_URL": "https://uomd-game-staging.muratcaneksiii.workers.dev",
+        "ADMIN_URL": "https://uomd-admin-staging.muratcaneksiii.workers.dev"
+      },
+      "d1_databases": [{ "binding": "DB", "database_name": "uomd-staging", "database_id": "687f9735-ee4c-4611-aa16-2fae99e51911", "migrations_dir": "migrations" }],
+      "r2_buckets": [{ "binding": "BACKUPS", "bucket_name": "uomd-db-backups" }]
+    }
+  }
+}
