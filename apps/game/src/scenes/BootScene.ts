@@ -6,6 +6,7 @@ import { prefs } from '../platform/prefs';
 import { API_BASE } from '../config';
 import { loadCurrencyName } from '../net/currency';
 import { detectIdentity } from '../net/identity';
+import { initConsent } from '../net/store';
 import { Services } from '../services';
 
 const UPDATE_TIMEOUT_MS = 4000;
@@ -33,6 +34,7 @@ export class BootScene extends Phaser.Scene {
       Sfx.init(wa.context, wa.masterVolumeNode ?? wa.context.destination);
     }
     Services.identity = detectIdentity();
+    void initConsent(); // Android: UMP consent form where the region requires it, then the ads SDK (no-op in a browser)
     void loadCurrencyName(API_BASE);
     try {
       Services.content = await ContentService.create();

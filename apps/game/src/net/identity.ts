@@ -1,3 +1,5 @@
+import { GoogleSignIn, isNative } from '../platform/native';
+
 /**
  * Google identity comes from the native Android shell (Credential Manager through the Capacitor plugin `UomdGoogleSignIn`).
  * A browser has no verified source of a Google ID token, so on the web sign-in is reported as unavailable instead of faked.
@@ -5,13 +7,8 @@
 export interface IdentityProvider {
   readonly kind: 'native' | 'none';
   getIdToken(): Promise<string>;
-}
-
-interface NativePlugin {
-  signIn(): Promise<{ idToken: string }>;
-}
-interface CapacitorWindow {
-  Capacitor?: { Plugins?: { UomdGoogleSignIn?: NativePlugin } };
+  /** forgets the chosen Google account on the device (the server session is revoked separately) */
+  forget(): Promise<void>;
 }
 
 export class IdentityUnavailable extends Error {
@@ -21,10 +18,16 @@ export class IdentityUnavailable extends Error {
 }
 
 export function detectIdentity(): IdentityProvider {
-  const plugin = (window as unknown as CapacitorWindow).Capacitor?.Plugins?.UomdGoogleSignIn;
-  if (plugin) return { kind: 'native', getIdToken: async () => (await plugin.signIn()).idToken };
+  if (isNative()) {
+    return {
+      kind: 'native',
+      getIdToken: async () => (await GoogleSignIn.signIn()).idToken,
+      forget: () => GoogleSignIn.signOut().catch(() => undefined)
+    };
+  }
   return {
     kind: 'none',
-    getIdToken: () => Promise.reject(new IdentityUnavailable())
+    getIdToken: () => Promise.reject(new IdentityUnavailable()),
+    forget: () => Promise.resolve()
   };
 }

@@ -52,3 +52,17 @@ configured as an identity provider). No password is involved at any point.
 - OAuth Android client (needs the package name above + the upload/App-signing SHA-1 once the keystore exists): `604013824221-e70vq2aq1glagljh81igslm7rmpekm78.apps.googleusercontent.com`.
 - Play billing service account (invited in Play Console): `uomd-play-billing@unaware-of-my-demise.iam.gserviceaccount.com`.
 - Pub/Sub: push subscription `uomdsub`, pull subscription `play-rtdn-sub` (unused by the game). The push subscription must use the staging RTDN endpoint with OIDC auth (audience = the endpoint URL).
+
+## Android shell (built 2026-10-11)
+- `apps/android`: Capacitor 8.5.3 project, package `io.github.mucaeksi.unawareofmydemise`, minSdk 24 / targetSdk 36, landscape, immersive. Web layer = the Phaser client built with `VITE_API_BASE` (staging by default).
+- Native bridges (Java, `apps/android/android/app/src/main/java/.../`): `UomdGoogleSignIn` (Credential Manager "Sign in with Google" -> Google ID token, audience = the OAuth **Web** client id), `UomdBilling` (Play Billing 8: products, purchase bound to the player's billing tag, restore), `UomdAds` (UMP consent -> AdMob rewarded with server-side-verification options). JS side: `apps/game/src/platform/native.ts`, `net/store.ts`, `net/identity.ts`. The device never grants anything: the Worker verifies ID tokens, purchase tokens (Play Developer API) and ad rewards (AdMob SSV).
+- Debug builds use Google's sample rewarded unit (test ads only); release builds use `ca-app-pub-4258559369390965/3553164322`.
+- CI `android.yml`: builds the signed release AAB + debug APK, boots the debug APK on an emulator (screenshot as evidence). The **upload keystore is generated once in CI** (random password, masked, never printed) and kept in the private R2 bucket `uomd-android-signing` (`upload.jks`, `upload.pass`); GitHub secrets `ANDROID_KEYSTORE_B64` / `ANDROID_KEYSTORE_PASSWORD` / `ANDROID_KEY_ALIAS` override it if you prefer them there. The workflow summary prints the PUBLIC SHA-1/SHA-256 fingerprints of the upload key.
+- Trust note: keystore and password sit in the same Cloudflare account that already holds every other secret. Play App Signing (the default for new apps) keeps the real app-signing key at Google, so a leaked upload key can be reset through Play support.
+
+### Owner steps after the first green build
+1. Download the `uomd-android` artifact from the workflow run (Actions > Android build > the run > Artifacts) -> `app-release.aab`.
+2. Play Console > your app > Testing > Internal testing > Create release > upload the AAB (accept Play App Signing).
+3. Google Cloud > Credentials > the **Android** OAuth client: add the package name and the SHA-1 of the **upload key** (from the workflow summary) AND later the SHA-1 of the **app signing key** (Play Console > Setup > App signing).
+4. Play Console > Monetize: create the products/subscription whose ids match the Control Center Shop products, then activate them there.
+5. Add yourself and testers under Testing > Testers (license testing for purchases).

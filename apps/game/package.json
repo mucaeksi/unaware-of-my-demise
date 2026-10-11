@@ -12,6 +12,7 @@
     "sync:content": "node scripts/sync-content.mjs"
   },
   "dependencies": {
+    "@capacitor/core": "8.5.3",
     "@fontsource/cinzel": "5.2.8",
     "@fontsource/cormorant-garamond": "5.2.11",
     "@uomd/combat": "*",

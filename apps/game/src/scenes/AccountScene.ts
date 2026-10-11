@@ -5,6 +5,7 @@ import { Progress, Services } from '../services';
 import { Button, txt } from '../ui/kit';
 import { T } from '../ui/theme';
 import { ApiError } from '../net/api';
+import { consentState, showPrivacyOptions } from '../net/store';
 
 export class AccountScene extends HubScene {
   protected readonly heading = 'ACCOUNT';
@@ -35,6 +36,8 @@ export class AccountScene extends HubScene {
     this.add_(new Button(this, REF_W / 2 + 330, 590, { label: 'DOWNLOAD SAVE', w: 600, onClick: () => void this.download() }).setEnabled(save.version > 0));
     this.add_(new Button(this, REF_W / 2 - 330, 730, { label: 'EXPORT MY DATA', w: 600, onClick: () => void this.exportData() }));
     this.add_(new Button(this, REF_W / 2 + 330, 730, { label: 'SIGN OUT', w: 600, onClick: () => void this.signOut() }));
+    const consent = consentState();
+    if (consent?.privacyOptionsRequired) this.add_(new Button(this, REF_W / 2, 1010, { label: 'PRIVACY OPTIONS (ADS)', w: 900, onClick: () => void showPrivacyOptions().then(() => this.say('Privacy choice updated')).catch((e) => this.say(errText(e))) }));
     this.add_(new Button(this, REF_W / 2, 880, { label: this.confirmDelete ? 'TAP AGAIN TO DELETE FOREVER' : 'DELETE ACCOUNT', sub: this.confirmDelete ? 'progress, wallet and roster cannot be restored' : undefined, w: 900, h: 130, variant: 'danger', onClick: () => void this.deleteAccount() }));
   }
 
@@ -74,6 +77,7 @@ export class AccountScene extends HubScene {
     }
     try {
       await Services.api.deleteAccount();
+      await Services.identity?.forget();
       this.confirmDelete = false;
       this.say('Your account was deleted');
       await this.refresh();
@@ -84,6 +88,7 @@ export class AccountScene extends HubScene {
 
   private async signOut(): Promise<void> {
     await Services.api.signOut();
+    await Services.identity?.forget();
     this.say('Signed out');
     await this.refresh();
   }

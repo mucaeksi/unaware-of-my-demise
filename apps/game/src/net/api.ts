@@ -291,6 +291,12 @@ export class GameApi extends EventTarget {
   }
   /** character-XP items by ascending xp value (filled by catalogNames) */
   xpItems: { itemId: string; xp: number }[] = [];
+  verifyPurchase(productId: string, purchaseToken: string): Promise<{ status: string; orderId?: string }> {
+    return this.call('POST', '/api/v1/shop/verify', { productId, purchaseToken });
+  }
+  adBegin(): Promise<{ nonce: string }> {
+    return this.call('POST', '/api/v1/ads/begin', {});
+  }
   async flags(): Promise<Record<string, { enabled: boolean; value: unknown }>> {
     return (await this.call<{ flags: Record<string, { enabled: boolean; value: unknown }> }>('GET', '/api/v1/flags', undefined, false)).flags;
   }
