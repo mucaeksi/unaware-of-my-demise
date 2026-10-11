@@ -166,6 +166,22 @@ describe('single pull rules', () => {
   });
 });
 
+describe('selectable banners without an off-target pool (Hall of Armaments)', () => {
+  const hall2 = weaponBanner('hall_x', ['sig_a', 'sig_b', 'sig_c'], [], { four: ['w4_a'], three: ['w3_a'] }, true);
+  it('a missed 5-star falls to one of the OTHER selectable items, never the target; two misses guarantee the target', () => {
+    const miss = pullOnce(hall2, emptyPity(), seq(0.0, 0.99, 0.9999), 'sig_a');
+    expect(miss.result.outcome).toBe('off');
+    expect(miss.result.itemId).toBe('sig_c');
+    expect(['sig_b', 'sig_c']).toContain(miss.result.itemId);
+    const second = pullOnce(hall2, miss.state, seq(0.0, 0.99, 0.0), 'sig_a');
+    expect(second.state.lost).toBe(2);
+    expect(pullOnce(hall2, second.state, seq(0.0), 'sig_a').result).toMatchObject({ itemId: 'sig_a', outcome: 'guaranteed' });
+  });
+  it('one selectable item alone cannot miss: validation refuses it', () => {
+    expect(() => weaponBanner('hall_y', ['only_one'], [], { four: ['w4_a'], three: ['w3_a'] }, true)).toThrow();
+  });
+});
+
 describe('banner validation', () => {
   it('rejects inconsistent definitions', () => {
     const base = JSON.parse(JSON.stringify(limited)) as BannerConfig;

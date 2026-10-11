@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { limitedCharacterBanner, standardCharacterBanner, weaponBanner } from '@uomd/economy';
 import { applyLedger } from '../src/db/ledger';
 import { pullGacha } from '../src/gacha/service';
-import { game, post, signIn } from './helpers';
+import { game, post, seedCanonCatalog, signIn } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 const POOLS = {
@@ -25,9 +25,10 @@ const P = 160;
 const fund = (playerId: string, pulls: number, key = rid()) => applyLedger(db(), { playerId, currency: 'eclipse_token', delta: pulls * P, reason: 'test_grant', idempotencyKey: `fund:${key}` });
 
 beforeAll(async () => {
+  await seedCanonCatalog();
   await putBanner('hall_of_ancestors', standardCharacterBanner('hall_of_ancestors', POOLS));
   await putBanner('oath_01_aveline', limitedCharacterBanner('oath_01_aveline', 'sister_aveline', POOLS));
-  await putBanner('hall_of_armaments', weaponBanner('hall_of_armaments', ['sig_a', 'sig_b'], ['w5_a'], { four: ['w4_a'], three: ['w3_a'] }, true));
+  await putBanner('hall_of_armaments', weaponBanner('hall_of_armaments', ['weapon_mahmut_signature', 'weapon_fadyme_signature'], [], { four: ['weapon_arming_sword_4_02'], three: ['weapon_arming_sword_3_01'] }, true));
 });
 
 describe('banner disclosure', () => {
@@ -190,8 +191,8 @@ describe('pull', () => {
     expect((await game('/api/v1/gacha/pull', post({ bannerId: 'does_not_exist', count: 1, requestId: rid() }, auth))).status).toBe(404);
     expect((await game('/api/v1/gacha/pull', post({ bannerId: 'future_banner', count: 1, requestId: rid() }, auth))).status).toBe(404);
     expect((await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_armaments', count: 1, requestId: rid() }, auth))).status).toBe(422);
-    expect((await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_armaments', count: 1, requestId: rid(), target: 'sig_zzz' }, auth))).status).toBe(422);
-    expect((await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_armaments', count: 1, requestId: rid(), target: 'sig_a' }, auth))).status).toBe(200);
+    expect((await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_armaments', count: 1, requestId: rid(), target: 'weapon_zzz' }, auth))).status).toBe(422);
+    expect((await game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_armaments', count: 1, requestId: rid(), target: 'weapon_mahmut_signature' }, auth))).status).toBe(200);
     // none of the refusals cost anything
     expect((await db().prepare("SELECT balance FROM wallets WHERE player_id = ?1 AND currency = 'eclipse_token'").bind(playerId).first<{ balance: number }>())?.balance).toBe(9 * P);
   });

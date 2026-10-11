@@ -201,3 +201,19 @@ describe('economy model endpoint', () => {
     expect((await admin('/admin/api/economy/flow', j('POST', { extra: 1 }))).status).toBe(400);
   });
 });
+
+describe('weapon banner administration', () => {
+  it('a weapon banner with the full commons pool (160+ ids) validates and activates (D1 variable limit handled)', async () => {
+    const { seedCanonCatalog } = await import('./helpers');
+    await seedCanonCatalog();
+    const { weaponBanner } = await import('@uomd/economy');
+    const q = async (r: number) => (await db().prepare("SELECT gear_id FROM gear_defs WHERE slot = 'weapon' AND rarity = ?1 AND owner_character_id IS NULL").bind(r).all<{ gear_id: string }>()).results.map((x) => x.gear_id);
+    const id = 'ops_weapon_full';
+    const cfg = weaponBanner(id, ['weapon_aveline_last_vigil'], ['weapon_mahmut_signature', 'weapon_fadyme_signature'], { four: await q(4), three: await q(3) }, false);
+    expect((await admin(`/admin/api/banners/${id}`, j('PUT', { title_en: 'Full pool', config: cfg, expectedVersion: 0 }))).status).toBe(200);
+    expect((await admin(`/admin/api/banners/${id}/state`, j('POST', { action: 'activate' }))).status).toBe(200);
+    const bad = weaponBanner('ops_weapon_bad', ['weapon_aveline_last_vigil'], ['weapon_mahmut_signature'], { four: ['weapon_longbow_3_01'], three: ['weapon_arming_sword_3_01'] }, false);
+    const r = await admin('/admin/api/banners/ops_weapon_bad', j('PUT', { title_en: 'Wrong rarity', config: bad, expectedVersion: 0 }));
+    expect(r.status).toBe(422);
+  });
+});

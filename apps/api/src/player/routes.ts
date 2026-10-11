@@ -12,6 +12,7 @@ import { billingTag, listProducts, syncSubscriptionMail, verifyPurchase } from '
 import { adStatus, beginAd, grantAd, AD } from '../ads/service';
 import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, submitBattle, writeSave } from '../progress/service';
+import { ascendGear, characterStats, dismantleGear, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
 import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
 import { claimMail, listMail, markRead } from '../mail/service';
 import { issueSession, playerForGoogle, resolveSession, revokeSession, verifyGoogleIdToken } from './auth';
@@ -95,6 +96,8 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/gacha/*', authed);
   app.use('/api/v1/characters/*', authed);
   app.use('/api/v1/stacks', authed);
+  app.use('/api/v1/gear', authed);
+  app.use('/api/v1/gear/*', authed);
   app.use('/api/v1/mail', authed);
   app.use('/api/v1/progress', authed);
   app.use('/api/v1/progress/*', authed);
@@ -272,4 +275,25 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     if (!CharId.test(id) || !/^[a-z][a-z0-9_]{1,119}$/.test(skillId)) throw new HttpError(400, 'bad_request', 'invalid id');
     return c.json(await upgradeSkill(c.env.DB, c.get('playerId'), id, skillId, await body(c, RequestOnly)));
   });
+
+  app.get('/api/v1/gear', async (c) => c.json({ gear: await listGear(c.env.DB, c.get('playerId')) }));
+  app.get('/api/v1/characters/:id/stats', async (c) => c.json(await characterStats(c.env.DB, c.get('playerId'), c.req.param('id'))));
+  const GearId = (raw: string): number => {
+    const n = Number(raw);
+    if (!Number.isInteger(n) || n < 1) throw new HttpError(400, 'bad_request', 'invalid gear id');
+    return n;
+  };
+  app.post('/api/v1/gear/:id/equip', async (c) => {
+    await perMinute(c.env, `gear:${c.get('playerId')}`, 120);
+    return c.json(await equipGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), (await body(c, EquipBody)).characterId));
+  });
+  app.post('/api/v1/gear/:id/unequip', async (c) => c.json(await unequipGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')))));
+  app.post('/api/v1/gear/:id/lock', async (c) => c.json(await lockGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), (await body(c, LockBody)).locked)));
+  app.post('/api/v1/gear/:id/level-up', async (c) => {
+    await perMinute(c.env, `gear:${c.get('playerId')}`, 120);
+    return c.json(await levelGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), await body(c, GearLevelBody)));
+  });
+  app.post('/api/v1/gear/:id/ascend', async (c) => c.json(await ascendGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), await body(c, GearRequest))));
+  app.post('/api/v1/gear/:id/dismantle', async (c) => c.json(await dismantleGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), await body(c, GearRequest))));
+  app.post('/api/v1/gear/:id/reroll', async (c) => c.json(await rerollGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), await body(c, GearRequest))));
 }

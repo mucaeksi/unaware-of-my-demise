@@ -109,12 +109,18 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
 
   // ------------------------------------------------------------------ banners
   const itemsExist = async (db: D1Database, cfg: BannerConfig): Promise<void> => {
-    if (cfg.kind !== 'character') return; // weapon catalog does not exist yet; weapon banners cannot be activated until it does
     const ids = [...cfg.pools.fiveFeatured, ...cfg.pools.fiveOther, ...cfg.pools.four, ...cfg.pools.three];
-    const { results } = await db.prepare(`SELECT id, rarity, status FROM characters WHERE id IN (${ids.map(() => '?').join(',')})`).bind(...ids).all<{ id: string; rarity: number; status: string }>();
+    const results: { id: string; rarity: number; status: string }[] = [];
+    // D1 allows at most 100 bound variables per statement: weapon pools have 160+ ids, so look them up in chunks
+    for (let i = 0; i < ids.length; i += 80) {
+      const part = ids.slice(i, i + 80);
+      const marks = part.map(() => '?').join(',');
+      const q = cfg.kind === 'character' ? `SELECT id AS id, rarity, status FROM characters WHERE id IN (${marks})` : `SELECT gear_id AS id, rarity, status FROM gear_defs WHERE slot = 'weapon' AND gear_id IN (${marks})`;
+      results.push(...(await db.prepare(q).bind(...part).all<{ id: string; rarity: number; status: string }>()).results);
+    }
     const known = new Map(results.map((r) => [r.id, r]));
     const bad = ids.filter((i) => !known.has(i) || known.get(i)?.status === 'retired');
-    if (bad.length) throw new HttpError(422, 'unknown_items', `unknown or retired characters: ${bad.slice(0, 5).join(', ')}`);
+    if (bad.length) throw new HttpError(422, 'unknown_items', `unknown or retired ${cfg.kind === 'character' ? 'characters' : 'weapons'}: ${bad.slice(0, 5).join(', ')}`);
     const wrong = [
       ...cfg.pools.fiveFeatured.concat(cfg.pools.fiveOther).filter((i) => known.get(i)?.rarity !== 5).map((i) => `${i} is not 5★`),
       ...cfg.pools.four.filter((i) => known.get(i)?.rarity !== 4).map((i) => `${i} is not 4★`),
@@ -181,7 +187,6 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
       if (b.startsAt && b.endsAt && b.endsAt <= b.startsAt) throw new HttpError(422, 'bad_window', 'endsAt must be after startsAt');
       const cfg = BannerConfig.parse(JSON.parse(row.config_json));
       await itemsExist(db, cfg);
-      if (cfg.kind === 'weapon') throw new HttpError(422, 'weapon_catalog_missing', 'weapon banners cannot be activated before the weapon catalog exists');
     }
     const res = await db.batch([
       b.action === 'activate'

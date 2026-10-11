@@ -63,7 +63,7 @@ export const BannerConfig = z
     if (b.featured) {
       if (b.pools.fiveFeatured.length === 0) bad('pools', 'featured banners need fiveFeatured items');
       if (b.featured.targetMode === 'fixed' && b.pools.fiveFeatured.length !== 1) bad('pools', 'a fixed target needs exactly one featured item');
-      if (b.featured.chance < 1 && b.pools.fiveOther.length === 0) bad('pools', 'fiveOther is needed when the target can be missed');
+      if (b.featured.chance < 1 && b.pools.fiveOther.length === 0 && !(b.featured.targetMode === 'selectable' && b.pools.fiveFeatured.length >= 2)) bad('pools', 'fiveOther is needed when the target can be missed');
     } else if (b.pools.fiveOther.length === 0) bad('pools', 'banners without a featured item need fiveOther items');
     const all = [...b.pools.fiveFeatured, ...b.pools.fiveOther, ...b.pools.four, ...b.pools.three];
     if (new Set(all).size !== all.length) bad('pools', 'an item may appear in only one pool');

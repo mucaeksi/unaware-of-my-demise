@@ -7,6 +7,8 @@ export const RewardAttachment = z.discriminatedUnion('type', [
   z.object({ type: z.literal('character'), itemId: Id }).strict(),
   /** a stackable material (books, seals, rivets, ...): see item_defs */
   z.object({ type: z.literal('item'), itemId: Id, quantity: z.number().int().min(1).max(9999) }).strict(),
+  /** a gear instance (weapon, armor, necklace, ring); accessories roll their stats when granted */
+  z.object({ type: z.literal('gear'), gearId: Id }).strict(),
   /** account (player level) experience */
   z.object({ type: z.literal('account_xp'), amount: z.number().int().min(1).max(1_000_000) }).strict()
 ]);

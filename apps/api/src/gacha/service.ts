@@ -2,11 +2,8 @@ import { analyzeBanner, BannerConfig, CANON, emptyPity, GachaError, pullMany, ty
 import { HttpError } from '../content/store';
 import { balanceOf, ledgerStatements } from '../db/ledger';
 
-/** CSPRNG roll in [0, 1) with 53 bits of precision. Pulls never use Math.random or a client-supplied value. */
-export const cryptoRoll: Roll = () => {
-  const [hi, lo] = crypto.getRandomValues(new Uint32Array(2)) as Uint32Array & [number, number];
-  return ((hi >>> 5) * 67108864 + (lo >>> 6)) / 9007199254740992;
-};
+export { cryptoRoll } from '../db/rng';
+import { cryptoRoll } from '../db/rng';
 
 interface BannerRow {
   id: string;
@@ -106,7 +103,8 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
       throw e;
     }
     const records: PullRecord[] = pulled.results.map((r, seq) => {
-      const duplicate = owned.has(r.itemId);
+      // characters can be duplicates (-> Memory Shards); weapons are separate instances, so a repeat is simply another copy
+      const duplicate = config.kind === 'character' && owned.has(r.itemId);
       owned.add(r.itemId);
       return {
         seq,
@@ -153,11 +151,13 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
             'INSERT INTO gacha_pulls (player_id, request_id, seq, banner_id, pull_number, rarity, item_type, item_id, outcome, upgraded, duplicate, rolls_json) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12)'
           )
           .bind(playerId, input.requestId, i, input.bannerId, r.pullNumber, r.rarity, rec.itemType, r.itemId, r.outcome, r.upgraded ? 1 : 0, rec.duplicate ? 1 : 0, JSON.stringify(r.rolls)),
-        db
-          .prepare(
-            'INSERT INTO player_items (player_id, item_type, item_id, copies, shards) VALUES (?1, ?2, ?3, 1, 0) ON CONFLICT (player_id, item_type, item_id) DO UPDATE SET copies = copies + 1, shards = shards + ?4'
-          )
-          .bind(playerId, rec.itemType, r.itemId, rec.shards)
+        config.kind === 'weapon'
+          ? db.prepare("INSERT INTO player_gear (player_id, gear_id, slot) VALUES (?1, ?2, 'weapon')").bind(playerId, r.itemId)
+          : db
+              .prepare(
+                'INSERT INTO player_items (player_id, item_type, item_id, copies, shards) VALUES (?1, ?2, ?3, 1, 0) ON CONFLICT (player_id, item_type, item_id) DO UPDATE SET copies = copies + 1, shards = shards + ?4'
+              )
+              .bind(playerId, rec.itemType, r.itemId, rec.shards)
       );
     });
     batch.push(db.prepare('DELETE FROM tx_guard'));

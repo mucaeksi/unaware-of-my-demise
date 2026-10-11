@@ -92,7 +92,9 @@ export function pullOnce(banner: BannerConfig, state: PityState, roll: Roll, tar
         outcome = 'target';
         lost = 0;
       } else {
-        itemId = pick(banner.pools.fiveOther);
+        // a selectable banner without an explicit off-target pool misses into its other selectable items
+        const off = banner.pools.fiveOther.length > 0 ? banner.pools.fiveOther : banner.pools.fiveFeatured.filter((x) => x !== chosenTarget);
+        itemId = pick(off);
         outcome = 'off';
         lost = state.lost + 1;
       }

@@ -57,3 +57,26 @@ describe('canon catalog seed', () => {
     expect((await admin('/admin/api/catalog/items/torn_chronicle_page', j('PATCH', { expectedVersion: page.version, xp_value: 130 }))).status).toBe(409);
   });
 });
+
+describe('banner seed against the catalog', () => {
+  it('every seeded banner (character and weapon) references items that exist with the right rarity', async () => {
+    const sql = Object.values(import.meta.glob('../seed/banners.sql', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>)[0] as string;
+    for (const stmt of sql.split(/;\n(?=INSERT )/).map((x) => x.replace(/^--.*\n/, '').trim().replace(/;$/, '')).filter(Boolean)) await db().prepare(stmt).run();
+    const { BannerConfig } = await import('@uomd/economy');
+    const { results } = await db().prepare("SELECT id, config_json, status FROM banners WHERE id IN ('hall_of_ancestors','hall_of_armaments_weapons') OR id LIKE 'oath_%'").all<{ id: string; config_json: string; status: string }>();
+    expect(results.length).toBe(12);
+    for (const b of results) {
+      const cfg = BannerConfig.parse(JSON.parse(b.config_json));
+      const ids = [...cfg.pools.fiveFeatured, ...cfg.pools.fiveOther, ...cfg.pools.four, ...cfg.pools.three];
+      const table = cfg.kind === 'character' ? 'characters' : 'gear_defs';
+      const col = cfg.kind === 'character' ? 'id' : 'gear_id';
+      let found = 0;
+      for (let i = 0; i < ids.length; i += 80) {
+        const part = ids.slice(i, i + 80);
+        found += (await db().prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE ${col} IN (${part.map(() => '?').join(',')})`).bind(...part).first<{ n: number }>())!.n;
+      }
+      expect(found, b.id).toBe(ids.length);
+    }
+    expect(results.find((r) => r.id === 'hall_of_armaments_weapons')?.status).toBe('active');
+  });
+});
