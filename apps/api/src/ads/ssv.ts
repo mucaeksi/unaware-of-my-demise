@@ -64,6 +64,29 @@ export function derToRaw(der: Uint8Array): Uint8Array {
   return raw;
 }
 
+/** The query string as seen plus its plausible original encodings (space as + or %20, apostrophe literal or %27). */
+export function signedMessageCandidates(message: string): string[] {
+  const out = new Set<string>([message, message.replace(/%27/g, "'").replace(/%22/g, '"').replace(/%3C/gi, '<').replace(/%3E/gi, '>')]);
+  const pairs = message.split('&').map((kv): [string, string] => {
+    const i = kv.indexOf('=');
+    const raw = i < 0 ? '' : kv.slice(i + 1);
+    let v = raw;
+    try {
+      v = decodeURIComponent(raw.replace(/\+/g, ' '));
+    } catch {
+      /* keep the raw text */
+    }
+    return [i < 0 ? kv : kv.slice(0, i), v];
+  });
+  for (const space of ['+', '%20']) {
+    for (const apos of ["'", '%27']) {
+      out.add(pairs.map(([k, v]) => `${k}=${encodeURIComponent(v).replace(/%20/g, space).replace(/'/g, apos)}`).join('&'));
+    }
+  }
+  out.add(pairs.map(([k, v]) => `${k}=${v}`).join('&')); // fully decoded values
+  return [...out];
+}
+
 export interface SsvParams {
   /** signed by Google's test key (AdMob's "verify URL" button and test ads): answer 200, never grant */
   viaTestKey: boolean;
@@ -98,11 +121,10 @@ export async function verifySsv(rawQuery: string, fetchKeys: SsvKeyFetcher): Pro
     key = keys.find((k) => String(k.keyId) === keyId);
   }
   if (!key) throw new HttpError(400, 'bad_ssv', 'unknown verifier key');
-  // Google signs the query exactly as it sends it, but the runtime hands us a URL that the URL parser already normalised: it escapes the
-  // characters of the "query percent-encode set" (' " < >), so a reward name like "Bell's Remains" arrives as %27. Try the message as seen,
-  // then with those characters restored; a signature can only match the form that was really signed.
-  const restored = message.replace(/%27/g, "'").replace(/%22/g, '"').replace(/%3C/gi, '<').replace(/%3E/gi, '>');
-  const candidates = restored === message ? [message] : [message, restored];
+  // Google signs the query exactly as it sends it, but the runtime hands us a URL that the URL parser already normalised (' becomes %27),
+  // and clients differ on how a space is written (+ or %20). Try the message as seen, then every plausible re-encoding of the same values;
+  // a signature can only match the form that was really signed, so this widens nothing.
+  const candidates = signedMessageCandidates(message);
   let ok = false;
   try {
     const pub = await crypto.subtle.importKey('spki', b64(key.base64), { name: 'ECDSA', namedCurve: 'P-256' }, false, ['verify']);

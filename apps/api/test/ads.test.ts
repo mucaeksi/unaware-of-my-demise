@@ -1,6 +1,6 @@
 import { env } from 'cloudflare:workers';
 import { describe, expect, it } from 'vitest';
-import { derToRaw } from '../src/ads/ssv';
+import { derToRaw, signedMessageCandidates } from '../src/ads/ssv';
 import { ADMOB_UNIT, ADMOB_UNIT_NUMERIC, game, post, signIn, ssvPath } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
@@ -29,6 +29,16 @@ describe('rewarded ads (AdMob server-side verification)', () => {
     // a tampered message is still refused
     const bad = await game(await ssvPath({ ad_unit: ADMOB_UNIT_NUMERIC, reward_item: "Bell's Remains", timestamp: String(Date.now()), transaction_id: `tx${uid()}` }, { rawApostrophe: true, badSignature: true }));
     expect(bad.status).toBe(400);
+  });
+
+  it('re-encoding candidates cover space as + or %20 and an apostrophe sent literally or as %27', () => {
+    const c = signedMessageCandidates('a=1&reward_item=Bell%27s+Remains&t=2');
+    expect(c).toContain('a=1&reward_item=Bell%27s+Remains&t=2');
+    expect(c).toContain("a=1&reward_item=Bell's+Remains&t=2");
+    expect(c).toContain("a=1&reward_item=Bell's%20Remains&t=2");
+    expect(c).toContain('a=1&reward_item=Bell%27s%20Remains&t=2');
+    expect(c).toContain("a=1&reward_item=Bell's Remains&t=2");
+    expect(new Set(c).size).toBe(c.length);
   });
 
   it('der -> raw conversion handles short integers and padding bytes', () => {
