@@ -1,6 +1,6 @@
 # Build state (living document — facts only)
 
-Last updated: 2026-10-10 · branch `claude/unaware-demise-dev-24ly57`.
+Last updated: 2026-10-11 · `main` = `claude/unaware-demise-dev-24ly57` (kept identical; every verified step is pushed to `main`). Read-only archive branches: `archive/godot-era` (25dc0b2, last Godot tree) and `archive/pre-cleanup-2026-10-10` (b3172b1, everything removed afterwards).
 Legend: **VERIFIED** = executed in this environment and observed; **LOCAL** = verified only against the local
 Miniflare/Workers runtime, not a deployed Cloudflare environment; **NOT DONE** = does not exist yet; **BLOCKED** = needs an owner action.
 
@@ -8,7 +8,7 @@ Miniflare/Workers runtime, not a deployed Cloudflare environment; **NOT DONE** =
 | Area | Result | Evidence |
 |---|---|---|
 | Monorepo (npm workspaces, TS 5.9 strict) | VERIFIED | `npm run typecheck` → 0 errors in 8 workspaces; `npm run lint` (ESLint 10 flat config) clean |
-| Shared primitives (sha256, canonical JSON, semver, ES256 sign/verify, seeded RNG) + media-spend guard | VERIFIED | `packages/shared` 14 tests (8 primitives, 6 budget guard) |
+| Shared primitives (sha256, canonical JSON, semver, ES256 sign/verify, seeded RNG) + media-spend guard + Google media helpers | VERIFIED | `packages/shared` 19 tests (8 primitives, 6 budget guard, 5 media price/request/response) |
 | Content schema (closed effect grammar, safe paths, story/encounter/manifest schemas, cross-reference validator) | VERIFIED | `packages/content-schema` 31 tests |
 | Deterministic combat engine (narrative `battle_rules`: action gauge, damage formula, element chart, focus, statuses, replay) | VERIFIED | `packages/combat` 20 tests (determinism, replay hash, illegal-action rejection, MAX_TURNS) |
 | Story VM (labels, choices, checkpoints, save/resume) | VERIFIED | `packages/story` 5 tests |
@@ -22,7 +22,7 @@ Miniflare/Workers runtime, not a deployed Cloudflare environment; **NOT DONE** =
 | Security review | VERIFIED | `docs/SECURITY_REVIEW_2026-10-10.md` (5 findings fixed, residual risks listed). `npm audit`: 1 low (esbuild dev-server file read on Windows; dev tooling only) |
 | Secret scan of the working tree (private JWK members, PEM blocks, `AIza…`, `cfut_…`, `ghp_…`, `sk-…`) | VERIFIED | no matches; `.env*`, `.cache/`, `.wrangler/` are git-ignored |
 
-Test totals at the last full run: **124 unit/Workers tests** (api 38, game 3, combat 20, content-schema 31, patch 13, shared 14, story 5)
+Test totals at the last full run: **129 unit/Workers tests** (api 38, game 3, combat 20, content-schema 31, patch 13, shared 19, story 5)
 and **9 e2e tests passed, 1 skipped by design** (the one-way "publish a release" scenario runs on the first project only).
 
 ## 1b. Deployed staging environment (GitHub Actions run 38081525826 `deploy.yml`, 2026-10-10, all steps green)
@@ -66,3 +66,11 @@ Screenshots taken by the e2e run (WebP, `docs/evidence/`): `desktop-01-title`, `
 
 ## 5. Exact next implementation step
 Once `CLOUDFLARE_API_TOKEN` (scopes above) is present: run workflow *Deploy Cloudflare environment* (`staging`) → it applies D1 migrations + seed, builds the client with `VITE_CONTENT_CHANNEL=staging`, deploys both Workers and health-checks `/api/v1/health`; then set `CONTENT_SIGNING_KEY`, create the Access app and publish `rel_0001` + `rel_0002` with *Publish content release*. After that: grow engine effect coverage (stun/shield/DoT families) and author the next tutorial scene (T-3) as a data patch to exercise the pipeline on the staging channel.
+
+## 6. Repository state after the 2026-10-11 cleanup
+- `main` CI: **green on 85c02f0** (lint/typecheck/129 tests/builds, content reproducibility, Playwright e2e at ×3 battle speed). Earlier `main` runs of the same hour were cancelled by the old concurrency rule; CI now runs per commit.
+- Working tree: 0 Godot-extension files; skills 46; `.mcp.json` = Graphify + Chrome DevTools; `narrative/` 40 MB (was 210 MB); `reference/` 10 MB; 814 tracked files. The `.git` pack stays ~920 MB (history is never rewritten).
+- Cloudflare: 2 staging Workers, 2 D1, 3 R2 buckets (`uomd-content-dev/staging`, `uomd-db-backups` kept), 1 Access app + 1 shared policy. Legacy stack deleted.
+- Google generation: **blocked at $0** until the owner records an approved budget; tooling ready (`tools/gen_image.ts`, `tools/media_budget.ts`, `reference/`). The Gemini request shape has not been exercised against the live API.
+- Known open items (owner): Google budget amount; Neon project + legacy GitHub secrets + R2 backup token; Claude account Preferences still say Godot; visual canon (locked plum hood vs crimson chibi atlas in `content/base`); CI service token if releases should be published from GitHub (otherwise publish through the Access-protected admin UI/API).
+
