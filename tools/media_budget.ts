@@ -22,9 +22,9 @@ const save = (b: MediaBudget): void => writeFileSync(FILE, `${JSON.stringify(b, 
 try {
   const b = load();
   if (cmd === 'status') {
-    console.log(JSON.stringify({ approved_usd: b.approved_usd, committed_usd: committedUsd(b), remaining_usd: remainingUsd(b), per_batch_cap_usd: b.per_batch_cap_usd, approved_by: b.approved_by, open_reservations: b.entries.filter((e) => e.status === 'reserved').length }, null, 2));
+    console.log(JSON.stringify({ approved_usd: b.approved_usd, committed_usd: committedUsd(b, new Date().toISOString()), remaining_usd: remainingUsd(b, new Date().toISOString()), period: b.period ?? 'total', per_batch_cap_usd: b.per_batch_cap_usd, approved_by: b.approved_by, open_reservations: b.entries.filter((e) => e.status === 'reserved').length }, null, 2));
   } else if (cmd === 'reserve') {
-    const out = reserve(b, { label: flag('label') ?? '', model: flag('model') ?? '', estimateUsd: Number(flag('usd')), now: new Date().toISOString() });
+    const out = reserve(b, { label: flag('label') ?? '', model: flag('model') ?? '', estimateUsd: Number(flag('usd')), asset: flag('asset'), now: new Date().toISOString() });
     save(out.budget);
     console.log(out.index);
   } else if (cmd === 'settle') {

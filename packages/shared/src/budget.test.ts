@@ -58,3 +58,29 @@ describe('media generation spending guard', () => {
     expect(code(() => cancel(b, 9))).toBe('bad_entry');
   });
 });
+
+describe('monthly limit and per-asset attempt cap', () => {
+  const monthly = (over: Partial<MediaBudget> = {}): MediaBudget => approved({ period: 'monthly', approved_usd: 20, per_batch_cap_usd: 3, max_attempts_per_asset: 3, ...over });
+  const at = (b: MediaBudget, usd: number, now: string, asset?: string) => reserve(b, { label: 'x', model: 'image', estimateUsd: usd, now, ...(asset ? { asset } : {}) });
+
+  it('resets the allowance on the first day of the next month but not within the month', () => {
+    let b = monthly();
+    for (let i = 0; i < 6; i++) b = at(b, 3, '2026-10-11T10:00:00Z').budget; // 18 of 20 used in October
+    expect(code(() => at(b, 3, '2026-10-30T10:00:00Z'))).toBe('over_budget');
+    expect(at(b, 3, '2026-11-01T00:00:01Z').budget.entries).toHaveLength(7);
+  });
+
+  it('stops after the allowed number of paid attempts for one asset, even with money left', () => {
+    let b = monthly();
+    for (let i = 0; i < 3; i++) b = at(b, 0.2, '2026-10-11T10:00:00Z', 'fadyme_portrait').budget;
+    expect(code(() => at(b, 0.2, '2026-10-11T11:00:00Z', 'fadyme_portrait'))).toBe('attempt_cap');
+    expect(at(b, 0.2, '2026-10-11T11:00:00Z', 'mahmut_portrait').index).toBe(3); // other assets are unaffected
+  });
+
+  it('a cancelled reservation does not count as an attempt', () => {
+    let b = monthly({ max_attempts_per_asset: 1 });
+    const r = at(b, 0.2, '2026-10-11T10:00:00Z', 'a');
+    b = cancel(r.budget, r.index);
+    expect(at(b, 0.2, '2026-10-11T10:05:00Z', 'a').index).toBe(1);
+  });
+});

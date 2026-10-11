@@ -10,7 +10,7 @@
 import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { extname, join } from 'node:path';
-import { BudgetError, buildImageRequest, cancel, estimateUsd, MediaError, parseImageResponse, priceOf, remainingUsd, reserve, settle, validateSpec, type ImageSpec, type InlineImage, type MediaBudget } from '@uomd/shared';
+import { attemptsFor, BudgetError, buildImageRequest, cancel, estimateUsd, MediaError, parseImageResponse, priceOf, remainingUsd, reserve, settle, validateSpec, type ImageSpec, type InlineImage, type MediaBudget } from '@uomd/shared';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const BUDGET_FILE = join(ROOT, 'content/budget/media_budget.json');
@@ -41,9 +41,9 @@ async function main(): Promise<void> {
   const request = buildImageRequest(spec, refs.map((r) => r.inline));
 
   if (!process.argv.includes('--execute')) {
-    console.log(JSON.stringify({ mode: 'dry-run', id: spec.id, model: spec.model, size: spec.size, count: spec.count, unit_price_usd: priceOf(spec.model, spec.size), estimate_usd: estimate, budget: { approved_usd: budget.approved_usd, per_batch_cap_usd: budget.per_batch_cap_usd, remaining_usd: remainingUsd(budget), approved_by: budget.approved_by }, request_path: request.path, references: refs.map((r) => ({ path: r.path, sha256: r.sha256 })), prompt_preview: spec.prompt.slice(0, 160) }, null, 2));
+    console.log(JSON.stringify({ mode: 'dry-run', id: spec.id, model: spec.model, size: spec.size, count: spec.count, unit_price_usd: priceOf(spec.model, spec.size), estimate_usd: estimate, budget: { approved_usd: budget.approved_usd, per_batch_cap_usd: budget.per_batch_cap_usd, remaining_usd: remainingUsd(budget, new Date().toISOString()), attempts_used_for_asset: attemptsFor(budget, spec.id), approved_by: budget.approved_by }, request_path: request.path, references: refs.map((r) => ({ path: r.path, sha256: r.sha256 })), prompt_preview: spec.prompt.slice(0, 160) }, null, 2));
     try {
-      reserve(budget, { label: spec.id, model: spec.model, estimateUsd: estimate, now: new Date().toISOString() });
+      reserve(budget, { label: spec.id, model: spec.model, estimateUsd: estimate, asset: spec.id, now: new Date().toISOString() });
       console.log('budget check: a reservation WOULD succeed (nothing reserved, no call made)');
     } catch (e) {
       console.log(`budget check: BLOCKED (${e instanceof BudgetError ? e.code : 'error'}) — ${(e as Error).message}`);
@@ -52,7 +52,7 @@ async function main(): Promise<void> {
   }
 
   // paid path: reserve first, persist the reservation, then call
-  const reserved = reserve(budget, { label: spec.id, model: spec.model, estimateUsd: estimate, now: new Date().toISOString() });
+  const reserved = reserve(budget, { label: spec.id, model: spec.model, estimateUsd: estimate, asset: spec.id, now: new Date().toISOString() });
   saveBudget(reserved.budget);
   const outDir = join(ROOT, '.cache/generated', spec.id);
   mkdirSync(outDir, { recursive: true });

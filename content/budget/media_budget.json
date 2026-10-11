@@ -1,9 +1,13 @@
 {
   "schema_version": 1,
   "currency": "USD",
-  "approved_usd": 0,
-  "per_batch_cap_usd": 0,
-  "approved_by": null,
-  "approved_at": null,
+  "approved_usd": 20,
+  "period": "monthly",
+  "approved_try": 1000,
+  "approved_note": "Owner limit: 1000 TL per month (stated in chat 2026-10-11). Counted as 20 USD per month, i.e. assuming at most 50 TL per USD (conservative: at 43-48 TL/USD the real spend stays under 1000 TL). Recheck the rate if the lira weakens.",
+  "per_batch_cap_usd": 3,
+  "max_attempts_per_asset": 3,
+  "approved_by": "owner (chat 2026-10-11)",
+  "approved_at": "2026-10-11T04:40:00Z",
   "entries": []
 }
