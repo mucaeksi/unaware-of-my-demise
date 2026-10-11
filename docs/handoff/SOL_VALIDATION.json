@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-11",
+  "status": "DOCUMENT_DATA_ACCEPTANCE_PASS",
+  "checks": {
+    "json_parse": {
+      "result": "PASS",
+      "files": 29
+    },
+    "combat": {
+      "result": "PASS",
+      "missing_ops": 22,
+      "cases": 54,
+      "full_snapshots_bounds_checked": 123,
+      "missing_status_sections": 9,
+      "engine_replay": "NOT_RUN_REQUIRES_FUTURE_ADAPTER"
+    },
+    "i18n": {
+      "result": "PASS",
+      "production_files": 38,
+      "allocated_keys": 375,
+      "excluded_literals": 1003,
+      "every_source_offset_line_raw_hash_and_placeholder_checked": true
+    },
+    "store": {
+      "result": "PASS",
+      "listing_character_counts": {
+        "Title (20 / 30 characters)": 20,
+        "Short description (under 80 characters)": 75,
+        "Full description (under 4,000 characters)": 1368,
+        "Internal-testing release notes (under 500 characters)": 329,
+        "First public release notes \u2014 use only after all listed content exists": 278
+      },
+      "seller_line_exact": true,
+      "submission": "NOT_RUN_UNKNOWN_FIELDS_REMAIN"
+    },
+    "media": {
+      "result": "PASS",
+      "characters": 20,
+      "enemies": 27,
+      "asset_prompts": 235,
+      "source_hashes_match": true,
+      "baseline_usd_assumption": 18.941,
+      "generation": "NOT_RUN"
+    },
+    "events": {
+      "result": "PASS",
+      "packages": 8,
+      "encounter_variants": 32,
+      "rewards_not_invented": true,
+      "canonical_enemy_ids_checked": true,
+      "live_event_test": "NOT_RUN"
+    },
+    "qa": {
+      "result": "PASS",
+      "named_cases": 24,
+      "first_aab_acceptance_matrix": true,
+      "device_execution": "NOT_RUN"
+    },
+    "runbook": {
+      "result": "PASS",
+      "required_procedure_sections_present": true,
+      "remote_operations": "NOT_RUN"
+    },
+    "economy": {
+      "result": "PASS",
+      "exact_source_function_runs": 8,
+      "archetypes_per_run": 3,
+      "rounded_cash_conservation": true,
+      "fee_xp_totals": true,
+      "strict_floor_and_shop_counterexample": true,
+      "live_http_or_config_change": "NOT_RUN"
+    },
+    "ownership": {
+      "result": "PASS",
+      "package_commits": [
+        "0cdc0a07",
+        "5a82fae3",
+        "c18fc30e",
+        "a10e4637",
+        "22667f1b",
+        "c9774625",
+        "181aa9f9",
+        "21779960"
+      ],
+      "all_authored_commit_paths_under_docs": true,
+      "note": "Independent upstream changes were merged; no application, narrative, signed-content or workflow edits authored by Sol."
+    },
+    "task_checklist": {
+      "result": "PASS",
+      "completed": 8,
+      "scope": "EN_ONLY_JA_JP_VOICE_NO_GENERATION"
+    }
+  },
+  "limitations": [
+    "No current-engine replay of proposed combat vectors",
+    "No physical Android, Play/AdMob sandbox or browser tests",
+    "No paid media, reservations, uploads or audio generation",
+    "No staging HTTP economy call or configuration changes",
+    "No operator backup restore/key rotation/refund/reset actions",
+    "Legal/canon/implementation UNKNOWN decisions remain for owner/Claude"
+  ]
+}

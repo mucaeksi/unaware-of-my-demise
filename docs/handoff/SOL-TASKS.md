@@ -13,7 +13,8 @@ Tick a box only when committed and accepted; add `commit <hash> - what is left`.
   - commit `181aa9f9` — accepted: exact 20/27 catalog IDs, 235 English prompts, tutorial-first priority, Japanese VO rules and budget arithmetic checked. Left: reference/candidate approval, casting/transcripts, export contracts and staged Google production; no generation.
 - [x] SOL-6 Localization catalog, EN source only (TR deferred by owner 2026-10-11; `docs/i18n/STRINGS.md`)
   - commit `c9774625` — accepted for owner EN-only scope: 38 production source files, 375 stable keys and all 1,378 literal occurrences classified; source hashes and placeholders checked. Left: Claude wires keys, dynamic server/narrative/native text and Japanese dialogue bindings.
-- [ ] SOL-7 Economy tuning proposal (`docs/economy/TUNING_PROPOSAL.md`)
+- [x] SOL-7 Economy tuning proposal (`docs/economy/TUNING_PROPOSAL.md`)
+  - commit `21779960` — accepted: concrete payouts/fee curves, eight local runs of the exact API simulator function and all three archetypes; strict no-ad recovery and shop counterexample checked. Left: owner tuning decisions, supply claim implementation, material routes, final boss drop conflict and live config/device validation; nothing applied.
 - [x] SOL-8 Side-story requirements for the engine (`docs/handoff/EVENT_REQUIREMENTS.md`)
   - commit `5a82fae3` — accepted: all 8 packages / 32 encounter variants audited against grammar, enemy IDs and null rewards. Left: production mappings, rewards, event state and Japanese media bindings.
 
