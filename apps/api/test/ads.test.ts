@@ -91,14 +91,13 @@ describe('rewarded ads (AdMob server-side verification)', () => {
     expect(((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token).toBe(150);
   });
 
-  it('rejects tampering, wrong key, wrong order, foreign ad units, old callbacks and unknown/foreign/used nonces', async () => {
+  it('rejects tampering, wrong key, wrong order, old callbacks and unknown/foreign/used nonces', async () => {
     const a = await signIn(`sub-adbad-${uid()}`);
     const b = await signIn(`sub-adbad2-${uid()}`);
     const okParams = async () => ({ ad_unit: ADMOB_UNIT, custom_data: ((await (await game('/api/v1/ads/begin', post({}, a.auth))).json()) as { nonce: string }).nonce, timestamp: String(Date.now()), transaction_id: `tx${uid()}`, user_id: a.playerId });
     expect((await game(await ssvPath(await okParams(), { badSignature: true }))).status).toBe(400);
     expect((await game(await ssvPath(await okParams(), { keyId: '1' }))).status).toBe(400);
     expect((await game(await ssvPath(await okParams(), { reorder: true }))).status).toBe(400);
-    expect((await game(await ssvPath({ ...(await okParams()), ad_unit: 'ca-app-pub-1/2' }))).status).toBe(400);
     expect((await game(await ssvPath({ ...(await okParams()), timestamp: String(Date.now() - 3 * 86_400_000) }))).status).toBe(400);
     expect((await game('/api/v1/ads/ssv')).status).toBe(400);
     // a nonce of player A cannot pay player B, and a missing/unknown nonce pays nobody
@@ -129,6 +128,37 @@ describe('rewarded ads (AdMob server-side verification)', () => {
 });
 
 describe('AdMob URL verification and test callbacks', () => {
+  it('acknowledges a live-key URL check with a placeholder ad unit and a literal apostrophe without payout', async () => {
+    const path = await ssvPath({ ad_network: '5450213213286189855', ad_unit: '1234567890', reward_amount: '20', reward_item: "Bell's Remains", timestamp: String(Date.now()), transaction_id: `tx${uid()}` }, { rawApostrophe: true });
+    const res = await game(path);
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ granted: false, reason: 'ad_unit_not_ours' });
+  });
+
+  it('a verified foreign unit cannot pay or consume a valid nonce; our unit can still use that nonce', async () => {
+    const { auth, playerId } = await signIn(`sub-adforeign-${uid()}`);
+    const begin = (await (await game('/api/v1/ads/begin', post({}, auth))).json()) as { nonce: string };
+    const params = { ad_unit: 'ca-app-pub-1/2', custom_data: begin.nonce, timestamp: String(Date.now()), transaction_id: `tx${uid()}`, user_id: playerId };
+    const res = await game(await ssvPath(params));
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ granted: false, reason: 'ad_unit_not_ours' });
+    expect(await db().prepare('SELECT used_at FROM ad_nonces WHERE nonce = ?1').bind(begin.nonce).first()).toEqual({ used_at: null });
+    expect(await db().prepare('SELECT transaction_id FROM ad_rewards WHERE transaction_id = ?1').bind(params.transaction_id).first()).toBeNull();
+    expect(((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token ?? 0).toBe(0);
+    const own = await game(await ssvPath({ ...params, ad_unit: ADMOB_UNIT_NUMERIC }));
+    expect(own.status).toBe(200);
+    expect(await own.json()).toMatchObject({ granted: true, balance: 30 });
+  });
+
+  it('rejects invalid signatures, unknown keys and wrong parameter order before acknowledging a foreign unit', async () => {
+    const params = { ad_unit: '1234567890', reward_item: "Bell's Remains", timestamp: String(Date.now()), transaction_id: `tx${uid()}` };
+    for (const opts of [{ badSignature: true }, { keyId: '1' }, { reorder: true }]) {
+      const res = await game(await ssvPath(params, opts));
+      expect(res.status).toBe(400);
+      expect(await res.json()).toMatchObject({ error: 'bad_ssv' });
+    }
+  });
+
   it('the "verify URL" request (no user_id, no custom_data, Google test key) is answered 200 and pays nothing', async () => {
     const path = await ssvPath({ ad_network: '5450213213286189855', ad_unit: ADMOB_UNIT_NUMERIC, reward_amount: '1', reward_item: 'token', timestamp: String(Date.now()), transaction_id: `tx${uid()}` }, { test: true });
     const res = await game(path);

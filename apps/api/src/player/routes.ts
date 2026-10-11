@@ -238,7 +238,12 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     if (ssv.viaTestKey) return c.json({ granted: false, reason: 'test_callback' });
     // AdMob's callback carries the numeric unit id (the part after the slash of ca-app-pub-<publisher>/<unit>); configuration may hold either form
     const unitId = (u: string): string => u.slice(u.lastIndexOf('/') + 1);
-    if (!units.some((u) => unitId(u) === unitId(ssv.adUnit))) throw new HttpError(400, 'bad_ssv', 'ad unit is not ours');
+    // AdMob's URL check can use a live verifier key with a placeholder unit (1234567890).
+    // Acknowledge verified foreign units without granting or consuming a player's nonce.
+    if (!units.some((u) => unitId(u) === unitId(ssv.adUnit))) {
+      console.log('ssv_ignored', JSON.stringify({ reason: 'ad_unit_not_ours', adUnit: ssv.adUnit }));
+      return c.json({ granted: false, reason: 'ad_unit_not_ours' });
+    }
     if (Math.abs(Date.now() - ssv.timestampMs) > AD.maxAgeMs) throw new HttpError(400, 'bad_ssv', 'callback is too old');
     if (!(await flagOn(c.env, 'ads.rewarded.enabled'))) return c.json({ granted: false, reason: 'disabled' });
     // 200 for every verified callback (Google retries other codes); the body says whether the view paid out
