@@ -1,0 +1,15 @@
+{
+  "id": "mahmut_vn_watchful",
+  "model": "gemini-3.1-flash-image",
+  "size": "2K",
+  "aspectRatio": "2:3",
+  "count": 1,
+  "references": [
+    {
+      "path": "reference/approved/mahmut_vn_composed.png",
+      "role": "IDENTITY AND CROP LOCK: the owner-approved Mahmut composed bust; copy its face, hair, stubble, eyes, armour, star and empty socket, cloak, pose, framing, lighting and flat green background exactly and change nothing except what the prompt names"
+    }
+  ],
+  "prompt": "Deliverable: the same visual-novel bust of Mahmut as in reference image 1, redrawn once with a single changed expression, portrait 2:3, one image only.\nIDENTITY AND CROP LOCK: Mahmut, an adult man aged 28. Keep exactly the face, short dark messy hair, stubble, brown eyes, dark worn mismatched half-plate with the star on the breastplate and the empty socket above it, tattered oxblood cloak, three-quarter pose, crop, camera distance, eye line (about 27% from the top), lighting, warm amber rim light from the left and flat pure #00FF00 background of reference image 1, aligned with it. The silhouette of the hair, shoulders and cloak stays identical; both hands stay outside the frame.\nCHANGE ONLY THE EXPRESSION, watchful: the eyes track slightly off-axis, resting just past the camera toward the left edge of the frame as if listening to something beyond it; the brow is minimally lowered; the head turns three to five degrees further toward the left; the mouth stays closed and the jaw relaxed; the tired steadiness remains. Everything outside the eyes, brows, mouth and a three-to-five-degree head turn is unchanged.\nSTYLE: painterly dark gothic anime light-novel illustration, thin soft plum-black linework, soft cel shading on the skin, painterly matte cloth, weathered worn dull metal, visible brush grain, no gloss, exactly the rendering of reference image 1.\nTECHNICAL: flat pure #00FF00 background, one flat colour from edge to edge with no gradient, shadow or glow; crisp hard silhouette edges; no green on the subject; text-free.\nDo not add: text, letters, logos, watermark, border, a second person, a different face, new props, changes of costume or crop.",
+  "notes": "mahmut_portraits group, stage 2 of 2 (expression edit). DEPENDS on the owner-approved mahmut_vn_composed: reference/approved/mahmut_vn_composed.png does not exist until that approval gate runs, so a gen_image dry run fails with ENOENT until then (validateSpec passes). Tutorial use: narration beats such as 'Are you hurt?' and 'It has crossed this patch three times.' (emotion tag watchful, the most frequent Mahmut tag). Plan and fallbacks: docs/media/specs/mahmut_portraits.md"
+}

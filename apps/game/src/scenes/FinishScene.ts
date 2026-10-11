@@ -41,12 +41,12 @@ export class FinishScene extends Phaser.Scene {
     } catch {
       /* the backdrop is decoration only */
     }
-    panel(this, REF_W / 2, REF_H / 2, 1380, 640, 'hot');
-    this.head = title(this, REF_W / 2, 330, '', 54, T.gold);
+    panel(this, REF_W / 2, REF_H / 2, 1380, 600, 'hot');
+    this.head = title(this, REF_W / 2, 360, '', 54, T.gold);
     this.note = txt(this, REF_W / 2, 450, '', { fontSize: '36px', color: T.text, align: 'center', wordWrap: { width: 1160 }, lineSpacing: 8 }).setOrigin(0.5, 0);
     this.bar = new Bar(this, REF_W / 2, 600, 1000, 26, () => C.goldHi);
     this.figures = txt(this, REF_W / 2, 650, '', { fontSize: '32px', color: T.dim }).setOrigin(0.5, 0);
-    this.action = new Button(this, REF_W / 2, 770, { label: S.finish.restart, w: 700, h: 128, fontSize: 40, variant: 'hot', onClick: () => void this.onAction() });
+    this.action = new Button(this, REF_W / 2, 700, { label: S.finish.restart, w: 700, h: 128, fontSize: 40, variant: 'hot', onClick: () => void this.onAction() });
     this.action.setVisible(false);
     void Services.patches.start(); // a no-op while it runs or when it has finished; covers a player who resumed straight at this step
     this.unsub = Services.patches.subscribe((s) => this.render(s));

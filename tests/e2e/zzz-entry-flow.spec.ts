@@ -171,9 +171,9 @@ test('first install: gate -> prologue -> T-1..T-3 (manual battles, cutscene rule
 
   let loads = 0;
   page.on('load', () => loads++);
-  await tap(page, info, REF_W / 2, 770);
-  await tap(page, info, REF_W / 2, 770);
-  await tap(page, info, REF_W / 2, 770);
+  await tap(page, info, REF_W / 2, 700);
+  await tap(page, info, REF_W / 2, 700);
+  await tap(page, info, REF_W / 2, 700);
   await page.waitForFunction(() => (window as any).__UOMD__?.game.scene.isActive('Title'), null, { timeout: 90_000 });
   await page.waitForTimeout(1500);
   expect(loads).toBe(1); // three presses, one restart
@@ -234,7 +234,7 @@ test('a failed download shows a retry path on the download page; retrying finish
   expect(await textsOf(page, 'Finish')).toContain('TRY AGAIN');
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-f7-11-download-failed.png` });
   blocked = false;
-  await tap(page, info, REF_W / 2, 770);
+  await tap(page, info, REF_W / 2, 700);
   await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.services.patches.get().kind), { timeout: 120_000 }).toBe('ready');
   await page.waitForTimeout(900);
   expect(await textsOf(page, 'Finish')).toContain('RESTART & ENTER GAME');
