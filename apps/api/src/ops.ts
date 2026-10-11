@@ -14,7 +14,11 @@ async function record(env: OpsEnv, kind: 'backup' | 'health', ok: boolean, detai
 }
 
 export async function runScheduled(cron: string, env: OpsEnv): Promise<void> {
-  if (cron === CRON_BACKUP) {
+  if (cron === CRON_HEALTH) {
+    const h = await runHealth(env);
+    await record(env, 'health', h.ok, h);
+  } else {
+    // the nightly schedule, or any one-off schedule an operator sets to run a backup now
     try {
       const r = await runBackup(env);
       await record(env, 'backup', true, r);
@@ -22,9 +26,6 @@ export async function runScheduled(cron: string, env: OpsEnv): Promise<void> {
       await record(env, 'backup', false, { error: e instanceof Error ? e.message : String(e) });
       throw e;
     }
-  } else if (cron === CRON_HEALTH) {
-    const h = await runHealth(env);
-    await record(env, 'health', h.ok, h);
   }
 }
 
