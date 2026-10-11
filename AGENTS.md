@@ -8,4 +8,6 @@ For Codex, discover project skills under `.agents/skills/`. Read the relevant `S
 
 Use [uomd-codex-workflow](.agents/skills/uomd-codex-workflow/SKILL.md) for repository coordination and validation. Use [docs/CODEX_SKILLS.md](docs/CODEX_SKILLS.md) for the complete catalog, invocation examples, runtime status and optional MCP setup. Native Codex calls use `$<skill-name>`; Claude slash commands and plugin-qualified names are not assumed to exist here.
 
+Cloudflare architecture, Worker review and CLI work have dedicated `uomd-cloudflare-platform`, `uomd-workers-review` and `uomd-wrangler` entry points to the installed official plugin/current docs. Use `uomd-android-release-qa` for native acceptance and `uomd-visual-regression` for browser evidence. The owner's review-first, choose-one-task workflow is captured in [docs/NEW_SESSION_PROJECT_REVIEW.md](docs/NEW_SESSION_PROJECT_REVIEW.md); when requested, finish the review and wait for the selected task before implementing it.
+
 Session/user authorization and available tools govern execution. A skill file or MCP declaration alone does not prove a live connection. Keep the current host's permissions, credentials and tool schemas; do not install upstream hooks, start paid generation, change global configuration or grant permissions through a skill adaptation.

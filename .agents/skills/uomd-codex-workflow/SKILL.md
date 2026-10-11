@@ -15,4 +15,6 @@ Read root README completely, then AGENTS.md. README is the master engineering pr
 
 Task-specific user authorization persists. Ordinary reversible development and existing staging work are authorized; permissions, public releases, destructive operations and spending follow README and the session. A generic workflow is not an approval to perform every possible operation.
 
+When the owner requests review and task selection first, complete the read-only review and numbered backlog, then wait for a task ID. After selection, finish that task and its necessary dependencies without repeating routine permission requests; report results and wait for the next selection. Use [the new-session prompt](../../../docs/NEW_SESSION_PROJECT_REVIEW.md) for the agreed review format. Do not turn read-only scope into implementation merely because the general main policy exists.
+
 Finish with the result, commit, actual verification and material limitations. Use monitoring evidence for live claims. Keep Claude files intact when maintaining Codex adapters; refresh and check with `tools/sync_codex_skills.py`, which does not execute source hooks.
