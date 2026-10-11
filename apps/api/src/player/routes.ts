@@ -6,6 +6,7 @@ import { HttpError } from '../content/store';
 import { d1RateLimit } from '../http';
 import type { GameEnv } from '../env';
 import { activeBanners, convertEclipseToFates, disclosure, pullGacha } from '../gacha/service';
+import { claimMail, listMail, markRead } from '../mail/service';
 import { issueSession, playerForGoogle, resolveSession, revokeSession, verifyGoogleIdToken } from './auth';
 
 type AppEnv = { Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } };
@@ -56,6 +57,8 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/inventory', authed);
   app.use('/api/v1/gacha/*', authed);
   app.use('/api/v1/economy/*', authed);
+  app.use('/api/v1/mail', authed);
+  app.use('/api/v1/mail/*', authed);
 
   app.post('/api/v1/auth/logout', async (c) => {
     await revokeSession(c.env.DB, c.get('tokenHash'));
@@ -110,5 +113,21 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     await perMinute(c.env, `convert:${c.get('playerId')}`, 30);
     const input = await body(c, Convert);
     return c.json(await convertEclipseToFates(c.env.DB, c.get('playerId'), input.count, input.requestId));
+  });
+
+  app.get('/api/v1/mail', async (c) => c.json({ mail: await listMail(c.env.DB, c.get('playerId')) }));
+
+  const MailId = z.coerce.number().int().min(1).max(Number.MAX_SAFE_INTEGER);
+  app.post('/api/v1/mail/:id/read', async (c) => {
+    const id = MailId.safeParse(c.req.param('id'));
+    if (!id.success) throw new HttpError(400, 'bad_request', 'invalid mail id');
+    await markRead(c.env.DB, c.get('playerId'), id.data);
+    return c.json({ ok: true });
+  });
+  app.post('/api/v1/mail/:id/claim', async (c) => {
+    await perMinute(c.env, `claim:${c.get('playerId')}`, 60);
+    const id = MailId.safeParse(c.req.param('id'));
+    if (!id.success) throw new HttpError(400, 'bad_request', 'invalid mail id');
+    return c.json(await claimMail(c.env.DB, c.get('playerId'), id.data));
   });
 }
