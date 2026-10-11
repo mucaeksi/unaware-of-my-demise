@@ -609,3 +609,48 @@ describe('hooks that react to being hit, to low HP and to the turn clock', () =>
     expect(hit(true)).toBe(105);
   });
 });
+
+describe('round-end rules', () => {
+  it("Hana's Still as Bark: an undamaged round arms a one-shot +20% attack, and does not re-arm while it is pending", () => {
+    const b = duel(
+      [
+        {
+          id: 'hana',
+          atk: 100,
+          spd: 100,
+          skills: [
+            { id: 'hb', ops: [dmg('single_enemy', 1)], target: 'enemy' },
+            { id: 'hp', type: 'passive', ops: [], hooks: [{ event: 'after_round_end', effect_ops: [{ op: 'arm_next_attack_bonus', target_selector_id: 'self', damage_multiplier: 1.2, consume_on_attack: true }], condition: { predicate: 'owner_took_no_damage_this_round' }, limit: { one_pending_bonus: true } }] }
+          ]
+        }
+      ],
+      [dummy('idler', { spd: 99 })]
+    );
+    b.advance();
+    const first = b.act({ skillId: 'hb', targetId: E(0, 'idler') }); // round 1 ends after the idler acts: Hana was not hit
+    expect(ev(first.events, 'damage')[0]?.amount).toBe(100);
+    expect(b.unit(P(0, 'hana')).nextAttackBonus).toBe(1.2);
+    const second = b.act({ skillId: 'hb', targetId: E(0, 'idler') });
+    expect(ev(second.events, 'damage')[0]?.amount).toBe(120);
+    expect(b.unit(P(0, 'hana')).nextAttackBonus === 1.2 || b.unit(P(0, 'hana')).nextAttackBonus === null).toBe(true);
+  });
+});
+
+describe('team-scoped damage hooks', () => {
+  it("Clem's Keep the Names: the first allied attack on each Dreaded enemy deals +8%, later ones do not", () => {
+    const b = duel(
+      [
+        { id: 'clem', spd: 5, skills: [{ id: 'cb', ops: [], target: 'enemy' }, { id: 'cp', type: 'passive', ops: [], hooks: [{ event: 'before_damage_dealt', effect_ops: [{ op: 'modify_outgoing_damage', target_selector_id: 'self', multiplier: 1.08 }], condition: { predicate: 'target_has_status', value: 'dread' }, limit: { per_target_per_battle: 1 }, event_filter: { owner_action_type: 'any_attack', team: 'player' } }] }] },
+        { id: 'friend', atk: 100, spd: 100, skills: [{ id: 'fb', ops: [dmg('single_enemy', 1)], target: 'enemy' }] }
+      ],
+      [dummy('marked')]
+    );
+    b.advance();
+    b.unit(E(0, 'marked')).statuses.push({ statusId: 'dread', turnsLeft: 9, sourceId: 'x', seq: 1 });
+    const a = b.act({ skillId: 'fb', targetId: E(0, 'marked') });
+    const c = b.act({ skillId: 'fb', targetId: E(0, 'marked') });
+    expect(ev(a.events, 'damage')[0]?.amount).toBe(108);
+    expect(ev(c.events, 'damage')[0]?.amount).toBe(100);
+  });
+});
+

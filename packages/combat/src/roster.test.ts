@@ -82,6 +82,12 @@ describe('the full playable roster and the regular enemies run in the engine', (
     }
   });
 
+  it("Clem's Keep the Names follows its text (any allied attack), not the owner-only scope of the raw data", () => {
+    const clem = pack.units.find((u) => u.unit_id === 'clem_marr');
+    const hook = clem?.skills.flatMap((k) => k.event_hooks ?? []).find((h) => h.event === 'before_damage_dealt');
+    expect(hook?.event_filter?.team).toBe('player');
+  });
+
   it('actions of every playable character were exercised', () => {
     const missing: string[] = [];
     for (const u of pack.units) for (const s of u.skills) if (s.type !== 'passive' && u.kind === 'character' && !used.has(s.skill_id)) missing.push(s.skill_id);
