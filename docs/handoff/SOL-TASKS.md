@@ -10,7 +10,8 @@ Tick a box only when committed and accepted; add `commit <hash> - what is left`.
 - [x] SOL-4 Runbook (`docs/RUNBOOK.md`)
   - commit `a10e4637` — accepted: source-backed logs/rollback/D1 restore/signing/refund/reset procedures and UNKNOWN gaps. Left: operator restore rehearsal and R01–R06 decisions; plaintext probe flagged to Claude.
 - [ ] SOL-5 Media production queue (`docs/media/QUEUE.md`)
-- [ ] SOL-6 Localization catalog, EN source only (TR deferred by owner 2026-10-11; `docs/i18n/STRINGS.md`)
+- [x] SOL-6 Localization catalog, EN source only (TR deferred by owner 2026-10-11; `docs/i18n/STRINGS.md`)
+  - commit `c9774625` — accepted for owner EN-only scope: 38 production source files, 375 stable keys and all 1,378 literal occurrences classified; source hashes and placeholders checked. Left: Claude wires keys, dynamic server/narrative/native text and Japanese dialogue bindings.
 - [ ] SOL-7 Economy tuning proposal (`docs/economy/TUNING_PROPOSAL.md`)
 - [x] SOL-8 Side-story requirements for the engine (`docs/handoff/EVENT_REQUIREMENTS.md`)
   - commit `5a82fae3` — accepted: all 8 packages / 32 encounter variants audited against grammar, enemy IDs and null rewards. Left: production mappings, rewards, event state and Japanese media bindings.
