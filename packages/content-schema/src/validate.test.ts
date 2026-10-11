@@ -11,11 +11,8 @@ const walk = (dir: string, rel = ''): string[] =>
   });
 const load = (dir: string): Map<string, Uint8Array> => new Map(walk(dir).map((p) => [p, new Uint8Array(readFileSync(join(dir, p)))]));
 
-const overlay = (): Map<string, Uint8Array> => {
-  const m = load(join(ROOT, 'base'));
-  for (const [k, v] of load(join(ROOT, 'patches/rel_0002_road_forgotten'))) m.set(k, v);
-  return m;
-};
+/** the base release alone: the first-install flow (prologue + tutorials T-1..T-3) */
+const overlay = (): Map<string, Uint8Array> => load(join(ROOT, 'base'));
 const campaign = (): Map<string, Uint8Array> => {
   const m = load(join(ROOT, 'base'));
   for (const [k, v] of load(join(ROOT, 'patches/rel_0003_part1_campaign'))) m.set(k, v);
@@ -25,13 +22,10 @@ const enc = new TextEncoder();
 
 describe('validateContentSet', () => {
   it('accepts the base release', () => {
-    expect(validateContentSet(load(join(ROOT, 'base')))).toMatchObject({ nodes: 1, units: 3 });
-  });
-  it('accepts base + patch rel_0002 as one effective set', () => {
-    expect(validateContentSet(overlay())).toMatchObject({ nodes: 2, units: 4, scenes: 4 });
+    expect(validateContentSet(load(join(ROOT, 'base')))).toMatchObject({ nodes: 3, units: 4 });
   });
   it('accepts base + the Part I campaign (35 stages, the full cast, placeholder art) as one effective set', () => {
-    expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 36, units: 47 });
+    expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 38, units: 47 });
   });
   it('rejects a campaign stage that names a guest the unit pack does not contain', () => {
     const m = campaign();
@@ -47,7 +41,7 @@ describe('validateContentSet', () => {
     m.set('encounters/tutorial_t2.json', enc.encode(JSON.stringify(bad)));
     expect(() => validateContentSet(m)).toThrow(ContentValidationError);
   });
-  it('rejects a chapter node that needs a patch-only encounter file that is absent', () => {
+  it('rejects a chapter node whose encounter file is absent', () => {
     const m = overlay();
     m.delete('encounters/tutorial_t2.json');
     expect(() => validateContentSet(m)).toThrow(/missing file encounters\/tutorial_t2.json/);
@@ -70,6 +64,21 @@ describe('validateContentSet', () => {
     const m2 = overlay();
     m2.set('units/unit_pack.json', enc.encode(JSON.stringify(pack2)));
     expect(() => validateContentSet(m2)).toThrow(/no_such_bell/);
+  });
+  it('rejects an entry index that points at a missing or broken tutorial stage, and a prologue whose timing does not add up', () => {
+    const m = overlay();
+    m.delete('encounters/tutorial_t3.json');
+    expect(() => validateContentSet(m)).toThrow(/missing file encounters\/tutorial_t3.json/);
+    const m2 = overlay();
+    const prologue = JSON.parse(new TextDecoder().decode(m2.get('entry/prologue.json')));
+    prologue.scenes[0].duration_seconds += 3;
+    m2.set('entry/prologue.json', enc.encode(JSON.stringify(prologue)));
+    expect(() => validateContentSet(m2)).toThrow(/scene durations add up/);
+    const m3 = overlay();
+    const entry = JSON.parse(new TextDecoder().decode(m3.get('entry/entry_index.json')));
+    entry.tutorial.push({ stage_id: 't1', encounter: 'encounters/tutorial_t1.json' });
+    m3.set('entry/entry_index.json', enc.encode(JSON.stringify(entry)));
+    expect(() => validateContentSet(m3)).toThrow(/duplicate stage t1/);
   });
   it('rejects art that points at a file the release does not contain', () => {
     const m = overlay();

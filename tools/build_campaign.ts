@@ -5,7 +5,7 @@
  * It also plays every stage with the Auto Battle policy and reports whether the stage can be won at its recommended level (docs/combat/CAMPAIGN_BALANCE.md).
  * Run: npm run build:campaign
  */
-import { copyFileSync, mkdirSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { mkdirSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
@@ -36,7 +36,17 @@ writeJson(`${OUT}/units/unit_pack.json`, pack);
 
 // ---- encounters + chapter index ----------------------------------------------------------------------------------------
 const nodeIds: string[] = [];
-const chapterOut: Json[] = [{ chapter_id: 'tutorial', title_en: 'Before the Road', nodes: [{ node_id: 't1', title_en: 'The First Step', kind: 'battle', encounter: 'encounters/tutorial_t1.json' }] }];
+const chapterOut: Json[] = [
+  {
+    chapter_id: 'tutorial',
+    title_en: 'Before the Road',
+    nodes: [
+      { node_id: 't1', title_en: 'The First Step', kind: 'battle', encounter: 'encounters/tutorial_t1.json' },
+      { node_id: 't2', title_en: 'A Road Forgotten', kind: 'battle', encounter: 'encounters/tutorial_t2.json', requires: 't1' },
+      { node_id: 't3', title_en: 'A Roof Before Dawn', kind: 'battle', encounter: 'encounters/tutorial_t3.json', requires: 't2' }
+    ]
+  }
+];
 let prev: string | null = null;
 const encounters = new Map<string, Encounter>();
 
@@ -105,10 +115,8 @@ writeJson(`${OUT}/chapters/chapter_index.json`, ChapterIndex.parse({ schema_vers
 
 // ---- art manifest: base art + one placeholder atlas for every unit that has no production art yet ------------------------------
 const base = ArtManifest.parse(readJson(`content/base/art/art_manifest.json`));
-const rel2 = ArtManifest.parse(readJson(`content/patches/rel_0002_road_forgotten/art/art_manifest.json`));
-const art = { ...base, atlases: { ...base.atlases, ...rel2.atlases }, units: { ...base.units, ...rel2.units } };
+const art = base; // the base art manifest already carries the tutorial cast (Mahmut, Fadyme, Bellbound Dead, Hollow Pilgrim)
 mkdirSync(join(ROOT, `${OUT}/art`), { recursive: true });
-copyFileSync(join(ROOT, 'content/patches/rel_0002_road_forgotten/art/atlas_hollow_pilgrim.webp'), join(ROOT, `${OUT}/art/atlas_hollow_pilgrim.webp`));
 const W = 256;
 const H = 384;
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b5a88"/><stop offset="1" stop-color="#2b2238"/></linearGradient></defs><ellipse cx="128" cy="360" rx="70" ry="14" fill="#000" opacity="0.35"/><path d="M128 150 C60 160 56 300 70 350 L186 350 C200 300 196 160 128 150 Z" fill="url(#g)" stroke="#c9b8e8" stroke-width="3"/><circle cx="128" cy="100" r="56" fill="url(#g)" stroke="#c9b8e8" stroke-width="3"/></svg>`;

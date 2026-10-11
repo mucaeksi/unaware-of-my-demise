@@ -140,6 +140,14 @@ export interface Product {
   subscription: { duration_days: number } | null;
 }
 
+export interface EntryCheckpoint {
+  phase: 'not_started' | 'in_progress' | 'completed';
+  prologue: boolean;
+  tutorials: number;
+  updatedAt: string | null;
+  playerId: string;
+}
+
 export const newRequestId = (): string => (globalThis.crypto?.randomUUID ? globalThis.crypto.randomUUID().replaceAll('-', '') : `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 12)}`);
 
 /** Typed client for the game API. The session token is an opaque bearer kept in localStorage (never logged). */
@@ -210,6 +218,9 @@ export class GameApi extends EventTarget {
     }
     this.store(null);
   }
+
+  entry = (): Promise<EntryCheckpoint> => this.call('GET', '/api/v1/entry');
+  putEntry = (b: { prologue: boolean; tutorials: number; completed?: boolean }): Promise<EntryCheckpoint> => this.call('PUT', '/api/v1/entry', b);
 
   me = (): Promise<{ id: string; displayName: string | null; createdAt: string; billingTag: string }> => this.call('GET', '/api/v1/me');
   async wallet(): Promise<Wallets> {

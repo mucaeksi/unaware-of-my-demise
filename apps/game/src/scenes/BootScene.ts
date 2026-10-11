@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { ContentService } from '../content/ContentService';
+import { loadEntry } from '../entry/state';
 import { prefs } from '../platform/prefs';
 import { API_BASE } from '../config';
 import { loadCurrencyName } from '../net/currency';
@@ -42,7 +43,8 @@ export class BootScene extends Phaser.Scene {
     this.scene.launch('Splash', { ready } satisfies SplashInit); // Boot stays alive: its loader serves the loads above until Splash ends it
     void ready.then((ok) => {
       if (ok) {
-        void this.checkForUpdates();
+        // first install: the download starts after sign-in (PatchService); only returning players check silently at boot
+        if (loadEntry().phase === 'completed') void this.checkForUpdates();
         void prefs();
       }
     });
@@ -52,6 +54,8 @@ export class BootScene extends Phaser.Scene {
   private async loadEverything(): Promise<boolean> {
     try {
       Services.content = await ContentService.create();
+      // after the first-install flow the downloaded release is switched on here, before any art is loaded (no network involved)
+      if (loadEntry().phase === 'completed') await Services.content.activateStaged();
       const art = await Services.refreshArt();
       await art.loadUi(this);
       await art.loadBackground(this, 'forest_whispering_ash');

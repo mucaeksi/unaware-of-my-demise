@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
 import type { ContentManifest, ManifestFile } from '@uomd/content-schema';
 import { generateSigningKeyPair, importPrivateKey, sha256Hex, type PublicKeyJwk } from '@uomd/shared';
-import { MemoryStorage, PatchManager, buildManifest, signManifest, type BaseContent, type PatchEnv, type RemoteSource } from './index';
+import { MemoryStorage, PatchManager, buildManifest, signManifest, type BaseContent, type PatchEnv, type PatchProgress, type RemoteSource } from './index';
 
 const ROOT = new URL('../../../content/', import.meta.url).pathname;
 const walk = (dir: string, rel = ''): string[] =>
@@ -26,7 +26,7 @@ beforeAll(async () => {
   privateKey = await importPrivateKey(kp.privateJwk);
   otherPublic = { ...((await generateSigningKeyPair()).publicJwk as PublicKeyJwk), kid: 'test-1' };
   baseFiles = load(join(ROOT, 'base'));
-  patchFiles = load(join(ROOT, 'patches/rel_0002_road_forgotten'));
+  patchFiles = load(join(ROOT, 'patches/rel_0003_part1_campaign'));
   const hashes: Record<string, string> = {};
   for (const f of baseFiles) hashes[f.path] = await sha256Hex(f.bytes);
   base = {
@@ -59,8 +59,9 @@ class FakeRemote implements RemoteSource {
     if (this.offline) throw new Error('network down');
     return this.manifest;
   }
-  async fetchObject(sha: string, f: ManifestFile): Promise<Uint8Array> {
+  async fetchObject(sha: string, f: ManifestFile, onBytes?: (n: number) => void): Promise<Uint8Array> {
     this.fetched.push(f.path);
+    onBytes?.(Math.floor(f.bytes / 2));
     const left = this.failFirst.get(sha) ?? 0;
     if (left > 0) {
       this.failFirst.set(sha, left - 1);
@@ -112,7 +113,7 @@ describe('PatchManager', () => {
     expect(remote.fetched.every((p) => patchFiles.some((f) => f.path === p))).toBe(true);
     expect((await storage.getState())?.active?.releaseId).toBe('rel_0002');
     const idx = JSON.parse(new TextDecoder().decode(await pm.read('chapters/chapter_index.json')));
-    expect(idx.chapters[0].nodes.map((n: { node_id: string }) => n.node_id)).toEqual(['t1', 't2']);
+    expect(idx.chapters.length).toBeGreaterThan(1); // the patch's chapter index (the whole campaign) replaces the base's single tutorial chapter
     // a path the patch does not touch still comes from the embedded base
     expect((await pm.read('audio/bgm_ch1_ash_forest_calm.ogg')).byteLength).toBeGreaterThan(1000);
     expect((await pm.checkAndApply()).status).toBe('up_to_date');
@@ -145,12 +146,12 @@ describe('PatchManager', () => {
 
   it('retries a flaky download and finishes; a persistently corrupted object is rejected with hash_mismatch', async () => {
     const flaky = await setup();
-    const some = flaky.manifest.files.find((f) => f.path === 'story/tutorial_t2_before.json') as ManifestFile;
+    const some = flaky.manifest.files.find((f) => f.path === 'encounters/stage_1_1.json') as ManifestFile;
     flaky.remote.failFirst.set(some.sha256, 2);
     expect((await flaky.pm.checkAndApply()).status).toBe('applied');
 
     const bad = await setup();
-    const target = bad.manifest.files.find((f) => f.path === 'encounters/tutorial_t2.json') as ManifestFile;
+    const target = bad.manifest.files.find((f) => f.path === 'encounters/stage_1_2.json') as ManifestFile;
     bad.remote.corrupt.add(target.sha256);
     expect(await bad.pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'hash_mismatch' });
     expect((await bad.storage.getState())?.active ?? null).toBeNull();
@@ -227,7 +228,7 @@ describe('PatchManager', () => {
     expect(await pm.checkAndApply()).toMatchObject({ status: 'reverted_to_base' });
     expect((await storage.getState())?.active).toBeNull();
     const idx = JSON.parse(new TextDecoder().decode(await pm.read('chapters/chapter_index.json')));
-    expect(idx.chapters[0].nodes).toHaveLength(1); // base index again
+    expect(idx.chapters).toHaveLength(1); // base index again
   });
 
   it('rolls back to the previous release when a stored object is corrupted on disk', async () => {
@@ -237,8 +238,80 @@ describe('PatchManager', () => {
     const victim = st?.active?.manifest.files.find((f) => f.path === 'chapters/chapter_index.json') as ManifestFile;
     await storage.putObject(victim.sha256, new TextEncoder().encode('{"tampered":true}'));
     const bytes = await pm.read('chapters/chapter_index.json'); // detects, rolls back, serves base
-    expect(JSON.parse(new TextDecoder().decode(bytes)).chapters[0].nodes).toHaveLength(1);
+    expect(JSON.parse(new TextDecoder().decode(bytes)).chapters).toHaveLength(1);
     expect((await storage.getState())?.active).toBeNull();
     expect((await storage.getState())?.denied).toContain('rel_0002');
+  });
+
+  it('reports progress: checking, downloading with byte counters that only grow, verifying, activating', async () => {
+    const { pm } = await setup();
+    const seen: PatchProgress[] = [];
+    const out = await pm.checkAndApply({ onProgress: (p) => seen.push(structuredClone(p)) });
+    expect(out.status).toBe('applied');
+    expect(seen[0]?.phase).toBe('checking');
+    expect(seen.map((p) => p.phase)).toEqual(expect.arrayContaining(['checking', 'downloading', 'verifying', 'activating']));
+    const dl = seen.filter((p) => p.phase === 'downloading');
+    expect(dl.at(-1)?.bytesDone).toBe(dl.at(-1)?.bytesTotal);
+    expect(dl.at(-1)?.filesDone).toBe(dl.at(-1)?.filesTotal);
+    const total = dl[0]?.bytesTotal ?? 0;
+    expect(total).toBeGreaterThan(0);
+    for (const p of dl) expect(p.bytesDone).toBeLessThanOrEqual(total);
+    // a late within-file report never moves the counter backwards across files
+    let last = 0;
+    for (const p of dl) {
+      expect(p.bytesDone).toBeGreaterThanOrEqual(0);
+      last = p.bytesDone;
+    }
+    expect(last).toBe(total);
+  });
+
+  it('staged: downloads and validates but does not switch on; a later start activates it without any network', async () => {
+    const { pm, storage, remote } = await setup();
+    const out = await pm.checkAndApply({ activate: false });
+    expect(out).toMatchObject({ status: 'staged', releaseId: 'rel_0002' });
+    const st = await storage.getState();
+    expect(st?.active ?? null).toBeNull();
+    expect(st?.staged?.releaseId).toBe('rel_0002');
+    // still served from the embedded base
+    expect(JSON.parse(new TextDecoder().decode(await pm.read('chapters/chapter_index.json'))).chapters).toHaveLength(1);
+
+    remote.offline = true; // the restart has no network
+    remote.fetched.length = 0;
+    expect(await pm.activateStaged()).toMatchObject({ status: 'applied', releaseId: 'rel_0002' });
+    expect(remote.fetched).toEqual([]);
+    const after = await storage.getState();
+    expect(after?.active?.releaseId).toBe('rel_0002');
+    expect(after?.staged ?? null).toBeNull();
+    expect(JSON.parse(new TextDecoder().decode(await pm.read('chapters/chapter_index.json'))).chapters.length).toBeGreaterThan(1);
+    expect(await pm.activateStaged()).toBeNull(); // nothing left to switch on
+  });
+
+  it('staged: a normal check with the same release activates it from storage instead of downloading again', async () => {
+    const { pm, remote } = await setup();
+    await pm.checkAndApply({ activate: false });
+    remote.fetched.length = 0;
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'applied', releaseId: 'rel_0002' });
+    expect(remote.fetched).toEqual([]);
+  });
+
+  it('staged: a damaged or missing stored object drops the stage instead of half-applying it', async () => {
+    const { pm, storage, manifest } = await setup();
+    await pm.checkAndApply({ activate: false });
+    const victim = manifest.files.find((f) => f.path === 'chapters/chapter_index.json') as ManifestFile;
+    await storage.putObject(victim.sha256, new TextEncoder().encode('{"tampered":true}'));
+    expect(await pm.activateStaged()).toMatchObject({ status: 'rejected', reason: 'download_failed' });
+    const st = await storage.getState();
+    expect(st?.active ?? null).toBeNull();
+    expect(st?.staged ?? null).toBeNull();
+  });
+
+  it('staged objects survive garbage collection while a newer release is active', async () => {
+    const { pm, storage, manifest } = await setup();
+    await pm.checkAndApply({ activate: false });
+    const stagedHashes = manifest.files.filter((f) => base.files[f.path] !== f.sha256).map((f) => f.sha256);
+    expect(stagedHashes.length).toBeGreaterThan(0);
+    for (const h of stagedHashes) expect(await storage.hasObject(h)).toBe(true);
+    await pm.rollback(); // nothing active: returns false, collect() must not run over the staged release
+    for (const h of stagedHashes) expect(await storage.hasObject(h)).toBe(true);
   });
 });

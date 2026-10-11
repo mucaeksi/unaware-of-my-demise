@@ -24,7 +24,7 @@ async function publishBase(): Promise<void> {
 
 async function publishPatch(): Promise<void> {
   await upload(patch);
-  expect((await post('/admin/api/releases', { id: 'rel_0002', channel: 'dev', notes: 'T-2', dependsOn: 'rel_0001', files: entries(patch) })).status).toBe(201);
+  expect((await post('/admin/api/releases', { id: 'rel_0002', channel: 'dev', notes: 'Part I campaign', dependsOn: 'rel_0001', files: entries(patch) })).status).toBe(201);
   expect((await post('/admin/api/releases/rel_0002/publish', {})).status).toBe(200);
 }
 
@@ -55,7 +55,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
     expect(ok.headers.get('Cache-Control')).toContain('immutable');
     expect(await sha256Hex(await ok.arrayBuffer())).toBe(file.sha256);
     // uploaded but not part of any published release -> invisible
-    const secret = patch.find((f) => f.path === 'encounters/tutorial_t2.json') as TestFile;
+    const secret = patch.find((f) => f.path === 'encounters/stage_1_2.json') as TestFile;
     await upload([secret]);
     expect((await game(`/api/v1/content/objects/${secret.sha256}`)).status).toBe(404);
     expect((await game(`/api/v1/content/objects/${'0'.repeat(64)}`)).status).toBe(404);
@@ -79,7 +79,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
     );
     const out = await pm.checkAndApply();
     expect(out).toMatchObject({ status: 'applied', releaseId: 'rel_0002' });
-    expect(JSON.parse(new TextDecoder().decode(await pm.read('chapters/chapter_index.json'))).chapters[0].nodes).toHaveLength(2);
+    expect(JSON.parse(new TextDecoder().decode(await pm.read('chapters/chapter_index.json'))).chapters.length).toBeGreaterThan(1);
   });
 
   it('rejects objects whose bytes do not match the stated hash, and disallowed media types', async () => {
@@ -100,7 +100,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
 
   it('refuses a patch whose content fails semantic validation (unknown unit in an encounter)', async () => {
     await publishBase();
-    const enc = patch.find((f) => f.path === 'encounters/tutorial_t2.json') as TestFile;
+    const enc = patch.find((f) => f.path === 'encounters/stage_1_2.json') as TestFile;
     const broken = JSON.parse(new TextDecoder().decode(enc.bytes));
     broken.enemies[0].unit_id = 'ghost_unit';
     const bytes = new TextEncoder().encode(JSON.stringify(broken));
@@ -206,10 +206,10 @@ describe('server-side battle verification', () => {
     expect(junk.status).toBe(400);
   });
 
-  it('a patch-only encounter (T-2) is verifiable only against the patched release', async () => {
+  it('a patch-only encounter (stage 1-1) is verifiable only against the patched release', async () => {
     await publishBase();
     await publishPatch();
-    const body = (releaseId: string) => JSON.stringify({ releaseId, encounterPath: 'encounters/tutorial_t2.json', actions: [] });
+    const body = (releaseId: string) => JSON.stringify({ releaseId, encounterPath: 'encounters/stage_1_1.json', actions: [] });
     const onBase = await game('/api/v1/battles/verify', { method: 'POST', body: body('rel_0001'), headers: { 'Content-Type': 'application/json' } });
     expect(onBase.status).toBe(404);
     const onPatch = await game('/api/v1/battles/verify', { method: 'POST', body: body('rel_0002'), headers: { 'Content-Type': 'application/json' } });

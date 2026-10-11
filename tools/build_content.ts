@@ -1,14 +1,15 @@
 /**
  * Builds the runtime content tree from the preserved narrative/ sources and approved legacy art.
- *   content/base/                      -> embedded in the app (release rel_0001)
- *   content/patches/rel_0002_*         -> a data-only patch published through R2 (release rel_0002)
+ *   content/base/                      -> embedded in the app (release rel_0001): the first-install flow = prologue + tutorials T-1..T-3
+ * Everything after the first restart is a data-only patch published through R2 (content/patches/*, e.g. tools/build_campaign.ts).
  * Run: npm run build:content   (add --contact-sheet to also render .cache/contact_sheet.png)
  */
-import { mkdirSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
 import { ChapterIndex, type ArtManifest, type StoryScene, type UnitAnimState } from '../packages/content-schema/src/index';
 import { buildEncounter, buildScene, buildUnitPack, emotionsUsed, tutorialChapter } from './lib/data';
+import { EntryIndex, Prologue } from '../packages/content-schema/src/index';
 import {
   buildBackground,
   buildFadedKeyArt,
@@ -21,8 +22,10 @@ import {
   type PoseSource,
   type UnitArtConfig
 } from './lib/art';
-import { LEGACY_COMMIT, ROOT, fileBytes, legacyBlob, sha256, writeJson, writeOut } from './lib/fsutil';
+import { LEGACY_COMMIT, ROOT, fileBytes, legacyBlob, readJson, sha256, writeJson, writeOut } from './lib/fsutil';
 
+/** the opening tutorials: no speed button and no Auto (manual turns); a later patch can switch them on by editing the encounter's ui block */
+const TUTORIAL_UI = { speed: false, auto: false };
 const L = (legacy: string): { legacy: string } => ({ legacy });
 const VN_SRC = 'narrative/15_Art_Workbench/characters/fadyme/production_v002/vn';
 const CHR = 'game/assets/characters';
@@ -131,7 +134,6 @@ const provenance: Provenance[] = [];
 async function main(): Promise<void> {
   const contactSheet = process.argv.includes('--contact-sheet');
   rmSync(join(ROOT, 'content/base'), { recursive: true, force: true });
-  rmSync(join(ROOT, 'content/patches'), { recursive: true, force: true });
 
   const legacyPortraits = JSON.parse(legacyBlob('game/data/presentation/battle_art_v001.json').toString('utf8')).portraits as Record<string, { emotions: Record<string, string> }>;
 
@@ -139,18 +141,24 @@ async function main(): Promise<void> {
   const party = ['mahmut', 'fadyme'];
   const t1 = tutorialChapter('T-1');
   const t2 = tutorialChapter('T-2');
+  const t3 = tutorialChapter('T-3');
   const scenes = {
     t1_before: buildScene(t1.before, 'T-1', 'before', 'bgm_ch1_ash_forest_calm', party),
     t1_after: buildScene(t1.after, 'T-1', 'after', 'bgm_ch1_ash_forest_calm', party),
     t2_before: buildScene(t2.before, 'T-2', 'before', 'bgm_ch1_ash_forest_calm', party),
-    t2_after: buildScene(t2.after, 'T-2', 'after', 'bgm_ch1_ash_forest_calm', party)
+    t2_after: buildScene(t2.after, 'T-2', 'after', 'bgm_ch1_ash_forest_calm', party),
+    t3_before: buildScene(t3.before, 'T-3', 'before', 'bgm_ch1_ash_forest_calm', party),
+    t3_after: buildScene(t3.after, 'T-3', 'after', 'bgm_ch1_ash_forest_calm', party)
   };
+  // v006: "the final scene holds its closing line for 5 seconds" (the script JSON carries the 3.5 s default for every scene)
+  scenes.t3_after.closing_hold_seconds = Math.max(scenes.t3_after.closing_hold_seconds ?? 0, 5);
   const partyDefs = [
     { unit_id: 'mahmut', row: 'front' as const },
     { unit_id: 'fadyme', row: 'rear' as const }
   ];
-  const enc1 = buildEncounter('T-1', 'tutorial_t1', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t1');
-  const enc2 = buildEncounter('T-2', 'tutorial_t2', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t2');
+  const enc1 = buildEncounter('T-1', 'tutorial_t1', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t1', TUTORIAL_UI);
+  const enc2 = buildEncounter('T-2', 'tutorial_t2', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t2', TUTORIAL_UI);
+  const enc3 = buildEncounter('T-3', 'tutorial_t3', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t3', TUTORIAL_UI);
 
   // ---- art ---------------------------------------------------------------------------------
   const built = new Map<string, BuiltUnit>();
@@ -229,34 +237,18 @@ async function main(): Promise<void> {
     provenance.push({ output: `${outDir}/${rel}`, sha256: sha256(text), sources });
   };
 
-  // ---- base release (T-1) ------------------------------------------------------------------
+  // ---- base release: the first-install flow (prologue + T-1..T-3) -------------------------------
   const BASE = 'content/base';
-  const baseArt = await artManifest(['fadyme', 'mahmut', 'bellbound_dead'], [scenes.t1_before, scenes.t1_after], BASE);
+  const baseScenes = Object.values(scenes);
+  const baseArt = await artManifest(['fadyme', 'mahmut', 'bellbound_dead', 'hollow_pilgrim'], baseScenes, BASE);
   putJson(BASE, 'art/art_manifest.json', baseArt, {});
-  putJson(BASE, 'units/unit_pack.json', buildUnitPack('base_units', ['mahmut', 'fadyme'], ['bellbound_dead']), { narrative: 'characters_part1.json,enemies_part1.json,battle_rules_part1.json' });
-  putJson(BASE, 'story/tutorial_t1_before.json', scenes.t1_before, { narrative: scenes.t1_before.provenance.source });
-  putJson(BASE, 'story/tutorial_t1_after.json', scenes.t1_after, { narrative: scenes.t1_after.provenance.source });
+  putJson(BASE, 'units/unit_pack.json', buildUnitPack('base_units', ['mahmut', 'fadyme'], ['bellbound_dead', 'hollow_pilgrim']), { narrative: 'characters_part1.json,enemies_part1.json,battle_rules_part1.json' });
+  for (const [k, sc] of Object.entries(scenes)) putJson(BASE, `story/tutorial_${k}.json`, sc, { narrative: sc.provenance.source });
   putJson(BASE, 'encounters/tutorial_t1.json', enc1, { narrative: enc1.provenance.source });
+  putJson(BASE, 'encounters/tutorial_t2.json', enc2, { narrative: enc2.provenance.source });
+  putJson(BASE, 'encounters/tutorial_t3.json', enc3, { narrative: enc3.provenance.source });
   putJson(
     BASE,
-    'chapters/chapter_index.json',
-    ChapterIndex.parse({
-      schema_version: 1,
-      chapters: [{ chapter_id: 'tutorial', title_en: 'Before the Road', nodes: [{ node_id: 't1', title_en: 'The First Step', kind: 'battle', encounter: 'encounters/tutorial_t1.json' }] }]
-    }),
-    {}
-  );
-
-  // ---- patch release (adds T-2: story + hollow pilgrim + chapter node) ----------------------
-  const PATCH = 'content/patches/rel_0002_road_forgotten';
-  const patchArt = await artManifest(['fadyme', 'mahmut', 'bellbound_dead', 'hollow_pilgrim'], [scenes.t1_before, scenes.t1_after, scenes.t2_before, scenes.t2_after], PATCH);
-  putJson(PATCH, 'art/art_manifest.json', patchArt, {});
-  putJson(PATCH, 'units/unit_pack.json', buildUnitPack('patch_units', ['mahmut', 'fadyme'], ['bellbound_dead', 'hollow_pilgrim']), { narrative: 'characters_part1.json,enemies_part1.json,battle_rules_part1.json' });
-  putJson(PATCH, 'story/tutorial_t2_before.json', scenes.t2_before, { narrative: scenes.t2_before.provenance.source });
-  putJson(PATCH, 'story/tutorial_t2_after.json', scenes.t2_after, { narrative: scenes.t2_after.provenance.source });
-  putJson(PATCH, 'encounters/tutorial_t2.json', enc2, { narrative: enc2.provenance.source });
-  putJson(
-    PATCH,
     'chapters/chapter_index.json',
     ChapterIndex.parse({
       schema_version: 1,
@@ -265,40 +257,38 @@ async function main(): Promise<void> {
           chapter_id: 'tutorial',
           title_en: 'Before the Road',
           nodes: [
-            { node_id: 't1', title_en: 'The First Step', kind: 'battle', encounter: 'encounters/tutorial_t1.json' },
-            { node_id: 't2', title_en: t2.title_en, kind: 'battle', encounter: 'encounters/tutorial_t2.json', requires: 't1' }
+            { node_id: 't1', title_en: t1.title_en, kind: 'battle', encounter: 'encounters/tutorial_t1.json' },
+            { node_id: 't2', title_en: t2.title_en, kind: 'battle', encounter: 'encounters/tutorial_t2.json', requires: 't1' },
+            { node_id: 't3', title_en: t3.title_en, kind: 'battle', encounter: 'encounters/tutorial_t3.json', requires: 't2' }
           ]
         }
       ]
     }),
     {}
   );
-  // the patch only needs to ship files that differ from the base; drop byte-identical duplicates
-  dedupeAgainstBase(BASE, PATCH);
+  // the first-install interlude, copied verbatim from the narrative source and checked against its schema
+  const prologue = Prologue.parse(readJson('narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/prologue_v001.json'));
+  putJson(BASE, 'entry/prologue.json', prologue, { narrative: 'narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/prologue_v001.json' });
+  putJson(
+    BASE,
+    'entry/entry_index.json',
+    EntryIndex.parse({
+      schema_version: 1,
+      prologue: 'entry/prologue.json',
+      tutorial: [
+        { stage_id: 't1', encounter: 'encounters/tutorial_t1.json' },
+        { stage_id: 't2', encounter: 'encounters/tutorial_t2.json' },
+        { stage_id: 't3', encounter: 'encounters/tutorial_t3.json' }
+      ]
+    }),
+    {}
+  );
 
   rmSync(join(ROOT, 'content/_tmp'), { recursive: true, force: true });
   writeFileSync(join(ROOT, 'content/provenance.json'), `${JSON.stringify({ generator: 'tools/build_content.ts', legacy_commit: LEGACY_COMMIT, outputs: provenance }, null, 2)}\n`);
 
   if (contactSheet) await renderContactSheet([...built.values()], baseArt);
   console.log(`content built: ${provenance.length} files`);
-}
-
-function listFiles(dir: string, rel = ''): string[] {
-  const out: string[] = [];
-  for (const name of readdirSync(join(ROOT, dir, rel))) {
-    const r = rel ? `${rel}/${name}` : name;
-    if (statSync(join(ROOT, dir, r)).isDirectory()) out.push(...listFiles(dir, r));
-    else out.push(r);
-  }
-  return out.sort();
-}
-
-function dedupeAgainstBase(base: string, patch: string): void {
-  const baseSet = new Map(listFiles(base).map((f) => [f, sha256(fileBytes(`${base}/${f}`))]));
-  for (const f of listFiles(patch)) {
-    const h = sha256(fileBytes(`${patch}/${f}`));
-    if (baseSet.get(f) === h) rmSync(join(ROOT, patch, f));
-  }
 }
 
 async function renderContactSheet(units: BuiltUnit[], art: ArtManifest): Promise<void> {

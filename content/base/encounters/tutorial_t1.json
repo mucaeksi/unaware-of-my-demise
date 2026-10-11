@@ -34,6 +34,10 @@
       "row": "front"
     }
   ],
+  "ui": {
+    "speed": false,
+    "auto": false
+  },
   "pre_story": "story/tutorial_t1_before.json",
   "post_story": "story/tutorial_t1_after.json",
   "provenance": {

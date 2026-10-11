@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 import type { PatchOutcome } from '@uomd/patch';
 import { CHANNEL, CLIENT_VERSION, PATCH_LAB_ENABLED, PREVIEW_FLOW_ENABLED, REF_H, REF_W } from '../config';
-import { advance, signInWithGoogle } from '../entry/flow';
+import { beginEntry, signInWithGoogle } from '../entry/flow';
+import { syncEntry } from '../entry/sync';
 import { loadEntry } from '../entry/state';
 import { S } from '../entry/strings';
 import { Music } from '../audio/Music';
@@ -21,6 +22,8 @@ function describe(o: PatchOutcome | null): string {
       return o.releaseId ? `Up to date (${o.releaseId})` : 'Up to date (embedded base)';
     case 'applied':
       return `Applied ${o.releaseId} · ${o.downloadedFiles} files · ${(o.downloadedBytes / 1024).toFixed(0)} KB`;
+    case 'staged':
+      return `Downloaded ${o.releaseId} · ${o.downloadedFiles} files · ${(o.downloadedBytes / 1024).toFixed(0)} KB (switches on at the next start)`;
     case 'reverted_to_base':
       return 'Reverted to embedded base (kill switch)';
     case 'offline':
@@ -79,6 +82,12 @@ export class TitleScene extends Phaser.Scene {
 
     if (this.firstRun) this.buildFirstRunMenu();
     else this.buildFullMenu();
+    // a reinstall or a second device: the account may already be past the entry flow
+    if (this.firstRun && Services.api.signedIn) {
+      void syncEntry(Services.api).then(({ state }) => {
+        if (state.phase === 'completed' && this.scene.isActive()) this.scene.restart();
+      });
+    }
 
     this.chipText = txt(this, 60, REF_H - 36, '', { fontSize: '24px', color: T.dim }).setOrigin(0, 0.5).setDepth(DEPTH.hud);
     if (PATCH_LAB_ENABLED) {
@@ -130,7 +139,7 @@ export class TitleScene extends Phaser.Scene {
         return;
       }
     }
-    advance(this);
+    await beginEntry(this);
   }
 
   private async startAudio(): Promise<void> {

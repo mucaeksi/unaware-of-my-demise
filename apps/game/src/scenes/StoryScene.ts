@@ -1,10 +1,11 @@
 import Phaser from 'phaser';
 import { StoryRunner, type StoryEvent } from '@uomd/story';
-import type { StoryScene as StoryData } from '@uomd/content-schema';
+import type { StoryCommand, StoryScene as StoryData } from '@uomd/content-schema';
 import { REF_H, REF_W } from '../config';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { prefs } from '../platform/prefs';
+import { CUTSCENE, cutsceneHoldSeconds, cutscenePauseSeconds } from '../entry/cutscene';
 import { Services } from '../services';
 import { Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
@@ -62,7 +63,13 @@ export class StoryScene extends Phaser.Scene {
   private choiceLayer: Phaser.GameObjects.Container | null = null;
   private logLayer: Phaser.GameObjects.Container | null = null;
   private autoBtn!: Button;
-  private skipBtn!: Button;
+  private skipBtn: Button | null = null;
+  /** first-install cutscene rules (scene data carries a `presentation` block) */
+  private cutscene = false;
+  private pausing = false;
+  private prevSpeaker: string | null = null;
+  private lastLineId: string | null = null;
+  private illustration: Phaser.GameObjects.Image | null = null;
 
   constructor() {
     super('Story');
@@ -75,6 +82,10 @@ export class StoryScene extends Phaser.Scene {
     this.waiting = false;
     this.auto = false;
     this.skip = false;
+    this.cutscene = false;
+    this.pausing = false;
+    this.prevSpeaker = null;
+    this.illustration = null;
     this.lineDone = true;
     this.typing = null;
     this.autoTimer = null;
@@ -87,6 +98,10 @@ export class StoryScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(0x0a0610);
     try {
       this.data0 = await content.story(this.init0.path);
+      this.cutscene = Boolean(this.data0.presentation);
+      this.auto = this.data0.presentation?.auto ?? false;
+      const lastLine = [...this.data0.commands].reverse().find((c): c is Extract<StoryCommand, { op: 'say' | 'narrate' }> => c.op === 'say' || c.op === 'narrate');
+      this.lastLineId = lastLine?.line_id ?? null;
       const chars = new Set<string>();
       const cues = new Set<string>();
       for (const c of this.data0.commands) {
@@ -124,6 +139,14 @@ export class StoryScene extends Phaser.Scene {
     this.bg.setScale(cover * 1.02);
     if (!prefs().reducedMotion) this.tweens.add({ targets: this.bg, scale: cover * 1.08, duration: 40000, ease: 'Sine.easeInOut', yoyo: true, repeat: -1 });
 
+    // a shared illustration (roadside_rest, shelter_evening) replaces the backdrop and the portraits for the whole scene when the content ships it
+    const illustrationKey = this.data0.illustration_id ? art.ui(`illustration_${this.data0.illustration_id}`) : null;
+    if (illustrationKey) {
+      this.illustration = this.add.image(REF_W / 2, REF_H / 2, illustrationKey).setDepth(DEPTH.bg + 1);
+      this.illustration.setScale(Math.max(REF_W / this.illustration.width, REF_H / this.illustration.height));
+      this.bg.setAlpha(0);
+    }
+
     // dusk grade + vignette keep the portraits readable on any background
     const shade = this.add.graphics().setDepth(DEPTH.bg + 5);
     shade.fillGradientStyle(0x0a0610, 0x0a0610, 0x0a0610, 0x0a0610, 0.05, 0.05, 0.7, 0.7);
@@ -148,9 +171,11 @@ export class StoryScene extends Phaser.Scene {
     this.caret = txt(this, 770, 86, '▼', { fontSize: '32px', color: T.gold }).setOrigin(1, 0.5).setVisible(false);
     this.box = this.add.container(REF_W / 2, 930, [panelBg, this.bodyText, this.caret]).setDepth(DEPTH.hud);
 
-    this.skipBtn = new Button(this, REF_W - 150, 70, { label: 'SKIP', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
-    this.autoBtn = new Button(this, REF_W - 400, 70, { label: 'AUTO', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
-    new Button(this, REF_W - 650, 70, { label: 'LOG', w: 220, h: 86, fontSize: 28, onClick: () => this.showLog() }).setDepth(DEPTH.hud + 3);
+    // cutscenes have no Skip and a single on/off Auto toggle (v006); the regular reader keeps Skip
+    if (!this.cutscene) this.skipBtn = new Button(this, REF_W - 150, 70, { label: 'SKIP', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
+    const rightEdge = this.cutscene ? REF_W - 150 : REF_W - 400;
+    this.autoBtn = new Button(this, rightEdge, 70, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
+    new Button(this, rightEdge - 250, 70, { label: 'LOG', w: 220, h: 86, fontSize: 28, onClick: () => this.showLog() }).setDepth(DEPTH.hud + 3);
     title(this, 170, 70, this.data0.title_en, 34, T.dim).setDepth(DEPTH.hud + 3).setOrigin(0, 0.5).setX(60);
     this.tweens.add({ targets: this.caret, alpha: 0.2, duration: 600, yoyo: true, repeat: -1 });
   }
@@ -231,6 +256,7 @@ export class StoryScene extends Phaser.Scene {
   // ------------------------------------------------------------------ actors
 
   private showActor(character: string, side: 'left' | 'right'): void {
+    if (this.illustration) return; // the illustration carries the characters
     const { art } = Services.ready();
     const key = art.portrait(character, 'composed');
     if (!key) return;
@@ -250,7 +276,7 @@ export class StoryScene extends Phaser.Scene {
     this.tweens.add({ targets: a.image, alpha: 0, duration: 300, onComplete: () => a.image.destroy() });
   }
 
-  private focusSpeaker(speaker: string, emotion?: string): void {
+  private focusSpeaker(speaker: string, emotion?: string, ms = 220): void {
     const { art } = Services.ready();
     for (const [id, a] of this.actors) {
       const active = id === speaker;
@@ -268,9 +294,9 @@ export class StoryScene extends Phaser.Scene {
         }
       }
       a.image.setDepth(active ? DEPTH.world + 2 : DEPTH.world);
-      this.tweens.add({ targets: a.image, alpha: active ? 1 : 0.72, duration: 220 });
+      this.tweens.add({ targets: a.image, alpha: active ? 1 : 0.72, duration: ms });
       a.image.setTint(active ? 0xffffff : 0xa89fb6);
-      this.tweens.add({ targets: a.image, y: REF_H + (active ? 18 : 40), duration: 260, ease: 'Sine.easeOut' });
+      this.tweens.add({ targets: a.image, y: REF_H + (active ? 18 : 40), duration: Math.max(260, ms), ease: 'Sine.easeOut' });
     }
   }
 
@@ -279,14 +305,11 @@ export class StoryScene extends Phaser.Scene {
   private showLine(e: Extract<StoryEvent, { type: 'line' }>): void {
     this.currentLine = e;
     const narr = e.speaker === 'narration';
-    this.focusSpeaker(narr ? '' : e.speaker, e.emotion);
-    this.namePlate.setVisible(!narr);
-    if (!narr) {
-      const a = this.actors.get(e.speaker);
-      const left = !a || a.side === 'left';
-      this.nameText.setText(e.speakerDisplay.toUpperCase());
-      this.namePlate.setPosition(left ? 330 : REF_W - 330, 784);
-    }
+    const pause = this.cutscene ? cutscenePauseSeconds(this.prevSpeaker, e.speaker, this.data0.presentation?.speaker_pause_seconds ?? 1) : 0;
+    this.prevSpeaker = e.speaker;
+    // a speaker change dissolves the portrait focus over 0.8 s (inside the 1 s pause); the same speaker continuing only waits
+    this.focusSpeaker(narr ? '' : e.speaker, e.emotion, pause > CUTSCENE.sameSpeakerPauseSeconds ? CUTSCENE.dissolveSeconds * 1000 : 220);
+    this.namePlate.setVisible(false);
     this.bodyText.setStyle({ fontStyle: narr ? 'italic' : 'normal', color: narr ? '#cfc4dd' : T.text });
     this.fullText = this.bodyText.getWrappedText(e.text).join('\n');
     this.bodyText.setText('');
@@ -294,7 +317,28 @@ export class StoryScene extends Phaser.Scene {
     this.lineDone = false;
     this.waiting = true;
     this.typing?.remove();
-    const cps = this.skip ? 400 : CPS[prefs().textSpeed];
+    this.autoTimer?.remove();
+    if (pause > 0) {
+      this.pausing = true;
+      this.time.delayedCall(pause * 1000, () => {
+        this.pausing = false;
+        this.startTyping(e, narr);
+      });
+    } else {
+      this.startTyping(e, narr);
+    }
+  }
+
+  private startTyping(e: Extract<StoryEvent, { type: 'line' }>, narr: boolean): void {
+    if (this.finished) return;
+    this.namePlate.setVisible(!narr);
+    if (!narr) {
+      const a = this.actors.get(e.speaker);
+      const left = !a || a.side === 'left';
+      this.nameText.setText(e.speakerDisplay.toUpperCase());
+      this.namePlate.setPosition(left ? 330 : REF_W - 330, 784);
+    }
+    const cps = this.cutscene ? CUTSCENE.cps : this.skip ? 400 : CPS[prefs().textSpeed];
     let n = 0;
     this.typing = this.time.addEvent({
       delay: 1000 / cps,
@@ -318,13 +362,21 @@ export class StoryScene extends Phaser.Scene {
     if (this.skip) {
       this.autoTimer = this.time.delayedCall(90, () => this.advance());
     } else if (this.auto) {
-      const hold = (this.currentLine?.holdSeconds ?? 2.4) * 1000 + this.fullText.length * 22;
-      this.autoTimer = this.time.delayedCall(hold, () => this.advance());
+      this.autoTimer = this.time.delayedCall(this.autoHoldMs(), () => this.advance());
     }
   }
 
+  private autoHoldMs(): number {
+    const line = this.currentLine;
+    if (!this.cutscene) return (line?.holdSeconds ?? 2.4) * 1000 + this.fullText.length * 22;
+    const last = line !== null && line.lineId === this.lastLineId;
+    return (
+      cutsceneHoldSeconds({ chars: this.fullText.length, ...(line?.holdSeconds !== undefined ? { holdSeconds: line.holdSeconds } : {}), last, ...(this.data0.closing_hold_seconds !== undefined ? { closingHoldSeconds: this.data0.closing_hold_seconds } : {}) }) * 1000
+    );
+  }
+
   private advance(): void {
-    if (this.finished || this.choiceLayer || this.logLayer) return;
+    if (this.finished || this.choiceLayer || this.logLayer || this.pausing) return;
     this.autoTimer?.remove();
     if (!this.waiting) return;
     if (!this.lineDone) {
@@ -338,12 +390,18 @@ export class StoryScene extends Phaser.Scene {
   private toggleAuto(): void {
     this.auto = !this.auto;
     this.autoBtn.setLabel(this.auto ? 'AUTO ✓' : 'AUTO');
+    if (this.cutscene) {
+      // one on/off switch: turning it off keeps the current line on screen, turning it on resumes the normal reading hold
+      this.autoTimer?.remove();
+      if (this.auto && this.lineDone && this.waiting && !this.pausing) this.autoTimer = this.time.delayedCall(this.autoHoldMs(), () => this.advance());
+      return;
+    }
     if (this.auto && this.lineDone && this.waiting) this.advance();
   }
 
   private toggleSkip(): void {
     this.skip = !this.skip;
-    this.skipBtn.setLabel(this.skip ? 'SKIP ✓' : 'SKIP');
+    this.skipBtn?.setLabel(this.skip ? 'SKIP ✓' : 'SKIP');
     if (this.skip && this.lineDone && this.waiting) this.advance();
   }
 

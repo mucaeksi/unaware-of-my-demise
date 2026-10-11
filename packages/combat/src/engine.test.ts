@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Battle, IllegalActionError, MAX_TURNS, playAuto, replayBattle, type BattleEvent } from './index';
-import { basePack, encounterT1, encounterT2, noCrit, patchPack, patchUnit } from './fixtures';
+import { basePack, encounterT1, encounterT2, noCrit, patchUnit } from './fixtures';
 
 const events = <T extends BattleEvent['type']>(log: BattleEvent[], type: T): Extract<BattleEvent, { type: T }>[] =>
   log.filter((e): e is Extract<BattleEvent, { type: T }> => e.type === type);
@@ -227,7 +227,7 @@ describe('outcomes', () => {
   });
 
   it('5v5 battles run to completion and stay deterministic', () => {
-    const pack = patchPack();
+    const pack = basePack();
     const party = [0, 1, 2, 3, 4].map((slot) => ({ unit_id: slot % 2 === 0 ? 'mahmut' : 'fadyme', level: 3, slot, row: slot < 2 ? ('front' as const) : ('rear' as const) }));
     const enemies = [0, 1, 2, 3, 4].map((slot) => ({ unit_id: slot < 3 ? 'bellbound_dead' : 'hollow_pilgrim', level: 3, slot, row: slot < 2 ? ('front' as const) : ('rear' as const) }));
     const enc = { ...encounterT2(), party, enemies };

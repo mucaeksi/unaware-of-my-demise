@@ -132,10 +132,6 @@ async function boot(): Promise<Stack> {
   };
 }
 
-export function publishPatch(adminJwt: string): Promise<void> {
-  return sh('npx', ['tsx', 'tools/publish_release.ts', '--admin', `http://127.0.0.1:${PORTS.admin}`, '--dir', 'content/patches/rel_0002_road_forgotten', '--id', 'rel_0002', '--channel', 'dev', '--depends', 'rel_0001', '--notes', 'Adds tutorial T-2 as a data-only patch', '--publish'], ROOT, { UOMD_ADMIN_JWT: adminJwt });
-}
-
 /** The Part I campaign (35 stages) as a data patch over the base release. */
 export function publishCampaign(adminJwt: string): Promise<void> {
   return sh('npx', ['tsx', 'tools/publish_release.ts', '--admin', `http://127.0.0.1:${PORTS.admin}`, '--dir', 'content/patches/rel_0003_part1_campaign', '--id', 'rel_0003', '--channel', 'dev', '--depends', 'rel_0001', '--notes', 'Part I campaign', '--publish'], ROOT, { UOMD_ADMIN_JWT: adminJwt });

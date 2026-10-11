@@ -3,10 +3,12 @@ import {
   ChapterIndex,
   ContentManifest,
   Encounter,
+  EntryIndex,
+  Prologue,
   StoryScene,
   UnitPack
 } from '@uomd/content-schema';
-import { PatchManager, type BaseContent, type PatchOutcome, type PatchState } from '@uomd/patch';
+import { PatchManager, type ApplyOptions, type BaseContent, type PatchOutcome, type PatchState } from '@uomd/patch';
 import { sha256Hex, type PublicKeyJwk } from '@uomd/shared';
 import trusted from '@uomd-trusted-keys';
 import { BASE_CONTENT_URL, CHANNEL, CLIENT_VERSION, PATCH_STORAGE_BUDGET, SUPPORTED_CONTENT_SCHEMA } from '../config';
@@ -90,11 +92,22 @@ export class ContentService {
     return this.patch.state();
   }
 
-  async checkForUpdates(): Promise<PatchOutcome> {
-    const outcome = await this.patch.checkAndApply();
+  async checkForUpdates(opts: ApplyOptions = {}): Promise<PatchOutcome> {
+    const outcome = await this.patch.checkAndApply(opts);
     this.lastCheck.outcome = outcome;
     this.lastCheck.at = Date.now();
     if (outcome.status === 'applied' || outcome.status === 'reverted_to_base') this.jsonCache.clear();
+    return outcome;
+  }
+
+  /** Switches on a release that was downloaded earlier (the restart after the first-install flow); no network involved. */
+  async activateStaged(): Promise<PatchOutcome | null> {
+    const outcome = await this.patch.activateStaged();
+    if (outcome) {
+      this.lastCheck.outcome = outcome;
+      this.lastCheck.at = Date.now();
+      if (outcome.status === 'applied') this.jsonCache.clear();
+    }
     return outcome;
   }
 
@@ -128,6 +141,13 @@ export class ContentService {
   }
   chapters(): Promise<ChapterIndex> {
     return this.json('chapters/chapter_index.json', ChapterIndex);
+  }
+  /** What the first-install flow plays (ships in the base release). */
+  entryIndex(): Promise<EntryIndex> {
+    return this.json('entry/entry_index.json', EntryIndex);
+  }
+  prologue(path: string): Promise<Prologue> {
+    return this.json(path, Prologue);
   }
   encounter(path: string): Promise<Encounter> {
     return this.json(path, Encounter);

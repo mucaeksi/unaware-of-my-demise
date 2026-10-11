@@ -59,6 +59,15 @@ export const StoryScene = z
     scene_id: Id,
     title_en: z.string().max(80),
     location_id: Id,
+    /**
+     * Cutscene presentation (the first-install flow, v006 rules): present = Auto starts on with a single on/off toggle, no Skip, fixed 26 cps
+     * reveal, minimum reading holds, speaker-change pauses. Absent = the regular story reader (text speed setting, Skip, log).
+     */
+    presentation: z.object({ auto: z.boolean(), speaker_pause_seconds: z.number().min(0).max(3) }).strict().optional(),
+    /** shared illustration shown for the whole scene instead of portraits (art manifest ui entry `illustration_<id>`); portraits are the fallback */
+    illustration_id: Id.optional(),
+    /** how long the last line of the scene stays before the scene ends */
+    closing_hold_seconds: z.number().min(0).max(10).optional(),
     commands: z.array(StoryCommand).min(1).max(400),
     provenance: z.object({ source: z.string(), source_sha256: z.string().optional(), note: z.string().optional() }).strict()
   })
@@ -134,6 +143,8 @@ export const Encounter = z
       .max(5),
     /** stage tuning from the narrative (`enemy_stat_multiplier`): applied to the listed stats of every enemy after level scaling */
     enemy_stat_multiplier: z.object({ value: z.number().min(0.1).max(10), applies_to: z.array(z.enum(['hp', 'atk', 'def', 'spd'])).min(1).max(4) }).strict().optional(),
+    /** HUD switches: the first tutorials hide the speed and Auto buttons (a later patch turns them on without a new build). Absent = both shown. */
+    ui: z.object({ speed: z.boolean(), auto: z.boolean() }).strict().optional(),
     pre_story: SafeAssetPath.optional(),
     post_story: SafeAssetPath.optional(),
     provenance: z.object({ source: z.string(), source_sha256: z.string().optional() }).strict()

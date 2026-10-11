@@ -44,16 +44,22 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
   const token = await googleToken('e2e-campaign');
   await page.evaluate(async (t) => (window as any).__UOMD__.services.api.signInWithIdToken(t), token);
 
+  // live data patch: an operator publishes while the unchanged client runs; the player checks from the content-updates panel
+  const nodeIds = (): Promise<string[]> =>
+    page.evaluate(async () => ((await (window as any).__UOMD__.services.content.chapters()).chapters.flatMap((c: any) => c.nodes) as any[]).map((n) => n.node_id));
+  expect(await nodeIds()).toEqual(['t1', 't2', 't3']); // the base: the three tutorial stages
   await publishCampaign(jwt());
-  await page.evaluate(async () => {
-    const sv = (window as any).__UOMD__.services;
-    await sv.content.checkForUpdates();
-    await sv.refreshArt(); // what the game does when a patch is applied
-  });
-  await expect
-    .poll(() => page.evaluate(async () => ((await (window as any).__UOMD__.services.content.chapters()).chapters.flatMap((c: any) => c.nodes) as any[]).map((n) => n.node_id)), { timeout: 60_000 })
-    .toContain('stage_1_2');
+  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').openPatchLab());
+  await page.waitForTimeout(600);
+  await tap(page, info, 960 - 410, 540 + 250); // CHECK NOW
+  await expect.poll(nodeIds, { timeout: 60_000 }).toContain('stage_1_2');
+  await page.screenshot({ path: `${SHOTS}/${info.project.name}-06-patch-lab.png` });
+  await page.evaluate(async () => (window as any).__UOMD__.services.refreshArt()); // what the game does when a patch is applied
 
+  // the patch persists across a reload (IndexedDB)
+  await page.reload();
+  await page.waitForFunction(() => (window as any).__UOMD__?.game.scene.isActive('Title'), null, { timeout: 60_000 });
+  await expect.poll(nodeIds, { timeout: 30_000 }).toContain('stage_1_2');
   // the chapter list scrolls (36 nodes) and shows the campaign
   await goto(page, 'Chapters');
   await waitScene(page, 'Chapters');

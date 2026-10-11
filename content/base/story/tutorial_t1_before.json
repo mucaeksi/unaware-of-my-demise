@@ -3,6 +3,11 @@
   "scene_id": "tutorial_t1_before",
   "title_en": "The First Step",
   "location_id": "forest_whispering_ash",
+  "presentation": {
+    "auto": true,
+    "speaker_pause_seconds": 1
+  },
+  "closing_hold_seconds": 3.5,
   "commands": [
     {
       "op": "background",

@@ -1,4 +1,5 @@
 import { ArtManifest } from './art';
+import { EntryIndex, Prologue } from './entry';
 import { ChapterIndex, Encounter, StoryScene } from './story';
 import { UnitPack } from './units';
 
@@ -112,6 +113,16 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
       }
     }
   };
+  const checkEncounter = (path: string): void => {
+    const enc = parse(path, Encounter);
+    if (!enc) return;
+    for (const e of [...enc.party, ...enc.enemies]) if (!units.has(e.unit_id)) problems.push(`${path}: unknown unit ${e.unit_id}`);
+    for (const g of enc.guests ?? []) if (!units.has(g)) problems.push(`${path}: unknown guest ${g}`);
+    if (art && !art.backgrounds[enc.location_id]) problems.push(`${path}: no background for ${enc.location_id}`);
+    if (art && enc.music_cue && !art.music[enc.music_cue]) problems.push(`${path}: unknown music cue ${enc.music_cue}`);
+    if (enc.pre_story) checkScene(enc.pre_story, enc.location_id);
+    if (enc.post_story) checkScene(enc.post_story, enc.location_id);
+  };
   if (index) {
     // a node may require any node of the campaign (the server gates on the player's progress rows, which are global)
     const allNodes = new Set(index.chapters.flatMap((c) => c.nodes.map((x) => x.node_id)));
@@ -128,15 +139,21 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
         } else if (!n.encounter) {
           problems.push(`node ${n.node_id}: battle node without encounter path`);
         } else {
-          const enc = parse(n.encounter, Encounter);
-          if (!enc) continue;
-          for (const e of [...enc.party, ...enc.enemies]) if (!units.has(e.unit_id)) problems.push(`${n.encounter}: unknown unit ${e.unit_id}`);
-          for (const g of enc.guests ?? []) if (!units.has(g)) problems.push(`${n.encounter}: unknown guest ${g}`);
-          if (art && !art.backgrounds[enc.location_id]) problems.push(`${n.encounter}: no background for ${enc.location_id}`);
-          if (art && enc.music_cue && !art.music[enc.music_cue]) problems.push(`${n.encounter}: unknown music cue ${enc.music_cue}`);
-          if (enc.pre_story) checkScene(enc.pre_story, enc.location_id);
-          if (enc.post_story) checkScene(enc.post_story, enc.location_id);
+          checkEncounter(n.encounter);
         }
+      }
+    }
+  }
+  // first-install flow (only present in releases that ship it): the prologue and every tutorial stage must resolve
+  if (files.has('entry/entry_index.json')) {
+    const entry = parse('entry/entry_index.json', EntryIndex);
+    if (entry) {
+      parse(entry.prologue, Prologue); // audio cues are hooks for the later sound pass and are not resolved against the music manifest
+      const stages = new Set<string>();
+      for (const t of entry.tutorial) {
+        if (stages.has(t.stage_id)) problems.push(`entry index: duplicate stage ${t.stage_id}`);
+        stages.add(t.stage_id);
+        checkEncounter(t.encounter);
       }
     }
   }

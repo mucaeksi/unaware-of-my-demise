@@ -2,8 +2,6 @@ import { sha256Hex } from '@uomd/shared';
 import { MEDIA_TYPE_BY_EXTENSION, type AllowedExtension } from '@uomd/content-schema';
 
 const baseJson = import.meta.glob('../../../content/base/**/*.json', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
-const patchJson = import.meta.glob('../../../content/patches/rel_0002_road_forgotten/**/*.json', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
-
 const campaignJson = import.meta.glob('../../../content/patches/rel_0003_part1_campaign/**/*.json', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
 
 export interface TestFile {
@@ -48,8 +46,16 @@ export async function baseFiles(): Promise<TestFile[]> {
   return build(baseJson, '/content/base/', [...bin]);
 }
 
+/** The Part I campaign patch on its own (only the files it ships; binaries are stand-ins). */
 export async function patchFiles(): Promise<TestFile[]> {
-  return build(patchJson, '/content/patches/rel_0002_road_forgotten/', ['art/atlas_hollow_pilgrim.webp']);
+  const base = await baseFiles();
+  const patch = await build(campaignJson, '/content/patches/rel_0003_part1_campaign/', []);
+  const art = JSON.parse(new TextDecoder().decode(patch.find((f) => f.path === 'art/art_manifest.json')?.bytes));
+  const bin = new Set<string>([...Object.values<{ image: string }>(art.atlases).map((a) => a.image), ...(Object.values(art.backgrounds) as string[])]);
+  const have = new Set([...base.map((f) => f.path), ...patch.map((f) => f.path)]);
+  const extra: TestFile[] = [];
+  for (const p of bin) if (!have.has(p)) extra.push(await file(p, enc.encode(`stand-in binary for ${p}`)));
+  return [...patch, ...extra];
 }
 
 /** The Part I campaign laid over the base release (the patch's files win), as the publisher's effective set. */

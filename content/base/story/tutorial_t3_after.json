@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "scene_id": "tutorial_t3_after",
+  "title_en": "A Roof Before Dawn",
+  "location_id": "forest_whispering_ash",
+  "presentation": {
+    "auto": true,
+    "speaker_pause_seconds": 1
+  },
+  "illustration_id": "shelter_evening",
+  "closing_hold_seconds": 5,
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "bgm_ch1_ash_forest_calm"
+    },
+    {
+      "op": "fade",
+      "direction": "in",
+      "seconds": 0.8
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t3_after_001",
+      "text": "Inside, the wind softened to a sound in the rafters. For the first time that evening, neither of them had to walk.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Dry enough here. The far corner is better.",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You have inspected the entire house in one breath.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "It is not a large house.",
+      "emotion": "dry_humor",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t3_after_005",
+      "text": "He laid his cloak over the cold stone. She sat on one edge and left the other unmistakably free.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_006",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "This seat appears to be available.",
+      "emotion": "soft_smile",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_007",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "I will check the doorway.",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_008",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You checked it on the way in.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_009",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "From the other side.",
+      "emotion": "dry_humor",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_010",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "An important distinction. Sit before you discover a third side.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t3_after_011",
+      "text": "He sat. His shield rested within reach; her shoulder rested almost within reach of his.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_012",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We have enough bread for tonight.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_013",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Actual bread, or another of your possibilities?",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_014",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Actual bread.",
+      "emotion": "dry_humor",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_015",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A roof and a supper. You should announce your successes more often.",
+      "emotion": "soft_smile",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t3_after_016",
+      "text": "She broke the loaf in two, considered the pieces, and put the larger one in his hand.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_017",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You gave me more.",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_018",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A flaw in the architecture of the loaf. Quite beyond my control.",
+      "emotion": "dry_amusement",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_019",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Tomorrow we find a better one.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t3_after_020",
+      "text": "She looked toward the doorway. For a moment her answer did not come.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_021",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Tomorrow. Yes.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_022",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "What is it?",
+      "emotion": "watchful",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_023",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Nothing that needs solving tonight.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_024",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "It does not have to need solving.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t3_after_025",
+      "text": "That made her turn back to him. The small joke she had prepared went unused.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_026",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Stay a little while. Before you stand watch.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_027",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "I am here.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_028",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I know. That was why I asked.",
+      "emotion": "soft_smile",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t3_after_029",
+      "text": "He stayed. Outside, the last light left the road; inside, the silence no longer felt empty.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_030",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We leave when there is light. No hurry.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_031",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "And no walking two steps ahead.",
+      "emotion": "soft_smile",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_032",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Beside you, then.",
+      "emotion": "composed",
+      "hold_seconds": 3
+    },
+    {
+      "op": "say",
+      "line_id": "tutorial_t3_after_033",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then.",
+      "emotion": "soft_smile",
+      "hold_seconds": 3
+    },
+    {
+      "op": "narrate",
+      "line_id": "tutorial_t3_after_034",
+      "text": "For tonight, a dry corner, half a loaf, and a place beside each other were enough.",
+      "hold_seconds": 4
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "tutorial_t3_after_done"
+    },
+    {
+      "op": "fade",
+      "direction": "out",
+      "seconds": 0.6
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-3.after",
+    "source_sha256": "d5419c8bd76f5c75e4c70e116fa97cdd97dfa8e158c852c7c96a988980bbce81"
+  }
+}

@@ -13,6 +13,8 @@ export interface PatchState {
   schema: 1;
   active: ActiveRelease | null;
   previous: ActiveRelease | null;
+  /** a release that is fully downloaded, verified and validated but not yet switched on (it activates at the next start) */
+  staged?: ActiveRelease | null;
   /** releases that failed validation or crashed on activation; never auto-applied again */
   denied: string[];
 }
@@ -31,7 +33,8 @@ export interface ContentStorage {
 export interface RemoteSource {
   /** latest published manifest for a channel, or null when none is published (HTTP 404) */
   fetchManifest(channel: Channel): Promise<unknown | null>;
-  fetchObject(sha256: string, file: ManifestFile): Promise<Uint8Array>;
+  /** `onBytes` (optional) reports the bytes received so far of this object, for a smooth progress bar. */
+  fetchObject(sha256: string, file: ManifestFile, onBytes?: (received: number) => void): Promise<Uint8Array>;
 }
 
 export interface BaseContent {
@@ -60,9 +63,28 @@ export interface PatchEnv {
   now?(): Date;
 }
 
+export type PatchPhase = 'checking' | 'downloading' | 'verifying' | 'activating';
+
+/** Progress snapshot handed to `onProgress`; totals are known from the signed manifest once the check has passed. */
+export interface PatchProgress {
+  phase: PatchPhase;
+  releaseId: string | null;
+  filesDone: number;
+  filesTotal: number;
+  bytesDone: number;
+  bytesTotal: number;
+}
+
+export interface ApplyOptions {
+  onProgress?: (p: PatchProgress) => void;
+  /** false: download, verify and validate, then park the release as `staged` (switched on later by `activateStaged`). Default true. */
+  activate?: boolean;
+}
+
 export type PatchOutcome =
   | { status: 'up_to_date'; releaseId: string | null }
   | { status: 'applied'; releaseId: string; generation: number; downloadedBytes: number; downloadedFiles: number }
+  | { status: 'staged'; releaseId: string; generation: number; downloadedBytes: number; downloadedFiles: number }
   | { status: 'reverted_to_base'; reason: 'kill_switch' }
   | { status: 'offline'; detail: string }
   | { status: 'rejected'; reason: RejectReason; detail: string };

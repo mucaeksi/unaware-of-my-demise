@@ -28,6 +28,14 @@
       }
     },
     {
+      "output": "content/base/art/atlas_hollow_pilgrim.webp",
+      "sha256": "d7539d3c55d14d9af32c23e2517cb0aad809e90602dc37ac3aa8b45ce827236c",
+      "sources": {
+        "git:game/assets/enemies/tutorial/pilgrim_poses_v003.png": "165cb66e91dc324b177040d2a0f1b7b92917e47b2f64d0b3f1e55c0e805b5c56",
+        "git:game/assets/enemies/tutorial/pilgrim_attack_v003.png": "0f4dae03ed7f3f9ef3263aefe493912c589d2c195b93fc79f13a3483a84437a0"
+      }
+    },
+    {
       "output": "content/base/art/portrait_mahmut_composed.webp",
       "sha256": "f61c6d032242ac1bd142c24b7b0fd86ced1f999ab53bf41ca1b2130b44d3c139",
       "sources": {
@@ -113,195 +121,94 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "e21ce58901467bec58cb830fb6adb2f95f4744ed4a5c1198311241bc5a661d5a",
+      "sha256": "856fce56edf900d87ae525ac0ce4c2fd7780483a947d8f64f59241b9f3780670",
       "sources": {}
     },
     {
       "output": "content/base/units/unit_pack.json",
-      "sha256": "f3b9f281ab8f92c878ac526eaac1c53c4f27f4b90fd90fa080996622ace21fd2",
+      "sha256": "16b9adacee0ccb464c42c5f59cc9c4c3d3b653f8ffe2bd7e41d36cdb389716cf",
       "sources": {
         "narrative": "characters_part1.json,enemies_part1.json,battle_rules_part1.json"
       }
     },
     {
       "output": "content/base/story/tutorial_t1_before.json",
-      "sha256": "00ff70e5b84590f157dd91d8f390b19448977ce1c53a7153ba2402ecdba6a140",
+      "sha256": "b92e7aaeb04ffe2aa79df752680a88fbbff3adc949a32926b42c225222f5e604",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-1.before"
       }
     },
     {
       "output": "content/base/story/tutorial_t1_after.json",
-      "sha256": "18e40c3d850a63e70ec58fc77cee3c6d2ee381374e29adea4e729e0d5788f513",
+      "sha256": "d4c047d6507858739d4dcc54be7041f9d8e445a46eff24e8a802d538e8b4c166",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-1.after"
       }
     },
     {
-      "output": "content/base/encounters/tutorial_t1.json",
-      "sha256": "c938a58967e5de2ee690c82f4b06b1f24438850f0ffedab6800580b87ea18a54",
-      "sources": {
-        "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-1"
-      }
-    },
-    {
-      "output": "content/base/chapters/chapter_index.json",
-      "sha256": "a04a7cb37b32f6a1a9299b2143040d5d7571e20a52d3d9b3961caefc4b72364b",
-      "sources": {}
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/atlas_fadyme.webp",
-      "sha256": "dfc696e0acc2542426a8990c9df01650ee021079165a8f7f42cba7419ec10b00",
-      "sources": {
-        "git:game/assets/characters/fadyme/chibi_poses_v003.png": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634",
-        "git:game/assets/characters/fadyme/ultimate_pose_v003.png": "1d06c98782fabdcf57ac9f647c107ea8316e39dded124cd86f9716db8fd00c62"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/atlas_mahmut.webp",
-      "sha256": "4937c5bebfc68c4b517c45ac4140473d34f8d22bcf375352f056d28b9fb1dd73",
-      "sources": {
-        "git:game/assets/characters/mahmut/chibi_poses_v003.png": "9a77ec6e6e4a9ffe86907b3ad6c6d2bea16193e686abd1d5c4cafdd044a08a20",
-        "git:game/assets/characters/mahmut/basic_attack_v003.png": "69f981f5dbae07eaf7b3fe514661e977fe6b047791655df5573c493ffe733b8c",
-        "git:game/assets/characters/mahmut/guard_pose_v003.png": "163fc5695cc4b06feebe62d80e7c0d73d0d462af210f022516fc56abaecd8338"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/atlas_bellbound_dead.webp",
-      "sha256": "fc259f42d1641a163c66ca218bbd5750e89724109c3ca8e02dcd19e4ae0972cb",
-      "sources": {
-        "git:game/assets/enemies/tutorial/bellbound_poses_v003.png": "1af25ab7d903016bd81a98f4b72bffa3f3f716fe75f2768fd8f6c5ff836cedd1",
-        "git:game/assets/enemies/tutorial/bellbound_attack_v003.png": "13ba8dc5e5dde64b157c854ba58c63358c2d86bc2e97a39b736683b64f586c2d"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/atlas_hollow_pilgrim.webp",
-      "sha256": "d7539d3c55d14d9af32c23e2517cb0aad809e90602dc37ac3aa8b45ce827236c",
-      "sources": {
-        "git:game/assets/enemies/tutorial/pilgrim_poses_v003.png": "165cb66e91dc324b177040d2a0f1b7b92917e47b2f64d0b3f1e55c0e805b5c56",
-        "git:game/assets/enemies/tutorial/pilgrim_attack_v003.png": "0f4dae03ed7f3f9ef3263aefe493912c589d2c195b93fc79f13a3483a84437a0"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/portrait_mahmut_composed.webp",
-      "sha256": "f61c6d032242ac1bd142c24b7b0fd86ced1f999ab53bf41ca1b2130b44d3c139",
-      "sources": {
-        "git:game/assets/characters/mahmut/vn_watchful_v001.png": "3fc41f865a39449e520e78b79c79e828d4654a64f7778849cf2b085137d0a7d0"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/portrait_mahmut_dry_humor.webp",
-      "sha256": "ef3a48a3c21e971de99ea4a3b555bd71ee5fd5b613e747c85807117e119ef823",
-      "sources": {
-        "git:game/assets/characters/mahmut/vn_dry_humor_v001.png": "5f54e98052b790a415bb128b7689d4359d6fc1cbc1a4ef27c44f9f7f282a2b01"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/portrait_mahmut_protective_resolve.webp",
-      "sha256": "c7a8ddc6a93c33af47099e4b66e46b725516cb90f508a8a8cedbada11162bea8",
-      "sources": {
-        "git:game/assets/characters/mahmut/vn_protective_resolve_v001.png": "c1298ccac0910a64598ab7d6a6d19cfc92778b2261a02fd4b2434745224c52ad"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/portrait_fadyme_composed.webp",
-      "sha256": "7fef1082bdd336b2a99b2881dc450fdae92ae38975664bf444dc7d4d2deb9289",
-      "sources": {
-        "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_composed_v001.png": "68ad5d9f4b3a44998f31e2a63e66e3d0a553befa44ad99fb4c8b32f041b1f290"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/portrait_fadyme_wry.webp",
-      "sha256": "eabeb23ac88a5a0a16ab244be0655fadb80c049d1fe31ccb6b1c407f35ea857f",
-      "sources": {
-        "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_wry_v001.png": "571cba7f0bedab12737103229958a399ad40acd63fac746d3b212d57a5656346"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/portrait_fadyme_warm.webp",
-      "sha256": "c980b69e260f1ccf0d40f54266441aa658d05bc717e7ea50b9577014f595565f",
-      "sources": {
-        "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_warm_v001.png": "9f5a76e725253ff322e0ad9bd348b8fd3b4fbb5339a07019c8f355ae788c0e32"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/portrait_fadyme_resolve.webp",
-      "sha256": "f08c47aa63c9732e852320ab6d1405517c333ae8d80cfa603688a5a85202da6f",
-      "sources": {
-        "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_resolve_v002.png": "0838156beec6724bfdf17ab36017ff524d0c638a642808a5cfee098252b03ab3"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/bg_forest_whispering_ash.webp",
-      "sha256": "8e1675b8a2615d4b336916a7b39f0b96d87b742d6a05958d7c077fe21cbcdb3b",
-      "sources": {
-        "git:game/assets/backgrounds/forest_whispering_ash/side_arena_v001.png": "ccad123fd1a9d1bcf5a4ba43751e857d1e674c0058a81f7c4a3f9b62cc17667a"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/audio/bgm_ch1_ash_forest_calm.ogg",
-      "sha256": "2c92582719d99f3b95d2159d45c3891530de9976a675686ab801179c000be582",
-      "sources": {
-        "narrative/11_Audio_Cues/Music_Source/bgm_ch1_ash_forest/bgm_ch1_ash_forest_calm_v001_loop.ogg": "2c92582719d99f3b95d2159d45c3891530de9976a675686ab801179c000be582"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/audio/bgm_ch1_ash_forest_chaotic.ogg",
-      "sha256": "d35e1ab6d3f284e9d31b570a7ba379dd11aac1f5c8e3d86173acd3dc6e2a68e5",
-      "sources": {
-        "narrative/11_Audio_Cues/Music_Source/bgm_ch1_ash_forest/bgm_ch1_ash_forest_chaotic_v001_loop.ogg": "d35e1ab6d3f284e9d31b570a7ba379dd11aac1f5c8e3d86173acd3dc6e2a68e5"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/ui_logo.webp",
-      "sha256": "b84ad0324a510ab5604764cc64ef63e468cad8088d29c341c24949530f18efb8",
-      "sources": {
-        "narrative/14_References/recovered_locked_v001/logo/brand_logo_wordmark_r2_v003.png": "c4a87503d53d5aab2d058f91cc988dd317baf728c093a80281a71988a8e8e4eb"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/ui_key_art.webp",
-      "sha256": "4eb31eb391369b4dca9d83ad8a8939811303e33385e831387127f63fb37411f1",
-      "sources": {
-        "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003.png": "58c54af2d268ce663542960950aace744286c7c4cf5d85b77a814134e3156176"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/art/art_manifest.json",
-      "sha256": "856fce56edf900d87ae525ac0ce4c2fd7780483a947d8f64f59241b9f3780670",
-      "sources": {}
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/units/unit_pack.json",
-      "sha256": "5730d590e1a2d04936874b02f7b4e4f9dc3680df61d6bbe1a40f490ee36d2420",
-      "sources": {
-        "narrative": "characters_part1.json,enemies_part1.json,battle_rules_part1.json"
-      }
-    },
-    {
-      "output": "content/patches/rel_0002_road_forgotten/story/tutorial_t2_before.json",
-      "sha256": "34872f1968cd0f4228e05ddec51cc1468b139c37436cd0cdcb31e45d30abfb88",
+      "output": "content/base/story/tutorial_t2_before.json",
+      "sha256": "5bd96f02a4ed946a82b2e2d99b36fb5939171de25ac6be74d1d399c02549555c",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2.before"
       }
     },
     {
-      "output": "content/patches/rel_0002_road_forgotten/story/tutorial_t2_after.json",
-      "sha256": "aac9527b29b2141ab9d119197676173f21d47e6c66adf5117f777f431441c6d7",
+      "output": "content/base/story/tutorial_t2_after.json",
+      "sha256": "8ff49951517087a2bb96ffbe3e0e35184837c9487c13138eee991af37b0e4027",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2.after"
       }
     },
     {
-      "output": "content/patches/rel_0002_road_forgotten/encounters/tutorial_t2.json",
-      "sha256": "8c25c20af5a376092b1acf3d7e9948296f05ebedb2288a0d54a8334c3d34de84",
+      "output": "content/base/story/tutorial_t3_before.json",
+      "sha256": "c30c5a273bb965725f7b44ff94a0f679099032973bd6e5e9d7bfc49e2d945d27",
+      "sources": {
+        "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-3.before"
+      }
+    },
+    {
+      "output": "content/base/story/tutorial_t3_after.json",
+      "sha256": "189db08a3235a52d49382ef8a2a0e3e8c9c9b1c518d2a828bd41ceeccc5240e3",
+      "sources": {
+        "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-3.after"
+      }
+    },
+    {
+      "output": "content/base/encounters/tutorial_t1.json",
+      "sha256": "cde1ae522c77b9de2212d5bfef64dda0835e60b204e8c06aaf254befad838ca2",
+      "sources": {
+        "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-1"
+      }
+    },
+    {
+      "output": "content/base/encounters/tutorial_t2.json",
+      "sha256": "b49af22998f94ed87ecc1efbdec1b01f457d30f5183ee536dac40ae8cc75378d",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2"
       }
     },
     {
-      "output": "content/patches/rel_0002_road_forgotten/chapters/chapter_index.json",
-      "sha256": "7a9ac64948ee07ea325ab874d3ed666d09257c255bc642b5ae85a063a95debf4",
+      "output": "content/base/encounters/tutorial_t3.json",
+      "sha256": "edc3ed4902cdfe4febccbcf63009284a04b87a046f6c3ddc0ecc20c0bcd3b4d9",
+      "sources": {
+        "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-3"
+      }
+    },
+    {
+      "output": "content/base/chapters/chapter_index.json",
+      "sha256": "f3ae15d0206edea16f02682ebc513dabf27ca72261e3aff7a3afe6a90662daff",
+      "sources": {}
+    },
+    {
+      "output": "content/base/entry/prologue.json",
+      "sha256": "47f8acec3fb91a6c2a75ed54fb3806339ebab136ccf72d307fd141f070996631",
+      "sources": {
+        "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/prologue_v001.json"
+      }
+    },
+    {
+      "output": "content/base/entry/entry_index.json",
+      "sha256": "80cb86df97de1018b2eb8a23926c391231b0b4d6658b2f220540db27dd9a6ab1",
       "sources": {}
     }
   ]

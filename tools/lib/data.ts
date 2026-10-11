@@ -242,6 +242,9 @@ interface TutorialScene {
   title_en: string;
   location_id: string;
   lines: TutorialLine[];
+  presentation?: { auto: boolean; speaker_pause_seconds: number };
+  illustration_id?: string;
+  closing_hold_seconds?: number;
 }
 interface TutorialChapter {
   stage_id: string;
@@ -285,6 +288,9 @@ export function buildScene(scene: TutorialScene, stageId: string, which: 'before
     scene_id: scene.scene_id,
     title_en: scene.title_en,
     location_id: scene.location_id,
+    ...(scene.presentation ? { presentation: { auto: scene.presentation.auto, speaker_pause_seconds: scene.presentation.speaker_pause_seconds } } : {}),
+    ...(scene.illustration_id ? { illustration_id: scene.illustration_id } : {}),
+    ...(typeof scene.closing_hold_seconds === 'number' ? { closing_hold_seconds: scene.closing_hold_seconds } : {}),
     commands,
     provenance: { source: `${NARR}/entry/tutorial_v001.json#${stageId}.${which}`, source_sha256: srcHash('entry/tutorial_v001.json') }
   });
@@ -295,7 +301,8 @@ export function buildEncounter(
   encounterId: string,
   party: { unit_id: string; row: 'front' | 'rear' }[],
   musicCue: string,
-  storyBase: string
+  storyBase: string,
+  ui?: { speed: boolean; auto: boolean }
 ): Encounter {
   const ch = tutorialChapter(stageId);
   const enemies: { unit_id: string; level: number; slot: number; row: 'front' | 'rear' }[] = [];
@@ -312,6 +319,7 @@ export function buildEncounter(
     music_cue: musicCue,
     party: party.map((p, i) => ({ unit_id: p.unit_id, level: 1, slot: i, row: p.row })),
     enemies,
+    ...(ui ? { ui } : {}),
     pre_story: `story/${storyBase}_before.json`,
     post_story: `story/${storyBase}_after.json`,
     provenance: { source: `${NARR}/entry/tutorial_v001.json#${stageId}`, source_sha256: srcHash('entry/tutorial_v001.json') }

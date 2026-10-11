@@ -56,7 +56,7 @@ test.describe('UOMD Control Center (admin SPA + API, local stack with a test-onl
     await expect(page.getByRole('cell', { name: new RegExp(probe.replace(/[./]/g, '\\$&')) })).toBeVisible();
 
     // patches: the base release is listed; exactly one release per channel is "current" (the live-patch test
-    // may already have published rel_0002 on this shared stack, so this must not depend on test order)
+    // may already have published rel_0003 on this shared stack, so this must not depend on test order)
     await page.getByRole('button', { name: 'Patches' }).click();
     await expect(page.locator('tbody tr', { has: page.locator('code', { hasText: /^rel_0001$/ }) })).toHaveCount(1);
     await expect(page.locator('tbody .badge.ok', { hasText: 'current' })).toHaveCount(1);

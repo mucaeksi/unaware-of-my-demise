@@ -28,6 +28,8 @@ export interface BattleInit {
   sessionId?: string;
   /** a lost owned-hero battle needs a fresh server session, so retrying goes back through the flow */
   onRetry?: (scene: Phaser.Scene) => void;
+  /** opening tutorial: no stars, no server verification line, retreat goes back to the story before the fight */
+  tutorial?: boolean;
 }
 
 const ELEMENT_COLOR: Record<string, number> = { Veil: C.veil, Stone: 0xe0d2b0, Ember: 0xff8a4c, Tide: 0x6cc4ff, Gale: 0x9be8c3, Dawn: 0xffe9a8 };
@@ -50,8 +52,8 @@ export class BattleScene extends Phaser.Scene {
   private descText!: Phaser.GameObjects.Text;
   private hintText!: Phaser.GameObjects.Text;
   private telegraphText!: Phaser.GameObjects.Text;
-  private autoBtn!: Button;
-  private speedBtn!: Button;
+  private autoBtn: Button | null = null;
+  private speedBtn: Button | null = null;
   private pendingResolve: ((a: PlayerAction) => void) | null = null;
   private bannerBox: Phaser.GameObjects.Container | null = null;
   private menuLayer: Phaser.GameObjects.Container | null = null;
@@ -164,9 +166,18 @@ export class BattleScene extends Phaser.Scene {
     this.chipLayer = this.add.container(0, 0).setDepth(DEPTH.hud);
     txt(this, 60, 122, 'TURN ORDER', { fontFamily: F.display, fontSize: '20px', color: T.dim }).setDepth(DEPTH.hud);
 
-    this.speedBtn = new Button(this, REF_W - 150, 70, { label: '×1', w: 190, h: 100, fontSize: 36, onClick: () => this.toggleSpeed() }).setDepth(DEPTH.hud);
-    this.autoBtn = new Button(this, REF_W - 365, 70, { label: 'AUTO', w: 210, h: 100, fontSize: 30, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
-    new Button(this, REF_W - 585, 70, { label: 'MENU', w: 210, h: 100, fontSize: 30, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
+    // the encounter's ui block can hide the speed and Auto buttons (the opening tutorials are manual, one turn at a time)
+    const ui = this.encounter.ui ?? { speed: true, auto: true };
+    let edge = REF_W - 150;
+    if (ui.speed) {
+      this.speedBtn = new Button(this, edge, 70, { label: '×1', w: 190, h: 100, fontSize: 36, onClick: () => this.toggleSpeed() }).setDepth(DEPTH.hud);
+      edge -= 215;
+    }
+    if (ui.auto) {
+      this.autoBtn = new Button(this, edge, 70, { label: 'AUTO', w: 210, h: 100, fontSize: 30, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
+      edge -= 220;
+    }
+    new Button(this, edge, 70, { label: 'MENU', w: 210, h: 100, fontSize: 30, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
 
     // between the title block and the speed/auto/menu buttons there is free room at the top: the turn hint lives there
     this.descText = txt(this, REF_W / 2, 860, '', { fontSize: '28px', color: T.text, align: 'center', wordWrap: { width: 1640 } }).setOrigin(0.5).setDepth(DEPTH.hud);
@@ -206,12 +217,12 @@ export class BattleScene extends Phaser.Scene {
     this.speed = this.speed >= 3 ? 1 : this.speed + 1; // ×1 → ×2 → ×3 → ×1
     this.time.timeScale = this.speed;
     this.tweens.timeScale = this.speed;
-    this.speedBtn.setLabel(`×${this.speed}`);
+    this.speedBtn?.setLabel(`×${this.speed}`);
   }
 
   private toggleAuto(): void {
     this.auto = !this.auto;
-    this.autoBtn.setLabel(this.auto ? 'AUTO ✓' : 'AUTO');
+    this.autoBtn?.setLabel(this.auto ? 'AUTO ✓' : 'AUTO');
     if (this.auto && this.pendingResolve) this.pendingResolve(this.battle.autoAction());
   }
 
@@ -676,30 +687,35 @@ export class BattleScene extends Phaser.Scene {
     this.tweens.add({ targets: dim, alpha: 0.72, duration: 400 });
     const box = panel(this, REF_W / 2, REF_H / 2, 1180, 700, won ? 'hot' : 'danger').setDepth(DEPTH.modal + 1);
     title(this, REF_W / 2, 310, won ? 'VICTORY' : 'DEFEAT', 96, won ? T.gold : T.crimson).setDepth(DEPTH.modal + 2);
-    const stars = this.add.graphics().setDepth(DEPTH.modal + 2);
-    for (let i = 0; i < 3; i++) {
-      const filled = i < result.stars;
-      stars.fillStyle(filled ? C.goldHi : 0x2a1e32, 1);
-      stars.lineStyle(3, C.gold, filled ? 1 : 0.4);
-      const cx = REF_W / 2 + (i - 1) * 130;
-      const cy = 460;
-      const pts: Phaser.Math.Vector2[] = [];
-      for (let k = 0; k < 10; k++) {
-        const r = k % 2 === 0 ? 52 : 22;
-        const a = -Math.PI / 2 + (k * Math.PI) / 5;
-        pts.push(new Phaser.Math.Vector2(cx + Math.cos(a) * r, cy + Math.sin(a) * r));
+    const tutorial = this.cfg.tutorial === true;
+    if (!tutorial) {
+      const stars = this.add.graphics().setDepth(DEPTH.modal + 2);
+      for (let i = 0; i < 3; i++) {
+        const filled = i < result.stars;
+        stars.fillStyle(filled ? C.goldHi : 0x2a1e32, 1);
+        stars.lineStyle(3, C.gold, filled ? 1 : 0.4);
+        const cx = REF_W / 2 + (i - 1) * 130;
+        const cy = 460;
+        const pts: Phaser.Math.Vector2[] = [];
+        for (let k = 0; k < 10; k++) {
+          const r = k % 2 === 0 ? 52 : 22;
+          const a = -Math.PI / 2 + (k * Math.PI) / 5;
+          pts.push(new Phaser.Math.Vector2(cx + Math.cos(a) * r, cy + Math.sin(a) * r));
+        }
+        stars.fillPoints(pts, true);
+        stars.strokePoints(pts, true);
       }
-      stars.fillPoints(pts, true);
-      stars.strokePoints(pts, true);
     }
-    txt(this, REF_W / 2, 560, `${result.turns} turns  ·  ${this.recorded.length} actions`, { fontSize: '34px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
-    const verify = txt(this, REF_W / 2, 618, 'Server verification: checking…', { fontSize: '30px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
-    if (this.cfg.sessionId || this.encounter.party_mode === 'owned') verify.setText('Server verification: at the claim (owned-hero stage)');
-    else void this.verifyOnServer(verify);
-    if (won) void this.claimProgress();
+    txt(this, REF_W / 2, tutorial ? 500 : 560, `${result.turns} turns  ·  ${this.recorded.length} actions`, { fontSize: '34px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
+    if (!tutorial) {
+      const verify = txt(this, REF_W / 2, 618, 'Server verification: checking…', { fontSize: '30px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
+      if (this.cfg.sessionId || this.encounter.party_mode === 'owned') verify.setText('Server verification: at the claim (owned-hero stage)');
+      else void this.verifyOnServer(verify);
+      if (won) void this.claimProgress();
+    }
 
-    const primary = new Button(this, REF_W / 2 - 250, 760, { label: won ? 'CONTINUE' : 'RETRY', w: 440, onClick: () => (won ? this.cfg.onDone(this, { won, stars: result.stars }) : this.cfg.onRetry ? this.cfg.onRetry(this) : this.scene.restart(this.cfg)) }).setDepth(DEPTH.modal + 2);
-    new Button(this, REF_W / 2 + 250, 760, { label: 'LEAVE', w: 440, onClick: () => this.cfg.onBack(this) }).setDepth(DEPTH.modal + 2);
+    const primary = new Button(this, tutorial && won ? REF_W / 2 : REF_W / 2 - 250, 760, { label: won ? 'CONTINUE' : 'RETRY', w: 440, onClick: () => (won ? this.cfg.onDone(this, { won, stars: result.stars }) : this.cfg.onRetry ? this.cfg.onRetry(this) : this.scene.restart(this.cfg)) }).setDepth(DEPTH.modal + 2);
+    if (!(tutorial && won)) new Button(this, REF_W / 2 + 250, 760, { label: tutorial ? 'BACK TO STORY' : 'LEAVE', w: 440, onClick: () => this.cfg.onBack(this) }).setDepth(DEPTH.modal + 2);
     void box;
     void primary;
   }

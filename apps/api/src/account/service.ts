@@ -22,6 +22,7 @@ export async function exportAccount(db: D1Database, playerId: string): Promise<R
     account: await q('SELECT xp FROM player_account WHERE player_id = ?1'),
     progress: await q('SELECT node_id, stars, clears, best_turns FROM player_progress WHERE player_id = ?1'),
     teams: await q('SELECT slot, name, members_json, active FROM player_teams WHERE player_id = ?1'),
+    entry: await q('SELECT phase, prologue, tutorials, updated_at FROM player_entry WHERE player_id = ?1'),
     pulls: pulls.slice(0, 2000),
     mail: mail.slice(0, 500),
     purchases: await q('SELECT order_id, product_id, kind, state, granted_at, refunded_at FROM purchases WHERE player_id = ?1'),
@@ -40,7 +41,7 @@ export async function deleteAccount(db: D1Database, playerId: string, confirm: s
   const own = (t: string): D1PreparedStatement => db.prepare(`DELETE FROM ${t} WHERE player_id = ?1`).bind(playerId);
   await db.batch([
     db.prepare("UPDATE players SET status = 'deleted', google_sub = NULL, display_name = NULL, deleted_at = strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id = ?1 AND status = 'active'").bind(playerId),
-    ...['sessions', 'player_teams', 'player_tasks', 'progression_requests', 'player_gear', 'player_chars', 'player_stacks', 'player_account', 'player_progress', 'player_ration', 'battle_claims', 'player_saves', 'pity_state', 'gacha_requests', 'ad_nonces', 'player_items', 'wallets'].map(own)
+    ...['sessions', 'player_entry', 'player_teams', 'player_tasks', 'progression_requests', 'player_gear', 'player_chars', 'player_stacks', 'player_account', 'player_progress', 'player_ration', 'battle_claims', 'player_saves', 'pity_state', 'gacha_requests', 'ad_nonces', 'player_items', 'wallets'].map(own)
   ]);
   return { deleted: true };
 }

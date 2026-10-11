@@ -3,6 +3,12 @@
   "scene_id": "tutorial_t2_after",
   "title_en": "A Road Forgotten",
   "location_id": "forest_whispering_ash",
+  "presentation": {
+    "auto": true,
+    "speaker_pause_seconds": 1
+  },
+  "illustration_id": "roadside_rest",
+  "closing_hold_seconds": 3.5,
   "commands": [
     {
       "op": "background",

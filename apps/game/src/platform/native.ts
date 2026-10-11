@@ -44,3 +44,22 @@ export const Ads = registerPlugin<AdsPlugin>('UomdAds');
 
 /** Plugin errors carry a stable `code` (canceled, no_account, no_fill, ...). */
 export const nativeCode = (e: unknown): string => (typeof e === 'object' && e !== null && 'code' in e ? String((e as { code: unknown }).code) : 'error');
+
+/** Native process relaunch (Capacitor plugin `UomdApp`, shipped with the next Android build); older shells and browsers reload the page instead. */
+export interface AppPlugin {
+  restart(): Promise<void>;
+}
+export const NativeApp = registerPlugin<AppPlugin>('UomdApp');
+
+/** Restarts the game client exactly once per call; the caller guards against repeated presses. */
+export async function restartGame(): Promise<void> {
+  if (isNative()) {
+    try {
+      await NativeApp.restart();
+      return;
+    } catch {
+      /* the shell has no relaunch plugin yet: fall back to reloading the web layer, which re-boots the game and activates the new content */
+    }
+  }
+  location.reload();
+}

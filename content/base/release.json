@@ -5,7 +5,7 @@
     "generation": 1,
     "channel": "staging",
     "created_at": "2026-10-10T00:00:00.000Z",
-    "notes": "Base content shipped inside the app: tutorial T-1"
+    "notes": "Base content shipped inside the app: first-install flow (prologue + tutorials T-1..T-3)"
   },
   "compat": {
     "min_client": "0.1.0",
@@ -18,8 +18,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "e21ce58901467bec58cb830fb6adb2f95f4744ed4a5c1198311241bc5a661d5a",
-      "bytes": 7289,
+      "sha256": "856fce56edf900d87ae525ac0ce4c2fd7780483a947d8f64f59241b9f3780670",
+      "bytes": 9091,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -34,6 +34,13 @@
       "path": "art/atlas_fadyme.webp",
       "sha256": "dfc696e0acc2542426a8990c9df01650ee021079165a8f7f42cba7419ec10b00",
       "bytes": 458320,
+      "media_type": "image/webp",
+      "kind": "atlas_image"
+    },
+    {
+      "path": "art/atlas_hollow_pilgrim.webp",
+      "sha256": "d7539d3c55d14d9af32c23e2517cb0aad809e90602dc37ac3aa8b45ce827236c",
+      "bytes": 252234,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
@@ -130,36 +137,92 @@
     },
     {
       "path": "chapters/chapter_index.json",
-      "sha256": "a04a7cb37b32f6a1a9299b2143040d5d7571e20a52d3d9b3961caefc4b72364b",
-      "bytes": 321,
+      "sha256": "f3ae15d0206edea16f02682ebc513dabf27ca72261e3aff7a3afe6a90662daff",
+      "bytes": 721,
       "media_type": "application/json",
       "kind": "chapter_index"
     },
     {
       "path": "encounters/tutorial_t1.json",
-      "sha256": "c938a58967e5de2ee690c82f4b06b1f24438850f0ffedab6800580b87ea18a54",
-      "bytes": 955,
+      "sha256": "cde1ae522c77b9de2212d5bfef64dda0835e60b204e8c06aaf254befad838ca2",
+      "bytes": 1008,
       "media_type": "application/json",
       "kind": "encounter"
     },
     {
+      "path": "encounters/tutorial_t2.json",
+      "sha256": "b49af22998f94ed87ecc1efbdec1b01f457d30f5183ee536dac40ae8cc75378d",
+      "bytes": 906,
+      "media_type": "application/json",
+      "kind": "encounter"
+    },
+    {
+      "path": "encounters/tutorial_t3.json",
+      "sha256": "edc3ed4902cdfe4febccbcf63009284a04b87a046f6c3ddc0ecc20c0bcd3b4d9",
+      "bytes": 1116,
+      "media_type": "application/json",
+      "kind": "encounter"
+    },
+    {
+      "path": "entry/entry_index.json",
+      "sha256": "80cb86df97de1018b2eb8a23926c391231b0b4d6658b2f220540db27dd9a6ab1",
+      "bytes": 341,
+      "media_type": "application/json",
+      "kind": "other_data"
+    },
+    {
+      "path": "entry/prologue.json",
+      "sha256": "47f8acec3fb91a6c2a75ed54fb3806339ebab136ccf72d307fd141f070996631",
+      "bytes": 5144,
+      "media_type": "application/json",
+      "kind": "other_data"
+    },
+    {
       "path": "story/tutorial_t1_after.json",
-      "sha256": "18e40c3d850a63e70ec58fc77cee3c6d2ee381374e29adea4e729e0d5788f513",
-      "bytes": 4209,
+      "sha256": "d4c047d6507858739d4dcc54be7041f9d8e445a46eff24e8a802d538e8b4c166",
+      "bytes": 4314,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t1_before.json",
-      "sha256": "00ff70e5b84590f157dd91d8f390b19448977ce1c53a7153ba2402ecdba6a140",
-      "bytes": 4351,
+      "sha256": "b92e7aaeb04ffe2aa79df752680a88fbbff3adc949a32926b42c225222f5e604",
+      "bytes": 4456,
+      "media_type": "application/json",
+      "kind": "story_scene"
+    },
+    {
+      "path": "story/tutorial_t2_after.json",
+      "sha256": "8ff49951517087a2bb96ffbe3e0e35184837c9487c13138eee991af37b0e4027",
+      "bytes": 5307,
+      "media_type": "application/json",
+      "kind": "story_scene"
+    },
+    {
+      "path": "story/tutorial_t2_before.json",
+      "sha256": "5bd96f02a4ed946a82b2e2d99b36fb5939171de25ac6be74d1d399c02549555c",
+      "bytes": 4093,
+      "media_type": "application/json",
+      "kind": "story_scene"
+    },
+    {
+      "path": "story/tutorial_t3_after.json",
+      "sha256": "189db08a3235a52d49382ef8a2a0e3e8c9c9b1c518d2a828bd41ceeccc5240e3",
+      "bytes": 9020,
+      "media_type": "application/json",
+      "kind": "story_scene"
+    },
+    {
+      "path": "story/tutorial_t3_before.json",
+      "sha256": "c30c5a273bb965725f7b44ff94a0f679099032973bd6e5e9d7bfc49e2d945d27",
+      "bytes": 4442,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "units/unit_pack.json",
-      "sha256": "f3b9f281ab8f92c878ac526eaac1c53c4f27f4b90fd90fa080996622ace21fd2",
-      "bytes": 18962,
+      "sha256": "16b9adacee0ccb464c42c5f59cc9c4c3d3b653f8ffe2bd7e41d36cdb389716cf",
+      "bytes": 21206,
       "media_type": "application/json",
       "kind": "unit_pack"
     }

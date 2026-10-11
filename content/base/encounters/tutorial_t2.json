@@ -28,6 +28,10 @@
       "row": "front"
     }
   ],
+  "ui": {
+    "speed": false,
+    "auto": false
+  },
   "pre_story": "story/tutorial_t2_before.json",
   "post_story": "story/tutorial_t2_after.json",
   "provenance": {

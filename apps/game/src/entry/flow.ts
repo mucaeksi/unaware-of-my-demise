@@ -5,14 +5,8 @@ import { Services } from '../services';
 import { toast } from '../ui/kit';
 import { S } from './strings';
 import { loadEntry, nextStep, type EntryStep } from './state';
-
-/** The scene that plays each entry step. A step whose scene is not registered yet is reported instead of silently skipped. */
-const SCENE_OF: Record<EntryStep['kind'], string> = {
-  prologue: 'Prologue',
-  tutorial: 'Tutorial',
-  finish: 'EntryFinish',
-  menu: 'Title'
-};
+import { playTutorialStage } from './tutorial';
+import { syncEntry } from './sync';
 
 export type SignInResult = 'ok' | 'unavailable' | 'failed';
 
@@ -33,13 +27,39 @@ export async function signInWithGoogle(scene: Phaser.Scene): Promise<SignInResul
 /** Whether the first-run menu may continue: signed in, or the preview build explicitly running without an account. */
 export const mayContinue = (): boolean => Services.api.signedIn || PREVIEW_FLOW_ENABLED;
 
-/** Routes the player to the first unfinished entry step. */
+/** Routes the player to the first unfinished entry step (fades out, then starts the step's scene or runner). */
 export function advance(scene: Phaser.Scene, step: EntryStep = nextStep(loadEntry())): void {
-  const key = SCENE_OF[step.kind];
-  if (!scene.scene.get(key)) {
-    toast(scene, `The road ahead is not ready yet (${step.kind}).`, 3200);
-    return;
-  }
   scene.cameras.main.fadeOut(420, 0, 0, 0);
-  scene.time.delayedCall(430, () => scene.scene.start(key, step));
+  scene.time.delayedCall(430, () => {
+    switch (step.kind) {
+      case 'prologue':
+        scene.scene.start('Prologue');
+        return;
+      case 'tutorial':
+        void playTutorialStage(scene, step.index).catch((e: unknown) => {
+          toast(scene, `The tutorial could not start: ${errText(e)}`, 4200);
+          scene.scene.start('Title');
+        });
+        return;
+      case 'finish':
+        scene.scene.start('Finish');
+        return;
+      case 'menu':
+        scene.scene.start('Title');
+        return;
+    }
+  });
+}
+
+/**
+ * First-run door (after Google sign-in, or Continue): reconcile with the account checkpoint, start the background patch download with
+ * its bottom bar, then go to the first unfinished step. The download never blocks the story.
+ */
+export async function beginEntry(scene: Phaser.Scene): Promise<void> {
+  const { state } = await syncEntry(Services.api);
+  if (state.phase !== 'completed') {
+    if (!scene.scene.isActive('PatchBar')) scene.scene.launch('PatchBar');
+    void Services.patches.start();
+  }
+  advance(scene, nextStep(state));
 }

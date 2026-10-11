@@ -20,3 +20,9 @@ export function describeAttachments(atts: MailItem['attachments'], names: Map<st
 }
 
 export const pct = (x: number, digits = 1): string => `${(x * 100).toFixed(digits).replace(/\.0+$/, '')} %`;
+
+/** Download sizes for the patch bar: "812 KB", "12.4 MB". */
+export function formatBytes(n: number): string {
+  if (n < 1024 * 1024) return `${Math.max(0, Math.round(n / 1024))} KB`;
+  return `${(n / (1024 * 1024)).toFixed(1)} MB`;
+}

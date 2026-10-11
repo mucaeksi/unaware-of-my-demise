@@ -10,6 +10,20 @@
           "title_en": "The First Step",
           "kind": "battle",
           "encounter": "encounters/tutorial_t1.json"
+        },
+        {
+          "node_id": "t2",
+          "title_en": "A Road Forgotten",
+          "kind": "battle",
+          "encounter": "encounters/tutorial_t2.json",
+          "requires": "t1"
+        },
+        {
+          "node_id": "t3",
+          "title_en": "A Roof Before Dawn",
+          "kind": "battle",
+          "encounter": "encounters/tutorial_t3.json",
+          "requires": "t2"
         }
       ]
     },

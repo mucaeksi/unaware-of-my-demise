@@ -2,6 +2,7 @@ export * from './primitives';
 export * from './effects';
 export * from './units';
 export * from './story';
+export * from './entry';
 export * from './art';
 export * from './manifest';
 export * from './validate';

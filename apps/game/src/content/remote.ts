@@ -13,9 +13,22 @@ export class ApiRemote implements RemoteSource {
     return res.json();
   }
 
-  async fetchObject(sha256: string, _file: ManifestFile): Promise<Uint8Array> {
+  async fetchObject(sha256: string, file: ManifestFile, onBytes?: (received: number) => void): Promise<Uint8Array> {
     const res = await this.fetchImpl(`${this.base}/api/v1/content/objects/${sha256}`);
     if (!res.ok) throw new Error(`object ${sha256.slice(0, 8)} failed: HTTP ${res.status}`);
-    return new Uint8Array(await res.arrayBuffer());
+    if (!onBytes || !res.body) return new Uint8Array(await res.arrayBuffer());
+    // streamed so a big object moves the progress bar smoothly instead of in one jump
+    const reader = res.body.getReader();
+    const out = new Uint8Array(file.bytes);
+    let received = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (received + value.byteLength > out.byteLength) throw new Error(`object ${sha256.slice(0, 8)} is larger than its manifest says`);
+      out.set(value, received);
+      received += value.byteLength;
+      onBytes(received);
+    }
+    return received === out.byteLength ? out : out.slice(0, received); // a short body fails the size check in the manager
   }
 }

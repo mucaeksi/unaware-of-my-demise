@@ -410,6 +410,85 @@
         "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#bellbound_dead",
         "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
       }
+    },
+    {
+      "unit_id": "hollow_pilgrim",
+      "kind": "enemy",
+      "name_en": "Hollow Pilgrim",
+      "element": "Veil",
+      "role": "slow_vanguard",
+      "base_stats": {
+        "hp": 8,
+        "atk": 1,
+        "def": 2,
+        "spd": 3
+      },
+      "growth_per_level": {
+        "hp": 0.4,
+        "atk": 0.05,
+        "def": 0.1,
+        "spd": 0
+      },
+      "weaknesses": [
+        "Dawn",
+        "Ember"
+      ],
+      "resistances": [
+        "Veil"
+      ],
+      "skills": [
+        {
+          "skill_id": "hollow_pilgrim_basic",
+          "name_en": "Grave-Worn Strike",
+          "type": "basic",
+          "description_en": "",
+          "player_target": "none",
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "ai_priority": 10,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ]
+        },
+        {
+          "skill_id": "hollow_pilgrim_pilgrim_s_weight",
+          "name_en": "Pilgrim's Weight",
+          "type": "signature",
+          "description_en": "A slow, stubborn frontliner with high HP and a crushing step.",
+          "player_target": "none",
+          "cooldown_turns": 3,
+          "focus_cost": 0,
+          "ai_priority": 30,
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy_default",
+              "damage_type": "physical",
+              "scale_stat": "atk",
+              "multiplier": 1.5
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "self",
+              "status_id": "stoneguard",
+              "duration_turns": 1
+            }
+          ]
+        }
+      ],
+      "faction_id": "hollow_host",
+      "intent_skill_id": "hollow_pilgrim_pilgrim_s_weight",
+      "art_key": "hollow_pilgrim",
+      "provenance": {
+        "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/enemies_part1.json#hollow_pilgrim",
+        "source_sha256": "ed50deb23e1198c6eb199a4fcc42813c6ebab781f43b8c62b6c84a364e884b43"
+      }
     }
   ],
   "rules": {

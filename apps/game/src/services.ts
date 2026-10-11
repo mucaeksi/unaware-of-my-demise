@@ -3,6 +3,7 @@ import { ArtLibrary } from './content/ArtLibrary';
 import { type ContentService } from './content/ContentService';
 import { GameApi } from './net/api';
 import { type IdentityProvider } from './net/identity';
+import { PatchService } from './patch/PatchService';
 
 /** Process-wide singletons the scenes share (there is exactly one content stack per page). */
 export const Services = {
@@ -10,6 +11,8 @@ export const Services = {
   art: null as ArtLibrary | null,
   api: new GameApi(),
   identity: null as IdentityProvider | null,
+  /** first-install background download (stages the release; the restart switches it on) */
+  patches: null as unknown as PatchService,
 
   ready(): { content: ContentService; art: ArtLibrary } {
     if (!this.content || !this.art) throw new Error('services not initialised');
@@ -27,6 +30,8 @@ export const Services = {
     game.events.emit(event);
   }
 };
+
+Services.patches = new PatchService(() => Services.content);
 
 export type NodeRef = { chapterId: string; nodeId: string };
 

@@ -147,6 +147,43 @@
           222
         ]
       }
+    },
+    "atlas_hollow_pilgrim": {
+      "image": "art/atlas_hollow_pilgrim.webp",
+      "width": 1863,
+      "height": 384,
+      "frames": {
+        "basic": [
+          2,
+          2,
+          487,
+          380
+        ],
+        "idle": [
+          491,
+          2,
+          278,
+          380
+        ],
+        "hit": [
+          771,
+          2,
+          333,
+          371
+        ],
+        "active": [
+          1106,
+          2,
+          443,
+          329
+        ],
+        "defeat": [
+          1551,
+          2,
+          310,
+          307
+        ]
+      }
     }
   },
   "units": {
@@ -312,6 +349,61 @@
           "scale": 1,
           "foot_y": 0.985,
           "pivot_x": 0.486
+        }
+      }
+    },
+    "hollow_pilgrim": {
+      "atlas": "atlas_hollow_pilgrim",
+      "facing": "left",
+      "height_px": 380,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.985,
+          "pivot_x": 0.468
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.985,
+          "pivot_x": 0.468
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 0.985,
+          "pivot_x": 0.597
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 0.985,
+          "pivot_x": 0.591
+        },
+        "ultimate": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 0.985,
+          "pivot_x": 0.591
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 0.985,
+          "pivot_x": 0.473
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 0.985,
+          "pivot_x": 0.422
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 0.985,
+          "pivot_x": 0.468
         }
       }
     }

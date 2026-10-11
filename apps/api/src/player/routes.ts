@@ -15,6 +15,7 @@ import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, wri
 import { ascendGear, characterStats, dismantleGear, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
 import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
 import { deleteAccount, exportAccount } from '../account/service';
+import { EntryBody, getEntry, putEntry } from '../entry/service';
 import { activateTeam, deleteTeam, listTeams, saveTeam, TeamBody } from '../teams/service';
 import { claimTask, listTasks } from '../tasks/service';
 import { claimMail, listMail, markRead } from '../mail/service';
@@ -99,6 +100,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/gacha/*', authed);
   app.use('/api/v1/characters/*', authed);
   app.use('/api/v1/stacks', authed);
+  app.use('/api/v1/entry', authed);
   app.use('/api/v1/teams', authed);
   app.use('/api/v1/teams/*', authed);
   app.use('/api/v1/account', authed);
@@ -302,6 +304,8 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     return c.json(await upgradeSkill(c.env.DB, c.get('playerId'), id, skillId, await body(c, RequestOnly)));
   });
 
+  app.get('/api/v1/entry', async (c) => c.json({ ...(await getEntry(c.env.DB, c.get('playerId'))), playerId: c.get('playerId') }));
+  app.put('/api/v1/entry', async (c) => c.json({ ...(await putEntry(c.env.DB, c.get('playerId'), await body(c, EntryBody))), playerId: c.get('playerId') }));
   app.get('/api/v1/teams', async (c) => c.json(await listTeams(c.env.DB, c.get('playerId'))));
   app.put('/api/v1/teams/:slot', async (c) => c.json(await saveTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')), await body(c, TeamBody))));
   app.post('/api/v1/teams/:slot/activate', async (c) => c.json(await activateTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')))));

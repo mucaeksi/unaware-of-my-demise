@@ -1,8 +1,8 @@
 import { ContentManifest, type ManifestFile } from '@uomd/content-schema';
 import { compareSemver, sha256Hex, verifyPayload, type SignedPayload } from '@uomd/shared';
-import type { ActiveRelease, BaseContent, ContentStorage, PatchEnv, PatchOutcome, PatchState, RejectReason, RemoteSource } from './types';
+import type { ActiveRelease, ApplyOptions, BaseContent, ContentStorage, PatchEnv, PatchOutcome, PatchProgress, PatchState, RejectReason, RemoteSource } from './types';
 
-const EMPTY: PatchState = { schema: 1, active: null, previous: null, denied: [] };
+const EMPTY: PatchState = { schema: 1, active: null, previous: null, staged: null, denied: [] };
 
 class Reject extends Error {
   constructor(readonly reason: RejectReason, detail: string) {
@@ -29,9 +29,10 @@ export class PatchManager {
     return (await this.storage.getState()) ?? EMPTY;
   }
 
-  /** Looks for a newer release and applies it. Never throws for expected failure modes. */
-  async checkAndApply(): Promise<PatchOutcome> {
+  /** Looks for a newer release and applies (or, with `activate: false`, stages) it. Never throws for expected failure modes. */
+  async checkAndApply(opts: ApplyOptions = {}): Promise<PatchOutcome> {
     const state = await this.state();
+    opts.onProgress?.({ phase: 'checking', releaseId: null, filesDone: 0, filesTotal: 0, bytesDone: 0, bytesTotal: 0 });
     let raw: unknown | null;
     try {
       raw = await this.remote.fetchManifest(this.env.channel);
@@ -51,7 +52,11 @@ export class PatchManager {
       }
       if (manifest.release.generation <= currentGen) throw new Reject('stale_generation', `generation ${manifest.release.generation} <= active ${currentGen}`);
       if (!(await this.inRollout(manifest))) return { status: 'up_to_date', releaseId: state.active?.releaseId ?? null };
-      return await this.apply(manifest, state);
+      if (state.staged?.releaseId === manifest.release.id && opts.activate !== false) {
+        const done = await this.activateStaged(opts.onProgress);
+        if (done) return done;
+      }
+      return await this.apply(manifest, state, opts);
     } catch (e) {
       if (e instanceof Reject) return { status: 'rejected', reason: e.reason, detail: e.message };
       throw e;
@@ -87,7 +92,7 @@ export class PatchManager {
     const st = await this.state();
     if (!st.active) return false;
     const denied = st.denied.includes(st.active.releaseId) ? st.denied : [...st.denied, st.active.releaseId];
-    await this.storage.setState({ schema: 1, active: st.previous, previous: null, denied });
+    await this.storage.setState({ schema: 1, active: st.previous, previous: null, staged: st.staged ?? null, denied });
     await this.collect();
     return true;
   }
@@ -116,7 +121,9 @@ export class PatchManager {
     return parseInt(h.slice(0, 8), 16) % 100 < m.rollout.percent;
   }
 
-  private async apply(m: ContentManifest, state: PatchState): Promise<PatchOutcome> {
+  private async apply(m: ContentManifest, state: PatchState, opts: ApplyOptions): Promise<PatchOutcome> {
+    const emit = (phase: PatchProgress['phase'], p: Partial<PatchProgress> = {}): void =>
+      opts.onProgress?.({ phase, releaseId: m.release.id, filesDone: 0, filesTotal: 0, bytesDone: 0, bytesTotal: 0, ...p });
     // 1. what is missing locally? (base-identical files and already-stored objects are free)
     const missing: ManifestFile[] = [];
     for (const f of m.files) {
@@ -128,13 +135,16 @@ export class PatchManager {
 
     // 2. download + verify each object; completed objects survive an interruption (resume)
     let downloaded = 0;
-    for (const f of missing) {
-      const bytes = await this.download(f);
+    emit('downloading', { filesTotal: missing.length, bytesTotal: addBytes });
+    for (const [i, f] of missing.entries()) {
+      const bytes = await this.download(f, (received) => emit('downloading', { filesDone: i, filesTotal: missing.length, bytesDone: downloaded + received, bytesTotal: addBytes }));
       await this.storage.putObject(f.sha256, bytes);
       downloaded += bytes.byteLength;
+      emit('downloading', { filesDone: i + 1, filesTotal: missing.length, bytesDone: downloaded, bytesTotal: addBytes });
     }
 
     // 3. semantic validation of the complete file set, as it would be activated
+    emit('verifying', { filesDone: missing.length, filesTotal: missing.length, bytesDone: downloaded, bytesTotal: addBytes });
     const files = new Map<string, Uint8Array>();
     for (const f of m.files) {
       const bytes = this.base.files[f.path] === f.sha256 ? await this.base.read(f.path) : await this.storage.getObject(f.sha256);
@@ -148,25 +158,64 @@ export class PatchManager {
       throw new Reject('validation_failed', e instanceof Error ? e.message : String(e));
     }
 
-    // 4. atomic activation; the old active release becomes the rollback target
     const next: ActiveRelease = {
       releaseId: m.release.id,
       generation: m.release.generation,
       manifest: m,
       activatedAt: (this.env.now?.() ?? new Date()).toISOString()
     };
-    await this.storage.setState({ schema: 1, active: next, previous: state.active, denied: state.denied });
+    if (opts.activate === false) {
+      // parked: the objects stay in storage (kept by collect) and the next start switches it on without a network
+      await this.storage.setState({ ...state, staged: next });
+      return { status: 'staged', releaseId: next.releaseId, generation: next.generation, downloadedBytes: downloaded, downloadedFiles: missing.length };
+    }
+
+    // 4. atomic activation; the old active release becomes the rollback target
+    emit('activating', { filesDone: missing.length, filesTotal: missing.length, bytesDone: addBytes, bytesTotal: addBytes });
+    await this.storage.setState({ schema: 1, active: next, previous: state.active, staged: null, denied: state.denied });
     await this.collect();
     return { status: 'applied', releaseId: next.releaseId, generation: next.generation, downloadedBytes: downloaded, downloadedFiles: missing.length };
   }
 
-  private async download(f: ManifestFile): Promise<Uint8Array> {
+  /**
+   * Switches on the staged release without touching the network: every object must still be in storage and the semantic
+   * validation runs again over the exact file set. Returns null when nothing is staged; a broken stage is dropped (never half-applied).
+   */
+  async activateStaged(onProgress?: ApplyOptions['onProgress']): Promise<PatchOutcome | null> {
+    const state = await this.state();
+    const staged = state.staged;
+    if (!staged) return null;
+    const m = staged.manifest;
+    onProgress?.({ phase: 'activating', releaseId: m.release.id, filesDone: 0, filesTotal: m.files.length, bytesDone: 0, bytesTotal: 0 });
+    try {
+      const currentGen = state.active?.generation ?? this.base.generation;
+      if (m.release.generation <= currentGen || state.denied.includes(m.release.id)) throw new Reject('stale_generation', 'staged release is no longer newer than the active one');
+      const files = new Map<string, Uint8Array>();
+      for (const f of m.files) {
+        const bytes = this.base.files[f.path] === f.sha256 ? await this.base.read(f.path) : await this.storage.getObject(f.sha256);
+        if (!bytes || (await sha256Hex(bytes)) !== f.sha256) throw new Reject('download_failed', `staged object for ${f.path} is missing or damaged`);
+        files.set(f.path, bytes);
+      }
+      await this.env.validate(files, m, this.base);
+    } catch (e) {
+      await this.storage.setState({ ...state, staged: null });
+      await this.collect();
+      if (e instanceof Reject) return { status: 'rejected', reason: e.reason, detail: e.message };
+      return { status: 'rejected', reason: 'validation_failed', detail: e instanceof Error ? e.message : String(e) };
+    }
+    const next: ActiveRelease = { ...staged, activatedAt: (this.env.now?.() ?? new Date()).toISOString() };
+    await this.storage.setState({ schema: 1, active: next, previous: state.active, staged: null, denied: state.denied });
+    await this.collect();
+    return { status: 'applied', releaseId: next.releaseId, generation: next.generation, downloadedBytes: 0, downloadedFiles: 0 };
+  }
+
+  private async download(f: ManifestFile, onBytes?: (received: number) => void): Promise<Uint8Array> {
     const attempts = this.env.maxAttempts ?? 3;
     const sleep = this.env.sleep ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
     let last = 'unknown';
     for (let i = 1; i <= attempts; i++) {
       try {
-        const bytes = await this.remote.fetchObject(f.sha256, f);
+        const bytes = await this.remote.fetchObject(f.sha256, f, onBytes);
         if (bytes.byteLength !== f.bytes) {
           last = `size ${bytes.byteLength} != ${f.bytes}`;
         } else if ((await sha256Hex(bytes)) !== f.sha256) {
@@ -186,7 +235,7 @@ export class PatchManager {
   private async collect(): Promise<void> {
     const st = await this.state();
     const keep = new Set<string>();
-    for (const r of [st.active, st.previous]) for (const f of r?.manifest.files ?? []) keep.add(f.sha256);
+    for (const r of [st.active, st.previous, st.staged]) for (const f of r?.manifest.files ?? []) keep.add(f.sha256);
     for (const h of await this.storage.listObjects()) if (!keep.has(h)) await this.storage.deleteObject(h);
   }
 }
