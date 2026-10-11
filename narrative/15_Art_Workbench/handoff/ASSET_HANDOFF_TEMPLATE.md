@@ -13,6 +13,6 @@ This is a template, not an approved asset or a new registry entry.
 - Proposed runtime destination and stable mapping ID:
 - Inclusion: base AAB / allowed content patch / reference only:
 - Integration dependencies and acceptance criteria:
-- Godot import / relevant test result:
+- Phaser import / browser test result:
 - Actual preview screenshots / Android-device status:
 - Remaining decisions or limitations:

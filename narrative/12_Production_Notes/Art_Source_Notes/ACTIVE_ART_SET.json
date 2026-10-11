@@ -62,6 +62,6 @@
     "archive": "narrative/archive/visuals_rejected_2026-10-05",
     "current_visual_reference": "narrative/design/VISUAL_REFERENCE_BRIEF_2026-10-05.md",
     "reuse_as_final_reference": false,
-    "new_design_source": "External designer AI; owner will deliver files for Godot integration"
+    "new_design_source": "External designer AI; owner will deliver files for runtime integration"
   }
 }

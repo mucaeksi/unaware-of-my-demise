@@ -1,9 +1,0 @@
-{
-  "status": "PASS",
-  "images_loaded": 6,
-  "portrait_options": 12,
-  "interactive_atlas": "idle \u00b7 2/4 \u00b7 kaynak aday",
-  "js_errors": [],
-  "transport": "Temporary loopback HTTP for test only, closed afterwards; no external resources",
-  "file_navigation": "Managed browser policy blocks file navigation; no browser policy modified. Standard desktop can open standalone file."
-}

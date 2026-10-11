@@ -1,3 +1,5 @@
+> **2026-10-10:** The Godot mapping in this folder (scene paths, `Game.attach`, `SceneTree.quit()`, engine splash) is obsolete — Phaser 4 scenes replace it. The HTML wireframes and UI specs remain useful as *design references only*; the final UI is rebuilt with Google-generated art.
+
 # Son owner kararı — görsel tasarım devri
 
 Önceki UI/görsel adayların tamamı owner tarafından reddedildi ve [arşivlendi](../archive/visuals_rejected_2026-10-05/README.md). Yeni UI, buton, ikon ve chibi dili **yalnız owner'ın afişinden** türetilecek; eski panolar referans değildir. [Dış tasarım AI'ı için ilk prompt](../design/EXTERNAL_DESIGNER_INTRO_PROMPT_TR.md). Mevcut kod/binding altyapısı yeni assetler gelene kadar geliştirme scaffold'ıdır. Aşağıdaki uygulama kayıtları tarihseldir.

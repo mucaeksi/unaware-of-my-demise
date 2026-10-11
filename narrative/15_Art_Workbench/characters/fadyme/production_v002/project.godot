@@ -1,9 +1,0 @@
-config_version=5
-[application]
-config/name="Fadyme Sources Review Only"
-[rendering]
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
-[display]
-window/size/viewport_width=1080
-window/size/viewport_height=1920

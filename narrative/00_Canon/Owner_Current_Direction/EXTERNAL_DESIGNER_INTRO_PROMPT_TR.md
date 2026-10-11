@@ -1,3 +1,5 @@
+> **SUPERSEDED 2026-10-10 (owner decision).** The engine is **Phaser 4.2.1 (landscape 1920×1080)**; Godot is retired. All visuals, music, voice and video are **regenerated from scratch with Google models**; the old art/audio in this repository are references only. Every Godot/GDScript instruction below is historical record, not a work order. Pre-cleanup tree: branch `archive/pre-cleanup-2026-10-10`.
+
 # Unaware of My Demise — Tasarım AI’ı için ilk görev ve oyun tanıtımı
 
 Bu metin, owner'ın en son gönderdiği Gothic/anime afiş görseli **tek görsel referans olarak eklenerek** doğrudan tasarım AI’ına verilebilir. İlk devir mesajıdır; ayrıntılı karakter, ekran, sahne ve animasyon brief’leri daha sonra paylaşılır. İç hikâye bilgileri içerir; mağaza açıklaması değildir. Kaynak kontrolü: `WORLD_STORY_CHARACTER_BRIEF_2026-10-05.md`, güncel canon/lore ve Godot içerik tanımları. Önceki görsel adayların tamamı owner tarafından reddedildi.

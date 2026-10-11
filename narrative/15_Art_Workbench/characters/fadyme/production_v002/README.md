@@ -1,3 +1,5 @@
+> **2026-10-10:** The Godot scenes, resources, shaders, scripts and the Godot validation captures of this package were removed (owner decision: Phaser 4 only). Remaining Godot wording below is historical. This package is **reference material only**: the art is regenerated with Google models. Full pre-cleanup tree: branch `archive/pre-cleanup-2026-10-10`.
+
 # Fadyme · üretim paketi v002 · 2026-10-09
 
 Kapsam: **yalnız asset/tasarım üretimi**. Oyun, runtime manifestleri, sahne akışı ve AAB değiştirilmedi. Yeni kaynaklar tasarım adayıdır; kullanıcı onayı uydurulmadı. Claude entegrasyonu ve sonraki buildleri yapar. [Yerel görsel inceleme](index.html) portre seçimi ve yürüme/bekleme animasyonu içerir; dosya olarak açılır, sunucu/uzaktan oturum gerektirmez.

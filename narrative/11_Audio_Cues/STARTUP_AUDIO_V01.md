@@ -1,3 +1,5 @@
+> **Archived 2026-10-10:** historical v01 record of the retired Godot engine splash. The Phaser build has no engine splash; the active studio flow is `STUDIO_SPLASH_V02.md` (its Godot-logo steps are likewise obsolete).
+
 # Godot → stüdyo → title ve gelecekteki ana tema — v01
 
 **Tarihsel v01 kaydı.** Owner’ın ek Godot yazılı sayfa ve düz stüdyo yazısını düzeltme isteğiyle aktif akış [SovTaym logolu açılış v02](STUDIO_SPLASH_V02.md) olarak güncellendi: Godot’un native logosu → logolu studio → mevcut title. Aşağıdaki v01 süreleri/görüntüleri kendi ilk commit aşamasına aittir.

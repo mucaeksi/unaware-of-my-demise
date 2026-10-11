@@ -14,7 +14,7 @@ Confidence:
 ### Visual Assets
 - Source path:
 - Intended use:
-- Godot destination:
+- Runtime destination (Phaser content id / R2 path):
 
 ### Audio / Voice
 - Source path:

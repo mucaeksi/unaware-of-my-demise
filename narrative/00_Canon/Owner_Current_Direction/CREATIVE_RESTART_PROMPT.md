@@ -1,3 +1,5 @@
+> **SUPERSEDED 2026-10-10 (owner decision).** The engine is **Phaser 4.2.1 (landscape 1920×1080)**; Godot is retired. All visuals, music, voice and video are **regenerated from scratch with Google models**; the old art/audio in this repository are references only. Every Godot/GDScript instruction below is historical record, not a work order. Pre-cleanup tree: branch `archive/pre-cleanup-2026-10-10`.
+
 > **Son karar (2026-10-05): Önceki bütün görsel adaylar reddedildi. Görsel üretim başka AI’a devredildi; bu eski promptun yeni görsel üretim sırası artık aktif görev değildir. Güncel iş: [devir promptu](EXTERNAL_DESIGNER_INTRO_PROMPT_TR.md), [tek stil referansı](VISUAL_REFERENCE_BRIEF_2026-10-05.md), ardından owner’ın göndereceği assetlerin Godot entegrasyonu.**
 
 # Unaware of My Demise — sanat, UI ve Godot entegrasyonu başlangıç promptu
