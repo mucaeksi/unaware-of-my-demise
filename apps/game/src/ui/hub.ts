@@ -24,9 +24,8 @@ export abstract class HubScene extends Phaser.Scene {
   create(): void {
     this.cameras.main.setBackgroundColor(0x0a0610);
     const { art } = Services.ready();
-    const bg = this.add.image(REF_W / 2, REF_H / 2, art.background('forest_whispering_ash'));
-    bg.setScale(Math.max(REF_W / bg.width, REF_H / bg.height));
-    this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x0a0610, 0.88);
+    void art.addBackdrop(this, 'forest_whispering_ash', -20);
+    this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x0a0610, 0.88).setDepth(-10);
     sceneFadeIn(this, 350);
     title(this, REF_W / 2, 70, this.heading, 60, T.gold);
     new Button(this, 190, REF_H - 80, { label: 'BACK', w: 300, h: 110, onClick: () => this.goBack() });

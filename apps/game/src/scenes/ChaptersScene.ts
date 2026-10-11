@@ -16,9 +16,8 @@ export class ChaptersScene extends Phaser.Scene {
   async create(): Promise<void> {
     const { content, art } = Services.ready();
     this.cameras.main.setBackgroundColor(0x0a0610);
-    const bg = this.add.image(REF_W / 2, REF_H / 2, art.background('forest_whispering_ash'));
-    bg.setScale(Math.max(REF_W / bg.width, REF_H / bg.height));
-    this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x0a0610, 0.82);
+    void art.addBackdrop(this, 'forest_whispering_ash', -20);
+    this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x0a0610, 0.82).setDepth(-10);
     sceneFadeIn(this, 400);
     title(this, REF_W / 2, 100, 'CHAPTERS', 64, T.gold);
 

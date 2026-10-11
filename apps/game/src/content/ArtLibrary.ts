@@ -109,6 +109,23 @@ export class ArtLibrary {
     await this.run(scene, [{ type: 'image', key: ref.key, url: ref.url }]);
   }
 
+  /**
+   * Adds a full-screen backdrop behind a scene. The art library is rebuilt after every content patch, so a scene must not assume an
+   * earlier scene already loaded the image: this loads it (a no-op when the texture exists) and never throws, so a missing or failed
+   * background leaves the plain dark backdrop instead of crashing the screen.
+   */
+  async addBackdrop(scene: Phaser.Scene, location: string, depth = -20): Promise<Phaser.GameObjects.Image | null> {
+    try {
+      await this.loadBackground(scene, location);
+      if (!scene.sys.isActive()) return null;
+      const img = scene.add.image(1920 / 2, 1080 / 2, this.background(location)).setDepth(depth);
+      img.setScale(Math.max(1920 / img.width, 1080 / img.height));
+      return img;
+    } catch {
+      return null;
+    }
+  }
+
   background(location: string): string {
     const k = this.bgKeys.get(location);
     if (!k) throw new Error(`background ${location} not loaded`);
