@@ -33,7 +33,11 @@ export const TargetSelector = z.enum([
   'lowest_hp_rear_enemy',
   'all_enemy_allies',
   'lowest_hp_enemy_ally',
-  'most_injured_enemy_ally'
+  'most_injured_enemy_ally',
+  'boss',
+  'duel_marked_enemy',
+  'self_and_enemy_guards',
+  'boss_and_enemy_guards'
 ]);
 export type TargetSelector = z.infer<typeof TargetSelector>;
 
@@ -97,7 +101,10 @@ export const EffectOp = z.discriminatedUnion('op', [
       can_trigger_passives: z.boolean().optional(),
       /** Damage that hits a shield depletes it this many times faster. */
       shield_damage_multiplier: z.number().min(1).max(5).optional(),
-      modifiers: z.array(DamageModifier).max(4).optional()
+      modifiers: z.array(DamageModifier).max(4).optional(),
+      /** Boss mechanics: stronger while a named objective still stands / while every objective of the phase still stands. */
+      multiplier_if_objective_alive: z.object({ objective_id: Id, multiplier: z.number().positive().max(5) }).strict().optional(),
+      multiplier_if_all_objectives_alive: z.object({ multiplier: z.number().positive().max(5) }).strict().optional()
     })
     .strict(),
   z.object({ op: z.literal('heal'), ...base, scale_stat: ScaleStat, multiplier: Mult }).strict(),
@@ -247,7 +254,26 @@ export const EffectOp = z.discriminatedUnion('op', [
       duration_turns: Turns
     })
     .strict(),
-  z.object({ op: z.literal('remove_shield'), ...base, amount_fraction: z.number().min(0).max(1) }).strict()
+  z
+    .object({ op: z.literal('remove_shield'), ...base, amount_fraction: z.number().min(0).max(1).optional(), shield_source_id: Id.optional() })
+    .strict()
+    .refine((o) => (o.amount_fraction === undefined) !== (o.shield_source_id === undefined), 'remove_shield needs exactly one of amount_fraction / shield_source_id'),
+  // ---- boss mechanics (objectives, telegraphs, wards, reinforcements)
+  z.object({ op: z.literal('cancel_boss_telegraph'), ...base, action_id: Id }).strict(),
+  z.object({ op: z.literal('remove_boss_modifier'), ...base, modifier_id: Id }).strict(),
+  z
+    .object({
+      op: z.literal('boss_damage_taken_modifier'),
+      ...base,
+      multiplier: z.number().min(0).max(1),
+      modifier_id: Id,
+      until_objective_destroyed: Id.optional(),
+      while_any_objective_alive: z.array(Id).min(1).max(6).optional()
+    })
+    .strict(),
+  z.object({ op: z.literal('summon_enemies'), ...base, enemy_id: Id, count: z.number().int().min(1).max(4), only_if_objective_alive: Id.optional() }).strict(),
+  z.object({ op: z.literal('remove_copied_statuses'), ...base, category: z.enum(['buff', 'shield']) }).strict(),
+  z.object({ op: z.literal('clear_status_if_all_objectives_destroyed'), ...base, objective_ids: z.array(Id).min(1).max(6), status_id: Id }).strict()
 ]);
 export type EffectOp = z.infer<typeof EffectOp>;
 

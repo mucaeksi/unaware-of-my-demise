@@ -135,7 +135,7 @@ export class BattleScene extends Phaser.Scene {
 
     const defs = new Map(this.pack.units.map((u) => [u.unit_id, u]));
     for (const side of ['player', 'enemy'] as const) {
-      const list = this.battle.combatants.filter((c) => c.side === side);
+      const list = this.battle.combatants.filter((c) => c.side === side && !c.objective); // objectives and the boss telegraph need their own presentation (UI stage)
       for (const row of ['front', 'rear'] as const) {
         const inRow = list.filter((c) => c.row === row).sort((a, b) => a.slot - b.slot);
         inRow.forEach((c, i) => {

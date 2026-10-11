@@ -1,9 +1,10 @@
-import type { ContinuousModifier, EffectOp, Element, Encounter, EventHook, HookEvent, Predicate, RulesDef, SkillDef, StatusDef, TargetSelector, UnitDef, UnitPack } from '@uomd/content-schema';
+import type { BossObjective, ContinuousModifier, EffectOp, Element, Encounter, EventHook, HookEvent, Predicate, RulesDef, SkillDef, StatusDef, TargetSelector, UnitDef, UnitPack } from '@uomd/content-schema';
 import { Rng } from '@uomd/shared';
 import {
   IllegalActionError,
   type BattleEvent,
   type BattleResult,
+  type BossModifier,
   type Combatant,
   type PlayerAction,
   type Row,
@@ -92,6 +93,7 @@ export class Battle {
   private readonly rng: Rng;
   private statusSeq = 0;
   private actionSeq = 0;
+  private readonly defs = new Map<string, UnitDef>();
   private round = 1;
   private readonly actedThisRound = new Set<string>();
   private readonly actionMarks = new Map<string, number>();
@@ -105,7 +107,8 @@ export class Battle {
     this.rules = pack.rules;
     for (const s of pack.rules.statuses) this.statusDefs.set(s.status_id, s);
     this.rng = new Rng(encounter.seed);
-    const defs = new Map<string, UnitDef>(pack.units.map((u) => [u.unit_id, u]));
+    for (const u of pack.units) this.defs.set(u.unit_id, u);
+    const defs = this.defs;
     const slotsSeen = new Set<string>();
     const add = (side: Side, e: Encounter['party'][number]): void => {
       const def = defs.get(e.unit_id);
@@ -119,6 +122,7 @@ export class Battle {
     for (const e of encounter.enemies) add('enemy', e);
     this.startingPlayers = encounter.party.length;
     this.log.push({ type: 'battle_start', seed: encounter.seed });
+    for (const c of [...this.combatants]) if (c.def.boss) this.initBoss(c);
   }
 
   static create(pack: UnitPack, encounter: Encounter): Battle {
@@ -167,7 +171,10 @@ export class Battle {
       hookTurnCount: {},
       hookRoundCount: {},
       hookTargetCount: {},
-      alive: true
+      alive: true,
+      boss: null,
+      objective: null,
+      weaknessOverride: null
     };
   }
 
@@ -184,7 +191,7 @@ export class Battle {
   }
 
   living(side: Side): Combatant[] {
-    return this.combatants.filter((c) => c.side === side && c.alive).sort((a, b) => a.slot - b.slot);
+    return this.combatants.filter((c) => c.side === side && c.alive && !c.objective).sort((a, b) => a.slot - b.slot);
   }
 
   private opponents(c: Combatant): Combatant[] {
@@ -283,7 +290,10 @@ export class Battle {
     const front = opp.filter((o) => o.row === 'front');
     const pool = front.length > 0 ? front : opp;
     const taunter = this.tauntSource(actor);
-    return taunter ? [taunter] : pool;
+    if (taunter) return [taunter];
+    // breakable objectives of the other side are always legal targets (they are never behind anyone)
+    const objectives = this.combatants.filter((c) => c.alive && c.objective?.targetable && c.side !== actor.side);
+    return [...pool, ...objectives];
   }
 
   /** An opposing unit whose opening guard has not yet caught this actor's first single-target attack. */
@@ -302,7 +312,7 @@ export class Battle {
   }
 
   private pickDefaultTarget(actor: Combatant): Combatant | null {
-    const legal = this.legalEnemyTargets(actor);
+    const legal = this.legalEnemyTargets(actor).filter((c) => !c.objective);
     return [...legal].sort((a, b) => a.hp / a.maxHp - b.hp / b.maxHp || a.slot - b.slot || (a.id < b.id ? -1 : 1))[0] ?? null;
   }
 
@@ -311,7 +321,8 @@ export class Battle {
   elementMultiplier(attackerElement: Element, target: Combatant): number {
     const el = this.rules.element;
     const t = target.def;
-    if (t.weaknesses?.includes(attackerElement)) return el.weakness;
+    if (target.objective) return el.neutral;
+    if ((target.weaknessOverride ?? t.weaknesses)?.includes(attackerElement)) return el.weakness;
     if (t.resistances?.includes(attackerElement)) return el.resistance;
     for (const [a, b] of el.mutual_pairs) {
       if ((attackerElement === a && t.element === b) || (attackerElement === b && t.element === a)) return el.advantage;
@@ -332,7 +343,7 @@ export class Battle {
   }
 
   private pickNextActor(): Combatant {
-    const live = this.combatants.filter((c) => c.alive);
+    const live = this.combatants.filter((c) => c.alive && !c.objective);
     let minTicks = Infinity;
     for (const c of live) {
       const need = this.threshold(c) - c.gauge;
@@ -356,7 +367,7 @@ export class Battle {
 
   /** Previews the order of the next N actions without mutating state (for the turn-order bar). */
   previewOrder(count: number): string[] {
-    const live = this.combatants.filter((c) => c.alive);
+    const live = this.combatants.filter((c) => c.alive && !c.objective);
     const g = new Map(live.map((c) => [c.id, c.gauge]));
     const pending = new Map(live.map((c) => [c.id, c.pendingDelay]));
     const out: string[] = [];
@@ -401,6 +412,7 @@ export class Battle {
     const actor = this.current;
     if (!actor) throw new IllegalActionError('no player turn is pending');
     const skill = this.validate(actor, action);
+    for (const c of this.combatants) if (c.alive && c.boss?.telegraph) c.boss.telegraph.actionsSeen++;
     this.executeSkill(actor, skill, skill.player_target !== 'none' ? this.unit(action.targetId as string) : null);
     this.finishTurn(actor);
     this.current = null;
@@ -439,6 +451,11 @@ export class Battle {
       const skipReason = this.consumeSkip(actor);
       if (skipReason) {
         this.emit({ type: 'turn_skipped', actor: actor.id, reason: skipReason });
+        const pending = actor.boss?.telegraph;
+        if (pending && actor.boss) {
+          const sk = actor.def.skills.find((k) => k.skill_id === pending.skillId);
+          if (sk?.telegraph?.interruptible_by_control !== false) this.cancelTelegraph(actor, 'control');
+        }
         this.finishTurn(actor);
         continue;
       }
@@ -450,12 +467,15 @@ export class Battle {
         this.current = actor;
         continue;
       }
-      const skill = this.chooseEnemySkill(actor);
-      if (!skill) {
-        this.emit({ type: 'turn_skipped', actor: actor.id, reason: 'no_usable_skill' });
-      } else {
-        const target = skill.player_target === 'enemy' ? this.pickDefaultTarget(actor) : null;
-        this.executeSkill(actor, skill, target);
+      if (actor.boss) this.bossAct(actor);
+      else {
+        const skill = this.chooseEnemySkill(actor);
+        if (!skill) {
+          this.emit({ type: 'turn_skipped', actor: actor.id, reason: 'no_usable_skill' });
+        } else {
+          const target = skill.player_target === 'enemy' ? this.pickDefaultTarget(actor) : null;
+          this.executeSkill(actor, skill, target);
+        }
       }
       this.finishTurn(actor);
     }
@@ -469,6 +489,7 @@ export class Battle {
   private finishTurn(actor: Combatant): void {
     actor.gauge -= this.threshold(actor);
     actor.pendingDelay = 0;
+    this.processTransitions();
     this.checkEnd();
     if (!this.outcome) this.trackRound(actor);
   }
@@ -479,7 +500,7 @@ export class Battle {
    */
   private trackRound(actor: Combatant): void {
     this.actedThisRound.add(actor.id);
-    if (!this.combatants.every((c) => !c.alive || this.actedThisRound.has(c.id))) return;
+    if (!this.combatants.every((c) => !c.alive || c.objective || this.actedThisRound.has(c.id))) return;
     this.fire('after_round_end', { actor: null, target: null, actionKind: null, actionId: 0, packet: null });
     this.emit({ type: 'round_end', round: this.round });
     this.round++;
@@ -578,7 +599,8 @@ export class Battle {
   }
 
   private chooseEnemySkill(actor: Combatant): SkillDef | null {
-    const candidates = actor.def.skills.filter((s) => s.type !== 'passive' && this.usable(actor, s).ok);
+    const phaseId = actor.boss ? actor.def.boss?.phases[actor.boss.phase]?.phase_id : undefined;
+    const candidates = actor.def.skills.filter((s) => s.type !== 'passive' && this.usable(actor, s).ok && (!s.phase_ids || (phaseId !== undefined && s.phase_ids.includes(phaseId))));
     candidates.sort((a, b) => b.ai_priority - a.ai_priority);
     return candidates[0] ?? null;
   }
@@ -624,7 +646,7 @@ export class Battle {
     const ok = prompt.options.filter((o) => o.available);
     const target = (o: SkillOption): PlayerAction => {
       if (!o.needsTarget) return { skillId: o.skillId };
-      const t = [...o.legalTargets.map((id) => this.unit(id))].sort((a, b) => a.hp / a.maxHp - b.hp / b.maxHp || a.slot - b.slot || (a.id < b.id ? -1 : 1))[0];
+      const t = [...this.autoPool(o.legalTargets.map((id) => this.unit(id)))].sort((a, b) => a.hp / a.maxHp - b.hp / b.maxHp || a.slot - b.slot || (a.id < b.id ? -1 : 1))[0];
       if (!t) throw new IllegalActionError('no legal target');
       return { skillId: o.skillId, targetId: t.id };
     };
@@ -797,6 +819,18 @@ export class Battle {
         return this.allies(a);
       case 'lowest_hp_enemy_ally':
         return this.byLowestHp(this.allies(a).filter((c) => c !== a)).slice(0, 1);
+      case 'boss': {
+        const b = this.allies(a).find((c) => c.def.boss);
+        return b ? [b] : [];
+      }
+      case 'duel_marked_enemy': {
+        const marked = opp().filter((c) => this.hasStatus(c, 'duel_mark'));
+        const t = marked[0] ?? this.pickDefaultTarget(a);
+        return t ? [t] : [];
+      }
+      case 'self_and_enemy_guards':
+      case 'boss_and_enemy_guards':
+        return this.allies(a);
       case 'most_injured_enemy_ally':
         return [...this.allies(a).filter((c) => c !== a)].sort((x, y) => x.hp / x.maxHp - y.hp / y.maxHp || x.slot - y.slot || (x.id < y.id ? -1 : 1)).slice(0, 1);
     }
@@ -928,7 +962,7 @@ export class Battle {
       case 'grant_shield': {
         for (const t of targets) {
           const amount = Math.max(1, Math.floor(this.scale(ctx.actor, op.scale_stat) * op.multiplier));
-          t.shields.push({ amount, turnsLeft: op.duration_turns });
+          t.shields.push(op.shield_source_id ? { amount, turnsLeft: op.duration_turns, sourceId: op.shield_source_id } : { amount, turnsLeft: op.duration_turns });
           this.emit({ type: 'shield', source: ctx.actor.id, target: t.id, amount });
         }
         break;
@@ -1058,13 +1092,68 @@ export class Battle {
       case 'remove_shield': {
         for (const t of targets) {
           let removed = 0;
-          for (const s of t.shields) {
-            const cut = Math.min(s.amount, Math.max(1, Math.ceil(s.amount * op.amount_fraction - 1e-9)));
-            s.amount -= cut;
-            removed += cut;
+          if (op.shield_source_id !== undefined) {
+            for (const sh of t.shields) if (sh.sourceId === op.shield_source_id) removed += sh.amount;
+            t.shields = t.shields.filter((sh) => sh.sourceId !== op.shield_source_id);
+          } else {
+            const fraction = op.amount_fraction ?? 0;
+            for (const sh of t.shields) {
+              const cut = Math.min(sh.amount, Math.max(1, Math.ceil(sh.amount * fraction - 1e-9)));
+              sh.amount -= cut;
+              removed += cut;
+            }
+            t.shields = t.shields.filter((sh) => sh.amount > 0);
           }
-          t.shields = t.shields.filter((s) => s.amount > 0);
           if (removed > 0) this.emit({ type: 'shield_removed', unit: t.id, amount: removed });
+        }
+        break;
+      }
+      case 'cancel_boss_telegraph': {
+        for (const t of targets) if (t.boss?.telegraph?.skillId === op.action_id) this.cancelTelegraph(t, 'objective');
+        break;
+      }
+      case 'remove_boss_modifier': {
+        for (const t of targets) if (t.boss) t.boss.modifiers = t.boss.modifiers.filter((m) => m.id !== op.modifier_id);
+        break;
+      }
+      case 'boss_damage_taken_modifier': {
+        for (const t of targets) {
+          if (!t.boss) continue;
+          t.boss.modifiers = t.boss.modifiers.filter((m) => m.id !== op.modifier_id);
+          const mod: BossModifier = { id: op.modifier_id, mult: op.multiplier };
+          if (op.until_objective_destroyed !== undefined) mod.untilObjective = op.until_objective_destroyed;
+          if (op.while_any_objective_alive !== undefined) mod.whileAny = op.while_any_objective_alive;
+          t.boss.modifiers.push(mod);
+        }
+        break;
+      }
+      case 'summon_enemies': {
+        if (op.only_if_objective_alive !== undefined && !this.objectiveAlive(op.only_if_objective_alive)) break;
+        for (const t of targets) this.summon(t, op.enemy_id, op.count);
+        break;
+      }
+      case 'remove_copied_statuses': {
+        for (const t of targets) {
+          if (op.category === 'shield') {
+            const before = t.shields.length;
+            t.shields = t.shields.filter((sh) => !sh.copied);
+            if (t.shields.length < before) this.emit({ type: 'shield_removed', unit: t.id, amount: 0 });
+          } else {
+            for (const st of t.statuses.filter((x) => x.copied)) {
+              t.statuses.splice(t.statuses.indexOf(st), 1);
+              this.emit({ type: 'status_removed', target: t.id, status: st.statusId, reason: 'cleansed' });
+            }
+          }
+        }
+        break;
+      }
+      case 'clear_status_if_all_objectives_destroyed': {
+        if (!op.objective_ids.every((id) => !this.objectiveAlive(id))) break;
+        for (const t of targets) {
+          const st = t.statuses.find((x) => x.statusId === op.status_id);
+          if (!st) continue;
+          t.statuses.splice(t.statuses.indexOf(st), 1);
+          this.emit({ type: 'status_removed', target: t.id, status: op.status_id, reason: 'cleansed' });
         }
         break;
       }
@@ -1077,7 +1166,7 @@ export class Battle {
     if (category === 'shield') {
       for (const s of [...source.shields].sort((a, b) => b.amount - a.amount)) {
         if (left-- <= 0) break;
-        target.shields.push({ amount: s.amount, turnsLeft: duration });
+        target.shields.push({ amount: s.amount, turnsLeft: duration, copied: true });
         this.emit({ type: 'buff_copied', source: source.id, target: target.id, what: 'shield' });
       }
       return;
@@ -1085,6 +1174,8 @@ export class Battle {
     for (const s of source.statuses.filter((x) => this.statusDefs.get(x.statusId)?.category === 'buff').sort((a, b) => a.seq - b.seq)) {
       if (left-- <= 0) return;
       this.applyStatus(target, target, s.statusId, duration);
+      const copy = target.statuses.find((x) => x.statusId === s.statusId);
+      if (copy) copy.copied = true;
       this.emit({ type: 'buff_copied', source: source.id, target: target.id, what: s.statusId });
     }
     for (const m of source.mods.filter((x) => x.amount > 0)) {
@@ -1107,6 +1198,7 @@ export class Battle {
     if (!def) throw new Error(`unknown status ${statusId}`);
     if (target.def.status_immunities?.includes(statusId)) return;
     if (target.statuses.some((s) => this.statusDefs.get(s.statusId)?.immune_status_ids?.includes(statusId))) return;
+    if (target.def.boss && def.category === 'control') turns = Math.max(1, Math.floor(turns * target.def.boss.control_duration_multiplier + 1e-9));
     const power = def.dot_atk_multiplier !== undefined ? this.effStat(source, 'atk') : undefined;
     const existing = target.statuses.find((s) => s.statusId === statusId);
     if (existing) {
@@ -1150,6 +1242,7 @@ export class Battle {
 
   private dealDamage(ctx: Ctx, target: Combatant, op: Extract<EffectOp, { op: 'damage' }>, element: Element, single: boolean): void {
     if (!target.alive) return;
+    if (target.objective) return this.hitObjective(ctx, target);
     const attacker = ctx.actor;
     const defStat = op.damage_type === 'physical' ? this.effStat(target, 'def') : this.effStat(target, 'res');
     const elementMult = this.elementMultiplier(element, target);
@@ -1162,6 +1255,11 @@ export class Battle {
     }
     // per-target conditional multipliers of the op itself
     let mult = op.multiplier;
+    if (op.multiplier_if_objective_alive && this.objectiveAlive(op.multiplier_if_objective_alive.objective_id)) mult *= op.multiplier_if_objective_alive.multiplier;
+    if (op.multiplier_if_all_objectives_alive) {
+      const mine = this.combatants.filter((c) => c.objective?.bossId === attacker.id);
+      if (mine.length > 0 && mine.every((c) => c.alive)) mult *= op.multiplier_if_all_objectives_alive.multiplier;
+    }
     if (op.modifiers) {
       const saved = ctx.eventTarget;
       ctx.eventTarget = target;
@@ -1222,8 +1320,9 @@ export class Battle {
       reduction *= r.mult;
       if (r.hitsLeft !== undefined && --r.hitsLeft <= 0) target.reductions.splice(target.reductions.indexOf(r), 1);
     }
+    const bossWard = target.boss ? this.bossWard(target) : 1;
     const raw =
-      base * elementTaken * (1 + reaction) * (attackKind && ctx.attackBonus !== null ? ctx.attackBonus : 1) * packet.outMult * packet.inMult * guard * reduction;
+      base * bossWard * elementTaken * (1 + reaction) * (attackKind && ctx.attackBonus !== null ? ctx.attackBonus : 1) * packet.outMult * packet.inMult * guard * reduction;
     const dmg = Math.max(1, Math.floor(raw + 1e-9));
     ctx.lastDamage = dmg;
     ctx.lastDamageTarget = target;
@@ -1307,7 +1406,18 @@ export class Battle {
       if (s.amount <= 0) target.shields.shift();
     }
     const hpBefore = target.hp;
-    target.hp = Math.max(0, target.hp - remaining);
+    let nextHp = Math.max(0, target.hp - remaining);
+    // a boss phase bar cannot run out: crossing the next phase threshold (or emptying) starts the change instead
+    const bossState = target.boss;
+    const nextPhase = bossState ? target.def.boss?.phases[bossState.phase + 1] : undefined;
+    if (bossState && nextPhase) {
+      const threshold = Math.floor(target.maxHp * (nextPhase.transition_hp_percent ?? 0.5) + 1e-9);
+      if (bossState.transitionPending || nextHp <= threshold) {
+        bossState.transitionPending = true;
+        nextHp = Math.max(1, nextHp);
+      }
+    }
+    target.hp = nextHp;
     const ev: BattleEvent = {
       type: 'damage',
       source: source.id,
@@ -1354,6 +1464,188 @@ export class Battle {
       this.fire('ally_damaged', info);
       this.fire('ally_hp_threshold_crossed', info);
     }
+  }
+
+  // ---------------------------------------------------------------- bosses
+
+  private initBoss(c: Combatant): void {
+    c.boss = { phase: -1, baseHp: c.maxHp, baseAtk: c.base.atk, baseDef: c.base.def, modifiers: [], telegraph: null, transitionPending: false };
+    this.enterPhase(c, 0);
+  }
+
+  /** A phase is a fresh HP bar (level-scaled base x multiplier) with its own stats, weaknesses, objectives and opening ops. */
+  private enterPhase(c: Combatant, idx: number): void {
+    const bossDef = c.def.boss;
+    const st = c.boss;
+    const phase = bossDef?.phases[idx];
+    if (!bossDef || !st || !phase) return;
+    if (idx > 0) {
+      for (const s of [...c.statuses]) {
+        if (this.statusDefs.get(s.statusId)?.category !== bossDef.clear_status_category || bossDef.preserve_status_ids.includes(s.statusId)) continue;
+        c.statuses.splice(c.statuses.indexOf(s), 1);
+        this.emit({ type: 'status_removed', target: c.id, status: s.statusId, reason: 'cleansed' });
+      }
+      c.mods = c.mods.filter((m) => m.amount >= 0);
+      for (const o of this.combatants) {
+        if (o.objective?.bossId === c.id && !o.objective.persists && o.alive) o.alive = false;
+      }
+    }
+    st.phase = idx;
+    st.transitionPending = false;
+    c.maxHp = Math.max(1, roundHalfUp(st.baseHp * phase.hp_multiplier));
+    c.hp = c.maxHp;
+    c.base.atk = Math.max(0, roundHalfUp(st.baseAtk * phase.atk_multiplier));
+    c.base.def = Math.max(0, roundHalfUp(st.baseDef * phase.def_multiplier));
+    c.weaknessOverride = phase.weaknesses;
+    for (const obj of phase.objectives) {
+      if (!this.combatants.some((o) => o.objective?.objectiveId === obj.objective_id && o.objective.bossId === c.id)) this.spawnObjective(c, obj);
+    }
+    this.emit({ type: 'phase_change', unit: c.id, phase: phase.phase_id, hp: c.hp, maxHp: c.maxHp });
+    const ctx = this.newCtx(c, c.def.skills[0] as SkillDef, { suppressHooks: true });
+    for (const op of phase.enter_ops) this.applyOp(op, ctx);
+    for (const op of phase.passive_ops) this.applyOp(op, ctx);
+  }
+
+  private spawnObjective(boss: Combatant, obj: BossObjective): void {
+    const def: UnitDef = {
+      unit_id: obj.objective_id,
+      kind: 'enemy',
+      name_en: obj.name_en,
+      element: 'Dawn',
+      role: 'objective',
+      base_stats: { hp: obj.max_hp, atk: 0, def: 0, spd: 1 },
+      skills: [{ skill_id: 'objective_idle', name_en: '-', type: 'basic', description_en: '', player_target: 'none', cooldown_turns: 0, focus_cost: 0, ai_priority: 0, effect_ops: [] }],
+      art_key: obj.objective_id,
+      provenance: { source: 'objective' }
+    };
+    const used = this.combatants.filter((c) => c.objective).length;
+    const o = this.makeCombatant(def, boss.side, 10 + used, 'front', boss.level);
+    o.objective = { objectiveId: obj.objective_id, bossId: boss.id, targetable: obj.targetable_by_player, persists: obj.persists_across_phases === true };
+    this.combatants.push(o);
+  }
+
+  private objectiveAlive(objectiveId: string): boolean {
+    return this.combatants.some((c) => c.objective?.objectiveId === objectiveId && c.alive);
+  }
+
+  /** Product of the boss-side damage-taken multipliers whose objective condition still holds. */
+  private bossWard(boss: Combatant): number {
+    let m = 1;
+    for (const mod of boss.boss?.modifiers ?? []) {
+      if (mod.untilObjective !== undefined && !this.objectiveAlive(mod.untilObjective)) continue;
+      if (mod.whileAny !== undefined && !mod.whileAny.some((id) => this.objectiveAlive(id))) continue;
+      m *= mod.mult;
+    }
+    return m;
+  }
+
+  /** Every damaging hit aimed at an objective removes one point of its integrity, whatever the attacker's numbers. */
+  private hitObjective(ctx: Ctx, o: Combatant): void {
+    o.hp = Math.max(0, o.hp - 1);
+    this.emit({ type: 'damage', source: ctx.actor.id, target: o.id, amount: 1, absorbed: 0, hpAfter: o.hp, crit: false, elementMultiplier: 1 });
+    if (o.hp > 0) return;
+    o.alive = false;
+    this.emit({ type: 'defeat', unit: o.id });
+    const info = o.objective;
+    if (!info) return;
+    const boss = this.combatants.find((c) => c.id === info.bossId);
+    this.emit({ type: 'objective_destroyed', objective: info.objectiveId, boss: info.bossId });
+    if (!boss?.alive || !boss.boss) return;
+    const phases = boss.def.boss?.phases ?? [];
+    const def = phases.flatMap((p) => p.objectives).find((x) => x.objective_id === info.objectiveId);
+    const bctx = this.newCtx(boss, boss.def.skills[0] as SkillDef, { suppressHooks: true });
+    for (const op of def?.on_destroyed ?? []) this.applyOp(op, bctx);
+    const pending = boss.boss.telegraph;
+    const tel = pending ? boss.def.skills.find((k) => k.skill_id === pending.skillId)?.telegraph : undefined;
+    if (pending && tel) {
+      const all = tel.interrupt_if_all_objectives_destroyed;
+      if (tel.interrupt_if_objective_destroyed === info.objectiveId || (all && all.every((id) => !this.objectiveAlive(id)))) this.cancelTelegraph(boss, 'objective');
+    }
+  }
+
+  private cancelTelegraph(boss: Combatant, reason: string): void {
+    const pending = boss.boss?.telegraph;
+    if (!boss.boss || !pending) return;
+    boss.boss.telegraph = null;
+    const skill = boss.def.skills.find((k) => k.skill_id === pending.skillId);
+    // an interrupted signature is spent: it goes on cooldown as if it had been used
+    if (skill && skill.cooldown_turns > 0) boss.cooldowns[skill.skill_id] = skill.cooldown_turns;
+    this.emit({ type: 'telegraph_cancelled', unit: boss.id, skill: pending.skillId, reason });
+  }
+
+  /** Boss turn: announce a telegraphed signature, resolve one announced earlier, or act normally. */
+  private bossAct(boss: Combatant): void {
+    const st = boss.boss;
+    if (!st) return;
+    const pending = st.telegraph;
+    if (pending) {
+      const sk = boss.def.skills.find((k) => k.skill_id === pending.skillId);
+      if (sk && pending.actionsSeen >= pending.actionsNeeded) {
+        st.telegraph = null;
+        this.executeSkill(boss, sk, null);
+        return;
+      }
+      // the player has not had its action yet: the boss keeps pressure with a plain strike and the intent stays
+      const basic = boss.def.skills.find((k) => k.type === 'basic');
+      if (basic) this.executeSkill(boss, basic, null);
+      return;
+    }
+    const skill = this.chooseEnemySkill(boss);
+    if (!skill) {
+      this.emit({ type: 'turn_skipped', actor: boss.id, reason: 'no_usable_skill' });
+      return;
+    }
+    const need = skill.telegraph?.player_actions_before_resolution ?? 0;
+    if (need > 0) {
+      st.telegraph = { skillId: skill.skill_id, actionsNeeded: need, actionsSeen: 0 };
+      const ctx = this.newCtx(boss, skill, { actionKind: skill.type === 'passive' ? null : (skill.type as ActionKind) });
+      const first = skill.effect_ops[0];
+      const targets = first ? this.resolve(first.target_selector_id, ctx, true) : [];
+      this.emit({ type: 'telegraph', unit: boss.id, skill: skill.skill_id, skillName: skill.name_en, targets: targets.map((t) => t.id), actionsNeeded: need });
+      return;
+    }
+    this.executeSkill(boss, skill, null);
+  }
+
+  /** Phase changes wait for the end of the action that caused them: any announced intent resolves first, then the next phase begins. */
+  private processTransitions(): void {
+    for (const boss of [...this.combatants]) {
+      if (!boss.alive || !boss.boss?.transitionPending) continue;
+      const pending = boss.boss.telegraph;
+      if (pending) {
+        const sk = boss.def.skills.find((k) => k.skill_id === pending.skillId);
+        boss.boss.telegraph = null;
+        if (sk) this.executeSkill(boss, sk, null);
+      }
+      if (boss.alive) this.enterPhase(boss, boss.boss.phase + 1);
+    }
+  }
+
+  private summon(boss: Combatant, enemyId: string, count: number): void {
+    const def = this.defs.get(enemyId);
+    if (!def) throw new Error(`summon_enemies: unknown unit ${enemyId}`);
+    for (let i = 0; i < count; i++) {
+      if (this.living(boss.side).length >= 5) return;
+      let slot = 0;
+      while (this.combatants.some((c) => c.id === `${boss.side}:${slot}:${enemyId}` || (c.side === boss.side && !c.objective && c.alive && c.slot === slot))) slot++;
+      const unit = this.makeCombatant(def, boss.side, slot, 'front', boss.level);
+      this.combatants.push(unit);
+      this.emit({ type: 'summon', source: boss.id, unit: unit.id });
+    }
+  }
+
+  /** Auto Battle: break the objective that would cancel the announced intent first, otherwise leave objectives alone. */
+  private autoPool(candidates: Combatant[]): Combatant[] {
+    const interrupting = candidates.filter((c) => {
+      if (!c.objective) return false;
+      const boss = this.combatants.find((b) => b.id === c.objective?.bossId);
+      const pending = boss?.boss?.telegraph;
+      const tel = pending ? boss?.def.skills.find((k) => k.skill_id === pending.skillId)?.telegraph : undefined;
+      return tel?.interrupt_if_objective_destroyed === c.objective.objectiveId || (tel?.interrupt_if_all_objectives_destroyed?.includes(c.objective.objectiveId) ?? false);
+    });
+    if (interrupting.length > 0) return interrupting;
+    const plain = candidates.filter((c) => !c.objective);
+    return plain.length > 0 ? plain : candidates;
   }
 
   // ---------------------------------------------------------------- hooks
@@ -1462,7 +1754,10 @@ export class Battle {
         focus: c.focus,
         alive: c.alive,
         statuses: c.statuses.map((s) => ({ id: s.statusId, turns: s.turnsLeft })),
-        cooldowns: { ...c.cooldowns }
+        cooldowns: { ...c.cooldowns },
+        objective: c.objective !== null,
+        bossPhase: c.boss ? (c.def.boss?.phases[c.boss.phase]?.phase_id ?? null) : null,
+        telegraph: c.boss?.telegraph?.skillId ?? null
       })),
       turn: this.turnCounter,
       awaiting: this.current?.id ?? null
@@ -1485,6 +1780,9 @@ export interface CombatSnapshot {
     alive: boolean;
     statuses: { id: string; turns: number }[];
     cooldowns: Record<string, number>;
+    objective: boolean;
+    bossPhase: string | null;
+    telegraph: string | null;
   }[];
   turn: number;
   awaiting: string | null;

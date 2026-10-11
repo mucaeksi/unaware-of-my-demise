@@ -5,6 +5,18 @@ import { ContinuousModifier, EffectOp, EventHook } from './effects';
 export const SkillType = z.enum(['basic', 'active', 'passive', 'ultimate', 'signature']);
 export type SkillType = z.infer<typeof SkillType>;
 
+/** A telegraphed action: announced on the boss's turn, resolved on its next one unless interrupted. */
+export const Telegraph = z
+  .object({
+    player_actions_before_resolution: z.number().int().min(0).max(3),
+    interruptible_by_control: z.boolean().optional(),
+    interrupt_if_objective_destroyed: Id.optional(),
+    interrupt_if_all_objectives_destroyed: z.array(Id).min(1).max(6).optional(),
+    remove_copied_shields_if_objective_destroyed: Id.optional()
+  })
+  .strict();
+export type Telegraph = z.infer<typeof Telegraph>;
+
 export const SkillDef = z
   .object({
     skill_id: Id,
@@ -22,6 +34,9 @@ export const SkillDef = z
     effect_ops: z.array(EffectOp).max(8),
     event_hooks: z.array(EventHook).max(4).optional(),
     continuous_modifiers: z.array(ContinuousModifier).max(4).optional(),
+    /** Boss skills: only usable in these phases (absent = every phase). */
+    phase_ids: z.array(Id).max(4).optional(),
+    telegraph: Telegraph.optional(),
     icon: z.string().max(80).optional()
   })
   .strict();
@@ -43,6 +58,54 @@ export const Growth = z
   .partial()
   .strict();
 
+/** A breakable thing on the boss side (Jaw Bell, Wax Seal ...). Every damaging hit aimed at it removes one point. */
+export const BossObjective = z
+  .object({
+    objective_id: Id,
+    name_en: z.string().min(1).max(60),
+    max_hp: z.number().int().min(1).max(12),
+    targetable_by_player: z.boolean(),
+    /** stays when the next phase begins (default: removed with its phase) */
+    persists_across_phases: z.boolean().optional(),
+    on_destroyed: z.array(EffectOp).max(4).optional()
+  })
+  .strict();
+export type BossObjective = z.infer<typeof BossObjective>;
+
+export const BossPhase = z
+  .object({
+    phase_id: Id,
+    name_en: z.string().min(1).max(60),
+    /** battle_start = the first phase; at_hp_percent = begins when the previous phase bar falls to that fraction of itself */
+    transition: z.enum(['battle_start', 'at_hp_percent']),
+    transition_hp_percent: z.number().min(0.05).max(0.95).nullable(),
+    /** fresh bar: max HP of this phase = level-scaled base HP x this */
+    hp_multiplier: z.number().positive().max(5),
+    atk_multiplier: z.number().positive().max(5),
+    def_multiplier: z.number().positive().max(5),
+    /** replaces the unit weaknesses while this phase lasts */
+    weaknesses: z.array(Element).max(4),
+    signature_action_id: Id.nullable(),
+    tauntable: z.boolean(),
+    objectives: z.array(BossObjective).max(4),
+    enter_ops: z.array(EffectOp).max(4),
+    passive_ops: z.array(EffectOp).max(4)
+  })
+  .strict();
+export type BossPhase = z.infer<typeof BossPhase>;
+
+export const BossDef = z
+  .object({
+    phases: z.array(BossPhase).min(1).max(4),
+    /** status ids that survive a phase change (everything of `clear_status_category` is cleared except these) */
+    preserve_status_ids: z.array(Id).max(4),
+    clear_status_category: z.enum(['debuff']),
+    /** control effects on the boss last this fraction of their base duration (minimum 1 turn) */
+    control_duration_multiplier: z.number().min(0.1).max(1)
+  })
+  .strict();
+export type BossDef = z.infer<typeof BossDef>;
+
 export const UnitDef = z
   .object({
     unit_id: Id,
@@ -61,6 +124,7 @@ export const UnitDef = z
     passive_hooks: z.array(EventHook).max(4).optional(),
     continuous_modifiers: z.array(ContinuousModifier).max(4).optional(),
     faction_id: Id.optional(),
+    boss: BossDef.optional(),
     status_immunities: z.array(Id).max(8).optional(),
     /** Enemy intent shown to the player before the action resolves. */
     intent_skill_id: Id.optional(),

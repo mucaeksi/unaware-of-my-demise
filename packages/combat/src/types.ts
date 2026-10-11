@@ -13,6 +13,8 @@ export interface StatusInstance {
   value?: number;
   /** damage over time: source ATK snapshot taken when applied. */
   power?: number;
+  /** copied from another unit (Portrait Borrowing, Mirror Frame) */
+  copied?: boolean;
 }
 export interface StatMod {
   stat: StatKey;
@@ -23,6 +25,9 @@ export interface StatMod {
 export interface ShieldInstance {
   amount: number;
   turnsLeft: number;
+  /** named shields (e.g. a formation) can be stripped as a group */
+  sourceId?: string;
+  copied?: boolean;
 }
 export interface RedirectInstance {
   protectorId: string;
@@ -58,6 +63,36 @@ export interface CounterInstance {
   consume: boolean;
 }
 
+/** A boss-side damage-taken multiplier tied to objectives (wax seal, glass racks, aether ward). */
+export interface BossModifier {
+  id: string;
+  mult: number;
+  untilObjective?: string;
+  whileAny?: string[];
+}
+export interface PendingTelegraph {
+  skillId: string;
+  /** player actions that must happen between the announcement and the resolution */
+  actionsNeeded: number;
+  actionsSeen: number;
+}
+export interface BossState {
+  phase: number;
+  /** level-scaled base values; phase multipliers apply on top */
+  baseHp: number;
+  baseAtk: number;
+  baseDef: number;
+  modifiers: BossModifier[];
+  telegraph: PendingTelegraph | null;
+  transitionPending: boolean;
+}
+export interface ObjectiveState {
+  objectiveId: string;
+  bossId: string;
+  targetable: boolean;
+  persists: boolean;
+}
+
 export interface Combatant {
   id: string;
   def: UnitDef;
@@ -90,6 +125,11 @@ export interface Combatant {
   hookRoundCount: Record<string, number>;
   hookTargetCount: Record<string, number>;
   alive: boolean;
+  boss: BossState | null;
+  /** set for breakable objectives: they are targets, never actors, and never count for victory */
+  objective: ObjectiveState | null;
+  /** the current boss phase's weaknesses replace the unit's own */
+  weaknessOverride: readonly string[] | null;
 }
 
 export type BattleEvent =
@@ -127,6 +167,11 @@ export type BattleEvent =
   | { type: 'buff_copied'; source: string; target: string; what: string }
   | { type: 'reaction'; unit: string; name: string; bonus: number }
   | { type: 'round_end'; round: number }
+  | { type: 'phase_change'; unit: string; phase: string; hp: number; maxHp: number }
+  | { type: 'telegraph'; unit: string; skill: string; skillName: string; targets: string[]; actionsNeeded: number }
+  | { type: 'telegraph_cancelled'; unit: string; skill: string; reason: string }
+  | { type: 'objective_destroyed'; objective: string; boss: string }
+  | { type: 'summon'; source: string; unit: string }
   | { type: 'battle_end'; winner: Side; stars: 0 | 1 | 2 | 3 };
 
 export interface SkillOption {

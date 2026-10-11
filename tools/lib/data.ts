@@ -162,8 +162,39 @@ export function buildEnemy(id: string): UnitDef {
       ai_priority: s.ai_priority ?? 0,
       effect_ops: (s.effect_ops as Json[]).map(convertOp)
     };
+    if (s.phase_ids) out.phase_ids = s.phase_ids;
+    if (s.telegraph_rules) out.telegraph = s.telegraph_rules;
     return SkillDef.parse(out);
   });
+  const boss = e.boss_id
+    ? {
+        phases: (e.phases as Json[]).map((p) => ({
+          phase_id: p.phase_id,
+          name_en: p.name_en,
+          transition: p.transition,
+          transition_hp_percent: p.transition_hp_percent ?? null,
+          hp_multiplier: p.hp_multiplier,
+          atk_multiplier: p.atk_multiplier,
+          def_multiplier: p.def_multiplier,
+          weaknesses: p.weaknesses,
+          signature_action_id: p.signature_action_id ?? null,
+          tauntable: p.tauntable === true,
+          objectives: (p.objectives as Json[]).map((o) => ({
+            objective_id: o.objective_id,
+            name_en: o.name_en,
+            max_hp: o.max_hp,
+            targetable_by_player: o.targetable_by_player === true,
+            ...(o.persists_across_phases === true ? { persists_across_phases: true } : {}),
+            ...(o.on_destroyed?.length ? { on_destroyed: (o.on_destroyed as Json[]).map(convertOp) } : {})
+          })),
+          enter_ops: (p.enter_ops as Json[]).map(convertOp),
+          passive_ops: (p.passive_ops as Json[]).map(convertOp)
+        })),
+        preserve_status_ids: e.phase_transition_contract.preserve_status_ids,
+        clear_status_category: e.phase_transition_contract.clear_status_category,
+        control_duration_multiplier: e.control_rules.control_duration_multiplier
+      }
+    : undefined;
   return UnitDef.parse({
     unit_id: e.enemy_id,
     kind: 'enemy',
@@ -178,6 +209,7 @@ export function buildEnemy(id: string): UnitDef {
     passive_hooks: e.passive_hooks?.length ? (e.passive_hooks as Json[]).map(convertHook) : undefined,
     continuous_modifiers: e.continuous_modifiers?.length ? e.continuous_modifiers : undefined,
     faction_id: e.faction_id,
+    boss,
     status_immunities: e.status_immunities?.length ? e.status_immunities : undefined,
     intent_skill_id: e.intent?.action_id,
     art_key: e.enemy_id,

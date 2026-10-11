@@ -44,6 +44,18 @@ describe('validateContentSet', () => {
     m.set('units/unit_pack.json', enc.encode(JSON.stringify(pack)));
     expect(() => validateContentSet(m)).toThrow(ContentValidationError);
   });
+  it('rejects boss references that point nowhere: summons of unknown units, objectives no phase defines', () => {
+    const m = overlay();
+    const pack = JSON.parse(new TextDecoder().decode(m.get('units/unit_pack.json')));
+    pack.units[0].skills[0].effect_ops.push({ op: 'summon_enemies', target_selector_id: 'self', enemy_id: 'ghost_unit', count: 1 });
+    m.set('units/unit_pack.json', enc.encode(JSON.stringify(pack)));
+    expect(() => validateContentSet(m)).toThrow(/summons unknown unit ghost_unit/);
+    const pack2 = JSON.parse(new TextDecoder().decode(overlay().get('units/unit_pack.json')));
+    pack2.units[0].skills[0].telegraph = { player_actions_before_resolution: 1, interrupt_if_objective_destroyed: 'no_such_bell' };
+    const m2 = overlay();
+    m2.set('units/unit_pack.json', enc.encode(JSON.stringify(pack2)));
+    expect(() => validateContentSet(m2)).toThrow(/no_such_bell/);
+  });
   it('rejects art that points at a file the release does not contain', () => {
     const m = overlay();
     m.delete('art/atlas_hollow_pilgrim.webp');

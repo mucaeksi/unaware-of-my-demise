@@ -50,10 +50,40 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
   if (pack) {
     for (const u of pack.units) {
       if (art && !art.units[u.art_key]) problems.push(`unit ${u.unit_id}: art_key ${u.art_key} missing from art manifest`);
-      for (const s of u.skills) {
-        const ops = [...s.effect_ops, ...(s.event_hooks ?? []).flatMap((h) => h.effect_ops)];
-        for (const op of ops) if (op.op === 'apply_status' && !statuses.has(op.status_id)) problems.push(`unit ${u.unit_id}/${s.skill_id}: unknown status ${op.status_id}`);
+      const bossPhases = u.boss?.phases ?? [];
+      const objectives = new Set(bossPhases.flatMap((p) => p.objectives.map((o) => o.objective_id)));
+      const phaseIds = new Set(bossPhases.map((p) => p.phase_id));
+      const ops = [
+        ...u.skills.flatMap((s) => [...s.effect_ops, ...(s.event_hooks ?? []).flatMap((h) => h.effect_ops)]),
+        ...(u.passive_hooks ?? []).flatMap((h) => h.effect_ops),
+        ...bossPhases.flatMap((p) => [...p.enter_ops, ...p.passive_ops, ...p.objectives.flatMap((o) => o.on_destroyed ?? [])])
+      ];
+      const needObjective = (id: string | undefined, where: string): void => {
+        if (id !== undefined && !objectives.has(id)) problems.push(`unit ${u.unit_id}: ${where} names objective ${id}, which no phase defines`);
+      };
+      for (const op of ops) {
+        if (op.op === 'apply_status' && !statuses.has(op.status_id)) problems.push(`unit ${u.unit_id}: unknown status ${op.status_id}`);
+        if (op.op === 'clear_status_if_all_objectives_destroyed') {
+          if (!statuses.has(op.status_id)) problems.push(`unit ${u.unit_id}: unknown status ${op.status_id}`);
+          for (const id of op.objective_ids) needObjective(id, op.op);
+        }
+        if (op.op === 'summon_enemies') {
+          if (!units.has(op.enemy_id)) problems.push(`unit ${u.unit_id}: summons unknown unit ${op.enemy_id}`);
+          needObjective(op.only_if_objective_alive, op.op);
+        }
+        if (op.op === 'boss_damage_taken_modifier') {
+          needObjective(op.until_objective_destroyed, op.op);
+          for (const id of op.while_any_objective_alive ?? []) needObjective(id, op.op);
+        }
+        if (op.op === 'damage') needObjective(op.multiplier_if_objective_alive?.objective_id, 'damage');
       }
+      for (const s of u.skills) {
+        for (const ph of s.phase_ids ?? []) if (!phaseIds.has(ph)) problems.push(`unit ${u.unit_id}/${s.skill_id}: phase ${ph} is not a phase of this boss`);
+        needObjective(s.telegraph?.interrupt_if_objective_destroyed, `${s.skill_id} telegraph`);
+        for (const id of s.telegraph?.interrupt_if_all_objectives_destroyed ?? []) needObjective(id, `${s.skill_id} telegraph`);
+        needObjective(s.telegraph?.remove_copied_shields_if_objective_destroyed, `${s.skill_id} telegraph`);
+      }
+      if (u.boss && u.boss.phases[0]?.transition !== 'battle_start') problems.push(`unit ${u.unit_id}: the first boss phase must begin at battle_start`);
     }
   }
   if (art) {

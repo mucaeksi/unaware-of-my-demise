@@ -1,7 +1,7 @@
 /**
  * How much of the narrative cast the combat engine can run. A unit counts as supported when every skill, hook and
  * modifier it names passes the closed effect grammar (the same check the content build and the server publish gate use).
- * Bosses additionally need their phase machinery (phases, objectives, telegraphs), which is reported separately.
+ * Boss phases, objectives and telegraphs are part of the unit definition and checked the same way.
  * Run: npx tsx tools/combat_coverage.ts
  */
 import { buildCharacter, buildEnemy, buildRules } from './lib/data';
@@ -37,7 +37,6 @@ count('characters', chars.map((c) => c.character_id), buildCharacter, (id) => (c
 const regular = enemies.filter((e) => !e.boss_id);
 const bosses = enemies.filter((e) => e.boss_id);
 count('enemies (regular)', regular.map((e) => e.enemy_id), buildEnemy, (id) => (regular.find((e) => e.enemy_id === id)?.skills as Json[]).length);
-count('bosses (skills only)', bosses.map((e) => e.enemy_id), buildEnemy, (id) => (bosses.find((e) => e.enemy_id === id)?.skills as Json[]).length);
-console.log(`boss phases modelled: ${bosses.filter((b) => (b.phases as Json[]).every((p) => !(p.objectives as Json[]).length && !(p.enter_ops as Json[]).length && !(p.passive_ops as Json[]).length)).length}/${bosses.length} (objectives, enter/passive ops and telegraphs need the boss machinery)`);
+count('bosses', bosses.map((e) => e.enemy_id), buildEnemy, (id) => (bosses.find((e) => e.enemy_id === id)?.skills as Json[]).length);
 for (const f of failures) console.log(`  ✗ ${f}`);
-process.exit(failures.some((f) => !f.startsWith('bosses')) ? 1 : 0);
+process.exit(failures.length > 0 ? 1 : 0);

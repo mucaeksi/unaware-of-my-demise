@@ -59,15 +59,37 @@ Measured by `npx tsx tools/combat_coverage.ts` (the same closed-grammar check th
 |---|---|---|
 | Playable characters | 20 / 20 | 80 / 80 |
 | Regular enemies | 20 / 20 | 40 / 40 |
-| Bosses | 4 / 7 skill sets; **phase machinery not built** | 9 / 18 |
+| Bosses (7) | 7 / 7 | 18 / 18 |
 
 Engine ops implemented: all 25 regular ops of the data (damage, heal, apply/remove status, shield, redirect, intercept, focus, stat modifiers, heal-per-cleanse,
 incoming/outgoing packet modifiers, block, damage reduction, first-hit guard, opening guard, regeneration, status-duration and cooldown reduction, delay,
 HP cost, counter, next-attack bonus, copy buff, remove shield). All 15 statuses are modelled. `packages/combat/src/mechanics.test.ts` proves each mechanic with
 hand-checkable numbers; `roster.test.ts` plays all 20 characters and 20 regular enemies in 5v5 fights (every active/ultimate is exercised, replays are bit-identical).
 
-### Still open: bosses (task C1, stage 2)
-Phases (HP bars, `phase_transition_contract`, per-phase weaknesses/multipliers), breakable objectives with `on_destroyed` ops, telegraphed signature actions
-that objectives can cancel, boss damage-taken modifiers tied to objectives, summons, and the remaining ops (`cancel_boss_telegraph, remove_boss_modifier,
-boss_damage_taken_modifier, summon_enemies, remove_copied_statuses, clear_status_if_all_objectives_destroyed`) + selectors `boss, duel_marked_enemy,
-self_and_enemy_guards, boss_and_enemy_guards` + `multiplier_if_*_alive` on damage. Until then no boss encounter may be published.
+### Bosses (`packages/combat/src/boss.test.ts`, `roster.test.ts`)
+21. **Phases are fresh bars.** A phase's max HP is the level-scaled base HP x `hp_multiplier`; ATK/DEF multipliers apply on top of the level-scaled base (not compounding).
+    Phase two begins when the first bar falls to `transition_hp_percent` of itself — the bar can never run out in a non-final phase (a big hit just starts the change).
+    The boss falls when the last bar is empty. Phase weaknesses *replace* the unit's own, so a weakness always beats an inherited resistance.
+22. **Phase change timing.** It happens at the end of the turn that caused it: an announced (telegraphed) intent resolves first, then debuffs are cleared (except
+    `preserve_status_ids`, normally Break; negative stat modifiers too), the new bar/stats/weaknesses apply, objectives of the old phase go (unless
+    `persists_across_phases`), the new objectives appear, and the phase's `enter_ops` / `passive_ops` run.
+23. **Objectives** (Jaw Bell, Wax Seal, Flask Racks ...) are targets that never act, never count for victory and are never hit by area attacks. They are always legal
+    single-target picks for the player. **Every damaging hit removes exactly 1 point** whatever the attacker's numbers (the data's tiny `max_hp` is a hit count; the damage scale
+    of a level-12 hero would otherwise break any objective in one touch). Multi-hit skills break them faster. `on_destroyed` ops run as the boss.
+24. **Telegraphs.** A signature with a `telegraph` is *announced* on the boss's turn (event `telegraph`, visible to the UI via `snapshot().units[].telegraph` and `intentFor`) and
+    resolved on its next turn once at least `player_actions_before_resolution` player actions have happened (a faster party gets more actions in between). Destroying the named
+    objective (or all of the named objectives) cancels it; a stun (Break) cancels it unless `interruptible_by_control` is false. A cancelled signature goes on cooldown as if used.
+    While an intent is pending and the party has not yet had its action, the boss plays a plain strike.
+25. **Wards.** `boss_damage_taken_modifier` multiplies damage taken while its objective condition holds (`until_objective_destroyed` / `while_any_objective_alive`);
+    `remove_boss_modifier` removes it explicitly.
+26. **Control on bosses** lasts `control_duration_multiplier` (0.5) of its duration, minimum one turn.
+27. **Summons** (`summon_enemies`) put full units from the pack into free slots of the boss side (field limit 5); they are skipped when `only_if_objective_alive` names a destroyed objective.
+    Summoned units are real enemies: the fight continues until they are down too.
+28. **Auto Battle** breaks the objective that would cancel the announced intent, otherwise ignores objectives.
+29. **Publishing gate.** `validateContentSet` rejects a unit pack that summons an unknown unit, names an objective no phase defines (summons, wards, telegraphs, multipliers),
+    names an unknown status, or lists a skill for a phase the boss does not have.
+
+### Still open
+Boss encounters in the chapter graph (the story stages 1-5 ... 7-5 reference these bosses), a Boss/Objective presentation in the battle screen (the engine already emits
+`phase_change`, `telegraph`, `telegraph_cancelled`, `objective_destroyed`, `summon` and objectives appear in `snapshot()`), Sweep/AFK, party-based (owned-hero) battles with
+equipment/growth stats, and the numeric balance pass (all 7 bosses fall to a level-14 party without losses in the smoke test).

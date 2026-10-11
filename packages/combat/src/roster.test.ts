@@ -6,12 +6,14 @@ import { Battle, replayBattle, type BattleEvent, type PlayerAction } from './ind
 
 const NARR = 'narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content';
 const characterIds = (readJson<{ characters: { character_id: string }[] }>(`${NARR}/characters_part1.json`).characters).map((c) => c.character_id);
-const enemyIds = (readJson<{ enemies: { enemy_id: string; boss_id?: string }[] }>(`${NARR}/enemies_part1.json`).enemies).filter((e) => !e.boss_id).map((e) => e.enemy_id);
+const allEnemies = readJson<{ enemies: { enemy_id: string; boss_id?: string }[] }>(`${NARR}/enemies_part1.json`).enemies;
+const enemyIds = allEnemies.filter((e) => !e.boss_id).map((e) => e.enemy_id);
+const bossIds = allEnemies.filter((e) => e.boss_id).map((e) => e.enemy_id);
 
 const pack = UnitPack.parse({
   schema_version: 1,
   pack_id: 'roster_test',
-  units: [...characterIds.map((c) => buildCharacter(c)), ...enemyIds.map((e) => buildEnemy(e))],
+  units: [...characterIds.map((c) => buildCharacter(c)), ...enemyIds.map((e) => buildEnemy(e)), ...bossIds.map((e) => buildEnemy(e))],
   rules: buildRules()
 });
 
@@ -100,4 +102,33 @@ describe('the full playable roster and the regular enemies run in the engine', (
     console.log('NOFIRE', passives.filter((id) => !hooks.has(id)).join(' '));
     expect(fired.length).toBeGreaterThan(passives.length / 3);
   });
+});
+
+describe('the seven story bosses', () => {
+  const team = ['mahmut', 'brin_alder', 'fadyme', 'sister_aveline', 'kera_voss'];
+
+  for (const boss of bossIds) {
+    it(`${boss}: fights through its phases, objectives and telegraphs, finishes and replays identically`, async () => {
+      const enc = Encounter.parse({
+        schema_version: 1,
+        encounter_id: `boss_${boss}`,
+        stage_id: 'X-5',
+        title_en: boss,
+        location_id: 'nowhere',
+        seed: 4242,
+        party: team.map((unit_id, slot) => ({ unit_id, level: 14, slot, row: slot < 2 ? 'front' : 'rear' })),
+        enemies: [{ unit_id: boss, level: 12, slot: 0, row: 'front' }],
+        provenance: { source: 'test' }
+      });
+      const { battle, actions } = play(enc);
+      expect(battle.result).not.toBeNull();
+      const phases = battle.log.filter((e) => e.type === 'phase_change');
+      expect(phases.length).toBeGreaterThanOrEqual(1);
+      expect(battle.log.some((e) => e.type === 'telegraph')).toBe(true);
+      if (battle.result?.winner === 'player') expect(phases).toHaveLength(2);
+      const again = await replayBattle(pack, enc, actions);
+      expect(again.valid).toBe(true);
+      expect(again.result).toEqual(battle.result);
+    });
+  }
 });
