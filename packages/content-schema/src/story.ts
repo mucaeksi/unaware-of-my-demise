@@ -120,7 +120,9 @@ const ChapterNode = z
     requires: Id.optional(),
     /** battle nodes: what a win costs (Ration) and grants; the server reads this from the published release, never from the client */
     ration_class: RationClass.optional(),
-    rewards: NodeRewards.optional()
+    rewards: NodeRewards.optional(),
+    /** random loot: a drop table (game_config 'drops') rolled by the server on every win; `boss_set_id` names the accessory set boss-set entries resolve to */
+    drop: z.object({ table: Id, boss_set_id: Id.optional() }).strict().optional()
   })
   .strict();
 

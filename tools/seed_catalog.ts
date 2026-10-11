@@ -7,7 +7,7 @@
  */
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { ProgressionConfig } from '../packages/economy/src/index';
+import { DropConfig, ProgressionConfig } from '../packages/economy/src/index';
 import { ROOT, readJson } from './lib/fsutil';
 
 const DIR = 'narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content';
@@ -93,6 +93,35 @@ const progression = ProgressionConfig.parse({
 add(`INSERT OR IGNORE INTO game_config (key, value_json) VALUES ('progression', ${j(progression)});`);
 // the secondary stat of a weapon is "role_stat" in the canon: resolved per combat role (placeholder mapping, tuned in the math pass)
 add(`INSERT OR IGNORE INTO game_config (key, value_json) VALUES ('gear', ${j({ note: 'role_stat of a weapon resolves by the first matching word of the character role; placeholder mapping', roleStat: { tank: 'def_pct', healer: 'heal_bonus_pct', support: 'effect_res_pct', default: 'atk_pct' }, equipSlots: ['weapon', 'armor', 'necklace', 'ring'], rerollCost: { itemId: 'unwritten_hour_cinder', quantityByRarity: { '4': 3, '5': 6 } } })});`);
+
+// ---- drop tables (canon drop_tables_part1.json). Silver Crown quantities fold into the main currency at 100 crowns = 1 unit (min 1): PLACEHOLDERS.
+interface CanonDrop { kind: string; item_id?: string; item_ids?: string[]; quantity?: number; quantity_min?: number; quantity_max?: number; rarity?: number; rarities?: number[]; chance?: number }
+const dropEntry = (e: CanonDrop): Record<string, unknown> | null => {
+  const chance = e.chance ?? 1;
+  const lo = e.quantity_min ?? e.quantity ?? 1;
+  const hi = e.quantity_max ?? e.quantity ?? lo;
+  switch (e.kind) {
+    case 'currency': {
+      const f = e.item_id === 'silver_crowns' ? (n: number): number => Math.max(1, Math.ceil(n / CROWNS_PER_UNIT)) : (n: number): number => n;
+      return { kind: 'currency', min: f(lo), max: f(hi), chance };
+    }
+    case 'item': return { kind: 'item', itemId: e.item_id, min: lo, max: hi, chance };
+    case 'item_pool': return { kind: 'item_pool', itemIds: e.item_ids, min: lo, max: hi, chance };
+    case 'weapon_pool': return { kind: 'gear_pool', slot: 'weapon', rarities: e.rarities, chance };
+    case 'armor_pool': return { kind: 'gear_pool', slot: 'armor', rarities: e.rarities, chance };
+    case 'accessory_pool': return { kind: 'gear_pool', slot: 'accessory', rarities: e.rarities, chance };
+    case 'accessory': return { kind: 'gear', gearId: e.item_id, chance };
+    case 'boss_set_accessory': return { kind: 'boss_set', rarity: e.rarity, chance };
+    case 'account_xp': return { kind: 'account_xp', amount: e.quantity, chance };
+    default: throw new Error(`unknown drop kind ${e.kind}`);
+  }
+};
+const dropTables = rd<{ drop_tables: { drop_table_id: string; repeatable_rewards: CanonDrop[]; first_clear_rewards: CanonDrop[] }[] }>('drop_tables_part1.json').drop_tables;
+const drops = DropConfig.parse({
+  note: 'Canon drop tables. Currency amounts are placeholders (Silver Crowns folded into the single currency); tuned in the final math pass. Boss-set entries resolve through the node\'s drop.boss_set_id.',
+  tables: Object.fromEntries(dropTables.map((t) => [t.drop_table_id, { repeat: t.repeatable_rewards.map(dropEntry), firstClear: t.first_clear_rewards.map(dropEntry) }]))
+});
+add(`INSERT OR IGNORE INTO game_config (key, value_json) VALUES ('drops', ${j(drops)});`);
 
 writeFileSync(join(ROOT, 'apps/api/seed/catalog.sql'), `${lines.join('\n')}\n`);
 console.log(`${items.length} items, ${wp.weapons.length} weapons, ${acc.accessories.length} accessories -> apps/api/seed/catalog.sql (${lines.length} statements)`);

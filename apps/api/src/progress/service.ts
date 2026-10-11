@@ -5,6 +5,7 @@ import { RATION_CAP, rationNextMs, rationNow, rationSpend, type RationState } fr
 import { sha256Hex } from '@uomd/shared';
 import { ContentStore, HttpError } from '../content/store';
 import { grantStatements } from '../db/grants';
+import { rollNodeDrops } from './drops';
 import type { GameEnv } from '../env';
 
 export const BattleSubmission = z
@@ -102,10 +103,13 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
     const spent = cost > 0 ? rationSpend(ration.stored, cost, nowMs) : null;
     if (cost > 0 && !spent) throw new HttpError(402, 'not_enough_ration', 'not enough Ration for this battle');
 
+    const drops = await rollNodeDrops(db, node.drop, firstClear);
     const grants: { a: RewardAttachment; key: string }[] = [];
     if (firstClear) rewardsDef.first_clear.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.nodeId}:first:${i}` }));
     if (newThreeStar) rewardsDef.three_star.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.nodeId}:three:${i}` }));
     rewardsDef.repeat.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.requestId}:repeat:${i}` }));
+    drops.first.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.nodeId}:firstdrop:${i}` }));
+    drops.repeat.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.requestId}:drop:${i}` }));
 
     const outcome: BattleOutcome = {
       requestId: input.requestId,
@@ -126,14 +130,18 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
         db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)')
       );
     }
+    // First clear is a plain INSERT (a parallel first clear hits the primary key and retries); later clears only apply when the best
+    // stars are still what this attempt read, so one-time rewards (first clear, first three stars) can never be granted twice.
     batch.push(
-      db
-        .prepare(
-          `INSERT INTO player_progress (player_id, node_id, stars, clears, best_turns, first_cleared_at, updated_at) VALUES (?1, ?2, ?3, 1, ?4, ?5, ?5)
-           ON CONFLICT (player_id, node_id) DO UPDATE SET stars = MAX(stars, excluded.stars), clears = clears + 1,
-             best_turns = MIN(COALESCE(best_turns, excluded.best_turns), excluded.best_turns), updated_at = excluded.updated_at`
-        )
-        .bind(playerId, input.nodeId, stars, turns, now.toISOString())
+      firstClear
+        ? db.prepare('INSERT INTO player_progress (player_id, node_id, stars, clears, best_turns, first_cleared_at, updated_at) VALUES (?1, ?2, ?3, 1, ?4, ?5, ?5)').bind(playerId, input.nodeId, stars, turns, now.toISOString())
+        : db
+            .prepare(
+              `UPDATE player_progress SET stars = MAX(stars, ?3), clears = clears + 1, best_turns = MIN(COALESCE(best_turns, ?4), ?4), updated_at = ?5
+               WHERE player_id = ?1 AND node_id = ?2 AND stars = ?6`
+            )
+            .bind(playerId, input.nodeId, stars, turns, now.toISOString(), oldStars),
+      ...(firstClear ? [] : [db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)')])
     );
     // one-time rewards keep stable keys (first clear / three stars), repeat rewards are keyed by the request
     for (const g of grants) batch.push(...(await grantStatements(db, playerId, [g.a], { keyPrefix: g.key, reason: `stage:${input.nodeId}` })));
@@ -150,6 +158,7 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
     } catch (e) {
       const msg = String(e instanceof Error ? e.message : e);
       if (/CHECK constraint failed: ok = 1/i.test(msg)) continue; // someone spent Ration meanwhile: recompute
+      if (/UNIQUE constraint failed: player_progress/i.test(msg)) continue; // a parallel first clear took the row: recompute
       if (/UNIQUE constraint failed: ledger\.idempotency_key/i.test(msg)) continue; // a parallel request took the one-time reward: recompute
       if (/UNIQUE constraint failed: battle_claims/i.test(msg)) continue; // the same request won meanwhile: the next round returns its stored result
       throw e;

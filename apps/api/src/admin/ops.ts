@@ -1,6 +1,6 @@
 import type { Context, Hono, MiddlewareHandler } from 'hono';
 import { z } from 'zod';
-import { analyzeBanner, analyzeFlow, BannerConfig, DEFAULT_FLOW, ProgressionConfig, simulateBanner } from '@uomd/economy';
+import { analyzeBanner, analyzeFlow, BannerConfig, DEFAULT_FLOW, DropConfig, ProgressionConfig, simulateBanner } from '@uomd/economy';
 import { atLeast, type AdminIdentity, type Role } from '../auth/access';
 import { HttpError } from '../content/store';
 import { audit, auditIfChanged, auditStatement } from '../db/audit';
@@ -266,7 +266,31 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     return c.json({ item_id: id });
   });
 
-  const CONFIG_SCHEMAS: Record<string, z.ZodType<unknown>> = { progression: ProgressionConfig, gear: z.object({ note: z.string().max(400).default(''), roleStat: z.record(z.string(), z.string()), equipSlots: z.array(z.enum(['weapon', 'armor', 'necklace', 'ring'])).min(1), rerollCost: z.object({ itemId: z.string(), quantityByRarity: z.record(z.string(), z.number().int().min(1)) }).strict() }).strict() };
+  /** every concrete item / gear id a drop table names must exist and not be retired (pools are resolved at roll time) */
+  const dropRefsExist = async (db: D1Database, cfg: DropConfig): Promise<void> => {
+    const items = new Set<string>();
+    const gears = new Set<string>();
+    for (const t of Object.values(cfg.tables)) {
+      for (const e of [...t.repeat, ...t.firstClear]) {
+        if (e.kind === 'item') items.add(e.itemId);
+        else if (e.kind === 'item_pool') e.itemIds.forEach((i) => items.add(i));
+        else if (e.kind === 'gear') gears.add(e.gearId);
+      }
+    }
+    const missing = async (table: 'item_defs' | 'gear_defs', col: string, ids: Set<string>): Promise<string[]> => {
+      const all = [...ids];
+      const found = new Set<string>();
+      for (let i = 0; i < all.length; i += 80) {
+        const part = all.slice(i, i + 80);
+        const rows = await db.prepare(`SELECT ${col} AS id FROM ${table} WHERE status <> 'retired' AND ${col} IN (${part.map(() => '?').join(',')})`).bind(...part).all<{ id: string }>();
+        rows.results.forEach((r) => found.add(r.id));
+      }
+      return all.filter((i) => !found.has(i));
+    };
+    const bad = [...(await missing('item_defs', 'item_id', items)), ...(await missing('gear_defs', 'gear_id', gears))];
+    if (bad.length) throw new HttpError(422, 'unknown_items', `drop tables name unknown or retired ids: ${bad.slice(0, 5).join(', ')}`);
+  };
+  const CONFIG_SCHEMAS: Record<string, z.ZodType<unknown>> = { progression: ProgressionConfig, drops: DropConfig, gear: z.object({ note: z.string().max(400).default(''), roleStat: z.record(z.string(), z.string()), equipSlots: z.array(z.enum(['weapon', 'armor', 'necklace', 'ring'])).min(1), rerollCost: z.object({ itemId: z.string(), quantityByRarity: z.record(z.string(), z.number().int().min(1)) }).strict() }).strict() };
   app.get('/admin/api/config/:key', need('viewer'), async (c) => {
     const row = await c.env.DB.prepare('SELECT key, value_json, version, updated_at, updated_by FROM game_config WHERE key = ?1').bind(c.req.param('key')).first<{ key: string; value_json: string; version: number; updated_at: string; updated_by: string }>();
     if (!row) throw new HttpError(404, 'no_such_config', 'unknown config key');
@@ -279,6 +303,7 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     const b = await body(c, z.object({ value: z.unknown(), expectedVersion: z.number().int().min(1) }).strict(), 100_000);
     const parsed = schema.safeParse(b.value);
     if (!parsed.success) throw new HttpError(422, 'invalid_config', parsed.error.issues.slice(0, 3).map((i) => `${i.path.join('.')}: ${i.message}`).join('; '));
+    if (key === 'drops') await dropRefsExist(c.env.DB, parsed.data as DropConfig);
     const who = c.get('admin').identity;
     const db = c.env.DB;
     const res = await db.batch([
