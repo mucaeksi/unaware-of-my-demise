@@ -1,0 +1,820 @@
+{
+  "source_revision": "5c83e3d1",
+  "runtime_unit_ids": [
+    "bellbound_dead",
+    "fadyme",
+    "mahmut"
+  ],
+  "packages": [
+    {
+      "package": "archive_watch",
+      "event_id": "tactical_archive_watch",
+      "title_en": "Archive Watch",
+      "unlock": {
+        "after_stage": "4-5",
+        "runtime_stage_mapping": null,
+        "ownership_required": false,
+        "payment_required": false
+      },
+      "battles_per_run": 3,
+      "cast_speakers": [
+        "iona_mist",
+        "kera_voss",
+        "odelia_pike",
+        "tilda_fen"
+      ],
+      "enemy_ids": [
+        "ash_wolf",
+        "bellbound_dead",
+        "hollow_pilgrim"
+      ],
+      "encounter_ids": [
+        "aw_enc_first_steady",
+        "aw_enc_first_reach",
+        "aw_enc_second_interrupt",
+        "aw_enc_second_endure",
+        "aw_enc_final_steady_interrupt",
+        "aw_enc_final_steady_endure",
+        "aw_enc_final_reach_interrupt",
+        "aw_enc_final_reach_endure"
+      ],
+      "reward_binding": null,
+      "dependencies": {
+        "iona_mist": {
+          "ops": [
+            "grant_first_hit_guard"
+          ],
+          "selectors": [
+            "event_target",
+            "last_heal_target",
+            "selected_ally"
+          ],
+          "statuses": [],
+          "fields": [
+            "event=ally_hp_threshold_crossed",
+            "predicate=event_target_hp_at_or_below_pct"
+          ]
+        },
+        "kera_voss": {
+          "ops": [],
+          "selectors": [
+            "random_other_enemy"
+          ],
+          "statuses": [
+            "burn"
+          ],
+          "fields": [
+            "event=after_damage_dealt",
+            "hit_count",
+            "modifiers",
+            "predicate=count_enemies_with_status"
+          ]
+        },
+        "odelia_pike": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [
+            "soaked"
+          ],
+          "fields": [
+            "continuous_modifiers",
+            "event=before_damage_dealt",
+            "predicate=target_has_status"
+          ]
+        },
+        "tilda_fen": {
+          "ops": [
+            "apply_regeneration"
+          ],
+          "selectors": [
+            "event_target",
+            "last_heal_target"
+          ],
+          "statuses": [
+            "soaked_immunity"
+          ],
+          "fields": [
+            "event=after_ally_healed"
+          ]
+        },
+        "ash_wolf": {
+          "ops": [],
+          "selectors": [
+            "lowest_hp_rear_enemy"
+          ],
+          "statuses": [
+            "trail_mark"
+          ],
+          "fields": []
+        },
+        "bellbound_dead": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        },
+        "hollow_pilgrim": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        }
+      },
+      "recorded_proxy_validation": {
+        "status": "PASS: schema-compatible proxies complete under existing combat engine",
+        "prototype_count": 8,
+        "simulation_runs": 72,
+        "base_replay_checks": 24,
+        "production_balance": "NOT_CERTIFIED"
+      }
+    },
+    {
+      "package": "borrowed_chair",
+      "event_id": "side_story_borrowed_chair",
+      "title_en": "A Borrowed Chair",
+      "unlock": {
+        "after_stage": "3-5",
+        "runtime_stage_mapping": null,
+        "ownership_required": false,
+        "payment_required": false,
+        "requires_completed_content": {
+          "canonical_source_event_id": "event_harvest_inn_meal",
+          "accepted_working_alias": "event_one_dish_one_name",
+          "runtime_completion_mapping": null
+        }
+      },
+      "battles_per_run": 0,
+      "cast_speakers": [
+        "jori_flint",
+        "pippa_bell"
+      ],
+      "enemy_ids": [],
+      "encounter_ids": [],
+      "reward_binding": null,
+      "dependencies": {
+        "jori_flint": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [
+            "burn"
+          ],
+          "fields": [
+            "continuous_modifiers",
+            "event=before_damage_dealt",
+            "predicate=owner_action_type"
+          ]
+        },
+        "pippa_bell": {
+          "ops": [
+            "reduce_cooldowns"
+          ],
+          "selectors": [
+            "ally_with_lowest_focus"
+          ],
+          "statuses": [],
+          "fields": [
+            "event=after_ally_ultimate"
+          ]
+        }
+      },
+      "recorded_proxy_validation": {
+        "status": "PASS: schema-compatible proxies complete under existing combat engine",
+        "prototype_count": 0,
+        "simulation_runs": 0,
+        "base_replay_checks": 0,
+        "production_balance": "NOT_CERTIFIED"
+      }
+    },
+    {
+      "package": "last_traveler",
+      "event_id": "side_quest_last_traveler",
+      "title_en": "For the Last Traveler",
+      "unlock": {
+        "after_stage": "1-4",
+        "runtime_stage_mapping": null,
+        "ownership_required": false,
+        "payment_required": false
+      },
+      "battles_per_run": 1,
+      "cast_speakers": [
+        "brin_alder",
+        "fadyme",
+        "mahmut",
+        "nixie_vale"
+      ],
+      "enemy_ids": [
+        "ash_wolf",
+        "bellbound_dead",
+        "hollow_pilgrim"
+      ],
+      "encounter_ids": [
+        "lt_enc_scout_tracks",
+        "lt_enc_scout_sound",
+        "lt_enc_brace_bank",
+        "lt_enc_brace_beam"
+      ],
+      "reward_binding": null,
+      "dependencies": {
+        "brin_alder": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": [
+            "continuous_modifiers",
+            "predicate=owner_has_status"
+          ]
+        },
+        "fadyme": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        },
+        "mahmut": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        },
+        "nixie_vale": {
+          "ops": [],
+          "selectors": [
+            "enemy_with_highest_atk",
+            "enemy_with_lowest_def"
+          ],
+          "statuses": [
+            "trail_mark"
+          ],
+          "fields": [
+            "continuous_modifiers",
+            "event=after_damage_dealt",
+            "event=before_damage_dealt",
+            "predicate=last_target_defeated",
+            "predicate=target_has_status_tag"
+          ]
+        },
+        "ash_wolf": {
+          "ops": [],
+          "selectors": [
+            "lowest_hp_rear_enemy"
+          ],
+          "statuses": [
+            "trail_mark"
+          ],
+          "fields": []
+        },
+        "bellbound_dead": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        },
+        "hollow_pilgrim": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        }
+      },
+      "recorded_proxy_validation": {
+        "status": "PASS: schema-compatible proxies complete under existing combat engine",
+        "prototype_count": 4,
+        "simulation_runs": 36,
+        "base_replay_checks": 12,
+        "production_balance": "NOT_CERTIFIED"
+      }
+    },
+    {
+      "package": "one_dish_one_name",
+      "event_id": "event_one_dish_one_name",
+      "title_en": "One Dish, One Name",
+      "unlock": {
+        "after_stage": "3-5",
+        "runtime_stage_mapping": null,
+        "ownership_required": false,
+        "payment_required": false
+      },
+      "battles_per_run": 1,
+      "cast_speakers": [
+        "fadyme",
+        "jori_flint",
+        "kera_voss",
+        "mahmut",
+        "nixie_vale",
+        "pippa_bell"
+      ],
+      "enemy_ids": [
+        "bellbound_dead",
+        "hollow_pilgrim"
+      ],
+      "encounter_ids": [
+        "od_enc_wood_road",
+        "od_enc_road_song",
+        "od_enc_song_wood"
+      ],
+      "reward_binding": null,
+      "dependencies": {
+        "fadyme": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        },
+        "jori_flint": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [
+            "burn"
+          ],
+          "fields": [
+            "continuous_modifiers",
+            "event=before_damage_dealt",
+            "predicate=owner_action_type"
+          ]
+        },
+        "kera_voss": {
+          "ops": [],
+          "selectors": [
+            "random_other_enemy"
+          ],
+          "statuses": [
+            "burn"
+          ],
+          "fields": [
+            "event=after_damage_dealt",
+            "hit_count",
+            "modifiers",
+            "predicate=count_enemies_with_status"
+          ]
+        },
+        "mahmut": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        },
+        "nixie_vale": {
+          "ops": [],
+          "selectors": [
+            "enemy_with_highest_atk",
+            "enemy_with_lowest_def"
+          ],
+          "statuses": [
+            "trail_mark"
+          ],
+          "fields": [
+            "continuous_modifiers",
+            "event=after_damage_dealt",
+            "event=before_damage_dealt",
+            "predicate=last_target_defeated",
+            "predicate=target_has_status_tag"
+          ]
+        },
+        "pippa_bell": {
+          "ops": [
+            "reduce_cooldowns"
+          ],
+          "selectors": [
+            "ally_with_lowest_focus"
+          ],
+          "statuses": [],
+          "fields": [
+            "event=after_ally_ultimate"
+          ]
+        },
+        "bellbound_dead": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        },
+        "hollow_pilgrim": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        }
+      },
+      "recorded_proxy_validation": {
+        "status": "PASS: schema-compatible proxies complete under existing combat engine",
+        "prototype_count": 3,
+        "simulation_runs": 27,
+        "base_replay_checks": 9,
+        "production_balance": "NOT_CERTIFIED"
+      }
+    },
+    {
+      "package": "open_road",
+      "event_id": "side_quest_open_road",
+      "title_en": "An Open Road",
+      "unlock": {
+        "after_stage": "5-5",
+        "runtime_stage_mapping": null,
+        "ownership_required": false,
+        "payment_required": false
+      },
+      "battles_per_run": 1,
+      "cast_speakers": [
+        "marek_vane",
+        "nara_vell"
+      ],
+      "enemy_ids": [
+        "bridge_revenant",
+        "hollow_cleric",
+        "hollow_pilgrim",
+        "lost_vow_knight"
+      ],
+      "encounter_ids": [
+        "or_enc_supply",
+        "or_enc_passage"
+      ],
+      "reward_binding": null,
+      "dependencies": {
+        "marek_vane": {
+          "ops": [
+            "delay_next_action"
+          ],
+          "selectors": [],
+          "statuses": [],
+          "fields": [
+            "continuous_modifiers",
+            "event=stat_snapshot"
+          ]
+        },
+        "nara_vell": {
+          "ops": [
+            "grant_damage_reduction",
+            "grant_opening_guard",
+            "modify_incoming_damage"
+          ],
+          "selectors": [
+            "event_target",
+            "selected_ally"
+          ],
+          "statuses": [],
+          "fields": [
+            "predicate=round_number_at_most",
+            "predicate=target_in_row"
+          ]
+        },
+        "bridge_revenant": {
+          "ops": [],
+          "selectors": [
+            "lowest_hp_front_enemy"
+          ],
+          "statuses": [],
+          "fields": []
+        },
+        "hollow_cleric": {
+          "ops": [],
+          "selectors": [
+            "lowest_hp_enemy",
+            "most_injured_enemy_ally"
+          ],
+          "statuses": [],
+          "fields": [
+            "predicate=enemy_ally_hp_below_pct",
+            "predicate=no_enemy_ally_below_pct"
+          ]
+        },
+        "hollow_pilgrim": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        },
+        "lost_vow_knight": {
+          "ops": [
+            "remove_shield"
+          ],
+          "selectors": [
+            "lowest_hp_front_enemy"
+          ],
+          "statuses": [],
+          "fields": []
+        }
+      },
+      "recorded_proxy_validation": {
+        "status": "PASS: schema-compatible proxies complete under existing combat engine",
+        "prototype_count": 2,
+        "simulation_runs": 18,
+        "base_replay_checks": 6,
+        "production_balance": "NOT_CERTIFIED"
+      }
+    },
+    {
+      "package": "somewhere_dry",
+      "event_id": "side_quest_somewhere_dry",
+      "title_en": "Somewhere Dry",
+      "unlock": {
+        "after_stage": "2-3",
+        "runtime_stage_mapping": null,
+        "ownership_required": false,
+        "payment_required": false
+      },
+      "battles_per_run": 1,
+      "cast_speakers": [
+        "mirel_quill",
+        "sister_aveline"
+      ],
+      "enemy_ids": [
+        "choir_knight",
+        "hollow_cleric",
+        "inkbound_dead"
+      ],
+      "encounter_ids": [
+        "dr_enc_shelf",
+        "dr_enc_desk"
+      ],
+      "reward_binding": null,
+      "dependencies": {
+        "mirel_quill": {
+          "ops": [
+            "reduce_status_durations"
+          ],
+          "selectors": [
+            "selected_ally"
+          ],
+          "statuses": [],
+          "fields": [
+            "event=after_ally_action",
+            "predicate=event_actor_has_any_buff"
+          ]
+        },
+        "sister_aveline": {
+          "ops": [],
+          "selectors": [
+            "event_target"
+          ],
+          "statuses": [
+            "dawnward"
+          ],
+          "fields": [
+            "event=ally_hp_threshold_crossed",
+            "predicate=event_target_hp_at_or_below_pct"
+          ]
+        },
+        "choir_knight": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": [
+            "event=ally_damaged"
+          ]
+        },
+        "hollow_cleric": {
+          "ops": [],
+          "selectors": [
+            "lowest_hp_enemy",
+            "most_injured_enemy_ally"
+          ],
+          "statuses": [],
+          "fields": [
+            "predicate=enemy_ally_hp_below_pct",
+            "predicate=no_enemy_ally_below_pct"
+          ]
+        },
+        "inkbound_dead": {
+          "ops": [],
+          "selectors": [
+            "lowest_hp_enemy"
+          ],
+          "statuses": [
+            "trail_mark"
+          ],
+          "fields": []
+        }
+      },
+      "recorded_proxy_validation": {
+        "status": "PASS: schema-compatible proxies complete under existing combat engine",
+        "prototype_count": 2,
+        "simulation_runs": 18,
+        "base_replay_checks": 6,
+        "production_balance": "NOT_CERTIFIED"
+      }
+    },
+    {
+      "package": "those_who_watch",
+      "event_id": "event_those_who_watch",
+      "title_en": "Those Who Watch",
+      "unlock": {
+        "after_stage": "6-5",
+        "runtime_stage_mapping": null,
+        "ownership_required": false,
+        "payment_required": false
+      },
+      "battles_per_run": 3,
+      "cast_speakers": [
+        "clem_marr",
+        "thistle_roe",
+        "vespera_wisp"
+      ],
+      "enemy_ids": [
+        "choir_knight",
+        "hollow_cleric",
+        "hollow_pilgrim",
+        "inkbound_dead"
+      ],
+      "encounter_ids": [
+        "tw_enc_ridge_1",
+        "tw_enc_ridge_2",
+        "tw_enc_terrace_1",
+        "tw_enc_terrace_2",
+        "tw_enc_return"
+      ],
+      "reward_binding": null,
+      "dependencies": {
+        "clem_marr": {
+          "ops": [
+            "modify_outgoing_damage"
+          ],
+          "selectors": [],
+          "statuses": [],
+          "fields": [
+            "event=before_damage_dealt",
+            "predicate=target_has_status",
+            "remove_status.selection=random_applied_buff"
+          ]
+        },
+        "thistle_roe": {
+          "ops": [],
+          "selectors": [
+            "last_heal_target"
+          ],
+          "statuses": [],
+          "fields": [
+            "predicate=owner_hp_above_pct"
+          ]
+        },
+        "vespera_wisp": {
+          "ops": [],
+          "selectors": [
+            "lowest_hp_enemy"
+          ],
+          "statuses": [],
+          "fields": [
+            "event=after_enemy_defeated",
+            "modifiers",
+            "predicate=event_target_had_status",
+            "predicate=target_has_status"
+          ]
+        },
+        "choir_knight": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": [
+            "event=ally_damaged"
+          ]
+        },
+        "hollow_cleric": {
+          "ops": [],
+          "selectors": [
+            "lowest_hp_enemy",
+            "most_injured_enemy_ally"
+          ],
+          "statuses": [],
+          "fields": [
+            "predicate=enemy_ally_hp_below_pct",
+            "predicate=no_enemy_ally_below_pct"
+          ]
+        },
+        "hollow_pilgrim": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        },
+        "inkbound_dead": {
+          "ops": [],
+          "selectors": [
+            "lowest_hp_enemy"
+          ],
+          "statuses": [
+            "trail_mark"
+          ],
+          "fields": []
+        }
+      },
+      "recorded_proxy_validation": {
+        "status": "PASS: schema-compatible proxies complete under existing combat engine",
+        "prototype_count": 5,
+        "simulation_runs": 45,
+        "base_replay_checks": 15,
+        "production_balance": "NOT_CERTIFIED"
+      }
+    },
+    {
+      "package": "two_labels",
+      "event_id": "event_two_labels",
+      "title_en": "Two Labels",
+      "unlock": {
+        "after_stage": "4-5",
+        "ownership_required": false,
+        "payment_required": false,
+        "runtime_stage_mapping": null,
+        "note_tr": "Canon stage 4-5 server completion; runtime stage e\u015flemesi tam Part I progression entegrasyonunda yap\u0131l\u0131r."
+      },
+      "battles_per_run": null,
+      "cast_speakers": [
+        "iona_mist",
+        "kera_voss",
+        "odelia_pike",
+        "tilda_fen"
+      ],
+      "enemy_ids": [
+        "bellbound_dead",
+        "hollow_pilgrim"
+      ],
+      "encounter_ids": [
+        "tl_enc_gate",
+        "tl_enc_coast_wall",
+        "tl_enc_coast_turn",
+        "tl_enc_load_sheds",
+        "tl_enc_load_cart",
+        "tl_enc_boundary_clean",
+        "tl_enc_boundary_scout",
+        "tl_enc_last_lane"
+      ],
+      "reward_binding": null,
+      "dependencies": {
+        "iona_mist": {
+          "ops": [
+            "grant_first_hit_guard"
+          ],
+          "selectors": [
+            "event_target",
+            "last_heal_target",
+            "selected_ally"
+          ],
+          "statuses": [],
+          "fields": [
+            "event=ally_hp_threshold_crossed",
+            "predicate=event_target_hp_at_or_below_pct"
+          ]
+        },
+        "kera_voss": {
+          "ops": [],
+          "selectors": [
+            "random_other_enemy"
+          ],
+          "statuses": [
+            "burn"
+          ],
+          "fields": [
+            "event=after_damage_dealt",
+            "hit_count",
+            "modifiers",
+            "predicate=count_enemies_with_status"
+          ]
+        },
+        "odelia_pike": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [
+            "soaked"
+          ],
+          "fields": [
+            "continuous_modifiers",
+            "event=before_damage_dealt",
+            "predicate=target_has_status"
+          ]
+        },
+        "tilda_fen": {
+          "ops": [
+            "apply_regeneration"
+          ],
+          "selectors": [
+            "event_target",
+            "last_heal_target"
+          ],
+          "statuses": [
+            "soaked_immunity"
+          ],
+          "fields": [
+            "event=after_ally_healed"
+          ]
+        },
+        "bellbound_dead": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        },
+        "hollow_pilgrim": {
+          "ops": [],
+          "selectors": [],
+          "statuses": [],
+          "fields": []
+        }
+      },
+      "recorded_proxy_validation": {
+        "status": "PASS: schema-compatible proxies complete under existing combat engine",
+        "prototype_count": 8,
+        "simulation_runs": 72,
+        "base_replay_checks": 24,
+        "production_balance": "NOT_CERTIFIED"
+      }
+    }
+  ]
+}
