@@ -53,13 +53,13 @@ const ssvTestPair = (await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve
 const spkiB64 = async (k: CryptoKey): Promise<string> => btoa(String.fromCharCode(...new Uint8Array((await crypto.subtle.exportKey('spki', k)) as ArrayBuffer)));
 const ssvTestSpki = await spkiB64(ssvTestPair.publicKey);
 const ssvSpki = btoa(String.fromCharCode(...new Uint8Array((await crypto.subtle.exportKey('spki', ssvPair.publicKey)) as ArrayBuffer)));
-import type { PlayClient, ProductPurchase, SubscriptionPurchase } from '../src/billing/play';
+import type { PlayClient, ProductPurchase, SubscriptionPurchase, OrderPurchase } from '../src/billing/play';
 
 /** In-memory Google Play: tests script purchases/subscriptions and observe acknowledge/consume calls. */
 export const fakePlay = {
   products: new Map<string, ProductPurchase>(),
   subs: new Map<string, SubscriptionPurchase>(),
-  orders: new Map<string, { orderId: string; createTimeMs: number; purchaseToken: string }>(),
+  orders: new Map<string, OrderPurchase>(),
   calls: [] as string[],
   failAck: false,
   reset(): void {
@@ -86,7 +86,7 @@ export const playClient: PlayClient = {
     if (scripted) return scripted;
     const entry = [...fakePlay.subs].find(([, s]) => s.latestOrderId === orderId);
     if (!entry) throw new Error('unknown order');
-    return { orderId, purchaseToken: entry[0], createTimeMs: entry[1].startTimeMs };
+    return { orderId, purchaseToken: entry[0], createTimeMs: entry[1].startTimeMs, fullRefundTimeMs: 0, partialRefund: false };
   },
   async acknowledgeProduct(id, token) {
     fakePlay.calls.push(`ack:${id}:${token}`);

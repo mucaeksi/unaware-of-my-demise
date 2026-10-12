@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { billingTag, verifyPurchase } from '../src/billing/service';
 import { handleRtdn } from '../src/billing/rtdn';
 import { deleteAccount } from '../src/account/service';
+import { claimMail } from '../src/mail/service';
 import { admin, baseEnv, fakePlay, playClient, post, signIn } from './helpers';
 
 const db = baseEnv.DB;
@@ -67,6 +68,60 @@ describe('durable RTDN delivery', () => {
     await db.prepare("INSERT INTO rtdn_seen (message_id) VALUES ('rtdn-legacy')").run();
     expect(await handleRtdn(db, baseEnv, playClient, notification('rtdn-legacy', token), at)).toEqual({ handled: 'subscription' });
     expect(await db.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 3200 });
+  });
+
+  it('a revoked notification with recovered current Google state cannot refund earlier periods', async () => {
+    const { token, playerId } = await renewal('stale-revoke');
+    expect(await handleRtdn(db, baseEnv, playClient, notification('rtdn-stale-revoke', token, 12), at)).toEqual({ handled: 'state_reconciled' });
+    expect(await db.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 1600 });
+    expect(await db.prepare("SELECT COUNT(*) AS n FROM purchases WHERE player_id = ?1 AND state = 'refunded'").bind(playerId).first()).toEqual({ n: 0 });
+  });
+
+  it('a verified current-period refund preserves earlier paid periods on the same token', async () => {
+    const { token, playerId, orderId } = await renewal('current-refund');
+    await verifyPurchase(db, playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token }, at);
+    fakePlay.subs.get(token)!.state = 'expired';
+    fakePlay.orders.set(orderId, { orderId, purchaseToken: token, createTimeMs: at.getTime(), fullRefundTimeMs: at.getTime() + 1000, partialRefund: false });
+    expect(await handleRtdn(db, baseEnv, playClient, notification('rtdn-current-refund', token, 12), new Date(at.getTime() + 2000))).toEqual({ handled: 'revoked' });
+    expect(await db.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 1600 });
+    expect(await db.prepare('SELECT order_id, state FROM purchases WHERE player_id = ?1 ORDER BY order_id').bind(playerId).all()).toMatchObject({ results: [{ order_id: 'test-order-current-refund', state: 'granted' }, { order_id: orderId, state: 'refunded' }] });
+  });
+
+  it('an unconfirmed voided order stays retryable and partial refunds require review without clawback', async () => {
+    const { token, playerId } = await renewal('unconfirmed-refund');
+    const orderId = 'test-order-unconfirmed-refund';
+    const message = { message: { messageId: 'rtdn-unconfirmed-refund', data: btoa(JSON.stringify({ voidedPurchaseNotification: { orderId } })) } };
+    fakePlay.orders.set(orderId, { orderId, purchaseToken: token, createTimeMs: at.getTime(), fullRefundTimeMs: 0, partialRefund: false });
+    await expect(handleRtdn(db, baseEnv, playClient, message, at)).rejects.toMatchObject({ code: 'refund_unconfirmed' });
+    fakePlay.orders.get(orderId)!.partialRefund = true;
+    await expect(handleRtdn(db, baseEnv, playClient, message, at)).rejects.toMatchObject({ code: 'refund_requires_review' });
+    expect(await db.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 1600 });
+    expect(await db.prepare('SELECT state FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ state: 'granted' });
+    fakePlay.orders.get(orderId)!.fullRefundTimeMs = at.getTime() + 1000;
+    expect(await handleRtdn(db, baseEnv, playClient, message, new Date(at.getTime() + 2000))).toEqual({ handled: 'refunded' });
+    expect(await db.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 0 });
+  });
+
+  it('does not grant a new period whose official order is already fully refunded', async () => {
+    const { token, playerId, orderId } = await renewal('refunded-before-verify');
+    fakePlay.orders.set(orderId, { orderId, purchaseToken: token, createTimeMs: at.getTime(), fullRefundTimeMs: at.getTime() + 1000, partialRefund: false });
+    expect(await verifyPurchase(db, playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token }, new Date(at.getTime() + 2000))).toMatchObject({ status: 'not_entitled' });
+    expect(await db.prepare('SELECT COUNT(*) AS n FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ n: 0 });
+    expect(await db.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 1600 });
+  });
+
+  it('suspends current-period mail while a revoked refund awaits Google proof, preserving earlier periods', async () => {
+    const { token, playerId, orderId } = await renewal('refund-propagation');
+    await verifyPurchase(db, playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token }, at);
+    const mail = await db.prepare('SELECT id FROM mail WHERE player_id = ?1 AND source_key = ?2').bind(playerId, `sub:${orderId}:hd:1`).first<{ id: number }>();
+    fakePlay.subs.get(token)!.state = 'expired';
+    const msg = notification('rtdn-refund-propagation', token, 12);
+    await expect(handleRtdn(db, baseEnv, playClient, msg, at)).rejects.toMatchObject({ code: 'refund_unconfirmed' });
+    await expect(claimMail(db, playerId, mail!.id, at)).rejects.toMatchObject({ code: 'entitlement_unavailable' });
+    expect(await db.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 3200 });
+    fakePlay.orders.set(orderId, { orderId, purchaseToken: token, createTimeMs: at.getTime(), fullRefundTimeMs: at.getTime() + 1000, partialRefund: false });
+    expect(await handleRtdn(db, baseEnv, playClient, msg, new Date(at.getTime() + 2000))).toEqual({ handled: 'revoked' });
+    expect(await db.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 1600 });
   });
 
   it('replays after fulfillment committed but both completion and failure-record writes were unavailable', async () => {

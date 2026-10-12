@@ -61,3 +61,7 @@ RTDN processing/done/expiry ownership and safe bounded retries passed nine regre
 ## Latest verified slice — R02-E1
 
 Bounded safe Play/OAuth transport and credential-scoped cache passed nine HTTP fixtures (seven failed before correction), plus consumed-marker and verified publisher cases. Lint/typecheck and all 455 application/tool tests passed. Next implement encrypted-token durable scheduled reconciliation with provider-read ownership/fencing, and revalidate revocation against authoritative order refund evidence; do not treat one token as proof that every historical billing period was refunded. Actual Google API/sandbox remains unverified.
+
+## Latest verified slice — R02-E2
+
+Revocation/voided refunds require authoritative exact-order full-refund proof; stale recovered state and earlier periods are preserved. Unconfirmed refunds remain retryable with current-period mail suspended; partial policy needs review. Six new cases (one negative failed before correction), lint/typecheck and all 461 application/tool tests pass. Real Graphify stats/query passed on the refreshed working-tree index. Next: encrypted-token durable scheduled reconciliation and provider-read ownership/fencing, then explicit legacy and claimed/noncurrency/partial policy preparation. External Google/device evidence stays unverified.

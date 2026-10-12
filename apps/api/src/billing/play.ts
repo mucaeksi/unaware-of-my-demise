@@ -22,10 +22,17 @@ export interface SubscriptionPurchase {
   startTimeMs: number;
   expiryTimeMs: number;
 }
+export interface OrderPurchase {
+  orderId: string;
+  createTimeMs: number;
+  purchaseToken: string;
+  fullRefundTimeMs: number;
+  partialRefund: boolean;
+}
 export interface PlayClient {
   getProduct(productId: string, token: string): Promise<ProductPurchase>;
   getSubscription(token: string, productId?: string): Promise<SubscriptionPurchase>;
-  getOrder(orderId: string): Promise<{ orderId: string; createTimeMs: number; purchaseToken: string }>;
+  getOrder(orderId: string): Promise<OrderPurchase>;
   acknowledgeProduct(productId: string, token: string): Promise<void>;
   consumeProduct(productId: string, token: string): Promise<void>;
   acknowledgeSubscription(productId: string, token: string): Promise<void>;
@@ -147,9 +154,9 @@ export class PlayApi implements PlayClient {
     };
   }
   /** Official Android Publisher v3 Order.createTime, not subscription lifecycle start or an assumed 30-day month. */
-  async getOrder(orderId: string): Promise<{ orderId: string; createTimeMs: number; purchaseToken: string }> {
-    const order = await this.call<{ orderId?: string; createTime?: string; purchaseToken?: string }>('GET', `orders/${encodeURIComponent(orderId)}`);
-    return { orderId: order.orderId ?? '', createTimeMs: ms(order.createTime), purchaseToken: order.purchaseToken ?? '' };
+  async getOrder(orderId: string): Promise<OrderPurchase> {
+    const order = await this.call<{ orderId?: string; createTime?: string; purchaseToken?: string; orderHistory?: { refundEvent?: { eventTime?: string }; partialRefundEvents?: unknown[] } }>('GET', `orders/${encodeURIComponent(orderId)}`);
+    return { orderId: order.orderId ?? '', createTimeMs: ms(order.createTime), purchaseToken: order.purchaseToken ?? '', fullRefundTimeMs: ms(order.orderHistory?.refundEvent?.eventTime), partialRefund: (order.orderHistory?.partialRefundEvents?.length ?? 0) > 0 };
   }
   async acknowledgeProduct(productId: string, token: string): Promise<void> {
     await this.call('POST', `purchases/products/${encodeURIComponent(productId)}/tokens/${encodeURIComponent(token)}:acknowledge`);

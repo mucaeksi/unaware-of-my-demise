@@ -107,8 +107,7 @@ export async function verifyPurchase(db: D1Database, play: PlayClient, playerId:
   if (s.productId !== product.product_id) throw new HttpError(422, 'product_mismatch', 'the token belongs to a different product');
   if (s.obfuscatedAccountId !== tag) throw new HttpError(403, 'account_mismatch', 'this purchase belongs to another account');
   if (!Number.isFinite(s.expiryTimeMs) || s.expiryTimeMs < 0) throw new HttpError(503, 'billing_invalid_response', 'billing expiry could not be verified');
-  await db.prepare("UPDATE purchases SET entitlement_state = ?2, period_end = CASE WHEN order_id = ?3 THEN ?4 ELSE period_end END, entitlement_checked_at = ?5 WHERE token_hash = ?1 AND state = 'granted' AND (entitlement_checked_at IS NULL OR entitlement_checked_at <= ?5)")
-    .bind(th, s.state, s.latestOrderId, new Date(s.expiryTimeMs).toISOString(), now.toISOString()).run();
+  await reconcileSubscriptionState(db, th, s, now);
   if (s.state === 'pending') return { status: 'pending', productId: product.product_id };
   if (!['active', 'canceled', 'in_grace'].includes(s.state) || !s.latestOrderId || s.expiryTimeMs <= now.getTime()) return { status: 'not_entitled', productId: product.product_id };
   const old = await db.prepare('SELECT fulfillment FROM purchases WHERE order_id = ?1').bind(s.latestOrderId).first<{ fulfillment: string | null }>();
@@ -118,6 +117,13 @@ export async function verifyPurchase(db: D1Database, play: PlayClient, playerId:
   const res = await grantSubscriptionPeriod(db, play, playerId, product, cfg, th, s, input.purchaseToken, 'verify', now);
   await syncSubscriptionMail(db, playerId, now);
   return res;
+}
+
+/** Shared by ordinary verification and revoked notifications; older observations cannot overwrite newer state. */
+export async function reconcileSubscriptionState(db: D1Database, th: string, s: Awaited<ReturnType<PlayClient['getSubscription']>>, now: Date): Promise<void> {
+  if (!Number.isFinite(s.expiryTimeMs) || s.expiryTimeMs < 0) throw new HttpError(503, 'billing_invalid_response', 'billing expiry could not be verified');
+  await db.prepare("UPDATE purchases SET entitlement_state = ?2, period_end = CASE WHEN order_id = ?3 THEN ?4 ELSE period_end END, entitlement_checked_at = ?5 WHERE token_hash = ?1 AND state = 'granted' AND (entitlement_checked_at IS NULL OR entitlement_checked_at <= ?5)")
+    .bind(th, s.state, s.latestOrderId, new Date(s.expiryTimeMs).toISOString(), now.toISOString()).run();
 }
 
 async function consume(db: D1Database, play: PlayClient, product: ProductRow, token: string, orderId: string): Promise<void> {
@@ -153,6 +159,9 @@ async function grantSubscriptionPeriod(
   const order = await play.getOrder(orderId);
   if (order.orderId !== orderId || order.purchaseToken !== token) throw new HttpError(422, 'order_mismatch', 'the order does not match this purchase');
   if (!Number.isSafeInteger(order.createTimeMs) || order.createTimeMs <= 0) throw new HttpError(503, 'billing_invalid_response', 'billing period start could not be verified');
+  if (!Number.isFinite(order.fullRefundTimeMs)) throw new HttpError(503, 'billing_invalid_response', 'order refund state could not be verified');
+  if (order.fullRefundTimeMs > 0) return { status: 'not_entitled', productId: product.product_id, orderId };
+  if (order.partialRefund) throw new HttpError(409, 'refund_requires_review', 'partial refund policy needs operator review');
   const start = Math.max(s.startTimeMs, order.createTimeMs);
   if (!Number.isFinite(start) || start >= s.expiryTimeMs) throw new HttpError(409, 'period_requires_review', 'billing period boundaries need reconciliation');
   const periodStart = new Date(start).toISOString();

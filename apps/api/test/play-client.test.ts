@@ -52,7 +52,7 @@ describe('Android Publisher transport contract (mocked HTTP)', () => {
       called = url;
       return response({ orderId: 'GPA/order..1', purchaseToken: 'test-token', createTime: '2026-02-28T00:00:00Z', buyerAddress: { address: 'private' }, total: { units: '100' } });
     });
-    expect(await new PlayApi(configured()).getOrder('GPA/order..1')).toEqual({ orderId: 'GPA/order..1', purchaseToken: 'test-token', createTimeMs: Date.parse('2026-02-28T00:00:00Z') });
+    expect(await new PlayApi(configured()).getOrder('GPA/order..1')).toEqual({ orderId: 'GPA/order..1', purchaseToken: 'test-token', createTimeMs: Date.parse('2026-02-28T00:00:00Z'), fullRefundTimeMs: 0, partialRefund: false });
     expect(called).toBe(`${api}/orders/GPA%2Forder..1`);
   });
 
@@ -65,6 +65,15 @@ describe('Android Publisher transport contract (mocked HTTP)', () => {
     });
     await expect(new PlayApi(configured()).getOrder('order')).rejects.toMatchObject({ status: 503, code: 'billing_unavailable', message: 'Google Play request could not complete; retry later' });
     expect(timeout.mock.calls).toEqual([[8000], [8000]]);
+  });
+
+  it('keeps partial refunds distinct from the official full-refund event', async () => {
+    let full = false;
+    vi.stubGlobal('fetch', async (url: string) => url === oauth ? response({ access_token: 'test-access-token', expires_in: 3600 }) : response({ orderId: 'order', orderHistory: { partialRefundEvents: [{}], ...(full ? { refundEvent: { eventTime: '2026-10-12T00:00:00Z' } } : {}) } }));
+    const client = new PlayApi(configured());
+    expect(await client.getOrder('order')).toMatchObject({ partialRefund: true, fullRefundTimeMs: 0 });
+    full = true;
+    expect(await client.getOrder('order')).toMatchObject({ partialRefund: true, fullRefundTimeMs: Date.parse('2026-10-12T00:00:00Z') });
   });
 
   it.each([{ access_token: 'token', expires_in: -1 }, { expires_in: 3600 }, { access_token: 'token', expires_in: '3600' }])('rejects malformed OAuth token response %j', async (body) => {

@@ -169,7 +169,7 @@ describe('subscription (Eclipse Blessing, canon 1,600 + 60 x 187)', () => {
     const { token, orderId } = await newSub(playerId);
     const subscription = fakePlay.subs.get(token)!;
     subscription.startTimeMs = Date.parse('2025-01-01'); subscription.expiryTimeMs = Date.parse(end);
-    fakePlay.orders.set(orderId, { orderId, purchaseToken: token, createTimeMs: Date.parse(begin) });
+    fakePlay.orders.set(orderId, { orderId, purchaseToken: token, createTimeMs: Date.parse(begin), fullRefundTimeMs: 0, partialRefund: false });
     await verifyPurchase(db(), playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token }, new Date(Date.parse(begin) + 1000));
     expect(await db().prepare('SELECT period_start, period_end FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ period_start: new Date(begin).toISOString(), period_end: new Date(end).toISOString() });
   });
@@ -399,6 +399,7 @@ describe('refunds and RTDN', () => {
     await verify(auth, 'tokens_small', token);
     // the player spent 100 of the 320 tokens
     await applyLedger(db(), { playerId, currency: 'eclipse_token', delta: -100, reason: 'test_spend', idempotencyKey: `spend:${uid()}` });
+    fakePlay.orders.set(orderId, { orderId, purchaseToken: token, createTimeMs: Date.now() - HOUR, fullRefundTimeMs: Date.now(), partialRefund: false });
     const res = await rtdn({ packageName: 'app.uomd.test', voidedPurchaseNotification: { purchaseToken: token, orderId, productType: 2, refundType: 1 } });
     expect(await res.json()).toEqual({ handled: 'refunded' });
     expect((await wallet(auth)).eclipse_token).toBe(0);
@@ -406,16 +407,18 @@ describe('refunds and RTDN', () => {
     expect(row?.state).toBe('refunded');
     expect(JSON.parse(row!.unrecovered)).toEqual({ eclipse_token: 100 });
     // a second void for the same order does nothing
-    expect(await (await rtdn({ packageName: 'app.uomd.test', voidedPurchaseNotification: { orderId } })).json()).toEqual({ handled: 'voided_unknown_order' });
+    expect(await (await rtdn({ packageName: 'app.uomd.test', voidedPurchaseNotification: { orderId } })).json()).toEqual({ handled: 'voided_already_refunded' });
     expect((await refundPurchase(db(), orderId, 'system')).refunded).toBe(false);
   });
 
   it('revoking a subscription refunds it and revokes unclaimed entitlement mail', async () => {
     const { auth, playerId } = await signIn(`sub-revoke-${uid()}`);
-    const { token } = await newSub(playerId, { startAgoH: 30, remainingH: 700 });
+    const { token, orderId } = await newSub(playerId, { startAgoH: 30, remainingH: 700 });
     await verify(auth, 'eclipse_blessing_30d', token);
     const mail = (await (await game('/api/v1/mail', { headers: auth })).json()) as { mail: { id: number }[] };
     expect(mail.mail.length).toBeGreaterThan(1);
+    fakePlay.subs.get(token)!.state = 'expired';
+    fakePlay.orders.set(orderId, { orderId, purchaseToken: token, createTimeMs: Date.now() - 30 * HOUR, fullRefundTimeMs: Date.now(), partialRefund: false });
     const r = await rtdn({ packageName: 'app.uomd.test', subscriptionNotification: { notificationType: 12, purchaseToken: token, subscriptionId: 'eclipse_blessing_30d' } });
     expect(await r.json()).toEqual({ handled: 'revoked' });
     expect((await wallet(auth)).eclipse_token ?? 0).toBe(0);

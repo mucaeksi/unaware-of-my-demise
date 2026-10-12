@@ -12,14 +12,14 @@
   },
   "now": [
     {
-      "title": "R02-E1 verified; durable encrypted-token reconciliation next",
-      "detail": "Provider deadlines/credential cache, consumed-marker recovery and verified RTDN publisher passed; 455 application/tool tests and lint/typecheck. Complete secure-token scheduled retries, provider-read serialization and legacy/refund policies. R02 stays open."
+      "title": "R02-E2 verified; secure scheduled recovery remains",
+      "detail": "Exact-order, Google-confirmed full refunds and propagation-time mail suspension passed locally; 461 application/tool tests and lint/typecheck. Complete durable encrypted-token scheduled reconciliation/provider ownership and legacy/claimed/noncurrency policy."
     }
   ],
   "next": [
     {
       "title": "R02 \u2014 durable financial recovery",
-      "detail": "Complete RTDN processing leases/done/replay, secure-token scheduled reconciliation, provider-read serialization and explicit legacy/claimed/noncurrency policy."
+      "detail": "Complete secure-token scheduled acknowledgement/renewal reconciliation and provider-read ownership/fencing; resolve explicit legacy/claimed/noncurrency/partial policies without touching live balances."
     },
     {
       "title": "R03 \u2014 release authority",
@@ -323,6 +323,26 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R02-E2-20261012",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "c0ab339502dad2cdeee8d4904576e3181a9d6c70",
+      "verifiedAt": "2026-10-12T22:05:11Z",
+      "scope": "R02-E2 working tree: stale-revocation negative case failed before correction; six added cases cover current-order-only refund, recovered state, full/partial/unconfirmed proof and retry, pending-mail suspension, already-refunded new-period denial and official refund-event projection. Lint/typecheck and 461 application/tool tests pass. Public Android Publisher OrderHistory/RefundEvent fields checked in integrity-verified googleapis 185.0.0 source. Refreshed free Graphify stats/query passed: 2779 nodes, 6945 edges, 149 communities; graph includes this working tree, not immutable deployed source. No live Google/refund/device/legacy repair proof. Scheduled encrypted-token recovery/provider-read ownership and financial policy remain open.",
+      "testIds": [
+        "apps/api/test/rtdn-recovery.test.ts",
+        "apps/api/test/billing.test.ts",
+        "apps/api/test/play-client.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "Graphify graph_stats + query_graph"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -476,7 +496,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Durable acknowledgement, immutable fulfillment, correct entitlements and crash-safe refund/notification completion.",
-      "implemented": "Locally verified ack retry, atomic original-credit currency refunds, immutable fulfillment/effective entitlement and mail/deletion guards, sales-independent paid verification, durable RTDN leases/done/dead-letter and audited operator reset. Scheduled reconciliation/provider serialization and legacy/refund policy remain open. OAuth/provider transport is bounded with safe failures and credential-scoped caching; consumed ack markers recover.",
+      "implemented": "Locally verified ack retry, atomic original-credit currency refunds, immutable fulfillment/effective entitlement and mail/deletion guards, sales-independent paid verification, durable RTDN leases/done/dead-letter and audited operator reset. Scheduled reconciliation/provider serialization and legacy/refund policy remain open. OAuth/provider transport is bounded with safe failures and credential-scoped caching; consumed ack markers recover. Refund notifications require official exact-order full-refund proof, preserve earlier periods, suspend uncertain current mail and keep partial refunds in review.",
       "dependsOn": [
         "R00"
       ],
@@ -501,7 +521,8 @@
         "E-R02-B-20261012",
         "E-R02-C-20261012",
         "E-R02-D-20261012",
-        "E-R02-E1-20261012"
+        "E-R02-E1-20261012",
+        "E-R02-E2-20261012"
       ],
       "blockerIds": [
         "B-PLAY",
@@ -537,6 +558,12 @@
           "title": "Bounded Google transport, scoped OAuth cache and consumed-marker recovery",
           "status": "COMPLETE",
           "remaining": "Actual Google API/sandbox and durable encrypted-token scheduled reconciliation/provider-read serialization remain open."
+        },
+        {
+          "id": "R02-E2",
+          "title": "Authoritative exact-order refund and propagation-time claim protection",
+          "status": "COMPLETE",
+          "remaining": "Actual Google full/partial/refund propagation timing and device proof unverified; scheduled encrypted-token recovery/provider ownership and legacy/claimed/noncurrency/partial policy remain open."
         }
       ]
     },
