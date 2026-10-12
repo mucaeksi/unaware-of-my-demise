@@ -113,3 +113,9 @@ For a designated disposable QA player who chooses deletion: export through GET `
 ## Incident closure record
 
 Record scope/environment, incident times, failing/known-good commits + Worker versions, affected order/transaction IDs in private evidence, actual mitigation, before/after health, ledger reconciliation, device validation, owner approval for sensitive action, remaining gaps and next owner. Never call a backup good from an R2 object’s existence alone, or a purchase fixed from an HTTP 200 alone. Routine logs/read-only diagnosis can continue; this documentation task authorizes no incident mutations.
+
+## RTDN processing recovery (R02-D)
+
+Authenticated deliveries acquire a 60-second ownership lease. In-flight concurrent deliveries return HTTP 503; completed identical deliveries return duplicate. Crashed/expired and legacy unknown markers are reconciled on the next authentic redelivery. Ten failed attempts retain dead_letter with a fixed safe failure code; original payloads and purchase tokens are not stored here. Delivery-specific journal events are unique by message ID/type.
+
+Viewer investigation: GET `/admin/api/billing/notifications?state=dead_letter` (50 records, opaque nextCursor for `before`). After correcting the cause, an operator may POST `/admin/api/billing/notifications/<messageId>/retry` with `expectedAttempts` from the record and a reason. CAS reset/audit share a batch; stale, done or unexpired processing records reject. This reset permits retry; it does not execute a job or prove Pub/Sub replay. Request a subsequent original authenticated push through the existing authorized Pub/Sub replay/redelivery path. Validate actual retry retention, dead-letter topic and seek permissions in the target project before claiming remote recovery; do not create roles or paste original tokens into investigation logs. Scheduled encrypted-token reconciliation remains separate open R02 work.

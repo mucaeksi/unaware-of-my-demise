@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R02-C verified; durable RTDN and scheduled reconciliation next",
-      "detail": "Frozen fulfillment, effective entitlement/atomic claims and deletion guards passed locally. 434 application/tool tests, lint/typecheck pass. Complete RTDN leases, encrypted-token retries and explicit legacy/noncurrency refund policy; R02 stays open."
+      "title": "R02-D verified; secure scheduled reconciliation next",
+      "detail": "Ack/refund/fulfillment and durable RTDN leases/done/operator reset passed locally; 443 application/tool tests. Complete encrypted-token scheduled retries/provider deadlines/serialization and legacy/claimed/noncurrency policies; R02 remains open."
     }
   ],
   "next": [
@@ -285,6 +285,26 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R02-D-20261012",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "9bcd5c58d160324354c80ced1715ec6b715a7117",
+      "verifiedAt": "2026-10-12T21:54:35Z",
+      "scope": "R02-D working tree: three RTDN regression cases failed before correction; nine recovery cases and all 443 application/tool tests, lint/typecheck pass. Crash after acquisition/effect, concurrent delivery, legacy unknown markers, expired ownership, bounded failures, message-content conflicts and audited CAS operator reset covered. Explicit deleted-account rejection. Isolated local game/admin Workers and 21 D1 migrations passed health; admin with absent Access config denied investigation with 503. No remote migration/PubSub/dead-letter/replay or device proof. Scheduled secure-token retries, provider-read serialization/deadlines and legacy/refund policy remain open.",
+      "testIds": [
+        "apps/api/test/rtdn-recovery.test.ts",
+        "apps/api/test/billing.test.ts",
+        "apps/api/test/admin.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "local game/admin Worker smoke: ports 18887/18888, isolated .cache/r02d-preview"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -438,7 +458,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Durable acknowledgement, immutable fulfillment, correct entitlements and crash-safe refund/notification completion.",
-      "implemented": "Local ack recovery, atomic original-credit currency refunds, immutable fulfillment/effective entitlement, atomic mail claims, deletion guards and paid sales-independent verification. RTDN and scheduled recovery/policy remain open.",
+      "implemented": "Locally verified ack retry, atomic original-credit currency refunds, immutable fulfillment/effective entitlement and mail/deletion guards, sales-independent paid verification, durable RTDN leases/done/dead-letter and audited operator reset. Scheduled reconciliation/provider serialization and legacy/refund policy remain open.",
       "dependsOn": [
         "R00"
       ],
@@ -449,7 +469,10 @@
         "apps/api/src/mail/service.ts",
         "apps/api/test/billing.test.ts",
         "apps/api/src/billing/play.ts",
-        "apps/api/migrations/0020_purchase_entitlements.sql"
+        "apps/api/migrations/0020_purchase_entitlements.sql",
+        "apps/api/migrations/0021_rtdn_processing.sql",
+        "apps/api/src/admin/billing.ts",
+        "apps/api/test/rtdn-recovery.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -457,7 +480,8 @@
         "E-EXTERNAL",
         "E-R02-A-20261012",
         "E-R02-B-20261012",
-        "E-R02-C-20261012"
+        "E-R02-C-20261012",
+        "E-R02-D-20261012"
       ],
       "blockerIds": [
         "B-PLAY",
@@ -481,6 +505,12 @@
           "title": "Frozen fulfillment, effective entitlement and atomic mail/deletion guards",
           "status": "COMPLETE",
           "remaining": "Official order API/sandbox remains external; legacy terms, scheduled retries, RTDN leases, provider-read serialization and claimed/noncurrency refund policy stay open."
+        },
+        {
+          "id": "R02-D",
+          "title": "Durable RTDN processing ownership, completion and audited retry",
+          "status": "COMPLETE",
+          "remaining": "Actual Pub/Sub retention/retry/dead-letter/seek and physical sandbox are unverified; operator reset requires subsequent authentic redelivery. Secure-token scheduled reconciliation, provider-read serialization/deadlines and financial policies remain open."
         }
       ]
     },

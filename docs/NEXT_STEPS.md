@@ -53,3 +53,7 @@ Atomic original-credit currency refunds passed catalog-edit, database-outage/ret
 ## Latest verified slice — R02-C
 
 Immutable fulfillment/effective entitlement, authoritative order starts, atomic mail/refund and deletion guards and sales-independent paid verification passed 28 billing cases. Lint/typecheck and all 434 application/tool tests passed; migration 0020 is local only. Continue durable RTDN processing/lease/done and secure-token scheduled reconciliation; legacy terms and claimed/noncurrency refund decisions remain explicit. Actual Android Publisher orders.get permission and physical sandbox are still unverified.
+
+## Latest verified slice — R02-D
+
+RTDN processing/done/expiry ownership and safe bounded retries passed nine regressions (three failed before correction), lint/typecheck and all 443 application/tool tests. Isolated local game/admin Workers passed health with 21 migrations; absent Access config denied admin access. Audited operator reset needs a subsequent authentic Pub/Sub redelivery, not an invented queued job. Continue encrypted-token scheduled acknowledgement/renewal reconciliation, provider-read serialization/deadlines and explicit legacy/refund policies.

@@ -10,6 +10,7 @@ import { audit, auditIfChanged, auditStatement } from './db/audit';
 import { onError, securityHeaders } from './http';
 import type { AdminEnv } from './env';
 import { registerOps } from './admin/ops';
+import { registerBillingOps } from './admin/billing';
 
 type Ctx = { Bindings: AdminEnv; Variables: { admin: AdminIdentity } };
 
@@ -96,6 +97,7 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     await next();
   };
   const store = (env: AdminEnv): ContentStore => new ContentStore(env.DB, env.CONTENT);
+  registerBillingOps(app, need);
 
   // public, reveals nothing sensitive: lets the SPA show "auth not configured" without a login
   app.get('/admin/api/health', (c) => c.json({ ok: true, service: 'uomd-admin', version: c.env.CF_VERSION_METADATA ?? null, environment: c.env.ENVIRONMENT, auth_configured: Boolean(c.env.ACCESS_TEAM_DOMAIN && c.env.ACCESS_AUD), signing_configured: Boolean(c.env.CONTENT_SIGNING_KEY && c.env.CONTENT_SIGNING_KID) }));
