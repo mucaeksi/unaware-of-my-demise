@@ -5,7 +5,8 @@ import { HttpError } from '../content/store';
 import type { GameEnv } from '../env';
 import { googleKeyResolver } from '../player/auth';
 import type { PlayClient } from './play';
-import { billingTag, reconcileSubscriptionState, refundPurchase, verifyPurchase } from './service';
+import { billingTag, reconcileSubscriptionState, refundPurchase } from './service';
+import { verifyReceipt, withBillingLock } from './recovery';
 
 /**
  * Pub/Sub push authentication: the push subscription is configured with an OIDC token (audience = RTDN_AUDIENCE, signed by the
@@ -86,8 +87,8 @@ async function processNotification(db: D1Database, env: GameEnv, play: PlayClien
   if (env.PLAY_PACKAGE_NAME && note.packageName && note.packageName !== env.PLAY_PACKAGE_NAME) return { handled: 'ignored_other_package' };
   const log = (type: string, orderId: string | null, detail: Record<string, unknown>) =>
     db.prepare("INSERT INTO purchase_events (source, order_id, type, detail) VALUES ('rtdn', ?1, ?2, ?3) ON CONFLICT DO NOTHING").bind(orderId, type, JSON.stringify({ ...detail, messageId })).run();
-  const suspendRefundMail = (orderId: string) => db.prepare("UPDATE purchases SET entitlement_state = 'unknown', entitlement_checked_at = ?2 WHERE order_id = ?1 AND kind = 'subscription' AND state = 'granted' AND (entitlement_checked_at IS NULL OR entitlement_checked_at <= ?2)")
-    .bind(orderId, now.toISOString()).run();
+  const suspendRefundMail = (orderId: string, fence: () => D1PreparedStatement) => db.batch([fence(), db.prepare("UPDATE purchases SET entitlement_state = 'unknown', entitlement_checked_at = ?2 WHERE order_id = ?1 AND kind = 'subscription' AND state = 'granted' AND (entitlement_checked_at IS NULL OR entitlement_checked_at <= ?2)")
+    .bind(orderId, now.toISOString()), db.prepare('DELETE FROM tx_guard')]);
 
   if (note.testNotification) {
     await log('test', null, {});
@@ -98,47 +99,53 @@ async function processNotification(db: D1Database, env: GameEnv, play: PlayClien
     const known = await db.prepare('SELECT token_hash, state FROM purchases WHERE order_id = ?1').bind(orderId).first<{ token_hash: string; state: string }>();
     if (!known) return { handled: 'voided_unknown_order' };
     if (known.state === 'refunded') return { handled: 'voided_already_refunded' };
-    await suspendRefundMail(orderId);
-    const order = await play.getOrder(orderId);
-    if (order.orderId !== orderId || await sha256Hex(`play-token:${order.purchaseToken}`) !== known.token_hash) throw new HttpError(422, 'order_mismatch', 'refund order does not match this purchase');
-    if (!Number.isFinite(order.fullRefundTimeMs)) throw new HttpError(503, 'billing_invalid_response', 'order refund state could not be verified');
-    if (order.fullRefundTimeMs <= 0) throw new HttpError(order.partialRefund ? 409 : 503, order.partialRefund ? 'refund_requires_review' : 'refund_unconfirmed', 'verified full-order refund is required');
-    const r = await refundPurchase(db, orderId, 'rtdn', now);
-    await log('voided', orderId, { refunded: r.refunded, unrecovered: r.unrecovered });
-    return { handled: r.refunded ? 'refunded' : 'voided_already_refunded' };
+    return withBillingLock(db, known.token_hash, async (fence) => {
+      await suspendRefundMail(orderId, fence);
+      const order = await play.getOrder(orderId);
+      if (order.orderId !== orderId || await sha256Hex(`play-token:${order.purchaseToken}`) !== known.token_hash) throw new HttpError(422, 'order_mismatch', 'refund order does not match this purchase');
+      if (!Number.isFinite(order.fullRefundTimeMs)) throw new HttpError(503, 'billing_invalid_response', 'order refund state could not be verified');
+      if (order.fullRefundTimeMs <= 0) throw new HttpError(order.partialRefund ? 409 : 503, order.partialRefund ? 'refund_requires_review' : 'refund_unconfirmed', 'verified full-order refund is required');
+      const r = await refundPurchase(db, orderId, 'rtdn', now, { fence });
+      await log('voided', orderId, { refunded: r.refunded, unrecovered: r.unrecovered });
+      return { handled: r.refunded ? 'refunded' : 'voided_already_refunded' };
+    });
   }
   const sub = note.subscriptionNotification;
   if (sub) {
     const th = await sha256Hex(`play-token:${sub.purchaseToken}`);
-    const known = await db.prepare('SELECT player_id, product_id FROM purchases WHERE token_hash = ?1 ORDER BY granted_at DESC LIMIT 1').bind(th).first<{ player_id: string; product_id: string }>();
+    let known = await db.prepare('SELECT player_id, product_id FROM purchases WHERE token_hash = ?1 ORDER BY granted_at DESC LIMIT 1').bind(th).first<{ player_id: string; product_id: string }>();
+    known ??= await db.prepare("SELECT player_id, product_id FROM billing_jobs WHERE token_hash = ?1 AND kind = 'subscription' AND state <> 'done'").bind(th).first<{ player_id: string; product_id: string }>();
     if (!known) {
       await log('subscription_unmatched', null, { type: sub.notificationType }); // the first purchase is granted by the client's verify call
       return { handled: 'unmatched' };
     }
     if (sub.notificationType === REVOKED) {
-      const current = await play.getSubscription(sub.purchaseToken, known.product_id);
-      if (current.productId !== known.product_id || current.obfuscatedAccountId !== await billingTag(known.player_id)) throw new HttpError(403, 'account_mismatch', 'subscription does not match this account');
-      await reconcileSubscriptionState(db, th, current, now);
-      if (['active', 'canceled', 'in_grace'].includes(current.state)) {
-        await log('revocation_stale', null, { state: current.state });
-        return { handled: 'state_reconciled' };
-      }
-      // Expired mail normally retains its grace. A pending revocation needs conservative claim suspension instead.
-      await suspendRefundMail(current.latestOrderId);
-      const order = await play.getOrder(current.latestOrderId);
-      if (order.orderId !== current.latestOrderId || order.purchaseToken !== sub.purchaseToken) throw new HttpError(422, 'order_mismatch', 'refund order does not match this purchase');
-      if (!Number.isFinite(order.fullRefundTimeMs)) throw new HttpError(503, 'billing_invalid_response', 'order refund state could not be verified');
-      if (order.fullRefundTimeMs <= 0) {
-        if (order.partialRefund) throw new HttpError(409, 'refund_requires_review', 'partial refund policy needs operator review');
-        throw new HttpError(503, 'refund_unconfirmed', 'revocation refund needs authoritative reconciliation');
-      }
-      const r = await refundPurchase(db, order.orderId, 'rtdn', now);
-      await log('revoked', order.orderId, { refunded: r.refunded, unrecovered: r.unrecovered });
-      return { handled: 'revoked' };
+      const account = known;
+      return withBillingLock(db, th, async (fence) => {
+        const current = await play.getSubscription(sub.purchaseToken, account.product_id);
+        if (current.productId !== account.product_id || current.obfuscatedAccountId !== await billingTag(account.player_id)) throw new HttpError(403, 'account_mismatch', 'subscription does not match this account');
+        await reconcileSubscriptionState(db, th, current, now, { fence });
+        if (['active', 'canceled', 'in_grace'].includes(current.state)) {
+          await log('revocation_stale', null, { state: current.state });
+          return { handled: 'state_reconciled' };
+        }
+        // Expired mail normally retains its grace. A pending revocation needs conservative claim suspension instead.
+        await suspendRefundMail(current.latestOrderId, fence);
+        const order = await play.getOrder(current.latestOrderId);
+        if (order.orderId !== current.latestOrderId || order.purchaseToken !== sub.purchaseToken) throw new HttpError(422, 'order_mismatch', 'refund order does not match this purchase');
+        if (!Number.isFinite(order.fullRefundTimeMs)) throw new HttpError(503, 'billing_invalid_response', 'order refund state could not be verified');
+        if (order.fullRefundTimeMs <= 0) {
+          if (order.partialRefund) throw new HttpError(409, 'refund_requires_review', 'partial refund policy needs operator review');
+          throw new HttpError(503, 'refund_unconfirmed', 'revocation refund needs authoritative reconciliation');
+        }
+        const r = await refundPurchase(db, order.orderId, 'rtdn', now, { fence });
+        await log('revoked', order.orderId, { refunded: r.refunded, unrecovered: r.unrecovered });
+        return { handled: 'revoked' };
+      });
     }
     // Play is asked again for every state change; grants remain idempotent per order id.
     try {
-      await verifyPurchase(db, play, known.player_id, { productId: known.product_id, purchaseToken: sub.purchaseToken }, now);
+      await verifyReceipt(env, play, known.player_id, { productId: known.product_id, purchaseToken: sub.purchaseToken }, now);
     } catch (e) {
       if (e instanceof HttpError && ['account_mismatch', 'unknown_product', 'account_deleted'].includes(e.code)) {
         await log('subscription_rejected', null, { type: sub.notificationType, code: e.code });
@@ -150,6 +157,14 @@ async function processNotification(db: D1Database, env: GameEnv, play: PlayClien
     return { handled: GRANTING.has(sub.notificationType) ? 'subscription' : 'state_reconciled' };
   }
   if (note.oneTimeProductNotification) {
+    const token = note.oneTimeProductNotification.purchaseToken;
+    const th = await sha256Hex(`play-token:${token}`);
+    const known = await db.prepare("SELECT player_id, product_id FROM billing_jobs WHERE token_hash = ?1 AND kind = 'consumable' AND state = 'pending'").bind(th).first<{ player_id: string; product_id: string }>();
+    if (known) {
+      const result = await verifyReceipt(env, play, known.player_id, { productId: known.product_id, purchaseToken: token }, now);
+      await log('one_time_reconciled', result.orderId ?? null, { status: result.status });
+      return { handled: 'one_time_reconciled' };
+    }
     await log('one_time', null, { type: note.oneTimeProductNotification.notificationType }); // grants happen on the client's verify call
     return { handled: 'noted' };
   }

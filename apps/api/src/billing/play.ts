@@ -11,6 +11,7 @@ export interface ProductPurchase {
   consumed: boolean;
   obfuscatedAccountId?: string;
   purchaseTimeMs: number;
+  testPurchase?: boolean;
 }
 export interface SubscriptionPurchase {
   state: 'active' | 'canceled' | 'in_grace' | 'on_hold' | 'paused' | 'expired' | 'pending' | 'unknown';
@@ -21,6 +22,7 @@ export interface SubscriptionPurchase {
   obfuscatedAccountId?: string;
   startTimeMs: number;
   expiryTimeMs: number;
+  testPurchase?: boolean;
 }
 export interface OrderPurchase {
   orderId: string;
@@ -100,7 +102,7 @@ export class PlayApi implements PlayClient {
     return googleJson<T>(`${API}/${this.pkg}/${path}`, { method, headers: { Authorization: `Bearer ${await accessToken(this.env)}`, 'Content-Type': 'application/json' }, ...(method === 'POST' ? { body: '{}' } : {}) }, true);
   }
   async getProduct(productId: string, token: string): Promise<ProductPurchase> {
-    const r = await this.call<{ purchaseState?: number; consumptionState?: number; acknowledgementState?: number; orderId?: string; obfuscatedExternalAccountId?: string; purchaseTimeMillis?: string }>(
+    const r = await this.call<{ purchaseState?: number; consumptionState?: number; acknowledgementState?: number; orderId?: string; obfuscatedExternalAccountId?: string; purchaseTimeMillis?: string; purchaseType?: number }>(
       'GET',
       `purchases/products/${encodeURIComponent(productId)}/tokens/${encodeURIComponent(token)}`
     );
@@ -110,7 +112,8 @@ export class PlayApi implements PlayClient {
       acknowledged: r.acknowledgementState === 1,
       consumed: r.consumptionState === 1,
       ...(r.obfuscatedExternalAccountId ? { obfuscatedAccountId: r.obfuscatedExternalAccountId } : {}),
-      purchaseTimeMs: Number(r.purchaseTimeMillis ?? 0)
+      purchaseTimeMs: Number(r.purchaseTimeMillis ?? 0),
+      testPurchase: r.purchaseType === 0
     };
   }
   async getSubscription(token: string, productId?: string): Promise<SubscriptionPurchase> {
@@ -119,6 +122,7 @@ export class PlayApi implements PlayClient {
       latestOrderId?: string;
       acknowledgementState?: string;
       startTime?: string;
+      testPurchase?: Record<string, never>;
       lineItems?: { productId?: string; expiryTime?: string; latestSuccessfulOrderId?: string }[];
       externalAccountIdentifiers?: { obfuscatedExternalAccountId?: string };
     }>('GET', `purchases/subscriptionsv2/tokens/${encodeURIComponent(token)}`);
@@ -150,7 +154,8 @@ export class PlayApi implements PlayClient {
       acknowledged: r.acknowledgementState === 'ACKNOWLEDGEMENT_STATE_ACKNOWLEDGED',
       ...(r.externalAccountIdentifiers?.obfuscatedExternalAccountId ? { obfuscatedAccountId: r.externalAccountIdentifiers.obfuscatedExternalAccountId } : {}),
       startTimeMs: ms(r.startTime),
-      expiryTimeMs: ms(line?.expiryTime)
+      expiryTimeMs: ms(line?.expiryTime),
+      testPurchase: !!r.testPurchase
     };
   }
   /** Official Android Publisher v3 Order.createTime, not subscription lifecycle start or an assumed 30-day month. */

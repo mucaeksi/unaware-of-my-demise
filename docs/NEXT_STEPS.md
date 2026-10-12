@@ -14,25 +14,16 @@ Owner instruction updated **2026-10-12**: complete README infrastructure in depe
 
 - Deliverables: capability/evidence registry in DEV_TRACKER, reconciled BUILD_STATE/INFRA_ROADMAP/GAME_FLOW/QA_ANDROID/MONITORING/NEXT_STEPS and README status pointer.
 - Verification: document/link/registry checks and actual admin-data generation/build compatibility. Dated application audit remains historical. The delivery commit contains this record (`git log -1 -- docs/NEXT_STEPS.md`).
-- R01–R18 engineering acceptance stays open. Live migrations/seeding, paid media, new permissions and public release are outside R00.
+- At R00 delivery, R01–R18 engineering acceptance stayed open; current status is in DEV_TRACKER. Live migrations/seeding, paid media, new permissions and public release are outside R00.
 
-## Proposed next selections
+## Current continuation route
 
-| Order | Task | Concrete first slice |
+| Order | Task | Next action |
 | --- | --- | --- |
-| 1 | R01 — complete locally | Shared material guard and 11 regressions delivered; 417 application/tool tests, lint/typecheck and builds passed. |
-| 2 | R02 | Choose an acknowledgement/refund/RTDN recovery slice with crash/replay tests and exact entitlement policy. |
-| 3 | R03 | Persist highest patch generation through kill/restart/rollback; then atomic publication and economic admission. |
-| 4 | R04 | Resolve zero-cost repeat payout policy and cross-source duplicate grants, after R01/R03. |
-| 5 | R06 | Correct Break/Auto, then gear/loans/capability semantics before chapter acceptance. |
-
-Layout comparison (R10) precedes dependent paid art (R15); reservation/ingest guards are R14. Final balance and sound/VO are R16. Required executable mode/menu foundations ship in the first AAB; patches deliver supported data/media.
-
-## External evidence and decisions
-
-Use blocker IDs in DEV_TRACKER. Revalidate existing Google/Play/AdMob configuration before asking to create anything; public IDs and old Console notes do not prove access. Do not replace the owner-held upload or age keys. Actual layout/reward/privacy choices, encrypted recovery and public release remain bounded owner inputs.
-
-The media budget is already approved; retain the active backup bucket. Deploy through Workers Builds, one Worker per build and one migration owner. Never run two E2E stacks against the same ports/state or rebuild mutable content while E2E reads it. Historical Claude workflow IDs, old branch instructions and removed Actions jobs are not executable work orders for this host.
+| 1 | R02 acceptance gaps | Prepare explicit legacy/refund/calendar/native-offer policy and secure/live configuration proof; local recovery slices are complete. |
+| 2 | R03 | Close durable generation, concurrent publication and economic release/session authority independently of missing Google access. |
+| 3 | R04–R06 | Fix reward/copy races, client durability and combat semantics before chapter/experience acceptance. |
+| 4 | R07–R18 | Follow README dependencies; finish noncreative infrastructure, retain genuine external/device/store gates and defer paid/creative assets. |
 
 ## Five-hour continuation runner
 
@@ -42,26 +33,10 @@ This host has no crontab or running systemd. The local loop survives while its p
 
 An independent read-only model readiness probe timed out after proxy HTTP 403 for `chatgpt.com` (2026-10-12). The saved environment draft adds only that custom hostname and replaces obsolete Godot/PostgreSQL/Next.js install/start instructions with the current Phaser/D1/pinned-tool setup. Saving is confirmed; applying/publishing is pending in environment settings. Existing package-manager presets and credential requirements are preserved. Recheck actual model access after publication; no automatic continuation PASS is asserted beforehand.
 
-## Latest verified slice — R02-A
+## Latest verified slice — R02-E3
 
-Existing-order subscription ack retry/provider-marker reconciliation passed two new regressions, all 419 application/tool tests and lint/typecheck. See README R02 and tracker evidence. Continue atomic refund/snapshot and RTDN/entitlement recovery; scheduled encrypted-token retry/deadlines are still open.
+R02-A/B/C/D/E1/E2/E3 are locally verified; README R02 summarizes each and DEV_TRACKER retains dated evidence. Latest: encrypted durable pending/retry work and shared client/RTDN/Cron transaction fences, bounded scheduled recovery, lost consume-marker repair, active-refund observation, earned-window expiry/grace and secure deletion/operator/export behavior. Lint/typecheck and all **480 application/tool tests** passed. Two isolated local Workers, 22 migrations and real scheduled dispatch passed; missing keyring/Access fails closed. No live keys, money changes, migration deployment, Google/device or formal security-audit proof.
 
-## Latest verified slice — R02-B
+Current host Wrangler is unauthenticated; staging/official-reference reads receive proxy 403. Set **BILLING_TOKEN_KEYS** in each existing game Worker secret store and prove exact deployed Cron/Google behavior using approved isolated sandbox data; source Cron config is not a live run. See SECRETS_AND_PERMISSIONS. Local tests use ephemeral test keys only.
 
-Atomic original-credit currency refunds passed catalog-edit, database-outage/retry, duplicate-refund and racing-spend tests; all 423 application/tool tests and lint/typecheck passed. No live or legacy financial repair. Continue immutable subscription terms/effective entitlement, RTDN processing leases and encrypted-token scheduled retries. R02 remains in progress.
-
-## Latest verified slice — R02-C
-
-Immutable fulfillment/effective entitlement, authoritative order starts, atomic mail/refund and deletion guards and sales-independent paid verification passed 28 billing cases. Lint/typecheck and all 434 application/tool tests passed; migration 0020 is local only. Continue durable RTDN processing/lease/done and secure-token scheduled reconciliation; legacy terms and claimed/noncurrency refund decisions remain explicit. Actual Android Publisher orders.get permission and physical sandbox are still unverified.
-
-## Latest verified slice — R02-D
-
-RTDN processing/done/expiry ownership and safe bounded retries passed nine regressions (three failed before correction), lint/typecheck and all 443 application/tool tests. Isolated local game/admin Workers passed health with 21 migrations; absent Access config denied admin access. Audited operator reset needs a subsequent authentic Pub/Sub redelivery, not an invented queued job. Continue encrypted-token scheduled acknowledgement/renewal reconciliation, provider-read serialization/deadlines and explicit legacy/refund policies.
-
-## Latest verified slice — R02-E1
-
-Bounded safe Play/OAuth transport and credential-scoped cache passed nine HTTP fixtures (seven failed before correction), plus consumed-marker and verified publisher cases. Lint/typecheck and all 455 application/tool tests passed. Next implement encrypted-token durable scheduled reconciliation with provider-read ownership/fencing, and revalidate revocation against authoritative order refund evidence; do not treat one token as proof that every historical billing period was refunded. Actual Google API/sandbox remains unverified.
-
-## Latest verified slice — R02-E2
-
-Revocation/voided refunds require authoritative exact-order full-refund proof; stale recovered state and earlier periods are preserved. Unconfirmed refunds remain retryable with current-period mail suspended; partial policy needs review. Six new cases (one negative failed before correction), lint/typecheck and all 461 application/tool tests pass. Real Graphify stats/query passed on the refreshed working-tree index. Next: encrypted-token durable scheduled reconciliation and provider-read ownership/fencing, then explicit legacy and claimed/noncurrency/partial policy preparation. External Google/device evidence stays unverified.
+Next source work: prepare legacy/claimed/noncurrency/partial/calendar-cadence and native offer-version decisions, then close independent **R03** generation/publication/economic release authority. R02 stays in progress for those acceptance gaps. Continue other authorized infrastructure while external setup waits; defer creative/paid assets.

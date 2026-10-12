@@ -1,6 +1,6 @@
 import { env } from 'cloudflare:workers';
 import { SignJWT, exportJWK, generateKeyPair, type JWTVerifyGetKey } from 'jose';
-import { generateSigningKeyPair, sha256Hex, type PublicKeyJwk } from '@uomd/shared';
+import { base64UrlEncode, generateSigningKeyPair, sha256Hex, type PublicKeyJwk } from '@uomd/shared';
 import { createAdminApp } from '../src/adminApp';
 import { createGameApp } from '../src/gameApp';
 import type { AdminEnv, GameEnv } from '../src/env';
@@ -28,7 +28,8 @@ export async function accessToken(identity: { email?: string; commonName?: strin
 
 const getKey = ((): JWTVerifyGetKey => async () => keys.publicKey) as unknown as () => JWTVerifyGetKey;
 
-export const baseEnv = env as unknown as GameEnv & AdminEnv;
+// Ephemeral unit-test keyring only; never written to a Worker or reused outside this test process.
+export const baseEnv: GameEnv & AdminEnv = { ...(env as unknown as GameEnv & AdminEnv), PLAY_PACKAGE_NAME: 'app.uomd.test', BILLING_TOKEN_KEYS: JSON.stringify({ current: 'test', keys: { test: base64UrlEncode(crypto.getRandomValues(new Uint8Array(32))) } }) };
 
 export function adminEnv(over: Partial<AdminEnv> = {}): AdminEnv {
   return {

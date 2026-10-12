@@ -53,6 +53,8 @@ describe('mailbox', () => {
 
   it('a sourceKey makes creation idempotent; attachments and recipient are immutable; mail is never deleted', async () => {
     const { playerId } = await signIn(`sub-idem-${key()}`);
+    await db().prepare("INSERT INTO purchases (order_id, player_id, product_id, kind, token_hash, period_start, period_end) VALUES ('ORDER1', ?1, 'eclipse_blessing_30d', 'subscription', ?2, ?3, ?4)")
+      .bind(playerId, 'f'.repeat(64), new Date(Date.now() - 3_600_000).toISOString(), new Date(Date.now() + 30 * 86_400_000).toISOString()).run();
     const m = { kind: 'subscription' as const, title: 'Half-day blessing', attachments: [{ type: 'currency' as const, currency: 'eclipse_token' as const, amount: 187 }], sourceKey: 'sub:ORDER1:halfday:1' };
     const first = await sendMail(db(), playerId, m, 'system');
     const second = await sendMail(db(), playerId, m, 'system');
@@ -61,6 +63,12 @@ describe('mailbox', () => {
     await expect(db().prepare("UPDATE mail SET attachments = '[]' WHERE id = ?1").bind(first.id).run()).rejects.toThrow(/immutable/);
     await expect(db().prepare("UPDATE mail SET player_id = 'x' WHERE id = ?1").bind(first.id).run()).rejects.toThrow();
     await expect(db().prepare('DELETE FROM mail WHERE id = ?1').bind(first.id).run()).rejects.toThrow(/retained/);
+  });
+
+  it('cannot create subscription mail without a matching paid period', async () => {
+    const { playerId } = await signIn(`sub-unbound-mail-${key()}`);
+    await expect(sendMail(db(), playerId, { kind: 'subscription', title: 'Unverified', sourceKey: 'sub:unknown:hd:1', attachments: [{ type: 'currency', currency: 'eclipse_token', amount: 187 }] }, 'system')).rejects.toMatchObject({ code: 'entitlement_unavailable' });
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM mail WHERE player_id = ?1').bind(playerId).first()).toEqual({ n: 0 });
   });
 
   it('character attachments grant a new character, or Memory Shards when the character is already owned', async () => {

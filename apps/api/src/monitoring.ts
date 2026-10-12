@@ -4,7 +4,7 @@ import { HttpError } from './content/store';
 export interface VersionMetadata { id: string; tag?: string; timestamp?: string }
 type Bindings = { DB: D1Database; CF_VERSION_METADATA?: VersionMetadata };
 const ssvMessages = new Set(['query too long', 'missing signature', 'signature and key_id must be the last parameters', 'unknown verifier key', 'signature does not verify', 'missing parameters', 'callback is too old', 'AdMob verifier keys could not be fetched', 'AdMob verifier key list is empty']);
-const outcomes = new Set(['test_callback', 'ad_unit_not_ours', 'disabled', 'bad_nonce', 'duplicate', 'cap', 'window_cap', 'daily_cap', 'granted', 'already_granted', 'ignored', 'processed', 'ok', 'pending', 'not_entitled', 'unknown_player', 'ignored_unparseable', 'ignored_other_package', 'test', 'refunded', 'voided_unknown_order', 'voided_already_refunded', 'unmatched', 'revoked', 'subscription', 'state_noted', 'state_reconciled', 'subscription_rejected', 'noted']);
+const outcomes = new Set(['test_callback', 'ad_unit_not_ours', 'disabled', 'bad_nonce', 'duplicate', 'cap', 'window_cap', 'daily_cap', 'granted', 'already_granted', 'ignored', 'processed', 'ok', 'pending', 'not_entitled', 'unknown_player', 'ignored_unparseable', 'ignored_other_package', 'test', 'refunded', 'voided_unknown_order', 'voided_already_refunded', 'one_time_reconciled', 'unmatched', 'revoked', 'subscription', 'state_noted', 'state_reconciled', 'subscription_rejected', 'noted']);
 
 /** Only matched route templates survive. Unmatched paths can contain arbitrary personal data. */
 export const requestMonitoring = (service: 'game' | 'admin'): MiddlewareHandler<{ Bindings: Bindings }> => async (c, next) => {

@@ -12,14 +12,14 @@
   },
   "now": [
     {
-      "title": "R02-E2 verified; secure scheduled recovery remains",
-      "detail": "Exact-order, Google-confirmed full refunds and propagation-time mail suspension passed locally; 461 application/tool tests and lint/typecheck. Complete durable encrypted-token scheduled reconciliation/provider ownership and legacy/claimed/noncurrency policy."
+      "title": "R02-E3 verified locally; policy/configuration acceptance remains",
+      "detail": "Encrypted durable pending/retry work, shared transactional ownership and Cron recovery pass 480 application/tool tests and lint/typecheck. Local 22 migrations/Workers/scheduled dispatch pass. No Cloudflare CLI auth; proxy blocks staging/docs; configure game Worker BILLING_TOKEN_KEYS and prove actual Cron/Google/device behavior. Continue R02 policy preparation and independent R03."
     }
   ],
   "next": [
     {
       "title": "R02 \u2014 durable financial recovery",
-      "detail": "Complete secure-token scheduled acknowledgement/renewal reconciliation and provider-read ownership/fencing; resolve explicit legacy/claimed/noncurrency/partial policies without touching live balances."
+      "detail": "Prepare explicit legacy/claimed/noncurrency/partial/calendar-cadence policy and native pre-purchase version binding; secure game Worker keyring/live recovery proof remain external. Independent R03 source work proceeds without waiting."
     },
     {
       "title": "R03 \u2014 release authority",
@@ -58,6 +58,10 @@
     {
       "title": "B-RELEASE \u2014 Production/public Play rollout",
       "detail": "Complete R18 evidence and concrete rollout/rollback before separate owner release decision; staging and local engineering may continue."
+    },
+    {
+      "title": "B-BILLING-KEYS \u2014 game Worker keyring/live recovery proof",
+      "detail": "Set BILLING_TOKEN_KEYS securely on existing uomd-game-dev/staging Workers (current/key map, independent random AES-256 base64url material per environment; retain prior keys during rotation). No plaintext source/client keys. This host has no Wrangler auth; existing Workers Builds/Console setup and exact deployed scheduled/Google evidence are required. No live key was created or uploaded."
     }
   ],
   "ideas": [
@@ -343,6 +347,29 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R02-E3-20261012",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "fec005dd6e53ba08d070da1bf433f3af50ca0f0f",
+      "verifiedAt": "2026-10-12T23:04:45Z",
+      "scope": "R02-E3 working tree: 19 new tests; encrypted token/AAD/key-id/nonce/tamper/rotation/prototype-name bounds, no-client consume/pending/RTDN work, deletion/export safety, operator CAS, ack deadline, real Worker scheduled module, stale provider fence, lost post-consume marker, earned-window expiry/grace (failed before correction), active-refund observation/renewal and missed refund proof. Stronger expired-worker clock/fence regression. Lint/typecheck and all 480 application/tool tests pass. Two local Workers, all 22 migrations and actual local scheduled-handler dispatch pass; absent Access/keyring fails closed. Installed Wrangler schema/types checked; official reference/staging requests proxy 403; CLI unauthenticated. No live keys, financial writes, deployment/Cron/Google or physical proof. Financial/cadence/legacy/native-offer policy acceptance remains open.",
+      "testIds": [
+        "apps/api/test/billing-recovery.test.ts",
+        "apps/api/test/billing-vault.test.ts",
+        "apps/api/test/rtdn-recovery.test.ts",
+        "apps/api/test/billing.test.ts",
+        "apps/api/test/mail.test.ts",
+        "apps/api/test/account.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "local game/admin Worker and scheduled-dispatch smoke: ports 18887/18888, isolated .cache/r02e3-preview"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -350,8 +377,8 @@
       "id": "B-CLOUD",
       "level": "UNVERIFIED",
       "title": "Current authorized Cloudflare read access and deployed/build/Access evidence",
-      "detail": "Inspect exact staging source tags, Workers Builds gates/filters, migration state, Access edge/MFA and safe ops outcomes. No live read was performed in R00; configured IDs do not prove access.",
-      "verifiedAt": null
+      "detail": "Current host Wrangler whoami reports unauthenticated (bounded check); staging health/reference HTTP requests receive proxy 403. Existing Workers Builds must deploy the intended tag and migration/Cron/Access/MFA evidence needs authorized read access. No live deployment/configuration claim.",
+      "verifiedAt": "2026-10-12T23:04:45Z"
     },
     {
       "id": "B-GOOGLE",
@@ -399,7 +426,7 @@
       "id": "B-ECONOMY",
       "level": "OWNER_BLOCKED",
       "title": "Unapplied payout/refund/shard and combat-policy choices",
-      "detail": "Prepare bounded proposals for free-repeat payout, recovery floor, final-boss rewards, noncurrency refund/claimed mail/shard policy and unresolved canon mechanics. Local correctness fixes proceed where policy is already defined.",
+      "detail": "Prepare bounded proposals for free-repeat payout, recovery floor, final-boss rewards, noncurrency refund/claimed mail/shard policy and unresolved canon mechanics. Local correctness fixes proceed where policy is already defined. Resolve the 60 fixed half-day offerings versus 28/31-day/accelerated periods and paid hold/pause accrual; current cadence is capped at verified period end without numeric retuning.",
       "verifiedAt": null
     },
     {
@@ -436,6 +463,13 @@
       "title": "Production/public Play rollout",
       "detail": "Complete R18 evidence and concrete rollout/rollback before separate owner release decision; staging and local engineering may continue.",
       "verifiedAt": null
+    },
+    {
+      "id": "B-BILLING-KEYS",
+      "level": "OWNER_BLOCKED",
+      "title": "Environment-specific game Worker billing keyring and live scheduled proof",
+      "detail": "Set BILLING_TOKEN_KEYS securely on existing uomd-game-dev/staging Workers (current/key map, independent random AES-256 base64url material per environment; retain prior keys during rotation). No plaintext source/client keys. This host has no Wrangler auth; existing Workers Builds/Console setup and exact deployed scheduled/Google evidence are required. No live key was created or uploaded.",
+      "verifiedAt": "2026-10-12T23:04:45Z"
     }
   ],
   "capabilities": [
@@ -496,7 +530,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Durable acknowledgement, immutable fulfillment, correct entitlements and crash-safe refund/notification completion.",
-      "implemented": "Locally verified ack retry, atomic original-credit currency refunds, immutable fulfillment/effective entitlement and mail/deletion guards, sales-independent paid verification, durable RTDN leases/done/dead-letter and audited operator reset. Scheduled reconciliation/provider serialization and legacy/refund policy remain open. OAuth/provider transport is bounded with safe failures and credential-scoped caching; consumed ack markers recover. Refund notifications require official exact-order full-refund proof, preserve earlier periods, suspend uncertain current mail and keep partial refunds in review.",
+      "implemented": "Locally verified ack/original-credit atomic refund/immutable fulfillment/effective entitlement and claims/deletion, durable RTDN, safe provider transport and exact-order refund proof. Provider-bound encrypted retry/pending work, shared token ownership/fences and bounded every-minute Cron wired; safe operator metadata/reset, consumed/deleted-token cleanup and earned-mail grace recovery. Whole acceptance remains partial for policy/native/live evidence.",
       "dependsOn": [
         "R00"
       ],
@@ -511,7 +545,12 @@
         "apps/api/migrations/0021_rtdn_processing.sql",
         "apps/api/src/admin/billing.ts",
         "apps/api/test/rtdn-recovery.test.ts",
-        "apps/api/test/play-client.test.ts"
+        "apps/api/test/play-client.test.ts",
+        "apps/api/migrations/0022_billing_reconciliation.sql",
+        "apps/api/src/billing/recovery.ts",
+        "apps/api/src/billing/vault.ts",
+        "apps/api/test/billing-recovery.test.ts",
+        "apps/api/test/billing-vault.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -522,11 +561,14 @@
         "E-R02-C-20261012",
         "E-R02-D-20261012",
         "E-R02-E1-20261012",
-        "E-R02-E2-20261012"
+        "E-R02-E2-20261012",
+        "E-R02-E3-20261012"
       ],
       "blockerIds": [
         "B-PLAY",
-        "B-ECONOMY"
+        "B-ECONOMY",
+        "B-BILLING-KEYS",
+        "B-CLOUD"
       ],
       "slices": [
         {
@@ -564,6 +606,12 @@
           "title": "Authoritative exact-order refund and propagation-time claim protection",
           "status": "COMPLETE",
           "remaining": "Actual Google full/partial/refund propagation timing and device proof unverified; scheduled encrypted-token recovery/provider ownership and legacy/claimed/noncurrency/partial policy remain open."
+        },
+        {
+          "id": "R02-E3",
+          "title": "Encrypted durable billing work, transactional ownership and scheduled recovery",
+          "status": "COMPLETE",
+          "remaining": "Live keyring/Cron/Google/physical evidence and backlog capacity remain unverified. Legacy/claimed/noncurrency/partial/calendar-cadence policy and native offer version binding remain separate acceptance."
         }
       ]
     },

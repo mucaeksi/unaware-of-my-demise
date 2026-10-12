@@ -1,65 +1,44 @@
-# Secrets and permissions checklist (names only — never paste values into chat or Git)
+# Secrets, bindings and current access
 
-## What exists (verified 2026-10-10)
-| Where | Item | Status |
-|---|---|---|
-| Cloudflare account `0c942d198668a8b1a8e8ee699651b817` | Workers.dev subdomain `muratcaneksiii`; Zero Trust org `red-sky-901e.cloudflareaccess.com` | present |
-| Cloudflare (created by this work) | D1 `uomd-dev` (`0512d420-…`), D1 `uomd-staging` (`687f9735-…`), R2 `uomd-content-dev`, R2 `uomd-content-staging` | created. **staging is deployed** (migrations 2/2, 20 characters seeded, Workers `uomd-game-staging`, `uomd-admin-staging`); dev remote is still empty |
-| Cloudflare (legacy stack) | **Decommissioned 2026-10-11 (owner-authorised):** Workers `unaware-of-my-demise` + `unaware-of-my-demise-admin`, Hyperdrive `unaware-of-my-demise-production` (→ Neon), R2 `unaware-of-my-demise-content` (was empty), the legacy Access app and two unattached reusable Access policies were **deleted** (verified: 2 Workers, 0 Hyperdrive, 1 Access app + 1 policy remain; legacy workers.dev URLs answer 404). **Kept on purpose:** R2 `uomd-db-backups` with ONE age-encrypted Neon dump (117 KB, 2026-10-05; its own 30-day lifecycle rule deletes it about 2026-11-04) — delete the bucket yourself when you no longer need it; the Neon project, the Neon credentials, the GitHub secrets (`DATABASE_URL`, `STAGING_DATABASE_URL`, `R2_BACKUP_ACCESS_KEY_ID`, `R2_BACKUP_SECRET_ACCESS_KEY`, variable `BACKUP_AGE_RECIPIENT`) and any Play RTDN push subscription pointing at the old Worker are **outside what this assistant can reach** — see the owner checklist in `BUILD_STATE.md` |
-| GitHub Actions | `CLOUDFLARE_API_TOKEN` (secret) | **verified by use (2026-10-10, run 38081525826)**: D1 migrations + seed, Worker + static-asset deploys and the health check all succeeded for staging, so the token has at least Workers Scripts/D1/R2 edit on this account. Its exact scope list is not readable from here |
-| GitHub Actions (presence not readable) | `CLOUDFLARE_ACCOUNT_ID` (variable, optional), `GOOGLE_PLAY_SERVICE_ACCOUNT`, Android keystore secrets, Neon URLs | presumed from legacy workflows |
-| Claude Code cloud environment | Gemini credential injected by the proxy for `*.googleapis.com` | working (model list verified) |
+[README](../README.md) is authoritative. Names/public identifiers are safe to record; private values stay in approved Worker/runtime/signing stores and never in chat, Git, browser variables or debug logs. Inspect existing settings before creating replacements.
 
-## What this repository's workflows need
-### 1. `CLOUDFLARE_API_TOKEN` (GitHub Actions secret, repository level) — **works for staging deploys (verified)**
-Verified: it can deploy both Workers, apply D1 migrations and write R2-bound Workers (see above). The legacy token was documented as *Workers Scripts Edit, Hyperdrive Read, R2 Edit (bucket `unaware-of-my-demise-content` only)*.
-`.github/workflows/deploy.yml` additionally needs (create in Cloudflare Dashboard → My Profile → API Tokens, scoped to
-account `0c942d19…`):
-- Account → **Workers Scripts: Edit** (deploy Workers + static assets)
-- Account → **D1: Edit** (apply migrations, seed)
-- Account → **Workers R2 Storage: Edit** — for buckets `uomd-content-dev` and `uomd-content-staging`
-- Account → **Workers KV / Queues**: not needed yet
-Add as: GitHub → Settings → Secrets and variables → Actions → *Repository secret* `CLOUDFLARE_API_TOKEN`
-(optionally variable `CLOUDFLARE_ACCOUNT_ID`; the workflow defaults to the account above).
+## Current delivery/access facts
 
-### 2. Cloudflare Access for the Control Center — **done for staging (owner-authorised 2026-10-10)**
-Access application `uomd-admin-staging - Cloudflare Workers` (id `a15f4607-a497-4444-a1fd-e4a5cbc020d9`, destination = the Worker `uomd-admin-staging`,
-session 24 h) reuses the existing reusable policy **"Cloudflare account members"** (allow). The account has exactly one member (the owner, Super Administrator),
-so only the owner can pass Access. Verified with `curl`: an unauthenticated request to the Worker now answers **302 → `red-sky-901e.cloudflareaccess.com`**
-(before: 503 from the Worker itself). Defence in depth: the Worker still verifies the Access JWT (issuer + audience) and maps the e-mail to a role in D1; the
-audience tag `ACCESS_AUD` (public, non-secret) is committed in `apps/api/wrangler.admin.jsonc`; the first owner row was inserted directly into the
-staging D1 `admin_users` with an audit entry (the owner's e-mail is not stored in the repository).
-Still optional: a CI **service token** for `publish-content.yml` (see §4) — not created, because its secret would have to pass through this assistant's context.
+- Staging uses **Cloudflare Workers Builds**. `tools/deploy_staging.sh game|admin|ops` deploys one Worker per build; game alone owns D1 migrations/seeds. Removed GitHub Actions workflows are not a supported bootstrap or permission source.
+- Existing public account/resource/Access/Google identifiers are in `apps/api/wrangler.*.jsonc`, `content/keys/trusted_public_keys.json` and the dated AAB access record. Configuration presence does not prove live permissions, MFA or credential usability.
+- **2026-10-12 host check:** bounded Wrangler whoami reports unauthenticated. Staging health and current official-reference requests are blocked by proxy 403. No live secrets were read/created/uploaded; deployed tags, migration state, Access/MFA and scheduled outcomes are unverified here.
+- Configure credentials through the supported secure environment/Cloudflare mechanism. Git push authorization, connector access, Wrangler authorization and Google app permissions are separate capabilities. Do not initiate login or paste tokens merely to inspect the project.
 
-### 3. `CONTENT_SIGNING_KEY` (Worker secret on `uomd-admin-<env>`; ES256 private JWK)
-**Status: set for staging (2026-10-10, Actions run 38082535422, job `signing-key`)** — `GET /admin/api/health` on the deployed staging
-Worker reports `signing_configured:true`. The private half exists only as the Worker secret (the job never printed or stored it);
-the matching public key is committed in `content/keys/trusted_public_keys.json` (kid `uomd-staging-2026-10`). An earlier note here claimed the
-key was already uploaded; that was wrong at the time (the Worker did not exist yet). The first-session key pair stayed in scratch space and is abandoned (nothing was ever signed with it).
-Preferred way, with no human handling of the private key: run the GitHub workflow **Deploy** (`deploy.yml`) for `staging` with the
-boolean input `bootstrap_signing_key` ticked (job `signing-key`, runs after the deploy). It generates the pair inside the job, stores the private half only as the Worker
-secret (never printed, never uploaded, never in the repository) and prints the **public** key, which must then be committed to
-`content/keys/trusted_public_keys.json` (replacing the `uomd-staging-2026-10` entry) before the next game deploy, because clients
-trust a manifest signature only if that public key is embedded in the build.
-Manual alternative: `npx tsx tools/gen_signing_key.ts --kid <id> --out <dir outside repo>` then
-`npx wrangler secret put CONTENT_SIGNING_KEY --env staging -c apps/api/wrangler.admin.jsonc`. Rotate by adding a second `kid`.
+## Required settings
 
-### 4. Publishing from CI (optional): Access **service token**
-Zero Trust → Access → Service auth → create token, add it to the Access policy, then store as GitHub secrets
-`CF_ACCESS_CLIENT_ID`, `CF_ACCESS_CLIENT_SECRET` and variables `ADMIN_URL_STAGING` / `ADMIN_URL_DEV`; insert its identity
-(`svc:<client id>`) into `admin_users` with role `operator`.
+| Target | Names | Minimum purpose/evidence |
+| --- | --- | --- |
+| Existing game Worker per environment | `GOOGLE_CLIENT_IDS`, `PLAY_PACKAGE_NAME`, `GOOGLE_PLAY_SERVICE_ACCOUNT` | Verify Google identity and app-specific Publisher product/subscription/order reads plus acknowledgement/consume permissions. Check Android/Web OAuth IDs, package/signing certificates and actual sandbox responses. Prices/base plans remain in Play Console. |
+| Existing game Worker per environment | **`BILLING_TOKEN_KEYS`** | R02-E3 environment-specific AES-256-GCM keyring for encrypted durable receipt work; setup/rotation below. No host/client copy or presumed binding. |
+| Existing game Worker / Pub/Sub | `RTDN_AUDIENCE`, `RTDN_PUSH_SERVICE_ACCOUNT`, configured topic/push subscription | OIDC signature/issuer/audience/verified publisher identity, retry/retention/dead-letter/seek and actual replay evidence. Reuse the existing project/permissions; do not invent a new role. |
+| Existing game Worker / AdMob | `ADMOB_AD_UNIT_IDS`, approved app/unit/test IDs and SSV configuration | Signature, nonce, cap and native test/live behavior. A historical URL check is not current financial/device proof. |
+| Existing admin Worker | `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD`, `ADMIN_BOOTSTRAP_OWNERS` | Existing Access edge/owner-member policy, MFA, JWT and D1 RBAC; service-binding rejection alone does not prove edge protection. |
+| Existing admin Worker | `CONTENT_SIGNING_KEY`, `CONTENT_SIGNING_KID` | Existing ES256 private key only in the Worker secret store; matching public key embedded in clients. Retain old trusted public keys during approved rotation. No obsolete Actions bootstrap or blind replacement. |
+| Existing ops Worker | `AGE_RECIPIENT`, DB/`BACKUPS`/GAME/ADMIN bindings | Age public recipient, authorized encrypted export and health. The owner-held private identity is required for a real encrypted restore; never substitute a new key. |
+| Native secure build environment | `UOMD_KEYSTORE_FILE`, `UOMD_KEYSTORE_PASSWORD`, `UOMD_KEY_ALIAS`, explicit version/environment | Existing upload key, strictly increasing versionCode and reproducible signed AAB/device evidence. Do not recreate the upload key. |
+| Approved media runtime | Existing approved Google credentials and `content/budget/media_budget.json` | Current approval is 1000 TL/month (recorded $20), $3/batch, three paid attempts per asset; R14 durability/uncertain-charge fixes are still required. Creative/paid generation is deferred by the owner. |
 
-### 5. Google (needed before Android work, not for this milestone)
-| Need | Name | Where created |
-|---|---|---|
-| Google Sign-In (Android + web) | `GOOGLE_CLIENT_IDS` variable (Android + Web OAuth client IDs; the legacy Worker already has one Web client) | Google Cloud Console → APIs & Services → Credentials |
-| Play Developer API | `GOOGLE_PLAY_SERVICE_ACCOUNT` (already presumed) + Play Console API access | Play Console → Users and permissions |
-| RTDN | `RTDN_AUDIENCE`, `RTDN_PUSH_SERVICE_ACCOUNT`, Pub/Sub topic | Google Cloud Pub/Sub |
-| AdMob | `ADMOB_APP_ID`, ad-unit IDs, server-side verification key | AdMob console |
-| Paid media generation | **spending guard implemented, budget = $0 until you approve**: `content/budget/media_budget.json` (`approved_usd`, `per_batch_cap_usd`, `approved_by/at`); every generation script must run `npx tsx tools/media_budget.ts reserve …` first and is blocked (exit 1) without an approved, sufficient budget; actual costs are settled and recorded (`packages/shared/src/budget.ts`, 6 tests). Also set a hard quota/budget alert on the Google Cloud project (Billing → Budgets & alerts) — the repo guard cannot see charges made outside it. | owner decision: amount + per-batch cap |
+## Billing keyring setup and rotation
 
-### 6. Context7 — removed (owner decision 2026-10-10); no key needed.
+Set `BILLING_TOKEN_KEYS` as a **secret on each existing game Worker**, independently for dev/staging. Format: JSON object with `current` key ID and `keys` mapping of retained IDs to canonical base64url values. Each value must encode **32 cryptographically random bytes**, without padding; at most eight IDs. The structural example below is not usable key material:
 
-## Verified without exposing values
-- Cloudflare OAuth (MCP) can list/create Workers scripts, D1, R2 and read Access apps — **not** a substitute for the CI token.
-- `api.cloudflare.com` and `*.workers.dev` are reachable from the cloud sandbox; no `CLOUDFLARE_*` env vars exist there.
+```json
+{"current":"v1","keys":{"v1":"<base64url of 32 securely generated random bytes>"}}
+```
+
+Generate/store the real material only through approved secure handling. Use the existing Cloudflare Worker Variables and Secrets console or an authenticated, explicitly targeted `wrangler secret put BILLING_TOKEN_KEYS --config apps/api/wrangler.game.jsonc --env staging` with secure input. Never print material, put it in `.codex/config.toml`, `.env`/Vite client variables, a build artifact or a prompt. Production provisioning remains a separate owner gate.
+
+Rotation: add a fresh ID/material, retain prior IDs, then change `current`. New verified receipt work rewraps ciphertext under the current key. Viewer job metadata exposes only `key_id`; verify no pending/review rows need an old ID before its approved removal. A removed key yields explicit review, not guessed tokens. A genuine authenticated client/RTDN receipt can be reverified and rewrapped; immutable grants stay deduplicated. Backups contain ciphertext, not this keyring, so recovery must retain access to the matching secure key versions.
+
+Verify the intended Workers Builds source tag, migration **0022**, every-minute game Cron and bounded backlog/ack behavior with approved isolated Google sandbox data. `verifyReceipt` fails closed without a valid keyring before new financial fulfillment; already-confirmed consumable replay remains available without a new grant. The local scheduled-dispatch check without the keyring proved blocked configuration, not successful cloud reconciliation.
+
+## Historical records and preserved resources
+
+2026-10-10 Actions deployment/signing and older Cloudflare/Gemini connectivity reports are historical evidence only. The original record and run IDs remain in Git history; they do not authorize restoring deleted workflows, rotating keys or granting broad roles now. Preserve existing settings and request only the capability actually missing.
+
+The retired Godot/Neon/Hyperdrive/legacy Worker resources were decommissioned under the dated owner instruction. **Preserve `uomd-db-backups`: current ops binds it and stores encrypted D1 exports.** Old instructions to delete that bucket or presume it contains only a legacy dump are superseded. No new decommission operation is part of this assignment. Context7 is retired and needs no key.

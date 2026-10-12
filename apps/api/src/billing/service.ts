@@ -4,7 +4,7 @@ import { sha256Hex } from '@uomd/shared';
 import { HttpError } from '../content/store';
 import { grantStatements } from '../db/grants';
 import { ledgerStatements, type Currency } from '../db/ledger';
-import { sendMail } from '../mail/service';
+import { prepareMail } from '../mail/service';
 import type { PlayClient } from './play';
 
 export const SubConfig = z
@@ -28,7 +28,16 @@ interface ProductRow {
   updated_at: string;
 }
 
-const Fulfillment = z.object({ grants: z.array(RewardAttachment), subscription: SubConfig.nullable(), catalogUpdatedAt: z.string() }).strict();
+export const Fulfillment = z.object({ grants: z.array(RewardAttachment), subscription: SubConfig.nullable(), catalogUpdatedAt: z.string() }).strict();
+export interface PurchaseRecovery {
+  kind?: ProductRow['kind'];
+  subscriptionState?: Awaited<ReturnType<PlayClient['getSubscription']>>['state'];
+  fence(): D1PreparedStatement;
+  confirmed(kind: ProductRow['kind'], orderId: string | null, fulfillment: string | null, purchaseTimeMs: number | null, test: boolean): Promise<string | null>;
+}
+
+const purchaseBatch = (db: D1Database, statements: D1PreparedStatement[], recovery?: Pick<PurchaseRecovery, 'fence'>) =>
+  db.batch([...(recovery ? [recovery.fence()] : []), ...statements, db.prepare('DELETE FROM tx_guard')]);
 
 /** Value passed to Play as obfuscatedExternalAccountId when the purchase flow is launched: binds the purchase to this account. */
 export const billingTag = async (playerId: string): Promise<string> => (await sha256Hex(`uomd-billing:${playerId}`)).slice(0, 40);
@@ -60,7 +69,7 @@ export interface VerifyResult {
  * Verifies a purchase with Google Play (never trusts the client), binds it to the account, grants exactly once per order id
  * (the primary key of `purchases` + ledger idempotency keys) and acknowledges / consumes it afterwards.
  */
-export async function verifyPurchase(db: D1Database, play: PlayClient, playerId: string, input: { productId: string; purchaseToken: string }, now = new Date()): Promise<VerifyResult> {
+export async function verifyPurchase(db: D1Database, play: PlayClient, playerId: string, input: { productId: string; purchaseToken: string }, now = new Date(), recovery?: PurchaseRecovery): Promise<VerifyResult> {
   const player = await db.prepare('SELECT status FROM players WHERE id = ?1').bind(playerId).first<{ status: string }>();
   if (!player || player.status === 'deleted') throw new HttpError(403, 'account_deleted', 'this account cannot receive purchase benefits');
   const product = await loadProduct(db, input.productId);
@@ -68,71 +77,82 @@ export async function verifyPurchase(db: D1Database, play: PlayClient, playerId:
   const th = await tokenHash(input.purchaseToken);
   const known = await db.prepare('SELECT kind, fulfillment FROM purchases WHERE token_hash = ?1 AND product_id = ?2 ORDER BY granted_at DESC LIMIT 1').bind(th, input.productId).first<{ kind: ProductRow['kind']; fulfillment: string | null }>();
   const currentKind = product.kind;
-  if (known) product.kind = known.kind; // a catalog edit cannot reinterpret an already-paid token
+  if (known || recovery?.kind) product.kind = known?.kind ?? recovery!.kind!; // paid or pending verified tokens keep their original kind
 
   if (product.kind === 'consumable') {
     const p = await play.getProduct(product.product_id, input.purchaseToken);
-    if (p.purchaseState === 'pending') return { status: 'pending', productId: product.product_id };
+    if (p.purchaseState === 'pending') {
+      if (recovery && p.obfuscatedAccountId === tag) await recovery.confirmed(product.kind, null, JSON.stringify({ grants: z.array(RewardAttachment).parse(JSON.parse(product.grants)), subscription: null, catalogUpdatedAt: product.updated_at }), null, !!p.testPurchase);
+      return { status: 'pending', productId: product.product_id };
+    }
     if (p.purchaseState !== 'purchased' || !p.orderId) return { status: 'not_entitled', productId: product.product_id };
     if (p.obfuscatedAccountId !== tag) throw new HttpError(403, 'account_mismatch', 'this purchase belongs to another account');
-    const existing = await db.prepare('SELECT player_id, acknowledged, state FROM purchases WHERE order_id = ?1').bind(p.orderId).first<{ player_id: string; acknowledged: number; state: string }>();
+    const existing = await db.prepare('SELECT player_id, acknowledged, state, fulfillment FROM purchases WHERE order_id = ?1').bind(p.orderId).first<{ player_id: string; acknowledged: number; state: string; fulfillment: string | null }>();
     if (existing) {
       if (existing.player_id !== playerId) throw new HttpError(409, 'order_owned', 'this order was already granted to another account');
       if (existing.state === 'refunded') return { status: 'not_entitled', productId: product.product_id, orderId: p.orderId };
+      await recovery?.confirmed(product.kind, p.orderId, existing.fulfillment, p.purchaseTimeMs, !!p.testPurchase);
       if (!existing.acknowledged) {
-        if (p.consumed) await db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(p.orderId).run();
-        else await consume(db, play, product, input.purchaseToken, p.orderId);
+        if (p.consumed) await purchaseBatch(db, [db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(p.orderId)], recovery);
+        else await consume(db, play, product, input.purchaseToken, p.orderId, recovery);
       }
       return { status: 'already_granted', productId: product.product_id, orderId: p.orderId };
     }
-    const grants = z.array(RewardAttachment).parse(JSON.parse(product.grants));
+    let fulfillment = JSON.stringify({ grants: z.array(RewardAttachment).parse(JSON.parse(product.grants)), subscription: null, catalogUpdatedAt: product.updated_at });
+    if (recovery) fulfillment = (await recovery.confirmed(product.kind, p.orderId, fulfillment, p.purchaseTimeMs, !!p.testPurchase))!;
+    const grants = Fulfillment.parse(JSON.parse(fulfillment)).grants;
     try {
-      await db.batch([
+      await purchaseBatch(db, [
         db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN EXISTS (SELECT 1 FROM players WHERE id = ?1 AND status <> \'deleted\') THEN 1 ELSE 0 END)').bind(playerId),
-        db.prepare("INSERT INTO purchases (order_id, player_id, product_id, kind, token_hash, period_start, granted_at, fulfillment) VALUES (?1, ?2, ?3, 'consumable', ?4, ?5, ?5, ?6)").bind(p.orderId, playerId, product.product_id, th, now.toISOString(), JSON.stringify({ grants, subscription: null, catalogUpdatedAt: product.updated_at })),
+        db.prepare("INSERT INTO purchases (order_id, player_id, product_id, kind, token_hash, period_start, granted_at, fulfillment) VALUES (?1, ?2, ?3, 'consumable', ?4, ?5, ?5, ?6)").bind(p.orderId, playerId, product.product_id, th, now.toISOString(), fulfillment),
         ...(await grantStatements(db, playerId, grants, { keyPrefix: `iap:${p.orderId}`, reason: `purchase:${product.product_id}` })),
         event(db, 'verify', p.orderId, 'granted', { productId: product.product_id }),
         db.prepare('DELETE FROM tx_guard')
-      ]);
+      ], recovery);
     } catch (e) {
-      if (/CHECK constraint failed: ok = 1/i.test(String(e))) throw new HttpError(403, 'account_deleted', 'this account cannot receive purchase benefits');
+      if (/CHECK constraint failed: ok = 1/i.test(String(e))) {
+        if (recovery) throw new HttpError(503, 'billing_lease_lost', 'billing ownership changed; retry verification');
+        throw new HttpError(403, 'account_deleted', 'this account cannot receive purchase benefits');
+      }
       if (/UNIQUE constraint failed: (purchases|ledger)/i.test(String(e instanceof Error ? e.message : e))) return { status: 'already_granted', productId: product.product_id, orderId: p.orderId };
       throw e;
     }
-    await consume(db, play, product, input.purchaseToken, p.orderId);
+    await consume(db, play, product, input.purchaseToken, p.orderId, recovery);
     return { status: 'granted', productId: product.product_id, orderId: p.orderId };
   }
 
   const s = await play.getSubscription(input.purchaseToken, product.product_id);
   if (s.productId !== product.product_id) throw new HttpError(422, 'product_mismatch', 'the token belongs to a different product');
   if (s.obfuscatedAccountId !== tag) throw new HttpError(403, 'account_mismatch', 'this purchase belongs to another account');
-  if (!Number.isFinite(s.expiryTimeMs) || s.expiryTimeMs < 0) throw new HttpError(503, 'billing_invalid_response', 'billing expiry could not be verified');
-  await reconcileSubscriptionState(db, th, s, now);
+  if (recovery) recovery.subscriptionState = s.state;
+  const old = await db.prepare('SELECT fulfillment FROM purchases WHERE order_id = ?1').bind(s.latestOrderId).first<{ fulfillment: string | null }>();
+  let frozen = old ? old.fulfillment : (currentKind !== product.kind ? known?.fulfillment ?? null : JSON.stringify({ grants: [], subscription: SubConfig.parse(JSON.parse(product.sub_config as string)), catalogUpdatedAt: product.updated_at }));
+  if (frozen) { const parsed = Fulfillment.parse(JSON.parse(frozen)); parsed.grants = parsed.subscription!.instant; frozen = JSON.stringify(parsed); }
+  if (recovery) frozen = await recovery.confirmed(product.kind, s.latestOrderId || null, frozen, s.state === 'pending' ? null : s.startTimeMs, !!s.testPurchase);
+  await reconcileSubscriptionState(db, th, s, now, recovery);
   if (s.state === 'pending') return { status: 'pending', productId: product.product_id };
   if (!['active', 'canceled', 'in_grace'].includes(s.state) || !s.latestOrderId || s.expiryTimeMs <= now.getTime()) return { status: 'not_entitled', productId: product.product_id };
-  const old = await db.prepare('SELECT fulfillment FROM purchases WHERE order_id = ?1').bind(s.latestOrderId).first<{ fulfillment: string | null }>();
-  if (old && !old.fulfillment) throw new HttpError(409, 'fulfillment_requires_review', 'legacy purchase terms need operator review');
-  const frozen = old?.fulfillment ?? (currentKind !== product.kind ? known?.fulfillment : null);
-  const cfg = frozen ? Fulfillment.parse(JSON.parse(frozen)).subscription! : SubConfig.parse(JSON.parse(product.sub_config as string));
-  const res = await grantSubscriptionPeriod(db, play, playerId, product, cfg, th, s, input.purchaseToken, 'verify', now);
+  if (!frozen) throw new HttpError(409, 'fulfillment_requires_review', 'legacy purchase terms need operator review');
+  const cfg = Fulfillment.parse(JSON.parse(frozen)).subscription!;
+  const res = await grantSubscriptionPeriod(db, play, playerId, product, cfg, th, s, input.purchaseToken, 'verify', now, frozen, recovery);
   await syncSubscriptionMail(db, playerId, now);
   return res;
 }
 
 /** Shared by ordinary verification and revoked notifications; older observations cannot overwrite newer state. */
-export async function reconcileSubscriptionState(db: D1Database, th: string, s: Awaited<ReturnType<PlayClient['getSubscription']>>, now: Date): Promise<void> {
+export async function reconcileSubscriptionState(db: D1Database, th: string, s: Awaited<ReturnType<PlayClient['getSubscription']>>, now: Date, recovery?: Pick<PurchaseRecovery, 'fence'>): Promise<void> {
   if (!Number.isFinite(s.expiryTimeMs) || s.expiryTimeMs < 0) throw new HttpError(503, 'billing_invalid_response', 'billing expiry could not be verified');
-  await db.prepare("UPDATE purchases SET entitlement_state = ?2, period_end = CASE WHEN order_id = ?3 THEN ?4 ELSE period_end END, entitlement_checked_at = ?5 WHERE token_hash = ?1 AND state = 'granted' AND (entitlement_checked_at IS NULL OR entitlement_checked_at <= ?5)")
-    .bind(th, s.state, s.latestOrderId, new Date(s.expiryTimeMs).toISOString(), now.toISOString()).run();
+  await purchaseBatch(db, [db.prepare("UPDATE purchases SET entitlement_state = ?2, period_end = CASE WHEN order_id = ?3 THEN ?4 ELSE period_end END, entitlement_checked_at = ?5 WHERE token_hash = ?1 AND state = 'granted' AND (entitlement_checked_at IS NULL OR entitlement_checked_at <= ?5)")
+    .bind(th, s.state, s.latestOrderId, new Date(s.expiryTimeMs).toISOString(), now.toISOString())], recovery);
 }
 
-async function consume(db: D1Database, play: PlayClient, product: ProductRow, token: string, orderId: string): Promise<void> {
+async function consume(db: D1Database, play: PlayClient, product: ProductRow, token: string, orderId: string, recovery?: PurchaseRecovery): Promise<void> {
   try {
     await play.consumeProduct(product.product_id, token); // consuming also acknowledges, and lets the item be bought again
-    await db.batch([db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(orderId), event(db, 'system', orderId, 'consumed')]);
+    await purchaseBatch(db, [db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(orderId), event(db, 'system', orderId, 'consumed')], recovery);
   } catch {
     // The grant is durable; subsequent verification retries this work. Scheduled reconciliation is tracked separately.
-    await db.batch([event(db, 'system', orderId, 'ack_failed', { code: 'play_consume_failed' })]);
+    await purchaseBatch(db, [event(db, 'system', orderId, 'ack_failed', { code: 'play_consume_failed' })], recovery);
   }
 }
 
@@ -146,14 +166,27 @@ async function grantSubscriptionPeriod(
   s: Awaited<ReturnType<PlayClient['getSubscription']>>,
   token: string,
   source: 'verify' | 'rtdn',
-  now: Date
+  now: Date,
+  fulfillment: string,
+  recovery?: PurchaseRecovery
 ): Promise<VerifyResult> {
   const orderId = s.latestOrderId;
   const existing = await db.prepare('SELECT player_id, acknowledged, state, entitlement_state, period_end FROM purchases WHERE order_id = ?1').bind(orderId).first<{ player_id: string; acknowledged: number; state: string; entitlement_state: string; period_end: string }>();
   if (existing) {
     if (existing.player_id !== playerId) throw new HttpError(409, 'order_owned', 'this order was already granted to another account');
     if (existing.state === 'refunded' || !['active', 'canceled', 'in_grace'].includes(existing.entitlement_state)) return { status: 'not_entitled', productId: product.product_id, orderId };
-    if (!existing.acknowledged) await acknowledgeSubscription(db, play, product.product_id, token, orderId, s.acknowledged);
+    const order = await play.getOrder(orderId);
+    if (order.orderId !== orderId || order.purchaseToken !== token) throw new HttpError(422, 'order_mismatch', 'the order does not match this purchase');
+    if (!Number.isFinite(order.fullRefundTimeMs)) throw new HttpError(503, 'billing_invalid_response', 'order refund state could not be verified');
+    if (order.fullRefundTimeMs > 0) {
+      await refundPurchase(db, orderId, 'system', now, recovery);
+      return { status: 'not_entitled', productId: product.product_id, orderId };
+    }
+    if (order.partialRefund) {
+      await purchaseBatch(db, [db.prepare("UPDATE purchases SET entitlement_state = 'unknown', entitlement_checked_at = ?2 WHERE order_id = ?1 AND (entitlement_checked_at IS NULL OR entitlement_checked_at <= ?2)").bind(orderId, now.toISOString())], recovery);
+      throw new HttpError(409, 'refund_requires_review', 'partial refund policy needs operator review');
+    }
+    if (!existing.acknowledged) await acknowledgeSubscription(db, play, product.product_id, token, orderId, s.acknowledged, recovery);
     return { status: 'already_granted', productId: product.product_id, orderId, periodEnd: existing.period_end };
   }
   const order = await play.getOrder(orderId);
@@ -167,32 +200,35 @@ async function grantSubscriptionPeriod(
   const periodStart = new Date(start).toISOString();
   const periodEnd = new Date(s.expiryTimeMs).toISOString();
   try {
-    await db.batch([
+    await purchaseBatch(db, [
       db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN EXISTS (SELECT 1 FROM players WHERE id = ?1 AND status <> \'deleted\') THEN 1 ELSE 0 END)').bind(playerId),
-      db.prepare("INSERT INTO purchases (order_id, player_id, product_id, kind, token_hash, period_start, period_end, granted_at, fulfillment, entitlement_state, entitlement_checked_at) VALUES (?1, ?2, ?3, 'subscription', ?4, ?5, ?6, ?7, ?8, ?9, ?7)").bind(orderId, playerId, product.product_id, th, periodStart, periodEnd, now.toISOString(), JSON.stringify({ grants: cfg.instant, subscription: cfg, catalogUpdatedAt: product.updated_at }), s.state),
+      db.prepare("INSERT INTO purchases (order_id, player_id, product_id, kind, token_hash, period_start, period_end, granted_at, fulfillment, entitlement_state, entitlement_checked_at) VALUES (?1, ?2, ?3, 'subscription', ?4, ?5, ?6, ?7, ?8, ?9, ?7)").bind(orderId, playerId, product.product_id, th, periodStart, periodEnd, now.toISOString(), fulfillment, s.state),
       ...(await grantStatements(db, playerId, cfg.instant, { keyPrefix: `iap:${orderId}:instant`, reason: `subscription:${product.product_id}` })),
       event(db, source, orderId, 'period_granted', { productId: product.product_id, periodEnd }),
       db.prepare('DELETE FROM tx_guard')
-    ]);
+    ], recovery);
   } catch (e) {
-    if (/CHECK constraint failed: ok = 1/i.test(String(e))) throw new HttpError(403, 'account_deleted', 'this account cannot receive purchase benefits');
+    if (/CHECK constraint failed: ok = 1/i.test(String(e))) {
+      if (recovery) throw new HttpError(503, 'billing_lease_lost', 'billing ownership changed; retry verification');
+      throw new HttpError(403, 'account_deleted', 'this account cannot receive purchase benefits');
+    }
     if (/UNIQUE constraint failed: (purchases|ledger)/i.test(String(e instanceof Error ? e.message : e))) return { status: 'already_granted', productId: product.product_id, orderId, periodEnd };
     throw e;
   }
-  await acknowledgeSubscription(db, play, product.product_id, token, orderId, s.acknowledged);
+  await acknowledgeSubscription(db, play, product.product_id, token, orderId, s.acknowledged, recovery);
   return { status: 'granted', productId: product.product_id, orderId, periodEnd };
 }
 
-async function acknowledgeSubscription(db: D1Database, play: PlayClient, productId: string, token: string, orderId: string, acknowledged: boolean): Promise<void> {
+async function acknowledgeSubscription(db: D1Database, play: PlayClient, productId: string, token: string, orderId: string, acknowledged: boolean, recovery?: PurchaseRecovery): Promise<void> {
   if (!acknowledged) {
     try {
       await play.acknowledgeSubscription(productId, token);
-      await db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(orderId).run();
+      await purchaseBatch(db, [db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(orderId)], recovery);
     } catch {
-      await db.batch([event(db, 'system', orderId, 'ack_failed', { code: 'play_ack_failed' })]);
+      await purchaseBatch(db, [event(db, 'system', orderId, 'ack_failed', { code: 'play_ack_failed' })], recovery);
     }
   } else {
-    await db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(orderId).run();
+    await purchaseBatch(db, [db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(orderId)], recovery);
   }
 }
 
@@ -202,26 +238,29 @@ async function acknowledgeSubscription(db: D1Database, play: PlayClient, product
  */
 export async function syncSubscriptionMail(db: D1Database, playerId: string, now = new Date()): Promise<number> {
   const { results } = await db
-    .prepare("SELECT p.order_id, p.product_id, p.period_start, p.period_end, p.fulfillment FROM purchases p JOIN players u ON u.id = p.player_id WHERE p.player_id = ?1 AND u.status <> 'deleted' AND p.kind = 'subscription' AND p.state = 'granted' AND p.entitlement_state IN ('active', 'canceled', 'in_grace') AND p.period_end > ?2 AND p.period_start <= ?2")
-    .bind(playerId, now.toISOString())
+    .prepare("SELECT p.order_id, p.product_id, p.period_start, p.period_end, p.fulfillment FROM purchases p JOIN players u ON u.id = p.player_id WHERE p.player_id = ?1 AND u.status <> 'deleted' AND p.kind = 'subscription' AND p.state = 'granted' AND p.entitlement_state IN ('active', 'canceled', 'in_grace', 'expired') AND p.period_end > ?3 AND p.period_start <= ?2")
+    .bind(playerId, now.toISOString(), new Date(now.getTime() - 60 * 86_400_000).toISOString())
     .all<{ order_id: string; product_id: string; period_start: string; period_end: string; fulfillment: string | null }>();
   let created = 0;
   for (const r of results) {
     if (!r.fulfillment) continue; // legacy terms are unknown; never invent them from a later catalog edit
     const cfg = Fulfillment.parse(JSON.parse(r.fulfillment)).subscription!;
     const every = cfg.periodic.every_hours * 3_600_000;
-    const due = Math.min(cfg.periodic.count, Math.floor((now.getTime() - Date.parse(r.period_start)) / every) + 1);
-    for (let k = 1; k <= due; k++) {
+    const start = Date.parse(r.period_start);
+    const due = Math.min(cfg.periodic.count, Math.ceil((Date.parse(r.period_end) - start) / every), Math.floor((now.getTime() - start) / every) + 1);
+    const first = Math.max(1, Math.floor((now.getTime() - cfg.periodic.claim_days * 86_400_000 - start) / every) + 2);
+    const batch: D1PreparedStatement[] = [];
+    for (let k = first; k <= due; k++) {
       const at = new Date(Date.parse(r.period_start) + (k - 1) * every);
-      const m = await sendMail(db, playerId, { kind: 'subscription', title: cfg.periodic.mail_title, body: `Offering ${k} of ${cfg.periodic.count}`, attachments: cfg.periodic.attachments, expiresInDays: cfg.periodic.claim_days, sourceKey: `sub:${r.order_id}:hd:${k}` }, 'system:subscription', at);
-      if (m.created) created++;
+      batch.push(prepareMail(db, playerId, { kind: 'subscription', title: cfg.periodic.mail_title, body: `Offering ${k} of ${cfg.periodic.count}`, attachments: cfg.periodic.attachments, expiresInDays: cfg.periodic.claim_days, sourceKey: `sub:${r.order_id}:hd:${k}` }, 'system:subscription', at));
     }
+    if (batch.length) created += (await db.batch(batch)).reduce((n, result) => n + result.meta.changes, 0);
   }
   return created;
 }
 
 /** Currency refunds use original immutable credits; marker, clawback, shortfall and event commit together. */
-export async function refundPurchase(db: D1Database, orderId: string, source: 'rtdn' | 'system', now = new Date()): Promise<{ refunded: boolean; unrecovered: Record<string, number> }> {
+export async function refundPurchase(db: D1Database, orderId: string, source: 'rtdn' | 'system', now = new Date(), recovery?: Pick<PurchaseRecovery, 'fence'>): Promise<{ refunded: boolean; unrecovered: Record<string, number> }> {
   for (let attempt = 0; attempt < 5; attempt++) {
     const p = await db.prepare('SELECT player_id, kind, state FROM purchases WHERE order_id = ?1').bind(orderId).first<{ player_id: string; kind: string; state: string }>();
     if (!p || p.state === 'refunded') return { refunded: false, unrecovered: {} };
@@ -242,14 +281,14 @@ export async function refundPurchase(db: D1Database, orderId: string, source: 'r
       if (credit.amount > take) unrecovered[credit.currency] = credit.amount - take;
     }
     try {
-      await db.batch([
+      await purchaseBatch(db, [
         db.prepare("UPDATE purchases SET state = 'refunded', refunded_at = ?2, unrecovered = ?3 WHERE order_id = ?1 AND state = 'granted'")
           .bind(orderId, now.toISOString(), JSON.stringify(unrecovered)),
         db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
         ...debits,
         event(db, source, orderId, 'refunded'),
         db.prepare('DELETE FROM tx_guard')
-      ]);
+      ], recovery);
       return { refunded: true, unrecovered };
     } catch (e) {
       const message = String(e instanceof Error ? e.message : e);

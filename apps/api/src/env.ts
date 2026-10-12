@@ -26,6 +26,8 @@ export interface GameEnv {
   ALLOWED_ORIGINS?: string;
   /** secret: Play Developer API service account JSON; billing fails closed when absent */
   GOOGLE_PLAY_SERVICE_ACCOUNT?: string;
+  /** secret: {current, keys} AES-256-GCM keyring; base64url keys, scoped to this environment */
+  BILLING_TOKEN_KEYS?: string;
   /** audience of the Pub/Sub push OIDC token (RTDN); RTDN is refused when unset */
   RTDN_AUDIENCE?: string;
   /** e-mail of the Pub/Sub push service account allowed to call the RTDN endpoint */

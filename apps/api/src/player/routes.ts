@@ -8,7 +8,8 @@ import type { GameEnv } from '../env';
 import { activeBanners, disclosure, pullGacha } from '../gacha/service';
 import { PlayApi, type PlayClient } from '../billing/play';
 import { authenticatePush, handleRtdn } from '../billing/rtdn';
-import { billingTag, listProducts, syncSubscriptionMail, verifyPurchase } from '../billing/service';
+import { billingTag, listProducts, syncSubscriptionMail } from '../billing/service';
+import { verifyReceipt } from '../billing/recovery';
 import { adStatus, beginAd, grantAd, AD } from '../ads/service';
 import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, writeSave } from '../progress/service';
@@ -261,7 +262,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     // A sales kill flag cannot discard an obligation already confirmed by Google Play.
     await perMinute(c.env, `verify:${c.get('playerId')}`, 20);
     const input = await body(c, Verify, 6000);
-    return c.json(await verifyPurchase(c.env.DB, playFor(c.env), c.get('playerId'), input));
+    return c.json(await verifyReceipt(c.env, playFor(c.env), c.get('playerId'), input));
   });
 
   // Google Pub/Sub push (RTDN): refunds, revocations, renewals. Authenticated by the push OIDC token, never by the body.

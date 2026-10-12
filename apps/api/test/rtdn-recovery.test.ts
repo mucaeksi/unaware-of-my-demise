@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { billingTag, verifyPurchase } from '../src/billing/service';
 import { handleRtdn } from '../src/billing/rtdn';
 import { deleteAccount } from '../src/account/service';
@@ -141,21 +141,32 @@ describe('durable RTDN delivery', () => {
   });
 
   it('an expired worker cannot mark or release the succeeding delivery owner', async () => {
-    const { token, playerId } = await renewal('ownership');
-    let enter!: () => void; let release!: () => void;
-    const entered = new Promise<void>((resolve) => { enter = resolve; });
-    const gate = new Promise<void>((resolve) => { release = resolve; });
-    const slow = { ...playClient, async getSubscription(t: string) { enter(); await gate; return playClient.getSubscription(t); } };
-    const msg = notification('rtdn-ownership', token);
-    const first = handleRtdn(db, baseEnv, slow, msg, at);
-    // Attach the rejection handler before unblocking to avoid an unhandled rejection.
-    const firstResult = first.catch((e: unknown) => e);
-    await entered;
-    expect(await handleRtdn(db, baseEnv, playClient, msg, new Date(at.getTime() + 61_000))).toEqual({ handled: 'subscription' });
-    release();
-    expect(await firstResult).toMatchObject({ code: 'rtdn_lease_lost' });
-    expect(await db.prepare('SELECT state, attempts, owner FROM rtdn_seen WHERE message_id = ?1').bind(msg.message.messageId).first()).toEqual({ state: 'done', attempts: 2, owner: null });
-    expect(await db.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 3200 });
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(at);
+    let unblock: (() => void) | undefined;
+    let settled: Promise<unknown> | undefined;
+    try {
+      const { token, playerId } = await renewal('ownership');
+      let enter!: () => void; let release!: () => void;
+      const entered = new Promise<void>((resolve) => { enter = resolve; });
+      const gate = new Promise<void>((resolve) => { release = resolve; });
+      const slow = { ...playClient, async getSubscription(t: string) { enter(); await gate; return playClient.getSubscription(t); } };
+      const msg = notification('rtdn-ownership', token);
+      const first = handleRtdn(db, baseEnv, slow, msg, at);
+      // Attach the rejection handler before unblocking to avoid an unhandled rejection.
+      const firstResult = first.catch((e: unknown) => e);
+      unblock = release; settled = firstResult;
+      await entered;
+      vi.setSystemTime(new Date(at.getTime() + 61_000));
+      expect(await handleRtdn(db, baseEnv, playClient, msg, new Date(at.getTime() + 61_000))).toEqual({ handled: 'subscription' });
+      release();
+      expect(await firstResult).toMatchObject({ code: 'billing_lease_lost' });
+      expect(await db.prepare('SELECT state, attempts, owner FROM rtdn_seen WHERE message_id = ?1').bind(msg.message.messageId).first()).toEqual({ state: 'done', attempts: 2, owner: null });
+      expect(await db.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 3200 });
+    } finally {
+      unblock?.(); await settled;
+      vi.useRealTimers();
+    }
   });
 
   it('bounds failed processing, retains safe dead-letter evidence and never records exception secrets', async () => {
@@ -212,5 +223,15 @@ describe('durable RTDN delivery', () => {
     }
     expect((await admin('/admin/api/billing/notifications?state=invalid')).status).toBe(400);
     expect((await admin('/admin/api/billing/notifications', { as: null })).status).toBe(401);
+  });
+
+  it('a legacy zero-attempt reset cannot be repeated before authentic delivery', async () => {
+    const id = 'rtdn-legacy-zero-reset';
+    await db.prepare('INSERT INTO rtdn_seen (message_id) VALUES (?1)').bind(id).run();
+    const path = `/admin/api/billing/notifications/${id}/retry`;
+    const request = post({ expectedAttempts: 0, reason: 'reconcile legacy completion ambiguity' });
+    expect((await admin(path, request)).status).toBe(200);
+    expect((await admin(path, request)).status).toBe(409);
+    expect(await db.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'billing.notification.retry' AND target = ?1").bind(id).first()).toEqual({ n: 1 });
   });
 });

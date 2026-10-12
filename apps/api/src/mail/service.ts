@@ -31,17 +31,26 @@ export interface MailRow {
   read_at: string | null;
 }
 
+const subscriptionOrder = (sourceKey: string | null | undefined): string | undefined => /^sub:([^:]+):/.exec(sourceKey ?? '')?.[1];
+
+/** Shared statement permits earned windows to be issued in one bounded D1 batch. */
+export function prepareMail(db: D1Database, playerId: string, mail: NewMail, createdBy: string, now = new Date()): D1PreparedStatement {
+  const m = NewMail.parse(mail);
+  const expires = new Date(now.getTime() + m.expiresInDays * 86_400_000).toISOString();
+  return db.prepare("INSERT INTO mail (player_id, kind, title, body, attachments, source_key, created_by, created_at, expires_at) SELECT ?1,?2,?3,?4,?5,?6,?7,?8,?9 FROM players WHERE id = ?1 AND status <> 'deleted' AND (?10 IS NULL OR EXISTS (SELECT 1 FROM purchases WHERE order_id = ?10 AND player_id = ?1 AND state = 'granted' AND entitlement_state IN ('active','canceled','in_grace','expired') AND period_start <= ?8 AND period_end > ?8)) ON CONFLICT (player_id, source_key) DO NOTHING RETURNING id")
+    .bind(playerId, m.kind, m.title, m.body, JSON.stringify(m.attachments), m.sourceKey ?? null, createdBy, now.toISOString(), expires, subscriptionOrder(m.sourceKey) ?? null);
+}
+
 /** Creates a mail. A repeated `sourceKey` for the same player is a no-op and returns the existing mail id. */
 export async function sendMail(db: D1Database, playerId: string, mail: NewMail, createdBy: string, now = new Date()): Promise<{ id: number; created: boolean }> {
   const m = NewMail.parse(mail);
-  const expires = new Date(now.getTime() + m.expiresInDays * 86_400_000).toISOString();
-  const res = await db
-    .prepare("INSERT INTO mail (player_id, kind, title, body, attachments, source_key, created_by, created_at, expires_at) SELECT ?1,?2,?3,?4,?5,?6,?7,?8,?9 FROM players WHERE id = ?1 AND status <> 'deleted' ON CONFLICT (player_id, source_key) DO NOTHING RETURNING id")
-    .bind(playerId, m.kind, m.title, m.body, JSON.stringify(m.attachments), m.sourceKey ?? null, createdBy, now.toISOString(), expires)
-    .first<{ id: number }>();
+  const res = await prepareMail(db, playerId, m, createdBy, now).first<{ id: number }>();
   if (res) return { id: res.id, created: true };
   const existing = await db.prepare('SELECT id FROM mail WHERE player_id = ?1 AND source_key = ?2').bind(playerId, m.sourceKey ?? '').first<{ id: number }>();
-  if (!existing) throw new HttpError(404, 'player_unknown', 'mail could not be created');
+  if (!existing) {
+    if (subscriptionOrder(m.sourceKey)) throw new HttpError(409, 'entitlement_unavailable', 'this subscription cannot issue new benefits');
+    throw new HttpError(404, 'player_unknown', 'mail could not be created');
+  }
   return { id: existing.id, created: false };
 }
 
@@ -69,7 +78,7 @@ export async function claimMail(db: D1Database, playerId: string, mailId: number
   if (mail.claimed_at) throw new HttpError(409, 'already_claimed', 'this mail was already claimed');
   if (mail.expires_at <= now.toISOString()) throw new HttpError(409, 'expired', 'this mail has expired');
   const src = await db.prepare('SELECT source_key FROM mail WHERE id = ?1').bind(mailId).first<{ source_key: string | null }>();
-  const order = /^sub:([^:]+):/.exec(src?.source_key ?? '')?.[1];
+  const order = subscriptionOrder(src?.source_key);
   if (order) {
     const p = await db.prepare('SELECT state FROM purchases WHERE order_id = ?1').bind(order).first<{ state: string }>();
     if (p?.state === 'refunded') throw new HttpError(409, 'revoked', 'this entitlement was revoked by a refund');
