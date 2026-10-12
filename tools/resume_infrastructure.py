@@ -5,10 +5,13 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import fcntl
+import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
+import signal
 import time
 
 INTERVAL = 5 * 60 * 60
@@ -44,6 +47,39 @@ def save_status(cache: Path, state: str, **detail: object) -> None:
     temp.replace(target)
 
 
+def workspace_fingerprint(root: Path) -> str:
+    """Bind continuation to this exact branch, HEAD and unfinished files; never discard another writer's changes."""
+    digest = hashlib.sha256()
+    for args in [['rev-parse', 'HEAD'], ['branch', '--show-current'], ['status', '--porcelain=v1', '-z'], ['diff', '--binary', 'HEAD']]:
+        digest.update(subprocess.check_output(['git', *args], cwd=root))
+    names = subprocess.check_output(['git', 'ls-files', '--others', '--exclude-standard', '-z'], cwd=root).split(b'\0')
+    for name in sorted(n for n in names if n):
+        path = root / os.fsdecode(name)
+        digest.update(name)
+        if path.is_symlink():
+            digest.update(os.fsencode(os.readlink(path)))
+        elif path.is_file():
+            with path.open('rb') as source:
+                for chunk in iter(lambda: source.read(65536), b''):
+                    digest.update(chunk)
+    return digest.hexdigest()
+
+
+def run_model(command: list[str], output, timeout: float = INTERVAL - 60) -> subprocess.CompletedProcess:
+    with subprocess.Popen(command, stdin=subprocess.PIPE, stdout=output, stderr=subprocess.STDOUT, text=True, start_new_session=True) as process:
+        try:
+            process.communicate(PROMPT, timeout=timeout)
+        except subprocess.TimeoutExpired:
+            os.killpg(process.pid, signal.SIGTERM)
+            try:
+                process.communicate(timeout=10)
+            except subprocess.TimeoutExpired:
+                os.killpg(process.pid, signal.SIGKILL)
+                process.communicate()
+            return subprocess.CompletedProcess(command, 124)
+        return subprocess.CompletedProcess(command, process.returncode)
+
+
 def run_once(root: Path, *, dry_run: bool = False) -> str:
     cache = root / ".cache" / "infrastructure-resume"
     cache.mkdir(parents=True, exist_ok=True)
@@ -53,27 +89,52 @@ def run_once(root: Path, *, dry_run: bool = False) -> str:
         except BlockingIOError:
             return "BUSY"
         dirty = subprocess.check_output(["git", "status", "--porcelain"], cwd=root, text=True)
-        if dirty.strip():
+        owned = cache / 'resume-session.json'
+        try:
+            previous = json.loads(owned.read_text()) if owned.exists() else {}
+        except (ValueError, OSError):
+            previous = {}
+        resume_id = previous.get('threadId')
+        if not dirty.strip() or not isinstance(resume_id, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{1,127}', resume_id):
+            resume_id = None
+        elif previous.get('workspaceFingerprint') != workspace_fingerprint(root):
+            resume_id = None
+        if dirty.strip() and not resume_id:
             save_status(cache, "DIRTY_WORKTREE", message="Preserve unfinished work; no session started.")
             return "DIRTY_WORKTREE"
         if dry_run:
             save_status(cache, "READY_NOT_EXECUTED", message="Dry run; no model or network call.")
             return "READY_NOT_EXECUTED"
         save_status(cache, "RUNNING", pid=os.getpid())
-        log = cache / f"run-{dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.jsonl"
+        log = cache / f"run-{dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')}.jsonl"
+        last = cache / 'last-message.txt'
+        last.touch(exist_ok=True)
+        last.chmod(0o600)
         # Logs stay private and ignored; never copy authentication or environment values into them.
         with log.open("x") as output:
             log.chmod(0o600)
             try:
-                result = subprocess.run(
-                    ["codex", "exec", "--cd", str(root), "--sandbox", "workspace-write",
+                command = ["codex", "exec", "--cd", str(root), "--sandbox", "workspace-write",
                      "-c", 'approval_policy="never"', "-c", 'model_reasoning_effort="xhigh"',
-                     "--json", "--output-last-message", str(cache / "last-message.txt"), "-"],
-                    input=PROMPT, text=True, stdout=output, stderr=subprocess.STDOUT,
-                )
+                     "--json", "--output-last-message", str(last)]
+                command.extend(['resume', resume_id, '-'] if resume_id else ['-'])
+                result = run_model(command, output)
             except OSError as error:
                 save_status(cache, "RUNNER_UNAVAILABLE", error=type(error).__name__)
                 return "RUNNER_UNAVAILABLE"
+        thread_id = resume_id
+        with log.open() as lines:
+            for line in lines:
+                try:
+                    event = json.loads(line)
+                    candidate = event.get('thread_id')
+                    if event.get('type') == 'thread.started' and isinstance(candidate, str) and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{1,127}', candidate):
+                        thread_id = candidate
+                except ValueError:
+                    continue
+        if thread_id:
+            owned.write_text(json.dumps({'threadId': thread_id, 'workspaceFingerprint': workspace_fingerprint(root)}) + '\n')
+            owned.chmod(0o600)
         state = "FINISHED" if result.returncode == 0 else "RETRY_NEXT_INTERVAL"
         save_status(cache, state, exitCode=result.returncode, log=log.name)
         return state

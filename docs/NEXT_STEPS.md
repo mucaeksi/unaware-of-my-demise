@@ -36,9 +36,11 @@ The media budget is already approved; retain the active backup bucket. Deploy th
 
 ## Five-hour continuation runner
 
-`python3 tools/resume_infrastructure.py --loop` waits five hours before each attempt, takes scheduler/session locks and starts `codex exec` only on a clean working tree. Usage/network failure is recorded as `RETRY_NEXT_INTERVAL`; it does not claim a reset occurred. Private status/logs are under ignored `.cache/infrastructure-resume/`. `--dry-run` checks guards without a model call. Inspect status and the recorded scheduler PID before starting another copy.
+`python3 tools/resume_infrastructure.py --loop` waits five hours before each attempt and takes scheduler/session locks. A new `codex exec` starts only on a clean tree. After an interrupted owned session, the runner can resume its exact recorded thread only if branch/HEAD/tracked and untracked file fingerprints still match; a foreign edit causes a safe skip. Each attempt has a bounded runtime and terminates its process group before the next interval. Usage/network failure is `RETRY_NEXT_INTERVAL`, not evidence that usage reset. Private status/logs/last message are under ignored `.cache/infrastructure-resume/`. `--dry-run` checks guards without a model call. Inspect status and the live scheduler PID before another copy.
 
 This host has no crontab or running systemd. The local loop survives while its process and environment stay alive; environment suspension/destruction stops it. Codex CLI authentication is configured, but the host's independent Codex model endpoint is currently network-blocked. MCP stdio and local source work remain available. The loop's scheduled state is not proof that a new model session started; actual execution requires provider access and available usage. No network-policy bypass is attempted.
+
+An independent read-only model readiness probe timed out after proxy HTTP 403 for `chatgpt.com` (2026-10-12). The saved environment draft adds only that custom hostname and replaces obsolete Godot/PostgreSQL/Next.js install/start instructions with the current Phaser/D1/pinned-tool setup. Saving is confirmed; applying/publishing is pending in environment settings. Existing package-manager presets and credential requirements are preserved. Recheck actual model access after publication; no automatic continuation PASS is asserted beforehand.
 
 ## Latest verified slice — R02-A
 
