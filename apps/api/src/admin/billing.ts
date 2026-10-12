@@ -4,6 +4,7 @@ import type { AdminIdentity, Role } from '../auth/access';
 import { HttpError } from '../content/store';
 import { auditIfChanged } from '../db/audit';
 import type { AdminEnv } from '../env';
+import { inspectPurchase } from '../billing/reconciliation';
 
 type Ctx = { Bindings: AdminEnv; Variables: { admin: AdminIdentity } };
 const State = z.enum(['legacy', 'pending', 'processing', 'done', 'dead_letter']);
@@ -21,6 +22,11 @@ async function retryInput(c: Context<Ctx>): Promise<z.infer<typeof Retry>> {
 
 /** Investigation exposes no payload/token. Reset permits a subsequent authentic Pub/Sub redelivery. */
 export function registerBillingOps(app: Hono<Ctx>, need: (role: Role) => MiddlewareHandler<Ctx>): void {
+  app.get('/admin/api/billing/purchases/:orderId/reconciliation', need('viewer'), async (c) => {
+    const id = c.req.param('orderId');
+    if (id.length < 1 || id.length > 200) throw new HttpError(400, 'bad_request', 'invalid order id');
+    return c.json(await inspectPurchase(c.env.DB, id));
+  });
   app.get('/admin/api/billing/notifications', need('viewer'), async (c) => {
     const state = c.req.query('state');
     const before = c.req.query('before');

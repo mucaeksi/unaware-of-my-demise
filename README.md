@@ -157,7 +157,7 @@ The committed [material-spending regressions](apps/api/test/material-spending.te
 
 ### R02 — Purchases, subscriptions, refunds and RTDN
 
-Server verification/order dedup and paid fulfillment are retained. Local recovery slices below are delivered; [DEV_TRACKER](docs/DEV_TRACKER.json) keeps dated detailed evidence. Latest local suite: **480 application/tool tests**, lint/typecheck and admin build PASS. No live Google, deployed migration or physical-device acceptance is implied.
+Server verification/order dedup and paid fulfillment are retained. Local recovery slices below are delivered; [DEV_TRACKER](docs/DEV_TRACKER.json) keeps dated detailed evidence. Latest local suite: **486 application/tool tests**, lint/typecheck and admin build PASS. No live Google, deployed migration or physical-device acceptance is implied.
 
 | Verified slice | Result | Recorded full-suite proof |
 | --- | --- | --- |
@@ -168,10 +168,13 @@ Server verification/order dedup and paid fulfillment are retained. Local recover
 | R02-E1 | Eight-second provider/OAuth deadlines, safe failures, credential-scoped cache, consumed-marker recovery and affirmative verified publisher email. | 455 tests; nine HTTP and three billing/auth cases. |
 | R02-E2 | Exact-order full-refund proof; preserve earlier periods/recovered state, suspend uncertain mail and retain partial refunds for review. | 461 tests; six new cases. |
 | R02-E3 | Provider-bound encrypted pending/retry work before grants, shared client/RTDN/Cron ownership with transactional fences, ack/consume/renewal/refund recovery, safe operator review and deletion cleanup. | 480 tests; 19 new cases, stronger expired-worker coverage; earned-window regression failed before correction. |
+| R02-F | Viewer-only, consistent D1 reconciliation snapshot; original/refund/shortfall/claimed-periodic facts, stable semantic hash and explicit legacy/noncurrency review reasons. | 486 tests; six new cases; no repair or policy application. |
 
 **R02-E3 runtime contract:** `verifyReceipt` is the application entry point; domain helpers remain separately testable. AES-256-GCM binds ciphertext to key ID/environment/package/player/product/token hash, with fresh nonces and retained-key rotation. `BILLING_TOKEN_KEYS` is an environment-specific **game Worker secret**, never a client variable. Every-minute dev/staging Cron processes at most five eligible jobs, uses bounded retries/ack deadlines and emits only aggregate results. Successful consumables/deleted accounts discard stored ciphertext; active subscriptions keep renewal observation after a refund without revocation. Earned mail can materialize within its original claim grace after expiry, stops at the actual paid period end and commits in batches with current-rights guards. Amounts/cadence were not retuned.
 
 Migration **0022**, two isolated local Workers and real local scheduled-handler dispatch passed; absent Access/keyring configuration failed closed. Wrangler is unauthenticated in this host, and staging/reference HTTP checks received proxy 403. Existing Workers Builds remain the deployment path; actual Cron/keyring/Google/RTDN configuration and deployed tags are **unverified**. [SECRETS_AND_PERMISSIONS](docs/SECRETS_AND_PERMISSIONS.md) specifies secure setup; no live secret or player transaction was changed.
+
+The [billing policy review](docs/billing/POLICY_REVIEW.md) contains concrete future refund/calendar alternatives and evidence gates. The viewer reconciliation endpoint reports facts only; a marker or snapshot hash does not authorize historical repair.
 
 Remaining acceptance:
 

@@ -40,3 +40,7 @@ R02-A/B/C/D/E1/E2/E3 are locally verified; README R02 summarizes each and DEV_TR
 Current host Wrangler is unauthenticated; staging/official-reference reads receive proxy 403. Set **BILLING_TOKEN_KEYS** in each existing game Worker secret store and prove exact deployed Cron/Google behavior using approved isolated sandbox data; source Cron config is not a live run. See SECRETS_AND_PERMISSIONS. Local tests use ephemeral test keys only.
 
 Next source work: prepare legacy/claimed/noncurrency/partial/calendar-cadence and native offer-version decisions, then close independent **R03** generation/publication/economic release authority. R02 stays in progress for those acceptance gaps. Continue other authorized infrastructure while external setup waits; defer creative/paid assets.
+
+## Latest verified addition — R02-F
+
+Viewer-only reconciliation snapshots and concrete refund/calendar/native-offer policy alternatives are prepared in docs/billing/POLICY_REVIEW.md. Six new cases, lint/typecheck and all 486 application/tool tests pass; no actual provider proof or financial repair. Next implement independent R03 durable generation/publication/economic release authority, retaining open R02 external/policy acceptance.

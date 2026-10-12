@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R02-E3 verified locally; policy/configuration acceptance remains",
-      "detail": "Encrypted durable pending/retry work, shared transactional ownership and Cron recovery pass 480 application/tool tests and lint/typecheck. Local 22 migrations/Workers/scheduled dispatch pass. No Cloudflare CLI auth; proxy blocks staging/docs; configure game Worker BILLING_TOKEN_KEYS and prove actual Cron/Google/device behavior. Continue R02 policy preparation and independent R03."
+      "title": "R02-F reconciliation/policy preparation verified; R03 next",
+      "detail": "All local finance recovery slices and read-only investigation pass 486 application/tool tests and lint/typecheck. Concrete policy alternatives are proposals; no live financial repair. Proceed to independent R03 while keyring/provider/native/policy evidence remains open."
     }
   ],
   "next": [
@@ -370,6 +370,23 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R02-F-20261012",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "e259ed888cb331b89143d9190b6bc5c1fa7574e3",
+      "verifiedAt": "2026-10-12T23:30:52Z",
+      "scope": "R02-F working tree: six new read-only reconciliation regressions cover catalog edits, stable factual hash/no financial writes, half-completed markers, legacy unknown terms, claimed periodic/noncurrency separation and viewer/auth/privacy guards. One SELECT-only D1 batch; no provider verification, policy approval or repair applier. Lint/typecheck and all 486 application/tool tests pass. Concrete refund/calendar/native-offer alternatives are unapplied proposals. Whole R02 policy/live/native acceptance remains open; independent R03 proceeds.",
+      "testIds": [
+        "apps/api/test/billing-reconciliation.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -530,7 +547,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Durable acknowledgement, immutable fulfillment, correct entitlements and crash-safe refund/notification completion.",
-      "implemented": "Locally verified ack/original-credit atomic refund/immutable fulfillment/effective entitlement and claims/deletion, durable RTDN, safe provider transport and exact-order refund proof. Provider-bound encrypted retry/pending work, shared token ownership/fences and bounded every-minute Cron wired; safe operator metadata/reset, consumed/deleted-token cleanup and earned-mail grace recovery. Whole acceptance remains partial for policy/native/live evidence.",
+      "implemented": "Locally verified ack/original-credit atomic refund/immutable fulfillment/effective entitlement and claims/deletion, durable RTDN, safe provider transport and exact-order refund proof. Provider-bound encrypted retry/pending work, shared token ownership/fences and bounded every-minute Cron wired; safe operator metadata/reset, consumed/deleted-token cleanup and earned-mail grace recovery. Whole acceptance remains partial for policy/native/live evidence. Viewer-only consistent reconciliation snapshots and explicit unapplied policy alternatives are prepared.",
       "dependsOn": [
         "R00"
       ],
@@ -550,7 +567,10 @@
         "apps/api/src/billing/recovery.ts",
         "apps/api/src/billing/vault.ts",
         "apps/api/test/billing-recovery.test.ts",
-        "apps/api/test/billing-vault.test.ts"
+        "apps/api/test/billing-vault.test.ts",
+        "apps/api/src/billing/reconciliation.ts",
+        "apps/api/test/billing-reconciliation.test.ts",
+        "docs/billing/POLICY_REVIEW.md"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -562,7 +582,8 @@
         "E-R02-D-20261012",
         "E-R02-E1-20261012",
         "E-R02-E2-20261012",
-        "E-R02-E3-20261012"
+        "E-R02-E3-20261012",
+        "E-R02-F-20261012"
       ],
       "blockerIds": [
         "B-PLAY",
@@ -612,6 +633,12 @@
           "title": "Encrypted durable billing work, transactional ownership and scheduled recovery",
           "status": "COMPLETE",
           "remaining": "Live keyring/Cron/Google/physical evidence and backlog capacity remain unverified. Legacy/claimed/noncurrency/partial/calendar-cadence policy and native offer version binding remain separate acceptance."
+        },
+        {
+          "id": "R02-F",
+          "title": "Read-only reconciliation and concrete policy alternatives",
+          "status": "COMPLETE",
+          "remaining": "No historical repair/policy application. Provider/native/keyring/cadence/retained-goods and legacy decisions remain separate acceptance."
         }
       ]
     },
