@@ -109,7 +109,7 @@ Additional failing regressions expose gaps outside the green existing suite. The
 
 **P0**: financial/data/release blocker. **P1**: required first-binary or core experience gap. **P2**: operational/scale/ergonomic debt, promoted when required by measured load or release acceptance. **S/M/L** are relative effort, not promised dates.
 
-Every package below was open or incomplete at the audit baseline. Recheck current code and acceptance evidence before starting. Each package's completion criteria are defined once in section 6.
+Every package below was open or incomplete at the audit baseline. Current task and evidence status is recorded in [DEV_TRACKER](docs/DEV_TRACKER.json), with evidence semantics in [BUILD_STATE](docs/BUILD_STATE.md). R00's documentation/evidence reconciliation is completed in the 2026-10-12 R00 delivery; this does not close R01–R18 engineering or live/device gates. Recheck current code and scoped evidence before starting. Each package's completion criteria are defined once in section 6.
 
 | ID | Work package | Priority / size | Dependencies |
 | --- | --- | --- | --- |
@@ -138,6 +138,8 @@ First engineering deliveries: material guard, crash-safe finance, release author
 ## 6. Open work and concrete completion criteria
 
 ### R00 — State, evidence and document reconciliation
+
+**Delivery record (2026-10-12):** the capability/evidence registry is in [DEV_TRACKER](docs/DEV_TRACKER.json); the supporting records below now distinguish implemented source, dated local tests and unverified external acceptance. Maintain these records as subsequent selected tasks complete. R00 adds no gameplay fix or fresh deployment/device approval.
 
 Build a capability/evidence registry recording required-versus-implemented functionality, task status, commit, test/build/deployment/device ID, **verifiedAt** and exact blockers. Keep BUILT, LOCAL_TESTED, STAGING_VERIFIED, DEVICE_VERIFIED and OWNER_BLOCKED distinct. Admin generatedAt is not evidence freshness.
 

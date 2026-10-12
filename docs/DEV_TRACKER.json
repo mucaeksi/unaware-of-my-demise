@@ -1,56 +1,63 @@
 {
+  "schemaVersion": 1,
+  "sourceCommit": "0499a6cb109cee3f7de4c9ad951e4e22e25d3983",
+  "reviewedAt": "2026-10-12",
+  "authority": "README.md",
+  "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
+  "currentAssignment": {
+    "id": "R00",
+    "status": "COMPLETE",
+    "nextProposed": "R01",
+    "workflow": "Complete one selected task, report verified delivery, then wait for the owner's next selection."
+  },
   "now": [
     {
-      "title": "Control Center walkthrough with you",
-      "detail": "All server systems are built (accounts, gacha, mail, shop/ads/billing logic, character growth, gear, drops, errands, teams, account export/delete). Log in at the admin URL and we go through every page together; leave notes in Development > Feedback."
-    },
-    {
-      "title": "UI design review with you",
-      "detail": "Client screens are functional skeletons on purpose (Summon, Roster, Companion, Armory, Errands, Mail, Shop, Account). Design of the panels is done together."
+      "title": "R00 complete \u2014 next task awaiting selection",
+      "detail": "Evidence registry and supporting records reconciled at source 0499a6cb. Scoped document checks and local admin-data generation/build passed. Historical application tests retain their original dates; generatedAt is not acceptance freshness. Recommended next: R01."
     }
   ],
   "next": [
     {
-      "title": "Android shell (Capacitor) + native bridges",
-      "detail": "Google sign-in, Play Billing, AdMob rewarded ads; emulator tests in CI."
+      "title": "R01 \u2014 atomic material spending",
+      "detail": "Recommended next selection: missing/zero/insufficient/exact stacks, all character/gear consumers, concurrent spends and semantic retries with no partial mutations."
     },
     {
-      "title": "Combat coverage 3/20 -> 20/20 characters, boss phases, Sweep/AFK",
-      "detail": "Party-based battles (team presets are stored and validated server-side already) wait for this."
+      "title": "R02 / R03 \u2014 finance recovery and release authority",
+      "detail": "After selection, split large packages into bounded acknowledgement/refund/RTDN or generation/publication slices; acceptance remains in README."
     },
     {
-      "title": "Team builder screen + gear level-up/dismantle/reroll screens",
-      "detail": "The server side exists and is tested; client screens follow the design review."
-    },
-    {
-      "title": "Consent flow (UMP) and store compliance docs",
-      "detail": "Account export/delete is built."
-    },
-    {
-      "title": "Final math pass",
-      "detail": "All reward amounts (ad payout, task payouts, drop quantities, stage rewards, upgrade fees) are placeholders until this pass, as you decided."
+      "title": "R04 then R06 \u2014 rewards and combat",
+      "detail": "Close repeat/duplicate grants after their dependencies, then Break/Auto/gear/loan semantics before chapter-flow acceptance. Later layouts/media follow README dependencies."
     }
   ],
   "blockedOnOwner": [
     {
-      "title": "Google Cloud: OAuth client IDs (Android + Web)",
-      "detail": "Needed for real Google sign-in. Steps in docs/AAB_ACCESS_PLAN.md."
+      "title": "B-SIGNING \u2014 Owner-held upload key and approved signed test binary",
+      "detail": "Use the existing key through secure UOMD_KEYSTORE_FILE/PASSWORD/KEY_ALIAS and explicit versionCode/environment; never recreate the key or print its values. Needed for signed-device/store acceptance, not local source work."
     },
     {
-      "title": "Play Console: app + service account access + products",
-      "detail": "Invite the service account email under Users and permissions; create the app."
+      "title": "B-PRIVACY \u2014 Operator, audience and retention decisions",
+      "detail": "Prepare field/table/SDK inventory and concrete options; owner supplies actual contact/domain, retention, public deletion route, age/TFUA and truthful store disclosures."
     },
     {
-      "title": "AdMob: enter the server-side verification callback URL",
-      "detail": "Retry 'verify callback URL' in AdMob after the latest staging deploy (the earlier 400 is fixed). app-ads.txt waits for a website."
+      "title": "B-ECONOMY \u2014 Unapplied payout/refund/shard and combat-policy choices",
+      "detail": "Prepare bounded proposals for free-repeat payout, recovery floor, final-boss rewards, noncurrency refund/claimed mail/shard policy and unresolved canon mechanics. Local correctness fixes proceed where policy is already defined."
     },
     {
-      "title": "Android keystore",
-      "detail": "Upload key for signing; never leaves the owner/CI secrets."
+      "title": "B-ART \u2014 Layout and visual identity decisions",
+      "detail": "Prepare same-content A/B/C layouts and concrete character/costume/studio alternatives before dependent art; review Japanese transcript/casting before final VO."
     },
     {
-      "title": "age private key",
-      "detail": "Only to rehearse a backup restore."
+      "title": "B-RESTORE \u2014 Owner-held age private key for encrypted restore",
+      "detail": "Prepare isolated restore targets/hash/table/FK/ledger/RPO/RTO checks; owner supplies decryption through approved secure handling. A new key or old plaintext drill cannot substitute."
+    },
+    {
+      "title": "B-ALERTS \u2014 Authorized alert destination",
+      "detail": "Prepare a bounded failure/delivery test and obtain owner-selected destination before external messages; source logging alone is not delivery."
+    },
+    {
+      "title": "B-RELEASE \u2014 Production/public Play rollout",
+      "detail": "Complete R18 evidence and concrete rollout/rollback before separate owner release decision; staging and local engineering may continue."
     }
   ],
   "ideas": [
@@ -76,7 +83,7 @@
       "from": "owner",
       "date": "2026-10-11",
       "text": "If a test or step fails more than twice: raise reasoning, note it, move on.",
-      "status": "working agreement"
+      "status": "Historical suggestion; current README/session scope and evidence rules govern retries and completion."
     },
     {
       "from": "owner",
@@ -95,6 +102,719 @@
       "date": "2026-10-11",
       "text": "Control Center login with unawareofmydemise@gmail.com.",
       "status": "done: D-19"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E-SOURCE-R00",
+      "level": "BUILT",
+      "result": "PASS",
+      "commit": "0499a6cb109cee3f7de4c9ad951e4e22e25d3983",
+      "verifiedAt": "2026-10-12",
+      "scope": "Scoped source/configuration review for R00: existing entry/native/team/boss/mail-refund/budget/ops/monitoring/deploy foundations and missing-row spending path. Per-capability sourcePaths are locators, not a claim that every line or acceptance case was re-audited. Application source is unchanged from the audit revision.",
+      "testIds": [],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
+    },
+    {
+      "id": "E-AUDIT-BASELINE",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "184b8d2963eac292162873e07db49bdd04b82f06",
+      "verifiedAt": "2026-10-12",
+      "scope": "Historical isolated audit: lint/typecheck, 406 existing application/tool tests, game/admin builds, 31 byte-identical base content files; 46 adapters and 10 Python tests. Not rerun for R00.",
+      "testIds": [
+        "README.md#verification-from-that-audit"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
+    },
+    {
+      "id": "E-AUDIT-REGRESSIONS",
+      "level": "LOCAL_TESTED",
+      "result": "FAIL",
+      "commit": "184b8d2963eac292162873e07db49bdd04b82f06",
+      "verifiedAt": "2026-10-12",
+      "scope": "Historical audit fixtures: missing material accepted, Break/Auto incorrect, three old-generation cases accepted. One newer-generation rollback positive case passed. These are unresolved regression findings; fixtures are not claimed committed to the repository.",
+      "testIds": [
+        "README.md#verification-from-that-audit"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
+    },
+    {
+      "id": "E-AUDIT-ENTRY",
+      "level": "LOCAL_TESTED",
+      "result": "FAIL",
+      "commit": "184b8d2963eac292162873e07db49bdd04b82f06",
+      "verifiedAt": "2026-10-12",
+      "scope": "Historical isolated renderer boot passed; second-shot narration alpha 0 observed. Full local entry/API harness timed out waiting for admin health. No fresh full-chain or Android PASS.",
+      "testIds": [
+        "README.md#verification-from-that-audit"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
+    },
+    {
+      "id": "E-R00-CHECKS",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "0499a6cb109cee3f7de4c9ad951e4e22e25d3983",
+      "verifiedAt": "2026-10-12T17:22:03Z",
+      "scope": "R00 documentation working tree based on sourceCommit; delivery revision is the enclosing Git commit. PASS: 19 capability/dependency/acceptance records, 6 evidence records, 13 blockers, 80 Markdown references, 19 tables, 17 admin rows, 24 preserved unique Android cases and diff whitespace. Isolated admin prebuild generated 17 rows/20 decisions/40 commits/33 screens; TypeScript and Vite build passed. Skill doctor/bootstrap verify and 46-adapter integrity passed. No gameplay suite, browser/device or remote acceptance rerun.",
+      "testIds": [
+        "git diff --check",
+        "python3 tools/sync_codex_skills.py --check",
+        "python3 tools/skills_doctor.py",
+        "python3 tools/bootstrap_skills.py --verify",
+        "R00 registry/dependency/reference/table/Android-case validation",
+        "npm run build -w @uomd/admin (includes progress generation, TypeScript and Vite)"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
+    },
+    {
+      "id": "E-EXTERNAL",
+      "level": "UNVERIFIED",
+      "result": "NOT_RUN",
+      "commit": "0499a6cb109cee3f7de4c9ad951e4e22e25d3983",
+      "verifiedAt": null,
+      "scope": "R00 performed no Cloudflare/Access/Google/Play live acceptance, physical Android cases, owner-key encrypted restore or public release. Historical external records are not promoted to current verification.",
+      "testIds": [],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
+    }
+  ],
+  "blockers": [
+    {
+      "id": "B-CLOUD",
+      "level": "UNVERIFIED",
+      "title": "Current authorized Cloudflare read access and deployed/build/Access evidence",
+      "detail": "Inspect exact staging source tags, Workers Builds gates/filters, migration state, Access edge/MFA and safe ops outcomes. No live read was performed in R00; configured IDs do not prove access.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-GOOGLE",
+      "level": "UNVERIFIED",
+      "title": "Actual Google identity configuration",
+      "detail": "Verify existing Android/Web OAuth IDs, package and signing SHA-1s against GOOGLE_CLIENT_IDS using real sign-in. Reuse existing configuration; do not assume it must be created.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-PLAY",
+      "level": "UNVERIFIED",
+      "title": "Play test products and authenticated sandbox",
+      "detail": "Verify existing app/product/base-plan/tester configuration, least-privilege service account and PLAY_PACKAGE_NAME, GOOGLE_PLAY_SERVICE_ACCOUNT, RTDN_AUDIENCE, RTDN_PUSH_SERVICE_ACCOUNT in the approved environment; no secret values in source.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-ADS",
+      "level": "UNVERIFIED",
+      "title": "Native AdMob/UMP test configuration",
+      "detail": "Verify existing app/unit IDs, test-device handling, SSV callback, public app-ads.txt and UMP settings. Historical callback results are not current device/financial proof.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-SIGNING",
+      "level": "OWNER_BLOCKED",
+      "title": "Owner-held upload key and approved signed test binary",
+      "detail": "Use the existing key through secure UOMD_KEYSTORE_FILE/PASSWORD/KEY_ALIAS and explicit versionCode/environment; never recreate the key or print its values. Needed for signed-device/store acceptance, not local source work.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-PRIVACY",
+      "level": "OWNER_BLOCKED",
+      "title": "Operator, audience and retention decisions",
+      "detail": "Prepare field/table/SDK inventory and concrete options; owner supplies actual contact/domain, retention, public deletion route, age/TFUA and truthful store disclosures.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-DEVICE",
+      "level": "UNVERIFIED",
+      "title": "Physical Android and Play evidence",
+      "detail": "Need recorded device/OS/WebView, original signed AAB hash/versionCode, licensed tester and sanitized results. No device case executed in R00; hardware provision is not inferred from repo files.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-ECONOMY",
+      "level": "OWNER_BLOCKED",
+      "title": "Unapplied payout/refund/shard and combat-policy choices",
+      "detail": "Prepare bounded proposals for free-repeat payout, recovery floor, final-boss rewards, noncurrency refund/claimed mail/shard policy and unresolved canon mechanics. Local correctness fixes proceed where policy is already defined.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-ART",
+      "level": "OWNER_BLOCKED",
+      "title": "Layout and visual identity decisions",
+      "detail": "Prepare same-content A/B/C layouts and concrete character/costume/studio alternatives before dependent art; review Japanese transcript/casting before final VO.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-MEDIA",
+      "level": "UNVERIFIED",
+      "title": "Provider capability/pricing and safe production pipeline",
+      "detail": "Budget already approved: 1000 TL/month, recorded $20, $3/batch, three attempts/asset. Verify actual Google endpoints/prices/licences and complete R14 reservations/ingest; offline guard work needs no paid call.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-RESTORE",
+      "level": "OWNER_BLOCKED",
+      "title": "Owner-held age private key for encrypted restore",
+      "detail": "Prepare isolated restore targets/hash/table/FK/ledger/RPO/RTO checks; owner supplies decryption through approved secure handling. A new key or old plaintext drill cannot substitute.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-ALERTS",
+      "level": "OWNER_BLOCKED",
+      "title": "Authorized alert destination",
+      "detail": "Prepare a bounded failure/delivery test and obtain owner-selected destination before external messages; source logging alone is not delivery.",
+      "verifiedAt": null
+    },
+    {
+      "id": "B-RELEASE",
+      "level": "OWNER_BLOCKED",
+      "title": "Production/public Play rollout",
+      "detail": "Complete R18 evidence and concrete rollout/rollback before separate owner release decision; staging and local engineering may continue.",
+      "verifiedAt": null
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "R00",
+      "title": "State, evidence and document reconciliation",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
+      "required": "A dated capability/evidence registry and consistent supporting records.",
+      "implemented": "Registry and seven supporting documents reconciled with README and source; admin-data compatibility checked by scoped delivery evidence.",
+      "dependsOn": [],
+      "acceptance": "README.md#r00--state-evidence-and-document-reconciliation",
+      "sourcePaths": [
+        "docs/BUILD_STATE.md",
+        "docs/INFRA_ROADMAP.md",
+        "docs/GAME_FLOW.md",
+        "docs/QA_ANDROID.md",
+        "docs/MONITORING.md",
+        "docs/NEXT_STEPS.md",
+        "tools/build_progress.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-R00-CHECKS"
+      ],
+      "blockerIds": []
+    },
+    {
+      "id": "R01",
+      "title": "Atomic material spending",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Reject missing/insufficient materials atomically across all consumers, with idempotent valid spends.",
+      "implemented": "Shared stackSpend and character/gear transaction paths exist; UPDATE-only missing-row guard is still open.",
+      "dependsOn": [
+        "R00"
+      ],
+      "acceptance": "README.md#r01--material-spending-and-shared-transaction-invariants",
+      "sourcePaths": [
+        "apps/api/src/db/grants.ts",
+        "apps/api/src/progression/characters.ts",
+        "apps/api/src/gear/service.ts",
+        "apps/api/test/progression.test.ts",
+        "apps/api/test/gear.test.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-REGRESSIONS",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": []
+    },
+    {
+      "id": "R02",
+      "title": "Purchase, refund and RTDN recovery",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Durable acknowledgement, immutable fulfillment, correct entitlements and crash-safe refund/notification completion.",
+      "implemented": "Play verification/order dedup/RTDN/refund and refunded unclaimed-mail check exist; recovery and transactional race gaps remain.",
+      "dependsOn": [
+        "R00"
+      ],
+      "acceptance": "README.md#r02--purchases-subscriptions-refunds-and-rtdn",
+      "sourcePaths": [
+        "apps/api/src/billing/service.ts",
+        "apps/api/src/billing/rtdn.ts",
+        "apps/api/src/mail/service.ts",
+        "apps/api/test/billing.test.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-PLAY",
+        "B-ECONOMY"
+      ]
+    },
+    {
+      "id": "R03",
+      "title": "Patch generation and release authority",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Durable generation high-water mark, atomic publication and bounded economic release admission.",
+      "implemented": "Signed manifests, staging and rollback exist; kill/rollback freshness, publish CAS and old-release reward authority remain open.",
+      "dependsOn": [
+        "R00"
+      ],
+      "acceptance": "README.md#r03--generation-publication-and-reward-release-authority",
+      "sourcePaths": [
+        "packages/patch/src/manager.ts",
+        "apps/api/src/content/store.ts",
+        "apps/api/src/progress/service.ts",
+        "packages/patch/src/manager.test.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-REGRESSIONS",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": []
+    },
+    {
+      "id": "R04",
+      "title": "Repeat rewards and duplicate grants",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Bound zero-cost repeat rewards and compute cross-source duplicate effects from committed inventory.",
+      "implemented": "Stage/drop/gacha/shared-grant paths exist; free-repeat policy and cross-source concurrency are unresolved.",
+      "dependsOn": [
+        "R01",
+        "R03"
+      ],
+      "acceptance": "README.md#r04--free-repeat-rewards-and-cross-source-duplicates",
+      "sourcePaths": [
+        "apps/api/src/progress/service.ts",
+        "apps/api/src/gacha/service.ts",
+        "apps/api/src/db/grants.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-ECONOMY"
+      ]
+    },
+    {
+      "id": "R05",
+      "title": "Durable client retry",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
+      "implemented": "Server idempotency and client API exist; new per-invocation IDs and non-durable pending operations leave recovery incomplete.",
+      "dependsOn": [
+        "R01",
+        "R02",
+        "R04"
+      ],
+      "acceptance": "README.md#r05--durable-client-retry-and-operation-status",
+      "sourcePaths": [
+        "apps/game/src/net/api.ts",
+        "apps/game/src/entry/sync.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": []
+    },
+    {
+      "id": "R06",
+      "title": "Combat semantics, gear and limits",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Correct Break/Auto/expiry/procs, loan equipment and compatible progression limits with deterministic replay.",
+      "implemented": "5v5-capable engine, 20 heroes/20 enemies/7 bosses, owned snapshots and basic gear stats exist; semantics/procs/loans/caps remain incomplete.",
+      "dependsOn": [
+        "R01"
+      ],
+      "acceptance": "README.md#r06--combat-semantics-equipment-loans-and-compatible-limits",
+      "sourcePaths": [
+        "packages/combat/src/engine.ts",
+        "packages/combat/src/boss.test.ts",
+        "apps/api/src/progress/party.ts",
+        "apps/game/src/scenes/BattleScene.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-REGRESSIONS",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-ECONOMY"
+      ]
+    },
+    {
+      "id": "R07",
+      "title": "Canon compiler and semantic validation",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Compile all ordered story entries and validate IDs, references, gates, waves and legal graphs.",
+      "implemented": "Campaign compiler and schema validators exist; battle-only campaign misses authored story flow and semantic coverage.",
+      "dependsOn": [
+        "R03",
+        "R06"
+      ],
+      "acceptance": "README.md#r07--canon-compiler-and-semantic-content-validation",
+      "sourcePaths": [
+        "tools/build_campaign.ts",
+        "packages/content-schema/src/validate.ts",
+        "narrative/09_VN_Scripts/Runtime_Snapshot"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": []
+    },
+    {
+      "id": "R08",
+      "title": "Effective catalog and patch grammar",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "One versioned server/client catalog, finite complete data grammar and safe bounded patch storage/compatibility.",
+      "implemented": "Content schema, server store and patch manager exist; new data-only hero lifecycle, complete grammar/storage and key-rotation acceptance remain open.",
+      "dependsOn": [
+        "R02",
+        "R03",
+        "R06",
+        "R07"
+      ],
+      "acceptance": "README.md#r08--versioned-effective-catalog-and-full-content-grammar",
+      "sourcePaths": [
+        "packages/content-schema/src",
+        "packages/patch/src",
+        "apps/api/src/content/store.ts",
+        "apps/game/src/patch"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": []
+    },
+    {
+      "id": "R09",
+      "title": "Entry and narrative continuity",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Visible measured opening, full account-scoped resume, durable Finish/restart and correct campaign Continue.",
+      "implemented": "Prologue, T-1/T-2/T-3, six scenes, entry API, PatchBar and native restart exist; visibility/timing/resume/Continue/save gaps remain.",
+      "dependsOn": [
+        "R05",
+        "R07"
+      ],
+      "acceptance": "README.md#r09--entry-narrative-continuity-and-returning-player-flow",
+      "sourcePaths": [
+        "tools/build_content.ts",
+        "apps/game/src/scenes/PrologueScene.ts",
+        "apps/game/src/scenes/StoryScene.ts",
+        "apps/game/src/scenes/FinishScene.ts",
+        "apps/game/src/scenes/TitleScene.ts",
+        "apps/api/src/entry/service.ts",
+        "tests/e2e/zzz-entry-flow.spec.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-ENTRY",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-DEVICE"
+      ]
+    },
+    {
+      "id": "R10",
+      "title": "Layouts and accessibility",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Reviewable same-content layout alternatives, safe areas, context recovery, accessible localized UX and exact costs.",
+      "implemented": "Client screens and helper foundations exist; layout approval, applied safe areas, accessibility and final UX remain incomplete.",
+      "dependsOn": [
+        "R06",
+        "R09"
+      ],
+      "acceptance": "README.md#r10--layout-review-safe-areas-and-accessibility",
+      "sourcePaths": [
+        "apps/game/src/scenes/TeamScene.ts",
+        "apps/game/src/scenes/GearScene.ts",
+        "apps/game/src/scenes/BattleScene.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-ART",
+        "B-DEVICE"
+      ]
+    },
+    {
+      "id": "R11",
+      "title": "Native identity, store and privacy",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Secure account/store/consent lifecycle, complete deletion/export and reproducible fail-closed native release.",
+      "implemented": "Capacitor shell and Google/Billing/Ads/restart plugins, account export/delete and UMP bridge exist; lifecycle and release acceptance remain open.",
+      "dependsOn": [
+        "R02",
+        "R05"
+      ],
+      "acceptance": "README.md#r11--native-identity-purchase-recovery-privacy-and-release-build",
+      "sourcePaths": [
+        "apps/android/android/app/src/main/java/io/github/mucaeksi/unawareofmydemise",
+        "apps/game/src/platform/native.ts",
+        "apps/game/src/net/store.ts",
+        "apps/api/src/account/service.ts",
+        "apps/api/src/player/routes.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-GOOGLE",
+        "B-PLAY",
+        "B-ADS",
+        "B-SIGNING",
+        "B-PRIVACY",
+        "B-DEVICE"
+      ]
+    },
+    {
+      "id": "R12",
+      "title": "Required mode foundations",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Executable Sweep/AFK, achievements/unlocks, events/seasons/social/arena/endless/multiwave foundations.",
+      "implemented": "Combat, ledger, tasks and shared rewards are reusable foundations; promised mode acceptance is incomplete.",
+      "dependsOn": [
+        "R01",
+        "R04",
+        "R06",
+        "R08"
+      ],
+      "acceptance": "README.md#r12--required-mode-and-progression-foundations",
+      "sourcePaths": [
+        "apps/api/src/progress/service.ts",
+        "apps/api/src/tasks/service.ts",
+        "packages/combat/src",
+        "tools/build_campaign.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-ECONOMY"
+      ]
+    },
+    {
+      "id": "R13",
+      "title": "Control Center workflows",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Secure narrative/LiveOps/media/release/support workflows, atomic audit/approval and bounded investigation.",
+      "implemented": "13 pages with Access JWT/RBAC/CSRF/audit, catalog and monitoring exist; full operational workflows and live edge evidence remain incomplete.",
+      "dependsOn": [
+        "R02",
+        "R03",
+        "R07",
+        "R08"
+      ],
+      "acceptance": "README.md#r13--control-center-workflow-and-authorization-completion",
+      "sourcePaths": [
+        "apps/admin/src/pages",
+        "apps/api/src/admin",
+        "apps/api/src/adminApp.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-CLOUD",
+        "B-ART"
+      ]
+    },
+    {
+      "id": "R14",
+      "title": "Media budget and ingest",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Durable per-call reservations/attempt accounting, provenance, deterministic approved ingest and strict-art.",
+      "implemented": "Approved 1000 TL/$20 monthly, $3 batch, three-attempt budget plus helpers/reference packages exist; concurrency/unknown-charge and ingest gaps remain.",
+      "dependsOn": [],
+      "acceptance": "README.md#r14--google-media-budget-provenance-and-deterministic-ingest",
+      "sourcePaths": [
+        "content/budget/media_budget.json",
+        "tools/media_budget.ts",
+        "tools/gen_image.ts",
+        "tools/build_content.ts",
+        "tools/lib/key.ts"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-MEDIA"
+      ],
+      "dependencyNote": "Reservation/guard work starts early; layout-specific ingest contracts follow R10."
+    },
+    {
+      "id": "R15",
+      "title": "Approved visual pilot",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Approved original character identity/expressions/poses and initial tutorial/prologue art with device readability.",
+      "implemented": "Art Bible, reference/spec/backlog packages and provisional runtime art exist; approved production pilot is incomplete.",
+      "dependsOn": [
+        "R10",
+        "R14"
+      ],
+      "acceptance": "README.md#r15--small-visual-pilot-and-character-attachment",
+      "sourcePaths": [
+        "docs/media/ART_BIBLE.md",
+        "docs/media/QUEUE.md",
+        "art_specs/p0",
+        "narrative/15_Art_Workbench"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-ART",
+        "B-MEDIA",
+        "B-DEVICE"
+      ]
+    },
+    {
+      "id": "R16",
+      "title": "Balance and final sound/VO",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Actual-config no-pull/no-ad sequential viability and approved final sound/music/JA VO.",
+      "implemented": "Economy/combat simulation helpers, tuning proposals and media plans exist; final values are unapplied and complete chronological proof/production remains open.",
+      "dependsOn": [
+        "R06",
+        "R08",
+        "R09",
+        "R12",
+        "R15"
+      ],
+      "acceptance": "README.md#r16--final-balance-recovery-floor-and-soundvo-production",
+      "sourcePaths": [
+        "docs/economy/TUNING_PROPOSAL.md",
+        "docs/combat/CAMPAIGN_BALANCE.md",
+        "packages/economy/src",
+        "docs/media"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-ECONOMY",
+        "B-MEDIA",
+        "B-ART",
+        "B-DEVICE"
+      ]
+    },
+    {
+      "id": "R17",
+      "title": "Operations and encrypted recovery",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "Real capacity/SLO/cost metrics, bounded consistent export, owner-key restore, alerts and exact-version build evidence.",
+      "implemented": "Safe monitoring, age-encrypted backup, health/catch-up and three Worker configs exist; plaintext probe removed; encrypted restore and current external evidence remain open.",
+      "dependsOn": [],
+      "acceptance": "README.md#r17--telemetry-capacity-build-and-encrypted-recovery",
+      "sourcePaths": [
+        "apps/api/src/ops",
+        "apps/api/src/ops.ts",
+        "apps/api/src/admin/monitoring.ts",
+        "apps/api/wrangler.ops.jsonc",
+        "tools/deploy_staging.sh"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-CLOUD",
+        "B-RESTORE",
+        "B-ALERTS",
+        "B-DEVICE"
+      ],
+      "dependencyNote": "Observability/build/recovery preparation starts early; completion depends on R02, R03 and R08."
+    },
+    {
+      "id": "R18",
+      "title": "Signed-AAB and Play acceptance",
+      "taskStatus": "OPEN",
+      "implementationStatus": "PARTIAL",
+      "required": "All first-binary gates, unchanged signed-AAB season proof, physical Play sandbox and separately approved public rollout.",
+      "implemented": "Android project/build sources and acceptance plan exist; no current device, signed-AAB season or store acceptance is recorded.",
+      "dependsOn": [
+        "R11",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17"
+      ],
+      "acceptance": "README.md#r18--first-store-aab-acceptance-and-public-release",
+      "sourcePaths": [
+        "docs/QA_ANDROID.md",
+        "apps/android",
+        "docs/store"
+      ],
+      "evidenceIds": [
+        "E-SOURCE-R00",
+        "E-AUDIT-BASELINE",
+        "E-EXTERNAL"
+      ],
+      "blockerIds": [
+        "B-GOOGLE",
+        "B-PLAY",
+        "B-ADS",
+        "B-SIGNING",
+        "B-PRIVACY",
+        "B-DEVICE",
+        "B-CLOUD",
+        "B-RELEASE"
+      ],
+      "dependencyNote": "Also requires every applicable earlier first-binary acceptance gate; direct dependency list follows README route."
     }
   ]
 }

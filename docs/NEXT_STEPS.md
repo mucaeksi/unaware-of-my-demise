@@ -1,30 +1,35 @@
-# Next steps and resume protocol (persistent memory for any session)
+# Next selected task and resume record
 
-Owner standing directive (2026-10-11): **work autonomously; when a usage limit ends the session, resume by itself after it resets.** A recurring
-routine ("uomd-resume") wakes the session hourly; on every wake follow this file, do the first open item, and keep going until the queue is empty.
-If nothing is actionable, answer with one line and stop (do not burn usage on empty loops).
+Updated 2026-10-12 for **R00** against source `0499a6cb109cee3f7de4c9ad951e4e22e25d3983`. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. The owner requested **one selected task at a time**. Finish R00, report verified delivery, then wait for the next selection. Recommended next task: **R01 — atomic material spending**.
 
-## Resume protocol (every wake)
-1. `git status`; commit and push anything uncommitted to `claude/unaware-demise-dev-24ly57`.
-2. Background work that may have died on a limit: re-launch workflows with `Workflow({scriptPath, resumeFromRunId})` (completed agents are cached).
-   - asset specs: run `wf_9759d639-32e`, script `~/.claude/projects/.../workflows/scripts/asset-skeleton-plan-wf_9759d639-32e.js`
-   - battle layout decision: run `wf_0278fb33-ccd`, script `.../battle-layout-decision-wf_0278fb33-ccd.js`
-   - full e2e: `npx playwright test -c tests/e2e/playwright.config.ts > .cache/e2e-full.log` (never two stacks at once; never rebuild `content/` while it runs)
-3. Then the queue below, top to bottom.
+## Resume safely
 
-## Queue
-1. **Full e2e result** (`.cache/e2e-full.log`): must be green on both projects. If green: push `HEAD:main` (standing owner directive, deploys through Workers Builds).
-2. **Battle layout** (`docs/design/BATTLE_LAYOUT.md` from the layout workflow): make the layout a data-driven preset (A current, B arena-lite, C AFK-faithful), render the same battle in each, show the owner side by side screenshots (Turkish message). Do not lock chibi sheet size or background safe zones before the owner picks.
-3. **Art generation** (owner: everything is generated from scratch via Google, few attempts, strong prompts; budget guard in `content/budget/media_budget.json`, dry run first, reserve before each paid call, look at every output):
-   P0 order: Fadyme portraits, Mahmut portraits (Mahmut has no locked face: first approved portrait becomes his anchor), event illustrations, prologue plates, studio mark (optional), UI icons; chibi sheets and battle backgrounds only after the layout decision.
-   Specs: `art_specs/p0/*.json` + `docs/media/specs/*.md`; contract `docs/media/ART_BIBLE.md`; pipeline `docs/media/EXPORT_PIPELINE.md` (`tools/ingest_art.ts` not written yet: write it against the first real outputs; keyer exists in `tools/lib/key.ts`).
-4. **Ingest + base art swap** (`content/approved_art/`, `build_content.ts` reads approved entries first), `--strict-art` before the AAB.
-5. **F8 new AAB**: version bump, `UomdApp.restart` plugin is written (Java), generated art in the base, `VITE_PREVIEW_FLOW=false`, internal-test upload is an owner step.
-6. Later (owner order): UI polish review together, balance last, sound/music last (integrated at the very end).
+1. Read README, AGENTS and the assignment. Inspect status/branch/worktrees, fetch main and compare intervening changes. Preserve others' work; use an isolated checkout when necessary.
+2. Read the selected task's tracker entry, evidence dates and README acceptance. Reproduce the finding on current source; do not reopen native/T-3/team/boss foundations because old documents call them missing.
+3. Complete the selected task and necessary dependencies, run scoped checks, update evidence/status and deliver a reviewable commit. Inspect the exact diff; never blindly commit an entire working tree.
+4. Refetch/integrate main before publishing and repeat affected checks. Main pushes may trigger Workers Builds. A successful push is not a verified deployment; inspect actual deployed tags for that claim.
+5. At session boundaries record task ID, start/latest revisions, edited files, checks/results, decisions/access, integration, budget reservations and next action. Automatic wake-up requires an actual configured host scheduler; this document does not establish one.
 
-## Owner-side items (cannot be done by the agent)
-AdMob URL verification retry; upload AAB `0.1.1 (2)` or the new one; SHA-1s into the Android OAuth client; Play products; start the Sol 6.1 agent session; confirm studio mark concept/name and Phaser-logo choice (pixel logo is in).
+## R00 handoff
 
-## Rules that must survive a restart
-README.md is the only master prompt; narrative canon is never rewritten silently; GitHub is the code source of truth; the Drive legacy archive is never modified;
-Turkish chat, concise but technically complete; no paid generation without a dry run and a budget reservation; every GitHub post ends with the Claude Code footer.
+- Deliverables: capability/evidence registry in DEV_TRACKER, reconciled BUILD_STATE/INFRA_ROADMAP/GAME_FLOW/QA_ANDROID/MONITORING/NEXT_STEPS and README status pointer.
+- Verification: document/link/registry checks and actual admin-data generation/build compatibility. Dated application audit remains historical. The delivery commit contains this record (`git log -1 -- docs/NEXT_STEPS.md`).
+- R01–R18 engineering acceptance stays open. Live migrations/seeding, paid media, new permissions and public release are outside R00.
+
+## Proposed next selections
+
+| Order | Task | Concrete first slice |
+| --- | --- | --- |
+| 1 | R01 | Reproduce missing-stack upgrade; enforce atomic existence/quantity spending; test all material consumers and unchanged state on rejection. |
+| 2 | R02 | Choose an acknowledgement/refund/RTDN recovery slice with crash/replay tests and exact entitlement policy. |
+| 3 | R03 | Persist highest patch generation through kill/restart/rollback; then atomic publication and economic admission. |
+| 4 | R04 | Resolve zero-cost repeat payout policy and cross-source duplicate grants, after R01/R03. |
+| 5 | R06 | Correct Break/Auto, then gear/loans/capability semantics before chapter acceptance. |
+
+Layout comparison (R10) precedes dependent paid art (R15); reservation/ingest guards are R14. Final balance and sound/VO are R16. Required executable mode/menu foundations ship in the first AAB; patches deliver supported data/media.
+
+## External evidence and decisions
+
+Use blocker IDs in DEV_TRACKER. Revalidate existing Google/Play/AdMob configuration before asking to create anything; public IDs and old Console notes do not prove access. Do not replace the owner-held upload or age keys. Actual layout/reward/privacy choices, encrypted recovery and public release remain bounded owner inputs.
+
+The media budget is already approved; retain the active backup bucket. Deploy through Workers Builds, one Worker per build and one migration owner. Never run two E2E stacks against the same ports/state or rebuild mutable content while E2E reads it. Historical Claude workflow IDs, old branch instructions and removed Actions jobs are not executable work orders for this host.
