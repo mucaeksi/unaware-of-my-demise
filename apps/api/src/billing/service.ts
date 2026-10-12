@@ -103,9 +103,9 @@ async function consume(db: D1Database, play: PlayClient, product: ProductRow, to
   try {
     await play.consumeProduct(product.product_id, token); // consuming also acknowledges, and lets the item be bought again
     await db.batch([db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(orderId), event(db, 'system', orderId, 'consumed')]);
-  } catch (e) {
-    // the grant is already safe in the database; the acknowledgement is retried by the next verify call or the sweep (Play refunds un-acknowledged purchases after 3 days)
-    await db.batch([event(db, 'system', orderId, 'ack_failed', { error: String(e instanceof Error ? e.message : e).slice(0, 200) })]);
+  } catch {
+    // The grant is durable; subsequent verification retries this work. Scheduled reconciliation is tracked separately.
+    await db.batch([event(db, 'system', orderId, 'ack_failed', { code: 'play_consume_failed' })]);
   }
 }
 
@@ -122,9 +122,10 @@ async function grantSubscriptionPeriod(
   now: Date
 ): Promise<VerifyResult> {
   const orderId = s.latestOrderId;
-  const existing = await db.prepare('SELECT player_id FROM purchases WHERE order_id = ?1').bind(orderId).first<{ player_id: string }>();
+  const existing = await db.prepare('SELECT player_id, acknowledged FROM purchases WHERE order_id = ?1').bind(orderId).first<{ player_id: string; acknowledged: number }>();
   if (existing) {
     if (existing.player_id !== playerId) throw new HttpError(409, 'order_owned', 'this order was already granted to another account');
+    if (!existing.acknowledged) await acknowledgeSubscription(db, play, product.product_id, token, orderId, s.acknowledged);
     return { status: 'already_granted', productId: product.product_id, orderId, periodEnd: new Date(s.expiryTimeMs).toISOString() };
   }
   const periodStart = new Date(Math.max(s.startTimeMs, s.expiryTimeMs - cfg.duration_days * 86_400_000)).toISOString();
@@ -139,17 +140,21 @@ async function grantSubscriptionPeriod(
     if (/UNIQUE constraint failed: (purchases|ledger)/i.test(String(e instanceof Error ? e.message : e))) return { status: 'already_granted', productId: product.product_id, orderId, periodEnd };
     throw e;
   }
-  if (!s.acknowledged) {
+  await acknowledgeSubscription(db, play, product.product_id, token, orderId, s.acknowledged);
+  return { status: 'granted', productId: product.product_id, orderId, periodEnd };
+}
+
+async function acknowledgeSubscription(db: D1Database, play: PlayClient, productId: string, token: string, orderId: string, acknowledged: boolean): Promise<void> {
+  if (!acknowledged) {
     try {
-      await play.acknowledgeSubscription(product.product_id, token);
+      await play.acknowledgeSubscription(productId, token);
       await db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(orderId).run();
-    } catch (e) {
-      await db.batch([event(db, 'system', orderId, 'ack_failed', { error: String(e instanceof Error ? e.message : e).slice(0, 200) })]);
+    } catch {
+      await db.batch([event(db, 'system', orderId, 'ack_failed', { code: 'play_ack_failed' })]);
     }
   } else {
     await db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(orderId).run();
   }
-  return { status: 'granted', productId: product.product_id, orderId, periodEnd };
 }
 
 /**

@@ -105,6 +105,32 @@ describe('one-time products', () => {
 });
 
 describe('subscription (Eclipse Blessing, canon 1,600 + 60 x 187)', () => {
+  it('retries a failed subscription acknowledgement on the existing order without granting again', async () => {
+    const { auth, playerId } = await signIn(`sub-suback-${uid()}`);
+    const { token, orderId } = await newSub(playerId);
+    fakePlay.failAck = true;
+    expect(await (await verify(auth, 'eclipse_blessing_30d', token)).json()).toMatchObject({ status: 'granted' });
+    expect(await db().prepare('SELECT acknowledged FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ acknowledged: 0 });
+    fakePlay.failAck = false;
+    expect(await (await verify(auth, 'eclipse_blessing_30d', token)).json()).toMatchObject({ status: 'already_granted' });
+    expect(await db().prepare('SELECT acknowledged FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ acknowledged: 1 });
+    expect(fakePlay.calls).toEqual([`ack_sub:eclipse_blessing_30d:${token}`]);
+    expect((await wallet(auth)).eclipse_token).toBe(1600);
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ n: 1 });
+  });
+
+  it('reconciles provider acknowledgement after the local marker was lost, without another provider call', async () => {
+    const { auth, playerId } = await signIn(`sub-subacklost-${uid()}`);
+    const { token, orderId } = await newSub(playerId);
+    await verify(auth, 'eclipse_blessing_30d', token);
+    await db().prepare('UPDATE purchases SET acknowledged = 0 WHERE order_id = ?1').bind(orderId).run();
+    const calls = fakePlay.calls.length;
+    expect(await (await verify(auth, 'eclipse_blessing_30d', token)).json()).toMatchObject({ status: 'already_granted' });
+    expect(await db().prepare('SELECT acknowledged FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ acknowledged: 1 });
+    expect(fakePlay.calls.length).toBe(calls);
+    expect((await wallet(auth)).eclipse_token).toBe(1600);
+  });
+
   it('grants 1,600 at once, then one mail per elapsed half-day window (14-day claim grace); all 60 sum to 12,820', async () => {
     const { auth, playerId } = await signIn(`sub-sub-${uid()}`);
     const { token, orderId } = await newSub(playerId, { startAgoH: 0, remainingH: 720 });

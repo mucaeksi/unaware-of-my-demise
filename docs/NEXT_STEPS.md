@@ -39,3 +39,7 @@ The media budget is already approved; retain the active backup bucket. Deploy th
 `python3 tools/resume_infrastructure.py --loop` waits five hours before each attempt, takes scheduler/session locks and starts `codex exec` only on a clean working tree. Usage/network failure is recorded as `RETRY_NEXT_INTERVAL`; it does not claim a reset occurred. Private status/logs are under ignored `.cache/infrastructure-resume/`. `--dry-run` checks guards without a model call. Inspect status and the recorded scheduler PID before starting another copy.
 
 This host has no crontab or running systemd. The local loop survives while its process and environment stay alive; environment suspension/destruction stops it. Codex CLI authentication is configured, but the host's independent Codex model endpoint is currently network-blocked. MCP stdio and local source work remain available. The loop's scheduled state is not proof that a new model session started; actual execution requires provider access and available usage. No network-policy bypass is attempted.
+
+## Latest verified slice — R02-A
+
+Existing-order subscription ack retry/provider-marker reconciliation passed two new regressions, all 419 application/tool tests and lint/typecheck. See README R02 and tracker evidence. Continue atomic refund/snapshot and RTDN/entitlement recovery; scheduled encrypted-token retry/deadlines are still open.

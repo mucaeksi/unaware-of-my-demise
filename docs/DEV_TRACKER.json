@@ -6,14 +6,14 @@
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R02",
-    "status": "PENDING",
+    "status": "IN_PROGRESS",
     "nextProposed": "R03",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R01 verified; R02 finance recovery next",
-      "detail": "417 application/tool tests, lint/typecheck and game/admin builds passed. R01 material consumers and rollback are locally complete; continue bounded R02 slices without awaiting task selection."
+      "title": "R02-A verified; atomic refund recovery next",
+      "detail": "Subscription acknowledgement retry/reconciliation corrected. 419 application/tool tests and lint/typecheck passed. R02 remains in progress: refund atomicity, immutable terms, entitlement/RTDN recovery and scheduled jobs are still open."
     }
   ],
   "next": [
@@ -229,6 +229,23 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R02-A-20261012",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "f71573b7162e1eecf9b1175cf12b09f763894a46",
+      "verifiedAt": "2026-10-12T21:01:57Z",
+      "scope": "R02-A working tree based on this revision: two failing-before/passing-after subscription ack regressions; 14 billing cases, lint/typecheck and 419 application/tool tests passed. Subsequent verify reconciles ack independently from grants; safe fixed failure codes. Scheduled reconciliation/deadlines and full R02 remain open; no live Play/device evidence.",
+      "testIds": [
+        "apps/api/test/billing.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -379,7 +396,7 @@
     {
       "id": "R02",
       "title": "Purchase, refund and RTDN recovery",
-      "taskStatus": "OPEN",
+      "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Durable acknowledgement, immutable fulfillment, correct entitlements and crash-safe refund/notification completion.",
       "implemented": "Play verification/order dedup/RTDN/refund and refunded unclaimed-mail check exist; recovery and transactional race gaps remain.",
@@ -396,11 +413,20 @@
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R02-A-20261012"
       ],
       "blockerIds": [
         "B-PLAY",
         "B-ECONOMY"
+      ],
+      "slices": [
+        {
+          "id": "R02-A",
+          "title": "Retry/reconcile existing-order subscription acknowledgement",
+          "status": "COMPLETE",
+          "remaining": "Scheduled encrypted-token reconciliation/deadlines remain open; this slice covers subsequent verify/RTDN calls."
+        }
       ]
     },
     {
