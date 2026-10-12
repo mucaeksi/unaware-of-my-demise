@@ -3,7 +3,7 @@ import { RewardAttachment } from '@uomd/content-schema';
 import { sha256Hex } from '@uomd/shared';
 import { HttpError } from '../content/store';
 import { grantStatements } from '../db/grants';
-import { balanceOf, ledgerStatements } from '../db/ledger';
+import { ledgerStatements, type Currency } from '../db/ledger';
 import { sendMail } from '../mail/service';
 import type { PlayClient } from './play';
 
@@ -180,33 +180,42 @@ export async function syncSubscriptionMail(db: D1Database, playerId: string, now
   return created;
 }
 
-/** Take back a refunded / revoked purchase: debit what is still in the wallet, record what is not recoverable. */
+/** Currency refunds use original immutable credits; marker, clawback, shortfall and event commit together. */
 export async function refundPurchase(db: D1Database, orderId: string, source: 'rtdn' | 'system', now = new Date()): Promise<{ refunded: boolean; unrecovered: Record<string, number> }> {
-  const p = await db.prepare('SELECT player_id, product_id, kind, state FROM purchases WHERE order_id = ?1').bind(orderId).first<{ player_id: string; product_id: string; kind: string; state: string }>();
-  if (!p || p.state === 'refunded') return { refunded: false, unrecovered: {} };
-  const product = await db.prepare('SELECT grants, sub_config FROM shop_products WHERE product_id = ?1').bind(p.product_id).first<{ grants: string; sub_config: string | null }>();
-  const atts: RewardAttachment[] = product ? (p.kind === 'subscription' ? SubConfig.parse(JSON.parse(product.sub_config as string)).instant : z.array(RewardAttachment).parse(JSON.parse(product.grants))) : [];
-  const marked = await db.batch([
-    db.prepare("UPDATE purchases SET state = 'refunded', refunded_at = ?2 WHERE order_id = ?1 AND state = 'granted'").bind(orderId, now.toISOString()),
-    event(db, source, orderId, 'refunded')
-  ]);
-  if (marked[0]?.meta.changes !== 1) return { refunded: false, unrecovered: {} };
-  const unrecovered: Record<string, number> = {};
-  for (const [i, a] of atts.entries()) {
-    if (a.type !== 'currency') continue;
-    const have = await balanceOf(db, p.player_id, a.currency);
-    const take = Math.min(have, a.amount);
-    let taken = 0;
-    if (take > 0) {
-      try {
-        await db.batch(ledgerStatements(db, { playerId: p.player_id, currency: a.currency, delta: -take, reason: `refund:${orderId}`, idempotencyKey: `iap:${orderId}:refund:${i}` }));
-        taken = take;
-      } catch {
-        taken = 0; // spent in the meantime: record it instead
-      }
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const p = await db.prepare('SELECT player_id, kind, state FROM purchases WHERE order_id = ?1').bind(orderId).first<{ player_id: string; kind: string; state: string }>();
+    if (!p || p.state === 'refunded') return { refunded: false, unrecovered: {} };
+    const prefix = p.kind === 'subscription' ? `iap:${orderId}:instant:` : `iap:${orderId}:`;
+    const credits = (await db.prepare('SELECT currency, SUM(delta) AS amount FROM ledger WHERE player_id = ?1 AND delta > 0 AND substr(idempotency_key, 1, length(?2)) = ?2 GROUP BY currency')
+      .bind(p.player_id, prefix).all<{ currency: Currency; amount: number }>()).results;
+    const debits: D1PreparedStatement[] = [];
+    const unrecovered: Record<string, number> = {};
+    for (const [i, credit] of credits.entries()) {
+      if (!Number.isSafeInteger(credit.amount) || credit.amount <= 0) throw new HttpError(409, 'refund_requires_review', 'original credit amount needs operator review');
+      const wallet = await db.prepare('SELECT balance, version FROM wallets WHERE player_id = ?1 AND currency = ?2')
+        .bind(p.player_id, credit.currency).first<{ balance: number; version: number }>();
+      const take = Math.min(wallet?.balance ?? 0, credit.amount);
+      // A concurrent spend/grant/delete changes the version; retry the whole refund rather than classifying an outage as spending.
+      debits.push(db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN COALESCE((SELECT version FROM wallets WHERE player_id = ?1 AND currency = ?2), -1) = ?3 THEN 1 ELSE 0 END)')
+        .bind(p.player_id, credit.currency, wallet?.version ?? -1));
+      if (take > 0) debits.push(...ledgerStatements(db, { playerId: p.player_id, currency: credit.currency, delta: -take, reason: `refund:${orderId}`, idempotencyKey: `iap:${orderId}:refund:${i}` }));
+      if (credit.amount > take) unrecovered[credit.currency] = credit.amount - take;
     }
-    if (a.amount - taken > 0) unrecovered[a.currency] = (unrecovered[a.currency] ?? 0) + a.amount - taken;
+    try {
+      await db.batch([
+        db.prepare("UPDATE purchases SET state = 'refunded', refunded_at = ?2, unrecovered = ?3 WHERE order_id = ?1 AND state = 'granted'")
+          .bind(orderId, now.toISOString(), JSON.stringify(unrecovered)),
+        db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+        ...debits,
+        event(db, source, orderId, 'refunded'),
+        db.prepare('DELETE FROM tx_guard')
+      ]);
+      return { refunded: true, unrecovered };
+    } catch (e) {
+      const message = String(e instanceof Error ? e.message : e);
+      if (/CHECK constraint failed: (ok = 1|balance >= 0)/i.test(message)) continue;
+      throw e;
+    }
   }
-  await db.prepare('UPDATE purchases SET unrecovered = ?2 WHERE order_id = ?1').bind(orderId, JSON.stringify(unrecovered)).run();
-  return { refunded: true, unrecovered };
+  throw new HttpError(409, 'busy', 'concurrent wallet changes; retry this refund');
 }

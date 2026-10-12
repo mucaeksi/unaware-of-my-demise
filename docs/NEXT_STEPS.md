@@ -43,3 +43,7 @@ This host has no crontab or running systemd. The local loop survives while its p
 ## Latest verified slice — R02-A
 
 Existing-order subscription ack retry/provider-marker reconciliation passed two new regressions, all 419 application/tool tests and lint/typecheck. See README R02 and tracker evidence. Continue atomic refund/snapshot and RTDN/entitlement recovery; scheduled encrypted-token retry/deadlines are still open.
+
+## Latest verified slice — R02-B
+
+Atomic original-credit currency refunds passed catalog-edit, database-outage/retry, duplicate-refund and racing-spend tests; all 423 application/tool tests and lint/typecheck passed. No live or legacy financial repair. Continue immutable subscription terms/effective entitlement, RTDN processing leases and encrypted-token scheduled retries. R02 remains in progress.

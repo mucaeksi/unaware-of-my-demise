@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R02-A verified; atomic refund recovery next",
-      "detail": "Subscription acknowledgement retry/reconciliation corrected. 419 application/tool tests and lint/typecheck passed. R02 remains in progress: refund atomicity, immutable terms, entitlement/RTDN recovery and scheduled jobs are still open."
+      "title": "R02-B verified; entitlement and RTDN recovery next",
+      "detail": "Ack retry and atomic original-credit currency refunds are complete locally. 423 application/tool tests passed. Complete immutable subscription terms, effective entitlement/claim races, RTDN leases and scheduled reconciliation; R02 remains open."
     }
   ],
   "next": [
@@ -246,6 +246,23 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R02-B-20261012",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "e11e8794150c098776fc9ff2d2a17fcfea01445d",
+      "verifiedAt": "2026-10-12T21:05:37Z",
+      "scope": "R02-B working tree: three original negative cases failed before correction; four added refund regressions and 18 billing cases pass after it. Currency refund marker/ledger/shortfall/event share one D1 batch with wallet-version retry. Uses original immutable credits after catalog edits, propagates outage, handles concurrent duplicate/refund/spend. Lint/typecheck and 423 application/tool tests passed. No live financial writes or retrospective legacy repair.",
+      "testIds": [
+        "apps/api/test/billing.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -414,7 +431,8 @@
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
-        "E-R02-A-20261012"
+        "E-R02-A-20261012",
+        "E-R02-B-20261012"
       ],
       "blockerIds": [
         "B-PLAY",
@@ -426,6 +444,12 @@
           "title": "Retry/reconcile existing-order subscription acknowledgement",
           "status": "COMPLETE",
           "remaining": "Scheduled encrypted-token reconciliation/deadlines remain open; this slice covers subsequent verify/RTDN calls."
+        },
+        {
+          "id": "R02-B",
+          "title": "Atomic currency refunds from immutable original ledger credits",
+          "status": "COMPLETE",
+          "remaining": "Previously incomplete legacy markers, claimed periodic/noncurrency policy and full immutable subscription terms remain open."
         }
       ]
     },

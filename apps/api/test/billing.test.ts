@@ -191,6 +191,69 @@ describe('subscription (Eclipse Blessing, canon 1,600 + 60 x 187)', () => {
 });
 
 describe('refunds and RTDN', () => {
+  it('refunds the originally credited currency even after the product grant amount changes', async () => {
+    const { auth, playerId } = await signIn(`sub-original-refund-${uid()}`);
+    const { token, orderId } = await newProduct(playerId);
+    await verify(auth, 'tokens_small', token);
+    await applyLedger(db(), { playerId, currency: 'eclipse_token', delta: 1000, reason: 'unrelated_reward', idempotencyKey: `topup:${uid()}` });
+    await db().prepare("UPDATE shop_products SET grants = '[{\"type\":\"currency\",\"currency\":\"eclipse_token\",\"amount\":1000}]' WHERE product_id = 'tokens_small'").run();
+    expect(await refundPurchase(db(), orderId, 'system')).toEqual({ refunded: true, unrecovered: {} });
+    expect((await wallet(auth)).eclipse_token).toBe(1000);
+  });
+
+  it('a database outage before clawback leaves the refund marker, event and wallet untouched; retry completes once', async () => {
+    const { auth, playerId } = await signIn(`sub-interrupted-refund-${uid()}`);
+    const { token, orderId } = await newProduct(playerId);
+    await verify(auth, 'tokens_small', token);
+    let ledgerPrepared = false;
+    const original = db();
+    const failing = new Proxy(original, {
+      get(target, key) {
+        if (key === 'prepare') return (sql: string) => {
+          if (sql.startsWith('INSERT INTO ledger')) ledgerPrepared = true;
+          return target.prepare(sql);
+        };
+        if (key === 'batch') return (statements: D1PreparedStatement[]) => {
+          if (ledgerPrepared) throw new Error('simulated database outage');
+          return target.batch(statements);
+        };
+        const value = Reflect.get(target, key);
+        return typeof value === 'function' ? value.bind(target) : value;
+      }
+    });
+    await expect(refundPurchase(failing, orderId, 'system')).rejects.toThrow('simulated database outage');
+    expect(await original.prepare('SELECT state, refunded_at, unrecovered FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ state: 'granted', refunded_at: null, unrecovered: '{}' });
+    expect(await original.prepare("SELECT COUNT(*) AS n FROM purchase_events WHERE order_id = ?1 AND type = 'refunded'").bind(orderId).first()).toEqual({ n: 0 });
+    expect((await wallet(auth)).eclipse_token).toBe(320);
+    expect((await refundPurchase(original, orderId, 'system')).refunded).toBe(true);
+    expect((await refundPurchase(original, orderId, 'system')).refunded).toBe(false);
+    expect((await wallet(auth)).eclipse_token).toBe(0);
+  });
+
+  it('concurrent refunds publish one marker/event and one clawback', async () => {
+    const { auth, playerId } = await signIn(`sub-concurrent-refund-${uid()}`);
+    const { token, orderId } = await newProduct(playerId);
+    await verify(auth, 'tokens_small', token);
+    const results = await Promise.all([refundPurchase(db(), orderId, 'system'), refundPurchase(db(), orderId, 'system')]);
+    expect(results.filter((r) => r.refunded)).toHaveLength(1);
+    expect(await db().prepare("SELECT COUNT(*) AS n FROM purchase_events WHERE order_id = ?1 AND type = 'refunded'").bind(orderId).first()).toEqual({ n: 1 });
+    expect((await wallet(auth)).eclipse_token).toBe(0);
+  });
+
+  it('a racing spend and refund conserve the original credit and record only the actual shortfall', async () => {
+    const { auth, playerId } = await signIn(`sub-spend-refund-${uid()}`);
+    const { token, orderId } = await newProduct(playerId);
+    await verify(auth, 'tokens_small', token);
+    const [refund, spend] = await Promise.all([
+      refundPurchase(db(), orderId, 'system'),
+      applyLedger(db(), { playerId, currency: 'eclipse_token', delta: -100, reason: 'racing_spend', idempotencyKey: `racing:${uid()}` })
+    ]);
+    expect(refund.refunded).toBe(true);
+    expect(refund.unrecovered).toEqual(spend.applied ? { eclipse_token: 100 } : {});
+    expect((await wallet(auth)).eclipse_token).toBe(0);
+    expect(await db().prepare('SELECT SUM(delta) AS balance FROM ledger WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 0 });
+  });
+
   const rtdn = async (data: unknown, over: Parameters<typeof pushToken>[0] = {}, headers: Record<string, string> = {}) =>
     game('/api/v1/billing/rtdn', { method: 'POST', body: JSON.stringify({ message: { messageId: `m${uid()}`, data: btoa(JSON.stringify(data)) } }), headers: { Authorization: `Bearer ${await pushToken(over)}`, 'Content-Type': 'application/json', ...headers } });
 
