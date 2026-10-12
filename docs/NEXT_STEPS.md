@@ -1,6 +1,6 @@
 # Autonomous infrastructure handoff
 
-Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00 is complete; next implementation is **R01 — atomic material spending**. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
+Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00/R01 are complete locally; current implementation is **R02 — finance recovery**, split into bounded slices. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
 
 ## Resume safely
 
@@ -20,7 +20,7 @@ Owner instruction updated **2026-10-12**: complete README infrastructure in depe
 
 | Order | Task | Concrete first slice |
 | --- | --- | --- |
-| 1 | R01 | Reproduce missing-stack upgrade; enforce atomic existence/quantity spending; test all material consumers and unchanged state on rejection. |
+| 1 | R01 — complete locally | Shared material guard and 11 regressions delivered; 417 application/tool tests, lint/typecheck and builds passed. |
 | 2 | R02 | Choose an acknowledgement/refund/RTDN recovery slice with crash/replay tests and exact entitlement policy. |
 | 3 | R03 | Persist highest patch generation through kill/restart/rollback; then atomic publication and economic admission. |
 | 4 | R04 | Resolve zero-cost repeat payout policy and cross-source duplicate grants, after R01/R03. |

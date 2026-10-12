@@ -25,8 +25,8 @@ Update only affected capabilities, attach scoped evidence, and link the existing
 | --- | --- | --- |
 | Android and identity | Capacitor shell; Java Google Credential Manager, Billing, AdMob/UMP and restart plugins; server verification/sessions. | R11 lifecycle/privacy/storage; R18 physical-device/Play acceptance. Native bridges are not missing. |
 | Opening | Nine-shot prologue; embedded T-1/T-2/T-3 and six dialogue scenes; staged patch/PatchBar; entry API, Finish/restart. | R09 visibility/timing, checkpoint/Continue and durable Finish; approved media/device proof. |
-| Combat and progression | Deterministic 5v5-capable engine, 20 heroes/20 regular enemies/7 bosses, owned-party snapshots, team/gear screens, boss presentation. | R01 spending; R06 Break/Auto/procs/loans/caps; R12 modes. Roster coverage is not semantic correctness. |
-| Economy | Wallet/ledger, gacha/pity/history, mail/tasks, character/gear progression, server battle rewards. | R01–R05 financial/retry/concurrency flaws; R16 numeric tuning. |
+| Combat and progression | Deterministic 5v5-capable engine, 20 heroes/20 regular enemies/7 bosses, owned-party snapshots, team/gear screens, boss presentation; R01 material guard locally corrected. | R06 Break/Auto/procs/loans/caps; R12 modes. Roster coverage is not semantic correctness. |
+| Economy | Wallet/ledger, gacha/pity/history, mail/tasks, character/gear progression, server battle rewards; shared atomic material spending. | R02–R05 financial/retry/concurrency flaws; R16 numeric tuning. |
 | Purchases and refunds | Verification, RTDN, refund records and refunded-subscription-mail claim check exist. | R02 acknowledgement/entitlement/refund recovery and claim/refund race; the pre-transaction guard is not atomic acceptance. |
 | Narrative and patches | Story VM, signed manifests, hash checks, staging/rollback and campaign compiler. | R03 generation/publication; R07 story compilation; R08 catalog/grammar/storage. |
 | Control Center | 13 pages, Access JWT/RBAC/CSRF/audit, monitoring and generated development data. | R13 operational workflows; current edge/MFA/version evidence is unverified. |
@@ -59,4 +59,4 @@ Historical Actions runs, browser screenshots and staging/backup reports remain h
 
 ## Next selected work
 
-R00 establishes the registry and reconciles the records. Next recommended implementation: **R01** (atomic material spending). Follow [NEXT_STEPS](NEXT_STEPS.md) and the owner's one-task-at-a-time selection; other R01–R18 acceptance gates remain open.
+R00 establishes the registry; R01 atomic material spending is locally complete: 11 new regressions (7 failed before correction), 26 focused progression/gear/material cases, lint/typecheck and 417 application/tool tests passed; game/admin builds passed. The owner now authorized autonomous infrastructure continuation. Next: **R02** finance recovery in bounded slices. Follow [NEXT_STEPS](NEXT_STEPS.md); external/device/asset evidence remains distinct.

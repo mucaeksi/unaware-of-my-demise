@@ -149,9 +149,9 @@ Do not follow stale instructions to delete the **active uomd-db-backups bucket**
 
 ### R01 — Material spending and shared transaction invariants
 
-[stackSpend](apps/api/src/db/grants.ts#L46) only updates an existing stack. A missing row changes zero rows and never triggers the nonnegative-quantity constraint; character upgrades and gear level/ascend/reroll can accept that as successful spending.
+**Completed locally (2026-10-12):** [stackSpend](apps/api/src/db/grants.ts#L46) now atomically proposes the remaining quantity even for a missing stack, so CHECK (qty >= 0) rolls back the entire consuming transaction. All character level/ascend/skill and gear level/ascend/reroll callers share the guard. The earlier UPDATE-only missing-row flaw was reproduced by seven failing negative cases before the fix.
 
-Use an **atomic existence-and-quantity guard inside the complete transaction**, shared by every material-consuming path. A client check or pre-transaction SELECT alone cannot close the race.
+The committed [material-spending regressions](apps/api/test/material-spending.test.ts) cover missing/zero/insufficient/exact stacks, multiple materials, all consumers, complete state/fee/task/journal rollback, concurrent last-stack spends, same-key replay and a rejected request retried after replenishment. Eleven new cases and the existing progression/gear cases passed; repository lint/typecheck and **417 application/tool tests** passed. Game/admin builds passed. This is local D1/Workers evidence; a deployed-source/physical-device result is not inferred from the main push. Scope and dated identifiers are recorded in DEV_TRACKER.
 
 **Accept when:** missing/zero/insufficient/exact stacks, multiple materials, concurrent spends, stale versions, repeated requests and lost responses are covered. Rejected work changes no character/gear state, balance, task counters, grant/request journal or other material. Exact valid spends and semantic retries apply once.
 

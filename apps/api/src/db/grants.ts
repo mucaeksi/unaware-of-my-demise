@@ -42,9 +42,11 @@ export const stackAdd = (db: D1Database, playerId: string, itemId: string, qty: 
     .prepare('INSERT INTO player_stacks (player_id, item_id, qty) VALUES (?1, ?2, MIN(?3, ?4)) ON CONFLICT (player_id, item_id) DO UPDATE SET qty = MIN(?3, qty + ?4)')
     .bind(playerId, itemId, cap, qty);
 
-/** Spends from a material stack; the CHECK (qty >= 0) aborts the whole batch when the player does not have enough. */
+/** Missing stacks also propose a negative quantity, so CHECK (qty >= 0) aborts the complete batch. */
 export const stackSpend = (db: D1Database, playerId: string, itemId: string, qty: number): D1PreparedStatement =>
-  db.prepare('UPDATE player_stacks SET qty = qty - ?3 WHERE player_id = ?1 AND item_id = ?2').bind(playerId, itemId, qty);
+  db
+    .prepare('INSERT INTO player_stacks (player_id, item_id, qty) VALUES (?1, ?2, COALESCE((SELECT qty FROM player_stacks WHERE player_id = ?1 AND item_id = ?2), 0) - ?3) ON CONFLICT (player_id, item_id) DO UPDATE SET qty = player_stacks.qty - ?3')
+    .bind(playerId, itemId, qty);
 
 /** Creates one gear instance. Accessories roll their main/sub stats NOW (server CSPRNG) and keep them in the instance. */
 export async function gearInstanceStatement(db: D1Database, playerId: string, gearId: string): Promise<D1PreparedStatement> {

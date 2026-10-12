@@ -5,15 +5,15 @@
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "R01",
+    "id": "R02",
     "status": "PENDING",
-    "nextProposed": "R02",
+    "nextProposed": "R03",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "Infrastructure continuation authorized",
-      "detail": "R00 complete. MCP/Ponytail setup and five-hour runner are being delivered, then R01. No further task selection is needed; source/tests are distinguished from live/device/store acceptance."
+      "title": "R01 verified; R02 finance recovery next",
+      "detail": "417 application/tool tests, lint/typecheck and game/admin builds passed. R01 material consumers and rollback are locally complete; continue bounded R02 slices without awaiting task selection."
     }
   ],
   "next": [
@@ -208,6 +208,27 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R01-20261012",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "df0290a27ad01724f67c91f5884955848abbfd8c",
+      "verifiedAt": "2026-10-12T20:54:59Z",
+      "scope": "R01 working tree based on the recorded commit; delivery revision is the enclosing Git commit. Before fix, seven new negative cases failed (HTTP 200 rather than 402). After fix, 11 new cases and 26 focused material/progression/gear tests pass; lint, all workspace typechecks, 417 application/tool tests and game/admin builds pass. No live data/migrations or device tests performed.",
+      "testIds": [
+        "apps/api/test/material-spending.test.ts",
+        "apps/api/test/progression.test.ts",
+        "apps/api/test/gear.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "npm run build -w @uomd/game",
+        "npm run build -w @uomd/admin"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -331,10 +352,10 @@
     {
       "id": "R01",
       "title": "Atomic material spending",
-      "taskStatus": "OPEN",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Reject missing/insufficient materials atomically across all consumers, with idempotent valid spends.",
-      "implemented": "Shared stackSpend and character/gear transaction paths exist; UPDATE-only missing-row guard is still open.",
+      "implemented": "Shared atomic stack spending now rejects missing/zero/insufficient materials within the complete D1 batch. Character level/ascend/skill and gear level/ascend/reroll regressions verify rollback, exact spends, last-stack concurrency and semantic replay. Local correctness accepted; external deployed/device evidence remains separate.",
       "dependsOn": [
         "R00"
       ],
@@ -344,12 +365,14 @@
         "apps/api/src/progression/characters.ts",
         "apps/api/src/gear/service.ts",
         "apps/api/test/progression.test.ts",
-        "apps/api/test/gear.test.ts"
+        "apps/api/test/gear.test.ts",
+        "apps/api/test/material-spending.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-REGRESSIONS",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R01-20261012"
       ],
       "blockerIds": []
     },
