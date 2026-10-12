@@ -7,9 +7,14 @@ exe="${CHROME_PATH:-}"
 if [ -z "$exe" ] && [ -n "${PLAYWRIGHT_BROWSERS_PATH:-}" ]; then
   exe="$(ls -d "$PLAYWRIGHT_BROWSERS_PATH"/chromium-*/chrome-linux/chrome 2>/dev/null | sort -V | tail -1 || true)"
 fi
+if [ -z "$exe" ]; then
+  for browser in chromium chromium-browser google-chrome google-chrome-stable; do
+    if exe="$(command -v "$browser")"; then break; fi
+  done
+fi
 args=(--headless --isolated --no-usage-statistics --no-performance-crux)
 [ -n "$exe" ] && args+=(--executablePath "$exe")
 if [ "$(id -u)" = "0" ]; then
   args+=(--chrome-arg=--no-sandbox --chrome-arg=--disable-setuid-sandbox)
 fi
-exec npx -y chrome-devtools-mcp@1.10.1 "${args[@]}"
+exec npx --offline -y chrome-devtools-mcp@1.10.1 "${args[@]}"

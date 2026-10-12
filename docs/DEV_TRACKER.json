@@ -5,15 +5,15 @@
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "R00",
-    "status": "COMPLETE",
-    "nextProposed": "R01",
-    "workflow": "Complete one selected task, report verified delivery, then wait for the owner's next selection."
+    "id": "R01",
+    "status": "PENDING",
+    "nextProposed": "R02",
+    "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R00 complete \u2014 next task awaiting selection",
-      "detail": "Evidence registry and supporting records reconciled at source 0499a6cb. Scoped document checks and local admin-data generation/build passed. Historical application tests retain their original dates; generatedAt is not acceptance freshness. Recommended next: R01."
+      "title": "Infrastructure continuation authorized",
+      "detail": "R00 complete. MCP/Ponytail setup and five-hour runner are being delivered, then R01. No further task selection is needed; source/tests are distinguished from live/device/store acceptance."
     }
   ],
   "next": [
@@ -186,6 +186,25 @@
       "verifiedAt": null,
       "scope": "R00 performed no Cloudflare/Access/Google/Play live acceptance, physical Android cases, owner-key encrypted restore or public release. Historical external records are not promoted to current verification.",
       "testIds": [],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
+    },
+    {
+      "id": "E-TOOLS-20261012",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "01533d9c325b2fd67e1a2d284c691b6c6c8dac95",
+      "verifiedAt": "2026-10-12T20:49:01Z",
+      "scope": "Tooling working tree: native discovery 54 skills/zero errors/six enabled Ponytail variants; enabled MCP config resolved; real Graphify stats/query and Chrome loopback page/DOM calls passed. 15 Python tests incl. runner dirty-worktree, overlap, dry-run and retry guards passed; 46 adapters intact. Generated code graph includes SQL; docs/media/canon excluded and AST coverage is partial. Scheduler execution and future model availability are separate evidence.",
+      "testIds": [
+        "Codex skills/list + config/read",
+        "MCP graph_stats + query_graph",
+        "MCP list_pages + new_page + evaluate_script",
+        "python3 -m unittest discover -s tools/tests",
+        "python3 tools/sync_codex_skills.py --check",
+        "bash -n tools/build_graph.sh tools/mcp_chrome_devtools.sh"
+      ],
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
@@ -689,7 +708,7 @@
     {
       "id": "R15",
       "title": "Approved visual pilot",
-      "taskStatus": "OPEN",
+      "taskStatus": "DEFERRED_ASSETS",
       "implementationStatus": "PARTIAL",
       "required": "Approved original character identity/expressions/poses and initial tutorial/prologue art with device readability.",
       "implemented": "Art Bible, reference/spec/backlog packages and provisional runtime art exist; approved production pilot is incomplete.",
@@ -713,7 +732,8 @@
         "B-ART",
         "B-MEDIA",
         "B-DEVICE"
-      ]
+      ],
+      "deferredReason": "Owner instructed to defer creative/paid asset production until infrastructure is complete."
     },
     {
       "id": "R16",

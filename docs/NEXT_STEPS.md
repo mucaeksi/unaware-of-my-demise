@@ -1,10 +1,10 @@
-# Next selected task and resume record
+# Autonomous infrastructure handoff
 
-Updated 2026-10-12 for **R00** against source `0499a6cb109cee3f7de4c9ad951e4e22e25d3983`. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. The owner requested **one selected task at a time**. Finish R00, report verified delivery, then wait for the next selection. Recommended next task: **R01 — atomic material spending**.
+Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00 is complete; next implementation is **R01 — atomic material spending**. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
 
 ## Resume safely
 
-1. Read README, AGENTS and the assignment. Inspect status/branch/worktrees, fetch main and compare intervening changes. Preserve others' work; use an isolated checkout when necessary.
+1. Read README, AGENTS and the current autonomous assignment. Inspect status/branch/worktrees, fetch main and compare intervening changes. Preserve others' work; use an isolated checkout when necessary.
 2. Read the selected task's tracker entry, evidence dates and README acceptance. Reproduce the finding on current source; do not reopen native/T-3/team/boss foundations because old documents call them missing.
 3. Complete the selected task and necessary dependencies, run scoped checks, update evidence/status and deliver a reviewable commit. Inspect the exact diff; never blindly commit an entire working tree.
 4. Refetch/integrate main before publishing and repeat affected checks. Main pushes may trigger Workers Builds. A successful push is not a verified deployment; inspect actual deployed tags for that claim.
@@ -33,3 +33,9 @@ Layout comparison (R10) precedes dependent paid art (R15); reservation/ingest gu
 Use blocker IDs in DEV_TRACKER. Revalidate existing Google/Play/AdMob configuration before asking to create anything; public IDs and old Console notes do not prove access. Do not replace the owner-held upload or age keys. Actual layout/reward/privacy choices, encrypted recovery and public release remain bounded owner inputs.
 
 The media budget is already approved; retain the active backup bucket. Deploy through Workers Builds, one Worker per build and one migration owner. Never run two E2E stacks against the same ports/state or rebuild mutable content while E2E reads it. Historical Claude workflow IDs, old branch instructions and removed Actions jobs are not executable work orders for this host.
+
+## Five-hour continuation runner
+
+`python3 tools/resume_infrastructure.py --loop` waits five hours before each attempt, takes scheduler/session locks and starts `codex exec` only on a clean working tree. Usage/network failure is recorded as `RETRY_NEXT_INTERVAL`; it does not claim a reset occurred. Private status/logs are under ignored `.cache/infrastructure-resume/`. `--dry-run` checks guards without a model call. Inspect status and the recorded scheduler PID before starting another copy.
+
+This host has no crontab or running systemd. The local loop survives while its process and environment stay alive; environment suspension/destruction stops it. Codex CLI authentication is configured, but the host's independent Codex model endpoint is currently network-blocked. MCP stdio and local source work remain available. The loop's scheduled state is not proof that a new model session started; actual execution requires provider access and available usage. No network-policy bypass is attempted.

@@ -1,16 +1,16 @@
-# Codex-only optional mirrors of the pinned .mcp.json declarations.
-# Start Codex at the repository root. Enable a server only when its runtime is
-# available and the task needs it; this file changes no host permissions or auth.
+# Project MCPs enabled at the owner's request. Start Codex at the repository root.
+# Build the local code index with tools/build_graph.sh before Graphify queries.
+# Existing sessions may need MCP reload/restart to discover these tools.
 # Claude continues to use .mcp.json unchanged.
 
 [mcp_servers.chrome-devtools]
 command = "bash"
 args = ["tools/mcp_chrome_devtools.sh"]
-enabled = false
+enabled = true
 startup_timeout_sec = 60
 
 [mcp_servers.graphify]
 command = "uv"
-args = ["run", "--no-project", "--with", "graphifyy[mcp]==0.9.84", "python", "-m", "graphify.serve", "graphify-out/graph.json"]
-enabled = false
+args = ["run", "--offline", "--no-project", "--with", "graphifyy[mcp]==0.9.84", "python", "-m", "graphify.serve", "graphify-out/graph.json"]
+enabled = true
 startup_timeout_sec = 60
