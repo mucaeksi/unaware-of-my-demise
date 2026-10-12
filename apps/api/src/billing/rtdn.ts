@@ -17,7 +17,7 @@ export async function authenticatePush(req: Request, env: GameEnv, getKey?: JWTV
   if (!m?.[1]) throw new HttpError(401, 'unauthenticated', 'missing push token');
   try {
     const { payload } = await jwtVerify(m[1], getKey ?? googleKeyResolver(env), { issuer: ['https://accounts.google.com', 'accounts.google.com'], audience: env.RTDN_AUDIENCE, algorithms: ['RS256'] });
-    if (payload.email !== env.RTDN_PUSH_SERVICE_ACCOUNT || payload.email_verified === false) throw new Error('wrong service account');
+    if (payload.email !== env.RTDN_PUSH_SERVICE_ACCOUNT || payload.email_verified !== true) throw new Error('wrong service account');
   } catch {
     throw new HttpError(401, 'unauthenticated', 'push token rejected');
   }

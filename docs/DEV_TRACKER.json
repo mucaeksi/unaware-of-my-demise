@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R02-D verified; secure scheduled reconciliation next",
-      "detail": "Ack/refund/fulfillment and durable RTDN leases/done/operator reset passed locally; 443 application/tool tests. Complete encrypted-token scheduled retries/provider deadlines/serialization and legacy/claimed/noncurrency policies; R02 remains open."
+      "title": "R02-E1 verified; durable encrypted-token reconciliation next",
+      "detail": "Provider deadlines/credential cache, consumed-marker recovery and verified RTDN publisher passed; 455 application/tool tests and lint/typecheck. Complete secure-token scheduled retries, provider-read serialization and legacy/refund policies. R02 stays open."
     }
   ],
   "next": [
@@ -305,6 +305,24 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R02-E1-20261012",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "b2f5825911d4d5c7aacdda1591f1884ead9e0c60",
+      "verifiedAt": "2026-10-12T21:58:48Z",
+      "scope": "R02-E1 working tree: seven failing-before transport cases now pass; nine mocked HTTP contract cases validate deadlines/safe abort failures, credential-scoped OAuth reuse/rotation and missing-config denial, malformed auth/JSON and official selected-line/order mapping. Three new billing cases cover consumed ack-marker reconciliation and affirmative publisher email. Lint/typecheck and all 455 application/tool tests pass. No actual Google HTTP/sandbox, secure-token scheduler or remote configuration proof.",
+      "testIds": [
+        "apps/api/test/play-client.test.ts",
+        "apps/api/test/billing.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -458,7 +476,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Durable acknowledgement, immutable fulfillment, correct entitlements and crash-safe refund/notification completion.",
-      "implemented": "Locally verified ack retry, atomic original-credit currency refunds, immutable fulfillment/effective entitlement and mail/deletion guards, sales-independent paid verification, durable RTDN leases/done/dead-letter and audited operator reset. Scheduled reconciliation/provider serialization and legacy/refund policy remain open.",
+      "implemented": "Locally verified ack retry, atomic original-credit currency refunds, immutable fulfillment/effective entitlement and mail/deletion guards, sales-independent paid verification, durable RTDN leases/done/dead-letter and audited operator reset. Scheduled reconciliation/provider serialization and legacy/refund policy remain open. OAuth/provider transport is bounded with safe failures and credential-scoped caching; consumed ack markers recover.",
       "dependsOn": [
         "R00"
       ],
@@ -472,7 +490,8 @@
         "apps/api/migrations/0020_purchase_entitlements.sql",
         "apps/api/migrations/0021_rtdn_processing.sql",
         "apps/api/src/admin/billing.ts",
-        "apps/api/test/rtdn-recovery.test.ts"
+        "apps/api/test/rtdn-recovery.test.ts",
+        "apps/api/test/play-client.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -481,7 +500,8 @@
         "E-R02-A-20261012",
         "E-R02-B-20261012",
         "E-R02-C-20261012",
-        "E-R02-D-20261012"
+        "E-R02-D-20261012",
+        "E-R02-E1-20261012"
       ],
       "blockerIds": [
         "B-PLAY",
@@ -511,6 +531,12 @@
           "title": "Durable RTDN processing ownership, completion and audited retry",
           "status": "COMPLETE",
           "remaining": "Actual Pub/Sub retention/retry/dead-letter/seek and physical sandbox are unverified; operator reset requires subsequent authentic redelivery. Secure-token scheduled reconciliation, provider-read serialization/deadlines and financial policies remain open."
+        },
+        {
+          "id": "R02-E1",
+          "title": "Bounded Google transport, scoped OAuth cache and consumed-marker recovery",
+          "status": "COMPLETE",
+          "remaining": "Actual Google API/sandbox and durable encrypted-token scheduled reconciliation/provider-read serialization remain open."
         }
       ]
     },

@@ -79,7 +79,10 @@ export async function verifyPurchase(db: D1Database, play: PlayClient, playerId:
     if (existing) {
       if (existing.player_id !== playerId) throw new HttpError(409, 'order_owned', 'this order was already granted to another account');
       if (existing.state === 'refunded') return { status: 'not_entitled', productId: product.product_id, orderId: p.orderId };
-      if (!existing.acknowledged && !p.consumed) await consume(db, play, product, input.purchaseToken, p.orderId);
+      if (!existing.acknowledged) {
+        if (p.consumed) await db.prepare('UPDATE purchases SET acknowledged = 1 WHERE order_id = ?1').bind(p.orderId).run();
+        else await consume(db, play, product, input.purchaseToken, p.orderId);
+      }
       return { status: 'already_granted', productId: product.product_id, orderId: p.orderId };
     }
     const grants = z.array(RewardAttachment).parse(JSON.parse(product.grants));

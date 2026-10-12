@@ -290,6 +290,26 @@ describe('subscription (Eclipse Blessing, canon 1,600 + 60 x 187)', () => {
 });
 
 describe('refunds and RTDN', () => {
+  it('reconciles an already-consumed provider receipt after the local ack marker was lost', async () => {
+    const { auth, playerId } = await signIn(`sub-consume-lost-${uid()}`);
+    const { token, orderId } = await newProduct(playerId);
+    await verify(auth, 'tokens_small', token);
+    fakePlay.products.get(token)!.consumed = true;
+    await db().prepare('UPDATE purchases SET acknowledged = 0 WHERE order_id = ?1').bind(orderId).run();
+    const before = fakePlay.calls.length;
+    expect(await (await verify(auth, 'tokens_small', token)).json()).toMatchObject({ status: 'already_granted' });
+    expect(await db().prepare('SELECT acknowledged FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ acknowledged: 1 });
+    expect(fakePlay.calls).toHaveLength(before);
+    expect((await wallet(auth)).eclipse_token).toBe(320);
+  });
+
+  it.each([false, null])('requires affirmative verified publisher email (claim %s)', async (emailVerified) => {
+    const messageId = `m${uid()}`;
+    const result = await game('/api/v1/billing/rtdn', { method: 'POST', body: JSON.stringify({ message: { messageId, data: btoa(JSON.stringify({ testNotification: {} })) } }), headers: { Authorization: `Bearer ${await pushToken({ emailVerified })}`, 'Content-Type': 'application/json' } });
+    expect(result.status).toBe(401);
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM rtdn_seen WHERE message_id = ?1').bind(messageId).first()).toEqual({ n: 0 });
+  });
+
   it('refunds the originally credited currency even after the product grant amount changes', async () => {
     const { auth, playerId } = await signIn(`sub-original-refund-${uid()}`);
     const { token, orderId } = await newProduct(playerId);

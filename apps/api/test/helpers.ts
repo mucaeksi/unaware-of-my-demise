@@ -108,8 +108,8 @@ export const playClient: PlayClient = {
 /** Signs a Pub/Sub push token like Google does for an authenticated push subscription. */
 export const RTDN_AUDIENCE = 'https://game.test/api/v1/billing/rtdn';
 export const RTDN_SA = 'rtdn-push@project.iam.gserviceaccount.com';
-export async function pushToken(over: { aud?: string; email?: string; wrongKey?: boolean } = {}): Promise<string> {
-  return new SignJWT({ email: over.email ?? RTDN_SA, email_verified: true })
+export async function pushToken(over: { aud?: string; email?: string; wrongKey?: boolean; emailVerified?: boolean | null } = {}): Promise<string> {
+  return new SignJWT({ email: over.email ?? RTDN_SA, ...(over.emailVerified === null ? {} : { email_verified: over.emailVerified ?? true }) })
     .setProtectedHeader({ alg: 'RS256', kid: 'g1' })
     .setIssuer('https://accounts.google.com')
     .setAudience(over.aud ?? RTDN_AUDIENCE)

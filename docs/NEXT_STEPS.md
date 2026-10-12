@@ -57,3 +57,7 @@ Immutable fulfillment/effective entitlement, authoritative order starts, atomic 
 ## Latest verified slice — R02-D
 
 RTDN processing/done/expiry ownership and safe bounded retries passed nine regressions (three failed before correction), lint/typecheck and all 443 application/tool tests. Isolated local game/admin Workers passed health with 21 migrations; absent Access config denied admin access. Audited operator reset needs a subsequent authentic Pub/Sub redelivery, not an invented queued job. Continue encrypted-token scheduled acknowledgement/renewal reconciliation, provider-read serialization/deadlines and explicit legacy/refund policies.
+
+## Latest verified slice — R02-E1
+
+Bounded safe Play/OAuth transport and credential-scoped cache passed nine HTTP fixtures (seven failed before correction), plus consumed-marker and verified publisher cases. Lint/typecheck and all 455 application/tool tests passed. Next implement encrypted-token durable scheduled reconciliation with provider-read ownership/fencing, and revalidate revocation against authoritative order refund evidence; do not treat one token as proof that every historical billing period was refunded. Actual Google API/sandbox remains unverified.

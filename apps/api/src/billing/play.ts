@@ -1,4 +1,5 @@
 import { importPKCS8, SignJWT } from 'jose';
+import { sha256Hex } from '@uomd/shared';
 import { HttpError } from '../content/store';
 import type { GameEnv } from '../env';
 
@@ -31,33 +32,51 @@ export interface PlayClient {
 }
 
 const API = 'https://androidpublisher.googleapis.com/androidpublisher/v3/applications';
-let tokenCache: { token: string; exp: number } | undefined;
+const OAUTH = 'https://oauth2.googleapis.com/token';
+let tokenCache: { token: string; exp: number; identity: string } | undefined;
+
+/** Deadline includes response-body reads; provider failures never carry token/URL/body text into logs. */
+async function googleJson<T>(url: string, init: RequestInit, purchase = false): Promise<T> {
+  try {
+    const res = await fetch(url, { ...init, signal: AbortSignal.timeout(8000) });
+    if (purchase && [400, 404].includes(res.status)) throw new HttpError(422, 'unknown_purchase', 'Google Play does not know this purchase');
+    if (!res.ok) throw new HttpError(503, 'billing_unavailable', 'Google Play request could not complete; retry later');
+    return (res.status === 204 ? {} : await res.json()) as T;
+  } catch (e) {
+    if (e instanceof HttpError) throw e;
+    throw new HttpError(503, 'billing_unavailable', 'Google Play request could not complete; retry later');
+  }
+}
 
 /** Access token for the Play service account (JWT bearer grant). The key lives only in the Worker secret GOOGLE_PLAY_SERVICE_ACCOUNT. */
 async function accessToken(env: GameEnv): Promise<string> {
-  if (tokenCache && tokenCache.exp > Date.now() + 60_000) return tokenCache.token;
   let sa: { client_email: string; private_key: string; token_uri?: string };
   try {
     sa = JSON.parse(env.GOOGLE_PLAY_SERVICE_ACCOUNT ?? '');
+    if (!sa || typeof sa.client_email !== 'string' || !/^[^\s@]+@[^\s@]+$/.test(sa.client_email) || typeof sa.private_key !== 'string' || !sa.private_key || (sa.token_uri && sa.token_uri !== OAUTH)) throw new Error('invalid service account');
   } catch {
     throw new HttpError(503, 'billing_not_configured', 'Google Play billing is not configured for this environment');
   }
+  const identity = await sha256Hex(`${env.ENVIRONMENT}:${env.PLAY_PACKAGE_NAME}:${env.GOOGLE_PLAY_SERVICE_ACCOUNT}`);
+  if (tokenCache?.identity === identity && tokenCache.exp > Date.now() + 60_000) return tokenCache.token;
+  let key: Awaited<ReturnType<typeof importPKCS8>>;
+  try { key = await importPKCS8(sa.private_key, 'RS256'); }
+  catch { throw new HttpError(503, 'billing_not_configured', 'Google Play billing is not configured for this environment'); }
   const now = Math.floor(Date.now() / 1000);
   const assertion = await new SignJWT({ scope: 'https://www.googleapis.com/auth/androidpublisher' })
     .setProtectedHeader({ alg: 'RS256', typ: 'JWT' })
     .setIssuer(sa.client_email)
-    .setAudience(sa.token_uri ?? 'https://oauth2.googleapis.com/token')
+    .setAudience(OAUTH)
     .setIssuedAt(now)
     .setExpirationTime(now + 3000)
-    .sign(await importPKCS8(sa.private_key, 'RS256'));
-  const res = await fetch(sa.token_uri ?? 'https://oauth2.googleapis.com/token', {
+    .sign(key);
+  const j = await googleJson<{ access_token: string; expires_in: number }>(OAUTH, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({ grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer', assertion })
   });
-  if (!res.ok) throw new HttpError(503, 'billing_unavailable', 'could not authenticate to Google Play');
-  const j = (await res.json()) as { access_token: string; expires_in: number };
-  tokenCache = { token: j.access_token, exp: Date.now() + j.expires_in * 1000 };
+  if (!j || typeof j.access_token !== 'string' || !j.access_token || !Number.isSafeInteger(j.expires_in) || j.expires_in <= 0 || j.expires_in > 86400) throw new HttpError(503, 'billing_invalid_response', 'Google Play authentication response was invalid');
+  tokenCache = { token: j.access_token, exp: Date.now() + j.expires_in * 1000, identity };
   return j.access_token;
 }
 
@@ -71,10 +90,7 @@ export class PlayApi implements PlayClient {
     return encodeURIComponent(this.env.PLAY_PACKAGE_NAME);
   }
   private async call<T>(method: 'GET' | 'POST', path: string): Promise<T> {
-    const res = await fetch(`${API}/${this.pkg}/${path}`, { method, headers: { Authorization: `Bearer ${await accessToken(this.env)}`, 'Content-Type': 'application/json' }, ...(method === 'POST' ? { body: '{}' } : {}) });
-    if (res.status === 404 || res.status === 400) throw new HttpError(422, 'unknown_purchase', 'Google Play does not know this purchase');
-    if (!res.ok) throw new HttpError(503, 'billing_unavailable', `Google Play API answered ${res.status}`);
-    return (res.status === 204 ? {} : await res.json()) as T;
+    return googleJson<T>(`${API}/${this.pkg}/${path}`, { method, headers: { Authorization: `Bearer ${await accessToken(this.env)}`, 'Content-Type': 'application/json' }, ...(method === 'POST' ? { body: '{}' } : {}) }, true);
   }
   async getProduct(productId: string, token: string): Promise<ProductPurchase> {
     const r = await this.call<{ purchaseState?: number; consumptionState?: number; acknowledgementState?: number; orderId?: string; obfuscatedExternalAccountId?: string; purchaseTimeMillis?: string }>(
