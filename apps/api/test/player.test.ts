@@ -1,5 +1,5 @@
 import { env } from 'cloudflare:workers';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { GOOGLE_CLIENT, game, googleIdToken, post, signIn } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
@@ -12,6 +12,19 @@ async function seedFreeStart(): Promise<void> {
 }
 
 describe('Google sign-in and sessions', () => {
+  it('still enforces the shared-IP sign-in cap with independent actor fixtures', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-10-12T12:00:10Z'));
+    try {
+      const token = await googleIdToken('sub-shared-ip-cap');
+      const request = () => game('/api/v1/auth/google', post({ idToken: token }, { 'CF-Connecting-IP': '198.19.0.1' }));
+      for (let i = 0; i < 20; i++) expect((await request()).status).toBe(200);
+      expect((await request()).status).toBe(429);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('creates a player with the free-start roster and a revocable bearer session', async () => {
     await seedFreeStart();
     const idToken = await googleIdToken('sub-signin-1');

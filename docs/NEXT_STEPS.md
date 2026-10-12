@@ -49,3 +49,7 @@ Existing-order subscription ack retry/provider-marker reconciliation passed two 
 ## Latest verified slice — R02-B
 
 Atomic original-credit currency refunds passed catalog-edit, database-outage/retry, duplicate-refund and racing-spend tests; all 423 application/tool tests and lint/typecheck passed. No live or legacy financial repair. Continue immutable subscription terms/effective entitlement, RTDN processing leases and encrypted-token scheduled retries. R02 remains in progress.
+
+## Latest verified slice — R02-C
+
+Immutable fulfillment/effective entitlement, authoritative order starts, atomic mail/refund and deletion guards and sales-independent paid verification passed 28 billing cases. Lint/typecheck and all 434 application/tool tests passed; migration 0020 is local only. Continue durable RTDN processing/lease/done and secure-token scheduled reconciliation; legacy terms and claimed/noncurrency refund decisions remain explicit. Actual Android Publisher orders.get permission and physical sandbox are still unverified.

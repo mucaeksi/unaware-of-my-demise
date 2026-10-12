@@ -155,7 +155,7 @@ describe('shop, flags, ads', () => {
     expect((await set('gacha.enabled', false)).status).toBe(200);
     expect((await game('/api/v1/gacha/pull', post({ bannerId: 'hall_x', count: 1, requestId: rid() }, auth))).status).toBe(503);
     expect((await set('shop.enabled', false)).status).toBe(200);
-    expect((await game('/api/v1/shop/verify', post({ productId: 'ops_pouch', purchaseToken: 'q'.repeat(20) }, auth))).status).toBe(503);
+    expect(await (await game('/api/v1/shop/products')).json()).toEqual({ products: [] }); // stop sales, preserve already-paid verification
     expect((await set('ads.rewarded.enabled', false)).status).toBe(200);
     expect((await game('/api/v1/ads/begin', post({}, auth))).status).toBe(503);
     for (const k of ['gacha.enabled', 'shop.enabled', 'ads.rewarded.enabled']) expect((await set(k, true)).status).toBe(200);

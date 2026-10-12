@@ -77,17 +77,13 @@ export async function handleRtdn(db: D1Database, env: GameEnv, play: PlayClient,
         await log('revoked', null, { orders: results.length });
         return { handled: 'revoked' };
       }
-      if (GRANTING.has(sub.notificationType)) {
-        // same code path as the client's verify call: Play is asked again and the grant is idempotent per order id
-        await verifyPurchase(db, play, known.player_id, { productId: known.product_id, purchaseToken: sub.purchaseToken }, now).catch((e: unknown) => {
-          if (e instanceof HttpError && (e.code === 'account_mismatch' || e.code === 'unknown_product')) return;
-          throw e;
-        });
-        await log('subscription', null, { type: sub.notificationType });
-        return { handled: 'subscription' };
-      }
-      await log('subscription_state', null, { type: sub.notificationType });
-      return { handled: 'state_noted' };
+      // Play is asked again for every state change; grants remain idempotent per order id.
+      await verifyPurchase(db, play, known.player_id, { productId: known.product_id, purchaseToken: sub.purchaseToken }, now).catch((e: unknown) => {
+        if (e instanceof HttpError && (e.code === 'account_mismatch' || e.code === 'unknown_product' || e.code === 'account_deleted')) return;
+        throw e;
+      });
+      await log('subscription', null, { type: sub.notificationType });
+      return { handled: GRANTING.has(sub.notificationType) ? 'subscription' : 'state_reconciled' };
     }
     if (note.oneTimeProductNotification) {
       await log('one_time', null, { type: note.oneTimeProductNotification.notificationType }); // grants happen on the client's verify call

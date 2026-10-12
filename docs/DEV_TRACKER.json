@@ -12,22 +12,22 @@
   },
   "now": [
     {
-      "title": "R02-B verified; entitlement and RTDN recovery next",
-      "detail": "Ack retry and atomic original-credit currency refunds are complete locally. 423 application/tool tests passed. Complete immutable subscription terms, effective entitlement/claim races, RTDN leases and scheduled reconciliation; R02 remains open."
+      "title": "R02-C verified; durable RTDN and scheduled reconciliation next",
+      "detail": "Frozen fulfillment, effective entitlement/atomic claims and deletion guards passed locally. 434 application/tool tests, lint/typecheck pass. Complete RTDN leases, encrypted-token retries and explicit legacy/noncurrency refund policy; R02 stays open."
     }
   ],
   "next": [
     {
-      "title": "R01 \u2014 atomic material spending",
-      "detail": "Recommended next selection: missing/zero/insufficient/exact stacks, all character/gear consumers, concurrent spends and semantic retries with no partial mutations."
+      "title": "R02 \u2014 durable financial recovery",
+      "detail": "Complete RTDN processing leases/done/replay, secure-token scheduled reconciliation, provider-read serialization and explicit legacy/claimed/noncurrency policy."
     },
     {
-      "title": "R02 / R03 \u2014 finance recovery and release authority",
-      "detail": "After selection, split large packages into bounded acknowledgement/refund/RTDN or generation/publication slices; acceptance remains in README."
+      "title": "R03 \u2014 release authority",
+      "detail": "Then complete durable patch generation, concurrent publication and bounded economic release/session acceptance."
     },
     {
-      "title": "R04 then R06 \u2014 rewards and combat",
-      "detail": "Close repeat/duplicate grants after their dependencies, then Break/Auto/gear/loan semantics before chapter-flow acceptance. Later layouts/media follow README dependencies."
+      "title": "R04\u2013R06 \u2014 rewards, retries and combat",
+      "detail": "Close repeat/duplicate grants and durable client mutations before combat semantics, loans and chapter flow."
     }
   ],
   "blockedOnOwner": [
@@ -263,6 +263,28 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R02-C-20261012",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "c4056b54ec4b1a0b75d9a619a4f882c0fd2a5d9a",
+      "verifiedAt": "2026-10-12T21:45:40Z",
+      "scope": "R02-C working tree: ten additional billing regressions (28 billing cases), preserved shared-IP auth throttle, all 434 application/tool tests and lint/typecheck pass. Frozen fulfillment, provider state/expiry, official order-start contract, atomic mail entitlement/deletion guards and paid sales-independent verification. Public googleapis 185.0.0 Android Publisher definitions/endpoint checked; no live API, migration deployment, physical sandbox or legacy repair proof. RTDN completion leases, scheduled secure-token reconciliation, provider-read serialization and claimed/noncurrency policy remain open.",
+      "testIds": [
+        "apps/api/test/billing.test.ts",
+        "apps/api/test/player.test.ts",
+        "apps/api/test/admin.test.ts",
+        "apps/api/test/mail.test.ts",
+        "apps/api/test/account.test.ts",
+        "apps/api/test/ops.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -284,7 +306,7 @@
       "id": "B-PLAY",
       "level": "UNVERIFIED",
       "title": "Play test products and authenticated sandbox",
-      "detail": "Verify existing app/product/base-plan/tester configuration, least-privilege service account and PLAY_PACKAGE_NAME, GOOGLE_PLAY_SERVICE_ACCOUNT, RTDN_AUDIENCE, RTDN_PUSH_SERVICE_ACCOUNT in the approved environment; no secret values in source.",
+      "detail": "Verify existing app/product/base-plan/tester configuration, least-privilege service account and PLAY_PACKAGE_NAME, GOOGLE_PLAY_SERVICE_ACCOUNT, RTDN_AUDIENCE, RTDN_PUSH_SERVICE_ACCOUNT in the approved environment; no secret values in source. Subscription period verification additionally needs Android Publisher orders.get read permission and real Order.createTime/selected-line order evidence.",
       "verifiedAt": null
     },
     {
@@ -416,7 +438,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Durable acknowledgement, immutable fulfillment, correct entitlements and crash-safe refund/notification completion.",
-      "implemented": "Play verification/order dedup/RTDN/refund and refunded unclaimed-mail check exist; recovery and transactional race gaps remain.",
+      "implemented": "Local ack recovery, atomic original-credit currency refunds, immutable fulfillment/effective entitlement, atomic mail claims, deletion guards and paid sales-independent verification. RTDN and scheduled recovery/policy remain open.",
       "dependsOn": [
         "R00"
       ],
@@ -425,14 +447,17 @@
         "apps/api/src/billing/service.ts",
         "apps/api/src/billing/rtdn.ts",
         "apps/api/src/mail/service.ts",
-        "apps/api/test/billing.test.ts"
+        "apps/api/test/billing.test.ts",
+        "apps/api/src/billing/play.ts",
+        "apps/api/migrations/0020_purchase_entitlements.sql"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
         "E-R02-A-20261012",
-        "E-R02-B-20261012"
+        "E-R02-B-20261012",
+        "E-R02-C-20261012"
       ],
       "blockerIds": [
         "B-PLAY",
@@ -450,6 +475,12 @@
           "title": "Atomic currency refunds from immutable original ledger credits",
           "status": "COMPLETE",
           "remaining": "Previously incomplete legacy markers, claimed periodic/noncurrency policy and full immutable subscription terms remain open."
+        },
+        {
+          "id": "R02-C",
+          "title": "Frozen fulfillment, effective entitlement and atomic mail/deletion guards",
+          "status": "COMPLETE",
+          "remaining": "Official order API/sandbox remains external; legacy terms, scheduled retries, RTDN leases, provider-read serialization and claimed/noncurrency refund policy stay open."
         }
       ]
     },

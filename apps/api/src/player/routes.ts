@@ -255,10 +255,10 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   const playFor = (env: GameEnv): PlayClient => (opts.play ? opts.play(env) : new PlayApi(env));
   const Verify = z.object({ productId: z.string().regex(/^[a-z][a-z0-9_.]{1,99}$/), purchaseToken: z.string().min(10).max(4096) }).strict();
 
-  app.get('/api/v1/shop/products', async (c) => c.json({ products: await listProducts(c.env.DB) }, 200, { 'Cache-Control': 'public, max-age=60' }));
+  app.get('/api/v1/shop/products', async (c) => c.json({ products: await flagOn(c.env, 'shop.enabled') ? await listProducts(c.env.DB) : [] }, 200, { 'Cache-Control': 'public, max-age=60' }));
 
   app.post('/api/v1/shop/verify', async (c) => {
-    await requireFlag(c.env, 'shop.enabled');
+    // A sales kill flag cannot discard an obligation already confirmed by Google Play.
     await perMinute(c.env, `verify:${c.get('playerId')}`, 20);
     const input = await body(c, Verify, 6000);
     return c.json(await verifyPurchase(c.env.DB, playFor(c.env), c.get('playerId'), input));

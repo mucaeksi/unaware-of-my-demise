@@ -36,7 +36,7 @@ export async function sendMail(db: D1Database, playerId: string, mail: NewMail, 
   const m = NewMail.parse(mail);
   const expires = new Date(now.getTime() + m.expiresInDays * 86_400_000).toISOString();
   const res = await db
-    .prepare('INSERT INTO mail (player_id, kind, title, body, attachments, source_key, created_by, created_at, expires_at) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9) ON CONFLICT (player_id, source_key) DO NOTHING RETURNING id')
+    .prepare("INSERT INTO mail (player_id, kind, title, body, attachments, source_key, created_by, created_at, expires_at) SELECT ?1,?2,?3,?4,?5,?6,?7,?8,?9 FROM players WHERE id = ?1 AND status <> 'deleted' ON CONFLICT (player_id, source_key) DO NOTHING RETURNING id")
     .bind(playerId, m.kind, m.title, m.body, JSON.stringify(m.attachments), m.sourceKey ?? null, createdBy, now.toISOString(), expires)
     .first<{ id: number }>();
   if (res) return { id: res.id, created: true };
@@ -76,7 +76,8 @@ export async function claimMail(db: D1Database, playerId: string, mailId: number
   }
 
   const batch: D1PreparedStatement[] = [
-    db.prepare('UPDATE mail SET claimed_at = ?3, read_at = COALESCE(read_at, ?3) WHERE id = ?1 AND player_id = ?2 AND claimed_at IS NULL AND expires_at > ?3').bind(mailId, playerId, now.toISOString()),
+    db.prepare("UPDATE mail SET claimed_at = ?3, read_at = COALESCE(read_at, ?3) WHERE id = ?1 AND player_id = ?2 AND claimed_at IS NULL AND expires_at > ?3 AND EXISTS (SELECT 1 FROM players WHERE id = ?2 AND status <> 'deleted') AND (?4 IS NULL OR EXISTS (SELECT 1 FROM purchases WHERE order_id = ?4 AND player_id = ?2 AND state = 'granted' AND entitlement_state IN ('active', 'canceled', 'in_grace', 'expired')))")
+      .bind(mailId, playerId, now.toISOString(), order ?? null),
     db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
     ...(await grantStatements(db, playerId, mail.attachments, { keyPrefix: `mail:${mailId}`, reason: `mail:${mail.kind}` }))
   ];
@@ -85,7 +86,14 @@ export async function claimMail(db: D1Database, playerId: string, mailId: number
     await db.batch(batch);
   } catch (e) {
     const msg = String(e instanceof Error ? e.message : e);
-    if (/CHECK constraint failed: ok = 1|UNIQUE constraint failed: ledger/i.test(msg)) throw new HttpError(409, 'already_claimed', 'this mail was already claimed');
+    if (/CHECK constraint failed: ok = 1|UNIQUE constraint failed: ledger/i.test(msg)) {
+      if (order) {
+        const entitlement = await db.prepare('SELECT state, entitlement_state FROM purchases WHERE order_id = ?1 AND player_id = ?2').bind(order, playerId).first<{ state: string; entitlement_state: string }>();
+        if (!entitlement || entitlement.state === 'refunded') throw new HttpError(409, 'revoked', 'this entitlement was revoked');
+        if (['on_hold', 'paused', 'pending', 'unknown'].includes(entitlement.entitlement_state)) throw new HttpError(409, 'entitlement_unavailable', 'this subscription is not currently entitled');
+      }
+      throw new HttpError(409, 'already_claimed', 'this mail is no longer claimable');
+    }
     throw e;
   }
   return { claimed: mail.attachments };

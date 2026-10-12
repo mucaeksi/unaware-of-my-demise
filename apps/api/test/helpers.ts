@@ -1,6 +1,6 @@
 import { env } from 'cloudflare:workers';
 import { SignJWT, exportJWK, generateKeyPair, type JWTVerifyGetKey } from 'jose';
-import { generateSigningKeyPair, type PublicKeyJwk } from '@uomd/shared';
+import { generateSigningKeyPair, sha256Hex, type PublicKeyJwk } from '@uomd/shared';
 import { createAdminApp } from '../src/adminApp';
 import { createGameApp } from '../src/gameApp';
 import type { AdminEnv, GameEnv } from '../src/env';
@@ -59,16 +59,18 @@ import type { PlayClient, ProductPurchase, SubscriptionPurchase } from '../src/b
 export const fakePlay = {
   products: new Map<string, ProductPurchase>(),
   subs: new Map<string, SubscriptionPurchase>(),
+  orders: new Map<string, { orderId: string; createTimeMs: number; purchaseToken: string }>(),
   calls: [] as string[],
   failAck: false,
   reset(): void {
     this.products.clear();
     this.subs.clear();
+    this.orders.clear();
     this.calls = [];
     this.failAck = false;
   }
 };
-const playClient: PlayClient = {
+export const playClient: PlayClient = {
   async getProduct(_id, token) {
     const p = fakePlay.products.get(token);
     if (!p) throw new Error('unknown token');
@@ -78,6 +80,13 @@ const playClient: PlayClient = {
     const s = fakePlay.subs.get(token);
     if (!s) throw new Error('unknown token');
     return s;
+  },
+  async getOrder(orderId) {
+    const scripted = fakePlay.orders.get(orderId);
+    if (scripted) return scripted;
+    const entry = [...fakePlay.subs].find(([, s]) => s.latestOrderId === orderId);
+    if (!entry) throw new Error('unknown order');
+    return { orderId, purchaseToken: entry[0], createTimeMs: entry[1].startTimeMs };
   },
   async acknowledgeProduct(id, token) {
     fakePlay.calls.push(`ack:${id}:${token}`);
@@ -159,7 +168,10 @@ export async function game(path: string, init: RequestInit = {}, over: Partial<G
 
 /** Signs a test player in through the real endpoint and returns the bearer header plus the player id. */
 export async function signIn(sub: string): Promise<{ auth: Record<string, string>; playerId: string; token: string }> {
-  const res = await game('/api/v1/auth/google', { method: 'POST', body: JSON.stringify({ idToken: await googleIdToken(sub) }) });
+  // Independent synthetic actors use stable benchmark-range IPs; explicit auth-throttle tests call game directly.
+  const hash = await sha256Hex(sub);
+  const ip = `198.18.${parseInt(hash.slice(0, 2), 16)}.${parseInt(hash.slice(2, 4), 16)}`;
+  const res = await game('/api/v1/auth/google', { method: 'POST', headers: { 'CF-Connecting-IP': ip }, body: JSON.stringify({ idToken: await googleIdToken(sub) }) });
   if (res.status !== 200) throw new Error(`sign-in failed: ${res.status} ${await res.text()}`);
   const j = (await res.json()) as { token: string; player: { id: string } };
   return { auth: { Authorization: `Bearer ${j.token}` }, playerId: j.player.id, token: j.token };

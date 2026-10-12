@@ -1,8 +1,10 @@
 import { env } from 'cloudflare:workers';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { billingTag, refundPurchase, verifyPurchase } from '../src/billing/service';
+import { billingTag, refundPurchase, syncSubscriptionMail, verifyPurchase } from '../src/billing/service';
+import { claimMail } from '../src/mail/service';
+import { deleteAccount } from '../src/account/service';
 import { applyLedger } from '../src/db/ledger';
-import { fakePlay, game, post, pushToken, signIn } from './helpers';
+import { fakePlay, game, playClient, post, pushToken, signIn } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 let n = 0;
@@ -73,9 +75,10 @@ describe('one-time products', () => {
     const canceled = await newProduct(a.playerId, { state: 'canceled' });
     expect(await (await verify(a.auth, 'tokens_small', canceled.token)).json()).toMatchObject({ status: 'not_entitled' });
     expect((await verify(a.auth, 'no_such_product', 'z'.repeat(30))).status).toBe(404);
-    await db().prepare("UPDATE shop_products SET active = 0 WHERE product_id = 'tokens_small'").run();
-    expect((await verify(a.auth, 'tokens_small', forA.token)).status).toBe(404);
     expect((await wallet(a.auth)).eclipse_token ?? 0).toBe(0);
+    await db().prepare("UPDATE shop_products SET active = 0 WHERE product_id = 'tokens_small'").run();
+    expect(await (await verify(a.auth, 'tokens_small', forA.token)).json()).toMatchObject({ status: 'granted' });
+    expect((await wallet(a.auth)).eclipse_token).toBe(320); // sales availability cannot discard a paid obligation
     expect((await game('/api/v1/shop/verify', post({ productId: 'tokens_small', purchaseToken: 'q'.repeat(20) }))).status).toBe(401);
   });
 
@@ -105,6 +108,102 @@ describe('one-time products', () => {
 });
 
 describe('subscription (Eclipse Blessing, canon 1,600 + 60 x 187)', () => {
+  it('a sales kill flag hides offers while a verified paid receipt is still honored', async () => {
+    const { auth, playerId } = await signIn(`sub-killed-sales-${uid()}`);
+    const { token } = await newProduct(playerId);
+    await db().prepare("INSERT INTO feature_flags (key, enabled) VALUES ('shop.enabled', 0) ON CONFLICT (key) DO UPDATE SET enabled = 0").run();
+    expect(await (await game('/api/v1/shop/products')).json()).toEqual({ products: [] });
+    expect(await (await verify(auth, 'tokens_small', token)).json()).toMatchObject({ status: 'granted' });
+    expect((await wallet(auth)).eclipse_token).toBe(320);
+    await db().prepare("UPDATE feature_flags SET enabled = 1 WHERE key = 'shop.enabled'").run();
+  });
+
+  it('an older active response cannot overwrite a newer held entitlement', async () => {
+    const { playerId } = await signIn(`sub-stale-entitlement-${uid()}`);
+    const { token, orderId } = await newSub(playerId);
+    const now = new Date();
+    await verifyPurchase(db(), playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token }, now);
+    fakePlay.subs.get(token)!.state = 'on_hold';
+    await verifyPurchase(db(), playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token }, new Date(now.getTime() + 1000));
+    fakePlay.subs.get(token)!.state = 'active';
+    expect((await verifyPurchase(db(), playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token }, now)).status).toBe('not_entitled');
+    expect(await db().prepare('SELECT entitlement_state FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ entitlement_state: 'on_hold' });
+  });
+
+  it('uses frozen period benefits after a catalog edit; rejects rewriting the snapshot', async () => {
+    const { auth, playerId } = await signIn(`sub-frozen-${uid()}`);
+    const { token, orderId } = await newSub(playerId);
+    await verify(auth, 'eclipse_blessing_30d', token);
+    const original = (await db().prepare('SELECT fulfillment FROM purchases WHERE order_id = ?1').bind(orderId).first<{ fulfillment: string }>())!.fulfillment;
+    const altered = JSON.parse(original).subscription as { periodic: { attachments: { amount: number }[] } };
+    altered.periodic.attachments[0]!.amount = 999;
+    await db().prepare("UPDATE shop_products SET sub_config = ?1 WHERE product_id = 'eclipse_blessing_30d'").bind(JSON.stringify(altered)).run();
+    await syncSubscriptionMail(db(), playerId, new Date(Date.now() + 13 * HOUR));
+    const mails = (await db().prepare('SELECT attachments FROM mail WHERE player_id = ?1').bind(playerId).all<{ attachments: string }>()).results;
+    await db().prepare("UPDATE shop_products SET sub_config = ?1 WHERE product_id = 'eclipse_blessing_30d'").bind(JSON.stringify(JSON.parse(original).subscription)).run();
+    expect(mails).toHaveLength(2);
+    expect(mails.map((m) => JSON.parse(m.attachments)[0].amount)).toEqual([187, 187]);
+    await expect(db().prepare("UPDATE purchases SET fulfillment = '{}' WHERE order_id = ?1").bind(orderId).run()).rejects.toThrow('immutable');
+  });
+
+  it('hold/pause stop new mail and suspend unclaimed rights; recovery and same-order expiry reconcile', async () => {
+    const { playerId } = await signIn(`sub-held-${uid()}`);
+    const { token, orderId } = await newSub(playerId);
+    await verifyPurchase(db(), playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token });
+    const mail = await db().prepare('SELECT id FROM mail WHERE player_id = ?1').bind(playerId).first<{ id: number }>();
+    for (const state of ['on_hold', 'paused'] as const) {
+      fakePlay.subs.get(token)!.state = state;
+      expect((await verifyPurchase(db(), playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token })).status).toBe('not_entitled');
+      expect(await syncSubscriptionMail(db(), playerId, new Date(Date.now() + 13 * HOUR))).toBe(0);
+      await expect(claimMail(db(), playerId, mail!.id)).rejects.toMatchObject({ code: 'entitlement_unavailable' });
+    }
+    const subscription = fakePlay.subs.get(token)!;
+    subscription.state = 'active'; subscription.expiryTimeMs += 24 * HOUR;
+    await verifyPurchase(db(), playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token });
+    expect(await db().prepare('SELECT entitlement_state, period_end FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ entitlement_state: 'active', period_end: new Date(subscription.expiryTimeMs).toISOString() });
+    expect((await claimMail(db(), playerId, mail!.id)).claimed).toHaveLength(1);
+  });
+
+  it.each([['2026-01-31', '2026-02-28'], ['2026-02-28', '2026-03-31'], ['2026-03-01T00:00:00Z', '2026-03-01T00:05:00Z']])('uses authoritative order time for %s → %s instead of a thirty-day subtraction', async (begin, end) => {
+    const { playerId } = await signIn(`sub-period-${uid()}`);
+    const { token, orderId } = await newSub(playerId);
+    const subscription = fakePlay.subs.get(token)!;
+    subscription.startTimeMs = Date.parse('2025-01-01'); subscription.expiryTimeMs = Date.parse(end);
+    fakePlay.orders.set(orderId, { orderId, purchaseToken: token, createTimeMs: Date.parse(begin) });
+    await verifyPurchase(db(), playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token }, new Date(Date.parse(begin) + 1000));
+    expect(await db().prepare('SELECT period_start, period_end FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ period_start: new Date(begin).toISOString(), period_end: new Date(end).toISOString() });
+  });
+
+  it('cannot recreate wallet/mail when deletion wins before fulfillment', async () => {
+    const { playerId } = await signIn(`sub-deleted-race-${uid()}`);
+    const { token } = await newSub(playerId);
+    const racingPlay = { ...playClient, async getOrder(id: string) {
+      const order = await playClient.getOrder(id);
+      await deleteAccount(db(), playerId, 'DELETE');
+      return order;
+    } };
+    await expect(verifyPurchase(db(), racingPlay, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token })).rejects.toMatchObject({ code: 'account_deleted' });
+    for (const table of ['wallets', 'mail', 'purchases']) expect(await db().prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE player_id = ?1`).bind(playerId).first()).toEqual({ n: 0 });
+  });
+
+  it('a refund committed after the fast mail check still prevents the atomic claim', async () => {
+    const { playerId } = await signIn(`sub-claim-refund-${uid()}`);
+    const { token, orderId } = await newSub(playerId);
+    await verifyPurchase(db(), playClient, playerId, { productId: 'eclipse_blessing_30d', purchaseToken: token });
+    const mail = await db().prepare('SELECT id FROM mail WHERE player_id = ?1').bind(playerId).first<{ id: number }>();
+    const original = db();
+    const racing = new Proxy(original, { get(target, key) {
+      if (key === 'batch') return async (statements: D1PreparedStatement[]) => {
+        await refundPurchase(original, orderId, 'system');
+        return original.batch(statements);
+      };
+      const value = Reflect.get(target, key); return typeof value === 'function' ? value.bind(target) : value;
+    } });
+    await expect(claimMail(racing, playerId, mail!.id)).rejects.toMatchObject({ code: 'revoked' });
+    expect(await original.prepare('SELECT claimed_at FROM mail WHERE id = ?1').bind(mail!.id).first()).toEqual({ claimed_at: null });
+    expect(await original.prepare('SELECT balance FROM wallets WHERE player_id = ?1').bind(playerId).first()).toEqual({ balance: 0 });
+  });
+
   it('retries a failed subscription acknowledgement on the existing order without granting again', async () => {
     const { auth, playerId } = await signIn(`sub-suback-${uid()}`);
     const { token, orderId } = await newSub(playerId);
@@ -256,6 +355,23 @@ describe('refunds and RTDN', () => {
 
   const rtdn = async (data: unknown, over: Parameters<typeof pushToken>[0] = {}, headers: Record<string, string> = {}) =>
     game('/api/v1/billing/rtdn', { method: 'POST', body: JSON.stringify({ message: { messageId: `m${uid()}`, data: btoa(JSON.stringify(data)) } }), headers: { Authorization: `Bearer ${await pushToken(over)}`, 'Content-Type': 'application/json', ...headers } });
+
+  it('RTDN hold suspends existing mail and recovery restores the same paid period without another instant grant', async () => {
+    const { auth, playerId } = await signIn(`sub-rtdn-state-${uid()}`);
+    const { token, orderId } = await newSub(playerId);
+    await verify(auth, 'eclipse_blessing_30d', token);
+    const mail = await db().prepare('SELECT id FROM mail WHERE player_id = ?1').bind(playerId).first<{ id: number }>();
+    const notify = (notificationType: number) => rtdn({ packageName: 'app.uomd.test', subscriptionNotification: { notificationType, purchaseToken: token } });
+    fakePlay.subs.get(token)!.state = 'on_hold';
+    expect(await (await notify(5)).json()).toEqual({ handled: 'state_reconciled' });
+    expect(await db().prepare('SELECT entitlement_state FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ entitlement_state: 'on_hold' });
+    await expect(claimMail(db(), playerId, mail!.id)).rejects.toMatchObject({ code: 'entitlement_unavailable' });
+    fakePlay.subs.get(token)!.state = 'active';
+    expect(await (await notify(1)).json()).toEqual({ handled: 'subscription' });
+    await claimMail(db(), playerId, mail!.id);
+    expect((await wallet(auth)).eclipse_token).toBe(1787);
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM purchases WHERE player_id = ?1').bind(playerId).first()).toEqual({ n: 1 });
+  });
 
   it('a voided purchase takes back what is still in the wallet and records what was already spent', async () => {
     const { auth, playerId } = await signIn(`sub-void-${uid()}`);

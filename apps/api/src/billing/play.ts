@@ -23,7 +23,8 @@ export interface SubscriptionPurchase {
 }
 export interface PlayClient {
   getProduct(productId: string, token: string): Promise<ProductPurchase>;
-  getSubscription(token: string): Promise<SubscriptionPurchase>;
+  getSubscription(token: string, productId?: string): Promise<SubscriptionPurchase>;
+  getOrder(orderId: string): Promise<{ orderId: string; createTimeMs: number; purchaseToken: string }>;
   acknowledgeProduct(productId: string, token: string): Promise<void>;
   consumeProduct(productId: string, token: string): Promise<void>;
   acknowledgeSubscription(productId: string, token: string): Promise<void>;
@@ -89,13 +90,13 @@ export class PlayApi implements PlayClient {
       purchaseTimeMs: Number(r.purchaseTimeMillis ?? 0)
     };
   }
-  async getSubscription(token: string): Promise<SubscriptionPurchase> {
+  async getSubscription(token: string, productId?: string): Promise<SubscriptionPurchase> {
     const r = await this.call<{
       subscriptionState?: string;
       latestOrderId?: string;
       acknowledgementState?: string;
       startTime?: string;
-      lineItems?: { productId?: string; expiryTime?: string }[];
+      lineItems?: { productId?: string; expiryTime?: string; latestSuccessfulOrderId?: string }[];
       externalAccountIdentifiers?: { obfuscatedExternalAccountId?: string };
     }>('GET', `purchases/subscriptionsv2/tokens/${encodeURIComponent(token)}`);
     const state = ((): SubscriptionPurchase['state'] => {
@@ -118,16 +119,21 @@ export class PlayApi implements PlayClient {
           return 'unknown';
       }
     })();
-    const line = r.lineItems?.[0];
+    const line = productId ? r.lineItems?.find((item) => item.productId === productId) : r.lineItems?.[0];
     return {
       state,
       productId: line?.productId ?? '',
-      latestOrderId: r.latestOrderId ?? '',
+      latestOrderId: line?.latestSuccessfulOrderId ?? r.latestOrderId ?? '',
       acknowledged: r.acknowledgementState === 'ACKNOWLEDGEMENT_STATE_ACKNOWLEDGED',
       ...(r.externalAccountIdentifiers?.obfuscatedExternalAccountId ? { obfuscatedAccountId: r.externalAccountIdentifiers.obfuscatedExternalAccountId } : {}),
       startTimeMs: ms(r.startTime),
       expiryTimeMs: ms(line?.expiryTime)
     };
+  }
+  /** Official Android Publisher v3 Order.createTime, not subscription lifecycle start or an assumed 30-day month. */
+  async getOrder(orderId: string): Promise<{ orderId: string; createTimeMs: number; purchaseToken: string }> {
+    const order = await this.call<{ orderId?: string; createTime?: string; purchaseToken?: string }>('GET', `orders/${encodeURIComponent(orderId)}`);
+    return { orderId: order.orderId ?? '', createTimeMs: ms(order.createTime), purchaseToken: order.purchaseToken ?? '' };
   }
   async acknowledgeProduct(productId: string, token: string): Promise<void> {
     await this.call('POST', `purchases/products/${encodeURIComponent(productId)}/tokens/${encodeURIComponent(token)}:acknowledge`);
