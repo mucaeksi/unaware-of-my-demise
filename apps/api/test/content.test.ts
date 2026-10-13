@@ -1,5 +1,5 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { ContentManifest } from '@uomd/content-schema';
+import { ContentManifest, type ChapterIndex } from '@uomd/content-schema';
 import { PatchManager, MemoryStorage, type BaseContent, type RemoteSource } from '@uomd/patch';
 import { sha256Hex, verifyPayload, type SignedPayload } from '@uomd/shared';
 import { baseFiles, patchFiles, type TestFile } from './fixtures';
@@ -29,7 +29,50 @@ async function publishPatch(): Promise<void> {
   expect((await post('/admin/api/releases/rel_0002/publish', {})).status).toBe(200);
 }
 
+async function malformedChapters(kind: 'duplicate' | 'cycle'): Promise<TestFile> {
+  const original = patch.find((file) => file.path === 'chapters/chapter_index.json')!;
+  const index = JSON.parse(new TextDecoder().decode(original.bytes)) as ChapterIndex;
+  const first = index.chapters[0]!.nodes[0]!;
+  const second = index.chapters[1]!.nodes[0]!;
+  if (kind === 'duplicate') index.chapters.push({ chapter_id: 'duplicate_node_chapter', title_en: 'Duplicate fixture', nodes: [structuredClone(first)] });
+  else { first.requires = second.node_id; second.requires = first.node_id; }
+  const bytes = new TextEncoder().encode(JSON.stringify(index));
+  return { ...original, bytes, sha256: await sha256Hex(bytes) };
+}
+
 describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
+  it.each(['duplicate', 'cycle'] as const)('rejects a %s campaign graph before writing a draft or changing the channel', async (kind) => {
+    await publishBase();
+    const bad = await malformedChapters(kind);
+    const files = [...patch.filter((file) => file.path !== bad.path), bad];
+    await upload(files);
+    const pointer = await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first();
+    const response = await post('/admin/api/releases', { id: 'rel_bad_graph', channel: 'dev', dependsOn: 'rel_0001', files: entries(files) });
+    expect(response.status).toBe(422);
+    expect(await response.text()).toContain(kind === 'duplicate' ? 'duplicate node' : 'prerequisite cycle');
+    expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM content_releases WHERE id = 'rel_bad_graph'").first()).toEqual({ n: 0 });
+    expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM release_files WHERE release_id = 'rel_bad_graph'").first()).toEqual({ n: 0 });
+    expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE target = 'rel_bad_graph'").first()).toEqual({ n: 0 });
+    expect(await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first()).toEqual(pointer);
+  });
+
+  it('revalidates a stored cyclic draft before signing, publication or a success audit', async () => {
+    await publishBase(); await upload(patch);
+    expect((await post('/admin/api/releases', { id: 'rel_0002', channel: 'dev', dependsOn: 'rel_0001', files: entries(patch) })).status).toBe(201);
+    const bad = await malformedChapters('cycle'); await upload([bad]);
+    // An older draft/storage writer may predate the strengthened graph contract.
+    await baseEnv.DB.prepare('UPDATE release_files SET sha256 = ?1 WHERE release_id = ?2 AND path = ?3').bind(bad.sha256, 'rel_0002', bad.path).run();
+    const draft = await baseEnv.DB.prepare("SELECT * FROM content_releases WHERE id = 'rel_0002'").first();
+    const pointer = await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first();
+    const audit = await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE target = 'rel_0002'").first();
+    const response = await post('/admin/api/releases/rel_0002/publish', {});
+    expect(response.status).toBe(422);
+    expect(await response.text()).toContain('prerequisite cycle');
+    expect(await baseEnv.DB.prepare("SELECT * FROM content_releases WHERE id = 'rel_0002'").first()).toEqual(draft);
+    expect(await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first()).toEqual(pointer);
+    expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE target = 'rel_0002'").first()).toEqual(audit);
+  });
+
   it('serves nothing until something is published', async () => {
     expect((await game('/api/v1/content/channels/dev/manifest')).status).toBe(404);
   });

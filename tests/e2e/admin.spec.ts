@@ -1,4 +1,6 @@
 import { expect, test } from '@playwright/test';
+import { ChapterIndex } from '@uomd/content-schema';
+import { sha256Hex } from '@uomd/shared';
 import { ADMIN, GAME, SHOTS } from './helpers';
 
 const jwt = (): string => process.env.E2E_ADMIN_JWT as string;
@@ -6,6 +8,37 @@ const jwt = (): string => process.env.E2E_ADMIN_JWT as string;
 test.describe.configure({ mode: 'serial' });
 
 test.describe('UOMD Control Center (admin SPA + API, local stack with a test-only Access identity)', () => {
+  test('rejects duplicate and cyclic chapter drafts while the current release remains usable', async ({ page, request }, info) => {
+    const headers = { 'Cf-Access-Jwt-Assertion': jwt() };
+    const manifest = await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json();
+    const source = ChapterIndex.parse(await (await request.get(`${GAME}/content/base/chapters/chapter_index.json`)).json());
+    for (const kind of ['duplicate', 'cycle'] as const) {
+      const index = structuredClone(source);
+      const first = index.chapters[0]!.nodes[0]!;
+      const second = index.chapters[0]!.nodes[1]!;
+      if (kind === 'duplicate') index.chapters.push({ chapter_id: 'duplicate_node_chapter', title_en: 'Duplicate fixture', nodes: [structuredClone(first)] });
+      else { first.requires = second.node_id; second.requires = first.node_id; }
+      const bytes = new TextEncoder().encode(JSON.stringify(index));
+      const sha256 = await sha256Hex(bytes);
+      const uploaded = await request.put(`${ADMIN}/admin/api/objects/${sha256}`, { headers: { ...headers, 'Content-Type': 'application/json' }, data: Buffer.from(bytes) });
+      expect(uploaded.ok()).toBe(true);
+      const id = `rel_bad_${kind}_${info.project.name.replaceAll('-', '_')}`;
+      const draft = await request.post(`${ADMIN}/admin/api/releases`, { headers, data: { id, channel: 'dev', dependsOn: 'rel_0001', files: [{ path: 'chapters/chapter_index.json', sha256 }] } });
+      expect(draft.status()).toBe(422);
+      expect(await draft.text()).toContain(kind === 'duplicate' ? 'duplicate node' : 'prerequisite cycle');
+      const releases = await (await request.get(`${ADMIN}/admin/api/releases`, { headers })).json();
+      expect(JSON.stringify(releases)).not.toContain(id);
+      expect(await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json()).toEqual(manifest);
+    }
+    await page.setExtraHTTPHeaders(headers);
+    await page.goto(ADMIN);
+    await expect(page.getByText('e2e-owner@example.com · owner')).toBeVisible();
+    await page.getByRole('button', { name: 'Patches' }).click();
+    await expect(page.locator('tbody .badge.ok', { hasText: 'current' })).toHaveCount(1);
+    await expect(page.locator('tbody')).not.toContainText('rel_bad_');
+    await page.screenshot({ path: `${SHOTS}/admin-${info.project.name}-graph-rejection.png`, fullPage: true });
+  });
+
   test('refuses to show anything without a valid Access token', async ({ page }) => {
     await page.goto(ADMIN);
     await expect(page.getByRole('alert')).toContainText(/401|invalid_token|missing_token/);

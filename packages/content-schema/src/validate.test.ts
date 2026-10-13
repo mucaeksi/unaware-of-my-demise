@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { ContentValidationError, validateContentSet } from './index';
+import { ContentValidationError, validateContentSet, type ChapterIndex, type UnitPack } from './index';
 
 const ROOT = new URL('../../../content/', import.meta.url).pathname;
 const walk = (dir: string, rel = ''): string[] =>
@@ -19,6 +19,11 @@ const campaign = (): Map<string, Uint8Array> => {
   return m;
 };
 const enc = new TextEncoder();
+const edit = <T>(files: Map<string, Uint8Array>, path: string, change: (value: T) => void): void => {
+  const value = JSON.parse(new TextDecoder().decode(files.get(path))) as T;
+  change(value);
+  files.set(path, enc.encode(JSON.stringify(value)));
+};
 
 describe('validateContentSet', () => {
   it('accepts the base release', () => {
@@ -26,6 +31,45 @@ describe('validateContentSet', () => {
   });
   it('accepts base + the Part I campaign (35 stages, the full cast, placeholder art) as one effective set', () => {
     expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 38, units: 47 });
+  });
+  it.each(['unit', 'skill', 'status', 'phase', 'objective'] as const)('rejects duplicate %s identities across the effective unit pack', (kind) => {
+    const files = campaign();
+    edit<UnitPack>(files, 'units/unit_pack.json', (pack) => {
+      if (kind === 'unit') pack.units.push(structuredClone(pack.units[0]!));
+      if (kind === 'skill') pack.units[1]!.skills.push(structuredClone(pack.units[0]!.skills[0]!));
+      if (kind === 'status') pack.rules.statuses.push(structuredClone(pack.rules.statuses[0]!));
+      const phases = pack.units.flatMap((unit) => unit.boss?.phases ?? []);
+      if (kind === 'phase') pack.units.find((unit) => unit.boss)!.boss!.phases.push({ ...structuredClone(phases[0]!), objectives: [] });
+      if (kind === 'objective') {
+        const phase = phases.find((phase) => phase.objectives.length > 0)!;
+        phase.objectives.push(structuredClone(phase.objectives[0]!));
+      }
+    });
+    expect(() => validateContentSet(files)).toThrow(new RegExp(`duplicate ${kind} `));
+  });
+  it.each(['chapter', 'node'] as const)('rejects duplicate %s identities across chapters', (kind) => {
+    const files = campaign();
+    edit<ChapterIndex>(files, 'chapters/chapter_index.json', (index) => {
+      const first = index.chapters[0]!;
+      index.chapters.push({ chapter_id: kind === 'chapter' ? first.chapter_id : 'duplicate_node_chapter', title_en: 'Duplicate fixture',
+        nodes: [{ ...structuredClone(first.nodes[0]!), ...(kind === 'chapter' ? { node_id: 'unique_cloned_node' } : {}) }] });
+    });
+    expect(() => validateContentSet(files)).toThrow(new RegExp(`duplicate ${kind} `));
+  });
+  it.each(['self', 'same chapter', 'cross chapter'] as const)('rejects a %s prerequisite cycle', (kind) => {
+    const files = campaign();
+    edit<ChapterIndex>(files, 'chapters/chapter_index.json', (index) => {
+      const first = index.chapters[0]!.nodes[0]!;
+      const second = kind === 'self' ? first : kind === 'same chapter' ? index.chapters[0]!.nodes[1]! : index.chapters[1]!.nodes[0]!;
+      first.requires = second.node_id;
+      second.requires = first.node_id;
+    });
+    expect(() => validateContentSet(files)).toThrow(/prerequisite cycle/);
+  });
+  it('accepts acyclic cross-chapter prerequisites regardless of chapter order', () => {
+    const files = campaign();
+    edit<ChapterIndex>(files, 'chapters/chapter_index.json', (index) => { index.chapters.reverse(); });
+    expect(validateContentSet(files)).toMatchObject({ chapters: 8, nodes: 38 });
   });
   it('rejects a campaign stage that names a guest the unit pack does not contain', () => {
     const m = campaign();

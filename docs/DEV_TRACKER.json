@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "ee3e7bab5a154cfb3cc3ce9011990183df645615",
+  "sourceCommit": "539c1594",
   "reviewedAt": "2026-10-13",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "R06",
+    "id": "R07",
     "status": "IN_PROGRESS",
-    "nextProposed": "R07",
+    "nextProposed": "R07 formation/reference and canonical story compilation",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "Four-commit transfer delivered to main; independent R07 validation next",
-      "detail": "Fresh fetch confirms main ee3e7bab. 615 application/tool tests, 33 Python checks, lint/typecheck, both builds and 46 adapters pass. Real desktop/phone Armory and desktop campaign pass with 25 local migrations; phone campaign intentionally skipped. Previous GitHub authentication blocker resolved; prior scheduler/runtime evidence is historical. R06 remains partial for explicit semantic decisions."
+      "title": "R07-A content identities and prerequisite cycles verified locally",
+      "detail": "Duplicate unit/skill/status/phase/objective/chapter/global-node IDs and prerequisite cycles now fail the shared content gate. 629 application/tool tests, lint/typecheck, builds/campaign and five actual desktop/phone local-Worker graph-rejection/Control Center/campaign cases pass; phone campaign intentionally skipped. R07 remains partial; R06 resistance/signature decisions and native/deployed acceptance remain open. Four-commit transfer reached main unchanged; original GitHub blocker resolved."
     }
   ],
   "next": [
     {
-      "title": "R02 \u2014 durable financial recovery",
-      "detail": "Prepare explicit legacy/claimed/noncurrency/partial/calendar-cadence policy and native pre-purchase version binding; secure game Worker keyring/live recovery proof remain external. Independent R03 source work proceeds without waiting."
+      "title": "R07 \u2014 legal formations, semantic references and canonical chapter flow",
+      "detail": "Continue independent graph/encounter reference coverage; then compile all 51 ordered main-story entries and 419 unique line IDs with source hashes, recruits, guest/spoiler gates and cue precedence. Economic catalog identities require R08 authority."
     },
     {
-      "title": "R03 \u2014 release authority",
-      "detail": "Then complete durable patch generation, concurrent publication and bounded economic release/session acceptance."
+      "title": "R06 \u2014 remaining reviewed combat semantics",
+      "detail": "Prepare finite resistance/signature and broader C01\u2013C39 decisions without applying proposals implicitly. Supported healing/Focus snapshots and explicit undefined-passive rejection are delivered; R06 remains partial."
     },
     {
-      "title": "R04\u2013R06 \u2014 rewards, retries and combat",
-      "detail": "Close repeat/duplicate grants and durable client mutations before combat semantics, loans and chapter flow."
+      "title": "R02/R05/R11/R18 \u2014 native financial, identity and device acceptance",
+      "detail": "Retain actual Google/Play/keyring, pre-purchase offer binding, secure session/lifecycle and signed physical-device proof requirements. Continue independent source work while those gates wait."
     }
   ],
   "blockedOnOwner": [
@@ -895,6 +895,29 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R07-A-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "539c1594",
+      "verifiedAt": "2026-10-13T16:48:53.793961+00:00",
+      "scope": "R07-A working tree: shared effective-content validator rejects duplicate unit/skill/status/boss-phase/objective/chapter/global-node IDs and self/same-chapter/cross-chapter prerequisite cycles; linear nonrecursive chains preserve valid order-independent routes. Eleven schema/three real D1/API regressions (13 rejected-input cases failed before correction). Draft rejects with no release/file/audit writes or pointer change; an older malformed draft is rejected before signing/publication/audit. 629 application/tool tests, lint/typecheck, both builds and campaign compilation pass. Five actual local-Worker desktop/phone graph rejection and Control Center/campaign cases pass with 25 migrations; phone campaign intentionally skipped. Rejection screenshots inspected. Graphify3047 nodes/7973 edges/143 communities. Generated empty-stills metadata restored; no canon, reward, numeric policy or paid media changes. Full story coverage, legal formation/reference and effective catalog validation remain; R07 partial. No formal security audit, deployed or native acceptance claimed.",
+      "testIds": [
+        "packages/content-schema/src/validate.test.ts",
+        "apps/api/test/content.test.ts",
+        "tests/e2e/admin.spec.ts (graph rejection and Control Center, desktop/phone)",
+        "tests/e2e/zz-campaign.spec.ts (desktop pass, phone skip)",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "npm run build",
+        "npm run build:campaign",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1328,10 +1351,10 @@
     {
       "id": "R07",
       "title": "Canon compiler and semantic validation",
-      "taskStatus": "OPEN",
+      "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Compile all ordered story entries and validate IDs, references, gates, waves and legal graphs.",
-      "implemented": "Campaign compiler and schema validators exist; battle-only campaign misses authored story flow and semantic coverage.",
+      "implemented": "R07-A shared effective-set validation now rejects duplicate unit/skill/status/phase/objective/chapter/global-node IDs and cyclic prerequisites before draft writes or publication/signing. Real D1/API rollback and actual local browser graph rejection preserve the active release. Valid base/campaign and order-independent acyclic graphs remain accepted. Full canonical story compilation, formation/reference and effective catalog coverage remain open.",
       "dependsOn": [
         "R03",
         "R06"
@@ -1340,12 +1363,16 @@
       "sourcePaths": [
         "tools/build_campaign.ts",
         "packages/content-schema/src/validate.ts",
-        "narrative/09_VN_Scripts/Runtime_Snapshot"
+        "narrative/09_VN_Scripts/Runtime_Snapshot",
+        "packages/content-schema/src/validate.test.ts",
+        "apps/api/test/content.test.ts",
+        "tests/e2e/admin.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R07-A-20261013"
       ],
       "blockerIds": []
     },

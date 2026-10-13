@@ -20,6 +20,13 @@ const dec = new TextDecoder();
  */
 export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { chapters: number; nodes: number; units: number; scenes: number } {
   const problems: string[] = [];
+  const unique = (kind: string, ids: string[]): void => {
+    const seen = new Set<string>();
+    for (const id of ids) {
+      if (seen.has(id)) problems.push(`duplicate ${kind} ${id}`);
+      seen.add(id);
+    }
+  };
   const json = (path: string): unknown => {
     const b = files.get(path);
     if (!b) {
@@ -49,6 +56,12 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
   const units = new Set(pack?.units.map((u) => u.unit_id) ?? []);
   const statuses = new Set(pack?.rules.statuses.map((s) => s.status_id) ?? []);
   if (pack) {
+    const phases = pack.units.flatMap((unit) => unit.boss?.phases ?? []);
+    unique('unit', pack.units.map((unit) => unit.unit_id));
+    unique('skill', pack.units.flatMap((unit) => unit.skills.map((skill) => skill.skill_id)));
+    unique('status', pack.rules.statuses.map((status) => status.status_id));
+    unique('phase', phases.map((phase) => phase.phase_id));
+    unique('objective', phases.flatMap((phase) => phase.objectives.map((objective) => objective.objective_id)));
     for (const u of pack.units) {
       if (art && !art.units[u.art_key]) problems.push(`unit ${u.unit_id}: art_key ${u.art_key} missing from art manifest`);
       const bossPhases = u.boss?.phases ?? [];
@@ -127,13 +140,28 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
   };
   if (index) {
     // a node may require any node of the campaign (the server gates on the player's progress rows, which are global)
-    const allNodes = new Set(index.chapters.flatMap((c) => c.nodes.map((x) => x.node_id)));
+    const campaignNodes = index.chapters.flatMap((chapter) => chapter.nodes);
+    unique('chapter', index.chapters.map((chapter) => chapter.chapter_id));
+    unique('node', campaignNodes.map((node) => node.node_id));
+    const allNodes = new Map(campaignNodes.map((node) => [node.node_id, node]));
+    // Walk each single-prerequisite chain once without recursion, including cross-chapter edges.
+    const checked = new Set<string>();
+    for (const node of campaignNodes) {
+      const chain = new Set<string>();
+      let current: string | undefined = node.node_id;
+      while (current !== undefined && allNodes.has(current) && !checked.has(current)) {
+        if (chain.has(current)) {
+          problems.push(`node ${current}: prerequisite cycle`);
+          break;
+        }
+        chain.add(current);
+        current = allNodes.get(current)?.requires;
+      }
+      for (const id of chain) checked.add(id);
+    }
     for (const ch of index.chapters) {
-      const ids = new Set<string>();
       for (const n of ch.nodes) {
         nodes++;
-        if (ids.has(n.node_id)) problems.push(`chapter ${ch.chapter_id}: duplicate node ${n.node_id}`);
-        ids.add(n.node_id);
         if (n.requires && !allNodes.has(n.requires)) problems.push(`node ${n.node_id}: requires unknown node ${n.requires}`);
         if (n.kind === 'story') {
           if (!n.story) problems.push(`node ${n.node_id}: story node without story path`);
