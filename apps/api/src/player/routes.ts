@@ -14,6 +14,7 @@ import { purchaseHistory } from '../billing/history';
 import { adStatus, beginAd, grantAd, AD } from '../ads/service';
 import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, writeSave } from '../progress/service';
+import { completeStory, StoryCompletion } from '../progress/story';
 import { ascendGear, characterStats, dismantleGear, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
 import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
 import { deleteAccount, exportAccount } from '../account/service';
@@ -202,6 +203,11 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   });
 
   app.get('/api/v1/progress', async (c) => c.json(await getProgress(c.env.DB, c.get('playerId'))));
+
+  app.post('/api/v1/progress/story', async (c) => {
+    await perMinute(c.env, `story:${c.get('playerId')}`, 60);
+    return c.json(await completeStory(c.env, c.get('playerId'), await body(c, StoryCompletion, 4 * 1024)));
+  });
 
   // step 1 of an owned-hero battle: the server freezes the party (team, gear, ranks, story loans) the client must fight with
   app.post('/api/v1/progress/battle/start', async (c) => {

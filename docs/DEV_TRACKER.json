@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "5ab6b4678ab9bb5320c110f96f3d5fc3a6003757",
+  "sourceCommit": "7215940b9fc2042c0df29cebd688dddf8dca9d7c",
   "reviewedAt": "2026-10-13",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R07-B formation and combat-reference validation verified locally",
-      "detail": "Shared encounter/frozen-party schemas reject slot collisions, repeated player copies and duplicate guests. Effective packs check unit kinds, own intent/phase skill references, immunity/preservation IDs and nested status/tag conditions across effects/hooks/modifiers. 662 application/tool tests, lint/typecheck, builds/campaign, 46 adapters and five real desktop/phone local-Worker rejection/Control Center/campaign cases pass with 25 migrations; phone campaign intentionally skipped. T-3 authored rows and the six-guest 7-4 declaration stay valid. R07 remains partial for canonical story and broader catalog coverage."
+      "title": "R07-C1 durable authoritative story completion verified",
+      "detail": "Reward-free zero-star story progress, exact operation results and transaction-time account/release/prerequisite guards are implemented. Signed-in chapter cards use server state; callbacks pin account/release and expose unconfirmed saves. 675 tests/lint/typecheck, 46 adapters, real desktop/phone response-loss/reload readers with zero extra POSTs, builds/25 migrations and existing admin flows pass. Canonical story compilation and phase dialogue are next."
     }
   ],
   "next": [
@@ -942,6 +942,27 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R07-C1-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "7215940b9fc2042c0df29cebd688dddf8dca9d7c",
+      "verifiedAt": "2026-10-13T17:43:31.632397+00:00",
+      "scope": "R07-C1 working tree: POST /progress/story validates the published story node/prerequisite; atomic zero-star one-clear progress plus original exact-input result in existing progression_requests, no rewards/Ration/tasks. Existing battle gates accept a cleared story prerequisite; account/release/prerequisite races fail at write time. Eight D1/API and five client cases; original five API cases failed before endpoint existed. 675 application/tool tests, lint/typecheck and 46 adapters pass. Signed-in Chapters uses authoritative progress/generation/account guards; reader callbacks pin release/account, await durable confirmation and provide retry/back, Saved Actions labels/recovery verify original results. Two actual desktop/phone reader cases prove server commit before response loss, reload/status recovery with zero extra POSTs, one clear and cross-account isolation; both builds/25 migrations and two existing Control Center cases pass. Reader screenshots inspected. Initial E2E expected a new apply despite startup already applying the fixture; revised check asserts actual active ID and both cases pass. Graph3055/8001/144. No new migration, historical repair, paid media or native/deployed acceptance. Canonical source compilation, phase interludes and full post-battle resume remain open.",
+      "testIds": [
+        "apps/api/test/story-progress.test.ts",
+        "apps/game/src/net/api.test.ts",
+        "tests/e2e/story-progress.spec.ts (desktop/phone)",
+        "tests/e2e/admin.spec.ts (existing Control Center desktop/phone)",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1378,7 +1399,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Compile all ordered story entries and validate IDs, references, gates, waves and legal graphs.",
-      "implemented": "R07-A shared effective-set validation now rejects duplicate unit/skill/status/phase/objective/chapter/global-node IDs and cyclic prerequisites before draft writes or publication/signing. Real D1/API rollback and actual local browser graph rejection preserve the active release. Valid base/campaign and order-independent acyclic graphs remain accepted. R07-B adds shared slot/player-copy/guest integrity, unit-kind and own skill/immunity/preservation/nested status-tag reference checks with API/browser rollback proof. Full canonical story compilation, broader cross-resource and effective catalog coverage remain open.",
+      "implemented": "R07-A shared effective-set validation now rejects duplicate unit/skill/status/phase/objective/chapter/global-node IDs and cyclic prerequisites before draft writes or publication/signing. Real D1/API rollback and actual local browser graph rejection preserve the active release. Valid base/campaign and order-independent acyclic graphs remain accepted. R07-B adds shared slot/player-copy/guest integrity, unit-kind and own skill/immunity/preservation/nested status-tag reference checks with API/browser rollback proof. Full canonical story compilation, broader cross-resource and effective catalog coverage remain open. R07-C1 adds atomic reward-free zero-star story completion, exact original-result recovery and write-time authority/prerequisite guards; account-pinned readers and server-derived chapter views can advance to a battle after confirmed story progress. Canonical compiler/phase-dialogue coverage remains open.",
       "dependsOn": [
         "R03",
         "R06"
@@ -1392,14 +1413,19 @@
         "apps/api/test/content.test.ts",
         "tests/e2e/admin.spec.ts",
         "packages/content-schema/src/story.ts",
-        "packages/content-schema/src/schema.test.ts"
+        "packages/content-schema/src/schema.test.ts",
+        "apps/api/src/progress/story.ts",
+        "apps/api/test/story-progress.test.ts",
+        "apps/game/src/flow.ts",
+        "tests/e2e/story-progress.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
         "E-R07-A-20261013",
-        "E-R07-B-20261013"
+        "E-R07-B-20261013",
+        "E-R07-C1-20261013"
       ],
       "blockerIds": []
     },

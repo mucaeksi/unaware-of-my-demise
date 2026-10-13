@@ -331,7 +331,7 @@ export class GameApi extends EventTarget {
       } catch (error) {
         const definite = attempts === 1 && error instanceof ApiError && ([400, 402, 403, 404, 413, 422].includes(error.status)
           || error.status === 409 && ['already_claimed', 'expired', 'revoked', 'period_closed', 'not_done', 'at_cap', 'not_at_cap', 'max_rank', 'max_ascension',
-            'account_level_too_low', 'level_too_low', 'story_gate', 'equipped', 'locked', 'request_id_reused', 'entitlement_unavailable', 'release_not_economic', 'save_conflict'].includes(error.code));
+            'account_level_too_low', 'level_too_low', 'story_gate', 'equipped', 'locked', 'request_id_reused', 'entitlement_unavailable', 'release_not_economic', 'save_conflict', 'story_state_changed'].includes(error.code));
         await this.journal.finish(checked.scope, checked.id, definite ? 'rejected' : 'pending', undefined, error instanceof ApiError ? error.code : 'confirmation_pending');
         this.dispatchEvent(new Event('operations'));
         throw error;
@@ -367,10 +367,11 @@ export class GameApi extends EventTarget {
     const value = result as { requestId?: string; pulls?: unknown[]; nodeId?: string; character?: string; level?: number; id?: number;
       ascension?: number; skillId?: string; rank?: number; stats?: { subs?: unknown[] }; gained?: unknown[];
       mailId?: number; claimed?: unknown[]; periodKey?: string; taskId?: string; rewards?: unknown[];
-      version?: number; phase?: string; prologue?: boolean; tutorials?: number; playerId?: string } | null;
+      version?: number; phase?: string; prologue?: boolean; tutorials?: number; playerId?: string; releaseId?: string; completed?: boolean } | null;
     if (!value || typeof value !== 'object'
       || operation.path === '/api/v1/gacha/pull' && (value.requestId !== operation.id || !Array.isArray(value.pulls) || value.pulls.length !== operation.body.count)
       || operation.path === '/api/v1/progress/battle' && (value.requestId !== operation.id || value.nodeId !== operation.body.nodeId)
+      || operation.path === '/api/v1/progress/story' && (value.requestId !== operation.id || value.nodeId !== operation.body.nodeId || value.releaseId !== operation.body.releaseId || value.completed !== true)
       || operation.path.startsWith('/api/v1/characters/') && (value.character !== operation.path.split('/')[4] || !Number.isSafeInteger(value.level)
         || operation.path.endsWith('/ascend') && !Number.isSafeInteger(value.ascension)
         || operation.path.endsWith('/upgrade') && (value.skillId !== operation.path.split('/')[6] || !Number.isSafeInteger(value.rank)))
@@ -466,6 +467,10 @@ export class GameApi extends EventTarget {
   }
   progress(): Promise<{ nodes: { node_id: string; stars: number; clears: number }[]; ration: { value: number; cap: number; nextMs: number } }> {
     return this.call('GET', '/api/v1/progress');
+  }
+  completeStory(releaseId: string, nodeId: string, expectedRevision = this.authRevision): Promise<{ requestId: string; releaseId: string; nodeId: string; completed: true; replayed: boolean }> {
+    if (expectedRevision !== this.authRevision) return Promise.reject(new ApiError(409, 'auth_changed', 'The selected account changed'));
+    return this.mutate('/api/v1/progress/story', { releaseId, nodeId });
   }
   submitBattle(releaseId: string, nodeId: string, actions: { skillId: string; targetId?: string }[], sessionId?: string): Promise<{ stars: number; firstClear: boolean; rewards: MailItem['attachments']; repeatRewardsAllowed?: boolean; ration: { spent: number; value: number } }> {
     return this.mutate('/api/v1/progress/battle', { releaseId, nodeId, actions, ...(sessionId ? { sessionId } : {}) });

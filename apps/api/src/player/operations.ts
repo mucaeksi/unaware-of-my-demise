@@ -23,7 +23,7 @@ export async function operationStatus(db: D1Database, playerId: string, requestI
     const gear = /^\/api\/v1\/gear\/([1-9]\d{0,15})\/(level-up|ascend|reroll|dismantle)$/.exec(path);
     const mail = /^\/api\/v1\/mail\/([1-9]\d{0,15})\/claim$/.exec(path);
     const task = path === '/api/v1/tasks/claim';
-    const checkpoint = path === '/api/v1/entry' ? 'entry_checkpoint' : path === '/api/v1/save' ? 'cloud_save' : null;
+    const checkpoint = path === '/api/v1/entry' ? 'entry_checkpoint' : path === '/api/v1/save' ? 'cloud_save' : path === '/api/v1/progress/story' ? 'story_complete' : null;
     if (!character && !task && !checkpoint && (!gear || !Number.isSafeInteger(Number(gear[1]))) && (!mail || !Number.isSafeInteger(Number(mail[1]))))
       throw new HttpError(400, 'bad_request', 'unsupported operation path');
     const kind = character

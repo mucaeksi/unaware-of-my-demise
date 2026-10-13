@@ -201,6 +201,40 @@ describe('durable client operations', () => {
     await expect(reload.retryOperation(storage.records[0]!.id)).resolves.toMatchObject({ version: 1 });
     expect(posts).toBe(1); expect(storage.records[0]).toMatchObject({ method: 'PUT', state: 'confirmed' });
   });
+  it('story completion response loss recovers its account-scoped original result without another POST', async () => {
+    const storage = new TestOperationStorage(); let sent = ''; let posts = 0;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (url.includes('/operations/')) {
+        const body = JSON.parse(sent);
+        return Response.json({ requestId: body.requestId, path: '/api/v1/progress/story', state: 'confirmed', binding: 'exact', inputHash: await sha256Hex(canonicalJson(body)), result: { ...body, completed: true, replayed: true } });
+      }
+      posts++; sent = init.body as string; throw new TypeError('story response lost');
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.completeStory('rel_story', 'opening')).rejects.toThrow('story response lost');
+    const reload = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(reload.retryOperation(storage.records[0]!.id)).resolves.toMatchObject({ releaseId: 'rel_story', nodeId: 'opening', completed: true });
+    expect(posts).toBe(1); expect(storage.records[0]!.state).toBe('confirmed');
+  });
+  it.each([{ completed: false }, { nodeId: 'other_story' }, { releaseId: 'another_release' }])('keeps malformed story confirmation pending: %j', async (change) => {
+    const storage = new TestOperationStorage();
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      return Response.json({ ...JSON.parse(init.body as string), completed: true, ...change });
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.completeStory('rel_story', 'opening')).rejects.toMatchObject({ code: 'invalid_response' });
+    expect(storage.records[0]!.state).toBe('pending');
+  });
+  it('an old story callback cannot complete for a newly selected account', async () => {
+    const api = new GameApi('https://game.test', new OperationJournal(new TestOperationStorage()));
+    const revision = api.authRevision;
+    values.set(sessionKey, JSON.stringify({ token: 'session-B', expiresAt: expiry() }));
+    const fetch = vi.fn(); vi.stubGlobal('fetch', fetch);
+    await expect(api.completeStory('rel_story', 'opening', revision)).rejects.toMatchObject({ code: 'auth_changed' });
+    expect(fetch).not.toHaveBeenCalled();
+  });
 
   it('entry checkpoints recover their pending predecessor before submitting higher progress', async () => {
     const storage = new TestOperationStorage(); const sent: Record<string, unknown>[] = []; let recovered = 0;

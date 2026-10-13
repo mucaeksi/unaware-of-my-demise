@@ -67,8 +67,8 @@ interface Stage {
   encounter: Encounter;
 }
 
-/** The published node, its unit pack and encounter, after the "previous node cleared" gate. */
-async function loadStage(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, releaseId: string, nodeId: string): Promise<Stage> {
+/** Both story and battle nodes use the published graph and the authenticated player's progress. */
+export async function loadProgressNode(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, releaseId: string, nodeId: string, kind: 'story' | 'battle'): Promise<{ node: Stage['node']; prerequisiteKind: 'story' | 'battle' | null }> {
   const db = env.DB;
   const store = new ContentStore(db, env.CONTENT);
   const rel = await store.getRelease(releaseId);
@@ -78,12 +78,21 @@ async function loadStage(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'
   if (!indexBytes) throw new HttpError(404, 'unknown_node', 'release has no chapter index');
   const index = ChapterIndex.parse(JSON.parse(dec.decode(indexBytes)));
   const node = index.chapters.flatMap((c) => c.nodes).find((n) => n.node_id === nodeId);
-  if (!node || node.kind !== 'battle' || !node.encounter) throw new HttpError(404, 'unknown_node', 'no such battle node in this release');
+  if (!node || node.kind !== kind || (kind === 'battle' ? !node.encounter : !node.story)) throw new HttpError(404, 'unknown_node', `no such ${kind} node in this release`);
+  const prerequisite = node.requires ? index.chapters.flatMap((chapter) => chapter.nodes).find((candidate) => candidate.node_id === node.requires) : null;
   if (node.requires) {
-    const req = await db.prepare('SELECT stars FROM player_progress WHERE player_id = ?1 AND node_id = ?2').bind(playerId, node.requires).first<{ stars: number }>();
-    if (!req || req.stars < 1) throw new HttpError(403, 'node_locked', `clear ${node.requires} first`);
+    const req = await db.prepare('SELECT stars, clears FROM player_progress WHERE player_id = ?1 AND node_id = ?2').bind(playerId, node.requires).first<{ stars: number; clears: number }>();
+    if (!prerequisite || !req || (prerequisite.kind === 'story' ? req.clears < 1 : req.stars < 1)) throw new HttpError(403, 'node_locked', `clear ${node.requires} first`);
   }
-  const [packBytes, encBytes] = await Promise.all([store.effectiveBytes(releaseId, 'units/unit_pack.json'), store.effectiveBytes(releaseId, node.encounter)]);
+  return { node, prerequisiteKind: prerequisite?.kind ?? null };
+}
+
+/** The published battle node, unit pack and encounter after its prerequisite gate. */
+async function loadStage(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, releaseId: string, nodeId: string): Promise<Stage> {
+  const { node } = await loadProgressNode(env, playerId, releaseId, nodeId, 'battle');
+  const store = new ContentStore(env.DB, env.CONTENT);
+  const dec = new TextDecoder();
+  const [packBytes, encBytes] = await Promise.all([store.effectiveBytes(releaseId, 'units/unit_pack.json'), store.effectiveBytes(releaseId, node.encounter!)]);
   if (!packBytes || !encBytes) throw new HttpError(404, 'unknown_encounter', 'encounter is not part of that release');
   return { node, pack: UnitPack.parse(JSON.parse(dec.decode(packBytes))), encounter: Encounter.parse(JSON.parse(dec.decode(encBytes))) };
 }

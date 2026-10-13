@@ -1,7 +1,8 @@
 import type Phaser from 'phaser';
 import type { ChapterIndex, Encounter } from '@uomd/content-schema';
 import { errText } from './ui/hub';
-import { toast } from './ui/kit';
+import { Button, toast } from './ui/kit';
+import { REF_H, REF_W } from './config';
 import { Progress, Services } from './services';
 
 type Node = ChapterIndex['chapters'][number]['nodes'][number];
@@ -49,12 +50,31 @@ export async function launchBattle(scene: Phaser.Scene, node: Node, enc: Encount
 export async function playNode(scene: Phaser.Scene, node: Node): Promise<void> {
   const { content } = Services.ready();
   if (node.kind === 'story' && node.story) {
-    scene.scene.start('Story', {
-      path: node.story,
-      onDone: (s: Phaser.Scene) => {
+    const api = Services.api;
+    const revision = api.authRevision;
+    const signedIn = api.signedIn;
+    const releaseId = await content.activeReleaseId();
+    let saving = false;
+    let retry: Button | null = null;
+    let back: Button | null = null;
+    const finish = async (s: Phaser.Scene): Promise<void> => {
+      if (saving) return;
+      saving = true; retry?.destroy(); retry = null;
+      try {
+        if (signedIn) await api.completeStory(releaseId, node.node_id, revision);
+        if (!s.scene.isActive('Story')) return;
         Progress.complete(node.node_id, 0);
         s.scene.start('Chapters');
-      }
+      } catch (error) {
+        if (!s.scene.isActive('Story')) return;
+        toast(s, `Story progress is not confirmed. ${errText(error)}`, 5000);
+        retry = new Button(s, REF_W / 2 + 220, REF_H - 80, { label: 'RETRY SAVE', w: 380, onClick: () => void finish(s) });
+        back ??= new Button(s, REF_W / 2 - 220, REF_H - 80, { label: 'BACK', w: 380, onClick: () => s.scene.start('Chapters') });
+      } finally { saving = false; }
+    };
+    scene.scene.start('Story', {
+      path: node.story,
+      onDone: (s: Phaser.Scene) => void finish(s)
     });
     return;
   }

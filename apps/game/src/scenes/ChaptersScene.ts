@@ -10,12 +10,19 @@ type Node = ChapterIndex['chapters'][number]['nodes'][number];
 
 export class ChaptersScene extends Phaser.Scene {
   private dragged = false;
+  private generation = 0;
 
   constructor() {
     super('Chapters');
   }
 
   async create(): Promise<void> {
+    const generation = ++this.generation;
+    const api = Services.api;
+    const revision = api.authRevision;
+    const authChanged = () => this.scene.restart();
+    api.addEventListener('auth', authChanged);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => { api.removeEventListener('auth', authChanged); this.generation++; });
     const { content, art } = Services.ready();
     this.cameras.main.setBackgroundColor(0x0a0610);
     void art.addBackdrop(this, 'forest_whispering_ash', -20);
@@ -26,8 +33,22 @@ export class ChaptersScene extends Phaser.Scene {
     const index = await content.chapters();
     const baseIndex = JSON.parse(new TextDecoder().decode(await content.base.read('chapters/chapter_index.json'))) as ChapterIndex;
     const baseNodes = new Set(baseIndex.chapters.flatMap((c) => c.nodes.map((n) => n.node_id)));
-    const progress = Progress.load();
+    let progress = Progress.load();
+    if (api.signedIn) {
+      try {
+        const authoritative = await api.progress();
+        progress = Object.fromEntries(authoritative.nodes.filter((node) => node.clears > 0).map((node) => [node.node_id, { stars: node.stars }]));
+      } catch (error) {
+        if (generation !== this.generation || revision !== api.authRevision) return;
+        title(this, REF_W / 2, REF_H / 2, 'Story progress could not be loaded', 44, T.crimson);
+        new Button(this, REF_W / 2, REF_H / 2 + 180, { label: 'RETRY', onClick: () => this.scene.restart() });
+        new Button(this, 270, REF_H - 90, { label: 'BACK', onClick: () => this.scene.start('Title') });
+        void error;
+        return;
+      }
+    }
     const active = await content.activeReleaseId();
+    if (generation !== this.generation || revision !== api.authRevision) return;
     const titles = new Map(index.chapters.flatMap((c) => c.nodes.map((n): [string, string] => [n.node_id, n.title_en])));
 
     let y = 250;

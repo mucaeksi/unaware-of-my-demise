@@ -18,7 +18,7 @@ export interface OperationRecord {
 export interface OperationStorage {
   change<T>(work: (records: OperationRecord[]) => T): Promise<T>;
 }
-const MUTATION_PATH = /^\/api\/v1\/(gacha\/pull|progress\/battle|characters\/[a-z][a-z0-9_]{0,79}\/(level-up|ascend|skills\/[a-z][a-z0-9_]{0,79}\/upgrade)|gear\/\d+\/(level-up|ascend|reroll|dismantle)|mail\/\d+\/claim|tasks\/claim|entry|save)$/;
+const MUTATION_PATH = /^\/api\/v1\/(gacha\/pull|progress\/(battle|story)|characters\/[a-z][a-z0-9_]{0,79}\/(level-up|ascend|skills\/[a-z][a-z0-9_]{0,79}\/upgrade)|gear\/\d+\/(level-up|ascend|reroll|dismantle)|mail\/\d+\/claim|tasks\/claim|entry|save)$/;
 const MAX_PENDING = 64;
 const MAX_HISTORY = 64;
 
