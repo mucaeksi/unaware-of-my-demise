@@ -2,6 +2,7 @@ import { TaskConfig, type RewardAttachment } from '@uomd/content-schema';
 import { segmentsAt, weekStart, windowOf, type Period } from '@uomd/economy';
 import { HttpError } from '../content/store';
 import { grantStatements } from '../db/grants';
+import { operationStatement, recordedOperation, type OperationInput } from '../db/operations';
 
 export type TaskEvent = 'eligible_wins' | 'boss_wins' | 'three_star_wins' | 'level_ups';
 
@@ -97,7 +98,12 @@ export async function listTasks(db: D1Database, playerId: string, nowMs = Date.n
   };
 }
 
-export async function claimTask(db: D1Database, playerId: string, input: { periodKey: string; taskId: string }, nowMs = Date.now()): Promise<Record<string, unknown>> {
+export async function claimTask(db: D1Database, playerId: string, input: { periodKey: string; taskId: string; requestId?: string }, nowMs = Date.now()): Promise<Record<string, unknown>> {
+  const operation = input.requestId ? { ...input, requestId: input.requestId } : null;
+  if (operation) {
+    const recorded = await recordedOperation(db, playerId, `task_claim:${input.periodKey}:${input.taskId}`, operation);
+    if (recorded) return recorded;
+  }
   const cfg = await loadTaskConfig(db);
   if (!cfg) throw new HttpError(404, 'no_tasks', 'tasks are not configured');
   const sl = slots(cfg, nowMs);
@@ -113,17 +119,23 @@ export async function claimTask(db: D1Database, playerId: string, input: { perio
       return r && t && r.progress >= t.objective.count;
     });
     if (!ready) throw new HttpError(409, 'not_done', 'finish the required tasks first');
-    return claimBatch(db, playerId, { periodKey: win.key, taskId: COMPLETION, target: 1, progress: 1, create: true }, cfg.daily.completion.rewards, key, reason);
+    return claimBatch(db, playerId, { periodKey: win.key, taskId: COMPLETION, target: 1, progress: 1, create: true }, cfg.daily.completion.rewards, key, reason, operation);
   }
   const slot = sl.find((s) => s.period.key === input.periodKey && s.taskId === input.taskId);
   if (!slot) throw new HttpError(409, 'period_closed', 'that task is not open any more');
   const row = await db.prepare('SELECT progress, target, claimed FROM player_tasks WHERE player_id = ?1 AND period_key = ?2 AND task_id = ?3').bind(playerId, input.periodKey, input.taskId).first<Row>();
   if (!row || row.progress < row.target) throw new HttpError(409, 'not_done', 'this task is not finished yet');
-  if (row.claimed === 1) throw new HttpError(409, 'already_claimed', 'already claimed');
-  return claimBatch(db, playerId, { periodKey: input.periodKey, taskId: input.taskId, target: row.target, progress: row.progress, create: false }, slot.rewards, key, reason);
+  if (row.claimed === 1) {
+    const replay = operation ? await recordedOperation(db, playerId, `task_claim:${input.periodKey}:${input.taskId}`, operation) : null;
+    if (replay) return replay;
+    throw new HttpError(409, 'already_claimed', 'already claimed');
+  }
+  return claimBatch(db, playerId, { periodKey: input.periodKey, taskId: input.taskId, target: row.target, progress: row.progress, create: false }, slot.rewards, key, reason, operation);
 }
 
-async function claimBatch(db: D1Database, playerId: string, t: { periodKey: string; taskId: string; target: number; progress: number; create: boolean }, rewards: RewardAttachment[], key: string, reason: string): Promise<Record<string, unknown>> {
+async function claimBatch(db: D1Database, playerId: string, t: { periodKey: string; taskId: string; target: number; progress: number; create: boolean }, rewards: RewardAttachment[], key: string, reason: string, operation: OperationInput | null): Promise<Record<string, unknown>> {
+  const kind = `task_claim:${t.periodKey}:${t.taskId}`;
+  const result = { periodKey: t.periodKey, taskId: t.taskId, rewards, ...(operation ? { requestId: operation.requestId } : {}) };
   const stmts = await grantStatements(db, playerId, rewards, { keyPrefix: `task:${key}`, reason });
   const mark = t.create
     ? [db.prepare("INSERT INTO player_tasks (player_id, period_key, task_id, progress, target, claimed, claimed_at) VALUES (?1, ?2, ?3, 1, 1, 1, strftime('%Y-%m-%dT%H:%M:%fZ','now'))").bind(playerId, t.periodKey, t.taskId)]
@@ -132,11 +144,16 @@ async function claimBatch(db: D1Database, playerId: string, t: { periodKey: stri
         db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)')
       ];
   try {
-    await db.batch([...mark, ...stmts, db.prepare('DELETE FROM tx_guard')]);
+    await db.batch([
+      db.prepare("INSERT INTO tx_guard (ok) VALUES (CASE WHEN EXISTS (SELECT 1 FROM players WHERE id = ?1 AND status = 'active') THEN 1 ELSE 0 END)").bind(playerId),
+      ...mark, ...stmts, ...(operation ? [operationStatement(db, playerId, kind, operation, result)] : []), db.prepare('DELETE FROM tx_guard')
+    ]);
   } catch (e) {
+    const replay = operation ? await recordedOperation(db, playerId, kind, operation) : null;
+    if (replay) return replay;
     const msg = String(e instanceof Error ? e.message : e);
     if (/CHECK constraint failed: ok = 1|UNIQUE constraint failed: (player_tasks|ledger)/i.test(msg)) throw new HttpError(409, 'already_claimed', 'already claimed');
     throw e;
   }
-  return { periodKey: t.periodKey, taskId: t.taskId, rewards };
+  return { ...result, ...(operation ? { replayed: false } : {}) };
 }

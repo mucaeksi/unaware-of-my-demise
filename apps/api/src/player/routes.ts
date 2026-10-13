@@ -195,7 +195,8 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     await perMinute(c.env, `claim:${c.get('playerId')}`, 60);
     const id = MailId.safeParse(c.req.param('id'));
     if (!id.success) throw new HttpError(400, 'bad_request', 'invalid mail id');
-    return c.json(await claimMail(c.env.DB, c.get('playerId'), id.data));
+    const input = await body(c, z.object({ requestId: RequestId.optional() }).strict());
+    return c.json(await claimMail(c.env.DB, c.get('playerId'), id.data, new Date(), input.requestId));
   });
 
   app.get('/api/v1/progress', async (c) => c.json(await getProgress(c.env.DB, c.get('playerId'))));
@@ -324,7 +325,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.get('/api/v1/account/export', async (c) => c.json(await exportAccount(c.env.DB, c.get('playerId'))));
   app.post('/api/v1/account/delete', async (c) => c.json(await deleteAccount(c.env.DB, c.get('playerId'), (await body(c, z.object({ confirm: z.string().max(20) }).strict())).confirm)));
   app.get('/api/v1/tasks', async (c) => c.json(await listTasks(c.env.DB, c.get('playerId'))));
-  app.post('/api/v1/tasks/claim', async (c) => c.json(await claimTask(c.env.DB, c.get('playerId'), await body(c, z.object({ periodKey: z.string().regex(/^[dw]:[0-9T:-]{10,13}(:[a-z][a-z0-9_]{1,79})?$/), taskId: z.string().regex(/^_?[a-z][a-z0-9_]{1,79}$/) }).strict()))));
+  app.post('/api/v1/tasks/claim', async (c) => c.json(await claimTask(c.env.DB, c.get('playerId'), await body(c, z.object({ periodKey: z.string().regex(/^[dw]:[0-9T:-]{10,13}(:[a-z][a-z0-9_]{1,79})?$/), taskId: z.string().regex(/^_?[a-z][a-z0-9_]{1,79}$/), requestId: RequestId.optional() }).strict()))));
   app.get('/api/v1/gear', async (c) => c.json({ gear: await listGear(c.env.DB, c.get('playerId')) }));
   app.get('/api/v1/characters/:id/stats', async (c) => c.json(await characterStats(c.env.DB, c.get('playerId'), c.req.param('id'))));
   const GearId = (raw: string): number => {

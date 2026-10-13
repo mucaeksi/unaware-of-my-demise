@@ -66,6 +66,34 @@ describe('authentication response ownership', () => {
 });
 
 describe('durable client operations', () => {
+  it('mail response loss preserves the original account-scoped claim across reload', async () => {
+    const storage = new TestOperationStorage(); const sent: string[] = [];
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      sent.push(init.body as string); if (sent.length === 1) throw new TypeError('claim response lost');
+      return Response.json({ requestId: JSON.parse(init.body as string).requestId, mailId: 42, claimed: [] });
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.claimMail(42)).rejects.toThrow();
+    await new GameApi('https://game.test', new OperationJournal(storage)).claimMail(42);
+    expect(sent[1]).toBe(sent[0]); expect(storage.records[0]!.state).toBe('confirmed');
+  });
+
+  it('a definite first task rejection does not block the next window or masquerade as success', async () => {
+    const storage = new TestOperationStorage(); const ids: string[] = [];
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      const input = JSON.parse(init.body as string); ids.push(input.requestId);
+      if (ids.length === 1) return Response.json({ error: 'not_done' }, { status: 409 });
+      return Response.json({ ...input, rewards: [] });
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.claimTask('d:old_window', 'task')).rejects.toMatchObject({ code: 'not_done' });
+    expect(storage.records[0]!.state).toBe('rejected');
+    await api.claimTask('d:new_window', 'task');
+    expect(ids[0]).not.toBe(ids[1]); expect(storage.records[1]!.state).toBe('confirmed');
+  });
+
   it('authoritative status recovers a committed action without another POST and replaces an untrusted cached result', async () => {
     const storage = new TestOperationStorage(); let body = ''; let posts = 0;
     vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {

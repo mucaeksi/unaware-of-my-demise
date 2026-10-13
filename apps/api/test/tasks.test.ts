@@ -5,6 +5,7 @@ import { Encounter, UnitPack } from '@uomd/content-schema';
 import { sha256Hex } from '@uomd/shared';
 import { baseFiles, type TestFile } from './fixtures';
 import { applyLedger } from '../src/db/ledger';
+import { claimTask } from '../src/tasks/service';
 import { admin, entries, game, post, resetContent, seedCanonCatalog, signIn, upload } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
@@ -60,6 +61,28 @@ const claim = (auth: Record<string, string>, periodKey: string, taskId: string) 
 const wallet = async (auth: Record<string, string>) => ((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token ?? 0;
 
 describe('task engine', () => {
+  it('durable result recovery survives an expired window and changed reward catalog', async () => {
+    const { auth, playerId } = await signIn(`sub-task-operation-${rid()}`);
+    const periodKey = (await tasks(auth)).daily.periodKey; const requestId = rid();
+    await db().prepare("INSERT INTO player_tasks (player_id, period_key, task_id, progress, target) VALUES (?1, ?2, 'win_two', 2, 2)").bind(playerId, periodKey).run();
+    const input = { periodKey, taskId: 'win_two', requestId };
+    expect(await claimTask(db(), playerId, input)).toMatchObject({ rewards: [{ amount: 10 }] });
+    const changed = structuredClone(CONFIG); changed.daily.tasks[0]!.rewards = [{ type: 'currency', currency: 'eclipse_token', amount: 999 }];
+    await db().prepare("UPDATE game_config SET value_json = ?1 WHERE key = 'tasks'").bind(JSON.stringify(changed)).run();
+    await expect(claimTask(db(), playerId, input, Date.now() + 13 * 3_600_000)).resolves.toMatchObject({ requestId, replayed: true, rewards: [{ amount: 10 }] });
+    expect(await wallet(auth)).toBe(10);
+  });
+
+  it('a completion claim records one result for simultaneous identical retries', async () => {
+    const { auth, playerId } = await signIn(`sub-task-completion-operation-${rid()}`); const periodKey = (await tasks(auth)).daily.periodKey;
+    await db().prepare("INSERT INTO player_tasks (player_id, period_key, task_id, progress, target) VALUES (?1, ?2, 'win_two', 2, 2), (?1, ?2, 'improve', 1, 1)").bind(playerId, periodKey).run();
+    const input = { periodKey, taskId: '_window_complete', requestId: rid() };
+    const replies = await Promise.all(Array.from({ length: 8 }, () => game('/api/v1/tasks/claim', post(input, auth))));
+    expect(replies.every((r) => r.status === 200)).toBe(true);
+    expect((await db().prepare('SELECT xp FROM player_account WHERE player_id = ?1').bind(playerId).first<{ xp: number }>())?.xp).toBe(400);
+    expect(await (await game(`/api/v1/operations/${input.requestId}?path=${encodeURIComponent('/api/v1/tasks/claim')}`, { headers: auth })).json()).toMatchObject({ state: 'confirmed', binding: 'exact', result: { ...input, rewards: [{ amount: 400 }] } });
+  });
+
   it('counts server-verified wins toward the window and weekly tasks; rewards are claimed once', async () => {
     const { auth } = await signIn(`sub-task-${rid()}`);
     expect((await tasks(auth)).daily.tasks.map((t) => t.progress)).toEqual([0, 0]);

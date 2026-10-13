@@ -15,6 +15,33 @@ async function ensureCharacter(id: string, rarity: number): Promise<void> {
 }
 
 describe('mailbox', () => {
+  it('a durable claim identity replays one original result for concurrent retries', async () => {
+    const { auth, playerId } = await signIn(`sub-mail-operation-${key()}`); const requestId = key();
+    const { id } = await sendMail(db(), playerId, { kind: 'reward', title: 'Recovery fixture', attachments: [{ type: 'currency', currency: 'eclipse_token', amount: 10 }] }, 'test');
+    const responses = await Promise.all(Array.from({ length: 8 }, () => game(`/api/v1/mail/${id}/claim`, post({ requestId }, auth))));
+    expect(responses.every((r) => r.status === 200)).toBe(true);
+    const results = await Promise.all(responses.map((r) => r.json()));
+    expect(results.every((r) => (r as { requestId: string }).requestId === requestId)).toBe(true);
+    expect(await (await game('/api/v1/wallet', { headers: auth })).json()).toEqual({ wallets: { eclipse_token: 10 } });
+    const status = await game(`/api/v1/operations/${requestId}?path=${encodeURIComponent(`/api/v1/mail/${id}/claim`)}`, { headers: auth });
+    expect(status.status).toBe(200); expect(await status.json()).toMatchObject({ state: 'confirmed', binding: 'exact', result: { requestId, mailId: id } });
+  });
+
+  it('a claim journal failure rolls back the marker and reward; an identity cannot claim a different mail', async () => {
+    const { auth, playerId } = await signIn(`sub-mail-journal-${key()}`); const requestId = key();
+    const { id } = await sendMail(db(), playerId, { kind: 'reward', title: 'Atomic fixture', attachments: [{ type: 'currency', currency: 'eclipse_token', amount: 10 }] }, 'test');
+    await db().prepare("CREATE TRIGGER reject_claim_journal BEFORE INSERT ON progression_requests WHEN NEW.kind LIKE 'mail_claim:%' BEGIN SELECT RAISE(ABORT, 'isolated claim journal failure'); END").run();
+    try {
+      expect((await game(`/api/v1/mail/${id}/claim`, post({ requestId }, auth))).status).toBe(500);
+      expect((await db().prepare('SELECT claimed_at FROM mail WHERE id = ?1').bind(id).first<{ claimed_at: string | null }>())?.claimed_at).toBeNull();
+      expect(await db().prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id = ?1').bind(playerId).first()).toEqual({ n: 0 });
+    } finally { await db().prepare('DROP TRIGGER reject_claim_journal').run(); }
+    expect((await game(`/api/v1/mail/${id}/claim`, post({ requestId }, auth))).status).toBe(200);
+    const second = await sendMail(db(), playerId, { kind: 'reward', title: 'Different fixture', attachments: [{ type: 'currency', currency: 'eclipse_token', amount: 20 }] }, 'test');
+    expect((await game(`/api/v1/mail/${second.id}/claim`, post({ requestId }, auth))).status).toBe(409);
+    expect((await db().prepare('SELECT claimed_at FROM mail WHERE id = ?1').bind(second.id).first<{ claimed_at: string | null }>())?.claimed_at).toBeNull();
+  });
+
   it('lists, reads and claims a reward mail atomically; a second claim is refused', async () => {
     const { auth, playerId } = await signIn(`sub-mail-${key()}`);
     const { id } = await sendMail(db(), playerId, { kind: 'compensation', title: 'Sorry for the downtime', body: 'Thanks', attachments: [{ type: 'currency', currency: 'eclipse_token', amount: 320 }, { type: 'currency', currency: 'eclipse_token', amount: 5000 }], expiresInDays: 7 }, 'ops');

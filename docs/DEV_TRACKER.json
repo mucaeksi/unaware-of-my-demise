@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R05-C authoritative result/input recovery verified; claims/save/lifecycle next",
-      "detail": "555 application/tool tests, lint/typecheck, 28 Python checks and real-Worker desktop/phone status recovery pass. Migration 0025 binds exact original inputs; four failing-before identity-reuse regressions now reject changed requests. Continue claims/checkpoints/cloud-save/purchase lifecycle and player recovery UI."
+      "title": "R05-D mail/task result recovery verified; checkpoint/save next",
+      "detail": "561 application/tool tests and lint/typecheck pass; real desktop/phone account flows and four real-Worker response-loss/reload scenarios pass. Mail/tasks journal frozen original results atomically with their claim/grants, including window/catalog changes and rollback. Continue checkpoint/cloud-save and player/purchase lifecycle recovery."
     }
   ],
   "next": [
@@ -598,6 +598,28 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R05-D-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "4129b7b9089f43b1f47245a13d96f4876d3c54df",
+      "verifiedAt": "2026-10-13T07:37:38+00:00",
+      "scope": "R05-D working tree: new ID-bearing mail/task claims atomically record canonical input and original result in the existing progression request journal; concurrent same-ID retries replay once, completed task terms survive window/catalog changes, journal failure rolls marker/grants back and cross-mail identity reuse is rejected. Legacy no-ID callers retain one-time behavior. Active-account task transaction fence, durable client claim wrappers, exact status/result checks and definite first rejection versus prior ambiguity preserve intent. Two failing-before cases, four new API/two client cases, all 561 application/tool tests and lint/typecheck pass. Actual desktop/phone account UI flows and four real-Worker response-loss+reload scenarios (gacha/mail on both projects) pass; status recovery emits zero additional mutation POSTs. Both builds and all 25 local migrations pass. No native/deployed/complete-R05 or creative generation claim. Continuation runtime observation: scheduled 07:16:48 UTC CLI attempt produced model-startup HTTP 403, error items only and zero model/tool work. Only the verified owned CLI process group was terminated; parent scheduler remains live with exact interrupted-thread/fingerprint record and persisted next deadline 12:16:48 UTC (15:16:48 Europe/Bucharest). No successful model-execution/usage-reset proof.",
+      "testIds": [
+        "apps/api/test/mail.test.ts",
+        "apps/api/test/tasks.test.ts",
+        "apps/game/src/net/api.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "tests/e2e/account.spec.ts (both projects)",
+        "tests/e2e/operation-recovery.spec.ts (four cases, real Workers/25 migrations)",
+        "E2E game/admin builds"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -929,7 +951,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
-      "implemented": "R05-A auth fences, R05-B original durable identities/payload/account scopes and R05-C authoritative result/input binding with durable gear wrappers are locally verified. Exact new request inputs/results are immutable; legacy proof remains unknown. Claims/checkpoint/cloud-save/purchase lifecycle and player recovery UI remain open; native/deployed acceptance is separate.",
+      "implemented": "R05-A\u2013D auth fences, durable identities/payload/account scopes, authoritative exact result/input recovery and atomic mail/task result journals are locally verified. Summons, battles, growth/gear and claims have durable wrappers; legacy input proof remains unknown. Checkpoint/cloud-save, purchase lifecycle and player recovery UI remain open; native/deployed acceptance is separate.",
       "dependsOn": [
         "R01",
         "R02",
@@ -945,7 +967,10 @@
         "tests/e2e/operation-recovery.spec.ts",
         "apps/api/src/player/operations.ts",
         "apps/api/migrations/0025_operation_input_binding.sql",
-        "apps/api/test/operation-status.test.ts"
+        "apps/api/test/operation-status.test.ts",
+        "apps/api/src/db/operations.ts",
+        "apps/api/src/mail/service.ts",
+        "apps/api/src/tasks/service.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -953,7 +978,8 @@
         "E-EXTERNAL",
         "E-R05-A-20261013",
         "E-R05-B-20261013",
-        "E-R05-C-20261013"
+        "E-R05-C-20261013",
+        "E-R05-D-20261013"
       ],
       "blockerIds": []
     },

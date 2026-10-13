@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { RewardAttachment } from '@uomd/content-schema';
 import { HttpError } from '../content/store';
 import { grantStatements } from '../db/grants';
+import { operationStatement, recordedOperation } from '../db/operations';
 
 export const Attachment = RewardAttachment;
 export type Attachment = RewardAttachment;
@@ -68,14 +69,22 @@ export async function listMail(db: D1Database, playerId: string, now = new Date(
 }
 
 /** Atomically claims one mail: the guarded UPDATE, the ledger credits and the item grants succeed or fail together. */
-export async function claimMail(db: D1Database, playerId: string, mailId: number, now = new Date()): Promise<{ claimed: Attachment[] }> {
+export async function claimMail(db: D1Database, playerId: string, mailId: number, now = new Date(), requestId?: string): Promise<{ claimed: Attachment[]; requestId?: string; mailId?: number; replayed?: boolean }> {
+  const input = requestId ? { requestId } : null;
+  const kind = `mail_claim:${mailId}`;
+  const recorded = input ? await recordedOperation(db, playerId, kind, input) : null;
+  if (recorded) return recorded as { claimed: Attachment[]; requestId: string; mailId: number; replayed: boolean };
   const row = await db
     .prepare('SELECT id, kind, title, body, attachments, created_at, expires_at, claimed_at, read_at FROM mail WHERE id = ?1 AND player_id = ?2')
     .bind(mailId, playerId)
     .first<Omit<MailRow, 'attachments'> & { attachments: string }>();
   if (!row) throw new HttpError(404, 'mail_not_found', 'no such mail');
   const mail = parse(row);
-  if (mail.claimed_at) throw new HttpError(409, 'already_claimed', 'this mail was already claimed');
+  if (mail.claimed_at) {
+    const replay = input ? await recordedOperation(db, playerId, kind, input) : null;
+    if (replay) return replay as { claimed: Attachment[]; requestId: string; mailId: number; replayed: boolean };
+    throw new HttpError(409, 'already_claimed', 'this mail was already claimed');
+  }
   if (mail.expires_at <= now.toISOString()) throw new HttpError(409, 'expired', 'this mail has expired');
   const src = await db.prepare('SELECT source_key FROM mail WHERE id = ?1').bind(mailId).first<{ source_key: string | null }>();
   const order = subscriptionOrder(src?.source_key);
@@ -84,16 +93,20 @@ export async function claimMail(db: D1Database, playerId: string, mailId: number
     if (p?.state === 'refunded') throw new HttpError(409, 'revoked', 'this entitlement was revoked by a refund');
   }
 
+  const result = { claimed: mail.attachments, ...(requestId ? { requestId, mailId } : {}) };
   const batch: D1PreparedStatement[] = [
     db.prepare("UPDATE mail SET claimed_at = ?3, read_at = COALESCE(read_at, ?3) WHERE id = ?1 AND player_id = ?2 AND claimed_at IS NULL AND expires_at > ?3 AND EXISTS (SELECT 1 FROM players WHERE id = ?2 AND status <> 'deleted') AND (?4 IS NULL OR EXISTS (SELECT 1 FROM purchases WHERE order_id = ?4 AND player_id = ?2 AND state = 'granted' AND entitlement_state IN ('active', 'canceled', 'in_grace', 'expired')))")
       .bind(mailId, playerId, now.toISOString(), order ?? null),
     db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
     ...(await grantStatements(db, playerId, mail.attachments, { keyPrefix: `mail:${mailId}`, reason: `mail:${mail.kind}` }))
   ];
+  if (input) batch.push(operationStatement(db, playerId, kind, input, result));
   batch.push(db.prepare('DELETE FROM tx_guard'));
   try {
     await db.batch(batch);
   } catch (e) {
+    const replay = input ? await recordedOperation(db, playerId, kind, input) : null;
+    if (replay) return replay as { claimed: Attachment[]; requestId: string; mailId: number; replayed: boolean };
     const msg = String(e instanceof Error ? e.message : e);
     if (/CHECK constraint failed: ok = 1|UNIQUE constraint failed: ledger/i.test(msg)) {
       if (order) {
@@ -105,7 +118,7 @@ export async function claimMail(db: D1Database, playerId: string, mailId: number
     }
     throw e;
   }
-  return { claimed: mail.attachments };
+  return { ...result, ...(requestId ? { replayed: false } : {}) };
 }
 
 export async function markRead(db: D1Database, playerId: string, mailId: number, now = new Date()): Promise<void> {

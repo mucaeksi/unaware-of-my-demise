@@ -266,7 +266,9 @@ export class GameApi extends EventTarget {
         result = await this.call('POST', checked.path, checked.body);
         this.validateOperationResult(checked, result);
       } catch (error) {
-        const definite = attempts === 1 && error instanceof ApiError && [400, 402, 404, 422].includes(error.status);
+        const definite = attempts === 1 && error instanceof ApiError && ([400, 402, 403, 404, 413, 422].includes(error.status)
+          || error.status === 409 && ['already_claimed', 'expired', 'revoked', 'period_closed', 'not_done', 'at_cap', 'not_at_cap', 'max_rank', 'max_ascension',
+            'account_level_too_low', 'level_too_low', 'story_gate', 'equipped', 'locked', 'request_id_reused', 'entitlement_unavailable', 'release_not_economic'].includes(error.code));
         await this.journal.finish(checked.scope, checked.id, definite ? 'rejected' : 'pending', undefined, error instanceof ApiError ? error.code : 'confirmation_pending');
         this.dispatchEvent(new Event('operations'));
         throw error;
@@ -294,7 +296,8 @@ export class GameApi extends EventTarget {
   }
   private validateOperationResult(operation: OperationRecord, result: unknown): void {
     const value = result as { requestId?: string; pulls?: unknown[]; nodeId?: string; character?: string; level?: number; id?: number;
-      ascension?: number; skillId?: string; rank?: number; stats?: { subs?: unknown[] }; gained?: unknown[] } | null;
+      ascension?: number; skillId?: string; rank?: number; stats?: { subs?: unknown[] }; gained?: unknown[];
+      mailId?: number; claimed?: unknown[]; periodKey?: string; taskId?: string; rewards?: unknown[] } | null;
     if (!value || typeof value !== 'object'
       || operation.path === '/api/v1/gacha/pull' && (value.requestId !== operation.id || !Array.isArray(value.pulls) || value.pulls.length !== operation.body.count)
       || operation.path === '/api/v1/progress/battle' && (value.requestId !== operation.id || value.nodeId !== operation.body.nodeId)
@@ -305,7 +308,9 @@ export class GameApi extends EventTarget {
         || operation.path.endsWith('/level-up') && !Number.isSafeInteger(value.level)
         || operation.path.endsWith('/ascend') && !Number.isSafeInteger(value.ascension)
         || operation.path.endsWith('/reroll') && !Array.isArray(value.stats?.subs)
-        || operation.path.endsWith('/dismantle') && !Array.isArray(value.gained)))
+        || operation.path.endsWith('/dismantle') && !Array.isArray(value.gained))
+      || operation.path.startsWith('/api/v1/mail/') && (value.requestId !== operation.id || value.mailId !== Number(operation.path.split('/')[4]) || !Array.isArray(value.claimed))
+      || operation.path === '/api/v1/tasks/claim' && (value.requestId !== operation.id || value.taskId !== operation.body.taskId || value.periodKey !== operation.body.periodKey || !Array.isArray(value.rewards)))
       throw new ApiError(503, 'invalid_response', 'The action has not been confirmed');
   }
   async retryOperation<T>(id: string): Promise<T> {
@@ -360,7 +365,7 @@ export class GameApi extends EventTarget {
     return (await this.call<{ mail: MailItem[] }>('GET', '/api/v1/mail')).mail;
   }
   claimMail(id: number): Promise<{ claimed: MailItem['attachments'] }> {
-    return this.call('POST', `/api/v1/mail/${id}/claim`, {});
+    return this.mutate(`/api/v1/mail/${id}/claim`, {});
   }
   async products(): Promise<Product[]> {
     return (await this.call<{ products: Product[] }>('GET', '/api/v1/shop/products', undefined, false)).products;
@@ -439,7 +444,7 @@ export class GameApi extends EventTarget {
     return this.call('GET', '/api/v1/tasks');
   }
   claimTask(periodKey: string, taskId: string): Promise<unknown> {
-    return this.call('POST', '/api/v1/tasks/claim', { periodKey, taskId });
+    return this.mutate('/api/v1/tasks/claim', { periodKey, taskId });
   }
   exportAccount(): Promise<Record<string, unknown>> {
     return this.call('GET', '/api/v1/account/export');
