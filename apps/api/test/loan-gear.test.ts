@@ -45,6 +45,10 @@ it('chooses the lowest matching generic weapon and excludes signature ownership'
     await db.prepare(`INSERT INTO gear_defs (gear_id, slot, name_en, rarity, family, owner_character_id, level_cap, base_json)
       VALUES (?1, 'weapon', ?1, 3, ?2, ?3, 20, ?4)`).bind(id, character.weapon_type, owner, JSON.stringify({ atk: attack })).run();
   }
-  try { const result = await gear(); expect(result.flat.atk).toBeGreaterThanOrEqual(123); expect(result.flat.atk).toBeLessThan(125); }
+  try {
+    const result = await gear(); expect(result.flat.atk).toBeGreaterThanOrEqual(123); expect(result.flat.atk).toBeLessThan(125);
+    await db.prepare("UPDATE gear_defs SET extra_json = ?1 WHERE gear_id = 'aab_loan_generic'").bind('{"passive_effect_id":"future_loan_proc"}').run();
+    await expect(gear()).rejects.toMatchObject({ code: 'unsupported_gear_passive', status: 422 });
+  }
   finally { await db.prepare("DELETE FROM gear_defs WHERE gear_id IN ('aaa_loan_signature', 'aab_loan_generic')").run(); }
 });

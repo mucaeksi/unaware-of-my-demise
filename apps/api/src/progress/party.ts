@@ -66,6 +66,7 @@ export async function buildParty(db: D1Database, playerId: string, encounter: En
 
 async function ownedMember(db: D1Database, playerId: string, characterId: string, cfg: ProgressionConfig, affinity: Member['affinity']): Promise<Member> {
   const st = await computeCharacterStats(db, playerId, characterId, cfg);
+  if (st.unsupportedPassives.length) throw new HttpError(422, 'unsupported_gear_passive', 'an equipped passive is not available in battle yet; remove that item or choose other equipment');
   const ranks = await db.prepare('SELECT skill_ranks FROM player_chars WHERE player_id = ?1 AND character_id = ?2').bind(playerId, characterId).first<{ skill_ranks: string }>();
   const skillRanks = ranks ? JSON.parse(ranks.skill_ranks) as Record<string, number> : {};
   return { unit_id: characterId, level: st.level, stats: st.stats, ...equipmentEffects(st.other), ...(Object.keys(skillRanks).length ? { skill_ranks: skillRanks } : {}), affinity };

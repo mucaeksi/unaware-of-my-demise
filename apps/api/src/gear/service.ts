@@ -7,6 +7,7 @@ import { balanceOf, ledgerStatements } from '../db/ledger';
 import { cryptoRoll } from '../db/rng';
 import { loadProgressionConfig } from '../progression/characters';
 import { taskEventStatements } from '../tasks/service';
+import { gearPassive, requireSupportedGearPassive } from './effects';
 
 export const GearRequest = z.object({ requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/) }).strict();
 export const EquipBody = z.object({ characterId: z.string().regex(/^[a-z][a-z0-9_]{1,79}$/) }).strict();
@@ -63,7 +64,7 @@ export interface GearView {
   equippedBy: string | null;
   locked: boolean;
   stats: AccessoryStats | null;
-  passive: { name?: string; text?: string } | null;
+  passive: { name?: string; text?: string; supported: boolean } | null;
   canDismantle: boolean;
 }
 
@@ -72,7 +73,6 @@ export async function listGear(db: D1Database, playerId: string): Promise<GearVi
   const { results } = await db.prepare(`${JOIN} WHERE g.player_id = ?1 ORDER BY d.rarity DESC, g.slot, g.id`).bind(playerId).all<GearRow>();
   return results.map((g) => {
     const cap = Math.min(g.level_cap, gearLevelCap(cfg, g.ascension));
-    const extra = JSON.parse(g.extra_json) as { passive_name_en?: string; passive_effect_en?: string };
     return {
       id: g.id,
       gearId: g.gear_id,
@@ -89,7 +89,7 @@ export async function listGear(db: D1Database, playerId: string): Promise<GearVi
       equippedBy: g.equipped_by,
       locked: g.locked === 1,
       stats: g.slot === 'necklace' || g.slot === 'ring' ? (JSON.parse(g.stats_json) as AccessoryStats) : null,
-      passive: extra.passive_name_en ? { name: extra.passive_name_en, ...(extra.passive_effect_en ? { text: extra.passive_effect_en } : {}) } : null,
+      passive: gearPassive(g.extra_json),
       canDismantle: g.dismantle_allowed === 1 && g.equipped_by === null && g.locked === 0
     };
   });
@@ -152,6 +152,7 @@ export function equipGear(db: D1Database, playerId: string, id: number, characte
     if (!ch) throw new HttpError(404, 'not_owned', 'you do not own this character');
     if (g.slot === 'weapon' && g.owner_character_id !== characterId && g.family !== ch.weapon_type) throw new HttpError(422, 'wrong_weapon_type', 'this character cannot use that weapon type');
     if (g.slot === 'weapon' && g.owner_character_id && g.owner_character_id !== characterId) throw new HttpError(422, 'signature_locked', 'a signature weapon belongs to its character');
+    requireSupportedGearPassive(g.extra_json);
     for (let attempt = 0; attempt < 3; attempt++) {
       try {
         await db.batch([
@@ -261,7 +262,7 @@ export function rerollGear(db: D1Database, playerId: string, id: number, input: 
 }
 
 /** Final combat stats of an owned character: level growth + equipped gear + set bonuses. This is what a server-verified party will use. */
-export async function computeCharacterStats(db: D1Database, playerId: string, characterId: string, cfg?: ProgressionConfig): Promise<{ characterId: string; level: number; stats: { hp: number; atk: number; def: number; spd: number }; other: Record<string, number>; equipped: { id: number; slot: string; name: string }[] }> {
+export async function computeCharacterStats(db: D1Database, playerId: string, characterId: string, cfg?: ProgressionConfig): Promise<{ characterId: string; level: number; stats: { hp: number; atk: number; def: number; spd: number }; other: Record<string, number>; equipped: { id: number; slot: string; name: string }[]; unsupportedPassives: string[] }> {
   cfg ??= await loadProgressionConfig(db);
   const ch = await db
     .prepare("SELECT c.base_hp, c.base_atk, c.base_def, c.base_spd, c.growth_hp, c.growth_atk, c.growth_def, c.growth_spd, c.role FROM player_items i JOIN characters c ON c.id = i.item_id WHERE i.player_id = ?1 AND i.item_type = 'character' AND i.item_id = ?2")
@@ -288,7 +289,7 @@ export async function computeCharacterStats(db: D1Database, playerId: string, ch
   }));
   const gear = aggregateGear(cfg, pieces, roleStat, sets);
   const stats = finalStats({ hp: ch.base_hp, atk: ch.base_atk, def: ch.base_def, spd: ch.base_spd }, { hp: ch.growth_hp, atk: ch.growth_atk, def: ch.growth_def, spd: ch.growth_spd }, level, gear);
-  return { characterId, level, stats, other: gear.other, equipped: results.map((g) => ({ id: g.id, slot: g.slot, name: g.name_en })) };
+  return { characterId, level, stats, other: gear.other, equipped: results.map((g) => ({ id: g.id, slot: g.slot, name: g.name_en })), unsupportedPassives: results.filter((g) => gearPassive(g.extra_json)).map((g) => g.gear_id) };
 }
 
 export async function characterStats(db: D1Database, playerId: string, characterId: string): Promise<Record<string, unknown>> {

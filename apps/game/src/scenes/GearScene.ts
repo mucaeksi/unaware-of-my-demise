@@ -7,7 +7,7 @@ import { Button, txt } from '../ui/kit';
 import { F, T } from '../ui/theme';
 
 const PER_PAGE = 6;
-const statLine = (g: GearView): string => (g.stats ? [g.stats.main, ...g.stats.subs].map((s) => `${s.stat.replace('_pct', '%')} ${s.value}`).join(' · ') : (g.passive?.name ?? ''));
+const statLine = (g: GearView): string => (g.stats ? [g.stats.main, ...g.stats.subs].map((s) => `${s.stat.replace('_pct', '%')} ${s.value}`).join(' · ') : (g.passive ? `${g.passive.name}${g.passive.supported === false ? ' · Passive not available yet' : ''}` : ''));
 
 /** Gear list. Opened from a companion it filters to one slot and offers Equip; opened alone it lists everything. */
 export class GearScene extends HubScene {
@@ -49,7 +49,7 @@ export class GearScene extends HubScene {
       this.add_(txt(this, 190, y - 24, `${g.name}  ${stars(g.rarity)}`, { fontFamily: F.display, fontSize: '28px', fontStyle: '600' }).setOrigin(0, 0.5));
       this.add_(txt(this, 190, y + 22, `${g.slot} · Lv ${g.level}/${g.levelCap}${g.equippedBy ? ` · on ${g.equippedBy}` : ''}   ${statLine(g)}`, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
       if (this.characterId) {
-        this.add_(new Button(this, REF_W - 250, y, { label: mine ? 'REMOVE' : 'EQUIP', w: 280, h: 90, fontSize: 28, variant: mine ? 'normal' : 'hot', onClick: () => void this.act(async () => { if (mine) await Services.api.unequip(g.id); else await Services.api.equip(g.id, this.characterId as string); this.say(mine ? 'Removed' : 'Equipped'); }) }));
+        this.add_(new Button(this, REF_W - 250, y, { label: mine ? 'REMOVE' : 'EQUIP', w: 280, h: 90, fontSize: 28, variant: mine ? 'normal' : 'hot', onClick: () => void this.act(async () => { if (mine) await Services.api.unequip(g.id); else await Services.api.equip(g.id, this.characterId as string); this.say(mine ? 'Removed' : 'Equipped'); }) }).setEnabled(mine || g.passive?.supported !== false));
       }
     });
     const pages = Math.max(1, Math.ceil(this.list.length / PER_PAGE));

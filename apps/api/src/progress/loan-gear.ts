@@ -3,6 +3,7 @@ import { aggregateGear, rollAccessory, type GearPiece, type GearStats, type Prog
 import { crc32, Rng } from '@uomd/shared';
 import { z } from 'zod';
 import { HttpError } from '../content/store';
+import { requireSupportedGearPassive } from '../gear/effects';
 
 const Pool = z.array(z.object({ stat_id: z.string().min(1).max(100), weight: z.number().positive().max(100_000), unit: z.enum(['percent', 'flat']),
   min_value: z.number().min(0), max_value: z.number().min(0) }).refine((entry) => entry.min_value <= entry.max_value, 'invalid stat range')).min(1).max(40);
@@ -24,6 +25,7 @@ export async function loanGear(db: D1Database, characterId: string, weaponType: 
   try {
     const defs = [batches[0]!.results[0], batches[1]!.results[0], ...batches.slice(4).map((batch) => batch.results[0])] as Definition[];
     const pieces: GearPiece[] = defs.map((def) => {
+      requireSupportedGearPassive(def.extra_json);
       const piece: GearPiece = { slot: def.slot, setId: def.set_id, level: template.level, ascension: template.ascension,
         base: JSON.parse(def.base_json), growth: JSON.parse(def.growth_json) };
       if (def.slot === 'necklace' || def.slot === 'ring') {

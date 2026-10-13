@@ -5,6 +5,7 @@ import { applyLedger } from '../src/db/ledger';
 import { sendMail } from '../src/mail/service';
 import { claimMail } from '../src/mail/service';
 import { game, post, seedCanonCatalog, signIn } from './helpers';
+import { gearPassive, requireSupportedGearPassive } from '../src/gear/effects';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 let n = 0;
@@ -28,6 +29,23 @@ const call = (auth: Record<string, string>, path: string, body: unknown = {}) =>
 const list = async (auth: Record<string, string>) => ((await (await game('/api/v1/gear', { headers: auth })).json()) as { gear: { id: number; slot: string; level: number; levelCap: number; equippedBy: string | null; stats: { main: { stat: string }; subs: unknown[] } | null; ascension: number; canDismantle: boolean }[] }).gear;
 
 describe('gear: grants and equipping', () => {
+  it('rejects malformed passive metadata and future effect IDs without interpreting text', () => {
+    for (const value of ['invalid-json', '{"passive_effect_id":42}', '{"passive_name_en":null}']) expect(() => gearPassive(value)).toThrow(expect.objectContaining({ code: 'invalid_gear_definition', status: 503 }));
+    expect(() => requireSupportedGearPassive('{"passive_effect_id":"future_proc"}')).toThrow(expect.objectContaining({ code: 'unsupported_gear_passive', status: 422 }));
+    expect(gearPassive('{"main":[],"sub":[]}')).toBeNull();
+  });
+  it('refuses an undefined advertised passive before replacing working gear or writing state', async () => {
+    const { auth, playerId } = await player();
+    const [sword, signature] = await give(playerId, ['weapon_arming_sword_3_01', 'weapon_mahmut_signature']);
+    expect((await call(auth, `/gear/${sword}/equip`, { characterId: 'mahmut' })).status).toBe(200);
+    const before = (await db().prepare('SELECT * FROM player_gear WHERE player_id = ?1 ORDER BY id').bind(playerId).all()).results;
+    const response = await call(auth, `/gear/${signature}/equip`, { characterId: 'mahmut' });
+    expect(response.status).toBe(422);
+    expect(await response.json()).toMatchObject({ error: 'unsupported_gear_passive' });
+    expect((await db().prepare('SELECT * FROM player_gear WHERE player_id = ?1 ORDER BY id').bind(playerId).all()).results).toEqual(before);
+    const inventory = await (await game('/api/v1/gear', { headers: auth })).json() as { gear: { id: number; passive: unknown }[] };
+    expect(inventory.gear.find((g) => g.id === signature)?.passive).toMatchObject({ supported: false });
+  });
   it('reusing a gear upgrade identity with different XP is rejected without another spend', async () => {
     const { auth, playerId } = await player({ stacks: { weapon_tempering_xp: 100 }, funds: 100 });
     const [id] = await give(playerId, ['weapon_arming_sword_3_01']); const requestId = rid();

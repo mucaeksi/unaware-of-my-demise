@@ -107,7 +107,7 @@ export interface GearView {
   equippedBy: string | null;
   locked: boolean;
   stats: { main: { stat: string; value: number }; subs: { stat: string; value: number }[] } | null;
-  passive: { name: string; text?: string } | null;
+  passive: { name: string; text?: string; supported?: boolean } | null;
 }
 export interface TaskView {
   id: string;

@@ -133,3 +133,33 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   expect(await page.evaluate(() => (window as any).__UOMD__.services.api.signedIn)).toBe(false);
   expect(problems.filter((p) => !p.includes('favicon') && !p.includes('HTTP 401') && !p.includes('HTTP 402'))).toEqual([]);
 });
+
+test('armory: unsupported signature is disclosed and disabled while ordinary gear still equips', async ({ page, request }, info) => {
+  const problems = await openGame(page);
+  const token = await googleToken(`e2e-gear-passive-${info.project.name}`);
+  const player = await page.evaluate(async (t) => (window as any).__UOMD__.services.api.signInWithIdToken(t), token);
+  const sent = await admin(request, `/admin/api/players/${player.id}/mail`, { reason: 'isolated equipment capability test', mail: { kind: 'reward', title: 'Equipment fixture', attachments: [{ type: 'gear', gearId: 'weapon_mahmut_signature' }, { type: 'gear', gearId: 'weapon_arming_sword_3_01' }] } });
+  await call(page, `/api/v1/mail/${sent.id}/claim`, { method: 'POST', body: {} });
+  await page.evaluate(() => {
+    const game = (window as any).__UOMD__.game;
+    game.scene.getScenes(true).forEach((s: any) => game.scene.stop(s.sys.settings.key));
+    game.scene.start('Gear', { characterId: 'mahmut', slot: 'weapon' });
+  });
+  await waitScene(page, 'Gear');
+  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').list?.length)).toBe(2);
+  await page.evaluate(() => new Promise<void>((resolve) => (window as any).__UOMD__.game.events.once('postrender', resolve)));
+  let equips = 0;
+  page.on('request', (r) => { if (/\/gear\/\d+\/equip$/.test(r.url())) equips++; });
+  const disclosure = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').body.list.filter((o: any) => typeof o.text === 'string').map((o: any) => o.text).join('\n'));
+  expect(disclosure).toContain('Passive not available yet');
+  await tap(page, info, REF_W - 250, 260);
+  expect(equips).toBe(0);
+  await tap(page, info, REF_W - 250, 380);
+  await expect.poll(async () => (await call(page, '/api/v1/gear')).gear.find((g: any) => g.gearId === 'weapon_arming_sword_3_01')?.equippedBy).toBe('mahmut');
+  expect(equips).toBe(1);
+  await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Gear').busy)).toBe(true);
+  await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Gear').cameras.main.fadeEffect.isRunning)).toBe(true);
+  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').children.list.some((o: any) => o.list?.some((c: any) => c.text === 'Equipped')))).toBe(false);
+  await page.screenshot({ path: `${SHOTS}/${info.project.name}-gear-passive-unavailable.png` });
+  expect(problems.filter((p) => !p.includes('favicon'))).toEqual([]);
+});

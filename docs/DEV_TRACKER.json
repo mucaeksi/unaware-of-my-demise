@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R06-D1 heal/action Focus snapshot locally verified; GitHub delivery blocked",
-      "detail": "612 application/tool tests, lint/typecheck, both builds and real desktop campaign pass. Closed version1 owned/loan bonuses freeze and replay to identical server hash. Resistance/procs and broader conformance remain open. Main last confirmed54e27c74; local d791b0f9/b93d0168 and this slice await restored GitHub authentication."
+      "title": "R06-D1/D2 heal/action Focus and undefined-passive guards verified locally; main delivery blocked",
+      "detail": "615 application/tool tests,33 Python checks/lint/typecheck/builds pass; real desktop campaign and desktop/phone Armory pass. Snapshots freeze supported effects; undefined procs are explicitly rejected/disclosed without inventory/history changes. Effect/element resistance/broader conformance remain; R06 partial. Main last confirmed54e27c74; four verified local commits await restored GitHub authentication."
     }
   ],
   "next": [
@@ -850,6 +850,29 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R06-D2-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "573705db",
+      "verifiedAt": "2026-10-13T13:49:36.075134+00:00",
+      "scope": "R06-D2 working tree: bounded validated passive metadata; authored signature echoes lack finite ops/magnitude and are explicitly unsupported. New equips reject422 before slot/instance writes, computed owned snapshot and virtual loans reject before admission. Inventory marks supportedfalse; Armory explains/disabled EQUIP and retains legacy REMOVE. Old frozen session finishes unchanged; item ownership/delivery/grants/prices/history intact. Two regressions fail previous source; malformed/future-ID and virtual-loan guards pass.615 application/tool tests,33 Python/lint/typecheck/builds25 migrations pass. Actual isolated local game/admin Workers, desktop/phone real signed fixture identity, mailed/claimed signature+generic gear: unavailable tap zero equip requests, ordinary gear one success, no console errors. Screens inspected. Not creative assets/proc definition/native/deployed/full-R06 acceptance. Main authentication still blocked after54e27c74; four local verified commits pending fresh fetch/integration. Final Graphify3051 nodes7511 edges156 communities; settled desktop/phone shots captured after toast/fade removal.",
+      "testIds": [
+        "apps/api/test/gear.test.ts",
+        "apps/api/test/owned-battle.test.ts",
+        "apps/api/test/loan-gear.test.ts",
+        "tests/e2e/account.spec.ts (armory desktop and phone)",
+        "npm test (615)",
+        "npm run lint",
+        "npm run typecheck",
+        "python3 -m unittest discover -s tools/tests (33)",
+        "python3 tools/sync_codex_skills.py --check (46)",
+        "game/admin builds and25 local migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1237,7 +1260,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Correct Break/Auto/expiry/procs, loan equipment and compatible progression limits with deterministic replay.",
-      "implemented": "R06-A/B/C1/C2 control/boss Auto/replay, coherent supported progression/materials and owned-versus-loaned snapshot equipment are locally verified. Canonical unowned loan template/CRC seeds preserve legacy releases. Secondary/proc effects and broader conformance remain; effective stage identity authority follows R07/R08. C2 delivery blocked by current GitHub authentication. R06-D1 adds closed version1 owned/loan outgoing-heal and normal-action Focus snapshots with identical authoritative replay; effect/element resistance, undefined signature procs and broader conformance remain open.",
+      "implemented": "R06-A/B/C1/C2 control/boss Auto/replay, coherent supported progression/materials and owned-versus-loaned snapshot equipment are locally verified. Canonical unowned loan template/CRC seeds preserve legacy releases. Secondary/proc effects and broader conformance remain; effective stage identity authority follows R07/R08. C2 delivery blocked by current GitHub authentication. R06-D1 adds closed version1 owned/loan outgoing-heal and normal-action Focus snapshots with identical authoritative replay; effect/element resistance, undefined signature procs and broader conformance remain open. R06-D2 validates/discloses/rejects undefined authored passive effects at new equip/owned/virtual admission, with unchanged frozen sessions and retained inventory/removal.",
       "dependsOn": [
         "R01"
       ],
@@ -1259,7 +1282,10 @@
         "apps/api/test/loan-gear.test.ts",
         "packages/shared/src/crc32.test.ts",
         "packages/combat/src/equipment.test.ts",
-        "packages/content-schema/src/story.ts"
+        "packages/content-schema/src/story.ts",
+        "apps/api/src/gear/effects.ts",
+        "apps/game/src/scenes/GearScene.ts",
+        "tests/e2e/account.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1269,7 +1295,8 @@
         "E-R06-B-20261013",
         "E-R06-C1-20261013",
         "E-R06-C2-20261013",
-        "E-R06-D1-20261013"
+        "E-R06-D1-20261013",
+        "E-R06-D2-20261013"
       ],
       "blockerIds": [
         "B-ECONOMY"

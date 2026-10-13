@@ -173,6 +173,23 @@ describe('owned-hero battles are fought with a server-frozen party', () => {
     expect((await db().prepare('SELECT COUNT(*) AS n FROM battle_sessions WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(0);
   });
 
+  it('requires removal of a legacy equipped undefined passive before a new battle but keeps the item', async () => {
+    const { auth, playerId } = await signIn(`sub-ob-${rid()}`);
+    const before = await start(auth); expect(before.status).toBe(200);
+    const old = await before.json() as { sessionId: string; party: BattleParty };
+    const mail = await sendMail(db(), playerId, { kind: 'reward', title: 'legacy passive fixture', attachments: [{ type: 'gear', gearId: 'weapon_mahmut_signature' }] }, 'test');
+    await claimMail(db(), playerId, mail.id);
+    const gear = await db().prepare("SELECT id FROM player_gear WHERE player_id = ?1 AND gear_id = 'weapon_mahmut_signature'").bind(playerId).first<{ id: number }>();
+    await db().prepare("UPDATE player_gear SET equipped_by = 'mahmut' WHERE id = ?1").bind(gear!.id).run();
+    const response = await start(auth); expect(response.status).toBe(422);
+    expect(await response.json()).toMatchObject({ error: 'unsupported_gear_passive' });
+    expect((await db().prepare('SELECT COUNT(*) AS n FROM battle_sessions WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(1);
+    expect((await submit(auth, { sessionId: old.sessionId, actions: playAuto(pack, encounter, old.party).actions })).status).toBe(200);
+    expect((await game(`/api/v1/gear/${gear!.id}/unequip`, post({}, auth))).status).toBe(200);
+    expect((await start(auth)).status).toBe(200);
+    expect(await db().prepare('SELECT gear_id FROM player_gear WHERE id = ?1').bind(gear!.id).first()).toEqual({ gear_id: 'weapon_mahmut_signature' });
+  });
+
   it('a fixed story encounter also freezes a release session and starts with a null party', async () => {
     const { auth } = await signIn(`sub-ob-${rid()}`);
     const r = await start(auth, 't1');
