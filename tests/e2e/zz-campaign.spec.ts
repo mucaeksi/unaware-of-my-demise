@@ -60,7 +60,7 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
   await page.reload();
   await page.waitForFunction(() => (window as any).__UOMD__?.game.scene.isActive('Title'), null, { timeout: 60_000 });
   await expect.poll(nodeIds, { timeout: 30_000 }).toContain('stage_1_2');
-  // the chapter list scrolls (36 nodes) and shows the campaign
+  // the chapter list scrolls and shows the complete 51-entry canonical campaign
   await goto(page, 'Chapters');
   await waitScene(page, 'Chapters');
   await page.waitForTimeout(1500);
@@ -81,6 +81,11 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
   };
   const claimed = (id: string): Promise<boolean> => page.evaluate(async (n) => ((await (window as any).__UOMD__.services.api.progress()).nodes as any[]).some((x) => x.node_id === n && x.stars >= 1), id);
 
+  await play(page, 'opening_sad_scene');
+  await waitScene(page, 'Story');
+  await skipStory(page, info, 'Chapters');
+  expect(await page.evaluate(async () => ((await (window as any).__UOMD__.services.api.progress()).nodes as any[]).find((node: any) => node.node_id === 'opening_sad_scene'))).toMatchObject({ stars: 0, clears: 1 });
+
   // 1-1: the guided two-hero stage (fixed party)
   await play(page, 'stage_1_1');
   await skipStory(page, info, 'Battle').catch(() => undefined);
@@ -91,6 +96,7 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
   await goto(page, 'Chapters');
   await waitScene(page, 'Chapters');
   await play(page, 'stage_1_2');
+  await skipStory(page, info, 'Battle');
   await waitScene(page, 'Battle');
   await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 60_000 }).toBeTruthy();
   const party = await page.evaluate(() => {

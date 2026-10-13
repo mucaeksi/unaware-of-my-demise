@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_7_3_pre",
+  "title_en": "The Names We Kept",
+  "location_id": "altar_first_eclipse",
+  "production": {
+    "direction_en": "A round archive is carved into the stairwell. Aveline, Mirel, Clem, Pippa and Kera rebuild the erased record from copied names, bell rubbings and Jori's forge marks.",
+    "music_direction_en": "pre: bgm_ledger_motif under the voices reading names | post: bgm_fadyme_theme with choir when the name is written back; this is the emotional peak before the boss"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "altar_first_eclipse"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_pre_001",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "The ledger was written over, not burned. Someone needed the names to remain beneath the ink.",
+      "emotion": "focused",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_pre_002",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "I can read the prayer beneath it. The names were offered as witnesses, not sacrifices.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_pre_007",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "I came here to be offered. They are asking me to be witnessed.",
+      "emotion": "tender",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_pre_003",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "Witnesses to what?",
+      "emotion": "curious",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_pre_004",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "To a promise. The last line says, 'Let the lost hour be remembered by the living.'",
+      "emotion": "tender",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_pre_005",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "There is one space scraped clean. It is the same length as Fadyme's name.",
+      "emotion": "careful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_pre_006",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then write it back. A name should not vanish just because someone feared what it meant.",
+      "emotion": "composed",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_pre_008",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "I will sing it while you write. The page will not dare lose its place.",
+      "emotion": "bright",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_7_3_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#vn_7_3.pre_battle_lines",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

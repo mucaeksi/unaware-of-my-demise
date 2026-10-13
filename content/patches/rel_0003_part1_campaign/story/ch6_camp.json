@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch6_camp",
+  "title_en": "Separate Roads",
+  "location_id": "ashen_estate_ruins",
+  "production": {
+    "direction_en": "Dawn among the estate ruins. The company divides to reach the altar by safe roads.",
+    "music_direction_en": "bgm_camp (dawn version) → bgm_held_the_road (first quiet statement) as the company divides"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "ashen_estate_ruins"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch6_camp_001",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "The schedule points to the First Eclipse Altar. Everyone go by different roads. Fewer targets.",
+      "emotion": "decisive",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch6_camp_002",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "The servants and the wounded go with Nara and Marek.",
+      "emotion": "firm_kind",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch6_camp_003",
+      "speaker": "sable_wren",
+      "speaker_display": "Sable",
+      "text": "I go ahead. Lanterns.",
+      "emotion": "terse",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch6_camp_004",
+      "speaker": "hana_birch",
+      "speaker_display": "Hana",
+      "text": "Fadyme. I am still not telling. But please be careful on the stairs.",
+      "emotion": "worried",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch6_camp_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I will be the most careful person on any stair.",
+      "emotion": "small_smile",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch6_camp_006",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We meet at the altar. All of us.",
+      "emotion": "resolved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch6_camp_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch06.json#ch6_camp.lines",
+    "source_sha256": "78d568bd266181e0dc93946e494939bcc85eb87b6317293ee9c01d76fe7dc2d3"
+  }
+}

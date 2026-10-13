@@ -169,12 +169,16 @@ export class ContentStore {
       if (!dep || dep.state !== 'published') throw new HttpError(409, 'bad_dependency', `dependency ${input.dependsOn} must be a published release`);
       dependsGeneration = dep.generation;
     }
-    const placeholders = input.files.map((_, i) => `?${i + 1}`).join(',');
-    const { results } = await this.db
-      .prepare(`SELECT sha256, bytes FROM content_objects WHERE sha256 IN (${placeholders})`)
-      .bind(...input.files.map((f) => f.sha256))
-      .all<{ sha256: string; bytes: number }>();
-    const sizes = new Map(results.map((r) => [r.sha256, r.bytes]));
+    // D1 permits at most 100 bound parameters per query. Full story patches exceed that.
+    const hashes = [...new Set(input.files.map((file) => file.sha256))];
+    const sizes = new Map<string, number>();
+    for (let offset = 0; offset < hashes.length; offset += 100) {
+      const chunk = hashes.slice(offset, offset + 100);
+      const placeholders = chunk.map((_, i) => `?${i + 1}`).join(',');
+      const { results } = await this.db.prepare(`SELECT sha256, bytes FROM content_objects WHERE sha256 IN (${placeholders})`)
+        .bind(...chunk).all<{ sha256: string; bytes: number }>();
+      for (const result of results) sizes.set(result.sha256, result.bytes);
+    }
     const missing = input.files.filter((f) => !sizes.has(f.sha256));
     if (missing.length > 0) throw new HttpError(409, 'missing_objects', `${missing.length} object(s) were not uploaded`, missing.map((m) => m.path));
 

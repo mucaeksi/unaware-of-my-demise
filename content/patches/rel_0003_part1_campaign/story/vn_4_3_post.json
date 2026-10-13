@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_4_3_post",
+  "title_en": "The Measure of a Life",
+  "location_id": "undercity_subterranean",
+  "production": {
+    "direction_en": "Clem unlocks a narrow archive room. Mahmut waits at the stairwell while Fadyme asks for a private reading.",
+    "music_direction_en": "pre: bgm_ch4_undercity (uneasy layer) | post: bgm_fadyme_theme — first time the theme is played in a minor key"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_subterranean"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_3_post_001",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "He will ask what I told you.",
+      "emotion": "concern",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_3_post_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Tell him the elixir might work.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_3_post_003",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "That is a lie.",
+      "emotion": "direct",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_3_post_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "It is a small one. Let me keep it.",
+      "emotion": "pleading",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_3_post_005",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "Mahmut has already given enough years to my name.",
+      "emotion": "sad",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_4_3_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch04.json#vn_4_3.post_battle_lines",
+    "source_sha256": "775fd32544c516eacce722b7f5b5398c785faab3744f555c8e6310d5e9a864de"
+  }
+}

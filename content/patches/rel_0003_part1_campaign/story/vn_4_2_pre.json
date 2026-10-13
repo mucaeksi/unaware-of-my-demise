@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_4_2_pre",
+  "title_en": "The Red Vial Ward",
+  "location_id": "undercity_subterranean",
+  "production": {
+    "direction_en": "Tilda and Iona have turned a storage room into a clinic. Kera sets the recovered ledger beside their medicine jars.",
+    "music_direction_en": "pre: bgm_warmth (muted: a clinic in a storage room) | post: bgm_quiet_sorrow on 'Fear takes longer.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_subterranean"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_2_pre_001",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "We have one clean table and three patients. I can make it four if you stop bleeding on it.",
+      "emotion": "dry_kind",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_2_pre_002",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "She means welcome. Sit down before you fall down.",
+      "emotion": "calm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_2_pre_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I brought the ledger. Do not let anyone spill medicine on it.",
+      "emotion": "tsundere",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_4_2_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch04.json#vn_4_2.pre_battle_lines",
+    "source_sha256": "775fd32544c516eacce722b7f5b5398c785faab3744f555c8e6310d5e9a864de"
+  }
+}

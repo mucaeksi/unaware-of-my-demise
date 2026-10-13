@@ -30,13 +30,13 @@ describe('authoritative reward-free story progress', () => {
   it('records a zero-star story once and unlocks its following battle without spending or granting', async () => {
     const { auth, playerId } = await signIn('story-new-account');
     expect((await game('/api/v1/progress/battle/start', post({ releaseId: 'rel_0001', nodeId: 't1' }, auth))).status).toBe(403);
-    const wallet = await baseEnv.DB.prepare('SELECT * FROM wallets WHERE player_id = ?1').bind(playerId).all();
+    const wallet = (await baseEnv.DB.prepare('SELECT * FROM wallets WHERE player_id = ?1').bind(playerId).all()).results;
     const response = await complete(auth);
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({ nodeId: 'story_start', releaseId: 'rel_0001', completed: true, replayed: false });
     expect(await baseEnv.DB.prepare('SELECT stars, clears FROM player_progress WHERE player_id = ?1 AND node_id = ?2').bind(playerId, 'story_start').first()).toEqual({ stars: 0, clears: 1 });
     expect((await game('/api/v1/progress/battle/start', post({ releaseId: 'rel_0001', nodeId: 't1' }, auth))).status).toBe(200);
-    expect(await baseEnv.DB.prepare('SELECT * FROM wallets WHERE player_id = ?1').bind(playerId).all()).toEqual(wallet);
+    expect((await baseEnv.DB.prepare('SELECT * FROM wallets WHERE player_id = ?1').bind(playerId).all()).results).toEqual(wallet);
     expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM player_ration WHERE player_id = ?1').bind(playerId).first()).toEqual({ n: 0 });
     expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id = ?1').bind(playerId).first()).toEqual({ n: 0 });
   });

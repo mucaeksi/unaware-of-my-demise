@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_3_2_post",
+  "title_en": "A Smith’s Last Bell",
+  "location_id": "village_oakhaven",
+  "production": {
+    "direction_en": "Jori has wedged her compact forge shield beneath the gate. She is too small to hold the door alone, but refuses to step away. Kera arrives on the Guild road with her rebuilt cart.",
+    "music_direction_en": "pre: bgm_tension (hammered anvil hits in the rhythm) | post: bgm_warmth (Jori held the gate)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "village_oakhaven"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_2_post_001",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You held the gate long enough for everyone to run.",
+      "emotion": "respectful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_2_post_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "I made the shield because I was tired of doors being the only thing between us and danger.",
+      "emotion": "honest",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_2_post_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then walk with us. A shield belongs where people need it.",
+      "emotion": "warm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_3_2_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch03.json#vn_3_2.post_battle_lines",
+    "source_sha256": "c48d1d1059fce39c2a35723ad4c692f3a7bc05289af8e7daa87b08ae4f333617"
+  }
+}

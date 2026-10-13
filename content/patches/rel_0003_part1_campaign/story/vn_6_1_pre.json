@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_6_1_pre",
+  "title_en": "The Servants’ Entrance",
+  "location_id": "estate_ashen_lord",
+  "production": {
+    "direction_en": "Sable opens the servants’ entrance from inside. A dozen servants wait in the dark, afraid to speak above a whisper.",
+    "music_direction_en": "pre: bgm_ch6_estate — whispering, soft clock ticks that stop and start | post: bgm_warmth (muted)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "estate_ashen_lord"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_1_pre_001",
+      "speaker": "sable_wren",
+      "speaker_display": "Sable",
+      "text": "No names until we are outside. The walls listen here.",
+      "emotion": "hushed",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_1_pre_002",
+      "speaker": "hana_birch",
+      "speaker_display": "Hana",
+      "text": "There are children under the stair. I can get them out.",
+      "emotion": "nervous",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_1_pre_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Take the rear passage. We will keep the sentinel busy.",
+      "emotion": "steady",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_6_1_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch06.json#vn_6_1.pre_battle_lines",
+    "source_sha256": "78d568bd266181e0dc93946e494939bcc85eb87b6317293ee9c01d76fe7dc2d3"
+  }
+}

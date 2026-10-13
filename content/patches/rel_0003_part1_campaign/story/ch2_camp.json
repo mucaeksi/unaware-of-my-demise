@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch2_camp",
+  "title_en": "What We Did Not Say",
+  "location_id": "cathedral_saint_luthos",
+  "production": {
+    "direction_en": "The cathedral refuge after the Bell-Widow's escape. Fadyme finds Mahmut on the tower stair.",
+    "music_direction_en": "bgm_fadyme_theme (solo piano, slow) on the tower stair; no strings until the last line"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "cathedral_saint_luthos"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_camp_001",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You knew her.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_camp_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Yes.",
+      "emotion": "low",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_camp_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You said no. In the rain. You said it very fast.",
+      "emotion": "steady",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_camp_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "I thought if you did not know her, she could not frighten you.",
+      "emotion": "ashamed",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_camp_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "That is a very foolish reason.",
+      "emotion": "soft",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_camp_006",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "And it is mine too. I cannot scold him without scolding myself.",
+      "emotion": "guilt",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_camp_007",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Tell me the rest when you can. I will not ask tonight.",
+      "emotion": "gentle",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_camp_008",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "That is a kinder bargain than I deserve.",
+      "emotion": "tired",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch2_camp_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch02.json#ch2_camp.lines",
+    "source_sha256": "8dc93d395a80583c66955dbe30fca66040d23aa972648a8d062edb22ae32eb0a"
+  }
+}

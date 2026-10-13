@@ -30,7 +30,29 @@ describe('validateContentSet', () => {
     expect(validateContentSet(load(join(ROOT, 'base')))).toMatchObject({ nodes: 3, units: 4 });
   });
   it('accepts base + the Part I campaign (35 stages, the full cast, placeholder art) as one effective set', () => {
-    expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 38, units: 47 });
+    expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 54, units: 47 });
+  });
+  it.each(['entry omission', 'chapter order', 'gate removal', 'scene link', 'line removal', 'line order', 'source hash', 'phase', 'boss', 'duplicate phase'] as const)('rejects canonical story %s before publication', (kind) => {
+    const files = campaign();
+    if (['entry omission', 'chapter order', 'gate removal', 'scene link'].includes(kind)) edit<ChapterIndex>(files, 'chapters/chapter_index.json', (index) => {
+      if (kind === 'entry omission') index.story_coverage!.entries.pop();
+      if (kind === 'chapter order') index.chapters.reverse();
+      if (kind === 'gate removal') delete index.chapters[1]!.nodes[1]!.requires;
+      if (kind === 'scene link') index.chapters[1]!.nodes[0]!.story = 'story/ch1_camp.json';
+    });
+    if (['line removal', 'line order', 'source hash'].includes(kind)) {
+      const scene = JSON.parse(new TextDecoder().decode(files.get('story/opening_sad_scene.json')));
+      if (kind === 'line removal') scene.commands.splice(scene.commands.findIndex((command: { op: string }) => command.op === 'say'), 1);
+      if (kind === 'line order') { const lines = scene.commands.filter((command: { op: string }) => command.op === 'say'); [lines[0].line_id, lines[1].line_id] = [lines[1].line_id, lines[0].line_id]; }
+      if (kind === 'source hash') scene.provenance.source_sha256 = '0'.repeat(64);
+      files.set('story/opening_sad_scene.json', enc.encode(JSON.stringify(scene)));
+    }
+    if (['phase', 'boss', 'duplicate phase'].includes(kind)) edit<Encounter>(files, 'encounters/stage_7_5.json', (encounter) => {
+      if (kind === 'phase') encounter.phase_stories![0]!.phase_id = 'missing_phase';
+      if (kind === 'boss') encounter.phase_stories![0]!.unit_id = 'mahmut';
+      if (kind === 'duplicate phase') encounter.phase_stories!.push(structuredClone(encounter.phase_stories![0]!));
+    });
+    expect(() => validateContentSet(files)).toThrow(/story coverage|boss phase|phase story binding/);
   });
   it.each(['unit', 'skill', 'status', 'phase', 'objective'] as const)('rejects duplicate %s identities across the effective unit pack', (kind) => {
     const files = campaign();
@@ -68,8 +90,8 @@ describe('validateContentSet', () => {
   });
   it('accepts acyclic cross-chapter prerequisites regardless of chapter order', () => {
     const files = campaign();
-    edit<ChapterIndex>(files, 'chapters/chapter_index.json', (index) => { index.chapters.reverse(); });
-    expect(validateContentSet(files)).toMatchObject({ chapters: 8, nodes: 38 });
+    edit<ChapterIndex>(files, 'chapters/chapter_index.json', (index) => { delete index.story_coverage; index.chapters.reverse(); });
+    expect(validateContentSet(files)).toMatchObject({ chapters: 8, nodes: 54 });
   });
   it.each(['party slot', 'enemy slot', 'hero', 'guest'] as const)('rejects repeated %s declarations without changing valid enemy copies', (kind) => {
     const files = campaign();
@@ -101,7 +123,7 @@ describe('validateContentSet', () => {
     expect(tutorial.enemies.filter((member) => member.unit_id === 'bellbound_dead')).toHaveLength(2);
     const finalApproach = JSON.parse(new TextDecoder().decode(files.get('encounters/stage_7_4.json'))) as Encounter;
     expect(finalApproach.guests).toHaveLength(6);
-    expect(validateContentSet(files)).toMatchObject({ nodes: 38 });
+    expect(validateContentSet(files)).toMatchObject({ nodes: 54 });
   });
   it.each(['intent', 'signature', 'unit immunity', 'boss preservation', 'status immunity'] as const)('rejects an undefined %s reference', (kind) => {
     const files = campaign();

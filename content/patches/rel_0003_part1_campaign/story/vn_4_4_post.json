@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_4_4_post",
+  "title_en": "The Elixir Lie",
+  "location_id": "undercity_subterranean",
+  "production": {
+    "direction_en": "Fadyme returns with a sealed vial. Kera recognizes the mixture from the guild ledger and sees the label is false. Later, alone, Fadyme refolds the letter from the forest road and tucks it deeper into her mother's prayer book.",
+    "music_direction_en": "pre: bgm_tension | post: bgm_fadyme_theme (piano only) while she refolds the letter; silence before 'I will not promise a cure.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_subterranean"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_4_post_001",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I will try. I will not promise a cure.",
+      "emotion": "honest",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_4_post_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "That is enough for tonight.",
+      "emotion": "tired",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_4_post_003",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "He accepted a hope because I asked him to. I will have to live with that.",
+      "emotion": "guilt",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_4_4_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch04.json#vn_4_4.post_battle_lines",
+    "source_sha256": "775fd32544c516eacce722b7f5b5398c785faab3744f555c8e6310d5e9a864de"
+  }
+}

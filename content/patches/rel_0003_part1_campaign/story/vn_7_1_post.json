@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_7_1_post",
+  "title_en": "The Stair of Seven Chains",
+  "location_id": "altar_first_eclipse",
+  "production": {
+    "direction_en": "A stairway descends through the mountain into the altar. Seven chains cross the passage; each bears the seven-notched gray seal that Yseldra left on Mahmut's shield. Nixie returns with Jori and Odelia.",
+    "music_direction_en": "pre: bgm_ch7_altar (uneasy layer), chains as percussion | post: bgm_ledger_motif (seven notes, then silence where the eighth should be)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "altar_first_eclipse"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_1_post_001",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "The hammer marks are mine. My grandmother's, before me. We repaired these chains after the first eclipse.",
+      "emotion": "stricken",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_1_post_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then your family tried to mend a wound it did not make.",
+      "emotion": "gentle",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_1_post_004",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "We made a cage and called it a bridge. My hands will not make that mistake again.",
+      "emotion": "resolved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_1_post_003",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "The marks point down. We can be sad after we stop the thing below.",
+      "emotion": "brisk",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_7_1_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#vn_7_1.post_battle_lines",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

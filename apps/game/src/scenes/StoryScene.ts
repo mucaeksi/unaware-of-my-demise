@@ -13,6 +13,7 @@ import { C, DEPTH, F, SIZE, T } from '../ui/theme';
 export interface StoryInit {
   path: string;
   onDone: (scene: Phaser.Scene) => void;
+  onBack?: (scene: Phaser.Scene) => void;
 }
 
 const CPS = { slow: 26, normal: 46, fast: 95 } as const;
@@ -85,6 +86,7 @@ export class StoryScene extends Phaser.Scene {
     this.cutscene = false;
     this.pausing = false;
     this.prevSpeaker = null;
+    this.currentLine = null;
     this.illustration = null;
     this.lineDone = true;
     this.typing = null;
@@ -128,7 +130,7 @@ export class StoryScene extends Phaser.Scene {
   private fail(e: unknown): void {
     title(this, REF_W / 2, REF_H / 2 - 40, 'This scene could not be loaded', SIZE.h2, T.crimson);
     txt(this, REF_W / 2, REF_H / 2 + 30, String(e instanceof Error ? e.message : e), { fontSize: `${SIZE.small}px`, color: T.dim, align: 'center', wordWrap: { width: 1400 } }).setOrigin(0.5);
-    new Button(this, REF_W / 2, REF_H / 2 + 200, { label: 'BACK', w: 360, onClick: () => this.scene.start('Title') });
+    new Button(this, REF_W / 2, REF_H / 2 + 200, { label: 'BACK', w: 360, onClick: () => this.init0.onBack ? this.init0.onBack(this) : this.scene.start('Title') });
   }
 
   // ------------------------------------------------------------------ layout
@@ -148,15 +150,10 @@ export class StoryScene extends Phaser.Scene {
       this.bg.setAlpha(0);
     }
 
-    // dusk grade + vignette keep the portraits readable on any background
+    // Grade the world below the HUD so dialogue and reader controls keep their contrast.
     const shade = this.add.graphics().setDepth(DEPTH.bg + 5);
     shade.fillGradientStyle(0x0a0610, 0x0a0610, 0x0a0610, 0x0a0610, 0.05, 0.05, 0.7, 0.7);
     shade.fillRect(0, 0, REF_W, REF_H);
-    try {
-      this.cameras.main.filters.external.addVignette(0.5, 0.5, 0.78, 0.35);
-    } catch {
-      /* filters unavailable: purely cosmetic */
-    }
 
     // tap anywhere to advance; buttons sit above this zone
     const zone = this.add.zone(REF_W / 2, REF_H / 2, REF_W, REF_H).setDepth(DEPTH.hud - 10).setInteractive();

@@ -37,6 +37,8 @@
       "atk"
     ]
   },
+  "pre_story": "story/vn_4_1_pre.json",
+  "post_story": "story/vn_4_1_post.json",
   "provenance": {
     "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#4-1"
   }

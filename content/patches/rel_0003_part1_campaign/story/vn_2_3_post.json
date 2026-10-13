@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_2_3_post",
+  "title_en": "The Guest Roll",
+  "location_id": "cathedral_saint_luthos",
+  "production": {
+    "direction_en": "Mirel unrolls a guest register under a brass reading lens. One line has been scraped so deeply that the parchment is nearly split.",
+    "music_direction_en": "pre: bgm_tension (low, investigative, clock-like pulse) | post: bgm_revelation (short) on 'exactly where the heir's name should be'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "cathedral_saint_luthos"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_3_post_001",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "There is a gap exactly where the heir’s name should be.",
+      "emotion": "grave",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_3_post_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You know who belongs there.",
+      "emotion": "measured",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_3_post_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I know who they wanted the world to forget.",
+      "emotion": "sad",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_3_post_004",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "And the world is already doing it.",
+      "emotion": "fear",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_2_3_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch02.json#vn_2_3.post_battle_lines",
+    "source_sha256": "8dc93d395a80583c66955dbe30fca66040d23aa972648a8d062edb22ae32eb0a"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_6_5_pre",
+  "title_en": "The Ashen Lord’s Wraith",
+  "location_id": "estate_ashen_lord",
+  "production": {
+    "direction_en": "An old noble’s Wraith steps out of its portrait frame. It wears the same face as every blank nameplate in the gallery.",
+    "music_direction_en": "pre: bgm_ch6_estate (chaotic layer) | battle: bgm_boss_wraith | post: bgm_ledger_motif on 'a schedule for the bells'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "estate_ashen_lord"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_5_pre_001",
+      "speaker": "ashen_lord_wraith",
+      "speaker_display": "The Wraith",
+      "text": "A house remembers its master. A kingdom remembers its heir.",
+      "emotion": "echo",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_5_pre_004",
+      "speaker": "ashen_lord_wraith",
+      "speaker_display": "The Wraith",
+      "text": "I hid the bell-keeper's daughter from the Crown. I kept her face and lost her name.",
+      "emotion": "echo",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_5_pre_002",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "It is copying the portraits. Break the mirror frame.",
+      "emotion": "urgent",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_5_pre_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Then we end the memory.",
+      "emotion": "command",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_6_5_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch06.json#vn_6_5.pre_battle_lines",
+    "source_sha256": "78d568bd266181e0dc93946e494939bcc85eb87b6317293ee9c01d76fe7dc2d3"
+  }
+}

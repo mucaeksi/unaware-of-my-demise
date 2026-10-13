@@ -152,9 +152,12 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
 
   let scenes = 0;
   let nodes = 0;
+  const parsedScenes = new Map<string, StoryScene>();
+  const parsedEncounters = new Map<string, Encounter>();
   const checkScene = (path: string, expectedLocation?: string): void => {
     const s = parse(path, StoryScene);
     if (!s) return;
+    parsedScenes.set(path, s);
     scenes++;
     // a scene that names an illustration the art manifest does not ship simply runs on its portraits (the stand-in period); it is never an error
     if (expectedLocation && s.location_id !== expectedLocation) problems.push(`${path}: location ${s.location_id} differs from encounter ${expectedLocation}`);
@@ -169,6 +172,7 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
   const checkEncounter = (path: string): void => {
     const enc = parse(path, Encounter);
     if (!enc) return;
+    parsedEncounters.set(path, enc);
     for (const e of [...enc.party, ...enc.enemies]) if (!units.has(e.unit_id)) problems.push(`${path}: unknown unit ${e.unit_id}`);
     for (const member of enc.party) needUnitKind(member.unit_id, 'character', `${path}/party`);
     for (const member of enc.enemies) needUnitKind(member.unit_id, 'enemy', `${path}/enemies`);
@@ -178,6 +182,13 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
     if (art && enc.music_cue && !art.music[enc.music_cue]) problems.push(`${path}: unknown music cue ${enc.music_cue}`);
     if (enc.pre_story) checkScene(enc.pre_story, enc.location_id);
     if (enc.post_story) checkScene(enc.post_story, enc.location_id);
+    unique(`${path} phase story binding`, (enc.phase_stories ?? []).map((binding) => `${binding.unit_id}:${binding.phase_id}`));
+    for (const binding of enc.phase_stories ?? []) {
+      const boss = units.get(binding.unit_id)?.boss;
+      if (!enc.enemies.some((member) => member.unit_id === binding.unit_id) || !boss?.phases.some((phase) => phase.phase_id === binding.phase_id))
+        problems.push(`${path}: unknown encounter boss phase ${binding.unit_id}/${binding.phase_id}`);
+      for (const story of binding.stories) checkScene(story, enc.location_id);
+    }
   };
   if (index) {
     // a node may require any node of the campaign (the server gates on the player's progress rows, which are global)
@@ -212,6 +223,36 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
         } else {
           checkEncounter(n.encounter);
         }
+      }
+    }
+    if (index.story_coverage) {
+      const coverage = index.story_coverage;
+      unique('story coverage source', coverage.sources.map((source) => source.path));
+      unique('story coverage chapter', coverage.chapter_ids);
+      unique('story coverage entry', coverage.entries.map((entry) => entry.entry_id));
+      unique('story coverage node', coverage.entries.map((entry) => entry.node_id));
+      unique('story coverage line', coverage.entries.flatMap((entry) => entry.line_ids));
+      const sourceHashes = new Map(coverage.sources.map((source) => [source.path, source.sha256]));
+      for (const id of coverage.chapter_ids) if (!index.chapters.some((chapter) => chapter.chapter_id === id)) problems.push(`story coverage: missing chapter ${id}`);
+      const actualOrder = index.chapters.filter((chapter) => coverage.chapter_ids.includes(chapter.chapter_id)).flatMap((chapter) => chapter.nodes.map((node) => node.node_id));
+      if (JSON.stringify(index.chapters.filter((chapter) => coverage.chapter_ids.includes(chapter.chapter_id)).map((chapter) => chapter.chapter_id)) !== JSON.stringify(coverage.chapter_ids)) problems.push('story coverage: chapter order differs from declared canon');
+      if (JSON.stringify(actualOrder) !== JSON.stringify(coverage.entries.map((entry) => entry.node_id))) problems.push('story coverage: chapter node order differs from declared canon');
+      for (const [position, entry] of coverage.entries.entries()) {
+        const node = allNodes.get(entry.node_id);
+        if (!node) { problems.push(`story coverage: missing node ${entry.node_id}`); continue; }
+        if (node.requires !== coverage.entries[position - 1]?.node_id) problems.push(`story coverage ${entry.entry_id}: prerequisite differs from declared canon`);
+        const encounter = node.encounter ? parsedEncounters.get(node.encounter) : undefined;
+        const linked = node.kind === 'story' ? [node.story] : [encounter?.pre_story, ...(encounter?.phase_stories ?? []).flatMap((binding) => binding.stories), encounter?.post_story];
+        if (JSON.stringify(linked) !== JSON.stringify(entry.scene_paths)) problems.push(`story coverage ${entry.entry_id}: scene links differ from declared canon`);
+        const lines: string[] = [];
+        for (const path of entry.scene_paths) {
+          const scene = parsedScenes.get(path);
+          if (!scene) { problems.push(`story coverage: missing referenced scene ${path}`); continue; }
+          const source = scene.provenance.source.split('#')[0]!;
+          if (!sourceHashes.has(source) || sourceHashes.get(source) !== scene.provenance.source_sha256) problems.push(`story coverage ${path}: source provenance differs from declared canon`);
+          lines.push(...scene.commands.flatMap((command) => command.op === 'say' || command.op === 'narrate' ? [command.line_id] : []));
+        }
+        if (JSON.stringify(lines) !== JSON.stringify(entry.line_ids)) problems.push(`story coverage ${entry.entry_id}: line IDs/order differ from declared canon`);
       }
     }
   }

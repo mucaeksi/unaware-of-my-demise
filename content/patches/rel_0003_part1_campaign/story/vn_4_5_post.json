@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_4_5_post",
+  "title_en": "The Red Vial Matron",
+  "location_id": "undercity_subterranean",
+  "production": {
+    "direction_en": "The Matron seals herself behind a glass ward and floods the chamber with corrosive vapor.",
+    "music_direction_en": "pre: bgm_tension (glass harmonics) | battle: bgm_boss_human (alchemist variation) | post: bgm_warmth (Kera stays)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_subterranean"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_5_post_001",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I am staying to copy every page of the antidote archive.",
+      "emotion": "resolved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_5_post_002",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "Iona and I will reopen the clinic. The patients need a door that stays open.",
+      "emotion": "firm_kind",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_5_post_007",
+      "speaker": "iona_mist",
+      "speaker_display": "Iona",
+      "text": "I will hang the lantern first. People should see the door before they need it.",
+      "emotion": "calm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_5_post_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We will come back for you.",
+      "emotion": "promise",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_5_post_004",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Bring the missing formula. I will bring the rest.",
+      "emotion": "determined",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_5_post_006",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Oakhaven has no smith while I am down here. I am going home to hold the gate. Send word when something needs a door.",
+      "emotion": "firm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_5_post_005",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "Weeks. Perhaps less. The words do not become kinder when repeated.",
+      "emotion": "sad",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_4_5_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch04.json#vn_4_5.post_battle_lines",
+    "source_sha256": "775fd32544c516eacce722b7f5b5398c785faab3744f555c8e6310d5e9a864de"
+  }
+}

@@ -4,6 +4,7 @@ import { Encounter, UnitPack } from '@uomd/content-schema';
 import { campaignFiles, type TestFile } from './fixtures';
 import { admin, baseEnv, entries, post, resetContent, seedCanonCatalog, signIn, upload } from './helpers';
 import { submitBattle } from '../src/progress/service';
+import { completeStory } from '../src/progress/story';
 
 const db = baseEnv.DB;
 let files: TestFile[];
@@ -30,6 +31,7 @@ async function financialState(playerId: string) {
 describe('zero-Ration campaign practice', () => {
   it('cannot farm the real stage_1_1 drop table with new request IDs and a known winning action sequence', async () => {
     const { playerId } = await signIn(`free-repeat-${crypto.randomUUID()}`);
+    await completeStory(baseEnv, playerId, { releaseId: 'rel_0001', nodeId: 'opening_sad_scene', requestId: crypto.randomUUID() });
     const first = await claim(playerId);
     expect(first.firstClear).toBe(true); expect(first.ration.spent).toBe(0); expect(first.repeatRewardsAllowed).toBe(false);
     const before = await financialState(playerId);
@@ -45,6 +47,7 @@ describe('zero-Ration campaign practice', () => {
 
   it('concurrent new IDs still grant only the finite first-clear/three-star milestones', async () => {
     const { playerId } = await signIn(`free-repeat-race-${crypto.randomUUID()}`);
+    await completeStory(baseEnv, playerId, { releaseId: 'rel_0001', nodeId: 'opening_sad_scene', requestId: crypto.randomUUID() });
     const bodies = await Promise.all(Array.from({ length: 12 }, () => claim(playerId)));
     const first = bodies.find((b) => b.firstClear)!;
     expect(bodies.filter((b) => b.firstClear)).toHaveLength(1);

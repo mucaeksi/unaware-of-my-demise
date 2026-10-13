@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_3_3_pre",
+  "title_en": "The Well Runs Red",
+  "location_id": "village_oakhaven",
+  "production": {
+    "direction_en": "A red-vial mercenary tips a flask into the village well. Fadyme raises her silver bell focus; the spell takes more from her than she lets anyone see.",
+    "music_direction_en": "pre: bgm_tension | post: bgm_quiet_sorrow — very quiet; the red on the gauntlet is not scored, leave room"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "village_oakhaven"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_3_pre_001",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Fadyme, take the left side. I have the well.",
+      "emotion": "command",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_3_pre_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I can reach both.",
+      "emotion": "strained",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_3_pre_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Your hand is bleeding.",
+      "emotion": "alarm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_3_pre_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "It is the mercenary’s blood. Keep the bucket moving.",
+      "emotion": "deflecting",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_3_3_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch03.json#vn_3_3.pre_battle_lines",
+    "source_sha256": "c48d1d1059fce39c2a35723ad4c692f3a7bc05289af8e7daa87b08ae4f333617"
+  }
+}

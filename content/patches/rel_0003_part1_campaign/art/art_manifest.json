@@ -3550,7 +3550,18 @@
     "undercity_subterranean": "art/bg_undercity_subterranean.webp",
     "bridge_forsaken": "art/bg_bridge_forsaken.webp",
     "estate_ashen_lord": "art/bg_estate_ashen_lord.webp",
-    "altar_first_eclipse": "art/bg_altar_first_eclipse.webp"
+    "altar_first_eclipse": "art/bg_altar_first_eclipse.webp",
+    "forest_edge_road": "art/bg_forest_edge_road.webp",
+    "orchard_lowlands": "art/bg_orchard_lowlands.webp",
+    "oakhaven_inn": "art/bg_oakhaven_inn.webp",
+    "river_city_gates": "art/bg_river_city_gates.webp",
+    "eastern_ravine_road": "art/bg_eastern_ravine_road.webp",
+    "bridge_far_bank": "art/bg_bridge_far_bank.webp",
+    "eastern_highland_road": "art/bg_eastern_highland_road.webp",
+    "ashen_estate_ruins": "art/bg_ashen_estate_ruins.webp",
+    "mountain_crater_rim": "art/bg_mountain_crater_rim.webp",
+    "altar_first_eclipse_outer_dais": "art/bg_altar_first_eclipse_outer_dais.webp",
+    "altar_first_eclipse_reflection": "art/bg_altar_first_eclipse_reflection.webp"
   },
   "music": {
     "bgm_ch1_ash_forest_calm": {

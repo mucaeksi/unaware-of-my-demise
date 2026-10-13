@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_5_5_pre",
+  "title_en": "The Commander Who Remained",
+  "location_id": "bridge_forsaken",
+  "production": {
+    "direction_en": "Marshal Oren waits at the far end of the bridge with a shield line and Mahmut’s old crest painted upside down.",
+    "music_direction_en": "pre: bgm_mahmut_theme (minor, slow march) facing Oren | battle: bgm_boss_human (commander variation, march snare) | post: bgm_mahmut_theme, solo cello"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "bridge_forsaken"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_5_pre_001",
+      "speaker": "marshal_oren",
+      "speaker_display": "Oren",
+      "text": "I gave the order. I did not know the rite would hollow her out.",
+      "emotion": "strained",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_5_pre_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You knew enough to send men after her.",
+      "emotion": "anger",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_5_pre_003",
+      "speaker": "marshal_oren",
+      "speaker_display": "Oren",
+      "text": "I thought the seal would save the kingdom without consuming its heir.",
+      "emotion": "shame",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_5_pre_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You thought a promise was the same as a plan.",
+      "emotion": "cold",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_5_pre_005",
+      "speaker": "marshal_oren",
+      "speaker_display": "Oren",
+      "text": "Yseldra carried the order from the Inquisition. I signed it. That is the whole of my courage.",
+      "emotion": "shame",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_5_5_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch05.json#vn_5_5.pre_battle_lines",
+    "source_sha256": "8ea1b07ecba8a8cf27843ce2c2704a360f271459c00d24ebffb85b54db61a83b"
+  }
+}

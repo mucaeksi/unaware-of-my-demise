@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch5_road",
+  "title_en": "Fog in the Ravine",
+  "location_id": "eastern_ravine_road",
+  "production": {
+    "direction_en": "Four days east. Refugees move the other way, carrying carts and children.",
+    "music_direction_en": "bgm_road (against the flow of refugees; muted)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "eastern_ravine_road"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_road_001",
+      "speaker": "refugee_woman",
+      "speaker_display": "Refugee",
+      "text": "Do not cross the old bridge. Soldiers on it. Crown colors, upside down.",
+      "emotion": "afraid",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_road_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Whose soldiers?",
+      "emotion": "hard",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_road_003",
+      "speaker": "refugee_woman",
+      "speaker_display": "Refugee",
+      "text": "A marshal's. They are looking for a woman with a bell pin.",
+      "emotion": "afraid",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_road_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then she had better keep her hood up.",
+      "emotion": "wry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_road_005",
+      "speaker": "mahmut_thought",
+      "speaker_display": "Mahmut (thought)",
+      "text": "Crown colors, upside down. Oren always hated sloppy banners.",
+      "emotion": "grim",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch5_road_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch05.json#ch5_road.lines",
+    "source_sha256": "8ea1b07ecba8a8cf27843ce2c2704a360f271459c00d24ebffb85b54db61a83b"
+  }
+}

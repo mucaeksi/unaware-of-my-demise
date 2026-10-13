@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_4_3_pre",
+  "title_en": "The Measure of a Life",
+  "location_id": "undercity_subterranean",
+  "production": {
+    "direction_en": "Clem unlocks a narrow archive room. Mahmut waits at the stairwell while Fadyme asks for a private reading.",
+    "music_direction_en": "pre: bgm_ch4_undercity (uneasy layer) | post: bgm_fadyme_theme — first time the theme is played in a minor key"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_subterranean"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_3_pre_001",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "You asked for a truth with no witnesses. I can give you one.",
+      "emotion": "matter_of_fact",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_3_pre_002",
+      "speaker": "alchemist",
+      "speaker_display": "Undercity Alchemist",
+      "text": "Not a month now. Weeks, perhaps less, if the bell keeps calling.",
+      "emotion": "grave",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_3_pre_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "And if I stop answering?",
+      "emotion": "controlled",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_3_pre_004",
+      "speaker": "alchemist",
+      "speaker_display": "Undercity Alchemist",
+      "text": "Then perhaps the bell will take the answer from someone else.",
+      "emotion": "sad",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_4_3_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch04.json#vn_4_3.pre_battle_lines",
+    "source_sha256": "775fd32544c516eacce722b7f5b5398c785faab3744f555c8e6310d5e9a864de"
+  }
+}

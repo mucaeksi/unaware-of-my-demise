@@ -112,6 +112,8 @@ export class BattleScene extends Phaser.Scene {
     const m = this.encounter.music_cue ? art.music(this.encounter.music_cue) : null;
     if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 1.6);
     await this.wait(500);
+    for (const event of this.battle.log) if (event.type === 'phase_change') await this.phaseStory(event.unit, event.phase);
+    if (this.dead) return;
     await this.loop();
   }
 
@@ -276,6 +278,34 @@ export class BattleScene extends Phaser.Scene {
       await this.playEvents(step.events);
     }
     if (!this.dead) await this.finish();
+  }
+
+  /** Await presentation only; combat actions, RNG and the server replay remain unchanged. */
+  private async phaseStory(unit: string, phase: string): Promise<void> {
+    const unitId = this.battle.unit(unit).def.unit_id;
+    const paths = this.encounter.phase_stories?.find((binding) => binding.unit_id === unitId && binding.phase_id === phase)?.stories ?? [];
+    for (const path of paths) {
+      if (this.dead) return;
+      await new Promise<void>((resolve) => {
+        const shutdown = (): void => { this.scene.stop('Story'); resolve(); };
+        this.events.once(Phaser.Scenes.Events.SHUTDOWN, shutdown);
+        const done = (back = false): void => {
+          this.events.off(Phaser.Scenes.Events.SHUTDOWN, shutdown);
+          this.scene.stop('Story');
+          this.scene.resume();
+          if (back) this.cfg.onBack(this);
+          else {
+            const { art } = Services.ready();
+            const music = this.encounter.music_cue ? art.music(this.encounter.music_cue) : null;
+            if (music) Music.play(this.cache.audio, music.key, music.loopStart, music.duration);
+          }
+          resolve();
+        };
+        this.scene.launch('Story', { path, onDone: () => done(), onBack: () => done(true) });
+        this.scene.bringToTop('Story');
+        this.scene.pause();
+      });
+    }
   }
 
   // ------------------------------------------------------------------ player input
@@ -636,6 +666,7 @@ export class BattleScene extends Phaser.Scene {
           if (!reduced) this.cameras.main.shake(260, 0.008);
           await this.wait(700);
         }
+        await this.phaseStory(e.unit, e.phase);
         break;
       }
       case 'telegraph': {

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_2_5_post",
+  "title_en": "The Bell-Widow’s Verdict",
+  "location_id": "cathedral_saint_luthos",
+  "production": {
+    "direction_en": "At the archive door, Yseldra waits beneath the bell tower. Seven wax seals hang from her chain, each cut through the center.",
+    "music_direction_en": "pre: bgm_bell_widow — first full statement; Yseldra's seven seals click as percussion | battle: bgm_boss_bell_widow | post: bgm_tension, cut to silence on 'She escaped.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "cathedral_saint_luthos"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_post_001",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "She escaped.",
+      "emotion": "frustrated",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_post_002",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "She could have killed us. She chose the bell tower instead.",
+      "emotion": "uneasy",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_post_003",
+      "speaker": "yseldra_distant",
+      "speaker_display": "Yseldra (distant)",
+      "text": "Ask who keeps the hour running.",
+      "emotion": "warning",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_post_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Oakhaven is marked on the map. I will warn them before the soldiers arrive.",
+      "emotion": "urgent",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_post_005",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "She knows I am dying. That does not mean I can let Mahmut know.",
+      "emotion": "fear",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_post_006",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "He lied to me, gently. So we are both keeping something.",
+      "emotion": "hurt",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_2_5_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch02.json#vn_2_5.post_battle_lines",
+    "source_sha256": "8dc93d395a80583c66955dbe30fca66040d23aa972648a8d062edb22ae32eb0a"
+  }
+}

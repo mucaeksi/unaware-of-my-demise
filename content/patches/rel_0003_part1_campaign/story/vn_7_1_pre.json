@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_7_1_pre",
+  "title_en": "The Stair of Seven Chains",
+  "location_id": "altar_first_eclipse",
+  "production": {
+    "direction_en": "A stairway descends through the mountain into the altar. Seven chains cross the passage; each bears the seven-notched gray seal that Yseldra left on Mahmut's shield. Nixie returns with Jori and Odelia.",
+    "music_direction_en": "pre: bgm_ch7_altar (uneasy layer), chains as percussion | post: bgm_ledger_motif (seven notes, then silence where the eighth should be)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "altar_first_eclipse"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_1_pre_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I brought the people from Oakhaven as far as the lower pass. They are safe. I am not staying behind again.",
+      "emotion": "firm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_1_pre_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "These links came from my family's forge. We were told they were made for a royal bridge.",
+      "emotion": "ashamed",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_1_pre_003",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "They were made to hold something in place. The question is what the crown was afraid would move.",
+      "emotion": "wary",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_1_pre_006",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "The chain-bearers up there sing to it. They think the eclipse is holding its breath for the kingdom.",
+      "emotion": "wary",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_1_pre_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We find the answer together. No one goes ahead alone.",
+      "emotion": "protective",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_1_pre_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You say that as if I am the one who keeps trying to disappear.",
+      "emotion": "light",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_7_1_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#vn_7_1.pre_battle_lines",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

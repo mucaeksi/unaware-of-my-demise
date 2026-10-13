@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch3_camp",
+  "title_en": "The Sealed Order",
+  "location_id": "oakhaven_inn",
+  "production": {
+    "direction_en": "Oakhaven's inn, after the captain falls. Mahmut sets Rusk's sealed order on the table between them. Nixie has stayed behind in the refuge with Oakhaven's Vale children.",
+    "music_direction_en": "bgm_camp (inn version: indoor, fire) → bgm_tension once the sealed order is on the table"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "oakhaven_inn"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_camp_001",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "We should open it. Knowledge is the only antidote I trust.",
+      "emotion": "impatient",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_camp_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A healer first. Please.",
+      "emotion": "firm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_camp_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Why does a healer matter for paper?",
+      "emotion": "confused",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_camp_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Because whatever it says, someone at the table may need one afterward.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_camp_005",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "...The Undercity has the best healers. And the Guild ledger.",
+      "emotion": "thoughtful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_camp_006",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Then we go down.",
+      "emotion": "decisive",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch3_camp_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch03.json#ch3_camp.lines",
+    "source_sha256": "c48d1d1059fce39c2a35723ad4c692f3a7bc05289af8e7daa87b08ae4f333617"
+  }
+}

@@ -49,16 +49,17 @@ export class ChaptersScene extends Phaser.Scene {
     }
     const active = await content.activeReleaseId();
     if (generation !== this.generation || revision !== api.authRevision) return;
-    const titles = new Map(index.chapters.flatMap((c) => c.nodes.map((n): [string, string] => [n.node_id, n.title_en])));
 
     let y = 250;
     let firstOpen = -1;
     for (const ch of index.chapters) {
-      txt(this, 330, y - 20, ch.title_en.toUpperCase(), { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: T.dim }).setOrigin(0, 0.5);
+      const revealed = ch.nodes.some((node) => progress[node.node_id] || !node.requires || progress[node.requires]);
+      const heading = revealed ? ch.title_en : 'Locked chapter';
+      txt(this, 330, y - 20, heading.toUpperCase(), { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: T.dim }).setOrigin(0, 0.5);
       y += 70;
       for (const node of ch.nodes) {
         if (firstOpen < 0 && !progress[node.node_id] && !(node.requires && !progress[node.requires])) firstOpen = y;
-        this.row(node, y, progress, titles, baseNodes.has(node.node_id) ? null : active);
+        this.row(node, y, progress, baseNodes.has(node.node_id) ? null : active);
         y += 160;
       }
     }
@@ -91,14 +92,15 @@ export class ChaptersScene extends Phaser.Scene {
     void back;
   }
 
-  private row(node: Node, y: number, progress: Record<string, { stars: number }>, titles: Map<string, string>, patchedBy: string | null): void {
+  private row(node: Node, y: number, progress: Record<string, { stars: number }>, patchedBy: string | null): void {
     const done = progress[node.node_id];
     const locked = Boolean(node.requires && !progress[node.requires]);
     const bg = panel(this, REF_W / 2, y, 1300, 138, locked ? 'dim' : 'normal');
-    const name = title(this, 0, 0, node.title_en.toUpperCase(), 42, locked ? T.dim : T.text).setOrigin(0, 0.5).setPosition(REF_W / 2 - 600, y - 20);
+    const label = locked ? node.kind === 'story' ? 'Locked story' : 'Locked battle' : node.title_en;
+    const name = title(this, 0, 0, label.toUpperCase(), 42, locked ? T.dim : T.text).setOrigin(0, 0.5).setPosition(REF_W / 2 - 600, y - 20);
     const cost = node.ration_class ? RATION_COST[node.ration_class] : 0;
     const battleLabel = cost === 0 ? 'Free practice · one-time rewards only' : `Story and battle · ${cost} Ration`;
-    const sub = txt(this, REF_W / 2 - 600, y + 28, locked ? `Locked — finish "${titles.get(node.requires ?? '') ?? node.requires}" first` : node.kind === 'battle' ? battleLabel : 'Story', { fontSize: '30px', color: T.dim });
+    const sub = txt(this, REF_W / 2 - 600, y + 28, locked ? 'Finish the previous story step first' : node.kind === 'battle' ? battleLabel : 'Story', { fontSize: '30px', color: T.dim });
     if (patchedBy) {
       const tag = panel(this, REF_W / 2 + 330, y - 28, 270, 56, 'hot');
       txt(this, REF_W / 2 + 330, y - 28, `NEW · ${patchedBy}`, { fontFamily: F.display, fontSize: '22px', fontStyle: '600', color: T.gold }).setOrigin(0.5);

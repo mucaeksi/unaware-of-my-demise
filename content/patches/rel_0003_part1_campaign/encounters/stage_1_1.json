@@ -40,6 +40,8 @@
       "row": "front"
     }
   ],
+  "pre_story": "story/vn_1_1_pre.json",
+  "post_story": "story/vn_1_1_post.json",
   "provenance": {
     "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#1-1"
   }

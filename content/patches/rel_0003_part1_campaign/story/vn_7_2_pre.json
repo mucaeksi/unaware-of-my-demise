@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_7_2_pre",
+  "title_en": "Those Who Held the Road",
+  "location_id": "altar_first_eclipse",
+  "production": {
+    "direction_en": "At a fork in the stair, companions who escorted refugees return from the outer route. They do not replace the player's formation; they create a brief, scripted diversion while the five-person party advances.",
+    "music_direction_en": "pre: bgm_held_the_road — full ensemble statement | post: bgm_held_the_road (comic tag for the barricade line)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "altar_first_eclipse"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_2_pre_001",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "The refugees are through. I told the guards to bar the road behind us.",
+      "emotion": "relieved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_2_pre_002",
+      "speaker": "rikka_ember",
+      "speaker_display": "Rikka",
+      "text": "And I told them the barricade was my idea. They believed me because I looked proud of it.",
+      "emotion": "cheerful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_2_pre_003",
+      "speaker": "nara_vell",
+      "speaker_display": "Nara",
+      "text": "Two sentinels are winding up a flank attack. Mahmut, your left side is about to become very popular.",
+      "emotion": "dry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_2_pre_005",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You have already done enough. Get everyone home.",
+      "emotion": "grateful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_2_pre_006",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "Then come back so I can tell you that in person.",
+      "emotion": "earnest",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_7_2_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#vn_7_2.pre_battle_lines",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

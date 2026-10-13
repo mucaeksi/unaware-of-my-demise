@@ -41,6 +41,40 @@ async function malformedChapters(kind: 'duplicate' | 'cycle'): Promise<TestFile>
 }
 
 describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
+  it.each([false, true])('checks all 512 allowed file hashes across D1 query chunks (last missing: %s)', async (missingLast) => {
+    const id = missingLast ? 'rel_hash_missing' : 'rel_hash_full';
+    const expanded = [...base];
+    for (let i = expanded.length; i < 512; i++) {
+      const bytes = new TextEncoder().encode(JSON.stringify({ schema_version: 1, scene_id: `hash_probe_${i}`, title_en: 'Hash lookup probe', location_id: 'forest_whispering_ash',
+        commands: [{ op: 'say', line_id: `hash_probe_line_${i}`, speaker: 'mahmut', speaker_display: 'Mahmut', text: 'Hash lookup probe.' }, { op: 'end' }], provenance: { source: 'test:bounded lookup' } }));
+      expanded.push({ path: `story/hash_probe_${i}.json`, bytes, sha256: await sha256Hex(bytes), mediaType: 'application/json' });
+    }
+    await upload(missingLast ? expanded.slice(0, -1) : expanded);
+    const response = await post('/admin/api/releases', { id, channel: 'dev', files: entries(expanded) });
+    expect(response.status).toBe(missingLast ? 409 : 201);
+    if (missingLast) {
+      expect(await response.json()).toMatchObject({ error: 'missing_objects', detail: [expanded.at(-1)!.path] });
+      expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM content_releases WHERE id = ?1').bind(id).first()).toEqual({ n: 0 });
+      expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM release_files WHERE release_id = ?1').bind(id).first()).toEqual({ n: 0 });
+      expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM audit_log WHERE target = ?1').bind(id).first()).toEqual({ n: 0 });
+    } else {
+      expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM release_files WHERE release_id = ?1').bind(id).first()).toEqual({ n: 512 });
+    }
+  });
+  it.each(['line omission', 'unknown phase'] as const)('rejects %s from the full canonical patch without draft/file/audit/pointer changes', async (kind) => {
+    await publishBase();
+    const original = patch.find((file) => file.path === (kind === 'line omission' ? 'story/opening_sad_scene.json' : 'encounters/stage_7_5.json'))!;
+    const value = JSON.parse(new TextDecoder().decode(original.bytes));
+    if (kind === 'line omission') value.commands.splice(value.commands.findIndex((command: { op: string }) => command.op === 'say'), 1);
+    else value.phase_stories[0].phase_id = 'missing_phase';
+    const bytes = new TextEncoder().encode(JSON.stringify(value)); const bad = { ...original, bytes, sha256: await sha256Hex(bytes) };
+    const files = [...patch.filter((file) => file.path !== bad.path), bad]; await upload(files);
+    const pointer = await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first();
+    const response = await post('/admin/api/releases', { id: 'rel_bad_story', channel: 'dev', dependsOn: 'rel_0001', files: entries(files) });
+    expect(response.status).toBe(422); expect(await response.text()).toContain(kind === 'line omission' ? 'line IDs/order' : 'unknown encounter boss phase');
+    for (const [table, column] of [['content_releases', 'id'], ['release_files', 'release_id'], ['audit_log', 'target']]) expect(await baseEnv.DB.prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE ${column} = 'rel_bad_story'`).first()).toEqual({ n: 0 });
+    expect(await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first()).toEqual(pointer);
+  });
   it.each(['duplicate slot', 'wrong enemy kind'] as const)('rejects a %s encounter before writing a draft', async (kind) => {
     await publishBase();
     const original = base.find((file) => file.path === 'encounters/tutorial_t3.json')!;

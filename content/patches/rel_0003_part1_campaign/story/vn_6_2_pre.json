@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_6_2_pre",
+  "title_en": "Portraits Without Names",
+  "location_id": "estate_ashen_lord",
+  "production": {
+    "direction_en": "The gallery contains portraits with their nameplates cut away. Mirel and Aveline arrive with the cathedral folio; Odelia's message found them. In one portrait, a court official's gloved hand rests beside a watch with no hands.",
+    "music_direction_en": "pre: bgm_ch6_estate (uneasy layer) | post: bgm_fadyme_theme + bgm_ledger_motif together on 'She was my mother.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "estate_ashen_lord"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_2_pre_001",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "Someone removed the names but left the faces. A very specific kind of cowardice.",
+      "emotion": "wry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_2_pre_002",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Or a person trying to hide the victims from the rite.",
+      "emotion": "thoughtful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_2_pre_003",
+      "speaker": "hana_birch",
+      "speaker_display": "Hana",
+      "text": "This woman has the same bell pin as Fadyme.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_6_2_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch06.json#vn_6_2.pre_battle_lines",
+    "source_sha256": "78d568bd266181e0dc93946e494939bcc85eb87b6317293ee9c01d76fe7dc2d3"
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch1_camp",
+  "title_en": "Ash That Falls Upward",
+  "location_id": "forest_whispering_ash",
+  "production": {
+    "direction_en": "Night after the Ash-Maw. The company camps at the shrine. Far off, a cracked handbell rings once; the ash above the fire drifts up instead of down.",
+    "music_direction_en": "bgm_camp (acoustic, fire) — one far cracked handbell, then the camp theme thins to a single cello"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_camp_001",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "The trees stopped whispering.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_camp_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "No. Listen. They are whispering someone else's name now.",
+      "emotion": "alert",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_camp_003",
+      "speaker": "narrator",
+      "speaker_display": "Narration",
+      "text": "Beyond the firelight, a single cracked bell rang, then went still.",
+      "emotion": "tense",
+      "voice_track": "jp_narration"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_camp_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Her.",
+      "emotion": "hard",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_camp_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "She is not coming closer. She wants us to know she is there.",
+      "emotion": "steady",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_camp_006",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "The widow's bell. It rang like that the night Mother's portrait came down.",
+      "emotion": "shaken",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_camp_007",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Sleep. I will watch.",
+      "emotion": "protective",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_camp_008",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You always say that. One day I will watch, and you will sleep.",
+      "emotion": "light",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch1_camp_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch01.json#ch1_camp.lines",
+    "source_sha256": "53e1cf59847fe15b1e7fa70a54a90f08c81fe0f94c4310c8d527844f8d69df21"
+  }
+}

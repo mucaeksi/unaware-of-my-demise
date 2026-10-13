@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_1_5_post",
+  "title_en": "The Ash-Maw",
+  "location_id": "forest_whispering_ash",
+  "production": {
+    "direction_en": "A dead wolf rises from the shrine ditch with a cracked bell fused through its jaw. The air goes silent around it.",
+    "music_direction_en": "pre: silence — the air goes silent around the wolf; no music until the battle starts | battle: bgm_boss_beast | post: sting_bell_toll (the bell stops), then bgm_ch1_ash_forest (uneasy layer)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_5_post_001",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "The bell stopped. The trees are still whispering.",
+      "emotion": "uneasy",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_5_post_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "They will forget the sound by morning.",
+      "emotion": "false_reassurance",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_5_post_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Your hand is freezing.",
+      "emotion": "concern",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_5_post_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Rain does that. I am perfectly fine.",
+      "emotion": "smile",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_5_post_005",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "My fingertips have gone pale. I will tell him after the next town.",
+      "emotion": "sad",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_1_5_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch01.json#vn_1_5.post_battle_lines",
+    "source_sha256": "53e1cf59847fe15b1e7fa70a54a90f08c81fe0f94c4310c8d527844f8d69df21"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_7_5_pre",
+  "title_en": "The Eclipse Construct",
+  "location_id": "altar_first_eclipse",
+  "production": {
+    "direction_en": "Five heroes enter a circular chamber beneath a suspended black sun. A crownless, clockwork guardian unfolds from the altar. During the battle, the VN camera returns briefly between phases to show Fadyme hiding the ash-dark veins spreading past her wrist.",
+    "music_direction_en": "pre: bgm_ch7_altar (chaotic layer) | battle: bgm_boss_eclipse_construct (phase 1, phase 2 adds choir and the bell motif) | post: silence after 'HOUR... STILL OWED.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "altar_first_eclipse"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_5_pre_001",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Five of us. We have broken worse lines than this.",
+      "emotion": "steady",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_5_pre_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "And if the altar asks for a name?",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_5_pre_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "It can have mine first.",
+      "emotion": "certain",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_5_pre_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "No. We leave with all five names. That is the only answer I will accept.",
+      "emotion": "warm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_7_5_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#vn_7_5.pre_battle_lines",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

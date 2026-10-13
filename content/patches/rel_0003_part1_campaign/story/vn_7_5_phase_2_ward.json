@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_7_5_phase_2_ward",
+  "title_en": "The Eclipse Construct",
+  "location_id": "altar_first_eclipse",
+  "production": {
+    "direction_en": "The three pylons ignite. Black-gold lines crawl over Fadyme's fingers; she closes her fist and keeps her voice even.",
+    "music_direction_en": "pre: bgm_ch7_altar (chaotic layer) | battle: bgm_boss_eclipse_construct (phase 1, phase 2 adds choir and the bell motif) | post: silence after 'HOUR... STILL OWED.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "altar_first_eclipse"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_5_phase2_001",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera (memory)",
+      "text": "The ward is using the bearer as its anchor! Break the pylons!",
+      "emotion": "urgent",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_5_phase2_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Fadyme, stay behind me!",
+      "emotion": "alarmed",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_5_phase2_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I am right here. Finish it with me.",
+      "emotion": "strained",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_7_5_phase_2_ward_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#vn_7_5.phase_2_ward",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_1_4_pre",
+  "title_en": "The Map’s Little Lie",
+  "location_id": "forest_whispering_ash",
+  "production": {
+    "direction_en": "A twig snaps above the road. Nixie drops from a low branch, bow already drawn at the shadow behind the party.",
+    "music_direction_en": "pre: silence until the twig snaps, then bgm_tension | post: bgm_warmth (party of five is complete)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_4_pre_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Do not follow the map. The map is lying. The wolves learned the road from it.",
+      "emotion": "urgent",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_4_pre_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "And you learned that by climbing a tree?",
+      "emotion": "skeptical",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_4_pre_003",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I learned it by being chased up one. There is a difference.",
+      "emotion": "genki",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_1_4_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch01.json#vn_1_4.pre_battle_lines",
+    "source_sha256": "53e1cf59847fe15b1e7fa70a54a90f08c81fe0f94c4310c8d527844f8d69df21"
+  }
+}

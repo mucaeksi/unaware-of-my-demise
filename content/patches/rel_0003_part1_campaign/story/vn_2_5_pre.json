@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_2_5_pre",
+  "title_en": "The Bell-Widow’s Verdict",
+  "location_id": "cathedral_saint_luthos",
+  "production": {
+    "direction_en": "At the archive door, Yseldra waits beneath the bell tower. Seven wax seals hang from her chain, each cut through the center.",
+    "music_direction_en": "pre: bgm_bell_widow — first full statement; Yseldra's seven seals click as percussion | battle: bgm_boss_bell_widow | post: bgm_tension, cut to silence on 'She escaped.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "cathedral_saint_luthos"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_pre_001",
+      "speaker": "lady_yseldra_vale",
+      "speaker_display": "Yseldra",
+      "text": "You found the record. You still do not know what it asks of her.",
+      "emotion": "controlled",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_pre_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Then tell us.",
+      "emotion": "angry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_pre_003",
+      "speaker": "lady_yseldra_vale",
+      "speaker_display": "Yseldra",
+      "text": "The altar does not cure. It keeps a wound open until the kingdom can be put back inside it.",
+      "emotion": "grave",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_pre_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You came to take me away.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_pre_005",
+      "speaker": "lady_yseldra_vale",
+      "speaker_display": "Yseldra",
+      "text": "I came to stop the next sacrifice. I will not pretend that makes my choice yours.",
+      "emotion": "honest",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_pre_006",
+      "speaker": "lady_yseldra_vale",
+      "speaker_display": "Yseldra",
+      "text": "And you, Sir Mahmut. You told her you did not know me.",
+      "emotion": "cold",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_pre_007",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Mahmut?",
+      "emotion": "stunned",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_5_pre_008",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Not now.",
+      "emotion": "tight",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_2_5_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch02.json#vn_2_5.pre_battle_lines",
+    "source_sha256": "8dc93d395a80583c66955dbe30fca66040d23aa972648a8d062edb22ae32eb0a"
+  }
+}

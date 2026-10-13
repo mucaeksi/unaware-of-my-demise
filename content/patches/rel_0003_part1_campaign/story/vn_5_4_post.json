@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_5_4_post",
+  "title_en": "The White Strand",
+  "location_id": "bridge_forsaken",
+  "production": {
+    "direction_en": "Odelia warns the party about mines. A bell pulse crosses the bridge; one lock of Fadyme’s ash-pale hair turns stark white, whiter than bone.",
+    "music_direction_en": "pre: bgm_ch5_bridge | the bell pulse: sting_bell_toll, then silence while the lock turns white; bgm_fadyme_theme returns only on 'Only tired.' | post: bgm_quiet_sorrow"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "bridge_forsaken"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_4_post_001",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Only tired. The wind is colder here.",
+      "emotion": "false_calm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_4_post_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You have been tired since the forest.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_4_post_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then I have been consistent.",
+      "emotion": "small_smile",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_4_post_005",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Consistent is not the same as well.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_4_post_006",
+      "speaker": "narrator",
+      "speaker_display": "Narration",
+      "text": "She does not answer. For the first time, he does not let the question go, and for the first time, she has nothing ready.",
+      "emotion": "somber",
+      "voice_track": "jp_narration"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_4_post_004",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "A white strand. One more thing the mirror will remember before he does.",
+      "emotion": "sad",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_5_4_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch05.json#vn_5_4.post_battle_lines",
+    "source_sha256": "8ea1b07ecba8a8cf27843ce2c2704a360f271459c00d24ebffb85b54db61a83b"
+  }
+}

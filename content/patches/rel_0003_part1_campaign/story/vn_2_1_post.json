@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_2_1_post",
+  "title_en": "Rain in the Nave",
+  "location_id": "cathedral_saint_luthos",
+  "production": {
+    "direction_en": "Rain falls through the broken rose window. Fadyme stops at the nave threshold when an unstrung bell answers from above.",
+    "music_direction_en": "pre: bgm_ch2_cathedral — rain through the rose window, organ pedal note; the unstrung bell answers with sting_bell_toll | post: bgm_ch2_cathedral (uneasy layer)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "cathedral_saint_luthos"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_1_post_001",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "The sound is coming from inside the stone.",
+      "emotion": "grave",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_1_post_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then the stone remembers what we have forgotten.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_1_post_003",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "It remembers my name.",
+      "emotion": "fear",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_2_1_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch02.json#vn_2_1.post_battle_lines",
+    "source_sha256": "8dc93d395a80583c66955dbe30fca66040d23aa972648a8d062edb22ae32eb0a"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_4_1_pre",
+  "title_en": "Stairs Below the Cistern",
+  "location_id": "undercity_subterranean",
+  "production": {
+    "direction_en": "Odelia’s chalk arrows lead beneath the city. The water is still, but something moves against its reflection.",
+    "music_direction_en": "pre: bgm_ch4_undercity — dripping water, low drone | post: bgm_ch4_undercity"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_subterranean"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_1_pre_001",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "Do not look for ripples. These things follow the shape of your shadow.",
+      "emotion": "low",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_1_pre_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "How did you find the tunnel?",
+      "emotion": "curious",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_1_pre_003",
+      "speaker": "odelia_pike",
+      "speaker_display": "Odelia",
+      "text": "I followed the people who stopped coming back.",
+      "emotion": "plain",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_4_1_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch04.json#vn_4_1.pre_battle_lines",
+    "source_sha256": "775fd32544c516eacce722b7f5b5398c785faab3744f555c8e6310d5e9a864de"
+  }
+}

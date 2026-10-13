@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_7_3_post",
+  "title_en": "The Names We Kept",
+  "location_id": "altar_first_eclipse",
+  "production": {
+    "direction_en": "A round archive is carved into the stairwell. Aveline, Mirel, Clem, Pippa and Kera rebuild the erased record from copied names, bell rubbings and Jori's forge marks.",
+    "music_direction_en": "pre: bgm_ledger_motif under the voices reading names | post: bgm_fadyme_theme with choir when the name is written back; this is the emotional peak before the boss"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "altar_first_eclipse"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_post_005",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "Give me the pen. My hand helped erase it. This time, my hand writes it back.",
+      "emotion": "resolved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_post_001",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Fadyme Veyr. The record accepts the ink.",
+      "emotion": "relieved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_post_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Veyr?",
+      "emotion": "surprised",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_post_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "My mother's name. It was hers before it was mine.",
+      "emotion": "guarded",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_3_post_004",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "I am sorry. I wanted one more quiet day before you knew even this much.",
+      "emotion": "guilty",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_7_3_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#vn_7_3.post_battle_lines",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

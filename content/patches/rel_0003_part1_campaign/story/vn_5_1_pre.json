@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_5_1_pre",
+  "title_en": "A Banner in the Fog",
+  "location_id": "bridge_forsaken",
+  "production": {
+    "direction_en": "A herald’s pennant appears through ravine mist. Marek recognizes the empty crest socket on Mahmut’s armor.",
+    "music_direction_en": "pre: bgm_ch5_bridge — fog, wind in chains; a solo horn for Marek's pennant | post: bgm_mahmut_theme (Marek recognizes the crest)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "bridge_forsaken"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_1_pre_001",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "That socket used to carry a crown. The road has not forgotten.",
+      "emotion": "measured",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_1_pre_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "The road remembers a version of me that no longer exists.",
+      "emotion": "guarded",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_1_pre_003",
+      "speaker": "marek_vane",
+      "speaker_display": "Marek",
+      "text": "Good. Then it can remember this one too.",
+      "emotion": "warm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_5_1_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch05.json#vn_5_1.pre_battle_lines",
+    "source_sha256": "8ea1b07ecba8a8cf27843ce2c2704a360f271459c00d24ebffb85b54db61a83b"
+  }
+}

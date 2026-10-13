@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_1_1_pre",
+  "title_en": "The Road That Whispers",
+  "location_id": "forest_whispering_ash",
+  "production": {
+    "direction_en": "At gray dawn, ash leaves whisper the names carved into them. Mahmut hears only wind; Fadyme hears one syllable spoken in her mother’s voice.",
+    "music_direction_en": "pre: bgm_ch1_ash_forest (calm layer) — rain, whispering leaves; one soft bell tone when Fadyme hears the syllable | post: sting_victory, then bgm_ch1_ash_forest"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_1_pre_001",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Three wolves. Stay behind my shield.",
+      "emotion": "alert",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_1_pre_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You say that as if I have ever listened.",
+      "emotion": "dry_amusement",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_1_pre_003",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "The bell has no clapper. Why can I still hear it?",
+      "emotion": "uneasy",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_1_1_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch01.json#vn_1_1.pre_battle_lines",
+    "source_sha256": "53e1cf59847fe15b1e7fa70a54a90f08c81fe0f94c4310c8d527844f8d69df21"
+  }
+}

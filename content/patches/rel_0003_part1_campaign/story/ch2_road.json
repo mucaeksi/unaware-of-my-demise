@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch2_road",
+  "title_en": "The Tower Across the Fields",
+  "location_id": "forest_edge_road",
+  "production": {
+    "direction_en": "Morning. Beyond the last ash trees, the bell tower of Saint Luthos rises over flooded fields. It has no rope.",
+    "music_direction_en": "bgm_road — morning, flooded fields; the ropeless tower gets a held note, no bell"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_edge_road"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_road_001",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "Cathedral by noon if the fields do not eat our boots.",
+      "emotion": "brisk",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_road_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I prayed there once. I was small enough to hide under the pews.",
+      "emotion": "wistful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_road_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You never told me.",
+      "emotion": "gentle",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_road_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I am telling you now. See? I tell you things.",
+      "emotion": "wry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch2_road_005",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "Small things. Only small things.",
+      "emotion": "guilt",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch2_road_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch02.json#ch2_road.lines",
+    "source_sha256": "8dc93d395a80583c66955dbe30fca66040d23aa972648a8d062edb22ae32eb0a"
+  }
+}

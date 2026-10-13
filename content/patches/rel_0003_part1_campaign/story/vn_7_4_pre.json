@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_7_4_pre",
+  "title_en": "Before the Last Toll",
+  "location_id": "altar_first_eclipse",
+  "production": {
+    "direction_en": "At the altar's outer ring, the returned companions raise wards and open an evacuation path. The five-person core party faces the last sentinels while distant friends hold the side lanes in a non-playable set piece.",
+    "music_direction_en": "pre: bgm_held_the_road → bgm_tension | post: sting_bell_toll (the pulse stops)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "altar_first_eclipse"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_4_pre_001",
+      "speaker": "sable_wren",
+      "speaker_display": "Sable",
+      "text": "The east passage is clear. I left a lantern at every turn; nobody gets lost in the dark tonight.",
+      "emotion": "assured",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_4_pre_002",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "The altar is counting backward. It has mistaken a bell for a clock.",
+      "emotion": "distant",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_4_pre_005",
+      "speaker": "tilda_fen",
+      "speaker_display": "Tilda",
+      "text": "The eastern anchor is mine. Hana, take the evacuees through the lantern path.",
+      "emotion": "commanding",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_4_pre_006",
+      "speaker": "hana_birch",
+      "speaker_display": "Hana",
+      "text": "I will. And Fadyme—I kept my promise. Come back, so I can stop keeping it.",
+      "emotion": "worried",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_4_pre_007",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I promise to try.",
+      "emotion": "soft",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_7_4_pre_008",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You do not have to promise alone.",
+      "emotion": "tender",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_7_4_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#vn_7_4.pre_battle_lines",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

@@ -13,6 +13,7 @@ import { playAuto } from '../packages/combat/src/index';
 import { ArtManifest, BattleParty, ChapterIndex, Encounter, type UnitPack, validateContentSet, type RewardAttachment } from '../packages/content-schema/src/index';
 import { finalStats } from '../packages/economy/src/index';
 import { buildUnitPack } from './lib/data';
+import { bindCampaignPhaseStories, compileCampaignStory } from './lib/campaign-story';
 import { ROOT, readJson, writeJson, writeOut } from './lib/fsutil';
 
 const NARR = 'narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content';
@@ -33,6 +34,9 @@ const REAR_ROLES = /caster|support|warder|assassin|flanker/;
 // ---- units -------------------------------------------------------------------------------------------------------
 const pack = buildUnitPack('part1_campaign', chars.map((c) => c.character_id as string), enemies.map((e) => e.enemy_id as string));
 writeJson(`${OUT}/units/unit_pack.json`, pack);
+const base = ArtManifest.parse(readJson(`content/base/art/art_manifest.json`));
+const story = compileCampaignStory(undefined, new Set(Object.keys(base.portraits)));
+for (const [path, scene] of story.files) writeJson(`${OUT}/${path}`, scene);
 
 // ---- encounters + chapter index ----------------------------------------------------------------------------------------
 const nodeIds: string[] = [];
@@ -47,11 +51,10 @@ const chapterOut: Json[] = [
     ]
   }
 ];
-let prev: string | null = null;
 const encounters = new Map<string, Encounter>();
+const battleNodes = new Map<string, Json>();
 
 for (const ch of chapters) {
-  const nodes: Json[] = [];
   for (const n of ch.nodes as Json[]) {
     const st = stages.find((s) => s.stage_id === n.stage_id) as Json;
     const id = snake(st.stage_id);
@@ -72,12 +75,18 @@ for (const ch of chapters) {
     for (const f of foes) {
       if (f.row === 'front' && ++fronts > 2) f.row = 'rear';
     }
+    const entry = story.entries.find((entry) => entry.stageId === st.stage_id);
+    if (!entry) throw new Error(`stage ${st.stage_id} has no canonical story entry`);
+    const phaseStories = bindCampaignPhaseStories(entry, foes, pack);
     const enc = Encounter.parse({
       schema_version: 1,
       encounter_id: id,
       stage_id: st.stage_id,
       title_en: st.title_en,
       location_id: ch.location_id,
+      pre_story: entry.preStory,
+      post_story: entry.postStory,
+      ...(phaseStories.length ? { phase_stories: phaseStories } : {}),
       seed: seedOf(st.stage_id),
       party_mode: tutorial ? 'fixed' : 'owned',
       party: tutorial ? [{ unit_id: 'mahmut', level: 1, slot: 0, row: 'front' }, { unit_id: 'fadyme', level: 1, slot: 1, row: 'rear' }] : [],
@@ -95,26 +104,40 @@ for (const ch of chapters) {
       if (r.grant_item_id) rewards.push({ type: 'item', itemId: r.grant_item_id, quantity: 1 });
     }
     if (st.drop_table_id && !dropTables.has(st.drop_table_id)) throw new Error(`stage ${st.stage_id}: unknown drop table ${st.drop_table_id}`);
-    nodes.push({
+    battleNodes.set(id, {
       node_id: id,
       title_en: st.title_en,
       kind: 'battle',
       encounter: `encounters/${id}.json`,
-      ...(prev ? { requires: prev } : {}),
       ration_class: st.stamina_cost === 0 ? 'tutorial' : 'campaign',
       ...(st.boss_id ? { boss: true } : {}),
       ...(rewards.length ? { rewards: { first_clear: rewards, three_star: [], repeat: [] } } : {}),
       ...(st.drop_table_id ? { drop: { table: st.drop_table_id, ...(st.boss_id && bossSets.get(st.boss_id) ? { boss_set_id: bossSets.get(st.boss_id) } : {}) } } : {})
     });
     nodeIds.push(id);
-    prev = id;
   }
-  chapterOut.push({ chapter_id: ch.chapter_id, title_en: ch.title_en, nodes });
 }
-writeJson(`${OUT}/chapters/chapter_index.json`, ChapterIndex.parse({ schema_version: 1, chapters: chapterOut }));
+if (battleNodes.size !== story.entries.filter((entry) => entry.stageId).length) throw new Error('canonical/mechanical stage coverage differs');
+let previous: string | undefined;
+for (const [chapterNumber, ch] of chapters.entries()) {
+  // Canon uses fuller names for chapters 2 and 5; stage IDs prove the snapshot mapping.
+  const chapterId = story.coverage.chapter_ids[chapterNumber];
+  if (!chapterId) throw new Error(`mechanical chapter ${ch.chapter_id} has no canonical chapter`);
+  const entries = story.entries.filter((entry) => entry.chapterId === chapterId);
+  const stageIds = new Set((ch.nodes as Json[]).map((node) => node.stage_id as string));
+  if (entries.filter((entry) => entry.stageId).length !== stageIds.size || entries.some((entry) => entry.stageId && !stageIds.has(entry.stageId))) throw new Error(`chapter ${ch.chapter_id}: canonical stage mapping differs`);
+  const nodes = entries.map((entry) => {
+    const node = entry.stageId ? battleNodes.get(entry.nodeId)! : { node_id: entry.nodeId, title_en: entry.title, kind: 'story', story: entry.story };
+    const linked = { ...node, ...(previous ? { requires: previous } : {}) };
+    previous = entry.nodeId;
+    return linked;
+  });
+  if (!nodes.length) throw new Error(`chapter ${ch.chapter_id} has no canonical story entries`);
+  chapterOut.push({ chapter_id: chapterId, title_en: ch.title_en, nodes });
+}
+writeJson(`${OUT}/chapters/chapter_index.json`, ChapterIndex.parse({ schema_version: 1, chapters: chapterOut, story_coverage: story.coverage }));
 
 // ---- art manifest: base art + one placeholder atlas for every unit that has no production art yet ------------------------------
-const base = ArtManifest.parse(readJson(`content/base/art/art_manifest.json`));
 const art = base; // the base art manifest already carries the tutorial cast (Mahmut, Fadyme, Bellbound Dead, Hollow Pilgrim)
 mkdirSync(join(ROOT, `${OUT}/art`), { recursive: true });
 const W = 256;
@@ -154,15 +177,16 @@ const TINT: Record<string, [string, string]> = {
   altar_first_eclipse: ['#5b2b4a', '#12060f']
 };
 const backgrounds: Record<string, string> = { ...art.backgrounds };
-for (const ch of chapters) {
-  const loc = ch.location_id as string;
+for (const loc of new Set([...chapters.map((ch) => ch.location_id as string), ...[...story.files.values()].map((scene) => scene.location_id)])) {
   if (backgrounds[loc]) continue;
   const [a, b] = TINT[loc] ?? ['#3a3048', '#0f0b16'];
   const bg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="1280" height="720" fill="url(#g)"/><ellipse cx="640" cy="760" rx="900" ry="220" fill="#000" opacity="0.35"/></svg>`;
   writeOut(`${OUT}/art/bg_${loc}.webp`, await sharp(Buffer.from(bg)).webp({ quality: 70 }).toBuffer());
   backgrounds[loc] = `art/bg_${loc}.webp`;
 }
-writeJson(`${OUT}/art/art_manifest.json`, ArtManifest.parse({ ...art, atlases, units: unitArt, backgrounds }));
+const compiledArt = ArtManifest.parse({ ...art, atlases, units: unitArt, backgrounds });
+const { stills, ...artWithoutStills } = compiledArt;
+writeJson(`${OUT}/art/art_manifest.json`, Object.keys(stills).length ? compiledArt : artWithoutStills);
 
 // ---- validate as the publisher does: base overlaid with this patch -------------------------------------------------------------------
 const walk = (dir: string, rel = ''): string[] => readdirSync(join(dir, rel)).flatMap((n) => { const r = rel ? `${rel}/${n}` : n; return statSync(join(dir, r)).isDirectory() ? walk(dir, r) : [r]; });
@@ -221,4 +245,4 @@ to enemy HP and ATK — its exact meaning is not documented in the data (see doc
 ${rows.join('\n')}
 `
 );
-console.log(`campaign: ${summary.units} units, ${nodeIds.length} stages, ${placeholders.length} placeholder-art units, ${results} stages probed`);
+console.log(`campaign: ${summary.units} units, ${nodeIds.length} stages, ${story.entries.length} story entries, ${story.files.size} scenes, ${story.coverage.entries.reduce((n, entry) => n + entry.line_ids.length, 0)} lines, ${placeholders.length} placeholder-art units, ${results} stages probed`);

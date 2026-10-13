@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_5_3_post",
+  "title_en": "A Knife Between Orders",
+  "location_id": "bridge_forsaken",
+  "production": {
+    "direction_en": "Sable and Rikka slip into a signal tower while the party draws guards away from the bell rope.",
+    "music_direction_en": "pre: bgm_tension (stealth, pizzicato) | post: bgm_revelation on 'This order names Fadyme.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "bridge_forsaken"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_3_post_001",
+      "speaker": "sable_wren",
+      "speaker_display": "Sable",
+      "text": "This order names Fadyme. The seal belongs to the old Crown Guard.",
+      "emotion": "low",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_3_post_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "My commander signed it.",
+      "emotion": "stunned",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_3_post_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then we ask him why.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_3_post_004",
+      "speaker": "sable_wren",
+      "speaker_display": "Sable",
+      "text": "If he answers honestly, I will be surprised.",
+      "emotion": "cool",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_5_3_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch05.json#vn_5_3.post_battle_lines",
+    "source_sha256": "8ea1b07ecba8a8cf27843ce2c2704a360f271459c00d24ebffb85b54db61a83b"
+  }
+}

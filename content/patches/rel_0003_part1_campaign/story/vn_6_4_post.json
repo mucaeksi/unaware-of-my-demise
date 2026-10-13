@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_6_4_post",
+  "title_en": "The Manor Gives Way",
+  "location_id": "estate_ashen_lord",
+  "production": {
+    "direction_en": "The manor shudders. Fadyme holds a stone arch above a trapped child; the recovered ledger lies open beside a handless-watch drawing.",
+    "music_direction_en": "pre: bgm_tension (the manor shudders) | post: bgm_clockless — first hint (pizzicato only) under 'C.V.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "estate_ashen_lord"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_4_post_001",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "Seven notches. The same seal. And these initials: C.V.",
+      "emotion": "focused",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_4_post_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "The handless watch was in the portrait.",
+      "emotion": "grim",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_4_post_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "The name is not in the ledger. We should keep moving.",
+      "emotion": "controlled",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_4_post_004",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "The letters have found us again. I know whose hand wrote them.",
+      "emotion": "fear",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_6_4_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch06.json#vn_6_4.post_battle_lines",
+    "source_sha256": "78d568bd266181e0dc93946e494939bcc85eb87b6317293ee9c01d76fe7dc2d3"
+  }
+}

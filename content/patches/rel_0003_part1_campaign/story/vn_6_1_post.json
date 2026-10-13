@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_6_1_post",
+  "title_en": "The Servants’ Entrance",
+  "location_id": "estate_ashen_lord",
+  "production": {
+    "direction_en": "Sable opens the servants’ entrance from inside. A dozen servants wait in the dark, afraid to speak above a whisper.",
+    "music_direction_en": "pre: bgm_ch6_estate — whispering, soft clock ticks that stop and start | post: bgm_warmth (muted)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "estate_ashen_lord"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_1_post_001",
+      "speaker": "hana_birch",
+      "speaker_display": "Hana",
+      "text": "They are safe. I thought my hands would shake more.",
+      "emotion": "relieved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_1_post_002",
+      "speaker": "sable_wren",
+      "speaker_display": "Sable",
+      "text": "They did shake. You still opened the door.",
+      "emotion": "respectful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_1_post_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "That is often what courage looks like.",
+      "emotion": "warm",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_1_post_004",
+      "speaker": "clem_marr",
+      "speaker_display": "Clem",
+      "text": "There is a row of graves behind this wing. No names. I am coming back for them.",
+      "emotion": "grim",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_6_1_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch06.json#vn_6_1.post_battle_lines",
+    "source_sha256": "78d568bd266181e0dc93946e494939bcc85eb87b6317293ee9c01d76fe7dc2d3"
+  }
+}

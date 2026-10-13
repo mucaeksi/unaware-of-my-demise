@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_2_4_pre",
+  "title_en": "A Page Beneath the Font",
+  "location_id": "cathedral_saint_luthos",
+  "production": {
+    "direction_en": "Aveline lifts a waterlogged page from beneath the font. Mirel holds its edges together while candlelight reveals one surviving sentence.",
+    "music_direction_en": "pre: bgm_quiet_sorrow | post: bgm_quiet_sorrow fades out on 'mercy'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "cathedral_saint_luthos"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_4_pre_001",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "A life held against the dark. That is the rite’s promise.",
+      "emotion": "reading",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_4_pre_002",
+      "speaker": "mirel_quill",
+      "speaker_display": "Mirel",
+      "text": "The sentence continues on a page someone carried away.",
+      "emotion": "focused",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_4_pre_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Who wrote the promise?",
+      "emotion": "direct",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_2_4_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch02.json#vn_2_4.pre_battle_lines",
+    "source_sha256": "8dc93d395a80583c66955dbe30fca66040d23aa972648a8d062edb22ae32eb0a"
+  }
+}

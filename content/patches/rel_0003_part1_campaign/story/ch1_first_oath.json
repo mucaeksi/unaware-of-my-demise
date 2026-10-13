@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch1_first_oath",
+  "title_en": "The Shrine Keeper's Register",
+  "location_id": "forest_whispering_ash",
+  "production": {
+    "direction_en": "Inside the wayshrine, the old keeper opens a register of oaths. Brin stands guard at the door.",
+    "music_direction_en": "bgm_ledger_motif (first statement, music-box tempo) under the register; stop on 'An invitation can only be written once.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_first_oath_001",
+      "speaker": "shrine_keeper",
+      "speaker_display": "Shrine Keeper",
+      "text": "You saved the woodcutters' children. The road owes you a companion.",
+      "emotion": "kind",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_first_oath_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We did not ask for payment.",
+      "emotion": "wary",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_first_oath_003",
+      "speaker": "shrine_keeper",
+      "speaker_display": "Shrine Keeper",
+      "text": "It is not payment. It is an oath. Travelers write here that they will walk for someone else when called.",
+      "emotion": "gentle",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_first_oath_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "And they come? Just like that?",
+      "emotion": "curious",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_first_oath_005",
+      "speaker": "shrine_keeper",
+      "speaker_display": "Shrine Keeper",
+      "text": "The oath binds their road to yours before your paths truly cross. You may meet them later as strangers. The oath remembers even when they do not.",
+      "emotion": "mysterious",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_first_oath_006",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "A promise that remembers people who forget. I should like one of those.",
+      "emotion": "wistful",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "say",
+      "line_id": "ch1_first_oath_007",
+      "speaker": "shrine_keeper",
+      "speaker_display": "Shrine Keeper",
+      "text": "Choose with care. An invitation can only be written once.",
+      "emotion": "solemn",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch1_first_oath_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch01.json#ch1_first_oath.lines",
+    "source_sha256": "53e1cf59847fe15b1e7fa70a54a90f08c81fe0f94c4310c8d527844f8d69df21"
+  }
+}

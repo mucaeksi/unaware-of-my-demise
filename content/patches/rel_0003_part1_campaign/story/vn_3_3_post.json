@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_3_3_post",
+  "title_en": "The Well Runs Red",
+  "location_id": "village_oakhaven",
+  "production": {
+    "direction_en": "A red-vial mercenary tips a flask into the village well. Fadyme raises her silver bell focus; the spell takes more from her than she lets anyone see.",
+    "music_direction_en": "pre: bgm_tension | post: bgm_quiet_sorrow — very quiet; the red on the gauntlet is not scored, leave room"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "village_oakhaven"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_3_post_001",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "There is red on my gauntlet.",
+      "emotion": "concern",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_3_post_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then the enemy finally managed to hit you.",
+      "emotion": "dry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_3_post_003",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "I wiped my own blood on his glove. He must not count the drops.",
+      "emotion": "sad",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_3_3_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch03.json#vn_3_3.post_battle_lines",
+    "source_sha256": "c48d1d1059fce39c2a35723ad4c692f3a7bc05289af8e7daa87b08ae4f333617"
+  }
+}

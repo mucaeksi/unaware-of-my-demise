@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_3_5_post",
+  "title_en": "The Mercenary Captain",
+  "location_id": "village_oakhaven",
+  "production": {
+    "direction_en": "Captain Rusk raises a signal banner over the orchard road. A volley is already aimed at the well.",
+    "music_direction_en": "pre: bgm_tension, snare roll under the signal banner | battle: bgm_boss_human | post: bgm_ledger_motif on 'Seven notches'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "village_oakhaven"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_5_post_001",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Seven notches. Same wax as the seal on your shield. There are letters beneath it: C.V.",
+      "emotion": "focused",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_5_post_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Do those initials mean anything to you?",
+      "emotion": "questioning",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_5_post_003",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Not yet. The Red Vial ledger may know.",
+      "emotion": "thoughtful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_5_post_004",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "C.V. I saw those letters on my father’s last page.",
+      "emotion": "shaken",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_5_post_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "We should find a healer before we open the order.",
+      "emotion": "deflecting",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_5_post_006",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Then I will carry it, sealed, until we do.",
+      "emotion": "steady",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_3_5_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch03.json#vn_3_5.post_battle_lines",
+    "source_sha256": "c48d1d1059fce39c2a35723ad4c692f3a7bc05289af8e7daa87b08ae4f333617"
+  }
+}

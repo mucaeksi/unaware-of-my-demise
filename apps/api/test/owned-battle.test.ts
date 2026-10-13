@@ -208,6 +208,8 @@ describe('the Part I campaign release', () => {
     const campaignPack = UnitPack.parse(JSON.parse(dec.decode(set.find((f) => f.path === 'units/unit_pack.json')!.bytes)));
     const campaignEnc = Encounter.parse(JSON.parse(dec.decode(set.find((f) => f.path === 'encounters/stage_1_2.json')!.bytes)));
     const { auth, playerId } = await signIn(`sub-camp-${rid()}`);
+    expect((await game('/api/v1/progress/battle/start', post({ releaseId: 'rel_0001', nodeId: 'stage_1_1' }, auth))).status).toBe(403);
+    expect((await game('/api/v1/progress/story', post({ releaseId: 'rel_0001', nodeId: 'opening_sad_scene', requestId: rid() }, auth))).status).toBe(200);
     expect((await game('/api/v1/progress/battle/start', post({ releaseId: 'rel_0001', nodeId: 'stage_1_1' }, auth))).status).toBe(200); // the tutorial stage is fixed, no session
     await db().prepare("INSERT INTO player_progress (player_id, node_id, stars, clears, first_cleared_at, updated_at) VALUES (?1, 'stage_1_1', 3, 1, '2026-01-01T00:00:00Z', '2026-01-01T00:00:00Z')").bind(playerId).run();
     const started = (await (await game('/api/v1/progress/battle/start', post({ releaseId: 'rel_0001', nodeId: 'stage_1_2' }, auth))).json()) as { sessionId: string; party: unknown };

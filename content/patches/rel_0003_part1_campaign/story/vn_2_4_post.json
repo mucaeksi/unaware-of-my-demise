@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_2_4_post",
+  "title_en": "A Page Beneath the Font",
+  "location_id": "cathedral_saint_luthos",
+  "production": {
+    "direction_en": "Aveline lifts a waterlogged page from beneath the font. Mirel holds its edges together while candlelight reveals one surviving sentence.",
+    "music_direction_en": "pre: bgm_quiet_sorrow | post: bgm_quiet_sorrow fades out on 'mercy'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "cathedral_saint_luthos"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_4_post_001",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "The person who wrote it may have thought it was mercy.",
+      "emotion": "guarded",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_4_post_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Mercy does not need a missing page.",
+      "emotion": "grim",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_4_post_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "No. But people do.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_2_4_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch02.json#vn_2_4.post_battle_lines",
+    "source_sha256": "8dc93d395a80583c66955dbe30fca66040d23aa972648a8d062edb22ae32eb0a"
+  }
+}

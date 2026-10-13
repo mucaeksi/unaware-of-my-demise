@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_5_3_pre",
+  "title_en": "A Knife Between Orders",
+  "location_id": "bridge_forsaken",
+  "production": {
+    "direction_en": "Sable and Rikka slip into a signal tower while the party draws guards away from the bell rope.",
+    "music_direction_en": "pre: bgm_tension (stealth, pizzicato) | post: bgm_revelation on 'This order names Fadyme.'"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "bridge_forsaken"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_3_pre_001",
+      "speaker": "rikka_ember",
+      "speaker_display": "Rikka",
+      "text": "I can break the door. I can also break the whole wall. Which one do you want?",
+      "emotion": "competitive",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_3_pre_002",
+      "speaker": "sable_wren",
+      "speaker_display": "Sable",
+      "text": "The door. We are rescuing prisoners, not improving the view.",
+      "emotion": "deadpan",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_5_3_pre_003",
+      "speaker": "rikka_ember",
+      "speaker_display": "Rikka",
+      "text": "You make every plan sound less fun.",
+      "emotion": "pout",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_5_3_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch05.json#vn_5_3.pre_battle_lines",
+    "source_sha256": "8ea1b07ecba8a8cf27843ce2c2704a360f271459c00d24ebffb85b54db61a83b"
+  }
+}

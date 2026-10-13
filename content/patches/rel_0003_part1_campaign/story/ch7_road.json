@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch7_road",
+  "title_en": "The Crown-Shaped Crater",
+  "location_id": "mountain_crater_rim",
+  "production": {
+    "direction_en": "Two quiet days later. Mahmut and Fadyme reach the crater rim. Below, an eclipse hangs over seven broken chains.",
+    "music_direction_en": "bgm_ch7_altar (distant, calm layer) — two quiet days; wind over the crater"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "mountain_crater_rim"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch7_road_001",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "It is beautiful. That is the worst part.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch7_road_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "When this is done, we will find somewhere ugly and safe.",
+      "emotion": "dry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch7_road_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "With cheese.",
+      "emotion": "smiling",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch7_road_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "With cheese.",
+      "emotion": "gentle",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch7_road_005",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "He believes the machine is the curse. Tomorrow he learns it is only the hand that holds the pen.",
+      "emotion": "sad",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "say",
+      "line_id": "ch7_road_006",
+      "speaker": "narrator",
+      "speaker_display": "Narration",
+      "text": "Below them, at the foot of the stair, a small lantern light moved. Their friends were already there.",
+      "emotion": "hopeful",
+      "voice_track": "jp_narration"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch7_road_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#ch7_road.lines",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

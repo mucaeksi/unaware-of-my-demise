@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_3_1_post",
+  "title_en": "The Empty Orchard",
+  "location_id": "village_oakhaven",
+  "production": {
+    "direction_en": "Nixie leads the company beneath bare apple trees. The fruit is still on the branches, but every name board in the orchard is blank.",
+    "music_direction_en": "pre: bgm_ch3_oakhaven (uneasy layer from the start: the name boards are blank) | post: bgm_ch3_oakhaven"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "village_oakhaven"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_1_post_001",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "A village can survive losing a name.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_1_post_002",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "A person should not have to prove they belong in their own home.",
+      "emotion": "angry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_1_post_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Then we give the names back.",
+      "emotion": "resolved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_1_post_004",
+      "speaker": "fadyme_thought",
+      "speaker_display": "Fadyme (thought)",
+      "text": "Every year I hid, someone else paid my hours.",
+      "emotion": "guilty",
+      "voice_track": "jp_inner"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_3_1_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch03.json#vn_3_1.post_battle_lines",
+    "source_sha256": "c48d1d1059fce39c2a35723ad4c692f3a7bc05289af8e7daa87b08ae4f333617"
+  }
+}

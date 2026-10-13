@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch4_road",
+  "title_en": "The River City",
+  "location_id": "river_city_gates",
+  "production": {
+    "direction_en": "The river city at dusk. Beneath its bridges, drainage mouths breathe cold air. Chalk arrows mark one of them. At the marked mouth, two Red Vial scouts sit bound back to back, alive, a gray seven-notched seal pressed on each collar.",
+    "music_direction_en": "bgm_road (river city at dusk, distant crowd) → bgm_tension at the bound scouts"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "river_city_gates"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch4_road_001",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "Someone marked that tunnel. Neat arrows. Harbor knots.",
+      "emotion": "observant",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch4_road_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "The Undercity. Everything the city does not want to see goes down there. Including my Guild.",
+      "emotion": "bitter",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch4_road_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "And its healers.",
+      "emotion": "hopeful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch4_road_006",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "Gray wax on Guild scouts, and the scouts still breathing. Someone is hunting my Guild's hunters.",
+      "emotion": "sharp",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch4_road_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Stay close below. The dark down there is not like the forest.",
+      "emotion": "protective",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch4_road_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I know. The forest at least whispered.",
+      "emotion": "light",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch4_road_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch04.json#ch4_road.lines",
+    "source_sha256": "775fd32544c516eacce722b7f5b5398c785faab3744f555c8e6310d5e9a864de"
+  }
+}

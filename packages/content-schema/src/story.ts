@@ -18,6 +18,8 @@ export const StoryCommand = z.discriminatedUnion('op', [
       speaker_display: z.string().min(1).max(40),
       text: z.string().min(1).max(600),
       emotion: z.string().max(40).optional(),
+      /** Production binding only; reviewed Japanese audio assets are supplied separately. */
+      voice_track: z.enum(['jp', 'jp_inner', 'jp_narration', 'none']).optional(),
       hold_seconds: z.number().min(0).max(30).optional()
     })
     .strict(),
@@ -68,6 +70,8 @@ export const StoryScene = z
     illustration_id: Id.optional(),
     /** how long the last line of the scene stays before the scene ends */
     closing_hold_seconds: z.number().min(0).max(10).optional(),
+    /** Authored direction/cue text is preserved as metadata, never interpreted as executable instructions. */
+    production: z.object({ direction_en: z.string().max(6000), music_direction_en: z.string().max(6000).optional() }).strict().optional(),
     commands: z.array(StoryCommand).min(1).max(400),
     provenance: z.object({ source: z.string(), source_sha256: z.string().optional(), note: z.string().optional() }).strict()
   })
@@ -166,6 +170,8 @@ export const Encounter = z
     ui: z.object({ speed: z.boolean(), auto: z.boolean() }).strict().optional(),
     pre_story: SafeAssetPath.optional(),
     post_story: SafeAssetPath.optional(),
+    /** Precompiled story playback at a declared boss phase; it changes presentation only. */
+    phase_stories: z.array(z.object({ unit_id: Id, phase_id: Id, stories: z.array(SafeAssetPath).min(1).max(4) }).strict()).max(4).optional(),
     provenance: z.object({ source: z.string(), source_sha256: z.string().optional() }).strict()
   })
   .strict()
@@ -210,7 +216,14 @@ const Chapter = z
 export const ChapterIndex = z
   .object({
     schema_version: z.literal(1),
-    chapters: z.array(Chapter).min(1)
+    chapters: z.array(Chapter).min(1),
+    /** Compiler source coverage: validators check the declared order, links and stable line IDs. */
+    story_coverage: z.object({
+      sources: z.array(z.object({ path: z.string().regex(/^narrative\/[A-Za-z0-9_/-]+\.json$/), sha256: z.string().regex(/^[a-f0-9]{64}$/) }).strict()).min(1).max(100),
+      chapter_ids: z.array(Id).min(1).max(100),
+      entries: z.array(z.object({ entry_id: z.string().regex(/^[a-z0-9_-]{1,80}$/), node_id: Id,
+        scene_paths: z.array(SafeAssetPath).min(1).max(6), line_ids: z.array(LineId).min(1).max(1000) }).strict()).min(1).max(1000)
+    }).strict().optional()
   })
   .strict();
 export type ChapterIndex = z.infer<typeof ChapterIndex>;

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_1_2_post",
+  "title_en": "No Bell in the Trees",
+  "location_id": "forest_whispering_ash",
+  "production": {
+    "direction_en": "At a collapsed wayshrine, Brin braces a fallen beam while Bellbound Dead scratch at the woodcutters’ shelter. Nixie has been scouting the road; Kera's herb cart is overturned beside the shrine. All three join the guided five-person battle as story loans.",
+    "music_direction_en": "pre: bgm_tension — scratching under the rain, low strings | post: sting_victory, then bgm_warmth (first recruit, small and quiet)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_post_001",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "The woodcutters are safe. I will walk with you until the next bell is silent.",
+      "emotion": "resolved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_post_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "That is farther than the next shrine.",
+      "emotion": "wry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_post_003",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "Then try to keep up.",
+      "emotion": "small_smile",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_post_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "I will mark the next stretch before the wolves can double back. You can borrow my bow until we reach the old cart road.",
+      "emotion": "practical",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_post_005",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "And I am going to retrieve my bottles before they become somebody else's research.",
+      "emotion": "flustered",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_post_006",
+      "speaker": "narration",
+      "speaker_display": "Narration",
+      "text": "Brin joins permanently as a story recruit. Nixie and Kera remain as temporary story loans for the next stretch. The shrine keeper gives the party a First Oath Invitation.",
+      "emotion": "none",
+      "voice_track": "none"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_1_2_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch01.json#vn_1_2.post_battle_lines",
+    "source_sha256": "53e1cf59847fe15b1e7fa70a54a90f08c81fe0f94c4310c8d527844f8d69df21"
+  }
+}

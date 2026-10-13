@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_3_4_pre",
+  "title_en": "The Inn of Borrowed Names",
+  "location_id": "village_oakhaven",
+  "production": {
+    "direction_en": "Pippa sings the lost names back to frightened villagers while a bell charm trembles at her wrist.",
+    "music_direction_en": "pre: Pippa's song is diegetic: lute and voice only (record with her VO) | post: bgm_warmth"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "village_oakhaven"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_4_pre_001",
+      "speaker": "pippa_bell",
+      "speaker_display": "Pippa",
+      "text": "If the ledger forgets you, I will sing louder than the paper.",
+      "emotion": "bright",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_4_pre_002",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "People are smiling again. I thought the bell took that too.",
+      "emotion": "relieved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_4_pre_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Not everything precious can be written down.",
+      "emotion": "gentle",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_3_4_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch03.json#vn_3_4.pre_battle_lines",
+    "source_sha256": "c48d1d1059fce39c2a35723ad4c692f3a7bc05289af8e7daa87b08ae4f333617"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch3_road",
+  "title_en": "Orchard Country",
+  "location_id": "orchard_lowlands",
+  "production": {
+    "direction_en": "Three days of orchard roads. Fadyme walks slower on the hills; Mahmut adjusts his pace without comment.",
+    "music_direction_en": "bgm_road (slower tempo than ch2_road: Fadyme walks slower); hint of bgm_mahmut_theme when he adjusts his pace"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "orchard_lowlands"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_road_001",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We will stop at the next wall.",
+      "emotion": "casual",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_road_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You stopped at the last wall. And the one before.",
+      "emotion": "dry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_road_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "They were good walls.",
+      "emotion": "deadpan",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_road_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You are pacing yourself for me.",
+      "emotion": "knowing",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_road_005",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "I am pacing myself for the walls.",
+      "emotion": "deadpan",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch3_road_006",
+      "speaker": "narrator",
+      "speaker_display": "Narration",
+      "text": "She laughed, and then coughed, and turned her face into her scarf before he could see.",
+      "emotion": "somber",
+      "voice_track": "jp_narration"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch3_road_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch03.json#ch3_road.lines",
+    "source_sha256": "c48d1d1059fce39c2a35723ad4c692f3a7bc05289af8e7daa87b08ae4f333617"
+  }
+}

@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "7215940b9fc2042c0df29cebd688dddf8dca9d7c",
+  "sourceCommit": "8733213bcd13667515baa2bb1ad700bf9b3186a8",
   "reviewedAt": "2026-10-13",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R07",
     "status": "IN_PROGRESS",
-    "nextProposed": "R07 canonical main-story compilation and source coverage",
+    "nextProposed": "R07-C3 First Oath selector and full chapter no-gacha acceptance",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R07-C1 durable authoritative story completion verified",
-      "detail": "Reward-free zero-star story progress, exact operation results and transaction-time account/release/prerequisite guards are implemented. Signed-in chapter cards use server state; callbacks pin account/release and expose unconfirmed saves. 675 tests/lint/typecheck, 46 adapters, real desktop/phone response-loss/reload readers with zero extra POSTs, builds/25 migrations and existing admin flows pass. Canonical story compilation and phase dialogue are next."
+      "title": "R07-C2 complete canonical main-story compilation locally verified",
+      "detail": "51 canonical entries, 419 exact stable lines and 88 scenes now link through the campaign; both Construct phase readers pause/resume above the battle. 700 tests/lint/types, builds/campaign, 46 adapters, browser matrix: 15 pass/1 intentional skip and final focused desktop/phone: 2 pass. Source/hash/order coverage, locked reveal titles and bounded 512-file D1 reads are verified. First Oath/full chapter, reusable spoiler gates, resume and native/deployed proof remain."
     }
   ],
   "next": [
     {
-      "title": "R07 \u2014 canonical main-story compilation and source coverage",
-      "detail": "Compile all 51 ordered main-story entries and 419 unique line IDs with exact source/hash coverage, before/after battle and road/camp/reveal order, recruit/guest/spoiler gates and cue precedence. Current schemas protect ID/prerequisite and slot/type/conditional-reference integrity; further cross-resource/effective economic catalog identities require R07/R08."
+      "title": "R07-C3 \u2014 First Oath selector and full authored chapter acceptance",
+      "detail": "Use the canonical seven-choice First Oath Invitation through durable server-authoritative item spending/character grants and original request recovery; prove a fresh no-gacha chapter/recruit route. Preserve amounts/choices/copy policy. Then reusable companion/codex/event stable-ID gates and R08 effective catalog/grammar; post-battle resume remains R09."
     },
     {
       "title": "R06 \u2014 remaining reviewed combat semantics",
@@ -963,6 +963,33 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R07-C2-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "8733213bcd13667515baa2bb1ad700bf9b3186a8",
+      "verifiedAt": "2026-10-13T18:21:02.180373+00:00",
+      "scope": "R07-C2 working tree: canonical manifest/seven chapter sources compile all 51 entries/419 unique exact lines into 88 scenes and 54 nodes including tutorials. Voice/emotion/source hashes and entry/scene/line/prerequisite coverage checked; both Construct interludes bind to the actual Aether Ward. Eleven compiler, ten semantic coverage and four additional D1 publication/512-file cases; 700 total app/tool tests, lint/types, builds/campaign and 46 adapters pass. Local-Worker matrix15 pass/1 intentional phone-campaign skip with 25 migrations; source/phase readers, recovery and admin flows exercised. Screenshot review caught readers rendered behind the paused battle: explicit scene ordering plus a render-order assertion passes a final focused desktop/phone2-case rerun and game types/lint. Settled screens inspected. Initial fixture failures were corrected: wait for Story before completion polling, isolate IDs against preserved audit records, compare financial rows rather than query durations, and retain both source reward fields. Larger campaign exposed actual D1 ?100 parameter limit; unique hash chunks handle512 files and missing final-chunk object without writes. Provider docs retrieved403, so no current live quota claim. Canonical chapters2/5 names and source cue/direction metadata prevail; missing audio silent, eleven gradient placeholders, embedded107 lines/stage numeric mechanics/rewards unchanged. No paid media/new permissions/historical repair/native/deployed/unchanged-AAB acceptance. First Oath/full chapter, reusable gates, post-battle resume and effective catalog remain open.",
+      "testIds": [
+        "tools/lib/campaign-story.test.ts",
+        "packages/content-schema/src/validate.test.ts",
+        "apps/api/test/content.test.ts",
+        "apps/api/test/owned-battle.test.ts",
+        "apps/api/test/free-repeat.test.ts",
+        "tests/e2e/canonical-story.spec.ts",
+        "tests/e2e/story-progress.spec.ts",
+        "tests/e2e/zz-campaign.spec.ts",
+        "tests/e2e/admin.spec.ts",
+        "npm test",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build:campaign",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1399,7 +1426,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Compile all ordered story entries and validate IDs, references, gates, waves and legal graphs.",
-      "implemented": "R07-A shared effective-set validation now rejects duplicate unit/skill/status/phase/objective/chapter/global-node IDs and cyclic prerequisites before draft writes or publication/signing. Real D1/API rollback and actual local browser graph rejection preserve the active release. Valid base/campaign and order-independent acyclic graphs remain accepted. R07-B adds shared slot/player-copy/guest integrity, unit-kind and own skill/immunity/preservation/nested status-tag reference checks with API/browser rollback proof. Full canonical story compilation, broader cross-resource and effective catalog coverage remain open. R07-C1 adds atomic reward-free zero-star story completion, exact original-result recovery and write-time authority/prerequisite guards; account-pinned readers and server-derived chapter views can advance to a battle after confirmed story progress. Canonical compiler/phase-dialogue coverage remains open.",
+      "implemented": "R07-A/B reject duplicate IDs, cyclic prerequisites, formation collisions, wrong unit kinds and dangling own-skill/status/tag references before draft/publication or device activation. C1 records durable reward-free zero-star story completion with account/release/prerequisite fences and original-result recovery; signed-in Chapters uses authoritative progress. C2 compiles all 51 canonical entries/419 lines into 88 scenes with source hashes and exact node/scene/line/prerequisite coverage; both real Construct phase readers pause, render above and resume battle presentation. Locked titles hide future reveals. First Oath/full no-gacha chapter, reusable companion/codex/event gates and effective economic catalog references remain open.",
       "dependsOn": [
         "R03",
         "R06"
@@ -1417,7 +1444,11 @@
         "apps/api/src/progress/story.ts",
         "apps/api/test/story-progress.test.ts",
         "apps/game/src/flow.ts",
-        "tests/e2e/story-progress.spec.ts"
+        "tests/e2e/story-progress.spec.ts",
+        "tools/lib/campaign-story.ts",
+        "tools/lib/campaign-story.test.ts",
+        "docs/CAMPAIGN_STORY_COMPILATION.md",
+        "tests/e2e/canonical-story.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1425,7 +1456,8 @@
         "E-EXTERNAL",
         "E-R07-A-20261013",
         "E-R07-B-20261013",
-        "E-R07-C1-20261013"
+        "E-R07-C1-20261013",
+        "E-R07-C2-20261013"
       ],
       "blockerIds": []
     },
@@ -1435,7 +1467,7 @@
       "taskStatus": "OPEN",
       "implementationStatus": "PARTIAL",
       "required": "One versioned server/client catalog, finite complete data grammar and safe bounded patch storage/compatibility.",
-      "implemented": "Content schema, server store and patch manager exist; new data-only hero lifecycle, complete grammar/storage and key-rotation acceptance remain open.",
+      "implemented": "Content schema, server store and patch manager exist; new data-only hero lifecycle, complete grammar/storage and key-rotation acceptance remain open. R07-C2 fixes the observed 100-parameter D1 draft lookup failure with deduplicated chunks and real 512-file/missing-final-object regressions; broader catalog/grammar/resource budgets remain open.",
       "dependsOn": [
         "R02",
         "R03",
@@ -1452,7 +1484,8 @@
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R07-C2-20261013"
       ],
       "blockerIds": []
     },

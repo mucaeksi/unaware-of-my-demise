@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_3_2_pre",
+  "title_en": "A Smith’s Last Bell",
+  "location_id": "village_oakhaven",
+  "production": {
+    "direction_en": "Jori has wedged her compact forge shield beneath the gate. She is too small to hold the door alone, but refuses to step away. Kera arrives on the Guild road with her rebuilt cart.",
+    "music_direction_en": "pre: bgm_tension (hammered anvil hits in the rhythm) | post: bgm_warmth (Jori held the gate)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "village_oakhaven"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_2_pre_001",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "If the gate falls, the forge is next. If the forge falls, they take the tools.",
+      "emotion": "stubborn",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_2_pre_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "You can replace tools. You cannot replace a village.",
+      "emotion": "impatient",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_3_2_pre_003",
+      "speaker": "jori_flint",
+      "speaker_display": "Jori",
+      "text": "I know. That is why I am still standing here.",
+      "emotion": "earnest",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_3_2_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch03.json#vn_3_2.pre_battle_lines",
+    "source_sha256": "c48d1d1059fce39c2a35723ad4c692f3a7bc05289af8e7daa87b08ae4f333617"
+  }
+}

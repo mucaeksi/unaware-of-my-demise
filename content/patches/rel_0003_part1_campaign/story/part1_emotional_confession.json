@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "scene_id": "part1_emotional_confession",
+  "title_en": "The Words He Did Not Know",
+  "location_id": "altar_first_eclipse_outer_dais",
+  "production": {
+    "direction_en": "Battle UI dissolves to a still VN composition: Mahmut kneels beside Fadyme under the dim eclipse. The others wait beyond a broken arch, close enough to help but giving them privacy. The narration is quiet; no music for the first exchange.",
+    "music_direction_en": "silence for the first lines; bgm_fadyme_theme enters on piano only when Mahmut first speaks her name; no percussion anywhere in this scene"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "altar_first_eclipse_outer_dais"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_001",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "All this time, you were carrying something alone.",
+      "emotion": "shaken",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I thought if I smiled, the curse would have to wait its turn.",
+      "emotion": "weak_laugh",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You should have told me.",
+      "emotion": "hurt",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_004",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I know. I wanted to be more than the person you were trying to save.",
+      "emotion": "honest",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_005",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You are. You are the person who made every road feel like it led somewhere.",
+      "emotion": "tender",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_006",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Then let me ask for one selfish thing. Stay until I fall asleep.",
+      "emotion": "fragile",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_007",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "I will stay when you wake, too.",
+      "emotion": "resolved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_008",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You still do not understand. I am dying, Mahmut. The curse is taking my hours one by one.",
+      "emotion": "tearful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_009",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Then I will find the hand that wrote this curse. I will not let it write the last line.",
+      "emotion": "grief_to_anger",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_010",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I was afraid you would look at me and see a final hour.",
+      "emotion": "vulnerable",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_011",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "I see you. I should have seen you sooner.",
+      "emotion": "remorseful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_012",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You did not know. That is why I could keep pretending.",
+      "emotion": "soft",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_014",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Then I have one more thing to confess. I knew Yseldra. I saw her call you to the altar that night, and I told you I did not know her.",
+      "emotion": "ashamed",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_015",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "I know. I heard it in the cathedral. We were both pretending, Mahmut. Let us stop together.",
+      "emotion": "tearful",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "confession_013",
+      "speaker": "narrator",
+      "speaker_display": "Narration",
+      "text": "For one breath, the eclipse above them thinned. Fadyme's fingers found Mahmut's, and the darkness beneath her skin did not retreat.",
+      "emotion": "somber",
+      "voice_track": "jp_narration"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "part1_emotional_confession_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#part1_emotional_confession.lines",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

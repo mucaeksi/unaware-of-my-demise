@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scene_id": "ch5_camp",
+  "title_en": "Watch Kept",
+  "location_id": "bridge_far_bank",
+  "production": {
+    "direction_en": "Night on the far bank. Mahmut sits with his back to the bridge. Fadyme brings two cups of weak tea.",
+    "music_direction_en": "bgm_camp (night, very sparse); two cups of tea: no melody, just a warm pad"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "bridge_far_bank"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_camp_001",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You have not spoken since the span.",
+      "emotion": "gentle",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_camp_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "He taught me to hold a shield. He signed the order that made me drop it.",
+      "emotion": "hollow",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_camp_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "And tonight he held a bridge.",
+      "emotion": "soft",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_camp_004",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Does that make him better or worse?",
+      "emotion": "raw",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_camp_005",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "It makes him a man who was late. You know how that feels.",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ch5_camp_006",
+      "speaker": "narrator",
+      "speaker_display": "Narration",
+      "text": "For once, she kept watch, and he slept.",
+      "emotion": "warm",
+      "voice_track": "jp_narration"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "ch5_camp_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch05.json#ch5_camp.lines",
+    "source_sha256": "8ea1b07ecba8a8cf27843ce2c2704a360f271459c00d24ebffb85b54db61a83b"
+  }
+}

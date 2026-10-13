@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_6_3_post",
+  "title_en": "The Sealed Conservatory",
+  "location_id": "estate_ashen_lord",
+  "production": {
+    "direction_en": "Vespera’s glass lantern reveals three hidden anchors around the conservatory. Thistle and Iona, who followed the same message up from the Undercity, set up a field infirmary beneath a stone arch.",
+    "music_direction_en": "pre: bgm_ch6_estate with glass harmonics (Vespera's lantern) | post: bgm_revelation (soft)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "estate_ashen_lord"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_3_post_001",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "Someone taught the glass to remember a room that is gone.",
+      "emotion": "uneasy",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_3_post_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Can a room miss someone?",
+      "emotion": "quiet",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_3_post_003",
+      "speaker": "vespera_wisp",
+      "speaker_display": "Vespera",
+      "text": "A room can keep an absence. That is close enough.",
+      "emotion": "soft",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_6_3_post_004",
+      "speaker": "thistle_roe",
+      "speaker_display": "Thistle",
+      "text": "Th-then we plant something in it. Absences hate that.",
+      "emotion": "gentle",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_6_3_post_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch06.json#vn_6_3.post_battle_lines",
+    "source_sha256": "78d568bd266181e0dc93946e494939bcc85eb87b6317293ee9c01d76fe7dc2d3"
+  }
+}

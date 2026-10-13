@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "scene_id": "part1_clockless_reveal",
+  "title_en": "The Hour That Remained",
+  "location_id": "altar_first_eclipse_reflection",
+  "production": {
+    "direction_en": "A reflection moves in the altar's polished black stone after the others leave. A man in a travel-stained chancellor's coat steps through it, carrying a watch with no hands. Yseldra appears in the reflected archway, her veil lifted for the first time.",
+    "music_direction_en": "bgm_clockless — full statement: pizzicato that never resolves; cut to silence on 'Uncle.'; bgm_main_theme over the ending card"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "altar_first_eclipse_reflection"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_cael_001",
+      "speaker": "lord_cael_veyr",
+      "speaker_display": "Cael",
+      "text": "You have finally told him the truth. How considerate of you to wait until the hour was nearly gone.",
+      "emotion": "cool_amusement",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_mahmut_001",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "Show yourself.",
+      "emotion": "warning",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_cael_002",
+      "speaker": "lord_cael_veyr",
+      "speaker_display": "Cael",
+      "text": "Lord Cael Veyr. The Clockless Chancellor, if titles still comfort anyone.",
+      "emotion": "formal",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_fadyme_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Uncle.",
+      "emotion": "breaking",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_fadyme_001",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "You were dead.",
+      "emotion": "disbelief",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_cael_003",
+      "speaker": "lord_cael_veyr",
+      "speaker_display": "Cael",
+      "text": "The court recorded my death. It did not record where my missing hour went.",
+      "emotion": "cold",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_mahmut_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You made her curse.",
+      "emotion": "angry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_cael_004",
+      "speaker": "lord_cael_veyr",
+      "speaker_display": "Cael",
+      "text": "I made a door. Yseldra chose who would stand in it.",
+      "emotion": "measured",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_yseldra_001",
+      "speaker": "lady_yseldra_vale",
+      "speaker_display": "Yseldra",
+      "text": "Do not mistake him for your answer, Fadyme. He only knows how to turn grief into a bargain.",
+      "emotion": "bitter",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_cael_005",
+      "speaker": "lord_cael_veyr",
+      "speaker_display": "Cael",
+      "text": "Come to the Clockless Court, Mahmut. I can return the hours the curse has taken. The price is one hour that belongs to you.",
+      "emotion": "inviting",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_mahmut_003",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "And if I refuse?",
+      "emotion": "guarded",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_cael_006",
+      "speaker": "lord_cael_veyr",
+      "speaker_display": "Cael",
+      "text": "Then she keeps fading, and you keep learning what 'too late' means.",
+      "emotion": "quiet_threat",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_fadyme_002",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Mahmut, do not answer him tonight.",
+      "emotion": "afraid",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "ending_narration_001",
+      "speaker": "narrator",
+      "speaker_display": "Narration",
+      "text": "The handless watch ticked once. Somewhere below the altar, a bell answered.",
+      "emotion": "ominous",
+      "voice_track": "jp_narration"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "part1_clockless_reveal_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch07.json#part1_clockless_reveal.lines",
+    "source_sha256": "2bfd4c6a95a8be29c009d93d1cf9bc24f0fcd80723cf2bccfd5e46dd0ed25d3f"
+  }
+}

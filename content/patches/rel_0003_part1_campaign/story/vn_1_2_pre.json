@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_1_2_pre",
+  "title_en": "No Bell in the Trees",
+  "location_id": "forest_whispering_ash",
+  "production": {
+    "direction_en": "At a collapsed wayshrine, Brin braces a fallen beam while Bellbound Dead scratch at the woodcutters’ shelter. Nixie has been scouting the road; Kera's herb cart is overturned beside the shrine. All three join the guided five-person battle as story loans.",
+    "music_direction_en": "pre: bgm_tension — scratching under the rain, low strings | post: sting_victory, then bgm_warmth (first recruit, small and quiet)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "forest_whispering_ash"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_pre_001",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "If I move, the roof comes down. If I stay, they reach the children.",
+      "emotion": "strained",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_pre_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "You do not have to hold it alone.",
+      "emotion": "steady",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_pre_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Three hands for the beam and three swords for the dead. We can manage both.",
+      "emotion": "encouraging",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_pre_004",
+      "speaker": "nixie_vale",
+      "speaker_display": "Nixie",
+      "text": "The tracks circle the shrine. We are being pushed toward the road, not away from it.",
+      "emotion": "alert",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_1_2_pre_005",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "My cart is full of smoke vials. If someone can throw straight, I can make that pack of corpses regret gathering.",
+      "emotion": "brisk",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_1_2_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch01.json#vn_1_2.pre_battle_lines",
+    "source_sha256": "53e1cf59847fe15b1e7fa70a54a90f08c81fe0f94c4310c8d527844f8d69df21"
+  }
+}

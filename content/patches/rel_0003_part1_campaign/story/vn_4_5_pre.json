@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_4_5_pre",
+  "title_en": "The Red Vial Matron",
+  "location_id": "undercity_subterranean",
+  "production": {
+    "direction_en": "The Matron seals herself behind a glass ward and floods the chamber with corrosive vapor.",
+    "music_direction_en": "pre: bgm_tension (glass harmonics) | battle: bgm_boss_human (alchemist variation) | post: bgm_warmth (Kera stays)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "undercity_subterranean"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "left"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_5_pre_001",
+      "speaker": "red_vial_matron",
+      "speaker_display": "Red Vial Matron",
+      "text": "The heir’s blood is not a cure. It is the last ingredient.",
+      "emotion": "hungry",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_5_pre_002",
+      "speaker": "kera_voss",
+      "speaker_display": "Kera",
+      "text": "I knew the Guild was using the wrong formula. I did not know it was using her.",
+      "emotion": "furious",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_4_5_pre_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "Break the flasks. Do not let her finish the sentence.",
+      "emotion": "focused",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_4_5_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch04.json#vn_4_5.pre_battle_lines",
+    "source_sha256": "775fd32544c516eacce722b7f5b5398c785faab3744f555c8e6310d5e9a864de"
+  }
+}

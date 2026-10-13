@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "scene_id": "vn_2_1_pre",
+  "title_en": "Rain in the Nave",
+  "location_id": "cathedral_saint_luthos",
+  "production": {
+    "direction_en": "Rain falls through the broken rose window. Fadyme stops at the nave threshold when an unstrung bell answers from above.",
+    "music_direction_en": "pre: bgm_ch2_cathedral — rain through the rose window, organ pedal note; the unstrung bell answers with sting_bell_toll | post: bgm_ch2_cathedral (uneasy layer)"
+  },
+  "commands": [
+    {
+      "op": "background",
+      "location_id": "cathedral_saint_luthos"
+    },
+    {
+      "op": "music",
+      "cue_id": "stop"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_1_pre_000",
+      "speaker": "brin_alder",
+      "speaker_display": "Brin",
+      "text": "The forest road is full of people running from the bells. I will walk them to the lowland shrine. Keep the next bell quiet until I catch up.",
+      "emotion": "resolved",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_1_pre_001",
+      "speaker": "sister_aveline",
+      "speaker_display": "Aveline",
+      "text": "Pilgrims first. Questions after. The clerics sealed the east aisle.",
+      "emotion": "firm_kind",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_1_pre_002",
+      "speaker": "mahmut",
+      "speaker_display": "Mahmut",
+      "text": "We will open it.",
+      "emotion": "steady",
+      "voice_track": "jp"
+    },
+    {
+      "op": "say",
+      "line_id": "node_2_1_pre_003",
+      "speaker": "fadyme",
+      "speaker_display": "Fadyme",
+      "text": "That bell has no rope.",
+      "emotion": "uneasy",
+      "voice_track": "jp"
+    },
+    {
+      "op": "checkpoint",
+      "checkpoint_id": "vn_2_1_pre_done"
+    },
+    {
+      "op": "end"
+    }
+  ],
+  "provenance": {
+    "source": "narrative/02_Main_Story/Chapters/story_script_ch02.json#vn_2_1.pre_battle_lines",
+    "source_sha256": "8dc93d395a80583c66955dbe30fca66040d23aa972648a8d062edb22ae32eb0a"
+  }
+}
