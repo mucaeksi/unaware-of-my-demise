@@ -19,9 +19,7 @@ export async function grantStatements(db: D1Database, playerId: string, atts: re
       if (!c) throw new HttpError(422, 'unknown_item', `character ${a.itemId} does not exist`);
       const shards = CANON.duplicateShards[c.rarity as 3 | 4 | 5] ?? 2;
       out.push(
-        db
-          .prepare("INSERT INTO player_items (player_id, item_type, item_id, copies, shards) VALUES (?1, 'character', ?2, 1, 0) ON CONFLICT (player_id, item_type, item_id) DO UPDATE SET copies = copies + 1, shards = shards + ?3")
-          .bind(playerId, a.itemId, shards)
+        characterGrantStatement(db, playerId, a.itemId, shards)
       );
     } else if (a.type === 'item') {
       const def = await db.prepare("SELECT stack_cap FROM item_defs WHERE item_id = ?1 AND status <> 'retired'").bind(a.itemId).first<{ stack_cap: number }>();
@@ -35,6 +33,11 @@ export async function grantStatements(db: D1Database, playerId: string, atts: re
   }
   return out;
 }
+
+/** Both pulls and attachment grants classify the existing copy in their committed transaction. */
+export const characterGrantStatement = (db: D1Database, playerId: string, characterId: string, duplicateShards: number): D1PreparedStatement =>
+  db.prepare("INSERT INTO player_items (player_id, item_type, item_id, copies, shards) VALUES (?1, 'character', ?2, 1, 0) ON CONFLICT (player_id, item_type, item_id) DO UPDATE SET copies = copies + 1, shards = shards + ?3")
+    .bind(playerId, characterId, duplicateShards);
 
 /** Adds to a material stack, clamped to the item's stack cap. */
 export const stackAdd = (db: D1Database, playerId: string, itemId: string, qty: number, cap: number): D1PreparedStatement =>

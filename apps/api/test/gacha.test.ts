@@ -3,6 +3,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { limitedCharacterBanner, standardCharacterBanner, weaponBanner } from '@uomd/economy';
 import { applyLedger } from '../src/db/ledger';
 import { pullGacha } from '../src/gacha/service';
+import { grantStatements } from '../src/db/grants';
 import { game, post, seedCanonCatalog, signIn } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
@@ -50,6 +51,48 @@ describe('banner disclosure', () => {
 });
 
 describe('pull', () => {
+  it('classifies simultaneous same-character pulls across independent pity groups from committed inventory', async () => {
+    const { playerId } = await signIn(`sub-cross-pity-${rid()}`); await fund(playerId, 2);
+    await putBanner('other_aveline', { ...limitedCharacterBanner('other_aveline', 'sister_aveline', POOLS), pityGroup: 'independent_aveline' });
+    let enter!: () => void; let resume!: () => void; let paused = false;
+    const entered = new Promise<void>((resolve) => { enter = resolve; });
+    const gate = new Promise<void>((resolve) => { resume = resolve; });
+    const delayed = new Proxy(db(), { get(target, key) {
+      if (key === 'batch') return async (statements: D1PreparedStatement[]) => { if (!paused) { paused = true; enter(); await gate; } return target.batch(statements); };
+      const value = Reflect.get(target, key); return typeof value === 'function' ? value.bind(target) : value;
+    } });
+    const slow = pullGacha(delayed, playerId, { bannerId: 'oath_01_aveline', count: 1, requestId: rid() }, { roll: () => 0 });
+    let fast: Awaited<ReturnType<typeof pullGacha>>;
+    try { await entered; fast = await pullGacha(db(), playerId, { bannerId: 'other_aveline', count: 1, requestId: rid() }, { roll: () => 0 }); } finally { resume(); }
+    const result = await slow;
+    expect([fast!.pulls[0]!.duplicate, result.pulls[0]!.duplicate]).toEqual([false, true]);
+    expect(await db().prepare("SELECT copies, shards FROM player_items WHERE player_id = ?1 AND item_id = 'sister_aveline'").bind(playerId).first()).toEqual({ copies: 2, shards: 10 });
+    const journal = await db().prepare('SELECT duplicate FROM gacha_pulls WHERE player_id = ?1 ORDER BY id').bind(playerId).all();
+    expect(journal.results).toEqual([{ duplicate: 0 }, { duplicate: 1 }]);
+  });
+
+  it('recomputes a delayed pull after a shared reward grants the new character first, preserving its response on replay', async () => {
+    const { playerId } = await signIn(`sub-cross-grant-${rid()}`); await fund(playerId, 1);
+    let enter!: () => void; let resume!: () => void; let paused = false;
+    const entered = new Promise<void>((resolve) => { enter = resolve; });
+    const gate = new Promise<void>((resolve) => { resume = resolve; });
+    const delayed = new Proxy(db(), { get(target, key) {
+      if (key === 'batch') return async (statements: D1PreparedStatement[]) => { if (!paused) { paused = true; enter(); await gate; } return target.batch(statements); };
+      const value = Reflect.get(target, key); return typeof value === 'function' ? value.bind(target) : value;
+    } });
+    const requestId = rid(); const pull = { bannerId: 'oath_01_aveline', count: 1, requestId };
+    const slow = pullGacha(delayed, playerId, pull, { roll: () => 0 });
+    try {
+      await entered;
+      await db().batch(await grantStatements(db(), playerId, [{ type: 'character', itemId: 'sister_aveline' }], { keyPrefix: `mail-fixture:${rid()}`, reason: 'mail:compensation' }));
+    } finally { resume(); }
+    const result = await slow;
+    expect(result.pulls[0]).toMatchObject({ duplicate: true, shards: 10 });
+    expect(await db().prepare("SELECT copies, shards FROM player_items WHERE player_id = ?1 AND item_id = 'sister_aveline'").bind(playerId).first()).toEqual({ copies: 2, shards: 10 });
+    const again = await pullGacha(db(), playerId, pull, { roll: () => { throw new Error('must replay'); } });
+    expect(again.pulls).toEqual(result.pulls); expect(again.replayed).toBe(true); expect(again.balance).toBe(0);
+  });
+
   it('debits the cost, journals the pulls, grants items and persists the pity counters (single and ten-pull)', async () => {
     const { auth, playerId } = await signIn(`sub-pull-${rid()}`);
     await fund(playerId, 11);

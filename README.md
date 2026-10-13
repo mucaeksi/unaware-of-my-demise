@@ -207,7 +207,7 @@ Campaign **stage_1_1** has zero-cost tutorial Ration class but a repeat drop tab
 
 Prepare an explicit first-clear-only, reward-free practice or approved capped-repeat policy. Record the source/canon contradiction and obtain the necessary reward decision before changing live payout/canon. The presentation-only T-1/T-2/T-3 entry runner remains reward-free.
 
-Gacha duplicate classification occurs before the inventory transaction and only same-pity-group CAS is serialized. Different pity groups or mail/purchase/compensation can concurrently grant the same newly acquired character without the correct shards. Compute shared duplicate effects and journal/response from committed inventory truth.
+**R04-A locally verified:** gacha now fences the exact original copy counts of every drawn character inside its D1 batch, in addition to pity CAS. A competing pity group or any attachment-grant source forces a bounded retry before debit, response and immutable pull journal commit. Pulls and mail/purchase/stage/task attachments share the same atomic character-copy/shard upsert. Two deterministic cross-group/cross-source regressions failed before correction; 74 focused cases, lint/typecheck and **516 application/tool tests** pass. Existing within-ten-pull duplicate classification and request replay remain intact. General noncurrency grant provenance and the free-repeat payout decision remain R04 acceptance work.
 
 **Accept when:** zero-cost repetitions cannot farm unlimited economic grants and concurrent cross-group/cross-source duplicates preserve copies/shards/history. All financial policies remain in the single-currency model.
 

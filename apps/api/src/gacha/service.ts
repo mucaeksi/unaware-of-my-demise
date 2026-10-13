@@ -1,6 +1,7 @@
 import { analyzeBanner, BannerConfig, CANON, emptyPity, GachaError, pullMany, type PityState, type PullResult, type Roll } from '@uomd/economy';
 import { HttpError } from '../content/store';
 import { balanceOf, ledgerStatements } from '../db/ledger';
+import { characterGrantStatement } from '../db/grants';
 
 export { cryptoRoll } from '../db/rng';
 import { cryptoRoll } from '../db/rng';
@@ -91,9 +92,11 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
       .first<{ pity5: number; pity4: number; lost: number; version: number }>();
     const state: PityState = stateRow ? { pity5: stateRow.pity5, pity4: stateRow.pity4, lost: stateRow.lost } : emptyPity();
     const version = stateRow?.version ?? 0;
-    const owned = new Set(
-      (await db.prepare('SELECT item_id FROM player_items WHERE player_id = ?1 AND item_type = ?2').bind(playerId, config.kind).all<{ item_id: string }>()).results.map((r) => r.item_id)
-    );
+    const inventory = config.kind === 'character'
+      ? (await db.prepare("SELECT item_id, copies FROM player_items WHERE player_id = ?1 AND item_type = 'character'").bind(playerId).all<{ item_id: string; copies: number }>()).results
+      : [];
+    const originalCopies = new Map(inventory.map((r) => [r.item_id, r.copies]));
+    const owned = new Set(originalCopies.keys());
 
     let pulled: ReturnType<typeof pullMany>;
     try {
@@ -134,6 +137,10 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
         .bind(playerId, config.pityGroup, pulled.state.pity5, pulled.state.pity4, pulled.state.lost, version),
       // the update above changed exactly one row, or somebody else pulled meanwhile: ok = 0 violates the CHECK and rolls everything back
       db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+      // Any grant source can acquire this character; fence the snapshot used by the response and immutable pull journal.
+      ...[...new Set(records.filter((r) => r.itemType === 'character').map((r) => r.itemId))].map((id) =>
+        db.prepare("INSERT INTO tx_guard (ok) VALUES (CASE WHEN COALESCE((SELECT copies FROM player_items WHERE player_id = ?1 AND item_type = 'character' AND item_id = ?2), 0) = ?3 THEN 1 ELSE 0 END)")
+          .bind(playerId, id, originalCopies.get(id) ?? 0)),
       ...ledgerStatements(db, {
         playerId,
         currency: 'eclipse_token',
@@ -153,11 +160,7 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
           .bind(playerId, input.requestId, i, input.bannerId, r.pullNumber, r.rarity, rec.itemType, r.itemId, r.outcome, r.upgraded ? 1 : 0, rec.duplicate ? 1 : 0, JSON.stringify(r.rolls)),
         config.kind === 'weapon'
           ? db.prepare("INSERT INTO player_gear (player_id, gear_id, slot) VALUES (?1, ?2, 'weapon')").bind(playerId, r.itemId)
-          : db
-              .prepare(
-                'INSERT INTO player_items (player_id, item_type, item_id, copies, shards) VALUES (?1, ?2, ?3, 1, 0) ON CONFLICT (player_id, item_type, item_id) DO UPDATE SET copies = copies + 1, shards = shards + ?4'
-              )
-              .bind(playerId, rec.itemType, r.itemId, rec.shards)
+          : characterGrantStatement(db, playerId, r.itemId, CANON.duplicateShards[r.rarity])
       );
     });
     batch.push(db.prepare('DELETE FROM tx_guard'));
@@ -167,7 +170,7 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
       return { ...response, balance: await balanceOf(db, playerId, 'eclipse_token'), replayed: false };
     } catch (e) {
       const msg = String(e instanceof Error ? e.message : e);
-      if (/CHECK constraint failed: ok = 1/i.test(msg)) continue; // lost the race for the pity counters: recompute from fresh state
+      if (/CHECK constraint failed: ok = 1/i.test(msg)) continue; // pity or a character copy changed: recompute from committed state
       if (/CHECK constraint failed: balance >= 0/i.test(msg)) throw new HttpError(402, 'insufficient_funds', 'not enough Eclipse Tokens');
       if (/UNIQUE constraint failed: (gacha_requests|ledger)\./i.test(msg)) {
         const dup = await replay();

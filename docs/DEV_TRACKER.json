@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R03 local release authority complete; R04 next",
-      "detail": "Durable client generation, atomic publication and bounded server economic/session admission verified. 514 application/tool tests, 19 Python checks and actual desktop campaign pass; deployed/native proof is separate. Continue shared duplicate/provenance correctness; prepare free-repeat policy without changing canon/live payout silently."
+      "title": "R04-A cross-source duplicate correctness verified",
+      "detail": "Two deterministic race regressions failed before correction; exact-copy transaction fences, shared copy/shard upsert and consistent response/pull history pass 516 application/tool tests and lint/typecheck. General grant provenance and explicit free-repeat policy remain open."
     }
   ],
   "next": [
@@ -447,6 +447,25 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R04-A-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "27269702e7fd22eb99deb7406e8932da67d72580",
+      "verifiedAt": "2026-10-13T04:19:58+00:00",
+      "scope": "R04-A working tree: two failing-before deterministic races now pass (independent pity groups and shared compensation grant before delayed summon). Exact original-copy transaction guards, bounded retry and shared atomic copy/shard upsert keep wallet/request/immutable pull journal/response/replay consistent. 74 focused gacha/mail/progress/billing cases, lint/typecheck and all 516 application/tool tests pass. No rates/prices/canon/live balances changed. Graphify refreshed at the clean R03 delivery revision: 2880 nodes, 7088 edges, 150 communities, real MCP stats/query; current R04 edits are source-verified independently, not claimed indexed. General grant provenance and free-repeat policy acceptance remain open.",
+      "testIds": [
+        "apps/api/test/gacha.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "bash tools/build_graph.sh",
+        "Graphify MCP graph_stats/query_graph (direct stdio)"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -740,10 +759,10 @@
     {
       "id": "R04",
       "title": "Repeat rewards and duplicate grants",
-      "taskStatus": "OPEN",
+      "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Bound zero-cost repeat rewards and compute cross-source duplicate effects from committed inventory.",
-      "implemented": "Stage/drop/gacha/shared-grant paths exist; free-repeat policy and cross-source concurrency are unresolved.",
+      "implemented": "R04-A locally verified: gacha copy-count guards participate in the same D1 batch as pity/debit/request/journal; competing pity or attachment sources trigger bounded recomputation. Shared atomic character-copy/shard upsert prevents divergent grants; committed response/journal and replay agree. Free-repeat policy and general noncurrency grant provenance remain open.",
       "dependsOn": [
         "R01",
         "R03"
@@ -757,7 +776,8 @@
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R04-A-20261013"
       ],
       "blockerIds": [
         "B-ECONOMY"

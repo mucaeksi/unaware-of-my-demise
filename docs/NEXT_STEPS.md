@@ -56,3 +56,7 @@ Successful draft transition, strictly increasing channel pointer and truthful au
 ## Latest verified slice — R03-C
 
 R03 local acceptance is complete: write-time economic/active-account fences, fixed/owned frozen release sessions, original two-hour grace, bounded 24-hour canary/manual allowlists, audited CAS revocation and persistent kill floor. Fifteen new cases, all 514 application/tool tests, 19 Python checks and the actual desktop campaign scenario pass; both builds and all 23 local migrations passed. Migration 0023 must reach the game D1 before the new admin release operations; do not infer live migration/deploy from main push. Next **R04**: shared committed-inventory duplicate effects/journal provenance and an explicit free-repeat payout proposal. Existing payout/canon decisions remain unapplied until resolved; independent correctness work continues. Assets remain deferred.
+
+## Latest verified slice — R04-A
+
+Cross-pity/cross-source character duplicate races are fenced by original-copy counts within the same transaction as pity, payment, request and immutable pull journal. Two new failing-before regressions, 74 focused cases, lint/typecheck and all 516 application/tool tests pass. Shared attachment/pull upsert preserves copies/shards. Next: general grant provenance and concrete free-repeat policy handling. No creative media or rates/prices/canon changes. Graphify was refreshed at clean R03 delivery and queried through actual stdio MCP; current R04 source edits are newer than that index.
