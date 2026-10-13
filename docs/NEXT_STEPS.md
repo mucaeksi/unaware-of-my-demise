@@ -1,6 +1,6 @@
 # Autonomous infrastructure handoff
 
-Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00/R01 are complete locally; current implementation is **R03 — release authority**, split into verified slices. R02 local recovery is implemented; policy/live/native evidence remains open. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
+Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00/R01 are complete locally; current implementation is **R04 — duplicate grants/repeat policy** after local R03 acceptance. R02 local recovery is implemented; policy/live/native evidence remains open. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
 
 ## Resume safely
 
@@ -21,7 +21,7 @@ Owner instruction updated **2026-10-12**: complete README infrastructure in depe
 | Order | Task | Next action |
 | --- | --- | --- |
 | 1 | R02 acceptance gaps | Prepare explicit legacy/refund/calendar/native-offer policy and secure/live configuration proof; local recovery slices are complete. |
-| 2 | R03 | Close durable generation, concurrent publication and economic release/session authority independently of missing Google access. |
+| 2 | R03 | Locally complete (A–C); retain deployed/native proof separately. |
 | 3 | R04–R06 | Fix reward/copy races, client durability and combat semantics before chapter/experience acceptance. |
 | 4 | R07–R18 | Follow README dependencies; finish noncreative infrastructure, retain genuine external/device/store gates and defer paid/creative assets. |
 
@@ -52,3 +52,7 @@ Independent per-channel generation/tombstone, signed legacy/cached-state validat
 ## Latest verified slice — R03-B
 
 Successful draft transition, strictly increasing channel pointer and truthful audit now commit together. Delayed concurrent publication and stale-audit regressions failed before correction; audit failure rolls signing/pointer back. Eighteen focused cases, lint/typecheck and all 499 application/tool tests pass. Next: R03-C current/allowlisted/grace/revoked economic acceptance, transaction-time reward/session fences and bounded existing-session completion.
+
+## Latest verified slice — R03-C
+
+R03 local acceptance is complete: write-time economic/active-account fences, fixed/owned frozen release sessions, original two-hour grace, bounded 24-hour canary/manual allowlists, audited CAS revocation and persistent kill floor. Fifteen new cases, all 514 application/tool tests, 19 Python checks and the actual desktop campaign scenario pass; both builds and all 23 local migrations passed. Migration 0023 must reach the game D1 before the new admin release operations; do not infer live migration/deploy from main push. Next **R04**: shared committed-inventory duplicate effects/journal provenance and an explicit free-repeat payout proposal. Existing payout/canon decisions remain unapplied until resolved; independent correctness work continues. Assets remain deferred.

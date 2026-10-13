@@ -120,11 +120,11 @@ describe('owned-hero battles are fought with a server-frozen party', () => {
     expect(r.status).toBe(422);
   });
 
-  it('a fixed story encounter needs no session and starts with a null party', async () => {
+  it('a fixed story encounter also freezes a release session and starts with a null party', async () => {
     const { auth } = await signIn(`sub-ob-${rid()}`);
     const r = await start(auth, 't1');
     expect(r.status).toBe(200);
-    expect(await r.json()).toEqual({ sessionId: null, party: null, expiresAt: null });
+    expect(await r.json()).toMatchObject({ sessionId: expect.stringMatching(/^[a-f0-9]{32}$/), party: null, expiresAt: expect.any(String) });
   });
 });
 

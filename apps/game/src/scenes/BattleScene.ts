@@ -23,9 +23,11 @@ export interface BattleInit {
   nodeId?: string;
   onDone: (scene: Phaser.Scene, outcome: BattleOutcome) => void;
   onBack: (scene: Phaser.Scene) => void;
-  /** owned-hero stages: the party and session frozen by the server (see flow.ts launchBattle) */
+  /** Owned stages use the frozen party; all signed-in stages use a frozen release session. */
   party?: BattleParty;
   sessionId?: string;
+  /** Financial submission stays bound to the release used when the battle started. */
+  releaseId?: string;
   /** a lost owned-hero battle needs a fresh server session, so retrying goes back through the flow */
   onRetry?: (scene: Phaser.Scene) => void;
   /** opening tutorial: no stars, no server verification line, retreat goes back to the story before the fight */
@@ -709,7 +711,7 @@ export class BattleScene extends Phaser.Scene {
     txt(this, REF_W / 2, tutorial ? 500 : 560, `${result.turns} turns  ·  ${this.recorded.length} actions`, { fontSize: '34px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
     if (!tutorial) {
       const verify = txt(this, REF_W / 2, 618, 'Server verification: checking…', { fontSize: '30px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
-      if (this.cfg.sessionId || this.encounter.party_mode === 'owned') verify.setText('Server verification: at the claim (owned-hero stage)');
+      if (this.cfg.sessionId || this.encounter.party_mode === 'owned') verify.setText('Server verification: at the progress claim');
       else void this.verifyOnServer(verify);
       if (won) void this.claimProgress();
     }
@@ -726,7 +728,7 @@ export class BattleScene extends Phaser.Scene {
     if (!api.signedIn || !this.cfg.nodeId) return;
     try {
       const { content } = Services.ready();
-      const r = await api.submitBattle(await content.activeReleaseId(), this.cfg.nodeId, this.recorded, this.cfg.sessionId);
+      const r = await api.submitBattle(this.cfg.releaseId ?? await content.activeReleaseId(), this.cfg.nodeId, this.recorded, this.cfg.sessionId);
       if (this.dead) return;
       const names = r.rewards.length ? await api.catalogNames().catch(() => new Map<string, string>()) : new Map<string, string>();
       const gained = r.rewards.length ? ` · rewards: ${r.rewards.map((a) => describeAttachment(a, names)).join(', ')}` : '';

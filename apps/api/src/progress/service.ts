@@ -9,6 +9,7 @@ import { taskEventStatements } from '../tasks/service';
 import { rollNodeDrops } from './drops';
 import { buildParty } from './party';
 import type { GameEnv } from '../env';
+import { BATTLE_SESSION_TTL_MS, economicStatement, requireEconomic } from '../content/authority';
 
 export const BattleSubmission = z
   .object({
@@ -78,7 +79,6 @@ async function loadStage(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'
   return { node, pack: UnitPack.parse(JSON.parse(dec.decode(packBytes))), encounter: Encounter.parse(JSON.parse(dec.decode(encBytes))) };
 }
 
-const SESSION_TTL_MS = 2 * 3_600_000;
 const MAX_OPEN_SESSIONS = 10;
 
 export interface BattleStart {
@@ -94,18 +94,25 @@ export interface BattleStart {
  */
 export async function startBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, input: { releaseId: string; nodeId: string }, now = new Date()): Promise<BattleStart> {
   const stage = await loadStage(env, playerId, input.releaseId, input.nodeId);
-  if ((stage.encounter.party_mode ?? 'fixed') !== 'owned') return { sessionId: null, party: null, expiresAt: null };
-  const party = await buildParty(env.DB, playerId, stage.encounter, new Set(stage.pack.units.map((u) => u.unit_id)));
+  await requireEconomic(env.DB, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, now);
+  const party = (stage.encounter.party_mode ?? 'fixed') === 'owned' ? await buildParty(env.DB, playerId, stage.encounter, new Set(stage.pack.units.map((u) => u.unit_id))) : null;
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   const id = [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('');
-  const expiresAt = new Date(now.getTime() + SESSION_TTL_MS).toISOString();
-  await env.DB.batch([
-    env.DB.prepare('DELETE FROM battle_sessions WHERE player_id = ?1 AND (expires_at < ?2 OR consumed_at IS NOT NULL)').bind(playerId, now.toISOString()),
-    // a player can hold a handful of open sessions; the oldest ones make room
-    env.DB.prepare(`DELETE FROM battle_sessions WHERE player_id = ?1 AND id IN (SELECT id FROM battle_sessions WHERE player_id = ?1 ORDER BY created_at DESC LIMIT -1 OFFSET ?2)`).bind(playerId, MAX_OPEN_SESSIONS - 1),
-    env.DB.prepare('INSERT INTO battle_sessions (id, player_id, release_id, node_id, party_json, created_at, expires_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)').bind(id, playerId, input.releaseId, input.nodeId, JSON.stringify(party), now.toISOString(), expiresAt)
-  ]);
+  const expiresAt = new Date(now.getTime() + BATTLE_SESSION_TTL_MS).toISOString();
+  try {
+    await env.DB.batch([
+      economicStatement(env.DB, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, now, undefined, true),
+      env.DB.prepare('DELETE FROM battle_sessions WHERE player_id = ?1 AND (expires_at < ?2 OR consumed_at IS NOT NULL)').bind(playerId, now.toISOString()),
+      // a player can hold a handful of open sessions; the oldest ones make room
+      env.DB.prepare(`DELETE FROM battle_sessions WHERE player_id = ?1 AND id IN (SELECT id FROM battle_sessions WHERE player_id = ?1 ORDER BY created_at DESC LIMIT -1 OFFSET ?2)`).bind(playerId, MAX_OPEN_SESSIONS - 1),
+      env.DB.prepare('INSERT INTO battle_sessions (id, player_id, release_id, node_id, party_json, created_at, expires_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)').bind(id, playerId, input.releaseId, input.nodeId, JSON.stringify(party), now.toISOString(), expiresAt),
+      env.DB.prepare('DELETE FROM tx_guard')
+    ]);
+  } catch (e) {
+    if (/CHECK constraint failed: ok = 1/i.test(String(e))) throw new HttpError(409, 'release_not_economic', 'release authority changed before the battle started');
+    throw e;
+  }
   return { sessionId: id, party, expiresAt };
 }
 
@@ -117,6 +124,8 @@ export async function startBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT
 export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, input: BattleSubmission, now = new Date()): Promise<BattleResponse> {
   const db = env.DB;
   const nowMs = now.getTime();
+  const wallStarted = Date.now();
+  const currentTime = (): Date => new Date(nowMs + Math.max(0, Date.now() - wallStarted));
   const finish = async (o: BattleOutcome, replayed: boolean): Promise<BattleResponse> => {
     const r = await rationRow(db, playerId, Date.now());
     return { ...o, ration: { spent: o.ration.spent, value: r.state.value, cap: RATION_CAP, nextMs: rationNextMs(r.stored, Date.now()) }, replayed };
@@ -131,19 +140,21 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
   if (first) return first;
 
   const stage = await loadStage(env, playerId, input.releaseId, input.nodeId);
+  await requireEconomic(db, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, currentTime(), input.sessionId);
   const node = stage.node;
   let party: BattleParty | undefined;
   let sessionRow: { id: string } | null = null;
-  if ((stage.encounter.party_mode ?? 'fixed') === 'owned') {
-    if (!input.sessionId) throw new HttpError(400, 'session_required', 'this stage is fought with your own heroes: start it first');
+  const owned = (stage.encounter.party_mode ?? 'fixed') === 'owned';
+  if (owned && !input.sessionId) throw new HttpError(400, 'session_required', 'this stage is fought with your own heroes: start it first');
+  if (input.sessionId) {
     const sess = await db
       .prepare('SELECT id, release_id, node_id, party_json, expires_at, consumed_at FROM battle_sessions WHERE id = ?1 AND player_id = ?2')
       .bind(input.sessionId, playerId)
       .first<{ id: string; release_id: string; node_id: string; party_json: string; expires_at: string; consumed_at: string | null }>();
     if (!sess || sess.release_id !== input.releaseId || sess.node_id !== input.nodeId) throw new HttpError(404, 'unknown_session', 'no such battle session for this stage');
     if (sess.consumed_at) throw new HttpError(409, 'session_used', 'this battle session was already submitted');
-    if (Date.parse(sess.expires_at) < nowMs) throw new HttpError(409, 'session_expired', 'this battle session expired; start the stage again');
-    party = BattleParty.parse(JSON.parse(sess.party_json));
+    if (Date.parse(sess.expires_at) <= currentTime().getTime()) throw new HttpError(409, 'session_expired', 'this battle session expired; start the stage again');
+    if (owned) party = BattleParty.parse(JSON.parse(sess.party_json));
     sessionRow = { id: sess.id };
   }
   const out = await replayBattle(stage.pack, stage.encounter, input.actions, party);
@@ -158,6 +169,7 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
   for (let attempt = 0; attempt < 5; attempt++) {
     const seen = attempt > 0 ? await replay() : null;
     if (seen) return seen;
+    await requireEconomic(db, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, currentTime(), input.sessionId);
     const old = await db.prepare('SELECT stars FROM player_progress WHERE player_id = ?1 AND node_id = ?2').bind(playerId, input.nodeId).first<{ stars: number }>();
     const oldStars = old?.stars ?? 0;
     const firstClear = !old;
@@ -185,10 +197,10 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
       rewards: grants.map((g) => g.a),
       ration: { spent: cost }
     };
-    const batch: D1PreparedStatement[] = [];
+    const batch: D1PreparedStatement[] = [economicStatement(db, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, currentTime(), input.sessionId, true)];
     if (sessionRow) {
       batch.push(
-        db.prepare('UPDATE battle_sessions SET consumed_at = ?2 WHERE id = ?1 AND consumed_at IS NULL').bind(sessionRow.id, now.toISOString()),
+        db.prepare('UPDATE battle_sessions SET consumed_at = ?2 WHERE id = ?1 AND consumed_at IS NULL AND julianday(expires_at) > julianday(?2)').bind(sessionRow.id, currentTime().toISOString()),
         db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)')
       );
     }

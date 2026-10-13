@@ -45,6 +45,7 @@ export async function deleteAccount(db: D1Database, playerId: string, confirm: s
     db.prepare("UPDATE players SET status = 'deleted', google_sub = NULL, display_name = NULL, deleted_at = strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id = ?1 AND status = 'active'").bind(playerId),
     db.prepare('DELETE FROM billing_locks WHERE token_hash IN (SELECT token_hash FROM billing_jobs WHERE player_id = ?1)').bind(playerId),
     own('billing_jobs'),
+    own('battle_sessions'),
     ...['sessions', 'player_entry', 'player_teams', 'player_tasks', 'progression_requests', 'player_gear', 'player_chars', 'player_stacks', 'player_account', 'player_progress', 'player_ration', 'battle_claims', 'player_saves', 'pity_state', 'gacha_requests', 'ad_nonces', 'player_items', 'wallets'].map(own)
   ]);
   return { deleted: true };

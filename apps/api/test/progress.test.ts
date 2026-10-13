@@ -3,7 +3,9 @@ import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { playAuto } from '@uomd/combat';
 import { Encounter, UnitPack } from '@uomd/content-schema';
 import { baseFiles, type TestFile } from './fixtures';
-import { admin, entries, game, post, resetContent, signIn, upload } from './helpers';
+import { admin, baseEnv, entries, game, post, resetContent, signIn, upload } from './helpers';
+import { startBattle, submitBattle } from '../src/progress/service';
+import { deleteAccount } from '../src/account/service';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 let base: TestFile[];
@@ -47,7 +49,181 @@ beforeEach(async () => {
 
 const submit = (auth: Record<string, string>, over: Record<string, unknown> = {}) => game('/api/v1/progress/battle', post({ releaseId: 'rel_0001', nodeId: 't1', requestId: rid(), actions, ...over }, auth));
 
+async function publishReplacement(rolloutPercent = 100): Promise<void> {
+  expect((await admin('/admin/api/releases', post({ id: 'rel_0002', channel: 'dev', files: entries(base), rolloutPercent }))).status).toBe(201);
+  expect((await admin('/admin/api/releases/rel_0002/publish', post({}))).status).toBe(200);
+}
+
+const policyPath = '/admin/api/releases/rel_0001/economic-policy';
+const input = (over: Record<string, unknown> = {}) => ({ releaseId: 'rel_0001', nodeId: 't1', requestId: rid(), actions, ...over });
+function delayedDatabase() {
+  let enter!: () => void; let resume!: () => void;
+  const entered = new Promise<void>((resolve) => { enter = resolve; });
+  const gate = new Promise<void>((resolve) => { resume = resolve; });
+  let paused = false;
+  const database = new Proxy(db(), { get(target, key) {
+    if (key === 'batch') return async (statements: D1PreparedStatement[]) => { if (!paused) { paused = true; enter(); await gate; } return target.batch(statements); };
+    const value = Reflect.get(target, key); return typeof value === 'function' ? value.bind(target) : value;
+  } });
+  return { database, entered, resume };
+}
+
 describe('server-verified battle progress', () => {
+  it('refuses new reward claims against an older published release after cutover', async () => {
+    const { auth, playerId } = await signIn(`sub-prog-old-${rid()}`);
+    await publishReplacement();
+    expect((await submit(auth)).status).toBe(409);
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id = ?1').bind(playerId).first()).toMatchObject({ n: 0 });
+  });
+
+  it('a channel kill blocks old financial claims even when the client still has the content', async () => {
+    const { auth, playerId } = await signIn(`sub-prog-kill-${rid()}`);
+    expect((await admin('/admin/api/channels/dev/kill', post({ releaseId: 'rel_0001' }))).status).toBe(200);
+    expect((await submit(auth)).status).toBe(409);
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id = ?1').bind(playerId).first()).toMatchObject({ n: 0 });
+  });
+
+  it('returns a recorded result idempotently after a channel kill without paying again', async () => {
+    const { auth, playerId } = await signIn(`sub-prog-retry-kill-${rid()}`);
+    const requestId = rid(); expect((await submit(auth, { requestId })).status).toBe(200);
+    const before = await db().prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id = ?1').bind(playerId).first();
+    expect((await admin('/admin/api/channels/dev/kill', post({ releaseId: 'rel_0001' }))).status).toBe(200);
+    expect(await (await submit(auth, { requestId })).json()).toMatchObject({ replayed: true });
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id = ?1').bind(playerId).first()).toEqual(before);
+  });
+
+  it('refuses starting a new battle on an old release after cutover', async () => {
+    const { auth } = await signIn(`sub-prog-start-old-${rid()}`); await publishReplacement();
+    expect((await game('/api/v1/progress/battle/start', post({ releaseId: 'rel_0001', nodeId: 't1' }, auth))).status).toBe(409);
+  });
+
+  it('completes a fixed battle started before cutover once during its bounded grace', async () => {
+    const { auth, playerId } = await signIn(`sub-prog-grace-${rid()}`);
+    const started = await startBattle(baseEnv, playerId, { releaseId: 'rel_0001', nodeId: 't1' });
+    expect(started.party).toBeNull(); expect(started.sessionId).toBeTruthy();
+    await publishReplacement();
+    const requestId = rid();
+    expect((await submit(auth, { sessionId: started.sessionId, requestId })).status).toBe(200);
+    expect(await (await submit(auth, { sessionId: started.sessionId, requestId })).json()).toMatchObject({ replayed: true });
+    expect((await submit(auth, { sessionId: started.sessionId })).status).toBe(409);
+  });
+
+  it('denies expired grace and a foreign frozen session without grants', async () => {
+    const a = await signIn(`sub-prog-expiry-${rid()}`); const b = await signIn(`sub-prog-foreign-${rid()}`);
+    const started = await startBattle(baseEnv, a.playerId, { releaseId: 'rel_0001', nodeId: 't1' });
+    await publishReplacement();
+    expect((await submit(b.auth, { sessionId: started.sessionId })).status).toBe(409);
+    await expect(submitBattle(baseEnv, a.playerId, input({ sessionId: started.sessionId }), new Date(Date.now() + 2 * 3_600_000 + 1000))).rejects.toMatchObject({ code: 'release_not_economic' });
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id IN (?1, ?2)').bind(a.playerId, b.playerId).first()).toMatchObject({ n: 0 });
+  });
+
+  it('a kill revokes existing grace and its floor survives a newer authorized rollback', async () => {
+    const { auth, playerId } = await signIn(`sub-prog-floor-${rid()}`);
+    const started = await startBattle(baseEnv, playerId, { releaseId: 'rel_0001', nodeId: 't1' });
+    expect((await admin('/admin/api/channels/dev/kill', post({ releaseId: 'rel_0001' }))).status).toBe(200);
+    expect((await submit(auth, { sessionId: started.sessionId })).status).toBe(409);
+    const restored = await admin('/admin/api/channels/dev/rollback', post({ releaseId: 'rel_0001' }));
+    expect(restored.status).toBe(200);
+    const { id } = await restored.json<{ id: string }>();
+    expect((await submit(auth, { releaseId: id })).status).toBe(200);
+    expect((await submit(auth, { sessionId: started.sessionId })).status).toBe(409);
+    expect((await admin(policyPath, post({ mode: 'allowlisted', expectedVersion: 1, validUntil: new Date(Date.now() + 60_000).toISOString(), reason: 'cannot waive incident floor' }))).status).toBe(409);
+    expect(await db().prepare("SELECT economic_floor FROM channel_pointers WHERE channel = 'dev'").first()).toMatchObject({ economic_floor: 2 });
+  });
+
+  it('supports audited bounded allowlists with CAS and blocks expiration or incident revocation', async () => {
+    const { auth, playerId } = await signIn(`sub-prog-policy-${rid()}`); await publishReplacement();
+    const deadline = new Date(Date.now() + 3_600_000).toISOString();
+    const allow = { mode: 'allowlisted', expectedVersion: 1, validUntil: deadline, reason: 'approved compatibility window' };
+    expect((await admin(policyPath, post(allow))).status).toBe(200);
+    expect((await admin(policyPath, post(allow))).status).toBe(409);
+    expect((await submit(auth)).status).toBe(200);
+    const requestId = rid(); expect((await submit(auth, { requestId })).status).toBe(200);
+    const before = await db().prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id = ?1').bind(playerId).first();
+    await expect(submitBattle(baseEnv, playerId, input(), new Date(deadline))).rejects.toMatchObject({ code: 'release_not_economic' });
+    expect((await admin(policyPath, post({ mode: 'revoked', expectedVersion: 2, reason: 'forced incident revocation' }))).status).toBe(200);
+    expect((await submit(auth)).status).toBe(409);
+    expect(await (await submit(auth, { requestId })).json()).toMatchObject({ replayed: true });
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id = ?1').bind(playerId).first()).toEqual(before);
+  });
+
+  it('validates exception deadlines and forbids viewer mutations or extending the original grace', async () => {
+    await publishReplacement();
+    expect((await admin(policyPath, post({ mode: 'allowlisted', expectedVersion: 1, reason: 'missing bounded deadline' }))).status).toBe(400);
+    expect((await admin(policyPath, post({ mode: 'allowlisted', expectedVersion: 1, validUntil: new Date(Date.now() + 25 * 3_600_000).toISOString(), reason: 'overlong exception deadline' }))).status).toBe(400);
+    expect((await admin(policyPath, post({ mode: 'grace', expectedVersion: 1, validUntil: new Date(Date.now() + 2 * 3_600_000).toISOString(), reason: 'cannot extend original grace' }))).status).toBe(400);
+    await db().prepare("INSERT OR REPLACE INTO admin_users (email, role, created_by) VALUES ('authority-viewer@example.com', 'viewer', 'test')").run();
+    try {
+      expect((await admin(policyPath, { as: 'authority-viewer@example.com' })).status).toBe(200);
+      expect((await admin(policyPath, { ...post({ mode: 'revoked', expectedVersion: 1, reason: 'unauthorized mutation' }), as: 'authority-viewer@example.com' })).status).toBe(403);
+    } finally { await db().prepare("DELETE FROM admin_users WHERE email = 'authority-viewer@example.com'").run(); }
+  });
+
+  it('can revoke the current release immediately and resume only through a newer publication', async () => {
+    const { auth, playerId } = await signIn(`sub-prog-current-revoke-${rid()}`);
+    expect((await admin(policyPath, post({ mode: 'revoked', expectedVersion: 0, reason: 'current release incident' }))).status).toBe(200);
+    expect((await submit(auth)).status).toBe(409);
+    await expect(startBattle(baseEnv, playerId, { releaseId: 'rel_0001', nodeId: 't1' })).rejects.toMatchObject({ code: 'release_not_economic' });
+    await publishReplacement();
+    expect((await submit(auth, { releaseId: 'rel_0002' })).status).toBe(200);
+    expect((await submit(auth)).status).toBe(409);
+  });
+
+  it('keeps the previous canary cohort economically eligible for a bounded window', async () => {
+    const { auth, playerId } = await signIn(`sub-prog-canary-${rid()}`);
+    await publishReplacement(50);
+    expect((await submit(auth)).status).toBe(200);
+    const policy = await db().prepare("SELECT mode, valid_until FROM release_economic_policy WHERE release_id = 'rel_0001'").first<{ mode: string; valid_until: string }>();
+    expect(policy!.mode).toBe('allowlisted');
+    await expect(submitBattle(baseEnv, playerId, input(), new Date(policy!.valid_until))).rejects.toMatchObject({ code: 'release_not_economic' });
+    expect((await admin('/admin/api/channels/dev/kill', post({ releaseId: 'rel_0001' }))).status).toBe(200);
+    expect((await submit(auth)).status).toBe(409);
+  });
+
+  it('rolls an economic exception back when its audit fails', async () => {
+    await publishReplacement();
+    const before = await db().prepare("SELECT * FROM release_economic_policy WHERE release_id = 'rel_0001'").first();
+    await db().exec("CREATE TRIGGER test_reject_economic_audit BEFORE INSERT ON audit_log WHEN NEW.action = 'release.economic_policy' BEGIN SELECT RAISE(ABORT, 'audit unavailable'); END");
+    try {
+      expect((await admin(policyPath, post({ mode: 'allowlisted', expectedVersion: 1, validUntil: new Date(Date.now() + 60_000).toISOString(), reason: 'test audited exception failure' }))).status).toBe(500);
+      expect(await db().prepare("SELECT * FROM release_economic_policy WHERE release_id = 'rel_0001'").first()).toEqual(before);
+    } finally { await db().exec('DROP TRIGGER test_reject_economic_audit'); }
+  });
+
+  it('fences reward writes against a kill arriving after admission and before the grant batch', async () => {
+    const { playerId } = await signIn(`sub-prog-write-race-${rid()}`);
+    const delayed = delayedDatabase();
+    const applying = submitBattle({ ...baseEnv, DB: delayed.database }, playerId, input());
+    const rejected = expect(applying).rejects.toMatchObject({ code: 'release_not_economic' });
+    try {
+      await delayed.entered;
+      expect((await admin('/admin/api/channels/dev/kill', post({ releaseId: 'rel_0001' }))).status).toBe(200);
+    } finally { delayed.resume(); }
+    await rejected;
+    for (const table of ['ledger', 'player_progress', 'battle_claims', 'player_ration']) expect(await db().prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE player_id = ?1`).bind(playerId).first()).toMatchObject({ n: 0 });
+  });
+
+  it('fences a delayed battle start against publication before its session insert', async () => {
+    const { playerId } = await signIn(`sub-prog-start-race-${rid()}`);
+    const delayed = delayedDatabase();
+    const starting = startBattle({ ...baseEnv, DB: delayed.database }, playerId, { releaseId: 'rel_0001', nodeId: 't1' });
+    const rejected = expect(starting).rejects.toMatchObject({ code: 'release_not_economic' });
+    try { await delayed.entered; await publishReplacement(); } finally { delayed.resume(); }
+    await rejected;
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM battle_sessions WHERE player_id = ?1').bind(playerId).first()).toMatchObject({ n: 0 });
+  });
+
+  it('cannot recreate financial/progress state after deletion races an already admitted grant', async () => {
+    const { playerId } = await signIn(`sub-prog-delete-race-${rid()}`);
+    const started = await startBattle(baseEnv, playerId, { releaseId: 'rel_0001', nodeId: 't1' });
+    const delayed = delayedDatabase();
+    const applying = submitBattle({ ...baseEnv, DB: delayed.database }, playerId, input({ sessionId: started.sessionId }));
+    const rejected = expect(applying).rejects.toMatchObject({ code: 'release_not_economic' });
+    try { await delayed.entered; await deleteAccount(db(), playerId, 'DELETE'); } finally { delayed.resume(); }
+    await rejected;
+    for (const table of ['ledger', 'player_progress', 'battle_claims', 'player_ration', 'battle_sessions']) expect(await db().prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE player_id = ?1`).bind(playerId).first()).toMatchObject({ n: 0 });
+  });
+
   it('re-simulates the battle, pays Ration, grants first-clear and three-star rewards once, records progress', async () => {
     const { auth, playerId } = await signIn(`sub-prog-${rid()}`);
     const res = await submit(auth);

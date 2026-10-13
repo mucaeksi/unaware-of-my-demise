@@ -228,6 +228,8 @@ export class ContentStore {
   private async activate(row: ReleaseRow, signed: ContentManifest, actor: string, action: string): Promise<ReleaseRow> {
     const db = this.db;
     const now = new Date().toISOString();
+    const canary = signed.rollout.percent < 100 && !signed.rollout.kill_switch;
+    const validUntil = new Date(Date.parse(now) + (canary ? 24 : 2) * 3_600_000).toISOString();
     try {
       await db.batch([
         db
@@ -238,15 +240,19 @@ export class ContentStore {
           )
           .bind(row.id, JSON.stringify(signed), now, row.channel),
         db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+        db.prepare(`INSERT INTO release_economic_policy (release_id, mode, valid_until, cutover_at, updated_by, updated_at)
+          SELECT release_id, ?5, ?2, ?3, ?4, ?3 FROM channel_pointers WHERE channel = ?1
+          ON CONFLICT (release_id) DO NOTHING`).bind(row.channel, validUntil, now, actor, canary ? 'allowlisted' : 'grace'),
         db
           .prepare(
-            `INSERT INTO channel_pointers (channel, release_id, updated_by, updated_at)
-             SELECT ?1, id, ?3, ?4 FROM content_releases WHERE id = ?2 AND state = 'published'
-             ON CONFLICT (channel) DO UPDATE SET release_id = excluded.release_id, version = version + 1, updated_by = excluded.updated_by, updated_at = excluded.updated_at
+            `INSERT INTO channel_pointers (channel, release_id, updated_by, updated_at, economic_floor)
+             SELECT ?1, id, ?3, ?4, CASE WHEN ?5 = 1 THEN generation ELSE 0 END FROM content_releases WHERE id = ?2 AND state = 'published'
+             ON CONFLICT (channel) DO UPDATE SET release_id = excluded.release_id, version = version + 1, updated_by = excluded.updated_by, updated_at = excluded.updated_at,
+               economic_floor = MAX(channel_pointers.economic_floor, excluded.economic_floor)
              WHERE (SELECT generation FROM content_releases WHERE id = excluded.release_id)
                > COALESCE((SELECT generation FROM content_releases WHERE id = channel_pointers.release_id), 0)`
           )
-          .bind(row.channel, row.id, actor, now),
+          .bind(row.channel, row.id, actor, now, signed.rollout.kill_switch ? 1 : 0),
         db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
         auditStatement(db, actor, action, row.id, { channel: row.channel, generation: row.generation }),
         db.prepare('DELETE FROM tx_guard')

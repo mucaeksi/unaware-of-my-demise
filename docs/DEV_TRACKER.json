@@ -5,15 +5,15 @@
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "R03",
+    "id": "R04",
     "status": "IN_PROGRESS",
-    "nextProposed": "R04",
+    "nextProposed": "R05",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R03-A/B verified; economic admission next",
-      "detail": "Durable client generation/storage and atomic publication/audit pass 499 application/tool tests; two real Chromium storage cases passed with R03-A. Old-release reward/session admission remains open."
+      "title": "R03 local release authority complete; R04 next",
+      "detail": "Durable client generation, atomic publication and bounded server economic/session admission verified. 514 application/tool tests, 19 Python checks and actual desktop campaign pass; deployed/native proof is separate. Continue shared duplicate/provenance correctness; prepare free-repeat policy without changing canon/live payout silently."
     }
   ],
   "next": [
@@ -424,6 +424,29 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R03-C-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "ea7d0f8bc6f54ec2a7ee68e932d786ca79b9b25a",
+      "verifiedAt": "2026-10-13T04:12:01+00:00",
+      "scope": "R03-C working tree: fifteen new economic cases; old new-claim/start and kill cases failed before correction. Current/24h canary or manual allowlist/pre-cutover 2h frozen-session grace/revoked admission; kill floor survives newer rollback; transaction-time kill/cutover/deletion races, deadline boundary/foreign session/CAS/RBAC/audit fault and recorded-result retry covered. 22 progress cases, lint/typecheck and all 514 application/tool tests; 19 Python tests include real legacy SQLite migration/backfill with a retired kill and channel isolation. Actual isolated local game/admin Workers, all 23 D1 migrations and builds; real Chromium desktop campaign (fixed + owned parties/claims/team/boss/data patch) passes. Owned-battle screenshot inspected; placeholder art remains deferred. No live policy/payout, deployment, physical Android or financial tuning proof.",
+      "testIds": [
+        "apps/api/test/progress.test.ts",
+        "apps/api/test/owned-battle.test.ts",
+        "apps/api/test/content.test.ts",
+        "apps/api/test/account.test.ts",
+        "apps/api/test/admin.test.ts",
+        "python3 -m unittest discover -s tools/tests",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "UOMD_CHROMIUM_PATH=/usr/bin/chromium npx --no-install playwright test -c tests/e2e/playwright.config.ts --project landscape-desktop --grep 'campaign: owned-hero'"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -682,10 +705,10 @@
     {
       "id": "R03",
       "title": "Patch generation and release authority",
-      "taskStatus": "IN_PROGRESS",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Durable generation high-water mark, atomic publication and bounded economic release admission.",
-      "implemented": "R03-A locally verified: independent per-channel generation/tombstone, freshness before kill, atomic activation fences, stored signature revalidation and retained legacy migration; IndexedDB metadata/objects await transaction completion. R03-B requires successful draft transition and strictly newer pointer before success audit, with whole-batch rollback on conflict. Economic release/session authority remains open.",
+      "implemented": "R03-A/B/C locally accepted: per-channel durable generation/tombstone and transaction-completion storage; strict draft/pointer/audit publication; current/bounded allowlisted/pre-cutover grace/revoked economic policy with immutable cutover and persistent kill floor. Start and reward batches recheck economic and active-account authority; signed-in fixed/owned sessions freeze release and expire; retries return recorded results only. Actual desktop campaign passes. Deployed/native evidence remains separate; policy UI integration is R13.",
       "dependsOn": [
         "R00"
       ],
@@ -697,14 +720,20 @@
         "packages/patch/src/manager.test.ts",
         "apps/game/src/platform/idbStorage.ts",
         "tests/storage/idb.spec.ts",
-        "apps/api/test/content.test.ts"
+        "apps/api/test/content.test.ts",
+        "apps/api/src/content/authority.ts",
+        "apps/api/migrations/0023_release_economic_authority.sql",
+        "apps/api/test/progress.test.ts",
+        "apps/game/src/flow.ts",
+        "tools/tests/test_release_authority_migration.py"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-REGRESSIONS",
         "E-EXTERNAL",
         "E-R03-A-20261013",
-        "E-R03-B-20261013"
+        "E-R03-B-20261013",
+        "E-R03-C-20261013"
       ],
       "blockerIds": []
     },

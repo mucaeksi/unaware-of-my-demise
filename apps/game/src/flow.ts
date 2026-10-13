@@ -7,9 +7,9 @@ import { Progress, Services } from './services';
 type Node = ChapterIndex['chapters'][number]['nodes'][number];
 
 /**
- * Starts the Battle scene for a node. Fixed (story) encounters just run. Owned-hero stages first ask the server for the frozen party
+ * Starts the Battle scene for a node. Signed-in stages freeze a release session; owned-hero stages also freeze the party
  * (team, gear stats, skill ranks, story loans) and fight with exactly that; a signed-out player is sent to the Account screen.
- * Retrying a lost owned-hero battle starts a fresh session.
+ * Retrying a lost battle starts a fresh session.
  */
 export async function launchBattle(scene: Phaser.Scene, node: Node, enc: Encounter, onDone: (s: Phaser.Scene) => void): Promise<void> {
   const { content } = Services.ready();
@@ -24,20 +24,22 @@ export async function launchBattle(scene: Phaser.Scene, node: Node, enc: Encount
     },
     onRetry: (b: Phaser.Scene) => void launchBattle(b, node, enc, onDone)
   };
-  if ((enc.party_mode ?? 'fixed') !== 'owned') {
+  const owned = (enc.party_mode ?? 'fixed') === 'owned';
+  const api = Services.api;
+  const releaseId = await content.activeReleaseId();
+  if (!owned && !api.signedIn) {
     scene.scene.start('Battle', base);
     return;
   }
-  const api = Services.api;
   if (!api.signedIn) {
     toast(scene, 'Sign in to fight with your own company.', 3200);
     scene.scene.start('Account');
     return;
   }
   try {
-    const started = await api.startBattle(await content.activeReleaseId(), node.node_id);
-    if (!started.party || !started.sessionId) throw new Error('the server did not return a party for this stage');
-    scene.scene.start('Battle', { ...base, party: started.party, sessionId: started.sessionId });
+    const started = await api.startBattle(releaseId, node.node_id);
+    if (!started.sessionId || owned && !started.party) throw new Error('the server did not return a battle session');
+    scene.scene.start('Battle', { ...base, releaseId, ...(started.party ? { party: started.party } : {}), sessionId: started.sessionId });
   } catch (e) {
     toast(scene, errText(e), 3800);
   }

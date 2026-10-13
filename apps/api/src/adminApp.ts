@@ -11,6 +11,7 @@ import { onError, securityHeaders } from './http';
 import type { AdminEnv } from './env';
 import { registerOps } from './admin/ops';
 import { registerBillingOps } from './admin/billing';
+import { setEconomicPolicy } from './content/authority';
 
 type Ctx = { Bindings: AdminEnv; Variables: { admin: AdminIdentity } };
 
@@ -192,6 +193,24 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     const r = await store(c.env).getRelease(c.req.param('id'));
     if (!r) throw new HttpError(404, 'no_such_release', 'release not found');
     return c.json({ ...r, manifest: JSON.parse(r.manifest_json) });
+  });
+
+  app.get('/admin/api/releases/:id/economic-policy', need('viewer'), async (c) => {
+    const release = await store(c.env).getRelease(c.req.param('id'));
+    if (!release) throw new HttpError(404, 'no_such_release', 'release not found');
+    const [policy, pointer] = await Promise.all([
+      c.env.DB.prepare('SELECT * FROM release_economic_policy WHERE release_id = ?1').bind(release.id).first(),
+      c.env.DB.prepare('SELECT release_id, economic_floor FROM channel_pointers WHERE channel = ?1').bind(release.channel).first()
+    ]);
+    return c.json({ releaseId: release.id, channel: release.channel, policy, pointer });
+  });
+  const EconomicPolicy = z.object({ mode: z.enum(['allowlisted', 'grace', 'revoked']), expectedVersion: z.number().int().min(0), validUntil: z.string().datetime().optional(), reason: z.string().trim().min(5).max(300) }).strict();
+  app.post('/admin/api/releases/:id/economic-policy', need('operator'), async (c) => {
+    const id = ReleaseId.safeParse(c.req.param('id'));
+    if (!id.success) throw new HttpError(400, 'bad_release', 'invalid release id');
+    const who = c.get('admin');
+    await setEconomicPolicy(c.env.DB, id.data, who.identity, who.role === 'owner' ? 'owner' : 'operator', await json(c, EconomicPolicy, 2048));
+    return c.json({ ok: true });
   });
 
   app.put('/admin/api/objects/:sha256', need('operator'), async (c) => {
