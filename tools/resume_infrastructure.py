@@ -81,19 +81,61 @@ def workspace_fingerprint(root: Path) -> str:
     return digest.hexdigest()
 
 
+def startup_state(output) -> str:
+    """A terminal CLI error before any model item must not hang until the five-hour deadline."""
+    if not isinstance(getattr(output, 'name', None), (str, os.PathLike)):
+        return 'unverified'
+    try:
+        with Path(output.name).open(errors='replace') as source:
+            data = source.read(1_048_576)
+        if len(data) == 1_048_576:
+            return 'unverified'  # Uncertain/large activity: retain the normal execution deadline.
+    except OSError:
+        return 'unverified'
+    terminal = False
+    for line in data.splitlines():
+        try:
+            event = json.loads(line)
+        except ValueError:
+            continue
+        if not isinstance(event, dict):
+            continue
+        kind = event.get('type', '')
+        if isinstance(kind, str) and kind.startswith('item.'):
+            item = event.get('item')
+            if not isinstance(item, dict) or item.get('type') != 'error':
+                return 'working'  # Any model/tool item preserves an interrupted working session.
+            terminal |= kind == 'item.completed'
+        terminal |= kind == 'turn.failed'
+    return 'failed' if terminal else 'waiting'
+
+
 def run_model(command: list[str], output, timeout: float = INTERVAL - 60, prompt: str = PROMPT) -> subprocess.CompletedProcess:
     with subprocess.Popen(command, stdin=subprocess.PIPE, stdout=output, stderr=subprocess.STDOUT, text=True, start_new_session=True) as process:
-        try:
-            process.communicate(prompt, timeout=timeout)
-        except subprocess.TimeoutExpired:
-            os.killpg(process.pid, signal.SIGTERM)
+        deadline = time.monotonic() + timeout
+        pending_input = prompt
+        monitor_startup = True
+        while True:
             try:
-                process.communicate(timeout=10)
+                process.communicate(pending_input, timeout=max(0.001, min(1, deadline - time.monotonic())))
+                return subprocess.CompletedProcess(command, 75 if monitor_startup and startup_state(output) == 'failed' else process.returncode)
             except subprocess.TimeoutExpired:
-                os.killpg(process.pid, signal.SIGKILL)
-                process.communicate()
-            return subprocess.CompletedProcess(command, 124)
-        return subprocess.CompletedProcess(command, process.returncode)
+                pending_input = None
+                state = startup_state(output) if monitor_startup else 'working'
+                monitor_startup = state not in ('working', 'unverified')
+                startup_failed = state == 'failed'
+                if not startup_failed and time.monotonic() < deadline:
+                    continue
+                try:
+                    os.killpg(process.pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass
+                try:
+                    process.communicate(timeout=10)
+                except subprocess.TimeoutExpired:
+                    os.killpg(process.pid, signal.SIGKILL)
+                    process.communicate()
+                return subprocess.CompletedProcess(command, 75 if startup_failed else 124)
 
 
 def run_once(root: Path, *, dry_run: bool = False, primary_root: Path | None = None) -> str:

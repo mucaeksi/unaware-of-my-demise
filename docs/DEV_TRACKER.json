@@ -787,6 +787,23 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-RUNNER-STARTUP-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "54e27c74",
+      "verifiedAt": "2026-10-13T12:37:04.173803+00:00",
+      "scope": "Primary runtime patch: bounded private startup log classification, terminal no-work failure gets retry code75 and stops owned process group before five-hour timeout; false-success zero exit corrected. Real/unknown model items disable startup monitoring, retryable errors preserve normal work, oversized/unreadable logs retain total deadline. Five actual subprocess cases, all33 Python checks, compile and 46-adapter integrity pass. Actual12:16:48 UTC isolated attempt: thread/turn started, HTTP403/errors only, one terminal error item and zero successful model/tool items. Verified owned child156853 group terminated; parent wrote RETRY_NEXT_INTERVAL and persisted17:16:48 UTC. Restarted updated owned scheduler as PID157993, exclusive lock/real sleeping process/SCHEDULED_NOT_EXECUTED and same deadline observed. Exact interrupted thread/fingerprint preserved; primary source checkpoint still R06-C1 at599 application/tool tests. Latest environment spec/observation50 current/running/connected, network state unknown and desired hosts omit model domain; saved draftrev2 unactivated/no exposed publish. No independent model/usage-reset proof, paid assets or live changes.",
+      "testIds": [
+        "python3 -m unittest discover -s tools/tests (33 cases)",
+        "python3 -m py_compile tools/resume_infrastructure.py",
+        "python3 tools/sync_codex_skills.py --check (46)",
+        "actual isolated scheduler/error-only run/process ownership/deadline observation"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [

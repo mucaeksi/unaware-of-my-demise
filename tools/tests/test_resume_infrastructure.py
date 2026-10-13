@@ -98,6 +98,38 @@ class ResumeGuards(unittest.TestCase):
             result = runner.run_model([sys.executable, '-c', 'import time; time.sleep(5)'], output, timeout=0.02)
         self.assertEqual(result.returncode, 124)
 
+    def test_terminal_startup_error_stops_owned_process_before_execution_timeout(self):
+        command = [sys.executable, '-c', 'import json,time; print(json.dumps({"type":"item.completed","item":{"type":"error"}}),flush=True); time.sleep(20)']
+        with (self.root / 'model.jsonl').open('x') as output:
+            result = runner.run_model(command, output, timeout=3)
+        self.assertEqual(result.returncode, 75)
+
+    def test_success_exit_with_only_terminal_error_is_not_successful_execution(self):
+        command = [sys.executable, '-c', 'import json; print(json.dumps({"type":"turn.failed"}),flush=True)']
+        with (self.root / 'model.jsonl').open('x') as output:
+            result = runner.run_model(command, output, timeout=3)
+        self.assertEqual(result.returncode, 75)
+
+    def test_error_after_real_model_work_retains_normal_process_result(self):
+        command = [sys.executable, '-c', 'import json; print(json.dumps({"type":"item.started","item":{"type":"command_execution"}})); print(json.dumps({"type":"turn.failed"}))']
+        with (self.root / 'model.jsonl').open('x') as output:
+            result = runner.run_model(command, output, timeout=3)
+        self.assertEqual(result.returncode, 0)
+
+    def test_retryable_startup_errors_do_not_stop_a_later_model_message(self):
+        command = [sys.executable, '-c', 'import json; print(json.dumps({"type":"error","message":"retrying"})); print(json.dumps({"type":"item.completed","item":{"type":"agent_message"}}))']
+        with (self.root / 'model.jsonl').open('x') as output:
+            result = runner.run_model(command, output, timeout=3)
+        self.assertEqual(result.returncode, 0)
+
+    def test_oversized_or_unknown_item_logs_never_infer_startup_failure(self):
+        p = self.root / 'model.jsonl'
+        with p.open('w') as output:
+            output.write('{"type":"item.started","item":null}\n{"type":"turn.failed"}\n'); output.flush()
+            self.assertEqual(runner.startup_state(output), 'working')
+            output.write('x' * 1_048_576); output.flush()
+            self.assertEqual(runner.startup_state(output), 'unverified')
+
     def test_isolated_dry_run_preserves_primary_dirty_and_untracked_files(self):
         self.init_repo()
         (self.root / 'source.ts').write_text('export const primaryUnfinished = 3;\n')

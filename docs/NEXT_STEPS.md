@@ -75,7 +75,7 @@ R04 locally complete: the existing Ration-paid repeat contract blocks zero-cost 
 
 ## Continuation tooling verification — 2026-10-13
 
-The isolated worktree and real primary-preserving dry-run are configured; 27 Python cases pass. Latest environment revision 46 is running/connected/current; policy state is unknown and the desired host list still lacks the model hostname. The saved draft revision 2 has current npm/Phaser/D1 instructions and the scoped model-host rule; publishing it is not available through this session’s tools. No model execution or quota-reset guarantee is asserted. Continue R05/other unblocked source work here.
+The isolated worktree and real primary-preserving dry-run are configured; 27 Python cases pass. Latest environment revision 50 is running/connected/current; policy state is unknown and the desired host list still lacks the model hostname. The saved draft revision 2 has current npm/Phaser/D1 instructions and the scoped model-host rule; publishing it is not available through this session’s tools. No model execution or quota-reset guarantee is asserted. Continue R05/other unblocked source work here.
 
 ## Latest verified slice — R05-A
 
@@ -124,3 +124,7 @@ Shipped 20-level/3-rank limits and coherent positive/safe XP/fee arithmetic, ord
 ## Latest verified slice — R06-C1
 
 Owned story guests use their own level/basic equipped stats/ranks, once, following the explicit chapter-1 canon; session stats stay frozen after unequipping. Revised regression failed before correction; nine owned-battle cases, all 599 application/tool tests, lint/typecheck and real desktop campaign pass (phone intentionally skipped). Both builds/25 migrations pass. Next authored unowned-loan rarity3 armor/weapon/accessories and CRC32 seed/defaults, then equipped secondary/proc effects. No inventory minting, numeric tuning or creative assets.
+
+## Continuation runtime update — terminal startup failure
+
+The 12:16:48 UTC retry again emitted HTTP403/terminal error with zero successful model/tool items. Its verified owned CLI group was stopped; the updated scheduler (PID157993 at observation) remains live, with exact interrupted thread/fingerprint and next deadline **2026-10-13 17:16:48 UTC / 20:16:48 Europe/Bucharest**. Five new actual-subprocess guards bring Python verification to 33: no-work terminal errors stop promptly (even a false zero exit), retryable/real-work/uncertain logs retain normal handling and process-group deadline remains bounded. Latest environment spec/observation50 current/running/connected, network state unknown, desired hosts lack model domain. No independent model-execution or quota-reset proof. R06-C1 application checkpoint stays 599 tests; canonical loan template remains next.
