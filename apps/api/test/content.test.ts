@@ -1,9 +1,10 @@
-import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ContentManifest } from '@uomd/content-schema';
 import { PatchManager, MemoryStorage, type BaseContent, type RemoteSource } from '@uomd/patch';
 import { sha256Hex, verifyPayload, type SignedPayload } from '@uomd/shared';
 import { baseFiles, patchFiles, type TestFile } from './fixtures';
 import { admin, baseEnv, entries, game, resetContent, signingPublic, upload, adminEnv } from './helpers';
+import { ContentStore } from '../src/content/store';
 
 let base: TestFile[];
 let patch: TestFile[];
@@ -151,10 +152,51 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
     expect((await post('/admin/api/releases', { id: 'rel_0002', channel: 'dev', notes: 'a', dependsOn: 'rel_0001', files: entries(patch) })).status).toBe(201);
     expect((await post('/admin/api/releases', { id: 'rel_0003', channel: 'dev', notes: 'b', dependsOn: 'rel_0001', files: entries(patch) })).status).toBe(201);
     expect((await post('/admin/api/releases/rel_0003/publish', {})).status).toBe(200);
+    const auditBefore = await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'release.publish' AND target = 'rel_0002'").first<{ n: number }>();
     const stale = await post('/admin/api/releases/rel_0002/publish', {});
     expect(stale.status).toBe(409);
     const m = ContentManifest.parse(await (await game('/api/v1/content/channels/dev/manifest')).json());
     expect(m.release.id).toBe('rel_0003');
+    expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'release.publish' AND target = 'rel_0002'").first()).toEqual(auditBefore);
+  });
+
+  it('fences a delayed draft snapshot after another request publishes it and a newer release', async () => {
+    await publishBase(); await upload(patch);
+    for (const id of ['rel_0002', 'rel_0003']) expect((await post('/admin/api/releases', { id, channel: 'dev', dependsOn: 'rel_0001', files: entries(patch) })).status).toBe(201);
+    const auditBefore = await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'release.publish' AND target = 'rel_0002'").first<{ n: number }>();
+    let started!: () => void; let resume!: () => void; let paused = false;
+    const reading = new Promise<void>((resolve) => { started = resolve; });
+    const gate = new Promise<void>((resolve) => { resume = resolve; });
+    const getRelease = ContentStore.prototype.getRelease;
+    const spy = vi.spyOn(ContentStore.prototype, 'getRelease').mockImplementation(async function (this: ContentStore, id) {
+      const row = await getRelease.call(this, id);
+      if (id === 'rel_0002' && !paused) { paused = true; started(); await gate; }
+      return row;
+    });
+    const delayed = post('/admin/api/releases/rel_0002/publish', {});
+    try {
+      await reading;
+      expect((await post('/admin/api/releases/rel_0002/publish', {})).status).toBe(200);
+      expect((await post('/admin/api/releases/rel_0003/publish', {})).status).toBe(200);
+      const pointer = await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first();
+      resume(); expect((await delayed).status).toBe(409);
+      expect(await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first()).toEqual(pointer);
+      expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'release.publish' AND target = 'rel_0002'").first()).toMatchObject({ n: auditBefore!.n + 1 });
+    } finally { resume(); await delayed; spy.mockRestore(); }
+  });
+
+  it('rolls publication and signing back if the audit cannot commit', async () => {
+    await publishBase(); await upload(patch);
+    await post('/admin/api/releases', { id: 'rel_0002', channel: 'dev', dependsOn: 'rel_0001', files: entries(patch) });
+    const store = new ContentStore(baseEnv.DB, baseEnv.CONTENT);
+    const draft = await store.getRelease('rel_0002');
+    const pointer = await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first();
+    await baseEnv.DB.exec("CREATE TRIGGER test_reject_publication BEFORE INSERT ON audit_log WHEN NEW.action = 'release.publish' AND NEW.target = 'rel_0002' BEGIN SELECT RAISE(ABORT, 'audit unavailable'); END");
+    try {
+      expect((await post('/admin/api/releases/rel_0002/publish', {})).status).toBe(500);
+      expect(await store.getRelease('rel_0002')).toEqual(draft);
+      expect(await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first()).toEqual(pointer);
+    } finally { await baseEnv.DB.exec('DROP TRIGGER test_reject_publication'); }
   });
 
   it('production publishing needs the owner role; operators can publish to dev', async () => {
@@ -219,11 +261,15 @@ describe('server-side battle verification', () => {
 
   it('rate limits the public verification endpoint', async () => {
     await publishBase();
-    let limited = 0;
-    for (let i = 0; i < 35; i++) {
-      const r = await game('/api/v1/battles/verify', { method: 'POST', body: JSON.stringify({ releaseId: 'rel_0001', encounterPath: 'encounters/tutorial_t1.json', actions: [] }), headers: { 'Content-Type': 'application/json', 'CF-Connecting-IP': '203.0.113.9' } });
-      if (r.status === 429) limited++;
-    }
-    expect(limited).toBeGreaterThanOrEqual(4);
+    // Keep the burst inside one rate-limit window even if the suite reaches a minute boundary.
+    vi.useFakeTimers({ toFake: ['Date'] });
+    try {
+      let limited = 0;
+      for (let i = 0; i < 35; i++) {
+        const r = await game('/api/v1/battles/verify', { method: 'POST', body: JSON.stringify({ releaseId: 'rel_0001', encounterPath: 'encounters/tutorial_t1.json', actions: [] }), headers: { 'Content-Type': 'application/json', 'CF-Connecting-IP': '203.0.113.9' } });
+        if (r.status === 429) limited++;
+      }
+      expect(limited).toBeGreaterThanOrEqual(4);
+    } finally { vi.useRealTimers(); }
   });
 });

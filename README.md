@@ -193,7 +193,7 @@ Legacy migration can recover the greatest signed generation still retained in th
 
 Reject authentic old kill g2 over active g4, replay g2 after accepted kill g3, and unseen g3 after g4→g2 fallback. Preserve repeated current polling and a deliberately signed **newer g5** containing older content for an authorized rollback.
 
-[ContentStore.activate](apps/api/src/content/store.ts#L231) can write an already-published old pointer even when its guarded draft transition changed zero rows. Keep successful transition, monotonic/CAS channel pointer and truthful audit in the same transaction; test the delayed concurrent-publication interleaving, not only sequential stale drafts.
+**R03-B locally verified:** [ContentStore.activate](apps/api/src/content/store.ts) atomically requires a successful draft transition and a strictly increasing channel pointer before its success audit can commit. A lost transition rolls the complete batch back with 409. The deterministic delayed-snapshot race and stale-audit regression failed before correction; audit failure also preserves the unsigned draft and old pointer. Eighteen publishing/verification cases, lint/typecheck and **499 application/tool tests** pass. The existing rate-limit burst test now freezes only Date to avoid crossing its minute window. No deployment evidence is implied.
 
 [Progress service](apps/api/src/progress/service.ts#L65) accepts any published same-channel release. Define current/allowlisted/grace/revoked **economic** acceptance, bounded frozen-session completion grace and forced incident revocation. A client-side kill does not revoke old reward claims.
 

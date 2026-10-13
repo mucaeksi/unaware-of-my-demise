@@ -228,24 +228,33 @@ export class ContentStore {
   private async activate(row: ReleaseRow, signed: ContentManifest, actor: string, action: string): Promise<ReleaseRow> {
     const db = this.db;
     const now = new Date().toISOString();
-    const [release] = await db.batch([
-      db
-        .prepare(
-          `UPDATE content_releases SET state = 'published', manifest_json = ?2, published_at = ?3
-           WHERE id = ?1 AND state = 'draft'
-             AND generation > COALESCE((SELECT r.generation FROM channel_pointers p JOIN content_releases r ON r.id = p.release_id WHERE p.channel = ?4), 0)`
-        )
-        .bind(row.id, JSON.stringify(signed), now, row.channel),
-      db
-        .prepare(
-          `INSERT INTO channel_pointers (channel, release_id, updated_by, updated_at)
-           SELECT ?1, id, ?3, ?4 FROM content_releases WHERE id = ?2 AND state = 'published'
-           ON CONFLICT (channel) DO UPDATE SET release_id = excluded.release_id, version = version + 1, updated_by = excluded.updated_by, updated_at = excluded.updated_at`
-        )
-        .bind(row.channel, row.id, actor, now),
-      auditStatement(db, actor, action, row.id, { channel: row.channel, generation: row.generation })
-    ]);
-    if (!release || release.meta.changes !== 1) throw new HttpError(409, 'stale_release', 'a newer release is already current on this channel');
+    try {
+      await db.batch([
+        db
+          .prepare(
+            `UPDATE content_releases SET state = 'published', manifest_json = ?2, published_at = ?3
+             WHERE id = ?1 AND state = 'draft'
+               AND generation > COALESCE((SELECT r.generation FROM channel_pointers p JOIN content_releases r ON r.id = p.release_id WHERE p.channel = ?4), 0)`
+          )
+          .bind(row.id, JSON.stringify(signed), now, row.channel),
+        db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+        db
+          .prepare(
+            `INSERT INTO channel_pointers (channel, release_id, updated_by, updated_at)
+             SELECT ?1, id, ?3, ?4 FROM content_releases WHERE id = ?2 AND state = 'published'
+             ON CONFLICT (channel) DO UPDATE SET release_id = excluded.release_id, version = version + 1, updated_by = excluded.updated_by, updated_at = excluded.updated_at
+             WHERE (SELECT generation FROM content_releases WHERE id = excluded.release_id)
+               > COALESCE((SELECT generation FROM content_releases WHERE id = channel_pointers.release_id), 0)`
+          )
+          .bind(row.channel, row.id, actor, now),
+        db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+        auditStatement(db, actor, action, row.id, { channel: row.channel, generation: row.generation }),
+        db.prepare('DELETE FROM tx_guard')
+      ]);
+    } catch (e) {
+      if (/CHECK constraint failed: ok = 1/i.test(String(e))) throw new HttpError(409, 'stale_release', 'the draft or channel changed before publication; retry');
+      throw e;
+    }
     return (await this.getRelease(row.id)) as ReleaseRow;
   }
 

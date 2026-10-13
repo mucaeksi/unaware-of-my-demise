@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R03-A durable client generation verified; publication next",
-      "detail": "497 application/tool tests plus two actual Chromium/IndexedDB cases pass. Per-channel authority survives overlay loss/rollback/kill; signed cached-state validation and transaction-completion durability are covered. Server publication and reward/session admission remain open."
+      "title": "R03-A/B verified; economic admission next",
+      "detail": "Durable client generation/storage and atomic publication/audit pass 499 application/tool tests; two real Chromium storage cases passed with R03-A. Old-release reward/session admission remains open."
     }
   ],
   "next": [
@@ -407,6 +407,23 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R03-B-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "3f01a1e260145821e555ad2b06a95925f89b93e3",
+      "verifiedAt": "2026-10-13T03:57:49+00:00",
+      "scope": "R03-B working tree: two publishing regressions failed before correction (delayed snapshot moved pointer backward and stale draft added success audit). Strict draft-transition and monotonic-pointer guards now atomically fence publication/audit; audit-insert fault rolls draft/signature/pointer back. Two added cases, 18 focused publishing/verification cases, lint/typecheck and all 499 application/tool tests pass. Existing fixed-minute throttle burst stabilized with Date-only clock. No live publish/deploy or economic session-admission proof.",
+      "testIds": [
+        "apps/api/test/content.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -668,7 +685,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Durable generation high-water mark, atomic publication and bounded economic release admission.",
-      "implemented": "R03-A locally verified: independent per-channel generation/tombstone, freshness before kill, atomic activation fences, stored signature revalidation and retained legacy migration; IndexedDB metadata/objects await transaction completion. Server publish CAS and economic release/session authority remain open.",
+      "implemented": "R03-A locally verified: independent per-channel generation/tombstone, freshness before kill, atomic activation fences, stored signature revalidation and retained legacy migration; IndexedDB metadata/objects await transaction completion. R03-B requires successful draft transition and strictly newer pointer before success audit, with whole-batch rollback on conflict. Economic release/session authority remains open.",
       "dependsOn": [
         "R00"
       ],
@@ -679,13 +696,15 @@
         "apps/api/src/progress/service.ts",
         "packages/patch/src/manager.test.ts",
         "apps/game/src/platform/idbStorage.ts",
-        "tests/storage/idb.spec.ts"
+        "tests/storage/idb.spec.ts",
+        "apps/api/test/content.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-REGRESSIONS",
         "E-EXTERNAL",
-        "E-R03-A-20261013"
+        "E-R03-A-20261013",
+        "E-R03-B-20261013"
       ],
       "blockerIds": []
     },

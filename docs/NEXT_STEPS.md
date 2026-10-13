@@ -48,3 +48,7 @@ Viewer-only reconciliation snapshots and concrete refund/calendar/native-offer p
 ## Latest verified slice — R03-A
 
 Independent per-channel generation/tombstone, signed legacy/cached-state validation, concurrent activation fences and transaction-completion IndexedDB durability pass 29 patch cases, two actual Chromium storage cases, lint/typecheck, all 497 application/tool tests and both builds. The original three generation regressions failed before correction. Current work: R03-B atomic publication with truthful audit, then R03-C economic release/session acceptance. Local database deletion and already-erased legacy history are genuine limits; server admission remains necessary. The five-hour runner safely skipped the dirty worktree at 2026-10-13 02:16:48 UTC; no new model execution is claimed.
+
+## Latest verified slice — R03-B
+
+Successful draft transition, strictly increasing channel pointer and truthful audit now commit together. Delayed concurrent publication and stale-audit regressions failed before correction; audit failure rolls signing/pointer back. Eighteen focused cases, lint/typecheck and all 499 application/tool tests pass. Next: R03-C current/allowlisted/grace/revoked economic acceptance, transaction-time reward/session fences and bounded existing-session completion.
