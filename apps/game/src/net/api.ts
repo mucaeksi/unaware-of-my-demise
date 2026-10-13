@@ -134,6 +134,14 @@ export interface MailItem {
   expires_at: string;
   claimed_at: string | null;
 }
+export interface PurchaseRecord {
+  recordKey: string; orderId: string | null; productId: string; title: string;
+  kind: 'consumable' | 'subscription'; deliveryState: 'granted' | 'refunded' | 'unconfirmed';
+  acknowledged: boolean | null; recordedAt: string; refundedAt: string | null;
+  providerState: string | null; providerCheckedAt: string | null;
+  recoveryState: 'pending' | 'review' | 'done' | null;
+}
+
 export interface Product {
   productId: string;
   kind: 'consumable' | 'subscription';
@@ -552,6 +560,20 @@ export class GameApi extends EventTarget {
     if (!result || result.productId !== productId || !['granted', 'already_granted', 'pending', 'not_entitled'].includes(result.status)
       || (result.status === 'granted' || result.status === 'already_granted') && (typeof result.orderId !== 'string' || !result.orderId))
       throw new ApiError(503, 'invalid_response', 'Purchase verification has not been confirmed');
+    return result;
+  }
+  async purchaseHistory(): Promise<{ records: PurchaseRecord[]; truncated: boolean }> {
+    const result = await this.call<{ records: PurchaseRecord[]; truncated: boolean }>('GET', '/api/v1/shop/history');
+    const date = (value: unknown) => typeof value === 'string' && Number.isFinite(Date.parse(value));
+    if (!result || typeof result.truncated !== 'boolean' || !Array.isArray(result.records) || result.records.length > 30 || !result.records.every((record) => record
+      && typeof record.recordKey === 'string' && record.recordKey.length <= 220 && typeof record.productId === 'string' && /^[a-z][a-z0-9_.]{1,99}$/.test(record.productId)
+      && typeof record.title === 'string' && record.title.length <= 512 && ['consumable', 'subscription'].includes(record.kind)
+      && ['granted', 'refunded', 'unconfirmed'].includes(record.deliveryState) && (record.orderId === null || typeof record.orderId === 'string')
+      && (record.acknowledged === null || typeof record.acknowledged === 'boolean') && date(record.recordedAt)
+      && (record.refundedAt === null || date(record.refundedAt)) && (record.providerCheckedAt === null || date(record.providerCheckedAt))
+      && (record.providerState === null || ['active', 'canceled', 'in_grace', 'on_hold', 'paused', 'expired', 'pending', 'unknown'].includes(record.providerState))
+      && (record.recoveryState === null || ['pending', 'review', 'done'].includes(record.recoveryState))))
+      throw new ApiError(503, 'invalid_response', 'Purchase history is unavailable');
     return result;
   }
   adBegin(): Promise<{ nonce: string }> {

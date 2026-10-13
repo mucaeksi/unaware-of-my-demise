@@ -35,6 +35,7 @@ export class AccountScene extends HubScene {
       return;
     }
     const me = await api.me();
+    this.add_(new Button(this, 300, 195, { label: 'PURCHASES', w: 460, h: 100, onClick: () => this.scene.start('Purchases') }));
     this.add_(new Button(this, REF_W - 300, 195, { label: 'SAVED ACTIONS', w: 460, h: 100, onClick: () => this.scene.start('Operations') }));
     this.add_(txt(this, REF_W / 2, 280, me.displayName ?? 'Wayfarer', { fontSize: '52px', color: T.gold }).setOrigin(0.5));
     this.add_(txt(this, REF_W / 2, 350, `Player ${me.id}`, { fontSize: '26px', color: T.dim }).setOrigin(0.5));

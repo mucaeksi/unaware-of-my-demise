@@ -108,3 +108,7 @@ Saved Actions exposes scoped pending/history and safe original-identity recovery
 ## Latest verified slice — R05-G1
 
 Checkout and restore retain their opening account revision; pending receipts reach provider-bound encrypted recovery. Restore exposes pending/unconfirmed outcomes, and malformed/wrong-product server responses never become a reported purchase success. Five new failing-before cases, 581 application/tool tests and lint/typecheck pass; both builds pass. Two browser SDK-fixture Shop cases pass with inspected phone screenshot (no actual Play/device proof). Next consumed-receipt status/history recovery; R11/R18 retain actual native lifecycle, secure session, offer-binding and device gates.
+
+## Latest verified slice — R05-G2
+
+Purchase History reads scoped recent delivery/recovery facts consistently without another grant/provider request. Consumed response-loss records, pending/review/refund and legacy unknown provider observations remain distinct. Four API/two client cases, 587 application/tool tests and lint/typecheck pass; four browser response/SDK-fixture scenarios pass and phone screenshot inspected. Both builds/25 migrations pass. Recent history is limited to 30 records; archival export/capacity remain R17. Graph refreshed (3011/7457/154). Continue independent R06 source semantics; pre-purchase offer/version binding and native secure-session/lifecycle/device work remain R02/R11/R18, and R05 retains its acceptance gates.

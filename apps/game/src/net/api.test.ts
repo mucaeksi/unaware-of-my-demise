@@ -33,6 +33,20 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('authentication response ownership', () => {
+  it('rejects corrupt history instead of drawing a false delivery', async () => {
+    for (const result of [{ records: [], truncated: 'false' }, { records: [{ deliveryState: 'granted', recordedAt: 'invalid' }], truncated: false }]) {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(result))); const api = new GameApi('https://game.test');
+      await expect(api.purchaseHistory()).rejects.toMatchObject({ code: 'invalid_response' });
+    }
+  });
+
+  it('does not expose a delayed purchase history to the newly selected account', async () => {
+    const delayed = deferred(); vi.stubGlobal('fetch', vi.fn().mockReturnValueOnce(delayed.promise).mockResolvedValueOnce(success()));
+    const api = new GameApi('https://game.test'); const old = api.purchaseHistory();
+    const rejected = expect(old).rejects.toMatchObject({ code: 'auth_changed' }); await api.signInWithIdToken('identity-B');
+    delayed.resolve(Response.json({ records: [], truncated: false })); await rejected;
+  });
+
   it('pins purchase verification to the account that opened the native checkout', async () => {
     const fetch = vi.fn(); vi.stubGlobal('fetch', fetch); const api = new GameApi('https://game.test'); const revision = api.authRevision;
     values.set(sessionKey, JSON.stringify({ token: 'session-B', expiresAt: expiry() }));

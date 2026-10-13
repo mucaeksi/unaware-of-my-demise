@@ -10,6 +10,7 @@ import { PlayApi, type PlayClient } from '../billing/play';
 import { authenticatePush, handleRtdn } from '../billing/rtdn';
 import { billingTag, listProducts, syncSubscriptionMail } from '../billing/service';
 import { verifyReceipt } from '../billing/recovery';
+import { purchaseHistory } from '../billing/history';
 import { adStatus, beginAd, grantAd, AD } from '../ads/service';
 import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, writeSave } from '../progress/service';
@@ -118,6 +119,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/ads/status', authed);
   app.use('/api/v1/ads/begin', authed);
   app.use('/api/v1/shop/verify', authed);
+  app.use('/api/v1/shop/history', authed);
   app.use('/api/v1/mail/*', authed);
   app.use('/api/v1/operations/*', authed);
 
@@ -268,6 +270,13 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   const Verify = z.object({ productId: z.string().regex(/^[a-z][a-z0-9_.]{1,99}$/), purchaseToken: z.string().min(10).max(4096) }).strict();
 
   app.get('/api/v1/shop/products', async (c) => c.json({ products: await flagOn(c.env, 'shop.enabled') ? await listProducts(c.env.DB) : [] }, 200, { 'Cache-Control': 'public, max-age=60' }));
+
+  app.get('/api/v1/shop/history', async (c) => {
+    const limit = z.coerce.number().int().min(1).max(30).safeParse(c.req.query('limit') ?? 30);
+    if (!limit.success) throw new HttpError(400, 'bad_request', 'history limit must be between 1 and 30');
+    await perMinute(c.env, `purchase-history:${c.get('playerId')}`, 30);
+    return c.json(await purchaseHistory(c.env.DB, c.get('playerId'), limit.data), 200, { 'Cache-Control': 'no-store' });
+  });
 
   app.post('/api/v1/shop/verify', async (c) => {
     // A sales kill flag cannot discard an obligation already confirmed by Google Play.

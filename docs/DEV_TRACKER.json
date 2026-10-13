@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R05-G1 pending purchase/restore guards verified; consumed receipt status next",
-      "detail": "581 application/tool tests and two browser SDK-fixture Shop cases pass. Pending receipts reach encrypted server recovery, checkout/restore pin account revision and failures stay visible. Consumed-receipt response-loss recovery and actual native lifecycle remain open."
+      "title": "R05-G2 delivery history verified; independent R06 source work next",
+      "detail": "587 application/tool tests and four browser response/SDK-fixture cases pass. Owned consumed delivery history survives missing provider inventory without another grant; refund/review/legacy unknown states remain explicit. Native pre-purchase binding, secure-session/lifecycle and device gates remain R02/R11/R18."
     }
   ],
   "next": [
@@ -707,6 +707,27 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R05-G2-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "4cc1bc16",
+      "verifiedAt": "2026-10-13T10:47:36.251227+00:00",
+      "scope": "R05-G2 working tree: authenticated rate-limited no-store scoped purchase history; one D1 batch reads up to 31 rows per delivery/recovery source and returns latest 30 plus truncation. Owned consumed delivery remains visible with provider token absent and no provider calls/repeated grant/balance change; other player and anonymous cannot read it. Distinct pending/review/refund; legacy default active is not a provider observation without checked timestamp. No receipt/ciphertext/fulfillment returned. Account Purchase History, bounded pages, client shape checks/old-response auth fence. Four API/two client cases, all 587 application/tool tests/lint/typecheck pass; four desktop/phone browser response/SDK-fixture cases cover history reload/no payment POST, new-account clearing and Shop outcomes, phone history screenshot inspected. Both builds/25 local migrations pass; free Graphify 3011 nodes/7457 edges/154 communities. Test-fixture Web Response status access corrected; no failing-before app bug claim from that fixture failure. No archival/capacity, fresh Google, physical-native/deployed or full-R05 acceptance claim. R02/R11/R18 retain pre-purchase offer binding and native secure-session/lifecycle/device work.",
+      "testIds": [
+        "apps/api/test/purchase-history.test.ts",
+        "apps/game/src/net/api.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "tests/e2e/purchase-history-ui.spec.ts (response fixtures)",
+        "tests/e2e/shop-recovery-ui.spec.ts (SDK fixtures)",
+        "E2E game/admin builds and 25 local migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1038,7 +1059,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
-      "implemented": "R05-A\u2013G1 original identities, exact operation status, atomic growth/claim/checkpoint/save journals, scoped visible recovery and revision-pinned native pending-receipt/restore submission are locally verified. Consumed-receipt status/history, native lifecycle and secure session storage remain; provider/device/deployed acceptance is separate.",
+      "implemented": "R05-A\u2013G2 ordinary durable identity/status journals, scoped visible recovery, revision-pinned native pending-receipt/restore submission and owned recent delivery history are locally verified, including consumed response loss. Pre-purchase offer binding/native secure-session/lifecycle and device gates remain R02/R11/R18; full R05 acceptance stays open.",
       "dependsOn": [
         "R01",
         "R02",
@@ -1066,7 +1087,11 @@
         "tests/e2e/gateway.ts",
         "apps/game/src/net/store.ts",
         "apps/game/src/net/store.test.ts",
-        "tests/e2e/shop-recovery-ui.spec.ts"
+        "tests/e2e/shop-recovery-ui.spec.ts",
+        "apps/api/src/billing/history.ts",
+        "apps/api/test/purchase-history.test.ts",
+        "apps/game/src/scenes/PurchasesScene.ts",
+        "tests/e2e/purchase-history-ui.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1079,7 +1104,8 @@
         "E-R05-E-20261013",
         "E-R05-F1-20261013",
         "E-R05-F2-20261013",
-        "E-R05-G1-20261013"
+        "E-R05-G1-20261013",
+        "E-R05-G2-20261013"
       ],
       "blockerIds": []
     },
