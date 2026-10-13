@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "0499a6cb109cee3f7de4c9ad951e4e22e25d3983",
+  "sourceCommit": "ee3e7bab5a154cfb3cc3ce9011990183df645615",
   "reviewedAt": "2026-10-13",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R06-D1/D2 heal/action Focus and undefined-passive guards verified locally; main delivery blocked",
-      "detail": "615 application/tool tests,33 Python checks/lint/typecheck/builds pass; real desktop campaign and desktop/phone Armory pass. Snapshots freeze supported effects; undefined procs are explicitly rejected/disclosed without inventory/history changes. Effect/element resistance/broader conformance remain; R06 partial. Main last confirmed54e27c74; four verified local commits await restored GitHub authentication."
+      "title": "Four-commit transfer delivered to main; independent R07 validation next",
+      "detail": "Fresh fetch confirms main ee3e7bab. 615 application/tool tests, 33 Python checks, lint/typecheck, both builds and 46 adapters pass. Real desktop/phone Armory and desktop campaign pass with 25 local migrations; phone campaign intentionally skipped. Previous GitHub authentication blocker resolved; prior scheduler/runtime evidence is historical. R06 remains partial for explicit semantic decisions."
     }
   ],
   "next": [
@@ -873,6 +873,28 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-TRANSFER-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "ee3e7bab5a154cfb3cc3ce9011990183df645615",
+      "verifiedAt": "2026-10-13T16:40:24.720159+00:00",
+      "scope": "Original delta bundle verified/imported; current main remained its ancestor. All four commits delivered unchanged by fast-forward and refetched. Fresh isolated checkout: 615 application/tool tests, 33 Python checks, lint/typecheck, game/admin builds, 46 adapters, 25 local migrations, actual desktop/phone Armory and desktop campaign pass; phone campaign intentionally skipped. Settled screenshots inspected. Initial browser startup timeout resolved with writable npm/config caches. Prior GitHub delivery blocker resolved. Graphify refreshed (3046 nodes/7977 edges/158 communities). No inherited scheduler or fresh independent model/deployed/native acceptance.",
+      "testIds": [
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "npm run build",
+        "python3 -m unittest discover -s tools/tests",
+        "python3 tools/sync_codex_skills.py --check",
+        "tests/e2e/account.spec.ts (Armory desktop/phone)",
+        "tests/e2e/zz-campaign.spec.ts (desktop pass, phone skip)",
+        "git bundle verify; git push origin HEAD:main; git fetch origin main"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1260,7 +1282,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Correct Break/Auto/expiry/procs, loan equipment and compatible progression limits with deterministic replay.",
-      "implemented": "R06-A/B/C1/C2 control/boss Auto/replay, coherent supported progression/materials and owned-versus-loaned snapshot equipment are locally verified. Canonical unowned loan template/CRC seeds preserve legacy releases. Secondary/proc effects and broader conformance remain; effective stage identity authority follows R07/R08. C2 delivery blocked by current GitHub authentication. R06-D1 adds closed version1 owned/loan outgoing-heal and normal-action Focus snapshots with identical authoritative replay; effect/element resistance, undefined signature procs and broader conformance remain open. R06-D2 validates/discloses/rejects undefined authored passive effects at new equip/owned/virtual admission, with unchanged frozen sessions and retained inventory/removal.",
+      "implemented": "R06-A/B/C1/C2 control/boss Auto/replay, coherent supported progression/materials and owned-versus-loaned snapshot equipment are locally verified. Canonical unowned loan template/CRC seeds preserve legacy releases. Secondary/proc effects and broader conformance remain; effective stage identity authority follows R07/R08. C2/D1/D2 delivered to main with the verified four-commit transfer on 2026-10-13. R06-D1 adds closed version1 owned/loan outgoing-heal and normal-action Focus snapshots with identical authoritative replay; effect/element resistance, undefined signature procs and broader conformance remain open. R06-D2 validates/discloses/rejects undefined authored passive effects at new equip/owned/virtual admission, with unchanged frozen sessions and retained inventory/removal.",
       "dependsOn": [
         "R01"
       ],
@@ -1296,7 +1318,8 @@
         "E-R06-C1-20261013",
         "E-R06-C2-20261013",
         "E-R06-D1-20261013",
-        "E-R06-D2-20261013"
+        "E-R06-D2-20261013",
+        "E-TRANSFER-20261013"
       ],
       "blockerIds": [
         "B-ECONOMY"
