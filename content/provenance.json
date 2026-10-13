@@ -126,7 +126,7 @@
     },
     {
       "output": "content/base/units/unit_pack.json",
-      "sha256": "16b9adacee0ccb464c42c5f59cc9c4c3d3b653f8ffe2bd7e41d36cdb389716cf",
+      "sha256": "e619a56e854bde2e2a3be10897ae9c67fd1e7c155bce2ce73fd17c36056b9d8c",
       "sources": {
         "narrative": "characters_part1.json,enemies_part1.json,battle_rules_part1.json"
       }

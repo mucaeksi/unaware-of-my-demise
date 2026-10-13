@@ -78,6 +78,7 @@ export function buildRules(): RulesDef {
     },
     auto_battle: { heal_priority_hp_percent: rules.auto_battle.heal_priority_hp_percent, save_ultimate_until_boss: rules.auto_battle.save_ultimate_until_boss },
     skill_rank_bonus: rules.skill_progression.damage_heal_shield_multiplier_bonus_per_rank,
+    story_loan_equipment: rules.story_loan_equipment,
     statuses
   });
 }

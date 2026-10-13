@@ -3,6 +3,7 @@ import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { playAuto } from '@uomd/combat';
 import { BattleParty, Encounter, UnitPack } from '@uomd/content-schema';
 import { sha256Hex } from '@uomd/shared';
+import { statAtLevel } from '@uomd/economy';
 import { baseFiles, campaignFiles, type TestFile } from './fixtures';
 import { admin, entries, game, post, resetContent, seedCanonCatalog, signIn, upload } from './helpers';
 import { computeCharacterStats, equipGear } from '../src/gear/service';
@@ -159,6 +160,10 @@ describe('the Part I campaign release', () => {
     const started = (await (await game('/api/v1/progress/battle/start', post({ releaseId: 'rel_0001', nodeId: 'stage_1_2' }, auth))).json()) as { sessionId: string; party: unknown };
     const party = BattleParty.parse(started.party);
     expect(party.map((m) => m.unit_id).sort()).toEqual(['brin_alder', 'fadyme', 'kera_voss', 'mahmut', 'nixie_vale']);
+    const brin = party.find((member) => member.unit_id === 'brin_alder')!;
+    const base = await db().prepare("SELECT base_hp, growth_hp FROM characters WHERE id = 'brin_alder'").first<{ base_hp: number; growth_hp: number }>();
+    expect(brin.stats!.hp).toBeGreaterThan(statAtLevel(base!.base_hp, base!.growth_hp, brin.level));
+    expect(await db().prepare('SELECT COUNT(*) AS n FROM player_gear WHERE player_id = ?1').bind(playerId).first()).toEqual({ n: 0 });
     expect(party.filter((m) => m.loan).map((m) => m.unit_id).sort()).toEqual(['brin_alder', 'kera_voss', 'nixie_vale']);
     expect(new Set(party.map((m) => m.slot)).size).toBe(5);
     const played = playAuto(campaignPack, campaignEnc, party);

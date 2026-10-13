@@ -24,3 +24,12 @@ export function base64UrlDecode(text: string): Uint8Array {
   for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
   return out;
 }
+/** IEEE CRC32 over UTF-8, used by the authored deterministic story-loan seed contract. */
+export function crc32(text: string): number {
+  let crc = 0xffffffff;
+  for (const byte of new TextEncoder().encode(text)) {
+    crc ^= byte;
+    for (let bit = 0; bit < 8; bit++) crc = (crc >>> 1) ^ (crc & 1 ? 0xedb88320 : 0);
+  }
+  return (crc ^ 0xffffffff) >>> 0;
+}

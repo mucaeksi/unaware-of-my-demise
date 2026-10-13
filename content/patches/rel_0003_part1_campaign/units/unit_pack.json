@@ -5777,6 +5777,20 @@
       "save_ultimate_until_boss": true
     },
     "skill_rank_bonus": 0.1,
+    "story_loan_equipment": {
+      "template_id": "story_loan_standard",
+      "rarity": 3,
+      "armor_id": "armor_padded_3_01",
+      "weapon_selection": "lowest_weapon_id_matching_character_equip_weapon_type",
+      "accessory_set_id": "ash_maw_hide",
+      "accessory_slots": [
+        "necklace",
+        "ring"
+      ],
+      "accessory_roll_seed": "crc32(character_id:stage_id:accessory_id)",
+      "level": 1,
+      "ascension": 0
+    },
     "statuses": [
       {
         "status_id": "burn",

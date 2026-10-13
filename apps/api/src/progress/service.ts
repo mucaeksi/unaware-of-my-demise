@@ -104,7 +104,7 @@ export interface BattleStart {
 export async function startBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, input: { releaseId: string; nodeId: string }, now = new Date()): Promise<BattleStart> {
   const stage = await loadStage(env, playerId, input.releaseId, input.nodeId);
   await requireEconomic(env.DB, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, now);
-  const party = (stage.encounter.party_mode ?? 'fixed') === 'owned' ? await buildParty(env.DB, playerId, stage.encounter, new Set(stage.pack.units.map((u) => u.unit_id))) : null;
+  const party = (stage.encounter.party_mode ?? 'fixed') === 'owned' ? await buildParty(env.DB, playerId, stage.encounter, new Set(stage.pack.units.map((u) => u.unit_id)), undefined, stage.pack.rules.story_loan_equipment) : null;
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   const id = [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('');

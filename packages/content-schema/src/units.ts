@@ -166,6 +166,15 @@ export const StatusDef = z
   .strict();
 export type StatusDef = z.infer<typeof StatusDef>;
 
+export const StoryLoanEquipment = z.object({
+  template_id: Id, rarity: z.number().int().min(3).max(5), armor_id: Id,
+  weapon_selection: z.literal('lowest_weapon_id_matching_character_equip_weapon_type'),
+  accessory_set_id: Id, accessory_slots: z.array(z.enum(['necklace', 'ring'])).max(2).refine((slots) => new Set(slots).size === slots.length, 'duplicate accessory slot'),
+  accessory_roll_seed: z.literal('crc32(character_id:stage_id:accessory_id)'),
+  level: z.number().int().min(1).max(20).default(1), ascension: z.literal(0).default(0)
+}).strict();
+export type StoryLoanEquipment = z.infer<typeof StoryLoanEquipment>;
+
 export const RulesDef = z
   .object({
     schema_version: z.literal(1),
@@ -197,6 +206,7 @@ export const RulesDef = z
     auto_battle: z.object({ heal_priority_hp_percent: z.number(), save_ultimate_until_boss: z.boolean() }).strict(),
     /** each skill rank above 1 multiplies the damage / heal / shield amounts of that skill by (1 + this x (rank - 1)) */
     skill_rank_bonus: z.number().min(0).max(1).optional(),
+    story_loan_equipment: StoryLoanEquipment.optional(),
     statuses: z.array(StatusDef)
   })
   .strict();

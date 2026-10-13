@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R06-C1 owned guest precedence verified; canonical loan equipment next",
-      "detail": "599 application/tool tests and real desktop campaign pass. Owned story guests retain their level/basic gear/ranks, once, with immutable session snapshot. Unowned loan template and equipped secondary/proc effects remain next."
+      "title": "R06-C2 canonical loan equipment verified locally; GitHub delivery blocked",
+      "detail": "603 application/tool tests,33 Python checks and real desktop campaign pass. Template gear/CRC seeds are snapshot-only; owned/legacy contracts preserved. Main confirmed through54e27c74; verified startup-guard commit d791b0f9 and C2 await restored GitHub authentication. Next equipped secondary/proc effects."
     }
   ],
   "next": [
@@ -804,6 +804,30 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R06-C2-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "d791b0f9",
+      "verifiedAt": "2026-10-13T13:08:25.653485+00:00",
+      "scope": "R06-C2 working tree: authored loan template in closed RulesDef and compiler/base/campaign packs; fresh virtual level1/asc0, preserved stage hero level/rank1. Generic matching rarity weapon excludes signatures; declared padded armor/Ash-Maw Hide deterministic accessories/set via IEEE CRC32 UTF8(character:stage:accessory). No inventory writes, basic stats frozen, missing/malformed declared gear503; old undeclared releases and owned copy behavior retained. Three API cases/external CRC vectors/strengthened actual-session stats and no-mint assertions; all603 application/tool tests,33 Python checks/lint/typecheck and real local Worker desktop campaign pass, phone intentionally skipped. Both builds25 migrations pass. Relevant generated pack/hash/provenance/report updated, unrelated empty art field restored. Conservative gearless smoke report does not close R16. Graph3041 nodes7466 edges164 communities. No creative production/numerical seed tuning/permanent inventory grants/native/deployed/full-R06 claim. GitHub credential failure blocks delivery after confirmed main54e27c74; startup guard d791b0f9 and enclosing C2 commit are local, connection restoration/fresh fetch/integration required.",
+      "testIds": [
+        "apps/api/test/loan-gear.test.ts",
+        "apps/api/test/owned-battle.test.ts",
+        "packages/shared/src/crc32.test.ts",
+        "npm run build:content",
+        "npm run build:campaign",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "python3 -m unittest discover -s tools/tests (33)",
+        "tests/e2e/zz-campaign.spec.ts (desktop pass, phone skip)",
+        "E2E game/admin builds and25 migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1191,7 +1215,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Correct Break/Auto/expiry/procs, loan equipment and compatible progression limits with deterministic replay.",
-      "implemented": "R06-A/B/C1 control/boss Auto/replay, supported coherent progression/material validation and owned story-guest level/basic gear/rank precedence with frozen session are locally verified. Unowned canonical loan equipment, secondary/proc effects and broader conformance remain; effective stage identity authority follows R07/R08.",
+      "implemented": "R06-A/B/C1/C2 control/boss Auto/replay, coherent supported progression/materials and owned-versus-loaned snapshot equipment are locally verified. Canonical unowned loan template/CRC seeds preserve legacy releases. Secondary/proc effects and broader conformance remain; effective stage identity authority follows R07/R08. C2 delivery blocked by current GitHub authentication.",
       "dependsOn": [
         "R01"
       ],
@@ -1208,7 +1232,10 @@
         "apps/api/src/progression/refs.ts",
         "apps/api/test/progression-config.test.ts",
         "apps/api/src/progress/party.ts",
-        "apps/api/test/owned-battle.test.ts"
+        "apps/api/test/owned-battle.test.ts",
+        "apps/api/src/progress/loan-gear.ts",
+        "apps/api/test/loan-gear.test.ts",
+        "packages/shared/src/crc32.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1216,7 +1243,8 @@
         "E-EXTERNAL",
         "E-R06-A-20261013",
         "E-R06-B-20261013",
-        "E-R06-C1-20261013"
+        "E-R06-C1-20261013",
+        "E-R06-C2-20261013"
       ],
       "blockerIds": [
         "B-ECONOMY"
