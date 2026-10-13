@@ -21,9 +21,14 @@ export class ShopScene extends HubScene {
     const native = isNative();
     // purchases Google still lists (interrupted flow, reinstall, another device) are re-verified by the server, which grants each once
     if (native) {
-      const restored = await restorePurchases().catch(() => 0);
-      if (restored > 0) {
-        this.say(`${restored} earlier purchase(s) restored`);
+      const restored = await restorePurchases().catch((error) => { this.say(errText(error)); return null; });
+      if (!this.isCurrentView()) return;
+      if (restored && (restored.granted || restored.pending || restored.unconfirmed || restored.notEntitled)) {
+        const messages = [restored.granted ? `${restored.granted} purchase(s) restored.` : '',
+          restored.pending ? `${restored.pending} payment(s) pending.` : '',
+          restored.unconfirmed ? `${restored.unconfirmed} purchase(s) still need confirmation. Reopen Shop to retry.` : '',
+          restored.notEntitled ? `${restored.notEntitled} purchase(s) have no current benefits.` : ''].filter(Boolean);
+        this.say(messages.join(' '));
         await this.updateWallet();
       }
     }

@@ -33,6 +33,20 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('authentication response ownership', () => {
+  it('pins purchase verification to the account that opened the native checkout', async () => {
+    const fetch = vi.fn(); vi.stubGlobal('fetch', fetch); const api = new GameApi('https://game.test'); const revision = api.authRevision;
+    values.set(sessionKey, JSON.stringify({ token: 'session-B', expiresAt: expiry() }));
+    await expect(api.verifyPurchase('tokens_small', 'original-play-token', revision)).rejects.toMatchObject({ code: 'auth_changed' });
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it('does not report malformed or wrong-product purchase responses as verified', async () => {
+    for (const result of [null, { status: 'granted', productId: 'other', orderId: 'order' }, { status: 'granted', productId: 'tokens_small' }, { status: 'unknown', productId: 'tokens_small' }]) {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(result))); const api = new GameApi('https://game.test');
+      await expect(api.verifyPurchase('tokens_small', 'original-play-token')).rejects.toMatchObject({ code: 'invalid_response' });
+    }
+  });
+
   it('logout or deletion from a stale rendered account cannot target the new shared selection', async () => {
     for (const kind of ['logout', 'delete']) {
       values.set(sessionKey, JSON.stringify({ token: 'session-A', expiresAt: expiry() }));

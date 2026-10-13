@@ -547,8 +547,12 @@ export class GameApi extends EventTarget {
   }
   /** character-XP items by ascending xp value (filled by catalogNames) */
   xpItems: { itemId: string; xp: number }[] = [];
-  verifyPurchase(productId: string, purchaseToken: string): Promise<{ status: string; orderId?: string }> {
-    return this.call('POST', '/api/v1/shop/verify', { productId, purchaseToken });
+  async verifyPurchase(productId: string, purchaseToken: string, expectedRevision = this.authRevision): Promise<{ status: 'granted' | 'already_granted' | 'pending' | 'not_entitled'; productId: string; orderId?: string }> {
+    const result = await this.call<{ status: 'granted' | 'already_granted' | 'pending' | 'not_entitled'; productId: string; orderId?: string }>('POST', '/api/v1/shop/verify', { productId, purchaseToken }, true, expectedRevision);
+    if (!result || result.productId !== productId || !['granted', 'already_granted', 'pending', 'not_entitled'].includes(result.status)
+      || (result.status === 'granted' || result.status === 'already_granted') && (typeof result.orderId !== 'string' || !result.orderId))
+      throw new ApiError(503, 'invalid_response', 'Purchase verification has not been confirmed');
+    return result;
   }
   adBegin(): Promise<{ nonce: string }> {
     return this.call('POST', '/api/v1/ads/begin', {});

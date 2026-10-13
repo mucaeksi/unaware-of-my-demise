@@ -1,16 +1,31 @@
 import { Ads, Billing, isNative, nativeCode, type ConsentState, type PlayPurchase } from '../platform/native';
 import { Services } from '../services';
 import type { Product } from './api';
+import { ApiError } from './api';
 
 export interface PurchaseOutcome {
   status: 'granted' | 'already_granted' | 'pending' | 'not_entitled' | 'canceled';
+}
+
+export interface RestoreOutcome {
+  granted: number;
+  alreadyGranted: number;
+  pending: number;
+  notEntitled: number;
+  unconfirmed: number;
+}
+
+function requireAccount(revision: number): void {
+  if (!Services.api.signedIn || Services.api.authRevision !== revision) throw new ApiError(409, 'auth_changed', 'The account changed; select the purchase account before retrying');
 }
 
 /** Buys a shop product through Google Play and lets the server verify and grant it. Returns what the SERVER decided. */
 export async function buyProduct(p: Product): Promise<PurchaseOutcome> {
   if (!isNative()) throw new Error('Purchases run inside the Android app');
   const type = p.kind === 'subscription' ? 'subs' : 'inapp';
+  const revision = Services.api.authRevision;
   const me = await Services.api.me();
+  requireAccount(revision);
   let bought: PlayPurchase;
   try {
     bought = await Billing.purchase({ productId: p.productId, type, accountTag: me.billingTag });
@@ -18,25 +33,34 @@ export async function buyProduct(p: Product): Promise<PurchaseOutcome> {
     if (nativeCode(e) === 'canceled') return { status: 'canceled' };
     throw e;
   }
-  if (bought.state === 'pending') return { status: 'pending' }; // granted later: the server hears about it through RTDN and the next restore
-  return (await Services.api.verifyPurchase(bought.productId, bought.purchaseToken)) as PurchaseOutcome;
+  requireAccount(revision);
+  if (bought.productId !== p.productId) throw new ApiError(503, 'invalid_response', 'Google Play returned a different product');
+  // Provider-bound pending receipts must reach the server's encrypted recovery before they clear.
+  return Services.api.verifyPurchase(bought.productId, bought.purchaseToken, revision);
 }
 
 /** Re-submits purchases Google still lists for this account (interrupted flows, another device, reinstall). The server grants each at most once. */
-export async function restorePurchases(): Promise<number> {
-  if (!isNative() || !Services.api.signedIn) return 0;
-  let granted = 0;
+export async function restorePurchases(): Promise<RestoreOutcome> {
+  const outcome: RestoreOutcome = { granted: 0, alreadyGranted: 0, pending: 0, notEntitled: 0, unconfirmed: 0 };
+  if (!isNative() || !Services.api.signedIn) return outcome;
+  const revision = Services.api.authRevision;
   const { purchases } = await Billing.owned();
+  requireAccount(revision);
   for (const p of purchases) {
-    if (p.state !== 'purchased') continue;
+    requireAccount(revision);
     try {
-      const r = (await Services.api.verifyPurchase(p.productId, p.purchaseToken)) as { status: string };
-      if (r.status === 'granted') granted++;
+      const r = await Services.api.verifyPurchase(p.productId, p.purchaseToken, revision);
+      if (r.status === 'granted') outcome.granted++;
+      else if (r.status === 'already_granted') outcome.alreadyGranted++;
+      else if (r.status === 'pending') outcome.pending++;
+      else outcome.notEntitled++;
     } catch {
-      /* not one of our products, or not entitled: ignore */
+      requireAccount(revision);
+      outcome.unconfirmed++;
     }
   }
-  return granted;
+  requireAccount(revision);
+  return outcome;
 }
 
 let consent: ConsentState | null = null;

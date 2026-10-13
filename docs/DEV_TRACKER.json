@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R05-F2 visible recovery and account lifecycle verified; purchases next",
-      "detail": "576 application/tool tests, 22 integrated browser cases and four final UI/lifecycle cases pass. Saved Actions preserves pending identity/account scope; deletion confirmation cannot survive account reselection or scene restart. Continue native purchase recovery; secure session storage and device acceptance retain R11/R18 gates."
+      "title": "R05-G1 pending purchase/restore guards verified; consumed receipt status next",
+      "detail": "581 application/tool tests and two browser SDK-fixture Shop cases pass. Pending receipts reach encrypted server recovery, checkout/restore pin account revision and failures stay visible. Consumed-receipt response-loss recovery and actual native lifecycle remain open."
     }
   ],
   "next": [
@@ -686,6 +686,27 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R05-G1-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "a1c46f24",
+      "verifiedAt": "2026-10-13T10:30:25.609847+00:00",
+      "scope": "R05-G1 working tree: revision-pinned native checkout/owned restore across profile/SDK await; no old-account transport, wrong native product or malformed server success. Pending receipts submitted to existing provider-bound encrypted recovery; restore counts delivery/pending/unconfirmed/unentitled outcomes and Shop exposes failures. Five new failing-before cases; all 581 application/tool tests and lint/typecheck pass. Two desktop/phone browser SDK-fixture Shop cases pass (mock native inventory and verification responses); phone screenshot inspected. Both builds and 25 local E2E migrations pass. Existing actual D1 billing tests retain frozen pending recovery/unbound rejection. No raw receipt persistence, physical native, live provider/deployed or complete R05 acceptance claim. Consumed receipt response-loss/history and lifecycle remain next.",
+      "testIds": [
+        "apps/game/src/net/api.test.ts",
+        "apps/game/src/net/store.test.ts",
+        "apps/api/test/billing-recovery.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "tests/e2e/shop-recovery-ui.spec.ts (two SDK-fixture cases)",
+        "E2E game/admin builds and 25 local migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1017,7 +1038,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
-      "implemented": "R05-A\u2013F2 durable original identities, exact status proof, atomic growth/claim/checkpoint/save journals, shared-session/deadline guards and visible scoped pending/history recovery are locally verified. Native purchase recovery and secure session/lifecycle remain open; native/deployed acceptance is separate.",
+      "implemented": "R05-A\u2013G1 original identities, exact operation status, atomic growth/claim/checkpoint/save journals, scoped visible recovery and revision-pinned native pending-receipt/restore submission are locally verified. Consumed-receipt status/history, native lifecycle and secure session storage remain; provider/device/deployed acceptance is separate.",
       "dependsOn": [
         "R01",
         "R02",
@@ -1042,7 +1063,10 @@
         "apps/game/src/scenes/OperationsScene.ts",
         "tests/e2e/action-recovery-ui.spec.ts",
         "tests/e2e/stack.ts",
-        "tests/e2e/gateway.ts"
+        "tests/e2e/gateway.ts",
+        "apps/game/src/net/store.ts",
+        "apps/game/src/net/store.test.ts",
+        "tests/e2e/shop-recovery-ui.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1054,7 +1078,8 @@
         "E-R05-D-20261013",
         "E-R05-E-20261013",
         "E-R05-F1-20261013",
-        "E-R05-F2-20261013"
+        "E-R05-F2-20261013",
+        "E-R05-G1-20261013"
       ],
       "blockerIds": []
     },
