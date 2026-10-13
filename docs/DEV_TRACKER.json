@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R05-F1 shared-session/deadline guards verified; visible recovery next",
-      "detail": "575 application/tool tests and ten real browser recovery cases pass. Cross-tab changes and session expiry/deadlines preserve scope; stale logout/delete callbacks cannot forget a newer identity. Continue player recovery screen, then native purchase/session lifecycle."
+      "title": "R05-F2 visible recovery and account lifecycle verified; purchases next",
+      "detail": "576 application/tool tests, 22 integrated browser cases and four final UI/lifecycle cases pass. Saved Actions preserves pending identity/account scope; deletion confirmation cannot survive account reselection or scene restart. Continue native purchase recovery; secure session storage and device acceptance retain R11/R18 gates."
     }
   ],
   "next": [
@@ -663,6 +663,29 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R05-F2-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "ed7f8937",
+      "verifiedAt": "2026-10-13T10:18:28.104812+00:00",
+      "scope": "R05-F2 working tree: Saved Actions pending/history, verified-account offline display, original-ID retry/status proof and scoped auth rerenders. Hub CREATING guard preserves synchronous signed-out navigation; sign-in releases selection before auth notifications. Logout/delete pin revision; deletion confirmation binds account/revision and resets on scene restart, including switching back. One client regression, all 576 application/tool tests, lint/typecheck, 28 Python checks and 22 real local-Worker desktop/phone account/recovery/admin cases pass; four final UI cases cover offline status recovery without another POST and confirmation lifecycle with expiry timer paused to prove account invalidation. Desktop pending/phone confirmed screenshots inspected. Private logs identified SQLITE_BUSY from separate workerd processes sharing SQLite; single multi-Worker runtime plus separate admin-origin proxy retains real auth and passes strict checks. Both builds/25 migrations pass. Free Graphify refresh: 2994 nodes/7387 edges/158 communities. No native/deployed/full-R05/creative generation claim. Latest environment spec/observation 46 current/running/connected, network state unknown and desired list lacks model host; no new model-execution proof. Scheduler remains live; deadline 12:16:48 UTC / 15:16:48 Bucharest.",
+      "testIds": [
+        "apps/game/src/net/api.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "python3 -m unittest discover -s tools/tests",
+        "tests/e2e/account.spec.ts",
+        "tests/e2e/operation-recovery.spec.ts",
+        "tests/e2e/action-recovery-ui.spec.ts (both projects; final lifecycle)",
+        "tests/e2e/admin.spec.ts",
+        "E2E game/admin builds and 25 local migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -994,7 +1017,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
-      "implemented": "R05-A\u2013F1 durable original identities, exact authoritative recovery, atomic growth/claim/checkpoint/save journals and same/cross-tab session/deadline/late-callback guards are locally verified. Visible player recovery and native purchase/session lifecycle remain open; native/deployed acceptance is separate.",
+      "implemented": "R05-A\u2013F2 durable original identities, exact status proof, atomic growth/claim/checkpoint/save journals, shared-session/deadline guards and visible scoped pending/history recovery are locally verified. Native purchase recovery and secure session/lifecycle remain open; native/deployed acceptance is separate.",
       "dependsOn": [
         "R01",
         "R02",
@@ -1015,7 +1038,11 @@
         "apps/api/src/mail/service.ts",
         "apps/api/src/tasks/service.ts",
         "apps/api/src/entry/service.ts",
-        "apps/api/src/progress/service.ts"
+        "apps/api/src/progress/service.ts",
+        "apps/game/src/scenes/OperationsScene.ts",
+        "tests/e2e/action-recovery-ui.spec.ts",
+        "tests/e2e/stack.ts",
+        "tests/e2e/gateway.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1026,7 +1053,8 @@
         "E-R05-C-20261013",
         "E-R05-D-20261013",
         "E-R05-E-20261013",
-        "E-R05-F1-20261013"
+        "E-R05-F1-20261013",
+        "E-R05-F2-20261013"
       ],
       "blockerIds": []
     },

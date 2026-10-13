@@ -1,15 +1,5 @@
-import { expect, test, type Page } from '@playwright/test';
-import { SignJWT, importJWK } from 'jose';
-import { ADMIN, openGame } from './helpers';
-import { GOOGLE_CLIENT } from './stack';
-
-async function signIn(page: Page, subject: string): Promise<{ id: string }> {
-  const token = await new SignJWT({ email: `${subject}@example.com`, email_verified: true, name: 'Recovery test', pad: 'x'.repeat(80) })
-    .setProtectedHeader({ alg: 'RS256', kid: 'g1' }).setSubject(subject)
-    .setIssuer('https://accounts.google.com').setAudience(GOOGLE_CLIENT).setIssuedAt().setExpirationTime('2h')
-    .sign(await importJWK(JSON.parse(process.env.E2E_GOOGLE_PRIVATE_JWK!), 'RS256'));
-  return page.evaluate(async (identity) => (window as any).__UOMD__.services.api.signInWithIdToken(identity), token);
-}
+import { expect, test } from '@playwright/test';
+import { ADMIN, openGame, signInDev as signIn } from './helpers';
 
 test('lost summon response survives reload and spends exactly once on the real Worker', async ({ page, request }, info) => {
   await openGame(page, '/', { fresh: true });

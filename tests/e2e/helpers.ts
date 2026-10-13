@@ -2,6 +2,17 @@
 import { expect, type Page, type TestInfo } from '@playwright/test';
 
 import { join } from 'node:path';
+import { SignJWT, importJWK } from 'jose';
+import { GOOGLE_CLIENT } from './stack';
+
+/** Isolated test identity; the real Worker validates it against the local fixture's ephemeral JWKS. */
+export async function signInDev(page: Page, subject: string): Promise<{ id: string }> {
+  const token = await new SignJWT({ email: `${subject}@example.com`, email_verified: true, name: 'Recovery test', pad: 'x'.repeat(80) })
+    .setProtectedHeader({ alg: 'RS256', kid: 'g1' }).setSubject(subject)
+    .setIssuer('https://accounts.google.com').setAudience(GOOGLE_CLIENT).setIssuedAt().setExpirationTime('2h')
+    .sign(await importJWK(JSON.parse(process.env.E2E_GOOGLE_PRIVATE_JWK!), 'RS256'));
+  return page.evaluate(async (identity) => (window as any).__UOMD__.services.api.signInWithIdToken(identity), token);
+}
 
 export const SHOTS = join(new URL('../../.cache/e2e-shots', import.meta.url).pathname);
 /** Local stack by default; `UOMD_REMOTE_GAME_URL` points the remote smoke test at a deployed environment. */

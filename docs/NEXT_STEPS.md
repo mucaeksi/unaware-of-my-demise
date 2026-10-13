@@ -75,7 +75,7 @@ R04 locally complete: the existing Ration-paid repeat contract blocks zero-cost 
 
 ## Continuation tooling verification — 2026-10-13
 
-The isolated worktree and real primary-preserving dry-run are configured; 27 Python cases pass. Current environment revision 34 is running/connected and still lacks the model hostname in its active policy. The saved draft revision 2 has current npm/Phaser/D1 instructions and the scoped model-host rule; publishing it is not available through this session’s tools. No model execution or quota-reset guarantee is asserted. Continue R05/other unblocked source work here.
+The isolated worktree and real primary-preserving dry-run are configured; 27 Python cases pass. Latest environment revision 46 is running/connected/current; policy state is unknown and the desired host list still lacks the model hostname. The saved draft revision 2 has current npm/Phaser/D1 instructions and the scoped model-host rule; publishing it is not available through this session’s tools. No model execution or quota-reset guarantee is asserted. Continue R05/other unblocked source work here.
 
 ## Latest verified slice — R05-A
 
@@ -100,3 +100,7 @@ Checkpoint and cloud-save ID/result journals commit with the monotonic update/CA
 ## Latest verified slice — R05-F1
 
 Shared-session storage changes, pre-transport epoch pins, scoped list/status reads, expiry and HTTP deadlines preserve original intent. Late logout/deletion callbacks stop before forgetting a new identity. Five new client cases, all **575 application/tool tests**, lint/typecheck and ten real desktop/phone recovery cases pass; two include shared-storage tabs and a delayed old 401. Both builds and 25 local migrations pass. Next visible recovery screen; native secure session storage and purchase lifecycle retain R11/R18 gates.
+
+## Latest verified slice — R05-F2
+
+Saved Actions exposes scoped pending/history and safe original-identity recovery; verified accounts can see pending actions offline. Account changes invalidate views and deletion confirmation, including switching back and reopening the scene. All 576 application/tool tests, lint/typecheck, 28 Python checks, 22 local desktop/phone account/recovery/admin cases and four final lifecycle/UI cases pass. Both builds/25 migrations pass; screenshots inspected. Local test Workers now share one runtime, eliminating the observed cross-process SQLite lock failures while retaining actual authentication. Graph refreshed (2994 nodes, 7387 edges, 158 communities). Continue native purchase recovery; R11 owns secure session storage and actual lifecycle/device gates.

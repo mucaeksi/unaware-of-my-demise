@@ -33,6 +33,16 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('authentication response ownership', () => {
+  it('logout or deletion from a stale rendered account cannot target the new shared selection', async () => {
+    for (const kind of ['logout', 'delete']) {
+      values.set(sessionKey, JSON.stringify({ token: 'session-A', expiresAt: expiry() }));
+      const fetch = vi.fn(); vi.stubGlobal('fetch', fetch); const api = new GameApi('https://game.test'); const revision = api.authRevision;
+      values.set(sessionKey, JSON.stringify({ token: 'session-B', expiresAt: expiry() }));
+      await expect(kind === 'logout' ? api.signOut(revision) : api.deleteAccount(revision)).rejects.toMatchObject({ code: 'auth_changed' });
+      expect(fetch).not.toHaveBeenCalled(); expect(api.signedIn).toBe(true);
+    }
+  });
+
   it('expiry of the previous session cannot cancel a newer sign-in or let stale reads interrupt it', async () => {
     vi.useFakeTimers({ toFake: ['Date'] });
     try {

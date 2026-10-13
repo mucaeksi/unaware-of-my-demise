@@ -11,10 +11,17 @@ export class AccountScene extends HubScene {
   protected readonly heading = 'ACCOUNT';
   protected override readonly needsSignIn = false;
 
-  private confirmDelete = false;
+  private confirmDeleteFor: string | null = null;
+  private confirmDeleteRevision = -1;
 
   constructor() {
     super('Account');
+  }
+
+  override create(): void {
+    this.confirmDeleteFor = null;
+    this.confirmDeleteRevision = -1;
+    super.create();
   }
 
   protected async build(): Promise<void> {
@@ -28,6 +35,7 @@ export class AccountScene extends HubScene {
       return;
     }
     const me = await api.me();
+    this.add_(new Button(this, REF_W - 300, 195, { label: 'SAVED ACTIONS', w: 460, h: 100, onClick: () => this.scene.start('Operations') }));
     this.add_(txt(this, REF_W / 2, 280, me.displayName ?? 'Wayfarer', { fontSize: '52px', color: T.gold }).setOrigin(0.5));
     this.add_(txt(this, REF_W / 2, 350, `Player ${me.id}`, { fontSize: '26px', color: T.dim }).setOrigin(0.5));
     const save = await api.readSave();
@@ -38,7 +46,8 @@ export class AccountScene extends HubScene {
     this.add_(new Button(this, REF_W / 2 + 330, 730, { label: 'SIGN OUT', w: 600, onClick: () => void this.signOut() }));
     const consent = consentState();
     if (consent?.privacyOptionsRequired) this.add_(new Button(this, REF_W / 2, 1010, { label: 'PRIVACY OPTIONS (ADS)', w: 900, onClick: () => void showPrivacyOptions().then(() => this.say('Privacy choice updated')).catch((e) => this.say(errText(e))) }));
-    this.add_(new Button(this, REF_W / 2, 880, { label: this.confirmDelete ? 'TAP AGAIN TO DELETE FOREVER' : 'DELETE ACCOUNT', sub: this.confirmDelete ? 'progress, wallet and roster cannot be restored' : undefined, w: 900, h: 130, variant: 'danger', onClick: () => void this.deleteAccount() }));
+    const confirming = this.confirmDeleteFor === me.id && this.confirmDeleteRevision === api.authRevision;
+    this.add_(new Button(this, REF_W / 2, 880, { label: confirming ? 'TAP AGAIN TO DELETE FOREVER' : 'DELETE ACCOUNT', sub: confirming ? 'progress, wallet and roster cannot be restored' : undefined, w: 900, h: 130, variant: 'danger', onClick: () => void this.deleteAccount(me.id) }));
   }
 
   private async signIn(): Promise<void> {
@@ -68,18 +77,21 @@ export class AccountScene extends HubScene {
     }
   }
 
-  private async deleteAccount(): Promise<void> {
-    if (!this.confirmDelete) {
-      this.confirmDelete = true;
-      this.time.delayedCall(6000, () => { this.confirmDelete = false; void this.refresh(); });
-      await this.refresh();
-      return;
-    }
+  private async deleteAccount(expectedPlayer: string): Promise<void> {
     try {
-      await Services.api.deleteAccount();
+      const api = Services.api; const revision = api.authRevision;
+      const current = await api.me();
+      if (revision !== api.authRevision || current.id !== expectedPlayer) throw new ApiError(409, 'auth_changed', 'The selected account changed');
+      if (this.confirmDeleteFor !== expectedPlayer || this.confirmDeleteRevision !== revision) {
+        this.confirmDeleteFor = expectedPlayer;
+        this.confirmDeleteRevision = revision;
+        this.time.delayedCall(6000, () => { if (this.confirmDeleteFor === expectedPlayer && this.confirmDeleteRevision === revision) { this.confirmDeleteFor = null; void this.refresh(); } });
+        await this.refresh(); return;
+      }
+      await api.deleteAccount(revision);
       if (Services.api.signedIn) throw new ApiError(409, 'auth_changed', 'The selected account changed');
       await Services.identity?.forget();
-      this.confirmDelete = false;
+      this.confirmDeleteFor = null;
       this.say('Your account was deleted');
       await this.refresh();
     } catch (e) {
@@ -89,7 +101,7 @@ export class AccountScene extends HubScene {
 
   private async signOut(): Promise<void> {
     try {
-      await Services.api.signOut();
+      await Services.api.signOut(Services.api.authRevision);
       if (Services.api.signedIn) throw new ApiError(409, 'auth_changed', 'The selected account changed');
       await Services.identity?.forget();
       this.say('Signed out');

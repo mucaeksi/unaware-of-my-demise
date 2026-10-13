@@ -1,12 +1,13 @@
 /**
  * Spins up the REAL stack locally for browser tests: built game + built admin, both Workers under
- * `wrangler dev` (Miniflare D1/R2 persisted to one shared directory), a test-only Access JWKS and a
+ * one multi-Worker `wrangler dev` runtime (shared D1/R2), a test-only Access JWKS and a
  * test-only content signing key. No Cloudflare credentials are needed.
  */
 import { spawn, type ChildProcess } from 'node:child_process';
-import { createServer, type Server } from 'node:http';
-import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { createServer, request as proxyRequest, type Server } from 'node:http';
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import ts from 'typescript';
 import { SignJWT, exportJWK, generateKeyPair } from 'jose';
 import { generateSigningKeyPair } from '../../packages/shared/src/index';
 
@@ -25,6 +26,7 @@ export interface Stack {
 
 const procs: ChildProcess[] = [];
 let jwksServer: Server | null = null;
+let adminProxy: Server | null = null;
 
 /** Async on purpose: the test JWKS server lives in this process and must keep answering while children run. */
 function sh(cmd: string, args: string[], cwd: string, env: NodeJS.ProcessEnv = {}): Promise<void> {
@@ -81,6 +83,8 @@ async function killAll(): Promise<void> {
     }
   }
   jwksServer?.close();
+  adminProxy?.closeAllConnections();
+  adminProxy?.close();
 }
 
 async function boot(): Promise<Stack> {
@@ -117,10 +121,48 @@ async function boot(): Promise<Stack> {
   await sh('npx', ['wrangler', 'd1', 'execute', 'DB', '--local', ...persist, '-c', 'wrangler.game.jsonc', '--env', 'dev', '--file', 'seed/banners.sql'], api);
   await sh('npx', ['wrangler', 'd1', 'execute', 'DB', '--local', ...persist, '-c', 'wrangler.game.jsonc', '--env', 'dev', '--file', 'seed/catalog.sql'], api);
 
-  start('admin', ['dev', '-c', 'wrangler.admin.jsonc', '--env', 'dev', '--port', String(PORTS.admin), '--inspector-port', '9301', ...persist, '--var', `ACCESS_TEAM_DOMAIN:${TEAM}`, '--var', `ACCESS_AUD:${AUD}`, '--var', `ACCESS_JWKS_URL:http://127.0.0.1:${PORTS.jwks}/jwks.json`, '--var', `ADMIN_BOOTSTRAP_OWNERS:${OWNER}`, '--var', `CONTENT_SIGNING_KEY:${JSON.stringify({ ...signing.privateJwk, kid })}`, '--var', `CONTENT_SIGNING_KID:${kid}`], api);
-  await waitFor(`http://127.0.0.1:${PORTS.admin}/admin/api/health`);
-  start('game', ['dev', '-c', 'wrangler.game.jsonc', '--env', 'dev', '--port', String(PORTS.game), '--inspector-port', '9302', ...persist, '--var', `GOOGLE_CLIENT_IDS:${GOOGLE_CLIENT}`, '--var', `GOOGLE_JWKS_URL:http://127.0.0.1:${PORTS.jwks}/google.json`], api);
+  // Two independent workerd processes opening the same SQLite database intermittently fail
+  // with SQLITE_BUSY. Service-bind the unmodified Workers inside a single runtime instead.
+  // Generated private configs contain only ephemeral fixture keys; deployment configs stay intact.
+  const fixtureConfig = (kind: 'game' | 'admin', vars: Record<string, string>): string => {
+    const file = join(api, `wrangler.${kind}.jsonc`);
+    const parsed = ts.parseConfigFileTextToJson(file, readFileSync(file, 'utf8'));
+    if (parsed.error) throw new Error(`Invalid local Worker config: ${file}`);
+    const config = parsed.config;
+    const { env: _env, $schema: _schema, account_id: _account, ...base } = config;
+    const dev = config.env.dev;
+    const target = join(STATE, `${kind}.json`);
+    writeFileSync(target, JSON.stringify({ ...base, ...dev, main: join(api, config.main),
+      assets: { ...dev.assets, directory: join(api, dev.assets.directory) },
+      d1_databases: dev.d1_databases.map((db: Record<string, string>) => ({ ...db, migrations_dir: join(api, db.migrations_dir) })),
+      vars: { ...dev.vars, ...vars }
+    }), { mode: 0o600 });
+    return target;
+  };
+  const gameConfig = fixtureConfig('game', { GOOGLE_CLIENT_IDS: GOOGLE_CLIENT, GOOGLE_JWKS_URL: `http://127.0.0.1:${PORTS.jwks}/google.json` });
+  const adminConfig = fixtureConfig('admin', { ACCESS_TEAM_DOMAIN: TEAM, ACCESS_AUD: AUD,
+    ACCESS_JWKS_URL: `http://127.0.0.1:${PORTS.jwks}/jwks.json`, ADMIN_BOOTSTRAP_OWNERS: OWNER,
+    CONTENT_SIGNING_KEY: JSON.stringify({ ...signing.privateJwk, kid }), CONTENT_SIGNING_KID: kid });
+  const gatewayConfig = join(STATE, 'gateway.json');
+  writeFileSync(gatewayConfig, JSON.stringify({ name: 'uomd-e2e-gateway',
+    main: join(ROOT, 'tests/e2e/gateway.ts'), compatibility_date: '2026-10-01',
+    services: [{ binding: 'GAME', service: 'uomd-game-dev' }, { binding: 'ADMIN', service: 'uomd-admin-dev' }]
+  }), { mode: 0o600 });
+  start('stack', ['dev', '-c', gatewayConfig, '-c', gameConfig, '-c', adminConfig,
+    '--port', String(PORTS.game), '--inspector-port', '9302', ...persist], api);
+  // Preserve the separate admin browser origin without starting another database runtime.
+  adminProxy = createServer((req, res) => {
+    const upstream = proxyRequest({ hostname: '127.0.0.1', port: PORTS.game,
+      path: req.url, method: req.method, headers: { ...req.headers, 'x-uomd-e2e-admin': '1' } }, (reply) => {
+      res.writeHead(reply.statusCode ?? 502, reply.headers); reply.pipe(res);
+    });
+    upstream.on('error', () => { if (!res.headersSent) res.writeHead(502); res.end(); });
+    req.on('aborted', () => upstream.destroy());
+    res.on('close', () => { if (!res.writableEnded) upstream.destroy(); });
+    req.pipe(upstream);
+  }).listen(PORTS.admin, '127.0.0.1');
   await waitFor(`http://127.0.0.1:${PORTS.game}/api/v1/health`);
+  await waitFor(`http://127.0.0.1:${PORTS.admin}/admin/api/health`);
 
   const publish = (dir: string, id: string, extra: string[] = []): Promise<void> =>
     sh('npx', ['tsx', 'tools/publish_release.ts', '--admin', `http://127.0.0.1:${PORTS.admin}`, '--dir', dir, '--id', id, '--channel', 'dev', '--publish', ...extra], ROOT, { UOMD_ADMIN_JWT: adminJwt });

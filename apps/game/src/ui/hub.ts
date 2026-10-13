@@ -19,7 +19,11 @@ export abstract class HubScene extends Phaser.Scene {
   protected balance = 0;
   protected abstract readonly heading: string;
   protected readonly needsSignIn: boolean = true;
+  protected readonly usesWallet: boolean = true;
   protected readonly backTo: string = 'Home';
+  private refreshing = false;
+  private rerender = false;
+  private renderRevision = -1;
 
   create(): void {
     this.cameras.main.setBackgroundColor(0x0a0610);
@@ -31,6 +35,13 @@ export abstract class HubScene extends Phaser.Scene {
     new Button(this, 190, REF_H - 80, { label: 'BACK', w: 300, h: 110, onClick: () => this.goBack() });
     this.walletText = txt(this, REF_W - 60, 70, '', { fontSize: '30px', color: T.text }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
     this.body = this.add.container(0, 0);
+    const authChanged = () => { void this.refresh(); };
+    Services.api.addEventListener('auth', authChanged);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      Services.api.removeEventListener('auth', authChanged);
+      this.renderRevision = -1;
+      this.rerender = false;
+    });
     void this.refresh();
   }
 
@@ -40,20 +51,42 @@ export abstract class HubScene extends Phaser.Scene {
 
   /** Re-renders the body (and the wallet strip). */
   protected async refresh(): Promise<void> {
-    this.body.removeAll(true);
-    const api = Services.api;
-    if (this.needsSignIn && !api.signedIn) {
+    if (this.refreshing) {
+      this.rerender = true;
+      this.body.removeAll(true);
       this.walletText.setText('');
-      this.body.add(txt(this, REF_W / 2, 400, 'Sign in to use this screen.', { fontSize: '44px' }).setOrigin(0.5));
-      this.body.add(new Button(this, REF_W / 2, 560, { label: 'ACCOUNT', w: 520, onClick: () => this.scene.start('Account') }));
       return;
     }
+    this.refreshing = true;
+    this.rerender = false;
+    this.renderRevision = Services.api.authRevision;
     try {
-      if (api.signedIn) this.showWallet(await api.wallet());
-      await this.build();
-    } catch (e) {
-      this.say(errText(e));
+      this.body.removeAll(true);
+      const api = Services.api;
+      if (this.needsSignIn && !api.signedIn) {
+        this.walletText.setText('');
+        this.body.add(txt(this, REF_W / 2, 400, 'Sign in to use this screen.', { fontSize: '44px' }).setOrigin(0.5));
+        this.body.add(new Button(this, REF_W / 2, 560, { label: 'ACCOUNT', w: 520, onClick: () => this.scene.start('Account') }));
+        return;
+      }
+      try {
+        if (api.signedIn && this.usesWallet) {
+          const wallet = await api.wallet();
+          if (!this.isCurrentView()) return;
+          this.showWallet(wallet);
+        }
+        await this.build();
+      } catch (e) {
+        this.say(errText(e));
+      }
+    } finally {
+      this.refreshing = false;
+      if (this.rerender && this.sys.isActive()) void this.refresh();
     }
+  }
+
+  protected isCurrentView(): boolean {
+    return (this.sys.isActive() || this.sys.settings.status === Phaser.Scenes.CREATING) && this.renderRevision === Services.api.authRevision;
   }
 
   private showWallet(w: Wallets): void {
@@ -63,16 +96,21 @@ export abstract class HubScene extends Phaser.Scene {
 
   /** Cheap wallet refresh after an action. */
   protected async updateWallet(): Promise<void> {
-    if (Services.api.signedIn) this.showWallet(await Services.api.wallet().catch(() => ({})));
+    if (Services.api.signedIn) {
+      const wallet = await Services.api.wallet().catch(() => ({}));
+      if (this.isCurrentView()) this.showWallet(wallet);
+    }
   }
 
   protected abstract build(): Promise<void> | void;
 
   protected say(message: string): void {
+    if (!this.isCurrentView()) return;
     toast(this, message, 3400);
   }
 
   protected add_<T extends Phaser.GameObjects.GameObject>(o: T): T {
+    if (!this.isCurrentView()) { o.destroy(); return o; }
     this.body.add(o);
     return o;
   }

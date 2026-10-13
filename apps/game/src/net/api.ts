@@ -175,6 +175,11 @@ export class GameApi extends EventTarget {
     return this.session !== null && Date.parse(this.session.expiresAt) > Date.now();
   }
 
+  get authRevision(): number {
+    this.observeSession();
+    return this.authVersion;
+  }
+
   /** Observe shared selection without writing: an old tab must never delete or restore another tab's bearer. */
   private observeSession(): void {
     try {
@@ -263,16 +268,18 @@ export class GameApi extends EventTarget {
       const r = await this.call<{ token: string; expiresAt: string; player: { id: string; displayName: string | null; isNew: boolean } }>('POST', '/api/v1/auth/google', { idToken }, false);
       this.observeSession();
       if (this.authVersion !== attempt) throw new ApiError(409, 'auth_changed', 'The selected account changed before sign-in completed');
+      this.signingIn = 0;
       this.store({ token: r.token, expiresAt: r.expiresAt });
       this.verifiedAccount = { version: this.authVersion, id: r.player.id };
       return r.player;
     } finally { if (this.signingIn === attempt) this.signingIn = 0; }
   }
 
-  async signOut(): Promise<void> {
+  async signOut(expectedRevision = this.authVersion): Promise<void> {
     this.observeSession();
+    if (expectedRevision !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The selected account changed');
     this.signingIn = 0;
-    const request = this.call('POST', '/api/v1/auth/logout', {});
+    const request = this.call('POST', '/api/v1/auth/logout', {}, true, expectedRevision);
     this.store(null); // End local authority immediately; the request already captured the old bearer.
     const endingVersion = this.authVersion;
     try {
@@ -525,10 +532,11 @@ export class GameApi extends EventTarget {
   exportAccount(): Promise<Record<string, unknown>> {
     return this.call('GET', '/api/v1/account/export');
   }
-  async deleteAccount(): Promise<void> {
+  async deleteAccount(expectedRevision = this.authVersion): Promise<void> {
     this.observeSession();
+    if (expectedRevision !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The selected account changed');
     const version = this.authVersion;
-    await this.call('POST', '/api/v1/account/delete', { confirm: 'DELETE' });
+    await this.call('POST', '/api/v1/account/delete', { confirm: 'DELETE' }, true, version);
     if (this.authVersion !== version) throw new ApiError(409, 'auth_changed', 'The previous account was deleted; the current sign-in was kept');
     this.store(null);
   }

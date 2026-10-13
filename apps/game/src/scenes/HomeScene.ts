@@ -24,7 +24,8 @@ export class HomeScene extends HubScene {
       { label: 'ARMORY', sub: 'Weapons and relics', scene: 'Gear' },
       { label: 'MAIL', sub: 'Rewards and notices', scene: 'Mail' },
       { label: 'SHOP', sub: 'Offers and ads', scene: 'Shop' },
-      { label: 'ACCOUNT', sub: api.signedIn ? 'Signed in' : 'Sign in', scene: 'Account' }
+      { label: 'ACCOUNT', sub: api.signedIn ? 'Signed in' : 'Sign in', scene: 'Account' },
+      { label: 'ACTIONS', sub: 'Pending results and history', scene: 'Operations' }
     ];
     tiles.forEach((t, i) => {
       const col = i % 3;
