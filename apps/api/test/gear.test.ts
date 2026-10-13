@@ -28,6 +28,14 @@ const call = (auth: Record<string, string>, path: string, body: unknown = {}) =>
 const list = async (auth: Record<string, string>) => ((await (await game('/api/v1/gear', { headers: auth })).json()) as { gear: { id: number; slot: string; level: number; levelCap: number; equippedBy: string | null; stats: { main: { stat: string }; subs: unknown[] } | null; ascension: number; canDismantle: boolean }[] }).gear;
 
 describe('gear: grants and equipping', () => {
+  it('reusing a gear upgrade identity with different XP is rejected without another spend', async () => {
+    const { auth, playerId } = await player({ stacks: { weapon_tempering_xp: 100 }, funds: 100 });
+    const [id] = await give(playerId, ['weapon_arming_sword_3_01']); const requestId = rid();
+    expect((await call(auth, `/gear/${id}/level-up`, { requestId, xp: 50 })).status).toBe(200);
+    expect((await call(auth, `/gear/${id}/level-up`, { requestId, xp: 75 })).status).toBe(409);
+    expect((await db().prepare("SELECT qty FROM player_stacks WHERE player_id = ?1 AND item_id = 'weapon_tempering_xp'").bind(playerId).first<{ qty: number }>())?.qty).toBe(50);
+  });
+
   it('grants weapons and armor as instances and rolls accessory stats at grant time', async () => {
     const { auth, playerId } = await player();
     const [w, a, ring] = await give(playerId, ['weapon_arming_sword_3_01', 'armor_padded_3_01', 'accessory_ash_maw_hide_ring_4']);

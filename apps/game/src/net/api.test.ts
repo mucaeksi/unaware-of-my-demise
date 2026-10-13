@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GameApi } from './api';
 import { OperationJournal, type OperationRecord, type OperationStorage } from './operations';
+import { canonicalJson, sha256Hex } from '@uomd/shared';
 
 class TestOperationStorage implements OperationStorage {
   records: OperationRecord[] = [];
@@ -65,6 +66,75 @@ describe('authentication response ownership', () => {
 });
 
 describe('durable client operations', () => {
+  it('authoritative status recovers a committed action without another POST and replaces an untrusted cached result', async () => {
+    const storage = new TestOperationStorage(); let body = ''; let posts = 0;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (url.includes('/operations/')) {
+        const input = JSON.parse(body);
+        return Response.json({ requestId: input.requestId, path: '/api/v1/gacha/pull', state: 'confirmed', binding: 'exact', inputHash: await sha256Hex(canonicalJson(input)), result: await pullResult(body, { balance: 160, replayed: true }).json() });
+      }
+      posts++; body = init.body as string; throw new TypeError('response lost');
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.pull('banner', 1)).rejects.toThrow(); const id = storage.records[0]!.id;
+    const reload = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(reload.retryOperation(id)).resolves.toMatchObject({ balance: 160 });
+    storage.records[0]!.result = { balance: 999 };
+    await expect(reload.retryOperation(id)).resolves.toMatchObject({ balance: 160 });
+    expect(storage.records[0]!.result).toMatchObject({ balance: 160 }); expect(posts).toBe(1);
+  });
+
+  it('legacy or mismatched status proof cannot confirm the pending action or send a new mutation', async () => {
+    const storage = new TestOperationStorage(); let proof = 'legacy'; let posts = 0;
+    vi.stubGlobal('fetch', vi.fn(async (url: string) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (url.includes('/operations/')) {
+        const record = storage.records[0]!;
+        return Response.json({ requestId: record.id, path: record.path, state: 'confirmed', binding: proof, inputHash: proof === 'legacy' ? null : '0'.repeat(64), result: { requestId: record.id, pulls: [{}] } });
+      }
+      posts++; throw new TypeError('unknown result');
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.pull('banner', 1)).rejects.toThrow(); const id = storage.records[0]!.id;
+    await expect(api.retryOperation(id)).rejects.toMatchObject({ code: 'operation_unverified' });
+    proof = 'exact'; await expect(api.retryOperation(id)).rejects.toMatchObject({ code: 'operation_unverified' });
+    expect(storage.records[0]!.state).toBe('pending'); expect(posts).toBe(1);
+  });
+
+  it('unknown status retries only the original saved payload and identity', async () => {
+    const storage = new TestOperationStorage(); const sent: string[] = [];
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (url.includes('/operations/')) { const record = storage.records[0]!; return Response.json({ requestId: record.id, path: record.path, state: 'unknown', binding: null, inputHash: null, result: null }); }
+      sent.push(init.body as string); if (sent.length === 1) throw new TypeError('request may not have arrived');
+      return pullResult(init.body as string);
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.pull('banner', 1)).rejects.toThrow();
+    await api.retryOperation(storage.records[0]!.id); expect(sent[1]).toBe(sent[0]);
+  });
+
+  it('gear upgrades also save their original inputs before transport', async () => {
+    const storage = new TestOperationStorage(); let sent = '';
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      sent = init.body as string; return Response.json({ id: 42, level: 2 });
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.levelGear(42, 50)).resolves.toMatchObject({ id: 42, level: 2 });
+    expect(storage.records[0]).toMatchObject({ state: 'confirmed', path: '/api/v1/gear/42/level-up', body: { xp: 50 } });
+    expect(JSON.parse(sent).requestId).toBe(storage.records[0]!.id);
+  });
+
+  it('a gear response without its growth result cannot be recorded as confirmed', async () => {
+    const storage = new TestOperationStorage();
+    vi.stubGlobal('fetch', vi.fn(async (url: string) => Response.json(url.endsWith('/me') ? { id: 'player-A' } : { id: 42 })));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.levelGear(42, 50)).rejects.toMatchObject({ code: 'invalid_response' });
+    expect(storage.records[0]!.state).toBe('pending');
+  });
+
   it('post-commit response loss and reload retry use the original request ID and confirm one result', async () => {
     const storage = new TestOperationStorage(); const bodies: string[] = []; let lost = false;
     vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {

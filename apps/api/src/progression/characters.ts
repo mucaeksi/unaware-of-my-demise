@@ -1,3 +1,4 @@
+import { canonicalJson } from '@uomd/shared';
 import { z } from 'zod';
 import { accountLevelFromXp, applyCharacterXp, characterLevelCap, characterXpToNext, feeForLevels, ProgressionConfig, xpToReach, type CharState } from '@uomd/economy';
 import { HttpError } from '../content/store';
@@ -99,11 +100,13 @@ type Compute = (ctx: { cfg: ProgressionConfig; row: CharRow; state: CharState; r
  * One atomic, idempotent character upgrade: re-reads the character under optimistic concurrency, lets `compute` decide the new
  * state, then ONE batch applies the state, spends materials and the fee, and records the request. A stale read retries.
  */
-async function characterOp(db: D1Database, playerId: string, characterId: string, requestId: string, kind: string, compute: Compute): Promise<Record<string, unknown>> {
+async function characterOp(db: D1Database, playerId: string, characterId: string, input: { requestId: string } & Record<string, unknown>, kind: string, compute: Compute): Promise<Record<string, unknown>> {
+  const { requestId } = input;
+  const inputJson = canonicalJson(input);
   const stored = async (): Promise<Record<string, unknown> | null> => {
-    const r = await db.prepare('SELECT kind, result_json FROM progression_requests WHERE player_id = ?1 AND request_id = ?2').bind(playerId, requestId).first<{ kind: string; result_json: string }>();
+    const r = await db.prepare('SELECT kind, result_json, input_json FROM progression_requests WHERE player_id = ?1 AND request_id = ?2').bind(playerId, requestId).first<{ kind: string; result_json: string; input_json: string | null }>();
     if (!r) return null;
-    if (r.kind !== `${kind}:${characterId}`) throw new HttpError(409, 'request_id_reused', 'this requestId was already used for a different operation');
+    if (r.kind !== `${kind}:${characterId}` || r.input_json !== null && r.input_json !== inputJson) throw new HttpError(409, 'request_id_reused', 'this requestId was already used for a different operation');
     return { ...(JSON.parse(r.result_json) as Record<string, unknown>), replayed: true };
   };
   const first = await stored();
@@ -129,7 +132,7 @@ async function characterOp(db: D1Database, playerId: string, characterId: string
       ...plan.items.map((i) => stackSpend(db, playerId, i.itemId, i.quantity)),
       ...(plan.fee > 0 ? ledgerStatements(db, { playerId, currency: 'eclipse_token', delta: -plan.fee, reason: `${kind}:${characterId}`, idempotencyKey: `prog:${playerId}:${requestId}` }) : []),
       ...(kind === 'level_up' ? await taskEventStatements(db, playerId, { level_ups: 1 }) : []),
-      db.prepare('INSERT INTO progression_requests (player_id, request_id, kind, result_json) VALUES (?1, ?2, ?3, ?4)').bind(playerId, requestId, `${kind}:${characterId}`, JSON.stringify(response)),
+      db.prepare('INSERT INTO progression_requests (player_id, request_id, kind, result_json, input_json) VALUES (?1, ?2, ?3, ?4, ?5)').bind(playerId, requestId, `${kind}:${characterId}`, JSON.stringify(response), inputJson),
       db.prepare('DELETE FROM tx_guard')
     ];
     try {
@@ -152,7 +155,7 @@ export const LevelUpBody = z.object({ requestId: z.string().regex(/^[A-Za-z0-9_-
 export const RequestOnly = z.object({ requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/) }).strict();
 
 export function levelUpCharacter(db: D1Database, playerId: string, characterId: string, input: z.infer<typeof LevelUpBody>): Promise<Record<string, unknown>> {
-  return characterOp(db, playerId, characterId, input.requestId, 'level_up', async ({ cfg, state, ranks, accountLevel }) => {
+  return characterOp(db, playerId, characterId, input, 'level_up', async ({ cfg, state, ranks, accountLevel }) => {
     const merged = new Map<string, number>();
     for (const i of input.items) merged.set(i.itemId, (merged.get(i.itemId) ?? 0) + i.quantity);
     const defs = (await db.prepare(`SELECT item_id, xp_value, kind FROM item_defs WHERE item_id IN (${[...merged.keys()].map(() => '?').join(',')})`).bind(...merged.keys()).all<{ item_id: string; xp_value: number | null; kind: string }>()).results;
@@ -183,7 +186,7 @@ export function levelUpCharacter(db: D1Database, playerId: string, characterId: 
 }
 
 export function ascendCharacter(db: D1Database, playerId: string, characterId: string, input: z.infer<typeof RequestOnly>): Promise<Record<string, unknown>> {
-  return characterOp(db, playerId, characterId, input.requestId, 'ascend', async ({ cfg, state, ranks, accountLevel }) => {
+  return characterOp(db, playerId, characterId, input, 'ascend', async ({ cfg, state, ranks, accountLevel }) => {
     const step = cfg.character.ascension[state.ascension + 1];
     if (!step) throw new HttpError(409, 'max_ascension', 'this character is fully ascended');
     const atCap = state.level >= characterLevelCap(cfg, state.ascension, 10_000);
@@ -198,7 +201,7 @@ export function ascendCharacter(db: D1Database, playerId: string, characterId: s
 }
 
 export function upgradeSkill(db: D1Database, playerId: string, characterId: string, skillId: string, input: z.infer<typeof RequestOnly>): Promise<Record<string, unknown>> {
-  return characterOp(db, playerId, characterId, input.requestId, `skill:${skillId}`, async ({ cfg, state, ranks }) => {
+  return characterOp(db, playerId, characterId, input, `skill:${skillId}`, async ({ cfg, state, ranks }) => {
     const skill = await db.prepare('SELECT skill_id, type FROM character_skills WHERE skill_id = ?1 AND character_id = ?2').bind(skillId, characterId).first<{ skill_id: string; type: 'basic' | 'active' | 'passive' | 'ultimate' }>();
     if (!skill) throw new HttpError(404, 'no_such_skill', 'this character has no such skill');
     const sk = cfg.character.skills;

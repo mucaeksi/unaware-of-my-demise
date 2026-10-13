@@ -149,6 +149,14 @@ describe('pull', () => {
     expect((await db().prepare('SELECT COUNT(*) AS n FROM gacha_pulls WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(10);
   });
 
+  it('a stored request cannot be reused with a different selectable target, including concurrent intent races', async () => {
+    const { auth, playerId } = await signIn(`sub-target-reuse-${rid()}`); await fund(playerId, 5);
+    const id = rid(); const pull = (target: string) => game('/api/v1/gacha/pull', post({ bannerId: 'hall_of_armaments', count: 1, requestId: id, target }, auth));
+    const replies = await Promise.all([pull('weapon_mahmut_signature'), pull('weapon_fadyme_signature')]);
+    expect(replies.map((r) => r.status).sort()).toEqual([200, 409]);
+    expect((await db().prepare('SELECT COUNT(*) AS n FROM gacha_pulls WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(1);
+  });
+
   it('the same requestId sent 12 times at once pulls exactly once', async () => {
     const { auth, playerId } = await signIn(`sub-same-${rid()}`);
     await fund(playerId, 30);

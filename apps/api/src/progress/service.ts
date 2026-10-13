@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { BattleParty, ChapterIndex, Encounter, RATION_COST, UnitPack, type RewardAttachment } from '@uomd/content-schema';
 import { replayBattle } from '@uomd/combat';
 import { RATION_CAP, rationNextMs, rationNow, rationSpend, type RationState } from '@uomd/economy';
-import { sha256Hex } from '@uomd/shared';
+import { canonicalJson, sha256Hex } from '@uomd/shared';
 import { ContentStore, HttpError } from '../content/store';
 import { grantStatements } from '../db/grants';
 import { taskEventStatements } from '../tasks/service';
@@ -45,6 +45,12 @@ async function rationRow(db: D1Database, playerId: string, nowMs: number): Promi
   const row = await db.prepare('SELECT value, at_ms FROM player_ration WHERE player_id = ?1').bind(playerId).first<{ value: number; at_ms: number }>();
   const stored: RationState = row ? { value: row.value, atMs: row.at_ms } : { value: RATION_CAP, atMs: nowMs };
   return { state: rationNow(stored, nowMs), exists: Boolean(row), stored };
+}
+
+export async function battleResult(db: D1Database, playerId: string, outcome: BattleOutcome, replayed: boolean): Promise<BattleResponse> {
+  const nowMs = Date.now();
+  const r = await rationRow(db, playerId, nowMs);
+  return { ...outcome, ration: { spent: outcome.ration.spent, value: r.state.value, cap: RATION_CAP, nextMs: rationNextMs(r.stored, nowMs) }, replayed };
 }
 
 export async function getProgress(db: D1Database, playerId: string, nowMs = Date.now()): Promise<Record<string, unknown>> {
@@ -128,14 +134,11 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
   const nowMs = now.getTime();
   const wallStarted = Date.now();
   const currentTime = (): Date => new Date(nowMs + Math.max(0, Date.now() - wallStarted));
-  const finish = async (o: BattleOutcome, replayed: boolean): Promise<BattleResponse> => {
-    const r = await rationRow(db, playerId, Date.now());
-    return { ...o, ration: { spent: o.ration.spent, value: r.state.value, cap: RATION_CAP, nextMs: rationNextMs(r.stored, Date.now()) }, replayed };
-  };
+  const finish = (o: BattleOutcome, replayed: boolean): Promise<BattleResponse> => battleResult(db, playerId, o, replayed);
   const replay = async (): Promise<BattleResponse | null> => {
-    const prior = await db.prepare('SELECT release_id, node_id, result_json FROM battle_claims WHERE player_id = ?1 AND request_id = ?2').bind(playerId, input.requestId).first<{ release_id: string; node_id: string; result_json: string }>();
+    const prior = await db.prepare('SELECT release_id, node_id, result_json, input_json FROM battle_claims WHERE player_id = ?1 AND request_id = ?2').bind(playerId, input.requestId).first<{ release_id: string; node_id: string; result_json: string; input_json: string | null }>();
     if (!prior) return null;
-    if (prior.release_id !== input.releaseId || prior.node_id !== input.nodeId) throw new HttpError(409, 'request_id_reused', 'this requestId was already used for a different battle');
+    if (prior.release_id !== input.releaseId || prior.node_id !== input.nodeId || prior.input_json !== null && prior.input_json !== canonicalJson(input)) throw new HttpError(409, 'request_id_reused', 'this requestId was already used for a different battle');
     return finish(JSON.parse(prior.result_json) as BattleOutcome, true);
   };
   const first = await replay();
@@ -233,7 +236,7 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
     if (cost > 0) batch.push(...(await taskEventStatements(db, playerId, { eligible_wins: 1, ...(node.boss ? { boss_wins: 1 } : {}), ...(stars === 3 ? { three_star_wins: 1 } : {}) }, nowMs)));
     for (const g of grants) batch.push(...(await grantStatements(db, playerId, [g.a], { keyPrefix: g.key, reason: `stage:${input.nodeId}` })));
     batch.push(
-      db.prepare('INSERT INTO battle_claims (player_id, request_id, release_id, node_id, result_json) VALUES (?1, ?2, ?3, ?4, ?5)').bind(playerId, input.requestId, input.releaseId, input.nodeId, JSON.stringify(outcome)),
+      db.prepare('INSERT INTO battle_claims (player_id, request_id, release_id, node_id, result_json, input_json) VALUES (?1, ?2, ?3, ?4, ?5, ?6)').bind(playerId, input.requestId, input.releaseId, input.nodeId, JSON.stringify(outcome), canonicalJson(input)),
       db
         .prepare('INSERT INTO battle_audit (release_id, encounter, valid, complete, winner, stars, turns, log_hash, client_match, caller) VALUES (?1,?2,1,1,?3,?4,?5,?6,1,?7)')
         .bind(input.releaseId, node.encounter, 'player', stars, turns, out.logHash, `player:${(await sha256Hex(playerId)).slice(0, 20)}`),

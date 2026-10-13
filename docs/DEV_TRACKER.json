@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R05-B durable summon/battle/character operations verified; status and remaining mutations next",
-      "detail": "541 application/tool tests, lint/typecheck, four real Chromium storage cases and two real-Worker desktop/phone response-loss/reload cases pass. Persist original identities and frozen account/backend-scoped payloads; no second summon payment. Continue authoritative server status/input checks, gear/claims/checkpoint/save/purchase recovery and player UI."
+      "title": "R05-C authoritative result/input recovery verified; claims/save/lifecycle next",
+      "detail": "555 application/tool tests, lint/typecheck, 28 Python checks and real-Worker desktop/phone status recovery pass. Migration 0025 binds exact original inputs; four failing-before identity-reuse regressions now reject changed requests. Continue claims/checkpoints/cloud-save/purchase lifecycle and player recovery UI."
     }
   ],
   "next": [
@@ -571,6 +571,33 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R05-C-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "bf45aceb",
+      "verifiedAt": "2026-10-13T07:05:47+00:00",
+      "scope": "R05-C working tree: canonical original inputs atomically stored in existing gacha/progression/battle request journals; migration 0025 preserves legacy inputs as null and forbids journal updates while permitting account-deletion cleanup. Four semantic regressions failed before correction (concurrent selectable target, changed materials, gear XP and battle actions/session). Authenticated player/path-scoped rate-limited no-store status returns original results/current balance or Ration plus exact input hash; absence is unknown and legacy proof is not invented. Manual retry checks authoritative input/result, sends no repeat POST for confirmed status, never trusts corrupt cached results and includes durable gear operations. Nine additional API and five client cases; all 555 application/tool tests, lint/typecheck, 28 Python checks, game/admin builds and 25 local migrations pass. Actual local Worker desktop/phone response-loss+reload recovery confirms through GET with zero recovery mutation POSTs. No native/deployed or complete R05 claim; claims/save/checkpoint/purchase/player UI remain.",
+      "testIds": [
+        "apps/api/test/operation-status.test.ts",
+        "apps/api/test/gacha.test.ts",
+        "apps/api/test/progression.test.ts",
+        "apps/api/test/gear.test.ts",
+        "apps/api/test/progress.test.ts",
+        "apps/game/src/net/api.test.ts",
+        "tools/tests/test_operation_input_migration.py",
+        "python3 -m unittest discover -s tools/tests",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "tests/e2e/operation-recovery.spec.ts (both projects, real Workers with 25 migrations)",
+        "npm run build -w @uomd/game",
+        "npm run build -w @uomd/admin"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -902,7 +929,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
-      "implemented": "R05-A auth fences and R05-B durable original summon/battle/character identities, frozen payloads, verified player/backend scoping, pending/confirmed/rejected states and reload retry are locally verified. Authoritative status/input semantics, remaining mutation coverage and player recovery UI remain open; native/deployed acceptance is separate.",
+      "implemented": "R05-A auth fences, R05-B original durable identities/payload/account scopes and R05-C authoritative result/input binding with durable gear wrappers are locally verified. Exact new request inputs/results are immutable; legacy proof remains unknown. Claims/checkpoint/cloud-save/purchase lifecycle and player recovery UI remain open; native/deployed acceptance is separate.",
       "dependsOn": [
         "R01",
         "R02",
@@ -915,14 +942,18 @@
         "apps/game/src/net/api.test.ts",
         "apps/game/src/net/operations.ts",
         "tests/storage/idb.spec.ts",
-        "tests/e2e/operation-recovery.spec.ts"
+        "tests/e2e/operation-recovery.spec.ts",
+        "apps/api/src/player/operations.ts",
+        "apps/api/migrations/0025_operation_input_binding.sql",
+        "apps/api/test/operation-status.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
         "E-R05-A-20261013",
-        "E-R05-B-20261013"
+        "E-R05-B-20261013",
+        "E-R05-C-20261013"
       ],
       "blockerIds": []
     },

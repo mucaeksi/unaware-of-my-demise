@@ -115,7 +115,7 @@ export class OperationJournal {
   async finish(scope: string, id: string, state: OperationState, result?: unknown, code?: string): Promise<void> {
     await this.storage.change((records) => {
       const record = records.find((r) => r.scope === scope && r.id === id);
-      if (!record || record.state !== 'pending') return;
+      if (!record || record.state !== 'pending' && !(record.state === 'confirmed' && state === 'confirmed')) return;
       record.state = state; record.at = Date.now();
       if (state === 'confirmed') record.result = structuredClone(result);
       if (code) record.code = /^[a-z_]{1,80}$/.test(code) ? code : 'request_failed';

@@ -31,11 +31,14 @@ test('lost summon response survives reload and spends exactly once on the real W
   expect(lost).toBe(true); expect(committed).toBe(true); expect(originalId).not.toBe('');
   await page.unroute('**/api/v1/gacha/pull'); await page.reload();
   await page.waitForFunction(() => (window as any).__UOMD__?.services.api.signedIn);
-  const recovered = await page.evaluate(async (value) => (window as any).__UOMD__.services.api.pull(value.bannerId, value.count), input);
+  let recoveryPosts = 0;
+  await page.route('**/api/v1/gacha/pull', async (route) => { recoveryPosts++; await route.abort('failed'); });
+  const recovered = await page.evaluate(async (id) => (window as any).__UOMD__.services.api.retryOperation(id), originalId);
   expect(recovered.requestId).toBe(originalId); expect(recovered.replayed).toBe(true);
   expect(recovered.balance).toBe(160);
+  expect(recoveryPosts).toBe(0);
   const journal = await page.evaluate(async () => (window as any).__UOMD__.services.api.operations());
-  expect(journal).toHaveLength(1); expect(journal[0]).toMatchObject({ id: originalId, state: 'confirmed', attempts: 2 });
+  expect(journal).toHaveLength(1); expect(journal[0]).toMatchObject({ id: originalId, state: 'confirmed', attempts: 1 });
   const history = await page.evaluate(async () => (window as any).__UOMD__.services.api.history());
   expect(history).toHaveLength(1);
 });

@@ -21,6 +21,7 @@ import { activateTeam, deleteTeam, listTeams, saveTeam, TeamBody } from '../team
 import { claimTask, listTasks } from '../tasks/service';
 import { claimMail, listMail, markRead } from '../mail/service';
 import { issueSession, playerForGoogle, resolveSession, revokeSession, verifyGoogleIdToken } from './auth';
+import { operationStatus } from './operations';
 
 type AppEnv = { Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } };
 type App = Hono<AppEnv>;
@@ -118,6 +119,15 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/ads/begin', authed);
   app.use('/api/v1/shop/verify', authed);
   app.use('/api/v1/mail/*', authed);
+  app.use('/api/v1/operations/*', authed);
+
+  app.get('/api/v1/operations/:id', async (c) => {
+    const id = RequestId.safeParse(c.req.param('id'));
+    const path = c.req.query('path');
+    if (!id.success || !path || path.length > 200) throw new HttpError(400, 'bad_request', 'invalid operation identity or path');
+    await perMinute(c.env, `operation-status:${c.get('playerId')}`, 60);
+    return c.json(await operationStatus(c.env.DB, c.get('playerId'), id.data, path), 200, { 'Cache-Control': 'no-store' });
+  });
 
   app.post('/api/v1/auth/logout', async (c) => {
     await revokeSession(c.env.DB, c.get('tokenHash'));

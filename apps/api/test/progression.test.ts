@@ -21,6 +21,13 @@ const mine = async (auth: Record<string, string>) => (await (await game('/api/v1
 const wallet = async (auth: Record<string, string>) => ((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token ?? 0;
 
 describe('character growth', () => {
+  it('reusing a level-up identity with different materials is rejected without another spend', async () => {
+    const { auth, playerId } = await setup({ account: 2500, stacks: { torn_chronicle_page: 10 }, funds: 100 });
+    const id = rid(); expect((await lvl(auth, 'mahmut', [{ itemId: 'torn_chronicle_page', quantity: 2 }], id)).status).toBe(200);
+    expect((await lvl(auth, 'mahmut', [{ itemId: 'torn_chronicle_page', quantity: 3 }], id)).status).toBe(409);
+    expect((await db().prepare("SELECT qty FROM player_stacks WHERE player_id = ?1 AND item_id = 'torn_chronicle_page'").bind(playerId).first<{ qty: number }>())?.qty).toBe(8);
+  });
+
   it('lists the free-start roster at level 1; the cap follows account level and ascension', async () => {
     const { auth } = await setup({ account: 250 * 3 + 50 * 3 }); // account level 4
     const m = await mine(auth);

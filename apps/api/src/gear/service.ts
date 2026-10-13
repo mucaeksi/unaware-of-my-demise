@@ -1,3 +1,4 @@
+import { canonicalJson } from '@uomd/shared';
 import { z } from 'zod';
 import { aggregateGear, equipmentLevelFee, equipmentXpToNext, finalStats, gearLevelCap, rerollAccessory, type AccessoryDef, type AccessoryStats, type GearPiece, type ProgressionConfig } from '@uomd/economy';
 import { HttpError } from '../content/store';
@@ -95,11 +96,13 @@ export async function listGear(db: D1Database, playerId: string): Promise<GearVi
 }
 
 /** Generic atomic gear operation with replay protection (reuses progression_requests). */
-async function gearOp(db: D1Database, playerId: string, id: number, requestId: string, kind: string, build: (g: GearRow, cfg: ProgressionConfig) => Promise<{ statements: D1PreparedStatement[]; response: Record<string, unknown> }>): Promise<Record<string, unknown>> {
+async function gearOp(db: D1Database, playerId: string, id: number, input: { requestId: string } & Record<string, unknown>, kind: string, build: (g: GearRow, cfg: ProgressionConfig) => Promise<{ statements: D1PreparedStatement[]; response: Record<string, unknown> }>): Promise<Record<string, unknown>> {
+  const { requestId } = input;
+  const inputJson = canonicalJson(input);
   const stored = async (): Promise<Record<string, unknown> | null> => {
-    const r = await db.prepare('SELECT kind, result_json FROM progression_requests WHERE player_id = ?1 AND request_id = ?2').bind(playerId, requestId).first<{ kind: string; result_json: string }>();
+    const r = await db.prepare('SELECT kind, result_json, input_json FROM progression_requests WHERE player_id = ?1 AND request_id = ?2').bind(playerId, requestId).first<{ kind: string; result_json: string; input_json: string | null }>();
     if (!r) return null;
-    if (r.kind !== `${kind}:${id}`) throw new HttpError(409, 'request_id_reused', 'this requestId was already used for a different operation');
+    if (r.kind !== `${kind}:${id}` || r.input_json !== null && r.input_json !== inputJson) throw new HttpError(409, 'request_id_reused', 'this requestId was already used for a different operation');
     return { ...(JSON.parse(r.result_json) as Record<string, unknown>), replayed: true };
   };
   const first = await stored();
@@ -118,7 +121,7 @@ async function gearOp(db: D1Database, playerId: string, id: number, requestId: s
       db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
       ...statements,
       ...(kind === 'gear_level' ? await taskEventStatements(db, playerId, { level_ups: 1 }) : []),
-      db.prepare('INSERT INTO progression_requests (player_id, request_id, kind, result_json) VALUES (?1, ?2, ?3, ?4)').bind(playerId, requestId, `${kind}:${id}`, JSON.stringify(response)),
+      db.prepare('INSERT INTO progression_requests (player_id, request_id, kind, result_json, input_json) VALUES (?1, ?2, ?3, ?4, ?5)').bind(playerId, requestId, `${kind}:${id}`, JSON.stringify(response), inputJson),
       db.prepare('DELETE FROM tx_guard')
     ];
     try {
@@ -179,7 +182,7 @@ export async function lockGear(db: D1Database, playerId: string, id: number, loc
 
 /** Spend tempering XP on a weapon or armor. No waste: only what is needed up to the current cap is consumed. */
 export function levelGear(db: D1Database, playerId: string, id: number, input: z.infer<typeof GearLevelBody>): Promise<Record<string, unknown>> {
-  return gearOp(db, playerId, id, input.requestId, 'gear_level', async (g, cfg) => {
+  return gearOp(db, playerId, id, input, 'gear_level', async (g, cfg) => {
     if (g.slot !== 'weapon' && g.slot !== 'armor') throw new HttpError(422, 'not_levelable', 'only weapons and armor level up');
     const cap = Math.min(g.level_cap, gearLevelCap(cfg, g.ascension));
     if (g.level >= cap) throw new HttpError(409, 'at_cap', g.level >= g.level_cap ? 'maximum level' : 'spend Blacksmith Rivets to unlock the next 5 levels', { cap, ascension: g.ascension });
@@ -210,7 +213,7 @@ export function levelGear(db: D1Database, playerId: string, id: number, input: z
 
 /** Rivet milestone: unlocks the next five levels and the milestone bonus. */
 export function ascendGear(db: D1Database, playerId: string, id: number, input: z.infer<typeof GearRequest>): Promise<Record<string, unknown>> {
-  return gearOp(db, playerId, id, input.requestId, 'gear_ascend', async (g, cfg) => {
+  return gearOp(db, playerId, id, input, 'gear_ascend', async (g, cfg) => {
     const next = cfg.equipment.milestones[g.ascension];
     if (!next) throw new HttpError(409, 'max_ascension', 'no further milestones');
     if (g.level < Math.min(g.level_cap, gearLevelCap(cfg, g.ascension))) throw new HttpError(409, 'not_at_cap', `reach level ${gearLevelCap(cfg, g.ascension)} first`);
@@ -223,7 +226,7 @@ export function ascendGear(db: D1Database, playerId: string, id: number, input: 
 
 /** Destroys an unequipped, unlocked, dismantle-able piece for tempering XP and crafting materials. */
 export function dismantleGear(db: D1Database, playerId: string, id: number, input: z.infer<typeof GearRequest>): Promise<Record<string, unknown>> {
-  return gearOp(db, playerId, id, input.requestId, 'gear_dismantle', async (g, cfg) => {
+  return gearOp(db, playerId, id, input, 'gear_dismantle', async (g, cfg) => {
     if (!g.dismantle_allowed) throw new HttpError(422, 'not_dismantlable', 'this item cannot be dismantled');
     if (g.equipped_by) throw new HttpError(409, 'equipped', 'unequip it first');
     if (g.locked) throw new HttpError(409, 'locked', 'unlock it first');
@@ -243,7 +246,7 @@ export function dismantleGear(db: D1Database, playerId: string, id: number, inpu
 
 /** 4-star and 5-star accessories can re-roll their sub stats with Cinders of the Unwritten Hour; main stat, set, slot and rarity stay. */
 export function rerollGear(db: D1Database, playerId: string, id: number, input: z.infer<typeof GearRequest>): Promise<Record<string, unknown>> {
-  return gearOp(db, playerId, id, input.requestId, 'gear_reroll', async (g) => {
+  return gearOp(db, playerId, id, input, 'gear_reroll', async (g) => {
     if (g.slot !== 'necklace' && g.slot !== 'ring') throw new HttpError(422, 'not_accessory', 'only accessories can be re-rolled');
     const gcfg = (await db.prepare("SELECT value_json FROM game_config WHERE key = 'gear'").first<{ value_json: string }>());
     const rc = (JSON.parse(gcfg?.value_json ?? '{}') as { rerollCost?: { itemId: string; quantityByRarity: Record<string, number> } }).rerollCost;

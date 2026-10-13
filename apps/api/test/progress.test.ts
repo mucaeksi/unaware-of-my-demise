@@ -69,6 +69,13 @@ function delayedDatabase() {
 }
 
 describe('server-verified battle progress', () => {
+  it('a recorded battle identity cannot be reused with different actions or a different session', async () => {
+    const { auth } = await signIn(`sub-battle-intent-${rid()}`); const requestId = rid();
+    expect((await submit(auth, { requestId })).status).toBe(200);
+    expect((await submit(auth, { requestId, actions: [{ skillId: 'different_action' }] })).status).toBe(409);
+    expect((await submit(auth, { requestId, sessionId: 'a'.repeat(32) })).status).toBe(409);
+  });
+
   it('refuses new reward claims against an older published release after cutover', async () => {
     const { auth, playerId } = await signIn(`sub-prog-old-${rid()}`);
     await publishReplacement();
@@ -89,6 +96,9 @@ describe('server-verified battle progress', () => {
     const before = await db().prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id = ?1').bind(playerId).first();
     expect((await admin('/admin/api/channels/dev/kill', post({ releaseId: 'rel_0001' }))).status).toBe(200);
     expect(await (await submit(auth, { requestId })).json()).toMatchObject({ replayed: true });
+    const recovered = await game(`/api/v1/operations/${requestId}?path=${encodeURIComponent('/api/v1/progress/battle')}`, { headers: auth });
+    expect(recovered.status).toBe(200);
+    expect(await recovered.json()).toMatchObject({ state: 'confirmed', binding: 'exact', result: { requestId, nodeId: 't1', replayed: true } });
     expect(await db().prepare('SELECT COUNT(*) AS n FROM ledger WHERE player_id = ?1').bind(playerId).first()).toEqual(before);
   });
 

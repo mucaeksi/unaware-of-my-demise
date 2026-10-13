@@ -1,3 +1,4 @@
+import { canonicalJson } from '@uomd/shared';
 import { analyzeBanner, BannerConfig, CANON, emptyPity, GachaError, pullMany, type PityState, type PullResult, type Roll } from '@uomd/economy';
 import { HttpError } from '../content/store';
 import { balanceOf, ledgerStatements } from '../db/ledger';
@@ -56,11 +57,11 @@ async function loadBanner(db: D1Database, id: string, now: Date): Promise<{ row:
 
 async function storedResult(db: D1Database, playerId: string, input: PullInput): Promise<Omit<PullResponse, 'balance' | 'replayed'> | null> {
   const prior = await db
-    .prepare('SELECT banner_id, pull_count, result_json FROM gacha_requests WHERE player_id = ?1 AND request_id = ?2')
+    .prepare('SELECT banner_id, pull_count, result_json, input_json FROM gacha_requests WHERE player_id = ?1 AND request_id = ?2')
     .bind(playerId, input.requestId)
-    .first<{ banner_id: string; pull_count: number; result_json: string }>();
+    .first<{ banner_id: string; pull_count: number; result_json: string; input_json: string | null }>();
   if (!prior) return null;
-  if (prior.banner_id !== input.bannerId || prior.pull_count !== input.count) throw new HttpError(409, 'request_id_reused', 'this requestId was already used for a different pull');
+  if (prior.banner_id !== input.bannerId || prior.pull_count !== input.count || prior.input_json !== null && prior.input_json !== canonicalJson(input)) throw new HttpError(409, 'request_id_reused', 'this requestId was already used for a different pull');
   return JSON.parse(prior.result_json) as Omit<PullResponse, 'balance' | 'replayed'>;
 }
 
@@ -148,7 +149,7 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
         reason: `gacha:${input.bannerId}`,
         idempotencyKey: `gacha:${playerId}:${input.requestId}`
       }),
-      db.prepare('INSERT INTO gacha_requests (player_id, request_id, banner_id, pull_count, result_json) VALUES (?1, ?2, ?3, ?4, ?5)').bind(playerId, input.requestId, input.bannerId, input.count, JSON.stringify(response))
+      db.prepare('INSERT INTO gacha_requests (player_id, request_id, banner_id, pull_count, result_json, input_json) VALUES (?1, ?2, ?3, ?4, ?5, ?6)').bind(playerId, input.requestId, input.bannerId, input.count, JSON.stringify(response), canonicalJson(input))
     ];
     pulled.results.forEach((r, i) => {
       const rec = records[i] as PullRecord;

@@ -1,6 +1,7 @@
 import type { BattleParty } from '@uomd/content-schema';
 import { API_BASE } from '../config';
 import { OperationJournal, type OperationRecord } from './operations';
+import { canonicalJson, sha256Hex } from '@uomd/shared';
 
 export interface TeamMember {
   characterId: string;
@@ -263,12 +264,7 @@ export class GameApi extends EventTarget {
       let result: unknown;
       try {
         result = await this.call('POST', checked.path, checked.body);
-        const value = result as { requestId?: string; pulls?: unknown[]; nodeId?: string; character?: string; level?: number } | null;
-        if (!value || typeof value !== 'object'
-          || checked.path === '/api/v1/gacha/pull' && (value.requestId !== checked.id || !Array.isArray(value.pulls) || value.pulls.length !== checked.body.count)
-          || checked.path === '/api/v1/progress/battle' && (value.requestId !== checked.id || value.nodeId !== checked.body.nodeId)
-          || checked.path.startsWith('/api/v1/characters/') && (value.character !== checked.path.split('/')[4] || typeof value.level !== 'number'))
-          throw new ApiError(503, 'invalid_response', 'The action has not been confirmed');
+        this.validateOperationResult(checked, result);
       } catch (error) {
         const definite = attempts === 1 && error instanceof ApiError && [400, 402, 404, 422].includes(error.status);
         await this.journal.finish(checked.scope, checked.id, definite ? 'rejected' : 'pending', undefined, error instanceof ApiError ? error.code : 'confirmation_pending');
@@ -296,10 +292,42 @@ export class GameApi extends EventTarget {
   async operations(): Promise<OperationRecord[]> {
     return this.journal.list((await this.accountScope()).scope);
   }
+  private validateOperationResult(operation: OperationRecord, result: unknown): void {
+    const value = result as { requestId?: string; pulls?: unknown[]; nodeId?: string; character?: string; level?: number; id?: number;
+      ascension?: number; skillId?: string; rank?: number; stats?: { subs?: unknown[] }; gained?: unknown[] } | null;
+    if (!value || typeof value !== 'object'
+      || operation.path === '/api/v1/gacha/pull' && (value.requestId !== operation.id || !Array.isArray(value.pulls) || value.pulls.length !== operation.body.count)
+      || operation.path === '/api/v1/progress/battle' && (value.requestId !== operation.id || value.nodeId !== operation.body.nodeId)
+      || operation.path.startsWith('/api/v1/characters/') && (value.character !== operation.path.split('/')[4] || !Number.isSafeInteger(value.level)
+        || operation.path.endsWith('/ascend') && !Number.isSafeInteger(value.ascension)
+        || operation.path.endsWith('/upgrade') && (value.skillId !== operation.path.split('/')[6] || !Number.isSafeInteger(value.rank)))
+      || operation.path.startsWith('/api/v1/gear/') && (value.id !== Number(operation.path.split('/')[4])
+        || operation.path.endsWith('/level-up') && !Number.isSafeInteger(value.level)
+        || operation.path.endsWith('/ascend') && !Number.isSafeInteger(value.ascension)
+        || operation.path.endsWith('/reroll') && !Array.isArray(value.stats?.subs)
+        || operation.path.endsWith('/dismantle') && !Array.isArray(value.gained)))
+      throw new ApiError(503, 'invalid_response', 'The action has not been confirmed');
+  }
   async retryOperation<T>(id: string): Promise<T> {
     const { scope, version } = await this.accountScope();
     const operation = await this.journal.get(scope, id);
     if (!operation) throw new ApiError(409, 'operation_missing', 'This action does not belong to the selected account');
+    if (operation.state !== 'rejected' && operation.attempts > 0) {
+      const status = await this.call<{ requestId: string; path: string; state: string; binding: string | null; inputHash: string | null; result: unknown }>('GET', `/api/v1/operations/${id}?path=${encodeURIComponent(operation.path)}`);
+      if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
+      if (!status || status.requestId !== id || status.path !== operation.path || !['confirmed', 'unknown'].includes(status.state))
+        throw new ApiError(503, 'invalid_response', 'The saved action has not been confirmed');
+      if (status.state === 'confirmed') {
+        if (status.binding !== 'exact' || status.inputHash !== await sha256Hex(canonicalJson(operation.body)))
+          throw new ApiError(409, 'operation_unverified', 'The original action details could not be verified');
+        this.validateOperationResult(operation, status.result);
+        await this.journal.finish(scope, id, 'confirmed', status.result);
+        this.dispatchEvent(new Event('operations'));
+        if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
+        return status.result as T;
+      }
+      if (operation.state === 'confirmed') throw new ApiError(503, 'operation_unverified', 'The recorded action is unavailable on the server');
+    }
     return this.executeOperation<T>(operation, version);
   }
 
@@ -388,6 +416,18 @@ export class GameApi extends EventTarget {
   }
   async gear(): Promise<GearView[]> {
     return (await this.call<{ gear: GearView[] }>('GET', '/api/v1/gear')).gear;
+  }
+  levelGear(id: number, xp: number): Promise<{ id: number; level: number }> {
+    return this.mutate(`/api/v1/gear/${id}/level-up`, { xp });
+  }
+  ascendGear(id: number): Promise<{ id: number; ascension: number }> {
+    return this.mutate(`/api/v1/gear/${id}/ascend`, {});
+  }
+  rerollGear(id: number): Promise<{ id: number; stats: GearView['stats'] }> {
+    return this.mutate(`/api/v1/gear/${id}/reroll`, {});
+  }
+  dismantleGear(id: number): Promise<{ id: number; gained: { itemId: string; quantity: number }[] }> {
+    return this.mutate(`/api/v1/gear/${id}/dismantle`, {});
   }
   equip(gearId: number, characterId: string): Promise<unknown> {
     return this.call('POST', `/api/v1/gear/${gearId}/equip`, { characterId });
