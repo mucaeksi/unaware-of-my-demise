@@ -131,3 +131,27 @@ test('a committed checkpoint survives response loss and reload without another P
   expect(recoveryWrites).toBe(0);
   expect(await page.evaluate(async () => (window as any).__UOMD__.services.api.entry())).toMatchObject({ tutorials: 1, phase: 'in_progress' });
 });
+
+test('a delayed old-tab unauthorized response preserves the newer shared account', async ({ page, context }, info) => {
+  await openGame(page, '/', { fresh: true });
+  const first = await signIn(page, `tab-first-${info.project.name}`);
+  const nextTab = await context.newPage(); await openGame(nextTab, '/', { fresh: true });
+  let release!: () => void; let waiting = false;
+  const gate = new Promise<void>((resolve) => { release = resolve; });
+  await page.route('**/api/v1/wallet', async (route) => {
+    const response = await route.fetch(); expect(response.status()).toBe(200);
+    waiting = true; await gate;
+    await route.fulfill({ status: 401, contentType: 'application/json', body: JSON.stringify({ error: 'unauthorized' }) });
+  });
+  const older = page.evaluate(async () => {
+    try { await (window as any).__UOMD__.services.api.wallet(); return null; }
+    catch (error) { return (error as { status: number }).status; }
+  });
+  await expect.poll(() => waiting).toBe(true);
+  const selected = await signIn(nextTab, `tab-selected-${info.project.name}`);
+  expect(selected.id).not.toBe(first.id); release(); expect(await older).toBe(401);
+  await page.unroute('**/api/v1/wallet');
+  expect(await page.evaluate(async () => (window as any).__UOMD__.services.api.me())).toMatchObject({ id: selected.id });
+  expect(await nextTab.evaluate(async () => (window as any).__UOMD__.services.api.me())).toMatchObject({ id: selected.id });
+  await nextTab.close();
+});

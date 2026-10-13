@@ -77,6 +77,7 @@ export class AccountScene extends HubScene {
     }
     try {
       await Services.api.deleteAccount();
+      if (Services.api.signedIn) throw new ApiError(409, 'auth_changed', 'The selected account changed');
       await Services.identity?.forget();
       this.confirmDelete = false;
       this.say('Your account was deleted');
@@ -87,10 +88,13 @@ export class AccountScene extends HubScene {
   }
 
   private async signOut(): Promise<void> {
-    await Services.api.signOut();
-    await Services.identity?.forget();
-    this.say('Signed out');
-    await this.refresh();
+    try {
+      await Services.api.signOut();
+      if (Services.api.signedIn) throw new ApiError(409, 'auth_changed', 'The selected account changed');
+      await Services.identity?.forget();
+      this.say('Signed out');
+      await this.refresh();
+    } catch (error) { this.say(errText(error)); }
   }
 
   private async upload(version: number): Promise<void> {

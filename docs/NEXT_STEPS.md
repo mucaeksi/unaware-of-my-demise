@@ -96,3 +96,7 @@ ID-bearing mail/task claims store original inputs/results atomically with the ma
 ## Latest verified slice — R05-E
 
 Checkpoint and cloud-save ID/result journals commit with the monotonic update/CAS; legacy callers remain compatible. Save v1 replay preserves another writer's v2, checkpoints retain later progress, fault/deletion guards hold and queued PUT/late GET results are account-fenced. All **570 application/tool tests**, lint/typecheck, eight real-Worker desktop/phone response-loss/reload cases, four menu cases and both builds pass with 25 migrations. Next visible player recovery, remaining session/lifecycle fences and purchase metadata. Complete narrative/Finish/Continue remains R09 and actual native/store acceptance remains R11/R18; creative assets stay deferred.
+
+## Latest verified slice — R05-F1
+
+Shared-session storage changes, pre-transport epoch pins, scoped list/status reads, expiry and HTTP deadlines preserve original intent. Late logout/deletion callbacks stop before forgetting a new identity. Five new client cases, all **575 application/tool tests**, lint/typecheck and ten real desktop/phone recovery cases pass; two include shared-storage tabs and a delayed old 401. Both builds and 25 local migrations pass. Next visible recovery screen; native secure session storage and purchase lifecycle retain R11/R18 gates.

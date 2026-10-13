@@ -160,22 +160,46 @@ export class GameApi extends EventTarget {
   private signingIn = 0;
   private activeOperations = new Map<string, Promise<unknown>>();
   private entryWrites: Promise<unknown> = Promise.resolve();
+  private observedSession: string | null | undefined;
 
   constructor(private readonly base = API_BASE, private readonly journal = new OperationJournal()) {
     super();
-    try {
-      const raw = localStorage.getItem(KEY);
-      if (raw) {
-        const s = JSON.parse(raw) as Session;
-        if (typeof s.token === 'string' && Date.parse(s.expiresAt) > Date.now()) this.session = s;
-      }
-    } catch {
-      /* private mode: stay signed out */
-    }
+    this.observeSession();
+    if (typeof window !== 'undefined') window.addEventListener('storage', (event) => {
+      if (event.key === KEY || event.key === null) this.observeSession();
+    });
   }
 
   get signedIn(): boolean {
-    return this.session !== null;
+    this.observeSession();
+    return this.session !== null && Date.parse(this.session.expiresAt) > Date.now();
+  }
+
+  /** Observe shared selection without writing: an old tab must never delete or restore another tab's bearer. */
+  private observeSession(): void {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw !== this.observedSession) {
+        this.observedSession = raw;
+        let next: Session | null = null;
+        try {
+          const value = raw ? JSON.parse(raw) as Partial<Session> : null;
+          if (value && typeof value.token === 'string' && value.token && value.token.length <= 8192 && typeof value.expiresAt === 'string' && Date.parse(value.expiresAt) > Date.now())
+            next = { token: value.token, expiresAt: value.expiresAt };
+        } catch { /* malformed shared storage means signed out */ }
+        if (next?.token !== this.session?.token || next?.expiresAt !== this.session?.expiresAt) this.adoptSession(next);
+      }
+    } catch { /* unavailable storage leaves the current in-memory authority unchanged */ }
+    if (this.session && !this.signingIn && !(Date.parse(this.session.expiresAt) > Date.now())) this.adoptSession(null);
+  }
+
+  private adoptSession(session: Session | null): void {
+    this.authVersion++;
+    this.session = session;
+    this.verifiedAccount = null;
+    this.signingIn = 0;
+    this.entryWrites = Promise.resolve();
+    this.dispatchEvent(new Event('auth'));
   }
 
   private store(s: Session | null): void {
@@ -183,8 +207,10 @@ export class GameApi extends EventTarget {
     this.session = s;
     this.entryWrites = Promise.resolve();
     try {
-      if (s) localStorage.setItem(KEY, JSON.stringify(s));
+      const raw = s ? JSON.stringify(s) : null;
+      if (raw) localStorage.setItem(KEY, raw);
       else localStorage.removeItem(KEY);
+      this.observedSession = raw;
     } catch {
       /* ignore */
     }
@@ -192,36 +218,50 @@ export class GameApi extends EventTarget {
   }
 
   /** Raw typed call. Public so the browser test harness can reach endpoints the UI does not wrap yet. */
-  async call<T>(method: string, path: string, body?: unknown, auth = true): Promise<T> {
+  async call<T>(method: string, path: string, body?: unknown, auth = true, expectedVersion?: number): Promise<T> {
+    if (auth) this.observeSession();
+    if (auth && this.signingIn) throw new ApiError(409, 'auth_changed', 'Finish selecting your account before requesting its data');
+    if (expectedVersion !== undefined && expectedVersion !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed before this action was sent');
     const requestSession = this.session;
     const requestAuthVersion = this.authVersion;
-    const res = await fetch(`${this.base}${path}`, {
-      method,
-      headers: { ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}), ...(auth && requestSession ? { Authorization: `Bearer ${requestSession.token}` } : {}) },
-      ...(body !== undefined ? { body: JSON.stringify(body) } : {})
-    });
-    const text = await res.text();
-    let json: unknown = null;
+    const controller = new AbortController();
+    const deadline = setTimeout(() => controller.abort(), 30_000);
     try {
-      json = text ? JSON.parse(text) : null;
-    } catch {
-      /* non-JSON error page */
-    }
-    if (!res.ok) {
-      const e = (json ?? {}) as { error?: string; message?: string; detail?: unknown };
-      if (res.status === 401 && auth && requestSession && this.session === requestSession && this.authVersion === requestAuthVersion) this.store(null);
-      throw new ApiError(res.status, e.error ?? 'http_error', e.message ?? `HTTP ${res.status}`, e.detail);
-    }
-    if (auth && method === 'GET' && requestAuthVersion !== this.authVersion)
-      throw new ApiError(409, 'auth_changed', 'The account changed before its data arrived');
-    return json as T;
+      const res = await fetch(`${this.base}${path}`, {
+        method,
+        signal: controller.signal,
+        headers: { ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}), ...(auth && requestSession ? { Authorization: `Bearer ${requestSession.token}` } : {}) },
+        ...(body !== undefined ? { body: JSON.stringify(body) } : {})
+      });
+      const text = await res.text();
+      let json: unknown = null;
+      try {
+        json = text ? JSON.parse(text) : null;
+      } catch {
+        /* non-JSON error page */
+      }
+      if (auth) this.observeSession();
+      if (!res.ok) {
+        const e = (json ?? {}) as { error?: string; message?: string; detail?: unknown };
+        if (res.status === 401 && auth && requestSession && this.session === requestSession && this.authVersion === requestAuthVersion) this.store(null);
+        throw new ApiError(res.status, e.error ?? 'http_error', e.message ?? `HTTP ${res.status}`, e.detail);
+      }
+      if (auth && method === 'GET' && requestAuthVersion !== this.authVersion)
+        throw new ApiError(409, 'auth_changed', 'The account changed before its data arrived');
+      return json as T;
+    } catch (error) {
+      if (controller.signal.aborted) throw new ApiError(503, 'request_timeout', 'The connection timed out. Check the saved action before trying again.');
+      throw error;
+    } finally { clearTimeout(deadline); }
   }
 
   async signInWithIdToken(idToken: string): Promise<{ id: string; displayName: string | null; isNew: boolean }> {
+    this.observeSession();
     const attempt = ++this.authVersion;
     this.signingIn = attempt;
     try {
       const r = await this.call<{ token: string; expiresAt: string; player: { id: string; displayName: string | null; isNew: boolean } }>('POST', '/api/v1/auth/google', { idToken }, false);
+      this.observeSession();
       if (this.authVersion !== attempt) throw new ApiError(409, 'auth_changed', 'The selected account changed before sign-in completed');
       this.store({ token: r.token, expiresAt: r.expiresAt });
       this.verifiedAccount = { version: this.authVersion, id: r.player.id };
@@ -230,17 +270,21 @@ export class GameApi extends EventTarget {
   }
 
   async signOut(): Promise<void> {
+    this.observeSession();
     this.signingIn = 0;
     const request = this.call('POST', '/api/v1/auth/logout', {});
     this.store(null); // End local authority immediately; the request already captured the old bearer.
+    const endingVersion = this.authVersion;
     try {
       await request;
     } catch {
       /* the server may already have dropped the session */
     }
+    if (endingVersion !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed; the new sign-in was kept');
   }
 
   private async accountScope(): Promise<{ scope: string; version: number }> {
+    this.observeSession();
     const version = this.authVersion;
     if (!this.session) throw new ApiError(401, 'signed_out', 'Sign in to continue');
     if (this.signingIn) throw new ApiError(409, 'auth_changed', 'Finish selecting your account before starting an action');
@@ -267,7 +311,7 @@ export class GameApi extends EventTarget {
       if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
       let result: unknown;
       try {
-        result = await this.call(checked.method, checked.path, checked.body);
+        result = await this.call(checked.method, checked.path, checked.body, true, version);
         this.validateOperationResult(checked, result);
       } catch (error) {
         const definite = attempts === 1 && error instanceof ApiError && ([400, 402, 403, 404, 413, 422].includes(error.status)
@@ -287,8 +331,10 @@ export class GameApi extends EventTarget {
   }
 
   private async mutate<T>(path: string, body: Record<string, unknown>, method: 'POST' | 'PUT' = 'POST'): Promise<T> {
+    const requestedVersion = this.authVersion;
     const snapshot = structuredClone(body);
     const { scope, version } = await this.accountScope();
+    if (requestedVersion !== version) throw new ApiError(409, 'auth_changed', 'The account changed; review this action before trying again');
     let operation: OperationRecord;
     try { operation = await this.journal.begin(scope, method, path, snapshot); }
     catch (error) { throw new ApiError(409, 'operation_not_saved', error instanceof Error ? error.message : 'The action could not be saved; no request was sent'); }
@@ -296,7 +342,11 @@ export class GameApi extends EventTarget {
     return this.executeOperation<T>(operation, version);
   }
   async operations(): Promise<OperationRecord[]> {
-    return this.journal.list((await this.accountScope()).scope);
+    const { scope, version } = await this.accountScope();
+    const records = await this.journal.list(scope);
+    this.observeSession();
+    if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
+    return records;
   }
   private validateOperationResult(operation: OperationRecord, result: unknown): void {
     const value = result as { requestId?: string; pulls?: unknown[]; nodeId?: string; character?: string; level?: number; id?: number;
@@ -328,7 +378,7 @@ export class GameApi extends EventTarget {
     const operation = await this.journal.get(scope, id);
     if (!operation) throw new ApiError(409, 'operation_missing', 'This action does not belong to the selected account');
     if (operation.state !== 'rejected' && operation.attempts > 0) {
-      const status = await this.call<{ requestId: string; path: string; state: string; binding: string | null; inputHash: string | null; result: unknown }>('GET', `/api/v1/operations/${id}?path=${encodeURIComponent(operation.path)}`);
+      const status = await this.call<{ requestId: string; path: string; state: string; binding: string | null; inputHash: string | null; result: unknown }>('GET', `/api/v1/operations/${id}?path=${encodeURIComponent(operation.path)}`, undefined, true, version);
       if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
       if (!status || status.requestId !== id || status.path !== operation.path || !['confirmed', 'unknown'].includes(status.state))
         throw new ApiError(503, 'invalid_response', 'The saved action has not been confirmed');
@@ -476,9 +526,11 @@ export class GameApi extends EventTarget {
     return this.call('GET', '/api/v1/account/export');
   }
   async deleteAccount(): Promise<void> {
+    this.observeSession();
     const version = this.authVersion;
     await this.call('POST', '/api/v1/account/delete', { confirm: 'DELETE' });
-    if (this.authVersion === version) this.store(null);
+    if (this.authVersion !== version) throw new ApiError(409, 'auth_changed', 'The previous account was deleted; the current sign-in was kept');
+    this.store(null);
   }
   async catalogNames(): Promise<Map<string, string>> {
     const c = await this.call<{ items: { item_id: string; name_en: string; xp_value: number | null; kind: string }[]; gear: { gear_id: string; name_en: string }[] }>('GET', '/api/v1/catalog', undefined, false);

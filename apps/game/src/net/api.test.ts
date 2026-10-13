@@ -33,6 +33,36 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('authentication response ownership', () => {
+  it('expiry of the previous session cannot cancel a newer sign-in or let stale reads interrupt it', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    try {
+      values.set(sessionKey, JSON.stringify({ token: 'session-A', expiresAt: new Date(Date.now() + 5000).toISOString() }));
+      const delayed = deferred(); const fetch = vi.fn().mockReturnValueOnce(delayed.promise); vi.stubGlobal('fetch', fetch);
+      const api = new GameApi('https://game.test'); const selecting = api.signInWithIdToken('identity-B');
+      vi.setSystemTime(Date.now() + 10_000); expect(api.signedIn).toBe(false);
+      await expect(api.me()).rejects.toMatchObject({ code: 'auth_changed' });
+      delayed.resolve(success()); await selecting;
+      expect(api.signedIn).toBe(true); expect(fetch).toHaveBeenCalledTimes(1);
+    } finally { vi.useRealTimers(); }
+  });
+
+  it('an expired shared session stops new economic requests before persistence or transport', async () => {
+    const storage = new TestOperationStorage(); const fetch = vi.fn(); vi.stubGlobal('fetch', fetch);
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    values.set(sessionKey, JSON.stringify({ token: 'session-A', expiresAt: new Date(Date.now() - 1000).toISOString() }));
+    expect(api.signedIn).toBe(false);
+    await expect(api.pull('banner', 1)).rejects.toMatchObject({ code: 'signed_out' });
+    expect(fetch).not.toHaveBeenCalled(); expect(storage.records).toHaveLength(0);
+  });
+
+  it('an unauthorized response in the previous tab cannot erase the shared newer session', async () => {
+    const delayed = deferred(); const fetch = vi.fn().mockReturnValueOnce(delayed.promise).mockResolvedValueOnce(success());
+    vi.stubGlobal('fetch', fetch); const previousTab = new GameApi('https://game.test'); const newTab = new GameApi('https://game.test');
+    const old = previousTab.me(); const rejected = expect(old).rejects.toMatchObject({ status: 401 });
+    await newTab.signInWithIdToken('identity-B'); delayed.resolve(Response.json({ error: 'unauthorized' }, { status: 401 })); await rejected;
+    expect(JSON.parse(values.get(sessionKey)!).token).toBe('session-B'); expect(previousTab.signedIn).toBe(true);
+  });
+
   it('successful old-account checkpoint/save reads never reach the newly selected account', async () => {
     for (const kind of ['entry', 'save']) {
       values.set(sessionKey, JSON.stringify({ token: 'session-A', expiresAt: expiry() }));
@@ -56,7 +86,8 @@ describe('authentication response ownership', () => {
   it('a delayed logout does not erase a newly signed-in session', async () => {
     const delayed = deferred(); vi.stubGlobal('fetch', vi.fn().mockReturnValueOnce(delayed.promise).mockResolvedValueOnce(success()));
     const api = new GameApi('https://game.test'); const logout = api.signOut();
-    await api.signInWithIdToken('identity-B'); delayed.resolve(Response.json({ ok: true })); await logout;
+    const rejected = expect(logout).rejects.toMatchObject({ code: 'auth_changed' });
+    await api.signInWithIdToken('identity-B'); delayed.resolve(Response.json({ ok: true })); await rejected;
     expect(api.signedIn).toBe(true); expect(JSON.parse(values.get(sessionKey)!).token).toBe('session-B');
   });
 
@@ -71,12 +102,51 @@ describe('authentication response ownership', () => {
   it('deleting the previous account cannot clear the current account session', async () => {
     const delayed = deferred(); vi.stubGlobal('fetch', vi.fn().mockReturnValueOnce(delayed.promise).mockResolvedValueOnce(success()));
     const api = new GameApi('https://game.test'); const deletion = api.deleteAccount();
-    await api.signInWithIdToken('identity-B'); delayed.resolve(Response.json({ deleted: true })); await deletion;
+    const rejected = expect(deletion).rejects.toMatchObject({ code: 'auth_changed' });
+    await api.signInWithIdToken('identity-B'); delayed.resolve(Response.json({ deleted: true })); await rejected;
     expect(api.signedIn).toBe(true); expect(JSON.parse(values.get(sessionKey)!).token).toBe('session-B');
   });
 });
 
 describe('durable client operations', () => {
+  it('an aborted HTTP deadline keeps the saved identity pending instead of reporting completion', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    try {
+      const storage = new TestOperationStorage(); let sent = false;
+      vi.stubGlobal('fetch', vi.fn((url: string, init: RequestInit) => {
+        if (url.endsWith('/me')) return Promise.resolve(Response.json({ id: 'player-A' }));
+        sent = true;
+        return new Promise<Response>((_resolve, reject) => init.signal!.addEventListener('abort', () => reject(new DOMException('deadline', 'AbortError'))));
+      }));
+      const api = new GameApi('https://game.test', new OperationJournal(storage));
+      const rejected = expect(api.pull('banner', 1)).rejects.toMatchObject({ code: 'request_timeout' });
+      await vi.waitFor(() => expect(sent).toBe(true));
+      await vi.advanceTimersByTimeAsync(30_000); await rejected;
+      expect(storage.records).toHaveLength(1); expect(storage.records[0]).toMatchObject({ state: 'pending', attempts: 1 });
+    } finally { vi.useRealTimers(); }
+  });
+
+  it('a shared-session change just before transport cannot send the saved action under either stale account context', async () => {
+    class SwitchingStorage extends TestOperationStorage {
+      switched = false;
+      override async change<T>(work: (records: OperationRecord[]) => T): Promise<T> {
+        const value = await super.change(work);
+        if (!this.switched && this.records[0]?.attempts === 1) {
+          this.switched = true; values.set(sessionKey, JSON.stringify({ token: 'session-B', expiresAt: expiry() }));
+        }
+        return value;
+      }
+    }
+    const storage = new SwitchingStorage(); let mutations = 0;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      mutations++; return pullResult(init.body as string);
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.pull('banner', 1)).rejects.toMatchObject({ code: 'auth_changed' });
+    expect(mutations).toBe(0); expect(storage.records[0]!.state).toBe('pending');
+  });
+
   it('cloud-save response loss retains its PUT identity and confirms the original version after reload', async () => {
     const storage = new TestOperationStorage(); let sent = ''; let posts = 0;
     vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {

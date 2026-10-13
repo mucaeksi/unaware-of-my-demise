@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R05-E checkpoint/save recovery verified; player/session/purchase lifecycle next",
-      "detail": "570 application/tool tests, lint/typecheck, eight real-Worker response-loss/reload cases and four entry-menu cases pass. Checkpoint/CAS and original result commit together, fault/deletion guards hold, later device data remains intact, and queued progress/authenticated reads are account-fenced. Continue visible recovery, session/lifecycle and purchase metadata; native/store acceptance stays separate."
+      "title": "R05-F1 shared-session/deadline guards verified; visible recovery next",
+      "detail": "575 application/tool tests and ten real browser recovery cases pass. Cross-tab changes and session expiry/deadlines preserve scope; stale logout/delete callbacks cannot forget a newer identity. Continue player recovery screen, then native purchase/session lifecycle."
     }
   ],
   "next": [
@@ -644,6 +644,25 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R05-F1-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "56ab4d90",
+      "verifiedAt": "2026-10-13T09:05:10+00:00",
+      "scope": "R05-F1 working tree: observe shared storage before/after transport without overwriting another tab; pin economic request scope revision before fetch, reject changed selection and fence pending-list/result reads. Expired sessions start no economic request; previous expiry cannot cancel new sign-in and account data reads pause during selection. Thirty-second AbortController HTTP deadline keeps original pending identity. Late logout/delete callbacks reject auth_changed before forgetting new identity. Five new client cases, two failed before correction, and all 575 application/tool tests/lint/typecheck pass. Ten actual desktop/phone browser recovery cases include same-origin two-page Google-dev-auth account switching and delayed synthetic old 401; all 25 local migrations and both builds pass. No physical native/deployed/session secure-storage/purchase/full-R05 claim.",
+      "testIds": [
+        "apps/game/src/net/api.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "tests/e2e/operation-recovery.spec.ts (ten cases, both projects, real Workers)",
+        "E2E game/admin builds and 25 local migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -975,7 +994,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
-      "implemented": "R05-A\u2013E auth fences, durable identities/payload/account scopes, exact authoritative result recovery and atomic growth/claim/checkpoint/cloud-save journals are locally verified. PUT checkpoint queues and stale successful GET fences protect account selection. Purchase lifecycle, visible player recovery and remaining session/lifecycle boundaries remain open; native/deployed acceptance is separate.",
+      "implemented": "R05-A\u2013F1 durable original identities, exact authoritative recovery, atomic growth/claim/checkpoint/save journals and same/cross-tab session/deadline/late-callback guards are locally verified. Visible player recovery and native purchase/session lifecycle remain open; native/deployed acceptance is separate.",
       "dependsOn": [
         "R01",
         "R02",
@@ -1006,7 +1025,8 @@
         "E-R05-B-20261013",
         "E-R05-C-20261013",
         "E-R05-D-20261013",
-        "E-R05-E-20261013"
+        "E-R05-E-20261013",
+        "E-R05-F1-20261013"
       ],
       "blockerIds": []
     },
