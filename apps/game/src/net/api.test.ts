@@ -1,5 +1,20 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GameApi } from './api';
+import { OperationJournal, type OperationRecord, type OperationStorage } from './operations';
+
+class TestOperationStorage implements OperationStorage {
+  records: OperationRecord[] = [];
+  failWrites = false;
+  async change<T>(work: (records: OperationRecord[]) => T): Promise<T> {
+    const next = structuredClone(this.records); const value = work(next);
+    if (this.failWrites) throw new Error('storage write failed');
+    this.records = next; return structuredClone(value);
+  }
+}
+const pullResult = (body: string, extra = {}) => {
+  const request = JSON.parse(body);
+  return Response.json({ requestId: request.requestId, pulls: Array.from({ length: request.count }, () => ({ itemId: 'mahmut' })), balance: 0, ...extra });
+};
 
 const values = new Map<string, string>();
 const sessionKey = 'uomd.session.v1';
@@ -46,5 +61,154 @@ describe('authentication response ownership', () => {
     const api = new GameApi('https://game.test'); const deletion = api.deleteAccount();
     await api.signInWithIdToken('identity-B'); delayed.resolve(Response.json({ deleted: true })); await deletion;
     expect(api.signedIn).toBe(true); expect(JSON.parse(values.get(sessionKey)!).token).toBe('session-B');
+  });
+});
+
+describe('durable client operations', () => {
+  it('post-commit response loss and reload retry use the original request ID and confirm one result', async () => {
+    const storage = new TestOperationStorage(); const bodies: string[] = []; let lost = false;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      bodies.push(init.body as string);
+      if (!lost) { lost = true; throw new TypeError('response lost after commit'); }
+      return pullResult(init.body as string, { replayed: true });
+    }));
+    const first = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(first.pull('banner', 1)).rejects.toThrow(/response lost/);
+    expect(storage.records[0]).toMatchObject({ state: 'pending', attempts: 1 });
+    const reload = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(reload.pull('banner', 1)).resolves.toMatchObject({ replayed: true });
+    expect(bodies[1]).toBe(bodies[0]); expect(storage.records[0]!.state).toBe('confirmed');
+    expect(JSON.stringify(storage.records)).not.toContain('session-A');
+  });
+
+  it('simultaneous identical taps share one identity and one transport call; a later confirmed intent gets a new ID', async () => {
+    const storage = new TestOperationStorage(); const delayed = deferred(); const sent: string[] = [];
+    vi.stubGlobal('fetch', vi.fn((url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Promise.resolve(Response.json({ id: 'player-A' }));
+      sent.push(init.body as string); return sent.length === 1 ? delayed.promise : Promise.resolve(pullResult(init.body as string));
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    const taps = Array.from({ length: 5 }, () => api.pull('banner', 1));
+    await vi.waitFor(() => expect(sent).toHaveLength(1)); delayed.resolve(pullResult(sent[0]!));
+    await Promise.all(taps); expect(sent).toHaveLength(1);
+    await api.pull('banner', 1); expect(sent).toHaveLength(2);
+    expect(JSON.parse(sent[0]!).requestId).not.toBe(JSON.parse(sent[1]!).requestId);
+  });
+
+  it('failed persistence sends no mutation and unknown input cannot silently turn into a new action', async () => {
+    const storage = new TestOperationStorage(); storage.failWrites = true;
+    const fetch = vi.fn(async (_url: string) => Response.json({ id: 'player-A' })); vi.stubGlobal('fetch', fetch);
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.pull('banner', 1)).rejects.toMatchObject({ code: 'operation_not_saved' });
+    expect(fetch).toHaveBeenCalledTimes(1); // account read only
+    storage.failWrites = false;
+    fetch.mockImplementation(async (url: string) => { if (url.endsWith('/me')) return Response.json({ id: 'player-A' }); throw new TypeError('unknown result'); });
+    await expect(api.pull('banner', 1)).rejects.toThrow(/unknown/);
+    const before = fetch.mock.calls.length;
+    await expect(api.pull('different_banner', 10)).rejects.toMatchObject({ code: 'operation_not_saved' });
+    expect(fetch.mock.calls.length).toBe(before);
+  });
+
+  it('a saved operation never replays against another verified account or backend', async () => {
+    const storage = new TestOperationStorage(); const mutation = vi.fn();
+    vi.stubGlobal('fetch', vi.fn(async (url: string) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      mutation(); throw new TypeError('unknown result');
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.pull('banner', 1)).rejects.toThrow(); const id = storage.records[0]!.id;
+    vi.stubGlobal('fetch', vi.fn(async () => success())); await api.signInWithIdToken('identity-B');
+    await expect(api.retryOperation(id)).rejects.toMatchObject({ code: 'operation_missing' });
+    const otherBackend = new GameApi('https://other.test', new OperationJournal(storage));
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json({ id: 'player-A' })));
+    await expect(otherBackend.retryOperation(id)).rejects.toMatchObject({ code: 'operation_missing' });
+    expect(mutation).toHaveBeenCalledTimes(1);
+  });
+
+  it('payload mutation by the caller cannot change the body saved before a delayed transport', async () => {
+    const storage = new TestOperationStorage(); const profile = deferred(); let sent = '';
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return profile.promise;
+      sent = init.body as string; return Response.json({ character: 'mahmut', level: 2 });
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage)); const items = [{ itemId: 'book', quantity: 1 }];
+    const upgrading = api.levelUp('mahmut', items); items[0]!.quantity = 9;
+    profile.resolve(Response.json({ id: 'player-A' })); await upgrading;
+    expect(JSON.parse(sent).items).toEqual([{ itemId: 'book', quantity: 1 }]);
+  });
+
+  it('unconfirmed success shapes stay pending and previous-account results cannot update the new account', async () => {
+    const storage = new TestOperationStorage(); const delayed = deferred(); let sent = '';
+    const fetch = vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (url.endsWith('/google')) return success();
+      sent = init.body as string; return delayed.promise;
+    }); vi.stubGlobal('fetch', fetch);
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    const buying = api.pull('banner', 1); const rejected = expect(buying).rejects.toMatchObject({ code: 'auth_changed' });
+    await vi.waitFor(() => expect(sent).not.toBe('')); await api.signInWithIdToken('identity-B');
+    delayed.resolve(pullResult(sent)); await rejected;
+    expect(storage.records[0]!.state).toBe('confirmed'); expect(api.signedIn).toBe(true);
+    values.set(sessionKey, JSON.stringify({ token: 'session-A', expiresAt: expiry() }));
+    vi.stubGlobal('fetch', vi.fn(async (url: string) => url.endsWith('/me') ? Response.json({ id: 'player-A' }) : Response.json({ requestId: 'wrong', pulls: [] })));
+    const reload = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(reload.pull('banner', 1)).rejects.toMatchObject({ code: 'invalid_response' });
+    expect(storage.records.at(-1)!.state).toBe('pending');
+  });
+
+  it('definite first-attempt rejection is recorded and a corrected intent gets its own ID', async () => {
+    const storage = new TestOperationStorage(); let rejected = false;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (!rejected) { rejected = true; return Response.json({ error: 'insufficient_funds' }, { status: 402 }); }
+      return pullResult(init.body as string);
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.pull('banner', 1)).rejects.toMatchObject({ code: 'insufficient_funds' });
+    expect(storage.records[0]).toMatchObject({ state: 'rejected', code: 'insufficient_funds' });
+    await api.pull('banner', 1); expect(storage.records[1]!.id).not.toBe(storage.records[0]!.id);
+  });
+
+  it('a confirmation write failure retains the original identity after the server has committed', async () => {
+    const storage = new TestOperationStorage(); const sent: string[] = [];
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      sent.push(init.body as string);
+      if (sent.length === 1) storage.failWrites = true;
+      return pullResult(init.body as string);
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.pull('banner', 1)).rejects.toThrow(/storage write failed/);
+    expect(storage.records[0]).toMatchObject({ state: 'pending', attempts: 1 });
+    storage.failWrites = false;
+    const reload = new GameApi('https://game.test', new OperationJournal(storage));
+    await reload.pull('banner', 1);
+    expect(sent[1]).toBe(sent[0]); expect(storage.records[0]!.state).toBe('confirmed');
+  });
+
+  it('an ambiguous earlier attempt stays pending even if a later attempt is rejected', async () => {
+    const storage = new TestOperationStorage(); let attempts = 0;
+    vi.stubGlobal('fetch', vi.fn(async (url: string) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (++attempts === 1) throw new TypeError('unknown result');
+      return Response.json({ error: 'insufficient_funds' }, { status: 402 });
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.pull('banner', 1)).rejects.toThrow(/unknown/);
+    await expect(api.pull('banner', 1)).rejects.toMatchObject({ code: 'insufficient_funds' });
+    expect(storage.records).toHaveLength(1);
+    expect(storage.records[0]).toMatchObject({ state: 'pending', attempts: 2 });
+  });
+
+  it('corrupt identity/account/payload cannot be replayed and credentials never enter durable records', async () => {
+    const storage = new TestOperationStorage(); const journal = new OperationJournal(storage);
+    const record = await journal.begin('account-A', 'POST', '/api/v1/gacha/pull', { bannerId: 'banner', count: 1 });
+    storage.records[0]!.id = 'altered_identity'; storage.records[0]!.body.requestId = 'altered_identity';
+    await expect(journal.get('account-A', 'altered_identity')).rejects.toThrow(/changed/);
+    storage.records[0]!.id = record.id; storage.records[0]!.body.requestId = record.id; storage.records[0]!.scope = 'account-B';
+    await expect(journal.get('account-B', record.id)).rejects.toThrow(/changed/);
+    await expect(journal.begin('account-C', 'POST', '/api/v1/gacha/pull', { purchaseToken: 'private receipt', bannerId: 'banner', count: 1 })).rejects.toThrow(/Credentials/);
+    expect(JSON.stringify(storage.records)).not.toContain('private receipt');
   });
 });

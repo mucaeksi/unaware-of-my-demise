@@ -1,0 +1,41 @@
+import { expect, test } from '@playwright/test';
+import { SignJWT, importJWK } from 'jose';
+import { ADMIN, openGame } from './helpers';
+import { GOOGLE_CLIENT } from './stack';
+
+test('lost summon response survives reload and spends exactly once on the real Worker', async ({ page, request }, info) => {
+  await openGame(page);
+  const token = await new SignJWT({ email: `recovery-${info.project.name}@example.com`, email_verified: true, name: 'Recovery test', pad: 'x'.repeat(80) })
+    .setProtectedHeader({ alg: 'RS256', kid: 'g1' }).setSubject(`recovery-${info.project.name}`)
+    .setIssuer('https://accounts.google.com').setAudience(GOOGLE_CLIENT).setIssuedAt().setExpirationTime('2h')
+    .sign(await importJWK(JSON.parse(process.env.E2E_GOOGLE_PRIVATE_JWK!), 'RS256'));
+  const player = await page.evaluate(async (identity) => (window as any).__UOMD__.services.api.signInWithIdToken(identity), token);
+  const adjustment = await request.post(`${ADMIN}/admin/api/players/${player.id}/adjust`, {
+    data: { currency: 'eclipse_token', delta: 320, reason: 'isolated recovery fixture', requestId: `recovery_${info.project.name}` },
+    headers: { 'Cf-Access-Jwt-Assertion': process.env.E2E_ADMIN_JWT! }
+  });
+  expect(adjustment.status()).toBe(200);
+  const input = await page.evaluate(async () => {
+    const banners = await (window as any).__UOMD__.services.api.banners();
+    return { bannerId: banners.find((banner: any) => banner.kind === 'character').id, count: 1 };
+  });
+  let committed = false; let originalId = '';
+  await page.route('**/api/v1/gacha/pull', async (route) => {
+    originalId = route.request().postDataJSON().requestId;
+    const response = await route.fetch(); expect(response.status()).toBe(200);
+    committed = true; await route.abort('failed');
+  });
+  const lost = await page.evaluate(async (value) => {
+    try { await (window as any).__UOMD__.services.api.pull(value.bannerId, value.count); return false; } catch { return true; }
+  }, input);
+  expect(lost).toBe(true); expect(committed).toBe(true); expect(originalId).not.toBe('');
+  await page.unroute('**/api/v1/gacha/pull'); await page.reload();
+  await page.waitForFunction(() => (window as any).__UOMD__?.services.api.signedIn);
+  const recovered = await page.evaluate(async (value) => (window as any).__UOMD__.services.api.pull(value.bannerId, value.count), input);
+  expect(recovered.requestId).toBe(originalId); expect(recovered.replayed).toBe(true);
+  expect(recovered.balance).toBe(160);
+  const journal = await page.evaluate(async () => (window as any).__UOMD__.services.api.operations());
+  expect(journal).toHaveLength(1); expect(journal[0]).toMatchObject({ id: originalId, state: 'confirmed', attempts: 2 });
+  const history = await page.evaluate(async () => (window as any).__UOMD__.services.api.history());
+  expect(history).toHaveLength(1);
+});

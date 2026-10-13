@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R05-A authentication response fences verified; durable operations next",
-      "detail": "Four failing-before stale auth/logout/sign-in/deletion races pass; 531 application/tool tests and lint/typecheck pass. Continue durable account-scoped operation identities, original payloads and authoritative result recovery."
+      "title": "R05-B durable summon/battle/character operations verified; status and remaining mutations next",
+      "detail": "541 application/tool tests, lint/typecheck, four real Chromium storage cases and two real-Worker desktop/phone response-loss/reload cases pass. Persist original identities and frozen account/backend-scoped payloads; no second summon payment. Continue authoritative server status/input checks, gear/claims/checkpoint/save/purchase recovery and player UI."
     }
   ],
   "next": [
@@ -548,6 +548,29 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R05-B-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "a176fa144dcab89f2c568b0741d5929d3213a54d",
+      "verifiedAt": "2026-10-13T06:43:27+00:00",
+      "scope": "R05-B working tree: original mutation ID/payload persisted before POST; verified player/backend scope, pending dedup and input freeze, first definite rejection versus ambiguous retry, bounded history, credential exclusion/integrity and stale-account result fences. Ten new client cases (caller mutation regression failed before correction), all 541 application/tool tests and lint/typecheck pass. Four real Chromium IndexedDB cases cover concurrency/reload, transaction abort-after-success and quota preservation. Two actual local Worker desktop/touch-phone cases discard a successfully committed summon response, reload and recover exactly one payment/history record with the original ID. E2E setup builds game/admin and applies all 24 migrations. No native/deployed/status endpoint/full-R05 acceptance claim. Existing real desktop account/summon UI and owned-party campaign scenarios also pass. Free root Graphify structural index refreshed for this working tree: 2943 nodes/7242 edges/157 communities; graph navigation is not exhaustive coverage.",
+      "testIds": [
+        "apps/game/src/net/api.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "tests/storage/idb.spec.ts (real Chromium)",
+        "tests/e2e/operation-recovery.spec.ts (both projects, real local Workers)",
+        "E2E game/admin builds and 24 local D1 migrations",
+        "tests/e2e/account.spec.ts (desktop)",
+        "tests/e2e/zz-campaign.spec.ts (desktop)",
+        "bash tools/build_graph.sh (free structural extraction)"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -879,7 +902,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
-      "implemented": "R05-A locally verified: captured bearer/revision protects newer sessions against stale unauthorized/logout/deletion results; newest sign-in wins and logout ends local authority immediately. Durable financial mutation identity/payload/status storage and retry/reload/account-scope recovery remain open.",
+      "implemented": "R05-A auth fences and R05-B durable original summon/battle/character identities, frozen payloads, verified player/backend scoping, pending/confirmed/rejected states and reload retry are locally verified. Authoritative status/input semantics, remaining mutation coverage and player recovery UI remain open; native/deployed acceptance is separate.",
       "dependsOn": [
         "R01",
         "R02",
@@ -889,13 +912,17 @@
       "sourcePaths": [
         "apps/game/src/net/api.ts",
         "apps/game/src/entry/sync.ts",
-        "apps/game/src/net/api.test.ts"
+        "apps/game/src/net/api.test.ts",
+        "apps/game/src/net/operations.ts",
+        "tests/storage/idb.spec.ts",
+        "tests/e2e/operation-recovery.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
-        "E-R05-A-20261013"
+        "E-R05-A-20261013",
+        "E-R05-B-20261013"
       ],
       "blockerIds": []
     },

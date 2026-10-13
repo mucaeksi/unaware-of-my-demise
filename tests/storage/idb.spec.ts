@@ -55,3 +55,41 @@ test('rejects writes aborted after request success and preserves both previous m
   });
   expect(result).toMatchObject({ failures: [true, true, true], state: { denied: [] }, highWater: { generation: 2, releaseId: 'old', killed: false }, object: null });
 });
+
+test('the operation journal persists one original ID across reload and concurrent instances', async ({ page }) => {
+  const first = await page.evaluate(async () => {
+    const path = '/src/net/operations.ts'; const { OperationJournal } = await import(path);
+    const records = await Promise.all(Array.from({ length: 12 }, () => new OperationJournal().begin('account-A', 'POST', '/api/v1/gacha/pull', { bannerId: 'banner', count: 1 })));
+    return records.map((record) => record.id);
+  });
+  expect(new Set(first).size).toBe(1);
+  await page.reload();
+  const restored = await page.evaluate(async () => {
+    const path = '/src/net/operations.ts'; const { OperationJournal } = await import(path);
+    const journal = new OperationJournal(); const record = await journal.begin('account-A', 'POST', '/api/v1/gacha/pull', { count: 1, bannerId: 'banner' });
+    return { id: record.id, state: record.state, otherAccount: await journal.list('account-B') };
+  });
+  expect(restored).toEqual({ id: first[0], state: 'pending', otherAccount: [] });
+});
+
+test('operation persistence rejects abort-after-success and quota errors while existing pending IDs remain readable', async ({ page }) => {
+  const result = await page.evaluate(async () => {
+    const path = '/src/net/operations.ts'; const { OperationJournal } = await import(path);
+    const journal = new OperationJournal();
+    const original = await journal.begin('account-A', 'POST', '/api/v1/gacha/pull', { bannerId: 'banner', count: 1 });
+    const put = IDBObjectStore.prototype.put;
+    IDBObjectStore.prototype.put = function (...args) {
+      const request = put.apply(this, args); request.addEventListener('success', () => request.transaction!.abort()); return request;
+    };
+    let aborted = false;
+    try { await journal.begin('account-B', 'POST', '/api/v1/gacha/pull', { bannerId: 'banner', count: 1 }); } catch { aborted = true; }
+    IDBObjectStore.prototype.put = () => { throw new DOMException('test quota full', 'QuotaExceededError'); };
+    let quota = false; let readable: string | null;
+    try {
+      try { await journal.begin('account-C', 'POST', '/api/v1/gacha/pull', { bannerId: 'banner', count: 1 }); } catch { quota = true; }
+      readable = (await journal.get('account-A', original.id))?.id ?? null;
+    } finally { IDBObjectStore.prototype.put = put; }
+    return { aborted, quota, sameId: readable === original.id, other: await journal.list('account-B') };
+  });
+  expect(result).toEqual({ aborted: true, quota: true, sameId: true, other: [] });
+});

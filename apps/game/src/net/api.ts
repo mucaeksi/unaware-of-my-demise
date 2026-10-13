@@ -1,5 +1,6 @@
 import type { BattleParty } from '@uomd/content-schema';
 import { API_BASE } from '../config';
+import { OperationJournal, type OperationRecord } from './operations';
 
 export interface TeamMember {
   characterId: string;
@@ -154,8 +155,11 @@ export const newRequestId = (): string => (globalThis.crypto?.randomUUID ? globa
 export class GameApi extends EventTarget {
   private session: Session | null = null;
   private authVersion = 0;
+  private verifiedAccount: { version: number; id: string } | null = null;
+  private signingIn = 0;
+  private activeOperations = new Map<string, Promise<unknown>>();
 
-  constructor(private readonly base = API_BASE) {
+  constructor(private readonly base = API_BASE, private readonly journal = new OperationJournal()) {
     super();
     try {
       const raw = localStorage.getItem(KEY);
@@ -210,13 +214,18 @@ export class GameApi extends EventTarget {
 
   async signInWithIdToken(idToken: string): Promise<{ id: string; displayName: string | null; isNew: boolean }> {
     const attempt = ++this.authVersion;
-    const r = await this.call<{ token: string; expiresAt: string; player: { id: string; displayName: string | null; isNew: boolean } }>('POST', '/api/v1/auth/google', { idToken }, false);
-    if (this.authVersion !== attempt) throw new ApiError(409, 'auth_changed', 'The selected account changed before sign-in completed');
-    this.store({ token: r.token, expiresAt: r.expiresAt });
-    return r.player;
+    this.signingIn = attempt;
+    try {
+      const r = await this.call<{ token: string; expiresAt: string; player: { id: string; displayName: string | null; isNew: boolean } }>('POST', '/api/v1/auth/google', { idToken }, false);
+      if (this.authVersion !== attempt) throw new ApiError(409, 'auth_changed', 'The selected account changed before sign-in completed');
+      this.store({ token: r.token, expiresAt: r.expiresAt });
+      this.verifiedAccount = { version: this.authVersion, id: r.player.id };
+      return r.player;
+    } finally { if (this.signingIn === attempt) this.signingIn = 0; }
   }
 
   async signOut(): Promise<void> {
+    this.signingIn = 0;
     const request = this.call('POST', '/api/v1/auth/logout', {});
     this.store(null); // End local authority immediately; the request already captured the old bearer.
     try {
@@ -224,6 +233,74 @@ export class GameApi extends EventTarget {
     } catch {
       /* the server may already have dropped the session */
     }
+  }
+
+  private async accountScope(): Promise<{ scope: string; version: number }> {
+    const version = this.authVersion;
+    if (!this.session) throw new ApiError(401, 'signed_out', 'Sign in to continue');
+    if (this.signingIn) throw new ApiError(409, 'auth_changed', 'Finish selecting your account before starting an action');
+    if (this.verifiedAccount?.version !== version) {
+      const profile = await this.me();
+      if (version !== this.authVersion || !this.session) throw new ApiError(409, 'auth_changed', 'The account changed');
+      if (!profile || typeof profile.id !== 'string' || !profile.id) throw new ApiError(503, 'invalid_response', 'Account confirmation is unavailable');
+      this.verifiedAccount = { version, id: profile.id };
+    }
+    const origin = typeof location === 'undefined' ? 'https://local.invalid' : location.origin;
+    return { scope: JSON.stringify([new URL(this.base || '/', origin).href, this.verifiedAccount.id]), version };
+  }
+
+  private async executeOperation<T>(operation: OperationRecord, version: number): Promise<T> {
+    const checked = await this.journal.get(operation.scope, operation.id);
+    if (!checked) throw new ApiError(409, 'operation_missing', 'This saved action is unavailable');
+    if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
+    if (checked.state === 'confirmed') return structuredClone(checked.result) as T;
+    if (checked.state === 'rejected') throw new ApiError(409, checked.code ?? 'operation_rejected', 'The saved action was rejected');
+    const active = this.activeOperations.get(checked.id);
+    if (active) return active as Promise<T>;
+    const request = (async () => {
+      const attempts = await this.journal.attempt(checked.scope, checked.id);
+      if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
+      let result: unknown;
+      try {
+        result = await this.call('POST', checked.path, checked.body);
+        const value = result as { requestId?: string; pulls?: unknown[]; nodeId?: string; character?: string; level?: number } | null;
+        if (!value || typeof value !== 'object'
+          || checked.path === '/api/v1/gacha/pull' && (value.requestId !== checked.id || !Array.isArray(value.pulls) || value.pulls.length !== checked.body.count)
+          || checked.path === '/api/v1/progress/battle' && (value.requestId !== checked.id || value.nodeId !== checked.body.nodeId)
+          || checked.path.startsWith('/api/v1/characters/') && (value.character !== checked.path.split('/')[4] || typeof value.level !== 'number'))
+          throw new ApiError(503, 'invalid_response', 'The action has not been confirmed');
+      } catch (error) {
+        const definite = attempts === 1 && error instanceof ApiError && [400, 402, 404, 422].includes(error.status);
+        await this.journal.finish(checked.scope, checked.id, definite ? 'rejected' : 'pending', undefined, error instanceof ApiError ? error.code : 'confirmation_pending');
+        this.dispatchEvent(new Event('operations'));
+        throw error;
+      }
+      await this.journal.finish(checked.scope, checked.id, 'confirmed', result);
+      this.dispatchEvent(new Event('operations'));
+      if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The action was recorded for the previous account');
+      return result as T;
+    })();
+    this.activeOperations.set(checked.id, request);
+    try { return await request as T; } finally { if (this.activeOperations.get(checked.id) === request) this.activeOperations.delete(checked.id); }
+  }
+
+  private async mutate<T>(path: string, body: Record<string, unknown>): Promise<T> {
+    const snapshot = structuredClone(body);
+    const { scope, version } = await this.accountScope();
+    let operation: OperationRecord;
+    try { operation = await this.journal.begin(scope, 'POST', path, snapshot); }
+    catch (error) { throw new ApiError(409, 'operation_not_saved', error instanceof Error ? error.message : 'The action could not be saved; no request was sent'); }
+    this.dispatchEvent(new Event('operations'));
+    return this.executeOperation<T>(operation, version);
+  }
+  async operations(): Promise<OperationRecord[]> {
+    return this.journal.list((await this.accountScope()).scope);
+  }
+  async retryOperation<T>(id: string): Promise<T> {
+    const { scope, version } = await this.accountScope();
+    const operation = await this.journal.get(scope, id);
+    if (!operation) throw new ApiError(409, 'operation_missing', 'This action does not belong to the selected account');
+    return this.executeOperation<T>(operation, version);
   }
 
   entry = (): Promise<EntryCheckpoint> => this.call('GET', '/api/v1/entry');
@@ -246,7 +323,7 @@ export class GameApi extends EventTarget {
     return (await this.call<{ pity: { pity_group: string; pity5: number; pity4: number; lost: number }[] }>('GET', '/api/v1/gacha/state')).pity;
   }
   pull(bannerId: string, count: 1 | 10, target?: string): Promise<PullResponse> {
-    return this.call('POST', '/api/v1/gacha/pull', { bannerId, count, requestId: newRequestId(), ...(target ? { target } : {}) });
+    return this.mutate('/api/v1/gacha/pull', { bannerId, count, ...(target ? { target } : {}) });
   }
   async history(): Promise<{ id: number; banner_id: string; pull_number: number; rarity: number; item_id: string; outcome: string; duplicate: number; at: string }[]> {
     return (await this.call<{ pulls: { id: number; banner_id: string; pull_number: number; rarity: number; item_id: string; outcome: string; duplicate: number; at: string }[] }>('GET', '/api/v1/gacha/history?limit=40')).pulls;
@@ -267,7 +344,7 @@ export class GameApi extends EventTarget {
     return this.call('GET', '/api/v1/progress');
   }
   submitBattle(releaseId: string, nodeId: string, actions: { skillId: string; targetId?: string }[], sessionId?: string): Promise<{ stars: number; firstClear: boolean; rewards: MailItem['attachments']; repeatRewardsAllowed?: boolean; ration: { spent: number; value: number } }> {
-    return this.call('POST', '/api/v1/progress/battle', { releaseId, nodeId, requestId: newRequestId(), actions, ...(sessionId ? { sessionId } : {}) });
+    return this.mutate('/api/v1/progress/battle', { releaseId, nodeId, actions, ...(sessionId ? { sessionId } : {}) });
   }
   /** Owned-hero stages: the server freezes the party (team, gear stats, ranks, story loans) the battle must be fought with. */
   startBattle(releaseId: string, nodeId: string): Promise<{ sessionId: string | null; party: BattleParty | null; expiresAt: string | null }> {
@@ -295,13 +372,13 @@ export class GameApi extends EventTarget {
     return this.call('GET', '/api/v1/characters/mine');
   }
   levelUp(id: string, items: { itemId: string; quantity: number }[]): Promise<{ level: number }> {
-    return this.call('POST', `/api/v1/characters/${id}/level-up`, { requestId: newRequestId(), items });
+    return this.mutate(`/api/v1/characters/${id}/level-up`, { items });
   }
   ascend(id: string): Promise<{ ascension: number }> {
-    return this.call('POST', `/api/v1/characters/${id}/ascend`, { requestId: newRequestId() });
+    return this.mutate(`/api/v1/characters/${id}/ascend`, {});
   }
   upgradeSkill(id: string, skillId: string): Promise<{ rank: number }> {
-    return this.call('POST', `/api/v1/characters/${id}/skills/${skillId}/upgrade`, { requestId: newRequestId() });
+    return this.mutate(`/api/v1/characters/${id}/skills/${skillId}/upgrade`, {});
   }
   characterStats(id: string): Promise<{ level: number; stats: Record<string, number> }> {
     return this.call('GET', `/api/v1/characters/${id}/stats`);
