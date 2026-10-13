@@ -1,6 +1,6 @@
 # Autonomous infrastructure handoff
 
-Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00/R01 are complete locally; current implementation is **R05 — persistent client operation recovery** after local R03/R04 acceptance. R02 local recovery is implemented; policy/live/native evidence remains open. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
+Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00/R01 are complete locally; current implementation is **R06 — combat semantics and compatible progression** after local R05 recovery slices; native cross-package acceptance remains open. R02 local recovery is implemented; policy/live/native evidence remains open. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
 
 ## Resume safely
 
@@ -112,3 +112,7 @@ Checkout and restore retain their opening account revision; pending receipts rea
 ## Latest verified slice — R05-G2
 
 Purchase History reads scoped recent delivery/recovery facts consistently without another grant/provider request. Consumed response-loss records, pending/review/refund and legacy unknown provider observations remain distinct. Four API/two client cases, 587 application/tool tests and lint/typecheck pass; four browser response/SDK-fixture scenarios pass and phone screenshot inspected. Both builds/25 migrations pass. Recent history is limited to 30 records; archival export/capacity remain R17. Graph refreshed (3011/7457/154). Continue independent R06 source semantics; pre-purchase offer/version binding and native secure-session/lifecycle/device work remain R02/R11/R18, and R05 retains its acceptance gates.
+
+## Latest verified slice — R06-A
+
+Duration-one/boss Break owes one action skip after expiry; dead turn-start units do not emit it. Boss Auto now releases a usable ultimate while emergency healing retains priority. Five new boundary/replay cases, 592 application/tool tests, lint/typecheck and exact event-hash replay pass. Three cases fail against the old engine under corrected fixtures. Real desktop owned campaign passes (phone intentionally skipped there); free-practice desktop/phone passes. Both builds/25 migrations pass. Next supported progression/config limits, gear effects/loans and semantic conformance; no C01–C39 proposal or numeric retuning applied.

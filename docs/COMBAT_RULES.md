@@ -15,6 +15,8 @@ the schema (on the device before activation, and on the server before publishing
 - Seeded RNG (mulberry32) for crits and chance statuses; auto battle policy (emergency heal < 40 %, active, basic; ultimates saved for bosses).
 - Stars: 3 = nobody lost, 2 = one lost, 1 = two or more lost; 300-turn safety limit counts as defeat.
 
+R06-A verification: a duration-one `skip_next_action` control still skips the next living action when owner-turn expiry removes its status. A unit killed during turn-start ticks never emits that owed skip. Auto holds ultimates for ordinary enemies and releases an available one when a living opposing boss is present, after emergency healing. Five new cases include the exact client/replay event hash; 592 application/tool tests pass. No numeric values or the broader proposed event-order policies changed.
+
 ## Interpretations (the data was ambiguous — flag for owner review)
 1. `lowest_hp_ally` compares absolute HP (ties: slot, id); `self_and_lowest_hp_ally` = self + lowest-HP *other* ally.
 2. Shield/heal amounts are floored (min 1). `heal_per_removed_status` heals each of the N lowest-HP allies for `floor(ATK × mult × stacks)`.

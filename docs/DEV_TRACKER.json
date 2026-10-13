@@ -5,15 +5,15 @@
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "R05",
+    "id": "R06",
     "status": "IN_PROGRESS",
-    "nextProposed": "R06",
+    "nextProposed": "R07",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R05-G2 delivery history verified; independent R06 source work next",
-      "detail": "587 application/tool tests and four browser response/SDK-fixture cases pass. Owned consumed delivery history survives missing provider inventory without another grant; refund/review/legacy unknown states remain explicit. Native pre-purchase binding, secure-session/lifecycle and device gates remain R02/R11/R18."
+      "title": "R06-A Break and boss Auto verified; configuration limits next",
+      "detail": "592 application/tool tests, exact event-hash replay, desktop owned campaign and desktop/phone practice pass. Proceed supported progression/config limits and gear/loan contracts; R02/R05/R11/R18 native/provider gates remain open."
     }
   ],
   "next": [
@@ -728,6 +728,26 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R06-A-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "82586fc0",
+      "verifiedAt": "2026-10-13T11:06:32.356027+00:00",
+      "scope": "R06-A working tree: preserve owed one-turn control skip through expiry incl boss floor, check turn-start death first, release usable Auto ultimate when living opposing boss exists, retain emergency healing and existing tick order. Five new cases incl explicit control/boss Auto exact authoritative event hash. Corrected valid fixtures: three scenarios fail against prior engine loaded by isolated test alias; all 18 boss cases and 592 application/tool tests/lint/typecheck pass. Real local Worker desktop owned campaign passes; that test intentionally skips phone. Free-practice desktop/phone passes, both builds/25 migrations pass. Temporary prior-engine file removed; no canon/numeric retuning/creative assets, native/deployed or complete-R06 acceptance claim. Remaining supported limits/config semantics, equipped effects, story loans and C01\u2013C39 proposal decisions remain.",
+      "testIds": [
+        "packages/combat/src/boss.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "tests/e2e/zz-campaign.spec.ts (desktop pass, phone skip)",
+        "tests/e2e/free-practice.spec.ts (both projects)",
+        "E2E game/admin builds and 25 local migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1112,10 +1132,10 @@
     {
       "id": "R06",
       "title": "Combat semantics, gear and limits",
-      "taskStatus": "OPEN",
+      "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Correct Break/Auto/expiry/procs, loan equipment and compatible progression limits with deterministic replay.",
-      "implemented": "5v5-capable engine, 20 heroes/20 enemies/7 bosses, owned snapshots and basic gear stats exist; semantics/procs/loans/caps remain incomplete.",
+      "implemented": "R06-A one-turn/boss control expiry, death-before-skip and boss Auto ultimate policy are locally verified with exact replay hash. Five-slot engine/owned snapshots/basic gear exist; progression/config limits, full equipment effects/loans and broader conformance remain.",
       "dependsOn": [
         "R01"
       ],
@@ -1124,12 +1144,15 @@
         "packages/combat/src/engine.ts",
         "packages/combat/src/boss.test.ts",
         "apps/api/src/progress/party.ts",
-        "apps/game/src/scenes/BattleScene.ts"
+        "apps/game/src/scenes/BattleScene.ts",
+        "packages/combat/src/boss.test.ts",
+        "docs/COMBAT_RULES.md"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-REGRESSIONS",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R06-A-20261013"
       ],
       "blockerIds": [
         "B-ECONOMY"

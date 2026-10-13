@@ -251,6 +251,10 @@ Persist pending operation identity, original request ID, payload and account sco
 
 ### R06 — Combat semantics, equipment, loans and compatible limits
 
+**R06-A locally verified:** duration-one control retains its owed next-action skip when turn-start expiry removes it, including the boss duration floor. Turn-start death is checked before a saved control skip; existing DoT/regen/cooldown ordering is preserved. Auto reserves an available ultimate against regular foes and uses it when a living opposing boss is present, retaining emergency-heal priority. Explicit control + boss Auto actions reproduce the exact authoritative event hash.
+
+Five additional boundary/replay cases, lint/typecheck and **592 application/tool tests** pass. Three scenarios fail against the previous engine with the corrected current fixtures; the new 18-case boss suite passes. Real local-Worker owned campaign passes on desktop (its phone project is explicitly skipped), and free-practice disclosure passes on desktop/phone. Both builds and 25 local migrations pass. No balance/canon/asset changes or native/deployed acceptance. Remaining R06 work is supported progression/config limits, equipment effects/loans and explicit semantic conformance; C01–C39 proposals are not silently applied.
+
 - [Engine turn handling](packages/combat/src/engine.ts#L490) expires duration-one Break before consumeSkip. Correct the defined control/expiry ordering for normal/boss actions and interruptible telegraphs.
 - [Auto selection](packages/combat/src/engine.ts#L697) treats save-until-boss as “never use ultimate.” Save against ordinary foes and use an available ultimate against a living boss; retain Focus/legality and deterministic replay.
 - Define/version status/DoT/regeneration/cooldown/event/RNG order and rounding. Resolve explicit source ambiguities—redirect precedence, Soaked, Soul Link, absolute versus relative lowest HP, shield copy, fresh-bar phases/objective hits and source text overrides—using [OPS_SPEC](docs/combat/OPS_SPEC.md) and vectors. C01–C39 are review proposals, not automatically approved canon.

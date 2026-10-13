@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { dmg, dummy, duel, ev, hero, P, E, type UnitSpec } from './testkit';
+import { Encounter, UnitPack } from '@uomd/content-schema';
+import { canonicalJson, sha256Hex } from '@uomd/shared';
+import { Battle, replayBattle } from './index';
+import { dmg, dummy, duel, ev, hero, P, E, RULES, unit, type UnitSpec } from './testkit';
 
 const phase = (id: string, over: Record<string, unknown> = {}) => ({
   phase_id: id,
@@ -33,6 +36,65 @@ const boss = (phases: unknown[], over: Partial<UnitSpec> = {}): UnitSpec => ({
 });
 
 describe('boss phases', () => {
+  it('control plus boss Auto actions reproduce the exact authoritative event hash', async () => {
+    const player: UnitSpec = { id: 'burst', spd: 100, skills: [
+      { id: 'burst_basic', target: 'enemy', ops: [dmg('single_enemy')] },
+      { id: 'burst_control', type: 'active', target: 'enemy', ops: [{ op: 'apply_status', target_selector_id: 'single_enemy', status_id: 'break', duration_turns: 1 }] },
+      { id: 'burst_ultimate', type: 'ultimate', target: 'enemy', focus: 0, ops: [dmg('single_enemy', 20)] }
+    ] };
+    const pack = UnitPack.parse({ schema_version: 1, pack_id: 'control_replay', rules: RULES, units: [unit(player), unit(boss([phase('first')]))] });
+    const encounter = Encounter.parse({ schema_version: 1, encounter_id: 'control_replay', stage_id: 'X-1', title_en: 'test', location_id: 'test', seed: 7,
+      party: [{ unit_id: 'burst', level: 1, slot: 0, row: 'front' }], enemies: [{ unit_id: 'warden', level: 1, slot: 0, row: 'front' }], provenance: { source: 'test' } });
+    const battle = Battle.create(pack, encounter); battle.advance();
+    const control = { skillId: 'burst_control', targetId: E(0, 'warden') }; battle.act(control);
+    const ultimate = battle.autoAction(); expect(ultimate.skillId).toBe('burst_ultimate'); battle.act(ultimate);
+    const replay = await replayBattle(pack, encounter, [control, ultimate]);
+    expect(replay).toMatchObject({ valid: true, complete: true, result: { winner: 'player' }, logHash: await sha256Hex(canonicalJson(battle.log)) });
+  });
+
+  it('a controlled unit killed by turn-start damage never reports a skipped living action', () => {
+    const b = duel([hero('binder', [
+      { op: 'apply_status', target_selector_id: 'single_enemy', status_id: 'break', duration_turns: 1 },
+      { op: 'apply_status', target_selector_id: 'single_enemy', status_id: 'burn', duration_turns: 1 }
+    ], { atk: 1000 }, { target: 'enemy' })], [dummy('victim', { hp: 1, spd: 99 })]);
+    b.advance(); b.act({ skillId: 'binder_x', targetId: E(0, 'victim') });
+    expect(b.unit(E(0, 'victim')).alive).toBe(false); expect(b.result?.winner).toBe('player');
+    expect(ev(b.log, 'turn_skipped')).toHaveLength(0);
+  });
+
+  it('a one-turn Break skips exactly one action, including the halved boss duration', () => {
+    for (const enemy of [dummy('warden', { spd: 99, skills: [{ id: 'warden_basic', ops: [dmg('single_enemy_default', 1)] }] }), boss([phase('first')], { hp: 1000 })]) {
+      const b = duel([hero('binder', [{ op: 'apply_status', target_selector_id: 'single_enemy', status_id: 'break', duration_turns: enemy.boss ? 2 : 1 }], {}, { target: 'enemy' })], [enemy]);
+      b.advance(); b.act({ skillId: 'binder_x', targetId: E(0, 'warden') });
+      expect(ev(b.log, 'turn_skipped')).toEqual([expect.objectContaining({ actor: E(0, 'warden'), reason: 'break' })]);
+      expect(ev(b.log, 'damage').filter((event) => event.source === E(0, 'warden'))).toHaveLength(0);
+      b.act({ skillId: 'binder_basic', targetId: E(0, 'warden') });
+      expect(ev(b.log, 'turn_skipped')).toHaveLength(1);
+      expect(ev(b.log, 'damage').filter((event) => event.source === E(0, 'warden'))).toHaveLength(1);
+    }
+  });
+
+  it('Auto saves a usable ultimate for regular enemies and uses it when a living boss is present', () => {
+    const player: UnitSpec = { id: 'burst', spd: 100, skills: [
+      { id: 'burst_basic', target: 'enemy', ops: [dmg('single_enemy')] },
+      { id: 'burst_ultimate', type: 'ultimate', target: 'enemy', focus: 0, ops: [dmg('single_enemy', 5)] }
+    ] };
+    for (const enemy of [dummy('regular', { spd: 99 }), boss([phase('first')])]) {
+      const b = duel([player], [enemy]); b.advance();
+      expect(b.autoAction().skillId).toBe(enemy.boss ? 'burst_ultimate' : 'burst_basic');
+    }
+  });
+
+  it('emergency healing still precedes a boss ultimate', () => {
+    const b = duel([{ id: 'healer', spd: 100, skills: [
+      { id: 'healer_basic', target: 'enemy', ops: [dmg('single_enemy')] },
+      { id: 'healer_active', type: 'active', ops: [{ op: 'heal', target_selector_id: 'self', scale_stat: 'atk', multiplier: 1 }] },
+      { id: 'healer_ultimate', type: 'ultimate', target: 'enemy', focus: 0, ops: [dmg('single_enemy', 5)] }
+    ] }], [boss([phase('first')])]);
+    b.advance(); b.unit(P(0, 'healer')).hp = 20;
+    expect(b.autoAction().skillId).toBe('healer_active');
+  });
+
   it('a phase bar is fresh: crossing 50% starts phase two with its own HP bar and stats', () => {
     const b = duel([hero('slayer', [], { atk: 60, hp: 2000 })], [boss([phase('first'), second()])]);
     b.advance();

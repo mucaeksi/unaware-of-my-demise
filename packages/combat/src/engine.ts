@@ -487,8 +487,12 @@ export class Battle {
       const actor = this.pickNextActor();
       this.turnCounter++;
       this.emit({ type: 'turn_start', actor: actor.id, turn: this.turnCounter });
-      this.beginTurn(actor);
-      const skipReason = this.consumeSkip(actor);
+      const expiredControl = this.beginTurn(actor);
+      if (!actor.alive) {
+        this.finishTurn(actor);
+        continue;
+      }
+      const skipReason = this.consumeSkip(actor) ?? expiredControl;
       if (skipReason) {
         this.emit({ type: 'turn_skipped', actor: actor.id, reason: skipReason });
         const pending = actor.boss?.telegraph;
@@ -496,10 +500,6 @@ export class Battle {
           const sk = actor.def.skills.find((k) => k.skill_id === pending.skillId);
           if (sk?.telegraph?.interruptible_by_control !== false) this.cancelTelegraph(actor, 'control');
         }
-        this.finishTurn(actor);
-        continue;
-      }
-      if (!actor.alive) {
         this.finishTurn(actor);
         continue;
       }
@@ -579,7 +579,8 @@ export class Battle {
 
   // ---------------------------------------------------------------- turn start
 
-  private beginTurn(actor: Combatant): void {
+  private beginTurn(actor: Combatant): string | null {
+    let expiredControl: string | null = null;
     for (const k of Object.keys(actor.cooldowns)) {
       const v = actor.cooldowns[k] ?? 0;
       if (v > 0) actor.cooldowns[k] = v - 1;
@@ -589,6 +590,8 @@ export class Battle {
     for (const s of [...actor.statuses]) {
       s.turnsLeft -= 1;
       if (s.turnsLeft <= 0) {
+        // A one-turn control still owes its next-action skip when its duration expires.
+        if (this.statusDefs.get(s.statusId)?.skip_next_action) expiredControl = s.statusId;
         actor.statuses.splice(actor.statuses.indexOf(s), 1);
         this.emit({ type: 'status_removed', target: actor.id, status: s.statusId, reason: 'expired' });
       }
@@ -619,6 +622,7 @@ export class Battle {
       if (r.ticksLeft <= 0 || r.turnsLeft <= 0) actor.regens.splice(actor.regens.indexOf(r), 1);
     }
     if (actor.alive) this.fire('owner_turn_start', { actor, target: null, actionKind: null, actionId: 0, packet: null });
+    return expiredControl;
   }
 
   private consumeSkip(actor: Combatant): string | null {
@@ -694,7 +698,7 @@ export class Battle {
     const lowAlly = this.allies(actor).some((a) => a.hp / a.maxHp < this.rules.auto_battle.heal_priority_hp_percent / 100);
     if (healer && lowAlly) return target(healer);
     const ult = ok.find((o) => o.type === 'ultimate');
-    if (ult && !this.rules.auto_battle.save_ultimate_until_boss) return target(ult);
+    if (ult && (!this.rules.auto_battle.save_ultimate_until_boss || this.opponents(actor).some((enemy) => enemy.boss !== null))) return target(ult);
     const active = ok.filter((o) => o.type === 'active').sort((a, b) => b.def.ai_priority - a.def.ai_priority)[0];
     if (active) return target(active);
     const basic = ok.find((o) => o.type === 'basic');
