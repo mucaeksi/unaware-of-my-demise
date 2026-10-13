@@ -4,7 +4,7 @@ import { playAuto } from '@uomd/combat';
 import { Encounter, UnitPack } from '@uomd/content-schema';
 import { baseFiles, type TestFile } from './fixtures';
 import { admin, baseEnv, entries, game, post, resetContent, signIn, upload } from './helpers';
-import { startBattle, submitBattle } from '../src/progress/service';
+import { startBattle, submitBattle, writeSave } from '../src/progress/service';
 import { deleteAccount } from '../src/account/service';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
@@ -339,6 +339,34 @@ describe('server-verified battle progress', () => {
 });
 
 describe('cloud save', () => {
+  it('save journal failure rolls the CAS back and deleted accounts cannot recreate a save', async () => {
+    const { auth, playerId } = await signIn(`sub-save-atomic-${rid()}`); const requestId = rid();
+    const input = { requestId, expectedVersion: 0, data: { step: 1 } };
+    await db().prepare("CREATE TRIGGER reject_save_journal BEFORE INSERT ON progression_requests WHEN NEW.kind = 'cloud_save' BEGIN SELECT RAISE(ABORT, 'isolated save journal failure'); END").run();
+    try {
+      expect((await game('/api/v1/save', { ...post(input, auth), method: 'PUT' })).status).toBe(500);
+      expect(await (await game('/api/v1/save', { headers: auth })).json()).toMatchObject({ version: 0, data: {} });
+    } finally { await db().prepare('DROP TRIGGER reject_save_journal').run(); }
+    expect(await writeSave(db(), playerId, input)).toMatchObject({ requestId, version: 1 });
+    await deleteAccount(db(), playerId, 'DELETE');
+    await expect(writeSave(db(), playerId, { requestId: rid(), expectedVersion: 0, data: {} })).rejects.toMatchObject({ status: 401 });
+    expect((await db().prepare('SELECT COUNT(*) AS n FROM player_saves WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(0);
+  });
+
+  it('same-ID concurrent save writes once and recovers the original result after another device advances', async () => {
+    const { auth } = await signIn(`sub-save-operation-${rid()}`); const requestId = rid();
+    const input = { requestId, expectedVersion: 0, data: { progress: { chapter: 1 } } };
+    const put = (body: unknown) => game('/api/v1/save', { ...post(body, auth), method: 'PUT' });
+    const responses = await Promise.all(Array.from({ length: 8 }, () => put(input)));
+    expect(responses.every((r) => r.status === 200)).toBe(true);
+    expect(await (await game('/api/v1/save', { headers: auth })).json()).toMatchObject({ version: 1, data: input.data });
+    expect((await put({ requestId: rid(), expectedVersion: 1, data: { device: 'newer' } })).status).toBe(200);
+    expect(await (await put(input)).json()).toMatchObject({ requestId, version: 1, replayed: true });
+    expect(await (await game('/api/v1/save', { headers: auth })).json()).toMatchObject({ version: 2, data: { device: 'newer' } });
+    expect((await put({ ...input, data: { changed: true } })).status).toBe(409);
+    expect(await (await game(`/api/v1/operations/${requestId}?path=${encodeURIComponent('/api/v1/save')}`, { headers: auth })).json()).toMatchObject({ state: 'confirmed', binding: 'exact', result: { requestId, version: 1 } });
+  });
+
   it('starts empty, writes with compare-and-set, and returns the server copy on a conflict', async () => {
     const { auth } = await signIn(`sub-save-${rid()}`);
     const put = (body: unknown) => game('/api/v1/save', { method: 'PUT', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json', ...auth } });

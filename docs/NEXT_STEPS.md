@@ -92,3 +92,7 @@ Migration 0025 binds exact new summon/progression/battle inputs to immutable com
 ## Latest verified slice — R05-D
 
 ID-bearing mail/task claims store original inputs/results atomically with the marker/grants; concurrent replay, expired-window/catalog changes, journal-failure rollback and cross-mail reuse are covered. No-ID compatibility and active-account task guard are retained. Durable client/status recovery and definite first rejection prevent duplicate payments or blocked later intent. All **561 application/tool tests**, lint/typecheck, two real desktop/phone account flows and four real-Worker response-loss/reload cases pass; both builds and all 25 local migrations pass. Next checkpoint/cloud-save contracts, then player/purchase lifecycle recovery. Asset production remains deferred; native/deployed proof is separate.
+
+## Latest verified slice — R05-E
+
+Checkpoint and cloud-save ID/result journals commit with the monotonic update/CAS; legacy callers remain compatible. Save v1 replay preserves another writer's v2, checkpoints retain later progress, fault/deletion guards hold and queued PUT/late GET results are account-fenced. All **570 application/tool tests**, lint/typecheck, eight real-Worker desktop/phone response-loss/reload cases, four menu cases and both builds pass with 25 migrations. Next visible player recovery, remaining session/lifecycle fences and purchase metadata. Complete narrative/Finish/Continue remains R09 and actual native/store acceptance remains R11/R18; creative assets stay deferred.

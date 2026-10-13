@@ -6,6 +6,7 @@ import { canonicalJson, sha256Hex } from '@uomd/shared';
 import { ContentStore, HttpError } from '../content/store';
 import { grantStatements } from '../db/grants';
 import { taskEventStatements } from '../tasks/service';
+import { operationStatement, recordedOperation } from '../db/operations';
 import { rollNodeDrops } from './drops';
 import { buildParty } from './party';
 import type { GameEnv } from '../env';
@@ -257,7 +258,7 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
   throw new HttpError(409, 'busy', 'too many simultaneous submissions on this account, try again');
 }
 
-const Save = z.object({ expectedVersion: z.number().int().min(0), data: z.record(z.string(), z.unknown()) }).strict();
+const Save = z.object({ expectedVersion: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER - 1), data: z.record(z.string(), z.unknown()), requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/).optional() }).strict();
 
 export async function readSave(db: D1Database, playerId: string): Promise<{ version: number; data: unknown; updatedAt: string | null }> {
   const row = await db.prepare('SELECT version, data, updated_at FROM player_saves WHERE player_id = ?1').bind(playerId).first<{ version: number; data: string; updated_at: string }>();
@@ -265,16 +266,35 @@ export async function readSave(db: D1Database, playerId: string): Promise<{ vers
 }
 
 /** Compare-and-set write of the client's cloud-save blob. A stale `expectedVersion` gets 409 plus the server copy to merge. */
-export async function writeSave(db: D1Database, playerId: string, raw: unknown, now = new Date()): Promise<{ version: number }> {
+export async function writeSave(db: D1Database, playerId: string, raw: unknown, now = new Date()): Promise<{ version: number; requestId?: string; replayed?: boolean }> {
   const parsed = Save.safeParse(raw);
   if (!parsed.success) throw new HttpError(400, 'bad_request', 'invalid save');
+  const input = parsed.data.requestId ? { ...parsed.data, requestId: parsed.data.requestId } : null;
+  const recorded = input ? await recordedOperation(db, playerId, 'cloud_save', input) : null;
+  if (recorded) return recorded as { version: number; requestId: string; replayed: boolean };
   const text = JSON.stringify(parsed.data.data);
   if (text.length > 65_536) throw new HttpError(413, 'save_too_large', 'cloud save is limited to 64 KB');
   const { expectedVersion } = parsed.data;
-  const res =
+  const write =
     expectedVersion === 0
-      ? await db.prepare('INSERT INTO player_saves (player_id, version, data, updated_at) VALUES (?1, 1, ?2, ?3) ON CONFLICT (player_id) DO NOTHING').bind(playerId, text, now.toISOString()).run()
-      : await db.prepare('UPDATE player_saves SET version = version + 1, data = ?3, updated_at = ?4 WHERE player_id = ?1 AND version = ?2').bind(playerId, expectedVersion, text, now.toISOString()).run();
-  if (res.meta.changes !== 1) throw new HttpError(409, 'save_conflict', 'the cloud save changed on another device', await readSave(db, playerId));
-  return { version: expectedVersion + 1 };
+      ? db.prepare('INSERT INTO player_saves (player_id, version, data, updated_at) VALUES (?1, 1, ?2, ?3) ON CONFLICT (player_id) DO NOTHING').bind(playerId, text, now.toISOString())
+      : db.prepare('UPDATE player_saves SET version = version + 1, data = ?3, updated_at = ?4 WHERE player_id = ?1 AND version = ?2').bind(playerId, expectedVersion, text, now.toISOString());
+  const result = { version: expectedVersion + 1, ...(input ? { requestId: input.requestId } : {}) };
+  try {
+    await db.batch([
+      db.prepare("INSERT INTO tx_guard (ok) VALUES (CASE WHEN EXISTS (SELECT 1 FROM players WHERE id = ?1 AND status = 'active') THEN 1 ELSE 0 END)").bind(playerId),
+      write, db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+      ...(input ? [operationStatement(db, playerId, 'cloud_save', input, result)] : []), db.prepare('DELETE FROM tx_guard')
+    ]);
+  } catch (error) {
+    const replay = input ? await recordedOperation(db, playerId, 'cloud_save', input) : null;
+    if (replay) return replay as { version: number; requestId: string; replayed: boolean };
+    if (/CHECK constraint failed: ok = 1/i.test(String(error))) {
+      const active = await db.prepare("SELECT 1 AS ok FROM players WHERE id = ?1 AND status = 'active'").bind(playerId).first();
+      if (!active) throw new HttpError(401, 'unauthorized', 'the account is unavailable');
+      throw new HttpError(409, 'save_conflict', 'the cloud save changed on another device', await readSave(db, playerId));
+    }
+    throw error;
+  }
+  return { ...result, ...(input ? { replayed: false } : {}) };
 }

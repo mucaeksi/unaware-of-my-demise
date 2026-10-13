@@ -1,6 +1,7 @@
 import { env } from 'cloudflare:workers';
 import { describe, expect, it } from 'vitest';
 import { game, post, signIn } from './helpers';
+import { putEntry } from '../src/entry/service';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 let n = 0;
@@ -9,6 +10,33 @@ const put = (auth: Record<string, string>, body: unknown) => game('/api/v1/entry
 const get = async (auth: Record<string, string>): Promise<{ phase: string; prologue: boolean; tutorials: number; updatedAt: string | null; playerId: string }> => (await game('/api/v1/entry', { headers: auth })).json() as never;
 
 describe('entry checkpoint', () => {
+  it('no-op checkpoints are receipted and a journal fault rolls a changed checkpoint back', async () => {
+    const { auth, playerId } = await signIn(`sub-entry-atomic-${rid()}`); const requestId = rid();
+    const noop = await put(auth, { requestId: rid(), prologue: false, tutorials: 0 });
+    expect(noop.status).toBe(200); expect(await noop.json()).toMatchObject({ phase: 'not_started', tutorials: 0 });
+    await db().prepare("CREATE TRIGGER reject_entry_journal BEFORE INSERT ON progression_requests WHEN NEW.kind = 'entry_checkpoint' BEGIN SELECT RAISE(ABORT, 'isolated entry journal failure'); END").run();
+    try {
+      expect((await put(auth, { requestId, prologue: true, tutorials: 1 })).status).toBe(500);
+      expect(await get(auth)).toMatchObject({ phase: 'not_started', tutorials: 0 });
+      expect((await db().prepare('SELECT COUNT(*) AS n FROM progression_requests WHERE player_id = ?1 AND request_id = ?2').bind(playerId, requestId).first<{ n: number }>())?.n).toBe(0);
+    } finally { await db().prepare('DROP TRIGGER reject_entry_journal').run(); }
+    expect((await put(auth, { requestId, prologue: true, tutorials: 1 })).status).toBe(200);
+  });
+
+  it('ID-bearing checkpoints replay their original result without lowering later progress', async () => {
+    const { auth } = await signIn(`sub-entry-operation-${rid()}`); const requestId = rid();
+    const input = { requestId, prologue: true, tutorials: 1 };
+    const first = await put(auth, input); expect(first.status).toBe(200);
+    expect(await first.json()).toMatchObject({ requestId, tutorials: 1 });
+    await put(auth, { requestId: rid(), prologue: true, tutorials: 3, completed: true });
+    const replay = await put(auth, input); expect(replay.status).toBe(200);
+    expect(await replay.json()).toMatchObject({ requestId, tutorials: 1, replayed: true });
+    expect(await get(auth)).toMatchObject({ phase: 'completed', tutorials: 3 });
+    expect((await put(auth, { ...input, tutorials: 2 })).status).toBe(409);
+    const status = await game(`/api/v1/operations/${requestId}?path=${encodeURIComponent('/api/v1/entry')}`, { headers: auth });
+    expect(await status.json()).toMatchObject({ state: 'confirmed', binding: 'exact', result: { requestId, tutorials: 1 } });
+  });
+
   it('starts as not_started and requires a session', async () => {
     const { auth, playerId } = await signIn(`sub-entry-${rid()}`);
     expect(await get(auth)).toEqual({ phase: 'not_started', prologue: false, tutorials: 0, updatedAt: null, playerId });
@@ -56,5 +84,7 @@ describe('entry checkpoint', () => {
     expect((await game('/api/v1/account/delete', post({ confirm: 'DELETE' }, auth))).status).toBe(200);
     const left = await db().prepare('SELECT count(*) AS c FROM player_entry WHERE player_id = ?1').bind(playerId).first<{ c: number }>();
     expect(left?.c).toBe(0);
+    await expect(putEntry(db(), playerId, { requestId: rid(), prologue: true, tutorials: 1 })).rejects.toMatchObject({ status: 401 });
+    expect((await db().prepare('SELECT COUNT(*) AS n FROM player_entry WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(0);
   });
 });

@@ -23,11 +23,12 @@ export async function operationStatus(db: D1Database, playerId: string, requestI
     const gear = /^\/api\/v1\/gear\/([1-9]\d{0,15})\/(level-up|ascend|reroll|dismantle)$/.exec(path);
     const mail = /^\/api\/v1\/mail\/([1-9]\d{0,15})\/claim$/.exec(path);
     const task = path === '/api/v1/tasks/claim';
-    if (!character && !task && (!gear || !Number.isSafeInteger(Number(gear[1]))) && (!mail || !Number.isSafeInteger(Number(mail[1]))))
+    const checkpoint = path === '/api/v1/entry' ? 'entry_checkpoint' : path === '/api/v1/save' ? 'cloud_save' : null;
+    if (!character && !task && !checkpoint && (!gear || !Number.isSafeInteger(Number(gear[1]))) && (!mail || !Number.isSafeInteger(Number(mail[1]))))
       throw new HttpError(400, 'bad_request', 'unsupported operation path');
     const kind = character
       ? `${character[2] === 'level-up' ? 'level_up' : character[2] === 'ascend' ? 'ascend' : `skill:${character[3]}`}:${character[1]}`
-      : gear ? `gear_${gear[2] === 'level-up' ? 'level' : gear[2]}:${gear[1]}` : mail ? `mail_claim:${mail[1]}` : null;
+      : gear ? `gear_${gear[2] === 'level-up' ? 'level' : gear[2]}:${gear[1]}` : mail ? `mail_claim:${mail[1]}` : checkpoint;
     row = await db.prepare('SELECT kind, input_json, result_json FROM progression_requests WHERE player_id = ?1 AND request_id = ?2').bind(playerId, requestId).first<StoredOperation>();
     if (row && (task ? !row.kind?.startsWith('task_claim:') : row.kind !== kind)) throw new HttpError(409, 'request_id_reused', 'this identity belongs to another operation');
   }

@@ -159,6 +159,7 @@ export class GameApi extends EventTarget {
   private verifiedAccount: { version: number; id: string } | null = null;
   private signingIn = 0;
   private activeOperations = new Map<string, Promise<unknown>>();
+  private entryWrites: Promise<unknown> = Promise.resolve();
 
   constructor(private readonly base = API_BASE, private readonly journal = new OperationJournal()) {
     super();
@@ -180,6 +181,7 @@ export class GameApi extends EventTarget {
   private store(s: Session | null): void {
     this.authVersion++;
     this.session = s;
+    this.entryWrites = Promise.resolve();
     try {
       if (s) localStorage.setItem(KEY, JSON.stringify(s));
       else localStorage.removeItem(KEY);
@@ -210,6 +212,8 @@ export class GameApi extends EventTarget {
       if (res.status === 401 && auth && requestSession && this.session === requestSession && this.authVersion === requestAuthVersion) this.store(null);
       throw new ApiError(res.status, e.error ?? 'http_error', e.message ?? `HTTP ${res.status}`, e.detail);
     }
+    if (auth && method === 'GET' && requestAuthVersion !== this.authVersion)
+      throw new ApiError(409, 'auth_changed', 'The account changed before its data arrived');
     return json as T;
   }
 
@@ -263,12 +267,12 @@ export class GameApi extends EventTarget {
       if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
       let result: unknown;
       try {
-        result = await this.call('POST', checked.path, checked.body);
+        result = await this.call(checked.method, checked.path, checked.body);
         this.validateOperationResult(checked, result);
       } catch (error) {
         const definite = attempts === 1 && error instanceof ApiError && ([400, 402, 403, 404, 413, 422].includes(error.status)
           || error.status === 409 && ['already_claimed', 'expired', 'revoked', 'period_closed', 'not_done', 'at_cap', 'not_at_cap', 'max_rank', 'max_ascension',
-            'account_level_too_low', 'level_too_low', 'story_gate', 'equipped', 'locked', 'request_id_reused', 'entitlement_unavailable', 'release_not_economic'].includes(error.code));
+            'account_level_too_low', 'level_too_low', 'story_gate', 'equipped', 'locked', 'request_id_reused', 'entitlement_unavailable', 'release_not_economic', 'save_conflict'].includes(error.code));
         await this.journal.finish(checked.scope, checked.id, definite ? 'rejected' : 'pending', undefined, error instanceof ApiError ? error.code : 'confirmation_pending');
         this.dispatchEvent(new Event('operations'));
         throw error;
@@ -282,11 +286,11 @@ export class GameApi extends EventTarget {
     try { return await request as T; } finally { if (this.activeOperations.get(checked.id) === request) this.activeOperations.delete(checked.id); }
   }
 
-  private async mutate<T>(path: string, body: Record<string, unknown>): Promise<T> {
+  private async mutate<T>(path: string, body: Record<string, unknown>, method: 'POST' | 'PUT' = 'POST'): Promise<T> {
     const snapshot = structuredClone(body);
     const { scope, version } = await this.accountScope();
     let operation: OperationRecord;
-    try { operation = await this.journal.begin(scope, 'POST', path, snapshot); }
+    try { operation = await this.journal.begin(scope, method, path, snapshot); }
     catch (error) { throw new ApiError(409, 'operation_not_saved', error instanceof Error ? error.message : 'The action could not be saved; no request was sent'); }
     this.dispatchEvent(new Event('operations'));
     return this.executeOperation<T>(operation, version);
@@ -297,7 +301,8 @@ export class GameApi extends EventTarget {
   private validateOperationResult(operation: OperationRecord, result: unknown): void {
     const value = result as { requestId?: string; pulls?: unknown[]; nodeId?: string; character?: string; level?: number; id?: number;
       ascension?: number; skillId?: string; rank?: number; stats?: { subs?: unknown[] }; gained?: unknown[];
-      mailId?: number; claimed?: unknown[]; periodKey?: string; taskId?: string; rewards?: unknown[] } | null;
+      mailId?: number; claimed?: unknown[]; periodKey?: string; taskId?: string; rewards?: unknown[];
+      version?: number; phase?: string; prologue?: boolean; tutorials?: number; playerId?: string } | null;
     if (!value || typeof value !== 'object'
       || operation.path === '/api/v1/gacha/pull' && (value.requestId !== operation.id || !Array.isArray(value.pulls) || value.pulls.length !== operation.body.count)
       || operation.path === '/api/v1/progress/battle' && (value.requestId !== operation.id || value.nodeId !== operation.body.nodeId)
@@ -310,7 +315,12 @@ export class GameApi extends EventTarget {
         || operation.path.endsWith('/reroll') && !Array.isArray(value.stats?.subs)
         || operation.path.endsWith('/dismantle') && !Array.isArray(value.gained))
       || operation.path.startsWith('/api/v1/mail/') && (value.requestId !== operation.id || value.mailId !== Number(operation.path.split('/')[4]) || !Array.isArray(value.claimed))
-      || operation.path === '/api/v1/tasks/claim' && (value.requestId !== operation.id || value.taskId !== operation.body.taskId || value.periodKey !== operation.body.periodKey || !Array.isArray(value.rewards)))
+      || operation.path === '/api/v1/tasks/claim' && (value.requestId !== operation.id || value.taskId !== operation.body.taskId || value.periodKey !== operation.body.periodKey || !Array.isArray(value.rewards))
+      || operation.path === '/api/v1/save' && (value.requestId !== operation.id || value.version !== Number(operation.body.expectedVersion) + 1)
+      || operation.path === '/api/v1/entry' && (value.requestId !== operation.id || value.playerId !== JSON.parse(operation.scope)[1]
+        || !['not_started', 'in_progress', 'completed'].includes(value.phase ?? '') || typeof value.prologue !== 'boolean' || !Number.isSafeInteger(value.tutorials)
+        || Number(value.tutorials) < Number(operation.body.tutorials) || Number(value.tutorials) > 3 || operation.body.prologue === true && !value.prologue
+        || operation.body.completed === true && value.phase !== 'completed'))
       throw new ApiError(503, 'invalid_response', 'The action has not been confirmed');
   }
   async retryOperation<T>(id: string): Promise<T> {
@@ -337,7 +347,23 @@ export class GameApi extends EventTarget {
   }
 
   entry = (): Promise<EntryCheckpoint> => this.call('GET', '/api/v1/entry');
-  putEntry = (b: { prologue: boolean; tutorials: number; completed?: boolean }): Promise<EntryCheckpoint> => this.call('PUT', '/api/v1/entry', b);
+  putEntry(b: { prologue: boolean; tutorials: number; completed?: boolean }): Promise<EntryCheckpoint> {
+    const snapshot = structuredClone(b); const version = this.authVersion;
+    const work = this.entryWrites.catch(() => undefined).then(async () => {
+      if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
+      const pending = (await this.operations()).find((r) => r.path === '/api/v1/entry' && r.state === 'pending');
+      if (pending) {
+        const { requestId: _identity, ...original } = pending.body;
+        const recovered = await this.retryOperation<EntryCheckpoint>(pending.id);
+        if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
+        if (canonicalJson(original) === canonicalJson(snapshot)) return recovered;
+      }
+      if (version !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The account changed');
+      return this.mutate<EntryCheckpoint>('/api/v1/entry', snapshot, 'PUT');
+    });
+    this.entryWrites = work;
+    return work;
+  }
 
   me = (): Promise<{ id: string; displayName: string | null; createdAt: string; billingTag: string }> => this.call('GET', '/api/v1/me');
   async wallet(): Promise<Wallets> {
@@ -399,7 +425,7 @@ export class GameApi extends EventTarget {
     return this.call('GET', '/api/v1/save');
   }
   writeSave(expectedVersion: number, data: Record<string, unknown>): Promise<{ version: number }> {
-    return this.call('PUT', '/api/v1/save', { expectedVersion, data });
+    return this.mutate('/api/v1/save', { expectedVersion, data }, 'PUT');
   }
   characters(): Promise<{ account: { level: number; xp: number }; characters: CharacterView[] }> {
     return this.call('GET', '/api/v1/characters/mine');

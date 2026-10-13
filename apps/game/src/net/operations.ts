@@ -18,7 +18,7 @@ export interface OperationRecord {
 export interface OperationStorage {
   change<T>(work: (records: OperationRecord[]) => T): Promise<T>;
 }
-const MUTATION_PATH = /^\/api\/v1\/(gacha\/pull|progress\/battle|characters\/[a-z][a-z0-9_]{0,79}\/(level-up|ascend|skills\/[a-z][a-z0-9_]{0,79}\/upgrade)|gear\/\d+\/(level-up|ascend|reroll|dismantle)|mail\/\d+\/claim|tasks\/claim)$/;
+const MUTATION_PATH = /^\/api\/v1\/(gacha\/pull|progress\/battle|characters\/[a-z][a-z0-9_]{0,79}\/(level-up|ascend|skills\/[a-z][a-z0-9_]{0,79}\/upgrade)|gear\/\d+\/(level-up|ascend|reroll|dismantle)|mail\/\d+\/claim|tasks\/claim|entry|save)$/;
 const MAX_PENDING = 64;
 const MAX_HISTORY = 64;
 
@@ -26,7 +26,7 @@ function valid(record: OperationRecord): boolean {
   return typeof record === 'object' && record !== null && typeof record.id === 'string' && /^[A-Za-z0-9_-]{8,64}$/.test(record.id)
     && typeof record.scope === 'string' && typeof record.signature === 'string' && /^[a-f0-9]{64}$/.test(record.signature)
     && typeof record.payloadHash === 'string' && /^[a-f0-9]{64}$/.test(record.payloadHash)
-    && record.method === 'POST' && MUTATION_PATH.test(record.path) && typeof record.body === 'object' && record.body !== null && !Array.isArray(record.body)
+    && record.method === (/^\/api\/v1\/(entry|save)$/.test(record.path) ? 'PUT' : 'POST') && MUTATION_PATH.test(record.path) && typeof record.body === 'object' && record.body !== null && !Array.isArray(record.body)
     && record.body.requestId === record.id && ['pending', 'confirmed', 'rejected'].includes(record.state) && Number.isFinite(record.at)
     && Number.isSafeInteger(record.attempts) && record.attempts >= 0;
 }
@@ -77,8 +77,8 @@ export class OperationJournal {
   private payloadHash(record: Pick<OperationRecord, 'id' | 'scope' | 'method' | 'path' | 'body'>): Promise<string> {
     return sha256Hex(canonicalJson({ id: record.id, scope: record.scope, method: record.method, path: record.path, body: record.body }));
   }
-  async begin(scope: string, method: 'POST', path: string, body: Record<string, unknown>): Promise<OperationRecord> {
-    if (method !== 'POST' || !MUTATION_PATH.test(path)) throw new Error('Unsupported durable operation');
+  async begin(scope: string, method: 'POST' | 'PUT', path: string, body: Record<string, unknown>): Promise<OperationRecord> {
+    if (method !== (/^\/api\/v1\/(entry|save)$/.test(path) ? 'PUT' : 'POST') || !MUTATION_PATH.test(path)) throw new Error('Unsupported durable operation');
     const serialized = JSON.stringify(body);
     if (/"(?:purchaseToken|idToken|token|authorization|refreshToken|accessToken)"\s*:/i.test(serialized)) throw new Error('Credentials cannot be recorded in an operation');
     if (new TextEncoder().encode(serialized).byteLength > 65_536) throw new Error('Operation payload is too large');

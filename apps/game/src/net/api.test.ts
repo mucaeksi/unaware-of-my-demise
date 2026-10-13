@@ -33,6 +33,17 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('authentication response ownership', () => {
+  it('successful old-account checkpoint/save reads never reach the newly selected account', async () => {
+    for (const kind of ['entry', 'save']) {
+      values.set(sessionKey, JSON.stringify({ token: 'session-A', expiresAt: expiry() }));
+      const delayed = deferred(); vi.stubGlobal('fetch', vi.fn().mockReturnValueOnce(delayed.promise).mockResolvedValueOnce(success()));
+      const api = new GameApi('https://game.test'); const older = kind === 'entry' ? api.entry() : api.readSave();
+      const rejected = expect(older).rejects.toMatchObject({ code: 'auth_changed' });
+      await api.signInWithIdToken('identity-B'); delayed.resolve(Response.json({ playerId: 'player-A', version: 1, data: { private: 'old account' } }));
+      await rejected; expect(api.signedIn).toBe(true);
+    }
+  });
+
   it('an old unauthorized response cannot sign a newer account out', async () => {
     const delayed = deferred(); const fetch = vi.fn().mockReturnValueOnce(delayed.promise).mockResolvedValueOnce(success()).mockResolvedValueOnce(Response.json({ id: 'player-B' }));
     vi.stubGlobal('fetch', fetch); const api = new GameApi('https://game.test');
@@ -66,6 +77,67 @@ describe('authentication response ownership', () => {
 });
 
 describe('durable client operations', () => {
+  it('cloud-save response loss retains its PUT identity and confirms the original version after reload', async () => {
+    const storage = new TestOperationStorage(); let sent = ''; let posts = 0;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (url.includes('/operations/')) {
+        const input = JSON.parse(sent);
+        return Response.json({ requestId: input.requestId, path: '/api/v1/save', state: 'confirmed', binding: 'exact', inputHash: await sha256Hex(canonicalJson(input)), result: { requestId: input.requestId, version: 1 } });
+      }
+      expect(init.method).toBe('PUT'); posts++; sent = init.body as string; throw new TypeError('save response lost');
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.writeSave(0, { progress: 1 })).rejects.toThrow();
+    const reload = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(reload.retryOperation(storage.records[0]!.id)).resolves.toMatchObject({ version: 1 });
+    expect(posts).toBe(1); expect(storage.records[0]).toMatchObject({ method: 'PUT', state: 'confirmed' });
+  });
+
+  it('entry checkpoints recover their pending predecessor before submitting higher progress', async () => {
+    const storage = new TestOperationStorage(); const sent: Record<string, unknown>[] = []; let recovered = 0;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (url.includes('/operations/')) {
+        recovered++; const original = sent[0]!;
+        return Response.json({ requestId: original.requestId, path: '/api/v1/entry', state: 'confirmed', binding: 'exact', inputHash: await sha256Hex(canonicalJson(original)),
+          result: { requestId: original.requestId, playerId: 'player-A', phase: 'in_progress', prologue: true, tutorials: 0 } });
+      }
+      const input = JSON.parse(init.body as string); expect(init.method).toBe('PUT'); sent.push(input);
+      if (sent.length === 1) throw new TypeError('checkpoint response lost');
+      return Response.json({ requestId: input.requestId, playerId: 'player-A', phase: 'in_progress', prologue: true, tutorials: input.tutorials });
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.putEntry({ prologue: true, tutorials: 0 })).rejects.toThrow();
+    await expect(api.putEntry({ prologue: true, tutorials: 2 })).resolves.toMatchObject({ tutorials: 2 });
+    expect(recovered).toBe(1); expect(sent).toHaveLength(2);
+    expect(sent[1]!.requestId).not.toBe(sent[0]!.requestId); expect(storage.records.every((r) => r.state === 'confirmed')).toBe(true);
+  });
+
+  it('an account switch during checkpoint recovery cannot submit the old progress under the new account', async () => {
+    const storage = new TestOperationStorage(); const status = deferred(); let sent = ''; let checkpoints = 0; let checking = false;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (url.endsWith('/google')) return success();
+      if (url.includes('/operations/')) { checking = true; return status.promise; }
+      sent = init.body as string; checkpoints++; throw new TypeError('lost checkpoint');
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.putEntry({ prologue: true, tutorials: 0 })).rejects.toThrow();
+    const continuing = api.putEntry({ prologue: true, tutorials: 2 }); const rejected = expect(continuing).rejects.toMatchObject({ code: 'auth_changed' });
+    await vi.waitFor(() => expect(checking).toBe(true)); await api.signInWithIdToken('identity-B');
+    const original = JSON.parse(sent);
+    status.resolve(Response.json({ requestId: original.requestId, path: '/api/v1/entry', state: 'confirmed', binding: 'exact', inputHash: await sha256Hex(canonicalJson(original)), result: { requestId: original.requestId, playerId: 'player-A', phase: 'in_progress', prologue: true, tutorials: 0 } }));
+    await rejected; expect(checkpoints).toBe(1);
+  });
+
+  it('durable method/path binding rejects invalid verbs before any record is written', async () => {
+    const storage = new TestOperationStorage(); const journal = new OperationJournal(storage);
+    await expect(journal.begin('scope', 'POST', '/api/v1/entry', { prologue: true, tutorials: 0 })).rejects.toThrow(/Unsupported/);
+    await expect(journal.begin('scope', 'PUT', '/api/v1/gacha/pull', { bannerId: 'banner', count: 1 })).rejects.toThrow(/Unsupported/);
+    expect(storage.records).toHaveLength(0);
+  });
+
   it('mail response loss preserves the original account-scoped claim across reload', async () => {
     const storage = new TestOperationStorage(); const sent: string[] = [];
     vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {

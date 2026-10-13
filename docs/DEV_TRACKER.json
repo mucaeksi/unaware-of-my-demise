@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R05-D mail/task result recovery verified; checkpoint/save next",
-      "detail": "561 application/tool tests and lint/typecheck pass; real desktop/phone account flows and four real-Worker response-loss/reload scenarios pass. Mail/tasks journal frozen original results atomically with their claim/grants, including window/catalog changes and rollback. Continue checkpoint/cloud-save and player/purchase lifecycle recovery."
+      "title": "R05-E checkpoint/save recovery verified; player/session/purchase lifecycle next",
+      "detail": "570 application/tool tests, lint/typecheck, eight real-Worker response-loss/reload cases and four entry-menu cases pass. Checkpoint/CAS and original result commit together, fault/deletion guards hold, later device data remains intact, and queued progress/authenticated reads are account-fenced. Continue visible recovery, session/lifecycle and purchase metadata; native/store acceptance stays separate."
     }
   ],
   "next": [
@@ -620,6 +620,30 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R05-E-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "333c0ca8",
+      "verifiedAt": "2026-10-13T08:12:29+00:00",
+      "scope": "R05-E working tree: entry monotonic updates and cloud-save CAS atomically journal canonical ID-bearing original results; same-ID races, changed-input reuse, no-op receipt, journal fault rollback and active-account post-deletion guards are covered. Original save v1 is recoverable after another writer advances to v2 without another write; checkpoint replay does not lower later completion. Legacy no-ID compatibility retained. Client PUT/path identity, checkpoint queue/predecessor recovery, account-version fences and rejection of stale successful authenticated GETs prevent old checkpoint/save data crossing selection. Four new API/five client cases and all 570 application/tool tests, lint/typecheck and both builds pass. Eight real-Worker desktop/phone response-loss+reload cases recover gacha/mail/checkpoint/save without additional confirmed-operation writes; four actual fresh/returning menu cases pass. All 25 local migrations pass. No full narrative/Finish/Continue, physical Android, deployed or complete-R05 proof; player/session/purchase lifecycle remains.",
+      "testIds": [
+        "apps/api/test/entry.test.ts",
+        "apps/api/test/progress.test.ts",
+        "apps/game/src/net/api.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "tests/e2e/operation-recovery.spec.ts (eight cases, both projects)",
+        "tests/e2e/entry.spec.ts (four menu cases)",
+        "npm run build -w @uomd/game",
+        "npm run build -w @uomd/admin",
+        "E2E local Workers with 25 migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -951,7 +975,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
-      "implemented": "R05-A\u2013D auth fences, durable identities/payload/account scopes, authoritative exact result/input recovery and atomic mail/task result journals are locally verified. Summons, battles, growth/gear and claims have durable wrappers; legacy input proof remains unknown. Checkpoint/cloud-save, purchase lifecycle and player recovery UI remain open; native/deployed acceptance is separate.",
+      "implemented": "R05-A\u2013E auth fences, durable identities/payload/account scopes, exact authoritative result recovery and atomic growth/claim/checkpoint/cloud-save journals are locally verified. PUT checkpoint queues and stale successful GET fences protect account selection. Purchase lifecycle, visible player recovery and remaining session/lifecycle boundaries remain open; native/deployed acceptance is separate.",
       "dependsOn": [
         "R01",
         "R02",
@@ -970,7 +994,9 @@
         "apps/api/test/operation-status.test.ts",
         "apps/api/src/db/operations.ts",
         "apps/api/src/mail/service.ts",
-        "apps/api/src/tasks/service.ts"
+        "apps/api/src/tasks/service.ts",
+        "apps/api/src/entry/service.ts",
+        "apps/api/src/progress/service.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -979,7 +1005,8 @@
         "E-R05-A-20261013",
         "E-R05-B-20261013",
         "E-R05-C-20261013",
-        "E-R05-D-20261013"
+        "E-R05-D-20261013",
+        "E-R05-E-20261013"
       ],
       "blockerIds": []
     },

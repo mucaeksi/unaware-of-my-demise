@@ -12,7 +12,7 @@ async function signIn(page: Page, subject: string): Promise<{ id: string }> {
 }
 
 test('lost summon response survives reload and spends exactly once on the real Worker', async ({ page, request }, info) => {
-  await openGame(page);
+  await openGame(page, '/', { fresh: true });
   const player = await signIn(page, `recovery-${info.project.name}`);
   const adjustment = await request.post(`${ADMIN}/admin/api/players/${player.id}/adjust`, {
     data: { currency: 'eclipse_token', delta: 320, reason: 'isolated recovery fixture', requestId: `recovery_${info.project.name}` },
@@ -48,7 +48,7 @@ test('lost summon response survives reload and spends exactly once on the real W
 });
 
 test('a committed mail claim recovers after reload without sending another claim', async ({ page, request }, info) => {
-  await openGame(page); const player = await signIn(page, `mail-recovery-${info.project.name}`);
+  await openGame(page, '/', { fresh: true }); const player = await signIn(page, `mail-recovery-${info.project.name}`);
   const created = await request.post(`${ADMIN}/admin/api/players/${player.id}/mail`, {
     data: { reason: 'isolated response-loss fixture', mail: { kind: 'reward', title: 'Recovery fixture', attachments: [{ type: 'currency', currency: 'eclipse_token', amount: 10 }] } },
     headers: { 'Cf-Access-Jwt-Assertion': process.env.E2E_ADMIN_JWT! }
@@ -78,4 +78,56 @@ test('a committed mail claim recovers after reload without sending another claim
   expect(state.wallet.eclipse_token).toBe(10);
   expect(state.operations).toHaveLength(1); expect(state.operations[0].state).toBe('confirmed');
   expect(state.mail.find((mail: any) => mail.id === id).claimed_at).not.toBeNull();
+});
+
+test('cloud-save response loss recovers its original version after a later device write', async ({ page }, info) => {
+  await openGame(page, '/', { fresh: true }); await signIn(page, `save-recovery-${info.project.name}`);
+  let originalId = ''; let committed = false;
+  await page.route('**/api/v1/save', async (route) => {
+    if (route.request().method() !== 'PUT') return route.continue();
+    originalId = route.request().postDataJSON().requestId;
+    const response = await route.fetch(); expect(response.status()).toBe(200);
+    committed = true; await route.abort('failed');
+  });
+  expect(await page.evaluate(async () => {
+    try { await (window as any).__UOMD__.services.api.writeSave(0, { device: 'original' }); return false; } catch { return true; }
+  })).toBe(true);
+  expect(committed).toBe(true);
+  await page.unroute('**/api/v1/save');
+  // A separate device advances the version while the original device still has an uncertain result.
+  expect(await page.evaluate(async () => (window as any).__UOMD__.services.api.call('PUT', '/api/v1/save', { expectedVersion: 1, data: { device: 'newer' } }))).toMatchObject({ version: 2 });
+  await page.reload(); await page.waitForFunction(() => (window as any).__UOMD__?.services.api.signedIn);
+  let recoveryWrites = 0;
+  await page.route('**/api/v1/save', async (route) => {
+    if (route.request().method() !== 'PUT') return route.continue();
+    recoveryWrites++; await route.abort('failed');
+  });
+  const result = await page.evaluate(async (id) => (window as any).__UOMD__.services.api.retryOperation(id), originalId);
+  expect(result).toMatchObject({ requestId: originalId, version: 1 }); expect(recoveryWrites).toBe(0);
+  expect(await page.evaluate(async () => (window as any).__UOMD__.services.api.readSave())).toMatchObject({ version: 2, data: { device: 'newer' } });
+});
+
+test('a committed checkpoint survives response loss and reload without another PUT', async ({ page }, info) => {
+  await openGame(page, '/', { fresh: true }); await signIn(page, `entry-recovery-${info.project.name}`);
+  let originalId = ''; let committed = false;
+  await page.route('**/api/v1/entry', async (route) => {
+    if (route.request().method() !== 'PUT') return route.continue();
+    originalId = route.request().postDataJSON().requestId;
+    const response = await route.fetch(); expect(response.status()).toBe(200);
+    committed = true; await route.abort('failed');
+  });
+  expect(await page.evaluate(async () => {
+    try { await (window as any).__UOMD__.services.api.putEntry({ prologue: true, tutorials: 1 }); return false; } catch { return true; }
+  })).toBe(true);
+  expect(committed).toBe(true);
+  await page.unroute('**/api/v1/entry'); await page.reload();
+  await page.waitForFunction(() => (window as any).__UOMD__?.services.api.signedIn);
+  let recoveryWrites = 0;
+  await page.route('**/api/v1/entry', async (route) => {
+    if (route.request().method() !== 'PUT') return route.continue();
+    recoveryWrites++; await route.abort('failed');
+  });
+  expect(await page.evaluate(async (id) => (window as any).__UOMD__.services.api.retryOperation(id), originalId)).toMatchObject({ requestId: originalId, tutorials: 1, prologue: true });
+  expect(recoveryWrites).toBe(0);
+  expect(await page.evaluate(async () => (window as any).__UOMD__.services.api.entry())).toMatchObject({ tutorials: 1, phase: 'in_progress' });
 });
