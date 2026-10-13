@@ -1,6 +1,6 @@
 import { ContentManifest, type ManifestFile } from '@uomd/content-schema';
 import { compareSemver, sha256Hex, verifyPayload, type SignedPayload } from '@uomd/shared';
-import type { ActiveRelease, ApplyOptions, BaseContent, ContentStorage, PatchEnv, PatchOutcome, PatchProgress, PatchState, RejectReason, RemoteSource } from './types';
+import type { ActiveRelease, ApplyOptions, BaseContent, ContentStorage, GenerationMark, PatchEnv, PatchOutcome, PatchProgress, PatchState, RejectReason, RemoteSource, StorageSnapshot } from './types';
 
 const EMPTY: PatchState = { schema: 1, active: null, previous: null, staged: null, denied: [] };
 
@@ -18,6 +18,7 @@ class Reject extends Error {
  *  - the previous release is kept for rollback; failures never touch the active release.
  */
 export class PatchManager {
+  private validated: { key: string; state: PatchState } | null = null;
   constructor(
     private readonly env: PatchEnv,
     private readonly storage: ContentStorage,
@@ -26,7 +27,56 @@ export class PatchManager {
   ) {}
 
   async state(): Promise<PatchState> {
-    return (await this.storage.getState()) ?? EMPTY;
+    return this.validState(await this.storage.getState());
+  }
+
+  private async validState(raw: PatchState | null): Promise<PatchState> {
+    if (!raw) return structuredClone(EMPTY);
+    let key: string;
+    try { key = JSON.stringify(raw); } catch { return structuredClone(EMPTY); }
+    if (this.validated?.key === key) return structuredClone(this.validated.state);
+    if (raw.schema !== 1 || !Array.isArray(raw.denied) || raw.denied.some((id) => typeof id !== 'string')) return structuredClone(EMPTY);
+    const state: PatchState = { ...EMPTY, denied: [...raw.denied] };
+    const valid = async (release: ActiveRelease | null | undefined): Promise<ActiveRelease | null> => {
+      if (!release) return null;
+      try {
+        const manifest = await this.admit(release.manifest, state);
+        if (release.releaseId !== manifest.release.id || release.generation !== manifest.release.generation || !Number.isFinite(Date.parse(release.activatedAt))) return null;
+        return { ...release, manifest };
+      } catch { return null; }
+    };
+    state.active = await valid(raw.active); state.previous = await valid(raw.previous); state.staged = await valid(raw.staged);
+    if (raw.active && !state.active && state.previous) { state.active = state.previous; state.previous = null; }
+    this.validated = { key, state: structuredClone(state) };
+    return state;
+  }
+
+  /** Crypto validation happens outside IDB; compare the exact snapshot again inside its write transaction. */
+  private async commit(change: (state: PatchState, mark: GenerationMark) => StorageSnapshot | null): Promise<boolean> {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const raw = await this.storage.getState(); const state = await this.validState(raw); let matched = false;
+      const result = await this.storage.updateState(this.env.channel, (current) => {
+        if (JSON.stringify(current.state) !== JSON.stringify(raw)) return null;
+        matched = true;
+        let mark = current.highWater;
+        if (mark && (!Number.isSafeInteger(mark.generation) || mark.generation < 1 || typeof mark.releaseId !== 'string' || typeof mark.killed !== 'boolean')) throw new Reject('storage_state_invalid', 'accepted generation record is corrupted');
+        const candidates: GenerationMark[] = [{ generation: this.base.generation, releaseId: this.base.releaseId, killed: false }, ...[state.active, state.previous, state.staged].filter((r): r is ActiveRelease => !!r).map((r) => ({ generation: r.generation, releaseId: r.releaseId, killed: r.manifest.rollout.kill_switch }))];
+        for (const candidate of candidates) if (!mark || candidate.generation > mark.generation) mark = candidate;
+        return change(state, mark!);
+      });
+      if (matched) return result;
+    }
+    throw new Reject('storage_busy', 'content state changed concurrently; retry the update');
+  }
+
+  private async highWater(): Promise<GenerationMark> {
+    let mark!: GenerationMark;
+    await this.commit((state, known) => { mark = known; return { state: state.active || state.previous || state.staged || state.denied.length ? state : null, highWater: known }; });
+    return mark;
+  }
+
+  private sameMark(mark: GenerationMark, manifest: ContentManifest): boolean {
+    return mark.generation === manifest.release.generation && mark.releaseId === manifest.release.id && mark.killed === manifest.rollout.kill_switch;
   }
 
   /** Looks for a newer release and applies (or, with `activate: false`, stages) it. Never throws for expected failure modes. */
@@ -42,8 +92,14 @@ export class PatchManager {
     if (raw === null) return { status: 'up_to_date', releaseId: state.active?.releaseId ?? null };
     try {
       const manifest = await this.admit(raw, state);
+      const highest = await this.highWater();
+      if (manifest.release.generation < highest.generation || manifest.release.generation === highest.generation && !this.sameMark(highest, manifest)) throw new Reject('stale_generation', 'manifest predates the greatest accepted generation');
       if (manifest.rollout.kill_switch) {
-        if (state.active) await this.storage.setState({ ...state, active: null, previous: state.active });
+        const committed = await this.commit((current, mark) => {
+          if (manifest.release.generation < mark.generation || manifest.release.generation === mark.generation && !this.sameMark(mark, manifest)) return null;
+          return { state: { ...current, active: null, previous: current.active ?? current.previous, staged: null }, highWater: { generation: manifest.release.generation, releaseId: manifest.release.id, killed: true } };
+        });
+        if (!committed) throw new Reject('stale_generation', 'a newer generation won before the kill committed');
         return { status: 'reverted_to_base', reason: 'kill_switch' };
       }
       const currentGen = state.active?.generation ?? this.base.generation;
@@ -56,7 +112,8 @@ export class PatchManager {
         const done = await this.activateStaged(opts.onProgress);
         if (done) return done;
       }
-      return await this.apply(manifest, state, opts);
+      if (this.sameMark(highest, manifest) && !state.staged) throw new Reject('stale_generation', 'this generation cannot be reapplied after fallback');
+      return await this.apply(manifest, opts);
     } catch (e) {
       if (e instanceof Reject) return { status: 'rejected', reason: e.reason, detail: e.message };
       throw e;
@@ -89,10 +146,12 @@ export class PatchManager {
 
   /** Re-activates the previous release (or the embedded base). Returns false when already on base. */
   async rollback(): Promise<boolean> {
-    const st = await this.state();
-    if (!st.active) return false;
-    const denied = st.denied.includes(st.active.releaseId) ? st.denied : [...st.denied, st.active.releaseId];
-    await this.storage.setState({ schema: 1, active: st.previous, previous: null, staged: st.staged ?? null, denied });
+    const changed = await this.commit((st, mark) => {
+      if (!st.active) return null;
+      const denied = st.denied.includes(st.active.releaseId) ? st.denied : [...st.denied, st.active.releaseId];
+      return { state: { ...st, active: st.previous, previous: null, denied }, highWater: mark };
+    });
+    if (!changed) return false;
     await this.collect();
     return true;
   }
@@ -110,7 +169,7 @@ export class PatchManager {
     if (m.compat.content_schema > this.env.supportedContentSchema) throw new Reject('schema_too_new', `content schema ${m.compat.content_schema} > ${this.env.supportedContentSchema}`);
     if (state.denied.includes(m.release.id)) throw new Reject('denied_release', `${m.release.id} previously failed on this device`);
     const dep = m.depends_on;
-    if (dep && dep.release_id !== this.base.releaseId) throw new Reject('dependency_mismatch', `needs ${dep.release_id}, base is ${this.base.releaseId}`);
+    if (dep && (dep.release_id !== this.base.releaseId || dep.generation !== this.base.generation)) throw new Reject('dependency_mismatch', `needs ${dep.release_id} g${dep.generation}, base is ${this.base.releaseId} g${this.base.generation}`);
     return m;
   }
 
@@ -121,7 +180,7 @@ export class PatchManager {
     return parseInt(h.slice(0, 8), 16) % 100 < m.rollout.percent;
   }
 
-  private async apply(m: ContentManifest, state: PatchState, opts: ApplyOptions): Promise<PatchOutcome> {
+  private async apply(m: ContentManifest, opts: ApplyOptions): Promise<PatchOutcome> {
     const emit = (phase: PatchProgress['phase'], p: Partial<PatchProgress> = {}): void =>
       opts.onProgress?.({ phase, releaseId: m.release.id, filesDone: 0, filesTotal: 0, bytesDone: 0, bytesTotal: 0, ...p });
     // 1. what is missing locally? (base-identical files and already-stored objects are free)
@@ -149,12 +208,13 @@ export class PatchManager {
     for (const f of m.files) {
       const bytes = this.base.files[f.path] === f.sha256 ? await this.base.read(f.path) : await this.storage.getObject(f.sha256);
       if (!bytes) throw new Reject('download_failed', `object for ${f.path} vanished from storage`);
+      if (bytes.byteLength !== f.bytes || (await sha256Hex(bytes)) !== f.sha256) throw new Reject('hash_mismatch', `stored object for ${f.path} is damaged`);
       files.set(f.path, bytes);
     }
     try {
       await this.env.validate(files, m, this.base);
     } catch (e) {
-      await this.storage.setState({ ...state, denied: [...new Set([...state.denied, m.release.id])] });
+      await this.commit((current, mark) => ({ state: { ...current, denied: [...new Set([...current.denied, m.release.id])] }, highWater: mark }));
       throw new Reject('validation_failed', e instanceof Error ? e.message : String(e));
     }
 
@@ -164,15 +224,19 @@ export class PatchManager {
       manifest: m,
       activatedAt: (this.env.now?.() ?? new Date()).toISOString()
     };
+    const stored = await this.commit((current, mark) => {
+      if (m.release.generation < mark.generation || m.release.generation === mark.generation && !this.sameMark(mark, m) || current.denied.includes(m.release.id)) return null;
+      const highWater = { generation: m.release.generation, releaseId: m.release.id, killed: false };
+      return { state: opts.activate === false ? { ...current, staged: next } : { ...current, active: next, previous: current.active, staged: null }, highWater };
+    });
+    if (!stored) throw new Reject('stale_generation', 'a newer accepted generation won during the download');
     if (opts.activate === false) {
       // parked: the objects stay in storage (kept by collect) and the next start switches it on without a network
-      await this.storage.setState({ ...state, staged: next });
       return { status: 'staged', releaseId: next.releaseId, generation: next.generation, downloadedBytes: downloaded, downloadedFiles: missing.length };
     }
 
     // 4. atomic activation; the old active release becomes the rollback target
     emit('activating', { filesDone: missing.length, filesTotal: missing.length, bytesDone: addBytes, bytesTotal: addBytes });
-    await this.storage.setState({ schema: 1, active: next, previous: state.active, staged: null, denied: state.denied });
     await this.collect();
     return { status: 'applied', releaseId: next.releaseId, generation: next.generation, downloadedBytes: downloaded, downloadedFiles: missing.length };
   }
@@ -188,6 +252,9 @@ export class PatchManager {
     const m = staged.manifest;
     onProgress?.({ phase: 'activating', releaseId: m.release.id, filesDone: 0, filesTotal: m.files.length, bytesDone: 0, bytesTotal: 0 });
     try {
+      await this.admit(m, state);
+      const highest = await this.highWater();
+      if (m.release.generation < highest.generation || m.release.generation === highest.generation && !this.sameMark(highest, m)) throw new Reject('stale_generation', 'staged release predates the greatest accepted generation');
       const currentGen = state.active?.generation ?? this.base.generation;
       if (m.release.generation <= currentGen || state.denied.includes(m.release.id)) throw new Reject('stale_generation', 'staged release is no longer newer than the active one');
       const files = new Map<string, Uint8Array>();
@@ -198,13 +265,17 @@ export class PatchManager {
       }
       await this.env.validate(files, m, this.base);
     } catch (e) {
-      await this.storage.setState({ ...state, staged: null });
+      await this.commit((current, mark) => ({ state: { ...current, staged: current.staged?.releaseId === staged.releaseId ? null : current.staged }, highWater: mark }));
       await this.collect();
       if (e instanceof Reject) return { status: 'rejected', reason: e.reason, detail: e.message };
       return { status: 'rejected', reason: 'validation_failed', detail: e instanceof Error ? e.message : String(e) };
     }
     const next: ActiveRelease = { ...staged, activatedAt: (this.env.now?.() ?? new Date()).toISOString() };
-    await this.storage.setState({ schema: 1, active: next, previous: state.active, staged: null, denied: state.denied });
+    const activated = await this.commit((current, mark) => {
+      if (current.staged?.releaseId !== next.releaseId || next.generation < mark.generation || next.generation === mark.generation && !this.sameMark(mark, m)) return null;
+      return { state: { ...current, active: next, previous: current.active, staged: null }, highWater: { generation: next.generation, releaseId: next.releaseId, killed: false } };
+    });
+    if (!activated) return { status: 'rejected', reason: 'stale_generation', detail: 'staged authority changed before activation' };
     await this.collect();
     return { status: 'applied', releaseId: next.releaseId, generation: next.generation, downloadedBytes: 0, downloadedFiles: 0 };
   }

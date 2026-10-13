@@ -1,6 +1,6 @@
 # Autonomous infrastructure handoff
 
-Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00/R01 are complete locally; current implementation is **R02 — finance recovery**, split into bounded slices. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
+Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00/R01 are complete locally; current implementation is **R03 — release authority**, split into verified slices. R02 local recovery is implemented; policy/live/native evidence remains open. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
 
 ## Resume safely
 
@@ -44,3 +44,7 @@ Next source work: prepare legacy/claimed/noncurrency/partial/calendar-cadence an
 ## Latest verified addition — R02-F
 
 Viewer-only reconciliation snapshots and concrete refund/calendar/native-offer policy alternatives are prepared in docs/billing/POLICY_REVIEW.md. Six new cases, lint/typecheck and all 486 application/tool tests pass; no actual provider proof or financial repair. Next implement independent R03 durable generation/publication/economic release authority, retaining open R02 external/policy acceptance.
+
+## Latest verified slice — R03-A
+
+Independent per-channel generation/tombstone, signed legacy/cached-state validation, concurrent activation fences and transaction-completion IndexedDB durability pass 29 patch cases, two actual Chromium storage cases, lint/typecheck, all 497 application/tool tests and both builds. The original three generation regressions failed before correction. Current work: R03-B atomic publication with truthful audit, then R03-C economic release/session acceptance. Local database deletion and already-erased legacy history are genuine limits; server admission remains necessary. The five-hour runner safely skipped the dirty worktree at 2026-10-13 02:16:48 UTC; no new model execution is claimed.

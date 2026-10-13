@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
   "sourceCommit": "0499a6cb109cee3f7de4c9ad951e4e22e25d3983",
-  "reviewedAt": "2026-10-12",
+  "reviewedAt": "2026-10-13",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "R02",
+    "id": "R03",
     "status": "IN_PROGRESS",
-    "nextProposed": "R03",
+    "nextProposed": "R04",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R02-F reconciliation/policy preparation verified; R03 next",
-      "detail": "All local finance recovery slices and read-only investigation pass 486 application/tool tests and lint/typecheck. Concrete policy alternatives are proposals; no live financial repair. Proceed to independent R03 while keyring/provider/native/policy evidence remains open."
+      "title": "R03-A durable client generation verified; publication next",
+      "detail": "497 application/tool tests plus two actual Chromium/IndexedDB cases pass. Per-channel authority survives overlay loss/rollback/kill; signed cached-state validation and transaction-completion durability are covered. Server publication and reward/session admission remain open."
     }
   ],
   "next": [
@@ -387,6 +387,26 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R03-A-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "ef7fe98fc88e3e3ab8a3f586555a312181a68cdf",
+      "verifiedAt": "2026-10-13T03:53:31+00:00",
+      "scope": "R03-A working tree: eleven added patch regressions (the first three failed before correction), 29 patch cases, lint/typecheck, all 497 application/tool tests and game/admin builds pass. Two actual Chromium 151 IndexedDB tests cover concurrent multi-instance writes, per-channel persistence after overlay loss/reopen and aborts after successful metadata/object requests. Delayed download vs newer kill, cached signature/hash corruption, retained legacy migration, newer signed rollback and damaged high-water denial covered. Entire database deletion loses local history; erased pre-upgrade history cannot be reconstructed. No Android/native/deployment or server economic-admission proof.",
+      "testIds": [
+        "packages/patch/src/manager.test.ts",
+        "UOMD_CHROMIUM_PATH=/usr/bin/chromium npx --no-install playwright test -c tests/storage/playwright.config.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "npm run build -w @uomd/game",
+        "npm run build -w @uomd/admin"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -645,10 +665,10 @@
     {
       "id": "R03",
       "title": "Patch generation and release authority",
-      "taskStatus": "OPEN",
+      "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Durable generation high-water mark, atomic publication and bounded economic release admission.",
-      "implemented": "Signed manifests, staging and rollback exist; kill/rollback freshness, publish CAS and old-release reward authority remain open.",
+      "implemented": "R03-A locally verified: independent per-channel generation/tombstone, freshness before kill, atomic activation fences, stored signature revalidation and retained legacy migration; IndexedDB metadata/objects await transaction completion. Server publish CAS and economic release/session authority remain open.",
       "dependsOn": [
         "R00"
       ],
@@ -657,12 +677,15 @@
         "packages/patch/src/manager.ts",
         "apps/api/src/content/store.ts",
         "apps/api/src/progress/service.ts",
-        "packages/patch/src/manager.test.ts"
+        "packages/patch/src/manager.test.ts",
+        "apps/game/src/platform/idbStorage.ts",
+        "tests/storage/idb.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-REGRESSIONS",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R03-A-20261013"
       ],
       "blockerIds": []
     },

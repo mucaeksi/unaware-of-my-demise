@@ -1,4 +1,5 @@
-import { MemoryStorage, type ContentStorage, type PatchState } from '@uomd/patch';
+import { MemoryStorage, type ContentStorage, type GenerationMark, type PatchState, type StorageSnapshot } from '@uomd/patch';
+import type { Channel } from '@uomd/content-schema';
 
 const DB = 'uomd-content';
 const OBJECTS = 'objects';
@@ -24,7 +25,7 @@ class IdbStorage implements ContentStorage {
   }
   async putObject(sha: string, bytes: Uint8Array): Promise<void> {
     const copy = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-    await req(this.store(OBJECTS, 'readwrite').put(copy, sha));
+    await this.write(OBJECTS, (store) => { store.put(copy, sha); });
   }
   async hasObject(sha: string): Promise<boolean> {
     return (await req(this.store(OBJECTS, 'readonly').count(sha))) > 0;
@@ -33,13 +34,40 @@ class IdbStorage implements ContentStorage {
     return (await req(this.store(OBJECTS, 'readonly').getAllKeys())) as string[];
   }
   async deleteObject(sha: string): Promise<void> {
-    await req(this.store(OBJECTS, 'readwrite').delete(sha));
+    await this.write(OBJECTS, (store) => { store.delete(sha); });
   }
   async getState(): Promise<PatchState | null> {
     return ((await req(this.store(META, 'readonly').get('state'))) as PatchState | undefined) ?? null;
   }
   async setState(state: PatchState): Promise<void> {
-    await req(this.store(META, 'readwrite').put(state, 'state'));
+    await this.write(META, (store) => { store.put(state, 'state'); });
+  }
+  async getHighWater(channel: Channel): Promise<GenerationMark | null> {
+    return ((await req(this.store(META, 'readonly').get(`generation:${channel}`))) as GenerationMark | undefined) ?? null;
+  }
+  async updateState(channel: Channel, change: (current: StorageSnapshot) => StorageSnapshot | null): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(META, 'readwrite'); const store = tx.objectStore(META);
+      let changed = false;
+      tx.oncomplete = () => resolve(changed);
+      tx.onabort = tx.onerror = () => reject(tx.error ?? new Error('content state transaction aborted'));
+      const state = req(store.get('state')); const mark = req(store.get(`generation:${channel}`));
+      void Promise.all([state, mark]).then(([value, highWater]) => {
+        const next = change({ state: (value as PatchState | undefined) ?? null, highWater: (highWater as GenerationMark | undefined) ?? null });
+        if (!next) return;
+        store.put(next.state, 'state');
+        if (next.highWater) store.put(next.highWater, `generation:${channel}`);
+        changed = true;
+      }).catch((e: unknown) => { try { tx.abort(); } catch { /* already aborted */ } reject(e); });
+    });
+  }
+  private write(name: string, work: (store: IDBObjectStore) => void): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(name, 'readwrite');
+      tx.oncomplete = () => resolve();
+      tx.onabort = tx.onerror = () => reject(tx.error ?? new Error('content storage transaction aborted'));
+      try { work(tx.objectStore(name)); } catch (e) { try { tx.abort(); } catch { /* already aborted */ } reject(e); }
+    });
   }
 }
 

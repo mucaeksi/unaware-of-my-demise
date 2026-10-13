@@ -187,7 +187,9 @@ Remaining acceptance:
 
 ### R03 — Generation, publication and reward release authority
 
-[PatchManager](packages/patch/src/manager.ts#L45) handles kill before freshness, stores no highest-ever accepted generation and loses that high-water mark on local rollback. Persist a **per-channel highest accepted generation/tombstone** across kill, staged activation, storage migration, corruption fallback, restart and rollback.
+**R03-A locally verified:** [PatchManager](packages/patch/src/manager.ts) now persists an independent per-channel highest accepted generation/tombstone, checks freshness before kill and atomically fences activation against concurrent updates. Kill clears staging; restart revalidates stored signatures and legacy retained overlays; rollback or lost/corrupt overlay state preserves the generation record. IndexedDB metadata/object writes resolve on transaction completion and reject aborts after request success. Eleven new regressions (the original three failed before correction), 29 patch cases, two actual Chromium/IndexedDB cases, lint/typecheck, **497 application/tool tests** and game/admin builds pass. Native storage/deployed acceptance remains separate.
+
+Legacy migration can recover the greatest signed generation still retained in the old overlay; it cannot reconstruct already-erased historical generations. A corrupt independent generation record fails closed. Deleting the entire browser database/reinstalling loses local history; server economic admission is the separate R03-C gate.
 
 Reject authentic old kill g2 over active g4, replay g2 after accepted kill g3, and unseen g3 after g4→g2 fallback. Preserve repeated current polling and a deliberately signed **newer g5** containing older content for an authorized rollback.
 

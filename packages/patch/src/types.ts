@@ -19,6 +19,18 @@ export interface PatchState {
   denied: string[];
 }
 
+/** Independent of the overlay state, so rollback or a lost state record cannot erase accepted authority. */
+export interface GenerationMark {
+  generation: number;
+  releaseId: string;
+  killed: boolean;
+}
+
+export interface StorageSnapshot {
+  state: PatchState | null;
+  highWater: GenerationMark | null;
+}
+
 export interface ContentStorage {
   getObject(sha256: string): Promise<Uint8Array | null>;
   putObject(sha256: string, bytes: Uint8Array): Promise<void>;
@@ -28,6 +40,9 @@ export interface ContentStorage {
   getState(): Promise<PatchState | null>;
   /** MUST be atomic: readers see either the old or the new state, never a mix. */
   setState(state: PatchState): Promise<void>;
+  getHighWater(channel: Channel): Promise<GenerationMark | null>;
+  /** Reads current state/mark and commits both atomically. The callback is synchronous; null makes no change. */
+  updateState(channel: Channel, change: (current: StorageSnapshot) => StorageSnapshot | null): Promise<boolean>;
 }
 
 export interface RemoteSource {
@@ -102,4 +117,6 @@ export type RejectReason =
   | 'storage_budget'
   | 'download_failed'
   | 'hash_mismatch'
-  | 'validation_failed';
+  | 'validation_failed'
+  | 'storage_busy'
+  | 'storage_state_invalid';

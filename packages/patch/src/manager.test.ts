@@ -314,4 +314,108 @@ describe('PatchManager', () => {
     await pm.rollback(); // nothing active: returns false, collect() must not run over the staged release
     for (const h of stagedHashes) expect(await storage.hasObject(h)).toBe(true);
   });
+
+  it('rejects an older authentic kill after accepting a higher generation', async () => {
+    const { pm, remote, storage } = await setup({}, { releaseId: 'rel_0004', generation: 4 });
+    await pm.checkAndApply(); remote.manifest = await signedPatch({ releaseId: 'kill_0002', generation: 2, killSwitch: true });
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'stale_generation' });
+    expect((await storage.getState())!.active!.releaseId).toBe('rel_0004');
+  });
+
+  it('remembers the kill generation on a fresh manager and rejects an older release replay', async () => {
+    const { pm, remote, storage } = await setup(); await pm.checkAndApply();
+    remote.manifest = await signedPatch({ releaseId: 'kill_0003', generation: 3, killSwitch: true }); await pm.checkAndApply();
+    remote.manifest = await signedPatch();
+    const restarted = new PatchManager(env(), storage, remote, base);
+    expect(await restarted.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'stale_generation' });
+    expect((await storage.getState())!.active).toBeNull();
+  });
+
+  it('keeps the greatest generation after local rollback and rejects an unseen intermediate version', async () => {
+    const { pm, remote, storage } = await setup(); await pm.checkAndApply();
+    remote.manifest = await signedPatch({ releaseId: 'rel_0004', generation: 4 }); await pm.checkAndApply();
+    await pm.rollback(); expect((await storage.getState())!.active!.generation).toBe(2);
+    remote.manifest = await signedPatch({ releaseId: 'rel_0003', generation: 3 });
+    expect(await new PatchManager(env(), storage, remote, base).checkAndApply()).toMatchObject({ status: 'rejected', reason: 'stale_generation' });
+    expect((await storage.getState())!.active!.generation).toBe(2);
+  });
+
+  it('allows an intentionally newer signed release with older files after rollback', async () => {
+    const { pm, remote, storage } = await setup({}, { releaseId: 'rel_0004', generation: 4 });
+    await pm.checkAndApply(); await pm.rollback();
+    remote.manifest = await signedPatch({ releaseId: 'rollback_0005', generation: 5 });
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'applied', generation: 5 });
+    expect((await storage.getHighWater('staging'))!.generation).toBe(5);
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'up_to_date' });
+  });
+
+  it('keeps authority when the overlay state is lost or corrupted and isolates channel marks', async () => {
+    const { pm, storage, remote } = await setup({}, { releaseId: 'rel_0004', generation: 4 });
+    await pm.checkAndApply();
+    expect(await storage.getHighWater('dev')).toBeNull();
+    for (const state of [null, { schema: 99 }]) {
+      storage.state = state as typeof storage.state;
+      remote.manifest = await signedPatch({ releaseId: 'rel_0003', generation: 3 });
+      expect(await new PatchManager(env(), storage, remote, base).checkAndApply()).toMatchObject({ status: 'rejected', reason: 'stale_generation' });
+      expect((await storage.getHighWater('staging'))!.generation).toBe(4);
+    }
+  });
+
+  it('migrates the retained signed legacy overlay generation before admitting an older kill', async () => {
+    const { pm, storage, remote } = await setup({}, { releaseId: 'rel_0004', generation: 4 });
+    await pm.checkAndApply(); storage.highWater.clear();
+    remote.manifest = await signedPatch({ releaseId: 'kill_0003', generation: 3, killSwitch: true });
+    expect(await new PatchManager(env(), storage, remote, base).checkAndApply()).toMatchObject({ status: 'rejected', reason: 'stale_generation' });
+    expect((await storage.getHighWater('staging'))!.generation).toBe(4);
+  });
+
+  it('clears staged content on kill and retains its tombstone through repeated polling', async () => {
+    const { pm, remote, storage } = await setup(); await pm.checkAndApply({ activate: false });
+    remote.manifest = await signedPatch({ releaseId: 'kill_0003', generation: 3, killSwitch: true });
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'reverted_to_base' });
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'reverted_to_base' });
+    expect(await new PatchManager(env(), storage, remote, base).activateStaged()).toBeNull();
+    remote.manifest = await signedPatch({ releaseId: 'different_0003', generation: 3 });
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'stale_generation' });
+    expect(await storage.getHighWater('staging')).toMatchObject({ generation: 3, killed: true });
+  });
+
+  it('rejects tampered stored stages on restart without raising the trusted generation', async () => {
+    const { pm, storage, remote } = await setup(); await pm.checkAndApply({ activate: false });
+    storage.state!.staged!.manifest.release.generation = 100;
+    const restarted = new PatchManager(env(), storage, remote, base);
+    expect(await restarted.activateStaged()).toBeNull();
+    remote.manifest = await signedPatch({ releaseId: 'rel_0003', generation: 3 });
+    expect(await restarted.checkAndApply()).toMatchObject({ status: 'applied', generation: 3 });
+  });
+
+  it('fails closed when the independent accepted-generation record is damaged', async () => {
+    const { pm, storage } = await setup();
+    storage.highWater.set('staging', { generation: NaN, releaseId: 'damaged', killed: false });
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'storage_state_invalid' });
+    expect(storage.state).toBeNull();
+  });
+
+  it('fences a delayed download against a newer kill accepted by another manager', async () => {
+    const { pm, remote, storage } = await setup({}, { releaseId: 'rel_0003', generation: 3 });
+    let started!: () => void; let resume!: () => void;
+    const downloading = new Promise<void>((resolve) => { started = resolve; });
+    const gate = new Promise<void>((resolve) => { resume = resolve; });
+    const fetchObject = remote.fetchObject.bind(remote);
+    remote.fetchObject = async (...args) => { started(); await gate; return fetchObject(...args); };
+    const applying = pm.checkAndApply(); await downloading;
+    const killer = new PatchManager(env(), storage, new FakeRemote(await signedPatch({ releaseId: 'kill_0004', generation: 4, killSwitch: true }), new Map()), base);
+    expect(await killer.checkAndApply()).toMatchObject({ status: 'reverted_to_base' });
+    resume(); expect(await applying).toMatchObject({ status: 'rejected', reason: 'stale_generation' });
+    expect(storage.state!.active).toBeNull();
+    expect(await storage.getHighWater('staging')).toMatchObject({ generation: 4, killed: true });
+  });
+
+  it('verifies cached object bytes before reusing them for a new release', async () => {
+    const { pm, manifest, storage } = await setup();
+    const victim = manifest.files.find((f) => base.files[f.path] !== f.sha256)!;
+    await storage.putObject(victim.sha256, new Uint8Array(victim.bytes));
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'hash_mismatch' });
+    expect(storage.state?.active ?? null).toBeNull();
+  });
 });
