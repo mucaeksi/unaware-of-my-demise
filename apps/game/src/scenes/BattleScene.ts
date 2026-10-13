@@ -732,7 +732,8 @@ export class BattleScene extends Phaser.Scene {
       if (this.dead) return;
       const names = r.rewards.length ? await api.catalogNames().catch(() => new Map<string, string>()) : new Map<string, string>();
       const gained = r.rewards.length ? ` · rewards: ${r.rewards.map((a) => describeAttachment(a, names)).join(', ')}` : '';
-      toast(this, `Progress saved to your account${gained}`);
+      const saved = r.repeatRewardsAllowed === false ? 'Free practice recorded · one-time rewards only' : 'Progress saved to your account';
+      toast(this, `${saved}${gained}`);
     } catch (e) {
       if (!this.dead) toast(this, e instanceof Error ? `Progress not saved: ${e.message}` : 'Progress not saved');
     }

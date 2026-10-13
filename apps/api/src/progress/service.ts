@@ -32,6 +32,8 @@ export interface BattleOutcome {
   newThreeStar: boolean;
   turns: number;
   rewards: RewardAttachment[];
+  /** Optional only for pre-upgrade recorded results; fresh claims always disclose this policy. */
+  repeatRewardsAllowed?: boolean;
   ration: { spent: number };
 }
 export interface BattleResponse extends BattleOutcome {
@@ -178,11 +180,12 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
     const spent = cost > 0 ? rationSpend(ration.stored, cost, nowMs) : null;
     if (cost > 0 && !spent) throw new HttpError(402, 'not_enough_ration', 'not enough Ration for this battle');
 
-    const drops = await rollNodeDrops(db, node.drop, firstClear);
+    const repeatRewardsAllowed = cost > 0;
+    const drops = await rollNodeDrops(db, node.drop, firstClear, repeatRewardsAllowed);
     const grants: { a: RewardAttachment; key: string }[] = [];
     if (firstClear) rewardsDef.first_clear.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.nodeId}:first:${i}` }));
     if (newThreeStar) rewardsDef.three_star.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.nodeId}:three:${i}` }));
-    rewardsDef.repeat.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.requestId}:repeat:${i}` }));
+    if (repeatRewardsAllowed) rewardsDef.repeat.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.requestId}:repeat:${i}` }));
     drops.first.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.nodeId}:firstdrop:${i}` }));
     drops.repeat.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.requestId}:drop:${i}` }));
 
@@ -195,6 +198,7 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
       newThreeStar,
       turns,
       rewards: grants.map((g) => g.a),
+      repeatRewardsAllowed,
       ration: { spent: cost }
     };
     const batch: D1PreparedStatement[] = [economicStatement(db, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, currentTime(), input.sessionId, true)];

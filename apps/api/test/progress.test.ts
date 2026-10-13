@@ -251,6 +251,27 @@ describe('server-verified battle progress', () => {
     await expect(db().prepare('UPDATE player_progress SET stars = 0 WHERE player_id = ?1').bind(playerId).run()).rejects.toThrow(/never decrease/);
   });
 
+  it('keeps configured one-time free-stage milestones but suppresses their fixed repeat rewards and replays truthfully', async () => {
+    const indexFile = base.find((f) => f.path === 'chapters/chapter_index.json')!;
+    const index = JSON.parse(dec.decode(indexFile.bytes)); index.chapters[0].nodes[0].ration_class = 'tutorial';
+    const bytes = new TextEncoder().encode(JSON.stringify(index));
+    const { sha256Hex } = await import('@uomd/shared');
+    const freeFiles = base.map((f) => f === indexFile ? { ...f, bytes, sha256: '' } : f);
+    freeFiles.find((f) => f.path === indexFile.path)!.sha256 = await sha256Hex(bytes);
+    await upload(freeFiles);
+    expect((await admin('/admin/api/releases', post({ id: 'rel_free', channel: 'dev', files: entries(freeFiles) }))).status).toBe(201);
+    expect((await admin('/admin/api/releases/rel_free/publish', post({}))).status).toBe(200);
+    const { auth } = await signIn(`sub-prog-free-fixed-${rid()}`); const requestId = rid();
+    const first = await submit(auth, { releaseId: 'rel_free', requestId }); expect(first.status).toBe(200);
+    const body = await first.json<{ repeatRewardsAllowed: boolean; firstClear: boolean; rewards: unknown[]; ration: { spent: number } }>();
+    expect(body).toMatchObject({ repeatRewardsAllowed: false, firstClear: true, ration: { spent: 0 } });
+    const wallet = await (await game('/api/v1/wallet', { headers: auth })).json();
+    expect(wallet).toEqual({ wallets: { eclipse_token: 100 + (three ? 50 : 0) } });
+    expect(await (await submit(auth, { releaseId: 'rel_free' })).json()).toMatchObject({ rewards: [], repeatRewardsAllowed: false });
+    expect(await (await submit(auth, { releaseId: 'rel_free', requestId })).json()).toMatchObject({ rewards: body.rewards, repeatRewardsAllowed: false, replayed: true });
+    expect(await (await game('/api/v1/wallet', { headers: auth })).json()).toEqual(wallet);
+  });
+
   it('a replayed requestId grants nothing twice; 15 identical concurrent submissions win exactly once', async () => {
     const { auth } = await signIn(`sub-prog-rep-${rid()}`);
     const id = rid();

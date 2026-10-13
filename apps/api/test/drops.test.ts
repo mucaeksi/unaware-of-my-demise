@@ -61,8 +61,9 @@ describe('drop tables', () => {
     const { auth, playerId } = await signIn(`sub-drop-${rid()}`);
     const res = await submit(auth);
     expect(res.status).toBe(200);
-    const j = (await res.json()) as { firstClear: boolean; rewards: { type: string }[] };
+    const j = (await res.json()) as { firstClear: boolean; repeatRewardsAllowed: boolean; rewards: { type: string }[] };
     expect(j.firstClear).toBe(true);
+    expect(j.repeatRewardsAllowed).toBe(true);
     const g1 = await gearOf(playerId);
     expect(g1.filter((g) => g.slot === 'necklace' || g.slot === 'ring')).toHaveLength(1);
     expect((await db().prepare("SELECT gear_id FROM player_gear WHERE player_id = ?1 AND gear_id LIKE 'accessory_ash_maw_hide_%_4'").bind(playerId).all()).results).toHaveLength(1);

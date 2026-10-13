@@ -44,12 +44,13 @@ async function loadPools(db: D1Database, entries: readonly DropEntry[], bossSetI
 }
 
 /** Rolls a node's drop table with the server CSPRNG. Unknown tables drop nothing (content is validated at publish; config is admin-editable). */
-export async function rollNodeDrops(db: D1Database, drop: { table: string; boss_set_id?: string } | undefined, firstClear: boolean): Promise<{ first: Granted[]; repeat: Granted[] }> {
+export async function rollNodeDrops(db: D1Database, drop: { table: string; boss_set_id?: string } | undefined, firstClear: boolean, repeatAllowed = true): Promise<{ first: Granted[]; repeat: Granted[] }> {
   const none = { first: [], repeat: [] };
-  if (!drop) return none;
+  if (!drop || !firstClear && !repeatAllowed) return none;
   const table = (await loadDropConfig(db))?.tables[drop.table];
   if (!table) return none;
-  const pools = await loadPools(db, firstClear ? [...table.firstClear, ...table.repeat] : table.repeat, drop.boss_set_id);
+  const eligible = [...(firstClear ? table.firstClear : []), ...(repeatAllowed ? table.repeat : [])];
+  const pools = await loadPools(db, eligible, drop.boss_set_id);
   const ctx = drop.boss_set_id ? { bossSetId: drop.boss_set_id } : {};
-  return { first: firstClear ? rollEntries(table.firstClear, cryptoRoll, pools, ctx) : [], repeat: rollEntries(table.repeat, cryptoRoll, pools, ctx) };
+  return { first: firstClear ? rollEntries(table.firstClear, cryptoRoll, pools, ctx) : [], repeat: repeatAllowed ? rollEntries(table.repeat, cryptoRoll, pools, ctx) : [] };
 }

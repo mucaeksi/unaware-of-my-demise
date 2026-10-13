@@ -1,6 +1,6 @@
 # Autonomous infrastructure handoff
 
-Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00/R01 are complete locally; current implementation is **R04 — duplicate grants/repeat policy** after local R03 acceptance. R02 local recovery is implemented; policy/live/native evidence remains open. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
+Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00/R01 are complete locally; current implementation is **R05 — persistent client operation recovery** after local R03/R04 acceptance. R02 local recovery is implemented; policy/live/native evidence remains open. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
 
 ## Resume safely
 
@@ -64,3 +64,7 @@ Cross-pity/cross-source character duplicate races are fenced by original-copy co
 ## Latest verified slice — R04-B
 
 Migration 0024 adds future-only uniquely keyed immutable reward attachment/effect facts for shared grants, summons and starters. Exact caps, duplicate shards, gear IDs, rollback/reuse/immutability, starter concurrency, bounded export and deletion retention pass eight new cases; all 524 application/tool tests and lint/typecheck pass. Two isolated local Workers with all 24 migrations pass health. No historical balances or provenance are invented. Free-repeat payout policy remains to resolve; final numeric balance stays R16. Continue independent retry/combat/canon/infra work if owner policy/live access waits.
+
+## Latest verified slice — R04-C
+
+R04 locally complete: the existing Ration-paid repeat contract blocks zero-cost fixed rewards/repeat drops, preserving finite configured milestones. The real sequential/concurrent stage_1_1 farming cases failed before correction; three new cases, lint/typecheck and all 527 application/tool tests pass. Actual desktop campaign and desktop/phone disclosure pass; final screenshots are taken after camera fade completion and inspected. No narrative, numerical tuning, history repair or creative generation. R16 still checks final recovery/income viability. Next R05 persistent operation identities and account-scoped response-loss recovery. Strengthen the five-hour runner so an unfinished primary checkout can be preserved while continuation works in its own checkout; current safe skip is not proof of execution.

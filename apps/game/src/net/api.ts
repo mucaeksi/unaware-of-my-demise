@@ -259,7 +259,7 @@ export class GameApi extends EventTarget {
   progress(): Promise<{ nodes: { node_id: string; stars: number; clears: number }[]; ration: { value: number; cap: number; nextMs: number } }> {
     return this.call('GET', '/api/v1/progress');
   }
-  submitBattle(releaseId: string, nodeId: string, actions: { skillId: string; targetId?: string }[], sessionId?: string): Promise<{ stars: number; firstClear: boolean; rewards: MailItem['attachments']; ration: { spent: number; value: number } }> {
+  submitBattle(releaseId: string, nodeId: string, actions: { skillId: string; targetId?: string }[], sessionId?: string): Promise<{ stars: number; firstClear: boolean; rewards: MailItem['attachments']; repeatRewardsAllowed?: boolean; ration: { spent: number; value: number } }> {
     return this.call('POST', '/api/v1/progress/battle', { releaseId, nodeId, requestId: newRequestId(), actions, ...(sessionId ? { sessionId } : {}) });
   }
   /** Owned-hero stages: the server freezes the party (team, gear stats, ranks, story loans) the battle must be fought with. */

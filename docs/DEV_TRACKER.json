@@ -5,15 +5,15 @@
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "R04",
+    "id": "R05",
     "status": "IN_PROGRESS",
-    "nextProposed": "R05",
+    "nextProposed": "R06",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R04-A/B duplicate correctness and reward provenance verified",
-      "detail": "516\u2192524 application/tool tests; immutable exact-effect grant facts, source identities, real gear IDs, cap/rollback/duplicate/export/deletion/startup cases pass. All 24 local migrations and game/admin Worker health pass. Free-repeat payout policy remains explicit acceptance work; final tuning stays R16."
+      "title": "R04 local repeat/copy/provenance acceptance complete; R05 next",
+      "detail": "Paid-only repeat eligibility closes real zero-Ration sequential/concurrent farming; finite configured milestones remain. 527 application/tool tests and actual desktop campaign plus desktop/phone disclosure pass. Continue persistent account-scoped operation recovery; final economy numbers remain R16."
     }
   ],
   "next": [
@@ -41,7 +41,7 @@
     },
     {
       "title": "B-ECONOMY \u2014 Unapplied payout/refund/shard and combat-policy choices",
-      "detail": "Prepare bounded proposals for free-repeat payout, recovery floor, final-boss rewards, noncurrency refund/claimed mail/shard policy and unresolved canon mechanics. Local correctness fixes proceed where policy is already defined."
+      "detail": "Paid-only repeat eligibility is now implemented under the autonomous assignment (R04-C); no historical recovery was applied. Final recovery-floor/payout/boss reward figures, retained/claimed/noncurrency refund and shard/combat ambiguities remain explicit R02/R06/R16 decisions. Local correctness work proceeds where policy is defined."
     },
     {
       "title": "B-ART \u2014 Layout and visual identity decisions",
@@ -488,6 +488,27 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R04-C-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "fe3283cb107d73158a3306bd5ad6ca8708684fb4",
+      "verifiedAt": "2026-10-13T04:46:15+00:00",
+      "scope": "R04-C working tree: two failing-before sequential/concurrent farm cases use real compiled stage_1_1, known deterministic actions and current local drop config. Three new cases cover paid-only fixed/repeat-table eligibility, finite free first/three-star amounts and truthful recorded-result retry; paid drop behavior preserved. Lint/typecheck and all 527 application/tool tests pass. Actual local desktop campaign and desktop/phone disclosure tests pass with all 24 local migrations and both builds. Final screenshots wait for real camera fade completion and were inspected. No new creative media, narrative/rate/price/first-clear amount edits, retrospective financial repair, deployed/native or final economy viability proof.",
+      "testIds": [
+        "apps/api/test/free-repeat.test.ts",
+        "apps/api/test/progress.test.ts",
+        "apps/api/test/drops.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "UOMD_CHROMIUM_PATH=/usr/bin/chromium npx --no-install playwright test -c tests/e2e/playwright.config.ts --project landscape-desktop --grep 'campaign: owned-hero'",
+        "UOMD_CHROMIUM_PATH=/usr/bin/chromium npx --no-install playwright test -c tests/e2e/playwright.config.ts tests/e2e/free-practice.spec.ts"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -544,7 +565,7 @@
       "id": "B-ECONOMY",
       "level": "OWNER_BLOCKED",
       "title": "Unapplied payout/refund/shard and combat-policy choices",
-      "detail": "Prepare bounded proposals for free-repeat payout, recovery floor, final-boss rewards, noncurrency refund/claimed mail/shard policy and unresolved canon mechanics. Local correctness fixes proceed where policy is already defined. Resolve the 60 fixed half-day offerings versus 28/31-day/accelerated periods and paid hold/pause accrual; current cadence is capped at verified period end without numeric retuning.",
+      "detail": "Paid-only repeat eligibility is now implemented under the autonomous assignment (R04-C); no historical recovery was applied. Final recovery-floor/payout/boss reward figures, retained/claimed/noncurrency refund and shard/combat ambiguities remain explicit R02/R06/R16 decisions. Local correctness work proceeds where policy is defined.",
       "verifiedAt": null
     },
     {
@@ -781,10 +802,10 @@
     {
       "id": "R04",
       "title": "Repeat rewards and duplicate grants",
-      "taskStatus": "IN_PROGRESS",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Bound zero-cost repeat rewards and compute cross-source duplicate effects from committed inventory.",
-      "implemented": "R04-A locally verified: gacha copy-count guards participate in the same D1 batch as pity/debit/request/journal; competing pity or attachment sources trigger bounded recomputation. Shared atomic character-copy/shard upsert prevents divergent grants; committed response/journal and replay agree. R04-B records future immutable uniquely keyed attachment/committed-effect facts for shared rewards, summons and starters, with exact caps/gear IDs and bounded own-account export. No invented historical provenance or repair. Free-repeat payout policy remains open.",
+      "implemented": "R04-A locally verified: gacha copy-count guards participate in the same D1 batch as pity/debit/request/journal; competing pity or attachment sources trigger bounded recomputation. Shared atomic character-copy/shard upsert prevents divergent grants; committed response/journal and replay agree. R04-B records future immutable uniquely keyed attachment/committed-effect facts for shared rewards, summons and starters, with exact caps/gear IDs and bounded own-account export. No invented historical provenance or repair. R04-C enforces the existing paid-win repeat contract: zero-cost practice has only finite configured milestones, no fixed/repeat-table loot; paid stages retain repeat amounts. Sequential/concurrent real stage_1_1 and frozen original retry pass; desktop/phone disclosure and actual campaign verified. Canon mismatch is recorded without narrative edits; R16 owns final tuning and external deployment/native proof is separate.",
       "dependsOn": [
         "R01",
         "R03"
@@ -797,18 +818,21 @@
         "apps/api/migrations/0024_reward_grant_journal.sql",
         "apps/api/test/reward-grants.test.ts",
         "apps/api/src/player/auth.ts",
-        "apps/api/src/account/service.ts"
+        "apps/api/src/account/service.ts",
+        "apps/api/test/free-repeat.test.ts",
+        "apps/api/src/progress/drops.ts",
+        "docs/economy/FREE_REPEAT_POLICY.md",
+        "tests/e2e/free-practice.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
         "E-R04-A-20261013",
-        "E-R04-B-20261013"
+        "E-R04-B-20261013",
+        "E-R04-C-20261013"
       ],
-      "blockerIds": [
-        "B-ECONOMY"
-      ]
+      "blockerIds": []
     },
     {
       "id": "R05",

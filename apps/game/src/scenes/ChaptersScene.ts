@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import type { ChapterIndex } from '@uomd/content-schema';
+import { RATION_COST, type ChapterIndex } from '@uomd/content-schema';
 import { REF_H, REF_W } from '../config';
 import { Progress, Services } from '../services';
 import { Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
@@ -75,7 +75,9 @@ export class ChaptersScene extends Phaser.Scene {
     const locked = Boolean(node.requires && !progress[node.requires]);
     const bg = panel(this, REF_W / 2, y, 1300, 138, locked ? 'dim' : 'normal');
     const name = title(this, 0, 0, node.title_en.toUpperCase(), 42, locked ? T.dim : T.text).setOrigin(0, 0.5).setPosition(REF_W / 2 - 600, y - 20);
-    const sub = txt(this, REF_W / 2 - 600, y + 28, locked ? `Locked — finish "${titles.get(node.requires ?? '') ?? node.requires}" first` : node.kind === 'battle' ? 'Story and battle' : 'Story', { fontSize: '30px', color: T.dim });
+    const cost = node.ration_class ? RATION_COST[node.ration_class] : 0;
+    const battleLabel = cost === 0 ? 'Free practice · one-time rewards only' : `Story and battle · ${cost} Ration`;
+    const sub = txt(this, REF_W / 2 - 600, y + 28, locked ? `Locked — finish "${titles.get(node.requires ?? '') ?? node.requires}" first` : node.kind === 'battle' ? battleLabel : 'Story', { fontSize: '30px', color: T.dim });
     if (patchedBy) {
       const tag = panel(this, REF_W / 2 + 330, y - 28, 270, 56, 'hot');
       txt(this, REF_W / 2 + 330, y - 28, `NEW · ${patchedBy}`, { fontFamily: F.display, fontSize: '22px', fontStyle: '600', color: T.gold }).setOrigin(0.5);
