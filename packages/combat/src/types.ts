@@ -1,4 +1,4 @@
-import type { SkillDef, SkillType, UnitDef } from '@uomd/content-schema';
+import type { EquipmentEffects, SkillDef, SkillType, UnitDef } from '@uomd/content-schema';
 
 export type Side = 'player' | 'enemy';
 export type Row = 'front' | 'rear';
@@ -128,6 +128,7 @@ export interface Combatant {
   hookTargetCount: Record<string, number>;
   /** skill_id -> rank (absent = 1) */
   skillRanks: Record<string, number>;
+  equipmentEffects: Partial<EquipmentEffects>;
   alive: boolean;
   boss: BossState | null;
   /** set for breakable objectives: they are targets, never actors, and never count for victory */

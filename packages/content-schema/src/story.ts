@@ -94,6 +94,14 @@ export const StoryScene = z
   });
 export type StoryScene = z.infer<typeof StoryScene>;
 
+/** Finite equipped-effect grammar; version 1 supports outgoing healing and normal-action Focus. */
+export const EquipmentEffects = z.object({
+  version: z.literal(1),
+  heal_bonus_pct: z.number().min(0).max(5).optional(),
+  focus_gain_pct: z.number().min(0).max(5).optional()
+}).strict();
+export type EquipmentEffects = z.infer<typeof EquipmentEffects>;
+
 /** One hero on the player's side of a battle. Content encounters list fixed (story) members; owned-hero battles get them from the server. */
 export const PartyMember = z
   .object({
@@ -109,6 +117,8 @@ export const PartyMember = z
     /** skill_id -> rank (1-3); each rank above 1 raises damage/heal/shield multipliers of that skill */
     skill_ranks: z.record(Id, z.number().int().min(1).max(3)).optional(),
     start_focus: z.number().int().min(0).max(100).optional(),
+    /** Frozen, versioned equipped effects; absent retains the original battle contract. */
+    equipment_effects: EquipmentEffects.optional(),
     /** story loan: not owned by the player */
     loan: z.boolean().optional()
   })

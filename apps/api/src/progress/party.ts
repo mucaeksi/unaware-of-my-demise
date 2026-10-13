@@ -1,4 +1,4 @@
-import { BattleParty, type Encounter, type PartyMember, type StoryLoanEquipment } from '@uomd/content-schema';
+import { BattleParty, EquipmentEffects, type Encounter, type PartyMember, type StoryLoanEquipment } from '@uomd/content-schema';
 import { finalStats, type ProgressionConfig } from '@uomd/economy';
 import { HttpError } from '../content/store';
 import { computeCharacterStats } from '../gear/service';
@@ -40,7 +40,7 @@ export async function buildParty(db: D1Database, playerId: string, encounter: En
     // Older releases without a declared template retain their original gearless loan contract.
     const gear = template ? await loanGear(db, id, ch.weapon_type, ch.role, encounter.stage_id, cfg, template) : { flat: {}, pct: {}, other: {} };
     const stats = finalStats({ hp: ch.base_hp, atk: ch.base_atk, def: ch.base_def, spd: ch.base_spd }, { hp: ch.growth_hp, atk: ch.growth_atk, def: ch.growth_def, spd: ch.growth_spd }, stageLevel, gear);
-    members.push({ unit_id: id, level: stageLevel, stats, loan: true, affinity });
+    members.push({ unit_id: id, level: stageLevel, stats, ...equipmentEffects(gear.other), loan: true, affinity });
   }
 
   const room = 5 - members.length;
@@ -68,7 +68,15 @@ async function ownedMember(db: D1Database, playerId: string, characterId: string
   const st = await computeCharacterStats(db, playerId, characterId, cfg);
   const ranks = await db.prepare('SELECT skill_ranks FROM player_chars WHERE player_id = ?1 AND character_id = ?2').bind(playerId, characterId).first<{ skill_ranks: string }>();
   const skillRanks = ranks ? JSON.parse(ranks.skill_ranks) as Record<string, number> : {};
-  return { unit_id: characterId, level: st.level, stats: st.stats, ...(Object.keys(skillRanks).length ? { skill_ranks: skillRanks } : {}), affinity };
+  return { unit_id: characterId, level: st.level, stats: st.stats, ...equipmentEffects(st.other), ...(Object.keys(skillRanks).length ? { skill_ranks: skillRanks } : {}), affinity };
+}
+
+function equipmentEffects(other: Record<string, number>): Pick<PartyMember, 'equipment_effects'> {
+  const effects = Object.fromEntries(['heal_bonus_pct', 'focus_gain_pct'].filter((key) => other[key] !== undefined).map((key) => [key, other[key]]));
+  if (!Object.keys(effects).length) return {};
+  const parsed = EquipmentEffects.safeParse({ version: 1, ...effects });
+  if (!parsed.success) throw new HttpError(503, 'invalid_equipment_effects', 'equipped effects exceed the supported battle contract');
+  return { equipment_effects: parsed.data };
 }
 
 function strip(m: { affinity: 'front' | 'rear' | null } & Omit<PartyMember, 'slot' | 'row'>, slot: number, row: 'front' | 'rear'): PartyMember {

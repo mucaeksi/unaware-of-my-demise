@@ -148,6 +148,7 @@ export class Battle {
       if (m.stats.res !== undefined) c.base.res = m.stats.res;
     }
     if (m.skill_ranks) c.skillRanks = { ...m.skill_ranks };
+    if (m.equipment_effects) c.equipmentEffects = { ...m.equipment_effects };
     if (m.start_focus) c.focus = Math.min(this.rules.focus.maximum, m.start_focus);
   }
 
@@ -209,6 +210,7 @@ export class Battle {
       hookRoundCount: {},
       hookTargetCount: {},
       skillRanks: {},
+      equipmentEffects: {},
       alive: true,
       boss: null,
       objective: null,
@@ -1263,6 +1265,7 @@ export class Battle {
 
   private healUnit(source: Combatant, target: Combatant, amount: number, ctx: Ctx | null): void {
     if (!target.alive || amount <= 0) return;
+    amount = Math.floor(amount * (1 + (source.equipmentEffects.heal_bonus_pct ?? 0)));
     const applied = Math.min(amount, target.maxHp - target.hp);
     target.hp += applied;
     source.lastHealTarget = target.id;
@@ -1275,7 +1278,7 @@ export class Battle {
 
   private addFocus(unit: Combatant, amount: number, scaled: boolean): void {
     if (!unit.alive) return;
-    const gain = scaled ? Math.floor(amount * this.statusProduct(unit, 'focus_gain_multiplier')) : amount;
+    const gain = scaled ? Math.floor(amount * this.statusProduct(unit, 'focus_gain_multiplier') * (1 + (unit.equipmentEffects.focus_gain_pct ?? 0))) : amount;
     const next = Math.min(this.rules.focus.maximum, unit.focus + gain);
     const delta = next - unit.focus;
     if (delta === 0) return;

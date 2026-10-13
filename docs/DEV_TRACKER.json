@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R06-C2 canonical loan equipment verified locally; GitHub delivery blocked",
-      "detail": "603 application/tool tests,33 Python checks and real desktop campaign pass. Template gear/CRC seeds are snapshot-only; owned/legacy contracts preserved. Main confirmed through54e27c74; verified startup-guard commit d791b0f9 and C2 await restored GitHub authentication. Next equipped secondary/proc effects."
+      "title": "R06-D1 heal/action Focus snapshot locally verified; GitHub delivery blocked",
+      "detail": "612 application/tool tests, lint/typecheck, both builds and real desktop campaign pass. Closed version1 owned/loan bonuses freeze and replay to identical server hash. Resistance/procs and broader conformance remain open. Main last confirmed54e27c74; local d791b0f9/b93d0168 and this slice await restored GitHub authentication."
     }
   ],
   "next": [
@@ -828,6 +828,28 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R06-D1-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "b93d0168",
+      "verifiedAt": "2026-10-13T13:39:27.355958+00:00",
+      "scope": "R06-D1 working tree: closed version1 supported heal_bonus_pct/normal-action focus_gain_pct snapshot for owned and virtual loans; engine copies snapshot and retains absent legacy/fixed Focus/hit cap behavior. Existing healing rounding then source bonus/cap; action status and gear multipliers before floor/maximum. Malformed supported bonuses503 before session write. Six engine cases (four failed before fix), two real D1 session cases plus canonical Brin1-3 CRC loan0.06 healing fixture;612 application/tool tests/lint/typecheck/both builds pass. Real local Worker desktop campaign pass, phone explicitly skipped;25 local migrations. Server audit hash matches honest client/replay after unequipping and rejects supplied replacement party. Graph3047/7493/159 at source verification. No asset generation/retuning/native/deployed/full-R06 acceptance. GitHub authentication still blocks fetch/main delivery; current environment revision57 running/connected/current, policy stateunknown. Scheduler157993 alive/next17:16:48UTC, no independent model access proof.",
+      "testIds": [
+        "packages/combat/src/equipment.test.ts",
+        "apps/api/test/owned-battle.test.ts",
+        "apps/api/test/loan-gear.test.ts",
+        "npm test (612)",
+        "npm run lint",
+        "npm run typecheck",
+        "tests/e2e/zz-campaign.spec.ts (desktop pass, phone skip)",
+        "game/admin builds and25 local migrations",
+        "python3 tools/sync_codex_skills.py --check (46)"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1215,7 +1237,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Correct Break/Auto/expiry/procs, loan equipment and compatible progression limits with deterministic replay.",
-      "implemented": "R06-A/B/C1/C2 control/boss Auto/replay, coherent supported progression/materials and owned-versus-loaned snapshot equipment are locally verified. Canonical unowned loan template/CRC seeds preserve legacy releases. Secondary/proc effects and broader conformance remain; effective stage identity authority follows R07/R08. C2 delivery blocked by current GitHub authentication.",
+      "implemented": "R06-A/B/C1/C2 control/boss Auto/replay, coherent supported progression/materials and owned-versus-loaned snapshot equipment are locally verified. Canonical unowned loan template/CRC seeds preserve legacy releases. Secondary/proc effects and broader conformance remain; effective stage identity authority follows R07/R08. C2 delivery blocked by current GitHub authentication. R06-D1 adds closed version1 owned/loan outgoing-heal and normal-action Focus snapshots with identical authoritative replay; effect/element resistance, undefined signature procs and broader conformance remain open.",
       "dependsOn": [
         "R01"
       ],
@@ -1235,7 +1257,9 @@
         "apps/api/test/owned-battle.test.ts",
         "apps/api/src/progress/loan-gear.ts",
         "apps/api/test/loan-gear.test.ts",
-        "packages/shared/src/crc32.test.ts"
+        "packages/shared/src/crc32.test.ts",
+        "packages/combat/src/equipment.test.ts",
+        "packages/content-schema/src/story.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1244,7 +1268,8 @@
         "E-R06-A-20261013",
         "E-R06-B-20261013",
         "E-R06-C1-20261013",
-        "E-R06-C2-20261013"
+        "E-R06-C2-20261013",
+        "E-R06-D1-20261013"
       ],
       "blockerIds": [
         "B-ECONOMY"

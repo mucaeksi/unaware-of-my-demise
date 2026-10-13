@@ -1,13 +1,15 @@
 import { env } from 'cloudflare:workers';
 import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import { playAuto } from '@uomd/combat';
+import { playAuto, replayBattle } from '@uomd/combat';
 import { BattleParty, Encounter, UnitPack } from '@uomd/content-schema';
-import { sha256Hex } from '@uomd/shared';
+import { canonicalJson, sha256Hex } from '@uomd/shared';
 import { statAtLevel } from '@uomd/economy';
 import { baseFiles, campaignFiles, type TestFile } from './fixtures';
 import { admin, entries, game, post, resetContent, seedCanonCatalog, signIn, upload } from './helpers';
 import { computeCharacterStats, equipGear } from '../src/gear/service';
 import { claimMail, sendMail } from '../src/mail/service';
+import { loanGear } from '../src/progress/loan-gear';
+import { loadProgressionConfig } from '../src/progression/characters';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 const dec = new TextDecoder();
@@ -137,6 +139,40 @@ describe('owned-hero battles are fought with a server-frozen party', () => {
     expect(r.status).toBe(422);
   });
 
+  it('freezes supported accessory bonuses, keeps replay after unequipping and rejects an altered client snapshot', async () => {
+    const { auth, playerId } = await signIn(`sub-ob-${rid()}`);
+    const mail = await sendMail(db(), playerId, { kind: 'reward', title: 'effect fixture', attachments: [{ type: 'gear', gearId: 'accessory_red_vial_residue_ring_3' }] }, 'test');
+    await claimMail(db(), playerId, mail.id);
+    const accessory = await db().prepare('SELECT id FROM player_gear WHERE player_id = ?1').bind(playerId).first<{ id: number }>();
+    await db().prepare('UPDATE player_gear SET stats_json = ?2 WHERE id = ?1').bind(accessory!.id, JSON.stringify({ main: { stat: 'heal_bonus_pct', value: 0.5 }, subs: [{ stat: 'focus_gain_pct', value: 0.5 }] })).run();
+    await equipGear(db(), playerId, accessory!.id, 'fadyme');
+    const response = await start(auth); expect(response.status).toBe(200);
+    const { party: raw, sessionId } = await response.json() as { party: unknown; sessionId: string };
+    const party = BattleParty.parse(raw);
+    expect(party.find((m) => m.unit_id === 'fadyme')?.equipment_effects).toEqual({ version: 1, heal_bonus_pct: 0.5, focus_gain_pct: 0.5 });
+    await db().prepare('UPDATE player_gear SET equipped_by = NULL WHERE id = ?1').bind(accessory!.id).run();
+    const played = playAuto(pack, encounter, party);
+    const hash = await sha256Hex(canonicalJson(played.battle.log));
+    expect(await replayBattle(pack, encounter, played.actions, party)).toMatchObject({ valid: true, complete: true, logHash: hash });
+    const altered = structuredClone(party); delete altered.find((m) => m.unit_id === 'fadyme')!.equipment_effects;
+    const forgedHash = (await replayBattle(pack, encounter, played.actions, altered)).logHash;
+    expect(forgedHash).not.toBe(hash);
+    expect((await submit(auth, { sessionId, actions: played.actions, party: altered })).status).toBe(400);
+    expect((await submit(auth, { sessionId, actions: played.actions })).status).toBe(200);
+    const audit = await db().prepare('SELECT log_hash FROM battle_audit WHERE caller = ?1 ORDER BY id DESC LIMIT 1').bind(`player:${(await sha256Hex(playerId)).slice(0, 20)}`).first<{ log_hash: string }>();
+    expect(audit?.log_hash).toBe(hash);
+  });
+
+  it('fails battle admission without a session write when an equipped supported bonus is malformed', async () => {
+    const { auth, playerId } = await signIn(`sub-ob-${rid()}`);
+    const mail = await sendMail(db(), playerId, { kind: 'reward', title: 'invalid effect fixture', attachments: [{ type: 'gear', gearId: 'accessory_red_vial_residue_ring_3' }] }, 'test');
+    await claimMail(db(), playerId, mail.id);
+    await db().prepare("UPDATE player_gear SET equipped_by = 'fadyme', stats_json = ?2 WHERE player_id = ?1").bind(playerId, JSON.stringify({ main: { stat: 'heal_bonus_pct', value: -0.5 }, subs: [] })).run();
+    const response = await start(auth); expect(response.status).toBe(503);
+    expect(await response.json()).toMatchObject({ error: 'invalid_equipment_effects' });
+    expect((await db().prepare('SELECT COUNT(*) AS n FROM battle_sessions WHERE player_id = ?1').bind(playerId).first<{ n: number }>())?.n).toBe(0);
+  });
+
   it('a fixed story encounter also freezes a release session and starts with a null party', async () => {
     const { auth } = await signIn(`sub-ob-${rid()}`);
     const r = await start(auth, 't1');
@@ -165,6 +201,13 @@ describe('the Part I campaign release', () => {
     expect(brin.stats!.hp).toBeGreaterThan(statAtLevel(base!.base_hp, base!.growth_hp, brin.level));
     expect(await db().prepare('SELECT COUNT(*) AS n FROM player_gear WHERE player_id = ?1').bind(playerId).first()).toEqual({ n: 0 });
     expect(party.filter((m) => m.loan).map((m) => m.unit_id).sort()).toEqual(['brin_alder', 'kera_voss', 'nixie_vale']);
+    const cfg = await loadProgressionConfig(db());
+    for (const member of party.filter((m) => m.loan)) {
+      const ch = await db().prepare('SELECT weapon_type, role FROM characters WHERE id = ?1').bind(member.unit_id).first<{ weapon_type: string; role: string }>();
+      const gear = await loanGear(db(), member.unit_id, ch!.weapon_type, ch!.role, campaignEnc.stage_id, cfg, campaignPack.rules.story_loan_equipment!);
+      const supported = Object.fromEntries(['heal_bonus_pct', 'focus_gain_pct'].filter((key) => gear.other[key] !== undefined).map((key) => [key, gear.other[key]]));
+      expect(member.equipment_effects).toEqual(Object.keys(supported).length ? { version: 1, ...supported } : undefined);
+    }
     expect(new Set(party.map((m) => m.slot)).size).toBe(5);
     const played = playAuto(campaignPack, campaignEnc, party);
     expect(played.battle.result?.winner).toBe('player');

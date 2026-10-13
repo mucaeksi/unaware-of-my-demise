@@ -1,10 +1,11 @@
 import { beforeAll, expect, it } from 'vitest';
-import { UnitPack, type StoryLoanEquipment } from '@uomd/content-schema';
+import { Encounter, UnitPack, type StoryLoanEquipment } from '@uomd/content-schema';
 import type { ProgressionConfig } from '@uomd/economy';
 import { baseEnv, seedCanonCatalog } from './helpers';
 import { baseFiles } from './fixtures';
 import { loanGear } from '../src/progress/loan-gear';
 import { loadProgressionConfig } from '../src/progression/characters';
+import { buildParty } from '../src/progress/party';
 
 const db = baseEnv.DB;
 let template: StoryLoanEquipment; let cfg: ProgressionConfig;
@@ -29,6 +30,14 @@ it('produces deterministic armor/weapon/two-piece bonuses without minting or con
 
 it('fails closed if declared loan equipment is missing', async () => {
   await expect(gear('1-2', { ...template, armor_id: 'nonexistent_loan_armor' })).rejects.toMatchObject({ code: 'loan_equipment_missing' });
+});
+
+it('freezes a supported deterministic loan bonus in the same grammar as owned gear', async () => {
+  const files = await baseFiles();
+  const base = Encounter.parse(JSON.parse(new TextDecoder().decode(files.find((file) => file.path === 'encounters/tutorial_t1.json')!.bytes)));
+  const party = await buildParty(db, 'unowned-loan-fixture', { ...base, stage_id: '1-3', guests: ['brin_alder'] }, new Set(['brin_alder']), cfg, template);
+  expect(party).toHaveLength(1);
+  expect(party[0]).toMatchObject({ loan: true, equipment_effects: { version: 1, heal_bonus_pct: 0.06 } });
 });
 
 it('chooses the lowest matching generic weapon and excludes signature ownership', async () => {
