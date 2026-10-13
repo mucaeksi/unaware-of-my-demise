@@ -124,7 +124,16 @@ export const PartyMember = z
   })
   .strict();
 export type PartyMember = z.infer<typeof PartyMember>;
-export const BattleParty = z.array(PartyMember).min(1).max(5);
+function checkFormation(members: readonly { unit_id: string; slot: number }[], ctx: z.RefinementCtx, path: string[], uniqueUnits: boolean): void {
+  const slots = new Set<number>();
+  const units = new Set<string>();
+  for (const [index, member] of members.entries()) {
+    if (slots.has(member.slot)) ctx.addIssue({ code: 'custom', path: [...path, index, 'slot'], message: `duplicate slot ${member.slot}` });
+    if (uniqueUnits && units.has(member.unit_id)) ctx.addIssue({ code: 'custom', path: [...path, index, 'unit_id'], message: `duplicate unit ${member.unit_id}` });
+    slots.add(member.slot); units.add(member.unit_id);
+  }
+}
+export const BattleParty = z.array(PartyMember).min(1).max(5).superRefine((members, ctx) => checkFormation(members, ctx, [], true));
 export type BattleParty = z.infer<typeof BattleParty>;
 
 export const Encounter = z
@@ -160,7 +169,16 @@ export const Encounter = z
     provenance: z.object({ source: z.string(), source_sha256: z.string().optional() }).strict()
   })
   .strict()
-  .refine((e) => (e.party_mode ?? 'fixed') === 'owned' || e.party.length >= 1, 'a fixed encounter needs at least one party member');
+  .refine((e) => (e.party_mode ?? 'fixed') === 'owned' || e.party.length >= 1, 'a fixed encounter needs at least one party member')
+  .superRefine((encounter, ctx) => {
+    checkFormation(encounter.party, ctx, ['party'], true);
+    checkFormation(encounter.enemies, ctx, ['enemies'], false);
+    const guests = new Set<string>();
+    for (const [index, id] of (encounter.guests ?? []).entries()) {
+      if (guests.has(id)) ctx.addIssue({ code: 'custom', path: ['guests', index], message: `duplicate guest ${id}` });
+      guests.add(id);
+    }
+  });
 export type Encounter = z.infer<typeof Encounter>;
 
 const ChapterNode = z

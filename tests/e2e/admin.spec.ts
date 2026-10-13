@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { ChapterIndex } from '@uomd/content-schema';
+import { ChapterIndex, Encounter, UnitPack } from '@uomd/content-schema';
 import { sha256Hex } from '@uomd/shared';
 import { ADMIN, GAME, SHOTS } from './helpers';
 
@@ -8,6 +8,36 @@ const jwt = (): string => process.env.E2E_ADMIN_JWT as string;
 test.describe.configure({ mode: 'serial' });
 
 test.describe('UOMD Control Center (admin SPA + API, local stack with a test-only Access identity)', () => {
+  test('rejects invalid formations and conditional references without replacing the current release', async ({ page, request }, info) => {
+    const headers = { 'Cf-Access-Jwt-Assertion': jwt() };
+    const manifest = await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json();
+    const encounter = Encounter.parse(await (await request.get(`${GAME}/content/base/encounters/tutorial_t3.json`)).json());
+    const pack = UnitPack.parse(await (await request.get(`${GAME}/content/base/units/unit_pack.json`)).json());
+    for (const kind of ['slot', 'kind', 'condition'] as const) {
+      const path = kind === 'condition' ? 'units/unit_pack.json' : 'encounters/tutorial_t3.json';
+      const value = kind === 'condition' ? structuredClone(pack) : structuredClone(encounter);
+      if ('units' in value) value.units[0]!.skills[0]!.effect_ops[0]!.when = { predicate: 'owner_has_status', value: 'missing_status' };
+      else if (kind === 'slot') value.enemies[1]!.slot = value.enemies[0]!.slot;
+      else value.enemies[0]!.unit_id = 'mahmut';
+      const bytes = new TextEncoder().encode(JSON.stringify(value)); const sha256 = await sha256Hex(bytes);
+      expect((await request.put(`${ADMIN}/admin/api/objects/${sha256}`, { headers: { ...headers, 'Content-Type': 'application/json' }, data: Buffer.from(bytes) })).ok()).toBe(true);
+      const id = `rel_bad_${kind}_${info.project.name.replaceAll('-', '_')}`;
+      const draft = await request.post(`${ADMIN}/admin/api/releases`, { headers, data: { id, channel: 'dev', dependsOn: 'rel_0001', files: [{ path, sha256 }] } });
+      expect(draft.status()).toBe(422);
+      expect(await draft.text()).toContain(kind === 'condition' ? 'unknown status missing_status' : kind === 'slot' ? 'duplicate slot' : 'must be an enemy');
+      const releases = await (await request.get(`${ADMIN}/admin/api/releases`, { headers })).json();
+      expect(JSON.stringify(releases)).not.toContain(id);
+      expect(await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json()).toEqual(manifest);
+    }
+    await page.setExtraHTTPHeaders(headers);
+    await page.goto(ADMIN);
+    await expect(page.getByText('e2e-owner@example.com · owner')).toBeVisible();
+    await page.getByRole('button', { name: 'Patches' }).click();
+    await expect(page.locator('tbody .badge.ok', { hasText: 'current' })).toHaveCount(1);
+    await expect(page.locator('tbody')).not.toContainText('rel_bad_');
+    await page.screenshot({ path: `${SHOTS}/admin-${info.project.name}-formation-rejection.png`, fullPage: true });
+  });
+
   test('rejects duplicate and cyclic chapter drafts while the current release remains usable', async ({ page, request }, info) => {
     const headers = { 'Cf-Access-Jwt-Assertion': jwt() };
     const manifest = await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json();

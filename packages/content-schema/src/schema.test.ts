@@ -1,7 +1,21 @@
 import { describe, expect, it } from 'vitest';
-import { ContentManifest, EffectOp, SafeAssetPath, StoryScene } from './index';
+import { BattleParty, ContentManifest, EffectOp, SafeAssetPath, StoryScene } from './index';
 
 const sha = 'a'.repeat(64);
+
+describe('BattleParty formation', () => {
+  const members = () => [{ unit_id: 'mahmut', level: 1, slot: 0, row: 'front' }, { unit_id: 'fadyme', level: 1, slot: 1, row: 'rear' }];
+  it.each(['slot', 'hero'])('rejects a repeated %s in a frozen party', (kind) => {
+    const party = members();
+    if (kind === 'slot') party[1]!.slot = party[0]!.slot;
+    else party[1]!.unit_id = party[0]!.unit_id;
+    expect(BattleParty.safeParse(party).success).toBe(false);
+  });
+  it('keeps noncontiguous slots and authored rows valid', () => {
+    const party = members(); party[1]!.slot = 4;
+    expect(BattleParty.safeParse(party).success).toBe(true);
+  });
+});
 
 describe('SafeAssetPath', () => {
   it.each(['story/t1.json', 'img/a_b-c.webp', 'audio/loop.ogg'])('accepts %s', (p) => {

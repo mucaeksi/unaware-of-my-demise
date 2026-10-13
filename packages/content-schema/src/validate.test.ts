@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { ContentValidationError, validateContentSet, type ChapterIndex, type UnitPack } from './index';
+import { ContentValidationError, validateContentSet, type ChapterIndex, type Encounter, type UnitPack } from './index';
 
 const ROOT = new URL('../../../content/', import.meta.url).pathname;
 const walk = (dir: string, rel = ''): string[] =>
@@ -70,6 +70,72 @@ describe('validateContentSet', () => {
     const files = campaign();
     edit<ChapterIndex>(files, 'chapters/chapter_index.json', (index) => { index.chapters.reverse(); });
     expect(validateContentSet(files)).toMatchObject({ chapters: 8, nodes: 38 });
+  });
+  it.each(['party slot', 'enemy slot', 'hero', 'guest'] as const)('rejects repeated %s declarations without changing valid enemy copies', (kind) => {
+    const files = campaign();
+    const path = kind === 'guest' ? 'encounters/stage_1_2.json' : 'encounters/tutorial_t3.json';
+    edit<Encounter>(files, path, (encounter) => {
+      if (kind === 'party slot') encounter.party[1]!.slot = encounter.party[0]!.slot;
+      if (kind === 'enemy slot') encounter.enemies[1]!.slot = encounter.enemies[0]!.slot;
+      if (kind === 'hero') encounter.party[1]!.unit_id = encounter.party[0]!.unit_id;
+      if (kind === 'guest') encounter.guests!.push(encounter.guests![0]!);
+    });
+    expect(() => validateContentSet(files)).toThrow(/duplicate (slot|unit|guest)/);
+  });
+  it.each(['party', 'enemies', 'guests', 'summon'] as const)('rejects a known unit of the wrong kind in %s', (side) => {
+    const files = campaign();
+    if (side === 'summon') edit<UnitPack>(files, 'units/unit_pack.json', (pack) => {
+      pack.units[0]!.skills[0]!.effect_ops.push({ op: 'summon_enemies', target_selector_id: 'self', enemy_id: 'mahmut', count: 1 });
+    });
+    else edit<Encounter>(files, side === 'guests' ? 'encounters/stage_1_2.json' : 'encounters/tutorial_t3.json', (encounter) => {
+      if (side === 'guests') encounter.guests = ['bellbound_dead'];
+      else encounter[side][0]!.unit_id = side === 'party' ? 'bellbound_dead' : 'mahmut';
+    });
+    expect(() => validateContentSet(files)).toThrow(/must be (a character|an enemy)/);
+  });
+  it('retains repeated enemy types, per-side slots, T-3 rows and the six-person canonical guest list', () => {
+    const files = campaign();
+    const tutorial = JSON.parse(new TextDecoder().decode(files.get('encounters/tutorial_t3.json'))) as Encounter;
+    expect(tutorial.party[0]!.slot).toBe(tutorial.enemies[0]!.slot);
+    expect(tutorial.enemies.filter((member) => member.row === 'front')).toHaveLength(3);
+    expect(tutorial.enemies.filter((member) => member.unit_id === 'bellbound_dead')).toHaveLength(2);
+    const finalApproach = JSON.parse(new TextDecoder().decode(files.get('encounters/stage_7_4.json'))) as Encounter;
+    expect(finalApproach.guests).toHaveLength(6);
+    expect(validateContentSet(files)).toMatchObject({ nodes: 38 });
+  });
+  it.each(['intent', 'signature', 'unit immunity', 'boss preservation', 'status immunity'] as const)('rejects an undefined %s reference', (kind) => {
+    const files = campaign();
+    edit<UnitPack>(files, 'units/unit_pack.json', (pack) => {
+      if (kind === 'intent') pack.units[0]!.intent_skill_id = 'missing_skill';
+      if (kind === 'signature') pack.units.find((unit) => unit.boss)!.boss!.phases[0]!.signature_action_id = 'missing_skill';
+      if (kind === 'unit immunity') pack.units[0]!.status_immunities = ['missing_status'];
+      if (kind === 'boss preservation') pack.units.find((unit) => unit.boss)!.boss!.preserve_status_ids = ['missing_status'];
+      if (kind === 'status immunity') pack.rules.statuses[0]!.immune_status_ids = ['missing_status'];
+    });
+    expect(() => validateContentSet(files)).toThrow(/missing_(status|skill)/);
+  });
+  it.each(['operation', 'damage modifier', 'skill hook', 'unit hook', 'skill modifier', 'unit modifier'] as const)('rejects undefined status predicates in a nested %s condition', (where) => {
+    const files = campaign();
+    edit<UnitPack>(files, 'units/unit_pack.json', (pack) => {
+      const unit = pack.units[0]!; const skill = unit.skills[0]!;
+      const condition = { all: [{ predicate: 'owner_hp_below_pct' as const, value: 50 }, { any: [{ predicate: 'owner_has_status' as const, value: 'missing_status' }] }] };
+      if (where === 'operation') skill.effect_ops[0]!.when = condition;
+      if (where === 'damage modifier') skill.effect_ops.push({ op: 'damage', target_selector_id: 'single_enemy', damage_type: 'physical', scale_stat: 'atk', multiplier: 1, modifiers: [{ condition, multiplier: 1 }] });
+      const hook = { event: 'owner_turn_start' as const, condition, effect_ops: [{ op: 'gain_focus' as const, target_selector_id: 'self' as const, amount: 1 }] };
+      if (where === 'skill hook') skill.event_hooks = [hook];
+      if (where === 'unit hook') unit.passive_hooks = [hook];
+      const modifier = { event: 'stat_snapshot' as const, condition, target: 'self' as const, stat_id: 'atk' as const, mode: 'add_pct' as const, amount: 0.1 };
+      if (where === 'skill modifier') skill.continuous_modifiers = [modifier];
+      if (where === 'unit modifier') unit.continuous_modifiers = [modifier];
+    });
+    expect(() => validateContentSet(files)).toThrow(/unknown status missing_status/);
+  });
+  it.each(['last_target_has_status', 'owner_has_status', 'target_has_status', 'event_target_had_status', 'count_enemies_with_status', 'target_has_status_tag', 'target_has_any_status_tag'] as const)('rejects undefined %s predicate identities', (predicate) => {
+    const files = campaign();
+    edit<UnitPack>(files, 'units/unit_pack.json', (pack) => {
+      pack.units[0]!.skills[0]!.effect_ops[0]!.when = { predicate, value: predicate === 'target_has_any_status_tag' ? 'mark_or_ghost' : 'missing_status' };
+    });
+    expect(() => validateContentSet(files)).toThrow(/unknown status( tag)? (missing_status|ghost)/);
   });
   it('rejects a campaign stage that names a guest the unit pack does not contain', () => {
     const m = campaign();

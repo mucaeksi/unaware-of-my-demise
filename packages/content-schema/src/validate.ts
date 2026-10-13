@@ -1,5 +1,6 @@
 import { ArtManifest } from './art';
 import { EntryIndex, Prologue } from './entry';
+import type { Predicate } from './effects';
 import { ChapterIndex, Encounter, StoryScene } from './story';
 import { UnitPack } from './units';
 
@@ -53,8 +54,33 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
   const art = parse('art/art_manifest.json', ArtManifest);
   const index = parse('chapters/chapter_index.json', ChapterIndex);
 
-  const units = new Set(pack?.units.map((u) => u.unit_id) ?? []);
+  const units = new Map(pack?.units.map((u) => [u.unit_id, u]) ?? []);
   const statuses = new Set(pack?.rules.statuses.map((s) => s.status_id) ?? []);
+  const tags = new Set(pack?.rules.statuses.flatMap((status) => status.tags ?? []) ?? []);
+  const needStatus = (id: string, where: string): void => {
+    if (!statuses.has(id)) problems.push(`${where}: unknown status ${id}`);
+  };
+  const needUnitKind = (id: string, kind: 'character' | 'enemy', where: string): void => {
+    const unit = units.get(id);
+    if (unit && unit.kind !== kind) problems.push(`${where}: unit ${id} must be ${kind === 'enemy' ? 'an enemy' : 'a character'}`);
+  };
+  const checkPredicate = (predicate: Predicate | undefined, where: string): void => {
+    const pending = predicate ? [predicate] : [];
+    while (pending.length) {
+      const current = pending.pop()!;
+      if ('all' in current) pending.push(...current.all);
+      else if ('any' in current) pending.push(...current.any);
+      else switch (current.predicate) {
+        case 'last_target_has_status': case 'owner_has_status': case 'target_has_status': case 'event_target_had_status': case 'count_enemies_with_status':
+          needStatus(current.value, where); break;
+        case 'target_has_status_tag': case 'target_has_any_status_tag':
+          for (const tag of current.predicate === 'target_has_any_status_tag' ? current.value.split('_or_') : [current.value]) {
+            if (!tags.has(tag)) problems.push(`${where}: unknown status tag ${tag}`);
+          }
+          break;
+      }
+    }
+  };
   if (pack) {
     const phases = pack.units.flatMap((unit) => unit.boss?.phases ?? []);
     unique('unit', pack.units.map((unit) => unit.unit_id));
@@ -62,11 +88,20 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
     unique('status', pack.rules.statuses.map((status) => status.status_id));
     unique('phase', phases.map((phase) => phase.phase_id));
     unique('objective', phases.flatMap((phase) => phase.objectives.map((objective) => objective.objective_id)));
+    for (const status of pack.rules.statuses) for (const id of status.immune_status_ids ?? []) needStatus(id, `status ${status.status_id}`);
     for (const u of pack.units) {
       if (art && !art.units[u.art_key]) problems.push(`unit ${u.unit_id}: art_key ${u.art_key} missing from art manifest`);
       const bossPhases = u.boss?.phases ?? [];
       const objectives = new Set(bossPhases.flatMap((p) => p.objectives.map((o) => o.objective_id)));
       const phaseIds = new Set(bossPhases.map((p) => p.phase_id));
+      const skillIds = new Set(u.skills.map((skill) => skill.skill_id));
+      for (const id of [u.intent_skill_id, ...bossPhases.map((phase) => phase.signature_action_id)]) {
+        if (id && !skillIds.has(id)) problems.push(`unit ${u.unit_id}: unknown own skill ${id}`);
+      }
+      for (const id of [...(u.status_immunities ?? []), ...(u.boss?.preserve_status_ids ?? [])]) needStatus(id, `unit ${u.unit_id}`);
+      const hooks = [...u.skills.flatMap((skill) => skill.event_hooks ?? []), ...(u.passive_hooks ?? [])];
+      const modifiers = [...u.skills.flatMap((skill) => skill.continuous_modifiers ?? []), ...(u.continuous_modifiers ?? [])];
+      for (const entry of [...hooks, ...modifiers]) checkPredicate(entry.condition, `unit ${u.unit_id}`);
       const ops = [
         ...u.skills.flatMap((s) => [...s.effect_ops, ...(s.event_hooks ?? []).flatMap((h) => h.effect_ops)]),
         ...(u.passive_hooks ?? []).flatMap((h) => h.effect_ops),
@@ -76,6 +111,8 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
         if (id !== undefined && !objectives.has(id)) problems.push(`unit ${u.unit_id}: ${where} names objective ${id}, which no phase defines`);
       };
       for (const op of ops) {
+        checkPredicate(op.when, `unit ${u.unit_id}/${op.op}`);
+        if (op.op === 'damage') for (const modifier of op.modifiers ?? []) checkPredicate(modifier.condition, `unit ${u.unit_id}/damage`);
         if (op.op === 'apply_status' && !statuses.has(op.status_id)) problems.push(`unit ${u.unit_id}: unknown status ${op.status_id}`);
         if (op.op === 'clear_status_if_all_objectives_destroyed') {
           if (!statuses.has(op.status_id)) problems.push(`unit ${u.unit_id}: unknown status ${op.status_id}`);
@@ -83,6 +120,7 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
         }
         if (op.op === 'summon_enemies') {
           if (!units.has(op.enemy_id)) problems.push(`unit ${u.unit_id}: summons unknown unit ${op.enemy_id}`);
+          needUnitKind(op.enemy_id, 'enemy', `unit ${u.unit_id}/summon_enemies`);
           needObjective(op.only_if_objective_alive, op.op);
         }
         if (op.op === 'boss_damage_taken_modifier') {
@@ -132,7 +170,10 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
     const enc = parse(path, Encounter);
     if (!enc) return;
     for (const e of [...enc.party, ...enc.enemies]) if (!units.has(e.unit_id)) problems.push(`${path}: unknown unit ${e.unit_id}`);
+    for (const member of enc.party) needUnitKind(member.unit_id, 'character', `${path}/party`);
+    for (const member of enc.enemies) needUnitKind(member.unit_id, 'enemy', `${path}/enemies`);
     for (const g of enc.guests ?? []) if (!units.has(g)) problems.push(`${path}: unknown guest ${g}`);
+    for (const id of enc.guests ?? []) needUnitKind(id, 'character', `${path}/guests`);
     if (art && !art.backgrounds[enc.location_id]) problems.push(`${path}: no background for ${enc.location_id}`);
     if (art && enc.music_cue && !art.music[enc.music_cue]) problems.push(`${path}: unknown music cue ${enc.music_cue}`);
     if (enc.pre_story) checkScene(enc.pre_story, enc.location_id);

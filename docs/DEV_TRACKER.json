@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "539c1594",
+  "sourceCommit": "5ab6b4678ab9bb5320c110f96f3d5fc3a6003757",
   "reviewedAt": "2026-10-13",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R07",
     "status": "IN_PROGRESS",
-    "nextProposed": "R07 formation/reference and canonical story compilation",
+    "nextProposed": "R07 canonical main-story compilation and source coverage",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R07-A content identities and prerequisite cycles verified locally",
-      "detail": "Duplicate unit/skill/status/phase/objective/chapter/global-node IDs and prerequisite cycles now fail the shared content gate. 629 application/tool tests, lint/typecheck, builds/campaign and five actual desktop/phone local-Worker graph-rejection/Control Center/campaign cases pass; phone campaign intentionally skipped. R07 remains partial; R06 resistance/signature decisions and native/deployed acceptance remain open. Four-commit transfer reached main unchanged; original GitHub blocker resolved."
+      "title": "R07-B formation and combat-reference validation verified locally",
+      "detail": "Shared encounter/frozen-party schemas reject slot collisions, repeated player copies and duplicate guests. Effective packs check unit kinds, own intent/phase skill references, immunity/preservation IDs and nested status/tag conditions across effects/hooks/modifiers. 662 application/tool tests, lint/typecheck, builds/campaign, 46 adapters and five real desktop/phone local-Worker rejection/Control Center/campaign cases pass with 25 migrations; phone campaign intentionally skipped. T-3 authored rows and the six-guest 7-4 declaration stay valid. R07 remains partial for canonical story and broader catalog coverage."
     }
   ],
   "next": [
     {
-      "title": "R07 \u2014 legal formations, semantic references and canonical chapter flow",
-      "detail": "Continue independent graph/encounter reference coverage; then compile all 51 ordered main-story entries and 419 unique line IDs with source hashes, recruits, guest/spoiler gates and cue precedence. Economic catalog identities require R08 authority."
+      "title": "R07 \u2014 canonical main-story compilation and source coverage",
+      "detail": "Compile all 51 ordered main-story entries and 419 unique line IDs with exact source/hash coverage, before/after battle and road/camp/reveal order, recruit/guest/spoiler gates and cue precedence. Current schemas protect ID/prerequisite and slot/type/conditional-reference integrity; further cross-resource/effective economic catalog identities require R07/R08."
     },
     {
       "title": "R06 \u2014 remaining reviewed combat semantics",
@@ -918,6 +918,30 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R07-B-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "5ab6b4678ab9bb5320c110f96f3d5fc3a6003757",
+      "verifiedAt": "2026-10-13T17:16:04.288299+00:00",
+      "scope": "R07-B working tree: Encounter/BattleParty reject per-side slot collisions, duplicate player copies and duplicate guests; repeated enemy types, sparse/per-side reused slots and authored rows remain supported. Effective content rejects wrong unit kinds for party/guest/enemy/summons, foreign/missing intent/phase signature skills, unknown immunity/preserved statuses and nested status/tag references in operation guards, damage modifiers, skill/unit hooks and continuous modifiers. Thirty schema plus three real D1/API cases; 31 negative cases failed before correction (draft201/publication200). Draft rejection writes no release/files/success audit and does not move the pointer; stored dangling condition is revalidated before signing/publication/audit. 662 application/tool tests, lint/typecheck, both builds/campaign, 46 adapters and five actual desktop/phone local-Worker formation/reference rejection/Control Center/campaign cases pass with 25 migrations; phone campaign intentionally skipped. Screenshots inspected. Graphify3045 nodes7977 edges153 communities. Generated empty-stills metadata restored. Existing T-3 three-front enemy formation and six-guest 7-4 list preserved without redefining the five-member composition; no canon/content values, RNG/math, permanent player data or paid media change. Full canonical story/cross-resource/economic catalog and native/deployed acceptance remain open.",
+      "testIds": [
+        "packages/content-schema/src/schema.test.ts",
+        "packages/content-schema/src/validate.test.ts",
+        "apps/api/test/content.test.ts",
+        "tests/e2e/admin.spec.ts (formation/reference rejection and Control Center desktop/phone)",
+        "tests/e2e/zz-campaign.spec.ts (desktop pass, phone skip)",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "npm run build",
+        "npm run build:campaign",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1354,7 +1378,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Compile all ordered story entries and validate IDs, references, gates, waves and legal graphs.",
-      "implemented": "R07-A shared effective-set validation now rejects duplicate unit/skill/status/phase/objective/chapter/global-node IDs and cyclic prerequisites before draft writes or publication/signing. Real D1/API rollback and actual local browser graph rejection preserve the active release. Valid base/campaign and order-independent acyclic graphs remain accepted. Full canonical story compilation, formation/reference and effective catalog coverage remain open.",
+      "implemented": "R07-A shared effective-set validation now rejects duplicate unit/skill/status/phase/objective/chapter/global-node IDs and cyclic prerequisites before draft writes or publication/signing. Real D1/API rollback and actual local browser graph rejection preserve the active release. Valid base/campaign and order-independent acyclic graphs remain accepted. R07-B adds shared slot/player-copy/guest integrity, unit-kind and own skill/immunity/preservation/nested status-tag reference checks with API/browser rollback proof. Full canonical story compilation, broader cross-resource and effective catalog coverage remain open.",
       "dependsOn": [
         "R03",
         "R06"
@@ -1366,13 +1390,16 @@
         "narrative/09_VN_Scripts/Runtime_Snapshot",
         "packages/content-schema/src/validate.test.ts",
         "apps/api/test/content.test.ts",
-        "tests/e2e/admin.spec.ts"
+        "tests/e2e/admin.spec.ts",
+        "packages/content-schema/src/story.ts",
+        "packages/content-schema/src/schema.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
-        "E-R07-A-20261013"
+        "E-R07-A-20261013",
+        "E-R07-B-20261013"
       ],
       "blockerIds": []
     },

@@ -1,5 +1,5 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { ContentManifest, type ChapterIndex } from '@uomd/content-schema';
+import { ContentManifest, type ChapterIndex, type Encounter, type UnitPack } from '@uomd/content-schema';
 import { PatchManager, MemoryStorage, type BaseContent, type RemoteSource } from '@uomd/patch';
 import { sha256Hex, verifyPayload, type SignedPayload } from '@uomd/shared';
 import { baseFiles, patchFiles, type TestFile } from './fixtures';
@@ -41,6 +41,44 @@ async function malformedChapters(kind: 'duplicate' | 'cycle'): Promise<TestFile>
 }
 
 describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
+  it.each(['duplicate slot', 'wrong enemy kind'] as const)('rejects a %s encounter before writing a draft', async (kind) => {
+    await publishBase();
+    const original = base.find((file) => file.path === 'encounters/tutorial_t3.json')!;
+    const encounter = JSON.parse(new TextDecoder().decode(original.bytes)) as Encounter;
+    if (kind === 'duplicate slot') encounter.enemies[1]!.slot = encounter.enemies[0]!.slot;
+    else encounter.enemies[0]!.unit_id = 'mahmut';
+    const bytes = new TextEncoder().encode(JSON.stringify(encounter));
+    const bad = { ...original, bytes, sha256: await sha256Hex(bytes) }; await upload([bad]);
+    const pointer = await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first();
+    const response = await post('/admin/api/releases', { id: 'rel_bad_encounter', channel: 'dev', dependsOn: 'rel_0001', files: entries([bad]) });
+    expect(response.status).toBe(422);
+    expect(await response.text()).toContain(kind === 'duplicate slot' ? 'duplicate slot' : 'must be an enemy');
+    expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM content_releases WHERE id = 'rel_bad_encounter'").first()).toEqual({ n: 0 });
+    expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM release_files WHERE release_id = 'rel_bad_encounter'").first()).toEqual({ n: 0 });
+    expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE target = 'rel_bad_encounter'").first()).toEqual({ n: 0 });
+    expect(await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first()).toEqual(pointer);
+  });
+
+  it('rejects an old draft with a dangling conditional status before signing or replacing the channel', async () => {
+    await publishBase(); await upload(patch);
+    expect((await post('/admin/api/releases', { id: 'rel_0002', channel: 'dev', dependsOn: 'rel_0001', files: entries(patch) })).status).toBe(201);
+    const original = patch.find((file) => file.path === 'units/unit_pack.json')!;
+    const pack = JSON.parse(new TextDecoder().decode(original.bytes)) as UnitPack;
+    pack.units[0]!.skills[0]!.effect_ops[0]!.when = { predicate: 'owner_has_status', value: 'missing_status' };
+    const bytes = new TextEncoder().encode(JSON.stringify(pack));
+    const bad = { ...original, bytes, sha256: await sha256Hex(bytes) }; await upload([bad]);
+    await baseEnv.DB.prepare('UPDATE release_files SET sha256 = ?1 WHERE release_id = ?2 AND path = ?3').bind(bad.sha256, 'rel_0002', bad.path).run();
+    const draft = await baseEnv.DB.prepare("SELECT * FROM content_releases WHERE id = 'rel_0002'").first();
+    const pointer = await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first();
+    const audit = await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE target = 'rel_0002'").first();
+    const response = await post('/admin/api/releases/rel_0002/publish', {});
+    expect(response.status).toBe(422);
+    expect(await response.text()).toContain('unknown status missing_status');
+    expect(await baseEnv.DB.prepare("SELECT * FROM content_releases WHERE id = 'rel_0002'").first()).toEqual(draft);
+    expect(await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first()).toEqual(pointer);
+    expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE target = 'rel_0002'").first()).toEqual(audit);
+  });
+
   it.each(['duplicate', 'cycle'] as const)('rejects a %s campaign graph before writing a draft or changing the channel', async (kind) => {
     await publishBase();
     const bad = await malformedChapters(kind);
