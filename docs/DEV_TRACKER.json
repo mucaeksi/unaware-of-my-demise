@@ -509,6 +509,25 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-RUNNER-ISOLATED-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "ba4eba8804292a723df157477286bcdbb429b042",
+      "verifiedAt": "2026-10-13T05:24:27+00:00",
+      "scope": "Runner working tree: 27 Python cases incl. seven isolated/schedule/ownership cases and clean interrupted-thread retry. Actual Git worktree preparation/dry-run preserves primary branch/HEAD/tracked/untracked fingerprint; unknown/foreign/changed ownership and overlapping runs denied. 46 adapters intact; static doctor PASS. Live isolated scheduler restarted with next attempt preserved at 2026-10-13T07:16:48+00:00. Uses authorized host filesystem scope, private logs and persisted UTC schedule; outer network policy unchanged. Environment revision 34 current/connected but model host not allowed; saved draft revision 2 exists with no exposed publish tool. No new model/session execution or usage reset proof; current application verification stays R04-C at 527 tests.",
+      "testIds": [
+        "python3 -m unittest discover -s tools/tests",
+        "python3 -m py_compile tools/resume_infrastructure.py",
+        "python3 tools/sync_codex_skills.py --check",
+        "python3 tools/skills_doctor.py",
+        "actual run_isolated dry-run + primary snapshot fingerprint",
+        "cloud environment status/read draft + live scheduler PID/schedule inspection"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [

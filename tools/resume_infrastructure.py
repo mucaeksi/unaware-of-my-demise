@@ -13,6 +13,7 @@ from pathlib import Path
 import subprocess
 import signal
 import time
+import uuid
 
 INTERVAL = 5 * 60 * 60
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,13 +39,28 @@ def stamp() -> str:
     return dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
 
 
-def save_status(cache: Path, state: str, **detail: object) -> None:
-    cache.mkdir(parents=True, exist_ok=True)
-    target = cache / "resume-status.json"
-    temp = cache / "resume-status.tmp"
-    temp.write_text(json.dumps({"at": stamp(), "state": state, **detail}, indent=2) + "\n")
+def save_private_json(target: Path, payload: dict) -> None:
+    temp = target.with_suffix('.tmp')
+    temp.write_text(json.dumps(payload, indent=2) + '\n')
     temp.chmod(0o600)
     temp.replace(target)
+
+
+def save_status(cache: Path, state: str, **detail: object) -> None:
+    cache.mkdir(parents=True, exist_ok=True)
+    save_private_json(cache / 'resume-status.json', {"at": stamp(), "state": state, **detail})
+
+
+def next_attempt(cache: Path, now: dt.datetime) -> dt.datetime:
+    """Preserve a scheduled interval across process restart; missed intervals cause only one attempt."""
+    fallback = now + dt.timedelta(seconds=INTERVAL)
+    try:
+        due = dt.datetime.fromisoformat(json.loads((cache / 'schedule.json').read_text())['nextAttemptAt'])
+        if due.tzinfo is None:
+            return fallback
+        return max(now, min(due, fallback))
+    except (OSError, ValueError, TypeError, KeyError):
+        return fallback
 
 
 def workspace_fingerprint(root: Path) -> str:
@@ -65,10 +81,10 @@ def workspace_fingerprint(root: Path) -> str:
     return digest.hexdigest()
 
 
-def run_model(command: list[str], output, timeout: float = INTERVAL - 60) -> subprocess.CompletedProcess:
+def run_model(command: list[str], output, timeout: float = INTERVAL - 60, prompt: str = PROMPT) -> subprocess.CompletedProcess:
     with subprocess.Popen(command, stdin=subprocess.PIPE, stdout=output, stderr=subprocess.STDOUT, text=True, start_new_session=True) as process:
         try:
-            process.communicate(PROMPT, timeout=timeout)
+            process.communicate(prompt, timeout=timeout)
         except subprocess.TimeoutExpired:
             os.killpg(process.pid, signal.SIGTERM)
             try:
@@ -80,7 +96,7 @@ def run_model(command: list[str], output, timeout: float = INTERVAL - 60) -> sub
         return subprocess.CompletedProcess(command, process.returncode)
 
 
-def run_once(root: Path, *, dry_run: bool = False) -> str:
+def run_once(root: Path, *, dry_run: bool = False, primary_root: Path | None = None) -> str:
     cache = root / ".cache" / "infrastructure-resume"
     cache.mkdir(parents=True, exist_ok=True)
     with (cache / "session.lock").open("a") as lock:
@@ -94,8 +110,10 @@ def run_once(root: Path, *, dry_run: bool = False) -> str:
             previous = json.loads(owned.read_text()) if owned.exists() else {}
         except (ValueError, OSError):
             previous = {}
+        if not isinstance(previous, dict):
+            previous = {}
         resume_id = previous.get('threadId')
-        if not dirty.strip() or not isinstance(resume_id, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{1,127}', resume_id):
+        if not (dirty.strip() or previous.get('interrupted') is True) or not isinstance(resume_id, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{1,127}', resume_id):
             resume_id = None
         elif previous.get('workspaceFingerprint') != workspace_fingerprint(root):
             resume_id = None
@@ -114,11 +132,23 @@ def run_once(root: Path, *, dry_run: bool = False) -> str:
         with log.open("x") as output:
             log.chmod(0o600)
             try:
-                command = ["codex", "exec", "--cd", str(root), "--sandbox", "workspace-write",
+                # An isolated worktree shares Git metadata outside its checkout; use the owner's authorized host scope.
+                command = ["codex", "exec", "--cd", str(root), "--sandbox", "danger-full-access" if primary_root else "workspace-write",
                      "-c", 'approval_policy="never"', "-c", 'model_reasoning_effort="xhigh"',
                      "--json", "--output-last-message", str(last)]
                 command.extend(['resume', resume_id, '-'] if resume_id else ['-'])
-                result = run_model(command, output)
+                if primary_root:
+                    prompt = PROMPT + f"""\nThis is the runner's owned isolated worktree. Primary checkout: {primary_root}.
+Inspect primary status/diff read-only to understand any unfinished work; preserve
+it and finish reviewed work here. Fetch/integrate current origin/main before
+choosing the next task. Keep this worktree on its own task branch; publish verified
+HEAD:main without checking out or modifying primary main. Install pinned workspace
+dependencies here if needed; never symlink primary node_modules (workspace links
+would test primary code). Use isolated fixtures/ports and clean up own processes.
+"""
+                    result = run_model(command, output, prompt=prompt)
+                else:
+                    result = run_model(command, output)
             except OSError as error:
                 save_status(cache, "RUNNER_UNAVAILABLE", error=type(error).__name__)
                 return "RUNNER_UNAVAILABLE"
@@ -133,20 +163,68 @@ def run_once(root: Path, *, dry_run: bool = False) -> str:
                 except ValueError:
                     continue
         if thread_id:
-            owned.write_text(json.dumps({'threadId': thread_id, 'workspaceFingerprint': workspace_fingerprint(root)}) + '\n')
-            owned.chmod(0o600)
+            save_private_json(owned, {'threadId': thread_id, 'workspaceFingerprint': workspace_fingerprint(root), 'interrupted': result.returncode != 0})
         state = "FINISHED" if result.returncode == 0 else "RETRY_NEXT_INTERVAL"
         save_status(cache, state, exitCode=result.returncode, log=log.name)
         return state
+
+
+def run_isolated(root: Path, *, dry_run: bool = False) -> str:
+    """Continue from a verified checkpoint without adopting or editing the primary checkout."""
+    root = root.resolve()
+    cache = root / '.cache' / 'infrastructure-resume'
+    cache.mkdir(parents=True, exist_ok=True)
+    with (cache / 'session.lock').open('a') as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            return 'BUSY'
+        workspace = cache / 'checkout'
+        registry = cache / 'worktree-owner.json'
+        try:
+            if not registry.exists():
+                if workspace.exists() or workspace.is_symlink():
+                    raise ValueError('unowned continuation path')
+                branch = f'codex/infrastructure-auto-{uuid.uuid4().hex[:12]}'
+                refs = subprocess.check_output(['git', 'for-each-ref', '--format=%(refname)', 'refs/remotes/origin/main', 'refs/heads/main'], cwd=root, text=True).splitlines()
+                base = 'refs/remotes/origin/main' if 'refs/remotes/origin/main' in refs else 'refs/heads/main' if 'refs/heads/main' in refs else 'HEAD'
+                subprocess.run(['git', 'worktree', 'add', '-b', branch, str(workspace), base], cwd=root, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+                info = {'primary': str(root), 'workspace': str(workspace), 'initialBranch': branch, 'fingerprint': workspace_fingerprint(workspace)}
+            else:
+                info = json.loads(registry.read_text())
+                if not isinstance(info, dict):
+                    raise ValueError('invalid continuation ownership record')
+                if workspace.is_symlink() or info.get('primary') != str(root) or info.get('workspace') != str(workspace) or info.get('fingerprint') != workspace_fingerprint(workspace):
+                    raise ValueError('continuation changed outside its recorded run')
+                registered = subprocess.check_output(['git', 'worktree', 'list', '--porcelain'], cwd=root, text=True).splitlines()
+                if f'worktree {workspace}' not in registered:
+                    raise ValueError('continuation is not a registered worktree')
+            common = lambda cwd: subprocess.check_output(['git', 'rev-parse', '--path-format=absolute', '--git-common-dir'], cwd=cwd, text=True).strip()
+            if common(workspace) != common(root):
+                raise ValueError('continuation belongs to another repository')
+            # Record ownership before starting a model; a missing record never authorizes adoption.
+            save_private_json(registry, info)
+        except (OSError, ValueError, subprocess.SubprocessError) as error:
+            save_status(cache, 'CONTINUATION_UNVERIFIED', error=type(error).__name__, message='Preserve the unowned or changed checkout; no model started.')
+            return 'CONTINUATION_UNVERIFIED'
+        save_status(cache, 'RUNNING', pid=os.getpid(), workspacePath=str(workspace))
+        result = run_once(workspace, dry_run=dry_run, primary_root=root)
+        if result in ['FINISHED', 'RETRY_NEXT_INTERVAL', 'RUNNER_UNAVAILABLE', 'READY_NOT_EXECUTED']:
+            info['fingerprint'] = workspace_fingerprint(workspace)
+            save_private_json(registry, info)
+        save_status(cache, result, workspacePath=str(workspace), detailPath=str(workspace / '.cache/infrastructure-resume/resume-status.json'))
+        return result
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--loop", action="store_true", help="Wait five hours before each attempt; host must remain alive.")
     parser.add_argument("--dry-run", action="store_true", help="Check dirty-worktree/lock guards without a model call.")
+    parser.add_argument('--isolated', action='store_true', help='Prepare/use the owned isolated checkout; primary unfinished work stays untouched, including in dry-run.')
     args = parser.parse_args()
     if not args.loop:
-        print(run_once(ROOT, dry_run=args.dry_run))
+        run = run_isolated if args.isolated else run_once
+        print(run(ROOT, dry_run=args.dry_run))
         return
     cache = ROOT / ".cache" / "infrastructure-resume"
     cache.mkdir(parents=True, exist_ok=True)
@@ -156,16 +234,22 @@ def main() -> None:
         except BlockingIOError:
             print("Scheduler already running.", flush=True)
             return
-        deadline = time.monotonic() + INTERVAL
+        now = dt.datetime.now(dt.timezone.utc)
+        due = next_attempt(cache, now)
+        deadline = time.monotonic() + (due - now).total_seconds()
+        save_private_json(cache / 'schedule.json', {'nextAttemptAt': due.isoformat(), 'intervalSeconds': INTERVAL})
         save_status(cache, "SCHEDULED_NOT_EXECUTED", pid=os.getpid(), intervalSeconds=INTERVAL,
-                    nextAttemptAt=(dt.datetime.now(dt.timezone.utc) + dt.timedelta(seconds=INTERVAL)).isoformat())
+                    nextAttemptAt=due.isoformat(), isolated=args.isolated)
         while True:
             time.sleep(max(0, deadline - time.monotonic()))
-            print(stamp(), run_once(ROOT, dry_run=args.dry_run), flush=True)
+            run = run_isolated if args.isolated else run_once
+            print(stamp(), run(ROOT, dry_run=args.dry_run), flush=True)
             # Missed intervals do not trigger a burst of overlapping model sessions.
             deadline += INTERVAL
             if deadline <= time.monotonic():
                 deadline = time.monotonic() + INTERVAL
+            due = dt.datetime.now(dt.timezone.utc) + dt.timedelta(seconds=max(0, deadline - time.monotonic()))
+            save_private_json(cache / 'schedule.json', {'nextAttemptAt': due.isoformat(), 'intervalSeconds': INTERVAL})
 
 
 if __name__ == "__main__":
