@@ -120,3 +120,7 @@ Duration-one/boss Break owes one action skip after expiry; dead turn-start units
 ## Latest verified slice — R06-B
 
 Shipped 20-level/3-rank limits and coherent positive/safe XP/fee arithmetic, ordered reachable caps/gates/milestones and complete rank costs are validated. Admin config checks known material identities; invalid stored config returns explicit 503 without fallback/repair. Four failing-before economic cases, three D1 admin/runtime cases, all 599 application/tool tests, lint/typecheck and real desktop/phone account flows pass. Both builds/25 migrations pass. Next canonical story-loan equipment/owned precedence and equipped effects; stage-gate identities depend on R07/R08 effective catalog. No numeric retuning or historical repair.
+
+## Latest verified slice — R06-C1
+
+Owned story guests use their own level/basic equipped stats/ranks, once, following the explicit chapter-1 canon; session stats stay frozen after unequipping. Revised regression failed before correction; nine owned-battle cases, all 599 application/tool tests, lint/typecheck and real desktop campaign pass (phone intentionally skipped). Both builds/25 migrations pass. Next authored unowned-loan rarity3 armor/weapon/accessories and CRC32 seed/defaults, then equipped secondary/proc effects. No inventory minting, numeric tuning or creative assets.

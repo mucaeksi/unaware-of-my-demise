@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R06-B shipped progression/coherence verified; loan equipment next",
-      "detail": "599 application/tool tests and desktop/phone account flows pass. Supported caps, positive/safe XP/fee arithmetic and coherent costs/gates/milestones prevent invalid progression; D1 materials are checked, invalid stored config fails closed without repair. Continue canonical story loans and equipped-effect contracts."
+      "title": "R06-C1 owned guest precedence verified; canonical loan equipment next",
+      "detail": "599 application/tool tests and real desktop campaign pass. Owned story guests retain their level/basic gear/ranks, once, with immutable session snapshot. Unowned loan template and equipped secondary/proc effects remain next."
     }
   ],
   "next": [
@@ -768,6 +768,25 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R06-C1-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "2f6e2eb0",
+      "verifiedAt": "2026-10-13T12:16:46.895194+00:00",
+      "scope": "R06-C1 working tree: explicit chapter1 owned-guest canon; own level/computed basic equipped stats/skill ranks replace loan, preserving guest position and no duplicate hero. Shared owned-member construction and defensive guest ID deduplication. Revised real-D1 owned-guest regression failed before correction; actual gear mail grant/equip, rank/level snapshot and later unequip leave stored session unchanged. Nine owned-battle cases, all 599 application/tool tests/lint/typecheck and real local Worker desktop campaign pass (phone intentionally skipped by campaign test); both builds/25 migrations pass. Unowned loan equipment and secondary/proc effects not yet implemented. No persistent gameplay inventory grant by party builder, numerical/canon retuning, paid/creative assets, native/deployed or complete-R06 claim.",
+      "testIds": [
+        "apps/api/test/owned-battle.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "tests/e2e/zz-campaign.spec.ts (desktop pass, phone skip)",
+        "E2E game/admin builds and 25 local migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1155,7 +1174,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Correct Break/Auto/expiry/procs, loan equipment and compatible progression limits with deterministic replay.",
-      "implemented": "R06-A/B control/boss Auto and exact replay plus shipped progression limits, positive/safe XP/fees, coherent costs/gates/milestones, material identity validation and fail-closed stored config are locally verified. Equipped effects, canonical loan gear/precedence and broader conformance remain; effective stage identity authority follows R07/R08.",
+      "implemented": "R06-A/B/C1 control/boss Auto/replay, supported coherent progression/material validation and owned story-guest level/basic gear/rank precedence with frozen session are locally verified. Unowned canonical loan equipment, secondary/proc effects and broader conformance remain; effective stage identity authority follows R07/R08.",
       "dependsOn": [
         "R01"
       ],
@@ -1170,14 +1189,17 @@
         "packages/economy/src/progression.ts",
         "packages/economy/src/progression.test.ts",
         "apps/api/src/progression/refs.ts",
-        "apps/api/test/progression-config.test.ts"
+        "apps/api/test/progression-config.test.ts",
+        "apps/api/src/progress/party.ts",
+        "apps/api/test/owned-battle.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-REGRESSIONS",
         "E-EXTERNAL",
         "E-R06-A-20261013",
-        "E-R06-B-20261013"
+        "E-R06-B-20261013",
+        "E-R06-C1-20261013"
       ],
       "blockerIds": [
         "B-ECONOMY"

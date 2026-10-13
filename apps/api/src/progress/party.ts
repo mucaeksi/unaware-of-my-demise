@@ -11,6 +11,7 @@ interface TeamMember {
 }
 
 const FRONT = 2;
+type Member = Omit<PartyMember, 'slot' | 'row'> & { affinity: 'front' | 'rear' | null };
 
 /**
  * The party the server fights with for an owned-hero stage: story guests first (they take slots before the player's own heroes,
@@ -21,17 +22,23 @@ const FRONT = 2;
 export async function buildParty(db: D1Database, playerId: string, encounter: Encounter, unitIds: ReadonlySet<string>, cfg?: ProgressionConfig): Promise<BattleParty> {
   cfg ??= await loadProgressionConfig(db);
   const stageLevel = Math.max(...encounter.enemies.map((e) => e.level), 1);
-  const members: (Omit<PartyMember, 'slot' | 'row'> & { affinity: 'front' | 'rear' | null })[] = [];
+  const members: Member[] = [];
 
-  for (const id of (encounter.guests ?? []).filter((g) => unitIds.has(g)).slice(0, 5)) {
+  for (const id of [...new Set(encounter.guests ?? [])].filter((g) => unitIds.has(g)).slice(0, 5)) {
     const ch = await db
       .prepare('SELECT base_hp, base_atk, base_def, base_spd, growth_hp, growth_atk, growth_def, growth_spd, formation_affinity FROM characters WHERE id = ?1')
       .bind(id)
       .first<{ base_hp: number; base_atk: number; base_def: number; base_spd: number; growth_hp: number; growth_atk: number; growth_def: number; growth_spd: number; formation_affinity: string | null }>();
     if (!ch) continue;
+    const affinity = ch.formation_affinity === 'front' || ch.formation_affinity === 'rear' ? ch.formation_affinity : null;
+    const owned = await db.prepare("SELECT 1 FROM player_items WHERE player_id = ?1 AND item_type = 'character' AND item_id = ?2").bind(playerId, id).first();
+    if (owned) {
+      members.push(await ownedMember(db, playerId, id, cfg, affinity));
+      continue;
+    }
     // story loans fight with their own level curve (no gear): the loan equipment template is not modelled yet
     const stats = finalStats({ hp: ch.base_hp, atk: ch.base_atk, def: ch.base_def, spd: ch.base_spd }, { hp: ch.growth_hp, atk: ch.growth_atk, def: ch.growth_def, spd: ch.growth_spd }, stageLevel, { flat: {}, pct: {}, other: {} });
-    members.push({ unit_id: id, level: stageLevel, stats, loan: true, affinity: ch.formation_affinity === 'front' || ch.formation_affinity === 'rear' ? ch.formation_affinity : null });
+    members.push({ unit_id: id, level: stageLevel, stats, loan: true, affinity });
   }
 
   const room = 5 - members.length;
@@ -39,10 +46,7 @@ export async function buildParty(db: D1Database, playerId: string, encounter: En
     for (const t of await ownedTeam(db, playerId, unitIds)) {
       if (members.length >= 5) break;
       if (members.some((m) => m.unit_id === t.characterId)) continue; // a guest already stands in for this hero
-      const st = await computeCharacterStats(db, playerId, t.characterId, cfg);
-      const ranks = await db.prepare('SELECT skill_ranks FROM player_chars WHERE player_id = ?1 AND character_id = ?2').bind(playerId, t.characterId).first<{ skill_ranks: string }>();
-      const skillRanks = ranks ? (JSON.parse(ranks.skill_ranks) as Record<string, number>) : {};
-      members.push({ unit_id: t.characterId, level: st.level, stats: st.stats, ...(Object.keys(skillRanks).length ? { skill_ranks: skillRanks } : {}), affinity: t.row });
+      members.push(await ownedMember(db, playerId, t.characterId, cfg, t.row));
     }
   }
   if (members.length === 0) throw new HttpError(409, 'no_team', 'you have no hero to send into battle');
@@ -56,6 +60,13 @@ export async function buildParty(db: D1Database, playerId: string, encounter: En
   front.forEach((m, i) => out.push(strip(m, i, 'front')));
   rest.forEach((m, i) => out.push(strip(m, front.length + i, 'rear')));
   return BattleParty.parse(out);
+}
+
+async function ownedMember(db: D1Database, playerId: string, characterId: string, cfg: ProgressionConfig, affinity: Member['affinity']): Promise<Member> {
+  const st = await computeCharacterStats(db, playerId, characterId, cfg);
+  const ranks = await db.prepare('SELECT skill_ranks FROM player_chars WHERE player_id = ?1 AND character_id = ?2').bind(playerId, characterId).first<{ skill_ranks: string }>();
+  const skillRanks = ranks ? JSON.parse(ranks.skill_ranks) as Record<string, number> : {};
+  return { unit_id: characterId, level: st.level, stats: st.stats, ...(Object.keys(skillRanks).length ? { skill_ranks: skillRanks } : {}), affinity };
 }
 
 function strip(m: { affinity: 'front' | 'rear' | null } & Omit<PartyMember, 'slot' | 'row'>, slot: number, row: 'front' | 'rear'): PartyMember {

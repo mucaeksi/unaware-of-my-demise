@@ -5,6 +5,8 @@ import { BattleParty, Encounter, UnitPack } from '@uomd/content-schema';
 import { sha256Hex } from '@uomd/shared';
 import { baseFiles, campaignFiles, type TestFile } from './fixtures';
 import { admin, entries, game, post, resetContent, seedCanonCatalog, signIn, upload } from './helpers';
+import { computeCharacterStats, equipGear } from '../src/gear/service';
+import { claimMail, sendMail } from '../src/mail/service';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 const dec = new TextDecoder();
@@ -98,7 +100,7 @@ describe('owned-hero battles are fought with a server-frozen party', () => {
     expect(((await r.json()) as { error: string }).error).toBe('session_expired');
   });
 
-  it('story loans take the first slots and the owned heroes fill the rest', async () => {
+  it('an owned story guest uses its own gear/ranks once and keeps the frozen snapshot', async () => {
     const guestEnc = { ...encounter, encounter_id: 'owned_g1', guests: ['fadyme'] };
     const index = JSON.parse(dec.decode(files.find((f) => f.path === 'chapters/chapter_index.json')!.bytes));
     index.chapters[0].nodes.push({ node_id: 'g1', title_en: 'Guest', kind: 'battle', encounter: 'encounters/owned_g1.json' });
@@ -107,12 +109,26 @@ describe('owned-hero battles are fought with a server-frozen party', () => {
     await upload(set);
     expect((await admin('/admin/api/releases', { method: 'POST', body: JSON.stringify({ id: 'rel_0001', channel: 'dev', notes: 'guests', files: entries(set) }), headers: { 'Content-Type': 'application/json' } })).status).toBe(201);
     expect((await admin('/admin/api/releases/rel_0001/publish', { method: 'POST', body: '{}', headers: { 'Content-Type': 'application/json' } })).status).toBe(200);
-    const { auth } = await signIn(`sub-ob-${rid()}`);
-    const j = (await (await start(auth, 'g1')).json()) as { party: unknown };
+    const { auth, playerId } = await signIn(`sub-ob-${rid()}`);
+    const ranks = { fadyme_basic_veilglass_thorn: 2 };
+    await db().prepare(`INSERT INTO player_chars (player_id, character_id, level, skill_ranks) VALUES (?1, 'fadyme', 5, ?2)
+      ON CONFLICT (player_id, character_id) DO UPDATE SET level = 5, skill_ranks = excluded.skill_ranks`).bind(playerId, JSON.stringify(ranks)).run();
+    const mail = await sendMail(db(), playerId, { kind: 'reward', title: 'owned guest gear fixture', attachments: [{ type: 'gear', gearId: 'armor_padded_3_01' }] }, 'test');
+    await claimMail(db(), playerId, mail.id);
+    const armor = await db().prepare("SELECT id FROM player_gear WHERE player_id = ?1 AND gear_id = 'armor_padded_3_01'").bind(playerId).first<{ id: number }>();
+    await equipGear(db(), playerId, armor!.id, 'fadyme');
+    const expected = await computeCharacterStats(db(), playerId, 'fadyme');
+    const response = await start(auth, 'g1'); expect(response.status).toBe(200);
+    const j = (await response.json()) as { party: unknown; sessionId: string };
     const party = BattleParty.parse(j.party);
     expect(party.map((m) => m.unit_id)).toEqual(expect.arrayContaining(['fadyme', 'mahmut']));
-    expect(party.filter((m) => m.unit_id === 'fadyme')).toHaveLength(1); // the loan stands in for the owned hero
-    expect(party.find((m) => m.unit_id === 'fadyme')?.loan).toBe(true);
+    expect(party.filter((m) => m.unit_id === 'fadyme')).toHaveLength(1);
+    const guest = party.find((m) => m.unit_id === 'fadyme')!;
+    expect(guest.loan).not.toBe(true);
+    expect(guest).toMatchObject({ level: 5, stats: expected.stats, skill_ranks: ranks });
+    await db().prepare('UPDATE player_gear SET equipped_by = NULL WHERE id = ?1').bind(armor!.id).run();
+    const frozen = await db().prepare('SELECT party_json FROM battle_sessions WHERE id = ?1').bind(j.sessionId).first<{ party_json: string }>();
+    expect(JSON.parse(frozen!.party_json)).toEqual(party);
   });
 
   it('the anonymous replay endpoint refuses an owned-hero stage instead of failing', async () => {
