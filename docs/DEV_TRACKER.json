@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R04 local repeat/copy/provenance acceptance complete; R05 next",
-      "detail": "Paid-only repeat eligibility closes real zero-Ration sequential/concurrent farming; finite configured milestones remain. 527 application/tool tests and actual desktop campaign plus desktop/phone disclosure pass. Continue persistent account-scoped operation recovery; final economy numbers remain R16."
+      "title": "R05-A authentication response fences verified; durable operations next",
+      "detail": "Four failing-before stale auth/logout/sign-in/deletion races pass; 531 application/tool tests and lint/typecheck pass. Continue durable account-scoped operation identities, original payloads and authoritative result recovery."
     }
   ],
   "next": [
@@ -528,6 +528,26 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R05-A-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "99de074008d37e9fe65f59c0b4702d1aa359402d",
+      "verifiedAt": "2026-10-13T06:01:30+00:00",
+      "scope": "R05-A working tree: four client auth-response regressions failed before correction and now pass (stale 401, delayed logout, out-of-order login and previous-account deletion). Request bearer/revision captured; newest login owns local session and logout ends local authority immediately. Lint/typecheck and all 531 application/tool tests pass; game/admin builds pass. No claim of durable operation or physical native lifecycle acceptance yet. Continuation checkout has independent npm-ci workspace links and its own free Graphify index (2891 nodes/7362 edges/145 communities at ba4eba88); actual local native skills/list reports 60 discovered/zero errors/six enabled Ponytail variants, not model execution proof.",
+      "testIds": [
+        "apps/game/src/net/api.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "npm run build -w @uomd/game",
+        "npm run build -w @uomd/admin",
+        "owned checkout npm ci/workspace-link checks; Graphify extract; native skills/list"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -856,10 +876,10 @@
     {
       "id": "R05",
       "title": "Durable client retry",
-      "taskStatus": "OPEN",
+      "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
-      "implemented": "Server idempotency and client API exist; new per-invocation IDs and non-durable pending operations leave recovery incomplete.",
+      "implemented": "R05-A locally verified: captured bearer/revision protects newer sessions against stale unauthorized/logout/deletion results; newest sign-in wins and logout ends local authority immediately. Durable financial mutation identity/payload/status storage and retry/reload/account-scope recovery remain open.",
       "dependsOn": [
         "R01",
         "R02",
@@ -868,12 +888,14 @@
       "acceptance": "README.md#r05--durable-client-retry-and-operation-status",
       "sourcePaths": [
         "apps/game/src/net/api.ts",
-        "apps/game/src/entry/sync.ts"
+        "apps/game/src/entry/sync.ts",
+        "apps/game/src/net/api.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R05-A-20261013"
       ],
       "blockerIds": []
     },

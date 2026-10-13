@@ -153,6 +153,7 @@ export const newRequestId = (): string => (globalThis.crypto?.randomUUID ? globa
 /** Typed client for the game API. The session token is an opaque bearer kept in localStorage (never logged). */
 export class GameApi extends EventTarget {
   private session: Session | null = null;
+  private authVersion = 0;
 
   constructor(private readonly base = API_BASE) {
     super();
@@ -172,6 +173,7 @@ export class GameApi extends EventTarget {
   }
 
   private store(s: Session | null): void {
+    this.authVersion++;
     this.session = s;
     try {
       if (s) localStorage.setItem(KEY, JSON.stringify(s));
@@ -184,9 +186,11 @@ export class GameApi extends EventTarget {
 
   /** Raw typed call. Public so the browser test harness can reach endpoints the UI does not wrap yet. */
   async call<T>(method: string, path: string, body?: unknown, auth = true): Promise<T> {
+    const requestSession = this.session;
+    const requestAuthVersion = this.authVersion;
     const res = await fetch(`${this.base}${path}`, {
       method,
-      headers: { ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}), ...(auth && this.session ? { Authorization: `Bearer ${this.session.token}` } : {}) },
+      headers: { ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}), ...(auth && requestSession ? { Authorization: `Bearer ${requestSession.token}` } : {}) },
       ...(body !== undefined ? { body: JSON.stringify(body) } : {})
     });
     const text = await res.text();
@@ -198,25 +202,28 @@ export class GameApi extends EventTarget {
     }
     if (!res.ok) {
       const e = (json ?? {}) as { error?: string; message?: string; detail?: unknown };
-      if (res.status === 401 && auth && this.session) this.store(null); // expired or revoked: back to signed out
+      if (res.status === 401 && auth && requestSession && this.session === requestSession && this.authVersion === requestAuthVersion) this.store(null);
       throw new ApiError(res.status, e.error ?? 'http_error', e.message ?? `HTTP ${res.status}`, e.detail);
     }
     return json as T;
   }
 
   async signInWithIdToken(idToken: string): Promise<{ id: string; displayName: string | null; isNew: boolean }> {
+    const attempt = ++this.authVersion;
     const r = await this.call<{ token: string; expiresAt: string; player: { id: string; displayName: string | null; isNew: boolean } }>('POST', '/api/v1/auth/google', { idToken }, false);
+    if (this.authVersion !== attempt) throw new ApiError(409, 'auth_changed', 'The selected account changed before sign-in completed');
     this.store({ token: r.token, expiresAt: r.expiresAt });
     return r.player;
   }
 
   async signOut(): Promise<void> {
+    const request = this.call('POST', '/api/v1/auth/logout', {});
+    this.store(null); // End local authority immediately; the request already captured the old bearer.
     try {
-      await this.call('POST', '/api/v1/auth/logout', {});
+      await request;
     } catch {
       /* the server may already have dropped the session */
     }
-    this.store(null);
   }
 
   entry = (): Promise<EntryCheckpoint> => this.call('GET', '/api/v1/entry');
@@ -321,8 +328,9 @@ export class GameApi extends EventTarget {
     return this.call('GET', '/api/v1/account/export');
   }
   async deleteAccount(): Promise<void> {
+    const version = this.authVersion;
     await this.call('POST', '/api/v1/account/delete', { confirm: 'DELETE' });
-    this.store(null);
+    if (this.authVersion === version) this.store(null);
   }
   async catalogNames(): Promise<Map<string, string>> {
     const c = await this.call<{ items: { item_id: string; name_en: string; xp_value: number | null; kind: string }[]; gear: { gear_id: string; name_en: string }[] }>('GET', '/api/v1/catalog', undefined, false);

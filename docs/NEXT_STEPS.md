@@ -76,3 +76,7 @@ R04 locally complete: the existing Ration-paid repeat contract blocks zero-cost 
 ## Continuation tooling verification — 2026-10-13
 
 The isolated worktree and real primary-preserving dry-run are configured; 27 Python cases pass. Current environment revision 34 is running/connected and still lacks the model hostname in its active policy. The saved draft revision 2 has current npm/Phaser/D1 instructions and the scoped model-host rule; publishing it is not available through this session’s tools. No model execution or quota-reset guarantee is asserted. Continue R05/other unblocked source work here.
+
+## Latest verified slice — R05-A
+
+Four failing-before authentication response races fixed: captured bearer/revision, latest sign-in ownership, immediate local logout and protection from an old deletion response. Lint/typecheck and all 531 application/tool tests pass; both builds pass. Next R05-B durable operation identity/original payload/account scope, then server status and claim/checkpoint/purchase recovery. The owned continuation checkout now has its own pinned npm dependencies (workspace links verified), free structural index and native skill discovery (60 available, zero errors, all six Ponytail variants enabled); no new model execution is claimed.

@@ -213,6 +213,8 @@ Three new cases (the real sequential/concurrent farm cases failed before correct
 
 ### R05 — Durable client retry and operation status
 
+**R05-A locally verified:** requests capture their session/revision before transport. A late unauthorized/logout/deletion response cannot erase a newer account, and an older sign-in cannot replace the later selection. Logout ends local authority immediately while revoking only its captured bearer. Four regression cases failed before correction; lint/typecheck and **531 application/tool tests** pass. This supplies the account boundary; durable operation identity/storage/status recovery below remains in progress.
+
 [Client API](apps/game/src/net/api.ts) generates a new request ID per invocation. A committed action with a lost response can become a second action after retry/reload.
 
 Persist pending operation identity, original request ID, payload and account scope until authoritative reconciliation. Cover gacha, battles, upgrades/gear, claims, entry checkpoints and purchases; distinguish actual new player intent from retry. Provide safe status/history recovery and clear pending/confirmed/rejected states.
