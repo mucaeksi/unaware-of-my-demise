@@ -10,11 +10,50 @@ import {
   finalStats,
   gearLevelCap,
   gearStatAt,
+  ProgressionConfig,
   statAtLevel,
   xpToReach
 } from './index';
 
 const C = CANON_PROGRESSION;
+
+describe('shipped progression capability and coherence', () => {
+  it('rejects levels and skill ranks that the shipped battle party cannot admit', () => {
+    for (const mutate of [
+      (config: typeof C) => { config.character.levelCap = 200; },
+      (config: typeof C) => { config.character.skills.maxRank.active = 10; }
+    ]) {
+      const config = structuredClone(C); mutate(config); expect(ProgressionConfig.safeParse(config).success).toBe(false);
+    }
+  });
+  it('rejects nonpositive XP thresholds and unsafe computed level fees', () => {
+    for (const mutate of [
+      (config: typeof C) => { config.character.xp = { a: 1, b: -2, c: 0 }; },
+      (config: typeof C) => { config.account.xp.increment = -300; },
+      (config: typeof C) => { config.equipment.xp.base = -100; },
+      (config: typeof C) => { config.character.fee.base = Number.MAX_VALUE; },
+      (config: typeof C) => { config.character.fee.base = Math.floor(Number.MAX_SAFE_INTEGER / 10); },
+      (config: typeof C) => { config.character.xp = { a: Math.floor(Number.MAX_SAFE_INTEGER / 10), b: 0, c: 0 }; }
+    ]) {
+      const config = structuredClone(C); mutate(config); expect(ProgressionConfig.safeParse(config).success).toBe(false);
+    }
+  });
+  it('rejects unordered or unreachable ascension caps and rank unlocks', () => {
+    for (const mutate of [
+      (config: typeof C) => { config.character.ascension[1]!.cap = 4; },
+      (config: typeof C) => { config.character.ascension[3]!.accountLevel = 21; },
+      (config: typeof C) => { config.character.skills.rankUnlockLevels = [10, 5]; }
+    ]) {
+      const config = structuredClone(C); mutate(config); expect(ProgressionConfig.safeParse(config).success).toBe(false);
+    }
+  });
+  it('rejects missing rank costs and unordered equipment milestones', () => {
+    const rank = structuredClone(C); rank.character.skills.feePerRank = [10];
+    expect(ProgressionConfig.safeParse(rank).success).toBe(false);
+    const gear = structuredClone(C); gear.equipment.milestones[1]!.fromLevel = 4;
+    expect(ProgressionConfig.safeParse(gear).success).toBe(false);
+  });
+});
 
 describe('character progression (canon formulas)', () => {
   it('xp_to_next(level) = 90 + 24 L + 8 L^2', () => {

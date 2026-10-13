@@ -9,7 +9,8 @@ import { taskEventStatements } from '../tasks/service';
 export async function loadProgressionConfig(db: D1Database): Promise<ProgressionConfig> {
   const row = await db.prepare("SELECT value_json FROM game_config WHERE key = 'progression'").first<{ value_json: string }>();
   if (!row) throw new HttpError(503, 'config_missing', 'progression rules are not configured');
-  return ProgressionConfig.parse(JSON.parse(row.value_json));
+  try { return ProgressionConfig.parse(JSON.parse(row.value_json)); }
+  catch { throw new HttpError(503, 'invalid_progression_config', 'progression rules need operator review'); }
 }
 
 export async function accountOf(db: D1Database, playerId: string, cfg: ProgressionConfig): Promise<{ xp: number; level: number; into: number; toNext: number | null }> {

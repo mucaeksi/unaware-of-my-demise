@@ -5,6 +5,7 @@ import { atLeast, type AdminIdentity, type Role } from '../auth/access';
 import { HttpError } from '../content/store';
 import { audit, auditIfChanged, auditStatement } from '../db/audit';
 import { applyLedger } from '../db/ledger';
+import { progressionRefsExist } from '../progression/refs';
 import type { AdminEnv } from '../env';
 import { NewMail, sendMail } from '../mail/service';
 import { SubConfig } from '../billing/service';
@@ -329,6 +330,7 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     const parsed = schema.safeParse(b.value);
     if (!parsed.success) throw new HttpError(422, 'invalid_config', parsed.error.issues.slice(0, 3).map((i) => `${i.path.join('.')}: ${i.message}`).join('; '));
     if (key === 'drops') await dropRefsExist(c.env.DB, parsed.data as DropConfig);
+    if (key === 'progression') await progressionRefsExist(c.env.DB, parsed.data as ProgressionConfig);
     if (key === 'tasks') await taskRefsExist(c.env.DB, parsed.data as TaskConfig);
     const who = c.get('admin').identity;
     const db = c.env.DB;

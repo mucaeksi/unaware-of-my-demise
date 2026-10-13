@@ -116,3 +116,7 @@ Purchase History reads scoped recent delivery/recovery facts consistently withou
 ## Latest verified slice — R06-A
 
 Duration-one/boss Break owes one action skip after expiry; dead turn-start units do not emit it. Boss Auto now releases a usable ultimate while emergency healing retains priority. Five new boundary/replay cases, 592 application/tool tests, lint/typecheck and exact event-hash replay pass. Three cases fail against the old engine under corrected fixtures. Real desktop owned campaign passes (phone intentionally skipped there); free-practice desktop/phone passes. Both builds/25 migrations pass. Next supported progression/config limits, gear effects/loans and semantic conformance; no C01–C39 proposal or numeric retuning applied.
+
+## Latest verified slice — R06-B
+
+Shipped 20-level/3-rank limits and coherent positive/safe XP/fee arithmetic, ordered reachable caps/gates/milestones and complete rank costs are validated. Admin config checks known material identities; invalid stored config returns explicit 503 without fallback/repair. Four failing-before economic cases, three D1 admin/runtime cases, all 599 application/tool tests, lint/typecheck and real desktop/phone account flows pass. Both builds/25 migrations pass. Next canonical story-loan equipment/owned precedence and equipped effects; stage-gate identities depend on R07/R08 effective catalog. No numeric retuning or historical repair.

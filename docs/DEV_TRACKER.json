@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R06-A Break and boss Auto verified; configuration limits next",
-      "detail": "592 application/tool tests, exact event-hash replay, desktop owned campaign and desktop/phone practice pass. Proceed supported progression/config limits and gear/loan contracts; R02/R05/R11/R18 native/provider gates remain open."
+      "title": "R06-B shipped progression/coherence verified; loan equipment next",
+      "detail": "599 application/tool tests and desktop/phone account flows pass. Supported caps, positive/safe XP/fee arithmetic and coherent costs/gates/milestones prevent invalid progression; D1 materials are checked, invalid stored config fails closed without repair. Continue canonical story loans and equipped-effect contracts."
     }
   ],
   "next": [
@@ -748,6 +748,26 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R06-B-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "8f232ce7",
+      "verifiedAt": "2026-10-13T11:30:33.008815+00:00",
+      "scope": "R06-B working tree: match shipped level20/rank3 capability; safe positive XP thresholds/accumulated arithmetic, safe level fee sums, ordered reachable ascension/account/rank/milestone gates and complete integer rank costs. Known D1 material IDs checked before existing config CAS/audit update. Unsupported stored config returns explicit invalid_progression_config/503, retaining original row without fallback/repair. Four failing-before economic regressions incl aggregate precision guards; three real D1 admin/runtime cases verify reject-without-write, supported BattleParty admission, one version increment/stale409, unknown materials and fail-closed legacy config. Canon catalog fixture seeding corrected; not counted as an app regression. All 599 application/tool tests/lint/typecheck and actual desktop/phone account flows pass; both builds/25 local migrations pass. No numerical seed retuning, history/balance repair, native/deployed or complete-R06 acceptance. Stage identity authority follows R07/R08; equipped effects and canonical loan loadouts remain.",
+      "testIds": [
+        "packages/economy/src/progression.test.ts",
+        "apps/api/test/progression-config.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "tests/e2e/account.spec.ts (both projects)",
+        "E2E game/admin builds and 25 local migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1135,7 +1155,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Correct Break/Auto/expiry/procs, loan equipment and compatible progression limits with deterministic replay.",
-      "implemented": "R06-A one-turn/boss control expiry, death-before-skip and boss Auto ultimate policy are locally verified with exact replay hash. Five-slot engine/owned snapshots/basic gear exist; progression/config limits, full equipment effects/loans and broader conformance remain.",
+      "implemented": "R06-A/B control/boss Auto and exact replay plus shipped progression limits, positive/safe XP/fees, coherent costs/gates/milestones, material identity validation and fail-closed stored config are locally verified. Equipped effects, canonical loan gear/precedence and broader conformance remain; effective stage identity authority follows R07/R08.",
       "dependsOn": [
         "R01"
       ],
@@ -1146,13 +1166,18 @@
         "apps/api/src/progress/party.ts",
         "apps/game/src/scenes/BattleScene.ts",
         "packages/combat/src/boss.test.ts",
-        "docs/COMBAT_RULES.md"
+        "docs/COMBAT_RULES.md",
+        "packages/economy/src/progression.ts",
+        "packages/economy/src/progression.test.ts",
+        "apps/api/src/progression/refs.ts",
+        "apps/api/test/progression-config.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-REGRESSIONS",
         "E-EXTERNAL",
-        "E-R06-A-20261013"
+        "E-R06-A-20261013",
+        "E-R06-B-20261013"
       ],
       "blockerIds": [
         "B-ECONOMY"
