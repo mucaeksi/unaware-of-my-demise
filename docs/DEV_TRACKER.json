@@ -12,8 +12,8 @@
   },
   "now": [
     {
-      "title": "R04-A cross-source duplicate correctness verified",
-      "detail": "Two deterministic race regressions failed before correction; exact-copy transaction fences, shared copy/shard upsert and consistent response/pull history pass 516 application/tool tests and lint/typecheck. General grant provenance and explicit free-repeat policy remain open."
+      "title": "R04-A/B duplicate correctness and reward provenance verified",
+      "detail": "516\u2192524 application/tool tests; immutable exact-effect grant facts, source identities, real gear IDs, cap/rollback/duplicate/export/deletion/startup cases pass. All 24 local migrations and game/admin Worker health pass. Free-repeat payout policy remains explicit acceptance work; final tuning stays R16."
     }
   ],
   "next": [
@@ -466,6 +466,28 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R04-B-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "a6d896b2b900632416469836c22f1a54f947153c",
+      "verifiedAt": "2026-10-13T04:31:24+00:00",
+      "scope": "R04-B working tree: eight new provenance cases; original currency/first and duplicate copies/shards/XP, actual clamped stacks including competing update, exact gear IDs across journal inserts, whole-batch rollback, duplicate grant identity, append-only denial, bounded scoped export, pseudonymous deletion retention and concurrent starter registration. No manufactured historical provenance. Lint/typecheck and all 524 application/tool tests pass. Isolated local game/admin Workers and all 24 D1 migrations pass health (admin auth absent, no live admin mutations). No payout/canon/rate/price/live financial repair or deployment proof. Free-repeat reward decision and final R16 tuning remain open.",
+      "testIds": [
+        "apps/api/test/reward-grants.test.ts",
+        "apps/api/test/gacha.test.ts",
+        "apps/api/test/player.test.ts",
+        "apps/api/test/account.test.ts",
+        "apps/api/test/admin.test.ts",
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "local game/admin Workers 18897/18898; isolated .cache/r04b-preview; 24 migrations"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -762,7 +784,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Bound zero-cost repeat rewards and compute cross-source duplicate effects from committed inventory.",
-      "implemented": "R04-A locally verified: gacha copy-count guards participate in the same D1 batch as pity/debit/request/journal; competing pity or attachment sources trigger bounded recomputation. Shared atomic character-copy/shard upsert prevents divergent grants; committed response/journal and replay agree. Free-repeat policy and general noncurrency grant provenance remain open.",
+      "implemented": "R04-A locally verified: gacha copy-count guards participate in the same D1 batch as pity/debit/request/journal; competing pity or attachment sources trigger bounded recomputation. Shared atomic character-copy/shard upsert prevents divergent grants; committed response/journal and replay agree. R04-B records future immutable uniquely keyed attachment/committed-effect facts for shared rewards, summons and starters, with exact caps/gear IDs and bounded own-account export. No invented historical provenance or repair. Free-repeat payout policy remains open.",
       "dependsOn": [
         "R01",
         "R03"
@@ -771,13 +793,18 @@
       "sourcePaths": [
         "apps/api/src/progress/service.ts",
         "apps/api/src/gacha/service.ts",
-        "apps/api/src/db/grants.ts"
+        "apps/api/src/db/grants.ts",
+        "apps/api/migrations/0024_reward_grant_journal.sql",
+        "apps/api/test/reward-grants.test.ts",
+        "apps/api/src/player/auth.ts",
+        "apps/api/src/account/service.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
-        "E-R04-A-20261013"
+        "E-R04-A-20261013",
+        "E-R04-B-20261013"
       ],
       "blockerIds": [
         "B-ECONOMY"

@@ -76,7 +76,11 @@ export async function playerForGoogle(db: D1Database, claims: GoogleClaims): Pro
         db.prepare("INSERT INTO players (id, google_sub, display_name, last_seen_at) VALUES (?1, ?2, ?3, strftime('%Y-%m-%dT%H:%M:%fZ','now'))").bind(id, claims.sub, claims.name ?? null),
         db
           .prepare("INSERT INTO player_items (player_id, item_type, item_id) SELECT ?1, 'character', id FROM characters WHERE acquisition = 'free_start' AND status = 'active'")
-          .bind(id)
+          .bind(id),
+        db.prepare(`INSERT INTO reward_grants (player_id, grant_key, reason, attachment_json, result_json)
+          SELECT ?1, 'signup:' || ?1 || ':' || item_id, 'signup', json_object('type', 'character', 'itemId', item_id),
+            json_object('copiesAdded', 1, 'shardsAdded', 0, 'copiesAfter', copies, 'shardsAfter', shards)
+          FROM player_items WHERE player_id = ?1 AND item_type = 'character'`).bind(id)
       ]);
       isNew = true;
     } catch (e) {

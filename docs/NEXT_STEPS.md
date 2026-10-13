@@ -60,3 +60,7 @@ R03 local acceptance is complete: write-time economic/active-account fences, fix
 ## Latest verified slice — R04-A
 
 Cross-pity/cross-source character duplicate races are fenced by original-copy counts within the same transaction as pity, payment, request and immutable pull journal. Two new failing-before regressions, 74 focused cases, lint/typecheck and all 516 application/tool tests pass. Shared attachment/pull upsert preserves copies/shards. Next: general grant provenance and concrete free-repeat policy handling. No creative media or rates/prices/canon changes. Graphify was refreshed at clean R03 delivery and queried through actual stdio MCP; current R04 source edits are newer than that index.
+
+## Latest verified slice — R04-B
+
+Migration 0024 adds future-only uniquely keyed immutable reward attachment/effect facts for shared grants, summons and starters. Exact caps, duplicate shards, gear IDs, rollback/reuse/immutability, starter concurrency, bounded export and deletion retention pass eight new cases; all 524 application/tool tests and lint/typecheck pass. Two isolated local Workers with all 24 migrations pass health. No historical balances or provenance are invented. Free-repeat payout policy remains to resolve; final numeric balance stays R16. Continue independent retry/combat/canon/infra work if owner policy/live access waits.

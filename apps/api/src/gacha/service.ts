@@ -1,7 +1,7 @@
 import { analyzeBanner, BannerConfig, CANON, emptyPity, GachaError, pullMany, type PityState, type PullResult, type Roll } from '@uomd/economy';
 import { HttpError } from '../content/store';
 import { balanceOf, ledgerStatements } from '../db/ledger';
-import { characterGrantStatement } from '../db/grants';
+import { characterGrantJournalStatement, characterGrantStatement, gearGrantJournalStatement } from '../db/grants';
 
 export { cryptoRoll } from '../db/rng';
 import { cryptoRoll } from '../db/rng';
@@ -152,6 +152,7 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
     ];
     pulled.results.forEach((r, i) => {
       const rec = records[i] as PullRecord;
+      const grantKey = `gacha:${playerId}:${input.requestId}:${i}`;
       batch.push(
         db
           .prepare(
@@ -160,7 +161,10 @@ export async function pullGacha(db: D1Database, playerId: string, input: PullInp
           .bind(playerId, input.requestId, i, input.bannerId, r.pullNumber, r.rarity, rec.itemType, r.itemId, r.outcome, r.upgraded ? 1 : 0, rec.duplicate ? 1 : 0, JSON.stringify(r.rolls)),
         config.kind === 'weapon'
           ? db.prepare("INSERT INTO player_gear (player_id, gear_id, slot) VALUES (?1, ?2, 'weapon')").bind(playerId, r.itemId)
-          : characterGrantStatement(db, playerId, r.itemId, CANON.duplicateShards[r.rarity])
+          : characterGrantStatement(db, playerId, r.itemId, CANON.duplicateShards[r.rarity]),
+        config.kind === 'weapon'
+          ? gearGrantJournalStatement(db, playerId, r.itemId, grantKey, `gacha:${input.bannerId}`)
+          : characterGrantJournalStatement(db, playerId, r.itemId, CANON.duplicateShards[r.rarity], grantKey, `gacha:${input.bannerId}`)
       );
     });
     batch.push(db.prepare('DELETE FROM tx_guard'));
