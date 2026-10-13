@@ -32,6 +32,20 @@ describe('validateContentSet', () => {
   it('accepts base + the Part I campaign (35 stages, the full cast, placeholder art) as one effective set', () => {
     expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 54, units: 47 });
   });
+  it.each(['duplicate item', 'duplicate choice', 'unknown hero', 'wrong rarity', 'battle gate', 'story gate', 'source hash'] as const)('rejects recruit selector %s', (kind) => {
+    const files = campaign();
+    edit<ChapterIndex>(files, 'chapters/chapter_index.json', (index) => {
+      const selector = index.recruit_selectors![0]!;
+      if (kind === 'duplicate item') index.recruit_selectors!.push(structuredClone(selector));
+      if (kind === 'duplicate choice') selector.choices.push(selector.choices[0]!);
+      if (kind === 'unknown hero') selector.choices[0] = 'unknown_hero';
+      if (kind === 'wrong rarity') selector.choices[0] = 'mahmut';
+      if (kind === 'battle gate') selector.after_node = 'ch1_first_oath';
+      if (kind === 'story gate') selector.scene_node = 'stage_1_3';
+      if (kind === 'source hash') selector.provenance.source_sha256 = '0'.repeat(64);
+    });
+    expect(() => validateContentSet(files)).toThrow(/selector/);
+  });
   it.each(['entry omission', 'chapter order', 'gate removal', 'scene link', 'line removal', 'line order', 'source hash', 'phase', 'boss', 'duplicate phase'] as const)('rejects canonical story %s before publication', (kind) => {
     const files = campaign();
     if (['entry omission', 'chapter order', 'gate removal', 'scene link'].includes(kind)) edit<ChapterIndex>(files, 'chapters/chapter_index.json', (index) => {

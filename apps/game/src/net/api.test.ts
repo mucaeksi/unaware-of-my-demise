@@ -147,6 +147,43 @@ describe('authentication response ownership', () => {
 });
 
 describe('durable client operations', () => {
+  it('invitation response loss recovers the exact selected companion and grant without another POST', async () => {
+    const storage = new TestOperationStorage(); let sent = ''; let posts = 0;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (url.includes('/operations/')) {
+        const body = JSON.parse(sent);
+        return Response.json({ requestId: body.requestId, path: '/api/v1/recruitment/first_oath_invitation', state: 'confirmed', binding: 'exact', inputHash: await sha256Hex(canonicalJson(body)),
+          result: { ...body, itemId: 'first_oath_invitation', characterName: 'Tilda Fen', consumed: 1, grant: { copiesAdded: 1, copiesAfter: 1, shardsAdded: 0, shardsAfter: 0 } } });
+      }
+      posts++; sent = init.body as string; throw new TypeError('invitation response lost');
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.selectRecruit('rel_story', 'first_oath_invitation', 'tilda_fen')).rejects.toThrow('invitation response lost');
+    const reload = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(reload.retryOperation(storage.records[0]!.id)).resolves.toMatchObject({ characterId: 'tilda_fen', consumed: 1, grant: { copiesAfter: 1, shardsAdded: 0 } });
+    expect(posts).toBe(1); expect(storage.records[0]!.state).toBe('confirmed');
+  });
+  it.each([{ characterId: 'iona_mist' }, { consumed: 0 }, { grant: { copiesAdded: 1, copiesAfter: 1, shardsAdded: -1, shardsAfter: 0 } }])('keeps a malformed invitation receipt pending: %j', async (change) => {
+    const storage = new TestOperationStorage();
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      return Response.json({ ...JSON.parse(init.body as string), itemId: 'first_oath_invitation', characterName: 'Tilda Fen', consumed: 1, grant: { copiesAdded: 1, copiesAfter: 1, shardsAdded: 0, shardsAfter: 0 }, ...change });
+    }));
+    await expect(new GameApi('https://game.test', new OperationJournal(storage)).selectRecruit('rel_story', 'first_oath_invitation', 'tilda_fen')).rejects.toMatchObject({ code: 'invalid_response' });
+    expect(storage.records[0]!.state).toBe('pending');
+  });
+  it('an invitation opened by the previous account sends no selection for the new account', async () => {
+    const api = new GameApi('https://game.test', new OperationJournal(new TestOperationStorage())); const revision = api.authRevision;
+    values.set(sessionKey, JSON.stringify({ token: 'session-B', expiresAt: expiry() })); const fetch = vi.fn(); vi.stubGlobal('fetch', fetch);
+    await expect(api.selectRecruit('rel_story', 'first_oath_invitation', 'tilda_fen', revision)).rejects.toMatchObject({ code: 'auth_changed' }); expect(fetch).not.toHaveBeenCalled();
+  });
+  it('rejects corrupt invitation lists before offering an irreversible choice', async () => {
+    for (const value of [{ releaseId: 'wrong', selectors: [] }, { releaseId: 'rel_story', selectors: [{ quantity: 1, choices: [] }] }]) {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(value)));
+      await expect(new GameApi('https://game.test').recruitSelectors('rel_story')).rejects.toMatchObject({ code: 'invalid_response' });
+    }
+  });
   it('an aborted HTTP deadline keeps the saved identity pending instead of reporting completion', async () => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
     try {

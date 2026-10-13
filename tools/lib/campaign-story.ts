@@ -11,7 +11,9 @@ const Scene = z.object({ scene_id: Id, stage_id: z.string().regex(/^\d+-\d+$/).o
   pre_battle_lines: z.array(Line).min(1).max(400).optional(), post_battle_lines: z.array(Line).min(1).max(400).optional(), phase_interludes: z.array(Interlude).max(4).optional() }).passthrough();
 const Chapter = z.object({ chapter_id: Id, opening_scene: Scene.optional(), scenes: z.array(Scene), after_battle_scenes: z.array(Scene).optional() }).passthrough();
 const Manifest = z.object({ chapter_files: z.array(z.string().regex(/^story_script_ch\d{2}\.json$/)).min(1), main_stage_scene_count: z.number().int().positive(),
-  non_stage_scene_ids: z.array(Id), story_order: z.array(z.string().regex(/^[a-z0-9_-]{1,80}$/)).min(1) }).passthrough();
+  non_stage_scene_ids: z.array(Id), story_order: z.array(z.string().regex(/^[a-z0-9_-]{1,80}$/)).min(1),
+  acquisition_story_beats: z.object({ guaranteed_selector: z.object({ item_id: Id, claim_after_stage: z.string().regex(/^\d+-\d+$/), choose_one_from: z.array(Id).min(1).max(20) }).passthrough() }).passthrough()
+}).passthrough();
 
 export interface SourceFile { path: string; bytes: Uint8Array }
 export interface StorySources { manifest: SourceFile; chapters: SourceFile[] }
@@ -44,7 +46,7 @@ export function canonicalStorySources(): StorySources {
 
 /** Compile spoken lines/order from canon; snapshot mechanics and source prose never become executable code. */
 export function compileCampaignStory(sources = canonicalStorySources(), portraits: ReadonlySet<string> = new Set(['mahmut', 'fadyme'])): {
-  entries: CampaignStoryEntry[]; files: Map<string, StoryScene>; coverage: NonNullable<ChapterIndex['story_coverage']>
+  entries: CampaignStoryEntry[]; files: Map<string, StoryScene>; coverage: NonNullable<ChapterIndex['story_coverage']>; selectors: NonNullable<ChapterIndex['recruit_selectors']>
 } {
   const manifest = Manifest.parse(decode(sources.manifest));
   const files = new Map<string, StoryScene>();
@@ -104,7 +106,13 @@ export function compileCampaignStory(sources = canonicalStorySources(), portrait
     entry.lineIds = entry.scenePaths.flatMap((path) => files.get(path)!.commands.flatMap((command) => command.op === 'say' || command.op === 'narrate' ? [command.line_id] : []));
     return entry;
   });
-  return { entries, files, coverage: { chapter_ids: chapters.map(({ chapter }) => chapter.chapter_id),
+  const selector = manifest.acquisition_story_beats.guaranteed_selector;
+  const after = entries.find((entry) => entry.stageId === selector.claim_after_stage);
+  const scene = entries.find((entry) => entry.id === 'ch1_first_oath');
+  if (!after || !scene?.story || entries.indexOf(scene) !== entries.indexOf(after) + 1 || new Set(selector.choose_one_from).size !== selector.choose_one_from.length) throw new Error('canonical selector has invalid choices/story gate');
+  return { entries, files, selectors: [{ item_id: selector.item_id, title_en: 'First Oath Invitation', after_node: after.nodeId, scene_node: scene.nodeId,
+    rarity: 4, choices: selector.choose_one_from, provenance: { source: `${sources.manifest.path}#acquisition_story_beats.guaranteed_selector`, source_sha256: sha256(Buffer.from(sources.manifest.bytes)) } }],
+    coverage: { chapter_ids: chapters.map(({ chapter }) => chapter.chapter_id),
     sources: [sources.manifest, ...sources.chapters].map((source) => ({ path: source.path, sha256: sha256(Buffer.from(source.bytes)) })),
     entries: entries.map((entry) => ({ entry_id: entry.id, node_id: entry.nodeId, scene_paths: entry.scenePaths, line_ids: entry.lineIds })) } };
 }

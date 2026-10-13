@@ -51,6 +51,7 @@ describe('canonical campaign story compilation', () => {
     for (const [path, scene] of output.files) expect(readJson(`${root}/${path}`)).toEqual(scene);
     const index = ChapterIndex.parse(readJson(`${root}/chapters/chapter_index.json`));
     expect(index.story_coverage).toEqual(output.coverage);
+    expect(index.recruit_selectors).toEqual(output.selectors);
     const nodes = index.chapters.slice(1).flatMap((chapter) => chapter.nodes);
     expect(nodes.map((node) => node.node_id)).toEqual(output.entries.map((entry) => entry.nodeId));
     for (const [i, node] of nodes.entries()) expect(node.requires).toBe(nodes[i - 1]?.node_id);
@@ -64,6 +65,22 @@ describe('canonical campaign story compilation', () => {
         ...(reward.recruit_character_id ? [{ type: 'character', itemId: reward.recruit_character_id }] : []),
         ...(reward.grant_item_id ? [{ type: 'item', itemId: reward.grant_item_id, quantity: 1 }] : [])
       ]));
+    }
+  });
+  it('compiles First Oath choices and the stage/story gates directly from the canonical manifest', () => {
+    const sources = canonicalStorySources(); const output = compileCampaignStory(sources);
+    const selector = decode(sources.manifest).acquisition_story_beats.guaranteed_selector;
+    expect(output.selectors).toEqual([{ item_id: selector.item_id, title_en: 'First Oath Invitation', after_node: 'stage_1_2', scene_node: 'ch1_first_oath', rarity: 4,
+      choices: selector.choose_one_from, provenance: { source: `${sources.manifest.path}#acquisition_story_beats.guaranteed_selector`, source_sha256: sha256(Buffer.from(sources.manifest.bytes)) } }]);
+    expect(output.selectors[0]!.choices).toHaveLength(7);
+    for (const kind of ['duplicate', 'wrong gate', 'empty'] as const) {
+      const changed = { ...sources, manifest: edited(sources.manifest, (value) => {
+        const selector = value.acquisition_story_beats.guaranteed_selector;
+        if (kind === 'duplicate') selector.choose_one_from.push(selector.choose_one_from[0]);
+        if (kind === 'wrong gate') selector.claim_after_stage = '7-5';
+        if (kind === 'empty') selector.choose_one_from = [];
+      }) };
+      expect(() => compileCampaignStory(changed)).toThrow();
     }
   });
   it('binds all five phase lines to the real Construct ward and rejects absent/ambiguous bosses or phases', () => {

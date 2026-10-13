@@ -217,6 +217,10 @@ export const ChapterIndex = z
   .object({
     schema_version: z.literal(1),
     chapters: z.array(Chapter).min(1),
+    recruit_selectors: z.array(z.object({ item_id: Id, title_en: z.string().min(1).max(80), after_node: Id, scene_node: Id,
+      rarity: z.literal(4), choices: z.array(Id).min(1).max(20),
+      provenance: z.object({ source: z.string().min(1).max(512), source_sha256: z.string().regex(/^[a-f0-9]{64}$/) }).strict()
+    }).strict()).max(20).optional(),
     /** Compiler source coverage: validators check the declared order, links and stable line IDs. */
     story_coverage: z.object({
       sources: z.array(z.object({ path: z.string().regex(/^narrative\/[A-Za-z0-9_/-]+\.json$/), sha256: z.string().regex(/^[a-f0-9]{64}$/) }).strict()).min(1).max(100),

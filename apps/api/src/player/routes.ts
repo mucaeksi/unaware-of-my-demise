@@ -15,6 +15,7 @@ import { adStatus, beginAd, grantAd, AD } from '../ads/service';
 import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, writeSave } from '../progress/service';
 import { completeStory, StoryCompletion } from '../progress/story';
+import { listRecruitSelectors, RecruitSelection, selectRecruit } from '../recruitment/service';
 import { ascendGear, characterStats, dismantleGear, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
 import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
 import { deleteAccount, exportAccount } from '../account/service';
@@ -104,6 +105,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/gacha/*', authed);
   app.use('/api/v1/characters/*', authed);
   app.use('/api/v1/stacks', authed);
+  app.use('/api/v1/recruitment/*', authed);
   app.use('/api/v1/entry', authed);
   app.use('/api/v1/teams', authed);
   app.use('/api/v1/teams/*', authed);
@@ -309,6 +311,18 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.get('/api/v1/stacks', async (c) => {
     const { results } = await c.env.DB.prepare('SELECT item_id, qty FROM player_stacks WHERE player_id = ?1 AND qty > 0 ORDER BY item_id').bind(c.get('playerId')).all();
     return c.json({ stacks: results });
+  });
+  app.get('/api/v1/recruitment/selectors', async (c) => {
+    const releaseId = RecruitSelection.shape.releaseId.safeParse(c.req.query('releaseId'));
+    if (!releaseId.success) throw new HttpError(400, 'bad_request', 'invalid release id');
+    await perMinute(c.env, `selectors:${c.get('playerId')}`, 60);
+    return c.json(await listRecruitSelectors(c.env, c.get('playerId'), releaseId.data), 200, { 'Cache-Control': 'no-store' });
+  });
+  app.post('/api/v1/recruitment/:itemId', async (c) => {
+    const itemId = c.req.param('itemId');
+    if (!/^[a-z][a-z0-9_]{1,79}$/.test(itemId)) throw new HttpError(400, 'bad_request', 'invalid invitation id');
+    await perMinute(c.env, `select-recruit:${c.get('playerId')}`, 30);
+    return c.json(await selectRecruit(c.env, c.get('playerId'), itemId, await body(c, RecruitSelection, 4096)));
   });
   const CharId = /^[a-z][a-z0-9_]{1,79}$/;
   app.post('/api/v1/characters/:id/level-up', async (c) => {

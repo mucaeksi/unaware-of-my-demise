@@ -10,6 +10,7 @@ const caption = (record: OperationRecord): string => {
   if (record.path === '/api/v1/gacha/pull') return record.body.count === 1 || record.body.count === 10 ? `Wish ×${record.body.count}` : 'Wish';
   if (record.path === '/api/v1/progress/battle') return 'Battle result';
   if (record.path === '/api/v1/progress/story') return 'Story progress';
+  if (record.path.startsWith('/api/v1/recruitment/')) return 'Invitation choice';
   if (record.path.startsWith('/api/v1/characters/')) return 'Character growth';
   if (record.path.startsWith('/api/v1/gear/')) return 'Equipment growth';
   if (record.path.startsWith('/api/v1/mail/')) return 'Mail reward';

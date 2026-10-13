@@ -615,6 +615,28 @@
       ]
     }
   ],
+  "recruit_selectors": [
+    {
+      "item_id": "first_oath_invitation",
+      "title_en": "First Oath Invitation",
+      "after_node": "stage_1_2",
+      "scene_node": "ch1_first_oath",
+      "rarity": 4,
+      "choices": [
+        "tilda_fen",
+        "rikka_ember",
+        "odelia_pike",
+        "pippa_bell",
+        "thistle_roe",
+        "iona_mist",
+        "marek_vane"
+      ],
+      "provenance": {
+        "source": "narrative/02_Main_Story/story_script_part1_manifest.json#acquisition_story_beats.guaranteed_selector",
+        "source_sha256": "95e8b2ddee2d730705add0f17fe983f678c22230bc577c8854d002554e34169b"
+      }
+    }
+  ],
   "story_coverage": {
     "sources": [
       {

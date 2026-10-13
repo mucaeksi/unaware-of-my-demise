@@ -135,7 +135,7 @@ for (const [chapterNumber, ch] of chapters.entries()) {
   if (!nodes.length) throw new Error(`chapter ${ch.chapter_id} has no canonical story entries`);
   chapterOut.push({ chapter_id: chapterId, title_en: ch.title_en, nodes });
 }
-writeJson(`${OUT}/chapters/chapter_index.json`, ChapterIndex.parse({ schema_version: 1, chapters: chapterOut, story_coverage: story.coverage }));
+writeJson(`${OUT}/chapters/chapter_index.json`, ChapterIndex.parse({ schema_version: 1, chapters: chapterOut, story_coverage: story.coverage, recruit_selectors: story.selectors }));
 
 // ---- art manifest: base art + one placeholder atlas for every unit that has no production art yet ------------------------------
 const art = base; // the base art manifest already carries the tutorial cast (Mahmut, Fadyme, Bellbound Dead, Hollow Pilgrim)

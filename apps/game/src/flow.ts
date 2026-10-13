@@ -64,6 +64,11 @@ export async function playNode(scene: Phaser.Scene, node: Node): Promise<void> {
         if (signedIn) await api.completeStory(releaseId, node.node_id, revision);
         if (!s.scene.isActive('Story')) return;
         Progress.complete(node.node_id, 0);
+        if (signedIn && (await content.chapters()).recruit_selectors?.some((selector) => selector.scene_node === node.node_id)) {
+          if (revision !== api.authRevision || !s.scene.isActive('Story')) return;
+          s.scene.start('Recruit', { returnTo: 'Chapters' });
+          return;
+        }
         s.scene.start('Chapters');
       } catch (error) {
         if (!s.scene.isActive('Story')) return;

@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "8733213bcd13667515baa2bb1ad700bf9b3186a8",
+  "sourceCommit": "f694ade486a9b2dd2160cd5775eaca243a20e988",
   "reviewedAt": "2026-10-13",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R07",
     "status": "IN_PROGRESS",
-    "nextProposed": "R07-C3 First Oath selector and full chapter no-gacha acceptance",
+    "nextProposed": "R07 reusable companion/codex/event stable-ID spoiler gates",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R07-C2 complete canonical main-story compilation locally verified",
-      "detail": "51 canonical entries, 419 exact stable lines and 88 scenes now link through the campaign; both Construct phase readers pause/resume above the battle. 700 tests/lint/types, builds/campaign, 46 adapters, browser matrix: 15 pass/1 intentional skip and final focused desktop/phone: 2 pass. Source/hash/order coverage, locked reveal titles and bounded 512-file D1 reads are verified. First Oath/full chapter, reusable spoiler gates, resume and native/deployed proof remain."
+      "title": "R07-C3 First Oath and one complete no-gacha chapter locally verified",
+      "detail": "Canonical seven-choice invitation with atomic item/copy grants, exact-input frozen original recovery, transaction-time eligibility fences and account-safe review/confirm UI. 726 tests/lint/types, campaign/game/admin builds and 46 adapters pass. 12 existing browser checks and two final desktop/phone full-chapter/recovery/account-isolation cases pass with 25 migrations; screenshots inspected. Fresh chapter-1 route uses Iona and legal manual active/ultimate choices, no wishes/ads or numeric changes. Every-choice/Auto balance, account XP, reusable gates, resume and native/deployed/old-AAB proof remain."
     }
   ],
   "next": [
     {
-      "title": "R07-C3 \u2014 First Oath selector and full authored chapter acceptance",
-      "detail": "Use the canonical seven-choice First Oath Invitation through durable server-authoritative item spending/character grants and original request recovery; prove a fresh no-gacha chapter/recruit route. Preserve amounts/choices/copy policy. Then reusable companion/codex/event stable-ID gates and R08 effective catalog/grammar; post-battle resume remains R09."
+      "title": "R07 \u2014 reusable companion/codex/event gates",
+      "detail": "Use stable IDs and authoritative account progress for reusable spoiler evaluation and interpreter gates; preserve mechanical boss information and fail closed on missing/unknown references. Then R08 effective economic catalogs/complete grammar. First Oath and one full Iona/manual no-gacha chapter are verified; broader Auto/choice balance/account XP and R09 post-battle continuity retain separate acceptance."
     },
     {
       "title": "R06 \u2014 remaining reviewed combat semantics",
@@ -990,6 +990,31 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R07-C3-20261013",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "f694ade486a9b2dd2160cd5775eaca243a20e988",
+      "verifiedAt": "2026-10-13T21:10:38.694942+00:00",
+      "scope": "R07-C3 working tree: manifest\u2019s seven First Oath choices and provenance compile into strict selector declarations; semantic guards reject duplicate IDs, wrong kind/rarity and battle/story gates. One earned invitation is spent atomically with shared character/copy grants and a frozen exact-input original result. Account/release/story/item/character races and journal faults roll back all changes; replay survives a killed release and later duplicate grants, with account-scoped status. Twelve D1/API, six client, seven schema and one compiler cases; 726 application/tool tests, lint/types, campaign/game/admin builds and 46 adapters pass. Twelve existing Control Center/canonical-story browser cases and two final desktop/touch-phone First Oath cases pass against real local Workers with all 25 migrations. The final cases prove commit-before-response-loss, reload/original-status recovery with zero extra POSTs, the full chapter and account-change isolation. Choice/confirmation/settled result screenshots inspected. Initial harness failures involved queued scene overlap, an intentionally aborted request logged without its URL and an early click before input registration; corrected scene waits, URL-bound error recording and settled input pass the final rerun. Graphify refreshed (3116 nodes/8152 edges/157 communities). One fresh account completes opening/five battles/First Oath/camp with Brin, Iona and starters without wishes or ads, using canonical stats and legal manual active/ultimate decisions for the last three battles. Default level-1 Auto lost 1-3; account caps remain enforced. Initial ten-HP test catalog replaced with canonical fixtures. No numeric changes, migration, prices, paid media, formal security audit or native/deployed/old-AAB acceptance. All-choice/Auto balance/account XP and reusable gates/effective catalog/resume remain open.",
+      "testIds": [
+        "apps/api/test/recruitment.test.ts",
+        "apps/game/src/net/api.test.ts",
+        "packages/content-schema/src/validate.test.ts",
+        "tools/lib/campaign-story.test.ts",
+        "tests/e2e/first-oath.spec.ts",
+        "tests/e2e/canonical-story.spec.ts",
+        "tests/e2e/admin.spec.ts",
+        "npm test",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build:campaign",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1426,7 +1451,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Compile all ordered story entries and validate IDs, references, gates, waves and legal graphs.",
-      "implemented": "R07-A/B reject duplicate IDs, cyclic prerequisites, formation collisions, wrong unit kinds and dangling own-skill/status/tag references before draft/publication or device activation. C1 records durable reward-free zero-star story completion with account/release/prerequisite fences and original-result recovery; signed-in Chapters uses authoritative progress. C2 compiles all 51 canonical entries/419 lines into 88 scenes with source hashes and exact node/scene/line/prerequisite coverage; both real Construct phase readers pause, render above and resume battle presentation. Locked titles hide future reveals. First Oath/full no-gacha chapter, reusable companion/codex/event gates and effective economic catalog references remain open.",
+      "implemented": "R07-A/B reject duplicate IDs, cyclic prerequisites, formation collisions, wrong unit kinds and dangling own-skill/status/tag references before draft/publication or device activation. C1 records durable reward-free zero-star story completion with account/release/prerequisite fences and original-result recovery; signed-in Chapters uses authoritative progress. C2 compiles all 51 canonical entries/419 lines into 88 scenes with source hashes and exact node/scene/line/prerequisite coverage; both real Construct phase readers pause, render above and resume battle presentation. Locked titles hide future reveals. C3 adds the canonical seven-choice First Oath, atomic item/copy grants, frozen original-result recovery and account-safe review/confirm UI; one fresh Iona/manual no-gacha chapter is verified. Reusable companion/codex/event gates and effective economic catalog references remain open; broader choice/Auto balance/account XP and resume remain separate acceptance.",
       "dependsOn": [
         "R03",
         "R06"
@@ -1448,7 +1473,11 @@
         "tools/lib/campaign-story.ts",
         "tools/lib/campaign-story.test.ts",
         "docs/CAMPAIGN_STORY_COMPILATION.md",
-        "tests/e2e/canonical-story.spec.ts"
+        "tests/e2e/canonical-story.spec.ts",
+        "apps/api/src/recruitment/service.ts",
+        "apps/api/test/recruitment.test.ts",
+        "apps/game/src/scenes/RecruitScene.ts",
+        "tests/e2e/first-oath.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1457,7 +1486,8 @@
         "E-R07-A-20261013",
         "E-R07-B-20261013",
         "E-R07-C1-20261013",
-        "E-R07-C2-20261013"
+        "E-R07-C2-20261013",
+        "E-R07-C3-20261013"
       ],
       "blockerIds": []
     },

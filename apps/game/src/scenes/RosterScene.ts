@@ -28,6 +28,7 @@ export class RosterScene extends HubScene {
 
   private draw(total: number): void {
     this.body.removeAll(true);
+    this.add_(new Button(this, REF_W - 300, 170, { label: 'INVITATIONS', w: 420, h: 90, onClick: () => this.scene.start('Recruit', { returnTo: 'Roster' }) }));
     this.add_(txt(this, REF_W / 2, 160, `${this.list.length} of ${total} companions`, { fontSize: '36px', color: T.dim }).setOrigin(0.5));
     const slice = this.list.slice(this.page * PER_PAGE, (this.page + 1) * PER_PAGE);
     slice.forEach((c, i) => {

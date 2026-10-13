@@ -196,6 +196,14 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
     unique('chapter', index.chapters.map((chapter) => chapter.chapter_id));
     unique('node', campaignNodes.map((node) => node.node_id));
     const allNodes = new Map(campaignNodes.map((node) => [node.node_id, node]));
+    unique('recruit selector', (index.recruit_selectors ?? []).map((selector) => selector.item_id));
+    for (const selector of index.recruit_selectors ?? []) {
+      unique(`${selector.item_id} selector choice`, selector.choices);
+      const after = allNodes.get(selector.after_node); const scene = allNodes.get(selector.scene_node);
+      if (after?.kind !== 'battle' || scene?.kind !== 'story' || scene.requires !== selector.after_node) problems.push(`selector ${selector.item_id}: invalid battle/story gate`);
+      for (const id of selector.choices) if (units.get(id)?.kind !== 'character' || units.get(id)?.rarity !== selector.rarity) problems.push(`selector ${selector.item_id}: invalid ${selector.rarity}-star character ${id}`);
+      if (index.story_coverage && !index.story_coverage.sources.some((source) => source.path === selector.provenance.source.split('#')[0] && source.sha256 === selector.provenance.source_sha256)) problems.push(`selector ${selector.item_id}: invalid source provenance`);
+    }
     // Walk each single-prerequisite chain once without recursion, including cross-chapter edges.
     const checked = new Set<string>();
     for (const node of campaignNodes) {

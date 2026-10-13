@@ -8,6 +8,14 @@ export interface TeamMember {
   slot: number;
   row: 'front' | 'rear';
 }
+export interface RecruitSelectorView {
+  itemId: string; title: string; quantity: number; duplicateShards: number;
+  choices: { id: string; name_en: string; rarity: number; element: string; role: string; copies: number }[];
+}
+export interface RecruitSelectionResult {
+  requestId: string; releaseId: string; itemId: string; characterId: string; characterName: string; consumed: number; replayed: boolean;
+  grant: { copiesAdded: number; shardsAdded: number; copiesAfter: number; shardsAfter: number };
+}
 export interface TeamPreset {
   slot: number;
   name: string;
@@ -331,7 +339,7 @@ export class GameApi extends EventTarget {
       } catch (error) {
         const definite = attempts === 1 && error instanceof ApiError && ([400, 402, 403, 404, 413, 422].includes(error.status)
           || error.status === 409 && ['already_claimed', 'expired', 'revoked', 'period_closed', 'not_done', 'at_cap', 'not_at_cap', 'max_rank', 'max_ascension',
-            'account_level_too_low', 'level_too_low', 'story_gate', 'equipped', 'locked', 'request_id_reused', 'entitlement_unavailable', 'release_not_economic', 'save_conflict', 'story_state_changed'].includes(error.code));
+            'account_level_too_low', 'level_too_low', 'story_gate', 'equipped', 'locked', 'request_id_reused', 'entitlement_unavailable', 'release_not_economic', 'save_conflict', 'story_state_changed', 'selector_state_changed'].includes(error.code));
         await this.journal.finish(checked.scope, checked.id, definite ? 'rejected' : 'pending', undefined, error instanceof ApiError ? error.code : 'confirmation_pending');
         this.dispatchEvent(new Event('operations'));
         throw error;
@@ -367,11 +375,15 @@ export class GameApi extends EventTarget {
     const value = result as { requestId?: string; pulls?: unknown[]; nodeId?: string; character?: string; level?: number; id?: number;
       ascension?: number; skillId?: string; rank?: number; stats?: { subs?: unknown[] }; gained?: unknown[];
       mailId?: number; claimed?: unknown[]; periodKey?: string; taskId?: string; rewards?: unknown[];
-      version?: number; phase?: string; prologue?: boolean; tutorials?: number; playerId?: string; releaseId?: string; completed?: boolean } | null;
+      version?: number; phase?: string; prologue?: boolean; tutorials?: number; playerId?: string; releaseId?: string; completed?: boolean; itemId?: string; characterId?: string; characterName?: string; consumed?: number; grant?: RecruitSelectionResult['grant'] } | null;
     if (!value || typeof value !== 'object'
       || operation.path === '/api/v1/gacha/pull' && (value.requestId !== operation.id || !Array.isArray(value.pulls) || value.pulls.length !== operation.body.count)
       || operation.path === '/api/v1/progress/battle' && (value.requestId !== operation.id || value.nodeId !== operation.body.nodeId)
       || operation.path === '/api/v1/progress/story' && (value.requestId !== operation.id || value.nodeId !== operation.body.nodeId || value.releaseId !== operation.body.releaseId || value.completed !== true)
+      || operation.path.startsWith('/api/v1/recruitment/') && (value.requestId !== operation.id || value.releaseId !== operation.body.releaseId || value.itemId !== operation.path.split('/')[4] || value.characterId !== operation.body.characterId || value.consumed !== 1
+        || typeof value.characterName !== 'string' || value.characterName.length === 0 || value.characterName.length > 80
+        || !value.grant || value.grant.copiesAdded !== 1 || !Number.isSafeInteger(value.grant.shardsAdded) || value.grant.shardsAdded < 0
+        || !Number.isSafeInteger(value.grant.copiesAfter) || value.grant.copiesAfter < 1 || !Number.isSafeInteger(value.grant.shardsAfter) || value.grant.shardsAfter < value.grant.shardsAdded)
       || operation.path.startsWith('/api/v1/characters/') && (value.character !== operation.path.split('/')[4] || !Number.isSafeInteger(value.level)
         || operation.path.endsWith('/ascend') && !Number.isSafeInteger(value.ascension)
         || operation.path.endsWith('/upgrade') && (value.skillId !== operation.path.split('/')[6] || !Number.isSafeInteger(value.rank)))
@@ -471,6 +483,23 @@ export class GameApi extends EventTarget {
   completeStory(releaseId: string, nodeId: string, expectedRevision = this.authRevision): Promise<{ requestId: string; releaseId: string; nodeId: string; completed: true; replayed: boolean }> {
     if (expectedRevision !== this.authRevision) return Promise.reject(new ApiError(409, 'auth_changed', 'The selected account changed'));
     return this.mutate('/api/v1/progress/story', { releaseId, nodeId });
+  }
+  async recruitSelectors(releaseId: string): Promise<{ releaseId: string; selectors: RecruitSelectorView[] }> {
+    const value = await this.call<{ releaseId: string; selectors: RecruitSelectorView[] }>('GET', `/api/v1/recruitment/selectors?releaseId=${encodeURIComponent(releaseId)}`);
+    const id = /^[a-z][a-z0-9_]{1,79}$/;
+    if (!value || value.releaseId !== releaseId || !Array.isArray(value.selectors) || value.selectors.length > 20
+      || new Set(value.selectors.map((selector) => selector?.itemId)).size !== value.selectors.length
+      || !value.selectors.every((selector) => selector && typeof selector.itemId === 'string' && id.test(selector.itemId) && typeof selector.title === 'string' && selector.title.length > 0 && selector.title.length <= 80
+        && Number.isSafeInteger(selector.quantity) && selector.quantity > 0 && Number.isSafeInteger(selector.duplicateShards) && selector.duplicateShards >= 0 && Array.isArray(selector.choices) && selector.choices.length > 0 && selector.choices.length <= 20
+        && new Set(selector.choices.map((choice) => choice?.id)).size === selector.choices.length
+        && selector.choices.every((choice) => choice && typeof choice.id === 'string' && id.test(choice.id) && typeof choice.name_en === 'string' && choice.name_en.length > 0 && choice.name_en.length <= 80
+          && choice.rarity === 4 && typeof choice.element === 'string' && typeof choice.role === 'string' && Number.isSafeInteger(choice.copies) && choice.copies >= 0)))
+      throw new ApiError(503, 'invalid_response', 'The invitation choices could not be confirmed');
+    return value;
+  }
+  selectRecruit(releaseId: string, itemId: string, characterId: string, expectedRevision = this.authRevision): Promise<RecruitSelectionResult> {
+    if (expectedRevision !== this.authRevision) return Promise.reject(new ApiError(409, 'auth_changed', 'The selected account changed'));
+    return this.mutate(`/api/v1/recruitment/${itemId}`, { releaseId, characterId });
   }
   submitBattle(releaseId: string, nodeId: string, actions: { skillId: string; targetId?: string }[], sessionId?: string): Promise<{ stars: number; firstClear: boolean; rewards: MailItem['attachments']; repeatRewardsAllowed?: boolean; ration: { spent: number; value: number } }> {
     return this.mutate('/api/v1/progress/battle', { releaseId, nodeId, actions, ...(sessionId ? { sessionId } : {}) });
