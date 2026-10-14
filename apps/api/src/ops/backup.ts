@@ -41,3 +41,44 @@ export async function runBackup(env: OpsEnv, now = new Date(), limits: Partial<D
   await env.BACKUPS.put(`${key}.manifest.json`, JSON.stringify(manifest, null, 2), { httpMetadata: { contentType: 'application/json' } });
   return { key, bytes: cipher.byteLength, tables: dump.tables, reconciled: dump.reconciled };
 }
+
+/**
+ * Enforces R2 backup retention/lifecycle policy (`d1/<target>/d1-<target>-<YYYYMMDDTHHMMSSZ>.sql.age`),
+ * deleting backups older than `retentionDays` while always retaining at least `minKeep` most recent backups.
+ */
+export async function pruneBackups(
+  bucket: Pick<R2Bucket, 'list' | 'delete'>,
+  target: string,
+  retentionDays = 30,
+  minKeep = 3,
+  now = new Date()
+): Promise<{ inspected: number; deleted: string[]; kept: number }> {
+  if (typeof bucket.list !== 'function' || typeof bucket.delete !== 'function') {
+    return { inspected: 0, deleted: [], kept: 0 };
+  }
+  const prefix = `d1/${target}/d1-${target}-`;
+  const listed = await bucket.list({ prefix, limit: 500 });
+  const ageKeys = (listed.objects ?? [])
+    .map((o) => o.key)
+    .filter((k) => k.endsWith('.sql.age'))
+    .sort()
+    .reverse();
+
+  const cutoffMs = now.getTime() - Math.max(1, retentionDays) * 86_400_000;
+  const deleted: string[] = [];
+
+  for (let i = 0; i < ageKeys.length; i++) {
+    if (i < Math.max(1, minKeep)) continue;
+    const key = ageKeys[i]!;
+    const match = /-(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z\.sql\.age$/.exec(key);
+    if (!match) continue;
+    const stampIso = `${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}Z`;
+    const ts = Date.parse(stampIso);
+    if (Number.isFinite(ts) && ts < cutoffMs) {
+      await bucket.delete([key, `${key}.manifest.json`]);
+      deleted.push(key);
+    }
+  }
+
+  return { inspected: ageKeys.length, deleted, kept: ageKeys.length - deleted.length };
+}

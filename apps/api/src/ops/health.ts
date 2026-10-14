@@ -25,6 +25,15 @@ export async function runHealth(env: OpsEnv, now = new Date()): Promise<HealthRe
     const r = await env.ADMIN.fetch('https://admin.internal/admin/api/system', { redirect: 'manual', headers: { 'User-Agent': 'uomd-ops' } });
     return { ok: [401, 403].includes(r.status), detail: `HTTP ${r.status}` };
   });
+  if (env.PUBLIC_ADMIN_URL) {
+    const publicUrl = env.PUBLIC_ADMIN_URL;
+    await probe('admin_access_edge', async () => {
+      const r = await fetch(publicUrl, { redirect: 'manual', headers: { 'User-Agent': 'uomd-ops' } });
+      const loc = r.headers.get('location') ?? '';
+      const edgeProtected = [302, 303, 401, 403].includes(r.status) && (r.status !== 302 || loc.includes('cloudflareaccess.com') || loc.includes('/cdn-cgi/access/'));
+      return { ok: edgeProtected, detail: `HTTP ${r.status}${loc ? ` -> ${loc.slice(0, 60)}` : ''}` };
+    });
+  }
   await probe('backup_fresh', async () => {
     const last = await env.DB.prepare("SELECT at FROM ops_runs WHERE kind = 'backup' AND ok = 1 ORDER BY id DESC LIMIT 1").first<{ at: string }>();
     if (!last) return { ok: false, detail: 'no backup yet' };

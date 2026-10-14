@@ -3,10 +3,11 @@ import { Decrypter, generateX25519Identity, identityToRecipient } from 'age-encr
 import { describe, expect, it } from 'vitest';
 import { sha256Hex } from '@uomd/shared';
 import { applyLedger } from '../src/db/ledger';
-import { runBackup } from '../src/ops/backup';
+import { pruneBackups, runBackup } from '../src/ops/backup';
 import { dumpDatabase, sqlLiteral } from '../src/ops/dump';
 import type { OpsEnv } from '../src/ops/env';
 import { runHealth } from '../src/ops/health';
+import { rehearseRestore, verifyEncryptedBackup } from '../src/ops/restore';
 import { CRON_BACKUP, CRON_HEALTH, backupIsOverdue, runScheduled } from '../src/ops';
 import { signIn } from './helpers';
 
@@ -204,5 +205,96 @@ describe('Control Center operations feed', () => {
     expect(j.lastGoodBackupAt).toBeTruthy();
     expect(j.backups[0]).toMatchObject({ ok: true, detail: { key: 'd1/test/x.sql.age' } });
     expect(j.health[0]?.ok).toBe(false);
+  });
+});
+
+describe('uomd-ops: encrypted restore rehearsal, R2 retention, and out-of-band alerts (R17-B)', () => {
+  it('verifies encrypted backup, reconciles table counts/ledger/triggers, and scrubs deleted accounts on restore', async () => {
+    const { playerId: victimId } = await signIn(`sub-rehearse-del-${Math.random().toString(36).slice(2)}`);
+    await applyLedger(db(), { playerId: victimId, currency: 'eclipse_token', delta: 100, reason: 'seed', idempotencyKey: `reh:${victimId}` });
+
+    const id = await generateX25519Identity();
+    const bucket = fakeBucket();
+    const ops = {
+      DB: db(),
+      BACKUPS: bucket as unknown as R2Bucket,
+      AGE_RECIPIENT: await identityToRecipient(id),
+      TARGET: 'test',
+      GAME: fetcher(200),
+      ADMIN: fetcher(401)
+    } satisfies OpsEnv;
+
+    const bk = await runBackup(ops, new Date('2026-10-14T03:17:00Z'));
+    const cipher = bucket.objects.get(bk.key) as Uint8Array;
+    const manifestRaw = bucket.objects.get(`${bk.key}.manifest.json`) as string;
+
+    const v = await verifyEncryptedBackup(cipher, manifestRaw, id, new Date('2026-10-14T05:17:00Z'));
+    expect(v.ok).toBe(true);
+    expect(v.sha256MatchesManifest).toBe(true);
+    expect(v.plainBytesMatchesManifest).toBe(true);
+    expect(v.tableCountsMatchDump).toBe(true);
+    expect(v.triggersAfterInserts).toBe(true);
+    expect(v.rpoHours).toBeCloseTo(2, 2);
+
+    const rehearsal = await rehearseRestore(db(), cipher, manifestRaw, id, [victimId], new Date('2026-10-14T05:17:00Z'));
+    expect(rehearsal.ok).toBe(true);
+    expect(rehearsal.dbRowCountsMatch).toBe(true);
+    expect(rehearsal.ledgerReconciled).toBe(true);
+    expect(rehearsal.triggersEnforced).toBe(true);
+    expect(rehearsal.deletedAccountsReapplied).toBeGreaterThanOrEqual(1);
+
+    const victimRow = await db().prepare('SELECT status, google_sub FROM players WHERE id = ?1').bind(victimId).first<{ status: string; google_sub: string | null }>();
+    expect(victimRow).toEqual({ status: 'deleted', google_sub: null });
+  });
+
+  it('prunes R2 backups older than retentionDays while preserving at least minKeep recent backups', async () => {
+    const keys = [
+      'd1/staging/d1-staging-20260801T031700Z.sql.age',
+      'd1/staging/d1-staging-20260815T031700Z.sql.age',
+      'd1/staging/d1-staging-20260901T031700Z.sql.age',
+      'd1/staging/d1-staging-20261010T031700Z.sql.age',
+      'd1/staging/d1-staging-20261014T031700Z.sql.age'
+    ];
+    const store = new Set<string>();
+    for (const k of keys) {
+      store.add(k);
+      store.add(`${k}.manifest.json`);
+    }
+    const r2Mock = {
+      list: async () => ({ objects: [...store].map((key) => ({ key })) }) as unknown as R2Objects,
+      delete: async (toDelete: string | string[]) => {
+        for (const k of Array.isArray(toDelete) ? toDelete : [toDelete]) store.delete(k);
+      }
+    };
+
+    const res = await pruneBackups(r2Mock, 'staging', 30, 3, new Date('2026-10-15T00:00:00Z'));
+    expect(res.inspected).toBe(5);
+    // 2 newest are within 30 days; 3rd newest (2026-09-01) is kept by minKeep=3; 2 oldest are pruned
+    expect(res.kept).toBe(3);
+    expect(res.deleted).toEqual([
+      'd1/staging/d1-staging-20260815T031700Z.sql.age',
+      'd1/staging/d1-staging-20260801T031700Z.sql.age'
+    ]);
+    expect(store.has('d1/staging/d1-staging-20260901T031700Z.sql.age')).toBe(true);
+    expect(store.has('d1/staging/d1-staging-20260801T031700Z.sql.age')).toBe(false);
+    expect(store.has('d1/staging/d1-staging-20260801T031700Z.sql.age.manifest.json')).toBe(false);
+  });
+
+  it('persists out-of-band R2 alerts when health checks fail so outages do not rely solely on D1', async () => {
+    const bucket = fakeBucket();
+    const opsEnv = {
+      DB: db(),
+      BACKUPS: bucket as unknown as R2Bucket,
+      AGE_RECIPIENT: await identityToRecipient(await generateX25519Identity()),
+      TARGET: 'test_alert',
+      GAME: down,
+      ADMIN: down
+    } satisfies OpsEnv;
+
+    await runScheduled(CRON_HEALTH, opsEnv);
+    const latestAlertRaw = bucket.objects.get('alerts/test_alert/latest.json') as string | undefined;
+    expect(latestAlertRaw).toBeTruthy();
+    const alertJson = JSON.parse(latestAlertRaw!) as { target: string; kind: string; ok: boolean };
+    expect(alertJson).toMatchObject({ target: 'test_alert', kind: 'health', ok: false });
   });
 });
