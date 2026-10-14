@@ -35,6 +35,7 @@ export class TeamScene extends HubScene {
   private picking: number | null = null;
   private page = 0;
   private dirty = false;
+  private releaseId: string | undefined;
 
   constructor() {
     super('Team');
@@ -42,7 +43,8 @@ export class TeamScene extends HubScene {
 
   protected async build(): Promise<void> {
     const api = Services.api;
-    const [mine, roster, teams] = await Promise.all([api.characters(), api.roster(), api.teams()]);
+    this.releaseId = await Services.ready().content.activeReleaseId();
+    const [mine, roster, teams] = await Promise.all([api.characters(this.releaseId), api.roster(this.releaseId), api.teams()]);
     const names = new Map(roster.map((c) => [c.id, c]));
     this.heroes = mine.characters.map((c) => ({ id: c.id, name: names.get(c.id)?.name_en ?? c.id, level: c.level, role: (names.get(c.id)?.role ?? '').replaceAll('_', ' ') })).sort((a, b) => b.level - a.level || a.name.localeCompare(b.name));
     this.presets = new Map(teams.teams.map((t) => [t.slot, t]));
@@ -113,7 +115,7 @@ export class TeamScene extends HubScene {
     const members = this.members();
     if (members.length === 0) return this.say('Choose at least one hero first.');
     try {
-      await Services.api.saveTeam(this.slot, `Team ${this.slot}`, members);
+      await Services.api.saveTeam(this.slot, `Team ${this.slot}`, members, this.releaseId);
       this.say('Team saved.');
       this.dirty = false;
       await this.refresh();
@@ -125,7 +127,7 @@ export class TeamScene extends HubScene {
   private async activate(): Promise<void> {
     if (this.dirty) await this.save();
     try {
-      await Services.api.activateTeam(this.slot);
+      await Services.api.activateTeam(this.slot, this.releaseId);
       this.say(`Team ${this.slot} is now the one that goes into battle.`);
       await this.refresh();
     } catch (e) {
@@ -135,7 +137,7 @@ export class TeamScene extends HubScene {
 
   private async clear(): Promise<void> {
     try {
-      if (this.presets.has(this.slot)) await Services.api.deleteTeam(this.slot);
+      if (this.presets.has(this.slot)) await Services.api.deleteTeam(this.slot, this.releaseId);
       this.cells = [null, null, null, null, null];
       this.dirty = false;
       await this.refresh();

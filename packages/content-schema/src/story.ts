@@ -1,3 +1,4 @@
+import { PresentationCommand } from './presentation';
 import { z } from 'zod';
 import { Id, LineId, SafeAssetPath } from './primitives';
 import { NodeRewards, RationClass } from './rewards';
@@ -10,6 +11,9 @@ const speaker = z.union([z.literal('narration'), Id]);
 const label = z.string().regex(/^[a-z][a-z0-9_]{0,39}$/);
 
 export const StoryCommand = z.discriminatedUnion('op', [
+  ...PresentationCommand.options,
+  z.object({ op: z.literal('set_flag'), flag: Id, value: z.boolean() }).strict(),
+  z.object({ op: z.literal('branch'), flag: Id, equals: z.boolean(), goto: label }).strict(),
   z
     .object({
       op: z.literal('say'),
@@ -79,6 +83,7 @@ export const StoryScene = z
   .superRefine((scene, ctx) => {
     const labels = new Set<string>();
     const seenLines = new Set<string>();
+    if (new Set(scene.commands.flatMap((c) => c.op === 'set_flag' || c.op === 'branch' ? [c.flag] : [])).size > 128) ctx.addIssue({ code: 'custom', message: 'scene exceeds its flag budget' });
     for (const [i, c] of scene.commands.entries()) {
       if (c.op === 'label') {
         if (labels.has(c.name)) ctx.addIssue({ code: 'custom', path: ['commands', i], message: `duplicate label ${c.name}` });
@@ -90,6 +95,7 @@ export const StoryScene = z
       }
     }
     for (const [i, c] of scene.commands.entries()) {
+      if (c.op === 'branch' && !labels.has(c.goto)) ctx.addIssue({ code: 'custom', path: ['commands', i], message: `branch to unknown label ${c.goto}` });
       if (c.op === 'goto' && !labels.has(c.label)) ctx.addIssue({ code: 'custom', path: ['commands', i], message: `goto unknown label ${c.label}` });
       if (c.op === 'choice') {
         for (const o of c.options) if (!labels.has(o.goto)) ctx.addIssue({ code: 'custom', path: ['commands', i], message: `choice goto unknown label ${o.goto}` });

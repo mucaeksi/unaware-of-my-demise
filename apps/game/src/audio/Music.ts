@@ -9,7 +9,12 @@ import { prefs } from '../platform/prefs';
 export class MusicPlayer {
   private ctx: AudioContext | null = null;
   private out: GainNode | null = null;
-  private current: { key: string; src: AudioBufferSourceNode; gain: GainNode } | null = null;
+  private current: { key: string; src: AudioBufferSourceNode; gain: GainNode; release: () => void } | null = null;
+
+  private acquire: ((key: string, owner: object) => () => void) | null = null;
+  private readonly ducks = new Set<object>();
+  assetOwner(acquire: (key: string, owner: object) => () => void): void { this.acquire = acquire; }
+  duck(): () => void { const owner = {}; this.ducks.add(owner); this.setVolume(prefs().musicVolume); return () => { this.ducks.delete(owner); this.setVolume(prefs().musicVolume); }; }
 
   init(sound: Phaser.Sound.BaseSoundManager): void {
     const wa = sound as Phaser.Sound.WebAudioSoundManager;
@@ -25,7 +30,7 @@ export class MusicPlayer {
   }
 
   setVolume(v: number): void {
-    if (this.out) this.out.gain.value = v;
+    if (this.out) this.out.gain.value = v * (this.ducks.size ? 0.25 : 1);
   }
 
   play(cache: Phaser.Cache.BaseCache, cacheKey: string, loopStart: number, duration: number, fade = 1.4): void {
@@ -35,7 +40,7 @@ export class MusicPlayer {
     if (this.current?.key === cacheKey) return;
     const buffer = cache.get(cacheKey) as AudioBuffer | undefined;
     if (!buffer || typeof buffer.getChannelData !== 'function') return;
-    if (ctx.state === 'suspended') void ctx.resume();
+    if (ctx.state === 'suspended') void ctx.resume().catch(() => undefined);
     this.stop(fade);
     const src = ctx.createBufferSource();
     src.buffer = buffer;
@@ -47,7 +52,9 @@ export class MusicPlayer {
     gain.gain.exponentialRampToValueAtTime(1, ctx.currentTime + fade);
     src.connect(gain).connect(out);
     src.start();
-    this.current = { key: cacheKey, src, gain };
+    const release = this.acquire?.(cacheKey, {}) ?? (() => undefined);
+    src.onended = () => { release(); gain.disconnect(); src.disconnect(); };
+    this.current = { key: cacheKey, src, gain, release };
   }
 
   stop(fade = 0.8): void {

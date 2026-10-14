@@ -22,7 +22,7 @@ export class RosterScene extends HubScene {
     const byId = new Map(roster.map((c) => [c.id, c]));
     this.list = inv
       .filter((i) => i.item_type === 'character')
-      .map((i) => ({ id: i.item_id, name: byId.get(i.item_id)?.name_en ?? i.item_id, rarity: byId.get(i.item_id)?.rarity ?? 3, element: byId.get(i.item_id)?.element ?? '', role: byId.get(i.item_id)?.role ?? '', copies: i.copies, shards: i.shards }))
+      .map((i) => ({ id: i.item_id, name: byId.get(i.item_id)?.name_en ?? i.item_id, rarity: byId.get(i.item_id)?.rarity ?? 0, element: byId.get(i.item_id)?.element ?? '', role: byId.get(i.item_id)?.role ?? '', copies: i.copies, shards: i.shards }))
       .sort((a, b) => b.rarity - a.rarity || a.name.localeCompare(b.name));
     this.draw(roster.length);
   }
@@ -39,7 +39,7 @@ export class RosterScene extends HubScene {
       const nm = this.add_(txt(this, x, y - 52, c.name, { fontFamily: F.display, fontSize: '32px', fontStyle: '600', color: c.rarity === 5 ? '#ffd86b' : T.text }).setOrigin(0.5));
       if (nm.width > 350) nm.setScale(350 / nm.width);
       this.add_(txt(this, x, y - 8, stars(c.rarity), { fontSize: '32px', color: '#ffd86b' }).setOrigin(0.5));
-      this.add_(txt(this, x, y + 32, `${c.element} · ${c.role.replaceAll('_', ' ')}`, { fontSize: '24px', color: T.dim }).setOrigin(0.5));
+      this.add_(txt(this, x, y + 32, c.rarity ? `${c.element} · ${c.role.replaceAll('_', ' ')}` : 'Unavailable in this version', { fontSize: '24px', color: T.dim }).setOrigin(0.5));
       this.add_(txt(this, x, y + 68, c.copies > 1 || c.shards ? `copies ${c.copies} · shards ${c.shards}` : 'tap for details', { fontSize: '24px', color: T.dim }).setOrigin(0.5));
     });
     const pages = Math.max(1, Math.ceil(this.list.length / PER_PAGE));

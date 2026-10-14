@@ -54,11 +54,8 @@ beforeEach(async () => {
   await resetContent(); await upload(files);
   const staged = await admin('/admin/api/releases', post({ id: releaseId, channel: 'dev', files: entries(files) }));
   expect(staged.status, await staged.clone().text()).toBe(201);
-  // Explicit isolated runtime fixture. Publication remains blocked in the product API.
-  await db.batch([
-    db.prepare("UPDATE content_releases SET state = 'published', published_at = strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id = ?1").bind(releaseId),
-    db.prepare("INSERT INTO channel_pointers (channel, release_id, version, updated_by) VALUES ('dev', ?1, 1, 'test') ON CONFLICT (channel) DO UPDATE SET release_id = excluded.release_id, version = version + 1").bind(releaseId)
-  ]);
+  const published = await admin(`/admin/api/releases/${releaseId}/publish`, post({}));
+  expect(published.status, await published.clone().text()).toBe(200);
 });
 async function prepared() {
   const player = await signIn(`catalog-lifecycle-${crypto.randomUUID()}`);
@@ -225,4 +222,103 @@ it('summons a new catalog-only companion before recruitment and grows the same s
   expect(await db.prepare('SELECT id FROM character_identities WHERE id = ?1').bind(hero).first()).toEqual({ id: hero });
   expect((await grow(auth)).status).toBe(200);
   expect(await db.prepare('SELECT 1 FROM characters WHERE id = ?1').bind(hero).first()).toBeNull();
+});
+
+it('keeps a declared-only team and freezes earned mail definitions before later catalog loss', async () => {
+  const { auth, playerId } = await prepared(); expect((await recruit(auth)).status).toBe(200);
+  expect((await game('/api/v1/teams/1', { ...post({ releaseId, name: 'Snapshot team', members: [{ characterId: hero, slot: 0, row: 'rear' }] }, auth), method: 'PUT' })).status).toBe(200);
+  expect((await game('/api/v1/teams/1/activate', post({ releaseId }, auth))).status).toBe(200);
+  const { sendMail, claimMail, listMail } = await import('../src/mail/service');
+  const sent = await sendMail(db, playerId, { kind: 'reward', title: 'Frozen reward', attachments: [{ type: 'character', itemId: hero }, { type: 'item', itemId: xp, quantity: 1 }, { type: 'gear', gearId: armor }] }, 'test', new Date(), runtime);
+  await baseEnv.CONTENT.delete(ContentStore.objectKey(runtime.sha256));
+  expect((await listMail(db, playerId)).find((m) => m.id === sent.id)?.names?.[hero]).toBe('Catalog Probe');
+  const received = await claimMail(db, playerId, sent.id, new Date(), 'catalog_mail_frozen'); expect(received.claimed).toHaveLength(3);
+  expect(await claimMail(db, playerId, sent.id, new Date(), 'catalog_mail_frozen')).toMatchObject({ replayed: true });
+  expect(await db.prepare("SELECT copies, shards FROM player_items WHERE player_id = ?1 AND item_id = ?2").bind(playerId, hero).first()).toEqual({ copies: 2, shards: 5 });
+});
+
+it('preserves a provider-confirmed catalog-only purchase across publication loss and catalog edits', async () => {
+  const { playerId } = await prepared();
+  const { fakePlay, playClient } = await import('./helpers'); const { billingTag } = await import('../src/billing/service'); const { verifyReceipt } = await import('../src/billing/recovery');
+  const productId = 'catalog_paid_probe'; const token = `paid_catalog_${playerId}`; const orderId = `GPA.catalog.${playerId}`;
+  await db.prepare("INSERT OR REPLACE INTO shop_products (product_id, kind, title_en, grants, active) VALUES (?1, 'consumable', 'Frozen catalog fixture', ?2, 0)").bind(productId, JSON.stringify([{ type: 'character', itemId: hero }, { type: 'gear', gearId: armor }])).run();
+  fakePlay.products.set(token, { purchaseState: 'pending', orderId, acknowledged: false, consumed: false, purchaseTimeMs: Date.now(), obfuscatedAccountId: await billingTag(playerId) });
+  expect(await verifyReceipt(baseEnv, playClient, playerId, { productId, purchaseToken: token })).toMatchObject({ status: 'pending' });
+  await db.prepare("UPDATE shop_products SET grants = '[]' WHERE product_id = ?1").bind(productId).run();
+  await baseEnv.CONTENT.delete(ContentStore.objectKey(runtime.sha256));
+  fakePlay.products.get(token)!.purchaseState = 'purchased';
+  expect(await verifyReceipt(baseEnv, playClient, playerId, { productId, purchaseToken: token })).toMatchObject({ status: 'granted' });
+  expect(await db.prepare("SELECT copies FROM player_items WHERE player_id = ?1 AND item_id = ?2").bind(playerId, hero).first()).toEqual({ copies: 1 });
+  expect(await db.prepare('SELECT count(*) AS n FROM player_gear WHERE player_id = ?1 AND gear_id = ?2').bind(playerId, armor).first()).toEqual({ n: 2 });
+});
+
+it('pins task rules across catalog changes without duplicate claims or changed rewards', async () => {
+  const { auth, playerId } = await prepared(); const { taskEventStatements } = await import('../src/tasks/service');
+  await db.batch(await taskEventStatements(db, playerId, { eligible_wins: 999, boss_wins: 999, three_star_wins: 999, level_ups: 999 }, Date.now(), runtime.data.config.tasks, runtime));
+  const first = await game(`/api/v1/tasks?releaseId=${releaseId}`, { headers: auth }); expect(first.status).toBe(200);
+  const shown = await first.json<{ windowHours: number; daily: { periodKey: string; tasks: { id: string; rewards: unknown[] }[] } }>(); const task = shown.daily.tasks[0]!;
+  const changed = structuredClone(runtime.data); changed.config.tasks.windowHours = shown.windowHours === 12 ? 6 : 12; changed.config.tasks.daily.tasks[0]!.rewards = [{ type: 'currency', currency: 'eclipse_token', amount: 1 }];
+  const snapshot = await artifact(CATALOG_PATH, changed); const nextId = 'rel_catalog_tasks_next'; await upload([snapshot]);
+  expect((await admin('/admin/api/releases', post({ id: nextId, channel: 'dev', files: entries([...files.filter((f) => f.path !== CATALOG_PATH), snapshot]) }))).status).toBe(201);
+  expect((await admin(`/admin/api/releases/${nextId}/publish`, post({}))).status).toBe(200);
+  const fresh = await game(`/api/v1/tasks?releaseId=${nextId}`, { headers: auth }); expect(await fresh.json()).toMatchObject({ windowHours: shown.windowHours, daily: { periodKey: shown.daily.periodKey } });
+  const input = { releaseId: nextId, periodKey: shown.daily.periodKey, taskId: task.id, requestId: 'catalog_task_frozen' };
+  const claimed = await game('/api/v1/tasks/claim', post(input, auth)); expect(claimed.status, await claimed.clone().text()).toBe(200); expect(await claimed.json()).toMatchObject({ rewards: task.rewards });
+  expect((await game('/api/v1/tasks/claim', post({ ...input, requestId: 'catalog_task_duplicate' }, auth))).status).toBe(409);
+  await baseEnv.CONTENT.delete(ContentStore.objectKey(snapshot.sha256));
+  const recovered = await game('/api/v1/tasks/claim', post(input, auth)); expect(recovered.status).toBe(200); expect(await recovered.json()).toMatchObject({ replayed: true, rewards: task.rewards });
+});
+
+async function publishVariant(id: string, data: EconomyCatalog) {
+  const snapshot = await artifact(CATALOG_PATH, data); await upload([snapshot]);
+  const staged = await admin('/admin/api/releases', post({ id, channel: 'dev', files: entries([...files.filter((f) => f.path !== CATALOG_PATH), snapshot]) })); expect(staged.status, await staged.clone().text()).toBe(201);
+  expect((await admin(`/admin/api/releases/${id}/publish`, post({}))).status).toBe(200); return snapshot;
+}
+it('atomically starts new accounts from the published catalog while existing logins survive a kill', async () => {
+  const changed = structuredClone(runtime.data); changed.characters.find((c) => c.id === hero)!.acquisition = 'free_start';
+  const nextId = 'rel_catalog_starters'; await publishVariant(nextId, changed);
+  const subject = `catalog-starter-${crypto.randomUUID()}`; const { playerId } = await signIn(subject);
+  expect(await db.prepare("SELECT copies FROM player_items WHERE player_id = ?1 AND item_id = ?2").bind(playerId, hero).first()).toEqual({ copies: 1 });
+  expect(await db.prepare("SELECT json_extract(result_json, '$.releaseId') AS releaseId FROM reward_grants WHERE player_id = ?1 AND grant_key = ?2").bind(playerId, `signup:${playerId}:${hero}`).first()).toEqual({ releaseId: nextId });
+  const kill = await admin('/admin/api/channels/dev/kill', post({ releaseId: nextId })); expect(kill.status).toBe(200);
+  const { playerForGoogle } = await import('../src/player/auth');
+  expect(await playerForGoogle(db, { sub: subject }, baseEnv)).toMatchObject({ id: playerId, isNew: false });
+  await expect(playerForGoogle(db, { sub: `killed-${subject}` }, baseEnv)).rejects.toMatchObject({ code: 'release_not_economic' });
+  expect(await db.prepare('SELECT id FROM players WHERE google_sub = ?1').bind(`killed-${subject}`).first()).toBeNull();
+});
+it('preserves historical equipment and permits safe cleanup when its definition disappears', async () => {
+  const { auth, playerId } = await prepared(); const id = (await db.prepare('SELECT id FROM player_gear WHERE player_id = ?1 AND gear_id = ?2').bind(playerId, armor).first<{ id: number }>())!.id;
+  expect((await game(`/api/v1/gear/${id}/equip`, post({ releaseId, characterId: 'mahmut' }, auth))).status).toBe(200);
+  const changed = structuredClone(runtime.data); changed.gear = changed.gear.filter((g) => g.gear_id !== armor); const nextId = 'rel_catalog_retired'; await publishVariant(nextId, changed);
+  const listed = await game(`/api/v1/gear?releaseId=${nextId}`, { headers: auth });
+  expect(await listed.json()).toMatchObject({ gear: expect.arrayContaining([expect.objectContaining({ id, gearId: armor, equippedBy: 'mahmut', unavailableReason: expect.any(String) })]) });
+  expect((await game(`/api/v1/gear/${id}/unequip`, post({ releaseId: nextId }, auth))).status).toBe(200);
+  expect((await game(`/api/v1/gear/${id}/lock`, post({ releaseId: nextId, locked: true }, auth))).status).toBe(200);
+  expect((await game(`/api/v1/gear/${id}/equip`, post({ releaseId: nextId, characterId: 'mahmut' }, auth))).status).toBe(422);
+  expect(await db.prepare('SELECT gear_id, equipped_by, locked FROM player_gear WHERE id = ?1').bind(id).first()).toEqual({ gear_id: armor, equipped_by: null, locked: 1 });
+});
+it('keeps subscription instant and periodic catalog-only benefits after their source object disappears', async () => {
+  const { playerId } = await prepared();
+  const { fakePlay, playClient } = await import('./helpers'); const { billingTag, syncSubscriptionMail } = await import('../src/billing/service'); const { verifyReceipt } = await import('../src/billing/recovery'); const { claimMail } = await import('../src/mail/service');
+  const productId = 'catalog_sub_probe'; const token = `catalog_sub_${playerId}`; const now = new Date();
+  const source = await db.prepare("SELECT sub_config FROM shop_products WHERE product_id = 'eclipse_blessing_30d'").first<{ sub_config: string }>(); const config = JSON.parse(source!.sub_config); config.instant = [{ type: 'character', itemId: hero }]; config.periodic.attachments = [{ type: 'gear', gearId: armor }];
+  await db.prepare("INSERT OR REPLACE INTO shop_products (product_id, kind, title_en, grants, sub_config, active) VALUES (?1, 'subscription', 'Synthetic catalog subscription', '[]', ?2, 0)").bind(productId, JSON.stringify(config)).run();
+  fakePlay.subs.set(token, { state: 'active', productId, latestOrderId: `GPA.catalog.${playerId}..0`, acknowledged: false, startTimeMs: now.getTime(), expiryTimeMs: now.getTime() + 30 * 86_400_000, obfuscatedAccountId: await billingTag(playerId) });
+  expect(await verifyReceipt(baseEnv, playClient, playerId, { productId, purchaseToken: token }, now)).toMatchObject({ status: 'granted' });
+  await baseEnv.CONTENT.delete(ContentStore.objectKey(runtime.sha256));
+  const nextWindow = new Date(now.getTime() + 12 * 3_600_000 + 1);
+  expect(await syncSubscriptionMail(db, playerId, nextWindow)).toBe(1);
+  const mail = await db.prepare("SELECT id FROM mail WHERE player_id = ?1 AND kind = 'subscription' ORDER BY id DESC LIMIT 1").bind(playerId).first<{ id: number }>();
+  expect(await claimMail(db, playerId, mail!.id, nextWindow, 'catalog_sub_mail_frozen')).toMatchObject({ claimed: [{ type: 'gear', gearId: armor }] });
+  expect(await db.prepare('SELECT COUNT(*) AS n FROM player_gear WHERE player_id = ?1 AND gear_id = ?2').bind(playerId, armor).first()).toEqual({ n: 2 });
+  expect(await syncSubscriptionMail(db, playerId, nextWindow)).toBe(0);
+});
+
+it('displays original task reward names when the next catalog renames their item', async () => {
+  const first = structuredClone(runtime.data); first.config.tasks.daily.tasks[0]!.rewards = [{ type: 'item', itemId: xp, quantity: 1 }]; const firstId = 'rel_task_names_original'; const snapshot = await publishVariant(firstId, first);
+  const { auth, playerId } = await signIn(`task-names-${crypto.randomUUID()}`); const { taskEventStatements } = await import('../src/tasks/service');
+  await db.batch(await taskEventStatements(db, playerId, { eligible_wins: 999, boss_wins: 999, three_star_wins: 999, level_ups: 999 }, Date.now(), first.config.tasks, { releaseId: firstId, sha256: snapshot.sha256, data: first }));
+  const renamed = structuredClone(first); const originalName = renamed.items.find((i) => i.item_id === xp)!.name_en; renamed.items.find((i) => i.item_id === xp)!.name_en = 'Later synthetic label'; const nextId = 'rel_task_names_next'; await publishVariant(nextId, renamed);
+  const response = await game(`/api/v1/tasks?releaseId=${nextId}`, { headers: auth }); expect(response.status).toBe(200);
+  expect(await response.json()).toMatchObject({ daily: { tasks: expect.arrayContaining([expect.objectContaining({ rewardNames: expect.objectContaining({ [xp]: originalName }) })]) } });
 });

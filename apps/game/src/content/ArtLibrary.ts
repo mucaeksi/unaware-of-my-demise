@@ -12,7 +12,7 @@ export interface UnitFrames {
   textureKey: string;
   facing: 'left' | 'right';
   heightPx: number;
-  states: Record<string, { frame: string; scale: number; footY: number; pivotX: number }>;
+  states: Record<string, { frame: string; scale: number; footY: number; pivotX: number; animationKey?: string }>;
 }
 
 /**
@@ -29,13 +29,28 @@ export class ArtLibrary {
 
   constructor(private readonly content: ContentService, readonly art: ArtManifest) {}
 
+  private async asset(scene: Phaser.Scene, path: string, decodedBytes = 0) {
+    this.content.watchAssetOwner(scene, (release) => scene.events.once('shutdown', release));
+    const ref = await this.content.asset(path, scene, decodedBytes);
+    if (!scene.sys.isActive()) { this.content.releaseAssets(scene); throw new Error('scene closed while loading media'); }
+    return ref;
+  }
+
   private async run(scene: Phaser.Scene, queue: Queued[]): Promise<void> {
+    for (const item of queue) this.content.retainAsset(item.key, scene, () => {
+      if (item.type === 'image' && scene.textures.exists(item.key)) scene.textures.remove(item.key);
+      if (item.type === 'audio' && scene.cache.audio.exists(item.key)) scene.cache.audio.remove(item.key);
+      for (const key of scene.anims.getAnimsFromTexture(item.key)) if (key.startsWith(`${item.key}:`)) scene.anims.remove(key);
+    });
     const todo = queue.filter((q) => (q.type === 'image' ? !scene.textures.exists(q.key) : !scene.cache.audio.exists(q.key)));
     if (todo.length === 0) return;
     await new Promise<void>((resolve, reject) => {
       const loader = scene.load;
-      loader.once('complete', () => resolve());
-      loader.once('loaderror', (file: Phaser.Loader.File) => reject(new Error(`failed to load ${file.key}`)));
+      const cleanup = () => { loader.off('complete', complete); loader.off('loaderror', failed); scene.events.off('shutdown', closed); };
+      const complete = () => { cleanup(); resolve(); };
+      const failed = (file: Phaser.Loader.File) => { if (todo.some((q) => q.key === file.key)) { cleanup(); reject(new Error(`failed to load ${file.key}`)); } };
+      const closed = () => { cleanup(); reject(new Error('scene closed while loading media')); };
+      loader.once('complete', complete); loader.on('loaderror', failed); scene.events.once('shutdown', closed);
       for (const q of todo) {
         if (q.type === 'image') loader.image(q.key, q.url);
         else loader.audio(q.key, q.url);
@@ -46,12 +61,13 @@ export class ArtLibrary {
 
   async loadUnits(scene: Phaser.Scene, artKeys: readonly string[]): Promise<void> {
     const queue: Queued[] = [];
-    const want = [...new Set(artKeys)].filter((k) => !this.unitCache.has(k));
+    const want = [...new Set(artKeys)];
     for (const k of want) {
       const u = this.art.units[k];
       const atlas = u && this.art.atlases[u.atlas];
       if (!u || !atlas) throw new Error(`no art for unit ${k}`);
-      const ref = await this.content.asset(atlas.image);
+      const ref = await this.asset(scene,atlas.image);
+      if (ref.width !== atlas.width || ref.height !== atlas.height) throw new Error('atlas dimensions differ from the art manifest');
       queue.push({ type: 'image', key: ref.key, url: ref.url });
     }
     await this.run(scene, queue);
@@ -59,11 +75,15 @@ export class ArtLibrary {
       const u = this.art.units[k];
       const atlas = u && this.art.atlases[u.atlas];
       if (!u || !atlas) continue;
-      const ref = await this.content.asset(atlas.image);
+      const ref = await this.asset(scene,atlas.image);
       const tex = scene.textures.get(ref.key);
       for (const [name, [x, y, w, h]] of Object.entries(atlas.frames)) if (!tex.has(name)) tex.add(name, 0, x, y, w, h);
       const states: UnitFrames['states'] = {};
-      for (const [st, s] of Object.entries(u.states)) states[st] = { frame: s.frame, scale: s.scale, footY: s.foot_y, pivotX: s.pivot_x };
+      for (const [st, s] of Object.entries(u.states)) {
+        const animationKey = s.animation ? `${ref.key}:${k}:${st}` : undefined;
+        if (animationKey && s.animation && !scene.anims.exists(animationKey)) scene.anims.create({ key: animationKey, frames: s.animation.frames.map((frame) => ({ key: ref.key, frame })), frameRate: s.animation.fps, repeat: s.animation.loop ? -1 : 0 });
+        states[st] = { frame: s.frame, scale: s.scale, footY: s.foot_y, pivotX: s.pivot_x, ...(animationKey ? { animationKey } : {}) };
+      }
       this.unitCache.set(k, { textureKey: ref.key, facing: u.facing, heightPx: u.height_px, states });
     }
   }
@@ -74,11 +94,11 @@ export class ArtLibrary {
     return u;
   }
 
-  frameFor(artKey: string, state: UnitAnimState): { key: string; frame: string; scale: number; footY: number; pivotX: number } {
+  frameFor(artKey: string, state: UnitAnimState): { key: string; frame: string; scale: number; footY: number; pivotX: number; animationKey?: string } {
     const u = this.unit(artKey);
     const s = u.states[state] ?? u.states.idle;
     if (!s) throw new Error(`unit ${artKey} has no idle state`);
-    return { key: u.textureKey, frame: s.frame, scale: s.scale, footY: s.footY, pivotX: s.pivotX };
+    return { key: u.textureKey, frame: s.frame, scale: s.scale, footY: s.footY, pivotX: s.pivotX, ...(s.animationKey ? { animationKey: s.animationKey } : {}) };
   }
 
   async loadPortraits(scene: Phaser.Scene, characters: readonly string[]): Promise<void> {
@@ -87,7 +107,7 @@ export class ArtLibrary {
       const p = this.art.portraits[c];
       if (!p) continue;
       for (const [img, path] of Object.entries(p.images)) {
-        const ref = await this.content.asset(path);
+        const ref = await this.asset(scene,path);
         this.portraitKeys.set(`${c}/${img}`, ref.key);
         queue.push({ type: 'image', key: ref.key, url: ref.url });
       }
@@ -105,7 +125,7 @@ export class ArtLibrary {
   async loadBackground(scene: Phaser.Scene, location: string): Promise<void> {
     const path = this.art.backgrounds[location];
     if (!path) throw new Error(`no background for ${location}`);
-    const ref = await this.content.asset(path);
+    const ref = await this.asset(scene,path);
     this.bgKeys.set(location, ref.key);
     await this.run(scene, [{ type: 'image', key: ref.key, url: ref.url }]);
   }
@@ -136,9 +156,14 @@ export class ArtLibrary {
   async loadMusic(scene: Phaser.Scene, cue: string): Promise<void> {
     const m = this.art.music[cue];
     if (!m) return;
-    const ref = await this.content.asset(m.file);
+    const ref = await this.asset(scene,m.file, Math.ceil(m.duration_s * 48_000 * 2 * 4));
     this.musicKeys.set(cue, { key: ref.key, loopStart: m.loop_start_s, duration: m.duration_s });
     await this.run(scene, [{ type: 'audio', key: ref.key, url: ref.url }]);
+    const buffer = scene.cache.audio.get(ref.key) as AudioBuffer | undefined;
+    if (buffer && typeof buffer.getChannelData === 'function') {
+      try { if (buffer.duration > m.duration_s + 0.5 || buffer.numberOfChannels > 2 || buffer.sampleRate > 96_000) throw new Error('Music decoding differs from its declared resource budget'); this.content.accountDecodedAsset(ref.key, buffer.length * buffer.numberOfChannels * 4); }
+      catch (error) { scene.cache.audio.remove(ref.key); throw error; }
+    }
   }
 
   music(cue: string): { key: string; loopStart: number; duration: number } | null {
@@ -158,7 +183,7 @@ export class ArtLibrary {
   async loadUi(scene: Phaser.Scene): Promise<void> {
     const queue: Queued[] = [];
     for (const [name, path] of Object.entries(this.art.ui)) {
-      const ref = await this.content.asset(path);
+      const ref = await this.asset(scene,path);
       this.uiKeys.set(name, ref.key);
       queue.push({ type: 'image', key: ref.key, url: ref.url });
     }
@@ -170,8 +195,8 @@ export class ArtLibrary {
     const queue: Queued[] = [];
     for (const id of ids) {
       const path = this.art.stills[id];
-      if (!path || this.stillKeys.has(id)) continue;
-      const ref = await this.content.asset(path);
+      if (!path) continue;
+      const ref = await this.asset(scene,path);
       this.stillKeys.set(id, ref.key);
       queue.push({ type: 'image', key: ref.key, url: ref.url });
     }

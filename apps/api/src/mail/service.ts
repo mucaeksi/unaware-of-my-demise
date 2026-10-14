@@ -1,3 +1,5 @@
+import { GrantCatalog, freezeGrantCatalog } from '../content/grant-catalog';
+import type { RuntimeCatalog } from '../content/runtime-catalog';
 import { z } from 'zod';
 import { RewardAttachment } from '@uomd/content-schema';
 import { HttpError } from '../content/store';
@@ -30,22 +32,23 @@ export interface MailRow {
   expires_at: string;
   claimed_at: string | null;
   read_at: string | null;
+  names?: Record<string, string>;
 }
 
 const subscriptionOrder = (sourceKey: string | null | undefined): string | undefined => /^sub:([^:]+):/.exec(sourceKey ?? '')?.[1];
 
 /** Shared statement permits earned windows to be issued in one bounded D1 batch. */
-export function prepareMail(db: D1Database, playerId: string, mail: NewMail, createdBy: string, now = new Date()): D1PreparedStatement {
+export function prepareMail(db: D1Database, playerId: string, mail: NewMail, createdBy: string, now = new Date(), catalog?: GrantCatalog): D1PreparedStatement {
   const m = NewMail.parse(mail);
   const expires = new Date(now.getTime() + m.expiresInDays * 86_400_000).toISOString();
-  return db.prepare("INSERT INTO mail (player_id, kind, title, body, attachments, source_key, created_by, created_at, expires_at) SELECT ?1,?2,?3,?4,?5,?6,?7,?8,?9 FROM players WHERE id = ?1 AND status <> 'deleted' AND (?10 IS NULL OR EXISTS (SELECT 1 FROM purchases WHERE order_id = ?10 AND player_id = ?1 AND state = 'granted' AND entitlement_state IN ('active','canceled','in_grace','expired') AND period_start <= ?8 AND period_end > ?8)) ON CONFLICT (player_id, source_key) DO NOTHING RETURNING id")
-    .bind(playerId, m.kind, m.title, m.body, JSON.stringify(m.attachments), m.sourceKey ?? null, createdBy, now.toISOString(), expires, subscriptionOrder(m.sourceKey) ?? null);
+  return db.prepare("INSERT INTO mail (player_id, kind, title, body, attachments, source_key, created_by, created_at, expires_at, grant_catalog) SELECT ?1,?2,?3,?4,?5,?6,?7,?8,?9,?11 FROM players WHERE id = ?1 AND status <> 'deleted' AND (?10 IS NULL OR EXISTS (SELECT 1 FROM purchases WHERE order_id = ?10 AND player_id = ?1 AND state = 'granted' AND entitlement_state IN ('active','canceled','in_grace','expired') AND period_start <= ?8 AND period_end > ?8)) ON CONFLICT (player_id, source_key) DO NOTHING RETURNING id")
+    .bind(playerId, m.kind, m.title, m.body, JSON.stringify(m.attachments), m.sourceKey ?? null, createdBy, now.toISOString(), expires, subscriptionOrder(m.sourceKey) ?? null, catalog ? JSON.stringify(GrantCatalog.parse(catalog)) : null);
 }
 
 /** Creates a mail. A repeated `sourceKey` for the same player is a no-op and returns the existing mail id. */
-export async function sendMail(db: D1Database, playerId: string, mail: NewMail, createdBy: string, now = new Date()): Promise<{ id: number; created: boolean }> {
+export async function sendMail(db: D1Database, playerId: string, mail: NewMail, createdBy: string, now = new Date(), catalog?: RuntimeCatalog): Promise<{ id: number; created: boolean }> {
   const m = NewMail.parse(mail);
-  const res = await prepareMail(db, playerId, m, createdBy, now).first<{ id: number }>();
+  const res = await prepareMail(db, playerId, m, createdBy, now, freezeGrantCatalog(catalog, m.attachments)).first<{ id: number }>();
   if (res) return { id: res.id, created: true };
   const existing = await db.prepare('SELECT id FROM mail WHERE player_id = ?1 AND source_key = ?2').bind(playerId, m.sourceKey ?? '').first<{ id: number }>();
   if (!existing) {
@@ -55,12 +58,16 @@ export async function sendMail(db: D1Database, playerId: string, mail: NewMail, 
   return { id: existing.id, created: false };
 }
 
-const parse = (r: Omit<MailRow, 'attachments'> & { attachments: string }): MailRow => ({ ...r, attachments: JSON.parse(r.attachments) as Attachment[] });
+const parse = (r: Omit<MailRow, 'attachments'> & { attachments: string; grant_catalog?: string | null }): MailRow => {
+  const catalog = r.grant_catalog ? GrantCatalog.parse(JSON.parse(r.grant_catalog)) : undefined;
+  const { grant_catalog: _frozen, ...fields } = r;
+  return { ...fields, attachments: JSON.parse(r.attachments) as Attachment[], ...(catalog ? { names: Object.fromEntries([...catalog.data.characters.map((c) => [c.id, c.name_en]), ...catalog.data.items.map((i) => [i.item_id, i.name_en]), ...catalog.data.gear.map((g) => [g.gear_id, g.name_en])]) } : {}) };
+};
 
 export async function listMail(db: D1Database, playerId: string, now = new Date()): Promise<MailRow[]> {
   const { results } = await db
     .prepare(
-      `SELECT id, kind, title, body, attachments, created_at, expires_at, claimed_at, read_at FROM mail
+      `SELECT id, kind, title, body, attachments, created_at, expires_at, claimed_at, read_at, grant_catalog FROM mail
        WHERE player_id = ?1 AND (claimed_at IS NOT NULL AND claimed_at > ?3 OR claimed_at IS NULL AND expires_at > ?2) ORDER BY id DESC LIMIT 100`
     )
     .bind(playerId, now.toISOString(), new Date(now.getTime() - 3 * 86_400_000).toISOString())
@@ -75,7 +82,7 @@ export async function claimMail(db: D1Database, playerId: string, mailId: number
   const recorded = input ? await recordedOperation(db, playerId, kind, input) : null;
   if (recorded) return recorded as { claimed: Attachment[]; requestId: string; mailId: number; replayed: boolean };
   const row = await db
-    .prepare('SELECT id, kind, title, body, attachments, created_at, expires_at, claimed_at, read_at FROM mail WHERE id = ?1 AND player_id = ?2')
+    .prepare('SELECT id, kind, title, body, attachments, created_at, expires_at, claimed_at, read_at, grant_catalog FROM mail WHERE id = ?1 AND player_id = ?2')
     .bind(mailId, playerId)
     .first<Omit<MailRow, 'attachments'> & { attachments: string }>();
   if (!row) throw new HttpError(404, 'mail_not_found', 'no such mail');
@@ -86,19 +93,20 @@ export async function claimMail(db: D1Database, playerId: string, mailId: number
     throw new HttpError(409, 'already_claimed', 'this mail was already claimed');
   }
   if (mail.expires_at <= now.toISOString()) throw new HttpError(409, 'expired', 'this mail has expired');
-  const src = await db.prepare('SELECT source_key FROM mail WHERE id = ?1').bind(mailId).first<{ source_key: string | null }>();
+  const src = await db.prepare('SELECT source_key, grant_catalog FROM mail WHERE id = ?1').bind(mailId).first<{ source_key: string | null; grant_catalog: string | null }>();
   const order = subscriptionOrder(src?.source_key);
   if (order) {
     const p = await db.prepare('SELECT state FROM purchases WHERE order_id = ?1').bind(order).first<{ state: string }>();
     if (p?.state === 'refunded') throw new HttpError(409, 'revoked', 'this entitlement was revoked by a refund');
   }
 
-  const result = { claimed: mail.attachments, ...(requestId ? { requestId, mailId } : {}) };
+  const catalog = src?.grant_catalog ? GrantCatalog.parse(JSON.parse(src.grant_catalog)) : undefined;
+  const result = { ...(catalog ? { releaseId: catalog.releaseId, catalogSha256: catalog.sha256 } : {}), claimed: mail.attachments, ...(requestId ? { requestId, mailId } : {}) };
   const batch: D1PreparedStatement[] = [
     db.prepare("UPDATE mail SET claimed_at = ?3, read_at = COALESCE(read_at, ?3) WHERE id = ?1 AND player_id = ?2 AND claimed_at IS NULL AND expires_at > ?3 AND EXISTS (SELECT 1 FROM players WHERE id = ?2 AND status <> 'deleted') AND (?4 IS NULL OR EXISTS (SELECT 1 FROM purchases WHERE order_id = ?4 AND player_id = ?2 AND state = 'granted' AND entitlement_state IN ('active', 'canceled', 'in_grace', 'expired')))")
       .bind(mailId, playerId, now.toISOString(), order ?? null),
     db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
-    ...(await grantStatements(db, playerId, mail.attachments, { keyPrefix: `mail:${mailId}`, reason: `mail:${mail.kind}` }))
+    ...(await grantStatements(db, playerId, mail.attachments, { keyPrefix: `mail:${mailId}`, reason: `mail:${mail.kind}`, catalog }))
   ];
   if (input) batch.push(operationStatement(db, playerId, kind, input, result));
   batch.push(db.prepare('DELETE FROM tx_guard'));

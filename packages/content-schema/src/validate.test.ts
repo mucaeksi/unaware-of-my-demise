@@ -9,7 +9,7 @@ const walk = (dir: string, rel = ''): string[] =>
     const r = rel ? `${rel}/${n}` : n;
     return statSync(join(dir, r)).isDirectory() ? walk(dir, r) : [r];
   });
-const load = (dir: string): Map<string, Uint8Array> => new Map(walk(dir).map((p) => [p, new Uint8Array(readFileSync(join(dir, p)))]));
+const load = (dir: string): Map<string, Uint8Array> => new Map(walk(dir).filter((p) => p !== 'release.json').map((p) => [p, new Uint8Array(readFileSync(join(dir, p)))]));
 
 /** the base release alone: the first-install flow (prologue + tutorials T-1..T-3) */
 const overlay = (): Map<string, Uint8Array> => load(join(ROOT, 'base'));

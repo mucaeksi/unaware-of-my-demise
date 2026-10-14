@@ -1,6 +1,8 @@
 /** Small per-device preferences (never gameplay state). localStorage can throw in private modes. */
 export interface Prefs {
   musicVolume: number;
+  voiceVolume: number;
+  locale: string;
   sfxVolume: number;
   reducedMotion: boolean;
   textSpeed: 'slow' | 'normal' | 'fast';
@@ -17,7 +19,7 @@ function randomId(): string {
 
 function defaults(): Prefs {
   const reduced = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  return { musicVolume: 0.7, sfxVolume: 0.8, reducedMotion: reduced, textSpeed: 'normal', installId: randomId() };
+  return { voiceVolume: 0.8, locale: 'en', musicVolume: 0.7, sfxVolume: 0.8, reducedMotion: reduced, textSpeed: 'normal', installId: randomId() };
 }
 
 let cache: Prefs | null = null;

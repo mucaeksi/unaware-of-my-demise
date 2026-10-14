@@ -32,7 +32,7 @@ export class ShopScene extends HubScene {
         await this.updateWallet();
       }
     }
-    const [products, ads] = await Promise.all([api.products(), api.adStatus().catch(() => null)]);
+    const [products, ads] = await Promise.all([api.products(await Services.ready().content.activeReleaseId()), api.adStatus().catch(() => null)]);
     this.add_(txt(this, REF_W / 2, 160, native ? 'Payments are handled by Google Play.' : 'Purchases and rewarded ads run inside the Android app.', { fontSize: '32px', color: T.dim }).setOrigin(0.5));
     if (products.length === 0) this.add_(txt(this, REF_W / 2, 420, 'No offers are on sale yet.', { fontSize: '44px' }).setOrigin(0.5));
     products.slice(0, 4).forEach((p, i) => this.row(p, 290 + i * 150, native));

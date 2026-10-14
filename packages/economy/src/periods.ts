@@ -32,7 +32,8 @@ export function segmentPeriod(week: number, seg: { id: string; startDay: number;
 /** Segments of this week and last week that are running now, or ended within `graceDays` (claim period). */
 export function segmentsAt<S extends { id: string; startDay: number; durationDays: number }>(nowMs: number, segs: readonly S[], graceDays: number): (S & { period: Period; running: boolean })[] {
   const out: (S & { period: Period; running: boolean })[] = [];
-  for (const week of [weekStart(nowMs) - 7 * DAY, weekStart(nowMs)]) {
+  for (let offset = Math.ceil(graceDays / 7) + 1; offset >= 0; offset--) {
+    const week = weekStart(nowMs) - offset * 7 * DAY;
     for (const s of segs) {
       const period = segmentPeriod(week, s);
       if (nowMs >= period.startMs && nowMs < period.endMs + graceDays * DAY) out.push({ ...s, period, running: nowMs < period.endMs });

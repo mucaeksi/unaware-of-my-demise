@@ -20,7 +20,8 @@ export class MailScene extends HubScene {
   }
 
   protected async build(): Promise<void> {
-    const [mail, roster, catalog] = await Promise.all([Services.api.mail(), Services.api.roster(), Services.api.catalogNames()]);
+    const releaseId = await Services.ready().content.activeReleaseId();
+    const [mail, roster, catalog] = await Promise.all([Services.api.mail(), Services.api.roster(releaseId), Services.api.catalogNames(releaseId)]);
     this.mail = mail;
     this.names = new Map([...catalog, ...roster.map((c): [string, string] => [c.id, c.name_en])]);
     this.draw();
@@ -36,7 +37,7 @@ export class MailScene extends HubScene {
       const done = Boolean(m.claimed_at);
       this.card(REF_W / 2 - 100, y, 1400, 120, done ? 'dim' : 'normal');
       this.add_(txt(this, 280, y - 28, m.title, { fontFamily: F.display, fontSize: '32px', fontStyle: '600', color: done ? T.dim : T.text }).setOrigin(0, 0.5));
-      this.add_(txt(this, 280, y + 22, `${describeAttachments(m.attachments, this.names)}   ·   ${done ? 'claimed' : `expires ${m.expires_at.slice(0, 10)}`}`, { fontSize: '26px', color: T.dim }).setOrigin(0, 0.5));
+      this.add_(txt(this, 280, y + 22, `${describeAttachments(m.attachments, new Map([...this.names, ...Object.entries(m.names ?? {})]))}   ·   ${done ? 'claimed' : `expires ${m.expires_at.slice(0, 10)}`}`, { fontSize: '26px', color: T.dim }).setOrigin(0, 0.5));
       this.add_(new Button(this, REF_W - 250, y, { label: done ? 'CLAIMED' : 'CLAIM', w: 280, h: 100, fontSize: 30, variant: done ? 'dim' : 'hot', onClick: () => void this.claim(m) }).setEnabled(!done));
     });
     const pages = Math.max(1, Math.ceil(this.mail.length / PER_PAGE));
@@ -54,7 +55,7 @@ export class MailScene extends HubScene {
     try {
       await Services.api.claimMail(m.id);
       m.claimed_at = new Date().toISOString();
-      this.say(`Claimed: ${describeAttachments(m.attachments, this.names)}`);
+      this.say(`Claimed: ${describeAttachments(m.attachments, new Map([...this.names, ...Object.entries(m.names ?? {})]))}`);
       await this.updateWallet();
       this.draw();
     } catch (e) {

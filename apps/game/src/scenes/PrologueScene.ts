@@ -7,6 +7,7 @@ import { recordEntry } from '../entry/sync';
 import { plateKey } from '../entry/plates';
 import { prefs } from '../platform/prefs';
 import { ArtLibrary } from '../content/ArtLibrary';
+import { NarrativeStage } from '../presentation/NarrativeStage';
 import { Services } from '../services';
 import { Button, txt } from '../ui/kit';
 import { C, DEPTH, F, T } from '../ui/theme';
@@ -25,6 +26,8 @@ export const sceneSeconds = (s: PrologueData): number => (INTRO_FAST ? 0.35 : s.
  * scene the screen fades to black and offers CONTINUE, which records the prologue as seen and goes on to tutorial T-1.
  */
 export class PrologueScene extends Phaser.Scene {
+  private stage: NarrativeStage | null = null;
+  private generation = 0;
   private data0: Prologue | null = null;
   private current: Phaser.GameObjects.Image | null = null;
   private caption!: Phaser.GameObjects.Text;
@@ -39,6 +42,8 @@ export class PrologueScene extends Phaser.Scene {
   }
 
   init(): void {
+    this.generation++;
+    this.stage = null;
     this.data0 = null;
     this.current = null;
     this.typer = null;
@@ -61,19 +66,27 @@ export class PrologueScene extends Phaser.Scene {
   }
 
   private async loadScript(): Promise<void> {
+    const generation = this.generation;
+    this.events.once('shutdown', () => { this.generation++; });
+    const current = () => generation === this.generation && this.sys.isActive();
     try {
       const { content } = Services.ready();
       const entry = await content.entryIndex();
       this.data0 = await content.prologue(entry.prologue);
+      const [pack, locale] = await Promise.all([content.presentation(), content.locale()]);
+      if (!current()) return;
+      this.stage = new NarrativeStage(this, content, Services.ready().art.art, pack, locale);
+      if (this.data0.video_id) { await this.stage.video(this.data0.video_id, false); if (current()) this.ending(); return; }
       // plates are loaded here, not at boot (the stills group is lazy); a plate the content does not ship is drawn as a painted stand-in
       const ids = this.data0.scenes.flatMap((sc) => ArtLibrary.plateIds(sc.id, sc.visual));
       await Services.art?.loadStills(this, ids).catch((e: unknown) => console.warn('prologue plates unavailable', e));
     } catch (e) {
       // the prologue is a presentation: if it cannot load, the road must still open
       console.error('prologue unavailable', e);
-      this.finish();
+      if (current()) this.finish();
       return;
     }
+    if (!current()) return;
     this.tweens.add({ targets: this.shade, alpha: 1, duration: 600 });
     this.next();
   }
@@ -122,7 +135,8 @@ export class PrologueScene extends Phaser.Scene {
     this.body.setText('');
     this.tweens.add({ targets: this.caption, alpha: 1, duration: TEXT_FADE_MS * 2, delay: 300 });
     this.body.setAlpha(1);
-    const full = scene.text_en;
+    const full = this.stage?.text(scene.line_id, scene.text_en) ?? scene.text_en;
+    void this.stage?.voice(scene.line_id);
     const step = INTRO_FAST ? 3 : 1;
     let n = 0;
     this.typer = this.time.addEvent({

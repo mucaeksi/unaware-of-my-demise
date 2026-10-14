@@ -1,3 +1,4 @@
+import { displayCatalog } from '../content/runtime-catalog';
 import { exportCatalog } from '../content/catalog';
 import type { Context, Hono, MiddlewareHandler } from 'hono';
 import { z } from 'zod';
@@ -74,7 +75,7 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     // grants above this size need an owner (compensation is real money's worth)
     const big = b.mail.attachments.some((a) => a.type === 'currency' && a.amount > 5000);
     if (big && !atLeast(c.get('admin').role, 'owner')) throw new HttpError(403, 'insufficient_role', 'premium grants above 5000 need an owner');
-    const sent = await sendMail(c.env.DB, id.data, b.mail, who);
+    const sent = await sendMail(c.env.DB, id.data, b.mail, who, new Date(), await displayCatalog({ DB: c.env.DB, CONTENT: c.env.CONTENT, CONTENT_CHANNEL: c.env.ENVIRONMENT }));
     await audit(c.env.DB, who, 'player.mail', id.data, { mailId: sent.id, reason: b.reason, attachments: b.mail.attachments });
     return c.json(sent, 201);
   });

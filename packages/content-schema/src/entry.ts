@@ -28,6 +28,7 @@ export const Prologue = z
     title_en: z.string().min(1).max(60),
     locale: z.literal('en'),
     duration_seconds: z.number().min(10).max(600),
+    video_id: Id.optional(),
     voice_status: z.enum(['unrecorded', 'recorded']),
     visual_presentation: z.string().max(60),
     sources: z.array(z.string().max(200)).max(20),

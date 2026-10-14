@@ -21,7 +21,7 @@ export async function completeStory(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTE
   const library = await loadLibrary(env, input.releaseId);
   const entry = library?.entries.find((entry) => entry.entry_id === input.nodeId);
   const campaign = entry ? null : await loadProgressNode(env, playerId, input.releaseId, input.nodeId, 'story');
-  if (entry) await requireLibraryGate(env, playerId, entry);
+  if (entry) await requireLibraryGate(env, playerId, entry, input.releaseId, now);
   await requireEconomic(db, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, now);
   const result = { requestId: input.requestId, releaseId: input.releaseId, nodeId: input.nodeId, completed: true, replayed: false };
   const statements = [economicStatement(db, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, now, undefined, true)];

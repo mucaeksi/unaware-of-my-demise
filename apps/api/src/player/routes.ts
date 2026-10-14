@@ -3,6 +3,7 @@ import { z } from 'zod';
 import type { JWTVerifyGetKey } from 'jose';
 import { sha256Hex } from '@uomd/shared';
 import { HttpError } from '../content/store';
+import { availablePanels, scheduledProducts } from '../content/presentation';
 import { displayCatalog, operationCatalog, releaseScope, gearDefinition } from '../content/runtime-catalog';
 import { d1RateLimit } from '../http';
 import type { GameEnv } from '../env';
@@ -102,7 +103,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     await perMinute(c.env, `signin:${(await sha256Hex(ip)).slice(0, 32)}`, 20);
     const { idToken } = await body(c, SignIn);
     const claims = await verifyGoogleIdToken(idToken, c.env, opts.getGoogleKey);
-    const player = await playerForGoogle(c.env.DB, claims);
+    const player = await playerForGoogle(c.env.DB, claims, c.env);
     const session = await issueSession(c.env.DB, player.id);
     return c.json({ token: session.token, expiresAt: session.expiresAt, player: { id: player.id, displayName: player.displayName, isNew: player.isNew } });
   });
@@ -121,6 +122,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/characters/*', authed);
   app.use('/api/v1/stacks', authed);
   app.use('/api/v1/recruitment/*', authed);
+  app.use('/api/v1/presentation/*', authed);
   app.use('/api/v1/library', authed);
   app.use('/api/v1/library/*', authed);
   app.use('/api/v1/entry', authed);
@@ -310,7 +312,13 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   const playFor = (env: GameEnv): PlayClient => (opts.play ? opts.play(env) : new PlayApi(env));
   const Verify = z.object({ productId: z.string().regex(/^[a-z][a-z0-9_.]{1,99}$/), purchaseToken: z.string().min(10).max(4096) }).strict();
 
-  app.get('/api/v1/shop/products', async (c) => c.json({ products: await flagOn(c.env, 'shop.enabled') ? await listProducts(c.env.DB) : [] }, 200, { 'Cache-Control': 'public, max-age=60' }));
+  app.get('/api/v1/shop/products', async (c) => c.json({ products: await flagOn(c.env, 'shop.enabled') ? await scheduledProducts(c.env, await listProducts(c.env.DB), selectedRelease(c.req.query('releaseId'))) : [] }, 200, { 'Cache-Control': 'no-store' }));
+  app.get('/api/v1/presentation/panels', async (c) => {
+    const releaseId = selectedRelease(c.req.query('releaseId'));
+    if (!releaseId) throw new HttpError(400, 'release_required', 'select a content release');
+    await perMinute(c.env, `presentation:${c.get('playerId')}`, 60);
+    return c.json(await availablePanels(c.env, c.get('playerId'), releaseId));
+  });
 
   app.get('/api/v1/shop/history', async (c) => {
     const limit = z.coerce.number().int().min(1).max(30).safeParse(c.req.query('limit') ?? 30);
@@ -387,13 +395,22 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.get('/api/v1/entry', async (c) => c.json({ ...(await getEntry(c.env.DB, c.get('playerId'))), playerId: c.get('playerId') }));
   app.put('/api/v1/entry', async (c) => c.json({ ...(await putEntry(c.env.DB, c.get('playerId'), await body(c, EntryBody))), playerId: c.get('playerId') }));
   app.get('/api/v1/teams', async (c) => c.json(await listTeams(c.env.DB, c.get('playerId'))));
-  app.put('/api/v1/teams/:slot', async (c) => c.json(await saveTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')), await body(c, TeamBody))));
-  app.post('/api/v1/teams/:slot/activate', async (c) => c.json(await activateTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')))));
-  app.delete('/api/v1/teams/:slot', async (c) => c.json(await deleteTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')))));
+  app.put('/api/v1/teams/:slot', async (c) => {
+    const input = await body(c, TeamBody);
+    return c.json(await saveTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')), input, releaseScope(c.env, input.releaseId)));
+  });
+  app.post('/api/v1/teams/:slot/activate', async (c) => {
+    const input = await body(c, z.object({ releaseId: ReleaseId.optional() }).strict(), undefined, true);
+    return c.json(await activateTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')), releaseScope(c.env, input.releaseId)));
+  });
+  app.delete('/api/v1/teams/:slot', async (c) => c.json(await deleteTeam(c.env.DB, c.get('playerId'), Number(c.req.param('slot')), releaseScope(c.env, selectedRelease(c.req.query('releaseId'))))));
   app.get('/api/v1/account/export', async (c) => c.json(await exportAccount(c.env.DB, c.get('playerId'))));
   app.post('/api/v1/account/delete', async (c) => c.json(await deleteAccount(c.env.DB, c.get('playerId'), (await body(c, z.object({ confirm: z.string().max(20) }).strict())).confirm)));
-  app.get('/api/v1/tasks', async (c) => c.json(await listTasks(c.env.DB, c.get('playerId'))));
-  app.post('/api/v1/tasks/claim', async (c) => c.json(await claimTask(c.env.DB, c.get('playerId'), await body(c, z.object({ periodKey: z.string().regex(/^[dw]:[0-9T:-]{10,13}(:[a-z][a-z0-9_]{1,79})?$/), taskId: z.string().regex(/^_?[a-z][a-z0-9_]{1,79}$/), requestId: RequestId.optional() }).strict()))));
+  app.get('/api/v1/tasks', async (c) => c.json(await listTasks(c.env.DB, c.get('playerId'), Date.now(), releaseScope(c.env, selectedRelease(c.req.query('releaseId'))))));
+  app.post('/api/v1/tasks/claim', async (c) => {
+    const input = await body(c, z.object({ releaseId: ReleaseId.optional(), periodKey: z.string().regex(/^[dw]:[0-9T:-]{10,13}(:[a-z][a-z0-9_]{1,79})?$/), taskId: z.string().regex(/^_?[a-z][a-z0-9_]{1,79}$/), requestId: RequestId.optional() }).strict());
+    return c.json(await claimTask(c.env.DB, c.get('playerId'), input, Date.now(), releaseScope(c.env, input.releaseId)));
+  });
   app.get('/api/v1/gear', async (c) => {
     const catalog = await operationCatalog(c.env.DB, c.get('playerId'), releaseScope(c.env, selectedRelease(c.req.query('releaseId'))));
     return c.json({ gear: await listGear(c.env.DB, c.get('playerId'), catalog) });

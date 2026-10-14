@@ -1,4 +1,4 @@
-import { MemoryStorage, type ContentStorage, type GenerationMark, type PatchState, type StorageSnapshot } from '@uomd/patch';
+import { MemoryStorage, type ContentStorage, type GenerationMark, type PatchState, type StorageSnapshot, type DownloadReservation } from '@uomd/patch';
 import type { Channel } from '@uomd/content-schema';
 
 const DB = 'uomd-content';
@@ -23,9 +23,8 @@ class IdbStorage implements ContentStorage {
     const v = (await req(this.store(OBJECTS, 'readonly').get(sha))) as ArrayBuffer | undefined;
     return v ? new Uint8Array(v) : null;
   }
-  async putObject(sha: string, bytes: Uint8Array): Promise<void> {
-    const copy = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-    await this.write(OBJECTS, (store) => { store.put(copy, sha); });
+  async putObject(sha: string, bytes: Uint8Array, reservation?: string): Promise<void> {
+    await this.objectWrite(sha, bytes, reservation);
   }
   async hasObject(sha: string): Promise<boolean> {
     return (await req(this.store(OBJECTS, 'readonly').count(sha))) > 0;
@@ -34,7 +33,7 @@ class IdbStorage implements ContentStorage {
     return (await req(this.store(OBJECTS, 'readonly').getAllKeys())) as string[];
   }
   async deleteObject(sha: string): Promise<void> {
-    await this.write(OBJECTS, (store) => { store.delete(sha); });
+    await this.objectWrite(sha, null);
   }
   async getState(): Promise<PatchState | null> {
     return ((await req(this.store(META, 'readonly').get('state'))) as PatchState | undefined) ?? null;
@@ -47,18 +46,39 @@ class IdbStorage implements ContentStorage {
   }
   async updateState(channel: Channel, change: (current: StorageSnapshot) => StorageSnapshot | null): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      const tx = this.db.transaction(META, 'readwrite'); const store = tx.objectStore(META);
+      const tx = this.db.transaction([META, OBJECTS], 'readwrite'); const store = tx.objectStore(META); const objects = tx.objectStore(OBJECTS);
       let changed = false;
       tx.oncomplete = () => resolve(changed);
       tx.onabort = tx.onerror = () => reject(tx.error ?? new Error('content state transaction aborted'));
       const state = req(store.get('state')); const mark = req(store.get(`generation:${channel}`));
-      void Promise.all([state, mark]).then(([value, highWater]) => {
-        const next = change({ state: (value as PatchState | undefined) ?? null, highWater: (highWater as GenerationMark | undefined) ?? null });
+      const keys = req(store.getAllKeys()); const values = req(store.getAll()); const downloads = req(store.get('downloads'));
+      void Promise.all([state, mark, keys, values, downloads]).then(([value, highWater, names, rows, reservations]) => {
+        const inventory = Object.fromEntries(names.flatMap((key, index) => typeof key === 'string' && key.startsWith('size:') ? [[key.slice(5), rows[index] as number]] : []));
+        const next = change({ state: (value as PatchState | undefined) ?? null, highWater: (highWater as GenerationMark | undefined) ?? null, inventory, downloads: (reservations as Record<string, DownloadReservation> | undefined) ?? {} });
         if (!next) return;
         store.put(next.state, 'state');
         if (next.highWater) store.put(next.highWater, `generation:${channel}`);
+        if (next.downloads) store.put(next.downloads, 'downloads');
+        for (const key of next.removeObjects ?? []) { objects.delete(key); store.delete(`size:${key}`); }
         changed = true;
       }).catch((e: unknown) => { try { tx.abort(); } catch { /* already aborted */ } reject(e); });
+    });
+  }
+  private objectWrite(sha: string, bytes: Uint8Array | null, reservation?: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction([OBJECTS, META], 'readwrite'); const objects = tx.objectStore(OBJECTS); const meta = tx.objectStore(META);
+      tx.oncomplete = () => resolve(); tx.onabort = tx.onerror = () => reject(tx.error ?? new Error('content object transaction aborted'));
+      const save = (): void => {
+        if (bytes) { objects.put(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), sha); meta.put(bytes.byteLength, `size:${sha}`); }
+        else { objects.delete(sha); meta.delete(`size:${sha}`); }
+        if (reservation && !sha.startsWith('partial:')) { objects.delete(`partial:${sha}`); meta.delete(`size:partial:${sha}`); }
+      };
+      if (!reservation) { save(); return; }
+      const request = meta.get('downloads'); request.onsuccess = () => {
+        const entry = (request.result as Record<string, DownloadReservation> | undefined)?.[reservation]; const limit = entry?.files[sha.replace(/^partial:/, '')];
+        if (!entry || entry.expiresAt <= Date.now() || limit === undefined || bytes && bytes.byteLength > limit) { tx.abort(); return; }
+        save();
+      };
     });
   }
   private write(name: string, work: (store: IDBObjectStore) => void): Promise<void> {
@@ -81,14 +101,17 @@ export async function openContentStorage(): Promise<StorageHandle> {
   try {
     if (typeof indexedDB === 'undefined') throw new Error('no indexedDB');
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
-      const open = indexedDB.open(DB, 1);
+      let refused = false;
+      const open = indexedDB.open(DB, 2);
       open.onupgradeneeded = () => {
-        open.result.createObjectStore(OBJECTS);
-        open.result.createObjectStore(META);
+        if (!open.result.objectStoreNames.contains(OBJECTS)) open.result.createObjectStore(OBJECTS);
+        if (!open.result.objectStoreNames.contains(META)) open.result.createObjectStore(META);
+        const tx = open.transaction!; const cursor = tx.objectStore(OBJECTS).openCursor();
+        cursor.onsuccess = () => { const row = cursor.result; if (row) { tx.objectStore(META).put((row.value as ArrayBuffer).byteLength, `size:${String(row.key)}`); row.continue(); } };
       };
-      open.onsuccess = () => resolve(open.result);
+      open.onsuccess = () => { if (refused) open.result.close(); else { open.result.onversionchange = () => open.result.close(); resolve(open.result); } };
       open.onerror = () => reject(open.error);
-      open.onblocked = () => reject(new Error('indexedDB blocked'));
+      open.onblocked = () => { refused = true; reject(new Error('indexedDB blocked')); };
     });
     return { storage: new IdbStorage(db), persistent: true };
   } catch {

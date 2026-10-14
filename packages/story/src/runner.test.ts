@@ -17,6 +17,24 @@ const drain = (r: StoryRunner): StoryEvent[] => {
 };
 
 describe('StoryRunner', () => {
+  it('restores bounded boolean flags, branches and emits only finite presentation commands', () => {
+    const data = scene([
+      { op: 'set_flag', flag: 'saw_gate', value: true }, { op: 'checkpoint', checkpoint_id: 'gate_save' },
+      { op: 'branch', flag: 'saw_gate', equals: true, goto: 'open_gate' },
+      { op: 'narrate', line_id: 'not_taken', text: 'Not taken' }, { op: 'label', name: 'open_gate' },
+      { op: 'camera', x: 960, y: 540, zoom: 1.2, seconds: 0.5 }, { op: 'end' }
+    ]);
+    const runner = new StoryRunner(data); expect(runner.next()?.type).toBe('checkpoint');
+    const saved = runner.save(); expect(saved.flags).toEqual({ saw_gate: true });
+    const restored = new StoryRunner(data, saved);
+    expect(restored.next()).toMatchObject({ type: 'presentation', command: { op: 'camera' } });
+    expect(restored.next()?.type).toBe('end');
+    expect(() => new StoryRunner(data, { ...saved, flags: { invalid: 'expression' } as unknown as Record<string, boolean> })).toThrow('invalid saved flags');
+  });
+  it('terminates nonblocking control-flow loops instead of freezing the renderer', () => {
+    const runner = new StoryRunner(scene([{ op: 'label', name: 'loop' }, { op: 'goto', label: 'loop' }, { op: 'end' }]));
+    expect(() => runner.next()).toThrow('finite step budget');
+  });
   it('plays commands in order and ends', () => {
     const r = new StoryRunner(
       scene([
@@ -90,3 +108,5 @@ describe('StoryRunner', () => {
     }
   });
 });
+
+it('bounds loops which repeatedly emit nonblocking presentation events', () => { const runner = new StoryRunner(scene([{ op: 'label', name: 'loop' }, { op: 'camera', x: 960, y: 540, zoom: 1, seconds: 0 }, { op: 'goto', label: 'loop' }, { op: 'end' }])); expect(() => { for (let i = 0; i < 100; i++) runner.next(); }).toThrow('finite step budget'); });

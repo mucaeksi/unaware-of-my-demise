@@ -26,14 +26,19 @@ export interface GenerationMark {
   killed: boolean;
 }
 
+export interface DownloadReservation { files: Record<string, number>; expiresAt: number }
+
 export interface StorageSnapshot {
+  inventory?: Record<string, number>;
+  downloads?: Record<string, DownloadReservation>;
+  removeObjects?: string[];
   state: PatchState | null;
   highWater: GenerationMark | null;
 }
 
 export interface ContentStorage {
   getObject(sha256: string): Promise<Uint8Array | null>;
-  putObject(sha256: string, bytes: Uint8Array): Promise<void>;
+  putObject(sha256: string, bytes: Uint8Array, reservation?: string): Promise<void>;
   hasObject(sha256: string): Promise<boolean>;
   listObjects(): Promise<string[]>;
   deleteObject(sha256: string): Promise<void>;
@@ -47,9 +52,9 @@ export interface ContentStorage {
 
 export interface RemoteSource {
   /** latest published manifest for a channel, or null when none is published (HTTP 404) */
-  fetchManifest(channel: Channel): Promise<unknown | null>;
+  fetchManifest(channel: Channel, signal?: AbortSignal): Promise<unknown | null>;
   /** `onBytes` (optional) reports the bytes received so far of this object, for a smooth progress bar. */
-  fetchObject(sha256: string, file: ManifestFile, onBytes?: (received: number) => void): Promise<Uint8Array>;
+  fetchObject(sha256: string, file: ManifestFile, onBytes?: (received: number) => void, options?: { signal?: AbortSignal; partial?: Uint8Array; onPartial?: (bytes: Uint8Array) => Promise<void> }): Promise<Uint8Array>;
 }
 
 export interface BaseContent {
@@ -66,6 +71,7 @@ export interface PatchEnv {
   clientVersion: string;
   /** highest content schema version this client's code understands */
   supportedContentSchema: number;
+  supportedCapabilities?: readonly string[];
   trustedKeys: readonly PublicKeyJwk[];
   /** stable random install id; drives percentage rollout buckets */
   installId: string;
@@ -73,9 +79,14 @@ export interface PatchEnv {
   storageBudgetBytes: number;
   /** semantic validation of the downloaded content (schemas + cross references). Throw to reject. */
   validate(files: Map<string, Uint8Array>, manifest: ContentManifest, base: BaseContent): Promise<void> | void;
+  /** Optional synchronous media header/resource checks, before activation, without retaining full media. */
+  validateObject?(file: ManifestFile, bytes: Uint8Array): void;
   maxAttempts?: number;
   sleep?(ms: number): Promise<void>;
   now?(): Date;
+  storageEstimate?(): Promise<{ usage?: number; quota?: number }>;
+  networkPolicy?(): 'online' | 'offline' | 'metered';
+  downloadTimeoutMs?: number;
 }
 
 export type PatchPhase = 'checking' | 'downloading' | 'verifying' | 'activating';
@@ -91,6 +102,8 @@ export interface PatchProgress {
 }
 
 export interface ApplyOptions {
+  signal?: AbortSignal;
+  allowMetered?: boolean;
   onProgress?: (p: PatchProgress) => void;
   /** false: download, verify and validate, then park the release as `staged` (switched on later by `activateStaged`). Default true. */
   activate?: boolean;
@@ -105,6 +118,11 @@ export type PatchOutcome =
   | { status: 'rejected'; reason: RejectReason; detail: string };
 
 export type RejectReason =
+  | 'capability_missing'
+  | 'cancelled'
+  | 'download_timeout'
+  | 'network_policy'
+  | 'storage_quota'
   | 'malformed_manifest'
   | 'bad_signature'
   | 'wrong_channel'

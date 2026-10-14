@@ -8,11 +8,12 @@ import { ADMIN, GAME, SHOTS } from './helpers';
 
 const run = promisify(execFile);
 
-test('exports a validated catalog after retry, stages it through the CLI and blocks premature activation', async ({ page, request }, info) => {
+test('exports a validated catalog after retry, stages it through the CLI and publishes only for compatible clients', async ({ page, request }, info) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   const headers = { 'Cf-Access-Jwt-Assertion': process.env.E2E_ADMIN_JWT! };
   const pointer = await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json();
+  try {
   await page.setExtraHTTPHeaders(headers);
   await page.goto(ADMIN);
   await page.getByRole('button', { name: 'Catalog', exact: true }).click();
@@ -37,7 +38,6 @@ test('exports a validated catalog after retry, stages it through the CLI and blo
   const id = `rel_catalog_${info.project.name.startsWith('phone') ? 'phone' : 'desktop'}`;
   const cli = ['tsx', 'tools/publish_release.ts', '--admin', ADMIN, '--dir', 'content/patches/rel_0003_part1_campaign', '--id', id, '--channel', 'dev', '--depends', pointer.release.id, '--catalog-snapshot'];
   const options = { cwd: new URL('../../', import.meta.url), env: { ...process.env, UOMD_ADMIN_JWT: process.env.E2E_ADMIN_JWT! }, timeout: 90_000 };
-  await expect(run('npx', [...cli, '--publish'], options)).rejects.toThrow('catalog snapshots can be staged only');
   await run('npx', cli, options);
   const row = await (await request.get(`${ADMIN}/admin/api/releases/${id}`, { headers })).json();
   const manifest = JSON.parse(row.manifest_json);
@@ -51,9 +51,11 @@ test('exports a validated catalog after retry, stages it through the CLI and blo
   page.on('dialog', (dialog) => dialog.accept());
   const publish = release.getByRole('button', { name: 'Publish', exact: true });
   if (info.project.name.startsWith('phone')) await publish.tap(); else await publish.click();
-  await expect(page.getByRole('status')).toContainText('release-scoped economic activation is not available yet');
-  await expect(release).toContainText('draft');
-  expect(await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json()).toEqual(pointer);
+  await expect(page.getByRole('status')).toContainText('done');
+  await expect(release).toContainText('published');
+  const published = await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json();
+  expect(published).toMatchObject({ release: { id }, compat: { min_client: '0.1.2', required_capabilities: ['catalog_v1'] }, signature: { alg: 'ES256' } });
   await page.screenshot({ path: `${SHOTS}/catalog-${info.project.name}-staged.png`, fullPage: true });
   expect(errors).toEqual([]);
+  } finally { expect((await request.post(`${ADMIN}/admin/api/channels/dev/rollback`, { headers, data: { releaseId: pointer.release.id } })).status()).toBe(200); }
 });

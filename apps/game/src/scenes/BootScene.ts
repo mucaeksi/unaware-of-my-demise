@@ -15,6 +15,7 @@ import type { SplashInit } from './SplashScene';
 const UPDATE_TIMEOUT_MS = 4000;
 
 export class BootScene extends Phaser.Scene {
+  private backgroundUpdate = false;
   constructor() {
     super('Boot');
   }
@@ -46,7 +47,7 @@ export class BootScene extends Phaser.Scene {
     void ready.then((ok) => {
       if (ok) {
         // first install: the download starts after sign-in (PatchService); only returning players check silently at boot
-        if (loadEntry().phase === 'completed') void this.checkForUpdates();
+        if (this.backgroundUpdate && loadEntry().phase === 'completed') { this.scene.launch('PatchBar'); void Services.patches.start(); }
         void prefs();
       }
     });
@@ -57,7 +58,13 @@ export class BootScene extends Phaser.Scene {
     try {
       Services.content = await ContentService.create();
       // after the first-install flow the downloaded release is switched on here, before any art is loaded (no network involved)
-      if (loadEntry().phase === 'completed') await Services.content.activateStaged();
+      this.backgroundUpdate = false;
+      if (loadEntry().phase === 'completed') {
+        await Services.content.activateStaged();
+        const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), UPDATE_TIMEOUT_MS);
+        try { const outcome = await Services.content.checkForUpdates({ signal: controller.signal }); this.backgroundUpdate = outcome.status === 'offline' || outcome.status === 'rejected'; }
+        finally { clearTimeout(timer); }
+      }
       const art = await Services.refreshArt();
       await art.loadUi(this);
       await art.loadBackground(this, 'forest_whispering_ash');
@@ -86,20 +93,6 @@ export class BootScene extends Phaser.Scene {
       this.load.once(Phaser.Loader.Events.FILE_LOAD_ERROR, () => resolve());
       this.load.start();
     });
-  }
-
-  /** Background patch check: never blocks the first frame; offline start is the normal case. */
-  private async checkForUpdates(): Promise<void> {
-    const content = Services.content;
-    if (!content) return;
-    const timeout = new Promise<'timeout'>((r) => setTimeout(() => r('timeout'), UPDATE_TIMEOUT_MS));
-    const out = await Promise.race([content.checkForUpdates(), timeout]);
-    if (out !== 'timeout' && (out.status === 'applied' || out.status === 'reverted_to_base')) {
-      await Services.refreshArt();
-      this.game.events.emit('content:changed', out);
-    } else {
-      this.game.events.emit('content:checked');
-    }
   }
 
   private makeFxTextures(): void {

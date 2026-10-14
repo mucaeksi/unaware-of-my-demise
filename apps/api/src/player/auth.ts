@@ -1,3 +1,6 @@
+import { displayCatalog } from '../content/runtime-catalog';
+import { identityStatement } from '../db/identities';
+import { economicStatement } from '../content/authority';
 import { createRemoteJWKSet, jwtVerify, type JWTVerifyGetKey } from 'jose';
 import { sha256Hex } from '@uomd/shared';
 import { HttpError } from '../content/store';
@@ -64,26 +67,31 @@ export interface PlayerRef {
  * Finds or creates the player for a Google subject. A new player receives the free-start roster (Mahmut and Fadyme: the
  * `characters` rows whose acquisition is `free_start`) in the same transaction as the account.
  */
-export async function playerForGoogle(db: D1Database, claims: GoogleClaims): Promise<PlayerRef & { isNew: boolean }> {
+export async function playerForGoogle(db: D1Database, claims: GoogleClaims, content?: Pick<GameEnv, 'CONTENT' | 'CONTENT_CHANNEL'>): Promise<PlayerRef & { isNew: boolean }> {
   const find = (): Promise<{ id: string; display_name: string | null; status: string } | null> =>
     db.prepare('SELECT id, display_name, status FROM players WHERE google_sub = ?1').bind(claims.sub).first();
   let row = await find();
   let isNew = false;
   if (!row) {
     const id = `p_${crypto.randomUUID().replaceAll('-', '')}`;
+    const catalog = content ? await displayCatalog({ ...content, DB: db }) : undefined;
+    const starters = catalog?.data.characters.filter((c) => c.acquisition === 'free_start' && c.status === 'active');
     try {
       await db.batch([
         db.prepare("INSERT INTO players (id, google_sub, display_name, last_seen_at) VALUES (?1, ?2, ?3, strftime('%Y-%m-%dT%H:%M:%fZ','now'))").bind(id, claims.sub, claims.name ?? null),
-        db
+        ...(catalog && content ? [economicStatement(db, content.CONTENT_CHANNEL, catalog.releaseId, id, '', new Date(), undefined, true)] : []),
+        ...(starters ? starters.flatMap((c) => [identityStatement(db, 'character', c.id), db.prepare("INSERT INTO player_items (player_id, item_type, item_id) VALUES (?1, 'character', ?2)").bind(id, c.id)]) : [db
           .prepare("INSERT INTO player_items (player_id, item_type, item_id) SELECT ?1, 'character', id FROM characters WHERE acquisition = 'free_start' AND status = 'active'")
-          .bind(id),
+          .bind(id)]),
         db.prepare(`INSERT INTO reward_grants (player_id, grant_key, reason, attachment_json, result_json)
           SELECT ?1, 'signup:' || ?1 || ':' || item_id, 'signup', json_object('type', 'character', 'itemId', item_id),
-            json_object('copiesAdded', 1, 'shardsAdded', 0, 'copiesAfter', copies, 'shardsAfter', shards)
-          FROM player_items WHERE player_id = ?1 AND item_type = 'character'`).bind(id)
+            json_patch(json_object('copiesAdded', 1, 'shardsAdded', 0, 'copiesAfter', copies, 'shardsAfter', shards), ?2)
+          FROM player_items WHERE player_id = ?1 AND item_type = 'character'`).bind(id, JSON.stringify(catalog ? { releaseId: catalog.releaseId, catalogSha256: catalog.sha256 } : {})),
+        db.prepare('DELETE FROM tx_guard')
       ]);
       isNew = true;
     } catch (e) {
+      if (/CHECK constraint failed: ok = 1/i.test(String(e))) throw new HttpError(409, 'release_not_economic', 'account creation is paused while content is being updated');
       if (!/UNIQUE constraint failed: players\.google_sub/i.test(String(e instanceof Error ? e.message : e))) throw e;
     }
     row = await find();

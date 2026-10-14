@@ -4,14 +4,15 @@ import { HttpError } from '../content/store';
 import { ledgerStatements } from './ledger';
 import { cryptoRoll } from './rng';
 import { identityStatement } from './identities';
-import { catalogCharacter, catalogGear, type RuntimeCatalog } from '../content/runtime-catalog';
+import type { GrantCatalog } from '../content/grant-catalog';
+import { catalogCharacter, catalogGear } from '../content/runtime-catalog';
 
 /**
  * The one place that turns reward attachments (currency, character, material item, account XP) into D1 statements, so mail claims,
  * stage rewards, purchases and quests all grant exactly the same way. The caller puts the statements into its own transactional
  * batch (together with its idempotency guard). `keyPrefix` + attachment index form the ledger idempotency keys.
  */
-export async function grantStatements(db: D1Database, playerId: string, atts: readonly RewardAttachment[], o: { keyPrefix: string; reason: string; catalog?: RuntimeCatalog }): Promise<D1PreparedStatement[]> {
+export async function grantStatements(db: D1Database, playerId: string, atts: readonly RewardAttachment[], o: { keyPrefix: string; reason: string; catalog?: GrantCatalog }): Promise<D1PreparedStatement[]> {
   const out: D1PreparedStatement[] = [];
   for (const [i, a] of atts.entries()) {
     const key = `${o.keyPrefix}:${i}`;
@@ -75,7 +76,7 @@ export const stackSpend = (db: D1Database, playerId: string, itemId: string, qty
     .bind(playerId, itemId, qty);
 
 /** Creates one gear instance. Accessories roll their main/sub stats NOW (server CSPRNG) and keep them in the instance. */
-export async function gearInstanceStatement(db: D1Database, playerId: string, gearId: string, catalog?: RuntimeCatalog): Promise<D1PreparedStatement> {
+export async function gearInstanceStatement(db: D1Database, playerId: string, gearId: string, catalog?: GrantCatalog): Promise<D1PreparedStatement> {
   const row = catalog ? catalogGear(catalog, gearId) : undefined;
   const def = row ? { slot: row.slot, extra_json: JSON.stringify(row.extra) } : await db.prepare("SELECT slot, extra_json FROM gear_defs WHERE gear_id = ?1 AND status <> 'retired'").bind(gearId).first<{ slot: string; extra_json: string }>();
   if (!def) throw new HttpError(422, 'unknown_item', `gear ${gearId} does not exist`);

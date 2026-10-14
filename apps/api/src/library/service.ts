@@ -1,16 +1,13 @@
-import { NarrativeLibrary, narrativeGateAllows, type LibraryEntry, type LibraryCard, type NarrativeFacts, type NarrativeGate } from '@uomd/content-schema';
+import { EventSchedule, NarrativeLibrary, narrativeGateAllows, type LibraryEntry, type LibraryCard, type NarrativeFacts, type NarrativeGate } from '@uomd/content-schema';
 import { requireEconomic } from '../content/authority';
-import { ContentStore, HttpError } from '../content/store';
+import { HttpError } from '../content/store';
 import type { GameEnv } from '../env';
+
+import { releaseData, inWindow } from '../content/release-data';
 
 type Env = Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>;
 export async function loadLibrary(env: Env, releaseId: string): Promise<NarrativeLibrary | null> {
-  const store = new ContentStore(env.DB, env.CONTENT); const release = await store.getRelease(releaseId);
-  if (!release || release.state !== 'published' || release.channel !== env.CONTENT_CHANNEL) throw new HttpError(404, 'unknown_release', 'no published release on this channel');
-  const bytes = await store.effectiveBytes(releaseId, 'library/library_index.json');
-  if (!bytes) return null;
-  try { return NarrativeLibrary.parse(JSON.parse(new TextDecoder().decode(bytes))); }
-  catch { throw new HttpError(503, 'content_unavailable', 'the library could not be loaded'); }
+  return await releaseData(env, releaseId, 'library/library_index.json', NarrativeLibrary) ?? null;
 }
 async function facts(env: Env, playerId: string, entries: readonly LibraryEntry[]): Promise<NarrativeFacts> {
   const statements: D1PreparedStatement[] = [];
@@ -30,8 +27,10 @@ async function facts(env: Env, playerId: string, entries: readonly LibraryEntry[
     completedEntries: new Set(rows.filter((row) => row.node_id && Number(row.clears) > 0).map((row) => row.node_id!)),
     ownedCharacters: new Set(rows.flatMap((row) => row.item_id ? [row.item_id] : [])) };
 }
-export async function requireLibraryGate(env: Env, playerId: string, entry: LibraryEntry): Promise<void> {
-  if (!narrativeGateAllows(entry.gate, await facts(env, playerId, [entry]))) throw new HttpError(403, 'node_locked', 'continue the main story and earlier companion parts first');
+export async function requireLibraryGate(env: Env, playerId: string, entry: LibraryEntry, releaseId?: string, now = new Date()): Promise<void> {
+  const state = await facts(env, playerId, [entry]);
+  if (releaseId && !await eventAvailable(env, releaseId, entry, state, now)) throw new HttpError(403, 'event_closed', 'this event is outside its schedule');
+  if (!narrativeGateAllows(entry.gate, state)) throw new HttpError(403, 'node_locked', 'continue the main story and earlier companion parts first');
 }
 /** Same three AND requirements as the shared evaluator, fenced again at the completion write. */
 export function libraryGateStatement(db: D1Database, playerId: string, gate: NarrativeGate): D1PreparedStatement {
@@ -46,13 +45,23 @@ export async function listLibrary(env: Env, playerId: string, releaseId: string)
   await requireEconomic(env.DB, env.CONTENT_CHANNEL, releaseId, playerId, '', new Date());
   if (!library) return { releaseId, entries: [] };
   const state = await facts(env, playerId, library.entries);
-  return { releaseId, entries: library.entries.filter((entry) => narrativeGateAllows(entry.gate, state)).map((entry) => ({ entry_id: entry.entry_id,
+  const schedule = await releaseData(env, releaseId, 'schedules/events.json', EventSchedule);
+  const now = new Date();
+  return { releaseId, entries: library.entries.filter((entry) => eventOpen(schedule, entry, state, now)).filter((entry) => narrativeGateAllows(entry.gate, state)).map((entry) => ({ entry_id: entry.entry_id,
     kind: entry.kind, group_id: entry.group_id, part: entry.part, title_en: entry.title_en, completed: state.completedEntries.has(entry.entry_id) })) };
 }
 export async function readLibraryEntry(env: Env, playerId: string, releaseId: string, entryId: string): Promise<{ releaseId: string; entry: LibraryEntry }> {
   const library = await loadLibrary(env, releaseId); const entry = library?.entries.find((entry) => entry.entry_id === entryId);
   if (!entry) throw new HttpError(404, 'unknown_node', 'no such library entry');
   await requireEconomic(env.DB, env.CONTENT_CHANNEL, releaseId, playerId, entryId, new Date());
-  await requireLibraryGate(env, playerId, entry);
+  await requireLibraryGate(env, playerId, entry, releaseId);
   return { releaseId, entry };
+}
+
+function eventOpen(schedule: EventSchedule | undefined, entry: LibraryEntry, state: NarrativeFacts, now: Date): boolean {
+  const slot = schedule?.events.find((e) => e.entry_id === entry.entry_id);
+  return !slot || state.completedEntries.has(entry.entry_id) || inWindow(slot.window, now);
+}
+async function eventAvailable(env: Env, releaseId: string, entry: LibraryEntry, state: NarrativeFacts, now: Date): Promise<boolean> {
+  return eventOpen(await releaseData(env, releaseId, 'schedules/events.json', EventSchedule), entry, state, now);
 }

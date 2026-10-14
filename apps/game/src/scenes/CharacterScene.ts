@@ -30,7 +30,7 @@ export class CharacterScene extends HubScene {
     const c = mine.characters.find((x) => x.id === this.id);
     const meta = roster.find((x) => x.id === this.id);
     if (!c || !meta) {
-      this.add_(txt(this, REF_W / 2, 400, 'You do not own this companion.', { fontSize: '40px' }).setOrigin(0.5));
+      this.add_(txt(this, REF_W / 2, 400, mine.unavailable?.some((c) => c.id === this.id) ? 'This companion is unavailable in this content version. Your ownership is preserved.' : 'You do not own this companion.', { fontSize: '40px', align: 'center', wordWrap: { width: 1400 } }).setOrigin(0.5));
       return;
     }
     const have = new Map(stacks.map((s) => [s.item_id, s.qty]));

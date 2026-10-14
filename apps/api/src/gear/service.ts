@@ -78,17 +78,20 @@ export interface GearView {
   stats: AccessoryStats | null;
   passive: { name?: string; text?: string; supported: boolean } | null;
   canDismantle: boolean;
+  unavailableReason?: string;
 }
 
 export async function listGear(db: D1Database, playerId: string, catalog?: RuntimeCatalog): Promise<GearView[]> {
   const cfg = catalog?.data.config.progression ?? await loadProgressionConfig(db);
-  const results = catalog ? (await db.prepare('SELECT id, gear_id, slot, level, xp, ascension, equipped_by, stats_json, locked, version FROM player_gear WHERE player_id = ?1').bind(playerId).all<GearRow>()).results.map((g) => {
+  const instances = catalog ? (await db.prepare('SELECT id, gear_id, slot, level, xp, ascension, equipped_by, stats_json, locked, version FROM player_gear WHERE player_id = ?1').bind(playerId).all<GearRow>()).results : [];
+  const available = (g: GearRow) => catalog!.data.gear.some((d) => d.gear_id === g.gear_id && d.status !== 'retired');
+  const results = catalog ? instances.filter(available).map((g) => {
     const definition = catalogGear(catalog, g.gear_id);
     if (g.slot !== definition.slot) throw new HttpError(503, 'invalid_gear_instance', 'item slot differs from its release definition');
     return { ...g, ...gearDefinition(definition) };
   }) : (await db.prepare(`${JOIN} WHERE g.player_id = ?1 ORDER BY d.rarity DESC, g.slot, g.id`).bind(playerId).all<GearRow>()).results;
   results.sort((a, b) => b.rarity - a.rarity || a.slot.localeCompare(b.slot) || a.id - b.id);
-  return results.map((g) => {
+  const views: GearView[] = results.map((g) => {
     const cap = Math.min(g.level_cap, gearLevelCap(cfg, g.ascension));
     return {
       id: g.id,
@@ -110,6 +113,8 @@ export async function listGear(db: D1Database, playerId: string, catalog?: Runti
       canDismantle: g.dismantle_allowed === 1 && g.equipped_by === null && g.locked === 0
     };
   });
+  if (catalog) for (const g of instances.filter((row) => !available(row))) views.push({ id: g.id, gearId: g.gear_id, slot: g.slot, name: g.gear_id, rarity: 0, family: '', setId: null, level: g.level, levelCap: g.level, xp: g.xp, xpToNext: null, ascension: g.ascension, equippedBy: g.equipped_by, locked: g.locked === 1, stats: null, passive: null, canDismantle: false, unavailableReason: 'Unavailable in this content version' });
+  return views;
 }
 
 /** Generic atomic gear operation with replay protection (reuses progression_requests). */
@@ -142,7 +147,7 @@ async function gearOp(db: D1Database, playerId: string, id: number, input: { req
       db.prepare('UPDATE player_gear SET version = version + 1 WHERE id = ?1 AND player_id = ?2 AND version = ?3').bind(id, playerId, g.version),
       db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
       ...statements,
-      ...(kind === 'gear_level' ? await taskEventStatements(db, playerId, { level_ups: 1 }, Date.now(), catalog?.data.config.tasks) : []),
+      ...(kind === 'gear_level' ? await taskEventStatements(db, playerId, { level_ups: 1 }, Date.now(), catalog?.data.config.tasks, catalog) : []),
       db.prepare('INSERT INTO progression_requests (player_id, request_id, kind, result_json, input_json) VALUES (?1, ?2, ?3, ?4, ?5)').bind(playerId, requestId, `${kind}:${id}`, JSON.stringify(response), inputJson),
       db.prepare('DELETE FROM tx_guard')
     ];
@@ -172,10 +177,11 @@ const admission = (db: D1Database, playerId: string, scope?: ReleaseScope): D1Pr
   ? [economicStatement(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date(), undefined, true)] : [];
 
 /** Assignment/lock remain repeatable state setters, without inventing durable economic requests. */
-async function setGear(db: D1Database, playerId: string, id: number, scope: ReleaseScope | undefined, build: (g: GearRow, catalog?: RuntimeCatalog) => Promise<D1PreparedStatement[]>, response: Record<string, unknown>): Promise<Record<string, unknown>> {
+async function setGear(db: D1Database, playerId: string, id: number, scope: ReleaseScope | undefined, build: (g: GearRow, catalog?: RuntimeCatalog) => Promise<D1PreparedStatement[]>, response: Record<string, unknown>, allowUnavailable = false): Promise<Record<string, unknown>> {
   const catalog = await operationCatalog(db, playerId, scope);
   for (let attempt = 0; attempt < 3; attempt++) {
-    const g = await getGear(db, playerId, id, catalog);
+    const g = allowUnavailable ? await db.prepare('SELECT id, gear_id, slot, version FROM player_gear WHERE id = ?1 AND player_id = ?2').bind(id, playerId).first<GearRow>() : await getGear(db, playerId, id, catalog);
+    if (!g) throw new HttpError(404, 'no_such_gear', 'you do not have this item');
     const statements = await build(g, catalog);
     try {
       await db.batch([...admission(db, playerId, scope),
@@ -209,11 +215,11 @@ export function equipGear(db: D1Database, playerId: string, id: number, characte
 }
 
 export function unequipGear(db: D1Database, playerId: string, id: number, scope?: ReleaseScope): Promise<Record<string, unknown>> {
-  return setGear(db, playerId, id, scope, async () => [db.prepare('UPDATE player_gear SET equipped_by = NULL WHERE id = ?1 AND player_id = ?2').bind(id, playerId)], { equippedBy: null });
+  return setGear(db, playerId, id, scope, async () => [db.prepare('UPDATE player_gear SET equipped_by = NULL WHERE id = ?1 AND player_id = ?2').bind(id, playerId)], { equippedBy: null }, true);
 }
 
 export function lockGear(db: D1Database, playerId: string, id: number, locked: boolean, scope?: ReleaseScope): Promise<Record<string, unknown>> {
-  return setGear(db, playerId, id, scope, async () => [db.prepare('UPDATE player_gear SET locked = ?3 WHERE id = ?1 AND player_id = ?2').bind(id, playerId, locked ? 1 : 0)], { locked });
+  return setGear(db, playerId, id, scope, async () => [db.prepare('UPDATE player_gear SET locked = ?3 WHERE id = ?1 AND player_id = ?2').bind(id, playerId, locked ? 1 : 0)], { locked }, true);
 }
 
 /** Spend tempering XP on a weapon or armor. No waste: only what is needed up to the current cap is consumed. */

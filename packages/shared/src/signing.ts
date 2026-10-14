@@ -19,6 +19,19 @@ export interface PublicKeyJwk {
 
 export type SignedPayload = Record<string, unknown> & { signature?: { kid: string; alg: 'ES256'; value: string } };
 
+/** Compiled trust roots only. Replacing/removing a root requires a new reviewed application binary. */
+export function assertTrustedKeys(value: unknown): asserts value is PublicKeyJwk[] {
+  if (!Array.isArray(value) || value.length < 1 || value.length > 8) throw new Error('expected 1..8 public content trust roots');
+  const ids = new Set<string>();
+  for (const key of value as Record<string, unknown>[]) {
+    if (!key || key.kty !== 'EC' || key.crv !== 'P-256' || typeof key.kid !== 'string' || !/^[A-Za-z0-9_-]{1,64}$/.test(key.kid) || ids.has(key.kid) || key.d !== undefined ||
+      typeof key.x !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(key.x) || typeof key.y !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(key.y)) throw new Error('invalid or ambiguous public content trust root');
+    const allowed = new Set(['kty', 'crv', 'x', 'y', 'kid', 'use', 'key_ops', 'alg', 'ext']);
+    if (Object.entries(key).some(([name, value]) => value !== undefined && !allowed.has(name)) || key.alg !== undefined && key.alg !== 'ES256' || key.use !== undefined && key.use !== 'sig' || key.key_ops !== undefined && (!Array.isArray(key.key_ops) || key.key_ops.some((op) => op !== 'verify'))) throw new Error('content trust roots must contain public verification material only');
+    ids.add(key.kid);
+  }
+}
+
 function signingInput(payload: SignedPayload): Uint8Array {
   const { signature: _ignored, ...rest } = payload;
   return new TextEncoder().encode(canonicalJson(rest));
@@ -41,6 +54,7 @@ export async function signPayload(payload: SignedPayload, privateKey: CryptoKey,
 export async function verifyPayload(payload: SignedPayload, trustedKeys: readonly PublicKeyJwk[]): Promise<boolean> {
   const sig = payload.signature;
   if (!sig || sig.alg !== 'ES256' || typeof sig.value !== 'string') return false;
+  try { assertTrustedKeys(trustedKeys); } catch { return false; }
   const jwk = trustedKeys.find((k) => k.kid === sig.kid);
   if (!jwk) return false;
   try {

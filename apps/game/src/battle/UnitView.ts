@@ -23,7 +23,7 @@ export class UnitView extends Phaser.GameObjects.Container {
   readonly artKey: string;
   spot: Spot;
   readonly unitName: string;
-  private readonly sprite: Phaser.GameObjects.Image;
+  private readonly sprite: Phaser.GameObjects.Sprite;
   private readonly shadow: Phaser.GameObjects.Ellipse;
   private readonly ring: Phaser.GameObjects.Ellipse;
   private readonly plate: Phaser.GameObjects.Container;
@@ -49,7 +49,7 @@ export class UnitView extends Phaser.GameObjects.Container {
 
     this.shadow = scene.add.ellipse(0, 0, u.heightPx * 0.62, u.heightPx * 0.12, 0x000000, 0.42);
     this.ring = scene.add.ellipse(0, 0, u.heightPx * 0.78, u.heightPx * 0.17, C.silver, 0).setStrokeStyle(4, C.goldHi, 0);
-    this.sprite = scene.add.image(0, 0, u.textureKey);
+    this.sprite = scene.add.sprite(0, 0, u.textureKey);
     this.add([this.shadow, this.ring, this.sprite]);
 
     const idle = art.frameFor(init.artKey, 'idle');
@@ -109,7 +109,9 @@ export class UnitView extends Phaser.GameObjects.Container {
     this.breathe?.stop();
     const f = this.art.frameFor(this.artKey, state);
     const u = this.art.unit(this.artKey);
+    this.sprite.stop();
     this.sprite.setTexture(f.key, f.frame).setOrigin(f.pivotX, f.footY).setScale(this.baseScale * f.scale);
+    if (f.animationKey && !this.reduced) this.sprite.play(f.animationKey);
     // players face right, enemies face left; mirror when the authored art faces the other way
     const wantRight = this.side === 'player';
     this.sprite.setFlipX((u.facing === 'right') !== wantRight);

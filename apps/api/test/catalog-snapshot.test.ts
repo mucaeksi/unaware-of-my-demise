@@ -3,7 +3,7 @@ import { CATALOG_PATH, EconomyCatalog, MAX_CATALOG_BYTES, validateContentSet } f
 import { ContentStore } from '../src/content/store';
 import type { CatalogSnapshot } from '../src/content/catalog';
 import { sha256Hex } from '@uomd/shared';
-import { admin, baseEnv, entries, game, resetContent, upload } from './helpers';
+import { admin, adminEnv, baseEnv, entries, game, resetContent, upload } from './helpers';
 import { campaignFiles, type TestFile } from './fixtures';
 
 let files: TestFile[];
@@ -51,7 +51,7 @@ it('exports for a viewer but refuses an unauthenticated request', async () => {
   expect((await admin('/admin/api/catalog/snapshot', { as: 'viewer@example.com' })).status).toBe(200);
 });
 
-it('keeps a staged catalog immutable and private, and blocks publication before signing or pointer changes', async () => {
+it('keeps a staged catalog immutable and private, then publishes it with a signed capability and compatible binary floor', async () => {
   const bytes = new TextEncoder().encode(snapshot.json);
   const artifact = { path: CATALOG_PATH, bytes, sha256: snapshot.sha256, mediaType: 'application/json' };
   await upload([...files, artifact]);
@@ -65,13 +65,15 @@ it('keeps a staged catalog immutable and private, and blocks publication before 
   expect(JSON.parse(before!.manifest_json).files).toContainEqual(expect.objectContaining({ path: CATALOG_PATH, sha256: snapshot.sha256 }));
   await baseEnv.DB.prepare("UPDATE characters SET name_en = 'Later edit' WHERE id = 'mahmut'").run();
   expect(await store.effectiveBytes('rel_catalog_stage', CATALOG_PATH)).toEqual(bytes);
-  const published = await post('/admin/api/releases/rel_catalog_stage/publish', {});
-  expect(published.status).toBe(409);
-  expect(await published.json()).toMatchObject({ error: 'catalog_activation_unavailable' });
-  expect(await store.getRelease('rel_catalog_stage')).toEqual(before);
   expect((await game(`/api/v1/content/objects/${snapshot.sha256}`)).status).toBe(404);
-  expect(await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first()).toEqual(pointer);
-  expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE target = 'rel_catalog_stage' AND action = 'release.publish'").first()).toEqual({ n: 0 });
+  expect(JSON.parse(before!.manifest_json).compat).toMatchObject({ min_client: '0.1.2', required_capabilities: ['catalog_v1'] });
+  const published = await post('/admin/api/releases/rel_catalog_stage/publish', {});
+  expect(published.status).toBe(200);
+  const after = await store.getRelease('rel_catalog_stage');
+  expect(after?.state).toBe('published'); expect(JSON.parse(after!.manifest_json).signature).toBeDefined();
+  expect((await game(`/api/v1/content/objects/${snapshot.sha256}`)).status).toBe(200);
+  expect(await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first()).not.toEqual(pointer);
+  expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE target = 'rel_catalog_stage' AND action = 'release.publish'").first()).toEqual({ n: 1 });
 });
 
 it.each(['progression', 'malformed JSON', 'unknown config', 'item metadata'] as const)('fails export closed on %s without repairing live rows', async (kind) => {
@@ -148,21 +150,21 @@ it.each(['alternate path', 'oversized JSON'] as const)('rejects %s without a dra
   const artifact = { path, bytes, sha256: await sha256Hex(bytes), mediaType: 'application/json' };
   await upload([...files, artifact]);
   const response = await post('/admin/api/releases', { id: 'rel_catalog_budget', channel: 'dev', files: entries([...files, artifact]) });
-  expect(response.status).toBe(422);
-  expect(await response.text()).toContain(kind === 'alternate path' ? 'unsupported catalog path' : '1 MiB staging budget');
+  expect(response.status).toBe(kind === 'alternate path' ? 422 : 413);
+  expect(await response.text()).toContain(kind === 'alternate path' ? 'unsupported catalog path' : 'resource budget');
   expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM content_releases WHERE id = 'rel_catalog_budget'").first()).toEqual({ n: 0 });
 });
 
-it('also blocks rollback into a catalog-bearing historical row', async () => {
+it('republishes a catalog rollback with a higher generation and the required binary capabilities', async () => {
   const artifact = { path: CATALOG_PATH, bytes: new TextEncoder().encode(snapshot.json), sha256: snapshot.sha256, mediaType: 'application/json' };
   await upload([...files, artifact]);
   expect((await post('/admin/api/releases', { id: 'rel_catalog_history', channel: 'dev', files: entries([...files, artifact]) })).status).toBe(201);
-  // Deliberately emulate a historical row from outside the current publication gate.
-  await baseEnv.DB.prepare("UPDATE content_releases SET state = 'published' WHERE id = 'rel_catalog_history'").run();
+  expect((await post('/admin/api/releases/rel_catalog_history/publish', {})).status).toBe(200);
   const response = await post('/admin/api/channels/dev/rollback', { releaseId: 'rel_catalog_history' });
-  expect(response.status).toBe(409);
-  expect(await response.json()).toMatchObject({ error: 'catalog_activation_unavailable' });
-  expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM content_releases').first()).toEqual({ n: 1 });
+  expect(response.status).toBe(200);
+  const served = await game('/api/v1/content/channels/dev/manifest');
+  expect(await served.json()).toMatchObject({ compat: { min_client: '0.1.2', required_capabilities: ['catalog_v1'] }, release: { generation: 2 } });
+  expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM content_releases').first()).toEqual({ n: 2 });
 });
 
 it('retains retired banner references while rejecting retired characters in active pools', () => {
@@ -172,4 +174,14 @@ it('retains retired banner references while rejecting retired characters in acti
   expect(EconomyCatalog.safeParse(candidate).success).toBe(true);
   candidate.banners[0]!.status = 'active';
   expect(EconomyCatalog.safeParse(candidate).success).toBe(false);
+});
+
+it('keeps a catalog draft unsigned when the bound game runtime is old, then publishes after readiness is verified', async () => {
+  const artifact = { path: CATALOG_PATH, bytes: new TextEncoder().encode(snapshot.json), sha256: snapshot.sha256, mediaType: 'application/json' }; await upload([...files, artifact]);
+  expect((await post('/admin/api/releases', { id: 'rel_runtime_gate', channel: 'dev', files: entries([...files, artifact]) })).status).toBe(201);
+  const store = new ContentStore(baseEnv.DB, baseEnv.CONTENT); const before = await store.getRelease('rel_runtime_gate');
+  const unavailable = adminEnv({ GAME: { connect: () => { throw new Error('readiness fixture must not open raw sockets'); }, fetch: async () => Response.json({ environment: 'dev', channel: 'dev', d1: { ok: true, migrations_applied: 26 } }) } });
+  const response = await admin('/admin/api/releases/rel_runtime_gate/publish', { method: 'POST', body: '{}', env: unavailable }); expect(response.status).toBe(503); expect(await response.json()).toMatchObject({ error: 'game_runtime_unavailable' });
+  expect(await store.getRelease('rel_runtime_gate')).toEqual(before); expect(await baseEnv.DB.prepare("SELECT 1 FROM audit_log WHERE target = 'rel_runtime_gate' AND action = 'release.publish'").first()).toBeNull();
+  expect((await post('/admin/api/releases/rel_runtime_gate/publish', {})).status).toBe(200);
 });

@@ -1,6 +1,8 @@
-# Autonomous infrastructure handoff
+# Handoff boundary — R08 complete, R09 waiting
 
-Owner instruction updated **2026-10-12**: complete README infrastructure in dependency order without waiting for task selections, update README/evidence after each verified slice, and fast-forward main only after required checks/integration. Defer creative/paid asset generation, then return to it after infrastructure. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) holds status/evidence. R00/R01 are complete locally; current implementation is **R06 — combat semantics and compatible progression** after local R05 recovery slices; native cross-package acceptance remains open. R02 local recovery is implemented; policy/live/native evidence remains open. This supersedes the earlier choose-one-and-wait workflow for the current assignment.
+Owner instruction **2026-10-14** supersedes the older autonomous route below: complete and push R08, then update the complete README/handoff and push a final time; **stop before implementing R09**. Argon 4 through Antigravity owns subsequent code, full game/UX/art design, image generation, animation, integration, QA, documentation and GitHub pushes. [README](../README.md) is the current detailed execution brief. R08's source is locally verified with 923 tests, 16 desktop/touch browser cases, 27 migrations and the recorded builds/checks; external/device/store acceptance remains separate.
+
+The historical slice records below are dated evidence, not current instructions or an active scheduler. R08 completion supersedes temporary catalog activation blocks and older B2b3 queues. R09 has not started. A full Argon handoff replaces this historical queue in the final documentation delivery.
 
 ## Resume safely
 
@@ -16,7 +18,7 @@ Owner instruction updated **2026-10-12**: complete README infrastructure in depe
 - Verification: document/link/registry checks and actual admin-data generation/build compatibility. Dated application audit remains historical. The delivery commit contains this record (`git log -1 -- docs/NEXT_STEPS.md`).
 - At R00 delivery, R01–R18 engineering acceptance stayed open; current status is in DEV_TRACKER. Live migrations/seeding, paid media, new permissions and public release are outside R00.
 
-## Current continuation route
+## Historical continuation route — superseded 2026-10-14
 
 | Order | Task | Next action |
 | --- | --- | --- |
@@ -227,3 +229,7 @@ Selected catalogs drive gear views, equip/unequip/lock, level/ascension, reroll 
 Next R08-B2b3: signup, team validation, task claims, other non-battle grants and remaining metadata/bootstrap/history/task/retirement support contracts, preserving paid obligations. Require the compatible reader/client floor before activation; full grammar/keys/storage and deployed/signed-device evidence remain open. See [CATALOG_SNAPSHOT](CATALOG_SNAPSHOT.md).
 
 Verification: all 872 application/tool tests, lint/typecheck, campaign/game/admin builds and 46 adapters pass. Six actual local Worker browser cases (desktop3/phone3, 26 migrations) verify selected gear and summon, original-status recovery after lost responses/reload with zero extra mutation POSTs, growth recovery and the retained publication block. Screens inspected; no deployed or signed-device acceptance. Initial banner/target/accessory-reference and permanent-registry fixture assumptions were corrected without retuning rules or weakening validation.
+
+## R08 completion — current local delivery
+
+R08 source complete: exact versioned signup/team/growth/gear/gacha/task and grant contexts; migration 0027 freezes weekly terms and earned/paid grant subsets. Public signed catalog activation/rollback is enabled with same-environment/channel game-runtime/migration readiness, client 0.1.2 and derived capabilities. Closed presentation/voice/caption/video/locale/stage/camera/WebGL-mask/tween/flag/checkpoint/frame-animation/notice/calendar interpreters; compiled trust-root lifecycle; IDB v2 transaction completion, retained-byte leases/GC/quota, range resume/cancel/deadline/network consent, safe startup activation and owned bounded media caches. All 923 application/tool tests (API469/game97/combat93/schema123/economy44/patch41/shared24/story8/tools24), lint/typecheck, campaign/game/admin builds and 46 adapters pass. Final real local-Worker desktop8/touch-phone8 browser matrix passes with 27 migrations; screenshots inspected. Same built browser binary installs a public signed synthetic season, exercises declared-only recruitment/growth/equipment/team/summon/animated authoritative battle, locale/mask/video pause/no-Skip/decoder fallback/modal ordering and account-change cleanup; IDB v1-to-v2/abort-after-request-success/blocked-storage fallback, reload recovery, rollback/kill and title lifecycle also pass. Synthetic four/five-star identities clone existing numeric definitions/art; the legitimate four-or-better guarantee retains canonical rates. Earlier browser failures exposed real mask/modal/startup/decoder races, corrected with actual-render assertions; final harness fixes wait for input registration, use signOut and honor five-star guarantee outcomes. No canon/numeric seeds/production media, live migrations, deployed/source tag, physical device or signed-original-AAB acceptance is claimed. Local source checkpoints do not complete R09. Physical WebView/unchanged-AAB season and deployed capacity remain R18/R17. Owner requires stopping before R09 and handing subsequent work to Argon 4 through Antigravity.

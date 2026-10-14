@@ -1,3 +1,5 @@
+import { PRESENTATION_PATH, PresentationPack, PresentationCommand, LocalePack, EventSchedule, ShopSchedule } from './presentation';
+import { MAX_JSON_FILE_BYTES, MAX_JSON_TOTAL_BYTES } from './primitives';
 import { CATALOG_PATH, MAX_CATALOG_BYTES, EconomyCatalog, catalogContentProblems } from './catalog';
 import { ArtManifest } from './art';
 import { EntryIndex, Prologue } from './entry';
@@ -13,7 +15,7 @@ export class ContentValidationError extends Error {
   }
 }
 
-const dec = new TextDecoder();
+const dec = new TextDecoder('utf-8', { fatal: true, ignoreBOM: false });
 
 /**
  * Validates the EFFECTIVE content set (patch files overlaid on the base) the way the client will use
@@ -23,6 +25,9 @@ const dec = new TextDecoder();
  */
 export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { chapters: number; nodes: number; units: number; scenes: number } {
   const problems: string[] = [];
+  const parsedPaths = new Set<string>();
+  const jsonFiles = [...files].filter(([path]) => path.endsWith('.json'));
+  if (jsonFiles.some(([, bytes]) => bytes.byteLength > MAX_JSON_FILE_BYTES) || jsonFiles.reduce((n, [, bytes]) => n + bytes.byteLength, 0) > MAX_JSON_TOTAL_BYTES) throw new ContentValidationError(['JSON resource budget exceeded']);
   const unique = (kind: string, ids: string[]): void => {
     const seen = new Set<string>();
     for (const id of ids) {
@@ -44,6 +49,7 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
     }
   };
   const parse = <T>(path: string, schema: { safeParse(v: unknown): { success: true; data: T } | { success: false; error: { issues: { path: PropertyKey[]; message: string }[] } } }): T | undefined => {
+    parsedPaths.add(path);
     const raw = json(path);
     if (raw === undefined) return undefined;
     const r = schema.safeParse(raw);
@@ -307,11 +313,12 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
       }
     }
   }
+  let prologue: Prologue | undefined;
   // first-install flow (only present in releases that ship it): the prologue and every tutorial stage must resolve
   if (files.has('entry/entry_index.json')) {
     const entry = parse('entry/entry_index.json', EntryIndex);
     if (entry) {
-      parse(entry.prologue, Prologue); // audio cues are hooks for the later sound pass and are not resolved against the music manifest
+      prologue = parse(entry.prologue, Prologue); // audio cues are hooks for the later sound pass and are not resolved against the music manifest
       const stages = new Set<string>();
       for (const t of entry.tutorial) {
         if (stages.has(t.stage_id)) problems.push(`entry index: duplicate stage ${t.stage_id}`);
@@ -327,6 +334,98 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
       const catalog = parse(CATALOG_PATH, EconomyCatalog);
       if (catalog && pack && index) problems.push(...catalogContentProblems(catalog, pack, index));
     }
+  }
+  for (const path of files.keys()) if (!parsedPaths.has(path) && path.endsWith('.json')) {
+    if (path.startsWith('story/')) checkScene(path);
+    if (path.startsWith('encounters/')) checkEncounter(path);
+  }
+  const profile = files.has(PRESENTATION_PATH) ? parse(PRESENTATION_PATH, PresentationPack) : undefined;
+  const lineOwners = new Map<string, string>(); const sceneIds = new Set<string>();
+  for (const [path, scene] of parsedScenes) {
+    if (sceneIds.has(scene.scene_id)) problems.push(`${path}: duplicate stable scene ID ${scene.scene_id}`); sceneIds.add(scene.scene_id);
+    for (const command of scene.commands) if (command.op === 'say' || command.op === 'narrate') { const owner = lineOwners.get(command.line_id); if (owner && owner !== path) problems.push(`${path}: stable line ${command.line_id} collides with ${owner}`); lineOwners.set(command.line_id, path); }
+  }
+  const lines = new Map([...parsedScenes.values()].flatMap((scene) => scene.commands.flatMap((c) => c.op === 'say' || c.op === 'narrate' ? [[c.line_id, c.text] as const] : [])));
+  for (const line of prologue?.scenes ?? []) { if (lines.has(line.line_id)) problems.push(`prologue: colliding stable line ${line.line_id}`); lines.set(line.line_id, line.text_en); }
+  const textIds = new Set(lines.keys());
+  const textLimits = new Map([...lines.keys()].map((id) => [id, 600]));
+  const exists = (table: Record<string, unknown> | undefined, id: string): boolean => !!table && Object.hasOwn(table, id);
+  const needProfile = (kind: 'voices' | 'sounds' | 'videos' | 'panels', id: string, where: string): void => { if (!exists(profile?.[kind], id)) problems.push(`${where}: unknown presentation ${kind}/${id}`); };
+  for (const [path, scene] of parsedScenes) {
+    const layers = new Set<string>(); const masks = new Set<string>();
+    for (const c of scene.commands) {
+      if (PresentationCommand.options.some((op) => op.shape.op.value === c.op) && !profile) problems.push(`${path}: presentation commands require ${PRESENTATION_PATH}`);
+      if (c.op === 'voice') needProfile('voices', c.line_id, path);
+      if (c.op === 'sound') needProfile('sounds', c.cue_id, path);
+      if (c.op === 'video') { needProfile('videos', c.video_id, path); if (scene.presentation && c.skippable) problems.push(`${path}: entry cutscenes cannot add Skip`); }
+      if (c.op === 'panel') {
+        needProfile('panels', c.panel_id, path);
+        const pending = [c.panel_id]; const visited = new Set<string>();
+        while (pending.length) { const id = pending.pop()!; if (visited.has(id)) continue; visited.add(id); const panel = profile && Object.hasOwn(profile.panels, id) ? profile.panels[id] : undefined;
+          for (const button of panel?.buttons ?? []) { if (button.action.type === 'screen') problems.push(`${path}: modal notices cannot abandon a paused story through screen navigation`); if (button.action.type === 'panel') pending.push(button.action.panel_id); }
+        }
+      }
+      if (c.op === 'layer') { if (layers.size >= 16 && !layers.has(c.layer_id)) problems.push(`${path}: too many stage layers`); layers.add(c.layer_id); if (!exists(c.kind === 'still' ? art?.stills : art?.ui, c.art_id)) problems.push(`${path}: unknown stage art ${c.art_id}`); }
+      if ((c.op === 'animate' || c.op === 'mask' || c.op === 'remove_layer') && !layers.has(c.layer_id)) problems.push(`${path}: stage layer ${c.layer_id} must be declared first`);
+      if (c.op === 'mask') { if (c.shape === 'none') masks.delete(c.layer_id); else masks.add(c.layer_id); if (masks.size > 2) problems.push(`${path}: mask framebuffer budget exceeded`); }
+      if (c.op === 'remove_layer') { layers.delete(c.layer_id); masks.delete(c.layer_id); }
+    }
+    // Definite layer assignment across all reachable branches, including a jump over a declaration.
+    const labels = new Map(scene.commands.flatMap((c, i) => c.op === 'label' ? [[c.name, i] as const] : []));
+    const incoming = new Map<number, Set<string>>([[0, new Set()]]); const pending = [0];
+    while (pending.length) {
+      const pc = pending.pop()!; const command = scene.commands[pc]; if (!command) continue;
+      const state = new Set(incoming.get(pc)!);
+      if (command.op === 'layer') state.add(command.layer_id);
+      if (command.op === 'remove_layer') state.delete(command.layer_id);
+      const next = command.op === 'end' ? [] : command.op === 'goto' ? [labels.get(command.label)] : command.op === 'choice' ? command.options.map((o) => labels.get(o.goto)) : command.op === 'branch' ? [pc + 1, labels.get(command.goto)] : [pc + 1];
+      for (const to of next) if (to !== undefined && to < scene.commands.length) {
+        const prior = incoming.get(to); const merged = prior ? new Set([...prior].filter((id) => state.has(id))) : new Set(state);
+        if (!prior || merged.size !== prior.size) { incoming.set(to, merged); pending.push(to); }
+      }
+    }
+    for (const [pc, state] of incoming) {
+      const command = scene.commands[pc]!;
+      if ((command.op === 'animate' || command.op === 'mask' || command.op === 'remove_layer') && !state.has(command.layer_id)) problems.push(`${path}: layer ${command.layer_id} is not declared on every reachable branch`);
+      if (command.op === 'layer' && state.size >= 16 && !state.has(command.layer_id)) problems.push(`${path}: reachable layer budget exceeded`);
+    }
+  }
+  if (prologue?.video_id) {
+    const video = profile && Object.hasOwn(profile.videos, prologue.video_id) ? profile.videos[prologue.video_id] : undefined;
+    if (!video || Math.abs(video.duration_s - prologue.duration_seconds) > 0.01) problems.push('prologue: video must cover the authored duration');
+  }
+  if (prologue?.voice_status === 'recorded' && prologue.scenes.some((line) => !profile || !Object.hasOwn(profile.voices, line.line_id))) problems.push('prologue: recorded voice requires every Japanese line');
+  if (profile) {
+    for (const [id, voice] of Object.entries(profile.voices)) { if (!lines.has(id)) problems.push(`voice ${id}: unknown stable line`); if (!files.has(voice.file)) problems.push(`voice ${id}: missing audio`); const shot = prologue?.scenes.find((s) => s.line_id === id); if (shot && voice.duration_s > shot.duration_seconds) problems.push(`voice ${id}: exceeds authored shot duration`); }
+    for (const [id, sound] of Object.entries(profile.sounds)) if (!files.has(sound.file)) problems.push(`sound ${id}: missing audio`);
+    for (const [id, video] of Object.entries(profile.videos)) {
+      if (!files.has(video.file)) problems.push(`video ${id}: missing media`);
+      if (video.poster_id && !exists(art?.stills, video.poster_id)) problems.push(`video ${id}: unknown poster`);
+      for (const cue of video.captions) if (lines.get(cue.line_id) !== cue.text_en) problems.push(`video ${id}: captions differ from their stable English lines`);
+    }
+    const nodes = new Set(index?.chapters.flatMap((c) => c.nodes.map((n) => n.node_id)) ?? []);
+    for (const [id, panel] of Object.entries(profile.panels)) {
+      if (panel.after_node && !nodes.has(panel.after_node)) problems.push(`panel ${id}: unknown unlock node`);
+      if (panel.image_id && !exists(art?.stills, panel.image_id)) problems.push(`panel ${id}: unknown illustration`);
+      for (const [label, limit] of [[panel.title, 80], ...panel.body.map((l) => [l, 600] as const), ...panel.buttons.map((b) => [b.label, 40] as const)] as const) if (label.text_id) { textIds.add(label.text_id); textLimits.set(label.text_id, Math.min(textLimits.get(label.text_id) ?? limit, limit)); }
+      for (const button of panel.buttons) if (button.action.type === 'panel') needProfile('panels', button.action.panel_id, `panel ${id}`);
+    }
+    for (const locale of profile.locales) {
+      const pack = parse(`locales/${locale}.json`, LocalePack);
+      if (pack) { if (pack.locale !== locale) problems.push(`locale ${locale}: filename identity mismatch`); for (const key of Object.keys(pack.strings)) { if (!textIds.has(key)) problems.push(`locale ${locale}: unknown text ID ${key}`); if (pack.strings[key]!.length > (textLimits.get(key) ?? 600)) problems.push(`locale ${locale}: text exceeds its presentation context budget ${key}`); } }
+    }
+  }
+  if (files.has('schedules/events.json')) {
+    const schedule = parse('schedules/events.json', EventSchedule); const library = files.has('library/library_index.json') ? parse('library/library_index.json', NarrativeLibrary) : undefined;
+    unique('event schedule', schedule?.events.map((e) => e.entry_id) ?? []);
+    for (const event of schedule?.events ?? []) if (!library?.entries.some((e) => e.entry_id === event.entry_id && e.kind === 'event')) problems.push(`event schedule: unknown event entry ${event.entry_id}`);
+  }
+  if (files.has('schedules/shop.json')) { const schedule = parse('schedules/shop.json', ShopSchedule); unique('shop schedule', schedule?.offers.map((e) => e.product_id) ?? []); }
+  // Every admitted JSON document gets a closed grammar, including unlinked resources.
+  for (const path of files.keys()) if (path.endsWith('.json') && !parsedPaths.has(path)) {
+    if (path.startsWith('story/')) checkScene(path);
+    else if (path.startsWith('encounters/')) checkEncounter(path);
+    else problems.push(`unsupported JSON document ${path}`);
   }
   if (problems.length > 0) throw new ContentValidationError(problems);
   return { chapters: index?.chapters.length ?? 0, nodes, units: units.size, scenes };

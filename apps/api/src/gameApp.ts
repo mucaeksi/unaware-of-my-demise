@@ -1,3 +1,4 @@
+import { CONTENT_CAPABILITIES } from '@uomd/content-schema';
 import { requestMonitoring } from './monitoring';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
@@ -43,7 +44,8 @@ export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?
     '/api/*',
     cors({
       origin: (origin, c) => (['https://localhost', 'capacitor://localhost', ...(c.env.ALLOWED_ORIGINS ?? '').split(',').map((o: string) => o.trim()).filter(Boolean)].includes(origin) ? origin : null),
-      allowHeaders: ['Authorization', 'Content-Type'],
+      allowHeaders: ['Authorization', 'Content-Type', 'Range'],
+      exposeHeaders: ['Content-Range', 'Accept-Ranges', 'ETag'],
       allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       maxAge: 86_400
     })
@@ -72,7 +74,7 @@ export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?
     const store = new ContentStore(c.env.DB, c.env.CONTENT);
     const current = await store.publishedManifest(c.env.CONTENT_CHANNEL).catch(() => null);
     const ok = d1.ok === true && r2.ok === true;
-    return c.json({ ok, service: 'uomd-game', version: c.env.CF_VERSION_METADATA ?? null, environment: c.env.ENVIRONMENT, channel: c.env.CONTENT_CHANNEL, time: new Date().toISOString(), d1, r2, current_release: current?.releaseId ?? null }, ok ? 200 : 503);
+    return c.json({ ok, service: 'uomd-game', version: c.env.CF_VERSION_METADATA ?? null, environment: c.env.ENVIRONMENT, channel: c.env.CONTENT_CHANNEL, time: new Date().toISOString(), d1, r2, runtime: { catalog_protocol: 1, capabilities: CONTENT_CAPABILITIES }, current_release: current?.releaseId ?? null }, ok ? 200 : 503);
   });
 
   app.get('/api/v1/content/channels/:channel/manifest', async (c) => {
@@ -92,12 +94,23 @@ export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?
     const store = new ContentStore(c.env.DB, c.env.CONTENT);
     // unpublished objects are indistinguishable from missing ones
     if (!(await store.isServable(sha, c.env.CONTENT_CHANNEL))) throw new HttpError(404, 'not_found', 'no such object');
-    const obj = await store.getObject(sha);
+    const range = c.req.header('Range'); let offset: number | undefined; let total: number | undefined;
+    if (range !== undefined) {
+      const info = await c.env.CONTENT.head(ContentStore.objectKey(sha));
+      if (!info) throw new HttpError(404, 'not_found', 'no such object');
+      total = info.size;
+      const match = /^bytes=(0|[1-9][0-9]*)-$/.exec(range); offset = match ? Number(match[1]) : -1;
+      if (!Number.isSafeInteger(offset) || offset < 0 || offset >= total) return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${total}` } });
+    }
+    const obj = await store.getObject(sha, offset);
     if (!obj) throw new HttpError(404, 'not_found', 'no such object');
     return new Response(obj.body, {
+      status: offset === undefined ? 200 : 206,
       headers: {
         'Content-Type': obj.httpMetadata?.contentType ?? 'application/octet-stream',
-        'Content-Length': String(obj.size),
+        'Content-Length': String(offset === undefined ? obj.size : total! - offset),
+        'Accept-Ranges': 'bytes',
+        ...(offset === undefined ? {} : { 'Content-Range': `bytes ${offset}-${total! - 1}/${total}` }),
         ETag: `"${sha}"`,
         'Cache-Control': 'public, max-age=31536000, immutable'
       }

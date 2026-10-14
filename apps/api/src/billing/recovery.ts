@@ -1,3 +1,5 @@
+import { freezeGrantCatalog } from '../content/grant-catalog';
+import { displayCatalog } from '../content/runtime-catalog';
 import { sha256Hex } from '@uomd/shared';
 import { HttpError } from '../content/store';
 import type { GameEnv } from '../env';
@@ -74,7 +76,13 @@ export async function verifyReceipt(env: GameEnv, play: PlayClient, playerId: st
         const previous = await db.prepare('SELECT player_id, order_id, fulfillment, ack_deadline FROM billing_jobs WHERE token_hash = ?1').bind(th).first<Pick<Job, 'player_id' | 'order_id' | 'fulfillment' | 'ack_deadline'>>();
         if (previous && previous.player_id !== playerId) throw new HttpError(403, 'account_mismatch', 'this purchase belongs to another account');
         const samePeriod = previous && (previous.order_id === orderId || previous.order_id === null);
-        const fulfillment = samePeriod && previous.fulfillment ? previous.fulfillment : proposed;
+        let fulfillment = samePeriod && previous.fulfillment ? previous.fulfillment : proposed;
+        if (fulfillment && !(samePeriod && previous.fulfillment)) {
+          const terms = Fulfillment.parse(JSON.parse(fulfillment));
+          const rewards = [...terms.grants, ...(terms.subscription?.instant ?? []), ...(terms.subscription?.periodic.attachments ?? [])];
+          const catalog = freezeGrantCatalog(await displayCatalog(env), rewards);
+          if (catalog) fulfillment = JSON.stringify({ ...terms, grantCatalog: catalog });
+        }
         if (fulfillment) Fulfillment.parse(JSON.parse(fulfillment));
         if (purchaseTimeMs !== null && (!Number.isSafeInteger(purchaseTimeMs) || purchaseTimeMs <= 0)) throw new HttpError(503, 'billing_invalid_response', 'purchase time could not be verified');
         const deadline = samePeriod && previous.ack_deadline ? previous.ack_deadline : purchaseTimeMs === null ? null : new Date(purchaseTimeMs + (test ? 3 * 60_000 : 3 * 86_400_000)).toISOString();

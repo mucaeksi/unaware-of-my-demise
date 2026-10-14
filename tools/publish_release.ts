@@ -16,7 +16,6 @@ const arg = (n: string): string | undefined => {
 };
 const need = (n: string): string => arg(n) ?? (() => { throw new Error(`missing --${n}`); })();
 
-if (process.argv.includes('--catalog-snapshot') && process.argv.includes('--publish')) throw new Error('catalog snapshots can be staged only; omit --publish');
 
 const admin = need('admin').replace(/\/$/, '');
 const dir = resolve(ROOT, need('dir'));
@@ -53,7 +52,7 @@ if (process.argv.includes('--catalog-snapshot')) {
   if (bytes.byteLength > MAX_CATALOG_BYTES || bytes.byteLength !== snapshot.bytes || await sha256Hex(bytes) !== snapshot.sha256) throw new Error('catalog export size/hash mismatch');
   EconomyCatalog.parse(JSON.parse(snapshot.json));
   files.push({ path: CATALOG_PATH, bytes, sha256: snapshot.sha256, type: 'application/json' });
-  console.log(`catalog snapshot: ${snapshot.sha256} (${bytes.byteLength} bytes; draft only)`);
+  console.log(`catalog snapshot: ${snapshot.sha256} (${bytes.byteLength} bytes)`);
 }
 let created = 0;
 for (const f of files) {

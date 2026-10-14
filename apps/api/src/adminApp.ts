@@ -1,3 +1,4 @@
+import { requireGameRuntime } from './content/runtime-ready';
 import { registerMonitoring } from './admin/monitoring';
 import { requestMonitoring } from './monitoring';
 import { Hono, type MiddlewareHandler } from 'hono';
@@ -235,6 +236,7 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
 
   app.post('/admin/api/releases/:id/publish', need('operator'), async (c) => {
     const who = c.get('admin');
+    await requireGameRuntime(c.env, await store(c.env).getRelease(c.req.param('id')));
     const signer = await loadSigner(c.env.CONTENT_SIGNING_KEY, c.env.CONTENT_SIGNING_KID);
     const row = await store(c.env).publish(c.req.param('id'), who.identity, who.role === 'owner' ? 'owner' : 'operator', signer);
     return c.json({ id: row.id, generation: row.generation, channel: row.channel, state: row.state, published_at: row.published_at });
@@ -247,6 +249,7 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
       if (!channel.success) throw new HttpError(400, 'bad_channel', 'unknown channel');
       const body = await json(c, Source);
       const who = c.get('admin');
+      if (mode === 'rollback') await requireGameRuntime(c.env, await store(c.env).getRelease(body.releaseId));
       const signer = await loadSigner(c.env.CONTENT_SIGNING_KEY, c.env.CONTENT_SIGNING_KID);
       const row = await store(c.env).republish({ channel: channel.data, sourceId: body.releaseId, mode, actor: who.identity, role: who.role === 'owner' ? 'owner' : 'operator', signer });
       return c.json({ id: row.id, generation: row.generation, channel: row.channel, state: row.state });

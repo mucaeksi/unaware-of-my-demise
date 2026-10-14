@@ -15,18 +15,20 @@ const left = (ms: number): string => {
 export class TasksScene extends HubScene {
   protected readonly heading = 'ERRANDS';
   private busy = false;
+  private releaseId: string | undefined;
 
   constructor() {
     super('Tasks');
   }
 
   protected async build(): Promise<void> {
-    const [t, names] = await Promise.all([Services.api.tasks(), Services.api.catalogNames()]);
+    this.releaseId = await Services.ready().content.activeReleaseId();
+    const [t, names] = await Promise.all([Services.api.tasks(this.releaseId), Services.api.catalogNames(this.releaseId)]);
     let y = 190;
     const row = (v: TaskView, periodKey: string, note?: string): void => {
       this.card(REF_W / 2 - 100, y, 1500, 108, v.claimed ? 'dim' : v.done ? 'hot' : 'normal');
       this.add_(txt(this, 190, y - 24, `${v.title}   ${v.progress}/${v.objective.count}`, { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: v.claimed ? T.dim : T.text }).setOrigin(0, 0.5));
-      this.add_(txt(this, 190, y + 22, `${describeAttachments(v.rewards, names)}${note ? `   ·   ${note}` : ''}`, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
+      this.add_(txt(this, 190, y + 22, `${describeAttachments(v.rewards, new Map([...names, ...Object.entries(v.rewardNames ?? {})]))}${note ? `   ·   ${note}` : ''}`, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
       this.add_(new Button(this, REF_W - 250, y, { label: v.claimed ? 'CLAIMED' : 'CLAIM', w: 280, h: 90, fontSize: 28, variant: v.done && !v.claimed ? 'hot' : 'dim', onClick: () => void this.claim(periodKey, v.id) }).setEnabled(v.done && !v.claimed));
       y += 120;
     };
@@ -35,7 +37,7 @@ export class TasksScene extends HubScene {
       this.add_(txt(this, 190, y - 40, `THIS WINDOW · ends in ${left(d.endsAtMs - t.serverTimeMs)}`, { fontFamily: F.display, fontSize: '28px', color: T.gold }).setOrigin(0, 0.5));
       y += 10;
       d.tasks.forEach((v) => row(v, d.periodKey));
-      row({ id: '_window_complete', title: 'Window complete', objective: { type: 'bonus', count: 1 }, progress: d.completion.ready ? 1 : 0, done: d.completion.ready, claimed: d.completion.claimed, rewards: d.completion.rewards }, d.periodKey);
+      row({ id: '_window_complete', title: 'Window complete', objective: { type: 'bonus', count: 1 }, progress: d.completion.ready ? 1 : 0, done: d.completion.ready, claimed: d.completion.claimed, rewards: d.completion.rewards, rewardNames: d.completion.rewardNames }, d.periodKey);
     }
     if (t.weekly.length) {
       this.add_(txt(this, 190, y - 40, 'THIS WEEK', { fontFamily: F.display, fontSize: '28px', color: T.gold }).setOrigin(0, 0.5));
@@ -49,7 +51,7 @@ export class TasksScene extends HubScene {
     if (this.busy) return;
     this.busy = true;
     try {
-      await Services.api.claimTask(periodKey, taskId);
+      await Services.api.claimTask(periodKey, taskId, this.releaseId);
       this.say('Reward claimed');
       await this.updateWallet();
       await this.refresh();

@@ -68,7 +68,7 @@ function skillViews(cfg: ProgressionConfig, level: number, ranks: Record<string,
   });
 }
 
-export async function listCharacters(db: D1Database, playerId: string, catalog?: RuntimeCatalog): Promise<{ account: Awaited<ReturnType<typeof accountOf>>; characters: CharacterView[] }> {
+export async function listCharacters(db: D1Database, playerId: string, catalog?: RuntimeCatalog): Promise<{ account: Awaited<ReturnType<typeof accountOf>>; characters: CharacterView[]; unavailable: { id: string; reason: string }[] }> {
   const cfg = catalog?.data.config.progression ?? await loadProgressionConfig(db);
   const account = await accountOf(db, playerId, cfg);
   const owned = (await db.prepare("SELECT item_id FROM player_items WHERE player_id = ?1 AND item_type = 'character' ORDER BY item_id").bind(playerId).all<{ item_id: string }>()).results.map((r) => r.item_id);
@@ -89,7 +89,7 @@ export async function listCharacters(db: D1Database, playerId: string, catalog?:
       skills: skillViews(cfg, r.level, JSON.parse(r.skill_ranks) as Record<string, number>, skills.filter((s) => s.character_id === id))
     };
   });
-  return { account, characters };
+  return { account, characters, unavailable: catalog ? owned.filter((id) => !characters.some((c) => c.id === id)).map((id) => ({ id, reason: 'Unavailable in this content version' })) : [] };
 }
 
 interface Plan {
@@ -140,7 +140,7 @@ async function characterOp(db: D1Database, playerId: string, characterId: string
       db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
       ...plan.items.map((i) => stackSpend(db, playerId, i.itemId, i.quantity)),
       ...(plan.fee > 0 ? ledgerStatements(db, { playerId, currency: 'eclipse_token', delta: -plan.fee, reason: `${kind}:${characterId}`, idempotencyKey: `prog:${playerId}:${requestId}` }) : []),
-      ...(kind === 'level_up' ? await taskEventStatements(db, playerId, { level_ups: 1 }, Date.now(), catalog?.data.config.tasks) : []),
+      ...(kind === 'level_up' ? await taskEventStatements(db, playerId, { level_ups: 1 }, Date.now(), catalog?.data.config.tasks, catalog) : []),
       db.prepare('INSERT INTO progression_requests (player_id, request_id, kind, result_json, input_json) VALUES (?1, ?2, ?3, ?4, ?5)').bind(playerId, requestId, `${kind}:${characterId}`, JSON.stringify(response), inputJson),
       db.prepare('DELETE FROM tx_guard')
     ];

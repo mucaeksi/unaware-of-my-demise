@@ -5,10 +5,11 @@ export type PatchStatus =
   | { kind: 'idle' }
   | { kind: 'running'; progress: PatchProgress | null }
   | { kind: 'ready'; outcome: PatchOutcome }
-  | { kind: 'failed'; detail: string; updateRequired: boolean };
+  | { kind: 'failed'; detail: string; updateRequired: boolean; requiresNetworkApproval?: boolean };
 
 /** The slice of ContentService the first-install download needs (a fake in tests). */
 export interface PatchSource {
+  readonly persistent?: boolean;
   checkForUpdates(opts?: ApplyOptions): Promise<PatchOutcome>;
 }
 
@@ -23,6 +24,8 @@ export class PatchService {
   private status: PatchStatus = { kind: 'idle' };
   private readonly listeners = new Set<Listener>();
   private run: Promise<PatchStatus> | null = null;
+  private controller: AbortController | null = null;
+  private allowMetered = false;
 
   constructor(private readonly source: () => PatchSource | null) {}
 
@@ -51,7 +54,10 @@ export class PatchService {
     return this.run;
   }
 
-  retry(): Promise<PatchStatus> {
+  cancel(): void { this.controller?.abort(); }
+
+  retry(opts: Pick<ApplyOptions, 'allowMetered'> = {}): Promise<PatchStatus> {
+    if (opts.allowMetered !== undefined) this.allowMetered = opts.allowMetered;
     if (this.status.kind === 'failed') this.status = { kind: 'idle' };
     return this.start();
   }
@@ -62,16 +68,19 @@ export class PatchService {
       this.set({ kind: 'failed', detail: 'content service is not ready', updateRequired: false });
       return this.status;
     }
+    this.controller = new AbortController();
     this.set({ kind: 'running', progress: null });
     let outcome: PatchOutcome;
     try {
-      outcome = await source.checkForUpdates({ activate: false, onProgress: (p) => this.set({ kind: 'running', progress: p }) });
+      outcome = await source.checkForUpdates({ activate: false, signal: this.controller.signal, allowMetered: this.allowMetered, onProgress: (p) => this.set({ kind: 'running', progress: p }) });
     } catch (e) {
       this.set({ kind: 'failed', detail: e instanceof Error ? e.message : String(e), updateRequired: false });
       return this.status;
     }
     switch (outcome.status) {
       case 'staged':
+        if (source.persistent === false) { this.set({ kind: 'failed', detail: 'Local storage is unavailable. Enable device storage and restart before entering the downloaded content.', updateRequired: false }); break; }
+        this.set({ kind: 'ready', outcome }); break;
       case 'applied':
       case 'up_to_date':
       case 'reverted_to_base':
@@ -82,7 +91,7 @@ export class PatchService {
         break;
       case 'rejected':
         // a release this app can never apply (too new for the binary) needs an app update, not a retry
-        this.set({ kind: 'failed', detail: outcome.reason, updateRequired: outcome.reason === 'client_too_old' || outcome.reason === 'schema_too_new' });
+        this.set({ kind: 'failed', detail: outcome.detail, ...(outcome.reason === 'network_policy' ? { requiresNetworkApproval: true } : {}), updateRequired: outcome.reason === 'client_too_old' || outcome.reason === 'schema_too_new' || outcome.reason === 'capability_missing' });
         break;
     }
     return this.status;

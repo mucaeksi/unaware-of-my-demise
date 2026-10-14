@@ -16,7 +16,8 @@ export async function loadReleaseCatalog(env: Pick<GameEnv, 'DB' | 'CONTENT' | '
   const release = await store.getRelease(releaseId);
   if (!release || release.state !== 'published' || release.channel !== env.CONTENT_CHANNEL) throw new HttpError(404, 'unknown_release', 'release is not published on this channel');
   const invalid = (): HttpError => new HttpError(503, 'release_catalog_invalid', 'the declared release catalog is unavailable or invalid');
-  const manifest = ContentManifest.parse(JSON.parse(release.manifest_json));
+  let manifest: ContentManifest;
+  try { manifest = ContentManifest.parse(JSON.parse(release.manifest_json)); } catch { throw invalid(); }
   const declared = manifest.files.find((file) => file.path === CATALOG_PATH);
   const sha256 = (await store.effectiveFiles(releaseId)).get(CATALOG_PATH);
   if (!declared && !sha256) return undefined; // explicit catalog-free legacy contract
@@ -32,13 +33,13 @@ export async function loadReleaseCatalog(env: Pick<GameEnv, 'DB' | 'CONTENT' | '
   }
 }
 
-export function catalogCharacter(catalog: RuntimeCatalog, id: string): EconomyCatalog['characters'][number] {
+export function catalogCharacter(catalog: { data: Pick<EconomyCatalog, 'characters'> }, id: string): EconomyCatalog['characters'][number] {
   const row = catalog.data.characters.find((c) => c.id === id && c.status !== 'retired');
   if (!row) throw new HttpError(422, 'unknown_item', `character ${id} is unavailable in this release`);
   return row;
 }
 
-export function catalogGear(catalog: RuntimeCatalog, id: string): EconomyCatalog['gear'][number] {
+export function catalogGear(catalog: { data: Pick<EconomyCatalog, 'gear'> }, id: string): EconomyCatalog['gear'][number] {
   const row = catalog.data.gear.find((g) => g.gear_id === id && g.status !== 'retired');
   if (!row) throw new HttpError(422, 'unknown_item', `gear ${id} is unavailable in this release`);
   return row;

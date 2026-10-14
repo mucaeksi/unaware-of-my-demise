@@ -34,6 +34,7 @@ export const baseEnv: GameEnv & AdminEnv = { ...(env as unknown as GameEnv & Adm
 export function adminEnv(over: Partial<AdminEnv> = {}): AdminEnv {
   return {
     ...(baseEnv as AdminEnv),
+    GAME: { fetch: async (input: RequestInfo | URL, init?: RequestInit) => gameApp.fetch(new Request(input, init), baseEnv) } as Fetcher,
     ACCESS_TEAM_DOMAIN: TEAM,
     ACCESS_AUD: AUD,
     ADMIN_BOOTSTRAP_OWNERS: 'owner@example.com',

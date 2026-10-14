@@ -9,8 +9,9 @@ export async function exportAccount(db: D1Database, playerId: string): Promise<R
   const [profile] = await q('SELECT id, created_at, display_name, last_seen_at, status FROM players WHERE id = ?1');
   const ledger = await q('SELECT id, currency, delta, reason, at FROM ledger WHERE player_id = ?1 ORDER BY id DESC LIMIT 2001');
   const pulls = await q('SELECT id, banner_id, pull_number, rarity, item_type, item_id, outcome, duplicate, at FROM gacha_pulls WHERE player_id = ?1 ORDER BY id DESC LIMIT 2001');
-  const mail = await q('SELECT id, kind, title, body, attachments, created_at, read_at, claimed_at FROM mail WHERE player_id = ?1 ORDER BY id DESC LIMIT 501');
+  const mail = await q('SELECT id, kind, title, body, attachments, grant_catalog, created_at, read_at, claimed_at FROM mail WHERE player_id = ?1 ORDER BY id DESC LIMIT 501');
   const billingRecovery = await q('SELECT product_id, kind, order_id, state, next_at, ack_deadline, attempts, last_code, updated_at FROM billing_jobs WHERE player_id = ?1 ORDER BY updated_at DESC LIMIT 501');
+  const taskRules = await q('SELECT week_start, config_json, grant_catalog FROM task_rule_weeks WHERE player_id = ?1 ORDER BY week_start DESC LIMIT 501');
   const rewardGrants = await q('SELECT id, grant_key, reason, attachment_json, result_json, at FROM reward_grants WHERE player_id = ?1 ORDER BY id DESC LIMIT 2001');
   return {
     exportedAt: new Date().toISOString(),
@@ -29,9 +30,10 @@ export async function exportAccount(db: D1Database, playerId: string): Promise<R
     mail: mail.slice(0, 500),
     purchases: await q('SELECT order_id, product_id, kind, state, granted_at, refunded_at FROM purchases WHERE player_id = ?1'),
     billingRecovery: billingRecovery.slice(0, 500),
+    taskRules: taskRules.slice(0, 500),
     rewardGrants: rewardGrants.slice(0, 2000),
     cloudSave: await q('SELECT version, data, updated_at FROM player_saves WHERE player_id = ?1'),
-    truncated: { ledger: ledger.length > 2000, pulls: pulls.length > 2000, mail: mail.length > 500, billingRecovery: billingRecovery.length > 500, rewardGrants: rewardGrants.length > 2000 }
+    truncated: { taskRules: taskRules.length > 500, ledger: ledger.length > 2000, pulls: pulls.length > 2000, mail: mail.length > 500, billingRecovery: billingRecovery.length > 500, rewardGrants: rewardGrants.length > 2000 }
   };
 }
 
@@ -48,7 +50,7 @@ export async function deleteAccount(db: D1Database, playerId: string, confirm: s
     db.prepare('DELETE FROM billing_locks WHERE token_hash IN (SELECT token_hash FROM billing_jobs WHERE player_id = ?1)').bind(playerId),
     own('billing_jobs'),
     own('battle_sessions'),
-    ...['sessions', 'player_entry', 'player_teams', 'player_tasks', 'progression_requests', 'player_gear', 'player_chars', 'player_stacks', 'player_account', 'player_progress', 'player_ration', 'battle_claims', 'player_saves', 'pity_state', 'gacha_requests', 'ad_nonces', 'player_items', 'wallets'].map(own)
+    ...['sessions', 'player_entry', 'player_teams', 'player_tasks', 'task_rule_weeks', 'progression_requests', 'player_gear', 'player_chars', 'player_stacks', 'player_account', 'player_progress', 'player_ration', 'battle_claims', 'player_saves', 'pity_state', 'gacha_requests', 'ad_nonces', 'player_items', 'wallets'].map(own)
   ]);
   return { deleted: true };
 }

@@ -71,3 +71,17 @@ describe('PatchService', () => {
     expect(await svc.start()).toMatchObject({ kind: 'failed' });
   });
 });
+
+it('does not promise a restart will retain a memory-only stage', async () => {
+  const src = { ...source([staged]), persistent: false };
+  const service = new PatchService(() => src);
+  expect(await service.start()).toMatchObject({ kind: 'failed', updateRequired: false, detail: expect.stringContaining('Local storage is unavailable') });
+});
+it('requires a separate explicit retry choice for mobile data and forwards cancellation', async () => {
+  const src = source([{ status: 'rejected', reason: 'network_policy', detail: 'Metered connection' }, staged]);
+  const service = new PatchService(() => src);
+  expect(await service.start()).toMatchObject({ kind: 'failed', requiresNetworkApproval: true });
+  expect(src.calls[0]?.allowMetered).toBe(false);
+  expect(await service.retry({ allowMetered: true })).toMatchObject({ kind: 'ready' }); expect(src.calls[1]?.allowMetered).toBe(true);
+  expect(src.calls[1]?.signal).toBeInstanceOf(AbortSignal);
+});

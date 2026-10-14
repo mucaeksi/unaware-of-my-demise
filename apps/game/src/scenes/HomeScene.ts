@@ -32,6 +32,7 @@ export class HomeScene extends HubScene {
       const row = Math.floor(i / 3);
       this.add_(new Button(this, REF_W / 2 - 520 + col * 520, 290 + row * 215, { label: t.label, sub: t.sub, w: 480, h: 190, fontSize: 46, variant: i === 0 ? 'hot' : 'normal', onClick: () => this.scene.start(t.scene) }));
     });
+    this.add_(new Button(this, REF_W / 2, 1000, { label: 'NOTICES', w: 440, h: 110, onClick: () => this.scene.start('ContentPanel') }));
     this.add_(new Button(this, REF_W - 330, 1000, { label: 'ARCHIVE', w: 440, h: 110, onClick: () => this.scene.start('Library') }));
     this.add_(txt(this, REF_W / 2, 830, api.signedIn ? 'Your progress, wallet and rolls are kept on the server.' : 'Sign in to keep your progress, wallet and rolls on the server.', { fontSize: '34px', color: T.dim }).setOrigin(0.5));
     try {

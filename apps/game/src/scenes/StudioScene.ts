@@ -20,7 +20,9 @@ export class StudioScene extends Phaser.Scene {
     super('Studio');
   }
 
-  create(): void {
+  async create(): Promise<void> {
+    await Services.ready().art.loadUi(this);
+    if (!this.sys.isActive()) return;
     this.cameras.main.setBackgroundColor(0x05030a);
     const calm = prefs().reducedMotion;
     const cx = REF_W / 2;

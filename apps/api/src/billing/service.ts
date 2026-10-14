@@ -1,3 +1,4 @@
+import { GrantCatalog } from '../content/grant-catalog';
 import { z } from 'zod';
 import { RewardAttachment } from '@uomd/content-schema';
 import { sha256Hex } from '@uomd/shared';
@@ -28,7 +29,7 @@ interface ProductRow {
   updated_at: string;
 }
 
-export const Fulfillment = z.object({ grants: z.array(RewardAttachment), subscription: SubConfig.nullable(), catalogUpdatedAt: z.string() }).strict();
+export const Fulfillment = z.object({ grants: z.array(RewardAttachment), subscription: SubConfig.nullable(), catalogUpdatedAt: z.string(), grantCatalog: GrantCatalog.optional() }).strict();
 export interface PurchaseRecovery {
   kind?: ProductRow['kind'];
   subscriptionState?: Awaited<ReturnType<PlayClient['getSubscription']>>['state'];
@@ -100,12 +101,13 @@ export async function verifyPurchase(db: D1Database, play: PlayClient, playerId:
     }
     let fulfillment = JSON.stringify({ grants: z.array(RewardAttachment).parse(JSON.parse(product.grants)), subscription: null, catalogUpdatedAt: product.updated_at });
     if (recovery) fulfillment = (await recovery.confirmed(product.kind, p.orderId, fulfillment, p.purchaseTimeMs, !!p.testPurchase))!;
-    const grants = Fulfillment.parse(JSON.parse(fulfillment)).grants;
+    const terms = Fulfillment.parse(JSON.parse(fulfillment));
+    const grants = terms.grants;
     try {
       await purchaseBatch(db, [
         db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN EXISTS (SELECT 1 FROM players WHERE id = ?1 AND status <> \'deleted\') THEN 1 ELSE 0 END)').bind(playerId),
         db.prepare("INSERT INTO purchases (order_id, player_id, product_id, kind, token_hash, period_start, granted_at, fulfillment) VALUES (?1, ?2, ?3, 'consumable', ?4, ?5, ?5, ?6)").bind(p.orderId, playerId, product.product_id, th, now.toISOString(), fulfillment),
-        ...(await grantStatements(db, playerId, grants, { keyPrefix: `iap:${p.orderId}`, reason: `purchase:${product.product_id}` })),
+        ...(await grantStatements(db, playerId, grants, { keyPrefix: `iap:${p.orderId}`, reason: `purchase:${product.product_id}`, catalog: terms.grantCatalog })),
         event(db, 'verify', p.orderId, 'granted', { productId: product.product_id }),
         db.prepare('DELETE FROM tx_guard')
       ], recovery);
@@ -203,7 +205,7 @@ async function grantSubscriptionPeriod(
     await purchaseBatch(db, [
       db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN EXISTS (SELECT 1 FROM players WHERE id = ?1 AND status <> \'deleted\') THEN 1 ELSE 0 END)').bind(playerId),
       db.prepare("INSERT INTO purchases (order_id, player_id, product_id, kind, token_hash, period_start, period_end, granted_at, fulfillment, entitlement_state, entitlement_checked_at) VALUES (?1, ?2, ?3, 'subscription', ?4, ?5, ?6, ?7, ?8, ?9, ?7)").bind(orderId, playerId, product.product_id, th, periodStart, periodEnd, now.toISOString(), fulfillment, s.state),
-      ...(await grantStatements(db, playerId, cfg.instant, { keyPrefix: `iap:${orderId}:instant`, reason: `subscription:${product.product_id}` })),
+      ...(await grantStatements(db, playerId, cfg.instant, { keyPrefix: `iap:${orderId}:instant`, reason: `subscription:${product.product_id}`, catalog: Fulfillment.parse(JSON.parse(fulfillment)).grantCatalog })),
       event(db, source, orderId, 'period_granted', { productId: product.product_id, periodEnd }),
       db.prepare('DELETE FROM tx_guard')
     ], recovery);
@@ -244,7 +246,8 @@ export async function syncSubscriptionMail(db: D1Database, playerId: string, now
   let created = 0;
   for (const r of results) {
     if (!r.fulfillment) continue; // legacy terms are unknown; never invent them from a later catalog edit
-    const cfg = Fulfillment.parse(JSON.parse(r.fulfillment)).subscription!;
+    const terms = Fulfillment.parse(JSON.parse(r.fulfillment));
+    const cfg = terms.subscription!;
     const every = cfg.periodic.every_hours * 3_600_000;
     const start = Date.parse(r.period_start);
     const due = Math.min(cfg.periodic.count, Math.ceil((Date.parse(r.period_end) - start) / every), Math.floor((now.getTime() - start) / every) + 1);
@@ -252,7 +255,7 @@ export async function syncSubscriptionMail(db: D1Database, playerId: string, now
     const batch: D1PreparedStatement[] = [];
     for (let k = first; k <= due; k++) {
       const at = new Date(Date.parse(r.period_start) + (k - 1) * every);
-      batch.push(prepareMail(db, playerId, { kind: 'subscription', title: cfg.periodic.mail_title, body: `Offering ${k} of ${cfg.periodic.count}`, attachments: cfg.periodic.attachments, expiresInDays: cfg.periodic.claim_days, sourceKey: `sub:${r.order_id}:hd:${k}` }, 'system:subscription', at));
+      batch.push(prepareMail(db, playerId, { kind: 'subscription', title: cfg.periodic.mail_title, body: `Offering ${k} of ${cfg.periodic.count}`, attachments: cfg.periodic.attachments, expiresInDays: cfg.periodic.claim_days, sourceKey: `sub:${r.order_id}:hd:${k}` }, 'system:subscription', at, terms.grantCatalog));
     }
     if (batch.length) created += (await db.batch(batch)).reduce((n, result) => n + result.meta.changes, 0);
   }

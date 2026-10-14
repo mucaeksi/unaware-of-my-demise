@@ -1,6 +1,6 @@
-# Content release contract — R08-A
+# Content release contract — R08
 
-New server publications are signed, self-contained snapshots. This completes the dependency/compatibility prerequisite of R08; the versioned economic catalog, full grammar, storage budgets and key rotation remain open.
+New server publications are signed, self-contained snapshots. Catalog activation, finite grammar, capabilities, trust and bounded delivery are specified in [R08_CONTENT_RUNTIME.md](R08_CONTENT_RUNTIME.md). Local evidence and native/deployed acceptance remain separate.
 
 ## Authoring and composition
 
@@ -10,7 +10,7 @@ Composition can therefore start from a previous patch without requiring that int
 
 The final set, including inherited files, is limited to 512 paths. Hash metadata reads deduplicate and chunk at 100 D1 parameters. Duplicate supplied paths, missing objects, incompatible channels, empty client ranges and oversized effective sets fail before draft/file/audit writes. Publication revalidates content and checks that the D1 file index matches the manifest before signing. Existing role, generation, transactional pointer/audit and economic-policy fences remain in effect.
 
-Compatibility is the intersection of the requested and source client ranges, with the higher content-schema requirement. A composition cannot lower a source minimum, raise its maximum or lower its schema requirement. The Control Center release list displays the effective bounds and schema before publication.
+Compatibility is the intersection of the requested and source client ranges, with the higher content-schema requirement and union of source/derived required capabilities. A composition cannot lower a source minimum, raise its maximum or lower its schema requirement. The Control Center release list displays the effective bounds and schema before publication.
 
 ```bash
 npx tsx tools/publish_release.ts --admin "$UOMD_ADMIN_URL" \
@@ -23,7 +23,7 @@ Use existing Access credentials through the supported environment variables. Omi
 
 ## Binary boundary and device reads
 
-Client 0.1.1 is the first binary with the corrected snapshot read contract. The game package and Android default version name are 0.1.1; actual signed versionCode/environment/device acceptance remains R11/R18. New server snapshots and offline root manifests require at least 0.1.1 even if a caller requests a lower minimum. Existing 0.1.0 binaries reject them before object download; this requires a new AAB, rather than a data patch to the older reader.
+Client 0.1.1 is the first binary with the corrected snapshot read contract. The game package and Android default version name are now 0.1.2; catalog/presentation/locale/animation/flag features require that new binary and signed capabilities; actual signed versionCode/environment/device acceptance remains R11/R18. New server snapshots and offline root manifests require at least 0.1.1 even if a caller requests a lower minimum. Existing 0.1.0 binaries reject them before object download; this requires a new AAB, rather than a data patch to the older reader.
 
 For an active snapshot, every readable path must appear in its signed manifest. Device semantic validation uses that exact set. Embedded bytes can satisfy a declared file only when its path and hash match, avoiding a redundant download and the previous false-corruption rollback. Hash checks still apply. Legacy dependent manifests retain the exact embedded release ID/generation admission check and may inherit that base's omitted paths. Previous/staged state and generation high-water behavior remain intact.
 
@@ -31,18 +31,18 @@ For an active snapshot, every readable path must appear in its signed manifest. 
 
 Published historical chains remain readable on the server. Resolution checks manifest/row identity, channel, generation and dependency metadata, rejects missing/cyclic/incoherent chains, and explicitly rejects a ninth layer instead of silently truncating. Legacy dependent drafts must be recreated through composition (`draft_needs_rebuild`); they are not rewritten in place or signed as unsupported chains.
 
-Rollback publishes a higher-generation complete snapshot, revalidates its effective content and retains the source maximum and content schema. Its minimum is retained or tightened to 0.1.1. A legacy maximum below this floor rejects rollback before new rows are written; publish a reviewed compatible snapshot instead.
+Rollback publishes a higher-generation complete snapshot, revalidates its effective content and retains the source maximum and content schema. Its minimum is retained or tightened to 0.1.1 for plain snapshots, or 0.1.2 when the new primitives/catalog are present. Source capabilities are retained and unioned with derived requirements. A legacy maximum below this floor rejects rollback before new rows are written; publish a reviewed compatible snapshot instead.
 
 Kill also publishes a higher generation and retains the source compatibility exactly, including a legacy 0.1.0 range. Clients process kill before reading its files, so older compatible binaries can still be disabled. Semantic validation is intentionally bypassed for kill so broken gameplay JSON cannot prevent emergency disablement; structural chain/object-index checks still apply. A kill's source range must cover the intended recipients. The existing economic-floor cutover remains independent of client adoption.
 
 Existing frozen battle/rule/party records are not migrated or rebuilt. New source changes do not claim acceptance for an unchanged old AAB, a deployed Worker or a signed device build.
 
-## Catalog staging
+## Catalog publication and evidence
 
-R08-B1 adds an optional [catalog snapshot](CATALOG_SNAPSHOT.md) at `catalog/economy.json` with strict shared reference validation and admin/CLI export. Such drafts cannot publish or become rollback targets until release-scoped economic activation is implemented. Legacy catalog-free releases retain the R08-A publication path. R08-B2a binds the dormant battle path to the exact catalog while retaining atomic authority and original-result recovery; B2b1 supplies the D1 identity bridge and selected recruit/growth/views; B2b2 binds gear/gacha and extends the isolated declared-only lifecycle through equip/summon/fight. The remaining signup/team/task/other grant contexts and compatible reader floor must migrate before activation.
+The optional [catalog snapshot](CATALOG_SNAPSHOT.md) at `catalog/economy.json` now publishes and rolls back through normal signing/atomic authority after closed validation. Signup, teams, task claims and earned/paid grants use selected or frozen definitions alongside battle/recruit/growth/gear/gacha. Client 0.1.2 and derived signed capabilities replace the temporary activation block. Catalog-free historical publications retain their explicit legacy contract.
 
-## Verification and remaining scope
+Dated evidence is in [DEV_TRACKER.json](DEV_TRACKER.json). Public local draft/publish and unchanged-browser-binary tests exercise synthetic declared-only identities and media without definition-table materialization. This does not establish native/deployed acceptance, final balance, production media or R09 account-scoped Continue/resume.
 
-The R08-A evidence record in [DEV_TRACKER.json](DEV_TRACKER.json) records actual checks and source revision. Tests cover composed publications through the real patch manager, compatibility inheritance and rollback/kill, legacy admission and depth, the effective 512-file limit, signed/index agreement and snapshot-versus-overlay validation. Browser checks use actual local game/admin Workers and desktop/touch-phone clients.
+## Current R08 limits
 
-Next: finish signup/team/task/non-battle-grant contexts, remaining metadata/history/support contracts and the compatible reader floor before public catalog activation. The isolated declared-only recruit → grow → equip → summon → fight path is locally exercised; this snapshot contract does not version the editable authoring tables or prove device/deployed acceptance. Full admitted-JSON grammar/capabilities, key rotation/revocation, IndexedDB transaction completion, retained-byte/quota accounting, media deadlines/cancellation and cache cleanup remain R08 work.
+Every JSON kind now receives closed semantic validation, including unlinked story/encounters; unknown documents fail. Worker validation bounds reads to 1 MiB/JSON and 8 MiB aggregate and checks media existence/size. The complete 512-path/200 MiB release, compiled trust policy, IDB/reservation/range/timeout/network/cache contracts and native evidence boundaries are in [the runtime contract](R08_CONTENT_RUNTIME.md).

@@ -41,7 +41,7 @@ function SnapshotExport(): ReactNode {
   };
   return <section className="card catalog-export" aria-labelledby="catalog-export-title">
     <h3 id="catalog-export-title">Catalog snapshot for a content draft</h3>
-    <p>Export one validated copy of the current character, skill, item, gear, banner and rule definitions. Save it as <code>catalog/economy.json</code> in a complete content draft. Catalog release activation is unavailable until game operations use the same version; live rules still use the editable tables.</p>
+    <p>Export one validated copy of the current character, skill, item, gear, banner and rule definitions. Save it as <code>catalog/economy.json</code> in a complete content draft. Publication signs this snapshot for compatible clients (0.1.2 or later). Game operations use the selected release; later edits affect future drafts.</p>
     <button className="btn primary" disabled={busy} onClick={() => void download()}>{busy ? 'Preparing snapshot…' : 'Export catalog snapshot'}</button>
     {error ? <div role="alert"><p>{error}</p><button className="btn" onClick={() => void download()}>Retry export</button></div> : null}
     {result ? <div role="status"><p>Snapshot exported · {result.bytes.toLocaleString('en-US')} bytes</p><p>{Object.entries(result.counts).map(([key, count]) => `${key}: ${count}`).join(' · ')}</p><p>SHA-256: <code>{result.sha256}</code></p></div> : null}

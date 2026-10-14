@@ -25,7 +25,7 @@ export const UnitArt = z
     height_px: z.number().min(40).max(900),
     states: z.record(
       z.enum(UNIT_ANIM_STATES),
-      z.object({ frame: z.string(), scale: z.number().min(0.2).max(3), foot_y: z.number().min(0.5).max(1), pivot_x: z.number().min(0).max(1).default(0.5) }).strict()
+      z.object({ frame: z.string(), scale: z.number().min(0.2).max(3), foot_y: z.number().min(0.5).max(1), animation: z.object({ frames: z.array(z.string().min(1).max(40)).min(1).max(60), fps: z.number().int().min(1).max(30), loop: z.boolean() }).strict().optional(), pivot_x: z.number().min(0).max(1).default(0.5) }).strict()
     )
   })
   .strict();
@@ -37,7 +37,7 @@ export const ArtManifest = z
     units: z.record(Id, UnitArt),
     portraits: z.record(Id, z.object({ emotions: z.record(z.string(), Id), images: z.record(Id, SafeAssetPath) }).strict()),
     backgrounds: z.record(Id, SafeAssetPath),
-    music: z.record(Id, z.object({ file: SafeAssetPath, loop_start_s: z.number().min(0), duration_s: z.number().positive() }).strict()).default({}),
+    music: z.record(Id, z.object({ file: SafeAssetPath, loop_start_s: z.number().min(0), duration_s: z.number().positive().max(180) }).strict()).default({}),
     ui: z.record(Id, SafeAssetPath).default({}),
     /**
      * Full-frame story art that is loaded on demand, never at boot: the prologue plates (`prologue_<scene id>`, optional family fallback
@@ -48,6 +48,7 @@ export const ArtManifest = z
   })
   .strict()
   .superRefine((art, ctx) => {
+    for (const [id, atlas] of Object.entries(art.atlases)) for (const [name, [x, y, w, h]] of Object.entries(atlas.frames)) if (x + w > atlas.width || y + h > atlas.height) ctx.addIssue({ code: 'custom', message: `atlas ${id}/${name} exceeds texture bounds` });
     for (const [key, u] of Object.entries(art.units)) {
       const atlas = art.atlases[u.atlas];
       if (!atlas) {
@@ -55,6 +56,7 @@ export const ArtManifest = z
         continue;
       }
       for (const [st, s] of Object.entries(u.states)) {
+        for (const frame of s.animation?.frames ?? []) if (!Object.hasOwn(atlas.frames, frame)) ctx.addIssue({ code: 'custom', message: `animation names unknown frame ${frame}` });
         if (!atlas.frames[s.frame]) ctx.addIssue({ code: 'custom', path: ['units', key, 'states', st], message: `unknown frame ${s.frame}` });
       }
       if (!u.states.idle) ctx.addIssue({ code: 'custom', path: ['units', key], message: 'idle state is required' });

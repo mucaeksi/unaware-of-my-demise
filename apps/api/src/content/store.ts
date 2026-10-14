@@ -1,4 +1,4 @@
-import { CATALOG_PATH, ContentManifest, ContentValidationError, MIN_SNAPSHOT_CLIENT_VERSION, validateContentSet, type Channel } from '@uomd/content-schema';
+import { ContentManifest, ContentValidationError, MAX_JSON_FILE_BYTES, MAX_JSON_TOTAL_BYTES, MAX_RELEASE_BYTES, MIN_EFFECTIVE_CLIENT_VERSION, requiredContentCapabilities, ShopSchedule, MIN_SNAPSHOT_CLIENT_VERSION, validateContentSet, type Channel } from '@uomd/content-schema';
 import { manifestFromEntries, signManifest, type FileEntry } from '@uomd/patch';
 import { compareSemver, importPrivateKey, sha256Hex } from '@uomd/shared';
 import { auditStatement } from '../db/audit';
@@ -78,8 +78,8 @@ export class ContentStore {
     return row !== null;
   }
 
-  async getObject(sha256: string): Promise<R2ObjectBody | null> {
-    return this.bucket.get(ContentStore.objectKey(sha256));
+  async getObject(sha256: string, offset?: number): Promise<R2ObjectBody | null> {
+    return this.bucket.get(ContentStore.objectKey(sha256), offset === undefined ? {} : { range: { offset } });
   }
 
   // ------------------------------------------------------------------ queries
@@ -143,19 +143,33 @@ export class ContentStore {
   async readText(sha256: string): Promise<Uint8Array> {
     const obj = await this.getObject(sha256);
     if (!obj) throw new HttpError(404, 'object_missing', `object ${sha256.slice(0, 8)} is not in storage`);
-    return new Uint8Array(await obj.arrayBuffer());
+    if (obj.size > MAX_JSON_FILE_BYTES) throw new HttpError(413, 'json_budget', 'JSON object exceeds the 1 MiB validation budget');
+    const bytes = new Uint8Array(await obj.arrayBuffer());
+    if (await sha256Hex(bytes) !== sha256) throw new HttpError(422, 'hash_mismatch', 'stored JSON object no longer matches its hash');
+    return bytes;
   }
 
   /** Effective path->bytes map for semantic validation (JSON is read, other media only needs to exist). */
   private async effectiveSet(files: Map<string, string>): Promise<Map<string, Uint8Array>> {
     const set = new Map<string, Uint8Array>();
-    for (const [path, sha] of files) set.set(path, path.endsWith('.json') ? await this.readText(sha) : EMPTY);
+    const entries = await this.fileEntries(files);
+    const json = entries.filter((e) => e.path.endsWith('.json'));
+    if (entries.reduce((n, e) => n + e.bytes, 0) > MAX_RELEASE_BYTES || json.some((e) => e.bytes > MAX_JSON_FILE_BYTES) || json.reduce((n, e) => n + e.bytes, 0) > MAX_JSON_TOTAL_BYTES) throw new HttpError(413, 'resource_budget', 'release exceeds the validation resource budget');
+    // HEAD every object before admission; a stale D1 upload row does not prove media exists.
+    for (const entry of entries) {
+      if (entry.path.endsWith('.json')) set.set(entry.path, await this.readText(entry.sha256));
+      else { const object = await this.bucket.head(ContentStore.objectKey(entry.sha256)); if (!object || object.size !== entry.bytes) throw new HttpError(422, 'object_missing', `missing or truncated media ${entry.path}`); set.set(entry.path, EMPTY); }
+    }
     return set;
   }
 
-  private async validate(files: Map<string, string>): Promise<void> {
+  private async validate(files: Map<string, string>): Promise<string[]> {
     try {
-      validateContentSet(await this.effectiveSet(files));
+      const set = await this.effectiveSet(files);
+      validateContentSet(set);
+      const shop = set.get('schedules/shop.json');
+      if (shop) for (const offer of ShopSchedule.parse(JSON.parse(new TextDecoder().decode(shop))).offers) if (!await this.db.prepare('SELECT 1 AS x FROM shop_products WHERE product_id = ?1').bind(offer.product_id).first()) throw new HttpError(422, 'content_invalid', `unknown scheduled product ${offer.product_id}`);
+      return requiredContentCapabilities(set);
     } catch (e) {
       if (e instanceof ContentValidationError) throw new HttpError(422, 'content_invalid', e.message, e.problems);
       throw e;
@@ -199,12 +213,14 @@ export class ContentStore {
 
     if (new Set(input.files.map((f) => f.path)).size !== input.files.length) throw new HttpError(400, 'duplicate_path', 'supplied files contain duplicate paths');
     let minClient = compareSemver(input.minClient, MIN_SNAPSHOT_CLIENT_VERSION) < 0 ? MIN_SNAPSHOT_CLIENT_VERSION : input.minClient;
+    let inheritedCapabilities: string[] = [];
     let maxClient = input.maxClient;
     let contentSchema = input.contentSchema ?? 1;
     if (input.dependsOn) {
       const dep = await this.getRelease(input.dependsOn);
       if (!dep || dep.state !== 'published' || dep.channel !== input.channel) throw new HttpError(409, 'bad_dependency', `dependency ${input.dependsOn} must be a published release on ${input.channel}`);
       const compat = ContentManifest.parse(JSON.parse(dep.manifest_json)).compat;
+      inheritedCapabilities = compat.required_capabilities ?? [];
       if (compareSemver(minClient, compat.min_client) < 0) minClient = compat.min_client;
       if (compat.max_client && (!maxClient || compareSemver(maxClient, compat.max_client) > 0)) maxClient = compat.max_client;
       contentSchema = Math.max(contentSchema, compat.content_schema);
@@ -213,7 +229,9 @@ export class ContentStore {
     const effective = input.dependsOn ? await this.effectiveFiles(input.dependsOn) : new Map<string, string>();
     for (const f of input.files) effective.set(f.path, f.sha256);
     const entries = await this.fileEntries(effective);
-    await this.validate(effective);
+    const requiredCapabilities = [...new Set([...inheritedCapabilities, ...await this.validate(effective)])].sort();
+    if (requiredCapabilities.length && compareSemver(minClient, MIN_EFFECTIVE_CLIENT_VERSION) < 0) minClient = MIN_EFFECTIVE_CLIENT_VERSION;
+    if (maxClient && compareSemver(minClient, maxClient) > 0) throw new HttpError(400, 'bad_compat', 'client compatibility range is empty');
 
     const gen = await this.db.prepare('SELECT COALESCE(MAX(generation), 0) + 1 AS g FROM content_releases WHERE channel = ?1').bind(input.channel).first<{ g: number }>();
     const generation = gen?.g ?? 1;
@@ -226,6 +244,7 @@ export class ContentStore {
         minClient,
         maxClient,
         contentSchema,
+        requiredCapabilities,
         rolloutPercent: input.rolloutPercent ?? 100
       },
       entries
@@ -254,10 +273,11 @@ export class ContentStore {
     if (row.channel === 'production' && role !== 'owner') throw new HttpError(403, 'owner_required', 'publishing to production needs the owner role');
     if (row.depends_on) throw new HttpError(409, 'draft_needs_rebuild', 'recreate this legacy dependent draft to publish a self-contained snapshot');
     const files = await this.effectiveFiles(id);
-    await this.validate(files);
-    if (files.has(CATALOG_PATH)) throw new HttpError(409, 'catalog_activation_unavailable', 'catalog snapshots can be staged; release-scoped economic activation is not available yet');
+    const discovered = await this.validate(files);
     const { signature: _drop, ...unsigned } = JSON.parse(row.manifest_json) as ContentManifest;
     if (unsigned.files.length !== files.size || unsigned.files.some((f) => files.get(f.path) !== f.sha256)) throw new HttpError(409, 'manifest_mismatch', 'draft file index differs from its manifest; recreate the draft');
+    const requiredCapabilities = [...new Set([...(unsigned.compat.required_capabilities ?? []), ...discovered])].sort();
+    if (requiredCapabilities.length && (compareSemver(unsigned.compat.min_client, MIN_EFFECTIVE_CLIENT_VERSION) < 0 || JSON.stringify(unsigned.compat.required_capabilities) !== JSON.stringify(requiredCapabilities))) throw new HttpError(409, 'draft_needs_rebuild', 'recreate this draft with current capability and client compatibility declarations');
     const signed = await signManifest(ContentManifest.parse(unsigned), signer.key, signer.kid);
     return this.activate(row, signed, actor, 'release.publish');
   }
@@ -313,9 +333,9 @@ export class ContentStore {
     const files = await this.effectiveFiles(src.id);
     const entries = await this.fileEntries(files);
     // A kill must remain available even when the current release fails semantic validation.
-    if (opts.mode === 'rollback' && files.has(CATALOG_PATH)) throw new HttpError(409, 'catalog_activation_unavailable', 'catalog economic activation is not available yet');
-    if (opts.mode === 'rollback') await this.validate(files);
-    const minClient = opts.mode === 'rollback' && compareSemver(srcManifest.compat.min_client, MIN_SNAPSHOT_CLIENT_VERSION) < 0 ? MIN_SNAPSHOT_CLIENT_VERSION : srcManifest.compat.min_client;
+    const requiredCapabilities = opts.mode === 'rollback' ? [...new Set([...(srcManifest.compat.required_capabilities ?? []), ...await this.validate(files)])].sort() : srcManifest.compat.required_capabilities;
+    const floor = requiredCapabilities?.length ? MIN_EFFECTIVE_CLIENT_VERSION : MIN_SNAPSHOT_CLIENT_VERSION;
+    const minClient = opts.mode === 'rollback' && compareSemver(srcManifest.compat.min_client, floor) < 0 ? floor : srcManifest.compat.min_client;
     if (srcManifest.compat.max_client && compareSemver(minClient, srcManifest.compat.max_client) > 0) throw new HttpError(409, 'bad_compat', 'rollback source excludes snapshot-capable clients; publish a reviewed compatible snapshot');
     const gen = await this.db.prepare('SELECT COALESCE(MAX(generation), 0) + 1 AS g FROM content_releases WHERE channel = ?1').bind(opts.channel).first<{ g: number }>();
     const generation = gen?.g ?? src.generation + 1;
@@ -329,6 +349,7 @@ export class ContentStore {
         minClient,
         maxClient: srcManifest.compat.max_client,
         contentSchema: srcManifest.compat.content_schema,
+        requiredCapabilities,
         rollbackTo: { releaseId: src.id, generation: src.generation },
         killSwitch: opts.mode === 'kill',
         rolloutPercent: 100

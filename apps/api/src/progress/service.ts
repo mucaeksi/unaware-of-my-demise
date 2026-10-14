@@ -250,7 +250,7 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
     );
     // one-time rewards keep stable keys (first clear / three stars), repeat rewards are keyed by the request
     // task progress counts only Ration-consuming wins (canon eligibility), in the same atomic batch
-    if (cost > 0) batch.push(...(await taskEventStatements(db, playerId, { eligible_wins: 1, ...(node.boss ? { boss_wins: 1 } : {}), ...(stars === 3 ? { three_star_wins: 1 } : {}) }, nowMs, catalog?.data.config.tasks)));
+    if (cost > 0) batch.push(...(await taskEventStatements(db, playerId, { eligible_wins: 1, ...(node.boss ? { boss_wins: 1 } : {}), ...(stars === 3 ? { three_star_wins: 1 } : {}) }, nowMs, catalog?.data.config.tasks, catalog)));
     for (const g of grants) batch.push(...(await grantStatements(db, playerId, [g.a], { keyPrefix: g.key, reason: `stage:${input.nodeId}`, catalog })));
     batch.push(
       db.prepare('INSERT INTO battle_claims (player_id, request_id, release_id, node_id, result_json, input_json) VALUES (?1, ?2, ?3, ?4, ?5, ?6)').bind(playerId, input.requestId, input.releaseId, input.nodeId, JSON.stringify(outcome), canonicalJson(input)),

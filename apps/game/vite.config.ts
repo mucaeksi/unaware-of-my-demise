@@ -1,10 +1,13 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
+import { assertTrustedKeys } from '../../packages/shared/src/signing';
 
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as { version: string };
 
 const trustedKeys = process.env.UOMD_TRUSTED_KEYS ?? fileURLToPath(new URL('../../content/keys/trusted_public_keys.json', import.meta.url));
+
+assertTrustedKeys((JSON.parse(readFileSync(trustedKeys, 'utf8')) as { keys?: unknown }).keys);
 
 export default defineConfig({
   resolve: { alias: { '@uomd-trusted-keys': trustedKeys } },

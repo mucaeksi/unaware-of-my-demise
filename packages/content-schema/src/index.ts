@@ -10,3 +10,5 @@ export * from './rewards';
 export * from './tasks';
 export * from './library';
 export * from './catalog';
+
+export * from './presentation';

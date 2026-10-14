@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { StoryRunner, type StoryEvent } from '@uomd/story';
 import type { StoryCommand, StoryScene as StoryData } from '@uomd/content-schema';
 import { REF_H, REF_W } from '../config';
+import { NarrativeStage } from '../presentation/NarrativeStage';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { prefs } from '../platform/prefs';
@@ -44,6 +45,9 @@ interface Actor {
 
 export class StoryScene extends Phaser.Scene {
   private generation = 0;
+  private stage: NarrativeStage | null = null;
+  private voiceBtn: Button | null = null;
+  private currentView: () => boolean = () => false;
   private init0!: StoryInit;
   private data0!: StoryData;
   private runner!: StoryRunner;
@@ -81,6 +85,8 @@ export class StoryScene extends Phaser.Scene {
 
   init(data: StoryInit): void {
     this.generation++;
+    this.stage = null;
+    this.voiceBtn = null;
     this.init0 = data;
     this.actors = new Map();
     this.finished = false;
@@ -102,7 +108,8 @@ export class StoryScene extends Phaser.Scene {
   async create(): Promise<void> {
     const generation = this.generation;
     const current = (): boolean => generation === this.generation && (this.init0.authRevision === undefined || this.init0.authRevision === Services.api.authRevision);
-    const accountChanged = (): void => { if (!current() && this.sys.isActive()) this.init0.onBack?.(this); };
+    this.currentView = current;
+    const accountChanged = (): void => { if (!current() && (this.sys.isActive() || this.sys.isPaused())) this.init0.onBack?.(this); };
     if (this.init0.authRevision !== undefined) Services.api.addEventListener('auth', accountChanged);
     this.events.once('shutdown', () => { this.generation++; Services.api.removeEventListener('auth', accountChanged); });
     const { content, art } = Services.ready();
@@ -115,15 +122,20 @@ export class StoryScene extends Phaser.Scene {
       this.auto = this.data0.presentation?.auto ?? false;
       const lastLine = [...this.data0.commands].reverse().find((c): c is Extract<StoryCommand, { op: 'say' | 'narrate' }> => c.op === 'say' || c.op === 'narrate');
       this.lastLineId = lastLine?.line_id ?? null;
+      const [profile, locale] = await Promise.all([content.presentation(), content.locale()]);
+      if (!current()) return;
+      this.stage = new NarrativeStage(this, content, art.art, profile, locale);
       const chars = new Set<string>();
+      const locations = new Set([this.data0.location_id]);
       const cues = new Set<string>();
       for (const c of this.data0.commands) {
+        if (c.op === 'background') locations.add(c.location_id);
         if (c.op === 'show') chars.add(c.character);
         if (c.op === 'say') chars.add(c.speaker);
         if (c.op === 'music' && c.cue_id !== 'stop') cues.add(c.cue_id);
       }
       await Promise.all([
-        art.loadBackground(this, this.data0.location_id),
+        ...[...locations].map((id) => art.loadBackground(this, id)),
         this.data0.illustration_id ? art.loadStills(this, [this.data0.illustration_id]).catch(() => undefined) : Promise.resolve(),
         art.loadPortraits(this, [...chars]),
         ...[...cues].map((q) => art.loadMusic(this, q))
@@ -141,6 +153,7 @@ export class StoryScene extends Phaser.Scene {
   }
 
   private fail(e: unknown): void {
+    this.finished = true; this.stage?.destroy(); this.autoTimer?.remove(); this.typing?.remove();
     title(this, REF_W / 2, REF_H / 2 - 40, 'This scene could not be loaded', SIZE.h2, T.crimson);
     txt(this, REF_W / 2, REF_H / 2 + 30, String(e instanceof Error ? e.message : e), { fontSize: `${SIZE.small}px`, color: T.dim, align: 'center', wordWrap: { width: 1400 } }).setOrigin(0.5);
     new Button(this, REF_W / 2, REF_H / 2 + 200, { label: 'BACK', w: 360, onClick: () => this.init0.onBack ? this.init0.onBack(this) : this.scene.start('Title') });
@@ -182,6 +195,7 @@ export class StoryScene extends Phaser.Scene {
     this.caret = txt(this, 770, 86, '▼', { fontSize: '32px', color: T.gold }).setOrigin(1, 0.5).setVisible(false);
     this.box = this.add.container(REF_W / 2, 902, [panelBg, this.bodyText, this.caret]).setDepth(DEPTH.hud);
 
+    this.voiceBtn = new Button(this, REF_W - 160, 210, { label: 'VOICE', w: 240, h: 110, fontSize: 28, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }).setDepth(DEPTH.hud + 3).setVisible(false);
     // cutscenes have no Skip and a single on/off Auto toggle (v006); the regular reader keeps Skip
     if (!this.cutscene) this.skipBtn = new Button(this, REF_W - 150, 70, { label: 'SKIP', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
     const rightEdge = this.cutscene ? REF_W - 150 : REF_W - 400;
@@ -195,6 +209,7 @@ export class StoryScene extends Phaser.Scene {
   // ------------------------------------------------------------------ program flow
 
   private pump(): void {
+    if (this.finished || !this.currentView()) return;
     for (;;) {
       const e = this.runner.next();
       if (!e) {
@@ -209,6 +224,12 @@ export class StoryScene extends Phaser.Scene {
   private apply(e: StoryEvent): boolean {
     const { art } = Services.ready();
     switch (e.type) {
+      case 'presentation': {
+        const generation = this.generation;
+        this.waiting = false;
+        void this.stage?.execute(e.command).then(() => { if (generation === this.generation && this.currentView()) this.pump(); }).catch((error: unknown) => { if (generation === this.generation && this.currentView()) this.fail(error); });
+        return true;
+      }
       case 'background': {
         // single-location scenes today; a location swap cross-fades the background
         const key = art.background(e.locationId);
@@ -241,6 +262,8 @@ export class StoryScene extends Phaser.Scene {
         this.hideActor(e.character);
         return false;
       case 'checkpoint':
+        // One bounded checkpoint per reader/account revision. R09 owns the resume flow.
+        try { sessionStorage.setItem('uomd.story.checkpoint.v1', JSON.stringify({ path: this.init0.path, authRevision: Services.api.authRevision, checkpointId: e.checkpointId, state: this.runner.save() })); } catch { /* optional local continuity */ }
         return false;
       case 'wait':
         this.time.delayedCall(e.seconds * 1000, () => this.pump());
@@ -316,6 +339,8 @@ export class StoryScene extends Phaser.Scene {
 
   private showLine(e: Extract<StoryEvent, { type: 'line' }>): void {
     this.currentLine = e;
+    this.voiceBtn?.setVisible(this.stage?.hasVoice(e.lineId) ?? false);
+    void this.stage?.voice(e.lineId);
     const narr = e.speaker === 'narration';
     const pause = this.cutscene ? cutscenePauseSeconds(this.prevSpeaker, e.speaker, this.data0.presentation?.speaker_pause_seconds ?? 1) : 0;
     this.prevSpeaker = e.speaker;
@@ -323,7 +348,7 @@ export class StoryScene extends Phaser.Scene {
     this.focusSpeaker(narr ? '' : e.speaker, e.emotion, pause > CUTSCENE.sameSpeakerPauseSeconds ? CUTSCENE.dissolveSeconds * 1000 : 220);
     this.namePlate.setVisible(false);
     this.bodyText.setStyle({ fontStyle: narr ? 'italic' : 'normal', color: narr ? '#cfc4dd' : T.text });
-    this.fullText = this.bodyText.getWrappedText(e.text).join('\n');
+    this.fullText = this.bodyText.getWrappedText(this.stage?.text(e.lineId, e.text) ?? e.text).join('\n');
     this.bodyText.setText('');
     this.caret.setVisible(false);
     this.lineDone = false;
@@ -453,7 +478,7 @@ export class StoryScene extends Phaser.Scene {
     let y = 270;
     for (const l of lines) {
       const who = l.speaker === 'narration' ? '' : `${l.speakerDisplay.toUpperCase()}  `;
-      const t = txt(this, 290, y, `${who}${l.text}`, { fontSize: '32px', color: l.speaker === 'narration' ? '#b9aecb' : T.text, wordWrap: { width: 1340 } });
+      const t = txt(this, 290, y, `${who}${this.stage?.text(l.lineId, l.text) ?? l.text}`, { fontSize: '32px', color: l.speaker === 'narration' ? '#b9aecb' : T.text, wordWrap: { width: 1340 } });
       items.push(t);
       y += t.height + 22;
     }

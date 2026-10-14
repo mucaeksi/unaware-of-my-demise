@@ -1,5 +1,5 @@
-import { ContentManifest, MEDIA_TYPE_BY_EXTENSION, type AllowedExtension, type Channel, type FileKind } from '@uomd/content-schema';
-import { sha256Hex, signPayload, type SignedPayload } from '@uomd/shared';
+import { ContentManifest, MIN_EFFECTIVE_CLIENT_VERSION, requiredContentCapabilities, MEDIA_TYPE_BY_EXTENSION, type AllowedExtension, type Channel, type FileKind } from '@uomd/content-schema';
+import { compareSemver, sha256Hex, signPayload, type SignedPayload } from '@uomd/shared';
 
 export interface ReleaseMeta {
   releaseId: string;
@@ -8,6 +8,7 @@ export interface ReleaseMeta {
   notes: string;
   minClient: string;
   maxClient?: string;
+  requiredCapabilities?: string[];
   contentSchema?: number;
   dependsOn?: { releaseId: string; generation: number };
   rollbackTo?: { releaseId: string; generation: number };
@@ -46,7 +47,7 @@ export function manifestFromEntries(meta: ReleaseMeta, files: readonly FileEntry
   const manifest = {
     schema_version: 1,
     release: { id: meta.releaseId, generation: meta.generation, channel: meta.channel, created_at: meta.createdAt ?? new Date().toISOString(), notes: meta.notes },
-    compat: { min_client: meta.minClient, ...(meta.maxClient ? { max_client: meta.maxClient } : {}), content_schema: meta.contentSchema ?? 1 },
+    compat: { min_client: meta.minClient, ...(meta.requiredCapabilities?.length ? { required_capabilities: meta.requiredCapabilities } : {}), ...(meta.maxClient ? { max_client: meta.maxClient } : {}), content_schema: meta.contentSchema ?? 1 },
     ...(meta.dependsOn ? { depends_on: { release_id: meta.dependsOn.releaseId, generation: meta.dependsOn.generation } } : {}),
     ...(meta.rollbackTo ? { rollback_to: { release_id: meta.rollbackTo.releaseId, generation: meta.rollbackTo.generation } } : {}),
     rollout: { percent: meta.rolloutPercent ?? 100, kill_switch: meta.killSwitch ?? false },
@@ -59,7 +60,9 @@ export function manifestFromEntries(meta: ReleaseMeta, files: readonly FileEntry
 export async function buildManifest(meta: ReleaseMeta, files: { path: string; bytes: Uint8Array }[]): Promise<ContentManifest> {
   const entries: FileEntry[] = [];
   for (const f of files) entries.push({ path: f.path, sha256: await sha256Hex(f.bytes), bytes: f.bytes.byteLength });
-  return manifestFromEntries(meta, entries);
+  const requiredCapabilities = [...new Set([...(meta.requiredCapabilities ?? []), ...requiredContentCapabilities(new Map(files.map((f) => [f.path, f.bytes])))])].sort();
+  const minClient = requiredCapabilities.length && compareSemver(meta.minClient, MIN_EFFECTIVE_CLIENT_VERSION) < 0 ? MIN_EFFECTIVE_CLIENT_VERSION : meta.minClient;
+  return manifestFromEntries({ ...meta, minClient, requiredCapabilities }, entries);
 }
 
 export async function signManifest(manifest: ContentManifest, privateKey: CryptoKey, kid: string): Promise<ContentManifest> {

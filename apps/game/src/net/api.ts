@@ -108,6 +108,7 @@ export interface CharacterView {
   skills: SkillView[];
 }
 export interface GearView {
+  unavailableReason?: string;
   id: number;
   gearId: string;
   slot: 'weapon' | 'armor' | 'necklace' | 'ring';
@@ -121,6 +122,7 @@ export interface GearView {
   passive: { name: string; text?: string; supported?: boolean } | null;
 }
 export interface TaskView {
+  rewardNames?: Record<string, string>;
   id: string;
   title: string;
   objective: { type: string; count: number };
@@ -131,11 +133,12 @@ export interface TaskView {
 }
 export interface TasksResponse {
   serverTimeMs: number;
-  daily: null | { periodKey: string; endsAtMs: number; tasks: TaskView[]; completion: { ready: boolean; claimed: boolean; rewards: Attachment[] } };
+  daily: null | { periodKey: string; endsAtMs: number; tasks: TaskView[]; completion: { ready: boolean; claimed: boolean; rewards: Attachment[]; rewardNames?: Record<string, string> } };
   weekly: (TaskView & { periodKey: string; endsAtMs: number; running: boolean })[];
 }
 
 export interface MailItem {
+  names?: Record<string, string>;
   id: number;
   kind: string;
   title: string;
@@ -396,7 +399,7 @@ export class GameApi extends EventTarget {
         || operation.path.endsWith('/reroll') && !Array.isArray(value.stats?.subs)
         || operation.path.endsWith('/dismantle') && !Array.isArray(value.gained))
       || operation.path.startsWith('/api/v1/mail/') && (value.requestId !== operation.id || value.mailId !== Number(operation.path.split('/')[4]) || !Array.isArray(value.claimed))
-      || operation.path === '/api/v1/tasks/claim' && (value.requestId !== operation.id || value.taskId !== operation.body.taskId || value.periodKey !== operation.body.periodKey || !Array.isArray(value.rewards))
+      || operation.path === '/api/v1/tasks/claim' && (operation.body.releaseId !== undefined && value.releaseId !== operation.body.releaseId || value.requestId !== operation.id || value.taskId !== operation.body.taskId || value.periodKey !== operation.body.periodKey || !Array.isArray(value.rewards))
       || operation.path === '/api/v1/save' && (value.requestId !== operation.id || value.version !== Number(operation.body.expectedVersion) + 1)
       || operation.path === '/api/v1/entry' && (value.requestId !== operation.id || value.playerId !== JSON.parse(operation.scope)[1]
         || !['not_started', 'in_progress', 'completed'].includes(value.phase ?? '') || typeof value.prologue !== 'boolean' || !Number.isSafeInteger(value.tutorials)
@@ -474,14 +477,19 @@ export class GameApi extends EventTarget {
   claimMail(id: number): Promise<{ claimed: MailItem['attachments'] }> {
     return this.mutate(`/api/v1/mail/${id}/claim`, {});
   }
-  async products(): Promise<Product[]> {
-    return (await this.call<{ products: Product[] }>('GET', '/api/v1/shop/products', undefined, false)).products;
+  async products(releaseId?: string): Promise<Product[]> {
+    return (await this.call<{ products: Product[] }>('GET', `/api/v1/shop/products${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`, undefined, false)).products;
   }
   adStatus(): Promise<{ windowViews: number; perWindow: number; reward: number; nextSlotAt: string | null }> {
     return this.call('GET', '/api/v1/ads/status');
   }
   progress(): Promise<{ nodes: { node_id: string; stars: number; clears: number }[]; ration: { value: number; cap: number; nextMs: number } }> {
     return this.call('GET', '/api/v1/progress');
+  }
+  async panels(releaseId: string): Promise<{ releaseId: string; panelIds: string[]; serverTimeMs: number }> {
+    const data = await this.call<{ releaseId: string; panelIds: string[]; serverTimeMs: number }>('GET', `/api/v1/presentation/panels?releaseId=${encodeURIComponent(releaseId)}`);
+    if (data.releaseId !== releaseId || !Array.isArray(data.panelIds) || data.panelIds.length > 64 || data.panelIds.some((id) => typeof id !== 'string')) throw new ApiError(503, 'invalid_response', 'These notices could not be confirmed');
+    return data;
   }
   async library(releaseId: string): Promise<{ releaseId: string; entries: LibraryCard[] }> {
     const value = LibraryListing.safeParse(await this.call('GET', `/api/v1/library?releaseId=${encodeURIComponent(releaseId)}`));
@@ -527,14 +535,14 @@ export class GameApi extends EventTarget {
   teams(): Promise<{ teams: TeamPreset[] }> {
     return this.call('GET', '/api/v1/teams');
   }
-  saveTeam(slot: number, name: string, members: TeamMember[]): Promise<unknown> {
-    return this.call('PUT', `/api/v1/teams/${slot}`, { name, members });
+  saveTeam(slot: number, name: string, members: TeamMember[], releaseId?: string): Promise<unknown> {
+    return this.call('PUT', `/api/v1/teams/${slot}`, { name, members, ...(releaseId ? { releaseId } : {}) });
   }
-  activateTeam(slot: number): Promise<unknown> {
-    return this.call('POST', `/api/v1/teams/${slot}/activate`, {});
+  activateTeam(slot: number, releaseId?: string): Promise<unknown> {
+    return this.call('POST', `/api/v1/teams/${slot}/activate`, { ...(releaseId ? { releaseId } : {}) });
   }
-  deleteTeam(slot: number): Promise<unknown> {
-    return this.call('DELETE', `/api/v1/teams/${slot}`);
+  deleteTeam(slot: number, releaseId?: string): Promise<unknown> {
+    return this.call('DELETE', `/api/v1/teams/${slot}${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
   }
   readSave(): Promise<{ version: number; data: Record<string, unknown>; updatedAt: string | null }> {
     return this.call('GET', '/api/v1/save');
@@ -542,7 +550,7 @@ export class GameApi extends EventTarget {
   writeSave(expectedVersion: number, data: Record<string, unknown>): Promise<{ version: number }> {
     return this.mutate('/api/v1/save', { expectedVersion, data }, 'PUT');
   }
-  characters(releaseId?: string): Promise<{ account: { level: number; xp: number }; characters: CharacterView[] }> {
+  characters(releaseId?: string): Promise<{ account: { level: number; xp: number }; characters: CharacterView[]; unavailable?: { id: string; reason: string }[] }> {
     return this.call('GET', `/api/v1/characters/mine${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
   }
   levelUp(id: string, items: { itemId: string; quantity: number }[], releaseId?: string): Promise<{ level: number }> {
@@ -581,11 +589,11 @@ export class GameApi extends EventTarget {
   unequip(gearId: number, releaseId?: string): Promise<unknown> {
     return this.call('POST', `/api/v1/gear/${gearId}/unequip`, { ...(releaseId ? { releaseId } : {}) });
   }
-  tasks(): Promise<TasksResponse> {
-    return this.call('GET', '/api/v1/tasks');
+  tasks(releaseId?: string): Promise<TasksResponse> {
+    return this.call('GET', `/api/v1/tasks${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
   }
-  claimTask(periodKey: string, taskId: string): Promise<unknown> {
-    return this.mutate('/api/v1/tasks/claim', { periodKey, taskId });
+  claimTask(periodKey: string, taskId: string, releaseId?: string): Promise<unknown> {
+    return this.mutate('/api/v1/tasks/claim', { periodKey, taskId, ...(releaseId ? { releaseId } : {}) });
   }
   exportAccount(): Promise<Record<string, unknown>> {
     return this.call('GET', '/api/v1/account/export');

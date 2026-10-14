@@ -193,7 +193,7 @@ writeJson(`${OUT}/art/art_manifest.json`, Object.keys(stills).length ? compiledA
 
 // ---- validate as the publisher does: base overlaid with this patch -------------------------------------------------------------------
 const walk = (dir: string, rel = ''): string[] => readdirSync(join(dir, rel)).flatMap((n) => { const r = rel ? `${rel}/${n}` : n; return statSync(join(dir, r)).isDirectory() ? walk(dir, r) : [r]; });
-const load = (dir: string): Map<string, Uint8Array> => new Map(walk(dir).map((p) => [p, new Uint8Array(readFileSync(join(dir, p)))]));
+const load = (dir: string): Map<string, Uint8Array> => new Map(walk(dir).filter((p) => p !== 'release.json').map((p) => [p, new Uint8Array(readFileSync(join(dir, p)))]));
 const effective = load(join(ROOT, 'content/base'));
 for (const [k, v] of load(join(ROOT, OUT))) effective.set(k, v);
 const summary = validateContentSet(effective);

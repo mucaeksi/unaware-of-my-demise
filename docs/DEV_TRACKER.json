@@ -1,66 +1,62 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "c6de8d75269306deb14db0de3a700a0675aec45a",
+  "sourceCommit": "0f2f3f11403942ef4b58f8691f2f06e8699d4a03",
   "reviewedAt": "2026-10-14",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R08",
-    "status": "IN_PROGRESS",
-    "nextProposed": "R08-B2b3 signup/team/task/other grant contexts, support contracts and compatible reader floor",
-    "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
+    "status": "COMPLETE",
+    "nextProposed": "R09 — WAITING for Argon 4 / Antigravity handoff; not started by Codex",
+    "workflow": "Owner 2026-10-14: finish R08 and push, then reconcile README/handoff and push once more. Stop before R09. Argon 4 through Antigravity owns subsequent implementation, whole-game design, generated visuals, animation, QA, docs and GitHub delivery. No automatic runner or Argon session is established."
   },
   "now": [
     {
-      "title": "R08-B2b2 selected gear and gacha locally verified",
-      "detail": "Selected gear views/assignment/growth/reroll/dismantle and gacha disclosure/pools/costs/grants use the exact release catalog. Atomic economic and instance/pity/copy guards, stable ID registration, durable release-bound intent and original-result recovery preserve one spend/grant; history retains request provenance. Isolated declared-only fixtures recruit/grow/equip/summon/fight without global definition copies. All 872 tests, lint/types, campaign/game/admin builds, 46 adapters and desktop3/phone3 local browser cases pass with 26 migrations; screens inspected. No activation, numeric/canon tuning or deployed/signed-device acceptance. B2b3 covers remaining contexts and reader floor."
+      "title": "R08 source complete and locally verified; stop before R09",
+      "detail": "R08 source complete: exact versioned signup/team/growth/gear/gacha/task and grant contexts; migration 0027 freezes weekly terms and earned/paid grant subsets. Public signed catalog activation/rollback is enabled with same-environment/channel game-runtime/migration readiness, client 0.1.2 and derived capabilities. Closed presentation/voice/caption/video/locale/stage/camera/WebGL-mask/tween/flag/checkpoint/frame-animation/notice/calendar interpreters; compiled trust-root lifecycle; IDB v2 transaction completion, retained-byte leases/GC/quota, range resume/cancel/deadline/network consent, safe startup activation and owned bounded media caches. All 923 application/tool tests (API469/game97/combat93/schema123/economy44/patch41/shared24/story8/tools24), lint/typecheck, campaign/game/admin builds and 46 adapters pass. Final real local-Worker desktop8/touch-phone8 browser matrix passes with 27 migrations; screenshots inspected. Same built browser binary installs a public signed synthetic season, exercises declared-only recruitment/growth/equipment/team/summon/animated authoritative battle, locale/mask/video pause/no-Skip/decoder fallback/modal ordering and account-change cleanup; IDB v1-to-v2/abort-after-request-success/blocked-storage fallback, reload recovery, rollback/kill and title lifecycle also pass. Synthetic four/five-star identities clone existing numeric definitions/art; the legitimate four-or-better guarantee retains canonical rates. Earlier browser failures exposed real mask/modal/startup/decoder races, corrected with actual-render assertions; final harness fixes wait for input registration, use signOut and honor five-star guarantee outcomes. No canon/numeric seeds/production media, live migrations, deployed/source tag, physical device or signed-original-AAB acceptance is claimed. Local source checkpoints do not complete R09. Physical WebView/unchanged-AAB season and deployed capacity remain R18/R17. Owner requires stopping before R09 and handing subsequent work to Argon 4 through Antigravity."
     }
   ],
   "next": [
     {
-      "title": "R08-B2b3 \u2014 remaining economic contexts and support contracts",
-      "detail": "Bind signup, team validation, task claims, other non-battle grants and remaining UI metadata to selected/frozen release contracts as appropriate. Preserve immutable journals, paid obligations and transaction authority; finish bootstrap/current/allowlisted/history/task/retirement/support behavior. Require a compatible catalog reader/client floor before removing publication/rollback blocks. The isolated declared-only recruit/grow/equip/summon/fight path is locally exercised; full grammar/key/storage and deployed/signed-device acceptance remain separate."
+      "title": "R09 — first Argon 4 / Antigravity implementation package",
+      "detail": "WAITING, not started. Revalidate nine-shot caption/timeline defects; implement account/release-scoped durable scene/choice checkpoints, post-battle continuation without duplicate rewards, authoritative Continue and durable Finish/restart/retry. Preserve R08 catalog/media/storage contracts. Follow README for full R09 acceptance and remaining R00–R18 work."
     },
     {
-      "title": "R06 \u2014 remaining reviewed combat semantics",
-      "detail": "Prepare finite resistance/signature and broader C01\u2013C39 decisions without applying proposals implicitly. Supported healing/Focus snapshots and explicit undefined-passive rejection are delivered; R06 remains partial."
-    },
-    {
-      "title": "R02/R05/R11/R18 \u2014 native financial, identity and device acceptance",
-      "detail": "Retain actual Google/Play/keyring, pre-purchase offer binding, secure session/lifecycle and signed physical-device proof requirements. Continue independent source work while those gates wait."
+      "title": "Argon 4 full-game ownership after handoff",
+      "detail": "Through Antigravity, Argon owns code, whole-game/UX/art design, image generation, animation, integration, verification, documentation and verified GitHub pushes. Complete dependent R10–R18 and partial R02/R05/R06/R07 work; budget/canon/financial/private-access/public-release gates remain explicit."
     }
   ],
   "blockedOnOwner": [
     {
-      "title": "B-SIGNING \u2014 Owner-held upload key and approved signed test binary",
+      "title": "B-SIGNING — Owner-held upload key and approved signed test binary",
       "detail": "Use the existing key through secure UOMD_KEYSTORE_FILE/PASSWORD/KEY_ALIAS and explicit versionCode/environment; never recreate the key or print its values. Needed for signed-device/store acceptance, not local source work."
     },
     {
-      "title": "B-PRIVACY \u2014 Operator, audience and retention decisions",
+      "title": "B-PRIVACY — Operator, audience and retention decisions",
       "detail": "Prepare field/table/SDK inventory and concrete options; owner supplies actual contact/domain, retention, public deletion route, age/TFUA and truthful store disclosures."
     },
     {
-      "title": "B-ECONOMY \u2014 Unapplied payout/refund/shard and combat-policy choices",
+      "title": "B-ECONOMY — Unapplied payout/refund/shard and combat-policy choices",
       "detail": "Paid-only repeat eligibility is now implemented under the autonomous assignment (R04-C); no historical recovery was applied. Final recovery-floor/payout/boss reward figures, retained/claimed/noncurrency refund and shard/combat ambiguities remain explicit R02/R06/R16 decisions. Local correctness work proceeds where policy is defined."
     },
     {
-      "title": "B-ART \u2014 Layout and visual identity decisions",
+      "title": "B-ART — Layout and visual identity decisions",
       "detail": "Prepare same-content A/B/C layouts and concrete character/costume/studio alternatives before dependent art; review Japanese transcript/casting before final VO."
     },
     {
-      "title": "B-RESTORE \u2014 Owner-held age private key for encrypted restore",
+      "title": "B-RESTORE — Owner-held age private key for encrypted restore",
       "detail": "Prepare isolated restore targets/hash/table/FK/ledger/RPO/RTO checks; owner supplies decryption through approved secure handling. A new key or old plaintext drill cannot substitute."
     },
     {
-      "title": "B-ALERTS \u2014 Authorized alert destination",
+      "title": "B-ALERTS — Authorized alert destination",
       "detail": "Prepare a bounded failure/delivery test and obtain owner-selected destination before external messages; source logging alone is not delivery."
     },
     {
-      "title": "B-RELEASE \u2014 Production/public Play rollout",
+      "title": "B-RELEASE — Production/public Play rollout",
       "detail": "Complete R18 evidence and concrete rollout/rollback before separate owner release decision; staging and local engineering may continue."
     },
     {
-      "title": "B-BILLING-KEYS \u2014 game Worker keyring/live recovery proof",
+      "title": "B-BILLING-KEYS — game Worker keyring/live recovery proof",
       "detail": "Set BILLING_TOKEN_KEYS securely on existing uomd-game-dev/staging Workers (current/key map, independent random AES-256 base64url material per environment; retain prior keys during rotation). No plaintext source/client keys. This host has no Wrangler auth; existing Workers Builds/Console setup and exact deployed scheduled/Google evidence are required. No live key was created or uploaded."
     }
   ],
@@ -735,7 +731,7 @@
       "result": "PASS",
       "commit": "82586fc0",
       "verifiedAt": "2026-10-13T11:06:32.356027+00:00",
-      "scope": "R06-A working tree: preserve owed one-turn control skip through expiry incl boss floor, check turn-start death first, release usable Auto ultimate when living opposing boss exists, retain emergency healing and existing tick order. Five new cases incl explicit control/boss Auto exact authoritative event hash. Corrected valid fixtures: three scenarios fail against prior engine loaded by isolated test alias; all 18 boss cases and 592 application/tool tests/lint/typecheck pass. Real local Worker desktop owned campaign passes; that test intentionally skips phone. Free-practice desktop/phone passes, both builds/25 migrations pass. Temporary prior-engine file removed; no canon/numeric retuning/creative assets, native/deployed or complete-R06 acceptance claim. Remaining supported limits/config semantics, equipped effects, story loans and C01\u2013C39 proposal decisions remain.",
+      "scope": "R06-A working tree: preserve owed one-turn control skip through expiry incl boss floor, check turn-start death first, release usable Auto ultimate when living opposing boss exists, retain emergency healing and existing tick order. Five new cases incl explicit control/boss Auto exact authoritative event hash. Corrected valid fixtures: three scenarios fail against prior engine loaded by isolated test alias; all 18 boss cases and 592 application/tool tests/lint/typecheck pass. Real local Worker desktop owned campaign passes; that test intentionally skips phone. Free-practice desktop/phone passes, both builds/25 migrations pass. Temporary prior-engine file removed; no canon/numeric retuning/creative assets, native/deployed or complete-R06 acceptance claim. Remaining supported limits/config semantics, equipped effects, story loans and C01–C39 proposal decisions remain.",
       "testIds": [
         "packages/combat/src/boss.test.ts",
         "npm run lint",
@@ -997,7 +993,7 @@
       "result": "PASS",
       "commit": "f694ade486a9b2dd2160cd5775eaca243a20e988",
       "verifiedAt": "2026-10-13T21:10:38.694942+00:00",
-      "scope": "R07-C3 working tree: manifest\u2019s seven First Oath choices and provenance compile into strict selector declarations; semantic guards reject duplicate IDs, wrong kind/rarity and battle/story gates. One earned invitation is spent atomically with shared character/copy grants and a frozen exact-input original result. Account/release/story/item/character races and journal faults roll back all changes; replay survives a killed release and later duplicate grants, with account-scoped status. Twelve D1/API, six client, seven schema and one compiler cases; 726 application/tool tests, lint/types, campaign/game/admin builds and 46 adapters pass. Twelve existing Control Center/canonical-story browser cases and two final desktop/touch-phone First Oath cases pass against real local Workers with all 25 migrations. The final cases prove commit-before-response-loss, reload/original-status recovery with zero extra POSTs, the full chapter and account-change isolation. Choice/confirmation/settled result screenshots inspected. Initial harness failures involved queued scene overlap, an intentionally aborted request logged without its URL and an early click before input registration; corrected scene waits, URL-bound error recording and settled input pass the final rerun. Graphify refreshed (3116 nodes/8152 edges/157 communities). One fresh account completes opening/five battles/First Oath/camp with Brin, Iona and starters without wishes or ads, using canonical stats and legal manual active/ultimate decisions for the last three battles. Default level-1 Auto lost 1-3; account caps remain enforced. Initial ten-HP test catalog replaced with canonical fixtures. No numeric changes, migration, prices, paid media, formal security audit or native/deployed/old-AAB acceptance. All-choice/Auto balance/account XP and reusable gates/effective catalog/resume remain open.",
+      "scope": "R07-C3 working tree: manifest’s seven First Oath choices and provenance compile into strict selector declarations; semantic guards reject duplicate IDs, wrong kind/rarity and battle/story gates. One earned invitation is spent atomically with shared character/copy grants and a frozen exact-input original result. Account/release/story/item/character races and journal faults roll back all changes; replay survives a killed release and later duplicate grants, with account-scoped status. Twelve D1/API, six client, seven schema and one compiler cases; 726 application/tool tests, lint/types, campaign/game/admin builds and 46 adapters pass. Twelve existing Control Center/canonical-story browser cases and two final desktop/touch-phone First Oath cases pass against real local Workers with all 25 migrations. The final cases prove commit-before-response-loss, reload/original-status recovery with zero extra POSTs, the full chapter and account-change isolation. Choice/confirmation/settled result screenshots inspected. Initial harness failures involved queued scene overlap, an intentionally aborted request logged without its URL and an early click before input registration; corrected scene waits, URL-bound error recording and settled input pass the final rerun. Graphify refreshed (3116 nodes/8152 edges/157 communities). One fresh account completes opening/five battles/First Oath/camp with Brin, Iona and starters without wishes or ads, using canonical stats and legal manual active/ultimate decisions for the last three battles. Default level-1 Auto lost 1-3; account caps remain enforced. Initial ten-HP test catalog replaced with canonical fixtures. No numeric changes, migration, prices, paid media, formal security audit or native/deployed/old-AAB acceptance. All-choice/Auto balance/account XP and reusable gates/effective catalog/resume remain open.",
       "testIds": [
         "apps/api/test/recruitment.test.ts",
         "apps/game/src/net/api.test.ts",
@@ -1159,6 +1155,38 @@
         "npm run typecheck",
         "npm run build:campaign",
         "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
+    },
+    {
+      "id": "E-R08-COMPLETE-20261014",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "0f2f3f11403942ef4b58f8691f2f06e8699d4a03",
+      "verifiedAt": "2026-10-14T16:48:05.371362+00:00",
+      "scope": "R08 completion working tree based on the recorded commit; the enclosing delivery commit identifies this exact source/docs. R08 source complete: exact versioned signup/team/growth/gear/gacha/task and grant contexts; migration 0027 freezes weekly terms and earned/paid grant subsets. Public signed catalog activation/rollback is enabled with same-environment/channel game-runtime/migration readiness, client 0.1.2 and derived capabilities. Closed presentation/voice/caption/video/locale/stage/camera/WebGL-mask/tween/flag/checkpoint/frame-animation/notice/calendar interpreters; compiled trust-root lifecycle; IDB v2 transaction completion, retained-byte leases/GC/quota, range resume/cancel/deadline/network consent, safe startup activation and owned bounded media caches. All 923 application/tool tests (API469/game97/combat93/schema123/economy44/patch41/shared24/story8/tools24), lint/typecheck, campaign/game/admin builds and 46 adapters pass. Final real local-Worker desktop8/touch-phone8 browser matrix passes with 27 migrations; screenshots inspected. Same built browser binary installs a public signed synthetic season, exercises declared-only recruitment/growth/equipment/team/summon/animated authoritative battle, locale/mask/video pause/no-Skip/decoder fallback/modal ordering and account-change cleanup; IDB v1-to-v2/abort-after-request-success/blocked-storage fallback, reload recovery, rollback/kill and title lifecycle also pass. Synthetic four/five-star identities clone existing numeric definitions/art; the legitimate four-or-better guarantee retains canonical rates. Earlier browser failures exposed real mask/modal/startup/decoder races, corrected with actual-render assertions; final harness fixes wait for input registration, use signOut and honor five-star guarantee outcomes. No canon/numeric seeds/production media, live migrations, deployed/source tag, physical device or signed-original-AAB acceptance is claimed. Local source checkpoints do not complete R09. Physical WebView/unchanged-AAB season and deployed capacity remain R18/R17. Owner requires stopping before R09 and handing subsequent work to Argon 4 through Antigravity. Final delivery rerun: all 923 tests pass; after completing the typed Fetcher fixtures with rejecting raw-socket guards, both affected API files pass all 56 cases and full lint/typecheck pass. Normal game/admin builds also pass with the compiled trust-root configuration. Final free Graphify refresh after staging new sources: 3404 nodes/9046 edges/185 communities, no LLM calls. Stage/task navigation was checked against real source; Gradle and symbol-free test/export modules remain extraction limits.",
+      "testIds": [
+        "npm test",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build:campaign",
+        "npm run build -w @uomd/game",
+        "npm run build -w @uomd/admin",
+        "python3 tools/sync_codex_skills.py --check",
+        "apps/api/test/runtime-ready.test.ts",
+        "apps/api/test/presentation.test.ts",
+        "apps/api/test/catalog-lifecycle.test.ts",
+        "packages/content-schema/src/presentation.test.ts",
+        "packages/patch/src/lifecycle.test.ts",
+        "tests/e2e/r08-complete.spec.ts",
+        "tests/e2e/patch-storage.spec.ts",
+        "tests/e2e/catalog-growth.spec.ts",
+        "tests/e2e/catalog-gear-gacha.spec.ts",
+        "tests/e2e/catalog-snapshot.spec.ts",
+        "tests/e2e/release-snapshot.spec.ts",
+        "tests/e2e/title-lifecycle.spec.ts"
       ],
       "buildId": null,
       "deploymentId": null,
@@ -1494,7 +1522,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Persist account-scoped operation identity until authoritative reconciliation across response loss/reload.",
-      "implemented": "R05-A\u2013G2 ordinary durable identity/status journals, scoped visible recovery, revision-pinned native pending-receipt/restore submission and owned recent delivery history are locally verified, including consumed response loss. Pre-purchase offer binding/native secure-session/lifecycle and device gates remain R02/R11/R18; full R05 acceptance stays open.",
+      "implemented": "R05-A–G2 ordinary durable identity/status journals, scoped visible recovery, revision-pinned native pending-receipt/restore submission and owned recent delivery history are locally verified, including consumed response loss. Pre-purchase offer binding/native secure-session/lifecycle and device gates remain R02/R11/R18; full R05 acceptance stays open.",
       "dependsOn": [
         "R01",
         "R02",
@@ -1652,10 +1680,10 @@
     {
       "id": "R08",
       "title": "Effective catalog and patch grammar",
-      "taskStatus": "IN_PROGRESS",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "One versioned server/client catalog, finite complete data grammar and safe bounded patch storage/compatibility.",
-      "implemented": "R08-A locally verifies complete same-channel snapshots, strict snapshot/legacy reads, base-identical reuse, bounded files/parameters, manifest/index agreement, dependency guards and min/max/schema propagation with a 0.1.1 snapshot-reader floor. R08-B1 exports/stages closed bounded D1 catalogs with shared exact pack/chapter/reference validation and admin/CLI export. B2a binds battle party/loan/equipped inputs, drops, grants and task events to an exact request-local catalog, preserving atomic authority, hash provenance and original recovery; explicit role priority preserves bonuses after canonical export. B2b1 adds immutable ID-only registries/player foreign keys with data/journal/gear-sequence preservation and binds recruitment, character growth/rank/ascension, metadata/roster/stat views and durable client growth identities to the selected release. B2b2 binds gear assignment/growth/reroll/dismantle and gacha disclosure/pools/costs/grants, durable client intent and history provenance to selected catalogs with atomic authority and original recovery. Declared-only fixtures recruit/grow/equip/summon/fight without global definition copies. Publication and rollback into catalog-bearing releases remain blocked pending signup/team/task-claim/other non-battle-grant contexts, remaining metadata/support policies and compatible reader floor. Full public/device new-identity acceptance, grammar/capabilities, keys, quota/resources/cache and deployed/signed-device acceptance remain open.",
+      "implemented": "R08 source complete: exact versioned signup/team/growth/gear/gacha/task and grant contexts; migration 0027 freezes weekly terms and earned/paid grant subsets. Public signed catalog activation/rollback is enabled with same-environment/channel game-runtime/migration readiness, client 0.1.2 and derived capabilities. Closed presentation/voice/caption/video/locale/stage/camera/WebGL-mask/tween/flag/checkpoint/frame-animation/notice/calendar interpreters; compiled trust-root lifecycle; IDB v2 transaction completion, retained-byte leases/GC/quota, range resume/cancel/deadline/network consent, safe startup activation and owned bounded media caches. All 923 application/tool tests (API469/game97/combat93/schema123/economy44/patch41/shared24/story8/tools24), lint/typecheck, campaign/game/admin builds and 46 adapters pass. Final real local-Worker desktop8/touch-phone8 browser matrix passes with 27 migrations; screenshots inspected. Same built browser binary installs a public signed synthetic season, exercises declared-only recruitment/growth/equipment/team/summon/animated authoritative battle, locale/mask/video pause/no-Skip/decoder fallback/modal ordering and account-change cleanup; IDB v1-to-v2/abort-after-request-success/blocked-storage fallback, reload recovery, rollback/kill and title lifecycle also pass. Synthetic four/five-star identities clone existing numeric definitions/art; the legitimate four-or-better guarantee retains canonical rates. Earlier browser failures exposed real mask/modal/startup/decoder races, corrected with actual-render assertions; final harness fixes wait for input registration, use signOut and honor five-star guarantee outcomes. No canon/numeric seeds/production media, live migrations, deployed/source tag, physical device or signed-original-AAB acceptance is claimed. Local source checkpoints do not complete R09. Physical WebView/unchanged-AAB season and deployed capacity remain R18/R17. Owner requires stopping before R09 and handing subsequent work to Argon 4 through Antigravity.",
       "dependsOn": [
         "R02",
         "R03",
@@ -1685,7 +1713,19 @@
         "apps/api/src/gacha/service.ts",
         "apps/api/src/player/routes.ts",
         "apps/api/test/catalog-lifecycle.test.ts",
-        "tests/e2e/catalog-gear-gacha.spec.ts"
+        "tests/e2e/catalog-gear-gacha.spec.ts",
+        "apps/api/migrations/0027_release_obligations.sql",
+        "apps/api/src/content/runtime-ready.ts",
+        "apps/api/src/content/grant-catalog.ts",
+        "apps/api/src/content/presentation.ts",
+        "apps/api/src/tasks/rules.ts",
+        "apps/game/src/presentation/NarrativeStage.ts",
+        "apps/game/src/scenes/ContentPanelScene.ts",
+        "apps/game/src/platform/idbStorage.ts",
+        "packages/content-schema/src/presentation.ts",
+        "docs/R08_CONTENT_RUNTIME.md",
+        "tests/e2e/r08-complete.spec.ts",
+        "tests/e2e/patch-storage.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1696,7 +1736,8 @@
         "E-R08-B1-20261014",
         "E-R08-B2A-20261014",
         "E-R08-B2B1-20261014",
-        "E-R08-B2B2-20261014"
+        "E-R08-B2B2-20261014",
+        "E-R08-COMPLETE-20261014"
       ],
       "blockerIds": []
     },

@@ -40,12 +40,16 @@ export class TitleScene extends Phaser.Scene {
   /** true until the entry flow (prologue, tutorials, patch page) has been completed once on this account/device */
   private firstRun = false;
   private busy = false;
+  private viewRevision = 0;
+  private settingsRequest = 0;
 
   constructor() {
     super('Title');
   }
 
   async create(): Promise<void> {
+    this.viewRevision++;
+    this.events.once('shutdown', () => { this.viewRevision++; });
     this.overlay = null;
     this.audioStarted = false;
     this.busy = false;
@@ -55,6 +59,8 @@ export class TitleScene extends Phaser.Scene {
     await art.ensureBoot(this).catch((e: unknown) => console.warn('menu art unavailable', e));
     if (!this.sys.isActive()) return;
     this.cameras.main.setBackgroundColor(0x0a0610);
+    const notice = Services.ready().content.storageNotice;
+    if (notice) toast(this, notice, 8000);
 
     const bg = this.add.image(REF_W / 2, REF_H / 2, art.background('forest_whispering_ash'));
     bg.setScale(Math.max(REF_W / bg.width, REF_H / bg.height) * 1.05);
@@ -206,8 +212,13 @@ export class TitleScene extends Phaser.Scene {
     return { items: [dim, box, head], cx: REF_W / 2, cy: REF_H / 2 };
   }
 
-  private openSettings(): void {
-    const { items, cx, cy } = this.openOverlay('SETTINGS', 1100, 880);
+  private async openSettings(): Promise<void> {
+    const revision = this.viewRevision; const request = ++this.settingsRequest;
+    const profile = await Services.ready().content.presentation().catch(() => null);
+    if (!this.sys.isActive() || revision !== this.viewRevision || request !== this.settingsRequest) return;
+    const locales = ['en', ...(profile?.locales ?? []).filter((l) => l !== 'en')];
+    const shiftLocale = (delta: number): void => setPref('locale', locales[(Math.max(0, locales.indexOf(prefs().locale)) + delta + locales.length) % locales.length]!);
+    const { items, cx, cy } = this.openOverlay('SETTINGS', 1100, 1000);
     const rows: { label: string; get: () => string; dec: () => void; inc: () => void }[] = [
       {
         label: 'Music',
@@ -221,6 +232,8 @@ export class TitleScene extends Phaser.Scene {
         dec: () => { setPref('sfxVolume', Math.max(0, +(prefs().sfxVolume - 0.1).toFixed(1))); Sfx.setVolume(prefs().sfxVolume); Sfx.tap(); },
         inc: () => { setPref('sfxVolume', Math.min(1, +(prefs().sfxVolume + 0.1).toFixed(1))); Sfx.setVolume(prefs().sfxVolume); Sfx.tap(); }
       },
+      { label: 'Voice', get: () => `${Math.round(prefs().voiceVolume * 100)}%`, dec: () => setPref('voiceVolume', Math.max(0, +(prefs().voiceVolume - 0.1).toFixed(1))), inc: () => setPref('voiceVolume', Math.min(1, +(prefs().voiceVolume + 0.1).toFixed(1))) },
+      { label: 'Language', get: () => prefs().locale.toUpperCase(), dec: () => shiftLocale(-1), inc: () => shiftLocale(1) },
       {
         label: 'Text speed',
         get: () => prefs().textSpeed.toUpperCase(),
@@ -235,7 +248,7 @@ export class TitleScene extends Phaser.Scene {
       }
     ];
     rows.forEach((r, i) => {
-      const y = cy - 230 + i * 125;
+      const y = cy - 300 + i * 110;
       items.push(txt(this, cx - 470, y, r.label, { fontSize: '40px' }).setOrigin(0, 0.5));
       const value = txt(this, cx + 190, y, r.get(), { fontFamily: F.display, fontSize: '36px', fontStyle: '600', color: T.gold }).setOrigin(0.5);
       items.push(value);
@@ -244,10 +257,10 @@ export class TitleScene extends Phaser.Scene {
       items.push(value);
     });
     if (this.firstRun) {
-      items.push(new Button(this, cx, cy + 340, { label: 'CLOSE', w: 560, onClick: () => this.closeOverlay() }));
+      items.push(new Button(this, cx, cy + 400, { label: 'CLOSE', w: 560, onClick: () => this.closeOverlay() }));
     } else {
-      items.push(new Button(this, cx - 250, cy + 340, { label: 'RESET PROGRESS', w: 430, variant: 'danger', fontSize: 26, onClick: () => { Progress.reset(); toast(this, 'Progress cleared'); } }));
-      items.push(new Button(this, cx + 250, cy + 340, { label: 'CLOSE', w: 430, onClick: () => this.closeOverlay() }));
+      items.push(new Button(this, cx - 250, cy + 400, { label: 'RESET PROGRESS', w: 430, variant: 'danger', fontSize: 26, onClick: () => { Progress.reset(); toast(this, 'Progress cleared'); } }));
+      items.push(new Button(this, cx + 250, cy + 400, { label: 'CLOSE', w: 430, onClick: () => this.closeOverlay() }));
     }
     this.overlay = this.add.container(0, 0, items).setDepth(DEPTH.modal);
   }

@@ -73,16 +73,16 @@ export class FinishScene extends Phaser.Scene {
     if (s.kind === 'failed') {
       this.shown = 'failed';
       this.head.setText(S.finish.waitingTitle);
-      this.note.setText(s.updateRequired ? S.patch.updateRequired : S.finish.failedBody);
+      this.note.setText(s.updateRequired ? S.patch.updateRequired : s.requiresNetworkApproval ? 'Downloads are paused on this data-saving connection.' : `${S.finish.failedBody}\n${s.detail.slice(0, 180)}`);
       this.bar.setVisible(false);
       this.figures.setText('');
-      this.action.setVisible(!s.updateRequired).setLabel(S.finish.retry).setEnabled(true);
+      this.action.setVisible(!s.updateRequired).setLabel(s.requiresNetworkApproval ? 'USE MOBILE DATA' : S.finish.retry).setEnabled(true);
       return;
     }
     this.shown = 'waiting';
     this.head.setText(S.finish.waitingTitle);
     this.note.setText(S.finish.waitingBody);
-    this.action.setVisible(false);
+    this.action.setVisible(true).setLabel('PAUSE DOWNLOAD').setEnabled(true);
     this.bar.setVisible(true);
     const frac = barFill(s);
     this.bar.set(frac ?? 0);
@@ -92,8 +92,10 @@ export class FinishScene extends Phaser.Scene {
 
   private async onAction(): Promise<void> {
     if (this.restarting) return;
+    if (this.shown === 'waiting') { Services.patches.cancel(); return; }
     if (this.shown === 'failed') {
-      void Services.patches.retry();
+      const state = Services.patches.get();
+      void Services.patches.retry(state.kind === 'failed' && state.requiresNetworkApproval ? { allowMetered: true } : {});
       return;
     }
     if (this.shown !== 'ready') return;

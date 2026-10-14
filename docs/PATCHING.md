@@ -1,5 +1,7 @@
 # Content patching
 
+Current R08 contract: [R08_CONTENT_RUNTIME.md](R08_CONTENT_RUNTIME.md). It supersedes historical limitations below: catalog activation requires 0.1.2/capabilities; complete JSON validation, static-root lifecycle, IDB v2 byte accounting/reservations, quota, cancel/deadlines/range resume and owned bounded media caches are implemented. Native/deployed measurements remain explicit R18/R17 gates.
+
 **Rule:** a patch may contain only declarative data and media (`json, webp, png, ogg, mp3, m4a, webm, txt`). Scripts, WASM,
 HTML, SVG and native code are rejected by the schema (`SafeAssetPath`) and by media-type allowlists in the admin API.
 New *mechanics* (new effect ops, statuses, selectors, UI components, native SDKs) still require a new binary.
@@ -51,7 +53,11 @@ incompatibility, downgrade, storage budget, semantic validation failure, offline
 events, staged activation (offline), damaged stage, GC of staged objects.
 
 ## Compatibility matrix (current)
+
 | Client | Content schema | Notes |
-|---|---|---|
-| 0.1.x | 1 | first runtime; effect grammar v2 (all 34 narrative ops, 15 statuses, boss phases/objectives/telegraphs, owned-hero parties). No store build has shipped with grammar v1, so no compatibility break exists yet. |
-Future rows are added whenever the grammar/schema gains capabilities (older clients ignore releases with a higher `content_schema`).
+| --- | --- | --- |
+| 0.1.0 | 1 | Historical base/legacy interpreter. Cannot receive the corrected snapshot/catalog/presentation reader through data. |
+| 0.1.1 | 1 | Complete signed snapshot reader; new publication enforces at least this floor. |
+| 0.1.2 | 1 + signed capabilities | Effective catalog, calendar, presentation, locale, sprite animation and story flags. Capability requirements are derived/unioned and compatibility intersected; normal publish/rollback also requires a compatible bound backend. |
+
+New primitives/native integrations/trust-root additions or removal require a new reviewed binary; older binaries may reject the extended manifest before their minimum-version UX. Native old-AAB/update behavior remains R18. See the runtime contract for exact resource and key lifecycle limits.

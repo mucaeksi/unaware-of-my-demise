@@ -1,3 +1,6 @@
+import { taskRules, taskPeriodTime, type TaskRules } from './rules';
+import { operationCatalog, type ReleaseScope, type RuntimeCatalog } from '../content/runtime-catalog';
+import { economicStatement, requireEconomic } from '../content/authority';
 import { TaskConfig, type RewardAttachment } from '@uomd/content-schema';
 import { segmentsAt, weekStart, windowOf, type Period } from '@uomd/economy';
 import { HttpError } from '../content/store';
@@ -35,8 +38,8 @@ function slots(cfg: TaskConfig, nowMs: number): Slot[] {
  * event (battle win, level-up), so progress can never be claimed without the action having happened. Progress is capped at the target.
  * A weekly segment only counts while it is running (not during its claim grace).
  */
-export async function taskEventStatements(db: D1Database, playerId: string, events: Partial<Record<TaskEvent, number>>, nowMs = Date.now(), config?: TaskConfig): Promise<D1PreparedStatement[]> {
-  const cfg = config ?? await loadTaskConfig(db);
+export async function taskEventStatements(db: D1Database, playerId: string, events: Partial<Record<TaskEvent, number>>, nowMs = Date.now(), config?: TaskConfig, catalog?: RuntimeCatalog): Promise<D1PreparedStatement[]> {
+  const cfg = (await taskRules(db, playerId, nowMs, config, catalog))?.config;
   if (!cfg) return [];
   const out: D1PreparedStatement[] = [];
   for (const s of slots(cfg, nowMs)) {
@@ -64,18 +67,27 @@ interface Row {
 
 const COMPLETION = '_window_complete';
 
-export async function listTasks(db: D1Database, playerId: string, nowMs = Date.now()): Promise<Record<string, unknown>> {
-  const cfg = await loadTaskConfig(db);
+export async function listTasks(db: D1Database, playerId: string, nowMs = Date.now(), scope?: ReleaseScope): Promise<Record<string, unknown>> {
+  const catalog = await operationCatalog(db, playerId, scope, new Date(nowMs));
+  const rules = await taskRules(db, playerId, nowMs, catalog?.data.config.tasks, catalog);
+  const cfg = rules?.config;
   if (!cfg) return { windowHours: 12, daily: null, weekly: [], serverTimeMs: nowMs };
   const win = windowOf(nowMs, cfg.windowHours);
-  const sl = slots(cfg, nowMs);
+  const rulesByWeek = new Map<number, TaskRules>([[weekStart(nowMs), rules!]]);
+  const namesOf = (terms: TaskRules | undefined): Record<string, string> | undefined => terms?.catalog ? Object.fromEntries([...terms.catalog.data.characters.map((c) => [c.id, c.name_en]), ...terms.catalog.data.items.map((i) => [i.item_id, i.name_en]), ...terms.catalog.data.gear.map((g) => [g.gear_id, g.name_en])]) : undefined;
+  const sl = slots(cfg, nowMs).filter((s) => s.scope === 'daily' || weekStart(s.period.startMs) === weekStart(nowMs));
+  for (let back = 1; back <= 5; back++) {
+    const time = weekStart(nowMs) - back * 7 * 86_400_000;
+    const prior = await taskRules(db, playerId, time, undefined, undefined, false);
+    if (prior) { rulesByWeek.set(time, prior); sl.push(...slots(prior.config, nowMs).filter((s) => s.scope === 'weekly' && weekStart(s.period.startMs) === time)); }
+  }
   const keys = [...new Set(sl.map((s) => s.period.key))];
   const rows = (await db.prepare(`SELECT period_key, task_id, progress, target, claimed FROM player_tasks WHERE player_id = ?1 AND period_key IN (${keys.map(() => '?').join(',')})`).bind(playerId, ...keys).all<Row>()).results;
   const rowOf = (key: string, id: string): Row | undefined => rows.find((r) => r.period_key === key && r.task_id === id);
   const view = (s: Slot) => {
     const r = rowOf(s.period.key, s.taskId);
     const progress = r?.progress ?? 0;
-    return { id: s.taskId, title: s.title, objective: s.objective, progress: Math.min(progress, s.objective.count), done: progress >= s.objective.count, claimed: r?.claimed === 1, rewards: s.rewards };
+    return { id: s.taskId, title: s.title, objective: s.objective, progress: Math.min(progress, s.objective.count), done: progress >= s.objective.count, claimed: r?.claimed === 1, rewards: s.rewards, rewardNames: namesOf(rulesByWeek.get(weekStart(s.period.startMs))) };
   };
   const daily = sl.filter((s) => s.scope === 'daily').map(view);
   const completion = rowOf(win.key, COMPLETION);
@@ -85,6 +97,8 @@ export async function listTasks(db: D1Database, playerId: string, nowMs = Date.n
     // a finished segment is only worth showing while there is something to claim
     .filter((w) => w.running || (w.done && !w.claimed));
   return {
+    ...(scope?.releaseId ? { releaseId: scope.releaseId } : {}),
+    taskRulesSha256: rules!.hash,
     serverTimeMs: nowMs,
     windowHours: cfg.windowHours,
     weekStartMs: weekStart(nowMs),
@@ -92,19 +106,25 @@ export async function listTasks(db: D1Database, playerId: string, nowMs = Date.n
       periodKey: win.key,
       endsAtMs: win.endMs,
       tasks: daily,
-      completion: { requires: cfg.daily.completion.requires, rewards: cfg.daily.completion.rewards, ready: cfg.daily.completion.requires.every((id) => daily.find((t) => t.id === id)?.done), claimed: completion?.claimed === 1 }
+      completion: { requires: cfg.daily.completion.requires, rewards: cfg.daily.completion.rewards, rewardNames: namesOf(rules!), ready: cfg.daily.completion.requires.every((id) => daily.find((t) => t.id === id)?.done), claimed: completion?.claimed === 1 }
     },
     weekly
   };
 }
 
-export async function claimTask(db: D1Database, playerId: string, input: { periodKey: string; taskId: string; requestId?: string }, nowMs = Date.now()): Promise<Record<string, unknown>> {
+export async function claimTask(db: D1Database, playerId: string, input: { periodKey: string; taskId: string; requestId?: string; releaseId?: string }, nowMs = Date.now(), scope?: ReleaseScope): Promise<Record<string, unknown>> {
   const operation = input.requestId ? { ...input, requestId: input.requestId } : null;
   if (operation) {
     const recorded = await recordedOperation(db, playerId, `task_claim:${input.periodKey}:${input.taskId}`, operation);
     if (recorded) return recorded;
   }
-  const cfg = await loadTaskConfig(db);
+  if (input.releaseId !== scope?.releaseId) throw new HttpError(400, 'release_context_mismatch', 'task release context differs');
+  const catalog = await operationCatalog(db, playerId, scope, new Date(nowMs));
+  const time = taskPeriodTime(input.periodKey);
+  const current = await taskRules(db, playerId, nowMs, catalog?.data.config.tasks, catalog);
+  const rules = weekStart(time) === weekStart(nowMs) ? current : await taskRules(db, playerId, time, undefined, undefined, false);
+  const cfg = rules?.config;
+  if (!cfg && current) throw new HttpError(409, 'period_closed', 'that task period was never opened');
   if (!cfg) throw new HttpError(404, 'no_tasks', 'tasks are not configured');
   const sl = slots(cfg, nowMs);
   const key = `${playerId}:${input.periodKey}:${input.taskId}`;
@@ -119,7 +139,7 @@ export async function claimTask(db: D1Database, playerId: string, input: { perio
       return r && t && r.progress >= t.objective.count;
     });
     if (!ready) throw new HttpError(409, 'not_done', 'finish the required tasks first');
-    return claimBatch(db, playerId, { periodKey: win.key, taskId: COMPLETION, target: 1, progress: 1, create: true }, cfg.daily.completion.rewards, key, reason, operation);
+    return claimBatch(db, playerId, { periodKey: win.key, taskId: COMPLETION, target: 1, progress: 1, create: true }, cfg.daily.completion.rewards, key, reason, operation, rules!, scope);
   }
   const slot = sl.find((s) => s.period.key === input.periodKey && s.taskId === input.taskId);
   if (!slot) throw new HttpError(409, 'period_closed', 'that task is not open any more');
@@ -130,13 +150,13 @@ export async function claimTask(db: D1Database, playerId: string, input: { perio
     if (replay) return replay;
     throw new HttpError(409, 'already_claimed', 'already claimed');
   }
-  return claimBatch(db, playerId, { periodKey: input.periodKey, taskId: input.taskId, target: row.target, progress: row.progress, create: false }, slot.rewards, key, reason, operation);
+  return claimBatch(db, playerId, { periodKey: input.periodKey, taskId: input.taskId, target: row.target, progress: row.progress, create: false }, slot.rewards, key, reason, operation, rules!, scope);
 }
 
-async function claimBatch(db: D1Database, playerId: string, t: { periodKey: string; taskId: string; target: number; progress: number; create: boolean }, rewards: RewardAttachment[], key: string, reason: string, operation: OperationInput | null): Promise<Record<string, unknown>> {
+async function claimBatch(db: D1Database, playerId: string, t: { periodKey: string; taskId: string; target: number; progress: number; create: boolean }, rewards: RewardAttachment[], key: string, reason: string, operation: OperationInput | null, rules: TaskRules, scope?: ReleaseScope): Promise<Record<string, unknown>> {
   const kind = `task_claim:${t.periodKey}:${t.taskId}`;
-  const result = { periodKey: t.periodKey, taskId: t.taskId, rewards, ...(operation ? { requestId: operation.requestId } : {}) };
-  const stmts = await grantStatements(db, playerId, rewards, { keyPrefix: `task:${key}`, reason });
+  const result = { ...(scope?.releaseId ? { releaseId: scope.releaseId } : {}), ...(rules.catalog ? { catalogSha256: rules.catalog.sha256 } : {}), taskRulesSha256: rules.hash, periodKey: t.periodKey, taskId: t.taskId, rewards, ...(operation ? { requestId: operation.requestId } : {}) };
+  const stmts = await grantStatements(db, playerId, rewards, { keyPrefix: `task:${key}`, reason, catalog: rules.catalog });
   const mark = t.create
     ? [db.prepare("INSERT INTO player_tasks (player_id, period_key, task_id, progress, target, claimed, claimed_at) VALUES (?1, ?2, ?3, 1, 1, 1, strftime('%Y-%m-%dT%H:%M:%fZ','now'))").bind(playerId, t.periodKey, t.taskId)]
     : [
@@ -145,12 +165,14 @@ async function claimBatch(db: D1Database, playerId: string, t: { periodKey: stri
       ];
   try {
     await db.batch([
+      ...(scope?.releaseId ? [economicStatement(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date(), undefined, true)] : []),
       db.prepare("INSERT INTO tx_guard (ok) VALUES (CASE WHEN EXISTS (SELECT 1 FROM players WHERE id = ?1 AND status = 'active') THEN 1 ELSE 0 END)").bind(playerId),
       ...mark, ...stmts, ...(operation ? [operationStatement(db, playerId, kind, operation, result)] : []), db.prepare('DELETE FROM tx_guard')
     ]);
   } catch (e) {
     const replay = operation ? await recordedOperation(db, playerId, kind, operation) : null;
     if (replay) return replay;
+    if (scope?.releaseId) await requireEconomic(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date());
     const msg = String(e instanceof Error ? e.message : e);
     if (/CHECK constraint failed: ok = 1|UNIQUE constraint failed: (player_tasks|ledger)/i.test(msg)) throw new HttpError(409, 'already_claimed', 'already claimed');
     throw e;

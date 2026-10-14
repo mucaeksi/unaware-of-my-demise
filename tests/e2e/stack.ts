@@ -135,6 +135,7 @@ async function boot(): Promise<Stack> {
     writeFileSync(target, JSON.stringify({ ...base, ...dev, main: join(api, config.main),
       assets: { ...dev.assets, directory: join(api, dev.assets.directory) },
       d1_databases: dev.d1_databases.map((db: Record<string, string>) => ({ ...db, migrations_dir: join(api, db.migrations_dir) })),
+      ...(kind === 'admin' ? { services: [{ binding: 'GAME', service: 'uomd-game-dev' }] } : {}),
       vars: { ...dev.vars, ...vars }
     }), { mode: 0o600 });
     return target;
