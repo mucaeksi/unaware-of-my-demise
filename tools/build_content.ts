@@ -22,6 +22,7 @@ import {
   type PoseSource,
   type UnitArtConfig
 } from './lib/art';
+import { loadApprovedArtEntries, type ApprovedArtEntry } from './ingest_art';
 import { LEGACY_COMMIT, ROOT, fileBytes, legacyBlob, readJson, sha256, writeJson, writeOut } from './lib/fsutil';
 
 /** the opening tutorials: no speed button and no Auto (manual turns); a later patch can switch them on by editing the encounter's ui block */
@@ -131,8 +132,24 @@ interface Provenance {
 }
 const provenance: Provenance[] = [];
 
+function copyApprovedEntryOutputs(entry: ApprovedArtEntry, outDir: string): void {
+  const srcKey = `${entry.source.kind}:${entry.asset_id}@rev${entry.revision}`;
+  for (const out of entry.outputs) {
+    const bytes = fileBytes(`content/approved_art/${out.path}`);
+    writeOut(`${outDir}/${out.path}`, bytes);
+    provenance.push({
+      output: `${outDir}/${out.path}`,
+      sha256: sha256(bytes),
+      sources: { [srcKey]: entry.source.sha256, entry: entry.ingest.fingerprint }
+    });
+  }
+}
+
 async function main(): Promise<void> {
   const contactSheet = process.argv.includes('--contact-sheet');
+  const strictArt = process.argv.includes('--strict-art');
+  const requireApproved = process.argv.includes('--require-approved') || strictArt;
+  const approvedEntries = loadApprovedArtEntries(ROOT, requireApproved);
   rmSync(join(ROOT, 'content/base'), { recursive: true, force: true });
 
   const legacyPortraits = JSON.parse(legacyBlob('game/data/presentation/battle_art_v001.json').toString('utf8')).portraits as Record<string, { emotions: Record<string, string> }>;
@@ -160,14 +177,47 @@ async function main(): Promise<void> {
   const enc2 = buildEncounter('T-2', 'tutorial_t2', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t2', TUTORIAL_UI);
   const enc3 = buildEncounter('T-3', 'tutorial_t3', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t3', TUTORIAL_UI);
 
-  // ---- art ---------------------------------------------------------------------------------
+  // ---- art (approved_art first, legacy fallback only for uncovered keys) ----------------------
+  const approvedUnits = new Map<string, ApprovedArtEntry>();
+  const approvedPortraits = new Map<string, ApprovedArtEntry[]>();
+  const approvedBackgrounds = new Map<string, ApprovedArtEntry>();
+  const approvedUi = new Map<string, ApprovedArtEntry>();
+  const approvedStills = new Map<string, ApprovedArtEntry>();
+  const approvedExtraAtlases = new Map<string, ApprovedArtEntry>();
+
+  for (const e of approvedEntries) {
+    for (const uKey of Object.keys(e.targets.units ?? {})) approvedUnits.set(uKey, e);
+    for (const cKey of Object.keys(e.targets.portraits ?? {})) {
+      const list = approvedPortraits.get(cKey) ?? [];
+      list.push(e);
+      approvedPortraits.set(cKey, list);
+    }
+    for (const bgKey of Object.keys(e.targets.backgrounds ?? {})) approvedBackgrounds.set(bgKey, e);
+    for (const uiKey of Object.keys(e.targets.ui ?? {})) approvedUi.set(uiKey, e);
+    for (const stKey of Object.keys(e.targets.stills ?? {})) approvedStills.set(stKey, e);
+    if (!e.targets.units) {
+      for (const atKey of Object.keys(e.targets.atlases ?? {})) approvedExtraAtlases.set(atKey, e);
+    }
+  }
+
   const built = new Map<string, BuiltUnit>();
-  for (const [k, cfg] of Object.entries(UNIT_ART)) built.set(k, await buildUnitAtlas(cfg, 'content/_tmp/art'));
+  for (const [k, cfg] of Object.entries(UNIT_ART)) {
+    if (!approvedUnits.has(k)) {
+      built.set(k, await buildUnitAtlas(cfg, 'content/_tmp/art'));
+    }
+  }
 
   async function artManifest(unitKeys: string[], scenesUsed: StoryScene[], outDir: string): Promise<ArtManifest> {
     const atlases: ArtManifest['atlases'] = {};
     const units: ArtManifest['units'] = {};
     for (const k of unitKeys) {
+      const appUnit = approvedUnits.get(k);
+      if (appUnit && appUnit.targets.units?.[k]) {
+        copyApprovedEntryOutputs(appUnit, outDir);
+        Object.assign(atlases, appUnit.targets.atlases ?? {});
+        units[k] = appUnit.targets.units[k]!;
+        continue;
+      }
       const b = built.get(k);
       if (!b) throw new Error(`no art for ${k}`);
       const rel = `art/atlas_${k}.webp`;
@@ -176,40 +226,67 @@ async function main(): Promise<void> {
       atlases[`atlas_${k}`] = { image: rel, width: b.atlas.width, height: b.atlas.height, frames: b.atlas.frames };
       units[k] = b.unit as ArtManifest['units'][string];
     }
+    for (const [, extra] of approvedExtraAtlases) {
+      copyApprovedEntryOutputs(extra, outDir);
+      Object.assign(atlases, extra.targets.atlases ?? {});
+    }
     const portraits: ArtManifest['portraits'] = {};
     for (const [char, tags] of emotionsUsed(scenesUsed)) {
-      const files = PORTRAIT_FILES[char];
-      const map = legacyPortraits[char]?.emotions;
-      if (!files || !map) continue;
+      const appCharEntries = approvedPortraits.get(char) ?? [];
       const emotions: Record<string, string> = {};
       const images: Record<string, string> = {};
-      const needed = new Set<string>(['composed']);
-      for (const tag of tags) {
-        const key = map[tag];
-        if (key) {
-          emotions[tag] = key;
-          needed.add(key);
+      for (const entry of appCharEntries) {
+        copyApprovedEntryOutputs(entry, outDir);
+        const pTarget = entry.targets.portraits?.[char];
+        if (pTarget) {
+          Object.assign(emotions, pTarget.emotions);
+          Object.assign(images, pTarget.images);
         }
       }
-      for (const key of needed) {
-        const src = files[key];
-        if (!src) throw new Error(`no portrait source for ${char}/${key}`);
-        const p = await buildPortrait(src, 1100);
-        const rel = `art/portrait_${char}_${key}.webp`;
-        writeOut(`${outDir}/${rel}`, p.bytes);
-        provenance.push({ output: `${outDir}/${rel}`, sha256: sha256(p.bytes), sources: { [srcId(src)]: p.hash } });
-        images[key] = rel;
+      const files = PORTRAIT_FILES[char];
+      const map = legacyPortraits[char]?.emotions;
+      if (files && map) {
+        const needed = new Set<string>(images.composed ? [] : ['composed']);
+        for (const tag of tags) {
+          if (emotions[tag]) continue;
+          const key = map[tag];
+          if (key) {
+            emotions[tag] = key;
+            if (!images[key]) needed.add(key);
+          }
+        }
+        for (const key of needed) {
+          const src = files[key];
+          if (!src) throw new Error(`no portrait source for ${char}/${key}`);
+          const p = await buildPortrait(src, 1100);
+          const rel = `art/portrait_${char}_${key}.webp`;
+          writeOut(`${outDir}/${rel}`, p.bytes);
+          provenance.push({ output: `${outDir}/${rel}`, sha256: sha256(p.bytes), sources: { [srcId(src)]: p.hash } });
+          images[key] = rel;
+        }
       }
-      emotions.composed = 'composed';
+      if (images.composed) emotions.composed = 'composed';
       portraits[char] = { emotions, images };
     }
     const backgrounds: ArtManifest['backgrounds'] = {};
     for (const [loc, src] of Object.entries(BG_FILES)) {
+      const appBg = approvedBackgrounds.get(loc);
+      if (appBg && appBg.targets.backgrounds?.[loc]) {
+        copyApprovedEntryOutputs(appBg, outDir);
+        backgrounds[loc] = appBg.targets.backgrounds[loc]!;
+        continue;
+      }
       const p = await buildBackground(src, 1920);
       const rel = `art/bg_${loc}.webp`;
       writeOut(`${outDir}/${rel}`, p.bytes);
       provenance.push({ output: `${outDir}/${rel}`, sha256: sha256(p.bytes), sources: { [srcId(src)]: p.hash } });
       backgrounds[loc] = rel;
+    }
+    for (const [loc, appBg] of approvedBackgrounds) {
+      if (!backgrounds[loc] && appBg.targets.backgrounds?.[loc]) {
+        copyApprovedEntryOutputs(appBg, outDir);
+        backgrounds[loc] = appBg.targets.backgrounds[loc]!;
+      }
     }
     const music: ArtManifest['music'] = {};
     for (const [cue, m] of Object.entries(MUSIC)) {
@@ -221,15 +298,40 @@ async function main(): Promise<void> {
       music[cue] = { file: rel, loop_start_s: meta.engine_loop.loop_offset_s, duration_s: meta.file_length_s };
     }
     const ui: ArtManifest['ui'] = {};
-    const logo = await buildKeyedImage(UI_FILES.logo, 1400);
-    writeOut(`${outDir}/art/ui_logo.webp`, logo.bytes);
-    provenance.push({ output: `${outDir}/art/ui_logo.webp`, sha256: sha256(logo.bytes), sources: { [srcId(UI_FILES.logo)]: logo.hash } });
-    ui.logo = 'art/ui_logo.webp';
-    const key = await buildFadedKeyArt(UI_FILES.key_art, 760);
-    writeOut(`${outDir}/art/ui_key_art.webp`, key.bytes);
-    provenance.push({ output: `${outDir}/art/ui_key_art.webp`, sha256: sha256(key.bytes), sources: { [srcId(UI_FILES.key_art)]: key.hash } });
-    ui.key_art = 'art/ui_key_art.webp';
-    return validateArt({ schema_version: 1, atlases, units, portraits, backgrounds, music, ui });
+    if (approvedUi.has('logo')) {
+      const e = approvedUi.get('logo')!;
+      copyApprovedEntryOutputs(e, outDir);
+      ui.logo = e.targets.ui!.logo!;
+    } else {
+      const logo = await buildKeyedImage(UI_FILES.logo, 1400);
+      writeOut(`${outDir}/art/ui_logo.webp`, logo.bytes);
+      provenance.push({ output: `${outDir}/art/ui_logo.webp`, sha256: sha256(logo.bytes), sources: { [srcId(UI_FILES.logo)]: logo.hash } });
+      ui.logo = 'art/ui_logo.webp';
+    }
+    if (approvedUi.has('key_art')) {
+      const e = approvedUi.get('key_art')!;
+      copyApprovedEntryOutputs(e, outDir);
+      ui.key_art = e.targets.ui!.key_art!;
+    } else {
+      const key = await buildFadedKeyArt(UI_FILES.key_art, 760);
+      writeOut(`${outDir}/art/ui_key_art.webp`, key.bytes);
+      provenance.push({ output: `${outDir}/art/ui_key_art.webp`, sha256: sha256(key.bytes), sources: { [srcId(UI_FILES.key_art)]: key.hash } });
+      ui.key_art = 'art/ui_key_art.webp';
+    }
+    for (const [uiKey, appUiEntry] of approvedUi) {
+      if (!ui[uiKey] && appUiEntry.targets.ui?.[uiKey]) {
+        copyApprovedEntryOutputs(appUiEntry, outDir);
+        ui[uiKey] = appUiEntry.targets.ui[uiKey]!;
+      }
+    }
+    const stills: ArtManifest['stills'] = {};
+    for (const [stKey, appSt] of approvedStills) {
+      if (appSt.targets.stills?.[stKey]) {
+        copyApprovedEntryOutputs(appSt, outDir);
+        stills[stKey] = appSt.targets.stills[stKey]!;
+      }
+    }
+    return validateArt({ schema_version: 1, atlases, units, portraits, backgrounds, music, ui, stills });
   }
 
   const putJson = (outDir: string, rel: string, value: unknown, sources: Record<string, string>): void => {
@@ -285,6 +387,16 @@ async function main(): Promise<void> {
   );
 
   rmSync(join(ROOT, 'content/_tmp'), { recursive: true, force: true });
+  if (strictArt) {
+    const legacyArtOutputs = provenance
+      .filter((entry) => entry.output.includes('/art/') && Object.keys(entry.sources).some((key) => key.startsWith('git:')))
+      .map((entry) => entry.output);
+    if (legacyArtOutputs.length > 0 || approvedEntries.length === 0) {
+      throw new Error(
+        `strict-art check failed: ${legacyArtOutputs.length} art output(s) still depend on legacy git: sources (${legacyArtOutputs.slice(0, 5).join(', ')})`
+      );
+    }
+  }
   writeFileSync(join(ROOT, 'content/provenance.json'), `${JSON.stringify({ generator: 'tools/build_content.ts', legacy_commit: LEGACY_COMMIT, outputs: provenance }, null, 2)}\n`);
 
   if (contactSheet) await renderContactSheet([...built.values()], baseArt);
