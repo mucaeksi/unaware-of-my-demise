@@ -4,10 +4,12 @@ import { CHANNEL, CLIENT_VERSION, PATCH_LAB_ENABLED, PREVIEW_FLOW_ENABLED, REF_H
 import { beginEntry, signInWithGoogle } from '../entry/flow';
 import { syncEntry } from '../entry/sync';
 import { loadEntry } from '../entry/state';
-import { S } from '../entry/strings';
+import { S, setActiveLocaleStrings } from '../entry/strings';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
-import { prefs, setPref } from '../platform/prefs';
+import { consentState, showPrivacyOptions } from '../net/store';
+import { prefs, setPref, type Prefs } from '../platform/prefs';
+import { safeInsets } from '../platform/safeArea';
 import { Progress, Services } from '../services';
 import { Button, panel, sceneFadeIn, title, toast, txt } from '../ui/kit';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
@@ -43,9 +45,14 @@ export class TitleScene extends Phaser.Scene {
   private busy = false;
   private viewRevision = 0;
   private settingsRequest = 0;
+  private autoOpenSettings = false;
 
   constructor() {
     super('Title');
+  }
+
+  init(data?: { openSettings?: boolean }): void {
+    this.autoOpenSettings = Boolean(data?.openSettings);
   }
 
   async create(): Promise<void> {
@@ -55,7 +62,8 @@ export class TitleScene extends Phaser.Scene {
     this.audioStarted = false;
     this.busy = false;
     this.firstRun = loadEntry().phase !== 'completed';
-    const { art } = Services.ready();
+    const { art, content } = Services.ready();
+    void content.locale().then((loc) => setActiveLocaleStrings(loc?.strings)).catch(() => undefined);
     // a patch can have replaced the art library while the splash played: make sure it has loaded what this screen draws
     await art.ensureBoot(this).catch((e: unknown) => console.warn('menu art unavailable', e));
     if (!this.sys.isActive()) return;
@@ -81,14 +89,15 @@ export class TitleScene extends Phaser.Scene {
       /* cosmetic */
     }
 
+    const insets = safeInsets(this);
     const logoKey = art.ui('logo');
     if (logoKey) {
-      const logo = this.add.image(500, 270, logoKey).setAlpha(0);
+      const logo = this.add.image(500 + insets.left, 270, logoKey).setAlpha(0);
       logo.setScale(860 / logo.width);
       this.tweens.add({ targets: logo, alpha: 1, y: 258, duration: 1400, ease: 'Cubic.easeOut' });
       if (!prefs().reducedMotion) this.tweens.add({ targets: logo, y: 266, duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut', delay: 1400 });
     }
-    txt(this, 500, 478, S.menu.tagline, { fontFamily: F.display, fontSize: '30px', fontStyle: '600', color: '#c9b6e4' }).setOrigin(0.5).setLetterSpacing(4);
+    txt(this, 500 + insets.left, 478, S.menu.tagline, { fontFamily: F.display, fontSize: '30px', fontStyle: '600', color: '#c9b6e4' }).setOrigin(0.5).setLetterSpacing(4);
 
     if (this.firstRun) this.buildFirstRunMenu();
     else this.buildFullMenu();
@@ -99,7 +108,7 @@ export class TitleScene extends Phaser.Scene {
       });
     }
 
-    this.chipText = txt(this, 60, REF_H - 36, '', { fontSize: '24px', color: T.dim }).setOrigin(0, 0.5).setDepth(DEPTH.hud);
+    this.chipText = txt(this, 60 + insets.left, REF_H - 36 - insets.bottom, '', { fontSize: '24px', color: T.dim }).setOrigin(0, 0.5).setDepth(DEPTH.hud);
     if (PATCH_LAB_ENABLED) {
       this.chipText.setInteractive({ useHandCursor: true }).on('pointerup', () => this.openPatchLab());
     }
@@ -112,30 +121,38 @@ export class TitleScene extends Phaser.Scene {
     });
     this.input.once('pointerdown', () => void this.startAudio());
     sceneFadeIn(this, 700);
+    if (this.autoOpenSettings) {
+      this.autoOpenSettings = false;
+      void this.openSettings();
+    }
   }
 
   /** First install: the only doors are sign-in (or Continue when a session exists) and Settings. */
   private buildFirstRunMenu(): void {
+    const insets = safeInsets(this);
+    const mx = 500 + insets.left;
     const signedIn = Services.api.signedIn;
     const native = Services.identity?.kind === 'native';
     if (signedIn) {
-      new Button(this, 500, 640, { label: S.menu.cont, sub: S.menu.contSub, w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.enter() });
+      new Button(this, mx, 640, { label: S.menu.cont, sub: S.menu.contSub, w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.enter() });
     } else if (native) {
-      new Button(this, 500, 640, { label: S.menu.signIn, sub: S.menu.signInSub, w: 640, h: 128, fontSize: 38, variant: 'hot', onClick: () => void this.enter() });
+      new Button(this, mx, 640, { label: S.menu.signIn, sub: S.menu.signInSub, w: 640, h: 128, fontSize: 38, variant: 'hot', onClick: () => void this.enter() });
     } else if (PREVIEW_FLOW_ENABLED) {
-      new Button(this, 500, 640, { label: S.menu.preview, sub: S.menu.previewSub, w: 640, h: 128, fontSize: 40, variant: 'hot', onClick: () => void this.enter() });
+      new Button(this, mx, 640, { label: S.menu.preview, sub: S.menu.previewSub, w: 640, h: 128, fontSize: 40, variant: 'hot', onClick: () => void this.enter() });
     } else {
-      new Button(this, 500, 640, { label: S.menu.signIn, w: 640, h: 128, fontSize: 38, variant: 'dim', onClick: () => undefined }).setEnabled(false);
-      txt(this, 500, 730, S.menu.webNote, { fontSize: '30px', color: T.dim }).setOrigin(0.5);
+      new Button(this, mx, 640, { label: S.menu.signIn, w: 640, h: 128, fontSize: 38, variant: 'dim', onClick: () => undefined }).setEnabled(false);
+      txt(this, mx, 730, S.menu.webNote, { fontSize: '30px', color: T.dim }).setOrigin(0.5);
     }
-    new Button(this, 500, 800, { label: S.menu.settings, w: 560, h: 120, onClick: () => this.openSettings() });
+    new Button(this, mx, 800, { label: S.menu.settings, w: 560, h: 120, onClick: () => this.openSettings() });
   }
 
   private buildFullMenu(): void {
-    new Button(this, 500, 640, { label: 'CONTINUE', sub: 'Enter the Road', w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.begin() });
-    new Button(this, 500, 786, { label: 'CHAPTERS', w: 560, h: 120, onClick: () => this.go('Chapters') });
-    new Button(this, 500, 920, { label: 'SETTINGS', w: 560, h: 120, onClick: () => this.openSettings() });
-    new Button(this, REF_W - 200, 80, { label: 'COMPANY', w: 340, h: 110, fontSize: 30, onClick: () => this.go('Home') });
+    const insets = safeInsets(this);
+    const mx = 500 + insets.left;
+    new Button(this, mx, 640, { label: 'CONTINUE', sub: 'Enter the Road', w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.begin() });
+    new Button(this, mx, 786, { label: 'CHAPTERS', w: 560, h: 120, onClick: () => this.go('Chapters') });
+    new Button(this, mx, 920, { label: 'SETTINGS', w: 560, h: 120, onClick: () => this.openSettings() });
+    new Button(this, REF_W - 200 - insets.right, 80 + insets.top, { label: 'COMPANY', w: 340, h: 110, fontSize: 30, onClick: () => this.go('Home') });
   }
 
   /** Sign in (native) when needed, then continue with the first unfinished entry step. */
@@ -234,8 +251,11 @@ export class TitleScene extends Phaser.Scene {
     const profile = await Services.ready().content.presentation().catch(() => null);
     if (!this.sys.isActive() || revision !== this.viewRevision || request !== this.settingsRequest) return;
     const locales = ['en', ...(profile?.locales ?? []).filter((l) => l !== 'en')];
-    const shiftLocale = (delta: number): void => setPref('locale', locales[(Math.max(0, locales.indexOf(prefs().locale)) + delta + locales.length) % locales.length]!);
-    const { items, cx, cy } = this.openOverlay('SETTINGS', 1100, 1000);
+    const shiftLocale = (delta: number): void => {
+      setPref('locale', locales[(Math.max(0, locales.indexOf(prefs().locale)) + delta + locales.length) % locales.length]!);
+      void Services.ready().content.locale().then((loc) => setActiveLocaleStrings(loc?.strings)).catch(() => undefined);
+    };
+    const { items, cx, cy } = this.openOverlay('SETTINGS', 1720, 1000);
     const rows: { label: string; get: () => string; dec: () => void; inc: () => void }[] = [
       {
         label: 'Music',
@@ -273,6 +293,62 @@ export class TitleScene extends Phaser.Scene {
       items.push(new Button(this, cx + 350, y, { label: '+', w: 130, h: 100, fontSize: 48, onClick: () => { r.inc(); value.setText(r.get()); } }));
       items.push(value);
     });
+
+    const tiers: Prefs['qualityTier'][] = ['auto', 'low', 'medium', 'high'];
+    const layouts: Prefs['battleLayout'][] = ['afk_faithful', 'current', 'arena_lite'];
+    const layoutTag = (l: Prefs['battleLayout']): string => (l === 'afk_faithful' ? 'AFK' : l === 'arena_lite' ? 'ARENA' : 'CURRENT');
+    const a11yToggles: { getLabel: () => string; sub: string; onClick: (btn: Button) => void }[] = [
+      {
+        getLabel: () => `TEXT: ${prefs().textSize.toUpperCase()}`,
+        sub: 'Text Size',
+        onClick: (btn) => { setPref('textSize', prefs().textSize === 'normal' ? 'large' : 'normal'); btn.setLabel(`TEXT: ${prefs().textSize.toUpperCase()}`); }
+      },
+      {
+        getLabel: () => `CONTRAST: ${prefs().highContrast ? 'HIGH' : 'STD'}`,
+        sub: 'Contrast Mode',
+        onClick: (btn) => { setPref('highContrast', !prefs().highContrast); btn.setLabel(`CONTRAST: ${prefs().highContrast ? 'HIGH' : 'STD'}`); }
+      },
+      {
+        getLabel: () => `FLASH: ${prefs().reduceFlash ? 'REDUCED' : 'NORMAL'}`,
+        sub: 'Reduce Flash',
+        onClick: (btn) => { setPref('reduceFlash', !prefs().reduceFlash); btn.setLabel(`FLASH: ${prefs().reduceFlash ? 'REDUCED' : 'NORMAL'}`); }
+      },
+      {
+        getLabel: () => `QUALITY: ${prefs().qualityTier.toUpperCase()}`,
+        sub: 'Graphics Tier',
+        onClick: (btn) => {
+          const next = tiers[(tiers.indexOf(prefs().qualityTier) + 1) % tiers.length]!;
+          setPref('qualityTier', next);
+          btn.setLabel(`QUALITY: ${next.toUpperCase()}`);
+        }
+      },
+      {
+        getLabel: () => `LAYOUT: ${layoutTag(prefs().battleLayout)}`,
+        sub: 'Battle Layout',
+        onClick: (btn) => {
+          const next = layouts[(layouts.indexOf(prefs().battleLayout) + 1) % layouts.length]!;
+          setPref('battleLayout', next);
+          btn.setLabel(`LAYOUT: ${layoutTag(next)}`);
+        }
+      },
+      {
+        getLabel: () => 'PRIVACY OPTIONS',
+        sub: 'Ad Consent',
+        onClick: () => {
+          if (consentState()?.privacyOptionsRequired) {
+            void showPrivacyOptions().then(() => toast(this, 'Privacy choice updated')).catch((e: unknown) => toast(this, String(e instanceof Error ? e.message : e)));
+          } else {
+            toast(this, 'Privacy options: no personalised ad consent required on this build');
+          }
+        }
+      }
+    ];
+    a11yToggles.forEach((t, i) => {
+      const y = cy - 300 + i * 110;
+      const btn = new Button(this, 1600, y, { label: t.getLabel(), sub: t.sub, w: 340, h: 96, fontSize: 22, onClick: () => t.onClick(btn) });
+      items.push(btn);
+    });
+
     if (this.firstRun) {
       items.push(new Button(this, cx, cy + 400, { label: 'CLOSE', w: 560, onClick: () => this.closeOverlay() }));
     } else {

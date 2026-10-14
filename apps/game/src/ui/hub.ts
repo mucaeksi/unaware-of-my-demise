@@ -1,7 +1,9 @@
 import Phaser from 'phaser';
 import { REF_H, REF_W } from '../config';
+import { S } from '../entry/strings';
 import { ApiError, type Wallets } from '../net/api';
 import { currency } from '../net/currency';
+import { safeInsets } from '../platform/safeArea';
 import { Services } from '../services';
 import { Button, panel, sceneFadeIn, title, toast, txt } from './kit';
 import { DEPTH, T } from './theme';
@@ -31,9 +33,10 @@ export abstract class HubScene extends Phaser.Scene {
     void art.addBackdrop(this, 'forest_whispering_ash', -20);
     this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x0a0610, 0.88).setDepth(-10);
     sceneFadeIn(this, 350);
-    title(this, REF_W / 2, 70, this.heading, 60, T.gold);
-    new Button(this, 190, REF_H - 80, { label: 'BACK', w: 300, h: 110, onClick: () => this.goBack() });
-    this.walletText = txt(this, REF_W - 60, 70, '', { fontSize: '30px', color: T.text }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
+    const insets = safeInsets(this);
+    title(this, REF_W / 2, 70 + Math.round(insets.top * 0.5), this.heading, 60, T.gold);
+    new Button(this, 190 + insets.left, REF_H - 80 - insets.bottom, { label: S.hub.back, w: 300, h: 110, onClick: () => this.goBack() });
+    this.walletText = txt(this, REF_W - 60 - insets.right, 70 + Math.round(insets.top * 0.5), '', { fontSize: '30px', color: T.text }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
     this.body = this.add.container(0, 0);
     const authChanged = () => { void this.refresh(); };
     Services.api.addEventListener('auth', authChanged);
@@ -44,6 +47,7 @@ export abstract class HubScene extends Phaser.Scene {
     });
     void this.refresh();
   }
+
 
   protected goBack(): void {
     this.scene.start(this.backTo);

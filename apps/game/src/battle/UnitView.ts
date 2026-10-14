@@ -2,9 +2,11 @@ import Phaser from 'phaser';
 import type { Combatant } from '@uomd/combat';
 import type { UnitAnimState } from '@uomd/content-schema';
 import type { ArtLibrary } from '../content/ArtLibrary';
+import { prefs } from '../platform/prefs';
 import { Bar, hpColor, txt } from '../ui/kit';
 import { C, DEPTH, F, T } from '../ui/theme';
 import type { Spot } from './formation';
+
 
 export interface ViewInit {
   id: string;
@@ -127,6 +129,7 @@ export class UnitView extends Phaser.GameObjects.Container {
   }
 
   flash(color: number = 0xffffff, ms = 120): void {
+    if (this.reduced || prefs().reduceFlash) return;
     this.sprite.setTint(color).setTintMode(Phaser.TintModes.FILL);
     this.scene.time.delayedCall(ms, () => this.sprite.clearTint().setTintMode(Phaser.TintModes.MULTIPLY));
   }
@@ -160,13 +163,27 @@ export class UnitView extends Phaser.GameObjects.Container {
     if (text) this.intentText.setText(targetsLabel ? `▸ ${text} → ${targetsLabel}` : `▸ ${text}`);
   }
 
-  setBadges(c: Pick<Combatant, 'statuses' | 'shields'>, statusNames: ReadonlyMap<string, string>): void {
+  setBadges(
+    c: Pick<Combatant, 'statuses' | 'shields'>,
+    statusNames: ReadonlyMap<string, string | { name: string; category: string }>
+  ): void {
     const shield = c.shields.reduce((n, s) => n + s.amount, 0);
-    this.shieldText.setText(shield > 0 ? `SH ${shield}` : '');
-    this.statusText.setText(c.statuses.map((s) => `${statusNames.get(s.statusId) ?? s.statusId} ${s.turnsLeft}`).join('  ·  '));
+    this.shieldText.setText(shield > 0 ? `⛨ SH ${shield}` : '');
+    this.statusText.setText(
+      c.statuses
+        .map((s) => {
+          const meta = statusNames.get(s.statusId);
+          const name = typeof meta === 'string' ? meta : meta?.name ?? s.statusId;
+          const cat = typeof meta === 'object' && meta ? meta.category : '';
+          const cue = cat === 'buff' ? '▲ ' : cat === 'control' ? '◆ ' : cat === 'debuff' ? '▼ ' : '';
+          return `${cue}${name} ${s.turnsLeft}`;
+        })
+        .join('  ·  ')
+    );
   }
 
   override destroy(fromScene?: boolean): void {
+
     this.plate.destroy(fromScene);
     super.destroy(fromScene);
   }

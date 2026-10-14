@@ -8,6 +8,7 @@ import { loadEntry, markPrologueSeen } from '../entry/state';
 import { recordEntry } from '../entry/sync';
 import { plateKey } from '../entry/plates';
 import { prefs } from '../platform/prefs';
+import { safeInsets } from '../platform/safeArea';
 import { ArtLibrary } from '../content/ArtLibrary';
 import { NarrativeStage } from '../presentation/NarrativeStage';
 import { Services } from '../services';
@@ -68,32 +69,34 @@ export class PrologueScene extends Phaser.Scene {
 
   create(): void {
     this.cameras.main.setBackgroundColor(0x000000);
+    const insets = safeInsets(this);
     this.shade = this.add.graphics().setDepth(DEPTH.hud - 100);
     this.shade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0, 0, 0.88, 0.88);
     this.shade.fillRect(0, REF_H - 470, REF_W, 470);
     this.shade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.55, 0.55, 0, 0);
     this.shade.fillRect(0, 0, REF_W, 220);
     this.shade.setAlpha(0);
-    this.caption = txt(this, REF_W / 2, 96, '', { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: '#e3c37d', stroke: '#05030a', strokeThickness: 5 }).setOrigin(0.5).setLetterSpacing(9).setDepth(DEPTH.hud).setAlpha(0);
-    this.body = txt(this, REF_W / 2, REF_H - 300, '', { fontFamily: F.body, fontSize: '46px', fontStyle: '500', color: T.text, align: 'center', wordWrap: { width: 1520 }, lineSpacing: 14, stroke: '#05030a', strokeThickness: 6 }).setOrigin(0.5, 0).setDepth(DEPTH.hud);
+    this.caption = txt(this, REF_W / 2, 96 + Math.round(insets.top * 0.5), '', { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: '#e3c37d', stroke: '#05030a', strokeThickness: 5 }).setOrigin(0.5).setLetterSpacing(9).setDepth(DEPTH.hud).setAlpha(0);
+    this.body = txt(this, REF_W / 2, REF_H - 300 - insets.bottom, '', { fontFamily: F.body, fontSize: '46px', fontStyle: '500', color: T.text, align: 'center', wordWrap: { width: 1520 - insets.left - insets.right }, lineSpacing: 14, stroke: '#05030a', strokeThickness: 6 }).setOrigin(0.5, 0).setDepth(DEPTH.hud);
     this.buildControls();
     if (!prefs().reducedMotion && !INTRO_FAST) this.addMotes();
     void this.loadScript();
   }
 
   private buildControls(): void {
+    const insets = safeInsets(this);
     this.input.on('pointerdown', () => {
       const ctx = (this.sound as Phaser.Sound.WebAudioSoundManager).context;
       if (ctx?.state === 'suspended') void ctx.resume().catch(() => undefined);
     });
-    this.pauseBtn = new Button(this, 130, 64, {
+    this.pauseBtn = new Button(this, 130 + insets.left, 64 + insets.top, {
       label: 'PAUSE',
       w: 180,
       h: 72,
       fontSize: 24,
       onClick: () => this.togglePause()
     }).setDepth(DEPTH.hud + 3);
-    this.muteBtn = new Button(this, 330, 64, {
+    this.muteBtn = new Button(this, 330 + insets.left, 64 + insets.top, {
       label: this.muted ? 'UNMUTE' : 'MUTE',
       w: 180,
       h: 72,
@@ -101,7 +104,7 @@ export class PrologueScene extends Phaser.Scene {
       onClick: () => this.toggleMute()
     }).setDepth(DEPTH.hud + 3);
     if (loadEntry().phase === 'completed') {
-      new Button(this, REF_W - 150, 70, {
+      new Button(this, REF_W - 150 - insets.right, 70 + insets.top, {
         label: 'SKIP',
         w: 200,
         h: 78,
@@ -119,9 +122,14 @@ export class PrologueScene extends Phaser.Scene {
         this.tweens.resumeAll();
       }
     };
+    const onContextLost = (): void => {
+      if (!this.done && this.index >= 0) savePrologueCheckpoint(Services.api.accountKey, this.index);
+    };
     document.addEventListener('visibilitychange', onVisibility);
+    this.game.events.on('webgl:contextlost', onContextLost);
     this.events.once('shutdown', () => {
       document.removeEventListener('visibilitychange', onVisibility);
+      this.game.events.off('webgl:contextlost', onContextLost);
       this.time.paused = false;
     });
   }

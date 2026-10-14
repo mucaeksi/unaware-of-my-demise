@@ -5,9 +5,12 @@ import { canonicalJson, sha256Hex } from '@uomd/shared';
 import { API_BASE, REF_H, REF_W } from '../config';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
-import { spotFor } from '../battle/formation';
+import { activeBattleLayout, battleLayoutSpec, spotFor, type BattleLayoutPreset } from '../battle/formation';
 import { UnitView } from '../battle/UnitView';
+import { announce } from '../platform/a11y';
+import { qualityProfile } from '../platform/graphics';
 import { prefs } from '../platform/prefs';
+import { safeInsets } from '../platform/safeArea';
 import { describeAttachment } from '../ui/format';
 import { Services } from '../services';
 import { Button, panel, sceneFadeIn, title, toast, txt } from '../ui/kit';
@@ -34,7 +37,10 @@ export interface BattleInit {
   onRetry?: (scene: Phaser.Scene) => void;
   /** opening tutorial: no stars, no server verification line, retreat goes back to the story before the fight */
   tutorial?: boolean;
+  /** optional layout preset override (A: current, B: arena_lite, C: afk_faithful) */
+  layout?: BattleLayoutPreset;
 }
+
 
 const ELEMENT_COLOR: Record<string, number> = { Veil: C.veil, Stone: 0xe0d2b0, Ember: 0xff8a4c, Tide: 0x6cc4ff, Gale: 0x9be8c3, Dawn: 0xffe9a8 };
 
@@ -128,21 +134,30 @@ export class BattleScene extends Phaser.Scene {
     await this.loop();
   }
 
+  private get layoutPreset(): BattleLayoutPreset {
+    return this.cfg.layout ?? activeBattleLayout();
+  }
+
   // ------------------------------------------------------------------ world
 
   private buildWorld(): void {
     const { art } = Services.ready();
+    const q = qualityProfile();
+    const insets = safeInsets(this);
+    const insetX = Math.max(insets.left, insets.right);
     const bg = this.add.image(REF_W / 2, 0, art.background(this.encounter.location_id)).setOrigin(0.5, 0).setDepth(DEPTH.bg);
     bg.setScale(Math.max(REF_W / bg.width, REF_H / bg.height));
     const grade = this.add.graphics().setDepth(DEPTH.bg + 2);
     grade.fillGradientStyle(0x0a0610, 0x0a0610, 0x0a0610, 0x0a0610, 0.35, 0.35, 0.65, 0.65);
     grade.fillRect(0, 0, REF_W, REF_H);
-    try {
-      this.cameras.main.filters.external.addVignette(0.5, 0.5, 0.82, 0.3);
-    } catch {
-      /* cosmetic */
+    if (q.vignette) {
+      try {
+        this.cameras.main.filters.external.addVignette(0.5, 0.5, 0.82, 0.3);
+      } catch {
+        /* cosmetic */
+      }
     }
-    if (!prefs().reducedMotion) {
+    if (!prefs().reducedMotion && q.particles && q.particleDensity > 0) {
       this.add.particles(0, 0, 'fx_spark', {
         x: { min: 0, max: REF_W },
         y: { min: 200, max: 900 },
@@ -151,7 +166,7 @@ export class BattleScene extends Phaser.Scene {
         speedX: { min: -8, max: 10 },
         scale: { start: 0.12, end: 0 },
         alpha: { start: 0.35, end: 0 },
-        frequency: 220,
+        frequency: Math.round(220 / q.particleDensity),
         tint: 0xcbb8e8,
         blendMode: 'ADD'
       }).setDepth(DEPTH.fx - 50);
@@ -163,7 +178,7 @@ export class BattleScene extends Phaser.Scene {
       for (const row of ['front', 'rear'] as const) {
         const inRow = list.filter((c) => c.row === row).sort((a, b) => a.slot - b.slot);
         inRow.forEach((c, i) => {
-          const spot = spotFor(side, row, i, inRow.length);
+          const spot = spotFor(side, row, i, inRow.length, this.layoutPreset, insetX);
           const v = new UnitView(this, art, { id: c.id, name: c.def.name_en, side, artKey: defs.get(c.def.unit_id)?.art_key ?? c.def.unit_id, maxHp: c.maxHp, hp: c.hp, spot }, prefs().reducedMotion);
           v.setDepth(DEPTH.units + spot.y);
           v.on('pointerup', () => this.onUnitTapped(v));
@@ -176,50 +191,55 @@ export class BattleScene extends Phaser.Scene {
   // ------------------------------------------------------------------ HUD
 
   private buildHud(): void {
+    const insets = safeInsets(this);
+    const spec = battleLayoutSpec(this.layoutPreset);
     // top-left: stage title; centre-left: turn order
-    title(this, 60, 62, `${this.encounter.stage_id}  ·  ${this.encounter.title_en}`, 36, T.gold).setOrigin(0, 0.5).setDepth(DEPTH.hud);
+    title(this, 60 + insets.left, 62 + insets.top, `${this.encounter.stage_id}  ·  ${this.encounter.title_en}`, 36, T.gold).setOrigin(0, 0.5).setDepth(DEPTH.hud);
     this.chipLayer = this.add.container(0, 0).setDepth(DEPTH.hud);
-    txt(this, 60, 122, 'TURN ORDER', { fontFamily: F.display, fontSize: '20px', color: T.dim }).setDepth(DEPTH.hud);
+    txt(this, 60 + insets.left, 122 + insets.top, 'TURN ORDER', { fontFamily: F.display, fontSize: '20px', color: T.dim }).setDepth(DEPTH.hud);
 
     // the encounter's ui block can hide the speed and Auto buttons (the opening tutorials are manual, one turn at a time)
     const ui = this.encounter.ui ?? { speed: true, auto: true };
-    let edge = REF_W - 150;
+    let edge = REF_W - 150 - insets.right;
+    const btnY = 70 + insets.top;
     if (ui.speed) {
-      this.speedBtn = new Button(this, edge, 70, { label: '×1', w: 190, h: 100, fontSize: 36, onClick: () => this.toggleSpeed() }).setDepth(DEPTH.hud);
+      this.speedBtn = new Button(this, edge, btnY, { label: '×1', w: 190, h: 100, fontSize: 36, onClick: () => this.toggleSpeed() }).setDepth(DEPTH.hud);
       edge -= 215;
     }
     if (ui.auto) {
-      this.autoBtn = new Button(this, edge, 70, { label: 'AUTO', w: 210, h: 100, fontSize: 30, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
+      this.autoBtn = new Button(this, edge, btnY, { label: 'AUTO', w: 210, h: 100, fontSize: 30, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
       edge -= 220;
     }
-    new Button(this, edge, 70, { label: 'MENU', w: 210, h: 100, fontSize: 30, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
+    new Button(this, edge, btnY, { label: 'MENU', w: 210, h: 100, fontSize: 30, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
 
     // between the title block and the speed/auto/menu buttons there is free room at the top: the turn hint lives there
-    this.descText = txt(this, REF_W / 2, 860, '', { fontSize: '28px', color: T.text, align: 'center', wordWrap: { width: 1640 } }).setOrigin(0.5).setDepth(DEPTH.hud);
-    this.hintText = txt(this, 830, 62, '', { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setDepth(DEPTH.hud);
-    this.telegraphText = txt(this, REF_W - 60, 150, '', { fontFamily: F.display, fontSize: '30px', fontStyle: '700', color: T.crimson, stroke: '#0a0610', strokeThickness: 5 }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
+    this.descText = txt(this, REF_W / 2, spec.descY - insets.bottom, '', { fontSize: '28px', color: T.text, align: 'center', wordWrap: { width: 1640 - insets.left - insets.right } }).setOrigin(0.5).setDepth(DEPTH.hud);
+    this.hintText = txt(this, 830, 62 + insets.top, '', { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setDepth(DEPTH.hud);
+    this.telegraphText = txt(this, REF_W - 60 - insets.right, 150 + insets.top, '', { fontFamily: F.display, fontSize: '30px', fontStyle: '700', color: T.crimson, stroke: '#0a0610', strokeThickness: 5 }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
     this.refreshHud();
   }
 
   private refreshHud(): void {
     if (this.dead) return;
+    const insets = safeInsets(this);
+    const spec = battleLayoutSpec(this.layoutPreset);
     const order = this.battle.result ? [] : this.battle.previewOrder(8);
     this.chipLayer.removeAll(true);
     this.chips = [];
     order.forEach((id, i) => {
       const c = this.battle.unit(id);
-      const x = 120 + i * 108;
+      const x = 120 + insets.left + i * 108;
       const ring = this.add.circle(0, 0, 40, 0x120a18, 0.95).setStrokeStyle(4, c.side === 'player' ? C.player : C.enemy, i === 0 ? 1 : 0.7);
       const letter = txt(this, 0, -2, c.def.name_en.charAt(0).toUpperCase(), { fontFamily: F.display, fontSize: '36px', fontStyle: '700', color: c.side === 'player' ? '#cfe0ff' : '#ffb3c4' }).setOrigin(0.5);
-      const chip = this.add.container(x, 192, [ring, letter]);
+      const chip = this.add.container(x, spec.turnOrderY + insets.top, [ring, letter]);
       if (i === 0) chip.setScale(1.15);
       this.chipLayer.add(chip);
       this.chips.push(chip);
     });
-    // enemy intents + status badges
+    // enemy intents + status badges (with shape cues ▲/▼/◆/⛨)
     for (const [id, v] of this.views) {
       const c = this.battle.unit(id);
-      v.setBadges(c, new Map([...this.statusNames].map(([k, s]) => [k, s.name])));
+      v.setBadges(c, this.statusNames);
       if (c.side === 'enemy' && !c.objective) {
         const intent = c.alive ? this.battle.intentFor(id) : null;
         const tgt = intent?.targetId ? this.battle.unit(intent.targetId).def.name_en.toUpperCase() : undefined;
@@ -227,6 +247,7 @@ export class BattleScene extends Phaser.Scene {
       }
     }
   }
+
 
   private toggleSpeed(): void {
     this.speed = this.speed >= 3 ? 1 : this.speed + 1; // ×1 → ×2 → ×3 → ×1
@@ -345,6 +366,8 @@ export class BattleScene extends Phaser.Scene {
     this.clearSkillPanel();
     this.submit = submit;
     this.selected = null;
+    const insets = safeInsets(this);
+    const spec = battleLayoutSpec(this.layoutPreset);
     const actor = this.battle.unit(prompt.actor);
     const items: Phaser.GameObjects.GameObject[] = [];
     const n = prompt.options.length;
@@ -352,13 +375,15 @@ export class BattleScene extends Phaser.Scene {
     const gap = 24;
     const x0 = REF_W / 2 - ((n - 1) * (w + gap)) / 2;
     const passive = actor.def.skills.find((s) => s.type === 'passive');
-    this.hintText.setText(`${actor.def.name_en.toUpperCase()}'S TURN`);
+    const turnBanner = `${actor.def.name_en.toUpperCase()}'S TURN`;
+    this.hintText.setText(turnBanner);
+    announce(turnBanner);
     this.descText.setText(passive ? `Passive — ${passive.name_en}: ${passive.description_en}` : '');
     this.descText.setColor(T.dim);
     prompt.options.forEach((o, i) => {
       const label = o.type === 'ultimate' ? 'ULTIMATE' : o.type === 'basic' ? 'BASIC' : 'SKILL';
       const sub = !o.available ? (o.reason === 'cooldown' ? `Cooldown ${o.cooldownLeft}` : `Focus ${actor.focus}/${o.def.focus_cost}`) : label;
-      const b = new Button(this, x0 + i * (w + gap), 960, { label: o.name.toUpperCase(), sub, w, h: 128, fontSize: 28, variant: o.type === 'ultimate' ? 'hot' : 'normal', onClick: () => this.onSkillTapped(o, b) });
+      const b = new Button(this, x0 + i * (w + gap), spec.skillBarY - insets.bottom, { label: o.name.toUpperCase(), sub, w, h: 128, fontSize: 28, variant: o.type === 'ultimate' ? 'hot' : 'normal', onClick: () => this.onSkillTapped(o, b) });
       b.setEnabled(o.available);
       items.push(b);
     });
@@ -410,12 +435,13 @@ export class BattleScene extends Phaser.Scene {
   /** Reinforcements called mid-battle: load their art, add a view and spread the enemy side again. */
   private async addSummoned(id: string): Promise<void> {
     const { art } = Services.ready();
+    const insets = safeInsets(this);
     const c = this.battle.unit(id);
     const defs = new Map(this.pack.units.map((u) => [u.unit_id, u]));
     const artKey = defs.get(c.def.unit_id)?.art_key ?? c.def.art_key;
     await art.loadUnits(this, [artKey]);
     if (this.dead) return;
-    const spot = spotFor(c.side, c.row, 0, 1);
+    const spot = spotFor(c.side, c.row, 0, 1, this.layoutPreset, Math.max(insets.left, insets.right));
     const v = new UnitView(this, art, { id: c.id, name: c.def.name_en, side: c.side, artKey, maxHp: c.maxHp, hp: c.hp, spot }, prefs().reducedMotion);
     v.setDepth(DEPTH.units + spot.y);
     v.on('pointerup', () => this.onUnitTapped(v));
@@ -426,13 +452,15 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private relayout(side: 'player' | 'enemy'): void {
+    const insets = safeInsets(this);
+    const insetX = Math.max(insets.left, insets.right);
     const list = this.battle.combatants.filter((c) => c.side === side);
     for (const row of ['front', 'rear'] as const) {
       const inRow = list.filter((c) => c.row === row).sort((a, b) => a.slot - b.slot);
       inRow.forEach((c, i) => {
         const v = this.views.get(c.id);
         if (!v) return;
-        const spot = spotFor(side, row, i, inRow.length);
+        const spot = spotFor(side, row, i, inRow.length, this.layoutPreset, insetX);
         v.glideTo(spot);
         v.setDepth(DEPTH.units + spot.y);
       });
@@ -466,14 +494,15 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private burst(x: number, y: number, color: number, count = 14): void {
-    if (prefs().reducedMotion) return;
+    const q = qualityProfile();
+    if (prefs().reducedMotion || prefs().reduceFlash || !q.particles || q.particleDensity <= 0) return;
     const em = this.add.particles(x, y, 'fx_spark', { speed: { min: 90, max: 340 }, angle: { min: 0, max: 360 }, scale: { start: 0.55, end: 0 }, alpha: { start: 1, end: 0 }, lifespan: 520, tint: color, blendMode: 'ADD', emitting: false }).setDepth(DEPTH.fx);
-    em.explode(count);
+    em.explode(Math.max(4, Math.round(count * q.particleDensity)));
     this.time.delayedCall(800, () => em.destroy());
   }
 
   private ringPulse(x: number, y: number, color: number, radius = 150): void {
-    if (prefs().reducedMotion) return;
+    if (prefs().reducedMotion || prefs().reduceFlash) return;
     const r = this.add.circle(x, y, 20, color, 0).setStrokeStyle(6, color, 0.9).setDepth(DEPTH.fx);
     this.tweens.add({ targets: r, radius, alpha: 0, duration: 650, ease: 'Cubic.easeOut', onComplete: () => r.destroy() });
   }
@@ -504,6 +533,7 @@ export class BattleScene extends Phaser.Scene {
 
   private async present(e: BattleEvent): Promise<void> {
     const reduced = prefs().reducedMotion;
+    const noFlash = reduced || prefs().reduceFlash;
     switch (e.type) {
       case 'turn_start': {
         await this.settleAction();
@@ -514,7 +544,7 @@ export class BattleScene extends Phaser.Scene {
         break;
       }
       case 'turn_skipped': {
-        this.float(this.view(e.actor), 'STAGGERED', T.crimson, 34);
+        this.float(this.view(e.actor), '◆ STAGGERED', T.crimson, 34);
         await this.wait(400);
         break;
       }
@@ -530,7 +560,7 @@ export class BattleScene extends Phaser.Scene {
         let dim: Phaser.GameObjects.Rectangle | null = null;
         if (ult) {
           Sfx.ultimate();
-          if (!reduced) {
+          if (!noFlash) {
             dim = this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x07040c, 0).setDepth(DEPTH.units + 1100);
             this.tweens.add({ targets: dim, alpha: 0.55, duration: 260 });
             v.setDepth(DEPTH.units + 1150);
@@ -561,12 +591,12 @@ export class BattleScene extends Phaser.Scene {
         if (e.counter) this.float(t, 'COUNTER', T.gold, 30, -60);
         if (e.redirectedFrom) this.float(t, 'INTERCEPT', T.gold, 28, 70);
         if (e.amount > 0) this.float(t, e.crit ? `-${e.amount}!` : `-${e.amount}`, e.crit ? T.crit : e.counter ? T.gold : '#ffffff', e.crit ? 60 : 44);
-        if (e.absorbed > 0) this.float(t, e.amount === 0 ? 'BLOCKED' : `(${e.absorbed} absorbed)`, T.shield, 30, e.amount === 0 ? 0 : 80);
+        if (e.absorbed > 0) this.float(t, e.amount === 0 ? '⛨ BLOCKED' : `(${e.absorbed} absorbed)`, T.shield, 30, e.amount === 0 ? 0 : 80);
         t.setHp(e.hpAfter, this.battle.unit(e.target).maxHp);
         if (!reduced) {
           const spr = t.pose();
           this.tweens.add({ targets: spr, x: { from: -10, to: 10 }, duration: 55, yoyo: true, repeat: 2, onComplete: () => spr.setX(0) });
-          if (e.crit) this.cameras.main.shake(180, 0.006);
+          if (e.crit && !noFlash) this.cameras.main.shake(180, 0.006);
         }
         await this.wait(e.crit ? 360 : 270);
         if (t.alive && t.animState === 'hit') t.applyState('idle');
@@ -583,7 +613,7 @@ export class BattleScene extends Phaser.Scene {
       }
       case 'shield': {
         const t = this.view(e.target);
-        this.float(t, `+${e.amount} SHIELD`, T.shield, 34);
+        this.float(t, `⛨ +${e.amount} SHIELD`, T.shield, 34);
         this.ringPulse(t.hitPoint.x, t.hitPoint.y, C.shield, 120);
         Sfx.guard();
         await this.wait(200);
@@ -592,11 +622,13 @@ export class BattleScene extends Phaser.Scene {
       case 'status_applied': {
         const t = this.view(e.target);
         const s = this.statusNames.get(e.status);
-        this.float(t, (s?.name ?? e.status).toUpperCase(), s?.category === 'buff' ? T.shield : T.crimson, 32, 0);
+        const cue = s?.category === 'buff' ? '▲ ' : s?.category === 'control' ? '◆ ' : '▼ ';
+        this.float(t, `${cue}${(s?.name ?? e.status).toUpperCase()}`, s?.category === 'buff' ? T.shield : T.crimson, 32, 0);
         await this.wait(190);
         break;
       }
       case 'status_removed': {
+
         if (e.reason === 'cleansed') this.float(this.view(e.target), 'CLEANSED', T.heal, 30);
         break;
       }

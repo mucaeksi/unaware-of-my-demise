@@ -30,6 +30,7 @@ import { SummonScene } from './scenes/SummonScene';
 import { TasksScene } from './scenes/TasksScene';
 import { TeamScene } from './scenes/TeamScene';
 import { TitleScene } from './scenes/TitleScene';
+import { installContextRecovery, qualityProfile } from './platform/graphics';
 import { Services } from './services';
 
 function fatal(message: string): void {
@@ -41,6 +42,7 @@ function fatal(message: string): void {
 }
 
 try {
+  const qp = qualityProfile();
   const game = new Phaser.Game({
     type: Phaser.WEBGL,
     parent: 'game',
@@ -48,18 +50,15 @@ try {
     width: REF_W,
     height: REF_H,
     scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
-    render: { antialias: true, powerPreference: 'high-performance', roundPixels: false },
-    fps: { target: 60 },
+    render: { antialias: qp.tier !== 'low', powerPreference: qp.tier === 'low' ? 'low-power' : 'high-performance', roundPixels: false },
+    fps: { target: qp.targetFps },
     input: { touch: { capture: true }, activePointers: 2 },
     banner: false,
     scene: [BootScene, ContentPanelScene, SplashScene, StudioScene, TitleScene, PrologueScene, FinishScene, ChaptersScene, StoryScene, BattleScene, HomeScene, SummonScene, RosterScene, RecruitScene, LibraryScene, MailScene, ShopScene, AccountScene, OperationsScene, PurchasesScene, CharacterScene, GearScene, TasksScene, TeamScene, PatchBarScene]
   });
-  game.canvas?.addEventListener('webglcontextlost', (e) => {
-    e.preventDefault();
-    fatal('The graphics context was lost. Reload to continue.');
-  });
+  const contextRecovery = installContextRecovery(game, () => Services.refreshArt().then(() => undefined));
   // test/debug hook (read-only handles; no privileged state is exposed)
-  (window as unknown as { __UOMD__: unknown }).__UOMD__ = { game, services: Services, playNode };
+  (window as unknown as { __UOMD__: unknown }).__UOMD__ = { game, services: Services, playNode, contextRecovery };
 } catch (e) {
   fatal(`This device cannot run the game: ${e instanceof Error ? e.message : String(e)}`);
 }

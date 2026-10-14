@@ -27,11 +27,20 @@ export class AccountScene extends HubScene {
   protected async build(): Promise<void> {
     const api = Services.api;
     const identity = Services.identity;
+    const openPrivacy = (): void => {
+      if (consentState()?.privacyOptionsRequired) {
+        void showPrivacyOptions().then(() => this.say('Privacy choice updated')).catch((e) => this.say(errText(e)));
+      } else {
+        this.say('Privacy options: no personalised ad consent required on this build');
+      }
+    };
     if (!api.signedIn) {
       this.add_(txt(this, REF_W / 2, 330, 'Your account is a Google account. Progress, rolls and purchases are bound to it and survive a reinstall.', { fontSize: '36px', wordWrap: { width: 1400 }, align: 'center' }).setOrigin(0.5));
       const native = identity?.kind === 'native';
       this.add_(new Button(this, REF_W / 2, 520, { label: 'SIGN IN WITH GOOGLE', w: 760, h: 140, variant: native ? 'hot' : 'dim', onClick: () => void this.signIn() }).setEnabled(native));
       if (!native) this.add_(txt(this, REF_W / 2, 650, 'Google sign-in runs inside the Android app. This browser build cannot sign in.', { fontSize: '32px', color: T.dim }).setOrigin(0.5));
+      this.add_(new Button(this, REF_W / 2 - 280, 790, { label: 'PRIVACY OPTIONS (ADS)', w: 520, h: 110, fontSize: 28, onClick: openPrivacy }));
+      this.add_(new Button(this, REF_W / 2 + 280, 790, { label: 'SETTINGS', w: 520, h: 110, fontSize: 28, onClick: () => this.scene.start('Title', { openSettings: true }) }));
       return;
     }
     const me = await api.me();
@@ -45,8 +54,8 @@ export class AccountScene extends HubScene {
     this.add_(new Button(this, REF_W / 2 + 330, 590, { label: 'DOWNLOAD SAVE', w: 600, onClick: () => void this.download() }).setEnabled(save.version > 0));
     this.add_(new Button(this, REF_W / 2 - 330, 730, { label: 'EXPORT MY DATA', w: 600, onClick: () => void this.exportData() }));
     this.add_(new Button(this, REF_W / 2 + 330, 730, { label: 'SIGN OUT', w: 600, onClick: () => void this.signOut() }));
-    const consent = consentState();
-    if (consent?.privacyOptionsRequired) this.add_(new Button(this, REF_W / 2, 1010, { label: 'PRIVACY OPTIONS (ADS)', w: 900, onClick: () => void showPrivacyOptions().then(() => this.say('Privacy choice updated')).catch((e) => this.say(errText(e))) }));
+    this.add_(new Button(this, REF_W / 2 - 235, 1010, { label: 'PRIVACY OPTIONS (ADS)', w: 450, h: 96, fontSize: 24, onClick: openPrivacy }));
+    this.add_(new Button(this, REF_W / 2 + 235, 1010, { label: 'SETTINGS', w: 450, h: 96, fontSize: 24, onClick: () => this.scene.start('Title', { openSettings: true }) }));
     const confirming = this.confirmDeleteFor === me.id && this.confirmDeleteRevision === api.authRevision;
     this.add_(new Button(this, REF_W / 2, 880, { label: confirming ? 'TAP AGAIN TO DELETE FOREVER' : 'DELETE ACCOUNT', sub: confirming ? 'progress, wallet and roster cannot be restored' : undefined, w: 900, h: 130, variant: 'danger', onClick: () => void this.deleteAccount(me.id) }));
   }

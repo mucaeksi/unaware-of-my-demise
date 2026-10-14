@@ -6,6 +6,7 @@ import { NarrativeStage } from '../presentation/NarrativeStage';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { prefs } from '../platform/prefs';
+import { safeInsets } from '../platform/safeArea';
 import { CUTSCENE, cutsceneHoldSeconds, cutscenePauseSeconds } from '../entry/cutscene';
 import { clearStoryCheckpoint, loadReadLines, loadStoryCheckpoint, saveReadLines, saveStoryCheckpoint } from '../entry/resume';
 import { Services } from '../services';
@@ -175,23 +176,39 @@ export class StoryScene extends Phaser.Scene {
     this.input.keyboard?.on('keydown-SPACE', () => this.advance());
     this.input.keyboard?.on('keydown-ENTER', () => this.advance());
 
+    const insets = safeInsets(this);
     const panelBg = panel(this, 0, 0, 1640, 250, 'normal');
     this.nameText = txt(this, 0, 0, '', { fontFamily: F.display, fontSize: '36px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5);
     const plateBg = panel(this, 0, 0, 380, 72, 'hot');
     this.namePlate = this.add.container(0, 0, [plateBg, this.nameText]).setDepth(DEPTH.hud + 2).setVisible(false);
     this.bodyText = txt(this, -770, -88, '', { fontSize: '40px', color: T.text, lineSpacing: 6, wordWrap: { width: 1540 } });
     this.caret = txt(this, 770, 86, '▼', { fontSize: '32px', color: T.gold }).setOrigin(1, 0.5).setVisible(false);
-    this.box = this.add.container(REF_W / 2, 902, [panelBg, this.bodyText, this.caret]).setDepth(DEPTH.hud);
+    this.box = this.add.container(REF_W / 2, 902 - insets.bottom, [panelBg, this.bodyText, this.caret]).setDepth(DEPTH.hud);
 
-    this.voiceBtn = new Button(this, REF_W - 160, 210, { label: 'VOICE', w: 240, h: 110, fontSize: 28, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }).setDepth(DEPTH.hud + 3).setVisible(false);
+    this.voiceBtn = new Button(this, REF_W - 160 - insets.right, 210 + insets.top, { label: 'VOICE', w: 240, h: 110, fontSize: 28, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }).setDepth(DEPTH.hud + 3).setVisible(false);
     // cutscenes have no Skip and a single on/off Auto toggle (v006); the regular reader keeps Skip
-    if (!this.cutscene) this.skipBtn = new Button(this, REF_W - 150, 70, { label: 'SKIP', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
-    const rightEdge = this.cutscene ? REF_W - 150 : REF_W - 400;
-    this.autoBtn = new Button(this, rightEdge, 70, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
-    new Button(this, rightEdge - 250, 70, { label: 'LOG', w: 220, h: 86, fontSize: 28, onClick: () => this.showLog() }).setDepth(DEPTH.hud + 3);
-    title(this, 170, 70, this.data0.title_en, 34, T.dim).setDepth(DEPTH.hud + 3).setOrigin(0, 0.5).setX(60);
-    if (this.init0.authRevision !== undefined && this.init0.onBack) new Button(this, 220, 210, { label: 'ARCHIVE', w: 340, h: 110, onClick: () => this.init0.onBack?.(this) }).setDepth(DEPTH.hud + 3);
+    if (!this.cutscene) this.skipBtn = new Button(this, REF_W - 150 - insets.right, 70 + insets.top, { label: 'SKIP', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
+    const rightEdge = (this.cutscene ? REF_W - 150 : REF_W - 400) - insets.right;
+    this.autoBtn = new Button(this, rightEdge, 70 + insets.top, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
+    new Button(this, rightEdge - 250, 70 + insets.top, { label: 'LOG', w: 220, h: 86, fontSize: 28, onClick: () => this.showLog() }).setDepth(DEPTH.hud + 3);
+    title(this, 170 + insets.left, 70 + insets.top, this.data0.title_en, 34, T.dim).setDepth(DEPTH.hud + 3).setOrigin(0, 0.5).setX(60 + insets.left);
+    if (this.init0.authRevision !== undefined && this.init0.onBack) new Button(this, 220 + insets.left, 210 + insets.top, { label: 'ARCHIVE', w: 340, h: 110, onClick: () => this.init0.onBack?.(this) }).setDepth(DEPTH.hud + 3);
     this.tweens.add({ targets: this.caret, alpha: 0.2, duration: 600, yoyo: true, repeat: -1 });
+    const onContextLost = (): void => {
+      if (!this.finished && this.data0 && this.runner) {
+        saveStoryCheckpoint(Services.api.accountKey, {
+          path: this.init0.path,
+          sceneId: this.data0.scene_id,
+          checkpointId: this.currentLine?.lineId,
+          state: this.runner.saveAtCurrentEvent()
+        });
+        saveReadLines(Services.api.accountKey, this.read);
+      }
+    };
+    this.game.events.on('webgl:contextlost', onContextLost);
+    this.events.once('shutdown', () => {
+      this.game.events.off('webgl:contextlost', onContextLost);
+    });
   }
 
   /** Applies reconstructed visual/audio state when resuming from a mid-scene checkpoint. */

@@ -1,6 +1,7 @@
 import type { BattleParty } from '@uomd/content-schema';
 import { LibraryEntry, LibraryListing, type LibraryCard } from '@uomd/content-schema';
 import { API_BASE } from '../config';
+import type { CatalogProgressionConfig } from '../ui/growth';
 import { OperationJournal, type OperationRecord } from './operations';
 import { canonicalJson, sha256Hex } from '@uomd/shared';
 
@@ -563,13 +564,13 @@ export class GameApi extends EventTarget {
   characters(releaseId?: string): Promise<{ account: { level: number; xp: number }; characters: CharacterView[]; unavailable?: { id: string; reason: string }[] }> {
     return this.call('GET', `/api/v1/characters/mine${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
   }
-  levelUp(id: string, items: { itemId: string; quantity: number }[], releaseId?: string): Promise<{ level: number }> {
+  levelUp(id: string, items: { itemId: string; quantity: number }[], releaseId?: string): Promise<{ level: number; xp?: number; gainedXp?: number; levelsGained?: number; wastedXp?: number; cap?: number; balance?: number; spent?: { items: { itemId: string; quantity: number }[]; fee: number } }> {
     return this.mutate(`/api/v1/characters/${id}/level-up`, { items, ...(releaseId ? { releaseId } : {}) });
   }
-  ascend(id: string, releaseId?: string): Promise<{ ascension: number }> {
+  ascend(id: string, releaseId?: string): Promise<{ ascension: number; level?: number; newCap?: number; balance?: number; spent?: { items: { itemId: string; quantity: number }[]; fee: number } }> {
     return this.mutate(`/api/v1/characters/${id}/ascend`, releaseId ? { releaseId } : {});
   }
-  upgradeSkill(id: string, skillId: string, releaseId?: string): Promise<{ rank: number }> {
+  upgradeSkill(id: string, skillId: string, releaseId?: string): Promise<{ rank: number; skillId?: string; balance?: number; spent?: { items: { itemId: string; quantity: number }[]; fee: number } }> {
     return this.mutate(`/api/v1/characters/${id}/skills/${skillId}/upgrade`, releaseId ? { releaseId } : {});
   }
   characterStats(id: string, releaseId?: string): Promise<{ level: number; stats: Record<string, number> }> {
@@ -617,12 +618,15 @@ export class GameApi extends EventTarget {
     this.store(null);
   }
   async catalogNames(releaseId?: string): Promise<Map<string, string>> {
-    const c = await this.call<{ items: { item_id: string; name_en: string; xp_value: number | null; kind: string }[]; gear: { gear_id: string; name_en: string }[] }>('GET', `/api/v1/catalog${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`, undefined, false);
+    const c = await this.call<{ items: { item_id: string; name_en: string; xp_value: number | null; kind: string }[]; gear: { gear_id: string; name_en: string }[]; config?: { progression?: CatalogProgressionConfig } }>('GET', `/api/v1/catalog${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`, undefined, false);
     this.xpItems = c.items.filter((i) => i.kind === 'character_xp' && i.xp_value).map((i) => ({ itemId: i.item_id, xp: i.xp_value as number })).sort((a, b) => a.xp - b.xp);
+    if (c.config?.progression) this.progressionConfig = c.config.progression;
     return new Map([...c.items.map((i): [string, string] => [i.item_id, i.name_en]), ...c.gear.map((g): [string, string] => [g.gear_id, g.name_en])]);
   }
   /** character-XP items by ascending xp value (filled by catalogNames) */
   xpItems: { itemId: string; xp: number }[] = [];
+  /** progression curve and fee configuration (filled by catalogNames) */
+  progressionConfig: CatalogProgressionConfig | null = null;
   async verifyPurchase(productId: string, purchaseToken: string, expectedRevision = this.authRevision): Promise<{ status: 'granted' | 'already_granted' | 'pending' | 'not_entitled'; productId: string; orderId?: string }> {
     const result = await this.call<{ status: 'granted' | 'already_granted' | 'pending' | 'not_entitled'; productId: string; orderId?: string }>('POST', '/api/v1/shop/verify', { productId, purchaseToken }, true, expectedRevision);
     if (!result || result.productId !== productId || !['granted', 'already_granted', 'pending', 'not_entitled'].includes(result.status)
