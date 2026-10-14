@@ -34,8 +34,22 @@ Argon 4 owns design choices and produces the images/animations with tools actual
 
 Private OAuth/Play/AdMob/signing/age keys, financial-policy/legal facts, authorized alert destination and production/public release stay explicit external gates. Never invent them or ask for private values in chat. See [SECRETS_AND_PERMISSIONS](SECRETS_AND_PERMISSIONS.md) and README for exact inputs.
 
-## Validation and delivery facts
+## Argon 4 / Antigravity local deliveries (2026-10-15)
 
-Use README's commands. No simultaneous E2E stacks on the same ports/state; no mutable content rebuild during browser reads; run heavy suites/Graphify after browser shutdown. E2E uses disposable real local D1/R2 and ephemeral identity/signing fixtures. `.cache/e2e-shots` is ignored and may not transfer; trace archives may contain auth data and must not be published.
+- **R09 (`123c3e6e`)**: Nine-shot prologue caption-alpha/overlap fix, durable account-scoped resume, audio-gesture unlock, native restart fallback, campaign Continue target resolution and first-clear vs repeat stage preview.
+- **R13-A (`524f0043`, Opus 5.5 merged)**: Cumulative admin mail grant threshold, atomic mail/compensation audit, banner/shop CAS and cursor pagination/filtering endpoints.
+- **R10 (`6f32229a`)**: Battle layout candidates (`afk_faithful`, `current`, `arena_lite`), dynamic cutout/safe-area inset helper (`safeArea.ts`), companion growth legibility tabs (`OVERVIEW | LEVEL | ASCEND | SKILLS`) and accessibility/quality preferences.
+- **R11 (`b7cacc52`)**: Native identity (`AndroidKeyStore`), store catalog/offer disclosures, startup/resume/reinstall purchase reconciliation, reactive UMP consent & child/teen ad policy, nonce-bound rewarded ad verification, 21-table account erasure + deletion-on-restore (`account_deletions`, migration `0028_r11_privacy_ads_reconcile.sql`) and fail-closed Android release gates.
+- **R17-A (`f0020808`, Opus 5.5 merged)**: Bounded snapshot-consistent D1 backup (`apps/api/src/ops/dump.ts`, `apps/api/src/ops/backup.ts`) and index-backed monitoring prune/freshness (`apps/api/src/monitoring.ts`, `apps/api/src/admin/monitoring.ts`).
+- **R13 (`55d3437d`)**: Control Center workflows, release composer, R2 asset provenance (`POST /admin/api/assets/:id/approve`, `mediaProvenance`), release diff, sensitive approvals endpoint and Access MFA gate (`ACCESS_REQUIRE_MFA`).
+- **R12 (`fc1daea1`)**: Stage Sweep, character-bound Memory Shards nonmandatory resonance & excess conversion, AFK Idle Patrol, Mode Unlock Gates, Achievements, Seasonal Events, Profile & Leaderboards, Async Arena and Endless Corridor (`0029_r12_modes_and_progression.sql`).
+- **R14-B (`c9dfbca2`)**: Deterministic offline art ingest (`tools/ingest_art.ts`), component-first sheet slicer (`tools/lib/slice.ts`), `A31` reference hygiene and `tools/build_content.ts` approved-art assembly & `--strict-art`.
+- **R17-B (`b1c3b3cf`)**: Encrypted backup verification & restore rehearsal (`apps/api/src/ops/restore.ts`), deletion-on-restore account scrub (`reapplyAccountDeletions`), R2 backup retention/lifecycle pruning (`pruneBackups`), optional public Cloudflare Access edge probe (`admin_access_edge`) and out-of-band R2/webhook alert persistence (`alerts/<target>/latest.json`).
+- **R16 (`8e0e1c3d`)**: Chronological variable-fee/material-gate/no-ad simulator (`packages/economy/src/chronological.ts`), final-boss repeat-5★ vs first-clear resolution (`resolveFinalBossDropTable`), unconditional 80-token UTC Daily Supplies recovery floor (`POST /api/v1/tasks/supplies`) and reviewed Japanese voice transcript/reading validation (`apps/game/src/audio/voiceTranscripts.ts`).
+- **R15 (`4b94649c`)**: Locked Fadyme/Mahmut pilot identity anchors, adult-age provenance, resolved hood-vs-cape and studio mark decisions, 8-pose chibi contract verification, third-party engine credit separation (`apps/game/src/ui/pilotAttachment.ts`) and companion bond/tactical/expression UI in `RosterScene`, `CharacterScene` and `SummonScene`.
 
-A main push may trigger existing Cloudflare Workers Builds. It does not establish a deployment PASS. Preserve one Worker per pipeline and game-only migration ownership; no obsolete GitHub Actions recreation. Report exact commit and observed build/deployment/device evidence separately. Update README/DEV_TRACKER/BUILD_STATE/INFRA_ROADMAP/this checkpoint after each verified delivery, preserving historical evidence dates.
+## Remaining parallel & external gates
+
+- **Opus 5.5 worktree (`C:\Users\PC\uomd-opus-worktree`)**: Paket 2 (`R14-A` atomic file lock & per-call reservation ledger in `packages/shared/src/budget.ts` and `packages/shared/src/media.ts`) and Paket 4 (`R06/R12-Engine` elemental/status resistance & multi-wave encounter progression) can be merged into `main` once committed in the worktree.
+- **R18 & External Gates**: Physical Android device testing, signed unchanged-AAB season proof, real Google OAuth/Play Billing/AdMob sandbox verification, owner-held `age` private-key live restore drill and live Cloudflare deployment tag verification remain explicit external gates.
+
