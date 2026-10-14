@@ -22,7 +22,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         // CI passes the build number; the Play Console needs a strictly increasing versionCode per upload
         versionCode Integer.parseInt(System.getenv("UOMD_VERSION_CODE") ?: "1")
-        versionName(System.getenv("UOMD_VERSION_NAME") ?: "0.1.0")
+        versionName(System.getenv("UOMD_VERSION_NAME") ?: "0.1.1")
         // public identifiers (not secrets): OAuth Web client (Google ID token audience) and the AdMob ids
         buildConfigField "String", "GOOGLE_WEB_CLIENT_ID", "\"" + (System.getenv("UOMD_GOOGLE_WEB_CLIENT_ID") ?: "604013824221-n7htgfhfs55njs5ie11ulojsk1tnk6da.apps.googleusercontent.com") + "\""
         manifestPlaceholders = [admobAppId: (System.getenv("UOMD_ADMOB_APP_ID") ?: "ca-app-pub-4258559369390965~2559970251")]

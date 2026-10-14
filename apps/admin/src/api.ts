@@ -80,6 +80,9 @@ export interface Release {
   channel: 'dev' | 'staging' | 'production';
   state: 'draft' | 'published' | 'retired';
   depends_on: string | null;
+  min_client: string;
+  max_client: string | null;
+  content_schema: number;
   notes: string;
   created_by: string;
   created_at: string;

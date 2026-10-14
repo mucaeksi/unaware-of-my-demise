@@ -53,7 +53,8 @@ async function loadBase(): Promise<BaseContent> {
 
 /**
  * Single access point for game content. Everything the scenes show (units, scenes, art, music) is
- * resolved through the patch overlay: active patch release first, embedded base otherwise.
+ * resolved through the active snapshot, or through the embedded base when no snapshot is active.
+ * Legacy dependent overlays may also inherit embedded files.
  */
 export class ContentService {
   readonly lastCheck: { outcome: PatchOutcome | null; at: number | null } = { outcome: null, at: null };

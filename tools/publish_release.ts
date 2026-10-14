@@ -1,13 +1,13 @@
 /**
  * Publishes a content directory through the Control Center API (the same path the admin UI uses).
  *   tsx tools/publish_release.ts --admin https://uomd-admin-staging.<sub>.workers.dev --dir content/base \
- *       --id rel_0001 --channel staging [--depends rel_0001] [--notes "..."] [--rollout 100] [--publish]
+ *       --id rel_0001 --channel staging [--depends rel_0001] [--notes "..."] [--min-client 0.1.1] [--max-client 1.0.0] [--content-schema 1] [--rollout 100] [--publish]
  * Auth: set CF_ACCESS_CLIENT_ID + CF_ACCESS_CLIENT_SECRET (Access service token) or UOMD_ADMIN_JWT (tests only).
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { sha256Hex } from '../packages/shared/src/index';
-import { MEDIA_TYPE_BY_EXTENSION, type AllowedExtension } from '../packages/content-schema/src/index';
+import { MEDIA_TYPE_BY_EXTENSION, MIN_SNAPSHOT_CLIENT_VERSION, type AllowedExtension } from '../packages/content-schema/src/index';
 import { ROOT } from './lib/fsutil';
 
 const arg = (n: string): string | undefined => {
@@ -57,6 +57,9 @@ const draft = await call('/releases', {
     id: need('id'),
     channel: need('channel'),
     notes: arg('notes') ?? '',
+    minClient: arg('min-client') ?? MIN_SNAPSHOT_CLIENT_VERSION,
+    ...(arg('max-client') ? { maxClient: arg('max-client') } : {}),
+    ...(arg('content-schema') ? { contentSchema: Number(arg('content-schema')) } : {}),
     ...(arg('depends') ? { dependsOn: arg('depends') } : {}),
     ...(arg('rollout') ? { rolloutPercent: Number(arg('rollout')) } : {}),
     files: files.map((f) => ({ path: f.path, sha256: f.sha256 }))

@@ -32,15 +32,15 @@ export function Releases({ me, say }: { me: Me; say: (m: string) => void }): Rea
     <>
       <header className="page"><h2>Content patches</h2><span className="badge">{rows.length} releases</span></header>
       <div className="notice">
-        Releases contain data and media only (JSON, WebP/PNG, OGG…). Executable code is rejected by the schema. Publishing signs the manifest (ES256) and atomically moves the channel pointer; rollback and kill switch publish a <em>new, higher</em> generation so devices only ever move forward.
+        Releases contain data and media only (JSON, WebP/PNG, OGG…). Executable code is rejected by the schema. Draft composition copies the complete file set from a published release on the same channel; the resulting snapshot has no runtime dependency. New snapshots require client 0.1.1 or later. Rollback preserves or tightens compatibility; kill retains the source limits. Publishing signs the manifest (ES256) and atomically moves the channel pointer; rollback and kill switch publish a <em>new, higher</em> generation so devices only ever move forward.
       </div>
-      <table>
-        <thead><tr><th>Channel</th><th>Gen</th><th>Release</th><th>State</th><th>Files</th><th>Depends on</th><th>Notes</th><th>Created</th><th /></tr></thead>
+      <div className="releases-table" role="region" aria-label="Content releases" tabIndex={0}><table>
+        <thead><tr><th>Channel</th><th>Gen</th><th>Release</th><th>State</th><th>Files</th><th>Compatibility</th><th>Legacy dependency</th><th>Notes</th><th>Created</th><th /></tr></thead>
         <tbody>
-          {rows.length === 0 ? <tr><td colSpan={9}>No releases yet. Upload objects and create a draft with <code>tools/publish_release.ts</code> or the API.</td></tr> : rows.map((r) => (
+          {rows.length === 0 ? <tr><td colSpan={10}>No releases yet. Upload objects and create a draft with <code>tools/publish_release.ts</code> or the API.</td></tr> : rows.map((r) => (
             <tr key={r.id}>
               <td>{r.channel}</td><td>{r.generation}</td><td><code>{r.id}</code> {r.is_current ? <span className="badge ok">current</span> : null}</td>
-              <td><span className={`badge ${r.state === 'published' ? 'ok' : 'warn'}`}>{r.state}</span></td><td>{r.files}</td><td>{r.depends_on ?? '—'}</td><td>{r.notes}</td><td className="mono">{r.created_at}<div>{r.created_by}</div></td>
+              <td><span className={`badge ${r.state === 'published' ? 'ok' : 'warn'}`}>{r.state}</span></td><td>{r.files}</td><td>Client {r.min_client}–{r.max_client ?? 'unbounded'}<div>Schema {r.content_schema}</div></td><td>{r.depends_on ?? '—'}</td><td>{r.notes}</td><td className="mono">{r.created_at}<div>{r.created_by}</div></td>
               <td>
                 {canWrite && r.state === 'draft' ? <button className="btn primary" disabled={busy !== null} onClick={() => act(`Publish ${r.id}`, `/releases/${r.id}/publish`, {})}>Publish</button> : null}
                 {canWrite && r.state === 'published' && !r.is_current ? <button className="btn" disabled={busy !== null} onClick={() => act(`Roll ${r.channel} back to ${r.id}`, `/channels/${r.channel}/rollback`, { releaseId: r.id })}>Roll back here</button> : null}
@@ -49,7 +49,7 @@ export function Releases({ me, say }: { me: Me; say: (m: string) => void }): Rea
             </tr>
           ))}
         </tbody>
-      </table>
+      </table></div>
     </>
   );
 }

@@ -337,6 +337,8 @@ Complete patch delivery contracts:
 - Current resume reuses completed files, not partial byte ranges. Add appropriate deadlines/abort/retry, cancellation/network-data policy and range/chunk handling where justified for large media; measure on WebView.
 - Clean obsolete Blob URLs/textures safely across releases and rollbacks; bound cache memory.
 
+**R08-A local delivery (2026-10-14):** server composition now materializes a complete signed snapshot with same-channel source validation and no runtime chain. Effective file limits/chunked hash reads, strict snapshot reads, base-identical reuse and min/max/schema propagation are implemented. New snapshots require client **0.1.1**; an older 0.1.0 AAB cannot receive this reader correction as data. Rollback preserves or tightens source compatibility; kill retains the exact source range so compatible legacy clients can still be disabled. Legacy chain reads fail closed and dependent drafts require recreation. See [the release contract](docs/CONTENT_RELEASE_CONTRACT.md). R08 remains partial: versioned D1 economic catalog/reference authority is next, followed by full grammar/key/storage/resource contracts and actual signed-device evidence.
+
 **Accept when:** a new hero can recruit→grow→equip→summon→fight, with new boss/chapter/banner/event/media/balance in consistent data. Interrupted/corrupt/offline/incompatible/low-storage patches retain a usable previous state and never introduce executable code. Complete the signed-original-AAB proof in R18.
 
 ### R09 — Entry, narrative continuity and returning-player flow

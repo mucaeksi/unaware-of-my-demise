@@ -1,6 +1,6 @@
-import { ContentManifest, ContentValidationError, validateContentSet, type Channel } from '@uomd/content-schema';
+import { ContentManifest, ContentValidationError, MIN_SNAPSHOT_CLIENT_VERSION, validateContentSet, type Channel } from '@uomd/content-schema';
 import { manifestFromEntries, signManifest, type FileEntry } from '@uomd/patch';
-import { importPrivateKey, sha256Hex } from '@uomd/shared';
+import { compareSemver, importPrivateKey, sha256Hex } from '@uomd/shared';
 import { auditStatement } from '../db/audit';
 
 export class HttpError extends Error {
@@ -96,26 +96,41 @@ export class ContentStore {
     return row ? { releaseId: row.id, json: row.json } : null;
   }
 
-  async listReleases(): Promise<(Omit<ReleaseRow, 'manifest_json'> & { files: number })[]> {
+  async listReleases(): Promise<(Omit<ReleaseRow, 'manifest_json'> & { files: number; min_client: string; max_client: string | null; content_schema: number })[]> {
     const { results } = await this.db
       .prepare(
         `SELECT r.id, r.generation, r.channel, r.state, r.depends_on, r.notes, r.created_by, r.created_at, r.published_at,
+                json_extract(r.manifest_json, '$.compat.min_client') AS min_client,
+                json_extract(r.manifest_json, '$.compat.max_client') AS max_client,
+                json_extract(r.manifest_json, '$.compat.content_schema') AS content_schema,
                 (SELECT COUNT(*) FROM release_files f WHERE f.release_id = r.id) AS files,
                 (SELECT 1 FROM channel_pointers p WHERE p.release_id = r.id) AS is_current
          FROM content_releases r ORDER BY r.channel, r.generation DESC`
       )
       .all();
-    return results as unknown as (Omit<ReleaseRow, 'manifest_json'> & { files: number })[];
+    return results as unknown as (Omit<ReleaseRow, 'manifest_json'> & { files: number; min_client: string; max_client: string | null; content_schema: number })[];
   }
 
   /** Files of a release plus everything inherited through depends_on (dependency first, release wins). */
   async effectiveFiles(releaseId: string): Promise<Map<string, string>> {
     const chain: string[] = [];
     let cur: string | null = releaseId;
-    while (cur && chain.length < 8) {
+    let child: ReleaseRow | null = null;
+    while (cur) {
+      if (chain.length >= 8 || chain.includes(cur)) throw new HttpError(409, 'bad_dependency', 'release dependency chain is cyclic or exceeds eight layers');
+      const row = await this.getRelease(cur);
+      if (!row) throw new HttpError(409, 'bad_dependency', `missing release ${cur}`);
+      const parsed = ContentManifest.safeParse(JSON.parse(row.manifest_json));
+      if (!parsed.success || parsed.data.release.id !== row.id || parsed.data.release.channel !== row.channel || parsed.data.release.generation !== row.generation || (parsed.data.depends_on?.release_id ?? null) !== row.depends_on) {
+        throw new HttpError(409, 'bad_dependency', `incoherent release ${cur}`);
+      }
+      if (child) {
+        const dependency = (JSON.parse(child.manifest_json) as ContentManifest).depends_on!;
+        if (row.state === 'draft' || row.channel !== child.channel || row.generation >= child.generation || row.generation !== dependency.generation) throw new HttpError(409, 'bad_dependency', `incompatible dependency ${cur}`);
+      }
       chain.push(cur);
-      const r: { depends_on: string | null } | null = await this.db.prepare('SELECT depends_on FROM content_releases WHERE id = ?1').bind(cur).first();
-      cur = r?.depends_on ?? null;
+      child = row;
+      cur = row.depends_on;
     }
     const out = new Map<string, string>();
     for (const id of chain.reverse()) {
@@ -147,6 +162,23 @@ export class ContentStore {
     }
   }
 
+  private async fileEntries(files: Map<string, string>): Promise<FileEntry[]> {
+    if (files.size > 512) throw new HttpError(400, 'too_many_files', 'effective release exceeds 512 files');
+    // D1 permits at most 100 bound parameters per query, including inherited files.
+    const hashes = [...new Set(files.values())];
+    const sizes = new Map<string, number>();
+    for (let offset = 0; offset < hashes.length; offset += 100) {
+      const chunk = hashes.slice(offset, offset + 100);
+      const placeholders = chunk.map((_, i) => `?${i + 1}`).join(',');
+      const { results } = await this.db.prepare(`SELECT sha256, bytes FROM content_objects WHERE sha256 IN (${placeholders})`)
+        .bind(...chunk).all<{ sha256: string; bytes: number }>();
+      for (const result of results) sizes.set(result.sha256, result.bytes);
+    }
+    const missing = [...files].filter(([, sha]) => !sizes.has(sha));
+    if (missing.length) throw new HttpError(409, 'missing_objects', `${missing.length} object(s) were not uploaded`, missing.map(([path]) => path));
+    return [...files].map(([path, sha256]) => ({ path, sha256, bytes: sizes.get(sha256)! }));
+  }
+
   // ------------------------------------------------------------------ drafts and publishing
 
   async createDraft(input: {
@@ -154,6 +186,8 @@ export class ContentStore {
     channel: Channel;
     notes: string;
     minClient: string;
+    maxClient?: string;
+    contentSchema?: number;
     dependsOn?: string;
     files: { path: string; sha256: string }[];
     rolloutPercent?: number;
@@ -163,40 +197,35 @@ export class ContentStore {
     if (input.files.length === 0) throw new HttpError(400, 'no_files', 'a release needs at least one file');
     if (await this.getRelease(input.id)) throw new HttpError(409, 'release_exists', `release ${input.id} already exists`);
 
-    let dependsGeneration: number | undefined;
+    if (new Set(input.files.map((f) => f.path)).size !== input.files.length) throw new HttpError(400, 'duplicate_path', 'supplied files contain duplicate paths');
+    let minClient = compareSemver(input.minClient, MIN_SNAPSHOT_CLIENT_VERSION) < 0 ? MIN_SNAPSHOT_CLIENT_VERSION : input.minClient;
+    let maxClient = input.maxClient;
+    let contentSchema = input.contentSchema ?? 1;
     if (input.dependsOn) {
       const dep = await this.getRelease(input.dependsOn);
-      if (!dep || dep.state !== 'published') throw new HttpError(409, 'bad_dependency', `dependency ${input.dependsOn} must be a published release`);
-      dependsGeneration = dep.generation;
+      if (!dep || dep.state !== 'published' || dep.channel !== input.channel) throw new HttpError(409, 'bad_dependency', `dependency ${input.dependsOn} must be a published release on ${input.channel}`);
+      const compat = ContentManifest.parse(JSON.parse(dep.manifest_json)).compat;
+      if (compareSemver(minClient, compat.min_client) < 0) minClient = compat.min_client;
+      if (compat.max_client && (!maxClient || compareSemver(maxClient, compat.max_client) > 0)) maxClient = compat.max_client;
+      contentSchema = Math.max(contentSchema, compat.content_schema);
     }
-    // D1 permits at most 100 bound parameters per query. Full story patches exceed that.
-    const hashes = [...new Set(input.files.map((file) => file.sha256))];
-    const sizes = new Map<string, number>();
-    for (let offset = 0; offset < hashes.length; offset += 100) {
-      const chunk = hashes.slice(offset, offset + 100);
-      const placeholders = chunk.map((_, i) => `?${i + 1}`).join(',');
-      const { results } = await this.db.prepare(`SELECT sha256, bytes FROM content_objects WHERE sha256 IN (${placeholders})`)
-        .bind(...chunk).all<{ sha256: string; bytes: number }>();
-      for (const result of results) sizes.set(result.sha256, result.bytes);
-    }
-    const missing = input.files.filter((f) => !sizes.has(f.sha256));
-    if (missing.length > 0) throw new HttpError(409, 'missing_objects', `${missing.length} object(s) were not uploaded`, missing.map((m) => m.path));
-
+    if (maxClient && compareSemver(minClient, maxClient) > 0) throw new HttpError(400, 'bad_compat', 'client compatibility range is empty');
     const effective = input.dependsOn ? await this.effectiveFiles(input.dependsOn) : new Map<string, string>();
     for (const f of input.files) effective.set(f.path, f.sha256);
+    const entries = await this.fileEntries(effective);
     await this.validate(effective);
 
     const gen = await this.db.prepare('SELECT COALESCE(MAX(generation), 0) + 1 AS g FROM content_releases WHERE channel = ?1').bind(input.channel).first<{ g: number }>();
     const generation = gen?.g ?? 1;
-    const entries: FileEntry[] = input.files.map((f) => ({ path: f.path, sha256: f.sha256, bytes: sizes.get(f.sha256) as number }));
     const manifest = manifestFromEntries(
       {
         releaseId: input.id,
         generation,
         channel: input.channel,
         notes: input.notes,
-        minClient: input.minClient,
-        ...(input.dependsOn && dependsGeneration ? { dependsOn: { releaseId: input.dependsOn, generation: dependsGeneration } } : {}),
+        minClient,
+        maxClient,
+        contentSchema,
         rolloutPercent: input.rolloutPercent ?? 100
       },
       entries
@@ -206,9 +235,9 @@ export class ContentStore {
       await db.batch([
         db
           .prepare('INSERT INTO content_releases (id, generation, channel, depends_on, manifest_json, notes, created_by) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)')
-          .bind(input.id, generation, input.channel, input.dependsOn ?? null, JSON.stringify(manifest), input.notes, input.actor),
+          .bind(input.id, generation, input.channel, null, JSON.stringify(manifest), input.notes, input.actor),
         ...entries.map((e) => db.prepare('INSERT INTO release_files (release_id, path, sha256) VALUES (?1, ?2, ?3)').bind(input.id, e.path, e.sha256)),
-        auditStatement(db, input.actor, 'release.draft', input.id, { channel: input.channel, generation, files: entries.length })
+        auditStatement(db, input.actor, 'release.draft', input.id, { channel: input.channel, generation, files: entries.length, composedFrom: input.dependsOn ?? null, suppliedFiles: input.files.length })
       ]);
     } catch (e) {
       if (/UNIQUE constraint failed/i.test(String(e))) throw new HttpError(409, 'generation_race', 'another release was created at the same time; retry');
@@ -223,8 +252,11 @@ export class ContentStore {
     if (!row) throw new HttpError(404, 'no_such_release', `release ${id} not found`);
     if (row.state !== 'draft') throw new HttpError(409, 'not_a_draft', `release ${id} is ${row.state}`);
     if (row.channel === 'production' && role !== 'owner') throw new HttpError(403, 'owner_required', 'publishing to production needs the owner role');
-    await this.validate(await this.effectiveFiles(id));
+    if (row.depends_on) throw new HttpError(409, 'draft_needs_rebuild', 'recreate this legacy dependent draft to publish a self-contained snapshot');
+    const files = await this.effectiveFiles(id);
+    await this.validate(files);
     const { signature: _drop, ...unsigned } = JSON.parse(row.manifest_json) as ContentManifest;
+    if (unsigned.files.length !== files.size || unsigned.files.some((f) => files.get(f.path) !== f.sha256)) throw new HttpError(409, 'manifest_mismatch', 'draft file index differs from its manifest; recreate the draft');
     const signed = await signManifest(ContentManifest.parse(unsigned), signer.key, signer.kid);
     return this.activate(row, signed, actor, 'release.publish');
   }
@@ -276,7 +308,13 @@ export class ContentStore {
     if (opts.channel === 'production' && opts.role !== 'owner') throw new HttpError(403, 'owner_required', 'production changes need the owner role');
     const src = await this.getRelease(opts.sourceId);
     if (!src || src.state === 'draft' || src.channel !== opts.channel) throw new HttpError(404, 'no_such_release', `no published release ${opts.sourceId} on ${opts.channel}`);
-    const srcManifest = JSON.parse(src.manifest_json) as ContentManifest;
+    const srcManifest = ContentManifest.parse(JSON.parse(src.manifest_json));
+    const files = await this.effectiveFiles(src.id);
+    const entries = await this.fileEntries(files);
+    // A kill must remain available even when the current release fails semantic validation.
+    if (opts.mode === 'rollback') await this.validate(files);
+    const minClient = opts.mode === 'rollback' && compareSemver(srcManifest.compat.min_client, MIN_SNAPSHOT_CLIENT_VERSION) < 0 ? MIN_SNAPSHOT_CLIENT_VERSION : srcManifest.compat.min_client;
+    if (srcManifest.compat.max_client && compareSemver(minClient, srcManifest.compat.max_client) > 0) throw new HttpError(409, 'bad_compat', 'rollback source excludes snapshot-capable clients; publish a reviewed compatible snapshot');
     const gen = await this.db.prepare('SELECT COALESCE(MAX(generation), 0) + 1 AS g FROM content_releases WHERE channel = ?1').bind(opts.channel).first<{ g: number }>();
     const generation = gen?.g ?? src.generation + 1;
     const id = `${opts.mode === 'kill' ? 'kill' : 'rb'}_${opts.channel}_g${generation}`;
@@ -286,19 +324,20 @@ export class ContentStore {
         generation,
         channel: opts.channel,
         notes: `${opts.mode === 'kill' ? 'KILL SWITCH' : 'Rollback'} to ${src.id}`,
-        minClient: srcManifest.compat.min_client,
-        ...(srcManifest.depends_on ? { dependsOn: { releaseId: srcManifest.depends_on.release_id, generation: srcManifest.depends_on.generation } } : {}),
+        minClient,
+        maxClient: srcManifest.compat.max_client,
+        contentSchema: srcManifest.compat.content_schema,
         rollbackTo: { releaseId: src.id, generation: src.generation },
         killSwitch: opts.mode === 'kill',
         rolloutPercent: 100
       },
-      srcManifest.files
+      entries
     );
     const db = this.db;
     await db.batch([
       db
         .prepare('INSERT INTO content_releases (id, generation, channel, depends_on, manifest_json, notes, created_by) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)')
-        .bind(id, generation, opts.channel, src.depends_on, JSON.stringify(manifest), manifest.release.notes, opts.actor),
+        .bind(id, generation, opts.channel, null, JSON.stringify(manifest), manifest.release.notes, opts.actor),
       ...manifest.files.map((f) => db.prepare('INSERT INTO release_files (release_id, path, sha256) VALUES (?1, ?2, ?3)').bind(id, f.path, f.sha256))
     ]);
     const signed = await signManifest(manifest, opts.signer.key, opts.signer.kid);

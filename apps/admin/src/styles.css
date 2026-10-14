@@ -53,3 +53,8 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.65); }
 .monitor-page > .card { margin-bottom: 20px; }
 .monitor-page .muted { color: var(--dim); font-size: 13px; }
 main:has(.monitor-page) { min-width: 0; }
+
+main:has(.releases-table) { min-width: 0; }
+.releases-table { overflow-x: auto; }
+.releases-table table { min-width: 1050px; }
+.releases-table button { white-space: nowrap; min-height: 44px; }

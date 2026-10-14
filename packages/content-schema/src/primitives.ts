@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
 export const CURRENT_CONTENT_SCHEMA = 1;
+/** First binary with self-contained snapshot reads and base-identical object reuse. */
+export const MIN_SNAPSHOT_CLIENT_VERSION = '0.1.1';
 
 /** snake_case stable identifier (characters, enemies, skills, scenes, nodes). */
 export const Id = z.string().regex(/^[a-z][a-z0-9_]{1,79}$/, 'id must be snake_case, 2-80 chars');

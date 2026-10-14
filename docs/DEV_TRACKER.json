@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "f0730d5574389ddeffafe13351e9f8ee4083650a",
+  "sourceCommit": "75bb738162e1d736d60bfa0917249045836a9416",
   "reviewedAt": "2026-10-14",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "R07",
+    "id": "R08",
     "status": "IN_PROGRESS",
-    "nextProposed": "R08 versioned effective server/client catalog and reference authority",
+    "nextProposed": "R08-B versioned effective D1 catalog and cross-resource authority",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R07-C4 canonical Archive and shared spoiler gates locally verified",
-      "detail": "76 companion parts, 12 codex records and four events compile to 92 entries/100 scenes; 433 exact authored dialogue lines plus 12 codex text IDs. Stable battle/ownership/previous-part AND gates, filtered server reads and durable reward-free completion with write-time fences. 764 tests, lint/types, builds/campaign, 46 adapters; browser matrix14 pass plus final desktop/phone2 pass, 25 migrations. Screens inspected; early-exit, order, lost-save/status and account isolation pass. No new migration, numeric changes or paid media; R08 effective catalogs/grammar and R09 continuity follow."
+      "title": "R08-A signed snapshot and compatibility contract locally verified",
+      "detail": "Same-channel draft composition materializes complete snapshots with audit provenance, effective 512-file/D1 chunk limits and pre-sign manifest/index checks. Strict client snapshot reads and base-identical reuse; min/max/schema propagation and source-range intersection. New publications require client 0.1.1; legacy-compatible kill retains source bounds and incompatible legacy rollback fails before writes. 784 tests, lint/types, builds/campaign, 46 adapters and 14 real local-Worker desktop/touch-phone browser cases pass with 25 migrations; screenshots inspected. Versioned D1 catalog/grammar/key/storage and native/deployed acceptance remain open."
     }
   ],
   "next": [
     {
-      "title": "R08 \u2014 effective release catalog and reference authority",
-      "detail": "Define one versioned effective server/client catalog for characters, skills, gear, items, drops, banners and config, with strict references and preserved historical battle/rule snapshots. Prove a newly declared identity recruits, grows, equips, summons and fights consistently; then full grammar/capabilities/version/storage compatibility. R07 remains partial for cross-resource authority. R09 continuity, R12 schedules/modes and R16 balance retain separate acceptance."
+      "title": "R08-B \u2014 effective D1 release catalog and reference authority",
+      "detail": "Bind character/skill/item/gear/drop/banner/config definitions to the same effective release; validate all cross-resource identities and preserve historical battle/rule snapshots. Prove one newly declared identity recruits, grows, equips, summons and fights consistently. R08-A snapshot composition/compatibility is delivered; full grammar/capabilities, key rotation, IndexedDB completion/quota/resource contracts remain. R09 continuity, R12 schedules/modes and R16 balance retain separate acceptance."
     },
     {
       "title": "R06 \u2014 remaining reviewed combat semantics",
@@ -1042,6 +1042,31 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R08-A-20261014",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "75bb738162e1d736d60bfa0917249045836a9416",
+      "verifiedAt": "2026-10-14T04:52:23.210759+00:00",
+      "scope": "R08-A working tree: same-channel published-source composition writes complete signed snapshots with no runtime dependency; audit retains source/supplied/effective counts. Complete effective sets cap at 512 and hash metadata chunks at 100; duplicate paths, cross-channel/disjoint inputs, absent objects and manifest/index drift fail before relevant writes/signing. Legacy reads validate identity/channel/generation/dependency and reject a ninth layer; dependent drafts require recreation. API/CLI/admin carry min/max/schema; composition intersects source bounds, rollback retains or tightens them, kill retains them exactly and bypasses gameplay semantic validation only. Corrected snapshot reader and base-identical reuse require game client 0.1.1, also the Android default version name; older binaries reject new snapshots before download. A legacy source maximum below this floor rejects rollback before rows, while compatible legacy kill remains available. Fifteen new D1/API, two client validator, two patch-manager and one manifest cases; seven initial publication/read regressions failed before correction. All 784 application/tool tests, lint/typecheck, campaign/game/admin builds, offline CLI compatibility assertion and 46 adapters pass. Fourteen actual local-Worker browser cases pass (admin10, canonical story2, snapshot2) with all 25 migrations. Desktop/touch-phone cases prove two-source composition, base-identical audio reads, IndexedDB reload, actual admin rollback/kill, retained bounds and no body overflow. Snapshot/kill screenshots inspected. First matrix was interrupted at the phone action after eleven passes; scoped table scrolling and actual touch actions correct the overflow/hit targeting. Initial fixture audio-size and foreign-key assumptions and Node-only game test imports were corrected. Graphify refreshed: 3179 nodes/8351 edges/160 communities; navigation verified against source. Frozen battle/party/rule data, numeric/canon/media values and Claude files preserved; no migration, formal audit, paid media, deployed or signed-device/old-AAB acceptance. New AAB required for this reader; economic catalog, full grammar, keys and storage/resource budgets remain R08.",
+      "testIds": [
+        "apps/api/test/content.test.ts",
+        "apps/game/src/content/validator.test.ts",
+        "packages/patch/src/manager.test.ts",
+        "packages/content-schema/src/schema.test.ts",
+        "tests/e2e/release-snapshot.spec.ts",
+        "tests/e2e/admin.spec.ts",
+        "tests/e2e/canonical-story.spec.ts",
+        "npm test",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build:campaign",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1531,10 +1556,10 @@
     {
       "id": "R08",
       "title": "Effective catalog and patch grammar",
-      "taskStatus": "OPEN",
+      "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "One versioned server/client catalog, finite complete data grammar and safe bounded patch storage/compatibility.",
-      "implemented": "Content schema, server store and patch manager exist; new data-only hero lifecycle, complete grammar/storage and key-rotation acceptance remain open. R07-C2 fixes the observed 100-parameter D1 draft lookup failure with deduplicated chunks and real 512-file/missing-final-object regressions; broader catalog/grammar/resource budgets remain open.",
+      "implemented": "R08-A locally verifies same-channel composition into complete signed snapshots, exact snapshot-versus-legacy-base reads, base-identical reuse, min/max/schema authoring and propagation, compatibility intersections and rollback/kill bounds. New publication floor is client 0.1.1; older binaries reject before download and require a new AAB. Effective 512-file/100-parameter limits, manifest/index agreement, legacy chain guards and draft recreation are tested. Versioned D1 catalog/new identity lifecycle, full grammar/capabilities, keys, IndexedDB transaction completion, quota/resources/cache and native/deployed acceptance remain open.",
       "dependsOn": [
         "R02",
         "R03",
@@ -1546,13 +1571,18 @@
         "packages/content-schema/src",
         "packages/patch/src",
         "apps/api/src/content/store.ts",
-        "apps/game/src/patch"
+        "apps/game/src/patch",
+        "apps/game/src/content",
+        "tools/publish_release.ts",
+        "tools/make_release.ts",
+        "docs/CONTENT_RELEASE_CONTRACT.md"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
-        "E-R07-C2-20261013"
+        "E-R07-C2-20261013",
+        "E-R08-A-20261014"
       ],
       "blockerIds": []
     },

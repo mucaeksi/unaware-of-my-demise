@@ -125,12 +125,13 @@ export class PatchManager {
     const st = await this.state();
     const f = st.active?.manifest.files.find((x) => x.path === path);
     if (f) {
-      const bytes = await this.storage.getObject(f.sha256);
+      const bytes = this.base.files[path] === f.sha256 ? await this.base.read(path) : await this.storage.getObject(f.sha256);
       if (bytes && (await sha256Hex(bytes)) === f.sha256) return bytes;
       // storage lost or corrupted a patched object: fall back to the last good state, then to base
       await this.rollback();
       return this.read(path);
     }
+    if (st.active && !st.active.manifest.depends_on) throw new Error(`no such content file: ${path}`);
     return this.base.read(path);
   }
 
@@ -139,6 +140,7 @@ export class PatchManager {
     const st = await this.state();
     const f = st.active?.manifest.files.find((x) => x.path === path);
     if (f) return { source: 'patch', sha256: f.sha256 };
+    if (st.active && !st.active.manifest.depends_on) throw new Error(`no such content file: ${path}`);
     const h = this.base.files[path];
     if (!h) throw new Error(`no such content file: ${path}`);
     return { source: 'base', sha256: h };

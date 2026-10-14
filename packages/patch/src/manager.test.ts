@@ -119,6 +119,27 @@ describe('PatchManager', () => {
     expect((await pm.checkAndApply()).status).toBe('up_to_date');
   });
 
+  it('reads base-identical files in a full snapshot without downloading or rolling back', async () => {
+    const files = [...new Map([...baseFiles, ...patchFiles].map((f) => [f.path, f])).values()];
+    const manifest = await signedPatch({ dependsOn: undefined }, files);
+    const storage = new MemoryStorage();
+    const remote = new FakeRemote(manifest, await objectsOf(files));
+    const pm = new PatchManager(env(), storage, remote, base);
+    expect((await pm.checkAndApply()).status).toBe('applied');
+    const path = 'audio/bgm_ch1_ash_forest_calm.ogg';
+    expect(remote.fetched).not.toContain(path);
+    expect(await pm.read(path)).toEqual(await base.read(path));
+    expect(storage.state?.active?.releaseId).toBe('rel_0002');
+  });
+
+  it('does not serve undeclared base files through a self-contained snapshot', async () => {
+    const { pm } = await setup({}, { dependsOn: undefined });
+    expect((await pm.checkAndApply()).status).toBe('applied');
+    const path = 'audio/bgm_ch1_ash_forest_calm.ogg';
+    await expect(pm.read(path)).rejects.toThrow('no such content file');
+    await expect(pm.locate(path)).rejects.toThrow('no such content file');
+  });
+
   it('rejects a manifest with a bad or untrusted signature and leaves state untouched', async () => {
     const { pm, storage } = await setup({ trustedKeys: [otherPublic] });
     expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'bad_signature' });

@@ -63,6 +63,11 @@ describe('ContentManifest', () => {
     bad.files.push(bad.files[0] as (typeof bad.files)[0]);
     expect(ContentManifest.safeParse(bad).success).toBe(false);
   });
+  it('rejects inverted compatibility and self dependencies even with an older generation', () => {
+    expect(ContentManifest.safeParse({ ...base, compat: { ...base.compat, min_client: '1.10.0', max_client: '1.9.9' } }).success).toBe(false);
+    expect(ContentManifest.safeParse({ ...base, compat: { ...base.compat, min_client: '1.9.9', max_client: '1.10.0' } }).success).toBe(true);
+    expect(ContentManifest.safeParse({ ...base, release: { ...base.release, generation: 2 }, depends_on: { release_id: base.release.id, generation: 1 } }).success).toBe(false);
+  });
   it('rejects dependency generation >= own generation', () => {
     const bad = { ...structuredClone(base), depends_on: { release_id: 'rel_0001', generation: 1 } };
     expect(ContentManifest.safeParse(bad).success).toBe(false);

@@ -57,6 +57,12 @@ export const ContentManifest = z
   })
   .strict()
   .superRefine((m, ctx) => {
+    if (m.compat.max_client) {
+      const max = m.compat.max_client.split('.').map(Number);
+      const order = m.compat.min_client.split('.').map(Number).map((part, i) => part - max[i]!).find((difference) => difference !== 0) ?? 0;
+      if (order > 0) ctx.addIssue({ code: 'custom', path: ['compat'], message: 'client compatibility range is empty' });
+    }
+    if (m.depends_on?.release_id === m.release.id) ctx.addIssue({ code: 'custom', path: ['depends_on'], message: 'release cannot depend on itself' });
     const seen = new Set<string>();
     for (const [i, f] of m.files.entries()) {
       if (seen.has(f.path)) ctx.addIssue({ code: 'custom', path: ['files', i, 'path'], message: `duplicate path ${f.path}` });

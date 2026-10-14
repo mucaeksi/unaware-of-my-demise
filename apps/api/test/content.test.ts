@@ -59,6 +59,11 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
       expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM audit_log WHERE target = ?1').bind(id).first()).toEqual({ n: 0 });
     } else {
       expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM release_files WHERE release_id = ?1').bind(id).first()).toEqual({ n: 512 });
+      expect((await post(`/admin/api/releases/${id}/publish`, {})).status).toBe(200);
+      const overflow = await post('/admin/api/releases', { id: 'rel_hash_overflow', channel: 'dev', dependsOn: id, files: [{ path: 'story/hash_overflow.json', sha256: expanded.at(-1)!.sha256 }] });
+      expect(overflow.status).toBe(400);
+      expect(await overflow.json()).toMatchObject({ error: 'too_many_files' });
+      for (const [table, column] of [['content_releases', 'id'], ['release_files', 'release_id'], ['audit_log', 'target']]) expect(await baseEnv.DB.prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE ${column} = 'rel_hash_overflow'`).first()).toEqual({ n: 0 });
     }
   });
   it.each(['line omission', 'unknown phase'] as const)('rejects %s from the full canonical patch without draft/file/audit/pointer changes', async (kind) => {
@@ -156,11 +161,159 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
     expect(res.status).toBe(200);
     const manifest = ContentManifest.parse(await res.json());
     expect(manifest.release).toMatchObject({ id: 'rel_0002', generation: 2, channel: 'dev' });
-    expect(manifest.depends_on).toMatchObject({ release_id: 'rel_0001', generation: 1 });
+    expect(manifest.depends_on).toBeUndefined();
+    expect(manifest.files.some((f) => f.path === 'audio/bgm_ch1_ash_forest_calm.ogg')).toBe(true);
     expect(await verifyPayload(manifest as unknown as SignedPayload, [signingPublic])).toBe(true);
     // ETag round trip
     const again = await game('/api/v1/content/channels/dev/manifest', { headers: { 'If-None-Match': res.headers.get('ETag') as string } });
     expect(again.status).toBe(304);
+  });
+
+  it('composes two published patches into a self-contained signed snapshot usable on the embedded base', async () => {
+    await publishBase(); await publishPatch();
+    const changed = patch.find((f) => f.path === 'encounters/stage_1_1.json')!;
+    expect((await post('/admin/api/releases', { id: 'rel_0003', channel: 'dev', dependsOn: 'rel_0002', files: entries([changed]) })).status).toBe(201);
+    expect((await post('/admin/api/releases/rel_0003/publish', {})).status).toBe(200);
+    const manifest = ContentManifest.parse(await (await game('/api/v1/content/channels/dev/manifest')).json());
+    expect(manifest.depends_on).toBeUndefined();
+    expect((await new ContentStore(baseEnv.DB, baseEnv.CONTENT).getRelease('rel_0003'))!.depends_on).toBeNull();
+    const pm = new PatchManager(
+      { channel: 'dev', clientVersion: '0.1.1', supportedContentSchema: 1, trustedKeys: [signingPublic], installId: 'chain', storageBudgetBytes: 1e9, validate: () => undefined },
+      new MemoryStorage(),
+      { fetchManifest: async () => manifest, fetchObject: async (sha) => new Uint8Array(await (await game(`/api/v1/content/objects/${sha}`)).arrayBuffer()) },
+      { releaseId: 'rel_0001', generation: 1, files: Object.fromEntries(base.map((f) => [f.path, f.sha256])), read: async (p) => base.find((f) => f.path === p)!.bytes }
+    );
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'applied', releaseId: 'rel_0003' });
+    expect(await pm.read('audio/bgm_ch1_ash_forest_calm.ogg')).toEqual(base.find((f) => f.path === 'audio/bgm_ch1_ash_forest_calm.ogg')!.bytes);
+    expect((await pm.checkAndApply()).status).toBe('up_to_date');
+  });
+
+  it('rejects cross-channel composition without draft/file/audit writes', async () => {
+    await publishBase();
+    const response = await post('/admin/api/releases', { id: 'rel_cross_channel', channel: 'staging', dependsOn: 'rel_0001', files: entries([base[0]!]) });
+    expect(response.status).toBe(409);
+    expect(await response.json()).toMatchObject({ error: 'bad_dependency' });
+    for (const [table, column] of [['content_releases', 'id'], ['release_files', 'release_id'], ['audit_log', 'target']]) expect(await baseEnv.DB.prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE ${column} = 'rel_cross_channel'`).first()).toEqual({ n: 0 });
+  });
+
+  it.each(['rollback', 'kill'] as const)('retains min/max client and content schema on %s', async (mode) => {
+    await upload(base);
+    const compat = { min_client: '1.2.0', max_client: '2.0.0', content_schema: 2 };
+    expect((await post('/admin/api/releases', { id: 'rel_restricted', channel: 'dev', minClient: compat.min_client, maxClient: compat.max_client, contentSchema: compat.content_schema, files: entries(base) })).status).toBe(201);
+    expect((await post('/admin/api/releases/rel_restricted/publish', {})).status).toBe(200);
+    expect((await post(`/admin/api/channels/dev/${mode}`, { releaseId: 'rel_restricted' })).status).toBe(200);
+    const manifest = ContentManifest.parse(await (await game('/api/v1/content/channels/dev/manifest')).json());
+    expect(manifest.compat).toEqual(compat);
+  });
+
+  it('intersects source compatibility during composition and rejects disjoint ranges before writes', async () => {
+    await upload(base);
+    expect((await post('/admin/api/releases', { id: 'rel_restricted', channel: 'dev', minClient: '1.2.0', maxClient: '2.0.0', contentSchema: 2, files: entries(base) })).status).toBe(201);
+    expect((await post('/admin/api/releases/rel_restricted/publish', {})).status).toBe(200);
+    const created = await post('/admin/api/releases', { id: 'rel_composed', channel: 'dev', dependsOn: 'rel_restricted', minClient: '0.1.0', maxClient: '9.0.0', contentSchema: 1, files: entries([base[0]!]) });
+    expect(created.status).toBe(201);
+    const row = await new ContentStore(baseEnv.DB, baseEnv.CONTENT).getRelease('rel_composed');
+    expect(JSON.parse(row!.manifest_json).compat).toEqual({ min_client: '1.2.0', max_client: '2.0.0', content_schema: 2 });
+    const rejected = await post('/admin/api/releases', { id: 'rel_disjoint', channel: 'dev', dependsOn: 'rel_restricted', minClient: '3.0.0', files: entries([base[0]!]) });
+    expect(rejected.status).toBe(400);
+    expect(await rejected.json()).toMatchObject({ error: 'bad_compat' });
+    for (const [table, column] of [['content_releases', 'id'], ['release_files', 'release_id'], ['audit_log', 'target']]) expect(await baseEnv.DB.prepare(`SELECT COUNT(*) AS n FROM ${table} WHERE ${column} = 'rel_disjoint'`).first()).toEqual({ n: 0 });
+  });
+
+  it('rejects duplicate supplied paths before merging a composition', async () => {
+    await publishBase();
+    const response = await post('/admin/api/releases', { id: 'rel_duplicate', channel: 'dev', dependsOn: 'rel_0001', files: entries([base[0]!, base[0]!]) });
+    expect(response.status).toBe(400);
+    expect(await response.json()).toMatchObject({ error: 'duplicate_path' });
+  });
+
+  it('requires rebuilding legacy dependent drafts and still resolves valid published historical chains', async () => {
+    await publishBase(); await publishPatch();
+    const store = new ContentStore(baseEnv.DB, baseEnv.CONTENT);
+    const patchRow = (await store.getRelease('rel_0002'))!;
+    const manifest = JSON.parse(patchRow.manifest_json) as ContentManifest;
+    manifest.depends_on = { release_id: 'rel_0001', generation: 1 };
+    await baseEnv.DB.prepare("UPDATE content_releases SET state = 'draft', depends_on = 'rel_0001', manifest_json = ?1 WHERE id = 'rel_0002'").bind(JSON.stringify(manifest)).run();
+    const before = await store.getRelease('rel_0002');
+    const response = await post('/admin/api/releases/rel_0002/publish', {});
+    expect(response.status).toBe(409);
+    expect(await response.json()).toMatchObject({ error: 'draft_needs_rebuild' });
+    expect(await store.getRelease('rel_0002')).toEqual(before);
+    await baseEnv.DB.prepare("UPDATE content_releases SET state = 'published' WHERE id = 'rel_0002'").run();
+    expect(await store.effectiveFiles('rel_0002')).toEqual(new Map(manifest.files.map((f) => [f.path, f.sha256])));
+    const rollback = await post('/admin/api/channels/dev/rollback', { releaseId: 'rel_0002' });
+    expect(rollback.status).toBe(200);
+    expect(ContentManifest.parse(await (await game('/api/v1/content/channels/dev/manifest')).json()).depends_on).toBeUndefined();
+  });
+
+  it.each(['missing', 'channel', 'generation', 'cycle'] as const)('fails closed on a %s historical dependency', async (kind) => {
+    await publishBase(); await publishPatch();
+    const store = new ContentStore(baseEnv.DB, baseEnv.CONTENT);
+    if (kind === 'missing') { await expect(store.effectiveFiles('rel_missing')).rejects.toMatchObject({ code: 'bad_dependency' }); return; }
+    const row = (await store.getRelease('rel_0002'))!;
+    const manifest = JSON.parse(row.manifest_json) as ContentManifest;
+    const dep = kind === 'cycle' ? 'rel_0002' : 'rel_0001';
+    manifest.depends_on = { release_id: dep, generation: kind === 'generation' ? 9 : 1 };
+    await baseEnv.DB.prepare("UPDATE content_releases SET depends_on = ?1, manifest_json = ?2 WHERE id = 'rel_0002'").bind(dep, JSON.stringify(manifest)).run();
+    if (kind === 'channel') await baseEnv.DB.prepare("UPDATE content_releases SET channel = 'staging' WHERE id = 'rel_0001'").run();
+    await expect(store.effectiveFiles('rel_0002')).rejects.toMatchObject({ code: 'bad_dependency' });
+  });
+
+  it('rejects a ninth historical layer instead of silently returning a truncated file set', async () => {
+    await publishBase();
+    const store = new ContentStore(baseEnv.DB, baseEnv.CONTENT);
+    const root = ContentManifest.parse(JSON.parse((await store.getRelease('rel_0001'))!.manifest_json));
+    for (let generation = 2; generation <= 9; generation++) {
+      const id = `rel_depth_g${generation}`;
+      const depends = generation === 2 ? 'rel_0001' : `rel_depth_g${generation - 1}`;
+      const manifest = { ...root, release: { ...root.release, id, generation }, depends_on: { release_id: depends, generation: generation - 1 } };
+      await baseEnv.DB.prepare("INSERT INTO content_releases (id, generation, channel, state, depends_on, manifest_json, notes, created_by) VALUES (?1, ?2, 'dev', 'published', ?3, ?4, '', 'test')").bind(id, generation, depends, JSON.stringify(manifest)).run();
+    }
+    expect(await store.effectiveFiles('rel_depth_g8')).toEqual(new Map(root.files.map((f) => [f.path, f.sha256])));
+    await expect(store.effectiveFiles('rel_depth_g9')).rejects.toMatchObject({ code: 'bad_dependency' });
+  });
+
+  it('does not sign a valid but different D1 file index than the draft manifest', async () => {
+    await publishBase();
+    const store = new ContentStore(baseEnv.DB, baseEnv.CONTENT);
+    expect((await post('/admin/api/releases', { id: 'rel_mismatch', channel: 'dev', dependsOn: 'rel_0001', files: entries([base[0]!]) })).status).toBe(201);
+    await baseEnv.DB.prepare("INSERT INTO release_files (release_id, path, sha256) VALUES ('rel_mismatch', 'notes/extra.txt', ?1)").bind(base[0]!.sha256).run();
+    const draft = await store.getRelease('rel_mismatch');
+    const pointer = await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first();
+    expect((await post('/admin/api/releases/rel_mismatch/publish', {})).status).toBe(409);
+    expect(await store.getRelease('rel_mismatch')).toEqual(draft);
+    expect(await baseEnv.DB.prepare("SELECT * FROM channel_pointers WHERE channel = 'dev'").first()).toEqual(pointer);
+    expect(await baseEnv.DB.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'release.publish' AND target = 'rel_mismatch'").first()).toEqual({ n: 0 });
+  });
+
+  it('raises the publication floor and rejects the older binary before any object download', async () => {
+    await publishBase(); await publishPatch();
+    const fetchObject = vi.fn();
+    const manifest = ContentManifest.parse(await (await game('/api/v1/content/channels/dev/manifest')).json());
+    expect(manifest.compat.min_client).toBe('0.1.1');
+    const pm = new PatchManager(
+      { channel: 'dev', clientVersion: '0.1.0', supportedContentSchema: 1, trustedKeys: [signingPublic], installId: 'old-binary', storageBudgetBytes: 1e9, validate: () => undefined },
+      new MemoryStorage(), { fetchManifest: async () => manifest, fetchObject },
+      { releaseId: 'rel_0001', generation: 1, files: {}, read: async () => new Uint8Array() }
+    );
+    expect(await pm.checkAndApply()).toMatchObject({ status: 'rejected', reason: 'client_too_old' });
+    expect(fetchObject).not.toHaveBeenCalled();
+  });
+
+  it('refuses an incompatible legacy rollback before writes while retaining a legacy-compatible kill', async () => {
+    await publishBase();
+    const store = new ContentStore(baseEnv.DB, baseEnv.CONTENT);
+    const source = (await store.getRelease('rel_0001'))!;
+    const manifest = JSON.parse(source.manifest_json) as ContentManifest;
+    manifest.compat = { min_client: '0.1.0', max_client: '0.1.0', content_schema: 1 };
+    await baseEnv.DB.prepare("UPDATE content_releases SET manifest_json = ?1 WHERE id = 'rel_0001'").bind(JSON.stringify(manifest)).run();
+    const count = await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM content_releases').first();
+    const rollback = await post('/admin/api/channels/dev/rollback', { releaseId: 'rel_0001' });
+    expect(rollback.status).toBe(409);
+    expect(await rollback.json()).toMatchObject({ error: 'bad_compat' });
+    expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM content_releases').first()).toEqual(count);
+    expect((await post('/admin/api/channels/dev/kill', { releaseId: 'rel_0001' })).status).toBe(200);
+    expect(ContentManifest.parse(await (await game('/api/v1/content/channels/dev/manifest')).json()).compat).toEqual(manifest.compat);
   });
 
   it('serves published objects immutably and hides unpublished or unknown ones', async () => {
@@ -188,7 +341,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
     const baseHashes = Object.fromEntries(base.map((f) => [f.path, f.sha256]));
     const baseContent: BaseContent = { releaseId: 'rel_0001', generation: 1, files: baseHashes, read: async (p) => (base.find((f) => f.path === p) as TestFile).bytes };
     const pm = new PatchManager(
-      { channel: 'dev', clientVersion: '0.1.0', supportedContentSchema: 1, trustedKeys: [signingPublic], installId: 'x', storageBudgetBytes: 1e9, validate: () => undefined, sleep: async () => undefined },
+      { channel: 'dev', clientVersion: '0.1.1', supportedContentSchema: 1, trustedKeys: [signingPublic], installId: 'x', storageBudgetBytes: 1e9, validate: () => undefined, sleep: async () => undefined },
       new MemoryStorage(),
       remote,
       baseContent
