@@ -1,9 +1,10 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { ContentValidationError, validateContentSet, type ChapterIndex, type Encounter, type UnitPack, type NarrativeLibrary } from './index';
 
-const ROOT = new URL('../../../content/', import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL('../../../content/', import.meta.url));
 const walk = (dir: string, rel = ''): string[] =>
   readdirSync(join(dir, rel)).flatMap((n) => {
     const r = rel ? `${rel}/${n}` : n;

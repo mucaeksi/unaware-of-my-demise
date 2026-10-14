@@ -86,8 +86,41 @@ describe('StoryRunner', () => {
     r.next();
     const save = r.save();
     const resumed = new StoryRunner(scene(cmds), save);
+    expect(resumed.history.map((h) => h.lineId)).toEqual(['l_001']);
     expect(resumed.next()).toMatchObject({ type: 'line', lineId: 'l_002' });
     expect(() => new StoryRunner(scene(cmds), { ...save, sceneId: 'other' })).toThrow();
+  });
+
+  it('saveAtCurrentEvent captures the active line or choice and reconstructs actors, background, music and backlog', () => {
+    const cmds = [
+      { op: 'background', location_id: 'forest_whispering_ash' },
+      { op: 'music', cue_id: 'bgm_ch1_ash_forest_calm' },
+      { op: 'show', character: 'mahmut', side: 'left' },
+      { op: 'say', line_id: 'l_001', speaker: 'mahmut', speaker_display: 'Mahmut', text: 'First', emotion: 'watchful' },
+      { op: 'say', line_id: 'l_002', speaker: 'mahmut', speaker_display: 'Mahmut', text: 'Second', emotion: 'protective' },
+      { op: 'choice', options: [{ id: 'go', text: 'Go', goto: 'done' }, { id: 'wait', text: 'Wait', goto: 'done' }] },
+      { op: 'label', name: 'done' },
+      { op: 'end' }
+    ];
+    const s = scene(cmds);
+
+    const r = new StoryRunner(s);
+    expect(r.next()?.type).toBe('background');
+    expect(r.next()?.type).toBe('music');
+    expect(r.next()?.type).toBe('show');
+    expect(r.next()).toMatchObject({ type: 'line', lineId: 'l_001' });
+    expect(r.next()).toMatchObject({ type: 'line', lineId: 'l_002' });
+    const midLine = r.saveAtCurrentEvent();
+    const resumedLine = new StoryRunner(s, midLine);
+    expect(resumedLine.history.map((h) => h.lineId)).toEqual(['l_001']);
+    expect(resumedLine.restored.musicCueId).toBe('bgm_ch1_ash_forest_calm');
+    expect(resumedLine.restored.actors.get('mahmut')).toEqual({ side: 'left', emotion: 'watchful' });
+    expect(resumedLine.next()).toMatchObject({ type: 'line', lineId: 'l_002' });
+    expect(resumedLine.next()?.type).toBe('choice');
+    const midChoice = resumedLine.saveAtCurrentEvent();
+    const resumedChoice = new StoryRunner(s, midChoice);
+    expect(resumedChoice.history.map((h) => h.lineId)).toEqual(['l_001', 'l_002']);
+    expect(resumedChoice.next()?.type).toBe('choice');
   });
 
   it('classifies blocking events', () => {

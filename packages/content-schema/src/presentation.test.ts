@@ -1,8 +1,9 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { PresentationPack, PresentationCommand, validateContentSet, requiredContentCapabilities } from './index';
-const root = new URL('../../../content/base/', import.meta.url).pathname;
+const root = fileURLToPath(new URL('../../../content/base/', import.meta.url));
 const walk = (rel = ''): string[] => readdirSync(join(root, rel)).flatMap((n) => { const p = rel ? `${rel}/${n}` : n; return statSync(join(root, p)).isDirectory() ? walk(p) : [p]; });
 const base = () => new Map(walk().filter((p) => p !== 'release.json').map((p) => [p, new Uint8Array(readFileSync(join(root, p)))]));
 const put = (files: Map<string, Uint8Array>, path: string, value: unknown) => files.set(path, new TextEncoder().encode(JSON.stringify(value)));

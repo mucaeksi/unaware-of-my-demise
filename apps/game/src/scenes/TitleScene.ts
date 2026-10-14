@@ -11,7 +11,8 @@ import { prefs, setPref } from '../platform/prefs';
 import { Progress, Services } from '../services';
 import { Button, panel, sceneFadeIn, title, toast, txt } from '../ui/kit';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
-import { playNode } from '../flow';
+import { playNode, resolveNextCampaignNode } from '../flow';
+
 
 const TITLE_CUE = 'bgm_ch1_ash_forest_calm';
 
@@ -131,7 +132,7 @@ export class TitleScene extends Phaser.Scene {
   }
 
   private buildFullMenu(): void {
-    new Button(this, 500, 640, { label: 'BEGIN', sub: 'The First Step', w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.begin() });
+    new Button(this, 500, 640, { label: 'CONTINUE', sub: 'Enter the Road', w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.begin() });
     new Button(this, 500, 786, { label: 'CHAPTERS', w: 560, h: 120, onClick: () => this.go('Chapters') });
     new Button(this, 500, 920, { label: 'SETTINGS', w: 560, h: 120, onClick: () => this.openSettings() });
     new Button(this, REF_W - 200, 80, { label: 'COMPANY', w: 340, h: 110, fontSize: 30, onClick: () => this.go('Home') });
@@ -172,12 +173,28 @@ export class TitleScene extends Phaser.Scene {
   }
 
   private async begin(): Promise<void> {
+    if (this.busy) return;
+    this.busy = true;
     void this.startAudio();
-    const { content } = Services.ready();
-    const idx = await content.chapters();
-    const first = idx.chapters[0]?.nodes[0];
-    if (first) await playNode(this, first);
+    try {
+      const { content } = Services.ready();
+      const idx = await content.chapters();
+      let progress = Progress.load();
+      if (Services.api.signedIn) {
+        try {
+          const authoritative = await Services.api.progress();
+          progress = Object.fromEntries(authoritative.nodes.filter((n) => n.clears > 0).map((n) => [n.node_id, { stars: n.stars }]));
+        } catch {
+          /* fall back to local progress when offline */
+        }
+      }
+      const next = resolveNextCampaignNode(idx, progress, Services.api.accountKey);
+      if (next) await playNode(this, next);
+    } finally {
+      this.busy = false;
+    }
   }
+
 
   private async refreshChip(): Promise<void> {
     const { content } = Services.ready();

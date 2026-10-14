@@ -36,12 +36,13 @@ Services.patches = new PatchService(() => Services.content);
 export type NodeRef = { chapterId: string; nodeId: string };
 
 const KEY = 'uomd.progress.v1';
+const progressKey = (): string => (Services.api.accountKey === 'guest' ? KEY : `${KEY}:${Services.api.accountKey}`);
 
-/** Tiny local progress record for the preview (server-side progression comes with accounts). */
+/** Account-scoped local progress record (reconciled with server progression when signed in). */
 export const Progress = {
   load(): Record<string, { stars: number }> {
     try {
-      return JSON.parse(localStorage.getItem(KEY) ?? '{}') as Record<string, { stars: number }>;
+      return JSON.parse(localStorage.getItem(progressKey()) ?? '{}') as Record<string, { stars: number }>;
     } catch {
       return {};
     }
@@ -50,16 +51,17 @@ export const Progress = {
     const p = this.load();
     p[nodeId] = { stars: Math.max(p[nodeId]?.stars ?? 0, stars) };
     try {
-      localStorage.setItem(KEY, JSON.stringify(p));
+      localStorage.setItem(progressKey(), JSON.stringify(p));
     } catch {
       /* ignore */
     }
   },
   reset(): void {
     try {
-      localStorage.removeItem(KEY);
+      localStorage.removeItem(progressKey());
     } catch {
       /* ignore */
     }
   }
 };
+

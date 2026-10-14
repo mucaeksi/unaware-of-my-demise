@@ -3,16 +3,18 @@
  * one multi-Worker `wrangler dev` runtime (shared D1/R2), a test-only Access JWKS and a
  * test-only content signing key. No Cloudflare credentials are needed.
  */
-import { spawn, type ChildProcess } from 'node:child_process';
+import { spawn, spawnSync, type ChildProcess } from 'node:child_process';
 import { createServer, request as proxyRequest, type Server } from 'node:http';
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 import { SignJWT, exportJWK, generateKeyPair } from 'jose';
 import { generateSigningKeyPair } from '../../packages/shared/src/index';
 
-export const ROOT = new URL('../../', import.meta.url).pathname.replace(/\/$/, '');
-export const STATE = join(ROOT, '.cache/e2e-state');
+export const ROOT = fileURLToPath(new URL('../../', import.meta.url)).replace(/[\\/]$/, '');
+export const STATE = process.platform === 'win32' ? join(tmpdir(), 'uomd-e2e-state') : join(ROOT, '.cache/e2e-state');
 export const PORTS = { game: 8787, admin: 8788, jwks: 8799 };
 export const TEAM = 'e2e-team.local';
 export const AUD = 'e2e-audience';
@@ -28,10 +30,24 @@ const procs: ChildProcess[] = [];
 let jwksServer: Server | null = null;
 let adminProxy: Server | null = null;
 
+function resolveSpawn(cmd: string, args: string[]): { bin: string; argv: string[] } {
+  if (cmd === 'npx' && args[0] === 'wrangler') {
+    return { bin: process.execPath, argv: [join(ROOT, 'node_modules/wrangler/bin/wrangler.js'), ...args.slice(1)] };
+  }
+  if (cmd === 'npx' && args[0] === 'tsx') {
+    return { bin: process.execPath, argv: [join(ROOT, 'node_modules/tsx/dist/cli.mjs'), ...args.slice(1)] };
+  }
+  if (process.platform === 'win32' && (cmd === 'npm' || cmd === 'npx')) {
+    return { bin: process.env.ComSpec ?? 'cmd.exe', argv: ['/d', '/s', '/c', `${cmd}.cmd`, ...args] };
+  }
+  return { bin: cmd, argv: args };
+}
+
 /** Async on purpose: the test JWKS server lives in this process and must keep answering while children run. */
 function sh(cmd: string, args: string[], cwd: string, env: NodeJS.ProcessEnv = {}): Promise<void> {
   return new Promise((resolve, reject) => {
-    const p = spawn(cmd, args, { cwd, stdio: 'inherit', env: { ...process.env, ...env } });
+    const { bin, argv } = resolveSpawn(cmd, args);
+    const p = spawn(bin, argv, { cwd, stdio: 'inherit', env: { ...process.env, ...env } });
     p.on('error', reject);
     p.on('exit', (code) => (code === 0 ? resolve() : reject(new Error(`${cmd} ${args.slice(0, 3).join(' ')} exited with ${code}`))));
   });
@@ -59,7 +75,8 @@ function localEnv(): NodeJS.ProcessEnv {
 }
 
 function start(name: string, args: string[], cwd: string): void {
-  const p = spawn('npx', ['wrangler', ...args], { cwd, env: localEnv(), stdio: ['ignore', 'pipe', 'pipe'], detached: true });
+  const { bin, argv } = resolveSpawn('npx', ['wrangler', ...args]);
+  const p = spawn(bin, argv, { cwd, env: localEnv(), stdio: ['ignore', 'pipe', 'pipe'], detached: process.platform !== 'win32' });
   p.stdout?.on('data', (d: Buffer) => process.env.E2E_VERBOSE && process.stdout.write(`[${name}] ${d}`));
   p.stderr?.on('data', (d: Buffer) => process.env.E2E_VERBOSE && process.stderr.write(`[${name}] ${d}`));
   procs.push(p);
@@ -77,7 +94,13 @@ export async function startStack(): Promise<Stack> {
 async function killAll(): Promise<void> {
   for (const p of procs) {
     try {
-      if (p.pid) process.kill(-p.pid, 'SIGTERM'); // the whole group: npx -> wrangler -> workerd
+      if (p.pid) {
+        if (process.platform === 'win32') {
+          spawnSync('taskkill', ['/PID', String(p.pid), '/T', '/F'], { stdio: 'ignore' });
+        } else {
+          process.kill(-p.pid, 'SIGTERM'); // the whole group: npx -> wrangler -> workerd
+        }
+      }
     } catch {
       /* already gone */
     }
@@ -86,6 +109,7 @@ async function killAll(): Promise<void> {
   adminProxy?.closeAllConnections();
   adminProxy?.close();
 }
+
 
 async function boot(): Promise<Stack> {
   rmSync(STATE, { recursive: true, force: true });

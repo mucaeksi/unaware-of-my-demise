@@ -1,13 +1,15 @@
 import Phaser from 'phaser';
 import { REF_H, REF_W } from '../config';
+import { advance } from '../entry/flow';
 import { S } from '../entry/strings';
-import { markCompleted } from '../entry/state';
-import { recordEntry } from '../entry/sync';
+import { loadEntry, nextStep } from '../entry/state';
+import { confirmEntryComplete } from '../entry/sync';
 import { restartGame } from '../platform/native';
 import { barFill } from '../patch/barFill';
 import type { PatchStatus } from '../patch/PatchService';
 import { Services } from '../services';
 import { formatBytes } from '../ui/format';
+import { errText } from '../ui/hub';
 import { Bar, Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
 import { C, T } from '../ui/theme';
 
@@ -33,6 +35,11 @@ export class FinishScene extends Phaser.Scene {
   async create(): Promise<void> {
     this.restarting = false;
     this.shown = null;
+    const entry = loadEntry();
+    if (!entry.prologue || entry.tutorials < 3) {
+      advance(this, nextStep(entry));
+      return;
+    }
     const { art } = Services.ready();
     await art.ensureBoot(this).catch(() => undefined);
     if (!this.sys.isActive()) return;
@@ -50,11 +57,12 @@ export class FinishScene extends Phaser.Scene {
     this.figures = txt(this, REF_W / 2, 650, '', { fontSize: '32px', color: T.dim }).setOrigin(0.5, 0);
     this.action = new Button(this, REF_W / 2, 700, { label: S.finish.restart, w: 700, h: 128, fontSize: 40, variant: 'hot', onClick: () => void this.onAction() });
     this.action.setVisible(false);
-    void Services.patches.start(); // a no-op while it runs or when it has finished; covers a player who resumed straight at this step
+    if (Services.patches.get().kind === 'idle') void Services.patches.start(); // covers a player who resumed straight at this step without resetting a failed run
     this.unsub = Services.patches.subscribe((s) => this.render(s));
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.unsub?.());
     sceneFadeIn(this, 900);
   }
+
 
   private render(s: PatchStatus): void {
     if (this.restarting || !this.head.active) return;
@@ -100,10 +108,29 @@ export class FinishScene extends Phaser.Scene {
     }
     if (this.shown !== 'ready') return;
     this.restarting = true; // one restart however many presses
+    this.action.setLabel(Services.api.signedIn ? 'SAVING TO ACCOUNT…' : S.finish.restarting).setEnabled(false);
+    try {
+      await confirmEntryComplete(Services.api);
+    } catch (e) {
+      if (!this.sys.isActive()) return;
+      this.restarting = false;
+      this.note.setText(`${S.finish.readyBody}\n\nCould not confirm your entry checkpoint on the server: ${errText(e)}`);
+      this.action.setVisible(true).setLabel('RETRY SAVE & RESTART').setEnabled(true);
+      return;
+    }
+    if (!this.sys.isActive()) return;
+    this.note.setText(S.finish.readyBody);
     this.action.setLabel(S.finish.restarting).setEnabled(false);
-    // the entry flow is complete: remember it on the device at once and on the account when reachable (a short wait, never a blocker)
-    recordEntry(Services.api, (st) => markCompleted(st));
     await new Promise<void>((r) => this.time.delayedCall(450, () => r()));
-    await restartGame();
+    try {
+      await restartGame();
+    } catch (e) {
+      if (!this.sys.isActive()) return;
+      this.restarting = false;
+      this.note.setText(`${S.finish.readyBody}\n\nCheckpoint saved, but the automatic restart could not complete: ${errText(e)}`);
+      this.action.setVisible(true).setLabel('RETRY RESTART').setEnabled(true);
+    }
   }
 }
+
+

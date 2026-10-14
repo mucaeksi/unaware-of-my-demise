@@ -3,11 +3,12 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { readFileSync, readdirSync, statSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { ArtManifest, EconomyCatalog, MEDIA_TYPE_BY_EXTENSION, type AllowedExtension } from '@uomd/content-schema';
 import { sha256Hex } from '@uomd/shared';
 import { expect, type APIRequestContext } from '@playwright/test';
 import { ADMIN } from './helpers';
-const run = promisify(execFile); const root = new URL('../../', import.meta.url).pathname;
+const run = promisify(execFile); const root = fileURLToPath(new URL('../../', import.meta.url));
 export const HERO = 'r08_probe_hero'; export const HERO_FIVE = 'r08_probe_five'; export const INVITATION = 'r08_probe_invitation'; export const ARMOR = 'r08_probe_armor'; export const BANNER = 'r08_probe_banner'; export const NODE = 'r08_probe_battle';
 export async function publishFixture(request: APIRequestContext, id: string) {
   const headers = { 'Cf-Access-Jwt-Assertion': process.env.E2E_ADMIN_JWT! };

@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { RATION_COST, type ChapterIndex } from '@uomd/content-schema';
 import { REF_H, REF_W } from '../config';
+import { loadEntry } from '../entry/state';
 import { Progress, Services } from '../services';
 import { Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
 import { C, F, T } from '../ui/theme';
@@ -50,16 +51,22 @@ export class ChaptersScene extends Phaser.Scene {
     const active = await content.activeReleaseId();
     if (generation !== this.generation || revision !== api.authRevision) return;
 
+    const entryDone = loadEntry().phase === 'completed';
+    const hasCampaign = index.chapters.some((ch) => ch.chapter_id !== 'tutorial');
     let y = 250;
     let firstOpen = -1;
     for (const ch of index.chapters) {
-      const revealed = ch.nodes.some((node) => progress[node.node_id] || !node.requires || progress[node.requires]);
-      const heading = revealed ? ch.title_en : 'Locked chapter';
+      const isTutorial = ch.chapter_id === 'tutorial';
+      const revealed = (isTutorial && entryDone) || ch.nodes.some((node) => progress[node.node_id] || !node.requires || progress[node.requires]);
+      const heading = isTutorial && entryDone ? `${ch.title_en} · Replay` : revealed ? ch.title_en : 'Locked chapter';
       txt(this, 330, y - 20, heading.toUpperCase(), { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: T.dim }).setOrigin(0, 0.5);
       y += 70;
       for (const node of ch.nodes) {
-        if (firstOpen < 0 && !progress[node.node_id] && !(node.requires && !progress[node.requires])) firstOpen = y;
-        this.row(node, y, progress, baseNodes.has(node.node_id) ? null : active);
+        const tutorialReplay = isTutorial && entryDone;
+        if ((!isTutorial || !hasCampaign) && firstOpen < 0 && !progress[node.node_id] && !(node.requires && !progress[node.requires])) {
+          firstOpen = y;
+        }
+        this.row(node, y, progress, baseNodes.has(node.node_id) ? null : active, tutorialReplay);
         y += 160;
       }
     }
@@ -92,15 +99,16 @@ export class ChaptersScene extends Phaser.Scene {
     void back;
   }
 
-  private row(node: Node, y: number, progress: Record<string, { stars: number }>, patchedBy: string | null): void {
+  private row(node: Node, y: number, progress: Record<string, { stars: number }>, patchedBy: string | null, tutorialReplay = false): void {
     const done = progress[node.node_id];
-    const locked = Boolean(node.requires && !progress[node.requires]);
+    const locked = !tutorialReplay && Boolean(node.requires && !progress[node.requires]);
     const bg = panel(this, REF_W / 2, y, 1300, 138, locked ? 'dim' : 'normal');
     const label = locked ? node.kind === 'story' ? 'Locked story' : 'Locked battle' : node.title_en;
     const name = title(this, 0, 0, label.toUpperCase(), 42, locked ? T.dim : T.text).setOrigin(0, 0.5).setPosition(REF_W / 2 - 600, y - 20);
     const cost = node.ration_class ? RATION_COST[node.ration_class] : 0;
-    const battleLabel = cost === 0 ? 'Free practice · one-time rewards only' : `Story and battle · ${cost} Ration`;
+    const battleLabel = tutorialReplay ? 'Tutorial replay · no Ration cost' : cost === 0 ? 'Free practice · one-time rewards only' : `Story and battle · ${cost} Ration`;
     const sub = txt(this, REF_W / 2 - 600, y + 28, locked ? 'Finish the previous story step first' : node.kind === 'battle' ? battleLabel : 'Story', { fontSize: '30px', color: T.dim });
+
     if (patchedBy) {
       const tag = panel(this, REF_W / 2 + 330, y - 28, 270, 56, 'hot');
       txt(this, REF_W / 2 + 330, y - 28, `NEW · ${patchedBy}`, { fontFamily: F.display, fontSize: '22px', fontStyle: '600', color: T.gold }).setOrigin(0.5);

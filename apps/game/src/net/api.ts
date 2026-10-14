@@ -39,6 +39,7 @@ const KEY = 'uomd.session.v1';
 interface Session {
   token: string;
   expiresAt: string;
+  playerId?: string;
 }
 
 /** D-17: one main currency. */
@@ -202,6 +203,14 @@ export class GameApi extends EventTarget {
     return this.authVersion;
   }
 
+  /** Synchronous account scope key for local storage isolation ('guest' when signed out, player/session scoped when signed in). */
+  get accountKey(): string {
+    if (!this.signedIn || !this.session) return 'guest';
+    const id = this.verifiedAccount?.id ?? this.session.playerId;
+    if (id) return `player:${id}`;
+    return `token:${this.session.token.slice(0, 24)}`;
+  }
+
   /** Observe shared selection without writing: an old tab must never delete or restore another tab's bearer. */
   private observeSession(): void {
     try {
@@ -212,9 +221,10 @@ export class GameApi extends EventTarget {
         try {
           const value = raw ? JSON.parse(raw) as Partial<Session> : null;
           if (value && typeof value.token === 'string' && value.token && value.token.length <= 8192 && typeof value.expiresAt === 'string' && Date.parse(value.expiresAt) > Date.now())
-            next = { token: value.token, expiresAt: value.expiresAt };
+            next = { token: value.token, expiresAt: value.expiresAt, ...(typeof value.playerId === 'string' && value.playerId ? { playerId: value.playerId } : {}) };
         } catch { /* malformed shared storage means signed out */ }
         if (next?.token !== this.session?.token || next?.expiresAt !== this.session?.expiresAt) this.adoptSession(next);
+        else if (this.session && next?.playerId && !this.session.playerId) this.session.playerId = next.playerId;
       }
     } catch { /* unavailable storage leaves the current in-memory authority unchanged */ }
     if (this.session && !this.signingIn && !(Date.parse(this.session.expiresAt) > Date.now())) this.adoptSession(null);
@@ -291,7 +301,7 @@ export class GameApi extends EventTarget {
       this.observeSession();
       if (this.authVersion !== attempt) throw new ApiError(409, 'auth_changed', 'The selected account changed before sign-in completed');
       this.signingIn = 0;
-      this.store({ token: r.token, expiresAt: r.expiresAt });
+      this.store({ token: r.token, expiresAt: r.expiresAt, playerId: r.player.id });
       this.verifiedAccount = { version: this.authVersion, id: r.player.id };
       return r.player;
     } finally { if (this.signingIn === attempt) this.signingIn = 0; }

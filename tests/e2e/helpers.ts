@@ -2,6 +2,7 @@
 import { expect, type Page, type TestInfo } from '@playwright/test';
 
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { SignJWT, importJWK } from 'jose';
 import { GOOGLE_CLIENT } from './stack';
 
@@ -14,7 +15,7 @@ export async function signInDev(page: Page, subject: string): Promise<{ id: stri
   return page.evaluate(async (identity) => (window as any).__UOMD__.services.api.signInWithIdToken(identity), token);
 }
 
-export const SHOTS = join(new URL('../../.cache/e2e-shots', import.meta.url).pathname);
+export const SHOTS = join(fileURLToPath(new URL('../../.cache/e2e-shots', import.meta.url)));
 /** Local stack by default; `UOMD_REMOTE_GAME_URL` points the remote smoke test at a deployed environment. */
 export const GAME = (process.env.UOMD_REMOTE_GAME_URL ?? 'http://127.0.0.1:8787').replace(/\/$/, '');
 export const ADMIN = 'http://127.0.0.1:8788';

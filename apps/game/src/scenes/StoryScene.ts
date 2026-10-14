@@ -7,6 +7,7 @@ import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { prefs } from '../platform/prefs';
 import { CUTSCENE, cutsceneHoldSeconds, cutscenePauseSeconds } from '../entry/cutscene';
+import { clearStoryCheckpoint, loadReadLines, loadStoryCheckpoint, saveReadLines, saveStoryCheckpoint } from '../entry/resume';
 import { Services } from '../services';
 import { Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
@@ -20,22 +21,6 @@ export interface StoryInit {
 }
 
 const CPS = { slow: 26, normal: 46, fast: 95 } as const;
-const READ_KEY = 'uomd.read.v1';
-
-function loadRead(): Set<string> {
-  try {
-    return new Set(JSON.parse(localStorage.getItem(READ_KEY) ?? '[]') as string[]);
-  } catch {
-    return new Set();
-  }
-}
-function saveRead(s: Set<string>): void {
-  try {
-    localStorage.setItem(READ_KEY, JSON.stringify([...s].slice(-4000)));
-  } catch {
-    /* ignore */
-  }
-}
 
 interface Actor {
   side: 'left' | 'right';
@@ -65,7 +50,7 @@ export class StoryScene extends Phaser.Scene {
   private auto = false;
   private skip = false;
   private autoTimer: Phaser.Time.TimerEvent | null = null;
-  private read = loadRead();
+  private read = new Set<string>();
   private currentLine: Extract<StoryEvent, { type: 'line' }> | null = null;
   private finished = false;
   private choiceLayer: Phaser.GameObjects.Container | null = null;
@@ -103,6 +88,7 @@ export class StoryScene extends Phaser.Scene {
     this.autoTimer = null;
     this.choiceLayer = null;
     this.logLayer = null;
+    this.read = loadReadLines(Services.api.accountKey);
   }
 
   async create(): Promise<void> {
@@ -146,9 +132,11 @@ export class StoryScene extends Phaser.Scene {
       return;
     }
     if (!current()) return;
+    const savedCp = loadStoryCheckpoint(Services.api.accountKey, this.init0.path, this.data0.scene_id);
+    this.runner = new StoryRunner(this.data0, savedCp?.state);
     this.build();
+    this.restoreFromRunner();
     sceneFadeIn(this, 500);
-    this.runner = new StoryRunner(this.data0);
     this.pump();
   }
 
@@ -206,6 +194,26 @@ export class StoryScene extends Phaser.Scene {
     this.tweens.add({ targets: this.caret, alpha: 0.2, duration: 600, yoyo: true, repeat: -1 });
   }
 
+  /** Applies reconstructed visual/audio state when resuming from a mid-scene checkpoint. */
+  private restoreFromRunner(): void {
+    const { art } = Services.ready();
+    const r = this.runner.restored;
+    const bgKey = art.background(r.locationId);
+    if (this.bg.texture.key !== bgKey) this.bg.setTexture(bgKey);
+    if (r.musicCueId !== null) {
+      if (r.musicCueId === 'stop') Music.stop();
+      else {
+        const m = art.music(r.musicCueId);
+        if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration);
+      }
+    }
+    for (const [character, a] of r.actors) {
+      this.showActor(character, a.side, a.emotion, true);
+    }
+    this.prevSpeaker = r.prevSpeaker;
+  }
+
+
   // ------------------------------------------------------------------ program flow
 
   private pump(): void {
@@ -262,16 +270,31 @@ export class StoryScene extends Phaser.Scene {
         this.hideActor(e.character);
         return false;
       case 'checkpoint':
-        // One bounded checkpoint per reader/account revision. R09 owns the resume flow.
-        try { sessionStorage.setItem('uomd.story.checkpoint.v1', JSON.stringify({ path: this.init0.path, authRevision: Services.api.authRevision, checkpointId: e.checkpointId, state: this.runner.save() })); } catch { /* optional local continuity */ }
+        saveStoryCheckpoint(Services.api.accountKey, {
+          path: this.init0.path,
+          sceneId: this.data0.scene_id,
+          checkpointId: e.checkpointId,
+          state: this.runner.save()
+        });
         return false;
       case 'wait':
         this.time.delayedCall(e.seconds * 1000, () => this.pump());
         return true;
       case 'line':
+        saveStoryCheckpoint(Services.api.accountKey, {
+          path: this.init0.path,
+          sceneId: this.data0.scene_id,
+          checkpointId: e.lineId,
+          state: this.runner.saveAtCurrentEvent()
+        });
         this.showLine(e);
         return true;
       case 'choice':
+        saveStoryCheckpoint(Services.api.accountKey, {
+          path: this.init0.path,
+          sceneId: this.data0.scene_id,
+          state: this.runner.saveAtCurrentEvent()
+        });
         this.showChoices(e);
         return true;
       case 'end':
@@ -283,26 +306,35 @@ export class StoryScene extends Phaser.Scene {
   private complete(): void {
     if (this.finished) return;
     this.finished = true;
-    saveRead(this.read);
+    clearStoryCheckpoint(Services.api.accountKey, this.init0.path);
+    saveReadLines(Services.api.accountKey, this.read);
     this.autoTimer?.remove();
     this.time.delayedCall(450, () => this.init0.onDone(this));
   }
 
   // ------------------------------------------------------------------ actors
 
-  private showActor(character: string, side: 'left' | 'right'): void {
+  private showActor(character: string, side: 'left' | 'right', emotion = 'composed', immediate = false): void {
     if (this.illustration) return; // the illustration carries the characters
     const { art } = Services.ready();
-    const key = art.portrait(character, 'composed');
+    const key = art.portrait(character, emotion) ?? art.portrait(character, 'composed');
     if (!key) return;
+    const existing = this.actors.get(character);
+    if (existing) {
+      existing.image.destroy();
+      this.actors.delete(character);
+    }
     const x = side === 'left' ? 500 : REF_W - 500;
-    const img = this.add.image(x + (side === 'left' ? -80 : 80), REF_H + 30, key).setOrigin(0.5, 1).setDepth(DEPTH.world).setAlpha(0);
+    const img = this.add.image(immediate ? x : x + (side === 'left' ? -80 : 80), REF_H + 30, key).setOrigin(0.5, 1).setDepth(DEPTH.world).setAlpha(immediate ? 0.72 : 0);
     const k = 980 / img.height;
     img.setScale(k);
     if (side === 'left') img.setFlipX(false);
-    this.actors.set(character, { side, image: img, emotion: 'composed' });
-    this.tweens.add({ targets: img, x, alpha: 0.72, duration: prefs().reducedMotion ? 1 : 700, ease: 'Cubic.easeOut' });
+    this.actors.set(character, { side, image: img, emotion });
+    if (!immediate) {
+      this.tweens.add({ targets: img, x, alpha: 0.72, duration: prefs().reducedMotion ? 1 : 700, ease: 'Cubic.easeOut' });
+    }
   }
+
 
   private hideActor(character: string): void {
     const a = this.actors.get(character);

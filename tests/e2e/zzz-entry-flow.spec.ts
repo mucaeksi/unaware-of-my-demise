@@ -93,6 +93,7 @@ test('prologue timing: nine scenes, 120 s, no skip, narration revealed at 26 cha
   const switched = (Date.now() - t0) / 1000;
   expect(switched).toBeGreaterThan(10.5);
   expect(switched).toBeLessThan(14.5);
+  expect(await sceneState(page, 'Prologue', (s) => s.body.alpha)).toBe(1);
   // the narration is revealed at 26 characters per second: sample one second of an ongoing reveal
   const len = (): Promise<number> => sceneState(page, 'Prologue', (s) => (s.body.text as string).length);
   const l1 = await len();
@@ -182,17 +183,29 @@ test('first install: gate -> prologue -> T-1..T-3 (manual battles, cutscene rule
   // ---- after the restart: the full menu, the new content is active, the entry flow is finished
   const after = await page.evaluate(async () => {
     const sv = (window as any).__UOMD__.services;
-    return { active: await sv.content.activeReleaseId(), entry: JSON.parse(localStorage.getItem('uomd.entry.v1') ?? '{}'), nodes: ((await sv.content.chapters()).chapters.flatMap((c: any) => c.nodes) as any[]).length };
+    const progress = JSON.parse(localStorage.getItem('uomd.progress.v1') ?? '{}') as Record<string, unknown>;
+    return {
+      active: await sv.content.activeReleaseId(),
+      entry: JSON.parse(localStorage.getItem('uomd.entry.v1') ?? '{}'),
+      nodes: ((await sv.content.chapters()).chapters.flatMap((c: any) => c.nodes) as any[]).length,
+      stage1_1Cleared: Boolean(progress['stage_1_1'])
+    };
   });
   expect(after.active).toBe('rel_0004');
   expect(after.entry).toMatchObject({ phase: 'completed', prologue: true, tutorials: 3 });
   expect(after.nodes).toBeGreaterThan(30);
+  expect(after.stage1_1Cleared).toBe(false);
   const labels = (await textsOf(page, 'Title')).join('|');
+  expect(labels).toContain('CONTINUE');
   expect(labels).toContain('CHAPTERS');
   expect(labels).not.toContain('PREVIEW BUILD');
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-f7-09-after-restart-menu.png` });
+  await tap(page, info, 500, 640); // CONTINUE -> enters Part I campaign opening rather than replaying tutorial t1
+  await waitScene(page, 'Story', 30_000);
+  expect(await sceneState(page, 'Story', (s) => s.init0.path)).toBe('story/opening_sad_scene.json');
   expect(problems.filter((p) => !p.includes('favicon') && !p.includes('HTTP 404') && !p.includes('requestfailed'))).toEqual([]);
 });
+
 
 test('resuming at the end with the download still running: the page waits, then confirms (late patch)', async ({ page }, info) => {
   test.skip(info.project.name !== 'landscape-desktop', 'long scenario, runs once');
@@ -203,8 +216,9 @@ test('resuming at the end with the download still running: the page waits, then 
       localStorage.setItem('uomd.entry.v1', JSON.stringify({ phase: 'in_progress', prologue: true, tutorials: 3, updatedAt: '2026-10-11T00:00:00.000Z' }));
     } catch { /* ignore */ }
   });
-  await slowDownloads(page, 1200);
+  await slowDownloads(page, 350);
   await openGame(page, '/', { fresh: true, until: 'Title' });
+
   await enterFromMenu(page, info);
   await waitScene(page, 'Finish', 30_000);
   await page.waitForTimeout(3500);

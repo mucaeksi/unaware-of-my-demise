@@ -1,8 +1,10 @@
 import Phaser from 'phaser';
 import type { Prologue, PrologueScene as PrologueData } from '@uomd/content-schema';
+import { Music } from '../audio/Music';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
 import { advance } from '../entry/flow';
-import { markPrologueSeen } from '../entry/state';
+import { clearPrologueCheckpoint, loadPrologueCheckpoint, savePrologueCheckpoint } from '../entry/resume';
+import { loadEntry, markPrologueSeen } from '../entry/state';
 import { recordEntry } from '../entry/sync';
 import { plateKey } from '../entry/plates';
 import { prefs } from '../platform/prefs';
@@ -21,9 +23,10 @@ const TEXT_FADE_MS = INTRO_FAST ? 40 : 450;
 export const sceneSeconds = (s: PrologueData): number => (INTRO_FAST ? 0.35 : s.duration_seconds);
 
 /**
- * "Before the Road": the ~120 s first-install interlude. Each scene is one plate with a slow camera move, a caption and one
- * narration line revealed at 26 characters per second. No controls and no skip (v006); the download runs underneath. After the last
- * scene the screen fades to black and offers CONTINUE, which records the prologue as seen and goes on to tutorial T-1.
+ * "Before the Road": the 120 s first-install interlude. Each scene is one plate with a slow camera move, a caption and one
+ * narration line revealed at 26 characters per second. Pause/Mute controls are available on all runs, and Skip is available on replay;
+ * the download runs underneath. After the last scene the screen fades to black and offers CONTINUE, which records the prologue as seen
+ * and goes on to tutorial T-1.
  */
 export class PrologueScene extends Phaser.Scene {
   private stage: NarrativeStage | null = null;
@@ -34,6 +37,12 @@ export class PrologueScene extends Phaser.Scene {
   private body!: Phaser.GameObjects.Text;
   private shade!: Phaser.GameObjects.Graphics;
   private typer: Phaser.Time.TimerEvent | null = null;
+  private fadeTimer: Phaser.Time.TimerEvent | null = null;
+  private advanceTimer: Phaser.Time.TimerEvent | null = null;
+  private pauseBtn: Button | null = null;
+  private muteBtn: Button | null = null;
+  private pausedByUser = false;
+  private muted = false;
   private index = -1;
   private done = false;
 
@@ -47,6 +56,12 @@ export class PrologueScene extends Phaser.Scene {
     this.data0 = null;
     this.current = null;
     this.typer = null;
+    this.fadeTimer = null;
+    this.advanceTimer = null;
+    this.pauseBtn = null;
+    this.muteBtn = null;
+    this.pausedByUser = false;
+    this.muted = this.sound.mute;
     this.index = -1;
     this.done = false;
   }
@@ -61,8 +76,70 @@ export class PrologueScene extends Phaser.Scene {
     this.shade.setAlpha(0);
     this.caption = txt(this, REF_W / 2, 96, '', { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: '#e3c37d', stroke: '#05030a', strokeThickness: 5 }).setOrigin(0.5).setLetterSpacing(9).setDepth(DEPTH.hud).setAlpha(0);
     this.body = txt(this, REF_W / 2, REF_H - 300, '', { fontFamily: F.body, fontSize: '46px', fontStyle: '500', color: T.text, align: 'center', wordWrap: { width: 1520 }, lineSpacing: 14, stroke: '#05030a', strokeThickness: 6 }).setOrigin(0.5, 0).setDepth(DEPTH.hud);
+    this.buildControls();
     if (!prefs().reducedMotion && !INTRO_FAST) this.addMotes();
     void this.loadScript();
+  }
+
+  private buildControls(): void {
+    this.input.on('pointerdown', () => {
+      const ctx = (this.sound as Phaser.Sound.WebAudioSoundManager).context;
+      if (ctx?.state === 'suspended') void ctx.resume().catch(() => undefined);
+    });
+    this.pauseBtn = new Button(this, 130, 64, {
+      label: 'PAUSE',
+      w: 180,
+      h: 72,
+      fontSize: 24,
+      onClick: () => this.togglePause()
+    }).setDepth(DEPTH.hud + 3);
+    this.muteBtn = new Button(this, 330, 64, {
+      label: this.muted ? 'UNMUTE' : 'MUTE',
+      w: 180,
+      h: 72,
+      fontSize: 24,
+      onClick: () => this.toggleMute()
+    }).setDepth(DEPTH.hud + 3);
+    if (loadEntry().phase === 'completed') {
+      new Button(this, REF_W - 150, 70, {
+        label: 'SKIP',
+        w: 200,
+        h: 78,
+        fontSize: 26,
+        onClick: () => this.finish()
+      }).setDepth(DEPTH.hud + 3);
+    }
+    const onVisibility = (): void => {
+      if (!this.sys.isActive() || this.done) return;
+      if (document.hidden) {
+        this.time.paused = true;
+        this.tweens.pauseAll();
+      } else if (!this.pausedByUser) {
+        this.time.paused = false;
+        this.tweens.resumeAll();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+    this.events.once('shutdown', () => {
+      document.removeEventListener('visibilitychange', onVisibility);
+      this.time.paused = false;
+    });
+  }
+
+  private togglePause(): void {
+    if (this.done) return;
+    this.pausedByUser = !this.pausedByUser;
+    this.time.paused = this.pausedByUser;
+    if (this.pausedByUser) this.tweens.pauseAll();
+    else this.tweens.resumeAll();
+    this.pauseBtn?.setLabel(this.pausedByUser ? 'RESUME' : 'PAUSE');
+  }
+
+  private toggleMute(): void {
+    this.muted = !this.muted;
+    this.sound.mute = this.muted;
+    Music.setVolume(this.muted ? 0 : prefs().musicVolume);
+    this.muteBtn?.setLabel(this.muted ? 'UNMUTE' : 'MUTE');
   }
 
   private async loadScript(): Promise<void> {
@@ -87,6 +164,10 @@ export class PrologueScene extends Phaser.Scene {
       return;
     }
     if (!current()) return;
+    const savedIndex = loadPrologueCheckpoint(Services.api.accountKey, this.data0.scenes.length);
+    if (savedIndex !== null && savedIndex > 0) {
+      this.index = savedIndex - 1;
+    }
     this.tweens.add({ targets: this.shade, alpha: 1, duration: 600 });
     this.next();
   }
@@ -100,13 +181,18 @@ export class PrologueScene extends Phaser.Scene {
       this.ending();
       return;
     }
+    savePrologueCheckpoint(Services.api.accountKey, this.index);
     const first = this.index === 0;
     const holdMs = sceneSeconds(scene) * 1000;
     this.showPlate(scene, first, holdMs);
     this.showText(scene);
-    // the next scene starts exactly when this one's script time is up (the crossfade overlaps the tail)
-    this.time.delayedCall(Math.max(0, holdMs - CROSSFADE_MS), () => {
+    this.fadeTimer?.remove(false);
+    this.advanceTimer?.remove(false);
+    this.fadeTimer = this.time.delayedCall(Math.max(0, holdMs - TEXT_FADE_MS), () => {
       this.fadeText(() => undefined);
+    });
+    // Advance exactly when this scene's full duration_seconds has elapsed so all 9 scenes sum to 120 s.
+    this.advanceTimer = this.time.delayedCall(holdMs, () => {
       this.next();
     });
   }
@@ -131,10 +217,10 @@ export class PrologueScene extends Phaser.Scene {
 
   private showText(scene: PrologueData): void {
     this.typer?.remove(false);
-    this.caption.setText(scene.caption_en.toUpperCase());
-    this.body.setText('');
+    this.tweens.killTweensOf([this.body, this.caption]);
+    this.caption.setText(scene.caption_en.toUpperCase()).setAlpha(0);
+    this.body.setText('').setAlpha(1);
     this.tweens.add({ targets: this.caption, alpha: 1, duration: TEXT_FADE_MS * 2, delay: 300 });
-    this.body.setAlpha(1);
     const full = this.stage?.text(scene.line_id, scene.text_en) ?? scene.text_en;
     void this.stage?.voice(scene.line_id);
     const step = INTRO_FAST ? 3 : 1;
@@ -152,12 +238,18 @@ export class PrologueScene extends Phaser.Scene {
 
   private fadeText(done: () => void): void {
     this.typer?.remove(false);
+    this.tweens.killTweensOf([this.body, this.caption]);
     this.tweens.add({ targets: [this.body, this.caption], alpha: 0, duration: TEXT_FADE_MS, onComplete: done });
   }
 
   private ending(): void {
     if (this.done) return;
     this.done = true;
+    if (this.pausedByUser) {
+      this.pausedByUser = false;
+      this.time.paused = false;
+      this.tweens.resumeAll();
+    }
     const black = this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x000000, 1).setDepth(DEPTH.modal).setAlpha(0);
     this.tweens.add({
       targets: black,
@@ -173,9 +265,12 @@ export class PrologueScene extends Phaser.Scene {
 
   /** The prologue counts as seen once the player moves on (or when it cannot be shown at all). */
   private finish(): void {
+    this.time.paused = false;
+    clearPrologueCheckpoint(Services.api.accountKey);
     recordEntry(Services.api, (s) => markPrologueSeen(s));
     advance(this);
   }
+
 
   /** A few slow ash motes over every plate, built-in Phaser particles on the shared soft dot. */
   private addMotes(): void {

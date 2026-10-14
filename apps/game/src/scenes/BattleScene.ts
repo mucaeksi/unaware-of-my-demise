@@ -21,6 +21,8 @@ export interface BattleInit {
   encounterPath: string;
   /** chapter node being played: lets a signed-in player's win be claimed on the server */
   nodeId?: string;
+  /** Invoked as soon as a battle win is confirmed (after server claim when signed in, or immediately in preview/tutorial). */
+  onClaimed?: (stars: number) => void;
   onDone: (scene: Phaser.Scene, outcome: BattleOutcome) => void;
   onBack: (scene: Phaser.Scene) => void;
   /** Owned stages use the frozen party; all signed-in stages use a frozen release session. */
@@ -59,6 +61,10 @@ export class BattleScene extends Phaser.Scene {
   private pendingResolve: ((a: PlayerAction) => void) | null = null;
   private bannerBox: Phaser.GameObjects.Container | null = null;
   private menuLayer: Phaser.GameObjects.Container | null = null;
+  private claimPromise: Promise<boolean> | null = null;
+  private claimConfirmed = false;
+  private primaryBtn: Button | null = null;
+  private verifyLabel: Phaser.GameObjects.Text | null = null;
 
   constructor() {
     super('Battle');
@@ -77,7 +83,12 @@ export class BattleScene extends Phaser.Scene {
     this.pendingResolve = null;
     this.bannerBox = null;
     this.menuLayer = null;
+    this.claimPromise = null;
+    this.claimConfirmed = false;
+    this.primaryBtn = null;
+    this.verifyLabel = null;
   }
+
 
   async create(): Promise<void> {
     const { content, art } = Services.ready();
@@ -742,33 +753,92 @@ export class BattleScene extends Phaser.Scene {
     txt(this, REF_W / 2, tutorial ? 500 : 560, `${result.turns} turns  ·  ${this.recorded.length} actions`, { fontSize: '34px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
     if (!tutorial) {
       const verify = txt(this, REF_W / 2, 618, 'Server verification: checking…', { fontSize: '30px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
+      this.verifyLabel = verify;
       if (this.cfg.sessionId || this.encounter.party_mode === 'owned') verify.setText('Server verification: at the progress claim');
       else void this.verifyOnServer(verify);
-      if (won) void this.claimProgress();
+      if (won) {
+        if (Services.api.signedIn && this.cfg.nodeId) {
+          this.claimPromise = this.claimProgress(result.stars);
+        } else {
+          this.claimConfirmed = true;
+          this.cfg.onClaimed?.(result.stars);
+        }
+      }
+    } else if (won) {
+      this.claimConfirmed = true;
+      this.cfg.onClaimed?.(result.stars);
     }
 
-    const primary = new Button(this, tutorial && won ? REF_W / 2 : REF_W / 2 - 250, 760, { label: won ? 'CONTINUE' : 'RETRY', w: 440, onClick: () => (won ? this.cfg.onDone(this, { won, stars: result.stars }) : this.cfg.onRetry ? this.cfg.onRetry(this) : this.scene.restart(this.cfg)) }).setDepth(DEPTH.modal + 2);
+    const primary = new Button(this, tutorial && won ? REF_W / 2 : REF_W / 2 - 250, 760, {
+      label: won ? 'CONTINUE' : 'RETRY',
+      w: 440,
+      onClick: () => {
+        if (!won) {
+          if (this.cfg.onRetry) this.cfg.onRetry(this);
+          else this.scene.restart(this.cfg);
+          return;
+        }
+        void this.onContinue(result.stars);
+      }
+    }).setDepth(DEPTH.modal + 2);
+    this.primaryBtn = primary;
     if (!(tutorial && won)) new Button(this, REF_W / 2 + 250, 760, { label: tutorial ? 'BACK TO STORY' : 'LEAVE', w: 440, onClick: () => this.cfg.onBack(this) }).setDepth(DEPTH.modal + 2);
     void box;
     void primary;
   }
 
+  private async onContinue(stars: number): Promise<void> {
+    if (this.claimPromise) {
+      this.primaryBtn?.setLabel('SAVING…').setEnabled(false);
+      await this.claimPromise;
+    }
+    if (!this.claimConfirmed) {
+      this.primaryBtn?.setLabel('SAVING…').setEnabled(false);
+      this.claimPromise = this.claimProgress(stars);
+      const ok = await this.claimPromise;
+      if (!ok) return;
+    }
+    if (!this.dead) {
+      this.cfg.onDone(this, { won: true, stars });
+    }
+  }
+
   /** Signed-in players: the server re-simulates the win again, pays Ration and grants the stage rewards. */
-  private async claimProgress(): Promise<void> {
+  private async claimProgress(stars: number): Promise<boolean> {
     const api = Services.api;
-    if (!api.signedIn || !this.cfg.nodeId) return;
+    if (!api.signedIn || !this.cfg.nodeId) {
+      this.claimConfirmed = true;
+      this.cfg.onClaimed?.(stars);
+      return true;
+    }
     try {
       const { content } = Services.ready();
       const r = await api.submitBattle(this.cfg.releaseId ?? await content.activeReleaseId(), this.cfg.nodeId, this.recorded, this.cfg.sessionId);
-      if (this.dead) return;
+      if (this.dead) return false;
+      this.claimConfirmed = true;
+      this.cfg.onClaimed?.(stars);
+      if (this.primaryBtn?.active) this.primaryBtn.setLabel('CONTINUE').setEnabled(true);
+      if (this.verifyLabel?.active && (this.cfg.sessionId || this.encounter.party_mode === 'owned')) {
+        this.verifyLabel.setText('Server verification: ✓ progress saved to your account').setColor(T.heal);
+      }
       const names = r.rewards.length ? await api.catalogNames(this.cfg.releaseId ?? await content.activeReleaseId()).catch(() => new Map<string, string>()) : new Map<string, string>();
       const gained = r.rewards.length ? ` · rewards: ${r.rewards.map((a) => describeAttachment(a, names)).join(', ')}` : '';
       const saved = r.repeatRewardsAllowed === false ? 'Free practice recorded · one-time rewards only' : 'Progress saved to your account';
       toast(this, `${saved}${gained}`);
+      return true;
     } catch (e) {
-      if (!this.dead) toast(this, e instanceof Error ? `Progress not saved: ${e.message}` : 'Progress not saved');
+      this.claimConfirmed = false;
+      if (!this.dead) {
+        if (this.primaryBtn?.active) this.primaryBtn.setLabel('RETRY SAVE').setEnabled(true);
+        if (this.verifyLabel?.active) this.verifyLabel.setText('Server verification: ✗ progress not saved — retry').setColor(T.crimson);
+        toast(this, e instanceof Error ? `Progress not saved: ${e.message}` : 'Progress not saved');
+      }
+      return false;
+    } finally {
+      this.claimPromise = null;
     }
   }
+
 
   /** Asks the Worker to re-simulate the battle; the client result is only accepted if hashes agree. */
   private async verifyOnServer(label: Phaser.GameObjects.Text): Promise<void> {

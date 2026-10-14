@@ -2,8 +2,9 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-export const ROOT = new URL('../../', import.meta.url).pathname.replace(/\/$/, '');
+export const ROOT = fileURLToPath(new URL('../../', import.meta.url)).replace(/[\\/]$/, '');
 
 /**
  * Commit that still holds the approved legacy tutorial art the content build reads through `git show` (retired Godot-era tree,

@@ -1,5 +1,5 @@
 import type { EntryCheckpoint } from '../net/api';
-import { freshEntry, loadEntry, mergeEntry, saveEntry, type EntryState } from './state';
+import { freshEntry, loadEntry, markCompleted, mergeEntry, saveEntry, type EntryState } from './state';
 
 /** The slice of the API client the sync needs (a fake in tests). */
 export interface EntryApi {
@@ -60,3 +60,23 @@ export function recordEntry(api: EntryApi, step: (s: EntryState) => EntryState):
   if (api.signedIn) void api.putEntry(body(next)).catch(() => undefined); // the next syncEntry repairs a missed push
   return next;
 }
+
+/**
+ * Confirms entry completion before the mandatory first restart.
+ * Verifies prologue + 3 tutorials are complete, and when signed in awaits server checkpoint persistence before marking local state completed.
+ */
+export async function confirmEntryComplete(api: EntryApi): Promise<{ state: EntryState; remoteConfirmed: boolean }> {
+  const cur = loadEntry();
+  if (!cur.prologue || cur.tutorials < 3) {
+    throw new Error('Entry prerequisites not met (prologue and all 3 tutorials required).');
+  }
+  if (api.signedIn) {
+    const remote = await api.putEntry({ prologue: true, tutorials: 3, completed: true });
+    writeOwner(remote.playerId);
+    const next = saveEntry(fromServer(remote));
+    return { state: next, remoteConfirmed: true };
+  }
+  const next = saveEntry(markCompleted(cur));
+  return { state: next, remoteConfirmed: false };
+}
+

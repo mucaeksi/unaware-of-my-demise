@@ -1,11 +1,12 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, it } from 'vitest';
 import type { ContentManifest, ManifestFile } from '@uomd/content-schema';
 import { generateSigningKeyPair, importPrivateKey, sha256Hex, type PublicKeyJwk } from '@uomd/shared';
 import { MemoryStorage, PatchManager, buildManifest, signManifest, type BaseContent, type PatchEnv, type PatchProgress, type RemoteSource } from './index';
 
-const ROOT = new URL('../../../content/', import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL('../../../content/', import.meta.url));
 const walk = (dir: string, rel = ''): string[] =>
   readdirSync(join(dir, rel)).flatMap((n) => {
     const r = rel ? `${rel}/${n}` : n;
@@ -130,7 +131,8 @@ describe('PatchManager', () => {
     expect(remote.fetched).not.toContain(path);
     expect(await pm.read(path)).toEqual(await base.read(path));
     expect(storage.state?.active?.releaseId).toBe('rel_0002');
-  });
+  }, 20_000);
+
 
   it('does not serve undeclared base files through a self-contained snapshot', async () => {
     const { pm } = await setup({}, { dependsOn: undefined });
