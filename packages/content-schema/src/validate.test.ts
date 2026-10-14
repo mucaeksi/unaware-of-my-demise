@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { ContentValidationError, validateContentSet, type ChapterIndex, type Encounter, type UnitPack } from './index';
+import { ContentValidationError, validateContentSet, type ChapterIndex, type Encounter, type UnitPack, type NarrativeLibrary } from './index';
 
 const ROOT = new URL('../../../content/', import.meta.url).pathname;
 const walk = (dir: string, rel = ''): string[] =>
@@ -26,6 +26,27 @@ const edit = <T>(files: Map<string, Uint8Array>, path: string, change: (value: T
 };
 
 describe('validateContentSet', () => {
+  it.each(['duplicate entry', 'unknown stage', 'story stage', 'missing owner', 'unknown owner', 'part order', 'cycle', 'unknown previous', 'hash', 'scene hash', 'coverage', 'cross-main line', 'art', 'op'] as const)('rejects library %s', (kind) => {
+    const files = campaign();
+    edit<NarrativeLibrary>(files, 'library/library_index.json', (library) => {
+      const entry = library.entries.find((entry) => entry.entry_id === 'cs_kera_voss_2')!;
+      if (kind === 'duplicate entry') library.entries.push(structuredClone(entry));
+      if (kind === 'unknown stage') entry.gate.after_node = 'stage_99_1';
+      if (kind === 'story stage') entry.gate.after_node = 'ch1_first_oath';
+      if (kind === 'missing owner') delete entry.gate.owned_character;
+      if (kind === 'unknown owner') entry.gate.owned_character = 'unknown_hero';
+      if (kind === 'part order') entry.part = 99;
+      if (kind === 'cycle') entry.gate.after_entry = entry.entry_id;
+      if (kind === 'unknown previous') entry.gate.after_entry = 'unknown_reading';
+      if (kind === 'hash') entry.provenance.source_sha256 = '0'.repeat(64);
+      if (kind === 'scene hash') entry.scenes[0]!.provenance.source_sha256 = '0'.repeat(64);
+      if (kind === 'coverage') entry.line_ids.pop();
+      if (kind === 'cross-main line') { const main = JSON.parse(new TextDecoder().decode(files.get('story/opening_sad_scene.json'))).commands.find((command: { op: string }) => command.op === 'say'); const say = entry.scenes[0]!.commands.find((command) => command.op === 'say')!; if (say.op === 'say') { say.line_id = main.line_id; entry.line_ids[0] = say.line_id; } }
+      if (kind === 'art') entry.scenes[0]!.commands.push({ op: 'background', location_id: 'missing_location' });
+      if (kind === 'op') (entry.scenes[0]!.commands as unknown[]).push({ op: 'eval', script: 'downloaded code' });
+    });
+    expect(() => validateContentSet(files)).toThrow();
+  });
   it('accepts the base release', () => {
     expect(validateContentSet(load(join(ROOT, 'base')))).toMatchObject({ nodes: 3, units: 4 });
   });

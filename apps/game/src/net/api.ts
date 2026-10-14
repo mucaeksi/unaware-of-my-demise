@@ -1,4 +1,5 @@
 import type { BattleParty } from '@uomd/content-schema';
+import { LibraryEntry, LibraryListing, type LibraryCard } from '@uomd/content-schema';
 import { API_BASE } from '../config';
 import { OperationJournal, type OperationRecord } from './operations';
 import { canonicalJson, sha256Hex } from '@uomd/shared';
@@ -479,6 +480,19 @@ export class GameApi extends EventTarget {
   }
   progress(): Promise<{ nodes: { node_id: string; stars: number; clears: number }[]; ration: { value: number; cap: number; nextMs: number } }> {
     return this.call('GET', '/api/v1/progress');
+  }
+  async library(releaseId: string): Promise<{ releaseId: string; entries: LibraryCard[] }> {
+    const value = LibraryListing.safeParse(await this.call('GET', `/api/v1/library?releaseId=${encodeURIComponent(releaseId)}`));
+    if (!value.success || value.data.releaseId !== releaseId || new Set(value.data.entries.map((entry) => entry.entry_id)).size !== value.data.entries.length)
+      throw new ApiError(503, 'invalid_response', 'The library could not be confirmed');
+    return value.data;
+  }
+  async libraryEntry(releaseId: string, entryId: string, expectedRevision = this.authRevision): Promise<LibraryEntry> {
+    if (expectedRevision !== this.authRevision) throw new ApiError(409, 'auth_changed', 'The selected account changed');
+    const response = await this.call<{ releaseId: string; entry: unknown }>('GET', `/api/v1/library/${encodeURIComponent(entryId)}?releaseId=${encodeURIComponent(releaseId)}`, undefined, true, expectedRevision);
+    const entry = LibraryEntry.safeParse(response?.entry);
+    if (!entry.success || response.releaseId !== releaseId || entry.data.entry_id !== entryId) throw new ApiError(503, 'invalid_response', 'This reading could not be confirmed');
+    return entry.data;
   }
   completeStory(releaseId: string, nodeId: string, expectedRevision = this.authRevision): Promise<{ requestId: string; releaseId: string; nodeId: string; completed: true; replayed: boolean }> {
     if (expectedRevision !== this.authRevision) return Promise.reject(new ApiError(409, 'auth_changed', 'The selected account changed'));

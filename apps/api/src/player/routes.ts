@@ -16,6 +16,7 @@ import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, writeSave } from '../progress/service';
 import { completeStory, StoryCompletion } from '../progress/story';
 import { listRecruitSelectors, RecruitSelection, selectRecruit } from '../recruitment/service';
+import { listLibrary, readLibraryEntry } from '../library/service';
 import { ascendGear, characterStats, dismantleGear, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
 import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
 import { deleteAccount, exportAccount } from '../account/service';
@@ -106,6 +107,8 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/characters/*', authed);
   app.use('/api/v1/stacks', authed);
   app.use('/api/v1/recruitment/*', authed);
+  app.use('/api/v1/library', authed);
+  app.use('/api/v1/library/*', authed);
   app.use('/api/v1/entry', authed);
   app.use('/api/v1/teams', authed);
   app.use('/api/v1/teams/*', authed);
@@ -205,6 +208,19 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   });
 
   app.get('/api/v1/progress', async (c) => c.json(await getProgress(c.env.DB, c.get('playerId'))));
+  app.get('/api/v1/library', async (c) => {
+    const release = StoryCompletion.shape.releaseId.safeParse(c.req.query('releaseId'));
+    if (!release.success) throw new HttpError(400, 'bad_request', 'invalid release id');
+    await perMinute(c.env, `library:${c.get('playerId')}`, 60);
+    return c.json(await listLibrary(c.env, c.get('playerId'), release.data), 200, { 'Cache-Control': 'no-store' });
+  });
+  app.get('/api/v1/library/:id', async (c) => {
+    const release = StoryCompletion.shape.releaseId.safeParse(c.req.query('releaseId'));
+    const entry = StoryCompletion.shape.nodeId.safeParse(c.req.param('id'));
+    if (!release.success || !entry.success) throw new HttpError(400, 'bad_request', 'invalid library request');
+    await perMinute(c.env, `library:${c.get('playerId')}`, 60);
+    return c.json(await readLibraryEntry(c.env, c.get('playerId'), release.data, entry.data), 200, { 'Cache-Control': 'no-store' });
+  });
 
   app.post('/api/v1/progress/story', async (c) => {
     await perMinute(c.env, `story:${c.get('playerId')}`, 60);

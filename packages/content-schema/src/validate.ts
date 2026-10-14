@@ -3,6 +3,7 @@ import { EntryIndex, Prologue } from './entry';
 import type { Predicate } from './effects';
 import { ChapterIndex, Encounter, StoryScene } from './story';
 import { UnitPack } from './units';
+import { NarrativeLibrary } from './library';
 
 export class ContentValidationError extends Error {
   constructor(readonly problems: string[]) {
@@ -157,6 +158,9 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
   const checkScene = (path: string, expectedLocation?: string): void => {
     const s = parse(path, StoryScene);
     if (!s) return;
+    checkSceneData(path, s, expectedLocation);
+  };
+  const checkSceneData = (path: string, s: StoryScene, expectedLocation?: string): void => {
     parsedScenes.set(path, s);
     scenes++;
     // a scene that names an illustration the art manifest does not ship simply runs on its portraits (the stand-in period); it is never an error
@@ -261,6 +265,44 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
           lines.push(...scene.commands.flatMap((command) => command.op === 'say' || command.op === 'narrate' ? [command.line_id] : []));
         }
         if (JSON.stringify(lines) !== JSON.stringify(entry.line_ids)) problems.push(`story coverage ${entry.entry_id}: line IDs/order differ from declared canon`);
+      }
+    }
+  }
+  if (files.has('library/library_index.json')) {
+    const library = parse('library/library_index.json', NarrativeLibrary);
+    if (library && index) {
+      const mainNodes = new Map(index.chapters.flatMap((chapter) => chapter.nodes).map((node) => [node.node_id, node]));
+      const entries = new Map(library.entries.map((entry) => [entry.entry_id, entry]));
+      const sourceHashes = new Map(library.sources.map((source) => [source.path, source.sha256]));
+      unique('library source', library.sources.map((source) => source.path));
+      unique('library entry', library.entries.map((entry) => entry.entry_id));
+      unique('library scene', library.entries.flatMap((entry) => entry.scenes.map((scene) => scene.scene_id)));
+      unique('library line', library.entries.flatMap((entry) => entry.line_ids));
+      const existingLines = new Set([...parsedScenes.values()].flatMap((scene) => scene.commands.flatMap((command) => command.op === 'say' || command.op === 'narrate' ? [command.line_id] : [])));
+      const existingSceneIds = new Set([...parsedScenes.values()].map((scene) => scene.scene_id));
+      const priorParts = new Map<string, { id: string; part: number }>();
+      for (const entry of library.entries) {
+        const where = `library ${entry.entry_id}`; const gate = entry.gate;
+        if (mainNodes.has(entry.entry_id)) problems.push(`${where}: ID collides with a campaign node`);
+        if (gate.after_node && mainNodes.get(gate.after_node)?.kind !== 'battle') problems.push(`${where}: unknown battle gate ${gate.after_node}`);
+        if (gate.owned_character && units.get(gate.owned_character)?.kind !== 'character') problems.push(`${where}: unknown character gate ${gate.owned_character}`);
+        if (gate.after_entry && !entries.has(gate.after_entry)) problems.push(`${where}: unknown previous entry`);
+        if (entry.kind === 'companion') {
+          const prior = priorParts.get(entry.group_id);
+          if (units.get(entry.group_id)?.kind !== 'character' || !gate.after_node || entry.part !== (prior?.part ?? 0) + 1 || gate.after_entry !== prior?.id
+            || gate.owned_character !== (['mahmut', 'fadyme'].includes(entry.group_id) ? undefined : entry.group_id)) problems.push(`${where}: invalid companion order/ownership`);
+          priorParts.set(entry.group_id, { id: entry.entry_id, part: entry.part });
+        } else if (gate.after_entry || gate.owned_character || entry.part !== 1 || entry.kind === 'event' && !gate.after_node) problems.push(`${where}: invalid codex/event gate`);
+        if (sourceHashes.get(entry.provenance.source) !== entry.provenance.source_sha256) problems.push(`${where}: invalid provenance`);
+        const lines: string[] = [];
+        for (const scene of entry.scenes) {
+          if (existingSceneIds.has(scene.scene_id)) problems.push(`${where}: scene ID collision`);
+          existingSceneIds.add(scene.scene_id);
+          checkSceneData(scene.scene_id, scene);
+          if (scene.provenance.source.split('#')[0] !== entry.provenance.source || scene.provenance.source_sha256 !== entry.provenance.source_sha256) problems.push(`${where}: scene provenance mismatch`);
+          lines.push(...scene.commands.flatMap((command) => command.op === 'say' || command.op === 'narrate' ? [command.line_id] : []));
+        }
+        if (JSON.stringify(lines) !== JSON.stringify(entry.line_ids) || lines.some((id) => existingLines.has(id))) problems.push(`${where}: line coverage/collision`);
       }
     }
   }

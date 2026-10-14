@@ -14,6 +14,7 @@ import { ArtManifest, BattleParty, ChapterIndex, Encounter, type UnitPack, valid
 import { finalStats } from '../packages/economy/src/index';
 import { buildUnitPack } from './lib/data';
 import { bindCampaignPhaseStories, compileCampaignStory } from './lib/campaign-story';
+import { compileNarrativeLibrary } from './lib/narrative-library';
 import { ROOT, readJson, writeJson, writeOut } from './lib/fsutil';
 
 const NARR = 'narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content';
@@ -35,6 +36,8 @@ const REAR_ROLES = /caster|support|warder|assassin|flanker/;
 const pack = buildUnitPack('part1_campaign', chars.map((c) => c.character_id as string), enemies.map((e) => e.enemy_id as string));
 writeJson(`${OUT}/units/unit_pack.json`, pack);
 const base = ArtManifest.parse(readJson(`content/base/art/art_manifest.json`));
+const library = compileNarrativeLibrary(undefined, new Set(Object.keys(base.portraits)));
+writeJson(`${OUT}/library/library_index.json`, library);
 const story = compileCampaignStory(undefined, new Set(Object.keys(base.portraits)));
 for (const [path, scene] of story.files) writeJson(`${OUT}/${path}`, scene);
 
@@ -177,7 +180,7 @@ const TINT: Record<string, [string, string]> = {
   altar_first_eclipse: ['#5b2b4a', '#12060f']
 };
 const backgrounds: Record<string, string> = { ...art.backgrounds };
-for (const loc of new Set([...chapters.map((ch) => ch.location_id as string), ...[...story.files.values()].map((scene) => scene.location_id)])) {
+for (const loc of new Set([...chapters.map((ch) => ch.location_id as string), ...[...story.files.values()].map((scene) => scene.location_id), ...library.entries.flatMap((entry) => entry.scenes.map((scene) => scene.location_id))])) {
   if (backgrounds[loc]) continue;
   const [a, b] = TINT[loc] ?? ['#3a3048', '#0f0b16'];
   const bg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="1280" height="720" fill="url(#g)"/><ellipse cx="640" cy="760" rx="900" ry="220" fill="#000" opacity="0.35"/></svg>`;

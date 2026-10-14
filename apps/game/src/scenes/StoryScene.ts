@@ -12,6 +12,8 @@ import { C, DEPTH, F, SIZE, T } from '../ui/theme';
 
 export interface StoryInit {
   path: string;
+  data?: StoryData;
+  authRevision?: number;
   onDone: (scene: Phaser.Scene) => void;
   onBack?: (scene: Phaser.Scene) => void;
 }
@@ -41,6 +43,7 @@ interface Actor {
 }
 
 export class StoryScene extends Phaser.Scene {
+  private generation = 0;
   private init0!: StoryInit;
   private data0!: StoryData;
   private runner!: StoryRunner;
@@ -77,6 +80,7 @@ export class StoryScene extends Phaser.Scene {
   }
 
   init(data: StoryInit): void {
+    this.generation++;
     this.init0 = data;
     this.actors = new Map();
     this.finished = false;
@@ -96,10 +100,17 @@ export class StoryScene extends Phaser.Scene {
   }
 
   async create(): Promise<void> {
+    const generation = this.generation;
+    const current = (): boolean => generation === this.generation && (this.init0.authRevision === undefined || this.init0.authRevision === Services.api.authRevision);
+    const accountChanged = (): void => { if (!current() && this.sys.isActive()) this.init0.onBack?.(this); };
+    if (this.init0.authRevision !== undefined) Services.api.addEventListener('auth', accountChanged);
+    this.events.once('shutdown', () => { this.generation++; Services.api.removeEventListener('auth', accountChanged); });
     const { content, art } = Services.ready();
     this.cameras.main.setBackgroundColor(0x0a0610);
     try {
-      this.data0 = await content.story(this.init0.path);
+      const data = this.init0.data ?? await content.story(this.init0.path);
+      if (!current()) return;
+      this.data0 = data;
       this.cutscene = Boolean(this.data0.presentation);
       this.auto = this.data0.presentation?.auto ?? false;
       const lastLine = [...this.data0.commands].reverse().find((c): c is Extract<StoryCommand, { op: 'say' | 'narrate' }> => c.op === 'say' || c.op === 'narrate');
@@ -118,9 +129,11 @@ export class StoryScene extends Phaser.Scene {
         ...[...cues].map((q) => art.loadMusic(this, q))
       ]);
     } catch (e) {
+      if (!current()) return;
       this.fail(e);
       return;
     }
+    if (!current()) return;
     this.build();
     sceneFadeIn(this, 500);
     this.runner = new StoryRunner(this.data0);
@@ -175,6 +188,7 @@ export class StoryScene extends Phaser.Scene {
     this.autoBtn = new Button(this, rightEdge, 70, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
     new Button(this, rightEdge - 250, 70, { label: 'LOG', w: 220, h: 86, fontSize: 28, onClick: () => this.showLog() }).setDepth(DEPTH.hud + 3);
     title(this, 170, 70, this.data0.title_en, 34, T.dim).setDepth(DEPTH.hud + 3).setOrigin(0, 0.5).setX(60);
+    if (this.init0.authRevision !== undefined && this.init0.onBack) new Button(this, 220, 210, { label: 'ARCHIVE', w: 340, h: 110, onClick: () => this.init0.onBack?.(this) }).setDepth(DEPTH.hud + 3);
     this.tweens.add({ targets: this.caret, alpha: 0.2, duration: 600, yoyo: true, repeat: -1 });
   }
 

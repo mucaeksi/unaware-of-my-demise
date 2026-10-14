@@ -147,6 +147,19 @@ describe('authentication response ownership', () => {
 });
 
 describe('durable client operations', () => {
+  it('rejects mismatched library identities and malformed unlocked cards before displaying text', async () => {
+    for (const response of [{ releaseId: 'other_release', entries: [] }, { releaseId: 'rel_story', entries: [{ entry_id: 'codex_x', title_en: 'A reveal' }] }]) {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(response)));
+      await expect(new GameApi('https://game.test').library('rel_story')).rejects.toMatchObject({ code: 'invalid_response' });
+    }
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json({ releaseId: 'other_release', entry: {} })));
+    await expect(new GameApi('https://game.test').libraryEntry('rel_story', 'codex_x')).rejects.toMatchObject({ code: 'invalid_response' });
+  });
+  it('a library selection belonging to the old account sends no read for the new account', async () => {
+    const api = new GameApi('https://game.test'); const revision = api.authRevision;
+    values.set(sessionKey, JSON.stringify({ token: 'session-B', expiresAt: expiry() })); const fetch = vi.fn(); vi.stubGlobal('fetch', fetch);
+    await expect(api.libraryEntry('rel_story', 'codex_x', revision)).rejects.toMatchObject({ code: 'auth_changed' }); expect(fetch).not.toHaveBeenCalled();
+  });
   it('invitation response loss recovers the exact selected companion and grant without another POST', async () => {
     const storage = new TestOperationStorage(); let sent = ''; let posts = 0;
     vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {

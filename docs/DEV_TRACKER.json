@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "f694ade486a9b2dd2160cd5775eaca243a20e988",
-  "reviewedAt": "2026-10-13",
+  "sourceCommit": "f0730d5574389ddeffafe13351e9f8ee4083650a",
+  "reviewedAt": "2026-10-14",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R07",
     "status": "IN_PROGRESS",
-    "nextProposed": "R07 reusable companion/codex/event stable-ID spoiler gates",
+    "nextProposed": "R08 versioned effective server/client catalog and reference authority",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R07-C3 First Oath and one complete no-gacha chapter locally verified",
-      "detail": "Canonical seven-choice invitation with atomic item/copy grants, exact-input frozen original recovery, transaction-time eligibility fences and account-safe review/confirm UI. 726 tests/lint/types, campaign/game/admin builds and 46 adapters pass. 12 existing browser checks and two final desktop/phone full-chapter/recovery/account-isolation cases pass with 25 migrations; screenshots inspected. Fresh chapter-1 route uses Iona and legal manual active/ultimate choices, no wishes/ads or numeric changes. Every-choice/Auto balance, account XP, reusable gates, resume and native/deployed/old-AAB proof remain."
+      "title": "R07-C4 canonical Archive and shared spoiler gates locally verified",
+      "detail": "76 companion parts, 12 codex records and four events compile to 92 entries/100 scenes; 433 exact authored dialogue lines plus 12 codex text IDs. Stable battle/ownership/previous-part AND gates, filtered server reads and durable reward-free completion with write-time fences. 764 tests, lint/types, builds/campaign, 46 adapters; browser matrix14 pass plus final desktop/phone2 pass, 25 migrations. Screens inspected; early-exit, order, lost-save/status and account isolation pass. No new migration, numeric changes or paid media; R08 effective catalogs/grammar and R09 continuity follow."
     }
   ],
   "next": [
     {
-      "title": "R07 \u2014 reusable companion/codex/event gates",
-      "detail": "Use stable IDs and authoritative account progress for reusable spoiler evaluation and interpreter gates; preserve mechanical boss information and fail closed on missing/unknown references. Then R08 effective economic catalogs/complete grammar. First Oath and one full Iona/manual no-gacha chapter are verified; broader Auto/choice balance/account XP and R09 post-battle continuity retain separate acceptance."
+      "title": "R08 \u2014 effective release catalog and reference authority",
+      "detail": "Define one versioned effective server/client catalog for characters, skills, gear, items, drops, banners and config, with strict references and preserved historical battle/rule snapshots. Prove a newly declared identity recruits, grows, equips, summons and fights consistently; then full grammar/capabilities/version/storage compatibility. R07 remains partial for cross-resource authority. R09 continuity, R12 schedules/modes and R16 balance retain separate acceptance."
     },
     {
       "title": "R06 \u2014 remaining reviewed combat semantics",
@@ -1015,6 +1015,33 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R07-C4-20261014",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "f0730d5574389ddeffafe13351e9f8ee4083650a",
+      "verifiedAt": "2026-10-14T04:16:38.434667+00:00",
+      "scope": "R07-C4 working tree: canonical three-source library, 76 companion parts/12 codex records/four events, 92 entries/100 scenes and 433 authored dialogue lines plus 12 derived codex text IDs. Shared strict stable-ID AND gates use exact starred battle, ownership and previous read completion. Publication/device checks reject unknown references, order/cycles, source/scene/line collisions, provenance, unsupported commands and missing art. Server cards disclose no locked titles/text/gates; read rechecks authority, declared-ID fact queries chunk at 99 IDs plus player. Existing reward-free story journal records library completion with atomic account/release/stage/ownership/previous fences and original-result recovery. Eleven D1/API, two client, 19 schema/gate and six compiler cases; all 764 application/tool tests pass. All 764 application/tool tests, lint/typecheck, campaign/game/admin builds and 46 adapters pass. The real local-Worker browser matrix passes 14 cases with all 25 migrations; two final desktop/touch-phone library cases also pass after explicit return navigation and save-error render-order checks. They cover canonical codex/companion/event readers, same-stage part order, committed-but-lost save/reload/status recovery with zero extra POSTs, early exit without a completion marker, clickable error-back controls above the HUD and account-change closure/isolation. Premise, reader, companion-order, event and retry screenshots inspected. Graphify refreshed (3178 nodes/8385 edges/153 communities). Twenty-six gradient locations and supplied portraits only; absent production audio silent. Existing main story/tutorial/numeric rewards preserved. Initial schema fixtures used shortened rather than canonical Kera IDs, a codex fixture used a display-derived ID, and first D1 types needed a heterogeneous batch row shape; corrected before final checks. No formal audit, migration, paid production, live changes or native/deployed/old-AAB acceptance. Browser late-stage fixtures are not a new campaign/balance proof; R08 effective catalogs, R09 continuity and R12 schedules/modes remain.",
+      "testIds": [
+        "packages/content-schema/src/library.test.ts",
+        "packages/content-schema/src/validate.test.ts",
+        "tools/lib/narrative-library.test.ts",
+        "apps/api/test/library.test.ts",
+        "apps/api/test/story-progress.test.ts",
+        "apps/game/src/net/api.test.ts",
+        "tests/e2e/library.spec.ts",
+        "tests/e2e/canonical-story.spec.ts",
+        "tests/e2e/admin.spec.ts",
+        "npm test",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build:campaign",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1451,7 +1478,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "Compile all ordered story entries and validate IDs, references, gates, waves and legal graphs.",
-      "implemented": "R07-A/B reject duplicate IDs, cyclic prerequisites, formation collisions, wrong unit kinds and dangling own-skill/status/tag references before draft/publication or device activation. C1 records durable reward-free zero-star story completion with account/release/prerequisite fences and original-result recovery; signed-in Chapters uses authoritative progress. C2 compiles all 51 canonical entries/419 lines into 88 scenes with source hashes and exact node/scene/line/prerequisite coverage; both real Construct phase readers pause, render above and resume battle presentation. Locked titles hide future reveals. C3 adds the canonical seven-choice First Oath, atomic item/copy grants, frozen original-result recovery and account-safe review/confirm UI; one fresh Iona/manual no-gacha chapter is verified. Reusable companion/codex/event gates and effective economic catalog references remain open; broader choice/Auto balance/account XP and resume remain separate acceptance.",
+      "implemented": "R07-A/B reject duplicate IDs, cyclic prerequisites, formation collisions, wrong unit kinds and dangling own-skill/status/tag references before draft/publication or device activation. C1 records durable reward-free zero-star story completion with account/release/prerequisite fences and original-result recovery; signed-in Chapters uses authoritative progress. C2 compiles all 51 canonical entries/419 lines into 88 scenes with source hashes and exact node/scene/line/prerequisite coverage; both real Construct phase readers pause, render above and resume battle presentation. Locked titles hide future reveals. C3 adds the canonical seven-choice First Oath, atomic item/copy grants, frozen original-result recovery and account-safe review/confirm UI; one fresh Iona/manual no-gacha chapter is verified. C4 compiles the 92-entry/100-scene canonical Archive, shared exact battle/ownership/previous-part gates, filtered account-authoritative reads and durable reward-free completion with transaction-time fences. Effective economic catalog references remain R08; broader choice/Auto balance/account XP and resume retain separate acceptance.",
       "dependsOn": [
         "R03",
         "R06"
@@ -1477,7 +1504,16 @@
         "apps/api/src/recruitment/service.ts",
         "apps/api/test/recruitment.test.ts",
         "apps/game/src/scenes/RecruitScene.ts",
-        "tests/e2e/first-oath.spec.ts"
+        "tests/e2e/first-oath.spec.ts",
+        "packages/content-schema/src/library.ts",
+        "packages/content-schema/src/library.test.ts",
+        "tools/lib/narrative-library.ts",
+        "tools/lib/narrative-library.test.ts",
+        "apps/api/src/library/service.ts",
+        "apps/api/test/library.test.ts",
+        "apps/game/src/scenes/LibraryScene.ts",
+        "tests/e2e/library.spec.ts",
+        "docs/NARRATIVE_LIBRARY.md"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1487,7 +1523,8 @@
         "E-R07-B-20261013",
         "E-R07-C1-20261013",
         "E-R07-C2-20261013",
-        "E-R07-C3-20261013"
+        "E-R07-C3-20261013",
+        "E-R07-C4-20261014"
       ],
       "blockerIds": []
     },

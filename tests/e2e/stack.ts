@@ -178,3 +178,12 @@ async function boot(): Promise<Stack> {
 export function publishCampaign(adminJwt: string, id = 'rel_0003'): Promise<void> {
   return sh('npx', ['tsx', 'tools/publish_release.ts', '--admin', `http://127.0.0.1:${PORTS.admin}`, '--dir', 'content/patches/rel_0003_part1_campaign', '--id', id, '--channel', 'dev', '--depends', 'rel_0001', '--notes', 'Part I campaign', '--publish'], ROOT, { UOMD_ADMIN_JWT: adminJwt });
 }
+
+/** Gate/reader QA only: late progress and ownership in this stack's disposable local D1, never a playthrough claim. */
+export async function seedLibraryFixture(playerId: string): Promise<void> {
+  if (!/^[A-Za-z0-9_-]{8,80}$/.test(playerId)) throw new Error('invalid library fixture player');
+  const sql = `INSERT INTO player_progress (player_id, node_id, stars, clears) VALUES
+    ('${playerId}', 'stage_3_5', 1, 1), ('${playerId}', 'stage_4_5', 1, 1), ('${playerId}', 'stage_6_5', 1, 1);
+    INSERT INTO player_items (player_id, item_type, item_id, copies, shards) VALUES ('${playerId}', 'character', 'kera_voss', 1, 0);`;
+  await sh('npx', ['wrangler', 'd1', 'execute', 'DB', '--local', '--persist-to', STATE, '-c', 'wrangler.game.jsonc', '--env', 'dev', '--command', sql], join(ROOT, 'apps/api'));
+}
