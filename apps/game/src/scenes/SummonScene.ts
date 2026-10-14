@@ -18,6 +18,7 @@ export class SummonScene extends HubScene {
   private names = new Map<string, string>();
   private idx = 0;
   private busy = false;
+  private releaseId: string | undefined;
   private overlay: Phaser.GameObjects.Container | null = null;
   private target: string | undefined;
 
@@ -27,10 +28,11 @@ export class SummonScene extends HubScene {
 
   protected async build(): Promise<void> {
     const api = Services.api;
-    const [banners, state, roster] = await Promise.all([api.banners(), api.gachaState(), api.roster()]);
+    this.releaseId = await Services.ready().content.activeReleaseId();
+    const [banners, state, roster, names] = await Promise.all([api.banners(this.releaseId), api.gachaState(), api.roster(this.releaseId), api.catalogNames(this.releaseId)]);
     this.banners = banners;
     this.pity = new Map(state.map((s) => [s.pity_group, s]));
-    this.names = new Map(roster.map((c) => [c.id, c.name_en]));
+    this.names = new Map([...names, ...roster.map((c): [string, string] => [c.id, c.name_en])]);
     if (this.idx >= banners.length) this.idx = 0;
     this.draw();
   }
@@ -95,7 +97,7 @@ export class SummonScene extends HubScene {
     if (this.busy) return;
     this.busy = true;
     try {
-      const r = await Services.api.pull(b.id, count, this.target);
+      const r = await Services.api.pull(b.id, count, this.target, this.releaseId);
       const st = await Services.api.gachaState();
       this.pity = new Map(st.map((s) => [s.pity_group, s]));
       await this.updateWallet();

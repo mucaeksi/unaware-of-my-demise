@@ -18,7 +18,7 @@ import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, wri
 import { completeStory, StoryCompletion } from '../progress/story';
 import { listRecruitSelectors, RecruitSelection, selectRecruit } from '../recruitment/service';
 import { listLibrary, readLibraryEntry } from '../library/service';
-import { ascendGear, characterStats, dismantleGear, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
+import { ascendGear, characterStats, dismantleGear, GearContext, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
 import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
 import { deleteAccount, exportAccount } from '../account/service';
 import { EntryBody, getEntry, putEntry } from '../entry/service';
@@ -34,14 +34,14 @@ type App = Hono<AppEnv>;
 const RequestId = z.string().regex(/^[A-Za-z0-9_-]{8,64}$/);
 const SignIn = z.object({ idToken: z.string().min(100).max(8192) }).strict();
 const Pull = z
-  .object({ bannerId: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/), count: z.union([z.literal(1), z.literal(10)]), requestId: RequestId, target: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/).optional() })
+  .object({ releaseId: z.string().regex(/^[a-z][a-z0-9_]{1,47}$/).optional(), bannerId: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/), count: z.union([z.literal(1), z.literal(10)]), requestId: RequestId, target: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/).optional() })
   .strict();
 
-async function body<T>(c: { req: { text(): Promise<string> } }, schema: z.ZodType<T>, max = 8192 + 512): Promise<T> {
+async function body<T>(c: { req: { text(): Promise<string> } }, schema: z.ZodType<T>, max = 8192 + 512, allowEmpty = false): Promise<T> {
   const raw = await c.req.text();
   if (raw.length > max) throw new HttpError(413, 'too_large', 'request body too large');
   try {
-    return schema.parse(JSON.parse(raw));
+    return schema.parse(allowEmpty && !raw.trim() ? {} : JSON.parse(raw));
   } catch {
     throw new HttpError(400, 'bad_request', 'invalid request body');
   }
@@ -172,8 +172,9 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   });
 
   app.get('/api/v1/banners', async (c) => {
-    const banners = await activeBanners(c.env.DB);
-    return c.json({ banners: banners.map((b) => disclosure(b.row, b.config)), serverTime: new Date().toISOString() }, 200, { 'Cache-Control': 'public, max-age=30' });
+    const catalog = await displayCatalog(c.env, selectedRelease(c.req.query('releaseId')));
+    const banners = await activeBanners(c.env.DB, new Date(), catalog);
+    return c.json({ banners: banners.map((b) => disclosure(b.row, b.config)), ...(catalog ? { releaseId: catalog.releaseId, catalogSha256: catalog.sha256 } : {}), serverTime: new Date().toISOString() }, 200, { 'Cache-Control': 'public, max-age=30' });
   });
 
   app.get('/api/v1/gacha/state', async (c) => {
@@ -185,7 +186,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     await requireFlag(c.env, 'gacha.enabled');
     await perMinute(c.env, `pull:${c.get('playerId')}`, 30);
     const input = await body(c, Pull);
-    return c.json(await pullGacha(c.env.DB, c.get('playerId'), input));
+    return c.json(await pullGacha(c.env.DB, c.get('playerId'), input, { scope: releaseScope(c.env, input.releaseId) }));
   });
 
   app.get('/api/v1/gacha/history', async (c) => {
@@ -193,8 +194,10 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     const before = Number(c.req.query('before') ?? 0) || 0;
     const { results } = await c.env.DB
       .prepare(
-        `SELECT id, banner_id, request_id, seq, pull_number, rarity, item_type, item_id, outcome, upgraded, duplicate, at FROM gacha_pulls
-         WHERE player_id = ?1 AND (?2 = 0 OR id < ?2) ORDER BY id DESC LIMIT ?3`
+        `SELECT p.id, p.banner_id, p.request_id, p.seq, p.pull_number, p.rarity, p.item_type, p.item_id, p.outcome, p.upgraded, p.duplicate, p.at,
+           json_extract(r.result_json, '$.releaseId') AS releaseId, json_extract(r.result_json, '$.catalogSha256') AS catalogSha256
+         FROM gacha_pulls p LEFT JOIN gacha_requests r ON r.player_id = p.player_id AND r.request_id = p.request_id
+         WHERE p.player_id = ?1 AND (?2 = 0 OR p.id < ?2) ORDER BY p.id DESC LIMIT ?3`
       )
       .bind(c.get('playerId'), before, limit)
       .all();
@@ -391,7 +394,10 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.post('/api/v1/account/delete', async (c) => c.json(await deleteAccount(c.env.DB, c.get('playerId'), (await body(c, z.object({ confirm: z.string().max(20) }).strict())).confirm)));
   app.get('/api/v1/tasks', async (c) => c.json(await listTasks(c.env.DB, c.get('playerId'))));
   app.post('/api/v1/tasks/claim', async (c) => c.json(await claimTask(c.env.DB, c.get('playerId'), await body(c, z.object({ periodKey: z.string().regex(/^[dw]:[0-9T:-]{10,13}(:[a-z][a-z0-9_]{1,79})?$/), taskId: z.string().regex(/^_?[a-z][a-z0-9_]{1,79}$/), requestId: RequestId.optional() }).strict()))));
-  app.get('/api/v1/gear', async (c) => c.json({ gear: await listGear(c.env.DB, c.get('playerId')) }));
+  app.get('/api/v1/gear', async (c) => {
+    const catalog = await operationCatalog(c.env.DB, c.get('playerId'), releaseScope(c.env, selectedRelease(c.req.query('releaseId'))));
+    return c.json({ gear: await listGear(c.env.DB, c.get('playerId'), catalog) });
+  });
   app.get('/api/v1/characters/:id/stats', async (c) => {
     const catalog = await operationCatalog(c.env.DB, c.get('playerId'), releaseScope(c.env, selectedRelease(c.req.query('releaseId'))));
     return c.json(await characterStats(c.env.DB, c.get('playerId'), c.req.param('id'), catalog));
@@ -403,15 +409,32 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   };
   app.post('/api/v1/gear/:id/equip', async (c) => {
     await perMinute(c.env, `gear:${c.get('playerId')}`, 120);
-    return c.json(await equipGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), (await body(c, EquipBody)).characterId));
+    const input = await body(c, EquipBody);
+    return c.json(await equipGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), input.characterId, releaseScope(c.env, input.releaseId)));
   });
-  app.post('/api/v1/gear/:id/unequip', async (c) => c.json(await unequipGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')))));
-  app.post('/api/v1/gear/:id/lock', async (c) => c.json(await lockGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), (await body(c, LockBody)).locked)));
+  app.post('/api/v1/gear/:id/unequip', async (c) => {
+    const input = await body(c, GearContext, undefined, true);
+    return c.json(await unequipGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), releaseScope(c.env, input.releaseId)));
+  });
+  app.post('/api/v1/gear/:id/lock', async (c) => {
+    const input = await body(c, LockBody);
+    return c.json(await lockGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), input.locked, releaseScope(c.env, input.releaseId)));
+  });
   app.post('/api/v1/gear/:id/level-up', async (c) => {
     await perMinute(c.env, `gear:${c.get('playerId')}`, 120);
-    return c.json(await levelGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), await body(c, GearLevelBody)));
+    const input = await body(c, GearLevelBody);
+    return c.json(await levelGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), input, releaseScope(c.env, input.releaseId)));
   });
-  app.post('/api/v1/gear/:id/ascend', async (c) => c.json(await ascendGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), await body(c, GearRequest))));
-  app.post('/api/v1/gear/:id/dismantle', async (c) => c.json(await dismantleGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), await body(c, GearRequest))));
-  app.post('/api/v1/gear/:id/reroll', async (c) => c.json(await rerollGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), await body(c, GearRequest))));
+  app.post('/api/v1/gear/:id/ascend', async (c) => {
+    const input = await body(c, GearRequest);
+    return c.json(await ascendGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), input, releaseScope(c.env, input.releaseId)));
+  });
+  app.post('/api/v1/gear/:id/dismantle', async (c) => {
+    const input = await body(c, GearRequest);
+    return c.json(await dismantleGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), input, releaseScope(c.env, input.releaseId)));
+  });
+  app.post('/api/v1/gear/:id/reroll', async (c) => {
+    const input = await body(c, GearRequest);
+    return c.json(await rerollGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), input, releaseScope(c.env, input.releaseId)));
+  });
 }

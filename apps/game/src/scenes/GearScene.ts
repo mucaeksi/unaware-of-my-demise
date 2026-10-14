@@ -17,6 +17,7 @@ export class GearScene extends HubScene {
   private page = 0;
   private list: GearView[] = [];
   private busy = false;
+  private releaseId: string | undefined;
 
   constructor() {
     super('Gear');
@@ -34,7 +35,8 @@ export class GearScene extends HubScene {
   }
 
   protected async build(): Promise<void> {
-    const all = await Services.api.gear();
+    this.releaseId = await Services.ready().content.activeReleaseId();
+    const all = await Services.api.gear(this.releaseId);
     this.list = all.filter((g) => (this.slot ? g.slot === this.slot : true));
     this.draw();
   }
@@ -49,7 +51,7 @@ export class GearScene extends HubScene {
       this.add_(txt(this, 190, y - 24, `${g.name}  ${stars(g.rarity)}`, { fontFamily: F.display, fontSize: '28px', fontStyle: '600' }).setOrigin(0, 0.5));
       this.add_(txt(this, 190, y + 22, `${g.slot} · Lv ${g.level}/${g.levelCap}${g.equippedBy ? ` · on ${g.equippedBy}` : ''}   ${statLine(g)}`, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
       if (this.characterId) {
-        this.add_(new Button(this, REF_W - 250, y, { label: mine ? 'REMOVE' : 'EQUIP', w: 280, h: 90, fontSize: 28, variant: mine ? 'normal' : 'hot', onClick: () => void this.act(async () => { if (mine) await Services.api.unequip(g.id); else await Services.api.equip(g.id, this.characterId as string); this.say(mine ? 'Removed' : 'Equipped'); }) }).setEnabled(mine || g.passive?.supported !== false));
+        this.add_(new Button(this, REF_W - 250, y, { label: mine ? 'REMOVE' : 'EQUIP', w: 280, h: 90, fontSize: 28, variant: mine ? 'normal' : 'hot', onClick: () => void this.act(async () => { if (mine) await Services.api.unequip(g.id, this.releaseId); else await Services.api.equip(g.id, this.characterId as string, this.releaseId); this.say(mine ? 'Removed' : 'Equipped'); }) }).setEnabled(mine || g.passive?.supported !== false));
       }
     });
     const pages = Math.max(1, Math.ceil(this.list.length / PER_PAGE));

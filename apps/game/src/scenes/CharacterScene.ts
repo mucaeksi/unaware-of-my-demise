@@ -26,7 +26,7 @@ export class CharacterScene extends HubScene {
   protected async build(): Promise<void> {
     const api = Services.api;
     const releaseId = await Services.ready().content.activeReleaseId();
-    const [mine, roster, names, stacks, gear, st] = await Promise.all([api.characters(releaseId), api.roster(releaseId), api.catalogNames(releaseId), api.stacks(), api.gear(), api.characterStats(this.id, releaseId).catch(() => null)]);
+    const [mine, roster, names, stacks, gear, st] = await Promise.all([api.characters(releaseId), api.roster(releaseId), api.catalogNames(releaseId), api.stacks(), api.gear(releaseId), api.characterStats(this.id, releaseId).catch(() => null)]);
     const c = mine.characters.find((x) => x.id === this.id);
     const meta = roster.find((x) => x.id === this.id);
     if (!c || !meta) {

@@ -188,3 +188,10 @@ describe('server-side character stats and weapon banners', () => {
     expect((await call(auth, '/gacha/pull', { bannerId: 'hall_test', count: 1, requestId: rid() })).status).toBe(422); // a selectable banner needs a target
   });
 });
+
+it('keeps legacy empty-body unequip compatible', async () => {
+  const { auth, playerId } = await player(); const [id] = await give(playerId, ['weapon_arming_sword_3_01']);
+  expect((await call(auth, `/gear/${id}/equip`, { characterId: 'mahmut' })).status).toBe(200);
+  const removed = await game(`/api/v1/gear/${id}/unequip`, { method: 'POST', headers: auth }); expect(removed.status).toBe(200);
+  expect(await removed.json()).toMatchObject({ id, equippedBy: null });
+});

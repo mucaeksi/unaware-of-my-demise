@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "360c33852ff820b07a77e9a5d97d7f1c3cf41792",
+  "sourceCommit": "c6de8d75269306deb14db0de3a700a0675aec45a",
   "reviewedAt": "2026-10-14",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R08",
     "status": "IN_PROGRESS",
-    "nextProposed": "R08-B2b2 remaining gear/gacha/team/signup/task/grant contexts and compatible reader floor",
+    "nextProposed": "R08-B2b3 signup/team/task/other grant contexts, support contracts and compatible reader floor",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R08-B2b1 identity storage and recruit/growth locally verified",
-      "detail": "Migration 0026 separates durable player foreign keys from mutable definitions through immutable ID-only registries. Populated/empty migration tests preserve every player field, journal, gear index and deleted-instance AUTOINCREMENT high-water mark. Recruitment and level/ascension/rank operations, selected catalog/roster/stat views and durable client growth intent now use one release; original results recover before changed admission/catalog reads. Declared-only fixture identities recruit, grow, rank, ascend and fight without global definition copies. All 862 tests, lint/types, builds/campaign, 46 adapters and final desktop2/phone3 browser cases pass with 26 migrations; screens inspected. No activation, numerical/canon tuning or live/native acceptance. Remaining paths and reader floor are R08-B2b2."
+      "title": "R08-B2b2 selected gear and gacha locally verified",
+      "detail": "Selected gear views/assignment/growth/reroll/dismantle and gacha disclosure/pools/costs/grants use the exact release catalog. Atomic economic and instance/pity/copy guards, stable ID registration, durable release-bound intent and original-result recovery preserve one spend/grant; history retains request provenance. Isolated declared-only fixtures recruit/grow/equip/summon/fight without global definition copies. All 872 tests, lint/types, campaign/game/admin builds, 46 adapters and desktop3/phone3 local browser cases pass with 26 migrations; screens inspected. No activation, numeric/canon tuning or deployed/signed-device acceptance. B2b3 covers remaining contexts and reader floor."
     }
   ],
   "next": [
     {
-      "title": "R08-B2b2 \u2014 remaining economic operation contexts",
-      "detail": "Bind signup, gear/gacha/team operations, task claims, non-battle grants and remaining UI metadata consumers to the selected/frozen release as appropriate. Preserve journals, paid obligations and transaction authority; finish bootstrap/current/allowlisted/history/task/retirement/support behavior. Require a compatible catalog reader/client floor and prove the new declared identity equips and summons as well as recruits/grows/fights before removing the publication/rollback block. Full grammar/key/storage and deployed/signed-device acceptance remain separate."
+      "title": "R08-B2b3 \u2014 remaining economic contexts and support contracts",
+      "detail": "Bind signup, team validation, task claims, other non-battle grants and remaining UI metadata to selected/frozen release contracts as appropriate. Preserve immutable journals, paid obligations and transaction authority; finish bootstrap/current/allowlisted/history/task/retirement/support behavior. Require a compatible catalog reader/client floor before removing publication/rollback blocks. The isolated declared-only recruit/grow/equip/summon/fight path is locally exercised; full grammar/key/storage and deployed/signed-device acceptance remain separate."
     },
     {
       "title": "R06 \u2014 remaining reviewed combat semantics",
@@ -1138,6 +1138,31 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R08-B2B2-20261014",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "c6de8d75269306deb14db0de3a700a0675aec45a",
+      "verifiedAt": "2026-10-14T14:03:45.875037+00:00",
+      "scope": "R08-B2b2 working tree: selected catalogs drive gear views/equip/unequip/lock/level/ascension/reroll/dismantle, banner disclosure and pull config/reward grants. No canonical numeric, narrative or media edits; no new migration. Public routes carry lazy release context, recover recorded durable results first, reject unscoped new gear/pull mutations while a catalog is current, and fence economic authority with instance/pity/copy concurrency in the same atomic D1 batch. Snapshot-only identities register without materializing global definitions. History obtains optional release/hash provenance from immutable request results, retaining legacy nulls and account-bound paging. Armory/Summon/companion equipment use the installed release; durable gear/pull inputs and fresh/recovered result checks preserve it. Extended real-D1 lifecycle fixtures prove declared-only recruit/grow/equip/summon/fight, independent new companion and weapon minting, exact instance grant journals, frozen gear/material/fee/task rules with malformed authoring config, recovery after revocation/catalog loss and post-dismantle, mismatched release reuse rejection and account changes at transaction boundary with no partial spend/grant. Legacy empty-body unequip remains accepted. All 872 application/tool tests pass in the final full run: API449/game91/combat93/schema112/economy44/patch31/shared23/story5/tools24. Lint/types, campaign build, game/admin builds and 46 adapters pass. Actual local Worker browser matrix desktop3/phone3 passes with 26 migrations: armory equip uses installed release; one committed summon response is lost, survives reload and recovers from original status with zero extra mutation POSTs and exactly one history row. Growth recovery and catalog staging/export/publication-block regressions also pass on both viewports. Gear/summon desktop and phone screenshots inspected; no unexpected errors in affected flows. Initial synthetic tests used an acquisition tag instead of the executable banner ID, omitted a selectable target and omitted accessory reroll-reference updates; fixtures corrected with validation/rate rules unchanged. The new-character fixture now checks per-player ownership rather than assuming the immutable registry is empty after prior cases. No deployed or native/signed-AAB proof, no general accessibility/visual redesign acceptance and no public catalog activation. Remaining signup/team/task/other grant and metadata/support contracts, compatible reader floor and full grammar/keys/storage remain open.",
+      "testIds": [
+        "apps/api/test/catalog-lifecycle.test.ts",
+        "apps/api/test/gear.test.ts",
+        "apps/api/test/gacha.test.ts",
+        "apps/game/src/net/api.test.ts",
+        "tests/e2e/catalog-gear-gacha.spec.ts",
+        "tests/e2e/catalog-growth.spec.ts",
+        "tests/e2e/catalog-snapshot.spec.ts",
+        "npm test",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build:campaign",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1630,7 +1655,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "One versioned server/client catalog, finite complete data grammar and safe bounded patch storage/compatibility.",
-      "implemented": "R08-A locally verifies complete same-channel snapshots, strict snapshot/legacy reads, base-identical reuse, bounded files/parameters, manifest/index agreement, dependency guards and min/max/schema propagation with a 0.1.1 snapshot-reader floor. R08-B1 exports/stages closed bounded D1 catalogs with shared exact pack/chapter/reference validation and admin/CLI export. B2a binds battle party/loan/equipped inputs, drops, grants and task events to an exact request-local catalog, preserving atomic authority, hash provenance and original recovery; explicit role priority preserves bonuses after canonical export. B2b1 adds immutable ID-only registries/player foreign keys with data/journal/gear-sequence preservation and binds recruitment, character growth/rank/ascension, metadata/roster/stat views and durable client growth identities to the selected release. Declared-only fixtures recruit/grow/fight without global definition copies. Publication and rollback into catalog-bearing releases remain blocked pending signup/gear/gacha/team/task-claim/non-battle-grant contexts, remaining metadata/support policies and compatible reader floor. Full equip/summon/new-identity lifecycle, grammar/capabilities, keys, quota/resources/cache and deployed/signed-device acceptance remain open.",
+      "implemented": "R08-A locally verifies complete same-channel snapshots, strict snapshot/legacy reads, base-identical reuse, bounded files/parameters, manifest/index agreement, dependency guards and min/max/schema propagation with a 0.1.1 snapshot-reader floor. R08-B1 exports/stages closed bounded D1 catalogs with shared exact pack/chapter/reference validation and admin/CLI export. B2a binds battle party/loan/equipped inputs, drops, grants and task events to an exact request-local catalog, preserving atomic authority, hash provenance and original recovery; explicit role priority preserves bonuses after canonical export. B2b1 adds immutable ID-only registries/player foreign keys with data/journal/gear-sequence preservation and binds recruitment, character growth/rank/ascension, metadata/roster/stat views and durable client growth identities to the selected release. B2b2 binds gear assignment/growth/reroll/dismantle and gacha disclosure/pools/costs/grants, durable client intent and history provenance to selected catalogs with atomic authority and original recovery. Declared-only fixtures recruit/grow/equip/summon/fight without global definition copies. Publication and rollback into catalog-bearing releases remain blocked pending signup/team/task-claim/other non-battle-grant contexts, remaining metadata/support policies and compatible reader floor. Full public/device new-identity acceptance, grammar/capabilities, keys, quota/resources/cache and deployed/signed-device acceptance remain open.",
       "dependsOn": [
         "R02",
         "R03",
@@ -1655,7 +1680,12 @@
         "apps/api/src/db/identities.ts",
         "apps/api/src/recruitment/service.ts",
         "apps/api/src/progression/characters.ts",
-        "apps/game/src/net/api.ts"
+        "apps/game/src/net/api.ts",
+        "apps/api/src/gear/service.ts",
+        "apps/api/src/gacha/service.ts",
+        "apps/api/src/player/routes.ts",
+        "apps/api/test/catalog-lifecycle.test.ts",
+        "tests/e2e/catalog-gear-gacha.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1665,7 +1695,8 @@
         "E-R08-A-20261014",
         "E-R08-B1-20261014",
         "E-R08-B2A-20261014",
-        "E-R08-B2B1-20261014"
+        "E-R08-B2B1-20261014",
+        "E-R08-B2B2-20261014"
       ],
       "blockerIds": []
     },

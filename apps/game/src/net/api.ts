@@ -73,6 +73,8 @@ export interface PullRecord {
   upgraded: boolean;
 }
 export interface PullResponse {
+  releaseId?: string;
+  catalogSha256?: string;
   pulls: PullRecord[];
   balance: number;
   pity: { pity5: number; pity4: number; lost: number; hardPity: number };
@@ -378,7 +380,7 @@ export class GameApi extends EventTarget {
       mailId?: number; claimed?: unknown[]; periodKey?: string; taskId?: string; rewards?: unknown[];
       version?: number; phase?: string; prologue?: boolean; tutorials?: number; playerId?: string; releaseId?: string; completed?: boolean; itemId?: string; characterId?: string; characterName?: string; consumed?: number; grant?: RecruitSelectionResult['grant'] } | null;
     if (!value || typeof value !== 'object'
-      || operation.path === '/api/v1/gacha/pull' && (value.requestId !== operation.id || !Array.isArray(value.pulls) || value.pulls.length !== operation.body.count)
+      || operation.path === '/api/v1/gacha/pull' && (operation.body.releaseId !== undefined && value.releaseId !== operation.body.releaseId || value.requestId !== operation.id || !Array.isArray(value.pulls) || value.pulls.length !== operation.body.count)
       || operation.path === '/api/v1/progress/battle' && (value.requestId !== operation.id || value.nodeId !== operation.body.nodeId)
       || operation.path === '/api/v1/progress/story' && (value.requestId !== operation.id || value.nodeId !== operation.body.nodeId || value.releaseId !== operation.body.releaseId || value.completed !== true)
       || operation.path.startsWith('/api/v1/recruitment/') && (value.requestId !== operation.id || value.releaseId !== operation.body.releaseId || value.itemId !== operation.path.split('/')[4] || value.characterId !== operation.body.characterId || value.consumed !== 1
@@ -388,7 +390,7 @@ export class GameApi extends EventTarget {
       || operation.path.startsWith('/api/v1/characters/') && (operation.body.releaseId !== undefined && value.releaseId !== operation.body.releaseId || value.character !== operation.path.split('/')[4] || !Number.isSafeInteger(value.level)
         || operation.path.endsWith('/ascend') && !Number.isSafeInteger(value.ascension)
         || operation.path.endsWith('/upgrade') && (value.skillId !== operation.path.split('/')[6] || !Number.isSafeInteger(value.rank)))
-      || operation.path.startsWith('/api/v1/gear/') && (value.id !== Number(operation.path.split('/')[4])
+      || operation.path.startsWith('/api/v1/gear/') && (operation.body.releaseId !== undefined && value.releaseId !== operation.body.releaseId || value.id !== Number(operation.path.split('/')[4])
         || operation.path.endsWith('/level-up') && !Number.isSafeInteger(value.level)
         || operation.path.endsWith('/ascend') && !Number.isSafeInteger(value.ascension)
         || operation.path.endsWith('/reroll') && !Array.isArray(value.stats?.subs)
@@ -454,14 +456,14 @@ export class GameApi extends EventTarget {
   async roster(releaseId?: string): Promise<{ id: string; name_en: string; rarity: number; element: string; role: string }[]> {
     return (await this.call<{ characters: { id: string; name_en: string; rarity: number; element: string; role: string }[] }>('GET', `/api/v1/characters${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`, undefined, false)).characters;
   }
-  async banners(): Promise<BannerInfo[]> {
-    return (await this.call<{ banners: BannerInfo[] }>('GET', '/api/v1/banners', undefined, false)).banners;
+  async banners(releaseId?: string): Promise<BannerInfo[]> {
+    return (await this.call<{ banners: BannerInfo[] }>('GET', `/api/v1/banners${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`, undefined, false)).banners;
   }
   async gachaState(): Promise<{ pity_group: string; pity5: number; pity4: number; lost: number }[]> {
     return (await this.call<{ pity: { pity_group: string; pity5: number; pity4: number; lost: number }[] }>('GET', '/api/v1/gacha/state')).pity;
   }
-  pull(bannerId: string, count: 1 | 10, target?: string): Promise<PullResponse> {
-    return this.mutate('/api/v1/gacha/pull', { bannerId, count, ...(target ? { target } : {}) });
+  pull(bannerId: string, count: 1 | 10, target?: string, releaseId?: string): Promise<PullResponse> {
+    return this.mutate('/api/v1/gacha/pull', { bannerId, count, ...(releaseId ? { releaseId } : {}), ...(target ? { target } : {}) });
   }
   async history(): Promise<{ id: number; banner_id: string; pull_number: number; rarity: number; item_id: string; outcome: string; duplicate: number; at: string }[]> {
     return (await this.call<{ pulls: { id: number; banner_id: string; pull_number: number; rarity: number; item_id: string; outcome: string; duplicate: number; at: string }[] }>('GET', '/api/v1/gacha/history?limit=40')).pulls;
@@ -558,26 +560,26 @@ export class GameApi extends EventTarget {
   async stacks(): Promise<{ item_id: string; qty: number }[]> {
     return (await this.call<{ stacks: { item_id: string; qty: number }[] }>('GET', '/api/v1/stacks')).stacks;
   }
-  async gear(): Promise<GearView[]> {
-    return (await this.call<{ gear: GearView[] }>('GET', '/api/v1/gear')).gear;
+  async gear(releaseId?: string): Promise<GearView[]> {
+    return (await this.call<{ gear: GearView[] }>('GET', `/api/v1/gear${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`)).gear;
   }
-  levelGear(id: number, xp: number): Promise<{ id: number; level: number }> {
-    return this.mutate(`/api/v1/gear/${id}/level-up`, { xp });
+  levelGear(id: number, xp: number, releaseId?: string): Promise<{ id: number; level: number }> {
+    return this.mutate(`/api/v1/gear/${id}/level-up`, { xp, ...(releaseId ? { releaseId } : {}) });
   }
-  ascendGear(id: number): Promise<{ id: number; ascension: number }> {
-    return this.mutate(`/api/v1/gear/${id}/ascend`, {});
+  ascendGear(id: number, releaseId?: string): Promise<{ id: number; ascension: number }> {
+    return this.mutate(`/api/v1/gear/${id}/ascend`, { ...(releaseId ? { releaseId } : {}) });
   }
-  rerollGear(id: number): Promise<{ id: number; stats: GearView['stats'] }> {
-    return this.mutate(`/api/v1/gear/${id}/reroll`, {});
+  rerollGear(id: number, releaseId?: string): Promise<{ id: number; stats: GearView['stats'] }> {
+    return this.mutate(`/api/v1/gear/${id}/reroll`, { ...(releaseId ? { releaseId } : {}) });
   }
-  dismantleGear(id: number): Promise<{ id: number; gained: { itemId: string; quantity: number }[] }> {
-    return this.mutate(`/api/v1/gear/${id}/dismantle`, {});
+  dismantleGear(id: number, releaseId?: string): Promise<{ id: number; gained: { itemId: string; quantity: number }[] }> {
+    return this.mutate(`/api/v1/gear/${id}/dismantle`, { ...(releaseId ? { releaseId } : {}) });
   }
-  equip(gearId: number, characterId: string): Promise<unknown> {
-    return this.call('POST', `/api/v1/gear/${gearId}/equip`, { characterId });
+  equip(gearId: number, characterId: string, releaseId?: string): Promise<unknown> {
+    return this.call('POST', `/api/v1/gear/${gearId}/equip`, { characterId, ...(releaseId ? { releaseId } : {}) });
   }
-  unequip(gearId: number): Promise<unknown> {
-    return this.call('POST', `/api/v1/gear/${gearId}/unequip`, {});
+  unequip(gearId: number, releaseId?: string): Promise<unknown> {
+    return this.call('POST', `/api/v1/gear/${gearId}/unequip`, { ...(releaseId ? { releaseId } : {}) });
   }
   tasks(): Promise<TasksResponse> {
     return this.call('GET', '/api/v1/tasks');

@@ -594,7 +594,28 @@ describe('selected catalog operation identity', () => {
       calls.push(url); return Response.json({ characters: [], items: [], gear: [] });
     }));
     const api = new GameApi('https://game.test');
-    await Promise.all([api.roster('rel_selected'), api.characters('rel_selected'), api.catalogNames('rel_selected'), api.characterStats('iona_mist', 'rel_selected')]);
-    expect(calls).toHaveLength(4); expect(calls.every((url) => new URL(url).searchParams.get('releaseId') === 'rel_selected')).toBe(true);
+    await Promise.all([api.roster('rel_selected'), api.characters('rel_selected'), api.catalogNames('rel_selected'), api.characterStats('iona_mist', 'rel_selected'), api.gear('rel_selected'), api.banners('rel_selected')]);
+    expect(calls).toHaveLength(6); expect(calls.every((url) => new URL(url).searchParams.get('releaseId') === 'rel_selected')).toBe(true);
+  });
+});
+
+describe('selected gear and summon intent', () => {
+  it.each(['gear', 'gacha'] as const)('retains the release on %s intent and validates recovered results before confirmation', async (kind) => {
+    const storage = new TestOperationStorage(); let original = ''; let recovering = false;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      if (url.includes('/operations/')) {
+        const input = JSON.parse(original);
+        const result = kind === 'gear' ? { id: 7, level: 2, releaseId: recovering ? 'rel_selected' : 'rel_other' } : { requestId: input.requestId, pulls: [{}], releaseId: recovering ? 'rel_selected' : 'rel_other' };
+        return Response.json({ requestId: input.requestId, path: kind === 'gear' ? '/api/v1/gear/7/level-up' : '/api/v1/gacha/pull', state: 'confirmed', binding: 'exact', inputHash: await sha256Hex(canonicalJson(input)), result });
+      }
+      original = init.body as string; throw new TypeError('response lost after commit');
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(kind === 'gear' ? api.levelGear(7, 100, 'rel_selected') : api.pull('banner', 1, undefined, 'rel_selected')).rejects.toThrow(/response lost/);
+    expect(storage.records[0]).toMatchObject({ state: 'pending', body: { releaseId: 'rel_selected' } });
+    const reload = new GameApi('https://game.test', new OperationJournal(storage)); const id = storage.records[0]!.id;
+    await expect(reload.retryOperation(id)).rejects.toMatchObject({ code: 'invalid_response' }); expect(storage.records[0]!.state).toBe('pending');
+    recovering = true; await reload.retryOperation(id); expect(storage.records[0]!.state).toBe('confirmed');
   });
 });
