@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { BattleParty, ChapterIndex, Encounter, RATION_COST, UnitPack, type RewardAttachment } from '@uomd/content-schema';
 import { replayBattle } from '@uomd/combat';
-import { RATION_CAP, rationNextMs, rationNow, rationSpend, type RationState } from '@uomd/economy';
+import { RATION_CAP, rationNextMs, rationNow, rationSpend, windowOf, type RationState } from '@uomd/economy';
 import { canonicalJson, sha256Hex } from '@uomd/shared';
 import { ContentStore, HttpError } from '../content/store';
 import { grantStatements } from '../db/grants';
@@ -12,6 +12,34 @@ import { buildParty } from './party';
 import { loadReleaseCatalog } from '../content/runtime-catalog';
 import type { GameEnv } from '../env';
 import { BATTLE_SESSION_TTL_MS, economicStatement, requireEconomic } from '../content/authority';
+
+export const SWEEP_MAX_BATCH = 10;
+export const SWEEP_DAILY_NODE_LIMIT = 20;
+
+export const SweepSubmission = z
+  .object({
+    releaseId: z.string().regex(/^[a-z][a-z0-9_]{1,47}$/),
+    nodeId: z.string().regex(/^[a-z][a-z0-9_]{1,79}$/),
+    count: z.number().int().min(1).max(SWEEP_MAX_BATCH).default(1),
+    requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/)
+  })
+  .strict();
+export type SweepSubmission = z.infer<typeof SweepSubmission>;
+
+export interface SweepOutcome {
+  catalogSha256?: string;
+  requestId: string;
+  nodeId: string;
+  count: number;
+  dailyUsed: number;
+  dailyLimit: number;
+  rewards: RewardAttachment[];
+  ration: { spent: number };
+}
+export interface SweepResponse extends SweepOutcome {
+  ration: { spent: number; value: number; cap: number; nextMs: number };
+  replayed: boolean;
+}
 
 export const BattleSubmission = z
   .object({
@@ -57,10 +85,26 @@ export async function battleResult(db: D1Database, playerId: string, outcome: Ba
   return { ...outcome, ration: { spent: outcome.ration.spent, value: r.state.value, cap: RATION_CAP, nextMs: rationNextMs(r.stored, nowMs) }, replayed };
 }
 
+export async function sweepResult(db: D1Database, playerId: string, outcome: SweepOutcome, replayed: boolean): Promise<SweepResponse> {
+  const nowMs = Date.now();
+  const r = await rationRow(db, playerId, nowMs);
+  return { ...outcome, ration: { spent: outcome.ration.spent, value: r.state.value, cap: RATION_CAP, nextMs: rationNextMs(r.stored, nowMs) }, replayed };
+}
+
 export async function getProgress(db: D1Database, playerId: string, nowMs = Date.now()): Promise<Record<string, unknown>> {
   const { results } = await db.prepare('SELECT node_id, stars, clears, best_turns FROM player_progress WHERE player_id = ?1 ORDER BY node_id').bind(playerId).all();
   const r = await rationRow(db, playerId, nowMs);
-  return { nodes: results, ration: { value: r.state.value, cap: RATION_CAP, nextMs: rationNextMs(r.stored, nowMs) } };
+  const win = windowOf(nowMs, 12);
+  const { results: sweeps } = await db
+    .prepare("SELECT task_id, progress FROM player_tasks WHERE player_id = ?1 AND period_key = ?2 AND task_id LIKE 'sweep:%'")
+    .bind(playerId, win.key)
+    .all<{ task_id: string; progress: number }>();
+  const sweepUsage = Object.fromEntries(sweeps.map((s) => [s.task_id.slice('sweep:'.length), s.progress]));
+  return {
+    nodes: results,
+    ration: { value: r.state.value, cap: RATION_CAP, nextMs: rationNextMs(r.stored, nowMs) },
+    sweep: { periodKey: win.key, dailyLimit: SWEEP_DAILY_NODE_LIMIT, maxBatch: SWEEP_MAX_BATCH, usageByNode: sweepUsage }
+  };
 }
 
 
@@ -272,6 +316,131 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
     }
   }
   throw new HttpError(409, 'busy', 'too many simultaneous submissions on this account, try again');
+}
+
+/**
+ * R12 Sweep: server-authoritative multi-clear for stages already completed at 3 stars.
+ * Enforces 3-star eligibility, repeatable Ration cost, daily per-stage sweep limits, atomic Ration spend,
+ * repeat reward/drop rolling, task accounting, and idempotent requestId replay.
+ */
+export async function sweepStage(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, input: SweepSubmission, now = new Date()): Promise<SweepResponse> {
+  const db = env.DB;
+  const nowMs = now.getTime();
+  const wallStarted = Date.now();
+  const currentTime = (): Date => new Date(nowMs + Math.max(0, Date.now() - wallStarted));
+  const finish = (o: SweepOutcome, replayed: boolean): Promise<SweepResponse> => sweepResult(db, playerId, o, replayed);
+  const canonicalInput = canonicalJson({ ...input, sweep: true });
+  const replay = async (): Promise<SweepResponse | null> => {
+    const prior = await db.prepare('SELECT release_id, node_id, result_json, input_json FROM battle_claims WHERE player_id = ?1 AND request_id = ?2').bind(playerId, input.requestId).first<{ release_id: string; node_id: string; result_json: string; input_json: string | null }>();
+    if (!prior) return null;
+    if (prior.release_id !== input.releaseId || prior.node_id !== input.nodeId || prior.input_json !== canonicalInput) {
+      throw new HttpError(409, 'request_id_reused', 'this requestId was already used for a different battle or sweep');
+    }
+    return finish(JSON.parse(prior.result_json) as SweepOutcome, true);
+  };
+  const first = await replay();
+  if (first) return first;
+
+  const stage = await loadStage(env, playerId, input.releaseId, input.nodeId);
+  await requireEconomic(db, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, currentTime());
+  const catalog = await loadReleaseCatalog(env, input.releaseId);
+  const node = stage.node;
+  const unitCost = node.ration_class ? RATION_COST[node.ration_class] : 0;
+  if (unitCost <= 0) {
+    throw new HttpError(422, 'sweep_not_repeatable', 'free or tutorial stages do not consume Ration and cannot be swept');
+  }
+  const totalCost = unitCost * input.count;
+  const rewardsDef = node.rewards ?? { first_clear: [], three_star: [], repeat: [] };
+  const win = windowOf(nowMs, 12);
+  const sweepTaskId = `sweep:${input.nodeId}`;
+
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const seen = attempt > 0 ? await replay() : null;
+    if (seen) return seen;
+    await requireEconomic(db, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, currentTime());
+    const prog = await db.prepare('SELECT stars, clears FROM player_progress WHERE player_id = ?1 AND node_id = ?2').bind(playerId, input.nodeId).first<{ stars: number; clears: number }>();
+    if (!prog || prog.stars < 3) {
+      throw new HttpError(403, 'sweep_requires_three_stars', 'three-star clear is required before sweeping this stage');
+    }
+    const sweptRow = await db
+      .prepare('SELECT progress FROM player_tasks WHERE player_id = ?1 AND period_key = ?2 AND task_id = ?3')
+      .bind(playerId, win.key, sweepTaskId)
+      .first<{ progress: number }>();
+    const sweptSoFar = sweptRow?.progress ?? 0;
+    if (sweptSoFar + input.count > SWEEP_DAILY_NODE_LIMIT) {
+      throw new HttpError(409, 'sweep_limit_reached', 'daily sweep limit reached for this stage', {
+        limit: SWEEP_DAILY_NODE_LIMIT,
+        used: sweptSoFar,
+        remaining: Math.max(0, SWEEP_DAILY_NODE_LIMIT - sweptSoFar)
+      });
+    }
+    const ration = await rationRow(db, playerId, nowMs);
+    const spent = rationSpend(ration.stored, totalCost, nowMs);
+    if (!spent) throw new HttpError(402, 'not_enough_ration', 'not enough Ration for this sweep');
+
+    const grants: { a: RewardAttachment; key: string }[] = [];
+    for (let run = 0; run < input.count; run++) {
+      rewardsDef.repeat.forEach((a, i) => grants.push({ a, key: `sweep:${playerId}:${input.requestId}:${run}:repeat:${i}` }));
+      const drops = await rollNodeDrops(db, node.drop, false, true, catalog);
+      drops.repeat.forEach((a, i) => grants.push({ a, key: `sweep:${playerId}:${input.requestId}:${run}:drop:${i}` }));
+    }
+
+    const outcome: SweepOutcome = {
+      ...(catalog ? { catalogSha256: catalog.sha256 } : {}),
+      requestId: input.requestId,
+      nodeId: input.nodeId,
+      count: input.count,
+      dailyUsed: sweptSoFar + input.count,
+      dailyLimit: SWEEP_DAILY_NODE_LIMIT,
+      rewards: grants.map((g) => g.a),
+      ration: { spent: totalCost }
+    };
+
+    const batch: D1PreparedStatement[] = [
+      economicStatement(db, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, currentTime(), undefined, true),
+      db.prepare('INSERT OR IGNORE INTO player_ration (player_id, value, at_ms) VALUES (?1, ?2, ?3)').bind(playerId, ration.stored.value, ration.stored.atMs),
+      db.prepare('UPDATE player_ration SET value = ?4, at_ms = ?5 WHERE player_id = ?1 AND value = ?2 AND at_ms = ?3').bind(playerId, ration.stored.value, ration.stored.atMs, spent.value, spent.atMs),
+      db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+      ...(sweptRow
+        ? [
+            db
+              .prepare('UPDATE player_tasks SET progress = progress + ?4 WHERE player_id = ?1 AND period_key = ?2 AND task_id = ?3 AND progress = ?5 AND progress + ?4 <= ?6')
+              .bind(playerId, win.key, sweepTaskId, input.count, sweptSoFar, SWEEP_DAILY_NODE_LIMIT),
+            db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)')
+          ]
+        : [
+            db
+              .prepare('INSERT INTO player_tasks (player_id, period_key, task_id, progress, target) VALUES (?1, ?2, ?3, ?4, ?5)')
+              .bind(playerId, win.key, sweepTaskId, input.count, SWEEP_DAILY_NODE_LIMIT)
+          ]),
+      db
+        .prepare('UPDATE player_progress SET clears = clears + ?3, updated_at = ?4 WHERE player_id = ?1 AND node_id = ?2 AND stars = 3')
+        .bind(playerId, input.nodeId, input.count, now.toISOString()),
+      db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+      ...(await taskEventStatements(db, playerId, { eligible_wins: input.count, ...(node.boss ? { boss_wins: input.count } : {}), three_star_wins: input.count }, nowMs, catalog?.data.config.tasks, catalog))
+    ];
+    for (const g of grants) {
+      batch.push(...(await grantStatements(db, playerId, [g.a], { keyPrefix: g.key, reason: `sweep:${input.nodeId}`, catalog })));
+    }
+    batch.push(
+      db.prepare('INSERT INTO battle_claims (player_id, request_id, release_id, node_id, result_json, input_json) VALUES (?1, ?2, ?3, ?4, ?5, ?6)').bind(playerId, input.requestId, input.releaseId, input.nodeId, JSON.stringify(outcome), canonicalInput),
+      db
+        .prepare('INSERT INTO battle_audit (release_id, encounter, valid, complete, winner, stars, turns, log_hash, client_match, caller) VALUES (?1,?2,1,1,?3,3,0,?4,1,?5)')
+        .bind(input.releaseId, node.encounter, 'player', `sweep:${input.count}`, `player:${(await sha256Hex(playerId)).slice(0, 20)}`),
+      db.prepare('DELETE FROM tx_guard')
+    );
+
+    try {
+      await db.batch(batch);
+      return finish(outcome, false);
+    } catch (e) {
+      const msg = String(e instanceof Error ? e.message : e);
+      if (/CHECK constraint failed: ok = 1/i.test(msg)) continue;
+      if (/UNIQUE constraint failed: (player_tasks|ledger|battle_claims)/i.test(msg)) continue;
+      throw e;
+    }
+  }
+  throw new HttpError(409, 'busy', 'too many simultaneous sweeps on this account, try again');
 }
 
 const Save = z.object({ expectedVersion: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER - 1), data: z.record(z.string(), z.unknown()), requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/).optional() }).strict();

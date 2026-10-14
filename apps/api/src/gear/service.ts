@@ -338,8 +338,30 @@ export async function computeCharacterStats(db: D1Database, playerId: string, ch
     ...(g.slot === 'necklace' || g.slot === 'ring' ? { rolled: JSON.parse(g.stats_json) as AccessoryStats } : {})
   }));
   const gear = aggregateGear(cfg, pieces, roleStat, sets);
-  const stats = finalStats({ hp: ch.base_hp, atk: ch.base_atk, def: ch.base_def, spd: ch.base_spd }, { hp: ch.growth_hp, atk: ch.growth_atk, def: ch.growth_def, spd: ch.growth_spd }, level, gear);
-  return { characterId, level, stats, other: gear.other, equipped: results.map((g) => ({ id: g.id, slot: g.slot, name: g.name_en })), unsupportedPassives: results.filter((g) => gearPassive(g.extra_json)).map((g) => g.gear_id) };
+  const baseStats = finalStats({ hp: ch.base_hp, atk: ch.base_atk, def: ch.base_def, spd: ch.base_spd }, { hp: ch.growth_hp, atk: ch.growth_atk, def: ch.growth_def, spd: ch.growth_spd }, level, gear);
+  const resRow = await db
+    .prepare("SELECT progress FROM player_tasks WHERE player_id = ?1 AND period_key = 'shard:resonance' AND task_id = ?2")
+    .bind(playerId, characterId)
+    .first<{ progress: number }>();
+  const resonanceTier = Math.max(0, Math.min(6, resRow?.progress ?? 0));
+  const stats =
+    resonanceTier > 0
+      ? {
+          hp: Math.ceil(baseStats.hp * (1 + resonanceTier * 0.01)),
+          atk: Math.ceil(baseStats.atk * (1 + resonanceTier * 0.01)),
+          def: Math.ceil(baseStats.def * (1 + resonanceTier * 0.01)),
+          spd: baseStats.spd
+        }
+      : baseStats;
+  return {
+    characterId,
+    level,
+    stats,
+    ...(resonanceTier > 0 ? { resonanceTier } : {}),
+    other: gear.other,
+    equipped: results.map((g) => ({ id: g.id, slot: g.slot, name: g.name_en })),
+    unsupportedPassives: results.filter((g) => gearPassive(g.extra_json)).map((g) => g.gear_id)
+  };
 }
 
 export async function characterStats(db: D1Database, playerId: string, characterId: string, catalog?: RuntimeCatalog): Promise<Record<string, unknown>> {

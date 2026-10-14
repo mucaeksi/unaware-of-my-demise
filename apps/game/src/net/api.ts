@@ -116,6 +116,16 @@ export interface CharacterView {
   xpToNext: number | null;
   ascension: number;
   cap: number;
+  copies?: number;
+  shards?: number;
+  resonance?: {
+    tier: number;
+    maxTier: number;
+    nextShardCost: number | null;
+    bonusPct: number;
+    excessShards: number;
+    excessItemId: string;
+  };
   nextAscension: { cap: number; accountLevel: number; items: { itemId: string; quantity: number }[]; fee: number; requiresNode?: string } | null;
   skills: SkillView[];
 }
@@ -724,5 +734,70 @@ export class GameApi extends EventTarget {
   }
   async flags(): Promise<Record<string, { enabled: boolean; value: unknown }>> {
     return (await this.call<{ flags: Record<string, { enabled: boolean; value: unknown }> }>('GET', '/api/v1/flags', undefined, false)).flags;
+  }
+
+  // R12 Sweep, Memory Shards & Mode Foundations
+  sweepStage(releaseId: string, nodeId: string, count = 1): Promise<{ requestId: string; nodeId: string; count: number; dailyUsed: number; dailyLimit: number; rewards: Attachment[]; ration: { spent: number; value: number; cap: number; nextMs: number }; replayed: boolean }> {
+    return this.mutate('/api/v1/progress/sweep', { releaseId, nodeId, count });
+  }
+  attuneShards(characterId: string, releaseId?: string): Promise<{ character: string; spentShards: number; shardsRemaining: number; resonance: NonNullable<CharacterView['resonance']> }> {
+    return this.mutate(`/api/v1/characters/${characterId}/shards/attune`, releaseId ? { releaseId } : {});
+  }
+  convertExcessShards(characterId: string, shards?: number, releaseId?: string): Promise<{ character: string; convertedShards: number; shardsRemaining: number; gained: Attachment[]; resonance: NonNullable<CharacterView['resonance']> }> {
+    return this.mutate(`/api/v1/characters/${characterId}/shards/convert`, { ...(shards !== undefined ? { shards } : {}), ...(releaseId ? { releaseId } : {}) });
+  }
+  modes(releaseId?: string): Promise<{ serverTimeMs: number; modes: Record<string, { unlocked: boolean; launchLocked: boolean; requirement: string }> }> {
+    return this.call('GET', `/api/v1/modes${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
+  }
+  afkStatus(releaseId?: string): Promise<{ unlocked: boolean; serverTimeMs: number; checkpointMs: number; capSeconds: number; elapsedSeconds: number; capped: boolean; minutesAccrued: number; claimable: boolean; rewards: Attachment[] }> {
+    return this.call('GET', `/api/v1/afk${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
+  }
+  claimAfk(releaseId?: string): Promise<{ requestId: string; elapsedSeconds: number; minutesAccrued: number; rewards: Attachment[]; replayed: boolean }> {
+    return this.mutate('/api/v1/afk/claim', releaseId ? { releaseId } : {});
+  }
+  achievements(releaseId?: string): Promise<{ serverTimeMs: number; achievements: { id: string; title: string; description: string; badgeTitle: string; progress: number; target: number; done: boolean; claimed: boolean; rewards: Attachment[] }[] }> {
+    return this.call('GET', `/api/v1/achievements${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
+  }
+  claimAchievement(achievementId: string, releaseId?: string): Promise<{ requestId: string; achievementId: string; badgeTitle: string; rewards: Attachment[]; balance?: number }> {
+    return this.mutate('/api/v1/achievements/claim', { achievementId, ...(releaseId ? { releaseId } : {}) });
+  }
+  events(releaseId?: string): Promise<{ serverTimeMs: number; events: { eventId: string; title: string; subtitle: string; state: string; startsAtMs: number; endsAtMs: number; claimEndsAtMs: number; objectives: { id: string; title: string; progress: number; target: number; done: boolean; claimed: boolean; rewards: Attachment[] }[] }[] }> {
+    return this.call('GET', `/api/v1/events${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
+  }
+  claimEvent(eventId: string, objectiveId: string, releaseId?: string): Promise<{ requestId: string; eventId: string; objectiveId: string; rewards: Attachment[] }> {
+    return this.mutate(`/api/v1/events/${eventId}/claim`, { objectiveId, ...(releaseId ? { releaseId } : {}) });
+  }
+  profile(releaseId?: string): Promise<{ playerId: string; displayName: string; avatarCharacterId: string; titleBadge: string; unlockedBadges: string[]; summary: Record<string, number> }> {
+    return this.call('GET', `/api/v1/profile${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
+  }
+  updateProfile(input: { displayName?: string; avatarCharacterId?: string; titleBadge?: string }): Promise<{ displayName: string; avatarCharacterId: string; titleBadge: string }> {
+    return this.mutate('/api/v1/profile', input, 'PUT');
+  }
+  leaderboard(board: 'campaign_stars' | 'arena' | 'endless' = 'campaign_stars', limit = 20): Promise<{ board: string; entries: { rank: number; playerTag: string; displayName: string; score: number; isMe: boolean }[] }> {
+    return this.call('GET', `/api/v1/leaderboard?board=${encodeURIComponent(board)}&limit=${limit}`);
+  }
+  arenaState(releaseId?: string): Promise<Record<string, unknown>> {
+    return this.call('GET', `/api/v1/arena${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
+  }
+  setArenaDefense(members: TeamMember[], releaseId?: string): Promise<Record<string, unknown>> {
+    return this.mutate('/api/v1/arena/defense', { members, ...(releaseId ? { releaseId } : {}) }, 'PUT');
+  }
+  fightArenaMatch(releaseId: string, opponentId: string, actions?: { skillId: string; targetId?: string }[]): Promise<Record<string, unknown>> {
+    return this.mutate('/api/v1/arena/match', { releaseId, opponentId, ...(actions ? { actions } : {}) });
+  }
+  claimArenaSeason(seasonId: string, releaseId?: string): Promise<Record<string, unknown>> {
+    return this.mutate('/api/v1/arena/season/claim', { seasonId, ...(releaseId ? { releaseId } : {}) });
+  }
+  endlessState(releaseId?: string): Promise<Record<string, unknown>> {
+    return this.call('GET', `/api/v1/endless${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
+  }
+  startEndless(releaseId: string, modifier: 'blood_moon' | 'iron_ward' | 'ashen_haste' = 'blood_moon'): Promise<Record<string, unknown>> {
+    return this.mutate('/api/v1/endless/start', { releaseId, modifier });
+  }
+  submitEndlessWave(releaseId: string, sessionId: string, actions?: { skillId: string; targetId?: string }[]): Promise<Record<string, unknown>> {
+    return this.mutate('/api/v1/endless/wave', { releaseId, sessionId, ...(actions ? { actions } : {}) });
+  }
+  claimEndlessMilestone(wave: number, releaseId?: string): Promise<Record<string, unknown>> {
+    return this.mutate('/api/v1/endless/milestone/claim', { wave, ...(releaseId ? { releaseId } : {}) });
   }
 }

@@ -15,17 +15,47 @@ import { verifyReceipt } from '../billing/recovery';
 import { purchaseHistory } from '../billing/history';
 import { adNonceStatus, adStatus, beginAd, grantAd, recordTestAdNonce, AD } from '../ads/service';
 import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
-import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, writeSave } from '../progress/service';
+import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, sweepStage, SweepSubmission, writeSave } from '../progress/service';
 import { completeStory, StoryCompletion } from '../progress/story';
 import { listRecruitSelectors, RecruitSelection, selectRecruit } from '../recruitment/service';
 import { listLibrary, readLibraryEntry } from '../library/service';
 import { ascendGear, characterStats, dismantleGear, GearContext, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
-import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
+import { ascendCharacter, attuneCharacterShards, convertExcessShards, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, ShardConvertBody, upgradeSkill } from '../progression/characters';
 import { DATA_INVENTORY, deleteAccount, exportAccount } from '../account/service';
 import { EntryBody, getEntry, putEntry } from '../entry/service';
 import { activateTeam, deleteTeam, listTeams, saveTeam, TeamBody } from '../teams/service';
 import { claimTask, listTasks } from '../tasks/service';
 import { claimMail, listMail, markRead } from '../mail/service';
+import {
+  AchievementClaimBody,
+  AfkClaimBody,
+  ArenaDefenseBody,
+  ArenaMatchBody,
+  ArenaSeasonClaimBody,
+  claimAchievement,
+  claimAfkRewards,
+  claimArenaSeason,
+  claimEndlessMilestone,
+  claimEventReward,
+  EndlessMilestoneClaimBody,
+  EndlessStartBody,
+  EndlessWaveBody,
+  EventClaimBody,
+  fightArenaMatch,
+  getAfkStatus,
+  getArenaState,
+  getEndlessState,
+  getLeaderboard,
+  getModeGates,
+  getProfile,
+  listAchievements,
+  listEvents,
+   ProfileUpdateBody,
+  setArenaDefense,
+  startEndlessRun,
+  submitEndlessWave,
+  updateProfile
+} from '../modes/service';
 import { issueSession, playerForGoogle, refreshSession, resolveSession, revokeAllSessions, revokeSession, verifyGoogleIdToken } from './auth';
 import { operationStatus } from './operations';
 
@@ -147,6 +177,19 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/shop/history', authed);
   app.use('/api/v1/mail/*', authed);
   app.use('/api/v1/operations/*', authed);
+  app.use('/api/v1/modes', authed);
+  app.use('/api/v1/afk', authed);
+  app.use('/api/v1/afk/*', authed);
+  app.use('/api/v1/achievements', authed);
+  app.use('/api/v1/achievements/*', authed);
+  app.use('/api/v1/events', authed);
+  app.use('/api/v1/events/*', authed);
+  app.use('/api/v1/profile', authed);
+  app.use('/api/v1/leaderboard', authed);
+  app.use('/api/v1/arena', authed);
+  app.use('/api/v1/arena/*', authed);
+  app.use('/api/v1/endless', authed);
+  app.use('/api/v1/endless/*', authed);
 
   app.get('/api/v1/privacy', (c) =>
     c.json(
@@ -308,6 +351,13 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     await perMinute(c.env, `battle:${c.get('playerId')}`, 20);
     const input = await body(c, BattleSubmission, 64 * 1024);
     return c.json(await submitBattle(c.env, c.get('playerId'), input));
+  });
+
+  app.post('/api/v1/progress/sweep', async (c) => {
+    await requireFlag(c.env, 'sweep.enabled');
+    await perMinute(c.env, `sweep:${c.get('playerId')}`, 30);
+    const input = await body(c, SweepSubmission, 4 * 1024);
+    return c.json(await sweepStage(c.env, c.get('playerId'), input));
   });
 
   app.get('/api/v1/save', async (c) => c.json(await readSave(c.env.DB, c.get('playerId'))));
@@ -515,5 +565,122 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.post('/api/v1/gear/:id/reroll', async (c) => {
     const input = await body(c, GearRequest);
     return c.json(await rerollGear(c.env.DB, c.get('playerId'), GearId(c.req.param('id')), input, releaseScope(c.env, input.releaseId)));
+  });
+
+  // R12 Character-bound Memory Shards nonmandatory sink & excess policy
+  app.post('/api/v1/characters/:id/shards/attune', async (c) => {
+    await perMinute(c.env, `shard:${c.get('playerId')}`, 30);
+    const id = c.req.param('id');
+    if (!CharId.test(id)) throw new HttpError(400, 'bad_request', 'invalid character id');
+    const input = await body(c, RequestOnly);
+    return c.json(await attuneCharacterShards(c.env.DB, c.get('playerId'), id, input, releaseScope(c.env, input.releaseId)));
+  });
+  app.post('/api/v1/characters/:id/shards/convert', async (c) => {
+    await perMinute(c.env, `shard:${c.get('playerId')}`, 30);
+    const id = c.req.param('id');
+    if (!CharId.test(id)) throw new HttpError(400, 'bad_request', 'invalid character id');
+    const input = await body(c, ShardConvertBody);
+    return c.json(await convertExcessShards(c.env.DB, c.get('playerId'), id, input, releaseScope(c.env, input.releaseId)));
+  });
+
+  // R12 Mode Unlock Gates & Launch Locks
+  app.get('/api/v1/modes', async (c) =>
+    c.json(await getModeGates(c.env.DB, c.get('playerId'), Date.now(), releaseScope(c.env, selectedRelease(c.req.query('releaseId')))))
+  );
+
+  // R12 AFK Patrol Idle Rewards
+  app.get('/api/v1/afk', async (c) =>
+    c.json(await getAfkStatus(c.env.DB, c.get('playerId'), new Date(), releaseScope(c.env, selectedRelease(c.req.query('releaseId')))))
+  );
+  app.post('/api/v1/afk/claim', async (c) => {
+    await requireFlag(c.env, 'afk.enabled');
+    await perMinute(c.env, `afk:${c.get('playerId')}`, 20);
+    const input = await body(c, AfkClaimBody);
+    return c.json(await claimAfkRewards(c.env.DB, c.get('playerId'), input, new Date(), releaseScope(c.env, input.releaseId)));
+  });
+
+  // R12 Achievements
+  app.get('/api/v1/achievements', async (c) =>
+    c.json(await listAchievements(c.env.DB, c.get('playerId'), Date.now(), releaseScope(c.env, selectedRelease(c.req.query('releaseId')))))
+  );
+  app.post('/api/v1/achievements/claim', async (c) => {
+    await perMinute(c.env, `ach:${c.get('playerId')}`, 30);
+    const input = await body(c, AchievementClaimBody);
+    return c.json(await claimAchievement(c.env.DB, c.get('playerId'), input, new Date(), releaseScope(c.env, input.releaseId)));
+  });
+
+  // R12 Seasonal Events & Schedules
+  app.get('/api/v1/events', async (c) =>
+    c.json(await listEvents(c.env.DB, c.get('playerId'), Date.now(), releaseScope(c.env, selectedRelease(c.req.query('releaseId')))))
+  );
+  app.post('/api/v1/events/:id/claim', async (c) => {
+    await requireFlag(c.env, 'events.enabled');
+    await perMinute(c.env, `event:${c.get('playerId')}`, 30);
+    const eventId = c.req.param('id');
+    if (!/^[a-z][a-z0-9_]{1,63}$/.test(eventId)) throw new HttpError(400, 'bad_request', 'invalid event id');
+    const input = await body(c, EventClaimBody);
+    return c.json(await claimEventReward(c.env.DB, c.get('playerId'), eventId, input, new Date(), releaseScope(c.env, input.releaseId)));
+  });
+
+  // R12 Profile & Leaderboards
+  app.get('/api/v1/profile', async (c) =>
+    c.json(await getProfile(c.env.DB, c.get('playerId'), Date.now(), releaseScope(c.env, selectedRelease(c.req.query('releaseId')))))
+  );
+  app.put('/api/v1/profile', async (c) => {
+    await perMinute(c.env, `profile:${c.get('playerId')}`, 20);
+    const input = await body(c, ProfileUpdateBody);
+    return c.json(await updateProfile(c.env.DB, c.get('playerId'), input));
+  });
+  app.get('/api/v1/leaderboard', async (c) => {
+    const board = z.enum(['campaign_stars', 'arena', 'endless']).safeParse(c.req.query('board') ?? 'campaign_stars');
+    if (!board.success) throw new HttpError(400, 'bad_request', 'invalid leaderboard type');
+    const limit = Math.min(50, Math.max(1, Number(c.req.query('limit') ?? 20) || 20));
+    return c.json(await getLeaderboard(c.env.DB, c.get('playerId'), board.data, limit));
+  });
+
+  // R12 Asynchronous Arena
+  app.get('/api/v1/arena', async (c) =>
+    c.json(await getArenaState(c.env.DB, c.get('playerId'), Date.now(), releaseScope(c.env, selectedRelease(c.req.query('releaseId')))))
+  );
+  app.put('/api/v1/arena/defense', async (c) => {
+    await requireFlag(c.env, 'arena.enabled');
+    await perMinute(c.env, `arena:${c.get('playerId')}`, 20);
+    const input = await body(c, ArenaDefenseBody);
+    return c.json(await setArenaDefense(c.env.DB, c.get('playerId'), input, releaseScope(c.env, input.releaseId)));
+  });
+  app.post('/api/v1/arena/match', async (c) => {
+    await requireFlag(c.env, 'arena.enabled');
+    await perMinute(c.env, `arenamatch:${c.get('playerId')}`, 20);
+    const input = await body(c, ArenaMatchBody, 64 * 1024);
+    return c.json(await fightArenaMatch(c.env, c.get('playerId'), input));
+  });
+  app.post('/api/v1/arena/season/claim', async (c) => {
+    await requireFlag(c.env, 'arena.enabled');
+    await perMinute(c.env, `arenaseason:${c.get('playerId')}`, 20);
+    const input = await body(c, ArenaSeasonClaimBody);
+    return c.json(await claimArenaSeason(c.env.DB, c.get('playerId'), input, new Date(), releaseScope(c.env, input.releaseId)));
+  });
+
+  // R12 Endless Corridor
+  app.get('/api/v1/endless', async (c) =>
+    c.json(await getEndlessState(c.env.DB, c.get('playerId'), Date.now(), releaseScope(c.env, selectedRelease(c.req.query('releaseId')))))
+  );
+  app.post('/api/v1/endless/start', async (c) => {
+    await requireFlag(c.env, 'endless.enabled');
+    await perMinute(c.env, `endless:${c.get('playerId')}`, 20);
+    const input = await body(c, EndlessStartBody);
+    return c.json(await startEndlessRun(c.env, c.get('playerId'), input));
+  });
+  app.post('/api/v1/endless/wave', async (c) => {
+    await requireFlag(c.env, 'endless.enabled');
+    await perMinute(c.env, `endlesswave:${c.get('playerId')}`, 20);
+    const input = await body(c, EndlessWaveBody, 64 * 1024);
+    return c.json(await submitEndlessWave(c.env, c.get('playerId'), input));
+  });
+  app.post('/api/v1/endless/milestone/claim', async (c) => {
+    await requireFlag(c.env, 'endless.enabled');
+    await perMinute(c.env, `endlessms:${c.get('playerId')}`, 20);
+    const input = await body(c, EndlessMilestoneClaimBody);
+    return c.json(await claimEndlessMilestone(c.env.DB, c.get('playerId'), input, new Date(), releaseScope(c.env, input.releaseId)));
   });
 }

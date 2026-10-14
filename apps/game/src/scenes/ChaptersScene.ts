@@ -120,6 +120,25 @@ export class ChaptersScene extends Phaser.Scene {
       stars.fillStyle(on ? C.goldHi : 0x2a1e32, 1);
       stars.fillCircle(REF_W / 2 + 480 + i * 44 - 44, y + 24, 14);
     }
+    if (!locked && !tutorialReplay && node.kind === 'battle' && cost > 0 && done && done.stars >= 3 && Services.api.signedIn) {
+      new Button(this, REF_W / 2 + 220, y + 24, {
+        label: `SWEEP (${cost}R)`,
+        w: 220,
+        h: 56,
+        fontSize: 22,
+        onClick: () => {
+          void (async () => {
+            try {
+              const relId = await Services.ready().content.activeReleaseId();
+              await Services.api.sweepStage(relId, node.node_id, 1);
+              this.scene.restart();
+            } catch {
+              this.scene.restart();
+            }
+          })();
+        }
+      });
+    }
     // a card only fires for a press that began on it: the tap that closed the previous scene must not fall through
     let pressed = false;
     bg.setInteractive({ useHandCursor: !locked })

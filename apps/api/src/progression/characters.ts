@@ -2,12 +2,45 @@ import { canonicalJson } from '@uomd/shared';
 import { z } from 'zod';
 import { accountLevelFromXp, applyCharacterXp, characterLevelCap, characterXpToNext, feeForLevels, ProgressionConfig, xpToReach, type CharState } from '@uomd/economy';
 import { HttpError } from '../content/store';
-import { stackSpend } from '../db/grants';
+import { grantStatements, stackSpend } from '../db/grants';
 import { balanceOf, ledgerStatements } from '../db/ledger';
+import { operationStatement, recordedOperation } from '../db/operations';
 import { taskEventStatements } from '../tasks/service';
 import { catalogCharacter, operationCatalog, type RuntimeCatalog, type ReleaseScope } from '../content/runtime-catalog';
 import { identityStatement } from '../db/identities';
 import { economicStatement, requireEconomic } from '../content/authority';
+
+export const SHARD_MAX_TIER = 6;
+export const SHARD_BONUS_PCT_PER_TIER = 1;
+export const EXCESS_SHARD_ITEM = 'torn_chronicle_page';
+export const SHARD_COSTS_BY_RARITY: Record<number, readonly number[]> = {
+  3: [2, 2, 4, 4, 6, 6],
+  4: [5, 5, 10, 10, 15, 15],
+  5: [10, 10, 20, 20, 30, 30]
+};
+
+export function shardResonanceInfo(rarity: number, tier: number, shards: number): {
+  tier: number;
+  maxTier: number;
+  nextShardCost: number | null;
+  bonusPct: number;
+  excessShards: number;
+  excessItemId: string;
+} {
+  const costs = SHARD_COSTS_BY_RARITY[rarity] ?? SHARD_COSTS_BY_RARITY[4]!;
+  const clampedTier = Math.max(0, Math.min(SHARD_MAX_TIER, tier));
+  const nextShardCost = clampedTier < SHARD_MAX_TIER ? (costs[clampedTier] ?? null) : null;
+  const remainingNeeded = costs.slice(clampedTier).reduce((sum, c) => sum + c, 0);
+  const excessShards = Math.max(0, shards - remainingNeeded);
+  return {
+    tier: clampedTier,
+    maxTier: SHARD_MAX_TIER,
+    nextShardCost,
+    bonusPct: clampedTier * SHARD_BONUS_PCT_PER_TIER,
+    excessShards,
+    excessItemId: EXCESS_SHARD_ITEM
+  };
+}
 
 export async function loadProgressionConfig(db: D1Database): Promise<ProgressionConfig> {
   const row = await db.prepare("SELECT value_json FROM game_config WHERE key = 'progression'").first<{ value_json: string }>();
@@ -51,6 +84,9 @@ export interface CharacterView {
   xpToNext: number | null;
   ascension: number;
   cap: number;
+  copies: number;
+  shards: number;
+  resonance: ReturnType<typeof shardResonanceInfo>;
   nextAscension: { cap: number; accountLevel: number; items: { itemId: string; quantity: number }[]; fee: number; requiresNode?: string } | null;
   skills: SkillView[];
 }
@@ -71,11 +107,22 @@ function skillViews(cfg: ProgressionConfig, level: number, ranks: Record<string,
 export async function listCharacters(db: D1Database, playerId: string, catalog?: RuntimeCatalog): Promise<{ account: Awaited<ReturnType<typeof accountOf>>; characters: CharacterView[]; unavailable: { id: string; reason: string }[] }> {
   const cfg = catalog?.data.config.progression ?? await loadProgressionConfig(db);
   const account = await accountOf(db, playerId, cfg);
-  const owned = (await db.prepare("SELECT item_id FROM player_items WHERE player_id = ?1 AND item_type = 'character' ORDER BY item_id").bind(playerId).all<{ item_id: string }>()).results.map((r) => r.item_id);
+  const ownedRows = (await db.prepare("SELECT item_id, copies, shards FROM player_items WHERE player_id = ?1 AND item_type = 'character' ORDER BY item_id").bind(playerId).all<{ item_id: string; copies: number; shards: number }>()).results;
+  const owned = ownedRows.map((r) => r.item_id);
+  const itemByChar = new Map(ownedRows.map((r) => [r.item_id, r]));
   const rows = new Map((await db.prepare('SELECT character_id, level, xp, ascension, skill_ranks, version FROM player_chars WHERE player_id = ?1').bind(playerId).all<CharRow & { character_id: string }>()).results.map((r) => [r.character_id, r]));
+  const resonanceRows = new Map(
+    (await db.prepare("SELECT task_id, progress FROM player_tasks WHERE player_id = ?1 AND period_key = 'shard:resonance'").bind(playerId).all<{ task_id: string; progress: number }>()).results.map((r) => [r.task_id, r.progress])
+  );
+  const rarityByChar = catalog
+    ? new Map(catalog.data.characters.map((c) => [c.id, c.rarity]))
+    : new Map((await db.prepare('SELECT id, rarity FROM characters').all<{ id: string; rarity: number }>()).results.map((c) => [c.id, c.rarity]));
   const skills = catalog ? catalog.data.skills : (await db.prepare('SELECT skill_id, character_id, type, name_en FROM character_skills ORDER BY skill_id').all<{ skill_id: string; character_id: string; type: string; name_en: string }>()).results;
   const characters = owned.filter((id) => !catalog || catalog.data.characters.some((c) => c.id === id && c.status !== 'retired')).map((id): CharacterView => {
     const r = rows.get(id) ?? DEFAULT_ROW;
+    const item = itemByChar.get(id) ?? { copies: 1, shards: 0 };
+    const rarity = rarityByChar.get(id) ?? 4;
+    const resTier = resonanceRows.get(id) ?? 0;
     const cap = characterLevelCap(cfg, r.ascension, account.level);
     const step = cfg.character.ascension[r.ascension + 1];
     return {
@@ -85,6 +132,9 @@ export async function listCharacters(db: D1Database, playerId: string, catalog?:
       xpToNext: r.level >= cfg.character.levelCap ? null : characterXpToNext(cfg, r.level),
       ascension: r.ascension,
       cap,
+      copies: item.copies,
+      shards: item.shards,
+      resonance: shardResonanceInfo(rarity, resTier, item.shards),
       nextAscension: step ? { cap: step.cap, accountLevel: step.accountLevel, items: step.items, fee: step.fee, ...(step.requiresNode ? { requiresNode: step.requiresNode } : {}) } : null,
       skills: skillViews(cfg, r.level, JSON.parse(r.skill_ranks) as Record<string, number>, skills.filter((s) => s.character_id === id))
     };
@@ -228,3 +278,183 @@ export function upgradeSkill(db: D1Database, playerId: string, characterId: stri
     return { state: { ...state, skillRanks: { ...ranks, [skillId]: rank + 1 } }, items: [{ itemId: sk.itemBySkillType[skill.type], quantity: qty }], fee: Math.ceil(sk.feePerRank[rank - 1] ?? 0), response: { skillId, rank: rank + 1 } };
   }, scope);
 }
+
+export const ShardConvertBody = RequestOnly.extend({
+  shards: z.number().int().min(1).max(9999).optional()
+}).strict();
+
+/**
+ * R12 Memory Shards: nonmandatory character-bound keepsake resonance sink.
+ * Never gates story chapters, skills, or ascension caps, and costs zero main currency.
+ */
+export async function attuneCharacterShards(db: D1Database, playerId: string, characterId: string, input: z.infer<typeof RequestOnly>, scope?: ReleaseScope): Promise<Record<string, unknown>> {
+  const kind = `shard_attune:${characterId}`;
+  const first = await recordedOperation(db, playerId, kind, input);
+  if (first) return first;
+  if (input.releaseId !== scope?.releaseId) throw new HttpError(400, 'release_context_mismatch', 'the selected release requires matching operation context');
+  await ownsCharacter(db, playerId, characterId);
+  const catalog = await operationCatalog(db, playerId, scope);
+  const rarity = catalog
+    ? catalogCharacter(catalog, characterId).rarity
+    : ((await db.prepare('SELECT rarity FROM characters WHERE id = ?1').bind(characterId).first<{ rarity: number }>())?.rarity ?? 4);
+  const costs = SHARD_COSTS_BY_RARITY[rarity] ?? SHARD_COSTS_BY_RARITY[4]!;
+
+  for (let attempt = 0; attempt < 5; attempt++) {
+    if (attempt > 0) {
+      const seen = await recordedOperation(db, playerId, kind, input);
+      if (seen) return seen;
+    }
+    const item = await db
+      .prepare("SELECT shards FROM player_items WHERE player_id = ?1 AND item_type = 'character' AND item_id = ?2")
+      .bind(playerId, characterId)
+      .first<{ shards: number }>();
+    if (!item) throw new HttpError(404, 'not_owned', 'you do not own this character');
+    const resRow = await db
+      .prepare("SELECT progress FROM player_tasks WHERE player_id = ?1 AND period_key = 'shard:resonance' AND task_id = ?2")
+      .bind(playerId, characterId)
+      .first<{ progress: number }>();
+    const currentTier = resRow?.progress ?? 0;
+    if (currentTier >= SHARD_MAX_TIER) {
+      throw new HttpError(409, 'max_resonance', 'this character has already reached maximum Memory Resonance');
+    }
+    const cost = costs[currentTier] ?? 10;
+    if (item.shards < cost) {
+      throw new HttpError(402, 'insufficient_shards', `needs ${cost} character Memory Shards (have ${item.shards})`, { required: cost, have: item.shards });
+    }
+    const nextTier = currentTier + 1;
+    const remainingShards = item.shards - cost;
+    const resonance = shardResonanceInfo(rarity, nextTier, remainingShards);
+    const result = {
+      ...(scope?.releaseId ? { releaseId: scope.releaseId } : {}),
+      ...(catalog ? { catalogSha256: catalog.sha256 } : {}),
+      character: characterId,
+      spentShards: cost,
+      shardsRemaining: remainingShards,
+      resonance
+    };
+
+    const batch: D1PreparedStatement[] = [
+      ...(scope?.releaseId ? [economicStatement(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date(), undefined, true)] : []),
+      ...(catalog ? [identityStatement(db, 'character', characterId)] : []),
+      db
+        .prepare("UPDATE player_items SET shards = shards - ?3 WHERE player_id = ?1 AND item_type = 'character' AND item_id = ?2 AND shards = ?4 AND shards >= ?3")
+        .bind(playerId, characterId, cost, item.shards),
+      db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+      ...(resRow
+        ? [
+            db
+              .prepare("UPDATE player_tasks SET progress = ?3 WHERE player_id = ?1 AND period_key = 'shard:resonance' AND task_id = ?2 AND progress = ?4")
+              .bind(playerId, characterId, nextTier, currentTier),
+            db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)')
+          ]
+        : [
+            db
+              .prepare("INSERT INTO player_tasks (player_id, period_key, task_id, progress, target) VALUES (?1, 'shard:resonance', ?2, ?3, ?4)")
+              .bind(playerId, characterId, nextTier, SHARD_MAX_TIER)
+          ]),
+      operationStatement(db, playerId, kind, input, result),
+      db.prepare('DELETE FROM tx_guard')
+    ];
+
+    try {
+      await db.batch(batch);
+      return { ...result, replayed: false };
+    } catch (e) {
+      const msg = String(e instanceof Error ? e.message : e);
+      if (/CHECK constraint failed: ok = 1|UNIQUE constraint failed: (player_tasks|progression_requests)/i.test(msg)) {
+        const prior = await recordedOperation(db, playerId, kind, input);
+        if (prior) return prior;
+        if (scope?.releaseId) await requireEconomic(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date());
+        continue;
+      }
+      throw e;
+    }
+  }
+  throw new HttpError(409, 'busy', 'too many simultaneous shard operations on this character, try again');
+}
+
+/**
+ * R12 Excess Memory Shards: converts surplus character-bound shards (beyond what is needed for max resonance)
+ * into general character XP materials (`torn_chronicle_page`), never into the main currency (`eclipse_token`).
+ */
+export async function convertExcessShards(db: D1Database, playerId: string, characterId: string, input: z.infer<typeof ShardConvertBody>, scope?: ReleaseScope): Promise<Record<string, unknown>> {
+  const kind = `shard_convert:${characterId}`;
+  const first = await recordedOperation(db, playerId, kind, input);
+  if (first) return first;
+  if (input.releaseId !== scope?.releaseId) throw new HttpError(400, 'release_context_mismatch', 'the selected release requires matching operation context');
+  await ownsCharacter(db, playerId, characterId);
+  const catalog = await operationCatalog(db, playerId, scope);
+  const rarity = catalog
+    ? catalogCharacter(catalog, characterId).rarity
+    : ((await db.prepare('SELECT rarity FROM characters WHERE id = ?1').bind(characterId).first<{ rarity: number }>())?.rarity ?? 4);
+
+  for (let attempt = 0; attempt < 5; attempt++) {
+    if (attempt > 0) {
+      const seen = await recordedOperation(db, playerId, kind, input);
+      if (seen) return seen;
+    }
+    const item = await db
+      .prepare("SELECT shards FROM player_items WHERE player_id = ?1 AND item_type = 'character' AND item_id = ?2")
+      .bind(playerId, characterId)
+      .first<{ shards: number }>();
+    if (!item) throw new HttpError(404, 'not_owned', 'you do not own this character');
+    const resRow = await db
+      .prepare("SELECT progress FROM player_tasks WHERE player_id = ?1 AND period_key = 'shard:resonance' AND task_id = ?2")
+      .bind(playerId, characterId)
+      .first<{ progress: number }>();
+    const currentTier = resRow?.progress ?? 0;
+    const info = shardResonanceInfo(rarity, currentTier, item.shards);
+    const toConvert = input.shards ?? info.excessShards;
+    if (toConvert <= 0 || toConvert > info.excessShards) {
+      throw new HttpError(409, 'no_excess_shards', 'only shards exceeding remaining resonance tiers can be converted into materials', {
+        shards: item.shards,
+        excessAvailable: info.excessShards,
+        requested: toConvert
+      });
+    }
+    const remainingShards = item.shards - toConvert;
+    const gained = [{ type: 'item' as const, itemId: EXCESS_SHARD_ITEM, quantity: toConvert }];
+    const result = {
+      ...(scope?.releaseId ? { releaseId: scope.releaseId } : {}),
+      ...(catalog ? { catalogSha256: catalog.sha256 } : {}),
+      character: characterId,
+      convertedShards: toConvert,
+      shardsRemaining: remainingShards,
+      gained,
+      resonance: shardResonanceInfo(rarity, currentTier, remainingShards)
+    };
+    const grantStmts = await grantStatements(db, playerId, gained, {
+      keyPrefix: `shard_excess:${playerId}:${input.requestId}`,
+      reason: `shard_excess:${characterId}`,
+      catalog
+    });
+
+    const batch: D1PreparedStatement[] = [
+      ...(scope?.releaseId ? [economicStatement(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date(), undefined, true)] : []),
+      ...(catalog ? [identityStatement(db, 'character', characterId)] : []),
+      db
+        .prepare("UPDATE player_items SET shards = shards - ?3 WHERE player_id = ?1 AND item_type = 'character' AND item_id = ?2 AND shards = ?4 AND shards >= ?3")
+        .bind(playerId, characterId, toConvert, item.shards),
+      db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+      ...grantStmts,
+      operationStatement(db, playerId, kind, input, result),
+      db.prepare('DELETE FROM tx_guard')
+    ];
+
+    try {
+      await db.batch(batch);
+      return { ...result, replayed: false };
+    } catch (e) {
+      const msg = String(e instanceof Error ? e.message : e);
+      if (/CHECK constraint failed: ok = 1|UNIQUE constraint failed: progression_requests/i.test(msg)) {
+        const prior = await recordedOperation(db, playerId, kind, input);
+        if (prior) return prior;
+        if (scope?.releaseId) await requireEconomic(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date());
+        continue;
+      }
+      throw e;
+    }
+  }
+  throw new HttpError(409, 'busy', 'too many simultaneous shard conversions on this character, try again');
+}
+

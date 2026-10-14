@@ -109,7 +109,41 @@ export class CharacterScene extends HubScene {
     }).setEnabled(ascPlan.canExecute));
 
     if (c.nextAscension) {
-      this.add_(txt(this, 520, 690, `${c.nextAscension.items.map((i) => `${nm(i.itemId)} ${(have.get(i.itemId) ?? 0)}/${i.quantity}`).join('  ·  ')}  ·  ${Math.ceil(c.nextAscension.fee)} ${currency.name}`, { fontSize: '22px', color: T.dim }).setOrigin(0.5));
+      this.add_(txt(this, 520, 676, `${c.nextAscension.items.map((i) => `${nm(i.itemId)} ${(have.get(i.itemId) ?? 0)}/${i.quantity}`).join('  ·  ')}  ·  ${Math.ceil(c.nextAscension.fee)} ${currency.name}`, { fontSize: '20px', color: T.dim }).setOrigin(0.5));
+    }
+
+    const res = c.resonance;
+    const shards = c.shards ?? 0;
+    if (res) {
+      const resLabel = `Memory Shards: ${shards}  ·  Resonance ${res.tier}/${res.maxTier} (+${res.bonusPct}% HP/ATK/DEF, optional keepsake)`;
+      this.add_(txt(this, 520, 710, resLabel, { fontSize: '19px', color: T.gold }).setOrigin(0.5));
+      const canAttune = res.nextShardCost !== null && shards >= res.nextShardCost;
+      if (canAttune) {
+        this.add_(new Button(this, 360, 750, {
+          label: `ATTUNE (${res.nextShardCost})`,
+          w: 280,
+          h: 52,
+          fontSize: 20,
+          onClick: () => void this.act(async () => {
+            const out = await api.attuneShards(this.id, releaseId);
+            this.lastOutcome = `Last Action: Memory Resonance Tier ${out.resonance.tier}/${out.resonance.maxTier} (+${out.resonance.bonusPct}% HP/ATK/DEF) · Spent ${out.spentShards} Memory Shards`;
+            this.say(`Resonance Tier ${out.resonance.tier}`);
+          })
+        }));
+      }
+      if (res.excessShards > 0) {
+        this.add_(new Button(this, canAttune ? 680 : 520, 750, {
+          label: `EXCHANGE ${res.excessShards} EXCESS`,
+          w: 300,
+          h: 52,
+          fontSize: 20,
+          onClick: () => void this.act(async () => {
+            const out = await api.convertExcessShards(this.id, res.excessShards, releaseId);
+            this.lastOutcome = `Last Action: Converted ${out.convertedShards} excess Memory Shards into ${out.convertedShards} ${nm(res.excessItemId)}`;
+            this.say('Excess shards exchanged');
+          })
+        }));
+      }
     }
 
     // skills
