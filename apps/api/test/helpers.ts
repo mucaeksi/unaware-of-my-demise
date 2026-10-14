@@ -16,8 +16,13 @@ export const SIGNING_KID = 'test-kid-1';
 export const signingPublic: PublicKeyJwk = { ...(signing.publicJwk as PublicKeyJwk), kid: SIGNING_KID };
 void exportJWK;
 
-export async function accessToken(identity: { email?: string; commonName?: string }, over: { aud?: string; iss?: string; wrongKey?: boolean; expired?: boolean } = {}): Promise<string> {
-  let jwt = new SignJWT({ ...(identity.email ? { email: identity.email } : {}), ...(identity.commonName ? { common_name: identity.commonName } : {}) })
+export async function accessToken(identity: { email?: string; commonName?: string }, over: { aud?: string; iss?: string; wrongKey?: boolean; expired?: boolean; amr?: string[]; mfa?: boolean } = {}): Promise<string> {
+  let jwt = new SignJWT({
+    ...(identity.email ? { email: identity.email } : {}),
+    ...(identity.commonName ? { common_name: identity.commonName } : {}),
+    ...(over.amr ? { amr: over.amr } : {}),
+    ...(over.mfa !== undefined ? { mfa: over.mfa } : {})
+  })
     .setProtectedHeader({ alg: 'RS256', kid: 'k1' })
     .setIssuer(over.iss ?? `https://${TEAM}`)
     .setAudience(over.aud ?? AUD)

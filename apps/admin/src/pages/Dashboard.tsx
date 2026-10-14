@@ -53,7 +53,7 @@ export function Dashboard({ health }: { health: Health | null }): ReactNode {
       <div className="grid">
         <div className="card"><h3>D1 database</h3><div className="big">{s.d1.ok ? 'OK' : 'DOWN'}</div><div className="mono">{s.d1.latency_ms} ms · {mb(s.d1.size_bytes)} · {s.d1.migrations.length} migrations</div></div>
         <div className="card"><h3>R2 content bucket</h3><div className="big">{s.r2.ok ? 'OK' : 'DOWN'}</div><div className="mono">{s.r2.ok ? `${s.r2.objects_listed ?? 0} objects · ${mb(s.r2.bytes_listed ?? 0)}` : s.r2.error}</div></div>
-        <div className="card"><h3>Environment</h3><div className="big">{s.environment}</div><div className="mono">{health?.signing_configured ? 'signing key set' : 'no signing key'} · Access {s.auth.access_configured ? 'on' : 'OFF'}</div></div>
+        <div className="card"><h3>Environment</h3><div className="big">{s.environment}</div><div className="mono">{health?.signing_configured ? 'signing key set' : 'no signing key'} · Access {s.auth.access_configured ? 'on' : 'OFF'}{s.auth.mfa_enforced ? ' · MFA enforced' : ''}</div></div>
         <div className="card"><h3>Free-plan ceilings (D1)</h3><div className="mono">{(s.limits.d1_rows_read_per_day / 1e6).toFixed(0)}M reads/day · {(s.limits.d1_rows_written_per_day / 1e3).toFixed(0)}k writes/day · {(s.limits.d1_bytes_per_database / 1024 ** 2).toFixed(0)} MB/db</div><div className="mono">Live usage: {s.usage_source === 'not_connected' ? 'analytics API not connected yet' : s.usage_source}</div></div>
       </div>
       <h3>Published channels</h3>

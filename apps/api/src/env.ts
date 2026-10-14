@@ -53,4 +53,6 @@ export interface AdminEnv {
   /** secret: ES256 private JWK (JSON) used to sign content manifests */
   CONTENT_SIGNING_KEY?: string;
   CONTENT_SIGNING_KID?: string;
+  /** when set to '1', human Access tokens must carry an verified MFA factor in amr/mfa claims */
+  ACCESS_REQUIRE_MFA?: string;
 }

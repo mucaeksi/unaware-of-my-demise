@@ -270,6 +270,31 @@ export class ContentStore {
     return (await this.getRelease(input.id)) as ReleaseRow;
   }
 
+  /** Classifies non-JSON release files into owner-approved R2 media vs pending preview media. */
+  async mediaProvenance(files: Map<string, string>): Promise<{ approved: string[]; pendingPreviewMedia: string[] }> {
+    const media = [...files.entries()].filter(([path]) => !path.endsWith('.json'));
+    if (media.length === 0) return { approved: [], pendingPreviewMedia: [] };
+    const approved: string[] = [];
+    const pendingPreviewMedia: string[] = [];
+    for (const [path, sha256] of media) {
+      const row = await this.db
+        .prepare(
+          `SELECT a.bytes AS bytes
+           FROM assets a
+           JOIN content_objects o ON o.sha256 = a.sha256 AND o.bytes = a.bytes AND o.media_type = a.media_type
+           JOIN admin_users u ON u.email = a.created_by AND u.role = 'owner'
+           WHERE a.path = ?1 AND a.sha256 = ?2 AND a.status = 'approved'
+             AND length(trim(a.source)) >= 3 AND length(trim(a.license)) >= 2`
+        )
+        .bind(path, sha256)
+        .first<{ bytes: number }>();
+      const head = row ? await this.bucket.head(ContentStore.objectKey(sha256)) : null;
+      if (row && head && head.size === row.bytes) approved.push(path);
+      else pendingPreviewMedia.push(path);
+    }
+    return { approved, pendingPreviewMedia };
+  }
+
   /** Signs a draft and makes it the channel's current release (atomically, only if it is newer). */
   async publish(id: string, actor: string, role: 'owner' | 'operator', signer: Signer): Promise<ReleaseRow> {
     const row = await this.getRelease(id);
@@ -279,6 +304,12 @@ export class ContentStore {
     if (row.depends_on) throw new HttpError(409, 'draft_needs_rebuild', 'recreate this legacy dependent draft to publish a self-contained snapshot');
     const files = await this.effectiveFiles(id);
     const discovered = await this.validate(files);
+    if (row.channel === 'production') {
+      const prov = await this.mediaProvenance(files);
+      if (prov.pendingPreviewMedia.length > 0) {
+        throw new HttpError(422, 'unapproved_media', `production release contains media without owner-approved R2 provenance: ${prov.pendingPreviewMedia.slice(0, 5).join(', ')}`, prov.pendingPreviewMedia);
+      }
+    }
     const { signature: _drop, ...unsigned } = JSON.parse(row.manifest_json) as ContentManifest;
     if (unsigned.files.length !== files.size || unsigned.files.some((f) => files.get(f.path) !== f.sha256)) throw new HttpError(409, 'manifest_mismatch', 'draft file index differs from its manifest; recreate the draft');
     const requiredCapabilities = [...new Set([...(unsigned.compat.required_capabilities ?? []), ...discovered])].sort();

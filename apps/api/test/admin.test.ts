@@ -513,4 +513,42 @@ describe('R13 bounded cursor pagination for admin collections', () => {
     expect(await (await admin(`/admin/api/purchases/${made[0]?.order}`)).json()).toMatchObject({ purchase: { order_id: made[0]?.order, player_id: playerId, entitlement_state: 'active' } });
     expect((await admin('/admin/api/purchases/GPA.none')).status).toBe(404);
   });
+
+  it('verifies Access MFA policy when ACCESS_REQUIRE_MFA=1, enforces R2 provenance for approved assets, and exposes release diff and sensitive approvals', async () => {
+    await staff();
+    const mfaEnv = adminEnv({ ACCESS_REQUIRE_MFA: '1' });
+    const noMfa = await admin('/admin/api/me', { as: null, env: mfaEnv, headers: { 'Cf-Access-Jwt-Assertion': await accessToken({ email: 'owner@example.com' }) } });
+    expect([noMfa.status, await errorOf(noMfa)]).toEqual([403, 'mfa_required']);
+    const withMfa = await admin('/admin/api/me', { as: null, env: mfaEnv, headers: { 'Cf-Access-Jwt-Assertion': await accessToken({ email: 'owner@example.com' }, { amr: ['pwd', 'totp'] }) } });
+    expect(withMfa.status).toBe(200);
+    expect(await withMfa.json()).toEqual({ identity: 'owner@example.com', role: 'owner', mfaVerified: true });
+
+    // Operator cannot directly mark an asset approved
+    const assetPath = `art/r13_prov_${tag()}.webp`;
+    const bytes = new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8]);
+    const buf = await crypto.subtle.digest('SHA-256', bytes);
+    const sha256 = [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
+    const opApproveAttempt = await admin('/admin/api/assets', send('POST', { path: assetPath, sha256, bytes: bytes.byteLength, media_type: 'image/webp', kind: 'portrait', source: 'model:imagen-3:prompt-hash', license: 'project-owned', status: 'approved' }, OPERATOR));
+    expect([opApproveAttempt.status, await errorOf(opApproveAttempt)]).toEqual([403, 'insufficient_role']);
+
+    // Operator registers candidate; owner cannot approve until R2 object is uploaded
+    const cand = await admin('/admin/api/assets', send('POST', { path: assetPath, sha256, bytes: bytes.byteLength, media_type: 'image/webp', kind: 'portrait', source: 'model:imagen-3:prompt-hash', license: 'project-owned', status: 'candidate' }, OPERATOR));
+    expect(cand.status).toBe(201);
+    const assetList = (await (await admin(`/admin/api/assets?q=${encodeURIComponent(assetPath)}`)).json()) as { assets: { id: number }[] };
+    const assetId = assetList.assets[0]!.id;
+    const beforeUpload = await admin(`/admin/api/assets/${assetId}/approve`, send('POST', {}));
+    expect([beforeUpload.status, await errorOf(beforeUpload)]).toEqual([409, 'object_not_stored']);
+
+    // Upload the actual object to R2, then owner approves
+    const putObj = await admin(`/admin/api/objects/${sha256}`, { method: 'PUT', body: bytes, headers: { 'Content-Type': 'image/webp' } });
+    expect([200, 201]).toContain(putObj.status);
+    const approved = await admin(`/admin/api/assets/${assetId}/approve`, send('POST', {}));
+    expect(approved.status).toBe(200);
+    expect(await approved.json()).toMatchObject({ id: assetId, path: assetPath, status: 'approved', verifiedSha256: sha256 });
+
+    // Sensitive approvals endpoint lists the owner approval with singleOwnerModel: true
+    const approvals = (await (await admin('/admin/api/approvals?limit=10')).json()) as { approvals: { action: string; target: string; actor_role: string }[]; singleOwnerModel: boolean };
+    expect(approvals.singleOwnerModel).toBe(true);
+    expect(approvals.approvals.some((a) => a.action === 'asset.approve' && a.target === assetPath && a.actor_role === 'owner')).toBe(true);
+  });
 });

@@ -138,7 +138,7 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
       // Free-plan ceilings (README): shown for context; live usage needs the Cloudflare analytics API (not connected)
       limits: { d1_rows_read_per_day: 5_000_000, d1_rows_written_per_day: 100_000, d1_storage_bytes_total: 5 * 1024 ** 3, d1_bytes_per_database: 500 * 1024 ** 2 },
       usage_source: 'not_connected',
-      auth: { access_configured: Boolean(c.env.ACCESS_TEAM_DOMAIN && c.env.ACCESS_AUD), signing_configured: Boolean(c.env.CONTENT_SIGNING_KEY && c.env.CONTENT_SIGNING_KID) }
+      auth: { access_configured: Boolean(c.env.ACCESS_TEAM_DOMAIN && c.env.ACCESS_AUD), signing_configured: Boolean(c.env.CONTENT_SIGNING_KEY && c.env.CONTENT_SIGNING_KID), mfa_enforced: c.env.ACCESS_REQUIRE_MFA === '1' }
     });
   });
 
@@ -220,17 +220,43 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
 
   app.post('/admin/api/assets', need('operator'), async (c) => {
     const a = await json(c, AssetBody);
-    const who = c.get('admin').identity;
+    const { identity: who, role } = c.get('admin');
+    if (a.status === 'approved' && !atLeast(role, 'owner')) {
+      throw new AuthError(403, 'insufficient_role', 'only an owner may mark an asset approved');
+    }
     await c.env.DB.batch([
       c.env.DB
         .prepare(
           `INSERT INTO assets (path, sha256, bytes, media_type, kind, source, license, status, created_by) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)
-           ON CONFLICT (path) DO UPDATE SET sha256 = excluded.sha256, bytes = excluded.bytes, media_type = excluded.media_type, kind = excluded.kind, source = excluded.source, license = excluded.license, status = excluded.status`
+           ON CONFLICT (path) DO UPDATE SET sha256 = excluded.sha256, bytes = excluded.bytes, media_type = excluded.media_type, kind = excluded.kind, source = excluded.source, license = excluded.license, status = excluded.status, created_by = excluded.created_by`
         )
         .bind(a.path, a.sha256, a.bytes, a.media_type, a.kind, a.source, a.license, a.status, who),
       auditStatement(c.env.DB, who, 'asset.upsert', a.path, { sha256: a.sha256, status: a.status })
     ]);
     return c.json({ ok: true, path: a.path }, 201);
+  });
+
+  app.post('/admin/api/assets/:id{[0-9]{1,15}}/approve', need('owner'), async (c) => {
+    const id = Number(c.req.param('id'));
+    const asset = await c.env.DB
+      .prepare('SELECT id, path, sha256, bytes, media_type, kind, source, license, status FROM assets WHERE id = ?1')
+      .bind(id)
+      .first<{ id: number; path: string; sha256: string; bytes: number; media_type: string; kind: string; source: string; license: string; status: string }>();
+    if (!asset) throw new HttpError(404, 'no_such_asset', 'asset not found');
+    const objRow = await c.env.DB
+      .prepare('SELECT bytes, media_type FROM content_objects WHERE sha256 = ?1')
+      .bind(asset.sha256)
+      .first<{ bytes: number; media_type: string }>();
+    const head = objRow ? await c.env.CONTENT.head(ContentStore.objectKey(asset.sha256)) : null;
+    if (!objRow || !head || objRow.bytes !== asset.bytes || head.size !== asset.bytes || objRow.media_type !== asset.media_type) {
+      throw new HttpError(409, 'object_not_stored', 'cannot approve an asset before its exact R2 object is stored and verified');
+    }
+    const who = c.get('admin').identity;
+    await c.env.DB.batch([
+      c.env.DB.prepare("UPDATE assets SET status = 'approved', created_by = ?2 WHERE id = ?1").bind(id, who),
+      auditStatement(c.env.DB, who, 'asset.approve', asset.path, { id, sha256: asset.sha256, bytes: asset.bytes, media_type: asset.media_type, source: asset.source, license: asset.license })
+    ]);
+    return c.json({ id, path: asset.path, status: 'approved', verifiedSha256: asset.sha256, verifiedBytes: asset.bytes });
   });
 
   // ------------------------------------------------------------------ content releases
@@ -245,9 +271,46 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
   });
 
   app.get('/admin/api/releases/:id', need('viewer'), async (c) => {
-    const r = await store(c.env).getRelease(c.req.param('id'));
+    const s = store(c.env);
+    const r = await s.getRelease(c.req.param('id'));
     if (!r) throw new HttpError(404, 'no_such_release', 'release not found');
-    return c.json({ ...r, manifest: JSON.parse(r.manifest_json) });
+    const files = await s.effectiveFiles(r.id).catch(() => new Map<string, string>());
+    const mediaProvenance = await s.mediaProvenance(files);
+    return c.json({ ...r, manifest: JSON.parse(r.manifest_json), mediaProvenance });
+  });
+
+  app.get('/admin/api/releases/:id/diff', need('viewer'), async (c) => {
+    const s = store(c.env);
+    const r = await s.getRelease(c.req.param('id'));
+    if (!r) throw new HttpError(404, 'no_such_release', 'release not found');
+    const againstParam = c.req.query('against');
+    const current = againstParam
+      ? { release_id: againstParam }
+      : await c.env.DB.prepare('SELECT release_id FROM channel_pointers WHERE channel = ?1').bind(r.channel).first<{ release_id: string }>();
+    const targetFiles = await s.effectiveFiles(r.id);
+    const baseFiles = current?.release_id && current.release_id !== r.id ? await s.effectiveFiles(current.release_id) : new Map<string, string>();
+    const added: { path: string; sha256: string }[] = [];
+    const changed: { path: string; beforeSha256: string; afterSha256: string }[] = [];
+    const removed: { path: string; sha256: string }[] = [];
+    for (const [path, sha256] of targetFiles) {
+      const prev = baseFiles.get(path);
+      if (!prev) added.push({ path, sha256 });
+      else if (prev !== sha256) changed.push({ path, beforeSha256: prev, afterSha256: sha256 });
+    }
+    for (const [path, sha256] of baseFiles) {
+      if (!targetFiles.has(path)) removed.push({ path, sha256 });
+    }
+    const mediaProvenance = await s.mediaProvenance(targetFiles);
+    return c.json({
+      releaseId: r.id,
+      channel: r.channel,
+      againstId: current?.release_id ?? null,
+      added,
+      changed,
+      removed,
+      unchangedCount: targetFiles.size - added.length - changed.length,
+      mediaProvenance
+    });
   });
 
   app.get('/admin/api/releases/:id/economic-policy', need('viewer'), async (c) => {
@@ -308,7 +371,7 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     });
   }
 
-  // ------------------------------------------------------------------ audit + users
+  // ------------------------------------------------------------------ audit + approvals + users
   app.get('/admin/api/audit', need('viewer'), async (c) => {
     const actor = filter(c.req.query('actor'), z.string().max(200), 'actor');
     const action = filter(c.req.query('action'), z.string().max(80), 'action');
@@ -331,6 +394,24 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     const entry = await c.env.DB.prepare('SELECT id, at, actor, action, target, detail FROM audit_log WHERE id = ?1').bind(Number(c.req.param('id'))).first();
     if (!entry) throw new HttpError(404, 'no_such_entry', 'audit entry not found');
     return c.json({ entry });
+  });
+
+  app.get('/admin/api/approvals', need('viewer'), async (c) => {
+    const limit = pageLimit(c.req.query('limit'), 50);
+    const after = readCursor(c.req.query('cursor'), z.tuple([z.number().int().min(1)]));
+    const { results } = await c.env.DB
+      .prepare(
+        `SELECT a.id, a.at, a.actor, COALESCE(u.role, 'owner') AS actor_role, a.action, a.target, a.detail
+         FROM audit_log a
+         LEFT JOIN admin_users u ON u.email = a.actor
+         WHERE a.action IN ('release.publish', 'release.rollback', 'release.kill_switch', 'asset.approve', 'player.mail', 'player.adjust', 'product.set', 'admin.set_role', 'economic_policy.set')
+           AND (?1 IS NULL OR a.id < ?1)
+         ORDER BY a.id DESC LIMIT ?2`
+      )
+      .bind(after?.[0] ?? null, limit + 1)
+      .all<{ id: number }>();
+    const page = pageOf(results, limit, (r) => [r.id]);
+    return c.json({ approvals: page.rows, nextCursor: page.nextCursor, singleOwnerModel: true });
   });
 
   app.get('/admin/api/users', need('owner'), async (c) => {

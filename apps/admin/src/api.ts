@@ -34,6 +34,7 @@ export interface Health {
 export interface Me {
   identity: string;
   role: 'viewer' | 'operator' | 'owner';
+  mfaVerified?: boolean;
 }
 export interface SystemStatus {
   environment: string;
@@ -43,7 +44,7 @@ export interface SystemStatus {
   pointers: { channel: string; release_id: string; version: number; updated_at: string; updated_by: string }[];
   limits: { d1_rows_read_per_day: number; d1_rows_written_per_day: number; d1_storage_bytes_total: number; d1_bytes_per_database: number };
   usage_source: string;
-  auth: { access_configured: boolean; signing_configured: boolean };
+  auth: { access_configured: boolean; signing_configured: boolean; mfa_enforced?: boolean };
 }
 export interface Character {
   id: string;
@@ -73,6 +74,8 @@ export interface Asset {
   license: string;
   status: string;
   created_by: string;
+  created_at?: string;
+  object_stored?: number;
 }
 export interface Release {
   id: string;
@@ -90,6 +93,31 @@ export interface Release {
   files: number;
   is_current?: number | null;
 }
+export interface ReleaseDetail extends Release {
+  manifest: {
+    release: { id: string; generation: number; channel: string; notes: string };
+    compat: { min_client: string; max_client?: string; content_schema: number; required_capabilities?: string[] };
+    rollout: { percent: number; kill_switch?: boolean };
+    files: { path: string; sha256: string; bytes: number }[];
+  };
+  mediaProvenance?: { approved: string[]; pendingPreviewMedia: string[] };
+}
+export interface ReleaseDiff {
+  releaseId: string;
+  channel: string;
+  againstId: string | null;
+  added: { path: string; sha256: string }[];
+  changed: { path: string; beforeSha256: string; afterSha256: string }[];
+  removed: { path: string; sha256: string }[];
+  unchangedCount: number;
+  mediaProvenance: { approved: string[]; pendingPreviewMedia: string[] };
+}
+export interface EconomicPolicyInfo {
+  releaseId: string;
+  channel: string;
+  policy: { release_id: string; mode: 'allowlisted' | 'grace' | 'revoked'; version: number; valid_until: string | null; cutover_at: string | null; reason: string; updated_by: string; updated_at: string } | null;
+  pointer: { release_id: string; economic_floor: number } | null;
+}
 export interface AuditEntry {
   id: number;
   at: string;
@@ -98,11 +126,49 @@ export interface AuditEntry {
   target: string | null;
   detail: string;
 }
-
+export interface ApprovalEntry extends AuditEntry {
+  actor_role: 'owner' | 'operator' | 'viewer';
+}
 export interface CatalogSnapshot {
   path: string;
   sha256: string;
   bytes: number;
   json: string;
   counts: Record<string, number>;
+}
+
+export function downloadJson(filename: string, data: unknown): void {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+export async function sha256HexBrowser(bytes: ArrayBuffer): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+const EXT_MEDIA_TYPES: Record<string, string> = {
+  json: 'application/json',
+  webp: 'image/webp',
+  png: 'image/png',
+  ogg: 'audio/ogg',
+  mp4: 'video/mp4',
+  txt: 'text/plain',
+  atlas: 'text/plain'
+};
+
+export function mediaTypeForPath(path: string): string {
+  const ext = path.split('.').pop()?.toLowerCase() ?? '';
+  return EXT_MEDIA_TYPES[ext] ?? 'application/octet-stream';
+}
+
+export function newRequestId(prefix = 'req'): string {
+  return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
 }

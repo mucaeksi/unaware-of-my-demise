@@ -1,5 +1,5 @@
-import { useState, type FormEvent, type ReactNode } from 'react';
-import { api, ApiError, type Me } from '../api';
+import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { api, ApiError, downloadJson, newRequestId, type Me } from '../api';
 import { ErrorNotice } from '../App';
 
 interface PlayerRow { id: string; display_name: string | null; status: string; created_at: string; last_seen_at: string | null }
@@ -16,20 +16,56 @@ interface Detail {
   activeSessions: number;
 }
 
-const rid = (): string => `a_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
-
 export function Players({ me, say }: { me: Me; say: (m: string) => void }): ReactNode {
   const [rows, setRows] = useState<PlayerRow[] | null>(null);
+  const [nextCursor, setNextCursor] = useState<string | null>(null);
+  const [q, setQ] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
   const [detail, setDetail] = useState<Detail | null>(null);
   const [err, setErr] = useState<unknown>(null);
   const canMail = me.role !== 'viewer';
   const isOwner = me.role === 'owner';
 
+  const buildQuery = useCallback((query: string, status: string, cursor?: string | null): string => {
+    const params = new URLSearchParams();
+    if (query.trim()) params.set('q', query.trim());
+    if (status) params.set('status', status);
+    if (cursor) params.set('cursor', cursor);
+    const qs = params.toString();
+    return `/players${qs ? `?${qs}` : ''}`;
+  }, []);
+
+  const load = useCallback((query = q, status = statusFilter): void => {
+    api<{ players: PlayerRow[]; nextCursor?: string | null }>(buildQuery(query, status))
+      .then((r) => {
+        setRows(r.players);
+        setNextCursor(r.nextCursor ?? null);
+        setErr(null);
+      })
+      .catch(setErr);
+  }, [buildQuery, q, statusFilter]);
+
+  useEffect(() => {
+    load(q, statusFilter);
+  }, [load, q, statusFilter]);
+
   const search = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const q = String(new FormData(e.currentTarget).get('q') ?? '');
-    api<{ players: PlayerRow[] }>(`/players?q=${encodeURIComponent(q)}`).then((r) => { setRows(r.players); setErr(null); }).catch(setErr);
+    const nextQ = String(new FormData(e.currentTarget).get('q') ?? '');
+    setQ(nextQ);
+    load(nextQ, statusFilter);
   };
+
+  const loadMore = (): void => {
+    if (!nextCursor || !rows) return;
+    api<{ players: PlayerRow[]; nextCursor?: string | null }>(buildQuery(q, statusFilter, nextCursor))
+      .then((r) => {
+        setRows([...rows, ...r.players]);
+        setNextCursor(r.nextCursor ?? null);
+      })
+      .catch(setErr);
+  };
+
   const open = (id: string): void => { api<Detail>(`/players/${id}`).then(setDetail).catch(setErr); };
   const fail = (x: unknown): void => say(x instanceof ApiError ? `${x.code}: ${x.message}` : String((x as Error).message));
 
@@ -41,7 +77,16 @@ export function Players({ me, say }: { me: Me; say: (m: string) => void }): Reac
     try {
       await api(`/players/${detail.player.id}/mail`, {
         method: 'POST',
-        body: JSON.stringify({ reason: String(f.get('reason')), mail: { kind: 'compensation', title: String(f.get('title')), body: String(f.get('body') ?? ''), attachments: amount > 0 ? [{ type: 'currency', currency: String(f.get('currency')), amount }] : [] } })
+        body: JSON.stringify({
+          reason: String(f.get('reason')),
+          requestId: newRequestId('mail'),
+          mail: {
+            kind: 'compensation',
+            title: String(f.get('title')),
+            body: String(f.get('body') ?? ''),
+            attachments: amount > 0 ? [{ type: 'currency', currency: String(f.get('currency')), amount }] : []
+          }
+        })
       });
       say('Mail sent'); open(detail.player.id);
     } catch (x) { fail(x); }
@@ -51,7 +96,7 @@ export function Players({ me, say }: { me: Me; say: (m: string) => void }): Reac
     if (!detail) return;
     const f = new FormData(e.currentTarget);
     try {
-      const r = await api<{ applied: boolean; balance: number }>(`/players/${detail.player.id}/adjust`, { method: 'POST', body: JSON.stringify({ currency: String(f.get('currency')), delta: Number(f.get('delta')), reason: String(f.get('reason')), requestId: rid() }) });
+      const r = await api<{ applied: boolean; balance: number }>(`/players/${detail.player.id}/adjust`, { method: 'POST', body: JSON.stringify({ currency: String(f.get('currency')), delta: Number(f.get('delta')), reason: String(f.get('reason')), requestId: newRequestId('adj') }) });
       say(`Balance now ${r.balance}`); open(detail.player.id);
     } catch (x) { fail(x); }
   };
@@ -59,25 +104,44 @@ export function Players({ me, say }: { me: Me; say: (m: string) => void }): Reac
     if (!detail) return;
     const reason = window.prompt(`Reason to set ${status}:`);
     if (!reason) return;
-    try { await api(`/players/${detail.player.id}/status`, { method: 'POST', body: JSON.stringify({ status, reason }) }); say(`Player ${status}`); open(detail.player.id); } catch (x) { fail(x); }
+    try { await api(`/players/${detail.player.id}/status`, { method: 'POST', body: JSON.stringify({ status, reason }) }); say(`Player ${status}`); open(detail.player.id); load(); } catch (x) { fail(x); }
   };
 
   return (
     <>
-      <header className="page"><h2>Players</h2></header>
-      <form className="row" onSubmit={search}><input name="q" placeholder="player id or display name" maxLength={60} /><button className="btn primary" type="submit">Search</button></form>
+      <header className="page">
+        <h2>Players</h2>
+        {rows ? <span className="badge">{rows.length} loaded</span> : null}
+        {rows ? <button className="btn" type="button" onClick={() => downloadJson('players.json', rows)}>Export JSON</button> : null}
+      </header>
+      <form className="row" onSubmit={search}>
+        <input name="q" defaultValue={q} placeholder="player id or display name" maxLength={60} />
+        <select aria-label="Filter player status" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+          <option value="">All statuses</option>
+          <option value="active">active</option>
+          <option value="banned">banned</option>
+          <option value="deleted">deleted</option>
+        </select>
+        <button className="btn primary" type="submit">Search</button>
+      </form>
       <ErrorNotice error={err} />
       {rows ? (
-        <table>
-          <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Created</th><th>Last seen</th><th /></tr></thead>
-          <tbody>{rows.map((p) => (
-            <tr key={p.id}><td><code>{p.id}</code></td><td>{p.display_name ?? '—'}</td><td><span className={`badge ${p.status === 'active' ? 'ok' : 'warn'}`}>{p.status}</span></td><td>{p.created_at}</td><td>{p.last_seen_at ?? '—'}</td><td><button className="btn" onClick={() => open(p.id)}>Open</button></td></tr>
-          ))}</tbody>
-        </table>
+        <>
+          <table>
+            <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Created</th><th>Last seen</th><th /></tr></thead>
+            <tbody>{rows.map((p) => (
+              <tr key={p.id}><td><code>{p.id}</code></td><td>{p.display_name ?? '—'}</td><td><span className={`badge ${p.status === 'active' ? 'ok' : 'warn'}`}>{p.status}</span></td><td>{p.created_at}</td><td>{p.last_seen_at ?? '—'}</td><td><button className="btn" onClick={() => open(p.id)}>Open</button></td></tr>
+            ))}</tbody>
+          </table>
+          {nextCursor ? <div className="row"><button className="btn" type="button" onClick={loadMore}>Load more</button></div> : null}
+        </>
       ) : <p>Search to list players.</p>}
       {detail ? (
         <section className="card" aria-label="Player detail">
-          <h3>{detail.player.display_name ?? detail.player.id} <span className={`badge ${detail.player.status === 'active' ? 'ok' : 'warn'}`}>{detail.player.status}</span> <span className="badge">{detail.activeSessions} active sessions</span></h3>
+          <div className="row">
+            <h3>{detail.player.display_name ?? detail.player.id} <span className={`badge ${detail.player.status === 'active' ? 'ok' : 'warn'}`}>{detail.player.status}</span> <span className="badge">{detail.activeSessions} active sessions</span></h3>
+            <button className="btn" type="button" onClick={() => downloadJson(`player-${detail.player.id}.json`, detail)}>Export player</button>
+          </div>
           <p className="mono">{detail.player.id}</p>
           <h3>Wallets</h3>
           <p>{detail.wallets.length ? detail.wallets.map((w) => `${w.currency}: ${w.balance}`).join(' · ') : 'empty'}</p>
@@ -99,7 +163,7 @@ export function Players({ me, say }: { me: Me; say: (m: string) => void }): Reac
               <input name="body" placeholder="message" maxLength={2000} />
               <select name="currency"><option>eclipse_token</option></select>
               <input name="amount" type="number" min="0" max="1000000" defaultValue="0" aria-label="amount" />
-              <input name="reason" placeholder="audit reason" required minLength={3} maxLength={200} />
+              <input name="reason" placeholder="audit reason (grants > 5,000 require owner)" required minLength={3} maxLength={200} />
               <button className="btn primary" type="submit">Send mail</button>
             </form>
           ) : null}

@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { api, ApiError, type Me } from '../api';
+import { api, ApiError, downloadJson, newRequestId, type Me } from '../api';
 import { ErrorNotice } from '../App';
 
 interface Banner {
@@ -26,20 +26,20 @@ export function Banners({ me, say }: { me: Me; say: (m: string) => void }): Reac
     try { setSim({ id: b.id, out: await api<SimOut>('/banners/simulate', { method: 'POST', body: JSON.stringify({ bannerId: b.id, accounts: 2000, pullsPerAccount: 200, seed: 1 }) }) }); } catch (x) { fail(x); }
   };
   const state = async (b: Banner, action: 'activate' | 'retire'): Promise<void> => {
-    let body: Record<string, string> = { action };
+    let body: Record<string, unknown> = { action, expectedVersion: b.version, requestId: newRequestId('ban') };
     if (action === 'activate') {
       const ends = window.prompt('Banner ends at (ISO date-time, canon: 15 days after the start). Leave empty for no end:', new Date(Date.now() + 15 * 86_400_000).toISOString());
       if (ends === null) return;
-      body = { action, startsAt: new Date().toISOString(), ...(ends ? { endsAt: ends } : {}) };
+      body = { action, expectedVersion: b.version, requestId: newRequestId('ban'), startsAt: new Date().toISOString(), ...(ends ? { endsAt: ends } : {}) };
     } else if (!window.confirm(`Retire ${b.id}? Players can no longer pull on it.`)) return;
-    try { await api(`/banners/${b.id}/state`, { method: 'POST', body: JSON.stringify(body) }); say(`${b.id}: ${action}d`); load(); } catch (x) { fail(x); }
+    try { await api(`/banners/${b.id}/state`, { method: 'POST', body: JSON.stringify(body) }); say(`${b.id}: ${action}d`); load(); } catch (x) { fail(x); load(); }
   };
 
   if (err) return <ErrorNotice error={err} />;
   if (!rows) return <p>Loading banners…</p>;
   return (
     <>
-      <header className="page"><h2>Banners</h2><span className="badge">{rows.length}</span></header>
+      <header className="page"><h2>Banners</h2><span className="badge">{rows.length}</span><button className="btn" type="button" onClick={() => downloadJson('banners.json', rows)}>Export JSON</button></header>
       <p>Rates and pity are data. A live banner cannot be edited; the simulator runs the real engine. Weapon banners wait for the weapon catalog.</p>
       <table>
         <thead><tr><th>ID</th><th>Title</th><th>Status</th><th>5★ base</th><th>Pity</th><th>≈ pulls / 5★</th><th>≈ pulls / target</th><th>Window</th><th /></tr></thead>

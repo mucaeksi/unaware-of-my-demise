@@ -9,6 +9,17 @@ export interface AdminIdentity {
   /** email, or "svc:<client id>" for Access service tokens */
   identity: string;
   role: Role;
+  mfaVerified?: boolean;
+}
+
+const MFA_METHODS = new Set(['mfa', 'otp', 'totp', 'hwk', 'swk', 'webauthn', 'pin']);
+
+export function hasMfaFactor(payload: Record<string, unknown>): boolean {
+  if (payload.mfa === true) return true;
+  if (Array.isArray(payload.amr)) {
+    return payload.amr.some((m) => typeof m === 'string' && MFA_METHODS.has(m.toLowerCase()));
+  }
+  return false;
 }
 
 export class AuthError extends Error {
@@ -72,16 +83,21 @@ export async function authenticate(req: Request, env: AdminEnv, getKey?: (teamDo
   const common = typeof payload.common_name === 'string' ? payload.common_name : undefined;
   const identity = email ?? (common ? `svc:${common}` : undefined);
   if (!identity) throw new AuthError(401, 'no_identity', 'token carries no identity');
+  const mfa = hasMfaFactor(payload as Record<string, unknown>);
+  if (email && env.ACCESS_REQUIRE_MFA === '1' && !mfa) {
+    throw new AuthError(403, 'mfa_required', 'Cloudflare Access MFA verification is required');
+  }
+  const extra = mfa ? { mfaVerified: true } : {};
 
   const row = await env.DB.prepare('SELECT role FROM admin_users WHERE email = ?1').bind(identity).first<{ role: Role }>();
-  if (row) return { identity, role: row.role };
+  if (row) return { identity, role: row.role, ...extra };
   const bootstrap = (env.ADMIN_BOOTSTRAP_OWNERS ?? '').split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
   if (email && bootstrap.includes(email)) {
     await env.DB.batch([
       env.DB.prepare("INSERT OR IGNORE INTO admin_users (email, role, created_by) VALUES (?1, 'owner', 'bootstrap')").bind(email),
       env.DB.prepare("INSERT INTO audit_log (actor, action, target, detail) VALUES ('bootstrap', 'admin.bootstrap_owner', ?1, '{}')").bind(email)
     ]);
-    return { identity, role: 'owner' };
+    return { identity, role: 'owner', ...extra };
   }
   throw new AuthError(403, 'not_an_admin', 'this identity has no role in the Control Center');
 }

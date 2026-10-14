@@ -7,6 +7,7 @@ interface Version { id: string; tag?: string; timestamp?: string }
 interface Operation { id: number; at: string; kind: string; ok: number; detail: { version?: Version | null; checks?: { name: string; ok: boolean; detail: string }[] } }
 interface Snapshot {
   updatedAt: string; windowStart: string; retentionDays: number; maxEvents: number; environment: string;
+  freshness?: { source: string; generatedAt: string; windowStart: string; newestEventAt: string | null; lastHealthAt: string | null; lastBackupAt: string | null; lastGoodBackupAt: string | null; healthStale: boolean; backupStale: boolean };
   players: { total: number; new24h: number | null; active24h: number | null; banned: number | null };
   economy: { wallets: { currency: string; balance: number }[]; flows: { currency: string; earned: number; spent: number; transactions: number }[]; breakdown: { source: string; earned: number; spent: number }[]; pulls: { pulls: number; players: number } };
   ads: { grants: number; tokens: number; players: number };
