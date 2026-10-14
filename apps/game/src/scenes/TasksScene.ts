@@ -29,6 +29,17 @@ export class TasksScene extends HubScene {
       Promise.resolve(Services.api.afkStatus?.(this.releaseId)).catch(() => null),
     ]);
     let y = 190;
+    if (t.supplies) {
+      const sup = t.supplies;
+      const nextText = sup.claimed
+        ? `Claimed for today · Next supply in ${left(sup.endsAtMs - t.serverTimeMs)}`
+        : `+${sup.amount} Bell's Remains · Unconditional daily recovery floor`;
+      this.card(REF_W / 2 - 100, y, 1500, 100, sup.claimed ? 'dim' : 'hot');
+      this.add_(txt(this, 190, y - 22, 'DAILY SUPPLIES (RECOVERY FLOOR)', { fontFamily: F.display, fontSize: '26px', fontStyle: '600', color: sup.claimed ? T.dim : T.gold }).setOrigin(0, 0.5));
+      this.add_(txt(this, 190, y + 20, nextText, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
+      this.add_(new Button(this, REF_W - 250, y, { label: sup.claimed ? 'CLAIMED' : 'SUPPLIES', w: 280, h: 86, fontSize: 26, variant: sup.claimed ? 'dim' : 'hot', onClick: () => void this.claimSupplies() }).setEnabled(!sup.claimed));
+      y += 120;
+    }
     if (afk) {
       const elapsedMin = Math.floor(afk.elapsedSeconds / 60);
       const capMin = Math.floor(afk.capSeconds / 60);
@@ -61,6 +72,22 @@ export class TasksScene extends HubScene {
       t.weekly.forEach((w) => row(w, w.periodKey, w.running ? `ends in ${left(w.endsAtMs - t.serverTimeMs)}` : 'claim before it expires'));
     }
     if (!d && t.weekly.length === 0) this.add_(txt(this, REF_W / 2, 400, 'No errands right now.', { fontSize: '40px' }).setOrigin(0.5));
+  }
+
+  private async claimSupplies(): Promise<void> {
+    if (this.busy) return;
+    this.busy = true;
+    try {
+      const res = await Services.api.claimDailySupplies(this.releaseId);
+      this.say(`Claimed +${res.amount} Bell's Remains`);
+      await this.updateWallet();
+      await this.refresh();
+    } catch (e) {
+      this.say(errText(e));
+      await this.refresh();
+    } finally {
+      this.busy = false;
+    }
   }
 
   private async claimAfkPatrol(): Promise<void> {

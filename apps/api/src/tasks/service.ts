@@ -66,12 +66,38 @@ interface Row {
 }
 
 const COMPLETION = '_window_complete';
+export const DAILY_SUPPLIES_TASK_ID = '_daily_supplies';
+export const DAILY_SUPPLIES_AMOUNT = 80;
+
+export function utcSupplyPeriod(nowMs: number): { key: string; endsAtMs: number } {
+  const dayStart = Math.floor(nowMs / 86_400_000) * 86_400_000;
+  const isoDay = new Date(dayStart).toISOString().slice(0, 10);
+  return { key: `supply:${isoDay}`, endsAtMs: dayStart + 86_400_000 };
+}
 
 export async function listTasks(db: D1Database, playerId: string, nowMs = Date.now(), scope?: ReleaseScope): Promise<Record<string, unknown>> {
   const catalog = await operationCatalog(db, playerId, scope, new Date(nowMs));
   const rules = await taskRules(db, playerId, nowMs, catalog?.data.config.tasks, catalog);
   const cfg = rules?.config;
-  if (!cfg) return { windowHours: 12, daily: null, weekly: [], serverTimeMs: nowMs };
+  const supply = utcSupplyPeriod(nowMs);
+  if (!cfg) {
+    const supplyRow = await db
+      .prepare('SELECT claimed FROM player_tasks WHERE player_id = ?1 AND period_key = ?2 AND task_id = ?3')
+      .bind(playerId, supply.key, DAILY_SUPPLIES_TASK_ID)
+      .first<{ claimed: number }>();
+    return {
+      windowHours: 12,
+      daily: null,
+      weekly: [],
+      supplies: {
+        periodKey: supply.key,
+        amount: DAILY_SUPPLIES_AMOUNT,
+        claimed: supplyRow?.claimed === 1,
+        endsAtMs: supply.endsAtMs
+      },
+      serverTimeMs: nowMs
+    };
+  }
   const win = windowOf(nowMs, cfg.windowHours);
   const rulesByWeek = new Map<number, TaskRules>([[weekStart(nowMs), rules!]]);
   const namesOf = (terms: TaskRules | undefined): Record<string, string> | undefined => terms?.catalog ? Object.fromEntries([...terms.catalog.data.characters.map((c) => [c.id, c.name_en]), ...terms.catalog.data.items.map((i) => [i.item_id, i.name_en]), ...terms.catalog.data.gear.map((g) => [g.gear_id, g.name_en])]) : undefined;
@@ -81,7 +107,7 @@ export async function listTasks(db: D1Database, playerId: string, nowMs = Date.n
     const prior = await taskRules(db, playerId, time, undefined, undefined, false);
     if (prior) { rulesByWeek.set(time, prior); sl.push(...slots(prior.config, nowMs).filter((s) => s.scope === 'weekly' && weekStart(s.period.startMs) === time)); }
   }
-  const keys = [...new Set(sl.map((s) => s.period.key))];
+  const keys = [...new Set([...sl.map((s) => s.period.key), supply.key])];
   const rows = (await db.prepare(`SELECT period_key, task_id, progress, target, claimed FROM player_tasks WHERE player_id = ?1 AND period_key IN (${keys.map(() => '?').join(',')})`).bind(playerId, ...keys).all<Row>()).results;
   const rowOf = (key: string, id: string): Row | undefined => rows.find((r) => r.period_key === key && r.task_id === id);
   const view = (s: Slot) => {
@@ -91,6 +117,7 @@ export async function listTasks(db: D1Database, playerId: string, nowMs = Date.n
   };
   const daily = sl.filter((s) => s.scope === 'daily').map(view);
   const completion = rowOf(win.key, COMPLETION);
+  const supplyRow = rowOf(supply.key, DAILY_SUPPLIES_TASK_ID);
   const weekly = sl
     .filter((s) => s.scope === 'weekly')
     .map((s) => ({ ...view(s), periodKey: s.period.key, startsAtMs: s.period.startMs, endsAtMs: s.period.endMs, running: nowMs < s.period.endMs }))
@@ -102,6 +129,12 @@ export async function listTasks(db: D1Database, playerId: string, nowMs = Date.n
     serverTimeMs: nowMs,
     windowHours: cfg.windowHours,
     weekStartMs: weekStart(nowMs),
+    supplies: {
+      periodKey: supply.key,
+      amount: DAILY_SUPPLIES_AMOUNT,
+      claimed: supplyRow?.claimed === 1,
+      endsAtMs: supply.endsAtMs
+    },
     daily: {
       periodKey: win.key,
       endsAtMs: win.endMs,
@@ -175,6 +208,66 @@ async function claimBatch(db: D1Database, playerId: string, t: { periodKey: stri
     if (scope?.releaseId) await requireEconomic(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date());
     const msg = String(e instanceof Error ? e.message : e);
     if (/CHECK constraint failed: ok = 1|UNIQUE constraint failed: (player_tasks|ledger)/i.test(msg)) throw new HttpError(409, 'already_claimed', 'already claimed');
+    throw e;
+  }
+  return { ...result, ...(operation ? { replayed: false } : {}) };
+}
+
+/**
+ * R16 / SOL-7 Unconditional Daily Supplies recovery floor:
+ * Grants 80 `eclipse_token` once per UTC day (`supply:YYYY-MM-DD`) with no win, spend, Ration, ad, or subscription requirement.
+ */
+export async function claimDailySupplies(
+  db: D1Database,
+  playerId: string,
+  input: { requestId?: string; releaseId?: string } = {},
+  nowMs = Date.now(),
+  scope?: ReleaseScope
+): Promise<Record<string, unknown>> {
+  const supply = utcSupplyPeriod(nowMs);
+  const kind = `task_claim:${supply.key}:${DAILY_SUPPLIES_TASK_ID}`;
+  const operation = input.requestId ? { ...input, requestId: input.requestId } : null;
+  if (operation) {
+    const recorded = await recordedOperation(db, playerId, kind, operation);
+    if (recorded) return recorded;
+  }
+  if (input.releaseId !== scope?.releaseId) {
+    throw new HttpError(400, 'release_context_mismatch', 'task release context differs');
+  }
+  const catalog = await operationCatalog(db, playerId, scope, new Date(nowMs));
+  const rewards: RewardAttachment[] = [{ type: 'currency', currency: 'eclipse_token', amount: DAILY_SUPPLIES_AMOUNT }];
+  const key = `${playerId}:${supply.key}:${DAILY_SUPPLIES_TASK_ID}`;
+  const reason = `task:${DAILY_SUPPLIES_TASK_ID}`;
+  const result = {
+    ...(scope?.releaseId ? { releaseId: scope.releaseId } : {}),
+    ...(catalog ? { catalogSha256: catalog.sha256 } : {}),
+    periodKey: supply.key,
+    taskId: DAILY_SUPPLIES_TASK_ID,
+    amount: DAILY_SUPPLIES_AMOUNT,
+    endsAtMs: supply.endsAtMs,
+    rewards,
+    ...(operation ? { requestId: operation.requestId } : {})
+  };
+  const stmts = await grantStatements(db, playerId, rewards, { keyPrefix: `task:${key}`, reason, catalog });
+  try {
+    await db.batch([
+      ...(scope?.releaseId ? [economicStatement(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date(), undefined, true)] : []),
+      db.prepare("INSERT INTO tx_guard (ok) VALUES (CASE WHEN EXISTS (SELECT 1 FROM players WHERE id = ?1 AND status = 'active') THEN 1 ELSE 0 END)").bind(playerId),
+      db
+        .prepare("INSERT INTO player_tasks (player_id, period_key, task_id, progress, target, claimed, claimed_at) VALUES (?1, ?2, ?3, 1, 1, 1, strftime('%Y-%m-%dT%H:%M:%fZ','now'))")
+        .bind(playerId, supply.key, DAILY_SUPPLIES_TASK_ID),
+      ...stmts,
+      ...(operation ? [operationStatement(db, playerId, kind, operation, result)] : []),
+      db.prepare('DELETE FROM tx_guard')
+    ]);
+  } catch (e) {
+    const replay = operation ? await recordedOperation(db, playerId, kind, operation) : null;
+    if (replay) return replay;
+    if (scope?.releaseId) await requireEconomic(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date());
+    const msg = String(e instanceof Error ? e.message : e);
+    if (/CHECK constraint failed: ok = 1|UNIQUE constraint failed: (player_tasks|ledger)/i.test(msg)) {
+      throw new HttpError(409, 'already_claimed', 'daily supplies already claimed for this UTC day');
+    }
     throw e;
   }
   return { ...result, ...(operation ? { replayed: false } : {}) };

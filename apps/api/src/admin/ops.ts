@@ -3,7 +3,7 @@ import { exportCatalog } from '../content/catalog';
 import { freezeGrantCatalog } from '../content/grant-catalog';
 import type { Context, Hono, MiddlewareHandler } from 'hono';
 import { z } from 'zod';
-import { analyzeBanner, analyzeFlow, BannerConfig, DEFAULT_FLOW, DropConfig, ProgressionConfig, simulateBanner } from '@uomd/economy';
+import { analyzeBanner, analyzeChronological, analyzeFlow, BannerConfig, ChronologicalModelSchema, DEFAULT_FLOW, DropConfig, ProgressionConfig, simulateBanner } from '@uomd/economy';
 import { atLeast, type AdminIdentity, type Role } from '../auth/access';
 import { HttpError } from '../content/store';
 import { audit, auditIfChanged, auditStatement } from '../db/audit';
@@ -306,6 +306,7 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     .strict();
   app.get('/admin/api/economy/defaults', need('viewer'), (c) => c.json({ model: DEFAULT_FLOW }));
   app.post('/admin/api/economy/flow', need('viewer'), async (c) => c.json(analyzeFlow(await body(c, Flow))));
+  app.post('/admin/api/economy/chronological', need('viewer'), async (c) => c.json(analyzeChronological(await body(c, ChronologicalModelSchema))));
 
   // ------------------------------------------------------------------ operations (written by the uomd-ops cron Worker)
   app.get('/admin/api/ops', need('viewer'), async (c) => {

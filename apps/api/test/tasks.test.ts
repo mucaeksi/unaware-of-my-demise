@@ -157,4 +157,41 @@ describe('task engine', () => {
     expect((await admin('/admin/api/config/tasks', { method: 'PUT', body: JSON.stringify({ value: badItem, expectedVersion: cur.version }), headers: json })).status).toBe(422);
     expect((await admin('/admin/api/config/tasks', { method: 'PUT', body: JSON.stringify({ value: CONFIG, expectedVersion: cur.version }), headers: json })).status).toBe(200);
   });
+
+  it('grants unconditional UTC daily supplies recovery floor without wins or token balance and exposes chronological economy analysis', async () => {
+    const { auth } = await signIn(`sub-task-supplies-${rid()}`);
+    expect(await wallet(auth)).toBe(0);
+    const v0 = (await (await game('/api/v1/tasks', { headers: auth })).json()) as {
+      supplies: { periodKey: string; amount: number; claimed: boolean; endsAtMs: number };
+    };
+    expect(v0.supplies).toMatchObject({ amount: 80, claimed: false });
+
+    const reqId = rid();
+    const res1 = await game('/api/v1/tasks/supplies', post({ requestId: reqId }, auth));
+    expect(res1.status).toBe(200);
+    expect(await res1.json()).toMatchObject({ taskId: '_daily_supplies', rewards: [{ type: 'currency', currency: 'eclipse_token', amount: 80 }] });
+    expect(await wallet(auth)).toBe(80);
+
+    // Idempotent replay with same requestId
+    const replay = await game('/api/v1/tasks/supplies', post({ requestId: reqId }, auth));
+    expect(replay.status).toBe(200);
+    expect(await replay.json()).toMatchObject({ replayed: true });
+    expect(await wallet(auth)).toBe(80);
+
+    // Second claim in same UTC day with a new requestId fails with 409 already_claimed
+    const dup = await game('/api/v1/tasks/supplies', post({ requestId: rid() }, auth));
+    expect(dup.status).toBe(409);
+    expect(((await dup.json()) as { error: string }).error).toBe('already_claimed');
+
+    const v1 = (await (await game('/api/v1/tasks', { headers: auth })).json()) as typeof v0;
+    expect(v1.supplies).toMatchObject({ amount: 80, claimed: true });
+
+    const simRes = await admin('/admin/api/economy/chronological', { method: 'POST', body: JSON.stringify({ days: 7 }), headers: json });
+    expect(simRes.status).toBe(200);
+    const simBody = (await simRes.json()) as { singleHeroTotalCost: number; strictFloorHolds: boolean; strictRecoveryDays: number };
+    expect(simBody.singleHeroTotalCost).toBe(740);
+    expect(simBody.strictFloorHolds).toBe(true);
+    expect(simBody.strictRecoveryDays).toBe(1);
+  });
 });
+

@@ -24,7 +24,7 @@ import { ascendCharacter, attuneCharacterShards, convertExcessShards, levelUpCha
 import { DATA_INVENTORY, deleteAccount, exportAccount } from '../account/service';
 import { EntryBody, getEntry, putEntry } from '../entry/service';
 import { activateTeam, deleteTeam, listTeams, saveTeam, TeamBody } from '../teams/service';
-import { claimTask, listTasks } from '../tasks/service';
+import { claimDailySupplies, claimTask, listTasks } from '../tasks/service';
 import { claimMail, listMail, markRead } from '../mail/service';
 import {
   AchievementClaimBody,
@@ -522,6 +522,10 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.post('/api/v1/tasks/claim', async (c) => {
     const input = await body(c, z.object({ releaseId: ReleaseId.optional(), periodKey: z.string().regex(/^[dw]:[0-9T:-]{10,13}(:[a-z][a-z0-9_]{1,79})?$/), taskId: z.string().regex(/^_?[a-z][a-z0-9_]{1,79}$/), requestId: RequestId.optional() }).strict());
     return c.json(await claimTask(c.env.DB, c.get('playerId'), input, Date.now(), releaseScope(c.env, input.releaseId)));
+  });
+  app.post('/api/v1/tasks/supplies', async (c) => {
+    const input = await body(c, RequestOnly, undefined, true);
+    return c.json(await claimDailySupplies(c.env.DB, c.get('playerId'), input, Date.now(), releaseScope(c.env, input.releaseId)));
   });
   app.get('/api/v1/gear', async (c) => {
     const catalog = await operationCatalog(c.env.DB, c.get('playerId'), releaseScope(c.env, selectedRelease(c.req.query('releaseId'))));

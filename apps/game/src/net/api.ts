@@ -155,6 +155,7 @@ export interface TaskView {
 }
 export interface TasksResponse {
   serverTimeMs: number;
+  supplies?: { periodKey: string; amount: number; claimed: boolean; endsAtMs: number };
   daily: null | { periodKey: string; endsAtMs: number; tasks: TaskView[]; completion: { ready: boolean; claimed: boolean; rewards: Attachment[]; rewardNames?: Record<string, string> } };
   weekly: (TaskView & { periodKey: string; endsAtMs: number; running: boolean })[];
 }
@@ -674,6 +675,9 @@ export class GameApi extends EventTarget {
   }
   claimTask(periodKey: string, taskId: string, releaseId?: string): Promise<unknown> {
     return this.mutate('/api/v1/tasks/claim', { periodKey, taskId, ...(releaseId ? { releaseId } : {}) });
+  }
+  claimDailySupplies(releaseId?: string): Promise<{ periodKey: string; amount: number; endsAtMs: number }> {
+    return this.mutate('/api/v1/tasks/supplies', releaseId ? { releaseId } : {});
   }
   exportAccount(): Promise<Record<string, unknown>> {
     return this.call('GET', '/api/v1/account/export');
