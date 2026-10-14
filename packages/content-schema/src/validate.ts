@@ -1,3 +1,4 @@
+import { CATALOG_PATH, MAX_CATALOG_BYTES, EconomyCatalog, catalogContentProblems } from './catalog';
 import { ArtManifest } from './art';
 import { EntryIndex, Prologue } from './entry';
 import type { Predicate } from './effects';
@@ -317,6 +318,14 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
         stages.add(t.stage_id);
         checkEncounter(t.encounter);
       }
+    }
+  }
+  for (const path of files.keys()) if (path.startsWith('catalog/') && path !== CATALOG_PATH) problems.push(`unsupported catalog path ${path}`);
+  if (files.has(CATALOG_PATH)) {
+    if (files.get(CATALOG_PATH)!.byteLength > MAX_CATALOG_BYTES) problems.push('catalog snapshot exceeds the 1 MiB staging budget');
+    else {
+      const catalog = parse(CATALOG_PATH, EconomyCatalog);
+      if (catalog && pack && index) problems.push(...catalogContentProblems(catalog, pack, index));
     }
   }
   if (problems.length > 0) throw new ContentValidationError(problems);

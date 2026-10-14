@@ -9,3 +9,4 @@ export * from './validate';
 export * from './rewards';
 export * from './tasks';
 export * from './library';
+export * from './catalog';

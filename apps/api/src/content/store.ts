@@ -1,4 +1,4 @@
-import { ContentManifest, ContentValidationError, MIN_SNAPSHOT_CLIENT_VERSION, validateContentSet, type Channel } from '@uomd/content-schema';
+import { CATALOG_PATH, ContentManifest, ContentValidationError, MIN_SNAPSHOT_CLIENT_VERSION, validateContentSet, type Channel } from '@uomd/content-schema';
 import { manifestFromEntries, signManifest, type FileEntry } from '@uomd/patch';
 import { compareSemver, importPrivateKey, sha256Hex } from '@uomd/shared';
 import { auditStatement } from '../db/audit';
@@ -255,6 +255,7 @@ export class ContentStore {
     if (row.depends_on) throw new HttpError(409, 'draft_needs_rebuild', 'recreate this legacy dependent draft to publish a self-contained snapshot');
     const files = await this.effectiveFiles(id);
     await this.validate(files);
+    if (files.has(CATALOG_PATH)) throw new HttpError(409, 'catalog_activation_unavailable', 'catalog snapshots can be staged; release-scoped economic activation is not available yet');
     const { signature: _drop, ...unsigned } = JSON.parse(row.manifest_json) as ContentManifest;
     if (unsigned.files.length !== files.size || unsigned.files.some((f) => files.get(f.path) !== f.sha256)) throw new HttpError(409, 'manifest_mismatch', 'draft file index differs from its manifest; recreate the draft');
     const signed = await signManifest(ContentManifest.parse(unsigned), signer.key, signer.kid);
@@ -312,6 +313,7 @@ export class ContentStore {
     const files = await this.effectiveFiles(src.id);
     const entries = await this.fileEntries(files);
     // A kill must remain available even when the current release fails semantic validation.
+    if (opts.mode === 'rollback' && files.has(CATALOG_PATH)) throw new HttpError(409, 'catalog_activation_unavailable', 'catalog economic activation is not available yet');
     if (opts.mode === 'rollback') await this.validate(files);
     const minClient = opts.mode === 'rollback' && compareSemver(srcManifest.compat.min_client, MIN_SNAPSHOT_CLIENT_VERSION) < 0 ? MIN_SNAPSHOT_CLIENT_VERSION : srcManifest.compat.min_client;
     if (srcManifest.compat.max_client && compareSemver(minClient, srcManifest.compat.max_client) > 0) throw new HttpError(409, 'bad_compat', 'rollback source excludes snapshot-capable clients; publish a reviewed compatible snapshot');

@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { api, ApiError, type Me } from '../api';
+import { api, ApiError, type Me, type CatalogSnapshot } from '../api';
 import { ErrorNotice } from '../App';
 
 const TABS = ['Summary', 'Items', 'Gear', 'Rules'] as const;
@@ -15,12 +15,37 @@ export function Catalog({ me, say }: { me: Me; say: (m: string) => void }): Reac
       <div className="row" role="tablist">
         {TABS.map((t) => <button key={t} role="tab" aria-selected={t === tab} className={`btn${t === tab ? ' primary' : ''}`} onClick={() => setTab(t)}>{t}</button>)}
       </div>
-      {tab === 'Summary' ? <Summary /> : null}
+      {tab === 'Summary' ? <><SnapshotExport /><Summary /></> : null}
       {tab === 'Items' ? <Items me={me} say={say} /> : null}
       {tab === 'Gear' ? <Gear /> : null}
       {tab === 'Rules' ? <Rules me={me} say={say} /> : null}
     </>
   );
+}
+
+function SnapshotExport(): ReactNode {
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState<CatalogSnapshot | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const download = async (): Promise<void> => {
+    setBusy(true); setError(null); setResult(null);
+    try {
+      const snapshot = await api<CatalogSnapshot>('/catalog/snapshot');
+      const url = URL.createObjectURL(new Blob([snapshot.json], { type: 'application/json' }));
+      const link = document.createElement('a'); link.href = url; link.download = 'economy.json';
+      document.body.appendChild(link); link.click(); link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      setResult(snapshot);
+    } catch (e) { setError(msg(e)); }
+    finally { setBusy(false); }
+  };
+  return <section className="card catalog-export" aria-labelledby="catalog-export-title">
+    <h3 id="catalog-export-title">Catalog snapshot for a content draft</h3>
+    <p>Export one validated copy of the current character, skill, item, gear, banner and rule definitions. Save it as <code>catalog/economy.json</code> in a complete content draft. Catalog release activation is unavailable until game operations use the same version; live rules still use the editable tables.</p>
+    <button className="btn primary" disabled={busy} onClick={() => void download()}>{busy ? 'Preparing snapshot…' : 'Export catalog snapshot'}</button>
+    {error ? <div role="alert"><p>{error}</p><button className="btn" onClick={() => void download()}>Retry export</button></div> : null}
+    {result ? <div role="status"><p>Snapshot exported · {result.bytes.toLocaleString('en-US')} bytes</p><p>{Object.entries(result.counts).map(([key, count]) => `${key}: ${count}`).join(' · ')}</p><p>SHA-256: <code>{result.sha256}</code></p></div> : null}
+  </section>;
 }
 
 function Summary(): ReactNode {

@@ -98,3 +98,11 @@ export interface AuditEntry {
   target: string | null;
   detail: string;
 }
+
+export interface CatalogSnapshot {
+  path: string;
+  sha256: string;
+  bytes: number;
+  json: string;
+  counts: Record<string, number>;
+}

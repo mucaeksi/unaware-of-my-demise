@@ -37,6 +37,10 @@ Kill also publishes a higher generation and retains the source compatibility exa
 
 Existing frozen battle/rule/party records are not migrated or rebuilt. New source changes do not claim acceptance for an unchanged old AAB, a deployed Worker or a signed device build.
 
+## Catalog staging
+
+R08-B1 adds an optional [catalog snapshot](CATALOG_SNAPSHOT.md) at `catalog/economy.json` with strict shared reference validation and admin/CLI export. Such drafts cannot publish or become rollback targets until release-scoped economic activation is implemented. Legacy catalog-free releases retain the R08-A publication path.
+
 ## Verification and remaining scope
 
 The R08-A evidence record in [DEV_TRACKER.json](DEV_TRACKER.json) records actual checks and source revision. Tests cover composed publications through the real patch manager, compatibility inheritance and rollback/kill, legacy admission and depth, the effective 512-file limit, signed/index agreement and snapshot-versus-overlay validation. Browser checks use actual local game/admin Workers and desktop/touch-phone clients.

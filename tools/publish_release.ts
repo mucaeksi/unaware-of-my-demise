@@ -7,7 +7,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { sha256Hex } from '../packages/shared/src/index';
-import { MEDIA_TYPE_BY_EXTENSION, MIN_SNAPSHOT_CLIENT_VERSION, type AllowedExtension } from '../packages/content-schema/src/index';
+import { CATALOG_PATH, EconomyCatalog, MAX_CATALOG_BYTES, MEDIA_TYPE_BY_EXTENSION, MIN_SNAPSHOT_CLIENT_VERSION, type AllowedExtension } from '../packages/content-schema/src/index';
 import { ROOT } from './lib/fsutil';
 
 const arg = (n: string): string | undefined => {
@@ -15,6 +15,8 @@ const arg = (n: string): string | undefined => {
   return i >= 0 ? process.argv[i + 1] : undefined;
 };
 const need = (n: string): string => arg(n) ?? (() => { throw new Error(`missing --${n}`); })();
+
+if (process.argv.includes('--catalog-snapshot') && process.argv.includes('--publish')) throw new Error('catalog snapshots can be staged only; omit --publish');
 
 const admin = need('admin').replace(/\/$/, '');
 const dir = resolve(ROOT, need('dir'));
@@ -41,6 +43,17 @@ const files = [];
 for (const p of walk(dir).filter((p) => p !== 'release.json')) {
   const bytes = new Uint8Array(readFileSync(join(dir, p)));
   files.push({ path: p, bytes, sha256: await sha256Hex(bytes), type: MEDIA_TYPE_BY_EXTENSION[p.split('.').pop() as AllowedExtension] });
+}
+if (process.argv.includes('--catalog-snapshot')) {
+  if (files.some((f) => f.path === CATALOG_PATH)) throw new Error('catalog/economy.json is already present; omit --catalog-snapshot');
+  const response = await call('/catalog/snapshot', { method: 'GET' });
+  if (!response.ok) throw new Error(`catalog export: HTTP ${response.status} ${await response.text()}`);
+  const snapshot = await response.json() as { json: string; sha256: string; bytes: number };
+  const bytes = new TextEncoder().encode(snapshot.json);
+  if (bytes.byteLength > MAX_CATALOG_BYTES || bytes.byteLength !== snapshot.bytes || await sha256Hex(bytes) !== snapshot.sha256) throw new Error('catalog export size/hash mismatch');
+  EconomyCatalog.parse(JSON.parse(snapshot.json));
+  files.push({ path: CATALOG_PATH, bytes, sha256: snapshot.sha256, type: 'application/json' });
+  console.log(`catalog snapshot: ${snapshot.sha256} (${bytes.byteLength} bytes; draft only)`);
 }
 let created = 0;
 for (const f of files) {

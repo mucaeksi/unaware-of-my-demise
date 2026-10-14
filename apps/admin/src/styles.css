@@ -58,3 +58,7 @@ main:has(.releases-table) { min-width: 0; }
 .releases-table { overflow-x: auto; }
 .releases-table table { min-width: 1050px; }
 .releases-table button { white-space: nowrap; min-height: 44px; }
+
+.catalog-export { margin: 16px 0; }
+.catalog-export code { overflow-wrap: anywhere; }
+.catalog-export button { min-height: 44px; }

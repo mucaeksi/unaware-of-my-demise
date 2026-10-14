@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "75bb738162e1d736d60bfa0917249045836a9416",
+  "sourceCommit": "4100809ab87d324842621c393136ac03ea2ca18d",
   "reviewedAt": "2026-10-14",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R08",
     "status": "IN_PROGRESS",
-    "nextProposed": "R08-B versioned effective D1 catalog and cross-resource authority",
+    "nextProposed": "R08-B2 release-scoped economic catalog reads and transaction authority",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R08-A signed snapshot and compatibility contract locally verified",
-      "detail": "Same-channel draft composition materializes complete snapshots with audit provenance, effective 512-file/D1 chunk limits and pre-sign manifest/index checks. Strict client snapshot reads and base-identical reuse; min/max/schema propagation and source-range intersection. New publications require client 0.1.1; legacy-compatible kill retains source bounds and incompatible legacy rollback fails before writes. 784 tests, lint/types, builds/campaign, 46 adapters and 14 real local-Worker desktop/touch-phone browser cases pass with 25 migrations; screenshots inspected. Versioned D1 catalog/grammar/key/storage and native/deployed acceptance remain open."
+      "title": "R08-B1 catalog export and draft validation locally verified",
+      "detail": "One D1 read batch exports a deterministic closed catalog (20 characters, 80 skills, 18 items, 258 gear, 7 sets, 20 weapon types, 12 banners; 247283 bytes). Admin download/retry and CLI snapshot staging verify counts/hash/budget. Shared exact catalog/pack/chapter checks reject unknown or mismatched definitions, rewards/drops/boss pools, progression gates, selectors and loans. Catalog-bearing publication/rollback is blocked before signing/pointers until runtime binding. 826 tests, lint/types, builds/campaign, 46 adapters; browser 14 plus final desktop/phone 2 pass with 25 migrations and inspected screenshots. No new migration, numeric/creative/live/native change; economic runtime remains R08-B2."
     }
   ],
   "next": [
     {
-      "title": "R08-B \u2014 effective D1 release catalog and reference authority",
-      "detail": "Bind character/skill/item/gear/drop/banner/config definitions to the same effective release; validate all cross-resource identities and preserve historical battle/rule snapshots. Prove one newly declared identity recruits, grows, equips, summons and fights consistently. R08-A snapshot composition/compatibility is delivered; full grammar/capabilities, key rotation, IndexedDB completion/quota/resource contracts remain. R09 continuity, R12 schedules/modes and R16 balance retain separate acceptance."
+      "title": "R08-B2 \u2014 release-scoped economic catalog activation",
+      "detail": "Use the selected release catalog for player catalog/roster, recruitment, progression, gear, gacha, party/loan construction, drops and shared grants. Fence transaction authority and retain original-operation results and historical battle/rule inputs; define bootstrap/current/allowlisted behavior. Remove the B1 publication/rollback block only after a new declared identity recruits, grows, equips, summons and fights consistently. Legacy catalog-free behavior, full grammar/capabilities, keys, IndexedDB quota/resource contracts, R09 continuity and native/deployed acceptance remain explicit."
     },
     {
       "title": "R06 \u2014 remaining reviewed combat semantics",
@@ -1067,6 +1067,28 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R08-B1-20261014",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "4100809ab87d324842621c393136ac03ea2ca18d",
+      "verifiedAt": "2026-10-14T05:24:34.071668+00:00",
+      "scope": "R08-B1 working tree: a closed EconomyCatalog schema reuses existing economy schemas, with bounded typed character/skill/item/weapon/armor/accessory/set/banner/config definitions. Eight D1 SELECTs in one read batch export ordered canonical JSON with SHA-256, UTF-8 bytes and counts; limit-plus-one rows and strict unknown-config/data handling fail with explicit 503 and no repair. Canonical seed exports 20 characters / 80 skills / 18 items / 258 gear / 7 sets / 20 weapon types / 12 banners, 247283 bytes within 1 MiB. Raw uncompiled skill source remains excluded; compiled pack identities/names/stats/growth/role/element/rarity/formation agree. Source banner tags remain inert provenance; declared executable pools validate identities/kinds/rarities. Shared Worker/device staging validation checks duplicate/unknown/retired references, item/gear/pool/dismantle/reroll/task/progression rules and exact chapter reward/drop/boss/selector/loan/gate references. Prototype-inherited dictionary properties cannot substitute for declared drop tables. Catalog-free legacy behavior remains; catalog-bearing drafts and rollback sources cannot activate until economic readers/guards are versioned. Private draft bytes survive live edits, unsigned manifests record exact object hashes, and blocked publication leaves signing/audit/pointers unchanged. Admin export loading/error/retry/download/hash/count feedback and CLI --catalog-snapshot hash/schema verification are exercised. CLI combines no publish with snapshot export; guard runs before uploads. Forty-two new D1/schema cases; the initial unvalidated catalog regression failed before correction, and review caught/fixed the constructor-name lookup. All 826 application/tool tests pass in the final standalone run; lint/types, game/admin builds, campaign compilation and 46 adapters pass. Browser matrix 14 passes (admin 10 / catalog 2 / release-snapshot 2), plus final focused desktop/touch-phone catalog 2 pass with page-error checks and all 25 migrations. Downloaded bytes parse and hash correctly; actual CLI stages 200-file complete drafts, admin Publish fails explicitly, public draft objects remain 404 and current manifest is unchanged. Export/staging screenshots inspected. An old audit assertion assumed the first publication stayed in the latest 100 rows; uploads displaced it, so the scenario now asserts its actual asset edit and character edit. Earlier overloaded full runs hit existing 5-second integration/crypto timeouts during simultaneous browser/build/graph work; final standalone suite passes without timeout/assertion changes. The accessory source reroll cost is an item/quantity object, retained without changing canon values. Graphify refreshed 3217 nodes/8453 edges/156 communities, navigation checked against source. No migration, economic activation, tuning, paid media, formal audit, deployed or signed-device acceptance. R08-B2 must bind all economic readers and transaction authority and prove the new-identity lifecycle before removing the activation block.",
+      "testIds": [
+        "apps/api/test/catalog-snapshot.test.ts",
+        "tests/e2e/catalog-snapshot.spec.ts",
+        "tests/e2e/admin.spec.ts",
+        "tests/e2e/release-snapshot.spec.ts",
+        "npm test",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build:campaign",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1559,7 +1581,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "One versioned server/client catalog, finite complete data grammar and safe bounded patch storage/compatibility.",
-      "implemented": "R08-A locally verifies same-channel composition into complete signed snapshots, exact snapshot-versus-legacy-base reads, base-identical reuse, min/max/schema authoring and propagation, compatibility intersections and rollback/kill bounds. New publication floor is client 0.1.1; older binaries reject before download and require a new AAB. Effective 512-file/100-parameter limits, manifest/index agreement, legacy chain guards and draft recreation are tested. Versioned D1 catalog/new identity lifecycle, full grammar/capabilities, keys, IndexedDB transaction completion, quota/resources/cache and native/deployed acceptance remain open.",
+      "implemented": "R08-A locally verifies same-channel composition into complete signed snapshots, exact snapshot-versus-legacy-base reads, base-identical reuse, min/max/schema authoring and propagation, compatibility intersections and rollback/kill bounds. New publication floor is client 0.1.1; older binaries reject before download and require a new AAB. Effective 512-file/100-parameter limits, manifest/index agreement, legacy chain guards and draft recreation are tested. Versioned D1 catalog/new identity lifecycle, full grammar/capabilities, keys, IndexedDB transaction completion, quota/resources/cache and native/deployed acceptance remain open. R08-B1 now exports/stages closed catalog documents from eight D1 definition tables, with strict shared catalog/pack/chapter reference validation, admin download/retry and CLI hash/schema verification. Publication and rollback into catalog-bearing releases are explicitly blocked until all economic operations read that version. Legacy catalog-free operations still read editable D1; new-identity lifecycle is not accepted.",
       "dependsOn": [
         "R02",
         "R03",
@@ -1575,14 +1597,18 @@
         "apps/game/src/content",
         "tools/publish_release.ts",
         "tools/make_release.ts",
-        "docs/CONTENT_RELEASE_CONTRACT.md"
+        "docs/CONTENT_RELEASE_CONTRACT.md",
+        "packages/content-schema/src/catalog.ts",
+        "apps/api/src/content/catalog.ts",
+        "docs/CATALOG_SNAPSHOT.md"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
         "E-R07-C2-20261013",
-        "E-R08-A-20261014"
+        "E-R08-A-20261014",
+        "E-R08-B1-20261014"
       ],
       "blockerIds": []
     },

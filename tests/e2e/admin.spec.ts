@@ -128,7 +128,7 @@ test.describe('UOMD Control Center (admin SPA + API, local stack with a test-onl
     // audit: the edits above are recorded, append-only
     await page.getByRole('button', { name: 'Audit' }).click();
     await expect(page.getByRole('cell', { name: 'character.update' }).first()).toBeVisible();
-    await expect(page.getByRole('cell', { name: 'release.publish' }).first()).toBeVisible();
+    await expect(page.getByRole('row').filter({ hasText: probe }).getByRole('cell', { name: 'asset.upsert', exact: true })).toBeVisible();
   });
   test('monitoring follows real callbacks, polls automatically and marks failed refreshes', async ({ page }, info) => {
     await page.setExtraHTTPHeaders({ 'Cf-Access-Jwt-Assertion': jwt() });

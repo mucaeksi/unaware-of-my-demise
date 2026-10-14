@@ -1,3 +1,4 @@
+import { exportCatalog } from '../content/catalog';
 import type { Context, Hono, MiddlewareHandler } from 'hono';
 import { z } from 'zod';
 import { analyzeBanner, analyzeFlow, BannerConfig, DEFAULT_FLOW, DropConfig, ProgressionConfig, simulateBanner } from '@uomd/economy';
@@ -245,6 +246,7 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
   });
 
   // ------------------------------------------------------------------ catalog and tunable rules
+  app.get('/admin/api/catalog/snapshot', need('viewer'), async (c) => c.json(await exportCatalog(c.env.DB)));
   app.get('/admin/api/catalog/summary', need('viewer'), async (c) => {
     const db = c.env.DB;
     const [items, gear, sets] = await Promise.all([
