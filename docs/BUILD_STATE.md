@@ -1,6 +1,6 @@
 # Build state — evidence and current gaps
 
-Reconciled **2026-10-14** for R08 completion working tree based on `0f2f3f11403942ef4b58f8691f2f06e8699d4a03`. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) records exact scope/evidence. R08 is source complete and locally verified; R09 is deliberately not started. Subsequent implementation and all creative production pass to Argon 4 through Antigravity after the final documentation push.
+Reconciled **2026-10-14** for R08 completion working tree based on `0f2f3f11403942ef4b58f8691f2f06e8699d4a03`. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) records exact scope/evidence. R08 is source complete and locally verified; R09 is deliberately not started. R08 was pushed as `a181a92248beacadf6bfb0444032943b057adea0`; the enclosing documentation commit completes the handoff. Subsequent implementation and all creative production pass to Argon 4 through Antigravity.
 
 ## Evidence contract
 
@@ -65,7 +65,7 @@ Historical Actions runs, browser screenshots and staging/backup reports remain h
 - Verify live build commands/path filters/test gates and source tags before claiming current staging results. No live configuration was read in R00. Main pushes may trigger existing pipelines.
 - Ops actively binds **uomd-db-backups**. Preserve it; obsolete decommission instructions are superseded. Configured cron schedules are 03:17 UTC daily and every 15 minutes, with catch-up logic; configuration is not latest-run success.
 - Admin service-binding 401/403 checks verify the Worker's own JWT rejection, not the public Access edge or MFA.
-- Approved Google media budget: **1000 TL/month**, recorded **$20/month**, **$3/batch**, **three paid attempts per asset**. See [media_budget.json](../content/budget/media_budget.json); recheck exchange/provider prices and finish R14 guards before dependent production.
+- Approved media budget (Argon 4 now owns production): **1000 TL/month**, recorded **$20/month**, **$3/batch**, **three paid attempts per asset**. See [media_budget.json](../content/budget/media_budget.json); recheck exchange/provider prices and finish R14 guards before dependent production.
 - Deletion is **POST /api/v1/account/delete**; export is **GET /api/v1/account/export**. Complete field/table/retention coverage remains R11, including battle sessions.
 - Production/public Play rollout is a separate owner gate. Credentials, live permissions and device availability are not inferred from configuration.
 

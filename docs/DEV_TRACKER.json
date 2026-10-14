@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "0f2f3f11403942ef4b58f8691f2f06e8699d4a03",
+  "sourceCommit": "a181a92248beacadf6bfb0444032943b057adea0",
   "reviewedAt": "2026-10-14",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
@@ -40,10 +40,6 @@
       "detail": "Paid-only repeat eligibility is now implemented under the autonomous assignment (R04-C); no historical recovery was applied. Final recovery-floor/payout/boss reward figures, retained/claimed/noncurrency refund and shard/combat ambiguities remain explicit R02/R06/R16 decisions. Local correctness work proceeds where policy is defined."
     },
     {
-      "title": "B-ART — Layout and visual identity decisions",
-      "detail": "Prepare same-content A/B/C layouts and concrete character/costume/studio alternatives before dependent art; review Japanese transcript/casting before final VO."
-    },
-    {
       "title": "B-RESTORE — Owner-held age private key for encrypted restore",
       "detail": "Prepare isolated restore targets/hash/table/FK/ledger/RPO/RTO checks; owner supplies decryption through approved secure handling. A new key or old plaintext drill cannot substitute."
     },
@@ -71,7 +67,7 @@
       "from": "owner",
       "date": "2026-10-11",
       "text": "Finish UI + all infrastructure + admin first; only art production remains afterwards.",
-      "status": "in progress"
+      "status": "Historical order superseded by 2026-10-14 Argon 4/Antigravity full-game handoff; follow README dependencies and budget."
     },
     {
       "from": "owner",
@@ -102,6 +98,12 @@
       "date": "2026-10-11",
       "text": "Control Center login with unawareofmydemise@gmail.com.",
       "status": "done: D-19"
+    },
+    {
+      "from": "owner",
+      "date": "2026-10-14",
+      "text": "Finish R08 and push, then complete README/handoff and push once more; stop before R09. Argon 4 through Antigravity owns all further development, whole-game design, generated images, animation and GitHub delivery.",
+      "status": "R08 delivered; final documentation handoff is the enclosing commit. R09 remains OPEN and not started."
     }
   ],
   "evidence": [
@@ -1191,6 +1193,23 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-ARGON-HANDOFF-20261014",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "a181a92248beacadf6bfb0444032943b057adea0",
+      "verifiedAt": "2026-10-14T16:52:17.078575+00:00",
+      "scope": "Documentation-only handoff working tree based on the recorded R08 delivery; enclosing final docs commit identifies it. Full root README reconciled to current code/evidence with detailed R09 next actions and complete remaining R00–R18 criteria. Owner assigns all further coding/game/UX/art design/image generation/animation/integration/QA/docs/GitHub delivery to Argon 4 through Antigravity. AGENTS/AGENT_RULES/NEXT_STEPS/DECISIONS/tracker/roadmap/build-state aligned; old creative deferral and exclusive media/agent ownership superseded without increased budget or live financial/private/public-release action. Local links/anchors, 19 capability paths/anchors, evidence IDs and 17 four-column roadmap rows checked; 46 adapters and admin development-data build pass. No application source changed after R08; R09 remains OPEN, not started; R15 now OPEN under delegated ownership, no approved production asset claimed. No model session, remote message, provider generation, deployment or native result established.",
+      "testIds": [
+        "local documentation/registry/link/anchor checks",
+        "git diff --check",
+        "python3 tools/sync_codex_skills.py --check",
+        "npm run build -w @uomd/admin"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1252,16 +1271,16 @@
     },
     {
       "id": "B-ART",
-      "level": "OWNER_BLOCKED",
-      "title": "Layout and visual identity decisions",
-      "detail": "Prepare same-content A/B/C layouts and concrete character/costume/studio alternatives before dependent art; review Japanese transcript/casting before final VO.",
+      "level": "UNVERIFIED",
+      "title": "Reviewable layout and visual identity contract",
+      "detail": "Argon 4 owns routine layout, art and animation decisions under the 2026-10-14 assignment. Produce same-content layout comparisons and identity/costume/studio evidence; preserve canon/budget and obtain concrete review for substantial identity/plot changes. Reviewed Japanese transcript/casting and device readability remain acceptance work.",
       "verifiedAt": null
     },
     {
       "id": "B-MEDIA",
       "level": "UNVERIFIED",
       "title": "Provider capability/pricing and safe production pipeline",
-      "detail": "Budget already approved: 1000 TL/month, recorded $20, $3/batch, three attempts/asset. Verify actual Google endpoints/prices/licences and complete R14 reservations/ingest; offline guard work needs no paid call.",
+      "detail": "Budget remains 1000 TL/month, recorded $20, $3/batch, three attempts/asset. Argon 4 through Antigravity owns creative production using actual available tools; earlier Google-only assignment is superseded. Verify chosen endpoints/prices/licences and complete R14 reservations/ingest; offline work needs no paid call. No new paid account/permissions or increased spend is approved by the handoff.",
       "verifiedAt": null
     },
     {
@@ -1314,7 +1333,8 @@
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
-        "E-R00-CHECKS"
+        "E-R00-CHECKS",
+        "E-ARGON-HANDOFF-20261014"
       ],
       "blockerIds": []
     },
@@ -1918,7 +1938,7 @@
     {
       "id": "R15",
       "title": "Approved visual pilot",
-      "taskStatus": "DEFERRED_ASSETS",
+      "taskStatus": "OPEN",
       "implementationStatus": "PARTIAL",
       "required": "Approved original character identity/expressions/poses and initial tutorial/prologue art with device readability.",
       "implemented": "Art Bible, reference/spec/backlog packages and provisional runtime art exist; approved production pilot is incomplete.",
@@ -1943,7 +1963,7 @@
         "B-MEDIA",
         "B-DEVICE"
       ],
-      "deferredReason": "Owner instructed to defer creative/paid asset production until infrastructure is complete."
+      "dependencyNote": "2026-10-14 owner delegated all design/image/animation/game work to Argon 4 through Antigravity. The old blanket creative deferral is superseded; production follows selected layout/safe ingest (R10/R14), budget and actual tool/device evidence. No production pilot has started in this delivery."
     },
     {
       "id": "R16",
