@@ -10,10 +10,10 @@ import { syncEntry } from './sync';
 
 export type SignInResult = 'ok' | 'unavailable' | 'failed';
 
-/** Native Google sign-in (Credential Manager) -> the Worker verifies the ID token. A browser has no verified Google identity. */
+/** Google sign-in (Android Credential Manager or Web Google Identity Services) -> the Worker verifies the ID token. */
 export async function signInWithGoogle(scene: Phaser.Scene): Promise<SignInResult> {
   const identity = Services.identity;
-  if (!identity || identity.kind !== 'native') return 'unavailable';
+  if (!identity || (identity.kind !== 'native' && identity.kind !== 'web')) return 'unavailable';
   try {
     const token = await identity.getIdToken();
     await Services.api.signInWithIdToken(token);

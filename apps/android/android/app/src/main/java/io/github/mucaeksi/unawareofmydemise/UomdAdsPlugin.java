@@ -28,46 +28,92 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @CapacitorPlugin(name = "UomdAds")
 public class UomdAdsPlugin extends Plugin {
     private final AtomicBoolean initialised = new AtomicBoolean(false);
+    private volatile boolean underAgeOfConsent = false;
+    private volatile boolean consentWithdrawn = false;
     private RewardedAd loaded;
+
+    @Override
+    protected void handleOnDestroy() {
+        loaded = null;
+        super.handleOnDestroy();
+    }
 
     private ConsentInformation consent() {
         return UserMessagingPlatform.getConsentInformation(getContext());
     }
 
-    private void startSdk() {
-        if (!initialised.compareAndSet(false, true)) return;
+    private void applyRequestConfiguration() {
         MobileAds.setRequestConfiguration(
             new RequestConfiguration.Builder()
-                // conservative defaults: teen content ceiling; the age of consent is not assumed (UMP decides)
+                // Explicit audience policy: teen content ceiling (13+ target audience), not child-directed, respects under-age-of-consent tag
                 .setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_T)
+                .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_FALSE)
+                .setTagForUnderAgeOfConsent(
+                    underAgeOfConsent
+                        ? RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_TRUE
+                        : RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_FALSE
+                )
                 .build()
         );
+    }
+
+    private void startSdk() {
+        applyRequestConfiguration();
+        if (!initialised.compareAndSet(false, true)) return;
         new Thread(() -> MobileAds.initialize(getContext(), status -> { })).start();
+    }
+
+    private String mapConsentStatus(ConsentInformation ci) {
+        if (consentWithdrawn) return "withdrawn";
+        if (underAgeOfConsent) return "denied";
+        int st = ci.getConsentStatus();
+        if (st == ConsentInformation.ConsentStatus.OBTAINED) return "OBTAINED";
+        if (st == ConsentInformation.ConsentStatus.NOT_REQUIRED) return "NOT_REQUIRED";
+        if (st == ConsentInformation.ConsentStatus.REQUIRED) return "REQUIRED";
+        return "UNKNOWN";
+    }
+
+    private boolean canRequestAdsNow() {
+        if (consentWithdrawn || underAgeOfConsent) return false;
+        return consent().canRequestAds();
     }
 
     private JSObject state() {
         ConsentInformation ci = consent();
+        boolean allowed = canRequestAdsNow();
+        if (!allowed) loaded = null;
         JSObject o = new JSObject();
-        o.put("canRequestAds", ci.canRequestAds());
+        o.put("canRequestAds", allowed);
         o.put("privacyOptionsRequired", ci.getPrivacyOptionsRequirementStatus() == ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED);
+        o.put("status", mapConsentStatus(ci));
+        o.put("underAgeOfConsent", underAgeOfConsent);
+        o.put("childDirected", false);
+        o.put("maxAdContentRating", "T");
         return o;
     }
 
     /** Runs the UMP consent flow (shows the form when the user's region requires it), then starts the ads SDK if consent allows. */
     @PluginMethod
     public void init(PluginCall call) {
-        ConsentRequestParameters params = new ConsentRequestParameters.Builder().build();
+        Boolean underAgeArg = call.getBoolean("underAgeOfConsent");
+        if (underAgeArg != null) underAgeOfConsent = underAgeArg;
+        applyRequestConfiguration();
+        ConsentRequestParameters params = new ConsentRequestParameters.Builder()
+            .setTagForUnderAgeOfConsent(underAgeOfConsent)
+            .build();
         getActivity().runOnUiThread(() ->
             consent().requestConsentInfoUpdate(
                 getActivity(),
                 params,
                 () -> UserMessagingPlatform.loadAndShowConsentFormIfRequired(getActivity(), formError -> {
-                    if (consent().canRequestAds()) startSdk();
+                    if (canRequestAdsNow()) startSdk();
+                    else loaded = null;
                     call.resolve(state());
                 }),
                 requestError -> {
                     // offline or the consent service is down: remember the last known consent
-                    if (consent().canRequestAds()) startSdk();
+                    if (canRequestAdsNow()) startSdk();
+                    else loaded = null;
                     call.resolve(state());
                 }
             )
@@ -77,7 +123,25 @@ public class UomdAdsPlugin extends Plugin {
     /** Re-opens the consent choices (a settings entry is required where privacy options are mandatory). */
     @PluginMethod
     public void showPrivacyOptions(PluginCall call) {
-        getActivity().runOnUiThread(() -> UserMessagingPlatform.showPrivacyOptionsForm(getActivity(), formError -> call.resolve(state())));
+        Boolean withdrawArg = call.getBoolean("withdrawConsent");
+        Boolean underAgeArg = call.getBoolean("underAgeOfConsent");
+        if (underAgeArg != null) underAgeOfConsent = underAgeArg;
+        if (Boolean.TRUE.equals(withdrawArg)) {
+            consentWithdrawn = true;
+            loaded = null;
+        } else if (Boolean.FALSE.equals(withdrawArg)) {
+            consentWithdrawn = false;
+        }
+        applyRequestConfiguration();
+        getActivity().runOnUiThread(() ->
+            UserMessagingPlatform.showPrivacyOptionsForm(
+                getActivity(),
+                formError -> {
+                    if (!canRequestAdsNow()) loaded = null;
+                    call.resolve(state());
+                }
+            )
+        );
     }
 
     /** { userId, customData } -> { earned: boolean }. Resolves when the ad is closed. */
@@ -89,7 +153,8 @@ public class UomdAdsPlugin extends Plugin {
             call.reject("userId and customData required", "bad_request");
             return;
         }
-        if (!consent().canRequestAds()) {
+        if (!canRequestAdsNow()) {
+            loaded = null;
             call.reject("Ads are not allowed until consent is given", "no_consent");
             return;
         }
@@ -102,6 +167,11 @@ public class UomdAdsPlugin extends Plugin {
                 new RewardedAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull RewardedAd ad) {
+                        if (!canRequestAdsNow()) {
+                            loaded = null;
+                            call.reject("Ads are not allowed until consent is given", "no_consent");
+                            return;
+                        }
                         loaded = ad;
                         ad.setServerSideVerificationOptions(new ServerSideVerificationOptions.Builder().setUserId(userId).setCustomData(customData).build());
                         AtomicBoolean earned = new AtomicBoolean(false);

@@ -234,4 +234,39 @@ describe('durable RTDN delivery', () => {
     expect((await admin(path, request)).status).toBe(409);
     expect(await db.prepare("SELECT COUNT(*) AS n FROM audit_log WHERE action = 'billing.notification.retry' AND target = ?1").bind(id).first()).toEqual({ n: 1 });
   });
+
+  it('reconciles one-time product RTDN for an unacknowledged purchase row or terminal rejection (R11)', async () => {
+    await db
+      .prepare(
+        "INSERT OR REPLACE INTO shop_products (product_id, kind, title_en, grants, active) VALUES ('tokens_small', 'consumable', 'Small pouch', '[{\"type\":\"currency\",\"currency\":\"eclipse_token\",\"amount\":320}]', 1)"
+      )
+      .run();
+    const { playerId } = await signIn('rtdn-onetime-unack');
+    const token = 'test-onetime-unack-token';
+    const orderId = 'test-onetime-unack-order';
+    fakePlay.products.set(token, {
+      orderId,
+      purchaseState: 'purchased',
+      acknowledged: false,
+      consumed: false,
+      obfuscatedAccountId: await billingTag(playerId),
+      purchaseTimeMs: at.getTime()
+    });
+    // Seed the purchase via verifyPurchase, then simulate an unacknowledged purchase row with no open billing_job
+    await verifyPurchase(db, playClient, playerId, { productId: 'tokens_small', purchaseToken: token }, at);
+    fakePlay.products.get(token)!.consumed = false;
+    fakePlay.products.get(token)!.acknowledged = false;
+    await db.prepare('UPDATE purchases SET acknowledged = 0 WHERE order_id = ?1').bind(orderId).run();
+    await db.prepare('DELETE FROM billing_jobs WHERE order_id = ?1').bind(orderId).run();
+
+    const msg = {
+      message: {
+        messageId: 'rtdn-onetime-unack-msg',
+        data: btoa(JSON.stringify({ oneTimeProductNotification: { purchaseToken: token, sku: 'tokens_small', notificationType: 1 } }))
+      }
+    };
+    expect(await handleRtdn(db, baseEnv, playClient, msg, at)).toEqual({ handled: 'one_time_reconciled' });
+    expect(await db.prepare('SELECT acknowledged FROM purchases WHERE order_id = ?1').bind(orderId).first()).toEqual({ acknowledged: 1 });
+  });
 });
+

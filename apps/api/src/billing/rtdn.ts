@@ -159,11 +159,20 @@ async function processNotification(db: D1Database, env: GameEnv, play: PlayClien
   if (note.oneTimeProductNotification) {
     const token = note.oneTimeProductNotification.purchaseToken;
     const th = await sha256Hex(`play-token:${token}`);
-    const known = await db.prepare("SELECT player_id, product_id FROM billing_jobs WHERE token_hash = ?1 AND kind = 'consumable' AND state = 'pending'").bind(th).first<{ player_id: string; product_id: string }>();
+    let known = await db.prepare("SELECT player_id, product_id FROM billing_jobs WHERE token_hash = ?1 AND kind = 'consumable' AND state <> 'done'").bind(th).first<{ player_id: string; product_id: string }>();
+    known ??= await db.prepare("SELECT player_id, product_id FROM purchases WHERE token_hash = ?1 AND kind = 'consumable' AND acknowledged = 0 ORDER BY granted_at DESC LIMIT 1").bind(th).first<{ player_id: string; product_id: string }>();
     if (known) {
-      const result = await verifyReceipt(env, play, known.player_id, { productId: known.product_id, purchaseToken: token }, now);
-      await log('one_time_reconciled', result.orderId ?? null, { status: result.status });
-      return { handled: 'one_time_reconciled' };
+      try {
+        const result = await verifyReceipt(env, play, known.player_id, { productId: known.product_id, purchaseToken: token }, now);
+        await log('one_time_reconciled', result.orderId ?? null, { type: note.oneTimeProductNotification.notificationType, status: result.status });
+        return { handled: 'one_time_reconciled' };
+      } catch (e) {
+        if (e instanceof HttpError && ['account_mismatch', 'unknown_product', 'account_deleted'].includes(e.code)) {
+          await log('one_time_rejected', null, { type: note.oneTimeProductNotification.notificationType, code: e.code });
+          return { handled: 'one_time_rejected' };
+        }
+        throw e;
+      }
     }
     await log('one_time', null, { type: note.oneTimeProductNotification.notificationType }); // grants happen on the client's verify call
     return { handled: 'noted' };

@@ -7,7 +7,7 @@ import { prefs } from '../platform/prefs';
 import { API_BASE } from '../config';
 import { loadCurrencyName } from '../net/currency';
 import { detectIdentity } from '../net/identity';
-import { initConsent } from '../net/store';
+import { initConsent, initStoreReconciliation } from '../net/store';
 import phaserLogoUrl from '../assets/phaser-pixel-large-shaded.png';
 import { Services } from '../services';
 import type { SplashInit } from './SplashScene';
@@ -39,7 +39,9 @@ export class BootScene extends Phaser.Scene {
       Sfx.init(wa.context, wa.masterVolumeNode ?? wa.context.destination);
     }
     Services.identity = detectIdentity();
-    void initConsent(); // Android: UMP consent form where the region requires it, then the ads SDK (no-op in a browser)
+    await Services.api.hydrateNativeSession();
+    void initConsent(); // Android: UMP consent form where the region requires it, then the ads SDK
+    initStoreReconciliation(); // Startup, resume, auth-switch, and async Play purchase reconciliation
     void loadCurrencyName(API_BASE);
     // the engine credit plays while content and menu art load behind it
     const ready = this.loadEverything();

@@ -1,11 +1,11 @@
-import { REF_W } from '../config';
+import { API_BASE, REF_W } from '../config';
 import { prefs } from '../platform/prefs';
 import { errText, HubScene } from '../ui/hub';
 import { Progress, Services } from '../services';
 import { Button, txt } from '../ui/kit';
 import { T } from '../ui/theme';
 import { ApiError } from '../net/api';
-import { consentState, showPrivacyOptions } from '../net/store';
+import { consentState, showPrivacyOptions, subscribeConsent } from '../net/store';
 
 export class AccountScene extends HubScene {
   protected readonly heading = 'ACCOUNT';
@@ -21,26 +21,41 @@ export class AccountScene extends HubScene {
   override create(): void {
     this.confirmDeleteFor = null;
     this.confirmDeleteRevision = -1;
+    const unsub = subscribeConsent(() => {
+      if (this.sys.isActive()) void this.refresh();
+    });
+    this.events.once('shutdown', unsub);
     super.create();
   }
 
   protected async build(): Promise<void> {
     const api = Services.api;
     const identity = Services.identity;
+    const currentConsent = consentState();
+    const consentTag =
+      currentConsent?.status === 'withdrawn' || currentConsent?.status === 'denied'
+        ? 'PRIVACY: WITHDRAWN'
+        : currentConsent?.status === 'OBTAINED'
+          ? 'PRIVACY: CONSENTED'
+          : 'PRIVACY OPTIONS (ADS)';
     const openPrivacy = (): void => {
-      if (consentState()?.privacyOptionsRequired) {
-        void showPrivacyOptions().then(() => this.say('Privacy choice updated')).catch((e) => this.say(errText(e)));
-      } else {
-        this.say('Privacy options: no personalised ad consent required on this build');
-      }
+      void showPrivacyOptions()
+        .then((next) => this.say(`Privacy choice updated (${next?.status ?? 'saved'})`))
+        .catch((e) => this.say(errText(e)));
+    };
+    const openPrivacyPolicy = (): void => {
+      const url = `${API_BASE || ''}/privacy`;
+      if (typeof window !== 'undefined' && typeof window.open === 'function') window.open(url, '_blank', 'noopener,noreferrer');
+      this.say('Privacy notice & web deletion portal opened');
     };
     if (!api.signedIn) {
       this.add_(txt(this, REF_W / 2, 330, 'Your account is a Google account. Progress, rolls and purchases are bound to it and survive a reinstall.', { fontSize: '36px', wordWrap: { width: 1400 }, align: 'center' }).setOrigin(0.5));
-      const native = identity?.kind === 'native';
-      this.add_(new Button(this, REF_W / 2, 520, { label: 'SIGN IN WITH GOOGLE', w: 760, h: 140, variant: native ? 'hot' : 'dim', onClick: () => void this.signIn() }).setEnabled(native));
-      if (!native) this.add_(txt(this, REF_W / 2, 650, 'Google sign-in runs inside the Android app. This browser build cannot sign in.', { fontSize: '32px', color: T.dim }).setOrigin(0.5));
-      this.add_(new Button(this, REF_W / 2 - 280, 790, { label: 'PRIVACY OPTIONS (ADS)', w: 520, h: 110, fontSize: 28, onClick: openPrivacy }));
-      this.add_(new Button(this, REF_W / 2 + 280, 790, { label: 'SETTINGS', w: 520, h: 110, fontSize: 28, onClick: () => this.scene.start('Title', { openSettings: true }) }));
+      const canSignIn = identity?.kind === 'native' || identity?.kind === 'web';
+      this.add_(new Button(this, REF_W / 2, 520, { label: 'SIGN IN WITH GOOGLE', w: 760, h: 140, variant: canSignIn ? 'hot' : 'dim', onClick: () => void this.signIn() }).setEnabled(canSignIn));
+      if (!canSignIn) this.add_(txt(this, REF_W / 2, 650, 'Google sign-in requires the Android app or configured Google Web Client ID.', { fontSize: '32px', color: T.dim }).setOrigin(0.5));
+      this.add_(new Button(this, REF_W / 2 - 480, 790, { label: consentTag, w: 460, h: 110, fontSize: 24, onClick: openPrivacy }));
+      this.add_(new Button(this, REF_W / 2, 790, { label: 'PRIVACY & DELETE URL', w: 460, h: 110, fontSize: 24, onClick: openPrivacyPolicy }));
+      this.add_(new Button(this, REF_W / 2 + 480, 790, { label: 'SETTINGS', w: 460, h: 110, fontSize: 28, onClick: () => this.scene.start('Title', { openSettings: true }) }));
       return;
     }
     const me = await api.me();
@@ -54,8 +69,9 @@ export class AccountScene extends HubScene {
     this.add_(new Button(this, REF_W / 2 + 330, 590, { label: 'DOWNLOAD SAVE', w: 600, onClick: () => void this.download() }).setEnabled(save.version > 0));
     this.add_(new Button(this, REF_W / 2 - 330, 730, { label: 'EXPORT MY DATA', w: 600, onClick: () => void this.exportData() }));
     this.add_(new Button(this, REF_W / 2 + 330, 730, { label: 'SIGN OUT', w: 600, onClick: () => void this.signOut() }));
-    this.add_(new Button(this, REF_W / 2 - 235, 1010, { label: 'PRIVACY OPTIONS (ADS)', w: 450, h: 96, fontSize: 24, onClick: openPrivacy }));
-    this.add_(new Button(this, REF_W / 2 + 235, 1010, { label: 'SETTINGS', w: 450, h: 96, fontSize: 24, onClick: () => this.scene.start('Title', { openSettings: true }) }));
+    this.add_(new Button(this, REF_W / 2 - 460, 1010, { label: consentTag, w: 430, h: 96, fontSize: 22, onClick: openPrivacy }));
+    this.add_(new Button(this, REF_W / 2, 1010, { label: 'PRIVACY NOTICE', w: 430, h: 96, fontSize: 22, onClick: openPrivacyPolicy }));
+    this.add_(new Button(this, REF_W / 2 + 460, 1010, { label: 'SETTINGS', w: 430, h: 96, fontSize: 24, onClick: () => this.scene.start('Title', { openSettings: true }) }));
     const confirming = this.confirmDeleteFor === me.id && this.confirmDeleteRevision === api.authRevision;
     this.add_(new Button(this, REF_W / 2, 880, { label: confirming ? 'TAP AGAIN TO DELETE FOREVER' : 'DELETE ACCOUNT', sub: confirming ? 'progress, wallet and roster cannot be restored' : undefined, w: 900, h: 130, variant: 'danger', onClick: () => void this.deleteAccount(me.id) }));
   }

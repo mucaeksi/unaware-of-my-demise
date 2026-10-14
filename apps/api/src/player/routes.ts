@@ -13,7 +13,7 @@ import { authenticatePush, handleRtdn } from '../billing/rtdn';
 import { billingTag, listProducts, syncSubscriptionMail } from '../billing/service';
 import { verifyReceipt } from '../billing/recovery';
 import { purchaseHistory } from '../billing/history';
-import { adStatus, beginAd, grantAd, AD } from '../ads/service';
+import { adNonceStatus, adStatus, beginAd, grantAd, recordTestAdNonce, AD } from '../ads/service';
 import { googleKeyFetcher, verifySsv, type SsvKeyFetcher } from '../ads/ssv';
 import { BattleSubmission, getProgress, readSave, startBattle, submitBattle, writeSave } from '../progress/service';
 import { completeStory, StoryCompletion } from '../progress/story';
@@ -21,12 +21,12 @@ import { listRecruitSelectors, RecruitSelection, selectRecruit } from '../recrui
 import { listLibrary, readLibraryEntry } from '../library/service';
 import { ascendGear, characterStats, dismantleGear, GearContext, EquipBody, equipGear, GearLevelBody, GearRequest, levelGear, listGear, LockBody, lockGear, rerollGear, unequipGear } from '../gear/service';
 import { ascendCharacter, levelUpCharacter, LevelUpBody, listCharacters, RequestOnly, upgradeSkill } from '../progression/characters';
-import { deleteAccount, exportAccount } from '../account/service';
+import { DATA_INVENTORY, deleteAccount, exportAccount } from '../account/service';
 import { EntryBody, getEntry, putEntry } from '../entry/service';
 import { activateTeam, deleteTeam, listTeams, saveTeam, TeamBody } from '../teams/service';
 import { claimTask, listTasks } from '../tasks/service';
 import { claimMail, listMail, markRead } from '../mail/service';
-import { issueSession, playerForGoogle, resolveSession, revokeSession, verifyGoogleIdToken } from './auth';
+import { issueSession, playerForGoogle, refreshSession, resolveSession, revokeAllSessions, revokeSession, verifyGoogleIdToken } from './auth';
 import { operationStatus } from './operations';
 
 type AppEnv = { Bindings: GameEnv; Variables: { playerId: string; tokenHash: string } };
@@ -116,6 +116,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   };
   app.use('/api/v1/me', authed);
   app.use('/api/v1/auth/logout', authed);
+  app.use('/api/v1/auth/refresh', authed);
   app.use('/api/v1/wallet', authed);
   app.use('/api/v1/inventory', authed);
   app.use('/api/v1/gacha/*', authed);
@@ -129,7 +130,8 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/teams', authed);
   app.use('/api/v1/teams/*', authed);
   app.use('/api/v1/account', authed);
-  app.use('/api/v1/account/*', authed);
+  app.use('/api/v1/account/export', authed);
+  app.use('/api/v1/account/delete', authed);
   app.use('/api/v1/tasks', authed);
   app.use('/api/v1/tasks/*', authed);
   app.use('/api/v1/gear', authed);
@@ -140,10 +142,43 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.use('/api/v1/save', authed);
   app.use('/api/v1/ads/status', authed);
   app.use('/api/v1/ads/begin', authed);
+  app.use('/api/v1/ads/nonces/*', authed);
   app.use('/api/v1/shop/verify', authed);
   app.use('/api/v1/shop/history', authed);
   app.use('/api/v1/mail/*', authed);
   app.use('/api/v1/operations/*', authed);
+
+  app.get('/api/v1/privacy', (c) =>
+    c.json(
+      {
+        app: 'Unaware of My Demise',
+        packageId: c.env.PLAY_PACKAGE_NAME ?? 'io.github.mucaeksi.unawareofmydemise',
+        dataInventory: DATA_INVENTORY
+      },
+      200,
+      { 'Cache-Control': 'public, max-age=300' }
+    )
+  );
+
+  app.post('/api/v1/account/delete-request', async (c) => {
+    const ip = c.req.header('CF-Connecting-IP') ?? 'local';
+    await perMinute(c.env, `delete-req:${(await sha256Hex(ip)).slice(0, 32)}`, 10);
+    const input = await body(c, z.object({ idToken: z.string().min(100).max(8192).optional(), confirm: z.string().max(20) }).strict());
+    if (input.confirm !== 'DELETE') throw new HttpError(400, 'confirmation_required', 'send {"confirm":"DELETE"} to delete the account');
+    let playerId: string | null;
+    if (input.idToken) {
+      const claims = await verifyGoogleIdToken(input.idToken, c.env, opts.getGoogleKey);
+      const row = await c.env.DB.prepare("SELECT id FROM players WHERE google_sub = ?1 AND status = 'active'").bind(claims.sub).first<{ id: string }>();
+      playerId = row?.id ?? null;
+    } else if (c.req.header('Authorization')) {
+      const s = await resolveSession(c.env.DB, c.req.header('Authorization'));
+      playerId = s.playerId;
+    } else {
+      throw new HttpError(401, 'unauthenticated', 'provide a Google ID token or active session');
+    }
+    if (!playerId) return c.json({ deleted: false, reason: 'no_active_account' });
+    return c.json(await deleteAccount(c.env.DB, playerId, 'DELETE', 'web_request'));
+  });
 
   app.get('/api/v1/operations/:id', async (c) => {
     const id = RequestId.safeParse(c.req.param('id'));
@@ -153,8 +188,24 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     return c.json(await operationStatus(c.env.DB, c.get('playerId'), id.data, path), 200, { 'Cache-Control': 'no-store' });
   });
 
+  app.post('/api/v1/auth/refresh', async (c) => {
+    await perMinute(c.env, `refresh:${c.get('playerId')}`, 20);
+    const input = await body(c, z.object({ idToken: z.string().min(100).max(8192).optional() }).strict(), undefined, true);
+    if (input.idToken) {
+      const claims = await verifyGoogleIdToken(input.idToken, c.env, opts.getGoogleKey);
+      const current = await c.env.DB.prepare('SELECT id, google_sub, status FROM players WHERE id = ?1').bind(c.get('playerId')).first<{ id: string; google_sub: string | null; status: string }>();
+      if (!current || current.status !== 'active' || current.google_sub !== claims.sub) {
+        await revokeSession(c.env.DB, c.get('tokenHash'));
+        throw new HttpError(409, 'account_switched', 'Google account changed; sign in with the selected account');
+      }
+    }
+    return c.json(await refreshSession(c.env.DB, c.get('tokenHash'), c.get('playerId')));
+  });
+
   app.post('/api/v1/auth/logout', async (c) => {
-    await revokeSession(c.env.DB, c.get('tokenHash'));
+    const input = await body(c, z.object({ allDevices: z.boolean().optional() }).strict(), undefined, true);
+    if (input.allDevices) await revokeAllSessions(c.env.DB, c.get('playerId'));
+    else await revokeSession(c.env.DB, c.get('tokenHash'));
     return c.json({ ok: true });
   });
 
@@ -275,6 +326,14 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
 
   app.get('/api/v1/ads/status', async (c) => c.json(await adStatus(c.env.DB, c.get('playerId'))));
 
+  const NonceParam = z.string().regex(/^[A-Za-z0-9_-]{16,64}$/);
+  app.get('/api/v1/ads/nonces/:nonce', async (c) => {
+    const nonce = NonceParam.safeParse(c.req.param('nonce'));
+    if (!nonce.success) throw new HttpError(400, 'bad_request', 'invalid ad nonce');
+    await perMinute(c.env, `adnonce:${c.get('playerId')}`, 60);
+    return c.json(await adNonceStatus(c.env.DB, c.get('playerId'), nonce.data), 200, { 'Cache-Control': 'no-store' });
+  });
+
   // step 1 of a rewarded view: the client gets a one-time nonce and passes it to AdMob as ServerSideVerificationOptions.customData
   app.post('/api/v1/ads/begin', async (c) => {
     await requireFlag(c.env, 'ads.rewarded.enabled');
@@ -293,8 +352,11 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
       console.warn('ssv_rejected', JSON.stringify({ reason: e instanceof Error ? e.message : String(e), keyId: p.get('key_id'), adUnit: p.get('ad_unit'), params: [...p.keys()].join(','), queryLength: url.search.length }));
       throw e;
     });
-    // AdMob's "verify URL" button and test ads are signed with Google's test key: acknowledge, pay nothing
-    if (ssv.viaTestKey) return c.json({ granted: false, reason: 'test_callback' });
+    // AdMob's "verify URL" button and test ads are signed with Google's test key: acknowledge, pay nothing, and record test status on the nonce
+    if (ssv.viaTestKey) {
+      await recordTestAdNonce(c.env.DB, ssv.userId, ssv.customData, ssv.transactionId);
+      return c.json({ granted: false, reason: 'test_callback' });
+    }
     // AdMob's callback carries the numeric unit id (the part after the slash of ca-app-pub-<publisher>/<unit>); configuration may hold either form
     const unitId = (u: string): string => u.slice(u.lastIndexOf('/') + 1);
     // AdMob's URL check can use a live verifier key with a placeholder unit (1234567890).

@@ -1,9 +1,19 @@
 import type { BattleParty } from '@uomd/content-schema';
 import { LibraryEntry, LibraryListing, type LibraryCard } from '@uomd/content-schema';
 import { API_BASE } from '../config';
+import { GoogleSignIn, isNative } from '../platform/native';
 import type { CatalogProgressionConfig } from '../ui/growth';
 import { OperationJournal, type OperationRecord } from './operations';
 import { canonicalJson, sha256Hex } from '@uomd/shared';
+
+export interface AdNonceStatusView {
+  nonce: string;
+  state: 'pending' | 'verified' | 'test_callback' | 'rejected' | 'expired' | 'missing';
+  reward: number | null;
+  reason: string | null;
+  transactionId: string | null;
+  verifiedAt: string | null;
+}
 
 export interface TeamMember {
   characterId: string;
@@ -212,8 +222,39 @@ export class GameApi extends EventTarget {
     return `token:${this.session.token.slice(0, 24)}`;
   }
 
+  /** Hydrate native session from AndroidKeyStore-backed encrypted storage on startup and scrub any legacy localStorage token. */
+  async hydrateNativeSession(): Promise<boolean> {
+    if (!isNative()) return this.signedIn;
+    try {
+      const stored = await GoogleSignIn.readSession();
+      if (stored?.token && stored.expiresAt && Date.parse(stored.expiresAt) > Date.now()) {
+        try { localStorage.removeItem(KEY); } catch { /* ignore */ }
+        this.adoptSession({ token: stored.token, expiresAt: stored.expiresAt, ...(stored.playerId ? { playerId: stored.playerId } : {}) });
+        return true;
+      }
+      const legacyRaw = localStorage.getItem(KEY);
+      if (legacyRaw) {
+        localStorage.removeItem(KEY);
+        const legacy = JSON.parse(legacyRaw) as Partial<Session>;
+        if (legacy?.token && legacy.expiresAt && Date.parse(legacy.expiresAt) > Date.now()) {
+          await GoogleSignIn.writeSession({ token: legacy.token, expiresAt: legacy.expiresAt, ...(legacy.playerId ? { playerId: legacy.playerId } : {}) });
+          this.adoptSession({ token: legacy.token, expiresAt: legacy.expiresAt, ...(legacy.playerId ? { playerId: legacy.playerId } : {}) });
+          return true;
+        }
+      }
+      await GoogleSignIn.clearSession();
+    } catch { /* native session unavailable */ }
+    this.adoptSession(null);
+    return false;
+  }
+
   /** Observe shared selection without writing: an old tab must never delete or restore another tab's bearer. */
   private observeSession(): void {
+    if (isNative()) {
+      try { localStorage.removeItem(KEY); } catch { /* ignore */ }
+      if (this.session && !this.signingIn && !(Date.parse(this.session.expiresAt) > Date.now())) this.adoptSession(null);
+      return;
+    }
     try {
       const raw = localStorage.getItem(KEY);
       if (raw !== this.observedSession) {
@@ -244,6 +285,13 @@ export class GameApi extends EventTarget {
     this.authVersion++;
     this.session = s;
     this.entryWrites = Promise.resolve();
+    if (isNative()) {
+      try { localStorage.removeItem(KEY); this.observedSession = null; } catch { /* ignore */ }
+      if (s) void GoogleSignIn.writeSession({ token: s.token, expiresAt: s.expiresAt, ...(s.playerId ? { playerId: s.playerId } : {}) }).catch(() => {});
+      else void GoogleSignIn.clearSession().catch(() => {});
+      this.dispatchEvent(new Event('auth'));
+      return;
+    }
     try {
       const raw = s ? JSON.stringify(s) : null;
       if (raw) localStorage.setItem(KEY, raw);
@@ -308,11 +356,22 @@ export class GameApi extends EventTarget {
     } finally { if (this.signingIn === attempt) this.signingIn = 0; }
   }
 
-  async signOut(expectedRevision = this.authVersion): Promise<void> {
+  async refreshSession(idToken?: string, expectedRevision = this.authVersion): Promise<{ token: string; expiresAt: string; playerId: string }> {
+    this.observeSession();
+    if (expectedRevision !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The selected account changed');
+    const r = await this.call<{ token: string; expiresAt: string; playerId: string }>('POST', '/api/v1/auth/refresh', idToken ? { idToken } : {}, true, expectedRevision);
+    this.observeSession();
+    if (expectedRevision !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The selected account changed before refresh completed');
+    this.store({ token: r.token, expiresAt: r.expiresAt, playerId: r.playerId });
+    this.verifiedAccount = { version: this.authVersion, id: r.playerId };
+    return r;
+  }
+
+  async signOut(expectedRevision = this.authVersion, allDevices = false): Promise<void> {
     this.observeSession();
     if (expectedRevision !== this.authVersion) throw new ApiError(409, 'auth_changed', 'The selected account changed');
     this.signingIn = 0;
-    const request = this.call('POST', '/api/v1/auth/logout', {}, true, expectedRevision);
+    const request = this.call('POST', '/api/v1/auth/logout', allDevices ? { allDevices: true } : {}, true, expectedRevision);
     this.store(null); // End local authority immediately; the request already captured the old bearer.
     const endingVersion = this.authVersion;
     try {
@@ -650,6 +709,18 @@ export class GameApi extends EventTarget {
   }
   adBegin(): Promise<{ nonce: string }> {
     return this.call('POST', '/api/v1/ads/begin', {});
+  }
+  async adNonceStatus(nonce: string, expectedRevision = this.authRevision): Promise<AdNonceStatusView> {
+    const result = await this.call<AdNonceStatusView>('GET', `/api/v1/ads/nonces/${encodeURIComponent(nonce)}`, undefined, true, expectedRevision);
+    if (!result || result.nonce !== nonce || !['pending', 'verified', 'test_callback', 'rejected', 'expired', 'missing'].includes(result.state))
+      throw new ApiError(503, 'invalid_response', 'Ad verification status is unavailable');
+    return result;
+  }
+  privacyNotice(): Promise<Record<string, unknown>> {
+    return this.call('GET', '/api/v1/privacy', undefined, false);
+  }
+  requestAccountDeletion(idToken: string, confirm = 'DELETE'): Promise<{ deleted: true; playerId: string }> {
+    return this.call('POST', '/api/v1/account/delete-request', { idToken, confirm }, false);
   }
   async flags(): Promise<Record<string, { enabled: boolean; value: unknown }>> {
     return (await this.call<{ flags: Record<string, { enabled: boolean; value: unknown }> }>('GET', '/api/v1/flags', undefined, false)).flags;

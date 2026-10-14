@@ -132,10 +132,10 @@ export class TitleScene extends Phaser.Scene {
     const insets = safeInsets(this);
     const mx = 500 + insets.left;
     const signedIn = Services.api.signedIn;
-    const native = Services.identity?.kind === 'native';
+    const canSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
     if (signedIn) {
       new Button(this, mx, 640, { label: S.menu.cont, sub: S.menu.contSub, w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.enter() });
-    } else if (native) {
+    } else if (canSignIn) {
       new Button(this, mx, 640, { label: S.menu.signIn, sub: S.menu.signInSub, w: 640, h: 128, fontSize: 38, variant: 'hot', onClick: () => void this.enter() });
     } else if (PREVIEW_FLOW_ENABLED) {
       new Button(this, mx, 640, { label: S.menu.preview, sub: S.menu.previewSub, w: 640, h: 128, fontSize: 40, variant: 'hot', onClick: () => void this.enter() });
@@ -155,12 +155,12 @@ export class TitleScene extends Phaser.Scene {
     new Button(this, REF_W - 200 - insets.right, 80 + insets.top, { label: 'COMPANY', w: 340, h: 110, fontSize: 30, onClick: () => this.go('Home') });
   }
 
-  /** Sign in (native) when needed, then continue with the first unfinished entry step. */
+  /** Sign in (native or web GIS) when needed, then continue with the first unfinished entry step. */
   private async enter(): Promise<void> {
     if (this.busy) return;
     this.busy = true;
     void this.startAudio();
-    if (!Services.api.signedIn && Services.identity?.kind === 'native') {
+    if (!Services.api.signedIn && (Services.identity?.kind === 'native' || Services.identity?.kind === 'web')) {
       if ((await signInWithGoogle(this)) !== 'ok') {
         this.busy = false;
         return;
@@ -332,14 +332,19 @@ export class TitleScene extends Phaser.Scene {
         }
       },
       {
-        getLabel: () => 'PRIVACY OPTIONS',
+        getLabel: () => {
+          const st = consentState()?.status;
+          return st === 'withdrawn' || st === 'denied' ? 'ADS: WITHDRAWN' : st === 'OBTAINED' ? 'ADS: CONSENTED' : 'PRIVACY OPTIONS';
+        },
         sub: 'Ad Consent',
-        onClick: () => {
-          if (consentState()?.privacyOptionsRequired) {
-            void showPrivacyOptions().then(() => toast(this, 'Privacy choice updated')).catch((e: unknown) => toast(this, String(e instanceof Error ? e.message : e)));
-          } else {
-            toast(this, 'Privacy options: no personalised ad consent required on this build');
-          }
+        onClick: (btn) => {
+          void showPrivacyOptions()
+            .then((next) => {
+              const st = next?.status;
+              btn.setLabel(st === 'withdrawn' || st === 'denied' ? 'ADS: WITHDRAWN' : st === 'OBTAINED' ? 'ADS: CONSENTED' : 'PRIVACY OPTIONS');
+              toast(this, `Privacy choice updated (${st ?? 'saved'})`);
+            })
+            .catch((e: unknown) => toast(this, String(e instanceof Error ? e.message : e)));
         }
       }
     ];

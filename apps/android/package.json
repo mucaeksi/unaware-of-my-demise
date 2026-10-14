@@ -5,10 +5,11 @@
   "type": "module",
   "description": "Capacitor Android shell of Unaware of My Demise (native Google sign-in, Play Billing, AdMob/UMP bridges). The native project in ./android is committed and reproducible in CI.",
   "scripts": {
+    "check:release": "tsx ../../tools/check_android_release.ts",
     "build:web": "VITE_API_BASE=${UOMD_API_BASE:-https://uomd-game-staging.muratcaneksiii.workers.dev} VITE_CONTENT_CHANNEL=${UOMD_CHANNEL:-staging} VITE_PATCH_LAB=false VITE_PREVIEW_FLOW=false npm run build -w @uomd/game --prefix ../..",
     "sync": "npm run build:web && cap sync android",
     "apk": "npm run sync && cd android && ./gradlew assembleDebug",
-    "aab": "npm run sync && cd android && ./gradlew bundleRelease"
+    "aab": "npm run check:release && npm run sync && cd android && ./gradlew bundleRelease"
   },
   "dependencies": {
     "@capacitor/android": "8.5.3",

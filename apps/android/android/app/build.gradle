@@ -40,9 +40,34 @@ android {
         }
         release {
             minifyEnabled false
-            buildConfigField "String", "REWARDED_UNIT_ID", "\"" + (System.getenv("UOMD_ADMOB_REWARDED_UNIT") ?: "ca-app-pub-4258559369390965/3553164322") + "\""
+            def releaseAdUnit = System.getenv("UOMD_ADMOB_REWARDED_UNIT") ?: "ca-app-pub-4258559369390965/3553164322"
+            buildConfigField "String", "REWARDED_UNIT_ID", "\"" + releaseAdUnit + "\""
             if (System.getenv("UOMD_KEYSTORE_FILE")) signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+gradle.taskGraph.whenReady { graph ->
+    def isReleaseTask = graph.allTasks.any { t -> t.name =~ /(bundle|assemble).*Release/ }
+    if (isReleaseTask && System.getenv("UOMD_ALLOW_UNSIGNED_RELEASE") != "true") {
+        def ks = System.getenv("UOMD_KEYSTORE_FILE")
+        def ksPass = System.getenv("UOMD_KEYSTORE_PASSWORD")
+        def verRaw = System.getenv("UOMD_VERSION_CODE")
+        def adUnit = System.getenv("UOMD_ADMOB_REWARDED_UNIT") ?: "ca-app-pub-4258559369390965/3553164322"
+        def channel = System.getenv("UOMD_CHANNEL") ?: "staging"
+        def apiBase = System.getenv("UOMD_API_BASE") ?: ""
+        if (!ks || !file(ks).exists() || !ksPass) {
+            throw new GradleException("Release build blocked: UOMD_KEYSTORE_FILE and UOMD_KEYSTORE_PASSWORD are required for signed release bundles.")
+        }
+        if (!verRaw || !verRaw.isInteger() || Integer.parseInt(verRaw) < 1) {
+            throw new GradleException("Release build blocked: UOMD_VERSION_CODE must be an explicit positive integer.")
+        }
+        if (adUnit.contains("3940256099942544")) {
+            throw new GradleException("Release build blocked: Google sample test AdMob unit ID is forbidden in release builds.")
+        }
+        if (channel == "production" && (apiBase.contains("staging") || apiBase.contains("localhost") || apiBase.contains("127.0.0.1"))) {
+            throw new GradleException("Release build blocked: production channel cannot target a staging or localhost API_BASE.")
         }
     }
 }

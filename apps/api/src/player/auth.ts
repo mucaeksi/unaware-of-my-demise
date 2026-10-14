@@ -63,6 +63,8 @@ export interface PlayerRef {
   displayName: string | null;
 }
 
+import { reapplyAccountDeletions } from '../account/service';
+
 /**
  * Finds or creates the player for a Google subject. A new player receives the free-start roster (Mahmut and Fadyme: the
  * `characters` rows whose acquisition is `free_start`) in the same transaction as the account.
@@ -71,6 +73,13 @@ export async function playerForGoogle(db: D1Database, claims: GoogleClaims, cont
   const find = (): Promise<{ id: string; display_name: string | null; status: string } | null> =>
     db.prepare('SELECT id, display_name, status FROM players WHERE google_sub = ?1').bind(claims.sub).first();
   let row = await find();
+  if (row) {
+    const tombstoned = await db.prepare("SELECT 1 AS ok FROM audit_log WHERE action = 'account.delete' AND target = ?1 LIMIT 1").bind(row.id).first();
+    if (tombstoned || row.status === 'deleted') {
+      await reapplyAccountDeletions(db, [row.id]);
+      row = await find();
+    }
+  }
   let isNew = false;
   if (!row) {
     const id = `p_${crypto.randomUUID().replaceAll('-', '')}`;
@@ -113,6 +122,27 @@ export async function issueSession(db: D1Database, playerId: string, now = new D
   return { token, expiresAt };
 }
 
+/** Rotates an active session bearer token atomically (revokes the current token hash and issues a new one). */
+export async function refreshSession(db: D1Database, tokenHash: string, playerId: string, now = new Date()): Promise<{ token: string; expiresAt: string; playerId: string }> {
+  const token = randomToken();
+  const nextHash = await sha256Hex(token);
+  const expiresAt = new Date(now.getTime() + SESSION_TTL_DAYS * 86_400_000).toISOString();
+  try {
+    await db.batch([
+      db.prepare("UPDATE sessions SET revoked_at = ?3 WHERE token_hash = ?1 AND player_id = ?2 AND revoked_at IS NULL AND expires_at > ?3").bind(tokenHash, playerId, now.toISOString()),
+      db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
+      db.prepare("INSERT INTO tx_guard (ok) VALUES (CASE WHEN EXISTS (SELECT 1 FROM players WHERE id = ?1 AND status = 'active') AND NOT EXISTS (SELECT 1 FROM audit_log WHERE action = 'account.delete' AND target = ?1) THEN 1 ELSE 0 END)").bind(playerId),
+      db.prepare('INSERT INTO sessions (token_hash, player_id, created_at, expires_at, last_used_at) VALUES (?1, ?2, ?3, ?4, ?3)').bind(nextHash, playerId, now.toISOString(), expiresAt),
+      db.prepare('UPDATE players SET last_seen_at = ?2 WHERE id = ?1').bind(playerId, now.toISOString()),
+      db.prepare('DELETE FROM tx_guard')
+    ]);
+  } catch (e) {
+    if (/CHECK constraint failed: ok = 1/i.test(String(e))) throw new HttpError(401, 'unauthenticated', 'session could not be refreshed');
+    throw e;
+  }
+  return { token, expiresAt, playerId };
+}
+
 /** Resolves a bearer token to an active player or throws 401. Touches `last_used_at` at most once per hour. */
 export async function resolveSession(db: D1Database, authorization: string | undefined, now = new Date()): Promise<{ playerId: string; tokenHash: string }> {
   const m = /^Bearer (uomd1\.[A-Za-z0-9_-]{40,60})$/.exec(authorization ?? '');
@@ -121,7 +151,8 @@ export async function resolveSession(db: D1Database, authorization: string | und
   const row = await db
     .prepare(
       `SELECT s.player_id AS player_id, s.last_used_at AS last_used_at FROM sessions s JOIN players p ON p.id = s.player_id
-       WHERE s.token_hash = ?1 AND s.revoked_at IS NULL AND s.expires_at > ?2 AND p.status = 'active'`
+       WHERE s.token_hash = ?1 AND s.revoked_at IS NULL AND s.expires_at > ?2 AND p.status = 'active'
+         AND NOT EXISTS (SELECT 1 FROM audit_log a WHERE a.action = 'account.delete' AND a.target = s.player_id)`
     )
     .bind(tokenHash, now.toISOString())
     .first<{ player_id: string; last_used_at: string }>();
@@ -137,4 +168,9 @@ export async function resolveSession(db: D1Database, authorization: string | und
 
 export async function revokeSession(db: D1Database, tokenHash: string, now = new Date()): Promise<void> {
   await db.prepare('UPDATE sessions SET revoked_at = ?2 WHERE token_hash = ?1 AND revoked_at IS NULL').bind(tokenHash, now.toISOString()).run();
+}
+
+export async function revokeAllSessions(db: D1Database, playerId: string, now = new Date()): Promise<{ revoked: number }> {
+  const r = await db.prepare('UPDATE sessions SET revoked_at = ?2 WHERE player_id = ?1 AND revoked_at IS NULL').bind(playerId, now.toISOString()).run();
+  return { revoked: r.meta.changes ?? 0 };
 }

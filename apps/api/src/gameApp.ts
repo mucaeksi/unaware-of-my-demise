@@ -161,6 +161,22 @@ export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?
 
   registerPlayerRoutes(app, opts);
 
+  app.get('/privacy', (c) =>
+    c.html(
+      `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unaware of My Demise — Privacy &amp; Data Safety</title></head><body style="font-family:Georgia,serif;background:#110d12;color:#f3e9d2;max-width:780px;margin:2rem auto;padding:1.5rem;line-height:1.6"><h1>Unaware of My Demise — Privacy &amp; Data Retention Notice</h1><p>Package: <code>${c.env.PLAY_PACKAGE_NAME ?? 'io.github.mucaeksi.unawareofmydemise'}</code></p><p>Identity is bound exclusively to Google Sign-In (verified Google subject ID and display name). Mutable gameplay data (sessions, wallets, roster, gear, teams, tasks, battle sessions, cloud saves, pending billing tokens and ad nonces) is erased immediately upon account deletion. Financial, randomness and anti-fraud audit ledgers are retained in pseudonymous form (linked only to an unlinked tombstone ID with all Google identifiers removed) for 7 years to satisfy tax, payment-reconciliation and statutory obligations. Deleted accounts are recorded in an append-only tombstone log so backup restoration cannot resurrect erased personal data.</p><p>Audience &amp; Ads Policy: Not directed to children under 13 (<code>tagForChildDirectedTreatment=false</code>, maximum ad content rating <code>T</code>). Ad consent is managed via Google User Messaging Platform (UMP) before any ad SDK request, is retained offline on the device, and can be reviewed or withdrawn at any time from <strong>Account &gt; Privacy Options (Ads)</strong> or <strong>Title &gt; Settings &gt; Privacy Options</strong> without signing in.</p><p>Machine-readable inventory: <a href="/api/v1/privacy" style="color:#d4af37">/api/v1/privacy</a> · Web account deletion request: <a href="/account/delete-request" style="color:#d4af37">/account/delete-request</a></p></body></html>`,
+      200,
+      { 'Cache-Control': 'public, max-age=300' }
+    )
+  );
+
+  app.get('/account/delete-request', (c) =>
+    c.html(
+      `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unaware of My Demise — Delete Account</title></head><body style="font-family:Georgia,serif;background:#110d12;color:#f3e9d2;max-width:780px;margin:2rem auto;padding:1.5rem;line-height:1.6"><h1>Unaware of My Demise — Account Deletion Request</h1><p>You can delete your account and all mutable progression data either inside the app (<strong>Account &gt; Delete Account</strong>) or from the web without reinstalling the app by submitting a verified Google ID token to <code>POST /api/v1/account/delete-request</code> with <code>{"idToken":"&lt;google-id-token&gt;","confirm":"DELETE"}</code>.</p><p>Deleting your game account removes your Google identity link, display name, active sessions, wallet balances, characters, gear, teams, battle sessions and cloud saves immediately. Active Google Play subscriptions must be cancelled separately in <strong>Google Play &gt; Payments &amp; subscriptions</strong>.</p><p>See <a href="/privacy" style="color:#d4af37">Privacy &amp; Data Retention Notice</a> for full details on erased and pseudonymous retained records.</p></body></html>`,
+      200,
+      { 'Cache-Control': 'public, max-age=300' }
+    )
+  );
+
   app.all('/api/*', (c) => c.json({ error: 'not_found', message: 'no such endpoint' }, 404));
   return app;
 }

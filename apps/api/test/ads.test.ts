@@ -182,3 +182,63 @@ describe('currency name', () => {
     expect(await (await game('/api/v1/currency')).json()).toEqual({ id: 'eclipse_token', name: "Bell's Remains" });
   });
 });
+
+describe('nonce-bound ad verification status (R11)', () => {
+  it('reports pending, verified, test_callback, and rejected states for the exact player nonce', async () => {
+    const { auth, playerId } = await signIn(`sub-adnonce-${uid()}`);
+    const other = await signIn(`sub-adnonce-other-${uid()}`);
+
+    // 1. Fresh nonce is pending; another player cannot inspect it (404 unknown_nonce)
+    const { nonce } = (await (await game('/api/v1/ads/begin', post({}, auth))).json()) as { nonce: string };
+    expect(await (await game(`/api/v1/ads/nonces/${nonce}`, { headers: auth })).json()).toMatchObject({
+      nonce,
+      status: 'pending',
+      state: 'pending',
+      reward: 0
+    });
+    expect((await game(`/api/v1/ads/nonces/${nonce}`, { headers: other.auth })).status).toBe(404);
+
+    // 2. Test-key callback marks nonce as test_callback without granting currency
+    const { nonce: testNonce } = (await (await game('/api/v1/ads/begin', post({}, auth))).json()) as { nonce: string };
+    await game(
+      await ssvPath(
+        { ad_unit: ADMOB_UNIT_NUMERIC, custom_data: testNonce, timestamp: String(Date.now()), transaction_id: `tx${uid()}`, user_id: playerId },
+        { test: true }
+      )
+    );
+    expect(await (await game(`/api/v1/ads/nonces/${testNonce}`, { headers: auth })).json()).toMatchObject({
+      nonce: testNonce,
+      status: 'test_callback',
+      state: 'test_callback',
+      reward: 0,
+      reason: 'test_callback'
+    });
+
+    // 3. Production callback marks nonce as verified with reward and transactionId
+    const tx = `tx${uid()}`;
+    await game(
+      await ssvPath({ ad_unit: ADMOB_UNIT_NUMERIC, custom_data: nonce, timestamp: String(Date.now()), transaction_id: tx, user_id: playerId })
+    );
+    expect(await (await game(`/api/v1/ads/nonces/${nonce}`, { headers: auth })).json()).toMatchObject({
+      nonce,
+      status: 'verified',
+      state: 'verified',
+      reward: 30,
+      transactionId: tx
+    });
+
+    // 4. Duplicate transaction on another nonce marks that nonce as rejected
+    const { nonce: dupNonce } = (await (await game('/api/v1/ads/begin', post({}, auth))).json()) as { nonce: string };
+    await game(
+      await ssvPath({ ad_unit: ADMOB_UNIT_NUMERIC, custom_data: dupNonce, timestamp: String(Date.now()), transaction_id: tx, user_id: playerId })
+    );
+    expect(await (await game(`/api/v1/ads/nonces/${dupNonce}`, { headers: auth })).json()).toMatchObject({
+      nonce: dupNonce,
+      status: 'rejected',
+      state: 'rejected',
+      reason: 'duplicate',
+      transactionId: tx
+    });
+  });
+});
+
