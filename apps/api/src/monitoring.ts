@@ -35,10 +35,18 @@ export const requestMonitoring = (service: 'game' | 'admin'): MiddlewareHandler<
   try { c.executionCtx.waitUntil(work); } catch { await work; }
 };
 
-/** Run from the 15-minute operations tick, retaining at most 30 days / 10,000 events. */
-export async function pruneMonitoring(db: D1Database): Promise<void> {
+/** Retention for the operational journal. Each prune deletes at most `pruneBatch` rows per rule, so a backlog drains over ticks. */
+export const MONITOR_RETENTION = { days: 30, maxEvents: 10_000, pruneBatch: 5_000 } as const;
+
+/** Run from the 15-minute operations tick, retaining at most 30 days / 10,000 events. Both deletes walk the `at` index (no full sort). */
+export async function pruneMonitoring(db: D1Database, retention: { days: number; maxEvents: number; pruneBatch: number } = MONITOR_RETENTION): Promise<void> {
   await db.batch([
-    db.prepare("DELETE FROM monitor_events WHERE at < strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-30 days')"),
-    db.prepare('DELETE FROM monitor_events WHERE id IN (SELECT id FROM monitor_events ORDER BY at DESC, id DESC LIMIT -1 OFFSET 10000)')
+    db
+      .prepare("DELETE FROM monitor_events WHERE id IN (SELECT id FROM monitor_events WHERE at < strftime('%Y-%m-%dT%H:%M:%fZ', 'now', ?1) ORDER BY at LIMIT ?2)")
+      .bind(`-${retention.days} days`, retention.pruneBatch),
+    // keep the newest maxEvents by (at, id): ties on the same millisecond cannot leave more than the cap
+    db
+      .prepare('DELETE FROM monitor_events WHERE id IN (SELECT id FROM monitor_events WHERE (at, id) < (SELECT at, id FROM monitor_events ORDER BY at DESC, id DESC LIMIT 1 OFFSET ?1) ORDER BY at, id LIMIT ?2)')
+      .bind(retention.maxEvents - 1, retention.pruneBatch)
   ]);
 }

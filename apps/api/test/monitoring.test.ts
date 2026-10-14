@@ -94,4 +94,43 @@ describe('central monitoring', () => {
     expect(await db.prepare('SELECT COUNT(*) AS n FROM monitor_events').first()).toEqual({ n: 10000 });
     expect(await db.prepare("SELECT id FROM monitor_events WHERE id='event-0'").first()).toBeNull();
   });
+
+  it('prunes at most one bounded batch per rule per tick, oldest first, so a backlog drains over several ticks', async () => {
+    await db.prepare("WITH RECURSIVE n(i) AS (SELECT 0 UNION ALL SELECT i+1 FROM n WHERE i<24) INSERT INTO monitor_events (id,at,service,category,event,severity,method,route,status,reason) SELECT printf('old-%02d', i), printf('2020-01-01T00:00:%02d.000Z', i), 'game','api','api_error','warning','GET','unmatched',404,'http_404' FROM n").run();
+    const retention = { days: 30, maxEvents: 10_000, pruneBatch: 10 };
+    await pruneMonitoring(db, retention);
+    expect((await db.prepare('SELECT MIN(id) AS first, COUNT(*) AS n FROM monitor_events').first())).toEqual({ first: 'old-10', n: 15 });
+    await pruneMonitoring(db, retention);
+    await pruneMonitoring(db, retention);
+    expect(await db.prepare('SELECT COUNT(*) AS n FROM monitor_events').first()).toEqual({ n: 0 });
+  });
+
+  it('reports explicit freshness: newest event, last health/backup evidence and staleness', async () => {
+    await db.prepare('DELETE FROM ops_runs').run();
+    const empty = await (await admin('/admin/api/monitoring')).json() as { freshness: Record<string, unknown> };
+    expect(empty.freshness).toMatchObject({ source: 'd1', newestEventAt: null, lastHealthAt: null, lastGoodBackupAt: null, healthStale: true, backupStale: true, limits: { events: 100 } });
+    await db.prepare("INSERT INTO monitor_events (id,at,service,category,event,severity,method,route,status,reason) VALUES ('fresh-1', strftime('%Y-%m-%dT%H:%M:%fZ','now'), 'game','api','api_error','warning','GET','unmatched',404,'http_404')").run();
+    await db.prepare("INSERT INTO ops_runs (kind, ok, detail_json) VALUES ('backup', 1, '{}'), ('health', 1, '{}')").run();
+    const fresh = await (await admin('/admin/api/monitoring?category=api')).json() as { updatedAt: string; freshness: { generatedAt: string; newestEventAt: string; lastHealthAt: string; lastGoodBackupAt: string; healthStale: boolean; backupStale: boolean } };
+    expect(fresh.freshness.generatedAt).toBe(fresh.updatedAt);
+    expect(fresh.freshness.newestEventAt).toBeTruthy();
+    expect(fresh.freshness.lastHealthAt).toBeTruthy();
+    expect(fresh.freshness.lastGoodBackupAt).toBeTruthy();
+    expect([fresh.freshness.healthStale, fresh.freshness.backupStale]).toEqual([false, false]);
+    await db.prepare('DELETE FROM ops_runs').run();
+  });
+
+  it('journal reads and prunes are index-backed (no full table scan)', async () => {
+    const plan = async (sql: string, ...binds: unknown[]): Promise<string> => (await db.prepare(`EXPLAIN QUERY PLAN ${sql}`).bind(...binds).all<{ detail: string }>()).results.map((r) => r.detail).join(' | ');
+    const scans = (detail: string): boolean => /SCAN monitor_events(?! USING)/.test(detail);
+    for (const [sql, binds] of [
+      ['SELECT * FROM monitor_events ORDER BY at DESC, id DESC LIMIT ?1', [100]],
+      ['SELECT * FROM monitor_events WHERE category = ?1 ORDER BY at DESC, id DESC LIMIT ?2', ['api', 100]],
+      ['SELECT category, severity, COUNT(*) AS count FROM monitor_events WHERE at >= ?1 GROUP BY category, severity', ['2026-01-01']],
+      ["SELECT id FROM monitor_events WHERE at < strftime('%Y-%m-%dT%H:%M:%fZ', 'now', ?1) ORDER BY at LIMIT ?2", ['-30 days', 5000]]
+    ] as const) {
+      const detail = await plan(sql, ...binds);
+      expect(scans(detail), `${sql} => ${detail}`).toBe(false);
+    }
+  });
 });
