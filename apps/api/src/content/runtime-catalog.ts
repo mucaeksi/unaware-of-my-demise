@@ -2,6 +2,7 @@ import { CATALOG_PATH, ContentManifest, EconomyCatalog, MAX_CATALOG_BYTES } from
 import { sha256Hex } from '@uomd/shared';
 import type { GameEnv } from '../env';
 import { ContentStore, HttpError } from './store';
+import { requireEconomic } from './authority';
 
 /** Request-local definitions. Never cache under a channel or fall back after finding a declared catalog. */
 export interface RuntimeCatalog {
@@ -58,4 +59,25 @@ export function characterDefinition(row: EconomyCatalog['characters'][number]) {
 export function gearDefinition(row: EconomyCatalog['gear'][number]) {
   return { ...row, base_json: JSON.stringify(row.base), growth_json: JSON.stringify(row.growth), extra_json: JSON.stringify(row.extra),
     dismantle_json: JSON.stringify(row.dismantle), dismantle_allowed: row.dismantle_allowed ? 1 : 0 };
+}
+
+/** Route context is passed lazily so durable operation recovery runs before release/catalog admission. */
+export interface ReleaseScope extends Pick<GameEnv, 'CONTENT' | 'CONTENT_CHANNEL'> { releaseId?: string }
+export function releaseScope(env: Pick<GameEnv, 'CONTENT' | 'CONTENT_CHANNEL'>, releaseId?: string): ReleaseScope {
+  return { CONTENT: env.CONTENT, CONTENT_CHANNEL: env.CONTENT_CHANNEL, releaseId };
+}
+export async function operationCatalog(db: D1Database, playerId: string, scope?: ReleaseScope, now = new Date()): Promise<RuntimeCatalog | undefined> {
+  if (!scope) return undefined; // internal legacy callers; public routes always supply channel context
+  const env = { ...scope, DB: db };
+  if (!scope.releaseId) {
+    const pointer = await db.prepare('SELECT release_id FROM channel_pointers WHERE channel = ?1').bind(scope.CONTENT_CHANNEL).first<{ release_id: string }>();
+    if (pointer && await loadReleaseCatalog(env, pointer.release_id)) throw new HttpError(409, 'release_required', 'select the installed content release before changing this account');
+    return undefined;
+  }
+  await requireEconomic(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', now);
+  return loadReleaseCatalog(env, scope.releaseId);
+}
+export async function displayCatalog(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, releaseId?: string): Promise<RuntimeCatalog | undefined> {
+  if (!releaseId) releaseId = (await env.DB.prepare('SELECT release_id FROM channel_pointers WHERE channel = ?1').bind(env.CONTENT_CHANNEL).first<{ release_id: string }>())?.release_id;
+  return releaseId ? loadReleaseCatalog(env, releaseId) : undefined;
 }

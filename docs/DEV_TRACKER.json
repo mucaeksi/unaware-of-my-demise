@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "8c05717c2e90d94d233d38835271a16396e5f724",
+  "sourceCommit": "360c33852ff820b07a77e9a5d97d7f1c3cf41792",
   "reviewedAt": "2026-10-14",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R08",
     "status": "IN_PROGRESS",
-    "nextProposed": "R08-B2b remaining economic readers, D1 identity bridge and compatible catalog reader floor",
+    "nextProposed": "R08-B2b2 remaining gear/gacha/team/signup/task/grant contexts and compatible reader floor",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R08-B2a battle catalog runtime locally verified",
-      "detail": "The exact published release catalog binds owned/loan/equipped party inputs, drop rules/pools, character/item/gear grants and battle task events. Manifest/index/hash/byte/UTF-8/schema failures cannot fall back to live authoring tables; original results recover before catalog access and new outcomes disclose the hash. Explicit role-map priority preserves live bonuses after canonical JSON sorting. 851 tests, lint/types, campaign/game/admin builds and 46 adapters pass. Initial browser matrix 7/8 exposed a late title-chip write to a destroyed Text; fixed with captured-target/lifecycle guards. Final desktop catalog/title 2 and touch-phone catalog/First Oath/title 3 pass with 25 migrations; screenshots inspected. No activation, migration, numerical tuning, paid assets or native/deployed acceptance. Next: remaining economic readers/guards, D1 identity support and reader floor."
+      "title": "R08-B2b1 identity storage and recruit/growth locally verified",
+      "detail": "Migration 0026 separates durable player foreign keys from mutable definitions through immutable ID-only registries. Populated/empty migration tests preserve every player field, journal, gear index and deleted-instance AUTOINCREMENT high-water mark. Recruitment and level/ascension/rank operations, selected catalog/roster/stat views and durable client growth intent now use one release; original results recover before changed admission/catalog reads. Declared-only fixture identities recruit, grow, rank, ascend and fight without global definition copies. All 862 tests, lint/types, builds/campaign, 46 adapters and final desktop2/phone3 browser cases pass with 26 migrations; screens inspected. No activation, numerical/canon tuning or live/native acceptance. Remaining paths and reader floor are R08-B2b2."
     }
   ],
   "next": [
     {
-      "title": "R08-B2b \u2014 remaining economic catalog activation prerequisites",
-      "detail": "Bind player catalog/roster/signup, recruitment, character progression, gear/gacha/task claims and non-battle grants to the selected release. Preserve original-result recovery and transaction-time authority; define bootstrap/current/allowlisted/history and cross-catalog task behavior. Bridge the existing player definition foreign keys for new declared IDs, require a reader/client floor accepting explicit role priority, and prove recruit\u2192grow\u2192equip\u2192summon\u2192fight before removing the catalog publication/rollback block. Full grammar/keys/storage and deployed/signed-device acceptance remain separate."
+      "title": "R08-B2b2 \u2014 remaining economic operation contexts",
+      "detail": "Bind signup, gear/gacha/team operations, task claims, non-battle grants and remaining UI metadata consumers to the selected/frozen release as appropriate. Preserve journals, paid obligations and transaction authority; finish bootstrap/current/allowlisted/history/task/retirement/support behavior. Require a compatible catalog reader/client floor and prove the new declared identity equips and summons as well as recruits/grows/fights before removing the publication/rollback block. Full grammar/key/storage and deployed/signed-device acceptance remain separate."
     },
     {
       "title": "R06 \u2014 remaining reviewed combat semantics",
@@ -1113,6 +1113,31 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R08-B2B1-20261014",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "360c33852ff820b07a77e9a5d97d7f1c3cf41792",
+      "verifiedAt": "2026-10-14T10:47:05.870567+00:00",
+      "scope": "R08-B2b1 working tree: migration 0026 creates immutable ID-only character/item/gear registries, seeds all existing authoring identities and registers future legacy inserts. Rebuilt player_stacks/player_chars/player_gear retain every field, constraints, indexes and AUTOINCREMENT sequence, including deleted highest/all instances; journals and authored definitions are not rewritten. Four dedicated real D1 migration tests use isolated legacy 25-migration datasets, exact before/after row comparisons, foreign_key_check, duplicate-slot/nonnegative/player/identity constraints, immutable IDs and both sequence branches. Snapshot shared grants register validated IDs inside the caller transaction without copying definitions globally. Recruitment uses the selected catalog for invitation/companion eligibility, metadata, rarity and duplicate grants; inventory/story gates plus account/release fences remain atomic. Character level/ascension/rank calculations use snapshot XP items, progression/material/fee rules, skills and task events. Fresh unscoped public growth rejects while a catalog is current; explicit inputs bind to operation context, fresh writes fence economic authority and original results recover before admission/catalog loading. Selected public catalog/roster and owned progression/stats retain legacy bootstrap only when unselected and no catalog is current; explicit missing/draft/wrong-channel selections never fall back. Roster/companion client views capture the installed release for metadata/cost/stat/growth requests; the durable operation identity and fresh/recovered result checks include it. Five isolated catalog lifecycle cases stage then explicitly admit unsigned private fixtures behind the unchanged public activation/rollback block: a declared-only companion/material/invitation/gear has no authoring rows, recruits, levels, ranks, ascends and fights; gear mint journaling identifies its exact instance, original results recover after release revocation and catalog loss, mismatched request releases reject and account changes at commit roll back growth/materials/fees. Two client regressions cover release-bound reads and wrong-release result rejection with a retained pending intent. All 862 application/tool tests pass in the final full run (API441/game89/combat93/schema112/economy44/patch31/shared23/story5/tools24); lint/types, campaign/game/admin builds and 46 adapters pass. Health/admin exact migration expectations now include 0026 and 26 applied migrations; initial full-run failures were those stale expectations. Initial synthetic unit art_key lacked a manifest entry; fixture now reuses supplied Iona art without producing assets. Final real local Worker browser desktop growth/catalog2 and touch-phone growth/catalog/First Oath3 pass with all 26 migrations. Captured four view requests and the growth mutation use the installed release; commit-before-response-loss/reload recovers at level3 through original operation status with zero extra mutation POSTs and no duplicate XP use. Full phone chapter still completes without wishes/ads and retains account isolation. Initial desktop growth fixture was correctly disabled by account-level cap1; adding existing account XP to the isolated gift fixes the fixture without tuning rules or weakening assertions. Growth/recruitment screenshots inspected and final affected cases report no unexpected errors. Graphify refreshed 3271 nodes/8542 edges/164 communities; navigation checked against source. No economic activation, canonical numerical/content/media change, paid production, formal audit, deployed or signed-device acceptance. Stable IDs solve persistence, not definition admission or full historical retirement/support policy. Signup/gear/gacha/team/task-claim/non-battle-grant contexts, remaining metadata consumers, reader/client floor, full grammar/keys/storage and full equip/summon lifecycle remain open.",
+      "testIds": [
+        "apps/api/test/catalog-identities.test.ts",
+        "apps/api/test/catalog-lifecycle.test.ts",
+        "apps/api/test/admin.test.ts",
+        "apps/game/src/net/api.test.ts",
+        "tests/e2e/catalog-growth.spec.ts",
+        "tests/e2e/catalog-snapshot.spec.ts",
+        "tests/e2e/first-oath.spec.ts",
+        "npm test",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build:campaign",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1605,7 +1630,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "One versioned server/client catalog, finite complete data grammar and safe bounded patch storage/compatibility.",
-      "implemented": "R08-A locally verifies same-channel composition into complete signed snapshots, exact snapshot-versus-legacy-base reads, base-identical reuse, min/max/schema authoring and propagation, compatibility intersections and rollback/kill bounds. New publication floor is client 0.1.1; older binaries reject before download and require a new AAB. Effective 512-file/100-parameter limits, manifest/index agreement, legacy chain guards and draft recreation are tested. Versioned D1 catalog/new identity lifecycle, full grammar/capabilities, keys, IndexedDB transaction completion, quota/resources/cache and native/deployed acceptance remain open. R08-B1 now exports/stages closed catalog documents from eight D1 definition tables, with strict shared catalog/pack/chapter reference validation, admin download/retry and CLI hash/schema verification. Publication and rollback into catalog-bearing releases are explicitly blocked until all economic operations read that version. Legacy catalog-free operations still read editable D1; new-identity lifecycle is not accepted. R08-B2a binds the dormant battle path to exact request-local catalogs, including party/loan/equipped inputs, drops, grants and task events, with hash provenance, strict failure, existing atomic authority and original recovery. Explicit role matching order preserves bonuses through canonical export. Publication/rollback remain blocked pending the other economic readers, D1 identity support and compatible reader floor; no new-identity acceptance is claimed.",
+      "implemented": "R08-A locally verifies complete same-channel snapshots, strict snapshot/legacy reads, base-identical reuse, bounded files/parameters, manifest/index agreement, dependency guards and min/max/schema propagation with a 0.1.1 snapshot-reader floor. R08-B1 exports/stages closed bounded D1 catalogs with shared exact pack/chapter/reference validation and admin/CLI export. B2a binds battle party/loan/equipped inputs, drops, grants and task events to an exact request-local catalog, preserving atomic authority, hash provenance and original recovery; explicit role priority preserves bonuses after canonical export. B2b1 adds immutable ID-only registries/player foreign keys with data/journal/gear-sequence preservation and binds recruitment, character growth/rank/ascension, metadata/roster/stat views and durable client growth identities to the selected release. Declared-only fixtures recruit/grow/fight without global definition copies. Publication and rollback into catalog-bearing releases remain blocked pending signup/gear/gacha/team/task-claim/non-battle-grant contexts, remaining metadata/support policies and compatible reader floor. Full equip/summon/new-identity lifecycle, grammar/capabilities, keys, quota/resources/cache and deployed/signed-device acceptance remain open.",
       "dependsOn": [
         "R02",
         "R03",
@@ -1625,7 +1650,12 @@
         "packages/content-schema/src/catalog.ts",
         "apps/api/src/content/catalog.ts",
         "docs/CATALOG_SNAPSHOT.md",
-        "apps/api/src/content/runtime-catalog.ts"
+        "apps/api/src/content/runtime-catalog.ts",
+        "apps/api/migrations/0026_catalog_identities.sql",
+        "apps/api/src/db/identities.ts",
+        "apps/api/src/recruitment/service.ts",
+        "apps/api/src/progression/characters.ts",
+        "apps/game/src/net/api.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1634,7 +1664,8 @@
         "E-R07-C2-20261013",
         "E-R08-A-20261014",
         "E-R08-B1-20261014",
-        "E-R08-B2A-20261014"
+        "E-R08-B2A-20261014",
+        "E-R08-B2B1-20261014"
       ],
       "blockerIds": []
     },

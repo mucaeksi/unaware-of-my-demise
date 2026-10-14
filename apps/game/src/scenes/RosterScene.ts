@@ -17,7 +17,8 @@ export class RosterScene extends HubScene {
   }
 
   protected async build(): Promise<void> {
-    const [inv, roster] = await Promise.all([Services.api.inventory(), Services.api.roster()]);
+    const releaseId = await Services.ready().content.activeReleaseId();
+    const [inv, roster] = await Promise.all([Services.api.inventory(), Services.api.roster(releaseId)]);
     const byId = new Map(roster.map((c) => [c.id, c]));
     this.list = inv
       .filter((i) => i.item_type === 'character')

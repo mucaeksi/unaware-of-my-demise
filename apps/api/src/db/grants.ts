@@ -3,6 +3,7 @@ import { CANON, rollAccessory, type AccessoryDef } from '@uomd/economy';
 import { HttpError } from '../content/store';
 import { ledgerStatements } from './ledger';
 import { cryptoRoll } from './rng';
+import { identityStatement } from './identities';
 import { catalogCharacter, catalogGear, type RuntimeCatalog } from '../content/runtime-catalog';
 
 /**
@@ -22,6 +23,7 @@ export async function grantStatements(db: D1Database, playerId: string, atts: re
       if (!c) throw new HttpError(422, 'unknown_item', `character ${a.itemId} does not exist`);
       const shards = CANON.duplicateShards[c.rarity as 3 | 4 | 5] ?? 2;
       out.push(
+        ...(o.catalog ? [identityStatement(db, 'character', a.itemId)] : []),
         characterGrantStatement(db, playerId, a.itemId, shards),
         characterGrantJournalStatement(db, playerId, a.itemId, shards, key, o.reason)
       );
@@ -29,11 +31,11 @@ export async function grantStatements(db: D1Database, playerId: string, atts: re
       const def = o.catalog ? o.catalog.data.items.find((item) => item.item_id === a.itemId && item.status !== 'retired') : await db.prepare("SELECT stack_cap FROM item_defs WHERE item_id = ?1 AND status <> 'retired'").bind(a.itemId).first<{ stack_cap: number }>();
       if (!def) throw new HttpError(422, 'unknown_item', `item ${a.itemId} does not exist`);
       // Record the actual clamped addition inside the same transaction, before changing the stack.
-      out.push(grantJournalStatement(db, playerId, a, key, o.reason,
+      out.push(...(o.catalog ? [identityStatement(db, 'item', a.itemId)] : []), grantJournalStatement(db, playerId, a, key, o.reason,
         "json_object('quantityBefore', COALESCE((SELECT qty FROM player_stacks WHERE player_id = ?1 AND item_id = ?5), 0), 'quantityAdded', MIN(?7 - COALESCE((SELECT qty FROM player_stacks WHERE player_id = ?1 AND item_id = ?5), 0), ?6))", [a.itemId, a.quantity, def.stack_cap]),
         stackAdd(db, playerId, a.itemId, a.quantity, def.stack_cap));
     } else if (a.type === 'gear') {
-      out.push(await gearInstanceStatement(db, playerId, a.gearId, o.catalog), gearGrantJournalStatement(db, playerId, a.gearId, key, o.reason));
+      out.push(...(o.catalog ? [identityStatement(db, 'gear', a.gearId)] : []), await gearInstanceStatement(db, playerId, a.gearId, o.catalog), gearGrantJournalStatement(db, playerId, a.gearId, key, o.reason));
     } else {
       out.push(db.prepare('INSERT INTO player_account (player_id, xp) VALUES (?1, ?2) ON CONFLICT (player_id) DO UPDATE SET xp = xp + ?2').bind(playerId, a.amount),
         grantJournalStatement(db, playerId, a, key, o.reason, "json_object('xpAdded', ?5, 'xpAfter', (SELECT xp FROM player_account WHERE player_id = ?1))", [a.amount]));

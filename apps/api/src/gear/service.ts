@@ -301,6 +301,6 @@ export async function computeCharacterStats(db: D1Database, playerId: string, ch
   return { characterId, level, stats, other: gear.other, equipped: results.map((g) => ({ id: g.id, slot: g.slot, name: g.name_en })), unsupportedPassives: results.filter((g) => gearPassive(g.extra_json)).map((g) => g.gear_id) };
 }
 
-export async function characterStats(db: D1Database, playerId: string, characterId: string): Promise<Record<string, unknown>> {
-  return computeCharacterStats(db, playerId, characterId);
+export async function characterStats(db: D1Database, playerId: string, characterId: string, catalog?: RuntimeCatalog): Promise<Record<string, unknown>> {
+  return computeCharacterStats(db, playerId, characterId, undefined, catalog);
 }

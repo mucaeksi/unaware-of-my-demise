@@ -574,3 +574,27 @@ describe('durable client operations', () => {
     expect(JSON.stringify(storage.records)).not.toContain('private receipt');
   });
 });
+
+describe('selected catalog operation identity', () => {
+  it('keeps the selected release in the durable growth request and rejects a wrong-release result', async () => {
+    const storage = new TestOperationStorage(); const sent: Record<string, unknown>[] = [];
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url.endsWith('/me')) return Response.json({ id: 'player-A' });
+      const input = JSON.parse(init.body as string); sent.push(input);
+      return Response.json({ character: 'iona_mist', level: 2, releaseId: 'rel_other' });
+    }));
+    const api = new GameApi('https://game.test', new OperationJournal(storage));
+    await expect(api.levelUp('iona_mist', [{ itemId: 'bound_chronicle', quantity: 1 }], 'rel_selected')).rejects.toMatchObject({ code: 'invalid_response' });
+    expect(sent[0]).toMatchObject({ releaseId: 'rel_selected' });
+    expect(storage.records[0]).toMatchObject({ state: 'pending', body: { releaseId: 'rel_selected' } });
+  });
+  it('loads roster, costs, progression and stats using the same explicit release', async () => {
+    const calls: string[] = [];
+    vi.stubGlobal('fetch', vi.fn(async (url: string) => {
+      calls.push(url); return Response.json({ characters: [], items: [], gear: [] });
+    }));
+    const api = new GameApi('https://game.test');
+    await Promise.all([api.roster('rel_selected'), api.characters('rel_selected'), api.catalogNames('rel_selected'), api.characterStats('iona_mist', 'rel_selected')]);
+    expect(calls).toHaveLength(4); expect(calls.every((url) => new URL(url).searchParams.get('releaseId') === 'rel_selected')).toBe(true);
+  });
+});

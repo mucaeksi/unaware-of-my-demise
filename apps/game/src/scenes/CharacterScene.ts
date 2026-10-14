@@ -25,7 +25,8 @@ export class CharacterScene extends HubScene {
 
   protected async build(): Promise<void> {
     const api = Services.api;
-    const [mine, roster, names, stacks, gear, st] = await Promise.all([api.characters(), api.roster(), api.catalogNames(), api.stacks(), api.gear(), api.characterStats(this.id).catch(() => null)]);
+    const releaseId = await Services.ready().content.activeReleaseId();
+    const [mine, roster, names, stacks, gear, st] = await Promise.all([api.characters(releaseId), api.roster(releaseId), api.catalogNames(releaseId), api.stacks(), api.gear(), api.characterStats(this.id, releaseId).catch(() => null)]);
     const c = mine.characters.find((x) => x.id === this.id);
     const meta = roster.find((x) => x.id === this.id);
     if (!c || !meta) {
@@ -45,10 +46,10 @@ export class CharacterScene extends HubScene {
 
     const xpItem = api.xpItems.find((i) => (have.get(i.itemId) ?? 0) > 0);
     const canLevel = c.level < c.cap && Boolean(xpItem);
-    this.add_(new Button(this, 340, 600, { label: 'LEVEL UP', sub: xpItem ? `uses 1 ${nm(xpItem.itemId)}` : 'no XP items', w: 400, h: 120, fontSize: 32, variant: 'hot', onClick: () => void this.act(async () => { await api.levelUp(this.id, [{ itemId: (xpItem as { itemId: string }).itemId, quantity: 1 }]); this.say('Level up'); }) }).setEnabled(canLevel));
+    this.add_(new Button(this, 340, 600, { label: 'LEVEL UP', sub: xpItem ? `uses 1 ${nm(xpItem.itemId)}` : 'no XP items', w: 400, h: 120, fontSize: 32, variant: 'hot', onClick: () => void this.act(async () => { await api.levelUp(this.id, [{ itemId: (xpItem as { itemId: string }).itemId, quantity: 1 }], releaseId); this.say('Level up'); }) }).setEnabled(canLevel));
     const asc = c.nextAscension;
     const ascOk = Boolean(asc) && c.level >= c.cap && asc !== null && asc.items.every((i) => (have.get(i.itemId) ?? 0) >= i.quantity);
-    this.add_(new Button(this, 700, 600, { label: 'ASCEND', sub: asc ? `→ cap ${asc.cap} · account Lv ${asc.accountLevel}` : 'fully ascended', w: 400, h: 120, fontSize: 32, onClick: () => void this.act(async () => { await api.ascend(this.id); this.say('Ascended'); }) }).setEnabled(ascOk));
+    this.add_(new Button(this, 700, 600, { label: 'ASCEND', sub: asc ? `→ cap ${asc.cap} · account Lv ${asc.accountLevel}` : 'fully ascended', w: 400, h: 120, fontSize: 32, onClick: () => void this.act(async () => { await api.ascend(this.id, releaseId); this.say('Ascended'); }) }).setEnabled(ascOk));
     if (asc) this.add_(txt(this, 520, 690, `${asc.items.map((i) => `${nm(i.itemId)} ${(have.get(i.itemId) ?? 0)}/${i.quantity}`).join('  ·  ')}  ·  ${Math.ceil(asc.fee)} ${currency.name}`, { fontSize: '26px', color: T.dim }).setOrigin(0.5));
 
     // skills
@@ -60,7 +61,7 @@ export class CharacterScene extends HubScene {
       this.add_(txt(this, 930, y + 20, `${sk.type} · rank ${sk.rank}/${sk.maxRank}`, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
       const n = sk.next;
       const ok = n !== null && c.level >= n.unlockLevel && (have.get(n.itemId) ?? 0) >= n.quantity;
-      this.add_(new Button(this, 1530, y, { label: n ? 'RANK UP' : 'MAX', sub: n ? `${nm(n.itemId)} ×${n.quantity}` : undefined, w: 220, h: 80, fontSize: 24, onClick: () => void this.act(async () => { await api.upgradeSkill(this.id, sk.skillId); this.say(`${sk.name} improved`); }) }).setEnabled(ok));
+      this.add_(new Button(this, 1530, y, { label: n ? 'RANK UP' : 'MAX', sub: n ? `${nm(n.itemId)} ×${n.quantity}` : undefined, w: 220, h: 80, fontSize: 24, onClick: () => void this.act(async () => { await api.upgradeSkill(this.id, sk.skillId, releaseId); this.say(`${sk.name} improved`); }) }).setEnabled(ok));
     });
 
     // gear slots

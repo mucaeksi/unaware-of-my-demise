@@ -340,7 +340,7 @@ export class GameApi extends EventTarget {
       } catch (error) {
         const definite = attempts === 1 && error instanceof ApiError && ([400, 402, 403, 404, 413, 422].includes(error.status)
           || error.status === 409 && ['already_claimed', 'expired', 'revoked', 'period_closed', 'not_done', 'at_cap', 'not_at_cap', 'max_rank', 'max_ascension',
-            'account_level_too_low', 'level_too_low', 'story_gate', 'equipped', 'locked', 'request_id_reused', 'entitlement_unavailable', 'release_not_economic', 'save_conflict', 'story_state_changed', 'selector_state_changed'].includes(error.code));
+            'account_level_too_low', 'level_too_low', 'story_gate', 'equipped', 'locked', 'request_id_reused', 'entitlement_unavailable', 'release_not_economic', 'save_conflict', 'story_state_changed', 'selector_state_changed', 'release_required'].includes(error.code));
         await this.journal.finish(checked.scope, checked.id, definite ? 'rejected' : 'pending', undefined, error instanceof ApiError ? error.code : 'confirmation_pending');
         this.dispatchEvent(new Event('operations'));
         throw error;
@@ -385,7 +385,7 @@ export class GameApi extends EventTarget {
         || typeof value.characterName !== 'string' || value.characterName.length === 0 || value.characterName.length > 80
         || !value.grant || value.grant.copiesAdded !== 1 || !Number.isSafeInteger(value.grant.shardsAdded) || value.grant.shardsAdded < 0
         || !Number.isSafeInteger(value.grant.copiesAfter) || value.grant.copiesAfter < 1 || !Number.isSafeInteger(value.grant.shardsAfter) || value.grant.shardsAfter < value.grant.shardsAdded)
-      || operation.path.startsWith('/api/v1/characters/') && (value.character !== operation.path.split('/')[4] || !Number.isSafeInteger(value.level)
+      || operation.path.startsWith('/api/v1/characters/') && (operation.body.releaseId !== undefined && value.releaseId !== operation.body.releaseId || value.character !== operation.path.split('/')[4] || !Number.isSafeInteger(value.level)
         || operation.path.endsWith('/ascend') && !Number.isSafeInteger(value.ascension)
         || operation.path.endsWith('/upgrade') && (value.skillId !== operation.path.split('/')[6] || !Number.isSafeInteger(value.rank)))
       || operation.path.startsWith('/api/v1/gear/') && (value.id !== Number(operation.path.split('/')[4])
@@ -451,8 +451,8 @@ export class GameApi extends EventTarget {
   async inventory(): Promise<{ item_type: string; item_id: string; copies: number; shards: number }[]> {
     return (await this.call<{ items: { item_type: string; item_id: string; copies: number; shards: number }[] }>('GET', '/api/v1/inventory')).items;
   }
-  async roster(): Promise<{ id: string; name_en: string; rarity: number; element: string; role: string }[]> {
-    return (await this.call<{ characters: { id: string; name_en: string; rarity: number; element: string; role: string }[] }>('GET', '/api/v1/characters', undefined, false)).characters;
+  async roster(releaseId?: string): Promise<{ id: string; name_en: string; rarity: number; element: string; role: string }[]> {
+    return (await this.call<{ characters: { id: string; name_en: string; rarity: number; element: string; role: string }[] }>('GET', `/api/v1/characters${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`, undefined, false)).characters;
   }
   async banners(): Promise<BannerInfo[]> {
     return (await this.call<{ banners: BannerInfo[] }>('GET', '/api/v1/banners', undefined, false)).banners;
@@ -540,20 +540,20 @@ export class GameApi extends EventTarget {
   writeSave(expectedVersion: number, data: Record<string, unknown>): Promise<{ version: number }> {
     return this.mutate('/api/v1/save', { expectedVersion, data }, 'PUT');
   }
-  characters(): Promise<{ account: { level: number; xp: number }; characters: CharacterView[] }> {
-    return this.call('GET', '/api/v1/characters/mine');
+  characters(releaseId?: string): Promise<{ account: { level: number; xp: number }; characters: CharacterView[] }> {
+    return this.call('GET', `/api/v1/characters/mine${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
   }
-  levelUp(id: string, items: { itemId: string; quantity: number }[]): Promise<{ level: number }> {
-    return this.mutate(`/api/v1/characters/${id}/level-up`, { items });
+  levelUp(id: string, items: { itemId: string; quantity: number }[], releaseId?: string): Promise<{ level: number }> {
+    return this.mutate(`/api/v1/characters/${id}/level-up`, { items, ...(releaseId ? { releaseId } : {}) });
   }
-  ascend(id: string): Promise<{ ascension: number }> {
-    return this.mutate(`/api/v1/characters/${id}/ascend`, {});
+  ascend(id: string, releaseId?: string): Promise<{ ascension: number }> {
+    return this.mutate(`/api/v1/characters/${id}/ascend`, releaseId ? { releaseId } : {});
   }
-  upgradeSkill(id: string, skillId: string): Promise<{ rank: number }> {
-    return this.mutate(`/api/v1/characters/${id}/skills/${skillId}/upgrade`, {});
+  upgradeSkill(id: string, skillId: string, releaseId?: string): Promise<{ rank: number }> {
+    return this.mutate(`/api/v1/characters/${id}/skills/${skillId}/upgrade`, releaseId ? { releaseId } : {});
   }
-  characterStats(id: string): Promise<{ level: number; stats: Record<string, number> }> {
-    return this.call('GET', `/api/v1/characters/${id}/stats`);
+  characterStats(id: string, releaseId?: string): Promise<{ level: number; stats: Record<string, number> }> {
+    return this.call('GET', `/api/v1/characters/${id}/stats${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
   }
   async stacks(): Promise<{ item_id: string; qty: number }[]> {
     return (await this.call<{ stacks: { item_id: string; qty: number }[] }>('GET', '/api/v1/stacks')).stacks;
@@ -596,8 +596,8 @@ export class GameApi extends EventTarget {
     if (this.authVersion !== version) throw new ApiError(409, 'auth_changed', 'The previous account was deleted; the current sign-in was kept');
     this.store(null);
   }
-  async catalogNames(): Promise<Map<string, string>> {
-    const c = await this.call<{ items: { item_id: string; name_en: string; xp_value: number | null; kind: string }[]; gear: { gear_id: string; name_en: string }[] }>('GET', '/api/v1/catalog', undefined, false);
+  async catalogNames(releaseId?: string): Promise<Map<string, string>> {
+    const c = await this.call<{ items: { item_id: string; name_en: string; xp_value: number | null; kind: string }[]; gear: { gear_id: string; name_en: string }[] }>('GET', `/api/v1/catalog${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`, undefined, false);
     this.xpItems = c.items.filter((i) => i.kind === 'character_xp' && i.xp_value).map((i) => ({ itemId: i.item_id, xp: i.xp_value as number })).sort((a, b) => a.xp - b.xp);
     return new Map([...c.items.map((i): [string, string] => [i.item_id, i.name_en]), ...c.gear.map((g): [string, string] => [g.gear_id, g.name_en])]);
   }

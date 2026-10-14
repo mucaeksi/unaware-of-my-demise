@@ -5,6 +5,9 @@ import { HttpError } from '../content/store';
 import { stackSpend } from '../db/grants';
 import { balanceOf, ledgerStatements } from '../db/ledger';
 import { taskEventStatements } from '../tasks/service';
+import { catalogCharacter, operationCatalog, type RuntimeCatalog, type ReleaseScope } from '../content/runtime-catalog';
+import { identityStatement } from '../db/identities';
+import { economicStatement, requireEconomic } from '../content/authority';
 
 export async function loadProgressionConfig(db: D1Database): Promise<ProgressionConfig> {
   const row = await db.prepare("SELECT value_json FROM game_config WHERE key = 'progression'").first<{ value_json: string }>();
@@ -65,13 +68,13 @@ function skillViews(cfg: ProgressionConfig, level: number, ranks: Record<string,
   });
 }
 
-export async function listCharacters(db: D1Database, playerId: string): Promise<{ account: Awaited<ReturnType<typeof accountOf>>; characters: CharacterView[] }> {
-  const cfg = await loadProgressionConfig(db);
+export async function listCharacters(db: D1Database, playerId: string, catalog?: RuntimeCatalog): Promise<{ account: Awaited<ReturnType<typeof accountOf>>; characters: CharacterView[] }> {
+  const cfg = catalog?.data.config.progression ?? await loadProgressionConfig(db);
   const account = await accountOf(db, playerId, cfg);
   const owned = (await db.prepare("SELECT item_id FROM player_items WHERE player_id = ?1 AND item_type = 'character' ORDER BY item_id").bind(playerId).all<{ item_id: string }>()).results.map((r) => r.item_id);
   const rows = new Map((await db.prepare('SELECT character_id, level, xp, ascension, skill_ranks, version FROM player_chars WHERE player_id = ?1').bind(playerId).all<CharRow & { character_id: string }>()).results.map((r) => [r.character_id, r]));
-  const skills = (await db.prepare('SELECT skill_id, character_id, type, name_en FROM character_skills ORDER BY skill_id').all<{ skill_id: string; character_id: string; type: string; name_en: string }>()).results;
-  const characters = owned.map((id): CharacterView => {
+  const skills = catalog ? catalog.data.skills : (await db.prepare('SELECT skill_id, character_id, type, name_en FROM character_skills ORDER BY skill_id').all<{ skill_id: string; character_id: string; type: string; name_en: string }>()).results;
+  const characters = owned.filter((id) => !catalog || catalog.data.characters.some((c) => c.id === id && c.status !== 'retired')).map((id): CharacterView => {
     const r = rows.get(id) ?? DEFAULT_ROW;
     const cap = characterLevelCap(cfg, r.ascension, account.level);
     const step = cfg.character.ascension[r.ascension + 1];
@@ -95,13 +98,13 @@ interface Plan {
   fee: number;
   response: Record<string, unknown>;
 }
-type Compute = (ctx: { cfg: ProgressionConfig; row: CharRow; state: CharState; ranks: Record<string, number>; accountLevel: number }) => Promise<Plan> | Plan;
+type Compute = (ctx: { catalog?: RuntimeCatalog; cfg: ProgressionConfig; row: CharRow; state: CharState; ranks: Record<string, number>; accountLevel: number }) => Promise<Plan> | Plan;
 
 /**
  * One atomic, idempotent character upgrade: re-reads the character under optimistic concurrency, lets `compute` decide the new
  * state, then ONE batch applies the state, spends materials and the fee, and records the request. A stale read retries.
  */
-async function characterOp(db: D1Database, playerId: string, characterId: string, input: { requestId: string } & Record<string, unknown>, kind: string, compute: Compute): Promise<Record<string, unknown>> {
+async function characterOp(db: D1Database, playerId: string, characterId: string, input: { requestId: string } & Record<string, unknown>, kind: string, compute: Compute, scope?: ReleaseScope): Promise<Record<string, unknown>> {
   const { requestId } = input;
   const inputJson = canonicalJson(input);
   const stored = async (): Promise<Record<string, unknown> | null> => {
@@ -112,8 +115,11 @@ async function characterOp(db: D1Database, playerId: string, characterId: string
   };
   const first = await stored();
   if (first) return first;
+  if (input.releaseId !== scope?.releaseId) throw new HttpError(400, 'release_context_mismatch', 'the selected release requires matching operation context');
   await ownsCharacter(db, playerId, characterId);
-  const cfg = await loadProgressionConfig(db);
+  const catalog = await operationCatalog(db, playerId, scope);
+  if (catalog) catalogCharacter(catalog, characterId);
+  const cfg = catalog?.data.config.progression ?? await loadProgressionConfig(db);
   for (let attempt = 0; attempt < 5; attempt++) {
     if (attempt > 0) {
       const seen = await stored();
@@ -122,9 +128,11 @@ async function characterOp(db: D1Database, playerId: string, characterId: string
     const existing = await db.prepare('SELECT level, xp, ascension, skill_ranks, version FROM player_chars WHERE player_id = ?1 AND character_id = ?2').bind(playerId, characterId).first<CharRow>();
     const row = existing ?? DEFAULT_ROW;
     const account = await accountOf(db, playerId, cfg);
-    const plan = await compute({ cfg, row, state: { level: row.level, xp: row.xp, ascension: row.ascension }, ranks: JSON.parse(row.skill_ranks) as Record<string, number>, accountLevel: account.level });
-    const response = { ...plan.response, character: characterId, level: plan.state.level, xp: plan.state.xp, ascension: plan.state.ascension, spent: { items: plan.items, fee: plan.fee } };
+    const plan = await compute({ catalog, cfg, row, state: { level: row.level, xp: row.xp, ascension: row.ascension }, ranks: JSON.parse(row.skill_ranks) as Record<string, number>, accountLevel: account.level });
+    const response = { ...plan.response, ...(scope?.releaseId ? { releaseId: scope.releaseId } : {}), ...(catalog ? { catalogSha256: catalog.sha256 } : {}), character: characterId, level: plan.state.level, xp: plan.state.xp, ascension: plan.state.ascension, spent: { items: plan.items, fee: plan.fee } };
     const batch: D1PreparedStatement[] = [
+      ...(scope?.releaseId ? [economicStatement(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date(), undefined, true)] : []),
+      ...(catalog ? [identityStatement(db, 'character', characterId), ...plan.items.map((item) => identityStatement(db, 'item', item.itemId))] : []),
       db.prepare('INSERT OR IGNORE INTO player_chars (player_id, character_id) VALUES (?1, ?2)').bind(playerId, characterId),
       db
         .prepare('UPDATE player_chars SET level = ?3, xp = ?4, ascension = ?5, skill_ranks = ?6, version = version + 1 WHERE player_id = ?1 AND character_id = ?2 AND version = ?7')
@@ -132,7 +140,7 @@ async function characterOp(db: D1Database, playerId: string, characterId: string
       db.prepare('INSERT INTO tx_guard (ok) VALUES (CASE WHEN changes() = 1 THEN 1 ELSE 0 END)'),
       ...plan.items.map((i) => stackSpend(db, playerId, i.itemId, i.quantity)),
       ...(plan.fee > 0 ? ledgerStatements(db, { playerId, currency: 'eclipse_token', delta: -plan.fee, reason: `${kind}:${characterId}`, idempotencyKey: `prog:${playerId}:${requestId}` }) : []),
-      ...(kind === 'level_up' ? await taskEventStatements(db, playerId, { level_ups: 1 }) : []),
+      ...(kind === 'level_up' ? await taskEventStatements(db, playerId, { level_ups: 1 }, Date.now(), catalog?.data.config.tasks) : []),
       db.prepare('INSERT INTO progression_requests (player_id, request_id, kind, result_json, input_json) VALUES (?1, ?2, ?3, ?4, ?5)').bind(playerId, requestId, `${kind}:${characterId}`, JSON.stringify(response), inputJson),
       db.prepare('DELETE FROM tx_guard')
     ];
@@ -141,7 +149,11 @@ async function characterOp(db: D1Database, playerId: string, characterId: string
       return { ...response, balance: await balanceOf(db, playerId, 'eclipse_token'), replayed: false };
     } catch (e) {
       const msg = String(e instanceof Error ? e.message : e);
-      if (/CHECK constraint failed: ok = 1/i.test(msg)) continue;
+      if (/CHECK constraint failed: ok = 1/i.test(msg)) {
+        const prior = await stored(); if (prior) return prior;
+        if (scope?.releaseId) await requireEconomic(db, scope.CONTENT_CHANNEL, scope.releaseId, playerId, '', new Date());
+        continue;
+      }
       if (/CHECK constraint failed: qty >= 0/i.test(msg)) throw new HttpError(402, 'insufficient_items', 'you do not have enough materials');
       if (/CHECK constraint failed: balance >= 0/i.test(msg)) throw new HttpError(402, 'insufficient_funds', 'not enough of the main currency');
       if (/UNIQUE constraint failed: (progression_requests|ledger)/i.test(msg)) continue;
@@ -152,14 +164,15 @@ async function characterOp(db: D1Database, playerId: string, characterId: string
 }
 
 const ItemsInput = z.array(z.object({ itemId: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/), quantity: z.number().int().min(1).max(9999) }).strict()).min(1).max(5);
-export const LevelUpBody = z.object({ requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/), items: ItemsInput }).strict();
-export const RequestOnly = z.object({ requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/) }).strict();
+const ReleaseId = z.string().regex(/^[a-z][a-z0-9_]{1,47}$/).optional();
+export const LevelUpBody = z.object({ releaseId: ReleaseId, requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/), items: ItemsInput }).strict();
+export const RequestOnly = z.object({ releaseId: ReleaseId, requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/) }).strict();
 
-export function levelUpCharacter(db: D1Database, playerId: string, characterId: string, input: z.infer<typeof LevelUpBody>): Promise<Record<string, unknown>> {
-  return characterOp(db, playerId, characterId, input, 'level_up', async ({ cfg, state, ranks, accountLevel }) => {
+export function levelUpCharacter(db: D1Database, playerId: string, characterId: string, input: z.infer<typeof LevelUpBody>, scope?: ReleaseScope): Promise<Record<string, unknown>> {
+  return characterOp(db, playerId, characterId, input, 'level_up', async ({ catalog, cfg, state, ranks, accountLevel }) => {
     const merged = new Map<string, number>();
     for (const i of input.items) merged.set(i.itemId, (merged.get(i.itemId) ?? 0) + i.quantity);
-    const defs = (await db.prepare(`SELECT item_id, xp_value, kind FROM item_defs WHERE item_id IN (${[...merged.keys()].map(() => '?').join(',')})`).bind(...merged.keys()).all<{ item_id: string; xp_value: number | null; kind: string }>()).results;
+    const defs = catalog ? catalog.data.items.filter((item) => merged.has(item.item_id) && item.status !== 'retired') : (await db.prepare(`SELECT item_id, xp_value, kind FROM item_defs WHERE item_id IN (${[...merged.keys()].map(() => '?').join(',')})`).bind(...merged.keys()).all<{ item_id: string; xp_value: number | null; kind: string }>()).results;
     let gained = 0;
     let smallest = Infinity;
     for (const [id, qty] of merged) {
@@ -183,10 +196,10 @@ export function levelUpCharacter(db: D1Database, playerId: string, characterId: 
       fee: feeForLevels(cfg, r.feeLevels),
       response: { gainedXp: gained, levelsGained: r.levelsGained, wastedXp: r.wasted, cap }
     };
-  });
+  }, scope);
 }
 
-export function ascendCharacter(db: D1Database, playerId: string, characterId: string, input: z.infer<typeof RequestOnly>): Promise<Record<string, unknown>> {
+export function ascendCharacter(db: D1Database, playerId: string, characterId: string, input: z.infer<typeof RequestOnly>, scope?: ReleaseScope): Promise<Record<string, unknown>> {
   return characterOp(db, playerId, characterId, input, 'ascend', async ({ cfg, state, ranks, accountLevel }) => {
     const step = cfg.character.ascension[state.ascension + 1];
     if (!step) throw new HttpError(409, 'max_ascension', 'this character is fully ascended');
@@ -198,12 +211,12 @@ export function ascendCharacter(db: D1Database, playerId: string, characterId: s
       if (!cleared || cleared.stars < 1) throw new HttpError(409, 'story_gate', `clear ${step.requiresNode} first`);
     }
     return { state: { ...state, ascension: state.ascension + 1, skillRanks: ranks }, items: step.items, fee: Math.ceil(step.fee), response: { newCap: step.cap } };
-  });
+  }, scope);
 }
 
-export function upgradeSkill(db: D1Database, playerId: string, characterId: string, skillId: string, input: z.infer<typeof RequestOnly>): Promise<Record<string, unknown>> {
-  return characterOp(db, playerId, characterId, input, `skill:${skillId}`, async ({ cfg, state, ranks }) => {
-    const skill = await db.prepare('SELECT skill_id, type FROM character_skills WHERE skill_id = ?1 AND character_id = ?2').bind(skillId, characterId).first<{ skill_id: string; type: 'basic' | 'active' | 'passive' | 'ultimate' }>();
+export function upgradeSkill(db: D1Database, playerId: string, characterId: string, skillId: string, input: z.infer<typeof RequestOnly>, scope?: ReleaseScope): Promise<Record<string, unknown>> {
+  return characterOp(db, playerId, characterId, input, `skill:${skillId}`, async ({ catalog, cfg, state, ranks }) => {
+    const skill = catalog ? catalog.data.skills.find((s) => s.skill_id === skillId && s.character_id === characterId) : await db.prepare('SELECT skill_id, type FROM character_skills WHERE skill_id = ?1 AND character_id = ?2').bind(skillId, characterId).first<{ skill_id: string; type: 'basic' | 'active' | 'passive' | 'ultimate' }>();
     if (!skill) throw new HttpError(404, 'no_such_skill', 'this character has no such skill');
     const sk = cfg.character.skills;
     const rank = ranks[skillId] ?? 1;
@@ -213,5 +226,5 @@ export function upgradeSkill(db: D1Database, playerId: string, characterId: stri
     if (unlock === undefined || qty === undefined) throw new HttpError(409, 'max_rank', 'this skill is at its highest rank');
     if (state.level < unlock) throw new HttpError(409, 'level_too_low', `rank ${rank + 1} unlocks at character level ${unlock}`, { required: unlock });
     return { state: { ...state, skillRanks: { ...ranks, [skillId]: rank + 1 } }, items: [{ itemId: sk.itemBySkillType[skill.type], quantity: qty }], fee: Math.ceil(sk.feePerRank[rank - 1] ?? 0), response: { skillId, rank: rank + 1 } };
-  });
+  }, scope);
 }

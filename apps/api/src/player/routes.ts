@@ -3,6 +3,7 @@ import { z } from 'zod';
 import type { JWTVerifyGetKey } from 'jose';
 import { sha256Hex } from '@uomd/shared';
 import { HttpError } from '../content/store';
+import { displayCatalog, operationCatalog, releaseScope, gearDefinition } from '../content/runtime-catalog';
 import { d1RateLimit } from '../http';
 import type { GameEnv } from '../env';
 import { activeBanners, disclosure, pullGacha } from '../gacha/service';
@@ -67,9 +68,22 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     return c.json({ id: r?.id ?? 'eclipse_token', name: r?.display_name ?? "Bell's Remains" }, 200, { 'Cache-Control': 'public, max-age=300' });
   });
 
+  const ReleaseId = z.string().regex(/^[a-z][a-z0-9_]{1,47}$/);
+  const selectedRelease = (value?: string): string | undefined => {
+    if (value === undefined) return undefined;
+    const parsed = ReleaseId.safeParse(value);
+    if (!parsed.success) throw new HttpError(400, 'bad_request', 'invalid release id');
+    return parsed.data;
+  };
+
   /** Public catalog: material definitions, gear definitions (compact) and the progression rules, so the client can show costs and names. */
   app.get('/api/v1/catalog', async (c) => {
     const db = c.env.DB;
+    const catalog = await displayCatalog(c.env, selectedRelease(c.req.query('releaseId')));
+    if (catalog) return c.json({ releaseId: catalog.releaseId, catalogSha256: catalog.sha256,
+      items: catalog.data.items.filter((item) => item.status !== 'retired').map((item) => ({ item_id: item.item_id, name_en: item.name_en, kind: item.kind, rarity: item.rarity, xp_value: item.xp_value, consumable: item.consumable ? 1 : 0 })),
+      gear: catalog.data.gear.filter((g) => g.status !== 'retired').map((g) => { const row = gearDefinition(g); return { gear_id: row.gear_id, slot: row.slot, name_en: row.name_en, rarity: row.rarity, family: row.family, tier: row.tier, set_id: row.set_id, owner_character_id: row.owner_character_id, level_cap: row.level_cap, base_json: row.base_json, growth_json: row.growth_json }; }),
+      config: catalog.data.config }, 200, { 'Cache-Control': 'public, max-age=60' });
     const [items, gear, cfg] = await Promise.all([
       db.prepare("SELECT item_id, name_en, kind, rarity, xp_value, consumable FROM item_defs WHERE status <> 'retired' ORDER BY kind, item_id").all(),
       db.prepare("SELECT gear_id, slot, name_en, rarity, family, tier, set_id, owner_character_id, level_cap, base_json, growth_json FROM gear_defs WHERE status <> 'retired' ORDER BY slot, rarity DESC, gear_id").all(),
@@ -323,7 +337,10 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     return c.json(await handleRtdn(c.env.DB, c.env, playFor(c.env), parsed));
   });
 
-  app.get('/api/v1/characters/mine', async (c) => c.json(await listCharacters(c.env.DB, c.get('playerId'))));
+  app.get('/api/v1/characters/mine', async (c) => {
+    const catalog = await operationCatalog(c.env.DB, c.get('playerId'), releaseScope(c.env, selectedRelease(c.req.query('releaseId'))));
+    return c.json(await listCharacters(c.env.DB, c.get('playerId'), catalog));
+  });
   app.get('/api/v1/stacks', async (c) => {
     const { results } = await c.env.DB.prepare('SELECT item_id, qty FROM player_stacks WHERE player_id = ?1 AND qty > 0 ORDER BY item_id').bind(c.get('playerId')).all();
     return c.json({ stacks: results });
@@ -345,20 +362,23 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     await perMinute(c.env, `levelup:${c.get('playerId')}`, 60);
     const id = c.req.param('id');
     if (!CharId.test(id)) throw new HttpError(400, 'bad_request', 'invalid character id');
-    return c.json(await levelUpCharacter(c.env.DB, c.get('playerId'), id, await body(c, LevelUpBody)));
+    const input = await body(c, LevelUpBody);
+    return c.json(await levelUpCharacter(c.env.DB, c.get('playerId'), id, input, releaseScope(c.env, input.releaseId)));
   });
   app.post('/api/v1/characters/:id/ascend', async (c) => {
     await perMinute(c.env, `ascend:${c.get('playerId')}`, 30);
     const id = c.req.param('id');
     if (!CharId.test(id)) throw new HttpError(400, 'bad_request', 'invalid character id');
-    return c.json(await ascendCharacter(c.env.DB, c.get('playerId'), id, await body(c, RequestOnly)));
+    const input = await body(c, RequestOnly);
+    return c.json(await ascendCharacter(c.env.DB, c.get('playerId'), id, input, releaseScope(c.env, input.releaseId)));
   });
   app.post('/api/v1/characters/:id/skills/:skillId/upgrade', async (c) => {
     await perMinute(c.env, `skill:${c.get('playerId')}`, 60);
     const id = c.req.param('id');
     const skillId = c.req.param('skillId');
     if (!CharId.test(id) || !/^[a-z][a-z0-9_]{1,119}$/.test(skillId)) throw new HttpError(400, 'bad_request', 'invalid id');
-    return c.json(await upgradeSkill(c.env.DB, c.get('playerId'), id, skillId, await body(c, RequestOnly)));
+    const input = await body(c, RequestOnly);
+    return c.json(await upgradeSkill(c.env.DB, c.get('playerId'), id, skillId, input, releaseScope(c.env, input.releaseId)));
   });
 
   app.get('/api/v1/entry', async (c) => c.json({ ...(await getEntry(c.env.DB, c.get('playerId'))), playerId: c.get('playerId') }));
@@ -372,7 +392,10 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   app.get('/api/v1/tasks', async (c) => c.json(await listTasks(c.env.DB, c.get('playerId'))));
   app.post('/api/v1/tasks/claim', async (c) => c.json(await claimTask(c.env.DB, c.get('playerId'), await body(c, z.object({ periodKey: z.string().regex(/^[dw]:[0-9T:-]{10,13}(:[a-z][a-z0-9_]{1,79})?$/), taskId: z.string().regex(/^_?[a-z][a-z0-9_]{1,79}$/), requestId: RequestId.optional() }).strict()))));
   app.get('/api/v1/gear', async (c) => c.json({ gear: await listGear(c.env.DB, c.get('playerId')) }));
-  app.get('/api/v1/characters/:id/stats', async (c) => c.json(await characterStats(c.env.DB, c.get('playerId'), c.req.param('id'))));
+  app.get('/api/v1/characters/:id/stats', async (c) => {
+    const catalog = await operationCatalog(c.env.DB, c.get('playerId'), releaseScope(c.env, selectedRelease(c.req.query('releaseId'))));
+    return c.json(await characterStats(c.env.DB, c.get('playerId'), c.req.param('id'), catalog));
+  });
   const GearId = (raw: string): number => {
     const n = Number(raw);
     if (!Number.isInteger(n) || n < 1) throw new HttpError(400, 'bad_request', 'invalid gear id');

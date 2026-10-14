@@ -39,7 +39,7 @@ Existing frozen battle/rule/party records are not migrated or rebuilt. New sourc
 
 ## Catalog staging
 
-R08-B1 adds an optional [catalog snapshot](CATALOG_SNAPSHOT.md) at `catalog/economy.json` with strict shared reference validation and admin/CLI export. Such drafts cannot publish or become rollback targets until release-scoped economic activation is implemented. Legacy catalog-free releases retain the R08-A publication path. R08-B2a binds the dormant battle path to the exact catalog while retaining atomic authority and original-result recovery; the other economic paths and D1 new-identity bridge must migrate before activation.
+R08-B1 adds an optional [catalog snapshot](CATALOG_SNAPSHOT.md) at `catalog/economy.json` with strict shared reference validation and admin/CLI export. Such drafts cannot publish or become rollback targets until release-scoped economic activation is implemented. Legacy catalog-free releases retain the R08-A publication path. R08-B2a binds the dormant battle path to the exact catalog while retaining atomic authority and original-result recovery; B2b1 supplies the D1 identity bridge and selected recruit/growth/views. The other economic contexts and compatible reader floor must migrate before activation.
 
 ## Verification and remaining scope
 
