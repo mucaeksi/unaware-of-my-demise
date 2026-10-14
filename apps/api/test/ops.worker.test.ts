@@ -1,6 +1,7 @@
 import { env } from 'cloudflare:workers';
 import { Decrypter, generateX25519Identity, identityToRecipient } from 'age-encryption';
 import { describe, expect, it } from 'vitest';
+import { sha256Hex } from '@uomd/shared';
 import { applyLedger } from '../src/db/ledger';
 import { runBackup } from '../src/ops/backup';
 import { dumpDatabase, sqlLiteral } from '../src/ops/dump';
@@ -38,6 +39,91 @@ describe('uomd-ops: logical dump', () => {
     const lastInsert = d.sql.lastIndexOf('INSERT INTO');
     expect(d.sql.indexOf('CREATE TRIGGER ledger_no_update')).toBeGreaterThan(lastInsert); // append-only triggers must not block the restore
     expect(d.sql.trimEnd().endsWith('COMMIT;')).toBe(true);
+  });
+});
+
+/** Records every SQL text prepared, and can run a hook before each batch (to simulate concurrent writers). */
+function recording(inner: D1Database, beforeBatch?: (sqlSoFar: string[]) => Promise<void>): { db: D1Database; sql: string[] } {
+  const sql: string[] = [];
+  const db = {
+    prepare: (q: string) => { sql.push(q); return inner.prepare(q); },
+    batch: async (s: D1PreparedStatement[]) => { await beforeBatch?.(sql); return inner.batch(s); }
+  };
+  return { db: db as unknown as D1Database, sql };
+}
+
+describe('uomd-ops: bounded dump at scale (R17)', () => {
+  const ROWS = 300;
+  const withScaleTable = async (run: () => Promise<void>): Promise<void> => {
+    await db().prepare('CREATE TABLE r17_scale (id INTEGER PRIMARY KEY, v TEXT NOT NULL) STRICT').run();
+    await db().prepare("WITH RECURSIVE n(i) AS (SELECT 1 UNION ALL SELECT i + 1 FROM n WHERE i < ?1) INSERT INTO r17_scale (id, v) SELECT i, 'row-' || i || '-''q' FROM n").bind(ROWS).run();
+    try { await run(); } finally { await db().prepare('DROP TABLE r17_scale').run(); }
+  };
+
+  it('a database over the row cap fails from COUNT(*) alone, before any row is read', async () => {
+    await withScaleTable(async () => {
+      const { db: spy, sql } = recording(db());
+      await expect(dumpDatabase(spy, { maxRows: ROWS })).rejects.toThrow(new RegExp(`capped at ${ROWS}`));
+      expect(sql.some((q) => /SELECT \*/i.test(q))).toBe(false);
+      expect(sql.filter((q) => /COUNT\(\*\)/.test(q)).length).toBeGreaterThan(0);
+    });
+  });
+
+  it('multi-page dumps are byte-identical to single-page dumps, with every row exactly once', async () => {
+    await withScaleTable(async () => {
+      const { db: spy, sql } = recording(db());
+      const paged = await dumpDatabase(spy, { pageRows: 7 });
+      const whole = await dumpDatabase(db());
+      expect(paged.pages.r17_scale).toBe(Math.floor(ROWS / 7) + 1);
+      expect(whole.pages.r17_scale).toBe(1);
+      expect(paged.tables).toEqual(whole.tables);
+      expect(paged.tables.r17_scale).toBe(ROWS);
+      expect(paged.bytes).toBe(new TextEncoder().encode(paged.sql).byteLength);
+      expect(await sha256Hex(paged.sql)).toBe(await sha256Hex(whole.sql));
+      for (const i of [1, 7, 8, 150, ROWS]) expect(paged.sql.split(`'row-${i}-''q'`).length - 1).toBe(1);
+      // every row read is an explicitly bounded page in deterministic order
+      expect(sql.filter((q) => /SELECT \*/i.test(q)).every((q) => /ORDER BY .+ LIMIT \?1 OFFSET \?2$/.test(q))).toBe(true);
+      expect(paged.reconciled).toBe(true);
+    });
+  });
+
+  it('growth between sizing and reading stays bounded: within headroom it is captured, beyond it the dump refuses', async () => {
+    await withScaleTable(async () => {
+      const grow = (n: number) => {
+        let done = false;
+        return async (sqlSoFar: string[]): Promise<void> => {
+          if (done || !sqlSoFar.some((q) => /OFFSET \?2$/.test(q))) return; // only right before the page-read transaction
+          done = true;
+          await db().prepare("WITH RECURSIVE k(i) AS (SELECT 1 UNION ALL SELECT i + 1 FROM k WHERE i < ?1) INSERT INTO r17_scale (v) SELECT 'late-' || i FROM k").bind(n).run();
+        };
+      };
+      // 300 rows at sizing, pages of 100 => capacity 400
+      const within = await dumpDatabase(recording(db(), grow(50)).db, { pageRows: 100 });
+      expect(within.tables.r17_scale).toBe(ROWS + 50);
+      await expect(dumpDatabase(recording(db(), grow(200)).db, { pageRows: 100 })).rejects.toThrow(/grew from 350 to 550 rows/);
+    });
+  });
+
+  it('enforces the byte budget while emitting, not after building the whole file', async () => {
+    await withScaleTable(async () => {
+      await expect(dumpDatabase(db(), { maxBytes: 4096 })).rejects.toThrow(/exceeds 4096 bytes/);
+    });
+  });
+
+  it('the backup manifest records rows, pages, limits and duration as scale evidence', async () => {
+    await withScaleTable(async () => {
+      const bucket = fakeBucket();
+      const id = await generateX25519Identity();
+      const r = await runBackup({ DB: db(), BACKUPS: bucket as unknown as R2Bucket, AGE_RECIPIENT: await identityToRecipient(id), TARGET: 'test', GAME: fetcher(200), ADMIN: fetcher(401) }, new Date('2026-10-12T03:17:00Z'), { pageRows: 50 });
+      const manifest = JSON.parse(bucket.objects.get(`${r.key}.manifest.json`) as string) as { rows: number; pages: Record<string, number>; limits: { pageRows: number; maxRows: number }; durationMs: number; sha256Plain: string; tables: Record<string, number> };
+      expect(manifest.pages.r17_scale).toBe(Math.floor(ROWS / 50) + 1);
+      expect(manifest.rows).toBe(Object.values(manifest.tables).reduce((a, b) => a + b, 0));
+      expect(manifest.limits).toMatchObject({ pageRows: 50, maxRows: 200_000 });
+      expect(manifest.durationMs).toBeGreaterThanOrEqual(0);
+      const d = new Decrypter();
+      d.addIdentity(id);
+      expect(await sha256Hex(await d.decrypt(bucket.objects.get(r.key) as Uint8Array, 'text'))).toBe(manifest.sha256Plain);
+    });
   });
 });
 
