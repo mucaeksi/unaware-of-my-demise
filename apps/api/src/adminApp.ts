@@ -13,6 +13,7 @@ import type { AdminEnv } from './env';
 import { registerOps } from './admin/ops';
 import { registerBillingOps } from './admin/billing';
 import { setEconomicPolicy } from './content/authority';
+import { filter, likeSubstring, pageLimit, pageOf, readCursor } from './admin/page';
 
 type Ctx = { Bindings: AdminEnv; Variables: { admin: AdminIdentity } };
 
@@ -143,8 +144,28 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
 
   // ------------------------------------------------------------------ characters
   app.get('/admin/api/characters', need('viewer'), async (c) => {
-    const { results } = await c.env.DB.prepare('SELECT * FROM characters ORDER BY rarity DESC, name_en').all();
-    return c.json({ characters: results });
+    const status = filter(c.req.query('status'), z.enum(['active', 'hidden', 'retired']), 'status');
+    const rarity = filter(c.req.query('rarity'), z.coerce.number().int().min(1).max(5), 'rarity');
+    const q = (c.req.query('q') ?? '').trim().slice(0, 60);
+    const limit = pageLimit(c.req.query('limit'), 100);
+    const after = readCursor(c.req.query('cursor'), z.tuple([z.number().int(), z.string(), z.string()]));
+    const { results } = await c.env.DB
+      .prepare(
+        `SELECT * FROM characters
+         WHERE (?1 IS NULL OR status = ?1) AND (?2 IS NULL OR rarity = ?2) AND (?3 = '' OR id LIKE ?4 ESCAPE '\\' OR name_en LIKE ?4 ESCAPE '\\')
+           AND (?5 IS NULL OR rarity < ?5 OR (rarity = ?5 AND (name_en > ?6 OR (name_en = ?6 AND id > ?7))))
+         ORDER BY rarity DESC, name_en, id LIMIT ?8`
+      )
+      .bind(status ?? null, rarity ?? null, q, likeSubstring(q), after?.[0] ?? null, after?.[1] ?? null, after?.[2] ?? null, limit + 1)
+      .all<{ id: string; name_en: string; rarity: number }>();
+    const page = pageOf(results, limit, (r) => [r.rarity, r.name_en, r.id]);
+    return c.json({ characters: page.rows, nextCursor: page.nextCursor });
+  });
+
+  app.get('/admin/api/characters/:id', need('viewer'), async (c) => {
+    const character = await c.env.DB.prepare('SELECT * FROM characters WHERE id = ?1').bind(c.req.param('id')).first();
+    if (!character) throw new HttpError(404, 'no_such_character', 'character not found');
+    return c.json({ character });
   });
 
   app.patch('/admin/api/characters/:id', need('operator'), async (c) => {
@@ -170,8 +191,31 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
 
   // ------------------------------------------------------------------ asset catalog
   app.get('/admin/api/assets', need('viewer'), async (c) => {
-    const { results } = await c.env.DB.prepare('SELECT * FROM assets ORDER BY kind, path').all();
-    return c.json({ assets: results });
+    const kind = filter(c.req.query('kind'), z.string().min(2).max(40), 'kind');
+    const status = filter(c.req.query('status'), z.enum(['candidate', 'approved', 'retired']), 'status');
+    const q = (c.req.query('q') ?? '').trim().slice(0, 120);
+    const limit = pageLimit(c.req.query('limit'), 100);
+    const after = readCursor(c.req.query('cursor'), z.tuple([z.string(), z.string()]));
+    const { results } = await c.env.DB
+      .prepare(
+        `SELECT * FROM assets
+         WHERE (?1 IS NULL OR kind = ?1) AND (?2 IS NULL OR status = ?2) AND (?3 = '' OR path LIKE ?4 ESCAPE '\\')
+           AND (?5 IS NULL OR (kind, path) > (?5, ?6))
+         ORDER BY kind, path LIMIT ?7`
+      )
+      .bind(kind ?? null, status ?? null, q, likeSubstring(q), after?.[0] ?? null, after?.[1] ?? null, limit + 1)
+      .all<{ kind: string; path: string }>();
+    const page = pageOf(results, limit, (r) => [r.kind, r.path]);
+    return c.json({ assets: page.rows, nextCursor: page.nextCursor });
+  });
+
+  app.get('/admin/api/assets/:id{[0-9]{1,15}}', need('viewer'), async (c) => {
+    const asset = await c.env.DB
+      .prepare('SELECT a.*, EXISTS (SELECT 1 FROM content_objects o WHERE o.sha256 = a.sha256) AS object_stored FROM assets a WHERE a.id = ?1')
+      .bind(Number(c.req.param('id')))
+      .first();
+    if (!asset) throw new HttpError(404, 'no_such_asset', 'asset not found');
+    return c.json({ asset });
   });
 
   app.post('/admin/api/assets', need('operator'), async (c) => {
@@ -190,7 +234,15 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
   });
 
   // ------------------------------------------------------------------ content releases
-  app.get('/admin/api/releases', need('viewer'), async (c) => c.json({ releases: await store(c.env).listReleases() }));
+  app.get('/admin/api/releases', need('viewer'), async (c) => {
+    const channel = filter(c.req.query('channel'), Channel, 'channel');
+    const state = filter(c.req.query('state'), z.enum(['draft', 'published', 'retired']), 'state');
+    const limit = pageLimit(c.req.query('limit'), 100);
+    const after = readCursor(c.req.query('cursor'), z.tuple([z.string(), z.number().int()]));
+    const rows = await store(c.env).listReleases({ ...(channel ? { channel } : {}), ...(state ? { state } : {}), after, limit: limit + 1 });
+    const page = pageOf(rows, limit, (r) => [r.channel, r.generation]);
+    return c.json({ releases: page.rows, nextCursor: page.nextCursor });
+  });
 
   app.get('/admin/api/releases/:id', need('viewer'), async (c) => {
     const r = await store(c.env).getRelease(c.req.param('id'));
@@ -258,9 +310,27 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
 
   // ------------------------------------------------------------------ audit + users
   app.get('/admin/api/audit', need('viewer'), async (c) => {
-    const limit = Math.min(200, Math.max(1, Number(c.req.query('limit') ?? '50') || 50));
-    const { results } = await c.env.DB.prepare('SELECT id, at, actor, action, target, detail FROM audit_log ORDER BY id DESC LIMIT ?1').bind(limit).all();
-    return c.json({ entries: results });
+    const actor = filter(c.req.query('actor'), z.string().max(200), 'actor');
+    const action = filter(c.req.query('action'), z.string().max(80), 'action');
+    const target = filter(c.req.query('target'), z.string().max(200), 'target');
+    const limit = pageLimit(c.req.query('limit'), 50);
+    const after = readCursor(c.req.query('cursor'), z.tuple([z.number().int().min(1)]));
+    const { results } = await c.env.DB
+      .prepare(
+        `SELECT id, at, actor, action, target, detail FROM audit_log
+         WHERE (?1 IS NULL OR actor = ?1) AND (?2 IS NULL OR action = ?2) AND (?3 IS NULL OR target = ?3) AND (?4 IS NULL OR id < ?4)
+         ORDER BY id DESC LIMIT ?5`
+      )
+      .bind(actor ?? null, action ?? null, target ?? null, after?.[0] ?? null, limit + 1)
+      .all<{ id: number }>();
+    const page = pageOf(results, limit, (r) => [r.id]);
+    return c.json({ entries: page.rows, nextCursor: page.nextCursor });
+  });
+
+  app.get('/admin/api/audit/:id{[0-9]{1,15}}', need('viewer'), async (c) => {
+    const entry = await c.env.DB.prepare('SELECT id, at, actor, action, target, detail FROM audit_log WHERE id = ?1').bind(Number(c.req.param('id'))).first();
+    if (!entry) throw new HttpError(404, 'no_such_entry', 'audit entry not found');
+    return c.json({ entry });
   });
 
   app.get('/admin/api/users', need('owner'), async (c) => {

@@ -1,5 +1,6 @@
 import { displayCatalog } from '../content/runtime-catalog';
 import { exportCatalog } from '../content/catalog';
+import { freezeGrantCatalog } from '../content/grant-catalog';
 import type { Context, Hono, MiddlewareHandler } from 'hono';
 import { z } from 'zod';
 import { analyzeBanner, analyzeFlow, BannerConfig, DEFAULT_FLOW, DropConfig, ProgressionConfig, simulateBanner } from '@uomd/economy';
@@ -9,15 +10,20 @@ import { audit, auditIfChanged, auditStatement } from '../db/audit';
 import { applyLedger } from '../db/ledger';
 import { progressionRefsExist } from '../progression/refs';
 import type { AdminEnv } from '../env';
-import { NewMail, sendMail } from '../mail/service';
+import { NewMail, prepareMail } from '../mail/service';
 import { SubConfig } from '../billing/service';
 import { RewardAttachment, TaskConfig } from '@uomd/content-schema';
+import { adminRequestStatement, changedOne, clearGuard, isGuardFailure, recordedAdminRequest, RequestId, type AdminRequest } from './requests';
+import { filter, likeSubstring, pageLimit, pageOf, readCursor } from './page';
 
 type Ctx = { Bindings: AdminEnv; Variables: { admin: AdminIdentity } };
 type Guard = (min: Role) => MiddlewareHandler<Ctx>;
 
 const PlayerId = z.string().regex(/^p_[0-9a-f]{32}$/);
 const Reason = z.string().min(3).max(200);
+/** Premium currency one request may grant without an owner (summed across every attachment of the request). */
+export const OWNER_GRANT_THRESHOLD = 5000;
+export const premiumTotal = (attachments: readonly RewardAttachment[]): number => attachments.reduce((n, a) => (a.type === 'currency' ? n + a.amount : n), 0);
 
 async function body<T>(c: Context<Ctx>, schema: z.ZodType<T>, max = 64 * 1024): Promise<T> {
   const raw = await c.req.text();
@@ -34,15 +40,20 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
   // ------------------------------------------------------------------ players
   app.get('/admin/api/players', need('viewer'), async (c) => {
     const q = (c.req.query('q') ?? '').trim().slice(0, 60);
-    const like = `%${q.replace(/[%_\\]/g, (m) => `\\${m}`)}%`;
+    const status = filter(c.req.query('status'), z.enum(['active', 'banned', 'deleted']), 'status');
+    const limit = pageLimit(c.req.query('limit'), 25);
+    const after = readCursor(c.req.query('cursor'), z.tuple([z.string(), z.string()]));
     const { results } = await c.env.DB
       .prepare(
         `SELECT id, display_name, status, created_at, last_seen_at FROM players
-         WHERE (?1 = '' OR id LIKE ?2 ESCAPE '\\' OR display_name LIKE ?2 ESCAPE '\\') ORDER BY created_at DESC LIMIT 25`
+         WHERE (?1 = '' OR id LIKE ?2 ESCAPE '\\' OR display_name LIKE ?2 ESCAPE '\\') AND (?3 IS NULL OR status = ?3)
+           AND (?4 IS NULL OR (created_at, id) < (?4, ?5))
+         ORDER BY created_at DESC, id DESC LIMIT ?6`
       )
-      .bind(q, like)
-      .all();
-    return c.json({ players: results });
+      .bind(q, likeSubstring(q), status ?? null, after?.[0] ?? null, after?.[1] ?? null, limit + 1)
+      .all<{ id: string; created_at: string }>();
+    const page = pageOf(results, limit, (r) => [r.created_at, r.id]);
+    return c.json({ players: page.rows, nextCursor: page.nextCursor });
   });
 
   app.get('/admin/api/players/:id', need('viewer'), async (c) => {
@@ -65,19 +76,52 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     return c.json({ player, wallets: wallets.results, items: items.results, ledger: ledger.results, pulls: pulls.results, pity: pity.results, purchases: purchases.results, progress: progress.results, activeSessions: sessions?.n ?? 0, mail: mail.results });
   });
 
-  const Compensation = z.object({ mail: NewMail, reason: Reason }).strict();
+  const Compensation = z.object({ mail: NewMail, reason: Reason, requestId: RequestId.optional() }).strict();
   app.post('/admin/api/players/:id/mail', need('operator'), async (c) => {
     const id = PlayerId.safeParse(c.req.param('id'));
     if (!id.success) throw new HttpError(400, 'bad_request', 'invalid player id');
     const b = await body(c, Compensation);
-    const who = c.get('admin').identity;
-    if (!(await c.env.DB.prepare('SELECT 1 AS ok FROM players WHERE id = ?1').bind(id.data).first())) throw new HttpError(404, 'no_such_player', 'player not found');
-    // grants above this size need an owner (compensation is real money's worth)
-    const big = b.mail.attachments.some((a) => a.type === 'currency' && a.amount > 5000);
-    if (big && !atLeast(c.get('admin').role, 'owner')) throw new HttpError(403, 'insufficient_role', 'premium grants above 5000 need an owner');
-    const sent = await sendMail(c.env.DB, id.data, b.mail, who, new Date(), await displayCatalog({ DB: c.env.DB, CONTENT: c.env.CONTENT, CONTENT_CHANNEL: c.env.ENVIRONMENT }));
-    await audit(c.env.DB, who, 'player.mail', id.data, { mailId: sent.id, reason: b.reason, attachments: b.mail.attachments });
-    return c.json(sent, 201);
+    const { identity: who, role } = c.get('admin');
+    const db = c.env.DB;
+    // Compensation is real money's worth. The threshold applies to the request total (one recipient per request), so
+    // splitting a grant across several attachments cannot dodge owner approval.
+    const premium = premiumTotal(b.mail.attachments);
+    if (premium > OWNER_GRANT_THRESHOLD && !atLeast(role, 'owner')) throw new HttpError(403, 'insufficient_role', `premium grants above ${OWNER_GRANT_THRESHOLD} in total need an owner (this request: ${premium})`);
+    const req: AdminRequest | null = b.requestId ? { requestId: b.requestId, actor: who, action: 'player.mail', target: id.data, input: { mail: b.mail, reason: b.reason } } : null;
+    if (req) {
+      const prior = await recordedAdminRequest(db, req);
+      if (prior) return c.json(prior.result, prior.status);
+    }
+    if (!(await db.prepare('SELECT 1 AS ok FROM players WHERE id = ?1').bind(id.data).first())) throw new HttpError(404, 'no_such_player', 'player not found');
+    // Every admin mail carries a source key so the batch can refer to the row it creates (and replays cannot duplicate it).
+    const sourceKey = b.mail.sourceKey ?? `admin:${b.requestId ?? crypto.randomUUID()}`;
+    const catalog = freezeGrantCatalog(await displayCatalog({ DB: db, CONTENT: c.env.CONTENT, CONTENT_CHANNEL: c.env.ENVIRONMENT }), b.mail.attachments);
+    const mailIdSql = '(SELECT id FROM mail WHERE player_id = ?7 AND source_key = ?8)';
+    let created: number | undefined;
+    try {
+      const res = await db.batch<{ id: number }>([
+        prepareMail(db, id.data, { ...b.mail, sourceKey }, who, new Date(), catalog),
+        changedOne(db),
+        db
+          .prepare("INSERT INTO audit_log (actor, action, target, detail) SELECT ?1, 'player.mail', ?2, json_set(?3, '$.mailId', id) FROM mail WHERE player_id = ?2 AND source_key = ?4")
+          .bind(who, id.data, JSON.stringify({ reason: b.reason, attachments: b.mail.attachments, premiumTotal: premium, ...(b.requestId ? { requestId: b.requestId } : {}) }), sourceKey),
+        ...(req ? [adminRequestStatement(db, req, 201, { sql: `json_object('id', ${mailIdSql}, 'created', json('true'))`, binds: [id.data, sourceKey] })] : []),
+        clearGuard(db)
+      ]);
+      created = res[0]?.results[0]?.id;
+    } catch (e) {
+      if (req) {
+        const prior = await recordedAdminRequest(db, req);
+        if (prior) return c.json(prior.result, prior.status);
+      }
+      if (!isGuardFailure(e)) throw e;
+      // Nothing was written or audited: report what actually exists instead of claiming a new grant.
+      const existing = await db.prepare('SELECT id FROM mail WHERE player_id = ?1 AND source_key = ?2').bind(id.data, sourceKey).first<{ id: number }>();
+      if (existing) return c.json({ id: existing.id, created: false }, 200);
+      if (sourceKey.startsWith('sub:')) throw new HttpError(409, 'entitlement_unavailable', 'this subscription cannot issue new benefits');
+      throw new HttpError(404, 'no_such_player', 'player not found or deleted');
+    }
+    return c.json({ id: created, created: true }, 201);
   });
 
   const Adjust = z.object({ currency: z.literal('eclipse_token'), delta: z.number().int().min(-1_000_000).max(1_000_000).refine((n) => n !== 0), reason: Reason, requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/) }).strict();
@@ -177,28 +221,57 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     return c.json({ id, version: b.expectedVersion + 1 });
   });
 
-  const Schedule = z.object({ action: z.enum(['activate', 'retire']), startsAt: z.string().datetime().optional(), endsAt: z.string().datetime().optional() }).strict();
+  const Schedule = z
+    .object({ action: z.enum(['activate', 'retire']), startsAt: z.string().datetime().optional(), endsAt: z.string().datetime().optional(), expectedVersion: z.number().int().min(1).optional(), requestId: RequestId.optional() })
+    .strict();
   app.post('/admin/api/banners/:id/state', need('operator'), async (c) => {
     const id = c.req.param('id');
     const b = await body(c, Schedule);
     const db = c.env.DB;
     const who = c.get('admin').identity;
-    const row = await db.prepare('SELECT config_json, status FROM banners WHERE id = ?1').bind(id).first<{ config_json: string; status: string }>();
+    const { requestId, ...input } = b;
+    const req: AdminRequest | null = requestId ? { requestId, actor: who, action: `banner.${b.action}`, target: id, input } : null;
+    if (req) {
+      const prior = await recordedAdminRequest(db, req);
+      if (prior) return c.json(prior.result, prior.status);
+    }
+    const row = await db.prepare('SELECT config_json, status, version, starts_at, ends_at FROM banners WHERE id = ?1').bind(id).first<{ config_json: string; status: string; version: number; starts_at: string | null; ends_at: string | null }>();
     if (!row) throw new HttpError(404, 'no_such_banner', 'banner not found');
+    if (b.expectedVersion !== undefined && b.expectedVersion !== row.version) throw new HttpError(409, 'version_conflict', `banner changed since version ${b.expectedVersion} (now ${row.version})`);
+    const startsAt = b.startsAt ?? null;
+    const endsAt = b.endsAt ?? null;
+    if (b.action === 'retire' && row.status === 'retired') throw new HttpError(409, 'no_change', 'banner is already retired');
     if (b.action === 'activate') {
       if (row.status === 'retired') throw new HttpError(409, 'retired', 'a retired banner cannot be reactivated; clone it');
-      if (b.startsAt && b.endsAt && b.endsAt <= b.startsAt) throw new HttpError(422, 'bad_window', 'endsAt must be after startsAt');
+      if (startsAt && endsAt && endsAt <= startsAt) throw new HttpError(422, 'bad_window', 'endsAt must be after startsAt');
+      if (row.status === 'active' && row.starts_at === startsAt && row.ends_at === endsAt) throw new HttpError(409, 'no_change', 'banner is already active with that window');
       const cfg = BannerConfig.parse(JSON.parse(row.config_json));
       await itemsExist(db, cfg);
     }
-    const res = await db.batch([
+    const result = { id, status: b.action === 'activate' ? 'active' : 'retired', version: row.version + 1 };
+    // The UPDATE is bound to the version validated above: a concurrent edit makes it change nothing, and the guard then
+    // rolls back the audit and replay rows so a rejected write never claims success.
+    const change =
       b.action === 'activate'
-        ? db.prepare("UPDATE banners SET status = 'active', starts_at = ?2, ends_at = ?3, version = version + 1, updated_by = ?4 WHERE id = ?1 AND status IN ('draft','active')").bind(id, b.startsAt ?? null, b.endsAt ?? null, who)
-        : db.prepare("UPDATE banners SET status = 'retired', version = version + 1, updated_by = ?2 WHERE id = ?1 AND status <> 'retired'").bind(id, who),
-      auditIfChanged(db, who, `banner.${b.action}`, id, { startsAt: b.startsAt ?? null, endsAt: b.endsAt ?? null })
-    ]);
-    if (res[0]?.meta.changes !== 1) throw new HttpError(409, 'no_change', 'banner is already in that state');
-    return c.json({ id, status: b.action === 'activate' ? 'active' : 'retired' });
+        ? db.prepare("UPDATE banners SET status = 'active', starts_at = ?2, ends_at = ?3, version = version + 1, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now'), updated_by = ?4 WHERE id = ?1 AND version = ?5 AND status IN ('draft','active')").bind(id, startsAt, endsAt, who, row.version)
+        : db.prepare("UPDATE banners SET status = 'retired', version = version + 1, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now'), updated_by = ?2 WHERE id = ?1 AND version = ?3 AND status <> 'retired'").bind(id, who, row.version);
+    try {
+      await db.batch([
+        change,
+        changedOne(db),
+        auditStatement(db, who, `banner.${b.action}`, id, { startsAt, endsAt, fromVersion: row.version, fromStatus: row.status, ...(requestId ? { requestId } : {}) }),
+        ...(req ? [adminRequestStatement(db, req, 200, result)] : []),
+        clearGuard(db)
+      ]);
+    } catch (e) {
+      if (req) {
+        const prior = await recordedAdminRequest(db, req);
+        if (prior) return c.json(prior.result, prior.status);
+      }
+      if (isGuardFailure(e)) throw new HttpError(409, 'version_conflict', 'banner changed while this request was processed; reload and retry');
+      throw e;
+    }
+    return c.json(result);
   });
 
   const Sim = z
@@ -347,37 +420,103 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
 
   // ------------------------------------------------------------------ shop
   app.get('/admin/api/products', need('viewer'), async (c) => {
-    const { results } = await c.env.DB.prepare('SELECT product_id, kind, title_en, grants, sub_config, active, updated_at, updated_by FROM shop_products ORDER BY product_id').all();
+    const { results } = await c.env.DB.prepare('SELECT product_id, kind, title_en, grants, sub_config, active, version, updated_at, updated_by FROM shop_products ORDER BY product_id').all();
     return c.json({ products: results });
   });
 
   const Product = z
-    .object({ kind: z.enum(['consumable', 'subscription']), title_en: z.string().min(2).max(80), grants: z.array(RewardAttachment).max(8).default([]), sub_config: SubConfig.optional(), active: z.boolean() })
+    .object({
+      kind: z.enum(['consumable', 'subscription']),
+      title_en: z.string().min(2).max(80),
+      grants: z.array(RewardAttachment).max(8).default([]),
+      sub_config: SubConfig.optional(),
+      active: z.boolean(),
+      /** 0 creates; otherwise the version the editor loaded (GET /products) */
+      expectedVersion: z.number().int().min(0).default(0),
+      requestId: RequestId.optional()
+    })
     .strict()
-    .refine((p) => (p.kind === 'subscription' ? Boolean(p.sub_config) : p.grants.length > 0), { message: 'a consumable needs grants; a subscription needs sub_config' });
+    .refine((p) => (p.kind === 'subscription' ? Boolean(p.sub_config) : p.grants.length > 0), { message: 'a consumable needs grants; a subscription needs sub_config' })
+    .refine((p) => p.kind === 'subscription' || !p.sub_config, { message: 'a consumable cannot carry sub_config' });
   app.put('/admin/api/products/:id', need('owner'), async (c) => {
     const id = c.req.param('id');
     if (!/^[a-z][a-z0-9_.]{1,99}$/.test(id)) throw new HttpError(400, 'bad_request', 'invalid product id');
-    const p = await body(c, Product);
+    const { requestId, ...p } = await body(c, Product);
     const who = c.get('admin').identity;
     const db = c.env.DB;
-    await db.batch([
-      db
-        .prepare(
-          `INSERT INTO shop_products (product_id, kind, title_en, grants, sub_config, active, updated_by) VALUES (?1,?2,?3,?4,?5,?6,?7)
-           ON CONFLICT (product_id) DO UPDATE SET title_en = excluded.title_en, grants = excluded.grants, sub_config = excluded.sub_config, active = excluded.active, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now'), updated_by = excluded.updated_by
-           WHERE shop_products.kind = excluded.kind`
-        )
-        .bind(id, p.kind, p.title_en, JSON.stringify(p.grants), p.sub_config ? JSON.stringify(p.sub_config) : null, p.active ? 1 : 0, who),
-      auditStatement(db, who, 'product.set', id, { kind: p.kind, active: p.active, grants: p.grants })
-    ]);
-    return c.json({ product_id: id });
+    const req: AdminRequest | null = requestId ? { requestId, actor: who, action: 'product.set', target: id, input: p } : null;
+    if (req) {
+      const prior = await recordedAdminRequest(db, req);
+      if (prior) return c.json(prior.result, prior.status);
+    }
+    const grants = JSON.stringify(p.grants);
+    const sub = p.sub_config ? JSON.stringify(p.sub_config) : null;
+    const active = p.active ? 1 : 0;
+    const result = { product_id: id, version: p.expectedVersion + 1 };
+    const change =
+      p.expectedVersion === 0
+        ? db.prepare('INSERT INTO shop_products (product_id, kind, title_en, grants, sub_config, active, updated_by, version) VALUES (?1,?2,?3,?4,?5,?6,?7,1) ON CONFLICT (product_id) DO NOTHING').bind(id, p.kind, p.title_en, grants, sub, active, who)
+        : db
+            .prepare(
+              `UPDATE shop_products SET title_en = ?3, grants = ?4, sub_config = ?5, active = ?6, version = version + 1, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now'), updated_by = ?7
+               WHERE product_id = ?1 AND kind = ?2 AND version = ?8 AND (title_en IS NOT ?3 OR grants IS NOT ?4 OR sub_config IS NOT ?5 OR active IS NOT ?6)`
+            )
+            .bind(id, p.kind, p.title_en, grants, sub, active, who, p.expectedVersion);
+    try {
+      await db.batch([
+        change,
+        changedOne(db),
+        auditStatement(db, who, 'product.set', id, { kind: p.kind, active: p.active, grants: p.grants, created: p.expectedVersion === 0, fromVersion: p.expectedVersion, ...(requestId ? { requestId } : {}) }),
+        ...(req ? [adminRequestStatement(db, req, 200, result)] : []),
+        clearGuard(db)
+      ]);
+    } catch (e) {
+      if (req) {
+        const prior = await recordedAdminRequest(db, req);
+        if (prior) return c.json(prior.result, prior.status);
+      }
+      if (!isGuardFailure(e)) throw e;
+      const row = await db.prepare('SELECT kind, version FROM shop_products WHERE product_id = ?1').bind(id).first<{ kind: string; version: number }>();
+      if (!row) throw new HttpError(404, 'no_such_product', 'product not found (send expectedVersion 0 to create it)');
+      if (p.expectedVersion === 0) throw new HttpError(409, 'exists', `product exists at version ${row.version}; send expectedVersion to update it`);
+      if (row.kind !== p.kind) throw new HttpError(409, 'kind_immutable', `a ${row.kind} product cannot become a ${p.kind}; create a new product id`);
+      if (row.version !== p.expectedVersion) throw new HttpError(409, 'version_conflict', `product changed since version ${p.expectedVersion} (now ${row.version})`);
+      throw new HttpError(409, 'no_change', 'product already has these values');
+    }
+    return c.json(result);
   });
 
+  const PurchaseFilters = { state: z.enum(['granted', 'refunded']), kind: z.enum(['consumable', 'subscription']), product: z.string().regex(/^[a-z][a-z0-9_.]{1,99}$/) };
   app.get('/admin/api/purchases', need('viewer'), async (c) => {
-    const { results } = await c.env.DB.prepare("SELECT order_id, player_id, product_id, kind, state, period_end, unrecovered, granted_at, refunded_at FROM purchases ORDER BY granted_at DESC LIMIT 100").all();
+    const player = filter(c.req.query('player'), PlayerId, 'player');
+    const product = filter(c.req.query('product'), PurchaseFilters.product, 'product');
+    const state = filter(c.req.query('state'), PurchaseFilters.state, 'state');
+    const kind = filter(c.req.query('kind'), PurchaseFilters.kind, 'kind');
+    const limit = pageLimit(c.req.query('limit'), 100);
+    const after = readCursor(c.req.query('cursor'), z.tuple([z.string(), z.string()]));
+    const { results } = await c.env.DB
+      .prepare(
+        `SELECT order_id, player_id, product_id, kind, state, period_end, unrecovered, granted_at, refunded_at FROM purchases
+         WHERE (?1 IS NULL OR player_id = ?1) AND (?2 IS NULL OR product_id = ?2) AND (?3 IS NULL OR state = ?3) AND (?4 IS NULL OR kind = ?4)
+           AND (?5 IS NULL OR (granted_at, order_id) < (?5, ?6))
+         ORDER BY granted_at DESC, order_id DESC LIMIT ?7`
+      )
+      .bind(player ?? null, product ?? null, state ?? null, kind ?? null, after?.[0] ?? null, after?.[1] ?? null, limit + 1)
+      .all<{ order_id: string; granted_at: string }>();
+    const page = pageOf(results, limit, (r) => [r.granted_at, r.order_id]);
     const refunds = await c.env.DB.prepare("SELECT COUNT(*) AS n FROM purchases WHERE state = 'refunded' AND unrecovered <> '{}'").first<{ n: number }>();
-    return c.json({ purchases: results, refundsWithUnrecovered: refunds?.n ?? 0 });
+    return c.json({ purchases: page.rows, nextCursor: page.nextCursor, refundsWithUnrecovered: refunds?.n ?? 0 });
+  });
+
+  app.get('/admin/api/purchases/:orderId', need('viewer'), async (c) => {
+    const orderId = c.req.param('orderId');
+    if (orderId.length > 200) throw new HttpError(400, 'bad_request', 'invalid order id');
+    const purchase = await c.env.DB
+      .prepare('SELECT order_id, player_id, product_id, kind, state, acknowledged, period_start, period_end, granted_at, refunded_at, unrecovered, fulfillment, entitlement_state, entitlement_checked_at FROM purchases WHERE order_id = ?1')
+      .bind(orderId)
+      .first();
+    if (!purchase) throw new HttpError(404, 'no_such_purchase', 'purchase not found');
+    return c.json({ purchase });
   });
 
   app.get('/admin/api/ads/summary', need('viewer'), async (c) => {

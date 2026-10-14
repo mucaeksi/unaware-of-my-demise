@@ -96,7 +96,8 @@ export class ContentStore {
     return row ? { releaseId: row.id, json: row.json } : null;
   }
 
-  async listReleases(): Promise<(Omit<ReleaseRow, 'manifest_json'> & { files: number; min_client: string; max_client: string | null; content_schema: number })[]> {
+  /** Ordered by channel, then newest generation. Options bound the page (keyset `after` = last row's [channel, generation]). */
+  async listReleases(opts: { channel?: string; state?: string; after?: readonly [string, number] | null; limit?: number } = {}): Promise<(Omit<ReleaseRow, 'manifest_json'> & { files: number; min_client: string; max_client: string | null; content_schema: number })[]> {
     const { results } = await this.db
       .prepare(
         `SELECT r.id, r.generation, r.channel, r.state, r.depends_on, r.notes, r.created_by, r.created_at, r.published_at,
@@ -105,8 +106,12 @@ export class ContentStore {
                 json_extract(r.manifest_json, '$.compat.content_schema') AS content_schema,
                 (SELECT COUNT(*) FROM release_files f WHERE f.release_id = r.id) AS files,
                 (SELECT 1 FROM channel_pointers p WHERE p.release_id = r.id) AS is_current
-         FROM content_releases r ORDER BY r.channel, r.generation DESC`
+         FROM content_releases r
+         WHERE (?1 IS NULL OR r.channel = ?1) AND (?2 IS NULL OR r.state = ?2)
+           AND (?3 IS NULL OR r.channel > ?3 OR (r.channel = ?3 AND r.generation < ?4))
+         ORDER BY r.channel, r.generation DESC LIMIT ?5`
       )
+      .bind(opts.channel ?? null, opts.state ?? null, opts.after?.[0] ?? null, opts.after?.[1] ?? null, opts.limit ?? -1)
       .all();
     return results as unknown as (Omit<ReleaseRow, 'manifest_json'> & { files: number; min_client: string; max_client: string | null; content_schema: number })[];
   }
