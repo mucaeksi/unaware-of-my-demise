@@ -41,6 +41,13 @@ export async function exportCatalog(db: D1Database): Promise<CatalogSnapshot> {
     banners: banners!.map((r) => { const { config_json, ...rest } = r; return { ...rest, config: parse(config_json) }; }),
     config: Object.fromEntries(config!.map((r) => [r.key, parse(r.value_json)]))
   };
+  // Canonical JSON sorts record keys. Preserve the live first-match rule as explicit snapshot metadata.
+  const gearConfig = raw.config.gear;
+  if (gearConfig && typeof gearConfig === 'object' && !Array.isArray(gearConfig) && 'roleStat' in gearConfig) {
+    if ('roleStatOrder' in gearConfig) throw new HttpError(503, 'catalog_invalid', 'role stat order is snapshot metadata, not a live authoring field');
+    const roles = gearConfig.roleStat;
+    if (roles && typeof roles === 'object' && !Array.isArray(roles)) Object.assign(gearConfig, { roleStatOrder: Object.keys(roles).filter((key) => key !== 'default') });
+  }
   const parsed = EconomyCatalog.safeParse(raw);
   if (!parsed.success) throw new HttpError(503, 'catalog_invalid', 'catalog needs operator review', parsed.error.issues.slice(0, 8).map((issue) => `${issue.path.join('.')}: ${issue.message}`));
   const json = canonicalJson(parsed.data);

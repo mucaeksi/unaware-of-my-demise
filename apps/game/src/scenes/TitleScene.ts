@@ -175,8 +175,10 @@ export class TitleScene extends Phaser.Scene {
 
   private async refreshChip(): Promise<void> {
     const { content } = Services.ready();
+    const chip = this.chipText;
     const active = await content.activeReleaseId();
-    this.chipText.setText(`CONTENT ${active}${active !== content.base.releaseId ? ' (patch)' : ''}  ·  ${CHANNEL}  ·  v${CLIENT_VERSION}${PATCH_LAB_ENABLED ? '  ·  tap for details' : ''}`);
+    if (!this.sys.isActive() || !chip?.active || this.chipText !== chip) return;
+    chip.setText(`CONTENT ${active}${active !== content.base.releaseId ? ' (patch)' : ''}  ·  ${CHANNEL}  ·  v${CLIENT_VERSION}${PATCH_LAB_ENABLED ? '  ·  tap for details' : ''}`);
   }
 
   private onContentChanged(out: PatchOutcome): void {

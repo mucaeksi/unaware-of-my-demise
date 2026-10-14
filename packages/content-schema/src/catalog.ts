@@ -15,10 +15,14 @@ const Status = z.enum(['active', 'hidden', 'retired']);
 const Slot = z.enum(['weapon', 'armor', 'necklace', 'ring']);
 export const GearStatId = z.enum(['hp_flat', 'atk_flat', 'def_flat', 'spd_flat', 'hp_pct', 'atk_pct', 'def_pct', 'spd_pct', 'effect_res_pct', 'element_res_pct', 'focus_gain_pct', 'heal_bonus_pct']);
 export const GearConfig = z.object({
-  note: z.string().max(400).default(''), roleStat: z.record(Id, GearStatId), equipSlots: z.array(Slot).min(1).max(4),
+  note: z.string().max(400).default(''), roleStat: z.record(Id, GearStatId), roleStatOrder: z.array(Id).max(512).optional(), equipSlots: z.array(Slot).min(1).max(4),
   rerollCost: z.object({ itemId: Id, quantityByRarity: z.partialRecord(z.enum(['1', '2', '3', '4', '5']), Count.min(1)) }).strict()
 }).strict().superRefine((c, ctx) => {
   if (!c.roleStat.default) ctx.addIssue({ code: 'custom', message: 'role stat needs a default' });
+  if (c.roleStatOrder) {
+    const keys = Object.keys(c.roleStat).filter((key) => key !== 'default');
+    if (new Set(c.roleStatOrder).size !== keys.length || c.roleStatOrder.length !== keys.length || c.roleStatOrder.some((key) => !keys.includes(key))) ctx.addIssue({ code: 'custom', message: 'role stat order must list every non-default role exactly once' });
+  }
   if (new Set(c.equipSlots).size !== c.equipSlots.length) ctx.addIssue({ code: 'custom', message: 'duplicate equipment slot' });
 });
 const Base = z.object({ hp: z.number().positive(), atk: z.number().nonnegative(), def: z.number().nonnegative(), spd: z.number().positive() }).strict();
@@ -74,6 +78,8 @@ export const EconomyCatalog = z.object({ schema_version: z.literal(1),
   const equipment = (id: string): void => { if (!gear.has(id) || gear.get(id)!.status === 'retired') bad(`unknown or retired catalog gear ${id}`); };
   const reward = (r: RewardAttachment): void => { if (r.type === 'item') item(r.itemId); else if (r.type === 'gear') equipment(r.gearId); else if (r.type === 'character' && (!chars.has(r.itemId) || chars.get(r.itemId)!.status === 'retired')) bad(`unknown or retired catalog character ${r.itemId}`); };
   for (const ch of c.characters) {
+    const roleStats = Object.keys(c.config.gear.roleStat).filter((key) => key !== 'default' && ch.role.includes(key)).map((key) => c.config.gear.roleStat[key]);
+    if (!c.config.gear.roleStatOrder && new Set(roleStats).size > 1) bad(`character ${ch.id}: ambiguous role stats need explicit priority`);
     if (!c.weapon_types.some((w) => w.weapon_type === ch.weapon_type)) bad(`character ${ch.id}: unknown weapon type`);
     const sig = gear.get(ch.signature_weapon_id);
     if (!sig || sig.slot !== 'weapon' || sig.owner_character_id !== ch.id || sig.family !== ch.weapon_type) bad(`character ${ch.id}: invalid signature weapon`);

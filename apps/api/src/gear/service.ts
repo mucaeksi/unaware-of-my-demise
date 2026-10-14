@@ -8,6 +8,7 @@ import { cryptoRoll } from '../db/rng';
 import { loadProgressionConfig } from '../progression/characters';
 import { taskEventStatements } from '../tasks/service';
 import { gearPassive, requireSupportedGearPassive } from './effects';
+import { catalogCharacter, characterDefinition, catalogGear, gearDefinition, catalogRoleStat, type RuntimeCatalog } from '../content/runtime-catalog';
 
 export const GearRequest = z.object({ requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/) }).strict();
 export const EquipBody = z.object({ characterId: z.string().regex(/^[a-z][a-z0-9_]{1,79}$/) }).strict();
@@ -262,21 +263,29 @@ export function rerollGear(db: D1Database, playerId: string, id: number, input: 
 }
 
 /** Final combat stats of an owned character: level growth + equipped gear + set bonuses. This is what a server-verified party will use. */
-export async function computeCharacterStats(db: D1Database, playerId: string, characterId: string, cfg?: ProgressionConfig): Promise<{ characterId: string; level: number; stats: { hp: number; atk: number; def: number; spd: number }; other: Record<string, number>; equipped: { id: number; slot: string; name: string }[]; unsupportedPassives: string[] }> {
-  cfg ??= await loadProgressionConfig(db);
-  const ch = await db
+export async function computeCharacterStats(db: D1Database, playerId: string, characterId: string, cfg?: ProgressionConfig, catalog?: RuntimeCatalog): Promise<{ characterId: string; level: number; stats: { hp: number; atk: number; def: number; spd: number }; other: Record<string, number>; equipped: { id: number; slot: string; name: string }[]; unsupportedPassives: string[] }> {
+  cfg = catalog?.data.config.progression ?? cfg ?? await loadProgressionConfig(db);
+  const definition = catalog ? catalogCharacter(catalog, characterId) : undefined;
+  if (catalog && !await db.prepare("SELECT 1 FROM player_items WHERE player_id = ?1 AND item_type = 'character' AND item_id = ?2").bind(playerId, characterId).first()) throw new HttpError(404, 'not_owned', 'you do not own this character');
+  const ch = definition ? characterDefinition(definition) : await db
     .prepare("SELECT c.base_hp, c.base_atk, c.base_def, c.base_spd, c.growth_hp, c.growth_atk, c.growth_def, c.growth_spd, c.role FROM player_items i JOIN characters c ON c.id = i.item_id WHERE i.player_id = ?1 AND i.item_type = 'character' AND i.item_id = ?2")
     .bind(playerId, characterId)
     .first<{ base_hp: number; base_atk: number; base_def: number; base_spd: number; growth_hp: number; growth_atk: number; growth_def: number; growth_spd: number; role: string }>();
   if (!ch) throw new HttpError(404, 'not_owned', 'you do not own this character');
   const st = await db.prepare('SELECT level FROM player_chars WHERE player_id = ?1 AND character_id = ?2').bind(playerId, characterId).first<{ level: number }>();
   const level = st?.level ?? 1;
-  const { results } = await db.prepare(`${JOIN} WHERE g.player_id = ?1 AND g.equipped_by = ?2`).bind(playerId, characterId).all<GearRow>();
-  const gcfg = JSON.parse((await db.prepare("SELECT value_json FROM game_config WHERE key = 'gear'").first<{ value_json: string }>())?.value_json ?? '{}') as { roleStat?: Record<string, string> };
+  const results = catalog
+    ? (await db.prepare('SELECT id, gear_id, slot, level, xp, ascension, equipped_by, stats_json, locked, version FROM player_gear WHERE player_id = ?1 AND equipped_by = ?2').bind(playerId, characterId).all<GearRow>()).results.map((instance) => {
+      const definition = catalogGear(catalog, instance.gear_id);
+      if (instance.slot !== definition.slot) throw new HttpError(503, 'invalid_gear_instance', 'equipped item slot differs from its release definition');
+      return { ...instance, ...gearDefinition(definition) };
+    })
+    : (await db.prepare(`${JOIN} WHERE g.player_id = ?1 AND g.equipped_by = ?2`).bind(playerId, characterId).all<GearRow>()).results;
+  const gcfg = catalog?.data.config.gear ?? JSON.parse((await db.prepare("SELECT value_json FROM game_config WHERE key = 'gear'").first<{ value_json: string }>())?.value_json ?? '{}') as { roleStat?: Record<string, string> };
   const roles = gcfg.roleStat ?? {};
   const roleKey = Object.keys(roles).find((k) => k !== 'default' && ch.role.includes(k));
-  const roleStat = (roleKey ? roles[roleKey] : roles.default) ?? 'atk_pct';
-  const setRows = (await db.prepare('SELECT set_id, pieces_for_bonus, bonus_json FROM accessory_sets').all<{ set_id: string; pieces_for_bonus: number; bonus_json: string }>()).results;
+  const roleStat = catalog ? catalogRoleStat(catalog, ch.role) : (roleKey ? roles[roleKey] : roles.default) ?? 'atk_pct';
+  const setRows = catalog ? catalog.data.sets.map((row) => ({ set_id: row.set_id, pieces_for_bonus: row.pieces_for_bonus, bonus_json: JSON.stringify(row.bonus) })) : (await db.prepare('SELECT set_id, pieces_for_bonus, bonus_json FROM accessory_sets').all<{ set_id: string; pieces_for_bonus: number; bonus_json: string }>()).results;
   const sets = Object.fromEntries(setRows.map((s) => [s.set_id, { piecesForBonus: s.pieces_for_bonus, ...(() => { const b = JSON.parse(s.bonus_json) as { stat: string; pct: number }; return { stat: b.stat, pct: b.pct }; })() }]));
   const pieces: GearPiece[] = results.map((g) => ({
     slot: g.slot,

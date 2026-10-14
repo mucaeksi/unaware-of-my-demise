@@ -13,7 +13,7 @@ export interface StatPoolEntry {
 export interface AccessoryDef {
   main: StatPoolEntry[];
   sub: StatPoolEntry[];
-  profile?: { substat_count: number; is_rerollable: boolean; reroll_cost: number | null } | undefined;
+  profile?: { substat_count: number; is_rerollable: boolean; reroll_cost: number | { item_id: string; quantity: number } | null } | undefined;
 }
 export interface RolledStat {
   stat: string;

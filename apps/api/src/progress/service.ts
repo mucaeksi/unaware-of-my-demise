@@ -9,6 +9,7 @@ import { taskEventStatements } from '../tasks/service';
 import { operationStatement, recordedOperation } from '../db/operations';
 import { rollNodeDrops } from './drops';
 import { buildParty } from './party';
+import { loadReleaseCatalog } from '../content/runtime-catalog';
 import type { GameEnv } from '../env';
 import { BATTLE_SESSION_TTL_MS, economicStatement, requireEconomic } from '../content/authority';
 
@@ -25,6 +26,8 @@ export const BattleSubmission = z
 export type BattleSubmission = z.infer<typeof BattleSubmission>;
 
 export interface BattleOutcome {
+  /** Absent for catalog-free legacy claims. Stored with the original outcome. */
+  catalogSha256?: string;
   requestId: string;
   nodeId: string;
   stars: number;
@@ -100,6 +103,7 @@ async function loadStage(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'
 const MAX_OPEN_SESSIONS = 10;
 
 export interface BattleStart {
+  catalogSha256?: string;
   sessionId: string | null;
   /** the exact player side to fight with (owned-hero stages), or null for fixed story encounters */
   party: BattleParty | null;
@@ -113,7 +117,8 @@ export interface BattleStart {
 export async function startBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, input: { releaseId: string; nodeId: string }, now = new Date()): Promise<BattleStart> {
   const stage = await loadStage(env, playerId, input.releaseId, input.nodeId);
   await requireEconomic(env.DB, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, now);
-  const party = (stage.encounter.party_mode ?? 'fixed') === 'owned' ? await buildParty(env.DB, playerId, stage.encounter, new Set(stage.pack.units.map((u) => u.unit_id)), undefined, stage.pack.rules.story_loan_equipment) : null;
+  const catalog = await loadReleaseCatalog(env, input.releaseId);
+  const party = (stage.encounter.party_mode ?? 'fixed') === 'owned' ? await buildParty(env.DB, playerId, stage.encounter, new Set(stage.pack.units.map((u) => u.unit_id)), undefined, stage.pack.rules.story_loan_equipment, catalog) : null;
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   const id = [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('');
@@ -131,7 +136,7 @@ export async function startBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT
     if (/CHECK constraint failed: ok = 1/i.test(String(e))) throw new HttpError(409, 'release_not_economic', 'release authority changed before the battle started');
     throw e;
   }
-  return { sessionId: id, party, expiresAt };
+  return { sessionId: id, party, expiresAt, ...(catalog ? { catalogSha256: catalog.sha256 } : {}) };
 }
 
 /**
@@ -156,6 +161,7 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
 
   const stage = await loadStage(env, playerId, input.releaseId, input.nodeId);
   await requireEconomic(db, env.CONTENT_CHANNEL, input.releaseId, playerId, input.nodeId, currentTime(), input.sessionId);
+  const catalog = await loadReleaseCatalog(env, input.releaseId);
   const node = stage.node;
   let party: BattleParty | undefined;
   let sessionRow: { id: string } | null = null;
@@ -194,7 +200,7 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
     if (cost > 0 && !spent) throw new HttpError(402, 'not_enough_ration', 'not enough Ration for this battle');
 
     const repeatRewardsAllowed = cost > 0;
-    const drops = await rollNodeDrops(db, node.drop, firstClear, repeatRewardsAllowed);
+    const drops = await rollNodeDrops(db, node.drop, firstClear, repeatRewardsAllowed, catalog);
     const grants: { a: RewardAttachment; key: string }[] = [];
     if (firstClear) rewardsDef.first_clear.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.nodeId}:first:${i}` }));
     if (newThreeStar) rewardsDef.three_star.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.nodeId}:three:${i}` }));
@@ -203,6 +209,7 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
     drops.repeat.forEach((a, i) => grants.push({ a, key: `stage:${playerId}:${input.requestId}:drop:${i}` }));
 
     const outcome: BattleOutcome = {
+      ...(catalog ? { catalogSha256: catalog.sha256 } : {}),
       requestId: input.requestId,
       nodeId: input.nodeId,
       stars,
@@ -243,8 +250,8 @@ export async function submitBattle(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTEN
     );
     // one-time rewards keep stable keys (first clear / three stars), repeat rewards are keyed by the request
     // task progress counts only Ration-consuming wins (canon eligibility), in the same atomic batch
-    if (cost > 0) batch.push(...(await taskEventStatements(db, playerId, { eligible_wins: 1, ...(node.boss ? { boss_wins: 1 } : {}), ...(stars === 3 ? { three_star_wins: 1 } : {}) }, nowMs)));
-    for (const g of grants) batch.push(...(await grantStatements(db, playerId, [g.a], { keyPrefix: g.key, reason: `stage:${input.nodeId}` })));
+    if (cost > 0) batch.push(...(await taskEventStatements(db, playerId, { eligible_wins: 1, ...(node.boss ? { boss_wins: 1 } : {}), ...(stars === 3 ? { three_star_wins: 1 } : {}) }, nowMs, catalog?.data.config.tasks)));
+    for (const g of grants) batch.push(...(await grantStatements(db, playerId, [g.a], { keyPrefix: g.key, reason: `stage:${input.nodeId}`, catalog })));
     batch.push(
       db.prepare('INSERT INTO battle_claims (player_id, request_id, release_id, node_id, result_json, input_json) VALUES (?1, ?2, ?3, ?4, ?5, ?6)').bind(playerId, input.requestId, input.releaseId, input.nodeId, JSON.stringify(outcome), canonicalJson(input)),
       db

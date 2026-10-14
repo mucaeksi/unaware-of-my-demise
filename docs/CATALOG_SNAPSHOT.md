@@ -1,6 +1,6 @@
-# Catalog draft snapshots — R08-B1
+# Economic catalog snapshots — R08-B1 / R08-B2a
 
-R08-B1 stages a versioned catalog document and validates its references. It does not activate a release-scoped economic catalog. Existing game operations still read the editable D1 tables; R08-B2 must move those reads and transaction guards to the selected release before catalog-bearing releases may publish.
+R08-B1 stages a versioned catalog document and validates its references. It does not activate a release-scoped economic catalog. R08-B2a binds the battle path to the selected catalog behind the existing activation block. Other game operations still read the editable D1 tables; those reads and transaction guards must migrate before catalog-bearing releases may publish.
 
 ## Export and stage
 
@@ -32,8 +32,20 @@ When `catalog/economy.json` is present, the shared content validator additionall
 
 Catalog-free legacy releases retain their existing behavior. This opt-in staging contract does not imply that all legacy rewards or all other JSON kinds now have complete cross-resource validation. It does not automatically add a catalog to the embedded base or publish new heroes.
 
+## Battle runtime — R08-B2a
+
+`loadReleaseCatalog` accepts an exact published release on the configured channel. Catalog-free legacy releases explicitly retain their live-table behavior. A declared catalog requires a complete snapshot with matching manifest/index hash, declared/object byte size, a maximum of 1 MiB, valid UTF-8, verified SHA-256 and the closed catalog schema. Missing index/object entries, corrupt bytes or invalid definitions fail explicitly; none falls back to live authoring data. Definitions remain request-local, with no channel-keyed cache. Loading a published definition is not economic admission; callers still apply `requireEconomic` and the transaction-time fence.
+
+The exporter records the live gear role-map matching order as `config.gear.roleStatOrder`; canonical JSON key sorting must not change a multi-word role's first matching bonus. The order must contain each non-default key exactly once. An omitted order is accepted only when every declared character has an unambiguous result; ambiguous B1 drafts need a fresh export and draft, without rewriting stored objects. Owned and virtual equipment use the same explicit priority. Earlier B1 client validators reject this additional field; before catalog activation, require a compatible newly built reader through the client compatibility floor and signed-device checks.
+
+Battle start uses this catalog for character base/growth/formation, progression and role-stat rules, equipped templates/set bonuses and deterministic virtual loan equipment. Ownership, character levels/ranks, equipment instances and rolled accessory stats remain player state in D1. Missing/retired catalog identities and incompatible instance slots fail admission. Compiled skills/rules still come from the same release's UnitPack; the resulting party remains frozen in the existing session.
+
+Battle submission uses that exact release catalog for drop tables and eligible gear/boss pools, item stack caps, character rarity/duplicate grants, gear/accessory minting and task event definitions. Original claim recovery still precedes release/catalog loading. New start responses and recorded claims disclose `catalogSha256`; existing catalog-free and pre-upgrade results need no new field. The existing transaction-time account/release/session fences, revocation/kill floor, bounded allowlist/grace and atomic reward journals remain authoritative. Selecting an allowlisted older release does not select the current release's catalog.
+
+This is a runtime preparation slice, not public activation. Local integration tests explicitly admit unsigned catalog fixtures in isolated D1 to exercise the dormant path; the publication/rollback API still rejects them. Player catalog/roster, signup, recruitment, progression, gear operations, gacha, tasks/claims and non-battle grants still require migration. Existing `player_stacks`, `player_chars` and `player_gear` foreign keys also require a reviewed identity-lifecycle bridge before an identity declared only in a catalog can grow/equip. No global definition-table materialization or numeric retuning is introduced here. Bootstrap/current selection, historical ownership/retirement support and claim policy across differing task catalogs and the compatible catalog-reader floor remain part of the next slice.
+
 ## Next acceptance
 
-R08-B2 must load the chosen catalog in player catalog/roster, character progression, recruitment, gacha, gear, party/loan construction, drops and shared grants, with coherent transaction-time authority and existing original-result recovery. It must define bootstrap/current/allowlisted/historical behavior and freeze the relevant catalog/rule inputs. Only then remove the activation block and prove a new declared identity through recruit → grow → equip → summon → fight. Live draft editing, retirement/support workflows, complete grammar/capabilities, keys, quota/storage and signed-device acceptance remain separate requirements.
+Continue R08-B2 with player catalog/roster, signup, character progression, recruitment, gacha, gear, task claims and non-battle shared grants. Reuse B2a's exact release loader and retain transaction-time authority and original-result recovery. It must define bootstrap/current/allowlisted/historical behavior and freeze the relevant catalog/rule inputs. Only then remove the activation block and prove a new declared identity through recruit → grow → equip → summon → fight. Live draft editing, retirement/support workflows, complete grammar/capabilities, keys, quota/storage and signed-device acceptance remain separate requirements.
 
 Verification is recorded in [DEV_TRACKER.json](DEV_TRACKER.json). All evidence is local unless a deployed version or signed device/build identifier is explicitly attached.

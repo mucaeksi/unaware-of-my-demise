@@ -4,17 +4,26 @@ import { crc32, Rng } from '@uomd/shared';
 import { z } from 'zod';
 import { HttpError } from '../content/store';
 import { requireSupportedGearPassive } from '../gear/effects';
+import { gearDefinition, catalogRoleStat, type RuntimeCatalog } from '../content/runtime-catalog';
 
 const Pool = z.array(z.object({ stat_id: z.string().min(1).max(100), weight: z.number().positive().max(100_000), unit: z.enum(['percent', 'flat']),
   min_value: z.number().min(0), max_value: z.number().min(0) }).refine((entry) => entry.min_value <= entry.max_value, 'invalid stat range')).min(1).max(40);
 const Accessory = z.object({ main: Pool, sub: Pool, profile: z.object({ substat_count: z.number().int().min(1).max(6),
-  is_rerollable: z.boolean(), reroll_cost: z.number().nullable(), minimum_substat_value_rolls: z.literal(1).optional(), maximum_substat_value_rolls: z.literal(1).optional() }).passthrough().optional() }).passthrough();
+  is_rerollable: z.boolean(), reroll_cost: z.union([z.number(), z.object({ item_id: z.string(), quantity: z.number().positive() }).strict()]).nullable(), minimum_substat_value_rolls: z.literal(1).optional(), maximum_substat_value_rolls: z.literal(1).optional() }).passthrough().optional() }).passthrough();
 interface Definition { gear_id: string; slot: GearPiece['slot']; set_id: string | null; base_json: string; growth_json: string; extra_json: string }
 
 /** Virtual pieces only: never mint inventory, spend materials or reroll the player's equipment. */
-export async function loanGear(db: D1Database, characterId: string, weaponType: string | null, role: string, stageId: string, cfg: ProgressionConfig, template: StoryLoanEquipment): Promise<GearStats> {
+export async function loanGear(db: D1Database, characterId: string, weaponType: string | null, role: string, stageId: string, cfg: ProgressionConfig, template: StoryLoanEquipment, catalog?: RuntimeCatalog): Promise<GearStats> {
   const columns = 'gear_id, slot, set_id, base_json, growth_json, extra_json';
-  const batches = await db.batch([
+  const gear = catalog?.data.gear.filter((g) => g.status !== 'retired').sort((a, b) => a.gear_id < b.gear_id ? -1 : a.gear_id > b.gear_id ? 1 : 0);
+  const choose = (predicate: (g: NonNullable<typeof gear>[number]) => boolean) => ({ results: gear!.filter(predicate).slice(0, 1).map(gearDefinition) });
+  const batches = catalog ? [
+    choose((g) => g.slot === 'weapon' && g.family === weaponType && g.rarity === template.rarity && !g.owner_character_id),
+    choose((g) => g.gear_id === template.armor_id && g.slot === 'armor' && g.rarity === template.rarity),
+    { results: catalog.data.sets.filter((s) => s.set_id === template.accessory_set_id).map((s) => ({ pieces_for_bonus: s.pieces_for_bonus, bonus_json: JSON.stringify(s.bonus) })) },
+    { results: [{ value_json: JSON.stringify(catalog.data.config.gear) }] },
+    ...template.accessory_slots.map((slot) => choose((g) => g.slot === slot && g.set_id === template.accessory_set_id && g.rarity === template.rarity))
+  ] : await db.batch([
     db.prepare(`SELECT ${columns} FROM gear_defs WHERE slot = 'weapon' AND family = ?1 AND rarity = ?2 AND owner_character_id IS NULL ORDER BY gear_id LIMIT 1`).bind(weaponType, template.rarity),
     db.prepare(`SELECT ${columns} FROM gear_defs WHERE gear_id = ?1 AND slot = 'armor' AND rarity = ?2`).bind(template.armor_id, template.rarity),
     db.prepare('SELECT pieces_for_bonus, bonus_json FROM accessory_sets WHERE set_id = ?1').bind(template.accessory_set_id),
@@ -37,7 +46,7 @@ export async function loanGear(db: D1Database, characterId: string, weaponType: 
     });
     const config = JSON.parse((batches[3]!.results[0] as { value_json: string }).value_json) as { roleStat?: Record<string, string> };
     const roles = config.roleStat ?? {}; const key = Object.keys(roles).find((candidate) => candidate !== 'default' && role.includes(candidate));
-    const roleStat = (key ? roles[key] : roles.default) ?? 'atk_pct';
+    const roleStat = catalog ? catalogRoleStat(catalog, role) : (key ? roles[key] : roles.default) ?? 'atk_pct';
     const set = batches[2]!.results[0] as { pieces_for_bonus: number; bonus_json: string };
     const bonus = z.object({ stat: z.string().min(1).max(100), pct: z.number().min(0).max(5) }).parse(JSON.parse(set.bonus_json));
     return aggregateGear(cfg, pieces, roleStat, { [template.accessory_set_id]: { piecesForBonus: set.pieces_for_bonus, stat: bonus.stat, pct: bonus.pct } });

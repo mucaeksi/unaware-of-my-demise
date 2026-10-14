@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "4100809ab87d324842621c393136ac03ea2ca18d",
+  "sourceCommit": "8c05717c2e90d94d233d38835271a16396e5f724",
   "reviewedAt": "2026-10-14",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R08",
     "status": "IN_PROGRESS",
-    "nextProposed": "R08-B2 release-scoped economic catalog reads and transaction authority",
+    "nextProposed": "R08-B2b remaining economic readers, D1 identity bridge and compatible catalog reader floor",
     "workflow": "Owner authorized all infrastructure in dependency order without further task selections. Update README/evidence and verify before each main push. Defer creative/paid assets; preserve real external acceptance gates."
   },
   "now": [
     {
-      "title": "R08-B1 catalog export and draft validation locally verified",
-      "detail": "One D1 read batch exports a deterministic closed catalog (20 characters, 80 skills, 18 items, 258 gear, 7 sets, 20 weapon types, 12 banners; 247283 bytes). Admin download/retry and CLI snapshot staging verify counts/hash/budget. Shared exact catalog/pack/chapter checks reject unknown or mismatched definitions, rewards/drops/boss pools, progression gates, selectors and loans. Catalog-bearing publication/rollback is blocked before signing/pointers until runtime binding. 826 tests, lint/types, builds/campaign, 46 adapters; browser 14 plus final desktop/phone 2 pass with 25 migrations and inspected screenshots. No new migration, numeric/creative/live/native change; economic runtime remains R08-B2."
+      "title": "R08-B2a battle catalog runtime locally verified",
+      "detail": "The exact published release catalog binds owned/loan/equipped party inputs, drop rules/pools, character/item/gear grants and battle task events. Manifest/index/hash/byte/UTF-8/schema failures cannot fall back to live authoring tables; original results recover before catalog access and new outcomes disclose the hash. Explicit role-map priority preserves live bonuses after canonical JSON sorting. 851 tests, lint/types, campaign/game/admin builds and 46 adapters pass. Initial browser matrix 7/8 exposed a late title-chip write to a destroyed Text; fixed with captured-target/lifecycle guards. Final desktop catalog/title 2 and touch-phone catalog/First Oath/title 3 pass with 25 migrations; screenshots inspected. No activation, migration, numerical tuning, paid assets or native/deployed acceptance. Next: remaining economic readers/guards, D1 identity support and reader floor."
     }
   ],
   "next": [
     {
-      "title": "R08-B2 \u2014 release-scoped economic catalog activation",
-      "detail": "Use the selected release catalog for player catalog/roster, recruitment, progression, gear, gacha, party/loan construction, drops and shared grants. Fence transaction authority and retain original-operation results and historical battle/rule inputs; define bootstrap/current/allowlisted behavior. Remove the B1 publication/rollback block only after a new declared identity recruits, grows, equips, summons and fights consistently. Legacy catalog-free behavior, full grammar/capabilities, keys, IndexedDB quota/resource contracts, R09 continuity and native/deployed acceptance remain explicit."
+      "title": "R08-B2b \u2014 remaining economic catalog activation prerequisites",
+      "detail": "Bind player catalog/roster/signup, recruitment, character progression, gear/gacha/task claims and non-battle grants to the selected release. Preserve original-result recovery and transaction-time authority; define bootstrap/current/allowlisted/history and cross-catalog task behavior. Bridge the existing player definition foreign keys for new declared IDs, require a reader/client floor accepting explicit role priority, and prove recruit\u2192grow\u2192equip\u2192summon\u2192fight before removing the catalog publication/rollback block. Full grammar/keys/storage and deployed/signed-device acceptance remain separate."
     },
     {
       "title": "R06 \u2014 remaining reviewed combat semantics",
@@ -1089,6 +1089,30 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R08-B2A-20261014",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "8c05717c2e90d94d233d38835271a16396e5f724",
+      "verifiedAt": "2026-10-14T08:38:28.478178+00:00",
+      "scope": "R08-B2a working tree: request-local catalog loading requires the exact published release/configured channel and a complete snapshot with coherent manifest/index SHA-256, declared/object bytes, valid UTF-8 and closed schema within 1 MiB. Missing declared indices/objects, corrupt/hash-correct invalid data and byte-budget violations fail without editable-table fallback. Catalog-free legacy behavior stays explicit. Battle party construction uses catalog base/growth/formation, progression/role rules, equipped templates/sets and deterministic loans while retaining player ownership/levels/ranks/instances/rolled stats in D1 and existing frozen sessions. Battle submission uses snapshot drop rules and eligible weapon/accessory/boss pools, item caps, character rarity/duplicate rules, gear/accessory minting and task events. Existing transaction-time player/release/session fences, kill/revocation, allowlisting and original claim recovery remain; claims recover after catalog loss without another payout. Starts and stored outcomes disclose catalogSha256. Runtime integration tests explicitly admit unsigned isolated fixtures behind the unchanged public activation/rollback block. Review found that canonical key sorting could change first-match role bonuses: exports now preserve source matching order as roleStatOrder; coverage/duplicate/unknown/default/ambiguous priority validation and 4-star owned/loan parity preserve values. Fresh export is 247327 bytes; ambiguous B1 drafts need a fresh export, and older strict readers require a compatible binary/client floor before activation. Accessory reroll-cost typing admits its existing canonical item/quantity object without changing roll math. Twenty runtime and five new schema regressions; all 851 application/tool tests pass in the final standalone run (API432/game87/combat93/schema112/economy44/patch31/shared23/story5/tools24). Lint/types, campaign/game/admin builds and 46 adapters pass. Initial browser matrix passed seven of eight but the completed phone chapter exposed a delayed TitleScene.refreshChip write into a destroyed Text. Capture the original Text and recheck scene/target life and identity after await; controlled shutdown/restart browser cases prevent stale writes and crashes. Final desktop catalog/title 2 and phone catalog/First Oath/title 3 pass with all 25 local migrations. Earlier account/armory and desktop First Oath cases passed; final phone chapter completes without wishes/ads and preserves original-result recovery/account isolation. Catalog export/staging and recovered recruitment screenshots inspected; no errors in final affected cases. Initial test fixtures needed actual pointer audit fields/status values/object foreign keys and dynamic ration timing; corrected without weakening checks. Graphify refreshed 3233 nodes/8457 edges/163 communities, navigation checked against current source. No migration, economic activation, tuning, creative media, formal audit, deployed or signed-device acceptance. R08 remains partial: roster/signup/recruit/growth/gear/gacha/task claims, non-battle grants, D1 identity bridge, reader floor and full grammar/key/storage acceptance remain.",
+      "testIds": [
+        "apps/api/test/runtime-catalog.test.ts",
+        "apps/api/test/catalog-snapshot.test.ts",
+        "tests/e2e/title-lifecycle.spec.ts",
+        "tests/e2e/catalog-snapshot.spec.ts",
+        "tests/e2e/first-oath.spec.ts",
+        "tests/e2e/account.spec.ts",
+        "npm test",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run build:campaign",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1581,7 +1605,7 @@
       "taskStatus": "IN_PROGRESS",
       "implementationStatus": "PARTIAL",
       "required": "One versioned server/client catalog, finite complete data grammar and safe bounded patch storage/compatibility.",
-      "implemented": "R08-A locally verifies same-channel composition into complete signed snapshots, exact snapshot-versus-legacy-base reads, base-identical reuse, min/max/schema authoring and propagation, compatibility intersections and rollback/kill bounds. New publication floor is client 0.1.1; older binaries reject before download and require a new AAB. Effective 512-file/100-parameter limits, manifest/index agreement, legacy chain guards and draft recreation are tested. Versioned D1 catalog/new identity lifecycle, full grammar/capabilities, keys, IndexedDB transaction completion, quota/resources/cache and native/deployed acceptance remain open. R08-B1 now exports/stages closed catalog documents from eight D1 definition tables, with strict shared catalog/pack/chapter reference validation, admin download/retry and CLI hash/schema verification. Publication and rollback into catalog-bearing releases are explicitly blocked until all economic operations read that version. Legacy catalog-free operations still read editable D1; new-identity lifecycle is not accepted.",
+      "implemented": "R08-A locally verifies same-channel composition into complete signed snapshots, exact snapshot-versus-legacy-base reads, base-identical reuse, min/max/schema authoring and propagation, compatibility intersections and rollback/kill bounds. New publication floor is client 0.1.1; older binaries reject before download and require a new AAB. Effective 512-file/100-parameter limits, manifest/index agreement, legacy chain guards and draft recreation are tested. Versioned D1 catalog/new identity lifecycle, full grammar/capabilities, keys, IndexedDB transaction completion, quota/resources/cache and native/deployed acceptance remain open. R08-B1 now exports/stages closed catalog documents from eight D1 definition tables, with strict shared catalog/pack/chapter reference validation, admin download/retry and CLI hash/schema verification. Publication and rollback into catalog-bearing releases are explicitly blocked until all economic operations read that version. Legacy catalog-free operations still read editable D1; new-identity lifecycle is not accepted. R08-B2a binds the dormant battle path to exact request-local catalogs, including party/loan/equipped inputs, drops, grants and task events, with hash provenance, strict failure, existing atomic authority and original recovery. Explicit role matching order preserves bonuses through canonical export. Publication/rollback remain blocked pending the other economic readers, D1 identity support and compatible reader floor; no new-identity acceptance is claimed.",
       "dependsOn": [
         "R02",
         "R03",
@@ -1600,7 +1624,8 @@
         "docs/CONTENT_RELEASE_CONTRACT.md",
         "packages/content-schema/src/catalog.ts",
         "apps/api/src/content/catalog.ts",
-        "docs/CATALOG_SNAPSHOT.md"
+        "docs/CATALOG_SNAPSHOT.md",
+        "apps/api/src/content/runtime-catalog.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
@@ -1608,7 +1633,8 @@
         "E-EXTERNAL",
         "E-R07-C2-20261013",
         "E-R08-A-20261014",
-        "E-R08-B1-20261014"
+        "E-R08-B1-20261014",
+        "E-R08-B2A-20261014"
       ],
       "blockerIds": []
     },

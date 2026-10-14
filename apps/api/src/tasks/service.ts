@@ -35,8 +35,8 @@ function slots(cfg: TaskConfig, nowMs: number): Slot[] {
  * event (battle win, level-up), so progress can never be claimed without the action having happened. Progress is capped at the target.
  * A weekly segment only counts while it is running (not during its claim grace).
  */
-export async function taskEventStatements(db: D1Database, playerId: string, events: Partial<Record<TaskEvent, number>>, nowMs = Date.now()): Promise<D1PreparedStatement[]> {
-  const cfg = await loadTaskConfig(db);
+export async function taskEventStatements(db: D1Database, playerId: string, events: Partial<Record<TaskEvent, number>>, nowMs = Date.now(), config?: TaskConfig): Promise<D1PreparedStatement[]> {
+  const cfg = config ?? await loadTaskConfig(db);
   if (!cfg) return [];
   const out: D1PreparedStatement[] = [];
   for (const s of slots(cfg, nowMs)) {
