@@ -5,6 +5,7 @@ import { planAscension, planLevelUp, planSkillUpgrade } from '../ui/growth';
 import { errText, HubScene } from '../ui/hub';
 import { stars } from '../ui/format';
 import { Button, txt } from '../ui/kit';
+import { describeCompanionAttachment, nextPortraitExpression } from '../ui/pilotAttachment';
 import { F, T } from '../ui/theme';
 
 const SLOTS = ['weapon', 'armor', 'necklace', 'ring'] as const;
@@ -16,6 +17,7 @@ export class CharacterScene extends HubScene {
   private id = '';
   private busy = false;
   private lastOutcome = '';
+  private expression = 'composed';
 
   constructor() {
     super('Character');
@@ -23,7 +25,10 @@ export class CharacterScene extends HubScene {
 
   init(data: { id?: string }): void {
     const nextId = data.id ?? '';
-    if (nextId !== this.id) this.lastOutcome = '';
+    if (nextId !== this.id) {
+      this.lastOutcome = '';
+      this.expression = 'composed';
+    }
     this.id = nextId;
   }
 
@@ -40,16 +45,30 @@ export class CharacterScene extends HubScene {
     const have = new Map(stacks.map((s) => [s.item_id, s.qty]));
     const nm = (id: string): string => names.get(id) ?? id;
     const accountLevel = mine.account?.level ?? 1;
+    const attach = describeCompanionAttachment(this.id, meta.element, meta.role);
 
     if (this.lastOutcome) {
       this.add_(txt(this, REF_W / 2, 134, this.lastOutcome, { fontSize: '22px', color: T.heal, align: 'center', wordWrap: { width: 1560 } }).setOrigin(0.5));
     }
 
     this.card(520, 442, 880, 548, meta.rarity === 5 ? 'hot' : 'normal');
-    this.add_(txt(this, 520, 212, meta.name_en, { fontFamily: F.display, fontSize: '50px', fontStyle: '600', color: meta.rarity === 5 ? '#ffd86b' : T.text }).setOrigin(0.5));
-    this.add_(txt(this, 520, 266, `${stars(meta.rarity)}   ${meta.element} · ${meta.role.replaceAll('_', ' ')}   ·   Account Lv ${accountLevel}`, { fontSize: '26px', color: T.dim }).setOrigin(0.5));
-    this.add_(txt(this, 520, 326, `Level ${c.level} / ${c.cap}    Ascension ${c.ascension}`, { fontSize: '38px' }).setOrigin(0.5));
-    this.add_(txt(this, 520, 372, c.xpToNext === null ? 'Maximum level' : `XP ${c.xp} / ${c.xpToNext}`, { fontSize: '26px', color: T.dim }).setOrigin(0.5));
+    this.add_(txt(this, 520, 206, meta.name_en, { fontFamily: F.display, fontSize: '48px', fontStyle: '600', color: meta.rarity === 5 ? '#ffd86b' : T.text }).setOrigin(0.5));
+    this.add_(txt(this, 520, 254, `${stars(meta.rarity)}   ${attach.tacticalBadge}   ·   Account Lv ${accountLevel}`, { fontSize: '23px', color: T.dim }).setOrigin(0.5));
+    this.add_(txt(this, 520, 288, `${attach.bondTitle}: ${attach.bondLine}`, { fontSize: '19px', color: T.gold, align: 'center', wordWrap: { width: 840 } }).setOrigin(0.5));
+    if (attach.availableExpressions.length > 1) {
+      this.add_(new Button(this, 850, 206, {
+        label: `EXPR: ${this.expression.toUpperCase()}`,
+        w: 196,
+        h: 44,
+        fontSize: 16,
+        onClick: () => {
+          this.expression = nextPortraitExpression(this.id, this.expression);
+          void this.refresh();
+        }
+      }));
+    }
+    this.add_(txt(this, 520, 330, `Level ${c.level} / ${c.cap}    Ascension ${c.ascension}`, { fontSize: '36px' }).setOrigin(0.5));
+    this.add_(txt(this, 520, 372, c.xpToNext === null ? 'Maximum level' : `XP ${c.xp} / ${c.xpToNext}`, { fontSize: '25px', color: T.dim }).setOrigin(0.5));
     const s = st?.stats ?? {};
     this.add_(txt(this, 520, 424, ['hp', 'atk', 'def', 'spd'].map((k) => `${k.toUpperCase()} ${Math.round(s[k] ?? 0)}`).join('    '), { fontSize: '32px', color: T.gold }).setOrigin(0.5));
 

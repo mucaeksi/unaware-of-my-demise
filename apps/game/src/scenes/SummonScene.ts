@@ -7,6 +7,7 @@ import { Services } from '../services';
 import { errText, HubScene } from '../ui/hub';
 import { pct, stars } from '../ui/format';
 import { Bar, Button, panel, title, txt } from '../ui/kit';
+import { describeCompanionAttachment } from '../ui/pilotAttachment';
 import { C, DEPTH, F, T } from '../ui/theme';
 
 const RARITY_COLOR: Record<number, string> = { 5: '#ffd86b', 4: '#c9b6e4', 3: '#a99bb8' };
@@ -127,11 +128,13 @@ export class SummonScene extends HubScene {
       const x = cx - ((cols - 1) * (cw + 20)) / 2 + (i % cols) * (cw + 20);
       const y = cy - 100 + Math.floor(i / cols) * (ch + 24) - (r.pulls.length > 5 ? 20 : -90);
       const card = panel(this, x, y, cw, ch, p.rarity === 5 ? 'hot' : p.rarity === 4 ? 'normal' : 'dim');
-      const nm = txt(this, x, y - 40, this.name(p.itemId), { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: RARITY_COLOR[p.rarity] }).setOrigin(0.5);
+      const nm = txt(this, x, y - 48, this.name(p.itemId), { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: RARITY_COLOR[p.rarity] }).setOrigin(0.5);
       if (nm.width > cw - 30) nm.setScale((cw - 30) / nm.width);
-      const star = txt(this, x, y + 5, stars(p.rarity), { fontSize: '34px', color: RARITY_COLOR[p.rarity] }).setOrigin(0.5);
-      const tag = txt(this, x, y + 58, p.duplicate ? `+${p.shards} shards` : p.outcome === 'guaranteed' ? 'NEW · guaranteed' : 'NEW', { fontSize: '26px', color: p.duplicate ? T.dim : T.heal }).setOrigin(0.5);
-      const group = [card, nm, star, tag];
+      const star = txt(this, x, y - 8, stars(p.rarity), { fontSize: '32px', color: RARITY_COLOR[p.rarity] }).setOrigin(0.5);
+      const attach = describeCompanionAttachment(p.itemId);
+      const roleCue = txt(this, x, y + 28, attach.formationSlot.toUpperCase(), { fontSize: '18px', color: T.gold }).setOrigin(0.5);
+      const tag = txt(this, x, y + 62, p.duplicate ? `+${p.shards} shards` : p.outcome === 'guaranteed' ? 'NEW · guaranteed' : 'NEW', { fontSize: '24px', color: p.duplicate ? T.dim : T.heal }).setOrigin(0.5);
+      const group = [card, nm, star, roleCue, tag];
       items.push(...group);
       if (!prefs().reducedMotion) {
         group.forEach((o) => (o as Phaser.GameObjects.Image).setAlpha(0));
