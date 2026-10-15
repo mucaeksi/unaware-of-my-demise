@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { ContentService } from '../content/ContentService';
-import { loadEntry } from '../entry/state';
+import { forceResetEntry, loadEntry } from '../entry/state';
 import { prefs } from '../platform/prefs';
 import { API_BASE } from '../config';
 import { loadCurrencyName } from '../net/currency';
@@ -40,10 +40,14 @@ export class BootScene extends Phaser.Scene {
     void initConsent(); // Android: UMP consent form where the region requires it, then the ads SDK
     initStoreReconciliation(); // Startup, resume, auth-switch, and async Play purchase reconciliation
     void loadCurrencyName(API_BASE);
+    const params = new URLSearchParams(window.location.search);
+    const previewScene = params.get('preview_scene');
+    if (previewScene === 'fresh_flow' || previewScene === 'title_fresh' || params.get('fresh_entry') === '1') {
+      forceResetEntry();
+    }
     // the engine credit plays while content and menu art load behind it
     const ready = this.loadEverything();
-    const previewScene = new URLSearchParams(window.location.search).get('preview_scene');
-    if (previewScene && previewScene !== 'splash') {
+    if (previewScene && previewScene !== 'splash' && previewScene !== 'fresh_flow') {
       void ready.then((ok) => {
         if (!ok) return;
         void prefs();
@@ -66,6 +70,7 @@ export class BootScene extends Phaser.Scene {
         this.scene.start('Studio');
         break;
       case 'title':
+      case 'title_fresh':
         this.scene.start('Title');
         break;
       case 'prologue':

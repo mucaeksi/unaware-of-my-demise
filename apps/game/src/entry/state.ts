@@ -67,9 +67,60 @@ export function parseEntry(raw: unknown): EntryState {
 }
 
 const KEY = 'uomd.entry.v1';
+const V012_RESET_KEY = 'uomd.entry.aab_v012_reset.v1';
+const FORCE_FRESH_KEY = 'uomd.entry.force_fresh.v1';
 let cache: EntryState | null = null;
 
+/**
+ * Ensures browsers that played an earlier pre-v0.1.2 build on staging start fresh in the new
+ * v0.1.2 Base AAB flow (Prologue + 3 Tutorials) instead of skipping straight to post-tutorial.
+ * Skipped under automated tests / WebDriver so test fixtures remain untouched.
+ */
+function ensureV012EntryReset(): void {
+  try {
+    if (typeof window === 'undefined' || window.navigator?.webdriver) return;
+    if (localStorage.getItem(V012_RESET_KEY) !== '1') {
+      localStorage.setItem(V012_RESET_KEY, '1');
+      localStorage.setItem(FORCE_FRESH_KEY, '1');
+      localStorage.removeItem(KEY);
+      localStorage.removeItem('uomd.entry.owner.v1');
+      cache = null;
+    }
+  } catch {
+    /* ignore storage errors */
+  }
+}
+
+export function isForceFreshEntry(): boolean {
+  try {
+    return typeof window !== 'undefined' && !window.navigator?.webdriver && localStorage.getItem(FORCE_FRESH_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+export function clearForceFreshEntry(): void {
+  try {
+    localStorage.removeItem(FORCE_FRESH_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+/** Explicitly resets the entry state to a brand-new player (used by Admin Live Preview & Title replay button). */
+export function forceResetEntry(): EntryState {
+  try {
+    localStorage.setItem(V012_RESET_KEY, '1');
+    localStorage.setItem(FORCE_FRESH_KEY, '1');
+    localStorage.removeItem('uomd.entry.owner.v1');
+  } catch {
+    /* ignore */
+  }
+  return saveEntry(freshEntry());
+}
+
 export function loadEntry(): EntryState {
+  ensureV012EntryReset();
   if (cache) return cache;
   try {
     const raw = localStorage.getItem(KEY);
@@ -84,6 +135,7 @@ export function saveEntry(s: EntryState): EntryState {
   cache = s;
   try {
     localStorage.setItem(KEY, JSON.stringify(s));
+    if (s.phase === 'completed') clearForceFreshEntry();
   } catch {
     /* storage unavailable: the record lives for this session only */
   }
@@ -94,3 +146,4 @@ export function saveEntry(s: EntryState): EntryState {
 export function resetEntryCache(): void {
   cache = null;
 }
+

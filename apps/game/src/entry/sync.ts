@@ -1,5 +1,5 @@
 import type { EntryCheckpoint } from '../net/api';
-import { freshEntry, loadEntry, markCompleted, mergeEntry, saveEntry, type EntryState } from './state';
+import { freshEntry, isForceFreshEntry, loadEntry, markCompleted, mergeEntry, saveEntry, type EntryState } from './state';
 
 /** The slice of the API client the sync needs (a fake in tests). */
 export interface EntryApi {
@@ -38,7 +38,7 @@ const sameProgress = (a: EntryState, b: EntryState): boolean => a.phase === b.ph
  */
 export async function syncEntry(api: EntryApi): Promise<{ state: EntryState; synced: boolean }> {
   const local = loadEntry();
-  if (!api.signedIn) return { state: local, synced: false };
+  if (!api.signedIn || isForceFreshEntry()) return { state: local, synced: false };
   try {
     const remote = await api.entry();
     const owner = readOwner();

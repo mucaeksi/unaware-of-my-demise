@@ -158,7 +158,7 @@ export class ContentService {
 
   private async preferBaseFile(path: string): Promise<boolean> {
     if (!Object.hasOwn(this.base.files, path)) return false;
-    if (path === 'chapters/chapter_index.json' || path === 'units/unit_pack.json' || path === 'art/art_manifest.json') return false;
+    if (CHANNEL === 'dev' && (path === 'chapters/chapter_index.json' || path === 'units/unit_pack.json' || path === 'art/art_manifest.json')) return false;
     return this.isStaleBasePatch();
   }
 

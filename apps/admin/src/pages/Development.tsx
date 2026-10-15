@@ -130,9 +130,9 @@ const FRAMES: { label: string; w: number; h: number }[] = [
 ];
 
 const SCENE_PRESETS: { id: string; label: string }[] = [
-  { id: '', label: '1. Full Flow (Phaser Splash)' },
+  { id: 'fresh_flow', label: '1. Full Flow (Splash → Prologue → Tutorials)' },
   { id: 'studio', label: '2. ŞovTaym Studios' },
-  { id: 'title', label: '3. Title (Tap to Start)' },
+  { id: 'title_fresh', label: '3. Title (Tap to Start → Prologue)' },
   { id: 'prologue', label: '4. 120s Prologue' },
   { id: 'story_t1', label: '5. Tutorial LN Story (Busts)' },
   { id: 'battle_t1', label: '6. Battle T-1 (Whispering Ash)' },
@@ -145,7 +145,7 @@ const SCENE_PRESETS: { id: string; label: string }[] = [
 
 function Preview(): ReactNode {
   const [f, setF] = useState(0);
-  const [scene, setScene] = useState('');
+  const [scene, setScene] = useState('fresh_flow');
   const [nonce, setNonce] = useState(0);
   const frame = FRAMES[f] as (typeof FRAMES)[number];
   const url = gameUrl(scene);

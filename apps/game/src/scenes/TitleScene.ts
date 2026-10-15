@@ -3,7 +3,7 @@ import type { PatchOutcome } from '@uomd/patch';
 import { CHANNEL, CLIENT_VERSION, PATCH_LAB_ENABLED, PREVIEW_FLOW_ENABLED, REF_H, REF_W } from '../config';
 import { beginEntry, signInWithGoogle } from '../entry/flow';
 import { syncEntry } from '../entry/sync';
-import { loadEntry } from '../entry/state';
+import { forceResetEntry, loadEntry } from '../entry/state';
 import { S, setActiveLocaleStrings } from '../entry/strings';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
@@ -236,11 +236,24 @@ export class TitleScene extends Phaser.Scene {
       .setDepth(DEPTH.world);
   }
 
-  /** Clean Title Screen menu: blinking TAP TO START banner + discrete top-right SETTINGS utility pill. */
+  /** Clean Title Screen menu: blinking TAP TO START banner + discrete top-right SETTINGS & REPLAY INTRO utility pills. */
   private buildTitleStartMenu(): void {
     const insets = safeInsets(this);
     const subLine = this.firstRun ? S.menu.tapSubFirstRun : S.menu.tapSubReturn;
     this.buildTapToContinueBanner('GOOGLE PLAY GAMES  ·  LIVEOPS', subLine, true, () => void this.onTapToStart());
+    if (!this.firstRun) {
+      new Button(this, REF_W - 415 - insets.right, 58 + insets.top, {
+        label: 'REPLAY INTRO',
+        w: 280,
+        h: 72,
+        fontSize: 21,
+        onClick: () => {
+          forceResetEntry();
+          this.firstRun = true;
+          void this.onTapToStart();
+        }
+      }).setDepth(DEPTH.hud + 2);
+    }
     new Button(this, REF_W - 145 - insets.right, 58 + insets.top, {
       label: S.menu.settings,
       w: 210,
