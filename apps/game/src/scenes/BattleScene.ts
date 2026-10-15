@@ -193,18 +193,163 @@ export class BattleScene extends Phaser.Scene {
 
     const defs = new Map(this.pack.units.map((u) => [u.unit_id, u]));
     for (const side of ['player', 'enemy'] as const) {
-      const list = this.battle.combatants.filter((c) => c.side === side);
-      for (const row of ['front', 'rear'] as const) {
-        const inRow = list.filter((c) => c.row === row).sort((a, b) => a.slot - b.slot);
-        inRow.forEach((c, i) => {
-          const spot = spotFor(side, row, i, inRow.length, this.layoutPreset, insetX);
-          const v = new UnitView(this, art, { id: c.id, name: c.def.name_en, side, artKey: defs.get(c.def.unit_id)?.art_key ?? c.def.unit_id, element: c.def.element, maxHp: c.maxHp, hp: c.hp, spot }, prefs().reducedMotion);
-          v.setDepth(DEPTH.units + spot.y);
-          v.on('pointerup', () => this.onUnitTapped(v));
-          this.views.set(c.id, v);
-        });
+      for (const { c, visualRow, indexInRow, countInRow } of this.visualFormationForSide(side)) {
+        const spot = spotFor(side, visualRow, indexInRow, countInRow, this.layoutPreset, insetX);
+        const v = new UnitView(
+          this,
+          art,
+          {
+            id: c.id,
+            name: c.def.name_en,
+            side,
+            artKey: defs.get(c.def.unit_id)?.art_key ?? c.def.unit_id,
+            element: c.def.element,
+            maxHp: c.maxHp,
+            hp: c.hp,
+            spot,
+          },
+          prefs().reducedMotion,
+        );
+        v.setDepth(DEPTH.units + spot.y);
+        v.on('pointerup', () => this.onUnitTapped(v));
+        this.views.set(c.id, v);
       }
     }
+  }
+
+  /**
+   * Distributes a side's combatants into the canonical 2-Front (2 önde) + 3-Rear (3 arkada) visual formation.
+   * When an encounter defines >2 units in `front` and <3 in `rear` (e.g. 3 enemies all tagged `front`),
+   * excess units overflow into the `rear` visual column so every battle displays a true 3-back / 2-front formation.
+   */
+  private visualFormationForSide(side: 'player' | 'enemy'): {
+    c: BattleScene['battle']['combatants'][number];
+    visualRow: 'front' | 'rear';
+    indexInRow: number;
+    countInRow: number;
+  }[] {
+    const list = this.battle.combatants.filter((c) => c.side === side).sort((a, b) => a.slot - b.slot);
+    const rawFront = list.filter((c) => c.row === 'front');
+    const rawRear = list.filter((c) => c.row === 'rear');
+    let front: typeof list;
+    let rear: typeof list;
+    if (rawFront.length >= 2 && rawRear.length === 0) {
+      // Distribute 2-unit or 3+-unit all-front waves into front (up to 2, or 1 when <=3 total) + rear (up to 3)
+      const sortedFront = [...rawFront].sort((a, b) => {
+        const aTank = /pilgrim|knight|tank|guard|bulwark/i.test(a.def.unit_id + ' ' + a.def.role) ? 0 : 1;
+        const bTank = /pilgrim|knight|tank|guard|bulwark/i.test(b.def.unit_id + ' ' + b.def.role) ? 0 : 1;
+        return aTank - bTank || a.slot - b.slot;
+      });
+      const frontCap = rawFront.length <= 3 ? 1 : 2;
+      front = sortedFront.slice(0, frontCap);
+      rear = sortedFront.slice(frontCap);
+    } else if (rawFront.length > 2 && rawRear.length < 3) {
+      const sortedFront = [...rawFront].sort((a, b) => {
+        const aTank = /pilgrim|knight|tank|guard|bulwark/i.test(a.def.unit_id + ' ' + a.def.role) ? 0 : 1;
+        const bTank = /pilgrim|knight|tank|guard|bulwark/i.test(b.def.unit_id + ' ' + b.def.role) ? 0 : 1;
+        return aTank - bTank || a.slot - b.slot;
+      });
+      front = sortedFront.slice(0, 2);
+      rear = [...sortedFront.slice(2), ...rawRear];
+    } else {
+      front = rawFront;
+      rear = rawRear;
+    }
+    const out: {
+      c: BattleScene['battle']['combatants'][number];
+      visualRow: 'front' | 'rear';
+      indexInRow: number;
+      countInRow: number;
+    }[] = [];
+    front.forEach((c, i) => out.push({ c, visualRow: 'front', indexInRow: i, countInRow: front.length }));
+    rear.forEach((c, i) => out.push({ c, visualRow: 'rear', indexInRow: i, countInRow: rear.length }));
+    return out;
+  }
+
+  /** Renders and caches a 96x96 circular mini-portrait medallion texture for the Turn Order bar. */
+  private ensureUnitAvatarTexture(artKey: string, side: 'player' | 'enemy'): string {
+    const texKey = `turn_avatar_${artKey}_${side}`;
+    if (this.textures.exists(texKey)) return texKey;
+    const { art } = Services.ready();
+    const u = art.unit(artKey);
+    const idle = art.frameFor(artKey, 'idle');
+    const frameObj = this.textures.getFrame(idle.key, idle.frame);
+    const srcImg = frameObj?.source?.image as HTMLImageElement | HTMLCanvasElement | undefined;
+
+    const size = 96;
+    const canvasTex = this.textures.createCanvas(texKey, size, size);
+    if (!canvasTex) return idle.key;
+    const ctx = canvasTex.getContext();
+    const cx = size / 2;
+    const cy = size / 2;
+    const r = 42;
+
+    ctx.clearRect(0, 0, size, size);
+
+    // 1. Dark gothic circular backdrop
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.closePath();
+    const bgGrad = ctx.createRadialGradient(cx, cy - 10, 6, cx, cy, r);
+    if (side === 'player') {
+      bgGrad.addColorStop(0, '#2a1f3d');
+      bgGrad.addColorStop(1, '#0e0816');
+    } else {
+      bgGrad.addColorStop(0, '#3a1728');
+      bgGrad.addColorStop(1, '#12070e');
+    }
+    ctx.fillStyle = bgGrad;
+    ctx.fill();
+
+    // 2. Clip and draw character head/bust crop
+    ctx.clip();
+    if (srcImg && frameObj) {
+      const fx = frameObj.cutX;
+      const fy = frameObj.cutY;
+      const fw = frameObj.cutWidth;
+      const fh = frameObj.cutHeight;
+      // SD Chibis have oversized 2-head proportions: top 58% of idle frame is the head & shoulders
+      const cropH = Math.max(1, Math.round(fh * 0.6));
+      const cropW = Math.min(fw, Math.round(cropH * 1.05));
+      const cropX = fx + Math.max(0, Math.round((fw - cropW) * 0.5));
+      const cropY = fy;
+      const wantRight = side === 'player';
+      const flipX = (u.facing === 'right') !== wantRight;
+
+      ctx.save();
+      ctx.translate(cx, cy + 4);
+      if (flipX) ctx.scale(-1, 1);
+      const drawSize = r * 2.08;
+      ctx.drawImage(srcImg, cropX, cropY, cropW, cropH, -drawSize / 2, -drawSize / 2, drawSize, drawSize);
+      ctx.restore();
+    }
+
+    // Subtle inner edge vignette inside circle
+    const vig = ctx.createRadialGradient(cx, cy, r * 0.62, cx, cy, r);
+    vig.addColorStop(0, 'rgba(10,6,16,0)');
+    vig.addColorStop(1, 'rgba(10,6,16,0.55)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, size, size);
+    ctx.restore();
+
+    // 3. Ornate dual metallic bezel ring
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = side === 'player' ? '#7ea8ff' : '#e56b86';
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, r - 3, 0, Math.PI * 2);
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = side === 'player' ? '#e3c37d' : '#ffb3c4';
+    ctx.stroke();
+    ctx.restore();
+
+    canvasTex.refresh();
+    return texKey;
   }
 
   // ------------------------------------------------------------------ HUD
@@ -212,29 +357,28 @@ export class BattleScene extends Phaser.Scene {
   private buildHud(): void {
     const insets = safeInsets(this);
     const spec = battleLayoutSpec(this.layoutPreset);
-    // top-left: stage title; centre-left: turn order
-    title(this, 60 + insets.left, 62 + insets.top, `${this.encounter.stage_id}  ·  ${this.encounter.title_en}`, 36, T.gold).setOrigin(0, 0.5).setDepth(DEPTH.hud);
+    // top-left: stage title; compact circular portrait turn order bar right below
+    title(this, 60 + insets.left, 54 + insets.top, `${this.encounter.stage_id}  ·  ${this.encounter.title_en}`, 32, T.gold).setOrigin(0, 0.5).setDepth(DEPTH.hud);
     this.chipLayer = this.add.container(0, 0).setDepth(DEPTH.hud);
-    txt(this, 60 + insets.left, 122 + insets.top, 'TURN ORDER', { fontFamily: F.display, fontSize: '20px', color: T.dim }).setDepth(DEPTH.hud);
 
     // the encounter's ui block can hide the speed and Auto buttons (the opening tutorials are manual, one turn at a time)
     const ui = this.encounter.ui ?? { speed: true, auto: true };
     let edge = REF_W - 150 - insets.right;
-    const btnY = 70 + insets.top;
+    const btnY = 66 + insets.top;
     if (ui.speed) {
-      this.speedBtn = new Button(this, edge, btnY, { label: '×1', w: 190, h: 100, fontSize: 36, onClick: () => this.toggleSpeed() }).setDepth(DEPTH.hud);
-      edge -= 215;
+      this.speedBtn = new Button(this, edge, btnY, { label: '×1', w: 180, h: 88, fontSize: 32, onClick: () => this.toggleSpeed() }).setDepth(DEPTH.hud);
+      edge -= 200;
     }
     if (ui.auto) {
-      this.autoBtn = new Button(this, edge, btnY, { label: 'AUTO', w: 210, h: 100, fontSize: 30, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
-      edge -= 220;
+      this.autoBtn = new Button(this, edge, btnY, { label: 'AUTO', w: 196, h: 88, fontSize: 28, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
+      edge -= 206;
     }
-    new Button(this, edge, btnY, { label: 'MENU', w: 210, h: 100, fontSize: 30, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
+    new Button(this, edge, btnY, { label: 'MENU', w: 196, h: 88, fontSize: 28, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
 
     // between the title block and the speed/auto/menu buttons there is free room at the top: the turn hint lives there
-    this.descText = txt(this, REF_W / 2, spec.descY - insets.bottom, '', { fontSize: '28px', color: T.text, align: 'center', wordWrap: { width: 1640 - insets.left - insets.right } }).setOrigin(0.5).setDepth(DEPTH.hud);
-    this.hintText = txt(this, 830, 62 + insets.top, '', { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setDepth(DEPTH.hud);
-    this.telegraphText = txt(this, REF_W - 60 - insets.right, 150 + insets.top, '', { fontFamily: F.display, fontSize: '30px', fontStyle: '700', color: T.crimson, stroke: '#0a0610', strokeThickness: 5 }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
+    this.descText = txt(this, REF_W / 2, spec.descY - insets.bottom, '', { fontSize: '26px', color: T.text, align: 'center', wordWrap: { width: 1640 - insets.left - insets.right } }).setOrigin(0.5).setDepth(DEPTH.hud);
+    this.hintText = txt(this, 830, 54 + insets.top, '', { fontFamily: F.display, fontSize: '26px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setDepth(DEPTH.hud);
+    this.telegraphText = txt(this, REF_W - 60 - insets.right, 136 + insets.top, '', { fontFamily: F.display, fontSize: '26px', fontStyle: '700', color: T.crimson, stroke: '#0a0610', strokeThickness: 5 }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
     this.refreshHud();
   }
 
@@ -245,16 +389,48 @@ export class BattleScene extends Phaser.Scene {
     const order = this.battle.result ? [] : this.battle.previewOrder(8);
     this.chipLayer.removeAll(true);
     this.chips = [];
-    order.forEach((id, i) => {
-      const c = this.battle.unit(id);
-      const x = 120 + insets.left + i * 108;
-      const ring = this.add.circle(0, 0, 40, 0x120a18, 0.95).setStrokeStyle(4, c.side === 'player' ? C.player : C.enemy, i === 0 ? 1 : 0.7);
-      const letter = txt(this, 0, -2, c.def.name_en.charAt(0).toUpperCase(), { fontFamily: F.display, fontSize: '36px', fontStyle: '700', color: c.side === 'player' ? '#cfe0ff' : '#ffb3c4' }).setOrigin(0.5);
-      const chip = this.add.container(x, spec.turnOrderY + insets.top, [ring, letter]);
-      if (i === 0) chip.setScale(1.15);
-      this.chipLayer.add(chip);
-      this.chips.push(chip);
-    });
+    if (order.length > 0) {
+      const barY = spec.turnOrderY + insets.top;
+      const barX = 60 + insets.left;
+      const stepX = 54;
+      const barW = 92 + order.length * stepX;
+      const barH = 54;
+      const track = this.add.graphics();
+      track.fillStyle(0x0c0714, 0.78);
+      track.lineStyle(1.5, C.gold, 0.42);
+      track.fillRoundedRect(barX, barY - barH / 2, barW, barH, 27);
+      track.strokeRoundedRect(barX, barY - barH / 2, barW, barH, 27);
+      const lbl = txt(this, barX + 42, barY, 'TURN', {
+        fontFamily: F.display,
+        fontSize: '14px',
+        fontStyle: '700',
+        color: T.gold,
+      }).setOrigin(0.5);
+      this.chipLayer.add([track, lbl]);
+
+      const defs = new Map(this.pack.units.map((u) => [u.unit_id, u]));
+      order.forEach((id, i) => {
+        const c = this.battle.unit(id);
+        const artKey = defs.get(c.def.unit_id)?.art_key ?? c.def.unit_id;
+        const avatarTex = this.ensureUnitAvatarTexture(artKey, c.side);
+        const x = barX + 98 + i * stepX;
+        const isCurrent = i === 0;
+        const items: Phaser.GameObjects.GameObject[] = [];
+        if (isCurrent) {
+          const glow = this.add.circle(0, 0, 26, C.goldHi, 0.22).setStrokeStyle(2.5, C.goldHi, 0.95);
+          items.push(glow);
+        }
+        const avatar = this.add.image(0, 0, avatarTex).setScale(isCurrent ? 0.52 : 0.42);
+        items.push(avatar);
+        if (isCurrent) {
+          const crown = txt(this, 0, -25, '▼', { fontSize: '13px', color: T.gold, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5);
+          items.push(crown);
+        }
+        const chip = this.add.container(x, barY, items);
+        this.chipLayer.add(chip);
+        this.chips.push(chip);
+      });
+    }
     // enemy intents + status badges (with shape cues ▲/▼/◆/⛨)
     for (const [id, v] of this.views) {
       const c = this.battle.unit(id);
@@ -474,16 +650,12 @@ export class BattleScene extends Phaser.Scene {
   private relayout(side: 'player' | 'enemy'): void {
     const insets = safeInsets(this);
     const insetX = Math.max(insets.left, insets.right);
-    const list = this.battle.combatants.filter((c) => c.side === side);
-    for (const row of ['front', 'rear'] as const) {
-      const inRow = list.filter((c) => c.row === row).sort((a, b) => a.slot - b.slot);
-      inRow.forEach((c, i) => {
-        const v = this.views.get(c.id);
-        if (!v) return;
-        const spot = spotFor(side, row, i, inRow.length, this.layoutPreset, insetX);
-        v.glideTo(spot);
-        v.setDepth(DEPTH.units + spot.y);
-      });
+    for (const { c, visualRow, indexInRow, countInRow } of this.visualFormationForSide(side)) {
+      const v = this.views.get(c.id);
+      if (!v) continue;
+      const spot = spotFor(side, visualRow, indexInRow, countInRow, this.layoutPreset, insetX);
+      v.glideTo(spot);
+      v.setDepth(DEPTH.units + spot.y);
     }
   }
 

@@ -18,15 +18,15 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "197a63172c5023634f3947e3a8884fa061f30b20ee7bd98f2081455e750777d4",
-      "bytes": 8959,
+      "sha256": "0393d47db8fa6f2a9db2ee92ed40e5460631240a0c84f97946b40ef49ae95933",
+      "bytes": 9174,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
     {
       "path": "art/atlas_bellbound_dead.webp",
-      "sha256": "ab6f84785211fa6395f9edf4f2997dd613851e121203dd24a6f0e24e91ca6c54",
-      "bytes": 101860,
+      "sha256": "990827030c29201f07911b41e31dc7ba01f1020e8f46c1a25b0bc9e987f8d548",
+      "bytes": 101988,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
@@ -39,8 +39,8 @@
     },
     {
       "path": "art/atlas_hollow_pilgrim.webp",
-      "sha256": "e3cd464846094c71bbf6a2a4a59742d1cba69acb3c951d945d488eaf4f04b213",
-      "bytes": 123358,
+      "sha256": "d2915a6a939ef3a09cd0d5880e7d13e474a45a73733575ee8f19f7aaa1663dc0",
+      "bytes": 123116,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
@@ -74,50 +74,57 @@
     },
     {
       "path": "art/portrait_fadyme_composed.webp",
-      "sha256": "7fef1082bdd336b2a99b2881dc450fdae92ae38975664bf444dc7d4d2deb9289",
-      "bytes": 305672,
+      "sha256": "87333f7b655f7bc463bfc02e298750a8a3d67e7edbcb3891c37743a7462ff405",
+      "bytes": 133122,
       "media_type": "image/webp",
       "kind": "portrait"
     },
     {
       "path": "art/portrait_fadyme_resolve.webp",
-      "sha256": "f08c47aa63c9732e852320ab6d1405517c333ae8d80cfa603688a5a85202da6f",
-      "bytes": 205968,
+      "sha256": "8b31a9747b48afbb3fb7ede3c10f1b7f0d3be5a8e8fc568b1319facb09375b09",
+      "bytes": 151332,
       "media_type": "image/webp",
       "kind": "portrait"
     },
     {
       "path": "art/portrait_fadyme_warm.webp",
-      "sha256": "c980b69e260f1ccf0d40f54266441aa658d05bc717e7ea50b9577014f595565f",
-      "bytes": 288238,
+      "sha256": "892c347f36c55c16a3aaef9d1996cd5732ac50a0e8cb80fdae02b758873b484f",
+      "bytes": 155842,
       "media_type": "image/webp",
       "kind": "portrait"
     },
     {
       "path": "art/portrait_fadyme_wry.webp",
-      "sha256": "eabeb23ac88a5a0a16ab244be0655fadb80c049d1fe31ccb6b1c407f35ea857f",
-      "bytes": 205632,
+      "sha256": "0667a255089d9d7bb61c880e1b635b9a5eaac514f1eabb07ff75f32abb67e876",
+      "bytes": 151228,
       "media_type": "image/webp",
       "kind": "portrait"
     },
     {
       "path": "art/portrait_mahmut_composed.webp",
-      "sha256": "f61c6d032242ac1bd142c24b7b0fd86ced1f999ab53bf41ca1b2130b44d3c139",
-      "bytes": 277762,
+      "sha256": "7bc2d64e668096de9449ab191f7f74f4926ebd498f427613aa52d0adce57d1d3",
+      "bytes": 98554,
       "media_type": "image/webp",
       "kind": "portrait"
     },
     {
       "path": "art/portrait_mahmut_dry_humor.webp",
-      "sha256": "ef3a48a3c21e971de99ea4a3b555bd71ee5fd5b613e747c85807117e119ef823",
-      "bytes": 210216,
+      "sha256": "7429b941eb622bde2169b23bf325228b6d903684c40cb53f0724363c10a8fb91",
+      "bytes": 137520,
       "media_type": "image/webp",
       "kind": "portrait"
     },
     {
       "path": "art/portrait_mahmut_protective_resolve.webp",
-      "sha256": "c7a8ddc6a93c33af47099e4b66e46b725516cb90f508a8a8cedbada11162bea8",
-      "bytes": 209122,
+      "sha256": "d89d4fcd7c8c764e994dce0fe132b6b612a9f07e8fe71e49e70a159f2980757a",
+      "bytes": 156424,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_mahmut_watchful.webp",
+      "sha256": "637273a2d334a6372088e5b3c681d0cee4aef297b8fbe0665160e0b3653a4e7f",
+      "bytes": 145538,
       "media_type": "image/webp",
       "kind": "portrait"
     },

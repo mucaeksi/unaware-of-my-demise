@@ -123,7 +123,16 @@ export class StoryScene extends Phaser.Scene {
       const addEmotion = (ch: string, em = 'composed'): void => {
         chars.add(ch);
         let set = charEmotions.get(ch);
-        if (!set) { set = new Set(['composed']); charEmotions.set(ch, set); }
+        if (!set) {
+          set = new Set(
+            ch === 'fadyme'
+              ? ['composed', 'dry_amusement', 'soft_smile', 'determined']
+              : ch === 'mahmut'
+                ? ['composed', 'watchful', 'dry_humor', 'protective']
+                : ['composed'],
+          );
+          charEmotions.set(ch, set);
+        }
         set.add(em);
       };
       const locations = new Set([this.data0.location_id]);
@@ -134,9 +143,10 @@ export class StoryScene extends Phaser.Scene {
         if (c.op === 'say') addEmotion(c.speaker, c.emotion ?? 'composed');
         if (c.op === 'music' && c.cue_id !== 'stop') cues.add(c.cue_id);
       }
-      // Always load original character portraits so all cutscenes stage the canonical character busts
+      // Always load all character emotion portraits so both speaker and listener react dynamically
       await Promise.all([
         ...[...locations].map((id) => art.loadBackground(this, id)),
+        ...(this.data0.illustration_id ? [art.loadStills(this, [this.data0.illustration_id])] : []),
         art.loadPortraits(this, [...chars], charEmotions),
         ...[...cues].map((q) => art.loadMusic(this, q))
       ]);
@@ -219,15 +229,15 @@ export class StoryScene extends Phaser.Scene {
 
     this.nameText = txt(this, 0, 0, '', {
       fontFamily: F.display,
-      fontSize: '34px',
+      fontSize: '28px',
       fontStyle: '700',
       color: T.gold,
       stroke: '#0a0610',
       strokeThickness: 4
     })
       .setOrigin(0.5)
-      .setLetterSpacing(3);
-    const plateBg = panel(this, 0, 0, 390, 70, 'hot');
+      .setLetterSpacing(2);
+    const plateBg = panel(this, 0, 0, 490, 68, 'hot');
     this.namePlate = this.add.container(0, 0, [plateBg, this.nameText]).setDepth(DEPTH.hud + 2).setVisible(false);
 
     this.actionBadge = txt(this, 0, -96, '', {
@@ -406,6 +416,10 @@ export class StoryScene extends Phaser.Scene {
 
   // ------------------------------------------------------------------ actors & bust choreography
 
+  private targetBustHeight(character: string): number {
+    return character === 'fadyme' ? 845 : 940;
+  }
+
   private showActor(character: string, side: 'left' | 'right', emotion = 'composed', immediate = false): void {
     const { art } = Services.ready();
     const key = art.portrait(character, emotion) ?? art.portrait(character, 'composed');
@@ -416,16 +430,17 @@ export class StoryScene extends Phaser.Scene {
       existing.image.destroy();
       this.actors.delete(character);
     }
-    const baseX = side === 'left' ? 500 : REF_W - 500;
-    const baseY = REF_H + 30;
+    const baseX = side === 'left' ? 470 : REF_W - 470;
+    const baseY = REF_H + 22;
     const img = this.add
       .image(immediate ? baseX : baseX + (side === 'left' ? -90 : 90), baseY, key)
       .setOrigin(0.5, 1)
       .setDepth(DEPTH.world)
-      .setAlpha(immediate ? 0.82 : 0);
-    const k = 980 / img.height;
+      .setAlpha(immediate ? 0.86 : 0);
+    const k = this.targetBustHeight(character) / img.height;
     img.setScale(k);
-    if (side === 'left') img.setFlipX(false);
+    // Authored portraits face slightly right; flip right-side character so both face inward toward each other
+    img.setFlipX(side === 'right');
 
     let breatheTween: Phaser.Tweens.Tween | null = null;
     if (!prefs().reducedMotion) {
@@ -453,7 +468,7 @@ export class StoryScene extends Phaser.Scene {
     };
     this.actors.set(character, actor);
     if (!immediate) {
-      this.tweens.add({ targets: img, x: baseX, alpha: 0.82, duration: prefs().reducedMotion ? 1 : 950, ease: 'Cubic.easeOut' });
+      this.tweens.add({ targets: img, x: baseX, alpha: 0.86, duration: prefs().reducedMotion ? 1 : 950, ease: 'Cubic.easeOut' });
     }
   }
 
@@ -465,40 +480,159 @@ export class StoryScene extends Phaser.Scene {
     this.tweens.add({ targets: a.image, alpha: 0, duration: 450, onComplete: () => a.image.destroy() });
   }
 
+  /** Smoothly crossfades a character's portrait texture to `newEmotion` and plays a physical reaction impulse. */
+  private setActorEmotion(character: string, newEmotion: string, reactionImpulse = true): void {
+    const a = this.actors.get(character);
+    if (!a) return;
+    const { art } = Services.ready();
+    const key = art.portrait(character, newEmotion) ?? art.portrait(character, 'composed');
+    if (!key) return;
+    const changed = a.emotion !== newEmotion || a.image.texture.key !== key;
+    a.emotion = newEmotion;
+    if (!changed) return;
+
+    const prevKey = a.image.texture.key;
+    const ghost = this.add
+      .image(a.image.x, a.image.y, prevKey)
+      .setOrigin(0.5, 1)
+      .setScale(a.image.scaleX, a.image.scaleY)
+      .setFlipX(a.image.flipX)
+      .setAngle(a.image.angle)
+      .setTint(a.image.tintTopLeft)
+      .setAlpha(a.image.alpha)
+      .setDepth(a.image.depth);
+
+    const sc = (this.targetBustHeight(character) / a.image.height) * a.scaleMult;
+    a.image.setTexture(key).setScale(sc);
+
+    this.tweens.add({
+      targets: ghost,
+      alpha: 0,
+      duration: prefs().reducedMotion ? 1 : 220,
+      ease: 'Quad.easeOut',
+      onComplete: () => ghost.destroy()
+    });
+
+    if (reactionImpulse && !prefs().reducedMotion) {
+      if (newEmotion === 'dry_amusement' || newEmotion === 'dry_humor') {
+        this.tweens.add({ targets: a.image, y: a.image.y - 10, duration: 130, yoyo: true, ease: 'Sine.easeInOut' });
+      } else if (newEmotion === 'protective' || newEmotion === 'determined') {
+        this.tweens.add({ targets: a.image, scaleX: sc * 1.035, scaleY: sc * 1.035, duration: 150, yoyo: true, ease: 'Back.easeOut' });
+      } else if (newEmotion === 'soft_smile') {
+        this.tweens.add({ targets: a.image, y: a.image.y + 8, duration: 180, yoyo: true, ease: 'Sine.easeInOut' });
+      }
+    }
+  }
+
   /**
-   * Shapes and animates the original character busts (`portrait_mahmut_*` and `portrait_fadyme_*`)
-   * according to both what they say (emotion/dialogue) and what they do in the narrative script!
+   * Shapes and animates the character busts (`portrait_mahmut_*` and `portrait_fadyme_*`)
+   * according to the flow, content, and spirit of each line, updating both speaker and listener reactions!
    */
-  private applyLineChoreography(e: Extract<StoryEvent, { type: 'line' }>): void {
+  private applyLineChoreography(e: Extract<StoryEvent, { type: 'line' }>): { speakerEmotion: string; moodLabel: string } {
     const id = e.lineId;
     const m = this.actors.get('mahmut');
     const f = this.actors.get('fadyme');
     let stageCue = '';
+
+    // Context-aware emotion overrides for lines where the base script used repeated 'composed' tags
+    const EMOTION_OVERRIDES: Record<string, { speaker?: string; listener?: { char: string; emotion: string } }> = {
+      tutorial_t1_before_001: { listener: { char: 'mahmut', emotion: 'watchful' } },
+      tutorial_t1_before_003: { listener: { char: 'mahmut', emotion: 'dry_humor' } },
+      tutorial_t1_before_005: { listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t1_before_006: { listener: { char: 'fadyme', emotion: 'composed' } },
+      tutorial_t1_before_009: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t1_before_012: { speaker: 'protective', listener: { char: 'fadyme', emotion: 'determined' } },
+      tutorial_t1_before_013: { listener: { char: 'fadyme', emotion: 'determined' } },
+
+      tutorial_t1_after_002: { listener: { char: 'fadyme', emotion: 'dry_amusement' } },
+      tutorial_t1_after_006: { speaker: 'composed', listener: { char: 'fadyme', emotion: 'soft_smile' } },
+      tutorial_t1_after_007: { speaker: 'composed', listener: { char: 'fadyme', emotion: 'dry_amusement' } },
+      tutorial_t1_after_012: { speaker: 'determined', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t1_after_014: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'dry_humor' } },
+
+      tutorial_t2_before_003: { speaker: 'composed', listener: { char: 'mahmut', emotion: 'watchful' } },
+      tutorial_t2_before_004: { speaker: 'watchful' },
+      tutorial_t2_before_005: { speaker: 'dry_amusement', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t2_before_007: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t2_before_011: { speaker: 'protective', listener: { char: 'fadyme', emotion: 'determined' } },
+
+      tutorial_t2_after_003: { speaker: 'watchful', listener: { char: 'fadyme', emotion: 'dry_amusement' } },
+      tutorial_t2_after_005: { speaker: 'composed', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t2_after_006: { speaker: 'dry_humor', listener: { char: 'fadyme', emotion: 'composed' } },
+      tutorial_t2_after_007: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t2_after_008: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t2_after_015: { speaker: 'composed', listener: { char: 'fadyme', emotion: 'soft_smile' } },
+      tutorial_t2_after_016: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'dry_humor' } },
+      tutorial_t2_after_018: { speaker: 'dry_humor', listener: { char: 'fadyme', emotion: 'soft_smile' } },
+
+      tutorial_t3_before_007: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'watchful' } },
+      tutorial_t3_before_008: { speaker: 'protective', listener: { char: 'fadyme', emotion: 'composed' } },
+      tutorial_t3_before_009: { speaker: 'dry_amusement', listener: { char: 'mahmut', emotion: 'protective' } },
+      tutorial_t3_before_012: { speaker: 'composed', listener: { char: 'fadyme', emotion: 'soft_smile' } },
+      tutorial_t3_before_014: { speaker: 'determined', listener: { char: 'mahmut', emotion: 'protective' } },
+
+      tutorial_t3_after_005: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t3_after_008: { speaker: 'dry_amusement', listener: { char: 'mahmut', emotion: 'dry_humor' } },
+      tutorial_t3_after_011: { speaker: 'composed', listener: { char: 'fadyme', emotion: 'soft_smile' } },
+      tutorial_t3_after_016: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'watchful' } },
+      tutorial_t3_after_020: { speaker: 'composed', listener: { char: 'mahmut', emotion: 'watchful' } },
+      tutorial_t3_after_021: { speaker: 'composed', listener: { char: 'mahmut', emotion: 'watchful' } },
+      tutorial_t3_after_023: { speaker: 'dry_amusement', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t3_after_024: { speaker: 'composed', listener: { char: 'fadyme', emotion: 'composed' } },
+      tutorial_t3_after_025: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t3_after_026: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t3_after_029: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'composed' } },
+      tutorial_t3_after_030: { speaker: 'dry_humor', listener: { char: 'fadyme', emotion: 'soft_smile' } },
+      tutorial_t3_after_031: { speaker: 'dry_amusement', listener: { char: 'mahmut', emotion: 'dry_humor' } },
+      tutorial_t3_after_032: { speaker: 'composed', listener: { char: 'fadyme', emotion: 'soft_smile' } },
+      tutorial_t3_after_034: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'composed' } },
+    };
+
+    const ov = EMOTION_OVERRIDES[id];
+    const resolvedEmotion = ov?.speaker ?? e.emotion ?? 'composed';
+
+    if (e.speaker === 'narration') {
+      if (ov?.speaker && f) this.setActorEmotion('fadyme', ov.speaker, true);
+      if (ov?.listener) this.setActorEmotion(ov.listener.char, ov.listener.emotion, true);
+    } else {
+      this.setActorEmotion(e.speaker, resolvedEmotion, true);
+      if (ov?.listener) {
+        this.setActorEmotion(ov.listener.char, ov.listener.emotion, false);
+      } else {
+        // Default reactive listener expression based on speaker's tone
+        const otherChar = e.speaker === 'mahmut' ? 'fadyme' : 'mahmut';
+        if (resolvedEmotion === 'protective' || resolvedEmotion === 'determined') {
+          this.setActorEmotion(otherChar, otherChar === 'fadyme' ? 'determined' : 'protective', false);
+        } else if (resolvedEmotion === 'dry_amusement' || resolvedEmotion === 'dry_humor') {
+          this.setActorEmotion(otherChar, otherChar === 'fadyme' ? 'soft_smile' : 'dry_humor', false);
+        }
+      }
+    }
 
     // 1. Default emotion-driven micro-posture for the active speaker
     if (e.speaker !== 'narration') {
       const sp = this.actors.get(e.speaker);
       if (sp) {
         const inward = sp.side === 'left' ? 1 : -1;
-        switch (e.emotion) {
+        switch (resolvedEmotion) {
           case 'watchful':
-            sp.tiltDeg = inward * 1.2;
-            sp.scaleMult = 1.01;
+            sp.tiltDeg = inward * 1.4;
+            sp.scaleMult = 1.015;
             break;
           case 'dry_humor':
           case 'dry_amusement':
-            sp.tiltDeg = inward * -1.8;
-            sp.scaleMult = 1.01;
+            sp.tiltDeg = inward * -2.2;
+            sp.scaleMult = 1.015;
             break;
           case 'soft_smile':
-            sp.tiltDeg = inward * 1.6;
-            sp.scaleMult = 1.015;
+            sp.tiltDeg = inward * 1.8;
+            sp.scaleMult = 1.02;
             break;
           case 'protective':
           case 'determined':
-            sp.tiltDeg = inward * 2.0;
-            sp.offsetX = Math.max(sp.offsetX * inward, 36) * inward;
-            sp.scaleMult = 1.045;
+            sp.tiltDeg = inward * 2.4;
+            sp.offsetX = Math.max(sp.offsetX * inward, 42) * inward;
+            sp.scaleMult = 1.05;
             break;
           default:
             sp.tiltDeg = 0;
@@ -511,19 +645,16 @@ export class StoryScene extends Phaser.Scene {
     // 2. Scene & line-specific narrative action choreography
     switch (id) {
       case 'tutorial_t1_before_006':
-        // "That one is loose. Give me your hand."
         if (m) { m.offsetX = 75; m.tiltDeg = 2.2; }
         stageCue = 'MAHMUT EXTENDS HIS HAND ACROSS THE WET STONES';
         break;
       case 'tutorial_t1_before_009':
-        // "She took his hand. On the other side, neither let go quite as promptly as the crossing required."
         if (m) { m.offsetX = 95; m.tiltDeg = 1.8; }
         if (f) { f.offsetX = -95; f.tiltDeg = -2.2; }
         stageCue = 'HAND IN HAND ACROSS THE SLIPPERY CROSSING';
         break;
       case 'tutorial_t1_before_012':
       case 'tutorial_t1_before_013':
-        // "Something scraped across the stones ahead. Mahmut turned..." / "Two of them. Stay beside the wall."
         if (m) { m.offsetX = 115; m.offsetY = -12; m.scaleMult = 1.055; m.tiltDeg = 2.5; }
         if (f) { f.offsetX = -35; }
         if (!prefs().reducedMotion && id === 'tutorial_t1_before_012') {
@@ -532,19 +663,16 @@ export class StoryScene extends Phaser.Scene {
         stageCue = 'BELLBOUND DEAD APPROACH IN THE MIST';
         break;
       case 'tutorial_t1_before_014':
-        // "Beside it. Not behind you. I know the difference."
         if (f) { f.offsetX = -90; f.offsetY = -12; f.scaleMult = 1.05; f.tiltDeg = -2.0; }
         stageCue = 'STANDING SIDE BY SIDE';
         break;
 
       case 'tutorial_t1_after_004':
       case 'tutorial_t1_after_005':
-        // "Your sleeve." / "A branch. It has dreadful manners."
         if (m) { m.offsetX = 70; m.tiltDeg = 1.8; }
         if (f) { f.tiltDeg = -2.2; }
         break;
       case 'tutorial_t1_after_006':
-        // "He brushed a torn leaf from her shoulder, then found a reason to check his shield."
         if (m) { m.offsetX = 125; m.tiltDeg = 3.0; }
         if (f) { f.offsetX = -85; f.tiltDeg = -1.6; }
         stageCue = 'HE BRUSHES A TORN ASH LEAF FROM HER SHOULDER';
@@ -552,25 +680,22 @@ export class StoryScene extends Phaser.Scene {
           if (!this.sys.isActive() || !m) return;
           m.offsetX = 35;
           m.tiltDeg = -1.5;
-          this.animateActorTransform(m, 650);
+          this.animateActorTransform('mahmut', m, 650);
         });
         break;
       case 'tutorial_t1_after_014':
-        // "He shortened his stride. She noticed, and chose not to thank him for it aloud."
         if (m) { m.offsetX = 55; m.tiltDeg = 1.0; }
         if (f) { f.offsetX = -55; f.tiltDeg = -1.2; }
         stageCue = 'MATCHING STRIDES ALONG THE ASH ROAD';
         break;
 
       case 'tutorial_t2_before_006':
-        // "For a moment she watched the empty movement without speaking. Mahmut did not hurry her."
         if (f) { f.tiltDeg = -2.0; f.offsetX = -30; }
         stageCue = 'WATCHING THE LONE HOLLOW PILGRIM';
         break;
       case 'tutorial_t2_before_011':
       case 'tutorial_t2_before_012':
       case 'tutorial_t2_before_013':
-        // "The pilgrim stopped. Its head turned toward them."
         if (m) { m.offsetX = 95; m.offsetY = -10; m.scaleMult = 1.05; m.tiltDeg = 2.2; }
         if (f) { f.offsetX = -80; f.offsetY = -8; f.scaleMult = 1.04; f.tiltDeg = -1.8; }
         stageCue = 'COMBAT STANCE AT THE FORGOTTEN STONE CROSSING';
@@ -578,34 +703,30 @@ export class StoryScene extends Phaser.Scene {
 
       case 'tutorial_t2_after_001':
       case 'tutorial_t2_after_002':
-        // "Beyond the narrow path, a fallen stone offered a seat..." / "Sit. The trees have survived your inspection."
-        if (f) { f.offsetY = 52; f.offsetX = -65; f.tiltDeg = -1.5; }
-        if (m) { m.offsetY = id === 'tutorial_t2_after_002' ? 48 : 10; m.offsetX = 65; }
+        if (f) { f.offsetY = 44; f.offsetX = -65; f.tiltDeg = -1.5; }
+        if (m) { m.offsetY = id === 'tutorial_t2_after_002' ? 40 : 10; m.offsetX = 65; }
         stageCue = 'RESTING UPON THE MOSSY FALLEN STONE';
         break;
       case 'tutorial_t2_after_003':
       case 'tutorial_t2_after_004':
-        if (m) { m.offsetY = 52; m.offsetX = 85; m.tiltDeg = 1.5; }
-        if (f) { f.offsetY = 52; f.offsetX = -85; f.tiltDeg = -1.8; }
+        if (m) { m.offsetY = 44; m.offsetX = 85; m.tiltDeg = 1.5; }
+        if (f) { f.offsetY = 44; f.offsetX = -85; f.tiltDeg = -1.8; }
         break;
       case 'tutorial_t2_after_005':
       case 'tutorial_t2_after_006':
       case 'tutorial_t2_after_007':
       case 'tutorial_t2_after_008':
-        // "She drew his wrist toward her and threaded the loose leather through its buckle."
-        if (m) { m.offsetY = 54; m.offsetX = 130; m.tiltDeg = 2.6; m.scaleMult = 1.02; }
-        if (f) { f.offsetY = 54; f.offsetX = -130; f.tiltDeg = -3.2; f.scaleMult = 1.02; }
+        if (m) { m.offsetY = 46; m.offsetX = 125; m.tiltDeg = 2.4; m.scaleMult = 1.02; }
+        if (f) { f.offsetY = 46; f.offsetX = -125; f.tiltDeg = -2.8; f.scaleMult = 1.02; }
         stageCue = 'FADYME TIGHTENS THE LOOSE LEATHER STRAP ON HIS GAUNTLET';
         break;
       case 'tutorial_t2_after_016':
-        // "She smiled down at the finished knot. He looked away first, but not quickly."
-        if (f) { f.offsetY = 52; f.offsetX = -110; f.tiltDeg = -1.8; }
-        if (m) { m.offsetY = 52; m.offsetX = 95; m.tiltDeg = -2.2; }
+        if (f) { f.offsetY = 44; f.offsetX = -105; f.tiltDeg = -1.8; }
+        if (m) { m.offsetY = 44; m.offsetX = 95; m.tiltDeg = -2.0; }
         stageCue = 'A QUIET SMILE OVER THE FINISHED BUCKLE';
         break;
 
       case 'tutorial_t3_before_007':
-        // "She laughed softly. He was still listening when a shape moved beneath the eaves."
         if (f && !prefs().reducedMotion) {
           this.tweens.add({ targets: f.image, y: f.image.y - 14, duration: 160, yoyo: true, repeat: 1, ease: 'Sine.easeInOut' });
         }
@@ -617,7 +738,6 @@ export class StoryScene extends Phaser.Scene {
         stageCue = 'SHADOWS STIR BENEATH THE SHELTER EAVES';
         break;
       case 'tutorial_t3_before_014':
-        // "This time they stepped forward together."
         if (m) { m.offsetX = 115; m.offsetY = -14; m.scaleMult = 1.06; m.tiltDeg = 2.0; }
         if (f) { f.offsetX = -115; f.offsetY = -14; f.scaleMult = 1.06; f.tiltDeg = -2.0; }
         stageCue = 'STEPPING FORWARD TOGETHER AS ONE';
@@ -625,40 +745,34 @@ export class StoryScene extends Phaser.Scene {
 
       case 'tutorial_t3_after_005':
       case 'tutorial_t3_after_006':
-        // "He laid his cloak over the cold stone. She sat on one edge and left the other unmistakably free."
-        if (f) { f.offsetY = 56; f.offsetX = -85; f.tiltDeg = -1.8; }
+        if (f) { f.offsetY = 48; f.offsetX = -85; f.tiltDeg = -1.8; }
         if (m) { m.offsetY = 0; m.offsetX = 50; m.tiltDeg = 1.2; }
         stageCue = 'HIS OXBLOOD CLOAK SPREAD OVER THE COLD STONE BENCH';
         break;
       case 'tutorial_t3_after_007':
       case 'tutorial_t3_after_009':
-        // "I will check the doorway."
         if (m) { m.offsetY = 0; m.offsetX = 20; m.tiltDeg = -2.0; }
         break;
       case 'tutorial_t3_after_011':
-        // "He sat. His shield rested within reach; her shoulder rested almost within reach of his."
-        if (m) { m.offsetY = 56; m.offsetX = 135; m.tiltDeg = 1.8; }
-        if (f) { f.offsetY = 56; f.offsetX = -135; f.tiltDeg = -1.8; }
+        if (m) { m.offsetY = 48; m.offsetX = 130; m.tiltDeg = 1.8; }
+        if (f) { f.offsetY = 48; f.offsetX = -130; f.tiltDeg = -1.8; }
         stageCue = 'SEATED SIDE BY SIDE WITHIN THE WAYSIDE SHELTER';
         break;
       case 'tutorial_t3_after_016':
-        // "She broke the loaf in two, considered the pieces, and put the larger one in his hand."
-        if (f) { f.offsetY = 56; f.offsetX = -148; f.tiltDeg = -2.8; }
-        if (m) { m.offsetY = 56; m.offsetX = 140; m.tiltDeg = 2.0; }
+        if (f) { f.offsetY = 48; f.offsetX = -142; f.tiltDeg = -2.6; }
+        if (m) { m.offsetY = 48; m.offsetX = 136; m.tiltDeg = 2.0; }
         stageCue = 'SHARING A LOAF OF BREAD AT DUSK';
         break;
       case 'tutorial_t3_after_020':
-        // "She looked toward the doorway. For a moment her answer did not come."
-        if (f) { f.offsetY = 56; f.offsetX = -95; f.tiltDeg = 2.6; }
+        if (f) { f.offsetY = 48; f.offsetX = -95; f.tiltDeg = 2.4; }
         stageCue = 'GAZING OUT TOWARD THE DARKENING ROAD';
         break;
       case 'tutorial_t3_after_025':
       case 'tutorial_t3_after_026':
       case 'tutorial_t3_after_029':
       case 'tutorial_t3_after_034':
-        // "That made her turn back to him..." / "He stayed..." / "For tonight, a dry corner, half a loaf, and a place beside each other were enough."
-        if (f) { f.offsetY = 56; f.offsetX = -145; f.tiltDeg = -2.0; }
-        if (m) { m.offsetY = 56; m.offsetX = 145; m.tiltDeg = 1.8; }
+        if (f) { f.offsetY = 48; f.offsetX = -140; f.tiltDeg = -2.0; }
+        if (m) { m.offsetY = 48; m.offsetX = 140; m.tiltDeg = 1.8; }
         if (id === 'tutorial_t3_after_034') {
           stageCue = 'A DRY CORNER, HALF A LOAF, AND A PLACE BESIDE EACH OTHER';
         }
@@ -666,13 +780,26 @@ export class StoryScene extends Phaser.Scene {
     }
 
     this.actionBadge.setText(stageCue);
+    const MOOD_LABELS: Record<string, string> = {
+      watchful: 'WATCHFUL',
+      composed: 'CALM',
+      dry_humor: 'DRY HUMOR',
+      dry_amusement: 'WRY WIT',
+      soft_smile: 'WARMTH',
+      protective: 'GUARDIAN',
+      determined: 'RESOLVE',
+    };
+    return {
+      speakerEmotion: resolvedEmotion,
+      moodLabel: MOOD_LABELS[resolvedEmotion] ?? 'COMPOSED',
+    };
   }
 
-  private animateActorTransform(a: Actor, ms = 420): void {
-    const baseScale = 980 / a.image.height;
+  private animateActorTransform(character: string, a: Actor, ms = 420): void {
+    const baseScale = this.targetBustHeight(character) / a.image.height;
     const targetScale = baseScale * a.scaleMult;
-    const active = this.currentLine?.speaker === (a.side === 'left' ? 'mahmut' : 'fadyme');
-    const liftY = active ? -14 : 6;
+    const active = this.currentLine?.speaker === character;
+    const liftY = active ? -16 : 6;
     this.tweens.add({
       targets: a.image,
       x: a.baseX + a.offsetX,
@@ -686,38 +813,26 @@ export class StoryScene extends Phaser.Scene {
   }
 
   private focusSpeaker(speaker: string, emotion?: string, ms = 280): void {
-    const { art } = Services.ready();
+    if (speaker && emotion) {
+      this.setActorEmotion(speaker, emotion, false);
+    }
     for (const [id, a] of this.actors) {
       const active = id === speaker;
       const isNarr = speaker === '';
-      if (active && emotion && a.emotion !== emotion) {
-        const key = art.portrait(id, emotion);
-        if (key && key !== a.image.texture.key) {
-          a.emotion = emotion;
-          this.tweens.add({
-            targets: a.image,
-            alpha: 0.48,
-            duration: 110,
-            yoyo: true,
-            onYoyo: () => {
-              const sc = (980 / a.image.height) * a.scaleMult;
-              a.image.setTexture(key).setScale(sc);
-            }
-          });
-        }
-      }
       a.image.setDepth(active ? DEPTH.world + 2 : DEPTH.world);
       this.tweens.add({
         targets: a.image,
-        alpha: active ? 1 : isNarr ? 0.88 : 0.74,
+        alpha: active ? 1 : isNarr ? 0.9 : 0.72,
         duration: ms
       });
-      a.image.setTint(active ? 0xffffff : isNarr ? 0xe4dcef : 0xb2a8c2);
-      this.animateActorTransform(a, Math.max(360, ms));
+      a.image.setTint(active ? 0xffffff : isNarr ? 0xe8e0f2 : 0xb0a4c2);
+      this.animateActorTransform(id, a, Math.max(360, ms));
     }
   }
 
   // ------------------------------------------------------------------ dialogue
+
+  private currentMoodLabel = '';
 
   private showLine(e: Extract<StoryEvent, { type: 'line' }>): void {
     this.currentLine = e;
@@ -728,13 +843,16 @@ export class StoryScene extends Phaser.Scene {
     this.prevSpeaker = e.speaker;
 
     // Shape and animate character busts according to speaker emotion and script actions
-    this.applyLineChoreography(e);
-    this.focusSpeaker(narr ? '' : e.speaker, e.emotion, pause > CUTSCENE.sameSpeakerPauseSeconds ? CUTSCENE.dissolveSeconds * 1000 : 320);
+    const { speakerEmotion, moodLabel } = this.applyLineChoreography(e);
+    this.currentMoodLabel = moodLabel;
+    this.focusSpeaker(narr ? '' : e.speaker, speakerEmotion, pause > CUTSCENE.sameSpeakerPauseSeconds ? CUTSCENE.dissolveSeconds * 1000 : 320);
 
     this.namePlate.setVisible(false);
+    const isProtectiveOrResolve = speakerEmotion === 'protective' || speakerEmotion === 'determined';
+    const isWarm = speakerEmotion === 'soft_smile';
     this.bodyText.setStyle({
-      fontStyle: narr ? 'italic 500' : '500',
-      color: narr ? '#dfd4ee' : T.text
+      fontStyle: narr ? 'italic 500' : isProtectiveOrResolve ? '600' : '500',
+      color: narr ? '#dfd4ee' : isWarm ? '#fff6ea' : isProtectiveOrResolve ? '#f7ecf9' : T.text
     });
     const rawLine = this.stage?.text(e.lineId, e.text) ?? e.text;
     const formattedLine = narr ? `— ${rawLine}` : `“${rawLine}”`;
@@ -749,24 +867,34 @@ export class StoryScene extends Phaser.Scene {
       this.pausing = true;
       this.time.delayedCall(pause * 1000, () => {
         this.pausing = false;
-        this.startTyping(e, narr);
+        this.startTyping(e, narr, speakerEmotion);
       });
     } else {
-      this.startTyping(e, narr);
+      this.startTyping(e, narr, speakerEmotion);
     }
   }
 
-  private startTyping(e: Extract<StoryEvent, { type: 'line' }>, narr: boolean): void {
+  private startTyping(e: Extract<StoryEvent, { type: 'line' }>, narr: boolean, speakerEmotion = 'composed'): void {
     if (this.finished) return;
     this.namePlate.setVisible(!narr);
     if (!narr) {
       const a = this.actors.get(e.speaker);
       const left = !a || a.side === 'left';
-      this.nameText.setText(e.speakerDisplay.toUpperCase());
+      const label = this.currentMoodLabel ? `${e.speakerDisplay.toUpperCase()}  ·  ${this.currentMoodLabel}` : e.speakerDisplay.toUpperCase();
+      this.nameText.setText(label);
       this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);
-      this.namePlate.setPosition(left ? 330 : REF_W - 330, 756);
+      this.namePlate.setPosition(left ? 365 : REF_W - 365, 756);
     }
-    const cps = this.cutscene ? CUTSCENE.cps : this.skip ? 400 : CPS[prefs().textSpeed];
+    const baseCps = this.cutscene ? CUTSCENE.cps : this.skip ? 400 : CPS[prefs().textSpeed];
+    const cpsMult =
+      speakerEmotion === 'protective' || speakerEmotion === 'determined'
+        ? 1.18
+        : speakerEmotion === 'soft_smile'
+          ? 0.9
+          : speakerEmotion === 'dry_amusement' || speakerEmotion === 'dry_humor'
+            ? 1.06
+            : 1.0;
+    const cps = baseCps * cpsMult;
     let n = 0;
     this.typing = this.time.addEvent({
       delay: 1000 / cps,

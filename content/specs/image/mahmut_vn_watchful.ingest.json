@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "asset_id": "mahmut_vn_watchful",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "2c14df646516",
+    "provenance": ".cache/generated/mahmut_vn_watchful/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      30,
+      210
+    ],
+    "choke_px": 1.5,
+    "despill": true
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 245760
+  },
+  "manifest": {
+    "character": "mahmut",
+    "image": "watchful",
+    "emotion_tags": [
+      "watchful"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "asset_id": "fadyme_vn_composed",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "a3bd872553c7",
+    "provenance": ".cache/generated/fadyme_vn_composed/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      30,
+      210
+    ],
+    "choke_px": 1.5,
+    "despill": true
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 245760
+  },
+  "manifest": {
+    "character": "fadyme",
+    "image": "composed",
+    "emotion_tags": [
+      "composed",
+      "calm"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}

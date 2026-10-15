@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "asset_id": "mahmut_vn_watchful",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "mahmut": {
+        "emotions": {
+          "watchful": "watchful"
+        },
+        "images": {
+          "watchful": "art/portrait_mahmut_watchful.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "2c14df64651610cbbc44e2cbd4a985b489cea75bdad3f02861631906c3a8a058",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/mahmut_vn_watchful/run.provenance.json",
+    "provenance_sha256": "00895c0926a573bd7d2200712ff616537113645f01366b56556c6266aee82785",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "4d24e9716a376a48aa7367dfa5081126fe38b20148f7a2d845e8bce90126618b",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/mahmut_vn_watchful.ingest.json",
+    "spec_sha256": "5d183366db888c5464f32c3ec5b27440d5f5b7dbad97388142137df20b79112f",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "07d01f4b4b3ed8d5581388853efc32b991c0954df893da3a85b5820a09b16cdd"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_mahmut_watchful.webp",
+      "sha256": "637273a2d334a6372088e5b3c681d0cee4aef297b8fbe0665160e0b3653a4e7f",
+      "pixels_sha256": "9bccade76f98499dc0a77ad9c2c86e355f2c21868cec54bb6fee5e1d6f87e07d",
+      "bytes": 145538,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=38"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "145538 bytes <= 245760"
+        },
+        "A08": {
+          "status": "warn",
+          "detail": "spill=0.0064%"
+        }
+      },
+      "warnings": [
+        "A12: removed 38 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-15T19:54:13.432Z",
+      "note": "Approved waist-up watchful portrait"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_mahmut_watchful.webp",
+          "sha256": "b07fba76a55c72ed7240dd129e66c0a7feab8d6fdac6aa21104dd7fbd0381157",
+          "pixels_sha256": "a6715eb9ae239810495ad5597cee683b66cd7074d59e76f28e267c2d52200c0b",
+          "bytes": 163504,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "8f4918e330c8da7f3f1fbe420d2b74ffa7a334d07238bda572c40de0373f75ec",
+      "fingerprint": "8d63f82446dda38238e3d783952a2c525d0212808a5de37133473b130b065703"
+    }
+  ]
+}

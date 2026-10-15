@@ -35,52 +35,52 @@ export const BATTLE_LAYOUTS: Readonly<Record<BattleLayoutPreset, BattleLayoutSpe
     id: 'current',
     code: 'A',
     title: 'A · Current Baseline',
-    groundTop: 470,
-    groundBottom: 670,
-    frontX: 700,
-    rearX: 400,
-    jitterX: 50,
+    groundTop: 565,
+    groundBottom: 780,
+    frontX: 620,
+    rearX: 360,
+    jitterX: 24,
     interleaveFrontTwo: false,
-    turnOrderY: 192,
-    skillBarY: 960,
-    descY: 860,
-    plateOffsetY: 44,
-    scaleMin: 0.9,
-    scaleSpan: 0.14
+    turnOrderY: 132,
+    skillBarY: 964,
+    descY: 868,
+    plateOffsetY: 22,
+    scaleMin: 0.56,
+    scaleSpan: 0.08
   },
   arena_lite: {
     id: 'arena_lite',
     code: 'B',
     title: 'B · Arena-Lite Wide',
-    groundTop: 420,
-    groundBottom: 700,
-    frontX: 740,
+    groundTop: 560,
+    groundBottom: 785,
+    frontX: 640,
     rearX: 340,
-    jitterX: 44,
+    jitterX: 24,
     interleaveFrontTwo: false,
-    turnOrderY: 168,
-    skillBarY: 970,
+    turnOrderY: 132,
+    skillBarY: 968,
     descY: 872,
-    plateOffsetY: 42,
-    scaleMin: 0.88,
-    scaleSpan: 0.16
+    plateOffsetY: 22,
+    scaleMin: 0.55,
+    scaleSpan: 0.08
   },
   afk_faithful: {
     id: 'afk_faithful',
     code: 'C',
-    title: 'C · AFK-Faithful Staggered (Selected)',
-    groundTop: 400,
-    groundBottom: 716,
-    frontX: 690,
-    rearX: 370,
-    jitterX: 136,
+    title: 'C · AFK-Faithful 3-Rear 2-Front (Selected)',
+    groundTop: 555,
+    groundBottom: 785,
+    frontX: 590,
+    rearX: 346,
+    jitterX: 28,
     interleaveFrontTwo: true,
-    turnOrderY: 184,
-    skillBarY: 960,
-    descY: 856,
-    plateOffsetY: 38,
-    scaleMin: 0.74,
-    scaleSpan: 0.12
+    turnOrderY: 128,
+    skillBarY: 964,
+    descY: 868,
+    plateOffsetY: 20,
+    scaleMin: 0.53,
+    scaleSpan: 0.07
   }
 } as const;
 
@@ -101,10 +101,10 @@ export const LOCKED_CHIBI_CONTRACT = {
     footY: 0.92
   },
   backgroundSafeZone: {
-    horizonY: [360, 420] as const,
-    groundPlaneY: [410, 780] as const,
-    hudTopReserveY: [0, 220] as const,
-    hudBottomReserveY: [830, 1080] as const,
+    horizonY: [480, 545] as const,
+    groundPlaneY: [555, 790] as const,
+    hudTopReserveY: [0, 185] as const,
+    hudBottomReserveY: [855, 1080] as const,
     notchMarginX: 130
   }
 } as const;
@@ -128,9 +128,9 @@ export function battleLayoutSpec(preset: BattleLayoutPreset = activeBattleLayout
 }
 
 /**
- * Screen position of a unit. Units of the same row are spread over the ground band (centered when
- * alone), alternating x offsets so tall sprites overlap less. `index`/`count` = place among the
- * living-or-dead members of that row, ordered by slot, so nobody moves when a neighbour falls.
+ * Screen position of a unit in a 3-Rear + 2-Front formation grounded on the stone/ash battlefield floor.
+ * - Rear column (up to 3 slots): 0%, 50%, 100% of ground band (or 0% and 100% when 2 rear units).
+ * - Front column (up to 2 slots): interleaved at 25% and 75% of ground band (or 62% when solo).
  */
 export function spotFor(
   side: Side,
@@ -144,22 +144,24 @@ export function spotFor(
   const span = spec.groundBottom - spec.groundTop;
   let y: number;
   if (count <= 1) {
-    y = (spec.groundTop + spec.groundBottom) / 2;
+    y = spec.interleaveFrontTwo
+      ? Math.round(spec.groundTop + span * (row === 'front' ? 0.62 : 0.36))
+      : (spec.groundTop + spec.groundBottom) / 2;
   } else if (spec.interleaveFrontTwo && row === 'front' && count === 2) {
     // Interleave 2 front units at 25% and 75% of the band so they sit cleanly between 3 rear units (0%, 50%, 100%)
-    y = spec.groundTop + span * (index === 0 ? 0.25 : 0.75);
+    y = Math.round(spec.groundTop + span * (index === 0 ? 0.25 : 0.75));
   } else {
-    y = spec.groundTop + (span * index) / (count - 1);
+    y = Math.round(spec.groundTop + (span * index) / (count - 1));
   }
   const jitter =
     count <= 1
       ? 0
       : count === 3
         ? index === 0
-          ? -Math.round(spec.jitterX * 1.55)
+          ? -spec.jitterX
           : index === 1
-            ? 0
-            : Math.round(spec.jitterX * 1.35)
+            ? Math.round(spec.jitterX * 0.85)
+            : -Math.round(spec.jitterX * 0.45)
         : index % 2 === 0
           ? -spec.jitterX
           : spec.jitterX;

@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "asset_id": "mahmut_vn_protective_resolve",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "mahmut": {
+        "emotions": {
+          "protective_resolve": "protective_resolve",
+          "protective": "protective_resolve"
+        },
+        "images": {
+          "protective_resolve": "art/portrait_mahmut_protective_resolve.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "6b70b9efba82f8e5cc99d9cc195d37687fab2390243dc57ab73ff5c1cae6e2c8",
+    "mime": "image/png",
+    "width": 896,
+    "height": 1200,
+    "provenance_file": ".cache/generated/mahmut_vn_protective_resolve/run.provenance.json",
+    "provenance_sha256": "8802153276015e12cde4e0198cf2097e2d978e0ba126fe84087d5fc3e2f0a920",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "1bb81f32e14a869f5b659af3a2631fcd15b36cb1d73e139a28ef7b0dc7b9ca7a",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/mahmut_vn_protective_resolve.ingest.json",
+    "spec_sha256": "674147593ae196832e1e90a231e8fb0cc43895576f4dd6c9227fa881c2ad3ba7",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "792d24b1ba16082817aefa05958675c031dcf59e8f21fcd36568cbe8adaafc5b"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_mahmut_protective_resolve.webp",
+      "sha256": "d89d4fcd7c8c764e994dce0fe132b6b612a9f07e8fe71e49e70a159f2980757a",
+      "pixels_sha256": "de8092980a3380b975501a26cbf9ca162d386d35c98f64093d5186337b1e8f93",
+      "bytes": 156424,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 896x1200"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=16"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "156424 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0019%"
+        }
+      },
+      "warnings": [
+        "A12: removed 16 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-15T19:32:20.907Z",
+      "note": "Approved expressive portrait"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

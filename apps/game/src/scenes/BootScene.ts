@@ -77,19 +77,19 @@ export class BootScene extends Phaser.Scene {
         this.scene.start('Prologue');
         break;
       case 'story_t1':
-        this.scene.start('Story', { sceneId: 'tutorial_t1_before', next: { kind: 'battle', encounterId: 'tutorial_t1', nodeId: 'tutorial_1' } });
+        this.scene.start('Story', { path: 'story/tutorial_t1_before.json', onDone: () => this.scene.start('Battle', { encounterPath: 'encounters/tutorial_t1.json', tutorial: true, onDone: () => this.scene.start('Title'), onBack: () => this.scene.start('Title') }) });
         break;
       case 'battle_t1':
-        this.scene.start('Battle', { encounterId: 'tutorial_t1', nodeId: 'tutorial_1' });
+        this.scene.start('Battle', { encounterPath: 'encounters/tutorial_t1.json', tutorial: true, onDone: () => this.scene.start('Title'), onBack: () => this.scene.start('Title') });
         break;
       case 'battle_t2':
-        this.scene.start('Battle', { encounterId: 'tutorial_t2', nodeId: 'tutorial_2' });
+        this.scene.start('Battle', { encounterPath: 'encounters/tutorial_t2.json', tutorial: true, onDone: () => this.scene.start('Title'), onBack: () => this.scene.start('Title') });
         break;
       case 'battle_t3':
-        this.scene.start('Battle', { encounterId: 'tutorial_t3', nodeId: 'tutorial_3' });
+        this.scene.start('Battle', { encounterPath: 'encounters/tutorial_t3.json', tutorial: true, onDone: () => this.scene.start('Title'), onBack: () => this.scene.start('Title') });
         break;
       case 'story_t3_after':
-        this.scene.start('Story', { sceneId: 'tutorial_t3_after', next: { kind: 'finish' } });
+        this.scene.start('Story', { path: 'story/tutorial_t3_after.json', onDone: () => this.scene.start('Finish') });
         break;
       case 'finish_wait':
         this.scene.start('Finish');

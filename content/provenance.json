@@ -20,67 +20,82 @@
     },
     {
       "output": "content/base/art/atlas_bellbound_dead.webp",
-      "sha256": "ab6f84785211fa6395f9edf4f2997dd613851e121203dd24a6f0e24e91ca6c54",
+      "sha256": "990827030c29201f07911b41e31dc7ba01f1020e8f46c1a25b0bc9e987f8d548",
       "sources": {
-        "generated:bellbound_dead_chibi_sheet@rev3": "4aae7d60e23a4305ef801950ea243b93eaa8266a01bb5fdfa77bb682a68a1dca",
-        "entry": "744a26485d4072e6d00179df0d33adbc3e951317c831ce53982c8949e7e80ea7"
+        "generated:bellbound_dead_chibi_sheet@rev4": "31fb3337c0aad2f298926ab2e03699770a0c3ecff4c1cfa118019dfe5c82ca57",
+        "entry": "38019e50b1e5b6ef5b04c62516aef80b52eb462ca9c8f4be70cc6f3ab93e5236"
       }
     },
     {
       "output": "content/base/art/atlas_hollow_pilgrim.webp",
-      "sha256": "e3cd464846094c71bbf6a2a4a59742d1cba69acb3c951d945d488eaf4f04b213",
+      "sha256": "d2915a6a939ef3a09cd0d5880e7d13e474a45a73733575ee8f19f7aaa1663dc0",
       "sources": {
-        "generated:hollow_pilgrim_chibi_sheet@rev4": "b340fb827f190fdf3209c3b6912d874b4cf9c810a7335473dc3a8c51f82523cf",
-        "entry": "29034404cbda3d0cb0c85f8d69392d44b3cf3b42571f2f978282e5ba6a881d86"
+        "generated:hollow_pilgrim_chibi_sheet@rev5": "f8b7571307515e817e662957f7445ace12e48bf832ca00f244749815895f222e",
+        "entry": "2fa68f680793c354e1a9e5c493b53835b03b3dc58ef8b0c42469c86c626d303d"
       }
     },
     {
       "output": "content/base/art/portrait_mahmut_composed.webp",
-      "sha256": "f61c6d032242ac1bd142c24b7b0fd86ced1f999ab53bf41ca1b2130b44d3c139",
+      "sha256": "7bc2d64e668096de9449ab191f7f74f4926ebd498f427613aa52d0adce57d1d3",
       "sources": {
-        "git:game/assets/characters/mahmut/vn_watchful_v001.png": "3fc41f865a39449e520e78b79c79e828d4654a64f7778849cf2b085137d0a7d0"
+        "generated:mahmut_vn_composed@rev2": "3908d83f70307105114a7439c7e51792c3bcc97e97375a1133842f71827029b6",
+        "entry": "b981e5444e14bc4ce465eaee9563244b7feed9b9d1fffc884ec8a52ca4bcd02c"
       }
     },
     {
       "output": "content/base/art/portrait_mahmut_dry_humor.webp",
-      "sha256": "ef3a48a3c21e971de99ea4a3b555bd71ee5fd5b613e747c85807117e119ef823",
+      "sha256": "7429b941eb622bde2169b23bf325228b6d903684c40cb53f0724363c10a8fb91",
       "sources": {
-        "git:game/assets/characters/mahmut/vn_dry_humor_v001.png": "5f54e98052b790a415bb128b7689d4359d6fc1cbc1a4ef27c44f9f7f282a2b01"
+        "generated:mahmut_vn_dry_humor@rev1": "518f4414e9457786b9ea8fbb65633d31804556ac69e0d0d9021a1357c2d5cc1f",
+        "entry": "bbda53c0574c4cc48d9458a4affcf20afe0a37680ee0f537823512a3337c59f4"
       }
     },
     {
       "output": "content/base/art/portrait_mahmut_protective_resolve.webp",
-      "sha256": "c7a8ddc6a93c33af47099e4b66e46b725516cb90f508a8a8cedbada11162bea8",
+      "sha256": "d89d4fcd7c8c764e994dce0fe132b6b612a9f07e8fe71e49e70a159f2980757a",
       "sources": {
-        "git:game/assets/characters/mahmut/vn_protective_resolve_v001.png": "c1298ccac0910a64598ab7d6a6d19cfc92778b2261a02fd4b2434745224c52ad"
+        "generated:mahmut_vn_protective_resolve@rev1": "6b70b9efba82f8e5cc99d9cc195d37687fab2390243dc57ab73ff5c1cae6e2c8",
+        "entry": "792d24b1ba16082817aefa05958675c031dcf59e8f21fcd36568cbe8adaafc5b"
+      }
+    },
+    {
+      "output": "content/base/art/portrait_mahmut_watchful.webp",
+      "sha256": "637273a2d334a6372088e5b3c681d0cee4aef297b8fbe0665160e0b3653a4e7f",
+      "sources": {
+        "generated:mahmut_vn_watchful@rev2": "2c14df64651610cbbc44e2cbd4a985b489cea75bdad3f02861631906c3a8a058",
+        "entry": "07d01f4b4b3ed8d5581388853efc32b991c0954df893da3a85b5820a09b16cdd"
       }
     },
     {
       "output": "content/base/art/portrait_fadyme_composed.webp",
-      "sha256": "7fef1082bdd336b2a99b2881dc450fdae92ae38975664bf444dc7d4d2deb9289",
+      "sha256": "87333f7b655f7bc463bfc02e298750a8a3d67e7edbcb3891c37743a7462ff405",
       "sources": {
-        "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_composed_v001.png": "68ad5d9f4b3a44998f31e2a63e66e3d0a553befa44ad99fb4c8b32f041b1f290"
-      }
-    },
-    {
-      "output": "content/base/art/portrait_fadyme_wry.webp",
-      "sha256": "eabeb23ac88a5a0a16ab244be0655fadb80c049d1fe31ccb6b1c407f35ea857f",
-      "sources": {
-        "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_wry_v001.png": "571cba7f0bedab12737103229958a399ad40acd63fac746d3b212d57a5656346"
-      }
-    },
-    {
-      "output": "content/base/art/portrait_fadyme_warm.webp",
-      "sha256": "c980b69e260f1ccf0d40f54266441aa658d05bc717e7ea50b9577014f595565f",
-      "sources": {
-        "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/sources/vn_warm_v001.png": "9f5a76e725253ff322e0ad9bd348b8fd3b4fbb5339a07019c8f355ae788c0e32"
+        "generated:fadyme_vn_composed@rev1": "a3bd872553c77d520ec616cdfb2cec619b67369b0e65eb0cfd4bbeb27b426886",
+        "entry": "09b581eb0a6bc24f79fb621b46003dd0989824af079418a34178ed9d6a1d2edf"
       }
     },
     {
       "output": "content/base/art/portrait_fadyme_resolve.webp",
-      "sha256": "f08c47aa63c9732e852320ab6d1405517c333ae8d80cfa603688a5a85202da6f",
+      "sha256": "8b31a9747b48afbb3fb7ede3c10f1b7f0d3be5a8e8fc568b1319facb09375b09",
       "sources": {
-        "narrative/15_Art_Workbench/characters/fadyme/production_v002/vn/vn_resolve_v002.png": "0838156beec6724bfdf17ab36017ff524d0c638a642808a5cfee098252b03ab3"
+        "generated:fadyme_vn_resolve@rev1": "06546c7dd27b41acb0309768bcf3ff1dedd21ba0e1f52e8dd680cf62acb25e7f",
+        "entry": "b474a9ad44b8b5a180a20be2acc689123bbcdabf9eb29714082c987bd8fc4991"
+      }
+    },
+    {
+      "output": "content/base/art/portrait_fadyme_warm.webp",
+      "sha256": "892c347f36c55c16a3aaef9d1996cd5732ac50a0e8cb80fdae02b758873b484f",
+      "sources": {
+        "generated:fadyme_vn_warm@rev1": "d3f29fa75150f43516f8682451d780424a5ff9a44a9e9c25ef37382d030c8654",
+        "entry": "1e4268b68bb6bb50a13e69a359c6f8aa23281f65d235b8a4988d0a54fc82bc2a"
+      }
+    },
+    {
+      "output": "content/base/art/portrait_fadyme_wry.webp",
+      "sha256": "0667a255089d9d7bb61c880e1b635b9a5eaac514f1eabb07ff75f32abb67e876",
+      "sources": {
+        "generated:fadyme_vn_wry@rev1": "0023cb9525b61599204cdaaeca29235441b9441fe21abe328f8635cb22840521",
+        "entry": "11ed180b62340fcbc8915dbf872d98ca256b9577f5949acc3aa93b3a21341fa2"
       }
     },
     {
@@ -241,7 +256,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "197a63172c5023634f3947e3a8884fa061f30b20ee7bd98f2081455e750777d4",
+      "sha256": "0393d47db8fa6f2a9db2ee92ed40e5460631240a0c84f97946b40ef49ae95933",
       "sources": {}
     },
     {

@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "asset_id": "mahmut_vn_composed",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "mahmut": {
+        "emotions": {
+          "composed": "composed"
+        },
+        "images": {
+          "composed": "art/portrait_mahmut_composed.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "3908d83f70307105114a7439c7e51792c3bcc97e97375a1133842f71827029b6",
+    "mime": "image/png",
+    "width": 896,
+    "height": 1200,
+    "provenance_file": ".cache/generated/mahmut_vn_composed/run.provenance.json",
+    "provenance_sha256": "131537bd0258ae17aa0c5f5505513f18efc42da2edbcc00ad8a3acbcb52c0848",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "71e91c55d872db48ef6e6e029c5a8150bce267a2fd8d5daba5bca4c36885f982",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/mahmut_vn_composed.ingest.json",
+    "spec_sha256": "d241d84d723fae11cb0d5882e7557735dcf43bf3485fd2980a490e37e8afb2d7",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "b981e5444e14bc4ce465eaee9563244b7feed9b9d1fffc884ec8a52ca4bcd02c"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_mahmut_composed.webp",
+      "sha256": "7bc2d64e668096de9449ab191f7f74f4926ebd498f427613aa52d0adce57d1d3",
+      "pixels_sha256": "6c537147640b15c676c5ab8180f56678da651cb4edb7f8bfd6722e71cfd2ca98",
+      "bytes": 98554,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 896x1200"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=10"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "98554 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0016%"
+        }
+      },
+      "warnings": [
+        "A12: removed 10 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-15T19:37:11.162Z",
+      "note": "Approved"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_mahmut_composed.webp",
+          "sha256": "7bc2d64e668096de9449ab191f7f74f4926ebd498f427613aa52d0adce57d1d3",
+          "pixels_sha256": "6c537147640b15c676c5ab8180f56678da651cb4edb7f8bfd6722e71cfd2ca98",
+          "bytes": 98554,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "3908d83f70307105114a7439c7e51792c3bcc97e97375a1133842f71827029b6",
+      "fingerprint": "8c80d734eb8c15cd007615a54ab889327cd60d43fb4dbccce89cd3dee40ba79f"
+    }
+  ]
+}

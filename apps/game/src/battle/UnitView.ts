@@ -56,14 +56,15 @@ export class UnitView extends Phaser.GameObjects.Container {
     const pal = BattleVfx.palette(this.element);
     BattleVfx.ensureTextures(scene);
 
-    this.shadow = scene.add.ellipse(0, 0, u.heightPx * 0.58, u.heightPx * 0.13, 0x000000, 0.48);
+    const dScale = init.spot.depthScale;
+    this.shadow = scene.add.ellipse(0, -3, u.heightPx * 0.62 * dScale, u.heightPx * 0.14 * dScale, 0x050208, 0.74);
     this.auraRing = scene.add
-      .image(0, 2, 'fx_ring')
+      .image(0, -1, 'fx_ring')
       .setTint(init.side === 'player' ? pal.primary : 0xe55b8a)
       .setBlendMode(Phaser.BlendModes.ADD)
-      .setScale(0.36 * init.spot.depthScale, 0.14 * init.spot.depthScale)
+      .setScale(0.32 * dScale, 0.12 * dScale)
       .setAlpha(0.28);
-    this.ring = scene.add.ellipse(0, 0, u.heightPx * 0.72, u.heightPx * 0.16, C.silver, 0).setStrokeStyle(4, C.goldHi, 0);
+    this.ring = scene.add.ellipse(0, -2, u.heightPx * 0.74 * dScale, u.heightPx * 0.16 * dScale, C.silver, 0).setStrokeStyle(3, C.goldHi, 0);
     this.sprite = scene.add.sprite(0, 0, u.textureKey);
     this.add([this.shadow, this.auraRing, this.ring, this.sprite]);
 
@@ -71,32 +72,32 @@ export class UnitView extends Phaser.GameObjects.Container {
     this.baseScale = (u.heightPx / (scene.textures.getFrame(idle.key, idle.frame)?.height ?? u.heightPx)) * init.spot.depthScale;
     this.applyState('idle');
 
-    // plate under the feet
-    const plateY = 30;
+    // sleek compact plate under the feet
+    const plateY = 20;
     const plateBg = scene.add
-      .rectangle(0, init.side === 'player' ? 22 : 24, 218, init.side === 'player' ? 62 : 68, 0x0a0610, 0.68)
-      .setStrokeStyle(1.5, init.side === 'player' ? C.player : C.enemy, 0.48);
-    const nameT = txt(scene, 0, 0, init.name.toUpperCase(), {
+      .rectangle(0, init.side === 'player' ? 18 : 20, 178, init.side === 'player' ? 50 : 54, 0x0a0610, 0.72)
+      .setStrokeStyle(1.2, init.side === 'player' ? C.player : C.enemy, 0.52);
+    const nameT = txt(scene, 0, -1, init.name.toUpperCase(), {
       fontFamily: F.display,
-      fontSize: '20px',
+      fontSize: '16px',
       fontStyle: '600',
       color: init.side === 'player' ? '#cfe0ff' : '#ffb3c4',
       stroke: '#0a0610',
       strokeThickness: 4,
     }).setOrigin(0.5);
-    this.hpBar = new Bar(scene, 0, 24, 188, 12, hpColor);
+    this.hpBar = new Bar(scene, 0, 19, 154, 10, hpColor);
     this.hpBar.set(init.hp / init.maxHp, false);
-    this.focusBar = init.side === 'player' ? new Bar(scene, 0, 40, 188, 7, () => C.focus) : null;
+    this.focusBar = init.side === 'player' ? new Bar(scene, 0, 32, 154, 6, () => C.focus) : null;
     this.focusBar?.set(0, false);
-    this.shieldText = txt(scene, 100, 24, '', { fontSize: '20px', color: T.shield, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0, 0.5);
-    this.statusText = txt(scene, 0, init.side === 'player' ? 60 : 44, '', { fontSize: '18px', color: '#e0d4ee', stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5);
-    this.intentText = txt(scene, 0, init.side === 'player' ? 60 : 48, '', {
+    this.shieldText = txt(scene, 82, 19, '', { fontSize: '16px', color: T.shield, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0, 0.5);
+    this.statusText = txt(scene, 0, init.side === 'player' ? 48 : 36, '', { fontSize: '15px', color: '#e0d4ee', stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5);
+    this.intentText = txt(scene, 0, init.side === 'player' ? 48 : 38, '', {
       fontFamily: F.display,
-      fontSize: '18px',
+      fontSize: '15px',
       fontStyle: '600',
       color: '#ffb3c4',
       stroke: '#0a0610',
-      strokeThickness: 5,
+      strokeThickness: 4,
     })
       .setOrigin(0.5)
       .setVisible(false);
@@ -113,13 +114,13 @@ export class UnitView extends Phaser.GameObjects.Container {
         this.intentText,
       ])
       .setDepth(DEPTH.hud - 60);
-    this.marker = txt(scene, 0, 0, '▼', { fontSize: '42px', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setVisible(false);
+    this.marker = txt(scene, 0, 0, '▼', { fontSize: '34px', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setVisible(false);
     this.add(this.marker);
     this.placeTags();
 
-    const w = u.heightPx * 0.85;
-    this.setSize(w, u.heightPx * this.spot.depthScale);
-    this.setInteractive(new Phaser.Geom.Rectangle(-w / 2, -u.heightPx * this.spot.depthScale, w, u.heightPx * this.spot.depthScale + 70), Phaser.Geom.Rectangle.Contains);
+    const w = u.heightPx * 0.85 * dScale;
+    this.setSize(w, u.heightPx * dScale);
+    this.setInteractive(new Phaser.Geom.Rectangle(-w / 2, -u.heightPx * dScale, w, u.heightPx * dScale + 64), Phaser.Geom.Rectangle.Contains);
     scene.add.existing(this);
     if (!reduced) this.startBreathing();
   }
@@ -128,11 +129,11 @@ export class UnitView extends Phaser.GameObjects.Container {
   glideTo(spot: Spot): void {
     this.spot = spot;
     this.scene.tweens.add({ targets: this, x: spot.x, y: spot.y, duration: 320, ease: 'Quad.easeInOut' });
-    this.scene.tweens.add({ targets: this.plate, x: spot.x, y: spot.y + 30, duration: 320, ease: 'Quad.easeInOut' });
+    this.scene.tweens.add({ targets: this.plate, x: spot.x, y: spot.y + 20, duration: 320, ease: 'Quad.easeInOut' });
   }
 
   private placeTags(): void {
-    const top = -this.art.unit(this.artKey).heightPx * this.spot.depthScale - 26;
+    const top = -this.art.unit(this.artKey).heightPx * this.spot.depthScale - 22;
     this.marker.setY(top + 4);
   }
 
@@ -144,11 +145,12 @@ export class UnitView extends Phaser.GameObjects.Container {
     this.sprite.setScale(base).setAngle(0).setPosition(0, 0);
 
     const period = 860 + (this.spot.y % 9) * 38;
+    // Keep y=0 locked so boots stay planted firmly on the ground shadow while torso breathes via scaleY/scaleX
     this.breathe = this.scene.tweens.add({
       targets: this.sprite,
-      scaleY: base * 1.044,
-      scaleX: base * 0.968,
-      y: -5,
+      scaleY: base * 1.036,
+      scaleX: base * 0.974,
+      y: 0,
       duration: period,
       yoyo: true,
       repeat: -1,
@@ -156,7 +158,7 @@ export class UnitView extends Phaser.GameObjects.Container {
     });
     this.sway = this.scene.tweens.add({
       targets: this.sprite,
-      angle: { from: -1.6, to: 1.6 },
+      angle: { from: -1.1, to: 1.1 },
       duration: period * 2,
       yoyo: true,
       repeat: -1,
@@ -172,7 +174,8 @@ export class UnitView extends Phaser.GameObjects.Container {
     const u = this.art.unit(this.artKey);
     this.sprite.stop();
     const sc = this.baseScale * f.scale;
-    this.sprite.setTexture(f.key, f.frame).setOrigin(f.pivotX, f.footY).setScale(sc).setAngle(0).setPosition(0, 0);
+    // Anchor at bottom of trimmed frame (1.0) so soles of boots sit directly on the shadow at y=0
+    this.sprite.setTexture(f.key, f.frame).setOrigin(f.pivotX, 1).setScale(sc).setAngle(0).setPosition(0, 0);
     if (f.animationKey && !this.reduced) this.sprite.play(f.animationKey);
     // players face right, enemies face left; mirror when the authored art faces the other way
     const wantRight = this.side === 'player';

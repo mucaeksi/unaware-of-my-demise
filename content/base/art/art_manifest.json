@@ -246,49 +246,49 @@
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.565
+          "pivot_x": 0.433
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.565
+          "pivot_x": 0.433
         },
         "basic": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.56
+          "pivot_x": 0.438
         },
         "active": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.56
+          "pivot_x": 0.438
         },
         "ultimate": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.56
+          "pivot_x": 0.438
         },
         "hit": {
           "frame": "hit",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.509
+          "pivot_x": 0.49
         },
         "defeat": {
           "frame": "defeat",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.465
+          "pivot_x": 0.534
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.565
+          "pivot_x": 0.433
         }
       }
     },
@@ -301,13 +301,13 @@
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.431
+          "pivot_x": 0.568
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.431
+          "pivot_x": 0.568
         },
         "basic": {
           "frame": "basic",
@@ -331,19 +331,19 @@
           "frame": "hit",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.466
+          "pivot_x": 0.532
         },
         "defeat": {
           "frame": "defeat",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.462
+          "pivot_x": 0.537
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.431
+          "pivot_x": 0.568
         }
       }
     }
@@ -351,29 +351,35 @@
   "portraits": {
     "mahmut": {
       "emotions": {
-        "watchful": "composed",
+        "composed": "composed",
         "dry_humor": "dry_humor",
+        "protective_resolve": "protective_resolve",
         "protective": "protective_resolve",
-        "composed": "composed"
+        "watchful": "watchful"
       },
       "images": {
         "composed": "art/portrait_mahmut_composed.webp",
         "dry_humor": "art/portrait_mahmut_dry_humor.webp",
-        "protective_resolve": "art/portrait_mahmut_protective_resolve.webp"
+        "protective_resolve": "art/portrait_mahmut_protective_resolve.webp",
+        "watchful": "art/portrait_mahmut_watchful.webp"
       }
     },
     "fadyme": {
       "emotions": {
-        "dry_amusement": "wry",
-        "soft_smile": "warm",
+        "composed": "composed",
+        "calm": "composed",
+        "resolve": "resolve",
         "determined": "resolve",
-        "composed": "composed"
+        "warm": "warm",
+        "soft_smile": "warm",
+        "wry": "wry",
+        "dry_amusement": "wry"
       },
       "images": {
         "composed": "art/portrait_fadyme_composed.webp",
-        "wry": "art/portrait_fadyme_wry.webp",
+        "resolve": "art/portrait_fadyme_resolve.webp",
         "warm": "art/portrait_fadyme_warm.webp",
-        "resolve": "art/portrait_fadyme_resolve.webp"
+        "wry": "art/portrait_fadyme_wry.webp"
       }
     }
   },

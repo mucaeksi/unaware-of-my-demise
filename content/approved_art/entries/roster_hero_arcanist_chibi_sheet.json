@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "roster_hero_arcanist_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 2,
+  "revision": 3,
   "targets": {
     "atlases": {
       "atlas_hero_arcanist": {
@@ -59,13 +59,13 @@
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.732
+            "pivot_x": 0.267
           },
           "active": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.732
+            "pivot_x": 0.267
           },
           "ultimate": {
             "frame": "ultimate",
@@ -97,12 +97,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "05e188d6dc3d61996e3355023154830ecf0a0ceaf0c9220cede25967ad0af01e",
+    "sha256": "064693c1234bbbee069144908e8a1991d65c8226985880a7014418ef46998c29",
     "mime": "image/png",
     "width": 2752,
     "height": 1536,
     "provenance_file": ".cache/generated/roster_hero_arcanist_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "4dec7285cce6135c68179e56e6f41ea0cb85d197e0b613ecb00a7c06eff9e825",
+    "provenance_sha256": "2d20b39f21a37f09c6b2115fc7bbd6db4f42a3207aea7b5ef3436d9acc1e6383",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
     "references": [],
@@ -110,17 +110,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/roster_hero_arcanist_chibi_sheet.ingest.json",
-    "spec_sha256": "b985425a51407a794da40cca65ee29988f3a04bf4968ad847e97ee054df3e0af",
+    "spec_sha256": "7bcc03eb27ab9dee4aebf981e199e42b0dfbb7aaa17a98e4933cc10154a16045",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "7da9e8f404e09f56ea2d7f198b75c1cf22051b9929c9df80af4f55cda167b9cc"
+    "fingerprint": "258a88f0d4e05af3b03182d0a3c27470db5c211d1e487e58000a1c1060ac539f"
   },
   "outputs": [
     {
       "path": "art/atlas_hero_arcanist.webp",
-      "sha256": "43dcfd705c74e3e93670c4aacf91f945cb587ddfade723bb35c2caafc034c8c3",
-      "pixels_sha256": "9bc8b44970afa6e4df11723b207977834175d55b02d5e62b7c719d9881d735f6",
-      "bytes": 139222,
+      "sha256": "4f6d839ff91d8bb1f73fc1c2305b5493a764c612af0e37bfc99ad4e4f47fea3e",
+      "pixels_sha256": "b41e4049d4217da83c316d322fec1e36d11ba01f73c9bbc1787a2722f7b4ea35",
+      "bytes": 139572,
       "width": 1613,
       "height": 425
     }
@@ -165,11 +165,11 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "139222 bytes <= 665600"
+          "detail": "139572 bytes <= 665600"
         },
         "A08": {
           "status": "warn",
-          "detail": "spill=0.0088%"
+          "detail": "spill=0.0109%"
         }
       },
       "warnings": [
@@ -178,9 +178,9 @@
     },
     "human": {
       "status": "approved",
-      "by": "antigravity",
-      "at": "2026-10-15T17:17:57.042Z",
-      "note": "Approved wide panoramic battlefields and resized 2-head SD Chibis"
+      "by": "owner",
+      "at": "2026-10-15T19:30:25.556Z",
+      "note": "Approved"
     }
   },
   "license": {
@@ -203,6 +203,21 @@
       ],
       "source_sha256": "05e188d6dc3d61996e3355023154830ecf0a0ceaf0c9220cede25967ad0af01e",
       "fingerprint": "a5ed09a626b71b5b0975619fbaea7d71b67788e96d8ce637e870f2d73edefa8d"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_hero_arcanist.webp",
+          "sha256": "43dcfd705c74e3e93670c4aacf91f945cb587ddfade723bb35c2caafc034c8c3",
+          "pixels_sha256": "9bc8b44970afa6e4df11723b207977834175d55b02d5e62b7c719d9881d735f6",
+          "bytes": 139222,
+          "width": 1613,
+          "height": 425
+        }
+      ],
+      "source_sha256": "05e188d6dc3d61996e3355023154830ecf0a0ceaf0c9220cede25967ad0af01e",
+      "fingerprint": "7da9e8f404e09f56ea2d7f198b75c1cf22051b9929c9df80af4f55cda167b9cc"
     }
   ]
 }
