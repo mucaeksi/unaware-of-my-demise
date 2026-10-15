@@ -92,7 +92,7 @@ function Overview({ p }: { p: Progress }): ReactNode {
             <span className="badge ok">{p.baseRelease.approvedArtCount} approved art entries</span>
           </div>
           <p style={{ margin: '8px 0 0', color: 'var(--dim)' }}>
-            <strong>Flow:</strong> Phaser Splash (retro-synth chime + prism laser) → ŞovTaym Studios (celestial astrolabe + Main Theme) → Title (Tap to Start → Google Play Sign-In → Background Patch) → 120s 9-Shot Prologue → 3-Stage Tutorial (6 Light Novel cutscenes with reactive busts, 2-head SD Chibis at 0.72x scale, 3 wide panoramic battlefields) → Random-Quote Patch Wait / Client Restart → Part I Beginning / Company Hub.
+            <strong>Flow:</strong> Phaser Splash (retro-synth chime + prism laser) → SovTaym Studios (celestial astrolabe + Main Theme) → Title (Tap to Start → Google Play Sign-In → Background Patch) → 120s 9-Shot Prologue → 3-Stage Tutorial (6 Light Novel cutscenes with reactive busts, 2-head SD Chibis at 0.72x scale, 3 wide panoramic battlefields) → Random-Quote Patch Wait / Client Restart → Part I Beginning / Company Hub.
           </p>
         </section>
       ) : null}
@@ -131,7 +131,7 @@ const FRAMES: { label: string; w: number; h: number }[] = [
 
 const SCENE_PRESETS: { id: string; label: string }[] = [
   { id: 'fresh_flow', label: '1. Full Flow (Splash → Prologue → Tutorials)' },
-  { id: 'studio', label: '2. ŞovTaym Studios' },
+  { id: 'studio', label: '2. SovTaym Studios' },
   { id: 'title_fresh', label: '3. Title (Tap to Start → Prologue)' },
   { id: 'prologue', label: '4. 120s Prologue' },
   { id: 'story_t1', label: '5. Tutorial LN Story (Busts)' },

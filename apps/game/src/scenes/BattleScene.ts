@@ -218,7 +218,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   /**
-   * Distributes a side's combatants into the canonical 2-Front (2 önde) + 3-Rear (3 arkada) visual formation.
+   * Distributes a side's combatants into the canonical 2-Front + 3-Rear visual formation.
    * When an encounter defines >2 units in `front` and <3 in `rear` (e.g. 3 enemies all tagged `front`),
    * excess units overflow into the `rear` visual column so every battle displays a true 3-back / 2-front formation.
    */

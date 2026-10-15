@@ -70,12 +70,43 @@ function resolveFontSizePx(raw: string | number | undefined, fallback: number): 
   return `${adjusted}px`;
 }
 
+/** Strips any Turkish-specific characters into strict English ASCII equivalents. */
+export function sanitizeEnText(raw: string): string {
+  return raw
+    .replace(/İ/g, 'I')
+    .replace(/ı/g, 'i')
+    .replace(/Ş/g, 'S')
+    .replace(/ş/g, 's')
+    .replace(/Ğ/g, 'G')
+    .replace(/ğ/g, 'g')
+    .replace(/Ü/g, 'U')
+    .replace(/ü/g, 'u')
+    .replace(/Ö/g, 'O')
+    .replace(/ö/g, 'o')
+    .replace(/Ç/g, 'C')
+    .replace(/ç/g, 'c');
+}
+
+/**
+ * Strict English ASCII uppercase for Cinzel (`F.display`) headers and labels.
+ * Because Cinzel is an all-caps/small-caps display font whose lowercase `'i'` glyph renders with a dot (`İ`),
+ * converting all `F.display` text to true ASCII uppercase (`A-Z`, `I` = U+0049) eliminates dotted `İ` (`FİRST` -> `FIRST`).
+ */
+export function toEnUpper(raw: string): string {
+  return sanitizeEnText(raw).replace(/i/g, 'I').toUpperCase();
+}
+
 export function txt(scene: Phaser.Scene, x: number, y: number, text: string, style: Phaser.Types.GameObjects.Text.TextStyle = {}): Phaser.GameObjects.Text {
   const hc = prefs().highContrast;
   const q = qualityProfile();
   const baseColor = style.color ?? (hc ? '#ffffff' : T.text);
   const resolvedColor = hc && baseColor === T.dim ? '#dfd6ec' : baseColor;
-  const t = scene.add.text(x, y, text, {
+  const isDisplay = style.fontFamily === F.display;
+  const formatText = (val: string | string[]): string | string[] => {
+    if (Array.isArray(val)) return val.map((item) => (isDisplay ? toEnUpper(String(item)) : sanitizeEnText(String(item))));
+    return isDisplay ? toEnUpper(String(val)) : sanitizeEnText(String(val));
+  };
+  const t = scene.add.text(x, y, formatText(text), {
     fontFamily: F.body,
     resolution: q.textResolution,
     ...(hc ? { stroke: '#050208', strokeThickness: 3 } : {}),
@@ -83,11 +114,13 @@ export function txt(scene: Phaser.Scene, x: number, y: number, text: string, sty
     fontSize: resolveFontSizePx(style.fontSize, SIZE.body),
     color: resolvedColor
   });
+  const origSetText = t.setText.bind(t);
+  t.setText = ((val: string | string[]) => origSetText(formatText(val))) as typeof t.setText;
   return t;
 }
 
 export function title(scene: Phaser.Scene, x: number, y: number, text: string, size: number = SIZE.h2, color: string = T.text): Phaser.GameObjects.Text {
-  return txt(scene, x, y, text, { fontFamily: F.display, fontSize: `${size}px`, fontStyle: '600', color, stroke: '#0a0610', strokeThickness: prefs().highContrast ? 6 : 4 }).setOrigin(0.5);
+  return txt(scene, x, y, toEnUpper(text), { fontFamily: F.display, fontSize: `${size}px`, fontStyle: '600', color, stroke: '#0a0610', strokeThickness: prefs().highContrast ? 6 : 4 }).setOrigin(0.5);
 }
 
 export interface ButtonOptions {

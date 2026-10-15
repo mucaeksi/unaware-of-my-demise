@@ -88,7 +88,7 @@ export class FinishScene extends Phaser.Scene {
     });
     this.action.setVisible(false);
 
-    // Rotating random game quotes beneath the Patch Box ("kutucuğun altında")
+    // Rotating random game quotes beneath the Patch Box
     const quoteRule = this.add.graphics();
     quoteRule.lineStyle(1.5, C.gold, 0.45);
     quoteRule.lineBetween(REF_W / 2 - 420, 728, REF_W / 2 - 18, 728);
