@@ -79,7 +79,7 @@
     "atlas": "atlas_enemy_knight",
     "unit": "enemy_knight",
     "facing": "left",
-    "height_px": 360
+    "height_px": 258
   },
   "qc": {
     "profile": "chibi_r2"

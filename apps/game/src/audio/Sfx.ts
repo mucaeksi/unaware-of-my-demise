@@ -120,5 +120,20 @@ export const Sfx = {
   },
   lose(): void {
     Sfx.bell(98, 0.4, 3);
+  },
+  /** Phaser engine splash chime: retro-futuristic ascending prism synth arpeggio + laser sweep + warm bass pad. */
+  phaserLogo(): void {
+    const c = ready();
+    if (!c) return;
+    const t0 = c.currentTime + 0.04;
+    // Warm sub-bass foundation
+    tone(130.81, 'triangle', t0, 0.12, 0.22, 1.85);
+    // Prism laser beam sweep
+    tone(220, 'sine', t0 + 0.06, 0.04, 0.12, 0.55, 1320);
+    // Ascending Cmaj9 retro-synth arpeggio (C4 -> E4 -> G4 -> B4 -> D5 -> E5)
+    [261.63, 329.63, 392.0, 493.88, 587.33, 659.25].forEach((f, i) => {
+      tone(f, 'triangle', t0 + 0.1 + i * 0.085, 0.015, 0.16, 0.95 - i * 0.06);
+      tone(f * 2, 'sine', t0 + 0.1 + i * 0.085, 0.01, 0.06, 0.75);
+    });
   }
 };

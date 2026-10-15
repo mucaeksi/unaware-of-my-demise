@@ -158,7 +158,11 @@ async function main(): Promise<void> {
   const party = ['mahmut', 'fadyme'];
   const t1 = tutorialChapter('T-1');
   const t2 = tutorialChapter('T-2');
+  t2.before.location_id = 'forgotten_stone_crossing';
+  t2.after.location_id = 'forgotten_stone_crossing';
   const t3 = tutorialChapter('T-3');
+  t3.before.location_id = 'shelter_courtyard_dusk';
+  t3.after.location_id = 'shelter_courtyard_dusk';
   const scenes = {
     t1_before: buildScene(t1.before, 'T-1', 'before', 'bgm_ch1_ash_forest_calm', party),
     t1_after: buildScene(t1.after, 'T-1', 'after', 'bgm_ch1_ash_forest_calm', party),
@@ -174,8 +178,8 @@ async function main(): Promise<void> {
     { unit_id: 'fadyme', row: 'rear' as const }
   ];
   const enc1 = buildEncounter('T-1', 'tutorial_t1', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t1', TUTORIAL_UI);
-  const enc2 = buildEncounter('T-2', 'tutorial_t2', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t2', TUTORIAL_UI);
-  const enc3 = buildEncounter('T-3', 'tutorial_t3', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t3', TUTORIAL_UI);
+  const enc2 = { ...buildEncounter('T-2', 'tutorial_t2', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t2', TUTORIAL_UI), location_id: 'forgotten_stone_crossing' };
+  const enc3 = { ...buildEncounter('T-3', 'tutorial_t3', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t3', TUTORIAL_UI), location_id: 'shelter_courtyard_dusk' };
 
   // ---- art (approved_art first, legacy fallback only for uncovered keys) ----------------------
   const approvedUnits = new Map<string, ApprovedArtEntry>();

@@ -79,7 +79,7 @@
     "atlas": "atlas_fadyme",
     "unit": "fadyme",
     "facing": "right",
-    "height_px": 360
+    "height_px": 252
   },
   "qc": {
     "profile": "chibi_r2"

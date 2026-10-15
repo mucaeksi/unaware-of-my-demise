@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scene_id": "tutorial_t2_after",
   "title_en": "A Road Forgotten",
-  "location_id": "forest_whispering_ash",
+  "location_id": "forgotten_stone_crossing",
   "presentation": {
     "auto": true,
     "speaker_pause_seconds": 1
@@ -12,7 +12,7 @@
   "commands": [
     {
       "op": "background",
-      "location_id": "forest_whispering_ash"
+      "location_id": "forgotten_stone_crossing"
     },
     {
       "op": "music",

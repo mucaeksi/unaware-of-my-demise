@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scene_id": "tutorial_t3_before",
   "title_en": "A Roof Before Dawn",
-  "location_id": "forest_whispering_ash",
+  "location_id": "shelter_courtyard_dusk",
   "presentation": {
     "auto": true,
     "speaker_pause_seconds": 1
@@ -11,7 +11,7 @@
   "commands": [
     {
       "op": "background",
-      "location_id": "forest_whispering_ash"
+      "location_id": "shelter_courtyard_dusk"
     },
     {
       "op": "music",

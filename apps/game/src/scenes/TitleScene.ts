@@ -14,6 +14,8 @@ import { Progress, Services } from '../services';
 import { Button, panel, sceneFadeIn, title, toast, txt } from '../ui/kit';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
 import { playNode, resolveNextCampaignNode } from '../flow';
+import { RANDOM_GAME_QUOTES } from '../entry/strings';
+import { ensurePatchBar } from '../patch/PatchBar';
 
 
 const TITLE_CUE = 'bgm_ch1_ash_forest_calm';
@@ -39,6 +41,10 @@ function describe(o: PatchOutcome | null): string {
 export class TitleScene extends Phaser.Scene {
   private chipText!: Phaser.GameObjects.Text;
   private overlay: Phaser.GameObjects.Container | null = null;
+  private tapBanner: Phaser.GameObjects.Container | null = null;
+  private stagingBox: Phaser.GameObjects.Container | null = null;
+  private authBadgeText: Phaser.GameObjects.Text | null = null;
+  private quoteTimer: Phaser.Time.TimerEvent | null = null;
   private audioStarted = false;
   /** true until the entry flow (prologue, tutorials, patch page) has been completed once on this account/device */
   private firstRun = false;
@@ -57,8 +63,15 @@ export class TitleScene extends Phaser.Scene {
 
   async create(): Promise<void> {
     this.viewRevision++;
-    this.events.once('shutdown', () => { this.viewRevision++; });
+    this.events.once('shutdown', () => {
+      this.viewRevision++;
+      this.quoteTimer?.remove(false);
+      this.quoteTimer = null;
+    });
     this.overlay = null;
+    this.tapBanner = null;
+    this.stagingBox = null;
+    this.authBadgeText = null;
     this.audioStarted = false;
     this.busy = false;
     this.firstRun = loadEntry().phase !== 'completed';
@@ -70,6 +83,9 @@ export class TitleScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(0x0a0610);
     const notice = Services.ready().content.storageNotice;
     if (notice) toast(this, notice, 8000);
+
+    // Ensure Main Theme continues seamlessly from StudioScene (or starts if entering Title directly)
+    void this.ensureMainTheme();
 
     const titleBgKey = art.ui('title_bg');
     if (titleBgKey) {
@@ -100,11 +116,11 @@ export class TitleScene extends Phaser.Scene {
     }
 
     const shade = this.add.graphics();
-    // Light top bar gradient for utility pills and bottom gradient behind TAP TO CONTINUE
+    // Light top bar gradient for utility pills and bottom gradient behind TAP TO START
     shade.fillGradientStyle(0x05030a, 0x05030a, 0x05030a, 0x05030a, 0.32, 0.32, 0, 0);
     shade.fillRect(0, 0, REF_W, 110);
-    shade.fillGradientStyle(0x05030a, 0x05030a, 0x05030a, 0x05030a, 0, 0, 0.78, 0.78);
-    shade.fillRect(0, REF_H - 220, REF_W, 220);
+    shade.fillGradientStyle(0x05030a, 0x05030a, 0x05030a, 0x05030a, 0, 0, 0.82, 0.82);
+    shade.fillRect(0, REF_H - 250, REF_W, 250);
 
     if (!prefs().reducedMotion && this.textures.exists('fx_spark')) {
       this.addTitleAtmosphere();
@@ -125,9 +141,9 @@ export class TitleScene extends Phaser.Scene {
     if (logoKey) {
       const logo = this.add.image(logoX, logoY + 12, logoKey).setAlpha(0);
       logo.setScale(820 / logo.width);
-      this.tweens.add({ targets: logo, alpha: 1, y: logoY, duration: 1400, ease: 'Cubic.easeOut' });
+      this.tweens.add({ targets: logo, alpha: 1, y: logoY, duration: 1500, ease: 'Cubic.easeOut' });
       if (!prefs().reducedMotion) {
-        this.tweens.add({ targets: logo, y: logoY + 8, duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut', delay: 1400 });
+        this.tweens.add({ targets: logo, y: logoY + 8, duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut', delay: 1500 });
       }
     }
     txt(this, logoX, 462, S.menu.tagline, {
@@ -142,12 +158,14 @@ export class TitleScene extends Phaser.Scene {
       .setLetterSpacing(5);
 
     this.buildServerBadge();
-    if (this.firstRun) this.buildFirstRunMenu();
-    else this.buildFullMenu();
+    this.buildTitleStartMenu();
+
     // a reinstall or a second device: the account may already be past the entry flow
     if (this.firstRun && Services.api.signedIn) {
       void syncEntry(Services.api).then(({ state }) => {
-        if (state.phase === 'completed' && this.scene.isActive()) this.scene.restart();
+        if (state.phase === 'completed' && this.scene.isActive() && !this.busy) {
+          this.firstRun = false;
+        }
       });
     }
 
@@ -163,23 +181,23 @@ export class TitleScene extends Phaser.Scene {
       this.game.events.off('content:checked', this.onChecked, this);
     });
     this.input.once('pointerdown', () => void this.startAudio());
-    sceneFadeIn(this, 700);
+    sceneFadeIn(this, 1200);
     if (this.autoOpenSettings) {
       this.autoOpenSettings = false;
       void this.openSettings();
     }
   }
 
-  /** Online gacha server & account status badge in the top-left corner. */
+  /** Online gacha server & Google Play Games account status badge in the top-left corner. */
   private buildServerBadge(): void {
     const insets = safeInsets(this);
     const x = 60 + insets.left;
     const y = 58 + insets.top;
     const g = this.add.graphics();
-    g.fillStyle(0x120a18, 0.76);
-    g.fillRoundedRect(0, -24, 430, 48, 24);
+    g.fillStyle(0x120a18, 0.78);
+    g.fillRoundedRect(0, -24, 490, 48, 24);
     g.lineStyle(1.5, C.gold, 0.55);
-    g.strokeRoundedRect(0, -24, 430, 48, 24);
+    g.strokeRoundedRect(0, -24, 490, 48, 24);
     g.fillStyle(C.hpGood, 1);
     g.fillCircle(24, 0, 6);
     const realm = txt(this, 44, 0, 'SANCTUM-01  ·  ONLINE', {
@@ -190,13 +208,13 @@ export class TitleScene extends Phaser.Scene {
     })
       .setOrigin(0, 0.5)
       .setLetterSpacing(2);
-    const authTag = txt(this, 412, 0, Services.api.signedIn ? 'SYNCED' : 'GUEST', {
+    this.authBadgeText = txt(this, 470, 0, Services.api.signedIn ? 'PLAY GAMES ✓' : 'PLAY GAMES', {
       fontFamily: F.display,
       fontSize: '18px',
       fontStyle: '600',
       color: Services.api.signedIn ? T.heal : T.dim
     }).setOrigin(1, 0.5);
-    this.add.container(x, y, [g, realm, authTag]).setDepth(DEPTH.hud + 1);
+    this.add.container(x, y, [g, realm, this.authBadgeText]).setDepth(DEPTH.hud + 1);
   }
 
   /** Rising ash and warm ember particles across the widescreen title illustration. */
@@ -217,7 +235,21 @@ export class TitleScene extends Phaser.Scene {
       .setDepth(DEPTH.world);
   }
 
-  /** Shared full-screen tap-to-continue zone and blinking gothic prompt banner at the bottom center. */
+  /** Clean Title Screen menu: blinking TAP TO START banner + discrete top-right SETTINGS utility pill. */
+  private buildTitleStartMenu(): void {
+    const insets = safeInsets(this);
+    const subLine = this.firstRun ? S.menu.tapSubFirstRun : S.menu.tapSubReturn;
+    this.buildTapToContinueBanner('GOOGLE PLAY GAMES  ·  LIVEOPS', subLine, true, () => void this.onTapToStart());
+    new Button(this, REF_W - 145 - insets.right, 58 + insets.top, {
+      label: S.menu.settings,
+      w: 210,
+      h: 72,
+      fontSize: 22,
+      onClick: () => void this.openSettings()
+    }).setDepth(DEPTH.hud + 2);
+  }
+
+  /** Shared full-screen tap-to-start zone and blinking gothic prompt banner at the bottom center. */
   private buildTapToContinueBanner(modeBadge: string, subLine: string, enabled: boolean, onTap: () => void): void {
     const insets = safeInsets(this);
     const cx = REF_W / 2;
@@ -257,18 +289,18 @@ export class TitleScene extends Phaser.Scene {
 
     const mainPrompt = txt(this, 0, 0, S.menu.tapToContinue, {
       fontFamily: F.display,
-      fontSize: '42px',
+      fontSize: '44px',
       fontStyle: '700',
       color: enabled ? '#f1ece4' : T.dim,
       stroke: '#0a0610',
       strokeThickness: 6
     })
       .setOrigin(0.5)
-      .setLetterSpacing(9);
+      .setLetterSpacing(10);
 
     const badgeTxt = txt(this, 0, 50, modeBadge, {
       fontFamily: F.display,
-      fontSize: '22px',
+      fontSize: '21px',
       fontStyle: '600',
       color: T.gold,
       stroke: '#0a0610',
@@ -286,12 +318,12 @@ export class TitleScene extends Phaser.Scene {
       strokeThickness: 3
     }).setOrigin(0.5);
 
-    this.add.container(cx, cy, [wings, mainPrompt, badgeTxt, subTxt]).setDepth(DEPTH.hud);
+    this.tapBanner = this.add.container(cx, cy, [wings, mainPrompt, badgeTxt, subTxt]).setDepth(DEPTH.hud);
 
     if (enabled && !prefs().reducedMotion) {
       this.tweens.add({
         targets: mainPrompt,
-        alpha: { from: 1, to: 0.26 },
+        alpha: { from: 1, to: 0.24 },
         scale: { from: 1.02, to: 0.98 },
         duration: 1150,
         yoyo: true,
@@ -301,99 +333,230 @@ export class TitleScene extends Phaser.Scene {
     }
   }
 
-  /** First install: full-screen blinking TAP TO CONTINUE + discrete top-right SETTINGS utility pill. */
-  private buildFirstRunMenu(): void {
-    const insets = safeInsets(this);
-    const signedIn = Services.api.signedIn;
-    const canSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
-    if (signedIn) {
-      this.buildTapToContinueBanner(S.menu.cont, S.menu.tapSubFirstRun, true, () => void this.enter());
-    } else if (canSignIn) {
-      this.buildTapToContinueBanner(S.menu.signIn, S.menu.signInSub, true, () => void this.enter());
-    } else if (PREVIEW_FLOW_ENABLED) {
-      this.buildTapToContinueBanner(S.menu.preview, S.menu.tapSubFirstRun, true, () => void this.enter());
-    } else {
-      this.buildTapToContinueBanner(S.menu.signIn, S.menu.webNote, false, () => undefined);
-    }
-    new Button(this, REF_W - 145 - insets.right, 58 + insets.top, {
-      label: S.menu.settings,
-      w: 210,
-      h: 72,
-      fontSize: 22,
-      onClick: () => void this.openSettings()
-    }).setDepth(DEPTH.hud + 2);
-  }
-
-  /** Returning player: full-screen blinking TAP TO CONTINUE + discrete top-right online gacha utility pills. */
-  private buildFullMenu(): void {
-    const insets = safeInsets(this);
-    this.buildTapToContinueBanner('CONTINUE', S.menu.tapSubReturn, true, () => void this.begin());
-    const topY = 58 + insets.top;
-    new Button(this, REF_W - 595 - insets.right, topY, {
-      label: 'COMPANY',
-      w: 210,
-      h: 72,
-      fontSize: 22,
-      variant: 'hot',
-      onClick: () => this.go('Home')
-    }).setDepth(DEPTH.hud + 2);
-    new Button(this, REF_W - 370 - insets.right, topY, {
-      label: 'CHAPTERS',
-      w: 210,
-      h: 72,
-      fontSize: 22,
-      onClick: () => this.go('Chapters')
-    }).setDepth(DEPTH.hud + 2);
-    new Button(this, REF_W - 145 - insets.right, topY, {
-      label: 'SETTINGS',
-      w: 210,
-      h: 72,
-      fontSize: 22,
-      onClick: () => void this.openSettings()
-    }).setDepth(DEPTH.hud + 2);
-  }
-
-  /** Sign in (native or web GIS) when needed, then continue with the first unfinished entry step. */
-  private async enter(): Promise<void> {
+  /**
+   * Unified TAP TO START handler:
+   * 1. Shows the Google Play Games Sign-In & Patch Check Area in the bottom-center.
+   * 2. Authenticates Google Play Games (native/web when configured, or verifies session).
+   * 3. Starts Patch Check (`Services.patches.start()`).
+   * 4. For first-time players: keeps patching in the background (`ensurePatchBar`) and transitions slowly into the 2-minute Prologue & Tutorials.
+   * 5. For returning/post-tutorial players: finishes patch check on screen, then resumes where the player left off (or shows Part I Beginning if Part I patch is not yet installed).
+   */
+  private async onTapToStart(): Promise<void> {
     if (this.busy) return;
     this.busy = true;
     void this.startAudio();
-    if (!Services.api.signedIn && (Services.identity?.kind === 'native' || Services.identity?.kind === 'web')) {
-      if ((await signInWithGoogle(this)) !== 'ok') {
+
+    const insets = safeInsets(this);
+    if (this.tapBanner) {
+      this.tweens.add({ targets: this.tapBanner, alpha: 0, duration: 280 });
+    }
+
+    // Build the Google Play Sign-In + Patch Check / Patch Area panel at the bottom center
+    const cx = REF_W / 2;
+    const cy = REF_H - 180 - insets.bottom;
+    const boxBg = panel(this, 0, -10, 1180, 196, 'normal');
+
+    // Google Play Games badge emblem
+    const gpIcon = this.add.graphics();
+    gpIcon.fillStyle(0x1f3628, 0.95);
+    gpIcon.fillRoundedRect(-540, -64, 44, 44, 10);
+    gpIcon.lineStyle(1.5, C.hpGood, 0.85);
+    gpIcon.strokeRoundedRect(-540, -64, 44, 44, 10);
+    gpIcon.fillStyle(C.hpGood, 1);
+    gpIcon.fillTriangle(-525, -54, -525, -30, -505, -42);
+
+    const stepHeading = txt(this, -480, -42, 'GOOGLE PLAY GAMES  ·  SIGNING IN…', {
+      fontFamily: F.display,
+      fontSize: '25px',
+      fontStyle: '700',
+      color: T.gold,
+      stroke: '#0a0610',
+      strokeThickness: 4
+    })
+      .setOrigin(0, 0.5)
+      .setLetterSpacing(3);
+
+    const patchSub = txt(this, -480, -4, 'Authenticating Google Play Games profile and preparing patch manifest…', {
+      fontFamily: F.body,
+      fontSize: '24px',
+      color: T.text
+    }).setOrigin(0, 0.5);
+
+    const trackW = 1070;
+    const track = this.add.rectangle(0, 32, trackW, 14, 0x09050e, 0.95).setStrokeStyle(1.5, C.goldDim, 0.7);
+    const fill = this.add.rectangle(-trackW / 2, 32, 80, 10, C.goldHi, 0.95).setOrigin(0, 0.5);
+    const pctTxt = txt(this, 535, -42, 'AUTH', {
+      fontFamily: F.display,
+      fontSize: '22px',
+      fontStyle: '700',
+      color: T.gold
+    }).setOrigin(1, 0.5);
+
+    // Random quote underneath the patch box
+    let quoteIdx = Math.floor(Math.random() * RANDOM_GAME_QUOTES.length);
+    const quoteTxt = txt(this, 0, 118, RANDOM_GAME_QUOTES[quoteIdx] ?? '', {
+      fontFamily: F.body,
+      fontSize: '23px',
+      fontStyle: 'italic 500',
+      color: '#d8cce8',
+      stroke: '#05030a',
+      strokeThickness: 4,
+      align: 'center',
+      wordWrap: { width: 1180 }
+    }).setOrigin(0.5);
+
+    this.stagingBox?.destroy();
+    this.stagingBox = this.add
+      .container(cx, cy, [boxBg, gpIcon, stepHeading, patchSub, track, fill, pctTxt, quoteTxt])
+      .setDepth(DEPTH.hud + 3)
+      .setAlpha(0);
+    this.tweens.add({ targets: this.stagingBox, alpha: 1, duration: 360, ease: 'Sine.easeOut' });
+
+    this.quoteTimer?.remove(false);
+    this.quoteTimer = this.time.addEvent({
+      delay: 4800,
+      loop: true,
+      callback: () => {
+        if (!quoteTxt.active) return;
+        quoteIdx = (quoteIdx + 1) % RANDOM_GAME_QUOTES.length;
+        this.tweens.add({
+          targets: quoteTxt,
+          alpha: 0,
+          duration: 300,
+          onComplete: () => {
+            if (!quoteTxt.active) return;
+            quoteTxt.setText(RANDOM_GAME_QUOTES[quoteIdx] ?? '');
+            this.tweens.add({ targets: quoteTxt, alpha: 1, duration: 400 });
+          }
+        });
+      }
+    });
+
+    // Step 1: Google Play Games Sign-In
+    const canRealSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
+    if (!Services.api.signedIn && canRealSignIn) {
+      const res = await signInWithGoogle(this);
+      if (!this.sys.isActive()) return;
+      if (res !== 'ok' && !PREVIEW_FLOW_ENABLED) {
+        this.quoteTimer?.remove(false);
+        this.stagingBox?.destroy();
+        this.stagingBox = null;
+        if (this.tapBanner) this.tweens.add({ targets: this.tapBanner, alpha: 1, duration: 280 });
         this.busy = false;
         return;
       }
+    } else {
+      await this.waitMs(520);
+      if (!this.sys.isActive()) return;
     }
-    await beginEntry(this);
+
+    if (this.authBadgeText?.active) {
+      this.authBadgeText.setText('PLAY GAMES ✓').setColor(T.heal);
+    }
+    if (Services.api.signedIn) {
+      await syncEntry(Services.api).catch(() => undefined);
+      if (!this.sys.isActive()) return;
+      this.firstRun = loadEntry().phase !== 'completed';
+    }
+
+    // Step 2: Patch Check & Patch Area
+    stepHeading.setText('GOOGLE PLAY GAMES ✓  ·  CHECKING FOR PATCHES…');
+    patchSub.setText(
+      this.firstRun
+        ? 'Starting background patch download — Prologue & Tutorial will begin shortly…'
+        : 'Verifying latest live content manifest and checking for game updates…'
+    );
+    pctTxt.setText('PATCH');
+    this.tweens.add({ targets: fill, width: Math.round(trackW * 0.42), duration: 550, ease: 'Sine.easeOut' });
+
+    Services.patches.start();
+    void this.refreshChip();
+
+    if (this.firstRun) {
+      // First-time player: keep patch running in background and transition slowly into Prologue / Tutorial
+      ensurePatchBar(this.game);
+      await this.waitMs(850);
+      if (!this.sys.isActive()) return;
+      this.tweens.add({ targets: fill, width: trackW, duration: 420, ease: 'Sine.easeOut' });
+      pctTxt.setText('LIVE');
+      patchSub.setText('Background patch active · Entering Before the Road…');
+      await this.waitMs(420);
+      if (!this.sys.isActive()) return;
+      await beginEntry(this);
+      return;
+    }
+
+    // Post-tutorial / Returning player: wait if patch is currently checking/downloading
+    while (this.sys.isActive() && Services.patches.get().kind === 'checking') {
+      const p = Services.patches.get();
+      if (p.kind === 'checking' && p.progress && p.progress.totalBytes > 0) {
+        const ratio = Math.min(1, Math.max(0.15, p.progress.downloadedBytes / p.progress.totalBytes));
+        fill.width = Math.round(trackW * ratio);
+        pctTxt.setText(`${Math.round(ratio * 100)}%`);
+        patchSub.setText(
+          `Downloading patch ${p.progress.releaseId} · ${p.progress.completedFiles}/${p.progress.totalFiles} files`
+        );
+      }
+      await this.waitMs(180);
+    }
+    if (!this.sys.isActive()) return;
+
+    this.tweens.add({ targets: fill, width: trackW, duration: 360, ease: 'Sine.easeOut' });
+    pctTxt.setText('100%');
+    patchSub.setText('Content up to date · Entering the road…');
+    await this.waitMs(480);
+    if (!this.sys.isActive()) return;
+    await this.begin();
+  }
+
+  private waitMs(ms: number): Promise<void> {
+    return new Promise((resolve) => {
+      if (!this.sys.isActive()) return resolve();
+      this.time.delayedCall(ms, () => resolve());
+    });
+  }
+
+  private async ensureMainTheme(): Promise<void> {
+    const { art } = Services.ready();
+    try {
+      await art.loadMusic(this, TITLE_CUE);
+      const m = art.music(TITLE_CUE);
+      if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 1.8);
+    } catch {
+      /* music is optional */
+    }
   }
 
   private async startAudio(): Promise<void> {
     if (this.audioStarted) return;
     this.audioStarted = true;
-    const { art } = Services.ready();
-    try {
-      await art.loadMusic(this, TITLE_CUE);
-      const m = art.music(TITLE_CUE);
-      if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 2.2);
-    } catch {
-      /* music is optional */
-    }
+    await this.ensureMainTheme();
     Sfx.bell(330, 0.2, 2.2);
   }
 
   private go(scene: string): void {
     void this.startAudio();
-    this.cameras.main.fadeOut(260, 10, 6, 16);
-    this.time.delayedCall(260, () => this.scene.start(scene));
+    this.cameras.main.fadeOut(900, 10, 6, 16);
+    this.time.delayedCall(900, () => this.scene.start(scene));
   }
 
   private async begin(): Promise<void> {
-    if (this.busy) return;
-    this.busy = true;
-    void this.startAudio();
     try {
       const { content } = Services.ready();
       const idx = await content.chapters();
+      const campaignChapters = idx.chapters.filter((ch) => ch.chapter_id !== 'tutorial');
+
+      // If only the base AAB tutorial is installed (Part I patch not yet applied),
+      // show the Part I Beginning screen instead of looping back into Tutorial T-1!
+      if (campaignChapters.length === 0) {
+        this.quoteTimer?.remove(false);
+        this.stagingBox?.destroy();
+        this.stagingBox = null;
+        this.openPartOneBeginningModal();
+        this.busy = false;
+        return;
+      }
+
       let progress = Progress.load();
       if (Services.api.signedIn) {
         try {
@@ -404,11 +567,90 @@ export class TitleScene extends Phaser.Scene {
         }
       }
       const next = resolveNextCampaignNode(idx, progress, Services.api.accountKey);
-      if (next) await playNode(this, next);
+      if (next) {
+        this.cameras.main.fadeOut(1100, 10, 6, 16);
+        await this.waitMs(1100);
+        await playNode(this, next);
+      }
     } finally {
       this.busy = false;
     }
   }
+
+  /**
+   * Shown to players who have graduated from the base AAB (Prologue + 3-Part Tutorial + Client Restart)
+   * when Part I has not yet been delivered via LiveOps patch.
+   */
+  private openPartOneBeginningModal(): void {
+    const { items, cx, cy } = this.openOverlay('PART I  ·  UNAWARE, I FADE', 1380, 720);
+    const sub = txt(this, cx, cy - 190, 'PROLOGUE & TUTORIAL COMPLETED  ·  ACCOUNT SYNCHRONIZED', {
+      fontFamily: F.display,
+      fontSize: '24px',
+      fontStyle: '600',
+      color: T.heal,
+      letterSpacing: 4
+    }).setOrigin(0.5);
+    const body = txt(
+      this,
+      cx,
+      cy - 55,
+      'Fadyme and Mahmut step out from the wayside shelter into the pale dawn of the Whispering Ash.\n\n' +
+        'Part I — "Unaware, I Fade" and subsequent chapters are delivered dynamically via LiveOps Content Patches.\n' +
+        'Your tutorial completion and Google Play profile are saved. You may visit the Company Sanctum or check for the Part I patch below.',
+      {
+        fontFamily: F.body,
+        fontSize: '32px',
+        color: T.text,
+        align: 'center',
+        lineSpacing: 12,
+        wordWrap: { width: 1180 }
+      }
+    ).setOrigin(0.5);
+    const quote = txt(this, cx, cy + 125, '“Two names still uncalled. And a road that had only just begun.”', {
+      fontFamily: F.body,
+      fontSize: '28px',
+      fontStyle: 'italic 500',
+      color: T.gold
+    }).setOrigin(0.5);
+    const companyBtn = new Button(this, cx - 390, cy + 245, {
+      label: 'COMPANY SANCTUM',
+      w: 360,
+      h: 96,
+      fontSize: 24,
+      variant: 'hot',
+      onClick: () => {
+        this.closeOverlay();
+        this.go('Home');
+      }
+    });
+    const checkBtn = new Button(this, cx, cy + 245, {
+      label: 'CHECK PATCH',
+      w: 340,
+      h: 96,
+      fontSize: 24,
+      onClick: async () => {
+        checkBtn.setLabel('CHECKING…').setEnabled(false);
+        const out = await Services.ready().content.checkForUpdates();
+        if (out.status === 'applied' || out.status === 'reverted_to_base') await Services.refreshArt();
+        void this.refreshChip();
+        toast(this, describe(out));
+        if (checkBtn.active) checkBtn.setLabel('CHECK PATCH').setEnabled(true);
+      }
+    });
+    const closeBtn = new Button(this, cx + 390, cy + 245, {
+      label: 'RETURN TO TITLE',
+      w: 360,
+      h: 96,
+      fontSize: 24,
+      onClick: () => {
+        this.closeOverlay();
+        if (this.tapBanner) this.tweens.add({ targets: this.tapBanner, alpha: 1, duration: 300 });
+      }
+    });
+    items.push(sub, body, quote, companyBtn, checkBtn, closeBtn);
+    this.overlay = this.add.container(0, 0, items).setDepth(DEPTH.modal);
+  }
+
 
 
   private async refreshChip(): Promise<void> {

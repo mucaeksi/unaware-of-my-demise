@@ -15,6 +15,9 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(UomdAdsPlugin.class);
         registerPlugin(UomdAppPlugin.class);
         super.onCreate(savedInstanceState);
+        if (getBridge() != null && getBridge().getWebView() != null) {
+            getBridge().getWebView().getSettings().setMediaPlaybackRequiresUserGesture(false);
+        }
         enterImmersive();
     }
 

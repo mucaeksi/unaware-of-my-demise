@@ -79,7 +79,7 @@
     "atlas": "atlas_hero_arcanist",
     "unit": "hero_arcanist",
     "facing": "right",
-    "height_px": 350
+    "height_px": 248
   },
   "qc": {
     "profile": "chibi_r2"

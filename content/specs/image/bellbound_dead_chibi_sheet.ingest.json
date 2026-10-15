@@ -79,7 +79,7 @@
     "atlas": "atlas_bellbound_dead",
     "unit": "bellbound_dead",
     "facing": "left",
-    "height_px": 340
+    "height_px": 242
   },
   "qc": {
     "profile": "chibi_r2"

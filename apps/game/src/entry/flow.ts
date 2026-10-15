@@ -27,10 +27,11 @@ export async function signInWithGoogle(scene: Phaser.Scene): Promise<SignInResul
 /** Whether the first-run menu may continue: signed in, or the preview build explicitly running without an account. */
 export const mayContinue = (): boolean => Services.api.signedIn || PREVIEW_FLOW_ENABLED;
 
-/** Routes the player to the first unfinished entry step (fades out, then starts the step's scene or runner). */
+/** Routes the player to the first unfinished entry step (fades out slowly, then starts the step's scene or runner). */
 export function advance(scene: Phaser.Scene, step: EntryStep = nextStep(loadEntry())): void {
-  scene.cameras.main.fadeOut(420, 0, 0, 0);
-  scene.time.delayedCall(430, () => {
+  const dur = 1100;
+  scene.cameras.main.fadeOut(dur, 0, 0, 0);
+  scene.time.delayedCall(dur + 40, () => {
     switch (step.kind) {
       case 'prologue':
         scene.scene.start('Prologue');

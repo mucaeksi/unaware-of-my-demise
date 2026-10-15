@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "bg_forgotten_stone_crossing",
+  "class": "background",
+  "source": {
+    "kind": "generated",
+    "pick": "08b066d6fde8",
+    "provenance": ".cache/generated/bg_forgotten_stone_crossing/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 327680
+  },
+  "manifest": {
+    "background": "forgotten_stone_crossing"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

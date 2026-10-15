@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
 import { S } from '../entry/strings';
@@ -7,14 +8,16 @@ import { Services } from '../services';
 import { txt } from '../ui/kit';
 import { C, F, T } from '../ui/theme';
 
-const NAME_IN = INTRO_FAST ? 80 : 1300;
-const PRESENTS_AT = INTRO_FAST ? 60 : 1000;
-const HOLD = INTRO_FAST ? 80 : 1700;
-const OUT = INTRO_FAST ? 80 : 1000;
+const MAIN_THEME_CUE = 'bgm_ch1_ash_forest_calm';
+const NAME_IN = INTRO_FAST ? 80 : 1700;
+const PRESENTS_AT = INTRO_FAST ? 60 : 1100;
+const HOLD = INTRO_FAST ? 80 : 2100;
+const OUT = INTRO_FAST ? 80 : 1500;
 
 /**
- * "SovTaym Studios Presents" card, ~4.5 s, ink on black. Renders the commissioned `studio_mark` celestial astrolabe emblem
- * framed by counter-rotating gold/silver filigree rings, a hairline shimmer sweep, and rising spark motes. Tapping does not skip.
+ * "SovTaym Studios Presents" card, slow fade-in on deep obsidian. Renders the commissioned `studio_mark` celestial astrolabe emblem
+ * framed by counter-rotating gold/silver filigree rings, a hairline shimmer sweep, and rising spark motes.
+ * Starts the Main Theme music the exact moment the studio logo appears so it flows seamlessly into the Title screen.
  */
 export class StudioScene extends Phaser.Scene {
   constructor() {
@@ -22,7 +25,11 @@ export class StudioScene extends Phaser.Scene {
   }
 
   async create(): Promise<void> {
-    await Services.ready().art.loadUi(this);
+    const { art } = Services.ready();
+    await Promise.all([
+      art.loadUi(this),
+      art.loadMusic(this, MAIN_THEME_CUE).catch(() => undefined)
+    ]);
     if (!this.sys.isActive()) return;
     this.cameras.main.setBackgroundColor(0x05030a);
     const calm = prefs().reducedMotion;
@@ -45,7 +52,7 @@ export class StudioScene extends Phaser.Scene {
         this.tweens.add({
           targets: aura,
           scale: { from: 5.4, to: 6.8 },
-          duration: 2400,
+          duration: 2600,
           yoyo: true,
           repeat: -1,
           ease: 'Sine.easeInOut'
@@ -69,7 +76,7 @@ export class StudioScene extends Phaser.Scene {
       mark.setScale(calm ? targetScale : targetScale * 0.86);
       parts.push(mark);
       if (!calm) {
-        this.tweens.add({ targets: mark, scale: targetScale, duration: NAME_IN + 400, ease: 'Cubic.easeOut' });
+        this.tweens.add({ targets: mark, scale: targetScale, duration: NAME_IN + 500, ease: 'Cubic.easeOut' });
       }
     }
 
@@ -96,9 +103,17 @@ export class StudioScene extends Phaser.Scene {
     parts.push(divider, name);
     [...parts, presents].forEach((o) => o.setAlpha(0));
 
-    Sfx.bell(330, 0.14, 2.0);
-    this.tweens.add({ targets: parts, alpha: 1, duration: NAME_IN, ease: 'Sine.easeOut' });
-    this.tweens.add({ targets: presents, alpha: 1, duration: NAME_IN, delay: PRESENTS_AT, ease: 'Sine.easeOut' });
+    // Start Main Theme music the exact moment the SovTaym Studios logo begins appearing
+    const playMainTheme = (): void => {
+      const m = art.music(MAIN_THEME_CUE);
+      if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 2.4);
+    };
+    playMainTheme();
+    Sfx.bell(330, 0.14, 2.2);
+    this.input.once('pointerdown', () => playMainTheme());
+
+    this.tweens.add({ targets: parts, alpha: 1, duration: NAME_IN, ease: 'Sine.easeInOut' });
+    this.tweens.add({ targets: presents, alpha: 1, duration: NAME_IN, delay: PRESENTS_AT, ease: 'Sine.easeInOut' });
     if (!calm) {
       this.tweens.add({ targets: name, y: cy + 50, duration: NAME_IN + PRESENTS_AT + HOLD + OUT, ease: 'Sine.easeInOut' });
     }
@@ -109,8 +124,10 @@ export class StudioScene extends Phaser.Scene {
         targets: [...parts, presents],
         alpha: 0,
         duration: OUT,
-        ease: 'Sine.easeIn',
-        onComplete: () => this.scene.start('Title')
+        ease: 'Sine.easeInOut',
+        onComplete: () => {
+          this.time.delayedCall(INTRO_FAST ? 20 : 320, () => this.scene.start('Title'));
+        }
       });
     });
   }

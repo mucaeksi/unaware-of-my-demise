@@ -174,7 +174,7 @@ for (const u of pack.units) {
   if (u.kind === 'character') {
     const isFrontMartial = u.formation_affinity === 'front' || /tank|bruiser|vanguard|knight|defender|shield|warden/.test(tag);
     const template = isFrontMartial ? art.units.mahmut! : heroArcanistUnit;
-    unitArt[u.art_key] = { ...template, facing: 'right', height_px: isFrontMartial ? 360 : 350 };
+    unitArt[u.art_key] = { ...template, facing: 'right', height_px: isFrontMartial ? 258 : 248 };
   } else {
     const isKnightOrBoss = Boolean(u.boss) || /knight|warden|sentinel|guard|captain|lord|vanguard|bruiser|brute|executioner|inquisitor/.test(tag);
     const isPilgrimOrCaster = /caster|pilgrim|choir|priest|acolyte|lantern|whisper|shade|weaver|chanter/.test(tag);
@@ -186,7 +186,7 @@ for (const u of pack.units) {
     unitArt[u.art_key] = {
       ...template,
       facing: 'left',
-      height_px: u.boss ? 430 : isKnightOrBoss ? 365 : 345
+      height_px: u.boss ? 310 : isKnightOrBoss ? 260 : 242
     };
   }
   placeholders.push(u.art_key);
@@ -213,7 +213,11 @@ const TINT: Record<string, [string, string]> = {
   estate_ashen_lord: ['#55464f', '#16111a'],
   altar_first_eclipse: ['#5b2b4a', '#12060f']
 };
-const backgrounds: Record<string, string> = { ...art.backgrounds };
+const backgrounds: Record<string, string> = {
+  ...art.backgrounds,
+  ...(art.backgrounds.forgotten_stone_crossing ? { bridge_forsaken: art.backgrounds.forgotten_stone_crossing } : {}),
+  ...(art.backgrounds.shelter_courtyard_dusk ? { village_oakhaven: art.backgrounds.shelter_courtyard_dusk } : {})
+};
 for (const loc of new Set([...chapters.map((ch) => ch.location_id as string), ...[...story.files.values()].map((scene) => scene.location_id), ...library.entries.flatMap((entry) => entry.scenes.map((scene) => scene.location_id))])) {
   if (backgrounds[loc]) continue;
   const [a, b] = TINT[loc] ?? ['#3a3048', '#0f0b16'];

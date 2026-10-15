@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "bg_forgotten_stone_crossing",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "forgotten_stone_crossing": "art/bg_forgotten_stone_crossing.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "08b066d6fde8395fc494809eb5523aef7fb24bc989cfaeadbdf7362887211ad6",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/bg_forgotten_stone_crossing/run.provenance.json",
+    "provenance_sha256": "0db225f99f58de81159af86f494adf2cc065ff62bed86d8708bc80f7cdafca50",
+    "model": "gemini-3.1-flash-image",
+    "prompt_sha256": "6bf4e20fff07314056eb0e289698c7b6788163d66d0bb697bc7af9f1091776e9",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/bg_forgotten_stone_crossing.ingest.json",
+    "spec_sha256": "07d2c686cff3e732e1acc781f8980fc30802d97b8d05b3af6aaac97159848bd1",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "03b3155aa9ee907d88da85d07bbb6b3fcd4c97bcdb6e27e4be9b73047123054f"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_forgotten_stone_crossing.webp",
+      "sha256": "dba9ff4acf7f9c64e8409a9d64fb0cfbedae91a15fb65e2f9e1bd5e56097adbe",
+      "pixels_sha256": "4ae2a124a0e4d48e70f1fd34ffd7fb1b2044735d477b8534fd44f6ba1dd69ac5",
+      "bytes": 106288,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "106288 bytes <= 327680"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "antigravity",
+      "at": "2026-10-15T17:17:07.366Z",
+      "note": "Approved wide panoramic battlefields and resized 2-head SD Chibis"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

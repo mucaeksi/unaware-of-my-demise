@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "bg_forest_whispering_ash_ordered",
   "class": "background",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "backgrounds": {
       "forest_whispering_ash": "art/bg_forest_whispering_ash.webp"
@@ -10,30 +10,30 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "dd405f5d88f8eeb0af968d3aee58a5299670b1ff235dc2ad4b81f530279821a3",
+    "sha256": "1bfac1ddbf58930adc3b518892d99dfc2d064cff0e8fef21baa858aab1ea5e35",
     "mime": "image/png",
     "width": 1920,
     "height": 1080,
     "provenance_file": ".cache/generated/bg_forest_whispering_ash_ordered/run.provenance.json",
-    "provenance_sha256": "b1045279abd5f0f431519a638784aed2ee487562f6d3aeb8c3d12bf5e530ac79",
+    "provenance_sha256": "1d648cc02bb1d747379e9217c5d5dcef94e63bc13df37cc59afb6fdeced0a120",
     "model": "gemini-3.1-flash-image",
-    "prompt_sha256": "145ec22fa91e3b13e7dfcce94f6ce7953db1c1582fabcfd6945f405bc2df278e",
+    "prompt_sha256": "2c499828c5c9ff0a8acac38c9a1fb52cbdf4ad173b6a58ab55e359d068e852ec",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/bg_forest_whispering_ash_ordered.ingest.json",
-    "spec_sha256": "f711d3d947980b1301d28dc6d8a7cd183f783f606c7f4d4c3cbe7afa3fb83d9f",
+    "spec_sha256": "c73bcb5125a85d25a8ed22b2157db461b649132ac01cfdb7b077b66beed71d14",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "883ca7bd1ffa77345c690c56e55c5f0ea1b5061e997a4ff7d7e60f8ffeeace10"
+    "fingerprint": "8084eec9d458090ae87e7b54f6b22f9ba4ae188a03d2623685de57fb13849ed8"
   },
   "outputs": [
     {
       "path": "art/bg_forest_whispering_ash.webp",
-      "sha256": "15c1567d2b6e3a355b7342332b0317eac6917920f0c782e64349ffd27ad45d92",
-      "pixels_sha256": "6443abeeb8949821bf203026b6226ea7b1071fb14a764f4c2444b387aae8e818",
-      "bytes": 129498,
+      "sha256": "13a39b24d24c55408e562c24e7fbf1238a97d5eac81debc98d712933f4054449",
+      "pixels_sha256": "ef9e752510c7d7c8ab6f3b099f9bebeecca126aa58f45673d08bb624d0b1b824",
+      "bytes": 112520,
       "width": 1920,
       "height": 1080
     }
@@ -62,16 +62,16 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "129498 bytes <= 327680"
+          "detail": "112520 bytes <= 327680"
         }
       },
       "warnings": []
     },
     "human": {
       "status": "approved",
-      "by": "owner-step1",
-      "at": "2026-10-15T04:25:21.733Z",
-      "note": "Approved in Step 1 opening & prologue overhaul"
+      "by": "antigravity",
+      "at": "2026-10-15T17:17:00.582Z",
+      "note": "Approved wide panoramic battlefields and resized 2-head SD Chibis"
     }
   },
   "license": {
@@ -79,5 +79,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/bg_forest_whispering_ash.webp",
+          "sha256": "15c1567d2b6e3a355b7342332b0317eac6917920f0c782e64349ffd27ad45d92",
+          "pixels_sha256": "6443abeeb8949821bf203026b6226ea7b1071fb14a764f4c2444b387aae8e818",
+          "bytes": 129498,
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "source_sha256": "dd405f5d88f8eeb0af968d3aee58a5299670b1ff235dc2ad4b81f530279821a3",
+      "fingerprint": "883ca7bd1ffa77345c690c56e55c5f0ea1b5061e997a4ff7d7e60f8ffeeace10"
+    }
+  ]
 }

@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "bg_shelter_courtyard_dusk",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "shelter_courtyard_dusk": "art/bg_shelter_courtyard_dusk.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "5b02ba5a443cef5389e83ae9373d6ec9d8fcb4ede9ed0e568b85cb4f76ecf54e",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/bg_shelter_courtyard_dusk/run.provenance.json",
+    "provenance_sha256": "77e7e3c54ada3fb59a92cbfc6b786990136d901b78391f610cc9bae574c20ece",
+    "model": "gemini-3.1-flash-image",
+    "prompt_sha256": "2dafbb1b4f2769a6b117ed28d00027e055c36b3c974eddcc4b813007be23cf06",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/bg_shelter_courtyard_dusk.ingest.json",
+    "spec_sha256": "ca96efed2de3c5a34af530e7e87a00d53c4341cd152012c3e81b562eeebf8021",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "1c2a2cdfaa204a08d5a1b832c8b8eb521a4ca0bdf3925a49a16850ffb0ccb6f4"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_shelter_courtyard_dusk.webp",
+      "sha256": "4cf027e11d854dd69ab388032820db1ed80652ae6f419d7bb7395c669c519df6",
+      "pixels_sha256": "9c0eeab9c5970fe98874a72edc83a846a56837d7478eb65c990429958493941e",
+      "bytes": 132030,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "132030 bytes <= 327680"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "antigravity",
+      "at": "2026-10-15T17:17:15.089Z",
+      "note": "Approved wide panoramic battlefields and resized 2-head SD Chibis"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

@@ -18,8 +18,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "af36a860821bfb4d34cb998e1daf82d8bb6f17d3f4c472e3890c30e0eeaf55f7",
-      "bytes": 8819,
+      "sha256": "197a63172c5023634f3947e3a8884fa061f30b20ee7bd98f2081455e750777d4",
+      "bytes": 8959,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -53,8 +53,22 @@
     },
     {
       "path": "art/bg_forest_whispering_ash.webp",
-      "sha256": "15c1567d2b6e3a355b7342332b0317eac6917920f0c782e64349ffd27ad45d92",
-      "bytes": 129498,
+      "sha256": "13a39b24d24c55408e562c24e7fbf1238a97d5eac81debc98d712933f4054449",
+      "bytes": 112520,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/bg_forgotten_stone_crossing.webp",
+      "sha256": "dba9ff4acf7f9c64e8409a9d64fb0cfbedae91a15fb65e2f9e1bd5e56097adbe",
+      "bytes": 106288,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/bg_shelter_courtyard_dusk.webp",
+      "sha256": "4cf027e11d854dd69ab388032820db1ed80652ae6f419d7bb7395c669c519df6",
+      "bytes": 132030,
       "media_type": "image/webp",
       "kind": "background"
     },
@@ -242,15 +256,15 @@
     },
     {
       "path": "encounters/tutorial_t2.json",
-      "sha256": "b49af22998f94ed87ecc1efbdec1b01f457d30f5183ee536dac40ae8cc75378d",
-      "bytes": 906,
+      "sha256": "fa8028bfbb183584252f2ac995a2418b83ee4a882e502d3f32a694d0f37dd886",
+      "bytes": 909,
       "media_type": "application/json",
       "kind": "encounter"
     },
     {
       "path": "encounters/tutorial_t3.json",
-      "sha256": "edc3ed4902cdfe4febccbcf63009284a04b87a046f6c3ddc0ecc20c0bcd3b4d9",
-      "bytes": 1116,
+      "sha256": "f71028713e798d8a3cfdbe6f1067163207a05537425bc0049f2cfcbc8052b40d",
+      "bytes": 1117,
       "media_type": "application/json",
       "kind": "encounter"
     },
@@ -284,29 +298,29 @@
     },
     {
       "path": "story/tutorial_t2_after.json",
-      "sha256": "8ff49951517087a2bb96ffbe3e0e35184837c9487c13138eee991af37b0e4027",
-      "bytes": 5307,
+      "sha256": "19f148d02a957b1949e799d5bbb77c3b9faac2144c557c663e8d6cf18a1123b6",
+      "bytes": 5313,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t2_before.json",
-      "sha256": "5bd96f02a4ed946a82b2e2d99b36fb5939171de25ac6be74d1d399c02549555c",
-      "bytes": 4093,
+      "sha256": "2e9d982752cb3832b0e9911e87d04f2d967d4d465d176aaa8bf929a14d09bb9f",
+      "bytes": 4099,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t3_after.json",
-      "sha256": "189db08a3235a52d49382ef8a2a0e3e8c9c9b1c518d2a828bd41ceeccc5240e3",
-      "bytes": 9020,
+      "sha256": "177c70075dc4466f46dcca3d6bde6ce984038aee6802029d7cd06d90b23e2028",
+      "bytes": 9022,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t3_before.json",
-      "sha256": "c30c5a273bb965725f7b44ff94a0f679099032973bd6e5e9d7bfc49e2d945d27",
-      "bytes": 4442,
+      "sha256": "c7079456265ada059a2be246588d142f51a17037275ad874244170685afa894c",
+      "bytes": 4444,
       "media_type": "application/json",
       "kind": "story_scene"
     },

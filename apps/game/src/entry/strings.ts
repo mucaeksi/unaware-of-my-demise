@@ -4,19 +4,19 @@ export const S = {
   studio: { name: 'SovTaym Studios', presents: 'PRESENTS' },
   menu: {
     tagline: 'PART I  ·  UNAWARE, I FADE',
-    tapToContinue: 'TAP TO CONTINUE',
-    tapSubFirstRun: 'Touch anywhere to begin the prologue',
-    tapSubReturn: 'Touch anywhere to enter the road',
+    tapToContinue: 'TAP TO START',
+    tapSubFirstRun: 'Touch anywhere to sign in with Google Play & begin',
+    tapSubReturn: 'Touch anywhere to sign in & continue your journey',
     serverOnline: '● SANCTUM-01  ·  ONLINE',
-    signIn: 'SIGN IN WITH GOOGLE',
-    signInSub: 'Your journey is saved to your account',
-    cont: 'CONTINUE',
+    signIn: 'SIGN IN WITH GOOGLE PLAY',
+    signInSub: 'Your journey is saved to your Google Play account',
+    cont: 'TAP TO START',
     contSub: 'Resume the road',
     enterRoad: 'Enter the Road',
     chapters: 'CHAPTERS',
     company: 'COMPANY',
-    preview: 'PREVIEW BUILD',
-    previewSub: 'Continue without an account',
+    preview: 'GOOGLE PLAY GAMES',
+    previewSub: 'Connect & check for updates',
     settings: 'SETTINGS',
     webNote: 'Google sign-in runs inside the Android app.',
     offline: 'The first start needs a connection to download the road. Check your network and try again.',
@@ -24,19 +24,19 @@ export const S = {
   },
   finish: {
     waitingTitle: 'THE ROAD IS BEING PREPARED',
-    waitingBody: 'The rest of the game is still arriving. You can keep the app open; this page continues by itself.',
+    waitingBody: 'Downloading and verifying the latest patch while the music plays. The game will restart automatically as soon as the patch finishes.',
     readyTitle: 'EVERYTHING IS INSTALLED',
-    readyBody: 'The game will restart once and open at the main menu.',
+    readyBody: 'Patch complete. Restarting client…',
     restart: 'RESTART & ENTER GAME',
     restarting: 'RESTARTING…',
     retry: 'TRY AGAIN',
     failedBody: 'The download could not finish. Check your connection and try again; nothing already downloaded is lost.'
   },
   patch: {
-    checking: 'Looking for the road',
-    downloading: 'Downloading the road',
-    verifying: 'Verifying what was downloaded',
-    activating: 'Almost ready',
+    checking: 'Checking for patches…',
+    downloading: 'Downloading game patch…',
+    verifying: 'Verifying signed manifest…',
+    activating: 'Applying update…',
     failed: 'The download was interrupted. Tap to try again.',
     updateRequired: 'This version of the game is too old for the road ahead. Please update the app.',
     retrying: 'Trying again…'
@@ -95,6 +95,19 @@ export const S = {
     emptySlot: '— empty —'
   }
 } as const;
+
+/** Iconic lines from the narrative shown beneath the patch box so the player has atmospheric reading while updates download. */
+export const RANDOM_GAME_QUOTES: ReadonlyArray<{ quote: string; speaker: string }> = [
+  { quote: '“Beside it. Not behind you. I know the difference.”', speaker: 'Fadyme  ·  The Whispering Ash' },
+  { quote: '“That stone is loose. Give me your hand.”  —  “For the stone, or for the whole road?”', speaker: 'Mahmut & Fadyme' },
+  { quote: '“A flaw in the architecture of the loaf. Quite beyond my control.”', speaker: 'Fadyme  ·  A Roof Before Dawn' },
+  { quote: '“Wait for my shield. Do not let them separate us.”', speaker: 'Mahmut  ·  Oathless Vanguard' },
+  { quote: '“Stay a little while. Before you stand watch.”  —  “I am here.”', speaker: 'Fadyme & Mahmut' },
+  { quote: '“The bell kept the village hours long before the war taught it to count the missing.”', speaker: 'Chronicle of Veyrhold' },
+  { quote: '“I would rather we reached somewhere ordinary. With an especially ordinary supper.”', speaker: 'Fadyme  ·  A Road Forgotten' },
+  { quote: '“Even your armour is asking for a rest. Hold still.”', speaker: 'Fadyme  ·  Roadside Rest' },
+  { quote: '“We leave when there is light. No hurry.”  —  “And no walking two steps ahead.”', speaker: 'Mahmut & Fadyme' }
+];
 
 export const EN_STRINGS: Readonly<Record<string, string>> = Object.freeze(
   Object.entries(S).reduce<Record<string, string>>((acc, [group, entries]) => {

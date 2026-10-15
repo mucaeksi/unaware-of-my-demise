@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "mahmut_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_mahmut": {
@@ -41,7 +41,7 @@
       "mahmut": {
         "atlas": "atlas_mahmut",
         "facing": "right",
-        "height_px": 360,
+        "height_px": 258,
         "states": {
           "idle": {
             "frame": "idle",
@@ -110,10 +110,10 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/mahmut_chibi_sheet.ingest.json",
-    "spec_sha256": "b13a93d9aa17dc14538598c2f368f9d96a0beaa0e68d4b96a33047c285691ba0",
+    "spec_sha256": "331620af80183a223760af3dfee653bd8e03fa53a4fdcb28b14c9a286d683181",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "b60e92976bedb352d1b2e978c983fcaad1a7c08413eab1f92264eada7eeb35e9"
+    "fingerprint": "0bde6778cb901ad1cd40fdc23f108d4b90094d5e0067122374db14aae968f689"
   },
   "outputs": [
     {
@@ -179,8 +179,8 @@
     "human": {
       "status": "approved",
       "by": "antigravity",
-      "at": "2026-10-15T16:09:28.139Z",
-      "note": "2-head SD Chibi battle sprite sheet"
+      "at": "2026-10-15T17:17:32.075Z",
+      "note": "Approved wide panoramic battlefields and resized 2-head SD Chibis"
     }
   },
   "license": {
@@ -188,5 +188,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_mahmut.webp",
+          "sha256": "837f9d2c124fc8d8648b5eb5d7c5f1afe45747dc8ab96863f2f3f1c22221bd54",
+          "pixels_sha256": "5ea3bbf4af9f50af66d10d56b0397ccd7facea4847476c88c8087c73f10d613f",
+          "bytes": 110786,
+          "width": 1547,
+          "height": 416
+        }
+      ],
+      "source_sha256": "1acc2bc551cf777bcb26fce9ca592a4b02377804f5dcc6d412f312664558b87d",
+      "fingerprint": "b60e92976bedb352d1b2e978c983fcaad1a7c08413eab1f92264eada7eeb35e9"
+    }
+  ]
 }

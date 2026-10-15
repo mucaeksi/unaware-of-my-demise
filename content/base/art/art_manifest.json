@@ -130,7 +130,7 @@
     "fadyme": {
       "atlas": "atlas_fadyme",
       "facing": "right",
-      "height_px": 360,
+      "height_px": 252,
       "states": {
         "idle": {
           "frame": "idle",
@@ -185,7 +185,7 @@
     "mahmut": {
       "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 360,
+      "height_px": 258,
       "states": {
         "idle": {
           "frame": "idle",
@@ -240,7 +240,7 @@
     "bellbound_dead": {
       "atlas": "atlas_bellbound_dead",
       "facing": "left",
-      "height_px": 340,
+      "height_px": 242,
       "states": {
         "idle": {
           "frame": "idle",
@@ -295,7 +295,7 @@
     "hollow_pilgrim": {
       "atlas": "atlas_hollow_pilgrim",
       "facing": "left",
-      "height_px": 318,
+      "height_px": 232,
       "states": {
         "idle": {
           "frame": "idle",
@@ -378,7 +378,9 @@
     }
   },
   "backgrounds": {
-    "forest_whispering_ash": "art/bg_forest_whispering_ash.webp"
+    "forest_whispering_ash": "art/bg_forest_whispering_ash.webp",
+    "forgotten_stone_crossing": "art/bg_forgotten_stone_crossing.webp",
+    "shelter_courtyard_dusk": "art/bg_shelter_courtyard_dusk.webp"
   },
   "music": {
     "bgm_ch1_ash_forest_calm": {

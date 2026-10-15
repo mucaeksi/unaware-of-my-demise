@@ -236,7 +236,7 @@
     "fadyme": {
       "atlas": "atlas_fadyme",
       "facing": "right",
-      "height_px": 360,
+      "height_px": 252,
       "states": {
         "idle": {
           "frame": "idle",
@@ -291,7 +291,7 @@
     "mahmut": {
       "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 360,
+      "height_px": 258,
       "states": {
         "idle": {
           "frame": "idle",
@@ -346,7 +346,7 @@
     "bellbound_dead": {
       "atlas": "atlas_bellbound_dead",
       "facing": "left",
-      "height_px": 340,
+      "height_px": 242,
       "states": {
         "idle": {
           "frame": "idle",
@@ -401,7 +401,7 @@
     "hollow_pilgrim": {
       "atlas": "atlas_hollow_pilgrim",
       "facing": "left",
-      "height_px": 318,
+      "height_px": 232,
       "states": {
         "idle": {
           "frame": "idle",
@@ -456,7 +456,7 @@
     "hero_arcanist": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -511,7 +511,7 @@
     "enemy_knight": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 360,
+      "height_px": 258,
       "states": {
         "idle": {
           "frame": "idle",
@@ -566,7 +566,7 @@
     "kera_voss": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -621,7 +621,7 @@
     "brin_alder": {
       "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 360,
+      "height_px": 258,
       "states": {
         "idle": {
           "frame": "idle",
@@ -676,7 +676,7 @@
     "nixie_vale": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -731,7 +731,7 @@
     "sister_aveline": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -786,7 +786,7 @@
     "sable_wren": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -841,7 +841,7 @@
     "tilda_fen": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -896,7 +896,7 @@
     "rikka_ember": {
       "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 360,
+      "height_px": 258,
       "states": {
         "idle": {
           "frame": "idle",
@@ -951,7 +951,7 @@
     "mirel_quill": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1006,7 +1006,7 @@
     "odelia_pike": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1061,7 +1061,7 @@
     "pippa_bell": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1116,7 +1116,7 @@
     "nara_vell": {
       "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 360,
+      "height_px": 258,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1171,7 +1171,7 @@
     "clem_marr": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1226,7 +1226,7 @@
     "vespera_wisp": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1281,7 +1281,7 @@
     "hana_birch": {
       "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 360,
+      "height_px": 258,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1336,7 +1336,7 @@
     "thistle_roe": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1391,7 +1391,7 @@
     "iona_mist": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1446,7 +1446,7 @@
     "jori_flint": {
       "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 360,
+      "height_px": 258,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1501,7 +1501,7 @@
     "marek_vane": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 350,
+      "height_px": 248,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1556,7 +1556,7 @@
     "ash_wolf": {
       "atlas": "atlas_bellbound_dead",
       "facing": "left",
-      "height_px": 345,
+      "height_px": 242,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1611,7 +1611,7 @@
     "bridge_revenant": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 365,
+      "height_px": 260,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1666,7 +1666,7 @@
     "chain_cultist": {
       "atlas": "atlas_bellbound_dead",
       "facing": "left",
-      "height_px": 345,
+      "height_px": 242,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1721,7 +1721,7 @@
     "choir_knight": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 365,
+      "height_px": 260,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1776,7 +1776,7 @@
     "corrupted_crown_guard": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 365,
+      "height_px": 260,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1831,7 +1831,7 @@
     "corrupted_mercenary": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 365,
+      "height_px": 260,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1886,7 +1886,7 @@
     "crownless_knight": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 365,
+      "height_px": 260,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1941,7 +1941,7 @@
     "eclipse_sentinel": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 365,
+      "height_px": 260,
       "states": {
         "idle": {
           "frame": "idle",
@@ -1996,7 +1996,7 @@
     "estate_wraith": {
       "atlas": "atlas_hollow_pilgrim",
       "facing": "left",
-      "height_px": 345,
+      "height_px": 242,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2051,7 +2051,7 @@
     "glass_viper": {
       "atlas": "atlas_bellbound_dead",
       "facing": "left",
-      "height_px": 345,
+      "height_px": 242,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2106,7 +2106,7 @@
     "hollow_cleric": {
       "atlas": "atlas_hollow_pilgrim",
       "facing": "left",
-      "height_px": 345,
+      "height_px": 242,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2161,7 +2161,7 @@
     "inkbound_dead": {
       "atlas": "atlas_hollow_pilgrim",
       "facing": "left",
-      "height_px": 345,
+      "height_px": 242,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2216,7 +2216,7 @@
     "lost_vow_knight": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 365,
+      "height_px": 260,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2271,7 +2271,7 @@
     "noble_retainer": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 365,
+      "height_px": 260,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2326,7 +2326,7 @@
     "orchard_ghoul": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 365,
+      "height_px": 260,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2381,7 +2381,7 @@
     "red_vial_alchemist": {
       "atlas": "atlas_hollow_pilgrim",
       "facing": "left",
-      "height_px": 345,
+      "height_px": 242,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2436,7 +2436,7 @@
     "red_vial_scout": {
       "atlas": "atlas_bellbound_dead",
       "facing": "left",
-      "height_px": 345,
+      "height_px": 242,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2491,7 +2491,7 @@
     "royal_hollow": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 365,
+      "height_px": 260,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2546,7 +2546,7 @@
     "boss_ash_maw": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 430,
+      "height_px": 310,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2601,7 +2601,7 @@
     "boss_bell_widow": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 430,
+      "height_px": 310,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2656,7 +2656,7 @@
     "boss_captain_rusk": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 430,
+      "height_px": 310,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2711,7 +2711,7 @@
     "boss_red_vial_matron": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 430,
+      "height_px": 310,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2766,7 +2766,7 @@
     "boss_marshal_oren": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 430,
+      "height_px": 310,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2821,7 +2821,7 @@
     "boss_ashen_lord_wraith": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 430,
+      "height_px": 310,
       "states": {
         "idle": {
           "frame": "idle",
@@ -2876,7 +2876,7 @@
     "boss_eclipse_construct": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
-      "height_px": 430,
+      "height_px": 310,
       "states": {
         "idle": {
           "frame": "idle",
@@ -3675,10 +3675,12 @@
   },
   "backgrounds": {
     "forest_whispering_ash": "art/bg_forest_whispering_ash.webp",
+    "forgotten_stone_crossing": "art/bg_forgotten_stone_crossing.webp",
+    "shelter_courtyard_dusk": "art/bg_shelter_courtyard_dusk.webp",
+    "bridge_forsaken": "art/bg_forgotten_stone_crossing.webp",
+    "village_oakhaven": "art/bg_shelter_courtyard_dusk.webp",
     "cathedral_saint_luthos": "art/bg_cathedral_saint_luthos.webp",
-    "village_oakhaven": "art/bg_village_oakhaven.webp",
     "undercity_subterranean": "art/bg_undercity_subterranean.webp",
-    "bridge_forsaken": "art/bg_bridge_forsaken.webp",
     "estate_ashen_lord": "art/bg_estate_ashen_lord.webp",
     "altar_first_eclipse": "art/bg_altar_first_eclipse.webp",
     "forest_edge_road": "art/bg_forest_edge_road.webp",

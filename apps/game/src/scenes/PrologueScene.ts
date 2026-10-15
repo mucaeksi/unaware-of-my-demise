@@ -18,8 +18,8 @@ import { C, DEPTH, F, T } from '../ui/theme';
 
 /** Characters per second of the narration reveal (v006: no recording yet, so a fixed pace; the voice clock replaces it later). */
 export const REVEAL_CPS = 26;
-const CROSSFADE_MS = INTRO_FAST ? 60 : 800;
-const TEXT_FADE_MS = INTRO_FAST ? 40 : 450;
+const CROSSFADE_MS = INTRO_FAST ? 60 : 1400;
+const TEXT_FADE_MS = INTRO_FAST ? 40 : 650;
 
 /** Seconds a scene lasts on screen. Timing comes from the narrative script; `?fastintro` only shortens it for automated review. */
 export const sceneSeconds = (s: PrologueData): number => (INTRO_FAST ? 0.35 : s.duration_seconds);
@@ -27,8 +27,8 @@ export const sceneSeconds = (s: PrologueData): number => (INTRO_FAST ? 0.35 : s.
 /**
  * "Before the Road": the 120 s first-install interlude. Each scene is one plate with a slow camera move, a caption and one
  * narration line revealed at 26 characters per second. Pause/Mute controls are available on all runs, and Skip is available on replay;
- * the download runs underneath. After the last scene the screen fades to black and offers CONTINUE, which records the prologue as seen
- * and goes on to tutorial T-1.
+ * the download runs underneath. After the last scene the screen slowly fades to black, records the prologue as seen
+ * and seamlessly enters tutorial T-1.
  */
 export class PrologueScene extends Phaser.Scene {
   private stage: NarrativeStage | null = null;
@@ -223,7 +223,7 @@ export class PrologueScene extends Phaser.Scene {
     if (savedIndex !== null && savedIndex > 0) {
       this.index = savedIndex - 1;
     }
-    this.tweens.add({ targets: this.shade, alpha: 1, duration: 600 });
+    this.tweens.add({ targets: this.shade, alpha: 1, duration: 1100 });
     this.next();
   }
 
@@ -272,11 +272,11 @@ export class PrologueScene extends Phaser.Scene {
     img.setScale(from);
     const drift = calm ? 0 : (this.index % 3 === 1 ? 46 : -46);
     img.x += drift * -1;
-    this.tweens.add({ targets: img, alpha: 1, duration: first ? (INTRO_FAST ? 60 : 1200) : CROSSFADE_MS, ease: 'Sine.easeInOut' });
+    this.tweens.add({ targets: img, alpha: 1, duration: first ? (INTRO_FAST ? 60 : 1700) : CROSSFADE_MS, ease: 'Sine.easeInOut' });
     if (!calm) this.tweens.add({ targets: img, scale: to, x: REF_W / 2 + drift, duration: holdMs + CROSSFADE_MS, ease: 'Sine.easeInOut' });
     const old = this.current;
     this.current = img;
-    if (old) this.time.delayedCall(CROSSFADE_MS + 60, () => old.destroy());
+    if (old) this.time.delayedCall(CROSSFADE_MS + 80, () => old.destroy());
   }
 
   private showText(scene: PrologueData): void {
@@ -319,11 +319,10 @@ export class PrologueScene extends Phaser.Scene {
     this.tweens.add({
       targets: black,
       alpha: 1,
-      duration: INTRO_FAST ? 60 : 1400,
-      ease: 'Sine.easeIn',
+      duration: INTRO_FAST ? 60 : 2000,
+      ease: 'Sine.easeInOut',
       onComplete: () => {
-        const btn = new Button(this, REF_W / 2, REF_H / 2 + 40, { label: 'CONTINUE', w: 520, h: 128, fontSize: 44, variant: 'hot', onClick: () => this.finish() }).setDepth(DEPTH.modal + 1).setAlpha(0);
-        this.tweens.add({ targets: btn, alpha: 1, duration: 700 });
+        this.time.delayedCall(INTRO_FAST ? 30 : 400, () => this.finish());
       }
     });
   }

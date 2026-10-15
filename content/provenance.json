@@ -6,32 +6,32 @@
       "output": "content/base/art/atlas_fadyme.webp",
       "sha256": "82e5384d43a20a76c16c34d010cb4fcb107725edccfa0d39fcabbae7fa23fad4",
       "sources": {
-        "generated:fadyme_chibi_sheet@rev1": "147265238e8dd1ef2649e6ca67f4b88da138f3fa24b27875e5be1089c35d6ea0",
-        "entry": "e18675eab81576cb70d8e1a304a6d212dec1cbe867ab0060b69ee0238997d38e"
+        "generated:fadyme_chibi_sheet@rev2": "147265238e8dd1ef2649e6ca67f4b88da138f3fa24b27875e5be1089c35d6ea0",
+        "entry": "2db70025be2e7fda796badfb79e3eee133ee7223a251c828149fc028cc46e931"
       }
     },
     {
       "output": "content/base/art/atlas_mahmut.webp",
       "sha256": "837f9d2c124fc8d8648b5eb5d7c5f1afe45747dc8ab96863f2f3f1c22221bd54",
       "sources": {
-        "generated:mahmut_chibi_sheet@rev1": "1acc2bc551cf777bcb26fce9ca592a4b02377804f5dcc6d412f312664558b87d",
-        "entry": "b60e92976bedb352d1b2e978c983fcaad1a7c08413eab1f92264eada7eeb35e9"
+        "generated:mahmut_chibi_sheet@rev2": "1acc2bc551cf777bcb26fce9ca592a4b02377804f5dcc6d412f312664558b87d",
+        "entry": "0bde6778cb901ad1cd40fdc23f108d4b90094d5e0067122374db14aae968f689"
       }
     },
     {
       "output": "content/base/art/atlas_bellbound_dead.webp",
       "sha256": "ab6f84785211fa6395f9edf4f2997dd613851e121203dd24a6f0e24e91ca6c54",
       "sources": {
-        "generated:bellbound_dead_chibi_sheet@rev2": "4aae7d60e23a4305ef801950ea243b93eaa8266a01bb5fdfa77bb682a68a1dca",
-        "entry": "0cb585e25ba067c70f380f5a450b8224a53d90b5eccff53ea5713da43465b864"
+        "generated:bellbound_dead_chibi_sheet@rev3": "4aae7d60e23a4305ef801950ea243b93eaa8266a01bb5fdfa77bb682a68a1dca",
+        "entry": "744a26485d4072e6d00179df0d33adbc3e951317c831ce53982c8949e7e80ea7"
       }
     },
     {
       "output": "content/base/art/atlas_hollow_pilgrim.webp",
       "sha256": "e3cd464846094c71bbf6a2a4a59742d1cba69acb3c951d945d488eaf4f04b213",
       "sources": {
-        "generated:hollow_pilgrim_chibi_sheet@rev3": "b340fb827f190fdf3209c3b6912d874b4cf9c810a7335473dc3a8c51f82523cf",
-        "entry": "0b89b787c8a3eabbe7db5217603f69426153d36b25fc4a4837526b5868d675c5"
+        "generated:hollow_pilgrim_chibi_sheet@rev4": "b340fb827f190fdf3209c3b6912d874b4cf9c810a7335473dc3a8c51f82523cf",
+        "entry": "29034404cbda3d0cb0c85f8d69392d44b3cf3b42571f2f978282e5ba6a881d86"
       }
     },
     {
@@ -85,10 +85,26 @@
     },
     {
       "output": "content/base/art/bg_forest_whispering_ash.webp",
-      "sha256": "15c1567d2b6e3a355b7342332b0317eac6917920f0c782e64349ffd27ad45d92",
+      "sha256": "13a39b24d24c55408e562c24e7fbf1238a97d5eac81debc98d712933f4054449",
       "sources": {
-        "generated:bg_forest_whispering_ash_ordered@rev1": "dd405f5d88f8eeb0af968d3aee58a5299670b1ff235dc2ad4b81f530279821a3",
-        "entry": "883ca7bd1ffa77345c690c56e55c5f0ea1b5061e997a4ff7d7e60f8ffeeace10"
+        "generated:bg_forest_whispering_ash_ordered@rev2": "1bfac1ddbf58930adc3b518892d99dfc2d064cff0e8fef21baa858aab1ea5e35",
+        "entry": "8084eec9d458090ae87e7b54f6b22f9ba4ae188a03d2623685de57fb13849ed8"
+      }
+    },
+    {
+      "output": "content/base/art/bg_forgotten_stone_crossing.webp",
+      "sha256": "dba9ff4acf7f9c64e8409a9d64fb0cfbedae91a15fb65e2f9e1bd5e56097adbe",
+      "sources": {
+        "generated:bg_forgotten_stone_crossing@rev1": "08b066d6fde8395fc494809eb5523aef7fb24bc989cfaeadbdf7362887211ad6",
+        "entry": "03b3155aa9ee907d88da85d07bbb6b3fcd4c97bcdb6e27e4be9b73047123054f"
+      }
+    },
+    {
+      "output": "content/base/art/bg_shelter_courtyard_dusk.webp",
+      "sha256": "4cf027e11d854dd69ab388032820db1ed80652ae6f419d7bb7395c669c519df6",
+      "sources": {
+        "generated:bg_shelter_courtyard_dusk@rev1": "5b02ba5a443cef5389e83ae9373d6ec9d8fcb4ede9ed0e568b85cb4f76ecf54e",
+        "entry": "1c2a2cdfaa204a08d5a1b832c8b8eb521a4ca0bdf3925a49a16850ffb0ccb6f4"
       }
     },
     {
@@ -225,7 +241,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "af36a860821bfb4d34cb998e1daf82d8bb6f17d3f4c472e3890c30e0eeaf55f7",
+      "sha256": "197a63172c5023634f3947e3a8884fa061f30b20ee7bd98f2081455e750777d4",
       "sources": {}
     },
     {
@@ -251,28 +267,28 @@
     },
     {
       "output": "content/base/story/tutorial_t2_before.json",
-      "sha256": "5bd96f02a4ed946a82b2e2d99b36fb5939171de25ac6be74d1d399c02549555c",
+      "sha256": "2e9d982752cb3832b0e9911e87d04f2d967d4d465d176aaa8bf929a14d09bb9f",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2.before"
       }
     },
     {
       "output": "content/base/story/tutorial_t2_after.json",
-      "sha256": "8ff49951517087a2bb96ffbe3e0e35184837c9487c13138eee991af37b0e4027",
+      "sha256": "19f148d02a957b1949e799d5bbb77c3b9faac2144c557c663e8d6cf18a1123b6",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2.after"
       }
     },
     {
       "output": "content/base/story/tutorial_t3_before.json",
-      "sha256": "c30c5a273bb965725f7b44ff94a0f679099032973bd6e5e9d7bfc49e2d945d27",
+      "sha256": "c7079456265ada059a2be246588d142f51a17037275ad874244170685afa894c",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-3.before"
       }
     },
     {
       "output": "content/base/story/tutorial_t3_after.json",
-      "sha256": "189db08a3235a52d49382ef8a2a0e3e8c9c9b1c518d2a828bd41ceeccc5240e3",
+      "sha256": "177c70075dc4466f46dcca3d6bde6ce984038aee6802029d7cd06d90b23e2028",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-3.after"
       }
@@ -286,14 +302,14 @@
     },
     {
       "output": "content/base/encounters/tutorial_t2.json",
-      "sha256": "b49af22998f94ed87ecc1efbdec1b01f457d30f5183ee536dac40ae8cc75378d",
+      "sha256": "fa8028bfbb183584252f2ac995a2418b83ee4a882e502d3f32a694d0f37dd886",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2"
       }
     },
     {
       "output": "content/base/encounters/tutorial_t3.json",
-      "sha256": "edc3ed4902cdfe4febccbcf63009284a04b87a046f6c3ddc0ecc20c0bcd3b4d9",
+      "sha256": "f71028713e798d8a3cfdbe6f1067163207a05537425bc0049f2cfcbc8052b40d",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-3"
       }

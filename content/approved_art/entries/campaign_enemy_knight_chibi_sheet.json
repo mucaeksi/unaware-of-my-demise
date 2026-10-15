@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "campaign_enemy_knight_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_enemy_knight": {
@@ -41,7 +41,7 @@
       "enemy_knight": {
         "atlas": "atlas_enemy_knight",
         "facing": "left",
-        "height_px": 360,
+        "height_px": 258,
         "states": {
           "idle": {
             "frame": "idle",
@@ -110,10 +110,10 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/campaign_enemy_knight_chibi_sheet.ingest.json",
-    "spec_sha256": "7c736c0b04bbf84d45e3110d099961196833e57a9005077aa18b211b43d5d627",
+    "spec_sha256": "ea1e2eebcb110f45bab53c8d8eecb3afff86a5cd68dbdbdd074b7e2276326197",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "51a9efdadc48536f0707b16906d13bcec7d850bfd3057a1a1b22392794866d5b"
+    "fingerprint": "6f4314a57949a46455b41c1ae77d81d87e15c2b8b52e2ba8ab5aee7d7ca2ed78"
   },
   "outputs": [
     {
@@ -179,8 +179,8 @@
     "human": {
       "status": "approved",
       "by": "antigravity",
-      "at": "2026-10-15T16:09:45.015Z",
-      "note": "2-head SD Chibi battle sprite sheet"
+      "at": "2026-10-15T17:18:06.368Z",
+      "note": "Approved wide panoramic battlefields and resized 2-head SD Chibis"
     }
   },
   "license": {
@@ -188,5 +188,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_enemy_knight.webp",
+          "sha256": "4f8b304425d989c98e32d88a3b4e231b9ce18ca0d3f231c1de0bf81991183182",
+          "pixels_sha256": "9f86cd67df8196d8249844cace9d503d2d6e4839d53baefea11e8f6fb27be783",
+          "bytes": 93622,
+          "width": 1795,
+          "height": 425
+        }
+      ],
+      "source_sha256": "2a84df4d6559e6bbe439e72594b561c4c72e806afe30e5c62712b6b5bba1fe9b",
+      "fingerprint": "51a9efdadc48536f0707b16906d13bcec7d850bfd3057a1a1b22392794866d5b"
+    }
+  ]
 }

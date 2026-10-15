@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "bellbound_dead_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 2,
+  "revision": 3,
   "targets": {
     "atlases": {
       "atlas_bellbound_dead": {
@@ -41,7 +41,7 @@
       "bellbound_dead": {
         "atlas": "atlas_bellbound_dead",
         "facing": "left",
-        "height_px": 340,
+        "height_px": 242,
         "states": {
           "idle": {
             "frame": "idle",
@@ -110,10 +110,10 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/bellbound_dead_chibi_sheet.ingest.json",
-    "spec_sha256": "8e78f3bb6911717491e229db2f500d9ae619f3f7d88bf548e55fe758b7b2dfb4",
+    "spec_sha256": "5dc8a0747bd78df3f19442ffd587a2c961c01b4b9ff4c15b4c8fdb46963df8f4",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "0cb585e25ba067c70f380f5a450b8224a53d90b5eccff53ea5713da43465b864"
+    "fingerprint": "744a26485d4072e6d00179df0d33adbc3e951317c831ce53982c8949e7e80ea7"
   },
   "outputs": [
     {
@@ -177,8 +177,8 @@
     "human": {
       "status": "approved",
       "by": "antigravity",
-      "at": "2026-10-15T16:09:32.307Z",
-      "note": "2-head SD Chibi battle sprite sheet"
+      "at": "2026-10-15T17:17:39.830Z",
+      "note": "Approved wide panoramic battlefields and resized 2-head SD Chibis"
     }
   },
   "license": {
@@ -201,6 +201,21 @@
       ],
       "source_sha256": "02cf3b6c96b6cf880c86aadb073bb99f46a458d5217d7c56444075efccabb1cd",
       "fingerprint": "ecbb6832fa1605eba8c608d9d42d0284f6737cf0ee576f536176723fbe163432"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_bellbound_dead.webp",
+          "sha256": "ab6f84785211fa6395f9edf4f2997dd613851e121203dd24a6f0e24e91ca6c54",
+          "pixels_sha256": "587040be3f790fb7def9e1c79c5a8fa5205b5d0d633f74cc9616c1949391d483",
+          "bytes": 101860,
+          "width": 1581,
+          "height": 416
+        }
+      ],
+      "source_sha256": "4aae7d60e23a4305ef801950ea243b93eaa8266a01bb5fdfa77bb682a68a1dca",
+      "fingerprint": "0cb585e25ba067c70f380f5a450b8224a53d90b5eccff53ea5713da43465b864"
     }
   ]
 }

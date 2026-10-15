@@ -3,7 +3,7 @@
   "encounter_id": "tutorial_t2",
   "stage_id": "T-2",
   "title_en": "A Road Forgotten",
-  "location_id": "forest_whispering_ash",
+  "location_id": "forgotten_stone_crossing",
   "seed": 81009,
   "music_cue": "bgm_ch1_ash_forest_chaotic",
   "party": [
