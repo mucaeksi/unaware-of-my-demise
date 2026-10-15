@@ -21,18 +21,18 @@
     },
     {
       "output": "content/base/art/atlas_bellbound_dead.webp",
-      "sha256": "fc259f42d1641a163c66ca218bbd5750e89724109c3ca8e02dcd19e4ae0972cb",
+      "sha256": "50e7a6db873b519e58abb16bf17befa84530345b5b9fa28f35fce5f9f4c77f4a",
       "sources": {
-        "git:game/assets/enemies/tutorial/bellbound_poses_v003.png": "1af25ab7d903016bd81a98f4b72bffa3f3f716fe75f2768fd8f6c5ff836cedd1",
-        "git:game/assets/enemies/tutorial/bellbound_attack_v003.png": "13ba8dc5e5dde64b157c854ba58c63358c2d86bc2e97a39b736683b64f586c2d"
+        "generated:bellbound_dead_chibi_sheet@rev1": "02cf3b6c96b6cf880c86aadb073bb99f46a458d5217d7c56444075efccabb1cd",
+        "entry": "ecbb6832fa1605eba8c608d9d42d0284f6737cf0ee576f536176723fbe163432"
       }
     },
     {
       "output": "content/base/art/atlas_hollow_pilgrim.webp",
-      "sha256": "d7539d3c55d14d9af32c23e2517cb0aad809e90602dc37ac3aa8b45ce827236c",
+      "sha256": "f9cc84ebebc6822ef30928dbc863cb9a807b4416f63cc703ca572b6a474b3807",
       "sources": {
-        "git:game/assets/enemies/tutorial/pilgrim_poses_v003.png": "165cb66e91dc324b177040d2a0f1b7b92917e47b2f64d0b3f1e55c0e805b5c56",
-        "git:game/assets/enemies/tutorial/pilgrim_attack_v003.png": "0f4dae03ed7f3f9ef3263aefe493912c589d2c195b93fc79f13a3483a84437a0"
+        "generated:hollow_pilgrim_chibi_sheet@rev1": "047179ee79198f5a1f55c2ede692e8abf51be9a13238c167449526cb7b716000",
+        "entry": "287fa5e0cf7a1642820e3a20a527ba04e317f921f45c0da75832a2512969e2ed"
       }
     },
     {
@@ -137,6 +137,22 @@
       }
     },
     {
+      "output": "content/base/art/still_roadside_rest.webp",
+      "sha256": "9810ca1dc89f83b470819a048975b6223bcf92475e008852d7878541aad468d0",
+      "sources": {
+        "generated:ill_roadside_rest@rev1": "06cedc5d097fc87b0ea6198c410d1d13fa683c5db8a4b5f3a01c7701f46cdd58",
+        "entry": "0284f8ad4016f35f21fdb66637ccbe5d8eb52e6312286d1bb2e233076ea98c81"
+      }
+    },
+    {
+      "output": "content/base/art/still_shelter_evening.webp",
+      "sha256": "518194e98dc860e39a1b0ca6eb314fb52618b1478bb9ebfb707b81d6927a7e6b",
+      "sources": {
+        "generated:ill_shelter_evening@rev1": "943d061a3182e1b05248093fac09465b00ecf19e89e291ca1b3cc9c7c19436a1",
+        "entry": "40ad642acd09abd56a23d087764aa806618c67ceb3aeb4adabec6f32e34c7f9b"
+      }
+    },
+    {
       "output": "content/base/art/still_prologue_crownfall.webp",
       "sha256": "aa95cdc01cc2100cf5d2f7bff33e34803e01597372077dc71de4dbb546974188",
       "sources": {
@@ -210,7 +226,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "df1a65d7ebe2944318d56626b83b44ea69dda87189f70e212aa513f275d31d39",
+      "sha256": "41072b3f29239151e41eb977d09adf1b9a4c440daa3ac076daad8b85e16d143d",
       "sources": {}
     },
     {

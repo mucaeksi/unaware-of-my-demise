@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "ill_shelter_evening",
+  "class": "still",
+  "revision": 1,
+  "targets": {
+    "stills": {
+      "shelter_evening": "art/still_shelter_evening.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "943d061a3182e1b05248093fac09465b00ecf19e89e291ca1b3cc9c7c19436a1",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/ill_shelter_evening/run.provenance.json",
+    "provenance_sha256": "6728219321ecd08ee8f3c2610cda01963fd5bf75211f16ccba8585359389fd32",
+    "model": "antigravity-image-gen-v2",
+    "prompt_sha256": "651f886e23a8082bdb6445c7738bf37d03d5757b91e51c8d44b8052856d7682e",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/ill_shelter_evening.ingest.json",
+    "spec_sha256": "8ce8135d30a98a7a13e623877b55bf8ce7764a672ced5010d0f24a73f777c1f3",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "40ad642acd09abd56a23d087764aa806618c67ceb3aeb4adabec6f32e34c7f9b"
+  },
+  "outputs": [
+    {
+      "path": "art/still_shelter_evening.webp",
+      "sha256": "518194e98dc860e39a1b0ca6eb314fb52618b1478bb9ebfb707b81d6927a7e6b",
+      "pixels_sha256": "d20a973be331fcb40f420404ea48516a4be9d0c7828e00da5270909c91a6d6b6",
+      "bytes": 136330,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "136330 bytes <= 389120"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-15T10:25:54.984Z",
+      "note": "Template-faithful Fadyme and Mahmut tutorial CG"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

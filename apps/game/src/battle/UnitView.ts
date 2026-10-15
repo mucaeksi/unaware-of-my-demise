@@ -59,17 +59,20 @@ export class UnitView extends Phaser.GameObjects.Container {
     this.applyState('idle');
 
     // plate under the feet
-    const plateY = 44;
-    const nameT = txt(scene, 0, 0, init.name.toUpperCase(), { fontFamily: F.display, fontSize: '24px', fontStyle: '600', color: init.side === 'player' ? '#cfe0ff' : '#ffb3c4', stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5);
-    this.hpBar = new Bar(scene, 0, 30, 210, 14, hpColor);
+    const plateY = 38;
+    const plateBg = scene.add
+      .rectangle(0, init.side === 'player' ? 24 : 26, 244, init.side === 'player' ? 68 : 74, 0x0a0610, 0.64)
+      .setStrokeStyle(1.5, init.side === 'player' ? C.player : C.enemy, 0.42);
+    const nameT = txt(scene, 0, 0, init.name.toUpperCase(), { fontFamily: F.display, fontSize: '22px', fontStyle: '600', color: init.side === 'player' ? '#cfe0ff' : '#ffb3c4', stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5);
+    this.hpBar = new Bar(scene, 0, 26, 210, 13, hpColor);
     this.hpBar.set(init.hp / init.maxHp, false);
-    this.focusBar = init.side === 'player' ? new Bar(scene, 0, 50, 210, 8, () => C.focus) : null;
+    this.focusBar = init.side === 'player' ? new Bar(scene, 0, 44, 210, 8, () => C.focus) : null;
     this.focusBar?.set(0, false);
-    this.shieldText = txt(scene, 112, 30, '', { fontSize: '24px', color: T.shield, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0, 0.5);
-    this.statusText = txt(scene, 0, init.side === 'player' ? 74 : 56, '', { fontSize: '22px', color: '#e0d4ee', stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5);
-    this.intentText = txt(scene, 0, init.side === 'player' ? 74 : 84, '', { fontFamily: F.display, fontSize: '21px', fontStyle: '600', color: '#ffb3c4', stroke: '#0a0610', strokeThickness: 5 }).setOrigin(0.5).setVisible(false);
+    this.shieldText = txt(scene, 112, 26, '', { fontSize: '22px', color: T.shield, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0, 0.5);
+    this.statusText = txt(scene, 0, init.side === 'player' ? 66 : 48, '', { fontSize: '20px', color: '#e0d4ee', stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5);
+    this.intentText = txt(scene, 0, init.side === 'player' ? 66 : 52, '', { fontFamily: F.display, fontSize: '20px', fontStyle: '600', color: '#ffb3c4', stroke: '#0a0610', strokeThickness: 5 }).setOrigin(0.5).setVisible(false);
     // the plate lives on its own layer above every sprite so a front unit never hides a rear unit's bars
-    this.plate = scene.add.container(init.spot.x, init.spot.y + plateY, [nameT, this.hpBar, ...(this.focusBar ? [this.focusBar] : []), this.shieldText, this.statusText, this.intentText]).setDepth(DEPTH.hud - 60);
+    this.plate = scene.add.container(init.spot.x, init.spot.y + plateY, [plateBg, nameT, this.hpBar, ...(this.focusBar ? [this.focusBar] : []), this.shieldText, this.statusText, this.intentText]).setDepth(DEPTH.hud - 60);
     this.marker = txt(scene, 0, 0, '▼', { fontSize: '44px', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setVisible(false);
     this.add(this.marker);
     this.placeTags();
@@ -85,7 +88,7 @@ export class UnitView extends Phaser.GameObjects.Container {
   glideTo(spot: Spot): void {
     this.spot = spot;
     this.scene.tweens.add({ targets: this, x: spot.x, y: spot.y, duration: 320, ease: 'Quad.easeInOut' });
-    this.scene.tweens.add({ targets: this.plate, x: spot.x, y: spot.y + 44, duration: 320, ease: 'Quad.easeInOut' });
+    this.scene.tweens.add({ targets: this.plate, x: spot.x, y: spot.y + 38, duration: 320, ease: 'Quad.easeInOut' });
   }
 
   private placeTags(): void {

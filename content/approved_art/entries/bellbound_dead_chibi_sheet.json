@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "asset_id": "bellbound_dead_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_bellbound_dead": {
+        "image": "art/atlas_bellbound_dead.webp",
+        "width": 1426,
+        "height": 440,
+        "frames": {
+          "hit": [
+            4,
+            4,
+            403,
+            432
+          ],
+          "idle": [
+            411,
+            4,
+            243,
+            408
+          ],
+          "basic": [
+            658,
+            4,
+            440,
+            386
+          ],
+          "defeat": [
+            1102,
+            4,
+            320,
+            291
+          ]
+        }
+      }
+    },
+    "units": {
+      "bellbound_dead": {
+        "atlas": "atlas_bellbound_dead",
+        "facing": "left",
+        "height_px": 340,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.535
+          },
+          "walk": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.535
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.689
+          },
+          "active": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.689
+          },
+          "ultimate": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.689
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.406
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.462
+          },
+          "victory": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.535
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "02cf3b6c96b6cf880c86aadb073bb99f46a458d5217d7c56444075efccabb1cd",
+    "mime": "image/png",
+    "width": 2752,
+    "height": 1536,
+    "provenance_file": ".cache/generated/bellbound_dead_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "ebf92808b615bfb7a0a7b27af22bf636a1f097ae6db35267d6e4a2a12ba64875",
+    "model": "antigravity-image-gen-v2",
+    "prompt_sha256": "f117c91cb0f064a38bb37cbb198bc7705a831eb817adc6dad995596060c685f2",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/bellbound_dead_chibi_sheet.ingest.json",
+    "spec_sha256": "ab655af1d87e00d3164d4100e588d110190a155b7be44906140ffbfd84f085d5",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "ecbb6832fa1605eba8c608d9d42d0284f6737cf0ee576f536176723fbe163432"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_bellbound_dead.webp",
+      "sha256": "50e7a6db873b519e58abb16bf17befa84530345b5b9fa28f35fce5f9f4c77f4a",
+      "pixels_sha256": "578138f6d4d36b26da3dd8a73059a2caa018cec8de5b2c00e4b2d19a083846b7",
+      "bytes": 123942,
+      "width": 1426,
+      "height": 440
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2752x1536"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=22"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "4 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.602"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1426x440"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "123942 bytes <= 665600"
+        },
+        "A08": {
+          "status": "warn",
+          "detail": "spill=0.0192%"
+        }
+      },
+      "warnings": [
+        "A12: removed 22 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-15T10:29:44.567Z",
+      "note": "Dark gothic anime Chibi enemy sheet"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

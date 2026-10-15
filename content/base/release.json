@@ -18,15 +18,15 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "df1a65d7ebe2944318d56626b83b44ea69dda87189f70e212aa513f275d31d39",
-      "bytes": 9740,
+      "sha256": "41072b3f29239151e41eb977d09adf1b9a4c440daa3ac076daad8b85e16d143d",
+      "bytes": 9605,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
     {
       "path": "art/atlas_bellbound_dead.webp",
-      "sha256": "fc259f42d1641a163c66ca218bbd5750e89724109c3ca8e02dcd19e4ae0972cb",
-      "bytes": 157916,
+      "sha256": "50e7a6db873b519e58abb16bf17befa84530345b5b9fa28f35fce5f9f4c77f4a",
+      "bytes": 123942,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
@@ -39,8 +39,8 @@
     },
     {
       "path": "art/atlas_hollow_pilgrim.webp",
-      "sha256": "d7539d3c55d14d9af32c23e2517cb0aad809e90602dc37ac3aa8b45ce827236c",
-      "bytes": 252234,
+      "sha256": "f9cc84ebebc6822ef30928dbc863cb9a807b4416f63cc703ca572b6a474b3807",
+      "bytes": 141014,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
@@ -167,6 +167,20 @@
       "path": "art/still_prologue_throne_wars.webp",
       "sha256": "6ff6809b81d48de64272764744c6cf3f650b6229ff5181fc92523c2a9ed68d85",
       "bytes": 79930,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_roadside_rest.webp",
+      "sha256": "9810ca1dc89f83b470819a048975b6223bcf92475e008852d7878541aad468d0",
+      "bytes": 138734,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_shelter_evening.webp",
+      "sha256": "518194e98dc860e39a1b0ca6eb314fb52618b1478bb9ebfb707b81d6927a7e6b",
+      "bytes": 136330,
       "media_type": "image/webp",
       "kind": "background"
     },

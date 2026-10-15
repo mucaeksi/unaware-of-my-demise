@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "asset_id": "hollow_pilgrim_chibi_sheet",
+  "class": "unit_sheet",
+  "source": {
+    "kind": "generated",
+    "pick": "047179ee7919",
+    "provenance": ".cache/generated/hollow_pilgrim_chibi_sheet/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "bottom",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      20,
+      190
+    ],
+    "choke_px": 1,
+    "despill": true
+  },
+  "layout": {
+    "mode": "regions",
+    "cells": {
+      "idle": [
+        0,
+        0,
+        1376,
+        768
+      ],
+      "basic": [
+        1376,
+        0,
+        1376,
+        768
+      ],
+      "hit": [
+        0,
+        768,
+        1376,
+        768
+      ],
+      "defeat": [
+        1376,
+        768,
+        1376,
+        768
+      ]
+    }
+  },
+  "frames": {
+    "idle": "idle",
+    "idle_frame_px": 456,
+    "ground": "lowest",
+    "pivot": "lower_body_centroid",
+    "state_map": {
+      "walk": "idle",
+      "victory": "idle",
+      "active": "basic",
+      "ultimate": "basic"
+    }
+  },
+  "export": {
+    "fit": "trim",
+    "max_atlas": 2048,
+    "pad": 4,
+    "webp": {
+      "mode": "lossy",
+      "quality": 84,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 665600
+  },
+  "manifest": {
+    "atlas": "atlas_hollow_pilgrim",
+    "unit": "hollow_pilgrim",
+    "facing": "left",
+    "height_px": 380
+  },
+  "qc": {
+    "profile": "chibi_r2"
+  }
+}

@@ -101,12 +101,17 @@ export class ArtLibrary {
     return { key: u.textureKey, frame: s.frame, scale: s.scale, footY: s.footY, pivotX: s.pivotX, ...(s.animationKey ? { animationKey: s.animationKey } : {}) };
   }
 
-  async loadPortraits(scene: Phaser.Scene, characters: readonly string[]): Promise<void> {
+  async loadPortraits(scene: Phaser.Scene, characters: readonly string[], emotions?: ReadonlyMap<string, ReadonlySet<string>>): Promise<void> {
     const queue: Queued[] = [];
     for (const c of characters) {
       const p = this.art.portraits[c];
       if (!p) continue;
+      const wanted = emotions?.get(c);
+      const allowedImages = wanted
+        ? new Set([...wanted, 'composed'].map((e) => p.emotions[e]).filter((img): img is string => Boolean(img)))
+        : null;
       for (const [img, path] of Object.entries(p.images)) {
+        if (allowedImages && allowedImages.size > 0 && !allowedImages.has(img)) continue;
         const ref = await this.asset(scene,path);
         this.portraitKeys.set(`${c}/${img}`, ref.key);
         queue.push({ type: 'image', key: ref.key, url: ref.url });

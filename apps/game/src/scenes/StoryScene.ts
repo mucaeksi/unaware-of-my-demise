@@ -113,18 +113,26 @@ export class StoryScene extends Phaser.Scene {
       if (!current()) return;
       this.stage = new NarrativeStage(this, content, art.art, profile, locale);
       const chars = new Set<string>();
+      const charEmotions = new Map<string, Set<string>>();
+      const addEmotion = (ch: string, em = 'composed'): void => {
+        chars.add(ch);
+        let set = charEmotions.get(ch);
+        if (!set) { set = new Set(['composed']); charEmotions.set(ch, set); }
+        set.add(em);
+      };
       const locations = new Set([this.data0.location_id]);
       const cues = new Set<string>();
       for (const c of this.data0.commands) {
         if (c.op === 'background') locations.add(c.location_id);
-        if (c.op === 'show') chars.add(c.character);
-        if (c.op === 'say') chars.add(c.speaker);
+        if (c.op === 'show') addEmotion(c.character);
+        if (c.op === 'say') addEmotion(c.speaker, c.emotion ?? 'composed');
         if (c.op === 'music' && c.cue_id !== 'stop') cues.add(c.cue_id);
       }
+      const hasStill = Boolean(this.data0.illustration_id && art.art.stills[this.data0.illustration_id]);
       await Promise.all([
         ...[...locations].map((id) => art.loadBackground(this, id)),
         this.data0.illustration_id ? art.loadStills(this, [this.data0.illustration_id]).catch(() => undefined) : Promise.resolve(),
-        art.loadPortraits(this, [...chars]),
+        hasStill ? Promise.resolve() : art.loadPortraits(this, [...chars], charEmotions),
         ...[...cues].map((q) => art.loadMusic(this, q))
       ]);
     } catch (e) {
@@ -161,7 +169,11 @@ export class StoryScene extends Phaser.Scene {
     const illustrationKey = this.data0.illustration_id ? art.still(this.data0.illustration_id) : null;
     if (illustrationKey) {
       this.illustration = this.add.image(REF_W / 2, REF_H / 2, illustrationKey).setDepth(DEPTH.bg + 1);
-      this.illustration.setScale(Math.max(REF_W / this.illustration.width, REF_H / this.illustration.height));
+      const illCover = Math.max(REF_W / this.illustration.width, REF_H / this.illustration.height);
+      this.illustration.setScale(illCover * 1.01);
+      if (!prefs().reducedMotion) {
+        this.tweens.add({ targets: this.illustration, scale: illCover * 1.05, duration: 36000, ease: 'Sine.easeInOut', yoyo: true, repeat: -1 });
+      }
       this.bg.setAlpha(0);
     }
 

@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "asset_id": "hollow_pilgrim_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_hollow_pilgrim": {
+        "image": "art/atlas_hollow_pilgrim.webp",
+        "width": 1932,
+        "height": 499,
+        "frames": {
+          "hit": [
+            4,
+            4,
+            486,
+            491
+          ],
+          "idle": [
+            494,
+            4,
+            382,
+            456
+          ],
+          "basic": [
+            880,
+            4,
+            563,
+            423
+          ],
+          "defeat": [
+            1447,
+            4,
+            481,
+            356
+          ]
+        }
+      }
+    },
+    "units": {
+      "hollow_pilgrim": {
+        "atlas": "atlas_hollow_pilgrim",
+        "facing": "left",
+        "height_px": 380,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.579
+          },
+          "walk": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.579
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.601
+          },
+          "active": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.601
+          },
+          "ultimate": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.601
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.584
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.492
+          },
+          "victory": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.579
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "047179ee79198f5a1f55c2ede692e8abf51be9a13238c167449526cb7b716000",
+    "mime": "image/png",
+    "width": 2752,
+    "height": 1536,
+    "provenance_file": ".cache/generated/hollow_pilgrim_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "1a4561242bbeb5533868913c8fe9a74f343c07c98b44455c13f22724ef4f3a41",
+    "model": "antigravity-image-gen-v2",
+    "prompt_sha256": "2523fd953de0033ebec100878d976f786c5ae8487977cd80dc2115d1ba03bf71",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/hollow_pilgrim_chibi_sheet.ingest.json",
+    "spec_sha256": "bdc48a5d399fdfc2d6b60b08d35b55b1a0c813ce39345c9e865525922882cd12",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "287fa5e0cf7a1642820e3a20a527ba04e317f921f45c0da75832a2512969e2ed"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_hollow_pilgrim.webp",
+      "sha256": "f9cc84ebebc6822ef30928dbc863cb9a807b4416f63cc703ca572b6a474b3807",
+      "pixels_sha256": "96c795f52b7873a508e6a236e6fe5aeb4d406be6ffb30fbb79367e319056edd6",
+      "bytes": 141014,
+      "width": 1932,
+      "height": 499
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2752x1536"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=1"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "4 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.647"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1932x499"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "141014 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0045%"
+        }
+      },
+      "warnings": [
+        "A12: removed 1 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-15T10:29:50.271Z",
+      "note": "Dark gothic anime Chibi enemy sheet"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

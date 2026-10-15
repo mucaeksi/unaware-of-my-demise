@@ -69,18 +69,18 @@ export const BATTLE_LAYOUTS: Readonly<Record<BattleLayoutPreset, BattleLayoutSpe
     id: 'afk_faithful',
     code: 'C',
     title: 'C · AFK-Faithful Staggered (Selected)',
-    groundTop: 430,
-    groundBottom: 690,
-    frontX: 680,
-    rearX: 390,
-    jitterX: 36,
+    groundTop: 400,
+    groundBottom: 716,
+    frontX: 690,
+    rearX: 370,
+    jitterX: 136,
     interleaveFrontTwo: true,
     turnOrderY: 184,
     skillBarY: 960,
     descY: 856,
-    plateOffsetY: 42,
-    scaleMin: 0.9,
-    scaleSpan: 0.14
+    plateOffsetY: 38,
+    scaleMin: 0.74,
+    scaleSpan: 0.12
   }
 } as const;
 
@@ -151,7 +151,18 @@ export function spotFor(
   } else {
     y = spec.groundTop + (span * index) / (count - 1);
   }
-  const jitter = count <= 1 ? 0 : index % 2 === 0 ? -spec.jitterX : spec.jitterX;
+  const jitter =
+    count <= 1
+      ? 0
+      : count === 3
+        ? index === 0
+          ? -spec.jitterX
+          : index === 1
+            ? 0
+            : spec.jitterX
+        : index % 2 === 0
+          ? -spec.jitterX
+          : spec.jitterX;
   const basePlayerX = row === 'front' ? spec.frontX : spec.rearX;
   const minX = Math.max(220, safeInsetX + 160);
   const clampedPlayerX = Math.max(minX, basePlayerX + jitter);

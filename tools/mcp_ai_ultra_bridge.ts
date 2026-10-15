@@ -113,10 +113,12 @@ function exportNotebookLmBundle(): Record<string, unknown> {
   writeFileSync(outFile, sections.join('\n'), 'utf8');
   return {
     outputPath: outFile,
+    docsHubPath: join(ROOT, 'docs', 'notebooklm'),
+    googleDriveHubPath: resolve(ROOT, '..', 'UOMD_NotebookLM_Hub'),
     includedFileCount: includedFiles.length,
     includedFiles,
     instructions:
-      'Upload `.cache/ai-ultra/notebooklm_uomd_canon_bundle.md` directly into Gemini Notebook (notebooklm.google) or query it via `notebooklm-mcp` for zero-hallucination canon checks, voice scripts, and Audio Overviews.'
+      'Select the 6 numbered Markdown sources in Google Drive (`UOMD_NotebookLM_Hub` or `docs/notebooklm/`) or upload `.cache/ai-ultra/notebooklm_uomd_canon_bundle.md` directly into NotebookLM Plus (notebooklm.google).'
   };
 }
 

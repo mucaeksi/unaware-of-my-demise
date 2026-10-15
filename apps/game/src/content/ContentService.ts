@@ -212,7 +212,7 @@ export class ContentService {
       const type = path.endsWith('.webp') ? 'image/webp' : path.endsWith('.png') ? 'image/png' : path.endsWith('.ogg') ? 'audio/ogg' : path.endsWith('.mp3') ? 'audio/mpeg' : path.endsWith('.m4a') ? 'audio/mp4' : path.endsWith('.webm') ? 'video/webm' : 'application/octet-stream';
       const cost = bytes.byteLength + (dimensions ? dimensions.width * dimensions.height * 4 : decodedBytes);
       this.collectIdleAssets();
-      if ([...this.assets.values()].reduce((n, a) => n + a.cost, 0) + cost > 128 * 1024 * 1024) throw new Error('The current scene exceeds its media memory budget');
+      if ([...this.assets.values()].reduce((n, a) => n + a.cost, 0) + cost > 256 * 1024 * 1024) throw new Error('The current scene exceeds its media memory budget');
       const url = base ? `${BASE_CONTENT_URL}/${path}` : URL.createObjectURL(new Blob([bytes as BlobPart], { type }));
       record = { key, url, ...dimensions, cost, encodedBytes: bytes.byteLength, owners: new Set() }; this.assets.set(key, record);
     }
@@ -223,7 +223,7 @@ export class ContentService {
   accountDecodedAsset(key: string, bytes: number): void {
     const record = this.assets.get(key); if (!record) return;
     const cost = Math.max(record.cost, record.encodedBytes + bytes);
-    if (!Number.isSafeInteger(bytes) || bytes < 0 || [...this.assets.values()].reduce((n, a) => n + (a === record ? cost : a.cost), 0) > 128 * 1024 * 1024) throw new Error('Decoded media exceeds the scene memory budget');
+    if (!Number.isSafeInteger(bytes) || bytes < 0 || [...this.assets.values()].reduce((n, a) => n + (a === record ? cost : a.cost), 0) > 256 * 1024 * 1024) throw new Error('Decoded media exceeds the scene memory budget');
     record.cost = cost;
   }
 

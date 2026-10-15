@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "ill_roadside_rest",
+  "class": "still",
+  "source": {
+    "kind": "generated",
+    "pick": "06cedc5d097f",
+    "provenance": ".cache/generated/ill_roadside_rest/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 389120
+  },
+  "manifest": {
+    "still": "roadside_rest"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

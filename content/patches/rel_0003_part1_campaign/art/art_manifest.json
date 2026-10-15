@@ -113,75 +113,63 @@
     },
     "atlas_bellbound_dead": {
       "image": "art/atlas_bellbound_dead.webp",
-      "width": 1435,
-      "height": 344,
+      "width": 1426,
+      "height": 440,
       "frames": {
-        "basic": [
-          2,
-          2,
-          381,
-          340
+        "hit": [
+          4,
+          4,
+          403,
+          432
         ],
         "idle": [
-          385,
-          2,
-          195,
-          340
+          411,
+          4,
+          243,
+          408
         ],
-        "active": [
-          582,
-          2,
-          332,
-          309
-        ],
-        "hit": [
-          916,
-          2,
-          254,
-          290
+        "basic": [
+          658,
+          4,
+          440,
+          386
         ],
         "defeat": [
-          1172,
-          2,
-          261,
-          222
+          1102,
+          4,
+          320,
+          291
         ]
       }
     },
     "atlas_hollow_pilgrim": {
       "image": "art/atlas_hollow_pilgrim.webp",
-      "width": 1863,
-      "height": 384,
+      "width": 1932,
+      "height": 499,
       "frames": {
-        "basic": [
-          2,
-          2,
-          487,
-          380
+        "hit": [
+          4,
+          4,
+          486,
+          491
         ],
         "idle": [
-          491,
-          2,
-          278,
-          380
+          494,
+          4,
+          382,
+          456
         ],
-        "hit": [
-          771,
-          2,
-          333,
-          371
-        ],
-        "active": [
-          1106,
-          2,
-          443,
-          329
+        "basic": [
+          880,
+          4,
+          563,
+          423
         ],
         "defeat": [
-          1551,
-          2,
-          310,
-          307
+          1447,
+          4,
+          481,
+          356
         ]
       }
     },
@@ -331,50 +319,50 @@
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.486
+          "foot_y": 1,
+          "pivot_x": 0.535
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.486
+          "foot_y": 1,
+          "pivot_x": 0.535
         },
         "basic": {
           "frame": "basic",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.576
+          "foot_y": 1,
+          "pivot_x": 0.689
         },
         "active": {
-          "frame": "active",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.558
+          "foot_y": 1,
+          "pivot_x": 0.689
         },
         "ultimate": {
-          "frame": "active",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.558
+          "foot_y": 1,
+          "pivot_x": 0.689
         },
         "hit": {
           "frame": "hit",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.469
+          "foot_y": 1,
+          "pivot_x": 0.406
         },
         "defeat": {
           "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.439
+          "foot_y": 1,
+          "pivot_x": 0.462
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.486
+          "foot_y": 1,
+          "pivot_x": 0.535
         }
       }
     },
@@ -386,50 +374,50 @@
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.468
+          "foot_y": 1,
+          "pivot_x": 0.579
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.468
+          "foot_y": 1,
+          "pivot_x": 0.579
         },
         "basic": {
           "frame": "basic",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.597
+          "foot_y": 1,
+          "pivot_x": 0.601
         },
         "active": {
-          "frame": "active",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.591
+          "foot_y": 1,
+          "pivot_x": 0.601
         },
         "ultimate": {
-          "frame": "active",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.591
+          "foot_y": 1,
+          "pivot_x": 0.601
         },
         "hit": {
           "frame": "hit",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.473
+          "foot_y": 1,
+          "pivot_x": 0.584
         },
         "defeat": {
           "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.422
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.468
+          "foot_y": 1,
+          "pivot_x": 0.579
         }
       }
     },
@@ -3608,6 +3596,8 @@
     "title_bg": "art/ui_title_bg.webp"
   },
   "stills": {
+    "roadside_rest": "art/still_roadside_rest.webp",
+    "shelter_evening": "art/still_shelter_evening.webp",
     "prologue_crownfall": "art/still_prologue_crownfall.webp",
     "prologue_roads": "art/still_prologue_roads.webp",
     "prologue_throne_wars": "art/still_prologue_throne_wars.webp",
