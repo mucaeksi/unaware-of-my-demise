@@ -130,10 +130,10 @@
     },
     {
       "output": "content/base/art/ui_title_bg.webp",
-      "sha256": "e02051f4907eef1e1ae9c65b3aacc11a58f476f59900394dd67757da58e60c4e",
+      "sha256": "5696df7ba4b5dc8fcc2f697020701240ddcea7caea73992b1f8fd174fbd10934",
       "sources": {
-        "generated:title_key_art_01@rev1": "01cbac0204b7799db22a6de1944d768f2a9f87ef0ec0ec3669fd7f68d5473446",
-        "entry": "2bce27495da4e1d8f42e43ea4eeeabb0c6f4c24f01308d41c2d47a6a6aa14609"
+        "generated:title_key_art_01@rev2": "1d6eebd2ec4c224830f81a88e9e6092ed2a6a7bf0453610a796c7dfc4addc88e",
+        "entry": "2f873eef27baee7fa3986cea1326bcb8f78aa5f9faa1ff888289909aa9c541ad"
       }
     },
     {
@@ -162,18 +162,18 @@
     },
     {
       "output": "content/base/art/still_prologue_beginning.webp",
-      "sha256": "8bb1f2bee3ec0059bca8bd41501e634b47bd928d58edb206baec0d59802083a7",
+      "sha256": "35c786654f55037bfff8afbb7efaf4d1b05c1df7f80861815b736df6efb55450",
       "sources": {
-        "generated:prologue_road_beginning@rev1": "30ddd5bcebc379320acf1bb87213211890b469c80e71d13de6d4ad7f9ff3bf8b",
-        "entry": "63d91361acf76d4724342888f133ccb27dc3c4a27f2e9a961ab4e4425d7cdb17"
+        "generated:prologue_road_beginning@rev2": "5eddb79fb5b5743d5d2cf76b5fe197a65ffdb4a598279fd1a450807dcde066a6",
+        "entry": "6e2db1ee43e8ac4bff788b40b5d1a5a67b096d95a12d28fb3f4160f98dbb1f92"
       }
     },
     {
       "output": "content/base/art/still_prologue_reunion.webp",
-      "sha256": "093e700db33dc7c1fa665b9ce35cb60825867b9315274e9bcbe5824b7788bded",
+      "sha256": "473adcf837dc8e76508abc8d1fe42584d6a378a75ce6abc8a7ecddd4bb62c9d6",
       "sources": {
-        "generated:prologue_road_reunion@rev1": "10c465475ce62d24d8b4401ead4610c44512a25940f1564ffdcd4bf04aa62ab7",
-        "entry": "b4da5f0a3e72d82913b70c0905b02bc681b4d60b8152afa6f47df899b95b4be6"
+        "generated:prologue_road_reunion@rev2": "e6e90bb21aaa26bee5070474e8825c6ebb201b1bba00221d45cd1f2bc3dc1ec7",
+        "entry": "2fd569c4f88679407ee9019e3d82d84a6c9880c8efc9585eacb636e58dc5f25f"
       }
     },
     {
@@ -202,10 +202,10 @@
     },
     {
       "output": "content/base/art/still_prologue_search.webp",
-      "sha256": "bba5f9967d974e27cc9a00298d22128aa9c2726eb000f503fe991e77907f7996",
+      "sha256": "889052436a8db6cce9b2d55d4af21291137be565df0e903b4a5767025ae6ddff",
       "sources": {
-        "generated:prologue_village_search@rev1": "4bca93bd1d2347a55716273b4b7bec37b767c39fe0e0c354f588420455609e11",
-        "entry": "8feacfbe5e127de21cfea62beff7fd12d408aafd9b06738db580f15c674f2b9c"
+        "generated:prologue_village_search@rev2": "db4b2c7f26b30dce29e2c85cdce246d87fc934171a088a33e3af7add249b7ec8",
+        "entry": "69721a36acb79027eaecf1f1fa1f25fa5b0dad680b962426b28f719c16c6dd83"
       }
     },
     {
