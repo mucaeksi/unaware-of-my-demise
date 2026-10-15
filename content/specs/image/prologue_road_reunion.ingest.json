@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "prologue_road_reunion",
+  "class": "still",
+  "source": {
+    "kind": "generated",
+    "pick": "10c465475ce6",
+    "provenance": ".cache/generated/prologue_road_reunion/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 307200
+  },
+  "manifest": {
+    "still": "prologue_reunion"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

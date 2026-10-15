@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "bg_forest_whispering_ash_ordered",
+  "class": "background",
+  "source": {
+    "kind": "generated",
+    "pick": "dd405f5d88f8",
+    "provenance": ".cache/generated/bg_forest_whispering_ash_ordered/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 327680
+  },
+  "manifest": {
+    "background": "forest_whispering_ash"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

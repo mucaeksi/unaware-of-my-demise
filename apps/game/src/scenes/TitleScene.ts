@@ -71,34 +71,82 @@ export class TitleScene extends Phaser.Scene {
     const notice = Services.ready().content.storageNotice;
     if (notice) toast(this, notice, 8000);
 
-    const bg = this.add.image(REF_W / 2, REF_H / 2, art.background('forest_whispering_ash'));
-    bg.setScale(Math.max(REF_W / bg.width, REF_H / bg.height) * 1.05);
-    if (!prefs().reducedMotion) this.tweens.add({ targets: bg, x: REF_W / 2 - 30, scale: bg.scale * 1.03, duration: 24000, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
-
-    const keyArt = art.ui('key_art');
-    if (keyArt) {
-      const k = this.add.image(REF_W - 330, REF_H / 2, keyArt);
-      k.setScale(REF_H / k.height).setX(REF_W - (k.width * k.scale) / 2);
+    const titleBgKey = art.ui('title_bg');
+    if (titleBgKey) {
+      const bg = this.add.image(REF_W / 2, REF_H / 2, titleBgKey);
+      bg.setScale(Math.max(REF_W / bg.width, REF_H / bg.height) * 1.04);
+      if (!prefs().reducedMotion) {
+        this.tweens.add({
+          targets: bg,
+          x: REF_W / 2 - 22,
+          scale: bg.scale * 1.028,
+          duration: 22000,
+          yoyo: true,
+          repeat: -1,
+          ease: 'Sine.easeInOut'
+        });
+      }
+    } else {
+      const bg = this.add.image(REF_W / 2, REF_H / 2, art.background('forest_whispering_ash'));
+      bg.setScale(Math.max(REF_W / bg.width, REF_H / bg.height) * 1.05);
+      if (!prefs().reducedMotion) {
+        this.tweens.add({ targets: bg, x: REF_W / 2 - 30, scale: bg.scale * 1.03, duration: 24000, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+      }
+      const keyArt = art.ui('key_art');
+      if (keyArt) {
+        const k = this.add.image(REF_W - 330, REF_H / 2, keyArt);
+        k.setScale(REF_H / k.height).setX(REF_W - (k.width * k.scale) / 2);
+      }
     }
+
     const shade = this.add.graphics();
-    shade.fillGradientStyle(0x0a0610, 0x0a0610, 0x0a0610, 0x0a0610, 0.92, 0, 0.92, 0);
-    shade.fillRect(0, 0, REF_W * 0.7, REF_H);
+    // Subtle left-upper vignette behind the logo and bottom cinematic gradient behind TAP TO CONTINUE
+    shade.fillGradientStyle(0x05030a, 0x05030a, 0x05030a, 0x05030a, 0.72, 0.72, 0, 0);
+    shade.fillRect(0, 0, REF_W, 170);
+    shade.fillGradientStyle(0x05030a, 0x05030a, 0x05030a, 0x05030a, 0, 0, 0.9, 0.9);
+    shade.fillRect(0, REF_H - 270, REF_W, 270);
     try {
-      this.cameras.main.filters.external.addVignette(0.5, 0.5, 0.85, 0.35);
+      this.cameras.main.filters.external.addVignette(0.5, 0.5, 0.88, 0.32);
     } catch {
       /* cosmetic */
     }
 
+    if (!prefs().reducedMotion && this.textures.exists('fx_spark')) {
+      this.addTitleAtmosphere();
+    }
+
     const insets = safeInsets(this);
+    const logoX = 520 + insets.left;
+    const logoY = 262;
+    if (this.textures.exists('fx_spark')) {
+      this.add
+        .image(logoX, logoY, 'fx_spark')
+        .setScale(9.5, 4.2)
+        .setTint(C.plumHi)
+        .setBlendMode(Phaser.BlendModes.ADD)
+        .setAlpha(0.32);
+    }
     const logoKey = art.ui('logo');
     if (logoKey) {
-      const logo = this.add.image(500 + insets.left, 270, logoKey).setAlpha(0);
-      logo.setScale(860 / logo.width);
-      this.tweens.add({ targets: logo, alpha: 1, y: 258, duration: 1400, ease: 'Cubic.easeOut' });
-      if (!prefs().reducedMotion) this.tweens.add({ targets: logo, y: 266, duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut', delay: 1400 });
+      const logo = this.add.image(logoX, logoY + 12, logoKey).setAlpha(0);
+      logo.setScale(820 / logo.width);
+      this.tweens.add({ targets: logo, alpha: 1, y: logoY, duration: 1400, ease: 'Cubic.easeOut' });
+      if (!prefs().reducedMotion) {
+        this.tweens.add({ targets: logo, y: logoY + 8, duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut', delay: 1400 });
+      }
     }
-    txt(this, 500 + insets.left, 478, S.menu.tagline, { fontFamily: F.display, fontSize: '30px', fontStyle: '600', color: '#c9b6e4' }).setOrigin(0.5).setLetterSpacing(4);
+    txt(this, logoX, 462, S.menu.tagline, {
+      fontFamily: F.display,
+      fontSize: '28px',
+      fontStyle: '600',
+      color: '#e3c37d',
+      stroke: '#0a0610',
+      strokeThickness: 4
+    })
+      .setOrigin(0.5)
+      .setLetterSpacing(5);
 
+    this.buildServerBadge();
     if (this.firstRun) this.buildFirstRunMenu();
     else this.buildFullMenu();
     // a reinstall or a second device: the account may already be past the entry flow
@@ -108,7 +156,7 @@ export class TitleScene extends Phaser.Scene {
       });
     }
 
-    this.chipText = txt(this, 60 + insets.left, REF_H - 36 - insets.bottom, '', { fontSize: '24px', color: T.dim }).setOrigin(0, 0.5).setDepth(DEPTH.hud);
+    this.chipText = txt(this, 60 + insets.left, REF_H - 36 - insets.bottom, '', { fontSize: '24px', color: T.dim }).setOrigin(0, 0.5).setDepth(DEPTH.hud + 2);
     if (PATCH_LAB_ENABLED) {
       this.chipText.setInteractive({ useHandCursor: true }).on('pointerup', () => this.openPatchLab());
     }
@@ -127,32 +175,187 @@ export class TitleScene extends Phaser.Scene {
     }
   }
 
-  /** First install: the only doors are sign-in (or Continue when a session exists) and Settings. */
+  /** Online gacha server & account status badge in the top-left corner. */
+  private buildServerBadge(): void {
+    const insets = safeInsets(this);
+    const x = 60 + insets.left;
+    const y = 58 + insets.top;
+    const g = this.add.graphics();
+    g.fillStyle(0x120a18, 0.76);
+    g.fillRoundedRect(0, -24, 430, 48, 24);
+    g.lineStyle(1.5, C.gold, 0.55);
+    g.strokeRoundedRect(0, -24, 430, 48, 24);
+    g.fillStyle(C.hpGood, 1);
+    g.fillCircle(24, 0, 6);
+    const realm = txt(this, 44, 0, 'SANCTUM-01  ·  ONLINE', {
+      fontFamily: F.display,
+      fontSize: '20px',
+      fontStyle: '600',
+      color: T.gold
+    })
+      .setOrigin(0, 0.5)
+      .setLetterSpacing(2);
+    const authTag = txt(this, 412, 0, Services.api.signedIn ? 'SYNCED' : 'GUEST', {
+      fontFamily: F.display,
+      fontSize: '18px',
+      fontStyle: '600',
+      color: Services.api.signedIn ? T.heal : T.dim
+    }).setOrigin(1, 0.5);
+    this.add.container(x, y, [g, realm, authTag]).setDepth(DEPTH.hud + 1);
+  }
+
+  /** Rising ash and warm ember particles across the widescreen title illustration. */
+  private addTitleAtmosphere(): void {
+    this.add
+      .particles(0, 0, 'fx_spark', {
+        x: { min: 0, max: REF_W },
+        y: REF_H + 20,
+        lifespan: 10500,
+        speedY: { min: -58, max: -24 },
+        speedX: { min: -18, max: 14 },
+        scale: { min: 0.04, max: 0.16 },
+        alpha: { start: 0.36, end: 0 },
+        frequency: 300,
+        tint: [0xc9b6e4, 0xe3c37d, 0xd4325c],
+        blendMode: 'ADD'
+      })
+      .setDepth(DEPTH.world);
+  }
+
+  /** Shared full-screen tap-to-continue zone and blinking gothic prompt banner at the bottom center. */
+  private buildTapToContinueBanner(modeBadge: string, subLine: string, enabled: boolean, onTap: () => void): void {
+    const insets = safeInsets(this);
+    const cx = REF_W / 2;
+    const cy = REF_H - 165 - insets.bottom;
+
+    if (enabled) {
+      const tapZone = this.add
+        .zone(REF_W / 2, REF_H / 2, REF_W, REF_H)
+        .setInteractive({ useHandCursor: true })
+        .setDepth(DEPTH.hud - 2);
+      tapZone.on('pointerup', () => {
+        if (this.overlay || this.busy) return;
+        Sfx.confirm();
+        onTap();
+      });
+    }
+
+    const wings = this.add.graphics();
+    wings.lineStyle(2, C.goldHi, 0.85);
+    wings.lineBetween(-540, 0, -350, 0);
+    wings.lineBetween(350, 0, 540, 0);
+    wings.lineStyle(1, C.silver, 0.45);
+    wings.lineBetween(-470, 6, -360, 6);
+    wings.lineBetween(360, 6, 470, 6);
+    wings.fillStyle(C.goldHi, 0.95);
+    for (const dx of [-336, 336]) {
+      wings.fillPoints(
+        [
+          new Phaser.Math.Vector2(dx, -8),
+          new Phaser.Math.Vector2(dx + 8, 0),
+          new Phaser.Math.Vector2(dx, 8),
+          new Phaser.Math.Vector2(dx - 8, 0)
+        ],
+        true
+      );
+    }
+
+    const mainPrompt = txt(this, 0, 0, S.menu.tapToContinue, {
+      fontFamily: F.display,
+      fontSize: '42px',
+      fontStyle: '700',
+      color: enabled ? '#f1ece4' : T.dim,
+      stroke: '#0a0610',
+      strokeThickness: 6
+    })
+      .setOrigin(0.5)
+      .setLetterSpacing(9);
+
+    const badgeTxt = txt(this, 0, 50, modeBadge, {
+      fontFamily: F.display,
+      fontSize: '22px',
+      fontStyle: '600',
+      color: T.gold,
+      stroke: '#0a0610',
+      strokeThickness: 4
+    })
+      .setOrigin(0.5)
+      .setLetterSpacing(4);
+
+    const subTxt = txt(this, 0, 82, subLine, {
+      fontFamily: F.body,
+      fontSize: '26px',
+      fontStyle: 'italic 500',
+      color: T.dim,
+      stroke: '#0a0610',
+      strokeThickness: 3
+    }).setOrigin(0.5);
+
+    this.add.container(cx, cy, [wings, mainPrompt, badgeTxt, subTxt]).setDepth(DEPTH.hud);
+
+    if (enabled && !prefs().reducedMotion) {
+      this.tweens.add({
+        targets: mainPrompt,
+        alpha: { from: 1, to: 0.26 },
+        scale: { from: 1.02, to: 0.98 },
+        duration: 1150,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut'
+      });
+    }
+  }
+
+  /** First install: full-screen blinking TAP TO CONTINUE + discrete top-right SETTINGS utility pill. */
   private buildFirstRunMenu(): void {
     const insets = safeInsets(this);
-    const mx = 500 + insets.left;
     const signedIn = Services.api.signedIn;
     const canSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
     if (signedIn) {
-      new Button(this, mx, 640, { label: S.menu.cont, sub: S.menu.contSub, w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.enter() });
+      this.buildTapToContinueBanner(S.menu.cont, S.menu.tapSubFirstRun, true, () => void this.enter());
     } else if (canSignIn) {
-      new Button(this, mx, 640, { label: S.menu.signIn, sub: S.menu.signInSub, w: 640, h: 128, fontSize: 38, variant: 'hot', onClick: () => void this.enter() });
+      this.buildTapToContinueBanner(S.menu.signIn, S.menu.signInSub, true, () => void this.enter());
     } else if (PREVIEW_FLOW_ENABLED) {
-      new Button(this, mx, 640, { label: S.menu.preview, sub: S.menu.previewSub, w: 640, h: 128, fontSize: 40, variant: 'hot', onClick: () => void this.enter() });
+      this.buildTapToContinueBanner(S.menu.preview, S.menu.tapSubFirstRun, true, () => void this.enter());
     } else {
-      new Button(this, mx, 640, { label: S.menu.signIn, w: 640, h: 128, fontSize: 38, variant: 'dim', onClick: () => undefined }).setEnabled(false);
-      txt(this, mx, 730, S.menu.webNote, { fontSize: '30px', color: T.dim }).setOrigin(0.5);
+      this.buildTapToContinueBanner(S.menu.signIn, S.menu.webNote, false, () => undefined);
     }
-    new Button(this, mx, 800, { label: S.menu.settings, w: 560, h: 120, onClick: () => this.openSettings() });
+    new Button(this, REF_W - 145 - insets.right, 58 + insets.top, {
+      label: S.menu.settings,
+      w: 210,
+      h: 72,
+      fontSize: 22,
+      onClick: () => void this.openSettings()
+    }).setDepth(DEPTH.hud + 2);
   }
 
+  /** Returning player: full-screen blinking TAP TO CONTINUE + discrete top-right online gacha utility pills. */
   private buildFullMenu(): void {
     const insets = safeInsets(this);
-    const mx = 500 + insets.left;
-    new Button(this, mx, 640, { label: 'CONTINUE', sub: 'Enter the Road', w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.begin() });
-    new Button(this, mx, 786, { label: 'CHAPTERS', w: 560, h: 120, onClick: () => this.go('Chapters') });
-    new Button(this, mx, 920, { label: 'SETTINGS', w: 560, h: 120, onClick: () => this.openSettings() });
-    new Button(this, REF_W - 200 - insets.right, 80 + insets.top, { label: 'COMPANY', w: 340, h: 110, fontSize: 30, onClick: () => this.go('Home') });
+    this.buildTapToContinueBanner('CONTINUE', S.menu.tapSubReturn, true, () => void this.begin());
+    const topY = 58 + insets.top;
+    new Button(this, REF_W - 595 - insets.right, topY, {
+      label: 'COMPANY',
+      w: 210,
+      h: 72,
+      fontSize: 22,
+      variant: 'hot',
+      onClick: () => this.go('Home')
+    }).setDepth(DEPTH.hud + 2);
+    new Button(this, REF_W - 370 - insets.right, topY, {
+      label: 'CHAPTERS',
+      w: 210,
+      h: 72,
+      fontSize: 22,
+      onClick: () => this.go('Chapters')
+    }).setDepth(DEPTH.hud + 2);
+    new Button(this, REF_W - 145 - insets.right, topY, {
+      label: 'SETTINGS',
+      w: 210,
+      h: 72,
+      fontSize: 22,
+      onClick: () => void this.openSettings()
+    }).setDepth(DEPTH.hud + 2);
   }
 
   /** Sign in (native or web GIS) when needed, then continue with the first unfinished entry step. */

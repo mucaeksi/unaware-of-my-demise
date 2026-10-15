@@ -186,9 +186,12 @@ export async function signIn(sub: string): Promise<{ auth: Record<string, string
 
 export const post = (body: unknown, auth: Record<string, string> = {}): RequestInit => ({ method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json', ...auth } });
 
-export async function upload(files: TestFile[], as = 'owner@example.com'): Promise<void> {
+export async function upload(files: TestFile[], as: string | null = 'owner@example.com'): Promise<void> {
+  const jwt = as ? await accessToken({ email: as }) : null;
   for (const f of files) {
-    const res = await admin(`/admin/api/objects/${f.sha256}`, { method: 'PUT', body: f.bytes as BodyInit, headers: { 'Content-Type': f.mediaType }, as });
+    const headers: Record<string, string> = { 'Content-Type': f.mediaType };
+    if (jwt) headers['Cf-Access-Jwt-Assertion'] = jwt;
+    const res = await admin(`/admin/api/objects/${f.sha256}`, { method: 'PUT', body: f.bytes as BodyInit, headers, as: null });
     if (res.status !== 200 && res.status !== 201) throw new Error(`upload ${f.path} failed: ${res.status} ${await res.text()}`);
   }
 }

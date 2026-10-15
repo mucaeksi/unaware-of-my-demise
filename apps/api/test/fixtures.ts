@@ -41,6 +41,7 @@ export async function baseFiles(): Promise<TestFile[]> {
     ...(Object.values(art.backgrounds) as string[]),
     ...Object.values<{ file: string }>(art.music).map((m) => m.file),
     ...(Object.values(art.ui) as string[]),
+    ...(Object.values(art.stills ?? {}) as string[]),
     ...Object.values<{ images: Record<string, string> }>(art.portraits).flatMap((p) => Object.values(p.images))
   ]);
   return build(baseJson, '/content/base/', [...bin]);
@@ -51,7 +52,12 @@ export async function patchFiles(): Promise<TestFile[]> {
   const base = await baseFiles();
   const patch = await build(campaignJson, '/content/patches/rel_0003_part1_campaign/', []);
   const art = JSON.parse(new TextDecoder().decode(patch.find((f) => f.path === 'art/art_manifest.json')?.bytes));
-  const bin = new Set<string>([...Object.values<{ image: string }>(art.atlases).map((a) => a.image), ...(Object.values(art.backgrounds) as string[])]);
+  const bin = new Set<string>([
+    ...Object.values<{ image: string }>(art.atlases).map((a) => a.image),
+    ...(Object.values(art.backgrounds) as string[]),
+    ...(Object.values(art.ui ?? {}) as string[]),
+    ...(Object.values(art.stills ?? {}) as string[])
+  ]);
   const have = new Set([...base.map((f) => f.path), ...patch.map((f) => f.path)]);
   const extra: TestFile[] = [];
   for (const p of bin) if (!have.has(p)) extra.push(await file(p, enc.encode(`stand-in binary for ${p}`)));
@@ -63,7 +69,12 @@ export async function campaignFiles(): Promise<TestFile[]> {
   const base = await baseFiles();
   const patch = await build(campaignJson, '/content/patches/rel_0003_part1_campaign/', []);
   const art = JSON.parse(new TextDecoder().decode(patch.find((f) => f.path === 'art/art_manifest.json')?.bytes));
-  const bin = new Set<string>([...Object.values<{ image: string }>(art.atlases).map((a) => a.image), ...(Object.values(art.backgrounds) as string[])]);
+  const bin = new Set<string>([
+    ...Object.values<{ image: string }>(art.atlases).map((a) => a.image),
+    ...(Object.values(art.backgrounds) as string[]),
+    ...(Object.values(art.ui ?? {}) as string[]),
+    ...(Object.values(art.stills ?? {}) as string[])
+  ]);
   const have = new Set([...base.map((f) => f.path), ...patch.map((f) => f.path)]);
   const extra: TestFile[] = [];
   for (const p of bin) if (!have.has(p)) extra.push(await file(p, enc.encode(`stand-in binary for ${p}`)));

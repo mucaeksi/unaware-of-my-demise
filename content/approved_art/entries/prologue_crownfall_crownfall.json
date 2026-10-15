@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "prologue_crownfall_crownfall",
+  "class": "still",
+  "revision": 1,
+  "targets": {
+    "stills": {
+      "prologue_crownfall": "art/still_prologue_crownfall.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "41c1a374ef119a18de566e9ee1e3d1f12dc3da9359aae19da820911ae69f9ead",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/prologue_crownfall_crownfall/run.provenance.json",
+    "provenance_sha256": "2e2192608ae142f78c57d6c9ea8d1646a97bc4f126613a50399000834590a990",
+    "model": "gemini-3.1-flash-image",
+    "prompt_sha256": "ee736138cdecfdfc17ef4de1cd65d2deda5d6f23ec305f9ccd6c89b7ec1eeafc",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/prologue_crownfall_crownfall.ingest.json",
+    "spec_sha256": "091f0ccf5b7f03ea5a04cb30e73516fcd20664ee15ee080860e9e86fe9c95b1d",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "fd075a50603db02c8403d70e5d45eb9d412afbe388033cec8229f7b029e13b22"
+  },
+  "outputs": [
+    {
+      "path": "art/still_prologue_crownfall.webp",
+      "sha256": "aa95cdc01cc2100cf5d2f7bff33e34803e01597372077dc71de4dbb546974188",
+      "pixels_sha256": "301b0d6bf8ff6d848054883b4001e2bd83086529a67ea2ef04dd1ec007fd5f4b",
+      "bytes": 125560,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "125560 bytes <= 307200"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner-step1",
+      "at": "2026-10-15T04:25:25.898Z",
+      "note": "Approved in Step 1 opening & prologue overhaul"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

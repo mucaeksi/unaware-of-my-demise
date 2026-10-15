@@ -45,7 +45,7 @@ test('F1: a fresh install shows the engine credit, the studio card, then the fir
   expect(labels.join('|')).not.toContain('COMPANY');
 
   // settings are reachable before sign-in and do not offer a progress reset
-  await tap(page, info, 500, 800);
+  await tap(page, info, 1920 - 145, 58);
   await page.waitForTimeout(700);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-f1-4-settings.png` });
   expect(problems.filter((p) => !p.includes('favicon'))).toEqual([]);

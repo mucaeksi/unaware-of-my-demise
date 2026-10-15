@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "title_key_art_01",
+  "class": "ui_image",
+  "revision": 1,
+  "targets": {
+    "ui": {
+      "title_bg": "art/ui_title_bg.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "01cbac0204b7799db22a6de1944d768f2a9f87ef0ec0ec3669fd7f68d5473446",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/title_key_art_01/run.provenance.json",
+    "provenance_sha256": "d48432be2fd615fe4c1bf8e56dea9fad1bc73dc2cf006e39824609286cd9a740",
+    "model": "gemini-3.1-flash-image",
+    "prompt_sha256": "7b65230e8aa5c917179c395f0208f1c939e5020fcd58d52b8b679d915d5b5908",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/title_key_art_01.ingest.json",
+    "spec_sha256": "68fc2a8fe6a3cbbc44bf92ac3abe4abe55f64943bafffba7724e0cc0d77eb5bf",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "2bce27495da4e1d8f42e43ea4eeeabb0c6f4c24f01308d41c2d47a6a6aa14609"
+  },
+  "outputs": [
+    {
+      "path": "art/ui_title_bg.webp",
+      "sha256": "e02051f4907eef1e1ae9c65b3aacc11a58f476f59900394dd67757da58e60c4e",
+      "pixels_sha256": "7c875a1031b440924bd9f723ab04e1e28208fa4f4e7d36319886f3f55190a228",
+      "bytes": 122374,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "122374 bytes <= 360000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner-step1",
+      "at": "2026-10-15T04:25:20.715Z",
+      "note": "Approved in Step 1 opening & prologue overhaul"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

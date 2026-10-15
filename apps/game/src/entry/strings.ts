@@ -4,6 +4,10 @@ export const S = {
   studio: { name: 'SovTaym Studios', presents: 'PRESENTS' },
   menu: {
     tagline: 'PART I  ·  UNAWARE, I FADE',
+    tapToContinue: 'TAP TO CONTINUE',
+    tapSubFirstRun: 'Touch anywhere to begin the prologue',
+    tapSubReturn: 'Touch anywhere to enter the road',
+    serverOnline: '● SANCTUM-01  ·  ONLINE',
     signIn: 'SIGN IN WITH GOOGLE',
     signInSub: 'Your journey is saved to your account',
     cont: 'CONTINUE',

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
 import { S } from '../entry/strings';
 import { prefs } from '../platform/prefs';
@@ -12,8 +13,8 @@ const HOLD = INTRO_FAST ? 80 : 1700;
 const OUT = INTRO_FAST ? 80 : 1000;
 
 /**
- * "SovTaym Studios Presents" card, ~4.5 s, ink on black. The studio mark comes from the art manifest (`ui` entry `studio_mark`) when
- * the active content carries one; until then a hairline ornament stands in. Tapping does not skip.
+ * "SovTaym Studios Presents" card, ~4.5 s, ink on black. Renders the commissioned `studio_mark` celestial astrolabe emblem
+ * framed by counter-rotating gold/silver filigree rings, a hairline shimmer sweep, and rising spark motes. Tapping does not skip.
  */
 export class StudioScene extends Phaser.Scene {
   constructor() {
@@ -27,56 +28,164 @@ export class StudioScene extends Phaser.Scene {
     const calm = prefs().reducedMotion;
     const cx = REF_W / 2;
     const cy = REF_H / 2;
+    const markY = cy - 142;
 
     const parts: (Phaser.GameObjects.Image | Phaser.GameObjects.Text | Phaser.GameObjects.Container)[] = [];
+
+    // Ambient radial glow behind the studio emblem
+    if (this.textures.exists('fx_spark')) {
+      const aura = this.add
+        .image(cx, markY, 'fx_spark')
+        .setScale(6.2)
+        .setTint(C.gold)
+        .setBlendMode(Phaser.BlendModes.ADD)
+        .setAlpha(0);
+      parts.push(aura);
+      if (!calm) {
+        this.tweens.add({
+          targets: aura,
+          scale: { from: 5.4, to: 6.8 },
+          duration: 2400,
+          yoyo: true,
+          repeat: -1,
+          ease: 'Sine.easeInOut'
+        });
+      }
+    }
+
+    // Counter-rotating celestial chronometer rings behind the studio mark
+    const outerRing = this.celestialRing(cx, markY, 158, C.gold, 12);
+    const innerRing = this.celestialRing(cx, markY, 128, C.silver, 8);
+    parts.push(outerRing, innerRing);
+    if (!calm) {
+      this.tweens.add({ targets: outerRing, angle: 90, duration: NAME_IN + PRESENTS_AT + HOLD + OUT, ease: 'Sine.easeInOut' });
+      this.tweens.add({ targets: innerRing, angle: -90, duration: NAME_IN + PRESENTS_AT + HOLD + OUT, ease: 'Sine.easeInOut' });
+    }
+
     const markKey = Services.art?.ui('studio_mark');
     if (markKey) {
-      const mark = this.add.image(cx, cy - 170, markKey);
-      mark.setScale(Math.min(260 / mark.width, 260 / mark.height));
+      const mark = this.add.image(cx, markY, markKey);
+      const targetScale = Math.min(248 / mark.width, 248 / mark.height);
+      mark.setScale(calm ? targetScale : targetScale * 0.86);
       parts.push(mark);
-    } else {
-      parts.push(this.ornament(cx, cy - 120));
+      if (!calm) {
+        this.tweens.add({ targets: mark, scale: targetScale, duration: NAME_IN + 400, ease: 'Cubic.easeOut' });
+      }
     }
-    const name = txt(this, cx, cy - 10, S.studio.name, { fontFamily: F.display, fontSize: '88px', fontStyle: '600', color: '#e9e2d4' }).setOrigin(0.5).setLetterSpacing(10);
-    const presents = txt(this, cx, cy + 92, S.studio.presents, { fontFamily: F.body, fontSize: '36px', fontStyle: 'italic 500', color: T.dim }).setOrigin(0.5).setLetterSpacing(18);
-    parts.push(name);
+
+    const divider = this.ornament(cx, cy - 2, calm);
+    const name = txt(this, cx, cy + 56, S.studio.name.toUpperCase(), {
+      fontFamily: F.display,
+      fontSize: '78px',
+      fontStyle: '600',
+      color: '#e9e2d4',
+      stroke: '#120a18',
+      strokeThickness: 5
+    })
+      .setOrigin(0.5)
+      .setLetterSpacing(10);
+    const presents = txt(this, cx, cy + 138, S.studio.presents, {
+      fontFamily: F.body,
+      fontSize: '36px',
+      fontStyle: 'italic 500',
+      color: T.gold
+    })
+      .setOrigin(0.5)
+      .setLetterSpacing(18);
+
+    parts.push(divider, name);
     [...parts, presents].forEach((o) => o.setAlpha(0));
 
+    Sfx.bell(330, 0.14, 2.0);
     this.tweens.add({ targets: parts, alpha: 1, duration: NAME_IN, ease: 'Sine.easeOut' });
     this.tweens.add({ targets: presents, alpha: 1, duration: NAME_IN, delay: PRESENTS_AT, ease: 'Sine.easeOut' });
-    if (!calm) this.tweens.add({ targets: name, y: cy - 16, duration: NAME_IN + PRESENTS_AT + HOLD + OUT, ease: 'Sine.easeInOut' });
+    if (!calm) {
+      this.tweens.add({ targets: name, y: cy + 50, duration: NAME_IN + PRESENTS_AT + HOLD + OUT, ease: 'Sine.easeInOut' });
+    }
     if (!calm && !INTRO_FAST && this.textures.exists('fx_spark')) this.addAsh();
 
     this.time.delayedCall(PRESENTS_AT + NAME_IN + HOLD, () => {
-      this.tweens.add({ targets: [...parts, presents], alpha: 0, duration: OUT, ease: 'Sine.easeIn', onComplete: () => this.scene.start('Title') });
+      this.tweens.add({
+        targets: [...parts, presents],
+        alpha: 0,
+        duration: OUT,
+        ease: 'Sine.easeIn',
+        onComplete: () => this.scene.start('Title')
+      });
     });
   }
 
-  /** Two hairlines meeting at a diamond: the same ornament vocabulary as the UI panels. */
-  private ornament(x: number, y: number): Phaser.GameObjects.Container {
+  /** Delicate astronomical degree ring with cardinal diamond ticks around the SovTaym emblem. */
+  private celestialRing(x: number, y: number, radius: number, color: number, ticks: number): Phaser.GameObjects.Container {
     const g = this.add.graphics();
-    g.lineStyle(2, C.gold, 0.8);
-    g.lineBetween(-210, 0, -26, 0);
-    g.lineBetween(26, 0, 210, 0);
-    g.fillStyle(C.goldHi, 0.95);
-    g.fillPoints([new Phaser.Math.Vector2(0, -16), new Phaser.Math.Vector2(16, 0), new Phaser.Math.Vector2(0, 16), new Phaser.Math.Vector2(-16, 0)], true);
+    g.lineStyle(1.5, color, 0.36);
+    g.strokeCircle(0, 0, radius);
+    for (let i = 0; i < ticks; i++) {
+      const rad = (i * Math.PI * 2) / ticks;
+      const c = Math.cos(rad);
+      const s = Math.sin(rad);
+      const inner = i % 3 === 0 ? radius - 12 : radius - 6;
+      const outer = i % 3 === 0 ? radius + 12 : radius + 6;
+      g.lineStyle(i % 3 === 0 ? 2 : 1.2, i % 3 === 0 ? C.goldHi : color, i % 3 === 0 ? 0.75 : 0.42);
+      g.lineBetween(c * inner, s * inner, c * outer, s * outer);
+    }
     return this.add.container(x, y, [g]);
   }
 
-  /** A few slow motes, built-in Phaser particles on the shared soft-dot texture. */
+  /** Two hairlines meeting at a diamond with an animated horizontal shimmer sweep. */
+  private ornament(x: number, y: number, calm: boolean): Phaser.GameObjects.Container {
+    const g = this.add.graphics();
+    g.lineStyle(2, C.gold, 0.82);
+    g.lineBetween(-260, 0, -28, 0);
+    g.lineBetween(28, 0, 260, 0);
+    g.lineStyle(1, C.silver, 0.45);
+    g.lineBetween(-180, -5, -36, -5);
+    g.lineBetween(36, -5, 180, -5);
+    g.fillStyle(C.goldHi, 0.95);
+    g.fillPoints(
+      [
+        new Phaser.Math.Vector2(0, -14),
+        new Phaser.Math.Vector2(14, 0),
+        new Phaser.Math.Vector2(0, 14),
+        new Phaser.Math.Vector2(-14, 0)
+      ],
+      true
+    );
+    const items: Phaser.GameObjects.GameObject[] = [g];
+    if (!calm && this.textures.exists('fx_spark')) {
+      const glint = this.add
+        .image(-240, 0, 'fx_spark')
+        .setScale(1.8, 0.18)
+        .setTint(C.goldHi)
+        .setBlendMode(Phaser.BlendModes.ADD)
+        .setAlpha(0.85);
+      items.push(glint);
+      this.tweens.add({
+        targets: glint,
+        x: 240,
+        duration: 2100,
+        delay: 300,
+        ease: 'Sine.easeInOut'
+      });
+    }
+    return this.add.container(x, y, items);
+  }
+
+  /** Slow golden and lilac spark motes rising across the dark studio card. */
   private addAsh(): void {
     const emitter = this.add.particles(0, 0, 'fx_spark', {
       x: { min: 0, max: REF_W },
       y: REF_H + 20,
       lifespan: 9000,
-      speedY: { min: -46, max: -22 },
-      speedX: { min: -10, max: 10 },
-      scale: { min: 0.05, max: 0.16 },
-      alpha: { start: 0.28, end: 0 },
-      frequency: 520,
-      tint: [0xc9b6e4, 0xb8975a],
+      speedY: { min: -52, max: -24 },
+      speedX: { min: -12, max: 12 },
+      scale: { min: 0.05, max: 0.18 },
+      alpha: { start: 0.34, end: 0 },
+      frequency: 420,
+      tint: [0xc9b6e4, 0xb8975a, 0xe3c37d],
       blendMode: 'ADD'
     });
     emitter.setDepth(-1);
   }
 }
+

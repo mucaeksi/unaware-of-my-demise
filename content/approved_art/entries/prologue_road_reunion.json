@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "prologue_road_reunion",
+  "class": "still",
+  "revision": 1,
+  "targets": {
+    "stills": {
+      "prologue_reunion": "art/still_prologue_reunion.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "10c465475ce62d24d8b4401ead4610c44512a25940f1564ffdcd4bf04aa62ab7",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/prologue_road_reunion/run.provenance.json",
+    "provenance_sha256": "ae713a4860dff700fe0db626f0b608fdea2e573252469f4499a92ddb7b3ea565",
+    "model": "gemini-3.1-flash-image",
+    "prompt_sha256": "24b34ff21a2afe58700e0f5476cb5032633347cb8316281f2d1384b22191a793",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/prologue_road_reunion.ingest.json",
+    "spec_sha256": "c4890264a0cc5bf30136124aecdb96957684cc0b69aeb15ca7bb77b5ab56a763",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "b4da5f0a3e72d82913b70c0905b02bc681b4d60b8152afa6f47df899b95b4be6"
+  },
+  "outputs": [
+    {
+      "path": "art/still_prologue_reunion.webp",
+      "sha256": "093e700db33dc7c1fa665b9ce35cb60825867b9315274e9bcbe5824b7788bded",
+      "pixels_sha256": "5b99bbed2fa59fb0e29e14c3ff40ac103fda2abe2f4f1b640876e0df998322be",
+      "bytes": 98876,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "98876 bytes <= 307200"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner-step1",
+      "at": "2026-10-15T04:25:28.424Z",
+      "note": "Approved in Step 1 opening & prologue overhaul"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

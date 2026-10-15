@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import type { Prologue, PrologueScene as PrologueData } from '@uomd/content-schema';
 import { Music } from '../audio/Music';
+import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
 import { advance } from '../entry/flow';
 import { clearPrologueCheckpoint, loadPrologueCheckpoint, savePrologueCheckpoint } from '../entry/resume';
@@ -19,6 +20,7 @@ import { C, DEPTH, F, T } from '../ui/theme';
 export const REVEAL_CPS = 26;
 const CROSSFADE_MS = INTRO_FAST ? 60 : 800;
 const TEXT_FADE_MS = INTRO_FAST ? 40 : 450;
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'] as const;
 
 /** Seconds a scene lasts on screen. Timing comes from the narrative script; `?fastintro` only shortens it for automated review. */
 export const sceneSeconds = (s: PrologueData): number => (INTRO_FAST ? 0.35 : s.duration_seconds);
@@ -34,8 +36,11 @@ export class PrologueScene extends Phaser.Scene {
   private generation = 0;
   private data0: Prologue | null = null;
   private current: Phaser.GameObjects.Image | null = null;
+  private actCounter!: Phaser.GameObjects.Text;
   private caption!: Phaser.GameObjects.Text;
+  private captionRule!: Phaser.GameObjects.Graphics;
   private body!: Phaser.GameObjects.Text;
+  private progressFill!: Phaser.GameObjects.Rectangle;
   private shade!: Phaser.GameObjects.Graphics;
   private typer: Phaser.Time.TimerEvent | null = null;
   private fadeTimer: Phaser.Time.TimerEvent | null = null;
@@ -71,13 +76,66 @@ export class PrologueScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(0x000000);
     const insets = safeInsets(this);
     this.shade = this.add.graphics().setDepth(DEPTH.hud - 100);
-    this.shade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0, 0, 0.88, 0.88);
+    this.shade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0, 0, 0.9, 0.9);
     this.shade.fillRect(0, REF_H - 470, REF_W, 470);
-    this.shade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.55, 0.55, 0, 0);
-    this.shade.fillRect(0, 0, REF_W, 220);
+    this.shade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.62, 0.62, 0, 0);
+    this.shade.fillRect(0, 0, REF_W, 240);
+    // Subtle cinematic vignette border
+    this.shade.lineStyle(1, C.plumHi, 0.35);
+    this.shade.strokeRect(24 + insets.left, 20 + insets.top, REF_W - 48 - insets.left - insets.right, REF_H - 40 - insets.top - insets.bottom);
     this.shade.setAlpha(0);
-    this.caption = txt(this, REF_W / 2, 96 + Math.round(insets.top * 0.5), '', { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: '#e3c37d', stroke: '#05030a', strokeThickness: 5 }).setOrigin(0.5).setLetterSpacing(9).setDepth(DEPTH.hud).setAlpha(0);
-    this.body = txt(this, REF_W / 2, REF_H - 300 - insets.bottom, '', { fontFamily: F.body, fontSize: '46px', fontStyle: '500', color: T.text, align: 'center', wordWrap: { width: 1520 - insets.left - insets.right }, lineSpacing: 14, stroke: '#05030a', strokeThickness: 6 }).setOrigin(0.5, 0).setDepth(DEPTH.hud);
+
+    const capY = 96 + Math.round(insets.top * 0.5);
+    this.actCounter = txt(this, REF_W / 2, capY - 36, '', {
+      fontFamily: F.display,
+      fontSize: '18px',
+      fontStyle: '600',
+      color: T.dim,
+      stroke: '#05030a',
+      strokeThickness: 3
+    }).setOrigin(0.5).setLetterSpacing(6).setDepth(DEPTH.hud).setAlpha(0);
+
+    this.caption = txt(this, REF_W / 2, capY, '', {
+      fontFamily: F.display,
+      fontSize: '34px',
+      fontStyle: '600',
+      color: '#e3c37d',
+      stroke: '#05030a',
+      strokeThickness: 5
+    }).setOrigin(0.5).setLetterSpacing(9).setDepth(DEPTH.hud).setAlpha(0);
+
+    this.captionRule = this.add.graphics().setDepth(DEPTH.hud).setAlpha(0);
+    this.captionRule.lineStyle(1.2, C.gold, 0.48);
+    this.captionRule.lineBetween(REF_W / 2 - 220, capY + 28, REF_W / 2 - 14, capY + 28);
+    this.captionRule.lineBetween(REF_W / 2 + 14, capY + 28, REF_W / 2 + 220, capY + 28);
+    this.captionRule.fillStyle(C.goldHi, 0.85);
+    this.captionRule.fillPoints(
+      [
+        new Phaser.Math.Vector2(REF_W / 2, capY + 22),
+        new Phaser.Math.Vector2(REF_W / 2 + 6, capY + 28),
+        new Phaser.Math.Vector2(REF_W / 2, capY + 34),
+        new Phaser.Math.Vector2(REF_W / 2 - 6, capY + 28)
+      ],
+      true
+    );
+
+    this.body = txt(this, REF_W / 2, REF_H - 300 - insets.bottom, '', {
+      fontFamily: F.body,
+      fontSize: '46px',
+      fontStyle: '500',
+      color: T.text,
+      align: 'center',
+      wordWrap: { width: 1520 - insets.left - insets.right },
+      lineSpacing: 14,
+      stroke: '#05030a',
+      strokeThickness: 6
+    }).setOrigin(0.5, 0).setDepth(DEPTH.hud);
+
+    const barW = 720;
+    const barY = REF_H - 34 - insets.bottom;
+    this.add.rectangle(REF_W / 2, barY, barW, 3, C.plumHi, 0.45).setDepth(DEPTH.hud);
+    this.progressFill = this.add.rectangle(REF_W / 2 - barW / 2, barY, 0, 3, C.goldHi, 0.8).setOrigin(0, 0.5).setDepth(DEPTH.hud + 1);
+
     this.buildControls();
     if (!prefs().reducedMotion && !INTRO_FAST) this.addMotes();
     void this.loadScript();
@@ -192,8 +250,17 @@ export class PrologueScene extends Phaser.Scene {
     savePrologueCheckpoint(Services.api.accountKey, this.index);
     const first = this.index === 0;
     const holdMs = sceneSeconds(scene) * 1000;
+    const total = Math.max(1, data.scenes.length);
+    const startW = 720 * (this.index / total);
+    const endW = 720 * ((this.index + 1) / total);
+    this.tweens.killTweensOf(this.progressFill);
+    this.progressFill.width = startW;
+    this.tweens.add({ targets: this.progressFill, width: endW, duration: holdMs, ease: 'Linear' });
+    if (!this.muted && !INTRO_FAST) {
+      Sfx.bell(this.index === 4 ? 220 : 330 + (this.index % 3) * 55, 0.08, 1.5);
+    }
     this.showPlate(scene, first, holdMs);
-    this.showText(scene);
+    this.showText(scene, total);
     this.fadeTimer?.remove(false);
     this.advanceTimer?.remove(false);
     this.fadeTimer = this.time.delayedCall(Math.max(0, holdMs - TEXT_FADE_MS), () => {
@@ -223,12 +290,16 @@ export class PrologueScene extends Phaser.Scene {
     if (old) this.time.delayedCall(CROSSFADE_MS + 60, () => old.destroy());
   }
 
-  private showText(scene: PrologueData): void {
+  private showText(scene: PrologueData, total: number): void {
     this.typer?.remove(false);
-    this.tweens.killTweensOf([this.body, this.caption]);
+    this.tweens.killTweensOf([this.body, this.caption, this.actCounter, this.captionRule]);
+    const romCur = ROMAN[this.index] ?? String(this.index + 1);
+    const romTot = ROMAN[total - 1] ?? String(total);
+    this.actCounter.setText(`SCENE ${romCur} / ${romTot}`).setAlpha(0);
     this.caption.setText(scene.caption_en.toUpperCase()).setAlpha(0);
+    this.captionRule.setAlpha(0);
     this.body.setText('').setAlpha(1);
-    this.tweens.add({ targets: this.caption, alpha: 1, duration: TEXT_FADE_MS * 2, delay: 300 });
+    this.tweens.add({ targets: [this.actCounter, this.caption, this.captionRule], alpha: 1, duration: TEXT_FADE_MS * 2, delay: 300 });
     const full = this.stage?.text(scene.line_id, scene.text_en) ?? scene.text_en;
     void this.stage?.voice(scene.line_id);
     const step = INTRO_FAST ? 3 : 1;
@@ -246,8 +317,8 @@ export class PrologueScene extends Phaser.Scene {
 
   private fadeText(done: () => void): void {
     this.typer?.remove(false);
-    this.tweens.killTweensOf([this.body, this.caption]);
-    this.tweens.add({ targets: [this.body, this.caption], alpha: 0, duration: TEXT_FADE_MS, onComplete: done });
+    this.tweens.killTweensOf([this.body, this.caption, this.actCounter, this.captionRule]);
+    this.tweens.add({ targets: [this.body, this.caption, this.actCounter, this.captionRule], alpha: 0, duration: TEXT_FADE_MS, onComplete: done });
   }
 
   private ending(): void {

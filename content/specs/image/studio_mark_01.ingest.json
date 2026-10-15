@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "asset_id": "studio_mark_01",
+  "class": "ui_image",
+  "source": {
+    "kind": "generated",
+    "pick": "6f1e0c39dd19",
+    "provenance": ".cache/generated/studio_mark_01/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "bottom",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      0,
+      255
+    ],
+    "choke_px": 1,
+    "despill": true
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "inside",
+    "width": 512,
+    "height": 512,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 90000
+  },
+  "manifest": {
+    "ui": "studio_mark"
+  },
+  "qc": {
+    "profile": "mark"
+  }
+}

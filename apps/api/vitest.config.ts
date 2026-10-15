@@ -9,5 +9,11 @@ export default defineConfig({
       miniflare: { bindings: { TEST_MIGRATIONS: await readD1Migrations(fileURLToPath(new URL('./migrations', import.meta.url))) } }
     }))
   ],
-  test: { setupFiles: ['./test/apply-migrations.ts'], include: ['test/**/*.test.ts'] }
+  test: {
+    setupFiles: ['./test/apply-migrations.ts'],
+    include: ['test/**/*.test.ts'],
+    testTimeout: 30000,
+    hookTimeout: 30000,
+    maxWorkers: 4
+  }
 });

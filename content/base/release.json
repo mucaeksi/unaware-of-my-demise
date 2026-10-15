@@ -8,7 +8,7 @@
     "notes": "Base content shipped inside the app: first-install flow (prologue + tutorials T-1..T-3)"
   },
   "compat": {
-    "min_client": "0.1.0",
+    "min_client": "0.1.1",
     "content_schema": 1
   },
   "rollout": {
@@ -18,8 +18,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "d001e979629f7e2e2825d24a60df6cb3e555fca2bfe296050421f8977fc442e6",
-      "bytes": 9107,
+      "sha256": "df1a65d7ebe2944318d56626b83b44ea69dda87189f70e212aa513f275d31d39",
+      "bytes": 9740,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -53,8 +53,8 @@
     },
     {
       "path": "art/bg_forest_whispering_ash.webp",
-      "sha256": "8e1675b8a2615d4b336916a7b39f0b96d87b742d6a05958d7c077fe21cbcdb3b",
-      "bytes": 167016,
+      "sha256": "15c1567d2b6e3a355b7342332b0317eac6917920f0c782e64349ffd27ad45d92",
+      "bytes": 129498,
       "media_type": "image/webp",
       "kind": "background"
     },
@@ -108,6 +108,69 @@
       "kind": "portrait"
     },
     {
+      "path": "art/still_prologue_beginning.webp",
+      "sha256": "8bb1f2bee3ec0059bca8bd41501e634b47bd928d58edb206baec0d59802083a7",
+      "bytes": 136686,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_prologue_crownfall.webp",
+      "sha256": "aa95cdc01cc2100cf5d2f7bff33e34803e01597372077dc71de4dbb546974188",
+      "bytes": 125560,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_prologue_hours.webp",
+      "sha256": "2d6d72585235543db6845c0a78ee6fb9918d3a02b6843a503b833052e6f4f8ce",
+      "bytes": 133828,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_prologue_names.webp",
+      "sha256": "2dda4dc9fa32484e08474839e75b9de3e7f0d14afa5155b452b8d5a673220a91",
+      "bytes": 95872,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_prologue_ordinary_days.webp",
+      "sha256": "c3d212c1fb39fd2b764b8929639e9742587848a6cacb9009d77bf2299b41b18f",
+      "bytes": 128860,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_prologue_reunion.webp",
+      "sha256": "093e700db33dc7c1fa665b9ce35cb60825867b9315274e9bcbe5824b7788bded",
+      "bytes": 98876,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_prologue_roads.webp",
+      "sha256": "e39648cc80ebfe248facc21867f612dc9c676f0aa1d8e77b2f5fefb000d3ef68",
+      "bytes": 92422,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_prologue_search.webp",
+      "sha256": "bba5f9967d974e27cc9a00298d22128aa9c2726eb000f503fe991e77907f7996",
+      "bytes": 83204,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_prologue_throne_wars.webp",
+      "sha256": "6ff6809b81d48de64272764744c6cf3f650b6229ff5181fc92523c2a9ed68d85",
+      "bytes": 79930,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
       "path": "art/ui_key_art.webp",
       "sha256": "4eb31eb391369b4dca9d83ad8a8939811303e33385e831387127f63fb37411f1",
       "bytes": 77100,
@@ -118,6 +181,20 @@
       "path": "art/ui_logo.webp",
       "sha256": "b84ad0324a510ab5604764cc64ef63e468cad8088d29c341c24949530f18efb8",
       "bytes": 169904,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_studio_mark.webp",
+      "sha256": "bac50683f7839cc384a4af2827de9dc381d06f307a40f9c1b3d86214741c4b47",
+      "bytes": 83048,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_title_bg.webp",
+      "sha256": "e02051f4907eef1e1ae9c65b3aacc11a58f476f59900394dd67757da58e60c4e",
+      "bytes": 122374,
       "media_type": "image/webp",
       "kind": "other_data"
     },

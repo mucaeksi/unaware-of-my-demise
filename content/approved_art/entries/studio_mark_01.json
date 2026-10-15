@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "asset_id": "studio_mark_01",
+  "class": "ui_image",
+  "revision": 1,
+  "targets": {
+    "ui": {
+      "studio_mark": "art/ui_studio_mark.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "6f1e0c39dd1941151b31d784377d69bc86d75ee1afda1f00d0ce692dd3528066",
+    "mime": "image/png",
+    "width": 1024,
+    "height": 1024,
+    "provenance_file": ".cache/generated/studio_mark_01/run.provenance.json",
+    "provenance_sha256": "ef08874509c06a4ae79a3c44593f269e37ae06e431e5d8f1ef612fb8b29caef4",
+    "model": "gemini-3.1-flash-image",
+    "prompt_sha256": "bba24bb9d476c674eae41ea4a60e9d7965e17993bf4d8fedadf1486118e6e940",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/studio_mark_01.ingest.json",
+    "spec_sha256": "dca2a923ab3c7429642d058ebafa591bd047a62a2f1011df0f36f3be4b007293",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "3da658133c877598ac726b96bb29dac22b059d2b11af9ba66e94c9c4fce64760"
+  },
+  "outputs": [
+    {
+      "path": "art/ui_studio_mark.webp",
+      "sha256": "bac50683f7839cc384a4af2827de9dc381d06f307a40f9c1b3d86214741c4b47",
+      "pixels_sha256": "4a369f42b7d112f39ae358c3e8092113e4d09a1f9f48dd6a8d317faaf094c363",
+      "bytes": 83048,
+      "width": 512,
+      "height": 512
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1024x1024"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "pass",
+          "detail": "removed=0"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "512x512"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "83048 bytes <= 90000"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner-step1",
+      "at": "2026-10-15T04:25:19.809Z",
+      "note": "Approved in Step 1 opening & prologue overhaul"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

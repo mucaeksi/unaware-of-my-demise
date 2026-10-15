@@ -454,7 +454,19 @@
   },
   "ui": {
     "logo": "art/ui_logo.webp",
-    "key_art": "art/ui_key_art.webp"
+    "key_art": "art/ui_key_art.webp",
+    "studio_mark": "art/ui_studio_mark.webp",
+    "title_bg": "art/ui_title_bg.webp"
   },
-  "stills": {}
+  "stills": {
+    "prologue_crownfall": "art/still_prologue_crownfall.webp",
+    "prologue_roads": "art/still_prologue_roads.webp",
+    "prologue_throne_wars": "art/still_prologue_throne_wars.webp",
+    "prologue_beginning": "art/still_prologue_beginning.webp",
+    "prologue_reunion": "art/still_prologue_reunion.webp",
+    "prologue_hours": "art/still_prologue_hours.webp",
+    "prologue_names": "art/still_prologue_names.webp",
+    "prologue_ordinary_days": "art/still_prologue_ordinary_days.webp",
+    "prologue_search": "art/still_prologue_search.webp"
+  }
 }

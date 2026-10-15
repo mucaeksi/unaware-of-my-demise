@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "title_key_art_01",
+  "class": "ui_image",
+  "source": {
+    "kind": "generated",
+    "pick": "01cbac0204b7",
+    "provenance": ".cache/generated/title_key_art_01/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 360000
+  },
+  "manifest": {
+    "ui": "title_bg"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

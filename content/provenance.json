@@ -86,9 +86,10 @@
     },
     {
       "output": "content/base/art/bg_forest_whispering_ash.webp",
-      "sha256": "8e1675b8a2615d4b336916a7b39f0b96d87b742d6a05958d7c077fe21cbcdb3b",
+      "sha256": "15c1567d2b6e3a355b7342332b0317eac6917920f0c782e64349ffd27ad45d92",
       "sources": {
-        "git:game/assets/backgrounds/forest_whispering_ash/side_arena_v001.png": "ccad123fd1a9d1bcf5a4ba43751e857d1e674c0058a81f7c4a3f9b62cc17667a"
+        "generated:bg_forest_whispering_ash_ordered@rev1": "dd405f5d88f8eeb0af968d3aee58a5299670b1ff235dc2ad4b81f530279821a3",
+        "entry": "883ca7bd1ffa77345c690c56e55c5f0ea1b5061e997a4ff7d7e60f8ffeeace10"
       }
     },
     {
@@ -120,8 +121,96 @@
       }
     },
     {
+      "output": "content/base/art/ui_studio_mark.webp",
+      "sha256": "bac50683f7839cc384a4af2827de9dc381d06f307a40f9c1b3d86214741c4b47",
+      "sources": {
+        "generated:studio_mark_01@rev1": "6f1e0c39dd1941151b31d784377d69bc86d75ee1afda1f00d0ce692dd3528066",
+        "entry": "3da658133c877598ac726b96bb29dac22b059d2b11af9ba66e94c9c4fce64760"
+      }
+    },
+    {
+      "output": "content/base/art/ui_title_bg.webp",
+      "sha256": "e02051f4907eef1e1ae9c65b3aacc11a58f476f59900394dd67757da58e60c4e",
+      "sources": {
+        "generated:title_key_art_01@rev1": "01cbac0204b7799db22a6de1944d768f2a9f87ef0ec0ec3669fd7f68d5473446",
+        "entry": "2bce27495da4e1d8f42e43ea4eeeabb0c6f4c24f01308d41c2d47a6a6aa14609"
+      }
+    },
+    {
+      "output": "content/base/art/still_prologue_crownfall.webp",
+      "sha256": "aa95cdc01cc2100cf5d2f7bff33e34803e01597372077dc71de4dbb546974188",
+      "sources": {
+        "generated:prologue_crownfall_crownfall@rev1": "41c1a374ef119a18de566e9ee1e3d1f12dc3da9359aae19da820911ae69f9ead",
+        "entry": "fd075a50603db02c8403d70e5d45eb9d412afbe388033cec8229f7b029e13b22"
+      }
+    },
+    {
+      "output": "content/base/art/still_prologue_roads.webp",
+      "sha256": "e39648cc80ebfe248facc21867f612dc9c676f0aa1d8e77b2f5fefb000d3ef68",
+      "sources": {
+        "generated:prologue_crownfall_roads@rev1": "1d2f95253ca3475a0604ecdadb815db8656f1946992bf93ace35a39bb88f9689",
+        "entry": "ca88255343d5220fd62bc63cce4582770a02e44650f8fb5a39fd9cd0940ff886"
+      }
+    },
+    {
+      "output": "content/base/art/still_prologue_throne_wars.webp",
+      "sha256": "6ff6809b81d48de64272764744c6cf3f650b6229ff5181fc92523c2a9ed68d85",
+      "sources": {
+        "generated:prologue_crownfall_throne_wars@rev1": "f6e83f37a42051ad41a4a9cf46e70ec118d95941cc5e2ddb104891b2a46653a0",
+        "entry": "4e78f35520c269a9ae602dd0fd51e46d03197b33f8b23a153846febc56049034"
+      }
+    },
+    {
+      "output": "content/base/art/still_prologue_beginning.webp",
+      "sha256": "8bb1f2bee3ec0059bca8bd41501e634b47bd928d58edb206baec0d59802083a7",
+      "sources": {
+        "generated:prologue_road_beginning@rev1": "30ddd5bcebc379320acf1bb87213211890b469c80e71d13de6d4ad7f9ff3bf8b",
+        "entry": "63d91361acf76d4724342888f133ccb27dc3c4a27f2e9a961ab4e4425d7cdb17"
+      }
+    },
+    {
+      "output": "content/base/art/still_prologue_reunion.webp",
+      "sha256": "093e700db33dc7c1fa665b9ce35cb60825867b9315274e9bcbe5824b7788bded",
+      "sources": {
+        "generated:prologue_road_reunion@rev1": "10c465475ce62d24d8b4401ead4610c44512a25940f1564ffdcd4bf04aa62ab7",
+        "entry": "b4da5f0a3e72d82913b70c0905b02bc681b4d60b8152afa6f47df899b95b4be6"
+      }
+    },
+    {
+      "output": "content/base/art/still_prologue_hours.webp",
+      "sha256": "2d6d72585235543db6845c0a78ee6fb9918d3a02b6843a503b833052e6f4f8ce",
+      "sources": {
+        "generated:prologue_village_hours@rev1": "638862582985937d2a9b55ed12c2e7ce11c381bcfed3627ee541d41f15b4df0a",
+        "entry": "90a19d68ebbd1811d8e235895cab10fe74e6edc9f2e5856049012e0cb7af0125"
+      }
+    },
+    {
+      "output": "content/base/art/still_prologue_names.webp",
+      "sha256": "2dda4dc9fa32484e08474839e75b9de3e7f0d14afa5155b452b8d5a673220a91",
+      "sources": {
+        "generated:prologue_village_names@rev1": "5a402e3ed6ca65e52b86370b3bef1c2f6468e850674473df5deb94f8275cbc83",
+        "entry": "d962224e2ba831b9d15295f4b0a2562d94fc077581b06fac159774c1041d8650"
+      }
+    },
+    {
+      "output": "content/base/art/still_prologue_ordinary_days.webp",
+      "sha256": "c3d212c1fb39fd2b764b8929639e9742587848a6cacb9009d77bf2299b41b18f",
+      "sources": {
+        "generated:prologue_village_ordinary_days@rev1": "a9f506df7437d4992b98138a05bd22a87298d7e5812596e5e7ba6edbcf8ebe7f",
+        "entry": "e40e5dd965008025ba8dbc645495e5fc97e55e82a9740c5dafc7b8008a4b8405"
+      }
+    },
+    {
+      "output": "content/base/art/still_prologue_search.webp",
+      "sha256": "bba5f9967d974e27cc9a00298d22128aa9c2726eb000f503fe991e77907f7996",
+      "sources": {
+        "generated:prologue_village_search@rev1": "4bca93bd1d2347a55716273b4b7bec37b767c39fe0e0c354f588420455609e11",
+        "entry": "8feacfbe5e127de21cfea62beff7fd12d408aafd9b06738db580f15c674f2b9c"
+      }
+    },
+    {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "d001e979629f7e2e2825d24a60df6cb3e555fca2bfe296050421f8977fc442e6",
+      "sha256": "df1a65d7ebe2944318d56626b83b44ea69dda87189f70e212aa513f275d31d39",
       "sources": {}
     },
     {

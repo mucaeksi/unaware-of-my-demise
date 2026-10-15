@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "prologue_village_ordinary_days",
+  "class": "still",
+  "source": {
+    "kind": "generated",
+    "pick": "a9f506df7437",
+    "provenance": ".cache/generated/prologue_village_ordinary_days/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 307200
+  },
+  "manifest": {
+    "still": "prologue_ordinary_days"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}
