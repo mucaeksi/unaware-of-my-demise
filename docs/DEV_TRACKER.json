@@ -1,22 +1,30 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "7e74074e922316f1994fa3ca610953aa3474d61d",
+  "sourceCommit": "99ca5ae2",
   "reviewedAt": "2026-10-15",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "R17",
     "status": "LOCAL_TESTED",
-    "nextProposed": "R18 — First store AAB acceptance and public release (blocked on physical Android device & live staging/keys)",
-    "workflow": "Argon 4 / Antigravity + Opus 5.5 delivered and locally verified R06 (effect_res, element_res, multi-wave encounters) and R09–R17 on main. Remaining R18 acceptance gates require external credentials, live staging deployment, and physical Android device testing."
+    "nextProposed": "Part I OTA Patch Preparation & R18 First Store AAB Acceptance",
+    "workflow": "Argon 4 / Antigravity delivered Base AAB v0.1.2 (Opening, Google Play Sign-In, Background Patch, 120s Prologue, 3-Stage Tutorial with LN reactive busts, 2-head SD Chibi combat, 3 wide panoramic battlefields, random-quote Patch Wait & auto client restart) plus R06 and R09–R17 on main."
   },
   "now": [
     {
-      "title": "R06 and R09–R17 local engineering complete and verified on main",
-      "detail": "Implemented and locally verified R06 (effect_res, element_res, multi-wave encounter progression), R09 (entry, narrative continuity, audio-gesture resume, native restart fallback, campaign progression target, first-clear vs repeat stage preview), R10 (battle layout candidates, safeArea inset helper, companion growth tabs, accessibility/quality settings), R11 (AndroidKeyStore session store, store offer disclosure, startup/resume purchase reconciliation, reactive UMP consent & child/teen ad policy, nonce-bound rewarded ad SSV, 21-table account erasure + deletion-on-restore, fail-closed Android release gates), R12 (Stage Sweep, Memory Shards excess conversion, AFK Idle Patrol, Mode Unlock Gates, Achievements, Seasonal Events, Profile/Leaderboards, Async Arena, Endless Corridor, multi-wave combat), R13 (admin mail threshold/CAS/pagination, release composer, R2 asset approval/provenance, release diff, sensitive approvals, Access MFA gate), R14 (atomic budget lock, batch reservations, failed/reconcile workflow, unchanged failed prompt guard, offline ingest & component-first slicer, A31 hygiene, --strict-art), R15 (pilot character attachment anchors, adult-age provenance, resolved hood/cape & studio mark, 8-pose contract, third-party credit separation, bond/tactical/expression UI), R16 (chronological variable-fee/material-gate simulator, final-boss repeat-5★ drop resolution, 80-token Daily Supplies recovery floor, reviewed JA voice transcript validator), and R17 (bounded snapshot-consistent D1 backup, index-backed monitoring prune/freshness, encrypted restore rehearsal, deletion-on-restore scrub, backup retention pruning, public Access edge probe, out-of-band R2/webhook alert persistence)."
+      "title": "Base AAB v0.1.2 & Online Gacha Entry Flow complete and pushed to main",
+      "detail": "Phaser Splash (retro-synth arpeggio + prism laser beam) -> ŞovTaym Studios (celestial astrolabe emblem + immediate Main Theme start) -> Tap-to-Start Title -> Google Play Sign-In -> Background Patch download -> 120s 9-scene Prologue (clean plates, no top counters) -> 3-Stage Tutorial with 6 Light Novel cutscenes (reactive character busts & motion expressions), 2-head SD Chibi combat (0.72x scale, multi-layer canvas VFX, Ultimate cut-ins) and 3 wide panoramic battlefields (forest_whispering_ash, forgotten_stone_crossing, shelter_courtyard_dusk) -> random-quote Patch Wait screen (14 cycling canon quotes) or immediate client restart into Part I Beginning / Company Hub."
+    },
+    {
+      "title": "Control Center (Admin Panel) & Asset Pipeline synchronized to v0.1.2",
+      "detail": "Added D1 assets.sql seeding (47 approved & Base AAB assets), inline visual/audio preview in Asset Catalog, interactive Live Preview scene jump presets (?preview_scene=), updated 2026-10-15 browser evidence gallery, and ContentService stale-patch base guard so older IndexedDB/R2 patches never overwrite new Base AAB v0.1.2 assets."
     }
   ],
   "next": [
+    {
+      "title": "First AAB Playtest & Part I OTA Patch Authoring",
+      "detail": "Owner playtest of the v0.1.2 Base AAB flow on staging/device, iterative polish of fine details, and authoring/packaging of Part I Beginning onwards as signed OTA patches."
+    },
     {
       "title": "R18 — Physical Android device, live staging, and first store AAB acceptance",
       "detail": "Requires owner-held upload keystore, live Cloudflare/Google/Play/AdMob credentials, age private key for live encrypted restore drill, and physical Android device execution of the 24 QA cases in docs/QA_ANDROID.md."
@@ -53,6 +61,18 @@
     }
   ],
   "ideas": [
+    {
+      "from": "owner",
+      "date": "2026-10-15",
+      "text": "Base AAB v0.1.2 flow: slow transitions, Phaser logo + SFX -> ŞovTaym Studios + Main Theme -> Tap to Start -> Google Play Sign-In -> background patch -> 120s Prologue -> 3-stage Tutorial with Light Novel reactive busts, smaller 2-head SD Chibis & wider/varied battlefields -> random-quote Patch Wait / auto client restart -> Part I via OTA Patch.",
+      "status": "done: D-22 (v0.1.2 delivered & verified)"
+    },
+    {
+      "from": "owner",
+      "date": "2026-10-15",
+      "text": "Synchronize and update the Control Center (Admin Panel) to reflect the latest v0.1.2 version, assets, screenshots and live preview.",
+      "status": "done: D1 assets.sql seed, visual/audio asset inspector, Live Preview scene jumpers & v0.1.2 evidence"
+    },
     {
       "from": "owner",
       "date": "2026-10-11",
@@ -99,7 +119,7 @@
       "from": "owner",
       "date": "2026-10-14",
       "text": "Finish R08 and push, then complete README/handoff and push once more; stop before R09. Argon 4 through Antigravity owns all further development, whole-game design, generated images, animation and GitHub delivery.",
-      "status": "R08 delivered; final documentation handoff is the enclosing commit. R09 remains OPEN and not started."
+      "status": "done: R06 and R09–R17 + D-22 Base AAB v0.1.2 delivered on main."
     }
   ],
   "evidence": [

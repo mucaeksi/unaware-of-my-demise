@@ -40,16 +40,80 @@ const evDir = join(ROOT, 'docs/evidence');
 const screens = existsSync(evDir)
   ? readdirSync(evDir)
       .filter((f) => f.endsWith('.webp'))
-      .sort()
+      .sort((a, b) => {
+        const aIsAab = a.startsWith('aab-') ? 0 : 1;
+        const bIsAab = b.startsWith('aab-') ? 0 : 1;
+        return aIsAab !== bIsAab ? aIsAab - bIsAab : a.localeCompare(b);
+      })
       .map((f) => {
         copyFileSync(join(evDir, f), join(OUT, 'evidence', f));
         return { file: f, caption: f.replace(/\.webp$/, '').replace(/[-_]+/g, ' ') };
       })
   : [];
 
+// Copy Base AAB & Approved Art media into /dev/media/ so the Control Center Assets & Development pages can render inline previews
+for (const sub of ['art', 'audio']) {
+  mkdirSync(join(OUT, 'media', sub), { recursive: true });
+  const baseSub = join(ROOT, 'content/base', sub);
+  if (existsSync(baseSub)) {
+    for (const f of readdirSync(baseSub).filter((n) => n.endsWith('.webp') || n.endsWith('.ogg'))) {
+      copyFileSync(join(baseSub, f), join(OUT, 'media', sub, f));
+    }
+  }
+}
+const appArtDir = join(ROOT, 'content/approved_art/art');
+if (existsSync(appArtDir)) {
+  for (const f of readdirSync(appArtDir).filter((n) => n.endsWith('.webp'))) {
+    copyFileSync(join(appArtDir, f), join(OUT, 'media', 'art', f));
+  }
+}
+
+const baseRel = JSON.parse(readFileSync(join(ROOT, 'content/base/release.json'), 'utf8')) as {
+  release: { id: string; generation: number; channel: string; notes: string };
+  compat: { min_client: string; content_schema: number };
+  files: { path: string; sha256: string; bytes: number; media_type: string; kind: string }[];
+};
+const entriesDir = join(ROOT, 'content/approved_art/entries');
+const approvedEntries = existsSync(entriesDir)
+  ? readdirSync(entriesDir)
+      .filter((f) => f.endsWith('.json'))
+      .sort()
+      .map((f) => {
+        const e = JSON.parse(readFileSync(join(entriesDir, f), 'utf8')) as {
+          asset_id: string;
+          class: string;
+          revision: number;
+          outputs: { path: string; sha256: string; bytes: number; width?: number; height?: number }[];
+          qc?: { human?: { status?: string; note?: string } };
+        };
+        return {
+          asset_id: e.asset_id,
+          class: e.class,
+          revision: e.revision,
+          path: e.outputs[0]?.path ?? '',
+          sha256: e.outputs[0]?.sha256 ?? '',
+          bytes: e.outputs[0]?.bytes ?? 0,
+          dims: e.outputs[0]?.width && e.outputs[0]?.height ? `${e.outputs[0].width}×${e.outputs[0].height}` : '',
+          note: e.qc?.human?.note ?? ''
+        };
+      })
+  : [];
+
+const baseRelease = {
+  id: baseRel.release.id,
+  generation: baseRel.release.generation,
+  minClient: baseRel.compat.min_client,
+  notes: baseRel.release.notes,
+  fileCount: baseRel.files.length,
+  totalBytes: baseRel.files.reduce((sum, x) => sum + x.bytes, 0),
+  approvedArtCount: approvedEntries.length,
+  approvedEntries
+};
+
 const count = (needle: string): number => roadmap.filter((r) => r.status.includes(needle)).length;
 writeFileSync(
   join(OUT, 'progress.json'),
-  JSON.stringify({ generatedAt: new Date().toISOString(), summary: { total: roadmap.length, done: count('✅'), partial: count('🟡'), missing: count('❌') }, roadmap, decisions, commits, screens, ...tracker }, null, 1)
+  JSON.stringify({ generatedAt: new Date().toISOString(), summary: { total: roadmap.length, done: count('✅'), partial: count('🟡'), missing: count('❌') }, baseRelease, roadmap, decisions, commits, screens, ...tracker }, null, 1)
 );
-console.log(`progress.json: ${roadmap.length} roadmap rows, ${decisions.length} decisions, ${commits.length} commits, ${screens.length} screens`);
+console.log(`progress.json: ${roadmap.length} roadmap rows, ${decisions.length} decisions, ${commits.length} commits, ${screens.length} screens, ${approvedEntries.length} approved art entries`);
+

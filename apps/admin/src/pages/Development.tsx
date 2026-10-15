@@ -4,9 +4,30 @@ import { api, ApiError, type Me } from '../api';
 import { ErrorNotice } from '../App';
 
 interface Item { title: string; detail: string }
+interface ApprovedEntrySummary {
+  asset_id: string;
+  class: string;
+  revision: number;
+  path: string;
+  sha256: string;
+  bytes: number;
+  dims: string;
+  note: string;
+}
+interface BaseReleaseSummary {
+  id: string;
+  generation: number;
+  minClient: string;
+  notes: string;
+  fileCount: number;
+  totalBytes: number;
+  approvedArtCount: number;
+  approvedEntries: ApprovedEntrySummary[];
+}
 interface Progress {
   generatedAt: string;
   summary: { total: number; done: number; partial: number; missing: number };
+  baseRelease?: BaseReleaseSummary;
   roadmap: { n: number; area: string; status: string; detail: string }[];
   decisions: { id: string; when: string; what: string; note: string }[];
   commits: { sha: string; at: string; subject: string }[];
@@ -20,13 +41,13 @@ interface Note { id: number; area: string; kind: string; body: string; status: s
 
 const TABS = ['Overview', 'Live preview', 'Screens', 'Feedback'] as const;
 type Tab = (typeof TABS)[number];
-const AREAS = ['General', 'Title', 'Company hub', 'Summon', 'Roster', 'Mail', 'Shop', 'Account', 'Battle', 'Story', 'Chapters', 'Control Center', 'Economy', 'Art direction'];
+const AREAS = ['General', 'Splash & Studio', 'Title', 'Prologue (120s)', 'Story', 'Battle', 'Patch Wait & Restart', 'Company hub', 'Summon', 'Roster', 'Mail', 'Shop', 'Account', 'Chapters', 'Control Center', 'Economy', 'Art direction'];
 
 /** Where the browser build of the game lives: the sibling Worker of this admin, or the local dev server. */
-function gameUrl(): string {
+function gameUrl(scene = ''): string {
   const h = window.location.hostname;
-  if (h === '127.0.0.1' || h === 'localhost') return 'http://127.0.0.1:8787/';
-  return `${window.location.protocol}//${h.replace(/^uomd-admin/, 'uomd-game')}/`;
+  const base = h === '127.0.0.1' || h === 'localhost' ? 'http://127.0.0.1:8787/' : `${window.location.protocol}//${h.replace(/^uomd-admin/, 'uomd-game')}/`;
+  return scene ? `${base}?preview_scene=${encodeURIComponent(scene)}` : base;
 }
 
 export function Development({ me, say }: { me: Me; say: (m: string) => void }): ReactNode {
@@ -61,7 +82,20 @@ const List = ({ title, items }: { title: string; items: Item[] }): ReactNode => 
 function Overview({ p }: { p: Progress }): ReactNode {
   return (
     <>
-      <p className="mono">Generated {p.generatedAt} from the repository (roadmap, decisions, git history).</p>
+      <p className="mono">Generated {p.generatedAt} from the repository (roadmap, decisions, git history, Base AAB v0.1.2 manifest).</p>
+      {p.baseRelease ? (
+        <section className="card" style={{ marginBottom: 14 }}>
+          <div className="row">
+            <h3 style={{ margin: 0 }}>Base AAB v0.1.2 &amp; Online Gacha Entry Pipeline</h3>
+            <span className="badge ok">{p.baseRelease.id} · gen {p.baseRelease.generation}</span>
+            <span className="badge ok">{p.baseRelease.fileCount} base files ({(p.baseRelease.totalBytes / (1024 * 1024)).toFixed(2)} MB)</span>
+            <span className="badge ok">{p.baseRelease.approvedArtCount} approved art entries</span>
+          </div>
+          <p style={{ margin: '8px 0 0', color: 'var(--dim)' }}>
+            <strong>Flow:</strong> Phaser Splash (retro-synth chime + prism laser) → ŞovTaym Studios (celestial astrolabe + Main Theme) → Title (Tap to Start → Google Play Sign-In → Background Patch) → 120s 9-Shot Prologue → 3-Stage Tutorial (6 Light Novel cutscenes with reactive busts, 2-head SD Chibis at 0.72x scale, 3 wide panoramic battlefields) → Random-Quote Patch Wait / Client Restart → Part I Beginning / Company Hub.
+          </p>
+        </section>
+      ) : null}
       <div className="grid">
         <List title="Working on now" items={p.now} />
         <List title="Next" items={p.next} />
@@ -95,21 +129,43 @@ const FRAMES: { label: string; w: number; h: number }[] = [
   { label: 'Phone 20:9', w: 1200, h: 540 }
 ];
 
+const SCENE_PRESETS: { id: string; label: string }[] = [
+  { id: '', label: '1. Full Flow (Phaser Splash)' },
+  { id: 'studio', label: '2. ŞovTaym Studios' },
+  { id: 'title', label: '3. Title (Tap to Start)' },
+  { id: 'prologue', label: '4. 120s Prologue' },
+  { id: 'story_t1', label: '5. Tutorial LN Story (Busts)' },
+  { id: 'battle_t1', label: '6. Battle T-1 (Whispering Ash)' },
+  { id: 'battle_t2', label: '7. Battle T-2 (Stone Crossing)' },
+  { id: 'battle_t3', label: '8. Battle T-3 (Shelter Courtyard)' },
+  { id: 'story_t3_after', label: '9. Tutorial T-3 Finale LN' },
+  { id: 'finish_wait', label: '10. Patch Wait (Quotes)' },
+  { id: 'hub', label: '11. Company Hub' }
+];
+
 function Preview(): ReactNode {
   const [f, setF] = useState(0);
+  const [scene, setScene] = useState('');
   const [nonce, setNonce] = useState(0);
   const frame = FRAMES[f] as (typeof FRAMES)[number];
-  const url = gameUrl();
+  const url = gameUrl(scene);
   return (
     <>
-      <p>The game as deployed on this environment (the last push to main). Phones are 20:9 landscape; the canvas letterboxes the same way a device does.</p>
-      <div className="row">
+      <p>The game as deployed on this environment (the last push to main). Jump directly to any scene in the v0.1.2 Base AAB flow below, or test the full entry sequence from the Phaser Splash.</p>
+      <div className="row" style={{ marginBottom: 8 }}>
         {FRAMES.map((x, i) => <button key={x.label} className={`btn${i === f ? ' primary' : ''}`} onClick={() => setF(i)}>{x.label}</button>)}
         <button className="btn" onClick={() => setNonce(nonce + 1)}>Reload</button>
         <a className="btn" href={url} target="_blank" rel="noreferrer">Open in a new tab</a>
       </div>
+      <div className="row" style={{ flexWrap: 'wrap', gap: 6 }}>
+        {SCENE_PRESETS.map((s) => (
+          <button key={s.id || 'full'} className={`btn${scene === s.id ? ' primary' : ''}`} onClick={() => { setScene(s.id); setNonce(nonce + 1); }}>
+            {s.label}
+          </button>
+        ))}
+      </div>
       <div style={{ maxWidth: '100%', overflow: 'auto', marginTop: 12 }}>
-        <iframe key={`${f}-${nonce}`} title="Game preview" src={url} width={frame.w} height={frame.h} style={{ border: '1px solid var(--edge, #444)', borderRadius: 8, background: '#0a0610', maxWidth: '100%' }} allow="autoplay; fullscreen" />
+        <iframe key={`${f}-${scene}-${nonce}`} title="Game preview" src={url} width={frame.w} height={frame.h} style={{ border: '1px solid var(--edge, #444)', borderRadius: 8, background: '#0a0610', maxWidth: '100%' }} allow="autoplay; fullscreen" />
       </div>
     </>
   );

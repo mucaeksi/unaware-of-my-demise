@@ -148,12 +148,40 @@ export class ContentService {
 
   // ------------------------------------------------------------------ typed content
 
+  private async isStaleBasePatch(): Promise<boolean> {
+    const state = await this.patch.state();
+    if (!state.active) return false;
+    const expected = this.base.files['art/bg_forgotten_stone_crossing.webp'];
+    if (!expected) return false;
+    return !state.active.manifest.files.some((f) => f.path === 'art/bg_forgotten_stone_crossing.webp' && f.sha256 === expected);
+  }
+
+  private async preferBaseFile(path: string): Promise<boolean> {
+    if (!Object.hasOwn(this.base.files, path)) return false;
+    if (path === 'chapters/chapter_index.json' || path === 'units/unit_pack.json' || path === 'art/art_manifest.json') return false;
+    return this.isStaleBasePatch();
+  }
+
+  private async locateResolved(path: string): Promise<{ source: 'base' | 'patch'; sha256: string }> {
+    if (await this.preferBaseFile(path)) {
+      return { source: 'base', sha256: this.base.files[path]! };
+    }
+    return this.patch.locate(path);
+  }
+
+  private async readResolved(path: string): Promise<Uint8Array> {
+    if (await this.preferBaseFile(path)) {
+      return this.base.read(path);
+    }
+    return this.patch.read(path);
+  }
+
   private async json<T>(path: string, schema: { parse(v: unknown): T }): Promise<T> {
-    const loc = await this.patch.locate(path);
+    const loc = await this.locateResolved(path);
     const cached = this.jsonCache.get(loc.sha256);
     if (cached !== undefined) { this.jsonCache.delete(loc.sha256); this.jsonCache.set(loc.sha256, cached); return cached.value as T; }
-    const bytes = await this.patch.read(path);
-    const actual = await this.patch.locate(path);
+    const bytes = await this.readResolved(path);
+    const actual = await this.locateResolved(path);
     if (actual.sha256 !== loc.sha256) { this.storageNotice = 'Some downloaded content was lost. A healthy version was restored; reconnect to update.'; return this.json(path, schema); }
     const parsed = schema.parse(JSON.parse(dec.decode(bytes)));
     this.jsonCache.set(loc.sha256, { value: parsed, bytes: bytes.byteLength });
@@ -164,7 +192,7 @@ export class ContentService {
 
   async has(path: string): Promise<boolean> {
     const state = await this.patch.state();
-    return (state.active?.manifest.files.some((f) => f.path === path) ?? false) || (!state.active || !!state.active.manifest.depends_on) && Object.hasOwn(this.base.files, path);
+    return (state.active?.manifest.files.some((f) => f.path === path) ?? false) || (!state.active || !!state.active.manifest.depends_on || await this.isStaleBasePatch()) && Object.hasOwn(this.base.files, path);
   }
   async presentation(): Promise<PresentationPack> { return await this.has(PRESENTATION_PATH) ? this.json(PRESENTATION_PATH, PresentationPack) : PresentationPack.parse({ schema_version: 1 }); }
   async locale(locale = prefs().locale): Promise<LocalePack | undefined> {
@@ -176,8 +204,25 @@ export class ContentService {
   unitPack(): Promise<UnitPack> {
     return this.json('units/unit_pack.json', UnitPack);
   }
-  art(): Promise<ArtManifest> {
-    return this.json('art/art_manifest.json', ArtManifest);
+  async art(): Promise<ArtManifest> {
+    const patchArt = await this.json('art/art_manifest.json', ArtManifest);
+    if (!(await this.isStaleBasePatch())) return patchArt;
+    const baseArt = ArtManifest.parse(JSON.parse(dec.decode(await this.base.read('art/art_manifest.json'))));
+    return ArtManifest.parse({
+      schema_version: 1,
+      atlases: { ...patchArt.atlases, ...baseArt.atlases },
+      units: { ...patchArt.units, ...baseArt.units },
+      portraits: { ...patchArt.portraits, ...baseArt.portraits },
+      backgrounds: {
+        ...patchArt.backgrounds,
+        ...baseArt.backgrounds,
+        ...(baseArt.backgrounds.forgotten_stone_crossing ? { bridge_forsaken: baseArt.backgrounds.forgotten_stone_crossing } : {}),
+        ...(baseArt.backgrounds.shelter_courtyard_dusk ? { village_oakhaven: baseArt.backgrounds.shelter_courtyard_dusk } : {})
+      },
+      music: { ...patchArt.music, ...baseArt.music },
+      ui: { ...patchArt.ui, ...baseArt.ui },
+      stills: { ...patchArt.stills, ...baseArt.stills }
+    });
   }
   chapters(): Promise<ChapterIndex> {
     return this.json('chapters/chapter_index.json', ChapterIndex);
@@ -200,12 +245,12 @@ export class ContentService {
 
   /** Owners pin a resource through scene/media shutdown; unowned lookups have a bounded transient cache. */
   async asset(path: string, owner?: object, decodedBytes = 0): Promise<AssetRef> {
-    const loc = await this.patch.locate(path);
+    const loc = await this.locateResolved(path);
     const key = `${path}@${loc.sha256}`;
     let record = this.assets.get(key);
     if (!record) {
-      const bytes = await this.patch.read(path);
-      if ((await this.patch.locate(path)).sha256 !== loc.sha256) { this.storageNotice = 'Some downloaded content was lost. A healthy version was restored; reconnect to update.'; return this.asset(path, owner, decodedBytes); }
+      const bytes = await this.readResolved(path);
+      if ((await this.locateResolved(path)).sha256 !== loc.sha256) { this.storageNotice = 'Some downloaded content was lost. A healthy version was restored; reconnect to update.'; return this.asset(path, owner, decodedBytes); }
       if (this.assets.has(key)) return this.asset(path, owner, decodedBytes);
       const dimensions = imageSize(path, bytes);
       const base = this.base.files[path] === loc.sha256;

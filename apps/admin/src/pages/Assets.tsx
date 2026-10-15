@@ -99,7 +99,23 @@ export function Assets({ me, say }: { me: Me; say: (m: string) => void }): React
         <tbody>
           {rows.length === 0 ? <tr><td colSpan={7}>No assets registered yet.</td></tr> : rows.map((a) => (
             <tr key={a.id}>
-              <td><code>{a.path}</code><div className="mono">{a.sha256.slice(0, 16)}…</div></td>
+              <td>
+                <div className="row" style={{ gap: 10 }}>
+                  {a.path.endsWith('.webp') ? (
+                    <img
+                      src={`/dev/media/${a.path}`}
+                      alt=""
+                      loading="lazy"
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      style={{ width: 56, height: 36, objectFit: 'cover', borderRadius: 4, border: '1px solid var(--edge, #444)', background: '#0a0610' }}
+                    />
+                  ) : null}
+                  <div>
+                    <code>{a.path}</code>
+                    <div className="mono">{a.sha256.slice(0, 16)}…</div>
+                  </div>
+                </div>
+              </td>
               <td>{a.kind}</td>
               <td>{(a.bytes / 1024).toFixed(0)} KB</td>
               <td><span className={`badge ${a.status === 'approved' ? 'ok' : 'warn'}`}>{a.status}</span></td>
@@ -124,6 +140,23 @@ export function Assets({ me, say }: { me: Me; say: (m: string) => void }): React
           </div>
           <p className="mono">SHA-256: {detail.sha256} · {detail.bytes} bytes · {detail.media_type} · kind: {detail.kind} · status: {detail.status} · by {detail.created_by}</p>
           <p className="mono">Source: {detail.source} · License: {detail.license}</p>
+          {detail.path.endsWith('.webp') ? (
+            <div style={{ marginTop: 10 }}>
+              <a href={`/dev/media/${detail.path}`} target="_blank" rel="noreferrer">
+                <img
+                  src={`/dev/media/${detail.path}`}
+                  alt={detail.path}
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                  style={{ maxWidth: 640, maxHeight: 360, borderRadius: 6, border: '1px solid var(--edge, #444)', background: '#0a0610' }}
+                />
+              </a>
+            </div>
+          ) : null}
+          {detail.path.endsWith('.ogg') ? (
+            <div style={{ marginTop: 10 }}>
+              <audio controls src={`/dev/media/${detail.path}`} style={{ width: '100%', maxWidth: 480 }} />
+            </div>
+          ) : null}
         </section>
       ) : null}
       {me.role !== 'viewer' ? (

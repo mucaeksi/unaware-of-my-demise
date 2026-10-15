@@ -42,12 +42,60 @@ export class BootScene extends Phaser.Scene {
     void loadCurrencyName(API_BASE);
     // the engine credit plays while content and menu art load behind it
     const ready = this.loadEverything();
+    const previewScene = new URLSearchParams(window.location.search).get('preview_scene');
+    if (previewScene && previewScene !== 'splash') {
+      void ready.then((ok) => {
+        if (!ok) return;
+        void prefs();
+        document.getElementById('boot')?.classList.add('done');
+        this.startPreviewScene(previewScene);
+      });
+      return;
+    }
     this.scene.launch('Splash', { ready } satisfies SplashInit); // Boot stays alive: its loader serves the loads above until Splash ends it
     void ready.then((ok) => {
       if (ok) {
         void prefs();
       }
     });
+  }
+
+  private startPreviewScene(target: string): void {
+    switch (target) {
+      case 'studio':
+        this.scene.start('Studio');
+        break;
+      case 'title':
+        this.scene.start('Title');
+        break;
+      case 'prologue':
+        this.scene.start('Prologue');
+        break;
+      case 'story_t1':
+        this.scene.start('Story', { sceneId: 'tutorial_t1_before', next: { kind: 'battle', encounterId: 'tutorial_t1', nodeId: 'tutorial_1' } });
+        break;
+      case 'battle_t1':
+        this.scene.start('Battle', { encounterId: 'tutorial_t1', nodeId: 'tutorial_1' });
+        break;
+      case 'battle_t2':
+        this.scene.start('Battle', { encounterId: 'tutorial_t2', nodeId: 'tutorial_2' });
+        break;
+      case 'battle_t3':
+        this.scene.start('Battle', { encounterId: 'tutorial_t3', nodeId: 'tutorial_3' });
+        break;
+      case 'story_t3_after':
+        this.scene.start('Story', { sceneId: 'tutorial_t3_after', next: { kind: 'finish' } });
+        break;
+      case 'finish_wait':
+        this.scene.start('Finish');
+        break;
+      case 'hub':
+        this.scene.start('Home');
+        break;
+      default:
+        this.scene.start('Title');
+        break;
+    }
   }
 
   /** Content service, art library and the menu art. Reports a fatal startup error on the page and resolves false when it fails. */
