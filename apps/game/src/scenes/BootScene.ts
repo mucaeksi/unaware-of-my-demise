@@ -12,10 +12,7 @@ import phaserLogoUrl from '../assets/phaser-pixel-large-shaded.png';
 import { Services } from '../services';
 import type { SplashInit } from './SplashScene';
 
-const UPDATE_TIMEOUT_MS = 4000;
-
 export class BootScene extends Phaser.Scene {
-  private backgroundUpdate = false;
   constructor() {
     super('Boot');
   }
@@ -48,8 +45,6 @@ export class BootScene extends Phaser.Scene {
     this.scene.launch('Splash', { ready } satisfies SplashInit); // Boot stays alive: its loader serves the loads above until Splash ends it
     void ready.then((ok) => {
       if (ok) {
-        // first install: the download starts after sign-in (PatchService); only returning players check silently at boot
-        if (this.backgroundUpdate && loadEntry().phase === 'completed') { this.scene.launch('PatchBar'); void Services.patches.start(); }
         void prefs();
       }
     });
@@ -60,12 +55,8 @@ export class BootScene extends Phaser.Scene {
     try {
       Services.content = await ContentService.create();
       // after the first-install flow the downloaded release is switched on here, before any art is loaded (no network involved)
-      this.backgroundUpdate = false;
       if (loadEntry().phase === 'completed') {
         await Services.content.activateStaged();
-        const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), UPDATE_TIMEOUT_MS);
-        try { const outcome = await Services.content.checkForUpdates({ signal: controller.signal }); this.backgroundUpdate = outcome.status === 'offline' || outcome.status === 'rejected'; }
-        finally { clearTimeout(timer); }
       }
       const art = await Services.refreshArt();
       await art.loadUi(this);

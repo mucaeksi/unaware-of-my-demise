@@ -129,10 +129,10 @@ export class BattleScene extends Phaser.Scene {
     for (const s of this.pack.rules.statuses) this.statusNames.set(s.status_id, { name: s.name_en, category: s.category });
     this.buildWorld();
     this.buildHud();
-    sceneFadeIn(this, 600);
+    sceneFadeIn(this, 1200);
     const m = this.encounter.music_cue ? art.music(this.encounter.music_cue) : null;
-    if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 1.6);
-    await this.wait(500);
+    if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 1.8);
+    await this.wait(650);
     for (const event of this.battle.log) if (event.type === 'phase_change') await this.phaseStory(event.unit, event.phase);
     if (this.dead) return;
     await this.loop();
@@ -150,14 +150,28 @@ export class BattleScene extends Phaser.Scene {
     const q = qualityProfile();
     const insets = safeInsets(this);
     const insetX = Math.max(insets.left, insets.right);
-    const bg = this.add.image(REF_W / 2, 0, art.background(this.encounter.location_id)).setOrigin(0.5, 0).setDepth(DEPTH.bg);
-    bg.setScale(Math.max(REF_W / bg.width, REF_H / bg.height));
+    const bg = this.add.image(REF_W / 2, REF_H / 2, art.background(this.encounter.location_id)).setOrigin(0.5, 0.5).setDepth(DEPTH.bg);
+    const baseCover = Math.max(REF_W / bg.width, REF_H / bg.height) * 1.1;
+    bg.setScale(baseCover);
+    if (!prefs().reducedMotion) {
+      this.tweens.add({
+        targets: bg,
+        x: { from: REF_W / 2 - 26, to: REF_W / 2 + 26 },
+        scale: baseCover * 1.035,
+        duration: 26000,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut'
+      });
+    }
     const grade = this.add.graphics().setDepth(DEPTH.bg + 2);
-    grade.fillGradientStyle(0x0a0610, 0x0a0610, 0x0a0610, 0x0a0610, 0.35, 0.35, 0.65, 0.65);
-    grade.fillRect(0, 0, REF_W, REF_H);
+    grade.fillGradientStyle(0x0a0610, 0x0a0610, 0x0a0610, 0x0a0610, 0.28, 0.28, 0.04, 0.04);
+    grade.fillRect(0, 0, REF_W, 240);
+    grade.fillGradientStyle(0x0a0610, 0x0a0610, 0x0a0610, 0x0a0610, 0.04, 0.04, 0.62, 0.62);
+    grade.fillRect(0, REF_H - 320, REF_W, 320);
     if (q.vignette) {
       try {
-        this.cameras.main.filters.external.addVignette(0.5, 0.5, 0.82, 0.3);
+        this.cameras.main.filters.external.addVignette(0.5, 0.5, 0.85, 0.24);
       } catch {
         /* cosmetic */
       }

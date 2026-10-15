@@ -56,14 +56,14 @@ export class UnitView extends Phaser.GameObjects.Container {
     const pal = BattleVfx.palette(this.element);
     BattleVfx.ensureTextures(scene);
 
-    this.shadow = scene.add.ellipse(0, 0, u.heightPx * 0.64, u.heightPx * 0.14, 0x000000, 0.48);
+    this.shadow = scene.add.ellipse(0, 0, u.heightPx * 0.58, u.heightPx * 0.13, 0x000000, 0.48);
     this.auraRing = scene.add
       .image(0, 2, 'fx_ring')
       .setTint(init.side === 'player' ? pal.primary : 0xe55b8a)
       .setBlendMode(Phaser.BlendModes.ADD)
-      .setScale(0.46 * init.spot.depthScale, 0.18 * init.spot.depthScale)
+      .setScale(0.36 * init.spot.depthScale, 0.14 * init.spot.depthScale)
       .setAlpha(0.28);
-    this.ring = scene.add.ellipse(0, 0, u.heightPx * 0.78, u.heightPx * 0.17, C.silver, 0).setStrokeStyle(4, C.goldHi, 0);
+    this.ring = scene.add.ellipse(0, 0, u.heightPx * 0.72, u.heightPx * 0.16, C.silver, 0).setStrokeStyle(4, C.goldHi, 0);
     this.sprite = scene.add.sprite(0, 0, u.textureKey);
     this.add([this.shadow, this.auraRing, this.ring, this.sprite]);
 
@@ -72,27 +72,27 @@ export class UnitView extends Phaser.GameObjects.Container {
     this.applyState('idle');
 
     // plate under the feet
-    const plateY = 38;
+    const plateY = 30;
     const plateBg = scene.add
-      .rectangle(0, init.side === 'player' ? 24 : 26, 244, init.side === 'player' ? 68 : 74, 0x0a0610, 0.68)
+      .rectangle(0, init.side === 'player' ? 22 : 24, 218, init.side === 'player' ? 62 : 68, 0x0a0610, 0.68)
       .setStrokeStyle(1.5, init.side === 'player' ? C.player : C.enemy, 0.48);
     const nameT = txt(scene, 0, 0, init.name.toUpperCase(), {
       fontFamily: F.display,
-      fontSize: '22px',
+      fontSize: '20px',
       fontStyle: '600',
       color: init.side === 'player' ? '#cfe0ff' : '#ffb3c4',
       stroke: '#0a0610',
       strokeThickness: 4,
     }).setOrigin(0.5);
-    this.hpBar = new Bar(scene, 0, 26, 210, 13, hpColor);
+    this.hpBar = new Bar(scene, 0, 24, 188, 12, hpColor);
     this.hpBar.set(init.hp / init.maxHp, false);
-    this.focusBar = init.side === 'player' ? new Bar(scene, 0, 44, 210, 8, () => C.focus) : null;
+    this.focusBar = init.side === 'player' ? new Bar(scene, 0, 40, 188, 7, () => C.focus) : null;
     this.focusBar?.set(0, false);
-    this.shieldText = txt(scene, 112, 26, '', { fontSize: '22px', color: T.shield, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0, 0.5);
-    this.statusText = txt(scene, 0, init.side === 'player' ? 66 : 48, '', { fontSize: '20px', color: '#e0d4ee', stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5);
-    this.intentText = txt(scene, 0, init.side === 'player' ? 66 : 52, '', {
+    this.shieldText = txt(scene, 100, 24, '', { fontSize: '20px', color: T.shield, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0, 0.5);
+    this.statusText = txt(scene, 0, init.side === 'player' ? 60 : 44, '', { fontSize: '18px', color: '#e0d4ee', stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5);
+    this.intentText = txt(scene, 0, init.side === 'player' ? 60 : 48, '', {
       fontFamily: F.display,
-      fontSize: '20px',
+      fontSize: '18px',
       fontStyle: '600',
       color: '#ffb3c4',
       stroke: '#0a0610',
@@ -113,11 +113,11 @@ export class UnitView extends Phaser.GameObjects.Container {
         this.intentText,
       ])
       .setDepth(DEPTH.hud - 60);
-    this.marker = txt(scene, 0, 0, '▼', { fontSize: '44px', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setVisible(false);
+    this.marker = txt(scene, 0, 0, '▼', { fontSize: '42px', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setVisible(false);
     this.add(this.marker);
     this.placeTags();
 
-    const w = u.heightPx * 0.8;
+    const w = u.heightPx * 0.85;
     this.setSize(w, u.heightPx * this.spot.depthScale);
     this.setInteractive(new Phaser.Geom.Rectangle(-w / 2, -u.heightPx * this.spot.depthScale, w, u.heightPx * this.spot.depthScale + 70), Phaser.Geom.Rectangle.Contains);
     scene.add.existing(this);
@@ -128,7 +128,7 @@ export class UnitView extends Phaser.GameObjects.Container {
   glideTo(spot: Spot): void {
     this.spot = spot;
     this.scene.tweens.add({ targets: this, x: spot.x, y: spot.y, duration: 320, ease: 'Quad.easeInOut' });
-    this.scene.tweens.add({ targets: this.plate, x: spot.x, y: spot.y + 38, duration: 320, ease: 'Quad.easeInOut' });
+    this.scene.tweens.add({ targets: this.plate, x: spot.x, y: spot.y + 30, duration: 320, ease: 'Quad.easeInOut' });
   }
 
   private placeTags(): void {

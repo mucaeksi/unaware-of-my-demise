@@ -15,7 +15,8 @@ import { Button, panel, sceneFadeIn, title, toast, txt } from '../ui/kit';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
 import { playNode, resolveNextCampaignNode } from '../flow';
 import { RANDOM_GAME_QUOTES } from '../entry/strings';
-import { ensurePatchBar } from '../patch/PatchBar';
+import { barFill } from '../patch/barFill';
+import { formatBytes } from '../ui/format';
 
 
 const TITLE_CUE = 'bgm_ch1_ash_forest_calm';
@@ -383,7 +384,7 @@ export class TitleScene extends Phaser.Scene {
     }).setOrigin(0, 0.5);
 
     const trackW = 1070;
-    const track = this.add.rectangle(0, 32, trackW, 14, 0x09050e, 0.95).setStrokeStyle(1.5, C.goldDim, 0.7);
+    const track = this.add.rectangle(0, 32, trackW, 14, 0x09050e, 0.95).setStrokeStyle(1.5, C.gold, 0.65);
     const fill = this.add.rectangle(-trackW / 2, 32, 80, 10, C.goldHi, 0.95).setOrigin(0, 0.5);
     const pctTxt = txt(this, 535, -42, 'AUTH', {
       fontFamily: F.display,
@@ -392,9 +393,14 @@ export class TitleScene extends Phaser.Scene {
       color: T.gold
     }).setOrigin(1, 0.5);
 
+    const fmtQuote = (idx: number): string => {
+      const q = RANDOM_GAME_QUOTES[idx];
+      return q ? `${q.quote}   — ${q.speaker}` : '';
+    };
+
     // Random quote underneath the patch box
     let quoteIdx = Math.floor(Math.random() * RANDOM_GAME_QUOTES.length);
-    const quoteTxt = txt(this, 0, 118, RANDOM_GAME_QUOTES[quoteIdx] ?? '', {
+    const quoteTxt = txt(this, 0, 118, fmtQuote(quoteIdx), {
       fontFamily: F.body,
       fontSize: '23px',
       fontStyle: 'italic 500',
@@ -425,7 +431,7 @@ export class TitleScene extends Phaser.Scene {
           duration: 300,
           onComplete: () => {
             if (!quoteTxt.active) return;
-            quoteTxt.setText(RANDOM_GAME_QUOTES[quoteIdx] ?? '');
+            quoteTxt.setText(fmtQuote(quoteIdx));
             this.tweens.add({ targets: quoteTxt, alpha: 1, duration: 400 });
           }
         });
@@ -469,12 +475,11 @@ export class TitleScene extends Phaser.Scene {
     pctTxt.setText('PATCH');
     this.tweens.add({ targets: fill, width: Math.round(trackW * 0.42), duration: 550, ease: 'Sine.easeOut' });
 
-    Services.patches.start();
+    void Services.patches.start();
     void this.refreshChip();
 
     if (this.firstRun) {
       // First-time player: keep patch running in background and transition slowly into Prologue / Tutorial
-      ensurePatchBar(this.game);
       await this.waitMs(850);
       if (!this.sys.isActive()) return;
       this.tweens.add({ targets: fill, width: trackW, duration: 420, ease: 'Sine.easeOut' });
@@ -487,15 +492,14 @@ export class TitleScene extends Phaser.Scene {
     }
 
     // Post-tutorial / Returning player: wait if patch is currently checking/downloading
-    while (this.sys.isActive() && Services.patches.get().kind === 'checking') {
-      const p = Services.patches.get();
-      if (p.kind === 'checking' && p.progress && p.progress.totalBytes > 0) {
-        const ratio = Math.min(1, Math.max(0.15, p.progress.downloadedBytes / p.progress.totalBytes));
-        fill.width = Math.round(trackW * ratio);
-        pctTxt.setText(`${Math.round(ratio * 100)}%`);
-        patchSub.setText(
-          `Downloading patch ${p.progress.releaseId} · ${p.progress.completedFiles}/${p.progress.totalFiles} files`
-        );
+    while (this.sys.isActive() && Services.patches.get().kind === 'running') {
+      const st = Services.patches.get();
+      const ratio = Math.min(1, Math.max(0.2, barFill(st) ?? 0.2));
+      fill.width = Math.round(trackW * ratio);
+      pctTxt.setText(`${Math.round(ratio * 100)}%`);
+      const p = st.kind === 'running' ? st.progress : null;
+      if (p && p.bytesTotal > 0) {
+        patchSub.setText(`Downloading patch · ${formatBytes(p.bytesDone)} / ${formatBytes(p.bytesTotal)}`);
       }
       await this.waitMs(180);
     }

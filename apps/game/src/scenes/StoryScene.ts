@@ -27,6 +27,13 @@ interface Actor {
   side: 'left' | 'right';
   image: Phaser.GameObjects.Image;
   emotion: string;
+  baseX: number;
+  baseY: number;
+  offsetX: number;
+  offsetY: number;
+  tiltDeg: number;
+  scaleMult: number;
+  breatheTween: Phaser.Tweens.Tween | null;
 }
 
 export class StoryScene extends Phaser.Scene {
@@ -42,6 +49,7 @@ export class StoryScene extends Phaser.Scene {
   private box!: Phaser.GameObjects.Container;
   private nameText!: Phaser.GameObjects.Text;
   private namePlate!: Phaser.GameObjects.Container;
+  private actionBadge!: Phaser.GameObjects.Text;
   private bodyText!: Phaser.GameObjects.Text;
   private caret!: Phaser.GameObjects.Text;
   private typing: Phaser.Time.TimerEvent | null = null;
@@ -63,7 +71,6 @@ export class StoryScene extends Phaser.Scene {
   private pausing = false;
   private prevSpeaker: string | null = null;
   private lastLineId: string | null = null;
-  private illustration: Phaser.GameObjects.Image | null = null;
 
   constructor() {
     super('Story');
@@ -83,7 +90,6 @@ export class StoryScene extends Phaser.Scene {
     this.pausing = false;
     this.prevSpeaker = null;
     this.currentLine = null;
-    this.illustration = null;
     this.lineDone = true;
     this.typing = null;
     this.autoTimer = null;
@@ -128,11 +134,10 @@ export class StoryScene extends Phaser.Scene {
         if (c.op === 'say') addEmotion(c.speaker, c.emotion ?? 'composed');
         if (c.op === 'music' && c.cue_id !== 'stop') cues.add(c.cue_id);
       }
-      const hasStill = Boolean(this.data0.illustration_id && art.art.stills[this.data0.illustration_id]);
+      // Always load original character portraits so all cutscenes stage the canonical character busts
       await Promise.all([
         ...[...locations].map((id) => art.loadBackground(this, id)),
-        this.data0.illustration_id ? art.loadStills(this, [this.data0.illustration_id]).catch(() => undefined) : Promise.resolve(),
-        hasStill ? Promise.resolve() : art.loadPortraits(this, [...chars], charEmotions),
+        art.loadPortraits(this, [...chars], charEmotions),
         ...[...cues].map((q) => art.loadMusic(this, q))
       ]);
     } catch (e) {
@@ -145,7 +150,7 @@ export class StoryScene extends Phaser.Scene {
     this.runner = new StoryRunner(this.data0, savedCp?.state);
     this.build();
     this.restoreFromRunner();
-    sceneFadeIn(this, 500);
+    sceneFadeIn(this, 1300);
     this.pump();
   }
 
@@ -162,24 +167,40 @@ export class StoryScene extends Phaser.Scene {
     const { art } = Services.ready();
     this.bg = this.add.image(REF_W / 2, REF_H / 2, art.background(this.data0.location_id)).setDepth(DEPTH.bg);
     const cover = Math.max(REF_W / this.bg.width, REF_H / this.bg.height);
-    this.bg.setScale(cover * 1.02);
-    if (!prefs().reducedMotion) this.tweens.add({ targets: this.bg, scale: cover * 1.08, duration: 40000, ease: 'Sine.easeInOut', yoyo: true, repeat: -1 });
-
-    // a shared illustration (roadside_rest, shelter_evening) replaces the backdrop and the portraits for the whole scene when the content ships it
-    const illustrationKey = this.data0.illustration_id ? art.still(this.data0.illustration_id) : null;
-    if (illustrationKey) {
-      this.illustration = this.add.image(REF_W / 2, REF_H / 2, illustrationKey).setDepth(DEPTH.bg + 1);
-      const illCover = Math.max(REF_W / this.illustration.width, REF_H / this.illustration.height);
-      this.illustration.setScale(illCover * 1.01);
-      if (!prefs().reducedMotion) {
-        this.tweens.add({ targets: this.illustration, scale: illCover * 1.05, duration: 36000, ease: 'Sine.easeInOut', yoyo: true, repeat: -1 });
-      }
-      this.bg.setAlpha(0);
+    this.bg.setScale(cover * 1.04);
+    if (!prefs().reducedMotion) {
+      this.tweens.add({
+        targets: this.bg,
+        scale: cover * 1.09,
+        x: REF_W / 2 - 18,
+        duration: 36000,
+        ease: 'Sine.easeInOut',
+        yoyo: true,
+        repeat: -1
+      });
     }
 
-    // Grade the world below the HUD so dialogue and reader controls keep their contrast.
+    // Subtle atmospheric ash & ember motes behind the character busts
+    if (!prefs().reducedMotion && this.textures.exists('fx_spark')) {
+      this.add
+        .particles(0, 0, 'fx_spark', {
+          x: { min: 0, max: REF_W },
+          y: REF_H - 180,
+          lifespan: 9500,
+          speedY: { min: -42, max: -16 },
+          speedX: { min: -14, max: 14 },
+          scale: { min: 0.04, max: 0.13 },
+          alpha: { start: 0.28, end: 0 },
+          frequency: 420,
+          tint: [0xc9b6e4, 0xe3c37d, 0xefe8f5],
+          blendMode: 'ADD'
+        })
+        .setDepth(DEPTH.bg + 2);
+    }
+
+    // Grade the world below the HUD so Light Novel dialogue and original character busts keep rich contrast.
     const shade = this.add.graphics().setDepth(DEPTH.bg + 5);
-    shade.fillGradientStyle(0x0a0610, 0x0a0610, 0x0a0610, 0x0a0610, 0.05, 0.05, 0.7, 0.7);
+    shade.fillGradientStyle(0x0a0610, 0x0a0610, 0x0a0610, 0x0a0610, 0.08, 0.08, 0.76, 0.76);
     shade.fillRect(0, 0, REF_W, REF_H);
 
     // tap anywhere to advance; buttons sit above this zone
@@ -189,13 +210,51 @@ export class StoryScene extends Phaser.Scene {
     this.input.keyboard?.on('keydown-ENTER', () => this.advance());
 
     const insets = safeInsets(this);
-    const panelBg = panel(this, 0, 0, 1640, 250, 'normal');
-    this.nameText = txt(this, 0, 0, '', { fontFamily: F.display, fontSize: '36px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5);
-    const plateBg = panel(this, 0, 0, 380, 72, 'hot');
+    const panelBg = panel(this, 0, 0, 1680, 264, 'normal');
+    // Light Novel ornamental inner rule inside the reader box
+    const lnFrame = this.add.graphics();
+    lnFrame.lineStyle(1, C.gold, 0.32);
+    lnFrame.lineBetween(-790, -104, 790, -104);
+    lnFrame.lineBetween(-790, 104, 790, 104);
+
+    this.nameText = txt(this, 0, 0, '', {
+      fontFamily: F.display,
+      fontSize: '34px',
+      fontStyle: '700',
+      color: T.gold,
+      stroke: '#0a0610',
+      strokeThickness: 4
+    })
+      .setOrigin(0.5)
+      .setLetterSpacing(3);
+    const plateBg = panel(this, 0, 0, 390, 70, 'hot');
     this.namePlate = this.add.container(0, 0, [plateBg, this.nameText]).setDepth(DEPTH.hud + 2).setVisible(false);
-    this.bodyText = txt(this, -770, -88, '', { fontSize: '40px', color: T.text, lineSpacing: 6, wordWrap: { width: 1540 } });
-    this.caret = txt(this, 770, 86, '▼', { fontSize: '32px', color: T.gold }).setOrigin(1, 0.5).setVisible(false);
-    this.box = this.add.container(REF_W / 2, 902 - insets.bottom, [panelBg, this.bodyText, this.caret]).setDepth(DEPTH.hud);
+
+    this.actionBadge = txt(this, 0, -96, '', {
+      fontFamily: F.display,
+      fontSize: '20px',
+      fontStyle: '600',
+      color: '#e3c37d',
+      stroke: '#0a0610',
+      strokeThickness: 3
+    })
+      .setOrigin(0.5)
+      .setLetterSpacing(4)
+      .setAlpha(0.88);
+
+    this.bodyText = txt(this, -780, -68, '', {
+      fontFamily: F.body,
+      fontSize: '41px',
+      color: T.text,
+      lineSpacing: 10,
+      wordWrap: { width: 1560 },
+      stroke: '#07040c',
+      strokeThickness: 3
+    });
+    this.caret = txt(this, 780, 88, '▼', { fontSize: '32px', color: T.gold }).setOrigin(1, 0.5).setVisible(false);
+    this.box = this.add
+      .container(REF_W / 2, 902 - insets.bottom, [panelBg, lnFrame, this.actionBadge, this.bodyText, this.caret])
+      .setDepth(DEPTH.hud);
 
     this.voiceBtn = new Button(this, REF_W - 160 - insets.right, 210 + insets.top, { label: 'VOICE', w: 240, h: 110, fontSize: 28, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }).setDepth(DEPTH.hud + 3).setVisible(false);
     // cutscenes have no Skip and a single on/off Auto toggle (v006); the regular reader keeps Skip
@@ -268,7 +327,6 @@ export class StoryScene extends Phaser.Scene {
         return true;
       }
       case 'background': {
-        // single-location scenes today; a location swap cross-fades the background
         const key = art.background(e.locationId);
         if (this.bg.texture.key !== key) this.bg.setTexture(key);
         return false;
@@ -283,7 +341,9 @@ export class StoryScene extends Phaser.Scene {
       }
       case 'fade':
         if (e.direction === 'out') {
-          this.cameras.main.fadeOut(e.seconds * 1000, 10, 6, 16);
+          const isFinalTutorialScene = this.data0.scene_id === 'tutorial_t3_after';
+          const fadeMs = isFinalTutorialScene ? 2200 : Math.max(1200, e.seconds * 1000);
+          this.cameras.main.fadeOut(fadeMs, 10, 6, 16);
         }
         return false;
       case 'flash':
@@ -338,61 +398,322 @@ export class StoryScene extends Phaser.Scene {
     clearStoryCheckpoint(Services.api.accountKey, this.init0.path);
     saveReadLines(Services.api.accountKey, this.read);
     this.autoTimer?.remove();
-    this.time.delayedCall(450, () => this.init0.onDone(this));
+    const isFinalTutorialScene = this.data0.scene_id === 'tutorial_t3_after';
+    const holdOutMs = isFinalTutorialScene ? 2200 : 1200;
+    this.cameras.main.fadeOut(holdOutMs, 10, 6, 16);
+    this.time.delayedCall(holdOutMs, () => this.init0.onDone(this));
   }
 
-  // ------------------------------------------------------------------ actors
+  // ------------------------------------------------------------------ actors & bust choreography
 
   private showActor(character: string, side: 'left' | 'right', emotion = 'composed', immediate = false): void {
-    if (this.illustration) return; // the illustration carries the characters
     const { art } = Services.ready();
     const key = art.portrait(character, emotion) ?? art.portrait(character, 'composed');
     if (!key) return;
     const existing = this.actors.get(character);
     if (existing) {
+      existing.breatheTween?.stop();
       existing.image.destroy();
       this.actors.delete(character);
     }
-    const x = side === 'left' ? 500 : REF_W - 500;
-    const img = this.add.image(immediate ? x : x + (side === 'left' ? -80 : 80), REF_H + 30, key).setOrigin(0.5, 1).setDepth(DEPTH.world).setAlpha(immediate ? 0.72 : 0);
+    const baseX = side === 'left' ? 500 : REF_W - 500;
+    const baseY = REF_H + 30;
+    const img = this.add
+      .image(immediate ? baseX : baseX + (side === 'left' ? -90 : 90), baseY, key)
+      .setOrigin(0.5, 1)
+      .setDepth(DEPTH.world)
+      .setAlpha(immediate ? 0.82 : 0);
     const k = 980 / img.height;
     img.setScale(k);
     if (side === 'left') img.setFlipX(false);
-    this.actors.set(character, { side, image: img, emotion });
+
+    let breatheTween: Phaser.Tweens.Tween | null = null;
+    if (!prefs().reducedMotion) {
+      breatheTween = this.tweens.add({
+        targets: img,
+        scaleY: k * 1.012,
+        duration: side === 'left' ? 2800 : 2500,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut'
+      });
+    }
+
+    const actor: Actor = {
+      side,
+      image: img,
+      emotion,
+      baseX,
+      baseY,
+      offsetX: 0,
+      offsetY: 0,
+      tiltDeg: 0,
+      scaleMult: 1,
+      breatheTween
+    };
+    this.actors.set(character, actor);
     if (!immediate) {
-      this.tweens.add({ targets: img, x, alpha: 0.72, duration: prefs().reducedMotion ? 1 : 700, ease: 'Cubic.easeOut' });
+      this.tweens.add({ targets: img, x: baseX, alpha: 0.82, duration: prefs().reducedMotion ? 1 : 950, ease: 'Cubic.easeOut' });
     }
   }
-
 
   private hideActor(character: string): void {
     const a = this.actors.get(character);
     if (!a) return;
+    a.breatheTween?.stop();
     this.actors.delete(character);
-    this.tweens.add({ targets: a.image, alpha: 0, duration: 300, onComplete: () => a.image.destroy() });
+    this.tweens.add({ targets: a.image, alpha: 0, duration: 450, onComplete: () => a.image.destroy() });
   }
 
-  private focusSpeaker(speaker: string, emotion?: string, ms = 220): void {
+  /**
+   * Shapes and animates the original character busts (`portrait_mahmut_*` and `portrait_fadyme_*`)
+   * according to both what they say (emotion/dialogue) and what they do in the narrative script!
+   */
+  private applyLineChoreography(e: Extract<StoryEvent, { type: 'line' }>): void {
+    const id = e.lineId;
+    const m = this.actors.get('mahmut');
+    const f = this.actors.get('fadyme');
+    let stageCue = '';
+
+    // 1. Default emotion-driven micro-posture for the active speaker
+    if (e.speaker !== 'narration') {
+      const sp = this.actors.get(e.speaker);
+      if (sp) {
+        const inward = sp.side === 'left' ? 1 : -1;
+        switch (e.emotion) {
+          case 'watchful':
+            sp.tiltDeg = inward * 1.2;
+            sp.scaleMult = 1.01;
+            break;
+          case 'dry_humor':
+          case 'dry_amusement':
+            sp.tiltDeg = inward * -1.8;
+            sp.scaleMult = 1.01;
+            break;
+          case 'soft_smile':
+            sp.tiltDeg = inward * 1.6;
+            sp.scaleMult = 1.015;
+            break;
+          case 'protective':
+          case 'determined':
+            sp.tiltDeg = inward * 2.0;
+            sp.offsetX = Math.max(sp.offsetX * inward, 36) * inward;
+            sp.scaleMult = 1.045;
+            break;
+          default:
+            sp.tiltDeg = 0;
+            sp.scaleMult = 1.0;
+            break;
+        }
+      }
+    }
+
+    // 2. Scene & line-specific narrative action choreography
+    switch (id) {
+      case 'tutorial_t1_before_006':
+        // "That one is loose. Give me your hand."
+        if (m) { m.offsetX = 75; m.tiltDeg = 2.2; }
+        stageCue = 'MAHMUT EXTENDS HIS HAND ACROSS THE WET STONES';
+        break;
+      case 'tutorial_t1_before_009':
+        // "She took his hand. On the other side, neither let go quite as promptly as the crossing required."
+        if (m) { m.offsetX = 95; m.tiltDeg = 1.8; }
+        if (f) { f.offsetX = -95; f.tiltDeg = -2.2; }
+        stageCue = 'HAND IN HAND ACROSS THE SLIPPERY CROSSING';
+        break;
+      case 'tutorial_t1_before_012':
+      case 'tutorial_t1_before_013':
+        // "Something scraped across the stones ahead. Mahmut turned..." / "Two of them. Stay beside the wall."
+        if (m) { m.offsetX = 115; m.offsetY = -12; m.scaleMult = 1.055; m.tiltDeg = 2.5; }
+        if (f) { f.offsetX = -35; }
+        if (!prefs().reducedMotion && id === 'tutorial_t1_before_012') {
+          this.cameras.main.shake(260, 0.003);
+        }
+        stageCue = 'BELLBOUND DEAD APPROACH IN THE MIST';
+        break;
+      case 'tutorial_t1_before_014':
+        // "Beside it. Not behind you. I know the difference."
+        if (f) { f.offsetX = -90; f.offsetY = -12; f.scaleMult = 1.05; f.tiltDeg = -2.0; }
+        stageCue = 'STANDING SIDE BY SIDE';
+        break;
+
+      case 'tutorial_t1_after_004':
+      case 'tutorial_t1_after_005':
+        // "Your sleeve." / "A branch. It has dreadful manners."
+        if (m) { m.offsetX = 70; m.tiltDeg = 1.8; }
+        if (f) { f.tiltDeg = -2.2; }
+        break;
+      case 'tutorial_t1_after_006':
+        // "He brushed a torn leaf from her shoulder, then found a reason to check his shield."
+        if (m) { m.offsetX = 125; m.tiltDeg = 3.0; }
+        if (f) { f.offsetX = -85; f.tiltDeg = -1.6; }
+        stageCue = 'HE BRUSHES A TORN ASH LEAF FROM HER SHOULDER';
+        this.time.delayedCall(1800, () => {
+          if (!this.sys.isActive() || !m) return;
+          m.offsetX = 35;
+          m.tiltDeg = -1.5;
+          this.animateActorTransform(m, 650);
+        });
+        break;
+      case 'tutorial_t1_after_014':
+        // "He shortened his stride. She noticed, and chose not to thank him for it aloud."
+        if (m) { m.offsetX = 55; m.tiltDeg = 1.0; }
+        if (f) { f.offsetX = -55; f.tiltDeg = -1.2; }
+        stageCue = 'MATCHING STRIDES ALONG THE ASH ROAD';
+        break;
+
+      case 'tutorial_t2_before_006':
+        // "For a moment she watched the empty movement without speaking. Mahmut did not hurry her."
+        if (f) { f.tiltDeg = -2.0; f.offsetX = -30; }
+        stageCue = 'WATCHING THE LONE HOLLOW PILGRIM';
+        break;
+      case 'tutorial_t2_before_011':
+      case 'tutorial_t2_before_012':
+      case 'tutorial_t2_before_013':
+        // "The pilgrim stopped. Its head turned toward them."
+        if (m) { m.offsetX = 95; m.offsetY = -10; m.scaleMult = 1.05; m.tiltDeg = 2.2; }
+        if (f) { f.offsetX = -80; f.offsetY = -8; f.scaleMult = 1.04; f.tiltDeg = -1.8; }
+        stageCue = 'COMBAT STANCE AT THE FORGOTTEN STONE CROSSING';
+        break;
+
+      case 'tutorial_t2_after_001':
+      case 'tutorial_t2_after_002':
+        // "Beyond the narrow path, a fallen stone offered a seat..." / "Sit. The trees have survived your inspection."
+        if (f) { f.offsetY = 52; f.offsetX = -65; f.tiltDeg = -1.5; }
+        if (m) { m.offsetY = id === 'tutorial_t2_after_002' ? 48 : 10; m.offsetX = 65; }
+        stageCue = 'RESTING UPON THE MOSSY FALLEN STONE';
+        break;
+      case 'tutorial_t2_after_003':
+      case 'tutorial_t2_after_004':
+        if (m) { m.offsetY = 52; m.offsetX = 85; m.tiltDeg = 1.5; }
+        if (f) { f.offsetY = 52; f.offsetX = -85; f.tiltDeg = -1.8; }
+        break;
+      case 'tutorial_t2_after_005':
+      case 'tutorial_t2_after_006':
+      case 'tutorial_t2_after_007':
+      case 'tutorial_t2_after_008':
+        // "She drew his wrist toward her and threaded the loose leather through its buckle."
+        if (m) { m.offsetY = 54; m.offsetX = 130; m.tiltDeg = 2.6; m.scaleMult = 1.02; }
+        if (f) { f.offsetY = 54; f.offsetX = -130; f.tiltDeg = -3.2; f.scaleMult = 1.02; }
+        stageCue = 'FADYME TIGHTENS THE LOOSE LEATHER STRAP ON HIS GAUNTLET';
+        break;
+      case 'tutorial_t2_after_016':
+        // "She smiled down at the finished knot. He looked away first, but not quickly."
+        if (f) { f.offsetY = 52; f.offsetX = -110; f.tiltDeg = -1.8; }
+        if (m) { m.offsetY = 52; m.offsetX = 95; m.tiltDeg = -2.2; }
+        stageCue = 'A QUIET SMILE OVER THE FINISHED BUCKLE';
+        break;
+
+      case 'tutorial_t3_before_007':
+        // "She laughed softly. He was still listening when a shape moved beneath the eaves."
+        if (f && !prefs().reducedMotion) {
+          this.tweens.add({ targets: f.image, y: f.image.y - 14, duration: 160, yoyo: true, repeat: 1, ease: 'Sine.easeInOut' });
+        }
+        if (m) { m.tiltDeg = 2.0; m.offsetX = 60; }
+        break;
+      case 'tutorial_t3_before_008':
+      case 'tutorial_t3_before_010':
+        if (m) { m.offsetX = 95; m.offsetY = -10; m.scaleMult = 1.05; m.tiltDeg = 2.2; }
+        stageCue = 'SHADOWS STIR BENEATH THE SHELTER EAVES';
+        break;
+      case 'tutorial_t3_before_014':
+        // "This time they stepped forward together."
+        if (m) { m.offsetX = 115; m.offsetY = -14; m.scaleMult = 1.06; m.tiltDeg = 2.0; }
+        if (f) { f.offsetX = -115; f.offsetY = -14; f.scaleMult = 1.06; f.tiltDeg = -2.0; }
+        stageCue = 'STEPPING FORWARD TOGETHER AS ONE';
+        break;
+
+      case 'tutorial_t3_after_005':
+      case 'tutorial_t3_after_006':
+        // "He laid his cloak over the cold stone. She sat on one edge and left the other unmistakably free."
+        if (f) { f.offsetY = 56; f.offsetX = -85; f.tiltDeg = -1.8; }
+        if (m) { m.offsetY = 0; m.offsetX = 50; m.tiltDeg = 1.2; }
+        stageCue = 'HIS OXBLOOD CLOAK SPREAD OVER THE COLD STONE BENCH';
+        break;
+      case 'tutorial_t3_after_007':
+      case 'tutorial_t3_after_009':
+        // "I will check the doorway."
+        if (m) { m.offsetY = 0; m.offsetX = 20; m.tiltDeg = -2.0; }
+        break;
+      case 'tutorial_t3_after_011':
+        // "He sat. His shield rested within reach; her shoulder rested almost within reach of his."
+        if (m) { m.offsetY = 56; m.offsetX = 135; m.tiltDeg = 1.8; }
+        if (f) { f.offsetY = 56; f.offsetX = -135; f.tiltDeg = -1.8; }
+        stageCue = 'SEATED SIDE BY SIDE WITHIN THE WAYSIDE SHELTER';
+        break;
+      case 'tutorial_t3_after_016':
+        // "She broke the loaf in two, considered the pieces, and put the larger one in his hand."
+        if (f) { f.offsetY = 56; f.offsetX = -148; f.tiltDeg = -2.8; }
+        if (m) { m.offsetY = 56; m.offsetX = 140; m.tiltDeg = 2.0; }
+        stageCue = 'SHARING A LOAF OF BREAD AT DUSK';
+        break;
+      case 'tutorial_t3_after_020':
+        // "She looked toward the doorway. For a moment her answer did not come."
+        if (f) { f.offsetY = 56; f.offsetX = -95; f.tiltDeg = 2.6; }
+        stageCue = 'GAZING OUT TOWARD THE DARKENING ROAD';
+        break;
+      case 'tutorial_t3_after_025':
+      case 'tutorial_t3_after_026':
+      case 'tutorial_t3_after_029':
+      case 'tutorial_t3_after_034':
+        // "That made her turn back to him..." / "He stayed..." / "For tonight, a dry corner, half a loaf, and a place beside each other were enough."
+        if (f) { f.offsetY = 56; f.offsetX = -145; f.tiltDeg = -2.0; }
+        if (m) { m.offsetY = 56; m.offsetX = 145; m.tiltDeg = 1.8; }
+        if (id === 'tutorial_t3_after_034') {
+          stageCue = 'A DRY CORNER, HALF A LOAF, AND A PLACE BESIDE EACH OTHER';
+        }
+        break;
+    }
+
+    this.actionBadge.setText(stageCue);
+  }
+
+  private animateActorTransform(a: Actor, ms = 420): void {
+    const baseScale = 980 / a.image.height;
+    const targetScale = baseScale * a.scaleMult;
+    const active = this.currentLine?.speaker === (a.side === 'left' ? 'mahmut' : 'fadyme');
+    const liftY = active ? -14 : 6;
+    this.tweens.add({
+      targets: a.image,
+      x: a.baseX + a.offsetX,
+      y: a.baseY + a.offsetY + liftY,
+      angle: prefs().reducedMotion ? 0 : a.tiltDeg,
+      scaleX: targetScale,
+      scaleY: targetScale,
+      duration: prefs().reducedMotion ? 1 : ms,
+      ease: 'Cubic.easeOut'
+    });
+  }
+
+  private focusSpeaker(speaker: string, emotion?: string, ms = 280): void {
     const { art } = Services.ready();
     for (const [id, a] of this.actors) {
       const active = id === speaker;
+      const isNarr = speaker === '';
       if (active && emotion && a.emotion !== emotion) {
         const key = art.portrait(id, emotion);
         if (key && key !== a.image.texture.key) {
           a.emotion = emotion;
           this.tweens.add({
             targets: a.image,
-            alpha: 0.35,
-            duration: 90,
+            alpha: 0.48,
+            duration: 110,
             yoyo: true,
-            onYoyo: () => a.image.setTexture(key).setScale(980 / a.image.height)
+            onYoyo: () => {
+              const sc = (980 / a.image.height) * a.scaleMult;
+              a.image.setTexture(key).setScale(sc);
+            }
           });
         }
       }
       a.image.setDepth(active ? DEPTH.world + 2 : DEPTH.world);
-      this.tweens.add({ targets: a.image, alpha: active ? 1 : 0.72, duration: ms });
-      a.image.setTint(active ? 0xffffff : 0xa89fb6);
-      this.tweens.add({ targets: a.image, y: REF_H + (active ? 18 : 40), duration: Math.max(260, ms), ease: 'Sine.easeOut' });
+      this.tweens.add({
+        targets: a.image,
+        alpha: active ? 1 : isNarr ? 0.88 : 0.74,
+        duration: ms
+      });
+      a.image.setTint(active ? 0xffffff : isNarr ? 0xe4dcef : 0xb2a8c2);
+      this.animateActorTransform(a, Math.max(360, ms));
     }
   }
 
@@ -405,11 +726,19 @@ export class StoryScene extends Phaser.Scene {
     const narr = e.speaker === 'narration';
     const pause = this.cutscene ? cutscenePauseSeconds(this.prevSpeaker, e.speaker, this.data0.presentation?.speaker_pause_seconds ?? 1) : 0;
     this.prevSpeaker = e.speaker;
-    // a speaker change dissolves the portrait focus over 0.8 s (inside the 1 s pause); the same speaker continuing only waits
-    this.focusSpeaker(narr ? '' : e.speaker, e.emotion, pause > CUTSCENE.sameSpeakerPauseSeconds ? CUTSCENE.dissolveSeconds * 1000 : 220);
+
+    // Shape and animate character busts according to speaker emotion and script actions
+    this.applyLineChoreography(e);
+    this.focusSpeaker(narr ? '' : e.speaker, e.emotion, pause > CUTSCENE.sameSpeakerPauseSeconds ? CUTSCENE.dissolveSeconds * 1000 : 320);
+
     this.namePlate.setVisible(false);
-    this.bodyText.setStyle({ fontStyle: narr ? 'italic' : 'normal', color: narr ? '#cfc4dd' : T.text });
-    this.fullText = this.bodyText.getWrappedText(this.stage?.text(e.lineId, e.text) ?? e.text).join('\n');
+    this.bodyText.setStyle({
+      fontStyle: narr ? 'italic 500' : '500',
+      color: narr ? '#dfd4ee' : T.text
+    });
+    const rawLine = this.stage?.text(e.lineId, e.text) ?? e.text;
+    const formattedLine = narr ? `— ${rawLine}` : `“${rawLine}”`;
+    this.fullText = this.bodyText.getWrappedText(formattedLine).join('\n');
     this.bodyText.setText('');
     this.caret.setVisible(false);
     this.lineDone = false;
@@ -434,6 +763,7 @@ export class StoryScene extends Phaser.Scene {
       const a = this.actors.get(e.speaker);
       const left = !a || a.side === 'left';
       this.nameText.setText(e.speakerDisplay.toUpperCase());
+      this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);
       this.namePlate.setPosition(left ? 330 : REF_W - 330, 756);
     }
     const cps = this.cutscene ? CUTSCENE.cps : this.skip ? 400 : CPS[prefs().textSpeed];
