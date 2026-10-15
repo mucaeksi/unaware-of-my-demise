@@ -2,7 +2,7 @@ import type { EquipmentEffects, SkillDef, SkillType, UnitDef } from '@uomd/conte
 
 export type Side = 'player' | 'enemy';
 export type Row = 'front' | 'rear';
-export type StatKey = 'atk' | 'def' | 'spd' | 'res' | 'veil_res';
+export type StatKey = 'atk' | 'def' | 'spd' | 'res' | 'veil_res' | 'effect_res';
 
 export interface StatusInstance {
   statusId: string;
@@ -139,6 +139,7 @@ export interface Combatant {
 
 export type BattleEvent =
   | { type: 'battle_start'; seed: number }
+  | { type: 'wave_start'; wave: number }
   | { type: 'turn_start'; actor: string; turn: number }
   | { type: 'turn_skipped'; actor: string; reason: string }
   | { type: 'skill_used'; actor: string; skill: string; skillType: SkillType; targets: string[] }
@@ -159,6 +160,7 @@ export type BattleEvent =
   | { type: 'heal'; source: string; target: string; amount: number; hpAfter: number }
   | { type: 'shield'; source: string; target: string; amount: number }
   | { type: 'status_applied'; source: string; target: string; status: string; turns: number }
+  | { type: 'status_resisted'; source: string; target: string; status: string }
   | { type: 'status_removed'; target: string; status: string; reason: 'expired' | 'cleansed' }
   | { type: 'stat_mod'; target: string; stat: StatKey; mode: 'add_pct' | 'add_flat'; amount: number; turns: number }
   | { type: 'focus'; unit: string; delta: number; total: number }

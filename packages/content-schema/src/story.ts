@@ -1,6 +1,6 @@
 import { PresentationCommand } from './presentation';
 import { z } from 'zod';
-import { Id, LineId, SafeAssetPath } from './primitives';
+import { Element, Id, LineId, SafeAssetPath } from './primitives';
 import { NodeRewards, RationClass } from './rewards';
 
 /**
@@ -104,11 +104,13 @@ export const StoryScene = z
   });
 export type StoryScene = z.infer<typeof StoryScene>;
 
-/** Finite equipped-effect grammar; version 1 supports outgoing healing and normal-action Focus. */
+/** Finite equipped-effect grammar; version 1 supports outgoing healing, normal-action Focus, and status/element resistances. */
 export const EquipmentEffects = z.object({
   version: z.literal(1),
   heal_bonus_pct: z.number().min(0).max(5).optional(),
-  focus_gain_pct: z.number().min(0).max(5).optional()
+  focus_gain_pct: z.number().min(0).max(5).optional(),
+  effect_res_pct: z.number().min(0).max(1).optional(),
+  element_res_pct: z.partialRecord(Element, z.number().min(-1).max(1)).optional()
 }).strict();
 export type EquipmentEffects = z.infer<typeof EquipmentEffects>;
 
@@ -134,7 +136,7 @@ export const PartyMember = z
   })
   .strict();
 export type PartyMember = z.infer<typeof PartyMember>;
-function checkFormation(members: readonly { unit_id: string; slot: number }[], ctx: z.RefinementCtx, path: string[], uniqueUnits: boolean): void {
+function checkFormation(members: readonly { unit_id: string; slot: number }[], ctx: z.RefinementCtx, path: (string | number)[], uniqueUnits: boolean): void {
   const slots = new Set<number>();
   const units = new Set<string>();
   for (const [index, member] of members.entries()) {
@@ -145,6 +147,8 @@ function checkFormation(members: readonly { unit_id: string; slot: number }[], c
 }
 export const BattleParty = z.array(PartyMember).min(1).max(5).superRefine((members, ctx) => checkFormation(members, ctx, [], true));
 export type BattleParty = z.infer<typeof BattleParty>;
+
+const EnemyPlacement = z.object({ unit_id: Id, level: z.number().int().min(1).max(20), slot: z.number().int().min(0).max(4), row: z.enum(['front', 'rear']) }).strict();
 
 export const Encounter = z
   .object({
@@ -167,9 +171,15 @@ export const Encounter = z
     /** story loan heroes that join the player's team for this stage (they take slots before the player's own heroes) */
     guests: z.array(Id).max(6).optional(),
     enemies: z
-      .array(z.object({ unit_id: Id, level: z.number().int().min(1).max(20), slot: z.number().int().min(0).max(4), row: z.enum(['front', 'rear']) }).strict())
+      .array(EnemyPlacement)
       .min(1)
       .max(5),
+    /** Follow-up enemy waves spawned sequentially when the preceding wave is defeated; wave 1 is always `enemies`. */
+    waves: z
+      .array(z.array(EnemyPlacement).min(1).max(5))
+      .min(1)
+      .max(5)
+      .optional(),
     /** stage tuning from the narrative (`enemy_stat_multiplier`): applied to the listed stats of every enemy after level scaling */
     enemy_stat_multiplier: z.object({ value: z.number().min(0.1).max(10), applies_to: z.array(z.enum(['hp', 'atk', 'def', 'spd'])).min(1).max(4) }).strict().optional(),
     /** HUD switches: the first tutorials hide the speed and Auto buttons (a later patch turns them on without a new build). Absent = both shown. */
@@ -185,6 +195,9 @@ export const Encounter = z
   .superRefine((encounter, ctx) => {
     checkFormation(encounter.party, ctx, ['party'], true);
     checkFormation(encounter.enemies, ctx, ['enemies'], false);
+    for (const [wIdx, wave] of (encounter.waves ?? []).entries()) {
+      checkFormation(wave, ctx, ['waves', wIdx], false);
+    }
     const guests = new Set<string>();
     for (const [index, id] of (encounter.guests ?? []).entries()) {
       if (guests.has(id)) ctx.addIssue({ code: 'custom', path: ['guests', index], message: `duplicate guest ${id}` });

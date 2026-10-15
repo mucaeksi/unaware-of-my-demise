@@ -119,6 +119,10 @@ export const UnitDef = z
     growth_per_level: Growth.optional(),
     weaknesses: z.array(Element).optional(),
     resistances: z.array(Element).optional(),
+    /** Fractional resistance [0, 1] reducing the probability of hostile status application. */
+    effect_res: z.number().min(0).max(1).optional(),
+    /** Per-element fractional damage resistance [-1, 1] (positive reduces incoming damage, negative increases it). */
+    element_res: z.partialRecord(Element, z.number().min(-1).max(1)).optional(),
     skills: z.array(SkillDef).min(1).max(8),
     /** Hooks / always-on rules that belong to the unit rather than to one of its skills (enemy passives). */
     passive_hooks: z.array(EventHook).max(4).optional(),

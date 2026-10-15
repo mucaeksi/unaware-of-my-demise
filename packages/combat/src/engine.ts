@@ -102,12 +102,17 @@ export class Battle {
   private current: Combatant | null = null;
   private outcome: BattleResult | null = null;
   private readonly startingPlayers: number;
+  private readonly followUpWaves: Encounter['enemies'][];
+  private readonly enemyStatMultiplier: Encounter['enemy_stat_multiplier'];
+  private waveIndex = 0;
 
   private constructor(pack: UnitPack, encounter: Encounter, party?: BattleParty) {
     this.rules = pack.rules;
     for (const s of pack.rules.statuses) this.statusDefs.set(s.status_id, s);
     this.rng = new Rng(encounter.seed);
     for (const u of pack.units) this.defs.set(u.unit_id, u);
+    this.followUpWaves = encounter.waves ?? [];
+    this.enemyStatMultiplier = encounter.enemy_stat_multiplier;
     const defs = this.defs;
     const slotsSeen = new Set<string>();
     const add = (side: Side, e: Encounter['party'][number] & Partial<BattleParty[number]>): void => {
@@ -224,6 +229,14 @@ export class Battle {
     return this.outcome;
   }
 
+  get wave(): number {
+    return this.waveIndex + 1;
+  }
+
+  get totalWaves(): number {
+    return 1 + this.followUpWaves.length;
+  }
+
   unit(id: string): Combatant {
     const c = this.combatants.find((x) => x.id === id);
     if (!c) throw new Error(`unknown combatant ${id}`);
@@ -261,6 +274,24 @@ export class Battle {
     }
     const min = stat === 'spd' ? 1 : 0;
     return Math.max(min, roundHalfUp(value));
+  }
+
+  /** Effective hostile status resistance fraction in [0, 1]. */
+  effEffectRes(c: Combatant): number {
+    let pct = (c.def.effect_res ?? 0) + (c.equipmentEffects.effect_res_pct ?? 0);
+    for (const m of c.mods) {
+      if (m.stat === 'effect_res' && m.mode === 'add_pct') pct += m.amount;
+    }
+    return Math.max(0, Math.min(1, pct));
+  }
+
+  /** Effective per-element incoming damage multiplier (1 - resistance). */
+  effElementResMult(target: Combatant, element: Element): number {
+    let pct = (target.def.element_res?.[element] ?? 0) + (target.equipmentEffects.element_res_pct?.[element] ?? 0);
+    if (element === 'Veil') {
+      for (const m of target.mods) if (m.stat === 'veil_res' && m.mode === 'add_pct') pct += m.amount;
+    }
+    return Math.max(0, 1 - pct);
   }
 
   private statusProduct(c: Combatant, key: 'outgoing_damage_multiplier' | 'damage_taken_multiplier' | 'healing_received_multiplier' | 'focus_gain_multiplier'): number {
@@ -563,6 +594,10 @@ export class Battle {
       this.emit({ type: 'battle_end', winner: 'enemy', stars: 0 });
       return;
     }
+    if (enemies.length === 0 && players.length > 0 && this.waveIndex < this.followUpWaves.length) {
+      this.spawnNextWave();
+      return;
+    }
     if (enemies.length === 0 || players.length === 0) {
       const winner: Side = enemies.length === 0 ? 'player' : 'enemy';
       let stars: 0 | 1 | 2 | 3 = 0;
@@ -573,6 +608,26 @@ export class Battle {
       this.outcome = { winner, stars, turns: this.turnCounter };
       this.emit({ type: 'battle_end', winner, stars });
     }
+  }
+
+  private spawnNextWave(): void {
+    const nextEnemies = this.followUpWaves[this.waveIndex];
+    if (!nextEnemies) return;
+    this.waveIndex++;
+    for (let i = this.combatants.length - 1; i >= 0; i--) {
+      if (this.combatants[i]?.side === 'enemy') this.combatants.splice(i, 1);
+    }
+    const spawned: Combatant[] = [];
+    for (const e of nextEnemies) {
+      const def = this.defs.get(e.unit_id);
+      if (!def) throw new Error(`encounter wave references unknown unit ${e.unit_id}`);
+      const c = this.makeCombatant(def, 'enemy', e.slot, e.row, e.level);
+      this.applyEnemyTuning(c, this.enemyStatMultiplier);
+      this.combatants.push(c);
+      spawned.push(c);
+    }
+    this.emit({ type: 'wave_start', wave: this.waveIndex + 1 });
+    for (const c of spawned) if (c.def.boss) this.initBoss(c);
   }
 
   private emit(e: BattleEvent): void {
@@ -987,8 +1042,22 @@ export class Battle {
         break;
       }
       case 'apply_status': {
+        const statusDef = this.statusDefs.get(op.status_id);
+        const isHostile = statusDef !== undefined && statusDef.category !== 'buff';
         for (const t of targets) {
-          if (op.chance !== undefined && this.rng.next() >= op.chance) continue;
+          const effRes = isHostile ? this.effEffectRes(t) : 0;
+          if (op.chance !== undefined) {
+            const effectiveChance = op.chance * (1 - effRes);
+            if (this.rng.next() >= effectiveChance) {
+              if (effRes > 0) this.emit({ type: 'status_resisted', source: ctx.actor.id, target: t.id, status: op.status_id });
+              continue;
+            }
+          } else if (effRes > 0) {
+            if (this.rng.next() < effRes) {
+              this.emit({ type: 'status_resisted', source: ctx.actor.id, target: t.id, status: op.status_id });
+              continue;
+            }
+          }
           this.applyStatus(ctx.actor, t, op.status_id, op.duration_turns, op.shared_damage_fraction);
         }
         break;
@@ -1295,12 +1364,7 @@ export class Battle {
     const defStat = op.damage_type === 'physical' ? this.effStat(target, 'def') : this.effStat(target, 'res');
     const elementMult = this.elementMultiplier(element, target);
     const crit = this.rng.next() < this.rules.crit.chance;
-    let veilRes = 1;
-    if (element === 'Veil') {
-      let pct = 0;
-      for (const m of target.mods) if (m.stat === 'veil_res' && m.mode === 'add_pct') pct += m.amount;
-      veilRes = Math.max(0, 1 - pct);
-    }
+    const elemResMult = this.effElementResMult(target, element);
     // per-target conditional multipliers of the op itself
     let mult = op.multiplier * this.rankFactor(attacker, ctx.skill.skill_id);
     if (op.multiplier_if_objective_alive && this.objectiveAlive(op.multiplier_if_objective_alive.objective_id)) mult *= op.multiplier_if_objective_alive.multiplier;
@@ -1346,7 +1410,7 @@ export class Battle {
       elementMult *
       this.statusProduct(attacker, 'outgoing_damage_multiplier') *
       this.statusProduct(target, 'damage_taken_multiplier') *
-      veilRes *
+      elemResMult *
       (crit ? this.rules.crit.multiplier : 1);
 
     const packet: Packet = { source: attacker, target, outMult: 1, inMult: 1, blocked: false, actionKind: attackKind };

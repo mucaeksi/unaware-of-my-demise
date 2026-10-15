@@ -153,7 +153,7 @@ export const EffectOp = z.discriminatedUnion('op', [
     .object({
       op: z.literal('modify_stat'),
       ...base,
-      stat_id: z.enum(['atk', 'def', 'spd', 'veil_res', 'res']),
+      stat_id: z.enum(['atk', 'def', 'spd', 'veil_res', 'res', 'effect_res']),
       mode: z.enum(['add_pct', 'add_flat']),
       amount: z.number().min(-1).max(10),
       duration_turns: Turns
