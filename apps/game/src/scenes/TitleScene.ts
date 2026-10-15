@@ -100,16 +100,11 @@ export class TitleScene extends Phaser.Scene {
     }
 
     const shade = this.add.graphics();
-    // Subtle left-upper vignette behind the logo and bottom cinematic gradient behind TAP TO CONTINUE
-    shade.fillGradientStyle(0x05030a, 0x05030a, 0x05030a, 0x05030a, 0.72, 0.72, 0, 0);
-    shade.fillRect(0, 0, REF_W, 170);
-    shade.fillGradientStyle(0x05030a, 0x05030a, 0x05030a, 0x05030a, 0, 0, 0.9, 0.9);
-    shade.fillRect(0, REF_H - 270, REF_W, 270);
-    try {
-      this.cameras.main.filters.external.addVignette(0.5, 0.5, 0.88, 0.32);
-    } catch {
-      /* cosmetic */
-    }
+    // Light top bar gradient for utility pills and bottom gradient behind TAP TO CONTINUE
+    shade.fillGradientStyle(0x05030a, 0x05030a, 0x05030a, 0x05030a, 0.32, 0.32, 0, 0);
+    shade.fillRect(0, 0, REF_W, 110);
+    shade.fillGradientStyle(0x05030a, 0x05030a, 0x05030a, 0x05030a, 0, 0, 0.78, 0.78);
+    shade.fillRect(0, REF_H - 220, REF_W, 220);
 
     if (!prefs().reducedMotion && this.textures.exists('fx_spark')) {
       this.addTitleAtmosphere();

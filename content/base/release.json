@@ -109,8 +109,8 @@
     },
     {
       "path": "art/still_prologue_beginning.webp",
-      "sha256": "8bb1f2bee3ec0059bca8bd41501e634b47bd928d58edb206baec0d59802083a7",
-      "bytes": 136686,
+      "sha256": "35c786654f55037bfff8afbb7efaf4d1b05c1df7f80861815b736df6efb55450",
+      "bytes": 126656,
       "media_type": "image/webp",
       "kind": "background"
     },
@@ -144,8 +144,8 @@
     },
     {
       "path": "art/still_prologue_reunion.webp",
-      "sha256": "093e700db33dc7c1fa665b9ce35cb60825867b9315274e9bcbe5824b7788bded",
-      "bytes": 98876,
+      "sha256": "473adcf837dc8e76508abc8d1fe42584d6a378a75ce6abc8a7ecddd4bb62c9d6",
+      "bytes": 127234,
       "media_type": "image/webp",
       "kind": "background"
     },
@@ -158,8 +158,8 @@
     },
     {
       "path": "art/still_prologue_search.webp",
-      "sha256": "bba5f9967d974e27cc9a00298d22128aa9c2726eb000f503fe991e77907f7996",
-      "bytes": 83204,
+      "sha256": "889052436a8db6cce9b2d55d4af21291137be565df0e903b4a5767025ae6ddff",
+      "bytes": 97260,
       "media_type": "image/webp",
       "kind": "background"
     },
@@ -193,8 +193,8 @@
     },
     {
       "path": "art/ui_title_bg.webp",
-      "sha256": "e02051f4907eef1e1ae9c65b3aacc11a58f476f59900394dd67757da58e60c4e",
-      "bytes": 122374,
+      "sha256": "5696df7ba4b5dc8fcc2f697020701240ddcea7caea73992b1f8fd174fbd10934",
+      "bytes": 132236,
       "media_type": "image/webp",
       "kind": "other_data"
     },

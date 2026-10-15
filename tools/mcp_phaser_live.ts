@@ -156,6 +156,7 @@ interface InspectOptions {
   scene?: string;
   freshInstall?: boolean;
   fastIntro?: boolean;
+  prologueSceneIndex?: number;
   tapX?: number;
   tapY?: number;
   waitMs?: number;
@@ -164,6 +165,15 @@ interface InspectOptions {
 
 async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, unknown>> {
   mkdirSync(SHOTS_DIR, { recursive: true });
+  try {
+    const syncScript = join(ROOT, 'apps', 'game', 'scripts', 'sync-content.mjs');
+    if (existsSync(syncScript)) {
+      const childSync = spawn(process.execPath, [syncScript], { cwd: join(ROOT, 'apps', 'game'), stdio: 'ignore' });
+      await new Promise((r) => childSync.on('close', r));
+    }
+  } catch {
+    /* ignore */
+  }
   const { url, child } = await ensureLocalViteServer(4179);
   const browser = await chromium.launch({ headless: true });
   try {
@@ -189,6 +199,16 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
           /* ignore */
         }
       }, completed);
+    }
+
+    if (typeof opts.prologueSceneIndex === 'number' && opts.prologueSceneIndex > 0) {
+      await page.addInitScript((idx) => {
+        try {
+          localStorage.setItem('uomd.resume.prologue.v1:guest', JSON.stringify({ index: idx, updatedAt: new Date().toISOString() }));
+        } catch {
+          /* ignore */
+        }
+      }, opts.prologueSceneIndex);
     }
 
     const query = opts.fastIntro === true ? '?fastintro=1' : '';
@@ -244,6 +264,25 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
       targetScene,
       { timeout: 15000 }
     );
+
+    if (typeof opts.prologueSceneIndex === 'number' && targetScene === 'Prologue') {
+      await page.evaluate((targetIdx) => {
+        const g = (window as unknown as {
+          __UOMD__?: {
+            game?: {
+              scene?: {
+                getScene(k: string): { index: number; next(): void } | undefined;
+              };
+            };
+          };
+        }).__UOMD__?.game;
+        const p = g?.scene?.getScene('Prologue');
+        if (p && p.index !== targetIdx) {
+          p.index = targetIdx - 1;
+          p.next();
+        }
+      }, opts.prologueSceneIndex);
+    }
 
     await page.waitForTimeout(opts.waitMs ?? 1600);
 
@@ -417,6 +456,7 @@ async function handleRequest(req: JsonRpcRequest): Promise< Record<string, unkno
           scene: typeof args.scene === 'string' ? args.scene : undefined,
           freshInstall: Boolean(args.freshInstall),
           fastIntro: Boolean(args.fastIntro),
+          prologueSceneIndex: typeof args.prologueSceneIndex === 'number' ? args.prologueSceneIndex : undefined,
           tapX: typeof args.tapX === 'number' ? args.tapX : undefined,
           tapY: typeof args.tapY === 'number' ? args.tapY : undefined,
           waitMs: typeof args.waitMs === 'number' ? args.waitMs : undefined,

@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "title_key_art_01",
   "class": "ui_image",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "ui": {
       "title_bg": "art/ui_title_bg.webp"
@@ -10,30 +10,30 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "01cbac0204b7799db22a6de1944d768f2a9f87ef0ec0ec3669fd7f68d5473446",
+    "sha256": "1d6eebd2ec4c224830f81a88e9e6092ed2a6a7bf0453610a796c7dfc4addc88e",
     "mime": "image/png",
     "width": 1920,
     "height": 1080,
     "provenance_file": ".cache/generated/title_key_art_01/run.provenance.json",
-    "provenance_sha256": "d48432be2fd615fe4c1bf8e56dea9fad1bc73dc2cf006e39824609286cd9a740",
+    "provenance_sha256": "8a8db655658543ff75b8d732baadb41bcf8a8e9856d0d1012dfb7b6e54223478",
     "model": "gemini-3.1-flash-image",
-    "prompt_sha256": "7b65230e8aa5c917179c395f0208f1c939e5020fcd58d52b8b679d915d5b5908",
+    "prompt_sha256": "8d01643795f73c76b839884c3fe93ddf23a1dfe4e1597bfa19c42e925d832bc7",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/title_key_art_01.ingest.json",
-    "spec_sha256": "68fc2a8fe6a3cbbc44bf92ac3abe4abe55f64943bafffba7724e0cc0d77eb5bf",
+    "spec_sha256": "2852058585fdaa1ecbecb408b3bb6e92260d369b20e6e39904e5067b8d77b7d6",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "2bce27495da4e1d8f42e43ea4eeeabb0c6f4c24f01308d41c2d47a6a6aa14609"
+    "fingerprint": "2f873eef27baee7fa3986cea1326bcb8f78aa5f9faa1ff888289909aa9c541ad"
   },
   "outputs": [
     {
       "path": "art/ui_title_bg.webp",
-      "sha256": "e02051f4907eef1e1ae9c65b3aacc11a58f476f59900394dd67757da58e60c4e",
-      "pixels_sha256": "7c875a1031b440924bd9f723ab04e1e28208fa4f4e7d36319886f3f55190a228",
-      "bytes": 122374,
+      "sha256": "5696df7ba4b5dc8fcc2f697020701240ddcea7caea73992b1f8fd174fbd10934",
+      "pixels_sha256": "6f1fa5269983385057a9d02c9a0fca2eda19f2a9adda99c6e1929f075bb5d94d",
+      "bytes": 132236,
       "width": 1920,
       "height": 1080
     }
@@ -62,7 +62,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "122374 bytes <= 360000"
+          "detail": "132236 bytes <= 360000"
         }
       },
       "warnings": []
@@ -70,8 +70,8 @@
     "human": {
       "status": "approved",
       "by": "owner-step1",
-      "at": "2026-10-15T04:25:20.715Z",
-      "note": "Approved in Step 1 opening & prologue overhaul"
+      "at": "2026-10-15T08:04:43.296Z",
+      "note": "Template-faithful-v2"
     }
   },
   "license": {
@@ -79,5 +79,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/ui_title_bg.webp",
+          "sha256": "e02051f4907eef1e1ae9c65b3aacc11a58f476f59900394dd67757da58e60c4e",
+          "pixels_sha256": "7c875a1031b440924bd9f723ab04e1e28208fa4f4e7d36319886f3f55190a228",
+          "bytes": 122374,
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "source_sha256": "01cbac0204b7799db22a6de1944d768f2a9f87ef0ec0ec3669fd7f68d5473446",
+      "fingerprint": "2bce27495da4e1d8f42e43ea4eeeabb0c6f4c24f01308d41c2d47a6a6aa14609"
+    }
+  ]
 }

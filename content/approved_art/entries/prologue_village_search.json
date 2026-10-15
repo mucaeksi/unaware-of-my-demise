@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "prologue_village_search",
   "class": "still",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "stills": {
       "prologue_search": "art/still_prologue_search.webp"
@@ -10,30 +10,30 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "4bca93bd1d2347a55716273b4b7bec37b767c39fe0e0c354f588420455609e11",
+    "sha256": "db4b2c7f26b30dce29e2c85cdce246d87fc934171a088a33e3af7add249b7ec8",
     "mime": "image/png",
     "width": 1920,
     "height": 1080,
     "provenance_file": ".cache/generated/prologue_village_search/run.provenance.json",
-    "provenance_sha256": "a91de7d88fab33e91cfaf9856a2317361c467a6edc4c78bd99644bf5a277b7f9",
+    "provenance_sha256": "70ad68fc78873f9a329b2ba5ad5c3368a8ff5a643002145b3571190888c385f3",
     "model": "gemini-3.1-flash-image",
-    "prompt_sha256": "5ed529dc6fc403735ed5cf66d68a2df4eda810bdcc8b83a582d4b333a6e08b1f",
+    "prompt_sha256": "cd906df3bbeffc293b8d57025e9c2c68fc9e6ee26bdea0c1e14e2dad9c7c985a",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/prologue_village_search.ingest.json",
-    "spec_sha256": "d7e90222f0c99416c1c000f643fec86d6abc5e36c38ce6114693267120a6c8ad",
+    "spec_sha256": "fcf242283aca19483508797e83ef7eb5ef82c853162b32ce787710e1108635f8",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "8feacfbe5e127de21cfea62beff7fd12d408aafd9b06738db580f15c674f2b9c"
+    "fingerprint": "69721a36acb79027eaecf1f1fa1f25fa5b0dad680b962426b28f719c16c6dd83"
   },
   "outputs": [
     {
       "path": "art/still_prologue_search.webp",
-      "sha256": "bba5f9967d974e27cc9a00298d22128aa9c2726eb000f503fe991e77907f7996",
-      "pixels_sha256": "e0efbd4c99b0d550054386fcccf62023ea012f0179253e5d21ac7c9d628885fc",
-      "bytes": 83204,
+      "sha256": "889052436a8db6cce9b2d55d4af21291137be565df0e903b4a5767025ae6ddff",
+      "pixels_sha256": "50c005acacfdb5c4440ff53d1903eb8c8fe01328345f47beb1fb1d0705eb854e",
+      "bytes": 97260,
       "width": 1920,
       "height": 1080
     }
@@ -62,7 +62,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "83204 bytes <= 307200"
+          "detail": "97260 bytes <= 307200"
         }
       },
       "warnings": []
@@ -70,8 +70,8 @@
     "human": {
       "status": "approved",
       "by": "owner-step1",
-      "at": "2026-10-15T04:25:27.575Z",
-      "note": "Approved in Step 1 opening & prologue overhaul"
+      "at": "2026-10-15T08:04:47.663Z",
+      "note": "Template-faithful-v2"
     }
   },
   "license": {
@@ -79,5 +79,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/still_prologue_search.webp",
+          "sha256": "bba5f9967d974e27cc9a00298d22128aa9c2726eb000f503fe991e77907f7996",
+          "pixels_sha256": "e0efbd4c99b0d550054386fcccf62023ea012f0179253e5d21ac7c9d628885fc",
+          "bytes": 83204,
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "source_sha256": "4bca93bd1d2347a55716273b4b7bec37b767c39fe0e0c354f588420455609e11",
+      "fingerprint": "8feacfbe5e127de21cfea62beff7fd12d408aafd9b06738db580f15c674f2b9c"
+    }
+  ]
 }

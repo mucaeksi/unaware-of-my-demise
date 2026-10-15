@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "prologue_road_beginning",
   "class": "still",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "stills": {
       "prologue_beginning": "art/still_prologue_beginning.webp"
@@ -10,30 +10,30 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "30ddd5bcebc379320acf1bb87213211890b469c80e71d13de6d4ad7f9ff3bf8b",
+    "sha256": "5eddb79fb5b5743d5d2cf76b5fe197a65ffdb4a598279fd1a450807dcde066a6",
     "mime": "image/png",
     "width": 1920,
     "height": 1080,
     "provenance_file": ".cache/generated/prologue_road_beginning/run.provenance.json",
-    "provenance_sha256": "e77ec47b93046a2a5c29e2884a07f9bc27c59f0e8c3fae3f78294538e66c4739",
+    "provenance_sha256": "40bd827aa77644c8ec68eab9e44029648c98450f278510e51f7333af58c006ac",
     "model": "gemini-3.1-flash-image",
-    "prompt_sha256": "4312e80865112044007e4827d9c9ba31d4fd484098e72716d54b380d53a9bb99",
+    "prompt_sha256": "d03c4c934bb578959acdd278f35511d2acbac3b446e6344f98cffafa06fe2fdd",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/prologue_road_beginning.ingest.json",
-    "spec_sha256": "f0480d28a85d1b5f8359f5e01f10447878f2bf67a928b1de99a26cea739b7975",
+    "spec_sha256": "31caf9542127027a2feaa2eaca5eccc7cb74e10bcc1dea619b223665efc61ec7",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "63d91361acf76d4724342888f133ccb27dc3c4a27f2e9a961ab4e4425d7cdb17"
+    "fingerprint": "6e2db1ee43e8ac4bff788b40b5d1a5a67b096d95a12d28fb3f4160f98dbb1f92"
   },
   "outputs": [
     {
       "path": "art/still_prologue_beginning.webp",
-      "sha256": "8bb1f2bee3ec0059bca8bd41501e634b47bd928d58edb206baec0d59802083a7",
-      "pixels_sha256": "661889942458df1667955cc448eade4eaf39caa1508d9a621e83c150d7663130",
-      "bytes": 136686,
+      "sha256": "35c786654f55037bfff8afbb7efaf4d1b05c1df7f80861815b736df6efb55450",
+      "pixels_sha256": "e723a3cbe288bbb3e79f69c06bc8e4f288bf5cfca75ff04209b96a80b5d537d4",
+      "bytes": 126656,
       "width": 1920,
       "height": 1080
     }
@@ -62,7 +62,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "136686 bytes <= 307200"
+          "detail": "126656 bytes <= 307200"
         }
       },
       "warnings": []
@@ -70,8 +70,8 @@
     "human": {
       "status": "approved",
       "by": "owner-step1",
-      "at": "2026-10-15T04:25:29.307Z",
-      "note": "Approved in Step 1 opening & prologue overhaul"
+      "at": "2026-10-15T08:04:57.003Z",
+      "note": "Template-faithful-v2"
     }
   },
   "license": {
@@ -79,5 +79,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/still_prologue_beginning.webp",
+          "sha256": "8bb1f2bee3ec0059bca8bd41501e634b47bd928d58edb206baec0d59802083a7",
+          "pixels_sha256": "661889942458df1667955cc448eade4eaf39caa1508d9a621e83c150d7663130",
+          "bytes": 136686,
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "source_sha256": "30ddd5bcebc379320acf1bb87213211890b469c80e71d13de6d4ad7f9ff3bf8b",
+      "fingerprint": "63d91361acf76d4724342888f133ccb27dc3c4a27f2e9a961ab4e4425d7cdb17"
+    }
+  ]
 }
