@@ -103,3 +103,29 @@ export function parseImageResponse(json: unknown): { images: InlineImage[]; usag
   }
   return { images, usage: r.usageMetadata };
 }
+
+type Usage = Record<string, unknown>;
+const isObj = (v: unknown): v is Usage => typeof v === 'object' && v !== null && !Array.isArray(v);
+
+/**
+ * Sums usage metadata across calls (a count > 1 batch is several billed calls): numbers add, nested objects merge, arrays of
+ * per-modality entries (`{ modality, tokenCount }`) merge by modality, any other value keeps the latest. Pure; inputs untouched.
+ */
+export function mergeUsage(total: Usage | undefined, next: Usage | undefined): Usage | undefined {
+  const clone = <T>(v: T): T => JSON.parse(JSON.stringify(v)) as T;
+  if (!next) return total;
+  if (!total) return clone(next);
+  const out: Usage = { ...total };
+  for (const [k, v] of Object.entries(next)) {
+    const prev = out[k];
+    if (typeof v === 'number' && typeof prev === 'number') out[k] = prev + v;
+    else if (isObj(v) && isObj(prev)) out[k] = mergeUsage(prev, v);
+    else if (Array.isArray(v) && Array.isArray(prev) && [...v, ...prev].every((e) => isObj(e) && typeof e.modality === 'string')) {
+      const byModality = new Map<string, Usage>();
+      for (const e of [...prev, ...v] as Usage[]) byModality.set(e.modality as string, mergeUsage(byModality.get(e.modality as string), e) ?? e);
+      out[k] = [...byModality.values()];
+    } else out[k] = clone(v);
+  }
+  return out;
+}
+

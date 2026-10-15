@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BudgetError, cancel, committedUsd, emptyBudget, remainingUsd, reserve, settle, type MediaBudget } from './budget';
+import { attemptsFor, attemptsLeft, BudgetError, cancel, committedUsd, emptyBudget, fail, reconcile, remainingUsd, reserve, reserveBatch, settle, type MediaBudget } from './budget';
 
 const approved = (over: Partial<MediaBudget> = {}): MediaBudget => ({ ...emptyBudget(), approved_usd: 20, per_batch_cap_usd: 8, approved_by: 'owner', approved_at: '2026-10-10T00:00:00Z', ...over });
 const ask = (b: MediaBudget, usd: number) => reserve(b, { label: 'fadyme portrait batch', model: 'image', estimateUsd: usd, now: '2026-10-10T01:00:00Z' });
@@ -59,9 +59,10 @@ describe('media generation spending guard', () => {
   });
 });
 
-describe('monthly limit and per-asset attempt cap', () => {
+describe('monthly limit, per-call batch reservations, failed calls and prompt-change enforcement', () => {
   const monthly = (over: Partial<MediaBudget> = {}): MediaBudget => approved({ period: 'monthly', approved_usd: 20, per_batch_cap_usd: 3, max_attempts_per_asset: 3, ...over });
-  const at = (b: MediaBudget, usd: number, now: string, asset?: string) => reserve(b, { label: 'x', model: 'image', estimateUsd: usd, now, ...(asset ? { asset } : {}) });
+  const at = (b: MediaBudget, usd: number, now: string, asset?: string, promptSha256?: string) =>
+    reserve(b, { label: 'x', model: 'image', estimateUsd: usd, now, ...(asset ? { asset } : {}), ...(promptSha256 ? { promptSha256 } : {}) });
 
   it('resets the allowance on the first day of the next month but not within the month', () => {
     let b = monthly();
@@ -70,17 +71,60 @@ describe('monthly limit and per-asset attempt cap', () => {
     expect(at(b, 3, '2026-11-01T00:00:01Z').budget.entries).toHaveLength(7);
   });
 
-  it('stops after the allowed number of paid attempts for one asset, even with money left', () => {
+  it('stops after the allowed number of paid attempts for one asset, even with money left, and flags unchanged failed prompts', () => {
     let b = monthly();
-    for (let i = 0; i < 3; i++) b = at(b, 0.2, '2026-10-11T10:00:00Z', 'fadyme_portrait').budget;
-    expect(code(() => at(b, 0.2, '2026-10-11T11:00:00Z', 'fadyme_portrait'))).toBe('attempt_cap');
+    for (let i = 0; i < 3; i++) b = at(b, 0.2, '2026-10-11T10:00:00Z', 'fadyme_portrait', 'sha_same').budget;
+    expect(attemptsFor(b, 'fadyme_portrait')).toBe(3);
+    expect(attemptsLeft(b, 'fadyme_portrait')).toBe(0);
+    expect(code(() => at(b, 0.2, '2026-10-11T11:00:00Z', 'fadyme_portrait', 'sha_same'))).toBe('unchanged_failed_prompt');
+    expect(code(() => at(b, 0.2, '2026-10-11T11:00:00Z', 'fadyme_portrait', 'sha_new'))).toBe('attempt_cap');
     expect(at(b, 0.2, '2026-10-11T11:00:00Z', 'mahmut_portrait').index).toBe(3); // other assets are unaffected
   });
 
-  it('a cancelled reservation does not count as an attempt', () => {
-    let b = monthly({ max_attempts_per_asset: 1 });
-    const r = at(b, 0.2, '2026-10-11T10:00:00Z', 'a');
-    b = cancel(r.budget, r.index);
-    expect(at(b, 0.2, '2026-10-11T10:05:00Z', 'a').index).toBe(1);
+  it('a cancelled reservation does not count as an attempt, whereas a failed/timed-out sent call keeps its attempt and commitment until reconciled', () => {
+    let b = monthly({ max_attempts_per_asset: 2 });
+    const r0 = at(b, 0.5, '2026-10-11T10:00:00Z', 'a');
+    b = cancel(r0.budget, r0.index);
+    expect(attemptsFor(b, 'a')).toBe(0);
+
+    const r1 = at(b, 0.5, '2026-10-11T10:05:00Z', 'a');
+    b = fail(r1.budget, r1.index, 'HTTP 504 gateway timeout');
+    expect(attemptsFor(b, 'a')).toBe(1);
+    expect(committedUsd(b, '2026-10-11T10:06:00Z')).toBe(0.5);
+
+    // Once billing statement confirms $0 was charged, reconcile settles the amount while keeping the attempt history
+    b = reconcile(b, r1.index, 0);
+    expect(committedUsd(b, '2026-10-11T10:06:00Z')).toBe(0);
+    expect(attemptsFor(b, 'a')).toBe(1);
+  });
+
+  it('reserveBatch creates one entry per call and refuses when count exceeds remaining attempts for the asset', () => {
+    let b = monthly({ max_attempts_per_asset: 3 });
+    const batch = reserveBatch(b, {
+      label: 'fadyme_chibi',
+      model: 'gemini-3.1-flash-image',
+      unitEstimateUsd: 0.101,
+      count: 2,
+      now: '2026-10-11T10:00:00Z',
+      asset: 'fadyme_chibi'
+    });
+    b = batch.budget;
+    expect(batch.indices).toEqual([0, 1]);
+    expect(attemptsFor(b, 'fadyme_chibi')).toBe(2);
+    expect(attemptsLeft(b, 'fadyme_chibi')).toBe(1);
+    // Asking for count=2 when only 1 attempt remains fails atomically
+    expect(
+      code(() =>
+        reserveBatch(b, {
+          label: 'fadyme_chibi',
+          model: 'gemini-3.1-flash-image',
+          unitEstimateUsd: 0.101,
+          count: 2,
+          now: '2026-10-11T10:05:00Z',
+          asset: 'fadyme_chibi'
+        })
+      )
+    ).toBe('attempt_cap');
   });
 });
+

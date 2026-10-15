@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildImageRequest, estimateUsd, IMAGE_PRICES_USD, MediaError, parseImageResponse, priceOf, validateSpec, type ImageSpec } from './media';
+import { buildImageRequest, estimateUsd, IMAGE_PRICES_USD, MediaError, mergeUsage, parseImageResponse, priceOf, validateSpec, type ImageSpec } from './media';
 
 const spec = (over: Partial<ImageSpec> = {}): ImageSpec => ({
   id: 'fadyme_portrait_composed',
@@ -62,4 +62,18 @@ describe('media generation helpers', () => {
     expect(code(() => parseImageResponse({ candidates: [{ finishReason: 'IMAGE_SAFETY', content: { parts: [{ text: 'no' }] } }] }))).toBe('no_image');
     expect(code(() => parseImageResponse({}))).toBe('no_image');
   });
+
+  it('merges usageMetadata across multiple calls in a batch without losing earlier calls', () => {
+    const u1 = { promptTokenCount: 120, candidatesTokenCount: 1000, promptTokensDetails: [{ modality: 'TEXT', tokenCount: 40 }, { modality: 'IMAGE', tokenCount: 80 }] };
+    const u2 = { promptTokenCount: 120, candidatesTokenCount: 1100, promptTokensDetails: [{ modality: 'TEXT', tokenCount: 40 }, { modality: 'IMAGE', tokenCount: 80 }] };
+    expect(mergeUsage(u1, u2)).toEqual({
+      promptTokenCount: 240,
+      candidatesTokenCount: 2100,
+      promptTokensDetails: [
+        { modality: 'TEXT', tokenCount: 80 },
+        { modality: 'IMAGE', tokenCount: 160 }
+      ]
+    });
+  });
 });
+
