@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "asset_id": "campaign_enemy_knight_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_enemy_knight": {
+        "image": "art/atlas_enemy_knight.webp",
+        "width": 1795,
+        "height": 425,
+        "frames": {
+          "hit": [
+            4,
+            4,
+            387,
+            417
+          ],
+          "idle": [
+            395,
+            4,
+            349,
+            408
+          ],
+          "basic": [
+            748,
+            4,
+            634,
+            395
+          ],
+          "defeat": [
+            1386,
+            4,
+            405,
+            364
+          ]
+        }
+      }
+    },
+    "units": {
+      "enemy_knight": {
+        "atlas": "atlas_enemy_knight",
+        "facing": "left",
+        "height_px": 360,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.597
+          },
+          "walk": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.597
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.442
+          },
+          "active": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.442
+          },
+          "ultimate": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.442
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.539
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.536
+          },
+          "victory": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.597
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "2a84df4d6559e6bbe439e72594b561c4c72e806afe30e5c62712b6b5bba1fe9b",
+    "mime": "image/png",
+    "width": 2752,
+    "height": 1536,
+    "provenance_file": ".cache/generated/campaign_enemy_knight_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "cd9495fd0412add65b50031e8e60d26fd8191c3baa0b92d93dc1921d33852536",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/campaign_enemy_knight_chibi_sheet.ingest.json",
+    "spec_sha256": "7c736c0b04bbf84d45e3110d099961196833e57a9005077aa18b211b43d5d627",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "51a9efdadc48536f0707b16906d13bcec7d850bfd3057a1a1b22392794866d5b"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_enemy_knight.webp",
+      "sha256": "4f8b304425d989c98e32d88a3b4e231b9ce18ca0d3f231c1de0bf81991183182",
+      "pixels_sha256": "9f86cd67df8196d8249844cace9d503d2d6e4839d53baefea11e8f6fb27be783",
+      "bytes": 93622,
+      "width": 1795,
+      "height": 425
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2752x1536"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=4"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "4 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.633"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1795x425"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "93622 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0018%"
+        }
+      },
+      "warnings": [
+        "A12: removed 4 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "antigravity",
+      "at": "2026-10-15T16:09:45.015Z",
+      "note": "2-head SD Chibi battle sprite sheet"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

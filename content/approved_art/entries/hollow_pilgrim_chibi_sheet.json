@@ -2,37 +2,37 @@
   "schema": 1,
   "asset_id": "hollow_pilgrim_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "atlases": {
       "atlas_hollow_pilgrim": {
         "image": "art/atlas_hollow_pilgrim.webp",
-        "width": 1932,
-        "height": 499,
+        "width": 2026,
+        "height": 437,
         "frames": {
           "hit": [
             4,
             4,
-            486,
-            491
+            521,
+            429
           ],
           "idle": [
-            494,
+            529,
             4,
-            382,
-            456
+            467,
+            408
           ],
           "basic": [
-            880,
+            1000,
             4,
-            563,
-            423
+            452,
+            401
           ],
           "defeat": [
-            1447,
+            1456,
             4,
-            481,
-            356
+            566,
+            343
           ]
         }
       }
@@ -41,55 +41,55 @@
       "hollow_pilgrim": {
         "atlas": "atlas_hollow_pilgrim",
         "facing": "left",
-        "height_px": 380,
+        "height_px": 318,
         "states": {
           "idle": {
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.579
+            "pivot_x": 0.431
           },
           "walk": {
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.579
+            "pivot_x": 0.431
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.601
+            "pivot_x": 0.607
           },
           "active": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.601
+            "pivot_x": 0.607
           },
           "ultimate": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.601
+            "pivot_x": 0.607
           },
           "hit": {
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.584
+            "pivot_x": 0.466
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.492
+            "pivot_x": 0.462
           },
           "victory": {
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.579
+            "pivot_x": 0.431
           }
         }
       }
@@ -97,32 +97,32 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "047179ee79198f5a1f55c2ede692e8abf51be9a13238c167449526cb7b716000",
+    "sha256": "b340fb827f190fdf3209c3b6912d874b4cf9c810a7335473dc3a8c51f82523cf",
     "mime": "image/png",
     "width": 2752,
     "height": 1536,
     "provenance_file": ".cache/generated/hollow_pilgrim_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "1a4561242bbeb5533868913c8fe9a74f343c07c98b44455c13f22724ef4f3a41",
-    "model": "antigravity-image-gen-v2",
-    "prompt_sha256": "2523fd953de0033ebec100878d976f786c5ae8487977cd80dc2115d1ba03bf71",
+    "provenance_sha256": "f20ceaaae8794c48e7732048ef2cf5108486c855cd086e7d6239aad38b9a5d3a",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/hollow_pilgrim_chibi_sheet.ingest.json",
-    "spec_sha256": "bdc48a5d399fdfc2d6b60b08d35b55b1a0c813ce39345c9e865525922882cd12",
+    "spec_sha256": "89b7c44d69b7bf24dafe68fc8da7f91014b6f347babd5e0545af40c4412140bd",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "287fa5e0cf7a1642820e3a20a527ba04e317f921f45c0da75832a2512969e2ed"
+    "fingerprint": "0b89b787c8a3eabbe7db5217603f69426153d36b25fc4a4837526b5868d675c5"
   },
   "outputs": [
     {
       "path": "art/atlas_hollow_pilgrim.webp",
-      "sha256": "f9cc84ebebc6822ef30928dbc863cb9a807b4416f63cc703ca572b6a474b3807",
-      "pixels_sha256": "96c795f52b7873a508e6a236e6fe5aeb4d406be6ffb30fbb79367e319056edd6",
-      "bytes": 141014,
-      "width": 1932,
-      "height": 499
+      "sha256": "e3cd464846094c71bbf6a2a4a59742d1cba69acb3c951d945d488eaf4f04b213",
+      "pixels_sha256": "3b2f6d1551ce7a87b3d8a419fe641788ee574b84799ae4700a7f94c5c6fcc715",
+      "bytes": 123358,
+      "width": 2026,
+      "height": 437
     }
   ],
   "qc": {
@@ -146,7 +146,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=1"
+          "detail": "removed=3"
         },
         "A14": {
           "status": "pass",
@@ -157,30 +157,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.647"
+          "detail": "k=0.708"
         },
         "A18": {
           "status": "pass",
-          "detail": "1932x499"
+          "detail": "2026x437"
         },
         "A19": {
           "status": "pass",
-          "detail": "141014 bytes <= 665600"
+          "detail": "123358 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0045%"
+          "detail": "spill=0.0012%"
         }
       },
       "warnings": [
-        "A12: removed 1 isolated specks"
+        "A12: removed 3 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner",
-      "at": "2026-10-15T10:29:50.271Z",
-      "note": "Dark gothic anime Chibi enemy sheet"
+      "by": "antigravity",
+      "at": "2026-10-15T16:26:15.673Z",
+      "note": "2-head SD Chibi scaled 318px with warm amber lantern"
     }
   },
   "license": {
@@ -188,5 +188,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_hollow_pilgrim.webp",
+          "sha256": "f9cc84ebebc6822ef30928dbc863cb9a807b4416f63cc703ca572b6a474b3807",
+          "pixels_sha256": "96c795f52b7873a508e6a236e6fe5aeb4d406be6ffb30fbb79367e319056edd6",
+          "bytes": 141014,
+          "width": 1932,
+          "height": 499
+        }
+      ],
+      "source_sha256": "047179ee79198f5a1f55c2ede692e8abf51be9a13238c167449526cb7b716000",
+      "fingerprint": "287fa5e0cf7a1642820e3a20a527ba04e317f921f45c0da75832a2512969e2ed"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_hollow_pilgrim.webp",
+          "sha256": "a8ebe6fe4412ecaf47186013c19c0f1673db0a6b65d9a543c4963b0a7ca0a9a8",
+          "pixels_sha256": "1c46eaa205797b32a8e65c41a0f96fd5eac2eba1cf212fa8375f0b5faf5fb8f2",
+          "bytes": 113648,
+          "width": 1632,
+          "height": 876
+        }
+      ],
+      "source_sha256": "534af5817d1f5c3c8c979007aad410e48d908ec1083df1ef684cf917741e67a2",
+      "fingerprint": "37520d53fb35fdd59559f3c9b85a433137b67afc2cee17a0e9aee451e74c50b3"
+    }
+  ]
 }

@@ -140,21 +140,55 @@ for (const [chapterNumber, ch] of chapters.entries()) {
 }
 writeJson(`${OUT}/chapters/chapter_index.json`, ChapterIndex.parse({ schema_version: 1, chapters: chapterOut, story_coverage: story.coverage, recruit_selectors: story.selectors }));
 
-// ---- art manifest: base art + one placeholder atlas for every unit that has no production art yet ------------------------------
-const art = base; // the base art manifest already carries the tutorial cast (Mahmut, Fadyme, Bellbound Dead, Hollow Pilgrim)
+// ---- art manifest: base art + SD Chibi archetype atlases for every campaign unit -------------------------------------------
+const art = base; // the base art manifest carries the tutorial cast (Mahmut, Fadyme, Bellbound Dead, Hollow Pilgrim)
 mkdirSync(join(ROOT, `${OUT}/art`), { recursive: true });
-const W = 256;
-const H = 384;
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b5a88"/><stop offset="1" stop-color="#2b2238"/></linearGradient></defs><ellipse cx="128" cy="360" rx="70" ry="14" fill="#000" opacity="0.35"/><path d="M128 150 C60 160 56 300 70 350 L186 350 C200 300 196 160 128 150 Z" fill="url(#g)" stroke="#c9b8e8" stroke-width="3"/><circle cx="128" cy="100" r="56" fill="url(#g)" stroke="#c9b8e8" stroke-width="3"/></svg>`;
-writeOut(`${OUT}/art/atlas_placeholder.webp`, await sharp(Buffer.from(svg)).webp({ quality: 80 }).toBuffer());
-const frames = { idle: [0, 0, W, H] as [number, number, number, number] };
-const atlases: Record<string, unknown> = { ...art.atlases, atlas_placeholder: { image: 'art/atlas_placeholder.webp', width: W, height: H, frames } };
-const unitArt: Record<string, unknown> = { ...art.units };
+const heroArcanistEntry = readJson<Json>('content/approved_art/entries/roster_hero_arcanist_chibi_sheet.json');
+const enemyKnightEntry = readJson<Json>('content/approved_art/entries/campaign_enemy_knight_chibi_sheet.json');
+const heroArcanistBytes = readFileSync(join(ROOT, 'content/approved_art/art/atlas_hero_arcanist.webp'));
+const enemyKnightBytes = readFileSync(join(ROOT, 'content/approved_art/art/atlas_enemy_knight.webp'));
+writeOut(`${OUT}/art/atlas_hero_arcanist.webp`, heroArcanistBytes);
+writeOut(`${OUT}/art/atlas_enemy_knight.webp`, enemyKnightBytes);
+writeOut(`${OUT}/art/atlas_placeholder.webp`, heroArcanistBytes);
+
+const heroArcanistAtlas = heroArcanistEntry.targets.atlases.atlas_hero_arcanist;
+const enemyKnightAtlas = enemyKnightEntry.targets.atlases.atlas_enemy_knight;
+const heroArcanistUnit = heroArcanistEntry.targets.units.hero_arcanist;
+const enemyKnightUnit = enemyKnightEntry.targets.units.enemy_knight;
+
+const atlases: Record<string, unknown> = {
+  ...art.atlases,
+  atlas_hero_arcanist: heroArcanistAtlas,
+  atlas_enemy_knight: enemyKnightAtlas,
+  atlas_placeholder: { ...heroArcanistAtlas, image: 'art/atlas_placeholder.webp' }
+};
+const unitArt: Record<string, unknown> = {
+  ...art.units,
+  hero_arcanist: heroArcanistUnit,
+  enemy_knight: enemyKnightUnit
+};
 const placeholders: string[] = [];
 for (const u of pack.units) {
   if (unitArt[u.art_key]) continue;
-  const states = Object.fromEntries(['idle', 'walk', 'basic', 'active', 'ultimate', 'hit', 'defeat', 'victory'].map((s) => [s, { frame: 'idle', scale: 1, foot_y: 0.97, pivot_x: 0.5 }]));
-  unitArt[u.art_key] = { atlas: 'atlas_placeholder', facing: 'right', height_px: u.role.includes('boss') ? 420 : 340, states };
+  const tag = `${u.unit_id} ${u.role}`.toLowerCase();
+  if (u.kind === 'character') {
+    const isFrontMartial = u.formation_affinity === 'front' || /tank|bruiser|vanguard|knight|defender|shield|warden/.test(tag);
+    const template = isFrontMartial ? art.units.mahmut! : heroArcanistUnit;
+    unitArt[u.art_key] = { ...template, facing: 'right', height_px: isFrontMartial ? 360 : 350 };
+  } else {
+    const isKnightOrBoss = Boolean(u.boss) || /knight|warden|sentinel|guard|captain|lord|vanguard|bruiser|brute|executioner|inquisitor/.test(tag);
+    const isPilgrimOrCaster = /caster|pilgrim|choir|priest|acolyte|lantern|whisper|shade|weaver|chanter/.test(tag);
+    const template = isKnightOrBoss
+      ? enemyKnightUnit
+      : isPilgrimOrCaster
+        ? art.units.hollow_pilgrim!
+        : art.units.bellbound_dead!;
+    unitArt[u.art_key] = {
+      ...template,
+      facing: 'left',
+      height_px: u.boss ? 430 : isKnightOrBoss ? 365 : 345
+    };
+  }
   placeholders.push(u.art_key);
 }
 // breakable boss objectives are drawn from one generic "weak point" icon until each gets its own art

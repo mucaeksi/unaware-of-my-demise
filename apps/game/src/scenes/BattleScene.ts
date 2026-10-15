@@ -6,6 +6,7 @@ import { API_BASE, REF_H, REF_W } from '../config';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { activeBattleLayout, battleLayoutSpec, spotFor, type BattleLayoutPreset } from '../battle/formation';
+import { BattleVfx } from '../battle/BattleVfx';
 import { UnitView } from '../battle/UnitView';
 import { announce } from '../platform/a11y';
 import { qualityProfile } from '../platform/graphics';
@@ -111,9 +112,12 @@ export class BattleScene extends Phaser.Scene {
       const defs = new Map(this.pack.units.map((u) => [u.unit_id, u]));
       // breakable objectives are combatants too: their art keys come from the battle itself
       const artKeys = this.battle.combatants.map((c) => defs.get(c.def.unit_id)?.art_key ?? c.def.art_key);
+      const playerUnitIds = this.battle.combatants.filter((c) => c.side === 'player').map((c) => c.def.unit_id);
+      const neutralEmotions = new Map(playerUnitIds.map((id) => [id, new Set(['neutral'])]));
       await Promise.all([
         art.loadBackground(this, this.encounter.location_id),
         art.loadUnits(this, artKeys),
+        art.loadPortraits(this, playerUnitIds, neutralEmotions).catch(() => undefined),
         this.encounter.music_cue ? art.loadMusic(this, this.encounter.music_cue) : Promise.resolve()
       ]);
     } catch (e) {
@@ -142,6 +146,7 @@ export class BattleScene extends Phaser.Scene {
 
   private buildWorld(): void {
     const { art } = Services.ready();
+    BattleVfx.ensureTextures(this);
     const q = qualityProfile();
     const insets = safeInsets(this);
     const insetX = Math.max(insets.left, insets.right);
@@ -179,7 +184,7 @@ export class BattleScene extends Phaser.Scene {
         const inRow = list.filter((c) => c.row === row).sort((a, b) => a.slot - b.slot);
         inRow.forEach((c, i) => {
           const spot = spotFor(side, row, i, inRow.length, this.layoutPreset, insetX);
-          const v = new UnitView(this, art, { id: c.id, name: c.def.name_en, side, artKey: defs.get(c.def.unit_id)?.art_key ?? c.def.unit_id, maxHp: c.maxHp, hp: c.hp, spot }, prefs().reducedMotion);
+          const v = new UnitView(this, art, { id: c.id, name: c.def.name_en, side, artKey: defs.get(c.def.unit_id)?.art_key ?? c.def.unit_id, element: c.def.element, maxHp: c.maxHp, hp: c.hp, spot }, prefs().reducedMotion);
           v.setDepth(DEPTH.units + spot.y);
           v.on('pointerup', () => this.onUnitTapped(v));
           this.views.set(c.id, v);
@@ -442,11 +447,12 @@ export class BattleScene extends Phaser.Scene {
     await art.loadUnits(this, [artKey]);
     if (this.dead) return;
     const spot = spotFor(c.side, c.row, 0, 1, this.layoutPreset, Math.max(insets.left, insets.right));
-    const v = new UnitView(this, art, { id: c.id, name: c.def.name_en, side: c.side, artKey, maxHp: c.maxHp, hp: c.hp, spot }, prefs().reducedMotion);
+    const v = new UnitView(this, art, { id: c.id, name: c.def.name_en, side: c.side, artKey, element: c.def.element, maxHp: c.maxHp, hp: c.hp, spot }, prefs().reducedMotion);
     v.setDepth(DEPTH.units + spot.y);
     v.on('pointerup', () => this.onUnitTapped(v));
     this.views.set(c.id, v);
     this.relayout(c.side);
+    BattleVfx.castSigil(this, v.x, v.y - 12, c.def.element, 1.2);
     this.float(v, 'REINFORCEMENTS', T.crimson, 34);
     await this.wait(420);
   }
@@ -469,6 +475,8 @@ export class BattleScene extends Phaser.Scene {
 
   // ------------------------------------------------------------------ presentation
 
+  private activeSkillType: 'basic' | 'active' | 'ultimate' | 'passive' | 'signature' = 'basic';
+
   private view(id: string): UnitView {
     const v = this.views.get(id);
     if (!v) throw new Error(`no view for ${id}`);
@@ -490,7 +498,12 @@ export class BattleScene extends Phaser.Scene {
 
   private float(v: UnitView, text: string, color: string, size = 40, dx = 0): void {
     const t = txt(this, v.x + dx, v.headY + 70, text, { fontFamily: F.display, fontSize: `${size}px`, fontStyle: '700', color, stroke: '#0a0610', strokeThickness: 6 }).setOrigin(0.5).setDepth(DEPTH.fx + 100);
-    this.tweens.add({ targets: t, y: t.y - 110, alpha: { from: 1, to: 0 }, duration: 1100, ease: 'Cubic.easeOut', onComplete: () => t.destroy() });
+    if (!prefs().reducedMotion) {
+      t.setScale(1.55);
+      this.tweens.add({ targets: t, scale: 1, duration: 220, ease: 'Back.easeOut' });
+    }
+    this.tweens.add({ targets: t, y: t.y - 115, duration: 1100, ease: 'Cubic.easeOut' });
+    this.tweens.add({ targets: t, alpha: 0, delay: 520, duration: 580, ease: 'Quad.easeIn', onComplete: () => t.destroy() });
   }
 
   private burst(x: number, y: number, color: number, count = 14): void {
@@ -528,7 +541,10 @@ export class BattleScene extends Phaser.Scene {
     if (l.dim) this.tweens.add({ targets: l.dim, alpha: 0, duration: 260, onComplete: () => l.dim?.destroy() });
     if (!prefs().reducedMotion) this.cameras.main.zoomTo(1, 260);
     await this.wait(240);
-    if (v.alive) v.applyState('idle');
+    if (v.alive) {
+      v.setDepth(DEPTH.units + v.spot.y);
+      v.applyState('idle');
+    }
   }
 
   private async present(e: BattleEvent): Promise<void> {
@@ -551,52 +567,96 @@ export class BattleScene extends Phaser.Scene {
       case 'skill_used': {
         await this.settleAction();
         if (this.telegraphText.text) this.telegraphText.setText('');
+        this.activeSkillType = e.skillType;
         const v = this.view(e.actor);
+        const actorUnit = this.battle.unit(e.actor);
         const def = this.skillDef(e.actor, e.skill);
         const ult = e.skillType === 'ultimate';
-        void this.banner(def?.name_en ?? e.skill, ult);
+        const element = def?.element ?? actorUnit.def.element;
         const state = e.skillType === 'ultimate' ? 'ultimate' : e.skillType === 'active' ? 'active' : 'basic';
         v.applyState(state);
         let dim: Phaser.GameObjects.Rectangle | null = null;
+        const roleLower = actorUnit.def.role.toLowerCase();
+        const isCaster =
+          def?.player_target === 'ally' ||
+          actorUnit.def.formation_affinity === 'rear' ||
+          /support|healer|mage|caster|arcan|bell|alchem|ranged|seer|choir/.test(roleLower);
+        const opp = e.targets.map((t) => this.views.get(t)).find((t) => t && t.side !== v.side);
+
         if (ult) {
           Sfx.ultimate();
           if (!noFlash) {
             dim = this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x07040c, 0).setDepth(DEPTH.units + 1100);
-            this.tweens.add({ targets: dim, alpha: 0.55, duration: 260 });
+            this.tweens.add({ targets: dim, alpha: 0.58, duration: 240 });
             v.setDepth(DEPTH.units + 1150);
-            this.cameras.main.zoomTo(1.05, 300);
+            this.cameras.main.zoomTo(1.06, 280);
           }
-        } else if (v.side === 'player' && this.battle.unit(e.actor).def.unit_id === 'fadyme') {
-          Sfx.cast();
+          let portraitKey: string | null = null;
+          try {
+            const pk = Services.ready().art.portrait(actorUnit.def.unit_id, 'neutral');
+            if (pk && this.textures.exists(pk)) portraitKey = pk;
+          } catch {
+            /* fallback to chibi sprite frame */
+          }
+          const poseSpr = v.pose();
+          await BattleVfx.ultimateCutIn(this, {
+            unitName: actorUnit.def.name_en,
+            skillName: def?.name_en ?? e.skill,
+            element,
+            side: v.side,
+            portraitKey,
+            spriteKey: poseSpr.texture.key,
+            spriteFrame: String(poseSpr.frame.name),
+          });
+          v.playCast(true);
+          for (const tid of e.targets) {
+            const tv = this.views.get(tid);
+            if (!tv) continue;
+            if (tv.side !== v.side) BattleVfx.pillarEruption(this, tv.x, tv.y, element);
+            else BattleVfx.castSigil(this, tv.x, tv.y - 12, element, 1.3);
+          }
+          this.lunged = { view: v, dim };
+          await this.wait(320);
+        } else {
+          void this.banner(def?.name_en ?? e.skill, false);
+          if (v.side === 'player' && actorUnit.def.unit_id === 'fadyme') Sfx.cast();
+          this.lunged = { view: v, dim: null };
+          if (opp && !isCaster) {
+            const strikeX = opp.x + (v.side === 'player' ? -135 : 135);
+            const strikeY = opp.y;
+            await v.playDashTo(strikeX, strikeY);
+          } else if (opp && isCaster) {
+            v.playCast(false);
+            await BattleVfx.projectile(this, v.x + (v.side === 'player' ? 40 : -40), v.hitPoint.y, opp.hitPoint.x, opp.hitPoint.y, element, e.skillType === 'active');
+          } else {
+            v.playCast(false);
+            this.ringPulse(v.x, v.y - 120, ELEMENT_COLOR[element] ?? C.silver, 175);
+            await this.wait(280);
+          }
         }
-        const opp = e.targets.map((t) => this.views.get(t)).find((t) => t && t.side !== v.side);
-        if (opp && !ult && !reduced) {
-          const dx = Phaser.Math.Clamp((opp.x - v.x) * 0.55, -420, 420);
-          this.tweens.add({ targets: v, x: v.x + dx, y: v.y + (opp.y - v.y) * 0.4, duration: 230, ease: 'Quad.easeOut' });
-        }
-        this.lunged = { view: v, dim };
-        this.ringPulse(v.x, v.y - 120, ELEMENT_COLOR[def?.element ?? this.battle.unit(e.actor).def.element] ?? C.silver, ult ? 280 : 160);
-        await this.wait(ult ? 650 : 300);
         break;
       }
       case 'damage': {
         const t = this.view(e.target);
         const src = this.views.get(e.source);
         const element = src ? this.battle.unit(src.id).def.element : 'Veil';
-        const col = ELEMENT_COLOR[element] ?? 0xffffff;
+        const heavy = e.crit || this.activeSkillType === 'ultimate' || e.amount >= 4;
         if (e.amount > 0 && t.animState !== 'defeat') t.applyState('hit');
-        if (e.amount > 0) t.flash(0xffffff, 110);
-        this.burst(t.hitPoint.x, t.hitPoint.y, col, e.crit ? 26 : 14);
-        Sfx.hit(e.crit || e.amount >= 4);
+        if (e.amount > 0) {
+          t.flash(0xffffff, 110);
+          t.playHitReaction(heavy);
+        }
+        const slashStyle = e.crit || this.activeSkillType === 'ultimate' ? 'heavy' : this.activeSkillType === 'active' ? 'cross' : 'single';
+        BattleVfx.slashImpact(this, t.hitPoint.x, t.hitPoint.y, element, slashStyle, (src?.x ?? 0) <= t.x);
+        BattleVfx.hitImpact(this, t.hitPoint.x, t.hitPoint.y, element, e.crit, heavy);
+        Sfx.hit(heavy);
         if (e.counter) this.float(t, 'COUNTER', T.gold, 30, -60);
         if (e.redirectedFrom) this.float(t, 'INTERCEPT', T.gold, 28, 70);
-        if (e.amount > 0) this.float(t, e.crit ? `-${e.amount}!` : `-${e.amount}`, e.crit ? T.crit : e.counter ? T.gold : '#ffffff', e.crit ? 60 : 44);
+        if (e.amount > 0) this.float(t, e.crit ? `-${e.amount}!` : `-${e.amount}`, e.crit ? T.crit : e.counter ? T.gold : '#ffffff', e.crit ? 64 : 46);
         if (e.absorbed > 0) this.float(t, e.amount === 0 ? '⛨ BLOCKED' : `(${e.absorbed} absorbed)`, T.shield, 30, e.amount === 0 ? 0 : 80);
         t.setHp(e.hpAfter, this.battle.unit(e.target).maxHp);
-        if (!reduced) {
-          const spr = t.pose();
-          this.tweens.add({ targets: spr, x: { from: -10, to: 10 }, duration: 55, yoyo: true, repeat: 2, onComplete: () => spr.setX(0) });
-          if (e.crit && !noFlash) this.cameras.main.shake(180, 0.006);
+        if (!reduced && (e.crit || this.activeSkillType === 'ultimate') && !noFlash) {
+          this.cameras.main.shake(200, e.crit ? 0.008 : 0.006);
         }
         await this.wait(e.crit ? 360 : 270);
         if (t.alive && t.animState === 'hit') t.applyState('idle');
@@ -605,7 +665,8 @@ export class BattleScene extends Phaser.Scene {
       case 'heal': {
         const t = this.view(e.target);
         this.float(t, `+${e.amount}`, T.heal, 44);
-        this.burst(t.hitPoint.x, t.hitPoint.y, 0x8fe3a0, 10);
+        BattleVfx.castSigil(this, t.x, t.y - 10, 'Gale', 1.0);
+        this.burst(t.hitPoint.x, t.hitPoint.y, 0x8fe3a0, 12);
         Sfx.heal();
         t.setHp(e.hpAfter, this.battle.unit(e.target).maxHp);
         await this.wait(260);
@@ -614,7 +675,8 @@ export class BattleScene extends Phaser.Scene {
       case 'shield': {
         const t = this.view(e.target);
         this.float(t, `⛨ +${e.amount} SHIELD`, T.shield, 34);
-        this.ringPulse(t.hitPoint.x, t.hitPoint.y, C.shield, 120);
+        BattleVfx.castSigil(this, t.x, t.y - 10, 'Dawn', 1.0);
+        this.ringPulse(t.hitPoint.x, t.hitPoint.y, C.shield, 130);
         Sfx.guard();
         await this.wait(200);
         break;
@@ -623,6 +685,7 @@ export class BattleScene extends Phaser.Scene {
         const t = this.view(e.target);
         const s = this.statusNames.get(e.status);
         const cue = s?.category === 'buff' ? '▲ ' : s?.category === 'control' ? '◆ ' : '▼ ';
+        BattleVfx.castSigil(this, t.x, t.y - 10, s?.category === 'buff' ? 'Dawn' : 'Veil', 0.9);
         this.float(t, `${cue}${(s?.name ?? e.status).toUpperCase()}`, s?.category === 'buff' ? T.shield : T.crimson, 32, 0);
         await this.wait(190);
         break;

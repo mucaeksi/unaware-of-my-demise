@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "asset_id": "roster_hero_arcanist_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_hero_arcanist": {
+        "image": "art/atlas_hero_arcanist.webp",
+        "width": 1613,
+        "height": 425,
+        "frames": {
+          "ultimate": [
+            4,
+            4,
+            339,
+            417
+          ],
+          "idle": [
+            347,
+            4,
+            306,
+            408
+          ],
+          "basic": [
+            657,
+            4,
+            571,
+            398
+          ],
+          "hit": [
+            1232,
+            4,
+            377,
+            331
+          ]
+        }
+      }
+    },
+    "units": {
+      "hero_arcanist": {
+        "atlas": "atlas_hero_arcanist",
+        "facing": "right",
+        "height_px": 350,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.414
+          },
+          "walk": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.414
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.732
+          },
+          "active": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.732
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.429
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.422
+          },
+          "defeat": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.422
+          },
+          "victory": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.429
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "05e188d6dc3d61996e3355023154830ecf0a0ceaf0c9220cede25967ad0af01e",
+    "mime": "image/png",
+    "width": 2752,
+    "height": 1536,
+    "provenance_file": ".cache/generated/roster_hero_arcanist_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "4dec7285cce6135c68179e56e6f41ea0cb85d197e0b613ecb00a7c06eff9e825",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/roster_hero_arcanist_chibi_sheet.ingest.json",
+    "spec_sha256": "e9db553fa9c120a76108a8632cf2f9eb8c75d63026e93d0f3c933cad63f40a3e",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "a5ed09a626b71b5b0975619fbaea7d71b67788e96d8ce637e870f2d73edefa8d"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_hero_arcanist.webp",
+      "sha256": "43dcfd705c74e3e93670c4aacf91f945cb587ddfade723bb35c2caafc034c8c3",
+      "pixels_sha256": "9bc8b44970afa6e4df11723b207977834175d55b02d5e62b7c719d9881d735f6",
+      "bytes": 139222,
+      "width": 1613,
+      "height": 425
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2752x1536"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=8"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "4 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.575"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1613x425"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "139222 bytes <= 665600"
+        },
+        "A08": {
+          "status": "warn",
+          "detail": "spill=0.0088%"
+        }
+      },
+      "warnings": [
+        "A12: removed 8 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "antigravity",
+      "at": "2026-10-15T16:09:40.863Z",
+      "note": "2-head SD Chibi battle sprite sheet"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

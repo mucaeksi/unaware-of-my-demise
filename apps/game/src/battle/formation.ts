@@ -156,10 +156,10 @@ export function spotFor(
       ? 0
       : count === 3
         ? index === 0
-          ? -spec.jitterX
+          ? -Math.round(spec.jitterX * 1.55)
           : index === 1
             ? 0
-            : spec.jitterX
+            : Math.round(spec.jitterX * 1.35)
         : index % 2 === 0
           ? -spec.jitterX
           : spec.jitterX;

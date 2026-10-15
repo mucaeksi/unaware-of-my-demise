@@ -2,37 +2,37 @@
   "schema": 1,
   "asset_id": "bellbound_dead_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_bellbound_dead": {
         "image": "art/atlas_bellbound_dead.webp",
-        "width": 1426,
-        "height": 440,
+        "width": 1581,
+        "height": 416,
         "frames": {
-          "hit": [
-            4,
-            4,
-            403,
-            432
-          ],
           "idle": [
-            411,
             4,
-            243,
+            4,
+            292,
             408
           ],
           "basic": [
-            658,
+            300,
             4,
-            440,
-            386
+            433,
+            400
+          ],
+          "hit": [
+            737,
+            4,
+            442,
+            387
           ],
           "defeat": [
-            1102,
+            1183,
             4,
-            320,
-            291
+            394,
+            344
           ]
         }
       }
@@ -47,49 +47,49 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.535
+            "pivot_x": 0.565
           },
           "walk": {
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.535
+            "pivot_x": 0.565
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.689
+            "pivot_x": 0.56
           },
           "active": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.689
+            "pivot_x": 0.56
           },
           "ultimate": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.689
+            "pivot_x": 0.56
           },
           "hit": {
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.406
+            "pivot_x": 0.509
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.462
+            "pivot_x": 0.465
           },
           "victory": {
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.535
+            "pivot_x": 0.565
           }
         }
       }
@@ -97,32 +97,32 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "02cf3b6c96b6cf880c86aadb073bb99f46a458d5217d7c56444075efccabb1cd",
+    "sha256": "4aae7d60e23a4305ef801950ea243b93eaa8266a01bb5fdfa77bb682a68a1dca",
     "mime": "image/png",
     "width": 2752,
     "height": 1536,
     "provenance_file": ".cache/generated/bellbound_dead_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "ebf92808b615bfb7a0a7b27af22bf636a1f097ae6db35267d6e4a2a12ba64875",
-    "model": "antigravity-image-gen-v2",
-    "prompt_sha256": "f117c91cb0f064a38bb37cbb198bc7705a831eb817adc6dad995596060c685f2",
+    "provenance_sha256": "df030340250ae815e394a270cfed187e3febdff9e78b7b588d0ae7a6b04a4b21",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/bellbound_dead_chibi_sheet.ingest.json",
-    "spec_sha256": "ab655af1d87e00d3164d4100e588d110190a155b7be44906140ffbfd84f085d5",
+    "spec_sha256": "8e78f3bb6911717491e229db2f500d9ae619f3f7d88bf548e55fe758b7b2dfb4",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "ecbb6832fa1605eba8c608d9d42d0284f6737cf0ee576f536176723fbe163432"
+    "fingerprint": "0cb585e25ba067c70f380f5a450b8224a53d90b5eccff53ea5713da43465b864"
   },
   "outputs": [
     {
       "path": "art/atlas_bellbound_dead.webp",
-      "sha256": "50e7a6db873b519e58abb16bf17befa84530345b5b9fa28f35fce5f9f4c77f4a",
-      "pixels_sha256": "578138f6d4d36b26da3dd8a73059a2caa018cec8de5b2c00e4b2d19a083846b7",
-      "bytes": 123942,
-      "width": 1426,
-      "height": 440
+      "sha256": "ab6f84785211fa6395f9edf4f2997dd613851e121203dd24a6f0e24e91ca6c54",
+      "pixels_sha256": "587040be3f790fb7def9e1c79c5a8fa5205b5d0d633f74cc9616c1949391d483",
+      "bytes": 101860,
+      "width": 1581,
+      "height": 416
     }
   ],
   "qc": {
@@ -145,8 +145,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "warn",
-          "detail": "removed=22"
+          "status": "pass",
+          "detail": "removed=0"
         },
         "A14": {
           "status": "pass",
@@ -157,30 +157,28 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.602"
+          "detail": "k=0.595"
         },
         "A18": {
           "status": "pass",
-          "detail": "1426x440"
+          "detail": "1581x416"
         },
         "A19": {
           "status": "pass",
-          "detail": "123942 bytes <= 665600"
+          "detail": "101860 bytes <= 665600"
         },
         "A08": {
-          "status": "warn",
-          "detail": "spill=0.0192%"
+          "status": "pass",
+          "detail": "spill=0.0015%"
         }
       },
-      "warnings": [
-        "A12: removed 22 isolated specks"
-      ]
+      "warnings": []
     },
     "human": {
       "status": "approved",
-      "by": "owner",
-      "at": "2026-10-15T10:29:44.567Z",
-      "note": "Dark gothic anime Chibi enemy sheet"
+      "by": "antigravity",
+      "at": "2026-10-15T16:09:32.307Z",
+      "note": "2-head SD Chibi battle sprite sheet"
     }
   },
   "license": {
@@ -188,5 +186,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_bellbound_dead.webp",
+          "sha256": "50e7a6db873b519e58abb16bf17befa84530345b5b9fa28f35fce5f9f4c77f4a",
+          "pixels_sha256": "578138f6d4d36b26da3dd8a73059a2caa018cec8de5b2c00e4b2d19a083846b7",
+          "bytes": 123942,
+          "width": 1426,
+          "height": 440
+        }
+      ],
+      "source_sha256": "02cf3b6c96b6cf880c86aadb073bb99f46a458d5217d7c56444075efccabb1cd",
+      "fingerprint": "ecbb6832fa1605eba8c608d9d42d0284f6737cf0ee576f536176723fbe163432"
+    }
+  ]
 }

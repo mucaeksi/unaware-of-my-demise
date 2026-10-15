@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "asset_id": "mahmut_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_mahmut": {
+        "image": "art/atlas_mahmut.webp",
+        "width": 1547,
+        "height": 416,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            305,
+            408
+          ],
+          "ultimate": [
+            313,
+            4,
+            400,
+            398
+          ],
+          "basic": [
+            717,
+            4,
+            467,
+            382
+          ],
+          "hit": [
+            1188,
+            4,
+            355,
+            376
+          ]
+        }
+      }
+    },
+    "units": {
+      "mahmut": {
+        "atlas": "atlas_mahmut",
+        "facing": "right",
+        "height_px": 360,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.49
+          },
+          "walk": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.49
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.525
+          },
+          "active": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.525
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.475
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.492
+          },
+          "defeat": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.492
+          },
+          "victory": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.475
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "1acc2bc551cf777bcb26fce9ca592a4b02377804f5dcc6d412f312664558b87d",
+    "mime": "image/png",
+    "width": 2752,
+    "height": 1536,
+    "provenance_file": ".cache/generated/mahmut_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "bcb06ba9c62c89bb7fc63ea9c9f6ba7b01ad29cfd9ad99c653decfbc72cd6846",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/mahmut_chibi_sheet.ingest.json",
+    "spec_sha256": "b13a93d9aa17dc14538598c2f368f9d96a0beaa0e68d4b96a33047c285691ba0",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "b60e92976bedb352d1b2e978c983fcaad1a7c08413eab1f92264eada7eeb35e9"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_mahmut.webp",
+      "sha256": "837f9d2c124fc8d8648b5eb5d7c5f1afe45747dc8ab96863f2f3f1c22221bd54",
+      "pixels_sha256": "5ea3bbf4af9f50af66d10d56b0397ccd7facea4847476c88c8087c73f10d613f",
+      "bytes": 110786,
+      "width": 1547,
+      "height": 416
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2752x1536"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=2"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "4 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.596"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1547x416"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "110786 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0037%"
+        }
+      },
+      "warnings": [
+        "A12: removed 2 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "antigravity",
+      "at": "2026-10-15T16:09:28.139Z",
+      "note": "2-head SD Chibi battle sprite sheet"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "asset_id": "fadyme_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_fadyme": {
+        "image": "art/atlas_fadyme.webp",
+        "width": 1405,
+        "height": 417,
+        "frames": {
+          "ultimate": [
+            4,
+            4,
+            368,
+            409
+          ],
+          "idle": [
+            376,
+            4,
+            277,
+            408
+          ],
+          "basic": [
+            657,
+            4,
+            462,
+            399
+          ],
+          "hit": [
+            1123,
+            4,
+            278,
+            383
+          ]
+        }
+      }
+    },
+    "units": {
+      "fadyme": {
+        "atlas": "atlas_fadyme",
+        "facing": "right",
+        "height_px": 360,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.531
+          },
+          "walk": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.531
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.44
+          },
+          "active": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.44
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.401
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.505
+          },
+          "defeat": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.505
+          },
+          "victory": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.401
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "147265238e8dd1ef2649e6ca67f4b88da138f3fa24b27875e5be1089c35d6ea0",
+    "mime": "image/png",
+    "width": 2752,
+    "height": 1536,
+    "provenance_file": ".cache/generated/fadyme_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "f89417fdcedbe739e40a15f6fb04e876c582219a9b5535317aec552e04045450",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/fadyme_chibi_sheet.ingest.json",
+    "spec_sha256": "ec2193bad3f3c41988362865fec348051bee4af5ab8a29741f619a3be7ee9f25",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "e18675eab81576cb70d8e1a304a6d212dec1cbe867ab0060b69ee0238997d38e"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_fadyme.webp",
+      "sha256": "82e5384d43a20a76c16c34d010cb4fcb107725edccfa0d39fcabbae7fa23fad4",
+      "pixels_sha256": "1abe0343fed5ee90d1c3edc65f913d3f2cf693399012eb7adb05e801e3658f48",
+      "bytes": 119834,
+      "width": 1405,
+      "height": 417
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2752x1536"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "pass",
+          "detail": "removed=0"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "4 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.592"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1405x417"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "119834 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0032%"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "antigravity",
+      "at": "2026-10-15T16:09:22.203Z",
+      "note": "2-head SD Chibi battle sprite sheet"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

@@ -3,186 +3,218 @@
   "atlases": {
     "atlas_fadyme": {
       "image": "art/atlas_fadyme.webp",
-      "width": 1742,
-      "height": 753,
+      "width": 1405,
+      "height": 417,
       "frames": {
         "ultimate": [
-          2,
-          2,
-          445,
-          403
+          4,
+          4,
+          368,
+          409
         ],
         "idle": [
-          449,
-          2,
-          305,
-          360
-        ],
-        "active": [
-          756,
-          2,
-          282,
-          358
-        ],
-        "walk": [
-          1040,
-          2,
-          321,
-          354
+          376,
+          4,
+          277,
+          408
         ],
         "basic": [
-          1363,
-          2,
-          377,
-          350
-        ],
-        "victory": [
-          2,
-          407,
-          314,
-          344
+          657,
+          4,
+          462,
+          399
         ],
         "hit": [
-          318,
-          407,
-          326,
-          317
-        ],
-        "defeat": [
-          646,
-          407,
-          384,
-          275
+          1123,
+          4,
+          278,
+          383
         ]
       }
     },
     "atlas_mahmut": {
       "image": "art/atlas_mahmut.webp",
-      "width": 1859,
-      "height": 689,
+      "width": 1547,
+      "height": 416,
       "frames": {
         "idle": [
-          2,
-          2,
-          301,
-          360
-        ],
-        "walk": [
+          4,
+          4,
           305,
-          2,
-          325,
-          357
-        ],
-        "active": [
-          632,
-          2,
-          362,
-          353
-        ],
-        "victory": [
-          996,
-          2,
-          346,
-          346
-        ],
-        "basic": [
-          1344,
-          2,
-          513,
-          331
-        ],
-        "hit": [
-          2,
-          364,
-          351,
-          323
+          408
         ],
         "ultimate": [
-          355,
-          364,
-          359,
-          297
+          313,
+          4,
+          400,
+          398
         ],
-        "defeat": [
-          716,
-          364,
-          358,
-          275
+        "basic": [
+          717,
+          4,
+          467,
+          382
+        ],
+        "hit": [
+          1188,
+          4,
+          355,
+          376
         ]
       }
     },
     "atlas_bellbound_dead": {
       "image": "art/atlas_bellbound_dead.webp",
-      "width": 1426,
-      "height": 440,
+      "width": 1581,
+      "height": 416,
       "frames": {
-        "hit": [
-          4,
-          4,
-          403,
-          432
-        ],
         "idle": [
-          411,
           4,
-          243,
+          4,
+          292,
           408
         ],
         "basic": [
-          658,
+          300,
           4,
-          440,
-          386
+          433,
+          400
+        ],
+        "hit": [
+          737,
+          4,
+          442,
+          387
         ],
         "defeat": [
-          1102,
+          1183,
           4,
-          320,
-          291
+          394,
+          344
         ]
       }
     },
     "atlas_hollow_pilgrim": {
       "image": "art/atlas_hollow_pilgrim.webp",
-      "width": 1932,
-      "height": 499,
+      "width": 2026,
+      "height": 437,
       "frames": {
         "hit": [
           4,
           4,
-          486,
-          491
+          521,
+          429
         ],
         "idle": [
-          494,
+          529,
           4,
-          382,
-          456
+          467,
+          408
         ],
         "basic": [
-          880,
+          1000,
           4,
-          563,
-          423
+          452,
+          401
         ],
         "defeat": [
-          1447,
+          1456,
           4,
-          481,
-          356
+          566,
+          343
+        ]
+      }
+    },
+    "atlas_hero_arcanist": {
+      "image": "art/atlas_hero_arcanist.webp",
+      "width": 1613,
+      "height": 425,
+      "frames": {
+        "ultimate": [
+          4,
+          4,
+          339,
+          417
+        ],
+        "idle": [
+          347,
+          4,
+          306,
+          408
+        ],
+        "basic": [
+          657,
+          4,
+          571,
+          398
+        ],
+        "hit": [
+          1232,
+          4,
+          377,
+          331
+        ]
+      }
+    },
+    "atlas_enemy_knight": {
+      "image": "art/atlas_enemy_knight.webp",
+      "width": 1795,
+      "height": 425,
+      "frames": {
+        "hit": [
+          4,
+          4,
+          387,
+          417
+        ],
+        "idle": [
+          395,
+          4,
+          349,
+          408
+        ],
+        "basic": [
+          748,
+          4,
+          634,
+          395
+        ],
+        "defeat": [
+          1386,
+          4,
+          405,
+          364
         ]
       }
     },
     "atlas_placeholder": {
       "image": "art/atlas_placeholder.webp",
-      "width": 256,
-      "height": 384,
+      "width": 1613,
+      "height": 425,
       "frames": {
+        "ultimate": [
+          4,
+          4,
+          339,
+          417
+        ],
         "idle": [
-          0,
-          0,
-          256,
-          384
+          347,
+          4,
+          306,
+          408
+        ],
+        "basic": [
+          657,
+          4,
+          571,
+          398
+        ],
+        "hit": [
+          1232,
+          4,
+          377,
+          331
         ]
       }
     },
@@ -209,50 +241,50 @@
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.514
+          "foot_y": 1,
+          "pivot_x": 0.531
         },
         "walk": {
-          "frame": "walk",
+          "frame": "idle",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.549
+          "foot_y": 1,
+          "pivot_x": 0.531
         },
         "basic": {
           "frame": "basic",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.495
+          "foot_y": 1,
+          "pivot_x": 0.44
         },
         "active": {
-          "frame": "active",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.519
+          "foot_y": 1,
+          "pivot_x": 0.44
         },
         "ultimate": {
           "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.507
+          "foot_y": 1,
+          "pivot_x": 0.401
         },
         "hit": {
           "frame": "hit",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.522
+          "foot_y": 1,
+          "pivot_x": 0.505
         },
         "defeat": {
-          "frame": "defeat",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.525
+          "foot_y": 1,
+          "pivot_x": 0.505
         },
         "victory": {
-          "frame": "victory",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.523
+          "foot_y": 1,
+          "pivot_x": 0.401
         }
       }
     },
@@ -264,50 +296,50 @@
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.578
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "walk": {
-          "frame": "walk",
+          "frame": "idle",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.596
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "basic": {
           "frame": "basic",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.383
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "active": {
-          "frame": "active",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.577
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "ultimate": {
           "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.548
+          "foot_y": 1,
+          "pivot_x": 0.475
         },
         "hit": {
           "frame": "hit",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.572
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "defeat": {
-          "frame": "defeat",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.547
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "victory": {
-          "frame": "victory",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.985,
-          "pivot_x": 0.51
+          "foot_y": 1,
+          "pivot_x": 0.475
         }
       }
     },
@@ -320,37 +352,92 @@
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.535
+          "pivot_x": 0.565
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.535
+          "pivot_x": 0.565
         },
         "basic": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.689
+          "pivot_x": 0.56
         },
         "active": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.689
+          "pivot_x": 0.56
         },
         "ultimate": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.689
+          "pivot_x": 0.56
         },
         "hit": {
           "frame": "hit",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.406
+          "pivot_x": 0.509
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.465
+        },
+        "victory": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.565
+        }
+      }
+    },
+    "hollow_pilgrim": {
+      "atlas": "atlas_hollow_pilgrim",
+      "facing": "left",
+      "height_px": 318,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.431
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.431
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.607
+        },
+        "active": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.607
+        },
+        "ultimate": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.607
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.466
         },
         "defeat": {
           "frame": "defeat",
@@ -362,2427 +449,2482 @@
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.535
+          "pivot_x": 0.431
         }
       }
     },
-    "hollow_pilgrim": {
-      "atlas": "atlas_hollow_pilgrim",
-      "facing": "left",
-      "height_px": 380,
+    "hero_arcanist": {
+      "atlas": "atlas_hero_arcanist",
+      "facing": "right",
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.579
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.579
+          "pivot_x": 0.414
         },
         "basic": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.601
+          "pivot_x": 0.732
         },
         "active": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.601
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "basic",
+          "frame": "ultimate",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.601
+          "pivot_x": 0.429
         },
         "hit": {
           "frame": "hit",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.584
+          "pivot_x": 0.422
+        },
+        "defeat": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.422
+        },
+        "victory": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.429
+        }
+      }
+    },
+    "enemy_knight": {
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 360,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.597
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.597
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.442
+        },
+        "active": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.442
+        },
+        "ultimate": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.442
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
           "frame": "defeat",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.492
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.579
+          "pivot_x": 0.597
         }
       }
     },
     "kera_voss": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "brin_alder": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 360,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.475
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.475
         }
       }
     },
     "nixie_vale": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "sister_aveline": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "sable_wren": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "tilda_fen": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "rikka_ember": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 360,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.475
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.475
         }
       }
     },
     "mirel_quill": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "odelia_pike": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "pippa_bell": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "nara_vell": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 360,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.475
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.475
         }
       }
     },
     "clem_marr": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "vespera_wisp": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "hana_birch": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 360,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.475
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.475
         }
       }
     },
     "thistle_roe": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "iona_mist": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "jori_flint": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_mahmut",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 360,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.49
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.525
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.475
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.492
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.475
         }
       }
     },
     "marek_vane": {
-      "atlas": "atlas_placeholder",
+      "atlas": "atlas_hero_arcanist",
       "facing": "right",
-      "height_px": 340,
+      "height_px": 350,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.414
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.732
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.422
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ultimate",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.429
         }
       }
     },
     "ash_wolf": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_bellbound_dead",
+      "facing": "left",
+      "height_px": 345,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.509
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.465
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         }
       }
     },
     "bridge_revenant": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 365,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "chain_cultist": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_bellbound_dead",
+      "facing": "left",
+      "height_px": 345,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.509
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.465
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         }
       }
     },
     "choir_knight": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 365,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "corrupted_crown_guard": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 365,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "corrupted_mercenary": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 365,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "crownless_knight": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 365,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "eclipse_sentinel": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 365,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "estate_wraith": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_hollow_pilgrim",
+      "facing": "left",
+      "height_px": 345,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.466
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.462
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         }
       }
     },
     "glass_viper": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_bellbound_dead",
+      "facing": "left",
+      "height_px": 345,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.509
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.465
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         }
       }
     },
     "hollow_cleric": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_hollow_pilgrim",
+      "facing": "left",
+      "height_px": 345,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.466
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.462
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         }
       }
     },
     "inkbound_dead": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_hollow_pilgrim",
+      "facing": "left",
+      "height_px": 345,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.466
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.462
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         }
       }
     },
     "lost_vow_knight": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 365,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "noble_retainer": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 365,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "orchard_ghoul": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 365,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "red_vial_alchemist": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_hollow_pilgrim",
+      "facing": "left",
+      "height_px": 345,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.607
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.466
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.462
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.431
         }
       }
     },
     "red_vial_scout": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_bellbound_dead",
+      "facing": "left",
+      "height_px": 345,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.56
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.509
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.465
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.565
         }
       }
     },
     "royal_hollow": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 340,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 365,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "boss_ash_maw": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 420,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 430,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "boss_bell_widow": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 420,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 430,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "boss_captain_rusk": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 420,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 430,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "boss_red_vial_matron": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 420,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 430,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "boss_marshal_oren": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 420,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 430,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "boss_ashen_lord_wraith": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 420,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 430,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },
     "boss_eclipse_construct": {
-      "atlas": "atlas_placeholder",
-      "facing": "right",
-      "height_px": 420,
+      "atlas": "atlas_enemy_knight",
+      "facing": "left",
+      "height_px": 430,
       "states": {
         "idle": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "walk": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         },
         "basic": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "active": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "basic",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.442
         },
         "hit": {
-          "frame": "idle",
+          "frame": "hit",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.539
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "defeat",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.536
         },
         "victory": {
           "frame": "idle",
           "scale": 1,
-          "foot_y": 0.97,
-          "pivot_x": 0.5
+          "foot_y": 1,
+          "pivot_x": 0.597
         }
       }
     },

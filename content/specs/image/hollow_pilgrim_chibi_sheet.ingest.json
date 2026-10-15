@@ -4,7 +4,7 @@
   "class": "unit_sheet",
   "source": {
     "kind": "generated",
-    "pick": "047179ee7919",
+    "pick": "b340fb827f19",
     "provenance": ".cache/generated/hollow_pilgrim_chibi_sheet/run.provenance.json"
   },
   "key": {
@@ -53,7 +53,7 @@
   },
   "frames": {
     "idle": "idle",
-    "idle_frame_px": 456,
+    "idle_frame_px": 408,
     "ground": "lowest",
     "pivot": "lower_body_centroid",
     "state_map": {
@@ -79,7 +79,7 @@
     "atlas": "atlas_hollow_pilgrim",
     "unit": "hollow_pilgrim",
     "facing": "left",
-    "height_px": 380
+    "height_px": 318
   },
   "qc": {
     "profile": "chibi_r2"

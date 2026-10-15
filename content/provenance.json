@@ -4,35 +4,34 @@
   "outputs": [
     {
       "output": "content/base/art/atlas_fadyme.webp",
-      "sha256": "dfc696e0acc2542426a8990c9df01650ee021079165a8f7f42cba7419ec10b00",
+      "sha256": "82e5384d43a20a76c16c34d010cb4fcb107725edccfa0d39fcabbae7fa23fad4",
       "sources": {
-        "git:game/assets/characters/fadyme/chibi_poses_v003.png": "1df4d7f624f1e500933444626dc05695c3d4b28f119d52ce472665fc75d11634",
-        "git:game/assets/characters/fadyme/ultimate_pose_v003.png": "1d06c98782fabdcf57ac9f647c107ea8316e39dded124cd86f9716db8fd00c62"
+        "generated:fadyme_chibi_sheet@rev1": "147265238e8dd1ef2649e6ca67f4b88da138f3fa24b27875e5be1089c35d6ea0",
+        "entry": "e18675eab81576cb70d8e1a304a6d212dec1cbe867ab0060b69ee0238997d38e"
       }
     },
     {
       "output": "content/base/art/atlas_mahmut.webp",
-      "sha256": "4937c5bebfc68c4b517c45ac4140473d34f8d22bcf375352f056d28b9fb1dd73",
+      "sha256": "837f9d2c124fc8d8648b5eb5d7c5f1afe45747dc8ab96863f2f3f1c22221bd54",
       "sources": {
-        "git:game/assets/characters/mahmut/chibi_poses_v003.png": "9a77ec6e6e4a9ffe86907b3ad6c6d2bea16193e686abd1d5c4cafdd044a08a20",
-        "git:game/assets/characters/mahmut/basic_attack_v003.png": "69f981f5dbae07eaf7b3fe514661e977fe6b047791655df5573c493ffe733b8c",
-        "git:game/assets/characters/mahmut/guard_pose_v003.png": "163fc5695cc4b06feebe62d80e7c0d73d0d462af210f022516fc56abaecd8338"
+        "generated:mahmut_chibi_sheet@rev1": "1acc2bc551cf777bcb26fce9ca592a4b02377804f5dcc6d412f312664558b87d",
+        "entry": "b60e92976bedb352d1b2e978c983fcaad1a7c08413eab1f92264eada7eeb35e9"
       }
     },
     {
       "output": "content/base/art/atlas_bellbound_dead.webp",
-      "sha256": "50e7a6db873b519e58abb16bf17befa84530345b5b9fa28f35fce5f9f4c77f4a",
+      "sha256": "ab6f84785211fa6395f9edf4f2997dd613851e121203dd24a6f0e24e91ca6c54",
       "sources": {
-        "generated:bellbound_dead_chibi_sheet@rev1": "02cf3b6c96b6cf880c86aadb073bb99f46a458d5217d7c56444075efccabb1cd",
-        "entry": "ecbb6832fa1605eba8c608d9d42d0284f6737cf0ee576f536176723fbe163432"
+        "generated:bellbound_dead_chibi_sheet@rev2": "4aae7d60e23a4305ef801950ea243b93eaa8266a01bb5fdfa77bb682a68a1dca",
+        "entry": "0cb585e25ba067c70f380f5a450b8224a53d90b5eccff53ea5713da43465b864"
       }
     },
     {
       "output": "content/base/art/atlas_hollow_pilgrim.webp",
-      "sha256": "f9cc84ebebc6822ef30928dbc863cb9a807b4416f63cc703ca572b6a474b3807",
+      "sha256": "e3cd464846094c71bbf6a2a4a59742d1cba69acb3c951d945d488eaf4f04b213",
       "sources": {
-        "generated:hollow_pilgrim_chibi_sheet@rev1": "047179ee79198f5a1f55c2ede692e8abf51be9a13238c167449526cb7b716000",
-        "entry": "287fa5e0cf7a1642820e3a20a527ba04e317f921f45c0da75832a2512969e2ed"
+        "generated:hollow_pilgrim_chibi_sheet@rev3": "b340fb827f190fdf3209c3b6912d874b4cf9c810a7335473dc3a8c51f82523cf",
+        "entry": "0b89b787c8a3eabbe7db5217603f69426153d36b25fc4a4837526b5868d675c5"
       }
     },
     {
@@ -226,7 +225,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "41072b3f29239151e41eb977d09adf1b9a4c440daa3ac076daad8b85e16d143d",
+      "sha256": "af36a860821bfb4d34cb998e1daf82d8bb6f17d3f4c472e3890c30e0eeaf55f7",
       "sources": {}
     },
     {

@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "asset_id": "roster_hero_arcanist_chibi_sheet",
+  "class": "unit_sheet",
+  "source": {
+    "kind": "generated",
+    "pick": "05e188d6dc3d",
+    "provenance": ".cache/generated/roster_hero_arcanist_chibi_sheet/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "bottom",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      20,
+      190
+    ],
+    "choke_px": 1,
+    "despill": true
+  },
+  "layout": {
+    "mode": "regions",
+    "cells": {
+      "idle": [
+        0,
+        0,
+        1376,
+        768
+      ],
+      "basic": [
+        1376,
+        0,
+        1376,
+        768
+      ],
+      "ultimate": [
+        0,
+        768,
+        1376,
+        768
+      ],
+      "hit": [
+        1376,
+        768,
+        1376,
+        768
+      ]
+    }
+  },
+  "frames": {
+    "idle": "idle",
+    "idle_frame_px": 408,
+    "ground": "lowest",
+    "pivot": "lower_body_centroid",
+    "state_map": {
+      "walk": "idle",
+      "active": "basic",
+      "victory": "ultimate",
+      "defeat": "hit"
+    }
+  },
+  "export": {
+    "fit": "trim",
+    "max_atlas": 2048,
+    "pad": 4,
+    "webp": {
+      "mode": "lossy",
+      "quality": 85,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 665600
+  },
+  "manifest": {
+    "atlas": "atlas_hero_arcanist",
+    "unit": "hero_arcanist",
+    "facing": "right",
+    "height_px": 350
+  },
+  "qc": {
+    "profile": "chibi_r2"
+  }
+}
