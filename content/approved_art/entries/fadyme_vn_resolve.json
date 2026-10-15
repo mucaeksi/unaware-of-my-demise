@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "fadyme_vn_resolve",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "fadyme": {
@@ -18,30 +18,30 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "06546c7dd27b41acb0309768bcf3ff1dedd21ba0e1f52e8dd680cf62acb25e7f",
+    "sha256": "4795478b194382f89ba8e7046ee236bab7fffeef901fe3f27fb3e98ebf9e451c",
     "mime": "image/png",
-    "width": 896,
-    "height": 1200,
+    "width": 768,
+    "height": 1152,
     "provenance_file": ".cache/generated/fadyme_vn_resolve/run.provenance.json",
-    "provenance_sha256": "d8398e4e87906cea8bc96f6ace170f9419c5a6c86c9d37e29cab8cc9459406d3",
+    "provenance_sha256": "7f04cfed74b98d767f6926fc1f1f0394031d1f7e61b7ecdd384f950875b2d591",
     "model": "gemini-3-pro-image",
-    "prompt_sha256": "ba17d84d062b0c1d26d9e270751c3cdfbaff6cd2c2b823754a5100e09c913dbd",
+    "prompt_sha256": "aa781ba2ed34e703bc17cb9d9d1c00bcd382bcaab8cb627aaa3a9464a29c2372",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/fadyme_vn_resolve.ingest.json",
-    "spec_sha256": "19767c9eef4fb51006ba36c48e2105ba7430b2126a1a32e2b2fe83db49a8fb81",
+    "spec_sha256": "0cba85d330630934046f9607ecbbc39d5173f6a433c925123bec86a1d0fa7a16",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "b474a9ad44b8b5a180a20be2acc689123bbcdabf9eb29714082c987bd8fc4991"
+    "fingerprint": "6bc72c0f700a4d2689e9015456cabd74d8d17108f6a6e6393f1b0473143d0658"
   },
   "outputs": [
     {
       "path": "art/portrait_fadyme_resolve.webp",
-      "sha256": "8b31a9747b48afbb3fb7ede3c10f1b7f0d3be5a8e8fc568b1319facb09375b09",
-      "pixels_sha256": "2f6b3d9f73436994f35d57ab8cc4b94423bcd1cb6ebf253ed8610d4a2895fe28",
-      "bytes": 151332,
+      "sha256": "662eda4acb6ee4acc082791fc5b7e2ad3bdd2ab17086901bc004b405ae5e688b",
+      "pixels_sha256": "e567cb7cb3735bbdb0b299ead3895e076e5398c83a2136d4f86cbc7db8190cf2",
+      "bytes": 71156,
       "width": 768,
       "height": 1152
     }
@@ -59,15 +59,15 @@
         },
         "A02": {
           "status": "pass",
-          "detail": "image/png 896x1200"
+          "detail": "image/png 768x1152"
         },
         "A07": {
           "status": "pass",
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "warn",
-          "detail": "removed=26"
+          "status": "pass",
+          "detail": "removed=0"
         },
         "A18": {
           "status": "pass",
@@ -75,22 +75,20 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "151332 bytes <= 245760"
+          "detail": "71156 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0003%"
+          "detail": "spill=0.0000%"
         }
       },
-      "warnings": [
-        "A12: removed 26 isolated specks"
-      ]
+      "warnings": []
     },
     "human": {
       "status": "approved",
       "by": "owner",
-      "at": "2026-10-15T19:32:08.680Z",
-      "note": "Approved expressive portrait"
+      "at": "2026-10-15T21:30:53.431Z",
+      "note": "Approved knee-up boydan Light Novel sprite v2"
     }
   },
   "license": {
@@ -98,5 +96,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_fadyme_resolve.webp",
+          "sha256": "8b31a9747b48afbb3fb7ede3c10f1b7f0d3be5a8e8fc568b1319facb09375b09",
+          "pixels_sha256": "2f6b3d9f73436994f35d57ab8cc4b94423bcd1cb6ebf253ed8610d4a2895fe28",
+          "bytes": 151332,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "06546c7dd27b41acb0309768bcf3ff1dedd21ba0e1f52e8dd680cf62acb25e7f",
+      "fingerprint": "b474a9ad44b8b5a180a20be2acc689123bbcdabf9eb29714082c987bd8fc4991"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_fadyme_resolve.webp",
+          "sha256": "8b31a9747b48afbb3fb7ede3c10f1b7f0d3be5a8e8fc568b1319facb09375b09",
+          "pixels_sha256": "2f6b3d9f73436994f35d57ab8cc4b94423bcd1cb6ebf253ed8610d4a2895fe28",
+          "bytes": 151332,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "06546c7dd27b41acb0309768bcf3ff1dedd21ba0e1f52e8dd680cf62acb25e7f",
+      "fingerprint": "b474a9ad44b8b5a180a20be2acc689123bbcdabf9eb29714082c987bd8fc4991"
+    }
+  ]
 }

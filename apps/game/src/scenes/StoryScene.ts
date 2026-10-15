@@ -417,7 +417,7 @@ export class StoryScene extends Phaser.Scene {
   // ------------------------------------------------------------------ actors & bust choreography
 
   private targetBustHeight(character: string): number {
-    return character === 'fadyme' ? 845 : 940;
+    return character === 'fadyme' ? 895 : 955;
   }
 
   private showActor(character: string, side: 'left' | 'right', emotion = 'composed', immediate = false): void {
@@ -430,8 +430,8 @@ export class StoryScene extends Phaser.Scene {
       existing.image.destroy();
       this.actors.delete(character);
     }
-    const baseX = side === 'left' ? 470 : REF_W - 470;
-    const baseY = REF_H + 22;
+    const baseX = side === 'left' ? 460 : REF_W - 460;
+    const baseY = 955;
     const img = this.add
       .image(immediate ? baseX : baseX + (side === 'left' ? -90 : 90), baseY, key)
       .setOrigin(0.5, 1)
@@ -439,8 +439,10 @@ export class StoryScene extends Phaser.Scene {
       .setAlpha(immediate ? 0.86 : 0);
     const k = this.targetBustHeight(character) / img.height;
     img.setScale(k);
-    // Authored portraits face slightly right; flip right-side character so both face inward toward each other
-    img.setFlipX(side === 'right');
+    // Fadyme's knee-up sprites natively face left; Mahmut's natively face right. Flip only if needed to face inward.
+    const nativeFacing = character === 'fadyme' ? 'left' : 'right';
+    const desiredFacing = side === 'left' ? 'right' : 'left';
+    img.setFlipX(nativeFacing !== desiredFacing);
 
     let breatheTween: Phaser.Tweens.Tween | null = null;
     if (!prefs().reducedMotion) {
@@ -541,8 +543,8 @@ export class StoryScene extends Phaser.Scene {
       tutorial_t1_before_005: { listener: { char: 'mahmut', emotion: 'composed' } },
       tutorial_t1_before_006: { listener: { char: 'fadyme', emotion: 'composed' } },
       tutorial_t1_before_009: { speaker: 'soft_smile', listener: { char: 'mahmut', emotion: 'composed' } },
-      tutorial_t1_before_012: { speaker: 'protective', listener: { char: 'fadyme', emotion: 'determined' } },
-      tutorial_t1_before_013: { listener: { char: 'fadyme', emotion: 'determined' } },
+      tutorial_t1_before_012: { speaker: 'determined', listener: { char: 'mahmut', emotion: 'protective' } },
+      tutorial_t1_before_013: { speaker: 'protective', listener: { char: 'fadyme', emotion: 'determined' } },
 
       tutorial_t1_after_002: { listener: { char: 'fadyme', emotion: 'dry_amusement' } },
       tutorial_t1_after_006: { speaker: 'composed', listener: { char: 'fadyme', emotion: 'soft_smile' } },

@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "mahmut_vn_dry_humor",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "mahmut": {
@@ -17,30 +17,30 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "518f4414e9457786b9ea8fbb65633d31804556ac69e0d0d9021a1357c2d5cc1f",
+    "sha256": "beebef3239e53f73d0e98a0339fbb2e93c2ca3bb42920630b8bfd9b77772da8f",
     "mime": "image/png",
-    "width": 896,
-    "height": 1200,
+    "width": 768,
+    "height": 1152,
     "provenance_file": ".cache/generated/mahmut_vn_dry_humor/run.provenance.json",
-    "provenance_sha256": "6908e75143f4366937248414a2584ef5f9056dc308fc73db791d86ef14a23a3a",
+    "provenance_sha256": "4b225f75bbed81c5a7362d2c09d5e0add01c078be5804da5b4584b18fbb9e829",
     "model": "gemini-3-pro-image",
-    "prompt_sha256": "08dc8a884e94d343fd4ff66cee87658ec93308dcdd03363fa322bd3412cc784f",
+    "prompt_sha256": "0572b1fb723315c8316afd5bca89cb363eca15b14588bb7ffc3a3dbbcad3817c",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/mahmut_vn_dry_humor.ingest.json",
-    "spec_sha256": "6eafcb6208e48288eec01154f895dbe8f613e3227b4414c2965012f9e07d10ae",
+    "spec_sha256": "084650b556e77dff0f81794cac1dfc23db4bcb08d8922ee039d5e069e8fc2dea",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "bbda53c0574c4cc48d9458a4affcf20afe0a37680ee0f537823512a3337c59f4"
+    "fingerprint": "bd1733d6189dcde3b189d09b5dd426c908694eac75ae3535d11ac1f731ac627a"
   },
   "outputs": [
     {
       "path": "art/portrait_mahmut_dry_humor.webp",
-      "sha256": "7429b941eb622bde2169b23bf325228b6d903684c40cb53f0724363c10a8fb91",
-      "pixels_sha256": "bef40bbb264f8ff4f1810f45d4f92bd3049567ed0b8e10f33f9f133ab000dd54",
-      "bytes": 137520,
+      "sha256": "b6a14f557a4e1bdf3472f2f4820c36ca770b5ec77fc224baf5df254fa58f3445",
+      "pixels_sha256": "12df4c2d07aeea7e112466ba78ed75ed3597d18a90514043ff8b3ead2bf7c16e",
+      "bytes": 106018,
       "width": 768,
       "height": 1152
     }
@@ -58,7 +58,7 @@
         },
         "A02": {
           "status": "pass",
-          "detail": "image/png 896x1200"
+          "detail": "image/png 768x1152"
         },
         "A07": {
           "status": "pass",
@@ -66,7 +66,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=9"
+          "detail": "removed=10"
         },
         "A18": {
           "status": "pass",
@@ -74,22 +74,22 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "137520 bytes <= 245760"
+          "detail": "106018 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0010%"
+          "detail": "spill=0.0000%"
         }
       },
       "warnings": [
-        "A12: removed 9 isolated specks"
+        "A12: removed 10 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
       "by": "owner",
-      "at": "2026-10-15T19:32:16.767Z",
-      "note": "Approved expressive portrait"
+      "at": "2026-10-15T21:30:54.877Z",
+      "note": "Approved knee-up boydan Light Novel sprite v2"
     }
   },
   "license": {
@@ -97,5 +97,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_mahmut_dry_humor.webp",
+          "sha256": "7429b941eb622bde2169b23bf325228b6d903684c40cb53f0724363c10a8fb91",
+          "pixels_sha256": "bef40bbb264f8ff4f1810f45d4f92bd3049567ed0b8e10f33f9f133ab000dd54",
+          "bytes": 137520,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "518f4414e9457786b9ea8fbb65633d31804556ac69e0d0d9021a1357c2d5cc1f",
+      "fingerprint": "bbda53c0574c4cc48d9458a4affcf20afe0a37680ee0f537823512a3337c59f4"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_mahmut_dry_humor.webp",
+          "sha256": "7429b941eb622bde2169b23bf325228b6d903684c40cb53f0724363c10a8fb91",
+          "pixels_sha256": "bef40bbb264f8ff4f1810f45d4f92bd3049567ed0b8e10f33f9f133ab000dd54",
+          "bytes": 137520,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "518f4414e9457786b9ea8fbb65633d31804556ac69e0d0d9021a1357c2d5cc1f",
+      "fingerprint": "bbda53c0574c4cc48d9458a4affcf20afe0a37680ee0f537823512a3337c59f4"
+    }
+  ]
 }

@@ -183,7 +183,8 @@ export function bleed(rgba: Buffer, w: number, h: number, radius: number): void 
       frontier.push(p);
     }
   }
-  for (let step = 0; step < radius; step++) {
+  const steps = Math.max(radius, 16);
+  for (let step = 0; step < steps; step++) {
     const next: number[] = [];
     for (const p of frontier) {
       const x = p % w;
@@ -197,6 +198,13 @@ export function bleed(rgba: Buffer, w: number, h: number, radius: number): void 
       }
     }
     frontier = next;
+  }
+  for (let p = 0; p < n; p++) {
+    if (!done[p]) {
+      rgba[p * 4] = 0;
+      rgba[p * 4 + 1] = 0;
+      rgba[p * 4 + 2] = 0;
+    }
   }
 }
 

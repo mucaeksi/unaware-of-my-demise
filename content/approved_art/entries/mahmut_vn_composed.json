@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "mahmut_vn_composed",
   "class": "portrait",
-  "revision": 2,
+  "revision": 4,
   "targets": {
     "portraits": {
       "mahmut": {
@@ -17,30 +17,30 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "3908d83f70307105114a7439c7e51792c3bcc97e97375a1133842f71827029b6",
+    "sha256": "d323b11f686b953228e2f647de6df3a409b727bd765a50328e841694f9c9358c",
     "mime": "image/png",
-    "width": 896,
-    "height": 1200,
+    "width": 768,
+    "height": 1152,
     "provenance_file": ".cache/generated/mahmut_vn_composed/run.provenance.json",
-    "provenance_sha256": "131537bd0258ae17aa0c5f5505513f18efc42da2edbcc00ad8a3acbcb52c0848",
+    "provenance_sha256": "5727f178177ca5b31e3f08733872509161813cd100fe37e2401e604defb8eec9",
     "model": "gemini-3-pro-image",
-    "prompt_sha256": "71e91c55d872db48ef6e6e029c5a8150bce267a2fd8d5daba5bca4c36885f982",
+    "prompt_sha256": "5870557792d6fc6bd68c3165186bc1968bf81a1815db5f453835bd9c3d48dfc4",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/mahmut_vn_composed.ingest.json",
-    "spec_sha256": "d241d84d723fae11cb0d5882e7557735dcf43bf3485fd2980a490e37e8afb2d7",
+    "spec_sha256": "48b006d4417a7ee178291eed31577266e86c64fb99702c487a430418876efa50",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "b981e5444e14bc4ce465eaee9563244b7feed9b9d1fffc884ec8a52ca4bcd02c"
+    "fingerprint": "8517b87b89cb09874d79d8edcc78c0b9b2ad168e1c512637f2f7926dc254c523"
   },
   "outputs": [
     {
       "path": "art/portrait_mahmut_composed.webp",
-      "sha256": "7bc2d64e668096de9449ab191f7f74f4926ebd498f427613aa52d0adce57d1d3",
-      "pixels_sha256": "6c537147640b15c676c5ab8180f56678da651cb4edb7f8bfd6722e71cfd2ca98",
-      "bytes": 98554,
+      "sha256": "ce3067a3be21b21dd306a6d26b02376a6fd63bdf7f5dc5e4887106794bf272ef",
+      "pixels_sha256": "2285c59a6de9a623594c4458296a76dcb11ee4365a9292810820537659db24ab",
+      "bytes": 129722,
       "width": 768,
       "height": 1152
     }
@@ -58,7 +58,7 @@
         },
         "A02": {
           "status": "pass",
-          "detail": "image/png 896x1200"
+          "detail": "image/png 768x1152"
         },
         "A07": {
           "status": "pass",
@@ -66,7 +66,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=10"
+          "detail": "removed=3"
         },
         "A18": {
           "status": "pass",
@@ -74,22 +74,22 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "98554 bytes <= 245760"
+          "detail": "129722 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0016%"
+          "detail": "spill=0.0000%"
         }
       },
       "warnings": [
-        "A12: removed 10 isolated specks"
+        "A12: removed 3 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
       "by": "owner",
-      "at": "2026-10-15T19:37:11.162Z",
-      "note": "Approved"
+      "at": "2026-10-15T21:30:54.414Z",
+      "note": "Approved knee-up boydan Light Novel sprite v2"
     }
   },
   "license": {
@@ -112,6 +112,36 @@
       ],
       "source_sha256": "3908d83f70307105114a7439c7e51792c3bcc97e97375a1133842f71827029b6",
       "fingerprint": "8c80d734eb8c15cd007615a54ab889327cd60d43fb4dbccce89cd3dee40ba79f"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_mahmut_composed.webp",
+          "sha256": "7bc2d64e668096de9449ab191f7f74f4926ebd498f427613aa52d0adce57d1d3",
+          "pixels_sha256": "6c537147640b15c676c5ab8180f56678da651cb4edb7f8bfd6722e71cfd2ca98",
+          "bytes": 98554,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "3908d83f70307105114a7439c7e51792c3bcc97e97375a1133842f71827029b6",
+      "fingerprint": "b981e5444e14bc4ce465eaee9563244b7feed9b9d1fffc884ec8a52ca4bcd02c"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/portrait_mahmut_composed.webp",
+          "sha256": "7bc2d64e668096de9449ab191f7f74f4926ebd498f427613aa52d0adce57d1d3",
+          "pixels_sha256": "6c537147640b15c676c5ab8180f56678da651cb4edb7f8bfd6722e71cfd2ca98",
+          "bytes": 98554,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "3908d83f70307105114a7439c7e51792c3bcc97e97375a1133842f71827029b6",
+      "fingerprint": "b981e5444e14bc4ce465eaee9563244b7feed9b9d1fffc884ec8a52ca4bcd02c"
     }
   ]
 }
