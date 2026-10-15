@@ -39,7 +39,7 @@ export async function withFileLock<T>(file: string, fn: () => Promise<T> | T, o:
       } catch {
         continue; // released between open and stat
       }
-      if (Date.now() > deadline) throw new Error(`budget ledger is locked by another process (${lock}); retry later or remove a stale lock`);
+      if (Date.now() > deadline) throw new Error(`budget ledger is locked by another process (${lock}); retry later or remove a stale lock`, { cause: e });
       const base = o.retryMs ?? 20;
       await sleep(base + Math.floor(Math.random() * base));
     }

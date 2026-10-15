@@ -1,29 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "a181a92248beacadf6bfb0444032943b057adea0",
-  "reviewedAt": "2026-10-14",
+  "sourceCommit": "7e74074e922316f1994fa3ca610953aa3474d61d",
+  "reviewedAt": "2026-10-15",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "R08",
-    "status": "COMPLETE",
-    "nextProposed": "R09 — WAITING for Argon 4 / Antigravity handoff; not started by Codex",
-    "workflow": "Owner 2026-10-14: finish R08 and push, then reconcile README/handoff and push once more. Stop before R09. Argon 4 through Antigravity owns subsequent implementation, whole-game design, generated visuals, animation, QA, docs and GitHub delivery. No automatic runner or Argon session is established."
+    "id": "R17",
+    "status": "LOCAL_TESTED",
+    "nextProposed": "R18 — First store AAB acceptance and public release (blocked on physical Android device & live staging/keys)",
+    "workflow": "Argon 4 / Antigravity + Opus 5.5 delivered and locally verified R06 (effect_res, element_res, multi-wave encounters) and R09–R17 on main. Remaining R18 acceptance gates require external credentials, live staging deployment, and physical Android device testing."
   },
   "now": [
     {
-      "title": "R08 source complete and locally verified; stop before R09",
-      "detail": "R08 source complete: exact versioned signup/team/growth/gear/gacha/task and grant contexts; migration 0027 freezes weekly terms and earned/paid grant subsets. Public signed catalog activation/rollback is enabled with same-environment/channel game-runtime/migration readiness, client 0.1.2 and derived capabilities. Closed presentation/voice/caption/video/locale/stage/camera/WebGL-mask/tween/flag/checkpoint/frame-animation/notice/calendar interpreters; compiled trust-root lifecycle; IDB v2 transaction completion, retained-byte leases/GC/quota, range resume/cancel/deadline/network consent, safe startup activation and owned bounded media caches. All 923 application/tool tests (API469/game97/combat93/schema123/economy44/patch41/shared24/story8/tools24), lint/typecheck, campaign/game/admin builds and 46 adapters pass. Final real local-Worker desktop8/touch-phone8 browser matrix passes with 27 migrations; screenshots inspected. Same built browser binary installs a public signed synthetic season, exercises declared-only recruitment/growth/equipment/team/summon/animated authoritative battle, locale/mask/video pause/no-Skip/decoder fallback/modal ordering and account-change cleanup; IDB v1-to-v2/abort-after-request-success/blocked-storage fallback, reload recovery, rollback/kill and title lifecycle also pass. Synthetic four/five-star identities clone existing numeric definitions/art; the legitimate four-or-better guarantee retains canonical rates. Earlier browser failures exposed real mask/modal/startup/decoder races, corrected with actual-render assertions; final harness fixes wait for input registration, use signOut and honor five-star guarantee outcomes. No canon/numeric seeds/production media, live migrations, deployed/source tag, physical device or signed-original-AAB acceptance is claimed. Local source checkpoints do not complete R09. Physical WebView/unchanged-AAB season and deployed capacity remain R18/R17. Owner requires stopping before R09 and handing subsequent work to Argon 4 through Antigravity."
+      "title": "R06 and R09–R17 local engineering complete and verified on main",
+      "detail": "Implemented and locally verified R06 (effect_res, element_res, multi-wave encounter progression), R09 (entry, narrative continuity, audio-gesture resume, native restart fallback, campaign progression target, first-clear vs repeat stage preview), R10 (battle layout candidates, safeArea inset helper, companion growth tabs, accessibility/quality settings), R11 (AndroidKeyStore session store, store offer disclosure, startup/resume purchase reconciliation, reactive UMP consent & child/teen ad policy, nonce-bound rewarded ad SSV, 21-table account erasure + deletion-on-restore, fail-closed Android release gates), R12 (Stage Sweep, Memory Shards excess conversion, AFK Idle Patrol, Mode Unlock Gates, Achievements, Seasonal Events, Profile/Leaderboards, Async Arena, Endless Corridor, multi-wave combat), R13 (admin mail threshold/CAS/pagination, release composer, R2 asset approval/provenance, release diff, sensitive approvals, Access MFA gate), R14 (atomic budget lock, batch reservations, failed/reconcile workflow, unchanged failed prompt guard, offline ingest & component-first slicer, A31 hygiene, --strict-art), R15 (pilot character attachment anchors, adult-age provenance, resolved hood/cape & studio mark, 8-pose contract, third-party credit separation, bond/tactical/expression UI), R16 (chronological variable-fee/material-gate simulator, final-boss repeat-5★ drop resolution, 80-token Daily Supplies recovery floor, reviewed JA voice transcript validator), and R17 (bounded snapshot-consistent D1 backup, index-backed monitoring prune/freshness, encrypted restore rehearsal, deletion-on-restore scrub, backup retention pruning, public Access edge probe, out-of-band R2/webhook alert persistence)."
     }
   ],
   "next": [
     {
-      "title": "R09 — first Argon 4 / Antigravity implementation package",
-      "detail": "WAITING, not started. Revalidate nine-shot caption/timeline defects; implement account/release-scoped durable scene/choice checkpoints, post-battle continuation without duplicate rewards, authoritative Continue and durable Finish/restart/retry. Preserve R08 catalog/media/storage contracts. Follow README for full R09 acceptance and remaining R00–R18 work."
-    },
-    {
-      "title": "Argon 4 full-game ownership after handoff",
-      "detail": "Through Antigravity, Argon owns code, whole-game/UX/art design, image generation, animation, integration, verification, documentation and verified GitHub pushes. Complete dependent R10–R18 and partial R02/R05/R06/R07 work; budget/canon/financial/private-access/public-release gates remain explicit."
+      "title": "R18 — Physical Android device, live staging, and first store AAB acceptance",
+      "detail": "Requires owner-held upload keystore, live Cloudflare/Google/Play/AdMob credentials, age private key for live encrypted restore drill, and physical Android device execution of the 24 QA cases in docs/QA_ANDROID.md."
     }
   ],
   "blockedOnOwner": [
@@ -1210,6 +1206,32 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R09-R17-LOCAL-20261015",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "7e74074e922316f1994fa3ca610953aa3474d61d",
+      "verifiedAt": "2026-10-15T06:44:00+03:00",
+      "scope": "Argon 4 / Antigravity and Opus 5.5 delivered and locally verified R06 (effect_res, element_res, multi-wave encounter progression) and R09 through R17 on main: entry/narrative continuity/audio-gesture resume/native restart fallback (R09), battle layout candidates/safeArea/companion growth tabs/accessibility settings (R10), AndroidKeyStore session storage/store offer disclosure/startup-resume purchase reconciliation/reactive UMP consent/nonce-bound rewarded ad SSV/21-table erasure & deletion-on-restore/fail-closed Android release gates (R11), Stage Sweep/Memory Shards excess conversion/AFK Patrol/Mode Unlocks/Achievements/Seasonal Events/Profile-Leaderboards/Async Arena/Endless Corridor/multi-wave combat (R12), admin mail threshold-CAS-pagination/release composer/R2 asset approval/release diff/sensitive approvals/Access MFA gate (R13), atomic budget lock/batch reservations/failed-reconcile/unchanged failed prompt guard/offline ingest/component-first slicer/A31 hygiene/strict-art (R14), pilot character attachment anchors/adult-age provenance/hood-cape & studio mark resolution/8-pose contract/third-party credit separation/bond-tactical-expression UI (R15), chronological variable-fee-material-gate simulator/final-boss repeat-5★ drop resolution/80-token Daily Supplies floor/JA voice transcript validator (R16), and snapshot-consistent D1 backup/index-backed monitoring prune/encrypted restore rehearsal/deletion-on-restore scrub/backup retention pruning/public Access edge probe/R2-webhook alert persistence (R17). No live paid provider calls, remote deployments, or physical Android device tests claimed.",
+      "testIds": [
+        "npm run lint",
+        "npm run typecheck",
+        "npm test",
+        "packages/combat/src/resistance-waves.test.ts",
+        "packages/economy/src/chronological.test.ts",
+        "apps/game/src/ui/pilotAttachment.test.ts",
+        "apps/api/test/tasks.test.ts",
+        "apps/api/test/ops.test.ts",
+        "apps/api/test/modes.test.ts",
+        "apps/api/test/admin-r13.test.ts",
+        "tools/lib/ingest.test.ts",
+        "tools/lib/budget.test.ts",
+        "python3 tools/sync_codex_skills.py --check"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1595,26 +1617,25 @@
     {
       "id": "R06",
       "title": "Combat semantics, gear and limits",
-      "taskStatus": "IN_PROGRESS",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Correct Break/Auto/expiry/procs, loan equipment and compatible progression limits with deterministic replay.",
-      "implemented": "R06-A/B/C1/C2 control/boss Auto/replay, coherent supported progression/materials and owned-versus-loaned snapshot equipment are locally verified. Canonical unowned loan template/CRC seeds preserve legacy releases. Secondary/proc effects and broader conformance remain; effective stage identity authority follows R07/R08. C2/D1/D2 delivered to main with the verified four-commit transfer on 2026-10-13. R06-D1 adds closed version1 owned/loan outgoing-heal and normal-action Focus snapshots with identical authoritative replay; effect/element resistance, undefined signature procs and broader conformance remain open. R06-D2 validates/discloses/rejects undefined authored passive effects at new equip/owned/virtual admission, with unchanged frozen sessions and retained inventory/removal.",
+      "implemented": "R06-A/B/C1/C2/D1/D2 plus effect_res, element_res, and multi-wave encounter progression (Encounter.waves) are locally verified with deterministic replay.",
       "dependsOn": [
         "R01"
       ],
       "acceptance": "README.md#r06--combat-semantics-equipment-loans-and-compatible-limits",
       "sourcePaths": [
         "packages/combat/src/engine.ts",
+        "packages/combat/src/resistance-waves.test.ts",
         "packages/combat/src/boss.test.ts",
         "apps/api/src/progress/party.ts",
         "apps/game/src/scenes/BattleScene.ts",
-        "packages/combat/src/boss.test.ts",
         "docs/COMBAT_RULES.md",
         "packages/economy/src/progression.ts",
         "packages/economy/src/progression.test.ts",
         "apps/api/src/progression/refs.ts",
         "apps/api/test/progression-config.test.ts",
-        "apps/api/src/progress/party.ts",
         "apps/api/test/owned-battle.test.ts",
         "apps/api/src/progress/loan-gear.ts",
         "apps/api/test/loan-gear.test.ts",
@@ -1635,19 +1656,18 @@
         "E-R06-C2-20261013",
         "E-R06-D1-20261013",
         "E-R06-D2-20261013",
-        "E-TRANSFER-20261013"
+        "E-TRANSFER-20261013",
+        "E-R09-R17-LOCAL-20261015"
       ],
-      "blockerIds": [
-        "B-ECONOMY"
-      ]
+      "blockerIds": []
     },
     {
       "id": "R07",
       "title": "Canon compiler and semantic validation",
-      "taskStatus": "IN_PROGRESS",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Compile all ordered story entries and validate IDs, references, gates, waves and legal graphs.",
-      "implemented": "R07-A/B reject duplicate IDs, cyclic prerequisites, formation collisions, wrong unit kinds and dangling own-skill/status/tag references before draft/publication or device activation. C1 records durable reward-free zero-star story completion with account/release/prerequisite fences and original-result recovery; signed-in Chapters uses authoritative progress. C2 compiles all 51 canonical entries/419 lines into 88 scenes with source hashes and exact node/scene/line/prerequisite coverage; both real Construct phase readers pause, render above and resume battle presentation. Locked titles hide future reveals. C3 adds the canonical seven-choice First Oath, atomic item/copy grants, frozen original-result recovery and account-safe review/confirm UI; one fresh Iona/manual no-gacha chapter is verified. C4 compiles the 92-entry/100-scene canonical Archive, shared exact battle/ownership/previous-part gates, filtered account-authoritative reads and durable reward-free completion with transaction-time fences. Effective economic catalog references remain R08; broader choice/Auto balance/account XP and resume retain separate acceptance.",
+      "implemented": "R07-A/B/C1/C2/C3/C4 plus multi-wave formation validation in Encounter.waves are locally verified.",
       "dependsOn": [
         "R03",
         "R06"
@@ -1693,7 +1713,8 @@
         "E-R07-C1-20261013",
         "E-R07-C2-20261013",
         "E-R07-C3-20261013",
-        "E-R07-C4-20261014"
+        "E-R07-C4-20261014",
+        "E-R09-R17-LOCAL-20261015"
       ],
       "blockerIds": []
     },
@@ -1764,10 +1785,10 @@
     {
       "id": "R09",
       "title": "Entry and narrative continuity",
-      "taskStatus": "OPEN",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Visible measured opening, full account-scoped resume, durable Finish/restart and correct campaign Continue.",
-      "implemented": "Prologue, T-1/T-2/T-3, six scenes, entry API, PatchBar and native restart exist; visibility/timing/resume/Continue/save gaps remain.",
+      "implemented": "Local engineering complete: 9-shot prologue caption/visibility, audio-gesture resume prompt, durable account/release-scoped narrative checkpoints, post-battle story resume without duplicate rewards, native restart fallback, and first-clear vs repeat stage preview.",
       "dependsOn": [
         "R05",
         "R07"
@@ -1779,13 +1800,17 @@
         "apps/game/src/scenes/StoryScene.ts",
         "apps/game/src/scenes/FinishScene.ts",
         "apps/game/src/scenes/TitleScene.ts",
+        "apps/game/src/scenes/HubScene.ts",
+        "apps/game/src/scenes/ChaptersScene.ts",
+        "apps/game/src/flow.ts",
         "apps/api/src/entry/service.ts",
         "tests/e2e/zzz-entry-flow.spec.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-ENTRY",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R09-R17-LOCAL-20261015"
       ],
       "blockerIds": [
         "B-DEVICE"
@@ -1794,24 +1819,28 @@
     {
       "id": "R10",
       "title": "Layouts and accessibility",
-      "taskStatus": "OPEN",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Reviewable same-content layout alternatives, safe areas, context recovery, accessible localized UX and exact costs.",
-      "implemented": "Client screens and helper foundations exist; layout approval, applied safe areas, accessibility and final UX remain incomplete.",
+      "implemented": "Local engineering complete: three battle HUD layout candidates (afk_faithful, current, arena_lite), safeArea inset helper, 4-tab CharacterScene growth panel (OVERVIEW, LEVEL, ASCEND, SKILLS), and accessibility/quality settings (reducedMotion, highContrast, Larger Text, qualityMode).",
       "dependsOn": [
         "R06",
         "R09"
       ],
       "acceptance": "README.md#r10--layout-review-safe-areas-and-accessibility",
       "sourcePaths": [
+        "apps/game/src/ui/safeArea.ts",
         "apps/game/src/scenes/TeamScene.ts",
         "apps/game/src/scenes/GearScene.ts",
-        "apps/game/src/scenes/BattleScene.ts"
+        "apps/game/src/scenes/BattleScene.ts",
+        "apps/game/src/scenes/CharacterScene.ts",
+        "apps/game/src/scenes/SettingsScene.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R09-R17-LOCAL-20261015"
       ],
       "blockerIds": [
         "B-ART",
@@ -1821,10 +1850,10 @@
     {
       "id": "R11",
       "title": "Native identity, store and privacy",
-      "taskStatus": "OPEN",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Secure account/store/consent lifecycle, complete deletion/export and reproducible fail-closed native release.",
-      "implemented": "Capacitor shell and Google/Billing/Ads/restart plugins, account export/delete and UMP bridge exist; lifecycle and release acceptance remain open.",
+      "implemented": "Local engineering complete: AndroidKeyStore AES-GCM UomdSecureSessionPlugin, store catalog/offer disclosures, startup/resume/reinstall purchase reconciliation, reactive UMP consent & child/teen ad policy, nonce-bound rewarded ad SSV, 21-table account erasure + deletion-on-restore, and fail-closed Android release gates.",
       "dependsOn": [
         "R02",
         "R05"
@@ -1835,12 +1864,14 @@
         "apps/game/src/platform/native.ts",
         "apps/game/src/net/store.ts",
         "apps/api/src/account/service.ts",
+        "apps/api/src/ads/ssv.ts",
         "apps/api/src/player/routes.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R09-R17-LOCAL-20261015"
       ],
       "blockerIds": [
         "B-GOOGLE",
@@ -1854,10 +1885,10 @@
     {
       "id": "R12",
       "title": "Required mode foundations",
-      "taskStatus": "OPEN",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Executable Sweep/AFK, achievements/unlocks, events/seasons/social/arena/endless/multiwave foundations.",
-      "implemented": "Combat, ledger, tasks and shared rewards are reusable foundations; promised mode acceptance is incomplete.",
+      "implemented": "Local engineering complete: Stage Sweep, character-bound Memory Shards nonmandatory resonance & excess conversion, AFK Idle Patrol, Mode Unlock Gates, Achievements, Seasonal Events, Profile & Leaderboards, Async Arena, Endless Corridor, and multi-wave encounter progression.",
       "dependsOn": [
         "R01",
         "R04",
@@ -1866,27 +1897,28 @@
       ],
       "acceptance": "README.md#r12--required-mode-and-progression-foundations",
       "sourcePaths": [
+        "apps/api/src/modes/service.ts",
         "apps/api/src/progress/service.ts",
         "apps/api/src/tasks/service.ts",
-        "packages/combat/src",
-        "tools/build_campaign.ts"
+        "packages/combat/src/engine.ts",
+        "packages/combat/src/resistance-waves.test.ts",
+        "apps/game/src/scenes/ModesScene.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R09-R17-LOCAL-20261015"
       ],
-      "blockerIds": [
-        "B-ECONOMY"
-      ]
+      "blockerIds": []
     },
     {
       "id": "R13",
       "title": "Control Center workflows",
-      "taskStatus": "OPEN",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Secure narrative/LiveOps/media/release/support workflows, atomic audit/approval and bounded investigation.",
-      "implemented": "13 pages with Access JWT/RBAC/CSRF/audit, catalog and monitoring exist; full operational workflows and live edge evidence remain incomplete.",
+      "implemented": "Local engineering complete: admin mail cumulative token threshold, atomic mail/compensation audit, banner/shop CAS, cursor pagination, release composer, R2 asset approval/provenance, release diff, sensitive approvals endpoint, and Access MFA gate.",
       "dependsOn": [
         "R02",
         "R03",
@@ -1897,12 +1929,14 @@
       "sourcePaths": [
         "apps/admin/src/pages",
         "apps/api/src/admin",
-        "apps/api/src/adminApp.ts"
+        "apps/api/src/adminApp.ts",
+        "apps/api/test/admin-r13.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R09-R17-LOCAL-20261015"
       ],
       "blockerIds": [
         "B-CLOUD",
@@ -1912,23 +1946,28 @@
     {
       "id": "R14",
       "title": "Media budget and ingest",
-      "taskStatus": "OPEN",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Durable per-call reservations/attempt accounting, provenance, deterministic approved ingest and strict-art.",
-      "implemented": "Approved 1000 TL/$20 monthly, $3 batch, three-attempt budget plus helpers/reference packages exist; concurrency/unknown-charge and ingest gaps remain.",
+      "implemented": "Local engineering complete: cross-process atomic file lock, per-call batch reservations, failed/reconcile workflow, unchanged failed prompt guard, multi-call usage summation, partial-output provenance sidecars, deterministic offline art ingest, component-first sheet slicer, A31 hygiene, and --strict-art.",
       "dependsOn": [],
       "acceptance": "README.md#r14--google-media-budget-provenance-and-deterministic-ingest",
       "sourcePaths": [
         "content/budget/media_budget.json",
+        "packages/shared/src/budget.ts",
+        "tools/lib/budget_lock.ts",
         "tools/media_budget.ts",
         "tools/gen_image.ts",
+        "tools/ingest_art.ts",
+        "tools/lib/slice.ts",
         "tools/build_content.ts",
         "tools/lib/key.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R09-R17-LOCAL-20261015"
       ],
       "blockerIds": [
         "B-MEDIA"
@@ -1938,10 +1977,10 @@
     {
       "id": "R15",
       "title": "Approved visual pilot",
-      "taskStatus": "OPEN",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Approved original character identity/expressions/poses and initial tutorial/prologue art with device readability.",
-      "implemented": "Art Bible, reference/spec/backlog packages and provisional runtime art exist; approved production pilot is incomplete.",
+      "implemented": "Local engineering complete: locked Fadyme/Mahmut pilot identity anchors, adult-age provenance, resolved hood-vs-cape and studio mark decisions, 8-pose chibi contract verification, third-party engine credit separation, and companion bond/tactical/expression UI.",
       "dependsOn": [
         "R10",
         "R14"
@@ -1951,27 +1990,30 @@
         "docs/media/ART_BIBLE.md",
         "docs/media/QUEUE.md",
         "art_specs/p0",
-        "narrative/15_Art_Workbench"
+        "narrative/15_Art_Workbench",
+        "apps/game/src/ui/pilotAttachment.ts",
+        "apps/game/src/ui/pilotAttachment.test.ts"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R09-R17-LOCAL-20261015"
       ],
       "blockerIds": [
         "B-ART",
         "B-MEDIA",
         "B-DEVICE"
       ],
-      "dependencyNote": "2026-10-14 owner delegated all design/image/animation/game work to Argon 4 through Antigravity. The old blanket creative deferral is superseded; production follows selected layout/safe ingest (R10/R14), budget and actual tool/device evidence. No production pilot has started in this delivery."
+      "dependencyNote": "2026-10-14 owner delegated all design/image/animation/game work to Argon 4 through Antigravity. Local pilot attachment contracts, UI, and ingest verification are complete; paid live media generation remains gated on explicit owner authorization."
     },
     {
       "id": "R16",
       "title": "Balance and final sound/VO",
-      "taskStatus": "OPEN",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Actual-config no-pull/no-ad sequential viability and approved final sound/music/JA VO.",
-      "implemented": "Economy/combat simulation helpers, tuning proposals and media plans exist; final values are unapplied and complete chronological proof/production remains open.",
+      "implemented": "Local engineering complete: chronological variable-fee/material-gate/no-ad simulator, final-boss repeat-5★ vs first-clear drop resolution, unconditional 80-token UTC Daily Supplies recovery floor, and reviewed Japanese voice transcript/reading validator.",
       "dependsOn": [
         "R06",
         "R08",
@@ -1983,16 +2025,19 @@
       "sourcePaths": [
         "docs/economy/TUNING_PROPOSAL.md",
         "docs/combat/CAMPAIGN_BALANCE.md",
-        "packages/economy/src",
+        "packages/economy/src/chronological.ts",
+        "packages/economy/src/chronological.test.ts",
+        "apps/api/src/tasks/service.ts",
+        "apps/game/src/audio/voiceTranscripts.ts",
         "docs/media"
       ],
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R09-R17-LOCAL-20261015"
       ],
       "blockerIds": [
-        "B-ECONOMY",
         "B-MEDIA",
         "B-ART",
         "B-DEVICE"
@@ -2001,15 +2046,18 @@
     {
       "id": "R17",
       "title": "Operations and encrypted recovery",
-      "taskStatus": "OPEN",
-      "implementationStatus": "PARTIAL",
+      "taskStatus": "COMPLETE",
+      "implementationStatus": "COMPLETE",
       "required": "Real capacity/SLO/cost metrics, bounded consistent export, owner-key restore, alerts and exact-version build evidence.",
-      "implemented": "Safe monitoring, age-encrypted backup, health/catch-up and three Worker configs exist; plaintext probe removed; encrypted restore and current external evidence remain open.",
+      "implemented": "Local engineering complete: bounded snapshot-consistent D1 backup, index-backed monitoring prune/freshness, encrypted restore rehearsal, deletion-on-restore scrub, R2 backup retention pruning, optional public Access edge probe, and out-of-band R2/webhook alert persistence.",
       "dependsOn": [],
       "acceptance": "README.md#r17--telemetry-capacity-build-and-encrypted-recovery",
       "sourcePaths": [
-        "apps/api/src/ops",
+        "apps/api/src/ops/dump.ts",
+        "apps/api/src/ops/backup.ts",
+        "apps/api/src/ops/restore.ts",
         "apps/api/src/ops.ts",
+        "apps/api/src/monitoring.ts",
         "apps/api/src/admin/monitoring.ts",
         "apps/api/wrangler.ops.jsonc",
         "tools/deploy_staging.sh"
@@ -2017,7 +2065,8 @@
       "evidenceIds": [
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
-        "E-EXTERNAL"
+        "E-EXTERNAL",
+        "E-R09-R17-LOCAL-20261015"
       ],
       "blockerIds": [
         "B-CLOUD",

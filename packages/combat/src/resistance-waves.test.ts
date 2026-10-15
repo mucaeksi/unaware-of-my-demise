@@ -51,12 +51,12 @@ describe('effect_res & element_res', () => {
   it('supports equipment_effects.effect_res_pct and modify_stat effect_res on party members', () => {
     const enc = encounterT1();
     const b = Battle.create(noCrit(basePack()), enc, [
-      { unit_id: 'mahmut', level: 1, slot: 0, row: 'front', equipment_effects: { version: 1, effect_res_pct: 0.4, element_res_pct: { Dusk: 0.25 } } },
+      { unit_id: 'mahmut', level: 1, slot: 0, row: 'front', equipment_effects: { version: 1, effect_res_pct: 0.4, element_res_pct: { Dawn: 0.25 } } },
       { unit_id: 'fadyme', level: 1, slot: 1, row: 'rear', equipment_effects: { version: 1, effect_res_pct: 0.2 } }
     ]);
     const mahmut = b.unit('player:0:mahmut');
     expect(b.effEffectRes(mahmut)).toBeCloseTo(0.4);
-    expect(b.effElementResMult(mahmut, 'Dusk')).toBeCloseTo(0.75);
+    expect(b.effElementResMult(mahmut, 'Dawn')).toBeCloseTo(0.75);
   });
 });
 
