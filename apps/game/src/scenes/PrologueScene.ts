@@ -131,10 +131,10 @@ export class PrologueScene extends Phaser.Scene {
       strokeThickness: 6
     }).setOrigin(0.5, 0).setDepth(DEPTH.hud);
 
-    const barW = 720;
-    const barY = REF_H - 34 - insets.bottom;
+    const barW = 440;
+    const barY = capY + 46;
     this.add.rectangle(REF_W / 2, barY, barW, 3, C.plumHi, 0.45).setDepth(DEPTH.hud);
-    this.progressFill = this.add.rectangle(REF_W / 2 - barW / 2, barY, 0, 3, C.goldHi, 0.8).setOrigin(0, 0.5).setDepth(DEPTH.hud + 1);
+    this.progressFill = this.add.rectangle(REF_W / 2 - barW / 2, barY, 0, 3, C.goldHi, 0.85).setOrigin(0, 0.5).setDepth(DEPTH.hud + 1);
 
     this.buildControls();
     if (!prefs().reducedMotion && !INTRO_FAST) this.addMotes();
@@ -251,8 +251,8 @@ export class PrologueScene extends Phaser.Scene {
     const first = this.index === 0;
     const holdMs = sceneSeconds(scene) * 1000;
     const total = Math.max(1, data.scenes.length);
-    const startW = 720 * (this.index / total);
-    const endW = 720 * ((this.index + 1) / total);
+    const startW = 440 * (this.index / total);
+    const endW = 440 * ((this.index + 1) / total);
     this.tweens.killTweensOf(this.progressFill);
     this.progressFill.width = startW;
     this.tweens.add({ targets: this.progressFill, width: endW, duration: holdMs, ease: 'Linear' });
@@ -283,7 +283,7 @@ export class PrologueScene extends Phaser.Scene {
     img.setScale(from);
     const drift = calm ? 0 : (this.index % 3 === 1 ? 46 : -46);
     img.x += drift * -1;
-    this.tweens.add({ targets: img, alpha: 1, duration: first ? 1200 : CROSSFADE_MS, ease: 'Sine.easeInOut' });
+    this.tweens.add({ targets: img, alpha: 1, duration: first ? (INTRO_FAST ? 60 : 1200) : CROSSFADE_MS, ease: 'Sine.easeInOut' });
     if (!calm) this.tweens.add({ targets: img, scale: to, x: REF_W / 2 + drift, duration: holdMs + CROSSFADE_MS, ease: 'Sine.easeInOut' });
     const old = this.current;
     this.current = img;
@@ -299,7 +299,7 @@ export class PrologueScene extends Phaser.Scene {
     this.caption.setText(scene.caption_en.toUpperCase()).setAlpha(0);
     this.captionRule.setAlpha(0);
     this.body.setText('').setAlpha(1);
-    this.tweens.add({ targets: [this.actCounter, this.caption, this.captionRule], alpha: 1, duration: TEXT_FADE_MS * 2, delay: 300 });
+    this.tweens.add({ targets: [this.actCounter, this.caption, this.captionRule], alpha: 1, duration: TEXT_FADE_MS * 2, delay: INTRO_FAST ? 15 : 260 });
     const full = this.stage?.text(scene.line_id, scene.text_en) ?? scene.text_en;
     void this.stage?.voice(scene.line_id);
     const step = INTRO_FAST ? 3 : 1;
