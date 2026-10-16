@@ -151,9 +151,18 @@ export class ContentService {
   private async isStaleBasePatch(): Promise<boolean> {
     const state = await this.patch.state();
     if (!state.active) return false;
-    const expected = this.base.files['art/bg_forgotten_stone_crossing.webp'];
-    if (!expected) return false;
-    return !state.active.manifest.files.some((f) => f.path === 'art/bg_forgotten_stone_crossing.webp' && f.sha256 === expected);
+    for (const key of [
+      'art/bg_forgotten_stone_crossing.webp',
+      'presentation/presentation.json',
+      'entry/prologue.json',
+      'art/art_manifest.json'
+    ]) {
+      const expected = this.base.files[key];
+      if (expected && !state.active.manifest.files.some((f) => f.path === key && f.sha256 === expected)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private async preferBaseFile(path: string): Promise<boolean> {

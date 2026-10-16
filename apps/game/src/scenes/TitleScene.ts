@@ -3,7 +3,7 @@ import type { PatchOutcome } from '@uomd/patch';
 import { CHANNEL, CLIENT_VERSION, PATCH_LAB_ENABLED, PREVIEW_FLOW_ENABLED, REF_H, REF_W } from '../config';
 import { beginEntry, signInWithGoogle } from '../entry/flow';
 import { syncEntry } from '../entry/sync';
-import { forceResetEntry, loadEntry } from '../entry/state';
+import { forceResetEntry, isForceFreshEntry, isInteractiveBrowser, loadEntry } from '../entry/state';
 import { S, setActiveLocaleStrings } from '../entry/strings';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
@@ -159,7 +159,7 @@ export class TitleScene extends Phaser.Scene {
     this.buildTitleStartMenu();
 
     // a reinstall or a second device: the account may already be past the entry flow
-    if (this.firstRun && Services.api.signedIn) {
+    if (this.firstRun && Services.api.signedIn && !isForceFreshEntry()) {
       void syncEntry(Services.api).then(({ state }) => {
         if (state.phase === 'completed' && this.scene.isActive() && !this.busy) {
           this.firstRun = false;
@@ -467,7 +467,7 @@ export class TitleScene extends Phaser.Scene {
     if (this.authBadgeText?.active) {
       this.authBadgeText.setText('PLAY GAMES ✓').setColor(T.heal);
     }
-    if (Services.api.signedIn) {
+    if (Services.api.signedIn && !isForceFreshEntry()) {
       await syncEntry(Services.api).catch(() => undefined);
       if (!this.sys.isActive()) return;
       this.firstRun = loadEntry().phase !== 'completed';
@@ -487,6 +487,9 @@ export class TitleScene extends Phaser.Scene {
     void this.refreshChip();
 
     if (this.firstRun) {
+      if (isInteractiveBrowser()) {
+        forceResetEntry();
+      }
       // First-time player: keep patch running in background and transition slowly into Prologue / Tutorial
       await this.waitMs(850);
       if (!this.sys.isActive()) return;

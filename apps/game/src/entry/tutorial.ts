@@ -4,7 +4,7 @@ import { restartGame } from '../platform/native';
 import { Services } from '../services';
 import { advance } from './flow';
 import { clearFlowCheckpoint, clearStoryCheckpoint, loadFlowCheckpoint, saveFlowCheckpoint } from './resume';
-import { markTutorialDone } from './state';
+import { isForceFreshEntry, markTutorialDone } from './state';
 import { confirmEntryComplete, recordEntry } from './sync';
 
 /**
@@ -23,6 +23,8 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
 
   const finishStage = (s: Phaser.Scene): void => {
     clearFlowCheckpoint(accountKey);
+    if (enc.pre_story) clearStoryCheckpoint(accountKey, enc.pre_story);
+    if (enc.post_story) clearStoryCheckpoint(accountKey, enc.post_story);
     recordEntry(Services.api, (st) => markTutorialDone(st, index));
     if (index === 3 && Services.patches.get().kind === 'ready') {
       // Background patch already completed during the tutorial: fade to black and restart immediately
@@ -43,6 +45,7 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
   };
   const afterBattle = (b: Phaser.Scene): void => {
     if (enc.post_story) {
+      if (forceRestart || isForceFreshEntry()) clearStoryCheckpoint(accountKey, enc.post_story);
       saveFlowCheckpoint(accountKey, { kind: 'tutorial', index, step: 'post_story' });
       b.scene.start('Story', { path: enc.post_story, onDone: finishStage });
     } else {
@@ -62,7 +65,7 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
     });
   };
 
-  const flowCp = !forceRestart ? loadFlowCheckpoint(accountKey) : null;
+  const flowCp = !forceRestart && !isForceFreshEntry() ? loadFlowCheckpoint(accountKey) : null;
   if (flowCp?.kind === 'tutorial' && flowCp.index === index) {
     if (flowCp.step === 'post_story' && enc.post_story) {
       afterBattle(scene);
@@ -75,6 +78,7 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
   }
 
   if (enc.pre_story) {
+    if (forceRestart || isForceFreshEntry()) clearStoryCheckpoint(accountKey, enc.pre_story);
     saveFlowCheckpoint(accountKey, { kind: 'tutorial', index, step: 'pre_story' });
     scene.scene.start('Story', { path: enc.pre_story, onDone: battle });
   } else {

@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { ContentService } from '../content/ContentService';
-import { forceResetEntry, loadEntry } from '../entry/state';
+import { forceResetEntry, isForceFreshEntry, isInteractiveBrowser, loadEntry } from '../entry/state';
 import { prefs } from '../platform/prefs';
 import { API_BASE } from '../config';
 import { loadCurrencyName } from '../net/currency';
@@ -42,7 +42,20 @@ export class BootScene extends Phaser.Scene {
     void loadCurrencyName(API_BASE);
     const params = new URLSearchParams(window.location.search);
     const previewScene = params.get('preview_scene');
-    if (previewScene === 'fresh_flow' || previewScene === 'title_fresh' || params.get('fresh_entry') === '1') {
+    let isPostT3Restart = false;
+    try {
+      isPostT3Restart = typeof sessionStorage !== 'undefined' && sessionStorage.getItem('uomd.post_t3_restart.v1') === '1';
+      if (isPostT3Restart) sessionStorage.removeItem('uomd.post_t3_restart.v1');
+    } catch {
+      /* ignore */
+    }
+    if (
+      !isPostT3Restart &&
+      (isInteractiveBrowser() ||
+        previewScene === 'fresh_flow' ||
+        previewScene === 'title_fresh' ||
+        params.get('fresh_entry') === '1')
+    ) {
       forceResetEntry();
     }
     // the engine credit plays while content and menu art load behind it
@@ -110,6 +123,8 @@ export class BootScene extends Phaser.Scene {
       // after the first-install flow the downloaded release is switched on here, before any art is loaded (no network involved)
       if (loadEntry().phase === 'completed') {
         await Services.content.activateStaged();
+      } else if (isForceFreshEntry()) {
+        await Services.content.rollback().catch(() => undefined);
       }
       const art = await Services.refreshArt();
       await art.loadUi(this);

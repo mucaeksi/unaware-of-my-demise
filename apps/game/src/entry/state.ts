@@ -76,24 +76,48 @@ function clearCheckpointKeys(): void {
     const toRemove: string[] = [];
     for (let i = 0; i < localStorage.length; i++) {
       const k = localStorage.key(i);
-      if (k && (k.startsWith('uomd.flow') || k.startsWith('uomd.story') || k.startsWith('uomd.battle'))) {
+      if (
+        k &&
+        (k.startsWith('uomd.flow') ||
+          k.startsWith('uomd.story') ||
+          k.startsWith('uomd.prologue') ||
+          k.startsWith('uomd.battle') ||
+          k.startsWith('uomd.progress'))
+      ) {
         toRemove.push(k);
       }
     }
     for (const k of toRemove) localStorage.removeItem(k);
+    if (typeof sessionStorage !== 'undefined') {
+      sessionStorage.removeItem('uomd.story.checkpoint.v1');
+    }
   } catch {
     /* ignore */
   }
 }
 
 /**
+ * True on the local Vite dev server (port 5173) or any non-WebDriver browser session.
+ * Automated E2E tests run on port 8787 under WebDriver.
+ */
+export function isInteractiveBrowser(): boolean {
+  try {
+    if (typeof window === 'undefined') return false;
+    if (window.location?.port === '5173') return true;
+    return !window.navigator?.webdriver;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Ensures browsers that played an earlier pre-v0.1.4 build or got stuck on a mid-battle checkpoint
  * start fresh in the Base AAB flow (Prologue + 3 Tutorials).
- * Skipped under automated tests / WebDriver so test fixtures remain untouched.
+ * Skipped under automated E2E tests on port 8787 so test fixtures remain untouched.
  */
 function ensureV012EntryReset(): void {
   try {
-    if (typeof window === 'undefined' || window.navigator?.webdriver) return;
+    if (!isInteractiveBrowser()) return;
     if (localStorage.getItem(V012_RESET_KEY) !== '1') {
       localStorage.setItem(V012_RESET_KEY, '1');
       localStorage.setItem(FORCE_FRESH_KEY, '1');
@@ -109,7 +133,7 @@ function ensureV012EntryReset(): void {
 
 export function isForceFreshEntry(): boolean {
   try {
-    return typeof window !== 'undefined' && !window.navigator?.webdriver && localStorage.getItem(FORCE_FRESH_KEY) === '1';
+    return typeof window !== 'undefined' && localStorage.getItem(FORCE_FRESH_KEY) === '1';
   } catch {
     return false;
   }

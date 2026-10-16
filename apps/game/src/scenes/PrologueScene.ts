@@ -5,7 +5,7 @@ import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
 import { advance } from '../entry/flow';
 import { clearPrologueCheckpoint, loadPrologueCheckpoint, savePrologueCheckpoint } from '../entry/resume';
-import { loadEntry, markPrologueSeen } from '../entry/state';
+import { isForceFreshEntry, isInteractiveBrowser, loadEntry, markPrologueSeen } from '../entry/state';
 import { recordEntry } from '../entry/sync';
 import { plateKey } from '../entry/plates';
 import { prefs } from '../platform/prefs';
@@ -156,7 +156,7 @@ export class PrologueScene extends Phaser.Scene {
       fontSize: 21,
       onClick: () => this.toggleMute()
     }).setDepth(DEPTH.hud + 3);
-    if (loadEntry().phase === 'completed') {
+    if (loadEntry().phase === 'completed' || isInteractiveBrowser()) {
       new Button(this, REF_W - 108 - insets.right, 56 + insets.top, {
         label: 'SKIP',
         w: 148,
@@ -234,7 +234,7 @@ export class PrologueScene extends Phaser.Scene {
       return;
     }
     if (!current()) return;
-    const savedIndex = loadPrologueCheckpoint(Services.api.accountKey, this.data0.scenes.length);
+    const savedIndex = isForceFreshEntry() ? null : loadPrologueCheckpoint(Services.api.accountKey, this.data0.scenes.length);
     if (savedIndex !== null && savedIndex > 0) {
       this.index = savedIndex - 1;
     }

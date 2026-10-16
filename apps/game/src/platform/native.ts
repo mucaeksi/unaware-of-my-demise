@@ -110,6 +110,13 @@ export const NativeApp = registerPlugin<AppPlugin>('UomdApp');
 
 /** Restarts the game client exactly once per call; the caller guards against repeated presses. */
 export async function restartGame(): Promise<void> {
+  try {
+    if (typeof sessionStorage !== 'undefined') {
+      sessionStorage.setItem('uomd.post_t3_restart.v1', '1');
+    }
+  } catch {
+    /* ignore */
+  }
   if (isNative()) {
     try {
       await NativeApp.restart();
