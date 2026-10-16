@@ -36,34 +36,34 @@
     },
     {
       "output": "content/base/art/portrait_mahmut_composed.webp",
-      "sha256": "ce3067a3be21b21dd306a6d26b02376a6fd63bdf7f5dc5e4887106794bf272ef",
+      "sha256": "b31c0024cbb35d81255f7ede0d7073980ead5cafa9d2e1bb19f778e13a3e790b",
       "sources": {
-        "generated:mahmut_vn_composed@rev4": "d323b11f686b953228e2f647de6df3a409b727bd765a50328e841694f9c9358c",
-        "entry": "8517b87b89cb09874d79d8edcc78c0b9b2ad168e1c512637f2f7926dc254c523"
+        "generated:mahmut_vn_composed@rev5": "602d7d04f94624579816d2760a7de790f214f72b456b28e4e7500db1edd52fc7",
+        "entry": "72eedec4cb31abffbe14e2d1c0cf1759be09bb8f0e62a125dc08078c4d5f55a3"
       }
     },
     {
       "output": "content/base/art/portrait_mahmut_dry_humor.webp",
-      "sha256": "b6a14f557a4e1bdf3472f2f4820c36ca770b5ec77fc224baf5df254fa58f3445",
+      "sha256": "86769af525118f6183fb12f164132df9e62d2070f45a9ccce92f93516a88ff48",
       "sources": {
-        "generated:mahmut_vn_dry_humor@rev3": "beebef3239e53f73d0e98a0339fbb2e93c2ca3bb42920630b8bfd9b77772da8f",
-        "entry": "bd1733d6189dcde3b189d09b5dd426c908694eac75ae3535d11ac1f731ac627a"
+        "generated:mahmut_vn_dry_humor@rev4": "d585f95b80735b63b143e9f0dc2c59f5432fa42bb2c56f99d4dab9d1eb66eef3",
+        "entry": "2b7bc611db43a02840e7babde889fd9d9b2d832aedea5008dc9b11ba37dd960d"
       }
     },
     {
       "output": "content/base/art/portrait_mahmut_protective_resolve.webp",
-      "sha256": "f1a803706949231fb47f9da5a93d2ff74ee1fd8f85f564188b294e02352db190",
+      "sha256": "f180bc09767df70c96d373882758b635c305b38b5f5670daa7ba9fb0d1ad4c3a",
       "sources": {
-        "generated:mahmut_vn_protective_resolve@rev3": "deb31aa521b46cfbd6578bdde816fdcc890bbb901d0c36fa9501ba804e1dcaaa",
-        "entry": "957c6a189b88ee8e1f95957a2494d75120792c20da0aaf9a8eb07270ef296c03"
+        "generated:mahmut_vn_protective_resolve@rev4": "66cafc6fbaa77d93608ab47aa75c172541fe06c7412c30a79f2b0cebed8fc6eb",
+        "entry": "1c2086654e56d1ca2a0db3df95010c4326c1ccc3509570094cc46436972b204a"
       }
     },
     {
       "output": "content/base/art/portrait_mahmut_watchful.webp",
-      "sha256": "65ffd0a90d131d8ee046fc9aaa2b7a5c6eb04cd7c4f1c417edc6f5e138397246",
+      "sha256": "b571bb4d338fd66184d5d9a7cabbeb3fe073698453268e23b243bd5067849cb3",
       "sources": {
-        "generated:mahmut_vn_watchful@rev4": "612474d3d67803e3801350984ef38d9a0d32beb998b035f654a4af004e65a144",
-        "entry": "5f83075e73a99d901c67a88ca54b64647b36446be7964ec034d8a8d3dd2464e0"
+        "generated:mahmut_vn_watchful@rev5": "e766cbdb1c32914f20ad206b1ed2d75c7e875958e24ee890ae10178e3a69c495",
+        "entry": "76b5de0d40dd818baab02169941017b21c90506ebb8228fc0a27992908dd8115"
       }
     },
     {
@@ -160,10 +160,10 @@
     },
     {
       "output": "content/base/art/ui_title_bg.webp",
-      "sha256": "5696df7ba4b5dc8fcc2f697020701240ddcea7caea73992b1f8fd174fbd10934",
+      "sha256": "bb4c5aa743e131090aeb2f8f1a97dd4dd80c47a43c3819ae3dc0686392640ce0",
       "sources": {
-        "generated:title_key_art_01@rev2": "1d6eebd2ec4c224830f81a88e9e6092ed2a6a7bf0453610a796c7dfc4addc88e",
-        "entry": "2f873eef27baee7fa3986cea1326bcb8f78aa5f9faa1ff888289909aa9c541ad"
+        "generated:title_key_art_01@rev3": "ddd73954b3dd956b4b25ffe4ce7fe95ce5b74c428f47905d766f970c66d5d219",
+        "entry": "f8347ba68e4897ef6830d09837b53a94df32c63b4f2a39f5c997c1e6785b66c0"
       }
     },
     {

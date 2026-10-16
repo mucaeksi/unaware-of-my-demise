@@ -237,6 +237,17 @@ describe('outcomes', () => {
     expect(JSON.stringify(a.battle.log)).toBe(JSON.stringify(b.battle.log));
     expect(a.battle.combatants).toHaveLength(10);
   });
+
+  it('casualty-based star formula awards 3/2/1 stars for 5-unit parties (0-2 dead = 3★, 3 dead = 2★, 4 dead = 1★)', async () => {
+    const { computeVictoryStars } = await import('./index');
+    expect(computeVictoryStars(5, 0)).toBe(3);
+    expect(computeVictoryStars(5, 1)).toBe(3);
+    expect(computeVictoryStars(5, 2)).toBe(3);
+    expect(computeVictoryStars(5, 3)).toBe(2);
+    expect(computeVictoryStars(5, 4)).toBe(1);
+    expect(computeVictoryStars(2, 0)).toBe(3);
+    expect(computeVictoryStars(2, 1)).toBe(2);
+  });
 });
 
 describe('server replay verification', () => {

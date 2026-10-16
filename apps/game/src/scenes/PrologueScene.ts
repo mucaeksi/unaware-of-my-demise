@@ -136,26 +136,26 @@ export class PrologueScene extends Phaser.Scene {
       const ctx = (this.sound as Phaser.Sound.WebAudioSoundManager).context;
       if (ctx?.state === 'suspended') void ctx.resume().catch(() => undefined);
     });
-    this.pauseBtn = new Button(this, 130 + insets.left, 64 + insets.top, {
+    this.pauseBtn = new Button(this, 108 + insets.left, 56 + insets.top, {
       label: 'PAUSE',
-      w: 180,
-      h: 72,
-      fontSize: 24,
+      w: 148,
+      h: 62,
+      fontSize: 21,
       onClick: () => this.togglePause()
     }).setDepth(DEPTH.hud + 3);
-    this.muteBtn = new Button(this, 330 + insets.left, 64 + insets.top, {
+    this.muteBtn = new Button(this, 270 + insets.left, 56 + insets.top, {
       label: this.muted ? 'UNMUTE' : 'MUTE',
-      w: 180,
-      h: 72,
-      fontSize: 24,
+      w: 148,
+      h: 62,
+      fontSize: 21,
       onClick: () => this.toggleMute()
     }).setDepth(DEPTH.hud + 3);
     if (loadEntry().phase === 'completed') {
-      new Button(this, REF_W - 150 - insets.right, 70 + insets.top, {
+      new Button(this, REF_W - 108 - insets.right, 56 + insets.top, {
         label: 'SKIP',
-        w: 200,
-        h: 78,
-        fontSize: 26,
+        w: 148,
+        h: 62,
+        fontSize: 21,
         onClick: () => this.finish()
       }).setDepth(DEPTH.hud + 3);
     }

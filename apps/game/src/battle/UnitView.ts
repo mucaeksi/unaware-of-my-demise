@@ -72,11 +72,15 @@ export class UnitView extends Phaser.GameObjects.Container {
     this.baseScale = (u.heightPx / (scene.textures.getFrame(idle.key, idle.frame)?.height ?? u.heightPx)) * init.spot.depthScale;
     this.applyState('idle');
 
-    // sleek compact plate under the feet
+    // sleek compact oval translucent plate under the feet
     const plateY = 20;
-    const plateBg = scene.add
-      .rectangle(0, init.side === 'player' ? 18 : 20, 178, init.side === 'player' ? 50 : 54, 0x0a0610, 0.72)
-      .setStrokeStyle(1.2, init.side === 'player' ? C.player : C.enemy, 0.52);
+    const plateCenterY = init.side === 'player' ? 18 : 20;
+    const plateH = init.side === 'player' ? 50 : 54;
+    const plateBg = scene.add.graphics();
+    plateBg.fillStyle(0x0a0610, 0.46);
+    plateBg.lineStyle(1.4, init.side === 'player' ? C.player : C.enemy, 0.52);
+    plateBg.fillRoundedRect(-89, plateCenterY - plateH / 2, 178, plateH, Math.floor(plateH / 2));
+    plateBg.strokeRoundedRect(-89, plateCenterY - plateH / 2, 178, plateH, Math.floor(plateH / 2));
     const nameT = txt(scene, 0, -1, init.name.toUpperCase(), {
       fontFamily: F.display,
       fontSize: '16px',

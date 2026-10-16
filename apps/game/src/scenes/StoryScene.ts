@@ -266,14 +266,19 @@ export class StoryScene extends Phaser.Scene {
       .container(REF_W / 2, 902 - insets.bottom, [panelBg, lnFrame, this.actionBadge, this.bodyText, this.caret])
       .setDepth(DEPTH.hud);
 
-    this.voiceBtn = new Button(this, REF_W - 160 - insets.right, 210 + insets.top, { label: 'VOICE', w: 240, h: 110, fontSize: 28, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }).setDepth(DEPTH.hud + 3).setVisible(false);
-    // cutscenes have no Skip and a single on/off Auto toggle (v006); the regular reader keeps Skip
-    if (!this.cutscene) this.skipBtn = new Button(this, REF_W - 150 - insets.right, 70 + insets.top, { label: 'SKIP', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
-    const rightEdge = (this.cutscene ? REF_W - 150 : REF_W - 400) - insets.right;
-    this.autoBtn = new Button(this, rightEdge, 70 + insets.top, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: 220, h: 86, fontSize: 28, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
-    new Button(this, rightEdge - 250, 70 + insets.top, { label: 'LOG', w: 220, h: 86, fontSize: 28, onClick: () => this.showLog() }).setDepth(DEPTH.hud + 3);
-    title(this, 170 + insets.left, 70 + insets.top, this.data0.title_en, 34, T.dim).setDepth(DEPTH.hud + 3).setOrigin(0, 0.5).setX(60 + insets.left);
-    if (this.init0.authRevision !== undefined && this.init0.onBack) new Button(this, 220 + insets.left, 210 + insets.top, { label: 'ARCHIVE', w: 340, h: 110, onClick: () => this.init0.onBack?.(this) }).setDepth(DEPTH.hud + 3);
+    const topBtnY = 58 + insets.top;
+    const btnW = 148;
+    const btnH = 62;
+    const btnGap = 14;
+    const skipX = REF_W - 104 - insets.right;
+    const autoX = skipX - (btnW + btnGap);
+    const logX = autoX - (btnW + btnGap);
+    this.skipBtn = new Button(this, skipX, topBtnY, { label: 'SKIP', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
+    this.autoBtn = new Button(this, autoX, topBtnY, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
+    new Button(this, logX, topBtnY, { label: 'LOG', w: btnW, h: btnH, fontSize: 21, onClick: () => this.showLog() }).setDepth(DEPTH.hud + 3);
+    this.voiceBtn = new Button(this, skipX, topBtnY + 76, { label: 'VOICE', w: btnW, h: 58, fontSize: 20, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }).setDepth(DEPTH.hud + 3).setVisible(false);
+    title(this, 60 + insets.left, topBtnY, this.data0.title_en, 30, T.dim).setDepth(DEPTH.hud + 3).setOrigin(0, 0.5);
+    if (this.init0.authRevision !== undefined && this.init0.onBack) new Button(this, 160 + insets.left, topBtnY + 76, { label: 'ARCHIVE', w: 200, h: 62, fontSize: 21, onClick: () => this.init0.onBack?.(this) }).setDepth(DEPTH.hud + 3);
     this.tweens.add({ targets: this.caret, alpha: 0.2, duration: 600, yoyo: true, repeat: -1 });
     const onContextLost = (): void => {
       if (!this.finished && this.data0 && this.runner) {
@@ -849,7 +854,15 @@ export class StoryScene extends Phaser.Scene {
     this.currentMoodLabel = moodLabel;
     this.focusSpeaker(narr ? '' : e.speaker, speakerEmotion, pause > CUTSCENE.sameSpeakerPauseSeconds ? CUTSCENE.dissolveSeconds * 1000 : 320);
 
-    this.namePlate.setVisible(false);
+    this.namePlate.setVisible(!narr);
+    if (!narr) {
+      const a = this.actors.get(e.speaker);
+      const left = !a || a.side === 'left';
+      const label = this.currentMoodLabel ? `${e.speakerDisplay.toUpperCase()}  ·  ${this.currentMoodLabel}` : e.speakerDisplay.toUpperCase();
+      this.nameText.setText(label);
+      this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);
+      this.namePlate.setPosition(left ? 365 : REF_W - 365, 756);
+    }
     const isProtectiveOrResolve = speakerEmotion === 'protective' || speakerEmotion === 'determined';
     const isWarm = speakerEmotion === 'soft_smile';
     this.bodyText.setStyle({
@@ -865,13 +878,14 @@ export class StoryScene extends Phaser.Scene {
     this.waiting = true;
     this.typing?.remove();
     this.autoTimer?.remove();
-    if (pause > 0) {
+    if (pause > 0 && !this.skip) {
       this.pausing = true;
-      this.time.delayedCall(pause * 1000, () => {
+      this.typing = this.time.delayedCall(pause * 1000, () => {
         this.pausing = false;
         this.startTyping(e, narr, speakerEmotion);
       });
     } else {
+      this.pausing = false;
       this.startTyping(e, narr, speakerEmotion);
     }
   }
@@ -887,7 +901,7 @@ export class StoryScene extends Phaser.Scene {
       this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);
       this.namePlate.setPosition(left ? 365 : REF_W - 365, 756);
     }
-    const baseCps = this.cutscene ? CUTSCENE.cps : this.skip ? 400 : CPS[prefs().textSpeed];
+    const baseCps = this.skip ? 400 : this.cutscene ? CUTSCENE.cps : CPS[prefs().textSpeed];
     const cpsMult =
       speakerEmotion === 'protective' || speakerEmotion === 'determined'
         ? 1.18
@@ -911,6 +925,7 @@ export class StoryScene extends Phaser.Scene {
   }
 
   private finishTyping(): void {
+    this.pausing = false;
     this.typing?.remove();
     this.typing = null;
     this.bodyText.setText(this.fullText);
@@ -934,10 +949,10 @@ export class StoryScene extends Phaser.Scene {
   }
 
   private advance(): void {
-    if (this.finished || this.choiceLayer || this.logLayer || this.pausing) return;
+    if (this.finished || this.choiceLayer || this.logLayer) return;
     this.autoTimer?.remove();
     if (!this.waiting) return;
-    if (!this.lineDone) {
+    if (this.pausing || !this.lineDone) {
       this.finishTyping();
       return;
     }
@@ -958,9 +973,22 @@ export class StoryScene extends Phaser.Scene {
   }
 
   private toggleSkip(): void {
+    if (this.finished || this.choiceLayer) return;
+    const hasChoices = this.data0.commands.some((c) => c.op === 'choice');
+    if (this.cutscene || !hasChoices) {
+      this.skip = true;
+      this.skipBtn?.setLabel('SKIP ✓');
+      this.typing?.remove();
+      this.autoTimer?.remove();
+      this.complete();
+      return;
+    }
     this.skip = !this.skip;
     this.skipBtn?.setLabel(this.skip ? 'SKIP ✓' : 'SKIP');
-    if (this.skip && this.lineDone && this.waiting) this.advance();
+    if (this.skip && this.waiting) {
+      if (!this.lineDone) this.finishTyping();
+      else this.advance();
+    }
   }
 
   // ------------------------------------------------------------------ overlays

@@ -19,6 +19,26 @@ import {
 /** Safety net: a battle that is still undecided after this many turns is lost by the player. */
 export const MAX_TURNS = 300;
 
+/**
+ * Casualty-based victory star rating:
+ * - 5+ unit parties: 4+ defeated = 1★, 3 defeated = 2★, 0–2 defeated = 3★
+ * - 4-unit parties:  3 defeated = 1★, 2 defeated = 2★, 0–1 defeated = 3★
+ * - 3-unit parties:  2 defeated = 1★, 1 defeated = 2★, 0 defeated = 3★
+ * - 1–2 unit parties: 1 defeated = 2★, 0 defeated = 3★
+ */
+export function computeVictoryStars(startingPlayers: number, defeated: number): 1 | 2 | 3 {
+  if (startingPlayers >= 5) {
+    return defeated >= 4 ? 1 : defeated === 3 ? 2 : 3;
+  }
+  if (startingPlayers === 4) {
+    return defeated >= 3 ? 1 : defeated === 2 ? 2 : 3;
+  }
+  if (startingPlayers === 3) {
+    return defeated >= 2 ? 1 : defeated === 1 ? 2 : 3;
+  }
+  return defeated === 0 ? 3 : 2;
+}
+
 const roundHalfUp = (x: number): number => Math.floor(x + 0.5 + 1e-9);
 
 type ActionKind = 'basic' | 'active' | 'ultimate' | 'signature';
@@ -603,7 +623,7 @@ export class Battle {
       let stars: 0 | 1 | 2 | 3 = 0;
       if (winner === 'player') {
         const defeated = this.startingPlayers - players.length;
-        stars = defeated === 0 ? 3 : defeated === 1 ? 2 : 1;
+        stars = computeVictoryStars(this.startingPlayers, defeated);
       }
       this.outcome = { winner, stars, turns: this.turnCounter };
       this.emit({ type: 'battle_end', winner, stars });

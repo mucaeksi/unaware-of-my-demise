@@ -22,37 +22,85 @@ const PALETTE_HC: Record<PanelVariant, { top: number; bottom: number; edge: numb
   danger: { top: 0x2e0816, bottom: 0x0c0206, edge: 0xff6b8b, inner: 0xffffff, edgeA: 0.98 }
 };
 
-/** Baked gothic panel texture (gradient, double rule, corner diamonds). Cached per size+variant+contrast. */
+/** Baked gothic panel texture (translucent glass-gothic fill, oval/pill geometry for buttons, soft rounded corners for panels). Cached per size+variant+contrast. */
 export function panelTexture(scene: Phaser.Scene, w: number, h: number, variant: PanelVariant = 'normal'): string {
   const hc = prefs().highContrast;
-  const key = `ui_panel_${variant}_${hc ? 'hc_' : ''}${Math.round(w)}x${Math.round(h)}`;
+  const key = `ui_panel_v2_${variant}_${hc ? 'hc_' : ''}${Math.round(w)}x${Math.round(h)}`;
   if (scene.textures.exists(key)) return key;
   const p = (hc ? PALETTE_HC : PALETTE)[variant];
   const g = scene.make.graphics({ x: 0, y: 0 }, false);
-  // Phaser's gradient fills only apply to rect/triangle paths, so: solid rounded base + gradient sheen
-  g.fillStyle(p.bottom, hc ? 1 : 0.97);
-  g.fillRoundedRect(2, 2, w - 4, h - 4, 12);
-  g.fillGradientStyle(p.top, p.top, p.top, p.top, 0.85, 0.85, 0, 0);
-  g.fillRect(8, 8, w - 16, Math.max(4, (h - 16) * 0.62));
-  g.lineStyle(hc ? 4 : 3, p.edge, p.edgeA);
-  g.strokeRoundedRect(2, 2, w - 4, h - 4, 12);
-  g.lineStyle(hc ? 2 : 1, p.inner, hc ? 0.7 : 0.38);
-  g.strokeRoundedRect(10, 10, w - 20, h - 20, 7);
-  // corner ornaments: diamond + two tapered rules
-  const corner = (cx: number, cy: number, sx: number, sy: number): void => {
-    g.fillStyle(p.inner, 0.85);
-    g.fillPoints(
-      [new Phaser.Math.Vector2(cx, cy - 7 * sy), new Phaser.Math.Vector2(cx + 7 * sx, cy), new Phaser.Math.Vector2(cx, cy + 7 * sy), new Phaser.Math.Vector2(cx - 7 * sx, cy)],
-      true
-    );
-    g.lineStyle(2, p.inner, 0.6);
-    g.lineBetween(cx + 12 * sx, cy, cx + 44 * sx, cy);
-    g.lineBetween(cx, cy + 12 * sy, cx, cy + 44 * sy);
-  };
-  corner(18, 18, 1, 1);
-  corner(w - 18, 18, -1, 1);
-  corner(18, h - 18, 1, -1);
-  corner(w - 18, h - 18, -1, -1);
+
+  const isPill = h <= 140 && w >= h * 1.25;
+  const outerR = isPill ? Math.floor((h - 4) / 2) : Math.min(34, Math.max(18, Math.floor(Math.min(w, h) * 0.14)));
+  const innerInset = isPill ? 7 : 9;
+  const innerR = Math.max(6, outerR - (innerInset - 2));
+
+  // ~50% lower opacity than the legacy 0.97 solid fill so battlefields and art breathe through the UI
+  const baseAlpha = hc
+    ? 0.92
+    : variant === 'dim'
+      ? 0.36
+      : variant === 'hot'
+        ? 0.54
+        : variant === 'danger'
+          ? 0.52
+          : 0.48;
+  const sheenAlpha = hc ? 0.5 : variant === 'dim' ? 0.16 : 0.26;
+
+  g.fillStyle(p.bottom, baseAlpha);
+  g.fillRoundedRect(2, 2, w - 4, h - 4, outerR);
+
+  const sheenH = Math.max(8, Math.floor((h - innerInset * 2) * 0.5));
+  const sheenR = Math.min(innerR, Math.floor(sheenH / 2));
+  g.fillStyle(p.top, sheenAlpha);
+  g.fillRoundedRect(innerInset, innerInset, w - innerInset * 2, sheenH, sheenR);
+
+  g.lineStyle(hc ? 3.5 : 2, p.edge, p.edgeA * (hc ? 1 : 0.85));
+  g.strokeRoundedRect(2, 2, w - 4, h - 4, outerR);
+
+  g.lineStyle(hc ? 1.5 : 1, p.inner, hc ? 0.65 : 0.32);
+  g.strokeRoundedRect(innerInset, innerInset, w - innerInset * 2, h - innerInset * 2, innerR);
+
+  if (isPill) {
+    // Delicate gothic diamond accents on left & right pill arcs
+    const dy = h / 2;
+    const dx = Math.min(22, Math.max(13, Math.floor(h * 0.2)));
+    const r = Math.min(4.5, Math.max(3, h * 0.045));
+    g.fillStyle(p.inner, hc ? 0.85 : 0.62);
+    for (const cx of [dx, w - dx]) {
+      g.fillPoints(
+        [
+          new Phaser.Math.Vector2(cx, dy - r),
+          new Phaser.Math.Vector2(cx + r, dy),
+          new Phaser.Math.Vector2(cx, dy + r),
+          new Phaser.Math.Vector2(cx - r, dy)
+        ],
+        true
+      );
+    }
+  } else {
+    // Soft inset corner diamonds for larger modal/dialogue cards (no harsh 90-degree box lines)
+    const cInset = Math.max(20, Math.round(outerR * 0.68));
+    const r = 5;
+    g.fillStyle(p.inner, hc ? 0.85 : 0.65);
+    for (const [cx, cy] of [
+      [cInset, cInset],
+      [w - cInset, cInset],
+      [cInset, h - cInset],
+      [w - cInset, h - cInset]
+    ] as const) {
+      g.fillPoints(
+        [
+          new Phaser.Math.Vector2(cx, cy - r),
+          new Phaser.Math.Vector2(cx + r, cy),
+          new Phaser.Math.Vector2(cx, cy + r),
+          new Phaser.Math.Vector2(cx - r, cy)
+        ],
+        true
+      );
+    }
+  }
+
   g.generateTexture(key, w, h);
   g.destroy();
   return key;
@@ -159,7 +207,8 @@ export class Button extends Phaser.GameObjects.Container {
     this.bg = scene.add.image(0, 0, panelTexture(scene, this.bw, this.bh, this.variant));
     this.focusRing = scene.add.graphics();
     this.focusRing.lineStyle(4, C.goldHi, 1);
-    this.focusRing.strokeRoundedRect(-this.bw / 2 - 4, -this.bh / 2 - 4, this.bw + 8, this.bh + 8, 14);
+    const focusR = this.bh <= 140 ? Math.floor((this.bh + 4) / 2) : 28;
+    this.focusRing.strokeRoundedRect(-this.bw / 2 - 4, -this.bh / 2 - 4, this.bw + 8, this.bh + 8, focusR);
     this.focusRing.setVisible(false);
     this.label = txt(scene, 0, opts.sub ? -14 : 0, opts.label, { fontFamily: F.display, fontSize: `${opts.fontSize ?? 34}px`, fontStyle: '600', color: T.text }).setOrigin(0.5);
     this.subLabel = opts.sub ? txt(scene, 0, 24, opts.sub, { fontSize: `${SIZE.small - 4}px`, color: T.dim }).setOrigin(0.5) : null;

@@ -195,9 +195,9 @@ export class TitleScene extends Phaser.Scene {
     const x = 60 + insets.left;
     const y = 58 + insets.top;
     const g = this.add.graphics();
-    g.fillStyle(0x120a18, 0.78);
+    g.fillStyle(0x120a18, 0.48);
     g.fillRoundedRect(0, -24, 490, 48, 24);
-    g.lineStyle(1.5, C.gold, 0.55);
+    g.lineStyle(1.5, C.gold, 0.52);
     g.strokeRoundedRect(0, -24, 490, 48, 24);
     g.fillStyle(C.hpGood, 1);
     g.fillCircle(24, 0, 6);
@@ -242,11 +242,11 @@ export class TitleScene extends Phaser.Scene {
     const subLine = this.firstRun ? S.menu.tapSubFirstRun : S.menu.tapSubReturn;
     this.buildTapToContinueBanner('GOOGLE PLAY GAMES  ·  LIVEOPS', subLine, true, () => void this.onTapToStart());
     if (!this.firstRun) {
-      new Button(this, REF_W - 415 - insets.right, 58 + insets.top, {
+      new Button(this, REF_W - 340 - insets.right, 58 + insets.top, {
         label: 'REPLAY INTRO',
-        w: 280,
-        h: 72,
-        fontSize: 21,
+        w: 224,
+        h: 62,
+        fontSize: 20,
         onClick: () => {
           forceResetEntry();
           this.firstRun = true;
@@ -254,11 +254,11 @@ export class TitleScene extends Phaser.Scene {
         }
       }).setDepth(DEPTH.hud + 2);
     }
-    new Button(this, REF_W - 145 - insets.right, 58 + insets.top, {
+    new Button(this, REF_W - 126 - insets.right, 58 + insets.top, {
       label: S.menu.settings,
-      w: 210,
-      h: 72,
-      fontSize: 22,
+      w: 176,
+      h: 62,
+      fontSize: 21,
       onClick: () => void this.openSettings()
     }).setDepth(DEPTH.hud + 2);
   }

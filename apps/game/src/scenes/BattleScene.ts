@@ -363,17 +363,20 @@ export class BattleScene extends Phaser.Scene {
 
     // the encounter's ui block can hide the speed and Auto buttons (the opening tutorials are manual, one turn at a time)
     const ui = this.encounter.ui ?? { speed: true, auto: true };
-    let edge = REF_W - 150 - insets.right;
-    const btnY = 66 + insets.top;
+    let edge = REF_W - 104 - insets.right;
+    const btnY = 56 + insets.top;
+    const btnW = 148;
+    const btnH = 62;
+    const btnStep = btnW + 14;
     if (ui.speed) {
-      this.speedBtn = new Button(this, edge, btnY, { label: '×1', w: 180, h: 88, fontSize: 32, onClick: () => this.toggleSpeed() }).setDepth(DEPTH.hud);
-      edge -= 200;
+      this.speedBtn = new Button(this, edge, btnY, { label: '×1', w: btnW, h: btnH, fontSize: 22, onClick: () => this.toggleSpeed() }).setDepth(DEPTH.hud);
+      edge -= btnStep;
     }
     if (ui.auto) {
-      this.autoBtn = new Button(this, edge, btnY, { label: 'AUTO', w: 196, h: 88, fontSize: 28, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
-      edge -= 206;
+      this.autoBtn = new Button(this, edge, btnY, { label: 'AUTO', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
+      edge -= btnStep;
     }
-    new Button(this, edge, btnY, { label: 'MENU', w: 196, h: 88, fontSize: 28, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
+    new Button(this, edge, btnY, { label: 'MENU', w: btnW, h: btnH, fontSize: 21, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
 
     // between the title block and the speed/auto/menu buttons there is free room at the top: the turn hint lives there
     this.descText = txt(this, REF_W / 2, spec.descY - insets.bottom, '', { fontSize: '26px', color: T.text, align: 'center', wordWrap: { width: 1640 - insets.left - insets.right } }).setOrigin(0.5).setDepth(DEPTH.hud);
@@ -1000,40 +1003,124 @@ export class BattleScene extends Phaser.Scene {
     this.clearSkillPanel();
     const won = result.winner === 'player';
     if (won) {
-      for (const v of this.views.values()) if (v.side === 'player' && v.alive) v.applyState('victory');
+      for (const v of this.views.values()) {
+        if (v.side === 'player' && v.alive) {
+          v.applyState('victory');
+          BattleVfx.castSigil(this, v.x, v.y - 10, 'Dawn', 1.15);
+          this.burst(v.x, v.y - 80, 0xffe680, 14);
+          if (!prefs().reducedMotion) {
+            this.tweens.add({
+              targets: v,
+              y: v.y - 16,
+              duration: 380,
+              yoyo: true,
+              repeat: 2,
+              ease: 'Sine.easeOut'
+            });
+          }
+        }
+      }
       Sfx.victory();
     } else {
       Sfx.lose();
     }
-    await this.wait(700);
+    await this.wait(650);
     if (this.dead) return;
 
+    // Keep the battlefield & celebrating heroes on the left (x = 220..680) completely visible!
     const dim = this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x07040c, 0).setDepth(DEPTH.modal).setInteractive();
-    this.tweens.add({ targets: dim, alpha: 0.72, duration: 400 });
-    const box = panel(this, REF_W / 2, REF_H / 2, 1180, 700, won ? 'hot' : 'danger').setDepth(DEPTH.modal + 1);
-    title(this, REF_W / 2, 310, won ? 'VICTORY' : 'DEFEAT', 96, won ? T.gold : T.crimson).setDepth(DEPTH.modal + 2);
-    const tutorial = this.cfg.tutorial === true;
-    if (!tutorial) {
-      const stars = this.add.graphics().setDepth(DEPTH.modal + 2);
-      for (let i = 0; i < 3; i++) {
-        const filled = i < result.stars;
-        stars.fillStyle(filled ? C.goldHi : 0x2a1e32, 1);
-        stars.lineStyle(3, C.gold, filled ? 1 : 0.4);
-        const cx = REF_W / 2 + (i - 1) * 130;
-        const cy = 460;
-        const pts: Phaser.Math.Vector2[] = [];
-        for (let k = 0; k < 10; k++) {
-          const r = k % 2 === 0 ? 52 : 22;
-          const a = -Math.PI / 2 + (k * Math.PI) / 5;
-          pts.push(new Phaser.Math.Vector2(cx + Math.cos(a) * r, cy + Math.sin(a) * r));
-        }
-        stars.fillPoints(pts, true);
-        stars.strokePoints(pts, true);
+    this.tweens.add({ targets: dim, alpha: won ? 0.14 : 0.42, duration: 360 });
+
+    const cardX = won ? 1330 : REF_W / 2;
+    const cardY = 536;
+    const cardW = 840;
+    const cardH = 520;
+    const box = panel(this, cardX, cardY, cardW, cardH, won ? 'hot' : 'danger').setDepth(DEPTH.modal + 1);
+
+    title(this, cardX, cardY - 196, won ? 'VICTORY' : 'DEFEAT', 66, won ? T.gold : T.crimson).setDepth(DEPTH.modal + 2);
+    txt(this, cardX, cardY - 142, `${this.encounter.stage_id}  ·  ${this.encounter.title_en}`, {
+      fontFamily: F.display,
+      fontSize: '22px',
+      fontStyle: '600',
+      color: '#dfd6ec'
+    })
+      .setOrigin(0.5)
+      .setDepth(DEPTH.modal + 2);
+
+    // Animated 1-3 Stars shown in ALL battles (tutorial & campaign) based on unit casualties
+    const starY = cardY - 64;
+    for (let i = 0; i < 3; i++) {
+      const filled = won && i < result.stars;
+      const sx = cardX + (i - 1) * 116;
+      const starG = this.add.graphics({ x: sx, y: starY }).setDepth(DEPTH.modal + 2);
+      starG.fillStyle(filled ? C.goldHi : 0x1e1326, filled ? 1 : 0.65);
+      starG.lineStyle(3, filled ? 0xfff3b8 : C.gold, filled ? 1 : 0.35);
+      const pts: Phaser.Math.Vector2[] = [];
+      for (let k = 0; k < 10; k++) {
+        const r = k % 2 === 0 ? 42 : 18;
+        const a = -Math.PI / 2 + (k * Math.PI) / 5;
+        pts.push(new Phaser.Math.Vector2(Math.cos(a) * r, Math.sin(a) * r));
+      }
+      starG.fillPoints(pts, true);
+      starG.strokePoints(pts, true);
+      if (filled && !prefs().reducedMotion) {
+        starG.setScale(0.1);
+        this.tweens.add({
+          targets: starG,
+          scale: 1,
+          duration: 380,
+          delay: 130 * i,
+          ease: 'Back.easeOut',
+          onStart: () => {
+            this.burst(sx, starY, 0xffe680, 8);
+            Sfx.bell(660 + i * 110, 0.08, 0.5);
+          }
+        });
       }
     }
-    txt(this, REF_W / 2, tutorial ? 500 : 560, `${result.turns} turns  ·  ${this.recorded.length} actions`, { fontSize: '34px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
+
+    const playerUnits = this.battle.combatants.filter((c) => c.side === 'player');
+    const totalPlayers = playerUnits.length;
+    const alivePlayers = playerUnits.filter((c) => c.alive).length;
+    const fallenPlayers = Math.max(0, totalPlayers - alivePlayers);
+    const survivalSummary = won
+      ? `${alivePlayers}/${totalPlayers} HEROES STANDING  ·  ${fallenPlayers === 0 ? 'NO CASUALTIES (3★)' : `${fallenPlayers} FALLEN (${result.stars}★)`}`
+      : `0/${totalPlayers} HEROES STANDING  ·  PARTY DEFEATED`;
+
+    txt(this, cardX, cardY + 12, survivalSummary, {
+      fontFamily: F.display,
+      fontSize: '23px',
+      fontStyle: '700',
+      color: won ? T.gold : T.crimson
+    })
+      .setOrigin(0.5)
+      .setDepth(DEPTH.modal + 2);
+
+    txt(this, cardX, cardY + 48, `${result.turns} turns  ·  ${this.recorded.length} actions  ·  5-Unit Rule: 0-2 Fallen 3★ | 3 Fallen 2★ | 4 Fallen 1★`, {
+      fontSize: '20px',
+      color: T.dim
+    })
+      .setOrigin(0.5)
+      .setDepth(DEPTH.modal + 2);
+
+    // Chapter Star Milestone Reward Pill
+    const rewardTrack = this.add.graphics().setDepth(DEPTH.modal + 2);
+    rewardTrack.fillStyle(0x12091c, 0.46);
+    rewardTrack.lineStyle(1.5, C.gold, 0.45);
+    rewardTrack.fillRoundedRect(cardX - 380, cardY + 76, 760, 48, 24);
+    rewardTrack.strokeRoundedRect(cardX - 380, cardY + 76, 760, 48, 24);
+    txt(this, cardX, cardY + 100, `CHAPTER STAR CHESTS:  ★ 3 SILVER CACHE  ·  ★ 6 RELIC CHEST  ·  ★ 9 CALLING EMBER`, {
+      fontFamily: F.display,
+      fontSize: '15px',
+      fontStyle: '600',
+      color: '#e3c37d'
+    })
+      .setOrigin(0.5)
+      .setDepth(DEPTH.modal + 3);
+
+    const tutorial = this.cfg.tutorial === true;
     if (!tutorial) {
-      const verify = txt(this, REF_W / 2, 618, 'Server verification: checking…', { fontSize: '30px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
+      const verify = txt(this, cardX, cardY + 142, 'Server verification: checking…', { fontSize: '21px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.modal + 2);
       this.verifyLabel = verify;
       if (this.cfg.sessionId || this.encounter.party_mode === 'owned') verify.setText('Server verification: at the progress claim');
       else void this.verifyOnServer(verify);
@@ -1050,9 +1137,13 @@ export class BattleScene extends Phaser.Scene {
       this.cfg.onClaimed?.(result.stars);
     }
 
-    const primary = new Button(this, tutorial && won ? REF_W / 2 : REF_W / 2 - 250, 760, {
+    const btnY = cardY + 198;
+    const primary = new Button(this, tutorial && won ? cardX : cardX - 185, btnY, {
       label: won ? 'CONTINUE' : 'RETRY',
-      w: 440,
+      w: 340,
+      h: 76,
+      fontSize: 26,
+      variant: won ? 'hot' : 'normal',
       onClick: () => {
         if (!won) {
           if (this.cfg.onRetry) this.cfg.onRetry(this);
@@ -1063,7 +1154,15 @@ export class BattleScene extends Phaser.Scene {
       }
     }).setDepth(DEPTH.modal + 2);
     this.primaryBtn = primary;
-    if (!(tutorial && won)) new Button(this, REF_W / 2 + 250, 760, { label: tutorial ? 'BACK TO STORY' : 'LEAVE', w: 440, onClick: () => this.cfg.onBack(this) }).setDepth(DEPTH.modal + 2);
+    if (!(tutorial && won)) {
+      new Button(this, cardX + 185, btnY, {
+        label: tutorial ? 'BACK TO STORY' : 'LEAVE',
+        w: 340,
+        h: 76,
+        fontSize: 26,
+        onClick: () => this.cfg.onBack(this)
+      }).setDepth(DEPTH.modal + 2);
+    }
     void box;
     void primary;
   }
