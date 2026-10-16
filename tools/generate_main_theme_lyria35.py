@@ -311,8 +311,8 @@ def main() -> None:
         results.append(info)
         print(f"  -> {stem}: {info['duration_s']}s mastered ({info['ogg_path']})")
 
-    # Install Primary Candidate (main_theme_v3_duman_eclipse_anthem) as active bgm_main_theme.ogg
-    primary = results[0]
+    # Install Selected Candidate (main_theme_v2_intimate_anatolian_gothic — Candidate 3) as active bgm_main_theme.ogg
+    primary = next(r for r in results if r["stem"] == "main_theme_v2_intimate_anatolian_gothic")
     primary_ogg = Path(primary["ogg_path"])
     target_ogg = OUT_AUDIO_DIR / "bgm_main_theme.ogg"
     target_ogg.write_bytes(primary_ogg.read_bytes())

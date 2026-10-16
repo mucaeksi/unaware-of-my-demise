@@ -603,16 +603,16 @@ def main() -> None:
   <div style="background: rgba(216, 108, 120, 0.14); border: 1.5px solid rgba(227, 195, 125, 0.82); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px;">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px;">
       <div>
-        <span style="background:var(--gold);color:#120a18;font-weight:800;font-size:11.5px;padding:3px 9px;border-radius:99px;margin-right:8px;">★ AKTİF ANA TEMA (OYUNDA TAKILI)</span>
-        <b style="font-size:17px;color:var(--gold);">Varyasyon 1 — "Unaware of My Demise" · Vintage Tube Guitar, Crying Bends & Cello Ballad (72 BPM · 2:56)</b>
+        <span style="background:var(--gold);color:#120a18;font-weight:800;font-size:11.5px;padding:3px 9px;border-radius:99px;margin-right:8px;">🔒 KİLİTLENEN RESMİ ANA TEMA (OYUNDA TAKILI)</span>
+        <b style="font-size:17px;color:var(--gold);">"Unaware of My Demise" (Aday 3 · Intimate Midnight Guitar & Symphonic Rock Ballad · 68 BPM · 2:46)</b>
       </div>
-      <span style="font-size:12.5px;color:var(--lilac);">2 dk 56 sn (Loop: 0:30.2) · Gerçek <code>lyria-3.5</code> Stüdyo Kaydı</span>
+      <span style="font-size:12.5px;color:var(--lilac);">2 dk 46 sn (Loop: 0:17.5) · Gerçek <code>lyria-3.5</code> Stüdyo Kaydı</span>
     </div>
     <div style="font-size:13px;color:var(--text);line-height:1.5;margin-bottom:10px;">
-      • <b>0:00–0:30 (İntro):</b> Yalnız, spring-reverbli temiz Fender elektro gitarın inen minör yürüyüşü ve ağlayan bend/slide motifleri.<br>
-      • <b>0:30–1:02 (Verse):</b> Yavaş ve ağırbaşlı 4/4 rimshot davul ve sıcak bas gitar eşliğinde ağlayan temiz elektro gitar melodisi.<br>
-      • <b>1:02–1:38 (Nakarat / Duygusal Zirve):</b> Sıcak lambalı (tube-overdriven) solo elektro gitarın uzun, feryat eden bend'lerle ana temayı söyleyişi.<br>
-      • <b>1:38–2:56 (Çello Köprüsü & Final):</b> Yalnız çellonun hüzünlü karşı-melodisi (1:39), ikinci büyük gitar solosu (2:09) ve sakin elektro gitar/çello vedası.
+      • <b>0:00–0:17 (İntro):</b> Yalnız, derin reverbli ağlayan elektro gitarın karanlık-romantik açılış motifi.<br>
+      • <b>0:17–0:52 (Verse 1):</b> Samimi akustik gitar parmak yürüyüşü, temiz elektro gitar melodisi, derin bas ve yumuşak rimshot davul.<br>
+      • <b>0:52–1:24 (Nakarat 1 / Duygusal Zirve):</b> Lambalı (tube-overdriven) solo elektro gitarın yaylılar eşliğinde uzun, feryat eden bend'lerle yükselişi.<br>
+      • <b>1:24–2:46 (Verse 2, Çello/Akustik Köprü & Büyük Final):</b> Sakinleşen ikinci kıta (1:24), büyük gitar solosu (1:56), çello ve akustik gitarın nefes aldığı samimi köprü (2:16) ve epik final (2:28–2:46).
     </div>
     <audio controls preload="auto" style="width:100%;height:38px;" src="/content/base/audio/bgm_main_theme.ogg"></audio>
   </div>
@@ -620,17 +620,17 @@ def main() -> None:
   <!-- ALTERNATIVE LYRIA 3.5 CANDIDATES -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:12px;">
     <div style="background:rgba(16,10,24,0.88);border:1px solid var(--border);border-radius:10px;padding:12px 14px;">
-      <div style="font-size:11.5px;color:var(--emerald);font-weight:700;">🎻 ALTERNATİF ADAY 2 · ELEKTRO GİTAR & ANADOLU ÇELLO DÜETİ (70 BPM · 2:44)</div>
-      <div style="font-weight:700;color:var(--gold);margin:3px 0;">main_theme_v1_weeping_ballad (164.4 sn · <code>lyria-3.5</code> + Key Art Multimodal)</div>
-      <div style="font-size:12.5px;color:var(--dim);margin-bottom:8px;">Temiz ağlayan elektro gitar arpejleriyle (0:00–0:27) başlayıp içli bir solo çello kıtasına (0:27–0:54) ve ardından feryat eden overdrive elektro gitar nakaratına (0:54+) bağlanan versiyon.</div>
-      <audio controls preload="none" style="width:100%;height:34px;" src="/audition/music/main_theme_v1_weeping_ballad.mp3"></audio>
+      <div style="font-size:11.5px;color:var(--lilac);font-weight:700;">🎸 ARŞİV ADAY 1 · VINTAGE TUBE GUITAR & SLOW ROCK BALLAD (72 BPM · 2:56)</div>
+      <div style="font-weight:700;color:var(--gold);margin:3px 0;">main_theme_v3_duman_eclipse_anthem (176.0 sn · <code>lyria-3.5</code>)</div>
+      <div style="font-size:12.5px;color:var(--dim);margin-bottom:8px;">Yalnız spring-reverbli elektro gitar arpejleri (0:00–0:30), 4/4 rimshot davul (0:30–1:02) ve lambalı overdrive gitar solosu (1:02+).</div>
+      <audio controls preload="none" style="width:100%;height:34px;" src="/audition/music/main_theme_v3_duman_eclipse_anthem.mp3"></audio>
     </div>
 
     <div style="background:rgba(16,10,24,0.88);border:1px solid var(--border);border-radius:10px;padding:12px 14px;">
-      <div style="font-size:11.5px;color:var(--lilac);font-weight:700;">🌙 ALTERNATİF ADAY 3 · GECE GİTARI & SENFONİK ROCK BALAD (68 BPM · 2:46)</div>
-      <div style="font-weight:700;color:var(--gold);margin:3px 0;">main_theme_v2_intimate_anatolian_gothic (166.3 sn · <code>lyria-3.5</code>)</div>
-      <div style="font-size:12.5px;color:var(--dim);margin-bottom:8px;">Uzun, ağlayan ambient elektro gitar girişi (0:00–0:17), samimi akustik + elektro gitar yürüyüşü (0:17–0:52) ve yaylılarla yükselen epik rock balad nakaratı (0:52+).</div>
-      <audio controls preload="none" style="width:100%;height:34px;" src="/audition/music/main_theme_v2_intimate_anatolian_gothic.mp3"></audio>
+      <div style="font-size:11.5px;color:var(--emerald);font-weight:700;">🎻 ARŞİV ADAY 2 · ELEKTRO GİTAR & ANADOLU ÇELLO DÜETİ (70 BPM · 2:44)</div>
+      <div style="font-weight:700;color:var(--gold);margin:3px 0;">main_theme_v1_weeping_ballad (164.4 sn · <code>lyria-3.5</code> + Key Art Multimodal)</div>
+      <div style="font-size:12.5px;color:var(--dim);margin-bottom:8px;">Temiz ağlayan elektro gitar arpejleriyle (0:00–0:27) başlayıp içli bir solo çello kıtasına (0:27–0:54) ve overdrive elektro gitar nakaratına (0:54+) bağlanan versiyon.</div>
+      <audio controls preload="none" style="width:100%;height:34px;" src="/audition/music/main_theme_v1_weeping_ballad.mp3"></audio>
     </div>
   </div>
 </div>
