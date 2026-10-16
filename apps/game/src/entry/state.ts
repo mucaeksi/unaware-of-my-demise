@@ -67,13 +67,28 @@ export function parseEntry(raw: unknown): EntryState {
 }
 
 const KEY = 'uomd.entry.v1';
-const V012_RESET_KEY = 'uomd.entry.aab_v012_reset.v1';
+const V012_RESET_KEY = 'uomd.entry.aab_v014_reset.v1';
 const FORCE_FRESH_KEY = 'uomd.entry.force_fresh.v1';
 let cache: EntryState | null = null;
 
+function clearCheckpointKeys(): void {
+  try {
+    const toRemove: string[] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && (k.startsWith('uomd.flow') || k.startsWith('uomd.story') || k.startsWith('uomd.battle'))) {
+        toRemove.push(k);
+      }
+    }
+    for (const k of toRemove) localStorage.removeItem(k);
+  } catch {
+    /* ignore */
+  }
+}
+
 /**
- * Ensures browsers that played an earlier pre-v0.1.2 build on staging start fresh in the new
- * v0.1.2 Base AAB flow (Prologue + 3 Tutorials) instead of skipping straight to post-tutorial.
+ * Ensures browsers that played an earlier pre-v0.1.4 build or got stuck on a mid-battle checkpoint
+ * start fresh in the Base AAB flow (Prologue + 3 Tutorials).
  * Skipped under automated tests / WebDriver so test fixtures remain untouched.
  */
 function ensureV012EntryReset(): void {
@@ -84,6 +99,7 @@ function ensureV012EntryReset(): void {
       localStorage.setItem(FORCE_FRESH_KEY, '1');
       localStorage.removeItem(KEY);
       localStorage.removeItem('uomd.entry.owner.v1');
+      clearCheckpointKeys();
       cache = null;
     }
   } catch {
@@ -113,6 +129,7 @@ export function forceResetEntry(): EntryState {
     localStorage.setItem(V012_RESET_KEY, '1');
     localStorage.setItem(FORCE_FRESH_KEY, '1');
     localStorage.removeItem('uomd.entry.owner.v1');
+    clearCheckpointKeys();
   } catch {
     /* ignore */
   }

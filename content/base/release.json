@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "release": {
-    "id": "rel_0001",
+    "id": "base_v0_1_0",
     "generation": 1,
-    "channel": "staging",
-    "created_at": "2026-10-10T00:00:00.000Z",
-    "notes": "Base content shipped inside the app: first-install flow (prologue + tutorials T-1..T-3)"
+    "channel": "production",
+    "created_at": "2026-10-16T15:58:05.299Z",
+    "notes": ""
   },
   "compat": {
     "min_client": "0.1.1",
@@ -18,8 +18,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "5d0eda179cd4f53ad6f7249cbe8861cecf0c85fa475525ba9bc4236b8d2bdb9b",
-      "bytes": 10766,
+      "sha256": "c162ff45e08508cc360ef84fe24bf85e258cfdfb831bbd96d432b2b5683a841a",
+      "bytes": 9866,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -234,30 +234,9 @@
       "kind": "other_data"
     },
     {
-      "path": "audio/bgm_aftermath_quiet_relief.ogg",
-      "sha256": "4d26df2855819b6a16887182d8c7814017ddc8f3c0bac35d4c8b899f3ff218de",
-      "bytes": 1345429,
-      "media_type": "audio/ogg",
-      "kind": "audio"
-    },
-    {
       "path": "audio/bgm_battle_field.ogg",
       "sha256": "548830e74e7d40f0515653b11b9b20314177dc7c1ee55ae10017453a0adb26f7",
       "bytes": 1719905,
-      "media_type": "audio/ogg",
-      "kind": "audio"
-    },
-    {
-      "path": "audio/bgm_battle_shelter_climax.ogg",
-      "sha256": "0c19903efa874be635af27718a8386df0d2c6255a7c05655d0be3afc8006e0ab",
-      "bytes": 1755901,
-      "media_type": "audio/ogg",
-      "kind": "audio"
-    },
-    {
-      "path": "audio/bgm_battle_stone_crossing.ogg",
-      "sha256": "ef04f5dfe902671f2a8474fb4c60871d50b9c1e134f8a4d09afcbedcacf1feb2",
-      "bytes": 1821498,
       "media_type": "audio/ogg",
       "kind": "audio"
     },
@@ -283,13 +262,6 @@
       "kind": "audio"
     },
     {
-      "path": "audio/bgm_cutscene_ambush_tension.ogg",
-      "sha256": "5aefe020c9ad7b79a82db0ef2660cc96305e8732b4fbd9d84f8b25c9210cb2fd",
-      "bytes": 996655,
-      "media_type": "audio/ogg",
-      "kind": "audio"
-    },
-    {
       "path": "audio/bgm_fadyme_theme.ogg",
       "sha256": "bc2c230cf1cd67a8f1b4a7c9669f192f8388f3e1a363b772ce349b3ba6712e79",
       "bytes": 1628819,
@@ -297,16 +269,9 @@
       "kind": "audio"
     },
     {
-      "path": "audio/bgm_mahmut_road_march.ogg",
-      "sha256": "f69e894685e2bcd7f9ad1b4cf15bd093a37d3ed5220183a006dfd788f8016d6b",
-      "bytes": 1105493,
-      "media_type": "audio/ogg",
-      "kind": "audio"
-    },
-    {
       "path": "audio/bgm_main_theme.ogg",
-      "sha256": "2858f2eecbb3082e942551a3de82c70e1f923b50ddd983cea8930bddf3f43dfa",
-      "bytes": 1317447,
+      "sha256": "81c777cc4755ba70b3b81395238ef804101eb1a2c59ac3ef0f0bae431c061f25",
+      "bytes": 1149845,
       "media_type": "audio/ogg",
       "kind": "audio"
     },
@@ -314,13 +279,6 @@
       "path": "audio/bgm_prologue_before_the_road.ogg",
       "sha256": "cc6c66994ce18ef5f396727fdff0b7ad76188c5b4a93e3e41afb486f76afc8e4",
       "bytes": 1669440,
-      "media_type": "audio/ogg",
-      "kind": "audio"
-    },
-    {
-      "path": "audio/bgm_shelter_hearth_warmth.ogg",
-      "sha256": "bdeaba01352402eacc6171ebea225c5c2044698c131b5548937642bf13ca5d4e",
-      "bytes": 931554,
       "media_type": "audio/ogg",
       "kind": "audio"
     },
@@ -340,15 +298,15 @@
     },
     {
       "path": "encounters/tutorial_t2.json",
-      "sha256": "145b6848d889082ea2e91f83c0fa58765dd0d64aba1927fa4919c20cff704b73",
-      "bytes": 908,
+      "sha256": "76b24a7cabd231e960dd2e74a14d2539ad174e20c07c87693a988ac8b729fbfb",
+      "bytes": 899,
       "media_type": "application/json",
       "kind": "encounter"
     },
     {
       "path": "encounters/tutorial_t3.json",
-      "sha256": "a84adec2f21147fee6a17a17a8f5b07a1f882f6051b74c317c4350ef36999772",
-      "bytes": 1116,
+      "sha256": "868075261142a8b8ec14682af72c5722a61e7c4d14bcd08d5e751961447b57ec",
+      "bytes": 1107,
       "media_type": "application/json",
       "kind": "encounter"
     },
@@ -368,8 +326,8 @@
     },
     {
       "path": "story/tutorial_t1_after.json",
-      "sha256": "d6f2952e10864e011c87534c47aacc296cc38142bac7880b2e57156580c9e5c9",
-      "bytes": 4317,
+      "sha256": "d4c047d6507858739d4dcc54be7041f9d8e445a46eff24e8a802d538e8b4c166",
+      "bytes": 4314,
       "media_type": "application/json",
       "kind": "story_scene"
     },
@@ -389,22 +347,22 @@
     },
     {
       "path": "story/tutorial_t2_before.json",
-      "sha256": "6e23451e354e41907374455829bdc60eb652bf786c560fab6476d450ed36df8d",
-      "bytes": 4181,
+      "sha256": "356417b149efe15e73c757be27fa28dc8f4ff46d8d7addc13d2371f656105baf",
+      "bytes": 4180,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t3_after.json",
-      "sha256": "e30a6811775d3c0e0f7f07da870be221e581b93b6ac2be4e20fd6dc21291dc81",
-      "bytes": 9091,
+      "sha256": "4e8e0d3851fee28162002d0e69a4ddef05bbd6f6db878b031499df891a7bfdbf",
+      "bytes": 9082,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t3_before.json",
-      "sha256": "d839cdbe1232a060bef82d37b501ef0d2cb2cd8595272f43bf078b8954ad9552",
-      "bytes": 4521,
+      "sha256": "8affecf24ac8ed4ee4f357cd931368410a47a12100dc5050c0e7d1dc16074d19",
+      "bytes": 4523,
       "media_type": "application/json",
       "kind": "story_scene"
     },

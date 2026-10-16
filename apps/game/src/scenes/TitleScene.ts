@@ -241,19 +241,17 @@ export class TitleScene extends Phaser.Scene {
     const insets = safeInsets(this);
     const subLine = this.firstRun ? S.menu.tapSubFirstRun : S.menu.tapSubReturn;
     this.buildTapToContinueBanner('GOOGLE PLAY GAMES  ·  LIVEOPS', subLine, true, () => void this.onTapToStart());
-    if (!this.firstRun) {
-      new Button(this, REF_W - 340 - insets.right, 58 + insets.top, {
-        label: 'REPLAY INTRO',
-        w: 224,
-        h: 62,
-        fontSize: 20,
-        onClick: () => {
-          forceResetEntry();
-          this.firstRun = true;
-          void this.onTapToStart();
-        }
-      }).setDepth(DEPTH.hud + 2);
-    }
+    new Button(this, REF_W - 340 - insets.right, 58 + insets.top, {
+      label: 'REPLAY INTRO',
+      w: 224,
+      h: 62,
+      fontSize: 20,
+      onClick: () => {
+        forceResetEntry();
+        this.firstRun = true;
+        void this.onTapToStart();
+      }
+    }).setDepth(DEPTH.hud + 2);
     new Button(this, REF_W - 126 - insets.right, 58 + insets.top, {
       label: S.menu.settings,
       w: 176,

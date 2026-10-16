@@ -391,8 +391,8 @@
   "music": {
     "bgm_main_theme": {
       "file": "audio/bgm_main_theme.ogg",
-      "loop_start_s": 13.01,
-      "duration_s": 110.57
+      "loop_start_s": 12,
+      "duration_s": 101.5
     },
     "bgm_prologue_before_the_road": {
       "file": "audio/bgm_prologue_before_the_road.ogg",
@@ -423,36 +423,6 @@
       "file": "audio/bgm_battle_field.ogg",
       "loop_start_s": 16.7,
       "duration_s": 79.93
-    },
-    "bgm_battle_stone_crossing": {
-      "file": "audio/bgm_battle_stone_crossing.ogg",
-      "loop_start_s": 16.7,
-      "duration_s": 79.93
-    },
-    "bgm_battle_shelter_climax": {
-      "file": "audio/bgm_battle_shelter_climax.ogg",
-      "loop_start_s": 16.7,
-      "duration_s": 79.93
-    },
-    "bgm_cutscene_ambush_tension": {
-      "file": "audio/bgm_cutscene_ambush_tension.ogg",
-      "loop_start_s": 10.91,
-      "duration_s": 65.45
-    },
-    "bgm_mahmut_road_march": {
-      "file": "audio/bgm_mahmut_road_march.ogg",
-      "loop_start_s": 13.01,
-      "duration_s": 71.54
-    },
-    "bgm_aftermath_quiet_relief": {
-      "file": "audio/bgm_aftermath_quiet_relief.ogg",
-      "loop_start_s": 14.55,
-      "duration_s": 72.73
-    },
-    "bgm_shelter_hearth_warmth": {
-      "file": "audio/bgm_shelter_hearth_warmth.ogg",
-      "loop_start_s": 13.01,
-      "duration_s": 78.05
     }
   },
   "ui": {
