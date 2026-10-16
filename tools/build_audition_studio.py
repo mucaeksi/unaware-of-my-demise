@@ -969,7 +969,7 @@ const ROLE_BANNERS = {{
   }},
   fadyme: {{
     title: '🔔 Fadyme (22 · Light Controlled Alto) Ses Adayları',
-    desc: 'Kanonik Yönlendirme: "light, controlled alto; dark humour and sharp observation under the courtesy; \'I am fine\' is a mask" — Zarif, sakin, ince alaycı ve içten içe kırılgan başrol.',
+    desc: 'Kanonik Yönlendirme: "light, controlled alto; dark humour and sharp observation under the courtesy; “I am fine” is a mask" — Zarif, sakin, ince alaycı ve içten içe kırılgan başrol.',
     defaultFilter: 'FEMALE',
   }},
   mahmut: {{
