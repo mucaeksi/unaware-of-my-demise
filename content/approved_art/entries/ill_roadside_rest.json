@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "ill_roadside_rest",
   "class": "still",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "stills": {
       "roadside_rest": "art/still_roadside_rest.webp"
@@ -10,12 +10,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "06cedc5d097fc87b0ea6198c410d1d13fa683c5db8a4b5f3a01c7701f46cdd58",
+    "sha256": "b1fd79e53c09a49782872741b9772147c92ced79db90ad4865cf650384034632",
     "mime": "image/png",
     "width": 1920,
     "height": 1080,
     "provenance_file": ".cache/generated/ill_roadside_rest/run.provenance.json",
-    "provenance_sha256": "c7cc60246a7c43fc3f7287748d04665376b7468a7dfe4360c6afafdfc410c281",
+    "provenance_sha256": "a54cd0761c3a365cd10405dadb7b0e460a916f03c10ca8066419eb1cd7773bd4",
     "model": "antigravity-image-gen-v2",
     "prompt_sha256": "29cf8b0f7f3ab26ccd0d0c12557235035aaff00f7ee7bef7923b7c25dc68be5c",
     "references": [],
@@ -23,17 +23,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/ill_roadside_rest.ingest.json",
-    "spec_sha256": "29c110bfbc9afc4eb7929cd1be70916149d592e3d854969028f0951200bada8b",
+    "spec_sha256": "1b95e986724f7c43aa1aef0819dd22329a74171d015afdadce2b1215535fa827",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "0284f8ad4016f35f21fdb66637ccbe5d8eb52e6312286d1bb2e233076ea98c81"
+    "fingerprint": "1343384722c658aaeaf6f6b2542d8259282508b3a7354dc1e0fc1df6c65f7f6c"
   },
   "outputs": [
     {
       "path": "art/still_roadside_rest.webp",
-      "sha256": "9810ca1dc89f83b470819a048975b6223bcf92475e008852d7878541aad468d0",
-      "pixels_sha256": "74afe0d44734391323d43c65a54afb7444fe9da9c3c5f989e31f07c77f6ec493",
-      "bytes": 138734,
+      "sha256": "07187d709ea566cfdbbdcb0b7f6c9cfd53a41254003bc8f35968cfc369a0c186",
+      "pixels_sha256": "0a1c07dff9da841f9711efa34ffe64539e669800161a0f658757cd9d19ea6439",
+      "bytes": 140624,
       "width": 1920,
       "height": 1080
     }
@@ -62,7 +62,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "138734 bytes <= 389120"
+          "detail": "140624 bytes <= 389120"
         }
       },
       "warnings": []
@@ -70,8 +70,8 @@
     "human": {
       "status": "approved",
       "by": "owner",
-      "at": "2026-10-15T10:25:50.401Z",
-      "note": "Template-faithful Fadyme and Mahmut tutorial CG"
+      "at": "2026-10-16T02:06:35.805Z",
+      "note": "canonical-fadyme-lock"
     }
   },
   "license": {
@@ -79,5 +79,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/still_roadside_rest.webp",
+          "sha256": "9810ca1dc89f83b470819a048975b6223bcf92475e008852d7878541aad468d0",
+          "pixels_sha256": "74afe0d44734391323d43c65a54afb7444fe9da9c3c5f989e31f07c77f6ec493",
+          "bytes": 138734,
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "source_sha256": "06cedc5d097fc87b0ea6198c410d1d13fa683c5db8a4b5f3a01c7701f46cdd58",
+      "fingerprint": "0284f8ad4016f35f21fdb66637ccbe5d8eb52e6312286d1bb2e233076ea98c81"
+    }
+  ]
 }

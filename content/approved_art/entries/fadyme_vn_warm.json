@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "fadyme_vn_warm",
   "class": "portrait",
-  "revision": 4,
+  "revision": 5,
   "targets": {
     "portraits": {
       "fadyme": {
@@ -18,30 +18,30 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "e788770dfa5b1449a6828a83977ce2a2157ac47b3ac49a337d1dcdafe21ab86b",
+    "sha256": "1fd7f6de27572d87065aca6c7ef2da272f4f15a662490631c2a9f4c02d5988b2",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/fadyme_vn_warm/run.provenance.json",
-    "provenance_sha256": "4e098495d5599add2c4bef51ec642676ec8ac843236ef4545b95dbd108b703c1",
+    "provenance_sha256": "5d5be5328d0553a7e69f6e9755b396211024ecc5e619838e94304bb89940501d",
     "model": "gemini-3-pro-image",
-    "prompt_sha256": "63e5432ed22628059438702af7f8a5f759956f1bbe2c8dafaf56b354d3258436",
+    "prompt_sha256": "6b65eb8238c964703cdf4771ce3747b47d16bbc29538eb274135954ffaa42bfc",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/fadyme_vn_warm.ingest.json",
-    "spec_sha256": "d8e03c3c3b8c4c92e4205a043ce9c662730fbe58555901972b706ec36f3bae4c",
+    "spec_sha256": "4fe20a0b744c2f9b291b6cc1401d592f09bd775d879533fa9a12311ef01ba76e",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "ddaf65512c1f9b0e2a72af89f7320cdc9c80418bf6d5241a331d9a89250485e0"
+    "fingerprint": "bdd79bd6009638bf5dbcd804425e6da5068989727ad0004c9a466689f687ab01"
   },
   "outputs": [
     {
       "path": "art/portrait_fadyme_warm.webp",
-      "sha256": "ae12241e5481742bf81bbc2c481d880ef5005ae14a54979fa85d4af0e7d7d738",
-      "pixels_sha256": "87d1c193339dbb29eee817b111876b3ae92d5edc4910c30354e0ed6a24d63a0f",
-      "bytes": 61128,
+      "sha256": "f67b7c3fa1baec25c14707bb5d003619ebb57aa4a40fb8c8240e4b846d7c4b08",
+      "pixels_sha256": "1cf4dad8ef5d3ed16f3d87d4cd967abfeba1abcb34b0f0a40897e70a6b980053",
+      "bytes": 69290,
       "width": 768,
       "height": 1152
     }
@@ -66,8 +66,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "pass",
-          "detail": "removed=0"
+          "status": "warn",
+          "detail": "removed=5"
         },
         "A18": {
           "status": "pass",
@@ -75,20 +75,22 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "61128 bytes <= 245760"
+          "detail": "69290 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
           "detail": "spill=0.0000%"
         }
       },
-      "warnings": []
+      "warnings": [
+        "A12: removed 5 isolated specks"
+      ]
     },
     "human": {
       "status": "approved",
       "by": "owner",
-      "at": "2026-10-15T21:30:52.999Z",
-      "note": "Approved knee-up boydan Light Novel sprite v2"
+      "at": "2026-10-16T02:06:18.878Z",
+      "note": "canonical-fadyme-lock"
     }
   },
   "license": {
@@ -141,6 +143,21 @@
       ],
       "source_sha256": "38af35a9d754b8eda9cfda5cf81216f96561acc2eb77d5c21f8ab77415204264",
       "fingerprint": "324409bb09f5b404667c2b6f0eac91c159becadd77f40fd36a1796aeaec9f224"
+    },
+    {
+      "revision": 4,
+      "outputs": [
+        {
+          "path": "art/portrait_fadyme_warm.webp",
+          "sha256": "ae12241e5481742bf81bbc2c481d880ef5005ae14a54979fa85d4af0e7d7d738",
+          "pixels_sha256": "87d1c193339dbb29eee817b111876b3ae92d5edc4910c30354e0ed6a24d63a0f",
+          "bytes": 61128,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "e788770dfa5b1449a6828a83977ce2a2157ac47b3ac49a337d1dcdafe21ab86b",
+      "fingerprint": "ddaf65512c1f9b0e2a72af89f7320cdc9c80418bf6d5241a331d9a89250485e0"
     }
   ]
 }

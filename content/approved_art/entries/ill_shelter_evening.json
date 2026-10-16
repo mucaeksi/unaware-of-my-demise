@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "ill_shelter_evening",
   "class": "still",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "stills": {
       "shelter_evening": "art/still_shelter_evening.webp"
@@ -10,12 +10,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "943d061a3182e1b05248093fac09465b00ecf19e89e291ca1b3cc9c7c19436a1",
+    "sha256": "87d5da0213147ad5bc78ff9348c4f5875bb83851b733e2b46298beb8737c97ac",
     "mime": "image/png",
     "width": 1920,
     "height": 1080,
     "provenance_file": ".cache/generated/ill_shelter_evening/run.provenance.json",
-    "provenance_sha256": "6728219321ecd08ee8f3c2610cda01963fd5bf75211f16ccba8585359389fd32",
+    "provenance_sha256": "6a3920a00eb64ec43b844f0295f2dea05bd104fd347c9823d5d2fbae31e335eb",
     "model": "antigravity-image-gen-v2",
     "prompt_sha256": "651f886e23a8082bdb6445c7738bf37d03d5757b91e51c8d44b8052856d7682e",
     "references": [],
@@ -23,17 +23,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/ill_shelter_evening.ingest.json",
-    "spec_sha256": "8ce8135d30a98a7a13e623877b55bf8ce7764a672ced5010d0f24a73f777c1f3",
+    "spec_sha256": "f4dae3f38601a635ee69858071656ad7a0b89fc281ac235938a594f9e7f89cd6",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "40ad642acd09abd56a23d087764aa806618c67ceb3aeb4adabec6f32e34c7f9b"
+    "fingerprint": "c5d15130e32ff339a113ceeac29397e0fc97eb0cc2dc030370a65e3b3ec8c050"
   },
   "outputs": [
     {
       "path": "art/still_shelter_evening.webp",
-      "sha256": "518194e98dc860e39a1b0ca6eb314fb52618b1478bb9ebfb707b81d6927a7e6b",
-      "pixels_sha256": "d20a973be331fcb40f420404ea48516a4be9d0c7828e00da5270909c91a6d6b6",
-      "bytes": 136330,
+      "sha256": "930bb95b09a4d7f59697d7adb3b126abd7d367edabf72e48220ca49b7753ce7f",
+      "pixels_sha256": "aa8e66059a500c3fb43553ef0a64a2e1ff921512ce3ddf12fb11477deb4f29cd",
+      "bytes": 116214,
       "width": 1920,
       "height": 1080
     }
@@ -62,7 +62,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "136330 bytes <= 389120"
+          "detail": "116214 bytes <= 389120"
         }
       },
       "warnings": []
@@ -70,8 +70,8 @@
     "human": {
       "status": "approved",
       "by": "owner",
-      "at": "2026-10-15T10:25:54.984Z",
-      "note": "Template-faithful Fadyme and Mahmut tutorial CG"
+      "at": "2026-10-16T02:06:40.140Z",
+      "note": "canonical-fadyme-lock"
     }
   },
   "license": {
@@ -79,5 +79,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/still_shelter_evening.webp",
+          "sha256": "518194e98dc860e39a1b0ca6eb314fb52618b1478bb9ebfb707b81d6927a7e6b",
+          "pixels_sha256": "d20a973be331fcb40f420404ea48516a4be9d0c7828e00da5270909c91a6d6b6",
+          "bytes": 136330,
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "source_sha256": "943d061a3182e1b05248093fac09465b00ecf19e89e291ca1b3cc9c7c19436a1",
+      "fingerprint": "40ad642acd09abd56a23d087764aa806618c67ceb3aeb4adabec6f32e34c7f9b"
+    }
+  ]
 }

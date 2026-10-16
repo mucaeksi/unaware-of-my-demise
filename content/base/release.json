@@ -74,29 +74,29 @@
     },
     {
       "path": "art/portrait_fadyme_composed.webp",
-      "sha256": "c2b9b3ba3a534f3deb78a709f9f574947a007302066fed2d9b79e7481097d12e",
-      "bytes": 64006,
+      "sha256": "0fc6590c0c280a4d87f3955cb36d51cf7fc080972133b5d9e7f8a248d20657e7",
+      "bytes": 74508,
       "media_type": "image/webp",
       "kind": "portrait"
     },
     {
       "path": "art/portrait_fadyme_resolve.webp",
-      "sha256": "662eda4acb6ee4acc082791fc5b7e2ad3bdd2ab17086901bc004b405ae5e688b",
-      "bytes": 71156,
+      "sha256": "918ce2fde17167f1dd2e1e01b8c1da5a6609802b534a13a6760c10be03ea82e5",
+      "bytes": 79576,
       "media_type": "image/webp",
       "kind": "portrait"
     },
     {
       "path": "art/portrait_fadyme_warm.webp",
-      "sha256": "ae12241e5481742bf81bbc2c481d880ef5005ae14a54979fa85d4af0e7d7d738",
-      "bytes": 61128,
+      "sha256": "f67b7c3fa1baec25c14707bb5d003619ebb57aa4a40fb8c8240e4b846d7c4b08",
+      "bytes": 69290,
       "media_type": "image/webp",
       "kind": "portrait"
     },
     {
       "path": "art/portrait_fadyme_wry.webp",
-      "sha256": "f29993247b1b5f2a46ac4a204258a2094ef3a3122d86a9a5a4d0254804d0f8e4",
-      "bytes": 55720,
+      "sha256": "670e2ea8d6f17c5d57aa2a2cb32351848798bfa12f4c42c2a20e20d84c13c04e",
+      "bytes": 67186,
       "media_type": "image/webp",
       "kind": "portrait"
     },
@@ -130,8 +130,8 @@
     },
     {
       "path": "art/still_prologue_beginning.webp",
-      "sha256": "35c786654f55037bfff8afbb7efaf4d1b05c1df7f80861815b736df6efb55450",
-      "bytes": 126656,
+      "sha256": "0c70df58449fcdd5edd34e8ab483e482fce8582882d44631a7c3fc97d15c670b",
+      "bytes": 126350,
       "media_type": "image/webp",
       "kind": "background"
     },
@@ -193,22 +193,22 @@
     },
     {
       "path": "art/still_roadside_rest.webp",
-      "sha256": "9810ca1dc89f83b470819a048975b6223bcf92475e008852d7878541aad468d0",
-      "bytes": 138734,
+      "sha256": "07187d709ea566cfdbbdcb0b7f6c9cfd53a41254003bc8f35968cfc369a0c186",
+      "bytes": 140624,
       "media_type": "image/webp",
       "kind": "background"
     },
     {
       "path": "art/still_shelter_evening.webp",
-      "sha256": "518194e98dc860e39a1b0ca6eb314fb52618b1478bb9ebfb707b81d6927a7e6b",
-      "bytes": 136330,
+      "sha256": "930bb95b09a4d7f59697d7adb3b126abd7d367edabf72e48220ca49b7753ce7f",
+      "bytes": 116214,
       "media_type": "image/webp",
       "kind": "background"
     },
     {
       "path": "art/ui_key_art.webp",
-      "sha256": "4eb31eb391369b4dca9d83ad8a8939811303e33385e831387127f63fb37411f1",
-      "bytes": 77100,
+      "sha256": "c4b7fe2c408bff2c5c1e8f0abbd31f570a6ac282b46d913b1aa5a9b78ac5ef1f",
+      "bytes": 88758,
       "media_type": "image/webp",
       "kind": "other_data"
     },
@@ -228,8 +228,8 @@
     },
     {
       "path": "art/ui_title_bg.webp",
-      "sha256": "bb4c5aa743e131090aeb2f8f1a97dd4dd80c47a43c3819ae3dc0686392640ce0",
-      "bytes": 177922,
+      "sha256": "4a2f4bd9078bbd36cb25bf992025badb091f859fbfd939f5d1e171dcb908df14",
+      "bytes": 155980,
       "media_type": "image/webp",
       "kind": "other_data"
     },

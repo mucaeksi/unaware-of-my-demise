@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "title_key_art_01",
   "class": "ui_image",
-  "revision": 3,
+  "revision": 4,
   "targets": {
     "ui": {
       "title_bg": "art/ui_title_bg.webp"
@@ -10,12 +10,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "ddd73954b3dd956b4b25ffe4ce7fe95ce5b74c428f47905d766f970c66d5d219",
+    "sha256": "c28fcb12611f6f6c4683a1bb92833c963fd2c968fda163f0a60e2634b224a763",
     "mime": "image/png",
     "width": 1920,
     "height": 1080,
     "provenance_file": ".cache/generated/title_key_art_01/run.provenance.json",
-    "provenance_sha256": "ffb6e996f2d441181183938cac6e45ac4b203830016ab56b56e2cb3db08df040",
+    "provenance_sha256": "0046c36ccc4f72c4b12a1d9d1636d14382b1a3ce38d46b8e2ecabb6f9973876d",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "914fb3ca975079c1df1ae0741087c0cc3a8f973b5a27412fd566a6cc4008feff",
     "references": [],
@@ -23,17 +23,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/title_key_art_01.ingest.json",
-    "spec_sha256": "0a0a51a8d5c94d43ff811877c12a3398b3674151482a52a5646e92f264f6bdbe",
+    "spec_sha256": "9e88b25244788edf8eed2d9c78471efa0e0a57ee40a10e7037ea0c941c072a5f",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "f8347ba68e4897ef6830d09837b53a94df32c63b4f2a39f5c997c1e6785b66c0"
+    "fingerprint": "0b311fac98a77d5c91031d049576701fefab1290dbe62ba1e3f5d76bfc5fa3a1"
   },
   "outputs": [
     {
       "path": "art/ui_title_bg.webp",
-      "sha256": "bb4c5aa743e131090aeb2f8f1a97dd4dd80c47a43c3819ae3dc0686392640ce0",
-      "pixels_sha256": "68c0a7c41b77a337b0215a22a431320245abae2247afd6434698598c112636b6",
-      "bytes": 177922,
+      "sha256": "4a2f4bd9078bbd36cb25bf992025badb091f859fbfd939f5d1e171dcb908df14",
+      "pixels_sha256": "baa37afa76fb16722a5108fa01882134cbaf3a9f3162aa8d969f3ff764c0d28d",
+      "bytes": 155980,
       "width": 1920,
       "height": 1080
     }
@@ -62,16 +62,16 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "177922 bytes <= 360000"
+          "detail": "155980 bytes <= 360000"
         }
       },
       "warnings": []
     },
     "human": {
       "status": "approved",
-      "by": "reviewer:human-directed-canonical-prologue-mahmut-v3",
-      "at": "2026-10-16T00:07:17.229Z",
-      "note": "Canonical Prologue Mahmut knee-up Light Novel sprite and title key art"
+      "by": "owner",
+      "at": "2026-10-16T02:06:27.301Z",
+      "note": "canonical-fadyme-lock"
     }
   },
   "license": {
@@ -109,6 +109,21 @@
       ],
       "source_sha256": "1d6eebd2ec4c224830f81a88e9e6092ed2a6a7bf0453610a796c7dfc4addc88e",
       "fingerprint": "2f873eef27baee7fa3986cea1326bcb8f78aa5f9faa1ff888289909aa9c541ad"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/ui_title_bg.webp",
+          "sha256": "bb4c5aa743e131090aeb2f8f1a97dd4dd80c47a43c3819ae3dc0686392640ce0",
+          "pixels_sha256": "68c0a7c41b77a337b0215a22a431320245abae2247afd6434698598c112636b6",
+          "bytes": 177922,
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "source_sha256": "ddd73954b3dd956b4b25ffe4ce7fe95ce5b74c428f47905d766f970c66d5d219",
+      "fingerprint": "f8347ba68e4897ef6830d09837b53a94df32c63b4f2a39f5c997c1e6785b66c0"
     }
   ]
 }

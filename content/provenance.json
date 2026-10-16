@@ -68,34 +68,34 @@
     },
     {
       "output": "content/base/art/portrait_fadyme_composed.webp",
-      "sha256": "c2b9b3ba3a534f3deb78a709f9f574947a007302066fed2d9b79e7481097d12e",
+      "sha256": "0fc6590c0c280a4d87f3955cb36d51cf7fc080972133b5d9e7f8a248d20657e7",
       "sources": {
-        "generated:fadyme_vn_composed@rev3": "c0a96cf0f3071ad040a1b321b336c30bb71f346dbd456d0e217a27a851792cc2",
-        "entry": "91d71757a5554b2df20aa81457b276edb298f977039f7e530d664016c61f259e"
+        "generated:fadyme_vn_composed@rev4": "59ee3ef13993ba93d8ce2a5b28e6e48653edc7665fb3d7cbadd66cf57b880d3d",
+        "entry": "96d0e3ace5f8ccef77296bee8110a0452394ab07a8546dae8356d8f1ac76453b"
       }
     },
     {
       "output": "content/base/art/portrait_fadyme_resolve.webp",
-      "sha256": "662eda4acb6ee4acc082791fc5b7e2ad3bdd2ab17086901bc004b405ae5e688b",
+      "sha256": "918ce2fde17167f1dd2e1e01b8c1da5a6609802b534a13a6760c10be03ea82e5",
       "sources": {
-        "generated:fadyme_vn_resolve@rev3": "4795478b194382f89ba8e7046ee236bab7fffeef901fe3f27fb3e98ebf9e451c",
-        "entry": "6bc72c0f700a4d2689e9015456cabd74d8d17108f6a6e6393f1b0473143d0658"
+        "generated:fadyme_vn_resolve@rev4": "4a8309335351c73cc01f59e94c337e8543097cf5f05156b1fc3ea8335e4fb258",
+        "entry": "8b3eff540836640d45200fe62d2855f132ca60e39004e9e96f6204d3e232ad89"
       }
     },
     {
       "output": "content/base/art/portrait_fadyme_warm.webp",
-      "sha256": "ae12241e5481742bf81bbc2c481d880ef5005ae14a54979fa85d4af0e7d7d738",
+      "sha256": "f67b7c3fa1baec25c14707bb5d003619ebb57aa4a40fb8c8240e4b846d7c4b08",
       "sources": {
-        "generated:fadyme_vn_warm@rev4": "e788770dfa5b1449a6828a83977ce2a2157ac47b3ac49a337d1dcdafe21ab86b",
-        "entry": "ddaf65512c1f9b0e2a72af89f7320cdc9c80418bf6d5241a331d9a89250485e0"
+        "generated:fadyme_vn_warm@rev5": "1fd7f6de27572d87065aca6c7ef2da272f4f15a662490631c2a9f4c02d5988b2",
+        "entry": "bdd79bd6009638bf5dbcd804425e6da5068989727ad0004c9a466689f687ab01"
       }
     },
     {
       "output": "content/base/art/portrait_fadyme_wry.webp",
-      "sha256": "f29993247b1b5f2a46ac4a204258a2094ef3a3122d86a9a5a4d0254804d0f8e4",
+      "sha256": "670e2ea8d6f17c5d57aa2a2cb32351848798bfa12f4c42c2a20e20d84c13c04e",
       "sources": {
-        "generated:fadyme_vn_wry@rev3": "85262cd370e97c996ccd7f61e178992ba6df2c9ddc45f65b533d01001bafdd00",
-        "entry": "a15112197faf9beb03ed3f5208b7d16fcdf030e4894f9f5ded655463826d9d51"
+        "generated:fadyme_vn_wry@rev4": "17e0bd5cd9fa5c31cef5c6f7db25a81162e1eb9e1aa653f1a2c2f5e2633abb50",
+        "entry": "528ca8ba7f07e8319b9dd2541a03f5910018e413ad20e26b13387d8c5925f313"
       }
     },
     {
@@ -145,9 +145,9 @@
     },
     {
       "output": "content/base/art/ui_key_art.webp",
-      "sha256": "4eb31eb391369b4dca9d83ad8a8939811303e33385e831387127f63fb37411f1",
+      "sha256": "c4b7fe2c408bff2c5c1e8f0abbd31f570a6ac282b46d913b1aa5a9b78ac5ef1f",
       "sources": {
-        "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003.png": "58c54af2d268ce663542960950aace744286c7c4cf5d85b77a814134e3156176"
+        "narrative/14_References/recovered_locked_v001/key_art/brand_key_art_portrait_r2_v003.png": "6765cf180335d00bd32cead21fcaac1942ac3b037f579428767f82edbfd188da"
       }
     },
     {
@@ -160,26 +160,26 @@
     },
     {
       "output": "content/base/art/ui_title_bg.webp",
-      "sha256": "bb4c5aa743e131090aeb2f8f1a97dd4dd80c47a43c3819ae3dc0686392640ce0",
+      "sha256": "4a2f4bd9078bbd36cb25bf992025badb091f859fbfd939f5d1e171dcb908df14",
       "sources": {
-        "generated:title_key_art_01@rev3": "ddd73954b3dd956b4b25ffe4ce7fe95ce5b74c428f47905d766f970c66d5d219",
-        "entry": "f8347ba68e4897ef6830d09837b53a94df32c63b4f2a39f5c997c1e6785b66c0"
+        "generated:title_key_art_01@rev4": "c28fcb12611f6f6c4683a1bb92833c963fd2c968fda163f0a60e2634b224a763",
+        "entry": "0b311fac98a77d5c91031d049576701fefab1290dbe62ba1e3f5d76bfc5fa3a1"
       }
     },
     {
       "output": "content/base/art/still_roadside_rest.webp",
-      "sha256": "9810ca1dc89f83b470819a048975b6223bcf92475e008852d7878541aad468d0",
+      "sha256": "07187d709ea566cfdbbdcb0b7f6c9cfd53a41254003bc8f35968cfc369a0c186",
       "sources": {
-        "generated:ill_roadside_rest@rev1": "06cedc5d097fc87b0ea6198c410d1d13fa683c5db8a4b5f3a01c7701f46cdd58",
-        "entry": "0284f8ad4016f35f21fdb66637ccbe5d8eb52e6312286d1bb2e233076ea98c81"
+        "generated:ill_roadside_rest@rev2": "b1fd79e53c09a49782872741b9772147c92ced79db90ad4865cf650384034632",
+        "entry": "1343384722c658aaeaf6f6b2542d8259282508b3a7354dc1e0fc1df6c65f7f6c"
       }
     },
     {
       "output": "content/base/art/still_shelter_evening.webp",
-      "sha256": "518194e98dc860e39a1b0ca6eb314fb52618b1478bb9ebfb707b81d6927a7e6b",
+      "sha256": "930bb95b09a4d7f59697d7adb3b126abd7d367edabf72e48220ca49b7753ce7f",
       "sources": {
-        "generated:ill_shelter_evening@rev1": "943d061a3182e1b05248093fac09465b00ecf19e89e291ca1b3cc9c7c19436a1",
-        "entry": "40ad642acd09abd56a23d087764aa806618c67ceb3aeb4adabec6f32e34c7f9b"
+        "generated:ill_shelter_evening@rev2": "87d5da0213147ad5bc78ff9348c4f5875bb83851b733e2b46298beb8737c97ac",
+        "entry": "c5d15130e32ff339a113ceeac29397e0fc97eb0cc2dc030370a65e3b3ec8c050"
       }
     },
     {
@@ -208,10 +208,10 @@
     },
     {
       "output": "content/base/art/still_prologue_beginning.webp",
-      "sha256": "35c786654f55037bfff8afbb7efaf4d1b05c1df7f80861815b736df6efb55450",
+      "sha256": "0c70df58449fcdd5edd34e8ab483e482fce8582882d44631a7c3fc97d15c670b",
       "sources": {
-        "generated:prologue_road_beginning@rev2": "5eddb79fb5b5743d5d2cf76b5fe197a65ffdb4a598279fd1a450807dcde066a6",
-        "entry": "6e2db1ee43e8ac4bff788b40b5d1a5a67b096d95a12d28fb3f4160f98dbb1f92"
+        "generated:prologue_road_beginning@rev3": "8c283b88045369c405cb8adc1d23d3c8998f13d1b6cb8d07ea7f52438fbae0a2",
+        "entry": "e888c8230d99c7106357571aefa857ba88a3469bae6debb4dc6fc7b18658909a"
       }
     },
     {
