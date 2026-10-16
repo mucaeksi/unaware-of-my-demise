@@ -7,8 +7,9 @@ import { prefs } from '../platform/prefs';
  * be cross-faded. Without Web Audio (HTML5 fallback) music is simply skipped.
  */
 export class MusicPlayer {
-  /** Temporarily disabled while voiceovers are finalized; music will be added section-by-section. */
-  public enabled = false;
+  /** Enabled selectively section-by-section; currently only the Main Theme (`bgm_main_theme`) is active. */
+  public enabled = true;
+  public allowedPrefixes: readonly string[] = ['audio/bgm_main_theme.ogg'];
   private ctx: AudioContext | null = null;
   private out: GainNode | null = null;
   private current: { key: string; src: AudioBufferSourceNode; gain: GainNode; release: () => void } | null = null;
@@ -36,7 +37,7 @@ export class MusicPlayer {
   }
 
   play(cache: Phaser.Cache.BaseCache, cacheKey: string, loopStart: number, duration: number, fade = 1.4, startOffset = 0): void {
-    if (!this.enabled) {
+    if (!this.enabled || !this.allowedPrefixes.some((p) => cacheKey.startsWith(p))) {
       this.stop(0.1);
       return;
     }

@@ -588,77 +588,49 @@ def main() -> None:
   </div>
 </header>
 
-<!-- LYRIA 3.5 MAIN THEME + BALANCED 7-TRACK ROTATION -->
+<!-- LYRIA 3.5 MAIN THEME STUDIO -->
 <div class="card" id="soundtrack-suite-card" style="border-color: rgba(227, 195, 125, 0.65); background: linear-gradient(145deg, rgba(30, 16, 38, 0.95), rgba(14, 10, 22, 0.96)); margin-bottom: 22px;">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-bottom:14px;">
     <div>
-      <div style="font-size:20px;font-weight:700;color:var(--gold);">🎸 Saf Lyria 3.5 Soundtrack Rotasyonu (7 Berrak Stüdyo Parçası · Sıfır Sentetik Karmaşa)</div>
+      <div style="font-size:20px;font-weight:700;color:var(--gold);">🎸 Google Lyria 3.5 (<code>lyria-3.5</code>) — Ana Tema ("Unaware of My Demise") Stüdyosu</div>
       <div class="sub">
-        <b>Mimari & Rotasyon:</b> Sentetik katmanlar kaldırıldı; yalnızca <b>%100 saf <code>lyria-3.5</code> (44.1 kHz Stereo)</b> stüdyo kayıtları kullanıldı. Aynı müzikler art arda tekrar etmeyecek şekilde belirli aralıklarla döngüye sokuldu: <b>Studio/Title (<code>bgm_main_theme</code>) → Prologue (<code>bgm_prologue_before_the_road</code>) → T-1 Öncesi (<code>calm</code> → <code>uneasy</code>) → T-1 Savaş (<code>bgm_battle_field</code>) → T-1 Sonrası (<code>calm</code>) → T-2 Öncesi (<code>uneasy</code> → <code>chaotic</code>) → T-2 Savaş (<code>bgm_battle_field</code>) → T-2 Sonrası CG (<code>bgm_fadyme_theme</code>) → T-3 Öncesi (<code>calm</code> → <code>chaotic</code>) → T-3 Savaş (<code>bgm_battle_field</code>) → T-3 Sonrası CG (<code>bgm_fadyme_theme</code> → Satır 20'de <code>bgm_main_theme</code>)</b>.
+        <b>Tasarım & Motif:</b> Doğrudan Google Gemini API üzerinden <b><code>lyria-3.5</code> (44.1 kHz / 48 kHz Stereo)</b> modeliyle üretildi. <i>Duman – Haberin Yok Ölüyorum</i> ruhunu (inen Anadolu minör yürüyüşü, yalnız ve bol reverbli ağlayan elektro gitar arpejleri, içli mikro-bend'ler, derin bas, yavaş rimshot davul, yalnız çello ve nakaratta yükselen sıcak lambalı overdrive elektro gitar solosu) oyunumuzun karanlık gotik atmosferiyle birleştirir.
       </div>
     </div>
   </div>
 
-  <!-- FLAGSHIP MAIN THEME HIGHLIGHT -->
-  <div style="background: rgba(216, 108, 120, 0.12); border: 1.5px solid rgba(227, 195, 125, 0.72); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;">
+  <!-- ACTIVE FLAGSHIP MAIN THEME -->
+  <div style="background: rgba(216, 108, 120, 0.14); border: 1.5px solid rgba(227, 195, 125, 0.82); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px;">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px;">
       <div>
-        <span style="background:var(--gold);color:#120a18;font-weight:800;font-size:11.5px;padding:3px 9px;border-radius:99px;margin-right:8px;">★ FLAGSHIP MAIN THEME (SAF LYRIA 3.5)</span>
-        <b style="font-size:17px;color:var(--gold);">1. bgm_main_theme — "Unaware of My Demise" (Re Minör · Berrak Akustik Gitar, Yaylı Kontrbas, Solo Çello & Keçe Piyano)</b>
+        <span style="background:var(--gold);color:#120a18;font-weight:800;font-size:11.5px;padding:3px 9px;border-radius:99px;margin-right:8px;">★ AKTİF ANA TEMA (OYUNDA TAKILI)</span>
+        <b style="font-size:17px;color:var(--gold);">Varyasyon 1 — "Unaware of My Demise" · Vintage Tube Guitar, Crying Bends & Cello Ballad (72 BPM · 2:56)</b>
       </div>
-      <span style="font-size:12.5px;color:var(--lilac);">Re Minör (D minor) · 1:41.5 (Loop: 0:12.0) · %100 Saf <code>lyria-3.5</code> Master</span>
+      <span style="font-size:12.5px;color:var(--lilac);">2 dk 56 sn (Loop: 0:30.2) · Gerçek <code>lyria-3.5</code> Stüdyo Kaydı</span>
     </div>
     <div style="font-size:13px;color:var(--text);line-height:1.5;margin-bottom:10px;">
-      <b>Müzikal Kurgu (Sıfır Üst Üste Binme / Sıfır Karmaşa):</b><br>
-      • <b>0:00–0:32 (Yalnız Gitar & Yaylı Bas Girişi):</b> Re minör tonuna (D minor) transpoze edilmiş <code>lyria-3.5</code> yalnız akustik gitar, derin yaylı kontrbas ve uzaktan gelen çatlak çan.<br>
-      • <b>0:32–1:41 (Solo Çello & Keçe Piyano Duygusal Zirve):</b> Eşit güçlü (equal-power) pürüzsüz geçişle <code>lyria-3.5</code> Re minör solo çello ve keçe piyanonun standart döngüde yer almayan ikinci yarı dramatik yükselişine bağlanır.<br>
-      • <b>Kullanıldığı Yerler:</b> <b>1)</b> Oyun açılışı (<code>StudioScene</code> → <code>TitleScene</code>), <b>2)</b> <code>tutorial_t3_after</code> (20. satırda Fadyme kapıdaki sise bakıp sırrını sakladığı final anı).
+      • <b>0:00–0:30 (İntro):</b> Yalnız, spring-reverbli temiz Fender elektro gitarın inen minör yürüyüşü ve ağlayan bend/slide motifleri.<br>
+      • <b>0:30–1:02 (Verse):</b> Yavaş ve ağırbaşlı 4/4 rimshot davul ve sıcak bas gitar eşliğinde ağlayan temiz elektro gitar melodisi.<br>
+      • <b>1:02–1:38 (Nakarat / Duygusal Zirve):</b> Sıcak lambalı (tube-overdriven) solo elektro gitarın uzun, feryat eden bend'lerle ana temayı söyleyişi.<br>
+      • <b>1:38–2:56 (Çello Köprüsü & Final):</b> Yalnız çellonun hüzünlü karşı-melodisi (1:39), ikinci büyük gitar solosu (2:09) ve sakin elektro gitar/çello vedası.
     </div>
     <audio controls preload="auto" style="width:100%;height:38px;" src="/content/base/audio/bgm_main_theme.ogg"></audio>
   </div>
 
-  <!-- 6 CORE ROTATION TRACKS GRID -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;">
-    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
-      <div style="font-size:11.5px;color:var(--gold);font-weight:700;">🎬 2. PROLOGUE (Before the Road · 2:00 Sinematik)</div>
-      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_prologue_before_the_road (120.0 sn · 9 Sahneli Senkron)</div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Sadece 2 dakikalık açılış sinematiğinde çalar (Huzurlu Köy → Crownfall Yıkımı → Kavuşma & Yola Çıkış).</div>
-      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_prologue_before_the_road.ogg"></audio>
+  <!-- ALTERNATIVE LYRIA 3.5 CANDIDATES -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:12px;">
+    <div style="background:rgba(16,10,24,0.88);border:1px solid var(--border);border-radius:10px;padding:12px 14px;">
+      <div style="font-size:11.5px;color:var(--emerald);font-weight:700;">🎻 ALTERNATİF ADAY 2 · ELEKTRO GİTAR & ANADOLU ÇELLO DÜETİ (70 BPM · 2:44)</div>
+      <div style="font-weight:700;color:var(--gold);margin:3px 0;">main_theme_v1_weeping_ballad (164.4 sn · <code>lyria-3.5</code> + Key Art Multimodal)</div>
+      <div style="font-size:12.5px;color:var(--dim);margin-bottom:8px;">Temiz ağlayan elektro gitar arpejleriyle (0:00–0:27) başlayıp içli bir solo çello kıtasına (0:27–0:54) ve ardından feryat eden overdrive elektro gitar nakaratına (0:54+) bağlanan versiyon.</div>
+      <audio controls preload="none" style="width:100%;height:34px;" src="/audition/music/main_theme_v1_weeping_ballad.mp3"></audio>
     </div>
 
-    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
-      <div style="font-size:11.5px;color:var(--emerald);font-weight:700;">🍃 3. SAKİN ORMAN & NEFES ALMA (T-1 Başlangıç, T-1 Sonrası, T-3 Başlangıç)</div>
-      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_ch1_ash_forest_calm (100.4 sn · 68.3 BPM · C# minor)</div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Saf <code>lyria-3.5</code>: Kelt arpı, naylon gitar ve alto flüt. T-1 başında, T-1 savaş sonrasında ve T-3 başında çalar.</div>
-      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_ch1_ash_forest_calm.ogg"></audio>
-    </div>
-
-    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
-      <div style="font-size:11.5px;color:var(--lilac);font-weight:700;">🌫️ 4. HUZURSUZ İZ SÜRME (T-1 Satır 12, T-2 Başlangıç)</div>
-      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_ch1_ash_forest_uneasy (101.3 sn · 67.1 BPM · E minor)</div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Saf <code>lyria-3.5</code>: Tedirgin akustik gitar, yaylı kontrbas ve uzak çan. T-1'de ses duyulduğunda ve T-2 başında çalar.</div>
-      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_ch1_ash_forest_uneasy.ogg"></audio>
-    </div>
-
-    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
-      <div style="font-size:11.5px;color:var(--crimson);font-weight:700;">🔔 5. YAKLAŞAN TEHLİKE / PUSU (T-2 Satır 11, T-3 Satır 7)</div>
-      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_ch1_ash_forest_chaotic (101.8 sn · 97.6 BPM · F minor)</div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Saf <code>lyria-3.5</code>: Yaylı tremololar, bakır nefesliler ve tehlike çanları. Düşmanlar fark edildiğinde devreye girer.</div>
-      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_ch1_ash_forest_chaotic.ogg"></audio>
-    </div>
-
-    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
-      <div style="font-size:11.5px;color:var(--crimson);font-weight:700;">⚔️ 6. SAVAŞ TEMASI (T-1, T-2 ve T-3 Savaş Sahneleri)</div>
-      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_battle_field (79.9 sn · 129.2 BPM · C minor)</div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Saf <code>lyria-3.5</code>: Spiccato yaylılar, savaş davulları ve paslı çanlar. Yalnızca aktif savaşlarda çalar, ara sahnelerle bölündüğü için sıkmaz.</div>
-      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_battle_field.ogg"></audio>
-    </div>
-
-    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
-      <div style="font-size:11.5px;color:var(--emerald);font-weight:700;">🌸 7. FADYME & MAHMUT DUYGUSAL CG (T-2 Sonrası & T-3 Sonrası 1–19)</div>
-      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_fadyme_theme (86.1 sn · 73.8 BPM · D minor)</div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Saf <code>lyria-3.5</code>: Samimi keçe piyano ve solo çello. T-2 sonrası zırh kayışı CG'sinde ve T-3 sonrası ekmek bölüşme CG'sinde çalar.</div>
-      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_fadyme_theme.ogg"></audio>
+    <div style="background:rgba(16,10,24,0.88);border:1px solid var(--border);border-radius:10px;padding:12px 14px;">
+      <div style="font-size:11.5px;color:var(--lilac);font-weight:700;">🌙 ALTERNATİF ADAY 3 · GECE GİTARI & SENFONİK ROCK BALAD (68 BPM · 2:46)</div>
+      <div style="font-weight:700;color:var(--gold);margin:3px 0;">main_theme_v2_intimate_anatolian_gothic (166.3 sn · <code>lyria-3.5</code>)</div>
+      <div style="font-size:12.5px;color:var(--dim);margin-bottom:8px;">Uzun, ağlayan ambient elektro gitar girişi (0:00–0:17), samimi akustik + elektro gitar yürüyüşü (0:17–0:52) ve yaylılarla yükselen epik rock balad nakaratı (0:52+).</div>
+      <audio controls preload="none" style="width:100%;height:34px;" src="/audition/music/main_theme_v2_intimate_anatolian_gothic.mp3"></audio>
     </div>
   </div>
 </div>

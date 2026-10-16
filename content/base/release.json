@@ -21,8 +21,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "c162ff45e08508cc360ef84fe24bf85e258cfdfb831bbd96d432b2b5683a841a",
-      "bytes": 9866,
+      "sha256": "3d79a628d0fdd5f3a132e1d8db1c39d8b75eae6714ea1197d1b340d63d23e3e9",
+      "bytes": 10316,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -273,8 +273,8 @@
     },
     {
       "path": "audio/bgm_main_theme.ogg",
-      "sha256": "81c777cc4755ba70b3b81395238ef804101eb1a2c59ac3ef0f0bae431c061f25",
-      "bytes": 1149845,
+      "sha256": "8cb7a6f90e0c8e53ec0278af4ccdadfaf6c35602e709cc438b02c13656016eeb",
+      "bytes": 3412248,
       "media_type": "audio/ogg",
       "kind": "audio"
     },

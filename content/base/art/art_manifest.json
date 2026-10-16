@@ -391,8 +391,8 @@
   "music": {
     "bgm_main_theme": {
       "file": "audio/bgm_main_theme.ogg",
-      "loop_start_s": 12,
-      "duration_s": 101.5
+      "loop_start_s": 30.2,
+      "duration_s": 176.15
     },
     "bgm_prologue_before_the_road": {
       "file": "audio/bgm_prologue_before_the_road.ogg",

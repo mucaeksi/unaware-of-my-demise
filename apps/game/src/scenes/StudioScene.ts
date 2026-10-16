@@ -25,9 +25,10 @@ export class StudioScene extends Phaser.Scene {
 
   async create(): Promise<void> {
     const { art } = Services.ready();
-    await art.loadUi(this);
+    await Promise.all([art.loadUi(this), art.loadMusic(this, 'bgm_main_theme').catch(() => undefined)]);
     if (!this.sys.isActive()) return;
-    Music.stop(0.1);
+    const m = art.music('bgm_main_theme');
+    if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 1.8);
     this.cameras.main.setBackgroundColor(0x05030a);
     const calm = prefs().reducedMotion;
     const cx = REF_W / 2;

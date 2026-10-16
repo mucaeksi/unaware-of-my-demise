@@ -532,7 +532,13 @@ export class TitleScene extends Phaser.Scene {
   }
 
   private async ensureMainTheme(): Promise<void> {
-    Music.stop(0.1);
+    const { art } = Services.ready();
+    if (!art.music('bgm_main_theme')) {
+      await art.loadMusic(this, 'bgm_main_theme').catch(() => undefined);
+    }
+    if (!this.sys.isActive()) return;
+    const m = art.music('bgm_main_theme');
+    if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 1.6);
   }
 
   private async startAudio(): Promise<void> {
