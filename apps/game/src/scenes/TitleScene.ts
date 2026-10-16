@@ -18,9 +18,6 @@ import { RANDOM_GAME_QUOTES } from '../entry/strings';
 import { barFill } from '../patch/barFill';
 import { formatBytes } from '../ui/format';
 
-
-const TITLE_CUE = 'bgm_main_theme';
-
 function describe(o: PatchOutcome | null): string {
   if (!o) return 'No check yet';
   switch (o.status) {
@@ -532,14 +529,7 @@ export class TitleScene extends Phaser.Scene {
   }
 
   private async ensureMainTheme(): Promise<void> {
-    const { art } = Services.ready();
-    try {
-      await art.loadMusic(this, TITLE_CUE);
-      const m = art.music(TITLE_CUE);
-      if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 1.8);
-    } catch {
-      /* music is optional */
-    }
+    Music.stop(0.1);
   }
 
   private async startAudio(): Promise<void> {

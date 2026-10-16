@@ -15,7 +15,7 @@
     },
     {
       "op": "music",
-      "cue_id": "bgm_ch1_ash_forest_calm"
+      "cue_id": "stop"
     },
     {
       "op": "fade",
@@ -82,10 +82,6 @@
       "text": "I can see the stars outside. I would rather keep the rain there too.",
       "emotion": "dry_humor",
       "hold_seconds": 3
-    },
-    {
-      "op": "music",
-      "cue_id": "bgm_ch1_ash_forest_chaotic"
     },
     {
       "op": "narrate",

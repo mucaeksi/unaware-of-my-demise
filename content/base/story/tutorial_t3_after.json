@@ -16,7 +16,7 @@
     },
     {
       "op": "music",
-      "cue_id": "bgm_fadyme_theme"
+      "cue_id": "stop"
     },
     {
       "op": "fade",
@@ -191,10 +191,6 @@
       "text": "Tomorrow we find a better one.",
       "emotion": "composed",
       "hold_seconds": 3
-    },
-    {
-      "op": "music",
-      "cue_id": "bgm_main_theme"
     },
     {
       "op": "narrate",

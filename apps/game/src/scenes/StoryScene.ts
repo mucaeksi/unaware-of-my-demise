@@ -136,19 +136,16 @@ export class StoryScene extends Phaser.Scene {
         set.add(em);
       };
       const locations = new Set([this.data0.location_id]);
-      const cues = new Set<string>();
       for (const c of this.data0.commands) {
         if (c.op === 'background') locations.add(c.location_id);
         if (c.op === 'show') addEmotion(c.character);
         if (c.op === 'say') addEmotion(c.speaker, c.emotion ?? 'composed');
-        if (c.op === 'music' && c.cue_id !== 'stop') cues.add(c.cue_id);
       }
       // Always load all character emotion portraits so both speaker and listener react dynamically
       await Promise.all([
         ...[...locations].map((id) => art.loadBackground(this, id)),
         ...(this.data0.illustration_id ? [art.loadStills(this, [this.data0.illustration_id])] : []),
-        art.loadPortraits(this, [...chars], charEmotions),
-        ...[...cues].map((q) => art.loadMusic(this, q))
+        art.loadPortraits(this, [...chars], charEmotions)
       ]);
     } catch (e) {
       if (!current()) return;
@@ -273,10 +270,11 @@ export class StoryScene extends Phaser.Scene {
     const skipX = REF_W - 104 - insets.right;
     const autoX = skipX - (btnW + btnGap);
     const logX = autoX - (btnW + btnGap);
+    const voiceX = logX - (btnW + btnGap);
     this.skipBtn = new Button(this, skipX, topBtnY, { label: 'SKIP', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
     this.autoBtn = new Button(this, autoX, topBtnY, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
     new Button(this, logX, topBtnY, { label: 'LOG', w: btnW, h: btnH, fontSize: 21, onClick: () => this.showLog() }).setDepth(DEPTH.hud + 3);
-    this.voiceBtn = new Button(this, skipX, topBtnY + 76, { label: 'VOICE', w: btnW, h: 58, fontSize: 20, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }).setDepth(DEPTH.hud + 3).setVisible(false);
+    this.voiceBtn = new Button(this, voiceX, topBtnY, { label: 'VOICE', w: btnW, h: btnH, fontSize: 20, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }).setDepth(DEPTH.hud + 3).setVisible(false);
     title(this, 60 + insets.left, topBtnY, this.data0.title_en, 30, T.dim).setDepth(DEPTH.hud + 3).setOrigin(0, 0.5);
     if (this.init0.authRevision !== undefined && this.init0.onBack) new Button(this, 160 + insets.left, topBtnY + 76, { label: 'ARCHIVE', w: 200, h: 62, fontSize: 21, onClick: () => this.init0.onBack?.(this) }).setDepth(DEPTH.hud + 3);
     this.tweens.add({ targets: this.caret, alpha: 0.2, duration: 600, yoyo: true, repeat: -1 });
@@ -303,13 +301,7 @@ export class StoryScene extends Phaser.Scene {
     const r = this.runner.restored;
     const bgKey = art.background(r.locationId);
     if (this.bg.texture.key !== bgKey) this.bg.setTexture(bgKey);
-    if (r.musicCueId !== null) {
-      if (r.musicCueId === 'stop') Music.stop();
-      else {
-        const m = art.music(r.musicCueId);
-        if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration);
-      }
-    }
+    Music.stop(0.1);
     for (const [character, a] of r.actors) {
       this.showActor(character, a.side, a.emotion, true);
     }
@@ -347,11 +339,7 @@ export class StoryScene extends Phaser.Scene {
         return false;
       }
       case 'music': {
-        if (e.cueId === 'stop') Music.stop();
-        else {
-          const m = art.music(e.cueId);
-          if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration);
-        }
+        Music.stop(0.1);
         return false;
       }
       case 'fade':
@@ -913,13 +901,14 @@ export class StoryScene extends Phaser.Scene {
             : 1.0;
     const cps = baseCps * cpsMult;
     let n = 0;
+    const hasVoiceLine = Boolean(this.stage?.hasVoice(e.lineId));
     this.typing = this.time.addEvent({
       delay: 1000 / cps,
       loop: true,
       callback: () => {
         n += cps > 100 ? 4 : 1;
         this.bodyText.setText(this.fullText.slice(0, n));
-        if (n % 3 === 0 && !narr) Sfx.tap();
+        if (n % 3 === 0 && !narr && !hasVoiceLine) Sfx.tap();
         if (n >= this.fullText.length) this.finishTyping();
       }
     });
@@ -946,7 +935,9 @@ export class StoryScene extends Phaser.Scene {
 
   private autoHoldMs(): number {
     const line = this.currentLine;
-    const voiceHoldMs = line ? (this.stage?.voiceDuration(line.lineId) ?? 0) * 1000 + 350 : 0;
+    const revealSeconds = this.fullText.length / (this.cutscene ? CUTSCENE.cps : CPS[prefs().textSpeed]);
+    const voiceSeconds = line ? (this.stage?.voiceDuration(line.lineId) ?? 0) : 0;
+    const voiceHoldMs = voiceSeconds > 0 ? Math.max(950, (voiceSeconds - revealSeconds + 0.65) * 1000) : 0;
     if (!this.cutscene) return Math.max(voiceHoldMs, (line?.holdSeconds ?? 2.4) * 1000 + this.fullText.length * 22);
     const last = line !== null && line.lineId === this.lastLineId;
     const textHoldMs =

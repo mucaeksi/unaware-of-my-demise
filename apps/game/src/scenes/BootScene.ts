@@ -114,7 +114,6 @@ export class BootScene extends Phaser.Scene {
       const art = await Services.refreshArt();
       await art.loadUi(this);
       await art.loadBackground(this, 'forest_whispering_ash');
-      await art.loadMusic(this, 'bgm_ch1_ash_forest_calm').catch(() => undefined);
       return true;
     } catch (e) {
       const fatal = document.getElementById('fatal');

@@ -117,8 +117,7 @@ export class BattleScene extends Phaser.Scene {
       await Promise.all([
         art.loadBackground(this, this.encounter.location_id),
         art.loadUnits(this, artKeys),
-        art.loadPortraits(this, playerUnitIds, neutralEmotions).catch(() => undefined),
-        this.encounter.music_cue ? art.loadMusic(this, this.encounter.music_cue) : Promise.resolve()
+        art.loadPortraits(this, playerUnitIds, neutralEmotions).catch(() => undefined)
       ]);
     } catch (e) {
       title(this, REF_W / 2, REF_H / 2 - 40, 'This battle could not be loaded', SIZE.h2, T.crimson);
@@ -130,8 +129,7 @@ export class BattleScene extends Phaser.Scene {
     this.buildWorld();
     this.buildHud();
     sceneFadeIn(this, 1200);
-    const m = this.encounter.music_cue ? art.music(this.encounter.music_cue) : null;
-    if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 1.8);
+    Music.stop(0.1);
     await this.wait(650);
     for (const event of this.battle.log) if (event.type === 'phase_change') await this.phaseStory(event.unit, event.phase);
     if (this.dead) return;

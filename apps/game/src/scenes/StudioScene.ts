@@ -8,7 +8,6 @@ import { Services } from '../services';
 import { txt } from '../ui/kit';
 import { C, F, T } from '../ui/theme';
 
-const MAIN_THEME_CUE = 'bgm_main_theme';
 const NAME_IN = INTRO_FAST ? 80 : 1700;
 const PRESENTS_AT = INTRO_FAST ? 60 : 1100;
 const HOLD = INTRO_FAST ? 80 : 2100;
@@ -26,11 +25,9 @@ export class StudioScene extends Phaser.Scene {
 
   async create(): Promise<void> {
     const { art } = Services.ready();
-    await Promise.all([
-      art.loadUi(this),
-      art.loadMusic(this, MAIN_THEME_CUE).catch(() => undefined)
-    ]);
+    await art.loadUi(this);
     if (!this.sys.isActive()) return;
+    Music.stop(0.1);
     this.cameras.main.setBackgroundColor(0x05030a);
     const calm = prefs().reducedMotion;
     const cx = REF_W / 2;
@@ -103,14 +100,7 @@ export class StudioScene extends Phaser.Scene {
     parts.push(divider, name);
     [...parts, presents].forEach((o) => o.setAlpha(0));
 
-    // Start Main Theme music the exact moment the SovTaym Studios logo begins appearing
-    const playMainTheme = (): void => {
-      const m = art.music(MAIN_THEME_CUE);
-      if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 2.4);
-    };
-    playMainTheme();
     Sfx.bell(330, 0.14, 2.2);
-    this.input.once('pointerdown', () => playMainTheme());
 
     this.tweens.add({ targets: parts, alpha: 1, duration: NAME_IN, ease: 'Sine.easeInOut' });
     this.tweens.add({ targets: presents, alpha: 1, duration: NAME_IN, delay: PRESENTS_AT, ease: 'Sine.easeInOut' });

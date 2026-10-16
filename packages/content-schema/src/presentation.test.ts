@@ -20,7 +20,8 @@ function fixture() {
     { op: 'voice', line_id: lineId }, { op: 'narrate', line_id: lineId, text: 'Synthetic subtitle.' }, { op: 'video', video_id: 'probe_video', skippable: true }, { op: 'panel', panel_id: 'probe_panel' }, { op: 'end' }
   ] });
   files.set('audio/probe_voice.ogg', new Uint8Array([1])); files.set('video/probe_video.webm', new Uint8Array([1]));
-  const pack = PresentationPack.parse({ schema_version: 1, voices: { [lineId]: { file: 'audio/probe_voice.ogg', language: 'ja', duration_s: 1, reviewed_transcript_sha256: 'a'.repeat(64) } }, videos: { probe_video: { file: 'video/probe_video.webm', audio: 'none', duration_s: 2, captions: [{ line_id: lineId, text_en: 'Synthetic subtitle.', start_s: 0, end_s: 1 }] } }, locales: ['tr'], panels: { probe_panel: { title: { text_en: 'Test notice', text_id: 'probe.title' }, body: [{ text_en: 'Test only' }], buttons: [{ label: { text_en: 'Close' }, action: { type: 'close' } }] } } });
+  const existingVoices = files.has('presentation/presentation.json') ? (JSON.parse(new TextDecoder().decode(files.get('presentation/presentation.json'))).voices ?? {}) : {};
+  const pack = PresentationPack.parse({ schema_version: 1, voices: { ...existingVoices, [lineId]: { file: 'audio/probe_voice.ogg', language: 'ja', duration_s: 1, reviewed_transcript_sha256: 'a'.repeat(64) } }, videos: { probe_video: { file: 'video/probe_video.webm', audio: 'none', duration_s: 2, captions: [{ line_id: lineId, text_en: 'Synthetic subtitle.', start_s: 0, end_s: 1 }] } }, locales: ['tr'], panels: { probe_panel: { title: { text_en: 'Test notice', text_id: 'probe.title' }, body: [{ text_en: 'Test only' }], buttons: [{ label: { text_en: 'Close' }, action: { type: 'close' } }] } } });
   put(files, 'presentation/presentation.json', pack); put(files, 'locales/tr.json', { schema_version: 1, locale: 'tr', fallback: 'en', strings: { [lineId]: 'Test altyazısı.', 'probe.title': 'Test duyurusu' } });
   return { files, pack };
 }

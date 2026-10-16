@@ -55,7 +55,20 @@ export class NarrativeStage {
     element.onloadedmetadata = () => { if (!Number.isFinite(element.duration) || element.duration > duration + 0.5) this.stopAudio(key); };
     element.ontimeupdate = () => { if (!loop && element.currentTime >= duration) this.stopAudio(key); };
     element.onended = element.onerror = () => { if (this.audio.get(key) === clip) this.stopAudio(key); };
-    await element.play().catch(() => { if (this.audio.get(key) === clip) this.stopAudio(key); });
+    await element.play().catch(() => {
+      if (this.audio.get(key) !== clip) return;
+      const unlock = (): void => {
+        window.removeEventListener('pointerdown', unlock);
+        window.removeEventListener('keydown', unlock);
+        if (this.alive && this.audio.get(key) === clip) {
+          void element.play().catch(() => {
+            if (this.audio.get(key) === clip) this.stopAudio(key);
+          });
+        }
+      };
+      window.addEventListener('pointerdown', unlock, { once: true });
+      window.addEventListener('keydown', unlock, { once: true });
+    });
   }
   private stopAudio(key: string): void {
     this.audioTickets.delete(key); const clip = this.audio.get(key); if (!clip) return; this.audio.delete(key);

@@ -4,7 +4,7 @@
   "title_en": "Before the Road",
   "locale": "en",
   "duration_seconds": 120,
-  "voice_status": "unrecorded",
+  "voice_status": "recorded",
   "visual_presentation": "layered_motion_comic_v002",
   "sources": [
     "narrative/13_Timeline_Factions_Glossary/timeline.md",

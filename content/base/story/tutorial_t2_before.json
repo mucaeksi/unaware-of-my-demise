@@ -15,7 +15,7 @@
     },
     {
       "op": "music",
-      "cue_id": "bgm_ch1_ash_forest_uneasy"
+      "cue_id": "stop"
     },
     {
       "op": "fade",
@@ -115,10 +115,6 @@
       "text": "That can be arranged.",
       "emotion": "dry_humor",
       "hold_seconds": 3
-    },
-    {
-      "op": "music",
-      "cue_id": "bgm_ch1_ash_forest_chaotic"
     },
     {
       "op": "narrate",

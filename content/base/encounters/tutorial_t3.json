@@ -5,7 +5,6 @@
   "title_en": "A Roof Before Dawn",
   "location_id": "shelter_courtyard_dusk",
   "seed": 81010,
-  "music_cue": "bgm_battle_field",
   "party": [
     {
       "unit_id": "mahmut",

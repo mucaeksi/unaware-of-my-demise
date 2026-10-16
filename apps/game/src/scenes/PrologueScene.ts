@@ -20,7 +20,6 @@ import { C, DEPTH, F, T } from '../ui/theme';
 export const REVEAL_CPS = 26;
 const CROSSFADE_MS = INTRO_FAST ? 60 : 1400;
 const TEXT_FADE_MS = INTRO_FAST ? 40 : 650;
-const PROLOGUE_MUSIC_CUE = 'bgm_prologue_before_the_road';
 
 /** Seconds a scene lasts on screen. Timing comes from the narrative script; `?fastintro` only shortens it for automated review. */
 export const sceneSeconds = (s: PrologueData): number => (INTRO_FAST ? 0.35 : s.duration_seconds);
@@ -48,8 +47,6 @@ export class PrologueScene extends Phaser.Scene {
   private muteBtn: Button | null = null;
   private pausedByUser = false;
   private muted = false;
-  private prologueMusicReady = false;
-  private sceneStartedAtMs = 0;
   private index = -1;
   private done = false;
 
@@ -69,8 +66,6 @@ export class PrologueScene extends Phaser.Scene {
     this.muteBtn = null;
     this.pausedByUser = false;
     this.muted = this.sound.mute;
-    this.prologueMusicReady = false;
-    this.sceneStartedAtMs = 0;
     this.index = -1;
     this.done = false;
   }
@@ -214,22 +209,8 @@ export class PrologueScene extends Phaser.Scene {
     this.muteBtn?.setLabel(this.muted ? 'UNMUTE' : 'MUTE');
   }
 
-  private currentTimelineOffsetSeconds(): number {
-    if (!this.data0 || this.index < 0) return 0;
-    const prior = this.data0.scenes.slice(0, this.index).reduce((acc, s) => acc + s.duration_seconds, 0);
-    const inScene = Math.max(0, (this.time.now - this.sceneStartedAtMs) / 1000);
-    const curDur = this.data0.scenes[this.index]?.duration_seconds ?? 0;
-    return prior + Math.min(curDur, inScene);
-  }
-
-  private ensurePrologueMusic(forceOffset?: number): void {
-    if (!this.prologueMusicReady || this.done) return;
-    const cue = Services.art?.music(PROLOGUE_MUSIC_CUE);
-    if (!cue) return;
-    if (Music.currentKey === cue.key && forceOffset === undefined) return;
-    const offset = forceOffset ?? this.currentTimelineOffsetSeconds();
-    Music.play(this.cache.audio, cue.key, cue.loopStart, cue.duration, 1.2, offset);
-    Music.setVolume(this.muted ? 0 : prefs().musicVolume);
+  private ensurePrologueMusic(_forceOffset?: number): void {
+    Music.stop(0.1);
   }
 
   private async loadScript(): Promise<void> {
@@ -244,14 +225,8 @@ export class PrologueScene extends Phaser.Scene {
       if (!current()) return;
       this.stage = new NarrativeStage(this, content, Services.ready().art.art, pack, locale);
       if (this.data0.video_id) { await this.stage.video(this.data0.video_id, false); if (current()) this.ending(); return; }
-      // Load the 9 prologue stills and the dedicated 120s prologue musical score in parallel
       const ids = this.data0.scenes.flatMap((sc) => ArtLibrary.plateIds(sc.id, sc.visual));
-      await Promise.all([
-        Services.art?.loadStills(this, ids).catch((e: unknown) => console.warn('prologue plates unavailable', e)),
-        Services.art?.loadMusic(this, PROLOGUE_MUSIC_CUE).then(() => {
-          this.prologueMusicReady = Boolean(Services.art?.music(PROLOGUE_MUSIC_CUE));
-        }).catch((e: unknown) => console.warn('prologue music unavailable', e))
-      ]);
+      await Services.art?.loadStills(this, ids).catch((e: unknown) => console.warn('prologue plates unavailable', e));
     } catch (e) {
       // the prologue is a presentation: if it cannot load, the road must still open
       console.error('prologue unavailable', e);
@@ -260,12 +235,10 @@ export class PrologueScene extends Phaser.Scene {
     }
     if (!current()) return;
     const savedIndex = loadPrologueCheckpoint(Services.api.accountKey, this.data0.scenes.length);
-    let resumeOffset = 0;
     if (savedIndex !== null && savedIndex > 0) {
       this.index = savedIndex - 1;
-      resumeOffset = this.data0.scenes.slice(0, savedIndex).reduce((acc, s) => acc + s.duration_seconds, 0);
     }
-    this.ensurePrologueMusic(resumeOffset);
+    this.ensurePrologueMusic();
     this.tweens.add({ targets: this.shade, alpha: 1, duration: 1100 });
     this.next();
   }
@@ -279,7 +252,6 @@ export class PrologueScene extends Phaser.Scene {
       this.ending();
       return;
     }
-    this.sceneStartedAtMs = this.time.now;
     savePrologueCheckpoint(Services.api.accountKey, this.index);
     const first = this.index === 0;
     const holdMs = sceneSeconds(scene) * 1000;
@@ -289,7 +261,7 @@ export class PrologueScene extends Phaser.Scene {
     this.tweens.killTweensOf(this.progressFill);
     this.progressFill.width = startW;
     this.tweens.add({ targets: this.progressFill, width: endW, duration: holdMs, ease: 'Linear' });
-    if (!this.muted && !INTRO_FAST && !this.prologueMusicReady) {
+    if (!this.muted && !INTRO_FAST && !this.stage?.hasVoice(scene.line_id)) {
       Sfx.bell(this.index === 4 ? 220 : 330 + (this.index % 3) * 55, 0.08, 1.5);
     }
     this.showPlate(scene, first, holdMs);

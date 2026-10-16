@@ -1228,10 +1228,23 @@ function renderScriptInspector() {{
     jaRow.style.cssText = 'font-size:13.5px;color:var(--gold);';
     jaRow.lang = 'ja';
     jaRow.textContent = r.ja;
+    const audioUrl = `/content/base/${{r.output_ogg || ('voices/' + r.line_id + '.ogg')}}`;
+    const audioRow = document.createElement('div');
+    audioRow.style.cssText = 'display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0;';
+    const labPlayBtn = document.createElement('button');
+    labPlayBtn.className = 'play-lab-btn';
+    labPlayBtn.textContent = '🎛️ Lab İle Çal';
+    labPlayBtn.onclick = () => playThroughVoiceLab(audioUrl, labPlayBtn);
+    const lineAudio = document.createElement('audio');
+    lineAudio.controls = true;
+    lineAudio.preload = 'none';
+    lineAudio.src = audioUrl;
+    lineAudio.style.cssText = 'height:34px;flex:1;min-width:220px;';
+    audioRow.append(labPlayBtn, lineAudio);
     const promptRow = document.createElement('div');
     promptRow.style.cssText = 'font-size:11.5px;color:var(--dim);background:rgba(255,255,255,0.03);padding:7px 10px;border-radius:8px;font-family:monospace;white-space:pre-wrap;';
     promptRow.textContent = `Prompt (style): ${{r.speech_metadata.style}}\nGemini-3.8 Tags: ${{r.tts_text_gemini38}}\nChirp3 SSML   : ${{r.ssml_chirp3}}`;
-    card.append(top, whenRow, subRow, enRow, jaRow, promptRow);
+    card.append(top, whenRow, subRow, enRow, jaRow, audioRow, promptRow);
     scriptLinesList.append(card);
   }}
 }}
