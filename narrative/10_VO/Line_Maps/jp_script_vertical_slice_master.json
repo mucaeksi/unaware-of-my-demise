@@ -37,11 +37,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -1.0,
-        "duration_seconds": 10.23,
+        "duration_seconds": 11.46,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/entry_past_001.ogg"
+      "output_ogg": "voices/entry_past_001.ogg",
+      "recorded_duration_s": 11.46
     },
     {
       "order_index": 2,
@@ -67,11 +68,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -1.0,
-        "duration_seconds": 10.91,
+        "duration_seconds": 13.43,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/entry_past_002.ogg"
+      "output_ogg": "voices/entry_past_002.ogg",
+      "recorded_duration_s": 13.43
     },
     {
       "order_index": 3,
@@ -97,11 +99,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -1.1,
-        "duration_seconds": 10.93,
+        "duration_seconds": 11.47,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/entry_past_003.ogg"
+      "output_ogg": "voices/entry_past_003.ogg",
+      "recorded_duration_s": 11.47
     },
     {
       "order_index": 4,
@@ -127,11 +130,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -1.4,
-        "duration_seconds": 10.2,
+        "duration_seconds": 11.9,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/entry_past_004.ogg"
+      "output_ogg": "voices/entry_past_004.ogg",
+      "recorded_duration_s": 11.9
     },
     {
       "order_index": 5,
@@ -157,11 +161,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.86,
         "pitch_semitones": -2.0,
-        "duration_seconds": 11.74,
+        "duration_seconds": 15.38,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/entry_past_005.ogg"
+      "output_ogg": "voices/entry_past_005.ogg",
+      "recorded_duration_s": 15.38
     },
     {
       "order_index": 6,
@@ -187,11 +192,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.87,
         "pitch_semitones": -1.6,
-        "duration_seconds": 11.28,
+        "duration_seconds": 15.38,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/entry_past_006.ogg"
+      "output_ogg": "voices/entry_past_006.ogg",
+      "recorded_duration_s": 15.38
     },
     {
       "order_index": 7,
@@ -217,11 +223,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -1.0,
-        "duration_seconds": 9.18,
+        "duration_seconds": 12.98,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/entry_past_007.ogg"
+      "output_ogg": "voices/entry_past_007.ogg",
+      "recorded_duration_s": 12.98
     },
     {
       "order_index": 8,
@@ -247,11 +254,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.6,
-        "duration_seconds": 10.64,
+        "duration_seconds": 11.46,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/entry_past_008.ogg"
+      "output_ogg": "voices/entry_past_008.ogg",
+      "recorded_duration_s": 11.46
     },
     {
       "order_index": 9,
@@ -277,11 +285,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.89,
         "pitch_semitones": -1.0,
-        "duration_seconds": 9.94,
+        "duration_seconds": 11.47,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/entry_past_009.ogg"
+      "output_ogg": "voices/entry_past_009.ogg",
+      "recorded_duration_s": 11.47
     },
     {
       "order_index": 10,
@@ -307,11 +316,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -1.0,
-        "duration_seconds": 6.91,
+        "duration_seconds": 13.21,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_001.ogg"
+      "output_ogg": "voices/tutorial_t1_before_001.ogg",
+      "recorded_duration_s": 13.21
     },
     {
       "order_index": 11,
@@ -337,11 +347,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.9,
-        "duration_seconds": 3.41,
+        "duration_seconds": 4.82,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_002.ogg"
+      "output_ogg": "voices/tutorial_t1_before_002.ogg",
+      "recorded_duration_s": 4.82
     },
     {
       "order_index": 12,
@@ -367,11 +378,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 3.48,
+        "duration_seconds": 5.21,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_003.ogg"
+      "output_ogg": "voices/tutorial_t1_before_003.ogg",
+      "recorded_duration_s": 5.21
     },
     {
       "order_index": 13,
@@ -397,11 +409,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.95,
         "pitch_semitones": -0.6,
-        "duration_seconds": 2.83,
+        "duration_seconds": 4.55,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_004.ogg"
+      "output_ogg": "voices/tutorial_t1_before_004.ogg",
+      "recorded_duration_s": 4.55
     },
     {
       "order_index": 14,
@@ -427,11 +440,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": 0.3,
-        "duration_seconds": 5.14,
+        "duration_seconds": 6.45,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_005.ogg"
+      "output_ogg": "voices/tutorial_t1_before_005.ogg",
+      "recorded_duration_s": 6.45
     },
     {
       "order_index": 15,
@@ -457,11 +471,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.8,
-        "duration_seconds": 2.42,
+        "duration_seconds": 3.1,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_006.ogg"
+      "output_ogg": "voices/tutorial_t1_before_006.ogg",
+      "recorded_duration_s": 3.1
     },
     {
       "order_index": 16,
@@ -487,11 +502,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": 0.4,
-        "duration_seconds": 4.79,
+        "duration_seconds": 6.1,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_007.ogg"
+      "output_ogg": "voices/tutorial_t1_before_007.ogg",
+      "recorded_duration_s": 6.1
     },
     {
       "order_index": 17,
@@ -517,11 +533,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": -0.7,
-        "duration_seconds": 1.87,
+        "duration_seconds": 2.71,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_008.ogg"
+      "output_ogg": "voices/tutorial_t1_before_008.ogg",
+      "recorded_duration_s": 2.71
     },
     {
       "order_index": 18,
@@ -547,11 +564,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.8,
-        "duration_seconds": 8.41,
+        "duration_seconds": 12.54,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_009.ogg"
+      "output_ogg": "voices/tutorial_t1_before_009.ogg",
+      "recorded_duration_s": 12.54
     },
     {
       "order_index": 19,
@@ -577,11 +595,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 5.82,
+        "duration_seconds": 7.1,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_010.ogg"
+      "output_ogg": "voices/tutorial_t1_before_010.ogg",
+      "recorded_duration_s": 7.1
     },
     {
       "order_index": 20,
@@ -607,11 +626,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.6,
-        "duration_seconds": 2.18,
+        "duration_seconds": 2.71,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_011.ogg"
+      "output_ogg": "voices/tutorial_t1_before_011.ogg",
+      "recorded_duration_s": 2.71
     },
     {
       "order_index": 21,
@@ -637,11 +657,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": -1.3,
-        "duration_seconds": 8.47,
+        "duration_seconds": 7.72,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_012.ogg"
+      "output_ogg": "voices/tutorial_t1_before_012.ogg",
+      "recorded_duration_s": 7.72
     },
     {
       "order_index": 22,
@@ -667,11 +688,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.96,
         "pitch_semitones": -1.1,
-        "duration_seconds": 2.3,
+        "duration_seconds": 2.75,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_013.ogg"
+      "output_ogg": "voices/tutorial_t1_before_013.ogg",
+      "recorded_duration_s": 2.75
     },
     {
       "order_index": 23,
@@ -697,11 +719,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.95,
         "pitch_semitones": -0.2,
-        "duration_seconds": 4.98,
+        "duration_seconds": 5.92,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_before_014.ogg"
+      "output_ogg": "voices/tutorial_t1_before_014.ogg",
+      "recorded_duration_s": 5.92
     },
     {
       "order_index": 24,
@@ -727,11 +750,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -1.0,
-        "duration_seconds": 7.3,
+        "duration_seconds": 12.4,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_001.ogg"
+      "output_ogg": "voices/tutorial_t1_after_001.ogg",
+      "recorded_duration_s": 12.4
     },
     {
       "order_index": 25,
@@ -757,11 +781,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.7,
-        "duration_seconds": 1.12,
+        "duration_seconds": 1.31,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_002.ogg"
+      "output_ogg": "voices/tutorial_t1_after_002.ogg",
+      "recorded_duration_s": 1.31
     },
     {
       "order_index": 26,
@@ -787,11 +812,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 3.01,
+        "duration_seconds": 3.71,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_003.ogg"
+      "output_ogg": "voices/tutorial_t1_after_003.ogg",
+      "recorded_duration_s": 3.71
     },
     {
       "order_index": 27,
@@ -817,11 +843,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": -0.9,
-        "duration_seconds": 0.76,
+        "duration_seconds": 1.15,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_004.ogg"
+      "output_ogg": "voices/tutorial_t1_after_004.ogg",
+      "recorded_duration_s": 1.15
     },
     {
       "order_index": 28,
@@ -847,11 +874,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 3.19,
+        "duration_seconds": 4.38,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_005.ogg"
+      "output_ogg": "voices/tutorial_t1_after_005.ogg",
+      "recorded_duration_s": 4.38
     },
     {
       "order_index": 29,
@@ -877,11 +905,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -0.8,
-        "duration_seconds": 5.71,
+        "duration_seconds": 8.67,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_006.ogg"
+      "output_ogg": "voices/tutorial_t1_after_006.ogg",
+      "recorded_duration_s": 8.67
     },
     {
       "order_index": 30,
@@ -907,11 +936,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": -0.8,
-        "duration_seconds": 1.77,
+        "duration_seconds": 2.17,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_007.ogg"
+      "output_ogg": "voices/tutorial_t1_after_007.ogg",
+      "recorded_duration_s": 2.17
     },
     {
       "order_index": 31,
@@ -937,11 +967,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.4,
-        "duration_seconds": 4.48,
+        "duration_seconds": 7.14,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_008.ogg"
+      "output_ogg": "voices/tutorial_t1_after_008.ogg",
+      "recorded_duration_s": 7.14
     },
     {
       "order_index": 32,
@@ -967,11 +998,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.6,
-        "duration_seconds": 1.96,
+        "duration_seconds": 3.12,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_009.ogg"
+      "output_ogg": "voices/tutorial_t1_after_009.ogg",
+      "recorded_duration_s": 3.12
     },
     {
       "order_index": 33,
@@ -997,11 +1029,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": 0.3,
-        "duration_seconds": 4.44,
+        "duration_seconds": 4.64,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_010.ogg"
+      "output_ogg": "voices/tutorial_t1_after_010.ogg",
+      "recorded_duration_s": 4.64
     },
     {
       "order_index": 34,
@@ -1027,11 +1060,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": -0.8,
-        "duration_seconds": 7.04,
+        "duration_seconds": 8.04,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_011.ogg"
+      "output_ogg": "voices/tutorial_t1_after_011.ogg",
+      "recorded_duration_s": 8.04
     },
     {
       "order_index": 35,
@@ -1057,11 +1091,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": 0.0,
-        "duration_seconds": 4.42,
+        "duration_seconds": 4.08,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_012.ogg"
+      "output_ogg": "voices/tutorial_t1_after_012.ogg",
+      "recorded_duration_s": 4.08
     },
     {
       "order_index": 36,
@@ -1087,11 +1122,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -0.9,
-        "duration_seconds": 1.52,
+        "duration_seconds": 2.34,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_013.ogg"
+      "output_ogg": "voices/tutorial_t1_after_013.ogg",
+      "recorded_duration_s": 2.34
     },
     {
       "order_index": 37,
@@ -1117,11 +1153,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.8,
-        "duration_seconds": 6.32,
+        "duration_seconds": 7.69,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t1_after_014.ogg"
+      "output_ogg": "voices/tutorial_t1_after_014.ogg",
+      "recorded_duration_s": 7.69
     },
     {
       "order_index": 38,
@@ -1147,11 +1184,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -1.1,
-        "duration_seconds": 7.37,
+        "duration_seconds": 11.86,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_001.ogg"
+      "output_ogg": "voices/tutorial_t2_before_001.ogg",
+      "recorded_duration_s": 11.86
     },
     {
       "order_index": 39,
@@ -1177,11 +1215,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": -1.0,
-        "duration_seconds": 2.93,
+        "duration_seconds": 3.79,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_002.ogg"
+      "output_ogg": "voices/tutorial_t2_before_002.ogg",
+      "recorded_duration_s": 3.79
     },
     {
       "order_index": 40,
@@ -1207,11 +1246,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": -0.1,
-        "duration_seconds": 3.96,
+        "duration_seconds": 4.79,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_003.ogg"
+      "output_ogg": "voices/tutorial_t2_before_003.ogg",
+      "recorded_duration_s": 4.79
     },
     {
       "order_index": 41,
@@ -1237,11 +1277,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": -0.9,
-        "duration_seconds": 2.09,
+        "duration_seconds": 2.71,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_004.ogg"
+      "output_ogg": "voices/tutorial_t2_before_004.ogg",
+      "recorded_duration_s": 2.71
     },
     {
       "order_index": 42,
@@ -1267,11 +1308,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": 0.0,
-        "duration_seconds": 2.76,
+        "duration_seconds": 3.57,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_005.ogg"
+      "output_ogg": "voices/tutorial_t2_before_005.ogg",
+      "recorded_duration_s": 3.57
     },
     {
       "order_index": 43,
@@ -1297,11 +1339,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -1.0,
-        "duration_seconds": 7.5,
+        "duration_seconds": 10.71,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_006.ogg"
+      "output_ogg": "voices/tutorial_t2_before_006.ogg",
+      "recorded_duration_s": 10.71
     },
     {
       "order_index": 44,
@@ -1327,11 +1370,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -0.2,
-        "duration_seconds": 6.49,
+        "duration_seconds": 9.14,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_007.ogg"
+      "output_ogg": "voices/tutorial_t2_before_007.ogg",
+      "recorded_duration_s": 9.14
     },
     {
       "order_index": 45,
@@ -1357,11 +1401,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.9,
-        "duration_seconds": 0.9,
+        "duration_seconds": 1.06,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_008.ogg"
+      "output_ogg": "voices/tutorial_t2_before_008.ogg",
+      "recorded_duration_s": 1.06
     },
     {
       "order_index": 46,
@@ -1387,11 +1432,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": 0.3,
-        "duration_seconds": 6.88,
+        "duration_seconds": 8.16,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_009.ogg"
+      "output_ogg": "voices/tutorial_t2_before_009.ogg",
+      "recorded_duration_s": 8.16
     },
     {
       "order_index": 47,
@@ -1417,11 +1463,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.6,
-        "duration_seconds": 1.92,
+        "duration_seconds": 2.11,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_010.ogg"
+      "output_ogg": "voices/tutorial_t2_before_010.ogg",
+      "recorded_duration_s": 2.11
     },
     {
       "order_index": 48,
@@ -1447,11 +1494,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.89,
         "pitch_semitones": -1.4,
-        "duration_seconds": 4.58,
+        "duration_seconds": 6.56,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_011.ogg"
+      "output_ogg": "voices/tutorial_t2_before_011.ogg",
+      "recorded_duration_s": 6.56
     },
     {
       "order_index": 49,
@@ -1477,11 +1525,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.96,
         "pitch_semitones": -1.1,
-        "duration_seconds": 2.4,
+        "duration_seconds": 3.02,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_012.ogg"
+      "output_ogg": "voices/tutorial_t2_before_012.ogg",
+      "recorded_duration_s": 3.02
     },
     {
       "order_index": 50,
@@ -1507,11 +1556,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.95,
         "pitch_semitones": -0.1,
-        "duration_seconds": 2.94,
+        "duration_seconds": 3.15,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_before_013.ogg"
+      "output_ogg": "voices/tutorial_t2_before_013.ogg",
+      "recorded_duration_s": 3.15
     },
     {
       "order_index": 51,
@@ -1537,11 +1587,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -0.9,
-        "duration_seconds": 8.01,
+        "duration_seconds": 11.79,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_001.ogg"
+      "output_ogg": "voices/tutorial_t2_after_001.ogg",
+      "recorded_duration_s": 11.79
     },
     {
       "order_index": 52,
@@ -1567,11 +1618,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 4.89,
+        "duration_seconds": 7.24,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_002.ogg"
+      "output_ogg": "voices/tutorial_t2_after_002.ogg",
+      "recorded_duration_s": 7.24
     },
     {
       "order_index": 53,
@@ -1597,11 +1649,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.8,
-        "duration_seconds": 2.19,
+        "duration_seconds": 2.31,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_003.ogg"
+      "output_ogg": "voices/tutorial_t2_after_003.ogg",
+      "recorded_duration_s": 2.31
     },
     {
       "order_index": 54,
@@ -1627,11 +1680,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": 0.2,
-        "duration_seconds": 4.54,
+        "duration_seconds": 5.96,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_004.ogg"
+      "output_ogg": "voices/tutorial_t2_after_004.ogg",
+      "recorded_duration_s": 5.96
     },
     {
       "order_index": 55,
@@ -1657,11 +1711,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.8,
-        "duration_seconds": 4.83,
+        "duration_seconds": 6.23,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_005.ogg"
+      "output_ogg": "voices/tutorial_t2_after_005.ogg",
+      "recorded_duration_s": 6.23
     },
     {
       "order_index": 56,
@@ -1687,11 +1742,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": -0.7,
-        "duration_seconds": 1.16,
+        "duration_seconds": 2.03,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_006.ogg"
+      "output_ogg": "voices/tutorial_t2_after_006.ogg",
+      "recorded_duration_s": 2.03
     },
     {
       "order_index": 57,
@@ -1717,11 +1773,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": 0.1,
-        "duration_seconds": 4.6,
+        "duration_seconds": 4.53,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_007.ogg"
+      "output_ogg": "voices/tutorial_t2_after_007.ogg",
+      "recorded_duration_s": 4.53
     },
     {
       "order_index": 58,
@@ -1747,11 +1804,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.89,
         "pitch_semitones": -0.8,
-        "duration_seconds": 9.54,
+        "duration_seconds": 14.26,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_008.ogg"
+      "output_ogg": "voices/tutorial_t2_after_008.ogg",
+      "recorded_duration_s": 14.26
     },
     {
       "order_index": 59,
@@ -1777,11 +1835,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -0.7,
-        "duration_seconds": 1.17,
+        "duration_seconds": 1.61,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_009.ogg"
+      "output_ogg": "voices/tutorial_t2_after_009.ogg",
+      "recorded_duration_s": 1.61
     },
     {
       "order_index": 60,
@@ -1807,11 +1866,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 2.94,
+        "duration_seconds": 4.5,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_010.ogg"
+      "output_ogg": "voices/tutorial_t2_after_010.ogg",
+      "recorded_duration_s": 4.5
     },
     {
       "order_index": 61,
@@ -1837,11 +1897,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.8,
-        "duration_seconds": 0.58,
+        "duration_seconds": 1.11,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_011.ogg"
+      "output_ogg": "voices/tutorial_t2_after_011.ogg",
+      "recorded_duration_s": 1.11
     },
     {
       "order_index": 62,
@@ -1867,11 +1928,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": 0.4,
-        "duration_seconds": 2.37,
+        "duration_seconds": 2.92,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_012.ogg"
+      "output_ogg": "voices/tutorial_t2_after_012.ogg",
+      "recorded_duration_s": 2.92
     },
     {
       "order_index": 63,
@@ -1897,11 +1959,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": -0.7,
-        "duration_seconds": 2.7,
+        "duration_seconds": 3.43,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_013.ogg"
+      "output_ogg": "voices/tutorial_t2_after_013.ogg",
+      "recorded_duration_s": 3.43
     },
     {
       "order_index": 64,
@@ -1927,11 +1990,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 5.54,
+        "duration_seconds": 6.69,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_014.ogg"
+      "output_ogg": "voices/tutorial_t2_after_014.ogg",
+      "recorded_duration_s": 6.69
     },
     {
       "order_index": 65,
@@ -1957,11 +2021,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -0.8,
-        "duration_seconds": 1.01,
+        "duration_seconds": 1.19,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_015.ogg"
+      "output_ogg": "voices/tutorial_t2_after_015.ogg",
+      "recorded_duration_s": 1.19
     },
     {
       "order_index": 66,
@@ -1987,11 +2052,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.8,
-        "duration_seconds": 8.01,
+        "duration_seconds": 12.1,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_016.ogg"
+      "output_ogg": "voices/tutorial_t2_after_016.ogg",
+      "recorded_duration_s": 12.1
     },
     {
       "order_index": 67,
@@ -2017,11 +2083,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": 0.3,
-        "duration_seconds": 4.15,
+        "duration_seconds": 3.97,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_017.ogg"
+      "output_ogg": "voices/tutorial_t2_after_017.ogg",
+      "recorded_duration_s": 3.97
     },
     {
       "order_index": 68,
@@ -2047,11 +2114,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": -0.7,
-        "duration_seconds": 2.92,
+        "duration_seconds": 3.44,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t2_after_018.ogg"
+      "output_ogg": "voices/tutorial_t2_after_018.ogg",
+      "recorded_duration_s": 3.44
     },
     {
       "order_index": 69,
@@ -2077,11 +2145,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -0.9,
-        "duration_seconds": 8.68,
+        "duration_seconds": 10.74,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_001.ogg"
+      "output_ogg": "voices/tutorial_t3_before_001.ogg",
+      "recorded_duration_s": 10.74
     },
     {
       "order_index": 70,
@@ -2107,11 +2176,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.8,
-        "duration_seconds": 2.73,
+        "duration_seconds": 3.65,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_002.ogg"
+      "output_ogg": "voices/tutorial_t3_before_002.ogg",
+      "recorded_duration_s": 3.65
     },
     {
       "order_index": 71,
@@ -2137,11 +2207,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.95,
         "pitch_semitones": 0.4,
-        "duration_seconds": 3.08,
+        "duration_seconds": 4.84,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_003.ogg"
+      "output_ogg": "voices/tutorial_t3_before_003.ogg",
+      "recorded_duration_s": 4.84
     },
     {
       "order_index": 72,
@@ -2167,11 +2238,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.6,
-        "duration_seconds": 3.62,
+        "duration_seconds": 4.98,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_004.ogg"
+      "output_ogg": "voices/tutorial_t3_before_004.ogg",
+      "recorded_duration_s": 4.98
     },
     {
       "order_index": 73,
@@ -2197,11 +2269,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.4,
-        "duration_seconds": 4.19,
+        "duration_seconds": 5.33,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_005.ogg"
+      "output_ogg": "voices/tutorial_t3_before_005.ogg",
+      "recorded_duration_s": 5.33
     },
     {
       "order_index": 74,
@@ -2227,11 +2300,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.6,
-        "duration_seconds": 3.96,
+        "duration_seconds": 5.44,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_006.ogg"
+      "output_ogg": "voices/tutorial_t3_before_006.ogg",
+      "recorded_duration_s": 5.44
     },
     {
       "order_index": 75,
@@ -2257,11 +2331,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -1.0,
-        "duration_seconds": 6.83,
+        "duration_seconds": 8.3,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_007.ogg"
+      "output_ogg": "voices/tutorial_t3_before_007.ogg",
+      "recorded_duration_s": 8.3
     },
     {
       "order_index": 76,
@@ -2287,11 +2362,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.96,
         "pitch_semitones": -1.1,
-        "duration_seconds": 2.83,
+        "duration_seconds": 2.99,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_008.ogg"
+      "output_ogg": "voices/tutorial_t3_before_008.ogg",
+      "recorded_duration_s": 2.99
     },
     {
       "order_index": 77,
@@ -2317,11 +2393,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.0,
-        "duration_seconds": 3.61,
+        "duration_seconds": 3.91,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_009.ogg"
+      "output_ogg": "voices/tutorial_t3_before_009.ogg",
+      "recorded_duration_s": 3.91
     },
     {
       "order_index": 78,
@@ -2347,11 +2424,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.96,
         "pitch_semitones": -1.1,
-        "duration_seconds": 3.36,
+        "duration_seconds": 4.27,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_010.ogg"
+      "output_ogg": "voices/tutorial_t3_before_010.ogg",
+      "recorded_duration_s": 4.27
     },
     {
       "order_index": 79,
@@ -2377,11 +2455,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 4.37,
+        "duration_seconds": 4.35,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_011.ogg"
+      "output_ogg": "voices/tutorial_t3_before_011.ogg",
+      "recorded_duration_s": 4.35
     },
     {
       "order_index": 80,
@@ -2407,11 +2486,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": -0.8,
-        "duration_seconds": 2.38,
+        "duration_seconds": 3.19,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_012.ogg"
+      "output_ogg": "voices/tutorial_t3_before_012.ogg",
+      "recorded_duration_s": 3.19
     },
     {
       "order_index": 81,
@@ -2437,11 +2517,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.95,
         "pitch_semitones": -0.2,
-        "duration_seconds": 5.62,
+        "duration_seconds": 6.56,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_013.ogg"
+      "output_ogg": "voices/tutorial_t3_before_013.ogg",
+      "recorded_duration_s": 6.56
     },
     {
       "order_index": 82,
@@ -2467,11 +2548,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -1.0,
-        "duration_seconds": 3.02,
+        "duration_seconds": 4.01,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_before_014.ogg"
+      "output_ogg": "voices/tutorial_t3_before_014.ogg",
+      "recorded_duration_s": 4.01
     },
     {
       "order_index": 83,
@@ -2497,11 +2579,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -1.0,
-        "duration_seconds": 8.12,
+        "duration_seconds": 11.3,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_001.ogg"
+      "output_ogg": "voices/tutorial_t3_after_001.ogg",
+      "recorded_duration_s": 11.3
     },
     {
       "order_index": 84,
@@ -2527,11 +2610,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": -0.8,
-        "duration_seconds": 3.52,
+        "duration_seconds": 4.49,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_002.ogg"
+      "output_ogg": "voices/tutorial_t3_after_002.ogg",
+      "recorded_duration_s": 4.49
     },
     {
       "order_index": 85,
@@ -2557,11 +2641,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 3.0,
+        "duration_seconds": 4.42,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_003.ogg"
+      "output_ogg": "voices/tutorial_t3_after_003.ogg",
+      "recorded_duration_s": 4.42
     },
     {
       "order_index": 86,
@@ -2587,11 +2672,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.6,
-        "duration_seconds": 2.07,
+        "duration_seconds": 3.17,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_004.ogg"
+      "output_ogg": "voices/tutorial_t3_after_004.ogg",
+      "recorded_duration_s": 3.17
     },
     {
       "order_index": 87,
@@ -2617,11 +2703,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.8,
-        "duration_seconds": 9.5,
+        "duration_seconds": 13.58,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_005.ogg"
+      "output_ogg": "voices/tutorial_t3_after_005.ogg",
+      "recorded_duration_s": 13.58
     },
     {
       "order_index": 88,
@@ -2647,11 +2734,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": 0.3,
-        "duration_seconds": 3.28,
+        "duration_seconds": 3.02,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_006.ogg"
+      "output_ogg": "voices/tutorial_t3_after_006.ogg",
+      "recorded_duration_s": 3.02
     },
     {
       "order_index": 89,
@@ -2677,11 +2765,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.8,
-        "duration_seconds": 1.61,
+        "duration_seconds": 2.04,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_007.ogg"
+      "output_ogg": "voices/tutorial_t3_after_007.ogg",
+      "recorded_duration_s": 2.04
     },
     {
       "order_index": 90,
@@ -2707,11 +2796,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": 0.1,
-        "duration_seconds": 2.74,
+        "duration_seconds": 3.27,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_008.ogg"
+      "output_ogg": "voices/tutorial_t3_after_008.ogg",
+      "recorded_duration_s": 3.27
     },
     {
       "order_index": 91,
@@ -2737,11 +2827,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": -0.6,
-        "duration_seconds": 1.47,
+        "duration_seconds": 2.01,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_009.ogg"
+      "output_ogg": "voices/tutorial_t3_after_009.ogg",
+      "recorded_duration_s": 2.01
     },
     {
       "order_index": 92,
@@ -2767,11 +2858,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 4.99,
+        "duration_seconds": 7.15,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_010.ogg"
+      "output_ogg": "voices/tutorial_t3_after_010.ogg",
+      "recorded_duration_s": 7.15
     },
     {
       "order_index": 93,
@@ -2797,11 +2889,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.8,
-        "duration_seconds": 8.86,
+        "duration_seconds": 11.47,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_011.ogg"
+      "output_ogg": "voices/tutorial_t3_after_011.ogg",
+      "recorded_duration_s": 11.47
     },
     {
       "order_index": 94,
@@ -2827,11 +2920,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": -0.8,
-        "duration_seconds": 1.83,
+        "duration_seconds": 2.37,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_012.ogg"
+      "output_ogg": "voices/tutorial_t3_after_012.ogg",
+      "recorded_duration_s": 2.37
     },
     {
       "order_index": 95,
@@ -2857,11 +2951,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 5.54,
+        "duration_seconds": 5.32,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_013.ogg"
+      "output_ogg": "voices/tutorial_t3_after_013.ogg",
+      "recorded_duration_s": 5.32
     },
     {
       "order_index": 96,
@@ -2887,11 +2982,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": -0.6,
-        "duration_seconds": 1.21,
+        "duration_seconds": 2.06,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_014.ogg"
+      "output_ogg": "voices/tutorial_t3_after_014.ogg",
+      "recorded_duration_s": 2.06
     },
     {
       "order_index": 97,
@@ -2917,11 +3013,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": 0.3,
-        "duration_seconds": 5.33,
+        "duration_seconds": 5.23,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_015.ogg"
+      "output_ogg": "voices/tutorial_t3_after_015.ogg",
+      "recorded_duration_s": 5.23
     },
     {
       "order_index": 98,
@@ -2947,11 +3044,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.8,
-        "duration_seconds": 6.55,
+        "duration_seconds": 9.57,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_016.ogg"
+      "output_ogg": "voices/tutorial_t3_after_016.ogg",
+      "recorded_duration_s": 9.57
     },
     {
       "order_index": 99,
@@ -2977,11 +3075,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.93,
         "pitch_semitones": -0.7,
-        "duration_seconds": 1.57,
+        "duration_seconds": 2.31,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_017.ogg"
+      "output_ogg": "voices/tutorial_t3_after_017.ogg",
+      "recorded_duration_s": 2.31
     },
     {
       "order_index": 100,
@@ -3007,11 +3106,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.94,
         "pitch_semitones": 0.3,
-        "duration_seconds": 4.36,
+        "duration_seconds": 6.15,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_018.ogg"
+      "output_ogg": "voices/tutorial_t3_after_018.ogg",
+      "recorded_duration_s": 6.15
     },
     {
       "order_index": 101,
@@ -3037,11 +3137,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": -0.7,
-        "duration_seconds": 3.35,
+        "duration_seconds": 3.58,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_019.ogg"
+      "output_ogg": "voices/tutorial_t3_after_019.ogg",
+      "recorded_duration_s": 3.58
     },
     {
       "order_index": 102,
@@ -3067,11 +3168,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.89,
         "pitch_semitones": -1.1,
-        "duration_seconds": 6.19,
+        "duration_seconds": 8.62,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_020.ogg"
+      "output_ogg": "voices/tutorial_t3_after_020.ogg",
+      "recorded_duration_s": 8.62
     },
     {
       "order_index": 103,
@@ -3097,11 +3199,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.87,
         "pitch_semitones": -0.2,
-        "duration_seconds": 1.7,
+        "duration_seconds": 3.14,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_021.ogg"
+      "output_ogg": "voices/tutorial_t3_after_021.ogg",
+      "recorded_duration_s": 3.14
     },
     {
       "order_index": 104,
@@ -3127,11 +3230,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -0.8,
-        "duration_seconds": 0.8,
+        "duration_seconds": 0.91,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_022.ogg"
+      "output_ogg": "voices/tutorial_t3_after_022.ogg",
+      "recorded_duration_s": 0.91
     },
     {
       "order_index": 105,
@@ -3157,11 +3261,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -0.1,
-        "duration_seconds": 3.08,
+        "duration_seconds": 3.34,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_023.ogg"
+      "output_ogg": "voices/tutorial_t3_after_023.ogg",
+      "recorded_duration_s": 3.34
     },
     {
       "order_index": 106,
@@ -3187,11 +3292,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.9,
-        "duration_seconds": 2.91,
+        "duration_seconds": 4.18,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_024.ogg"
+      "output_ogg": "voices/tutorial_t3_after_024.ogg",
+      "recorded_duration_s": 4.18
     },
     {
       "order_index": 107,
@@ -3217,11 +3323,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.89,
         "pitch_semitones": -0.9,
-        "duration_seconds": 7.7,
+        "duration_seconds": 9.92,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_025.ogg"
+      "output_ogg": "voices/tutorial_t3_after_025.ogg",
+      "recorded_duration_s": 9.92
     },
     {
       "order_index": 108,
@@ -3247,11 +3354,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.89,
         "pitch_semitones": 0.0,
-        "duration_seconds": 4.21,
+        "duration_seconds": 4.51,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_026.ogg"
+      "output_ogg": "voices/tutorial_t3_after_026.ogg",
+      "recorded_duration_s": 4.51
     },
     {
       "order_index": 109,
@@ -3277,11 +3385,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.89,
         "pitch_semitones": -0.9,
-        "duration_seconds": 1.02,
+        "duration_seconds": 1.44,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_027.ogg"
+      "output_ogg": "voices/tutorial_t3_after_027.ogg",
+      "recorded_duration_s": 1.44
     },
     {
       "order_index": 110,
@@ -3307,11 +3416,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.89,
         "pitch_semitones": 0.2,
-        "duration_seconds": 3.4,
+        "duration_seconds": 4.08,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_028.ogg"
+      "output_ogg": "voices/tutorial_t3_after_028.ogg",
+      "recorded_duration_s": 4.08
     },
     {
       "order_index": 111,
@@ -3337,11 +3447,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.89,
         "pitch_semitones": -0.9,
-        "duration_seconds": 9.37,
+        "duration_seconds": 13.32,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_029.ogg"
+      "output_ogg": "voices/tutorial_t3_after_029.ogg",
+      "recorded_duration_s": 13.32
     },
     {
       "order_index": 112,
@@ -3367,11 +3478,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.91,
         "pitch_semitones": -0.8,
-        "duration_seconds": 3.11,
+        "duration_seconds": 3.99,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_030.ogg"
+      "output_ogg": "voices/tutorial_t3_after_030.ogg",
+      "recorded_duration_s": 3.99
     },
     {
       "order_index": 113,
@@ -3397,11 +3509,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.92,
         "pitch_semitones": 0.3,
-        "duration_seconds": 2.71,
+        "duration_seconds": 2.5,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_031.ogg"
+      "output_ogg": "voices/tutorial_t3_after_031.ogg",
+      "recorded_duration_s": 2.5
     },
     {
       "order_index": 114,
@@ -3427,11 +3540,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.9,
         "pitch_semitones": -0.8,
-        "duration_seconds": 1.87,
+        "duration_seconds": 2.47,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_032.ogg"
+      "output_ogg": "voices/tutorial_t3_after_032.ogg",
+      "recorded_duration_s": 2.47
     },
     {
       "order_index": 115,
@@ -3457,11 +3571,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.87,
         "pitch_semitones": 0.2,
-        "duration_seconds": 1.75,
+        "duration_seconds": 1.93,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_033.ogg"
+      "output_ogg": "voices/tutorial_t3_after_033.ogg",
+      "recorded_duration_s": 1.93
     },
     {
       "order_index": 116,
@@ -3487,11 +3602,12 @@
       "acoustic_profile": {
         "speaking_rate": 0.88,
         "pitch_semitones": -1.0,
-        "duration_seconds": 7.86,
+        "duration_seconds": 10.37,
         "duck_ratio": 0.25,
         "target_lufs": -20.0
       },
-      "output_ogg": "voices/tutorial_t3_after_034.ogg"
+      "output_ogg": "voices/tutorial_t3_after_034.ogg",
+      "recorded_duration_s": 10.37
     }
   ]
 }

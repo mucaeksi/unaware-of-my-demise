@@ -35,8 +35,21 @@ if hasattr(sys.stdout, "reconfigure"):
 
 ROOT = Path(__file__).resolve().parents[1]
 MASTER_SCRIPT_PATH = ROOT / "narrative" / "10_VO" / "Line_Maps" / "jp_script_vertical_slice_master.json"
-PRESENTATION_PATH = ROOT / "content" / "base" / "story" / "presentation.json"
-VO_OUT_ROOT = ROOT / "content" / "base" / "audio" / "vo"
+PRESENTATION_PATH = ROOT / "content" / "base" / "presentation" / "presentation.json"
+VO_OUT_ROOT = ROOT / "content" / "base" / "voices"
+
+
+def load_env_key() -> str:
+    key = os.environ.get("GEMINI_API_KEY", "").strip()
+    if key:
+        return key
+    env_file = ROOT / ".env"
+    if env_file.exists():
+        for raw_line in env_file.read_text(encoding="utf-8").splitlines():
+            line = raw_line.strip()
+            if line.startswith("GEMINI_API_KEY="):
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    return ""
 
 
 def load_master_script() -> dict[str, Any]:
@@ -53,81 +66,97 @@ def write_wav_pcm16(path: Path, pcm: bytes, sample_rate: int = 24000) -> None:
 
 
 def transcode_and_normalize_ogg(wav_path: Path, ogg_path: Path) -> float:
-    """Normalizes speech to -20 LUFS / -1.5 dBTP and encodes to 48kHz Opus/Vorbis OGG."""
+    """Normalizes speech to -20 LUFS / -1.5 dBTP and encodes to 24kHz Vorbis OGG without any artificial pitch shifting."""
+    import imageio_ffmpeg  # type: ignore
+
+    ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
     ogg_path.parent.mkdir(parents=True, exist_ok=True)
     cmd = [
-        "ffmpeg",
+        ffmpeg_exe,
         "-y",
         "-i",
         str(wav_path),
         "-af",
         "loudnorm=I=-20:TP=-1.5:LRA=11",
         "-ar",
-        "48000",
+        "24000",
         "-ac",
         "1",
         "-c:a",
         "libvorbis",
         "-q:a",
-        "5",
+        "6",
         str(ogg_path),
     ]
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    probe = subprocess.run(
-        [
-            "ffprobe",
-            "-v",
-            "error",
-            "-show_entries",
-            "format=duration",
-            "-of",
-            "default=noprint_wrappers=1:nokey=1",
-            str(ogg_path),
-        ],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    return round(float(probe.stdout.strip()), 2)
+    with wave.open(str(wav_path), "rb") as wf:
+        return round(wf.getnframes() / float(wf.getframerate()), 2)
+
+
+def normalize_inline_tags(tts_text: str) -> str:
+    """Normalizes inline vocal tags to official Gemini 3.8 TTS angle-bracket tags."""
+    return tts_text.replace("<soft chuckle>", "<chuckle>")
 
 
 def synthesize_gemini38(entry: dict[str, Any], api_key: str) -> bytes:
-    """Calls Gemini 3.8 Flash TTS with non-robotic acting prompt (`speech_metadata.style`) and inline tags."""
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-tts:generateContent?key={api_key}"
-    payload = {
-        "contents": [
+    """
+    Calls the official Gemini 3.8 Flash TTS Interactions API (`v1beta/interactions`)
+    with turn-level `speech_metadata.style` acting direction and inline `<...>` vocal tags.
+    """
+    url = "https://generativelanguage.googleapis.com/v1beta/interactions"
+    style_prompt = entry.get("speech_metadata", {}).get("style", "").strip()
+    tts_text = normalize_inline_tags(entry.get("tts_text_gemini38") or entry["ja"])
+
+    content_item: dict[str, Any] = {
+        "type": "text",
+        "text": tts_text,
+    }
+    if style_prompt:
+        content_item["annotations"] = [
             {
-                "parts": [
-                    {
-                        "text": entry["tts_text_gemini38"],
-                        "speech_metadata": {
-                            "speaker": entry["speaker_id"],
-                            "style": entry["speech_metadata"]["style"],
-                        },
-                    }
-                ]
+                "type": "speech_metadata",
+                "style": style_prompt,
+            }
+        ]
+
+    payload = {
+        "model": "gemini-3.8-flash-tts",
+        "input": [
+            {
+                "type": "user_input",
+                "content": [content_item],
             }
         ],
-        "generationConfig": {
-            "responseModalities": ["AUDIO"],
-            "speechConfig": {
-                "voiceConfig": {
-                    "prebuiltVoiceConfig": {
-                        "voiceName": entry["gemini_voice"],
-                    }
+        "response_format": {
+            "type": "audio",
+            "mime_type": "audio/l16",
+            "sample_rate": 24000,
+        },
+        "generation_config": {
+            "speech_config": [
+                {
+                    "voice": entry["gemini_voice"],
                 }
-            },
+            ]
         },
     }
     req = urllib.request.Request(
         url,
         data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
-        headers={"Content-Type": "application/json"},
+        headers={
+            "x-goog-api-key": api_key,
+            "Content-Type": "application/json",
+        },
         method="POST",
     )
-    with urllib.request.urlopen(req, timeout=60) as resp:
+    with urllib.request.urlopen(req, timeout=90) as resp:
         body = json.loads(resp.read().decode("utf-8"))
-    b64 = body["candidates"][0]["content"]["parts"][0]["inlineData"]["data"]
+
+    if "steps" in body and body["steps"]:
+        b64 = body["steps"][0]["content"][0]["data"]
+    else:
+        interaction = body.get("interaction", body)
+        b64 = interaction["output_audio"]["data"]
     return base64.b64decode(b64)
 
 
@@ -161,8 +190,21 @@ def synthesize_chirp3_ssml(entry: dict[str, Any], token: str, project_id: str) -
 
 
 def sync_presentation_manifest(lines: list[dict[str, Any]]) -> int:
-    """Updates `content/base/story/presentation.json` for any recorded VO audio files present on disk."""
-    pres = json.loads(PRESENTATION_PATH.read_text(encoding="utf-8"))
+    """Updates `content/base/presentation/presentation.json` for any recorded VO audio files present on disk."""
+    import hashlib
+
+    script_sha256 = hashlib.sha256(MASTER_SCRIPT_PATH.read_bytes()).hexdigest()
+    if PRESENTATION_PATH.exists():
+        pres = json.loads(PRESENTATION_PATH.read_text(encoding="utf-8"))
+    else:
+        pres = {
+            "schema_version": 1,
+            "voices": {},
+            "sounds": {},
+            "videos": {},
+            "locales": [],
+            "panels": {},
+        }
     voices = pres.setdefault("voices", {})
     registered = 0
     for entry in lines:
@@ -172,10 +214,12 @@ def sync_presentation_manifest(lines: list[dict[str, Any]]) -> int:
         if abs_path.exists():
             voices[line_id] = {
                 "file": rel_path,
-                "speaker": entry["speaker_id"],
+                "language": "ja",
+                "reviewed_transcript_sha256": script_sha256,
                 "duration_s": entry.get("recorded_duration_s", entry["acoustic_profile"]["duration_seconds"]),
             }
             registered += 1
+    PRESENTATION_PATH.parent.mkdir(parents=True, exist_ok=True)
     PRESENTATION_PATH.write_text(json.dumps(pres, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return registered
 
@@ -217,14 +261,14 @@ def main() -> None:
             print(f"\n... and {len(lines) - 5} more lines ready in {MASTER_SCRIPT_PATH.relative_to(ROOT)}.")
         return
 
-    api_key = os.environ.get("GEMINI_API_KEY", "")
+    api_key = load_env_key()
     for entry in lines:
         line_id = entry["line_id"]
         ogg_path = ROOT / "content" / "base" / entry["output_ogg"]
         wav_path = ROOT / ".cache" / "vo_wav" / f"{line_id}.wav"
         if args.engine == "gemini-3.8-flash-tts":
             if not api_key:
-                raise RuntimeError("Set GEMINI_API_KEY to synthesize with gemini-3.8-flash-tts (or run with --dry-run).")
+                raise RuntimeError("Set GEMINI_API_KEY in environment or .env to synthesize with gemini-3.8-flash-tts (or run with --dry-run).")
             pcm = synthesize_gemini38(entry, api_key)
         else:
             token = subprocess.check_output(["gcloud", "auth", "print-access-token"], text=True).strip()
@@ -233,8 +277,10 @@ def main() -> None:
         write_wav_pcm16(wav_path, pcm, 24000)
         dur = transcode_and_normalize_ogg(wav_path, ogg_path)
         entry["recorded_duration_s"] = dur
+        entry["acoustic_profile"]["duration_seconds"] = dur
         print(f"Recorded {line_id} ({entry['gemini_voice']} / {entry['emotion']}) -> {ogg_path.relative_to(ROOT)} ({dur:.2f}s)")
 
+    MASTER_SCRIPT_PATH.write_text(json.dumps(master, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     sync_presentation_manifest(master["lines"])
 
 
