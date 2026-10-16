@@ -137,6 +137,20 @@
       }
     },
     {
+      "output": "content/base/audio/bgm_prologue_before_the_road.ogg",
+      "sha256": "cc6c66994ce18ef5f396727fdff0b7ad76188c5b4a93e3e41afb486f76afc8e4",
+      "sources": {
+        "narrative/11_Audio_Cues/Music_Source/bgm_prologue_before_the_road/bgm_prologue_before_the_road_v001_loop.ogg": "cc6c66994ce18ef5f396727fdff0b7ad76188c5b4a93e3e41afb486f76afc8e4"
+      }
+    },
+    {
+      "output": "content/base/audio/bgm_fadyme_theme.ogg",
+      "sha256": "bc2c230cf1cd67a8f1b4a7c9669f192f8388f3e1a363b772ce349b3ba6712e79",
+      "sources": {
+        "narrative/11_Audio_Cues/Fadyme_Theme_Reference/bgm_fadyme_theme_v001_loop.ogg": "bc2c230cf1cd67a8f1b4a7c9669f192f8388f3e1a363b772ce349b3ba6712e79"
+      }
+    },
+    {
       "output": "content/base/art/ui_logo.webp",
       "sha256": "b84ad0324a510ab5604764cc64ef63e468cad8088d29c341c24949530f18efb8",
       "sources": {
@@ -256,7 +270,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "0393d47db8fa6f2a9db2ee92ed40e5460631240a0c84f97946b40ef49ae95933",
+      "sha256": "a4287a3d53142bf912c358395100193fa5f80e00ff7c5f15f34cc1e23650935d",
       "sources": {}
     },
     {

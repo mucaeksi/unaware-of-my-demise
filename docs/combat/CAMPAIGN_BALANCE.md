@@ -9,30 +9,30 @@ to enemy HP and ATK — its exact meaning is not documented in the data (see doc
 | Stage | Type | Level | Party | Wins | Avg stars |
 |---|---|---|---|---|---|
 | 1-1 | normal | 1 | mahmut, fadyme | 8/8 | 3.0 |
-| 1-2 | normal | 1 | brin, mahmut, nixie, kera, fadyme | 8/8 | 2.1 |
+| 1-2 | normal | 1 | brin, mahmut, nixie, kera, fadyme | 8/8 | 3.0 |
 | 1-3 | normal | 2 | mahmut, brin, kera, fadyme | 0/8 | - |
 | 1-4 | normal | 2 | mahmut, brin, nixie, fadyme | 0/8 | - |
 | 1-5 | boss | 3 | mahmut, brin, fadyme, nixie | 8/8 | 3.0 |
-| 2-1 | normal | 3 | mahmut, brin, fadyme, nixie | 8/8 | 1.0 |
+| 2-1 | normal | 3 | mahmut, brin, fadyme, nixie | 8/8 | 2.0 |
 | 2-2 | normal | 4 | mahmut, brin, sister, fadyme, nixie | 8/8 | 3.0 |
 | 2-3 | normal | 4 | mahmut, brin, mirel, fadyme, nixie | 8/8 | 3.0 |
-| 2-4 | normal | 5 | mahmut, brin, sister, mirel, fadyme | 8/8 | 2.3 |
+| 2-4 | normal | 5 | mahmut, brin, sister, mirel, fadyme | 8/8 | 3.0 |
 | 2-5 | boss | 6 | mahmut, brin, nixie, fadyme | 0/8 | - |
 | 3-1 | normal | 6 | mahmut, brin, nixie, fadyme | 0/8 | - |
-| 3-2 | normal | 7 | jori, mahmut, kera, fadyme, brin | 8/8 | 1.0 |
+| 3-2 | normal | 7 | jori, mahmut, kera, fadyme, brin | 8/8 | 2.9 |
 | 3-3 | normal | 7 | mahmut, brin, fadyme, nixie | 0/8 | - |
 | 3-4 | normal | 8 | mahmut, brin, pippa, fadyme, nixie | 0/8 | - |
 | 3-5 | boss | 9 | mahmut, brin, kera, fadyme, nixie | 0/8 | - |
-| 4-1 | normal | 9 | mahmut, brin, odelia, fadyme, nixie | 8/8 | 2.0 |
-| 4-2 | normal | 10 | mahmut, kera, tilda, iona, fadyme | 8/8 | 2.9 |
+| 4-1 | normal | 9 | mahmut, brin, odelia, fadyme, nixie | 8/8 | 3.0 |
+| 4-2 | normal | 10 | mahmut, kera, tilda, iona, fadyme | 8/8 | 3.0 |
 | 4-3 | normal | 10 | mahmut, brin, clem, thistle, fadyme | 8/8 | 3.0 |
 | 4-4 | normal | 11 | mahmut, brin, kera, fadyme, nixie | 8/8 | 3.0 |
 | 4-5 | boss | 12 | mahmut, kera, tilda, iona, fadyme | 0/8 | - |
-| 5-1 | normal | 12 | mahmut, brin, marek, fadyme, nixie | 8/8 | 2.0 |
+| 5-1 | normal | 12 | mahmut, brin, marek, fadyme, nixie | 8/8 | 3.0 |
 | 5-2 | normal | 13 | nara, mahmut, fadyme, brin, nixie | 8/8 | 3.0 |
-| 5-3 | normal | 13 | rikka, mahmut, sable, fadyme, brin | 8/8 | 2.0 |
+| 5-3 | normal | 13 | rikka, mahmut, sable, fadyme, brin | 8/8 | 3.0 |
 | 5-4 | normal | 14 | mahmut, brin, odelia, fadyme, nixie | 8/8 | 3.0 |
-| 5-5 | boss | 15 | nara, rikka, marek, sable, mahmut | 8/8 | 1.5 |
+| 5-5 | boss | 15 | nara, rikka, marek, sable, mahmut | 8/8 | 2.9 |
 | 6-1 | normal | 15 | mahmut, brin, sable, clem, fadyme | 8/8 | 3.0 |
 | 6-2 | normal | 16 | hana, mahmut, mirel, sister, fadyme | 8/8 | 3.0 |
 | 6-3 | normal | 16 | mahmut, vespera, thistle, iona, tilda | 8/8 | 3.0 |
@@ -40,6 +40,6 @@ to enemy HP and ATK — its exact meaning is not documented in the data (see doc
 | 6-5 | boss | 18 | mahmut, mirel, sister, vespera, fadyme | 0/8 | - |
 | 7-1 | normal | 18 | jori, mahmut, nixie, odelia, fadyme | 8/8 | 3.0 |
 | 7-2 | normal | 18 | brin, rikka, nara, marek, mahmut | 8/8 | 3.0 |
-| 7-3 | normal | 19 | sister, mirel, clem, pippa, kera | 8/8 | 2.0 |
-| 7-4 | normal | 19 | sable, vespera, tilda, iona, thistle | 8/8 | 2.9 |
+| 7-3 | normal | 19 | sister, mirel, clem, pippa, kera | 8/8 | 3.0 |
+| 7-4 | normal | 19 | sable, vespera, tilda, iona, thistle | 8/8 | 3.0 |
 | 7-5 | boss | 20 | mahmut, brin, fadyme, nixie, jori | 0/8 | - |

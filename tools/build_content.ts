@@ -120,9 +120,13 @@ const UI_FILES = {
 };
 
 const MUSIC_SRC = 'narrative/11_Audio_Cues/Music_Source/bgm_ch1_ash_forest';
+const PROLOGUE_MUSIC_SRC = 'narrative/11_Audio_Cues/Music_Source/bgm_prologue_before_the_road';
+const FADYME_MUSIC_SRC = 'narrative/11_Audio_Cues/Fadyme_Theme_Reference';
 const MUSIC: Record<string, { file: string; meta: string }> = {
   bgm_ch1_ash_forest_calm: { file: `${MUSIC_SRC}/bgm_ch1_ash_forest_calm_v001_loop.ogg`, meta: `${MUSIC_SRC}/bgm_ch1_ash_forest_calm_v001_loop.json` },
-  bgm_ch1_ash_forest_chaotic: { file: `${MUSIC_SRC}/bgm_ch1_ash_forest_chaotic_v001_loop.ogg`, meta: `${MUSIC_SRC}/bgm_ch1_ash_forest_chaotic_v001_loop.json` }
+  bgm_ch1_ash_forest_chaotic: { file: `${MUSIC_SRC}/bgm_ch1_ash_forest_chaotic_v001_loop.ogg`, meta: `${MUSIC_SRC}/bgm_ch1_ash_forest_chaotic_v001_loop.json` },
+  bgm_prologue_before_the_road: { file: `${PROLOGUE_MUSIC_SRC}/bgm_prologue_before_the_road_v001_loop.ogg`, meta: `${PROLOGUE_MUSIC_SRC}/bgm_prologue_before_the_road_v001_loop.json` },
+  bgm_fadyme_theme: { file: `${FADYME_MUSIC_SRC}/bgm_fadyme_theme_v001_loop.ogg`, meta: `${FADYME_MUSIC_SRC}/bgm_fadyme_theme_v001_loop.json` }
 };
 
 interface Provenance {

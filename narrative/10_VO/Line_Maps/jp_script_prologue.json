@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "story_id": "prologue_before_the_road_v001",
+  "speaker_id": "narrator",
+  "voice_track": "jp_narration",
+  "direction_global": "neutral, low, unhurried; quiet chronicle cadence with natural breath pauses between sentences; separate actor from the cast",
+  "glossary_applied": {
+    "Veyrhold": "ヴェアホルド",
+    "Crownfall": "王冠落ち（クラウンフォール）",
+    "Fadyme": "ファディメ",
+    "Mahmut": "マフムト",
+    "roadside registers": "道端の台帳"
+  },
+  "lines": [
+    {
+      "line_id": "entry_past_001",
+      "scene_id": "hours",
+      "time_range_s": [0, 12],
+      "caption_en": "Before the Road",
+      "speaker_id": "narrator",
+      "en": "Before the roads filled with ash, Veyrhold measured its days in bells. A sound from the tower meant another hour had passed.",
+      "ja": "道という道が灰に埋もれる前、ヴェアホルドの人々は鐘の音で日々を測っていた。塔から響くひと打ちは、またひとつの刻が過ぎたことを告げていた。",
+      "direction": "calm, nostalgic, measured; pause slightly after '測っていた。' as the tower bell decays"
+    },
+    {
+      "line_id": "entry_past_002",
+      "scene_id": "names",
+      "time_range_s": [12, 26],
+      "caption_en": "Names to Remember",
+      "speaker_id": "narrator",
+      "en": "People carved their names on doors and trees, and wrote them in roadside registers. Not for fame. So someone would remember that they had been here.",
+      "ja": "人々は扉や樹々に自らの名を刻み、道端の台帳にその名を書き残した。名声のためではない。確かにここに生きていたと、誰かが覚えていてくれるように。",
+      "direction": "intimate, quiet dignity; gentle emphasis on '名声のためではない。'"
+    },
+    {
+      "line_id": "entry_past_003",
+      "scene_id": "ordinary_days",
+      "time_range_s": [26, 38],
+      "caption_en": "Ordinary Days",
+      "speaker_id": "narrator",
+      "en": "There were markets, journeys, and doors that opened to strangers. Small things, easily forgotten. Until the day people began to lose them.",
+      "ja": "市が立ち、旅人が行き交い、見知らぬ者にも扉は開かれていた。すぐに忘れ去られるような、ささやかな日常。……それを失い始める日が来るまでは。",
+      "direction": "warm at the start, darkening and slowing on the final clause 'それを失い始める日が来るまでは。'"
+    },
+    {
+      "line_id": "entry_past_004",
+      "scene_id": "throne_wars",
+      "time_range_s": [38, 50],
+      "caption_en": "The Throne Wars",
+      "speaker_id": "narrator",
+      "en": "The great houses fought over a throne. Fields emptied. Families took to the roads, carrying what they could. The war drew closer to the capital.",
+      "ja": "諸侯はひとつの玉座を巡って争った。畑からは人が消え、家族は持てるものだけを抱えて街道へと出た。戦火は、やがて王都へと迫っていった。",
+      "direction": "low, grave, steady chronicle pace; short crisp pauses between sentences"
+    },
+    {
+      "line_id": "entry_past_005",
+      "scene_id": "crownfall",
+      "time_range_s": [50, 66],
+      "caption_en": "Six Years Ago",
+      "speaker_id": "narrator",
+      "en": "Then came Crownfall. The capital fell. The king died. By dawn, survivors were leaving behind streets they had once known by heart.",
+      "ja": "そして、『王冠落ち』の日が訪れた。王都は陥ち、王は斃れた。夜が明ける頃、生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。",
+      "direction": "solemn weight after the funeral bell strike; unhurried, restrained grief without melodrama"
+    },
+    {
+      "line_id": "entry_past_006",
+      "scene_id": "roads",
+      "time_range_s": [66, 82],
+      "caption_en": "What Remained",
+      "speaker_id": "narrator",
+      "en": "They carried blankets, tools, and the names of those who had not come with them. Beyond the walls, the roads were still there. Home was not.",
+      "ja": "彼らが背負ったのは、毛布と道具、そして共に来られなかった者たちの名だった。城壁の向こうに道はまだ続いていた。だが、帰るべき家はもうなかった。",
+      "direction": "hushed, sparse sorrow; let '帰るべき家はもうなかった。' settle into silence"
+    },
+    {
+      "line_id": "entry_past_007",
+      "scene_id": "search",
+      "time_range_s": [82, 96],
+      "caption_en": "A Name on the Road",
+      "speaker_id": "narrator",
+      "en": "Among the travelers was a knight who searched the village registers for one name. Village after village, winter after winter, he kept looking.",
+      "ja": "旅人たちのなかに、ただひとつの名を求めて村々の台帳を辿る騎士がいた。村から村へ、冬から冬へと、彼は探し続けた。",
+      "direction": "steady, resolute, quiet warmth entering the voice over Mahmut's walking cello motif"
+    },
+    {
+      "line_id": "entry_past_008",
+      "scene_id": "reunion",
+      "time_range_s": [96, 108],
+      "caption_en": "Found Again",
+      "speaker_id": "narrator",
+      "en": "In a hill village, he found her. She asked him to stay. He did. The road ahead would no longer be hers alone.",
+      "ja": "ある丘の村で、彼はついに彼女を見つけた。傍にいてほしいと彼女は願い、彼は頷いた。その先の道は、もはや彼女ひとりのものではなくなった。",
+      "direction": "gentle relief and understated tenderness over Fadyme's piano and silver bell"
+    },
+    {
+      "line_id": "entry_past_009",
+      "scene_id": "beginning",
+      "time_range_s": [108, 120],
+      "caption_en": "The Journey Begins",
+      "speaker_id": "narrator",
+      "en": "Now Fadyme and Mahmut walk together. The bells still ring. Neither has told the other everything. This is where their story begins.",
+      "ja": "いま、ファディメとマフムトは共に歩いている。鐘はいまも鳴り響き、ふたりはまだ互いのすべてを語ってはいない。……ここから、ふたりの物語が始まる。",
+      "direction": "poised, lingering closing cadence; leave space before 'ここから、ふたりの物語が始まる。'"
+    }
+  ]
+}

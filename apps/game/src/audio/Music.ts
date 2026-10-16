@@ -33,11 +33,11 @@ export class MusicPlayer {
     if (this.out) this.out.gain.value = v * (this.ducks.size ? 0.25 : 1);
   }
 
-  play(cache: Phaser.Cache.BaseCache, cacheKey: string, loopStart: number, duration: number, fade = 1.4): void {
+  play(cache: Phaser.Cache.BaseCache, cacheKey: string, loopStart: number, duration: number, fade = 1.4, startOffset = 0): void {
     const ctx = this.ctx;
     const out = this.out;
     if (!ctx || !out) return;
-    if (this.current?.key === cacheKey) return;
+    if (this.current?.key === cacheKey && startOffset === 0) return;
     const buffer = cache.get(cacheKey) as AudioBuffer | undefined;
     if (!buffer || typeof buffer.getChannelData !== 'function') return;
     if (ctx.state === 'suspended') void ctx.resume().catch(() => undefined);
@@ -51,10 +51,18 @@ export class MusicPlayer {
     gain.gain.setValueAtTime(0.0001, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(1, ctx.currentTime + fade);
     src.connect(gain).connect(out);
-    src.start();
+    const clampedOffset = Math.max(0, Math.min(startOffset, Math.max(0, buffer.duration - 0.1)));
+    src.start(0, clampedOffset);
     const release = this.acquire?.(cacheKey, {}) ?? (() => undefined);
     src.onended = () => { release(); gain.disconnect(); src.disconnect(); };
     this.current = { key: cacheKey, src, gain, release };
+  }
+
+  setPaused(paused: boolean): void {
+    const ctx = this.ctx;
+    if (!ctx) return;
+    if (paused && ctx.state === 'running') void ctx.suspend().catch(() => undefined);
+    else if (!paused && ctx.state === 'suspended') void ctx.resume().catch(() => undefined);
   }
 
   stop(fade = 0.8): void {

@@ -1,0 +1,20 @@
+{
+  "id": "bgm_prologue_before_the_road",
+  "kind": "music",
+  "revision": "v001",
+  "status": "APPROVED",
+  "approved_by": "owner",
+  "approved_date": "2026-10-16",
+  "model": "lyria-3.5+uomd-prologue-score-master",
+  "file": "narrative/11_Audio_Cues/Music_Source/bgm_prologue_before_the_road/bgm_prologue_before_the_road_v001_loop.ogg",
+  "engine_loop": {
+    "loop": false,
+    "loop_offset_s": 82.0,
+    "loop_offset_samples": 3616200,
+    "sample_rate": 44100
+  },
+  "structure": "Dedicated 120.0s 3-Act Prologue score synced to the 9 scenes of prologue_v001.json: Act I (0-38s) Veyrhold bronze tower bells, Ledger felt-piano motif & calm harp/flute; Act II (38-82s) Throne Wars uneasy strings/heartbeat drum, 0:50 Crownfall funeral bell & chaotic orchestral climax, 1:06 Quiet Sorrow solo cello aftermath pivoting to D minor; Act III (82-120s) Mahmut winter search walking cello motif, 1:36 Reunion silver pilgrim bell & full Fadyme Theme blossom.",
+  "file_length_s": 120.0,
+  "key_est": "E minor -> D minor",
+  "tempo_bpm": 73.8
+}

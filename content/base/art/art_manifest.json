@@ -398,6 +398,16 @@
       "file": "audio/bgm_ch1_ash_forest_chaotic.ogg",
       "loop_start_s": 19.9575,
       "duration_s": 101.777
+    },
+    "bgm_prologue_before_the_road": {
+      "file": "audio/bgm_prologue_before_the_road.ogg",
+      "loop_start_s": 82,
+      "duration_s": 120
+    },
+    "bgm_fadyme_theme": {
+      "file": "audio/bgm_fadyme_theme.ogg",
+      "loop_start_s": 25.232,
+      "duration_s": 86.052
     }
   },
   "ui": {

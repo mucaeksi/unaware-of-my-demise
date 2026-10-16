@@ -18,8 +18,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "0393d47db8fa6f2a9db2ee92ed40e5460631240a0c84f97946b40ef49ae95933",
-      "bytes": 9174,
+      "sha256": "a4287a3d53142bf912c358395100193fa5f80e00ff7c5f15f34cc1e23650935d",
+      "bytes": 9459,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -244,6 +244,20 @@
       "path": "audio/bgm_ch1_ash_forest_chaotic.ogg",
       "sha256": "d35e1ab6d3f284e9d31b570a7ba379dd11aac1f5c8e3d86173acd3dc6e2a68e5",
       "bytes": 2146003,
+      "media_type": "audio/ogg",
+      "kind": "audio"
+    },
+    {
+      "path": "audio/bgm_fadyme_theme.ogg",
+      "sha256": "bc2c230cf1cd67a8f1b4a7c9669f192f8388f3e1a363b772ce349b3ba6712e79",
+      "bytes": 1628819,
+      "media_type": "audio/ogg",
+      "kind": "audio"
+    },
+    {
+      "path": "audio/bgm_prologue_before_the_road.ogg",
+      "sha256": "cc6c66994ce18ef5f396727fdff0b7ad76188c5b4a93e3e41afb486f76afc8e4",
+      "bytes": 1669440,
       "media_type": "audio/ogg",
       "kind": "audio"
     },
